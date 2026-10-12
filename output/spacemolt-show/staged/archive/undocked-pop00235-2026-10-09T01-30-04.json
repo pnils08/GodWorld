@@ -1,0 +1,171 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00235-2026-10-09T01-30-04",
+  "popid": "POP-00235",
+  "holder": "Aaliyah Brennan",
+  "session": "undocked-pop00235",
+  "window": {
+    "startedAt": "2026-10-09T01:30:04.284Z",
+    "endedAt": "2026-10-09T01:34:29.408Z"
+  },
+  "runner": {
+    "turns": 15,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 1,
+    "estCostUsd": 0.0105,
+    "tokensIn": 73503,
+    "tokensOut": 915,
+    "log": "output/spacemolt-show/episodes/undocked-pop00235-2026-10-09T01-30-04.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-09T01:34:32.729Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 1,
+      "basis": [
+        {
+          "id": 182149050,
+          "event_type": "trading.exchange_fill",
+          "n": 2
+        }
+      ],
+      "value": 2
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {
+          "copper_ore": 1
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 1,
+        "combat": 0,
+        "navigation": 0,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [
+          {
+            "id": 182149050,
+            "created_at": "2026-10-09T01:33:00Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Copper Ore @ 2 each (2 credits)",
+            "data": {
+              "base_id": "alpha_centauri_colonial_station",
+              "item_id": "copper_ore",
+              "price": 2,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 2
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 182150421,
+            "created_at": "2026-10-09T01:34:29Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "AaliyahBrennan logged in",
+            "data": {
+              "last_login_at": "2026-10-09T01:30:06Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 182145315,
+            "created_at": "2026-10-09T01:30:06Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "AaliyahBrennan logged in",
+            "data": {
+              "last_login_at": "2026-10-06T01:37:24Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 2,
+    "listed": 4,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-09 01:34:29",
+        "text": "[Session Handoff] - **Current State:** Ship is docked at Alpha Centauri Colonial Station after completing all flight objectives.  \n- **Immediate Next Step:** None; mission is complete.  \n- **Location/Ship/Credits/Cargo:** Alpha Centauri Colonial Station; ship is fueled (100%), repaired, and empty cargo hold. Credits: minimal change after refuel (+2cr from ore sale).  \n- **Active Goals/Ongoing Plans:** None; flight objectives fulfilled.  \n- **Important Recent Events:** Attempted mining at Alpha Centauri Frost Ring but lacked ice harvester; sold 1 Copper Ore, refueled, and logged captain's log entry."
+      },
+      {
+        "index": 1,
+        "created_at": "2026-10-09 01:33:55",
+        "text": "Tonight's flight was steady work, just how I like it. Undocked from Alpha Centauri Station, tried to mine at the Frost Ring but realized I lacked an ice harvester—rookie mistake. Returned to the station, sold my copper ore, and refueled. Short and sweet, just like my shifts at the hospital. The ship's home safe, ready for the next night."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 2,
+        "created_at": "2026-10-06 01:37:24",
+        "text": "[Session Handoff] - **Current State**: Docked at Alpha Centauri Colonial Station after unsuccessful mining attempts (needs ice harvester for ice fields).  \n- **Next Step**: Plan to acquire an ice harvester module or return to Sol to mine remaining ores with current equipment.  \n- **Ship/Resources**: *Theoria* (mining_laser_i, pulse_laser_i), 515cr, cargo holds 1 Copper Ore (no ice due to invalid sale).  \n- **Active Goals**: Maximize mining profits; resolve module gap (ice harvester) or pivot to metallic asteroid mining.  \n- **Recent Events**:  \n  - Mined Copper Ore in Sol’s Main Belt (depleted).  \n  - Jumped to Alpha Centauri, failed ice mining (missing module).  \n  - Earned achievements: *Maiden Jump*, *First Steps*.  \n  - Note: Station market may need exact item IDs for trades (e.g., \"copper_ore\" not \"Copper Ore\").  \n\n**Action Priority**:  \n1. Sell Copper Ore (use exact ID) or upgrade equipment.  \n2. Check nearby systems (e.g., Sirius) for metallic belts if staying ore-focused."
+      },
+      {
+        "index": 3,
+        "created_at": "2026-10-06 01:36:56",
+        "text": "Tonight's flight was a bit of a challenge. Started mining in the Sol system but the Main Belt was depleted quickly. Traveled to Alpha Centauri and tried the Frost Ring, but it was also picked clean. Managed to mine a single unit of ice before heading back to sell it. Not much to show for the effort, but the stars were beautiful as always."
+      }
+    ]
+  }
+}

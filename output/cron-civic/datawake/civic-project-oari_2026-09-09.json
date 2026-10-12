@@ -1,0 +1,15 @@
+{
+  "office": "oari",
+  "agentDir": "civic-project-oari",
+  "holder": "Vanessa Tran-Muñoz",
+  "popid": "POP-01021",
+  "title": "OARI Program Director",
+  "date": "2026-09-09",
+  "cycle": 106,
+  "model": "deepseek/deepseek-chat",
+  "statement": "West Oakland's first expansion-month evaluation shows our teams meeting crisis with care exactly where it's needed most—bilingual responders, evening and weekend coverage, and protocols built with community input are proving that crisis response can be both compassionate and effective. Fruitvale and D5 implementations will build on this evidence-based model.",
+  "action": null,
+  "numberMoved": null,
+  "ranAt": "2026-09-09T10:45:48.439Z",
+  "fellBackFrom": null
+}

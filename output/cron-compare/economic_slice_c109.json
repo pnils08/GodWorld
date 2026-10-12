@@ -1,0 +1,961 @@
+{
+  "version": "ECONOMIC-SLICE-4",
+  "empty": false,
+  "cycle": 109,
+  "kind": "economic-storefront",
+  "variant": "business",
+  "hood": "West Oakland",
+  "pulse": {
+    "className": "hood-businesses",
+    "score": 41,
+    "label": "West Oakland businesses · Civis Systems, Mariner Construction",
+    "hood": "West Oakland",
+    "namedBusinesses": [
+      "Civis Systems",
+      "Mariner Construction",
+      "Oakmesh Systems",
+      "Northgate Construction",
+      "Coastline Construction"
+    ]
+  },
+  "story": {
+    "angle": "West Oakland businesses: Civis Systems, Mariner Construction, Oakmesh Systems — the people who work there",
+    "label": "West Oakland businesses · Civis Systems, Mariner Construction",
+    "hookLine": "Sam Fazio, Digital Twin Architect at Civis Systems. 13 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+    "hood": "West Oakland",
+    "pulseClass": "hood-businesses",
+    "namedBusinesses": [
+      "Civis Systems",
+      "Mariner Construction",
+      "Oakmesh Systems",
+      "Northgate Construction",
+      "Coastline Construction"
+    ],
+    "citizens": [
+      "Sam Fazio (POP-00445)",
+      "Catherine Santos (POP-00482)",
+      "Elias  Varek (POP-00789)",
+      "Maurice Franklin (POP-00801)",
+      "Maeve Pillai (POP-00851)",
+      "Yadira Rao (POP-00866)",
+      "Minh Raimon (POP-01010)",
+      "Dom Will (POP-00368)",
+      "Jace Robinson (POP-00483)",
+      "Jeremy Wong (POP-00712)",
+      "Elijah Roberts (POP-00275)",
+      "Jude Hess (POP-00521)",
+      "Enzo Walker (POP-00291)",
+      "Daniel Cloak (POP-00722)",
+      "Marcus Wright (POP-00288)",
+      "Eleanor Rivera (POP-00617)",
+      "Charlene Underwood (POP-00850)"
+    ],
+    "popids": [
+      "POP-00445",
+      "POP-00482",
+      "POP-00789",
+      "POP-00801",
+      "POP-00851",
+      "POP-00866",
+      "POP-01010",
+      "POP-00368",
+      "POP-00483",
+      "POP-00712",
+      "POP-00275",
+      "POP-00521",
+      "POP-00291",
+      "POP-00722",
+      "POP-00288",
+      "POP-00617",
+      "POP-00850"
+    ],
+    "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+    "cycle": 109
+  },
+  "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "businesses": [
+    {
+      "bizId": "BIZ-00052",
+      "name": "Civis Systems",
+      "sector": "Urban Systems Intelligence Firm",
+      "hood": "West Oakland",
+      "employeeCount": 41,
+      "avgSalary": 230000,
+      "annualRevenue": 60053786,
+      "growthRate": null,
+      "keyPersonnel": "Elias Varek (founder)",
+      "staff": [
+        {
+          "popid": "POP-00445",
+          "name": "Sam Fazio",
+          "role": "Digital Twin Architect"
+        },
+        {
+          "popid": "POP-00482",
+          "name": "Catherine Santos",
+          "role": "Digital Twin Architect"
+        },
+        {
+          "popid": "POP-00789",
+          "name": "Elias  Varek",
+          "role": "Founder of Civis Systems"
+        },
+        {
+          "popid": "POP-00801",
+          "name": "Maurice Franklin",
+          "role": "Drone Fleet Coordinator"
+        }
+      ],
+      "delta": {
+        "vsCycle": 108,
+        "employees": 0,
+        "revenue": 23666,
+        "growth": null
+      }
+    },
+    {
+      "bizId": "BIZ-00058",
+      "name": "Mariner Construction",
+      "sector": "Construction",
+      "hood": "West Oakland",
+      "employeeCount": 165,
+      "avgSalary": 90000,
+      "annualRevenue": null,
+      "growthRate": 4.93,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00851",
+          "name": "Maeve Pillai",
+          "role": "Plumber"
+        },
+        {
+          "popid": "POP-00866",
+          "name": "Yadira Rao",
+          "role": "Plumber"
+        },
+        {
+          "popid": "POP-01010",
+          "name": "Minh Raimon",
+          "role": "Carpenter Apprentice"
+        }
+      ],
+      "delta": {
+        "vsCycle": 108,
+        "employees": 0,
+        "revenue": null,
+        "growth": 0.8199999999999994
+      }
+    },
+    {
+      "bizId": "BIZ-00009",
+      "name": "Oakmesh Systems",
+      "sector": "Civic Tech",
+      "hood": "West Oakland",
+      "employeeCount": 46,
+      "avgSalary": 135000,
+      "annualRevenue": 9213935,
+      "growthRate": 31.39,
+      "keyPersonnel": "Marcus Tan (Founder)",
+      "staff": [
+        {
+          "popid": "POP-00368",
+          "name": "Dom Will",
+          "role": "Machine Learning Engineer (Oakmesh Systems)"
+        },
+        {
+          "popid": "POP-00483",
+          "name": "Jace Robinson",
+          "role": "Machine Learning Engineer (Oakmesh Systems)"
+        },
+        {
+          "popid": "POP-00712",
+          "name": "Jeremy Wong",
+          "role": "Civic Data Engineer (Oakmesh Systems)"
+        }
+      ],
+      "delta": {
+        "vsCycle": 108,
+        "employees": 0,
+        "revenue": 55287,
+        "growth": 1
+      }
+    },
+    {
+      "bizId": "BIZ-00060",
+      "name": "Northgate Construction",
+      "sector": "Construction",
+      "hood": "West Oakland",
+      "employeeCount": 95,
+      "avgSalary": 76000,
+      "annualRevenue": 78327513,
+      "growthRate": 6.36,
+      "keyPersonnel": "Helena Voss-Adeyemi (managing partner)",
+      "staff": [
+        {
+          "popid": "POP-00275",
+          "name": "Elijah Roberts",
+          "role": "Construction laborer"
+        },
+        {
+          "popid": "POP-00521",
+          "name": "Jude Hess",
+          "role": "Electrician"
+        }
+      ],
+      "delta": {
+        "vsCycle": 108,
+        "employees": 0,
+        "revenue": 95684,
+        "growth": 1
+      }
+    },
+    {
+      "bizId": "BIZ-00056",
+      "name": "Coastline Construction",
+      "sector": "Construction",
+      "hood": "West Oakland",
+      "employeeCount": 221,
+      "avgSalary": 85000,
+      "annualRevenue": 185843539,
+      "growthRate": 6.89,
+      "keyPersonnel": "Desmond Achebe (managing partner)",
+      "staff": [
+        {
+          "popid": "POP-00291",
+          "name": "Enzo Walker",
+          "role": "Plumber"
+        }
+      ],
+      "delta": {
+        "vsCycle": 108,
+        "employees": 0,
+        "revenue": 245917,
+        "growth": 0.7999999999999998
+      }
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "d0da6fb5",
+      "hood": "West Oakland",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00722",
+          "name": "Daniel Cloak"
+        },
+        {
+          "popid": "POP-00288",
+          "name": "Marcus Wright"
+        },
+        {
+          "popid": "POP-00617",
+          "name": "Eleanor Rivera"
+        },
+        {
+          "popid": "POP-00850",
+          "name": "Charlene Underwood"
+        }
+      ],
+      "citizenEvents": [
+        "Daniel Cloak — painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "Marcus Wright — noticed a familiar face missing from the morning routine",
+        "Eleanor Rivera — watched the ferry cut across the bay at sunset and felt lucky to live this close to the water",
+        "Charlene Underwood — snaked a drain on the first try and didn't brag about it, much"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00048",
+          "name": "West Side Cafe"
+        },
+        {
+          "bizId": "BIZ-00009",
+          "name": "Oakmesh Systems"
+        }
+      ],
+      "otherEntities": "New Covenant Pentecostal Assembly Seniors Lunch Program (program)",
+      "magnitude": -8,
+      "trend": "carrying, -8.00 strength left of 4-cycle run",
+      "suggestedJournalist": null,
+      "suggestedAngle": "general coverage"
+    }
+  ],
+  "citizens": [
+    {
+      "popid": "POP-00445",
+      "name": "Sam Fazio",
+      "role": "Digital Twin Architect",
+      "neighborhood": "West Oakland",
+      "business": "Civis Systems",
+      "profile": "Sam Fazio — Digital Twin Architect — Civis Systems, West Oakland",
+      "why": "works at Civis Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00482",
+      "name": "Catherine Santos",
+      "role": "Digital Twin Architect",
+      "neighborhood": "West Oakland",
+      "business": "Civis Systems",
+      "profile": "Catherine Santos — Digital Twin Architect — Civis Systems, West Oakland",
+      "why": "works at Civis Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00789",
+      "name": "Elias  Varek",
+      "role": "Founder of Civis Systems",
+      "neighborhood": "West Oakland",
+      "business": "Civis Systems",
+      "profile": "Elias  Varek — Founder of Civis Systems — Civis Systems, West Oakland",
+      "why": "works at Civis Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00801",
+      "name": "Maurice Franklin",
+      "role": "Drone Fleet Coordinator",
+      "neighborhood": "West Oakland",
+      "business": "Civis Systems",
+      "profile": "Maurice Franklin — Drone Fleet Coordinator — Civis Systems, West Oakland",
+      "why": "works at Civis Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00851",
+      "name": "Maeve Pillai",
+      "role": "Plumber",
+      "neighborhood": "West Oakland",
+      "business": "Mariner Construction",
+      "profile": "Maeve Pillai — Plumber — Mariner Construction, West Oakland",
+      "why": "works at Mariner Construction (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00866",
+      "name": "Yadira Rao",
+      "role": "Plumber",
+      "neighborhood": "West Oakland",
+      "business": "Mariner Construction",
+      "profile": "Yadira Rao — Plumber — Mariner Construction, West Oakland",
+      "why": "works at Mariner Construction (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01010",
+      "name": "Minh Raimon",
+      "role": "Carpenter Apprentice",
+      "neighborhood": "West Oakland",
+      "business": "Mariner Construction",
+      "profile": "Minh Raimon — Carpenter Apprentice — Mariner Construction, West Oakland",
+      "why": "works at Mariner Construction (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00368",
+      "name": "Dom Will",
+      "role": "Machine Learning Engineer (Oakmesh Systems)",
+      "neighborhood": "West Oakland",
+      "business": "Oakmesh Systems",
+      "profile": "Dom Will — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+      "why": "works at Oakmesh Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00483",
+      "name": "Jace Robinson",
+      "role": "Machine Learning Engineer (Oakmesh Systems)",
+      "neighborhood": "West Oakland",
+      "business": "Oakmesh Systems",
+      "profile": "Jace Robinson — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+      "why": "works at Oakmesh Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00712",
+      "name": "Jeremy Wong",
+      "role": "Civic Data Engineer (Oakmesh Systems)",
+      "neighborhood": "West Oakland",
+      "business": "Oakmesh Systems",
+      "profile": "Jeremy Wong — Civic Data Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+      "why": "works at Oakmesh Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00275",
+      "name": "Elijah Roberts",
+      "role": "Construction laborer",
+      "neighborhood": "West Oakland",
+      "business": "Northgate Construction",
+      "profile": "Elijah Roberts — Construction laborer — Northgate Construction, West Oakland",
+      "why": "works at Northgate Construction (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00521",
+      "name": "Jude Hess",
+      "role": "Electrician",
+      "neighborhood": "West Oakland",
+      "business": "Northgate Construction",
+      "profile": "Jude Hess — Electrician — Northgate Construction, West Oakland",
+      "why": "works at Northgate Construction (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00291",
+      "name": "Enzo Walker",
+      "role": "Plumber",
+      "neighborhood": "West Oakland",
+      "business": "Coastline Construction",
+      "profile": "Enzo Walker — Plumber — Coastline Construction, West Oakland",
+      "why": "works at Coastline Construction (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00722",
+      "name": "Daniel Cloak",
+      "role": null,
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Daniel Cloak — West Oakland",
+      "why": "engine seed for West Oakland this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00288",
+      "name": "Marcus Wright",
+      "role": null,
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Marcus Wright — West Oakland",
+      "why": "engine seed for West Oakland this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00617",
+      "name": "Eleanor Rivera",
+      "role": null,
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Eleanor Rivera — West Oakland",
+      "why": "engine seed for West Oakland this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00850",
+      "name": "Charlene Underwood",
+      "role": null,
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Charlene Underwood — West Oakland",
+      "why": "engine seed for West Oakland this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00043",
+      "name": "Janae Rivers",
+      "role": "City Council Member",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Janae Rivers — City Council Member — Piedmont Ave",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    },
+    {
+      "popid": "POP-00131",
+      "name": "Lorenzo Jordan",
+      "role": "Public Defender",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Lorenzo Jordan — Public Defender — Downtown",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    },
+    {
+      "popid": "POP-00143",
+      "name": "Clarissa Dane",
+      "role": "DISTRICT ATTORNEY",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Clarissa Dane — DISTRICT ATTORNEY — Fruitvale",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    },
+    {
+      "popid": "POP-00212",
+      "name": "Jessie Hess",
+      "role": "Barista",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Jessie Hess — Barista — Downtown",
+      "why": "on the Casino_Ledger this cycle — settled a undocked wager"
+    },
+    {
+      "popid": "POP-00213",
+      "name": "Davey Martinez",
+      "role": "Maintenance tech",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Davey Martinez — Maintenance tech — Temescal",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    }
+  ],
+  "closures": [],
+  "contractionWatch": [],
+  "casino": {
+    "wagers": [
+      {
+        "popid": "POP-00043",
+        "name": "Janae Rivers",
+        "market": "sports",
+        "stake": 376,
+        "payout": 0,
+        "settled": true,
+        "status": "settled-loss"
+      },
+      {
+        "popid": "POP-00131",
+        "name": "Lorenzo Jordan",
+        "market": "sports",
+        "stake": 367,
+        "payout": 0,
+        "settled": true,
+        "status": "settled-loss"
+      },
+      {
+        "popid": "POP-00143",
+        "name": "Clarissa Dane",
+        "market": "sports",
+        "stake": 900,
+        "payout": 1296,
+        "settled": true,
+        "status": "settled-win"
+      },
+      {
+        "popid": "POP-00212",
+        "name": "Jessie Hess",
+        "market": "undocked",
+        "stake": 111,
+        "payout": 0,
+        "settled": true,
+        "status": "settled-loss"
+      },
+      {
+        "popid": "POP-00213",
+        "name": "Davey Martinez",
+        "market": "sports",
+        "stake": 196,
+        "payout": 282,
+        "settled": true,
+        "status": "settled-win"
+      }
+    ],
+    "houseFloat": 241080,
+    "totalRows": 37
+  },
+  "cityMoney": {
+    "treasury": {
+      "state": "NO_ROWS",
+      "opening": null,
+      "closing": null,
+      "income": {},
+      "outflows": []
+    },
+    "debt": {
+      "defaults": [],
+      "overLine": 94,
+      "crisisByHood": {}
+    }
+  },
+  "deltas": {
+    "state": "PRIOR_CYCLE_ON_DISK",
+    "vs": 108
+  },
+  "prewrite": {
+    "pulseClass": "hood-businesses",
+    "angle": "West Oakland businesses: Civis Systems, Mariner Construction, Oakmesh Systems — the people who work there",
+    "hookLine": "Sam Fazio, Digital Twin Architect at Civis Systems. 13 named workers at 5 named businesses in West Oakland on the ledger this cycle.",
+    "namedBusinesses": [
+      "Civis Systems",
+      "Mariner Construction",
+      "Oakmesh Systems",
+      "Northgate Construction",
+      "Coastline Construction"
+    ],
+    "anchorFacts": [
+      "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias  Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+      "Mariner Construction · Construction · 165 employees · growth 4.9% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)",
+      "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems))",
+      "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Elijah Roberts (Construction laborer); Jude Hess (Electrician)",
+      "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber)",
+      "ENGINE SEED (West Oakland): citizens Daniel Cloak; Marcus Wright; Eleanor Rivera; Charlene Underwood · businesses West Side Cafe; Oakmesh Systems · New Covenant Pentecostal Assembly Seniors Lunch Program (program)",
+      "CASINO: Janae Rivers — sports wager, staked $376, settled for $0",
+      "CASINO: Lorenzo Jordan — sports wager, staked $367, settled for $0",
+      "CASINO: Clarissa Dane — sports wager, staked $900, settled for $1k",
+      "CASINO: Jessie Hess — undocked wager, staked $111, settled for $0",
+      "CASINO: Davey Martinez — sports wager, staked $196, settled for $282",
+      "CASINO: the house float stands at $241k"
+    ],
+    "evidence": [
+      {
+        "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias  Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "text": "Mariner Construction · Construction · 165 employees · growth 4.9% · on the roster: Maeve Pillai (Plumber); Yadira Rao (Plumber); Minh Raimon (Carpenter Apprentice)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)); Jeremy Wong (Civic Data Engineer (Oakmesh Systems))",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "text": "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner) · on the roster: Elijah Roberts (Construction laborer); Jude Hess (Electrician)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "text": "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner) · on the roster: Enzo Walker (Plumber)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "text": "ENGINE SEED (West Oakland): citizens Daniel Cloak; Marcus Wright; Eleanor Rivera; Charlene Underwood · businesses West Side Cafe; Oakmesh Systems · New Covenant Pentecostal Assembly Seniors Lunch Program (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+      },
+      {
+        "text": "CASINO: Janae Rivers — sports wager, staked $376, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C109"
+      },
+      {
+        "text": "CASINO: Lorenzo Jordan — sports wager, staked $367, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C109"
+      },
+      {
+        "text": "CASINO: Clarissa Dane — sports wager, staked $900, settled for $1k",
+        "src": "output/beats/Casino_Ledger.jsonl @C109"
+      },
+      {
+        "text": "CASINO: Jessie Hess — undocked wager, staked $111, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C109"
+      },
+      {
+        "text": "CASINO: Davey Martinez — sports wager, staked $196, settled for $282",
+        "src": "output/beats/Casino_Ledger.jsonl @C109"
+      },
+      {
+        "text": "CASINO: the house float stands at $241k",
+        "src": "output/beats/Casino_Ledger.jsonl @C109"
+      }
+    ],
+    "hooks": [
+      {
+        "text": "Unemployment in Lake Merritt up 20%. Economic stress story. Who's affected and why?",
+        "angle": "baseline context piece",
+        "hood": "Lake Merritt"
+      },
+      {
+        "text": "Notable event: \"Medium-severity economic spike in Baylight District\". Follow-up recommended.",
+        "angle": "desk rotation",
+        "hood": "Baylight District"
+      },
+      {
+        "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Camila Osman is the new owner of Claremont Table in Rockridge (C109)",
+        "angle": "desk rotation",
+        "hood": "Rockridge"
+      },
+      {
+        "text": "Mike Kinder has not advanced in 54 years",
+        "angle": "desk rotation",
+        "hood": null
+      },
+      {
+        "text": "Maya Torres-Dillon has not advanced in 54 years",
+        "angle": "desk rotation",
+        "hood": null
+      }
+    ],
+    "forbidden": [
+      "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+      "Do not contradict a role, employer or neighborhood listed here"
+    ]
+  },
+  "rotation": {
+    "pool": [
+      {
+        "hood": "Baylight District",
+        "staffed": 2,
+        "workers": 50,
+        "lastCovered": 108
+      },
+      {
+        "hood": "Lake Merritt",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "Temescal",
+        "staffed": 4,
+        "workers": 10,
+        "lastCovered": 107
+      },
+      {
+        "hood": "West Oakland",
+        "staffed": 7,
+        "workers": 15,
+        "lastCovered": null
+      },
+      {
+        "hood": "Brooklyn Basin",
+        "staffed": 1,
+        "workers": 4,
+        "lastCovered": null
+      },
+      {
+        "hood": "Jack London",
+        "staffed": 7,
+        "workers": 43,
+        "lastCovered": 106
+      },
+      {
+        "hood": "Downtown",
+        "staffed": 4,
+        "workers": 4,
+        "lastCovered": null
+      },
+      {
+        "hood": "Piedmont Ave",
+        "staffed": 2,
+        "workers": 6,
+        "lastCovered": null
+      },
+      {
+        "hood": "Fruitvale",
+        "staffed": 3,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "Uptown",
+        "staffed": 3,
+        "workers": 12,
+        "lastCovered": null
+      },
+      {
+        "hood": "Chinatown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Rockridge",
+        "staffed": 2,
+        "workers": 5,
+        "lastCovered": 105
+      },
+      {
+        "hood": "Grand Lake",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": 104
+      },
+      {
+        "hood": "Laurel",
+        "staffed": 3,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "East Oakland",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "San Antonio",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      }
+    ],
+    "picked": "West Oakland"
+  },
+  "candidates": [
+    {
+      "className": "hood-businesses",
+      "hood": "Baylight District",
+      "label": "Baylight District · 2 staffed / 10 listed",
+      "namedBusinesses": [
+        "Anthropic",
+        "Baylight Construction Authority"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Lake Merritt",
+      "label": "Lake Merritt · 1 staffed / 3 listed",
+      "namedBusinesses": [
+        "Ridgeline Ventures"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Temescal",
+      "label": "Temescal · 4 staffed / 6 listed",
+      "namedBusinesses": [
+        "Gridiron Analytics",
+        "OakTown Social",
+        "Calderon-Nishi"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Brooklyn Basin",
+      "label": "Brooklyn Basin · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "Portside Bio"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Jack London",
+      "label": "Jack London · 7 staffed / 7 listed",
+      "namedBusinesses": [
+        "Port of Oakland",
+        "Jack London Square Markets",
+        "Blue Lantern Bar"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Downtown",
+      "label": "Downtown · 4 staffed / 11 listed",
+      "namedBusinesses": [
+        "EBMUD",
+        "Miso Metro",
+        "Atlas Bay Architects"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Piedmont Ave",
+      "label": "Piedmont Ave · 2 staffed / 5 listed",
+      "namedBusinesses": [
+        "Kaiser Permanente Oakland",
+        "Mayday Movers"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Fruitvale",
+      "label": "Fruitvale · 3 staffed / 4 listed",
+      "namedBusinesses": [
+        "Fruitvale Community Clinic",
+        "Fruitvale Diner",
+        "Foothill Builders"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Uptown",
+      "label": "Uptown · 3 staffed / 6 listed",
+      "namedBusinesses": [
+        "Oakland Tech Collective",
+        "Art Walk Cafe",
+        "Night Walk Records"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Chinatown",
+      "label": "Chinatown · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Heritage Bakehouse"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Rockridge",
+      "label": "Rockridge · 2 staffed / 7 listed",
+      "namedBusinesses": [
+        "OakHouse",
+        "Claremont Table"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Grand Lake",
+      "label": "Grand Lake · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Port Grind"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Laurel",
+      "label": "Laurel · 3 staffed / 6 listed",
+      "namedBusinesses": [
+        "Nino's",
+        "Laurel Market",
+        "Schoolgate Cafe"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "East Oakland",
+      "label": "East Oakland · 2 staffed / 4 listed",
+      "namedBusinesses": [
+        "Eastside Family Market",
+        "Sunrise Cafe"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "San Antonio",
+      "label": "San Antonio · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Park Boulevard Cafe"
+      ]
+    }
+  ],
+  "signals": {
+    "businessLaneCount": 39,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c109.json patterns[2]; evidence: Neighborhood_Map row(s) 6"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic — economic upside, jobs and footprint in Downtown",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, East Oakland",
+        "ref": "output/engine_audit_c109.json patterns[7]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "ripple",
+        "label": "fold-applied/initiative-implementation | Initiative work landed in 6 neighborhood(s): Downtown, Jack London, West Oakland, Temescal, Fruitvale, East Oakland",
+        "hood": null,
+        "ref": "Ripple_Ledger cycle 109 (CauseType neighborhood-fold); rendered: world_summary_c109.md \"## What Moved\" > \"### neighborhood-fold\""
+      },
+      {
+        "kind": "ripple",
+        "label": "traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity | Edition coverage lifted the city: traffic +0.01, retail +0.146, nightlife +0.05, pu",
+        "hood": null,
+        "ref": "Ripple_Ledger cycle 109 (CauseType edition-coverage); rendered: world_summary_c109.md \"## What Moved\" > \"### edition-coverage\""
+      },
+      {
+        "kind": "ripple",
+        "label": "sentiment | prior-cycle coverage ratings × sentimentWeight × 0.015, clamped ±0.20",
+        "hood": null,
+        "ref": "Ripple_Ledger cycle 109 (CauseType edition-coverage); rendered: world_summary_c109.md \"## What Moved\" > \"### edition-coverage\""
+      }
+    ]
+  },
+  "scene": {
+    "namedOnTop": [
+      "Civis Systems",
+      "Mariner Construction",
+      "Oakmesh Systems",
+      "Northgate Construction",
+      "Coastline Construction"
+    ]
+  },
+  "pointers": [
+    "output/beats/Business_Ledger.jsonl (176 rows @C109)",
+    "output/beats/Employment_Roster.jsonl (869 rows)",
+    "output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 4)",
+    "output/beats/prev/Business_Ledger.jsonl (movement vs C108)",
+    "output/beats/Casino_Ledger.jsonl (37 wager rows this cycle)",
+    "output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 6)",
+    "output/desk_signal_c109.json lanes.business (pointers only)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2"
+  ]
+}

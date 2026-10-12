@@ -1,0 +1,439 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00592",
+    "name": "Talia Finch",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Oaks ground read C109 — low — the people around the second club",
+    "approach": "Oaks ground approach: this slice is what the Oaks feed says about the people — the mood in the room, the fans, the neighborhood around the park — with the record as context. First-person ground report. The moods and sentiments are feed rows, real; the walk to the park, the vendor, the kid with the glove are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "oaks",
+      "hood": "Baylight District",
+      "facts": [
+        "Oaks fans, C109: low",
+        "Room mood, C109: frustrated",
+        "Notebook (feed): Albiet preseason, the Oaks still have yet to taste a win. Rookie AJ Dybantsa continues to show promise scoring 19 points, 7 rebounds, 2 assists. Wendell Carter plays his first game and played the firs",
+        "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+        "Context: record 0-2 · streak L6",
+        "Home neighborhood (feed): Baylight District",
+        "Notebook (feed): Still without a win to show for it but Austin Reaves and Dillon Brooks show great promise in the loss. Reaves scores 24 points and Dillon Brooks adds 21 points. Wendell Carter scores 12 points. Adash",
+        "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+        "Context: record 0-3 · streak L7",
+        "Home neighborhood (feed): Downtown"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [],
+      "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-oaks-ground",
+    "hood": "Baylight District",
+    "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+    "plan": {
+      "focus": "The Oaks' preseason games and their impact on the community",
+      "closeQuestion": "How can the Oaks turn their season around and regain the fans' support?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01022",
+        "name": "Wilson Shepard",
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "profile": "Austin Reaves — SG / The Oaks — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01022-79e47cda66",
+        "pop": "POP-01022",
+        "name": "Wilson Shepard",
+        "quote": "To be honest, I think the team's performance can definitely affect the neighborhood's mood, but I haven't really seen that play out yet this season. I mean, we're still finding our rhythm, and I'm confident we'll tighten up and be ready for the real deal.",
+        "factIds": [
+          "F-5b5a560909b4"
+        ],
+        "src": "packet.W2[POP-01022]"
+      },
+      {
+        "id": "Q-POP-01027-a1f13fc361",
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "quote": "Honestly, I think fans are getting a little frustrated with the team's performance so far. I mean, we're still finding our footing, but it's hard not to worry when we're not seeing the wins. I trust that we'll get it together, we just need to keep working and supporting each other.",
+        "factIds": [
+          "F-98a8fe244624",
+          "F-c9c3c03b1ac8"
+        ],
+        "src": "packet.W2[POP-01027]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Talia Finch",
+        "text": "The team's efforts to improve may be hindered by the fans' negative sentiment",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks ground read C109 — low",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+      "id": "F-f9869449dd4e"
+    },
+    {
+      "t": "FACT",
+      "text": "low",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+      "id": "F-9f77871be565"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks fans, C109: low",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-856b79b79e5a"
+    },
+    {
+      "t": "FACT",
+      "text": "Room mood, C109: frustrated",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-98a8fe244624"
+    },
+    {
+      "t": "FACT",
+      "text": "Notebook (feed): Albiet preseason, the Oaks still have yet to taste a win. Rookie AJ Dybantsa continues to show promise scoring 19 points, 7 rebounds, 2 assists. Wendell Carter plays his first game and played the firs",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-cb32f8f75302"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-a689d2920790"
+    },
+    {
+      "t": "FACT",
+      "text": "Context: record 0-2 · streak L6",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-c9c3c03b1ac8"
+    },
+    {
+      "t": "FACT",
+      "text": "Home neighborhood (feed): Baylight District",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-fbd4027bf561"
+    },
+    {
+      "t": "FACT",
+      "text": "Notebook (feed): Still without a win to show for it but Austin Reaves and Dillon Brooks show great promise in the loss. Reaves scores 24 points and Dillon Brooks adds 21 points. Wendell Carter scores 12 points. Adash",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-06612658bb9e"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-984a9f12e804"
+    },
+    {
+      "t": "FACT",
+      "text": "Context: record 0-3 · streak L7",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-c840f3596048"
+    },
+    {
+      "t": "FACT",
+      "text": "Home neighborhood (feed): Downtown",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-7131c533ed70"
+    },
+    {
+      "t": "FACT",
+      "text": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+      "src": "Simulation_Ledger profile for POP-01022",
+      "id": "F-5b5a560909b4"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "talia-finch-oaks-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Carry one supplied Oaks fact into a room — a bar, a platform, a corner — and let the people there say what the city thinks of a franchise it hasn't decided on. The room is allotted texture; the fact is the Packet's. NOT analysis, NOT fan certainty, NOT the A's.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "first-person, physically present, sensory",
+      "targetWords": "400-650",
+      "opening": "a specific real-Oakland place and one sensory channel — weather, sound, a drink, a platform announcement",
+      "closing": "atmosphere, not analysis — the reader left sitting in the scene"
+    },
+    "authorizedTexture": [
+      "an unnamed bar, corner store, BART platform, sidewalk, or fence line in Jack London, West Oakland, Downtown, or the Baylight blocks — a newly named venue belongs on INTAKE BIZ",
+      "the reporter's own presence and sensory observation",
+      "unnamed patrons, regulars, and strangers speaking as city color — never a named attributed quote unless the Packet names them",
+      "the deciding-fan question as her standing thread, grounded in a supplied result"
+    ],
+    "textureConditions": [
+      "the result, the names, and what the coach said come from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "room voices stay unnamed and rhetorical — they must not become a count, a poll, a named person, or a fact about the team",
+      "real NBA players and teams may be named by a stranger as the feed names them; no life the feed didn't supply",
+      "no piece when the cycle has no Oaks row"
+    ],
+    "canonBlockers": [
+      "a real-world venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, result, record, streak, minute, injury, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "a fabricated player, coach, owner, or front-office quote",
+      "a personal life, hometown, family, or citizen record given to a real NBA player the feed only names",
+      "the A's as the subject (five other seats own them)",
+      "Chicago, the Bulls, or any prior bureau",
+      "engine or simulation vocabulary; real-world calendar dates (YYYY-MM-DD)"
+    ]
+  },
+  "manifest": {
+    "id": "AM-66814b2a1d97",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-f9869449dd4e",
+        "t": "FACT",
+        "text": "Oaks ground read C109 — low",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+      },
+      {
+        "id": "F-9f77871be565",
+        "t": "FACT",
+        "text": "low",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+      },
+      {
+        "id": "F-856b79b79e5a",
+        "t": "FACT",
+        "text": "Oaks fans, C109: low",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-98a8fe244624",
+        "t": "FACT",
+        "text": "Room mood, C109: frustrated",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-cb32f8f75302",
+        "t": "FACT",
+        "text": "Notebook (feed): Albiet preseason, the Oaks still have yet to taste a win. Rookie AJ Dybantsa continues to show promise scoring 19 points, 7 rebounds, 2 assists. Wendell Carter plays his first game and played the firs",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-a689d2920790",
+        "t": "FACT",
+        "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-c9c3c03b1ac8",
+        "t": "FACT",
+        "text": "Context: record 0-2 · streak L6",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-fbd4027bf561",
+        "t": "FACT",
+        "text": "Home neighborhood (feed): Baylight District",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-06612658bb9e",
+        "t": "FACT",
+        "text": "Notebook (feed): Still without a win to show for it but Austin Reaves and Dillon Brooks show great promise in the loss. Reaves scores 24 points and Dillon Brooks adds 21 points. Wendell Carter scores 12 points. Adash",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-984a9f12e804",
+        "t": "FACT",
+        "text": "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-c840f3596048",
+        "t": "FACT",
+        "text": "Context: record 0-3 · streak L7",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-7131c533ed70",
+        "t": "FACT",
+        "text": "Home neighborhood (feed): Downtown",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-5b5a560909b4",
+        "t": "FACT",
+        "text": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "src": "Simulation_Ledger profile for POP-01022"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01022-79e47cda66",
+        "speakerId": "POP-01022",
+        "speakerName": "Wilson Shepard",
+        "text": "To be honest, I think the team's performance can definitely affect the neighborhood's mood, but I haven't really seen that play out yet this season. I mean, we're still finding our rhythm, and I'm confident we'll tighten up and be ready for the real deal.",
+        "factIds": [
+          "F-5b5a560909b4"
+        ],
+        "src": "packet.W2[POP-01022]"
+      },
+      {
+        "id": "Q-POP-01027-a1f13fc361",
+        "speakerId": "POP-01027",
+        "speakerName": "Austin Reaves",
+        "text": "Honestly, I think fans are getting a little frustrated with the team's performance so far. I mean, we're still finding our footing, but it's hard not to worry when we're not seeing the wins. I trust that we'll get it together, we just need to keep working and supporting each other.",
+        "factIds": [
+          "F-98a8fe244624",
+          "F-c9c3c03b1ac8"
+        ],
+        "src": "packet.W2[POP-01027]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01022",
+        "name": "Wilson Shepard",
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01027",
+        "name": "Austin Reaves",
+        "profile": "Austin Reaves — SG / The Oaks — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Talia Finch",
+        "text": "The team's efforts to improve may be hindered by the fans' negative sentiment",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an unnamed bar, corner store, BART platform, sidewalk, or fence line in Jack London, West Oakland, Downtown, or the Baylight blocks — a newly named venue belongs on INTAKE BIZ",
+      "the reporter's own presence and sensory observation",
+      "unnamed patrons, regulars, and strangers speaking as city color — never a named attributed quote unless the Packet names them",
+      "the deciding-fan question as her standing thread, grounded in a supplied result"
+    ],
+    "textureConditions": [
+      "the result, the names, and what the coach said come from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "room voices stay unnamed and rhetorical — they must not become a count, a poll, a named person, or a fact about the team",
+      "real NBA players and teams may be named by a stranger as the feed names them; no life the feed didn't supply",
+      "no piece when the cycle has no Oaks row"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, result, record, streak, minute, injury, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "a fabricated player, coach, owner, or front-office quote",
+      "a personal life, hometown, family, or citizen record given to a real NBA player the feed only names",
+      "the A's as the subject (five other seats own them)",
+      "Chicago, the Bulls, or any prior bureau",
+      "engine or simulation vocabulary; real-world calendar dates (YYYY-MM-DD)"
+    ]
+  }
+}

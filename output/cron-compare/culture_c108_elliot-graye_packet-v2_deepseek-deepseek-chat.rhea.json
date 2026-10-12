@@ -1,0 +1,66 @@
+{
+  "draft": "output/cron-compare/culture_c108_elliot-graye_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "63a814bddaaa38042eeee6ab49a62ae3ed283ff229573216795aa104015e0547",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "33-year anchor of South Indian traditions",
+      "issue": "Unapproved institution tenure count (33 years) not explicitly grounded in ledger/packet",
+      "severity": "low"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "Passed sourcing and canon fidelity checks; authoritative faith mappings adhered to, quote matches packet verbatim.",
+  "review": {
+    "profileId": "graye-faith-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "packageVersion": "GRAYE-LEP2-1",
+    "manifestId": "AM-f264f0ed04df",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "33"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Anand Krishnamurthy",
+      "Eunice Marston"
+    ],
+    "unverified": [
+      "Bharat Mandir",
+      "Living Word",
+      "Quiet Hours",
+      "South Indian"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 7156,
+  "parseError": false,
+  "ranAt": "2026-09-24T23:15:31.405Z"
+}

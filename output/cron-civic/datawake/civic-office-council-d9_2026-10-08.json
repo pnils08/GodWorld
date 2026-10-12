@@ -1,0 +1,16 @@
+{
+  "office": "council_d9",
+  "agentDir": "civic-office-council-d9",
+  "holder": "Terrence Mobley",
+  "popid": "POP-00506",
+  "title": "City Council District 9",
+  "date": "2026-10-08",
+  "cycle": 110,
+  "model": "deepseek/deepseek-chat",
+  "statement": "Laurel and Uptown are holding steady—we'll keep monitoring conditions but see no urgent needs requiring intervention this cycle.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-08T10:45:10.128Z",
+  "fellBackFrom": null
+}

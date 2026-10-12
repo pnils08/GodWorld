@@ -1,0 +1,38 @@
+{
+  "office": "council_d8",
+  "cycle": 109,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "For Cycle 109, District 8 accepts the placement metrics for the Youth Apprenticeship Pipeline while establishing formal audit requirements for applicant intake records and regional placement transparency. We direct focused municipal baseline support to stabilize slow commercial trade in Adams Point and Eastlake, while crediting disciplined municipal maintenance for Lake Merritt's ongoing steady performance. Additionally, we confirm procedural compliance for the Fruitvale Transit Hub consultant selection and Baylight remediation tracking.",
+  "statements": [
+    {
+      "statementId": "STMT-109-council_d8-001",
+      "type": "audit_statement",
+      "topic": "Youth Apprenticeship Pipeline Intake Audit and Placement Transparency",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Formalize district audit requirements for INIT-007 intake documentation and verify cohort placement metrics.",
+      "quote": "Metric publication is welcome, but legislative verification requires complete applicant intake audits before full cohort deployment.",
+      "fullStatement": "Publishing placement metrics is a positive procedural step, but District 8 requires complete, verifiable applicant intake audit records to ensure transparency across all districts. We cannot evaluate the efficacy of the Oakland Youth Apprenticeship Pipeline on aggregate outputs alone without examining intake compliance and baseline criteria. District 8 formally enters an audit finding requiring documented verification of applicant logs alongside published placement figures to guarantee operational integrity across municipal training programs.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d8-002",
+      "type": "district_statement",
+      "topic": "District 8 Commercial Corridor Oversight and Baseline Municipal Services",
+      "initiative": null,
+      "decision": "Mandate documented municipal trade reviews for Adams Point and Eastlake while crediting municipal maintenance at Lake Merritt.",
+      "quote": "Lake Merritt's steady conditions show what consistent municipal service achieves; we must apply that same rigor to Adams Point and Eastlake.",
+      "fullStatement": "Lake Merritt's steady street trade and low crime are the direct result of consistent, documented baseline municipal service delivery and diligent local stewardship. However, we cannot ignore the slow commercial trade signals in Adams Point and Eastlake. While community morale remains upbeat and crime remains low across District 8, our commercial corridors require proactive municipal support rather than passive monitoring. We direct city administration to audit service delivery and provide documented trade mitigation protocols for Adams Point and Eastlake while correcting administrative filing discrepancies in Grand Lake.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d8-003",
+      "type": "oversight_statement",
+      "topic": "Capital Projects and Environmental Review Compliance",
+      "initiative": "Fruitvale Transit Hub Phase II — Visioning",
+      "decision": "Affirm procedural compliance and design consultant milestones for Fruitvale Transit Hub and Baylight remediation.",
+      "quote": "Every major capital milestone must adhere strictly to executed contracts and documented procedural timelines.",
+      "fullStatement": "District 8 supports moving forward with the design consultant selection for the Fruitvale Transit Hub Phase II, provided that procurement procedures, timeline milestones, and environmental review standards remain fully documented and accessible. Similarly, on the Baylight District Phase II remediation updates, our office continues to monitor contract execution and environmental remediation protocols. Capital infrastructure investments succeed only when City Hall maintains rigorous procedural standards from initial design authorization through site completion.",
+      "trackerUpdates": {}
+    }
+  ]
+}

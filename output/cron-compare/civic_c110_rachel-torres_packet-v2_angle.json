@@ -1,0 +1,457 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "rachel-torres",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00057",
+      "name": "Sgt. Rachel Torres",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "KONO logged the most incidents (10) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "public-safety",
+        "hood": "KONO",
+        "facts": [
+          "156 incidents across 22 neighborhoods; most in KONO 10, Chinatown 9, East Oakland 8, San Antonio 8, West Oakland 8; fewest in Rockridge 5, Temescal 5, Lake Merritt 5",
+          "KONO: 10 incidents (+2 vs C109), response 10.7 min, clearance 22%, property index 35, violent index 25",
+          "Slowest response: Lake Merritt: 5 incidents (+1 vs C109), response 11 min, clearance 22%, property index 31, violent index 20",
+          "Citywide custody this cycle: 34 arrests (0 tracked, 34 other residents); 68 in custody at the close",
+          "Adams Point: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Baylight District: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Brooklyn: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Chinatown: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Downtown: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": "desk-signal incident rows attached as pointers (5)",
+        "engineHooks": [],
+        "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-safety",
+      "hood": "KONO",
+      "score": null,
+      "src": "output/beats/Crime_Metrics.jsonl @C110",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): advance to preliminary schematics with community oversight provisions intact — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): filed legislative language with City Clerk — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved accelerated cohort placement with East Oakland priority — \"150 apprentices placed by spring — that's the target, and we're accelerating to hit it.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): independent oversight maintained; soil test verification proceeding — \"Independent oversight isn't bureaucracy — it's how we build trust while we build the future.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "KONO logged the most incidents (10) | 22 neighborhoods on the table",
+        "src": "output/beats/Crime_Metrics.jsonl @C110",
+        "id": "F-29821a06b5d3"
+      },
+      {
+        "t": "FACT",
+        "text": "KONO leads the incident count; Lake Merritt waits longest for a response; 68 in custody citywide; 7 public-safety staff on the roster.",
+        "src": "output/beats/Crime_Metrics.jsonl @C110",
+        "id": "F-871783bd39b8"
+      },
+      {
+        "t": "FACT",
+        "text": "156 incidents across 22 neighborhoods; most in KONO 10, Chinatown 9, East Oakland 8, San Antonio 8, West Oakland 8; fewest in Rockridge 5, Temescal 5, Lake Merritt 5",
+        "src": "output/beats/Crime_Metrics.jsonl @C110",
+        "id": "F-4e3bb82771d9"
+      },
+      {
+        "t": "FACT",
+        "text": "KONO: 10 incidents (+2 vs C109), response 10.7 min, clearance 22%, property index 35, violent index 25",
+        "src": "output/beats/Crime_Metrics.jsonl @C110",
+        "id": "F-a44a1710504a"
+      },
+      {
+        "t": "FACT",
+        "text": "Slowest response: Lake Merritt: 5 incidents (+1 vs C109), response 11 min, clearance 22%, property index 31, violent index 20",
+        "src": "output/beats/Crime_Metrics.jsonl @C110",
+        "id": "F-10214754deef"
+      },
+      {
+        "t": "FACT",
+        "text": "Citywide custody this cycle: 34 arrests (0 tracked, 34 other residents); 68 in custody at the close",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 city",
+        "id": "F-b2a1b2c5facc"
+      },
+      {
+        "t": "FACT",
+        "text": "Adams Point: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Adams Point",
+        "id": "F-eba60d465f44"
+      },
+      {
+        "t": "FACT",
+        "text": "Baylight District: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Baylight District",
+        "id": "F-68d9f1fad416"
+      },
+      {
+        "t": "FACT",
+        "text": "Brooklyn: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Brooklyn",
+        "id": "F-d1e9c586e42f"
+      },
+      {
+        "t": "FACT",
+        "text": "Chinatown: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Chinatown",
+        "id": "F-8f4f2052b842"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Downtown",
+        "id": "F-c6a5b3657d6e"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "offices",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-safety",
+      "angle": "KONO logged the most incidents (10) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "label": "KONO logged the most incidents (10) | 22 neighborhoods on the table",
+      "hookLine": "KONO leads the incident count; Lake Merritt waits longest for a response; 68 in custody citywide; 7 public-safety staff on the roster.",
+      "hood": "KONO",
+      "citizens": [
+        "Rafael Montez (POP-00136)",
+        "Kimberly Cho (POP-00137)",
+        "Leonard Briggs (POP-00138)",
+        "Samantha Viteri (POP-00139)",
+        "Marcus Hollowell (POP-00140)",
+        "Priya Narang (POP-00141)",
+        "Vanessa Tran-Muñoz (POP-01021)"
+      ],
+      "popids": [
+        "POP-00136",
+        "POP-00137",
+        "POP-00138",
+        "POP-00139",
+        "POP-00140",
+        "POP-00141",
+        "POP-01021"
+      ],
+      "ref": "output/beats/Crime_Metrics.jsonl @C110",
+      "cycle": 110
+    },
+    "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "SAFETY-SLICE-3",
+    "kind": "beat-safety",
+    "seat": {
+      "slug": "rachel-torres",
+      "name": "Sgt. Rachel Torres",
+      "popid": "POP-00057",
+      "desk": "civic",
+      "domain": "public-safety",
+      "builder": "buildSafetySlice.js"
+    },
+    "hood": "KONO",
+    "pulse": {
+      "className": "beat-safety",
+      "score": 100,
+      "label": "KONO logged the most incidents (10) | 22 neighborhoods on the table",
+      "hood": "KONO",
+      "source": "output/beats/Crime_Metrics.jsonl @C110"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "KONO logged the most incidents (10) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "hookLine": "KONO leads the incident count; Lake Merritt waits longest for a response; 68 in custody citywide; 7 public-safety staff on the roster.",
+      "anchorFacts": [
+        "156 incidents across 22 neighborhoods; most in KONO 10, Chinatown 9, East Oakland 8, San Antonio 8, West Oakland 8; fewest in Rockridge 5, Temescal 5, Lake Merritt 5",
+        "KONO: 10 incidents (+2 vs C109), response 10.7 min, clearance 22%, property index 35, violent index 25",
+        "Slowest response: Lake Merritt: 5 incidents (+1 vs C109), response 11 min, clearance 22%, property index 31, violent index 20",
+        "Citywide custody this cycle: 34 arrests (0 tracked, 34 other residents); 68 in custody at the close",
+        "Adams Point: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Baylight District: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Brooklyn: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Chinatown: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Downtown: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked"
+      ],
+      "evidence": [
+        {
+          "text": "156 incidents across 22 neighborhoods; most in KONO 10, Chinatown 9, East Oakland 8, San Antonio 8, West Oakland 8; fewest in Rockridge 5, Temescal 5, Lake Merritt 5",
+          "src": "output/beats/Crime_Metrics.jsonl @C110"
+        },
+        {
+          "text": "KONO: 10 incidents (+2 vs C109), response 10.7 min, clearance 22%, property index 35, violent index 25",
+          "src": "output/beats/Crime_Metrics.jsonl @C110"
+        },
+        {
+          "text": "Slowest response: Lake Merritt: 5 incidents (+1 vs C109), response 11 min, clearance 22%, property index 31, violent index 20",
+          "src": "output/beats/Crime_Metrics.jsonl @C110"
+        },
+        {
+          "text": "Citywide custody this cycle: 34 arrests (0 tracked, 34 other residents); 68 in custody at the close",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 city"
+        },
+        {
+          "text": "Adams Point: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Adams Point"
+        },
+        {
+          "text": "Baylight District: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Baylight District"
+        },
+        {
+          "text": "Brooklyn: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Brooklyn"
+        },
+        {
+          "text": "Chinatown: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Chinatown"
+        },
+        {
+          "text": "Downtown: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Downtown"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 109
+      },
+      "hooks": [],
+      "note": "desk-signal incident rows attached as pointers (5)",
+      "pageVoices": [],
+      "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00136",
+        "name": "Rafael Montez",
+        "role": "Police Chief",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Rafael Montez — Police Chief — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00137",
+        "name": "Kimberly Cho",
+        "role": "DEPUTY CHIEF OF OPERATIONS",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00138",
+        "name": "Leonard Briggs",
+        "role": "DEPUTY CHIEF OF COMMUNITY ENGAGEMENT",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00139",
+        "name": "Samantha Viteri",
+        "role": "INTERNAL AFFAIRS DIVISION LEAD",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00140",
+        "name": "Marcus Hollowell",
+        "role": "FIRE CHIEF",
+        "neighborhood": null,
+        "business": "Oakland Fire Department",
+        "profile": "Marcus Hollowell — FIRE CHIEF — Oakland Fire Department",
+        "why": "works at Oakland Fire Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00141",
+        "name": "Priya Narang",
+        "role": "EMS DIRECTOR",
+        "neighborhood": null,
+        "business": "Oakland Fire Department",
+        "profile": "Priya Narang — EMS DIRECTOR — Oakland Fire Department",
+        "why": "works at Oakland Fire Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "role": "OARI Program Director",
+        "neighborhood": null,
+        "business": "Oakland Alternative Response Initiative",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+        "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Crime_Metrics.jsonl @C110",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Rachel Torres",
+    "popid": "POP-00057",
+    "text": "KONO leads the incident count this cycle with 10 incidents, up from 8 last cycle. Response time averages 10.7 minutes, with a clearance rate of 22%. The property index stands at 35, and the violent index at 25. Lake Merritt, despite fewer incidents, has the slowest response time at 11 minutes. Citywide, there are 68 individuals in custody, with 34 arrests made this cycle. The public-safety roster includes 7 staff members. The focus will be on understanding the factors contributing to KONO's high incident count and the efficiency of response times across neighborhoods.",
+    "plan": {
+      "chase": "KONO leads the incident count this cycle with 10 incidents, up from 8 last cycle. Response time averages 10.7 minutes, with a clearance rate of 22%. The property index stands at 35, and the violent index at 25. Lake Merritt, despite fewer incidents, has the slowest response time at 11 minutes. Citywide, there are 68 individuals in custody, with 34 arrests made this cycle. The public-safety roster includes 7 staff members. The focus will be on understanding the factors contributing to KONO's high incident count and the efficiency of response times across neighborhoods.",
+      "focus": "Understanding the factors contributing to KONO's high incident count and the efficiency of response times across neighborhoods.",
+      "why": "To provide insights into public safety dynamics and resource allocation in Oakland.",
+      "checks": [
+        "Verify the accuracy of incident counts and response times.",
+        "Assess the impact of public-safety staffing levels on response efficiency.",
+        "Explore community perceptions of safety and law enforcement effectiveness."
+      ],
+      "targets": [],
+      "interpretation": "The data suggests a correlation between incident frequency and response times, but deeper analysis is needed to understand underlying causes and potential solutions.",
+      "unverifiedLead": [
+        "Potential discrepancies in incident reporting across neighborhoods.",
+        "Community-specific factors influencing crime rates."
+      ],
+      "closeQuestion": "What measures can be implemented to reduce incident counts and improve response times in high-crime neighborhoods?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): advance to preliminary schematics with community oversight provisions intact — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): filed legislative language with City Clerk — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved accelerated cohort placement with East Oakland priority — \"150 apprentices placed by spring — that's the target, and we're accelerating to hit it.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): independent oversight maintained; soil test verification proceeding — \"Independent oversight isn't bureaucracy — it's how we build trust while we build the future.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 102,
+  "ranAt": "2026-10-06T11:16:15.804Z"
+}

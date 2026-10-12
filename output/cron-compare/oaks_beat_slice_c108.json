@@ -1,0 +1,171 @@
+{
+  "version": "OAKS-BEAT-1",
+  "empty": false,
+  "cycle": 108,
+  "kind": "beat-oaks-beat",
+  "seat": {
+    "slug": "selena-grant",
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "desk": "sports",
+    "domain": "oaks",
+    "builder": "buildOaksBeatSlice.js"
+  },
+  "hood": "Jack London",
+  "pulse": {
+    "className": "beat-oaks-beat",
+    "score": 100,
+    "label": "Oaks — season-state C108 · - · -",
+    "hood": "Jack London",
+    "source": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+  },
+  "story": {
+    "kind": "beat-oaks-beat",
+    "angle": "Oaks — season-state C108 · - · - — the second club's board read",
+    "label": "Oaks — season-state C108 · - · -",
+    "hookLine": "Coach Wilson Shepard prepares his rookies for preseaon.",
+    "hood": "Jack London",
+    "citizens": [
+      "Wilson Shepard (POP-01022)",
+      "Adash Stanley (POP-01023)",
+      "Austin Reaves (POP-01027)"
+    ],
+    "popids": [
+      "POP-01022",
+      "POP-01023",
+      "POP-01027"
+    ],
+    "ref": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+    "cycle": 108
+  },
+  "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01022",
+      "name": "Wilson Shepard",
+      "role": "Head Coach, Oakland Oaks",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+      "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01023",
+      "name": "Adash Stanley",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+      "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01027",
+      "name": "Austin Reaves",
+      "role": "SG / The Oaks",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Austin Reaves — SG / The Oaks — Downtown",
+      "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+    },
+    {
+      "text": "Trigger: cold-streak",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+    },
+    {
+      "text": "Franchise stability: uncertain",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+    },
+    {
+      "text": "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+    },
+    {
+      "text": "Record 0-1 · streak L1",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+    },
+    {
+      "text": "Stats (feed): Austin Reaves/22pts/6asst/6rebs, AJ Dybantsa/18pts/11rebs",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+    },
+    {
+      "text": "Trigger: pre-season",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+    },
+    {
+      "text": "Franchise stability: uncertain",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Oaks — season-state C108 · - · - — the second club's board read",
+    "hookLine": "Coach Wilson Shepard prepares his rookies for preseaon.",
+    "anchorFacts": [
+      "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+      "Trigger: cold-streak",
+      "Franchise stability: uncertain",
+      "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+      "Record 0-1 · streak L1",
+      "Stats (feed): Austin Reaves/22pts/6asst/6rebs, AJ Dybantsa/18pts/11rebs",
+      "Trigger: pre-season",
+      "Franchise stability: uncertain"
+    ],
+    "evidence": [
+      {
+        "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+      },
+      {
+        "text": "Trigger: cold-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+      },
+      {
+        "text": "Franchise stability: uncertain",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+      },
+      {
+        "text": "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+      },
+      {
+        "text": "Record 0-1 · streak L1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+      },
+      {
+        "text": "Stats (feed): Austin Reaves/22pts/6asst/6rebs, AJ Dybantsa/18pts/11rebs",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+      },
+      {
+        "text": "Trigger: pre-season",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+      },
+      {
+        "text": "Franchise stability: uncertain",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+  },
+  "feedRows": 10,
+  "currentCycleRows": 2,
+  "pointers": [
+    "output/beats/Oakland_Sports_Feed.jsonl @C108",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

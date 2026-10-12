@@ -1,0 +1,369 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "rachel-torres",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00057",
+      "name": "Sgt. Rachel Torres",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — and the public-safety staff on the roster. Measured, third person, incident structure and classification gaps. The numbers and the officials are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "public-safety",
+        "hood": "San Antonio",
+        "facts": [
+          "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+          "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+          "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+          "Moved this cycle — rising: East Oakland, Dimond; easing: none"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": "desk-signal incident rows attached as pointers (5)",
+        "engineHooks": [
+          "Cooling down in West Oakland: The West Oakland Crime Spike — West Oakland recovering — pressure lifting Follow-up angle available. (historical reflection)",
+          "Notable event: \"graffiti tagging\". Follow-up recommended. (general coverage)"
+        ],
+        "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-safety",
+      "hood": "San Antonio",
+      "score": null,
+      "src": "output/beats/Crime_Metrics.jsonl @C108",
+      "nearby": [
+        {
+          "text": "Rose Delgado (City Council District 3): We're setting the stage for Fruitvale's future—this cohort is our promise in action.",
+          "src": "output/cron-civic/datawake/civic-office-council-d3_2026-09-22.json"
+        },
+        {
+          "text": "Ramon Vega (City Council District 4): Given the current conditions in my district, I will prioritize addressing the pressing concerns of m",
+          "src": "output/cron-civic/datawake/civic-office-council-d4_2026-09-22.json"
+        },
+        {
+          "text": "Janae Rivers (City Council District 5): First training cohort placement review isn't just about hitting targets—it's about lives transformed",
+          "src": "output/cron-civic/datawake/civic-office-council-d5_2026-09-22.json"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"world\" (+ 6 co-occurring tokens) recurred 3 cycles",
+          "src": "output/engine_audit_c108.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+          "src": "output/engine_audit_c108.json patterns[1]; evidence: Riley_Digest row(s)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01021",
+          "name": "Vanessa Tran-Muñoz",
+          "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+          "why": "works at Oakland Alternative Response Initiative (Employment_Roster)",
+          "role": "OARI Program Director",
+          "hood": "San Antonio"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-78217e633afa"
+      },
+      {
+        "t": "FACT",
+        "text": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+        "src": "output/beats/Crime_Metrics.jsonl @C108",
+        "id": "F-737c8d77b4da"
+      },
+      {
+        "t": "FACT",
+        "text": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+        "src": "output/beats/Crime_Metrics.jsonl @C108",
+        "id": "F-96e1bd4aba15"
+      },
+      {
+        "t": "FACT",
+        "text": "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+        "src": "output/beats/Crime_Metrics.jsonl @C108",
+        "id": "F-e894e19aa8c0"
+      },
+      {
+        "t": "FACT",
+        "text": "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+        "src": "output/beats/Crime_Metrics.jsonl @C108",
+        "id": "F-e6a6de140c64"
+      },
+      {
+        "t": "FACT",
+        "text": "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+        "src": "output/beats/Crime_Metrics.jsonl @C108",
+        "id": "F-5b44dbdfb31c"
+      },
+      {
+        "t": "FACT",
+        "text": "Moved this cycle — rising: East Oakland, Dimond; easing: none",
+        "src": "output/beats/Crime_Metrics.jsonl @C108",
+        "id": "F-841adbede11c"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-safety",
+      "angle": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "label": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+      "hookLine": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+      "hood": "San Antonio",
+      "citizens": [
+        "Vanessa Tran-Muñoz (POP-01021)"
+      ],
+      "popids": [
+        "POP-01021"
+      ],
+      "ref": "output/beats/Crime_Metrics.jsonl @C108",
+      "cycle": 108
+    },
+    "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — and the public-safety staff on the roster. Measured, third person, incident structure and classification gaps. The numbers and the officials are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "SAFETY-SLICE-2",
+    "kind": "beat-safety",
+    "seat": {
+      "slug": "rachel-torres",
+      "name": "Sgt. Rachel Torres",
+      "popid": "POP-00057",
+      "desk": "civic",
+      "domain": "public-safety",
+      "builder": "buildSafetySlice.js"
+    },
+    "hood": "San Antonio",
+    "pulse": {
+      "className": "beat-safety",
+      "score": 100,
+      "label": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+      "hood": "San Antonio",
+      "source": "output/beats/Crime_Metrics.jsonl @C108"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "hookLine": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+      "anchorFacts": [
+        "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+        "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+        "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+        "Moved this cycle — rising: East Oakland, Dimond; easing: none"
+      ],
+      "evidence": [
+        {
+          "text": "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+          "src": "output/beats/Crime_Metrics.jsonl @C108"
+        },
+        {
+          "text": "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+          "src": "output/beats/Crime_Metrics.jsonl @C108"
+        },
+        {
+          "text": "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+          "src": "output/beats/Crime_Metrics.jsonl @C108"
+        },
+        {
+          "text": "Moved this cycle — rising: East Oakland, Dimond; easing: none",
+          "src": "output/beats/Crime_Metrics.jsonl @C108"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 107
+      },
+      "hooks": [
+        {
+          "text": "Cooling down in West Oakland: The West Oakland Crime Spike — West Oakland recovering — pressure lifting Follow-up angle available.",
+          "angle": "historical reflection",
+          "domain": "SAFETY",
+          "hood": "West Oakland",
+          "priority": 2
+        },
+        {
+          "text": "Notable event: \"graffiti tagging\". Follow-up recommended.",
+          "angle": "general coverage",
+          "domain": "SAFETY",
+          "hood": null,
+          "priority": 2
+        }
+      ],
+      "note": "desk-signal incident rows attached as pointers (5)",
+      "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "role": "OARI Program Director",
+        "neighborhood": null,
+        "business": "Oakland Alternative Response Initiative",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+        "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Crime_Metrics.jsonl @C108",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Sgt. Rachel Torres this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Rachel Torres",
+    "popid": "POP-00057",
+    "text": "San Antonio leads with 8 incidents this cycle, matching last cycle's count. The response time averages 11 minutes, with an 18% clearance rate. The property index stands at 38, and the violent index at 27. Lake Merritt, despite fewer incidents, has the slowest response time at 11.2 minutes. East Oakland and Dimond are rising in incident counts, while no neighborhoods show easing trends. Vanessa Tran-Muñoz, the OARI Program Director, is a key figure to understand the dynamics behind these numbers.",
+    "plan": {
+      "chase": "San Antonio leads with 8 incidents this cycle, matching last cycle's count. The response time averages 11 minutes, with an 18% clearance rate. The property index stands at 38, and the violent index at 27. Lake Merritt, despite fewer incidents, has the slowest response time at 11.2 minutes. East Oakland and Dimond are rising in incident counts, while no neighborhoods show easing trends. Vanessa Tran-Muñoz, the OARI Program Director, is a key figure to understand the dynamics behind these numbers.",
+      "focus": "Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.",
+      "why": "To provide clarity on the public safety challenges in San Antonio and Lake Merritt, and to explore potential solutions or interventions.",
+      "checks": [
+        "Verify the accuracy of incident counts and response times.",
+        "Confirm the roles and responsibilities of Vanessa Tran-Muñoz in OARI."
+      ],
+      "targets": [
+        {
+          "pop": "POP-01021",
+          "question": "What initiatives is OARI currently implementing to address the high incident count in San Antonio?",
+          "basis": "Vanessa Tran-Muñoz works at Oakland Alternative Response Initiative (Employment_Roster)"
+        }
+      ],
+      "interpretation": "The persistent high incident count in San Antonio suggests ongoing public safety challenges that may require targeted interventions. The slow response times in Lake Merritt could indicate resource allocation issues or procedural inefficiencies.",
+      "unverifiedLead": [
+        "Potential resource allocation issues in Lake Merritt.",
+        "Community engagement strategies in San Antonio."
+      ],
+      "closeQuestion": "What steps can be taken to improve response times in Lake Merritt and reduce incidents in San Antonio?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Rose Delgado (City Council District 3): We're setting the stage for Fruitvale's future—this cohort is our promise in action.",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d3_2026-09-22.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Ramon Vega (City Council District 4): Given the current conditions in my district, I will prioritize addressing the pressing concerns of m",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d4_2026-09-22.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Janae Rivers (City Council District 5): First training cohort placement review isn't just about hitting targets—it's about lives transformed",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d5_2026-09-22.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"world\" (+ 6 co-occurring tokens) recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c108.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c108.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    }
+  ],
+  "laneEntries": 51,
+  "ranAt": "2026-09-22T11:15:50.342Z"
+}

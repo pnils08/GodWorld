@@ -1,0 +1,15 @@
+{
+  "office": "district_attorney",
+  "agentDir": "civic-office-district-attorney",
+  "holder": "Clarissa Dane",
+  "popid": "POP-00143",
+  "title": "District Attorney",
+  "date": "2026-09-08",
+  "cycle": 106,
+  "model": "moonshotai/kimi-k2",
+  "statement": "The DA's office has reviewed the first expansion-district evaluation for OARI's District 1 deployment in West Oakland. Under California Penal Code Section 830 et seq., alternative response teams must maintain evidentiary protocols when incidents escalate to criminal jurisdiction. Our office has received case files from OARI-coordinated incidents and has established charging review procedures. The monthly reporting framework provides prosecutorial visibility into incident outcomes. We are monitoring case-file continuity between alternative response and criminal jurisdiction.",
+  "action": "Directing deputy prosecutors to complete charging review of OARI-referred cases from District 1 and report on evidentiary protocol compliance by cycle 108.",
+  "numberMoved": null,
+  "ranAt": "2026-09-08T10:45:52.247Z",
+  "fellBackFrom": null
+}

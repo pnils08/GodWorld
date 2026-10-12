@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "110",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "maria-keen",
+  "byline": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 28,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/culture_c110_maria-keen_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "d/.env // tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00013\",\n  \"name\": \"Maria Keen\",\n  \"recorded\": true,\n  \"text\": \"filed: Culture: One Program, Two Beds, and a Mystery From Temescal\"\n}"
+  },
+  "ranAt": "2026-10-09T23:17:28.102Z",
+  "dispositionReconciledAt": "2026-10-10T17:00:04.681Z"
+}

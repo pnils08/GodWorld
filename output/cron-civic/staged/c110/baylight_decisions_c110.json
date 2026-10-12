@@ -1,0 +1,29 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 110,
+  "primaryVoice": "Mayor gavel (mayor_gavel-005)",
+  "consolidatedFrom": [
+    "STMT-110-baylight_authority-001 (Ramos — Baylight District Soil Test Verification)",
+    "STMT-110-council_d2-001 (Tran D2 — Baylight District Phase II Site Remediation)",
+    "STMT-110-council_d5-002 (Rivers D5 — Baylight District)",
+    "STMT-110-council_d6-004 (Crane D6 — Baylight District Soil Test Verification)",
+    "STMT-110-council_d8-003 (Chen D8 — Baylight District Soil Test Verification and Phase II Remediation)",
+    "STMT-110-mayor_gavel-005 (Mayor gavel — Baylight District Soil Test Verification)",
+    "STMT-110-mayor_open-006 (Mayor agenda — Baylight District — Soil Test Verification)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "ImplementationPhase": "construction-active",
+    "MilestoneNotes": "C110: Soil test verification complete; Phase II remediation proceeds with independent oversight",
+    "NextScheduledAction": "Remediation completion and construction milestone review",
+    "NextActionCycle": 112,
+    "LastWorkCycle": 110,
+    "LastWorkSeat": "proj-baylight"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-109-proj-baylight-2026-10-02"
+    ]
+  }
+}

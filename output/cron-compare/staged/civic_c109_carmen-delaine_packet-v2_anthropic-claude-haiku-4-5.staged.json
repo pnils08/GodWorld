@@ -1,0 +1,62 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "carmen-delaine",
+  "byline": "Carmen Delaine",
+  "bylinePopid": "POP-00011",
+  "article": "output/cron-compare/staged/civic_c109_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Daniel Cloak",
+        "role": "mentioned",
+        "popid": "POP-00722"
+      },
+      {
+        "name": "Irene Fay",
+        "role": "quoted-source",
+        "popid": "POP-00794"
+      },
+      {
+        "name": "Darius Clark",
+        "role": "mentioned",
+        "popid": "POP-00961"
+      },
+      {
+        "name": "Elena Patel",
+        "role": "quoted-source",
+        "popid": "POP-01030"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-001:disbursement-active",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "I’ve heard folks talking about the Stabilization Fund at the bakery, but honestly, I’m not sure yet how it’s touching the ground here. It feels like something big, but I’m waiting to see it in action.",
+        "sourceRef": "citizenVoice PRESS Daniel Cloak"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c888ca0d750b",
+    "draftSha256": "442d703f4f9a44df426dc3b7aa82591e256c9f367802851b8289c66c93ec1eaa",
+    "verdict": "output/cron-compare/civic_c109_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5.rhea.json",
+    "ranAt": "2026-10-03T17:01:33.462Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-03T17:01:35.861Z"
+}

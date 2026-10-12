@@ -1,0 +1,17 @@
+{
+  "desk": "culture",
+  "cycle": "109",
+  "model": "deepseek/deepseek-v4-pro",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 8262,
+  "usageOutputTokens": 7992,
+  "savedFiles": [
+    "output/cron-compare/culture_c109_maria-keen_bench-w2_deepseek-deepseek-v4-pro.md"
+  ],
+  "compareAgainst": "output/desk-output/culture_c109.md",
+  "durationMs": 162199,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-01T04:57:13.954Z"
+}

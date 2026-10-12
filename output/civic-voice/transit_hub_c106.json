@@ -1,0 +1,34 @@
+{
+  "office": "transit_hub",
+  "cycle": 106,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "Design-phase kickoff formally launched for Fruitvale Transit Hub Phase II with binding merchant protection covenants locked in per Council Member Delgado's conditions and Mayor Santana's authorization. Published the integrated community feedback schedule incorporating St. Esperanza Parish session outcomes: protected vendor zones, elder-safe pedestrian crossings, and local-hire pathways. BART infrastructure team meeting completed to operationalize protected vendor zones during construction.",
+  "statements": [
+    {
+      "statementId": "STMT-106-transit_hub-001",
+      "type": "operational_status",
+      "topic": "design-phase kickoff with merchant protection covenants",
+      "initiative": "INIT-003",
+      "decision": "Design phase formally launched with binding District 3 merchant protection covenants integrated into architectural planning; community feedback schedule published; BART infrastructure coordination locked for protected vendor zones",
+      "quote": "The covenants aren't ink on paper—they're Doña Esperanza keeping her tamale cart through construction, they're the panadería on E. 12th staying open so abuelas don't lose their morning bolillo.",
+      "fullStatement": "The design phase for Fruitvale Transit Hub Phase II is now live, and I'm publishing today the integrated community feedback schedule that carries forward every protection we heard at St. Esperanza Parish. Council Member Delgado was right to demand binding covenants: this is District 3's commercial corridor, and we're not displacing the vendors who built it. The covenants aren't ink on paper—they're Doña Esperanza keeping her tamale cart through construction, they're the panadería on E. 12th staying open so abuelas don't lose their morning bolillo. I've already met with BART's infrastructure team to lock in the protected vendor zones along the construction perimeter, and our baseline architectural timeline now builds in pedestrian detours that prioritize elder safety and small-business access. The local-hire pathway we committed to at St. Esperanza—Jamal Thompson's cohort and the Fruitvale residents who come after him—is embedded in the workforce sequencing, not bolted on later. This is what community-informed planning looks like when you don't compress the timeline to fit a political calendar.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C106: Design phase launched with binding merchant covenants; protected vendor zones locked with BART; community feedback schedule published",
+        "NextScheduledAction": "Architectural schematic development with merchant covenant compliance review",
+        "NextActionCycle": 107
+      }
+    },
+    {
+      "statementId": "STMT-106-transit_hub-002",
+      "type": "constituent_advocacy",
+      "topic": "Fruitvale neighborhood conditions and accountability",
+      "initiative": null,
+      "decision": "Affirmed continued operational presence in Fruitvale with direct accountability to residents; committed to visible design-phase engagement on the ground",
+      "quote": "The mood on International is steady, the street trade is moving, crime is low—but I'm not taking that snapshot for granted.",
+      "fullStatement": "Fruitvale this cycle: the mood on International is steady, the street trade is moving, crime is low—but I'm not taking that snapshot for granted. I'm here three blocks from BART on E. 12th, dropping my kids at the school on 33rd, walking the construction perimeter every morning. The design phase means more trucks, more dust, more disruption coming, and I answer for how that lands on the families who live here. St. Esperanza Parish this week: the mood slipped some since last cycle. I'm noticing. The design kickoff doesn't pause for parish sentiment, but I'm not blind to it either. My accountability this cycle is operational and visible: the protected vendor zones are marked on the ground, the pedestrian detours are posted in Spanish and English, and my phone stays on for the shop owners on 35th who have my number from Phase I.",
+      "trackerUpdates": {}
+    }
+  ]
+}

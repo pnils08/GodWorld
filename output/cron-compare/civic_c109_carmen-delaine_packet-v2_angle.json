@@ -1,0 +1,376 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "carmen-delaine",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00011",
+      "name": "Carmen Delaine",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup."
+    },
+    "signal": {
+      "kind": "initiative",
+      "hood": "West Oakland",
+      "score": null,
+      "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"District 1 gets OARI because the numbers prove it works—42% fewer unnecessary police deployments.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): accelerated — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): celebrated — \"Two weeks early and $1.2M under budget—that's how Oakland builds public health infrastructure.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): acknowledged — \"Dimond's slow trade deserves attention, West Oakland's progress deserves recognition.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00722",
+          "name": "Daniel Cloak",
+          "profile": "Daniel Cloak — Bakery Worker — West Oakland",
+          "why": "same-hood-ledger",
+          "role": "Bakery Worker",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00794",
+          "name": "Irene Fay",
+          "profile": "Irene Fay — Barista — West Oakland",
+          "why": "same-hood-ledger",
+          "role": "Barista",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00961",
+          "name": "Darius Clark",
+          "profile": "Darius Clark — Bakery Worker — West Oakland",
+          "why": "same-hood-ledger",
+          "role": "Bakery Worker",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-01030",
+          "name": "Elena Patel",
+          "profile": "Elena Patel — Cook — West Oakland",
+          "why": "same-hood-ledger",
+          "role": "Cook",
+          "hood": "West Oakland"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-912baafccba1"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+        "id": "F-e21be6ef0aa8"
+      },
+      {
+        "t": "FACT",
+        "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+        "id": "F-9d505eb90aee"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "kind": "initiative",
+      "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "hood": "West Oakland",
+      "popids": [],
+      "citizens": []
+    },
+    "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "carmen-delaine",
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "domain": "civic-ledger"
+    },
+    "pulse": {
+      "className": "civic-ledger",
+      "score": 55,
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hood": "West Oakland",
+      "source": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+        "Temescal Community Health Center — status passed, phase operational, VoteCycle 80, outcome PASSED, budget $45M [Initiative_Tracker]",
+        "Mayor — Avery Santana — approval 69 — active [Civic_Office_Ledger]",
+        "District Attorney — Clarissa Dane — approval 65 — active [Civic_Office_Ledger]",
+        "Public Defender — Caleb Reyes — approval 65 — active [Civic_Office_Ledger]",
+        "City Council District 1 — Denise Carter — approval 62 — active [Civic_Office_Ledger]",
+        "City Council District 2 — Leonard Tran — approval 65 — active [Civic_Office_Ledger]",
+        "City Council District 3 — Rose Delgado — approval 64 — active [Civic_Office_Ledger]",
+        "City Council District 4 — Ramon Vega — approval 62 — active [Civic_Office_Ledger]"
+      ],
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
+      ]
+    },
+    "candidates": [
+      {
+        "score": 55,
+        "kind": "initiative",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+        "hood": "West Oakland",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 8
+      },
+      {
+        "score": 55,
+        "kind": "vote",
+        "label": "West Oakland Stabilization Fund | Month-eight disbursement completion and Downtown outreach impact assessment C109",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 9
+      },
+      {
+        "score": 55,
+        "kind": "initiative",
+        "label": "Oakland Alternative Response Initiative | Status passed | phase dispatch-live",
+        "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 10
+      },
+      {
+        "score": 55,
+        "kind": "vote",
+        "label": "Oakland Alternative Response Initiative | District 1 evaluation completion and potential expansion decision C109",
+        "ref": "Initiative_Tracker (InitiativeID INIT-002)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 11
+      },
+      {
+        "score": 55,
+        "kind": "initiative",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Status proposed | phase design-phase",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+        "hood": "Fruitvale",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 12
+      },
+      {
+        "score": 55,
+        "kind": "vote",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Design consultant selection C109",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 13
+      }
+    ],
+    "pointers": [
+      "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-001)",
+      "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-002)",
+      "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-003)"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "text": "I'm digging into the West Oakland Stabilization Fund's disbursement phase. The mayor's gavel has been busy, but I want to see how this initiative is landing in the neighborhood. I’ll start by talking to folks who’ve received the checks and see if the money is making a tangible difference.",
+    "plan": {
+      "chase": "I'm digging into the West Oakland Stabilization Fund's disbursement phase. The mayor's gavel has been busy, but I want to see how this initiative is landing in the neighborhood. I’ll start by talking to folks who’ve received the checks and see if the money is making a tangible difference.",
+      "focus": "Tracking the impact of the West Oakland Stabilization Fund disbursement.",
+      "why": "The fund is active, and the mayor has acknowledged West Oakland's progress, but I want to see if the money is reaching the right hands and making a real impact.",
+      "checks": [
+        "Verify if the disbursement aligns with the mayor's acknowledgment of West Oakland's progress.",
+        "Assess whether the fund is addressing the needs it was intended to."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00722",
+          "question": "Have you received a Stabilization Fund check, and if so, how has it impacted your situation?",
+          "basis": "Same-hood-ledger; Daniel Cloak is a West Oakland resident directly affected by the fund."
+        },
+        {
+          "pop": "POP-00794",
+          "question": "What changes, if any, have you noticed in the neighborhood since the Stabilization Fund checks started arriving?",
+          "basis": "Same-hood-ledger; Irene Fay works in West Oakland and can provide insights into community changes."
+        },
+        {
+          "pop": "POP-00961",
+          "question": "How has the Stabilization Fund affected your ability to sustain your bakery business?",
+          "basis": "Same-hood-ledger; Darius Clark is a bakery worker in West Oakland, directly impacted by the fund."
+        },
+        {
+          "pop": "POP-01030",
+          "question": "Have you seen any improvements in the local economy or community services since the fund disbursement?",
+          "basis": "Same-hood-ledger; Elena Patel is a cook in West Oakland, providing a perspective on local economic changes."
+        }
+      ],
+      "interpretation": "The Stabilization Fund is a significant initiative, but its success hinges on how effectively it addresses the community's needs. I suspect there might be gaps between the fund's intent and its actual impact.",
+      "unverifiedLead": [
+        "Are there specific areas or demographics in West Oakland that haven't benefited from the fund?",
+        "Is there a discrepancy between the fund's disbursement and the community's immediate needs?"
+      ],
+      "closeQuestion": "Is the West Oakland Stabilization Fund truly stabilizing the community, or are there cracks in its foundation?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"District 1 gets OARI because the numbers prove it works—42% fewer unnecessary police deployments.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): accelerated — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): celebrated — \"Two weeks early and $1.2M under budget—that's how Oakland builds public health infrastructure.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): acknowledged — \"Dimond's slow trade deserves attention, West Oakland's progress deserves recognition.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 75,
+  "ranAt": "2026-09-28T11:15:47.631Z"
+}

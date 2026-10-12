@@ -1,0 +1,3 @@
+◇ injected env (31) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }
+[texture] Story_Seed_Deck: 45 seeds at C108 → 42 source lines across 16 hoods
+Wrote 3640 bytes to output/neighborhood_texture_c108.md (17/22 hoods with signal)

@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "110",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "freelance-firebrand",
+  "byline": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "beatDomain": "ACCOUNTABILITY"
+  },
+  "laneEntries": 102,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/civic_c110_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "selfRecord": {
+    "recorded": false,
+    "reason": "Command failed: node /root/GodWorld/scripts/citizenVoice.js --pop=POP-00799 --record-text=filed: Who Closed the File on West Oakland's Crime Spike While the Strain Keeps Repeating? --cycle=110\ncitizenVoice record-text: appendReflection_: [err] [object Object],[object Object]\n"
+  },
+  "ranAt": "2026-10-07T23:17:36.330Z",
+  "dispositionReconciledAt": "2026-10-10T17:00:04.519Z"
+}

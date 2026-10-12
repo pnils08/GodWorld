@@ -1,0 +1,62 @@
+{
+  "draft": "output/cron-compare/civic_c108_angela-reyes_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "64aafd4cc47b1f52b02e9a610855389ea5870bdec7b50d07653cf577f2bb93f6",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, roles, and quotes match canonical records and approved packet provenance with no canon violations.",
+  "review": {
+    "profileId": "angela-education-stability-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "packageVersion": "ANGELA-LEP2-1",
+    "manifestId": "AM-62d7f6be06e7",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "95%",
+          "77.7%",
+          "10"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Gloria Liu",
+      "Maya Torres-Dillon",
+      "Mei Wong",
+      "Salma Campbell"
+    ],
+    "unverified": [
+      "Bay Conservation Alliance Advisory",
+      "Yet Rockridge"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0101,
+  "durationMs": 6828,
+  "parseError": false,
+  "ranAt": "2026-09-22T23:17:48.247Z"
+}

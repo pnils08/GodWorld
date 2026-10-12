@@ -1,0 +1,556 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00501",
+    "name": "Denise Carter",
+    "role": "City Council District 1",
+    "officeId": "COUNCIL-D1",
+    "district": "D1",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d1",
+    "initiative": null,
+    "dials": {
+      "approval": 62
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "Month-nine disbursement review"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 40,
+    "label": "West Oakland Stabilization Fund — Month-nine disbursement review",
+    "lever": "Month-nine disbursement review",
+    "hood": "West Oakland",
+    "initiative": "INIT-001",
+    "vsCity": {
+      "sentiment": 0.45,
+      "citySentiment": 0.2890909090909091,
+      "crime": 0.61,
+      "cityCrime": 0.5872727272727272,
+      "heat": -15.636363636363633,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "Month-nine disbursement review",
+    "lineFacts": [
+      "approval 62",
+      "West Oakland Stabilization Fund is in disbursement-active; budget $28M — C107: Downtown canvass deployment authorized alongside month-eight disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing —…",
+      "due: Month-nine disbursement review",
+      "West Oakland crime: property 36, violent 25, incidents 6 (cycle 109) — city property 35.6, violent 23.9, incidents 6.3",
+      "West Oakland: sentiment 0.45 vs city 0.289; crime index 0.61 vs city 0.587; retail 8.21; housing pressure 0; steady; momentum 3"
+    ],
+    "missing": [
+      "no named applicant households — do not invent who got the check",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC108 - answer CONF-108-civic-office-council-d1: awaiting the Sunday fold\nNo applied or failed outcome in the available ledgers.",
+      "moves": [
+        {
+          "moveId": "MV-108-civic-office-council-d1-2026-09-24",
+          "cycle": 108,
+          "date": "2026-09-24",
+          "agentDir": "civic-office-council-d1",
+          "popid": "POP-00501",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-108-civic-office-council-d1",
+            "text": "The Oakland Alternative Response Initiative evaluation report will be filed to assess the program's impact and plan for permanent dispatch expansion in West Oakland.",
+            "directiveCycle": 108,
+            "confrontationSeat": "civic-office-council-d1"
+          },
+          "status": "pending",
+          "at": "2026-09-24T10:47:03.843Z"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-001",
+        "name": "West Oakland Stabilization Fund",
+        "domain": "economic",
+        "phase": "disbursement-active",
+        "status": "passed",
+        "voteCycle": 78,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 1,
+        "lastStageChangeCycle": 108,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland"
+        ],
+        "needsNext": "Standing — no delivering gate exists for this domain yet",
+        "budget": "budget $23,400,000 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "no-delivering-gate",
+          "text": "Standing — no delivering gate exists for this domain yet"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-002",
+        "name": "Oakland Alternative Response Initiative",
+        "domain": "safety",
+        "phase": "dispatch-live",
+        "status": "passed",
+        "voteCycle": 82,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 1,
+        "lastStageChangeCycle": 108,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "Fruitvale",
+          "East Oakland"
+        ],
+        "needsNext": "Standing — no delivering gate exists for this domain yet",
+        "budget": "budget $12,500,000 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "no-delivering-gate",
+          "text": "Standing — no delivering gate exists for this domain yet"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-007",
+        "name": "Oakland Youth Apprenticeship Pipeline",
+        "domain": "workforce",
+        "phase": "operational",
+        "status": "announced",
+        "voteCycle": null,
+        "stage": null,
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "East Oakland",
+          "Fruitvale"
+        ],
+        "needsNext": "First training cohort placement review",
+        "budget": "budget $12,500,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-001",
+      "INIT-002",
+      "INIT-007"
+    ],
+    "boardText": "Your board:\n- INIT-001 West Oakland Stabilization Fund [disbursement-active] — Standing — no delivering gate exists for this domain yet — budget $23,400,000 left, renewable\n- INIT-002 Oakland Alternative Response Initiative [dispatch-live] — Standing — no delivering gate exists for this domain yet — budget $12,500,000 left, renewable\n- INIT-007 Oakland Youth Apprenticeship Pipeline [operational] — First training cohort placement review — budget $12,500,000 left",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [
+        {
+          "cycle": "108",
+          "hood": "West Oakland",
+          "snippet": "Mike. (Nods, crossing arms) Still pushing for that high-rise on 14th, or did the zoning…",
+          "affect": "Irritable"
+        },
+        {
+          "cycle": "107",
+          "hood": "West Oakland",
+          "snippet": "I've heard about the West Oakland Stabilization Fund, and I think it's important that the…",
+          "affect": "Frustrated"
+        }
+      ],
+      "participation": [
+        {
+          "cycle": "107",
+          "hood": "West Oakland",
+          "snippet": "\"Keisha, good to see you. Been a minute since we crossed paths—how’s the work treating…",
+          "affect": "Content"
+        }
+      ],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 107,
+      "throughCycle": 109,
+      "window": "Complaint display C107–C109; condition counter C109 only.",
+      "text": "Complaint display C107–C109; condition counter C109 only.\nPeople are talking (2 complaints):\n- Mike. (Nods, crossing arms) Still pushing for that high-rise on 14th, or did the zoning… (West Oakland, C108)\n- I've heard about the West Oakland Stabilization Fund, and I think it's important that the… (West Oakland, C107)\nConstructive civic participation (not complaints): 1."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 3,
+      "text": "The working city:\n- Elena Soria Dominguez: The covenants are signed, but it’s not enough yet. Every delay feels like holding my breath, like watching… (C108)\n- Bobby Chen-Ramirez: The drywall crew starts tomorrow, and I keep running the fire-stop details in my head—did we double-check the… (C108)\n- Vanessa Tran-Muñoz: The East Oakland crews handled three opioid overdoses and a domestic call today—no transports, all resolved… (C108)\n1 more staff beyond this block."
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-106-civic-office-council-d1",
+          "cycle": 106,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — Present an economic recovery plan for West Oakland addressing depressed RetailVitality (5.01) and elevated CrimeIndex (1.10).",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Present an economic recovery plan for West Oakland addressing depressed RetailVitality (5.01) and elevated CrimeIndex (1.10).\n- **Why:** West Oakland holds the lowest retail vitality rank among active commercial zones in C106, coinciding with a 5-point approval drop (76 in C106) for the D1 office.\n- **Acceptance:** A public policy statement or council memorandum outlining targeted commercial corridor relief and safety oversight for West Oakland.\n- **Silence consequence:** Continued economic slide in West Oakland commercial corridors without targeted legislative intervention.\n",
+          "src": "output/mara-directives/mara_directive_c106_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-council-d1",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — File the District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to determine permanent dispatch expansion.",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** File the District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to determine permanent dispatch expansion.\n- **Why:** Tracker sequencing mandates completion of D1 OARI evaluation in C108 alongside Month-eight stabilization fund completion, as West Oakland registers decay momentum 2 with CrimeIndex at 0.58.\n- **Acceptance:** A formal D1 program evaluation report detailing call diversion rates, response times, and an expansion recommendation for INIT-002.\n- **Silence consequence:** Citywide expansion decisions for alternative response remain blocked without baseline performance data from the pilot district.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-109-civic-office-council-d1",
+          "cycle": 109,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — Transmit the formal District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to clear the citywide expansion decision.",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Transmit the formal District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to clear the citywide expansion decision.\n- **Why:** INIT-002 has operated on a C109 dispatch-live evaluation milestone that was carried over from C108 without an official program transmittal, risking stall threshold triggers alongside INIT-001 and INIT-007.\n- **Acceptance:** Publication and committee transmittal of the D1 OARI evaluation report detailing call diversion volumes, response times, and an actionable expansion finding.\n- **Silence consequence:** Citywide alternative emergency dispatch expansion remains stalled at the pilot stage without baseline D1 operational data.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "open": [
+        {
+          "id": "CONF-109-civic-office-council-d1",
+          "cycle": 109,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — Transmit the formal District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to clear the citywide expansion decision.",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Transmit the formal District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to clear the citywide expansion decision.\n- **Why:** INIT-002 has operated on a C109 dispatch-live evaluation milestone that was carried over from C108 without an official program transmittal, risking stall threshold triggers alongside INIT-001 and INIT-007.\n- **Acceptance:** Publication and committee transmittal of the D1 OARI evaluation report detailing call diversion volumes, response times, and an actionable expansion finding.\n- **Silence consequence:** Citywide alternative emergency dispatch expansion remains stalled at the pilot stage without baseline D1 operational data.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": [
+        "CONF-106-civic-office-council-d1",
+        "CONF-108-civic-office-council-d1"
+      ]
+    },
+    "confrontation": {
+      "id": "CONF-109-civic-office-council-d1",
+      "cycle": 109,
+      "agentDir": "civic-office-council-d1",
+      "demand": "Denise Carter — City Council District 1 — Transmit the formal District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to clear the citywide expansion decision.",
+      "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Transmit the formal District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to clear the citywide expansion decision.\n- **Why:** INIT-002 has operated on a C109 dispatch-live evaluation milestone that was carried over from C108 without an official program transmittal, risking stall threshold triggers alongside INIT-001 and INIT-007.\n- **Acceptance:** Publication and committee transmittal of the D1 OARI evaluation report detailing call diversion volumes, response times, and an actionable expansion finding.\n- **Silence consequence:** Citywide alternative emergency dispatch expansion remains stalled at the pilot stage without baseline D1 operational data.\n",
+      "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 109,
+      "problems": [
+        {
+          "id": "[\"Brooklyn\",\"health.sickResidents\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 82,
+          "cycle": 109
+        },
+        {
+          "id": "[\"Brooklyn\",\"safety.aboveMedianHoods\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 109
+        },
+        {
+          "id": "[\"West Oakland\",\"health.sickResidents\"]",
+          "hood": "West Oakland",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 90,
+          "cycle": 109
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Brooklyn\",\"health.sickResidents\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 82,
+          "cycle": 109,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Brooklyn\",\"safety.aboveMedianHoods\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 109,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"West Oakland\",\"health.sickResidents\"]",
+          "hood": "West Oakland",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 90,
+          "cycle": 109
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"Brooklyn\",\"health.sickResidents\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 82,
+          "cycle": 109,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Brooklyn\",\"safety.aboveMedianHoods\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 109,
+          "passedOverCycle": 108
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Condition problems at C109; prior Sunday folds through C108.\n- Brooklyn: sick residents 82 [passed over C108]\n- Brooklyn: hoods above city violent-level median 1 [passed over C108]\n- West Oakland: sick residents 90\n"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "West Oakland",
+      "Brooklyn"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00164",
+        "name": "Celeste Tran",
+        "neighborhood": "West Oakland",
+        "role": "Journalist, Social Trends",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland Stabilization Fund — Month-nine disbursement review"
+      },
+      {
+        "pop": "POP-00187",
+        "name": "Isla Sike",
+        "neighborhood": "West Oakland",
+        "role": "Domestic Violence Shelter Director",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland Stabilization Fund — Month-nine disbursement review"
+      },
+      {
+        "pop": "POP-00188",
+        "name": "Simone Cleng",
+        "neighborhood": "West Oakland",
+        "role": "Community Organizer",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland Stabilization Fund — Month-nine disbursement review"
+      },
+      {
+        "pop": "POP-00190",
+        "name": "Jackson Sift",
+        "neighborhood": "West Oakland",
+        "role": "Ex-Offender Reentry Counselor",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland Stabilization Fund — Month-nine disbursement review"
+      }
+    ],
+    "businesses": [
+      {
+        "id": "BIZ-00056",
+        "name": "Coastline Construction",
+        "neighborhood": "West Oakland",
+        "src": "world_summary lifestyle-sighting"
+      }
+    ],
+    "churches": [
+      {
+        "name": "New Covenant Pentecostal Assembly",
+        "neighborhood": "West Oakland",
+        "text": "community health fair hosted",
+        "src": "world_summary faith-event"
+      }
+    ],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D1",
+      "t": "FACT",
+      "text": "Denise Carter holds COUNCIL-D1 at approval 62",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-001",
+      "t": "FACT",
+      "text": "West Oakland Stabilization Fund is in disbursement-active; budget $28M — C107: Downtown canvass deployment authorized alongside month-eight disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing —…",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-WestOakland",
+      "t": "FACT",
+      "text": "West Oakland crime: property 36, violent 25, incidents 6 (cycle 109) — city property 35.6, violent 23.9, incidents 6.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-WestOakland",
+      "t": "FACT",
+      "text": "West Oakland: sentiment 0.45 vs city 0.289; crime index 0.61 vs city 0.587; retail 8.21; housing pressure 0; steady; momentum 3",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-we-0",
+      "t": "FACT",
+      "text": "SAFETY — crisis-lifecycle — West Oakland: The West Oakland Crime Spike — West Oakland crisis eased after 3 cycles back within city range (impactScore 10)",
+      "src": "world_summary World Events"
+    },
+    {
+      "id": "F-we-1",
+      "t": "FACT",
+      "text": "FAITH — community_program — West Oakland: New Covenant Pentecostal Assembly: community health fair hosted",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Approval": "62"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Faction": "OPP",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

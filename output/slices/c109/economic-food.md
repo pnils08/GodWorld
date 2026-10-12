@@ -1,0 +1,66 @@
+# SLICE — food & hospitality (kitchens as workplaces)
+
+Cycle **C109** · kind `food-workplaces` · hood **Fruitvale**
+
+## THE SLICE
+- Angle: Fruitvale kitchens: Fruitvale Diner, Marigold Cafe — the people who work the shift
+- Hook: Hazel Salazar, Line Cook at Fruitvale Diner. 1 named worker at 1 named kitchen in Fruitvale on the ledger this cycle.
+
+## BUSINESSES (ledger) AND WHO WORKS THERE (roster)
+- **Fruitvale Diner** — Restaurant & Dining · 2 employees · growth 8% · revenue $205k (+$315 vs C108)
+  - Hazel Salazar — Line Cook
+- **Marigold Cafe** — Cafe / dining · 30 employees · growth 8% · revenue $3.1M (+$5k vs C108)
+  - _no roster names — the staff here are yours to paint_
+
+## ENGINE HOOKS (colour, not fact)
+- Unemployment in Lake Merritt up 20%. Economic stress story. Who's affected and why? (baseline context piece)
+- Notable event: "Medium-severity economic spike in Baylight District". Follow-up recommended. (desk rotation)
+- High concentration of ambitious, driven personalities. Career competition and economic hustle stories. (baseline context piece)
+- Camila Osman is the new owner of Claremont Table in Rockridge (C109) (desk rotation)
+- Mike Kinder has not advanced in 54 years (desk rotation)
+- Maya Torres-Dillon has not advanced in 54 years (desk rotation)
+
+## ENGINE SEEDS (this cycle, business desk)
+- Jack London · carrying, 5.33 strength left of 3-cycle run
+  - citizens: Celo Patel; Mike Paulson; Anna Baker; Hector Leech
+  - businesses: Port of Oakland; Jack London Square Markets
+  - colour: Celo Patel — navigated the stroller traffic on College Avenue and silently judged the parking jobs
+  - colour: Mike Paulson — the holiday market at Jack London Square is bustling, the scent of roasted chestnuts mingling with the sound of carolers
+  - colour: Anna Baker — caught a stranger humming their song and felt briefly, wrongly, known
+  - colour: Hector Leech — tried a new recipe that mostly worked
+- Temescal · carrying, 2.00 strength left of 3-cycle run
+  - citizens: Sara Copper; Jada Alvarez; Brie Harris; Nila James
+  - businesses: Gridiron Analytics; Temescal Islamic Center
+  - colour: Sara Copper — braced for the sound of pile drivers and realized they had already started tuning it out near a cafe near the clinics
+  - colour: Jada Alvarez — the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.
+  - colour: Brie Harris — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture
+  - colour: Nila James — fielded questions at the corner store about the story they'd appeared in
+
+## APPROACH
+Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.
+
+## FORBIDDEN
+- Do not invent a business, a worker, an owner or a place — every name comes from this slice
+- Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose
+- Do not contradict a role, employer or neighborhood listed here
+
+## ROTATION
+picked **Fruitvale** (least recently covered). Pool: Jack London (2 staffed, last C106); Temescal (1 staffed, last C108); Rockridge (1 staffed, last C107); Fruitvale (1 staffed, never)
+
+## DESK SIGNAL (pointers only — not the source)
+- transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale [Fruitvale]
+- economic — economic upside, jobs and footprint in Downtown [Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, East Oakland]
+- fold-applied/initiative-implementation | Initiative work landed in 6 neighborhood(s): Downtown, Jack London, West Oakland, Temescal, Fruitvale, East Oakland
+- traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity | Edition coverage lifted the city: traffic +0.01, retail +0.146, nightlife +0.05, pu
+- sentiment | prior-cycle coverage ratings × sentimentWeight × 0.015, clamped ±0.20
+
+## POINTERS
+- output/beats/Business_Ledger.jsonl (176 rows @C109)
+- output/beats/Employment_Roster.jsonl (859 rows)
+- output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 4)
+- output/beats/prev/Business_Ledger.jsonl (movement vs C108)
+- output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 6)
+- output/desk_signal_c109.json lanes.business (pointers only)
+- docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2
+
+_Generated by scripts/buildEconomicSlice.js — no LLM. Facts are the names on this page; the room is the reporter's._

@@ -1,0 +1,48 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "109",
+  "persona": "talia-finch",
+  "byline": "Talia Finch",
+  "bylinePopid": "POP-00592",
+  "article": "output/cron-compare/staged/sports_c109_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Wilson Shepard",
+        "role": "quoted-source",
+        "popid": "POP-01022"
+      },
+      {
+        "name": "Austin Reaves",
+        "role": "quoted-source",
+        "popid": "POP-01027"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Baylight District"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I think the team's performance can definitely affect the neighborhood's mood, but I haven't really seen that play out yet this season. I mean, we're still finding our rhythm, and I'm confident we'll tighten up and be ready for the real deal.",
+        "sourceRef": "citizenVoice PRESS Wilson Shepard"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-66814b2a1d97",
+    "draftSha256": "b5203cca8fbcbb08e0df5e37f2cec74513fe4c54600fc0da6388ad7352288e58",
+    "verdict": "output/cron-compare/sports_c109_talia-finch_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-01T23:17:09.764Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:06.407Z"
+}

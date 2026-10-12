@@ -1,0 +1,68 @@
+{
+  "cycle": "109",
+  "signals": [
+    {
+      "slug": "INIT-001:disbursement-active",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c109_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5"
+      ],
+      "hoods": [
+        "West Oakland"
+      ],
+      "citizens": [
+        "POP-00794",
+        "POP-01030"
+      ],
+      "desks": [
+        "civic"
+      ]
+    }
+  ],
+  "registry": [
+    {
+      "id": "CRISIS-105-WESTOAKL",
+      "status": "closed",
+      "stage": "resolved"
+    },
+    {
+      "id": "INIT-001:disbursement-active",
+      "status": "open",
+      "stage": "disbursement-active"
+    },
+    {
+      "id": "INIT-002:dispatch-live",
+      "status": "open",
+      "stage": "dispatch-live"
+    },
+    {
+      "id": "INIT-003:design-phase",
+      "status": "open",
+      "stage": "design-phase"
+    },
+    {
+      "id": "INIT-005:operational",
+      "status": "open",
+      "stage": "operational"
+    },
+    {
+      "id": "INIT-006:construction-active",
+      "status": "open",
+      "stage": "construction-active"
+    },
+    {
+      "id": "INIT-007:operational",
+      "status": "open",
+      "stage": "operational"
+    },
+    {
+      "id": "INIT-008:announced",
+      "status": "open",
+      "stage": "announced"
+    }
+  ],
+  "retiredSlugsIgnored": 5
+}

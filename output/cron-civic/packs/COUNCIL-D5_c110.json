@@ -1,0 +1,458 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00043",
+    "name": "Janae Rivers",
+    "role": "City Council District 5",
+    "officeId": "COUNCIL-D5",
+    "district": "D5",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d5",
+    "initiative": null,
+    "dials": {
+      "approval": 62
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "First training cohort placement review"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 30,
+    "label": "Oakland Youth Apprenticeship Pipeline — First training cohort placement review",
+    "lever": "First training cohort placement review",
+    "hood": "East Oakland",
+    "initiative": "INIT-007",
+    "vsCity": {
+      "sentiment": 0.62,
+      "citySentiment": 0.5354545454545453,
+      "crime": 0.65,
+      "cityCrime": 0.5913636363636363,
+      "heat": -7.281818181818197,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "First training cohort placement review",
+    "lineFacts": [
+      "approval 62",
+      "Oakland Youth Apprenticeship Pipeline is in operational; budget $12.5M — C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established.",
+      "due: First training cohort placement review",
+      "East Oakland crime: property 34, violent 31, incidents 8 (cycle 110) — city property 35.5, violent 23.9, incidents 7.1",
+      "East Oakland: sentiment 0.62 vs city 0.535; crime index 0.65 vs city 0.591; retail 6.74; housing pressure 0; steady; momentum 5"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC109 - answer CONF-108-civic-office-council-d5: awaiting the Sunday fold\nNo applied or failed outcome in the available ledgers.",
+      "moves": [
+        {
+          "moveId": "MV-109-civic-office-council-d5-2026-09-29",
+          "cycle": 109,
+          "date": "2026-09-29",
+          "agentDir": "civic-office-council-d5",
+          "popid": "POP-00043",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-108-civic-office-council-d5",
+            "text": "Janae Rivers — City Council District 5 — Transmit the District 5 operational oversight review for OARI East Oakland dispatch deployment and review apprentice placement quotas.",
+            "directiveCycle": 108,
+            "confrontationSeat": "civic-office-council-d5"
+          },
+          "status": "pending",
+          "at": "2026-09-29T10:45:44.217Z"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-002",
+        "name": "Oakland Alternative Response Initiative",
+        "domain": "safety",
+        "phase": "dispatch-live",
+        "status": "passed",
+        "voteCycle": 82,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 2,
+        "lastStageChangeCycle": 108,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "Fruitvale",
+          "East Oakland"
+        ],
+        "needsNext": "Standing — no delivering gate exists for this domain yet",
+        "budget": "budget $12,259,615.38 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "no-delivering-gate",
+          "text": "Standing — no delivering gate exists for this domain yet"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-007",
+        "name": "Oakland Youth Apprenticeship Pipeline",
+        "domain": "workforce",
+        "phase": "operational",
+        "status": "announced",
+        "voteCycle": null,
+        "stage": null,
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "East Oakland",
+          "Fruitvale"
+        ],
+        "needsNext": "First training cohort placement review",
+        "budget": "budget $12,500,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-002",
+      "INIT-007"
+    ],
+    "boardText": "Your board:\n- INIT-002 Oakland Alternative Response Initiative [dispatch-live] — Standing — no delivering gate exists for this domain yet — budget $12,259,615.38 left, renewable\n- INIT-007 Oakland Youth Apprenticeship Pipeline [operational] — First training cohort placement review — budget $12,500,000 left",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [],
+      "participation": [],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 108,
+      "throughCycle": 110,
+      "window": "Complaint display C108–C110; condition counter C110 only.",
+      "text": "Complaint display C108–C110; condition counter C110 only.\nNo Civic complaints from your turf in this window."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 4,
+      "text": "The working city:\n- Elena Soria Dominguez: It’s the waiting that gets to me. Every delay feels like another winter without proper shelters for the… (C109)\n- Bobby Chen-Ramirez: The pharmacist’s kid taped a crayon drawing of our building to the bulletin board yesterday. Not the… (C109)\n- Vanessa Tran-Muñoz: Three more crews out today means we handled that many calls without patrol cars. Good. But the wait time for… (C109)\n- Marcus Webb: I’m staring at the spreadsheet for the month-nine review, thinking about how many of these households are… (C109)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-107-civic-office-council-d5",
+          "cycle": 107,
+          "agentDir": "civic-office-council-d5",
+          "demand": "Janae Rivers — City Council District 5 — Confirm district oversight parameters and intake allocations for East Oakland's INIT-002 emergency deployment and INIT-007 enrollment town hall.",
+          "sourceText": "## Janae Rivers — City Council District 5\n\n- **Agent:** `.claude/agents/civic-office-council-d5/`\n- **Address:** Confirm district oversight parameters and intake allocations for East Oakland's INIT-002 emergency deployment and INIT-007 enrollment town hall.\n- **Why:** Emergency expansion into East Oakland was authorized in C106; C107 deployment requires legislative confirmation of community liaison roles amid East Oakland's 0.97 CrimeIndex.\n- **Acceptance:** A recorded statement of oversight terms and youth enrollment allocations for District 5 corridors.\n- **Silence consequence:** Community oversight mechanisms remain undefined as field operations commence in East Oakland.\n",
+          "src": "output/mara-directives/mara_directive_c107_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-council-d5",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d5",
+          "demand": "Janae Rivers — City Council District 5 — Transmit the District 5 operational oversight review for OARI East Oakland dispatch deployment and review apprentice placement quotas.",
+          "sourceText": "## Janae Rivers — City Council District 5\n\n- **Agent:** `.claude/agents/civic-office-council-d5/`\n- **Address:** Transmit the District 5 operational oversight review for OARI East Oakland dispatch deployment and review apprentice placement quotas.\n- **Why:** Following C107 deployment authorization, East Oakland holds the city's highest CrimeIndex at 0.66, while Baylight District exhibits decay momentum 4 with stall clocks at C109 for INIT-002 and INIT-007.\n- **Acceptance:** A published D5 dispatch monitoring memo validating co-response protocols and confirming East Oakland youth cohort placement counts.\n- **Silence consequence:** Field responders in high-incident sectors operate without district-level coordination, risking operational drift.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-109-civic-office-council-d5",
+          "cycle": 109,
+          "agentDir": "civic-office-council-d5",
+          "demand": "Janae Rivers — City Council District 5 — Submit the District 5 co-response deployment review for INIT-002 and execute oversight protocols on Baylight District corridor conditions.",
+          "sourceText": "## Janae Rivers — City Council District 5\n\n- **Agent:** `.claude/agents/civic-office-council-d5/`\n- **Address:** Submit the District 5 co-response deployment review for INIT-002 and execute oversight protocols on Baylight District corridor conditions.\n- **Why:** Baylight District exhibits decay momentum 3 despite a low CrimeIndex of 0.45, while both INIT-002 and INIT-007 face C110 stall clocks on the D5 board following C107 dispatch deployment authorizations.\n- **Acceptance:** A filed D5 public safety oversight memo evaluating East Oakland OARI dispatch coverage and confirming apprentice intake numbers for the district.\n- **Silence consequence:** East Oakland dispatch operations proceed without district council oversight, leaving field response teams uncoordinated with neighborhood services.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "open": [
+        {
+          "id": "CONF-109-civic-office-council-d5",
+          "cycle": 109,
+          "agentDir": "civic-office-council-d5",
+          "demand": "Janae Rivers — City Council District 5 — Submit the District 5 co-response deployment review for INIT-002 and execute oversight protocols on Baylight District corridor conditions.",
+          "sourceText": "## Janae Rivers — City Council District 5\n\n- **Agent:** `.claude/agents/civic-office-council-d5/`\n- **Address:** Submit the District 5 co-response deployment review for INIT-002 and execute oversight protocols on Baylight District corridor conditions.\n- **Why:** Baylight District exhibits decay momentum 3 despite a low CrimeIndex of 0.45, while both INIT-002 and INIT-007 face C110 stall clocks on the D5 board following C107 dispatch deployment authorizations.\n- **Acceptance:** A filed D5 public safety oversight memo evaluating East Oakland OARI dispatch coverage and confirming apprentice intake numbers for the district.\n- **Silence consequence:** East Oakland dispatch operations proceed without district council oversight, leaving field response teams uncoordinated with neighborhood services.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": [
+        "CONF-107-civic-office-council-d5",
+        "CONF-108-civic-office-council-d5"
+      ]
+    },
+    "confrontation": {
+      "id": "CONF-109-civic-office-council-d5",
+      "cycle": 109,
+      "agentDir": "civic-office-council-d5",
+      "demand": "Janae Rivers — City Council District 5 — Submit the District 5 co-response deployment review for INIT-002 and execute oversight protocols on Baylight District corridor conditions.",
+      "sourceText": "## Janae Rivers — City Council District 5\n\n- **Agent:** `.claude/agents/civic-office-council-d5/`\n- **Address:** Submit the District 5 co-response deployment review for INIT-002 and execute oversight protocols on Baylight District corridor conditions.\n- **Why:** Baylight District exhibits decay momentum 3 despite a low CrimeIndex of 0.45, while both INIT-002 and INIT-007 face C110 stall clocks on the D5 board following C107 dispatch deployment authorizations.\n- **Acceptance:** A filed D5 public safety oversight memo evaluating East Oakland OARI dispatch coverage and confirming apprentice intake numbers for the district.\n- **Silence consequence:** East Oakland dispatch operations proceed without district council oversight, leaving field response teams uncoordinated with neighborhood services.\n",
+      "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 110,
+      "problems": [
+        {
+          "id": "[\"East Oakland\",\"health.sickResidents\"]",
+          "hood": "East Oakland",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 125,
+          "cycle": 110
+        },
+        {
+          "id": "[\"East Oakland\",\"safety.aboveMedianHoods\"]",
+          "hood": "East Oakland",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"East Oakland\",\"health.sickResidents\"]",
+          "hood": "East Oakland",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 125,
+          "cycle": 110
+        },
+        {
+          "id": "[\"East Oakland\",\"safety.aboveMedianHoods\"]",
+          "hood": "East Oakland",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110
+        }
+      ],
+      "passedOver": [],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Condition problems at C110; prior Sunday folds through C109.\n- East Oakland: sick residents 125\n- East Oakland: hoods above city violent-level median 1\nNo passed-over problem proven."
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "East Oakland"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00119",
+        "name": "Beverly Peterson",
+        "neighborhood": "East Oakland",
+        "role": "Scout, Oakland A's",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Youth Apprenticeship Pipeline — First training cohort placement review"
+      },
+      {
+        "pop": "POP-00165",
+        "name": "Arman Gutierrez",
+        "neighborhood": "East Oakland",
+        "role": "Photo Assistant",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Youth Apprenticeship Pipeline — First training cohort placement review"
+      },
+      {
+        "pop": "POP-00891",
+        "name": "Renée Cabrera",
+        "neighborhood": "East Oakland",
+        "role": "Physical Therapist",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Youth Apprenticeship Pipeline — First training cohort placement review"
+      },
+      {
+        "pop": "POP-01055",
+        "name": "Jerome Pittman",
+        "neighborhood": "East Oakland",
+        "role": "Transit Hub D5 Intake Liaison",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Youth Apprenticeship Pipeline — First training cohort placement review"
+      }
+    ],
+    "businesses": [],
+    "churches": [
+      {
+        "name": "Masjid An-Nur Oakland",
+        "neighborhood": "East Oakland",
+        "text": "seniors lunch program marks milestone",
+        "src": "world_summary faith-event"
+      }
+    ],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D5",
+      "t": "FACT",
+      "text": "Janae Rivers holds COUNCIL-D5 at approval 62",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-007",
+      "t": "FACT",
+      "text": "Oakland Youth Apprenticeship Pipeline is in operational; budget $12.5M — C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland crime: property 34, violent 31, incidents 8 (cycle 110) — city property 35.5, violent 23.9, incidents 7.1",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland: sentiment 0.62 vs city 0.535; crime index 0.65 vs city 0.591; retail 6.74; housing pressure 0; steady; momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-we-0",
+      "t": "FACT",
+      "text": "FAITH — community_program — East Oakland: Masjid An-Nur Oakland: seniors lunch program marks milestone",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Approval": "62"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Faction": "OPP",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

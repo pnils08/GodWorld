@@ -1,0 +1,264 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00799",
+    "name": "Jax Caldera",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Something does not line up — write into the gap.",
+    "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+    "voice": "Short, hot, first-person accountability column. Open on the sourced contradiction, press the supplied accountable subject, and end on the plan closeQuestion. No generic revitalization plea.",
+    "creativeBrief": {
+      "kind": "data-accountability",
+      "method": "TWO_SIDED_DATA_AUDIT",
+      "mismatch": {
+        "a": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 3 cycles",
+        "aSrc": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s)",
+        "b": "The tidy official read of the same cycle",
+        "bSrc": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s)"
+      },
+      "scopeHoods": [],
+      "missing": [
+        "the prior comparison needed to validate the flagged direction",
+        "an office response to the data mismatch"
+      ],
+      "closeQuestion": "Something does not line up — write into the gap.",
+      "sceneRule": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers.",
+      "sourcePointers": [
+        "output/cron-compare/stink_c110.json",
+        "output/desk_signal_c110.json",
+        "output/world_summary_c110.md",
+        "output/neighborhood_texture_c110.md",
+        "output/engine_audit_c110.json",
+        "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s)"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "anomaly",
+    "hood": null,
+    "src": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s) ",
+    "plan": {
+      "focus": "The gap between the official story and reality",
+      "closeQuestion": "What's really going on, and who's responsible for the discrepancy?"
+    },
+    "runningStories": [
+      "The West Oakland Crime Spike [West Oakland] — ENDED this week after 5 week(s)",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 2",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 2",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — week 2",
+      "Temescal Community Health Center — operational [Temescal] — week 2",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 2",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — week 2",
+      "Downtown Economic Revitalization — announced [Downtown] — week 2"
+    ]
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Jax Caldera",
+        "text": "a potential cover-up or lack of transparency",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C110",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-e491ae296bc1"
+    },
+    {
+      "t": "FACT",
+      "text": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 3 cycles",
+      "src": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s)",
+      "id": "F-010bbe6e3530"
+    },
+    {
+      "t": "FACT",
+      "text": "The tidy official read of the same cycle",
+      "src": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s)",
+      "id": "F-0eaf6e799d10"
+    },
+    {
+      "t": "FACT",
+      "text": "Season: Winter | Weather: 52°F fog, NW 8 mph, marine (frontState MARINE), humidity 77, visibility 4",
+      "src": "World_Config/weather snapshot for C110",
+      "id": "F-b0deda5c8c1f"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "ACTIVE probationary package. Apply public accountability pressure when the simulated record and the public story do not line up; starting friction is success, while resolving the civic problem is not the columnist's job.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "adversarial first-person accountability column",
+      "targetWords": "400-650",
+      "opening": "street-level scene in a bar, laundromat, corner, or similar public room",
+      "closing": "an unanswered accountability question"
+    },
+    "authorizedTexture": [
+      "a named street or street-level time cue used only as scene location",
+      "bars, a laundromat, a corner, booth, counter, or sidewalk setting — named in-world spots welcome",
+      "the reporter's own physical presence, drink, route, observation, and count of generic bar visits",
+      "an unnamed or role-only local voice such as a bartender, patron, neighbor, rider, or shop worker",
+      "adversarial inference and unanswered questions drawn from supplied facts"
+    ],
+    "textureConditions": [
+      "a count of the reporter's generic bar visits is persona texture, not a city metric or proof that a named business exists",
+      "an anonymous voice is color, not a sourced official statement, and must not be indexed as a quoted-source",
+      "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, public count, or other load-bearing factual claim",
+      "attributed quotation requires citizen-authored text preserved verbatim with addressable provenance; backend-composed lattice text is not a quotation",
+      "real-world city assumptions and generic urban-problem framing are forbidden",
+      "a rhetorical question or inference must remain framed as a question or inference rather than settled fact",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "canonBlockers": [
+      "a real-world person, place, business, institution, team, or event imported into the city",
+      "a wholly invented person given the authority of an established citizen or office-holder",
+      "a fabricated Project, Initiative, civic office, or institution carrying engine identity (a newly named bar, shop, or venue is INTAKE BIZ, not a violation)",
+      "a backend-composed or model-reconstructed statement presented as a citizen quotation",
+      "a false or unsupported vote, official act, official inaction, promise, decision, or duty presented as fact",
+      "a false criminal accusation or attributed admission",
+      "a load-bearing number, date, duration, budget, metric direction, or count that contradicts or lacks the supplied record",
+      "a current-state claim that contradicts the world summary or verified prior coverage"
+    ]
+  },
+  "manifest": {
+    "id": "AM-b796a95dcdfe",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-e491ae296bc1",
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-010bbe6e3530",
+        "t": "FACT",
+        "text": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 3 cycles",
+        "src": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s)"
+      },
+      {
+        "id": "F-0eaf6e799d10",
+        "t": "FACT",
+        "text": "The tidy official read of the same cycle",
+        "src": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s)"
+      },
+      {
+        "id": "F-b0deda5c8c1f",
+        "t": "FACT",
+        "text": "Season: Winter | Weather: 52°F fog, NW 8 mph, marine (frontState MARINE), humidity 77, visibility 4",
+        "src": "World_Config/weather snapshot for C110"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jax Caldera",
+        "text": "a potential cover-up or lack of transparency",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a named street or street-level time cue used only as scene location",
+      "bars, a laundromat, a corner, booth, counter, or sidewalk setting — named in-world spots welcome",
+      "the reporter's own physical presence, drink, route, observation, and count of generic bar visits",
+      "an unnamed or role-only local voice such as a bartender, patron, neighbor, rider, or shop worker",
+      "adversarial inference and unanswered questions drawn from supplied facts"
+    ],
+    "textureConditions": [
+      "a count of the reporter's generic bar visits is persona texture, not a city metric or proof that a named business exists",
+      "an anonymous voice is color, not a sourced official statement, and must not be indexed as a quoted-source",
+      "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, public count, or other load-bearing factual claim",
+      "attributed quotation requires citizen-authored text preserved verbatim with addressable provenance; backend-composed lattice text is not a quotation",
+      "real-world city assumptions and generic urban-problem framing are forbidden",
+      "a rhetorical question or inference must remain framed as a question or inference rather than settled fact",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world person, place, business, institution, team, or event imported into the city",
+      "a wholly invented person given the authority of an established citizen or office-holder",
+      "a fabricated Project, Initiative, civic office, or institution carrying engine identity (a newly named bar, shop, or venue is INTAKE BIZ, not a violation)",
+      "a backend-composed or model-reconstructed statement presented as a citizen quotation",
+      "a false or unsupported vote, official act, official inaction, promise, decision, or duty presented as fact",
+      "a false criminal accusation or attributed admission",
+      "a load-bearing number, date, duration, budget, metric direction, or count that contradicts or lacks the supplied record",
+      "a current-state claim that contradicts the world summary or verified prior coverage"
+    ]
+  }
+}

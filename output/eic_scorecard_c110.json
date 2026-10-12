@@ -1,0 +1,327 @@
+{
+  "cycle": "110",
+  "total": 23,
+  "counts": {
+    "accurate": 9,
+    "corrections-needed": 8,
+    "canon-violation": 6
+  },
+  "accuracyPct": 39.1,
+  "auditModel": "google/gemini-3.7-flash",
+  "trend": [
+    {
+      "cycle": 103,
+      "pct": 75
+    },
+    {
+      "cycle": 104,
+      "pct": 62.5
+    },
+    {
+      "cycle": 105,
+      "pct": 76.5
+    },
+    {
+      "cycle": 106,
+      "pct": 55.6
+    },
+    {
+      "cycle": 107,
+      "pct": 68.8
+    },
+    {
+      "cycle": 108,
+      "pct": 60
+    },
+    {
+      "cycle": 109,
+      "pct": 33.3
+    }
+  ],
+  "articles": [
+    {
+      "stem": "business_c110_business-desk_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "Use of 'cycle' in article prose ('this cycle', 'This"
+        }
+      ]
+    },
+    {
+      "stem": "civic_c110_angela-reyes_packet-v2_anthropic-claude-haiku-4-5",
+      "byline": "Angela Reyes",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "the Packet",
+          "class": "engine-verbiage",
+          "why": "The phrase 'the Packet said something sharper this cycle' leaks simulation engine vocabulary into newsroom copy."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "Initiative_Tracker",
+          "class": "engine-verbiage",
+          "why": "Direct engine/system vocabulary ('Initiative_Tracker') leaked into published prose twice."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c110_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Jax Caldera",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "References to 'a pattern tagged strain, paired with one other signal', 'tracker posts the opposite story', and storyline tracker closure states.",
+          "class": "engine-verbiage",
+          "why": "The prose leaks internal simulation engine telemetry, intake audit tokens, and tracker lifecycle metadata directly into the news report."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c110_lila-mezran_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Dr. Lila Mezran",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Citywide and neighborhood hospital census data",
+          "class": "data-misrepresentation",
+          "why": "The world summary explicitly states citywide hospital load is '1 in care (1% load)', directly contradicting the article's claims of 77 residents in care, 38 admissions, 76 occupied beds, and numerous neighborhood-level hospitalizations."
+        },
+        {
+          "what": "Yu Zen's status and quote context",
+          "class": "citizen-bending",
+          "why": "The article depicts Yu Zen as currently confined to an active hospital bed, whereas the world summary records Yu Zen as recovered and 'got back into a morning walk routine' in Rockridge."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c110_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c110_noah-tan_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "Reference to raw cycle IDs 'C107', 'C108"
+        }
+      ]
+    },
+    {
+      "stem": "civic_c110_rachel-torres_packet-v2_x-ai-grok-4-3",
+      "byline": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "all listed as other residents with none tracked",
+          "class": "engine-verbiage",
+          "why": "Directly leaks simulation data schema terminology differentiating tracked ledger citizens from background agent counts."
+        },
+        {
+          "what": "twenty-two neighborhoods on the table / The table places KONO at the top",
+          "class": "engine-verbiage",
+          "why": "Exposes the underlying data table / ledger feed format directly in news reporting prose."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c110_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Trevor Shimizu",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c110_elliot-graye_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Elliot Graye",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "References to 'C104', 'C107', 'C108', and 'C109' in the body text",
+          "class": "engine-verbiage",
+          "why": "Raw cycle designators (C104, C107, C108, C109) leak simulation engine vocabulary directly into published newsroom prose instead of in-world temporal framing."
+        }
+      ]
+    },
+    {
+      "stem": "culture_c110_maria-keen_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Maria Keen",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Hospitalized count for Dimond (4 still in care / 4 beds occupied) contradicts citywide ledger",
+          "class": "data-misrepresentation",
+          "why": "The world summary establishes citywide hospital occupancy at exactly 1 patient in care (1% load), making it impossible for Dimond alone to have 4 patients still in care / 4 beds occupied."
+        }
+      ]
+    },
+    {
+      "stem": "culture_c110_mason-ortega_packet-v2_x-ai-grok-4-3",
+      "byline": "Mason Ortega",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c110_anthony-raines_packet-v2_anthropic-claude-haiku-4-5",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Ellis had stumbled in Game Two, the kind of early-series misstep that can seed doubt through a roster.",
+          "class": "data-misrepresentation",
+          "why": "World Series Game 2 was started by Travis Coles, with bullpen appearances by Clark Sayran and Mariano Rosales; John Ellis did not pitch or stumble in Game 2."
+        }
+      ]
+    },
+    {
+      "stem": "sports_c110_elliot-marbury_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Elliot Marbury",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c110_hal-richmond_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Hal Richmond",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "an overall grade of ninety-three",
+          "class": "engine-verbiage",
+          "why": "Raw simulation stat/engine attribute ('overall grade of ninety-three') leaks directly into narrative sports prose."
+        }
+      ]
+    },
+    {
+      "stem": "sports_c110_p-slayer_packet-v2_x-ai-grok-4-3",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c110_selena-grant_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Selena Grant",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c110_simon-leary_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Simon Leary",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c110_talia-finch_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Talia Finch",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c110_tanya-cruz_packet-v2_x-ai-grok-4-3",
+      "byline": "Tanya Cruz",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "undocked-digest_c110_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+      "byline": "Nia Rook",
+      "desk": "undocked-digest",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Clarissa Dane, Kato Rivers, and Simone Adesanya are framed as competitive pilots logging 'flights', 'episodes', and 'partial credits' on a public leaderboard.",
+          "class": "citizen-bending",
+          "why": "Simone Adesanya is a school principal, Kato Rivers is a fitness trainer, and Aaliyah Brennan is a mobile clinic nurse. The article invents a fictional flight/pilot competition based on simulation runtime metrics ('episodes', 'partial credits', 'cycles led')."
+        },
+        {
+          "what": "Text incorporates raw simulation ledger/evaluation mechanics ('logged two episodes this cycle with no partial credits tallied yet', 'partial credits', 'cycles led').",
+          "class": "engine-verbiage",
+          "why": "Simulation episode and credit evaluation data leaked directly into the narrative prose as in-world competition standings."
+        }
+      ]
+    },
+    {
+      "stem": "undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "magnitude held at two out of five",
+          "class": "engine-verbiage",
+          "why": "System simulation telemetry ('magnitude') is leaking directly into prose."
+        },
+        {
+          "what": "Framing Aaliyah Brennan and Clarissa Dane as pilots in a combat/episodic broadcast show called 'UNDOCKED'",
+          "class": "citizen-bending",
+          "why": "Aaliyah Brennan is an Oakland resident in Lake Merritt whose cycle event was simply keeping interactions brief during heavy fog, and Clarissa Dane relocated from Fruitvale to West Oakland; portraying them as pilots/competitors in a sci-fi/combat program invents roles entirely disconnected from the ledger."
+        }
+      ]
+    },
+    {
+      "stem": "wire_c110_celeste-tran_packet-v2_x-ai-grok-4-3",
+      "byline": "Celeste Tran",
+      "desk": "wire",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Migration flow claims ('Downtown added ten residents', 'Temescal gaining ten people', 'Jack London nine, West Oakland seven')",
+          "class": "data-misrepresentation",
+          "why": "Contradicts the cycle 110 migration ledger, where West Oakland is the overwhelming recipient of incoming relocations (over a dozen households moving in) while Temescal, Downtown, and Jack London are net out-migration origins."
+        }
+      ]
+    }
+  ]
+}

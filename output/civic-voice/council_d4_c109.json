@@ -1,0 +1,38 @@
+{
+  "office": "council_d4",
+  "cycle": 109,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I will focus on addressing the pressing concerns of my constituents in D4, prioritizing targeted investment and fiscal discipline. The Mayor's agenda items align with my commitment to supporting our city's growth and development. I will support the Fruitvale Transit Hub Phase II and the Oakland Youth Apprenticeship Pipeline, while also addressing commercial contraction in Grand Lake and Glenview.",
+  "statements": [
+    {
+      "statementId": "STMT-109-council_d4-001",
+      "type": "support_statement",
+      "topic": "Fruitvale Transit Hub Phase II",
+      "initiative": "INIT-003",
+      "decision": "YES",
+      "quote": "The Fruitvale Transit Hub is a crucial step in connecting our communities and promoting economic growth. I'm committed to supporting this initiative and ensuring it benefits the people of D4.",
+      "fullStatement": "As Council President, I believe it's essential to invest in our city's infrastructure. The Fruitvale Transit Hub Phase II is a vital project that will improve transportation options for our residents and support local businesses. I will work to ensure that this project is completed efficiently and effectively, while also addressing the concerns of my constituents in D4.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d4-002",
+      "type": "commitment_statement",
+      "topic": "Commercial Contraction in Grand Lake and Glenview",
+      "initiative": "INIT-008",
+      "decision": "COMMIT",
+      "quote": "As the representative of D4, I'm committed to addressing commercial contraction in Grand Lake and Glenview. I will work with the City Planning Director to review our current budget allocations and identify opportunities for reallocation to support the development needs of these neighborhoods.",
+      "fullStatement": "Commercial contraction is a pressing concern in Grand Lake and Glenview, and it's essential that we take action to address it. I will commit to working with the City Planning Director to identify solutions and ensure that our budget allocations are supporting the needs of our communities. This includes reviewing our current small-business stabilization coverage and exploring options for retail vacancy relief.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d4-003",
+      "type": "statement",
+      "topic": "Glenview and Dimond",
+      "initiative": null,
+      "decision": "SUPPORT",
+      "quote": "The progress in Glenview is a testament to the city's structured support and the people's resilience. I'll ensure Glenview receives the attention it deserves, with a focus on targeted investment and fiscal discipline.",
+      "fullStatement": "As the representative of D4, I'm proud of the progress we've made in Glenview. However, I also recognize that Dimond is facing challenges, and it's essential that we address them. I will work to ensure that both neighborhoods receive the support they need, while also promoting fiscal discipline and targeted investment.",
+      "trackerUpdates": {}
+    }
+  ]
+}

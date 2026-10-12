@@ -1,0 +1,1180 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "108",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "Fruitvale — the programs that hold the block and the people who founded them",
+      "label": "Fruitvale: 3 active programs on the record",
+      "hookLine": "3 active programs in Fruitvale; Lucia Polito founded one.",
+      "hood": "Fruitvale",
+      "citizens": [
+        "Lucia Polito (POP-00004)"
+      ],
+      "popids": [
+        "POP-00004"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C108",
+      "cycle": 108
+    }
+  },
+  "angle": "output/cron-compare/culture_c108_maria-keen_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00004",
+      "name": "Lucia Polito",
+      "quote": "I've seen the impact that community programs can have on people's lives, and I feel grateful to be a part of it. As someone who's founded a program myself, I understand the passion and dedication that goes into creating something that truly helps others. It's amazing to see the difference these programs make in Fruitvale, and I'm always looking for ways to support and connect with the people who make them happen.",
+      "disp": "draws people in, deep with them; warm, tender with people; curious, open to new things",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the impact that community programs can have on people's lives, and I feel grateful to be a part of it. As someone who's founded a program myself, I understand the passion and dedication that goes into creating something that truly helps others. It's amazing to see the difference these programs make in Fruitvale, and I'm always looking for ways to support and connect with the people who make them happen.\",\n  \"fact_ids\": [\"F-71ce6b2e42ee\", \"F-d24fafa8a950\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-71ce6b2e42ee",
+          "F-d24fafa8a950"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00004-d56e514036",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the impact that community programs can have on people's lives, and I feel grateful to be a part of it. As someone who's founded a program myself, I understand the passion and dedication that goes into creating something that truly helps others. It's amazing to see the difference these programs make in Fruitvale, and I'm always looking for ways to support and connect with the people who make them happen."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00004",
+          "name": "Lucia Polito",
+          "role": "Aura Wellness Practitioner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The community programs in Fruitvale and their founders\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Fruitvale",
+          "focus": "The community programs in Fruitvale and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "founded Postpartum Oakland Network (Community_Programs)",
+            "same-neighborhood"
+          ],
+          "self": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-3cfb6e530c",
+              "src": "output/beats/Community_Programs.jsonl @C108",
+              "text": "3 active programs in Fruitvale; Lucia Polito founded one."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale: 3 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-f9fa3c649835"
+          },
+          {
+            "t": "FACT",
+            "text": "3 active programs in Fruitvale; Lucia Polito founded one.",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-71ce6b2e42ee"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-004",
+            "id": "F-9ce0f74cb1ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-010",
+            "id": "F-e9b0c5c0e013"
+          },
+          {
+            "t": "FACT",
+            "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-016",
+            "id": "F-8bfdc3d13d56"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C108 vs prev/",
+            "id": "F-07247dc450f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00004",
+            "id": "F-d24fafa8a950"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I've seen the community programs in Fruitvale really making a difference, and I think it's great that people like Lucia Polito are founding initiatives that help our neighborhood.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the community programs in Fruitvale really making a difference, and I think it's great that people like Lucia Polito are founding initiatives that help our neighborhood.\",\n  \"fact_ids\": [\"F-71ce6b2e42ee\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-71ce6b2e42ee"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-788c23539f",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the community programs in Fruitvale really making a difference, and I think it's great that people like Lucia Polito are founding initiatives that help our neighborhood."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "K-8 Teacher,Former Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The community programs in Fruitvale and their founders\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Fruitvale",
+          "focus": "The community programs in Fruitvale and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale: 3 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-f9fa3c649835"
+          },
+          {
+            "t": "FACT",
+            "text": "3 active programs in Fruitvale; Lucia Polito founded one.",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-71ce6b2e42ee"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-004",
+            "id": "F-9ce0f74cb1ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-010",
+            "id": "F-e9b0c5c0e013"
+          },
+          {
+            "t": "FACT",
+            "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-016",
+            "id": "F-8bfdc3d13d56"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C108 vs prev/",
+            "id": "F-07247dc450f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-dd73052ec46c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00644",
+      "name": "Rafael Pilgrim",
+      "quote": "I've seen the community programs in Fruitvale really make a difference, and I appreciate the work of founders like Lucia Polito who are dedicated to helping our neighborhood thrive.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the community programs in Fruitvale really make a difference, and I appreciate the work of founders like Lucia Polito who are dedicated to helping our neighborhood thrive.\",\n  \"fact_ids\": [\"F-71ce6b2e42ee\", \"F-8bfdc3d13d56\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-71ce6b2e42ee",
+          "F-8bfdc3d13d56"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00644-afc30760fd",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the community programs in Fruitvale really make a difference, and I appreciate the work of founders like Lucia Polito who are dedicated to helping our neighborhood thrive."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00644",
+          "name": "Rafael Pilgrim",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The community programs in Fruitvale and their founders\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Fruitvale",
+          "focus": "The community programs in Fruitvale and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Rafael Pilgrim — Server — Fruitvale",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale: 3 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-f9fa3c649835"
+          },
+          {
+            "t": "FACT",
+            "text": "3 active programs in Fruitvale; Lucia Polito founded one.",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-71ce6b2e42ee"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-004",
+            "id": "F-9ce0f74cb1ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-010",
+            "id": "F-e9b0c5c0e013"
+          },
+          {
+            "t": "FACT",
+            "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-016",
+            "id": "F-8bfdc3d13d56"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C108 vs prev/",
+            "id": "F-07247dc450f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Rafael Pilgrim — Server — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00644",
+            "id": "F-56d37e2ec062"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "I've seen the community programs in Fruitvale really making a difference, and I feel like they're bringing people together. I've heard Lucia Polito's work with the Postpartum Oakland Network is really helping new moms in the area.",
+      "disp": "driven, hard to sit still; magnetic, center of every room",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the community programs in Fruitvale really making a difference, and I feel like they're bringing people together. I've heard Lucia Polito's work with the Postpartum Oakland Network is really helping new moms in the area.\",\n  \"fact_ids\": [\"F-8bfdc3d13d56\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-8bfdc3d13d56"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00744-74d2c7e158",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the community programs in Fruitvale really making a difference, and I feel like they're bringing people together. I've heard Lucia Polito's work with the Postpartum Oakland Network is really helping new moms in the area."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00744",
+          "name": "Tomas Renteria",
+          "role": "Podcast Host / Line Cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The community programs in Fruitvale and their founders\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Fruitvale",
+          "focus": "The community programs in Fruitvale and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale: 3 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-f9fa3c649835"
+          },
+          {
+            "t": "FACT",
+            "text": "3 active programs in Fruitvale; Lucia Polito founded one.",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-71ce6b2e42ee"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-004",
+            "id": "F-9ce0f74cb1ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-010",
+            "id": "F-e9b0c5c0e013"
+          },
+          {
+            "t": "FACT",
+            "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-016",
+            "id": "F-8bfdc3d13d56"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C108 vs prev/",
+            "id": "F-07247dc450f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00744",
+            "id": "F-ba942a2b7b0a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00004",
+      "name": "Lucia Polito",
+      "quote": "I've seen the impact that community programs can have on people's lives, and I feel grateful to be a part of it. As someone who's founded a program myself, I understand the passion and dedication that goes into creating something that truly helps others. It's amazing to see the difference these programs make in Fruitvale, and I'm always looking for ways to support and connect with the people who make them happen.",
+      "disp": "draws people in, deep with them; warm, tender with people; curious, open to new things",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the impact that community programs can have on people's lives, and I feel grateful to be a part of it. As someone who's founded a program myself, I understand the passion and dedication that goes into creating something that truly helps others. It's amazing to see the difference these programs make in Fruitvale, and I'm always looking for ways to support and connect with the people who make them happen.\",\n  \"fact_ids\": [\"F-71ce6b2e42ee\", \"F-d24fafa8a950\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-71ce6b2e42ee",
+          "F-d24fafa8a950"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00004-d56e514036",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the impact that community programs can have on people's lives, and I feel grateful to be a part of it. As someone who's founded a program myself, I understand the passion and dedication that goes into creating something that truly helps others. It's amazing to see the difference these programs make in Fruitvale, and I'm always looking for ways to support and connect with the people who make them happen."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00004",
+          "name": "Lucia Polito",
+          "role": "Aura Wellness Practitioner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The community programs in Fruitvale and their founders\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Fruitvale",
+          "focus": "The community programs in Fruitvale and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "founded Postpartum Oakland Network (Community_Programs)",
+            "same-neighborhood"
+          ],
+          "self": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-3cfb6e530c",
+              "src": "output/beats/Community_Programs.jsonl @C108",
+              "text": "3 active programs in Fruitvale; Lucia Polito founded one."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale: 3 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-f9fa3c649835"
+          },
+          {
+            "t": "FACT",
+            "text": "3 active programs in Fruitvale; Lucia Polito founded one.",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-71ce6b2e42ee"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-004",
+            "id": "F-9ce0f74cb1ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-010",
+            "id": "F-e9b0c5c0e013"
+          },
+          {
+            "t": "FACT",
+            "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-016",
+            "id": "F-8bfdc3d13d56"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C108 vs prev/",
+            "id": "F-07247dc450f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00004",
+            "id": "F-d24fafa8a950"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I've seen the community programs in Fruitvale really making a difference, and I think it's great that people like Lucia Polito are founding initiatives that help our neighborhood.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the community programs in Fruitvale really making a difference, and I think it's great that people like Lucia Polito are founding initiatives that help our neighborhood.\",\n  \"fact_ids\": [\"F-71ce6b2e42ee\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-71ce6b2e42ee"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-788c23539f",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the community programs in Fruitvale really making a difference, and I think it's great that people like Lucia Polito are founding initiatives that help our neighborhood."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "K-8 Teacher,Former Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The community programs in Fruitvale and their founders\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Fruitvale",
+          "focus": "The community programs in Fruitvale and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale: 3 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-f9fa3c649835"
+          },
+          {
+            "t": "FACT",
+            "text": "3 active programs in Fruitvale; Lucia Polito founded one.",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-71ce6b2e42ee"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-004",
+            "id": "F-9ce0f74cb1ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-010",
+            "id": "F-e9b0c5c0e013"
+          },
+          {
+            "t": "FACT",
+            "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-016",
+            "id": "F-8bfdc3d13d56"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C108 vs prev/",
+            "id": "F-07247dc450f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-dd73052ec46c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00644",
+      "name": "Rafael Pilgrim",
+      "quote": "I've seen the community programs in Fruitvale really make a difference, and I appreciate the work of founders like Lucia Polito who are dedicated to helping our neighborhood thrive.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the community programs in Fruitvale really make a difference, and I appreciate the work of founders like Lucia Polito who are dedicated to helping our neighborhood thrive.\",\n  \"fact_ids\": [\"F-71ce6b2e42ee\", \"F-8bfdc3d13d56\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-71ce6b2e42ee",
+          "F-8bfdc3d13d56"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00644-afc30760fd",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the community programs in Fruitvale really make a difference, and I appreciate the work of founders like Lucia Polito who are dedicated to helping our neighborhood thrive."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00644",
+          "name": "Rafael Pilgrim",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The community programs in Fruitvale and their founders\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Fruitvale",
+          "focus": "The community programs in Fruitvale and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Rafael Pilgrim — Server — Fruitvale",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale: 3 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-f9fa3c649835"
+          },
+          {
+            "t": "FACT",
+            "text": "3 active programs in Fruitvale; Lucia Polito founded one.",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-71ce6b2e42ee"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-004",
+            "id": "F-9ce0f74cb1ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-010",
+            "id": "F-e9b0c5c0e013"
+          },
+          {
+            "t": "FACT",
+            "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-016",
+            "id": "F-8bfdc3d13d56"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C108 vs prev/",
+            "id": "F-07247dc450f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Rafael Pilgrim — Server — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00644",
+            "id": "F-56d37e2ec062"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "I've seen the community programs in Fruitvale really making a difference, and I feel like they're bringing people together. I've heard Lucia Polito's work with the Postpartum Oakland Network is really helping new moms in the area.",
+      "disp": "driven, hard to sit still; magnetic, center of every room",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the community programs in Fruitvale really making a difference, and I feel like they're bringing people together. I've heard Lucia Polito's work with the Postpartum Oakland Network is really helping new moms in the area.\",\n  \"fact_ids\": [\"F-8bfdc3d13d56\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-8bfdc3d13d56"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00744-74d2c7e158",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the community programs in Fruitvale really making a difference, and I feel like they're bringing people together. I've heard Lucia Polito's work with the Postpartum Oakland Network is really helping new moms in the area."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00744",
+          "name": "Tomas Renteria",
+          "role": "Podcast Host / Line Cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The community programs in Fruitvale and their founders\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Fruitvale",
+          "focus": "The community programs in Fruitvale and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale: 3 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-f9fa3c649835"
+          },
+          {
+            "t": "FACT",
+            "text": "3 active programs in Fruitvale; Lucia Polito founded one.",
+            "src": "output/beats/Community_Programs.jsonl @C108",
+            "id": "F-71ce6b2e42ee"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-004",
+            "id": "F-9ce0f74cb1ba"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-010",
+            "id": "F-e9b0c5c0e013"
+          },
+          {
+            "t": "FACT",
+            "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-016",
+            "id": "F-8bfdc3d13d56"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C108 vs prev/",
+            "id": "F-07247dc450f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00744",
+            "id": "F-ba942a2b7b0a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-25T18:18:14.882Z"
+}

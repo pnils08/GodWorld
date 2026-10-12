@@ -1,0 +1,287 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00164",
+    "name": "Celeste Tran",
+    "role": "desk reporter",
+    "desk": "wire"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Marin Tao leads the conversation (25 mentions); Uptown moves the most — what Oakland is doing together this week",
+    "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the engine's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "trends",
+      "hood": "San Antonio",
+      "facts": [
+        "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+        "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 87",
+        "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+        "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+        "Movement vs C108: Uptown +62 people, Downtown +61 people, Jack London +60 people, Temescal +59 people, KONO +59 people"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "Household in Rockridge spending 54% of income on housing (observational analysis)",
+        "Household in Lake Merritt spending 56% of income on housing (observational analysis)",
+        "Downtown boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+        "Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city (observational analysis)"
+      ],
+      "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-trends",
+    "hood": "San Antonio",
+    "src": "output/beats/Cultural_Ledger.jsonl @C109",
+    "plan": {
+      "focus": "The sudden rise of Marin Tao to the top of the cultural conversation",
+      "closeQuestion": "What does Marin Tao's sudden popularity reveal about the city's values and priorities?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Celeste Tran",
+        "text": "There may be a connection between Marin Tao's rise and the recent movement of people to the Uptown area, but more research is needed to confirm this",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-af6ecd4a6ee2"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-b92e8f58c6c6"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-7b70c2aa3290"
+    },
+    {
+      "t": "FACT",
+      "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 87",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-bfa3f309ae2b"
+    },
+    {
+      "t": "FACT",
+      "text": "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-ce794f1c115a"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-98d64e869896"
+    },
+    {
+      "t": "FACT",
+      "text": "Movement vs C108: Uptown +62 people, Downtown +61 people, Jack London +60 people, Temescal +59 people, KONO +59 people",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C109",
+      "id": "F-ecd96fd79ca3"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "celeste-social-trends-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the culture record's most-talked-about names, new arrivals, and neighborhood movement into a fast, reactive trend read — the count is Celeste's, the mood underneath it is hers to name.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "fast, reactive, semi-chaotic but grounded trend analyst",
+      "targetWords": "400-700",
+      "opening": "a Packet-named figure's media-mention count, a new arrival on the culture record, or a neighborhood movement delta",
+      "closing": "the implication, not the proof — what the pattern says about the city's mood, stated once and left there"
+    },
+    "authorizedTexture": [
+      "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
+      "unnamed color about the conversation itself — the group chat, the rewatch, who suddenly has an opinion — that adds no new named fact",
+      "connecting a Packet-supplied mention spike or movement delta to other Packet-supplied civic conditions already in the packet",
+      "treating the aggregate as a single intentional act ('Oakland decided') without claiming a specific poll, survey, or interview"
+    ],
+    "textureConditions": [
+      "every named figure, trend tag, media-mention count, and neighborhood movement number must come from the packet",
+      "no named show, movie, or streaming title unless the packet itself supplies one — the evening-media slate is not wired to this slice; unnamed viewing/mood color is fine, a specific invented title is not",
+      "a flat week (no mentions, no movement) is written as a real flat week, not papered over with an invented spike",
+      "the thesis follows the data window, never precedes it"
+    ],
+    "canonBlockers": [
+      "a named figure, show, movie, streaming title, venue, or neighborhood event not found in the supplied packet",
+      "an invented survey, poll, interview, direct quote, or social-media reaction",
+      "raw engine scores, labels, or decimals printed as public-facing evidence",
+      "a citywide mood or trend claim with no supplied count or movement delta behind it",
+      "a generic culture-desk roundup that abandons the assigned data window"
+    ]
+  },
+  "manifest": {
+    "id": "AM-72e7f3ac7947",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-af6ecd4a6ee2",
+        "t": "FACT",
+        "text": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-b92e8f58c6c6",
+        "t": "FACT",
+        "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-7b70c2aa3290",
+        "t": "FACT",
+        "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-bfa3f309ae2b",
+        "t": "FACT",
+        "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 87",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-ce794f1c115a",
+        "t": "FACT",
+        "text": "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-98d64e869896",
+        "t": "FACT",
+        "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-ecd96fd79ca3",
+        "t": "FACT",
+        "text": "Movement vs C108: Uptown +62 people, Downtown +61 people, Jack London +60 people, Temescal +59 people, KONO +59 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C109"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Celeste Tran",
+        "text": "There may be a connection between Marin Tao's rise and the recent movement of people to the Uptown area, but more research is needed to confirm this",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
+      "unnamed color about the conversation itself — the group chat, the rewatch, who suddenly has an opinion — that adds no new named fact",
+      "connecting a Packet-supplied mention spike or movement delta to other Packet-supplied civic conditions already in the packet",
+      "treating the aggregate as a single intentional act ('Oakland decided') without claiming a specific poll, survey, or interview"
+    ],
+    "textureConditions": [
+      "every named figure, trend tag, media-mention count, and neighborhood movement number must come from the packet",
+      "no named show, movie, or streaming title unless the packet itself supplies one — the evening-media slate is not wired to this slice; unnamed viewing/mood color is fine, a specific invented title is not",
+      "a flat week (no mentions, no movement) is written as a real flat week, not papered over with an invented spike",
+      "the thesis follows the data window, never precedes it"
+    ],
+    "forbiddenClaimClasses": [
+      "a named figure, show, movie, streaming title, venue, or neighborhood event not found in the supplied packet",
+      "an invented survey, poll, interview, direct quote, or social-media reaction",
+      "raw engine scores, labels, or decimals printed as public-facing evidence",
+      "a citywide mood or trend claim with no supplied count or movement delta behind it",
+      "a generic culture-desk roundup that abandons the assigned data window"
+    ]
+  }
+}

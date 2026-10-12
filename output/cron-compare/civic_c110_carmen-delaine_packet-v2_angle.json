@@ -1,0 +1,665 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "carmen-delaine",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00011",
+      "name": "Carmen Delaine",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup."
+    },
+    "signal": {
+      "kind": "initiative",
+      "hood": "West Oakland",
+      "score": null,
+      "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): advance to preliminary schematics with community oversight provisions intact — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): filed legislative language with City Clerk — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved accelerated cohort placement with East Oakland priority — \"150 apprentices placed by spring — that's the target, and we're accelerating to hit it.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): independent oversight maintained; soil test verification proceeding — \"Independent oversight isn't bureaucracy — it's how we build trust while we build the future.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00501",
+          "name": "Denise Carter",
+          "profile": "Denise Carter — civic office holder",
+          "role": "civic office holder",
+          "hood": null,
+          "mode": "offices",
+          "sourceKind": "office-record",
+          "evidence": {
+            "source": "output/civic-voice/council_d1_c110.json",
+            "statementId": "STMT-110-council_d1-001",
+            "initiativeId": "INIT-001",
+            "topic": "West Oakland Stabilization Fund"
+          }
+        },
+        {
+          "pop": "POP-00034",
+          "name": "Avery Santana",
+          "profile": "Avery Santana — civic office holder",
+          "role": "civic office holder",
+          "hood": null,
+          "mode": "offices",
+          "sourceKind": "office-record",
+          "evidence": {
+            "source": "output/civic-voice/mayor_gavel_c110.json",
+            "statementId": "STMT-110-mayor_gavel-001",
+            "initiativeId": "INIT-001",
+            "topic": "West Oakland Stabilization Fund Month-Nine Disbursement"
+          }
+        },
+        {
+          "pop": "POP-00037",
+          "name": "Brenda Okoro",
+          "profile": "Brenda Okoro — civic office holder",
+          "role": "civic office holder",
+          "hood": null,
+          "mode": "offices",
+          "sourceKind": "office-record",
+          "evidence": {
+            "source": "output/civic-voice/okoro_c110.json",
+            "statementId": "STMT-110-okoro-001",
+            "initiativeId": "INIT-001",
+            "topic": "West Oakland Stabilization Fund — Month-Nine Disbursement"
+          }
+        },
+        {
+          "pop": "POP-00790",
+          "name": "Marcus Webb",
+          "profile": "Marcus Webb — civic office holder",
+          "role": "civic office holder",
+          "hood": null,
+          "mode": "offices",
+          "sourceKind": "office-record",
+          "evidence": {
+            "source": "output/civic-voice/stabilization_fund_c110.json",
+            "statementId": "STMT-110-stabilization_fund-001",
+            "initiativeId": "INIT-001",
+            "topic": "Month-nine disbursement"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-07f96ee518bd"
+      },
+      {
+        "t": "FACT",
+        "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-fced7a5bf10d"
+      },
+      {
+        "t": "FACT",
+        "text": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-037db495b7ea"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — budget $28M; vote requirement 6-3; voted Cycle 78; outcome PASSED [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-aab0c056cd90"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund vote record — Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely) [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-4bbd2b1d9cdc"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — proposed by Avery Santana [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-8d6dc1998469"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — mayoral action: signed, Cycle 78 [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-1661a127b6aa"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — implementation phase disbursement-active; neighborhoods West Oakland; policy domain economic [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-cf3f87a78e73"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — budget total $28,000,000; remaining $23,000,000; last disbursement Cycle 110 [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-5c8b7183f023"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — next scheduled action: Month-ten disbursement review, Cycle 111 [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-45026745e22f"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund milestone — C109: month-eight tranche $400,000 released in West Oakland (2 household grants, $81,188). [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-498346b45f6f"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund milestone — C110: Month-nine disbursement $400K approved; 23-day avg processing time achieved [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-17a3c76b5196"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown Economic Revitalization — status proposed, phase legislation-filed, budget $15M [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-0b3f194b0620"
+      },
+      {
+        "t": "FACT",
+        "text": "Commercial Stabilization for Grand Lake — status proposed, phase announced, budget $2.5M [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-7f41b17afe00"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Tenant Defense Fund — status proposed, phase announced, budget $4.2M [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-1ed4626872da"
+      },
+      {
+        "t": "FACT",
+        "text": "Mayor — Avery Santana — approval 69 — active [Civic_Office_Ledger]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-9013d0e1f04d"
+      },
+      {
+        "t": "FACT",
+        "text": "District Attorney — Clarissa Dane — approval 65 — active [Civic_Office_Ledger]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-dd9da1e385ca"
+      },
+      {
+        "t": "FACT",
+        "text": "Public Defender — Caleb Reyes — approval 65 — active [Civic_Office_Ledger]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-e633aa2dfd99"
+      },
+      {
+        "t": "FACT",
+        "text": "City Council District 1 — Denise Carter — approval 62 — active [Civic_Office_Ledger]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-4f1dc77ddd76"
+      },
+      {
+        "t": "FACT",
+        "text": "City Council District 2 — Leonard Tran — approval 66 — active [Civic_Office_Ledger]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-e633c457a14d"
+      },
+      {
+        "t": "FACT",
+        "text": "The city treasury opened this cycle at $100M [City_Treasury]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-032beeb22b37"
+      },
+      {
+        "t": "FACT",
+        "text": "City treasury this cycle took in $5.2M: $5M the weekly budget allocation, $500 1 ticket, $153,351 court money on 34 cleared charges [City_Treasury]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-3a11e0e44727"
+      },
+      {
+        "t": "FACT",
+        "text": "City treasury balance at the close: $105.2M (from $0) [City_Treasury]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "id": "F-49ef81ab7d6b"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "offices",
+    "candidates": [
+      {
+        "pop": "POP-00501",
+        "name": "Denise Carter",
+        "role": "civic office holder",
+        "hood": null,
+        "profile": "Denise Carter — civic office holder",
+        "mode": "offices",
+        "sourceKind": "office-record",
+        "evidence": {
+          "source": "output/civic-voice/council_d1_c110.json",
+          "statementId": "STMT-110-council_d1-001",
+          "initiativeId": "INIT-001",
+          "topic": "West Oakland Stabilization Fund"
+        }
+      },
+      {
+        "pop": "POP-00034",
+        "name": "Avery Santana",
+        "role": "civic office holder",
+        "hood": null,
+        "profile": "Avery Santana — civic office holder",
+        "mode": "offices",
+        "sourceKind": "office-record",
+        "evidence": {
+          "source": "output/civic-voice/mayor_gavel_c110.json",
+          "statementId": "STMT-110-mayor_gavel-001",
+          "initiativeId": "INIT-001",
+          "topic": "West Oakland Stabilization Fund Month-Nine Disbursement"
+        }
+      },
+      {
+        "pop": "POP-00037",
+        "name": "Brenda Okoro",
+        "role": "civic office holder",
+        "hood": null,
+        "profile": "Brenda Okoro — civic office holder",
+        "mode": "offices",
+        "sourceKind": "office-record",
+        "evidence": {
+          "source": "output/civic-voice/okoro_c110.json",
+          "statementId": "STMT-110-okoro-001",
+          "initiativeId": "INIT-001",
+          "topic": "West Oakland Stabilization Fund — Month-Nine Disbursement"
+        }
+      },
+      {
+        "pop": "POP-00790",
+        "name": "Marcus Webb",
+        "role": "civic office holder",
+        "hood": null,
+        "profile": "Marcus Webb — civic office holder",
+        "mode": "offices",
+        "sourceKind": "office-record",
+        "evidence": {
+          "source": "output/civic-voice/stabilization_fund_c110.json",
+          "statementId": "STMT-110-stabilization_fund-001",
+          "initiativeId": "INIT-001",
+          "topic": "Month-nine disbursement"
+        }
+      }
+    ],
+    "officeRecords": [
+      {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "council_d1",
+        "statementId": "STMT-110-council_d1-001",
+        "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+        "topic": "West Oakland Stabilization Fund",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/council_d1_c110.json",
+        "holderPopid": "POP-00501",
+        "speakerName": "Denise Carter"
+      },
+      {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "mayor_gavel",
+        "statementId": "STMT-110-mayor_gavel-001",
+        "quote": "Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.",
+        "topic": "West Oakland Stabilization Fund Month-Nine Disbursement",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/mayor_gavel_c110.json",
+        "holderPopid": "POP-00034",
+        "speakerName": "Avery Santana"
+      },
+      {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "mayor_open",
+        "statementId": "STMT-110-mayor_open-002",
+        "quote": "Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.",
+        "topic": "West Oakland Stabilization Fund — Month-Nine Disbursement",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/mayor_open_c110.json",
+        "holderPopid": "POP-00034",
+        "speakerName": "Avery Santana"
+      },
+      {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "okoro",
+        "statementId": "STMT-110-okoro-001",
+        "quote": "Nine months in, the Fund's design is holding—targeted relief that flows to tenants before displacement does.",
+        "topic": "West Oakland Stabilization Fund — Month-Nine Disbursement",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/okoro_c110.json",
+        "holderPopid": "POP-00037",
+        "speakerName": "Brenda Okoro"
+      },
+      {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "stabilization_fund",
+        "statementId": "STMT-110-stabilization_fund-001",
+        "quote": "Seventy-nine households stabilized means seventy-nine Oakland families with checks in hand before the displacement notices arrive—every dollar moving with compliance that passes the Finance Committee's scrutiny.",
+        "topic": "Month-nine disbursement",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/stabilization_fund_c110.json",
+        "holderPopid": "POP-00790",
+        "speakerName": "Marcus Webb"
+      }
+    ]
+  },
+  "reporter": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "kind": "initiative",
+      "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "hood": "West Oakland",
+      "popids": [],
+      "citizens": []
+    },
+    "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "carmen-delaine",
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "domain": "civic-ledger"
+    },
+    "pulse": {
+      "className": "civic-ledger",
+      "score": 55,
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hood": "West Oakland",
+      "source": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "West Oakland Stabilization Fund — budget $28M; vote requirement 6-3; voted Cycle 78; outcome PASSED [Initiative_Tracker]",
+        "West Oakland Stabilization Fund vote record — Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely) [Initiative_Tracker]",
+        "West Oakland Stabilization Fund — proposed by Avery Santana [Initiative_Tracker]",
+        "West Oakland Stabilization Fund — mayoral action: signed, Cycle 78 [Initiative_Tracker]",
+        "West Oakland Stabilization Fund — implementation phase disbursement-active; neighborhoods West Oakland; policy domain economic [Initiative_Tracker]",
+        "West Oakland Stabilization Fund — budget total $28,000,000; remaining $23,000,000; last disbursement Cycle 110 [Initiative_Tracker]",
+        "West Oakland Stabilization Fund — next scheduled action: Month-ten disbursement review, Cycle 111 [Initiative_Tracker]",
+        "West Oakland Stabilization Fund milestone — C109: month-eight tranche $400,000 released in West Oakland (2 household grants, $81,188). [Initiative_Tracker]",
+        "West Oakland Stabilization Fund milestone — C110: Month-nine disbursement $400K approved; 23-day avg processing time achieved [Initiative_Tracker]",
+        "Downtown Economic Revitalization — status proposed, phase legislation-filed, budget $15M [Initiative_Tracker]",
+        "Commercial Stabilization for Grand Lake — status proposed, phase announced, budget $2.5M [Initiative_Tracker]",
+        "West Oakland Tenant Defense Fund — status proposed, phase announced, budget $4.2M [Initiative_Tracker]",
+        "Mayor — Avery Santana — approval 69 — active [Civic_Office_Ledger]",
+        "District Attorney — Clarissa Dane — approval 65 — active [Civic_Office_Ledger]",
+        "Public Defender — Caleb Reyes — approval 65 — active [Civic_Office_Ledger]",
+        "City Council District 1 — Denise Carter — approval 62 — active [Civic_Office_Ledger]",
+        "City Council District 2 — Leonard Tran — approval 66 — active [Civic_Office_Ledger]",
+        "The city treasury opened this cycle at $100M [City_Treasury]",
+        "City treasury this cycle took in $5.2M: $5M the weekly budget allocation, $500 1 ticket, $153,351 court money on 34 cleared charges [City_Treasury]",
+        "City treasury balance at the close: $105.2M (from $0) [City_Treasury]"
+      ],
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
+      ]
+    },
+    "candidates": [
+      {
+        "score": 55,
+        "kind": "initiative",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "hood": "West Oakland",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 28
+      },
+      {
+        "score": 55,
+        "kind": "vote",
+        "label": "West Oakland Stabilization Fund | Month-nine disbursement review C110",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 29
+      },
+      {
+        "score": 55,
+        "kind": "initiative",
+        "label": "Oakland Alternative Response Initiative | Status passed | phase dispatch-live",
+        "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-002:dispatch-live",
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 30
+      },
+      {
+        "score": 55,
+        "kind": "vote",
+        "label": "Oakland Alternative Response Initiative | Quarterly outcome report C112",
+        "ref": "Initiative_Tracker (InitiativeID INIT-002); storyline INIT-002:dispatch-live",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 31
+      },
+      {
+        "score": 55,
+        "kind": "initiative",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Status proposed | phase design-phase",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-003:design-phase",
+        "hood": "Fruitvale",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 32
+      },
+      {
+        "score": 55,
+        "kind": "vote",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Preliminary schematics review C111",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003); storyline INIT-003:design-phase",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 33
+      }
+    ],
+    "pointers": [
+      "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+      "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+      "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-002:dispatch-live",
+      "Initiative_Tracker (InitiativeID INIT-002); storyline INIT-002:dispatch-live",
+      "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-003:design-phase",
+      "Initiative_Tracker (InitiativeID INIT-003); storyline INIT-003:design-phase"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "text": "I'm digging into the West Oakland Stabilization Fund disbursements to see where the money is landing and how it's impacting the neighborhood. The fund's been active for nine months, and while the numbers show progress, I want to understand the real-world effects.",
+    "plan": {
+      "chase": "I'm digging into the West Oakland Stabilization Fund disbursements to see where the money is landing and how it's impacting the neighborhood. The fund's been active for nine months, and while the numbers show progress, I want to understand the real-world effects.",
+      "focus": "Tracking the flow and impact of the West Oakland Stabilization Fund disbursements.",
+      "why": "The fund's disbursements are making waves in the community, but there's a gap in understanding how effectively the money is being used and who it's reaching.",
+      "checks": [
+        "Verify the $400,000 disbursement in Cycle 110.",
+        "Confirm the 23-day average processing time.",
+        "Assess the impact of the household grants."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00501",
+          "question": "How are the disbursements being prioritized in West Oakland?",
+          "basis": "F-4f1dc77ddd76"
+        },
+        {
+          "pop": "POP-00034",
+          "question": "What metrics are being used to measure the success of the disbursements?",
+          "basis": "F-9013d0e1f04d"
+        },
+        {
+          "pop": "POP-00037",
+          "question": "What oversight mechanisms are in place to ensure transparency?",
+          "basis": "F-1ed4626872da"
+        }
+      ],
+      "interpretation": "The fund seems to be moving money efficiently, but the real test is whether it's stabilizing the community as intended.",
+      "unverifiedLead": [
+        "Are there any delays in disbursement processing not reflected in the official records?",
+        "How are recipients selected for household grants?"
+      ],
+      "closeQuestion": "Is the West Oakland Stabilization Fund achieving its goal of keeping neighbors in their neighborhoods?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): advance to preliminary schematics with community oversight provisions intact — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): filed legislative language with City Clerk — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved accelerated cohort placement with East Oakland priority — \"150 apprentices placed by spring — that's the target, and we're accelerating to hit it.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): independent oversight maintained; soil test verification proceeding — \"Independent oversight isn't bureaucracy — it's how we build trust while we build the future.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 102,
+  "ranAt": "2026-10-05T11:15:44.386Z"
+}

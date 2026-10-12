@@ -26,7 +26,8 @@
     "bylineContract": "bylineCandidates is a WHO-assist HINT — one name + POPID per lane, usage-rotated off the Bay_Tribune_Oakland roster. The desk still assigns; no angle, no story, no subject rides here (engine.76 W5h2 locked rule).",
     "notes": [
       "output/neighborhood_texture_c109.md not present at build time (produced at Step 5.5) — hood refs are forward pointers",
-      "4 Storyline_Ledger thread(s) carried no known desk — routed to civic"
+      "4 Storyline_Ledger thread(s) carried no known desk — routed to civic",
+      "engine.270 activation 2026-09-28: storylines + storylineRegistry added to the C109 signal; lanes and refs untouched"
     ]
   },
   "lanes": {
@@ -930,716 +931,6 @@
       }
     ]
   },
-  "openThreads": {
-    "civic": [
-      {
-        "kind": "thread",
-        "slug": "west-oakland-elio-perez-initiative",
-        "ref": "Storyline_Ledger (StorylineId west-oakland-elio-perez-initiative)",
-        "label": "west-oakland-elio-perez-initiative | C104→C108 | 9 article(s) | advanced 5, opened 4",
-        "lastCycle": 108,
-        "articles": 9,
-        "hood": "West Oakland",
-        "popids": [
-          "POP-00201",
-          "POP-00722",
-          "POP-00794",
-          "POP-00961",
-          "POP-00176"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "city-eleanor-rivera-beat-transit",
-        "ref": "Storyline_Ledger (StorylineId city-eleanor-rivera-beat-transit)",
-        "label": "city-eleanor-rivera-beat-transit | C106→C108 | 5 article(s) | advanced 2, opened 3",
-        "lastCycle": 108,
-        "articles": 5,
-        "popids": [
-          "POP-00617",
-          "POP-00218",
-          "POP-00280",
-          "POP-00338",
-          "POP-01039"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "rockridge-mei-wong-beat-schools",
-        "ref": "Storyline_Ledger (StorylineId rockridge-mei-wong-beat-schools)",
-        "label": "rockridge-mei-wong-beat-schools | C106→C108 | 4 article(s) | advanced 2, opened 2",
-        "lastCycle": 108,
-        "articles": 4,
-        "hood": "Rockridge,KONO",
-        "popids": [
-          "POP-01036",
-          "POP-00743",
-          "POP-00287",
-          "POP-00742",
-          "POP-00827",
-          "POP-01018"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "chinatown-yu-zen-beat-health",
-        "ref": "Storyline_Ledger (StorylineId chinatown-yu-zen-beat-health)",
-        "label": "chinatown-yu-zen-beat-health | C106→C108 | 4 article(s) | advanced 1, opened 3",
-        "lastCycle": 108,
-        "articles": 4,
-        "hood": "Chinatown",
-        "popids": [
-          "POP-00194",
-          "POP-00801",
-          "POP-00449",
-          "POP-00228",
-          "POP-01041"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "city-rick-walker-anomaly",
-        "ref": "Storyline_Ledger (StorylineId city-rick-walker-anomaly)",
-        "label": "city-rick-walker-anomaly | C107→C108 | 3 article(s) | advanced 1, opened 2",
-        "lastCycle": 108,
-        "articles": 3,
-        "popids": [
-          "POP-00198",
-          "POP-00170",
-          "POP-00201",
-          "POP-00210"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "city-tyrie-groin-beat-weather",
-        "ref": "Storyline_Ledger (StorylineId city-tyrie-groin-beat-weather)",
-        "label": "city-tyrie-groin-beat-weather | C108→C108 | 2 article(s) | opened 2",
-        "lastCycle": 108,
-        "articles": 2,
-        "popids": [
-          "POP-00254",
-          "POP-00241",
-          "POP-00170",
-          "POP-00198"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "jack-london-belle-lopez-undocked",
-        "ref": "Storyline_Ledger (StorylineId jack-london-belle-lopez-undocked)",
-        "label": "jack-london-belle-lopez-undocked | C108→C108 | 2 article(s) | opened 2",
-        "lastCycle": 108,
-        "articles": 2,
-        "hood": "Jack London",
-        "popids": [
-          "POP-00300",
-          "POP-00273",
-          "POP-00642",
-          "POP-00643"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "san-antonio-marin-tao-beat-trends",
-        "ref": "Storyline_Ledger (StorylineId san-antonio-marin-tao-beat-trends)",
-        "label": "san-antonio-marin-tao-beat-trends | C108→C108 | 2 article(s) | opened 2",
-        "lastCycle": 108,
-        "articles": 2,
-        "hood": "San Antonio",
-        "popids": [
-          "POP-00537",
-          "POP-00769",
-          "POP-00632",
-          "POP-00796"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "rockridge-gloria-liu-beat-schools",
-        "ref": "Storyline_Ledger (StorylineId rockridge-gloria-liu-beat-schools)",
-        "label": "rockridge-gloria-liu-beat-schools | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "hood": "Rockridge",
-        "popids": [
-          "POP-00827",
-          "POP-01036",
-          "POP-01018",
-          "POP-00742"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "west-oakland-daniel-cloak-initiative",
-        "ref": "Storyline_Ledger (StorylineId west-oakland-daniel-cloak-initiative)",
-        "label": "west-oakland-daniel-cloak-initiative | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "hood": "West Oakland",
-        "popids": [
-          "POP-00722",
-          "POP-00794",
-          "POP-00176",
-          "POP-00961"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "fruitvale-rick-walker-anomaly",
-        "ref": "Storyline_Ledger (StorylineId fruitvale-rick-walker-anomaly)",
-        "label": "fruitvale-rick-walker-anomaly | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "hood": "Fruitvale",
-        "popids": [
-          "POP-00198",
-          "POP-00953",
-          "POP-00212"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "san-antonio-dank-abara-beat-safety",
-        "ref": "Storyline_Ledger (StorylineId san-antonio-dank-abara-beat-safety)",
-        "label": "san-antonio-dank-abara-beat-safety | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "hood": "San Antonio",
-        "popids": [
-          "POP-00796",
-          "POP-01054",
-          "POP-00170"
-        ]
-      }
-    ],
-    "sports": [
-      {
-        "kind": "thread",
-        "slug": "baylight-district-vinnie-keane-prospect-callup",
-        "ref": "Storyline_Ledger (StorylineId baylight-district-vinnie-keane-prospect-callup)",
-        "label": "baylight-district-vinnie-keane-prospect-callup | C104→C108 | 10 article(s) | advanced 6, opened 4",
-        "lastCycle": 108,
-        "articles": 10,
-        "hood": "Baylight District,Fruitvale",
-        "popids": [
-          "POP-00001",
-          "POP-00050",
-          "POP-00170",
-          "POP-00018",
-          "POP-00003",
-          "POP-00019",
-          "POP-01024",
-          "POP-00198",
-          "POP-00201",
-          "POP-00033",
-          "POP-00597",
-          "POP-00644",
-          "POP-01078",
-          "POP-00598",
-          "POP-00021"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "downtown-wilson-shepard-beat-oaks-ground",
-        "ref": "Storyline_Ledger (StorylineId downtown-wilson-shepard-beat-oaks-ground)",
-        "label": "downtown-wilson-shepard-beat-oaks-ground | C107→C108 | 4 article(s) | advanced 2, opened 2",
-        "lastCycle": 108,
-        "articles": 4,
-        "hood": "Downtown,Jack London",
-        "popids": [
-          "POP-01022",
-          "POP-01023",
-          "POP-00212",
-          "POP-00224",
-          "POP-01027",
-          "POP-00273"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "rockridge-danny-horn-sports-analytics",
-        "ref": "Storyline_Ledger (StorylineId rockridge-danny-horn-sports-analytics)",
-        "label": "rockridge-danny-horn-sports-analytics | C108→C108 | 2 article(s) | opened 2",
-        "lastCycle": 108,
-        "articles": 2,
-        "hood": "Rockridge",
-        "popids": [
-          "POP-00528",
-          "POP-00025",
-          "POP-00022",
-          "POP-00527"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "downtown-john-ellis-injury-load",
-        "ref": "Storyline_Ledger (StorylineId downtown-john-ellis-injury-load)",
-        "label": "downtown-john-ellis-injury-load | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "hood": "Downtown",
-        "popids": [
-          "POP-00033",
-          "POP-01078",
-          "POP-00597",
-          "POP-00212"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "jack-london-wilson-shepard-beat-oaks-beat",
-        "ref": "Storyline_Ledger (StorylineId jack-london-wilson-shepard-beat-oaks-beat)",
-        "label": "jack-london-wilson-shepard-beat-oaks-beat | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "hood": "Jack London",
-        "popids": [
-          "POP-01022",
-          "POP-01023",
-          "POP-01027",
-          "POP-00273"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "jack-london-darrin-davis-long-view-signal",
-        "ref": "Storyline_Ledger (StorylineId jack-london-darrin-davis-long-view-signal)",
-        "label": "jack-london-darrin-davis-long-view-signal | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "hood": "Jack London",
-        "popids": [
-          "POP-00021",
-          "POP-00598",
-          "POP-00001"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "jack-london-wilson-shepard-beat-oaks-ground",
-        "ref": "Storyline_Ledger (StorylineId jack-london-wilson-shepard-beat-oaks-ground)",
-        "label": "jack-london-wilson-shepard-beat-oaks-ground | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "hood": "Jack London",
-        "popids": [
-          "POP-01022",
-          "POP-01023",
-          "POP-01027",
-          "POP-00273"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "eastlake-desmond-morton-win-streak",
-        "ref": "Storyline_Ledger (StorylineId eastlake-desmond-morton-win-streak)",
-        "label": "eastlake-desmond-morton-win-streak | C107→C107 | 2 article(s) | opened 2",
-        "lastCycle": 107,
-        "articles": 2,
-        "hood": "Eastlake",
-        "popids": [
-          "POP-00533",
-          "POP-00052",
-          "POP-00598",
-          "POP-00051"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "downtown-jessie-hess-beat-oaks-beat",
-        "ref": "Storyline_Ledger (StorylineId downtown-jessie-hess-beat-oaks-beat)",
-        "label": "downtown-jessie-hess-beat-oaks-beat | C107→C107 | 2 article(s) | opened 2",
-        "lastCycle": 107,
-        "articles": 2,
-        "hood": "Downtown",
-        "popids": [
-          "POP-00212",
-          "POP-00224"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "eastlake-travis-coles-sideline-signal",
-        "ref": "Storyline_Ledger (StorylineId eastlake-travis-coles-sideline-signal)",
-        "label": "eastlake-travis-coles-sideline-signal | C107→C107 | 2 article(s) | opened 2",
-        "lastCycle": 107,
-        "articles": 2,
-        "hood": "Eastlake",
-        "popids": [
-          "POP-00533",
-          "POP-00598",
-          "POP-00051",
-          "POP-00052"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "fruitvale-john-ellis-sports-analytics",
-        "ref": "Storyline_Ledger (StorylineId fruitvale-john-ellis-sports-analytics)",
-        "label": "fruitvale-john-ellis-sports-analytics | C107→C107 | 1 article(s) | opened 1",
-        "lastCycle": 107,
-        "articles": 1,
-        "hood": "Fruitvale",
-        "popids": [
-          "POP-00033",
-          "POP-00597",
-          "POP-00198",
-          "POP-00644"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "glenview-desmond-morton-long-view-signal",
-        "ref": "Storyline_Ledger (StorylineId glenview-desmond-morton-long-view-signal)",
-        "label": "glenview-desmond-morton-long-view-signal | C107→C107 | 1 article(s) | opened 1",
-        "lastCycle": 107,
-        "articles": 1,
-        "hood": "Glenview",
-        "popids": [
-          "POP-00051",
-          "POP-00003",
-          "POP-01087",
-          "POP-01089"
-        ]
-      }
-    ],
-    "culture": [
-      {
-        "kind": "thread",
-        "slug": "lake-merritt-vanessa-treary-named-restaurant",
-        "ref": "Storyline_Ledger (StorylineId lake-merritt-vanessa-treary-named-restaurant)",
-        "label": "lake-merritt-vanessa-treary-named-restaurant | C105→C108 | 5 article(s) | advanced 4, opened 1",
-        "lastCycle": 108,
-        "articles": 5,
-        "hood": "Lake Merritt,Temescal",
-        "popids": [
-          "POP-00781",
-          "POP-00783",
-          "POP-01045",
-          "POP-00135",
-          "POP-00916"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "downtown-tao-lee-beat-faith",
-        "ref": "Storyline_Ledger (StorylineId downtown-tao-lee-beat-faith)",
-        "label": "downtown-tao-lee-beat-faith | C107→C108 | 3 article(s) | advanced 1, opened 2",
-        "lastCycle": 108,
-        "articles": 3,
-        "hood": "Downtown,Montclair",
-        "popids": [
-          "POP-00764",
-          "POP-00180",
-          "POP-00753"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "jack-london-tomas-renteria-story-signal",
-        "ref": "Storyline_Ledger (StorylineId jack-london-tomas-renteria-story-signal)",
-        "label": "jack-london-tomas-renteria-story-signal | C106→C108 | 2 article(s) | advanced 1, opened 1",
-        "lastCycle": 108,
-        "articles": 2,
-        "hood": "Jack London,Fruitvale",
-        "popids": [
-          "POP-00744",
-          "POP-00878",
-          "POP-00960",
-          "POP-00004"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "rockridge-tara-ellison-beat-arts",
-        "ref": "Storyline_Ledger (StorylineId rockridge-tara-ellison-beat-arts)",
-        "label": "rockridge-tara-ellison-beat-arts | C108→C108 | 2 article(s) | opened 2",
-        "lastCycle": 108,
-        "articles": 2,
-        "hood": "Rockridge",
-        "popids": [
-          "POP-00546"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "montclair-eunice-marston-beat-faith",
-        "ref": "Storyline_Ledger (StorylineId montclair-eunice-marston-beat-faith)",
-        "label": "montclair-eunice-marston-beat-faith | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "hood": "Montclair",
-        "popids": [
-          "POP-00753"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "fruitvale-lucia-polito-beat-neighborhood",
-        "ref": "Storyline_Ledger (StorylineId fruitvale-lucia-polito-beat-neighborhood)",
-        "label": "fruitvale-lucia-polito-beat-neighborhood | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "hood": "Fruitvale",
-        "popids": [
-          "POP-00004",
-          "POP-00198",
-          "POP-00644",
-          "POP-00744"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "temescal-vanessa-treary-hood-kitchens",
-        "ref": "Storyline_Ledger (StorylineId temescal-vanessa-treary-hood-kitchens)",
-        "label": "temescal-vanessa-treary-hood-kitchens | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "hood": "Temescal",
-        "popids": [
-          "POP-00781",
-          "POP-01045",
-          "POP-00916",
-          "POP-00948"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "east-oakland-marcus-whitfield-beat-neighborhood",
-        "ref": "Storyline_Ledger (StorylineId east-oakland-marcus-whitfield-beat-neighborhood)",
-        "label": "east-oakland-marcus-whitfield-beat-neighborhood | C107→C107 | 1 article(s) | opened 1",
-        "lastCycle": 107,
-        "articles": 1,
-        "hood": "East Oakland",
-        "popids": [
-          "POP-00532",
-          "POP-01047",
-          "POP-01055",
-          "POP-00119"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "rockridge-mimmie-carlisle-hood-kitchens",
-        "ref": "Storyline_Ledger (StorylineId rockridge-mimmie-carlisle-hood-kitchens)",
-        "label": "rockridge-mimmie-carlisle-hood-kitchens | C107→C107 | 1 article(s) | opened 1",
-        "lastCycle": 107,
-        "articles": 1,
-        "hood": "Rockridge",
-        "popids": [
-          "POP-00682",
-          "POP-00721",
-          "POP-00905",
-          "POP-00210"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "chinatown-kenji-tanaka-beat-faith",
-        "ref": "Storyline_Ledger (StorylineId chinatown-kenji-tanaka-beat-faith)",
-        "label": "chinatown-kenji-tanaka-beat-faith | C106→C106 | 2 article(s) | opened 2",
-        "lastCycle": 106,
-        "articles": 2,
-        "hood": "Chinatown",
-        "popids": [
-          "POP-00763",
-          "POP-00759"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "lake-merritt-vanessa-treary-quiet-nightlife",
-        "ref": "Storyline_Ledger (StorylineId lake-merritt-vanessa-treary-quiet-nightlife)",
-        "label": "lake-merritt-vanessa-treary-quiet-nightlife | C106→C106 | 2 article(s) | opened 2",
-        "lastCycle": 106,
-        "articles": 2,
-        "hood": "Lake Merritt",
-        "popids": [
-          "POP-00781",
-          "POP-00783",
-          "POP-01045",
-          "POP-00135"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "lake-merritt-yuki-ji-quiet-nightlife",
-        "ref": "Storyline_Ledger (StorylineId lake-merritt-yuki-ji-quiet-nightlife)",
-        "label": "lake-merritt-yuki-ji-quiet-nightlife | C106→C106 | 1 article(s) | opened 1",
-        "lastCycle": 106,
-        "articles": 1,
-        "hood": "Lake Merritt",
-        "popids": [
-          "POP-00783",
-          "POP-01045",
-          "POP-00135"
-        ]
-      }
-    ],
-    "business": [
-      {
-        "kind": "thread",
-        "slug": "baylight-district-kelvon-ochoa-story-signal",
-        "ref": "Storyline_Ledger (StorylineId baylight-district-kelvon-ochoa-story-signal)",
-        "label": "baylight-district-kelvon-ochoa-story-signal | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "popids": [
-          "POP-00134",
-          "POP-00174",
-          "POP-00481"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "baylight-district-kelvon-ochoa-hood-businesses",
-        "ref": "Storyline_Ledger (StorylineId baylight-district-kelvon-ochoa-hood-businesses)",
-        "label": "baylight-district-kelvon-ochoa-hood-businesses | C108→C108 | 1 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 1,
-        "hood": "Baylight District",
-        "popids": [
-          "POP-00481",
-          "POP-00134",
-          "POP-00174"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "city-civis-systems-recalibration",
-        "ref": "Storyline_Ledger (StorylineId city-civis-systems-recalibration)",
-        "label": "city-civis-systems-recalibration | C108→C108 | 0 article(s) | opened 1",
-        "lastCycle": 108,
-        "articles": 0,
-        "popids": [
-          "POP-00789"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "temescal-ariana-reyes-story-signal",
-        "ref": "Storyline_Ledger (StorylineId temescal-ariana-reyes-story-signal)",
-        "label": "temescal-ariana-reyes-story-signal | C107→C107 | 1 article(s) | opened 1",
-        "lastCycle": 107,
-        "articles": 1,
-        "hood": "Temescal",
-        "popids": [
-          "POP-00133",
-          "POP-00347",
-          "POP-00781",
-          "POP-00792"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "temescal-ariana-reyes-hood-businesses",
-        "ref": "Storyline_Ledger (StorylineId temescal-ariana-reyes-hood-businesses)",
-        "label": "temescal-ariana-reyes-hood-businesses | C107→C107 | 1 article(s) | opened 1",
-        "lastCycle": 107,
-        "articles": 1,
-        "hood": "Temescal",
-        "popids": [
-          "POP-00133",
-          "POP-00781",
-          "POP-00347"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "west-oakland-toby-lamont-story-signal",
-        "ref": "Storyline_Ledger (StorylineId west-oakland-toby-lamont-story-signal)",
-        "label": "west-oakland-toby-lamont-story-signal | C106→C106 | 1 article(s) | opened 1",
-        "lastCycle": 106,
-        "articles": 1,
-        "hood": "West Oakland",
-        "popids": [
-          "POP-00183"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "west-oakland-toby-lamont-hood-businesses",
-        "ref": "Storyline_Ledger (StorylineId west-oakland-toby-lamont-hood-businesses)",
-        "label": "west-oakland-toby-lamont-hood-businesses | C106→C106 | 1 article(s) | opened 1",
-        "lastCycle": 106,
-        "articles": 1,
-        "hood": "West Oakland",
-        "popids": [
-          "POP-00183",
-          "POP-00184",
-          "POP-00188"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "rockridge-depak-ying-story-signal",
-        "ref": "Storyline_Ledger (StorylineId rockridge-depak-ying-story-signal)",
-        "label": "rockridge-depak-ying-story-signal | C105→C105 | 1 article(s) | opened 1",
-        "lastCycle": 105,
-        "articles": 1,
-        "hood": "Rockridge",
-        "popids": [
-          "POP-00210"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "rockridge-depak-ying-hood-rising",
-        "ref": "Storyline_Ledger (StorylineId rockridge-depak-ying-hood-rising)",
-        "label": "rockridge-depak-ying-hood-rising | C105→C105 | 1 article(s) | advanced 1",
-        "lastCycle": 105,
-        "articles": 1,
-        "hood": "Rockridge",
-        "popids": [
-          "POP-00210"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "grand-lake-vinnie-keane-retail-decay",
-        "ref": "Storyline_Ledger (StorylineId grand-lake-vinnie-keane-retail-decay)",
-        "label": "grand-lake-vinnie-keane-retail-decay | C104→C104 | 1 article(s) | opened 1 | DORMANT — 5 cycle(s) since coverage",
-        "lastCycle": 104,
-        "articles": 1,
-        "hood": "Grand Lake",
-        "popids": [
-          "POP-00001",
-          "POP-00002",
-          "POP-00170"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "grand-lake-amara-keane-retail-decay",
-        "ref": "Storyline_Ledger (StorylineId grand-lake-amara-keane-retail-decay)",
-        "label": "grand-lake-amara-keane-retail-decay | C104→C104 | 1 article(s) | opened 1 | DORMANT — 5 cycle(s) since coverage",
-        "lastCycle": 104,
-        "articles": 1,
-        "hood": "Grand Lake",
-        "popids": [
-          "POP-00002",
-          "POP-00170",
-          "POP-00198"
-        ]
-      },
-      {
-        "kind": "thread",
-        "slug": "dimond-clarence-moody-hood-cooling",
-        "ref": "Storyline_Ledger (StorylineId dimond-clarence-moody-hood-cooling)",
-        "label": "dimond-clarence-moody-hood-cooling | C103→C103 | 1 article(s) | opened 1 | DORMANT — 6 cycle(s) since coverage",
-        "lastCycle": 103,
-        "articles": 1,
-        "hood": "Dimond",
-        "popids": [
-          "POP-00730",
-          "POP-00170",
-          "POP-00201"
-        ]
-      }
-    ]
-  },
   "bylineCandidates": {
     "civic": {
       "name": "Carmen Delaine",
@@ -1665,5 +956,340 @@
       "basis": "beat",
       "recentUse": 0
     }
-  }
+  },
+  "storylines": {
+    "civic": [
+      {
+        "id": "CRISIS-105-WESTOAKL",
+        "type": "crisis",
+        "name": "The West Oakland Crime Spike",
+        "stage": "resolved",
+        "status": "closed",
+        "startCycle": 105,
+        "endCycle": 109,
+        "age": 5,
+        "hoods": [
+          "West Oakland"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Event_Arc_Ledger (ArcId CRISIS-105-WESTOAKL)",
+        "hasLedgerRow": false
+      },
+      {
+        "id": "INIT-001:disbursement-active",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-001",
+        "name": "West Oakland Stabilization Fund — disbursement-active",
+        "stage": "disbursement-active",
+        "status": "open",
+        "startCycle": 109,
+        "endCycle": null,
+        "age": 1,
+        "firstSeen": true,
+        "hoods": [
+          "West Oakland"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-001)",
+        "hasLedgerRow": false
+      },
+      {
+        "id": "INIT-002:dispatch-live",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-002",
+        "name": "Oakland Alternative Response Initiative — dispatch-live",
+        "stage": "dispatch-live",
+        "status": "open",
+        "startCycle": 109,
+        "endCycle": null,
+        "age": 1,
+        "firstSeen": true,
+        "hoods": [
+          "West Oakland",
+          "Fruitvale",
+          "East Oakland"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-002)",
+        "hasLedgerRow": false
+      },
+      {
+        "id": "INIT-003:design-phase",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-003",
+        "name": "Fruitvale Transit Hub Phase II — Visioning — design-phase",
+        "stage": "design-phase",
+        "status": "open",
+        "startCycle": 109,
+        "endCycle": null,
+        "age": 1,
+        "firstSeen": true,
+        "hoods": [
+          "Fruitvale"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-003)",
+        "hasLedgerRow": false
+      },
+      {
+        "id": "INIT-005:operational",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-005",
+        "name": "Temescal Community Health Center — operational",
+        "stage": "operational",
+        "status": "open",
+        "startCycle": 109,
+        "endCycle": null,
+        "age": 1,
+        "firstSeen": true,
+        "hoods": [
+          "Temescal"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-005)",
+        "hasLedgerRow": false
+      },
+      {
+        "id": "INIT-006:construction-active",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-006",
+        "name": "Baylight District — Final Council Vote — construction-active",
+        "stage": "construction-active",
+        "status": "open",
+        "startCycle": 109,
+        "endCycle": null,
+        "age": 1,
+        "firstSeen": true,
+        "hoods": [
+          "Jack London",
+          "Downtown"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-006)",
+        "hasLedgerRow": false
+      },
+      {
+        "id": "INIT-007:operational",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-007",
+        "name": "Oakland Youth Apprenticeship Pipeline — operational",
+        "stage": "operational",
+        "status": "open",
+        "startCycle": 109,
+        "endCycle": null,
+        "age": 1,
+        "firstSeen": true,
+        "hoods": [
+          "West Oakland",
+          "East Oakland",
+          "Fruitvale"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-007)",
+        "hasLedgerRow": false
+      },
+      {
+        "id": "INIT-008:announced",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-008",
+        "name": "Downtown Economic Revitalization — announced",
+        "stage": "announced",
+        "status": "open",
+        "startCycle": 109,
+        "endCycle": null,
+        "age": 1,
+        "firstSeen": true,
+        "hoods": [
+          "Downtown"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-008)",
+        "hasLedgerRow": false
+      }
+    ],
+    "sports": [],
+    "culture": [],
+    "business": []
+  },
+  "storylineRegistry": [
+    {
+      "id": "CRISIS-105-WESTOAKL",
+      "type": "crisis",
+      "name": "The West Oakland Crime Spike",
+      "stage": "resolved",
+      "status": "closed",
+      "startCycle": 105,
+      "endCycle": 109,
+      "age": 5,
+      "hoods": [
+        "West Oakland"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Event_Arc_Ledger (ArcId CRISIS-105-WESTOAKL)",
+      "hasLedgerRow": false
+    },
+    {
+      "id": "INIT-001:disbursement-active",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-001",
+      "name": "West Oakland Stabilization Fund — disbursement-active",
+      "stage": "disbursement-active",
+      "status": "open",
+      "startCycle": 109,
+      "endCycle": null,
+      "age": 1,
+      "firstSeen": true,
+      "hoods": [
+        "West Oakland"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-001)",
+      "hasLedgerRow": false
+    },
+    {
+      "id": "INIT-002:dispatch-live",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-002",
+      "name": "Oakland Alternative Response Initiative — dispatch-live",
+      "stage": "dispatch-live",
+      "status": "open",
+      "startCycle": 109,
+      "endCycle": null,
+      "age": 1,
+      "firstSeen": true,
+      "hoods": [
+        "West Oakland",
+        "Fruitvale",
+        "East Oakland"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-002)",
+      "hasLedgerRow": false
+    },
+    {
+      "id": "INIT-003:design-phase",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-003",
+      "name": "Fruitvale Transit Hub Phase II — Visioning — design-phase",
+      "stage": "design-phase",
+      "status": "open",
+      "startCycle": 109,
+      "endCycle": null,
+      "age": 1,
+      "firstSeen": true,
+      "hoods": [
+        "Fruitvale"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-003)",
+      "hasLedgerRow": false
+    },
+    {
+      "id": "INIT-005:operational",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-005",
+      "name": "Temescal Community Health Center — operational",
+      "stage": "operational",
+      "status": "open",
+      "startCycle": 109,
+      "endCycle": null,
+      "age": 1,
+      "firstSeen": true,
+      "hoods": [
+        "Temescal"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-005)",
+      "hasLedgerRow": false
+    },
+    {
+      "id": "INIT-006:construction-active",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-006",
+      "name": "Baylight District — Final Council Vote — construction-active",
+      "stage": "construction-active",
+      "status": "open",
+      "startCycle": 109,
+      "endCycle": null,
+      "age": 1,
+      "firstSeen": true,
+      "hoods": [
+        "Jack London",
+        "Downtown"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-006)",
+      "hasLedgerRow": false
+    },
+    {
+      "id": "INIT-007:operational",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-007",
+      "name": "Oakland Youth Apprenticeship Pipeline — operational",
+      "stage": "operational",
+      "status": "open",
+      "startCycle": 109,
+      "endCycle": null,
+      "age": 1,
+      "firstSeen": true,
+      "hoods": [
+        "West Oakland",
+        "East Oakland",
+        "Fruitvale"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-007)",
+      "hasLedgerRow": false
+    },
+    {
+      "id": "INIT-008:announced",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-008",
+      "name": "Downtown Economic Revitalization — announced",
+      "stage": "announced",
+      "status": "open",
+      "startCycle": 109,
+      "endCycle": null,
+      "age": 1,
+      "firstSeen": true,
+      "hoods": [
+        "Downtown"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-008)",
+      "hasLedgerRow": false
+    }
+  ]
 }

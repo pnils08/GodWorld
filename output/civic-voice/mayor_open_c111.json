@@ -1,0 +1,88 @@
+{
+  "office": "mayor_open",
+  "cycle": 111,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle I'm advancing eight critical decisions: month-ten disbursement for the West Oakland Stabilization Fund, accelerating the Fruitvale Transit Hub to schematics completion, pushing Baylight remediation toward construction readiness, demanding first cohort placement from the Youth Apprenticeship Pipeline, calling council hearings for Downtown Economic Revitalization, and filing both the Grand Lake Commercial Stabilization and West Oakland Tenant Defense Fund legislation. The engine flags stagnation in four initiatives — I'm answering with action, not excuses.",
+  "statements": [
+    {
+      "statementId": "STMT-111-mayor_open-001",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund Month-Ten Disbursement",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "The families who qualified for this money six months ago shouldn't wait another day — month-ten disbursement is approved.",
+      "fullStatement": "West Oakland is hurting. The engine sees it, I see it walking those blocks — quieter storefronts, the weight of housing pressure on families who've been here for generations. The Stabilization Fund was built for exactly this moment. Month-ten disbursement of $400,000 is approved today. Deputy Mayor Okoro's team has cut processing time to 23 days, and I'm directing them to maintain that pace. This fund has $23.8 million remaining, and I intend to see it move. The criteria remain clear: long-tenure residents and businesses facing displacement pressure in West Oakland. Downtown has its own path — INIT-008, which I'm also advancing this cycle. But West Oakland gets its money today.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-mayor_open-002",
+      "type": "executive_order",
+      "topic": "Fruitvale Transit Hub Phase II Acceleration",
+      "initiative": "INIT-003",
+      "decision": "directed",
+      "quote": "Four cycles in visioning is four cycles too long — I'm directing Mayer & Associates to deliver final schematics by Cycle 114.",
+      "fullStatement": "The Fruitvale Transit Hub has sat in schematics review for four cycles. That's not community process — that's bureaucratic drift. I'm issuing a formal directive to Mayer & Associates: final schematics delivered to my office by Cycle 114, with community review sessions scheduled for C112-C113. The $230 million allocated for this project demands momentum, not meetings. Fruitvale's streets are busy and its mood is upbeat — I said that last cycle, and I meant it. But that energy needs infrastructure to match. This hub connects our Latino base to opportunity, to downtown, to the regional economy. The merchant covenants are executed. The design RFP is published. Now we build. Community oversight provisions remain in force — Brenda Okoro's office will coordinate the review sessions — but the timeline moves.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-mayor_open-003",
+      "type": "executive_order",
+      "topic": "Baylight District Remediation Completion Deadline",
+      "initiative": "INIT-006",
+      "decision": "directed",
+      "quote": "Soil tests are verified, remediation proceeds — I'm setting the construction milestone review for Cycle 115.",
+      "fullStatement": "Baylight is my signature, and I don't sign my name to delays. Phase II remediation proceeds with the independent oversight that earned this city's trust. Soil test verification is complete — that was the hurdle, and it's cleared. I'm directing the project team to complete remediation by Cycle 114, with construction milestone review scheduled for Cycle 115. The $2.1 billion we committed is already moving — jobs on site, contracts executed, the harbor waterfront transforming. Downtown and Jack London are flagged as declining this cycle. I see that. Baylight is the answer — not tomorrow, but now. The independent oversight isn't bureaucracy, as I've said before — it's how we build trust while we build the future. That trust is earned. The timeline accelerates.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-mayor_open-004",
+      "type": "executive_order",
+      "topic": "Oakland Youth Apprenticeship Pipeline Cohort Placement Mandate",
+      "initiative": "INIT-007",
+      "decision": "directed",
+      "quote": "150 apprentices by spring — that was the promise, and I'm demanding the first cohort placement report by Cycle 112.",
+      "fullStatement": "The Youth Apprenticeship Pipeline has been operational for four cycles without a single cohort placement report. That's unacceptable. I'm issuing a formal directive to the Workforce Development team: first cohort placement numbers delivered to my office by Cycle 112. The $12.5 million we allocated isn't for town halls — it's for jobs. Real apprentices in real training with real pathways to union careers. The public enrollment event in C107 established the pipeline. Now we fill it. I'm targeting 150 placements by spring, as I announced last cycle, and that target is non-negotiable. West Oakland, East Oakland, Fruitvale — these are the communities this pipeline serves. The engine flags stagnation. I'm answering with a deadline.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-mayor_open-005",
+      "type": "executive_order",
+      "topic": "Downtown Economic Revitalization Council Hearing Call",
+      "initiative": "INIT-008",
+      "decision": "directed",
+      "quote": "Downtown businesses have waited long enough — I'm calling an emergency Economic Development Committee hearing for Cycle 112.",
+      "fullStatement": "Last cycle I filed the Downtown Economic Revitalization ordinance with the City Clerk. $15 million in stabilization support for businesses watching their shelves gather dust. This cycle I'm escalating: I'm formally calling an emergency hearing of the Economic Development Committee for Cycle 112, with full Council vote targeted for Cycle 113. Downtown is flagged as visibly declining. The low-severity improvement signal isn't enough — we need intervention at scale. This isn't about replacing the West Oakland Stabilization Fund, which serves a different geography with different criteria. This is about Downtown's specific pain: the commercial corridor, the storefronts, the jobs. I filed the legislation. Now I'm demanding the hearing. Council President Vega will receive my formal request this afternoon.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-mayor_open-006",
+      "type": "executive_order",
+      "topic": "Commercial Stabilization for Grand Lake Legislation Filing",
+      "initiative": "INIT-009",
+      "decision": "filed",
+      "quote": "Grand Lake's quiet engine needs fuel — $2.5 million in stabilization funding is now before the Council.",
+      "fullStatement": "Last cycle I announced this fund. This cycle I'm filing it. The Commercial Stabilization for Grand Lake — $2.5 million to keep storefronts open, jobs local, and the neighborhood's momentum from pricing out the people who built it. Grand Lake is flagged as visibly declining this cycle: slipping mood, quieter storefronts, housing pressure building. I see it. The legislation is filed with the City Clerk today, with committee referral requested for Cycle 112. This mirrors the Downtown Economic Revitalization approach but scaled to Grand Lake's specific commercial corridor needs. The businesses here aren't asking for handouts — they're asking for stability while the city grows around them. That's a request this administration answers.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-mayor_open-007",
+      "type": "executive_order",
+      "topic": "West Oakland Tenant Defense Fund Legislation Filing",
+      "initiative": "INIT-010",
+      "decision": "filed",
+      "quote": "Displacement doesn't wait for process — $4.2 million for legal defense is filed and moving.",
+      "fullStatement": "The West Oakland Tenant Defense Fund is filed today — $4.2 million to give families facing eviction the legal representation they need to stay in their homes. This complements the Stabilization Fund's direct assistance with the legal infrastructure that prevents displacement before it starts. The legislation moves to committee referral for Cycle 112. West Oakland is hurting, as the engine flags and as I see walking those blocks. The Stabilization Fund addresses the economic pressure. This fund addresses the legal pressure. Together they're the shield and the sword — keeping people housed and fighting back when they're threatened. Brenda Okoro's housing unit will coordinate implementation once Council acts. The filing is the first step. The demand is sustained.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-mayor_open-008",
+      "type": "public_remark",
+      "topic": "Fruitvale Success Recognition and Dimond Stability",
+      "initiative": null,
+      "decision": "acknowledged",
+      "quote": "Fruitvale's busy streets and upbeat mood happened because this community organizes — and Dimond's steady strength is Oakland working.",
+      "fullStatement": "The engine gives me two neighborhood signals this cycle. Fruitvale: mood clearly upbeat, street trade busy. I claimed that success last cycle, and I claim it again — because it's real. That energy comes from community organizing, from advocacy, from the infrastructure investments we've made and the ones I'm accelerating today. The Transit Hub will amplify what's already working. Dimond: mood mildly positive, street trade steady, crime low. This is Oakland functioning — not crisis, not celebration, just people living their lives in a city that works. I don't take that for granted. The Dimond Family Block Party this cycle, the steady hum of Romano's and the neighborhood's rhythm — that's the baseline we fight to protect. My agenda this cycle answers for both: acceleration where momentum builds, stability where calm holds.",
+      "trackerUpdates": {}
+    }
+  ]
+}

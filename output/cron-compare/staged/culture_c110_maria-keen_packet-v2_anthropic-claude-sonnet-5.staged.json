@@ -1,0 +1,43 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "110",
+  "persona": "maria-keen",
+  "byline": "Maria Keen",
+  "bylinePopid": "POP-00013",
+  "article": "output/cron-compare/staged/culture_c110_maria-keen_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Melton Neilon",
+        "role": "quoted-source",
+        "popid": "POP-00170"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Dimond"
+    ],
+    "claims": [
+      {
+        "claim": "Honestly, Dimond is still a bit of a mystery to me, I mean, I've heard it's a great neighborhood with a lot of heart, but I don't really know much about it beyond that. As a baker in Temescal, I tend to focus on my own community, but I'm always interested in what's going on in other parts of the city. I think community programs can really make a difference in people's lives, and I'd love to learn more about what's happening in Dimond.",
+        "sourceRef": "citizenVoice PRESS Melton Neilon"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-a2aa2d0e6649",
+    "draftSha256": "a9e8ad8beb7733261205a13d6d5f8615571d1775cbdffcddbdfd9ca76a01199b",
+    "verdict": "output/cron-compare/culture_c110_maria-keen_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-10-09T23:17:17.151Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.681Z"
+}

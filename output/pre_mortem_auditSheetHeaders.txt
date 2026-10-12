@@ -1,0 +1,67 @@
+◇ injected env (31) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]
+
+╔════════════════════════════════════════════════════════════════════╗
+║   Sheet Header Alignment Audit                                    ║
+╚════════════════════════════════════════════════════════════════════╝
+
+Connecting to Google Sheets...
+Connected: Simulation_Narrative
+
+═══════════════════════════════════════════════════════════════
+RESULTS
+═══════════════════════════════════════════════════════════════
+
+✓ Event_Arc_Ledger (v3LedgerWriter.js (deleted engine.142 S419; Event_Arc_Ledger frozen S313, schema kept for the header audit) v3.3)
+  Writer: 19 cols | Sheet: 32 cols | Rows: 654
+  +13 extra: Escalate, ResolutionType, ResolutionCycle, PrevPhase, AutoAdvance, PhaseStartCycle, PhaseDuration, NextPhaseTransition, TensionDecay, MakerHold, ForceResolve, ResolutionReason, Age
+
+✗ WorldEvents_V3_Ledger (recordWorldEventsv3.js v3.5)
+  Writer: 7 cols | Sheet: 7 cols | Rows: 387
+  ⚠  Sheet has 7 cols, writer outputs 29
+
+✗ Story_Seed_Deck (saveV3Seeds.js v3.4)
+  Writer: 8 cols | Sheet: 18 cols | Rows: 230
+  +10 extra: Citizens, CitizenEvents, Businesses, OtherEntities, Magnitude, Trend, CycleStamp, SuggestedJournalist, SuggestedAngle, MatchConfidence
+  ⚠  Col 0: "Cycle" should be "Timestamp"
+  ⚠  Col 1: "SeedID" should be "Cycle"
+  ⚠  Col 2: "Desk" should be "SeedID"
+  ⚠  Col 3: "Class" should be "SeedType"
+  ⚠  Col 6: "What" should be "Priority"
+  ⚠  Col 7: "Why" should be "SeedText"
+
+✗ Story_Hook_Deck (v3StoryHookWriter.js v3.4)
+  Writer: 10 cols | Sheet: 14 cols | Rows: 1771
+  +4 extra: SuggestedJournalist, SuggestedAngle, VoiceGuidance, MatchConfidence
+  ⚠  Col 2: "HookId" should be "HookID"
+
+✓ Texture_Trigger_Log (v3TextureWriter.js v3.5)
+  Writer: 7 cols | Sheet: 12 cols | Rows: 740
+  +5 extra: Holiday, HolidayPriority, FirstFriday, CreationDay, SportsSeason
+
+✓ Neighborhood_Map (v3NeighborhoodWriter.js v3.5)
+  Writer: 15 cols | Sheet: 36 cols | Rows: 22
+  +21 extra: MigrationFlow, NeighborhoodTrajectory, HousingPressure, TrajectoryStartCycle, MedianIncome, MedianRent, TrajectoryMomentum, District, CoreSimRank, IncomeTier, BoomExposure, BoomIndex, EmployerCharacter, WealthMin, WealthMax, ChildAreas, WeatherZone, Adjacent, AttentionWeight, Scenes, RentShare
+
+✓ Domain_Tracker (v3DomainWriter.js v3.4)
+  Writer: 31 cols | Sheet: 31 cols | Rows: 66
+
+✓ Chicago_Feed (v3ChicagoWriter.js v2.5)
+  Writer: 22 cols | Sheet: 22 cols | Rows: 60
+
+✓ Cycle_Weather (recordCycleWeather.js v1.2)
+  Writer: 11 cols | Sheet: 11 cols | Rows: 32
+
+✓ Media_Ledger (recordMediaLedger.js v3.2)
+  Writer: 25 cols | Sheet: 25 cols | Rows: 103
+
+✓ Cycle_Packet (buildCyclePacket.js v3.7)
+  Writer: 3 cols | Sheet: 3 cols | Rows: 66
+
+? Handoff_Output (? )
+  Writer: ? cols | Sheet: ? cols | Rows: 0
+  ⚠  Sheet does not exist
+
+═══════════════════════════════════════════════════════════════
+SUMMARY: 8 aligned, 4 misaligned, 12 total
+═══════════════════════════════════════════════════════════════
+

@@ -1,0 +1,17 @@
+◇ injected env (31) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]
+draftContentRows — cycle 108 | backend openrouter | APPLY | Active=yes | sheet 1-0GNeCz…
+facts: 45 seeds, 22 hoods, weather=fog, holiday=none
+ledger profile: 28 thin pools, 2 fragment slots, 3 persistent no-draw pools, 6 telemetry cycles
+drafted: 8 candidates
+
+valid: 5 | invalid: 3 | dup: 0 | capped: 0 | hood-gate repaired: 0
+  INVALID the crowd hums with energy as they discuss the A's latest win [dead hood gate: hood=Citywide]
+  INVALID the Temescal Holiday Market draws a steady stream of visitors [source:prevEvening;evening:cityEvent,auth:auto | hood=Temescal]
+  INVALID the sound of live music spills out from the bars along Jack London Square [source:prevEvening;evening:nightlife,auth:auto | hood=Jack London]
+  ROW [line] civic.westOakland | the West Oakland Stabilization Fund brings a sense of cautious optimism to the streets | hood=West Oakland | source:civicNews,auth:auto
+  ROW [line] civic.fruitvale | the Fruitvale Transit Hub construction site buzzes with activity | hood=Fruitvale | source:civicNews,auth:auto
+  ROW [line] culture.lakeMerritt | the lantern parade winds its way around the lake, casting a warm glow | hood=Lake Merritt | source:communityLife,auth:auto
+  ROW [line] civic.rockridge | the Rockridge streets are bustling with shoppers and diners | hood=Rockridge | source:civicNews,auth:auto
+  ROW [line] culture.citywide | epiphany celebrations bring a sense of community across the city | (ungated) | source:faith,auth:auto
+
+wrote + verified 5 rows (Active=yes).

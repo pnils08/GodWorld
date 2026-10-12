@@ -1,0 +1,837 @@
+{
+  "version": "HEALTH-SLICE-4",
+  "empty": false,
+  "cycle": 110,
+  "kind": "beat-health",
+  "seat": {
+    "slug": "lila-mezran",
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "desk": "civic",
+    "domain": "health",
+    "builder": "buildHealthSlice.js"
+  },
+  "hood": "Chinatown",
+  "pulse": {
+    "className": "beat-health",
+    "score": 100,
+    "label": "Chinatown carries the most sick residents (145) | 6 named on the hospital and cause records",
+    "hood": "Chinatown",
+    "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C110 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+  },
+  "story": {
+    "kind": "beat-health",
+    "angle": "Chinatown carries the most sick residents (145) | 6 named on the hospital and cause records",
+    "label": "Chinatown carries the most sick residents (145) | 6 named on the hospital and cause records",
+    "hookLine": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 77 in hospital care citywide, 76 beds occupied; illness is up in Chinatown — Millicent Kumar and Daphne Stafford can speak for the block.",
+    "hood": "Chinatown",
+    "citizens": [
+      "Yu Zen (POP-00194)",
+      "Maurice Franklin (POP-00801)",
+      "Jackson Sift (POP-00190)",
+      "Ron Arenson (POP-00367)",
+      "Jessie Hess (POP-00212)",
+      "Jett Walker (POP-00230)",
+      "Millicent Kumar (POP-00812)",
+      "Daphne Stafford (POP-00816)"
+    ],
+    "popids": [
+      "POP-00194",
+      "POP-00801",
+      "POP-00190",
+      "POP-00367",
+      "POP-00212",
+      "POP-00230",
+      "POP-00812",
+      "POP-00816"
+    ],
+    "ref": "output/beats/Neighborhood_Demographics.jsonl Sick @C110 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+    "cycle": 110
+  },
+  "approach": "Health approach: this slice is the illness count by neighborhood, every resident named on the hospital and live cause records, the residents the cycle summary names under Health/Recovering, and the care trail — sick residents to admissions to who is in a bed, hood by hood, tracked and other residents apart. A person listed as living in a neighborhood where illness is up is a neighbour to quote about the block, not a patient — nothing on the record says they are sick. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00194",
+      "name": "Yu Zen",
+      "role": "Commercial Insurance Broker",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+      "why": "on Hospital_Ledger this cycle"
+    },
+    {
+      "popid": "POP-00801",
+      "name": "Maurice Franklin",
+      "role": "Drone Fleet Coordinator",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
+      "why": "on Hospital_Ledger this cycle"
+    },
+    {
+      "popid": "POP-00190",
+      "name": "Jackson Sift",
+      "role": "Ex-Offender Reentry Counselor",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Jackson Sift — Ex-Offender Reentry Counselor — West Oakland",
+      "why": "named in the cycle health record"
+    },
+    {
+      "popid": "POP-00367",
+      "name": "Ron Arenson",
+      "role": "Maintenance Tech",
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Ron Arenson — Maintenance Tech — Baylight District",
+      "why": "named in the cycle health record"
+    },
+    {
+      "popid": "POP-00212",
+      "name": "Jessie Hess",
+      "role": "Barista",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Jessie Hess — Barista — Downtown",
+      "why": "named in the cycle health record"
+    },
+    {
+      "popid": "POP-00230",
+      "name": "Jett Walker",
+      "role": "Plumber",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Jett Walker — Plumber — Rockridge",
+      "why": "named in the cycle health record"
+    },
+    {
+      "popid": "POP-00812",
+      "name": "Millicent Kumar",
+      "role": "Plumber",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Millicent Kumar — Plumber — Chinatown",
+      "why": "lives in Chinatown, where illness is up this cycle — a neighbour to quote, not a patient"
+    },
+    {
+      "popid": "POP-00816",
+      "name": "Daphne Stafford",
+      "role": "Home Health Aide",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Daphne Stafford — Home Health Aide — Chinatown",
+      "why": "lives in Chinatown, where illness is up this cycle — a neighbour to quote, not a patient"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Sick residents by neighborhood: Chinatown 145 (+3 vs C109), East Oakland 125 (+3 vs C109), Ivy Hill 122 (+3 vs C109), Fruitvale 121 (+2 vs C109), San Antonio 114 (-1 vs C109), Laurel 113 (-1 vs C109), Rockridge 110 (+2 vs C109), Grand Lake 109 (+1 vs C109) — 1,947 across 22 neighborhoods",
+      "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C110"
+    },
+    {
+      "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+      "src": "output/beats/Hospital_Ledger.jsonl POP-00194"
+    },
+    {
+      "text": "Maurice Franklin (Rockridge) — in hospital care, recovering, admitted C106 after severe seasonal flu",
+      "src": "output/beats/Hospital_Ledger.jsonl POP-00801"
+    },
+    {
+      "text": "The city illness rate stands at 4.5%, with 1 in hospital care at 1% of capacity.",
+      "src": "output/world_summary_c110.md \"## City State\""
+    },
+    {
+      "text": "Jackson Sift dealt with a seasonal health concern (West Oakland).",
+      "src": "output/world_summary_c110.md \"## Who Lived It ### Health\""
+    },
+    {
+      "text": "Ron Arenson recovered from a winter illness (Baylight District).",
+      "src": "output/world_summary_c110.md \"## Who Lived It ### Health\""
+    },
+    {
+      "text": "Jessie Hess finally shook the cold that had been hanging around (Downtown).",
+      "src": "output/world_summary_c110.md \"## Who Lived It ### Recovering\""
+    },
+    {
+      "text": "Jett Walker finally shook the cold that had been hanging around (Rockridge).",
+      "src": "output/world_summary_c110.md \"## Who Lived It ### Recovering\""
+    },
+    {
+      "text": "Citywide hospital this cycle: 38 admissions (0 tracked, 38 other residents); 77 in care at the close, 76 beds occupied",
+      "src": "output/beats/Care_Justice_Census.jsonl hospital @C110 city"
+    },
+    {
+      "text": "Chinatown: 145 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl hospital @C110 Chinatown"
+    },
+    {
+      "text": "East Oakland: 125 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl hospital @C110 East Oakland"
+    },
+    {
+      "text": "Rockridge: 110 sick residents → 2 admissions → 5 in care at the close (1 tracked, 4 other residents) → 4 beds occupied; tracked: Maurice Franklin",
+      "src": "output/beats/Care_Justice_Census.jsonl hospital @C110 Rockridge"
+    },
+    {
+      "text": "Adams Point: 90 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl hospital @C110 Adams Point"
+    },
+    {
+      "text": "Brooklyn: 79 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl hospital @C110 Brooklyn"
+    },
+    {
+      "text": "Chinatown: 145 sick of 2,185 residents, 6.6% — at or over the 6% watch bar",
+      "src": "output/beats/Neighborhood_Demographics.jsonl Sick/Students+Adults+Seniors @C110"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Chinatown carries the most sick residents (145) | 6 named on the hospital and cause records",
+    "hookLine": "Yu Zen is one of 6 residents on the record this cycle; Chinatown carries the most illness; 77 in hospital care citywide, 76 beds occupied; illness is up in Chinatown — Millicent Kumar and Daphne Stafford can speak for the block.",
+    "anchorFacts": [
+      "Sick residents by neighborhood: Chinatown 145 (+3 vs C109), East Oakland 125 (+3 vs C109), Ivy Hill 122 (+3 vs C109), Fruitvale 121 (+2 vs C109), San Antonio 114 (-1 vs C109), Laurel 113 (-1 vs C109), Rockridge 110 (+2 vs C109), Grand Lake 109 (+1 vs C109) — 1,947 across 22 neighborhoods",
+      "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+      "Maurice Franklin (Rockridge) — in hospital care, recovering, admitted C106 after severe seasonal flu",
+      "The city illness rate stands at 4.5%, with 1 in hospital care at 1% of capacity.",
+      "Jackson Sift dealt with a seasonal health concern (West Oakland).",
+      "Ron Arenson recovered from a winter illness (Baylight District).",
+      "Jessie Hess finally shook the cold that had been hanging around (Downtown).",
+      "Jett Walker finally shook the cold that had been hanging around (Rockridge).",
+      "Citywide hospital this cycle: 38 admissions (0 tracked, 38 other residents); 77 in care at the close, 76 beds occupied",
+      "Chinatown: 145 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+      "East Oakland: 125 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+      "Rockridge: 110 sick residents → 2 admissions → 5 in care at the close (1 tracked, 4 other residents) → 4 beds occupied; tracked: Maurice Franklin",
+      "Adams Point: 90 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "Brooklyn: 79 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "Chinatown: 145 sick of 2,185 residents, 6.6% — at or over the 6% watch bar"
+    ],
+    "evidence": [
+      {
+        "text": "Sick residents by neighborhood: Chinatown 145 (+3 vs C109), East Oakland 125 (+3 vs C109), Ivy Hill 122 (+3 vs C109), Fruitvale 121 (+2 vs C109), San Antonio 114 (-1 vs C109), Laurel 113 (-1 vs C109), Rockridge 110 (+2 vs C109), Grand Lake 109 (+1 vs C109) — 1,947 across 22 neighborhoods",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C110"
+      },
+      {
+        "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+        "src": "output/beats/Hospital_Ledger.jsonl POP-00194"
+      },
+      {
+        "text": "Maurice Franklin (Rockridge) — in hospital care, recovering, admitted C106 after severe seasonal flu",
+        "src": "output/beats/Hospital_Ledger.jsonl POP-00801"
+      },
+      {
+        "text": "The city illness rate stands at 4.5%, with 1 in hospital care at 1% of capacity.",
+        "src": "output/world_summary_c110.md \"## City State\""
+      },
+      {
+        "text": "Jackson Sift dealt with a seasonal health concern (West Oakland).",
+        "src": "output/world_summary_c110.md \"## Who Lived It ### Health\""
+      },
+      {
+        "text": "Ron Arenson recovered from a winter illness (Baylight District).",
+        "src": "output/world_summary_c110.md \"## Who Lived It ### Health\""
+      },
+      {
+        "text": "Jessie Hess finally shook the cold that had been hanging around (Downtown).",
+        "src": "output/world_summary_c110.md \"## Who Lived It ### Recovering\""
+      },
+      {
+        "text": "Jett Walker finally shook the cold that had been hanging around (Rockridge).",
+        "src": "output/world_summary_c110.md \"## Who Lived It ### Recovering\""
+      },
+      {
+        "text": "Citywide hospital this cycle: 38 admissions (0 tracked, 38 other residents); 77 in care at the close, 76 beds occupied",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C110 city"
+      },
+      {
+        "text": "Chinatown: 145 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C110 Chinatown"
+      },
+      {
+        "text": "East Oakland: 125 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C110 East Oakland"
+      },
+      {
+        "text": "Rockridge: 110 sick residents → 2 admissions → 5 in care at the close (1 tracked, 4 other residents) → 4 beds occupied; tracked: Maurice Franklin",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C110 Rockridge"
+      },
+      {
+        "text": "Adams Point: 90 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C110 Adams Point"
+      },
+      {
+        "text": "Brooklyn: 79 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl hospital @C110 Brooklyn"
+      },
+      {
+        "text": "Chinatown: 145 sick of 2,185 residents, 6.6% — at or over the 6% watch bar",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick/Students+Adults+Seniors @C110"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 109
+    },
+    "hooks": [
+      {
+        "text": "Illness rates in KONO up 13%. Public health concern? Investigation warranted.",
+        "angle": "public health coverage",
+        "domain": "HEALTH",
+        "hood": "KONO",
+        "priority": 3
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the waiting room, the walk to the clinic, what a household does when one person is sick, who covers the shift"
+  },
+  "byHood": [
+    {
+      "hood": "Chinatown",
+      "sick": 145,
+      "pop": 2185,
+      "share": 0.06636155606407322
+    },
+    {
+      "hood": "East Oakland",
+      "sick": 125,
+      "pop": 2321,
+      "share": 0.05385609651012495
+    },
+    {
+      "hood": "Ivy Hill",
+      "sick": 122,
+      "pop": 2066,
+      "share": 0.0590513068731849
+    },
+    {
+      "hood": "Fruitvale",
+      "sick": 121,
+      "pop": 2309,
+      "share": 0.052403637938501516
+    },
+    {
+      "hood": "San Antonio",
+      "sick": 114,
+      "pop": 2191,
+      "share": 0.05203103605659516
+    },
+    {
+      "hood": "Laurel",
+      "sick": 113,
+      "pop": 2186,
+      "share": 0.05169258920402562
+    },
+    {
+      "hood": "Rockridge",
+      "sick": 110,
+      "pop": 2181,
+      "share": 0.0504355800091701
+    },
+    {
+      "hood": "Grand Lake",
+      "sick": 109,
+      "pop": 2292,
+      "share": 0.047556719022687606
+    },
+    {
+      "hood": "Piedmont Ave",
+      "sick": 104,
+      "pop": 2151,
+      "share": 0.04834960483496048
+    },
+    {
+      "hood": "Temescal",
+      "sick": 102,
+      "pop": 2722,
+      "share": 0.03747244673034533
+    },
+    {
+      "hood": "Dimond",
+      "sick": 98,
+      "pop": 2140,
+      "share": 0.04579439252336449
+    },
+    {
+      "hood": "Eastlake",
+      "sick": 93,
+      "pop": 2227,
+      "share": 0.04176021553659632
+    },
+    {
+      "hood": "Glenview",
+      "sick": 93,
+      "pop": 2174,
+      "share": 0.042778288868445265
+    },
+    {
+      "hood": "West Oakland",
+      "sick": 91,
+      "pop": 2239,
+      "share": 0.04064314426083073
+    },
+    {
+      "hood": "Adams Point",
+      "sick": 90,
+      "pop": 2370,
+      "share": 0.0379746835443038
+    },
+    {
+      "hood": "Downtown",
+      "sick": 86,
+      "pop": 2751,
+      "share": 0.031261359505634315
+    },
+    {
+      "hood": "Brooklyn",
+      "sick": 79,
+      "pop": 2112,
+      "share": 0.03740530303030303
+    },
+    {
+      "hood": "Jack London",
+      "sick": 77,
+      "pop": 2544,
+      "share": 0.030267295597484277
+    },
+    {
+      "hood": "Uptown",
+      "sick": 24,
+      "pop": 628,
+      "share": 0.03821656050955414
+    },
+    {
+      "hood": "Lake Merritt",
+      "sick": 19,
+      "pop": 596,
+      "share": 0.031879194630872486
+    },
+    {
+      "hood": "KONO",
+      "sick": 18,
+      "pop": 530,
+      "share": 0.033962264150943396
+    },
+    {
+      "hood": "Baylight District",
+      "sick": 14,
+      "pop": 508,
+      "share": 0.027559055118110236
+    }
+  ],
+  "careTrail": {
+    "state": "ON_RECORD",
+    "city": {
+      "scope": "city",
+      "hood": null,
+      "complete": true,
+      "completeness": "complete",
+      "demand": null,
+      "intakes": 38,
+      "tracked": 0,
+      "other": 38,
+      "closing": 77,
+      "trackedOcc": 1,
+      "otherOcc": 76,
+      "beds": 76,
+      "exits": 0,
+      "names": []
+    },
+    "unallocated": {
+      "scope": "unallocated",
+      "hood": null,
+      "complete": true,
+      "completeness": "complete",
+      "demand": null,
+      "intakes": 0,
+      "tracked": 0,
+      "other": 0,
+      "closing": 0,
+      "trackedOcc": 0,
+      "otherOcc": 0,
+      "beds": 0,
+      "exits": 0,
+      "names": []
+    },
+    "hoods": [
+      {
+        "scope": "neighborhood",
+        "hood": "Chinatown",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 145,
+        "intakes": 3,
+        "tracked": 0,
+        "other": 3,
+        "closing": 6,
+        "trackedOcc": 0,
+        "otherOcc": 6,
+        "beds": 6,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "East Oakland",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 125,
+        "intakes": 3,
+        "tracked": 0,
+        "other": 3,
+        "closing": 6,
+        "trackedOcc": 0,
+        "otherOcc": 6,
+        "beds": 6,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Rockridge",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 110,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 5,
+        "trackedOcc": 1,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": [
+          "Maurice Franklin"
+        ]
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Adams Point",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 90,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Brooklyn",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 79,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Dimond",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 98,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Downtown",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 86,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Eastlake",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 93,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Fruitvale",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 121,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Glenview",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 93,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Grand Lake",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 109,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Ivy Hill",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 122,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Jack London",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 77,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Laurel",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 113,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Piedmont Ave",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 104,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "San Antonio",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 114,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Temescal",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 102,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "West Oakland",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 91,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": 4,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Baylight District",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 14,
+        "intakes": 0,
+        "tracked": 0,
+        "other": 0,
+        "closing": 0,
+        "trackedOcc": 0,
+        "otherOcc": 0,
+        "beds": 0,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "KONO",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 18,
+        "intakes": 0,
+        "tracked": 0,
+        "other": 0,
+        "closing": 0,
+        "trackedOcc": 0,
+        "otherOcc": 0,
+        "beds": 0,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Lake Merritt",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 19,
+        "intakes": 0,
+        "tracked": 0,
+        "other": 0,
+        "closing": 0,
+        "trackedOcc": 0,
+        "otherOcc": 0,
+        "beds": 0,
+        "exits": 0,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Uptown",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 24,
+        "intakes": 0,
+        "tracked": 0,
+        "other": 0,
+        "closing": 0,
+        "trackedOcc": 0,
+        "otherOcc": 0,
+        "beds": 0,
+        "exits": 0,
+        "names": []
+      }
+    ]
+  },
+  "spikeHood": {
+    "hood": "Chinatown",
+    "share": 0.06636155606407322,
+    "prevShare": 0.06519742883379247,
+    "overBar": true,
+    "risen": false,
+    "neighbours": [
+      "POP-00812",
+      "POP-00816"
+    ],
+    "others": []
+  },
+  "pointers": [
+    "output/beats/Neighborhood_Demographics.jsonl Sick @C110 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Dr. Lila Mezran this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

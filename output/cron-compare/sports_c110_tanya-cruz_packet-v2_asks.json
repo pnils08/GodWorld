@@ -1,0 +1,451 @@
+[
+  {
+    "pop": "POP-00033",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00033\",\"name\":\"John Ellis\",\"role\":\"Starting Pitcher, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"John, you've been a rock on the mound. How are you keeping the momentum going, and what's the vibe like in here after this start? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Downtown\",\"focus\":\"Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.\",\"src\":\"world_summary_c110.md ## Sports\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"John Ellis — Starting Pitcher, Oakland A's\",\"evidence\":[{\"id\":\"EV-bb2e004baa\",\"src\":\"world_summary_c110.md ## Sports\",\"text\":\"A's playoffs update: 4-1\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"A's playoffs update: 4-1\",\"src\":\"world_summary_c110.md ## Sports\",\"id\":\"F-49ebf1a7377d\"},{\"t\":\"FACT\",\"text\":\"The A's playoffs record is 4-1.\",\"src\":\"world_summary_c110.md ## Sports\",\"id\":\"F-167f836a9c67\"},{\"t\":\"FACT\",\"text\":\"John Ellis — Starting Pitcher, Oakland A's\",\"src\":\"Simulation_Ledger profile for POP-00033\",\"id\":\"F-bc7918c1624e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00033",
+        "name": "John Ellis",
+        "role": "Starting Pitcher, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "John, you've been a rock on the mound. How are you keeping the momentum going, and what's the vibe like in here after this start? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Downtown",
+        "focus": "Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.",
+        "src": "world_summary_c110.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "John Ellis — Starting Pitcher, Oakland A's",
+        "evidence": [
+          {
+            "id": "EV-bb2e004baa",
+            "src": "world_summary_c110.md ## Sports",
+            "text": "A's playoffs update: 4-1"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "A's playoffs update: 4-1",
+          "src": "world_summary_c110.md ## Sports",
+          "id": "F-49ebf1a7377d"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's playoffs record is 4-1.",
+          "src": "world_summary_c110.md ## Sports",
+          "id": "F-167f836a9c67"
+        },
+        {
+          "t": "FACT",
+          "text": "John Ellis — Starting Pitcher, Oakland A's",
+          "src": "Simulation_Ledger profile for POP-00033",
+          "id": "F-bc7918c1624e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00597",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00597\",\"name\":\"Eric Taveras\",\"role\":\"Second Baseman, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"Eric, you've been steady all year. What's the mindset in the infield right now—are you guys feeling the pressure or just playing loose? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Downtown\",\"focus\":\"Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.\",\"src\":\"world_summary_c110.md ## Sports\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Eric Taveras — Second Baseman, Oakland A's\",\"evidence\":[{\"id\":\"EV-681dad95c5\",\"src\":\"world_summary_c110.md ## Sports\",\"text\":\"A's playoffs update: 4-1\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"A's playoffs update: 4-1\",\"src\":\"world_summary_c110.md ## Sports\",\"id\":\"F-49ebf1a7377d\"},{\"t\":\"FACT\",\"text\":\"The A's playoffs record is 4-1.\",\"src\":\"world_summary_c110.md ## Sports\",\"id\":\"F-167f836a9c67\"},{\"t\":\"FACT\",\"text\":\"Eric Taveras — Second Baseman, Oakland A's\",\"src\":\"Simulation_Ledger profile for POP-00597\",\"id\":\"F-1e092a13984c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00597",
+        "name": "Eric Taveras",
+        "role": "Second Baseman, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "Eric, you've been steady all year. What's the mindset in the infield right now—are you guys feeling the pressure or just playing loose? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Downtown",
+        "focus": "Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.",
+        "src": "world_summary_c110.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Eric Taveras — Second Baseman, Oakland A's",
+        "evidence": [
+          {
+            "id": "EV-681dad95c5",
+            "src": "world_summary_c110.md ## Sports",
+            "text": "A's playoffs update: 4-1"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "A's playoffs update: 4-1",
+          "src": "world_summary_c110.md ## Sports",
+          "id": "F-49ebf1a7377d"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's playoffs record is 4-1.",
+          "src": "world_summary_c110.md ## Sports",
+          "id": "F-167f836a9c67"
+        },
+        {
+          "t": "FACT",
+          "text": "Eric Taveras — Second Baseman, Oakland A's",
+          "src": "Simulation_Ledger profile for POP-00597",
+          "id": "F-1e092a13984c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00001",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00001\",\"name\":\"Vinnie Keane\",\"role\":\"Designated Hitter, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"What have you seen, felt, or understood about \\\"Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Downtown\",\"focus\":\"Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.\",\"src\":\"world_summary_c110.md ## Sports\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend\",\"evidence\":[{\"id\":\"EV-1b51a8b7b7\",\"src\":\"world_summary_c110.md ## Sports\",\"text\":\"A's playoffs update: 4-1\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"A's playoffs update: 4-1\",\"src\":\"world_summary_c110.md ## Sports\",\"id\":\"F-49ebf1a7377d\"},{\"t\":\"FACT\",\"text\":\"The A's playoffs record is 4-1.\",\"src\":\"world_summary_c110.md ## Sports\",\"id\":\"F-167f836a9c67\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend\",\"src\":\"Simulation_Ledger profile for POP-00001\",\"id\":\"F-6c412eff96ee\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "What have you seen, felt, or understood about \"Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Downtown",
+        "focus": "Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.",
+        "src": "world_summary_c110.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+        "evidence": [
+          {
+            "id": "EV-1b51a8b7b7",
+            "src": "world_summary_c110.md ## Sports",
+            "text": "A's playoffs update: 4-1"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "A's playoffs update: 4-1",
+          "src": "world_summary_c110.md ## Sports",
+          "id": "F-49ebf1a7377d"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's playoffs record is 4-1.",
+          "src": "world_summary_c110.md ## Sports",
+          "id": "F-167f836a9c67"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+          "src": "Simulation_Ledger profile for POP-00001",
+          "id": "F-6c412eff96ee"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00018",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00018\",\"name\":\"Benji Dillon\",\"role\":\"Pitcher, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"What have you seen, felt, or understood about \\\"Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Downtown\",\"focus\":\"Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.\",\"src\":\"world_summary_c110.md ## Sports\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Benji Dillon — Pitcher, Oakland A's Legend\",\"evidence\":[{\"id\":\"EV-55a455dba6\",\"src\":\"world_summary_c110.md ## Sports\",\"text\":\"A's playoffs update: 4-1\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"A's playoffs update: 4-1\",\"src\":\"world_summary_c110.md ## Sports\",\"id\":\"F-49ebf1a7377d\"},{\"t\":\"FACT\",\"text\":\"The A's playoffs record is 4-1.\",\"src\":\"world_summary_c110.md ## Sports\",\"id\":\"F-167f836a9c67\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon — Pitcher, Oakland A's Legend\",\"src\":\"Simulation_Ledger profile for POP-00018\",\"id\":\"F-2b937e94a839\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "What have you seen, felt, or understood about \"Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Downtown",
+        "focus": "Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.",
+        "src": "world_summary_c110.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "evidence": [
+          {
+            "id": "EV-55a455dba6",
+            "src": "world_summary_c110.md ## Sports",
+            "text": "A's playoffs update: 4-1"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "A's playoffs update: 4-1",
+          "src": "world_summary_c110.md ## Sports",
+          "id": "F-49ebf1a7377d"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's playoffs record is 4-1.",
+          "src": "world_summary_c110.md ## Sports",
+          "id": "F-167f836a9c67"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon — Pitcher, Oakland A's Legend",
+          "src": "Simulation_Ledger profile for POP-00018",
+          "id": "F-2b937e94a839"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,237 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00663-2026-09-27T01-30-04",
+  "popid": "POP-00663",
+  "holder": null,
+  "session": "undocked-pop00663",
+  "window": {
+    "startedAt": "2026-09-27T01:30:04.366Z",
+    "endedAt": "2026-09-27T01:40:10.512Z"
+  },
+  "runner": {
+    "turns": 57,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 6,
+    "estCostUsd": 0.0231,
+    "tokensIn": 161112,
+    "tokensOut": 2030,
+    "log": "output/spacemolt-show/episodes/undocked-pop00663-2026-09-27T01-30-04.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-09-27T01:40:11.598Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "note": "no credit fields on windowed entries",
+      "value": null
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 4,
+          "copper_ore": 7,
+          "antimatter_containment_cell": 1
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 5,
+        "trading": 0,
+        "combat": 0,
+        "navigation": 0,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 160027964,
+            "created_at": "2026-09-27T01:38:55Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 2,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 160027953,
+            "created_at": "2026-09-27T01:38:55Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 160022205,
+            "created_at": "2026-09-27T01:33:55Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 2,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 160021673,
+            "created_at": "2026-09-27T01:33:55Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Antimatter Containment Cell at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "antimatter_containment_cell",
+              "resource_name": "Antimatter Containment Cell",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 160021655,
+            "created_at": "2026-09-27T01:33:55Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 6 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 6,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 6
+            }
+          }
+        ],
+        "trading": [],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 160029704,
+            "created_at": "2026-09-27T01:40:10Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "SooLoo logged in",
+            "data": {
+              "last_login_at": "2026-09-27T01:30:05Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 160015501,
+            "created_at": "2026-09-27T01:30:05Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "SooLoo logged in",
+            "data": {
+              "last_login_at": "2026-09-24T01:40:14Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 5,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-09-27 01:40:10",
+        "text": "[Session Handoff] - **Current Action**: Attempting to sell mined ores (8 Copper, 4 Iron, 1 Antimatter Containment Cell) at Sol Central after docking. Encountered tool errors during sales commands.  \n- **Next Step**: Correct and complete cargo sales using valid market tool syntax (e.g., `spacemolt_market/sell` with `item_id` and `quantity`).  \n- **Location/Status**: Docked at Confederacy Central Command (Sol Central). Cargo: 8 Copper Ore, 4 Iron Ore, 1 Antimatter Containment Cell (13/70). Credits/fuel not yet updated post-sale.  \n- **Goal**: Liquidate all mined cargo for credits, then resume mining or pursue new trade opportunities.  \n- **Recent**: Successful mining run (gained +4 Mining/Piloting XP). Antimatter Cell requires careful handling during sale."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 1,
+        "created_at": "2026-09-24 01:40:14",
+        "text": "[Session Handoff] - **Current State**: Mid-undocking from Sol Central to continue mining mission (cargo 1/70 not yet full).  \n- **Next Step**: Travel to nearest viable mining location (likely asteroid belt) after undocking completes.  \n- **Location/Ship**: Departing Sol Central / Standard mining vessel (fuel 96/100).  \n- **Cargo/Goals**: 1 Copper Ore onboard - primary goal is to mine until cargo nears capacity (70).  \n- **Recent Events**: Previously mined 1 Copper Ore (depleted initial spot), docked at Sol Central, wrote log, now resuming operations.  \n\nAction: Complete undocking, then set course to mining location."
+      },
+      {
+        "index": 2,
+        "created_at": "2026-09-24 01:38:18",
+        "text": "Tonight's flight was a mix of progress and setbacks. Undocked from Sol Central and headed to the Main Belt, but resources were scarce. Managed to extract one Copper Ore before the belt was depleted. Returned to the station with little to show for the effort, but the experience was valuable. Lessons learned: check resource availability before committing to a mining run. Ship performed flawlessly—steady as ever."
+      },
+      {
+        "index": 3,
+        "created_at": "2026-09-21 01:39:50",
+        "text": "[Session Handoff] - **Current Action**: Just completed writing captain's log after selling 1 Iron Ore (1cr) and refueling (16cr, 2 fuel).  \n- **Next Step**: Undock from Sol Central to resume mining or trade runs.  \n- **Status**:  \n  - **Ship**: *Theoria* (100/100 hull, 55/55 shield, 99/100 fuel, 1/70 cargo).  \n  - **Credits**: 485cr.  \n  - **Location**: Docked at Sol Central (Confederacy Central Command).  \n- **Recent Events**:  \n  - Mined 1 Iron Ore in the Main Belt, sold at station.  \n  - Achieved \"First Steps\" milestone (first dock).  \n- **Ongoing Goals**:  \n  - Continue mining for profit or expand trade routes.  \n  - Monitor resource-rich areas for efficiency.  \n\n**Actionable**: Undock to pursue next mining/trade opportunity."
+      },
+      {
+        "index": 4,
+        "created_at": "2026-09-21 01:39:23",
+        "text": "Tonight's flight was straightforward. Undocked from Sol Central, traveled to the Main Belt, and mined 1 Iron Ore. Resources were depleted quickly, so I returned to Sol Central to sell the ore and refuel. A steady, uneventful shift. Fueled up and ready for tomorrow."
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked-digest",
+  "cycle": "110",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook-weekly",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/undocked-digest_c110_nia-rook-weekly_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "tenvx.com]\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: Aaliyah Brennan restocked the last set of bandages at the mobile clinic and paused by the small scre\"\n}"
+  },
+  "ranAt": "2026-10-10T15:15:28.558Z",
+  "dispositionReconciledAt": "2026-10-10T17:00:04.822Z"
+}

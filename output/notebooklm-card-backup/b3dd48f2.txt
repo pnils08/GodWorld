@@ -1,0 +1,389 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Darrin Davis
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: LF
+
+ 
+
+Jersey: #21
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 89
+
+ 
+
+MLB Service: 10.165
+
+ 
+
+Age: 32
+
+ 
+
+Bats: R
+
+ 
+
+Throws: R
+
+ 
+
+Height: 5'9"
+
+ 
+
+Weight: 186 lbs
+
+ 
+
+Drafted: Round 1 (2026)
+
+ 
+
+Secondary Position: CF, RF
+
+ 
+
+Hitter Tendency: OPPOSITE FIELD
+
+ 
+
+Born: OHIO
+
+ 
+
+Canonical POPID: POP-00021
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+CON R: 78
+
+ 
+
+CON L: 86
+
+ 
+
+POW R: 94
+
+ 
+
+POW L: 63
+
+ 
+
+VIS: 78
+
+ 
+
+DISC: 71
+
+ 
+
+CLT: 66
+
+ 
+
+BUNT: 35
+
+ 
+
+DBUNT: 20
+
+ 
+
+DUR: 86
+
+ 
+
+FLD: 63
+
+ 
+
+ARM: 68
+
+ 
+
+ACC: 61
+
+ 
+
+REAC: 62
+
+ 
+
+SPD: 74
+
+ 
+
+STEAL: 90
+
+ 
+
+BR AGG: 82
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G    AB   R   H    2B  3B  HR  RBI  BB  SO   SB  CS  AVG   OBP   SLG
+
+ 
+
+2041  ATH   95   374  62  114  28  4   24  73   22  42   26  6   0.305 0.350 0.594
+
+ 
+
+2040  ATH   137  546  90  160  32  4   38  107  42  84   28  5   .293  .347  .575
+
+ 
+
+Career (through 2039) ATH   1221 4799 823 1331 274 63  247 741  533 960  269 52  .277  .352  .515
+
+
+--------------------------------------------------------------------------------
+
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  OPS   PA   SF  SAC  GIDP  HBP  IBB  TB   SB%   PO   A    E   FLD%  INN     WAR
+
+ 
+
+2041  ATH   0.994 406  4   0    3     6    0    222  .812  37   0    0   1.000 186.0   3.6
+
+ 
+
+2040  ATH   .922  595  0   0    0     0    0    314        240  6    2   .992  1180.0  5.2
+
+ 
+
+Career (through 2039) ATH   .867  5400 0   0    0     0    0    2472       2150 55   18  .992  10500.0 35.9
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 1453
+
+ 
+
+AB: 5719
+
+ 
+
+R: 975
+
+ 
+
+H: 1605
+
+ 
+
+2B: 334
+
+ 
+
+3B: 71
+
+ 
+
+HR: 309
+
+ 
+
+RBI: 921
+
+ 
+
+BB: 597
+
+ 
+
+SO: 1086
+
+ 
+
+SB: 323
+
+ 
+
+CS: 63
+
+ 
+
+AVG: .280
+
+ 
+
+OBP: .348
+
+ 
+
+SLG: .525
+
+ 
+
+OPS: .873
+
+ 
+
+TB: 3008
+
+ 
+
+PO: 2427
+
+ 
+
+A: 61
+
+ 
+
+E: 20
+
+ 
+
+FLD%: .992
+
+ 
+
+INN: 11866.0
+
+ 
+
+WAR: 44.7
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2042: $28.4M
+
+ 
+
+2043–2050: Free Agent
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Option: Used
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+QUIRKS
+
+Home Run Threat
+
+Clutch Performer
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS
+
+MVP (2037, 2040)
+
+Hank Aaron Award (2033, 2037)
+
+Silver Slugger (2032, 2033, 2037, 2038, 2040)
+
+World Series MVP (2031, 2033)
+
+All-Star (2032-2038, 2040)
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00021
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00021

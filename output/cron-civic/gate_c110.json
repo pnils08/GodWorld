@@ -1,0 +1,43 @@
+{
+  "cycle": 110,
+  "pass": false,
+  "deterministicPass": true,
+  "sanityStatus": "fail-scoped",
+  "failures": [
+    {
+      "check": "sanity-read",
+      "detail": "INIT-005: Contradiction in MilestoneNotes — claims 'Final inspections complete + drywall authorized per D7 audit protocols — ready for interior finishes' in C110, but prior row states the center was already 'opened — construction complete, open to the public' in C109, implying interior finishes were already completed."
+    },
+    {
+      "check": "sanity-read",
+      "detail": "INIT-005: NextScheduledAction 'Interior finishes + equipment installation' contradicts prior row's 'First quarter utilization review' (C113), suggesting a regression in phase or misalignment with operational status."
+    },
+    {
+      "check": "sanity-read",
+      "detail": "INIT-007: ImplementationPhase moves from 'operational' to 'implementation-active' without clear justification; 'operational' typically implies full functionality, while 'implementation-active' suggests ongoing setup, creating a potential phase contradiction."
+    }
+  ],
+  "touchedInitiatives": [
+    "INIT-006",
+    "INIT-005",
+    "INIT-001",
+    "INIT-003",
+    "INIT-008",
+    "INIT-007"
+  ],
+  "maxRows": 7,
+  "sanity": {
+    "pass": false,
+    "issues": [
+      "INIT-005: Contradiction in MilestoneNotes — claims 'Final inspections complete + drywall authorized per D7 audit protocols — ready for interior finishes' in C110, but prior row states the center was already 'opened — construction complete, open to the public' in C109, implying interior finishes were already completed.",
+      "INIT-005: NextScheduledAction 'Interior finishes + equipment installation' contradicts prior row's 'First quarter utilization review' (C113), suggesting a regression in phase or misalignment with operational status.",
+      "INIT-007: ImplementationPhase moves from 'operational' to 'implementation-active' without clear justification; 'operational' typically implies full functionality, while 'implementation-active' suggests ongoing setup, creating a potential phase contradiction."
+    ],
+    "blockedInitiatives": [
+      "INIT-005",
+      "INIT-007"
+    ]
+  },
+  "model": "mistralai/mistral-large",
+  "ranAt": "2026-10-05T03:42:09.201Z"
+}

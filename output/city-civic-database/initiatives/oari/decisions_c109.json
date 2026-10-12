@@ -1,0 +1,18 @@
+{
+  "initiative": "INIT-002",
+  "initiativeId": "INIT-002",
+  "cycle": 109,
+  "primaryVoice": "Mayor gavel (mayor_gavel-002)",
+  "consolidatedFrom": [
+    "STMT-109-mayor_gavel-002 (Mayor gavel — OARI District 1 Expansion)",
+    "STMT-109-oari-001 (Tran-Muñoz — OARI Expansion)",
+    "STMT-109-oari-002 (Tran-Muñoz — East Oakland Crisis Response)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-002",
+    "ImplementationPhase": "dispatch-live",
+    "MilestoneNotes": "C109: Expanded to District 1 with evaluation metrics",
+    "NextScheduledAction": "Quarterly outcome report",
+    "NextActionCycle": 112
+  }
+}

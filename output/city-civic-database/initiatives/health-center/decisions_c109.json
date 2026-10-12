@@ -1,0 +1,18 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 109,
+  "primaryVoice": "Mayor gavel (mayor_gavel-004)",
+  "consolidatedFrom": [
+    "STMT-109-health_center-001 (Chen-Ramirez — project_closeout)",
+    "STMT-109-health_center-002 (Chen-Ramirez — neighborhood_operations)",
+    "STMT-109-mayor_gavel-004 (Mayor gavel — Temescal Community Health Center Opening)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "ImplementationPhase": "operational",
+    "MilestoneNotes": "C109: Opened 2 weeks early, $1.2M under budget",
+    "NextScheduledAction": "First quarter utilization review",
+    "NextActionCycle": 113
+  }
+}

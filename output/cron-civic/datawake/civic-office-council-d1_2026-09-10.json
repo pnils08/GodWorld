@@ -1,0 +1,15 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-09-10",
+  "cycle": 106,
+  "model": "deepseek/deepseek-chat",
+  "statement": "The West Oakland Stabilization Fund continues to make significant headway. This month’s disbursement is on track, targeting households in slipping blocks to ensure stability isn’t a waiting list. We’re seeing progress, but the momentum must be sustained.",
+  "action": null,
+  "numberMoved": "on track",
+  "ranAt": "2026-09-10T10:45:19.357Z",
+  "fellBackFrom": null
+}

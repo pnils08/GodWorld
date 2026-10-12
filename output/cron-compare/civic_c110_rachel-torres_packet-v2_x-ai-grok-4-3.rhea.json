@@ -1,0 +1,46 @@
+{
+  "draft": "output/cron-compare/civic_c110_rachel-torres_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "6076845cbf0d87134d84a0c07085a6ffd9ff0641192ee60185ffce208a8fde56",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft verified cleanly against packet data with zero canon contradictions or unsourced entities.",
+  "review": {
+    "profileId": "rachel-public-safety-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "packageVersion": "RACHEL-LEP2-1",
+    "manifestId": "AM-cb7a0b63e177",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0103,
+  "durationMs": 6665,
+  "parseError": false,
+  "ranAt": "2026-10-06T23:16:54.967Z"
+}

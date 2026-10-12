@@ -1,0 +1,61 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "107",
+  "persona": "p-slayer",
+  "byline": "P Slayer",
+  "bylinePopid": "POP-00008",
+  "article": "output/cron-compare/staged/sports_c107_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Travis Coles",
+        "role": "quoted-source",
+        "popid": "POP-00533"
+      },
+      {
+        "name": "Clark Saryan",
+        "role": "quoted-source",
+        "popid": "POP-00052"
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "role": "quoted-source",
+        "popid": "POP-00598"
+      },
+      {
+        "name": "Desmond Morton",
+        "role": "quoted-source",
+        "popid": "POP-00051"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "eastlake-desmond-morton-win-streak",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I've seen the community come together, feeling a sense of pride and excitement about the team's win. It's like a spark has been lit, and people are talking about it everywhere. I feel it too, it's a great feeling to be a part of something that brings people joy.",
+        "sourceRef": "citizenVoice PRESS Desmond Morton"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c86ae4b7a754",
+    "draftSha256": "a3d83ae4fc702ec1dc72e75006b3f368c0919578aa2062089b1e286dc98ca9a1",
+    "verdict": "output/cron-compare/sports_c107_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-09-18T01:26:47.851Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-19T17:00:02.427Z"
+}

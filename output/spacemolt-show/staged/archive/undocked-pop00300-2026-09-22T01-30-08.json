@@ -1,0 +1,201 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00300-2026-09-22T01-30-08",
+  "popid": "POP-00300",
+  "holder": null,
+  "session": "undocked-pop00300",
+  "window": {
+    "startedAt": "2026-09-22T01:30:08.515Z",
+    "endedAt": "2026-09-22T01:40:14.441Z"
+  },
+  "runner": {
+    "turns": 30,
+    "exitCode": 1,
+    "capped": true,
+    "toolErrors": 10,
+    "estCostUsd": 0.0078,
+    "tokensIn": 52699,
+    "tokensOut": 1441,
+    "log": "output/spacemolt-show/episodes/undocked-pop00300-2026-09-22T01-30-08.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-09-22T01:40:15.162Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "note": "no credit fields on windowed entries",
+      "value": null
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 1,
+          "nickel_ore": 1,
+          "titanium_ore": 1,
+          "copper_ore": 2
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 4,
+        "trading": 0,
+        "combat": 0,
+        "navigation": 0,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 150525332,
+            "created_at": "2026-09-22T01:37:16Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 150525173,
+            "created_at": "2026-09-22T01:37:16Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Nickel Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "nickel_ore",
+              "resource_name": "Nickel Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 150525010,
+            "created_at": "2026-09-22T01:37:16Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Titanium Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "titanium_ore",
+              "resource_name": "Titanium Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 150524877,
+            "created_at": "2026-09-22T01:37:16Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 2,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          }
+        ],
+        "trading": [],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 150528991,
+            "created_at": "2026-09-22T01:40:14Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "BelleLopez logged in",
+            "data": {
+              "last_login_at": "2026-09-22T01:30:10Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 150515713,
+            "created_at": "2026-09-22T01:30:10Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "BelleLopez logged in",
+            "data": {
+              "last_login_at": "2026-09-22T01:30:08Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 1,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-09-22 01:39:54",
+        "text": "Tonight was a quiet shift. Mined some ores—copper, titanium, nickel, and iron—but the deposits dried up fast. Had to return early to Sol Central to sell what I gathered. The ship's fueled up and ready for the next run. Just like my day job: steady, methodical, no surprises."
+      }
+    ],
+    "unwindowed": []
+  }
+}

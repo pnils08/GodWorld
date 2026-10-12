@@ -1,0 +1,151 @@
+{
+  "empty": false,
+  "cycle": 110,
+  "kind": "tanya-sideline",
+  "desk": "sports",
+  "journalist": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "persona": "tanya-cruz"
+  },
+  "pulse": {
+    "className": "record-only-sideline",
+    "score": 70,
+    "label": "A's playoffs update: 4-1"
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 10,
+        "name": "Inference Close"
+      }
+    ],
+    "anchorFacts": [
+      "The A's playoffs record is 4-1."
+    ],
+    "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+    "accessEvidence": {
+      "state": "ALLOTTED",
+      "facts": [
+        "clubhouse/sideline SET is the reporter's room"
+      ]
+    },
+    "quoteEvidence": {
+      "state": "NOT_SUPPLIED",
+      "quotes": []
+    },
+    "observationEvidence": {
+      "state": "ALLOTTED",
+      "facts": []
+    },
+    "missing": [
+      "Packet player quotes",
+      "injury or team-response facts beyond the supplied record"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "story": {
+    "angle": "A's playoffs update: 4-1",
+    "label": "A's playoffs update: 4-1",
+    "hookLine": "A's playoffs update: 4-1",
+    "kind": "sideline-signal",
+    "hood": "Downtown",
+    "popids": [
+      "POP-00033",
+      "POP-00597",
+      "POP-00001",
+      "POP-00018"
+    ],
+    "citizens": [
+      "John Ellis (POP-00033)",
+      "Eric Taveras (POP-00597)",
+      "Vinnie Keane (POP-00001)",
+      "Benji Dillon (POP-00018)"
+    ],
+    "ref": "world_summary_c110.md ## Sports",
+    "cycle": 110
+  },
+  "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+  "players": [
+    {
+      "name": "John Ellis",
+      "popid": "POP-00033",
+      "role": "Starting Pitcher, Oakland A's",
+      "neighborhood": "Laurel",
+      "why": "feed-names"
+    },
+    {
+      "name": "Eric Taveras",
+      "popid": "POP-00597",
+      "role": "Second Baseman, Oakland A's",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "why": "feed-names"
+    },
+    {
+      "name": "Benji Dillon",
+      "popid": "POP-00018",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not."
+  },
+  "candidates": [
+    {
+      "score": 70,
+      "label": "John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games.",
+      "cycle": 110
+    },
+    {
+      "score": 70,
+      "label": "The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+      "cycle": 110
+    },
+    {
+      "score": 70,
+      "label": "A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon",
+      "cycle": 110
+    },
+    {
+      "score": 50,
+      "label": "Henry Rivas shines in game 4, while Horn stays hot and Mark Aitken and Isley Kelley provide power.",
+      "cycle": 110
+    },
+    {
+      "score": 50,
+      "label": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+      "cycle": 110
+    },
+    {
+      "score": 40,
+      "label": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough.",
+      "cycle": 109
+    },
+    {
+      "score": 40,
+      "label": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+      "cycle": 109
+    },
+    {
+      "score": 40,
+      "label": "The Oaks lose yet again even with strong efforts from Austin Reaves,",
+      "cycle": 109
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c110.md ## Sports",
+    "scripts/sportsSubstrate.js",
+    "docs/media/TANYA_SIDELINE_BAG.md"
+  ]
+}

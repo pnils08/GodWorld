@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "109",
+  "model": "anthropic/claude-haiku-4.5",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 11662,
+  "usageOutputTokens": 1611,
+  "savedFiles": [
+    "output/cron-compare/civic_c109_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c109.md",
+  "durationMs": 17925,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-03T17:01:26.489Z"
+}

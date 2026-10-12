@@ -1,0 +1,54 @@
+{
+  "draft": "output/cron-compare/business_c110_business-desk_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "28ca313c3a9e4e8e1ccecc972e170dbb3a8dd15798fa8aacc3d5e5ad2dc8386e",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen profiles, roles, employer businesses, and the Priya Nair quote verified cleanly against cycle 110 canon.",
+  "review": {
+    "profileId": "jordan-economic-labor-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-1",
+    "manifestId": "AM-62c6b980c93c",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Andre Turner",
+      "Nina Rines",
+      "Priya Nair",
+      "Tobias Jurko"
+    ],
+    "unverified": [
+      "Miso Metro",
+      "Pacific Standard Architecture"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0111,
+  "durationMs": 7635,
+  "parseError": false,
+  "ranAt": "2026-10-07T03:50:53.908Z"
+}

@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "angela-reyes",
+  "byline": "Angela Reyes",
+  "bylinePopid": "POP-00156",
+  "article": "output/cron-compare/staged/civic_c109_angela-reyes_packet-v2_anthropic-claude-haiku-4-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Lo Thoop",
+        "role": "mentioned",
+        "popid": "POP-00667"
+      },
+      {
+        "name": "Patricia Nolan",
+        "role": "mentioned",
+        "popid": "POP-00729"
+      },
+      {
+        "name": "Jun Leu",
+        "role": "quoted-source",
+        "popid": "POP-00994"
+      },
+      {
+        "name": "Salma Navarro",
+        "role": "quoted-source",
+        "popid": "POP-00975"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Temescal"
+    ],
+    "claims": [
+      {
+        "claim": "You know, living here in Temescal, I’ve seen kids graduate—they walk across that stage, families cheering—but then there’s this quiet worry afterward. Are they really ready for what’s next? It’s like we’re celebrating the finish line, but the race isn’t over. I teach creative writing, and I see it in their essays—bright ideas, but sometimes they’re missing the tools to build on them. It’s not just about getting them out the door; it’s about making sure they’re equipped to walk through the next one.",
+        "sourceRef": "citizenVoice PRESS Lo Thoop"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d7c98d365dbb",
+    "draftSha256": "d32efa3578d6214eedae009033e0123ec6609ed515409bcc8ce30c3408d2a304",
+    "verdict": "output/cron-compare/civic_c109_angela-reyes_packet-v2_anthropic-claude-haiku-4-5.rhea.json",
+    "ranAt": "2026-10-02T06:45:39.642Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:02.020Z"
+}

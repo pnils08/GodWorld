@@ -1,0 +1,500 @@
+[
+  {
+    "pop": "POP-00198",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00198\",\"name\":\"Rick Walker\",\"role\":\"K-8 Teacher,Former Line cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"As a resident of Fruitvale, what have you seen, felt, or understood about \\\"Fruitvale's decay and the absence of active initiatives\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Fruitvale\",\"focus\":\"Fruitvale's decay and the absence of active initiatives\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\"},\"exposure\":{\"basis\":[\"stink-handle\",\"same-neighborhood\"],\"self\":\"Rick Walker (POP-00198) — role: K-8 Teacher,Former Line cook; neighborhood: Fruitvale; born: 1983; careerStage: senior; wealth: 8; employerBiz: BIZ-00016; skills: Education|Food & Culture; tier: 2\",\"evidence\":[{\"id\":\"EV-b541b57954\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"text\":\"Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"id\":\"F-120d7c551f80\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"id\":\"F-340f96f7c040\"},{\"t\":\"FACT\",\"text\":\"Season: Winter | Weather: 46°F fog, W 9 mph, marine (frontState MARINE), humidity 70, visibility 4\",\"src\":\"World_Config/weather snapshot for C108\",\"id\":\"F-c8ad41662860\"},{\"t\":\"FACT\",\"text\":\"The seniors lunch program at St. Esperanza Parish celebrates its milestone with a full dining hall. New faces are spotted on the block, unpacking boxes.\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"id\":\"F-ce5e851895e0\"},{\"t\":\"FACT\",\"text\":\"Rick Walker (POP-00198) — role: K-8 Teacher,Former Line cook; neighborhood: Fruitvale; born: 1983; careerStage: senior; wealth: 8; employerBiz: BIZ-00016; skills: Education|Food & Culture; tier: 2\",\"src\":\"Simulation_Ledger profile for POP-00198\",\"id\":\"F-71acf2c367c9\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"Fruitvale's decay and the absence of active initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Fruitvale",
+        "focus": "Fruitvale's decay and the absence of active initiatives",
+        "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6"
+      },
+      "exposure": {
+        "basis": [
+          "stink-handle",
+          "same-neighborhood"
+        ],
+        "self": "Rick Walker (POP-00198) — role: K-8 Teacher,Former Line cook; neighborhood: Fruitvale; born: 1983; careerStage: senior; wealth: 8; employerBiz: BIZ-00016; skills: Education|Food & Culture; tier: 2",
+        "evidence": [
+          {
+            "id": "EV-b541b57954",
+            "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+            "text": "Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+          "id": "F-120d7c551f80"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+          "id": "F-340f96f7c040"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Winter | Weather: 46°F fog, W 9 mph, marine (frontState MARINE), humidity 70, visibility 4",
+          "src": "World_Config/weather snapshot for C108",
+          "id": "F-c8ad41662860"
+        },
+        {
+          "t": "FACT",
+          "text": "The seniors lunch program at St. Esperanza Parish celebrates its milestone with a full dining hall. New faces are spotted on the block, unpacking boxes.",
+          "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+          "id": "F-ce5e851895e0"
+        },
+        {
+          "t": "FACT",
+          "text": "Rick Walker (POP-00198) — role: K-8 Teacher,Former Line cook; neighborhood: Fruitvale; born: 1983; careerStage: senior; wealth: 8; employerBiz: BIZ-00016; skills: Education|Food & Culture; tier: 2",
+          "src": "Simulation_Ledger profile for POP-00198",
+          "id": "F-71acf2c367c9"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00953",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00953\",\"name\":\"Carmen Solis\",\"role\":\"Community Advocate\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"As a resident of Fruitvale, what have you seen, felt, or understood about \\\"Fruitvale's decay and the absence of active initiatives\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Fruitvale\",\"focus\":\"Fruitvale's decay and the absence of active initiatives\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\"},\"exposure\":{\"basis\":[\"stink-handle\",\"same-neighborhood\"],\"self\":\"Carmen Solis (POP-00953) — role: Community Advocate; neighborhood: Fruitvale; born: 2003; careerStage: mid-career; wealth: 5; employerBiz: UNTRACKED; skills: Faith & Community; tier: 2\",\"evidence\":[{\"id\":\"EV-aea9678297\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"text\":\"Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"id\":\"F-120d7c551f80\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"id\":\"F-340f96f7c040\"},{\"t\":\"FACT\",\"text\":\"Season: Winter | Weather: 46°F fog, W 9 mph, marine (frontState MARINE), humidity 70, visibility 4\",\"src\":\"World_Config/weather snapshot for C108\",\"id\":\"F-c8ad41662860\"},{\"t\":\"FACT\",\"text\":\"The seniors lunch program at St. Esperanza Parish celebrates its milestone with a full dining hall. New faces are spotted on the block, unpacking boxes.\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"id\":\"F-ce5e851895e0\"},{\"t\":\"FACT\",\"text\":\"Carmen Solis (POP-00953) — role: Community Advocate; neighborhood: Fruitvale; born: 2003; careerStage: mid-career; wealth: 5; employerBiz: UNTRACKED; skills: Faith & Community; tier: 2\",\"src\":\"Simulation_Ledger profile for POP-00953\",\"id\":\"F-a1a5ce9efeaf\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00953",
+        "name": "Carmen Solis",
+        "role": "Community Advocate",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"Fruitvale's decay and the absence of active initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Fruitvale",
+        "focus": "Fruitvale's decay and the absence of active initiatives",
+        "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6"
+      },
+      "exposure": {
+        "basis": [
+          "stink-handle",
+          "same-neighborhood"
+        ],
+        "self": "Carmen Solis (POP-00953) — role: Community Advocate; neighborhood: Fruitvale; born: 2003; careerStage: mid-career; wealth: 5; employerBiz: UNTRACKED; skills: Faith & Community; tier: 2",
+        "evidence": [
+          {
+            "id": "EV-aea9678297",
+            "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+            "text": "Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+          "id": "F-120d7c551f80"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+          "id": "F-340f96f7c040"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Winter | Weather: 46°F fog, W 9 mph, marine (frontState MARINE), humidity 70, visibility 4",
+          "src": "World_Config/weather snapshot for C108",
+          "id": "F-c8ad41662860"
+        },
+        {
+          "t": "FACT",
+          "text": "The seniors lunch program at St. Esperanza Parish celebrates its milestone with a full dining hall. New faces are spotted on the block, unpacking boxes.",
+          "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+          "id": "F-ce5e851895e0"
+        },
+        {
+          "t": "FACT",
+          "text": "Carmen Solis (POP-00953) — role: Community Advocate; neighborhood: Fruitvale; born: 2003; careerStage: mid-career; wealth: 5; employerBiz: UNTRACKED; skills: Faith & Community; tier: 2",
+          "src": "Simulation_Ledger profile for POP-00953",
+          "id": "F-a1a5ce9efeaf"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00212",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00212\",\"name\":\"Jessie Hess\",\"role\":\"Barista\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"What have you seen, felt, or understood about \\\"Fruitvale's decay and the absence of active initiatives\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Fruitvale\",\"focus\":\"Fruitvale's decay and the absence of active initiatives\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\"},\"exposure\":{\"basis\":[\"same-hood-signal\"],\"self\":\"Jessie Hess (POP-00212) — role: Barista; neighborhood: Downtown; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 3\",\"evidence\":[{\"id\":\"EV-ad75a58257\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"text\":\"Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"id\":\"F-120d7c551f80\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"id\":\"F-340f96f7c040\"},{\"t\":\"FACT\",\"text\":\"Season: Winter | Weather: 46°F fog, W 9 mph, marine (frontState MARINE), humidity 70, visibility 4\",\"src\":\"World_Config/weather snapshot for C108\",\"id\":\"F-c8ad41662860\"},{\"t\":\"FACT\",\"text\":\"The seniors lunch program at St. Esperanza Parish celebrates its milestone with a full dining hall. New faces are spotted on the block, unpacking boxes.\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"id\":\"F-ce5e851895e0\"},{\"t\":\"FACT\",\"text\":\"Jessie Hess (POP-00212) — role: Barista; neighborhood: Downtown; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 3\",\"src\":\"Simulation_Ledger profile for POP-00212\",\"id\":\"F-2776eec3e3ed\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "What have you seen, felt, or understood about \"Fruitvale's decay and the absence of active initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Fruitvale",
+        "focus": "Fruitvale's decay and the absence of active initiatives",
+        "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-signal"
+        ],
+        "self": "Jessie Hess (POP-00212) — role: Barista; neighborhood: Downtown; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 3",
+        "evidence": [
+          {
+            "id": "EV-ad75a58257",
+            "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+            "text": "Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+          "id": "F-120d7c551f80"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+          "id": "F-340f96f7c040"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Winter | Weather: 46°F fog, W 9 mph, marine (frontState MARINE), humidity 70, visibility 4",
+          "src": "World_Config/weather snapshot for C108",
+          "id": "F-c8ad41662860"
+        },
+        {
+          "t": "FACT",
+          "text": "The seniors lunch program at St. Esperanza Parish celebrates its milestone with a full dining hall. New faces are spotted on the block, unpacking boxes.",
+          "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+          "id": "F-ce5e851895e0"
+        },
+        {
+          "t": "FACT",
+          "text": "Jessie Hess (POP-00212) — role: Barista; neighborhood: Downtown; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 3",
+          "src": "Simulation_Ledger profile for POP-00212",
+          "id": "F-2776eec3e3ed"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00541",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00541\",\"name\":\"Theo Burkes\",\"role\":\"Rapper\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"What have you seen, felt, or understood about \\\"Fruitvale's decay and the absence of active initiatives\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Fruitvale\",\"focus\":\"Fruitvale's decay and the absence of active initiatives\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\"},\"exposure\":{\"basis\":[\"same-hood-signal\"],\"self\":\"Theo Burkes (POP-00541) — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3\",\"evidence\":[{\"id\":\"EV-6056ef10f5\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"text\":\"Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"id\":\"F-120d7c551f80\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"id\":\"F-340f96f7c040\"},{\"t\":\"FACT\",\"text\":\"Season: Winter | Weather: 46°F fog, W 9 mph, marine (frontState MARINE), humidity 70, visibility 4\",\"src\":\"World_Config/weather snapshot for C108\",\"id\":\"F-c8ad41662860\"},{\"t\":\"FACT\",\"text\":\"The seniors lunch program at St. Esperanza Parish celebrates its milestone with a full dining hall. New faces are spotted on the block, unpacking boxes.\",\"src\":\"output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6\",\"id\":\"F-ce5e851895e0\"},{\"t\":\"FACT\",\"text\":\"Theo Burkes (POP-00541) — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3\",\"src\":\"Simulation_Ledger profile for POP-00541\",\"id\":\"F-5acbcaffdce5\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00541",
+        "name": "Theo Burkes",
+        "role": "Rapper",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "What have you seen, felt, or understood about \"Fruitvale's decay and the absence of active initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Fruitvale",
+        "focus": "Fruitvale's decay and the absence of active initiatives",
+        "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-signal"
+        ],
+        "self": "Theo Burkes (POP-00541) — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+        "evidence": [
+          {
+            "id": "EV-6056ef10f5",
+            "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+            "text": "Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+          "id": "F-120d7c551f80"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+          "id": "F-340f96f7c040"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Winter | Weather: 46°F fog, W 9 mph, marine (frontState MARINE), humidity 70, visibility 4",
+          "src": "World_Config/weather snapshot for C108",
+          "id": "F-c8ad41662860"
+        },
+        {
+          "t": "FACT",
+          "text": "The seniors lunch program at St. Esperanza Parish celebrates its milestone with a full dining hall. New faces are spotted on the block, unpacking boxes.",
+          "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+          "id": "F-ce5e851895e0"
+        },
+        {
+          "t": "FACT",
+          "text": "Theo Burkes (POP-00541) — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+          "src": "Simulation_Ledger profile for POP-00541",
+          "id": "F-5acbcaffdce5"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

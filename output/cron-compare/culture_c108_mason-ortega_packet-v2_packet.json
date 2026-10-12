@@ -1,0 +1,1133 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "108",
+  "persona": "mason-ortega",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Temescal kitchens: OakTown Social — the people who work the shift",
+      "label": "Temescal kitchens · OakTown Social",
+      "hookLine": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+      "hood": "Temescal",
+      "pulseClass": "hood-kitchens",
+      "namedBusinesses": [
+        "OakTown Social"
+      ],
+      "citizens": [
+        "Vanessa Treary (POP-00781)",
+        "Vanessa Ramas (POP-01045)",
+        "Jia Pena (POP-00916)",
+        "Akua Ortiz (POP-00948)",
+        "Ross Cabral (POP-00055)",
+        "Brie Harris (POP-00169)"
+      ],
+      "popids": [
+        "POP-00781",
+        "POP-01045",
+        "POP-00916",
+        "POP-00948",
+        "POP-00055",
+        "POP-00169"
+      ],
+      "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "cycle": 108
+    }
+  },
+  "angle": "output/cron-compare/culture_c108_mason-ortega_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00781",
+      "name": "Vanessa Treary",
+      "quote": "It’s not glamorous, but there’s something steady about it. You get to know people, their routines, their stories. It’s not just about the coffee—it’s about being a small part of their day, something they can count on. That’s what keeps me coming back.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"It’s not glamorous, but there’s something steady about it. You get to know people, their routines, their stories. It’s not just about the coffee—it’s about being a small part of their day, something they can count on. That’s what keeps me coming back.\",\n  \"fact_ids\": [\"F-2af25844ad98\", \"F-b32914e5fa63\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2af25844ad98",
+          "F-b32914e5fa63"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00781-c7b4ef1668",
+        "authoredQuote": true,
+        "publishableQuote": "It’s not glamorous, but there’s something steady about it. You get to know people, their routines, their stories. It’s not just about the coffee—it’s about being a small part of their day, something they can count on. That’s what keeps me coming back."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00781",
+          "name": "Vanessa Treary",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "works at OakTown Social (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Vanessa Treary — Barista — OakTown Social, Temescal",
+          "evidence": [
+            {
+              "id": "EV-33e24b999d",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+              "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal kitchens · OakTown Social",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-462d82d27585"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-2af25844ad98"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-e5b9425fdd14"
+          },
+          {
+            "t": "FACT",
+            "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+            "id": "F-e7e329343d01"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Treary — Barista — OakTown Social, Temescal",
+            "src": "Simulation_Ledger profile for POP-00781",
+            "id": "F-b32914e5fa63"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01045",
+      "name": "Vanessa Ramas",
+      "quote": "You know, it's not about glamour—it's about the rhythm of it. The regulars who come in and don't even have to say their order because you already know it. There's something steadying about that, especially in a city that's always changing. Tobias says I could find a job that pays more, but it's not just about the money. It's about knowing your place in the neighborhood, even if it's just pulling shots and remembering who takes oat milk.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, it's not about glamour—it's about the rhythm of it. The regulars who come in and don't even have to say their order because you already know it. There's something steadying about that, especially in a city that's always changing. Tobias says I could find a job that pays more, but it's not just about the money. It's about knowing your place in the neighborhood, even if it's just pulling shots and remembering who takes oat milk.\",\n  \"fact_ids\": [\"F-46b8c415de08\", \"F-e5b9425fdd14\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-46b8c415de08",
+          "F-e5b9425fdd14"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01045-0cb404c3a6",
+        "authoredQuote": true,
+        "publishableQuote": "You know, it's not about glamour—it's about the rhythm of it. The regulars who come in and don't even have to say their order because you already know it. There's something steadying about that, especially in a city that's always changing. Tobias says I could find a job that pays more, but it's not just about the money. It's about knowing your place in the neighborhood, even if it's just pulling shots and remembering who takes oat milk."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01045",
+          "name": "Vanessa Ramas",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "works at OakTown Social (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Vanessa Ramas — Barista — OakTown Social, Temescal",
+          "evidence": [
+            {
+              "id": "EV-7d778f89bd",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+              "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal kitchens · OakTown Social",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-462d82d27585"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-2af25844ad98"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-e5b9425fdd14"
+          },
+          {
+            "t": "FACT",
+            "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+            "id": "F-e7e329343d01"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Ramas — Barista — OakTown Social, Temescal",
+            "src": "Simulation_Ledger profile for POP-01045",
+            "id": "F-46b8c415de08"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00916",
+      "name": "Jia Pena",
+      "quote": "It's the rhythm of it, I think. The way the neighborhood moves and breathes, and you’re part of that. It’s not glamorous, but it’s steady. You know the faces, the routines, and there’s something comforting in that. It’s like being part of a bigger thing, even if it’s just pulling shots or cleaning the machine.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"It's the rhythm of it, I think. The way the neighborhood moves and breathes, and you’re part of that. It’s not glamorous, but it’s steady. You know the faces, the routines, and there’s something comforting in that. It’s like being part of a bigger thing, even if it’s just pulling shots or cleaning the machine.\",\n  \"fact_ids\": [\"F-2af25844ad98\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2af25844ad98"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00916-ccc31cb149",
+        "authoredQuote": true,
+        "publishableQuote": "It's the rhythm of it, I think. The way the neighborhood moves and breathes, and you’re part of that. It’s not glamorous, but it’s steady. You know the faces, the routines, and there’s something comforting in that. It’s like being part of a bigger thing, even if it’s just pulling shots or cleaning the machine."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00916",
+          "name": "Jia Pena",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "engine seed for Temescal this cycle (Story_Seed_Deck)",
+            "same-neighborhood"
+          ],
+          "self": "Jia Pena — Temescal",
+          "evidence": [
+            {
+              "id": "EV-8fa9ff022b",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+              "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal kitchens · OakTown Social",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-462d82d27585"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-2af25844ad98"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-e5b9425fdd14"
+          },
+          {
+            "t": "FACT",
+            "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+            "id": "F-e7e329343d01"
+          },
+          {
+            "t": "FACT",
+            "text": "Jia Pena — Temescal",
+            "src": "Simulation_Ledger profile for POP-00916",
+            "id": "F-4dcdbca791e3"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00948",
+      "name": "Akua Ortiz",
+      "quote": "You know, it's the rhythm of it all. The familiar faces, the routine—it’s comforting in a way. It’s not about the glamour; it’s about being part of something steady, something that people rely on. That’s what keeps folks like Vanessa coming back, day after day.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, it's the rhythm of it all. The familiar faces, the routine—it’s comforting in a way. It’s not about the glamour; it’s about being part of something steady, something that people rely on. That’s what keeps folks like Vanessa coming back, day after day.\",\n  \"fact_ids\": [\"F-2af25844ad98\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2af25844ad98"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00948-f7acd10e70",
+        "authoredQuote": true,
+        "publishableQuote": "You know, it's the rhythm of it all. The familiar faces, the routine—it’s comforting in a way. It’s not about the glamour; it’s about being part of something steady, something that people rely on. That’s what keeps folks like Vanessa coming back, day after day."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00948",
+          "name": "Akua Ortiz",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "engine seed for Temescal this cycle (Story_Seed_Deck)",
+            "same-neighborhood"
+          ],
+          "self": "Akua Ortiz — Temescal",
+          "evidence": [
+            {
+              "id": "EV-5b09c3c946",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+              "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal kitchens · OakTown Social",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-462d82d27585"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-2af25844ad98"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-e5b9425fdd14"
+          },
+          {
+            "t": "FACT",
+            "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+            "id": "F-e7e329343d01"
+          },
+          {
+            "t": "FACT",
+            "text": "Akua Ortiz — Temescal",
+            "src": "Simulation_Ledger profile for POP-00948",
+            "id": "F-dc38dc0dcdb7"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00781",
+      "name": "Vanessa Treary",
+      "quote": "It’s not glamorous, but there’s something steady about it. You get to know people, their routines, their stories. It’s not just about the coffee—it’s about being a small part of their day, something they can count on. That’s what keeps me coming back.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"It’s not glamorous, but there’s something steady about it. You get to know people, their routines, their stories. It’s not just about the coffee—it’s about being a small part of their day, something they can count on. That’s what keeps me coming back.\",\n  \"fact_ids\": [\"F-2af25844ad98\", \"F-b32914e5fa63\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2af25844ad98",
+          "F-b32914e5fa63"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00781-c7b4ef1668",
+        "authoredQuote": true,
+        "publishableQuote": "It’s not glamorous, but there’s something steady about it. You get to know people, their routines, their stories. It’s not just about the coffee—it’s about being a small part of their day, something they can count on. That’s what keeps me coming back."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00781",
+          "name": "Vanessa Treary",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "works at OakTown Social (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Vanessa Treary — Barista — OakTown Social, Temescal",
+          "evidence": [
+            {
+              "id": "EV-33e24b999d",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+              "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal kitchens · OakTown Social",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-462d82d27585"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-2af25844ad98"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-e5b9425fdd14"
+          },
+          {
+            "t": "FACT",
+            "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+            "id": "F-e7e329343d01"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Treary — Barista — OakTown Social, Temescal",
+            "src": "Simulation_Ledger profile for POP-00781",
+            "id": "F-b32914e5fa63"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01045",
+      "name": "Vanessa Ramas",
+      "quote": "You know, it's not about glamour—it's about the rhythm of it. The regulars who come in and don't even have to say their order because you already know it. There's something steadying about that, especially in a city that's always changing. Tobias says I could find a job that pays more, but it's not just about the money. It's about knowing your place in the neighborhood, even if it's just pulling shots and remembering who takes oat milk.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, it's not about glamour—it's about the rhythm of it. The regulars who come in and don't even have to say their order because you already know it. There's something steadying about that, especially in a city that's always changing. Tobias says I could find a job that pays more, but it's not just about the money. It's about knowing your place in the neighborhood, even if it's just pulling shots and remembering who takes oat milk.\",\n  \"fact_ids\": [\"F-46b8c415de08\", \"F-e5b9425fdd14\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-46b8c415de08",
+          "F-e5b9425fdd14"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01045-0cb404c3a6",
+        "authoredQuote": true,
+        "publishableQuote": "You know, it's not about glamour—it's about the rhythm of it. The regulars who come in and don't even have to say their order because you already know it. There's something steadying about that, especially in a city that's always changing. Tobias says I could find a job that pays more, but it's not just about the money. It's about knowing your place in the neighborhood, even if it's just pulling shots and remembering who takes oat milk."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01045",
+          "name": "Vanessa Ramas",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "works at OakTown Social (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Vanessa Ramas — Barista — OakTown Social, Temescal",
+          "evidence": [
+            {
+              "id": "EV-7d778f89bd",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+              "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal kitchens · OakTown Social",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-462d82d27585"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-2af25844ad98"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-e5b9425fdd14"
+          },
+          {
+            "t": "FACT",
+            "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+            "id": "F-e7e329343d01"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Ramas — Barista — OakTown Social, Temescal",
+            "src": "Simulation_Ledger profile for POP-01045",
+            "id": "F-46b8c415de08"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00916",
+      "name": "Jia Pena",
+      "quote": "It's the rhythm of it, I think. The way the neighborhood moves and breathes, and you’re part of that. It’s not glamorous, but it’s steady. You know the faces, the routines, and there’s something comforting in that. It’s like being part of a bigger thing, even if it’s just pulling shots or cleaning the machine.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"It's the rhythm of it, I think. The way the neighborhood moves and breathes, and you’re part of that. It’s not glamorous, but it’s steady. You know the faces, the routines, and there’s something comforting in that. It’s like being part of a bigger thing, even if it’s just pulling shots or cleaning the machine.\",\n  \"fact_ids\": [\"F-2af25844ad98\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2af25844ad98"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00916-ccc31cb149",
+        "authoredQuote": true,
+        "publishableQuote": "It's the rhythm of it, I think. The way the neighborhood moves and breathes, and you’re part of that. It’s not glamorous, but it’s steady. You know the faces, the routines, and there’s something comforting in that. It’s like being part of a bigger thing, even if it’s just pulling shots or cleaning the machine."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00916",
+          "name": "Jia Pena",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "engine seed for Temescal this cycle (Story_Seed_Deck)",
+            "same-neighborhood"
+          ],
+          "self": "Jia Pena — Temescal",
+          "evidence": [
+            {
+              "id": "EV-8fa9ff022b",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+              "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal kitchens · OakTown Social",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-462d82d27585"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-2af25844ad98"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-e5b9425fdd14"
+          },
+          {
+            "t": "FACT",
+            "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+            "id": "F-e7e329343d01"
+          },
+          {
+            "t": "FACT",
+            "text": "Jia Pena — Temescal",
+            "src": "Simulation_Ledger profile for POP-00916",
+            "id": "F-4dcdbca791e3"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00948",
+      "name": "Akua Ortiz",
+      "quote": "You know, it's the rhythm of it all. The familiar faces, the routine—it’s comforting in a way. It’s not about the glamour; it’s about being part of something steady, something that people rely on. That’s what keeps folks like Vanessa coming back, day after day.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, it's the rhythm of it all. The familiar faces, the routine—it’s comforting in a way. It’s not about the glamour; it’s about being part of something steady, something that people rely on. That’s what keeps folks like Vanessa coming back, day after day.\",\n  \"fact_ids\": [\"F-2af25844ad98\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2af25844ad98"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00948-f7acd10e70",
+        "authoredQuote": true,
+        "publishableQuote": "You know, it's the rhythm of it all. The familiar faces, the routine—it’s comforting in a way. It’s not about the glamour; it’s about being part of something steady, something that people rely on. That’s what keeps folks like Vanessa coming back, day after day."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00948",
+          "name": "Akua Ortiz",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Temescal",
+          "focus": "The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "engine seed for Temescal this cycle (Story_Seed_Deck)",
+            "same-neighborhood"
+          ],
+          "self": "Akua Ortiz — Temescal",
+          "evidence": [
+            {
+              "id": "EV-5b09c3c946",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+              "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal kitchens · OakTown Social",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-462d82d27585"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-2af25844ad98"
+          },
+          {
+            "t": "FACT",
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+            "id": "F-e5b9425fdd14"
+          },
+          {
+            "t": "FACT",
+            "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+            "id": "F-e7e329343d01"
+          },
+          {
+            "t": "FACT",
+            "text": "Akua Ortiz — Temescal",
+            "src": "Simulation_Ledger profile for POP-00948",
+            "id": "F-dc38dc0dcdb7"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-25T18:16:09.688Z"
+}

@@ -1,0 +1,461 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "107",
+  "persona": "angela-reyes",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00156",
+      "name": "Angela Reyes",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Enrollment moved in Fruitvale — KONO has the weakest school record on the table (index 7) — the students and teachers who live it",
+      "approach": "Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "schools",
+        "hood": "KONO",
+        "facts": [
+          "Enrollment moved: Fruitvale +11 students, East Oakland +10 students, San Antonio +10 students, Glenview +10 students, Brooklyn +9 students, Laurel +9 students vs C106",
+          "The school quality table is unchanged since C106 — no score moved this cycle.",
+          "Ranked by school quality index: Rockridge 9, Fruitvale 8, Brooklyn 8, Laurel 8, Grand Lake 8, West Oakland 8, Adams Point 8, Piedmont Ave 8, Downtown 8, Jack London 8, Baylight District 8, Uptown 8, Lake Merritt 8, East Oakland 7, San Antonio 7, Glenview 7, Dimond 7, Ivy Hill 7, Temescal 7, Chinatown 7, Eastlake 7, KONO 7 (22 neighborhoods)",
+          "KONO: school quality index 7, graduation 87%, college-ready 56%, teacher quality 7, funding 12,000, 46 students",
+          "Rockridge: school quality index 9, graduation 95%, college-ready 78%, teacher quality 9, funding 15,000, 230 students",
+          "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.51%; per-hood funding on the table totals 286,000"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": "no students or educators on the ledger in KONO — the educators below are elsewhere in the city",
+        "engineHooks": [
+          "Lake Merritt's student population up 18%. Young families moving in? School capacity angle. (general coverage)"
+        ],
+        "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-schools",
+      "hood": "KONO",
+      "score": null,
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Zero applicants waiting means zero excuses—this pipeline opens today.\"",
+          "src": "output/civic-voice/mayor_gavel_c107.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"When storefronts go quiet, families go next—so we're taking the fund to where the need is moving.\"",
+          "src": "output/civic-voice/mayor_gavel_c107.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Three districts flashing incoherence means we deploy three times over—starting now in East Oakland.\"",
+          "src": "output/civic-voice/mayor_gavel_c107.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): affirmed — \"Glenview's upbeat because we invested there—KONO's steady because we learned how to keep it that way.\"",
+          "src": "output/civic-voice/mayor_gavel_c107.json"
+        },
+        {
+          "text": "Ramon Vega (council d4): YES — \"The youth of Oakland deserve a chance to thrive, and this pipeline is a crucial step in providing them with the skills and opportunities they need to succeed.\"",
+          "src": "output/civic-voice/council_d4_c107.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01036",
+          "name": "Mei Wong",
+          "profile": "Mei Wong — After-school program aide — Rockridge",
+          "why": "educator on the ledger in Rockridge — none in KONO (Simulation_Ledger)",
+          "role": "After-school program aide",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-00847",
+          "name": "Caroline Cabrera",
+          "profile": "Caroline Cabrera — After-School Program Director — Uptown",
+          "why": "educator on the ledger in Uptown — none in KONO (Simulation_Ledger)",
+          "role": "After-School Program Director",
+          "hood": "Uptown"
+        },
+        {
+          "pop": "POP-00825",
+          "name": "Imogen Soto",
+          "profile": "Imogen Soto — After-School Program Director — Uptown",
+          "why": "educator on the ledger in Uptown — none in KONO (Simulation_Ledger)",
+          "role": "After-School Program Director",
+          "hood": "Uptown"
+        },
+        {
+          "pop": "POP-00321",
+          "name": "Jee Lei",
+          "profile": "Jee Lei — After-School Program Director — Uptown",
+          "why": "educator on the ledger in Uptown — none in KONO (Simulation_Ledger)",
+          "role": "After-School Program Director",
+          "hood": "Uptown"
+        },
+        {
+          "pop": "POP-00742",
+          "name": "Maya Torres-Dillon",
+          "profile": "Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher — Rockridge",
+          "why": "educator on the ledger in Rockridge — none in KONO (Simulation_Ledger)",
+          "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+          "hood": "Rockridge"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-ac25a93a42d1"
+      },
+      {
+        "t": "FACT",
+        "text": "KONO has the weakest school record on the table (index 7)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+        "id": "F-58f0a2258c55"
+      },
+      {
+        "t": "FACT",
+        "text": "5 educators on the ledger; the table says why their school reads the way it does.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+        "id": "F-fa36155cbcef"
+      },
+      {
+        "t": "FACT",
+        "text": "Enrollment moved: Fruitvale +11 students, East Oakland +10 students, San Antonio +10 students, Glenview +10 students, Brooklyn +9 students, Laurel +9 students vs C106",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C107",
+        "id": "F-2ab005445e79"
+      },
+      {
+        "t": "FACT",
+        "text": "The school quality table is unchanged since C106 — no score moved this cycle.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+        "id": "F-87a151462915"
+      },
+      {
+        "t": "FACT",
+        "text": "Ranked by school quality index: Rockridge 9, Fruitvale 8, Brooklyn 8, Laurel 8, Grand Lake 8, West Oakland 8, Adams Point 8, Piedmont Ave 8, Downtown 8, Jack London 8, Baylight District 8, Uptown 8, Lake Merritt 8, East Oakland 7, San Antonio 7, Glenview 7, Dimond 7, Ivy Hill 7, Temescal 7, Chinatown 7, Eastlake 7, KONO 7 (22 neighborhoods)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+        "id": "F-594550d45bbc"
+      },
+      {
+        "t": "FACT",
+        "text": "KONO: school quality index 7, graduation 87%, college-ready 56%, teacher quality 7, funding 12,000, 46 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+        "id": "F-55be1be7576e"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: school quality index 9, graduation 95%, college-ready 78%, teacher quality 9, funding 15,000, 230 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+        "id": "F-493bece5ee76"
+      },
+      {
+        "t": "FACT",
+        "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.51%; per-hood funding on the table totals 286,000",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C107",
+        "id": "F-3bbd8787d327"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-schools",
+      "angle": "Enrollment moved in Fruitvale — KONO has the weakest school record on the table (index 7) — the students and teachers who live it",
+      "label": "KONO has the weakest school record on the table (index 7)",
+      "hookLine": "5 educators on the ledger; the table says why their school reads the way it does.",
+      "hood": "KONO",
+      "citizens": [
+        "Mei Wong (POP-01036)",
+        "Caroline Cabrera (POP-00847)",
+        "Imogen Soto (POP-00825)",
+        "Jee Lei (POP-00321)",
+        "Maya Torres-Dillon (POP-00742)"
+      ],
+      "popids": [
+        "POP-01036",
+        "POP-00847",
+        "POP-00825",
+        "POP-00321",
+        "POP-00742"
+      ],
+      "ref": "output/beats/Neighborhood_Demographics.jsonl @C107",
+      "cycle": 107
+    },
+    "approach": "Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "SCHOOLS-SLICE-2",
+    "kind": "beat-schools",
+    "seat": {
+      "slug": "angela-reyes",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "desk": "civic",
+      "domain": "schools",
+      "builder": "buildSchoolsSlice.js"
+    },
+    "hood": "KONO",
+    "pulse": {
+      "className": "beat-schools",
+      "score": 100,
+      "label": "KONO has the weakest school record on the table (index 7)",
+      "hood": "KONO",
+      "source": "output/beats/Neighborhood_Demographics.jsonl @C107"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Enrollment moved in Fruitvale — KONO has the weakest school record on the table (index 7) — the students and teachers who live it",
+      "hookLine": "5 educators on the ledger; the table says why their school reads the way it does.",
+      "anchorFacts": [
+        "Enrollment moved: Fruitvale +11 students, East Oakland +10 students, San Antonio +10 students, Glenview +10 students, Brooklyn +9 students, Laurel +9 students vs C106",
+        "The school quality table is unchanged since C106 — no score moved this cycle.",
+        "Ranked by school quality index: Rockridge 9, Fruitvale 8, Brooklyn 8, Laurel 8, Grand Lake 8, West Oakland 8, Adams Point 8, Piedmont Ave 8, Downtown 8, Jack London 8, Baylight District 8, Uptown 8, Lake Merritt 8, East Oakland 7, San Antonio 7, Glenview 7, Dimond 7, Ivy Hill 7, Temescal 7, Chinatown 7, Eastlake 7, KONO 7 (22 neighborhoods)",
+        "KONO: school quality index 7, graduation 87%, college-ready 56%, teacher quality 7, funding 12,000, 46 students",
+        "Rockridge: school quality index 9, graduation 95%, college-ready 78%, teacher quality 9, funding 15,000, 230 students",
+        "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.51%; per-hood funding on the table totals 286,000"
+      ],
+      "evidence": [
+        {
+          "text": "Enrollment moved: Fruitvale +11 students, East Oakland +10 students, San Antonio +10 students, Glenview +10 students, Brooklyn +9 students, Laurel +9 students vs C106",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C107"
+        },
+        {
+          "text": "The school quality table is unchanged since C106 — no score moved this cycle.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C107"
+        },
+        {
+          "text": "Ranked by school quality index: Rockridge 9, Fruitvale 8, Brooklyn 8, Laurel 8, Grand Lake 8, West Oakland 8, Adams Point 8, Piedmont Ave 8, Downtown 8, Jack London 8, Baylight District 8, Uptown 8, Lake Merritt 8, East Oakland 7, San Antonio 7, Glenview 7, Dimond 7, Ivy Hill 7, Temescal 7, Chinatown 7, Eastlake 7, KONO 7 (22 neighborhoods)",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C107"
+        },
+        {
+          "text": "KONO: school quality index 7, graduation 87%, college-ready 56%, teacher quality 7, funding 12,000, 46 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C107"
+        },
+        {
+          "text": "Rockridge: school quality index 9, graduation 95%, college-ready 78%, teacher quality 9, funding 15,000, 230 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C107"
+        },
+        {
+          "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.51%; per-hood funding on the table totals 286,000",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C107"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 106
+      },
+      "hooks": [
+        {
+          "text": "Lake Merritt's student population up 18%. Young families moving in? School capacity angle.",
+          "angle": "general coverage",
+          "domain": "EDUCATION",
+          "hood": "Lake Merritt",
+          "priority": 2
+        }
+      ],
+      "note": "no students or educators on the ledger in KONO — the educators below are elsewhere in the city",
+      "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01036",
+        "name": "Mei Wong",
+        "role": "After-school program aide",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Mei Wong — After-school program aide — Rockridge",
+        "why": "educator on the ledger in Rockridge — none in KONO (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00847",
+        "name": "Caroline Cabrera",
+        "role": "After-School Program Director",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Caroline Cabrera — After-School Program Director — Uptown",
+        "why": "educator on the ledger in Uptown — none in KONO (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00825",
+        "name": "Imogen Soto",
+        "role": "After-School Program Director",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Imogen Soto — After-School Program Director — Uptown",
+        "why": "educator on the ledger in Uptown — none in KONO (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00321",
+        "name": "Jee Lei",
+        "role": "After-School Program Director",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Jee Lei — After-School Program Director — Uptown",
+        "why": "educator on the ledger in Uptown — none in KONO (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00742",
+        "name": "Maya Torres-Dillon",
+        "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher — Rockridge",
+        "why": "educator on the ledger in Rockridge — none in KONO (Simulation_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Neighborhood_Demographics.jsonl @C107",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Angela Reyes this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "text": "Angela Reyes plans to explore why KONO's school quality index remains stagnant at 7 despite stable citywide metrics, focusing on the human elements behind the numbers. With no educators on the ledger in KONO, she'll contrast the neighborhood's 46-student reality with Rockridge's thriving 230-student environment, seeking the untold pressures in a system where funding and outcomes don't align.",
+    "plan": {
+      "chase": "Angela Reyes plans to explore why KONO's school quality index remains stagnant at 7 despite stable citywide metrics, focusing on the human elements behind the numbers. With no educators on the ledger in KONO, she'll contrast the neighborhood's 46-student reality with Rockridge's thriving 230-student environment, seeking the untold pressures in a system where funding and outcomes don't align.",
+      "focus": "The disconnect between KONO's stable-but-low school quality index and the lived experience of its 46 students, despite unchanged citywide metrics.",
+      "why": "KONO's stagnation at index 7 stands out when enrollment is shifting elsewhere and the district shows growth. The absence of educators on the ledger suggests a story about systemic invisibility.",
+      "checks": [
+        "Verify if the 12,000 funding figure for KONO reflects per-student spending or a fixed allocation",
+        "Confirm whether the 87% graduation rate in KONO has held steady or fluctuated in recent cycles",
+        "Cross-reference teacher quality scores with educator retention rates in the district"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01036",
+          "question": "How does Rockridge's after-school programming adapt to its larger student population, and what barriers might prevent similar models in KONO?",
+          "basis": "F-493bece5ee76 (Rockridge's metrics) vs F-55be1be7576e (KONO's metrics)"
+        },
+        {
+          "pop": "POP-00742",
+          "question": "As a science teacher in high-performing Rockridge, what observable differences in resources or community engagement might explain KONO's persistent index 7?",
+          "basis": "F-594550d45bbc (citywide rankings)"
+        }
+      ],
+      "interpretation": "Stable numbers can mask churn—the real story may be who isn't staying in KONO long enough to move the needle.",
+      "unverifiedLead": [
+        "Families with means may be leveraging inter-district transfers despite KONO residency",
+        "The 56% college-ready rate could reflect language barriers not captured by the index"
+      ],
+      "closeQuestion": "What would it take for KONO's next enrollment shift to be upward?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Zero applicants waiting means zero excuses—this pipeline opens today.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c107.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"When storefronts go quiet, families go next—so we're taking the fund to where the need is moving.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c107.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Three districts flashing incoherence means we deploy three times over—starting now in East Oakland.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c107.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): affirmed — \"Glenview's upbeat because we invested there—KONO's steady because we learned how to keep it that way.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c107.json",
+      "popids": []
+    },
+    {
+      "label": "Ramon Vega (council d4): YES — \"The youth of Oakland deserve a chance to thrive, and this pipeline is a crucial step in providing them with the skills and opportunities they need to succeed.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c107.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 91,
+  "ranAt": "2026-09-15T21:56:26.970Z"
+}

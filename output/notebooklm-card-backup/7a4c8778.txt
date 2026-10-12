@@ -1,0 +1,355 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Frank Reyna
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: RF
+
+ 
+
+Jersey: #29
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: B
+
+ 
+
+Overall: 86
+
+ 
+
+MLB Service: 1.000
+
+ 
+
+Age: 21
+
+ 
+
+Bats: S
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'3"
+
+ 
+
+Weight: 197 lbs
+
+ 
+
+Drafted: Round 1 (2037)
+
+ 
+
+Secondary Position: LF, CF
+
+ 
+
+Hitter Tendency: WHOLE FIELD
+
+ 
+
+Born: PENNSYLVANIA
+
+ 
+
+Canonical POPID: POP-00079
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+CON R: 74
+
+ 
+
+CON L: 78
+
+ 
+
+POW R: 67
+
+ 
+
+POW L: 72
+
+ 
+
+VIS: 77
+
+ 
+
+DISC: 67
+
+ 
+
+CLT: 67
+
+ 
+
+BUNT: 30
+
+ 
+
+DBUNT: 15
+
+ 
+
+DUR: 75
+
+ 
+
+FLD: 82
+
+ 
+
+ARM: 80
+
+ 
+
+ACC: 75
+
+ 
+
+REAC: 69
+
+ 
+
+SPD: 66
+
+ 
+
+STEAL: 70
+
+ 
+
+BR AGG: 65
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   AB   R   H   2B  3B  HR  RBI  BB  SO  SB  CS  AVG   OBP   SLG
+
+ 
+
+2041  ATH   46  164  31  52  12  3   14  34   6   18  7   3   0.317 0.339 0.683
+
+
+--------------------------------------------------------------------------------
+
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  OPS   PA   SF  SAC  GIDP  HBP  IBB  TB   SB%   PO   A  E  FLD%  INN    WAR
+
+ 
+
+2041  ATH   1.022 171  1   0    1     0    0    112  .700  101  4  0  1.000 375.0  2.4
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 46
+
+ 
+
+AB: 164
+
+ 
+
+R: 31
+
+ 
+
+H: 52
+
+ 
+
+2B: 12
+
+ 
+
+3B: 3
+
+ 
+
+HR: 14
+
+ 
+
+RBI: 34
+
+ 
+
+BB: 6
+
+ 
+
+SO: 18
+
+ 
+
+SB: 7
+
+ 
+
+CS: 3
+
+ 
+
+AVG: .317
+
+ 
+
+OBP: .339
+
+ 
+
+SLG: .683
+
+ 
+
+OPS: 1.022
+
+ 
+
+TB: 112
+
+ 
+
+PO: 101
+
+ 
+
+A: 4
+
+ 
+
+E: 0
+
+ 
+
+FLD%: 1.000
+
+ 
+
+INN: 375.0
+
+ 
+
+WAR: 2.4
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2041: $780K (Pre-Arb)
+
+ 
+
+2042–2043: Renewals (RNW)
+
+ 
+
+2044–2045: Arbitration (ARB)
+
+ 
+
+2046+: Free Agent (FA)
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Options Used: 1/3
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00079
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00079

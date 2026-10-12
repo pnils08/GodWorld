@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "carmen-delaine",
+  "byline": "Carmen Delaine",
+  "bylinePopid": "POP-00011",
+  "article": "output/cron-compare/staged/civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Denise Carter",
+        "role": "quoted-source",
+        "popid": "POP-00501"
+      },
+      {
+        "name": "Avery Santana",
+        "role": "quoted-source",
+        "popid": "POP-00034"
+      },
+      {
+        "name": "Brenda Okoro",
+        "role": "quoted-source",
+        "popid": "POP-00037"
+      },
+      {
+        "name": "Marcus Webb",
+        "role": "quoted-source",
+        "popid": "POP-00790"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-001:disbursement-active",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+        "sourceRef": "citizenVoice PRESS Denise Carter"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-9fd541c76e1a",
+    "draftSha256": "12065cb0394bdd4a428ed388e834c76d16211c40ddf054f2e3cab9b4a2327956",
+    "verdict": "output/cron-compare/civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5.rhea.json",
+    "ranAt": "2026-10-05T23:15:36.173Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.490Z"
+}

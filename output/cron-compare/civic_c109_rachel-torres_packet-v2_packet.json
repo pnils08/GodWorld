@@ -1,0 +1,1024 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "rachel-torres",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-safety",
+      "angle": "Chinatown logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "label": "Chinatown logged the most incidents (8) | 22 neighborhoods on the table",
+      "hookLine": "Chinatown leads the incident count; Laurel waits longest for a response; 1 public-safety staff on the roster.",
+      "hood": "Chinatown",
+      "citizens": [
+        "Vanessa Tran-Muñoz (POP-01021)"
+      ],
+      "popids": [
+        "POP-01021"
+      ],
+      "ref": "output/beats/Crime_Metrics.jsonl @C109",
+      "cycle": 109
+    }
+  },
+  "angle": "output/cron-compare/civic_c109_rachel-torres_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-01041",
+      "name": "Ronald Williams",
+      "quote": "I hear Chinatown's got more incidents than other spots lately, but honestly, at the restaurant we just keep our heads down and do our work. The numbers don't really change how we move through the day.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I hear Chinatown's got more incidents than other spots lately, but honestly, at the restaurant we just keep our heads down and do our work. The numbers don't really change how we move through the day.\",\n  \"fact_ids\": [\"F-ebba208e4636\", \"F-111a31fe4e1c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ebba208e4636",
+          "F-111a31fe4e1c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01041-0ce687420c",
+        "authoredQuote": true,
+        "publishableQuote": "I hear Chinatown's got more incidents than other spots lately, but honestly, at the restaurant we just keep our heads down and do our work. The numbers don't really change how we move through the day."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01041",
+          "name": "Ronald Williams",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Patterns and clearance rates in Chinatown's incidents.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "Chinatown",
+          "focus": "Patterns and clearance rates in Chinatown's incidents.",
+          "src": "output/beats/Crime_Metrics.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Ronald Williams — Line cook — Chinatown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-ebba208e4636"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown leads the incident count; Laurel waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-5b009aa3127a"
+          },
+          {
+            "t": "FACT",
+            "text": "138 incidents across 22 neighborhoods; most in Chinatown 8, Glenview 8, Laurel 8, KONO 8, Temescal 8; fewest in Eastlake 4, Piedmont Ave 4, Lake Merritt 4",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-d67acf0ded31"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: 8 incidents (+1 vs C108), response 10.5 min, clearance 23%, property index 37, violent index 26",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-111a31fe4e1c"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Laurel: 8 incidents (+4 vs C108), response 10.8 min, clearance 18%, property index 38, violent index 24",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-05f5f1ad643a"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: none; easing: KONO",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-fea2f2783fcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Williams — Line cook — Chinatown",
+            "src": "Simulation_Ledger profile for POP-01041",
+            "id": "F-b41370f1cda1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00142",
+      "name": "Jonas Patel",
+      "quote": "Working in Chinatown, I've noticed the streets feel busier lately with more incidents, but it's hard to say if that's just my perception or if it's really worse than other neighborhoods. The clearance rates seem low, which makes people nervous.",
+      "disp": "curious, open to new things",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Working in Chinatown, I've noticed the streets feel busier lately with more incidents, but it's hard to say if that's just my perception or if it's really worse than other neighborhoods. The clearance rates seem low, which makes people nervous.\",\n  \"fact_ids\": [\"F-111a31fe4e1c\", \"F-ebba208e4636\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-111a31fe4e1c",
+          "F-ebba208e4636"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00142-2346c2a664",
+        "authoredQuote": true,
+        "publishableQuote": "Working in Chinatown, I've noticed the streets feel busier lately with more incidents, but it's hard to say if that's just my perception or if it's really worse than other neighborhoods. The clearance rates seem low, which makes people nervous."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00142",
+          "name": "Jonas Patel",
+          "role": "MEDICAL EXAMINER",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Patterns and clearance rates in Chinatown's incidents.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "Chinatown",
+          "focus": "Patterns and clearance rates in Chinatown's incidents.",
+          "src": "output/beats/Crime_Metrics.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-ebba208e4636"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown leads the incident count; Laurel waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-5b009aa3127a"
+          },
+          {
+            "t": "FACT",
+            "text": "138 incidents across 22 neighborhoods; most in Chinatown 8, Glenview 8, Laurel 8, KONO 8, Temescal 8; fewest in Eastlake 4, Piedmont Ave 4, Lake Merritt 4",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-d67acf0ded31"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: 8 incidents (+1 vs C108), response 10.5 min, clearance 23%, property index 37, violent index 26",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-111a31fe4e1c"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Laurel: 8 incidents (+4 vs C108), response 10.8 min, clearance 18%, property index 38, violent index 24",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-05f5f1ad643a"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: none; easing: KONO",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-fea2f2783fcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00142",
+            "id": "F-2d4a208a30df"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00214",
+      "name": "Jacquez Tearn",
+      "quote": "Man, I hear Chinatown's got the most trouble right now, but I keep my head down, work my shift. Folks say the cops take their time clearing things up, but what can you do? Just keep moving, stay sharp.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, I hear Chinatown's got the most trouble right now, but I keep my head down, work my shift. Folks say the cops take their time clearing things up, but what can you do? Just keep moving, stay sharp.\",\n  \"fact_ids\": [\"F-ebba208e4636\", \"F-111a31fe4e1c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ebba208e4636",
+          "F-111a31fe4e1c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00214-e6de4601ac",
+        "authoredQuote": true,
+        "publishableQuote": "Man, I hear Chinatown's got the most trouble right now, but I keep my head down, work my shift. Folks say the cops take their time clearing things up, but what can you do? Just keep moving, stay sharp."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00214",
+          "name": "Jacquez Tearn",
+          "role": "Dishwasher",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Patterns and clearance rates in Chinatown's incidents.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "Chinatown",
+          "focus": "Patterns and clearance rates in Chinatown's incidents.",
+          "src": "output/beats/Crime_Metrics.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jacquez Tearn — Dishwasher — Chinatown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-ebba208e4636"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown leads the incident count; Laurel waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-5b009aa3127a"
+          },
+          {
+            "t": "FACT",
+            "text": "138 incidents across 22 neighborhoods; most in Chinatown 8, Glenview 8, Laurel 8, KONO 8, Temescal 8; fewest in Eastlake 4, Piedmont Ave 4, Lake Merritt 4",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-d67acf0ded31"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: 8 incidents (+1 vs C108), response 10.5 min, clearance 23%, property index 37, violent index 26",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-111a31fe4e1c"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Laurel: 8 incidents (+4 vs C108), response 10.8 min, clearance 18%, property index 38, violent index 24",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-05f5f1ad643a"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: none; easing: KONO",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-fea2f2783fcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Jacquez Tearn — Dishwasher — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00214",
+            "id": "F-02b458a30790"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-01021",
+      "name": "Vanessa Tran-Muñoz",
+      "quote": null,
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; curious, open to new things; principled, plays it straight",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: citizen is not quote eligible",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Chinatown's numbers weigh on me because I know what it means when response times lag—it's not just statistics, it's someone's grandmother waiting too long for help. What I want is the same thing we proved possible in West Oakland: trained neighbors stepping up before crisis hits, and city resources that don't make communities compete for safety.\",\n  \"fact_ids\": [\"F-111a31fe4e1c\", \"F-5b009aa3127a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01021",
+          "name": "Vanessa Tran-Muñoz",
+          "role": "OARI Program Director",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "Using only the supplied facts, what about \"Patterns and clearance rates in Chinatown's incidents.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "Chinatown",
+          "focus": "Patterns and clearance rates in Chinatown's incidents.",
+          "src": "output/beats/Crime_Metrics.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "works at Oakland Alternative Response Initiative (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+          "evidence": [
+            {
+              "id": "EV-114948378a",
+              "src": "output/beats/Crime_Metrics.jsonl @C109",
+              "text": "Chinatown leads the incident count; Laurel waits longest for a response; 1 public-safety staff on the roster."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-ebba208e4636"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown leads the incident count; Laurel waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-5b009aa3127a"
+          },
+          {
+            "t": "FACT",
+            "text": "138 incidents across 22 neighborhoods; most in Chinatown 8, Glenview 8, Laurel 8, KONO 8, Temescal 8; fewest in Eastlake 4, Piedmont Ave 4, Lake Merritt 4",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-d67acf0ded31"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: 8 incidents (+1 vs C108), response 10.5 min, clearance 23%, property index 37, violent index 26",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-111a31fe4e1c"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Laurel: 8 incidents (+4 vs C108), response 10.8 min, clearance 18%, property index 38, violent index 24",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-05f5f1ad643a"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: none; easing: KONO",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-fea2f2783fcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+            "src": "Simulation_Ledger profile for POP-01021",
+            "id": "F-9b5455ac6638"
+          }
+        ],
+        "limits": {
+          "quoteEligible": false,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Return abstain. This citizen is not eligible for this interview path."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01041",
+      "name": "Ronald Williams",
+      "quote": "I hear Chinatown's got more incidents than other spots lately, but honestly, at the restaurant we just keep our heads down and do our work. The numbers don't really change how we move through the day.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I hear Chinatown's got more incidents than other spots lately, but honestly, at the restaurant we just keep our heads down and do our work. The numbers don't really change how we move through the day.\",\n  \"fact_ids\": [\"F-ebba208e4636\", \"F-111a31fe4e1c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ebba208e4636",
+          "F-111a31fe4e1c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01041-0ce687420c",
+        "authoredQuote": true,
+        "publishableQuote": "I hear Chinatown's got more incidents than other spots lately, but honestly, at the restaurant we just keep our heads down and do our work. The numbers don't really change how we move through the day."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01041",
+          "name": "Ronald Williams",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Patterns and clearance rates in Chinatown's incidents.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "Chinatown",
+          "focus": "Patterns and clearance rates in Chinatown's incidents.",
+          "src": "output/beats/Crime_Metrics.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Ronald Williams — Line cook — Chinatown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-ebba208e4636"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown leads the incident count; Laurel waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-5b009aa3127a"
+          },
+          {
+            "t": "FACT",
+            "text": "138 incidents across 22 neighborhoods; most in Chinatown 8, Glenview 8, Laurel 8, KONO 8, Temescal 8; fewest in Eastlake 4, Piedmont Ave 4, Lake Merritt 4",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-d67acf0ded31"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: 8 incidents (+1 vs C108), response 10.5 min, clearance 23%, property index 37, violent index 26",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-111a31fe4e1c"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Laurel: 8 incidents (+4 vs C108), response 10.8 min, clearance 18%, property index 38, violent index 24",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-05f5f1ad643a"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: none; easing: KONO",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-fea2f2783fcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Williams — Line cook — Chinatown",
+            "src": "Simulation_Ledger profile for POP-01041",
+            "id": "F-b41370f1cda1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00142",
+      "name": "Jonas Patel",
+      "quote": "Working in Chinatown, I've noticed the streets feel busier lately with more incidents, but it's hard to say if that's just my perception or if it's really worse than other neighborhoods. The clearance rates seem low, which makes people nervous.",
+      "disp": "curious, open to new things",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Working in Chinatown, I've noticed the streets feel busier lately with more incidents, but it's hard to say if that's just my perception or if it's really worse than other neighborhoods. The clearance rates seem low, which makes people nervous.\",\n  \"fact_ids\": [\"F-111a31fe4e1c\", \"F-ebba208e4636\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-111a31fe4e1c",
+          "F-ebba208e4636"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00142-2346c2a664",
+        "authoredQuote": true,
+        "publishableQuote": "Working in Chinatown, I've noticed the streets feel busier lately with more incidents, but it's hard to say if that's just my perception or if it's really worse than other neighborhoods. The clearance rates seem low, which makes people nervous."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00142",
+          "name": "Jonas Patel",
+          "role": "MEDICAL EXAMINER",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Patterns and clearance rates in Chinatown's incidents.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "Chinatown",
+          "focus": "Patterns and clearance rates in Chinatown's incidents.",
+          "src": "output/beats/Crime_Metrics.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-ebba208e4636"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown leads the incident count; Laurel waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-5b009aa3127a"
+          },
+          {
+            "t": "FACT",
+            "text": "138 incidents across 22 neighborhoods; most in Chinatown 8, Glenview 8, Laurel 8, KONO 8, Temescal 8; fewest in Eastlake 4, Piedmont Ave 4, Lake Merritt 4",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-d67acf0ded31"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: 8 incidents (+1 vs C108), response 10.5 min, clearance 23%, property index 37, violent index 26",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-111a31fe4e1c"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Laurel: 8 incidents (+4 vs C108), response 10.8 min, clearance 18%, property index 38, violent index 24",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-05f5f1ad643a"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: none; easing: KONO",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-fea2f2783fcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00142",
+            "id": "F-2d4a208a30df"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00214",
+      "name": "Jacquez Tearn",
+      "quote": "Man, I hear Chinatown's got the most trouble right now, but I keep my head down, work my shift. Folks say the cops take their time clearing things up, but what can you do? Just keep moving, stay sharp.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, I hear Chinatown's got the most trouble right now, but I keep my head down, work my shift. Folks say the cops take their time clearing things up, but what can you do? Just keep moving, stay sharp.\",\n  \"fact_ids\": [\"F-ebba208e4636\", \"F-111a31fe4e1c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ebba208e4636",
+          "F-111a31fe4e1c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00214-e6de4601ac",
+        "authoredQuote": true,
+        "publishableQuote": "Man, I hear Chinatown's got the most trouble right now, but I keep my head down, work my shift. Folks say the cops take their time clearing things up, but what can you do? Just keep moving, stay sharp."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00214",
+          "name": "Jacquez Tearn",
+          "role": "Dishwasher",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Patterns and clearance rates in Chinatown's incidents.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "Chinatown",
+          "focus": "Patterns and clearance rates in Chinatown's incidents.",
+          "src": "output/beats/Crime_Metrics.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jacquez Tearn — Dishwasher — Chinatown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-ebba208e4636"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown leads the incident count; Laurel waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-5b009aa3127a"
+          },
+          {
+            "t": "FACT",
+            "text": "138 incidents across 22 neighborhoods; most in Chinatown 8, Glenview 8, Laurel 8, KONO 8, Temescal 8; fewest in Eastlake 4, Piedmont Ave 4, Lake Merritt 4",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-d67acf0ded31"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: 8 incidents (+1 vs C108), response 10.5 min, clearance 23%, property index 37, violent index 26",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-111a31fe4e1c"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Laurel: 8 incidents (+4 vs C108), response 10.8 min, clearance 18%, property index 38, violent index 24",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-05f5f1ad643a"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: none; easing: KONO",
+            "src": "output/beats/Crime_Metrics.jsonl @C109",
+            "id": "F-fea2f2783fcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Jacquez Tearn — Dishwasher — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00214",
+            "id": "F-02b458a30790"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-29T18:16:56.529Z"
+}

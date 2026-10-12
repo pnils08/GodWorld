@@ -1,0 +1,397 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00157",
+    "name": "Noah Tan",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "C109 overcast, 49°F after fog — what this weather does to a day in the city",
+    "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "environment",
+      "hood": null,
+      "facts": [
+        "This cycle: overcast, 49°F, impact 1.05, comfort 0.5, mood neutral",
+        "Last 3 cycles: C106 overcast 52°F, C107 fog 44°F, C108 fog 46°F",
+        "Colin Soria — fought off a head cold that lingered all week"
+      ],
+      "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+      "note": null,
+      "engineHooks": [
+        "Multiple weather signals detected. Could be coincidence or early pattern. (general coverage)",
+        "Uptown boom sustained — momentum 10/10, the block everyone wants onto (desk rotation)",
+        "Sarah Corliss moved from Temescal to Jack London — moving up from Temescal (desk rotation)",
+        "Briar Soto moved from Temescal to Jack London — moving up from Temescal (desk rotation)"
+      ],
+      "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-weather",
+    "hood": null,
+    "src": "output/beats/Cycle_Weather.jsonl CycleID 109",
+    "plan": {
+      "focus": "The unremarkable but pervasive effect of neutral, chilly overcast on daily routines and decision-making.",
+      "closeQuestion": "When does 'not bad enough to stay in' become 'not good enough to go out'—and who decides?"
+    },
+    "runningStories": [
+      "The West Oakland Crime Spike [West Oakland] — ENDED this week after 5 week(s)",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — under way",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — under way",
+      "Temescal Community Health Center — operational [Temescal] — under way",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — under way",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — announced [Downtown] — under way"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00227",
+        "name": "Colin Soria",
+        "profile": "Colin Soria — Security guard — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00227-4fcac82fa4",
+        "pop": "POP-00227",
+        "name": "Colin Soria",
+        "quote": "You know, it's not the kind of weather that stops you in your tracks—just that dull, gray blanket that makes everything feel a little slower. I've noticed it in the way people move, like we're all carrying an extra weight we can't quite name. Even my usual rounds feel heavier, like the cold's seeped into my bones and decided to stay. It's not bad, exactly, just... there. Makes you want to hunker down, keep to yourself a little more than usual.",
+        "factIds": [
+          "F-7df180b7c53c",
+          "F-d7cce4dd9c81"
+        ],
+        "src": "packet.W2[POP-00227]"
+      },
+      {
+        "id": "Q-POP-00170-58cc805588",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "You know, when it's this kind of flat gray for days, I notice my regulars come in quieter, like they're carrying the weather inside with them. Even the dough feels slower to rise—not bad, just... deliberate, like it's thinking harder about whether it wants to wake up today.",
+        "factIds": [
+          "F-8c552dcaddd5",
+          "F-7df180b7c53c"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00201-8284a6dd06",
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "quote": "The overcast days make everything feel slower, like the world is holding its breath. It’s not gloomy, just... neutral, and it makes me want to stay inside, keep things simple, and not push too hard.",
+        "factIds": [
+          "F-7df180b7c53c"
+        ],
+        "src": "packet.W2[POP-00201]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Noah Tan",
+        "text": "Possible increase in daytime foot traffic at cafes as people seek warmth",
+        "usable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "Parents opting for indoor playgrounds over outdoor parks",
+        "usable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "Delivery workers layering differently than they would in clear cold",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "C109 overcast, 49°F after fog",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 109",
+      "id": "F-8c552dcaddd5"
+    },
+    {
+      "t": "FACT",
+      "text": "C109 overcast, 49°F after fog; 1 residents on the record lived it.",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 109",
+      "id": "F-06707c64bf25"
+    },
+    {
+      "t": "FACT",
+      "text": "This cycle: overcast, 49°F, impact 1.05, comfort 0.5, mood neutral",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 109",
+      "id": "F-7df180b7c53c"
+    },
+    {
+      "t": "FACT",
+      "text": "Last 3 cycles: C106 overcast 52°F, C107 fog 44°F, C108 fog 46°F",
+      "src": "output/beats/Cycle_Weather.jsonl",
+      "id": "F-18b28413f144"
+    },
+    {
+      "t": "FACT",
+      "text": "Colin Soria — fought off a head cold that lingered all week",
+      "src": "output/world_summary_c109.md ## Who Lived It",
+      "id": "F-d7cce4dd9c81"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Show what this season moved in GodWorld. The weather snapshot is context, never the Article. Live a Packet-backed person or place on a day like this.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person civic environment reporting from the street",
+      "targetWords": "400-700",
+      "opening": "a named person or Packet-named place living this cycle's season",
+      "closing": "what is still unfinished for them"
+    },
+    "authorizedTexture": [
+      "sensory dress of a Packet-named place already in the season-feel facts",
+      "the reporter's presence at that place",
+      "transitions that add no forecast or unsupplied measurement"
+    ],
+    "textureConditions": [
+      "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
+      "do not announce season or temperature as the lede",
+      "do not import real-world Oakland winter tropes absent from the Packet",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
+      "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
+      "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
+      "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-acfea1389277",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-8c552dcaddd5",
+        "t": "FACT",
+        "text": "C109 overcast, 49°F after fog",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 109"
+      },
+      {
+        "id": "F-06707c64bf25",
+        "t": "FACT",
+        "text": "C109 overcast, 49°F after fog; 1 residents on the record lived it.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 109"
+      },
+      {
+        "id": "F-7df180b7c53c",
+        "t": "FACT",
+        "text": "This cycle: overcast, 49°F, impact 1.05, comfort 0.5, mood neutral",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 109"
+      },
+      {
+        "id": "F-18b28413f144",
+        "t": "FACT",
+        "text": "Last 3 cycles: C106 overcast 52°F, C107 fog 44°F, C108 fog 46°F",
+        "src": "output/beats/Cycle_Weather.jsonl"
+      },
+      {
+        "id": "F-d7cce4dd9c81",
+        "t": "FACT",
+        "text": "Colin Soria — fought off a head cold that lingered all week",
+        "src": "output/world_summary_c109.md ## Who Lived It"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00227-4fcac82fa4",
+        "speakerId": "POP-00227",
+        "speakerName": "Colin Soria",
+        "text": "You know, it's not the kind of weather that stops you in your tracks—just that dull, gray blanket that makes everything feel a little slower. I've noticed it in the way people move, like we're all carrying an extra weight we can't quite name. Even my usual rounds feel heavier, like the cold's seeped into my bones and decided to stay. It's not bad, exactly, just... there. Makes you want to hunker down, keep to yourself a little more than usual.",
+        "factIds": [
+          "F-7df180b7c53c",
+          "F-d7cce4dd9c81"
+        ],
+        "src": "packet.W2[POP-00227]"
+      },
+      {
+        "id": "Q-POP-00170-58cc805588",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "You know, when it's this kind of flat gray for days, I notice my regulars come in quieter, like they're carrying the weather inside with them. Even the dough feels slower to rise—not bad, just... deliberate, like it's thinking harder about whether it wants to wake up today.",
+        "factIds": [
+          "F-8c552dcaddd5",
+          "F-7df180b7c53c"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00201-8284a6dd06",
+        "speakerId": "POP-00201",
+        "speakerName": "Elio Perez",
+        "text": "The overcast days make everything feel slower, like the world is holding its breath. It’s not gloomy, just... neutral, and it makes me want to stay inside, keep things simple, and not push too hard.",
+        "factIds": [
+          "F-7df180b7c53c"
+        ],
+        "src": "packet.W2[POP-00201]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00227",
+        "name": "Colin Soria",
+        "profile": "Colin Soria — Security guard — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Noah Tan",
+        "text": "Possible increase in daytime foot traffic at cafes as people seek warmth",
+        "publishable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "Parents opting for indoor playgrounds over outdoor parks",
+        "publishable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "Delivery workers layering differently than they would in clear cold",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "sensory dress of a Packet-named place already in the season-feel facts",
+      "the reporter's presence at that place",
+      "transitions that add no forecast or unsupplied measurement"
+    ],
+    "textureConditions": [
+      "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
+      "do not announce season or temperature as the lede",
+      "do not import real-world Oakland winter tropes absent from the Packet",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
+      "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
+      "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
+      "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+    ]
+  }
+}

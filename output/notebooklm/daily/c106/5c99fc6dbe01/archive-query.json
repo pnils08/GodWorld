@@ -1,0 +1,5 @@
+{
+  "answer": "Published-archive continuity was unavailable for this run (archive query skipped: the nlm archive lookup was OOM-killed twice on 2026-09-07). Treat this brief as same-day reporting without prior-cycle continuity.",
+  "sources_used": [],
+  "degraded": true
+}

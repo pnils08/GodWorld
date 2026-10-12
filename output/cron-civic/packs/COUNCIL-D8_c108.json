@@ -1,0 +1,296 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": true,
+  "actor": {
+    "id": "POP-00505",
+    "name": "Nina Chen",
+    "role": "City Council District 8",
+    "officeId": "COUNCIL-D8",
+    "district": "D8",
+    "faction": "CRC",
+    "agentDir": "civic-office-council-d8",
+    "initiative": null,
+    "dials": {
+      "approval": 65
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "no move this cycle"
+  },
+  "pulse": null,
+  "prewrite": {
+    "claim": null,
+    "lineFacts": [],
+    "missing": [
+      "no due action on this seat this cycle"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "No move for this seat in the available ledgers through C108.",
+      "moves": []
+    },
+    "board": [],
+    "boardAvailable": true,
+    "boardIds": [],
+    "boardText": "Your board is empty: no initiative sponsors you or touches your turf.",
+    "interventions": {
+      "available": true,
+      "playable": [
+        {
+          "key": "health-service",
+          "domain": "health",
+          "label": "Clinic, health center or care program"
+        },
+        {
+          "key": "transit-project",
+          "domain": "transit",
+          "label": "Station, line or transit hub"
+        },
+        {
+          "key": "school-program",
+          "domain": "education",
+          "label": "School funding or education program"
+        },
+        {
+          "key": "housing-program",
+          "domain": "housing",
+          "label": "Housing stabilization or rent relief program"
+        }
+      ],
+      "text": "Interventions you may propose (closed catalog; propose requires a budget inside the domain band):\n- health-service (health) — Clinic, health center or care program — budget band $5M-$100M\n- transit-project (transit) — Station, line or transit hub — budget band $20M-$500M\n- school-program (education) — School funding or education program — budget band $1M-$50M\n- housing-program (housing) — Housing stabilization or rent relief program — budget band $5M-$50M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [],
+      "participation": [],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 106,
+      "throughCycle": 108,
+      "window": "Complaint display C106–C108; condition counter C108 only.",
+      "text": "Complaint display C106–C108; condition counter C108 only.\nNo Civic complaints from your turf in this window."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 2,
+      "shownStaff": 2,
+      "text": "The working city:\n- Vanessa Tran-Muñoz: The East Oakland crews handled three opioid overdoses and a domestic call today—no transports, all resolved… (C108)\n- Marcus Webb: Sixty-nine households this month. That's good. That's real. But I keep staring at the Downtown canvass… (C108)"
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-108-civic-office-council-d8",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d8",
+          "demand": "Nina Chen — City Council District 8 — Review the verified applicant intake audit for INIT-007 and address Eastlake corridor decay signals.",
+          "sourceText": "## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Review the verified applicant intake audit for INIT-007 and address Eastlake corridor decay signals.\n- **Why:** In C107 Chen demanded verifiable intake audits before endorsing full rollout; C108 marks the first cohort placement review while Eastlake logs decay momentum 4 with CrimeIndex at 0.61.\n- **Acceptance:** A formal district audit finding on INIT-007 placement transparency and a documented municipal response to Eastlake crime metrics.\n- **Silence consequence:** Operational rollout of apprenticeship cohorts proceeds without legislative audit approval, leaving D8 intake unverified.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "open": [
+        {
+          "id": "CONF-108-civic-office-council-d8",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d8",
+          "demand": "Nina Chen — City Council District 8 — Review the verified applicant intake audit for INIT-007 and address Eastlake corridor decay signals.",
+          "sourceText": "## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Review the verified applicant intake audit for INIT-007 and address Eastlake corridor decay signals.\n- **Why:** In C107 Chen demanded verifiable intake audits before endorsing full rollout; C108 marks the first cohort placement review while Eastlake logs decay momentum 4 with CrimeIndex at 0.61.\n- **Acceptance:** A formal district audit finding on INIT-007 placement transparency and a documented municipal response to Eastlake crime metrics.\n- **Silence consequence:** Operational rollout of apprenticeship cohorts proceeds without legislative audit approval, leaving D8 intake unverified.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": []
+    },
+    "confrontation": {
+      "id": "CONF-108-civic-office-council-d8",
+      "cycle": 108,
+      "agentDir": "civic-office-council-d8",
+      "demand": "Nina Chen — City Council District 8 — Review the verified applicant intake audit for INIT-007 and address Eastlake corridor decay signals.",
+      "sourceText": "## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Review the verified applicant intake audit for INIT-007 and address Eastlake corridor decay signals.\n- **Why:** In C107 Chen demanded verifiable intake audits before endorsing full rollout; C108 marks the first cohort placement review while Eastlake logs decay momentum 4 with CrimeIndex at 0.61.\n- **Acceptance:** A formal district audit finding on INIT-007 placement transparency and a documented municipal response to Eastlake crime metrics.\n- **Silence consequence:** Operational rollout of apprenticeship cohorts proceeds without legislative audit approval, leaving D8 intake unverified.\n",
+      "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 108,
+      "problems": [
+        {
+          "id": "[\"Adams Point\",\"housing.hardshipHouseholds\"]",
+          "hood": "Adams Point",
+          "conditionKey": "housing.hardshipHouseholds",
+          "label": "rent-burden households",
+          "count": 1,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Adams Point\",\"health.sickResidents\"]",
+          "hood": "Adams Point",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 96,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Eastlake\",\"health.sickResidents\"]",
+          "hood": "Eastlake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 90,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Grand Lake\",\"health.sickResidents\"]",
+          "hood": "Grand Lake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 105,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Lake Merritt\",\"housing.hardshipHouseholds\"]",
+          "hood": "Lake Merritt",
+          "conditionKey": "housing.hardshipHouseholds",
+          "label": "rent-burden households",
+          "count": 29,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Lake Merritt\",\"health.sickResidents\"]",
+          "hood": "Lake Merritt",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 17,
+          "cycle": 108
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Adams Point\",\"housing.hardshipHouseholds\"]",
+          "hood": "Adams Point",
+          "conditionKey": "housing.hardshipHouseholds",
+          "label": "rent-burden households",
+          "count": 1,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Adams Point\",\"health.sickResidents\"]",
+          "hood": "Adams Point",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 96,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Eastlake\",\"health.sickResidents\"]",
+          "hood": "Eastlake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 90,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Grand Lake\",\"health.sickResidents\"]",
+          "hood": "Grand Lake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 105,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Lake Merritt\",\"housing.hardshipHouseholds\"]",
+          "hood": "Lake Merritt",
+          "conditionKey": "housing.hardshipHouseholds",
+          "label": "rent-burden households",
+          "count": 29,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Lake Merritt\",\"health.sickResidents\"]",
+          "hood": "Lake Merritt",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 17,
+          "cycle": 108
+        }
+      ],
+      "passedOver": [],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Condition problems at C108; prior Sunday folds through C107.\n- Adams Point: rent-burden households 1\n- Adams Point: sick residents 96\n- Eastlake: sick residents 90\n- Grand Lake: sick residents 105\n- Lake Merritt: rent-burden households 29\n- Lake Merritt: sick residents 17\nNo earlier pack proves a displayed condition."
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Lake Merritt",
+      "Adams Point",
+      "Grand Lake",
+      "Eastlake"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D8",
+        "PopId": "POP-00505",
+        "Holder": "Nina Chen",
+        "District": "D8",
+        "Approval": "65"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D6",
+        "PopId": "POP-00044",
+        "Holder": "Elliott Crane",
+        "District": "D6",
+        "Faction": "CRC",
+        "Approval": 55
+      },
+      {
+        "OfficeId": "COUNCIL-D7",
+        "PopId": "POP-00504",
+        "Holder": "Warren Ashford",
+        "District": "D7",
+        "Faction": "CRC",
+        "Approval": 51
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

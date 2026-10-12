@@ -1,0 +1,961 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "kind": "anomaly",
+      "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+      "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+      "hood": null,
+      "popids": [],
+      "citizens": []
+    }
+  },
+  "angle": "output/cron-compare/civic_c109_luis-navarro_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "Honestly, I hear teachers and parents at school talking about how the city keeps promising things for Fruitvale but nothing ever moves forward. We see the same empty lots year after year, and nobody ever explains why.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I hear teachers and parents at school talking about how the city keeps promising things for Fruitvale but nothing ever moves forward. We see the same empty lots year after year, and nobody ever explains why.\",\n  \"fact_ids\": [\"F-b1cc6de70ce5\", \"F-08498ffab668\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b1cc6de70ce5",
+          "F-08498ffab668"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-90c78da167",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, I hear teachers and parents at school talking about how the city keeps promising things for Fruitvale but nothing ever moves forward. We see the same empty lots year after year, and nobody ever explains why."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "K-8 Teacher,Former Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "What have you seen, felt, or understood about \"Accountability for the stalled Fruitvale Transit Hub Phase II visioning process\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": null,
+          "focus": "Accountability for the stalled Fruitvale Transit Hub Phase II visioning process",
+          "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale",
+          "evidence": [],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "civic gap in city — who is accountable, what council has or hasn't done",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-b1cc6de70ce5"
+          },
+          {
+            "t": "FACT",
+            "text": "No civic initiative addresses the city signal surfaced this cycle.",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-08498ffab668"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-dd73052ec46c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward. It feels like everyone’s waiting for someone else to take charge.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward. It feels like everyone’s waiting for someone else to take charge.\",\"fact_ids\":[\"F-b1cc6de70ce5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[],\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b1cc6de70ce5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-dec86e01fa",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward. It feels like everyone’s waiting for someone else to take charge."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "What have you seen, felt, or understood about \"Accountability for the stalled Fruitvale Transit Hub Phase II visioning process\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": null,
+          "focus": "Accountability for the stalled Fruitvale Transit Hub Phase II visioning process",
+          "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "civic gap in city — who is accountable, what council has or hasn't done",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-b1cc6de70ce5"
+          },
+          {
+            "t": "FACT",
+            "text": "No civic initiative addresses the city signal surfaced this cycle.",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-08498ffab668"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "Honestly, I hear folks at the diner grumbling about how nothing ever moves forward with the Fruitvale plans, but nobody seems to know who's actually holding the reins or why it's stuck.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I hear folks at the diner grumbling about how nothing ever moves forward with the Fruitvale plans, but nobody seems to know who's actually holding the reins or why it's stuck.\",\n  \"fact_ids\": [\"F-b1cc6de70ce5\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b1cc6de70ce5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00201-9887a91cd7",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, I hear folks at the diner grumbling about how nothing ever moves forward with the Fruitvale plans, but nobody seems to know who's actually holding the reins or why it's stuck."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00201",
+          "name": "Elio Perez",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "What have you seen, felt, or understood about \"Accountability for the stalled Fruitvale Transit Hub Phase II visioning process\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": null,
+          "focus": "Accountability for the stalled Fruitvale Transit Hub Phase II visioning process",
+          "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Elio Perez — Server — Rockridge",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "civic gap in city — who is accountable, what council has or hasn't done",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-b1cc6de70ce5"
+          },
+          {
+            "t": "FACT",
+            "text": "No civic initiative addresses the city signal surfaced this cycle.",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-08498ffab668"
+          },
+          {
+            "t": "FACT",
+            "text": "Elio Perez — Server — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00201",
+            "id": "F-2ddbe48011ea"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no one’s stepping up to take responsibility—it’s frustrating because we need that progress.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no one’s stepping up to take responsibility—it’s frustrating because we need that progress.\",\"fact_ids\":[\"F-b1cc6de70ce5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[],\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b1cc6de70ce5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00210-4fcde121f6",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no one’s stepping up to take responsibility—it’s frustrating because we need that progress."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00210",
+          "name": "Depak Ying",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "What have you seen, felt, or understood about \"Accountability for the stalled Fruitvale Transit Hub Phase II visioning process\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": null,
+          "focus": "Accountability for the stalled Fruitvale Transit Hub Phase II visioning process",
+          "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Depak Ying — Server — Rockridge",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "civic gap in city — who is accountable, what council has or hasn't done",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-b1cc6de70ce5"
+          },
+          {
+            "t": "FACT",
+            "text": "No civic initiative addresses the city signal surfaced this cycle.",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-08498ffab668"
+          },
+          {
+            "t": "FACT",
+            "text": "Depak Ying — Server — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00210",
+            "id": "F-d4c31165a2d5"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "Honestly, I hear teachers and parents at school talking about how the city keeps promising things for Fruitvale but nothing ever moves forward. We see the same empty lots year after year, and nobody ever explains why.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I hear teachers and parents at school talking about how the city keeps promising things for Fruitvale but nothing ever moves forward. We see the same empty lots year after year, and nobody ever explains why.\",\n  \"fact_ids\": [\"F-b1cc6de70ce5\", \"F-08498ffab668\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b1cc6de70ce5",
+          "F-08498ffab668"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-90c78da167",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, I hear teachers and parents at school talking about how the city keeps promising things for Fruitvale but nothing ever moves forward. We see the same empty lots year after year, and nobody ever explains why."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "K-8 Teacher,Former Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "What have you seen, felt, or understood about \"Accountability for the stalled Fruitvale Transit Hub Phase II visioning process\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": null,
+          "focus": "Accountability for the stalled Fruitvale Transit Hub Phase II visioning process",
+          "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale",
+          "evidence": [],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "civic gap in city — who is accountable, what council has or hasn't done",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-b1cc6de70ce5"
+          },
+          {
+            "t": "FACT",
+            "text": "No civic initiative addresses the city signal surfaced this cycle.",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-08498ffab668"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-dd73052ec46c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward. It feels like everyone’s waiting for someone else to take charge.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward. It feels like everyone’s waiting for someone else to take charge.\",\"fact_ids\":[\"F-b1cc6de70ce5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[],\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b1cc6de70ce5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-dec86e01fa",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward. It feels like everyone’s waiting for someone else to take charge."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "What have you seen, felt, or understood about \"Accountability for the stalled Fruitvale Transit Hub Phase II visioning process\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": null,
+          "focus": "Accountability for the stalled Fruitvale Transit Hub Phase II visioning process",
+          "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "civic gap in city — who is accountable, what council has or hasn't done",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-b1cc6de70ce5"
+          },
+          {
+            "t": "FACT",
+            "text": "No civic initiative addresses the city signal surfaced this cycle.",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-08498ffab668"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "Honestly, I hear folks at the diner grumbling about how nothing ever moves forward with the Fruitvale plans, but nobody seems to know who's actually holding the reins or why it's stuck.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I hear folks at the diner grumbling about how nothing ever moves forward with the Fruitvale plans, but nobody seems to know who's actually holding the reins or why it's stuck.\",\n  \"fact_ids\": [\"F-b1cc6de70ce5\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b1cc6de70ce5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00201-9887a91cd7",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, I hear folks at the diner grumbling about how nothing ever moves forward with the Fruitvale plans, but nobody seems to know who's actually holding the reins or why it's stuck."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00201",
+          "name": "Elio Perez",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "What have you seen, felt, or understood about \"Accountability for the stalled Fruitvale Transit Hub Phase II visioning process\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": null,
+          "focus": "Accountability for the stalled Fruitvale Transit Hub Phase II visioning process",
+          "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Elio Perez — Server — Rockridge",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "civic gap in city — who is accountable, what council has or hasn't done",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-b1cc6de70ce5"
+          },
+          {
+            "t": "FACT",
+            "text": "No civic initiative addresses the city signal surfaced this cycle.",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-08498ffab668"
+          },
+          {
+            "t": "FACT",
+            "text": "Elio Perez — Server — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00201",
+            "id": "F-2ddbe48011ea"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no one’s stepping up to take responsibility—it’s frustrating because we need that progress.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no one’s stepping up to take responsibility—it’s frustrating because we need that progress.\",\"fact_ids\":[\"F-b1cc6de70ce5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[],\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b1cc6de70ce5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00210-4fcde121f6",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no one’s stepping up to take responsibility—it’s frustrating because we need that progress."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00210",
+          "name": "Depak Ying",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "What have you seen, felt, or understood about \"Accountability for the stalled Fruitvale Transit Hub Phase II visioning process\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": null,
+          "focus": "Accountability for the stalled Fruitvale Transit Hub Phase II visioning process",
+          "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Depak Ying — Server — Rockridge",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "civic gap in city — who is accountable, what council has or hasn't done",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-b1cc6de70ce5"
+          },
+          {
+            "t": "FACT",
+            "text": "No civic initiative addresses the city signal surfaced this cycle.",
+            "src": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s)",
+            "id": "F-08498ffab668"
+          },
+          {
+            "t": "FACT",
+            "text": "Depak Ying — Server — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00210",
+            "id": "F-d4c31165a2d5"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-29T18:16:05.767Z"
+}

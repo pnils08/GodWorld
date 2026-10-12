@@ -1,0 +1,40 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "110",
+  "persona": "selena-grant",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Selena Grant",
+    "popid": "POP-00591"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-beat",
+      "angle": "Oaks — game-result C110 · 0-4 · L4 — the second club's board read",
+      "label": "Oaks — game-result C110 · 0-4 · L4",
+      "hookLine": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+      "hood": "Dimond",
+      "citizens": [
+        "Austin Reaves (POP-01027)",
+        "Adash Stanley (POP-01023)",
+        "Wilson Shepard (POP-01022)"
+      ],
+      "popids": [
+        "POP-01027",
+        "POP-01023",
+        "POP-01022"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+      "cycle": 110
+    }
+  },
+  "angle": "output/cron-compare/sports_c110_selena-grant_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-06T18:16:21.962Z"
+}

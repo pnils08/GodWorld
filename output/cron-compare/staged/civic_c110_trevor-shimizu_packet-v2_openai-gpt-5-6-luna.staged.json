@@ -1,0 +1,41 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/staged/civic_c110_trevor-shimizu_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Jerald Jensen",
+        "role": "quoted-source",
+        "popid": "POP-00280"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "You know, I’ve been hearing chatter about Lake Merritt station being quieter lately. It’s not just the fog—though that doesn’t help. People are talking about how it’s hitting the transit workers hard. Less foot traffic means fewer tips, fewer smiles, fewer connections. It’s tough when the lifeblood of a place starts to thin out.",
+        "sourceRef": "citizenVoice PRESS Jerald Jensen"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-f614a9218d31",
+    "draftSha256": "bd7565866609ab13bc67d6be4106c72ea57c11df21377d4f358e987e5a7ee091",
+    "verdict": "output/cron-compare/civic_c110_trevor-shimizu_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-05T23:16:51.705Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.633Z"
+}

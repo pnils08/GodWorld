@@ -1,0 +1,27 @@
+{
+  "date": "2026-09-09",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-09-09T23:19:41.042Z"
+}

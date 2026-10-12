@@ -1,0 +1,498 @@
+{
+  "date": "2026-09-24",
+  "cycle": 108,
+  "quotas": {
+    "grid": [
+      "elliot-graye",
+      "simon-leary",
+      "hal-richmond",
+      "talia-finch"
+    ],
+    "weekday": 4
+  },
+  "assignments": [
+    {
+      "desk": "culture",
+      "name": "Elliot Graye",
+      "popid": "POP-00012",
+      "beatDomain": "COMMUNITY",
+      "persona": "elliot-graye",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 4,
+      "story": {
+        "kind": "beat-faith",
+        "angle": "crisis response at Telegraph Presbyterian Fellowship (Downtown) — the week in faith, and Bharat Mandir of the East Bay in focus",
+        "label": "8 faith events on the record since C102 · Bharat Mandir of the East Bay in Montclair | 8 named on the record",
+        "hookLine": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+        "hood": "Montclair",
+        "citizens": [
+          "Anand Krishnamurthy (POP-00765)",
+          "Eunice Marston (POP-00753)",
+          "Naomi Sterling (POP-00759)",
+          "Eleanor Bishop (POP-00768)",
+          "Robert Jaston (POP-00758)",
+          "Idris Karim (POP-00761)",
+          "Antoine Vermeer (POP-00755)",
+          "Ramon Solano (POP-00756)"
+        ],
+        "popids": [
+          "POP-00765",
+          "POP-00753",
+          "POP-00759",
+          "POP-00768",
+          "POP-00758",
+          "POP-00761",
+          "POP-00755",
+          "POP-00756"
+        ],
+        "ref": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+        "cycle": 108
+      },
+      "beatSlice": true,
+      "beatSeat": "elliot-graye",
+      "pulse": {
+        "className": "beat-faith",
+        "score": 100,
+        "label": "8 faith events on the record since C102 · Bharat Mandir of the East Bay in Montclair | 8 named on the record",
+        "hood": "Montclair",
+        "source": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\""
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "crisis response at Telegraph Presbyterian Fellowship (Downtown) — the week in faith, and Bharat Mandir of the East Bay in focus",
+        "hookLine": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+        "anchorFacts": [
+          "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+          "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+          "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+          "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+          "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+          "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+          "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+          "In focus: Bharat Mandir of the East Bay — Hindu, Montclair, congregation 400, founded 1990, led by Pandit Anand Krishnamurthy — South Indian traditions, cultural programs"
+        ],
+        "evidence": [
+          {
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\""
+          },
+          {
+            "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\""
+          },
+          {
+            "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\""
+          },
+          {
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\""
+          },
+          {
+            "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\""
+          },
+          {
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\""
+          },
+          {
+            "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\""
+          },
+          {
+            "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\""
+          },
+          {
+            "text": "In focus: Bharat Mandir of the East Bay — Hindu, Montclair, congregation 400, founded 1990, led by Pandit Anand Krishnamurthy — South Indian traditions, cultural programs",
+            "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\""
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [
+          {
+            "text": "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+            "angle": "general coverage",
+            "domain": "FAITH",
+            "hood": null,
+            "priority": 3
+          },
+          {
+            "text": "A family bought their home in Downtown",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Downtown",
+            "priority": 3
+          },
+          {
+            "text": "The Raimon household (2) moved from Temescal to Brooklyn — moving up from Temescal",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Brooklyn",
+            "priority": 5
+          },
+          {
+            "text": "Marcus Tan moved from West Oakland to Fruitvale — moving up from West Oakland",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Fruitvale",
+            "priority": 5
+          }
+        ],
+        "note": null,
+        "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+      },
+      "wakePackage": "GRAYE-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Simon Leary",
+      "popid": "POP-00016",
+      "beatDomain": "SPORTS_LONG_VIEW",
+      "persona": "simon-leary",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 4,
+      "story": {
+        "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+        "label": "A's | game-result | (playoffs) | Vladimir Gonzalez, Darrin Davis, Isley Kelley, Vinnie Keane",
+        "kind": "feed",
+        "popids": [
+          "POP-00598",
+          "POP-00021",
+          "POP-00019",
+          "POP-00001"
+        ]
+      },
+      "wakePackage": "SIMON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Hal Richmond",
+      "popid": "POP-00007",
+      "beatDomain": "SPORTS_HISTORY",
+      "persona": "hal-richmond",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 4,
+      "story": {
+        "angle": "What the supplied C108 line card establishes, and what history remains unsupplied.",
+        "label": "A's — game-result — supplied C108 line card",
+        "hookLine": "A's — game-result — supplied C108 line card",
+        "hood": "Downtown",
+        "pulseClass": "era-door",
+        "team": "A's",
+        "eventKind": "game-result",
+        "closingNote": "break of continuity",
+        "citizens": [
+          "Pablo Almanzar (POP-01078)",
+          "Eric Taveras (POP-00597)",
+          "John Ellis (POP-00033)"
+        ],
+        "popids": [
+          "POP-01078",
+          "POP-00597",
+          "POP-00033"
+        ],
+        "ref": "world_summary_c108.md ## Sports",
+        "cycle": 108
+      },
+      "halSlice": true,
+      "historian": true,
+      "pulse": {
+        "className": "era-door",
+        "score": 88,
+        "label": "A's — game-result — supplied C108 line card",
+        "team": "A's",
+        "eventKind": "game-result",
+        "seasonType": "playoffs",
+        "storyAngle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+        "hasStats": true,
+        "record": "4-1",
+        "streak": "W1",
+        "foilNumber": "9IP",
+        "closingNote": "break of continuity",
+        "feedCycle": 108
+      },
+      "bag": {
+        "modes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "closingNote": "break of continuity",
+        "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0). Close toward break of continuity."
+      },
+      "prewrite": {
+        "reporter": "Hal Richmond",
+        "bagModes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "presentFacts": [
+          "Team record (feed): 4-1 · streak W1",
+          "Event (feed): A's — game-result (playoffs)",
+          "Cycle: C108"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "closingNote": "break of continuity",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0). Close toward break of continuity.",
+        "foilNumber": "9IP",
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ],
+        "hooks": []
+      },
+      "wakePackage": "HAL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Talia Finch",
+      "popid": "POP-00592",
+      "beatDomain": "SPORTS",
+      "persona": "talia-finch",
+      "approach": "Oaks ground approach (solo seat): carry one supplied Oaks fact into a real Oakland room and let unnamed people say what the city thinks of a team it hasn't decided on. Weather, sound, a drink, a platform. The fact is the feed's; the room is yours. End in the scene.",
+      "gridDay": 4,
+      "story": {
+        "kind": "beat-oaks-ground",
+        "angle": "Oaks ground read C108 — anxious — the people around the second club",
+        "label": "Oaks ground read C108 — anxious",
+        "hookLine": "anxious",
+        "hood": "Jack London",
+        "citizens": [
+          "Wilson Shepard (POP-01022)",
+          "Adash Stanley (POP-01023)",
+          "Austin Reaves (POP-01027)"
+        ],
+        "popids": [
+          "POP-01022",
+          "POP-01023",
+          "POP-01027"
+        ],
+        "ref": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+        "cycle": 108
+      },
+      "beatSlice": true,
+      "beatSeat": "talia-finch",
+      "pulse": {
+        "className": "beat-oaks-ground",
+        "score": 100,
+        "label": "Oaks ground read C108 — anxious",
+        "hood": "Jack London",
+        "source": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Oaks ground read C108 — anxious — the people around the second club",
+        "hookLine": "anxious",
+        "anchorFacts": [
+          "Oaks fans, C108: anxious",
+          "Room mood, C108: uncertain",
+          "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+          "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+          "Home neighborhood (feed): Jack London",
+          "Oaks fans, C108: low",
+          "Room mood, C108: frustrated",
+          "Notebook (feed): In The Oaks first preseason game the story remained the same from rookie camp as the Oaks lose to the Pistons, 104-101. Not for a lack of trying but at a lack of over playing the wins signifigance. As",
+          "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+          "Context: record 0-1 · streak L1",
+          "Home neighborhood (feed): Eastlake"
+        ],
+        "evidence": [
+          {
+            "text": "Oaks fans, C108: anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Room mood, C108: uncertain",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Home neighborhood (feed): Jack London",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Oaks fans, C108: low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Room mood, C108: frustrated",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Notebook (feed): In The Oaks first preseason game the story remained the same from rookie camp as the Oaks lose to the Pistons, 104-101. Not for a lack of trying but at a lack of over playing the wins signifigance. As",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Context: record 0-1 · streak L1",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Home neighborhood (feed): Eastlake",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [],
+        "note": null,
+        "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel"
+      },
+      "wakePackage": "TALIA-OAKS-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "gridDay": 4,
+      "story": {
+        "ref": "undocked:undocked-pop00663-Y3C4-e2",
+        "label": "UNDOCKED: Soo Loo — a night the books can't settle yet",
+        "kind": "undocked",
+        "angle": "Recap Soo Loo's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, sol, sirius, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 5 cycle(s) led, current streak 5.",
+        "citizens": [
+          "Soo Loo — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00663"
+        ],
+        "hood": "Downtown"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Elliot Graye",
+        "persona": "elliot-graye",
+        "wakePackage": "GRAYE-LEP2-1"
+      },
+      {
+        "name": "Simon Leary",
+        "persona": "simon-leary",
+        "wakePackage": "SIMON-LEP2-1"
+      },
+      {
+        "name": "Hal Richmond",
+        "persona": "hal-richmond",
+        "wakePackage": "HAL-LEP2-1"
+      },
+      {
+        "name": "Talia Finch",
+        "persona": "talia-finch",
+        "wakePackage": "TALIA-OAKS-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=elliot-graye,simon-leary,hal-richmond,talia-finch,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": true,
+    "reason": "pulse=era-door score=88 close=break of continuity"
+  },
+  "economicEnrich": {
+    "enriched": false,
+    "reason": "no business desk or Mason assignment in rota",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=2 talia-finch/beat-oaks-ground:Jack London, elliot-graye/beat-faith:Montclair",
+    "seats": [
+      "talia-finch/beat-oaks-ground:Jack London",
+      "elliot-graye/beat-faith:Montclair"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": false,
+    "reason": "no civic-domain persona assignment in rota",
+    "seats": []
+  },
+  "builtAt": "2026-09-24T11:15:08.299Z"
+}

@@ -1,0 +1,35 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "freelance-firebrand",
+  "byline": "Jax Caldera",
+  "bylinePopid": "POP-00799",
+  "article": "output/cron-compare/staged/civic_c110_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "repeating-event (medium) — Issue \"strain\" (+ 1 co-occurring tokens) recurred 3 cycles",
+        "sourceRef": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s)"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-b796a95dcdfe",
+    "draftSha256": "d9fac9e9ccb731705a45acd5844528393456592f5cb704c7e1cd34322bb3f34e",
+    "verdict": "output/cron-compare/civic_c110_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-10-07T23:17:26.346Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.519Z"
+}

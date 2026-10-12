@@ -1,0 +1,320 @@
+[
+  {
+    "pop": "POP-00770",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00770\",\"name\":\"Kato Rivers\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"What's behind Kato Rivers' recent performance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked-digest\",\"hood\":null,\"focus\":\"The current standings and recent episodes\",\"src\":\"undocked-week:weekly-c110\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Kato Rivers — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-517c3dad1f\",\"src\":\"undocked-week:weekly-c110\",\"text\":\"UNDOCKED week-in-review c110\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"UNDOCKED week-in-review c110\",\"src\":\"undocked-week:weekly-c110\",\"id\":\"F-a66344bdff34\"},{\"t\":\"FACT\",\"text\":\"Kato Rivers — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-00770\",\"id\":\"F-4711ce3d1b80\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00770",
+        "name": "Kato Rivers",
+        "role": "UNDOCKED pilot",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Nia Rook",
+        "question": "What's behind Kato Rivers' recent performance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "undocked-digest",
+        "hood": null,
+        "focus": "The current standings and recent episodes",
+        "src": "undocked-week:weekly-c110"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Kato Rivers — UNDOCKED pilot",
+        "evidence": [
+          {
+            "id": "EV-517c3dad1f",
+            "src": "undocked-week:weekly-c110",
+            "text": "UNDOCKED week-in-review c110"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "UNDOCKED week-in-review c110",
+          "src": "undocked-week:weekly-c110",
+          "id": "F-a66344bdff34"
+        },
+        {
+          "t": "FACT",
+          "text": "Kato Rivers — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-00770",
+          "id": "F-4711ce3d1b80"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00235",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00235\",\"name\":\"Aaliyah Brennan\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"How has Aaliyah Brennan's strategy changed over the cycles? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked-digest\",\"hood\":null,\"focus\":\"The current standings and recent episodes\",\"src\":\"undocked-week:weekly-c110\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Aaliyah Brennan — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-2401227327\",\"src\":\"undocked-week:weekly-c110\",\"text\":\"UNDOCKED week-in-review c110\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"UNDOCKED week-in-review c110\",\"src\":\"undocked-week:weekly-c110\",\"id\":\"F-a66344bdff34\"},{\"t\":\"FACT\",\"text\":\"Aaliyah Brennan — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-00235\",\"id\":\"F-df449268ad1f\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00235",
+        "name": "Aaliyah Brennan",
+        "role": "UNDOCKED pilot",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Nia Rook",
+        "question": "How has Aaliyah Brennan's strategy changed over the cycles? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "undocked-digest",
+        "hood": null,
+        "focus": "The current standings and recent episodes",
+        "src": "undocked-week:weekly-c110"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Aaliyah Brennan — UNDOCKED pilot",
+        "evidence": [
+          {
+            "id": "EV-2401227327",
+            "src": "undocked-week:weekly-c110",
+            "text": "UNDOCKED week-in-review c110"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "UNDOCKED week-in-review c110",
+          "src": "undocked-week:weekly-c110",
+          "id": "F-a66344bdff34"
+        },
+        {
+          "t": "FACT",
+          "text": "Aaliyah Brennan — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-00235",
+          "id": "F-df449268ad1f"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00287",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00287\",\"name\":\"Simone Adesanya\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"What's driving Simone Adesanya's success in the current cycle? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked-digest\",\"hood\":null,\"focus\":\"The current standings and recent episodes\",\"src\":\"undocked-week:weekly-c110\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Simone Adesanya — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-994f4d65bd\",\"src\":\"undocked-week:weekly-c110\",\"text\":\"UNDOCKED week-in-review c110\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"UNDOCKED week-in-review c110\",\"src\":\"undocked-week:weekly-c110\",\"id\":\"F-a66344bdff34\"},{\"t\":\"FACT\",\"text\":\"Simone Adesanya — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-00287\",\"id\":\"F-51e9a7c4ee3e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00287",
+        "name": "Simone Adesanya",
+        "role": "UNDOCKED pilot",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Nia Rook",
+        "question": "What's driving Simone Adesanya's success in the current cycle? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "undocked-digest",
+        "hood": null,
+        "focus": "The current standings and recent episodes",
+        "src": "undocked-week:weekly-c110"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Simone Adesanya — UNDOCKED pilot",
+        "evidence": [
+          {
+            "id": "EV-994f4d65bd",
+            "src": "undocked-week:weekly-c110",
+            "text": "UNDOCKED week-in-review c110"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "UNDOCKED week-in-review c110",
+          "src": "undocked-week:weekly-c110",
+          "id": "F-a66344bdff34"
+        },
+        {
+          "t": "FACT",
+          "text": "Simone Adesanya — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-00287",
+          "id": "F-51e9a7c4ee3e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

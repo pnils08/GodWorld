@@ -1,0 +1,34 @@
+{
+  "office": "oari",
+  "cycle": 107,
+  "speaker": "Dr. Vanessa Tran-Munoz",
+  "cascadeSummary": "Executing emergency dispatch protocol deployment to East Oakland per Mayor's directive, while leveraging D1 operational data to adapt protocols for Fruitvale's unique needs. Maintaining West Oakland's extended coverage hours and bilingual responder model as the evidence-based standard.",
+  "statements": [
+    {
+      "statementId": "STMT-107-oari-001",
+      "type": "operational_directive",
+      "topic": "East Oakland deployment",
+      "initiative": "INIT-002",
+      "decision": "Activated East Oakland emergency dispatch with joint OPD-OARI thresholds",
+      "quote": "East Oakland gets the same crisis care model that's working in West Oakland—just faster, because the need won't wait.",
+      "fullStatement": "Effective immediately, OARI responders are live in East Oakland with the same evidence-based protocols proving successful in West Oakland: bilingual teams, extended evening coverage, and clear clinical thresholds for OPD handoff. Our D1 evaluation showed this model reduces unnecessary police involvement in behavioral health crises by 42% while maintaining responder safety. East Oakland's deployment incorporates lessons from District 1, including adjusted response patterns for high-density corridors and enhanced coordination with Highland Hospital's psychiatric emergency services.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "dispatch-live",
+        "MilestoneNotes": "C107: Activated East Oakland deployment with OPD-integrated dispatch protocols",
+        "NextScheduledAction": "Fruitvale adaptation report due C108",
+        "NextActionCycle": 108
+      }
+    },
+    {
+      "statementId": "STMT-107-oari-002",
+      "type": "operational_report",
+      "topic": "District 1 evaluation findings",
+      "initiative": null,
+      "decision": "Published West Oakland operational metrics to inform Fruitvale adaptation",
+      "quote": "Data doesn't lie—when we meet crisis with care instead of cuffs, our communities get safer faster.",
+      "fullStatement": "West Oakland's first expansion-month evaluation shows 247 behavioral health responses with zero use-of-force incidents and 89% crisis resolution without police involvement. Our bilingual responder teams handled 32% of calls in Spanish or Cantonese, matching community language needs. These outcomes informed tonight's East Oakland deployment and will shape Fruitvale's adaptation—particularly the 6pm-midnight coverage window that handled 48% of District 1's behavioral health calls.",
+      "trackerUpdates": {}
+    }
+  ]
+}

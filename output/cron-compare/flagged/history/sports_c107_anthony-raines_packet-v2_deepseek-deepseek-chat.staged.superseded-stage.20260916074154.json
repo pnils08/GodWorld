@@ -1,0 +1,62 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "107",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "John Ellis",
+        "role": "quoted-source",
+        "popid": "POP-00033"
+      },
+      {
+        "name": "Eric Taveras",
+        "role": "quoted-source",
+        "popid": "POP-00597"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      },
+      {
+        "name": "Rafael Pilgrim",
+        "role": "quoted-source",
+        "popid": "POP-00644"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "baylight-district-vinnie-keane-prospect-callup",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "That game was everything I’ve been working for—every pitch, every inning. It’s not just about shutting them out; it’s about setting the tone for what’s next. We’re here to win, and that performance was a statement. The A’s are locked in, and I’m ready to keep pushing.",
+        "sourceRef": "citizenVoice PRESS John Ellis"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-ef58bc5a0a91",
+    "draftSha256": "de22b27eb23e6d309fed05093196d90ae4e32b7b3801d931679021502d4e26af",
+    "verdict": "output/cron-compare/sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-16T04:33:19.683Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-16T04:33:27.033Z"
+}

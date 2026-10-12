@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "110",
+  "persona": "talia-finch",
+  "byline": "Talia Finch",
+  "bylinePopid": "POP-00592",
+  "article": "output/cron-compare/staged/sports_c110_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Melton Neilon",
+        "role": "quoted-source",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      },
+      {
+        "name": "Jessie Hess",
+        "role": "quoted-source",
+        "popid": "POP-00212"
+      },
+      {
+        "name": "Daniel Cloak",
+        "role": "quoted-source",
+        "popid": "POP-00722"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Dimond"
+    ],
+    "claims": [
+      {
+        "claim": "Honestly, I'm still trying to process how the Oaks did in their preseason games. I was really looking forward to seeing what they could do, but that loss to the Miami Heat was a letdown. I want to believe they can turn it around, but it's hard to shake off the feeling that it's going to be a tough season.",
+        "sourceRef": "citizenVoice PRESS Jessie Hess"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-315b46467123",
+    "draftSha256": "94699075d2ddc5ba6b91a30efd53f1704d88b266297ed87afdec119eceeb8a78",
+    "verdict": "output/cron-compare/sports_c110_talia-finch_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-08T23:17:30.565Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.779Z"
+}

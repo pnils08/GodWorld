@@ -1,0 +1,22 @@
+{
+  "status": "arc-seed",
+  "cycle": "109",
+  "desk": "civic",
+  "persona": "freelance-firebrand",
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00764",
+      "name": "Tao Lee",
+      "quote": "I haven't really noticed any decay in our neighborhood, to be honest. It feels like there's always something new happening, and people seem to be looking out for each other. I mean, just the other day I saw a new face at the Telegraph Presbyterian Fellowship, and that's a great sign that our community is still growing and welcoming. As for initiatives, I think we've got a good thing going with the way our neighborhood comes together to support each other, even if it's not always formal or official."
+    },
+    {
+      "pop": "POP-00541",
+      "name": "Theo Burkes",
+      "quote": "Honestly, I don't really feel like Downtown is decaying or lacking initiatives. I mean, I've seen new faces around and events that bring people together. It feels like the neighborhood is thriving to me."
+    }
+  ],
+  "claim": "I haven't really noticed any decay in our neighborhood, to be honest. It feels like there's always something new happening, and people seem to be looking out for each other. I mean, just the other day I saw a new face at the Telegraph Presbyterian Fellowship, and that's a great sign that our community is still growing and welcoming. As for initiatives, I think we've got a good thing going with the way our neighborhood comes together to support each other, even if it's not always formal or official.",
+  "src": "citizenVoice PRESS c109",
+  "ranAt": "2026-09-30T18:16:28.258Z"
+}

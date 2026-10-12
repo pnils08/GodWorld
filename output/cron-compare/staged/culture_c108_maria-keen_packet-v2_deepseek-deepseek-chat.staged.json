@@ -1,0 +1,52 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "108",
+  "persona": "maria-keen",
+  "byline": "Maria Keen",
+  "bylinePopid": "POP-00013",
+  "article": "output/cron-compare/staged/culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Lucia Polito",
+        "role": "mentioned",
+        "popid": "POP-00004"
+      },
+      {
+        "name": "Tomas Renteria",
+        "role": "mentioned",
+        "popid": "POP-00744"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "jack-london-tomas-renteria-story-signal",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "I've seen the impact that community programs can have on people's lives, and I feel grateful to be a part of it. As someone who's founded a program myself, I understand the passion and dedication that goes into creating something that truly helps others. It's amazing to see the difference these programs make in Fruitvale, and I'm always looking for ways to support and connect with the people who make them happen.",
+        "sourceRef": "citizenVoice PRESS Lucia Polito"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d46d6c26eabd",
+    "draftSha256": "8ba99b0fb947445c07d493e7e04aa86ac5975d9be5e225fafb41e24c1914d4da",
+    "verdict": "output/cron-compare/culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-26T17:00:45.968Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-26T17:00:51.280Z"
+}

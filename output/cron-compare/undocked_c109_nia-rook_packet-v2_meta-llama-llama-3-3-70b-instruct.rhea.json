@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/undocked_c109_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "e8627cd0dbb775a475faa9cc640807bc4ace67bffdbeae19530d11ae42617165",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen quotes match exact packet provenance, verified citizens reside in West Oakland, and texture adheres to profile guidelines.",
+  "review": {
+    "profileId": "nia-rook-undocked-recap-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-1",
+    "manifestId": "AM-e27ed11d6fb3",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Daniel Cloak",
+      "Darius Clark",
+      "Irene Fay",
+      "Jackson Sift"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 7206,
+  "parseError": false,
+  "ranAt": "2026-09-30T23:18:20.652Z"
+}

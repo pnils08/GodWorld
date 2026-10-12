@@ -1,0 +1,35 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "110",
+  "persona": "elliot-marbury",
+  "byline": "Elliot Marbury",
+  "bylinePopid": "POP-00166",
+  "article": "output/cron-compare/staged/sports_c110_elliot-marbury_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Danny Horn — 9 seasons on the dossier, 2041 the latest — hitter density memo, multi-year",
+        "sourceRef": "output/player_truesource_mirror.json Danny Horn @C110"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-5cbb11c83d35",
+    "draftSha256": "b95bc7ba63cf4cde23506a7e66ade195b7d0f196608c52c1ed9f0798dd16d17c",
+    "verdict": "output/cron-compare/sports_c110_elliot-marbury_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-10-08T02:39:13.464Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.725Z"
+}

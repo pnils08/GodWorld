@@ -1,0 +1,17 @@
+{
+  "initiative": "INIT-003",
+  "initiativeId": "INIT-003",
+  "cycle": 107,
+  "primaryVoice": "Soria Dominguez (transit_hub-001)",
+  "consolidatedFrom": [
+    "STMT-107-transit_hub-001 (Soria Dominguez — Fruitvale merchant protections)",
+    "STMT-107-transit_hub-002 (Soria Dominguez — Fruitvale street vitality)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-003",
+    "ImplementationPhase": "design-phase",
+    "MilestoneNotes": "C107: Merchant covenants executed, design RFP published with community-informed requirements",
+    "NextScheduledAction": "Design consultant selection",
+    "NextActionCycle": 108
+  }
+}

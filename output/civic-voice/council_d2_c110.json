@@ -1,0 +1,38 @@
+{
+  "office": "council_d2",
+  "cycle": 110,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I am addressing the Baylight District's Phase II site remediation schedule and the need for immediate action to support Downtown Oakland's economic decay. I will vote to confirm the Phase II site remediation proceeds on schedule and emphasize the importance of infrastructure and economic impact data. Additionally, I will co-sponsor the Downtown Economic Revitalization legislation to provide targeted support for local businesses and public safety in Downtown Oakland.",
+  "statements": [
+    {
+      "statementId": "STMT-110-council_d2-001",
+      "type": "vote_statement",
+      "topic": "Baylight District Phase II Site Remediation",
+      "initiative": "INIT-006",
+      "decision": "Confirm Phase II site remediation proceeds on schedule",
+      "quote": "We must break ground on Baylight now, and we must do it with a clear understanding of the infrastructure and economic impact data.",
+      "fullStatement": "As we verify the first soil test results for the Baylight District project, I emphasize the need for transparency and community engagement. The data must guide our decisions, ensuring the project's success benefits the entire community, particularly Jack London and Downtown Oakland. I will closely monitor the independent oversight and site remediation progress, prioritizing the economic momentum and public safety.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d2-002",
+      "type": "legislative_statement",
+      "topic": "Downtown Economic Revitalization",
+      "initiative": "INIT-008",
+      "decision": "Co-sponsor Downtown Economic Revitalization legislation",
+      "quote": "Downtown's struggles are real, and I stand with its people - we need targeted support to address the crime and economic imbalance, not just words.",
+      "fullStatement": "I propose we allocate resources to enhance public safety and stimulate local businesses in Downtown Oakland, ensuring the success of the Baylight District benefits the entire community. The Downtown Economic Revitalization legislation is a crucial step towards addressing the economic imbalance in Downtown Oakland, and I am committed to working with my colleagues to make it a reality.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d2-003",
+      "type": "constituent_statement",
+      "topic": "Jack London Economic Performance",
+      "initiative": null,
+      "decision": "Claim credit for Jack London's economic success",
+      "quote": "Jack London's success is a testament to our focus on basic infrastructure, safety, and letting businesses operate without unnecessary obstruction.",
+      "fullStatement": "I am proud to see the economic momentum in Jack London, and I believe it is a direct result of our efforts to support local businesses and public safety. As the council member for District 2, I will continue to prioritize the needs of Jack London and Downtown Oakland, ensuring that our policies benefit the entire community.",
+      "trackerUpdates": {}
+    }
+  ]
+}

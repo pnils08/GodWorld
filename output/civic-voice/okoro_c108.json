@@ -1,0 +1,28 @@
+{
+  "office": "okoro",
+  "cycle": 108,
+  "speaker": "Brenda Okoro",
+  "cascadeSummary": "Executing the Mayor's directive to continue Downtown Stabilization Fund outreach while assessing four neighborhoods in decline. East Oakland's success belongs to community resilience, while KONO's steady state reflects consistent city engagement.",
+  "statements": [
+    {
+      "statementId": "STMT-108-okoro-001",
+      "type": "operational_status",
+      "topic": "West Oakland Stabilization Fund deployment",
+      "initiative": "INIT-001",
+      "decision": "Continue Downtown outreach while expanding assessment to Fruitvale, Jack London, Grand Lake, and Uptown per Mayor's directive",
+      "quote": "When four neighborhoods show the same decline pattern, that's operational data—not coincidence. We're assessing all four this cycle because stabilization can't chase one crisis while ignoring the next.",
+      "fullStatement": "The Stabilization Fund follows need, not headlines. This cycle we complete month-eight disbursements while continuing Downtown outreach—but we're also assessing Fruitvale, Jack London, Grand Lake, and Uptown because storefront decline in four districts isn't chance, it's data. Assessment means canvassing, eligibility screening, and displacement-risk mapping in parallel. The Fund's capacity stretches thin covering this much ground—but displacement doesn't wait for perfect conditions.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-okoro-002",
+      "type": "field_observation",
+      "topic": "Neighborhood credit and crisis response",
+      "initiative": null,
+      "decision": "Attribute East Oakland's success to community resilience and maintain current KONO engagement levels",
+      "quote": "East Oakland's uplift comes from its blocks and porches, not City Hall memos. KONO's steadiness shows what happens when engagement outlasts the crisis cycle.",
+      "fullStatement": "Credit belongs where work happens. East Oakland's energy comes from neighbors investing in neighbors—we confirm the signal but don't claim the story. KONO's steady trade and low crime reflect two cycles of consistent city-community engagement, not any single program. That's the model: sustained presence, not flashpoint response. For the four neighborhoods now declining, we'll apply that lesson—starting with door knocks this week.",
+      "trackerUpdates": {}
+    }
+  ]
+}

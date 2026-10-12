@@ -1,0 +1,26 @@
+{
+  "office": "police_chief",
+  "agentDir": "civic-office-police-chief",
+  "holder": "Rafael Montez",
+  "popid": "POP-00136",
+  "title": "Police Chief",
+  "date": "2026-10-01",
+  "cycle": 109,
+  "model": "deepseek/deepseek-chat",
+  "statement": "No public safety events requiring an official statement from this office occurred this cycle. OPD operations continue uninterrupted with standard deployments and response protocols.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-104-civic-office-police-chief",
+        "text": "The C104 patrol realignment plan establishes clear co-response protocols between OPD and OARI teams in East and West Oakland, with shift hours calibrated to crime index data. Behavioral health calls are routed to OARI responders when appropriate, with sworn officers maintaining primary responsibility for violent crime incidents and officer safety.",
+        "directiveCycle": 104,
+        "confrontationSeat": "civic-office-police-chief"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-01T10:45:22.176Z",
+  "fellBackFrom": null
+}

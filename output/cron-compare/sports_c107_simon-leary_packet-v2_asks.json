@@ -1,0 +1,440 @@
+[
+  {
+    "pop": "POP-00051",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00051\",\"name\":\"Desmond Morton\",\"role\":\"Left Fielder, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Simon Leary\",\"question\":\"What have you seen, felt, or understood about \\\"The role change inside a sustained team record and its interpretation as a structural metaphor.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"long-view-signal\",\"hood\":\"Glenview\",\"focus\":\"The role change inside a sustained team record and its interpretation as a structural metaphor.\",\"src\":\"world_summary_c107.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Desmond Morton — Left Fielder, Oakland A's — Jack London\",\"evidence\":[{\"id\":\"EV-e0eb146870\",\"src\":\"world_summary_c107.md ## Sports\",\"text\":\"The A's record is 2-1.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"The A's record is 2-1.\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-967b4fd33868\"},{\"t\":\"FACT\",\"text\":\"The A's have won 1 straight.\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-8d1c3857839c\"},{\"t\":\"FACT\",\"text\":\"Desmond Morton — Left Fielder, Oakland A's — Jack London\",\"src\":\"Simulation_Ledger profile for POP-00051\",\"id\":\"F-e7c09456fa01\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00051",
+        "name": "Desmond Morton",
+        "role": "Left Fielder, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Simon Leary",
+        "question": "What have you seen, felt, or understood about \"The role change inside a sustained team record and its interpretation as a structural metaphor.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "long-view-signal",
+        "hood": "Glenview",
+        "focus": "The role change inside a sustained team record and its interpretation as a structural metaphor.",
+        "src": "world_summary_c107.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "Desmond Morton — Left Fielder, Oakland A's — Jack London",
+        "evidence": [
+          {
+            "id": "EV-e0eb146870",
+            "src": "world_summary_c107.md ## Sports",
+            "text": "The A's record is 2-1."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's record is 2-1.",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-967b4fd33868"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's have won 1 straight.",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-8d1c3857839c"
+        },
+        {
+          "t": "FACT",
+          "text": "Desmond Morton — Left Fielder, Oakland A's — Jack London",
+          "src": "Simulation_Ledger profile for POP-00051",
+          "id": "F-e7c09456fa01"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00003",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00003\",\"name\":\"Mark Aitken\",\"role\":\"First Baseman, Oakland A's Legend — Player Rep, Community Liaison\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Simon Leary\",\"question\":\"What have you seen, felt, or understood about \\\"The role change inside a sustained team record and its interpretation as a structural metaphor.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"long-view-signal\",\"hood\":\"Glenview\",\"focus\":\"The role change inside a sustained team record and its interpretation as a structural metaphor.\",\"src\":\"world_summary_c107.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London\",\"evidence\":[{\"id\":\"EV-77aa323920\",\"src\":\"world_summary_c107.md ## Sports\",\"text\":\"The A's record is 2-1.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"The A's record is 2-1.\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-967b4fd33868\"},{\"t\":\"FACT\",\"text\":\"The A's have won 1 straight.\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-8d1c3857839c\"},{\"t\":\"FACT\",\"text\":\"Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London\",\"src\":\"Simulation_Ledger profile for POP-00003\",\"id\":\"F-a2cdfdf33ef7\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00003",
+        "name": "Mark Aitken",
+        "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Simon Leary",
+        "question": "What have you seen, felt, or understood about \"The role change inside a sustained team record and its interpretation as a structural metaphor.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "long-view-signal",
+        "hood": "Glenview",
+        "focus": "The role change inside a sustained team record and its interpretation as a structural metaphor.",
+        "src": "world_summary_c107.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+        "evidence": [
+          {
+            "id": "EV-77aa323920",
+            "src": "world_summary_c107.md ## Sports",
+            "text": "The A's record is 2-1."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's record is 2-1.",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-967b4fd33868"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's have won 1 straight.",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-8d1c3857839c"
+        },
+        {
+          "t": "FACT",
+          "text": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+          "src": "Simulation_Ledger profile for POP-00003",
+          "id": "F-a2cdfdf33ef7"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01087",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01087\",\"name\":\"Marcus King\",\"role\":\"Warehouse worker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Simon Leary\",\"question\":\"As a resident of Glenview, what have you seen, felt, or understood about \\\"The role change inside a sustained team record and its interpretation as a structural metaphor.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"long-view-signal\",\"hood\":\"Glenview\",\"focus\":\"The role change inside a sustained team record and its interpretation as a structural metaphor.\",\"src\":\"world_summary_c107.md ## Sports\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Marcus King — Warehouse worker — Glenview\",\"evidence\":[],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"The A's record is 2-1.\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-967b4fd33868\"},{\"t\":\"FACT\",\"text\":\"The A's have won 1 straight.\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-8d1c3857839c\"},{\"t\":\"FACT\",\"text\":\"Marcus King — Warehouse worker — Glenview\",\"src\":\"Simulation_Ledger profile for POP-01087\",\"id\":\"F-42793383c104\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01087",
+        "name": "Marcus King",
+        "role": "Warehouse worker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Simon Leary",
+        "question": "As a resident of Glenview, what have you seen, felt, or understood about \"The role change inside a sustained team record and its interpretation as a structural metaphor.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "long-view-signal",
+        "hood": "Glenview",
+        "focus": "The role change inside a sustained team record and its interpretation as a structural metaphor.",
+        "src": "world_summary_c107.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Marcus King — Warehouse worker — Glenview",
+        "evidence": [],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's record is 2-1.",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-967b4fd33868"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's have won 1 straight.",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-8d1c3857839c"
+        },
+        {
+          "t": "FACT",
+          "text": "Marcus King — Warehouse worker — Glenview",
+          "src": "Simulation_Ledger profile for POP-01087",
+          "id": "F-42793383c104"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01089",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01089\",\"name\":\"Jacob Perez\",\"role\":\"Delivery driver\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Simon Leary\",\"question\":\"As a resident of Glenview, what have you seen, felt, or understood about \\\"The role change inside a sustained team record and its interpretation as a structural metaphor.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"long-view-signal\",\"hood\":\"Glenview\",\"focus\":\"The role change inside a sustained team record and its interpretation as a structural metaphor.\",\"src\":\"world_summary_c107.md ## Sports\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Jacob Perez — Delivery driver — Glenview\",\"evidence\":[],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"The A's record is 2-1.\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-967b4fd33868\"},{\"t\":\"FACT\",\"text\":\"The A's have won 1 straight.\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-8d1c3857839c\"},{\"t\":\"FACT\",\"text\":\"Jacob Perez — Delivery driver — Glenview\",\"src\":\"Simulation_Ledger profile for POP-01089\",\"id\":\"F-433671837025\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01089",
+        "name": "Jacob Perez",
+        "role": "Delivery driver",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Simon Leary",
+        "question": "As a resident of Glenview, what have you seen, felt, or understood about \"The role change inside a sustained team record and its interpretation as a structural metaphor.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "long-view-signal",
+        "hood": "Glenview",
+        "focus": "The role change inside a sustained team record and its interpretation as a structural metaphor.",
+        "src": "world_summary_c107.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Jacob Perez — Delivery driver — Glenview",
+        "evidence": [],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's record is 2-1.",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-967b4fd33868"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's have won 1 straight.",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-8d1c3857839c"
+        },
+        {
+          "t": "FACT",
+          "text": "Jacob Perez — Delivery driver — Glenview",
+          "src": "Simulation_Ledger profile for POP-01089",
+          "id": "F-433671837025"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

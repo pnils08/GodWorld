@@ -1,0 +1,461 @@
+{
+  "meta": {
+    "type": "initiative-packet",
+    "initiative": "health-center",
+    "initiativeId": "INIT-005",
+    "cycle": 111,
+    "generatedAt": "2026-10-11T21:29:45.769Z",
+    "description": "Temescal Community Health Center — $45M for neighborhood health facility with priority designation"
+  },
+  "initiative": {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "type": "vote",
+    "status": "passed",
+    "budget": "$45M",
+    "voteRequirement": "5-4",
+    "voteCycle": "80",
+    "projection": "likely pass",
+    "outcome": "PASSED",
+    "leadFaction": "OPP",
+    "oppositionFaction": "CRC",
+    "swingVoter": "Ramon Vega",
+    "affectedNeighborhoods": "Temescal",
+    "policyDomain": "health",
+    "consequences": "Initiative approved. Implementation begins.",
+    "mayoralAction": "signed",
+    "mayoralActionCycle": "80",
+    "notes": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)",
+    "lastUpdated": "9/28/2026",
+    "implementationPhase": "operational",
+    "milestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal health center, construction-active since C80 (health — playable; delivers once a treating phase moves hood Sick against its conversion baseline).\nC109: opened — construction complete, open to the public.\nC109: Opened 2 weeks early, $1.2M under budget",
+    "nextScheduledAction": "First quarter utilization review",
+    "nextActionCycle": "113"
+  },
+  "office": {
+    "name": "Temescal Community Health Center Project Office",
+    "policyDomains": [
+      "health",
+      "community",
+      "infrastructure"
+    ],
+    "officials": [
+      {
+        "officeId": "MAYOR-01",
+        "title": "Mayor",
+        "name": "Avery Santana",
+        "popId": "POP-00034",
+        "status": "active",
+        "faction": "OPP"
+      },
+      {
+        "officeId": "STAFF-COS",
+        "title": "Chief of Staff",
+        "name": "Laila Cortez",
+        "popId": "POP-00035",
+        "status": "active",
+        "faction": "STAFF"
+      },
+      {
+        "officeId": "PLANNING-DIR",
+        "title": "City Planning Director",
+        "name": "Mara Vance",
+        "popId": "POP-00507",
+        "status": "active",
+        "faction": "STAFF"
+      }
+    ]
+  },
+  "previousCycle": {
+    "decisions": {
+      "initiative": "INIT-005",
+      "initiativeId": "INIT-005",
+      "cycle": 110,
+      "primaryVoice": "Chen-Ramirez (health_center-001)",
+      "consolidatedFrom": [
+        "STMT-110-health_center-001 (Chen-Ramirez — construction_progress)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-005",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C110: Final inspections complete + drywall authorized per D7 audit protocols — ready for interior finishes.",
+        "NextScheduledAction": "Interior finishes + equipment installation",
+        "NextActionCycle": 111,
+        "LastWorkCycle": 110,
+        "LastWorkSeat": "proj-health-center"
+      },
+      "_moveFold": {
+        "moveIds": [
+          "MV-109-proj-health-center-2026-10-02"
+        ]
+      }
+    },
+    "voiceDecisions": {
+      "mayorDecisions": [],
+      "factionReactions": [
+        {
+          "statementId": "STMT-110-council_d7-001",
+          "faction": "D7",
+          "speaker": "Warren Ashford",
+          "type": "action_statement",
+          "topic": "Temescal Community Health Center Drywall and Inspection Sign-Off",
+          "position": "Transmitted certified building inspection sign-off and drywall authorization for INIT-005 to the Planning and Building Department while mandating complete closeout audit protocols.",
+          "quote": "District 7 delivers results through rigorous inspection and strict accounting, not executive hand-waving.",
+          "relatedInitiatives": [
+            "Temescal Community Health Center"
+          ]
+        }
+      ]
+    },
+    "documentsProduced": [
+      "HLTH-C000-ProjectCharter-20400101.md",
+      "HLTH-C085-PriorityDesignationRequest-20410901.md",
+      "decisions_c103.json",
+      "decisions_c104.json",
+      "decisions_c105.json",
+      "decisions_c106.json",
+      "decisions_c107.json",
+      "decisions_c108.json",
+      "decisions_c109.json",
+      "decisions_c110.json"
+    ]
+  },
+  "maraDirective": null,
+  "citizens": {
+    "total": 150,
+    "tierBreakdown": {
+      "1": 7,
+      "2": 9,
+      "3": 25,
+      "4": 109
+    },
+    "avgIncome": 916255,
+    "medianIncome": 99863,
+    "atDisplacementRisk": 150,
+    "linkedProfiles": [],
+    "notableCitizens": [
+      {
+        "popId": "POP-00018",
+        "name": "Benji Dillon",
+        "tier": 1,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00019",
+        "name": "Isley Kelley",
+        "tier": 1,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00022",
+        "name": "Danny Horn",
+        "tier": 1,
+        "neighborhood": "Temescal",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00034",
+        "name": "Avery Santana",
+        "tier": 1,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00037",
+        "name": "Brenda Okoro",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00159",
+        "name": "Sharon Okafor",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00170",
+        "name": "Melton Neilon",
+        "tier": 1,
+        "neighborhood": "Temescal",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00201",
+        "name": "Elio Perez",
+        "tier": 1,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00210",
+        "name": "Depak Ying",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00504",
+        "name": "Warren Ashford",
+        "tier": 1,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00742",
+        "name": "Maya Torres-Dillon",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00759",
+        "name": "Naomi Sterling",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 5
+      },
+      {
+        "popId": "POP-00761",
+        "name": "Idris Karim",
+        "tier": 2,
+        "neighborhood": "Temescal",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00765",
+        "name": "Anand Krishnamurthy",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00769",
+        "name": "Dax Monroe",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      }
+    ]
+  },
+  "neighborhoods": [
+    {
+      "neighborhood": "Temescal",
+      "sentiment": 0.45,
+      "medianIncome": "68409",
+      "medianRent": "1710",
+      "trajectory": "steady",
+      "housingPressure": "3.5",
+      "crimeIndex": 0.64,
+      "retailVitality": 5.5,
+      "students": 313,
+      "adults": 2118,
+      "seniors": 297,
+      "unemployed": 178,
+      "sick": 96,
+      "schoolQuality": 6.6,
+      "propertyCrime": 43,
+      "violentCrime": 21,
+      "responseTime": 9.9,
+      "incidents": 7
+    },
+    {
+      "neighborhood": "Rockridge",
+      "sentiment": 0.36,
+      "medianIncome": "161607",
+      "medianRent": "4040",
+      "trajectory": "steady",
+      "housingPressure": "5",
+      "crimeIndex": 0.55,
+      "retailVitality": 10.2,
+      "students": 246,
+      "adults": 1489,
+      "seniors": 450,
+      "unemployed": 57,
+      "sick": 107,
+      "schoolQuality": 8.7,
+      "propertyCrime": 32,
+      "violentCrime": 23,
+      "responseTime": 10.5,
+      "incidents": 7
+    }
+  ],
+  "businesses": [
+    {
+      "bizId": "BIZ-00182",
+      "name": "Dillon Clinic",
+      "sector": "Healthcare",
+      "neighborhood": "Rockridge",
+      "employeeCount": 38,
+      "avgSalary": 85000,
+      "growthRate": "2.94",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00090",
+      "name": "Calderon-Nishi",
+      "sector": "Construction",
+      "neighborhood": "Temescal",
+      "employeeCount": 34,
+      "avgSalary": 78000,
+      "growthRate": "5.86",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00043",
+      "name": "OakHouse",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Rockridge",
+      "employeeCount": 22,
+      "avgSalary": 83000,
+      "growthRate": "7.41",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00008",
+      "name": "Gridiron Analytics",
+      "sector": "Sports Analytics",
+      "neighborhood": "Temescal",
+      "employeeCount": 20,
+      "avgSalary": 110000,
+      "growthRate": "28.02",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00169",
+      "name": "Claremont Table",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Rockridge",
+      "employeeCount": 15,
+      "avgSalary": 83000,
+      "growthRate": "5.81",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00097",
+      "name": "Temescal Community Health Center",
+      "sector": "Healthcare",
+      "neighborhood": "Temescal",
+      "employeeCount": 14,
+      "avgSalary": 88000,
+      "growthRate": "1.27",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00085",
+      "name": "Temple Beth Or",
+      "sector": "Faith Organization",
+      "neighborhood": "Rockridge",
+      "employeeCount": 12,
+      "avgSalary": 61000,
+      "growthRate": "3.28",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00168",
+      "name": "Canopy Market",
+      "sector": "Retail",
+      "neighborhood": "Rockridge",
+      "employeeCount": 11,
+      "avgSalary": 88000,
+      "growthRate": "3.69",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00170",
+      "name": "College Avenue Dental",
+      "sector": "Healthcare",
+      "neighborhood": "Rockridge",
+      "employeeCount": 8,
+      "avgSalary": 152000,
+      "growthRate": "3.59",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00038",
+      "name": "OakTown Social",
+      "sector": "Nightlife & Entertainment",
+      "neighborhood": "Temescal",
+      "employeeCount": 7,
+      "avgSalary": 37000,
+      "growthRate": "3.16",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00171",
+      "name": "Rockridge Pharmacy",
+      "sector": "Retail",
+      "neighborhood": "Rockridge",
+      "employeeCount": 7,
+      "avgSalary": 88000,
+      "growthRate": "2.36",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00080",
+      "name": "Temescal Islamic Center",
+      "sector": "Faith Organization",
+      "neighborhood": "Temescal",
+      "employeeCount": 6,
+      "avgSalary": 51000,
+      "growthRate": "3.89",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00106",
+      "name": "Brie Bouquets",
+      "sector": "Services",
+      "neighborhood": "Temescal",
+      "employeeCount": 5,
+      "avgSalary": 37000,
+      "growthRate": "3.67",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00107",
+      "name": "Da Dough",
+      "sector": "Services",
+      "neighborhood": "Temescal",
+      "employeeCount": 5,
+      "avgSalary": 37000,
+      "growthRate": "2.28",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00180",
+      "name": "Kelley Mercantile",
+      "sector": "Retail",
+      "neighborhood": "Rockridge",
+      "employeeCount": 4,
+      "avgSalary": 42000,
+      "growthRate": "1.53",
+      "status": ""
+    }
+  ]
+}

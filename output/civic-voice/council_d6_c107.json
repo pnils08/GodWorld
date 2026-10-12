@@ -1,0 +1,48 @@
+{
+  "office": "council_d6",
+  "cycle": 107,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "Piedmont Avenue demonstrates that steady street commerce and low crime are maintained through disciplined local stability and community trust. I am supporting the public enrollment launch for the Oakland Youth Apprenticeship Pipeline and the month-eight review for the West Oakland Stabilization Fund, while insisting on rigorous oversight as Baylight site mobilization begins.",
+  "statements": [
+    {
+      "statementId": "STMT-107-council_d6-001",
+      "type": "district_statement",
+      "topic": "Piedmont Ave Corridor Stability",
+      "initiative": null,
+      "decision": "Affirm municipal support for Piedmont Avenue's commercial vitality and safety baseline.",
+      "quote": "Piedmont Avenue's steady street trade and low crime show what happens when public safety and local business stability align.",
+      "fullStatement": "Piedmont Avenue continues to maintain steady street commerce and low crime rates because our local business owners and residents stay engaged and aligned. A thriving commercial corridor is not an accident; it is the product of predictable municipal services and steady local oversight. As District 6 representative, I will ensure City Hall continues to support the basic civic infrastructure that keeps Piedmont Avenue safe, accessible, and economically resilient.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d6-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline Public Enrollment Launch",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Support operational launch with strict placement metric tracking.",
+      "quote": "Opening enrollment is a necessary step, but municipal competence will be judged by verifiable job placements.",
+      "fullStatement": "With the applicant backlog cleared, moving to open enrollment and cohort placement targets is the right operational next step. However, opening the doors is only half the job. City Hall must maintain transparent reporting on training completion rates and actual private-sector placements. I support this enrollment rollout on the condition that Council receives quarterly placement audits.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d6-003",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund Downtown Outreach Expansion",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Support month-eight disbursement review and canvass deployment with fiscal tracking.",
+      "quote": "Targeted stabilization works when every dollar is accounted for and delivered cleanly to the storefronts that need it.",
+      "fullStatement": "I have supported the West Oakland Stabilization Fund when targeted resources prevent commercial displacement without fiscal waste. Expanding canvass operations and proceeding with the month-eight disbursement review makes sense, provided Downtown outreach adheres to the same verified eligibility standards and accounting rigor applied across earlier disbursement cycles.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d6-004",
+      "type": "vote_statement",
+      "topic": "Baylight District Contract Execution and Site Mobilization",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Condition contract execution on strict milestone reporting and construction oversight.",
+      "quote": "Baylight's potential is immense, but only if we hold every contract and mobilization milestone fully accountable.",
+      "fullStatement": "Following Council's final approval, moving to contract execution and site preparation requires tight fiscal and operational boundaries. Major capital projects demand continuous oversight to prevent cost overruns and delays. As site mobilization proceeds, City Hall must enforce every contract covenant and provide regular project milestone updates directly to Council.",
+      "trackerUpdates": {}
+    }
+  ]
+}

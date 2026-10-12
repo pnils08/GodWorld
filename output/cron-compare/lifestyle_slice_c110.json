@@ -1,0 +1,243 @@
+{
+  "version": "LIFESTYLE-SLICE-1",
+  "empty": false,
+  "cycle": 110,
+  "kind": "beat-lifestyle",
+  "seat": {
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "desk": "culture",
+    "domain": "lifestyle",
+    "builder": "buildLifestyleSlice.js"
+  },
+  "hood": "Lake Merritt",
+  "pulse": {
+    "className": "beat-lifestyle",
+    "score": 100,
+    "label": "Marin Tao leads the fame table; 2 fading, 1 new",
+    "hood": "Lake Merritt",
+    "source": "output/beats/Cultural_Ledger.jsonl @C110"
+  },
+  "story": {
+    "kind": "beat-lifestyle",
+    "angle": "Lena Cross is fading — how the city follows its names",
+    "label": "Marin Tao leads the fame table; 2 fading, 1 new",
+    "hookLine": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 95, cooling), 17 media mentions.",
+    "hood": "Lake Merritt",
+    "citizens": [
+      "Lena Cross (POP-00539)",
+      "Rowan Pierce (POP-00545)",
+      "Marin Tao (POP-00537)",
+      "Rico Valez (POP-00632)"
+    ],
+    "popids": [
+      "POP-00539",
+      "POP-00545",
+      "POP-00537",
+      "POP-00632"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C110",
+    "cycle": 110
+  },
+  "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00539",
+      "name": "Lena Cross",
+      "role": "Actor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Lena Cross — Actor — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00545",
+      "name": "Rowan Pierce",
+      "role": "Freelance Writer",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00537",
+      "name": "Marin Tao",
+      "role": "Musician",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Marin Tao — Musician — Chinatown",
+      "why": "the city knows them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00632",
+      "name": "Rico Valez",
+      "role": "Musician",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Rico Valez — Musician — Fruitvale",
+      "why": "the city knows them (Cultural_Ledger)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 95, cooling), 17 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C110"
+    },
+    {
+      "text": "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 69, cooling), 14 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C110"
+    },
+    {
+      "text": "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C110"
+    },
+    {
+      "text": "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C110"
+    },
+    {
+      "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record this cycle (fame 18, rising), 1 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C110"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Lena Cross is fading — how the city follows its names",
+    "hookLine": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 95, cooling), 17 media mentions.",
+    "anchorFacts": [
+      "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 95, cooling), 17 media mentions",
+      "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 69, cooling), 14 media mentions",
+      "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+      "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+      "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record this cycle (fame 18, rising), 1 media mentions"
+    ],
+    "evidence": [
+      {
+        "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 95, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110"
+      },
+      {
+        "text": "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 69, cooling), 14 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110"
+      },
+      {
+        "text": "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110"
+      },
+      {
+        "text": "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110"
+      },
+      {
+        "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record this cycle (fame 18, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [
+      {
+        "text": "Multiple nightlife signals detected. Could be coincidence or early pattern.",
+        "angle": "general coverage",
+        "domain": "NIGHTLIFE",
+        "hood": null,
+        "priority": 2
+      },
+      {
+        "text": "Nightlife surge in the district. Scene report or venue profile opportunity.",
+        "angle": "general coverage",
+        "domain": "NIGHTLIFE",
+        "hood": "Jack London",
+        "priority": 2
+      },
+      {
+        "text": "First Friday nightlife surge expected. Restaurant and bar scene coverage available.",
+        "angle": "general coverage",
+        "domain": "NIGHTLIFE",
+        "hood": "KONO",
+        "priority": 1
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Ivy Hill",
+        "priority": 3
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Adams Point",
+        "priority": 3
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Temescal",
+        "priority": 3
+      },
+      {
+        "text": "Jax Caldera moved from Temescal to Chinatown — moving up from Temescal",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Chinatown",
+        "priority": 5
+      },
+      {
+        "text": "Theodore Lindqvist moved from Lake Merritt to West Oakland — leaving Lake Merritt for a better fit",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 5
+      },
+      {
+        "text": "upgraded a flight seat and didn't think twice about it",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Jack London",
+        "priority": 3
+      },
+      {
+        "text": "navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Rockridge",
+        "priority": 3
+      },
+      {
+        "text": "overheard a stranger asking about rents on a block nobody used to ask about",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Jack London",
+        "priority": 3
+      },
+      {
+        "text": "stared at the Stabilization Fund application requirements until the numbers blurred together",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Laurel",
+        "priority": 3
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to"
+  },
+  "known": 53,
+  "fading": 2,
+  "appeared": 1,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C110",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Sharon Okafor this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

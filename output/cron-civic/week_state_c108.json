@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "cycle": 108,
+  "engineFiredAt": "2026-09-20T20:50:37.029Z",
+  "stages": {
+    "prep": {
+      "stage": "prep",
+      "status": "done",
+      "inputs": {},
+      "attempts": 0,
+      "updated": "2026-09-25T04:35:45.271Z"
+    },
+    "directive": {
+      "stage": "directive",
+      "status": "done",
+      "inputs": {},
+      "attempts": 0,
+      "updated": "2026-09-25T04:35:45.271Z"
+    },
+    "mayor-open": {
+      "stage": "mayor-open",
+      "status": "done",
+      "inputs": {},
+      "attempts": 0,
+      "updated": "2026-09-25T04:35:45.271Z"
+    },
+    "hearing": {
+      "stage": "hearing",
+      "status": "done",
+      "inputs": {
+        "pending": [
+          "council_d1",
+          "council_d5"
+        ]
+      },
+      "attempts": 0,
+      "updated": "2026-09-25T04:35:45.271Z"
+    },
+    "mayor-gavel": {
+      "stage": "mayor-gavel",
+      "status": "ready",
+      "inputs": {},
+      "attempts": 0,
+      "updated": "2026-09-25T04:35:45.271Z"
+    },
+    "projects": {
+      "stage": "projects",
+      "status": "waiting",
+      "inputs": {},
+      "attempts": 0,
+      "updated": null
+    },
+    "close-det": {
+      "stage": "close-det",
+      "status": "done",
+      "inputs": {
+        "deterministicPass": true
+      },
+      "attempts": 2,
+      "updated": "2026-09-25T04:38:14.682Z"
+    },
+    "verdict-clerk": {
+      "stage": "verdict-clerk",
+      "status": "ready",
+      "inputs": {
+        "verdict": "missing"
+      },
+      "attempts": 0,
+      "updated": "2026-09-25T04:38:14.682Z"
+    },
+    "verdict-sanity": {
+      "stage": "verdict-sanity",
+      "status": "deferred",
+      "inputs": {
+        "verdict": "skipped"
+      },
+      "attempts": 0,
+      "updated": "2026-09-25T04:38:14.682Z"
+    },
+    "apply": {
+      "stage": "apply",
+      "status": "done",
+      "inputs": {
+        "decision": {
+          "apply": true,
+          "blocked": false,
+          "via": "cutoff",
+          "reason": null,
+          "missingVerdicts": [
+            "clerk:missing",
+            "sanity-read:skipped"
+          ]
+        }
+      },
+      "attempts": 1,
+      "updated": "2026-09-25T04:43:17.676Z"
+    }
+  },
+  "updated": "2026-09-25T04:43:17.678Z"
+}

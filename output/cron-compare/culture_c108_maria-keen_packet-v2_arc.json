@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "culture",
+  "persona": "maria-keen",
+  "storyline": {
+    "slug": "fruitvale-lucia-polito-beat-neighborhood",
+    "verb": "opened"
+  },
+  "hood": "Fruitvale",
+  "quotes": [
+    {
+      "pop": "POP-00004",
+      "name": "Lucia Polito",
+      "quote": "I've seen the impact that community programs can have on people's lives, and I feel grateful to be a part of it. As someone who's founded a program myself, I understand the passion and dedication that goes into creating something that truly helps others. It's amazing to see the difference these programs make in Fruitvale, and I'm always looking for ways to support and connect with the people who make them happen."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I've seen the community programs in Fruitvale really making a difference, and I think it's great that people like Lucia Polito are founding initiatives that help our neighborhood."
+    },
+    {
+      "pop": "POP-00644",
+      "name": "Rafael Pilgrim",
+      "quote": "I've seen the community programs in Fruitvale really make a difference, and I appreciate the work of founders like Lucia Polito who are dedicated to helping our neighborhood thrive."
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "I've seen the community programs in Fruitvale really making a difference, and I feel like they're bringing people together. I've heard Lucia Polito's work with the Postpartum Oakland Network is really helping new moms in the area."
+    }
+  ],
+  "claim": "I've seen the impact that community programs can have on people's lives, and I feel grateful to be a part of it. As someone who's founded a program myself, I understand the passion and dedication that goes into creating something that truly helps others. It's amazing to see the difference these programs make in Fruitvale, and I'm always looking for ways to support and connect with the people who make them happen.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-25T18:18:14.883Z"
+}

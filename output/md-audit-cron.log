@@ -5,3 +5,10 @@
 [md-audit] scanning 880 Markdown files ... done
 [md-audit] report → output/md_audit_2026-09-02.md (51.8s)
 [md-audit] orphan-candidates: 4 | stale-but-linked: 14
+[md-audit] walking docs/, .claude/, and project memory ... 966 files (docs=493, control-plane=336, memory=137)
+[md-audit] building source-content index ... 970 source files
+[md-audit] active-edit set (30d) ... 4418 files touched
+[md-audit] loading batched Git mtimes ... 1243 tracked Markdown paths
+[md-audit] scanning 966 Markdown files ... done
+[md-audit] report → output/md_audit_2026-10-02.md (68.3s)
+[md-audit] orphan-candidates: 7 | stale-but-linked: 15

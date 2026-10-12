@@ -1,0 +1,201 @@
+PLAYER INTAKE (Pitcher) — 2041 SEASON
+
+Name: Carmen Mesa
+
+ 
+
+Team: Oakland Athletics
+
+ 
+
+Position: SP
+
+ 
+
+Age: 22
+
+ 
+
+Bats: L
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'2"
+
+ 
+
+Weight: 191 lbs
+
+ 
+
+Born: Cuba
+
+ 
+
+Drafted: Round 1 (2038)
+
+ 
+
+MLB Service: 1.000
+
+ 
+
+Overall: 81
+
+ 
+
+Potential: B
+
+ 
+
+POPID: POP-00081
+
+— 2041 REGULAR SEASON —
+
+Games: 10
+
+ 
+
+Games Started: 10
+
+ 
+
+Wins: 5
+
+ 
+
+Losses: 3
+
+ 
+
+Saves: 0
+
+ 
+
+Blown Saves: 0
+
+ 
+
+Holds: 0
+
+ 
+
+Innings Pitched: 56.0
+
+ 
+
+Hits Allowed: 44
+
+ 
+
+Runs Allowed: 21
+
+ 
+
+Earned Runs: 20
+
+ 
+
+Home Runs Allowed: 8
+
+ 
+
+Walks: 11
+
+ 
+
+Strikeouts: 67
+
+ 
+
+ERA: 3.21
+
+ 
+
+WHIP: 0.98
+
+ 
+
+Winning Percentage: 0.625
+
+ 
+
+Quality Starts: 5
+
+ 
+
+Complete Games: 1
+
+ 
+
+Shutouts: 1
+
+ 
+
+Hit Batters: 2
+
+ 
+
+Wild Pitches: 1
+
+ 
+
+Total Batters Faced: 222
+
+ 
+
+WAR: 1.3
+
+— RATE METRICS —
+
+K/9: 10.77
+
+ 
+
+BB/9: 1.77
+
+ 
+
+HR/9: 1.29
+
+ 
+
+FIP: 3.16
+
+ 
+
+ERC: 2.38
+
+— CONTRACT STATUS —
+
+2041: $780,000
+
+ 
+
+2042: RNW
+
+ 
+
+2043: RNW
+
+ 
+
+2044: ARB
+
+ 
+
+FA: 2046
+
+
+--------------------------------------------------------------------------------
+
+
+Quirks
+
+High Strikeout Starting Arsenal
+
+Complete Game Shutout Delivery

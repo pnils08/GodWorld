@@ -1,0 +1,57 @@
+{
+  "draft": "output/cron-compare/civic_c109_angela-reyes_packet-v2_anthropic-claude-haiku-4-5.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d32efa3578d6214eedae009033e0123ec6609ed515409bcc8ce30c3408d2a304",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, citizen profiles align with ledger ground truth, and education metrics conform to canon.",
+  "review": {
+    "profileId": "angela-education-stability-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "packageVersion": "ANGELA-LEP2-1",
+    "manifestId": "AM-d7c98d365dbb",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "3"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Jun Leu",
+      "Lo Thoop",
+      "Patricia Nolan",
+      "Salma Navarro"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0096,
+  "durationMs": 6697,
+  "parseError": false,
+  "ranAt": "2026-10-02T06:45:39.642Z"
+}

@@ -1,0 +1,199 @@
+PLAYER INTAKE (Pitcher) — 2041 SEASON
+
+Name: Mariano Rosales
+
+ 
+
+Team: Oakland Athletics
+
+ 
+
+Position: CP
+
+ 
+
+Age: 26
+
+ 
+
+Bats: S
+
+ 
+
+Throws: R
+
+ 
+
+Height: 5'10"
+
+ 
+
+Weight: 186 lbs
+
+ 
+
+Born: Utah
+
+ 
+
+Drafted: Round 2 (2035)
+
+ 
+
+MLB Service: 6.000
+
+ 
+
+Overall: 94
+
+ 
+
+Potential: A
+
+ 
+
+POPID: POP-00555
+
+— 2041 REGULAR SEASON —
+
+Games: 60
+
+ 
+
+Games Started: 0
+
+ 
+
+Wins: 8
+
+ 
+
+Losses: 3
+
+ 
+
+Saves: 42
+
+ 
+
+Blown Saves: 3
+
+ 
+
+Holds: 2
+
+ 
+
+Innings Pitched: 63.2
+
+ 
+
+Hits Allowed: 35
+
+ 
+
+Runs Allowed: 14
+
+ 
+
+Earned Runs: 13
+
+ 
+
+Home Runs Allowed: 6
+
+ 
+
+Walks: 14
+
+ 
+
+Strikeouts: 82
+
+ 
+
+ERA: 1.84
+
+ 
+
+WHIP: 0.77
+
+ 
+
+Winning Percentage: 0.727
+
+ 
+
+Quality Starts: 0
+
+ 
+
+Complete Games: 0
+
+ 
+
+Shutouts: 0
+
+ 
+
+Hit Batters: 1
+
+ 
+
+Wild Pitches: 0
+
+ 
+
+Total Batters Faced: 236
+
+ 
+
+WAR: 1.7
+
+— RATE METRICS —
+
+K/9: 11.59
+
+ 
+
+BB/9: 1.98
+
+ 
+
+HR/9: 0.85
+
+ 
+
+FIP: 2.36
+
+ 
+
+ERC: 1.21
+
+— CONTRACT STATUS —
+
+2041: $10,100,000
+
+ 
+
+2042: Free Agent (FA)
+
+
+--------------------------------------------------------------------------------
+
+
+Quirks
+
+High Leverage Closer
+
+Extreme Opposite Hitter Tendency
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS (Career Reference)
+
+All-Star (2041)
+
+AL Saves Leader (42 SV, 2041)

@@ -1,0 +1,26 @@
+{
+  "office": "council_d8",
+  "agentDir": "civic-office-council-d8",
+  "holder": "Nina Chen",
+  "popid": "POP-00505",
+  "title": "City Council District 8",
+  "date": "2026-09-23",
+  "cycle": 108,
+  "model": "google/gemini-3.7-flash",
+  "statement": "Our office maintains continuous procedural oversight across Lake Merritt, Adams Point, Grand Lake, and Eastlake, requiring complete audit verification for program intake protocols and systematic municipal maintenance reviews along all commercial corridors.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-108-civic-office-council-d8",
+        "text": "We are reviewing the verified applicant intake audit for INIT-007 to ensure full regulatory and reporting compliance, while coordinating standard municipal service oversight to address corridor conditions in Eastlake.",
+        "directiveCycle": 108,
+        "confrontationSeat": "civic-office-council-d8"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-09-23T10:45:42.610Z",
+  "fellBackFrom": null
+}

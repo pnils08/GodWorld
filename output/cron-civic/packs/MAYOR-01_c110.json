@@ -1,0 +1,1251 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00034",
+    "name": "Avery Santana",
+    "role": "Mayor",
+    "officeId": "MAYOR-01",
+    "district": "citywide",
+    "faction": "OPP",
+    "agentDir": "civic-office-mayor",
+    "initiative": null,
+    "dials": {
+      "approval": 69
+    }
+  },
+  "task": {
+    "a": "role-week",
+    "goal": "legislation-filed"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 48,
+    "label": "Commercial Stabilization for Grand Lake — legislation-filed",
+    "lever": "legislation-filed",
+    "hood": "Grand Lake",
+    "initiative": "INIT-009",
+    "vsCity": {
+      "sentiment": 0.49,
+      "citySentiment": 0.5354545454545453,
+      "crime": 0.6,
+      "cityCrime": 0.5913636363636363,
+      "heat": 4.7181818181818045,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "legislation-filed",
+    "lineFacts": [
+      "approval 69",
+      "Commercial Stabilization for Grand Lake is in announced; budget $2.5M",
+      "due: legislation-filed",
+      "Grand Lake crime: property 35, violent 25, incidents 8 (cycle 110) — city property 35.5, violent 23.9, incidents 7.1",
+      "Grand Lake: sentiment 0.49 vs city 0.535; crime index 0.6 vs city 0.591; retail 12.3; housing pressure 5; growth; momentum 10"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no named applicant households — do not invent who got the check",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC109 - answer CONF-104-civic-office-mayor: awaiting the Sunday fold\nNo applied or failed outcome in the available ledgers.",
+      "moves": [
+        {
+          "moveId": "MV-109-civic-office-mayor-2026-09-28",
+          "cycle": 109,
+          "date": "2026-09-28",
+          "agentDir": "civic-office-mayor",
+          "popid": "POP-00034",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-104-civic-office-mayor",
+            "text": "The Mayor's office will transmit the formal INIT-007 Review Findings and Corrective Actions Report to City Council this week to address apprenticeship intake bottlenecks and stabilize executive policy direction following the 13-point approval drop in C104.",
+            "directiveCycle": 104,
+            "confrontationSeat": "civic-office-mayor"
+          },
+          "status": "pending",
+          "at": "2026-09-28T10:45:52.331Z"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-001",
+        "name": "West Oakland Stabilization Fund",
+        "domain": "economic",
+        "phase": "disbursement-active",
+        "status": "passed",
+        "voteCycle": 78,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 2,
+        "lastStageChangeCycle": 108,
+        "sponsored": true,
+        "hoods": [
+          "West Oakland"
+        ],
+        "needsNext": "Standing — no delivering gate exists for this domain yet",
+        "budget": "budget $23,000,000 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "no-delivering-gate",
+          "text": "Standing — no delivering gate exists for this domain yet"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-002",
+        "name": "Oakland Alternative Response Initiative",
+        "domain": "safety",
+        "phase": "dispatch-live",
+        "status": "passed",
+        "voteCycle": 82,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 2,
+        "lastStageChangeCycle": 108,
+        "sponsored": true,
+        "hoods": [
+          "West Oakland",
+          "Fruitvale",
+          "East Oakland"
+        ],
+        "needsNext": "Standing — no delivering gate exists for this domain yet",
+        "budget": "budget $12,259,615.38 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "no-delivering-gate",
+          "text": "Standing — no delivering gate exists for this domain yet"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-003",
+        "name": "Fruitvale Transit Hub Phase II — Visioning",
+        "domain": "transit",
+        "phase": "design-phase",
+        "status": "proposed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": 2,
+        "lastStageChangeCycle": 108,
+        "sponsored": true,
+        "hoods": [
+          "Fruitvale"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $230,000,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-005",
+        "name": "Temescal Community Health Center",
+        "domain": "health",
+        "phase": "operational",
+        "status": "passed",
+        "voteCycle": 80,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 2,
+        "lastStageChangeCycle": 108,
+        "sponsored": true,
+        "hoods": [
+          "Temescal"
+        ],
+        "needsNext": "Standing — delivers when Sick moves down against its baseline — metric evidence unavailable: current World_Config dump unavailable",
+        "budget": "budget $17,653,846.15 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": "Delivering",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Standing — delivers when Sick moves down against its baseline"
+        },
+        "metricEvidence": {
+          "available": false,
+          "metricMoved": false,
+          "reason": "current World_Config dump unavailable"
+        }
+      },
+      {
+        "id": "INIT-006",
+        "name": "Baylight District — Final Council Vote",
+        "domain": "sports",
+        "phase": "construction-active",
+        "status": "passed",
+        "voteCycle": 83,
+        "stage": null,
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Jack London",
+          "Downtown"
+        ],
+        "needsNext": "Remediation completion and construction milestone review",
+        "budget": "budget $2,100,000,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-007",
+        "name": "Oakland Youth Apprenticeship Pipeline",
+        "domain": "workforce",
+        "phase": "operational",
+        "status": "announced",
+        "voteCycle": null,
+        "stage": null,
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "West Oakland",
+          "East Oakland",
+          "Fruitvale"
+        ],
+        "needsNext": "First training cohort placement review",
+        "budget": "budget $12,500,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-008",
+        "name": "Downtown Economic Revitalization",
+        "domain": "economic",
+        "phase": "legislation-filed",
+        "status": "proposed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "Downtown"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $15,000,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-009",
+        "name": "Commercial Stabilization for Grand Lake",
+        "domain": "economic",
+        "phase": "announced",
+        "status": "proposed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "Grand Lake"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget: no parsed budget",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-010",
+        "name": "West Oakland Tenant Defense Fund",
+        "domain": "economic",
+        "phase": "announced",
+        "status": "proposed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget: no parsed budget",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-001",
+      "INIT-002",
+      "INIT-003",
+      "INIT-005",
+      "INIT-006",
+      "INIT-007",
+      "INIT-008",
+      "INIT-009",
+      "INIT-010"
+    ],
+    "boardText": "Your board:\n- INIT-001 West Oakland Stabilization Fund [disbursement-active] — Standing — no delivering gate exists for this domain yet — budget $23,000,000 left, renewable\n- INIT-002 Oakland Alternative Response Initiative [dispatch-live] — Standing — no delivering gate exists for this domain yet — budget $12,259,615.38 left, renewable\n- INIT-003 Fruitvale Transit Hub Phase II — Visioning [design-phase] — Proposed — a passed council vote funds it — budget $230,000,000 left\n- INIT-005 Temescal Community Health Center [operational] — Standing — delivers when Sick moves down against its…",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [
+        {
+          "cycle": "109",
+          "hood": "Rockridge",
+          "snippet": "Honestly, I hear folks at the diner grumbling about how nothing ever moves forward with…",
+          "affect": "Resentful"
+        },
+        {
+          "cycle": "109",
+          "hood": "Rockridge",
+          "snippet": "I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no…",
+          "affect": "Frustrated"
+        },
+        {
+          "cycle": "109",
+          "hood": "West Oakland",
+          "snippet": "I feel like the city's response to what's been going on has been really slow, and it's…",
+          "affect": "Frustrated"
+        },
+        {
+          "cycle": "108",
+          "hood": "Fruitvale",
+          "snippet": "I’ve heard folks around here talking about the Fruitvale Transit Hub Phase II, but…",
+          "affect": "Frustrated"
+        },
+        {
+          "cycle": "108",
+          "hood": "Temescal",
+          "snippet": "I’ve heard folks talking about the Fruitvale Transit Hub Phase II, and it feels like…",
+          "affect": "Frustrated"
+        },
+        {
+          "cycle": "108",
+          "hood": "Fruitvale",
+          "snippet": "filed: The File Nobody's Holding",
+          "affect": "Frustrated"
+        },
+        {
+          "cycle": "108",
+          "hood": "Chinatown",
+          "snippet": "filed: Civic Desk — Cycle 108",
+          "affect": "Frustrated"
+        },
+        {
+          "cycle": "108",
+          "hood": "West Oakland",
+          "snippet": "Mike. (Nods, crossing arms) Still pushing for that high-rise on 14th, or did the zoning…",
+          "affect": "Irritable"
+        },
+        {
+          "cycle": "108",
+          "hood": "Jack London",
+          "snippet": "(Exhaling through his nose, running a hand through his hair) Jesus, Eli, it's 7:30 AM and…",
+          "affect": "Angry"
+        }
+      ],
+      "participation": [
+        {
+          "cycle": "109",
+          "hood": "West Oakland",
+          "snippet": "filed: Here's the corrected civic section for cycle 109:",
+          "affect": "Content"
+        }
+      ],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 108,
+      "throughCycle": 110,
+      "window": "Complaint display C108–C110; condition counter C110 only.",
+      "text": "Complaint display C108–C110; condition counter C110 only.\nPeople are talking (9 complaints):\n- Honestly, I hear folks at the diner grumbling about how nothing ever moves forward with… (Rockridge, C109)\n- I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no… (Rockridge, C109)\n- I feel like the city's response to what's been going on has been really slow, and it's… (West Oakland, C109)\n- I’ve heard folks around here talking about the Fruitvale Transit Hub Phase II, but… (Fruitvale, C108)\n- I’ve heard folks talking about the Fruitvale Transit Hub Phase II, and…"
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 4,
+      "text": "The working city:\n- Elena Soria Dominguez: It’s the waiting that gets to me. Every delay feels like another winter without proper shelters for the… (C109)\n- Bobby Chen-Ramirez: The pharmacist’s kid taped a crayon drawing of our building to the bulletin board yesterday. Not the… (C109)\n- Vanessa Tran-Muñoz: Three more crews out today means we handled that many calls without patrol cars. Good. But the wait time for… (C109)\n- Marcus Webb: I’m staring at the spreadsheet for the month-nine review, thinking about how many of these households are… (C109)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-103-civic-office-mayor",
+          "cycle": 103,
+          "agentDir": "civic-office-mayor",
+          "demand": "Avery Santana — Mayor — Direct the Office of Economic and Workforce Development (OEWD) to clear the recruitment and intake bottlenecks flagged in the C102 executive review of the Oakland Youth Apprenticeship Pipeline (INIT-007).",
+          "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Direct the Office of Economic and Workforce Development (OEWD) to clear the recruitment and intake bottlenecks flagged in the C102 executive review of the Oakland Youth Apprenticeship Pipeline (INIT-007).\n- **Why:** The program remains stalled with recruitment failures leading into the C104 findings report, requiring immediate executive intervention to unblock intake.\n- **Acceptance:** An executive directive instructing the program team on specific intake adjustments to be evaluated in C104.\n- **Silence consequence:** The apprenticeship pipeline will fail its pilot phase, leaving vulnerable youth without jobs and wasting allocated municipal resources.\n",
+          "src": "output/mara-directives/mara_directive_c103_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-104-civic-office-mayor",
+          "cycle": 104,
+          "agentDir": "civic-office-mayor",
+          "demand": "Avery Santana — Mayor — Transmit the formal INIT-007 Review Findings and Corrective Actions Report to City Council to resolve apprenticeship intake bottlenecks and stabilize executive policy direction following the 13-point approval drop in C104.",
+          "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Transmit the formal INIT-007 Review Findings and Corrective Actions Report to City Council to resolve apprenticeship intake bottlenecks and stabilize executive policy direction following the 13-point approval drop in C104.\n- **Why:** The Oakland Youth Apprenticeship Pipeline (INIT-007) is scheduled for its C104 review findings deliverable after executive intervention in C103, coinciding with a drop in mayoral approval from 95 to 82 in C104.\n- **Acceptance:** Public transmission of the INIT-007 corrective actions report containing revised intake targets and operational adjustments.\n- **Silence consequence:** INIT-007 stalls in pilot phase without authorized corrective workflows, leaving municipal workforce commitments unmet.\n",
+          "src": "output/mara-directives/mara_directive_c104_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-105-civic-office-mayor",
+          "cycle": 105,
+          "agentDir": "civic-office-mayor",
+          "demand": "Avery Santana — Mayor — Transmit the interagency administrative order directing OEWD and partner agencies to clear the Youth Apprenticeship Pipeline (INIT-007) backlog before the C106 town hall deadline.",
+          "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Transmit the interagency administrative order directing OEWD and partner agencies to clear the Youth Apprenticeship Pipeline (INIT-007) backlog before the C106 town hall deadline.\n- **Why:** Following C104 corrective plan filings and the executive approval shift to 69 in C105, executive authority must enforce partner intake processing to meet the C106 pilot clearance deadline.\n- **Acceptance:** An issued executive order or administrative directive mandating pipeline intake processing targets across participating municipal departments.\n- **Silence consequence:** The INIT-007 backlog remains unresolved into C106, compromising youth workforce commitments and administrative follow-through.\n",
+          "src": "output/mara-directives/mara_directive_c105_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-106-civic-office-mayor",
+          "cycle": 106,
+          "agentDir": "civic-office-mayor",
+          "demand": "Avery Santana — Mayor — Convene the Youth Apprenticeship Pipeline (INIT-007) public town hall and certify zero remaining backlog cases across municipal partner agencies.",
+          "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Convene the Youth Apprenticeship Pipeline (INIT-007) public town hall and certify zero remaining backlog cases across municipal partner agencies.\n- **Why:** Administrative orders issued in C105 established C106 as the deadline for clearing the intake backlog and conducting the public town hall, amid a 5-point drop in executive approval (64 in C106).\n- **Acceptance:** Official certification of backlog clearance and a published town hall transcript or outcomes summary.\n- **Silence consequence:** Failure to verify intake processing leaves applicants stalled and unresolved oversight questions for the administration.\n",
+          "src": "output/mara-directives/mara_directive_c106_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-107-civic-office-mayor",
+          "cycle": 107,
+          "agentDir": "civic-office-mayor",
+          "demand": "Avery Santana — Mayor — Convene the public town hall enrollment event for the Oakland Youth Apprenticeship Pipeline (INIT-007) and certify operational rollout.",
+          "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Convene the public town hall enrollment event for the Oakland Youth Apprenticeship Pipeline (INIT-007) and certify operational rollout.\n- **Why:** Following backlog clearance verified in C106, tracker sequencing sets the public enrollment launch in C107 as the gating operational milestone.\n- **Acceptance:** A published town hall enrollment report documenting open applicant intake and training cohort placement targets.\n- **Silence consequence:** The cleared intake pipeline remains dormant without executive launch of public enrollment.\n",
+          "src": "output/mara-directives/mara_directive_c107_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-mayor",
+          "cycle": 108,
+          "agentDir": "civic-office-mayor",
+          "demand": "Avery Santana — Mayor — Authorize the design consultant selection for Fruitvale Transit Hub Phase II (INIT-003) and publish the first training cohort placement metrics for the Youth Apprenticeship Pipeline (INIT-007).",
+          "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Authorize the design consultant selection for Fruitvale Transit Hub Phase II (INIT-003) and publish the first training cohort placement metrics for the Youth Apprenticeship Pipeline (INIT-007).\n- **Why:** Following C107 design RFP issuance and public town hall enrollment, C108 marks the scheduled milestone for INIT-003 consultant award and INIT-007 placement review; all six board initiatives sit at stall-clock threshold (NextActionCycle ≤ C109).\n- **Acceptance:** Executive authorization selecting the INIT-003 design consultant and a published INIT-007 placement audit establishing initial cohort numbers across city districts.\n- **Silence consequence:** Transit hub pre-development stalls at procurement, while enrolled apprenticeship applicants remain unassigned to active job placements.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-109-civic-office-mayor",
+          "cycle": 109,
+          "agentDir": "civic-office-mayor",
+          "demand": "Avery Santana — Mayor — File legislative language for Downtown Economic Revitalization (INIT-008) and formalize executive execution on month-eight disbursements for INIT-001 and the design consultant contract for INIT-003.",
+          "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** File legislative language for Downtown Economic Revitalization (INIT-008) and formalize executive execution on month-eight disbursements for INIT-001 and the design consultant contract for INIT-003.\n- **Why:** The executive board carries 8 constituent complaints above the visibility threshold with zero filed legislative proposals, while seven initiatives (INIT-001, INIT-002, INIT-003, INIT-005, INIT-006, INIT-007, INIT-008) sit at the C110 stall-clock deadline; INIT-008 missed its C108 filing milestone.\n- **Acceptance:** Formal filing of the INIT-008 revitalization ordinance text with the City Clerk and published executive orders confirming INIT-001 month-eight allocations and the INIT-003 design award.\n- **Silence consequence:** Citywide capital sequencing bottlenecks across seven active initiatives, leaving Downtown commercial corridors without statutory relief and stalling pre-development citywide.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "open": [
+        {
+          "id": "CONF-105-civic-office-mayor",
+          "cycle": 105,
+          "agentDir": "civic-office-mayor",
+          "demand": "Avery Santana — Mayor — Transmit the interagency administrative order directing OEWD and partner agencies to clear the Youth Apprenticeship Pipeline (INIT-007) backlog before the C106 town hall deadline.",
+          "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Transmit the interagency administrative order directing OEWD and partner agencies to clear the Youth Apprenticeship Pipeline (INIT-007) backlog before the C106 town hall deadline.\n- **Why:** Following C104 corrective plan filings and the executive approval shift to 69 in C105, executive authority must enforce partner intake processing to meet the C106 pilot clearance deadline.\n- **Acceptance:** An issued executive order or administrative directive mandating pipeline intake processing targets across participating municipal departments.\n- **Silence consequence:** The INIT-007 backlog remains unresolved into C106, compromising youth workforce commitments and administrative follow-through.\n",
+          "src": "output/mara-directives/mara_directive_c105_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-106-civic-office-mayor",
+          "cycle": 106,
+          "agentDir": "civic-office-mayor",
+          "demand": "Avery Santana — Mayor — Convene the Youth Apprenticeship Pipeline (INIT-007) public town hall and certify zero remaining backlog cases across municipal partner agencies.",
+          "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Convene the Youth Apprenticeship Pipeline (INIT-007) public town hall and certify zero remaining backlog cases across municipal partner agencies.\n- **Why:** Administrative orders issued in C105 established C106 as the deadline for clearing the intake backlog and conducting the public town hall, amid a 5-point drop in executive approval (64 in C106).\n- **Acceptance:** Official certification of backlog clearance and a published town hall transcript or outcomes summary.\n- **Silence consequence:** Failure to verify intake processing leaves applicants stalled and unresolved oversight questions for the administration.\n",
+          "src": "output/mara-directives/mara_directive_c106_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-107-civic-office-mayor",
+          "cycle": 107,
+          "agentDir": "civic-office-mayor",
+          "demand": "Avery Santana — Mayor — Convene the public town hall enrollment event for the Oakland Youth Apprenticeship Pipeline (INIT-007) and certify operational rollout.",
+          "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Convene the public town hall enrollment event for the Oakland Youth Apprenticeship Pipeline (INIT-007) and certify operational rollout.\n- **Why:** Following backlog clearance verified in C106, tracker sequencing sets the public enrollment launch in C107 as the gating operational milestone.\n- **Acceptance:** A published town hall enrollment report documenting open applicant intake and training cohort placement targets.\n- **Silence consequence:** The cleared intake pipeline remains dormant without executive launch of public enrollment.\n",
+          "src": "output/mara-directives/mara_directive_c107_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-mayor",
+          "cycle": 108,
+          "agentDir": "civic-office-mayor",
+          "demand": "Avery Santana — Mayor — Authorize the design consultant selection for Fruitvale Transit Hub Phase II (INIT-003) and publish the first training cohort placement metrics for the Youth Apprenticeship Pipeline (INIT-007).",
+          "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Authorize the design consultant selection for Fruitvale Transit Hub Phase II (INIT-003) and publish the first training cohort placement metrics for the Youth Apprenticeship Pipeline (INIT-007).\n- **Why:** Following C107 design RFP issuance and public town hall enrollment, C108 marks the scheduled milestone for INIT-003 consultant award and INIT-007 placement review; all six board initiatives sit at stall-clock threshold (NextActionCycle ≤ C109).\n- **Acceptance:** Executive authorization selecting the INIT-003 design consultant and a published INIT-007 placement audit establishing initial cohort numbers across city districts.\n- **Silence consequence:** Transit hub pre-development stalls at procurement, while enrolled apprenticeship applicants remain unassigned to active job placements.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-109-civic-office-mayor",
+          "cycle": 109,
+          "agentDir": "civic-office-mayor",
+          "demand": "Avery Santana — Mayor — File legislative language for Downtown Economic Revitalization (INIT-008) and formalize executive execution on month-eight disbursements for INIT-001 and the design consultant contract for INIT-003.",
+          "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** File legislative language for Downtown Economic Revitalization (INIT-008) and formalize executive execution on month-eight disbursements for INIT-001 and the design consultant contract for INIT-003.\n- **Why:** The executive board carries 8 constituent complaints above the visibility threshold with zero filed legislative proposals, while seven initiatives (INIT-001, INIT-002, INIT-003, INIT-005, INIT-006, INIT-007, INIT-008) sit at the C110 stall-clock deadline; INIT-008 missed its C108 filing milestone.\n- **Acceptance:** Formal filing of the INIT-008 revitalization ordinance text with the City Clerk and published executive orders confirming INIT-001 month-eight allocations and the INIT-003 design award.\n- **Silence consequence:** Citywide capital sequencing bottlenecks across seven active initiatives, leaving Downtown commercial corridors without statutory relief and stalling pre-development citywide.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": [
+        "CONF-103-civic-office-mayor",
+        "CONF-104-civic-office-mayor"
+      ]
+    },
+    "confrontation": {
+      "id": "CONF-105-civic-office-mayor",
+      "cycle": 105,
+      "agentDir": "civic-office-mayor",
+      "demand": "Avery Santana — Mayor — Transmit the interagency administrative order directing OEWD and partner agencies to clear the Youth Apprenticeship Pipeline (INIT-007) backlog before the C106 town hall deadline.",
+      "sourceText": "## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Transmit the interagency administrative order directing OEWD and partner agencies to clear the Youth Apprenticeship Pipeline (INIT-007) backlog before the C106 town hall deadline.\n- **Why:** Following C104 corrective plan filings and the executive approval shift to 69 in C105, executive authority must enforce partner intake processing to meet the C106 pilot clearance deadline.\n- **Acceptance:** An issued executive order or administrative directive mandating pipeline intake processing targets across participating municipal departments.\n- **Silence consequence:** The INIT-007 backlog remains unresolved into C106, compromising youth workforce commitments and administrative follow-through.\n",
+      "src": "output/mara-directives/mara_directive_c105_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "cycle": 110,
+      "proposals": [
+        {
+          "id": "INIT-003",
+          "available": true,
+          "cycle": 110,
+          "policyDomain": "transit",
+          "hoods": [
+            "Fruitvale"
+          ],
+          "hardshipBand": 0.3,
+          "counts": {},
+          "population": {
+            "value": 2309,
+            "source": "Neighborhood_Demographics.Students + Adults + Seniors",
+            "missingHoods": []
+          },
+          "support": {
+            "band": null,
+            "numerator": null,
+            "unit": null,
+            "requiredCount": null,
+            "cleared": false,
+            "reason": "domain-rules-deferred",
+            "basis": "Observed condition counts only; no sample extrapolation. Housing households are not population signatures."
+          },
+          "quality": {
+            "unlocatedConditionRows": 0,
+            "invalidConditionRows": 0,
+            "canonCacheMissing": []
+          }
+        },
+        {
+          "id": "INIT-008",
+          "available": true,
+          "cycle": 110,
+          "policyDomain": "economic",
+          "hoods": [
+            "Downtown"
+          ],
+          "hardshipBand": 0.3,
+          "counts": {},
+          "population": {
+            "value": 2751,
+            "source": "Neighborhood_Demographics.Students + Adults + Seniors",
+            "missingHoods": []
+          },
+          "support": {
+            "band": null,
+            "numerator": null,
+            "unit": null,
+            "requiredCount": null,
+            "cleared": false,
+            "reason": "domain-rules-deferred",
+            "basis": "Observed condition counts only; no sample extrapolation. Housing households are not population signatures."
+          },
+          "quality": {
+            "unlocatedConditionRows": 0,
+            "invalidConditionRows": 0,
+            "canonCacheMissing": []
+          }
+        },
+        {
+          "id": "INIT-009",
+          "available": true,
+          "cycle": 110,
+          "policyDomain": "economic",
+          "hoods": [
+            "Grand Lake"
+          ],
+          "hardshipBand": 0.3,
+          "counts": {},
+          "population": {
+            "value": 2292,
+            "source": "Neighborhood_Demographics.Students + Adults + Seniors",
+            "missingHoods": []
+          },
+          "support": {
+            "band": null,
+            "numerator": null,
+            "unit": null,
+            "requiredCount": null,
+            "cleared": false,
+            "reason": "domain-rules-deferred",
+            "basis": "Observed condition counts only; no sample extrapolation. Housing households are not population signatures."
+          },
+          "quality": {
+            "unlocatedConditionRows": 0,
+            "invalidConditionRows": 0,
+            "canonCacheMissing": []
+          }
+        },
+        {
+          "id": "INIT-010",
+          "available": true,
+          "cycle": 110,
+          "policyDomain": "economic",
+          "hoods": [
+            "West Oakland"
+          ],
+          "hardshipBand": 0.3,
+          "counts": {},
+          "population": {
+            "value": 2239,
+            "source": "Neighborhood_Demographics.Students + Adults + Seniors",
+            "missingHoods": []
+          },
+          "support": {
+            "band": null,
+            "numerator": null,
+            "unit": null,
+            "requiredCount": null,
+            "cleared": false,
+            "reason": "domain-rules-deferred",
+            "basis": "Observed condition counts only; no sample extrapolation. Housing households are not population signatures."
+          },
+          "quality": {
+            "unlocatedConditionRows": 0,
+            "invalidConditionRows": 0,
+            "canonCacheMissing": []
+          }
+        }
+      ],
+      "text": "Proposal conditions at C110 (observations; no support band supplied):\nINIT-003: domain condition rules deferred; support domain-rules-deferred; bad rows 0, unlocated 0\nINIT-008: domain condition rules deferred; support domain-rules-deferred; bad rows 0, unlocated 0\nINIT-009: domain condition rules deferred; support domain-rules-deferred; bad rows 0, unlocated 0\nINIT-010: domain condition rules deferred; support domain-rules-deferred; bad rows 0, unlocated 0"
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 110,
+      "problems": [
+        {
+          "id": "[\"Adams Point\",\"health.sickResidents\"]",
+          "hood": "Adams Point",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 90,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Baylight District\",\"health.sickResidents\"]",
+          "hood": "Baylight District",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 14,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Brooklyn\",\"health.sickResidents\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 79,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Brooklyn\",\"safety.aboveMedianHoods\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Chinatown\",\"health.sickResidents\"]",
+          "hood": "Chinatown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 145,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Chinatown\",\"safety.aboveMedianHoods\"]",
+          "hood": "Chinatown",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Dimond\",\"health.sickResidents\"]",
+          "hood": "Dimond",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 98,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Dimond\",\"safety.aboveMedianHoods\"]",
+          "hood": "Dimond",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Downtown\",\"health.sickResidents\"]",
+          "hood": "Downtown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 86,
+          "cycle": 110
+        },
+        {
+          "id": "[\"East Oakland\",\"health.sickResidents\"]",
+          "hood": "East Oakland",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 125,
+          "cycle": 110
+        },
+        {
+          "id": "[\"East Oakland\",\"safety.aboveMedianHoods\"]",
+          "hood": "East Oakland",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Eastlake\",\"health.sickResidents\"]",
+          "hood": "Eastlake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 93,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Fruitvale\",\"health.sickResidents\"]",
+          "hood": "Fruitvale",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 121,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Fruitvale\",\"safety.aboveMedianHoods\"]",
+          "hood": "Fruitvale",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Glenview\",\"health.sickResidents\"]",
+          "hood": "Glenview",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 93,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Glenview\",\"safety.aboveMedianHoods\"]",
+          "hood": "Glenview",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Grand Lake\",\"health.sickResidents\"]",
+          "hood": "Grand Lake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 109,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Ivy Hill\",\"health.sickResidents\"]",
+          "hood": "Ivy Hill",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 122,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Ivy Hill\",\"safety.aboveMedianHoods\"]",
+          "hood": "Ivy Hill",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Jack London\",\"health.sickResidents\"]",
+          "hood": "Jack London",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 77,
+          "cycle": 110
+        },
+        {
+          "id": "[\"KONO\",\"health.sickResidents\"]",
+          "hood": "KONO",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 18,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Lake Merritt\",\"health.sickResidents\"]",
+          "hood": "Lake Merritt",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 19,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Laurel\",\"health.sickResidents\"]",
+          "hood": "Laurel",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 113,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Piedmont Ave\",\"health.sickResidents\"]",
+          "hood": "Piedmont Ave",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 104,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Rockridge\",\"health.inCareCitizens\"]",
+          "hood": "Rockridge",
+          "conditionKey": "health.inCareCitizens",
+          "label": "citizens in care",
+          "count": 1,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Rockridge\",\"health.sickResidents\"]",
+          "hood": "Rockridge",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 110,
+          "cycle": 110
+        },
+        {
+          "id": "[\"San Antonio\",\"health.sickResidents\"]",
+          "hood": "San Antonio",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 114,
+          "cycle": 110
+        },
+        {
+          "id": "[\"San Antonio\",\"safety.aboveMedianHoods\"]",
+          "hood": "San Antonio",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Temescal\",\"health.sickResidents\"]",
+          "hood": "Temescal",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 102,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Uptown\",\"health.sickResidents\"]",
+          "hood": "Uptown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 24,
+          "cycle": 110
+        },
+        {
+          "id": "[\"West Oakland\",\"health.sickResidents\"]",
+          "hood": "West Oakland",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 91,
+          "cycle": 110
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Adams Point\",\"health.sickResidents\"]",
+          "hood": "Adams Point",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 90,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Baylight District\",\"health.sickResidents\"]",
+          "hood": "Baylight District",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 14,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Brooklyn\",\"health.sickResidents\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 79,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Brooklyn\",\"safety.aboveMedianHoods\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Chinatown\",\"health.sickResidents\"]",
+          "hood": "Chinatown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 145,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Dimond\",\"health.sickResidents\"]",
+          "hood": "Dimond",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 98,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Dimond\",\"safety.aboveMedianHoods\"]",
+          "hood": "Dimond",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Downtown\",\"health.sickResidents\"]",
+          "hood": "Downtown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 86,
+          "cycle": 110,
+          "passedOverCycle": 108
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"Adams Point\",\"health.sickResidents\"]",
+          "hood": "Adams Point",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 90,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Baylight District\",\"health.sickResidents\"]",
+          "hood": "Baylight District",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 14,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Brooklyn\",\"health.sickResidents\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 79,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Brooklyn\",\"safety.aboveMedianHoods\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Chinatown\",\"health.sickResidents\"]",
+          "hood": "Chinatown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 145,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Dimond\",\"health.sickResidents\"]",
+          "hood": "Dimond",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 98,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Dimond\",\"safety.aboveMedianHoods\"]",
+          "hood": "Dimond",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Downtown\",\"health.sickResidents\"]",
+          "hood": "Downtown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 86,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"East Oakland\",\"health.sickResidents\"]",
+          "hood": "East Oakland",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 125,
+          "cycle": 110,
+          "passedOverCycle": 109
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Condition problems at C110; prior Sunday folds through C109.\n- Adams Point: sick residents 90 [passed over C108]\n- Baylight District: sick residents 14 [passed over C108]\n- Brooklyn: sick residents 79 [passed over C108]\n- Brooklyn: hoods above city violent-level median 1 [passed over C108]\n- Chinatown: sick residents 145 [passed over C108]\n- Dimond: sick residents 98 [passed over C108]\n- Dimond: hoods above city violent-level median 1 [passed over C108]\n- Downtown: sick residents 86 [passed over C108]\n23 more conditions beyond this block.\n"
+    }
+  },
+  "signal": {
+    "kind": "role-heat",
+    "hoods": [],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00848",
+        "name": "Tanisha Freeman",
+        "neighborhood": "Grand Lake",
+        "role": "Electrician",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Grand Lake — Commercial Stabilization for Grand Lake — legislation-filed"
+      },
+      {
+        "pop": "POP-01080",
+        "name": "Louis Cross",
+        "neighborhood": "Grand Lake",
+        "role": "Relief Pitcher / Oakland A's",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Grand Lake — Commercial Stabilization for Grand Lake — legislation-filed"
+      },
+      {
+        "pop": "POP-01115",
+        "name": "Jill Lewis",
+        "neighborhood": "Grand Lake",
+        "role": "Mover",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Grand Lake — Commercial Stabilization for Grand Lake — legislation-filed"
+      },
+      {
+        "pop": "POP-01175",
+        "name": "Sunita Raghavan",
+        "neighborhood": "Grand Lake",
+        "role": "Pediatrician",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Grand Lake — Commercial Stabilization for Grand Lake — legislation-filed"
+      }
+    ],
+    "businesses": [],
+    "churches": [
+      {
+        "name": "Or Hashalom Renewal Community",
+        "neighborhood": "Grand Lake",
+        "text": "food pantry serves neighbors in need",
+        "src": "world_summary faith-event"
+      }
+    ],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-MAYOR-01",
+      "t": "FACT",
+      "text": "Avery Santana holds MAYOR-01 at approval 69",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-009",
+      "t": "FACT",
+      "text": "Commercial Stabilization for Grand Lake is in announced; budget $2.5M",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-GrandLake",
+      "t": "FACT",
+      "text": "Grand Lake crime: property 35, violent 25, incidents 8 (cycle 110) — city property 35.5, violent 23.9, incidents 7.1",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-GrandLake",
+      "t": "FACT",
+      "text": "Grand Lake: sentiment 0.49 vs city 0.535; crime index 0.6 vs city 0.591; retail 12.3; housing pressure 5; growth; momentum 10",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-traj-0",
+      "t": "FACT",
+      "text": "Grand Lake boom sustained — momentum 10/10, the block everyone wants onto",
+      "src": "world_summary trajectory"
+    },
+    {
+      "id": "F-we-0",
+      "t": "FACT",
+      "text": "FAITH — community_program — Grand Lake: Or Hashalom Renewal Community: food pantry serves neighbors in need",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "MAYOR-01",
+        "PopId": "POP-00034",
+        "Holder": "Avery Santana",
+        "District": "citywide",
+        "Approval": "69"
+      }
+    ],
+    "civicPeers": []
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

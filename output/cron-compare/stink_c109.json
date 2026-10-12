@@ -1,0 +1,340 @@
+{
+  "cycle": 109,
+  "scannedAt": "2026-09-30T11:15:08.635Z",
+  "signalPath": "/root/GodWorld/output/desk_signal_c109.json",
+  "signalMissing": false,
+  "illnessRate": 4.6,
+  "forceThreshold": 35,
+  "shouldForce": true,
+  "maxScore": 51,
+  "top": {
+    "className": "metric-contradiction",
+    "score": 51,
+    "desk": "civic",
+    "kind": "anomaly",
+    "label": "math-imbalance (medium) | Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+    "ref": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+    "hood": "Downtown",
+    "popids": [
+      "POP-00127",
+      "POP-00212",
+      "POP-00541"
+    ],
+    "handle": {
+      "angle": "civic gap in Downtown — who is accountable, what council has or hasn't done",
+      "hookLine": "No civic initiative addresses the Downtown signal surfaced this cycle.",
+      "citizens": [
+        "Jessie Hess (POP-00212)",
+        "Theo Burkes (POP-00541)",
+        "Mason Miller (POP-00127)"
+      ]
+    },
+    "story": {
+      "ref": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+      "label": "math-imbalance (medium) | Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "civic gap in Downtown — who is accountable, what council has or hasn't done",
+      "hookLine": "No civic initiative addresses the Downtown signal surfaced this cycle.",
+      "citizens": [
+        "Jessie Hess (POP-00212)",
+        "Theo Burkes (POP-00541)",
+        "Mason Miller (POP-00127)"
+      ],
+      "popids": [
+        "POP-00127",
+        "POP-00212",
+        "POP-00541"
+      ],
+      "hood": "Downtown",
+      "stinkClass": "metric-contradiction"
+    }
+  },
+  "candidates": [
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+      "ref": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00127",
+        "POP-00212",
+        "POP-00541"
+      ],
+      "handle": {
+        "angle": "civic gap in Downtown — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Downtown signal surfaced this cycle.",
+        "citizens": [
+          "Jessie Hess (POP-00212)",
+          "Theo Burkes (POP-00541)",
+          "Mason Miller (POP-00127)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+        "label": "math-imbalance (medium) | Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Downtown — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Downtown signal surfaced this cycle.",
+        "citizens": [
+          "Jessie Hess (POP-00212)",
+          "Theo Burkes (POP-00541)",
+          "Mason Miller (POP-00127)"
+        ],
+        "popids": [
+          "POP-00127",
+          "POP-00212",
+          "POP-00541"
+        ],
+        "hood": "Downtown",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | Fruitvale: decay [Sentiment -0.020, HousingPressure +1.000] — Sentiment now 0.42 (2 of 22, city median 0.28); HousingPressure now 2.5 (15 of 22, city median 0) — with no matching active initiative",
+      "ref": "output/engine_audit_c109.json patterns[2]; evidence: Neighborhood_Map row(s) 6",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00143",
+        "POP-00198",
+        "POP-00953"
+      ],
+      "handle": {
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 2 cycles.",
+        "citizens": [
+          "Rick Walker (POP-00198)",
+          "Carmen Solis (POP-00953)",
+          "Clarissa Dane (POP-00143)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c109.json patterns[2]; evidence: Neighborhood_Map row(s) 6",
+        "label": "math-imbalance (medium) | Fruitvale: decay [Sentiment -0.020, HousingPressure +1.000] — Sentiment now 0.42 (2 of 22, city median 0.28); HousingPressure now 2.5 (15 of 22, city median 0) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 2 cycles.",
+        "citizens": [
+          "Rick Walker (POP-00198)",
+          "Carmen Solis (POP-00953)",
+          "Clarissa Dane (POP-00143)"
+        ],
+        "popids": [
+          "POP-00143",
+          "POP-00198",
+          "POP-00953"
+        ],
+        "hood": "Fruitvale",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | Grand Lake: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (12 of 22, city median 0.28); HousingPressure now 4 (17 of 22, city median 0) — with no matching active initiative",
+      "ref": "output/engine_audit_c109.json patterns[3]; evidence: Neighborhood_Map row(s) 10",
+      "hood": "Grand Lake",
+      "popids": [
+        "POP-00002",
+        "POP-01080",
+        "POP-01115"
+      ],
+      "handle": {
+        "angle": "civic gap in Grand Lake — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Grand Lake signal surfaced this cycle.",
+        "citizens": [
+          "Amara Keane (POP-00002)",
+          "Louis Cross (POP-01080)",
+          "Jill Lewis (POP-01115)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c109.json patterns[3]; evidence: Neighborhood_Map row(s) 10",
+        "label": "math-imbalance (medium) | Grand Lake: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (12 of 22, city median 0.28); HousingPressure now 4 (17 of 22, city median 0) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Grand Lake — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Grand Lake signal surfaced this cycle.",
+        "citizens": [
+          "Amara Keane (POP-00002)",
+          "Louis Cross (POP-01080)",
+          "Jill Lewis (POP-01115)"
+        ],
+        "popids": [
+          "POP-00002",
+          "POP-01080",
+          "POP-01115"
+        ],
+        "hood": "Grand Lake",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "crisis-unattended",
+      "score": 38,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "ref": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "story": {
+        "ref": "output/engine_audit_c109.json patterns[0]; evidence: Riley_Digest row(s) ",
+        "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "crisis-unattended"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 28,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "ref": "output/engine_audit_c109.json patterns[4]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "story": {
+        "ref": "output/engine_audit_c109.json patterns[4]; evidence: WorldEvents_V3_Ledger row(s) ",
+        "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 28,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "writeback-drift (medium) | 8 council approvals unchanged from last cycle despite edition coverage",
+      "ref": "output/engine_audit_c109.json patterns[5]; evidence: Civic_Office_Ledger row(s) ",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "story": {
+        "ref": "output/engine_audit_c109.json patterns[5]; evidence: Civic_Office_Ledger row(s) ",
+        "label": "writeback-drift (medium) | 8 council approvals unchanged from last cycle despite edition coverage",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Initiative \"Temescal Community Health Center\" advanced: construction-active → operational",
+      "ref": "output/engine_audit_c109.json patterns[6]; evidence: Initiative_Tracker row(s) 5",
+      "hood": "Temescal",
+      "popids": [
+        "POP-00170",
+        "POP-00761",
+        "POP-00799"
+      ],
+      "handle": {
+        "angle": "Temescal Community Health Center advanced from construction-active to operational — what the milestone delivers and who carried it",
+        "hookLine": "Temescal Community Health Center advanced from construction-active to operational; a milestone worth covering, not burying.",
+        "citizens": [
+          "Melton Neilon (POP-00170)",
+          "Idris Karim (POP-00761)",
+          "Jax Caldera (POP-00799)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c109.json patterns[6]; evidence: Initiative_Tracker row(s) 5",
+        "label": "improvement (low) | Initiative \"Temescal Community Health Center\" advanced: construction-active → operational",
+        "kind": "anomaly",
+        "angle": "Temescal Community Health Center advanced from construction-active to operational — what the milestone delivers and who carried it",
+        "hookLine": "Temescal Community Health Center advanced from construction-active to operational; a milestone worth covering, not burying.",
+        "citizens": [
+          "Melton Neilon (POP-00170)",
+          "Idris Karim (POP-00761)",
+          "Jax Caldera (POP-00799)"
+        ],
+        "popids": [
+          "POP-00170",
+          "POP-00761",
+          "POP-00799"
+        ],
+        "hood": "Temescal",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 0.28 (expected 0.02) — from prior \"production-imbalance\"",
+      "ref": "output/engine_audit_c109.json patterns[7]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, East Oakland",
+      "popids": [
+        "POP-00212",
+        "POP-00541",
+        "POP-00764"
+      ],
+      "handle": {
+        "angle": "economic gain in Downtown — the positive outcome and its driver",
+        "hookLine": "A economic metric improved in Downtown this cycle.",
+        "citizens": [
+          "Tao Lee (POP-00764)",
+          "Jessie Hess (POP-00212)",
+          "Theo Burkes (POP-00541)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c109.json patterns[7]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 0.28 (expected 0.02) — from prior \"production-imbalance\"",
+        "kind": "anomaly",
+        "angle": "economic gain in Downtown — the positive outcome and its driver",
+        "hookLine": "A economic metric improved in Downtown this cycle.",
+        "citizens": [
+          "Tao Lee (POP-00764)",
+          "Jessie Hess (POP-00212)",
+          "Theo Burkes (POP-00541)"
+        ],
+        "popids": [
+          "POP-00212",
+          "POP-00541",
+          "POP-00764"
+        ],
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, East Oakland",
+        "stinkClass": "anomaly"
+      }
+    }
+  ],
+  "candidateCount": 8
+}

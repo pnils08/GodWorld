@@ -1,0 +1,38 @@
+{
+  "office": "council_d2",
+  "cycle": 106,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I am addressing the declining conditions in Downtown Oakland, committing to respond to the math imbalance and economic decay. I am also acknowledging the success in Jack London and claiming credit for the sustained economic performance in Downtown and Chinatown. Furthermore, I am reiterating my stance on Grand Lake commercial stabilization, requiring economic impact data before considering any measures.",
+  "statements": [
+    {
+      "statementId": "STMT-106-council_d2-001",
+      "type": "vote_statement",
+      "topic": "Downtown Oakland Mood Shift",
+      "initiative": null,
+      "decision": "Commit to responding to the declining conditions",
+      "quote": "Downtown's daily life is slipping, and I see it too. We need to act now to address the math imbalance and economic decay.",
+      "fullStatement": "As the representative of District 2, I am committed to responding to the declining conditions in Downtown Oakland. The data shows a clear decline in mood, storefront activity, and an increase in housing pressure. I will work with the city to identify the root causes and develop a plan to address these issues. This includes exploring options for commercial corridor assistance and infrastructure investments to support our local businesses and residents.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d2-002",
+      "type": "credit_statement",
+      "topic": "Jack London Economic Performance",
+      "initiative": null,
+      "decision": "Claim credit for sustained economic performance",
+      "quote": "Jack London's success is a testament to our focus on basic infrastructure, safety, and letting businesses operate without unnecessary obstruction.",
+      "fullStatement": "I am proud to claim credit for the sustained economic performance in Jack London. Our efforts to improve infrastructure, safety, and reduce regulatory barriers have paid off. I will continue to support initiatives that promote economic growth and development in our district.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d2-003",
+      "type": "stance_statement",
+      "topic": "Grand Lake Commercial Stabilization",
+      "initiative": null,
+      "decision": "Require economic impact data before considering measures",
+      "quote": "I don't write checks for other districts without seeing the ledger first. Show me the economic impact data on Grand Lake, and then we can discuss stabilization measures.",
+      "fullStatement": "Regarding Grand Lake commercial stabilization, I reiterate my stance that we need to see the economic impact data before considering any measures. I will not support stabilization efforts without a clear understanding of the economic benefits and potential risks. I urge the city to provide a comprehensive analysis of the economic situation in Grand Lake before we move forward.",
+      "trackerUpdates": {}
+    }
+  ]
+}

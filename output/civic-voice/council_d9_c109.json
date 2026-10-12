@@ -1,0 +1,28 @@
+{
+  "office": "council_d9",
+  "cycle": 109,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "This cycle, I prioritized addressing Uptown's commercial distress by pushing for expanded stabilization resources, while ensuring Laurel's progress remains a model for equitable development. I supported initiatives that align with our district's long-term stability goals.",
+  "statements": [
+    {
+      "statementId": "STMT-109-council_d9-001",
+      "type": "vote_statement",
+      "topic": "Uptown Commercial Distress",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Expand stabilization efforts to Uptown",
+      "quote": "Uptown’s vibrant streets are quieting—we can’t let our momentum fade.",
+      "fullStatement": "Uptown’s commercial distress metrics don’t tell the full story—we’re investing in long-term stability, not quick fixes. That 10/10 momentum didn’t come from chasing trends—it came from methodical community investment. I stand by our district’s measured approach. Expanding the West Oakland Stabilization Fund to Uptown is a necessary step to ensure our businesses thrive and our community remains vibrant.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d9-002",
+      "type": "vote_statement",
+      "topic": "Laurel Stability",
+      "initiative": null,
+      "decision": "Defend Laurel's progress as a model for equitable development",
+      "quote": "Laurel’s stability is no accident—it’s the result of staying focused on what works.",
+      "fullStatement": "Laurel’s stability isn’t by chance—it’s the result of stubborn, consistent work. Crime at 0.47 versus citywide 0.648? That gap didn’t open itself. We’re holding at zero housing pressure while others scramble. This district chose investment over quick fixes, and I won’t let distractions pull us off course now. Laurel’s progress isn’t legacy—it’s today’s work paying off, and it stands as a model for equitable development across Oakland.",
+      "trackerUpdates": {}
+    }
+  ]
+}

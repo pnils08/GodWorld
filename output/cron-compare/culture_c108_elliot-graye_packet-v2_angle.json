@@ -1,0 +1,578 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "108",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00012",
+      "name": "Elliot Graye",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "crisis response at Telegraph Presbyterian Fellowship (Downtown) — the week in faith, and Bharat Mandir of the East Bay in focus",
+      "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "faith",
+        "hood": "Montclair",
+        "facts": [
+          "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+          "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+          "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+          "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+          "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+          "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+          "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+          "In focus: Bharat Mandir of the East Bay — Hindu, Montclair, congregation 400, founded 1990, led by Pandit Anand Krishnamurthy — South Indian traditions, cultural programs"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity. (general coverage)",
+          "A family bought their home in Downtown (observational analysis)",
+          "The Raimon household (2) moved from Temescal to Brooklyn — moving up from Temescal (desk rotation)",
+          "Marcus Tan moved from West Oakland to Fruitvale — moving up from West Oakland (desk rotation)"
+        ],
+        "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-faith",
+      "hood": "Montclair",
+      "score": null,
+      "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+      "nearby": [
+        {
+          "text": "Dimond | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### Dimond\"; events: world_summary_c108.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### East Oakland\"; events: world_summary_c108.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### Fruitvale\"; events: world_summary_c108.md \"## World Events\""
+        },
+        {
+          "text": "KONO | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### KONO\"; events: world_summary_c108.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### Lake Merritt\"; events: world_summary_c108.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00765",
+          "name": "Anand Krishnamurthy",
+          "profile": "Anand Krishnamurthy — Senior Pastor / Faith Leader — Rockridge",
+          "why": "leads Bharat Mandir of the East Bay (Faith_Organizations)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-00753",
+          "name": "Eunice Marston",
+          "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+          "why": "leads Telegraph Presbyterian Fellowship — crisis response this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00759",
+          "name": "Naomi Sterling",
+          "profile": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+          "why": "leads Temple Beth Or — crisis response this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-00768",
+          "name": "Eleanor Bishop",
+          "profile": "Eleanor Bishop — Senior Pastor / Faith Leader — Lake Merritt",
+          "why": "leads Lakeshore Unitarian Universalist Fellowship — crisis response this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt"
+        },
+        {
+          "pop": "POP-00758",
+          "name": "Robert Jaston",
+          "profile": "Robert Jaston — Senior Pastor / Faith Leader — West Oakland",
+          "why": "leads New Covenant Pentecostal Assembly — crisis response this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00761",
+          "name": "Idris Karim",
+          "profile": "Idris Karim — Senior Pastor / Faith Leader — Temescal",
+          "why": "leads Temescal Islamic Center — crisis response this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00755",
+          "name": "Antoine Vermeer",
+          "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+          "why": "leads Cathedral of the Living Word — holy day this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt"
+        },
+        {
+          "pop": "POP-00756",
+          "name": "Ramon Solano",
+          "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+          "why": "leads St. Esperanza Parish — holy day this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Fruitvale"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-78217e633afa"
+      },
+      {
+        "t": "FACT",
+        "text": "8 faith events on the record since C102 · Bharat Mandir of the East Bay in Montclair | 8 named on the record",
+        "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+        "id": "F-d4d41119b5b8"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+        "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+        "id": "F-bb0b0465cfc1"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+        "id": "F-7d24d6975c0b"
+      },
+      {
+        "t": "FACT",
+        "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+        "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+        "id": "F-2e25fe91ddff"
+      },
+      {
+        "t": "FACT",
+        "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+        "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+        "id": "F-fa55233aeb20"
+      },
+      {
+        "t": "FACT",
+        "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+        "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\"",
+        "id": "F-876b8fbb3495"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+        "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\"",
+        "id": "F-f0155f51bf88"
+      },
+      {
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+        "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+        "id": "F-53d1f53fb120"
+      },
+      {
+        "t": "FACT",
+        "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+        "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\"",
+        "id": "F-3cbfd5530d60"
+      },
+      {
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\"",
+        "id": "F-760718ad78bc"
+      },
+      {
+        "t": "FACT",
+        "text": "In focus: Bharat Mandir of the East Bay — Hindu, Montclair, congregation 400, founded 1990, led by Pandit Anand Krishnamurthy — South Indian traditions, cultural programs",
+        "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+        "id": "F-6d5a90f0fac1"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-faith",
+      "angle": "crisis response at Telegraph Presbyterian Fellowship (Downtown) — the week in faith, and Bharat Mandir of the East Bay in focus",
+      "label": "8 faith events on the record since C102 · Bharat Mandir of the East Bay in Montclair | 8 named on the record",
+      "hookLine": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+      "hood": "Montclair",
+      "citizens": [
+        "Anand Krishnamurthy (POP-00765)",
+        "Eunice Marston (POP-00753)",
+        "Naomi Sterling (POP-00759)",
+        "Eleanor Bishop (POP-00768)",
+        "Robert Jaston (POP-00758)",
+        "Idris Karim (POP-00761)",
+        "Antoine Vermeer (POP-00755)",
+        "Ramon Solano (POP-00756)"
+      ],
+      "popids": [
+        "POP-00765",
+        "POP-00753",
+        "POP-00759",
+        "POP-00768",
+        "POP-00758",
+        "POP-00761",
+        "POP-00755",
+        "POP-00756"
+      ],
+      "ref": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+      "cycle": 108
+    },
+    "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "FAITH-SLICE-2",
+    "kind": "beat-faith",
+    "seat": {
+      "slug": "elliot-graye",
+      "name": "Elliot Graye",
+      "popid": "POP-00012",
+      "desk": "culture",
+      "domain": "faith",
+      "builder": "buildFaithSlice.js"
+    },
+    "hood": "Montclair",
+    "pulse": {
+      "className": "beat-faith",
+      "score": 100,
+      "label": "8 faith events on the record since C102 · Bharat Mandir of the East Bay in Montclair | 8 named on the record",
+      "hood": "Montclair",
+      "source": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\""
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "crisis response at Telegraph Presbyterian Fellowship (Downtown) — the week in faith, and Bharat Mandir of the East Bay in focus",
+      "hookLine": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+      "anchorFacts": [
+        "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+        "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+        "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+        "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+        "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+        "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+        "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+        "In focus: Bharat Mandir of the East Bay — Hindu, Montclair, congregation 400, founded 1990, led by Pandit Anand Krishnamurthy — South Indian traditions, cultural programs"
+      ],
+      "evidence": [
+        {
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\""
+        },
+        {
+          "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+          "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\""
+        },
+        {
+          "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+          "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\""
+        },
+        {
+          "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+          "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\""
+        },
+        {
+          "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+          "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\""
+        },
+        {
+          "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+          "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\""
+        },
+        {
+          "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+          "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\""
+        },
+        {
+          "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\""
+        },
+        {
+          "text": "In focus: Bharat Mandir of the East Bay — Hindu, Montclair, congregation 400, founded 1990, led by Pandit Anand Krishnamurthy — South Indian traditions, cultural programs",
+          "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\""
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+          "angle": "general coverage",
+          "domain": "FAITH",
+          "hood": null,
+          "priority": 3
+        },
+        {
+          "text": "A family bought their home in Downtown",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 3
+        },
+        {
+          "text": "The Raimon household (2) moved from Temescal to Brooklyn — moving up from Temescal",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Brooklyn",
+          "priority": 5
+        },
+        {
+          "text": "Marcus Tan moved from West Oakland to Fruitvale — moving up from West Oakland",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00765",
+        "name": "Anand Krishnamurthy",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Anand Krishnamurthy — Senior Pastor / Faith Leader — Rockridge",
+        "why": "leads Bharat Mandir of the East Bay (Faith_Organizations)"
+      },
+      {
+        "popid": "POP-00753",
+        "name": "Eunice Marston",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "why": "leads Telegraph Presbyterian Fellowship — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00759",
+        "name": "Naomi Sterling",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+        "why": "leads Temple Beth Or — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00768",
+        "name": "Eleanor Bishop",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Eleanor Bishop — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "leads Lakeshore Unitarian Universalist Fellowship — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00758",
+        "name": "Robert Jaston",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Robert Jaston — Senior Pastor / Faith Leader — West Oakland",
+        "why": "leads New Covenant Pentecostal Assembly — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00761",
+        "name": "Idris Karim",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Idris Karim — Senior Pastor / Faith Leader — Temescal",
+        "why": "leads Temescal Islamic Center — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "leads Cathedral of the Living Word — holy day this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00756",
+        "name": "Ramon Solano",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+        "why": "leads St. Esperanza Parish — holy day this week (Faith_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Elliot Graye this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "text": "I'm looking into the recent faith events in the area, particularly the crisis response efforts by various congregations. I want to explore how these communities are coming together to support each other.",
+    "plan": {
+      "chase": "I'm looking into the recent faith events in the area, particularly the crisis response efforts by various congregations. I want to explore how these communities are coming together to support each other.",
+      "focus": "Bharat Mandir of the East Bay",
+      "why": "I'm interested in learning more about the Hindu community in Montclair and their cultural programs.",
+      "checks": [
+        "attendance numbers",
+        "community outreach programs"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00765",
+          "question": "What role does Pandit Anand Krishnamurthy play in the community?",
+          "basis": "leadership"
+        },
+        {
+          "pop": "POP-00753",
+          "question": "How does Telegraph Presbyterian Fellowship's crisis response effort impact the community?",
+          "basis": "community support"
+        }
+      ],
+      "interpretation": "The recent faith events in the area suggest a strong sense of community and cooperation among the congregations.",
+      "unverifiedLead": [
+        "I've heard rumors of a new community program being launched by one of the local congregations, but I need to verify the details."
+      ],
+      "closeQuestion": "What can be learned from the different approaches to crisis response and community support among the various congregations?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Dimond | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Dimond",
+      "ref": "output/neighborhood_texture_c108.md \"### Dimond\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c108.md \"### East Oakland\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c108.md \"### Fruitvale\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "KONO | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "KONO",
+      "ref": "output/neighborhood_texture_c108.md \"### KONO\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c108.md \"### Lake Merritt\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 20,
+  "ranAt": "2026-09-24T11:15:47.757Z"
+}

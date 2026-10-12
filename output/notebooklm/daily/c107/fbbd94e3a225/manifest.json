@@ -1,0 +1,106 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.7",
+  "canonStatus": "NOT_CANON",
+  "cycle": 107,
+  "generatedAt": "2026-09-15T13:00:09.544Z",
+  "lastAttemptAt": "2026-09-15T13:00:09.544Z",
+  "hours": 36,
+  "packHash": "fbbd94e3a225de24949508b7c7517f2c84b23c14717eae5c798f5d0f7a5c9698",
+  "worldSummary": "output/world_summary_c107.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/business_c107_business-desk_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c107_lila-mezran_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c107_trevor-shimizu_packet-v2_deepseek-deepseek-chat.staged.md"
+    }
+  ],
+  "flaggedReports": [
+    "output/cron-compare/flagged/civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat.flags.json"
+  ],
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 3,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED",
+      "FLAGGED_DISPOSITION",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_3",
+      "REPORTED_THRESHOLD_MET_3"
+    ],
+    "dispositionCounts": {
+      "passed": 3,
+      "rheaFlagged": 1,
+      "neverGated": 0
+    },
+    "fingerprint": "17cea93f593ddf17de73ab20caeb5bc0ed36ece1862cfc8bd028b413070a4a43"
+  },
+  "newsroomPulse": {
+    "fingerprint": "f0755ac64ab48a4f1edaf00a4f703b314b73a2ba564077058ef7fb3ba98ab9d6",
+    "counts": {
+      "angles": 5,
+      "asks": 5,
+      "fanoutAssignments": 5,
+      "w2Ready": 4,
+      "quotes": 13,
+      "passed": 3,
+      "rheaFlagged": 1,
+      "neverGated": 0,
+      "flagged": 1,
+      "pending": 1
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "dryRun": false,
+  "archiveScope": {
+    "cycles": [
+      106,
+      105
+    ],
+    "sourceIds": [
+      "f5c42008-321f-4228-b0cb-6e6f24ca8ef4",
+      "fe335f6a-5be4-4d67-bcd9-08e496cf2d74"
+    ]
+  },
+  "boundedSourceHash": "abfa1093a3fe24b795c9ce3d4c9b1a64ef04b654a3f029f348ea59c338eab687",
+  "boundedSource": "output/notebooklm/daily/c107/fbbd94e3a225/bounded-newsroom-source.md",
+  "sourceIds": [
+    "2103b53e-eecb-4c08-8226-68657d1f09d0"
+  ],
+  "audioDirectionSourceId": "860658e9-121d-47b3-8c8f-bdeca140e5d4",
+  "audioPresentation": {
+    "format": "deep_dive",
+    "length": "default",
+    "source": "router",
+    "profile": "REPORTED_DAY"
+  },
+  "audioArtifactId": "0d56846d-2d70-483a-b1e5-233a4e8d4b72",
+  "audioPath": "output/notebooklm/daily/c107/fbbd94e3a225/godworld_daily_c107.m4a",
+  "driveLink": "https://drive.google.com/file/d/1cfV4SCGzvBlvjv2hEUo7VN3P5I5yf-mE/view?usp=drivesdk",
+  "opsReportArtifactId": "f980098d-4c44-4af9-8694-6895d41c7fbe"
+}

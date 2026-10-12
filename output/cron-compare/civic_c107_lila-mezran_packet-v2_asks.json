@@ -1,0 +1,570 @@
+[
+  {
+    "pop": "POP-00194",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00194\",\"name\":\"Yu Zen\",\"role\":\"Commercial Insurance Broker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Dr. Lila Mezran\",\"question\":\"What have you seen, felt, or understood about \\\"Chinatown's illness rate and its impact on daily life.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-health\",\"hood\":\"Chinatown\",\"focus\":\"Chinatown's illness rate and its impact on daily life.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\"},\"exposure\":{\"basis\":[\"on Hospital_Ledger this cycle\"],\"self\":\"Yu Zen — Commercial Insurance Broker — Rockridge\",\"evidence\":[{\"id\":\"EV-7feefbf38a\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\",\"text\":\"Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"Chinatown carries the most sick residents (133) | 4 named on the hospital and cause records\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\",\"id\":\"F-fb00375ce730\"},{\"t\":\"FACT\",\"text\":\"Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\",\"id\":\"F-dc923dc78c3e\"},{\"t\":\"FACT\",\"text\":\"Sick residents by neighborhood: Chinatown 133 (+8 vs C106), East Oakland 116 (+3 vs C106), Fruitvale 113 (+3 vs C106), Ivy Hill 113 (+3 vs C106), San Antonio 113 (+3 vs C106), Laurel 110 (-1 vs C106), Rockridge 110 (+3 vs C106), Temescal 109 (+1 vs C106) — 1,922 across 22 neighborhoods\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107\",\"id\":\"F-b48924fbc651\"},{\"t\":\"FACT\",\"text\":\"Yu Zen (Rockridge) — in hospital care, hospitalized, admitted C105 after a workplace accident\",\"src\":\"output/beats/Hospital_Ledger.jsonl POP-00194\",\"id\":\"F-0707d79e8d15\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu\",\"src\":\"output/beats/Hospital_Ledger.jsonl POP-00801\",\"id\":\"F-01863f8f97a1\"},{\"t\":\"FACT\",\"text\":\"The city illness rate stands at 4.9%, with 2 in hospital care at 2% of capacity.\",\"src\":\"output/world_summary_c107.md \\\"## City State\\\"\",\"id\":\"F-e6f8b4dc9432\"},{\"t\":\"FACT\",\"text\":\"Adams Point is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 15).\",\"src\":\"output/world_summary_c107.md \\\"## World Events\\\"\",\"id\":\"F-ab23d2fced61\"},{\"t\":\"FACT\",\"text\":\"Yu Zen — Commercial Insurance Broker — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00194\",\"id\":\"F-0cea0a3d84d3\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00194",
+        "name": "Yu Zen",
+        "role": "Commercial Insurance Broker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Dr. Lila Mezran",
+        "question": "What have you seen, felt, or understood about \"Chinatown's illness rate and its impact on daily life.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-health",
+        "hood": "Chinatown",
+        "focus": "Chinatown's illness rate and its impact on daily life.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+      },
+      "exposure": {
+        "basis": [
+          "on Hospital_Ledger this cycle"
+        ],
+        "self": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-7feefbf38a",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "Chinatown carries the most sick residents (133) | 4 named on the hospital and cause records",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "id": "F-fb00375ce730"
+        },
+        {
+          "t": "FACT",
+          "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "id": "F-dc923dc78c3e"
+        },
+        {
+          "t": "FACT",
+          "text": "Sick residents by neighborhood: Chinatown 133 (+8 vs C106), East Oakland 116 (+3 vs C106), Fruitvale 113 (+3 vs C106), Ivy Hill 113 (+3 vs C106), San Antonio 113 (+3 vs C106), Laurel 110 (-1 vs C106), Rockridge 110 (+3 vs C106), Temescal 109 (+1 vs C106) — 1,922 across 22 neighborhoods",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107",
+          "id": "F-b48924fbc651"
+        },
+        {
+          "t": "FACT",
+          "text": "Yu Zen (Rockridge) — in hospital care, hospitalized, admitted C105 after a workplace accident",
+          "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+          "id": "F-0707d79e8d15"
+        },
+        {
+          "t": "FACT",
+          "text": "Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu",
+          "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+          "id": "F-01863f8f97a1"
+        },
+        {
+          "t": "FACT",
+          "text": "The city illness rate stands at 4.9%, with 2 in hospital care at 2% of capacity.",
+          "src": "output/world_summary_c107.md \"## City State\"",
+          "id": "F-e6f8b4dc9432"
+        },
+        {
+          "t": "FACT",
+          "text": "Adams Point is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 15).",
+          "src": "output/world_summary_c107.md \"## World Events\"",
+          "id": "F-ab23d2fced61"
+        },
+        {
+          "t": "FACT",
+          "text": "Yu Zen — Commercial Insurance Broker — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00194",
+          "id": "F-0cea0a3d84d3"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00801",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00801\",\"name\":\"Maurice Franklin\",\"role\":\"Drone Fleet Coordinator\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Dr. Lila Mezran\",\"question\":\"What have you seen, felt, or understood about \\\"Chinatown's illness rate and its impact on daily life.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-health\",\"hood\":\"Chinatown\",\"focus\":\"Chinatown's illness rate and its impact on daily life.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\"},\"exposure\":{\"basis\":[\"on Hospital_Ledger this cycle\"],\"self\":\"Maurice Franklin — Drone Fleet Coordinator — Rockridge\",\"evidence\":[{\"id\":\"EV-6da3ea5134\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\",\"text\":\"Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"Chinatown carries the most sick residents (133) | 4 named on the hospital and cause records\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\",\"id\":\"F-fb00375ce730\"},{\"t\":\"FACT\",\"text\":\"Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\",\"id\":\"F-dc923dc78c3e\"},{\"t\":\"FACT\",\"text\":\"Sick residents by neighborhood: Chinatown 133 (+8 vs C106), East Oakland 116 (+3 vs C106), Fruitvale 113 (+3 vs C106), Ivy Hill 113 (+3 vs C106), San Antonio 113 (+3 vs C106), Laurel 110 (-1 vs C106), Rockridge 110 (+3 vs C106), Temescal 109 (+1 vs C106) — 1,922 across 22 neighborhoods\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107\",\"id\":\"F-b48924fbc651\"},{\"t\":\"FACT\",\"text\":\"Yu Zen (Rockridge) — in hospital care, hospitalized, admitted C105 after a workplace accident\",\"src\":\"output/beats/Hospital_Ledger.jsonl POP-00194\",\"id\":\"F-0707d79e8d15\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu\",\"src\":\"output/beats/Hospital_Ledger.jsonl POP-00801\",\"id\":\"F-01863f8f97a1\"},{\"t\":\"FACT\",\"text\":\"The city illness rate stands at 4.9%, with 2 in hospital care at 2% of capacity.\",\"src\":\"output/world_summary_c107.md \\\"## City State\\\"\",\"id\":\"F-e6f8b4dc9432\"},{\"t\":\"FACT\",\"text\":\"Adams Point is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 15).\",\"src\":\"output/world_summary_c107.md \\\"## World Events\\\"\",\"id\":\"F-ab23d2fced61\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin — Drone Fleet Coordinator — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00801\",\"id\":\"F-debf96d7a429\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00801",
+        "name": "Maurice Franklin",
+        "role": "Drone Fleet Coordinator",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Dr. Lila Mezran",
+        "question": "What have you seen, felt, or understood about \"Chinatown's illness rate and its impact on daily life.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-health",
+        "hood": "Chinatown",
+        "focus": "Chinatown's illness rate and its impact on daily life.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+      },
+      "exposure": {
+        "basis": [
+          "on Hospital_Ledger this cycle"
+        ],
+        "self": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-6da3ea5134",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "Chinatown carries the most sick residents (133) | 4 named on the hospital and cause records",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "id": "F-fb00375ce730"
+        },
+        {
+          "t": "FACT",
+          "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "id": "F-dc923dc78c3e"
+        },
+        {
+          "t": "FACT",
+          "text": "Sick residents by neighborhood: Chinatown 133 (+8 vs C106), East Oakland 116 (+3 vs C106), Fruitvale 113 (+3 vs C106), Ivy Hill 113 (+3 vs C106), San Antonio 113 (+3 vs C106), Laurel 110 (-1 vs C106), Rockridge 110 (+3 vs C106), Temescal 109 (+1 vs C106) — 1,922 across 22 neighborhoods",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107",
+          "id": "F-b48924fbc651"
+        },
+        {
+          "t": "FACT",
+          "text": "Yu Zen (Rockridge) — in hospital care, hospitalized, admitted C105 after a workplace accident",
+          "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+          "id": "F-0707d79e8d15"
+        },
+        {
+          "t": "FACT",
+          "text": "Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu",
+          "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+          "id": "F-01863f8f97a1"
+        },
+        {
+          "t": "FACT",
+          "text": "The city illness rate stands at 4.9%, with 2 in hospital care at 2% of capacity.",
+          "src": "output/world_summary_c107.md \"## City State\"",
+          "id": "F-e6f8b4dc9432"
+        },
+        {
+          "t": "FACT",
+          "text": "Adams Point is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 15).",
+          "src": "output/world_summary_c107.md \"## World Events\"",
+          "id": "F-ab23d2fced61"
+        },
+        {
+          "t": "FACT",
+          "text": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00801",
+          "id": "F-debf96d7a429"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00449",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00449\",\"name\":\"Teri Mitchell\",\"role\":\"Graphic Designer\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Dr. Lila Mezran\",\"question\":\"What have you seen, felt, or understood about \\\"Chinatown's illness rate and its impact on daily life.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-health\",\"hood\":\"Chinatown\",\"focus\":\"Chinatown's illness rate and its impact on daily life.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\"},\"exposure\":{\"basis\":[\"named in the cycle health record\"],\"self\":\"Teri Mitchell — Graphic Designer — Uptown\",\"evidence\":[{\"id\":\"EV-bd1e6dd35e\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\",\"text\":\"Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"Chinatown carries the most sick residents (133) | 4 named on the hospital and cause records\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\",\"id\":\"F-fb00375ce730\"},{\"t\":\"FACT\",\"text\":\"Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\",\"id\":\"F-dc923dc78c3e\"},{\"t\":\"FACT\",\"text\":\"Sick residents by neighborhood: Chinatown 133 (+8 vs C106), East Oakland 116 (+3 vs C106), Fruitvale 113 (+3 vs C106), Ivy Hill 113 (+3 vs C106), San Antonio 113 (+3 vs C106), Laurel 110 (-1 vs C106), Rockridge 110 (+3 vs C106), Temescal 109 (+1 vs C106) — 1,922 across 22 neighborhoods\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107\",\"id\":\"F-b48924fbc651\"},{\"t\":\"FACT\",\"text\":\"Yu Zen (Rockridge) — in hospital care, hospitalized, admitted C105 after a workplace accident\",\"src\":\"output/beats/Hospital_Ledger.jsonl POP-00194\",\"id\":\"F-0707d79e8d15\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu\",\"src\":\"output/beats/Hospital_Ledger.jsonl POP-00801\",\"id\":\"F-01863f8f97a1\"},{\"t\":\"FACT\",\"text\":\"The city illness rate stands at 4.9%, with 2 in hospital care at 2% of capacity.\",\"src\":\"output/world_summary_c107.md \\\"## City State\\\"\",\"id\":\"F-e6f8b4dc9432\"},{\"t\":\"FACT\",\"text\":\"Adams Point is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 15).\",\"src\":\"output/world_summary_c107.md \\\"## World Events\\\"\",\"id\":\"F-ab23d2fced61\"},{\"t\":\"FACT\",\"text\":\"Teri Mitchell — Graphic Designer — Uptown\",\"src\":\"Simulation_Ledger profile for POP-00449\",\"id\":\"F-97869da4105a\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00449",
+        "name": "Teri Mitchell",
+        "role": "Graphic Designer",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Dr. Lila Mezran",
+        "question": "What have you seen, felt, or understood about \"Chinatown's illness rate and its impact on daily life.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-health",
+        "hood": "Chinatown",
+        "focus": "Chinatown's illness rate and its impact on daily life.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+      },
+      "exposure": {
+        "basis": [
+          "named in the cycle health record"
+        ],
+        "self": "Teri Mitchell — Graphic Designer — Uptown",
+        "evidence": [
+          {
+            "id": "EV-bd1e6dd35e",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "Chinatown carries the most sick residents (133) | 4 named on the hospital and cause records",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "id": "F-fb00375ce730"
+        },
+        {
+          "t": "FACT",
+          "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "id": "F-dc923dc78c3e"
+        },
+        {
+          "t": "FACT",
+          "text": "Sick residents by neighborhood: Chinatown 133 (+8 vs C106), East Oakland 116 (+3 vs C106), Fruitvale 113 (+3 vs C106), Ivy Hill 113 (+3 vs C106), San Antonio 113 (+3 vs C106), Laurel 110 (-1 vs C106), Rockridge 110 (+3 vs C106), Temescal 109 (+1 vs C106) — 1,922 across 22 neighborhoods",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107",
+          "id": "F-b48924fbc651"
+        },
+        {
+          "t": "FACT",
+          "text": "Yu Zen (Rockridge) — in hospital care, hospitalized, admitted C105 after a workplace accident",
+          "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+          "id": "F-0707d79e8d15"
+        },
+        {
+          "t": "FACT",
+          "text": "Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu",
+          "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+          "id": "F-01863f8f97a1"
+        },
+        {
+          "t": "FACT",
+          "text": "The city illness rate stands at 4.9%, with 2 in hospital care at 2% of capacity.",
+          "src": "output/world_summary_c107.md \"## City State\"",
+          "id": "F-e6f8b4dc9432"
+        },
+        {
+          "t": "FACT",
+          "text": "Adams Point is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 15).",
+          "src": "output/world_summary_c107.md \"## World Events\"",
+          "id": "F-ab23d2fced61"
+        },
+        {
+          "t": "FACT",
+          "text": "Teri Mitchell — Graphic Designer — Uptown",
+          "src": "Simulation_Ledger profile for POP-00449",
+          "id": "F-97869da4105a"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00623",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00623\",\"name\":\"Winston Clarke\",\"role\":\"Retired Teacher\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Dr. Lila Mezran\",\"question\":\"What have you seen, felt, or understood about \\\"Chinatown's illness rate and its impact on daily life.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-health\",\"hood\":\"Chinatown\",\"focus\":\"Chinatown's illness rate and its impact on daily life.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\"},\"exposure\":{\"basis\":[\"named in the cycle health record\"],\"self\":\"Winston Clarke — Retired Teacher — Laurel\",\"evidence\":[{\"id\":\"EV-b070d9547d\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\",\"text\":\"Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"Chinatown carries the most sick residents (133) | 4 named on the hospital and cause records\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\",\"id\":\"F-fb00375ce730\"},{\"t\":\"FACT\",\"text\":\"Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl\",\"id\":\"F-dc923dc78c3e\"},{\"t\":\"FACT\",\"text\":\"Sick residents by neighborhood: Chinatown 133 (+8 vs C106), East Oakland 116 (+3 vs C106), Fruitvale 113 (+3 vs C106), Ivy Hill 113 (+3 vs C106), San Antonio 113 (+3 vs C106), Laurel 110 (-1 vs C106), Rockridge 110 (+3 vs C106), Temescal 109 (+1 vs C106) — 1,922 across 22 neighborhoods\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl Sick @C107\",\"id\":\"F-b48924fbc651\"},{\"t\":\"FACT\",\"text\":\"Yu Zen (Rockridge) — in hospital care, hospitalized, admitted C105 after a workplace accident\",\"src\":\"output/beats/Hospital_Ledger.jsonl POP-00194\",\"id\":\"F-0707d79e8d15\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu\",\"src\":\"output/beats/Hospital_Ledger.jsonl POP-00801\",\"id\":\"F-01863f8f97a1\"},{\"t\":\"FACT\",\"text\":\"The city illness rate stands at 4.9%, with 2 in hospital care at 2% of capacity.\",\"src\":\"output/world_summary_c107.md \\\"## City State\\\"\",\"id\":\"F-e6f8b4dc9432\"},{\"t\":\"FACT\",\"text\":\"Adams Point is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 15).\",\"src\":\"output/world_summary_c107.md \\\"## World Events\\\"\",\"id\":\"F-ab23d2fced61\"},{\"t\":\"FACT\",\"text\":\"Winston Clarke — Retired Teacher — Laurel\",\"src\":\"Simulation_Ledger profile for POP-00623\",\"id\":\"F-24a78fdb934f\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00623",
+        "name": "Winston Clarke",
+        "role": "Retired Teacher",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Dr. Lila Mezran",
+        "question": "What have you seen, felt, or understood about \"Chinatown's illness rate and its impact on daily life.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-health",
+        "hood": "Chinatown",
+        "focus": "Chinatown's illness rate and its impact on daily life.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+      },
+      "exposure": {
+        "basis": [
+          "named in the cycle health record"
+        ],
+        "self": "Winston Clarke — Retired Teacher — Laurel",
+        "evidence": [
+          {
+            "id": "EV-b070d9547d",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+            "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "Chinatown carries the most sick residents (133) | 4 named on the hospital and cause records",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "id": "F-fb00375ce730"
+        },
+        {
+          "t": "FACT",
+          "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+          "id": "F-dc923dc78c3e"
+        },
+        {
+          "t": "FACT",
+          "text": "Sick residents by neighborhood: Chinatown 133 (+8 vs C106), East Oakland 116 (+3 vs C106), Fruitvale 113 (+3 vs C106), Ivy Hill 113 (+3 vs C106), San Antonio 113 (+3 vs C106), Laurel 110 (-1 vs C106), Rockridge 110 (+3 vs C106), Temescal 109 (+1 vs C106) — 1,922 across 22 neighborhoods",
+          "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C107",
+          "id": "F-b48924fbc651"
+        },
+        {
+          "t": "FACT",
+          "text": "Yu Zen (Rockridge) — in hospital care, hospitalized, admitted C105 after a workplace accident",
+          "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+          "id": "F-0707d79e8d15"
+        },
+        {
+          "t": "FACT",
+          "text": "Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu",
+          "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+          "id": "F-01863f8f97a1"
+        },
+        {
+          "t": "FACT",
+          "text": "The city illness rate stands at 4.9%, with 2 in hospital care at 2% of capacity.",
+          "src": "output/world_summary_c107.md \"## City State\"",
+          "id": "F-e6f8b4dc9432"
+        },
+        {
+          "t": "FACT",
+          "text": "Adams Point is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 15).",
+          "src": "output/world_summary_c107.md \"## World Events\"",
+          "id": "F-ab23d2fced61"
+        },
+        {
+          "t": "FACT",
+          "text": "Winston Clarke — Retired Teacher — Laurel",
+          "src": "Simulation_Ledger profile for POP-00623",
+          "id": "F-24a78fdb934f"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "office": "okoro",
+  "cycle": 111,
+  "speaker": "Brenda Okoro",
+  "cascadeSummary": "Approved month-ten disbursement for West Oakland Stabilization Fund, ensuring long-tenure residents receive timely relief. Credited Fruitvale's success to community organizing while addressing Dimond's stability through ongoing operational focus.",
+  "statements": [
+    {
+      "statementId": "STMT-111-okoro-001",
+      "type": "operational_status",
+      "topic": "West Oakland Stabilization Fund month-ten disbursement",
+      "initiative": "INIT-001",
+      "decision": "Approved month-ten disbursement of $400,000, maintaining 23-day average processing time.",
+      "quote": "Stabilization is a race against displacement — month-ten disbursement keeps us ahead.",
+      "fullStatement": "Month-ten disbursement of $400,000 is approved for the West Oakland Stabilization Fund. Twenty-three-day average processing time achieved, forty-seven households stabilized since C84—that��s the Fund working as designed. Displacement doesn’t wait for slow process — targeted relief flows to tenants first.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-okoro-002",
+      "type": "cascade_response",
+      "topic": "Fruitvale success and Dimond stability",
+      "initiative": null,
+      "decision": "Credited Fruitvale's momentum to community organizing; affirmed Dimond's stability through operational focus.",
+      "quote": "Fruitvale’s busy streets are built on block-by-block engagement — City Hall didn’t deliver that momentum, the community did.",
+      "fullStatement": "Fruitvale’s upbeat mood and busy streets didn’t come from City Hall directives — they came from block-by-block organizing. Credit belongs to the community. In Dimond, stability is the story — steady trade, low crime, Oakland working. Our operational focus is holding that line.",
+      "trackerUpdates": {}
+    }
+  ]
+}

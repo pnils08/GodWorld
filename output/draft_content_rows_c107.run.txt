@@ -1,0 +1,18 @@
+◇ injected env (31) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
+draftContentRows — cycle 107 | backend openrouter | APPLY | Active=yes | sheet 1-0GNeCz…
+facts: 46 seeds, 22 hoods, weather=fog, holiday=MLKDay
+ledger profile: 25 thin pools, 2 fragment slots, 5 persistent no-draw pools, 5 telemetry cycles
+drafted: 9 candidates
+
+valid: 9 | invalid: 0 | dup: 0 | capped: 0 | hood-gate repaired: 0
+  ROW [line] sports.citywide | caught the recap of last night's game at the counter and stayed for the second retelling | (ungated) | source:media,auth:auto
+  ROW [line] sports.fruitvale | the crowd at the transit hub buzzed about the game long after the final play | hood=Fruitvale | source:communityLife,auth:auto
+  ROW [line] civic.westOakland | stopped by the stabilization fund office to check on the latest disbursement notices | hood=West Oakland | source:civicNews,auth:auto
+  ROW [line] civic.temescal | walked past the health center construction site, noting the steel beams rising faster than expected | hood=Temescal | source:occupation,auth:auto
+  ROW [line] culture.lakeMerritt | saw the epiphany ritual offerings left by the lakeshore, now soggy from morning fog | hood=Lake Merritt | source:faith,auth:auto
+  ROW [line] evening.downtown | lined up at the night market stall that always runs out of skewers by 10pm | hood=Downtown | source:prevEvening,evening:cityEvent,auth:auto
+  ROW [line] evening.jackLondon | left the playoff watch party with hoarse vocals and sticky shoes | hood=Jack London | source:prevEvening,evening:nightlife,auth:auto
+  ROW [fragment] VENUE | the pop-up gallery on the transit plaza | (ungated) | source:creationDay,auth:auto
+  ROW [fragment] MOOD | still riding the high from last night's win | (ungated) | source:sports,auth:auto
+
+wrote + verified 9 rows (Active=yes).

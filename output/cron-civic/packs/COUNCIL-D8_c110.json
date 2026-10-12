@@ -1,0 +1,494 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00505",
+    "name": "Nina Chen",
+    "role": "City Council District 8",
+    "officeId": "COUNCIL-D8",
+    "district": "D8",
+    "faction": "CRC",
+    "agentDir": "civic-office-council-d8",
+    "initiative": null,
+    "dials": {
+      "approval": 65
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "stand with Adams Point or leave it"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 234.7181818181818,
+    "label": "Adams Point — sentiment 0.38 vs city 0.535",
+    "lever": "stand with Adams Point or leave it",
+    "hood": "Adams Point",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.38,
+      "citySentiment": 0.5354545454545453,
+      "crime": 0.6,
+      "cityCrime": 0.5913636363636363,
+      "heat": 34.718181818181804,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "stand with Adams Point or leave it",
+    "lineFacts": [
+      "approval 65",
+      "Adams Point: sentiment 0.38 vs city 0.535; crime index 0.6 vs city 0.591; decay momentum 4; decay momentum 4",
+      "Adams Point crime: property 39, violent 21, incidents 6 (cycle 110) — city property 35.5, violent 23.9, incidents 7.1",
+      "Adams Point: sentiment 0.38 vs city 0.535; crime index 0.6 vs city 0.591; decay momentum 4; retail 6.72; housing pressure 0; decay; momentum 4"
+    ],
+    "missing": [
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC108 - answer CONF-108-civic-office-council-d8: awaiting the Sunday fold\nNo applied or failed outcome in the available ledgers.",
+      "moves": [
+        {
+          "moveId": "MV-108-civic-office-council-d8-2026-09-23",
+          "cycle": 108,
+          "date": "2026-09-23",
+          "agentDir": "civic-office-council-d8",
+          "popid": "POP-00505",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-108-civic-office-council-d8",
+            "text": "We are reviewing the verified applicant intake audit for INIT-007 to ensure full regulatory and reporting compliance, while coordinating standard municipal service oversight to address corridor conditions in Eastlake.",
+            "directiveCycle": 108,
+            "confrontationSeat": "civic-office-council-d8"
+          },
+          "status": "pending",
+          "at": "2026-09-23T10:45:42.611Z"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-009",
+        "name": "Commercial Stabilization for Grand Lake",
+        "domain": "economic",
+        "phase": "announced",
+        "status": "proposed",
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "Grand Lake"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget: no parsed budget",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-009"
+    ],
+    "boardText": "Your board:\n- INIT-009 Commercial Stabilization for Grand Lake [announced] — Proposed — a passed council vote funds it — budget: no parsed budget",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [],
+      "participation": [],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 108,
+      "throughCycle": 110,
+      "window": "Complaint display C108–C110; condition counter C110 only.",
+      "text": "Complaint display C108–C110; condition counter C110 only.\nNo Civic complaints from your turf in this window."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 4,
+      "text": "The working city:\n- Elena Soria Dominguez: It’s the waiting that gets to me. Every delay feels like another winter without proper shelters for the… (C109)\n- Bobby Chen-Ramirez: The pharmacist’s kid taped a crayon drawing of our building to the bulletin board yesterday. Not the… (C109)\n- Vanessa Tran-Muñoz: Three more crews out today means we handled that many calls without patrol cars. Good. But the wait time for… (C109)\n- Marcus Webb: I’m staring at the spreadsheet for the month-nine review, thinking about how many of these households are… (C109)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-108-civic-office-council-d8",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d8",
+          "demand": "Nina Chen — City Council District 8 — Review the verified applicant intake audit for INIT-007 and address Eastlake corridor decay signals.",
+          "sourceText": "## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Review the verified applicant intake audit for INIT-007 and address Eastlake corridor decay signals.\n- **Why:** In C107 Chen demanded verifiable intake audits before endorsing full rollout; C108 marks the first cohort placement review while Eastlake logs decay momentum 4 with CrimeIndex at 0.61.\n- **Acceptance:** A formal district audit finding on INIT-007 placement transparency and a documented municipal response to Eastlake crime metrics.\n- **Silence consequence:** Operational rollout of apprenticeship cohorts proceeds without legislative audit approval, leaving D8 intake unverified.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "open": [],
+      "answeredIds": [
+        "CONF-108-civic-office-council-d8"
+      ]
+    },
+    "conditions": {
+      "available": true,
+      "cycle": 110,
+      "proposals": [
+        {
+          "id": "INIT-009",
+          "available": true,
+          "cycle": 110,
+          "policyDomain": "economic",
+          "hoods": [
+            "Grand Lake"
+          ],
+          "hardshipBand": 0.3,
+          "counts": {},
+          "population": {
+            "value": 2292,
+            "source": "Neighborhood_Demographics.Students + Adults + Seniors",
+            "missingHoods": []
+          },
+          "support": {
+            "band": null,
+            "numerator": null,
+            "unit": null,
+            "requiredCount": null,
+            "cleared": false,
+            "reason": "domain-rules-deferred",
+            "basis": "Observed condition counts only; no sample extrapolation. Housing households are not population signatures."
+          },
+          "quality": {
+            "unlocatedConditionRows": 0,
+            "invalidConditionRows": 0,
+            "canonCacheMissing": []
+          }
+        }
+      ],
+      "text": "Proposal conditions at C110 (observations; no support band supplied):\nINIT-009: domain condition rules deferred; support domain-rules-deferred; bad rows 0, unlocated 0"
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 110,
+      "problems": [
+        {
+          "id": "[\"Adams Point\",\"health.sickResidents\"]",
+          "hood": "Adams Point",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 90,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Eastlake\",\"health.sickResidents\"]",
+          "hood": "Eastlake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 93,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Grand Lake\",\"health.sickResidents\"]",
+          "hood": "Grand Lake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 109,
+          "cycle": 110
+        },
+        {
+          "id": "[\"Lake Merritt\",\"health.sickResidents\"]",
+          "hood": "Lake Merritt",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 19,
+          "cycle": 110
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Adams Point\",\"health.sickResidents\"]",
+          "hood": "Adams Point",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 90,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Grand Lake\",\"health.sickResidents\"]",
+          "hood": "Grand Lake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 109,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Lake Merritt\",\"health.sickResidents\"]",
+          "hood": "Lake Merritt",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 19,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Eastlake\",\"health.sickResidents\"]",
+          "hood": "Eastlake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 93,
+          "cycle": 110,
+          "passedOverCycle": 109
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"Adams Point\",\"health.sickResidents\"]",
+          "hood": "Adams Point",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 90,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Grand Lake\",\"health.sickResidents\"]",
+          "hood": "Grand Lake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 109,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Lake Merritt\",\"health.sickResidents\"]",
+          "hood": "Lake Merritt",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 19,
+          "cycle": 110,
+          "passedOverCycle": 108
+        },
+        {
+          "id": "[\"Eastlake\",\"health.sickResidents\"]",
+          "hood": "Eastlake",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 93,
+          "cycle": 110,
+          "passedOverCycle": 109
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Condition problems at C110; prior Sunday folds through C109.\n- Adams Point: sick residents 90 [passed over C108]\n- Grand Lake: sick residents 109 [passed over C108]\n- Lake Merritt: sick residents 19 [passed over C108]\n- Eastlake: sick residents 93 [passed over C109]\n"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Lake Merritt",
+      "Adams Point",
+      "Grand Lake",
+      "Eastlake"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00645",
+        "name": "Ezekiel Campbell",
+        "neighborhood": "Adams Point",
+        "role": "Taxi driver",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Adams Point — Adams Point — sentiment 0.38 vs city 0.535"
+      },
+      {
+        "pop": "POP-00782",
+        "name": "Devon Willis",
+        "neighborhood": "Adams Point",
+        "role": "Server",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Adams Point — Adams Point — sentiment 0.38 vs city 0.535"
+      },
+      {
+        "pop": "POP-00798",
+        "name": "Grace Yamamoto",
+        "neighborhood": "Adams Point",
+        "role": "Independent Bookstore Owner",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Adams Point — Adams Point — sentiment 0.38 vs city 0.535"
+      },
+      {
+        "pop": "POP-00954",
+        "name": "Rev. Han",
+        "neighborhood": "Adams Point",
+        "role": "Senior Pastor / Faith Leader",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Adams Point — Adams Point — sentiment 0.38 vs city 0.535"
+      }
+    ],
+    "businesses": [
+      {
+        "id": "BIZ-00112",
+        "name": "Point Press Laundry",
+        "neighborhood": "Adams Point",
+        "src": "world_summary lifestyle-sighting"
+      }
+    ],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D8",
+      "t": "FACT",
+      "text": "Nina Chen holds COUNCIL-D8 at approval 65",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-AdamsPoint",
+      "t": "FACT",
+      "text": "Adams Point: sentiment 0.38 vs city 0.535; crime index 0.6 vs city 0.591; decay momentum 4; decay momentum 4",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-AdamsPoint",
+      "t": "FACT",
+      "text": "Adams Point crime: property 39, violent 21, incidents 6 (cycle 110) — city property 35.5, violent 23.9, incidents 7.1",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-AdamsPoint",
+      "t": "FACT",
+      "text": "Adams Point: sentiment 0.38 vs city 0.535; crime index 0.6 vs city 0.591; decay momentum 4; retail 6.72; housing pressure 0; decay; momentum 4",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-traj-2",
+      "t": "FACT",
+      "text": "Adams Point cooling off: foot traffic down, storefronts quieter than the rest of the city",
+      "src": "world_summary trajectory"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D8",
+        "PopId": "POP-00505",
+        "Holder": "Nina Chen",
+        "District": "D8",
+        "Approval": "65"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D6",
+        "PopId": "POP-00044",
+        "Holder": "Elliott Crane",
+        "District": "D6",
+        "Faction": "CRC",
+        "Approval": 55
+      },
+      {
+        "OfficeId": "COUNCIL-D7",
+        "PopId": "POP-00504",
+        "Holder": "Warren Ashford",
+        "District": "D7",
+        "Faction": "CRC",
+        "Approval": 51
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

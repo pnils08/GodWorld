@@ -1,0 +1,574 @@
+[
+  {
+    "pop": "POP-00617",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00617\",\"name\":\"Eleanor Rivera\",\"role\":\"BART Station Manager\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Trevor Shimizu\",\"question\":\"What have you seen, felt, or understood about \\\"12th St Oakland City Center ridership surge and its implications for transit operations.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-transit\",\"hood\":null,\"focus\":\"12th St Oakland City Center ridership surge and its implications for transit operations.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\"},\"exposure\":{\"basis\":[\"works at BART Oakland Division (Employment_Roster)\",\"same-neighborhood\"],\"self\":\"Eleanor Rivera — BART Station Manager — BART Oakland Division\",\"evidence\":[{\"id\":\"EV-bd6ccc9fbc\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"text\":\"12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-7ecc0f491999\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-d6b3c5e9bdfd\"},{\"t\":\"FACT\",\"text\":\"8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-ff7473d5ff66\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-f02949b540ca\"},{\"t\":\"FACT\",\"text\":\"Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-b75af1ed3772\"},{\"t\":\"FACT\",\"text\":\"19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-2271661f93d4\"},{\"t\":\"FACT\",\"text\":\"Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-40e4dc33b3ac\"},{\"t\":\"FACT\",\"text\":\"Eleanor Rivera — BART Station Manager — BART Oakland Division\",\"src\":\"Simulation_Ledger profile for POP-00617\",\"id\":\"F-6412715ef9fb\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00617",
+        "name": "Eleanor Rivera",
+        "role": "BART Station Manager",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Trevor Shimizu",
+        "question": "What have you seen, felt, or understood about \"12th St Oakland City Center ridership surge and its implications for transit operations.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-transit",
+        "hood": null,
+        "focus": "12th St Oakland City Center ridership surge and its implications for transit operations.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      "exposure": {
+        "basis": [
+          "works at BART Oakland Division (Employment_Roster)",
+          "same-neighborhood"
+        ],
+        "self": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "evidence": [
+          {
+            "id": "EV-bd6ccc9fbc",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+            "text": "12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-7ecc0f491999"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-d6b3c5e9bdfd"
+        },
+        {
+          "t": "FACT",
+          "text": "8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-ff7473d5ff66"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-f02949b540ca"
+        },
+        {
+          "t": "FACT",
+          "text": "Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-b75af1ed3772"
+        },
+        {
+          "t": "FACT",
+          "text": "19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-2271661f93d4"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-40e4dc33b3ac"
+        },
+        {
+          "t": "FACT",
+          "text": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+          "src": "Simulation_Ledger profile for POP-00617",
+          "id": "F-6412715ef9fb"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00218",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00218\",\"name\":\"Joel Wren\",\"role\":\"Mechanic\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Trevor Shimizu\",\"question\":\"What have you seen, felt, or understood about \\\"12th St Oakland City Center ridership surge and its implications for transit operations.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-transit\",\"hood\":null,\"focus\":\"12th St Oakland City Center ridership surge and its implications for transit operations.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\"},\"exposure\":{\"basis\":[\"works at AC Transit (Employment_Roster)\",\"same-neighborhood\"],\"self\":\"Joel Wren — Mechanic — AC Transit\",\"evidence\":[{\"id\":\"EV-f89027e654\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"text\":\"12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-7ecc0f491999\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-d6b3c5e9bdfd\"},{\"t\":\"FACT\",\"text\":\"8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-ff7473d5ff66\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-f02949b540ca\"},{\"t\":\"FACT\",\"text\":\"Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-b75af1ed3772\"},{\"t\":\"FACT\",\"text\":\"19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-2271661f93d4\"},{\"t\":\"FACT\",\"text\":\"Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-40e4dc33b3ac\"},{\"t\":\"FACT\",\"text\":\"Joel Wren — Mechanic — AC Transit\",\"src\":\"Simulation_Ledger profile for POP-00218\",\"id\":\"F-65e9463e842a\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00218",
+        "name": "Joel Wren",
+        "role": "Mechanic",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Trevor Shimizu",
+        "question": "What have you seen, felt, or understood about \"12th St Oakland City Center ridership surge and its implications for transit operations.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-transit",
+        "hood": null,
+        "focus": "12th St Oakland City Center ridership surge and its implications for transit operations.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      "exposure": {
+        "basis": [
+          "works at AC Transit (Employment_Roster)",
+          "same-neighborhood"
+        ],
+        "self": "Joel Wren — Mechanic — AC Transit",
+        "evidence": [
+          {
+            "id": "EV-f89027e654",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+            "text": "12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-7ecc0f491999"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-d6b3c5e9bdfd"
+        },
+        {
+          "t": "FACT",
+          "text": "8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-ff7473d5ff66"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-f02949b540ca"
+        },
+        {
+          "t": "FACT",
+          "text": "Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-b75af1ed3772"
+        },
+        {
+          "t": "FACT",
+          "text": "19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-2271661f93d4"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-40e4dc33b3ac"
+        },
+        {
+          "t": "FACT",
+          "text": "Joel Wren — Mechanic — AC Transit",
+          "src": "Simulation_Ledger profile for POP-00218",
+          "id": "F-65e9463e842a"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00280",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00280\",\"name\":\"Jerald Jensen\",\"role\":\"Janitor\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Trevor Shimizu\",\"question\":\"What have you seen, felt, or understood about \\\"12th St Oakland City Center ridership surge and its implications for transit operations.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-transit\",\"hood\":null,\"focus\":\"12th St Oakland City Center ridership surge and its implications for transit operations.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\"},\"exposure\":{\"basis\":[\"works at AC Transit (Employment_Roster)\",\"same-neighborhood\"],\"self\":\"Jerald Jensen — Janitor — AC Transit\",\"evidence\":[{\"id\":\"EV-b8d7b9b2a6\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"text\":\"12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-7ecc0f491999\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-d6b3c5e9bdfd\"},{\"t\":\"FACT\",\"text\":\"8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-ff7473d5ff66\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-f02949b540ca\"},{\"t\":\"FACT\",\"text\":\"Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-b75af1ed3772\"},{\"t\":\"FACT\",\"text\":\"19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-2271661f93d4\"},{\"t\":\"FACT\",\"text\":\"Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-40e4dc33b3ac\"},{\"t\":\"FACT\",\"text\":\"Jerald Jensen — Janitor — AC Transit\",\"src\":\"Simulation_Ledger profile for POP-00280\",\"id\":\"F-767f2a765161\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00280",
+        "name": "Jerald Jensen",
+        "role": "Janitor",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Trevor Shimizu",
+        "question": "What have you seen, felt, or understood about \"12th St Oakland City Center ridership surge and its implications for transit operations.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-transit",
+        "hood": null,
+        "focus": "12th St Oakland City Center ridership surge and its implications for transit operations.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      "exposure": {
+        "basis": [
+          "works at AC Transit (Employment_Roster)",
+          "same-neighborhood"
+        ],
+        "self": "Jerald Jensen — Janitor — AC Transit",
+        "evidence": [
+          {
+            "id": "EV-b8d7b9b2a6",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+            "text": "12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-7ecc0f491999"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-d6b3c5e9bdfd"
+        },
+        {
+          "t": "FACT",
+          "text": "8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-ff7473d5ff66"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-f02949b540ca"
+        },
+        {
+          "t": "FACT",
+          "text": "Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-b75af1ed3772"
+        },
+        {
+          "t": "FACT",
+          "text": "19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-2271661f93d4"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-40e4dc33b3ac"
+        },
+        {
+          "t": "FACT",
+          "text": "Jerald Jensen — Janitor — AC Transit",
+          "src": "Simulation_Ledger profile for POP-00280",
+          "id": "F-767f2a765161"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00338",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00338\",\"name\":\"Coen Cartier\",\"role\":\"Transit Operator (AC Transit)\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Trevor Shimizu\",\"question\":\"What have you seen, felt, or understood about \\\"12th St Oakland City Center ridership surge and its implications for transit operations.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-transit\",\"hood\":null,\"focus\":\"12th St Oakland City Center ridership surge and its implications for transit operations.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\"},\"exposure\":{\"basis\":[\"works at AC Transit (Employment_Roster)\",\"same-neighborhood\"],\"self\":\"Coen Cartier — Transit Operator (AC Transit) — AC Transit\",\"evidence\":[{\"id\":\"EV-3dc0e40483\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"text\":\"12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-7ecc0f491999\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-d6b3c5e9bdfd\"},{\"t\":\"FACT\",\"text\":\"8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-ff7473d5ff66\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-f02949b540ca\"},{\"t\":\"FACT\",\"text\":\"Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-b75af1ed3772\"},{\"t\":\"FACT\",\"text\":\"19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-2271661f93d4\"},{\"t\":\"FACT\",\"text\":\"Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 109\",\"id\":\"F-40e4dc33b3ac\"},{\"t\":\"FACT\",\"text\":\"Coen Cartier — Transit Operator (AC Transit) — AC Transit\",\"src\":\"Simulation_Ledger profile for POP-00338\",\"id\":\"F-46d5971db351\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00338",
+        "name": "Coen Cartier",
+        "role": "Transit Operator (AC Transit)",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Trevor Shimizu",
+        "question": "What have you seen, felt, or understood about \"12th St Oakland City Center ridership surge and its implications for transit operations.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-transit",
+        "hood": null,
+        "focus": "12th St Oakland City Center ridership surge and its implications for transit operations.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      "exposure": {
+        "basis": [
+          "works at AC Transit (Employment_Roster)",
+          "same-neighborhood"
+        ],
+        "self": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+        "evidence": [
+          {
+            "id": "EV-3dc0e40483",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+            "text": "12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-7ecc0f491999"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-d6b3c5e9bdfd"
+        },
+        {
+          "t": "FACT",
+          "text": "8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-ff7473d5ff66"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-f02949b540ca"
+        },
+        {
+          "t": "FACT",
+          "text": "Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-b75af1ed3772"
+        },
+        {
+          "t": "FACT",
+          "text": "19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-2271661f93d4"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 109",
+          "id": "F-40e4dc33b3ac"
+        },
+        {
+          "t": "FACT",
+          "text": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+          "src": "Simulation_Ledger profile for POP-00338",
+          "id": "F-46d5971db351"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

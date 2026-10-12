@@ -1,0 +1,42 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-10-04T01:40:14.274Z",
+  "POPID": "POP-00141",
+  "Cycle": 109,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00141-2026-10-04T01-30-04",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00141-2026-10-04T01-30-04.json",
+  "Holder": "Priya Narang",
+  "CreditsDelta": null,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Priya Narang credits=null systems=sol,sirius",
+  "DecidedAt": "2026-10-04T01:40:14.275Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 109,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00141",
+    "Holder": "Priya Narang",
+    "EpisodeId": "undocked-pop00141-Y3C5-e2",
+    "CreditsDelta": null,
+    "Systems": [
+      "sol",
+      "sirius"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00141-2026-10-04T01-30-04.json"
+  }
+}

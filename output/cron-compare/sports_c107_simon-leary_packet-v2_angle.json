@@ -1,0 +1,365 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "107",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00016",
+      "name": "Simon Leary",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The A's record is 2-1.",
+      "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+      "creativeBrief": {
+        "kind": "sports-long-view",
+        "pulseClass": "role-change-under-continuity",
+        "bagModes": [
+          "2 Keystone Player",
+          "4 Load-Bearing Continuity"
+        ],
+        "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+        "anchorFacts": [
+          "The A's record is 2-1.",
+          "The A's have won 1 straight."
+        ],
+        "missing": [
+          "why the role change was made",
+          "historical comparison or franchise precedent",
+          "organizational intention or future plan",
+          "citywide, clubhouse, or fan interpretation"
+        ],
+        "sceneRule": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts.",
+        "sourcePointers": [
+          "output/world_summary_c107.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/SIMON_LONGVIEW_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "long-view-signal",
+      "hood": "Glenview",
+      "score": null,
+      "src": "world_summary_c107.md ## Sports",
+      "nearby": [
+        {
+          "text": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Travis Coles, Clark Saryan, Vladimir Gonzalez, Desmond Morton",
+          "src": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Desmond Morton, Mark Aitken",
+          "src": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | John Ellis, Eric Taveras",
+          "src": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "sentiment | A's W2 [player-energy]; A's W2 [playoffs]; Oaks W0 [pre-season]",
+          "src": "Ripple_Ledger cycle 107 (CauseType sports); rendered: world_summary_c107.md \"## What Moved\" > \"### sports\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00051",
+          "name": "Desmond Morton",
+          "profile": "Desmond Morton — Left Fielder, Oakland A's — Jack London",
+          "why": "feed-names",
+          "role": "Left Fielder, Oakland A's",
+          "hood": "Jack London"
+        },
+        {
+          "pop": "POP-00003",
+          "name": "Mark Aitken",
+          "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+          "why": "feed-names",
+          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "hood": "Jack London"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-ac25a93a42d1"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's record is 2-1.",
+        "src": "world_summary_c107.md ## Sports",
+        "id": "F-967b4fd33868"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's have won 1 straight.",
+        "src": "world_summary_c107.md ## Sports",
+        "id": "F-8d1c3857839c"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The A's record is 2-1.",
+      "label": "The A's record is 2-1.",
+      "hookLine": "The A's record is 2-1.",
+      "kind": "long-view-signal",
+      "hood": "Glenview",
+      "popids": [
+        "POP-00051",
+        "POP-00003"
+      ],
+      "citizens": [
+        "Desmond Morton (POP-00051)",
+        "Mark Aitken (POP-00003)"
+      ],
+      "ref": "world_summary_c107.md ## Sports",
+      "cycle": 107
+    },
+    "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": {
+    "pulse": {
+      "className": "role-change-under-continuity",
+      "score": 84,
+      "label": "The A's record is 2-1."
+    },
+    "prewrite": {
+      "bagModes": [
+        {
+          "id": 2,
+          "name": "Keystone Player"
+        },
+        {
+          "id": 4,
+          "name": "Load-Bearing Continuity"
+        }
+      ],
+      "anchorFacts": [
+        "The A's record is 2-1.",
+        "The A's have won 1 straight."
+      ],
+      "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "missing": [
+        "why the role change was made",
+        "historical comparison or franchise precedent",
+        "organizational intention or future plan",
+        "citywide, clubhouse, or fan interpretation"
+      ],
+      "hooks": []
+    },
+    "players": [
+      {
+        "name": "Desmond Morton",
+        "popid": "POP-00051",
+        "role": "Left Fielder, Oakland A's",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      },
+      {
+        "name": "Mark Aitken",
+        "popid": "POP-00003",
+        "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+    },
+    "candidates": [
+      {
+        "score": 84,
+        "cycle": 107,
+        "team": "A's",
+        "label": "A's take game 3 vs Yankees, A's 8 vs Yankees 4"
+      },
+      {
+        "score": 84,
+        "cycle": 107,
+        "team": "A's",
+        "label": "A's close out the ALDS in NY , As 4 vs Yankees 0"
+      },
+      {
+        "score": 56,
+        "cycle": 107,
+        "team": "Oaks",
+        "label": "The Oaks are a full go for opening night , starting 5 announced."
+      },
+      {
+        "score": 54,
+        "cycle": 106,
+        "team": "A's",
+        "label": "Refelecting on the players traded this past season"
+      },
+      {
+        "score": 38,
+        "cycle": 107,
+        "team": "A's",
+        "label": "A's take game 1 vs Yankees, A's 5 vs Yankees 4"
+      },
+      {
+        "score": 36,
+        "cycle": 106,
+        "team": "A's",
+        "label": "Playoff Rosters set"
+      }
+    ]
+  },
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "text": "Simon Leary plans to explore the structural continuity within the A's current record, focusing on how role changes within the team support this continuity without establishing broader franchise history or organizational intent.",
+    "plan": {
+      "chase": "Simon Leary plans to explore the structural continuity within the A's current record, focusing on how role changes within the team support this continuity without establishing broader franchise history or organizational intent.",
+      "focus": "The role change inside a sustained team record and its interpretation as a structural metaphor.",
+      "why": "To delve into how individual role adjustments contribute to the team's ongoing performance without attributing broader historical or organizational significance.",
+      "checks": [
+        "Ensure interpretation remains abstract and grounded in approved present facts.",
+        "Avoid introducing new named persons, institutions, or events."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00051",
+          "question": "How does Desmond Morton's role contribute to the team's current continuity?",
+          "basis": "Desmond Morton is a key player mentioned in the feed-names, relevant to exploring role changes."
+        },
+        {
+          "pop": "POP-00003",
+          "question": "What insights can Mark Aitken provide on the team's structural continuity?",
+          "basis": "Mark Aitken's role as a community liaison and player rep offers a unique perspective on team dynamics."
+        }
+      ],
+      "interpretation": "Role changes within a team can be seen as adjustments within a larger structure, maintaining continuity rather than signaling broader shifts.",
+      "unverifiedLead": [
+        "Potential insights from players on how role changes are perceived within the team.",
+        "Exploration of how these changes impact team morale and performance."
+      ],
+      "closeQuestion": "How do individual role changes within the A's contribute to the team's sustained record without altering its broader structural identity?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-01023",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Travis Coles, Clark Saryan, Vladimir Gonzalez, Desmond Morton",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533",
+        "POP-00052",
+        "POP-00598",
+        "POP-00051"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Desmond Morton, Mark Aitken",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00051",
+        "POP-00003"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | John Ellis, Eric Taveras",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00033",
+        "POP-00597"
+      ]
+    },
+    {
+      "label": "sentiment | A's W2 [player-energy]; A's W2 [playoffs]; Oaks W0 [pre-season]",
+      "kind": "ripple",
+      "ref": "Ripple_Ledger cycle 107 (CauseType sports); rendered: world_summary_c107.md \"## What Moved\" > \"### sports\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 8,
+  "ranAt": "2026-09-17T11:15:58.764Z"
+}

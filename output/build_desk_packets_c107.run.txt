@@ -1,0 +1,209 @@
+◇ injected env (31) from ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]
+=== buildDeskPackets v1.8 (Auto Archive Context) ===
+Cycle: 107
+Pulling live data from Google Sheets...
+
+Sheets pulled in 1418ms
+  Historical events (baseline): 104
+  Hospital block: 2 in care, 1 recent outcomes
+  Media Ledger entries (C107): 3
+  Evening context: populated | Media entries: 3 | Dynamics: yes | v3.9: hooks=0 hoods=0 nhEcon=0 shock=no migration=no summary=no
+  Civic events (C107): 0
+
+Data counts:
+  Seeds (C107): 46
+  Hooks (C107): 55
+  Events (C107): 11
+  Active Arcs: 0
+  Civic Officers: 35
+  Initiatives: 6
+  Sim Ledger: 943
+  Chicago Citizens: 124
+  Cultural Entities: 51
+  Oakland Sports: 4
+  Chicago Sports: 87
+  Active Storylines: 61
+  Previous Drafts (C106): 0
+  Recent Quotes: 0
+  Active Households: 500
+  Household Events (C107): 37
+  Active Bonds (intensity>=3): 574
+  Economy: (no description)
+  Median Income: $100,000 | Citizens w/income: 867 | Neighborhoods: 22 | Businesses: 177
+  Mara directive: not found at /root/GodWorld/output/mara_directive_c107.txt
+  Roster: loaded
+  POPID index: 0 citizens loaded
+  Neighborhood citizen index: 22 neighborhoods mapped
+  Tier-5 fallback (engine.108): 0 hood(s) with no tracked citizen surfaced generics [presence only, never quotable]
+  Coverage echo: 0 citizens from previous edition
+
+Canon built:
+  Council members: 9
+  Pending votes: 2
+  Status alerts: 0
+  Executive branch — Mayor: Avery Santana
+  A's roster: 58
+  Bulls roster: 16
+  Cultural entities: 31
+  Reporters: 29
+
+--- Building Civic Desk ---
+  Events: 6 | Seeds: 18 | Hooks: 38 | Arcs: 0 | Storylines: 9 | Households: 460 | Bonds: 568
+  Story connections: 6 event-citizen links, 0 citizens with bonds, 800 with life context, 0 recently covered
+  Reporters: Dr. Lila Mezran, Luis Navarro, Carmen Delaine, Trevor Shimizu, Sgt. Rachel Torres
+  Reporter history: 0 reporters, 0 articles
+  Citizen archive: 0 citizens matched (of 801 extracted)
+  Voice cards: 785 citizens with personality profiles
+  Full packet: 1493.2 KB → /root/GodWorld/output/desk-packets/civic_c107.json
+  Summary: 442.9 KB → /root/GodWorld/output/desk-packets/civic_summary_c107.json
+  WARNING: Packet exceeds 200KB — agents should use summary file.
+
+--- Building Sports Desk (Oakland) ---
+  Events: 0 | Seeds: 3 | Hooks: 2 | Arcs: 0 | Storylines: 16 | Households: 102 | Bonds: 565
+  Story connections: 0 event-citizen links, 0 citizens with bonds, 840 with life context, 0 recently covered
+  Sports digest (Oakland): 3 games, 0 roster moves, 0 features, 0 front office, 0 fan/civic, 7 player moods | 0 games, 0 roster moves, 0 features, 0 front office, 0 fan/civic, 3 player moods
+  Reporters: Anthony, P Slayer, Hal Richmond, Tanya Cruz, DJ Hartley, Simon Leary, Elliot Marbury
+  Reporter history: 0 reporters, 0 articles
+  Citizen archive: 0 citizens matched (of 841 extracted)
+  Voice cards: 825 citizens with personality profiles
+  Full packet: 1407.9 KB → /root/GodWorld/output/desk-packets/sports_c107.json
+  Summary: 455.4 KB → /root/GodWorld/output/desk-packets/sports_summary_c107.json
+  WARNING: Packet exceeds 200KB — agents should use summary file.
+
+--- Building Culture Desk ---
+  Events: 7 | Seeds: 22 | Hooks: 43 | Arcs: 0 | Storylines: 7 | Households: 431 | Bonds: 567
+  Story connections: 7 event-citizen links, 0 citizens with bonds, 789 with life context, 0 recently covered
+  Reporters: Maria Keen, Sharon Okafor, Kai Marston, Mason Ortega, Angela Reyes, Noah Tan
+  Reporter history: 0 reporters, 0 articles
+  Citizen archive: 0 citizens matched (of 797 extracted)
+  Voice cards: 774 citizens with personality profiles
+  Full packet: 1477.7 KB → /root/GodWorld/output/desk-packets/culture_c107.json
+  Summary: 428.4 KB → /root/GodWorld/output/desk-packets/culture_summary_c107.json
+  WARNING: Packet exceeds 200KB — agents should use summary file.
+
+--- Building Business Desk ---
+  Events: 0 | Seeds: 3 | Hooks: 0 | Arcs: 0 | Storylines: 25 | Households: 113 | Bonds: 555
+  Story connections: 0 event-citizen links, 0 citizens with bonds, 793 with life context, 0 recently covered
+  Reporters: Jordan Velez
+  Reporter history: 0 reporters, 0 articles
+  Citizen archive: 0 citizens matched (of 794 extracted)
+  Voice cards: 778 citizens with personality profiles
+  Full packet: 1306.5 KB → /root/GodWorld/output/desk-packets/business_c107.json
+  Summary: 425.6 KB → /root/GodWorld/output/desk-packets/business_summary_c107.json
+  WARNING: Packet exceeds 200KB — agents should use summary file.
+
+--- Building Chicago Bureau ---
+  Events: 0 | Seeds: 0 | Hooks: 2 | Arcs: 0 | Storylines: 0 | Households: 0 | Bonds: 552
+  Story connections: 0 event-citizen links, 0 citizens with bonds, 783 with life context, 0 recently covered
+  Sports digest (Bulls): 35 games, 15 roster moves, 13 features, 11 front office, 0 fan/civic, 18 player moods
+  Reporters: Selena Grant, Talia Finch
+  Reporter history: 0 reporters, 0 articles
+  Citizen archive: 0 citizens matched (of 799 extracted)
+  Voice cards: 768 citizens with personality profiles
+  Full packet: 1342.2 KB → /root/GodWorld/output/desk-packets/chicago_c107.json
+  Summary: 506.9 KB → /root/GodWorld/output/desk-packets/chicago_summary_c107.json
+  WARNING: Packet exceeds 200KB — agents should use summary file.
+
+--- Building Letters Desk ---
+  Events: 11 | Seeds: 46 | Hooks: 55 | Arcs: 0 | Storylines: 30 | Households: 500 | Bonds: 574
+  Story connections: 11 event-citizen links, 0 citizens with bonds, 855 with life context, 0 recently covered
+  Sports digest (Oakland + Chicago): 3 games, 0 roster moves, 0 features, 0 front office, 0 fan/civic, 7 player moods | 0 games, 0 roster moves, 0 features, 0 front office, 0 fan/civic, 3 player moods | 35 games, 15 roster moves, 13 features, 11 front office, 0 fan/civic, 18 player moods
+  Reporters: (citizen voices)
+  Reporter history: 0 reporters, 0 articles
+  Citizen archive: 0 citizens matched (of 871 extracted)
+  Voice cards: 840 citizens with personality profiles
+  Full packet: 1769.8 KB → /root/GodWorld/output/desk-packets/letters_c107.json
+  Summary: 572.8 KB → /root/GodWorld/output/desk-packets/letters_summary_c107.json
+  WARNING: Packet exceeds 200KB — agents should use summary file.
+
+TrueSource reference: /root/GodWorld/output/desk-packets/truesource_reference.json
+Citizen archive: 0 citizens → /root/GodWorld/output/desk-packets/citizen_archive.json
+
+=== DESK PACKETS COMPLETE ===
+Output directory: /root/GodWorld/output/desk-packets
+Packets generated: 6
+
+Manifest summary:
+  civic: 1493.2KB | 6 events, 18 seeds, 38 hooks, 9 storylines
+  sports: 1407.9KB | 0 events, 3 seeds, 2 hooks, 16 storylines
+  culture: 1477.7KB | 7 events, 22 seeds, 43 hooks, 7 storylines
+  business: 1306.5KB | 0 events, 3 seeds, 0 hooks, 25 storylines
+  chicago: 1342.2KB | 0 events, 0 seeds, 2 hooks, 0 storylines
+  letters: 1769.8KB | 11 events, 46 seeds, 55 hooks, 30 storylines
+
+=== BUILDING ARCHIVE CONTEXT ===
+Running buildArchiveContext.js for Cycle 107...
+◇ injected env (31) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+[INFO] Building Supermemory archive context for Cycle 107
+
+[CIVIC] 4 queries
+  [SEARCH] "Bay Tribune edition coverage civic"
+  [OK] 1617 chars (SM: 1617, Dash: 0)
+  [SEARCH] "council vote initiative OARI Baylight civic"
+  [OK] 2091 chars (SM: 2091, Dash: 0)
+  [SEARCH] "Fruitvale Transit Hub Phase II — Visioning initiative vote"
+  [OK] 2069 chars (SM: 2069, Dash: 0)
+  [SEARCH] "Oakland Youth Apprenticeship Pipeline initiative vote"
+  [OK] 1850 chars (SM: 1850, Dash: 0)
+  [WROTE] /root/GodWorld/output/desk-briefings/civic_archive_c107.md (8141 chars)
+
+[SPORTS] 2 queries
+  [SEARCH] "Bay Tribune edition coverage sports"
+  [OK] 1441 chars (SM: 1441, Dash: 0)
+  [SEARCH] "Oakland A's roster players dynasty season"
+  [OK] 1931 chars (SM: 1931, Dash: 0)
+  [WROTE] /root/GodWorld/output/desk-briefings/sports_archive_c107.md (3731 chars)
+
+[CULTURE] 2 queries
+  [SEARCH] "Bay Tribune edition coverage culture"
+  [OK] 1232 chars (SM: 1232, Dash: 0)
+  [SEARCH] "Oakland culture community neighborhood arts faith"
+  [OK] 2135 chars (SM: 2135, Dash: 0)
+  [WROTE] /root/GodWorld/output/desk-briefings/culture_archive_c107.md (3736 chars)
+
+[BUSINESS] 2 queries
+  [SEARCH] "Bay Tribune edition coverage business"
+  [OK] 1607 chars (SM: 1607, Dash: 0)
+  [SEARCH] "Oakland business economic Stabilization Fund development"
+  [OK] 2009 chars (SM: 2009, Dash: 0)
+  [WROTE] /root/GodWorld/output/desk-briefings/business_archive_c107.md (3994 chars)
+
+[CHICAGO] 2 queries
+  [SEARCH] "Bay Tribune edition coverage chicago"
+  [OK] 2108 chars (SM: 2108, Dash: 0)
+  [SEARCH] "Chicago Bulls basketball Trepagnier Giddey Paulson"
+  [OK] 2090 chars (SM: 2090, Dash: 0)
+  [WROTE] /root/GodWorld/output/desk-briefings/chicago_archive_c107.md (4568 chars)
+
+[LETTERS] 2 queries
+  [SEARCH] "Bay Tribune edition coverage letters"
+  [OK] 1488 chars (SM: 1488, Dash: 0)
+  [SEARCH] "citizen voice letter community Oakland concerns"
+  [OK] 1190 chars (SM: 1190, Dash: 0)
+  [WROTE] /root/GodWorld/output/desk-briefings/letters_archive_c107.md (3045 chars)
+
+[RHEA] Building verification archive reference
+[RHEA] 9 queries
+  [SEARCH] "Bay Tribune edition errors corrections canon"
+  [OK] 2493 chars (SM: 2493, Dash: 0)
+  [SEARCH] "citizen names phantom fabricated characters"
+  [OK] 2568 chars (SM: 2568, Dash: 0)
+  [SEARCH] "council vote positions faction breakdown"
+  [OK] 3135 chars (SM: 3135, Dash: 0)
+  [SEARCH] "mayor Avery Santana Oakland"
+  [OK] 3072 chars (SM: 3072, Dash: 0)
+  [SEARCH] "Vinnie Keane position stats"
+  [OK] 3035 chars (SM: 3035, Dash: 0)
+  [SEARCH] "Mark Aitken position stats"
+  [OK] 2652 chars (SM: 2652, Dash: 0)
+  [SEARCH] "Benji Dillon position stats"
+  [OK] 3016 chars (SM: 3016, Dash: 0)
+  [SEARCH] "Isley Kelley position stats"
+  [OK] 3033 chars (SM: 3033, Dash: 0)
+  [SEARCH] "Darrin Davis position stats"
+  [OK] 2528 chars (SM: 2528, Dash: 0)
+  [WROTE] /root/GodWorld/output/desk-briefings/rhea_archive_c107.md (26251 chars)
+
+[DONE] 23 total queries across 7 targets — 23 API calls, 0 cache hits
+
+=== ALL DONE ===

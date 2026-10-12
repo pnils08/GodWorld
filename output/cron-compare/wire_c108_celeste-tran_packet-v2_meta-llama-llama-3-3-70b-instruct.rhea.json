@@ -1,0 +1,52 @@
+{
+  "draft": "output/cron-compare/wire_c108_celeste-tran_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "175f28a0bc09c70aa5d94db61cdc65da6524c9230f69e4685c98cbd3ea40b5cf",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen identities, neighborhoods, occupations, and quotes match ledger and packet provenance.",
+  "review": {
+    "profileId": "celeste-social-trends-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "celeste-social-trends-v1",
+    "packageVersion": "CELESTE-TRENDS-1",
+    "manifestId": "AM-8be1961e07ba",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Dank Abara",
+      "Dax Monroe",
+      "Marin Tao",
+      "Rico Valez"
+    ],
+    "unverified": [
+      "As Marin"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0102,
+  "durationMs": 7226,
+  "parseError": false,
+  "ranAt": "2026-09-25T23:18:19.302Z"
+}

@@ -1,0 +1,15 @@
+{
+  "office": "council_d7",
+  "agentDir": "civic-office-council-d7",
+  "holder": "Warren Ashford",
+  "popid": "POP-00504",
+  "title": "City Council District 7",
+  "date": "2026-09-07",
+  "cycle": 106,
+  "model": "google/gemini-3.7-flash",
+  "statement": "Temescal's sentiment sits above the city baseline at 0.51 and retail activity remains high, but property crime at 43 and violent crime at 33 remind us that commercial growth requires vigilant oversight. Defending District 7 means looking at the ledger honestly—we must ensure public safety expenditures match the actual incident rates across Temescal and KONO before greenlighting new allocations.",
+  "action": "Audit request for commercial corridor safety expenditures and incident response in District 7",
+  "numberMoved": "Temescal sentiment at 0.51 vs city 0.370; property crime at 43 vs city 39.7",
+  "ranAt": "2026-09-07T10:45:15.675Z",
+  "fellBackFrom": null
+}

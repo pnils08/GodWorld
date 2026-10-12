@@ -1,0 +1,121 @@
+{
+ "label": "live C106 baseline",
+ "sheet": "live",
+ "cycleCount": "106",
+ "rows": 930,
+ "parsed": 919,
+ "allNeutral": 546,
+ "allNeutralPct": 59.4,
+ "wakeDeviation60": 226,
+ "wakePct": 24.6,
+ "pressureRows": 0,
+ "pressureCauses": {},
+ "adaptedRecords": 0,
+ "dials": {
+  "drive": {
+   "mean": 57.2,
+   "lt40": 0,
+   "gt60": 242,
+   "pin0": 0,
+   "pin100": 1,
+   "contribPos": 1135,
+   "contribNeg": 6
+  },
+  "sociability": {
+   "mean": 58.11,
+   "lt40": 0,
+   "gt60": 233,
+   "pin0": 0,
+   "pin100": 4,
+   "contribPos": 3024,
+   "contribNeg": 0
+  },
+  "warmth": {
+   "mean": 52.88,
+   "lt40": 0,
+   "gt60": 77,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 100,
+   "contribNeg": 0
+  },
+  "openness": {
+   "mean": 53.23,
+   "lt40": 0,
+   "gt60": 116,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 2150,
+   "contribNeg": 0
+  },
+  "composure": {
+   "mean": 54.53,
+   "lt40": 2,
+   "gt60": 165,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 447,
+   "contribNeg": 350
+  },
+  "integrity": {
+   "mean": 50.53,
+   "lt40": 0,
+   "gt60": 20,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 128,
+   "contribNeg": 3
+  },
+  "family": {
+   "mean": 57.17,
+   "lt40": 1,
+   "gt60": 259,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 97,
+   "contribNeg": 0
+  },
+  "outabout": {
+   "mean": 51.05,
+   "lt40": 0,
+   "gt60": 17,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 1848,
+   "contribNeg": 0
+  }
+ },
+ "contrib": {
+  "pos": 8929,
+  "neg": 359,
+  "negSharePct": 3.9
+ },
+ "topTags": {
+  "Neighborhood": 2952,
+  "Daily": 2479,
+  "Personal": 1930,
+  "Civic Perception": 1083,
+  "PrevEvening": 928,
+  "Sports": 715,
+  "Money": 655,
+  "Background": 519,
+  "Lifestyle": 401,
+  "Micro-Event": 295,
+  "Holiday": 213,
+  "FirstFriday": 208,
+  "Media": 196,
+  "Maneuver-Climb": 195,
+  "Work": 136,
+  "Reputation": 122,
+  "CreationDay": 110,
+  "Education": 109,
+  "Career": 71,
+  "Home": 68,
+  "Weather": 54,
+  "Promotion": 45,
+  "Relationship": 42,
+  "Maneuver-Retreat": 39,
+  "Faith": 38
+ },
+ "engineErrorsTotalRows": 0
+}

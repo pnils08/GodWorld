@@ -1,0 +1,232 @@
+{
+  "empty": false,
+  "cycle": 109,
+  "kind": "anthony-analytic",
+  "journalist": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "persona": "anthony-raines",
+    "bagDoc": "docs/media/ANTHONY_ANALYSIS_BAG.md"
+  },
+  "pulse": {
+    "className": "line-card",
+    "score": 71,
+    "label": "A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+    "team": "A's",
+    "eventKind": "game-result",
+    "seasonType": "playoffs",
+    "storyAngle": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+    "hasStats": true,
+    "record": "2-1",
+    "streak": "W1",
+    "foilNumber": "7IP",
+    "feedCycle": 109
+  },
+  "charge": null,
+  "bag": {
+    "tools": [
+      {
+        "id": 1,
+        "name": "Box-Card Read"
+      },
+      {
+        "id": 5,
+        "name": "Repertoire vs Results"
+      }
+    ],
+    "claim": "One line anchors the board read — 7IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+    "foilNumber": "7IP"
+  },
+  "friction": {
+    "a": "Feed present fact: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+    "b": "Soft FO language or bleacher heat that skips the line",
+    "frame": "Evaluate fit and process with numbers — one claim, third person."
+  },
+  "prewrite": {
+    "reporter": "Anthony Raines",
+    "bagTools": [
+      {
+        "id": 1,
+        "name": "Box-Card Read"
+      },
+      {
+        "id": 5,
+        "name": "Repertoire vs Results"
+      }
+    ],
+    "lineFacts": [
+      "Feed line: Pablo Almanzar/7IP/5H/2ER/7SO",
+      "Feed line: Ernesto Quintero/1HR/1RBI",
+      "Feed line: Jose Colon/1HR/1RBI",
+      "Feed line: Darrin Davis/4-4",
+      "Team record (feed): 2-1 · W1",
+      "Event kind (feed): A's — game-result (playoffs)"
+    ],
+    "dossierFacts": [
+      "Pablo Almanzar TrueSource: 2041 REGULAR SEASON — Games: 5 Games Started: 5 Wins: 2 Losses: 0 Saves: 0 Blown Saves: 0 Holds: 0 Innings Pitched: 34.0 Hits Allowed: 12 Runs Allowed | WAR: 1.4",
+      "Ernesto Quintero TrueSource: 2041 REGULAR SEASON G: 145 PA: 589 AB: 554 R: 80 H: 156 2B: 25 3B: 3 HR: 46 RBI: 92 BB: 27 SO: 89 HBP: 4 SF: 3 SAC: 1 GIDP: 6 AVG: 0.282 OBP: 0.318 SL | WAR: 5.8 | AWARDS (Career Reference) - Top Prospect Tier 1 (2040) - Rookie of the Year (2041) - All-S",
+      "Jose Colon TrueSource: 2041 REGULAR SEASON G: 97 PA: 352 AB: 332 R: 97 H: 83 2B: 13 3B: 1 HR: 16 RBI: 42 BB: 16 SO: 53 HBP: 3 SF: 1 SAC: 0 GIDP: 4 AVG: 0.250 OBP: 0.290 SLG: | WAR: 1.7 | AWARDS (Career Reference)"
+    ],
+    "feedFacts": [
+      "StoryAngle: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+      "Notes: Game 3 of the WS; A's visit the Phillies for game 3. Pablo Almanzar gets the call in a crucial game 3, and does not disappoint. Pablo goes seven innings surrendering 2 runs. In a pitchers dual , the o",
+      "Record/Streak: 2-1 / W1"
+    ],
+    "claim": "One line anchors the board read — 7IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+    "missing": [
+      "x-stats / barrel% / launch angle / OAA not on feed",
+      "contracts or salaries not printed on this feed row",
+      "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)"
+    ],
+    "foilNumber": "7IP",
+    "anchorFacts": [
+      "Feed line: Pablo Almanzar/7IP/5H/2ER/7SO",
+      "Feed line: Ernesto Quintero/1HR/1RBI",
+      "Feed line: Jose Colon/1HR/1RBI",
+      "Feed line: Darrin Davis/4-4"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "story": {
+    "kind": "sports-analytics",
+    "angle": "One line anchors the board read — 7IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+    "label": "A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+    "hookLine": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+    "hood": "Chinatown",
+    "pulseClass": "line-card",
+    "team": "A's",
+    "eventKind": "game-result",
+    "citizens": [
+      "Pablo Almanzar (POP-01078)",
+      "Ernesto Quintero (POP-00050)",
+      "Jose Colon (POP-00599)"
+    ],
+    "popids": [
+      "POP-01078",
+      "POP-00050",
+      "POP-00599"
+    ],
+    "ref": "world_summary_c109.md ## Sports",
+    "cycle": 109
+  },
+  "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.",
+  "players": [
+    {
+      "name": "Pablo Almanzar",
+      "popid": "POP-01078",
+      "role": "SP / Oakland A's",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    },
+    {
+      "name": "Ernesto Quintero",
+      "popid": "POP-00050",
+      "role": "3B/1B , Oakland A's",
+      "neighborhood": "Baylight District",
+      "why": "feed-names"
+    },
+    {
+      "name": "Jose Colon",
+      "popid": "POP-00599",
+      "role": "Catcher, Oakland A's",
+      "neighborhood": "Chinatown",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "Chinatown",
+    "record": "2-1",
+    "streak": "W1",
+    "colorRoom": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers."
+  },
+  "candidates": [
+    {
+      "score": 71,
+      "cycle": 109,
+      "team": "A's",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon han"
+    },
+    {
+      "score": 69,
+      "cycle": 109,
+      "team": "A's",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough."
+    },
+    {
+      "score": 66,
+      "cycle": 108,
+      "team": "A's",
+      "primary": "award-board",
+      "hasStats": true,
+      "angle": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so f"
+    },
+    {
+      "score": 65,
+      "cycle": 109,
+      "team": "A's",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "Arturo Ramos does enough, Danny Horn shows some life, Frank Reyna doesnt make an out."
+    },
+    {
+      "score": 65,
+      "cycle": 109,
+      "team": "Oaks",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchis"
+    },
+    {
+      "score": 64,
+      "cycle": 108,
+      "team": "A's",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB "
+    },
+    {
+      "score": 63,
+      "cycle": 109,
+      "team": "Oaks",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "The Oaks lose yet again even with strong efforts from Austin Reaves,"
+    },
+    {
+      "score": 61,
+      "cycle": 108,
+      "team": "A's",
+      "primary": "award-board",
+      "hasStats": true,
+      "angle": "Eric Taveras win Post Season MVP"
+    },
+    {
+      "score": 54,
+      "cycle": 108,
+      "team": "A's",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "Through 3 games the A's lead the Twins 3-0. Game 1 As (6) Twins (2), Game 2 As (3) Twins (2), Game 3"
+    },
+    {
+      "score": 54,
+      "cycle": 108,
+      "team": "Oaks",
+      "primary": "line-card",
+      "hasStats": true,
+      "angle": "The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks."
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c109.md ## Sports",
+    "docs/media/ANTHONY_ANALYSIS_BAG.md",
+    "scripts/sportsSubstrate.js",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 4"
+  ]
+}

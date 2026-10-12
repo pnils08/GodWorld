@@ -1,0 +1,30 @@
+{
+  "office": "council_d4",
+  "agentDir": "civic-office-council-d4",
+  "holder": "Ramon Vega",
+  "popid": "POP-00042",
+  "title": "City Council District 4",
+  "date": "2026-10-05",
+  "cycle": 110,
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "statement": "I stand with Ivy Hill in addressing the pressing issues of commercial contraction and public safety. The recent data shows a concerning trend of decay momentum and crime index, which demands our immediate attention. As the representative of D4, I am committed to working with the city to find solutions that support the local businesses and residents of Ivy Hill.",
+  "moves": [
+    {
+      "type": "propose",
+      "payload": {
+        "title": "Ivy Hill Revitalization Initiative",
+        "problem": "Commercial contraction and public safety concerns in Ivy Hill",
+        "category": "economic",
+        "reach": "hood",
+        "hoods": [
+          "Ivy Hill"
+        ],
+        "budget": "$2.5M"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "0",
+  "ranAt": "2026-10-05T10:46:01.116Z",
+  "fellBackFrom": null
+}

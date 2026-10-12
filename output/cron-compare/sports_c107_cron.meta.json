@@ -1,0 +1,17 @@
+{
+  "desk": "sports",
+  "cycle": "107",
+  "model": "deepseek/deepseek-chat",
+  "turns": 2,
+  "maxTurns": 15,
+  "usageInputTokens": 37631,
+  "usageOutputTokens": 827,
+  "savedFiles": [
+    "output/cron-compare/sports_c107_deepseek-deepseek-chat.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c107.md",
+  "durationMs": 94113,
+  "dryRun": false,
+  "packetOnly": false,
+  "ranAt": "2026-09-16T04:22:35.234Z"
+}

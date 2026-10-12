@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "110",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "selena-grant",
+  "byline": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/sports_c110_selena-grant_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": " ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }\n{\n  \"popId\": \"POP-00591\",\n  \"name\": \"Selena Grant\",\n  \"recorded\": true,\n  \"text\": \"filed: The Oaks’ First Board Read Is a Blank One\"\n}"
+  },
+  "ranAt": "2026-10-06T23:19:50.987Z",
+  "dispositionReconciledAt": "2026-10-10T17:00:04.751Z"
+}

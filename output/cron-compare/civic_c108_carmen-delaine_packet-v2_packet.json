@@ -1,0 +1,967 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "carmen-delaine",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "kind": "initiative",
+      "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "hood": "West Oakland",
+      "popids": [],
+      "citizens": []
+    }
+  },
+  "angle": "output/cron-compare/civic_c108_carmen-delaine_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "I’ve heard folks talking about the Stabilization Fund at the bakery—some hopeful, some skeptical, but everyone’s watching to see where it lands.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks talking about the Stabilization Fund at the bakery—some hopeful, some skeptical, but everyone’s watching to see where it lands.\",\"fact_ids\":[\"F-b17fdd25d024\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b17fdd25d024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00722-21381ff981",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks talking about the Stabilization Fund at the bakery—some hopeful, some skeptical, but everyone’s watching to see where it lands."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00722",
+          "name": "Daniel Cloak",
+          "role": "Bakery Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Carmen Delaine",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "West Oakland",
+          "focus": "Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.",
+          "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Daniel Cloak — Bakery Worker — West Oakland",
+          "evidence": [],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-b17fdd25d024"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-531d400e59f1"
+          },
+          {
+            "t": "FACT",
+            "text": "Daniel Cloak — Bakery Worker — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00722",
+            "id": "F-ae0902a45abd"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00794",
+      "name": "Irene Fay",
+      "quote": "I've heard folks at the coffee shop talking about the Stabilization Fund, but honestly, it feels like one of those things that happens somewhere else—like I see the signs about meetings sometimes, but it doesn't touch my day-to-day yet.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard folks at the coffee shop talking about the Stabilization Fund, but honestly, it feels like one of those things that happens somewhere else—like I see the signs about meetings sometimes, but it doesn't touch my day-to-day yet.\",\n  \"fact_ids\": [\"F-b17fdd25d024\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b17fdd25d024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00794-2854e19777",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard folks at the coffee shop talking about the Stabilization Fund, but honestly, it feels like one of those things that happens somewhere else—like I see the signs about meetings sometimes, but it doesn't touch my day-to-day yet."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00794",
+          "name": "Irene Fay",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Carmen Delaine",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "West Oakland",
+          "focus": "Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.",
+          "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Irene Fay — Barista — West Oakland",
+          "evidence": [],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-b17fdd25d024"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-531d400e59f1"
+          },
+          {
+            "t": "FACT",
+            "text": "Irene Fay — Barista — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00794",
+            "id": "F-870db1e88fd1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00176",
+      "name": "Talmon Lint",
+      "quote": "I’ve heard folks talking about the Stabilization Fund at the community center, but honestly, I’ve been so tied up with installations that I haven’t seen much of its impact firsthand.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks talking about the Stabilization Fund at the community center, but honestly, I’ve been so tied up with installations that I haven’t seen much of its impact firsthand.\",\"fact_ids\":[\"F-b17fdd25d024\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b17fdd25d024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00176-c06c172a69",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks talking about the Stabilization Fund at the community center, but honestly, I’ve been so tied up with installations that I haven’t seen much of its impact firsthand."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00176",
+          "name": "Talmon Lint",
+          "role": "Solar Panel Installation Lead",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Carmen Delaine",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "West Oakland",
+          "focus": "Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.",
+          "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Talmon Lint — Solar Panel Installation Lead — West Oakland",
+          "evidence": [],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-b17fdd25d024"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-531d400e59f1"
+          },
+          {
+            "t": "FACT",
+            "text": "Talmon Lint — Solar Panel Installation Lead — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00176",
+            "id": "F-52cacc450ed1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00961",
+      "name": "Darius Clark",
+      "quote": "I’ve heard folks talking about the Stabilization Fund, but honestly, I haven’t seen much change around here yet. It’s hard to tell where the money’s going.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks talking about the Stabilization Fund, but honestly, I haven’t seen much change around here yet. It’s hard to tell where the money’s going.\",\"fact_ids\":[\"F-b17fdd25d024\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b17fdd25d024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00961-2534eb73b0",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks talking about the Stabilization Fund, but honestly, I haven’t seen much change around here yet. It’s hard to tell where the money’s going."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00961",
+          "name": "Darius Clark",
+          "role": "Bakery Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Carmen Delaine",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "West Oakland",
+          "focus": "Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.",
+          "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Darius Clark — Bakery Worker — West Oakland",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-b17fdd25d024"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-531d400e59f1"
+          },
+          {
+            "t": "FACT",
+            "text": "Darius Clark — Bakery Worker — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00961",
+            "id": "F-732040af9124"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "I’ve heard folks talking about the Stabilization Fund at the bakery—some hopeful, some skeptical, but everyone’s watching to see where it lands.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks talking about the Stabilization Fund at the bakery—some hopeful, some skeptical, but everyone’s watching to see where it lands.\",\"fact_ids\":[\"F-b17fdd25d024\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b17fdd25d024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00722-21381ff981",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks talking about the Stabilization Fund at the bakery—some hopeful, some skeptical, but everyone’s watching to see where it lands."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00722",
+          "name": "Daniel Cloak",
+          "role": "Bakery Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Carmen Delaine",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "West Oakland",
+          "focus": "Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.",
+          "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Daniel Cloak — Bakery Worker — West Oakland",
+          "evidence": [],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-b17fdd25d024"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-531d400e59f1"
+          },
+          {
+            "t": "FACT",
+            "text": "Daniel Cloak — Bakery Worker — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00722",
+            "id": "F-ae0902a45abd"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00794",
+      "name": "Irene Fay",
+      "quote": "I've heard folks at the coffee shop talking about the Stabilization Fund, but honestly, it feels like one of those things that happens somewhere else—like I see the signs about meetings sometimes, but it doesn't touch my day-to-day yet.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard folks at the coffee shop talking about the Stabilization Fund, but honestly, it feels like one of those things that happens somewhere else—like I see the signs about meetings sometimes, but it doesn't touch my day-to-day yet.\",\n  \"fact_ids\": [\"F-b17fdd25d024\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b17fdd25d024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00794-2854e19777",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard folks at the coffee shop talking about the Stabilization Fund, but honestly, it feels like one of those things that happens somewhere else—like I see the signs about meetings sometimes, but it doesn't touch my day-to-day yet."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00794",
+          "name": "Irene Fay",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Carmen Delaine",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "West Oakland",
+          "focus": "Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.",
+          "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Irene Fay — Barista — West Oakland",
+          "evidence": [],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-b17fdd25d024"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-531d400e59f1"
+          },
+          {
+            "t": "FACT",
+            "text": "Irene Fay — Barista — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00794",
+            "id": "F-870db1e88fd1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00176",
+      "name": "Talmon Lint",
+      "quote": "I’ve heard folks talking about the Stabilization Fund at the community center, but honestly, I’ve been so tied up with installations that I haven’t seen much of its impact firsthand.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks talking about the Stabilization Fund at the community center, but honestly, I’ve been so tied up with installations that I haven’t seen much of its impact firsthand.\",\"fact_ids\":[\"F-b17fdd25d024\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b17fdd25d024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00176-c06c172a69",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks talking about the Stabilization Fund at the community center, but honestly, I’ve been so tied up with installations that I haven’t seen much of its impact firsthand."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00176",
+          "name": "Talmon Lint",
+          "role": "Solar Panel Installation Lead",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Carmen Delaine",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "West Oakland",
+          "focus": "Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.",
+          "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Talmon Lint — Solar Panel Installation Lead — West Oakland",
+          "evidence": [],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-b17fdd25d024"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-531d400e59f1"
+          },
+          {
+            "t": "FACT",
+            "text": "Talmon Lint — Solar Panel Installation Lead — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00176",
+            "id": "F-52cacc450ed1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00961",
+      "name": "Darius Clark",
+      "quote": "I’ve heard folks talking about the Stabilization Fund, but honestly, I haven’t seen much change around here yet. It’s hard to tell where the money’s going.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks talking about the Stabilization Fund, but honestly, I haven’t seen much change around here yet. It’s hard to tell where the money’s going.\",\"fact_ids\":[\"F-b17fdd25d024\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b17fdd25d024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00961-2534eb73b0",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks talking about the Stabilization Fund, but honestly, I haven’t seen much change around here yet. It’s hard to tell where the money’s going."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00961",
+          "name": "Darius Clark",
+          "role": "Bakery Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Carmen Delaine",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "West Oakland",
+          "focus": "Tracking the impact and oversight of the West Oakland Stabilization Fund disbursement.",
+          "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Darius Clark — Bakery Worker — West Oakland",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-b17fdd25d024"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+            "id": "F-531d400e59f1"
+          },
+          {
+            "t": "FACT",
+            "text": "Darius Clark — Bakery Worker — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00961",
+            "id": "F-732040af9124"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-21T18:15:59.081Z"
+}

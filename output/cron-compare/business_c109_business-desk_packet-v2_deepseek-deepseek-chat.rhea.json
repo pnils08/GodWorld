@@ -1,0 +1,59 @@
+{
+  "draft": "output/cron-compare/business_c109_business-desk_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "74811fd90cd33ca6a9046004d91d9bb9ef023d99726d1d5e0c91ccd7b82aef81",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "said Walker, using the exact words from his approved statement / sticking to his authorized quote",
+      "issue": "Meta-scaffolding phrasing embedded in narrative prose; stylistic artifact, not a canon violation.",
+      "severity": "low"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "All quotes strictly match exact packet provenance and canon entities with zero high-severity violations.",
+  "review": {
+    "profileId": "jordan-economic-labor-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-1",
+    "manifestId": "AM-d6cb151eb33d",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Dom Will",
+      "Enzo Walker",
+      "Sam Fazio"
+    ],
+    "unverified": [
+      "Civis Systems",
+      "Coastline Construction",
+      "Oakmesh Systems"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0105,
+  "durationMs": 9290,
+  "parseError": false,
+  "ranAt": "2026-09-28T23:16:47.899Z"
+}

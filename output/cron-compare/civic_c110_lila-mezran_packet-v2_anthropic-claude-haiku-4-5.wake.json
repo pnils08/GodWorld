@@ -1,0 +1,30 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "110",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-4.5",
+  "configuredWriterModel": "anthropic/claude-haiku-4.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 102,
+  "quotesLanded": 3,
+  "disposition": "flagged",
+  "rheaPass": false,
+  "rheaFlagCount": 2,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/civic_c110_lila-mezran_packet-v2_anthropic-claude-haiku-4-5.md",
+  "selfRecord": null,
+  "ranAt": "2026-10-05T23:16:29.430Z",
+  "dispositionReconciledAt": "2026-10-10T17:00:04.571Z"
+}

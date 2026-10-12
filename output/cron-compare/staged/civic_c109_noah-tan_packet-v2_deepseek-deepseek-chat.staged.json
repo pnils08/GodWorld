@@ -1,0 +1,51 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "noah-tan",
+  "byline": "Noah Tan",
+  "bylinePopid": "POP-00157",
+  "article": "output/cron-compare/staged/civic_c109_noah-tan_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Colin Soria",
+        "role": "mentioned",
+        "popid": "POP-00227"
+      },
+      {
+        "name": "Melton Neilon",
+        "role": "mentioned",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Elio Perez",
+        "role": "quoted-source",
+        "popid": "POP-00201"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "You know, it's not the kind of weather that stops you in your tracks—just that dull, gray blanket that makes everything feel a little slower. I've noticed it in the way people move, like we're all carrying an extra weight we can't quite name. Even my usual rounds feel heavier, like the cold's seeped into my bones and decided to stay. It's not bad, exactly, just... there. Makes you want to hunker down, keep to yourself a little more than usual.",
+        "sourceRef": "citizenVoice PRESS Colin Soria"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-acfea1389277",
+    "draftSha256": "829e844e83487b6a42569dc19c2dc9a25bacb2b683da05c2fce91e66b5053464",
+    "verdict": "output/cron-compare/civic_c109_noah-tan_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-30T23:16:50.157Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:06.017Z"
+}

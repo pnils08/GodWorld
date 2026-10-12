@@ -1,5 +1,5 @@
 {
-  "cycle": 107,
+  "cycle": 111,
   "mayor": "Avery Santana",
   "executiveBranch": {
     "mayor": "Avery Santana",
@@ -8,7 +8,7 @@
       "title": "Mayor",
       "popId": "POP-00034",
       "status": "active",
-      "approvalRating": "65"
+      "approvalRating": "69"
     },
     "deputyMayor": "Brenda Okoro",
     "deputyMayorDetail": {
@@ -346,7 +346,7 @@
       "position": "Manager, Oakland A's",
       "popId": "POP-00528",
       "tier": "2",
-      "status": "active"
+      "status": "Active"
     },
     {
       "name": "Travis Coles",
@@ -430,7 +430,7 @@
       "position": "C / The Oaks",
       "popId": "POP-01028",
       "tier": "4",
-      "status": "active"
+      "status": "Active"
     },
     {
       "name": "Elliot Abraham",
@@ -461,7 +461,7 @@
       "status": "Active"
     },
     {
-      "name": "Hitoki  Ka",
+      "name": "Hitoki Ka",
       "position": "Relief Pitcher / Oakland A's",
       "popId": "POP-01081",
       "tier": "4",
@@ -484,19 +484,10 @@
   ],
   "initiatives": [
     {
-      "name": "Fruitvale Transit Hub Phase II — Visioning",
-      "id": "INIT-003",
-      "status": "visioning-complete",
-      "voteBreakdown": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented.",
-      "implementationPhase": null,
-      "nextScheduledAction": null,
-      "nextActionCycle": null
-    },
-    {
       "name": "Oakland Youth Apprenticeship Pipeline",
       "id": "INIT-007",
       "status": "announced",
-      "voteBreakdown": "Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (OUSD MOU C76, Peralta MOU C78, budget allocation C80, A's commitment C83) unverified.",
+      "voteBreakdown": "[ENGINE-CLOCK n=3 from=C109] Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (OUSD MOU C76, Peralta MOU C78, budget allocation C80, A's commitment C83) unverified.",
       "implementationPhase": null,
       "nextScheduledAction": null,
       "nextActionCycle": null
@@ -507,35 +498,35 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)",
       "implementationPhase": "disbursement-active",
-      "nextScheduledAction": "Month-eight disbursement review and Downtown canvass deployment",
-      "nextActionCycle": 107
+      "nextScheduledAction": "Month-ten disbursement review",
+      "nextActionCycle": 111
     },
     {
       "name": "Oakland Alternative Response Initiative",
       "id": "INIT-002",
       "status": "PASSED",
       "voteBreakdown": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes.",
-      "implementationPhase": "implementation-active",
-      "nextScheduledAction": "East Oakland dispatch protocol deployment",
-      "nextActionCycle": 107
+      "implementationPhase": "dispatch-live",
+      "nextScheduledAction": "Quarterly outcome report",
+      "nextActionCycle": 112
     },
     {
       "name": "Temescal Community Health Center",
       "id": "INIT-005",
       "status": "PASSED",
       "voteBreakdown": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)",
-      "implementationPhase": "construction-active",
-      "nextScheduledAction": "Utility inspections and interior systems rough-in completion",
-      "nextActionCycle": 107
+      "implementationPhase": "operational",
+      "nextScheduledAction": "First quarter utilization review",
+      "nextActionCycle": 113
     },
     {
       "name": "Baylight District — Final Council Vote",
       "id": "INIT-006",
       "status": "PASSED",
       "voteBreakdown": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes.",
-      "implementationPhase": "construction-planning",
-      "nextScheduledAction": "Contract execution and site preparation mobilization",
-      "nextActionCycle": 107
+      "implementationPhase": "construction-active",
+      "nextScheduledAction": "Remediation completion and construction milestone review",
+      "nextActionCycle": 112
     }
   ]
 }

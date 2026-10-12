@@ -1,0 +1,357 @@
+FULL STAT TRUE SOURCE — PITCHER
+
+Name: Benji Dillon
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: SP
+
+ 
+
+Jersey: #18
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 68
+
+ 
+
+MLB Service: 17.000
+
+ 
+
+Age: 38
+
+ 
+
+Bats: L
+
+ 
+
+Throws: L
+
+ 
+
+Height: 6'5"
+
+ 
+
+Weight: 219 lbs
+
+ 
+
+Drafted: Undrafted (2024)
+
+ 
+
+Secondary Position: NONE
+
+ 
+
+Hitter Tendency: WHOLE FIELD
+
+ 
+
+Born: CALIFORNIA
+
+ 
+
+Canonical POPID: POP-00018
+
+
+--------------------------------------------------------------------------------
+
+
+PITCH REPERTOIRE
+
+Pitch 1 — 4-Seam Fastball (98 mph)
+
+ 
+
+Pitch 2 — Changeup (80 mph)
+
+ 
+
+Pitch 3 — Curveball (69 mph)
+
+ 
+
+Pitch 4 — Slider (88 mph)
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+STA: 78
+
+ 
+
+H/9: 68
+
+ 
+
+K/9: 75
+
+ 
+
+BB/9: 70
+
+ 
+
+HR/9: 62
+
+ 
+
+PCLT: 80
+
+ 
+
+CTRL: 72
+
+ 
+
+VEL: 88
+
+ 
+
+BRK: 82
+
+ 
+
+FLD: 65
+
+ 
+
+ARM: 70
+
+ 
+
+ACC: 68
+
+ 
+
+REAC: 62
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   GS  W   L   SV  BS  HLD  IP      H    R   ER  HR  BB  SO   ERA
+
+ 
+
+2041  ATH   35  28  10  8   1   0   1    150.1   155  75  74  16  65  132  4.43
+
+ 
+
+2040  ATH   32  32  17  6   0   0   0    170.0   169  71  67  24  59  187  3.55
+
+ 
+
+Career (2025–2039) ATH   493 493 200 126 0   0   0    2787.2  2748 1158 1109 300 830 3219 3.58
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 560
+
+ 
+
+GS: 553
+
+ 
+
+W: 227
+
+ 
+
+L: 140
+
+ 
+
+SV: 1
+
+ 
+
+BS: 0
+
+ 
+
+HLD: 1
+
+ 
+
+IP: 3108.0
+
+ 
+
+H: 3072
+
+ 
+
+R: 1304
+
+ 
+
+ER: 1250
+
+ 
+
+HR: 340
+
+ 
+
+BB: 954
+
+ 
+
+SO: 3538
+
+ 
+
+ERA: 3.62
+
+ 
+
+WHIP: 1.30
+
+ 
+
+K/9: 10.25
+
+ 
+
+BB/9: 2.76
+
+ 
+
+HR/9: 0.98
+
+ 
+
+WAR: 83.7
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2041: $13.0M
+
+ 
+
+2042–2046: Free Agent (FA)
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Option: 0/3 Used
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+QUIRKS
+
+Dynasty Anchor
+
+Living Legend
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS
+
+Cy Young (2028, 2032, 2033, 2034, 2037)
+
+Rookie of the Year (2025)
+
+All-Star (2025, 2028, 2031, 2034, 2037)
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00018
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00018

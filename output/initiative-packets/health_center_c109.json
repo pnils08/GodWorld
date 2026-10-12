@@ -1,0 +1,453 @@
+{
+  "meta": {
+    "type": "initiative-packet",
+    "initiative": "health-center",
+    "initiativeId": "INIT-005",
+    "cycle": 109,
+    "generatedAt": "2026-09-28T13:56:45.256Z",
+    "description": "Temescal Community Health Center — $45M for neighborhood health facility with priority designation"
+  },
+  "initiative": {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "type": "vote",
+    "status": "passed",
+    "budget": "$45M",
+    "voteRequirement": "5-4",
+    "voteCycle": "80",
+    "projection": "likely pass",
+    "outcome": "PASSED",
+    "leadFaction": "OPP",
+    "oppositionFaction": "CRC",
+    "swingVoter": "Ramon Vega",
+    "affectedNeighborhoods": "Temescal",
+    "policyDomain": "health",
+    "consequences": "Initiative approved. Implementation begins.",
+    "mayoralAction": "signed",
+    "mayoralActionCycle": "80",
+    "notes": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)",
+    "lastUpdated": "9/28/2026",
+    "implementationPhase": "operational",
+    "milestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal health center, construction-active since C80 (health — playable; delivers once a treating phase moves hood Sick against its conversion baseline).\nC109: opened — construction complete, open to the public.\nC109: Opened 2 weeks early, $1.2M under budget",
+    "nextScheduledAction": "First quarter utilization review",
+    "nextActionCycle": "113"
+  },
+  "office": {
+    "name": "Temescal Community Health Center Project Office",
+    "policyDomains": [
+      "health",
+      "community",
+      "infrastructure"
+    ],
+    "officials": [
+      {
+        "officeId": "MAYOR-01",
+        "title": "Mayor",
+        "name": "Avery Santana",
+        "popId": "POP-00034",
+        "status": "active",
+        "faction": "OPP"
+      },
+      {
+        "officeId": "STAFF-COS",
+        "title": "Chief of Staff",
+        "name": "Laila Cortez",
+        "popId": "POP-00035",
+        "status": "active",
+        "faction": "STAFF"
+      },
+      {
+        "officeId": "PLANNING-DIR",
+        "title": "City Planning Director",
+        "name": "Mara Vance",
+        "popId": "POP-00507",
+        "status": "active",
+        "faction": "STAFF"
+      }
+    ]
+  },
+  "previousCycle": {
+    "decisions": {
+      "initiative": "INIT-005",
+      "initiativeId": "INIT-005",
+      "cycle": 108,
+      "primaryVoice": "move-fold",
+      "consolidatedFrom": [],
+      "trackerUpdates": {
+        "LastWorkCycle": 108,
+        "LastWorkSeat": "proj-health-center"
+      },
+      "_moveFold": {
+        "moveIds": [
+          "MV-108-proj-health-center-2026-09-25"
+        ]
+      }
+    },
+    "voiceDecisions": {
+      "mayorDecisions": [],
+      "factionReactions": [
+        {
+          "statementId": "STMT-108-council_d7-001",
+          "faction": "D7",
+          "speaker": "Warren Ashford",
+          "type": "vote_statement",
+          "topic": "Temescal Community Health Center Drywall and Fire-Rated Wall Inspection Sign-Off",
+          "position": "Authorize fire-rated wall inspection sign-off and drywall installation for INIT-005 following verified MEP completion.",
+          "quote": "The Temescal Community Health Center moves ahead on schedule not because of mayoral rhetoric, but because District 7 inspected every conduit and verified the logs before clearing the next phase.",
+          "relatedInitiatives": [
+            "Temescal Community Health Center"
+          ]
+        }
+      ]
+    },
+    "documentsProduced": [
+      "HLTH-C000-ProjectCharter-20400101.md",
+      "HLTH-C085-PriorityDesignationRequest-20410901.md",
+      "decisions_c103.json",
+      "decisions_c104.json",
+      "decisions_c105.json",
+      "decisions_c106.json",
+      "decisions_c107.json",
+      "decisions_c108.json",
+      "decisions_c109.json"
+    ]
+  },
+  "maraDirective": "# C108 Voice Directives — Mara Vance (AUTO)\n\n**Cycle:** 108\n**Issued:** C108 (auto-derived, cron-civic-run.js --stage=directive)\n**Source:** world_summary_c108 + engine review HIGHs + tracker + C107 voice record\n\n---\n## Avery Santana — Mayor\n\n- **Agent:** `.claude/agents/civic-office-mayor/`\n- **Address:** Authorize the design consultant selection for Fruitvale Transit Hub Phase II (INIT-003) and publish the first training cohort placement metrics for the Youth Apprenticeship Pipeline (INIT-007).\n- **Why:** Following C107 design RFP issuance and public town hall enrollment, C108 marks the scheduled milestone for INIT-003 consultant award and INIT-007 placement review; all six board initiatives sit at stall-clock threshold (NextActionCycle ≤ C109).\n- **Acceptance:** Executive authorization selecting the INIT-003 design consultant and a published INIT-007 placement audit establishing initial cohort numbers across city districts.\n- **Silence consequence:** Transit hub pre-development stalls at procurement, while enrolled apprenticeship applicants remain unassigned to active job placements.\n\n## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Concur on the INIT-003 design consultant selection and submit District 3 intake verification for the Youth Apprenticeship Pipeline cohort review.\n- **Why:** Following C107 merchant covenant execution, C108 requires consultant selection while Fruitvale shows engine review math-imbalance decay (Sentiment -0.030, RetailVitality -1.32 to 9.67, CrimeIndex 0.63).\n- **Acceptance:** Legislative sign-off on the Phase II design consultant contract and a filed D3 placement ledger confirming apprentice allocations.\n- **Silence consequence:** Corridor merchant protections lose architectural coordination during schematic design, and D3 youth intake targets lapse without council confirmation.\n\n## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** File the District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to determine permanent dispatch expansion.\n- **Why:** Tracker sequencing mandates completion of D1 OARI evaluation in C108 alongside Month-eight stabilization fund completion, as West Oakland registers decay momentum 2 with CrimeIndex at 0.58.\n- **Acceptance:** A formal D1 program evaluation report detailing call diversion rates, response times, and an expansion recommendation for INIT-002.\n- **Silence consequence:** Citywide expansion decisions for alternative response remain blocked without baseline performance data from the pilot district.\n\n## Janae Rivers — City Council District 5\n\n- **Agent:** `.claude/agents/civic-office-council-d5/`\n- **Address:** Transmit the District 5 operational oversight review for OARI East Oakland dispatch deployment and review apprentice placement quotas.\n- **Why:** Following C107 deployment authorization, East Oakland holds the city's highest CrimeIndex at 0.66, while Baylight District exhibits decay momentum 4 with stall clocks at C109 for INIT-002 and INIT-007.\n- **Acceptance:** A published D5 dispatch monitoring memo validating co-response protocols and confirming East Oakland youth cohort placement counts.\n- **Silence consequence:** Field responders in high-incident sectors operate without district-level coordination, risking operational drift.\n\n## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Certify the Phase II site remediation schedule for the Baylight District (INIT-006) and address commercial decay in Jack London and Downtown.\n- **Why:** C108 tracker sequencing advances INIT-006 to Phase II remediation, while Jack London registers an engine review math-imbalance (Sentiment -0.110, RetailVitality -1.07 to 12.06) and Downtown sentiment sits at 0.33.\n- **Acceptance:** A filed Phase II ground remediation timeline for Baylight and an economic support directive addressing corridor storefront decay.\n- **Silence consequence:** Environmental site preparation stalls before ground-breaking, delaying redevelopment deliverables.\n\n## Warren Ashford — City Council District 7\n\n- **Agent:** `.claude/agents/civic-office-council-d7/`\n- **Address:** Sign off on the fire-rated wall inspections and drywall milestone for the Temescal Community Health Center (INIT-005) while addressing KONO district sentiment distress.\n- **Why:** Following C107 MEP rough-in completion, INIT-005 requires C108 drywall inspection approvals; simultaneously, KONO records the lowest sentiment in Oakland (0.17 vs city 0.330, CrimeIndex 0.61).\n- **Acceptance:** Transmittal of the certified fire-rated wall inspection sign-off and a municipal service request targeting KONO corridor safety.\n- **Silence consequence:** Construction crews stall prior to interior enclosure, delaying the operational handover of the Temescal facility.\n\n## Nina Chen — City Council District 8\n\n- **Agent:** `.claude/agents/civic-office-council-d8/`\n- **Address:** Review the verified applicant intake audit for INIT-007 and address Eastlake corridor decay signals.\n- **Why:** In C107 Chen demanded verifiable intake audits before endorsing full rollout; C108 marks the first cohort placement review while Eastlake logs decay momentum 4 with CrimeIndex at 0.61.\n- **Acceptance:** A formal district audit finding on INIT-007 placement transparency and a documented municipal response to Eastlake crime metrics.\n- **Silence consequence:** Operational rollout of apprenticeship cohorts proceeds without legislative audit approval, leaving D8 intake unverified.\n\n## Terrence Mobley — City Council District 9\n\n- **Agent:** `.claude/agents/civic-office-council-d9/`\n- **Address:** Reconcile Uptown commercial distress metrics with district small-business stabilization deployment.\n- **Why:** Despite C107 claims of community success, Uptown triggered a C108 engine review math-imbalance (Sentiment -0.150 to 0.25, RetailVitality -1.26, HousingPressure rank 22 of 22 at 5.000).\n- **Acceptance:** A published Uptown commercial assessment detailing business retention allocations from the Downtown outreach expansion of INIT-001.\n- **Silence consequence:** Severe commercial and housing pressures in Uptown continue unmitigated by municipal stabilization resources.\n\n## Ramon Vega — City Council District 4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Address commercial contraction in Grand Lake and Glenview by reviewing citywide small-business stabilization coverage.\n- **Why:** Grand Lake triggered a C108 math-imbalance flag (Sentiment -0.300, RetailVitality -2.12 to 8.52, HousingPressure +1.000), while Glenview records decay momentum 2 and a city-low RetailVitality of 4.02.\n- **Acceptance:** Legislative action or committee referral targeting commercial revitalization and retail vacancy relief for D4 commercial nodes.\n- **Silence consequence:** Neighborhood commercial cores face unmonitored retail vitality collapse without council intervention.\n\n## Elliott Crane — City Council District 6\n\n- **Agent:** `.claude/agents/civic-office-council-d6/`\n- **Address:** Formulate an action plan to reverse declining sentiment in Piedmont Avenue and confirm oversight criteria for Baylight remediation.\n- **Why:** Piedmont Avenue sentiment dropped to 0.23 (below city median 0.330) despite low CrimeIndex (0.54), while Baylight mobilization requires independent council oversight.\n- **Acceptance:** A public district strategy addressing Piedmont Avenue merchant sentiment and a filed oversight memorandum for INIT-006 Phase II remediation.\n- **Silence consequence:** Commercial district sentiment continues downward drift while regional project remediation proceeds without cross-district scrutiny.\n",
+  "citizens": {
+    "total": 154,
+    "tierBreakdown": {
+      "1": 6,
+      "2": 10,
+      "3": 27,
+      "4": 111
+    },
+    "avgIncome": 1609388,
+    "medianIncome": 99863,
+    "atDisplacementRisk": 154,
+    "linkedProfiles": [],
+    "notableCitizens": [
+      {
+        "popId": "POP-00018",
+        "name": "Benji Dillon",
+        "tier": 1,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00019",
+        "name": "Isley Kelley",
+        "tier": 1,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00022",
+        "name": "Danny Horn",
+        "tier": 1,
+        "neighborhood": "Temescal",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00034",
+        "name": "Avery Santana",
+        "tier": 1,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00037",
+        "name": "Brenda Okoro",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00159",
+        "name": "Sharon Okafor",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00170",
+        "name": "Melton Neilon",
+        "tier": 2,
+        "neighborhood": "Temescal",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00201",
+        "name": "Elio Perez",
+        "tier": 1,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00210",
+        "name": "Depak Ying",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00504",
+        "name": "Warren Ashford",
+        "tier": 1,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00742",
+        "name": "Maya Torres-Dillon",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00759",
+        "name": "Naomi Sterling",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 5
+      },
+      {
+        "popId": "POP-00761",
+        "name": "Idris Karim",
+        "tier": 2,
+        "neighborhood": "Temescal",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00765",
+        "name": "Anand Krishnamurthy",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-00769",
+        "name": "Dax Monroe",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 4
+      },
+      {
+        "popId": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "tier": 2,
+        "neighborhood": "Rockridge",
+        "occupation": "",
+        "displacementRisk": 2
+      }
+    ]
+  },
+  "neighborhoods": [
+    {
+      "neighborhood": "Temescal",
+      "sentiment": 0.38,
+      "medianIncome": "68409",
+      "medianRent": "1710",
+      "trajectory": "steady",
+      "housingPressure": "4.5",
+      "crimeIndex": 0.63,
+      "retailVitality": 5.56,
+      "students": 311,
+      "adults": 2106,
+      "seniors": 294,
+      "unemployed": 177,
+      "sick": 108,
+      "schoolQuality": 6.8,
+      "propertyCrime": 40,
+      "violentCrime": 23,
+      "responseTime": 10.3,
+      "incidents": 8
+    },
+    {
+      "neighborhood": "Rockridge",
+      "sentiment": 0.28,
+      "medianIncome": "161607",
+      "medianRent": "4040",
+      "trajectory": "growth",
+      "housingPressure": "6",
+      "crimeIndex": 0.57,
+      "retailVitality": 11.01,
+      "students": 244,
+      "adults": 1481,
+      "seniors": 449,
+      "unemployed": 63,
+      "sick": 108,
+      "schoolQuality": 8.87,
+      "propertyCrime": 36,
+      "violentCrime": 21,
+      "responseTime": 9.7,
+      "incidents": 7
+    }
+  ],
+  "businesses": [
+    {
+      "bizId": "BIZ-00182",
+      "name": "Dillon Clinic",
+      "sector": "Healthcare",
+      "neighborhood": "Rockridge",
+      "employeeCount": 38,
+      "avgSalary": 85000,
+      "growthRate": "3",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00090",
+      "name": "Calderon-Nishi",
+      "sector": "Construction",
+      "neighborhood": "Temescal",
+      "employeeCount": 34,
+      "avgSalary": 78000,
+      "growthRate": "9.14",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00043",
+      "name": "OakHouse",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Rockridge",
+      "employeeCount": 22,
+      "avgSalary": 83000,
+      "growthRate": "6.93",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00008",
+      "name": "Gridiron Analytics",
+      "sector": "Sports Analytics",
+      "neighborhood": "Temescal",
+      "employeeCount": 20,
+      "avgSalary": 110000,
+      "growthRate": "28.47",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00169",
+      "name": "Claremont Table",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Rockridge",
+      "employeeCount": 15,
+      "avgSalary": 83000,
+      "growthRate": "5.69",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00097",
+      "name": "Temescal Community Health Center",
+      "sector": "Healthcare",
+      "neighborhood": "Temescal",
+      "employeeCount": 13,
+      "avgSalary": 88000,
+      "growthRate": "1.95",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00085",
+      "name": "Temple Beth Or",
+      "sector": "Faith Organization",
+      "neighborhood": "Rockridge",
+      "employeeCount": 12,
+      "avgSalary": 61000,
+      "growthRate": "3.47",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00168",
+      "name": "Canopy Market",
+      "sector": "Retail",
+      "neighborhood": "Rockridge",
+      "employeeCount": 11,
+      "avgSalary": 88000,
+      "growthRate": "6.01",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00170",
+      "name": "College Avenue Dental",
+      "sector": "Healthcare",
+      "neighborhood": "Rockridge",
+      "employeeCount": 8,
+      "avgSalary": 152000,
+      "growthRate": "3.81",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00038",
+      "name": "OakTown Social",
+      "sector": "Nightlife & Entertainment",
+      "neighborhood": "Temescal",
+      "employeeCount": 7,
+      "avgSalary": 37000,
+      "growthRate": "3.62",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00171",
+      "name": "Rockridge Pharmacy",
+      "sector": "Retail",
+      "neighborhood": "Rockridge",
+      "employeeCount": 7,
+      "avgSalary": 88000,
+      "growthRate": "4.71",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00080",
+      "name": "Temescal Islamic Center",
+      "sector": "Faith Organization",
+      "neighborhood": "Temescal",
+      "employeeCount": 6,
+      "avgSalary": 51000,
+      "growthRate": "4.41",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00106",
+      "name": "Brie Bouquets",
+      "sector": "Services",
+      "neighborhood": "Temescal",
+      "employeeCount": 5,
+      "avgSalary": 37000,
+      "growthRate": "3.85",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00107",
+      "name": "Da Dough",
+      "sector": "Services",
+      "neighborhood": "Temescal",
+      "employeeCount": 5,
+      "avgSalary": 37000,
+      "growthRate": "2.56",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00180",
+      "name": "Kelley Mercantile",
+      "sector": "Retail",
+      "neighborhood": "Rockridge",
+      "employeeCount": 4,
+      "avgSalary": 42000,
+      "growthRate": "4.13",
+      "status": ""
+    }
+  ]
+}

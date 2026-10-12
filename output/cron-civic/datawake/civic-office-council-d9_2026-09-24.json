@@ -1,0 +1,26 @@
+{
+  "office": "council_d9",
+  "agentDir": "civic-office-council-d9",
+  "holder": "Terrence Mobley",
+  "popid": "POP-00506",
+  "title": "City Council District 9",
+  "date": "2026-09-24",
+  "cycle": 108,
+  "model": "deepseek/deepseek-chat",
+  "statement": "Uptown's commercial distress metrics don't tell the full story—we're investing in long-term stability, not quick fixes. That 10/10 momentum didn't come from chasing trends—it came from methodical community investment. I stand by our district's measured approach.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-108-civic-office-council-d9",
+        "text": "Our small-business stabilization targets systemic vulnerabilities, not just today's sentiment dips. The numbers will catch up to the groundwork we're laying now.",
+        "directiveCycle": 108,
+        "confrontationSeat": "civic-office-council-d9"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-09-24T10:45:50.731Z",
+  "fellBackFrom": null
+}

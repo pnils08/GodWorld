@@ -1,0 +1,581 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00636",
+      "name": "Luis Navarro",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one evidence-bounded records brief without inventing a reporting trail",
+      "assignment": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase",
+      "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation.",
+      "creativeBrief": {
+        "kind": "civic-investigation",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "score": null,
+      "src": "output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): advance to preliminary schematics with community oversight provisions intact — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): filed legislative language with City Clerk — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved accelerated cohort placement with East Oakland priority — \"150 apprentices placed by spring — that's the target, and we're accelerating to hit it.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): independent oversight maintained; soil test verification proceeding — \"Independent oversight isn't bureaucracy — it's how we build trust while we build the future.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00503",
+          "name": "Rose Delgado",
+          "profile": "Rose Delgado — civic office holder",
+          "role": "civic office holder",
+          "hood": null,
+          "mode": "offices",
+          "sourceKind": "office-record",
+          "evidence": {
+            "source": "output/civic-voice/council_d3_c110.json",
+            "statementId": "STMT-110-council_d3-001",
+            "initiativeId": "INIT-003",
+            "topic": "Fruitvale Transit Hub Phase II"
+          }
+        },
+        {
+          "pop": "POP-00034",
+          "name": "Avery Santana",
+          "profile": "Avery Santana — civic office holder",
+          "role": "civic office holder",
+          "hood": null,
+          "mode": "offices",
+          "sourceKind": "office-record",
+          "evidence": {
+            "source": "output/civic-voice/mayor_gavel_c110.json",
+            "statementId": "STMT-110-mayor_gavel-002",
+            "initiativeId": "INIT-003",
+            "topic": "Fruitvale Transit Hub Phase II Preliminary Schematics"
+          }
+        },
+        {
+          "pop": "POP-00791",
+          "name": "Elena Soria Dominguez",
+          "profile": "Elena Soria Dominguez — civic office holder",
+          "role": "civic office holder",
+          "hood": null,
+          "mode": "offices",
+          "sourceKind": "office-record",
+          "evidence": {
+            "source": "output/civic-voice/transit_hub_c110.json",
+            "statementId": "STMT-110-transit_hub-001",
+            "initiativeId": "INIT-003",
+            "topic": "Fruitvale Transit Hub Phase II"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase",
+        "src": "output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+        "id": "F-6a13efaebede"
+      },
+      {
+        "t": "FACT",
+        "text": "The transit initiative carrying Fruitvale has not advanced in 3 cycles.",
+        "src": "output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+        "id": "F-5095da7d38ae"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase. Missing reporting evidence is a typed state, not proof that an act or response did not occur."
+    }
+  },
+  "sourcingPool": {
+    "mode": "offices",
+    "candidates": [
+      {
+        "pop": "POP-00503",
+        "name": "Rose Delgado",
+        "role": "civic office holder",
+        "hood": null,
+        "profile": "Rose Delgado — civic office holder",
+        "mode": "offices",
+        "sourceKind": "office-record",
+        "evidence": {
+          "source": "output/civic-voice/council_d3_c110.json",
+          "statementId": "STMT-110-council_d3-001",
+          "initiativeId": "INIT-003",
+          "topic": "Fruitvale Transit Hub Phase II"
+        }
+      },
+      {
+        "pop": "POP-00034",
+        "name": "Avery Santana",
+        "role": "civic office holder",
+        "hood": null,
+        "profile": "Avery Santana — civic office holder",
+        "mode": "offices",
+        "sourceKind": "office-record",
+        "evidence": {
+          "source": "output/civic-voice/mayor_gavel_c110.json",
+          "statementId": "STMT-110-mayor_gavel-002",
+          "initiativeId": "INIT-003",
+          "topic": "Fruitvale Transit Hub Phase II Preliminary Schematics"
+        }
+      },
+      {
+        "pop": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "role": "civic office holder",
+        "hood": null,
+        "profile": "Elena Soria Dominguez — civic office holder",
+        "mode": "offices",
+        "sourceKind": "office-record",
+        "evidence": {
+          "source": "output/civic-voice/transit_hub_c110.json",
+          "statementId": "STMT-110-transit_hub-001",
+          "initiativeId": "INIT-003",
+          "topic": "Fruitvale Transit Hub Phase II"
+        }
+      }
+    ],
+    "officeRecords": [
+      {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "council_d3",
+        "statementId": "STMT-110-council_d3-001",
+        "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+        "topic": "Fruitvale Transit Hub Phase II",
+        "initiativeId": "INIT-003",
+        "filePath": "output/civic-voice/council_d3_c110.json",
+        "holderPopid": "POP-00503",
+        "speakerName": "Rose Delgado"
+      },
+      {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "mayor_gavel",
+        "statementId": "STMT-110-mayor_gavel-002",
+        "quote": "Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.",
+        "topic": "Fruitvale Transit Hub Phase II Preliminary Schematics",
+        "initiativeId": "INIT-003",
+        "filePath": "output/civic-voice/mayor_gavel_c110.json",
+        "holderPopid": "POP-00034",
+        "speakerName": "Avery Santana"
+      },
+      {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "mayor_open",
+        "statementId": "STMT-110-mayor_open-003",
+        "quote": "Mayer & Associates listens to Fruitvale merchants first, designs second — and now we move to blueprints.",
+        "topic": "Fruitvale Transit Hub Phase II — Preliminary Schematics Advancement",
+        "initiativeId": "INIT-003",
+        "filePath": "output/civic-voice/mayor_open_c110.json",
+        "holderPopid": "POP-00034",
+        "speakerName": "Avery Santana"
+      },
+      {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "transit_hub",
+        "statementId": "STMT-110-transit_hub-001",
+        "quote": "Mayer & Associates doesn’t just draw blueprints—they listen to the tamale vendors and panaderías that make Fruitvale Fruitvale.",
+        "topic": "Fruitvale Transit Hub Phase II",
+        "initiativeId": "INIT-003",
+        "filePath": "output/civic-voice/transit_hub_c110.json",
+        "holderPopid": "POP-00791",
+        "speakerName": "Elena Soria Dominguez"
+      }
+    ]
+  },
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "label": "stuck-initiative (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"design-phase\" for 3 cycles",
+      "kind": "anomaly",
+      "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+      "hookLine": "The transit initiative carrying Fruitvale has not advanced in 3 cycles.",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00744",
+        "POP-00756",
+        "POP-00953"
+      ],
+      "citizens": [
+        "Tomas Renteria (POP-00744)",
+        "Ramon Solano (POP-00756)",
+        "Carmen Solis (POP-00953)"
+      ]
+    },
+    "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "luis-navarro",
+      "name": "Luis Navarro",
+      "popid": "POP-00636",
+      "domain": "accountability-anomaly"
+    },
+    "pulse": {
+      "className": "accountability-anomaly",
+      "score": 80,
+      "label": "stuck-initiative (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"design-phase\" for 3 cycles",
+      "hood": "Fruitvale",
+      "source": "output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "stuck-initiative (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"design-phase\" for 3 cycles"
+      ],
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+      ],
+      "schema": "INVESTIGATION-BRIEF-1",
+      "method": "KNOWN_UNKNOWN",
+      "missing": [
+        "documented response or documented non-response",
+        "request timestamp and elapsed silence duration",
+        "responsible person, office, or duty unless named by the source"
+      ],
+      "reportingEvidence": {
+        "recordChecks": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "requestEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responseEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responsibleEntities": {
+          "state": "NOT_SUPPLIED",
+          "entities": []
+        }
+      },
+      "silenceClock": {
+        "state": "UNESTABLISHED",
+        "value": null,
+        "src": null
+      },
+      "excludedCandidates": []
+    },
+    "candidates": [
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "stuck-initiative (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"design-phase\" for 3 cycles",
+        "ref": "output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00744",
+          "POP-00756",
+          "POP-00953"
+        ],
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 3 cycles.",
+        "citizens": [
+          "Carmen Solis (POP-00953)",
+          "Tomas Renteria (POP-00744)",
+          "Ramon Solano (POP-00756)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 0
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "stuck-initiative (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"operational\" for 3 cycles",
+        "ref": "output/engine_audit_c110.json patterns[1]; evidence: Initiative_Tracker row(s) 7",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [
+          "POP-00891",
+          "POP-01113",
+          "POP-01139"
+        ],
+        "angle": "Oakland Youth Apprenticeship Pipeline stalled in operational — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying West Oakland has not advanced in 3 cycles.",
+        "citizens": [
+          "Renée Cabrera (POP-00891)",
+          "Quinn Adeyemi (POP-01113)",
+          "Janelle Rossi (POP-01139)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 1
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 3 cycles",
+        "ref": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s)",
+        "hood": null,
+        "popids": [],
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 2
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "ref": "output/engine_audit_c110.json patterns[3]; evidence: WorldEvents_V3_Ledger row(s)",
+        "hood": null,
+        "popids": [],
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 3
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "production-imbalance (medium) | 19 neighborhoods report migration flow with zero economic events this cycle",
+        "ref": "output/engine_audit_c110.json patterns[4]; evidence: Neighborhood_Map row(s)",
+        "hood": "Downtown, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "popids": [
+          "POP-00127",
+          "POP-01154",
+          "POP-01157"
+        ],
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in 6 cycles.",
+        "citizens": [
+          "Felicia Grandberry (POP-01154)",
+          "Wesley Oduya (POP-01157)",
+          "Mason Miller (POP-00127)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 4
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: construction-planning → construction-active",
+        "ref": "output/engine_audit_c110.json patterns[5]; evidence: Initiative_Tracker row(s) 6",
+        "hood": "Jack London, Downtown",
+        "popids": [
+          "POP-00056",
+          "POP-00688",
+          "POP-01027"
+        ],
+        "angle": "Baylight District — Final Council Vote advanced from construction-planning to construction-active — what the milestone delivers and who carried it",
+        "hookLine": "Baylight District — Final Council Vote advanced from construction-planning to construction-active; a milestone worth covering, not burying.",
+        "citizens": [
+          "Austin Reaves (POP-01027)",
+          "Mint Condition (POP-00056)",
+          "Merkin Jumper (POP-00688)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 5
+      }
+    ],
+    "pointers": [
+      "output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "output/engine_audit_c110.json patterns[1]; evidence: Initiative_Tracker row(s) 7",
+      "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s)",
+      "output/engine_audit_c110.json patterns[3]; evidence: WorldEvents_V3_Ledger row(s)",
+      "output/engine_audit_c110.json patterns[4]; evidence: Neighborhood_Map row(s)",
+      "output/engine_audit_c110.json patterns[5]; evidence: Initiative_Tracker row(s) 6"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "text": "The Fruitvale Transit Hub Phase II has been stalled in the design-phase for three cycles. My focus is on understanding why the visioning process hasn't moved forward and identifying any gaps in communication or action.",
+    "plan": {
+      "chase": "The Fruitvale Transit Hub Phase II has been stalled in the design-phase for three cycles. My focus is on understanding why the visioning process hasn't moved forward and identifying any gaps in communication or action.",
+      "focus": "Identifying the unresolved gaps in the Fruitvale Transit Hub Phase II visioning process.",
+      "why": "The initiative has not advanced in three cycles, raising questions about the reasons behind the delay.",
+      "checks": [
+        "FACT: Fruitvale Transit Hub Phase II — Visioning stalled in design-phase",
+        "FACT: The transit initiative carrying Fruitvale has not advanced in 3 cycles."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00503",
+          "question": "What role has Rose Delgado played in the stalled visioning process for the Fruitvale Transit Hub Phase II?",
+          "basis": "Rose Delgado — civic office holder"
+        },
+        {
+          "pop": "POP-00034",
+          "question": "What steps has Avery Santana taken to address the stalled design-phase of the Fruitvale Transit Hub Phase II?",
+          "basis": "Avery Santana — civic office holder"
+        },
+        {
+          "pop": "POP-00791",
+          "question": "How has Elena Soria Dominguez contributed to the visioning process for the Fruitvale Transit Hub Phase II?",
+          "basis": "Elena Soria Dominguez — civic office holder"
+        }
+      ],
+      "interpretation": "The lack of progress in the Fruitvale Transit Hub Phase II visioning process suggests potential gaps in communication or action among key stakeholders.",
+      "unverifiedLead": [
+        "Is there a documented response or non-response from the responsible parties regarding the stalled visioning process?",
+        "What is the elapsed silence duration since the last documented action on this initiative?"
+      ],
+      "closeQuestion": "What steps can be taken to move the Fruitvale Transit Hub Phase II visioning process forward?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): advance to preliminary schematics with community oversight provisions intact — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): filed legislative language with City Clerk — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved accelerated cohort placement with East Oakland priority — \"150 apprentices placed by spring — that's the target, and we're accelerating to hit it.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): independent oversight maintained; soil test verification proceeding — \"Independent oversight isn't bureaucracy — it's how we build trust while we build the future.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 102,
+  "ranAt": "2026-10-06T11:15:49.081Z"
+}

@@ -1,0 +1,783 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "110",
+  "persona": "sharon-okafor",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00159",
+      "name": "Sharon Okafor",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Lena Cross is fading — how the city follows its names",
+      "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "lifestyle",
+        "hood": "Lake Merritt",
+        "facts": [
+          "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 95, cooling), 17 media mentions",
+          "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 69, cooling), 14 media mentions",
+          "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+          "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+          "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record this cycle (fame 18, rising), 1 media mentions"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "Multiple nightlife signals detected. Could be coincidence or early pattern. (general coverage)",
+          "Nightlife surge in the district. Scene report or venue profile opportunity. (general coverage)",
+          "First Friday nightlife surge expected. Restaurant and bar scene coverage available. (general coverage)",
+          "defaulted on the debts — the savings are gone and the record carries it (observational analysis)"
+        ],
+        "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-lifestyle",
+      "hood": "Lake Merritt",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C110",
+      "nearby": [
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c110.md \"### East Oakland\"; events: world_summary_c110.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c110.md \"### Fruitvale\"; events: world_summary_c110.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c110.md \"### Grand Lake\"; events: world_summary_c110.md \"## World Events\""
+        },
+        {
+          "text": "Ivy Hill | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c110.md \"### Ivy Hill\"; events: world_summary_c110.md \"## World Events\""
+        },
+        {
+          "text": "Piedmont Ave | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c110.md \"### Piedmont Ave\"; events: world_summary_c110.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "Marin Tao leads the fame table; 2 fading, 1 new",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110",
+        "id": "F-6f6a3d5f9d8e"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 95, cooling), 17 media mentions.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110",
+        "id": "F-1fbb36e52c76"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 95, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110",
+        "id": "F-630a806264f7"
+      },
+      {
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 69, cooling), 14 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110",
+        "id": "F-6196936920ea"
+      },
+      {
+        "t": "FACT",
+        "text": "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110",
+        "id": "F-ce8f81ebdfb9"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110",
+        "id": "F-f1b8307f42df"
+      },
+      {
+        "t": "FACT",
+        "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record this cycle (fame 18, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110",
+        "id": "F-0a60b46ab601"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-lifestyle",
+      "angle": "Lena Cross is fading — how the city follows its names",
+      "label": "Marin Tao leads the fame table; 2 fading, 1 new",
+      "hookLine": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 95, cooling), 17 media mentions.",
+      "hood": "Lake Merritt",
+      "citizens": [
+        "Lena Cross (POP-00539)",
+        "Rowan Pierce (POP-00545)",
+        "Marin Tao (POP-00537)",
+        "Rico Valez (POP-00632)"
+      ],
+      "popids": [
+        "POP-00539",
+        "POP-00545",
+        "POP-00537",
+        "POP-00632"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C110",
+      "cycle": 110
+    },
+    "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+      "named": "Da Dough",
+      "hood": "Temescal",
+      "person": "Warriors Alumni Thompson",
+      "venue": "Da Dough"
+    },
+    "recommend": {
+      "bag": "ground",
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+      "reason": "top pulse fame-sighting → ground",
+      "pulseClass": "fame-sighting",
+      "pulseLabel": "Warriors Alumni Thompson at Da Dough (Temescal)"
+    },
+    "prewrite": {
+      "pulseClass": "fame-sighting",
+      "angle": "Warriors Alumni Thompson spotted at Da Dough in Temescal — ground truth only, no invented companions",
+      "hookLine": "sighting | Warriors Alumni Thompson spotted at Da Dough",
+      "anchorFacts": [
+        "NAMED: Da Dough",
+        "PERSON: Warriors Alumni Thompson",
+        "VENUE: Da Dough",
+        "HOOD: Temescal",
+        "PERSON: Warriors Alumni Thompson",
+        "VENUE: Da Dough",
+        "HOOD: Temescal"
+      ],
+      "bagRecommend": "ground",
+      "bagSlug": "maria-keen"
+    },
+    "texture": {
+      "famous": [
+        "Warriors Alumni Thompson",
+        "Tara Ellison",
+        "Marcus Duval",
+        "Cultural Ambassador Li Wei"
+      ],
+      "restaurants": [
+        {
+          "name": "Temple Lounge",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Dockhouse BBQ",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Bubic Burgers",
+          "hood": "Baylight District"
+        },
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "OakTown Social",
+          "hood": "Temescal"
+        },
+        {
+          "name": "3AM Club",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Piedmont Parlor",
+          "hood": "Piedmont Ave"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 9,
+        "vibe": "art-scene",
+        "movement": "fan-surge",
+        "weatherImpact": 1.3
+      },
+      "cityEvents": [
+        "Downtown First Friday Live Music",
+        "Lake Merritt Community Circle",
+        "Piedmont Ave Winter Walk",
+        "Lake Merritt Lantern Parade"
+      ],
+      "tv": [
+        "Gallery Hour",
+        "Community Stories",
+        "Late Weather Watch",
+        "Bay Area Alert",
+        "Warm House",
+        "Fireside Hour",
+        "A's Franchise Spotlight",
+        "The Isley Kelley (SS) Interview"
+      ],
+      "movies": [
+        "Art of the City",
+        "Neighborhood Tales",
+        "Umbrella Line",
+        "Fog Harbor",
+        "New Beginnings",
+        "Snowlight",
+        "Ballpark Dreams"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight - Championship Edition",
+      "streamingTrend": "arts documentaries",
+      "foodTrend": "First Friday arts district dining - gallery crowd"
+    },
+    "signals": {
+      "fameCount": 9,
+      "sightingCount": 4,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Warriors Alumni Thompson spotted at Da Dough",
+          "name": "Warriors Alumni Thompson",
+          "venue": "Da Dough",
+          "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Temescal",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Tara Ellison spotted at Oakland Athletics",
+          "name": "Tara Ellison",
+          "venue": "Oakland Athletics",
+          "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Baylight District",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Marcus Duval spotted at Point Press Laundry",
+          "name": "Marcus Duval",
+          "venue": "Point Press Laundry",
+          "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Adams Point",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Cultural Ambassador Li Wei spotted at Eastlake Laundry",
+          "name": "Cultural Ambassador Li Wei",
+          "venue": "Eastlake Laundry",
+          "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Eastlake",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Temple Lounge",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Dockhouse BBQ",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Bubic Burgers",
+          "hood": "Baylight District"
+        },
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "OakTown Social",
+          "hood": "Temescal"
+        },
+        {
+          "name": "3AM Club",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Piedmont Parlor",
+          "hood": "Piedmont Ave"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 9,
+        "vibe": "art-scene",
+        "movement": "fan-surge",
+        "weatherImpact": 1.3
+      },
+      "cityEvents": [
+        "Downtown First Friday Live Music",
+        "Lake Merritt Community Circle",
+        "Piedmont Ave Winter Walk",
+        "Lake Merritt Lantern Parade"
+      ],
+      "tv": [
+        "Gallery Hour",
+        "Community Stories",
+        "Late Weather Watch",
+        "Bay Area Alert",
+        "Warm House",
+        "Fireside Hour",
+        "A's Franchise Spotlight",
+        "The Isley Kelley (SS) Interview"
+      ],
+      "movies": [
+        "Art of the City",
+        "Neighborhood Tales",
+        "Umbrella Line",
+        "Fog Harbor",
+        "New Beginnings",
+        "Snowlight",
+        "Ballpark Dreams"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+        "named": "Da Dough",
+        "hood": "Temescal"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Tara Ellison at Oakland Athletics (Baylight District)",
+        "named": "Oakland Athletics",
+        "hood": "Baylight District"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Marcus Duval at Point Press Laundry (Adams Point)",
+        "named": "Point Press Laundry",
+        "hood": "Adams Point"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Cultural Ambassador Li Wei at Eastlake Laundry (Eastlake)",
+        "named": "Eastlake Laundry",
+        "hood": "Eastlake"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Temple Lounge (Downtown)",
+        "named": "Temple Lounge",
+        "hood": "Downtown"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Dockhouse BBQ (Jack London)",
+        "named": "Dockhouse BBQ",
+        "hood": "Jack London"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Bubic Burgers (Baylight District)",
+        "named": "Bubic Burgers",
+        "hood": "Baylight District"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Harborline Grill (Jack London)",
+        "named": "Harborline Grill",
+        "hood": "Jack London"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Temple Lounge (Downtown)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "city-event",
+        "label": "Downtown First Friday Live Music",
+        "score": 31,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "fame-sighting",
+        "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+        "score": 31,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "fame-sighting",
+        "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+        "score": 31,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "named-restaurant",
+        "label": "Temple Lounge (Downtown)",
+        "score": 32,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "LIFESTYLE-SLICE-1",
+    "kind": "beat-lifestyle",
+    "seat": {
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "desk": "culture",
+      "domain": "lifestyle",
+      "builder": "buildLifestyleSlice.js"
+    },
+    "hood": "Lake Merritt",
+    "pulse": {
+      "className": "beat-lifestyle",
+      "score": 100,
+      "label": "Marin Tao leads the fame table; 2 fading, 1 new",
+      "hood": "Lake Merritt",
+      "source": "output/beats/Cultural_Ledger.jsonl @C110"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Lena Cross is fading — how the city follows its names",
+      "hookLine": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 95, cooling), 17 media mentions.",
+      "anchorFacts": [
+        "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 95, cooling), 17 media mentions",
+        "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 69, cooling), 14 media mentions",
+        "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record this cycle (fame 18, rising), 1 media mentions"
+      ],
+      "evidence": [
+        {
+          "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 95, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C110"
+        },
+        {
+          "text": "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 69, cooling), 14 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C110"
+        },
+        {
+          "text": "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C110"
+        },
+        {
+          "text": "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C110"
+        },
+        {
+          "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal, Local-tier — new on the culture record this cycle (fame 18, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C110"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "Multiple nightlife signals detected. Could be coincidence or early pattern.",
+          "angle": "general coverage",
+          "domain": "NIGHTLIFE",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "Nightlife surge in the district. Scene report or venue profile opportunity.",
+          "angle": "general coverage",
+          "domain": "NIGHTLIFE",
+          "hood": "Jack London",
+          "priority": 2
+        },
+        {
+          "text": "First Friday nightlife surge expected. Restaurant and bar scene coverage available.",
+          "angle": "general coverage",
+          "domain": "NIGHTLIFE",
+          "hood": "KONO",
+          "priority": 1
+        },
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Ivy Hill",
+          "priority": 3
+        },
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Adams Point",
+          "priority": 3
+        },
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Temescal",
+          "priority": 3
+        },
+        {
+          "text": "Jax Caldera moved from Temescal to Chinatown — moving up from Temescal",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Chinatown",
+          "priority": 5
+        },
+        {
+          "text": "Theodore Lindqvist moved from Lake Merritt to West Oakland — leaving Lake Merritt for a better fit",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "upgraded a flight seat and didn't think twice about it",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": "Jack London",
+          "priority": 3
+        },
+        {
+          "text": "navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": "Rockridge",
+          "priority": 3
+        },
+        {
+          "text": "overheard a stranger asking about rents on a block nobody used to ask about",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": "Jack London",
+          "priority": 3
+        },
+        {
+          "text": "stared at the Stabilization Fund application requirements until the numbers blurred together",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": "Laurel",
+          "priority": 3
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00545",
+        "name": "Rowan Pierce",
+        "role": "Freelance Writer",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00537",
+        "name": "Marin Tao",
+        "role": "Musician",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Marin Tao — Musician — Chinatown",
+        "why": "the city knows them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "why": "the city knows them (Cultural_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C110",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Sharon Okafor this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "text": "I'm looking into the story of Lena Cross, a fading celebrity in the Lake Merritt area, and how the city is responding to her declining fame. I want to explore the human side of her story and what it means for the community.",
+    "plan": {
+      "chase": "I'm looking into the story of Lena Cross, a fading celebrity in the Lake Merritt area, and how the city is responding to her declining fame. I want to explore the human side of her story and what it means for the community.",
+      "focus": "Lena Cross and her impact on the Lake Merritt community",
+      "why": "I'm interested in understanding how the city's perception of Lena Cross has changed over time and what this says about our culture's relationship with celebrity and fame.",
+      "checks": [
+        "Lena Cross's current activities and public appearances",
+        "Interviews with people who know her or have worked with her"
+      ],
+      "targets": [],
+      "interpretation": "The story of Lena Cross's fading fame may be a reflection of the city's shifting values and priorities.",
+      "unverifiedLead": [
+        "I've heard rumors that Lena Cross is struggling to come to terms with her declining fame, but I need to verify this through further research and interviews."
+      ],
+      "closeQuestion": "What does the future hold for Lena Cross, and how will the city remember her?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c110.md \"### East Oakland\"; events: world_summary_c110.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c110.md \"### Fruitvale\"; events: world_summary_c110.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c110.md \"### Grand Lake\"; events: world_summary_c110.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Ivy Hill | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Ivy Hill",
+      "ref": "output/neighborhood_texture_c110.md \"### Ivy Hill\"; events: world_summary_c110.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Piedmont Ave | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Piedmont Ave",
+      "ref": "output/neighborhood_texture_c110.md \"### Piedmont Ave\"; events: world_summary_c110.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 28,
+  "ranAt": "2026-10-09T11:16:20.638Z"
+}

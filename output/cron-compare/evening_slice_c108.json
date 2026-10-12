@@ -1,0 +1,794 @@
+{
+  "empty": false,
+  "cycle": 108,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Eric Taveras",
+      "Tara Ellison",
+      "Oakland Native MVP Davis"
+    ],
+    "restaurants": [
+      {
+        "name": "Bubic Burgers",
+        "hood": "Baylight District"
+      },
+      {
+        "name": "Slip Street Kitchen",
+        "hood": "Brooklyn"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "Uptown Pour House",
+        "hood": "Uptown"
+      },
+      {
+        "name": "Nightline Station",
+        "hood": "West Oakland"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 6,
+      "vibe": "game-night",
+      "movement": "restricted",
+      "weatherImpact": 1.3
+    },
+    "cityEvents": [
+      "Temescal Holiday Market",
+      "Dimond Neighborhood Stabilization Panel",
+      "Lake Merritt Lantern Parade"
+    ],
+    "tv": [
+      "Late Weather Watch",
+      "Bay Area Alert",
+      "The Neighbors",
+      "Fireside Hour",
+      "A's Sports Central",
+      "The Vinnie Keane (DH) Interview"
+    ],
+    "movies": [
+      "Storm Window",
+      "Fog Harbor",
+      "Rising Star",
+      "Snowlight",
+      "Diamond City"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight - Playoff Special",
+    "streamingTrend": "political commentary surge",
+    "foodTrend": "Playoff tension dining - sports bar surge"
+  },
+  "signals": {
+    "fameCount": 3,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c108.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Eric Taveras spotted at Lake Merritt Mindfulness Sangha",
+        "name": "Eric Taveras",
+        "venue": "Lake Merritt Mindfulness Sangha",
+        "ref": "Ripple_Ledger cycle 108 (CauseType lifestyle-sighting); rendered: world_summary_c108.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Downtown",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Tara Ellison spotted at Canopy Market",
+        "name": "Tara Ellison",
+        "venue": "Canopy Market",
+        "ref": "Ripple_Ledger cycle 108 (CauseType lifestyle-sighting); rendered: world_summary_c108.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Rockridge",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Oakland Native MVP Davis spotted at Gridiron Analytics",
+        "name": "Oakland Native MVP Davis",
+        "venue": "Gridiron Analytics",
+        "ref": "Ripple_Ledger cycle 108 (CauseType lifestyle-sighting); rendered: world_summary_c108.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Temescal",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Jessie Hess — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Jessie Hess",
+        "ref": "Ripple_Ledger cycle 108 (CauseType fame-event); rendered: world_summary_c108.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00212"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Vanessa Treary — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Vanessa Treary",
+        "ref": "Ripple_Ledger cycle 108 (CauseType fame-event); rendered: world_summary_c108.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00781"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Irene Fay — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Irene Fay",
+        "ref": "Ripple_Ledger cycle 108 (CauseType fame-event); rendered: world_summary_c108.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00794"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "quiet-nightlife",
+    "score": 24,
+    "label": "Uptown Pour House (Uptown) · quiet night",
+    "named": "Uptown Pour House",
+    "hood": "Uptown",
+    "person": null,
+    "venue": null
+  },
+  "candidates": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Uptown Pour House (Uptown) · quiet night",
+      "named": "Uptown Pour House",
+      "hood": "Uptown"
+    },
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Nightline Station (West Oakland) · quiet night",
+      "named": "Nightline Station",
+      "hood": "West Oakland"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Eric Taveras at Lake Merritt Mindfulness Sangha (Downtown)",
+      "named": "Lake Merritt Mindfulness Sangha",
+      "hood": "Downtown"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Tara Ellison at Canopy Market (Rockridge)",
+      "named": "Canopy Market",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Oakland Native MVP Davis at Gridiron Analytics (Temescal)",
+      "named": "Gridiron Analytics",
+      "hood": "Temescal"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Bubic Burgers (Baylight District)",
+      "named": "Bubic Burgers",
+      "hood": "Baylight District"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Slip Street Kitchen (Brooklyn)",
+      "named": "Slip Street Kitchen",
+      "hood": "Brooklyn"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Jessie Hess — fame rise",
+      "named": "Jessie Hess",
+      "hood": "Downtown"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Vanessa Treary — fame rise",
+      "named": "Vanessa Treary",
+      "hood": "Lake Merritt"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Irene Fay — fame rise",
+      "named": "Irene Fay",
+      "hood": "West Oakland"
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Late Weather Watch; Bay Area Alert; The Neighbors",
+      "named": "Late Weather Watch",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Temescal Holiday Market",
+      "named": "Temescal Holiday Market",
+      "hood": null
+    }
+  ],
+  "pulses": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Uptown Pour House (Uptown) · quiet night",
+      "named": "Uptown Pour House",
+      "hood": "Uptown",
+      "names": [
+        "Uptown Pour House"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Uptown Pour House is open and quiet in Uptown. What that condition means is not yet established.",
+      "hookLine": "Uptown Pour House is open and quiet in Uptown.",
+      "sceneBits": [
+        "VENUE: Uptown Pour House",
+        "HOOD: Uptown",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 6,
+        "vibe": "game-night",
+        "movement": "restricted",
+        "weatherImpact": 1.3
+      },
+      "cycle": 108
+    },
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Nightline Station (West Oakland) · quiet night",
+      "named": "Nightline Station",
+      "hood": "West Oakland",
+      "names": [
+        "Nightline Station"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightline Station is open and quiet in West Oakland. What that condition means is not yet established.",
+      "hookLine": "Nightline Station is open and quiet in West Oakland.",
+      "sceneBits": [
+        "VENUE: Nightline Station",
+        "HOOD: West Oakland",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 6,
+        "vibe": "game-night",
+        "movement": "restricted",
+        "weatherImpact": 1.3
+      },
+      "cycle": 108
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Eric Taveras at Lake Merritt Mindfulness Sangha (Downtown)",
+      "named": "Lake Merritt Mindfulness Sangha",
+      "hood": "Downtown",
+      "names": [
+        "Eric Taveras",
+        "Lake Merritt Mindfulness Sangha"
+      ],
+      "person": "Eric Taveras",
+      "venue": "Lake Merritt Mindfulness Sangha",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 108 (CauseType lifestyle-sighting); rendered: world_summary_c108.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Eric Taveras spotted at Lake Merritt Mindfulness Sangha in Downtown — ground truth only, no invented companions",
+      "hookLine": "sighting | Eric Taveras spotted at Lake Merritt Mindfulness Sangha",
+      "sceneBits": [
+        "PERSON: Eric Taveras",
+        "VENUE: Lake Merritt Mindfulness Sangha",
+        "HOOD: Downtown"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Tara Ellison at Canopy Market (Rockridge)",
+      "named": "Canopy Market",
+      "hood": "Rockridge",
+      "names": [
+        "Tara Ellison",
+        "Canopy Market"
+      ],
+      "person": "Tara Ellison",
+      "venue": "Canopy Market",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 108 (CauseType lifestyle-sighting); rendered: world_summary_c108.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Tara Ellison spotted at Canopy Market in Rockridge — ground truth only, no invented companions",
+      "hookLine": "sighting | Tara Ellison spotted at Canopy Market",
+      "sceneBits": [
+        "PERSON: Tara Ellison",
+        "VENUE: Canopy Market",
+        "HOOD: Rockridge"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Oakland Native MVP Davis at Gridiron Analytics (Temescal)",
+      "named": "Gridiron Analytics",
+      "hood": "Temescal",
+      "names": [
+        "Oakland Native MVP Davis",
+        "Gridiron Analytics"
+      ],
+      "person": "Oakland Native MVP Davis",
+      "venue": "Gridiron Analytics",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 108 (CauseType lifestyle-sighting); rendered: world_summary_c108.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Oakland Native MVP Davis spotted at Gridiron Analytics in Temescal — ground truth only, no invented companions",
+      "hookLine": "sighting | Oakland Native MVP Davis spotted at Gridiron Analytics",
+      "sceneBits": [
+        "PERSON: Oakland Native MVP Davis",
+        "VENUE: Gridiron Analytics",
+        "HOOD: Temescal"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Bubic Burgers (Baylight District)",
+      "named": "Bubic Burgers",
+      "hood": "Baylight District",
+      "names": [
+        "Bubic Burgers"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Bubic Burgers appears on the evening restaurant list in Baylight District. What was happening there is not established.",
+      "hookLine": "Bubic Burgers appears on the evening restaurant list in Baylight District.",
+      "sceneBits": [
+        "VENUE: Bubic Burgers",
+        "HOOD: Baylight District"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Slip Street Kitchen (Brooklyn)",
+      "named": "Slip Street Kitchen",
+      "hood": "Brooklyn",
+      "names": [
+        "Slip Street Kitchen"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Slip Street Kitchen appears on the evening restaurant list in Brooklyn. What was happening there is not established.",
+      "hookLine": "Slip Street Kitchen appears on the evening restaurant list in Brooklyn.",
+      "sceneBits": [
+        "VENUE: Slip Street Kitchen",
+        "HOOD: Brooklyn"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Jessie Hess — fame rise",
+      "named": "Jessie Hess",
+      "hood": "Downtown",
+      "names": [
+        "Jessie Hess"
+      ],
+      "person": "Jessie Hess",
+      "popids": [
+        "POP-00212"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 108 (CauseType fame-event); rendered: world_summary_c108.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Jessie Hess — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Jessie Hess — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Jessie Hess",
+        "HOOD: Downtown",
+        "LABEL: tier-climb | Jessie Hess — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Vanessa Treary — fame rise",
+      "named": "Vanessa Treary",
+      "hood": "Lake Merritt",
+      "names": [
+        "Vanessa Treary"
+      ],
+      "person": "Vanessa Treary",
+      "popids": [
+        "POP-00781"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 108 (CauseType fame-event); rendered: world_summary_c108.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Vanessa Treary — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Vanessa Treary — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Vanessa Treary",
+        "HOOD: Lake Merritt",
+        "LABEL: tier-climb | Vanessa Treary — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Irene Fay — fame rise",
+      "named": "Irene Fay",
+      "hood": "West Oakland",
+      "names": [
+        "Irene Fay"
+      ],
+      "person": "Irene Fay",
+      "popids": [
+        "POP-00794"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 108 (CauseType fame-event); rendered: world_summary_c108.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Irene Fay — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Irene Fay — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Irene Fay",
+        "HOOD: West Oakland",
+        "LABEL: tier-climb | Irene Fay — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Late Weather Watch; Bay Area Alert; The Neighbors",
+      "named": "Late Weather Watch",
+      "hood": null,
+      "names": [
+        "Late Weather Watch",
+        "Bay Area Alert",
+        "The Neighbors",
+        "Fireside Hour",
+        "A's Sports Central",
+        "The Vinnie Keane (DH) Interview"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media TV",
+      "angle": "Evening TV slate — Late Weather Watch, Bay Area Alert, The Neighbors; sports desk: Oakland Sports Tonight - Playoff Special",
+      "hookLine": "On the box tonight: Late Weather Watch, Bay Area Alert.",
+      "sceneBits": [
+        "TV: Late Weather Watch; Bay Area Alert; The Neighbors; Fireside Hour; A's Sports Central; The Vinnie Keane (DH) Interview",
+        "SPORTS BROADCAST: Oakland Sports Tonight - Playoff Special"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Temescal Holiday Market",
+      "named": "Temescal Holiday Market",
+      "hood": null,
+      "names": [
+        "Temescal Holiday Market"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Temescal Holiday Market — present-tense room, not calendar filler",
+      "hookLine": "Temescal Holiday Market is on the evening board.",
+      "sceneBits": [
+        "EVENT: Temescal Holiday Market"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Dimond Neighborhood Stabilization Panel",
+      "named": "Dimond Neighborhood Stabilization Panel",
+      "hood": null,
+      "names": [
+        "Dimond Neighborhood Stabilization Panel"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Dimond Neighborhood Stabilization Panel — present-tense room, not calendar filler",
+      "hookLine": "Dimond Neighborhood Stabilization Panel is on the evening board.",
+      "sceneBits": [
+        "EVENT: Dimond Neighborhood Stabilization Panel"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Lake Merritt Lantern Parade",
+      "named": "Lake Merritt Lantern Parade",
+      "hood": null,
+      "names": [
+        "Lake Merritt Lantern Parade"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Lake Merritt Lantern Parade — present-tense room, not calendar filler",
+      "hookLine": "Lake Merritt Lantern Parade is on the evening board.",
+      "sceneBits": [
+        "EVENT: Lake Merritt Lantern Parade"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "fast-food",
+      "score": 13,
+      "label": "SpeedyBurger (Downtown)",
+      "named": "SpeedyBurger",
+      "hood": "Downtown",
+      "names": [
+        "SpeedyBurger"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Fast food",
+      "angle": "SpeedyBurger appears on the evening fast-food list in Downtown. What was happening there is not established.",
+      "hookLine": "SpeedyBurger appears on the evening fast-food list in Downtown.",
+      "sceneBits": [
+        "VENUE: SpeedyBurger",
+        "HOOD: Downtown"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "movie-slate",
+      "score": 13,
+      "label": "Movies: Storm Window; Fog Harbor; Rising Star; Snowlight; Diamond City",
+      "named": "Storm Window",
+      "hood": null,
+      "names": [
+        "Storm Window",
+        "Fog Harbor",
+        "Rising Star",
+        "Snowlight",
+        "Diamond City"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media movies",
+      "angle": "Evening movie slate — Storm Window, Fog Harbor, Rising Star, Snowlight, Diamond City",
+      "hookLine": "Screens tonight: Storm Window, Fog Harbor, Rising Star, Snowlight, Diamond City.",
+      "sceneBits": [
+        "MOVIES: Storm Window; Fog Harbor; Rising Star; Snowlight; Diamond City"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Eric Taveras spotted (Riley famous list)",
+      "named": "Eric Taveras",
+      "hood": null,
+      "names": [
+        "Eric Taveras"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Eric Taveras is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Eric Taveras is being seen around town.",
+      "sceneBits": [
+        "NAME: Eric Taveras"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Tara Ellison spotted (Riley famous list)",
+      "named": "Tara Ellison",
+      "hood": null,
+      "names": [
+        "Tara Ellison"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Tara Ellison is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Tara Ellison is being seen around town.",
+      "sceneBits": [
+        "NAME: Tara Ellison"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Oakland Native MVP Davis spotted (Riley famous list)",
+      "named": "Oakland Native MVP Davis",
+      "hood": null,
+      "names": [
+        "Oakland Native MVP Davis"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Oakland Native MVP Davis is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Oakland Native MVP Davis is being seen around town.",
+      "sceneBits": [
+        "NAME: Oakland Native MVP Davis"
+      ],
+      "cycle": 108
+    },
+    {
+      "className": "faith-overlap",
+      "score": 11,
+      "label": "Faith / quiet work overlap with evening city",
+      "named": null,
+      "hood": null,
+      "names": [],
+      "requiresName": false,
+      "source": "Faith_Organizations tab (LeaderPOPID-linked)",
+      "angle": "Quiet institutional care against the evening board — congregations, not doctrine wars",
+      "hookLine": "Faith work continues while the city evenings out.",
+      "sceneBits": [
+        "FAITH REGISTRY: present"
+      ],
+      "cycle": 108
+    }
+  ],
+  "recommend": {
+    "bag": "lifestyle",
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "reason": "top pulse quiet-nightlife → lifestyle",
+    "pulseClass": "quiet-nightlife",
+    "pulseLabel": "Uptown Pour House (Uptown) · quiet night"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Bubic Burgers (Baylight District)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Uptown Pour House (Uptown) · quiet night",
+      "score": 32,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Uptown Pour House (Uptown) · quiet night",
+      "score": 32,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Uptown Pour House (Uptown) · quiet night",
+      "score": 32,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "fame-sighting",
+      "label": "Eric Taveras at Lake Merritt Mindfulness Sangha (Downtown)",
+      "score": 31,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Uptown Pour House is open and quiet in Uptown. What that condition means is not yet established.",
+    "label": "Uptown Pour House (Uptown) · quiet night",
+    "hookLine": "Uptown Pour House is open and quiet in Uptown.",
+    "hood": "Uptown",
+    "pulseClass": "quiet-nightlife",
+    "citizens": [],
+    "popids": [],
+    "named": "Uptown Pour House",
+    "venue": "Uptown Pour House",
+    "ref": "world_summary ## Evening Texture · Nightlife",
+    "cycle": 108
+  },
+  "prewrite": {
+    "pulseClass": "quiet-nightlife",
+    "angle": "Uptown Pour House is open and quiet in Uptown. What that condition means is not yet established.",
+    "hookLine": "Uptown Pour House is open and quiet in Uptown.",
+    "anchorFacts": [
+      "NAMED: Uptown Pour House",
+      "HOOD: Uptown",
+      "VENUE: Uptown Pour House",
+      "HOOD: Uptown",
+      "EVENING RECORD: open and quiet"
+    ],
+    "bagRecommend": "lifestyle",
+    "bagSlug": "sharon-okafor"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Bubic Burgers",
+        "hood": "Baylight District"
+      },
+      {
+        "name": "Slip Street Kitchen",
+        "hood": "Brooklyn"
+      },
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Uptown Pour House",
+        "hood": "Uptown"
+      },
+      {
+        "name": "Nightline Station",
+        "hood": "West Oakland"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 6,
+      "vibe": "game-night",
+      "movement": "restricted",
+      "weatherImpact": 1.3
+    },
+    "cityEvents": [
+      "Temescal Holiday Market",
+      "Dimond Neighborhood Stabilization Panel",
+      "Lake Merritt Lantern Parade"
+    ],
+    "tv": [
+      "Late Weather Watch",
+      "Bay Area Alert",
+      "The Neighbors",
+      "Fireside Hour",
+      "A's Sports Central",
+      "The Vinnie Keane (DH) Interview"
+    ],
+    "movies": [
+      "Storm Window",
+      "Fog Harbor",
+      "Rising Star",
+      "Snowlight",
+      "Diamond City"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c108.md ## Evening Texture",
+    "output/desk_signal_c108.json lanes.culture",
+    "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+  ]
+}

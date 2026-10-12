@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-30",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": false,
+      "error": "invalid W1 output: chase replaces the assignment"
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-09-30T11:16:44.633Z"
+}

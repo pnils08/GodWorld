@@ -1,0 +1,28 @@
+{
+  "office": "police_chief",
+  "cycle": 106,
+  "speaker": "Rafael Montez",
+  "cascadeSummary": "Published the C106 patrol deployment realignment memo defining OPD shift coverage and behavioral health co-response boundaries for East Oakland, West Oakland, and Downtown per the City Planning Director's directive. Addressed high-severity incoherence in West Oakland, Fruitvale, and East Oakland through operational clarity on dispatch thresholds and patrol staffing allocations. Declined to claim credit for Temescal's community health momentum, as that falls outside OPD's operational lane.",
+  "statements": [
+    {
+      "statementId": "STMT-106-police_chief-001",
+      "type": "operations_update",
+      "topic": "Patrol Deployment Realignment and OARI Co-Response Boundaries",
+      "initiative": "INIT-002",
+      "decision": "Published departmental operations directive detailing patrol staffing allocations and dispatch threshold handoffs for East Oakland (CrimeIndex 1.11), West Oakland (1.10), and Downtown (1.10)",
+      "quote": "Operational clarity between sworn patrol and alternative response teams prevents gaps in emergency coverage—that's not politics, it's dispatch protocol.",
+      "fullStatement": "Chief Rafael Montez today published the Cycle 106 patrol deployment realignment memo, establishing clear operational boundaries between OPD sworn patrol resources and OARI alternative response teams across East Oakland, West Oakland, and Downtown. The directive specifies dispatch threshold handoffs—behavioral health calls meeting defined criteria route to OARI co-response, while calls indicating immediate safety threat maintain sworn officer priority. Patrol staffing allocations shift to match call volume data showing elevated incident frequency in these three corridors. This operational matrix ensures residents receive appropriate response type without protocol confusion in the field.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-police_chief-002",
+      "type": "operations_update",
+      "topic": "High-Severity Incoherence Response",
+      "initiative": null,
+      "decision": "Directed OPD command staff to implement enhanced coordination protocols with OARI and community partners in West Oakland, Fruitvale, and East Oakland to address service delivery fragmentation",
+      "quote": "When service systems operate at cross purposes, residents pay the price—OPD is tightening operational coordination to reduce friction on the ground.",
+      "fullStatement": "Chief Rafael Montez has directed OPD command staff to implement enhanced operational coordination protocols in West Oakland, Fruitvale, and East Oakland, where high-severity incoherence between service systems has been flagged. The department will expand OARI co-deployment presence in these corridors, increase patrol supervisor visibility at community partner coordination meetings, and establish daily check-ins between OPD district commanders and OARI field coordinators. These measures address response fragmentation without expanding OPD's role beyond public safety operations. The department does not administer housing, health, or workforce programs—we ensure safe conditions for those who do.",
+      "trackerUpdates": {}
+    }
+  ]
+}

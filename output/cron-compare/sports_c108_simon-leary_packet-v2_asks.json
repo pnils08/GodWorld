@@ -1,0 +1,450 @@
+[
+  {
+    "pop": "POP-00019",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00019\",\"name\":\"Isley Kelley\",\"role\":\"Shortstop, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Simon Leary\",\"question\":\"What have you seen, felt, or understood about \\\"The role change inside the A's sustained record.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"long-view-signal\",\"hood\":\"Jack London\",\"focus\":\"The role change inside the A's sustained record.\",\"src\":\"world_summary_c108.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Isley Kelley — Shortstop, Oakland A's Legend — Rockridge\",\"evidence\":[{\"id\":\"EV-8d8b87c0e5\",\"src\":\"world_summary_c108.md ## Sports\",\"text\":\"The A's record is 3-0.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"The A's record is 3-0.\",\"src\":\"world_summary_c108.md ## Sports\",\"id\":\"F-bc6558cb9bba\"},{\"t\":\"FACT\",\"text\":\"The A's have won 5 straight.\",\"src\":\"world_summary_c108.md ## Sports\",\"id\":\"F-38f287867705\"},{\"t\":\"FACT\",\"text\":\"Isley Kelley — Shortstop, Oakland A's Legend — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00019\",\"id\":\"F-c5b1f326d0eb\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00019",
+        "name": "Isley Kelley",
+        "role": "Shortstop, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Simon Leary",
+        "question": "What have you seen, felt, or understood about \"The role change inside the A's sustained record.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "long-view-signal",
+        "hood": "Jack London",
+        "focus": "The role change inside the A's sustained record.",
+        "src": "world_summary_c108.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-8d8b87c0e5",
+            "src": "world_summary_c108.md ## Sports",
+            "text": "The A's record is 3-0."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's record is 3-0.",
+          "src": "world_summary_c108.md ## Sports",
+          "id": "F-bc6558cb9bba"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's have won 5 straight.",
+          "src": "world_summary_c108.md ## Sports",
+          "id": "F-38f287867705"
+        },
+        {
+          "t": "FACT",
+          "text": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00019",
+          "id": "F-c5b1f326d0eb"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00021",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00021\",\"name\":\"Darrin Davis\",\"role\":\"Left Fielder, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Simon Leary\",\"question\":\"What have you seen, felt, or understood about \\\"The role change inside the A's sustained record.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"long-view-signal\",\"hood\":\"Jack London\",\"focus\":\"The role change inside the A's sustained record.\",\"src\":\"world_summary_c108.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Darrin Davis — Left Fielder, Oakland A's Legend — Laurel\",\"evidence\":[{\"id\":\"EV-17cfcd8965\",\"src\":\"world_summary_c108.md ## Sports\",\"text\":\"The A's record is 3-0.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"The A's record is 3-0.\",\"src\":\"world_summary_c108.md ## Sports\",\"id\":\"F-bc6558cb9bba\"},{\"t\":\"FACT\",\"text\":\"The A's have won 5 straight.\",\"src\":\"world_summary_c108.md ## Sports\",\"id\":\"F-38f287867705\"},{\"t\":\"FACT\",\"text\":\"Darrin Davis — Left Fielder, Oakland A's Legend — Laurel\",\"src\":\"Simulation_Ledger profile for POP-00021\",\"id\":\"F-88d09abd9e26\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00021",
+        "name": "Darrin Davis",
+        "role": "Left Fielder, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Simon Leary",
+        "question": "What have you seen, felt, or understood about \"The role change inside the A's sustained record.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "long-view-signal",
+        "hood": "Jack London",
+        "focus": "The role change inside the A's sustained record.",
+        "src": "world_summary_c108.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "Darrin Davis — Left Fielder, Oakland A's Legend — Laurel",
+        "evidence": [
+          {
+            "id": "EV-17cfcd8965",
+            "src": "world_summary_c108.md ## Sports",
+            "text": "The A's record is 3-0."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's record is 3-0.",
+          "src": "world_summary_c108.md ## Sports",
+          "id": "F-bc6558cb9bba"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's have won 5 straight.",
+          "src": "world_summary_c108.md ## Sports",
+          "id": "F-38f287867705"
+        },
+        {
+          "t": "FACT",
+          "text": "Darrin Davis — Left Fielder, Oakland A's Legend — Laurel",
+          "src": "Simulation_Ledger profile for POP-00021",
+          "id": "F-88d09abd9e26"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00598",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00598\",\"name\":\"Vladimir Gonzalez\",\"role\":\"Right Fielder, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Simon Leary\",\"question\":\"What have you seen, felt, or understood about \\\"The role change inside the A's sustained record.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"long-view-signal\",\"hood\":\"Jack London\",\"focus\":\"The role change inside the A's sustained record.\",\"src\":\"world_summary_c108.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale\",\"evidence\":[{\"id\":\"EV-6bb9862078\",\"src\":\"world_summary_c108.md ## Sports\",\"text\":\"The A's record is 3-0.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"The A's record is 3-0.\",\"src\":\"world_summary_c108.md ## Sports\",\"id\":\"F-bc6558cb9bba\"},{\"t\":\"FACT\",\"text\":\"The A's have won 5 straight.\",\"src\":\"world_summary_c108.md ## Sports\",\"id\":\"F-38f287867705\"},{\"t\":\"FACT\",\"text\":\"Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00598\",\"id\":\"F-80925c703562\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "role": "Right Fielder, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Simon Leary",
+        "question": "What have you seen, felt, or understood about \"The role change inside the A's sustained record.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "long-view-signal",
+        "hood": "Jack London",
+        "focus": "The role change inside the A's sustained record.",
+        "src": "world_summary_c108.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale",
+        "evidence": [
+          {
+            "id": "EV-6bb9862078",
+            "src": "world_summary_c108.md ## Sports",
+            "text": "The A's record is 3-0."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's record is 3-0.",
+          "src": "world_summary_c108.md ## Sports",
+          "id": "F-bc6558cb9bba"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's have won 5 straight.",
+          "src": "world_summary_c108.md ## Sports",
+          "id": "F-38f287867705"
+        },
+        {
+          "t": "FACT",
+          "text": "Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00598",
+          "id": "F-80925c703562"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00001",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00001\",\"name\":\"Vinnie Keane\",\"role\":\"Designated Hitter, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Simon Leary\",\"question\":\"What have you seen, felt, or understood about \\\"The role change inside the A's sustained record.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"long-view-signal\",\"hood\":\"Jack London\",\"focus\":\"The role change inside the A's sustained record.\",\"src\":\"world_summary_c108.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake\",\"evidence\":[{\"id\":\"EV-2730a6df2f\",\"src\":\"world_summary_c108.md ## Sports\",\"text\":\"The A's record is 3-0.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"The A's record is 3-0.\",\"src\":\"world_summary_c108.md ## Sports\",\"id\":\"F-bc6558cb9bba\"},{\"t\":\"FACT\",\"text\":\"The A's have won 5 straight.\",\"src\":\"world_summary_c108.md ## Sports\",\"id\":\"F-38f287867705\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake\",\"src\":\"Simulation_Ledger profile for POP-00001\",\"id\":\"F-2b3e2e3d075f\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Simon Leary",
+        "question": "What have you seen, felt, or understood about \"The role change inside the A's sustained record.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "long-view-signal",
+        "hood": "Jack London",
+        "focus": "The role change inside the A's sustained record.",
+        "src": "world_summary_c108.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "evidence": [
+          {
+            "id": "EV-2730a6df2f",
+            "src": "world_summary_c108.md ## Sports",
+            "text": "The A's record is 3-0."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's record is 3-0.",
+          "src": "world_summary_c108.md ## Sports",
+          "id": "F-bc6558cb9bba"
+        },
+        {
+          "t": "FACT",
+          "text": "The A's have won 5 straight.",
+          "src": "world_summary_c108.md ## Sports",
+          "id": "F-38f287867705"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "src": "Simulation_Ledger profile for POP-00001",
+          "id": "F-2b3e2e3d075f"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

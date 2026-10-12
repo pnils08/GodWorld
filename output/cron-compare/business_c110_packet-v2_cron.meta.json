@@ -1,0 +1,17 @@
+{
+  "desk": "business",
+  "cycle": "110",
+  "model": "openai/gpt-5.6-luna",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 16504,
+  "usageOutputTokens": 2834,
+  "savedFiles": [
+    "output/cron-compare/business_c110_business-desk_packet-v2_openai-gpt-5-6-luna.md"
+  ],
+  "compareAgainst": "output/desk-output/business_c110.md",
+  "durationMs": 29941,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-07T03:50:45.906Z"
+}

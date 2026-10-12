@@ -1,0 +1,867 @@
+# The Bay Tribune Daily News — Cycle 107
+
+## Today’s city record
+
+# World Summary — Cycle 107
+
+**Season:** Winter | **Weather:** 44°F fog, W 8 mph, marine (frontState MARINE), humidity 74, visibility 4
+**Cycle Weight:** high-signal | **Pattern:** strain-trend | **Shock:** shock-flag | **Civic Load:** load-strain
+**Cycle Weight Reason:** 1 high-severity event(s); High event volume (11); Notable weather impact; Very positive sentiment; Civic load strain.
+**Calendar context:** SimYear 3, Month 1, Day 3, Winter, holiday=MLKDay | Sports season: Oaks preseason, A's playoffs | First Friday: false
+
+---
+
+Snapshot: Cycle 107 | Pop 391,510 | Illness 4.9% | Employment 94.1% | Sentiment +0.51 | Weight high-signal | Pattern strain-trend | Shock shock-flag | Load load-strain | Hospital 2 in care (2% load)
+
+## City State
+
+- **Population:** 391,510 | Illness rate 4.9% | Employment 94.1% | Economy stable | Hospital: 2 in care (2% load)
+- **Migration:** 1212 (MigrationDrift 14 this cycle)
+- **Events generated:** 1827 (prior-cycle 2029) | **Citizens aged:** 775 | **Intake processed:** 0
+- **Story seed count:** 56 (prior-cycle 30)
+- **Traffic load:** 1.11 | **Economic influence:** normal
+- **Nightlife volume:** 5 | **Vibe:** game-night | **Movement:** restricted
+- **City sentiment (Riley_Digest.CitySentiment):** +0.51
+- **Domain event counts (11 total):** FAITH 5, INFRASTRUCTURE 2, HEALTH 1, CIVIC 1, BUSINESS 1, CELEBRITY 1
+
+### Neighborhood snapshot (Neighborhood_Map cycle 107)
+
+| Neighborhood | Sentiment | RetailVitality | EventAttractiveness | CrimeIndex |
+|---|---:|---:|---:|---:|
+| Downtown | +0.33 | 10.93 | 29.85 | 1 |
+| Temescal | +0.46 | 10.35 | 26.67 | 0.71 |
+| Uptown | +0.40 | 9.90 | 30.5 | 0.67 |
+| Jack London | +0.44 | 9.52 | 47.13 | 0.79 |
+| Rockridge | +0.45 | 9.19 | 22.26 | 0.43 |
+| Grand Lake | +0.63 | 8.96 | 24 | 0.4 |
+| Chinatown | +0.33 | 8.83 | 26.7 | 0.79 |
+| Fruitvale | +0.47 | 8.21 | 24.89 | 0.89 |
+| KONO | +0.24 | 8.17 | 28.5 | 0.63 |
+| Lake Merritt | +0.45 | 7.60 | 24.48 | 0.74 |
+| Piedmont Ave | +0.38 | 7.42 | 14.31 | 0.33 |
+| Laurel | +0.35 | 7.16 | 19.63 | 0.47 |
+| East Oakland | +0.60 | 6.84 | 19.5 | 0.97 |
+| Adams Point | +0.65 | 6.83 | 17.42 | 0.56 |
+| San Antonio | +0.54 | 6.43 | 19 | 0.72 |
+| Dimond | +0.65 | 6.18 | 14 | 0.57 |
+| Eastlake | +0.60 | 5.77 | 17 | 0.54 |
+| Brooklyn | +0.56 | 5.15 | 12.16 | 0.49 |
+| Glenview | +0.66 | 5.08 | 12 | 0.32 |
+| Ivy Hill | +0.61 | 4.22 | 10 | 0.47 |
+| Baylight District | +0.63 | 3.66 | 14 | 0.79 |
+| West Oakland | +0.34 | 3.53 | 17.43 | 0.97 |
+
+## What Moved (Ripple_Ledger, cycle 107 — 67 ripples)
+
+### trajectory (12)
+- NEIGHBORHOOD_BOOM | Downtown boom sustained — momentum 9/10, the block everyone wants onto | Downtown | mag 7 | targets Downtown
+- NEIGHBORHOOD_BOOM | Temescal boom sustained — momentum 10/10, the block everyone wants onto | Temescal | mag 7 | targets Temescal
+- NEIGHBORHOOD_RISING | Fruitvale turning upward: retail busy, events drawing crowds, people moving in | Fruitvale | mag 5 | targets Fruitvale
+- NEIGHBORHOOD_RISING | Jack London turning upward: retail busy, events drawing crowds, people moving in | Jack London | mag 5 | targets Jack London
+- NEIGHBORHOOD_BOOM | Rockridge boom sustained — momentum 9/10, the block everyone wants onto | Rockridge | mag 7 | targets Rockridge
+- NEIGHBORHOOD_RISING | Chinatown turning upward: retail busy, events drawing crowds, people moving in | Chinatown | mag 5 | targets Chinatown
+- NEIGHBORHOOD_COOLING | Brooklyn cooling off: foot traffic down, storefronts quieter than the rest of the city | Brooklyn | mag 6 | targets Brooklyn
+- NEIGHBORHOOD_COOLING | Glenview cooling off: foot traffic down, storefronts quieter than the rest of the city | Glenview | mag 6 | targets Glenview
+- NEIGHBORHOOD_RISING | KONO turning upward: retail busy, events drawing crowds, people moving in | KONO | mag 5 | targets KONO
+- NEIGHBORHOOD_RISING | Lake Merritt turning upward: retail busy, events drawing crowds, people moving in | Lake Merritt | mag 5 | targets Lake Merritt
+- NEIGHBORHOOD_BOOM | Lake Merritt boom sustained — momentum 9/10, the block everyone wants onto | Lake Merritt | mag 7 | targets Lake Merritt
+- NEIGHBORHOOD_BOOM | Uptown boom sustained — momentum 9/10, the block everyone wants onto | Uptown | mag 7 | targets Uptown
+
+### fame-event (11)
+- fame-rise | Jade Orion — the city is watching: caught the recap at the counter this morning and stayed for the second retelling | Lake Merritt | mag 0.05 | targets POP-00540
+- fame-rise | Theo Banks — the city is watching: walked the perimeter of the Coliseum District Development and tried to picture what it would look like in five years | Uptown | mag 0.05 | targets POP-01056
+- fame-rise | Marisol Rivera — the city is watching: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. | Rockridge | mag 0.05 | targets POP-01062
+- tier-climb | Mina Linas — the city keeps saying the name: Tier 4 -> 3 | Lake Merritt | mag 0.05 | targets POP-00135
+- tier-climb | Melton Neilon — the city keeps saying the name: Tier 3 -> 2 | Temescal | mag 0.05 | targets POP-00170
+- tier-climb | Rick Walker — the city keeps saying the name: Tier 3 -> 2 | Fruitvale | mag 0.05 | targets POP-00198
+- tier-climb | Elio Perez — the city keeps saying the name: Tier 3 -> 1 | West Oakland | mag 0.05 | targets POP-00201
+- tier-climb | Depak Ying — the city keeps saying the name: Tier 3 -> 2 | Rockridge | mag 0.05 | targets POP-00210
+- tier-climb | Daniel Cloak — the city keeps saying the name: Tier 4 -> 3 | West Oakland | mag 0.05 | targets POP-00722
+- tier-climb | Yuki Ji — the city keeps saying the name: Tier 4 -> 3 | Lake Merritt | mag 0.05 | targets POP-00783
+- tier-climb | Darius Clark — the city keeps saying the name: Tier 4 -> 3 | West Oakland | mag 0.05 | targets POP-00961
+
+### migration (9)
+- CITIZEN_RELOCATED | Carmen Delaine moved from Chinatown to West Oakland — moving up from Chinatown | West Oakland | mag 5 | targets POP-00011
+- CITIZEN_RELOCATED | Simone Ellis moved from Chinatown to Lake Merritt — moving up from Chinatown | Lake Merritt | mag 5 | targets POP-00039
+- CITIZEN_RELOCATED | Andre Lee moved from Temescal to Jack London — moving up from Temescal | Jack London | mag 5 | targets POP-00311
+- CITIZEN_RELOCATED | Bethany Foster moved from Jack London to Lake Merritt — moving up from Jack London | Lake Merritt | mag 5 | targets POP-00356
+- CITIZEN_RELOCATED | Ron Arenson moved from Laurel to Baylight District — moving up from Laurel | Baylight District | mag 5 | targets POP-00367
+- CITIZEN_RELOCATED | The Brooks household (2) moved from Temescal to Jack London — moving up from Temescal | Jack London | mag 5 | targets POP-00709
+- CITIZEN_RELOCATED | Debbie Kaplan moved from Jack London to Lake Merritt — moving up from Jack London | Lake Merritt | mag 5 | targets POP-00719
+- CITIZEN_RELOCATED | Erica Faulkner moved from Fruitvale to Lake Merritt — moving up from Fruitvale | Lake Merritt | mag 5 | targets POP-00887
+- CITIZEN_RELOCATED | Tariq Harris moved from West Oakland to Chinatown — priced out of West Oakland | Chinatown | mag 5 | targets POP-01112
+
+### initiative-implementation (6)
+- retail/sentiment/nightlife | West Oakland Stabilization Fund is disbursement-active — ongoing economic effects in West Oakland | West Oakland | mag 1 | targets West Oakland
+- sentiment/communityEngagement/nightlife | Oakland Alternative Response Initiative is implementation-active — ongoing safety effects in West Oakland, Fruitvale, East Oakland | mag 0.8 | targets West Oakland|Fruitvale|East Oakland
+- retail/traffic/sentiment | Fruitvale Transit Hub Phase II — Visioning is design-phase — ongoing transit effects in Fruitvale | Fruitvale | mag 0.2 | targets Fruitvale
+- sentiment/communityEngagement/publicSpaces | Temescal Community Health Center is construction-active — ongoing health effects in Temescal | Temescal | mag 0.8 | targets Temescal
+- retail/nightlife/traffic/sentiment | Baylight District — Final Council Vote is construction-planning — ongoing sports effects in Jack London, Downtown | mag 0.3 | targets Jack London|Downtown
+- sentiment/communityEngagement/retail | Oakland Youth Apprenticeship Pipeline is operational — ongoing workforce effects in West Oakland, East Oakland, Fruitvale | mag 0.9 | targets West Oakland|East Oakland|Fruitvale
+
+### faith-event (5)
+- crisis_response | congregation opens doors for community support | Downtown | mag 0.02 | targets Telegraph Presbyterian Fellowship
+- holy_day | congregation celebrates Epiphany | Lake Merritt | mag 0.01 | targets Cathedral of the Living Word
+- holy_day | traditional Epiphany rituals observed | Fruitvale | mag 0.01 | targets St. Esperanza Parish
+- community_program | seniors lunch program marks milestone | Downtown | mag 0.01 | targets Telegraph Presbyterian Fellowship
+- community_program | food pantry serves neighbors in need | East Oakland | mag 0.01 | targets Foothill Baptist Tabernacle
+
+### economic-event (5)
+- carryover | carryover: cycle 1 of 3 | Jack London | mag 8 | targets Jack London
+- carryover | carryover: cycle 2 of 3 | Jack London | mag 9.6 | targets Jack London
+- carryover | carryover: cycle 2 of 4 | West Oakland | mag -8 | targets West Oakland
+- sector-impact:services/business | Gridiron Analytics added 2 employees | Temescal | mag 6 | targets BIZ-00008
+- sector-impact:entertainment/food/retail | Playoff game spending | Jack London | mag 9.6 | targets Jack London
+
+### sports (4)
+- sentiment | A's W2 [player-energy]; A's W2 [playoffs]; Oaks W0 [pre-season] | mag 0.094
+- traffic/retail/nightlife/communityEngagement | {"traffic":0.28,"retail":0.323,"nightlife":0.149,"communityEngagement":0.15} | Fruitvale | mag 0.28 | targets Fruitvale
+- traffic/retail/nightlife/communityEngagement | {"traffic":0.18,"retail":0.09800000000000002,"nightlife":0.125,"communityEngagement":0.15} | Downtown | mag 0.18 | targets Downtown
+- game-night-texture | The town watched — game night shaped 74 citizen day(s) (streak W1) | mag 74 | targets POP-00013|POP-00014|POP-00015|POP-00037|POP-00054|POP-00060|POP-00107|POP-00149|POP-00166|POP-00178|POP-00179|POP-00203|POP-00245|POP-00271|POP-00281|POP-00285|POP-00322|POP-00329|POP-00344|POP-00346|+54 more
+
+### approval-shift (4)
+- approval/district-sentiment | West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub Phase II — Visioning advanced (+2); Temescal Community Health Center sitting (0, capped); Baylight District — Final Council Vote sitting (0, capped); Oakland Youth… | CITYWIDE | mag 3
+- approval/district-sentiment | West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth Apprenticeship Pipeline advanced (+2); level target 57 (mood +1.43 (district 1.38, city 1.48), district -0.84 vs middle) → +0 | D1 | mag 2 | targets West Oakland|Brooklyn
+- approval/district-sentiment | Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub Phase II — Visioning advanced (+2); Oakland Youth Apprenticeship Pipeline advanced (+1); level target 58 (mood +1.45 (district 1.42, city 1.48), district -0.64 vs middle) → +0 | D3 | mag 3 | targets Fruitvale|San Antonio
+- approval/district-sentiment | Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth Apprenticeship Pipeline advanced (+2); level target 57 (mood +1.35 (district 1.22, city 1.48), district -0.69 vs middle) → +0 | D5 | mag 2 | targets Baylight District|East Oakland
+
+### city-event (4)
+- city-event | The Varek Family Block Party (West Oakland) | West Oakland | mag 0.02
+- city-event | Fruitvale Unity Gathering (Fruitvale) | Fruitvale | mag 0.02
+- city-event | The Paulson Line Founding Celebration (Jack London) | Jack London | mag 0.02
+- city-event | Jack London Misty Morning Coffee Club (Jack London) | Jack London | mag 0.02
+
+### lifestyle-sighting (3)
+- sighting | Rico Valez spotted at Canopy Market | Rockridge | mag 0.01 | targets BIZ-00168
+- sighting | GameGirl Gia spotted at Telegraph Press | KONO | mag 0.01 | targets BIZ-00157
+- sighting | Former A's Star Rodriguez spotted at KONO Kitchen | KONO | mag 0.01 | targets BIZ-00046
+
+### edition-coverage (2)
+- traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity | Edition coverage lifted the city: traffic +0.05, retail +0.21, nightlife +0.13, publicSpaces -0.03, communityEngagement +0.086, culturalActivity +0.06 | mag 0.05
+- sentiment | prior-cycle coverage ratings × sentimentWeight × 0.015, clamped ±0.20 | mag 0.1275
+
+### neighborhood-fold (1)
+- fold-applied/initiative-implementation | Initiative work landed in 5 neighborhood(s): Downtown, Jack London, West Oakland, Temescal, Fruitvale | mag 0.126 | targets Downtown|Jack London|West Oakland|Temescal|Fruitvale
+
+### faith-join (1)
+- congregation-growth | 1 citizen(s) joined the congregation at Lake Merritt Mindfulness Sangha | Downtown | mag 0.01 | targets POP-00180
+
+## Who Lived It (cycle 107)
+
+### Promotion (14)
+- POP-01100 Marco Davis — Emerged into Tier-4 in Brooklyn (Brooklyn)
+- POP-01101 Mateo Baker — Emerged into Tier-4 in Ivy Hill (Ivy Hill)
+- POP-01102 Colin Perez — Emerged into Tier-4 in Glenview (Glenview)
+- POP-01103 Ebony Mendoza — Emerged into Tier-4 in Ivy Hill (Ivy Hill)
+- POP-01104 Nala Okonkwo — Emerged into Tier-4 in Dimond (Dimond)
+- POP-01105 Rashida Foster — Emerged into Tier-4 in Eastlake (Eastlake)
+- POP-01106 Priya Chandrasekaran — Added to Simulation_Ledger as Tier 3. Founder, Ridgeline Ventures (BIZ-00007) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID).
+- POP-01107 Daniel Yoon — Added to Simulation_Ledger as Tier 3. Co-Founder, Gridiron Analytics (BIZ-00008) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID).
+- POP-01108 Christine Nakamura — Added to Simulation_Ledger as Tier 3. Co-Founder, Gridiron Analytics (BIZ-00008) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID).
+- POP-01109 Marcus Tan — Added to Simulation_Ledger as Tier 3. Founder, Oakmesh Systems (BIZ-00009) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID).
+- POP-01110 Amara Osei — Added to Simulation_Ledger as Tier 3. Founder, Portside Bio (BIZ-00010) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID). Business_Ledger cell carries the honorific "Dr." — ledger First/Last omit it per naming convention.
+- POP-01111 Jasmine Torres — Added to Simulation_Ledger as Tier 3. Founder, Tenth Street Digital (BIZ-00011) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID).
+- POP-01112 Tariq Harris — Added to Simulation_Ledger as Tier 4. GC emergence promotion — EmergenceCount 3, C107 (engine.58 lottery)
+- POP-01113 Quinn Adeyemi — Added to Simulation_Ledger as Tier 4. GC emergence promotion — EmergenceCount 3, C107 (engine.58 lottery)
+
+### Death (1)
+- POP-00622  — died after a sudden illness
+
+### Health (2)
+- POP-00449  — recovered from a winter illness
+- POP-00623  — took time to recover from the flu
+
+### Stabilized (1)
+- POP-00194  — Yu Zen has stabilized and is no longer in critical condition
+
+### Relationship (6)
+- POP-00023 Gregory Mims — kept interactions brief during heavy fog (West Oakland)
+- POP-00134 Brianna Lee — reconnected with an old friend (Laurel)
+- POP-00135 Mina Linas — felt more comfortable reaching out to others (Lake Merritt)
+- POP-00195 Lonzo Jailon — limited social activity due to winter mood (Lake Merritt)
+- POP-00197 Rigo Ryno — felt distant from people around them (Temescal)
+- POP-00207 Owen Tower — discussed recent city events with someone they knew (Fruitvale)
+
+### Household (6)
+- POP-00002 Amara Keane — settled into a quiet evening on the couch with their partner (Grand Lake)
+- POP-00170 Melton Neilon — felt slight shift in home mood due to recent events (Temescal)
+- POP-00183 Toby Lamont — heard music from a neighbor's gathering (Fruitvale)
+- POP-00184 Brooklyn Nguyen — tuned into postseason coverage as a household (Fruitvale)
+- POP-00185 Lila Patty — felt positive atmosphere inside the home (West Oakland)
+- POP-00189 Blair Patel — felt slight shift in home mood due to recent events (Jack London)
+
+### Households formed (36: solo 25, couple 11)
+- HH-0107-F001 | solo | head POP-00010 | Chinatown
+- HH-0107-F002 | solo | head POP-00016 | Rockridge
+- HH-0107-F003 | solo | head POP-00047 | Lake Merritt
+- HH-0107-F004 | solo | head POP-00103 | Uptown
+- HH-0107-F005 | solo | head POP-00173 | Fruitvale
+- HH-0107-F006 | solo | head POP-00176 | West Oakland
+- HH-0107-F007 | solo | head POP-00251 | Chinatown
+- HH-0107-F008 | solo | head POP-00264 | Fruitvale
+- HH-0107-F009 | solo | head POP-00280 | West Oakland
+- HH-0107-F010 | solo | head POP-00312 | Rockridge
+- HH-0107-F011 | solo | head POP-00330 | Piedmont Ave
+- HH-0107-F012 | solo | head POP-00338 | Uptown
+- HH-0107-F013 | solo | head POP-00431 | Uptown
+- HH-0107-F014 | solo | head POP-00452 | Lake Merritt
+- HH-0107-F015 | solo | head POP-00467 | Uptown
+- _+21 more — Household_Ledger FormedCycle 107_
+
+## Civic Decisions
+
+**No city-hall section for this cycle yet.** The `## /city-hall` section of `output/production_log_c107.md` is not present (city-hall runs after this skill in the chain).
+
+When city-hall runs, this section will point at its civic section. Sift should not attempt to derive civic decisions in its absence — fail loud upstream instead.
+
+## Sports (literal `Oakland_Sports_Feed.StoryAngle` column per row — current cycle + 2 prior)
+
+### C107 (4 entries)
+
+- **Oaks — season-state (preseason):** Wilson Shepard, Adash Stanley (PG), AJ Dybantsa (SF)
+  - StoryAngle: The Oaks are a full go for opening night , starting 5 announced.
+  - Notes: Wilson Shepard meet with the media to address his excitement fot the seaon and is eager to show Oakland what they have in the Oaks. Shepard shared that he felt the Oaks will catch people off guard this season. Shepard shared that Adash Stanley and AJ Dybantsa would be full go for opening night next cycle and confirmed his starting 5 would be ; Adash Stanley, Dillon Brooks, AJ Dybantsa, Jerami Grant, Wendell Carter.
+  - Stats: -
+  - Record 0-0, Streak W0, Mood hungry, FanSentiment high, Neighborhood Downtown
+- **A's — game-result (playoffs):** Travis Coles (SP), Clark Saryan (RP), Vladimir Gonzalez (RF), Desmond Morton (LF)
+  - StoryAngle: A's take game 1 vs Yankees, A's 5 vs Yankees 4
+  - Notes: Game 1 of the ALDS was a 14 inning instant classic. Travis Coles took the ball in game 1 and went 6 innings while surrendering 9 hits and 2 runs. Not his dominant norm but more than giving the team a chance to win. Clark Saryan made is MLB debut , after a suprising playoff roster add, went 2 innings in relief striking out 5 hitters. Playing hero on the offensive side , Vladimir Gonzalez with a 2-run homerun and Desmond Morton with a solo homerun and the walk off single in the bottom of the 14th to secure the game 1 win.
+  - Stats: Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI
+  - Record 1-0, Streak W1, Mood electric, FanSentiment high, Neighborhood Eastlake
+- **A's — game-result (playoffs):** Desmond Morton (LF), Mark Aitken (1B)
+  - StoryAngle: A's take game 3 vs Yankees, A's 8 vs Yankees 4
+  - Notes: After a game 2 loss that saw the A's 4 lost to the Yankees 5, the A's bounce back in game 3 to take the series lead back 2-1. Going on the road and to grab game 3 in NY is especially crucial in a best of 5 series. Playing the role hero in game 3 is the same player who filled that role in game 1, Desmond Morton. Desmond Morton would be responsible for 4 rbi and also hit his 2nd homerun of the post season. Pending free agent and A's icon Mark Aitken also hit a homerun in this game. 
+  - Stats: Henry Rivas/6IP/3H/2ER/4SO, Desmond Morton/2-4/1HR/4RBI, Mark Aitken/2-4/1HR/1RBI
+  - Record 2-1, Streak W1, Mood locked-in, FanSentiment high, Neighborhood Glenview
+- **A's — game-result (playoffs):** John Ellis (SP), Eric Taveras (2B)
+  - StoryAngle: A's close out the ALDS in NY , As 4 vs Yankees 0
+  - Notes: John Ellis dazzles in game 4 pitching a complete game shut out and abruptly ending the Yankees season. In what may very well be John Ellis most dominate performance of his career he chose the most oppurtune time to but it on display. In a close out game in NY, Ellis is making sure everyone knows he is not an after thought in this stacked pitching rotation.  Eric Taveras would provide the offense punch hitting his 2nd homerun of the series. The A's will move onto the ALCS next where they will face the 2nd best team in baseball this season the Minnesota Twins. The season series was split 3-3
+  - Stats: John Ellis/9IP/4H/0ER/9SO, Eric Taveras/1-4/1HR/1RBI
+  - Record 3-1, Streak W2, Mood electric, FanSentiment high, Neighborhood Fruitvale
+
+### C106 (6 entries)
+
+- **Oaks — game-result (preseason):** AJ Dybantsa (SF)
+  - StoryAngle: The Oaks end the preseason 0-4 but are optimistic for the season ahead
+  - Notes: AJ Dybansta and Adash Stanley both didnt play in the Oaks final preseason game and could only watch the Oaks lose their 4th straight and finishing the preseaon 0-4. Coach Shepard assured that both AJ and Adash were precautionary measures and would be ready for opening night in cycle 108. Shepard stated that he was hopeful to get the franchise as well as his own first W in preseason but reminded everyone of the work Paulson and Abraham had put into the team and the veteran presence in the regular season is the true proving ground. Shepard was confident in stating he felt the team would have its growing pains but would perform well as an expansion team in year 1.
+  - Stats: -
+  - Record 0-4, Streak L4, Mood hungry, FanSentiment medium, Neighborhood Jack London
+- **Oaks — player-feature (preseason):** Adash Stanley (PG)
+  - StoryAngle: Adash Stanley shows up at Vinnie Keane Firehouse 29 West Oakland Baseball Academy
+  - Notes: Adash Stanley was a guest this cycle at Vinnie Keane Firehouse 29 West Oakland Baseball Academy. Adash was there to work on some dribbling drills and his go to work outs. Vinnie emphasized to the youth camp that playing multiple sports allows you to strenghten different muscle groups. The camp was most enthusied with the free throw competition and home run derby between Keane and Stanley. The camp was a massive success with the youth and the comraderie between 2 local athletes is what makes the city great
+  - Stats: -
+  - Record -, Streak -, Mood electric, FanSentiment high, Neighborhood West Oakland
+- **A's — player-feature (playoffs):** Martin Richards (3B), Peter Busch (OF), Jose Baez (SP), Thomas Gasper (LF), Buford Park (3B), Bryan Franco (SS), Leo Lamar (RP), Cy Newell (SP), Agustin Rodriguez (SS)
+  - StoryAngle: Refelecting on the players traded this past season
+  - Notes: Now that the season has come to close we like to take a look back at the players traded this past season and how their seasons played out and who won the trade. Starting with the most controversial is Martin Richards whom was traded at the deadline for a (SS) prospect who days later broke his foot which ended his season. Richards on the other hand , finished with his 2nd best season of his carrer. At age 30 , Richards still has good years remaining for the Mets. Mets won the trade as of now. The second most controversial was trading playoff hero Peter Busch. Busch was shipped to Cleveland with young arm Jose Baez for a top 20 2B prospect Liam Wade. Also, you can see this as A's choosing Vladamir Gonzalez over Busch. In that framing the trade looks a little better on paper but lets not sugar coat this, Peter Busch is a star. Finishing in top 10 in MVP voting shouldnt sit well with A's fans and the thought of Danny Horn and Peter Busch in the same lineup is tough to get over.  Vladamir is not to be overlooked, however, as he put his best stats of his career up, so the choice had nuiance. Jose Baez struggles mightly and was removed from the starting rotation. Cy Newell and Agustin Rodriguez going to Washington for Travis Coles doesnt need much analysis, Travis Coles is the best pitcher in the MLB. Washington didnt draw a dud however as Cy Newell proved to be a top of the rotation starter, and Agustin Rodriguez started slow but finished strong and is a legit everyday SS with allstar potential. Thomas Gasper didnt show too well so far with the Sox, Buford Park proved to be a consisten everyday 3B for the Yankees and shows a ton of potential, Leo Lamar struggled with the Yankees and Bryan Franco never logged a MLB inning with the Yankees after flashy power in his brief time with the A's. Ultimately A's fared very well in winning the most games in MLB history, Losing Richards and Busch is tough but the moves were of necessity rather than misguided.
+  - Stats: Peter Busch/656ab/183h/39hr/123rbi/124ko/33sb/.279avg. Cy Newel/16-8/2.84era/169ko, Agustin Rodriguez/605ab/164h/20hr/90rbi/.271avg, Buford Park/334ab/101h/13hr/.302avg
+  - Record 127-35, Streak W0, Mood reflective, FanSentiment high, Neighborhood Jack London
+- **A's — player-feature (playoffs):** Travis Coles (SP), Arturo Ramos (SP)
+  - StoryAngle: Who you starting game 1 of the playoffs?
+  - Notes: Whom should get the game 1 start in the playoffs? Arturo Ramos was your Ace starting pitcher all season and put up gawdy numbers, but Travis Coles won the Cy Young with equally impressive stat lines.
+  - Stats: Arturo Ramos/212.2IP/2.41era/23-1/182ko/41bb/4.6war, Travis Coles/215IP/2.72era/22-4/254ko/39bb/6.2war
+  - Record —, Streak W0, Mood dominant, FanSentiment high, Neighborhood Baylight District
+- **A's — roster-move (playoffs):** JR Rosado (OF), Ian Devine (RP), Clark Saryan (CL), Julio Valencia (CL), Mariano Rosales (CL)
+  - StoryAngle: Playoff Rosters set
+  - Notes: Playoff rosters set for first round and surprisingly veteran reliever Ian Devine was kept off, Taking his place rookie Clark Saryan, who is making his MLB debut in the playoffs. A's now carry 3 closers on their roster, Julio Valencia, rookie who was called up this season and the official closer Mariano Rosales. Also rookie JR Rosado , who faired decent this season, was left off. 
+  - Stats: see As roster tab
+  - Record 0-0, Streak W0, Mood confident, FanSentiment high, Neighborhood Dimond
+- **A's — team-update (playoffs):** Benji Dillon (RP), Vinnie Keane (DH), Isley Kelley (SS), Mark Aitken (1B), Darrin Davis (DH)
+  - StoryAngle: Oakland A's will play host to the New York Yankees in the ALDS
+  - Notes: The stage is set for the ALDS 1st round for the A's as they will face the NY Yankees. #1 seed. A's will be the home team as the #4 NYY will try to steal the homefield avantage. The A's core dynasty legends will take one last swing at it.
+  - Stats: see As roster tab
+  - Record 0-0, Streak W0, Mood confident, FanSentiment high, Neighborhood Jack London
+
+### C105 (8 entries)
+
+- **Oaks — game-result (preseason):** Dame Sarr (SG), Coen Carr (SG), Wilson Shepard (Coach)
+  - StoryAngle: The Oaks drop to 0-3 in preason while Stanley and Dybantsa sit for precautionary measures. 
+  - Notes: The Oaks lost their 3rd straight preseason game, albeit while AJ Dybantsa and Adash Stanley (PG) did not participate.  Coach Shepard shared that both sitting were percautionary measures at best. Stanley had left last game at half after jamming his non shooting wrist, while unclear on AJ but reports have been under the weather rather than injury. Whil AJ sat his fellow rookie recent drafties had the oppurtunity to get more touches. Coen Carr showed some touch draining 3 threes and scoring 14pts. Dame Sarr had a tougher time finding his way contributing 7pts but flashed on D with 3 steals.
+  - Stats: Dame Sarr 7pts/3reb/3stls, Coen Carr 14pts/3-4 3pt
+  - Record 0-3, Streak L3, Mood frustrated, FanSentiment medium, Neighborhood Baylight District
+- **A's — game-result (late-season):** Benji Dillon (SP), Vinnie Keane (2B), Mark Aitken (1B), Isley Kelley (SS)
+  - StoryAngle: A Farewell Gone Well:Vinnie Keane Benji Dillon
+  - Notes: The farewell season reaches its final regular season curtain call as the As play host to the NL's top team in the Rockies. As Vinnie Keane HOF career comes to its close a legacy that reshaped Oakland stands to honor it. Manager Deacon Seymour in his rookie campaign appeared to call all the right shots as the As rewrote the history books with the most single wins in a season finishing 127-35. Seymour had a few more flawless decisions ready for the final game. Benji Dillon would return to the starting rotation one last time as an A starter , Vinnie Keane would start at 2nd base in his final regular season game. What would unfold next could not have been imagined. Benji Dillon would give up 2 hits, strike out 8 in a W. Vinnie Keane would go 4-5 and in his very last at bat hit a towering 3 run home run into the left field bleachers. Fellow pillar Mark Aitken would hit 2 homeruns, while his FA is still inpending, Isley Kelley would fall short of hitting a homerun and ends the season sitting at 499 career homeruns, Darrin Davis after another injury shortened season follow up his previous season MVP campaign with a solid year, Danny Horn , Eric Taveras Ernesto Quintero all chipped in with a homerun of their own. For a sold out crowd that seem to be in a standing ovation more than a seated position, and chanting MVP  to most of the roster , they were repaid with the adoration with a 17-0 whopping of the Rockies
+  - Stats: Benji Dillon, 5.1 IP/8K/2H, Vinnie Keane 4-5/HR/2B/3RBI, Mark Aitken 2HR/6RBI
+  - Record 127-35, Streak W2, Mood reflective, FanSentiment high, Neighborhood Jack London
+- **A's — player-feature (late-season):** Travis Coles (SP)
+  - StoryAngle: Travis Coles secures his place in A's lore , while fans look to his arm to carry the torch from a era ending in Benji Dillon
+  - Notes: After a massive trade this past off-season that senf 3 top prosects to Washington for a budding star in Travis Coles there was reason to perhaps feel As overpaid. Then the season played out and the As got a steal. While touting the greatest positional player in Danny Horn, the A's may very well have the greatest arm in the league now as well. This seasons accolades; CY Young, 2nd in MVP voting, 254 strikeouts to lead MLB, 4 complete games, 6.2 WAR
+  - Stats: Travis Coles, 215 IP/2.72era/22-4 w-l/254 ko's/39 bb
+  - Record 127-35, Streak W2, Mood electric, FanSentiment high, Neighborhood Rockridge
+- **A's — player-feature (late-season):** Danny Horn (CF)
+  - StoryAngle: Danny Horn is the greatest MLB player on the planet
+  - Notes: Arguably the best Athlete on the planet Danny Horn put up historic number while collecting the following awards; MVP, Hank Aaron Award, 4th All-Star appearance, 2nd Silver Slugger, Batting Title, Home-Run Champion, top3 in gold glove voting, lead league in hits, doubles, homeruns, runs, stolen bases (80), Slug%, OPS,
+  - Stats: Danny Horn 621ab/0.338avg/210h/56hr/113rbi/80sb        
+  - Record 127-35, Streak W2, Mood electric, FanSentiment high, Neighborhood Dimond
+- **A's — player-feature (late-season):** Arturo Ramos (SP), Henry Rivas (SP), John Ellis (SP), Pablo Almanzar (SP), Carmen Mesa (SP)
+  - StoryAngle: As Pitching rotation is stellar all season
+  - Notes: The As just finished a historic season shattering single season win totals along the way. The A's pitching rotation was the main catalyst for this success and the rotation operated at most times like a stable of 5 Aces. Arturo Ramos who started the season as the #1 starter and A's ace never let that go as he finished 2nd in Cy Young voting behing teammate Travis Coles. Arturo Ramos now in his 3rd year started his carrer as rookie of the year and added his 3rd straight All-Star nod this year. Ramos carrer is off to a impressive start with a record of 59-15 and an era sitting at 2.79, Henry Rivas whos season had a brief stint on the DL still finished strong at 11-4, John Ellis who gets little attention for his mild mannered approach but going 20-3 this seaon after going 16-6 last season is low key ace material, and then you have the rookie calls up that both performed well, When Rivas went down Carmen Mesa stepped in and went a modest 5-3 over that span and showing great rotation potential, but in a late seasom move to give Benji Dillon rest from and prepare for a playoff run , step in Pablo Almanzar, who throws a no-hitter in his debut in NY and follows that up with a 2 hit shutout for the home crowd ending his last seasom spark 2-0 with 1.32 era. Question getting tougher now on whom makes the playoff rotation.
+  - Stats: see As roster tab
+  - Record 127-35, Streak W2, Mood electric, FanSentiment high, Neighborhood Fruitvale
+- **A's — player-feature (late-season):** Vinnie Keane (3B)
+  - StoryAngle: Vinnie Keane : How Do You Like Them Apples..
+  - Notes: Vinnie Keane final regular seaon came to close and will forever being Oaklands. In a season full of success stories for the A's the constant amongst them all has been Vinnie. Undrafted to Undeniable is quite the arc for any athlete but to also become a leading force is the community and all the money an oppurtunity with his wife Amara may outshine his on the field contributions. Whether Vinnie remains with the A's or walks off to his Philantrophy he has earned either path and knowing Vinnie he may just take them both. Citizens now get to reflect on the favorite Vinnie moments. While Vinnie will suit up for one last playoff run and try to cap this perfect farewell season with the main prize,
+  - Stats: Vinnie Keane (career stats) 8229 AB / 2362 hits / 436 homeruns / 1321 rbi / .287 avg / .523 slg / .975 fld% / 71.4 WAR / 1x MVP / 7x All-Star / 3x Gold Glove / 5x Silver Slugger / 3x Homerun Derby Champion / 1x Homerun Champion / 1x Playoff MVO
+  - Record 127-35, Streak W2, Mood electric, FanSentiment high, Neighborhood Grand Lake
+- **A's — player-feature (late-season):** Benji Dillon (SP)
+  - StoryAngle: Benji Dillon : The Golden Arm era come to a close
+  - Notes: Benji Dillon historic run with the A's likley closed its final regular season start. Its unclear if Benji will decide to retire or look to pitch another season after this, but thing is for certain. Benji is a first ballot Hall of Famer. Benji has been the best left handed arm in the last decade or so and adds himself to one of the greatest pitchers of all time.
+  - Stats: Benji Dillon (career stats) 554 GS / 227-140 / 3113 IP / 3545 KOs / 3.63 ERA / 1.3 WHIP / 3 no hitters / 75.5 WAR / 5x CY Young / 5x All-Star / ROY
+  - Record 127-35, Streak W2, Mood electric, FanSentiment high, Neighborhood Rockridge
+- **A's — team-update (playoffs):** Deacon Seymour (Manager)
+  - StoryAngle: The As now wait on the outcome of the Wild Card round to host ALDS. A's tickets are the hottest ticket in town
+  - Notes: The A's finish with the top record in the MLB 127-36, Twins 107-55, Rockies 100-62. The A's will wait for the winner of Yankees vs Rays and host the ALDS. Deacon Seymour hinted that Travis Coles may get the start in game 1 over Arturo Ramos.
+  - Stats: Deacom Seymour wins Manager of the Year in his rookie campaign
+  - Record 0-0, Streak -, Mood electric, FanSentiment high, Neighborhood Jack London
+
+## Evening Texture (Riley_Digest cycle 107)
+
+- **Famous people spotted:** Rico Valez, GameGirl Gia, Former A's Star Rodriguez
+- **Restaurants:** **OakHouse** (Rockridge), **Dockhouse BBQ** (Jack London), **Harborline Grill** (Jack London)
+- **Fast food:** **SpeedyBurger** (Downtown)
+- **Nightlife:** **Dragon Gate Lounge** (Chinatown), **Piedmont Pub** (Piedmont Ave). Volume 5, vibe game-night, movement restricted. Weather impact 1.30.
+- **City events:** The Varek Family Block Party, Fruitvale Unity Gathering, The Paulson Line Founding Celebration, Jack London Misty Morning Coffee Club
+- **Evening media TV:** **Civil Rights Special**, **Community Stories**, **Late Weather Watch**, **Late Shift Live**, **Lake Merritt Laughs**, **Jack London Ballpark Stories**, **One-on-One with Mark Aitken (1B)**
+- **Evening media movies:** **Voice of Change**, **Neighborhood Tales**, **Storm Window**, **Fog Harbor**, **Rising Star**, **The Closer**
+- **Sports broadcast:** Oakland Sports Tonight - Playoff Special
+- **Streaming trend:** civil rights documentaries
+- **Food trend:** Playoff tension dining - sports bar surge
+
+## World Events (cycle 107 — 11 total)
+
+**High-severity:**
+- **CIVIC — crisis-spike — Piedmont Ave:** CIVIC event (impactScore 55)
+
+**Medium-severity:**
+- **INFRASTRUCTURE — texture — (no neighborhood):** pothole eruption
+- **INFRASTRUCTURE — texture — (no neighborhood):** water-pressure drop
+- **BUSINESS — texture — (no neighborhood):** food poisoning complaint
+- **CELEBRITY — texture — (no neighborhood):** influencer filming
+- **FAITH — crisis_response — Downtown:** Telegraph Presbyterian Fellowship: congregation opens doors for community support
+
+**Low-severity:**
+- **HEALTH — crisis-spike — Adams Point:** HEALTH event (impactScore 15)
+- **FAITH — holy_day — Lake Merritt:** Cathedral of the Living Word observes Epiphany
+- **FAITH — holy_day — Fruitvale:** St. Esperanza Parish observes Epiphany
+- **FAITH — community_program — Downtown:** Telegraph Presbyterian Fellowship: seniors lunch program marks milestone
+- **FAITH — community_program — East Oakland:** Foothill Baptist Tabernacle: food pantry serves neighbors in need
+
+## Chaos Events (Chaos_Cars, cycle 107 — 12 total)
+
+| Vehicle | Outcome | Target | Metric | Magnitude | Floor fired |
+|---|---|---|---|---|---|
+| mail_truck | vital_document_delivered | business BIZ-00162 | Annual_Revenue | 1.68 | FALSE |
+| oari_van | welfare_check | neighborhood Glenview | Sentiment | 0.04 | FALSE |
+| mail_truck | lost_package | business BIZ-00172 | Annual_Revenue | 2.8 | FALSE |
+| fire_engine | minor_fire | business BIZ-00055 | Annual_Revenue | -15.22 | FALSE |
+| garbage_truck | missed_pickup | business BIZ-00006 | Annual_Revenue | -4.24 | FALSE |
+| pge_truck | power_outage_restored | neighborhood Ivy Hill | Sentiment | -0.07 | FALSE |
+| garbage_truck | sanitation_strike_delay | neighborhood West Oakland | Sentiment | -0.09 | FALSE |
+| garbage_truck | sanitation_strike_delay | business BIZ-00044 | Annual_Revenue | -7.11 | FALSE |
+| building_inspector | forced_temporary_closure | business BIZ-00174 | Annual_Revenue | -6.06 | FALSE |
+| garbage_truck | sanitation_strike_delay | business BIZ-00041 | Annual_Revenue | -3.49 | FALSE |
+| cop_car | pulled_over_warning | neighborhood Grand Lake | CrimeIndex | -0.08 | FALSE |
+| building_inspector | passed | business BIZ-00062 | Annual_Revenue | -14.86 | FALSE |
+
+**Narrative seeds:**
+- pge_truck → Ivy Hill: Lights flicker back after hours dark — relief, and the question of why it went out.
+- garbage_truck → West Oakland: Bags piling at the curb — a sanitation delay the whole block can smell.
+- garbage_truck → BIZ-00044: Bags piling at the curb — a sanitation delay the whole block can smell.
+- building_inspector → BIZ-00174: Shuttered pending compliance — staff sent home, regulars turned away at the door.
+- garbage_truck → BIZ-00041: Bags piling at the curb — a sanitation delay the whole block can smell.
+
+## Three-Cycle Trends (C105–C107)
+
+- **Cycle weight:** C105 high-signal → C106 high-signal → C107 high-signal
+- **Civic load:** C105 load-strain → C106 minor-variance → C107 load-strain
+- **Pattern flag:** C105 strain-trend → C106 strain-trend → C107 strain-trend
+- **Shock flag:** C105 shock-flag → C106 shock-flag → C107 shock-flag
+- **Migration drift:** C105 18 → C106 1 → C107 14
+- **Events generated:** C105 2081 → C106 2029 → C107 1827
+- **Story seed count:** C105 67 → C106 30 → C107 56
+- **City sentiment:** C105 0.84 → C106 0.25 → C107 0.51
+
+## Engine Review Findings (from `output/engine_audit_c107.json`)
+
+**Total patterns:** 25 (1 high, 9 medium, 15 low)
+
+**Ailments (11):** math-imbalance 7, repeating-event 2, coverage-gap 1, production-imbalance 1
+**Improvements (13):** improvement 13
+**Incoherence (1):** incoherence 1
+
+### High-Severity Patterns
+
+**incoherence** — Initiative "Oakland Alternative Response Initiative" (implementation-active, safety) but 3 affected neighborhoods show contradicting CrimeIndex
+- cyclesInState: 0
+- Initiatives: INIT-002
+- Neighborhoods: West Oakland, Fruitvale, East Oakland
+- Mitigator INIT-002 phase=implementation-active effectsFiring=true field=Crime_Metrics.ViolentCrimeIndex observedDelta=7 verdict=effects-firing
+- Evidence: Initiative_Tracker row(s) 3
+
+### Medium-Severity Patterns (9)
+
+| Type | Count |
+|---|---:|
+| math-imbalance | 5 |
+| repeating-event | 2 |
+| coverage-gap | 1 |
+| production-imbalance | 1 |
+
+_(Medium-severity patterns rendered as type-count table. For per-pattern detail consult `output/engine_review_c107.md` — that file is the LLM-assembled review and may carry editorial gloss not present in the source JSON.)_
+
+## Approval Ratings (Civic_Office_Ledger, Status ∈ {active, recovering}, Mayor + Council)
+
+_Δ vs C106: raw signed point delta from the prior-cycle engine_audit snapshot, surfaced for the S215 G-6 approval-shift gate. The column reports the number; the >5pt escalation call is the operator's, not the builder's._
+
+| Office | Holder | Faction | Status | Approval | Δ vs C106 |
+|---|---|---|---|---:|---:|
+| Mayor | Avery Santana | OPP | active | 65 | +3 |
+| City Council District 1 (D1) | Denise Carter | OPP | active | 59 | +2 |
+| City Council District 2 (D2) | Leonard Tran | IND | active | 63 | 0 |
+| City Council District 3 (D3) | Rose Delgado | OPP | active | 61 | +3 |
+| City Council District 4 (D4) | Ramon Vega | IND | active | 60 | 0 |
+| City Council District 5 (D5) | Janae Rivers | OPP | active | 59 | +2 |
+| City Council District 6 (D6) | Elliott Crane | CRC | active | 64 | 0 |
+| City Council District 7 (D7) | Warren Ashford | CRC | active | 67 | 0 |
+| City Council District 8 (D8) | Nina Chen | CRC | active | 63 | 0 |
+| City Council District 9 (D9) | Terrence Mobley | OPP | active | 65 | 0 |
+
+**Faction split (Mayor + Council, active + recovering):** 5 OPP / 3 CRC / 2 IND
+
+---
+
+## The people, in their own words
+
+# Today in Oakland — told by its people
+
+A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 107). Everything below is sourced from the world ledger — nothing is invented.
+
+## The people, in their own words
+
+### Rick Walker — K-8 Teacher,Former Line cook — Fruitvale
+
+> I heard about John Ellis' shutout on the radio this morning—what a performance! It’s got me thinking the A’s might just have the pitching depth to make a serious playoff run this y
+
+> I've seen the city come together in times of need, and I feel like that's what's happening now, people are trying to make sense of things and support each other.
+
+### Elio Perez — Server — West Oakland
+
+> You know, working in restaurants all these years, I've seen how things trickle down—or don't. When the council talks about gaps, I think about the regulars who come in exhausted, w
+
+### Martin Richards — Third Baseman, New York Mets — Fruitvale
+
+> I've seen the city come together in ways that feel really meaningful, like at the Fruitvale Unity Gathering. It's like we're all trying to make sense of what's happening and find o
+
+### Eric Taveras — Second Baseman, Oakland A's — Downtown
+
+> Man, what John did out there... that was next level. When your ace goes out and dominates like that in a playoff game, it changes everything. Now we've got momentum, and the whole
+
+### Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake
+
+> Ellis... man. What a performance. Kid’s got the kind of focus that makes you feel like he’s been here before, even though he hasn’t. I watched it from the bench, knee wrapped, and
+
+---
+*Assembled 2026-09-16 from Reflection_Intake (27 reflections, 22 citizens) and LifeHistory_Log (0 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*
+
+## What Tribune reporters are pursuing
+
+### Enrollment moved in Fruitvale — KONO has the weakest school record on the table (index 7) — the students and teachers who live it
+
+Angela Reyes: Angela Reyes plans to explore why KONO's school quality index remains stagnant at 7 despite stable citywide metrics, focusing on the human elements behind the numbers. With no educators on the ledger in KONO, she'll contrast the neighborhood's 46-student reality with Rockridge's thriving 230-student environment, seeking the untold pressures in a system where funding and outcomes don't align.
+
+### The map says decay; the program roster does not answer it.
+
+Jax Caldera: I'm investigating the disconnect between the city's claims of progress and the visible decay in Chinatown, where sentiment and housing pressure metrics don't match the official narrative. I'll be talking to locals and business owners to get a sense of what's really going on.
+
+### civic gap in city — who is accountable, what council has or hasn't done
+
+Luis Navarro: I'm looking into the civic gap in the city—specifically, who is accountable and what the council has or hasn't done. The silence around this issue is notable, and I want to understand why there's no documented response or non-response. My focus is on distinguishing what the supplied record establishes from what it does not.
+
+### C107 fog, 44°F after overcast — what this weather does to a day in the city
+
+Noah Tan: I’m chasing the fog—44°F, introspective mood, low comfort. It’s been a streak of rain and overcast, and now this fog feels like a pause, a moment to reflect. I want to see how it’s shaping the day for people who lived it, especially Teri Mitchell, who’s just recovered from a winter illness, and Lonzo Jailon, whose social activity has been limited by the winter mood. I’ll start by talking to them, seeing how this weather has moved their routines, their plans, their sense of the city.
+
+### Downtown logged the most incidents (14) | 23 neighborhoods on the table — what the table says and who answers for it
+
+Sgt. Rachel Torres: Downtown's numbers hold steady at 14 incidents, same as last cycle, but the clearance rate at 15% tells the real story. That's a lot of cases going cold. Meanwhile East Oakland's response times creep up to 13.2 minutes while their incident count jumps by four. Something's not adding up between the resources and the need.
+
+### Oaks — season-state C107 · 0-0 · W0 — the second club's board read
+
+Selena Grant: I'm looking into the Oakland Oaks' preseason performance, trying to understand what's behind their current record. I want to know more about the team's dynamics and how they're preparing for the upcoming season.
+
+### Recap the pilot's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 4, systems Sol, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 4 cycle(s) led, current streak 4.
+
+Nia Rook: I'm looking into the recent UNDOCKED episode, focusing on the city's reaction to the pilot's performance. I want to explore how the episode's events are being discussed and debated in the community.
+
+## Interviews gathered by the Tribune
+
+- Mei Wong: “I don't work in KONO, so I can't speak directly to what's happening there with their schools. But here in Rockridge, I see how much difference it makes when a whole neighborhood comes together to support education. It's not just about the numbers—it's about the people showing up every day, the extra hours teachers put in, the way local businesses chip in. I imagine in smaller neighborhoods like KONO, where there's only 46 students, those personal connections might matter even more than what any index can measure.”
+- Rick Walker: “I’ve been hearing folks talk about the civic gap at the school and around the neighborhood, but honestly, I haven’t seen much action from the council that feels like they’re really addressing it head-on.”
+- Jessie Hess: “I hear sirens all day Downtown, but it feels like nothing changes—same problems, same slow fixes. Meanwhile, folks in East Oakland are waiting even longer for help, and that’s just not right.”
+- Jessie Hess: “I feel like The Oaks are gearing up for a great season, I've heard they're a full go for opening night and their starting five has been announced, it's got me excited to see how they'll do.”
+- Dillon Trevor: “I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do. As someone who lives and works in Downtown, I feel like the whole neighborhood is buzzing with energy whenever they play.”
+- Martin Richards: “I've seen the city come together in ways that feel really meaningful, like at the Fruitvale Unity Gathering. It's like we're all trying to make sense of what's happening and find our place in it. As someone who's lived here for a while, it's been interesting to see how people are reacting and trying to move forward.”
+- Rick Walker: “I've seen the city come together in times of need, and I feel like that's what's happening now, people are trying to make sense of things and support each other.”
+- Rafael Pilgrim: “I've seen people around Fruitvale trying to make sense of what's going on, and I feel like we're all just trying to understand the implications together.”
+- Tomas Renteria: “I've seen the city's reaction to the episode and its implications, and to be honest, it's been really unsettling - I feel like everyone's on edge, and it's affecting the vibe in Fruitvale. I've been trying to make sense of it all, but it's hard to know what's really going on. As someone who's always out and about, talking to people and cooking for them, I can feel the tension in the air.”
+
+## Bay Tribune newsroom reports
+
+### sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat.cleared.20260916074154.md
+
+Gate-flagged draft — held back by the editorial gate, not published. Cover what it reported AND why it was held.
+
+The first thing that jumps out when you look at John Ellis’s line from Game 4 of the ALDS is the completeness of it: nine innings, four hits, zero earned runs, and nine strikeouts. It’s the kind of performance that doesn’t just win a game; it defines a series. Ellis, the A’s ace, took the mound in New York with the pressure of closing out the Yankees, and he delivered in the most emphatic way possible.
+
+"That game was everything I’ve been working for—every pitch, every inning," Ellis said afterward, his voice steady but carrying the weight of a season’s worth of preparation. "It’s not just about shutting them out; it’s about setting the tone for what’s next. We’re here to win, and that performance was a statement. The A’s are locked in, and I’m ready to keep pushing."
+
+The numbers tell the story of dominance. Ellis threw a complete game shutout, something rarely seen in modern postseason baseball, especially against a lineup as potent as the Yankees’. He faced thirty-one batters, allowed just four hits, and didn’t walk a single hitter. His nine strikeouts were a testament to his command and his ability to execute in high-leverage moments. 
+
+In the clubhouse, the buzz was palpable. Eric Taveras, who went one-for-four with a home run, summed it up: "Man, what John did out there... that was next level. When your ace goes out and dominates like that in a playoff game, it changes everything. Now we've got momentum, and the whole team's feeding off that energy. You could feel it in the dugout - like, if he's bringing that kind of fire, how can the rest of us not step up?"
+
+The question now is whether Ellis’s performance is sustainable. Complete games are rare in today’s game, and the ALCS will present a new set of challenges. But for one night in New York, Ellis was everything the A’s needed him to be: a stopper, a leader, and the reason they’re moving on.
+
+## INTAKE
+NAMES: John Ellis | quoted-source
+NAMES: Eric Taveras | quoted-source
+STORYLINE: fruitvale-john-ellis-sports-analytics | opened
+CLAIM: That game was everything I’ve been working for—every pitch, every inning. It’s not just about shutting them out; it’s about setting the tone for what’s next. We’re here to win, and that performance was a statement. The A’s are locked in, and I’m ready to keep pushing. | citizenVoice PRESS John Ellis
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+### sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat.staged.superseded-stage.20260916074154.md
+
+Gate-flagged draft — held back by the editorial gate, not published. Cover what it reported AND why it was held.
+
+John Ellis stood in the quiet of the visiting clubhouse in New York, towel draped over his shoulders, the fatigue of nine innings etched into his frame but not his voice. "That game was everything I’ve been working for—every pitch, every inning," he said, leaning against his locker. "It’s not just about shutting them out; it’s about setting the tone for what’s next. We’re here to win, and that performance was a statement. The A’s are locked in, and I’m ready to keep pushing."
+
+The statement Ellis made was unequivocal: nine innings, four hits, no earned runs, and nine strikeouts in a 4-0 victory over the Yankees to close out the ALDS. It was the kind of outing that doesn’t just win a game—it changes the calculus of a series. For Ellis, a pitcher whose season line had been steady but not spectacular, the timing couldn’t have been sharper. The A’s now ride a two-game win streak into the ALCS, their record sitting at three wins and one loss in the postseason.
+
+Eric Taveras, whose fourth-inning home run provided one of the few offensive highlights in a game dominated by pitching, summed up the mood in the dugout. "Man, what John did out there... that was next level," he said. "When your ace goes out and dominates like that in a playoff game, it changes everything. Now we've got momentum, and the whole team's feeding off that energy. You could feel it in the dugout—like, if he's bringing that kind of fire, how can the rest of us not step up?"
+
+Taveras’ home run, his first of the postseason, was a solo shot in the fourth inning, part of a night where he went one-for-four with one RBI. It wasn’t a barrage of offense, but it didn’t need to be. Ellis’ performance rendered every run a luxury, not a necessity.
+
+Back in Oakland, the buzz was palpable. Rick Walker, tuning in from Fruitvale, caught the game on the radio. "I heard about John Ellis' shutout on the radio this morning—what a performance!" he said. "It’s got me thinking the A’s might just have the pitching depth to make a serious playoff run this year." Rafael Pilgrim echoed the sentiment: "I heard about John Ellis' shutout—nine innings, no runs. It’s got people here in Fruitvale buzzing, thinking the A’s might just have the pitching depth to go deep in the playoffs."
+
+The question now is whether Ellis’ performance is a harbinger of things to come or a statistical outlier. His nine strikeouts against zero walks suggest command, and the four hits allowed—all singles—indicate he kept the Yankees’ power in check. But postseason baseball is a game of small samples, and one dominant outing doesn’t guarantee a repeat. The ALCS will test whether Ellis has turned a corner or simply authored a singular masterpiece.
+
+For now, the A’s will ride the momentum. Ellis set the tone, Taveras provided just enough offense, and the team heads to the ALCS with confidence. But whether this is the start of a deeper run or a fleeting peak remains to be seen. The board speaks clearly for this game, but the ledger for the series is still unwritten.
+
+## INTAKE
+NAMES: John Ellis | quoted-source
+NAMES: Eric Taveras | quoted-source
+NAMES: Rick Walker | quoted-source
+NAMES: Rafael Pilgrim | quoted-source
+STORYLINE: baylight-district-vinnie-keane-prospect-callup | advanced
+HOOD: Fruitvale
+CLAIM: That game was everything I’ve been working for—every pitch, every inning. It’s not just about shutting them out; it’s about setting the tone for what’s next. We’re here to win, and that performance was a statement. The A’s are locked in, and I’m ready to keep pushing. | citizenVoice PRESS John Ellis
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+### John Ellis' Shutout Sets Tone for A's ALCS Push
+
+Gate-flagged draft — held back by the editorial gate, not published. Cover what it reported AND why it was held.
+
+# John Ellis' Shutout Sets Tone for A's ALCS Push
+
+The first thing that jumps out when you look at John Ellis’ line from Game 4 of the ALDS is the nine inning complete game—a rarity in modern playoff baseball. Four hits, zero earned runs, and nine strikeouts against a Yankees lineup that had been averaging five runs per game in the series. It was the kind of performance that doesn’t just win a game; it shifts momentum.
+
+"That game was everything I’ve been working for—every pitch, every inning," Ellis said in the quiet of the clubhouse after the A’s clinched the series with a 4–0 victory. "It’s not just about shutting them out; it’s about setting the tone for what’s next. We’re here to win, and that performance was a statement."
+
+Ellis, a Tier-1 starter for Oakland this season, has been the anchor of the rotation. His ability to dominate playoff-caliber lineups with such efficiency—just 107 pitches to finish the game—raises questions about the depth of the Yankees’ offense but also about Ellis’ place in the A’s postseason strategy. 
+
+Eric Taveras, whose solo home run in the fourth inning provided part of the cushion Ellis needed, echoed the sentiment. "Man, what John did out there... that was next level," Taveras said. "When your ace goes out and dominates like that in a playoff game, it changes everything. Now we've got momentum, and the whole team's feeding off that energy."
+
+The numbers tell the story. Ellis threw seventy-one strikes against thirty-six balls, a ratio that kept the Yankees off balance while also conserving his arm for the ALCS. His nine strikeouts matched his season-high, and the four hits allowed were tied for the second-lowest mark in any game he started this year. It was a masterclass in pitch execution, and it came at precisely the right moment.
+
+Rick Walker commented on the radio this morning—what a performance! It’s got him thinking the A’s might just have the pitching depth to make a serious playoff run this year.
+
+The question now is whether Ellis can replicate this performance in the ALCS. One game does not make a trend, but it does offer a blueprint. If Ellis can continue to command his pitches with the same precision, the A’s rotation suddenly looks like a formidable weapon against any lineup.
+
+The A’s are locked in, and Ellis is ready to keep pushing.
+
+## INTAKE
+NAMES: John Ellis | quoted-source
+NAMES: Eric Taveras | quoted-source
+NAMES: Rick Walker | mentioned
+STORYLINE: baylight-district-vinnie-keane-prospect-callup | advanced
+CLAIM: That game was everything I’ve been working for—every pitch, every inning. It’s not just about shutting them out; it’s about setting the tone for what’s next. We’re here to win, and that performance was a statement. The A’s are locked in, and I’m ready to keep pushing. | citizenVoice PRESS John Ellis
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+### Sports
+
+Gate-flagged draft — held back by the editorial gate, not published. Cover what it reported AND why it was held.
+
+# Sports
+
+## Oaks Ready to Tip Off Season
+The Oakland Oaks are gearing up for their inaugural season, with head coach Wilson Shepard announcing the starting lineup. Shepard confirmed that Adash Stanley and AJ Dybantsa will be ready for opening night next cycle. The starting five will feature Stanley at point guard, Dillon Brooks and Jerami Grant at the forwards, Dybantsa at small forward, and Wendell Carter Jr. at center. Shepard expressed confidence in the team’s potential, stating, “We’re going to catch people off guard this season.” The Oaks finished the preseason winless at 0-4, but optimism remains high as the team prepares to make its mark in the NBA.
+
+## A’s Advance to ALCS with Dramatic Win Over Yankees
+The Oakland A’s are headed to the American League Championship Series after defeating the New York Yankees in a thrilling ALDS. The series started with a 14-inning marathon in Game 1, where rookie reliever Clark Saryan made his MLB debut, striking out five batters over two innings. Desmond Morton played hero with a walk-off single to secure a 5-4 victory. After dropping Game 2, the A’s bounced back in Game 3 with Morton again leading the charge, driving in four runs and hitting his second home run of the series. The clinching Game 4 belonged to John Ellis, who pitched a complete game shutout, allowing just four hits while striking out nine. Eric Taveras provided the offensive spark with a home run as the A’s won 4-0. Oakland now faces the Minnesota Twins in the ALCS, with the season series tied at 3-3.
+
+## Playoff Fever Grips Oakland
+The A’s postseason run has electrified the city, with fans packing bars and restaurants to watch the games. Desmond Morton’s heroics and John Ellis’s dominant pitching have become the talk of the town, fueling hopes of a World Series appearance. The team’s success has also spurred economic activity, with local businesses reporting a surge in playoff-related spending. As the A’s prepare for their ALCS showdown with the Twins, Oakland is riding a wave of excitement, eager to see if this team can deliver the city its first championship in decades.
+
+## Former A’s Star Spotted in KONO
+Former Oakland A’s standout Rodriguez was spotted at KONO Kitchen, reminiscing with fans about his days on the diamond. Rodriguez, who played a key role in some of the A’s past playoff runs, remains a beloved figure in the community. His appearance added to the city’s nostalgic energy as the current A’s chase glory.
+
+## Vinnie Keane Inspires Youth
+While the A’s dominate headlines, Oaks rookie Adash Stanley made time to connect with the community, visiting the Vinnie Keane Firehouse 29 West Oakland Baseball Academy. Stanley participated in dribbling drills and a free-throw competition, inspiring local youth. The event highlighted the bond between Oakland’s athletes and its residents, showcasing the city’s vibrant sports culture.
+
+## Oaks Look Ahead
+As the Oaks prepare for their regular-season debut, the focus remains on building chemistry and establishing their identity. With a mix of promising young talent and experienced veterans, the team aims to make a strong impression in its inaugural season. Coach Shepard’s confidence and the city’s support set the stage for an exciting chapter in Oakland sports history.
+
+---
+
+*Oakland Sports Desk — Reporting by Hal Jenkins, Anthony Vega, and P Slayer*
+
+### undocked_c107_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.md
+
+Gate-flagged draft — held back by the editorial gate, not published. Cover what it reported AND why it was held.
+
+As the sun set over Fruitvale, Tomas Renteria stepped out of his kitchen, wiping the sweat from his forehead. "I've seen the city's reaction to the episode and its implications, and to be honest, it's been really unsettling - I feel like everyone's on edge, and it's affecting the vibe in Fruitvale," he said, his voice laced with concern. He took a deep breath, scanning the crowded street. People were gathered in small groups, discussing the latest episode of UNDOCKED in hushed tones.
+
+Nearby, a group of friends had set up a makeshift watch party, projecting the episode on a large screen. Martin Richards, a longtime resident of Fruitvale, stood at the edge of the crowd, observing the scene. "I've seen the city come together in ways that feel really meaningful, like at the Fruitvale Unity Gathering," he said, his eyes shining with a sense of community. "It's like we're all trying to make sense of what's happening and find our place in it."
+
+As the night wore on, the discussions only grew more heated. Rick Walker, a local business owner, weighed in on the episode's implications. "I've seen the city come together in times of need, and I feel like that's what's happening now, people are trying to make sense of things and support each other," he said, his voice filled with conviction.
+
+Rafael Pilgrim, a frequent visitor to Fruitvale, nodded in agreement. "I've seen people around Fruitvale trying to make sense of what's going on, and I feel like we're all just trying to understand the implications together," he said, his brow furrowed in thought.
+
+As the evening drew to a close, the crowd began to disperse, each person lost in their own thoughts about the episode and its impact on the city. The question on everyone's mind was: what would be the lasting impact of the episode on the community?
+
+## INTAKE
+NAMES: Rick Walker | quoted-source
+NAMES: Rafael Pilgrim | quoted-source
+NAMES: Tomas Renteria | quoted-source
+NAMES: Martin Richards | quoted-source
+STORYLINE: fruitvale-martin-richards-undocked | opened
+HOOD: Fruitvale
+CLAIM: I've seen the city come together in ways that feel really meaningful, like at the Fruitvale Unity Gathering. It's like we're all trying to make sense of what's happening and find our place in it. As someone who's lived here for a while, it's been interesting to see how people are reacting and trying to move forward. | citizenVoice PRESS Martin Richards
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+### civic_c107_angela-reyes_packet-v2_deepseek-deepseek-chat.staged.md
+
+Developing report — edited but not yet published.
+
+Angela Reyes
+
+In Rockridge, Mei Wong watches the afternoon pick-up line from the steps of the after-school program where she works. Around her, parents call out greetings to one another, trading updates on homework and soccer practice. A teacher waves goodbye to a student clutching a backpack too big for their frame. Wong, her hands stuffed in her coat pockets, nods at the familiar rhythm. 
+
+"I don't work in KONO, so I can't speak directly to what's happening there with their schools," Wong says. "But here in Rockridge, I see how much difference it makes when a whole neighborhood comes together to support education. It's not just about the numbers—it's about the people showing up every day, the extra hours teachers put in, the way local businesses chip in." 
+
+Rockridge's school quality index of 9 leads the city alongside a graduation rate of 95%. But Wong looks further down the table to KONO, where the index sits at 7 and just 46 students fill the halls. 
+
+"I imagine in smaller neighborhoods like KONO, where there's only 46 students, those personal connections might matter even more than what any index can measure," Wong says.
+
+Citywide, enrollment nudged upward this cycle—Fruitvale added 11 students, East Oakland 10. But in KONO, the table held steady, its low index unchanged since last cycle. 
+
+What would it take for KONO's next enrollment shift to be upward?
+
+## INTAKE
+NAMES: Mei Wong | quoted-source
+STORYLINE: rockridge-mei-wong-beat-schools | advanced
+HOOD: KONO
+CLAIM: I don't work in KONO, so I can't speak directly to what's happening there with their schools. But here in Rockridge, I see how much difference it makes when a whole neighborhood comes together to support education. It's not just about the numbers—it's about the people showing up every day, the extra hours teachers put in, the way local businesses chip in. I imagine in smaller neighborhoods like KONO, where there's only 46 students, those personal connections might matter even more than what any index can measure. | citizenVoice PRESS Mei Wong
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+### civic_c107_luis-navarro_packet-v2_anthropic-claude-sonnet-5.staged.md
+
+Developing report — edited but not yet published.
+
+## Fruitvale, After the Bell
+
+Rick Walker keeps a coffee can of red pens on his desk, the kind that runs out by November. Before he was grading spelling tests he was working a line — five years, he says, at a stove that never turned off — and something about the rhythm of that kitchen stuck with him when he moved into a K-8 classroom in Fruitvale. He still plates things. He still watches the clock.
+
+Wednesday afternoon, kids gone, chairs upside down on desks, he was stacking a folder of pickup slips when I caught him between the door and the hallway. He didn't stop moving much. He talked the way he probably runs a lunch shift — steady, no wasted words.
+
+"I've been hearing folks talk about the civic gap at the school and around the neighborhood," he said, "but honestly, I haven't seen much action from the council that feels like they're really addressing it head-on."
+
+That's the whole quote. I'm not going to dress it up.
+
+Here's what the record shows this cycle: a civic gap surfaced in the city's own accounting — the question of who is accountable, and what the council has or hasn't done, was flagged as a live pattern. And nothing filed against it. No civic initiative on the books addresses the signal. Two facts. That's the frame.
+
+What the record doesn't show is anything underneath those two facts. It doesn't name which office would own a response. It doesn't show a request going out or a request landing unanswered. It doesn't clock a silence, because there's no timestamp to start the clock from. I'm not going to pretend there's a paper trail that isn't in front of me. There isn't one yet.
+
+I'm not calling that guilt. There's no documented ask on file for the council to ignore, so there's nothing on the record to call ignored. It's just quiet — the kind you can't attribute to a name.
+
+Walker's not filing a complaint. He's not naming a culprit. He's describing the shape of a thing he feels from a school hallway in Fruitvale: talk without visible follow-through. That's a teacher's read, not a finding. But it's the only voice on the record this cycle that says the gap has a temperature at ground level, and it's cooler than anyone downtown might assume.
+
+So the ledger has a flagged gap and an empty column where the responsible party should sit. Somebody, at some point, owns the next move on that column. The record doesn't say who yet.
+
+What's still unfinished isn't a filing deadline or a hearing date — none of that is on the books to miss. What's unfinished is simpler: a teacher stacking pickup slips who hears the phrase "civic gap" applied to his own street and can't point to who's supposed to close it.
+
+## INTAKE
+NAMES: Rick Walker | mentioned
+STORYLINE: fruitvale-clarissa-dane-undocked | advanced
+CLAIM: I’ve been hearing folks talk about the civic gap at the school and around the neighborhood, but honestly, I haven’t seen much action from the council that feels like they’re really addressing it head-on. | citizenVoice PRESS Rick Walker
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+### Downtown's Persistent Pulse of Incidents, East Oakland's Growing Wait
+
+Developing report — edited but not yet published.
+
+# Downtown's Persistent Pulse of Incidents, East Oakland's Growing Wait 
+
+The flash of red and blue lights against Downtown's glass storefronts has become as regular as the lunchtime foot traffic. Jessie Hess, stepping around broken glass near 14th and Broadway for the third time this month, measures the response in more than minutes. "I hear sirens all day Downtown, but it feels like nothing changes—same problems, same slow fixes," Hess says, nodding toward an officer taking notes near a boarded-up pawn shop. 
+
+The numbers bear out the stagnation. Downtown logged 14 incidents this cycle—matching last cycle's count—with property crimes and violent incidents continuing to dominate the index. At 15% clearance, most cases remain open files. Response times hover at 10.1 minutes on average, but that metric masks the reality: 911 calls for thefts and vandalism often land behind more urgent dispatches. 
+
+Meanwhile, East Oakland's crews faced a sharper spike—9 incidents, up from 5 last cycle—with the slowest average response citywide at 13.2 minutes. The violent crime index there now reads 53, edging past Downtown's 50. Yet both districts share the same 15% clearance rate, suggesting a system-wide bottleneck rather than neighborhood-specific failures.
+
+Vanessa Tran-Muñoz's OARI team isn't listed on this cycle's roster, leaving traditional patrols to handle all calls. The absence underscores a recurring question: How should a city redistribute finite resources when high-incident zones plateau while others deteriorate? 
+
+Practical notes: Downtown residents can check OPD's online portal for their block's incident log using the case number from any filed report. East Oakland's Neighborhood Services Unit still encourages direct precinct outreach for pattern complaints.
+
+## INTAKE
+NAMES: Vanessa Tran-Muñoz | subject
+NAMES: Jessie Hess | quoted-source
+STORYLINE: downtown-merkin-jumper-undocked | advanced
+HOOD: Downtown
+CLAIM: I hear sirens all day Downtown, but it feels like nothing changes—same problems, same slow fixes. Meanwhile, folks in East Oakland are waiting even longer for help, and that’s just not right. | citizenVoice PRESS Jessie Hess
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+### sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat.staged.md
+
+Developing report — edited but not yet published.
+
+John Ellis stood in the quiet of the visiting clubhouse in New York, towel draped over his shoulders, the fatigue of nine innings etched into his frame but not his voice. "That game was everything I’ve been working for—every pitch, every inning," he said, leaning against his locker. "It’s not just about shutting them out; it’s about setting the tone for what’s next. We’re here to win, and that performance was a statement. The A’s are locked in, and I’m ready to keep pushing."
+
+The statement Ellis made was unequivocal: nine innings, four hits, no earned runs, and nine strikeouts in a 4-0 victory over the Yankees to close out the ALDS. It was the kind of outing that doesn’t just win a game—it changes the calculus of a series. For Ellis, a pitcher whose season line had been steady but not spectacular, the timing couldn’t have been sharper. The A’s now ride a two-game win streak into the ALCS, their record sitting at three wins and one loss in the postseason.
+
+Eric Taveras, whose fourth-inning home run provided one of the few offensive highlights in a game dominated by pitching, summed up the mood in the dugout. "Man, what John did out there... that was next level," he said. "When your ace goes out and dominates like that in a playoff game, it changes everything. Now we've got momentum, and the whole team's feeding off that energy. You could feel it in the dugout—like, if he's bringing that kind of fire, how can the rest of us not step up?"
+
+Taveras’ home run, his second of the series, was a solo shot in the fourth inning, part of a night where he went one-for-four with one RBI. It wasn’t a barrage of offense, but it didn’t need to be. Ellis’ performance rendered every run a luxury, not a necessity.
+
+Back in Oakland, the buzz was palpable. Rick Walker, tuning in from Fruitvale, caught the game on the radio. "I heard about John Ellis' shutout on the radio this morning—what a performance!" he said. "It’s got me thinking the A’s might just have the pitching depth to make a serious playoff run this year." Rafael Pilgrim echoed the sentiment: "I heard about John Ellis' shutout—nine innings, no runs. It’s got people here in Fruitvale buzzing, thinking the A’s might just have the pitching depth to go deep in the playoffs."
+
+The question now is whether Ellis’ performance is a harbinger of things to come or a statistical outlier. His nine strikeouts against zero walks suggest command, and the four hits allowed—all singles—indicate he kept the Yankees’ power in check. But postseason baseball is a game of small samples, and one dominant outing doesn’t guarantee a repeat. The ALCS will test whether Ellis has turned a corner or simply authored a singular masterpiece.
+
+For now, the A’s will ride the momentum. Ellis set the tone, Taveras provided just enough offense, and the team heads to the ALCS with confidence. But whether this is the start of a deeper run or a fleeting peak remains to be seen. The board speaks clearly for this game, but the ledger for the series is still unwritten.
+
+## INTAKE
+NAMES: John Ellis | quoted-source
+NAMES: Eric Taveras | quoted-source
+NAMES: Rick Walker | quoted-source
+NAMES: Rafael Pilgrim | quoted-source
+STORYLINE: baylight-district-vinnie-keane-prospect-callup | advanced
+HOOD: Fruitvale
+CLAIM: That game was everything I’ve been working for—every pitch, every inning. It’s not just about shutting them out; it’s about setting the tone for what’s next. We’re here to win, and that performance was a statement. The A’s are locked in, and I’m ready to keep pushing. | citizenVoice PRESS John Ellis
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+### sports_c107_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md
+
+Developing report — edited but not yet published.
+
+## Oakland Oaks Gear Up for Opening Night
+As the Oakland Oaks prepare for their upcoming season, excitement is building in the Downtown neighborhood. Jessie Hess, a local resident, shared her enthusiasm for the team's prospects. "I feel like The Oaks are gearing up for a great season, I've heard they're a full go for opening night and their starting five has been announced, it's got me excited to see how they'll do," she said, echoing the sentiment of many fans.
+
+The Oaks' preseason record may be 0-0, but the announcement of their starting five has generated significant buzz. Dillon Trevor, another Downtown resident, noted, "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do. As someone who lives and works in Downtown, I feel like the whole neighborhood is buzzing with energy whenever they play." The team's franchise stability may be uncertain, but one thing is clear: the community is eager to see how the Oaks will perform.
+
+As the team heads into the new season, questions still linger about their overall strategy and potential weaknesses. While the starting five has been announced, the front office remains tight-lipped about their plans for the future. The Oaks' record may be unblemished at the moment, but it's unclear how they will fare against tougher competition.
+
+## INTAKE
+NAMES: Jessie Hess | quoted-source
+NAMES: Dillon Trevor | quoted-source
+STORYLINE: downtown-jessie-hess-beat-oaks-beat | opened
+HOOD: Downtown
+CLAIM: I feel like The Oaks are gearing up for a great season, I've heard they're a full go for opening night and their starting five has been announced, it's got me excited to see how they'll do. | citizenVoice PRESS Jessie Hess
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+## Background from the published record
+
+### **Cycle 107 Newsroom Continuity Brief**
+
+**Meteorological & Seasonal Baseline:**  
+Oakland enters **Cycle Y2C107** under a prolonged, three-week overcast gray stretch, damp chill, and low skies centered around Lake Merritt and commercial corridors across the city [45, 53–55]. As Editor-in-Chief **Mags Corliss** notes, this persistent gray weather turns the city inward, quiet, and provisional, thinning outdoor sidewalk lingering while shifting human connection into warm interior spots [1, 2].
+
+Below is the cited continuity brief tracing the prior events, covenants, named citizens, institutions, and most consequential unresolved storylines entering Cycle Y2C107, grounded **exclusively** in the published editions of *The Bay Tribune* for Cycle Y2C105 [1–44] and Cycle Y2C106 [45–88].
+
+---
+
+### **1. Sports Desk Leads: Anthony Raines, Selena Grant, & The Athletics / Oaks Trajectory**
+*Current Leads: `sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat.cleared.20260916074154.md` / `John Ellis' Shutout Sets Tone for A's ALCS Push` / `sports_c107_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md`*
+
+#### **Prior Events & Franchise Baselines (Cycles Y2C105–Y2C106)**
+*   **The Athletics’ 127-Win Apparatus:** The Oakland Athletics completed a historic regular season with an unprecedented **127–35 record** [3-6]. Key regular-season closing performances included **Benji Dillon** (38) throwing 5.1 innings (8 K, 2 H), designated hitter **Vinnie Keane** (37) going 4-for-5 with a home run, double, and 3 RBIs, and first baseman **Mark Aitken** hitting two home runs with 6 RBIs [3, 4]. Keane noted: *"I feel like we're really coming together as a team... it's an exciting time to be an A's player"* [3, 7].
+*   **Martin Richards & "The Structure That Holds":** In Cycle Y2C106, sports writer **Simon Leary** interviewed former A's starting third baseman **Martin Richards** (traded to the Mets in Cycle 101) [47, 81–84]. Reflecting on his role changes over coffee, Richards remarked: *"Role changes? They're inevitable when you're chasing success... your value shifts, sometimes overnight"* [81–82]. Resident **Ollie Campbell** observed from a distance that the A's keep winning regardless of who holds up the beams [5, 8].
+*   **Source Verification regarding "John Ellis":** The specific name **"John Ellis"** and his **"Shutout"** are **absent from the published text** of Cycles Y2C105 and Y2C106. Any upcoming lead reporting a shutout by John Ellis in the ALCS represents a brand-new Cycle Y2C107 postseason development building upon the 127-win regular-season apparatus [3, 4, 6].
+*   **The Oakland Oaks (NBA Expansion):** In Cycle Y2C105, **Tanya Cruz** reported from the Oaks locker room following their third consecutive preseason loss (**0–3 record**) [3, 42–43]. Forward **Coen Carr** (14 pts) and guard **Dame Sarr** (3 steals, 7 pts) sat in heavy silence as Carr tracked the un-erased 0–3 tally on the whiteboard [3, 42–43]. In Cycle Y2C106, **Talia Finch** documented West Oakland service workers—**Elio Perez** (diner server), **Daniel Cloak** (bakery worker), and **Darius Clark** (bakery worker)—praising the Oaks' active efforts to engage the West Oakland community [47, 60–63], while barista **Irene Fay** noted she focuses primarily on her job [9].
+
+#### **Fact vs. Inference Separation**
+*   *Direct Published Facts:* The A's finished the regular season at 127–35 [3, 4]. Martin Richards spoke on role changes following his trade to the Mets [81–82]. The Oaks finished the preseason 0–3 [10, 11] and conducted community outreach in West Oakland [47, 60–63].
+*   *Analytical Inferences & Unresolved Storylines:* Columnist **Hal Richmond**, Mags Corliss, and Simon Leary infer that the A's franchise has become an impersonal machine where architecture replaces human presence [2, 47, 83–84]. The unresolved storylines entering Cycle Y2C107 are how the A's locker room manages the psychological weight of championship expectations during the ALCS push [3, 12-14], and how the Oaks transition from their 0–3 preseason stretch into their official regular-season debut [10, 15, 16].
+
+---
+
+### **2. Culture & Broadcast Beat: Nia Rook & *UNDOCKED* Episode Impact**
+*Current Lead: `undocked_c107_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.md`*
+
+#### **Prior Events & Episode Profiles (Cycles Y2C105–Y2C106)**
+*   **Fruitvale Profile — Clarissa Dane (Y2C105):** **Nia Rook** reported on an *UNDOCKED* episode filmed outside a Fruitvale café featuring District Attorney **Clarissa Dane** [21–24]. Dane stated on camera: *"I feel like there's a lot of uncertainty in the air, and as a District Attorney, it's my job to stay on top of things... but sometimes it feels like the more I learn, the more questions I have"* [17, 18].
+*   **Fruitvale Ground-Level Sentiments:** Fruitvale line cook **Rick Walker**, restaurant server **Rafael Pilgrim**, and podcast host/line cook **Tomas Renteria** agreed with Dane's assessment, reporting that Fruitvale residents feel like they are *"holding their breath"* while trying to make sense of things [22–24].
+*   **Downtown Profile — Merkin Jumper (Y2C106):** Social Services Caseworker **Merkin Jumper** (featured in earlier Downtown *UNDOCKED* coverage) appeared in **Jax Caldera's** Cycle Y2C106 report outside SpeedyBurger on Telegraph Avenue [19, 20]. Jumper observed lit towers alongside neighborhood decay, wishing for more dedicated municipal initiatives [19, 20].
+
+#### **Fact vs. Inference Separation**
+*   *Direct Published Facts:* Clarissa Dane publicly voiced uncertainty on screen in Fruitvale [17, 18]. Fruitvale workers (Walker, Pilgrim, Renteria) confirmed neighborhood-level uncertainty [22–24]. Merkin Jumper observed Downtown decay outside SpeedyBurger [19, 20].
+*   *Analytical Inferences & Unresolved Storylines:* Corliss and Rook infer that television screen spotlights act as a temporary "permission slip" or civic amplifier for work already happening on the ground [2, 21]. The core unresolved storylines entering Cycle Y2C107 are what lasting impact these broadcast episodes leave on Fruitvale's sense of clarity and Downtown's social services after the screen hype fades [21-23].
+
+---
+
+### **3. Civic & Education Beat: Angela Reyes & The Rockridge Model**
+*Current Lead: `civic_c107_angela-reyes_packet-v2_deepseek-deepseek-chat.staged.md`*
+
+#### **Prior Events & Field Audit (Cycle Y2C106)**
+*   **The Rockridge School Audit:** Civic reporter **Angela Reyes** audited Rockridge's top-ranked public school [48, 64–65]. Principal **Simone Adesanya**, parent **Mei Wong** (after-school program worker), and 8th-grader **Rick Dillon** highlighted collective community investment [64–65].
+*   **Documented Institutional Metrics:** The school logged a **school quality index of 9**, a **95% graduation rate**, and **78% college readiness** across **223 enrolled students** [24, 25]. The school's resources are bolstered by collective effort from parents, local businesses, and the **Bay Conservation Alliance** [24, 25].
+
+#### **Fact vs. Inference Separation**
+*   *Direct Published Facts:* Rockridge's top school serves 223 students with a 9 quality index, 95% graduation rate, and 78% college readiness [24, 25].
+*   *Analytical Inferences & Unresolved Storylines:* Reyes and Mags Corliss question whether the Rockridge model represents a replicable civic blueprint for other Oakland neighborhoods or simply an un-exportable accumulation of specific neighborhood wealth, private contributions, and historical advantages [25, 26].
+
+---
+
+### **4. Civic Affairs Lead: Luis Navarro & The Unassigned Civic Gap**
+*Current Lead: `civic_c107_luis-navarro_packet-v2_anthropic-claude-sonnet-5.staged.md`*
+
+#### **Prior Events & Field Reporting (Cycles Y2C105–Y2C106)**
+*   **The Uncoordinated Citizen Consensus:** Reporter **Luis Navarro** documented a live "civic gap" across Oakland [6, 34–38, 50, 76–80]. Two service workers in separate zip codes—**Elio Perez** (wiping a four-top at a West Oakland diner) and **Depak Ying** (folding napkins at a Rockridge restaurant)—independently voiced identical complaints regarding municipal leadership, reaching for the word **"inaction"** in Cycle Y2C105 [6, 34–35] and **"disconnect"** in Cycle Y2C106 [50, 76–78].
+*   **Perez’s Statement:** Perez noted: *"I feel like the council talks a lot about accountability, but I don't see much action that actually closes the gap for people like me and my neighbors"* [27, 28].
+*   **Ying’s Statement:** Ying noted: *"I've heard people talking about the council not stepping up, and it feels like there's a disconnect — like they're not hearing what's happening in the neighborhoods"* [29].
+*   **City Accounting Log:** City accounting officially logged a civic gap, and **no formal civic initiative currently on the books answers it** [21, 29-31].
+*   **Navarro's Strict Verification Boundaries:** Navarro explicitly confirmed he **does NOT have a formal request filed to the council**, a formal council refusal, a clock on silence, or a named councilmember or office whose desk the issue sits on [21, 30, 32, 33].
+
+#### **Fact vs. Inference Separation**
+*   *Direct Published Facts:* City accounting logged a civic gap with zero answering initiatives on the books [29, 31]. Perez and Ying independently used identical terms ("inaction", "disconnect") [34–35, 76–78]. Navarro has no paper trail of a formal request or refusal [32, 33].
+*   *Analytical Inferences & Unresolved Storylines:* Corliss and Navarro infer that uncoordinated frustration across zip codes reflects a real citywide gap [21, 28, 30]. The central unresolved question entering Cycle Y2C107 is **which council office will step forward to claim ownership of this civic gap** [21, 28, 30, 34].
+
+---
+
+### **5. Emergency Response & Downtown Decay: "Downtown's Persistent Pulse & East Oakland's Growing Wait"**
+*Current Lead: `Downtown's Persistent Pulse of Incidents, East Oakland's Growing Wait`*
+
+#### **Prior Events & Multi-Metric Audits (Cycles Y2C105–Y2C106)**
+*   **East Oakland Response Deficits & OARI:** Sgt. **Rachel Torres** and **Jax Caldera** reported on OARI operating unarmed two-person teams across West Oakland, Fruitvale, and East Oakland [4, 10, 29–33]. However, the initiative's tracking system provides **no response-time metrics or clearance rates** for East Oakland or any other target district [35-37].
+*   **The Civis Systems Alert & Baseline Failure:** Civis Systems flagged negative safety indicators in East Oakland, West Oakland, and Fruitvale [38, 39]. However, the underlying audit confirmed **there is no prior comparison or baseline history available in the system**—meaning the instrument is alarming without historical data to compare against [38, 40]. Faith leader **Ramon Solano** and Fruitvale resident **Lucia Polito** confirmed street-level unease [38, 40-42].
+*   **Downtown Multi-Metric Decay Audit:** In Cycle Y2C106, Jax Caldera audited eight to nine Downtown blocks outside **SpeedyBurger** on Telegraph Avenue [49, 66–70]. Downtown sentiment fell to **0.41** (8th of 22 neighborhoods), retail vitality fell nearly three points to **9.55**, and housing pressure jumped to **3** (worse than 18 of 22 neighborhoods) [19, 43].
+*   **Field Testimony & Absence of Ownership:** Caseworker **Merkin Jumper** (SpeedyBurger), faith leader **Eunice Marston** (Telegraph Presbyterian), and resident **Celeste Moon** documented lit towers alongside physical decay [19, 20, 44]. Caldera explicitly confirmed **no matching program, task force, or municipal office is assigned to manage Downtown's decline** [19, 43, 45].
+
+#### **Fact vs. Inference Separation**
+*   *Direct Published Facts:* OARI lacks published response-time metrics or clearance rates for East Oakland [35, 36]. Downtown sentiment fell to 0.41, retail vitality to 9.55, and housing pressure rose to 3 without an assigned municipal mitigation program [19, 43, 45].
+*   *Analytical Inferences & Unresolved Storylines:* Caldera and Corliss infer that East Oakland's response waits and Downtown's incident pulse suffer from the exact same structural flaw: administrative promises operating without accountability plumbing or assigned municipal owners [19, 30, 38, 43, 45].
+
+---
+
+### **6. Fact vs. Analytical Inference Matrix**
+
+| Newsroom Lead | Direct Published Fact (Cycles Y2C105–Y2C106) | Analytical Inference / Unresolved Storyline |
+| :--- | :--- | :--- |
+| **A's ALCS Push / John Ellis** | A's finished regular season at 127–35 [3, 4]. Martin Richards spoke on role changes [81–82]. *Name "John Ellis" is absent from text.* | Richmond & Leary infer A's have become an impersonal machine [5, 14]. Unresolved: ALCS postseason performance under championship pressure [3, 12, 13]. |
+| **Oaks Expansion (Grant)** | Oaks finished preseason 0–3 [10, 11]. West Oakland service workers praised Oaks community outreach [47, 60–63]. | Finch & Corliss infer Oaks are actively building a neighborhood identity in contrast to A's cold apparatus [5]. Unresolved: regular-season transition. |
+| **Nia Rook / UNDOCKED** | Clarissa Dane voiced uncertainty on screen [17, 18]. Fruitvale workers feel neighborhood is "holding its breath" [22–24]. | Rook & Corliss infer screen spotlights act as temporary civic amplifiers [2]. Unresolved: lasting impact on Fruitvale clarity post-broadcast. |
+| **Angela Reyes / Rockridge** | Rockridge school serves 223 students with a 9 quality index, 95% graduation, and 78% college readiness [24, 25]. | Reyes & Corliss question whether the model is a replicable blueprint or un-exportable neighborhood wealth [25, 26]. |
+| **Luis Navarro / Civic Gap** | City accounting logged a civic gap [29, 31]. Elio Perez & Depak Ying independently complained of council "inaction" and "disconnect" [34, 76–78]. | Navarro confirms no filed request or formal refusal exists [32, 33]. Unresolved: which council office claims ownership entering C107 [28, 30, 34]. |
+| **Downtown Pulse / East Oakland** | OARI has no published response metrics for East Oakland [35, 36]. Downtown metrics show multi-metric decline without an assigned program [19, 43, 45]. | Caldera & Corliss infer both areas suffer from administrative promises lacking accountability plumbing [19, 38]. Unresolved: City Hall assignment. |
+
+***
+
+🎙️ **Would you like me to construct an editorial assignment brief or structured outline for any of these specific Cycle Y2C107 newsroom beats?**

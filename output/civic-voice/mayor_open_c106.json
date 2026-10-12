@@ -1,0 +1,58 @@
+{
+  "office": "mayor_open",
+  "cycle": 106,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle I authorized the month-seven disbursement batch for the West Oakland Stabilization Fund, cleared the Youth Apprenticeship Pipeline backlog per Mara Vance's directive, advanced the Fruitvale Transit Hub to design-phase kickoff, and celebrated Temescal's construction momentum while acknowledging the downtown mood shift needs attention. My priority is delivering what we promised—housing stability, workforce access, and infrastructure that connects neighborhoods to opportunity.",
+  "statements": [
+    {
+      "statementId": "STMT-106-mayor_open-001",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund Month-Seven Disbursement",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "Month seven means another round of families staying in their homes instead of getting pushed out.",
+      "fullStatement": "This city doesn't abandon its people when the market turns against them. The month-seven disbursement batch for the West Oakland Stabilization Fund is approved—twelve more households, identified through Brenda Okoro's canvass operation, verified and moving to disbursement. We're not just cutting checks. We're walking blocks, knocking doors, making sure people who qualify know the fund exists. The engine flags West Oakland's daily life as declining, and I hear that. But I also see what the briefing doesn't capture: the grandmother who gets to stay in the flat she's lived in for thirty years because we showed up at her door with paperwork and a timeline. That's what this fund does. That's why it exists. The canvass we launched last month is finding households who slipped through the cracks of the first outreach wave. We're adjusting. We're learning. We're staying.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-mayor_open-002",
+      "type": "authorization_response",
+      "topic": "Youth Apprenticeship Pipeline Backlog Clearance Verification",
+      "initiative": "INIT-007",
+      "decision": "approved",
+      "quote": "Every young person in this city deserves a shot, not a runaround.",
+      "fullStatement": "Mara Vance asked for verification, and I'm delivering it. The administrative order I issued in C105 to clear the Youth Apprenticeship Pipeline backlog is executed. Zero backlogged applicants remain. The intake verification audit confirms full clearance across all participating city agencies—Workforce Development, Economic Development, the community-based partners. The town hall scheduled for this cycle will proceed with a clean slate and a clear message: Oakland's young people are not waiting in line anymore. The engine notes improvement flags in West Oakland, East Oakland, and Fruitvale for this initiative. I don't take those flags for granted. They mean the system is working, slowly, imperfectly, but working. The directive was clear. The follow-through is verified. The public forum will hear from young people who are now in the pipeline, not waiting outside it.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-mayor_open-003",
+      "type": "executive_order",
+      "topic": "Fruitvale Transit Hub Phase II Design-Phase Kickoff",
+      "initiative": "INIT-003",
+      "decision": "design-phase kickoff authorized",
+      "quote": "Fruitvale's small businesses and vendors aren't just stakeholders—they're the heart of this project.",
+      "fullStatement": "The first visioning session in C105 gave us the feedback we needed. Now we move. I'm authorizing the design-phase kickoff for the Fruitvale Transit Hub Phase II, with the community input from that session incorporated into the design parameters. The $230 million commitment stays on track. The engine flags Fruitvale at low-severity improvement. I'll take improvement wherever we can get it, but I'm not satisfied with low-severity anything in a neighborhood this vital. The design phase means engineers, architects, and community liaisons in the same room, translating what we heard into what we build. The small business corridor on International Boulevard, the vendor network, the families who depend on this connection to BART and AC Transit—they shaped this phase, and they'll see their fingerprints on the final design. This is how infrastructure earns trust.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-mayor_open-004",
+      "type": "policy_position",
+      "topic": "Temescal Community Health Center Construction Milestone and Neighborhood Credit",
+      "initiative": "INIT-005",
+      "decision": "public acknowledgment of construction momentum",
+      "quote": "Somebody's work is paying off in Temescal—let's name whose.",
+      "fullStatement": "The structural frame is complete. Ahead of schedule. The second shift on MEP rough-ins is keeping momentum. Temescal's mood reads upbeat, street trade busy, and I'm not going to let that go unclaimed. This is what $45 million in community health investment looks like when it lands. The Temescal Community Health Center isn't just a construction project—it's a statement that this neighborhood deserves world-class care without crossing town to get it. The engine asks who answers for San Antonio and who gets credit in Temescal. I'll answer the second part directly: the credit belongs to the construction crews working double shifts, to the community advocates who fought for this site, to the health workers who will staff it, and to the residents who kept showing up at planning meetings when it would have been easier to assume City Hall would forget. We didn't forget. The framing is up. The walls go in next.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-mayor_open-005",
+      "type": "public_remark",
+      "topic": "Downtown Oakland Mood Shift and City Attention",
+      "initiative": null,
+      "decision": "acknowledgment of declining conditions with commitment to response",
+      "quote": "Downtown's daily life is slipping, and I see it too.",
+      "fullStatement": "The engine flags Downtown and Rockridge and Grand Lake—daily life visibly declining, mood slipping, storefronts quieter, housing pressure building. No city program currently pointed at it. I read that line three times. It's accurate, and it's unacceptable. Downtown Oakland is the civic heart of this city. When it struggles, Oakland struggles. I am directing Laila Cortez to convene my economic development and housing deputies for a cross-cutting assessment of what we can deploy—existing tools, existing budgets, existing authority—to stabilize the commercial corridor and the residents getting squeezed by housing pressure. This is not a new initiative announcement. This is a Mayor saying I see what's happening, I have the data, and I'm not waiting for the next budget cycle to start moving. The Baylight District construction will ripple benefits to Jack London and Downtown, but ripples aren't enough when the water's receding. More to come.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "desk": "wire",
+  "cycle": "109",
+  "model": "x-ai/grok-4.3",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 5591,
+  "usageOutputTokens": 1290,
+  "savedFiles": [
+    "output/cron-compare/wire_c109_celeste-tran_packet-v2_x-ai-grok-4-3.md"
+  ],
+  "compareAgainst": "output/desk-output/wire_c109.md",
+  "durationMs": 8541,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-02T23:17:29.307Z"
+}

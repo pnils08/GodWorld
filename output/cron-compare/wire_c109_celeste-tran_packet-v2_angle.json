@@ -1,0 +1,433 @@
+{
+  "stage": "angle",
+  "desk": "wire",
+  "cycle": "109",
+  "persona": "celeste-tran",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00164",
+      "name": "Celeste Tran",
+      "role": "desk reporter",
+      "desk": "wire"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Marin Tao leads the conversation (25 mentions); Uptown moves the most — what Oakland is doing together this week",
+      "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the engine's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "trends",
+        "hood": "San Antonio",
+        "facts": [
+          "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+          "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 87",
+          "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+          "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+          "Movement vs C108: Uptown +62 people, Downtown +61 people, Jack London +60 people, Temescal +59 people, KONO +59 people"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "Household in Rockridge spending 54% of income on housing (observational analysis)",
+          "Household in Lake Merritt spending 56% of income on housing (observational analysis)",
+          "Downtown boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+          "Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city (observational analysis)"
+        ],
+        "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-trends",
+      "hood": "San Antonio",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "nearby": [
+        {
+          "text": "Temescal neighborhood texture — how residents experience the improvement | Residents of Temescal feel the change firsthand.",
+          "src": "output/engine_audit_c109.json patterns[6]; evidence: Initiative_Tracker row(s) 5"
+        },
+        {
+          "text": "Baylight District | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c109.md \"### Baylight District\"; events: world_summary_c109.md \"## World Events\""
+        },
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c109.md \"### Chinatown\"; events: world_summary_c109.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c109.md \"### Downtown\"; events: world_summary_c109.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c109.md \"### East Oakland\"; events: world_summary_c109.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-912baafccba1"
+      },
+      {
+        "t": "FACT",
+        "text": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-af6ecd4a6ee2"
+      },
+      {
+        "t": "FACT",
+        "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-b92e8f58c6c6"
+      },
+      {
+        "t": "FACT",
+        "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-7b70c2aa3290"
+      },
+      {
+        "t": "FACT",
+        "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 87",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-bfa3f309ae2b"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-ce794f1c115a"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-98d64e869896"
+      },
+      {
+        "t": "FACT",
+        "text": "Movement vs C108: Uptown +62 people, Downtown +61 people, Jack London +60 people, Temescal +59 people, KONO +59 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C109",
+        "id": "F-ecd96fd79ca3"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-trends",
+      "angle": "Marin Tao leads the conversation (25 mentions); Uptown moves the most — what Oakland is doing together this week",
+      "label": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+      "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+      "hood": "San Antonio",
+      "citizens": [
+        "Marin Tao (POP-00537)",
+        "Dax Monroe (POP-00769)",
+        "Rico Valez (POP-00632)"
+      ],
+      "popids": [
+        "POP-00537",
+        "POP-00769",
+        "POP-00632"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C109",
+      "cycle": 109
+    },
+    "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the engine's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "TRENDS-SLICE-1",
+    "kind": "beat-trends",
+    "seat": {
+      "slug": "celeste-tran",
+      "name": "Celeste Tran",
+      "popid": "POP-00164",
+      "desk": "wire",
+      "domain": "trends",
+      "builder": "buildTrendsSlice.js"
+    },
+    "hood": "San Antonio",
+    "pulse": {
+      "className": "beat-trends",
+      "score": 100,
+      "label": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+      "hood": "San Antonio",
+      "source": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Marin Tao leads the conversation (25 mentions); Uptown moves the most — what Oakland is doing together this week",
+      "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+      "anchorFacts": [
+        "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+        "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 87",
+        "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+        "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+        "Movement vs C108: Uptown +62 people, Downtown +61 people, Jack London +60 people, Temescal +59 people, KONO +59 people"
+      ],
+      "evidence": [
+        {
+          "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+          "src": "output/beats/Cultural_Ledger.jsonl @C109"
+        },
+        {
+          "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 87",
+          "src": "output/beats/Cultural_Ledger.jsonl @C109"
+        },
+        {
+          "text": "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+          "src": "output/beats/Cultural_Ledger.jsonl @C109"
+        },
+        {
+          "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C109"
+        },
+        {
+          "text": "Movement vs C108: Uptown +62 people, Downtown +61 people, Jack London +60 people, Temescal +59 people, KONO +59 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C109"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 108
+      },
+      "hooks": [
+        {
+          "text": "Household in Rockridge spending 54% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Rockridge",
+          "priority": 6
+        },
+        {
+          "text": "Household in Lake Merritt spending 56% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 6
+        },
+        {
+          "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Laurel",
+          "priority": 6
+        },
+        {
+          "text": "Fruitvale boom sustained — momentum 8/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 7
+        },
+        {
+          "text": "Jack London boom sustained — momentum 9/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "Rockridge boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Rockridge",
+          "priority": 7
+        },
+        {
+          "text": "Grand Lake boom sustained — momentum 9/10, the block everyone wants onto",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Grand Lake",
+          "priority": 7
+        }
+      ],
+      "note": null,
+      "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00537",
+        "name": "Marin Tao",
+        "role": "Musician",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Marin Tao — Musician — Chinatown",
+        "why": "the city is talking about them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00769",
+        "name": "Dax Monroe",
+        "role": "Artist",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Dax Monroe — Artist — Rockridge",
+        "why": "the city is talking about them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "why": "the city is talking about them (Cultural_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C109",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Celeste Tran this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "text": "I'm looking into the recent surge in attention around Marin Tao, who has been leading the conversation with 25 media mentions. I want to explore what's behind this trend and how it's impacting the city.",
+    "plan": {
+      "chase": "I'm looking into the recent surge in attention around Marin Tao, who has been leading the conversation with 25 media mentions. I want to explore what's behind this trend and how it's impacting the city.",
+      "focus": "The sudden rise of Marin Tao to the top of the cultural conversation",
+      "why": "To understand what's driving this trend and what it says about the city's current mood and interests",
+      "checks": [
+        "Marin Tao's background and previous work",
+        "The types of media outlets and platforms that are covering Marin Tao"
+      ],
+      "targets": [],
+      "interpretation": "The trend around Marin Tao may be indicative of a larger shift in the city's cultural landscape, with a focus on new and emerging talent",
+      "unverifiedLead": [
+        "There may be a connection between Marin Tao's rise and the recent movement of people to the Uptown area, but more research is needed to confirm this"
+      ],
+      "closeQuestion": "What does Marin Tao's sudden popularity reveal about the city's values and priorities?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Temescal neighborhood texture — how residents experience the improvement | Residents of Temescal feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Temescal",
+      "ref": "output/engine_audit_c109.json patterns[6]; evidence: Initiative_Tracker row(s) 5",
+      "popids": [
+        "POP-00170",
+        "POP-00761",
+        "POP-00799"
+      ]
+    },
+    {
+      "label": "Baylight District | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Baylight District",
+      "ref": "output/neighborhood_texture_c109.md \"### Baylight District\"; events: world_summary_c109.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c109.md \"### Chinatown\"; events: world_summary_c109.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c109.md \"### Downtown\"; events: world_summary_c109.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c109.md \"### East Oakland\"; events: world_summary_c109.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 26,
+  "ranAt": "2026-10-02T11:16:43.558Z"
+}

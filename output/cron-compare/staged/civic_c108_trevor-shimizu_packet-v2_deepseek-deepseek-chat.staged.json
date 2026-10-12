@@ -1,0 +1,61 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/staged/civic_c108_trevor-shimizu_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Joel Wren",
+        "role": "mentioned",
+        "popid": "POP-00218"
+      },
+      {
+        "name": "Jerald Jensen",
+        "role": "mentioned",
+        "popid": "POP-00280"
+      },
+      {
+        "name": "Eleanor Rivera",
+        "role": "mentioned",
+        "popid": "POP-00617"
+      },
+      {
+        "name": "Ximena Mehta",
+        "role": "mentioned",
+        "popid": "POP-01039"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "city-eleanor-rivera-beat-transit",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "At 12th Street, we've definitely felt the uptick in ridership. It's not just numbers - it's people adjusting their routines, and us adjusting right along with them. The team just... adapts. No big announcements, just everyone doing their part to keep things moving smoothly.",
+        "sourceRef": "citizenVoice PRESS Eleanor Rivera"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-9835527b33cc",
+    "draftSha256": "260997dd93692bb2d89f05426b370207cc382e94e8f36982e69d295dcd8034d1",
+    "verdict": "output/cron-compare/civic_c108_trevor-shimizu_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-21T23:19:19.562Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:02.565Z"
+}

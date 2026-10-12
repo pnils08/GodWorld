@@ -1,0 +1,17 @@
+{
+  "draft": "civic_c109_rachel-torres_packet-v2_deepseek-deepseek-chat.md",
+  "flags": [
+    {
+      "claim": "The steam from Jonas Patel's cart rose through the cold morning air as he rearranged jars of preserved plums behind the counter. His stall on Chinatown's Franklin Avenue",
+      "issue": "Jonas Patel (POP-00142) is canonically a Medical Examiner, not a street cart vendor.",
+      "severity": "high"
+    },
+    {
+      "claim": "Laundromat attendant Jacquez Tearn stacked folded shirts near 9th Street.",
+      "issue": "Jacquez Tearn (POP-00214) is canonically a Dishwasher, not a laundromat attendant.",
+      "severity": "high"
+    }
+  ],
+  "contamination": [],
+  "summary": "Critical occupation misrepresentations for verified citizens Jonas Patel (Medical Examiner cast as stall vendor) and Jacquez Tearn (Dishwasher cast as laundromat attendant)."
+}

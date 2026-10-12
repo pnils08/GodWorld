@@ -1,0 +1,9 @@
+{"Cycle":"110","Entry":"OPENING","Amount":"100000000","Counterparty":"GENERAL-FUND","BalanceAfter":"100000000","Note":"general fund opens (Baylight apart — its own tax-increment district)"}
+{"Cycle":"110","Entry":"PREFUNDED","Amount":"0","Counterparty":"INIT-001","BalanceAfter":"100000000","Note":"funded before the treasury"}
+{"Cycle":"110","Entry":"PREFUNDED","Amount":"0","Counterparty":"INIT-002","BalanceAfter":"100000000","Note":"funded before the treasury"}
+{"Cycle":"110","Entry":"PREFUNDED","Amount":"0","Counterparty":"INIT-005","BalanceAfter":"100000000","Note":"funded before the treasury"}
+{"Cycle":"110","Entry":"REVENUE","Amount":"5000000","Counterparty":"WEEKLY-ALLOCATION","BalanceAfter":"105000000","Note":"weekly budget allocation"}
+{"Cycle":"110","Entry":"REVENUE","Amount":"500","Counterparty":"TICKETS","BalanceAfter":"105000500","Note":"parking ticket, street sweeper, POP-00657"}
+{"Cycle":"110","Entry":"REVENUE","Amount":"153351","Counterparty":"COURT","BalanceAfter":"105153851","Note":"34 cleared charges, fined at the hood rate"}
+{"Cycle":"111","Entry":"REVENUE","Amount":"5000000","Counterparty":"WEEKLY-ALLOCATION","BalanceAfter":"110153851","Note":"weekly budget allocation"}
+{"Cycle":"111","Entry":"REVENUE","Amount":"135242","Counterparty":"COURT","BalanceAfter":"110289093","Note":"30 cleared charges, fined at the hood rate"}

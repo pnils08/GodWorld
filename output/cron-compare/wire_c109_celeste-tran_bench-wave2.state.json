@@ -1,0 +1,445 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00164",
+    "name": "Celeste Tran",
+    "role": "desk reporter",
+    "desk": "wire"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Marin Tao leads the conversation (25 mentions); Uptown moves the most — what Oakland is doing together this week",
+    "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the engine's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "trends",
+      "hood": "San Antonio",
+      "facts": [
+        "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+        "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88",
+        "Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111",
+        "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+        "Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "Household in West Oakland spending 53% of income on housing (observational analysis)",
+        "Household in Lake Merritt spending 51% of income on housing (observational analysis)",
+        "Downtown boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+        "West Oakland cooling off: foot traffic down, storefronts quieter than the rest of the city (observational analysis)"
+      ],
+      "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-trends",
+    "hood": "San Antonio",
+    "src": "output/beats/Cultural_Ledger.jsonl @C108",
+    "plan": {
+      "focus": "The impact of Marin Tao's rising fame on Oakland's cultural scene",
+      "closeQuestion": "What does Marin Tao's rising fame say about the city's current cultural values?"
+    },
+    "openThreads": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00537",
+        "name": "Marin Tao",
+        "profile": "Marin Tao — Musician — Chinatown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00769",
+        "name": "Dax Monroe",
+        "profile": "Dax Monroe — Artist — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00632",
+        "name": "Rico Valez",
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00796",
+        "name": "Dank Abara",
+        "profile": "Dank Abara",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00537-acbe976261",
+        "pop": "POP-00537",
+        "name": "Marin Tao",
+        "quote": "Honestly, I don't think about it that much. I'm just doing my thing, playing music, and trying to make a living. If people are talking about me, that's cool, but it's not something I focus on. I'm just trying to be true to myself and my art.",
+        "factIds": [
+          "F-5cfd163bed8d"
+        ],
+        "src": "packet.W2[POP-00537]"
+      },
+      {
+        "id": "Q-POP-00769-ec66c070a1",
+        "pop": "POP-00769",
+        "name": "Dax Monroe",
+        "quote": "Honestly, I haven't really thought about Marin Tao's rising fame and how it affects Oakland's cultural scene. I'm just trying to focus on my own art and life in Rockridge. I do know that there's been a lot of talk about the city's cultural scene lately, but I don't really feel like I'm in the loop.",
+        "factIds": [
+          "F-2d706c97794d",
+          "F-d7b022dc0c27"
+        ],
+        "src": "packet.W2[POP-00769]"
+      },
+      {
+        "id": "Q-POP-00632-cf6746e8b3",
+        "pop": "POP-00632",
+        "name": "Rico Valez",
+        "quote": "Honestly, I've been feeling like there's a lot of energy around Oakland's cultural scene lately, and I think Marin Tao's rising fame is a part of that. As a musician, I can feel the vibe of the city, and it seems like people are excited about what's happening here. I'm not sure what the future holds, but it's cool to see Oakland getting attention.",
+        "factIds": [
+          "F-2d706c97794d",
+          "F-d7b022dc0c27"
+        ],
+        "src": "packet.W2[POP-00632]"
+      },
+      {
+        "id": "Q-POP-00796-3a9577c553",
+        "pop": "POP-00796",
+        "name": "Dank Abara",
+        "quote": "I've noticed that Marin Tao's rising fame seems to be getting a lot of attention in Oakland, and as a waiter, I've heard people talking about it around San Antonio.",
+        "factIds": [
+          "F-2d706c97794d",
+          "F-d7b022dc0c27"
+        ],
+        "src": "packet.W2[POP-00796]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Celeste Tran",
+        "text": "The potential for Marin Tao's fame to bring new attention to Oakland's arts scene",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C108",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-78217e633afa"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-2d706c97794d"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-d7b022dc0c27"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-2fab856fb7b6"
+    },
+    {
+      "t": "FACT",
+      "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-16889ed63f66"
+    },
+    {
+      "t": "FACT",
+      "text": "Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-c4082aab131d"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-69371833824b"
+    },
+    {
+      "t": "FACT",
+      "text": "Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108",
+      "id": "F-09177454b07b"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao — Musician — Chinatown",
+      "src": "Simulation_Ledger profile for POP-00537",
+      "id": "F-5cfd163bed8d"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "celeste-social-trends-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the culture record's most-talked-about names, new arrivals, and neighborhood movement into a fast, reactive trend read — the count is Celeste's, the mood underneath it is hers to name.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "fast, reactive, semi-chaotic but grounded trend analyst",
+      "targetWords": "400-700",
+      "opening": "a Packet-named figure's media-mention count, a new arrival on the culture record, or a neighborhood movement delta",
+      "closing": "the implication, not the proof — what the pattern says about the city's mood, stated once and left there"
+    },
+    "authorizedTexture": [
+      "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
+      "unnamed color about the conversation itself — the group chat, the rewatch, who suddenly has an opinion — that adds no new named fact",
+      "connecting a Packet-supplied mention spike or movement delta to other Packet-supplied civic conditions already in the packet",
+      "treating the aggregate as a single intentional act ('Oakland decided') without claiming a specific poll, survey, or interview"
+    ],
+    "textureConditions": [
+      "every named figure, trend tag, media-mention count, and neighborhood movement number must come from the packet",
+      "no named show, movie, or streaming title unless the packet itself supplies one — the evening-media slate is not wired to this slice; unnamed viewing/mood color is fine, a specific invented title is not",
+      "a flat week (no mentions, no movement) is written as a real flat week, not papered over with an invented spike",
+      "the thesis follows the data window, never precedes it"
+    ],
+    "canonBlockers": [
+      "a named figure, show, movie, streaming title, venue, or neighborhood event not found in the supplied packet",
+      "an invented survey, poll, interview, direct quote, or social-media reaction",
+      "raw engine scores, labels, or decimals printed as public-facing evidence",
+      "a citywide mood or trend claim with no supplied count or movement delta behind it",
+      "a generic culture-desk roundup that abandons the assigned data window"
+    ]
+  },
+  "manifest": {
+    "id": "AM-8be1961e07ba",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-78217e633afa",
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-2d706c97794d",
+        "t": "FACT",
+        "text": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-d7b022dc0c27",
+        "t": "FACT",
+        "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-2fab856fb7b6",
+        "t": "FACT",
+        "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-16889ed63f66",
+        "t": "FACT",
+        "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-c4082aab131d",
+        "t": "FACT",
+        "text": "Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-69371833824b",
+        "t": "FACT",
+        "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-09177454b07b",
+        "t": "FACT",
+        "text": "Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108"
+      },
+      {
+        "id": "F-5cfd163bed8d",
+        "t": "FACT",
+        "text": "Marin Tao — Musician — Chinatown",
+        "src": "Simulation_Ledger profile for POP-00537"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00537-acbe976261",
+        "speakerId": "POP-00537",
+        "speakerName": "Marin Tao",
+        "text": "Honestly, I don't think about it that much. I'm just doing my thing, playing music, and trying to make a living. If people are talking about me, that's cool, but it's not something I focus on. I'm just trying to be true to myself and my art.",
+        "factIds": [
+          "F-5cfd163bed8d"
+        ],
+        "src": "packet.W2[POP-00537]"
+      },
+      {
+        "id": "Q-POP-00769-ec66c070a1",
+        "speakerId": "POP-00769",
+        "speakerName": "Dax Monroe",
+        "text": "Honestly, I haven't really thought about Marin Tao's rising fame and how it affects Oakland's cultural scene. I'm just trying to focus on my own art and life in Rockridge. I do know that there's been a lot of talk about the city's cultural scene lately, but I don't really feel like I'm in the loop.",
+        "factIds": [
+          "F-2d706c97794d",
+          "F-d7b022dc0c27"
+        ],
+        "src": "packet.W2[POP-00769]"
+      },
+      {
+        "id": "Q-POP-00632-cf6746e8b3",
+        "speakerId": "POP-00632",
+        "speakerName": "Rico Valez",
+        "text": "Honestly, I've been feeling like there's a lot of energy around Oakland's cultural scene lately, and I think Marin Tao's rising fame is a part of that. As a musician, I can feel the vibe of the city, and it seems like people are excited about what's happening here. I'm not sure what the future holds, but it's cool to see Oakland getting attention.",
+        "factIds": [
+          "F-2d706c97794d",
+          "F-d7b022dc0c27"
+        ],
+        "src": "packet.W2[POP-00632]"
+      },
+      {
+        "id": "Q-POP-00796-3a9577c553",
+        "speakerId": "POP-00796",
+        "speakerName": "Dank Abara",
+        "text": "I've noticed that Marin Tao's rising fame seems to be getting a lot of attention in Oakland, and as a waiter, I've heard people talking about it around San Antonio.",
+        "factIds": [
+          "F-2d706c97794d",
+          "F-d7b022dc0c27"
+        ],
+        "src": "packet.W2[POP-00796]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00537",
+        "name": "Marin Tao",
+        "profile": "Marin Tao — Musician — Chinatown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00769",
+        "name": "Dax Monroe",
+        "profile": "Dax Monroe — Artist — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00632",
+        "name": "Rico Valez",
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00796",
+        "name": "Dank Abara",
+        "profile": "Dank Abara",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Celeste Tran",
+        "text": "The potential for Marin Tao's fame to bring new attention to Oakland's arts scene",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
+      "unnamed color about the conversation itself — the group chat, the rewatch, who suddenly has an opinion — that adds no new named fact",
+      "connecting a Packet-supplied mention spike or movement delta to other Packet-supplied civic conditions already in the packet",
+      "treating the aggregate as a single intentional act ('Oakland decided') without claiming a specific poll, survey, or interview"
+    ],
+    "textureConditions": [
+      "every named figure, trend tag, media-mention count, and neighborhood movement number must come from the packet",
+      "no named show, movie, or streaming title unless the packet itself supplies one — the evening-media slate is not wired to this slice; unnamed viewing/mood color is fine, a specific invented title is not",
+      "a flat week (no mentions, no movement) is written as a real flat week, not papered over with an invented spike",
+      "the thesis follows the data window, never precedes it"
+    ],
+    "forbiddenClaimClasses": [
+      "a named figure, show, movie, streaming title, venue, or neighborhood event not found in the supplied packet",
+      "an invented survey, poll, interview, direct quote, or social-media reaction",
+      "raw engine scores, labels, or decimals printed as public-facing evidence",
+      "a citywide mood or trend claim with no supplied count or movement delta behind it",
+      "a generic culture-desk roundup that abandons the assigned data window"
+    ]
+  }
+}

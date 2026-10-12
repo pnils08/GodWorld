@@ -1,0 +1,207 @@
+{
+  "version": "OAKS-GROUND-1",
+  "empty": false,
+  "cycle": 109,
+  "kind": "beat-oaks-ground",
+  "seat": {
+    "slug": "talia-finch",
+    "name": "Talia Finch",
+    "popid": "POP-00592",
+    "desk": "sports",
+    "domain": "oaks",
+    "builder": "buildOaksGroundSlice.js"
+  },
+  "hood": "Baylight District",
+  "pulse": {
+    "className": "beat-oaks-ground",
+    "score": 100,
+    "label": "Oaks ground read C109 — low",
+    "hood": "Baylight District",
+    "source": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+  },
+  "story": {
+    "kind": "beat-oaks-ground",
+    "angle": "Oaks ground read C109 — low — the people around the second club",
+    "label": "Oaks ground read C109 — low",
+    "hookLine": "low",
+    "hood": "Baylight District",
+    "citizens": [
+      "Wilson Shepard (POP-01022)",
+      "Austin Reaves (POP-01027)",
+      "Dillon Brooks (POP-01079)"
+    ],
+    "popids": [
+      "POP-01022",
+      "POP-01027",
+      "POP-01079"
+    ],
+    "ref": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+    "cycle": 109
+  },
+  "approach": "Oaks ground approach: this slice is what the Oaks feed says about the people — the mood in the room, the fans, the neighborhood around the park — with the record as context. First-person ground report. The moods and sentiments are feed rows, real; the walk to the park, the vendor, the kid with the glove are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01022",
+      "name": "Wilson Shepard",
+      "role": "Head Coach, Oakland Oaks",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+      "why": "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01027",
+      "name": "Austin Reaves",
+      "role": "SG / The Oaks",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Austin Reaves — SG / The Oaks — Downtown",
+      "why": "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01079",
+      "name": "Dillon Brooks",
+      "role": "SF / The Oaks",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Dillon Brooks — SF / The Oaks — Uptown",
+      "why": "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Oaks fans, C109: low",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+    },
+    {
+      "text": "Room mood, C109: frustrated",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+    },
+    {
+      "text": "Notebook (feed): Albiet preseason, the Oaks still have yet to taste a win. Rookie AJ Dybantsa continues to show promise scoring 19 points, 7 rebounds, 2 assists. Wendell Carter plays his first game and played the firs",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+    },
+    {
+      "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+    },
+    {
+      "text": "Context: record 0-2 · streak L6",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+    },
+    {
+      "text": "Home neighborhood (feed): Baylight District",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+    },
+    {
+      "text": "Oaks fans, C109: low",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+    },
+    {
+      "text": "Room mood, C109: frustrated",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+    },
+    {
+      "text": "Notebook (feed): Still without a win to show for it but Austin Reaves and Dillon Brooks show great promise in the loss. Reaves scores 24 points and Dillon Brooks adds 21 points. Wendell Carter scores 12 points. Adash ",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+    },
+    {
+      "text": "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+    },
+    {
+      "text": "Context: record 0-3 · streak L7",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+    },
+    {
+      "text": "Home neighborhood (feed): Downtown",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Oaks ground read C109 — low — the people around the second club",
+    "hookLine": "low",
+    "anchorFacts": [
+      "Oaks fans, C109: low",
+      "Room mood, C109: frustrated",
+      "Notebook (feed): Albiet preseason, the Oaks still have yet to taste a win. Rookie AJ Dybantsa continues to show promise scoring 19 points, 7 rebounds, 2 assists. Wendell Carter plays his first game and played the firs",
+      "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+      "Context: record 0-2 · streak L6",
+      "Home neighborhood (feed): Baylight District",
+      "Oaks fans, C109: low",
+      "Room mood, C109: frustrated",
+      "Notebook (feed): Still without a win to show for it but Austin Reaves and Dillon Brooks show great promise in the loss. Reaves scores 24 points and Dillon Brooks adds 21 points. Wendell Carter scores 12 points. Adash ",
+      "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+      "Context: record 0-3 · streak L7",
+      "Home neighborhood (feed): Downtown"
+    ],
+    "evidence": [
+      {
+        "text": "Oaks fans, C109: low",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "text": "Room mood, C109: frustrated",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "text": "Notebook (feed): Albiet preseason, the Oaks still have yet to taste a win. Rookie AJ Dybantsa continues to show promise scoring 19 points, 7 rebounds, 2 assists. Wendell Carter plays his first game and played the firs",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "text": "Context: record 0-2 · streak L6",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "text": "Home neighborhood (feed): Baylight District",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "text": "Oaks fans, C109: low",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "text": "Room mood, C109: frustrated",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "text": "Notebook (feed): Still without a win to show for it but Austin Reaves and Dillon Brooks show great promise in the loss. Reaves scores 24 points and Dillon Brooks adds 21 points. Wendell Carter scores 12 points. Adash ",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "text": "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "text": "Context: record 0-3 · streak L7",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "text": "Home neighborhood (feed): Downtown",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel"
+  },
+  "feedRows": 10,
+  "currentCycleRows": 2,
+  "pointers": [
+    "output/beats/Oakland_Sports_Feed.jsonl @C109",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

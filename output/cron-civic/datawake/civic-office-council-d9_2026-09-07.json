@@ -1,0 +1,15 @@
+{
+  "office": "council_d9",
+  "agentDir": "civic-office-council-d9",
+  "holder": "Terrence Mobley",
+  "popid": "POP-00506",
+  "title": "City Council District 9",
+  "date": "2026-09-07",
+  "cycle": 106,
+  "model": "deepseek/deepseek-chat",
+  "statement": "Laurel's stability is hard-won—crime still below city averages with property at 28 and violent at 24 this cycle. Sentiment's holding at 0.36 while we keep housing pressure flat zero. This isn't luck—it's the result of staying focused on what works. I'm pushing back against any distraction from our momentum.",
+  "action": null,
+  "numberMoved": null,
+  "ranAt": "2026-09-07T10:45:37.939Z",
+  "fellBackFrom": null
+}

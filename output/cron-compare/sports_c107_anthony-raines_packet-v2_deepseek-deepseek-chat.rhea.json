@@ -1,0 +1,53 @@
+{
+  "draft": "output/cron-compare/sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "107",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "2316f97b783eb78d02c341831aa7d9a2ebc0dc1e3a93626607e088177e73499a",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "Rafael Pilgrim echoed the sentiment: 'I heard about John Ellis' shutout—nine innings, no runs...'",
+      "issue": "Near-verbatim sentiment repetition between Rick Walker and Rafael Pilgrim quotes in Fruitvale reaction block.",
+      "severity": "low"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "John Ellis Game 4 complete game shutout, Eric Taveras home run, series record (3-1), and citizen identities verified against C107 sports feed and ledger.",
+  "review": {
+    "profileId": "sports-desk",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": null,
+  "nameCheck": {
+    "verified": [
+      "Eric Taveras",
+      "John Ellis",
+      "Rafael Pilgrim",
+      "Rick Walker"
+    ],
+    "unverified": [
+      "For Ellis"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": false
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 8325,
+  "parseError": false,
+  "ranAt": "2026-09-16T07:41:33.499Z"
+}

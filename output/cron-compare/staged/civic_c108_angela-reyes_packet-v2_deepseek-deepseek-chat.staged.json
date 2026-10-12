@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "angela-reyes",
+  "byline": "Angela Reyes",
+  "bylinePopid": "POP-00156",
+  "article": "output/cron-compare/staged/civic_c108_angela-reyes_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Mei Wong",
+        "role": "quoted-source",
+        "popid": "POP-01036"
+      },
+      {
+        "name": "Maya Torres-Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00742"
+      },
+      {
+        "name": "Gloria Liu",
+        "role": "quoted-source",
+        "popid": "POP-00827"
+      },
+      {
+        "name": "Salma Campbell",
+        "role": "quoted-source",
+        "popid": "POP-01018"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "rockridge-mei-wong-beat-schools",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "Rockridge schools have always been a cornerstone of this community. Even with the shifts in enrollment across the city, we've managed to maintain a high standard of education. It's not just about the numbers; it's about the dedication of our teachers, the support from families, and the shared belief in the value of a good education.",
+        "sourceRef": "citizenVoice PRESS Gloria Liu"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-62d7f6be06e7",
+    "draftSha256": "64aafd4cc47b1f52b02e9a610855389ea5870bdec7b50d07653cf577f2bb93f6",
+    "verdict": "output/cron-compare/civic_c108_angela-reyes_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-22T23:17:48.247Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:02.326Z"
+}

@@ -1,0 +1,88 @@
+phase03-population/updateNeighborhoodDemographics.js:622:  if (sportsSeason === 'championship') {
+phase03-population/updateNeighborhoodDemographics.js:629:  } else if (sportsSeason === 'playoffs' || sportsSeason === 'post-season') {
+phase03-population/generateCrisisSpikes.js:394:    if (sportsSeason !== "off-season") {
+phase03-population/deriveDemographicDrift.js:136:  if (sportsSeason === 'championship') {
+phase03-population/deriveDemographicDrift.js:140:  } else if (sportsSeason === 'playoffs') {
+phase03-population/deriveDemographicDrift.js:143:  } else if (sportsSeason === 'late-season') {
+phase03-population/deriveDemographicDrift.js:249:    if (holiday !== 'none' || isFirstFriday || sportsSeason === 'playoffs' || sportsSeason === 'championship') {
+phase03-population/applyDemographicDrift.js:304:  if (sportsSeason === "championship") {
+phase03-population/applyDemographicDrift.js:306:  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+phase04-events/buildCityEvents.js:84:    if (sportsSeason && sportsSeason !== "off-season") tags.push("sportsSeason:" + sportsSeason);
+phase04-events/buildCityEvents.js:445:  if (sportsSeason === "championship") {
+phase04-events/buildCityEvents.js:448:  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+phase04-events/buildCityEvents.js:451:  } else if (sportsSeason === "late-season") {
+phase04-events/buildCityEvents.js:584:  if (sportsSeason === "championship") count = Math.max(count, 5);
+phase04-events/worldEventsEngine.js:93:  var IN_SEASON = (sportsSeason !== 'off-season');
+phase04-events/worldEventsEngine.js:95:  var allowPlayoffFlavor = makerOverrideSports && (sportsSeason === 'playoffs' || sportsSeason === 'post-season');
+phase04-events/worldEventsEngine.js:96:  var allowChampFlavor = makerOverrideSports && (sportsSeason === 'championship');
+phase04-events/generateGameModeMicroEvents.js:99:    if (sportsSeason && sportsSeason !== "off-season") t.push("sportsSeason:" + sportsSeason);
+phase04-events/generateGameModeMicroEvents.js:419:      if (sportsSeason === "championship") pool = pool.concat(championshipPool);
+phase04-events/generateGameModeMicroEvents.js:420:      else if (sportsSeason === "playoffs" || sportsSeason === "post-season") pool = pool.concat(playoffPool);
+phase04-events/generateGameModeMicroEvents.js:421:      else if (sportsSeason === "off-season") pool = pool.concat(offseasonPool);
+phase04-events/generateGameModeMicroEvents.js:502:      if (sportsSeason === "championship") chance += 0.02;
+phase04-events/generateGameModeMicroEvents.js:503:      else if (sportsSeason === "playoffs" || sportsSeason === "post-season") chance += 0.015;
+phase04-events/generateGameModeMicroEvents.js:504:      else if (sportsSeason === "regular") chance += 0.01;
+phase04-events/generateGenericCitizenMicroEvent.js:331:  if (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) basePool = basePool.concat(sportsSeasonPools[sportsSeason]);
+phase04-events/generateGenericCitizenMicroEvent.js:337:  var sportsPoolArr = (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) ? sportsSeasonPools[sportsSeason] : [];
+phase04-events/generateGenericCitizenMicroEvent.js:433:    if (sportsSeason === "championship") chance += 0.012;
+phase04-events/generateGenericCitizenMicroEvent.js:434:    else if (sportsSeason === "playoffs" || sportsSeason === "post-season") chance += 0.008;
+phase05-citizens/generateCitizensEvents.js:800:    if (sportsSeason && sportsSeason !== "off-season") tags.push("sportsSeason:" + sportsSeason);
+phase05-citizens/generateCitizensEvents.js:2440:    if (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) {
+phase05-citizens/checkForPromotions.js:444:    if (sportsSeason === "championship") {
+phase05-citizens/checkForPromotions.js:446:    } else if (sportsSeason === "playoffs") {
+phase05-citizens/bondPersistence.js:339:    if (b.sportsSeason && b.sportsSeason !== 'off-season') {
+phase05-citizens/bondPersistence.js:550:    if (b && b.sportsSeason === sportsSeason) {
+phase05-citizens/generateMediaModeEvents.js:157:    if (sportsSeason !== "off-season") {
+phase05-citizens/generateMediaModeEvents.js:217:    if (sportsSeason !== "off-season") {
+phase05-citizens/generateMediaModeEvents.js:286:  if (sportsSeason !== "off-season") {
+phase05-citizens/generateGenericCitizens.js:700:    if (sportsSeason === "championship") {
+phase05-citizens/generateGenericCitizens.js:702:    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+phase05-citizens/bondEngine.js:835:    if (bond.bondType === BOND_TYPES.SPORTS_RIVAL && sportsSeason === 'off-season') {
+phase05-citizens/bondEngine.js:1207:            sportsSeason === 'championship' ? 'Championship rivalry sparked.' : 'Playoff debate turned heated.',
+phase06-analysis/applyShockMonitor.js:142:    if (sportsSeason === "championship") {
+phase06-analysis/applyShockMonitor.js:146:    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+phase06-analysis/applyShockMonitor.js:323:  if (sportsIsOverride && sportsSeason === "championship" && curSent <= -0.4) {
+phase06-analysis/economicRippleEngine.js:1045:      isSportsZone: (cal.sportsZones || []).indexOf(nh) >= 0 && cal.sportsSeason !== 'off-season'
+phase07-evening-media/culturalLedger.js:361:    if (sportsSeason !== "off-season") parts.push(sportsSeason);
+phase07-evening-media/textureTriggers.js:272:  if (sportsSeason === 'championship') {
+phase07-evening-media/textureTriggers.js:277:  } else if (sportsSeason === 'playoffs') {
+phase07-evening-media/textureTriggers.js:281:  } else if (sportsSeason === 'late-season') {
+phase07-evening-media/buildMediaPacket.js:369:  if (sportsSeason === 'championship') {
+phase07-evening-media/buildMediaPacket.js:372:  if (sportsSeason === 'playoffs') {
+phase07-evening-media/buildEveningFood.js:121:  var selectedFast = weightedDrawWithoutReplacement_(fastCandidates, {}, sportsSeason !== "off-season" ? 2 : 1, rng);
+phase07-evening-media/buildEveningFood.js:136:  } else if (sportsSeason === "championship") {
+phase07-evening-media/buildEveningFood.js:138:  } else if (sportsSeason === "playoffs") {
+phase07-evening-media/buildEveningMedia.js:394:    if (sportsSeason === "championship" || sportsSeason === "world-series") {
+phase07-evening-media/buildEveningMedia.js:396:    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+phase07-evening-media/buildNightLife.js:260:  if (sportsSeason === "championship") {
+phase07-evening-media/buildNightLife.js:262:  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+phase07-evening-media/buildNightLife.js:264:  } else if (sportsSeason === "late-season") {
+phase07-evening-media/buildNightLife.js:436:  } else if (sportsSeason === "championship") {
+phase07-evening-media/buildNightLife.js:438:  } else if (sportsSeason === "playoffs") {
+phase07-evening-media/buildNightLife.js:469:  if (sportsSeason === "championship") movement = "fan-surge";
+phase07-evening-media/mediaFeedbackEngine.js:248:  if (cal.sportsSeason === 'championship') {
+phase07-evening-media/mediaFeedbackEngine.js:251:  } else if (cal.sportsSeason === 'playoffs') {
+phase07-evening-media/mediaFeedbackEngine.js:254:  } else if (cal.sportsSeason === 'late-season') {
+phase07-evening-media/mediaFeedbackEngine.js:480:  if (eventCategories.sports.length > 0 && cal.sportsSeason !== 'off-season') {
+phase07-evening-media/mediaFeedbackEngine.js:548:    if (cal.sportsSeason === 'championship') {
+phase07-evening-media/mediaFeedbackEngine.js:550:    } else if (cal.sportsSeason === 'playoffs') {
+phase07-evening-media/mediaFeedbackEngine.js:552:    } else if (cal.sportsSeason === 'late-season') {
+phase07-evening-media/mediaFeedbackEngine.js:560:    if (cal.sportsSeason === 'championship') {
+phase07-evening-media/mediaFeedbackEngine.js:568:    } else if (cal.sportsSeason === 'playoffs') {
+phase07-evening-media/mediaFeedbackEngine.js:626:    if (cal.sportsSeason === 'championship' || cal.sportsSeason === 'playoffs') {
+phase07-evening-media/mediaFeedbackEngine.js:803:  if (cal.sportsSeason === 'championship') {
+phase07-evening-media/mediaFeedbackEngine.js:805:  } else if (cal.sportsSeason === 'playoffs') {
+phase07-evening-media/mediaFeedbackEngine.js:1295:  if (sportsPool.length > 0 && (cal.sportsSeason === 'playoffs' || cal.sportsSeason === 'championship')) {
+phase07-evening-media/mediaFeedbackEngine.js:1386:  if (topic === 'sports') return cal.sportsSeason === 'championship' || cal.sportsSeason === 'playoffs';
+phase07-evening-media/storyHook.js:521:  if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+phase07-evening-media/storyHook.js:532:  if (sportsSeason === "championship") {
+phase07-evening-media/storyHook.js:543:  if (sportsSeason === "late-season") {
+phase08-v3-chicago/v3preLoader.js:51:  if (S.sportsSeason === undefined) S.sportsSeason = 'off-season';
+phase08-v3-chicago/v3DomainWriter.js:279:  if (sportsSeason && sportsSeason !== 'off-season') {
+phase09-digest/applyCompressionDigestSummary.js:190:  if (sportsSeason === "championship") sportsTag = "CHAMP";
+phase09-digest/applyCompressionDigestSummary.js:191:  else if (sportsSeason === "playoffs") sportsTag = "PLYF";
+phase09-digest/applyCompressionDigestSummary.js:192:  else if (sportsSeason === "post-season") sportsTag = "POST";
+phase09-digest/applyCompressionDigestSummary.js:193:  else if (sportsSeason === "late-season") sportsTag = "LATE";
+utilities/rosterLookup.js:563:  if (sportsSeason === 'championship') {
+utilities/rosterLookup.js:566:  if (sportsSeason === 'playoffs') {
+utilities/rosterLookup.js:569:  if (sportsSeason === 'spring-training') {

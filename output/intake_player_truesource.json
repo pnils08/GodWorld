@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-09-26T22:02:24.641Z",
+  "driveRootMLB": "1kJTjCkDBm0fYjU_ca4ul-qliMzdddv9S",
+  "driveRootProspects": null,
+  "container": "world-data",
+  "domainTag": "wd-player-truesource",
+  "wipeOld": false,
+  "wipeReport": null,
+  "mode": "apply",
+  "playerFilter": "Benji Dillon",
+  "passes": {
+    "subfolders": true,
+    "flatMLB": true,
+    "prospects": false
+  },
+  "totals": {
+    "records": 1,
+    "ingested": 1,
+    "wouldIngest": 0,
+    "noTxtFiles": 0,
+    "popIdUnresolved": 0,
+    "failed": 0,
+    "bySourcePass": {
+      "subfolder": 0,
+      "flat_mlb": 1,
+      "prospects": 0
+    },
+    "uniquePopIdsResolved": 1
+  },
+  "results": [
+    {
+      "player": "Benji Dillon",
+      "popId": "POP-00018",
+      "legacyPopId": null,
+      "popIdSource": "datapage:Benji Dillon FULL STAT TRUE SOURCE — PITCHER — 2041.txt",
+      "sourcePass": "flat_mlb",
+      "finalType": "player_truesource",
+      "status": "ingested",
+      "op": "PATCH",
+      "filesIngested": 2,
+      "contentSize": 4039,
+      "docId": "ZSREkrKqFFb96NDZKN43i9",
+      "httpStatus": 200
+    }
+  ]
+}

@@ -1,0 +1,580 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00017",
+    "name": "Anthony Raines",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The season line (.190AVG) has to carry the claim before the narrative does: World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+    "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sports-analytics",
+      "pulseClass": "award-board",
+      "bagTools": [
+        "1 Box-Card Read",
+        "7 Is-It-Real (ledger PANDAS)"
+      ],
+      "claim": "The season line (.190AVG) has to carry the claim before the narrative does: World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+      "lineFacts": [
+        "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+        "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+        "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+        "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+        "Feed line: Vladimir Gonzalez/35AB/4HR/8RBI/.286AVG",
+        "Feed line: Ernesto Quintero/37AB/3HR/6RBI/.324AVG"
+      ],
+      "missing": [
+        "x-stats / barrel% / launch angle / OAA not on feed",
+        "contracts or salaries not printed on this feed row",
+        "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)",
+        "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies"
+      ],
+      "sceneRule": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers.",
+      "sourcePointers": [
+        "output/world_summary_c108.md ## Sports",
+        "docs/media/ANTHONY_ANALYSIS_BAG.md",
+        "scripts/sportsSubstrate.js",
+        "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 4"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "sports-analytics",
+    "hood": "Rockridge",
+    "src": "world_summary_c108.md ## Sports",
+    "plan": {
+      "focus": "Danny Horn's performance and its impact on the A's World Series chances.",
+      "closeQuestion": "Can the A's afford to carry Horn's slump into the World Series, or will they need to make lineup adjustments?"
+    },
+    "openThreads": [
+      {
+        "slug": "baylight-district-vinnie-keane-prospect-callup",
+        "label": "baylight-district-vinnie-keane-prospect-callup | C104→C107 | 8 article(s) | advanced 4, opened 4",
+        "hood": "Baylight District,Fruitvale",
+        "popids": [
+          "POP-00001",
+          "POP-00050",
+          "POP-00170",
+          "POP-00018",
+          "POP-00003",
+          "POP-00019",
+          "POP-01024",
+          "POP-00198",
+          "POP-00201",
+          "POP-00033",
+          "POP-00597",
+          "POP-00644"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "eastlake-desmond-morton-win-streak",
+        "label": "eastlake-desmond-morton-win-streak | C107→C107 | 2 article(s) | opened 2",
+        "hood": "Eastlake",
+        "popids": [
+          "POP-00533",
+          "POP-00052",
+          "POP-00598",
+          "POP-00051"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "downtown-jessie-hess-beat-oaks-beat",
+        "label": "downtown-jessie-hess-beat-oaks-beat | C107→C107 | 2 article(s) | opened 2",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00212",
+          "POP-00224"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "downtown-wilson-shepard-beat-oaks-ground",
+        "label": "downtown-wilson-shepard-beat-oaks-ground | C107→C107 | 2 article(s) | opened 2",
+        "hood": "Downtown",
+        "popids": [
+          "POP-01022",
+          "POP-01023",
+          "POP-00212",
+          "POP-00224"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "eastlake-travis-coles-sideline-signal",
+        "label": "eastlake-travis-coles-sideline-signal | C107→C107 | 2 article(s) | opened 2",
+        "hood": "Eastlake",
+        "popids": [
+          "POP-00533",
+          "POP-00598",
+          "POP-00051",
+          "POP-00052"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "fruitvale-john-ellis-sports-analytics",
+        "label": "fruitvale-john-ellis-sports-analytics | C107→C107 | 1 article(s) | opened 1",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00033",
+          "POP-00597",
+          "POP-00198",
+          "POP-00644"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "glenview-desmond-morton-long-view-signal",
+        "label": "glenview-desmond-morton-long-view-signal | C107→C107 | 1 article(s) | opened 1",
+        "hood": "Glenview",
+        "popids": [
+          "POP-00051",
+          "POP-00003",
+          "POP-01087",
+          "POP-01089"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "jack-london-martin-richards-roster-move",
+        "label": "jack-london-martin-richards-roster-move | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031",
+          "POP-00273",
+          "POP-00642",
+          "POP-00643"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-martin-richards-long-view-signal",
+        "label": "jack-london-martin-richards-long-view-signal | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031",
+          "POP-00642"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "west-oakland-elio-perez-ripple",
+        "label": "west-oakland-elio-perez-ripple | C106→C106 | 2 article(s) | opened 2",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00201",
+          "POP-00722",
+          "POP-00794",
+          "POP-00961"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-martin-richards-story-signal",
+        "label": "jack-london-martin-richards-story-signal | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031",
+          "POP-00273",
+          "POP-00642",
+          "POP-00643"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-martin-richards-sports-analytics",
+        "label": "jack-london-martin-richards-sports-analytics | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031"
+        ],
+        "lastCycle": 106
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00527",
+        "name": "Mike Paulson",
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks — Jack London",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00528",
+        "name": "Deacon Seymour",
+        "profile": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00025",
+        "name": "Arturo Ramos",
+        "profile": "Arturo Ramos — Starting Pitcher, Oakland A's — Laurel",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00022",
+        "name": "Danny Horn",
+        "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00022-a57d6f596e",
+        "pop": "POP-00022",
+        "name": "Danny Horn",
+        "quote": "Look, I know my numbers haven’t been where I want them this postseason, but I’m grinding every day. This team’s got heart, and I’m gonna do everything I can to help us bring home that championship. The Phillies are tough, but we’ve got the pieces to get it done.",
+        "factIds": [
+          "F-d2d43282eb21",
+          "F-c4545b578d5f"
+        ],
+        "src": "packet.W2[POP-00022]"
+      },
+      {
+        "id": "Q-POP-00528-89c383cb1a",
+        "pop": "POP-00528",
+        "name": "Deacon Seymour",
+        "quote": "Danny Horn’s been grinding, and I respect that. The numbers don’t tell the whole story—he’s a guy who shows up every day, puts in the work, and keeps his head in the game. Right now, he’s not finding the gaps, but I’ve seen him turn it around before. He’s got the discipline, and when he locks in, he can change the momentum of a game. We’re counting on him to step up when it matters most.",
+        "factIds": [
+          "F-c4545b578d5f"
+        ],
+        "src": "packet.W2[POP-00528]"
+      },
+      {
+        "id": "Q-POP-00527-ca699a30e9",
+        "pop": "POP-00527",
+        "name": "Mike Paulson",
+        "quote": "Look, Danny’s been grinding through a tough stretch at the plate—no one’s denying that. But here’s the thing: he’s still showing up every day, putting in the work, and contributing in ways that don’t always show up in the box score. This team’s built on depth, and Danny’s part of that. We’re not leaning on any one guy to carry us—that’s why we’re here, chasing that seventh ring.",
+        "factIds": [
+          "F-d2d43282eb21",
+          "F-c4545b578d5f"
+        ],
+        "src": "packet.W2[POP-00527]"
+      },
+      {
+        "id": "Q-POP-00025-99cb05b249",
+        "pop": "POP-00025",
+        "name": "Arturo Ramos",
+        "quote": "Look, Danny's been grinding like the rest of us. Numbers don't always tell the whole story—he's got the kind of at-bats that wear pitchers down, and in a long series, that matters. We're not worried. When it clicks for him, it's gonna be big.",
+        "factIds": [
+          "F-c4545b578d5f",
+          "F-d2d43282eb21"
+        ],
+        "src": "packet.W2[POP-00025]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Anthony Raines",
+        "text": "Is there a mechanical issue with Horn's swing?",
+        "usable": false
+      },
+      {
+        "from": "Anthony Raines",
+        "text": "Could fatigue be a factor in Horn's performance?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C108",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-78217e633afa"
+    },
+    {
+      "t": "FACT",
+      "text": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+      "src": "world_summary_c108.md ## Sports",
+      "id": "F-c8c06b27c600"
+    },
+    {
+      "t": "FACT",
+      "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+      "src": "world_summary_c108.md ## Sports",
+      "id": "F-d2d43282eb21"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+      "src": "world_summary_c108.md ## Sports",
+      "id": "F-98134f64c28d"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+      "src": "world_summary_c108.md ## Sports",
+      "id": "F-dd826c22d8c0"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+      "src": "world_summary_c108.md ## Sports",
+      "id": "F-c4545b578d5f"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+      "src": "world_summary_c108.md ## Sports",
+      "id": "F-ac7eeea9e9a7"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Evaluate one Packet-backed sports line, roster fit, or feed delta with correctly attributed numbers and explicit sample limits. One sourced analytic claim is success; fan heat, elegy, and invented advanced metrics are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "precise third-person sports analysis",
+      "targetWords": "evidence-bounded",
+      "opening": "the strongest Packet-backed player line or roster fact",
+      "closing": "the sample, roster, or dossier evidence still needed to test the claim"
+    },
+    "authorizedTexture": [
+      "plain-language comparison of supplied player lines with each statistic kept with its named subject",
+      "a cautious variance or role-fit interpretation explicitly limited by the supplied sample",
+      "an unnamed quiet press-box or clubhouse transition that adds no person, venue, event, result, statistic, or team act"
+    ],
+    "textureConditions": [
+      "every named player, team, venue, institution, league, organization, and source must come from the Packet",
+      "every statistic, record, streak, result, roster move, role, award, contract, salary, injury, date, and sample claim requires Packet support",
+      "an unresolved feed subject may be named only as supplied and may not receive a POPID, biography, role beyond the supplied label, quote, or interview",
+      "single-game production may support a feed-delta observation but not an unsupported season projection or new player identity"
+    ],
+    "canonBlockers": [
+      "a statistic attributed to the wrong player or two player lines merged into one subject",
+      "alternate feed spellings presented as distinct people or silently assigned an invented identity",
+      "an invented advanced metric, projection, split, roster fact, contract, salary, award, injury, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "fan we, emotional crowd consensus, or historical elegy replacing the analytic claim"
+    ]
+  },
+  "manifest": {
+    "id": "AM-a2917e324908",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-78217e633afa",
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-c8c06b27c600",
+        "t": "FACT",
+        "text": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+        "src": "world_summary_c108.md ## Sports"
+      },
+      {
+        "id": "F-d2d43282eb21",
+        "t": "FACT",
+        "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+        "src": "world_summary_c108.md ## Sports"
+      },
+      {
+        "id": "F-98134f64c28d",
+        "t": "FACT",
+        "text": "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+        "src": "world_summary_c108.md ## Sports"
+      },
+      {
+        "id": "F-dd826c22d8c0",
+        "t": "FACT",
+        "text": "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+        "src": "world_summary_c108.md ## Sports"
+      },
+      {
+        "id": "F-c4545b578d5f",
+        "t": "FACT",
+        "text": "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+        "src": "world_summary_c108.md ## Sports"
+      },
+      {
+        "id": "F-ac7eeea9e9a7",
+        "t": "FACT",
+        "text": "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+        "src": "world_summary_c108.md ## Sports"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00022-a57d6f596e",
+        "speakerId": "POP-00022",
+        "speakerName": "Danny Horn",
+        "text": "Look, I know my numbers haven’t been where I want them this postseason, but I’m grinding every day. This team’s got heart, and I’m gonna do everything I can to help us bring home that championship. The Phillies are tough, but we’ve got the pieces to get it done.",
+        "factIds": [
+          "F-d2d43282eb21",
+          "F-c4545b578d5f"
+        ],
+        "src": "packet.W2[POP-00022]"
+      },
+      {
+        "id": "Q-POP-00528-89c383cb1a",
+        "speakerId": "POP-00528",
+        "speakerName": "Deacon Seymour",
+        "text": "Danny Horn’s been grinding, and I respect that. The numbers don’t tell the whole story—he’s a guy who shows up every day, puts in the work, and keeps his head in the game. Right now, he’s not finding the gaps, but I’ve seen him turn it around before. He’s got the discipline, and when he locks in, he can change the momentum of a game. We’re counting on him to step up when it matters most.",
+        "factIds": [
+          "F-c4545b578d5f"
+        ],
+        "src": "packet.W2[POP-00528]"
+      },
+      {
+        "id": "Q-POP-00527-ca699a30e9",
+        "speakerId": "POP-00527",
+        "speakerName": "Mike Paulson",
+        "text": "Look, Danny’s been grinding through a tough stretch at the plate—no one’s denying that. But here’s the thing: he’s still showing up every day, putting in the work, and contributing in ways that don’t always show up in the box score. This team’s built on depth, and Danny’s part of that. We’re not leaning on any one guy to carry us—that’s why we’re here, chasing that seventh ring.",
+        "factIds": [
+          "F-d2d43282eb21",
+          "F-c4545b578d5f"
+        ],
+        "src": "packet.W2[POP-00527]"
+      },
+      {
+        "id": "Q-POP-00025-99cb05b249",
+        "speakerId": "POP-00025",
+        "speakerName": "Arturo Ramos",
+        "text": "Look, Danny's been grinding like the rest of us. Numbers don't always tell the whole story—he's got the kind of at-bats that wear pitchers down, and in a long series, that matters. We're not worried. When it clicks for him, it's gonna be big.",
+        "factIds": [
+          "F-c4545b578d5f",
+          "F-d2d43282eb21"
+        ],
+        "src": "packet.W2[POP-00025]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00527",
+        "name": "Mike Paulson",
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks — Jack London",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00528",
+        "name": "Deacon Seymour",
+        "profile": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00025",
+        "name": "Arturo Ramos",
+        "profile": "Arturo Ramos — Starting Pitcher, Oakland A's — Laurel",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00022",
+        "name": "Danny Horn",
+        "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Anthony Raines",
+        "text": "Is there a mechanical issue with Horn's swing?",
+        "publishable": false
+      },
+      {
+        "from": "Anthony Raines",
+        "text": "Could fatigue be a factor in Horn's performance?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language comparison of supplied player lines with each statistic kept with its named subject",
+      "a cautious variance or role-fit interpretation explicitly limited by the supplied sample",
+      "an unnamed quiet press-box or clubhouse transition that adds no person, venue, event, result, statistic, or team act"
+    ],
+    "textureConditions": [
+      "every named player, team, venue, institution, league, organization, and source must come from the Packet",
+      "every statistic, record, streak, result, roster move, role, award, contract, salary, injury, date, and sample claim requires Packet support",
+      "an unresolved feed subject may be named only as supplied and may not receive a POPID, biography, role beyond the supplied label, quote, or interview",
+      "single-game production may support a feed-delta observation but not an unsupported season projection or new player identity"
+    ],
+    "forbiddenClaimClasses": [
+      "a statistic attributed to the wrong player or two player lines merged into one subject",
+      "alternate feed spellings presented as distinct people or silently assigned an invented identity",
+      "an invented advanced metric, projection, split, roster fact, contract, salary, award, injury, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "fan we, emotional crowd consensus, or historical elegy replacing the analytic claim"
+    ]
+  }
+}

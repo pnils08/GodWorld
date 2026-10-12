@@ -1,0 +1,345 @@
+FULL STAT TRUE SOURCE — PITCHER
+
+Name: Louis Cross
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: RP
+
+ 
+
+Jersey: #21
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 89
+
+ 
+
+MLB Service: 9.063
+
+ 
+
+Age: 30
+
+ 
+
+Bats: L
+
+ 
+
+Throws: L
+
+ 
+
+Height: 6'0"
+
+ 
+
+Weight: 185 lbs
+
+ 
+
+Drafted: Round 3 (2028)
+
+ 
+
+Secondary Position: NONE
+
+ 
+
+Hitter Tendency: PULL HITTER
+
+ 
+
+Born: TENNESSEE
+
+ 
+
+Canonical POPID: POP-01080
+
+
+--------------------------------------------------------------------------------
+
+
+PITCH REPERTOIRE
+
+4-Seam Fastball: 96 mph
+
+ 
+
+Slider: 88 mph
+
+ 
+
+2-Seam Fastball: 94 mph
+
+ 
+
+12–6 Curve: 82 mph
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+STA: 42
+
+ 
+
+H/9: 99
+
+ 
+
+K/9: 77
+
+ 
+
+BB/9: 64
+
+ 
+
+HR/9: 97
+
+ 
+
+PCLT: 85
+
+ 
+
+CTRL: 67
+
+ 
+
+VEL: 84
+
+ 
+
+BRK: 63
+
+ 
+
+FLD: 30
+
+ 
+
+ARM: 56
+
+ 
+
+ACC: 57
+
+ 
+
+REAC: 49
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   GS  W   L   SV  BS  HLD  IP    H   R   ER  HR  BB  SO   ERA
+
+ 
+
+2041  ATH   47  0   3   2   6   0   9    64.1  43  19  19  9   16  70   2.66
+
+ 
+
+2040  ATH   0   0   0   0   0   0   0    0.0   0   0   0   0   0   0    0.00
+
+ 
+
+2039  WSH   66  0   3   3   2   2   32   72.0  41  18  17  7   33  68   2.13
+
+ 
+
+2038  TOT   86  0   6   7   3   7   33   88.1  71  32  24  6   28  77   2.45
+
+ 
+
+2037  MIA   77  0   7   10  1   5   37   84.0  69  45  35  8   33  83   3.75
+
+ 
+
+2036  TOT   66  0   5   3   9   4   16   71.2  57  29  28  5   36  61   3.52
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 671
+
+ 
+
+GS: 0
+
+ 
+
+W: 47
+
+ 
+
+L: 51
+
+ 
+
+SV: 104
+
+ 
+
+BS: 52
+
+ 
+
+HLD: 182
+
+ 
+
+IP: 733.0
+
+ 
+
+H: 576
+
+ 
+
+R: 317
+
+ 
+
+ER: 273
+
+ 
+
+HR: 65
+
+ 
+
+BB: 344
+
+ 
+
+SO: 628
+
+ERA: 3.35
+
+ 
+
+WHIP: 1.25
+
+ 
+
+K/9: 7.71
+
+ 
+
+BB/9: 4.23
+
+ 
+
+HR/9: 0.80
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2040: $12.0M
+
+ 
+
+2041: $12.0M
+
+ 
+
+2042–2045: Free Agent (FA)
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Options: 2/3 USED
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-01080
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-01080

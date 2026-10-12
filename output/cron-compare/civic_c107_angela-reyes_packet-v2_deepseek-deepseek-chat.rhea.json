@@ -1,0 +1,56 @@
+{
+  "draft": "output/cron-compare/civic_c107_angela-reyes_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "107",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d4d992edaacd57625b0e48c38f5b428bb44ab0d7824c470421e8c98a6809f659",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Verified: citizen identity, exact quote provenance, and neighborhood education texture adhere strictly to canon.",
+  "review": {
+    "profileId": "angela-education-stability-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "packageVersion": "ANGELA-LEP2-1",
+    "manifestId": "AM-aa23e8f522f1",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "11",
+          "10"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Angela Reyes",
+      "Mei Wong"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0111,
+  "durationMs": 10629,
+  "parseError": false,
+  "ranAt": "2026-09-15T23:17:14.521Z"
+}

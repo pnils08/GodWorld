@@ -1,0 +1,26 @@
+{
+  "office": "council_d6",
+  "agentDir": "civic-office-council-d6",
+  "holder": "Elliott Crane",
+  "popid": "POP-00044",
+  "title": "City Council District 6",
+  "date": "2026-09-29",
+  "cycle": 109,
+  "model": "google/gemini-3.7-flash",
+  "statement": "Addressing declining sentiment in Piedmont Avenue requires City Hall to maintain reliable baseline municipal services and respond directly to local health concerns, while our oversight posture on Baylight remediation remains firm: strict contract auditing, documented environmental safety compliance, and full public transparency.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-108-civic-office-council-d6",
+        "text": "Our action plan pairs focused municipal service delivery and health responsiveness in Piedmont Avenue with strict milestone-based auditing and public contract verification for Baylight remediation.",
+        "directiveCycle": 108,
+        "confrontationSeat": "civic-office-council-d6"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "CONF-108-civic-office-council-d6",
+  "ranAt": "2026-09-29T10:45:53.550Z",
+  "fellBackFrom": null
+}

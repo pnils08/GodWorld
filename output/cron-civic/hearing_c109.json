@@ -1,0 +1,637 @@
+{
+  "stage": "hearing",
+  "cycle": 109,
+  "results": [
+    {
+      "dir": "civic-office-council-d7",
+      "slug": "council_d7",
+      "model": "google/gemini-3.7-flash",
+      "ok": true,
+      "output": "output/civic-voice/council_d7_c109.json",
+      "statements": 2,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D7",
+        "title": "City Council District 7",
+        "holder": "Warren Ashford",
+        "popid": "POP-00504",
+        "district": "D7",
+        "faction": "CRC",
+        "approval": 51,
+        "agentDir": "civic-office-council-d7",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D7)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "google/gemini-3.7-flash"
+      },
+      "voiceJson": {
+        "office": "council_d7",
+        "cycle": 109,
+        "speaker": "Warren Ashford",
+        "cascadeSummary": "Certified final inspection sign-offs for the Temescal Community Health Center while demanding a complete closeout audit following its public opening. Additionally, transmitted targeted municipal service requests to fortify commercial security in KONO and address sluggish street trade in Temescal through strict baseline oversight.",
+        "statements": [
+          {
+            "statementId": "STMT-109-council_d7-001",
+            "type": "vote_statement",
+            "topic": "Temescal Community Health Center Opening and Final Inspection Audit",
+            "initiative": "Temescal Community Health Center",
+            "decision": "Formally certify final fire-rated wall and drywall inspection sign-offs while demanding full closeout audit documentation for the $45M Temescal Community Health Center.",
+            "quote": "The Temescal Community Health Center opened ahead of schedule not by executive magic, but because District 7 inspected every single conduit, logged every inspection, and held the budget line.",
+            "fullStatement": "The Mayor can cut the ribbon and hold her celebration, but the $45M Temescal Community Health Center crossed the finish line because this office refused to cut corners. District 7 verified the MEP rough-ins, cleared the certified fire-rated wall inspections, and enforced strict milestone compliance before approving drywall enclosure. Public infrastructure succeeds when oversight is rigorous, not when press releases are plentiful. As this facility opens its doors to the public, I am submitting the final certified inspection sign-offs to the clerk while demanding a comprehensive closeout audit log. We delivered a state-of-the-art facility for Temescal under strict fiscal discipline, and that standard of vigilance must govern every major capital project in Oakland.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d7-002",
+            "type": "policy_statement",
+            "topic": "District 7 Corridor Management and KONO Municipal Service Delivery",
+            "initiative": null,
+            "decision": "Advance municipal service requests for KONO commercial corridor security and demand targeted economic support to revitalize Temescal street trade.",
+            "quote": "KONO does not need vague mayoral promises—it requires verified municipal safety delivery and targeted corridor maintenance that protects local merchants.",
+            "fullStatement": "Across District 7, our neighborhood mood is clearly upbeat, but the economic realities on the ground require focused municipal delivery rather than broad executive rhetoric. While KONO maintains steady street trade and low crime, corridor confidence depends entirely on targeted municipal safety presence and property security enforcement. Meanwhile, in Temescal, where street trade has slowed despite our infrastructure wins, we need verifiable service coordination to drive foot traffic back to local storefronts. Rockridge demonstrates the resilience of our commercial core when baseline municipal services are properly maintained. I am submitting formal service requests for KONO and Temescal to ensure city departments deliver measurable baseline maintenance rather than unbudgeted executive programs.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d8",
+      "slug": "council_d8",
+      "model": "google/gemini-3.7-flash",
+      "ok": true,
+      "output": "output/civic-voice/council_d8_c109.json",
+      "statements": 3,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D8",
+        "title": "City Council District 8",
+        "holder": "Nina Chen",
+        "popid": "POP-00505",
+        "district": "D8",
+        "faction": "CRC",
+        "approval": 55,
+        "agentDir": "civic-office-council-d8",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D8)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "google/gemini-3.7-flash"
+      },
+      "voiceJson": {
+        "office": "council_d8",
+        "cycle": 109,
+        "speaker": "Nina Chen",
+        "cascadeSummary": "For Cycle 109, District 8 accepts the placement metrics for the Youth Apprenticeship Pipeline while establishing formal audit requirements for applicant intake records and regional placement transparency. We direct focused municipal baseline support to stabilize slow commercial trade in Adams Point and Eastlake, while crediting disciplined municipal maintenance for Lake Merritt's ongoing steady performance. Additionally, we confirm procedural compliance for the Fruitvale Transit Hub consultant selection and Baylight remediation tracking.",
+        "statements": [
+          {
+            "statementId": "STMT-109-council_d8-001",
+            "type": "audit_statement",
+            "topic": "Youth Apprenticeship Pipeline Intake Audit and Placement Transparency",
+            "initiative": "Oakland Youth Apprenticeship Pipeline",
+            "decision": "Formalize district audit requirements for INIT-007 intake documentation and verify cohort placement metrics.",
+            "quote": "Metric publication is welcome, but legislative verification requires complete applicant intake audits before full cohort deployment.",
+            "fullStatement": "Publishing placement metrics is a positive procedural step, but District 8 requires complete, verifiable applicant intake audit records to ensure transparency across all districts. We cannot evaluate the efficacy of the Oakland Youth Apprenticeship Pipeline on aggregate outputs alone without examining intake compliance and baseline criteria. District 8 formally enters an audit finding requiring documented verification of applicant logs alongside published placement figures to guarantee operational integrity across municipal training programs.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d8-002",
+            "type": "district_statement",
+            "topic": "District 8 Commercial Corridor Oversight and Baseline Municipal Services",
+            "initiative": null,
+            "decision": "Mandate documented municipal trade reviews for Adams Point and Eastlake while crediting municipal maintenance at Lake Merritt.",
+            "quote": "Lake Merritt's steady conditions show what consistent municipal service achieves; we must apply that same rigor to Adams Point and Eastlake.",
+            "fullStatement": "Lake Merritt's steady street trade and low crime are the direct result of consistent, documented baseline municipal service delivery and diligent local stewardship. However, we cannot ignore the slow commercial trade signals in Adams Point and Eastlake. While community morale remains upbeat and crime remains low across District 8, our commercial corridors require proactive municipal support rather than passive monitoring. We direct city administration to audit service delivery and provide documented trade mitigation protocols for Adams Point and Eastlake while correcting administrative filing discrepancies in Grand Lake.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d8-003",
+            "type": "oversight_statement",
+            "topic": "Capital Projects and Environmental Review Compliance",
+            "initiative": "Fruitvale Transit Hub Phase II — Visioning",
+            "decision": "Affirm procedural compliance and design consultant milestones for Fruitvale Transit Hub and Baylight remediation.",
+            "quote": "Every major capital milestone must adhere strictly to executed contracts and documented procedural timelines.",
+            "fullStatement": "District 8 supports moving forward with the design consultant selection for the Fruitvale Transit Hub Phase II, provided that procurement procedures, timeline milestones, and environmental review standards remain fully documented and accessible. Similarly, on the Baylight District Phase II remediation updates, our office continues to monitor contract execution and environmental remediation protocols. Capital infrastructure investments succeed only when City Hall maintains rigorous procedural standards from initial design authorization through site completion.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d6",
+      "slug": "council_d6",
+      "model": "google/gemini-3.7-flash",
+      "ok": true,
+      "output": "output/civic-voice/council_d6_c109.json",
+      "statements": 4,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D6",
+        "title": "City Council District 6",
+        "holder": "Elliott Crane",
+        "popid": "POP-00044",
+        "district": "D6",
+        "faction": "CRC",
+        "approval": 55,
+        "agentDir": "civic-office-council-d6",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D6)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "google/gemini-3.7-flash"
+      },
+      "voiceJson": {
+        "office": "council_d6",
+        "cycle": 109,
+        "speaker": "Elliott Crane",
+        "cascadeSummary": "District 6 is acting directly to protect commercial vitality on Piedmont Avenue by pairing our low crime rates with rigorous municipal service delivery and responsive merchant support. Citywide, I am establishing strict council oversight benchmarks for Baylight Phase II remediation and insisting that all capital and workforce programs deliver transparent, verified returns for Oakland taxpayers.",
+        "statements": [
+          {
+            "statementId": "STMT-109-council_d6-001",
+            "type": "district_statement",
+            "topic": "Piedmont Avenue Commercial Corridor Strategy",
+            "initiative": null,
+            "decision": "Deploy a targeted district support strategy for Piedmont Avenue merchants focusing on municipal service responsiveness and corridor stability.",
+            "quote": "Low crime and active sidewalks are the foundation of Piedmont Avenue, but sustaining merchant confidence requires City Hall to deliver dependable municipal services every single day.",
+            "fullStatement": "Piedmont Avenue continues to demonstrate the strength of neighborhood-level stability with low crime and bustling street trade, yet merchant sentiment signals that we cannot take our commercial districts for granted. District 6 is advancing a focused corridor strategy to ensure our small businesses receive prompt municipal maintenance, streamlined administrative support, and steady public safety coordination. We protect our commercial vitality not through rhetoric, but through reliable, disciplined execution.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d6-002",
+            "type": "oversight_statement",
+            "topic": "Baylight District Phase II Site Remediation Oversight",
+            "initiative": "Baylight District — Final Council Vote",
+            "decision": "Establish independent council oversight criteria and milestone audits for Phase II remediation contracts.",
+            "quote": "Remediation at Baylight cannot run on general progress reports; every environmental metric, hauling contract, and dollar spent demands rigorous public verification.",
+            "fullStatement": "As site remediation begins for Phase II of the Baylight District, the City Council must maintain active, independent oversight over every operational phase. Large-scale remediation projects carry serious environmental and fiscal risks that require structured milestone auditing rather than passive updates. I am establishing concrete council oversight benchmarks to ensure contractor compliance, environmental safety standards, and complete transparency in spending before subsequent project phases proceed.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d6-003",
+            "type": "oversight_statement",
+            "topic": "Youth Apprenticeship Pipeline Placement Verification",
+            "initiative": "Oakland Youth Apprenticeship Pipeline",
+            "decision": "Support publication of cohort placement metrics while mandating quarterly retention audits.",
+            "quote": "Publishing placement metrics is the standard of fiscal accountability Oakland deserves—job training programs must prove they lead directly to durable careers.",
+            "fullStatement": "I support the directed publication of cohort placement metrics for the Youth Apprenticeship Pipeline. Workforce development investments must be evaluated by real employment outcomes, verifiable wage data, and sustained retention. Establishing clear, publicly reported performance indicators protects taxpayer dollars and guarantees that our enrolled youth transition into genuine, long-term careers.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d6-004",
+            "type": "policy_statement",
+            "topic": "Fruitvale Transit Hub Phase II Design Consultant Selection",
+            "initiative": "Fruitvale Transit Hub Phase II — Visioning",
+            "decision": "Condition design consultant authorization on strict cost controls and defined project milestones.",
+            "quote": "Major transit infrastructure requires rigorous cost containment from day one of design selection through project delivery.",
+            "fullStatement": "The selection of design consultants for Phase II of the Fruitvale Transit Hub must be bound to firm cost ceilings, clear deliverable timelines, and transparent reporting. Infrastructure investments succeed when visionary planning is backed by disciplined financial management and enforceable contractual standards.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d2",
+      "slug": "council_d2",
+      "model": "meta-llama/llama-3.3-70b-instruct",
+      "ok": true,
+      "output": "output/civic-voice/council_d2_c109.json",
+      "statements": 3,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D2",
+        "title": "City Council District 2",
+        "holder": "Leonard Tran",
+        "popid": "POP-00502",
+        "district": "D2",
+        "faction": "IND",
+        "approval": 59,
+        "agentDir": "civic-office-council-d2",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D2)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "meta-llama/llama-3.3-70b-instruct"
+      },
+      "voiceJson": {
+        "office": "council_d2",
+        "cycle": 109,
+        "speaker": "Leonard Tran",
+        "cascadeSummary": "I am addressing the Baylight District's Phase II site remediation schedule and the need for immediate action to support Downtown Oakland's economic decay. I will vote to confirm the Phase II site remediation proceeds on schedule and emphasize the importance of infrastructure and economic impact data. Additionally, I will claim credit for Jack London's economic success and acknowledge the slipping mood in Downtown Oakland, calling for urgent action to address the math imbalance and economic decay.",
+        "statements": [
+          {
+            "statementId": "STMT-109-council_d2-001",
+            "type": "vote_statement",
+            "topic": "Baylight District Phase II Site Remediation",
+            "initiative": "INIT-006",
+            "decision": "Confirm Phase II site remediation schedule",
+            "quote": "We must break ground on Baylight now, and we must do it with a clear understanding of the infrastructure and economic impact data.",
+            "fullStatement": "As we move forward with the Baylight District project, I emphasize the importance of addressing the economic imbalance in Downtown Oakland. The recent data shows a decline in sentiment and an increase in crime, which necessitates targeted support. I propose we allocate resources to enhance public safety and stimulate local businesses, ensuring the success of the Baylight District benefits the entire community. I will vote to confirm the Phase II site remediation proceeds on schedule.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d2-002",
+            "type": "statement",
+            "topic": "Downtown Economic Revitalization",
+            "initiative": "INIT-008",
+            "decision": "Propose community task force to address economic decay",
+            "quote": "Downtown's struggles are real, and I stand with its people - we need targeted support to address the crime and economic imbalance, not just words.",
+            "fullStatement": "Downtown's daily life is slipping, and I see it too. We need to act now to address the math imbalance and economic decay. I propose a community task force to bring together stakeholders and experts to develop a comprehensive plan to revitalize Downtown Oakland's economy.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d2-003",
+            "type": "statement",
+            "topic": "Jack London Economic Performance",
+            "initiative": null,
+            "decision": "Claim credit for Jack London's economic success",
+            "quote": "Jack London's success is a testament to our focus on basic infrastructure, safety, and letting businesses operate without unnecessary obstruction.",
+            "fullStatement": "I am proud to see the economic success of Jack London, which is a result of our efforts to provide basic infrastructure, safety, and a business-friendly environment. We must continue to support and nurture this growth to ensure the long-term prosperity of our community.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d9",
+      "slug": "council_d9",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/council_d9_c109.json",
+      "statements": 2,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D9",
+        "title": "City Council District 9",
+        "holder": "Terrence Mobley",
+        "popid": "POP-00506",
+        "district": "D9",
+        "faction": "OPP",
+        "approval": 55,
+        "agentDir": "civic-office-council-d9",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D9)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-chat"
+      },
+      "voiceJson": {
+        "office": "council_d9",
+        "cycle": 109,
+        "speaker": "Terrence Mobley",
+        "cascadeSummary": "This cycle, I prioritized addressing Uptown's commercial distress by pushing for expanded stabilization resources, while ensuring Laurel's progress remains a model for equitable development. I supported initiatives that align with our district's long-term stability goals.",
+        "statements": [
+          {
+            "statementId": "STMT-109-council_d9-001",
+            "type": "vote_statement",
+            "topic": "Uptown Commercial Distress",
+            "initiative": "West Oakland Stabilization Fund",
+            "decision": "Expand stabilization efforts to Uptown",
+            "quote": "Uptown’s vibrant streets are quieting—we can’t let our momentum fade.",
+            "fullStatement": "Uptown’s commercial distress metrics don’t tell the full story—we’re investing in long-term stability, not quick fixes. That 10/10 momentum didn’t come from chasing trends—it came from methodical community investment. I stand by our district’s measured approach. Expanding the West Oakland Stabilization Fund to Uptown is a necessary step to ensure our businesses thrive and our community remains vibrant.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d9-002",
+            "type": "vote_statement",
+            "topic": "Laurel Stability",
+            "initiative": null,
+            "decision": "Defend Laurel's progress as a model for equitable development",
+            "quote": "Laurel’s stability is no accident—it’s the result of staying focused on what works.",
+            "fullStatement": "Laurel’s stability isn’t by chance—it’s the result of stubborn, consistent work. Crime at 0.47 versus citywide 0.648? That gap didn’t open itself. We’re holding at zero housing pressure while others scramble. This district chose investment over quick fixes, and I won’t let distractions pull us off course now. Laurel’s progress isn’t legacy—it’s today’s work paying off, and it stands as a model for equitable development across Oakland.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d1",
+      "slug": "council_d1",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/council_d1_c109.json",
+      "statements": 3,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D1",
+        "title": "City Council District 1",
+        "holder": "Denise Carter",
+        "popid": "POP-00501",
+        "district": "D1",
+        "faction": "OPP",
+        "approval": 95,
+        "agentDir": "civic-office-council-d1",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D1)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-chat"
+      },
+      "voiceJson": {
+        "office": "council_d1",
+        "cycle": 109,
+        "speaker": "Denise Carter",
+        "cascadeSummary": "This cycle, I prioritized supporting West Oakland's revitalization through the Stabilization Fund expansion and ensuring equitable access to alternative response services in District 1. I also celebrated Brooklyn's community-driven success and reaffirmed my commitment to addressing displacement where it hits hardest.",
+        "statements": [
+          {
+            "statementId": "STMT-109-council_d1-001",
+            "type": "vote_statement",
+            "topic": "West Oakland Stabilization Fund",
+            "initiative": "INIT-001",
+            "decision": "Expand the Stabilization Fund's Downtown outreach to accelerate support for displaced residents.",
+            "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+            "fullStatement": "The month-eight disbursement of the West Oakland Stabilization Fund marks a critical step in our ongoing effort to revitalize the neighborhood. The Downtown outreach assessment shows promising engagement, but the real test will be sustaining momentum beyond the initial canvass. We need to ensure that the funds directly impact residents and businesses in West Oakland, particularly those most affected by displacement. Expansion is not just an option—it's a necessity.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d1-002",
+            "type": "vote_statement",
+            "topic": "Oakland Alternative Response Initiative",
+            "initiative": "INIT-002",
+            "decision": "Approve permanent dispatch expansion based on District 1 evaluation results.",
+            "quote": "Three districts, three protocols, one clear result—OARI works, so OARI grows.",
+            "fullStatement": "The District 1 evaluation of the Oakland Alternative Response Initiative confirms what we've seen in other districts: OARI works. Call diversion rates are up, response times are down, and residents feel safer knowing they have access to non-police resources. Permanent expansion isn't just justified—it's overdue.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d1-003",
+            "type": "cascade_statement",
+            "topic": "District Crisis and Credit",
+            "initiative": null,
+            "decision": "Celebrate Brooklyn's community-driven success and reaffirm commitment to West Oakland revitalization.",
+            "quote": "Brooklyn’s vitality comes from its people—not City Hall’s policies.",
+            "fullStatement": "Brooklyn's success this cycle is a testament to the strength of its community. The crime drop, the steady street trade, the tangible sense of hope—that's all civic engagement, not City Hall directives. Meanwhile, West Oakland's revitalization is gaining momentum thanks to the Stabilization Fund, but there's still work to do. We owe it to the residents who kept this neighborhood alive to keep pushing.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d5",
+      "slug": "council_d5",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/council_d5_c109.json",
+      "statements": 3,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D5",
+        "title": "City Council District 5",
+        "holder": "Janae Rivers",
+        "popid": "POP-00043",
+        "district": "D5",
+        "faction": "OPP",
+        "approval": 85,
+        "agentDir": "civic-office-council-d5",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D5)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-chat"
+      },
+      "voiceJson": {
+        "office": "council_d5",
+        "cycle": 109,
+        "speaker": "Janae Rivers",
+        "cascadeSummary": "Supported the Oakland Alternative Response Initiative expansion based on East Oakland's high CrimeIndex, ensuring youth placements are prioritized. Advocated for Baylight District's economic recovery and credited East Oakland's community-driven successes.",
+        "statements": [
+          {
+            "statementId": "STMT-109-council_d5-001",
+            "type": "vote_statement",
+            "topic": "public safety",
+            "initiative": "INIT-002",
+            "decision": "YES - Support OARI expansion to East Oakland",
+            "quote": "East Oakland's crime index isn't a footnote—it's a five-alarm fire demanding action, not promises.",
+            "fullStatement": "East Oakland's CrimeIndex at 0.66—the highest in the city—demands more than incremental solutions. The Oakland Alternative Response Initiative (OARI) has proven its effectiveness in District 1, and now it’s time to expand its deployment to East Oakland. Our community can’t afford to wait while protocols are debated—we need co-response teams on the ground, and we need youth placements tracked and confirmed. Lives are at stake, and our district deserves nothing less than decisive action.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d5-002",
+            "type": "constituent_statement",
+            "topic": "economic recovery",
+            "initiative": null,
+            "decision": "Advocate for Baylight District's economic spike",
+            "quote": "Baylight's slow streets aren't city wins—they're people's victories.",
+            "fullStatement": "Baylight District is showing signs of economic recovery—a clear testament to the resilience of our community. While street trade remains slow, the recent economic spike indicates forward momentum. This isn’t just a statistic; it’s the result of collective effort and investment. As we continue to rebuild, I commit to ensuring that Baylight’s recovery doesn’t stall—it accelerates. Our district deserves not just recovery but thriving, equitable growth.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d5-003",
+            "type": "constituent_statement",
+            "topic": "community success",
+            "initiative": null,
+            "decision": "Credit East Oakland's community health fair",
+            "quote": "East Oakland's peace isn't paperwork—it's people power we haven't unleashed yet.",
+            "fullStatement": "The Foothill Baptist Tabernacle’s community health fair in East Oakland is a shining example of what our district can achieve when we work together. This event wasn’t just a success—it was a testament to the strength and resilience of our community. While City Hall debates protocols, East Oaklanders are building solutions on the ground. I stand with them, amplifying their efforts and ensuring their victories are recognized and supported.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-okoro",
+      "slug": "okoro",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/okoro_c109.json",
+      "statements": 2,
+      "attempts": 2,
+      "seat": {
+        "officeId": "STAFF-DM-COMM",
+        "title": "Deputy Mayor (Community)",
+        "holder": "Brenda Okoro",
+        "popid": "POP-00037",
+        "district": "citywide",
+        "faction": "STAFF",
+        "approval": 65,
+        "agentDir": "civic-office-okoro",
+        "dataDomain": "community-development",
+        "dataSources": [
+          "Initiative_Tracker (stabilization-fund)",
+          "output/world_summary_c{XX}.md §neighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-chat"
+      },
+      "voiceJson": {
+        "office": "okoro",
+        "cycle": 109,
+        "speaker": "Brenda Okoro",
+        "cascadeSummary": "Authorized month-eight disbursement review for West Oakland Stabilization Fund, confirming 47 checks totaling $4.2M disbursed since C84. Directed acceleration of Downtown outreach based on storefront vacancy patterns. Credited West Oakland's stability to long-term residents and targeted Fund disbursements rather than short-term interventions.",
+        "statements": [
+          {
+            "statementId": "STMT-109-okoro-001",
+            "type": "operational_status",
+            "topic": "West Oakland Stabilization Fund disbursement",
+            "initiative": "INIT-001",
+            "decision": "Authorize month-eight disbursement review and expand Downtown outreach capacity",
+            "quote": "Forty-seven checks kept families in place since C84—that's stabilization working as designed. Downtown's vacancies tell us where to accelerate next.",
+            "fullStatement": "The month-eight disbursement review confirms the West Oakland Stabilization Fund is operating as chartered—47 checks totaling approximately $4.2M disbursed since C84 to the long-tenure residents the Fund exists to protect. Downtown's storefront patterns show need moving; we're reallocating two outreach teams there this cycle because stabilization funding must follow the evidence, not the headlines.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-okoro-002",
+            "type": "field_observation",
+            "topic": "District crisis and credit",
+            "initiative": null,
+            "decision": "Attribute West Oakland's stability to residents and Fund targeting rather than external interventions",
+            "quote": "West Oakland's resilience belongs to the people who held their ground—and the Fund that recognized their tenure matters.",
+            "fullStatement": "West Oakland's positive indicators this cycle reflect what happens when stabilization targets the right cohort—long-term residents who built the neighborhood's character. The Fund's disciplined scope recognized that protecting this group sustains community continuity. Credit belongs to them, not to short-term programs. As for Dimond—low crime doesn't mean no concerns. We're reviewing economic signals there for next cycle's adjustment.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d3",
+      "slug": "council_d3",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/council_d3_c109.json",
+      "statements": 3,
+      "attempts": 2,
+      "seat": {
+        "officeId": "COUNCIL-D3",
+        "title": "City Council District 3",
+        "holder": "Rose Delgado",
+        "popid": "POP-00503",
+        "district": "D3",
+        "faction": "OPP",
+        "approval": 85,
+        "agentDir": "civic-office-council-d3",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D3)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-chat"
+      },
+      "voiceJson": {
+        "office": "council_d3",
+        "cycle": 109,
+        "speaker": "Rose Delgado",
+        "cascadeSummary": "I voted to advance the Fruitvale Transit Hub Phase II design consultant selection to keep momentum on a vital community project. I also supported expanding the Oakland Alternative Response Initiative to District 3, recognizing its proven effectiveness in improving public safety. Finally, I highlighted the success of Fruitvale's street trade this cycle as a result of targeted neighborhood investment.",
+        "statements": [
+          {
+            "statementId": "STMT-109-council_d3-001",
+            "type": "vote_statement",
+            "topic": "Fruitvale Transit Hub Phase II",
+            "initiative": "INIT-003",
+            "decision": "YES",
+            "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+            "fullStatement": "The Fruitvale Transit Hub is a generational investment in our community. This design consultant selection moves us from vision to reality while upholding the merchant protections we fought for. I vote YES to keep this project on track.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d3-002",
+            "type": "vote_statement",
+            "topic": "Oakland Alternative Response Initiative",
+            "initiative": "INIT-002",
+            "decision": "YES",
+            "quote": "Safety isn't a template — it's a tailored approach that meets neighborhoods where they are.",
+            "fullStatement": "The Oakland Alternative Response Initiative has proven its value in Districts 1 and 2. Expanding it to District 3 will bring that same proven model of community-responsive public safety to Fruitvale and San Antonio.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d3-003",
+            "type": "crisis_credit_statement",
+            "topic": "District 3 Neighborhoods",
+            "initiative": null,
+            "decision": "Highlight Fruitvale's success",
+            "quote": "Fruitvale's bustling street trade isn't luck — it's the result of deliberate investment in our neighborhoods.",
+            "fullStatement": "This cycle's boosted street trade in Fruitvale shows what happens when we invest in our neighborhoods. It's proof that targeted funding, merchant support, and community engagement get results.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d4",
+      "slug": "council_d4",
+      "model": "meta-llama/llama-3.3-70b-instruct",
+      "ok": true,
+      "output": "output/civic-voice/council_d4_c109.json",
+      "statements": 3,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D4",
+        "title": "City Council District 4",
+        "holder": "Ramon Vega",
+        "popid": "POP-00042",
+        "district": "D4",
+        "faction": "IND",
+        "approval": 55,
+        "agentDir": "civic-office-council-d4",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D4)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "meta-llama/llama-3.3-70b-instruct"
+      },
+      "voiceJson": {
+        "office": "council_d4",
+        "cycle": 109,
+        "speaker": "Ramon Vega",
+        "cascadeSummary": "I will focus on addressing the pressing concerns of my constituents in D4, prioritizing targeted investment and fiscal discipline. The Mayor's agenda items align with my commitment to supporting our city's growth and development. I will support the Fruitvale Transit Hub Phase II and the Oakland Youth Apprenticeship Pipeline, while also addressing commercial contraction in Grand Lake and Glenview.",
+        "statements": [
+          {
+            "statementId": "STMT-109-council_d4-001",
+            "type": "support_statement",
+            "topic": "Fruitvale Transit Hub Phase II",
+            "initiative": "INIT-003",
+            "decision": "YES",
+            "quote": "The Fruitvale Transit Hub is a crucial step in connecting our communities and promoting economic growth. I'm committed to supporting this initiative and ensuring it benefits the people of D4.",
+            "fullStatement": "As Council President, I believe it's essential to invest in our city's infrastructure. The Fruitvale Transit Hub Phase II is a vital project that will improve transportation options for our residents and support local businesses. I will work to ensure that this project is completed efficiently and effectively, while also addressing the concerns of my constituents in D4.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d4-002",
+            "type": "commitment_statement",
+            "topic": "Commercial Contraction in Grand Lake and Glenview",
+            "initiative": "INIT-008",
+            "decision": "COMMIT",
+            "quote": "As the representative of D4, I'm committed to addressing commercial contraction in Grand Lake and Glenview. I will work with the City Planning Director to review our current budget allocations and identify opportunities for reallocation to support the development needs of these neighborhoods.",
+            "fullStatement": "Commercial contraction is a pressing concern in Grand Lake and Glenview, and it's essential that we take action to address it. I will commit to working with the City Planning Director to identify solutions and ensure that our budget allocations are supporting the needs of our communities. This includes reviewing our current small-business stabilization coverage and exploring options for retail vacancy relief.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-109-council_d4-003",
+            "type": "statement",
+            "topic": "Glenview and Dimond",
+            "initiative": null,
+            "decision": "SUPPORT",
+            "quote": "The progress in Glenview is a testament to the city's structured support and the people's resilience. I'll ensure Glenview receives the attention it deserves, with a focus on targeted investment and fiscal discipline.",
+            "fullStatement": "As the representative of D4, I'm proud of the progress we've made in Glenview. However, I also recognize that Dimond is facing challenges, and it's essential that we address them. I will work to ensure that both neighborhoods receive the support they need, while also promoting fiscal discipline and targeted investment.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    }
+  ],
+  "ranAt": "2026-09-28T06:14:04.877Z"
+}

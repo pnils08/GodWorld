@@ -1,0 +1,52 @@
+{
+  "draft": "output/cron-compare/sports_c110_selena-grant_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1f0d04f7321ac60bf3bc0b98317b599b595aac096adf0c0045856e5b279f5f01",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All stats, records, and player lines for the Oaks preseason games accurately match Ground Truth C110.",
+  "review": {
+    "profileId": "selena-grant-oaks-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "packageVersion": "SELENA-OAKS-2",
+    "manifestId": "AM-0f27d6be5a34",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Austin Reaves",
+      "Selena Grant"
+    ],
+    "unverified": [
+      "Bay Tribune Sports"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0105,
+  "durationMs": 8254,
+  "parseError": false,
+  "ranAt": "2026-10-06T23:19:06.697Z"
+}

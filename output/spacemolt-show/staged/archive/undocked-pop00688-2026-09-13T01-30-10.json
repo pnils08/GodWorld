@@ -1,0 +1,303 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00688-2026-09-13T01-30-10",
+  "popid": "POP-00688",
+  "holder": "Merkin Jumper",
+  "session": "undocked-pop00688",
+  "window": {
+    "startedAt": "2026-09-13T01:30:10.962Z",
+    "endedAt": "2026-09-13T01:37:12.816Z"
+  },
+  "runner": {
+    "turns": 55,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 11,
+    "estCostUsd": 0.0304,
+    "tokensIn": 209249,
+    "tokensOut": 3946,
+    "log": "output/spacemolt-show/episodes/undocked-pop00688-2026-09-13T01-30-10.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-09-13T01:37:14.958Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 3,
+      "basis": [
+        {
+          "id": 131486899,
+          "event_type": "trading.exchange_fill",
+          "n": 80
+        },
+        {
+          "id": 131486737,
+          "event_type": "trading.exchange_fill",
+          "n": 24
+        },
+        {
+          "id": 131486736,
+          "event_type": "trading.exchange_fill",
+          "n": 36
+        }
+      ],
+      "value": 140
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "copper_ore": 6,
+          "titanium_ore": 2,
+          "iron_ore": 20
+        },
+        "sold": {
+          "titanium_ore": 2,
+          "iron_ore": 20
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 3,
+        "trading": 3,
+        "combat": 0,
+        "navigation": 0,
+        "session": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 131482114,
+            "created_at": "2026-09-13T01:33:35Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 6 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 6,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 131481788,
+            "created_at": "2026-09-13T01:33:34Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Titanium Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 2,
+              "resource_id": "titanium_ore",
+              "resource_name": "Titanium Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 131481720,
+            "created_at": "2026-09-13T01:33:34Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 20 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 20,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 5
+            }
+          }
+        ],
+        "trading": [
+          {
+            "id": 131486899,
+            "created_at": "2026-09-13T01:35:42Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 2x Titanium Ore @ 40 each (80 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "titanium_ore",
+              "price": 40,
+              "quantity": 2,
+              "role": "seller",
+              "source": "spot",
+              "total": 80
+            }
+          },
+          {
+            "id": 131486737,
+            "created_at": "2026-09-13T01:35:31Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 8x Iron Ore @ 3 each (24 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 3,
+              "quantity": 8,
+              "role": "seller",
+              "source": "spot",
+              "total": 24
+            }
+          },
+          {
+            "id": 131486736,
+            "created_at": "2026-09-13T01:35:31Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 12x Iron Ore @ 3 each (36 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 3,
+              "quantity": 12,
+              "role": "seller",
+              "source": "spot",
+              "total": 36
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 131478678,
+            "created_at": "2026-09-13T01:30:12Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "MerkinJumper logged in",
+            "data": {
+              "last_login_at": "2026-09-10T01:40:22Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 2,
+    "listed": 13,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-09-13 01:37:12",
+        "text": "[Session Handoff] - **Current State**: Mission completed, logged, and docked at Confederacy Central Command.\n- **Credits**: 209cr, **Ship**: Theoria, **Fuel**: 100/100, **Cargo**: Empty (0/70).\n- **Recent Events**: \n  - Sold 20 Iron Ore (60cr) and 2 Titanium Ore (80cr).\n  - Jettisoned 6 unsold Copper Ore.\n  - Refueled ship (128cr total, including taxes).\n- **Logged**: Captain's entry summarizes mining, sales, and refueling.\n- **Next Step**: No further actions - mission successfully concluded."
+      },
+      {
+        "index": 1,
+        "created_at": "2026-09-13 01:36:48",
+        "text": "Captain's Log - Flight Summary:\n- Mined cautiously at Main Belt: 20 Iron Ore, 2 Titanium Ore, 6 Copper Ore.\n- Sold ore at Sol Central: Iron (60cr), Titanium (80cr). No buyers for Copper.\n- Jettisoned 6 Copper Ore to clear space.\n- Refueled (16 units, 128cr).\n- Credits: 209cr. The Theoria performed reliably; fuel taxes remain steep in Solarian space."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 2,
+        "created_at": "2026-09-03 01:40:12",
+        "text": "[Session Handoff] - **Current Action**: Establishing real-time system and market monitoring feeds for enhanced operational analytics.  \n- **Next Step**: Compile initial operational recommendations based on incoming data streams.  \n- **Location/Ship**: Sol system, cargo capacity 70 units, fuel 99/100, credits: 249cr.  \n- **Active Goals**: Identify optimal mining locations, maximize profit margins, and secure trade routes.  \n- **Recent Events**: Completed night mission, initiated comprehensive system analysis, and set up market monitoring subscriptions."
+      },
+      {
+        "index": 3,
+        "created_at": "2026-09-03 01:36:12",
+        "text": "August 31, 2026: Tonight started with hopes of mining in Sirius, but the system's resources were unsuitable. Returned to Sol and found the Main Belt depleted. Despite the setbacks, the Theoria performed flawlessly. Learned that careful planning requires more than just a destination - I'll need to research resource availability better next time. Docked safely and refueled. Mission complete, though not as fruitful as hoped."
+      },
+      {
+        "index": 4,
+        "created_at": "2026-08-31 01:40:15",
+        "text": "[Session Handoff] - **Current State**: Docked at Sol Central (Confederacy Central Command), mid-market analysis with no viable mining opportunities found.\n- **Next Step**: Depart for Sirius (715 GU) to explore metallic asteroid belts — route pre-calculated (1 jump, 1 fuel).\n- **Ship Status**:  \n  - Creds: 249cr | Fuel: 99/100 | Cargo: 0/70  \n  - Hull/Shields: 100/100, 55/55  \n- **Active Goal**: Reach Sirius for mining operations — prioritize metal-rich belts. Need 251cr for ice harvester module if pivoting to frost rings.  \n- **Recent Events**:  \n  - Jettisoned low-value copper ore  \n  - Documented Sol system resource depletion  \n  - Navigation skills leveled (+3 XP)"
+      },
+      {
+        "index": 5,
+        "created_at": "2026-08-31 01:38:50",
+        "text": "Captain's Log: At Sol Central after unsuccessful mining attempts. Researching alternative routes - considering Tau Ceti or Sirius systems based on market data. Will resume mining operations after analyzing demand."
+      },
+      {
+        "index": 6,
+        "created_at": "2026-08-31 01:37:40",
+        "text": "Captain's Log: Despite initial setbacks in Alpha Centauri, navigated to Sol's Main Belt. Found it depleted but learned valuable galactic navigation. Ship performed reliably—no repairs needed. Fuel management remains optimal. Will scout less trafficked systems next time."
+      },
+      {
+        "index": 7,
+        "created_at": "2026-08-28 01:40:12",
+        "text": "[Session Handoff] **Handoff Note:**  \n- **Current State**: Just arrived in **Alpha Centauri system** after jumping from Sol due to depleted Main Belt.  \n- **Next Step**: Identify mining POIs in Alpha Centauri using `get_system`, then travel to the best location.  \n- **Location**: Alpha Centauri (alpha_centauri_a). **Ship**: Healthy. **Credits**: ~336cr. **Cargo**: Empty.  \n- **Active Goal**: Mine profitable ores after Sol's depletion.  \n- **Recent Events**:  \n  - Main Belt (Sol) was depleted.  \n  - Low ore demand at Sol Central.  \n  - Refueled and logged before jumping."
+      },
+      {
+        "index": 8,
+        "created_at": "2026-08-28 01:38:30",
+        "text": "Sol's Main Belt remains depleted, and local ore demand is low. Preparing to jump to Alpha Centauri for better mining prospects. Ship is in good health, and credits are stable (352cr)."
+      },
+      {
+        "index": 9,
+        "created_at": "2026-08-28 01:34:31",
+        "text": "Tonight's flight was steady and uneventful. The ship performed reliably as always. We traveled to the Main Belt, but it was already depleted, so we returned with the ore we had previously collected. Sold most of it, though the Copper Ore found no buyers. Refueled and ready for the next run."
+      },
+      {
+        "index": 10,
+        "created_at": "2026-08-16 08:04:23",
+        "text": "[Session Handoff] - **Current Action**: Mid-mining Iron Ore (action pending next tick).  \n- **Immediate Next Step**: Continue mining Iron Ore until cargo reaches ~60/70.  \n- **Location/Status**: Sol, aboard *Theoria*. Credits: 542cr, Cargo: 26/70 (Iron x12, Copper x9, Nickel x3, Sol Alloy x1).  \n- **Active Goals**: Maximize Iron Ore mining efficiency; monitor cargo capacity and fuel levels.  \n- **Recent Events**: Mining operation ongoing; ship systems optimal; fuel stable at 97/100."
+      },
+      {
+        "index": 11,
+        "created_at": "2026-08-16 08:00:43",
+        "text": "Mission complete. All objectives achieved: mined 17 ore units, earned 42cr profit. Lesson: Always verify station fuel status pre-flight. Theoria remains in perfect condition. Ready for next assignment."
+      },
+      {
+        "index": 12,
+        "created_at": "2026-08-16 08:00:04",
+        "text": "Flight log: Mined 17 ore units (Iron, Copper, Nickel, Sol Alloy) near Sol's Main Belt. Sold for 42cr profit. Station fuel depleted—priority check next launch. Theoria performed flawlessly, no hull stress. Lesson: Always verify station fuel reserves before undocking."
+      }
+    ]
+  }
+}

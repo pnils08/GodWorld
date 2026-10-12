@@ -1,0 +1,114 @@
+{
+  "loggedAt": "2026-10-02T11:16:54.142Z",
+  "cycle": 109,
+  "writersWithFiles": [
+    "Anthony Raines",
+    "Hal Richmond",
+    "P Slayer",
+    "Simon Leary",
+    "Tanya Cruz",
+    "Selena Grant",
+    "Talia Finch"
+  ],
+  "rows": [
+    {
+      "n": 1,
+      "team": "A's",
+      "eventType": "game-result",
+      "eventTrigger": "hot-streak",
+      "snippet": "Arturo Ramos does enough, Danny Horn s",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary"
+      ],
+      "shared": [
+        "world summary",
+        "sports desk packet"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 2,
+      "team": "A's",
+      "eventType": "game-result",
+      "eventTrigger": "hot-streak",
+      "snippet": "Travis Coles and the bullpen struggle,",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary"
+      ],
+      "shared": [
+        "world summary",
+        "sports desk packet"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 3,
+      "team": "A's",
+      "eventType": "game-result",
+      "eventTrigger": "hot-streak",
+      "snippet": "Pablo Almanzar gets the call in game 3",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary"
+      ],
+      "shared": [
+        "world summary",
+        "sports desk packet"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 4,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "cold-streak",
+      "snippet": "The Oaks host game 2 of the preason vs",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary",
+        "sports desk packet"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 5,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "cold-streak",
+      "snippet": "The Oaks lose yet again even with stro",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary",
+        "sports desk packet"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    }
+  ],
+  "stranded": 0
+}

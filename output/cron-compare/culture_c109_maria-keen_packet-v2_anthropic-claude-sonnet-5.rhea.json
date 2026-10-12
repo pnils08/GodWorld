@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/culture_c109_maria-keen_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "129b9ab8abaa9b8a5b93d6fc47fbc0491477803ee58143dc6d6904659bf1f604",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes and citizen profiles match deterministic provenance and ledger ground truth with no canon contradictions or fourth-wall leakage.",
+  "review": {
+    "profileId": "maria-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "packageVersion": "MARIA-LEP2-1",
+    "manifestId": "AM-67b225179cf4",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Jackson Sift",
+      "Marc Allie",
+      "Omar Lingio",
+      "Yammie Perez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0095,
+  "durationMs": 5448,
+  "parseError": false,
+  "ranAt": "2026-10-02T23:17:07.891Z"
+}

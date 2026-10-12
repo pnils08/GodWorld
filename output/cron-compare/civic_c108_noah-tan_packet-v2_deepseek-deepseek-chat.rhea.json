@@ -1,0 +1,48 @@
+{
+  "draft": "output/cron-compare/civic_c108_noah-tan_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "425414c8ab982a508cdd3f04d6eddbc643f3f280388566f6061ade6356440ac4",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft passes all canon checks with accurate quote provenance, verified ledger profiles, and authorized weather texture.",
+  "review": {
+    "profileId": "noah-weather-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-427c297f74da",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Marc Allie",
+      "Tyrie Groin"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0095,
+  "durationMs": 5408,
+  "parseError": false,
+  "ranAt": "2026-09-23T23:17:30.986Z"
+}

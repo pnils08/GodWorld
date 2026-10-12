@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "107",
+  "desk": "sports",
+  "persona": "p-slayer",
+  "storyline": {
+    "slug": "eastlake-desmond-morton-win-streak",
+    "verb": "opened"
+  },
+  "hood": "Eastlake",
+  "quotes": [
+    {
+      "pop": "POP-00051",
+      "name": "Desmond Morton",
+      "quote": "I've seen the community come together, feeling a sense of pride and excitement about the team's win. It's like a spark has been lit, and people are talking about it everywhere. I feel it too, it's a great feeling to be a part of something that brings people joy."
+    },
+    {
+      "pop": "POP-00533",
+      "name": "Travis Coles",
+      "quote": "I've felt the city's energy shift with our recent wins, it's like the whole community is coming together and feeding off our momentum. As a player, it's an incredible feeling to know that our performance is having a direct impact on the people around us."
+    },
+    {
+      "pop": "POP-00052",
+      "name": "Clark Saryan",
+      "quote": "I've seen how a win like that can bring the community together, it's like a spark that ignites a sense of pride and belonging. As someone who's been around the game, I know how it feels to be part of a team that's on a roll, and I think that energy is infectious. It's not just about the game itself, but about the way it makes people feel - like they're part of something bigger than themselves."
+    },
+    {
+      "pop": "POP-00598",
+      "name": "Vladimir Gonzalez",
+      "quote": "It's been amazing to see how the community has come together after our win, I feel like it's brought a lot of energy and excitement to the neighborhood. As a player, it's great to see how our performance can impact the people around us."
+    }
+  ],
+  "claim": "I've seen the community come together, feeling a sense of pride and excitement about the team's win. It's like a spark has been lit, and people are talking about it everywhere. I feel it too, it's a great feeling to be a part of something that brings people joy.",
+  "src": "citizenVoice PRESS c107",
+  "ranAt": "2026-09-18T01:14:15.652Z"
+}

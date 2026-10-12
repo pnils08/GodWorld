@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "civic",
+  "persona": "freelance-firebrand",
+  "storyline": {
+    "slug": "fruitvale-rick-walker-anomaly",
+    "verb": "opened"
+  },
+  "hood": "Fruitvale",
+  "quotes": [
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I've seen some new faces around the neighborhood, which is great, but at the same time, I feel like there's a lack of energy, you know? It's like the community is just going through the motions. I've been living in Fruitvale for a while now, and I've noticed that there aren't as many initiatives or programs to bring people together or improve the area. It's a shame, because I think we have a lot of potential here."
+    },
+    {
+      "pop": "POP-00953",
+      "name": "Carmen Solis",
+      "quote": "I've noticed that there are new faces on the block, and that's a good thing, but at the same time, I feel like we're not really doing much to address the issues that have been plaguing our neighborhood. As someone who cares about this community, it's frustrating to see things not moving forward."
+    },
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "I've seen how some neighborhoods in Oakland, like Fruitvale, seem to be struggling. As someone who's lived in this city for a while, it's disheartening to see areas that need help not getting the attention they deserve. It feels like there's a lack of effort to really address the issues and make a positive change."
+    }
+  ],
+  "claim": "I've seen some new faces around the neighborhood, which is great, but at the same time, I feel like there's a lack of energy, you know? It's like the community is just going through the motions. I've been living in Fruitvale for a while now, and I've noticed that there aren't as many initiatives or programs to bring people together or improve the area. It's a shame, because I think we have a lot of potential here.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-23T18:16:08.102Z"
+}

@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "culture",
+  "persona": "mason-ortega",
+  "storyline": {
+    "slug": "temescal-vanessa-treary-hood-kitchens",
+    "verb": "opened"
+  },
+  "hood": "Temescal",
+  "quotes": [
+    {
+      "pop": "POP-00781",
+      "name": "Vanessa Treary",
+      "quote": "It’s not glamorous, but there’s something steady about it. You get to know people, their routines, their stories. It’s not just about the coffee—it’s about being a small part of their day, something they can count on. That’s what keeps me coming back."
+    },
+    {
+      "pop": "POP-01045",
+      "name": "Vanessa Ramas",
+      "quote": "You know, it's not about glamour—it's about the rhythm of it. The regulars who come in and don't even have to say their order because you already know it. There's something steadying about that, especially in a city that's always changing. Tobias says I could find a job that pays more, but it's not just about the money. It's about knowing your place in the neighborhood, even if it's just pulling shots and remembering who takes oat milk."
+    },
+    {
+      "pop": "POP-00916",
+      "name": "Jia Pena",
+      "quote": "It's the rhythm of it, I think. The way the neighborhood moves and breathes, and you’re part of that. It’s not glamorous, but it’s steady. You know the faces, the routines, and there’s something comforting in that. It’s like being part of a bigger thing, even if it’s just pulling shots or cleaning the machine."
+    },
+    {
+      "pop": "POP-00948",
+      "name": "Akua Ortiz",
+      "quote": "You know, it's the rhythm of it all. The familiar faces, the routine—it’s comforting in a way. It’s not about the glamour; it’s about being part of something steady, something that people rely on. That’s what keeps folks like Vanessa coming back, day after day."
+    }
+  ],
+  "claim": "It’s not glamorous, but there’s something steady about it. You get to know people, their routines, their stories. It’s not just about the coffee—it’s about being a small part of their day, something they can count on. That’s what keeps me coming back.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-25T18:16:09.697Z"
+}

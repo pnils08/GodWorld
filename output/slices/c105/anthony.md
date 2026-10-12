@@ -21,7 +21,10 @@ Cycle **C105** · kind `anthony-analytic` · POP-00017
   - Event kind (feed): A's — game-result (late-season)
   - NamesUsed (feed): Benji Dillon (SP), Vinnie Keane (2B), Mark Aitken (1B), Isley Kelley (SS)
 **DossierFacts:**
-  - NONE — offline slice; use packet TrueSource only if wake supplies
+  - Benji Dillon TrueSource: 2041 REGULAR SEASON — Games: 35 Games Started: 28 Wins: 10 Losses: 8 Saves: 1 Blown Saves: 0 Holds: 1 Innings Pitched: 150.1 Hits Allowed: 155 Runs Al | WAR: 2.2 | AWARDS (Career Reference) - Cy Young (2028, 2032, 2033, 2034, 2037) - Rookie of the Year (
+  - Vinnie Keane TrueSource: 2041 REGULAR SEASON G: 37 PA: 130 AB: 127 R: 25 H: 40 2B: 8 3B: 1 HR: 13 RBI: 29 BB: 0 SO: 6 HBP: 0 SF: 3 SAC: 0 GIDP: 2 AVG: 0.315 OBP: 0.308 SLG: 0. | WAR: 1.1 | AWARDS (Career Reference) - MVP (2031) - 8x All-Star (2025, 2027, 2028, 2029, 2030, 2031, 
+  - Mark Aitken TrueSource: 2041 REGULAR SEASON G: 138 PA: 572 AB: 540 R: 84 H: 153 2B: 23 3B: 0 HR: 33 RBI: 87 BB: 25 SO: 65 HBP: 3 SF: 3 SAC: 1 GIDP: 7 AVG: 0.283 OBP: 0.317 SL | WAR: 3.2 | AWARDS (Career Reference) - Rookie of the Year (2032) - Gold Glove (2032, 2038, 2039) - Si
+  - Isley Kelley TrueSource: 2041 REGULAR SEASON G: 136 PA: 605 AB: 563 R: 94 H: 181 2B: 41 3B: 3 HR: 31 RBI: 103 BB: 28 SO: 54 HBP: 6 SF: 8 SAC: 0 GIDP: 6 AVG: 0.321 OBP: 0.355 S | WAR: 7.4 | AWARDS (Career Reference) - MVP (2032, 2034, 2035) - Rookie of the Year (2026) - All-Star 
 **FeedFacts:**
   - StoryAngle: A Farewell Gone Well:Vinnie Keane Benji Dillon
   - Notes: The farewell season reaches its final regular season curtain call as the As play host to the NL's top team in the Rockies. As Vinnie Keane HOF career comes to its close a legacy that reshaped Oakland 
@@ -30,7 +33,6 @@ Cycle **C105** · kind `anthony-analytic` · POP-00017
   - x-stats / barrel% / launch angle / OAA not on feed
   - contracts or salaries not printed on this feed row
   - As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)
-  - TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies
 
 ## APPROACH
 Analytic approach (Anthony Raines): third-person only — never fan "we." One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.

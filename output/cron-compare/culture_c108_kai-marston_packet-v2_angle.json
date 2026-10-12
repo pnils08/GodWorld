@@ -1,0 +1,950 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "108",
+  "persona": "kai-marston",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00158",
+      "name": "Kai Marston",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Tara Ellison is rising — the acts and the rooms they play",
+      "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the engine's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "arts",
+        "hood": "Rockridge",
+        "facts": [
+          "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108",
+          "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 57, ascending), last seen C86",
+          "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+          "Theo Banks (rapper), Arts, Uptown — fame rising (fame 50, surging), last seen C99",
+          "Oakland Native MVP Davis (sports figure), Sports, Temescal — new on the culture record this cycle (fame 14, rising), last seen C108",
+          "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 97, cooling), last seen C94",
+          "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 71, cooling), last seen C88",
+          "ENGINE SEED (Citywide): Tariq Harris; Emiko Suzuki; Gerald Hoffman",
+          "ENGINE SEED (Lake Merritt): Deacon Seymour; Carmen Mesa; Marisol Guzman · at Cathedral of the Living Word; Estuary Architects",
+          "ENGINE SEED (Fruitvale): Brielle Lewis; Jia Carmichael; Delia Fuentes · at Fruitvale Diner; Fruitvale Transit Hub Authority"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "Uptown boom sustained — momentum 10/10, the block everyone wants onto (desk rotation)",
+          "Philly Rodriguez moved from Temescal to Jack London — moving up from Temescal (desk rotation)",
+          "Blair Patel moved from Jack London to Lake Merritt — moving up from Jack London (desk rotation)",
+          "Sonia Parikh moved from Temescal to Fruitvale — moving up from Temescal (desk rotation)"
+        ],
+        "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-arts",
+      "hood": "Rockridge",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "nearby": [
+        {
+          "text": "Dimond | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### Dimond\"; events: world_summary_c108.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### East Oakland\"; events: world_summary_c108.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### Fruitvale\"; events: world_summary_c108.md \"## World Events\""
+        },
+        {
+          "text": "KONO | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### KONO\"; events: world_summary_c108.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### Lake Merritt\"; events: world_summary_c108.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00546",
+          "name": "Tara Ellison",
+          "profile": "Tara Ellison — Journalist — Rockridge",
+          "why": "fame rising (Cultural_Ledger)",
+          "role": "Journalist",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-01063",
+          "name": "Alma Vasquez",
+          "profile": "Alma Vasquez — sculptor — Laurel",
+          "why": "fame rising (Cultural_Ledger)",
+          "role": "sculptor",
+          "hood": "Laurel"
+        },
+        {
+          "pop": "POP-01057",
+          "name": "Nina Reyes",
+          "profile": "Nina Reyes — actress — Fruitvale",
+          "why": "fame rising (Cultural_Ledger)",
+          "role": "actress",
+          "hood": "Fruitvale"
+        },
+        {
+          "pop": "POP-01056",
+          "name": "Theo Banks",
+          "profile": "Theo Banks — rapper — Uptown",
+          "why": "fame rising (Cultural_Ledger)",
+          "role": "rapper",
+          "hood": "Uptown"
+        },
+        {
+          "pop": "POP-00539",
+          "name": "Lena Cross",
+          "profile": "Lena Cross — Actor — Piedmont Ave",
+          "why": "fading — the where-are-they-now file (Cultural_Ledger)",
+          "role": "Actor",
+          "hood": "Piedmont Ave"
+        },
+        {
+          "pop": "POP-00545",
+          "name": "Rowan Pierce",
+          "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+          "why": "fading — the where-are-they-now file (Cultural_Ledger)",
+          "role": "Freelance Writer",
+          "hood": "Piedmont Ave"
+        },
+        {
+          "pop": "POP-01112",
+          "name": "Tariq Harris",
+          "profile": "Tariq Harris — Dental assistant — Chinatown",
+          "why": "culture seed this cycle (Story_Seed_Deck)",
+          "role": "Dental assistant",
+          "hood": "Chinatown"
+        },
+        {
+          "pop": "POP-00856",
+          "name": "Emiko Suzuki",
+          "profile": "Emiko Suzuki — Public Defender — KONO",
+          "why": "culture seed this cycle (Story_Seed_Deck)",
+          "role": "Public Defender",
+          "hood": "KONO"
+        },
+        {
+          "pop": "POP-00513",
+          "name": "Gerald Hoffman",
+          "profile": "Gerald Hoffman — Oakland Taxpayers Coalition President — Piedmont Ave",
+          "why": "culture seed this cycle (Story_Seed_Deck)",
+          "role": "Oakland Taxpayers Coalition President",
+          "hood": "Piedmont Ave"
+        },
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "why": "culture seed this cycle (Story_Seed_Deck)",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-00528",
+          "name": "Deacon Seymour",
+          "profile": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+          "why": "culture seed this cycle (Story_Seed_Deck)",
+          "role": "Manager, Oakland A's",
+          "hood": "Lake Merritt"
+        },
+        {
+          "pop": "POP-00081",
+          "name": "Carmen Mesa",
+          "profile": "Carmen Mesa — Starting Pitcher, Midland RockHounds (AA) — Lake Merritt",
+          "why": "culture seed this cycle (Story_Seed_Deck)",
+          "role": "Starting Pitcher, Midland RockHounds (AA)",
+          "hood": "Lake Merritt"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-78217e633afa"
+      },
+      {
+        "t": "FACT",
+        "text": "37 culture figures rising; 1 new on the record",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108",
+        "id": "F-d4f51b9388bf"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108",
+        "id": "F-bc818edcb044"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108",
+        "id": "F-4f832cac7dfe"
+      },
+      {
+        "t": "FACT",
+        "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 57, ascending), last seen C86",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108",
+        "id": "F-4effa0393cfd"
+      },
+      {
+        "t": "FACT",
+        "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108",
+        "id": "F-5c40ed1f4718"
+      },
+      {
+        "t": "FACT",
+        "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 50, surging), last seen C99",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108",
+        "id": "F-4612e104232f"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Native MVP Davis (sports figure), Sports, Temescal — new on the culture record this cycle (fame 14, rising), last seen C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108",
+        "id": "F-7b104fd07365"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 97, cooling), last seen C94",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108",
+        "id": "F-7bab8413f0eb"
+      },
+      {
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 71, cooling), last seen C88",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108",
+        "id": "F-c17c0b9d469e"
+      },
+      {
+        "t": "FACT",
+        "text": "ENGINE SEED (Citywide): Tariq Harris; Emiko Suzuki; Gerald Hoffman",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+        "id": "F-d98df39e0c6a"
+      },
+      {
+        "t": "FACT",
+        "text": "ENGINE SEED (Lake Merritt): Deacon Seymour; Carmen Mesa; Marisol Guzman · at Cathedral of the Living Word; Estuary Architects",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+        "id": "F-3a8068fa24ea"
+      },
+      {
+        "t": "FACT",
+        "text": "ENGINE SEED (Fruitvale): Brielle Lewis; Jia Carmichael; Delia Fuentes · at Fruitvale Diner; Fruitvale Transit Hub Authority",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+        "id": "F-d62cb9a81139"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Kai Marston",
+    "popid": "POP-00158"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-arts",
+      "angle": "Tara Ellison is rising — the acts and the rooms they play",
+      "label": "37 culture figures rising; 1 new on the record",
+      "hookLine": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108.",
+      "hood": "Rockridge",
+      "citizens": [
+        "Tara Ellison (POP-00546)",
+        "Alma Vasquez (POP-01063)",
+        "Nina Reyes (POP-01057)",
+        "Theo Banks (POP-01056)",
+        "Lena Cross (POP-00539)",
+        "Rowan Pierce (POP-00545)",
+        "Tariq Harris (POP-01112)",
+        "Emiko Suzuki (POP-00856)",
+        "Gerald Hoffman (POP-00513)",
+        "Benji Dillon (POP-00018)",
+        "Deacon Seymour (POP-00528)",
+        "Carmen Mesa (POP-00081)",
+        "Marisol Guzman (POP-00147)",
+        "Alisha Peña (POP-00029)",
+        "Brielle Lewis (POP-00459)",
+        "Jia Carmichael (POP-00876)",
+        "Delia Fuentes (POP-00973)",
+        "Isaac Renteria (POP-01042)"
+      ],
+      "popids": [
+        "POP-00546",
+        "POP-01063",
+        "POP-01057",
+        "POP-01056",
+        "POP-00539",
+        "POP-00545",
+        "POP-01112",
+        "POP-00856",
+        "POP-00513",
+        "POP-00018",
+        "POP-00528",
+        "POP-00081",
+        "POP-00147",
+        "POP-00029",
+        "POP-00459",
+        "POP-00876",
+        "POP-00973",
+        "POP-01042"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C108",
+      "cycle": 108
+    },
+    "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the engine's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Uptown Pour House (Uptown) · quiet night",
+      "named": "Uptown Pour House",
+      "hood": "Uptown",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Uptown Pour House (Uptown) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Uptown Pour House is open and quiet in Uptown. What that condition means is not yet established.",
+      "hookLine": "Uptown Pour House is open and quiet in Uptown.",
+      "anchorFacts": [
+        "NAMED: Uptown Pour House",
+        "HOOD: Uptown",
+        "VENUE: Uptown Pour House",
+        "HOOD: Uptown",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Eric Taveras",
+        "Tara Ellison",
+        "Oakland Native MVP Davis"
+      ],
+      "restaurants": [
+        {
+          "name": "Bubic Burgers",
+          "hood": "Baylight District"
+        },
+        {
+          "name": "Slip Street Kitchen",
+          "hood": "Brooklyn"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Uptown Pour House",
+          "hood": "Uptown"
+        },
+        {
+          "name": "Nightline Station",
+          "hood": "West Oakland"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 6,
+        "vibe": "game-night",
+        "movement": "restricted",
+        "weatherImpact": 1.3
+      },
+      "cityEvents": [
+        "Temescal Holiday Market",
+        "Dimond Neighborhood Stabilization Panel",
+        "Lake Merritt Lantern Parade"
+      ],
+      "tv": [
+        "Late Weather Watch",
+        "Bay Area Alert",
+        "The Neighbors",
+        "Fireside Hour",
+        "A's Sports Central",
+        "The Vinnie Keane (DH) Interview"
+      ],
+      "movies": [
+        "Storm Window",
+        "Fog Harbor",
+        "Rising Star",
+        "Snowlight",
+        "Diamond City"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight - Playoff Special",
+      "streamingTrend": "political commentary surge",
+      "foodTrend": "Playoff tension dining - sports bar surge"
+    },
+    "signals": {
+      "fameCount": 3,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Eric Taveras spotted at Lake Merritt Mindfulness Sangha",
+          "name": "Eric Taveras",
+          "venue": "Lake Merritt Mindfulness Sangha",
+          "ref": "Ripple_Ledger cycle 108 (CauseType lifestyle-sighting); rendered: world_summary_c108.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Downtown",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Tara Ellison spotted at Canopy Market",
+          "name": "Tara Ellison",
+          "venue": "Canopy Market",
+          "ref": "Ripple_Ledger cycle 108 (CauseType lifestyle-sighting); rendered: world_summary_c108.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Rockridge",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Oakland Native MVP Davis spotted at Gridiron Analytics",
+          "name": "Oakland Native MVP Davis",
+          "venue": "Gridiron Analytics",
+          "ref": "Ripple_Ledger cycle 108 (CauseType lifestyle-sighting); rendered: world_summary_c108.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Temescal",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Bubic Burgers",
+          "hood": "Baylight District"
+        },
+        {
+          "name": "Slip Street Kitchen",
+          "hood": "Brooklyn"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Uptown Pour House",
+          "hood": "Uptown"
+        },
+        {
+          "name": "Nightline Station",
+          "hood": "West Oakland"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 6,
+        "vibe": "game-night",
+        "movement": "restricted",
+        "weatherImpact": 1.3
+      },
+      "cityEvents": [
+        "Temescal Holiday Market",
+        "Dimond Neighborhood Stabilization Panel",
+        "Lake Merritt Lantern Parade"
+      ],
+      "tv": [
+        "Late Weather Watch",
+        "Bay Area Alert",
+        "The Neighbors",
+        "Fireside Hour",
+        "A's Sports Central",
+        "The Vinnie Keane (DH) Interview"
+      ],
+      "movies": [
+        "Storm Window",
+        "Fog Harbor",
+        "Rising Star",
+        "Snowlight",
+        "Diamond City"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Uptown Pour House (Uptown) · quiet night",
+        "named": "Uptown Pour House",
+        "hood": "Uptown"
+      },
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Nightline Station (West Oakland) · quiet night",
+        "named": "Nightline Station",
+        "hood": "West Oakland"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Eric Taveras at Lake Merritt Mindfulness Sangha (Downtown)",
+        "named": "Lake Merritt Mindfulness Sangha",
+        "hood": "Downtown"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Tara Ellison at Canopy Market (Rockridge)",
+        "named": "Canopy Market",
+        "hood": "Rockridge"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Oakland Native MVP Davis at Gridiron Analytics (Temescal)",
+        "named": "Gridiron Analytics",
+        "hood": "Temescal"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Bubic Burgers (Baylight District)",
+        "named": "Bubic Burgers",
+        "hood": "Baylight District"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Slip Street Kitchen (Brooklyn)",
+        "named": "Slip Street Kitchen",
+        "hood": "Brooklyn"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 16,
+        "label": "Jessie Hess — fame rise",
+        "named": "Jessie Hess",
+        "hood": "Downtown"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Bubic Burgers (Baylight District)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Uptown Pour House (Uptown) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Uptown Pour House (Uptown) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Uptown Pour House (Uptown) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Eric Taveras at Lake Merritt Mindfulness Sangha (Downtown)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "ARTS-SLICE-1",
+    "kind": "beat-arts",
+    "seat": {
+      "slug": "kai-marston",
+      "name": "Kai Marston",
+      "popid": "POP-00158",
+      "desk": "culture",
+      "domain": "arts",
+      "builder": "buildArtsSlice.js"
+    },
+    "hood": "Rockridge",
+    "pulse": {
+      "className": "beat-arts",
+      "score": 100,
+      "label": "37 culture figures rising; 1 new on the record",
+      "hood": "Rockridge",
+      "source": "output/beats/Cultural_Ledger.jsonl @C108"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Tara Ellison is rising — the acts and the rooms they play",
+      "hookLine": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108.",
+      "anchorFacts": [
+        "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108",
+        "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 57, ascending), last seen C86",
+        "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+        "Theo Banks (rapper), Arts, Uptown — fame rising (fame 50, surging), last seen C99",
+        "Oakland Native MVP Davis (sports figure), Sports, Temescal — new on the culture record this cycle (fame 14, rising), last seen C108",
+        "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 97, cooling), last seen C94",
+        "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 71, cooling), last seen C88",
+        "ENGINE SEED (Citywide): Tariq Harris; Emiko Suzuki; Gerald Hoffman",
+        "ENGINE SEED (Lake Merritt): Deacon Seymour; Carmen Mesa; Marisol Guzman · at Cathedral of the Living Word; Estuary Architects",
+        "ENGINE SEED (Fruitvale): Brielle Lewis; Jia Carmichael; Delia Fuentes · at Fruitvale Diner; Fruitvale Transit Hub Authority"
+      ],
+      "evidence": [
+        {
+          "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108"
+        },
+        {
+          "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 57, ascending), last seen C86",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108"
+        },
+        {
+          "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108"
+        },
+        {
+          "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 50, surging), last seen C99",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108"
+        },
+        {
+          "text": "Oakland Native MVP Davis (sports figure), Sports, Temescal — new on the culture record this cycle (fame 14, rising), last seen C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108"
+        },
+        {
+          "text": "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 97, cooling), last seen C94",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108"
+        },
+        {
+          "text": "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 71, cooling), last seen C88",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108"
+        },
+        {
+          "text": "ENGINE SEED (Citywide): Tariq Harris; Emiko Suzuki; Gerald Hoffman",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+        },
+        {
+          "text": "ENGINE SEED (Lake Merritt): Deacon Seymour; Carmen Mesa; Marisol Guzman · at Cathedral of the Living Word; Estuary Architects",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+        },
+        {
+          "text": "ENGINE SEED (Fruitvale): Brielle Lewis; Jia Carmichael; Delia Fuentes · at Fruitvale Diner; Fruitvale Transit Hub Authority",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 7
+        },
+        {
+          "text": "Philly Rodriguez moved from Temescal to Jack London — moving up from Temescal",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 5
+        },
+        {
+          "text": "Blair Patel moved from Jack London to Lake Merritt — moving up from Jack London",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 5
+        },
+        {
+          "text": "Sonia Parikh moved from Temescal to Fruitvale — moving up from Temescal",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 5
+        },
+        {
+          "text": "Yasmin Robinson at severe displacement risk in Lake Merritt (risk: 9/10)",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 7
+        }
+      ],
+      "note": null,
+      "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00546",
+        "name": "Tara Ellison",
+        "role": "Journalist",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-01063",
+        "name": "Alma Vasquez",
+        "role": "sculptor",
+        "neighborhood": "Laurel",
+        "business": null,
+        "profile": "Alma Vasquez — sculptor — Laurel",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-01057",
+        "name": "Nina Reyes",
+        "role": "actress",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Nina Reyes — actress — Fruitvale",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-01056",
+        "name": "Theo Banks",
+        "role": "rapper",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Theo Banks — rapper — Uptown",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00545",
+        "name": "Rowan Pierce",
+        "role": "Freelance Writer",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-01112",
+        "name": "Tariq Harris",
+        "role": "Dental assistant",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Tariq Harris — Dental assistant — Chinatown",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00856",
+        "name": "Emiko Suzuki",
+        "role": "Public Defender",
+        "neighborhood": "KONO",
+        "business": null,
+        "profile": "Emiko Suzuki — Public Defender — KONO",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00513",
+        "name": "Gerald Hoffman",
+        "role": "Oakland Taxpayers Coalition President",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Gerald Hoffman — Oakland Taxpayers Coalition President — Piedmont Ave",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00528",
+        "name": "Deacon Seymour",
+        "role": "Manager, Oakland A's",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00081",
+        "name": "Carmen Mesa",
+        "role": "Starting Pitcher, Midland RockHounds (AA)",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Carmen Mesa — Starting Pitcher, Midland RockHounds (AA) — Lake Merritt",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C108",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Kai Marston this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "text": "I'm planning to write about Tara Ellison, a journalist from Rockridge who's been gaining fame lately. I've seen her around the neighborhood and I'm curious to learn more about her work and what's behind her rising star.",
+    "plan": {
+      "chase": "I'm planning to write about Tara Ellison, a journalist from Rockridge who's been gaining fame lately. I've seen her around the neighborhood and I'm curious to learn more about her work and what's behind her rising star.",
+      "focus": "Tara Ellison",
+      "why": "Her rising fame and my interest in learning more about her work",
+      "checks": [
+        "Verify Tara Ellison's current projects",
+        "Research her background and experience"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00546",
+          "question": "What's driving Tara Ellison's rising fame?",
+          "basis": "Her recent appearances and mentions in the local media"
+        }
+      ],
+      "interpretation": "There's a growing interest in local journalists and their stories, and Tara Ellison seems to be at the forefront of this trend",
+      "unverifiedLead": [
+        "I've heard rumors of a new project she's working on, but I need to verify this information"
+      ],
+      "closeQuestion": "What's next for Tara Ellison, and how will she continue to make a name for herself in the journalism world?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Dimond | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Dimond",
+      "ref": "output/neighborhood_texture_c108.md \"### Dimond\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c108.md \"### East Oakland\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c108.md \"### Fruitvale\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "KONO | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "KONO",
+      "ref": "output/neighborhood_texture_c108.md \"### KONO\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c108.md \"### Lake Merritt\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 20,
+  "ranAt": "2026-09-25T11:15:35.621Z"
+}

@@ -1,0 +1,58 @@
+{
+  "draft": "output/cron-compare/sports_c109_hal-richmond_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "17ae40d0b29854282c066cb9485d54ae046960defbcc8562c287796a00b72bab",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "The Athletics stand even in this postseason, one game won, one game lost... That is the whole of what cycle one hundred nine gives us without embellishment",
+      "issue": "Cycle 109 sports feed includes three World Series games reaching a 2-1 series lead; piece focuses on the Game 2 feed snapshot (1-1 split, L1 streak).",
+      "severity": "med"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "Passed with authorized historical texture; living roster bios and stats match canon with no fabricated quotes or fourth-wall leaks.",
+  "review": {
+    "profileId": "hal-sports-history-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "hal-sports-history-v1",
+    "packageVersion": "HAL-LEP2-2",
+    "manifestId": "AM-23e59baeaff6",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Desmond Morton",
+      "Eric Taveras",
+      "Travis Coles"
+    ],
+    "unverified": [
+      "Cy Young",
+      "Denton Young"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.012,
+  "durationMs": 12612,
+  "parseError": false,
+  "ranAt": "2026-10-02T06:42:51.471Z"
+}

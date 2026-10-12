@@ -1,0 +1,211 @@
+{
+  "version": "DATA-DESK-SLICE-1",
+  "empty": false,
+  "cycle": 109,
+  "kind": "beat-data-desk",
+  "seat": {
+    "slug": "elliot-marbury",
+    "name": "Elliot Marbury",
+    "popid": "POP-00166",
+    "desk": "sports",
+    "domain": "data-desk",
+    "builder": "buildMarburySlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-data-desk",
+    "score": 100,
+    "label": "Mariano Rosales — 6 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+    "hood": null,
+    "source": "output/player_truesource_mirror.json POP-00555 @C109"
+  },
+  "story": {
+    "kind": "beat-data-desk",
+    "angle": "Mariano Rosales — 6 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year — what the line proves, on what sample, and what would disprove it",
+    "label": "Mariano Rosales — 6 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+    "hookLine": "Mariano Rosales's 2041 line against 5 earlier seasons and 2 peers.",
+    "hood": null,
+    "citizens": [
+      "Mariano Rosales (POP-00555)"
+    ],
+    "popids": [
+      "POP-00555"
+    ],
+    "ref": "output/player_truesource_mirror.json POP-00555 @C109",
+    "cycle": 109
+  },
+  "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00555",
+      "name": "Mariano Rosales",
+      "role": "CP, Athletics",
+      "neighborhood": null,
+      "business": null,
+      "profile": "Mariano Rosales — CP, Athletics",
+      "why": "dossier on file (player_truesource_mirror)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Mariano Rosales — CP, Athletics; 6 seasons on the dossier",
+      "src": "output/player_truesource_mirror.json POP-00555"
+    },
+    {
+      "text": "Mariano Rosales 2041 ATH: 60 G, 0 GS, 8-3, 42 SV, 63.2 IP, 35 H, 13 ER, 6 HR, 14 BB, 82 SO, ERA 1.84",
+      "src": "output/player_truesource_mirror.json POP-00555"
+    },
+    {
+      "text": "Mariano Rosales 2040 BAL: 58 G, 0 GS, 1-5, 38 SV, 56.0 IP, 56 H, 26 ER, 8 HR, 13 BB, 56 SO, ERA 4.18",
+      "src": "output/player_truesource_mirror.json POP-00555"
+    },
+    {
+      "text": "Mariano Rosales 2039 BAL: 67 G, 0 GS, 10-6, 2 SV, 77.2 IP, 52 H, 18 ER, 4 HR, 26 BB, 77 SO, ERA 2.09",
+      "src": "output/player_truesource_mirror.json POP-00555"
+    },
+    {
+      "text": "Mariano Rosales 2038 BAL: 83 G, 0 GS, 7-9, 1 SV, 89.2 IP, 93 H, 41 ER, 7 HR, 24 BB, 61 SO, ERA 4.11",
+      "src": "output/player_truesource_mirror.json POP-00555"
+    },
+    {
+      "text": "Mariano Rosales 2037 BAL: 72 G, 0 GS, 7-8, 0 SV, 77.2 IP, 75 H, 30 ER, 12 HR, 29 BB, 71 SO, ERA 3.48",
+      "src": "output/player_truesource_mirror.json POP-00555"
+    },
+    {
+      "text": "Mariano Rosales 2041 rates (63.2 IP): 11.6 K per 9, 2.0 BB per 9, 5.86 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json POP-00555"
+    },
+    {
+      "text": "Mariano Rosales 2040 rates (56.0 IP): 9.0 K per 9, 2.1 BB per 9, 4.31 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json POP-00555"
+    },
+    {
+      "text": "Mariano Rosales 2039 rates (77.2 IP): 8.9 K per 9, 3.0 BB per 9, 2.96 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json POP-00555"
+    },
+    {
+      "text": "Peer — Julio Valencia (CP, Athletics) 2041 ATH: 28 G, 0 GS, 2-0, 1 SV, 24.0 IP, 21 H, 6 ER, 1 HR, 8 BB, 20 SO, ERA 2.25",
+      "src": "output/player_truesource_mirror.json POP-00077"
+    },
+    {
+      "text": "Peer — Julio Valencia 2041 rates (24.0 IP): 7.5 K per 9, 3.0 BB per 9, 2.50 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json POP-00077"
+    },
+    {
+      "text": "Peer — Louis Cross (RP, Athletics) 2041 ATH: 47 G, 0 GS, 3-2, 6 SV, 64.1 IP, 43 H, 19 ER, 9 HR, 16 BB, 70 SO, ERA 2.66",
+      "src": "output/player_truesource_mirror.json POP-01080"
+    },
+    {
+      "text": "Peer — Louis Cross 2041 rates (64.1 IP): 9.8 K per 9, 2.2 BB per 9, 4.38 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json POP-01080"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Mariano Rosales — 6 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year — what the line proves, on what sample, and what would disprove it",
+    "hookLine": "Mariano Rosales's 2041 line against 5 earlier seasons and 2 peers.",
+    "anchorFacts": [
+      "Mariano Rosales — CP, Athletics; 6 seasons on the dossier",
+      "Mariano Rosales 2041 ATH: 60 G, 0 GS, 8-3, 42 SV, 63.2 IP, 35 H, 13 ER, 6 HR, 14 BB, 82 SO, ERA 1.84",
+      "Mariano Rosales 2040 BAL: 58 G, 0 GS, 1-5, 38 SV, 56.0 IP, 56 H, 26 ER, 8 HR, 13 BB, 56 SO, ERA 4.18",
+      "Mariano Rosales 2039 BAL: 67 G, 0 GS, 10-6, 2 SV, 77.2 IP, 52 H, 18 ER, 4 HR, 26 BB, 77 SO, ERA 2.09",
+      "Mariano Rosales 2038 BAL: 83 G, 0 GS, 7-9, 1 SV, 89.2 IP, 93 H, 41 ER, 7 HR, 24 BB, 61 SO, ERA 4.11",
+      "Mariano Rosales 2037 BAL: 72 G, 0 GS, 7-8, 0 SV, 77.2 IP, 75 H, 30 ER, 12 HR, 29 BB, 71 SO, ERA 3.48",
+      "Mariano Rosales 2041 rates (63.2 IP): 11.6 K per 9, 2.0 BB per 9, 5.86 K per BB (worked from the season line)",
+      "Mariano Rosales 2040 rates (56.0 IP): 9.0 K per 9, 2.1 BB per 9, 4.31 K per BB (worked from the season line)",
+      "Mariano Rosales 2039 rates (77.2 IP): 8.9 K per 9, 3.0 BB per 9, 2.96 K per BB (worked from the season line)",
+      "Peer — Julio Valencia (CP, Athletics) 2041 ATH: 28 G, 0 GS, 2-0, 1 SV, 24.0 IP, 21 H, 6 ER, 1 HR, 8 BB, 20 SO, ERA 2.25",
+      "Peer — Julio Valencia 2041 rates (24.0 IP): 7.5 K per 9, 3.0 BB per 9, 2.50 K per BB (worked from the season line)",
+      "Peer — Louis Cross (RP, Athletics) 2041 ATH: 47 G, 0 GS, 3-2, 6 SV, 64.1 IP, 43 H, 19 ER, 9 HR, 16 BB, 70 SO, ERA 2.66",
+      "Peer — Louis Cross 2041 rates (64.1 IP): 9.8 K per 9, 2.2 BB per 9, 4.38 K per BB (worked from the season line)"
+    ],
+    "evidence": [
+      {
+        "text": "Mariano Rosales — CP, Athletics; 6 seasons on the dossier",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "text": "Mariano Rosales 2041 ATH: 60 G, 0 GS, 8-3, 42 SV, 63.2 IP, 35 H, 13 ER, 6 HR, 14 BB, 82 SO, ERA 1.84",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "text": "Mariano Rosales 2040 BAL: 58 G, 0 GS, 1-5, 38 SV, 56.0 IP, 56 H, 26 ER, 8 HR, 13 BB, 56 SO, ERA 4.18",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "text": "Mariano Rosales 2039 BAL: 67 G, 0 GS, 10-6, 2 SV, 77.2 IP, 52 H, 18 ER, 4 HR, 26 BB, 77 SO, ERA 2.09",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "text": "Mariano Rosales 2038 BAL: 83 G, 0 GS, 7-9, 1 SV, 89.2 IP, 93 H, 41 ER, 7 HR, 24 BB, 61 SO, ERA 4.11",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "text": "Mariano Rosales 2037 BAL: 72 G, 0 GS, 7-8, 0 SV, 77.2 IP, 75 H, 30 ER, 12 HR, 29 BB, 71 SO, ERA 3.48",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "text": "Mariano Rosales 2041 rates (63.2 IP): 11.6 K per 9, 2.0 BB per 9, 5.86 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "text": "Mariano Rosales 2040 rates (56.0 IP): 9.0 K per 9, 2.1 BB per 9, 4.31 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "text": "Mariano Rosales 2039 rates (77.2 IP): 8.9 K per 9, 3.0 BB per 9, 2.96 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "text": "Peer — Julio Valencia (CP, Athletics) 2041 ATH: 28 G, 0 GS, 2-0, 1 SV, 24.0 IP, 21 H, 6 ER, 1 HR, 8 BB, 20 SO, ERA 2.25",
+        "src": "output/player_truesource_mirror.json POP-00077"
+      },
+      {
+        "text": "Peer — Julio Valencia 2041 rates (24.0 IP): 7.5 K per 9, 3.0 BB per 9, 2.50 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00077"
+      },
+      {
+        "text": "Peer — Louis Cross (RP, Athletics) 2041 ATH: 47 G, 0 GS, 3-2, 6 SV, 64.1 IP, 43 H, 19 ER, 9 HR, 16 BB, 70 SO, ERA 2.66",
+        "src": "output/player_truesource_mirror.json POP-01080"
+      },
+      {
+        "text": "Peer — Louis Cross 2041 rates (64.1 IP): 9.8 K per 9, 2.2 BB per 9, 4.38 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-01080"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "DOSSIER",
+      "vs": null
+    },
+    "hooks": [],
+    "note": "subject is on this cycle's feed",
+    "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange"
+  },
+  "subject": {
+    "pop": "POP-00555",
+    "name": "Mariano Rosales",
+    "type": "pitcher",
+    "seasons": 6
+  },
+  "peers": [
+    {
+      "pop": "POP-00077",
+      "name": "Julio Valencia"
+    },
+    {
+      "pop": "POP-01080",
+      "name": "Louis Cross"
+    }
+  ],
+  "pointers": [
+    "output/player_truesource_mirror.json POP-00555 @C109",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

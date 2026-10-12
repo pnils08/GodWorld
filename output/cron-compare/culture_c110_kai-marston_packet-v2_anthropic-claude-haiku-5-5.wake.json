@@ -1,0 +1,29 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "110",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-5.5",
+  "configuredWriterModel": "anthropic/claude-haiku-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "kai-marston",
+  "byline": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 28,
+  "quotesLanded": 0,
+  "disposition": "flagged",
+  "rheaPass": false,
+  "rheaFlagCount": 3,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/culture_c110_kai-marston_packet-v2_anthropic-claude-haiku-5-5-1702.md",
+  "selfRecord": null,
+  "ranAt": "2026-10-10T17:02:02.589Z"
+}

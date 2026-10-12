@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "109",
+  "model": "deepseek/deepseek-v4-pro",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 9418,
+  "usageOutputTokens": 4501,
+  "savedFiles": [
+    "output/cron-compare/civic_c109_noah-tan_bench-wave2_deepseek-deepseek-v4-pro.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c109.md",
+  "durationMs": 63722,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-01T05:05:45.955Z"
+}

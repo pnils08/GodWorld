@@ -1,0 +1,375 @@
+FULL STAT TRUE SOURCE — PITCHER
+
+Name: Travis Coles
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: SP
+
+ 
+
+Jersey: #35
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 99
+
+ 
+
+MLB Service: 3.000
+
+ 
+
+Age: 21
+
+ 
+
+Bats: R
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'4"
+
+ 
+
+Weight: 216 lbs
+
+ 
+
+Drafted: Round 1 (2037)
+
+ 
+
+Secondary Position: NONE
+
+ 
+
+Hitter Tendency: PULL HITTER
+
+ 
+
+Born: SOUTH CAROLINA
+
+ 
+
+Canonical POPID: POP-00533
+
+
+--------------------------------------------------------------------------------
+
+
+PITCH REPERTOIRE
+
+Pitch 1 — 4-Seam Fastball — 98 mph
+
+ 
+
+Pitch 2 — 12–6 Curve — 81 mph
+
+ 
+
+Pitch 3 — Slider — 88 mph
+
+ 
+
+Pitch 4 — Splitter — 91 mph
+
+ 
+
+Pitch 5 — Cutter — 96 mph
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+STA: 96
+
+ 
+
+H/9: 82
+
+ 
+
+K/9: 81
+
+ 
+
+BB/9: 77
+
+ 
+
+HR/9: 67
+
+ 
+
+PCLT: 67
+
+ 
+
+CTRL: 91
+
+ 
+
+VEL: 71
+
+ 
+
+BRK: 91
+
+ 
+
+FLD: 55
+
+ 
+
+ARM: 91
+
+ 
+
+ACC: 71
+
+ 
+
+REAC: 46
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   GS  W   L   SV  BS  HLD  IP      H    R   ER  HR  BB  SO   ERA
+
+ 
+
+2041  ATH   32  32  22  4   0   0   0    215     166  67  65  25  39  254  2.72
+
+ 
+
+2040  WSH   33  33  13  8   0   0   0    219.1   177  52  50  17  61  207  2.05
+
+ 
+
+2039  WSH   33  33  9   15  0   0   0    197.2   179  92  87  26  51  198  3.96
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 98
+
+ 
+
+GS: 98
+
+ 
+
+W: 44
+
+ 
+
+L: 27
+
+ 
+
+SV: 0
+
+ 
+
+BS: 0
+
+ 
+
+HLD: 0
+
+ 
+
+IP: 632.0
+
+ 
+
+H: 522
+
+ 
+
+R: 211
+
+ 
+
+ER: 202
+
+ 
+
+HR: 68
+
+ 
+
+BB: 151
+
+ 
+
+SO: 659
+
+ 
+
+ERA: 2.88
+
+ 
+
+WHIP: 1.06
+
+ 
+
+K/9: 9.38
+
+ 
+
+BB/9: 2.15
+
+ 
+
+HR/9: 0.97
+
+ 
+
+WAR: 14.7
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2041: $780K (Re-signed / Pre-Arb)
+
+ 
+
+2042: Arbitration
+
+ 
+
+2043: Arbitration
+
+ 
+
+2044: Arbitration
+
+ 
+
+2045–2050: Free Agent
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Option: 0/3 Used
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+QUIRKS
+
+Elite Strikeout Specialist
+
+Ace Mentality
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS
+
+All-Star (2040)
+
+Cy Young (2041)
+
+All-Star (2041)
+
+Strikeout Leader (2041)
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00533
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00533

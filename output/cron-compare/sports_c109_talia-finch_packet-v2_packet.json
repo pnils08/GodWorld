@@ -1,0 +1,790 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "109",
+  "persona": "talia-finch",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Talia Finch",
+    "popid": "POP-00592"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-ground",
+      "angle": "Oaks ground read C109 — low — the people around the second club",
+      "label": "Oaks ground read C109 — low",
+      "hookLine": "low",
+      "hood": "Baylight District",
+      "citizens": [
+        "Wilson Shepard (POP-01022)",
+        "Austin Reaves (POP-01027)",
+        "Dillon Brooks (POP-01079)"
+      ],
+      "popids": [
+        "POP-01022",
+        "POP-01027",
+        "POP-01079"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+      "cycle": 109
+    }
+  },
+  "angle": "output/cron-compare/sports_c109_talia-finch_packet-v2_angle.json",
+  "quotesRequested": 3,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": "To be honest, I think the team's performance can definitely affect the neighborhood's mood, but I haven't really seen that play out yet this season. I mean, we're still finding our rhythm, and I'm confident we'll tighten up and be ready for the real deal.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I think the team's performance can definitely affect the neighborhood's mood, but I haven't really seen that play out yet this season. I mean, we're still finding our rhythm, and I'm confident we'll tighten up and be ready for the real deal.\",\n  \"fact_ids\": [\"F-5b5a560909b4\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5b5a560909b4"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01022-79e47cda66",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I think the team's performance can definitely affect the neighborhood's mood, but I haven't really seen that play out yet this season. I mean, we're still finding our rhythm, and I'm confident we'll tighten up and be ready for the real deal."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01022",
+          "name": "Wilson Shepard",
+          "role": "Head Coach, Oakland Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "How does the team's performance affect the neighborhood's mood? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Baylight District",
+          "focus": "The Oaks' preseason games and their impact on the community",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+          ],
+          "self": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-46458e5913",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+              "text": "low"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C109 — low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "id": "F-f9869449dd4e"
+          },
+          {
+            "t": "FACT",
+            "text": "low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "id": "F-9f77871be565"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C109: low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-856b79b79e5a"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C109: frustrated",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-98a8fe244624"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Albiet preseason, the Oaks still have yet to taste a win. Rookie AJ Dybantsa continues to show promise scoring 19 points, 7 rebounds, 2 assists. Wendell Carter plays his first game and played the firs",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-cb32f8f75302"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-a689d2920790"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-2 · streak L6",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-c9c3c03b1ac8"
+          },
+          {
+            "t": "FACT",
+            "text": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01022",
+            "id": "F-5b5a560909b4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "Honestly, I think fans are getting a little frustrated with the team's performance so far. I mean, we're still finding our footing, but it's hard not to worry when we're not seeing the wins. I trust that we'll get it together, we just need to keep working and supporting each other.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I think fans are getting a little frustrated with the team's performance so far. I mean, we're still finding our footing, but it's hard not to worry when we're not seeing the wins. I trust that we'll get it together, we just need to keep working and supporting each other.\",\n  \"fact_ids\": [\"F-98a8fe244624\", \"F-c9c3c03b1ac8\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-98a8fe244624",
+          "F-c9c3c03b1ac8"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01027-a1f13fc361",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, I think fans are getting a little frustrated with the team's performance so far. I mean, we're still finding our footing, but it's hard not to worry when we're not seeing the wins. I trust that we'll get it together, we just need to keep working and supporting each other."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What are the fans' expectations from the team, and how do they think the team can improve? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Baylight District",
+          "focus": "The Oaks' preseason games and their impact on the community",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+          ],
+          "self": "Austin Reaves — SG / The Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-978b359c87",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+              "text": "low"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C109 — low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "id": "F-f9869449dd4e"
+          },
+          {
+            "t": "FACT",
+            "text": "low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "id": "F-9f77871be565"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C109: low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-856b79b79e5a"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C109: frustrated",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-98a8fe244624"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Albiet preseason, the Oaks still have yet to taste a win. Rookie AJ Dybantsa continues to show promise scoring 19 points, 7 rebounds, 2 assists. Wendell Carter plays his first game and played the firs",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-cb32f8f75302"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-a689d2920790"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-2 · streak L6",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-c9c3c03b1ac8"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-afa8c27895bb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": "To be honest, I think the team's performance can definitely affect the neighborhood's mood, but I haven't really seen that play out yet this season. I mean, we're still finding our rhythm, and I'm confident we'll tighten up and be ready for the real deal.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I think the team's performance can definitely affect the neighborhood's mood, but I haven't really seen that play out yet this season. I mean, we're still finding our rhythm, and I'm confident we'll tighten up and be ready for the real deal.\",\n  \"fact_ids\": [\"F-5b5a560909b4\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5b5a560909b4"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01022-79e47cda66",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I think the team's performance can definitely affect the neighborhood's mood, but I haven't really seen that play out yet this season. I mean, we're still finding our rhythm, and I'm confident we'll tighten up and be ready for the real deal."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01022",
+          "name": "Wilson Shepard",
+          "role": "Head Coach, Oakland Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "How does the team's performance affect the neighborhood's mood? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Baylight District",
+          "focus": "The Oaks' preseason games and their impact on the community",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+          ],
+          "self": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-46458e5913",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+              "text": "low"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C109 — low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "id": "F-f9869449dd4e"
+          },
+          {
+            "t": "FACT",
+            "text": "low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "id": "F-9f77871be565"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C109: low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-856b79b79e5a"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C109: frustrated",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-98a8fe244624"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Albiet preseason, the Oaks still have yet to taste a win. Rookie AJ Dybantsa continues to show promise scoring 19 points, 7 rebounds, 2 assists. Wendell Carter plays his first game and played the firs",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-cb32f8f75302"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-a689d2920790"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-2 · streak L6",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-c9c3c03b1ac8"
+          },
+          {
+            "t": "FACT",
+            "text": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01022",
+            "id": "F-5b5a560909b4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "Honestly, I think fans are getting a little frustrated with the team's performance so far. I mean, we're still finding our footing, but it's hard not to worry when we're not seeing the wins. I trust that we'll get it together, we just need to keep working and supporting each other.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I think fans are getting a little frustrated with the team's performance so far. I mean, we're still finding our footing, but it's hard not to worry when we're not seeing the wins. I trust that we'll get it together, we just need to keep working and supporting each other.\",\n  \"fact_ids\": [\"F-98a8fe244624\", \"F-c9c3c03b1ac8\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-98a8fe244624",
+          "F-c9c3c03b1ac8"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01027-a1f13fc361",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, I think fans are getting a little frustrated with the team's performance so far. I mean, we're still finding our footing, but it's hard not to worry when we're not seeing the wins. I trust that we'll get it together, we just need to keep working and supporting each other."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What are the fans' expectations from the team, and how do they think the team can improve? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Baylight District",
+          "focus": "The Oaks' preseason games and their impact on the community",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+          ],
+          "self": "Austin Reaves — SG / The Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-978b359c87",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+              "text": "low"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C109 — low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "id": "F-f9869449dd4e"
+          },
+          {
+            "t": "FACT",
+            "text": "low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "id": "F-9f77871be565"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C109: low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-856b79b79e5a"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C109: frustrated",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-98a8fe244624"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Albiet preseason, the Oaks still have yet to taste a win. Rookie AJ Dybantsa continues to show promise scoring 19 points, 7 rebounds, 2 assists. Wendell Carter plays his first game and played the firs",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-cb32f8f75302"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-a689d2920790"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-2 · streak L6",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-c9c3c03b1ac8"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-afa8c27895bb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01079",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: appendReflection_: [err] [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01079",
+          "name": "Dillon Brooks",
+          "role": "SF / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What have you seen, felt, or understood about \"The Oaks' preseason games and their impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Baylight District",
+          "focus": "The Oaks' preseason games and their impact on the community",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+          ],
+          "self": "Dillon Brooks — SF / The Oaks — Uptown",
+          "evidence": [
+            {
+              "id": "EV-5d753c5ddb",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+              "text": "low"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C109 — low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "id": "F-f9869449dd4e"
+          },
+          {
+            "t": "FACT",
+            "text": "low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "id": "F-9f77871be565"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C109: low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-856b79b79e5a"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C109: frustrated",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-98a8fe244624"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Albiet preseason, the Oaks still have yet to taste a win. Rookie AJ Dybantsa continues to show promise scoring 19 points, 7 rebounds, 2 assists. Wendell Carter plays his first game and played the firs",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-cb32f8f75302"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-a689d2920790"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-2 · streak L6",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+            "id": "F-c9c3c03b1ac8"
+          },
+          {
+            "t": "FACT",
+            "text": "Dillon Brooks — SF / The Oaks — Uptown",
+            "src": "Simulation_Ledger profile for POP-01079",
+            "id": "F-37c15567b8c3"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-01T18:18:25.430Z"
+}

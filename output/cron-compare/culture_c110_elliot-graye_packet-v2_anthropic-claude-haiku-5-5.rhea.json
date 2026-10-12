@@ -1,0 +1,53 @@
+{
+  "draft": "output/cron-compare/culture_c110_elliot-graye_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "7c42d1d7f5cf80aa6591aebd2d2d98bffbb18bcfaf499235800f3122fe6604b7",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Faith records and institutions verified cleanly against canon corrections and ledger profiles with authorized reflective texture.",
+  "review": {
+    "profileId": "graye-faith-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "packageVersion": "GRAYE-LEP2-1",
+    "manifestId": "AM-aa00c406ea7b",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Miriam Goldstein"
+    ],
+    "unverified": [
+      "Buddhist Temple",
+      "Esperanza Parish",
+      "Living Word",
+      "Telegraph Presbyterian Fellowship"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 6199,
+  "parseError": false,
+  "ranAt": "2026-10-08T23:15:27.146Z"
+}

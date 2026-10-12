@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "110",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "tanya-cruz",
+  "byline": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/sports_c110_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "uth.com]\n{\n  \"popId\": \"POP-00014\",\n  \"name\": \"Tanya Cruz\",\n  \"recorded\": true,\n  \"text\": \"filed: John Ellis sat at his stall in the clubhouse, tape still on his fingers, the 4-1 playoff mark hangin\"\n}"
+  },
+  "ranAt": "2026-10-07T23:20:11.574Z",
+  "dispositionReconciledAt": "2026-10-10T17:00:04.815Z"
+}

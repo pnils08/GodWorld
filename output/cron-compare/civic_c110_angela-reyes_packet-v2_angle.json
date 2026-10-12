@@ -1,0 +1,1124 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "angela-reyes",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00156",
+      "name": "Angela Reyes",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Enrollment moved in West Oakland — Rockridge has the strongest school record on the table (index 8.78) — the students and teachers who live it",
+      "approach": "Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "schools",
+        "hood": "Rockridge",
+        "facts": [
+          "Enrollment moved: West Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students, Laurel +1 students, Adams Point +1 students vs C109",
+          "Ranked by school quality index: Rockridge 8.78, Baylight District 8.11, West Oakland 8.09, Piedmont Ave 8.09, Brooklyn 8.07, Laurel 7.97, Adams Point 7.97, Jack London 7.91, Lake Merritt 7.91, Fruitvale 7.88, Downtown 7.82, Grand Lake 7.79, Uptown 7.71, Eastlake 6.97, Chinatown 6.96, KONO 6.96, Glenview 6.94, Dimond 6.94, San Antonio 6.88, Ivy Hill 6.88, East Oakland 6.85, Temescal 6.7 (22 neighborhoods)",
+          "Rockridge: school quality index 8.78 (was 8.87 at C109), graduation 94.81%, college-ready 76.99%, teacher quality 9.06, funding 15,000, 245 students",
+          "Temescal: school quality index 6.7 (was 6.8 at C109), graduation 85.45%, college-ready 56.5%, teacher quality 6.94, funding 11,500, 312 students",
+          "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.89%; per-hood funding on the table totals 286,000"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "defaulted on the debts — the savings are gone and the record carries it (desk rotation)",
+          "A family bought their home in Chinatown (desk rotation)",
+          "Fruitvale boom sustained — momentum 9/10, the block everyone wants onto (desk rotation)",
+          "Glenview cooling off: foot traffic down, storefronts quieter than the rest of the city (desk rotation)"
+        ],
+        "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-schools",
+      "hood": "Rockridge",
+      "score": null,
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): advance to preliminary schematics with community oversight provisions intact — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): filed legislative language with City Clerk — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved accelerated cohort placement with East Oakland priority — \"150 apprentices placed by spring — that's the target, and we're accelerating to hit it.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): independent oversight maintained; soil test verification proceeding — \"Independent oversight isn't bureaucracy — it's how we build trust while we build the future.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00040",
+          "name": "Aaron Whitfield",
+          "profile": "Aaron Whitfield — City Manager",
+          "role": "City Manager",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00016",
+            "pop": "POP-00040",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — Line cook",
+          "role": "Line cook",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00016",
+            "pop": "POP-00198",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00217",
+          "name": "Kenton Pearl",
+          "profile": "Kenton Pearl — Plumber",
+          "role": "Plumber",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00016",
+            "pop": "POP-00217",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00239",
+          "name": "Xiu Cello",
+          "profile": "Xiu Cello — Mover",
+          "role": "Mover",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00016",
+            "pop": "POP-00239",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00267",
+          "name": "Jacob King",
+          "profile": "Jacob King — Line cook",
+          "role": "Line cook",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00016",
+            "pop": "POP-00267",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00287",
+          "name": "Simone Adesanya",
+          "profile": "Simone Adesanya — School Principal",
+          "role": "School Principal",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00016",
+            "pop": "POP-00287",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00303",
+          "name": "Lee Coo",
+          "profile": "Lee Coo — School Psychologist",
+          "role": "School Psychologist",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00016",
+            "pop": "POP-00303",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00305",
+          "name": "Rico Fister",
+          "profile": "Rico Fister — High School Science Teacher",
+          "role": "High School Science Teacher",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00016",
+            "pop": "POP-00305",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00312",
+          "name": "Wiu Wiu",
+          "profile": "Wiu Wiu — High School Science Teacher",
+          "role": "High School Science Teacher",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00016",
+            "pop": "POP-00312",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00317",
+          "name": "Lila Bennington",
+          "profile": "Lila Bennington — Oakland Unified Elementary Teacher",
+          "role": "Oakland Unified Elementary Teacher",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00016",
+            "pop": "POP-00317",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00321",
+          "name": "Jee Lei",
+          "profile": "Jee Lei — After-School Program Director",
+          "role": "After-School Program Director",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00016",
+            "pop": "POP-00321",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00325",
+          "name": "Isabel Lopes",
+          "profile": "Isabel Lopes — ESL Teacher",
+          "role": "ESL Teacher",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00016",
+            "pop": "POP-00325",
+            "status": "Active"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge has the strongest school record on the table (index 8.78)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+        "id": "F-89e88955cec8"
+      },
+      {
+        "t": "FACT",
+        "text": "10 students and educators in Rockridge; the table says why their school reads the way it does.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+        "id": "F-77ac6b303f91"
+      },
+      {
+        "t": "FACT",
+        "text": "Enrollment moved: West Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students, Laurel +1 students, Adams Point +1 students vs C109",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C110",
+        "id": "F-b47c6858918c"
+      },
+      {
+        "t": "FACT",
+        "text": "Ranked by school quality index: Rockridge 8.78, Baylight District 8.11, West Oakland 8.09, Piedmont Ave 8.09, Brooklyn 8.07, Laurel 7.97, Adams Point 7.97, Jack London 7.91, Lake Merritt 7.91, Fruitvale 7.88, Downtown 7.82, Grand Lake 7.79, Uptown 7.71, Eastlake 6.97, Chinatown 6.96, KONO 6.96, Glenview 6.94, Dimond 6.94, San Antonio 6.88, Ivy Hill 6.88, East Oakland 6.85, Temescal 6.7 (22 neighborhoods)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+        "id": "F-174c028aa3d8"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: school quality index 8.78 (was 8.87 at C109), graduation 94.81%, college-ready 76.99%, teacher quality 9.06, funding 15,000, 245 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+        "id": "F-4d12ba431242"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal: school quality index 6.7 (was 6.8 at C109), graduation 85.45%, college-ready 56.5%, teacher quality 6.94, funding 11,500, 312 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+        "id": "F-dc16bb1a8c85"
+      },
+      {
+        "t": "FACT",
+        "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.89%; per-hood funding on the table totals 286,000",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C110",
+        "id": "F-dea8aaba086c"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "workplace",
+    "candidates": [
+      {
+        "pop": "POP-00040",
+        "name": "Aaron Whitfield",
+        "role": "City Manager",
+        "hood": null,
+        "profile": "Aaron Whitfield — City Manager",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00040",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "role": "Line cook",
+        "hood": null,
+        "profile": "Rick Walker — Line cook",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00198",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00217",
+        "name": "Kenton Pearl",
+        "role": "Plumber",
+        "hood": null,
+        "profile": "Kenton Pearl — Plumber",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00217",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00239",
+        "name": "Xiu Cello",
+        "role": "Mover",
+        "hood": null,
+        "profile": "Xiu Cello — Mover",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00239",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00267",
+        "name": "Jacob King",
+        "role": "Line cook",
+        "hood": null,
+        "profile": "Jacob King — Line cook",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00267",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00287",
+        "name": "Simone Adesanya",
+        "role": "School Principal",
+        "hood": null,
+        "profile": "Simone Adesanya — School Principal",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00287",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00303",
+        "name": "Lee Coo",
+        "role": "School Psychologist",
+        "hood": null,
+        "profile": "Lee Coo — School Psychologist",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00303",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00305",
+        "name": "Rico Fister",
+        "role": "High School Science Teacher",
+        "hood": null,
+        "profile": "Rico Fister — High School Science Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00305",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00312",
+        "name": "Wiu Wiu",
+        "role": "High School Science Teacher",
+        "hood": null,
+        "profile": "Wiu Wiu — High School Science Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00312",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00317",
+        "name": "Lila Bennington",
+        "role": "Oakland Unified Elementary Teacher",
+        "hood": null,
+        "profile": "Lila Bennington — Oakland Unified Elementary Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00317",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00321",
+        "name": "Jee Lei",
+        "role": "After-School Program Director",
+        "hood": null,
+        "profile": "Jee Lei — After-School Program Director",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00321",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00325",
+        "name": "Isabel Lopes",
+        "role": "ESL Teacher",
+        "hood": null,
+        "profile": "Isabel Lopes — ESL Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00325",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00352",
+        "name": "Kaila Jordache",
+        "role": "GED Program Instructor",
+        "hood": null,
+        "profile": "Kaila Jordache — GED Program Instructor",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00352",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00443",
+        "name": "Ace Hill",
+        "role": "ESL Teacher",
+        "hood": null,
+        "profile": "Ace Hill — ESL Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00443",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00499",
+        "name": "Jalen Serf",
+        "role": "School Psychologist",
+        "hood": null,
+        "profile": "Jalen Serf — School Psychologist",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00499",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00532",
+        "name": "Marcus Whitfield",
+        "role": "Youth Basketball Coach",
+        "hood": null,
+        "profile": "Marcus Whitfield — Youth Basketball Coach",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00532",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "hood": null,
+        "profile": "Lena Cross — Actor",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00539",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00631",
+        "name": "Derry Webb",
+        "role": "Youth Basketball Coach",
+        "hood": null,
+        "profile": "Derry Webb — Youth Basketball Coach",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00631",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00641",
+        "name": "Hector Campbell",
+        "role": "Taxi Driver",
+        "hood": null,
+        "profile": "Hector Campbell — Taxi Driver",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00641",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00649",
+        "name": "Jire Hilt",
+        "role": "Line Cook",
+        "hood": null,
+        "profile": "Jire Hilt — Line Cook",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00649",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00659",
+        "name": "Ripley Court",
+        "role": "STEM Program Coordinator",
+        "hood": null,
+        "profile": "Ripley Court — STEM Program Coordinator",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00659",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00667",
+        "name": "Lo Thoop",
+        "role": "Creative Writing Teacher",
+        "hood": null,
+        "profile": "Lo Thoop — Creative Writing Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00667",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00739",
+        "name": "Karem Asante",
+        "role": "Youth Counselor",
+        "hood": null,
+        "profile": "Karem Asante — Youth Counselor",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00739",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00742",
+        "name": "Maya Torres-Dillon",
+        "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+        "hood": null,
+        "profile": "Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00742",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00743",
+        "name": "Rick Dillon",
+        "role": "Grade Schooler",
+        "hood": null,
+        "profile": "Rick Dillon — Grade Schooler",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00743",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00825",
+        "name": "Imogen Soto",
+        "role": "After-School Program Director",
+        "hood": null,
+        "profile": "Imogen Soto — After-School Program Director",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00825",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00827",
+        "name": "Gloria Liu",
+        "role": "School Principal",
+        "hood": null,
+        "profile": "Gloria Liu — School Principal",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00827",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00847",
+        "name": "Caroline Cabrera",
+        "role": "After-School Program Director",
+        "hood": null,
+        "profile": "Caroline Cabrera — After-School Program Director",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00847",
+          "status": "Active"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-schools",
+      "angle": "Enrollment moved in West Oakland — Rockridge has the strongest school record on the table (index 8.78) — the students and teachers who live it",
+      "label": "Rockridge has the strongest school record on the table (index 8.78)",
+      "hookLine": "10 students and educators in Rockridge; the table says why their school reads the way it does.",
+      "hood": "Rockridge",
+      "citizens": [
+        "Mei Wong (POP-01036)",
+        "Maya Torres-Dillon (POP-00742)",
+        "Rick Dillon (POP-00743)",
+        "Rico Fister (POP-00305)",
+        "Wiu Wiu (POP-00312)",
+        "Gloria Liu (POP-00827)",
+        "Simone Adesanya (POP-00287)",
+        "Mateo Jilner (POP-01001)",
+        "Mateo Wally (POP-01012)",
+        "Salma Campbell (POP-01018)"
+      ],
+      "popids": [
+        "POP-01036",
+        "POP-00742",
+        "POP-00743",
+        "POP-00305",
+        "POP-00312",
+        "POP-00827",
+        "POP-00287",
+        "POP-01001",
+        "POP-01012",
+        "POP-01018"
+      ],
+      "ref": "output/beats/Neighborhood_Demographics.jsonl @C110",
+      "cycle": 110
+    },
+    "approach": "Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "SCHOOLS-SLICE-2",
+    "kind": "beat-schools",
+    "seat": {
+      "slug": "angela-reyes",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "desk": "civic",
+      "domain": "schools",
+      "builder": "buildSchoolsSlice.js"
+    },
+    "hood": "Rockridge",
+    "pulse": {
+      "className": "beat-schools",
+      "score": 100,
+      "label": "Rockridge has the strongest school record on the table (index 8.78)",
+      "hood": "Rockridge",
+      "source": "output/beats/Neighborhood_Demographics.jsonl @C110"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Enrollment moved in West Oakland — Rockridge has the strongest school record on the table (index 8.78) — the students and teachers who live it",
+      "hookLine": "10 students and educators in Rockridge; the table says why their school reads the way it does.",
+      "anchorFacts": [
+        "Enrollment moved: West Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students, Laurel +1 students, Adams Point +1 students vs C109",
+        "Ranked by school quality index: Rockridge 8.78, Baylight District 8.11, West Oakland 8.09, Piedmont Ave 8.09, Brooklyn 8.07, Laurel 7.97, Adams Point 7.97, Jack London 7.91, Lake Merritt 7.91, Fruitvale 7.88, Downtown 7.82, Grand Lake 7.79, Uptown 7.71, Eastlake 6.97, Chinatown 6.96, KONO 6.96, Glenview 6.94, Dimond 6.94, San Antonio 6.88, Ivy Hill 6.88, East Oakland 6.85, Temescal 6.7 (22 neighborhoods)",
+        "Rockridge: school quality index 8.78 (was 8.87 at C109), graduation 94.81%, college-ready 76.99%, teacher quality 9.06, funding 15,000, 245 students",
+        "Temescal: school quality index 6.7 (was 6.8 at C109), graduation 85.45%, college-ready 56.5%, teacher quality 6.94, funding 11,500, 312 students",
+        "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.89%; per-hood funding on the table totals 286,000"
+      ],
+      "evidence": [
+        {
+          "text": "Enrollment moved: West Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students, Laurel +1 students, Adams Point +1 students vs C109",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C110"
+        },
+        {
+          "text": "Ranked by school quality index: Rockridge 8.78, Baylight District 8.11, West Oakland 8.09, Piedmont Ave 8.09, Brooklyn 8.07, Laurel 7.97, Adams Point 7.97, Jack London 7.91, Lake Merritt 7.91, Fruitvale 7.88, Downtown 7.82, Grand Lake 7.79, Uptown 7.71, Eastlake 6.97, Chinatown 6.96, KONO 6.96, Glenview 6.94, Dimond 6.94, San Antonio 6.88, Ivy Hill 6.88, East Oakland 6.85, Temescal 6.7 (22 neighborhoods)",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110"
+        },
+        {
+          "text": "Rockridge: school quality index 8.78 (was 8.87 at C109), graduation 94.81%, college-ready 76.99%, teacher quality 9.06, funding 15,000, 245 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110"
+        },
+        {
+          "text": "Temescal: school quality index 6.7 (was 6.8 at C109), graduation 85.45%, college-ready 56.5%, teacher quality 6.94, funding 11,500, 312 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110"
+        },
+        {
+          "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.89%; per-hood funding on the table totals 286,000",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C110"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 109
+      },
+      "hooks": [
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 3
+        },
+        {
+          "text": "A family bought their home in Chinatown",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Chinatown",
+          "priority": 3
+        },
+        {
+          "text": "Fruitvale boom sustained — momentum 9/10, the block everyone wants onto",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 7
+        },
+        {
+          "text": "Glenview cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Glenview",
+          "priority": 6
+        },
+        {
+          "text": "Clarissa Dane moved from Fruitvale to West Oakland — moving up from Fruitvale",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "The Grant household (2) moved from Chinatown to West Oakland — moving up from Chinatown",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "The Zhou household (2) moved from Laurel to West Oakland — moving up from Laurel",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "Camila Osman moved from Rockridge to Chinatown — leaving Rockridge for a better fit",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Chinatown",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01036",
+        "name": "Mei Wong",
+        "role": "After-school program aide",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Mei Wong — After-school program aide — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00742",
+        "name": "Maya Torres-Dillon",
+        "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00743",
+        "name": "Rick Dillon",
+        "role": "Grade Schooler",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Rick Dillon — Grade Schooler — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00305",
+        "name": "Rico Fister",
+        "role": "High School Science Teacher",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Rico Fister — High School Science Teacher — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00312",
+        "name": "Wiu Wiu",
+        "role": "High School Science Teacher",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Wiu Wiu — High School Science Teacher — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00827",
+        "name": "Gloria Liu",
+        "role": "School Principal",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Gloria Liu — School Principal — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00287",
+        "name": "Simone Adesanya",
+        "role": "School Principal",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Simone Adesanya — School Principal — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-01001",
+        "name": "Mateo Jilner",
+        "role": "student",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Mateo Jilner — student — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-01012",
+        "name": "Mateo Wally",
+        "role": "student",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Mateo Wally — student — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-01018",
+        "name": "Salma Campbell",
+        "role": "student",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Salma Campbell — student — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Neighborhood_Demographics.jsonl @C110",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Angela Reyes this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "text": "I’m looking into Rockridge’s school quality index, which remains the highest in Oakland at 8.78, despite a slight dip from last cycle. Enrollment increased by one student, and I want to understand what’s driving families to choose Rockridge schools. The focus will be on the classroom environment, teacher quality, and how the community supports education.",
+    "plan": {
+      "chase": "I’m looking into Rockridge’s school quality index, which remains the highest in Oakland at 8.78, despite a slight dip from last cycle. Enrollment increased by one student, and I want to understand what’s driving families to choose Rockridge schools. The focus will be on the classroom environment, teacher quality, and how the community supports education.",
+      "focus": "Rockridge’s school quality index and enrollment trends.",
+      "why": "Rockridge consistently leads in school quality, and understanding what sustains this excellence could offer insights for other neighborhoods.",
+      "checks": [
+        "What specific factors contribute to Rockridge’s high teacher quality score of 9.06?",
+        "How does Rockridge’s funding of $15,000 per student compare to other neighborhoods?",
+        "What role does community involvement play in maintaining Rockridge’s strong school record?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00317",
+          "question": "What challenges do you face as an elementary teacher in Rockridge, and how does the community support you?",
+          "basis": "Rockridge’s teacher quality score is 9.06, the highest in the city."
+        },
+        {
+          "pop": "POP-00321",
+          "question": "How do after-school programs in Rockridge contribute to student success and college readiness?",
+          "basis": "Rockridge’s college-ready rate is 76.99%, one of the highest in Oakland."
+        }
+      ],
+      "interpretation": "Rockridge’s schools seem to thrive due to a combination of strong teacher quality, adequate funding, and community support. The slight dip in the school quality index might reflect broader citywide challenges, but Rockridge remains a benchmark for excellence.",
+      "unverifiedLead": [
+        "Is there a particular program or initiative in Rockridge that parents credit for the high graduation rate?",
+        "How do Rockridge schools address the needs of diverse student populations?"
+      ],
+      "closeQuestion": "What lessons can other neighborhoods learn from Rockridge’s approach to education?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): advance to preliminary schematics with community oversight provisions intact — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): filed legislative language with City Clerk — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved accelerated cohort placement with East Oakland priority — \"150 apprentices placed by spring — that's the target, and we're accelerating to hit it.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): independent oversight maintained; soil test verification proceeding — \"Independent oversight isn't bureaucracy — it's how we build trust while we build the future.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 102,
+  "ranAt": "2026-10-06T11:16:46.367Z"
+}

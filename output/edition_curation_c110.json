@@ -1,0 +1,154 @@
+{
+  "cycle": "110",
+  "top": 9,
+  "selected": [
+    "civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+    "sports_c110_talia-finch_packet-v2_openai-gpt-5-6-luna",
+    "civic_c110_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+    "sports_c110_p-slayer_packet-v2_x-ai-grok-4-3",
+    "sports_c110_tanya-cruz_packet-v2_x-ai-grok-4-3",
+    "civic_c110_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+    "culture_c110_mason-ortega_packet-v2_x-ai-grok-4-3",
+    "sports_c110_elliot-marbury_packet-v2_anthropic-claude-sonnet-5",
+    "sports_c110_selena-grant_packet-v2_openai-gpt-5-6-luna"
+  ],
+  "ranked": [
+    {
+      "stem": "civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "score": 5,
+      "slug": "INIT-001:disbursement-active",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "sports_c110_talia-finch_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Talia Finch",
+      "desk": "sports",
+      "score": 4,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c110_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "score": 3.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c110_p-slayer_packet-v2_x-ai-grok-4-3",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "score": 3,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c110_tanya-cruz_packet-v2_x-ai-grok-4-3",
+      "byline": "Tanya Cruz",
+      "desk": "sports",
+      "score": 3,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c110_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Trevor Shimizu",
+      "desk": "civic",
+      "score": 2.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c110_mason-ortega_packet-v2_x-ai-grok-4-3",
+      "byline": "Mason Ortega",
+      "desk": "culture",
+      "score": 2.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c110_elliot-marbury_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Elliot Marbury",
+      "desk": "sports",
+      "score": 2,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c110_selena-grant_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Selena Grant",
+      "desk": "sports",
+      "score": 2,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c110_simon-leary_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Simon Leary",
+      "desk": "sports",
+      "score": 2,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c110_angela-reyes_packet-v2_anthropic-claude-haiku-4-5",
+      "byline": "Angela Reyes",
+      "desk": "civic",
+      "score": 1,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "business_c110_business-desk_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "score": 0.5,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "civic_c110_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Jax Caldera",
+      "desk": "civic",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "civic_c110_noah-tan_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "civic_c110_rachel-torres_packet-v2_x-ai-grok-4-3",
+      "byline": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "culture_c110_elliot-graye_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Elliot Graye",
+      "desk": "culture",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "sports_c110_hal-richmond_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Hal Richmond",
+      "desk": "sports",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    }
+  ],
+  "excludedCanonViolations": 6
+}

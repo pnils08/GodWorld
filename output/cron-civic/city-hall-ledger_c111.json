@@ -1,0 +1,198 @@
+{
+  "cycle": 111,
+  "v": "CITYHALL/1",
+  "hearing": [
+    {
+      "officeId": "COUNCIL-D7",
+      "popid": "POP-00504",
+      "holder": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Temescal's resilience and KONO's stability are built on merchant discipline and strict oversight, not mayoral victory laps.",
+      "actionAsked": "Mandate municipal service auditing for KONO and targeted commercial revitalization tracking for Temescal merchant corridors.",
+      "voiceFile": "output/civic-voice/council_d7_c111.json"
+    },
+    {
+      "officeId": "COUNCIL-D8",
+      "popid": "POP-00505",
+      "holder": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "A two-and-a-half million dollar stabilization fund must be governed by clear disbursement protocols, verified eligibility baselines, and transparent administrative oversight.",
+      "actionAsked": "Support legislative filing for Commercial Stabilization for Grand Lake with mandatory milestone reporting and disbursement audit criteria",
+      "voiceFile": "output/civic-voice/council_d8_c111.json"
+    },
+    {
+      "officeId": "COUNCIL-D6",
+      "popid": "POP-00044",
+      "holder": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "When our neighborhood corridors are thriving and safe, the city's highest duty is to get the fundamentals right and support local commerce.",
+      "actionAsked": "Prioritize baseline municipal infrastructure and core city services to support thriving commercial corridors in Piedmont Avenue and Montclair.",
+      "voiceFile": "output/civic-voice/council_d6_c111.json"
+    },
+    {
+      "officeId": "COUNCIL-D2",
+      "popid": "POP-00502",
+      "holder": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "We must ensure the Baylight District project benefits the entire community, particularly Jack London and Downtown Oakland, with continued oversight and community engagement.",
+      "actionAsked": "Confirm the Phase II site remediation proceeds on schedule",
+      "voiceFile": "output/civic-voice/council_d2_c111.json"
+    },
+    {
+      "officeId": "COUNCIL-D4",
+      "popid": "POP-00042",
+      "holder": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Targeted investment and fiscal discipline are crucial for our city's growth, and I believe the Downtown Economic Revitalization initiative aligns with these principles.",
+      "actionAsked": "I will support the Downtown Economic Revitalization initiative",
+      "voiceFile": "output/civic-voice/council_d4_c111.json"
+    },
+    {
+      "officeId": "COUNCIL-D5",
+      "popid": "POP-00043",
+      "holder": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "East Oakland's youth deserve more than promises—they deserve pathways to prosperity.",
+      "actionAsked": "Demand prioritized placements for East Oakland youth in the first cohort",
+      "voiceFile": "output/civic-voice/council_d5_c111.json"
+    },
+    {
+      "officeId": "STAFF-DM-COMM",
+      "popid": "POP-00037",
+      "holder": "Brenda Okoro",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Stabilization is a race against displacement — month-ten disbursement keeps us ahead.",
+      "actionAsked": "Approved month-ten disbursement of $400,000, maintaining 23-day average processing time.",
+      "voiceFile": "output/civic-voice/okoro_c111.json"
+    },
+    {
+      "officeId": "COUNCIL-D3",
+      "popid": "POP-00503",
+      "holder": "Rose Delgado",
+      "district": "D3",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+      "actionAsked": "Accelerate schematics delivery by Cycle 114",
+      "voiceFile": "output/civic-voice/council_d3_c111.json"
+    },
+    {
+      "officeId": "COUNCIL-D1",
+      "popid": "POP-00501",
+      "holder": "Denise Carter",
+      "district": "D1",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+      "actionAsked": "Month-ten disbursement approved",
+      "voiceFile": "output/civic-voice/council_d1_c111.json"
+    },
+    {
+      "officeId": "COUNCIL-D9",
+      "popid": "POP-00506",
+      "holder": "Terrence Mobley",
+      "district": "D9",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Laurel’s stability is no accident—it’s the result of staying focused on what works.",
+      "actionAsked": "Monitor and sustain existing stability measures",
+      "voiceFile": "output/civic-voice/council_d9_c111.json"
+    }
+  ],
+  "votes": [],
+  "gavel": {
+    "officeId": "MAYOR-01",
+    "popid": "POP-00034",
+    "holder": "Avery Santana",
+    "dispositions": [
+      {
+        "initiativeId": "INIT-001",
+        "mayoralAction": "none",
+        "implementationPhase": "disbursement-active",
+        "note": "C111: Month-ten disbursement $400K approved; 23-day processing standard maintained."
+      },
+      {
+        "initiativeId": "INIT-003",
+        "mayoralAction": "none",
+        "implementationPhase": "design-phase",
+        "note": "C111: Advanced from visioning to design-phase; schematics delivery mandated Cycle 114."
+      },
+      {
+        "initiativeId": "INIT-007",
+        "mayoralAction": "none",
+        "implementationPhase": "implementation-active",
+        "note": "C111: First cohort placement report mandated for Cycle 112; implementation accountability enforced."
+      },
+      {
+        "initiativeId": "INIT-008",
+        "mayoralAction": "none",
+        "implementationPhase": "legislation-filed",
+        "note": "C111: Emergency Economic Development Committee hearing called for Cycle 112."
+      },
+      {
+        "initiativeId": "INIT-009",
+        "mayoralAction": "none",
+        "implementationPhase": "legislation-filed",
+        "note": "C111: Referred to Economic Development Committee with mandatory milestone reporting and audit criteria."
+      },
+      {
+        "initiativeId": "INIT-010",
+        "mayoralAction": "none",
+        "implementationPhase": "legislation-filed",
+        "note": "C111: Referred to Housing and Community Development Committee with legal support analysis."
+      },
+      {
+        "initiativeId": "INIT-006",
+        "mayoralAction": "none",
+        "implementationPhase": "construction-active",
+        "note": "C111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight."
+      }
+    ],
+    "quote": "Month-ten disbursement approved — $400,000 to keep West Oakland families in their homes.",
+    "voiceFile": "output/civic-voice/mayor_gavel_c111.json"
+  }
+}

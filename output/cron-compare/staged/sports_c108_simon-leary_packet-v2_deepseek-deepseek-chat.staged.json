@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "108",
+  "persona": "simon-leary",
+  "byline": "Simon Leary",
+  "bylinePopid": "POP-00016",
+  "article": "output/cron-compare/staged/sports_c108_simon-leary_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vladimir Gonzalez",
+        "role": "mentioned",
+        "popid": "POP-00598"
+      },
+      {
+        "name": "Darrin Davis",
+        "role": "quoted-source",
+        "popid": "POP-00021"
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "baylight-district-vinnie-keane-prospect-callup",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "You know, when you're in the middle of a streak like this, it's not about any one guy carrying the load. It's about each of us finding new ways to contribute when the moment calls for it. I've seen pitchers turning into leaders in the clubhouse, rookies stepping up like seasoned vets, and guys like me adjusting how we play to fit what the team needs that day. That's the secret - everyone being willing to shift roles without ego.",
+        "sourceRef": "citizenVoice PRESS Darrin Davis"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-1ac418d2814f",
+    "draftSha256": "85bb32b57e97306acdd7afd170c8b10408a2f6a583c5cbfcafc9a15a476d1eb0",
+    "verdict": "output/cron-compare/sports_c108_simon-leary_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-24T23:16:24.686Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:03.126Z"
+}

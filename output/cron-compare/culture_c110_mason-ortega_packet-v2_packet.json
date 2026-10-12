@@ -1,0 +1,351 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "110",
+  "persona": "mason-ortega",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Laurel kitchens: Nino's, Schoolgate Cafe, MacArthur Kitchen — the people who work the shift",
+      "label": "Laurel kitchens · Nino's, Schoolgate Cafe",
+      "hookLine": "Colin Phillips, Bakery Worker at Nino's. 2 named workers at 2 named kitchens in Laurel on the ledger this cycle.",
+      "hood": "Laurel",
+      "pulseClass": "hood-kitchens",
+      "namedBusinesses": [
+        "Nino's",
+        "Schoolgate Cafe",
+        "MacArthur Kitchen"
+      ],
+      "citizens": [
+        "Colin Phillips (POP-00786)",
+        "Jori Clame (POP-00232)"
+      ],
+      "popids": [
+        "POP-00786",
+        "POP-00232"
+      ],
+      "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "cycle": 110
+    }
+  },
+  "angle": "output/cron-compare/culture_c110_mason-ortega_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00786",
+      "name": "Colin Phillips",
+      "quote": "Most days at Nino's start before sunrise - mixing dough, shaping loaves, that kind of thing. It's steady work, not glamorous, but there's something satisfying about seeing the racks fill up before the morning rush. Lately I've been training on the pastry side too, which keeps things interesting.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Most days at Nino's start before sunrise - mixing dough, shaping loaves, that kind of thing. It's steady work, not glamorous, but there's something satisfying about seeing the racks fill up before the morning rush. Lately I've been training on the pastry side too, which keeps things interesting.\",\n  \"fact_ids\": [\"F-fb7d0167db0a\", \"F-07cf7bb0960c\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-fb7d0167db0a",
+          "F-07cf7bb0960c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00786-3d5cb3afcb",
+        "authoredQuote": true,
+        "publishableQuote": "Most days at Nino's start before sunrise - mixing dough, shaping loaves, that kind of thing. It's steady work, not glamorous, but there's something satisfying about seeing the racks fill up before the morning rush. Lately I've been training on the pastry side too, which keeps things interesting."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00786",
+          "name": "Colin Phillips",
+          "role": "Bakery Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "What does a typical day look like for you at Nino's? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Laurel",
+          "focus": "The daily grind and human stories behind the Laurel kitchens.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Colin Phillips — Bakery Worker",
+          "evidence": [
+            {
+              "id": "EV-bae4460ba7",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+              "text": "Colin Phillips, Bakery Worker at Nino's. 2 named workers at 2 named kitchens in Laurel on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C110",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-e491ae296bc1"
+          },
+          {
+            "t": "FACT",
+            "text": "Laurel kitchens · Nino's, Schoolgate Cafe",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+            "id": "F-317a3340ed6f"
+          },
+          {
+            "t": "FACT",
+            "text": "Colin Phillips, Bakery Worker at Nino's. 2 named workers at 2 named kitchens in Laurel on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+            "id": "F-fb7d0167db0a"
+          },
+          {
+            "t": "FACT",
+            "text": "Nino's · Food & Beverage · 13 employees · growth 3.9% · revenue $1.2M (+$887 vs C109) · on the roster: Colin Phillips (Bakery Worker)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+            "id": "F-07cf7bb0960c"
+          },
+          {
+            "t": "FACT",
+            "text": "Schoolgate Cafe · Cafe / dining · 8 employees · growth 4.6% · revenue $691k (+$608 vs C109) · on the roster: Jori Clame (Server)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+            "id": "F-b82ab2be8041"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur Kitchen · Restaurant & Dining · 11 employees · growth 3.8% · revenue $994k (+$728 vs C109)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+            "id": "F-c88b5d184246"
+          },
+          {
+            "t": "FACT",
+            "text": "ENGINE SEED (Jack London): citizens Brianna Scott; LaTrice Desai; Basma Inoue; Belle Lopez · businesses Harborline Grill; Port of Oakland",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C110",
+            "id": "F-b8b44a8cf888"
+          },
+          {
+            "t": "FACT",
+            "text": "ENGINE SEED (West Oakland): citizens Elias Varek; Nia Rook; Ilandra Tain; Josefina Williams · businesses Firehouse 29 West Oakland Baseball Academy; Northgate Construction · Keane Auxiliary Flag Football League (program)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C110",
+            "id": "F-90c83d9704aa"
+          },
+          {
+            "t": "FACT",
+            "text": "Colin Phillips — Bakery Worker",
+            "src": "Simulation_Ledger profile for POP-00786",
+            "id": "F-0e5384c65d50"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00786",
+      "name": "Colin Phillips",
+      "quote": "Most days at Nino's start before sunrise - mixing dough, shaping loaves, that kind of thing. It's steady work, not glamorous, but there's something satisfying about seeing the racks fill up before the morning rush. Lately I've been training on the pastry side too, which keeps things interesting.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Most days at Nino's start before sunrise - mixing dough, shaping loaves, that kind of thing. It's steady work, not glamorous, but there's something satisfying about seeing the racks fill up before the morning rush. Lately I've been training on the pastry side too, which keeps things interesting.\",\n  \"fact_ids\": [\"F-fb7d0167db0a\", \"F-07cf7bb0960c\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-fb7d0167db0a",
+          "F-07cf7bb0960c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00786-3d5cb3afcb",
+        "authoredQuote": true,
+        "publishableQuote": "Most days at Nino's start before sunrise - mixing dough, shaping loaves, that kind of thing. It's steady work, not glamorous, but there's something satisfying about seeing the racks fill up before the morning rush. Lately I've been training on the pastry side too, which keeps things interesting."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00786",
+          "name": "Colin Phillips",
+          "role": "Bakery Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "What does a typical day look like for you at Nino's? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Laurel",
+          "focus": "The daily grind and human stories behind the Laurel kitchens.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Colin Phillips — Bakery Worker",
+          "evidence": [
+            {
+              "id": "EV-bae4460ba7",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+              "text": "Colin Phillips, Bakery Worker at Nino's. 2 named workers at 2 named kitchens in Laurel on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C110",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-e491ae296bc1"
+          },
+          {
+            "t": "FACT",
+            "text": "Laurel kitchens · Nino's, Schoolgate Cafe",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+            "id": "F-317a3340ed6f"
+          },
+          {
+            "t": "FACT",
+            "text": "Colin Phillips, Bakery Worker at Nino's. 2 named workers at 2 named kitchens in Laurel on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+            "id": "F-fb7d0167db0a"
+          },
+          {
+            "t": "FACT",
+            "text": "Nino's · Food & Beverage · 13 employees · growth 3.9% · revenue $1.2M (+$887 vs C109) · on the roster: Colin Phillips (Bakery Worker)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+            "id": "F-07cf7bb0960c"
+          },
+          {
+            "t": "FACT",
+            "text": "Schoolgate Cafe · Cafe / dining · 8 employees · growth 4.6% · revenue $691k (+$608 vs C109) · on the roster: Jori Clame (Server)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+            "id": "F-b82ab2be8041"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur Kitchen · Restaurant & Dining · 11 employees · growth 3.8% · revenue $994k (+$728 vs C109)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+            "id": "F-c88b5d184246"
+          },
+          {
+            "t": "FACT",
+            "text": "ENGINE SEED (Jack London): citizens Brianna Scott; LaTrice Desai; Basma Inoue; Belle Lopez · businesses Harborline Grill; Port of Oakland",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C110",
+            "id": "F-b8b44a8cf888"
+          },
+          {
+            "t": "FACT",
+            "text": "ENGINE SEED (West Oakland): citizens Elias Varek; Nia Rook; Ilandra Tain; Josefina Williams · businesses Firehouse 29 West Oakland Baseball Academy; Northgate Construction · Keane Auxiliary Flag Football League (program)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C110",
+            "id": "F-90c83d9704aa"
+          },
+          {
+            "t": "FACT",
+            "text": "Colin Phillips — Bakery Worker",
+            "src": "Simulation_Ledger profile for POP-00786",
+            "id": "F-0e5384c65d50"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-09T18:15:16.544Z"
+}

@@ -1,0 +1,86 @@
+# C107 Voice Directives — Mara Vance (AUTO)
+
+**Cycle:** 107
+**Issued:** C107 (auto-derived, cron-civic-run.js --stage=directive)
+**Source:** world_summary_c107 + engine review HIGHs + tracker + C106 voice record
+
+---
+## Keisha Ramos — Baylight Authority Director
+
+- **Agent:** `.claude/agents/civic-office-baylight-authority/`
+- **Address:** Execute the master development contract and submit the site preparation mobilization schedule for Phase II.
+- **Why:** Following C106 council approval and contractor package submission, INIT-006 enters the construction-planning execution milestone in C107, gating ground remediation mobilization.
+- **Acceptance:** A fully executed master development contract and filed site preparation mobilization timeline.
+- **Silence consequence:** Pre-construction site preparation stalls, risking schedule slippage for the Baylight redevelopment area.
+
+## Elena Soria Dominguez — Transit Hub Planning Lead
+
+- **Agent:** `.claude/agents/civic-project-transit-hub/`
+- **Address:** Release the Phase II design Request for Proposals (RFP) and execute the binding merchant protection covenants.
+- **Why:** Following the C106 design-phase kickoff authorization, INIT-003 tracker sequencing mandates covenant execution and RFP issuance in C107 while Fruitvale RetailVitality sits at 8.21.
+- **Acceptance:** Publication of the formal design RFP and a registry of signed merchant protection covenants along the E. 12th Street corridor.
+- **Silence consequence:** Design procurement delays leave corridor small businesses without enforceable displacement protections.
+
+## Vanessa Tran-Muñoz — OARI Program Director
+
+- **Agent:** `.claude/agents/civic-project-oari/`
+- **Address:** Deploy operational dispatch protocols for East Oakland and submit the inter-agency coverage report reconciling elevated crime metrics.
+- **Why:** Engine audits flag high-severity incoherence in West Oakland (CrimeIndex 0.97), Fruitvale (0.89), and East Oakland (0.97), gating INIT-002 expansion milestones scheduled for C107.
+- **Acceptance:** A published East Oakland dispatch protocol document and operational shift schedule coordinating with emergency response partners.
+- **Silence consequence:** Operational divergence persists across active corridors, delaying crisis diversion in high-incident zones.
+
+## Marcus Webb — OEWD Program Director (Stabilization Fund)
+
+- **Agent:** `.claude/agents/civic-project-stabilization-fund/`
+- **Address:** Deliver the Month-eight disbursement review and deploy field canvass teams to Downtown commercial corridors.
+- **Why:** Tracker milestones schedule Month-eight disbursement review in C107 following C106 approval of 12 new households (69 total), while West Oakland RetailVitality sits at 3.53 and Downtown CrimeIndex stands at 1.00.
+- **Acceptance:** A submitted Month-eight disbursement audit detailing cumulative household grants and logged Downtown canvass intake figures.
+- **Silence consequence:** Disbursement processing lapses and vulnerable storefront corridors fail to access allocated stabilization funds.
+
+## Bobby Chen-Ramirez — Health Center Project Director
+
+- **Agent:** `.claude/agents/civic-project-health-center/`
+- **Address:** Complete mechanical, electrical, and plumbing (MEP) interior systems rough-ins and submit certified utility inspection sign-offs.
+- **Why:** With interior framing advanced in C106, INIT-005 construction-active milestones mandate utility rough-in completions and municipal inspection filings in C107.
+- **Acceptance:** Certified municipal inspection reports verifying MEP rough-in completion for the Temescal site.
+- **Silence consequence:** Construction phases stall ahead of interior wall closure, delaying the overall project delivery timeline.
+
+## Avery Santana — Mayor
+
+- **Agent:** `.claude/agents/civic-office-mayor/`
+- **Address:** Convene the public town hall enrollment event for the Oakland Youth Apprenticeship Pipeline (INIT-007) and certify operational rollout.
+- **Why:** Following backlog clearance verified in C106, tracker sequencing sets the public enrollment launch in C107 as the gating operational milestone.
+- **Acceptance:** A published town hall enrollment report documenting open applicant intake and training cohort placement targets.
+- **Silence consequence:** The cleared intake pipeline remains dormant without executive launch of public enrollment.
+
+## Rafael Montez — Police Chief
+
+- **Agent:** `.claude/agents/civic-office-police-chief/`
+- **Address:** File the East Oakland co-response protocol alignment memo establishing clear transfer thresholds between OPD sector patrol and OARI dispatchers.
+- **Why:** East Oakland CrimeIndex (0.97) and West Oakland CrimeIndex (0.97) require explicit jurisdictional boundaries to resolve engine audit incoherence during C107 INIT-002 expansion.
+- **Acceptance:** A joint dispatch boundary directive formally transmitted to City Planning and OARI program leadership.
+- **Silence consequence:** Dispatch confusion and uncoordinated field responses in high-incident zones.
+
+## Rose Delgado — City Council District 3
+
+- **Agent:** `.claude/agents/civic-office-council-d3/`
+- **Address:** Review and ratify the executed merchant protection covenants for the Fruitvale Transit Hub Phase II design RFP release.
+- **Why:** District 3 commercial stability depends on binding protections during transit design, with Fruitvale RetailVitality at 8.21 and CrimeIndex at 0.89 in C107.
+- **Acceptance:** Formal legislative concurrence or district sign-off on the INIT-003 merchant covenant framework.
+- **Silence consequence:** Lack of district ratification stalls RFP issuance and creates uncertainty for local business owners.
+
+## Janae Rivers — City Council District 5
+
+- **Agent:** `.claude/agents/civic-office-council-d5/`
+- **Address:** Confirm district oversight parameters and intake allocations for East Oakland's INIT-002 emergency deployment and INIT-007 enrollment town hall.
+- **Why:** Emergency expansion into East Oakland was authorized in C106; C107 deployment requires legislative confirmation of community liaison roles amid East Oakland's 0.97 CrimeIndex.
+- **Acceptance:** A recorded statement of oversight terms and youth enrollment allocations for District 5 corridors.
+- **Silence consequence:** Community oversight mechanisms remain undefined as field operations commence in East Oakland.
+
+## Brenda Okoro — Deputy Mayor (Community)
+
+- **Agent:** `.claude/agents/civic-office-okoro/`
+- **Address:** Transmit the coordinated deployment plan for Downtown commercial stabilization canvassing and INIT-007 town hall venue logistics.
+- **Why:** Executive directives in C106 expanded Stabilization Fund outreach to Downtown and mandated C107 public enrollment for the Youth Apprenticeship Pipeline.
+- **Acceptance:** A filed operational plan outlining Downtown merchant contact schedules and town hall administrative staffing.
+- **Silence consequence:** Downtown outreach remains fragmented and public enrollment logistics risk administrative delay.

@@ -1,0 +1,353 @@
+FULL STAT TRUE SOURCE — PITCHER
+
+Name: John Ellis
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: SP
+
+ 
+
+Jersey: #33
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 86
+
+ 
+
+MLB Service: 2.001
+
+ 
+
+Age: 25
+
+ 
+
+Bats: S
+
+ 
+
+Throws: R
+
+ 
+
+Height: 5'10"
+
+ 
+
+Weight: 209 lbs
+
+ 
+
+Drafted: Round 2 (2033)
+
+ 
+
+Secondary Position: NONE
+
+ 
+
+Hitter Tendency: OPPOSITE FIELD
+
+ 
+
+Born: NEW YORK
+
+ 
+
+Canonical POPID: POP-00033
+
+
+--------------------------------------------------------------------------------
+
+
+PITCH REPERTOIRE
+
+Pitch 1 — 4-Seam Fastball: 94 mph
+
+ 
+
+Pitch 2 — Slider: 86 mph
+
+ 
+
+Pitch 3 — Changeup: 84 mph
+
+ 
+
+Pitch 4 — Cutter: 92 mph
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+STA: 86
+
+ 
+
+H/9: 60
+
+ 
+
+K/9: 61
+
+ 
+
+BB/9: 68
+
+ 
+
+HR/9: 69
+
+ 
+
+PCLT: 55
+
+ 
+
+CTRL: 70
+
+ 
+
+VEL: 83
+
+ 
+
+BRK: 55
+
+ 
+
+FLD: 34
+
+ 
+
+ARM: 99
+
+ 
+
+ACC: 80
+
+ 
+
+REAC: 36
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   GS  W   L   SV  BS  HLD  IP      H    R   ER  HR  BB  SO   ERA
+
+ 
+
+2041  ATH   32  32  20  3   0   0   0    189.2   184  79  72  18  54  153  3.42
+
+ 
+
+2040  ATH   32  32  16  6   0   0   0    185.0   193  84  80  19  63  124  3.89
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 64
+
+ 
+
+GS: 64
+
+ 
+
+W: 36
+
+ 
+
+L: 9
+
+ 
+
+SV: 0
+
+ 
+
+BS: 0
+
+ 
+
+HLD: 0
+
+ 
+
+IP: 374.2
+
+ 
+
+H: 377
+
+ 
+
+R: 163
+
+ 
+
+ER: 152
+
+ 
+
+HR: 37
+
+ 
+
+BB: 117
+
+ 
+
+SO: 277
+
+ 
+
+ERA: 3.65
+
+ 
+
+WHIP: 1.32
+
+ 
+
+K/9: 6.65
+
+ 
+
+BB/9: 2.81
+
+ 
+
+HR/9: 0.89
+
+ 
+
+WAR: 6.2
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2041: $780K
+
+ 
+
+2042: Renewal (RNW)
+
+ 
+
+2043–2045: Arbitration
+
+ 
+
+2046–2049: Free Agent
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Option: 0/3 Used
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+QUIRKS
+
+Laser Throwing Arm (99 ARM)
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00033
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00033

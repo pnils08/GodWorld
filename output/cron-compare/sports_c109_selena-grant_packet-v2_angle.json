@@ -1,0 +1,467 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "109",
+  "persona": "selena-grant",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00591",
+      "name": "Selena Grant",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks — game-result C109 · 0-2 · L6 — the second club's board read",
+      "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "oaks",
+        "hood": "Baylight District",
+        "facts": [
+          "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+          "Record 0-2 · streak L6",
+          "Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs",
+          "Trigger: cold-streak",
+          "Franchise stability: uncertain",
+          "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+          "Record 0-3 · streak L7",
+          "Stats (feed): Austin Reaves/24pts/4asst, Dillon Brooks/21pts/8rebs, Wendell Carter Jr/12pts/7rebs"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-oaks-beat",
+      "hood": "Baylight District",
+      "score": null,
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+      "nearby": [
+        {
+          "text": "A's | game-result | (playoffs) | Arturo Ramos, Danny Horn, Mark Aitken",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Travis Coles, Eric Taveras, Desmond Morton",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Pablo Almanzar, Ernesto Quintero, Jose Colon",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | AJ Dybantsa, Wendell Carter Jr",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Wilson Shepard, Austin Reaves, Dillon Brooks",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01022",
+          "name": "Wilson Shepard",
+          "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "why": "named on the Oaks feed C109 (Oakland_Sports_Feed)",
+          "role": "Head Coach, Oakland Oaks",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-01027",
+          "name": "Austin Reaves",
+          "profile": "Austin Reaves — SG / The Oaks — Downtown",
+          "why": "named on the Oaks feed C109 (Oakland_Sports_Feed)",
+          "role": "SG / The Oaks",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-01079",
+          "name": "Dillon Brooks",
+          "profile": "Dillon Brooks — SF / The Oaks — Uptown",
+          "why": "named on the Oaks feed C109 (Oakland_Sports_Feed)",
+          "role": "SF / The Oaks",
+          "hood": "Uptown"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-912baafccba1"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result C109 · 0-2 · L6",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+        "id": "F-9324fd583a99"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+        "id": "F-e2866b587767"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+        "id": "F-a689d2920790"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 0-2 · streak L6",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+        "id": "F-430c53f6b0de"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+        "id": "F-a8638867df48"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: cold-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+        "id": "F-b10e622132e7"
+      },
+      {
+        "t": "FACT",
+        "text": "Franchise stability: uncertain",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+        "id": "F-f3470b03883d"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+        "id": "F-984a9f12e804"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 0-3 · streak L7",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+        "id": "F-5274ab408d23"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Austin Reaves/24pts/4asst, Dillon Brooks/21pts/8rebs, Wendell Carter Jr/12pts/7rebs",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+        "id": "F-d202a0c8af32"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Selena Grant",
+    "popid": "POP-00591"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-beat",
+      "angle": "Oaks — game-result C109 · 0-2 · L6 — the second club's board read",
+      "label": "Oaks — game-result C109 · 0-2 · L6",
+      "hookLine": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory, ",
+      "hood": "Baylight District",
+      "citizens": [
+        "Wilson Shepard (POP-01022)",
+        "Austin Reaves (POP-01027)",
+        "Dillon Brooks (POP-01079)"
+      ],
+      "popids": [
+        "POP-01022",
+        "POP-01027",
+        "POP-01079"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+      "cycle": 109
+    },
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OAKS-BEAT-1",
+    "kind": "beat-oaks-beat",
+    "seat": {
+      "slug": "selena-grant",
+      "name": "Selena Grant",
+      "popid": "POP-00591",
+      "desk": "sports",
+      "domain": "oaks",
+      "builder": "buildOaksBeatSlice.js"
+    },
+    "hood": "Baylight District",
+    "pulse": {
+      "className": "beat-oaks-beat",
+      "score": 100,
+      "label": "Oaks — game-result C109 · 0-2 · L6",
+      "hood": "Baylight District",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Oaks — game-result C109 · 0-2 · L6 — the second club's board read",
+      "hookLine": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory, ",
+      "anchorFacts": [
+        "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+        "Record 0-2 · streak L6",
+        "Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs",
+        "Trigger: cold-streak",
+        "Franchise stability: uncertain",
+        "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+        "Record 0-3 · streak L7",
+        "Stats (feed): Austin Reaves/24pts/4asst, Dillon Brooks/21pts/8rebs, Wendell Carter Jr/12pts/7rebs",
+        "Trigger: cold-streak",
+        "Franchise stability: uncertain"
+      ],
+      "evidence": [
+        {
+          "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+        },
+        {
+          "text": "Record 0-2 · streak L6",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+        },
+        {
+          "text": "Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+        },
+        {
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+        },
+        {
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+        },
+        {
+          "text": "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+        },
+        {
+          "text": "Record 0-3 · streak L7",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+        },
+        {
+          "text": "Stats (feed): Austin Reaves/24pts/4asst, Dillon Brooks/21pts/8rebs, Wendell Carter Jr/12pts/7rebs",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+        },
+        {
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+        },
+        {
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "why": "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — Downtown",
+        "why": "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01079",
+        "name": "Dillon Brooks",
+        "role": "SF / The Oaks",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Dillon Brooks — SF / The Oaks — Uptown",
+        "why": "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Oakland_Sports_Feed.jsonl @C109",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "text": "I'm looking into the Oaks' recent performance, trying to understand what's behind their losing streak. I want to talk to some of the players and coaches to get their perspective on what's going wrong.",
+    "plan": {
+      "chase": "I'm looking into the Oaks' recent performance, trying to understand what's behind their losing streak. I want to talk to some of the players and coaches to get their perspective on what's going wrong.",
+      "focus": "The Oaks' cold streak and its impact on the team's morale",
+      "why": "The Oaks' losing streak is a major concern for the team and its fans, and I want to explore the reasons behind it",
+      "checks": [
+        "stats",
+        "player interviews",
+        "coach's comments"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01022",
+          "question": "What's your take on the team's current performance?",
+          "basis": "His experience as the Head Coach"
+        },
+        {
+          "pop": "POP-01027",
+          "question": "How do you think the team can turn things around?",
+          "basis": "His recent strong performances on the court"
+        },
+        {
+          "pop": "POP-01079",
+          "question": "What's the mood like in the locker room right now?",
+          "basis": "His role as a team player"
+        }
+      ],
+      "interpretation": "The Oaks' losing streak is a complex issue that requires a deeper look into the team's dynamics and performance",
+      "unverifiedLead": [
+        "rumors of tension between players",
+        "speculation about the coach's future"
+      ],
+      "closeQuestion": "Can the Oaks break their losing streak and turn their season around?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | game-result | (playoffs) | Arturo Ramos, Danny Horn, Mark Aitken",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00025",
+        "POP-00022",
+        "POP-00003"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Travis Coles, Eric Taveras, Desmond Morton",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533",
+        "POP-00597",
+        "POP-00051"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Pablo Almanzar, Ernesto Quintero, Jose Colon",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01078",
+        "POP-00050",
+        "POP-00599"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | AJ Dybantsa, Wendell Carter Jr",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01024",
+        "POP-01028"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Wilson Shepard, Austin Reaves, Dillon Brooks",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-01027",
+        "POP-01079"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "ranAt": "2026-09-29T11:16:05.609Z"
+}

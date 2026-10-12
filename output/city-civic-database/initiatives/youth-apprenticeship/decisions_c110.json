@@ -1,0 +1,22 @@
+{
+  "initiative": "INIT-007",
+  "initiativeId": "INIT-007",
+  "cycle": 110,
+  "primaryVoice": "Mayor gavel (mayor_gavel-004)",
+  "consolidatedFrom": [
+    "STMT-110-council_d1-002 (Carter D1 — Oakland Youth Apprenticeship Pipeline)",
+    "STMT-110-council_d3-002 (Delgado D3 — Oakland Youth Apprenticeship Pipeline)",
+    "STMT-110-council_d5-001 (Rivers D5 — Youth Apprenticeship)",
+    "STMT-110-council_d6-005 (Crane D6 — Oakland Youth Apprenticeship Pipeline Cohort Review)",
+    "STMT-110-council_d8-004 (Chen D8 — Youth Apprenticeship Pipeline Placement Review)",
+    "STMT-110-mayor_gavel-004 (Mayor gavel — Oakland Youth Apprenticeship Pipeline Cohort Placement)",
+    "STMT-110-mayor_open-007 (Mayor agenda — Oakland Youth Apprenticeship Pipeline — Cohort Placement Review)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-007",
+    "ImplementationPhase": "implementation-active",
+    "MilestoneNotes": "C110: Cohort placement accelerated; East Oakland priority established; 150 target by spring",
+    "NextScheduledAction": "First cohort completion and placement verification",
+    "NextActionCycle": 112
+  }
+}

@@ -1,0 +1,389 @@
+{
+  "date": "2026-09-11",
+  "cycle": 106,
+  "quotas": {
+    "grid": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen"
+    ],
+    "weekday": 5
+  },
+  "assignments": [
+    {
+      "desk": "culture",
+      "name": "Mason Ortega",
+      "popid": "POP-00160",
+      "beatDomain": "CULTURE",
+      "persona": "mason-ortega",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 5,
+      "story": {
+        "angle": "Jack London kitchens: Harborline Grill, Blue Lantern Bar, Green & Gold Tavern — the people who work the shift",
+        "label": "Jack London kitchens · Harborline Grill, Blue Lantern Bar",
+        "hookLine": "Tomas Renteria, Podcast Host / Line Cook at Harborline Grill. 6 named workers at 2 named kitchens in Jack London on the ledger this cycle.",
+        "hood": "Jack London",
+        "pulseClass": "hood-kitchens",
+        "namedBusinesses": [
+          "Harborline Grill",
+          "Blue Lantern Bar",
+          "Green & Gold Tavern",
+          "Jack London Square Markets",
+          "Dockhouse BBQ"
+        ],
+        "citizens": [
+          "Tomas Renteria (POP-00744)",
+          "Quynh Le (POP-00878)",
+          "Jalen Hill (POP-00960)",
+          "Bruce Wright (POP-00965)",
+          "Yuki Ji (POP-00783)",
+          "Guadalupe Lee (POP-00970)",
+          "Mei-Lin Kang (POP-00835)",
+          "Ileana Vasquez (POP-00718)",
+          "Anna Baker (POP-00471)"
+        ],
+        "popids": [
+          "POP-00744",
+          "POP-00878",
+          "POP-00960",
+          "POP-00965",
+          "POP-00783",
+          "POP-00970",
+          "POP-00835",
+          "POP-00718",
+          "POP-00471"
+        ],
+        "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106",
+        "cycle": 106
+      },
+      "economicSlice": true,
+      "economicVariant": "food",
+      "pulse": {
+        "className": "hood-kitchens",
+        "score": 27,
+        "label": "Jack London kitchens · Harborline Grill, Blue Lantern Bar",
+        "hood": "Jack London",
+        "namedBusinesses": [
+          "Harborline Grill",
+          "Blue Lantern Bar",
+          "Green & Gold Tavern",
+          "Jack London Square Markets",
+          "Dockhouse BBQ"
+        ]
+      },
+      "prewrite": {
+        "pulseClass": "hood-kitchens",
+        "angle": "Jack London kitchens: Harborline Grill, Blue Lantern Bar, Green & Gold Tavern — the people who work the shift",
+        "hookLine": "Tomas Renteria, Podcast Host / Line Cook at Harborline Grill. 6 named workers at 2 named kitchens in Jack London on the ledger this cycle.",
+        "namedBusinesses": [
+          "Harborline Grill",
+          "Blue Lantern Bar",
+          "Green & Gold Tavern",
+          "Jack London Square Markets",
+          "Dockhouse BBQ"
+        ],
+        "anchorFacts": [
+          "Harborline Grill · Restaurant & Dining · 7 employees · growth 5% · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+          "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 5% · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+          "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 5%",
+          "Jack London Square Markets · Retail & Food · 30 employees · growth 5%",
+          "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 5%",
+          "ENGINE SEED (Jack London): citizens Mei-Lin Kang; Quynh Le; Ileana Vasquez; Anna Baker · businesses Baylight Construction Authority; Anchor Build"
+        ],
+        "evidence": [
+          {
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 5% · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+          },
+          {
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 5% · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+          },
+          {
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 5%",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+          },
+          {
+            "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 5%",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+          },
+          {
+            "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 5%",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+          },
+          {
+            "text": "ENGINE SEED (Jack London): citizens Mei-Lin Kang; Quynh Le; Ileana Vasquez; Anna Baker · businesses Baylight Construction Authority; Anchor Build",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C106"
+          }
+        ],
+        "hooks": [
+          {
+            "text": "Unemployment in Temescal up 14%. Economic stress story. Who's affected and why?",
+            "angle": "baseline context piece",
+            "hood": "Temescal"
+          },
+          {
+            "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+            "angle": "baseline context piece",
+            "hood": null
+          }
+        ],
+        "forbidden": [
+          "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+          "Do not contradict a role, employer or neighborhood listed here"
+        ]
+      },
+      "wakePackage": "MASON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Kai Marston",
+      "popid": "POP-00158",
+      "beatDomain": "CULTURE",
+      "persona": "kai-marston",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 5,
+      "story": {
+        "angle": "Lakeside Whisper Bar is open and quiet in Lake Merritt. What that condition means is not yet established.",
+        "label": "Lakeside Whisper Bar (Lake Merritt) · quiet night",
+        "hookLine": "Lakeside Whisper Bar is open and quiet in Lake Merritt.",
+        "hood": "Lake Merritt",
+        "pulseClass": "quiet-nightlife",
+        "citizens": [],
+        "popids": [],
+        "named": "Lakeside Whisper Bar",
+        "venue": "Lakeside Whisper Bar",
+        "ref": "world_summary ## Evening Texture · Nightlife",
+        "cycle": 106
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Lakeside Whisper Bar (Lake Merritt) · quiet night"
+      },
+      "recommend": {
+        "bag": "lifestyle",
+        "slug": "sharon-okafor",
+        "name": "Sharon Okafor",
+        "popid": "POP-00159",
+        "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+        "reason": "top pulse quiet-nightlife → lifestyle",
+        "pulseClass": "quiet-nightlife",
+        "pulseLabel": "Lakeside Whisper Bar (Lake Merritt) · quiet night"
+      },
+      "bag": "arts",
+      "wakePackage": "KAI-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "beatDomain": "CULTURE",
+      "persona": "sharon-okafor",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 5,
+      "story": {
+        "angle": "Lakeside Whisper Bar is open and quiet in Lake Merritt. What that condition means is not yet established.",
+        "label": "Lakeside Whisper Bar (Lake Merritt) · quiet night",
+        "hookLine": "Lakeside Whisper Bar is open and quiet in Lake Merritt.",
+        "hood": "Lake Merritt",
+        "pulseClass": "quiet-nightlife",
+        "citizens": [],
+        "popids": [],
+        "named": "Lakeside Whisper Bar",
+        "venue": "Lakeside Whisper Bar",
+        "ref": "world_summary ## Evening Texture · Nightlife",
+        "cycle": 106
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Lakeside Whisper Bar (Lake Merritt) · quiet night"
+      },
+      "recommend": {
+        "bag": "lifestyle",
+        "slug": "sharon-okafor",
+        "name": "Sharon Okafor",
+        "popid": "POP-00159",
+        "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+        "reason": "top pulse quiet-nightlife → lifestyle",
+        "pulseClass": "quiet-nightlife",
+        "pulseLabel": "Lakeside Whisper Bar (Lake Merritt) · quiet night"
+      },
+      "bag": "lifestyle",
+      "wakePackage": "SHARON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "beatDomain": "CULTURE_GROUND",
+      "persona": "maria-keen",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 5,
+      "story": {
+        "angle": "Lakeside Whisper Bar is open and quiet in Lake Merritt. What that condition means is not yet established.",
+        "label": "Lakeside Whisper Bar (Lake Merritt) · quiet night",
+        "hookLine": "Lakeside Whisper Bar is open and quiet in Lake Merritt.",
+        "hood": "Lake Merritt",
+        "pulseClass": "quiet-nightlife",
+        "citizens": [],
+        "popids": [],
+        "named": "Lakeside Whisper Bar",
+        "venue": "Lakeside Whisper Bar",
+        "ref": "world_summary ## Evening Texture · Nightlife",
+        "cycle": 106
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Lakeside Whisper Bar (Lake Merritt) · quiet night"
+      },
+      "recommend": {
+        "bag": "lifestyle",
+        "slug": "sharon-okafor",
+        "name": "Sharon Okafor",
+        "popid": "POP-00159",
+        "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+        "reason": "top pulse quiet-nightlife → lifestyle",
+        "pulseClass": "quiet-nightlife",
+        "pulseLabel": "Lakeside Whisper Bar (Lake Merritt) · quiet night"
+      },
+      "bag": "ground",
+      "wakePackage": "MARIA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "gridDay": 5,
+      "story": {
+        "ref": "undocked:undocked-pop00143-Y3C2-e2",
+        "label": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
+        "kind": "undocked",
+        "angle": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, combat 0, mishaps 0, magnitude 3/5. Standings: Clarissa Dane leads the board — rank #1, 3 cycle(s) led, current streak 3.",
+        "citizens": [
+          "Clarissa Dane — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00143"
+        ],
+        "hood": "Fruitvale"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Mason Ortega",
+        "persona": "mason-ortega",
+        "wakePackage": "MASON-LEP2-1"
+      },
+      {
+        "name": "Kai Marston",
+        "persona": "kai-marston",
+        "wakePackage": "KAI-LEP2-1"
+      },
+      {
+        "name": "Sharon Okafor",
+        "persona": "sharon-okafor",
+        "wakePackage": "SHARON-LEP2-1"
+      },
+      {
+        "name": "Maria Keen",
+        "persona": "maria-keen",
+        "wakePackage": "MARIA-LEP2-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=mason-ortega,kai-marston,sharon-okafor,maria-keen,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "seats=1 mason-ortega/food:Jack London",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": false,
+    "reason": "no beat-slice persona in rota",
+    "seats": [],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": true,
+    "reason": "seats=3",
+    "seats": [
+      {
+        "persona": "kai-marston",
+        "bag": "arts",
+        "pulse": "quiet-nightlife",
+        "score": 24
+      },
+      {
+        "persona": "sharon-okafor",
+        "bag": "lifestyle",
+        "pulse": "quiet-nightlife",
+        "score": 24
+      },
+      {
+        "persona": "maria-keen",
+        "bag": "ground",
+        "pulse": "quiet-nightlife",
+        "score": 24
+      }
+    ]
+  },
+  "civicDomainEnrich": {
+    "enriched": false,
+    "reason": "no civic-domain persona assignment in rota",
+    "seats": []
+  },
+  "builtAt": "2026-09-11T11:15:06.745Z"
+}

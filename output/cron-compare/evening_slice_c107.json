@@ -1,0 +1,899 @@
+{
+  "empty": false,
+  "cycle": 107,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Rico Valez",
+      "GameGirl Gia",
+      "Former A's Star Rodriguez"
+    ],
+    "restaurants": [
+      {
+        "name": "OakHouse",
+        "hood": "Rockridge"
+      },
+      {
+        "name": "Dockhouse BBQ",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Harborline Grill",
+        "hood": "Jack London"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "Dragon Gate Lounge",
+        "hood": "Chinatown"
+      },
+      {
+        "name": "Piedmont Pub",
+        "hood": "Piedmont Ave"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 5,
+      "vibe": "game-night",
+      "movement": "restricted",
+      "weatherImpact": 1.3
+    },
+    "cityEvents": [
+      "The Varek Family Block Party",
+      "Fruitvale Unity Gathering",
+      "The Paulson Line Founding Celebration",
+      "Jack London Misty Morning Coffee Club"
+    ],
+    "tv": [
+      "Civil Rights Special",
+      "Community Stories",
+      "Late Weather Watch",
+      "Late Shift Live",
+      "Lake Merritt Laughs",
+      "Jack London Ballpark Stories",
+      "One-on-One with Mark Aitken (1B)"
+    ],
+    "movies": [
+      "Voice of Change",
+      "Neighborhood Tales",
+      "Storm Window",
+      "Fog Harbor",
+      "Rising Star",
+      "The Closer"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight - Playoff Special",
+    "streamingTrend": "civil rights documentaries",
+    "foodTrend": "Playoff tension dining - sports bar surge"
+  },
+  "signals": {
+    "fameCount": 11,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c107.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Rico Valez spotted at Canopy Market",
+        "name": "Rico Valez",
+        "venue": "Canopy Market",
+        "ref": "Ripple_Ledger cycle 107 (CauseType lifestyle-sighting); rendered: world_summary_c107.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Rockridge",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | GameGirl Gia spotted at Telegraph Press",
+        "name": "GameGirl Gia",
+        "venue": "Telegraph Press",
+        "ref": "Ripple_Ledger cycle 107 (CauseType lifestyle-sighting); rendered: world_summary_c107.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "KONO",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Former A's Star Rodriguez spotted at KONO Kitchen",
+        "name": "Former A's Star Rodriguez",
+        "venue": "KONO Kitchen",
+        "ref": "Ripple_Ledger cycle 107 (CauseType lifestyle-sighting); rendered: world_summary_c107.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "KONO",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Jade Orion — the city is watching: caught the recap at the counter this morning and stayed for the second retelling",
+        "name": "Jade Orion",
+        "ref": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00540"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Theo Banks — the city is watching: walked the perimeter of the Coliseum District Development and tried to picture what it would look like in five years",
+        "name": "Theo Banks",
+        "ref": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Uptown",
+        "popids": [
+          "POP-01056"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Marisol Rivera — the city is watching: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "name": "Marisol Rivera",
+        "ref": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-01062"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Mina Linas — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Mina Linas",
+        "ref": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00135"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Melton Neilon — the city keeps saying the name: Tier 3 -> 2",
+        "name": "Melton Neilon",
+        "ref": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00170"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Rick Walker — the city keeps saying the name: Tier 3 -> 2",
+        "name": "Rick Walker",
+        "ref": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00198"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Elio Perez — the city keeps saying the name: Tier 3 -> 1",
+        "name": "Elio Perez",
+        "ref": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00201"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Depak Ying — the city keeps saying the name: Tier 3 -> 2",
+        "name": "Depak Ying",
+        "ref": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00210"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "quiet-nightlife",
+    "score": 24,
+    "label": "Dragon Gate Lounge (Chinatown) · quiet night",
+    "named": "Dragon Gate Lounge",
+    "hood": "Chinatown",
+    "person": null,
+    "venue": null
+  },
+  "candidates": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Dragon Gate Lounge (Chinatown) · quiet night",
+      "named": "Dragon Gate Lounge",
+      "hood": "Chinatown"
+    },
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Piedmont Pub (Piedmont Ave) · quiet night",
+      "named": "Piedmont Pub",
+      "hood": "Piedmont Ave"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Rico Valez at Canopy Market (Rockridge)",
+      "named": "Canopy Market",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "GameGirl Gia at Telegraph Press (KONO)",
+      "named": "Telegraph Press",
+      "hood": "KONO"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Former A's Star Rodriguez at KONO Kitchen (KONO)",
+      "named": "KONO Kitchen",
+      "hood": "KONO"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "OakHouse (Rockridge)",
+      "named": "OakHouse",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Dockhouse BBQ (Jack London)",
+      "named": "Dockhouse BBQ",
+      "hood": "Jack London"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Harborline Grill (Jack London)",
+      "named": "Harborline Grill",
+      "hood": "Jack London"
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Varek Family Block Party",
+      "named": "The Varek Family Block Party",
+      "hood": null
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Jade Orion — fame rise",
+      "named": "Jade Orion",
+      "hood": "Lake Merritt"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Theo Banks — fame rise",
+      "named": "Theo Banks",
+      "hood": "Uptown"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Marisol Rivera — fame rise",
+      "named": "Marisol Rivera",
+      "hood": "Rockridge"
+    }
+  ],
+  "pulses": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Dragon Gate Lounge (Chinatown) · quiet night",
+      "named": "Dragon Gate Lounge",
+      "hood": "Chinatown",
+      "names": [
+        "Dragon Gate Lounge"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Dragon Gate Lounge is open and quiet in Chinatown. What that condition means is not yet established.",
+      "hookLine": "Dragon Gate Lounge is open and quiet in Chinatown.",
+      "sceneBits": [
+        "VENUE: Dragon Gate Lounge",
+        "HOOD: Chinatown",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "game-night",
+        "movement": "restricted",
+        "weatherImpact": 1.3
+      },
+      "cycle": 107
+    },
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Piedmont Pub (Piedmont Ave) · quiet night",
+      "named": "Piedmont Pub",
+      "hood": "Piedmont Ave",
+      "names": [
+        "Piedmont Pub"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Piedmont Pub is open and quiet in Piedmont Ave. What that condition means is not yet established.",
+      "hookLine": "Piedmont Pub is open and quiet in Piedmont Ave.",
+      "sceneBits": [
+        "VENUE: Piedmont Pub",
+        "HOOD: Piedmont Ave",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "game-night",
+        "movement": "restricted",
+        "weatherImpact": 1.3
+      },
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Rico Valez at Canopy Market (Rockridge)",
+      "named": "Canopy Market",
+      "hood": "Rockridge",
+      "names": [
+        "Rico Valez",
+        "Canopy Market"
+      ],
+      "person": "Rico Valez",
+      "venue": "Canopy Market",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType lifestyle-sighting); rendered: world_summary_c107.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Rico Valez spotted at Canopy Market in Rockridge — ground truth only, no invented companions",
+      "hookLine": "sighting | Rico Valez spotted at Canopy Market",
+      "sceneBits": [
+        "PERSON: Rico Valez",
+        "VENUE: Canopy Market",
+        "HOOD: Rockridge"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "GameGirl Gia at Telegraph Press (KONO)",
+      "named": "Telegraph Press",
+      "hood": "KONO",
+      "names": [
+        "GameGirl Gia",
+        "Telegraph Press"
+      ],
+      "person": "GameGirl Gia",
+      "venue": "Telegraph Press",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType lifestyle-sighting); rendered: world_summary_c107.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "GameGirl Gia spotted at Telegraph Press in KONO — ground truth only, no invented companions",
+      "hookLine": "sighting | GameGirl Gia spotted at Telegraph Press",
+      "sceneBits": [
+        "PERSON: GameGirl Gia",
+        "VENUE: Telegraph Press",
+        "HOOD: KONO"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Former A's Star Rodriguez at KONO Kitchen (KONO)",
+      "named": "KONO Kitchen",
+      "hood": "KONO",
+      "names": [
+        "Former A's Star Rodriguez",
+        "KONO Kitchen"
+      ],
+      "person": "Former A's Star Rodriguez",
+      "venue": "KONO Kitchen",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType lifestyle-sighting); rendered: world_summary_c107.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Former A's Star Rodriguez spotted at KONO Kitchen in KONO — ground truth only, no invented companions",
+      "hookLine": "sighting | Former A's Star Rodriguez spotted at KONO Kitchen",
+      "sceneBits": [
+        "PERSON: Former A's Star Rodriguez",
+        "VENUE: KONO Kitchen",
+        "HOOD: KONO"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "OakHouse (Rockridge)",
+      "named": "OakHouse",
+      "hood": "Rockridge",
+      "names": [
+        "OakHouse"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "OakHouse appears on the evening restaurant list in Rockridge. What was happening there is not established.",
+      "hookLine": "OakHouse appears on the evening restaurant list in Rockridge.",
+      "sceneBits": [
+        "VENUE: OakHouse",
+        "HOOD: Rockridge"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Dockhouse BBQ (Jack London)",
+      "named": "Dockhouse BBQ",
+      "hood": "Jack London",
+      "names": [
+        "Dockhouse BBQ"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Dockhouse BBQ appears on the evening restaurant list in Jack London. What was happening there is not established.",
+      "hookLine": "Dockhouse BBQ appears on the evening restaurant list in Jack London.",
+      "sceneBits": [
+        "VENUE: Dockhouse BBQ",
+        "HOOD: Jack London"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Harborline Grill (Jack London)",
+      "named": "Harborline Grill",
+      "hood": "Jack London",
+      "names": [
+        "Harborline Grill"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Harborline Grill appears on the evening restaurant list in Jack London. What was happening there is not established.",
+      "hookLine": "Harborline Grill appears on the evening restaurant list in Jack London.",
+      "sceneBits": [
+        "VENUE: Harborline Grill",
+        "HOOD: Jack London"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Varek Family Block Party",
+      "named": "The Varek Family Block Party",
+      "hood": null,
+      "names": [
+        "The Varek Family Block Party"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: The Varek Family Block Party — present-tense room, not calendar filler",
+      "hookLine": "The Varek Family Block Party is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Varek Family Block Party",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Jade Orion — fame rise",
+      "named": "Jade Orion",
+      "hood": "Lake Merritt",
+      "names": [
+        "Jade Orion"
+      ],
+      "person": "Jade Orion",
+      "popids": [
+        "POP-00540"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Jade Orion — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Jade Orion — the city is watching: caught the recap at the counter this morning and stayed for the second retelling",
+      "sceneBits": [
+        "PERSON: Jade Orion",
+        "HOOD: Lake Merritt",
+        "LABEL: fame-rise | Jade Orion — the city is watching: caught the recap at the counter this morning and stayed for the second retelling"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Theo Banks — fame rise",
+      "named": "Theo Banks",
+      "hood": "Uptown",
+      "names": [
+        "Theo Banks"
+      ],
+      "person": "Theo Banks",
+      "popids": [
+        "POP-01056"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Theo Banks — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Theo Banks — the city is watching: walked the perimeter of the Coliseum District Development and tried to picture what it would look like in five years",
+      "sceneBits": [
+        "PERSON: Theo Banks",
+        "HOOD: Uptown",
+        "LABEL: fame-rise | Theo Banks — the city is watching: walked the perimeter of the Coliseum District Development and tried to picture what it would look like in five years"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Marisol Rivera — fame rise",
+      "named": "Marisol Rivera",
+      "hood": "Rockridge",
+      "names": [
+        "Marisol Rivera"
+      ],
+      "person": "Marisol Rivera",
+      "popids": [
+        "POP-01062"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Marisol Rivera — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Marisol Rivera — the city is watching: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "sceneBits": [
+        "PERSON: Marisol Rivera",
+        "HOOD: Rockridge",
+        "LABEL: fame-rise | Marisol Rivera — the city is watching: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever."
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Mina Linas — fame rise",
+      "named": "Mina Linas",
+      "hood": "Lake Merritt",
+      "names": [
+        "Mina Linas"
+      ],
+      "person": "Mina Linas",
+      "popids": [
+        "POP-00135"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Mina Linas — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Mina Linas — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Mina Linas",
+        "HOOD: Lake Merritt",
+        "LABEL: tier-climb | Mina Linas — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Melton Neilon — fame rise",
+      "named": "Melton Neilon",
+      "hood": "Temescal",
+      "names": [
+        "Melton Neilon"
+      ],
+      "person": "Melton Neilon",
+      "popids": [
+        "POP-00170"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Melton Neilon — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Melton Neilon — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Melton Neilon",
+        "HOOD: Temescal",
+        "LABEL: tier-climb | Melton Neilon — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Rick Walker — fame rise",
+      "named": "Rick Walker",
+      "hood": "Fruitvale",
+      "names": [
+        "Rick Walker"
+      ],
+      "person": "Rick Walker",
+      "popids": [
+        "POP-00198"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Rick Walker — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Rick Walker — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Rick Walker",
+        "HOOD: Fruitvale",
+        "LABEL: tier-climb | Rick Walker — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Elio Perez — fame rise",
+      "named": "Elio Perez",
+      "hood": "West Oakland",
+      "names": [
+        "Elio Perez"
+      ],
+      "person": "Elio Perez",
+      "popids": [
+        "POP-00201"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Elio Perez — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Elio Perez — the city keeps saying the name: Tier 3 -> 1",
+      "sceneBits": [
+        "PERSON: Elio Perez",
+        "HOOD: West Oakland",
+        "LABEL: tier-climb | Elio Perez — the city keeps saying the name: Tier 3 -> 1"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Depak Ying — fame rise",
+      "named": "Depak Ying",
+      "hood": "Rockridge",
+      "names": [
+        "Depak Ying"
+      ],
+      "person": "Depak Ying",
+      "popids": [
+        "POP-00210"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Depak Ying — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Depak Ying — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Depak Ying",
+        "HOOD: Rockridge",
+        "LABEL: tier-climb | Depak Ying — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Daniel Cloak — fame rise",
+      "named": "Daniel Cloak",
+      "hood": "West Oakland",
+      "names": [
+        "Daniel Cloak"
+      ],
+      "person": "Daniel Cloak",
+      "popids": [
+        "POP-00722"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Daniel Cloak — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Daniel Cloak — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Daniel Cloak",
+        "HOOD: West Oakland",
+        "LABEL: tier-climb | Daniel Cloak — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Yuki Ji — fame rise",
+      "named": "Yuki Ji",
+      "hood": "Lake Merritt",
+      "names": [
+        "Yuki Ji"
+      ],
+      "person": "Yuki Ji",
+      "popids": [
+        "POP-00783"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Yuki Ji — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Yuki Ji — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Yuki Ji",
+        "HOOD: Lake Merritt",
+        "LABEL: tier-climb | Yuki Ji — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 107
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Darius Clark — fame rise",
+      "named": "Darius Clark",
+      "hood": "West Oakland",
+      "names": [
+        "Darius Clark"
+      ],
+      "person": "Darius Clark",
+      "popids": [
+        "POP-00961"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 107 (CauseType fame-event); rendered: world_summary_c107.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Darius Clark — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Darius Clark — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Darius Clark",
+        "HOOD: West Oakland",
+        "LABEL: tier-climb | Darius Clark — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 107
+    }
+  ],
+  "recommend": {
+    "bag": "lifestyle",
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "reason": "top pulse quiet-nightlife → lifestyle",
+    "pulseClass": "quiet-nightlife",
+    "pulseLabel": "Dragon Gate Lounge (Chinatown) · quiet night"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "OakHouse (Rockridge)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Dragon Gate Lounge (Chinatown) · quiet night",
+      "score": 32,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Dragon Gate Lounge (Chinatown) · quiet night",
+      "score": 32,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Dragon Gate Lounge (Chinatown) · quiet night",
+      "score": 32,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "fame-sighting",
+      "label": "Rico Valez at Canopy Market (Rockridge)",
+      "score": 31,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Dragon Gate Lounge is open and quiet in Chinatown. What that condition means is not yet established.",
+    "label": "Dragon Gate Lounge (Chinatown) · quiet night",
+    "hookLine": "Dragon Gate Lounge is open and quiet in Chinatown.",
+    "hood": "Chinatown",
+    "pulseClass": "quiet-nightlife",
+    "citizens": [],
+    "popids": [],
+    "named": "Dragon Gate Lounge",
+    "venue": "Dragon Gate Lounge",
+    "ref": "world_summary ## Evening Texture · Nightlife",
+    "cycle": 107
+  },
+  "prewrite": {
+    "pulseClass": "quiet-nightlife",
+    "angle": "Dragon Gate Lounge is open and quiet in Chinatown. What that condition means is not yet established.",
+    "hookLine": "Dragon Gate Lounge is open and quiet in Chinatown.",
+    "anchorFacts": [
+      "NAMED: Dragon Gate Lounge",
+      "HOOD: Chinatown",
+      "VENUE: Dragon Gate Lounge",
+      "HOOD: Chinatown",
+      "EVENING RECORD: open and quiet"
+    ],
+    "bagRecommend": "lifestyle",
+    "bagSlug": "sharon-okafor"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "OakHouse",
+        "hood": "Rockridge"
+      },
+      {
+        "name": "Dockhouse BBQ",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Harborline Grill",
+        "hood": "Jack London"
+      },
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Dragon Gate Lounge",
+        "hood": "Chinatown"
+      },
+      {
+        "name": "Piedmont Pub",
+        "hood": "Piedmont Ave"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 5,
+      "vibe": "game-night",
+      "movement": "restricted",
+      "weatherImpact": 1.3
+    },
+    "cityEvents": [
+      "The Varek Family Block Party",
+      "Fruitvale Unity Gathering",
+      "The Paulson Line Founding Celebration",
+      "Jack London Misty Morning Coffee Club"
+    ],
+    "tv": [
+      "Civil Rights Special",
+      "Community Stories",
+      "Late Weather Watch",
+      "Late Shift Live",
+      "Lake Merritt Laughs",
+      "Jack London Ballpark Stories",
+      "One-on-One with Mark Aitken (1B)"
+    ],
+    "movies": [
+      "Voice of Change",
+      "Neighborhood Tales",
+      "Storm Window",
+      "Fog Harbor",
+      "Rising Star",
+      "The Closer"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c107.md ## Evening Texture",
+    "output/desk_signal_c107.json lanes.culture",
+    "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+  ]
+}

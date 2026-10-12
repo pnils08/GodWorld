@@ -1,0 +1,18 @@
+{
+  "office": "police_chief",
+  "cycle": 107,
+  "speaker": "Rafael Montez",
+  "cascadeSummary": "Addressed high-severity incoherence in West Oakland, Fruitvale, and East Oakland by transmitting joint dispatch boundary directive to City Planning and OARI leadership. Operationalized Mayor's OARI East Oakland Protocol Deployment through co-response protocol alignment memo defining transfer thresholds. Pursued operational clarity to reduce friction on the ground.",
+  "statements": [
+    {
+      "statementId": "STMT-107-police_chief-001",
+      "type": "operations_update",
+      "topic": "OARI Co-Response Protocol Alignment",
+      "initiative": "INIT-002",
+      "decision": "Transmitted joint dispatch boundary directive to City Planning and OARI program leadership.",
+      "quote": "Clear transfer thresholds between OPD and OARI dispatchers prevent gaps in emergency coverage—that's operational necessity, not optional paperwork.",
+      "fullStatement": "Chief Rafael Montez confirmed the transmission of a joint dispatch boundary directive to City Planning and OARI program leadership, establishing clear transfer thresholds between OPD sector patrol and OARI dispatchers in East Oakland. 'Behavioral health crisis response requires operational precision,' Montez stated. 'These thresholds define where sworn officers transfer responsibility to alternative response teams, ensuring seamless emergency coverage. Public safety depends on dispatch protocols that eliminate confusion in high-incident zones.' The directive operationalizes Mayor Santana's East Oakland Protocol Deployment mandate.",
+      "trackerUpdates": {}
+    }
+  ]
+}

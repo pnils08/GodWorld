@@ -1,0 +1,17 @@
+{
+  "status": "arc-seed",
+  "cycle": "110",
+  "desk": "business",
+  "persona": "business-desk",
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00531",
+      "name": "Priya Nair",
+      "quote": "My work at EBMUD focuses on ensuring our water systems can handle the pressures of climate change, especially as the city grows. It’s about balancing the need for reliable infrastructure with the realities of a changing environment. Downtown’s growth adds complexity, but it’s also a chance to innovate and build resilience into the system."
+    }
+  ],
+  "claim": "My work at EBMUD focuses on ensuring our water systems can handle the pressures of climate change, especially as the city grows. It’s about balancing the need for reliable infrastructure with the realities of a changing environment. Downtown’s growth adds complexity, but it’s also a chance to innovate and build resilience into the system.",
+  "src": "citizenVoice PRESS c110",
+  "ranAt": "2026-10-07T03:49:05.939Z"
+}

@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "cycle": 110,
+  "engineFiredAt": "2026-10-04T22:12:17.838Z",
+  "stages": {
+    "prep": {
+      "stage": "prep",
+      "status": "done",
+      "inputs": {},
+      "attempts": 0,
+      "updated": "2026-10-04T22:23:00.978Z"
+    },
+    "directive": {
+      "stage": "directive",
+      "status": "ready",
+      "inputs": {},
+      "attempts": 0,
+      "updated": "2026-10-04T22:23:26.025Z"
+    },
+    "mayor-open": {
+      "stage": "mayor-open",
+      "status": "done",
+      "inputs": {},
+      "attempts": 0,
+      "updated": "2026-10-04T22:23:00.978Z"
+    },
+    "hearing": {
+      "stage": "hearing",
+      "status": "done",
+      "inputs": {
+        "pending": []
+      },
+      "attempts": 0,
+      "updated": "2026-10-04T22:23:00.978Z"
+    },
+    "mayor-gavel": {
+      "stage": "mayor-gavel",
+      "status": "done",
+      "inputs": {},
+      "attempts": 0,
+      "updated": "2026-10-04T22:23:00.978Z"
+    },
+    "projects": {
+      "stage": "projects",
+      "status": "done",
+      "inputs": {
+        "pending": []
+      },
+      "attempts": 0,
+      "updated": "2026-10-04T22:23:00.978Z"
+    },
+    "close-det": {
+      "stage": "close-det",
+      "status": "done",
+      "inputs": {
+        "deterministicPass": true
+      },
+      "attempts": 0,
+      "updated": "2026-10-04T22:23:26.025Z"
+    },
+    "verdict-clerk": {
+      "stage": "verdict-clerk",
+      "status": "done",
+      "inputs": {
+        "verdict": "pass"
+      },
+      "attempts": 0,
+      "updated": "2026-10-04T22:23:26.025Z"
+    },
+    "verdict-sanity": {
+      "stage": "verdict-sanity",
+      "status": "done",
+      "inputs": {
+        "verdict": "fail-scoped",
+        "blockedInitiatives": [
+          "INIT-005",
+          "INIT-007"
+        ]
+      },
+      "attempts": 0,
+      "updated": "2026-10-05T04:17:03.520Z"
+    },
+    "apply": {
+      "stage": "apply",
+      "status": "done",
+      "inputs": {
+        "decision": {
+          "apply": true,
+          "blocked": false,
+          "via": "verdicts",
+          "reason": null,
+          "missingVerdicts": [],
+          "excluded": [
+            "INIT-005",
+            "INIT-007"
+          ]
+        }
+      },
+      "attempts": 1,
+      "updated": "2026-10-05T04:17:10.492Z"
+    }
+  },
+  "chainLaunches": 1,
+  "updated": "2026-10-05T04:17:10.494Z"
+}

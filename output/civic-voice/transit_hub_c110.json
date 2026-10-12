@@ -1,0 +1,34 @@
+{
+  "office": "transit_hub",
+  "cycle": 110,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "Advancing to preliminary schematics review with Mayer & Associates, ensuring community oversight provisions remain intact to protect local vendors and residents during construction. Focus remains on safeguarding the tamale vendors, panaderías, and street vitality that define Fruitvale.",
+  "statements": [
+    {
+      "statementId": "STMT-110-transit_hub-001",
+      "type": "operational_status",
+      "topic": "Fruitvale Transit Hub Phase II",
+      "initiative": "INIT-003",
+      "decision": "Advance to preliminary schematics review with community oversight provisions intact",
+      "quote": "Mayer & Associates doesn’t just draw blueprints—they listen to the tamale vendors and panaderías that make Fruitvale Fruitvale.",
+      "fullStatement": "Mayer & Associates has been directed to advance to preliminary schematics review for Fruitvale Transit Hub Phase II, with community oversight provisions fully intact. This ensures that the voices of Fruitvale’s vendors, residents, and elders remain central to the design process. The tamale carts, panaderías, and safe crossings we fought to protect aren’t just lines on a page—they’re the heartbeat of this neighborhood. With BART’s infrastructure team, we’ve locked in protected vendor zones during construction to ensure Doña Esperanza keeps her tamale cart and the abuelas don’t lose their morning bolillo.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C110: Advanced to preliminary schematics review with Mayer & Associates; community oversight provisions intact.",
+        "NextScheduledAction": "Present preliminary schematics to council committee within two cycles",
+        "NextActionCycle": 112
+      }
+    },
+    {
+      "statementId": "STMT-110-transit_hub-002",
+      "type": "constituent_update",
+      "topic": "Fruitvale neighborhood conditions",
+      "initiative": null,
+      "decision": "Monitor and sustain Fruitvale’s upbeat mood and street vitality",
+      "quote": "The tamales still steam on International, and the abuelas still cross to their panadería—that’s the baseline we���re protecting.",
+      "fullStatement": "This cycle, Fruitvale’s mood remains upbeat, street trade is busy, and crime is low. But we’re not taking this snapshot for granted. My team is actively monitoring conditions to ensure the momentum continues. The tamales still steam on International, and the abuelas still cross to their panadería—that’s the baseline we’re protecting. With the Transit Hub moving to preliminary schematics, we’re committed to keeping these streets alive and thriving.",
+      "trackerUpdates": {}
+    }
+  ]
+}

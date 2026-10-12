@@ -1,0 +1,48 @@
+{
+  "draft": "output/cron-compare/sports_c108_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "2c00dfabc96c7c94263802c6e5ecbc260e05531097c4a84a2b1513c5678d9788",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, sports results match C108 ALCS feed, and barroom fan texture is fully authorized.",
+  "review": {
+    "profileId": "p-slayer-fan-heat-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "packageVersion": "PSLAYER-LEP2-1",
+    "manifestId": "AM-3615b04f5888",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "John Ellis",
+      "Pablo Almanzar"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 5566,
+  "parseError": false,
+  "ranAt": "2026-09-23T23:19:01.014Z"
+}

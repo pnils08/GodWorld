@@ -1,0 +1,310 @@
+{
+  "date": "2026-09-16",
+  "cycle": 107,
+  "quotas": {
+    "grid": [
+      "freelance-firebrand",
+      "noah-tan",
+      "p-slayer"
+    ],
+    "weekday": 3
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Jax Caldera",
+      "popid": "POP-00799",
+      "beatDomain": "ACCOUNTABILITY",
+      "persona": "freelance-firebrand",
+      "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay numbers, crisis signal with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Sparing heat: one stink, not a roundup.",
+      "gridDay": 3,
+      "wakePackage": "JAX-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "beatDomain": "ENVIRONMENT",
+      "persona": "noah-tan",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 3,
+      "story": {
+        "kind": "beat-weather",
+        "angle": "C107 fog, 44°F after overcast — what this weather does to a day in the city",
+        "label": "C107 fog, 44°F after overcast",
+        "hookLine": "C107 fog, 44°F after overcast; 2 residents on the record lived it.",
+        "hood": null,
+        "citizens": [
+          "Teri Mitchell (POP-00449)",
+          "Lonzo Jailon (POP-00195)"
+        ],
+        "popids": [
+          "POP-00449",
+          "POP-00195"
+        ],
+        "ref": "output/beats/Cycle_Weather.jsonl CycleID 107",
+        "cycle": 107
+      },
+      "beatSlice": true,
+      "beatSeat": "noah-tan",
+      "pulse": {
+        "className": "beat-weather",
+        "score": 100,
+        "label": "C107 fog, 44°F after overcast",
+        "hood": null,
+        "source": "output/beats/Cycle_Weather.jsonl CycleID 107"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "C107 fog, 44°F after overcast — what this weather does to a day in the city",
+        "hookLine": "C107 fog, 44°F after overcast; 2 residents on the record lived it.",
+        "anchorFacts": [
+          "This cycle: fog, 44°F, impact 1.3, comfort 0.25, mood introspective",
+          "Last 3 cycles: C104 rain 48°F, C105 rain 49°F, C106 overcast 52°F",
+          "Teri Mitchell — recovered from a winter illness",
+          "Lonzo Jailon — limited social activity due to winter mood"
+        ],
+        "evidence": [
+          {
+            "text": "This cycle: fog, 44°F, impact 1.3, comfort 0.25, mood introspective",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 107"
+          },
+          {
+            "text": "Last 3 cycles: C104 rain 48°F, C105 rain 49°F, C106 overcast 52°F",
+            "src": "output/beats/Cycle_Weather.jsonl"
+          },
+          {
+            "text": "Teri Mitchell — recovered from a winter illness",
+            "src": "output/world_summary_c107.md ## Who Lived It"
+          },
+          {
+            "text": "Lonzo Jailon — limited social activity due to winter mood",
+            "src": "output/world_summary_c107.md ## Who Lived It"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_IN_TABLE",
+          "vs": 106
+        },
+        "hooks": [
+          {
+            "text": "Multiple weather signals detected. Could be coincidence or early pattern.",
+            "angle": "general coverage",
+            "domain": "WEATHER",
+            "hood": null,
+            "priority": 2
+          },
+          {
+            "text": "Challenging weather (fog) affecting daily routines. Street-level color available.",
+            "angle": "general coverage",
+            "domain": "WEATHER",
+            "hood": null,
+            "priority": 2
+          }
+        ],
+        "note": null,
+        "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+      },
+      "wakePackage": "NOAH-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "P Slayer",
+      "popid": "POP-00008",
+      "beatDomain": "SPORTS",
+      "persona": "p-slayer",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 3,
+      "story": {
+        "ref": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "label": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "kind": "win-streak",
+        "angle": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "hookLine": "Euphoria with friction: name the doubter, kill soft contentment.",
+        "hood": "Eastlake",
+        "team": "A's",
+        "eventKind": "game-result",
+        "popids": [
+          "POP-00533",
+          "POP-00052",
+          "POP-00598",
+          "POP-00051"
+        ],
+        "citizens": [
+          "Travis Coles — Starting Pitcher, Oakland A's, Downtown",
+          "Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA), Downtown",
+          "Vladimir Gonzalez — Right Fielder, Oakland A's, Fruitvale",
+          "Desmond Morton — Left Fielder, Oakland A's, Jack London"
+        ],
+        "pulseClass": "win-streak",
+        "pulseScore": 48,
+        "fanCharge": "euphoria",
+        "bagModeIds": [
+          3,
+          4,
+          7
+        ]
+      },
+      "pslayerSlice": true,
+      "fanHeat": true,
+      "pulse": {
+        "className": "win-streak",
+        "classes": [
+          "result-pulse",
+          "win-streak"
+        ],
+        "score": 48,
+        "label": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "team": "A's",
+        "eventKind": "game-result",
+        "seasonType": "playoffs",
+        "feedCycle": 107,
+        "record": "1-0",
+        "streak": "W1",
+        "mood": "electric",
+        "fanSentiment": "high",
+        "neighborhood": "Eastlake",
+        "notes": "Game 1 of the ALDS was a 14 inning instant classic. Travis Coles took the ball in game 1 and went 6 innings while surrendering 9 hits and 2 runs. Not his dominant norm but more than giving the team a chance to win. Clark Saryan made is MLB debut , after a suprising playoff roster add, went 2 innings in relief striking out 5 hitters. Playing hero on the offensive side , Vladimir Gonzalez with a 2-r",
+        "stats": "Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI"
+      },
+      "charge": {
+        "bagModes": [
+          {
+            "id": 3,
+            "name": "Friction Pivot"
+          },
+          {
+            "id": 4,
+            "name": "Loss Hangover / Empty Win"
+          },
+          {
+            "id": 7,
+            "name": "We Still Believe / We're Done"
+          }
+        ],
+        "fanCharge": "euphoria",
+        "foilNumber": "6IP",
+        "centralFeeling": "Oakland should let itself believe — with eyes open.",
+        "palette": [
+          "fury",
+          "euphoria",
+          "dread",
+          "defiance",
+          "confession",
+          "grief",
+          "dare"
+        ]
+      },
+      "wakePackage": "PSLAYER-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "gridDay": 3,
+      "story": {
+        "ref": "undocked:undocked-pop00731-Y3C3",
+        "label": "UNDOCKED: POP-00731 — up 4 on the night",
+        "kind": "undocked",
+        "angle": "Recap the pilot's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 4, systems Sol, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 4 cycle(s) led, current streak 4.",
+        "citizens": [
+          "POP-00731 — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00731"
+        ],
+        "hood": "Rockridge"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 1,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Jax Caldera",
+        "persona": "freelance-firebrand",
+        "wakePackage": "JAX-LEP2-1"
+      },
+      {
+        "name": "Noah Tan",
+        "persona": "noah-tan",
+        "wakePackage": "NOAH-LEP2-1"
+      },
+      {
+        "name": "P Slayer",
+        "persona": "p-slayer",
+        "wakePackage": "PSLAYER-LEP2-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": true,
+    "reason": "pulse=win-streak score=48 charge=euphoria"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": false,
+    "reason": "no business desk or Mason assignment in rota",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=1 noah-tan/beat-weather:—",
+    "seats": [
+      "noah-tan/beat-weather:—"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": false,
+    "reason": "no civic-domain persona assignment in rota",
+    "seats": []
+  },
+  "builtAt": "2026-09-16T11:15:07.627Z"
+}

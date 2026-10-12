@@ -1,0 +1,15 @@
+{
+  "office": "transit_hub",
+  "agentDir": "civic-project-transit-hub",
+  "holder": "Elena Soria Dominguez",
+  "popid": "POP-00791",
+  "title": "Transit Hub Planning Lead",
+  "date": "2026-09-10",
+  "cycle": 106,
+  "model": "deepseek/deepseek-chat",
+  "statement": "The design-phase kickoff will center what we heard at St. Esperanza Parish—protected vendor spaces, safe crossings for elders, and local hire pathways that start with Fruitvale residents. Those aren't add-ons; they're the foundation.",
+  "action": "Meeting with BART infrastructure team to lock in protected vendor zones during construction",
+  "numberMoved": null,
+  "ranAt": "2026-09-10T10:45:39.525Z",
+  "fellBackFrom": null
+}

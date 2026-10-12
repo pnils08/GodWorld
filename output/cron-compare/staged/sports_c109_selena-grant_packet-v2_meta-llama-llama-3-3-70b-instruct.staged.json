@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "109",
+  "persona": "selena-grant",
+  "byline": "Selena Grant",
+  "bylinePopid": "POP-00591",
+  "article": "output/cron-compare/staged/sports_c109_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Wilson Shepard",
+        "role": "quoted-source",
+        "popid": "POP-01022"
+      },
+      {
+        "name": "Austin Reaves",
+        "role": "quoted-source",
+        "popid": "POP-01027"
+      },
+      {
+        "name": "Dillon Brooks",
+        "role": "quoted-source",
+        "popid": "POP-01079"
+      },
+      {
+        "name": "Ernesto Quintero",
+        "role": "quoted-source",
+        "popid": "POP-00050"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I've been feeling like we're still finding our rhythm, you know? The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal. As for morale, I think the team's doing okay, considering. We're not getting the results we want, but we're not letting it get us down either.",
+        "sourceRef": "citizenVoice PRESS Wilson Shepard"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-45652b0bb68a",
+    "draftSha256": "3d190a01c780dd02e55cb0118b25d2c71ca46d10c272b93b80f7e4f3e464caf4",
+    "verdict": "output/cron-compare/sports_c109_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-09-29T23:18:00.288Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:06.371Z"
+}

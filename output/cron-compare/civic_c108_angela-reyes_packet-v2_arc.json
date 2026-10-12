@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "civic",
+  "persona": "angela-reyes",
+  "storyline": {
+    "slug": "rockridge-gloria-liu-beat-schools",
+    "verb": "opened"
+  },
+  "hood": "Rockridge",
+  "quotes": [
+    {
+      "pop": "POP-00827",
+      "name": "Gloria Liu",
+      "quote": "Rockridge schools have always been a cornerstone of this community. Even with the shifts in enrollment across the city, we've managed to maintain a high standard of education. It's not just about the numbers; it's about the dedication of our teachers, the support from families, and the shared belief in the value of a good education."
+    },
+    {
+      "pop": "POP-01036",
+      "name": "Mei Wong",
+      "quote": "What I’ve seen in Rockridge is that the schools here have this deep sense of community behind them. It’s not just about the numbers or funding—it’s about how everyone, from parents to teachers to local businesses, shows up and invests in the kids. That consistency makes a difference, even when other neighborhoods are seeing shifts in enrollment."
+    },
+    {
+      "pop": "POP-01018",
+      "name": "Salma Campbell",
+      "quote": "I’ve always felt like Rockridge schools just have this steady vibe, you know? Like, they’re consistent, and it shows in how people talk about them. Even with all the changes happening in other parts of the city, it feels like things here just keep running smoothly."
+    },
+    {
+      "pop": "POP-00742",
+      "name": "Maya Torres-Dillon",
+      "quote": "As a teacher here, I’ve seen firsthand how Rockridge schools thrive because of the community’s commitment. It’s not just about funding—though that helps—it’s about everyone pitching in. Parents, teachers, and local organizations all work together to create an environment where students can succeed. That shared responsibility makes a real difference."
+    }
+  ],
+  "claim": "Rockridge schools have always been a cornerstone of this community. Even with the shifts in enrollment across the city, we've managed to maintain a high standard of education. It's not just about the numbers; it's about the dedication of our teachers, the support from families, and the shared belief in the value of a good education.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-22T18:18:42.116Z"
+}

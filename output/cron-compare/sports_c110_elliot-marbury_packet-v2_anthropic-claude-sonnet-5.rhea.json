@@ -1,0 +1,57 @@
+{
+  "draft": "output/cron-compare/sports_c110_elliot-marbury_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "b95bc7ba63cf4cde23506a7e66ade195b7d0f196608c52c1ed9f0798dd16d17c",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean audit-grade analysis of Danny Horn's dossier lines with strict adherence to data-desk sourcing rules.",
+  "review": {
+    "profileId": "marbury-data-desk-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "marbury-data-desk-v1",
+    "packageVersion": "MARBURY-LEP2-1",
+    "manifestId": "AM-5cbb11c83d35",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "2042",
+          "21",
+          "5"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Danny Horn"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0105,
+  "durationMs": 7286,
+  "parseError": false,
+  "ranAt": "2026-10-08T02:39:13.464Z"
+}

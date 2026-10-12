@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "107",
+  "desk": "civic",
+  "persona": "noah-tan",
+  "storyline": {
+    "slug": "city-teri-mitchell-beat-weather",
+    "verb": "opened"
+  },
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00449",
+      "name": "Teri Mitchell",
+      "quote": "The fog this winter has been heavy, especially after recovering from being sick. It makes everything feel slower, like the world is holding its breath. It’s not unpleasant, just... introspective. You notice things you might otherwise rush past."
+    },
+    {
+      "pop": "POP-00195",
+      "name": "Lonzo Jailon",
+      "quote": "That fog rolls in and suddenly the whole lake feels like it's holding its breath. Makes my morning rounds slower—can't trust my eyes with the markers when everything's gray soup. And yeah, it gets in your head after weeks of this. Been keeping to myself more than usual, just... waiting for some sunlight to punch through."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "This fog's got everyone moving slower—I see it in the bakery too, folks lingering over their coffee like they're savoring the warmth. It's that time of year where the cold just settles into your bones, makes you want to hunker down."
+    }
+  ],
+  "claim": "The fog this winter has been heavy, especially after recovering from being sick. It makes everything feel slower, like the world is holding its breath. It’s not unpleasant, just... introspective. You notice things you might otherwise rush past.",
+  "src": "citizenVoice PRESS c107",
+  "ranAt": "2026-09-16T18:17:36.627Z"
+}

@@ -1,0 +1,151 @@
+{
+  "empty": false,
+  "cycle": 109,
+  "kind": "simon-longview",
+  "desk": "sports",
+  "journalist": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "persona": "simon-leary"
+  },
+  "pulse": {
+    "className": "role-change-under-continuity",
+    "score": 56,
+    "label": "The A's record is 1-0."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 2,
+        "name": "Keystone Player"
+      },
+      {
+        "id": 4,
+        "name": "Load-Bearing Continuity"
+      }
+    ],
+    "anchorFacts": [
+      "The A's record is 1-0.",
+      "The A's have won 2 straight."
+    ],
+    "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+    "missing": [
+      "why the role change was made",
+      "historical comparison or franchise precedent",
+      "organizational intention or future plan",
+      "citywide, clubhouse, or fan interpretation"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "civicFacts": [
+    "FranchiseStability (feed): stable — sports feed",
+    "EconomicFootprint (feed): growing — sports feed",
+    "EventTrigger (feed): hot-streak — sports feed",
+    "HomeNeighborhood (feed): Jack London — sports feed",
+    "FranchiseStability (feed): stable — sports feed",
+    "EconomicFootprint (feed): growing — sports feed"
+  ],
+  "story": {
+    "angle": "The A's record is 1-0.",
+    "label": "The A's record is 1-0.",
+    "hookLine": "The A's record is 1-0.",
+    "kind": "long-view-signal",
+    "hood": "Jack London",
+    "popids": [
+      "POP-00025",
+      "POP-00022",
+      "POP-00003"
+    ],
+    "citizens": [
+      "Arturo Ramos (POP-00025)",
+      "Danny Horn (POP-00022)",
+      "Mark Aitken (POP-00003)"
+    ],
+    "ref": "world_summary_c109.md ## Sports",
+    "cycle": 109
+  },
+  "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+  "players": [
+    {
+      "name": "Arturo Ramos",
+      "popid": "POP-00025",
+      "role": "Starting Pitcher, Oakland A's",
+      "neighborhood": "Laurel",
+      "why": "feed-names"
+    },
+    {
+      "name": "Danny Horn",
+      "popid": "POP-00022",
+      "role": "Center Fielder, Oakland A's - Best player in the MLB",
+      "neighborhood": "Temescal",
+      "why": "feed-names"
+    },
+    {
+      "name": "Mark Aitken",
+      "popid": "POP-00003",
+      "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+  },
+  "candidates": [
+    {
+      "score": 72,
+      "cycle": 109,
+      "team": "A's",
+      "label": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough."
+    },
+    {
+      "score": 56,
+      "cycle": 109,
+      "team": "A's",
+      "label": "Arturo Ramos does enough, Danny Horn shows some life, Frank Reyna doesnt make an out."
+    },
+    {
+      "score": 56,
+      "cycle": 109,
+      "team": "A's",
+      "label": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense."
+    },
+    {
+      "score": 54,
+      "cycle": 108,
+      "team": "A's",
+      "label": "Through 3 games the A's lead the Twins 3-0. Game 1 As (6) Twins (2), Game 2 As (3) Twins (2), Game 3 As (9) Twins (6)."
+    },
+    {
+      "score": 54,
+      "cycle": 108,
+      "team": "A's",
+      "label": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero"
+    },
+    {
+      "score": 54,
+      "cycle": 107,
+      "team": "A's",
+      "label": "A's take game 3 vs Yankees, A's 8 vs Yankees 4"
+    },
+    {
+      "score": 54,
+      "cycle": 107,
+      "team": "A's",
+      "label": "A's close out the ALDS in NY , As 4 vs Yankees 0"
+    },
+    {
+      "score": 44,
+      "cycle": 109,
+      "team": "Oaks",
+      "label": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,"
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c109.md ## Sports",
+    "scripts/sportsSubstrate.js",
+    "docs/media/SIMON_LONGVIEW_BAG.md"
+  ]
+}

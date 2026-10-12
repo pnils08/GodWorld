@@ -3,20 +3,38 @@
 Cycle **C106** · kind `beat-faith` · hood **Chinatown**
 
 ## THE SLICE
-- Angle: Bay Pure Land Buddhist Temple in Chinatown | 1 named on the record — the congregation and the quiet work around it
-- Hook: Rev. Kenji Tanaka leads Bay Pure Land Buddhist Temple, 300 strong.
+- Angle: crisis response at Temple Beth Or (Rockridge) — the week in faith, and Bay Pure Land Buddhist Temple in focus
+- Hook: Temple Beth Or (Rockridge), C104: congregation opens doors for community support
 
 ## FACTS (each line is a row on the record)
-- Bay Pure Land Buddhist Temple — Buddhist, Chinatown, congregation 300, founded 1926, led by Rev. Kenji Tanaka — Jodo Shinshu, Japanese-American heritage  _[output/beats/Faith_Organizations.jsonl "Bay Pure Land Buddhist Temple"]_
+- Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)  _[output/beats/Faith_Ledger.jsonl C104 "Temple Beth Or"]_
+- Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)  _[output/beats/Faith_Ledger.jsonl C104 "Lakeshore Unitarian Universalist Fellowship"]_
+- New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)  _[output/beats/Faith_Ledger.jsonl C102 "New Covenant Pentecostal Assembly"]_
+- Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)  _[output/beats/Faith_Ledger.jsonl C102 "Temescal Islamic Center"]_
+- Telegraph Presbyterian Fellowship (Downtown), C101 — crisis response: community grief gathering organized (attendance 80)  _[output/beats/Faith_Ledger.jsonl C101 "Telegraph Presbyterian Fellowship"]_
+- B'nai Tikvah Synagogue (Piedmont Ave), C101 — crisis response: congregation opens doors for community support (attendance 34)  _[output/beats/Faith_Ledger.jsonl C101 "B'nai Tikvah Synagogue"]_
+- Telegraph Presbyterian Fellowship (Downtown), C106 — holy day: traditional Epiphany rituals observed (attendance 270)  _[output/beats/Faith_Ledger.jsonl C106 "Telegraph Presbyterian Fellowship"]_
+- Cathedral of the Living Word (Lake Merritt), C106 — holy day: Epiphany observance brings community together (attendance 1,247)  _[output/beats/Faith_Ledger.jsonl C106 "Cathedral of the Living Word"]_
+- In focus: Bay Pure Land Buddhist Temple — Buddhist, Chinatown, congregation 300, founded 1926, led by Rev. Kenji Tanaka — Jodo Shinshu, Japanese-American heritage  _[output/beats/Faith_Organizations.jsonl "Bay Pure Land Buddhist Temple"]_
 
 ## PEOPLE ON THE RECORD (your sources — real; never invent another)
 - Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown — leads Bay Pure Land Buddhist Temple (Faith_Organizations)
+- Naomi Sterling — Senior Pastor / Faith Leader — Rockridge — leads Temple Beth Or — crisis response this week (Faith_Ledger)
+- Eleanor Bishop — Senior Pastor / Faith Leader — Lake Merritt — leads Lakeshore Unitarian Universalist Fellowship — crisis response this week (Faith_Ledger)
+- Robert Jaston — Senior Pastor / Faith Leader — West Oakland — leads New Covenant Pentecostal Assembly — crisis response this week (Faith_Ledger)
+- Idris Karim — Senior Pastor / Faith Leader — Temescal — leads Temescal Islamic Center — crisis response this week (Faith_Ledger)
+- Eunice Marston — Senior Pastor / Faith Leader — Downtown — leads Telegraph Presbyterian Fellowship — crisis response this week (Faith_Ledger)
+- Yael Bauer — Senior Pastor / Faith Leader — Piedmont Ave — leads B'nai Tikvah Synagogue — crisis response this week (Faith_Ledger)
+- Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt — leads Cathedral of the Living Word — holy day this week (Faith_Ledger)
+
+## ENGINE HOOKS FOR YOU (colour, not fact)
+- Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity. (general coverage)
 
 ## THE ROOM IS YOURS
 the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty
 
 ## APPROACH
-Faith and quiet-work approach: this slice is one congregation from the record — its tradition, its size, its leader and members — and the community programs around it. Dignity, not doctrine wars. The institution and the people are real; the service, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.
+Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.
 
 ## FORBIDDEN
 - Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice
@@ -25,6 +43,7 @@ Faith and quiet-work approach: this slice is one congregation from the record �
 
 ## POINTERS
 - output/beats/Faith_Organizations.jsonl "Bay Pure Land Buddhist Temple"
+- output/beats/Story_Hook_Deck.jsonl (hooks for Elliot Graye this cycle)
 - docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4
 
 _Generated by scripts/buildFaithSlice.js — no LLM. Facts are the rows; the room is the reporter's._

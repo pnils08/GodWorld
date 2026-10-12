@@ -1,0 +1,499 @@
+{
+  "date": "2026-09-22",
+  "cycle": 108,
+  "quotas": {
+    "grid": [
+      "luis-navarro",
+      "rachel-torres",
+      "angela-reyes",
+      "selena-grant"
+    ],
+    "weekday": 2
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Luis Navarro",
+      "popid": "POP-00636",
+      "beatDomain": "CIVIC",
+      "persona": "luis-navarro",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 2,
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[0]; evidence: Riley_Digest row(s)",
+        "label": "repeating-event (medium) | Issue \"world\" (+ 6 co-occurring tokens) recurred 3 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "hood": null,
+        "popids": [],
+        "citizens": []
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "luis-navarro",
+      "pulse": {
+        "className": "accountability-anomaly",
+        "score": 80,
+        "label": "repeating-event (medium) | Issue \"world\" (+ 6 co-occurring tokens) recurred 3 cycles",
+        "hood": null,
+        "source": "output/engine_audit_c108.json patterns[0]; evidence: Riley_Digest row(s)"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "repeating-event (medium) | Issue \"world\" (+ 6 co-occurring tokens) recurred 3 cycles"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ],
+        "schema": "INVESTIGATION-BRIEF-1",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "excludedCandidates": []
+      },
+      "wakePackage": "LUIS-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Sgt. Rachel Torres",
+      "popid": "POP-00057",
+      "beatDomain": "SAFETY",
+      "persona": "rachel-torres",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 2,
+      "story": {
+        "kind": "beat-safety",
+        "angle": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+        "label": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+        "hookLine": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+        "hood": "San Antonio",
+        "citizens": [
+          "Vanessa Tran-Muñoz (POP-01021)"
+        ],
+        "popids": [
+          "POP-01021"
+        ],
+        "ref": "output/beats/Crime_Metrics.jsonl @C108",
+        "cycle": 108
+      },
+      "beatSlice": true,
+      "beatSeat": "rachel-torres",
+      "pulse": {
+        "className": "beat-safety",
+        "score": 100,
+        "label": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+        "hood": "San Antonio",
+        "source": "output/beats/Crime_Metrics.jsonl @C108"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+        "hookLine": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+        "anchorFacts": [
+          "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+          "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+          "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+          "Moved this cycle — rising: East Oakland, Dimond; easing: none"
+        ],
+        "evidence": [
+          {
+            "text": "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+            "src": "output/beats/Crime_Metrics.jsonl @C108"
+          },
+          {
+            "text": "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+            "src": "output/beats/Crime_Metrics.jsonl @C108"
+          },
+          {
+            "text": "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+            "src": "output/beats/Crime_Metrics.jsonl @C108"
+          },
+          {
+            "text": "Moved this cycle — rising: East Oakland, Dimond; easing: none",
+            "src": "output/beats/Crime_Metrics.jsonl @C108"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 107
+        },
+        "hooks": [
+          {
+            "text": "Cooling down in West Oakland: The West Oakland Crime Spike — West Oakland recovering — pressure lifting Follow-up angle available.",
+            "angle": "historical reflection",
+            "domain": "SAFETY",
+            "hood": "West Oakland",
+            "priority": 2
+          },
+          {
+            "text": "Notable event: \"graffiti tagging\". Follow-up recommended.",
+            "angle": "general coverage",
+            "domain": "SAFETY",
+            "hood": null,
+            "priority": 2
+          }
+        ],
+        "note": "desk-signal incident rows attached as pointers (5)",
+        "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first"
+      },
+      "wakePackage": "RACHEL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "beatDomain": "EDUCATION",
+      "persona": "angela-reyes",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 2,
+      "story": {
+        "kind": "beat-schools",
+        "angle": "Enrollment moved in Fruitvale — Rockridge has the strongest school record on the table (index 8.94) — the students and teachers who live it",
+        "label": "Rockridge has the strongest school record on the table (index 8.94)",
+        "hookLine": "11 students and educators in Rockridge; the table says why their school reads the way it does.",
+        "hood": "Rockridge",
+        "citizens": [
+          "Mei Wong (POP-01036)",
+          "Maya Torres-Dillon (POP-00742)",
+          "Rick Dillon (POP-00743)",
+          "Rico Fister (POP-00305)",
+          "Wiu Wiu (POP-00312)",
+          "Priyanka Raman (POP-01096)",
+          "Gloria Liu (POP-00827)",
+          "Simone Adesanya (POP-00287)",
+          "Mateo Jilner (POP-01001)",
+          "Mateo Wally (POP-01012)",
+          "Salma Campbell (POP-01018)"
+        ],
+        "popids": [
+          "POP-01036",
+          "POP-00742",
+          "POP-00743",
+          "POP-00305",
+          "POP-00312",
+          "POP-01096",
+          "POP-00827",
+          "POP-00287",
+          "POP-01001",
+          "POP-01012",
+          "POP-01018"
+        ],
+        "ref": "output/beats/Neighborhood_Demographics.jsonl @C108",
+        "cycle": 108
+      },
+      "beatSlice": true,
+      "beatSeat": "angela-reyes",
+      "pulse": {
+        "className": "beat-schools",
+        "score": 100,
+        "label": "Rockridge has the strongest school record on the table (index 8.94)",
+        "hood": "Rockridge",
+        "source": "output/beats/Neighborhood_Demographics.jsonl @C108"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Enrollment moved in Fruitvale — Rockridge has the strongest school record on the table (index 8.94) — the students and teachers who live it",
+        "hookLine": "11 students and educators in Rockridge; the table says why their school reads the way it does.",
+        "anchorFacts": [
+          "Enrollment moved: Fruitvale +11 students, Glenview +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students, Laurel +9 students vs C107",
+          "Ranked by school quality index: Rockridge 8.94, Baylight District 8.04, Brooklyn 8.03, West Oakland 8.03, Piedmont Ave 8.03, Laurel 7.99, Adams Point 7.99, Jack London 7.99, Fruitvale 7.98, Downtown 7.96, Lake Merritt 7.96, Grand Lake 7.95, Uptown 7.92, Eastlake 6.99, Glenview 6.98, Dimond 6.98, Chinatown 6.98, KONO 6.98, San Antonio 6.96, Ivy Hill 6.96, East Oakland 6.95, Temescal 6.9 (22 neighborhoods)",
+          "Rockridge: school quality index 8.94 (was 9 at C107), graduation 94.97%, college-ready 77.73%, teacher quality 9.02, funding 15,000, 237 students",
+          "Temescal: school quality index 6.9 (was 7 at C107), graduation 85.85%, college-ready 57.5%, teacher quality 6.98, funding 11,500, 303 students",
+          "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.66%; per-hood funding on the table totals 286,000"
+        ],
+        "evidence": [
+          {
+            "text": "Enrollment moved: Fruitvale +11 students, Glenview +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students, Laurel +9 students vs C107",
+            "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108"
+          },
+          {
+            "text": "Ranked by school quality index: Rockridge 8.94, Baylight District 8.04, Brooklyn 8.03, West Oakland 8.03, Piedmont Ave 8.03, Laurel 7.99, Adams Point 7.99, Jack London 7.99, Fruitvale 7.98, Downtown 7.96, Lake Merritt 7.96, Grand Lake 7.95, Uptown 7.92, Eastlake 6.99, Glenview 6.98, Dimond 6.98, Chinatown 6.98, KONO 6.98, San Antonio 6.96, Ivy Hill 6.96, East Oakland 6.95, Temescal 6.9 (22 neighborhoods)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C108"
+          },
+          {
+            "text": "Rockridge: school quality index 8.94 (was 9 at C107), graduation 94.97%, college-ready 77.73%, teacher quality 9.02, funding 15,000, 237 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C108"
+          },
+          {
+            "text": "Temescal: school quality index 6.9 (was 7 at C107), graduation 85.85%, college-ready 57.5%, teacher quality 6.98, funding 11,500, 303 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C108"
+          },
+          {
+            "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.66%; per-hood funding on the table totals 286,000",
+            "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C108"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 107
+        },
+        "hooks": [
+          {
+            "text": "Lake Merritt's student population up 15%. Young families moving in? School capacity angle.",
+            "angle": "general coverage",
+            "domain": "EDUCATION",
+            "hood": "Lake Merritt",
+            "priority": 2
+          }
+        ],
+        "note": null,
+        "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05"
+      },
+      "wakePackage": "ANGELA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Selena Grant",
+      "popid": "POP-00591",
+      "beatDomain": "SPORTS",
+      "persona": "selena-grant",
+      "approach": "Oaks analysis approach (solo seat): open on a supplied number or roster observation, never a scene. The Oaks rows of the sports feed are the skeleton; the story is what a first-year franchise's decision means — the rotation, the sit, the signing, the silence. Real NBA names are the roster, not citizens. Belief is earned with numbers. End on what the front office still owes.",
+      "gridDay": 2,
+      "story": {
+        "kind": "beat-oaks-beat",
+        "angle": "Oaks — season-state C108 · - · - — the second club's board read",
+        "label": "Oaks — season-state C108 · - · -",
+        "hookLine": "Coach Wilson Shepard prepares his rookies for preseaon.",
+        "hood": "Jack London",
+        "citizens": [
+          "Wilson Shepard (POP-01022)",
+          "Adash Stanley (POP-01023)",
+          "Austin Reaves (POP-01027)"
+        ],
+        "popids": [
+          "POP-01022",
+          "POP-01023",
+          "POP-01027"
+        ],
+        "ref": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+        "cycle": 108
+      },
+      "beatSlice": true,
+      "beatSeat": "selena-grant",
+      "pulse": {
+        "className": "beat-oaks-beat",
+        "score": 100,
+        "label": "Oaks — season-state C108 · - · -",
+        "hood": "Jack London",
+        "source": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Oaks — season-state C108 · - · - — the second club's board read",
+        "hookLine": "Coach Wilson Shepard prepares his rookies for preseaon.",
+        "anchorFacts": [
+          "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+          "Trigger: cold-streak",
+          "Franchise stability: uncertain",
+          "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+          "Record 0-1 · streak L1",
+          "Stats (feed): Austin Reaves/22pts/6asst/6rebs, AJ Dybantsa/18pts/11rebs",
+          "Trigger: pre-season",
+          "Franchise stability: uncertain"
+        ],
+        "evidence": [
+          {
+            "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Trigger: cold-streak",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Franchise stability: uncertain",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Record 0-1 · streak L1",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Stats (feed): Austin Reaves/22pts/6asst/6rebs, AJ Dybantsa/18pts/11rebs",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Trigger: pre-season",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          },
+          {
+            "text": "Franchise stability: uncertain",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [],
+        "note": null,
+        "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+      },
+      "wakePackage": "SELENA-OAKS-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "gridDay": 2,
+      "story": {
+        "ref": "undocked:undocked-pop00300-Y3C4",
+        "label": "UNDOCKED: Belle Lopez — a night the books can't settle yet",
+        "kind": "undocked",
+        "angle": "Recap Belle Lopez's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, combat 0, mishaps 0, magnitude 3/5. Standings: Clarissa Dane leads the board — rank #1, 5 cycle(s) led, current streak 5.",
+        "citizens": [
+          "Belle Lopez — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00300"
+        ],
+        "hood": "Jack London"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Luis Navarro",
+        "persona": "luis-navarro",
+        "wakePackage": "LUIS-LEP2-1"
+      },
+      {
+        "name": "Sgt. Rachel Torres",
+        "persona": "rachel-torres",
+        "wakePackage": "RACHEL-LEP2-1"
+      },
+      {
+        "name": "Angela Reyes",
+        "persona": "angela-reyes",
+        "wakePackage": "ANGELA-LEP2-1"
+      },
+      {
+        "name": "Selena Grant",
+        "persona": "selena-grant",
+        "wakePackage": "SELENA-OAKS-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=luis-navarro,rachel-torres,angela-reyes,selena-grant,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": false,
+    "reason": "no business desk or Mason assignment in rota",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=3 selena-grant/beat-oaks-beat:Jack London, angela-reyes/beat-schools:Rockridge, rachel-torres/beat-safety:San Antonio",
+    "seats": [
+      "selena-grant/beat-oaks-beat:Jack London",
+      "angela-reyes/beat-schools:Rockridge",
+      "rachel-torres/beat-safety:San Antonio"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "luis-navarro",
+        "domain": "accountability-anomaly",
+        "label": "repeating-event (medium) | Issue \"world\" (+ 6 co-occurring tokens) recurred 3 cycles"
+      }
+    ]
+  },
+  "builtAt": "2026-09-22T11:15:10.246Z"
+}

@@ -1,0 +1,70 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 110,
+  "empty": false,
+  "pilots": [
+    {
+      "POPID": "POP-00770",
+      "episodes": 2,
+      "creditsDelta": 0,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": true,
+      "name": "Kato Rivers",
+      "hood": "Laurel"
+    },
+    {
+      "POPID": "POP-00235",
+      "episodes": 2,
+      "creditsDelta": 2,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": true,
+      "name": "Aaliyah Brennan",
+      "hood": "Lake Merritt"
+    },
+    {
+      "POPID": "POP-00287",
+      "episodes": 2,
+      "creditsDelta": 3,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": true,
+      "name": "Simone Adesanya",
+      "hood": "Rockridge"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-10-10T01:40:21.574Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00143",
+      "Holder": "Clarissa Dane",
+      "Episodes": 9,
+      "CreditsTotal": 303,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 3,
+      "LastAiredCycle": 107,
+      "CyclesLed": 7,
+      "CurrentStreak": 7
+    }
+  },
+  "story": {
+    "ref": "undocked-week:weekly-c110",
+    "label": "UNDOCKED week-in-review c110",
+    "kind": "undocked-digest",
+    "angle": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Kato Rivers, Aaliyah Brennan, Simone Adesanya), who is climbing and who is fading. Standings: Clarissa Dane leads the board — rank #1, 7 cycle(s) led, current streak 7. Per-pilot facts: Kato Rivers — 2 episode(s), partial credits 0, combat 0, mishaps 0; Aaliyah Brennan — 2 episode(s), partial credits 2, combat 0, mishaps 0; Simone Adesanya — 2 episode(s), partial credits 3, combat 0, mishaps 0.",
+    "citizens": [
+      "Kato Rivers — UNDOCKED cast pilot",
+      "Aaliyah Brennan — UNDOCKED cast pilot",
+      "Simone Adesanya — UNDOCKED cast pilot"
+    ],
+    "popids": [
+      "POP-00770",
+      "POP-00235",
+      "POP-00287"
+    ]
+  },
+  "generatedAt": "2026-10-10T13:15:01.603Z"
+}

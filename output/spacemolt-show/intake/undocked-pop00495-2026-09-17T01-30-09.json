@@ -1,0 +1,41 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-09-17T01:39:07.923Z",
+  "POPID": "POP-00495",
+  "Cycle": 107,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00495-2026-09-17T01-30-09",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00495-2026-09-17T01-30-09.json",
+  "Holder": "",
+  "CreditsDelta": 3,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "POP-00495 credits=3 systems=Sol",
+  "DecidedAt": "2026-09-17T01:39:07.925Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 107,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00495",
+    "Holder": "",
+    "EpisodeId": "undocked-pop00495-Y3C3",
+    "CreditsDelta": 3,
+    "Systems": [
+      "Sol"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00495-2026-09-17T01-30-09.json"
+  }
+}

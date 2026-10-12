@@ -1,0 +1,17 @@
+{
+  "desk": "culture",
+  "cycle": "109",
+  "model": "anthropic/claude-haiku-4.5",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 9392,
+  "usageOutputTokens": 1086,
+  "savedFiles": [
+    "output/cron-compare/culture_c109_elliot-graye_bench-wave2b_anthropic-claude-haiku-4-5.md"
+  ],
+  "compareAgainst": "output/desk-output/culture_c109.md",
+  "durationMs": 12853,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-01T05:07:52.389Z"
+}

@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked",
+  "cycle": "110",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "tenvx.com]\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: In Lake Merritt the screens lit the break-room wall and the crowd leaned forward when Aaliyah Brenna\"\n}"
+  },
+  "ranAt": "2026-10-09T23:18:30.859Z",
+  "dispositionReconciledAt": "2026-10-10T17:00:04.833Z"
+}

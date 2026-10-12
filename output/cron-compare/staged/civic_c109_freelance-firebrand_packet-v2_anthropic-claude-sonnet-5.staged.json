@@ -1,0 +1,48 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "freelance-firebrand",
+  "byline": "Jax Caldera",
+  "bylinePopid": "POP-00799",
+  "article": "output/cron-compare/staged/civic_c109_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Theo Burkes",
+        "role": "quoted-source",
+        "popid": "POP-00541"
+      },
+      {
+        "name": "Tao Lee",
+        "role": "quoted-source",
+        "popid": "POP-00764"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "I haven't really noticed any decay in our neighborhood, to be honest. It feels like there's always something new happening, and people seem to be looking out for each other. I mean, just the other day I saw a new face at the Telegraph Presbyterian Fellowship, and that's a great sign that our community is still growing and welcoming. As for initiatives, I think we've got a good thing going with the way our neighborhood comes together to support each other, even if it's not always formal or official.",
+        "sourceRef": "citizenVoice PRESS Tao Lee"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-7f4c8bdf0271",
+    "draftSha256": "e1733701e8a987d8da2a2054e99d1fc60633d5ba8f2bc84b5d8751158a973c4b",
+    "verdict": "output/cron-compare/civic_c109_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-10-02T06:41:19.576Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:05.689Z"
+}

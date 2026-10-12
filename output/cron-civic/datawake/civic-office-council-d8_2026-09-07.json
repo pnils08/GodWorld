@@ -1,0 +1,15 @@
+{
+  "office": "council_d8",
+  "agentDir": "civic-office-council-d8",
+  "holder": "Nina Chen",
+  "popid": "POP-00505",
+  "title": "City Council District 8",
+  "date": "2026-09-07",
+  "cycle": 106,
+  "model": "google/gemini-3.7-flash",
+  "statement": "District 8 will not stay quiet while Lake Merritt records a crime index of 0.85 alongside 48 property crimes. Our community sentiment remains strong at 0.46, but sustained momentum requires documented public safety compliance and thorough inter-agency coordination, not unexamined assumptions.",
+  "action": "request public safety incident review",
+  "numberMoved": "0.85 crime index",
+  "ranAt": "2026-09-07T10:45:23.734Z",
+  "fellBackFrom": null
+}

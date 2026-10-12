@@ -1,0 +1,24 @@
+{
+  "office": "baylight_authority",
+  "cycle": 111,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "Phase II site remediation proceeds as scheduled, with independent oversight confirming soil compliance. Construction milestone review set for Cycle 115. Community engagement remains a priority to ensure Jack London and Downtown Oakland benefit from the project.",
+  "statements": [
+    {
+      "statementId": "STMT-111-baylight_authority-001",
+      "type": "milestone_update",
+      "topic": "Baylight District Phase II Remediation",
+      "initiative": "INIT-006",
+      "decision": "Proceed with Phase II site remediation as scheduled, with construction milestone review set for Cycle 115.",
+      "quote": "Baylight builds on clean ground — Phase II remediation proceeds, setting the stage for Cycle 115 review.",
+      "fullStatement": "Baylight Authority Director Keisha Ramos confirmed that Phase II site remediation is proceeding as scheduled, with independent oversight verifying soil compliance. The construction milestone review has been set for Cycle 115, ensuring Baylight's foundation is solid. Community engagement remains a priority to ensure Jack London and Downtown Oakland benefit from the project.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-planning",
+        "MilestoneNotes": "C111: Phase II site remediation proceeds on schedule, with construction milestone review set for Cycle 115.",
+        "NextScheduledAction": "Construction milestone review",
+        "NextActionCycle": 115
+      }
+    }
+  ]
+}

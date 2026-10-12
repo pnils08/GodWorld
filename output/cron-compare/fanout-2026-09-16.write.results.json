@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-16",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": false,
+      "error": "no angle artifact at output/cron-compare/sports_c107_p-slayer_packet-v2_angle.json — run --stage=angle first"
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-09-16T23:16:25.876Z"
+}

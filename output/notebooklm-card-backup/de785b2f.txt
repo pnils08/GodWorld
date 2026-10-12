@@ -1,0 +1,215 @@
+PLAYER INTAKE (Batter) — 2041 SEASON
+
+Name: Kevin Clark
+
+ 
+
+Team: Oakland Athletics
+
+ 
+
+Position: 3B (2B, RF)
+
+ 
+
+Age: 21
+
+ 
+
+Bats: R
+
+ 
+
+Throws: R
+
+ 
+
+Height: 5'9"
+
+ 
+
+Weight: 201 lbs
+
+ 
+
+Born: Connecticut
+
+ 
+
+Drafted: Round 1 (2037)
+
+ 
+
+MLB Service: 1.000
+
+ 
+
+Overall: 79
+
+ 
+
+Potential: A
+
+ 
+
+POPID: POP-00053
+
+
+--------------------------------------------------------------------------------
+
+
+2041 REGULAR SEASON
+
+G: 18
+
+ 
+
+PA: 67
+
+ 
+
+AB: 64
+
+ 
+
+R: 11
+
+ 
+
+H: 19
+
+ 
+
+2B: 5
+
+ 
+
+3B: 1
+
+ 
+
+HR: 3
+
+ 
+
+RBI: 12
+
+ 
+
+BB: 1
+
+ 
+
+SO: 3
+
+ 
+
+HBP: 1
+
+ 
+
+SF: 1
+
+ 
+
+SAC: 0
+
+ 
+
+GIDP: 1
+
+AVG: 0.297
+
+ 
+
+OBP: 0.313
+
+ 
+
+SLG: 0.547
+
+ 
+
+OPS: 0.860
+
+ 
+
+TB: 35
+
+SB: 6
+
+ 
+
+CS: 0
+
+ 
+
+SB%: 1.000
+
+
+--------------------------------------------------------------------------------
+
+
+DEFENSE (2041)
+
+PO: 15
+
+ 
+
+A: 27
+
+ 
+
+E: 0
+
+ 
+
+FLD%: 1.000
+
+ 
+
+INN: 156.0
+
+
+--------------------------------------------------------------------------------
+
+
+VALUE
+
+WAR: 0.9
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2041: $100,000
+
+ 
+
+2042: RNW
+
+ 
+
+2043: RNW
+
+ 
+
+2044: ARB
+
+ 
+
+FA: 2046
+
+
+--------------------------------------------------------------------------------
+
+
+Quirks
+
+Late-Inning Pinch Hit Specialist
+
+Perfect Stolen Base Efficiency (6/6 SB)
+
+Flawless Hot Corner Defense (1.000 FLD%)

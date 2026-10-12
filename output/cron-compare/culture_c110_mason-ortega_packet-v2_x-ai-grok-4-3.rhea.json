@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/culture_c110_mason-ortega_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "8fb4b17ae85897824849abe05ca5703e63d67d5f91b2fa7224fe0297e02f78fc",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Colin Phillips quote and bakery workplace grounding verified against packet provenance.",
+  "review": {
+    "profileId": "mason-kitchen-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "packageVersion": "MASON-LEP2-1",
+    "manifestId": "AM-7e84091a8b31",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Colin Phillips"
+    ],
+    "unverified": [
+      "Lately I've"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 6894,
+  "parseError": false,
+  "ranAt": "2026-10-09T23:15:20.306Z"
+}

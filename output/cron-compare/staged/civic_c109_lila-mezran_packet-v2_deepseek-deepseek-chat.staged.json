@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "lila-mezran",
+  "byline": "Dr. Lila Mezran",
+  "bylinePopid": "POP-00154",
+  "article": "output/cron-compare/staged/civic_c109_lila-mezran_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Yu Zen",
+        "role": "mentioned",
+        "popid": "POP-00194"
+      },
+      {
+        "name": "Maurice Franklin",
+        "role": "mentioned",
+        "popid": "POP-00801"
+      },
+      {
+        "name": "Tiu Xiong",
+        "role": "quoted-source",
+        "popid": "POP-00209"
+      },
+      {
+        "name": "Colin Soria",
+        "role": "quoted-source",
+        "popid": "POP-00227"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone. But there's hope too—seeing someone like Marcus Osei recover gives the rest of us something to hold onto.",
+        "sourceRef": "citizenVoice PRESS Yu Zen"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-4ff72164faca",
+    "draftSha256": "f833043b1b0d5aacf7ae4ac2e3cee17f375a70749745b5ed40c30c3d4ceb18eb",
+    "verdict": "output/cron-compare/civic_c109_lila-mezran_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-28T23:17:30.133Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:05.948Z"
+}

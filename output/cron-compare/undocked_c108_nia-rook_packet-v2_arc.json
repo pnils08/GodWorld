@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "undocked",
+  "persona": "nia-rook",
+  "storyline": {
+    "slug": "jack-london-belle-lopez-undocked",
+    "verb": "opened"
+  },
+  "hood": "Jack London",
+  "quotes": [
+    {
+      "pop": "POP-00300",
+      "name": "Belle Lopez",
+      "quote": "I feel like my own life and the city's dynamics are intertwined, you know? As someone who's always working and trying to make ends meet, I can sense the tension and excitement in the neighborhood. I've been playing to climb, trying to reach new heights, and it feels like the city is doing the same. There's a sense of anticipation and hope in the air, especially with the A's doing well. But at the same time, I've noticed people being more cautious, like they're waiting to see what happens next. It's hard to put my finger on it, but I feel like my own struggles and triumphs are reflected in the city's dynamics, and vice versa."
+    },
+    {
+      "pop": "POP-00273",
+      "name": "Trenton Nawan",
+      "quote": "I've felt the city's dynamics shifting since Belle Lopez's episode, it's like people are more on edge, but I'm trying to stay steady and focused on my work as a server in Jack London."
+    },
+    {
+      "pop": "POP-00642",
+      "name": "Ollie Campbell",
+      "quote": "I've noticed things feel a bit tense around Jack London since Belle Lopez's episode, I'm not really sure what to make of it but it's been on my mind lately."
+    },
+    {
+      "pop": "POP-00643",
+      "name": "Guadalupe Lupe",
+      "quote": "I've noticed the city feels a bit tense lately, and I think it's because of what happened with Belle Lopez, it's all people are talking about when they come into the bar."
+    }
+  ],
+  "claim": "I feel like my own life and the city's dynamics are intertwined, you know? As someone who's always working and trying to make ends meet, I can sense the tension and excitement in the neighborhood. I've been playing to climb, trying to reach new heights, and it feels like the city is doing the same. There's a sense of anticipation and hope in the air, especially with the A's doing well. But at the same time, I've noticed people being more cautious, like they're waiting to see what happens next. It's hard to put my finger on it, but I feel like my own struggles and triumphs are reflected in the city's dynamics, and vice versa.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-25T18:20:02.064Z"
+}

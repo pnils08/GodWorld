@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "civic",
+  "persona": "rachel-torres",
+  "storyline": {
+    "slug": "san-antonio-dank-abara-beat-safety",
+    "verb": "opened"
+  },
+  "hood": "San Antonio",
+  "quotes": [
+    {
+      "pop": "POP-00796",
+      "name": "Dank Abara",
+      "quote": "I’ve heard San Antonio has more incidents than other neighborhoods, and Lake Merritt’s response times are slow, but I don’t know the specifics. It’s just something people talk about around here."
+    },
+    {
+      "pop": "POP-01054",
+      "name": "Delia Vargas-Ruiz",
+      "quote": "Working at the transit hub, I hear people talk about the response times, but honestly, most folks around here just keep their heads down and go about their day. The numbers are what they are."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard San Antonio’s been hit hard lately, and Lake Merritt’s taking longer to get help—it’s worrying, but I trust folks are doing what they can with what they’ve got."
+    }
+  ],
+  "claim": "I’ve heard San Antonio has more incidents than other neighborhoods, and Lake Merritt’s response times are slow, but I don’t know the specifics. It’s just something people talk about around here.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-22T18:17:36.548Z"
+}

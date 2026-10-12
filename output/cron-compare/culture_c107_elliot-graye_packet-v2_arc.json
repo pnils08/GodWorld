@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "107",
+  "desk": "culture",
+  "persona": "elliot-graye",
+  "storyline": {
+    "slug": "downtown-tao-lee-beat-faith",
+    "verb": "opened"
+  },
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00764",
+      "name": "Tao Lee",
+      "quote": "To be honest, I haven't really thought about the Lake Merritt Mindfulness Sangha that much, but I do know that our neighborhood has a strong sense of community, and it's great to see places like the Telegraph Presbyterian Fellowship opening their doors for support."
+    },
+    {
+      "pop": "POP-00753",
+      "name": "Eunice Marston",
+      "quote": "I haven't had any direct involvement with the Lake Merritt Mindfulness Sangha, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community."
+    },
+    {
+      "pop": "POP-00180",
+      "name": "Cameron Wallen",
+      "quote": "I've recently joined the congregation at Lake Merritt Mindfulness Sangha and I have to say, it's been a really positive experience for me. I feel like it's helped me to cultivate a sense of calm and clarity in my life, which is really important to me, especially with my busy schedule as a Corporate Accountant."
+    }
+  ],
+  "claim": "To be honest, I haven't really thought about the Lake Merritt Mindfulness Sangha that much, but I do know that our neighborhood has a strong sense of community, and it's great to see places like the Telegraph Presbyterian Fellowship opening their doors for support.",
+  "src": "citizenVoice PRESS c107",
+  "ranAt": "2026-09-17T18:15:49.588Z"
+}

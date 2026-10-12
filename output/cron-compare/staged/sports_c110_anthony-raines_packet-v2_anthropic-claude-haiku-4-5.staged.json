@@ -1,0 +1,35 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "110",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c110_anthony-raines_packet-v2_anthropic-claude-haiku-4-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "A's · game-result — John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly",
+        "sourceRef": "world_summary_c110.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c5f20a520082",
+    "draftSha256": "23aafc8113cc2cae20daf4ac5e0df4a0d6e10c43aa1c7315538246e8aa5e0142",
+    "verdict": "output/cron-compare/sports_c110_anthony-raines_packet-v2_anthropic-claude-haiku-4-5.rhea.json",
+    "ranAt": "2026-10-05T23:17:27.878Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.710Z"
+}

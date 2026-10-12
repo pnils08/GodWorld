@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/civic_c109_noah-tan_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "829e844e83487b6a42569dc19c2dc9a25bacb2b683da05c2fce91e66b5053464",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All named citizens, quotes, health details, and environmental texture fully verified against cycle 109 canon and packet provenance.",
+  "review": {
+    "profileId": "noah-weather-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-acfea1389277",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Colin Soria",
+      "Elio Perez",
+      "Melton Neilon",
+      "Noah Tan"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0097,
+  "durationMs": 6656,
+  "parseError": false,
+  "ranAt": "2026-09-30T23:16:50.157Z"
+}

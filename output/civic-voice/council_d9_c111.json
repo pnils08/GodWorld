@@ -1,0 +1,28 @@
+{
+  "office": "council_d9",
+  "cycle": 111,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "This cycle, I emphasized maintaining Laurel's stability and addressing Uptown's commercial distress. I advocated for continued focus on equitable development to sustain our district's momentum.",
+  "statements": [
+    {
+      "statementId": "STMT-111-council_d9-001",
+      "type": "vote_statement",
+      "topic": "Laurel Stability",
+      "initiative": null,
+      "decision": "Monitor and sustain existing stability measures",
+      "quote": "Laurel’s stability is no accident—it’s the result of staying focused on what works.",
+      "fullStatement": "Laurel’s stability is no accident—it’s the result of staying focused on what works. We will continue to monitor conditions and keep our approach consistent to ensure this momentum doesn’t falter.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d9-002",
+      "type": "vote_statement",
+      "topic": "Uptown Commercial Distress",
+      "initiative": null,
+      "decision": "Push for targeted interventions to boost commerce",
+      "quote": "Uptown’s vibrant streets are quieting—we can’t let our momentum fade.",
+      "fullStatement": "Uptown’s vibrant streets are quieting—we can’t let our momentum fade. We need targeted interventions to boost commerce and ensure that Uptown remains a hub of activity and opportunity for all.",
+      "trackerUpdates": {}
+    }
+  ]
+}

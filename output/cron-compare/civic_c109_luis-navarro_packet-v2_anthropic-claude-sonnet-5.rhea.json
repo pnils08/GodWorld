@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/civic_c109_luis-navarro_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "2a9050275dc719f5b3ff0193ff57bf9ac89805c44f301541b02b582eeb5887a2",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes, citizen bios, and investigative framing match packet provenance and ledger ground truth.",
+  "review": {
+    "profileId": "luis-investigation-record-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "packageVersion": "LUIS-LEP2-1",
+    "manifestId": "AM-c6c39ed593ce",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Depak Ying",
+      "Elio Perez",
+      "Melton Neilon",
+      "Rick Walker"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0094,
+  "durationMs": 5174,
+  "parseError": false,
+  "ranAt": "2026-09-29T23:16:02.524Z"
+}

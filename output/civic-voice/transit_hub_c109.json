@@ -1,0 +1,24 @@
+{
+  "office": "transit_hub",
+  "cycle": 109,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "Selected Mayer & Associates as design consultant for Fruitvale Transit Hub Phase II based on their track record of community-first design and merchant protections. Ensured covenants protecting local vendors during construction are locked into the design contract.",
+  "statements": [
+    {
+      "statementId": "STMT-109-transit_hub-001",
+      "type": "operational_status",
+      "topic": "Fruitvale Transit Hub Phase II Design Consultant Selection",
+      "initiative": "INIT-003",
+      "decision": "Selected Mayer & Associates as design consultant with merchant protection covenants included in contract",
+      "quote": "The covenants aren't ink on paper—they're Doña Esperanza keeping her tamale cart through construction, they're the panadería on E. 12th staying open so abuelas don't lose their morning bolillo.",
+      "fullStatement": "This is more than a design contract—it's a commitment to protect the heart of Fruitvale. Mayer & Associates understands that listening to merchants first leads to designs that work for the community. Their proposal centers on what we heard at St. Esperanza Parish: protected vendor spaces, safe crossings for elders, and local hire pathways that start with Fruitvale residents. These aren't add-ons; they're the foundation. The merchant protection covenants we secured mean Doña Esperanza keeps her tamale cart through construction and the panadería on E. 12th stays open so abuelas don't lose their morning bolillo.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "construction-planning",
+        "MilestoneNotes": "C109: Design consultant Mayer & Associates selected with merchant protection covenants included in contract",
+        "NextScheduledAction": "Preliminary design concepts review with community",
+        "NextActionCycle": 110
+      }
+    }
+  ]
+}

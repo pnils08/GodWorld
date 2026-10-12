@@ -1,0 +1,361 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00153",
+    "name": "Jordan Velez",
+    "role": "desk reporter",
+    "desk": "business"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Downtown businesses: EBMUD, Atlas Bay Architects, Oakland Entertainment Talent Ageny — the people who work there",
+    "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "economic-storefront",
+      "hood": "Downtown",
+      "pulseClass": "hood-businesses",
+      "economicFrame": "Downtown businesses: EBMUD, Atlas Bay Architects, Oakland Entertainment Talent Ageny — the people who work there",
+      "hook": "Priya Nair, Climate Adaptation Engineer at EBMUD. 4 named workers at 4 named businesses in Downtown on the ledger this cycle.",
+      "namedBusinesses": [
+        "EBMUD",
+        "Atlas Bay Architects",
+        "Oakland Entertainment Talent Ageny",
+        "Miso Metro",
+        "Pacific Standard Architecture"
+      ],
+      "workplaces": [
+        "EBMUD — Utilities — Priya Nair (Climate Adaptation Engineer)",
+        "Atlas Bay Architects — Architecture — Tobias Jurko (Landscape Architect)",
+        "Oakland Entertainment Talent Ageny — Talent Management — Nina Rines (Actress)",
+        "Miso Metro — Restaurant & Dining — Andre Turner (Line cook)",
+        "Pacific Standard Architecture — Architecture — no roster names"
+      ],
+      "engineColour": [
+        "Elena Reyes — priced Oaks season tickets and started a savings jar on the counter near a busy plaza",
+        "Everly Rainey — found a quiet minute at a civic plaza and still riding the high from last night's win",
+        "Brooks Wright — wandered through the late-night market stalls, clutching a paper cup of hot tea",
+        "Ronald Wough — read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots"
+      ],
+      "roomIsYours": "the counter, the hiring board, the back office, what the owner is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Downtown",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+    "plan": {
+      "focus": "The human side of economic movement in Downtown—how growth and adaptation ripple through workplaces and workers' lives.",
+      "closeQuestion": "What does 'steady growth' actually look like for the people clocking in every day?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00531",
+        "name": "Priya Nair",
+        "profile": "Priya Nair — Climate Adaptation Engineer",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00531-70179c8752",
+        "pop": "POP-00531",
+        "name": "Priya Nair",
+        "quote": "My work at EBMUD focuses on ensuring our water systems can handle the pressures of climate change, especially as the city grows. It’s about balancing the need for reliable infrastructure with the realities of a changing environment. Downtown’s growth adds complexity, but it’s also a chance to innovate and build resilience into the system.",
+        "factIds": [
+          "F-fd354edf6c40",
+          "F-1465bdf169d3"
+        ],
+        "src": "packet.W2[POP-00531]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Rumors of a new climate resilience grant affecting EBMUD's hiring",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Whispers about Atlas Bay eyeing a Fruitvale expansion tied to transit developments",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C110",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-e491ae296bc1"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown businesses · EBMUD, Atlas Bay Architects",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "id": "F-49af9e000c96"
+    },
+    {
+      "t": "FACT",
+      "text": "Priya Nair, Climate Adaptation Engineer at EBMUD. 4 named workers at 4 named businesses in Downtown on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "id": "F-fd354edf6c40"
+    },
+    {
+      "t": "FACT",
+      "text": "EBMUD · Utilities · 1900 employees · growth 11.7% · revenue $656.6M (+$1.5M vs C109) · on the roster: Priya Nair (Climate Adaptation Engineer)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "id": "F-1465bdf169d3"
+    },
+    {
+      "t": "FACT",
+      "text": "Atlas Bay Architects · Architecture · 86 employees · growth 9.6% · revenue $42.3M (+$78k vs C109) · key personnel: Sarah Huang (Healthcare Director) · on the roster: Tobias Jurko (Landscape Architect)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "id": "F-4ab9b4b003dd"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Entertainment Talent Ageny · Talent Management · 10 employees · growth 4.5% · revenue $1.3M (+$1k vs C109) · on the roster: Nina Rines (Actress)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "id": "F-57a5b94595d7"
+    },
+    {
+      "t": "FACT",
+      "text": "Miso Metro · Restaurant & Dining · 2 employees · growth 7.8% · revenue $250k (+$376 vs C109) · on the roster: Andre Turner (Line cook)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "id": "F-479e53d0ab01"
+    },
+    {
+      "t": "FACT",
+      "text": "Pacific Standard Architecture · Architecture · 96 employees · growth 7.4% · revenue $48.3M (+$69k vs C109) · key personnel: Theodore Lindqvist (principal)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "id": "F-06d4d9017f38"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Downtown): citizens Elena Reyes; Everly Rainey; Brooks Wright; Ronald Wough · businesses Oakland Alternative Response Initiative; Oakland Entertainment Talent Ageny · Telegraph Presbyterian Fellowship (faith)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C110",
+      "id": "F-257769e88bbc"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "grounded third-person economics and labor reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
+      "closing": "an unresolved beneficiary, contract, labor, or livelihood question grounded in the supplied record"
+    },
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "canonBlockers": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-62c6b980c93c",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-e491ae296bc1",
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-49af9e000c96",
+        "t": "FACT",
+        "text": "Downtown businesses · EBMUD, Atlas Bay Architects",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "id": "F-fd354edf6c40",
+        "t": "FACT",
+        "text": "Priya Nair, Climate Adaptation Engineer at EBMUD. 4 named workers at 4 named businesses in Downtown on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "id": "F-1465bdf169d3",
+        "t": "FACT",
+        "text": "EBMUD · Utilities · 1900 employees · growth 11.7% · revenue $656.6M (+$1.5M vs C109) · on the roster: Priya Nair (Climate Adaptation Engineer)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "id": "F-4ab9b4b003dd",
+        "t": "FACT",
+        "text": "Atlas Bay Architects · Architecture · 86 employees · growth 9.6% · revenue $42.3M (+$78k vs C109) · key personnel: Sarah Huang (Healthcare Director) · on the roster: Tobias Jurko (Landscape Architect)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "id": "F-57a5b94595d7",
+        "t": "FACT",
+        "text": "Oakland Entertainment Talent Ageny · Talent Management · 10 employees · growth 4.5% · revenue $1.3M (+$1k vs C109) · on the roster: Nina Rines (Actress)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "id": "F-479e53d0ab01",
+        "t": "FACT",
+        "text": "Miso Metro · Restaurant & Dining · 2 employees · growth 7.8% · revenue $250k (+$376 vs C109) · on the roster: Andre Turner (Line cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "id": "F-06d4d9017f38",
+        "t": "FACT",
+        "text": "Pacific Standard Architecture · Architecture · 96 employees · growth 7.4% · revenue $48.3M (+$69k vs C109) · key personnel: Theodore Lindqvist (principal)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "id": "F-257769e88bbc",
+        "t": "FACT",
+        "text": "ENGINE SEED (Downtown): citizens Elena Reyes; Everly Rainey; Brooks Wright; Ronald Wough · businesses Oakland Alternative Response Initiative; Oakland Entertainment Talent Ageny · Telegraph Presbyterian Fellowship (faith)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C110"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00531-70179c8752",
+        "speakerId": "POP-00531",
+        "speakerName": "Priya Nair",
+        "text": "My work at EBMUD focuses on ensuring our water systems can handle the pressures of climate change, especially as the city grows. It’s about balancing the need for reliable infrastructure with the realities of a changing environment. Downtown’s growth adds complexity, but it’s also a chance to innovate and build resilience into the system.",
+        "factIds": [
+          "F-fd354edf6c40",
+          "F-1465bdf169d3"
+        ],
+        "src": "packet.W2[POP-00531]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00531",
+        "name": "Priya Nair",
+        "profile": "Priya Nair — Climate Adaptation Engineer",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Rumors of a new climate resilience grant affecting EBMUD's hiring",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Whispers about Atlas Bay eyeing a Fruitvale expansion tied to transit developments",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "forbiddenClaimClasses": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  }
+}

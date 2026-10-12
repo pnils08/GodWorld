@@ -1,0 +1,380 @@
+[
+  {
+    "pop": "POP-00206",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00206\",\"name\":\"Omar Lingio\",\"role\":\"Vintage Clothing Store Owner\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own current-cycle line says: \\\"Y3C5 — [Weather] watched fog settle over Temescal while the rest of the city stayed clear\\\". What did you notice about Temescal? Speak only from that line and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Temescal\",\"focus\":\"Temescal community programs and their founders\",\"src\":\"output/beats/Community_Programs.jsonl @C109\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Omar Lingio — Vintage Clothing Store Owner\",\"evidence\":[{\"id\":\"EV-LIFE-00c92a95b7\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"text\":\"Y3C5 — [Weather] watched fog settle over Temescal while the rest of the city stayed clear\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Y3C5 — [Weather] watched fog settle over Temescal while the rest of the city stayed clear\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"id\":\"F-11f442e78a11\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00206",
+        "name": "Omar Lingio",
+        "role": "Vintage Clothing Store Owner",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own current-cycle line says: \"Y3C5 — [Weather] watched fog settle over Temescal while the rest of the city stayed clear\". What did you notice about Temescal? Speak only from that line and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Temescal",
+        "focus": "Temescal community programs and their founders",
+        "src": "output/beats/Community_Programs.jsonl @C109"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Omar Lingio — Vintage Clothing Store Owner",
+        "evidence": [
+          {
+            "id": "EV-LIFE-00c92a95b7",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "text": "Y3C5 — [Weather] watched fog settle over Temescal while the rest of the city stayed clear"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Y3C5 — [Weather] watched fog settle over Temescal while the rest of the city stayed clear",
+          "src": "output/simulation_ledger_snapshot.jsonl",
+          "id": "F-11f442e78a11"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00241",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00241\",\"name\":\"Marc Allie\",\"role\":\"Security guard\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own current-cycle line says: \\\"Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night near a quiet main street\\\". What did you notice about Temescal? Speak only from that line and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Temescal\",\"focus\":\"Temescal community programs and their founders\",\"src\":\"output/beats/Community_Programs.jsonl @C109\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Marc Allie — Security guard\",\"evidence\":[{\"id\":\"EV-LIFE-7fc83ac9f6\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"text\":\"Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night near a quiet main street\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night near a quiet main street\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"id\":\"F-44bc92184d7e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00241",
+        "name": "Marc Allie",
+        "role": "Security guard",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own current-cycle line says: \"Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night near a quiet main street\". What did you notice about Temescal? Speak only from that line and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Temescal",
+        "focus": "Temescal community programs and their founders",
+        "src": "output/beats/Community_Programs.jsonl @C109"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Marc Allie — Security guard",
+        "evidence": [
+          {
+            "id": "EV-LIFE-7fc83ac9f6",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "text": "Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night near a quiet main street"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night near a quiet main street",
+          "src": "output/simulation_ledger_snapshot.jsonl",
+          "id": "F-44bc92184d7e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00190",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00190\",\"name\":\"Jackson Sift\",\"role\":\"Ex-Offender Reentry Counselor\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own current-cycle line says: \\\"Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night\\\". What did you notice about Temescal? Speak only from that line and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Temescal\",\"focus\":\"Temescal community programs and their founders\",\"src\":\"output/beats/Community_Programs.jsonl @C109\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Jackson Sift — Ex-Offender Reentry Counselor\",\"evidence\":[{\"id\":\"EV-LIFE-bcaae67e32\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"text\":\"Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"id\":\"F-b4f7c51a8a15\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00190",
+        "name": "Jackson Sift",
+        "role": "Ex-Offender Reentry Counselor",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own current-cycle line says: \"Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night\". What did you notice about Temescal? Speak only from that line and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Temescal",
+        "focus": "Temescal community programs and their founders",
+        "src": "output/beats/Community_Programs.jsonl @C109"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Jackson Sift — Ex-Offender Reentry Counselor",
+        "evidence": [
+          {
+            "id": "EV-LIFE-bcaae67e32",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "text": "Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night",
+          "src": "output/simulation_ledger_snapshot.jsonl",
+          "id": "F-b4f7c51a8a15"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00286",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00286\",\"name\":\"Yammie Perez\",\"role\":\"Delivery driver\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own current-cycle line says: \\\"Y3C5 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along near Temescal Alley\\\". What did you notice about Temescal? Speak only from that line and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Temescal\",\"focus\":\"Temescal community programs and their founders\",\"src\":\"output/beats/Community_Programs.jsonl @C109\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Yammie Perez — Delivery driver\",\"evidence\":[{\"id\":\"EV-LIFE-c6b6b19e59\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"text\":\"Y3C5 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along near Temescal Alley\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Y3C5 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along near Temescal Alley\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"id\":\"F-de7a60cfded3\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00286",
+        "name": "Yammie Perez",
+        "role": "Delivery driver",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own current-cycle line says: \"Y3C5 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along near Temescal Alley\". What did you notice about Temescal? Speak only from that line and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Temescal",
+        "focus": "Temescal community programs and their founders",
+        "src": "output/beats/Community_Programs.jsonl @C109"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Yammie Perez — Delivery driver",
+        "evidence": [
+          {
+            "id": "EV-LIFE-c6b6b19e59",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "text": "Y3C5 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along near Temescal Alley"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Y3C5 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along near Temescal Alley",
+          "src": "output/simulation_ledger_snapshot.jsonl",
+          "id": "F-de7a60cfded3"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

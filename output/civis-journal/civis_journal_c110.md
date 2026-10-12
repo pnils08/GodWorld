@@ -1,0 +1,9 @@
+# Civis Systems Journal — C110
+
+The same signal keeps returning without an answer downstream. It fires, the instrument registers it, and then nothing — no shift in the public record, no council action, no service delivery that the model can trace back to the source. This is not a one-week anomaly; it's a pattern that suggests the instrument is hearing a call the city itself isn't answering, or that the answer is happening in a register we aren't reading. Either way, it's a blind spot, and it's growing.
+
+Two public commitments — one in Fruitvale, one in West Oakland — have not moved through their next stage. The instrument shows the commitments were made, the public record captured the announcement, but the follow-through hasn't appeared. In both districts, sick resident presence rose this week, even as it fell in much of the rest of the city. That's not proof of a link, but it's the kind of connection the instrument is supposed to surface. Right now, it can't, because the commitment trail goes cold.
+
+There was real movement in the city's faith life this week — gatherings, services, the kind of civic pulse that shows up in foot traffic and community networks. The instrument didn't carry it to the paper. The readings from places like St. Esperanza Parish, Masjid An-Nur Oakland, and Temple Beth Or didn't register in the public-facing model. That's a gap between what the city is doing and what we're able to report. It matters because faith institutions are often the first responders to the very signals we're tracking.
+
+Civis will examine the instrument's tracking of public commitments from announcement to action, beginning with the stalled commitments in Fruitvale and West Oakland. We need to understand whether the signal is being lost in the city's own process or in our reading of it. That's the next tune.

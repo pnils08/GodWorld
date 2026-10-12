@@ -1,0 +1,21 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "culture",
+  "persona": "elliot-graye",
+  "storyline": {
+    "slug": "montclair-eunice-marston-beat-faith",
+    "verb": "opened"
+  },
+  "hood": "Montclair",
+  "quotes": [
+    {
+      "pop": "POP-00753",
+      "name": "Eunice Marston",
+      "quote": "I haven't had any direct involvement with the Bharat Mandir of the East Bay, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community."
+    }
+  ],
+  "claim": "I haven't had any direct involvement with the Bharat Mandir of the East Bay, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-24T18:15:48.665Z"
+}

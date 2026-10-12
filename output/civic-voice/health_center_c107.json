@@ -1,0 +1,33 @@
+{
+  "office": "health_center",
+  "cycle": 107,
+  "speaker": "Bobby Chen-Ramirez",
+  "cascadeSummary": "Completed MEP rough-ins and certified utility inspections for the Temescal Community Health Center ahead of schedule. Continued second-shift crews to accelerate progress while maintaining rigorous quality standards.",
+  "statements": [
+    {
+      "statementId": "STMT-107-health_center-001",
+      "type": "operational_status",
+      "topic": "construction_progress",
+      "initiative": "INIT-005",
+      "decision": "Certified utility inspections and completed MEP rough-ins",
+      "quote": "Every conduit, every duct, every junction box—inspected, tested, and signed off before drywall goes up.",
+      "fullStatement": "This week, we completed mechanical, electrical, and plumbing rough-ins for the Temescal Community Health Center, certifying every utility junction before wall closure. Electrical conduit runs passed continuity testing; plumbing risers cleared hydrostatic pressure tests; HVAC ductwork met airflow specs. Second-shift crews kept us ahead of schedule without cutting corners—Temescal deserves systems that last. Certified inspection reports confirm every system meets OSHPD-3 and local code. Next cycle: drywall installation and fire-rated wall inspections.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "MilestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule",
+        "NextScheduledAction": "Drywall installation and fire-rated wall inspections",
+        "NextActionCycle": 108
+      }
+    },
+    {
+      "statementId": "STMT-107-health_center-002",
+      "type": "civic_update",
+      "topic": "community_transparency",
+      "initiative": null,
+      "decision": "Expanded daily progress photo postings",
+      "quote": "The bulletin board at 47th & Telegraph tells the story better than any status report ever could.",
+      "fullStatement": "Community engagement means showing the work, not just talking about it. Starting this cycle, the bulletin board at 47th & Telegraph displays daily progress photos—conduit runs, ductwork, inspection tags. Neighbors stop by every morning to see what changed overnight. The pharmacist says he fields more questions about our crane schedule than prescriptions some days. This is how you build trust: show the work, explain the timelines, and deliver on every promise.",
+      "trackerUpdates": {}
+    }
+  ]
+}

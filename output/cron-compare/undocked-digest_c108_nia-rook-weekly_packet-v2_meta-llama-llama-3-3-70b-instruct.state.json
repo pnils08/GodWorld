@@ -1,0 +1,351 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01076",
+    "name": "Nia Rook",
+    "role": "desk reporter",
+    "desk": "undocked-digest"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Soo Loo, Belle Lopez, Wanjiru Liu), who is climbing and who is fading. Standings: Clarissa Dane leads the board — rank #1, 5 cycle(s) led, current streak 5. Per-pilot facts: Soo Loo — 2 episode(s), partial credits 1, combat 0, mishaps 0; Belle Lopez — 2 episode(s), partial credits 98, combat 0, mishaps 0; Wanjiru Liu — 2 episode(s), partial credits 0, combat 0, mishaps 0.",
+    "approach": null,
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "undocked-digest",
+    "hood": null,
+    "src": "undocked-week:weekly-c108",
+    "plan": {
+      "focus": "UNDOCKED pilots' performance",
+      "closeQuestion": "Will the current leader maintain their position?"
+    },
+    "openThreads": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00663",
+        "name": "Soo Loo",
+        "profile": "Soo Loo — UNDOCKED cast pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00300",
+        "name": "Belle Lopez",
+        "profile": "Belle Lopez — UNDOCKED cast pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00663-4e26760f5e",
+        "pop": "POP-00663",
+        "name": "Soo Loo",
+        "quote": "I've been feeling like I'm always on, like I'm working myself thin, and it's hard to shake that feeling. I think that's what I've understood about performance - it's not just about doing well, it's about being able to keep going, to keep pushing through. For me, it's about finding that balance between giving it my all and taking care of myself.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-4b3e2f568830",
+          "F-4337bb2b1457"
+        ],
+        "src": "packet.W2[POP-00663]"
+      },
+      {
+        "id": "Q-POP-00300-266c7207e7",
+        "pop": "POP-00300",
+        "name": "Belle Lopez",
+        "quote": "Honestly, I've been so focused on my own work as a Home Health Aide and trying to make ends meet that I haven't really had the time or energy to think about the performance of others, including UNDOCKED pilots. My mind's been preoccupied with the recent city events and how they're affecting our community, and I've been trying to stay steady and supportive for my family and those around me.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-4b3e2f568830",
+          "F-c000f69c627a"
+        ],
+        "src": "packet.W2[POP-00300]"
+      },
+      {
+        "id": "Q-POP-00170-423413077c",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "I've heard people talking about the UNDOCKED pilots' performance, and from what I gather, it seems like they're doing a great job navigating through challenging situations, I feel like their ability to adapt is really impressive.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-4b3e2f568830"
+        ],
+        "src": "packet.W2[POP-00170]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "There might be a dark horse among the pilots",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C108",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-78217e633afa"
+    },
+    {
+      "t": "FACT",
+      "text": "UNDOCKED week-in-review c108",
+      "src": "undocked-week:weekly-c108",
+      "id": "F-4b3e2f568830"
+    },
+    {
+      "t": "FACT",
+      "text": "Soo Loo — UNDOCKED cast pilot",
+      "src": "Simulation_Ledger profile for POP-00663",
+      "id": "F-4337bb2b1457"
+    },
+    {
+      "t": "FACT",
+      "text": "Belle Lopez — UNDOCKED cast pilot",
+      "src": "Simulation_Ledger profile for POP-00300",
+      "id": "F-c000f69c627a"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the week's UNDOCKED episodes into one leaderboard/digest naming every pilot who flew — not a single-episode recap. Standings-forward: rank, streaks, who's climbing, who's fading, what the whole cast looked like this week.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person leaderboard recap — entertainment-beat energy, ranking-and-recap format",
+      "targetWords": "350-650",
+      "opening": "a scoreboard, standings post, or watch-party moment framing the whole week at once",
+      "closing": "the one line that sets up who the city watches next"
+    },
+    "authorizedTexture": [
+      "an unnamed bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues — no invented named venue, entity, or event",
+      "the reporter's own recap persona and who's-up-who's-down framing, now across the full week's cast rather than one episode",
+      "unnamed audience argument and aspiration lines used as city color, never as attributed quotes or measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the week's feed or standings"
+    ],
+    "textureConditions": [
+      "every named person, cast pilot, venue, business, and institution must come from the Packet",
+      "episode facts only from the typed feed fields (CreditsDelta, Systems, CombatEvents, MishapCount, Magnitude, Flags) — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings/leaderboard facts (Rank, CyclesLed, CurrentStreak) come only from the supplied Standings block — never invented math",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person",
+      "every pilot named in the supplied week's roster should appear at least once, even briefly, so the article actually prints their name"
+    ],
+    "canonBlockers": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math beyond the supplied Standings/pilot facts"
+    ]
+  },
+  "manifest": {
+    "id": "AM-27dd04348669",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-78217e633afa",
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-4b3e2f568830",
+        "t": "FACT",
+        "text": "UNDOCKED week-in-review c108",
+        "src": "undocked-week:weekly-c108"
+      },
+      {
+        "id": "F-4337bb2b1457",
+        "t": "FACT",
+        "text": "Soo Loo — UNDOCKED cast pilot",
+        "src": "Simulation_Ledger profile for POP-00663"
+      },
+      {
+        "id": "F-c000f69c627a",
+        "t": "FACT",
+        "text": "Belle Lopez — UNDOCKED cast pilot",
+        "src": "Simulation_Ledger profile for POP-00300"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00663-4e26760f5e",
+        "speakerId": "POP-00663",
+        "speakerName": "Soo Loo",
+        "text": "I've been feeling like I'm always on, like I'm working myself thin, and it's hard to shake that feeling. I think that's what I've understood about performance - it's not just about doing well, it's about being able to keep going, to keep pushing through. For me, it's about finding that balance between giving it my all and taking care of myself.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-4b3e2f568830",
+          "F-4337bb2b1457"
+        ],
+        "src": "packet.W2[POP-00663]"
+      },
+      {
+        "id": "Q-POP-00300-266c7207e7",
+        "speakerId": "POP-00300",
+        "speakerName": "Belle Lopez",
+        "text": "Honestly, I've been so focused on my own work as a Home Health Aide and trying to make ends meet that I haven't really had the time or energy to think about the performance of others, including UNDOCKED pilots. My mind's been preoccupied with the recent city events and how they're affecting our community, and I've been trying to stay steady and supportive for my family and those around me.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-4b3e2f568830",
+          "F-c000f69c627a"
+        ],
+        "src": "packet.W2[POP-00300]"
+      },
+      {
+        "id": "Q-POP-00170-423413077c",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "I've heard people talking about the UNDOCKED pilots' performance, and from what I gather, it seems like they're doing a great job navigating through challenging situations, I feel like their ability to adapt is really impressive.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-4b3e2f568830"
+        ],
+        "src": "packet.W2[POP-00170]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00663",
+        "name": "Soo Loo",
+        "profile": "Soo Loo — UNDOCKED cast pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00300",
+        "name": "Belle Lopez",
+        "profile": "Belle Lopez — UNDOCKED cast pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "There might be a dark horse among the pilots",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an unnamed bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues — no invented named venue, entity, or event",
+      "the reporter's own recap persona and who's-up-who's-down framing, now across the full week's cast rather than one episode",
+      "unnamed audience argument and aspiration lines used as city color, never as attributed quotes or measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the week's feed or standings"
+    ],
+    "textureConditions": [
+      "every named person, cast pilot, venue, business, and institution must come from the Packet",
+      "episode facts only from the typed feed fields (CreditsDelta, Systems, CombatEvents, MishapCount, Magnitude, Flags) — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings/leaderboard facts (Rank, CyclesLed, CurrentStreak) come only from the supplied Standings block — never invented math",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person",
+      "every pilot named in the supplied week's roster should appear at least once, even briefly, so the article actually prints their name"
+    ],
+    "forbiddenClaimClasses": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math beyond the supplied Standings/pilot facts"
+    ]
+  }
+}

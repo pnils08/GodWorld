@@ -1,0 +1,52 @@
+{
+  "draft": "output/cron-compare/sports_c109_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "3d190a01c780dd02e55cb0118b25d2c71ca46d10c272b93b80f7e4f3e464caf4",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, game stats match Oakland Sports Feed, and canon constraints are satisfied.",
+  "review": {
+    "profileId": "selena-grant-oaks-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "packageVersion": "SELENA-OAKS-1",
+    "manifestId": "AM-45652b0bb68a",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Austin Reaves",
+      "Dillon Brooks",
+      "Ernesto Quintero",
+      "Wilson Shepard"
+    ],
+    "unverified": [
+      "Head Coach"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0101,
+  "durationMs": 6515,
+  "parseError": false,
+  "ranAt": "2026-09-29T23:18:00.288Z"
+}

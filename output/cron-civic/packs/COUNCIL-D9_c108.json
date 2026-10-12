@@ -1,0 +1,328 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00506",
+    "name": "Terrence Mobley",
+    "role": "City Council District 9",
+    "officeId": "COUNCIL-D9",
+    "district": "D9",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d9",
+    "initiative": null,
+    "dials": {
+      "approval": 66
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "stand with Uptown or leave it"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 208.04545454545453,
+    "label": "Uptown — sentiment 0.25 vs city 0.330",
+    "lever": "stand with Uptown or leave it",
+    "hood": "Uptown",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.25,
+      "citySentiment": 0.33045454545454545,
+      "crime": 0.52,
+      "cityCrime": 0.5831818181818181,
+      "heat": 8.045454545454545,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "stand with Uptown or leave it",
+    "lineFacts": [
+      "approval 66",
+      "Uptown: sentiment 0.25 vs city 0.330; crime index 0.52 vs city 0.583; growth momentum 10",
+      "Uptown crime: property 32, violent 20, incidents 8 (cycle 108) — city property 35.6, violent 23.5, incidents 5.5",
+      "Uptown: sentiment 0.25 vs city 0.330; crime index 0.52 vs city 0.583; retail 10.04; housing pressure 5; growth; momentum 10"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "No move for this seat in the available ledgers through C108.",
+      "moves": []
+    },
+    "board": [],
+    "boardAvailable": true,
+    "boardIds": [],
+    "boardText": "Your board is empty: no initiative sponsors you or touches your turf.",
+    "interventions": {
+      "available": true,
+      "playable": [
+        {
+          "key": "health-service",
+          "domain": "health",
+          "label": "Clinic, health center or care program"
+        },
+        {
+          "key": "transit-project",
+          "domain": "transit",
+          "label": "Station, line or transit hub"
+        },
+        {
+          "key": "school-program",
+          "domain": "education",
+          "label": "School funding or education program"
+        }
+      ],
+      "text": "Interventions you may propose (closed catalog; propose requires a budget inside the domain band):\n- health-service (health) — Clinic, health center or care program — budget band $5M-$100M\n- transit-project (transit) — Station, line or transit hub — budget band $20M-$500M\n- school-program (education) — School funding or education program — budget band $1M-$50M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [],
+      "participation": [],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 106,
+      "throughCycle": 108,
+      "window": "Complaint display C106–C108; condition counter C108 only.",
+      "text": "Complaint display C106–C108; condition counter C108 only.\nNo Civic complaints from your turf in this window."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 2,
+      "shownStaff": 2,
+      "text": "The working city:\n- Vanessa Tran-Muñoz: The East Oakland crews handled three opioid overdoses and a domestic call today—no transports, all resolved… (C108)\n- Marcus Webb: Sixty-nine households this month. That's good. That's real. But I keep staring at the Downtown canvass… (C108)"
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-108-civic-office-council-d9",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d9",
+          "demand": "Terrence Mobley — City Council District 9 — Reconcile Uptown commercial distress metrics with district small-business stabilization deployment.",
+          "sourceText": "## Terrence Mobley — City Council District 9\n\n- **Agent:** `.claude/agents/civic-office-council-d9/`\n- **Address:** Reconcile Uptown commercial distress metrics with district small-business stabilization deployment.\n- **Why:** Despite C107 claims of community success, Uptown triggered a C108 engine review math-imbalance (Sentiment -0.150 to 0.25, RetailVitality -1.26, HousingPressure rank 22 of 22 at 5.000).\n- **Acceptance:** A published Uptown commercial assessment detailing business retention allocations from the Downtown outreach expansion of INIT-001.\n- **Silence consequence:** Severe commercial and housing pressures in Uptown continue unmitigated by municipal stabilization resources.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "open": [
+        {
+          "id": "CONF-108-civic-office-council-d9",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d9",
+          "demand": "Terrence Mobley — City Council District 9 — Reconcile Uptown commercial distress metrics with district small-business stabilization deployment.",
+          "sourceText": "## Terrence Mobley — City Council District 9\n\n- **Agent:** `.claude/agents/civic-office-council-d9/`\n- **Address:** Reconcile Uptown commercial distress metrics with district small-business stabilization deployment.\n- **Why:** Despite C107 claims of community success, Uptown triggered a C108 engine review math-imbalance (Sentiment -0.150 to 0.25, RetailVitality -1.26, HousingPressure rank 22 of 22 at 5.000).\n- **Acceptance:** A published Uptown commercial assessment detailing business retention allocations from the Downtown outreach expansion of INIT-001.\n- **Silence consequence:** Severe commercial and housing pressures in Uptown continue unmitigated by municipal stabilization resources.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": []
+    },
+    "confrontation": {
+      "id": "CONF-108-civic-office-council-d9",
+      "cycle": 108,
+      "agentDir": "civic-office-council-d9",
+      "demand": "Terrence Mobley — City Council District 9 — Reconcile Uptown commercial distress metrics with district small-business stabilization deployment.",
+      "sourceText": "## Terrence Mobley — City Council District 9\n\n- **Agent:** `.claude/agents/civic-office-council-d9/`\n- **Address:** Reconcile Uptown commercial distress metrics with district small-business stabilization deployment.\n- **Why:** Despite C107 claims of community success, Uptown triggered a C108 engine review math-imbalance (Sentiment -0.150 to 0.25, RetailVitality -1.26, HousingPressure rank 22 of 22 at 5.000).\n- **Acceptance:** A published Uptown commercial assessment detailing business retention allocations from the Downtown outreach expansion of INIT-001.\n- **Silence consequence:** Severe commercial and housing pressures in Uptown continue unmitigated by municipal stabilization resources.\n",
+      "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 108,
+      "problems": [
+        {
+          "id": "[\"Laurel\",\"health.sickResidents\"]",
+          "hood": "Laurel",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 111,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Uptown\",\"health.sickResidents\"]",
+          "hood": "Uptown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 21,
+          "cycle": 108
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Laurel\",\"health.sickResidents\"]",
+          "hood": "Laurel",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 111,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Uptown\",\"health.sickResidents\"]",
+          "hood": "Uptown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 21,
+          "cycle": 108
+        }
+      ],
+      "passedOver": [],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Condition problems at C108; prior Sunday folds through C107.\n- Laurel: sick residents 111\n- Uptown: sick residents 21\nNo earlier pack proves a displayed condition."
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Laurel",
+      "Uptown"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00077",
+        "name": "Julio Valencia",
+        "neighborhood": "Uptown",
+        "role": "Setup/Closing Pitcher, Oakland A's",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Uptown — Uptown — sentiment 0.25 vs city 0.330"
+      },
+      {
+        "pop": "POP-00085",
+        "name": "Richie Ramiro",
+        "neighborhood": "Uptown",
+        "role": "First Baseman, Midland RockHounds (AA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Uptown — Uptown — sentiment 0.25 vs city 0.330"
+      },
+      {
+        "pop": "POP-00103",
+        "name": "Kevin Ham",
+        "neighborhood": "Uptown",
+        "role": "Second Baseman, Stockton Ports (A)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Uptown — Uptown — sentiment 0.25 vs city 0.330"
+      },
+      {
+        "pop": "POP-00123",
+        "name": "Tre Mingo",
+        "neighborhood": "Uptown",
+        "role": "Port Worker",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Uptown — Uptown — sentiment 0.25 vs city 0.330"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D9",
+      "t": "FACT",
+      "text": "Terrence Mobley holds COUNCIL-D9 at approval 66",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-Uptown",
+      "t": "FACT",
+      "text": "Uptown: sentiment 0.25 vs city 0.330; crime index 0.52 vs city 0.583; growth momentum 10",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-Uptown",
+      "t": "FACT",
+      "text": "Uptown crime: property 32, violent 20, incidents 8 (cycle 108) — city property 35.6, violent 23.5, incidents 5.5",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Uptown",
+      "t": "FACT",
+      "text": "Uptown: sentiment 0.25 vs city 0.330; crime index 0.52 vs city 0.583; retail 10.04; housing pressure 5; growth; momentum 10",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-traj-0",
+      "t": "FACT",
+      "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+      "src": "world_summary trajectory"
+    },
+    {
+      "id": "F-chaos-fire_engine-neighborhood Uptown",
+      "t": "FACT",
+      "text": "fire_engine false_alarm → neighborhood Uptown Sentiment -0.07",
+      "src": "world_summary Chaos_Cars"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Approval": "66"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

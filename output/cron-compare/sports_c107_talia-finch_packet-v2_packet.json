@@ -1,0 +1,1246 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "107",
+  "persona": "talia-finch",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Talia Finch",
+    "popid": "POP-00592"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-ground",
+      "angle": "Oaks ground read C107 — high — the people around the second club",
+      "label": "Oaks ground read C107 — high",
+      "hookLine": "high",
+      "hood": "Downtown",
+      "citizens": [
+        "Wilson Shepard (POP-01022)",
+        "Adash Stanley (POP-01023)"
+      ],
+      "popids": [
+        "POP-01022",
+        "POP-01023"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+      "cycle": 107
+    }
+  },
+  "angle": "output/cron-compare/sports_c107_talia-finch_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": "I've been feeling the energy around Downtown, and I think our fans are really excited for the upcoming season. As the Head Coach of the Oakland Oaks, I'm eager to show the city what we're capable of, and I feel like we're going to catch people off guard this year.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been feeling the energy around Downtown, and I think our fans are really excited for the upcoming season. As the Head Coach of the Oakland Oaks, I'm eager to show the city what we're capable of, and I feel like we're going to catch people off guard this year.\",\n  \"fact_ids\": [\"F-c50960ca7087\", \"F-4e159b01415f\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c50960ca7087",
+          "F-4e159b01415f"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01022-878ebbbf4a",
+        "authoredQuote": true,
+        "publishableQuote": "I've been feeling the energy around Downtown, and I think our fans are really excited for the upcoming season. As the Head Coach of the Oakland Oaks, I'm eager to show the city what we're capable of, and I feel like we're going to catch people off guard this year."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01022",
+          "name": "Wilson Shepard",
+          "role": "Head Coach, Oakland Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The Oaks' fans and their excitement for the upcoming season\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Downtown",
+          "focus": "The Oaks' fans and their excitement for the upcoming season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C107 (Oakland_Sports_Feed)",
+            "same-neighborhood"
+          ],
+          "self": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-956aed9059",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+              "text": "high"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C107 — high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-27e8455fa41e"
+          },
+          {
+            "t": "FACT",
+            "text": "high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-8e4cb36a6500"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C107: high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-c50960ca7087"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C107: hungry",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-e322b0ee3df3"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Wilson Shepard meet with the media to address his excitement fot the seaon and is eager to show Oakland what they have in the Oaks. Shepard shared that he felt the Oaks will catch people off guard thi",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-4e159b01415f"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-455411084c39"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-0 · streak W0",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-90ae4627f67f"
+          },
+          {
+            "t": "FACT",
+            "text": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01022",
+            "id": "F-5b5a560909b4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.\",\n  \"fact_ids\": [\"F-c50960ca7087\", \"F-27e8455fa41e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c50960ca7087",
+          "F-27e8455fa41e"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01023-5ab0493617",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks ",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The Oaks' fans and their excitement for the upcoming season\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Downtown",
+          "focus": "The Oaks' fans and their excitement for the upcoming season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C107 (Oakland_Sports_Feed)",
+            "same-neighborhood"
+          ],
+          "self": "Adash Stanley — PG / The Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-13bab9108e",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+              "text": "high"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C107 — high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-27e8455fa41e"
+          },
+          {
+            "t": "FACT",
+            "text": "high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-8e4cb36a6500"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C107: high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-c50960ca7087"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C107: hungry",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-e322b0ee3df3"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Wilson Shepard meet with the media to address his excitement fot the seaon and is eager to show Oakland what they have in the Oaks. Shepard shared that he felt the Oaks will catch people off guard thi",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-4e159b01415f"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-455411084c39"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-0 · streak W0",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-90ae4627f67f"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-26cdcab1a2d4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "I can feel the energy around Downtown, people are really excited about the Oaks' upcoming season, it's all anyone can talk about when they come in for their coffee.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I can feel the energy around Downtown, people are really excited about the Oaks' upcoming season, it's all anyone can talk about when they come in for their coffee.\",\n  \"fact_ids\": [\"F-c50960ca7087\", \"F-8e4cb36a6500\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c50960ca7087",
+          "F-8e4cb36a6500"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00212-7e9459c402",
+        "authoredQuote": true,
+        "publishableQuote": "I can feel the energy around Downtown, people are really excited about the Oaks' upcoming season, it's all anyone can talk about when they come in for their coffee."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00212",
+          "name": "Jessie Hess",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The Oaks' fans and their excitement for the upcoming season\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Downtown",
+          "focus": "The Oaks' fans and their excitement for the upcoming season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jessie Hess — Barista — Downtown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C107 — high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-27e8455fa41e"
+          },
+          {
+            "t": "FACT",
+            "text": "high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-8e4cb36a6500"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C107: high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-c50960ca7087"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C107: hungry",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-e322b0ee3df3"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Wilson Shepard meet with the media to address his excitement fot the seaon and is eager to show Oakland what they have in the Oaks. Shepard shared that he felt the Oaks will catch people off guard thi",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-4e159b01415f"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-455411084c39"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-0 · streak W0",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-90ae4627f67f"
+          },
+          {
+            "t": "FACT",
+            "text": "Jessie Hess — Barista — Downtown",
+            "src": "Simulation_Ledger profile for POP-00212",
+            "id": "F-48795c7c7253"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00224",
+      "name": "Dillon Trevor",
+      "quote": "I can feel the energy around Downtown, people are really hyped about The Oaks' upcoming season. As someone who's always out in the neighborhood, I've seen how excited the fans are, and it's infectious. I'm looking forward to seeing what the season brings.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I can feel the energy around Downtown, people are really hyped about The Oaks' upcoming season. As someone who's always out in the neighborhood, I've seen how excited the fans are, and it's infectious. I'm looking forward to seeing what the season brings.\",\n  \"fact_ids\": [\"F-c50960ca7087\", \"F-455411084c39\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c50960ca7087",
+          "F-455411084c39"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00224-1fb214a984",
+        "authoredQuote": true,
+        "publishableQuote": "I can feel the energy around Downtown, people are really hyped about The Oaks' upcoming season. As someone who's always out in the neighborhood, I've seen how excited the fans are, and it's infectious. I'm looking forward to seeing what the season brings."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00224",
+          "name": "Dillon Trevor",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The Oaks' fans and their excitement for the upcoming season\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Downtown",
+          "focus": "The Oaks' fans and their excitement for the upcoming season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Dillon Trevor — Server — Downtown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C107 — high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-27e8455fa41e"
+          },
+          {
+            "t": "FACT",
+            "text": "high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-8e4cb36a6500"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C107: high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-c50960ca7087"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C107: hungry",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-e322b0ee3df3"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Wilson Shepard meet with the media to address his excitement fot the seaon and is eager to show Oakland what they have in the Oaks. Shepard shared that he felt the Oaks will catch people off guard thi",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-4e159b01415f"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-455411084c39"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-0 · streak W0",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-90ae4627f67f"
+          },
+          {
+            "t": "FACT",
+            "text": "Dillon Trevor — Server — Downtown",
+            "src": "Simulation_Ledger profile for POP-00224",
+            "id": "F-80fac7a0ad63"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": "I've been feeling the energy around Downtown, and I think our fans are really excited for the upcoming season. As the Head Coach of the Oakland Oaks, I'm eager to show the city what we're capable of, and I feel like we're going to catch people off guard this year.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been feeling the energy around Downtown, and I think our fans are really excited for the upcoming season. As the Head Coach of the Oakland Oaks, I'm eager to show the city what we're capable of, and I feel like we're going to catch people off guard this year.\",\n  \"fact_ids\": [\"F-c50960ca7087\", \"F-4e159b01415f\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c50960ca7087",
+          "F-4e159b01415f"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01022-878ebbbf4a",
+        "authoredQuote": true,
+        "publishableQuote": "I've been feeling the energy around Downtown, and I think our fans are really excited for the upcoming season. As the Head Coach of the Oakland Oaks, I'm eager to show the city what we're capable of, and I feel like we're going to catch people off guard this year."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01022",
+          "name": "Wilson Shepard",
+          "role": "Head Coach, Oakland Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The Oaks' fans and their excitement for the upcoming season\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Downtown",
+          "focus": "The Oaks' fans and their excitement for the upcoming season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C107 (Oakland_Sports_Feed)",
+            "same-neighborhood"
+          ],
+          "self": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-956aed9059",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+              "text": "high"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C107 — high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-27e8455fa41e"
+          },
+          {
+            "t": "FACT",
+            "text": "high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-8e4cb36a6500"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C107: high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-c50960ca7087"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C107: hungry",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-e322b0ee3df3"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Wilson Shepard meet with the media to address his excitement fot the seaon and is eager to show Oakland what they have in the Oaks. Shepard shared that he felt the Oaks will catch people off guard thi",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-4e159b01415f"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-455411084c39"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-0 · streak W0",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-90ae4627f67f"
+          },
+          {
+            "t": "FACT",
+            "text": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01022",
+            "id": "F-5b5a560909b4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.\",\n  \"fact_ids\": [\"F-c50960ca7087\", \"F-27e8455fa41e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c50960ca7087",
+          "F-27e8455fa41e"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01023-5ab0493617",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks ",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The Oaks' fans and their excitement for the upcoming season\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Downtown",
+          "focus": "The Oaks' fans and their excitement for the upcoming season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C107 (Oakland_Sports_Feed)",
+            "same-neighborhood"
+          ],
+          "self": "Adash Stanley — PG / The Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-13bab9108e",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+              "text": "high"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C107 — high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-27e8455fa41e"
+          },
+          {
+            "t": "FACT",
+            "text": "high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-8e4cb36a6500"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C107: high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-c50960ca7087"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C107: hungry",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-e322b0ee3df3"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Wilson Shepard meet with the media to address his excitement fot the seaon and is eager to show Oakland what they have in the Oaks. Shepard shared that he felt the Oaks will catch people off guard thi",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-4e159b01415f"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-455411084c39"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-0 · streak W0",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-90ae4627f67f"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-26cdcab1a2d4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "I can feel the energy around Downtown, people are really excited about the Oaks' upcoming season, it's all anyone can talk about when they come in for their coffee.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I can feel the energy around Downtown, people are really excited about the Oaks' upcoming season, it's all anyone can talk about when they come in for their coffee.\",\n  \"fact_ids\": [\"F-c50960ca7087\", \"F-8e4cb36a6500\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c50960ca7087",
+          "F-8e4cb36a6500"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00212-7e9459c402",
+        "authoredQuote": true,
+        "publishableQuote": "I can feel the energy around Downtown, people are really excited about the Oaks' upcoming season, it's all anyone can talk about when they come in for their coffee."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00212",
+          "name": "Jessie Hess",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The Oaks' fans and their excitement for the upcoming season\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Downtown",
+          "focus": "The Oaks' fans and their excitement for the upcoming season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jessie Hess — Barista — Downtown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C107 — high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-27e8455fa41e"
+          },
+          {
+            "t": "FACT",
+            "text": "high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-8e4cb36a6500"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C107: high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-c50960ca7087"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C107: hungry",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-e322b0ee3df3"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Wilson Shepard meet with the media to address his excitement fot the seaon and is eager to show Oakland what they have in the Oaks. Shepard shared that he felt the Oaks will catch people off guard thi",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-4e159b01415f"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-455411084c39"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-0 · streak W0",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-90ae4627f67f"
+          },
+          {
+            "t": "FACT",
+            "text": "Jessie Hess — Barista — Downtown",
+            "src": "Simulation_Ledger profile for POP-00212",
+            "id": "F-48795c7c7253"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00224",
+      "name": "Dillon Trevor",
+      "quote": "I can feel the energy around Downtown, people are really hyped about The Oaks' upcoming season. As someone who's always out in the neighborhood, I've seen how excited the fans are, and it's infectious. I'm looking forward to seeing what the season brings.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I can feel the energy around Downtown, people are really hyped about The Oaks' upcoming season. As someone who's always out in the neighborhood, I've seen how excited the fans are, and it's infectious. I'm looking forward to seeing what the season brings.\",\n  \"fact_ids\": [\"F-c50960ca7087\", \"F-455411084c39\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c50960ca7087",
+          "F-455411084c39"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00224-1fb214a984",
+        "authoredQuote": true,
+        "publishableQuote": "I can feel the energy around Downtown, people are really hyped about The Oaks' upcoming season. As someone who's always out in the neighborhood, I've seen how excited the fans are, and it's infectious. I'm looking forward to seeing what the season brings."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00224",
+          "name": "Dillon Trevor",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The Oaks' fans and their excitement for the upcoming season\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Downtown",
+          "focus": "The Oaks' fans and their excitement for the upcoming season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Dillon Trevor — Server — Downtown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C107 — high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-27e8455fa41e"
+          },
+          {
+            "t": "FACT",
+            "text": "high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "id": "F-8e4cb36a6500"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C107: high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-c50960ca7087"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C107: hungry",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-e322b0ee3df3"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): Wilson Shepard meet with the media to address his excitement fot the seaon and is eager to show Oakland what they have in the Oaks. Shepard shared that he felt the Oaks will catch people off guard thi",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-4e159b01415f"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-455411084c39"
+          },
+          {
+            "t": "FACT",
+            "text": "Context: record 0-0 · streak W0",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+            "id": "F-90ae4627f67f"
+          },
+          {
+            "t": "FACT",
+            "text": "Dillon Trevor — Server — Downtown",
+            "src": "Simulation_Ledger profile for POP-00224",
+            "id": "F-80fac7a0ad63"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-17T18:17:34.272Z"
+}

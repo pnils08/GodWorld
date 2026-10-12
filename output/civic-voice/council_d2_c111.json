@@ -1,0 +1,38 @@
+{
+  "office": "council_d2",
+  "cycle": 111,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I am addressing the pressing issues in my district, including the Baylight District remediation and Downtown Economic Revitalization. I believe in data-driven decision making and community engagement. I will support the Baylight District project and advocate for targeted support for Downtown Oakland's economic decay.",
+  "statements": [
+    {
+      "statementId": "STMT-111-council_d2-001",
+      "type": "vote_statement",
+      "topic": "Baylight District Remediation",
+      "initiative": "INIT-006",
+      "decision": "Confirm the Phase II site remediation proceeds on schedule",
+      "quote": "We must ensure the Baylight District project benefits the entire community, particularly Jack London and Downtown Oakland, with continued oversight and community engagement.",
+      "fullStatement": "As we review the remediation completion and construction milestone for the Baylight District, I want to emphasize the importance of transparency and community engagement. The data must guide our decisions, and I will closely monitor the independent oversight and site remediation progress, prioritizing economic momentum and public safety.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d2-002",
+      "type": "vote_statement",
+      "topic": "Downtown Economic Revitalization",
+      "initiative": "INIT-008",
+      "decision": "Support the Downtown Economic Revitalization legislation",
+      "quote": "Downtown's struggles are real, and I stand with its people - we need targeted support to address the crime and economic imbalance, not just words.",
+      "fullStatement": "I believe in providing support for local businesses and public safety in Downtown Oakland. The Downtown Economic Revitalization legislation is a step in the right direction, and I will work to ensure its successful implementation.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d2-003",
+      "type": "statement",
+      "topic": "Constituent Support",
+      "initiative": null,
+      "decision": "Address the concerns of Baylight District and Jack London",
+      "quote": "I will continue to fight for the people of my district, ensuring their voices are heard and their concerns are addressed.",
+      "fullStatement": "As the representative of District 2, I am committed to supporting the communities of Baylight District and Jack London. I will work tirelessly to address their concerns and ensure their needs are met.",
+      "trackerUpdates": {}
+    }
+  ]
+}

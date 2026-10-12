@@ -1,0 +1,334 @@
+{
+  "cycle": 111,
+  "entries": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Month-ten disbursement approved — $400,000 to keep West Oakland families in their homes.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): accelerate to design-phase with Cycle 114 deadline — \"Four cycles of waiting ends today — Fruitvale Transit Hub enters design-phase with schematics due Cycle 114.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): mandate first cohort placement report by Cycle 112 — \"150 apprentices by spring — I'm demanding the first cohort placement report by Cycle 112.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): call emergency Economic Development Committee hearing for Cycle 112 — \"Downtown businesses have waited long enough — I'm calling an emergency Economic Development Committee hearing for Cycle ",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): refer to Economic Development Committee with mandatory milestone reporting — \"Grand Lake's quiet engine needs fuel — $2.5 million in stabilization funding is now before the Council.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): refer to Housing and Community Development Committee — \"Displacement doesn't wait for process — $4.2 million for legal defense is filed and moving.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): public acknowledgment of community success and municipal stability — \"Fruitvale's busy streets and upbeat mood happened because this community organizes — and Dimond's steady strength is Oakl",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): set construction milestone review for Cycle 115 — \"Soil tests are verified, remediation proceeds — I'm setting the construction milestone review for Cycle 115.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Warren Ashford (council d7): Mandate municipal service auditing for KONO and targeted commercial revitalization tracking for Temescal merchant corridors. — \"Temescal's resilience and KONO's stability are built on merchan",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d7_c111.json",
+      "popids": [
+        "POP-00504"
+      ]
+    },
+    {
+      "label": "Warren Ashford (council d7): Enforce post-occupancy clinical intake audits and line-item expenditure reconciliations on remaining facility allocations. — \"Operational status is merely a baseline—District 7 will audit eve",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d7_c111.json",
+      "popids": [
+        "POP-00504"
+      ]
+    },
+    {
+      "label": "Warren Ashford (council d7): Condition consideration of downtown revitalization funds on performance-indexed audit standards and line-item transparency at the Cycle 112 committee hearing. — \"A multi-million-dollar downto",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d7_c111.json",
+      "popids": [
+        "POP-00504"
+      ]
+    },
+    {
+      "label": "Nina Chen (council d8): Support legislative filing for Commercial Stabilization for Grand Lake with mandatory milestone reporting and disbursement audit criteria — \"A two-and-a-half million dollar stabilization fund must",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d8_c111.json",
+      "popids": [
+        "POP-00505"
+      ]
+    },
+    {
+      "label": "Nina Chen (council d8): Establish municipal service audits and commercial storefront baseline tracking for Grand Lake — \"Addressing quiet storefronts and shifting neighborhood momentum requires structured data, scheduled",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d8_c111.json",
+      "popids": [
+        "POP-00505"
+      ]
+    },
+    {
+      "label": "Nina Chen (council d8): Direct public works maintenance parity for Adams Point while crediting consistent municipal schedules for Lake Merritt stability — \"Lake Merritt's steady street trade proves that scheduled municip",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d8_c111.json",
+      "popids": [
+        "POP-00505"
+      ]
+    },
+    {
+      "label": "Elliott Crane (council d6): Prioritize baseline municipal infrastructure and core city services to support thriving commercial corridors in Piedmont Avenue and Montclair. — \"When our neighborhood corridors are thriving a",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d6_c111.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Elliott Crane (council d6): Support month-ten disbursement while maintaining mandatory financial accounting to the Finance Committee. — \"Direct relief prevents displacement, but transparent accounting must accompany ever",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d6_c111.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Elliott Crane (council d6): Participate in the Cycle 112 Economic Development Committee hearing with focus on permit streamlining and fiscal guardrails. — \"Revitalizing downtown requires real regulatory relief and measur",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d6_c111.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Elliott Crane (council d6): Support the Cycle 112 cohort placement report requirement to verify workforce training outcomes. — \"Accountability in workforce development means auditing actual placements, not just celebrati",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d6_c111.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Elliott Crane (council d6): Demand comprehensive fiscal analysis and committee hearings on newly filed stabilization and legal defense measures. — \"New multi-million dollar appropriations must go through rigorous committ",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d6_c111.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Leonard Tran (council d2): Confirm the Phase II site remediation proceeds on schedule — \"We must ensure the Baylight District project benefits the entire community, particularly Jack London and Downtown Oakland, with con",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d2_c111.json",
+      "popids": [
+        "POP-00502"
+      ]
+    },
+    {
+      "label": "Leonard Tran (council d2): Support the Downtown Economic Revitalization legislation — \"Downtown's struggles are real, and I stand with its people - we need targeted support to address the crime and economic imbalance, no",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d2_c111.json",
+      "popids": [
+        "POP-00502"
+      ]
+    },
+    {
+      "label": "Leonard Tran (council d2): Address the concerns of Baylight District and Jack London — \"I will continue to fight for the people of my district, ensuring their voices are heard and their concerns are addressed.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d2_c111.json",
+      "popids": [
+        "POP-00502"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): I will support the Downtown Economic Revitalization initiative — \"Targeted investment and fiscal discipline are crucial for our city's growth, and I believe the Downtown Economic Revitalization i",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c111.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): I acknowledge the progress in Glenview — \"The progress in Glenview is a testament to the city's structured support and the people's resilience.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c111.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): I will support the Ivy Hill infrastructure crisis response — \"When a neighborhood needs help, we must show up with solutions, not just speeches.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c111.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Janae Rivers (council d5): Demand prioritized placements for East Oakland youth in the first cohort — \"East Oakland's youth deserve more than promises—they deserve pathways to prosperity.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d5_c111.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "Janae Rivers (council d5): Community-driven solutions to address decay — \"Baylight's decay isn't just a problem—it's a call to action for community-driven solutions.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d5_c111.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "Brenda Okoro (okoro): Approved month-ten disbursement of $400,000, maintaining 23-day average processing time. — \"Stabilization is a race against displacement — month-ten disbursement keeps us ahead.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/okoro_c111.json",
+      "popids": [
+        "POP-00037"
+      ]
+    },
+    {
+      "label": "Brenda Okoro (okoro): Credited Fruitvale's momentum to community organizing; affirmed Dimond's stability through operational focus. — \"Fruitvale’s busy streets are built on block-by-block engagement — City Hall didn’t de",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/okoro_c111.json",
+      "popids": [
+        "POP-00037"
+      ]
+    },
+    {
+      "label": "Rose Delgado (council d3): Accelerate schematics delivery by Cycle 114 — \"Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d3_c111.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Rose Delgado (council d3): Demand cohort placement report by Cycle 112 — \"This cohort is our promise in action—we're investing in D3's future, one apprentice at a time.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d3_c111.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Rose Delgado (council d3): Push for safety patrols and economic recovery measures — \"San Antonio isn’t just another neighborhood—it’s the heart of D3’s resilience.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d3_c111.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Month-ten disbursement approved — \"When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c111.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Accelerate cohort placements to meet spring target — \"150 apprentices placed by spring—that's the target, and we're accelerating to hit it.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c111.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Legislation filed — \"Displacement doesn't wait for process—$4.2 million for legal defense is filed and moving.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c111.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Brooklyn’s vitality comes from its community — \"Brooklyn’s vitality comes from its people—not City Hall’s policies.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c111.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Terrence Mobley (council d9): Monitor and sustain existing stability measures — \"Laurel’s stability is no accident—it’s the result of staying focused on what works.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d9_c111.json",
+      "popids": [
+        "POP-00506"
+      ]
+    },
+    {
+      "label": "Terrence Mobley (council d9): Push for targeted interventions to boost commerce — \"Uptown’s vibrant streets are quieting—we can’t let our momentum fade.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d9_c111.json",
+      "popids": [
+        "POP-00506"
+      ]
+    },
+    {
+      "label": "Marcus Webb (stabilization fund): Approved month-ten disbursement of $400,000 for 10 additional households. — \"Ninety-one households stabilized means ninety-one West Oakland families who won’t face displacement this mont",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/stabilization_fund_c111.json",
+      "popids": [
+        "POP-00790"
+      ]
+    },
+    {
+      "label": "Bobby Chen-Ramirez (health center): Implement pre-opening clinical intake workflow audits and expenditure reconciliations. — \"The 51st Street bench crowd knows the pharmacy hours by heart—now they'll know where every dol",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/health_center_c111.json",
+      "popids": [
+        "POP-00792"
+      ]
+    },
+    {
+      "label": "Elena Soria Dominguez (transit hub): Advance to design-phase with Cycle 114 schematics deadline — \"Four cycles of community visioning have shaped these blueprints — now we move to final design with Doña Esperanza's tamal",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/transit_hub_c111.json",
+      "popids": [
+        "POP-00791"
+      ]
+    },
+    {
+      "label": "Elena Soria Dominguez (transit hub): Maintain focus on street vitality and crime prevention — \"The tamales still steam, the abuelas still cross — our work protects this baseline.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/transit_hub_c111.json",
+      "popids": [
+        "POP-00791"
+      ]
+    },
+    {
+      "label": "Keisha Ramos (baylight authority): Proceed with Phase II site remediation as scheduled, with construction milestone review set for Cycle 115. — \"Baylight builds on clean ground — Phase II remediation proceeds, setting th",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/baylight_authority_c111.json",
+      "popids": [
+        "POP-00041"
+      ]
+    }
+  ],
+  "builtAt": "2026-10-11T22:21:56.300Z"
+}

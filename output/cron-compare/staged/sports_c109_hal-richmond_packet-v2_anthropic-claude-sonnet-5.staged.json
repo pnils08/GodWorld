@@ -1,0 +1,35 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "109",
+  "persona": "hal-richmond",
+  "byline": "Hal Richmond",
+  "bylinePopid": "POP-00007",
+  "article": "output/cron-compare/staged/sports_c109_hal-richmond_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "A's — game-result — supplied C109 line card",
+        "sourceRef": "world_summary_c109.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-23e59baeaff6",
+    "draftSha256": "17ae40d0b29854282c066cb9485d54ae046960defbcc8562c287796a00b72bab",
+    "verdict": "output/cron-compare/sports_c109_hal-richmond_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-10-02T06:42:51.471Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:06.360Z"
+}

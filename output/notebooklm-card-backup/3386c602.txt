@@ -1,0 +1,203 @@
+PLAYER INTAKE (Pitcher) — 2041 SEASON
+
+Name: Travis Coles
+
+ 
+
+Team: Oakland Athletics
+
+ 
+
+Position: SP
+
+ 
+
+Age: 21
+
+ 
+
+Bats: R
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'4"
+
+ 
+
+Weight: 216 lbs
+
+ 
+
+Born: South Carolina
+
+ 
+
+Drafted: Round 1 (2037)
+
+ 
+
+MLB Service: 3.000
+
+ 
+
+Overall: 99
+
+ 
+
+Potential: A
+
+— 2041 REGULAR SEASON —
+
+Games: 32
+
+ 
+
+Games Started: 32
+
+ 
+
+Wins: 22
+
+ 
+
+Losses: 4
+
+ 
+
+Saves: 0
+
+ 
+
+Blown Saves: 0
+
+ 
+
+Holds: 0
+
+ 
+
+Innings Pitched: 215
+
+ 
+
+Hits Allowed: 166
+
+ 
+
+Runs Allowed: 67
+
+ 
+
+Earned Runs: 65
+
+ 
+
+Home Runs Allowed: 25
+
+ 
+
+Walks: 39
+
+ 
+
+Strikeouts: 254
+
+ 
+
+ERA: 2.72
+
+ 
+
+WHIP: 0.95
+
+ 
+
+Winning Percentage: 0.846
+
+ 
+
+Quality Starts: 26
+
+ 
+
+Complete Games: 4
+
+ 
+
+Shutouts: 3
+
+ 
+
+Hit Batters: 1
+
+ 
+
+Wild Pitches: 3
+
+ 
+
+Total Batters Faced: 835
+
+ 
+
+WAR: 6.2
+
+— RATE METRICS —
+
+K/9: 10.62
+
+ 
+
+BB/9: 1.63
+
+ 
+
+HR/9: 1.04
+
+ 
+
+FIP: 2.71
+
+— CONTRACT STATUS —
+
+2042: Arbitration (ARB)
+
+ 
+
+2043: ARB
+
+ 
+
+2044: ARB
+
+ 
+
+FA: 2045
+
+
+--------------------------------------------------------------------------------
+
+
+Quirks
+
+Elite Strikeout Specialist
+
+Ace Mentality
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS (Career Reference)
+
+All-Star (2040)
+
+Cy Young (2041)
+
+All-Star (2041)
+
+Strikeout Leader (2041)

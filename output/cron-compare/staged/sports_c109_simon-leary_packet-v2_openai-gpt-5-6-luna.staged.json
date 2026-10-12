@@ -1,0 +1,37 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "109",
+  "persona": "simon-leary",
+  "byline": "Simon Leary",
+  "bylinePopid": "POP-00016",
+  "article": "output/cron-compare/staged/sports_c109_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "The A's record is 1-0.",
+        "sourceRef": "world_summary_c109.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-bb3fb9c1281d",
+    "draftSha256": "cb809cfd038bab979a655b221de8b5f03c3e5df07db9ad76283d62b8769d54bc",
+    "verdict": "output/cron-compare/sports_c109_simon-leary_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-01T23:15:46.510Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:06.392Z"
+}

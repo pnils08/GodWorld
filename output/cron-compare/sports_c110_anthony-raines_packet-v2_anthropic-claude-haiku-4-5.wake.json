@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "110",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-4.5",
+  "configuredWriterModel": "anthropic/claude-haiku-4.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "anthony-raines",
+  "byline": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 1,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/sports_c110_anthony-raines_packet-v2_anthropic-claude-haiku-4-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": ": ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00017\",\n  \"name\": \"Anthony Raines\",\n  \"recorded\": true,\n  \"text\": \"filed: Ellis Steadies, Taveras Closes: A's Claim Seventh Ring Under Paulson\"\n}"
+  },
+  "ranAt": "2026-10-05T23:17:40.123Z",
+  "dispositionReconciledAt": "2026-10-10T17:00:04.710Z"
+}

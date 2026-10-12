@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "109",
+  "persona": "maria-keen",
+  "byline": "Maria Keen",
+  "bylinePopid": "POP-00013",
+  "article": "output/cron-compare/staged/culture_c109_maria-keen_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Jackson Sift",
+        "role": "quoted-source",
+        "popid": "POP-00190"
+      },
+      {
+        "name": "Omar Lingio",
+        "role": "mentioned",
+        "popid": "POP-00206"
+      },
+      {
+        "name": "Marc Allie",
+        "role": "quoted-source",
+        "popid": "POP-00241"
+      },
+      {
+        "name": "Yammie Perez",
+        "role": "quoted-source",
+        "popid": "POP-00286"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Temescal"
+    ],
+    "claims": [
+      {
+        "claim": "You know, it's moments like those that remind me why I love Temescal so much. I was just standing there, watching the fog roll in, and it felt like the whole neighborhood was wrapped in this quiet, peaceful blanket. The rest of the city might have been sunny and bustling, but here, it was like time stood still. I felt grateful to be a part of this community, to have my store here and be able to experience days like that.",
+        "sourceRef": "citizenVoice PRESS Omar Lingio"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-67b225179cf4",
+    "draftSha256": "129b9ab8abaa9b8a5b93d6fc47fbc0491477803ee58143dc6d6904659bf1f604",
+    "verdict": "output/cron-compare/culture_c109_maria-keen_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-10-02T23:17:07.891Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:06.253Z"
+}

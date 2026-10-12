@@ -1,0 +1,160 @@
+{
+  "empty": false,
+  "cycle": 108,
+  "kind": "simon-longview",
+  "desk": "sports",
+  "journalist": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "persona": "simon-leary"
+  },
+  "pulse": {
+    "className": "role-change-under-continuity",
+    "score": 84,
+    "label": "The A's record is 3-0."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 2,
+        "name": "Keystone Player"
+      },
+      {
+        "id": 4,
+        "name": "Load-Bearing Continuity"
+      }
+    ],
+    "anchorFacts": [
+      "The A's record is 3-0.",
+      "The A's have won 5 straight."
+    ],
+    "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+    "missing": [
+      "why the role change was made",
+      "historical comparison or franchise precedent",
+      "organizational intention or future plan",
+      "citywide, clubhouse, or fan interpretation"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "civicFacts": [
+    "FranchiseStability (feed): stable — sports feed",
+    "EconomicFootprint (feed): growing — sports feed",
+    "EventTrigger (feed): playoffs — sports feed",
+    "HomeNeighborhood (feed): Jack London — sports feed",
+    "FranchiseStability (feed): stable — sports feed",
+    "EconomicFootprint (feed): growing — sports feed"
+  ],
+  "story": {
+    "angle": "The A's record is 3-0.",
+    "label": "The A's record is 3-0.",
+    "hookLine": "The A's record is 3-0.",
+    "kind": "long-view-signal",
+    "hood": "Jack London",
+    "popids": [
+      "POP-00598",
+      "POP-00021",
+      "POP-00019",
+      "POP-00001"
+    ],
+    "citizens": [
+      "Vladimir Gonzalez (POP-00598)",
+      "Darrin Davis (POP-00021)",
+      "Isley Kelley (POP-00019)",
+      "Vinnie Keane (POP-00001)"
+    ],
+    "ref": "world_summary_c108.md ## Sports",
+    "cycle": 108
+  },
+  "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+  "players": [
+    {
+      "name": "Vladimir Gonzalez",
+      "popid": "POP-00598",
+      "role": "Right Fielder, Oakland A's",
+      "neighborhood": "Fruitvale",
+      "why": "feed-names"
+    },
+    {
+      "name": "Darrin Davis",
+      "popid": "POP-00021",
+      "role": "Left Fielder, Oakland A's Legend",
+      "neighborhood": "Laurel",
+      "why": "feed-names"
+    },
+    {
+      "name": "Isley Kelley",
+      "popid": "POP-00019",
+      "role": "Shortstop, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    },
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+  },
+  "candidates": [
+    {
+      "score": 84,
+      "cycle": 108,
+      "team": "A's",
+      "label": "Through 3 games the A's lead the Twins 3-0. Game 1 As (6) Twins (2), Game 2 As (3) Twins (2), Game 3 As (9) Twins (6)."
+    },
+    {
+      "score": 84,
+      "cycle": 108,
+      "team": "A's",
+      "label": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero"
+    },
+    {
+      "score": 56,
+      "cycle": 108,
+      "team": "A's",
+      "label": "Eric Taveras win Post Season MVP"
+    },
+    {
+      "score": 54,
+      "cycle": 107,
+      "team": "A's",
+      "label": "A's take game 3 vs Yankees, A's 8 vs Yankees 4"
+    },
+    {
+      "score": 54,
+      "cycle": 107,
+      "team": "A's",
+      "label": "A's close out the ALDS in NY , As 4 vs Yankees 0"
+    },
+    {
+      "score": 54,
+      "cycle": 106,
+      "team": "A's",
+      "label": "Refelecting on the players traded this past season"
+    },
+    {
+      "score": 44,
+      "cycle": 108,
+      "team": "Oaks",
+      "label": "The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks."
+    },
+    {
+      "score": 38,
+      "cycle": 108,
+      "team": "A's",
+      "label": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0)."
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c108.md ## Sports",
+    "scripts/sportsSubstrate.js",
+    "docs/media/SIMON_LONGVIEW_BAG.md"
+  ]
+}

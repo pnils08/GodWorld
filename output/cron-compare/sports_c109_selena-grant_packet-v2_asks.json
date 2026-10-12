@@ -1,0 +1,565 @@
+[
+  {
+    "pop": "POP-01022",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01022\",\"name\":\"Wilson Shepard\",\"role\":\"Head Coach, Oakland Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Selena Grant\",\"question\":\"What have you seen, felt, or understood about \\\"The Oaks' cold streak and its impact on the team's morale\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-beat\",\"hood\":\"Baylight District\",\"focus\":\"The Oaks' cold streak and its impact on the team's morale\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\"},\"exposure\":{\"basis\":[\"named on the Oaks feed C109 (Oakland_Sports_Feed)\"],\"self\":\"Wilson Shepard — Head Coach, Oakland Oaks — Downtown\",\"evidence\":[{\"id\":\"EV-46458e5913\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\",\"text\":\"The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result C109 · 0-2 · L6\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\",\"id\":\"F-9324fd583a99\"},{\"t\":\"FACT\",\"text\":\"The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\",\"id\":\"F-e2866b587767\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-a689d2920790\"},{\"t\":\"FACT\",\"text\":\"Record 0-2 · streak L6\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-430c53f6b0de\"},{\"t\":\"FACT\",\"text\":\"Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-a8638867df48\"},{\"t\":\"FACT\",\"text\":\"Trigger: cold-streak\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-b10e622132e7\"},{\"t\":\"FACT\",\"text\":\"Franchise stability: uncertain\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-f3470b03883d\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — Head Coach, Oakland Oaks — Downtown\",\"src\":\"Simulation_Ledger profile for POP-01022\",\"id\":\"F-5b5a560909b4\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Selena Grant",
+        "question": "What have you seen, felt, or understood about \"The Oaks' cold streak and its impact on the team's morale\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-beat",
+        "hood": "Baylight District",
+        "focus": "The Oaks' cold streak and its impact on the team's morale",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+      },
+      "exposure": {
+        "basis": [
+          "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+        ],
+        "self": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "evidence": [
+          {
+            "id": "EV-46458e5913",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "text": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result C109 · 0-2 · L6",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+          "id": "F-9324fd583a99"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+          "id": "F-e2866b587767"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-a689d2920790"
+        },
+        {
+          "t": "FACT",
+          "text": "Record 0-2 · streak L6",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-430c53f6b0de"
+        },
+        {
+          "t": "FACT",
+          "text": "Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-a8638867df48"
+        },
+        {
+          "t": "FACT",
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-b10e622132e7"
+        },
+        {
+          "t": "FACT",
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-f3470b03883d"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "src": "Simulation_Ledger profile for POP-01022",
+          "id": "F-5b5a560909b4"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01027",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01027\",\"name\":\"Austin Reaves\",\"role\":\"SG / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Selena Grant\",\"question\":\"What have you seen, felt, or understood about \\\"The Oaks' cold streak and its impact on the team's morale\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-beat\",\"hood\":\"Baylight District\",\"focus\":\"The Oaks' cold streak and its impact on the team's morale\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\"},\"exposure\":{\"basis\":[\"named on the Oaks feed C109 (Oakland_Sports_Feed)\"],\"self\":\"Austin Reaves — SG / The Oaks — Downtown\",\"evidence\":[{\"id\":\"EV-978b359c87\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\",\"text\":\"The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result C109 · 0-2 · L6\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\",\"id\":\"F-9324fd583a99\"},{\"t\":\"FACT\",\"text\":\"The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\",\"id\":\"F-e2866b587767\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-a689d2920790\"},{\"t\":\"FACT\",\"text\":\"Record 0-2 · streak L6\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-430c53f6b0de\"},{\"t\":\"FACT\",\"text\":\"Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-a8638867df48\"},{\"t\":\"FACT\",\"text\":\"Trigger: cold-streak\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-b10e622132e7\"},{\"t\":\"FACT\",\"text\":\"Franchise stability: uncertain\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-f3470b03883d\"},{\"t\":\"FACT\",\"text\":\"Austin Reaves — SG / The Oaks — Downtown\",\"src\":\"Simulation_Ledger profile for POP-01027\",\"id\":\"F-afa8c27895bb\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Selena Grant",
+        "question": "What have you seen, felt, or understood about \"The Oaks' cold streak and its impact on the team's morale\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-beat",
+        "hood": "Baylight District",
+        "focus": "The Oaks' cold streak and its impact on the team's morale",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+      },
+      "exposure": {
+        "basis": [
+          "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+        ],
+        "self": "Austin Reaves — SG / The Oaks — Downtown",
+        "evidence": [
+          {
+            "id": "EV-978b359c87",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "text": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result C109 · 0-2 · L6",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+          "id": "F-9324fd583a99"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+          "id": "F-e2866b587767"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-a689d2920790"
+        },
+        {
+          "t": "FACT",
+          "text": "Record 0-2 · streak L6",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-430c53f6b0de"
+        },
+        {
+          "t": "FACT",
+          "text": "Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-a8638867df48"
+        },
+        {
+          "t": "FACT",
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-b10e622132e7"
+        },
+        {
+          "t": "FACT",
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-f3470b03883d"
+        },
+        {
+          "t": "FACT",
+          "text": "Austin Reaves — SG / The Oaks — Downtown",
+          "src": "Simulation_Ledger profile for POP-01027",
+          "id": "F-afa8c27895bb"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01079",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01079\",\"name\":\"Dillon Brooks\",\"role\":\"SF / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Selena Grant\",\"question\":\"What have you seen, felt, or understood about \\\"The Oaks' cold streak and its impact on the team's morale\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-beat\",\"hood\":\"Baylight District\",\"focus\":\"The Oaks' cold streak and its impact on the team's morale\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\"},\"exposure\":{\"basis\":[\"named on the Oaks feed C109 (Oakland_Sports_Feed)\"],\"self\":\"Dillon Brooks — SF / The Oaks — Uptown\",\"evidence\":[{\"id\":\"EV-5d753c5ddb\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\",\"text\":\"The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result C109 · 0-2 · L6\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\",\"id\":\"F-9324fd583a99\"},{\"t\":\"FACT\",\"text\":\"The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\",\"id\":\"F-e2866b587767\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-a689d2920790\"},{\"t\":\"FACT\",\"text\":\"Record 0-2 · streak L6\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-430c53f6b0de\"},{\"t\":\"FACT\",\"text\":\"Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-a8638867df48\"},{\"t\":\"FACT\",\"text\":\"Trigger: cold-streak\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-b10e622132e7\"},{\"t\":\"FACT\",\"text\":\"Franchise stability: uncertain\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-f3470b03883d\"},{\"t\":\"FACT\",\"text\":\"Dillon Brooks — SF / The Oaks — Uptown\",\"src\":\"Simulation_Ledger profile for POP-01079\",\"id\":\"F-37c15567b8c3\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01079",
+        "name": "Dillon Brooks",
+        "role": "SF / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Selena Grant",
+        "question": "What have you seen, felt, or understood about \"The Oaks' cold streak and its impact on the team's morale\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-beat",
+        "hood": "Baylight District",
+        "focus": "The Oaks' cold streak and its impact on the team's morale",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+      },
+      "exposure": {
+        "basis": [
+          "named on the Oaks feed C109 (Oakland_Sports_Feed)"
+        ],
+        "self": "Dillon Brooks — SF / The Oaks — Uptown",
+        "evidence": [
+          {
+            "id": "EV-5d753c5ddb",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+            "text": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result C109 · 0-2 · L6",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+          "id": "F-9324fd583a99"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+          "id": "F-e2866b587767"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-a689d2920790"
+        },
+        {
+          "t": "FACT",
+          "text": "Record 0-2 · streak L6",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-430c53f6b0de"
+        },
+        {
+          "t": "FACT",
+          "text": "Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-a8638867df48"
+        },
+        {
+          "t": "FACT",
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-b10e622132e7"
+        },
+        {
+          "t": "FACT",
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-f3470b03883d"
+        },
+        {
+          "t": "FACT",
+          "text": "Dillon Brooks — SF / The Oaks — Uptown",
+          "src": "Simulation_Ledger profile for POP-01079",
+          "id": "F-37c15567b8c3"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00050",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00050\",\"name\":\"Ernesto Quintero\",\"role\":\"3B/1B , Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Selena Grant\",\"question\":\"As a resident of Baylight District, what have you seen, felt, or understood about \\\"The Oaks' cold streak and its impact on the team's morale\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-beat\",\"hood\":\"Baylight District\",\"focus\":\"The Oaks' cold streak and its impact on the team's morale\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Ernesto Quintero — 3B/1B , Oakland A's — Baylight District\",\"evidence\":[],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result C109 · 0-2 · L6\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\",\"id\":\"F-9324fd583a99\"},{\"t\":\"FACT\",\"text\":\"The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C109\",\"id\":\"F-e2866b587767\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-a689d2920790\"},{\"t\":\"FACT\",\"text\":\"Record 0-2 · streak L6\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-430c53f6b0de\"},{\"t\":\"FACT\",\"text\":\"Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-a8638867df48\"},{\"t\":\"FACT\",\"text\":\"Trigger: cold-streak\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-b10e622132e7\"},{\"t\":\"FACT\",\"text\":\"Franchise stability: uncertain\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C109\",\"id\":\"F-f3470b03883d\"},{\"t\":\"FACT\",\"text\":\"Ernesto Quintero — 3B/1B , Oakland A's — Baylight District\",\"src\":\"Simulation_Ledger profile for POP-00050\",\"id\":\"F-d66efbf64730\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Selena Grant",
+        "question": "As a resident of Baylight District, what have you seen, felt, or understood about \"The Oaks' cold streak and its impact on the team's morale\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-beat",
+        "hood": "Baylight District",
+        "focus": "The Oaks' cold streak and its impact on the team's morale",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+        "evidence": [],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result C109 · 0-2 · L6",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+          "id": "F-9324fd583a99"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+          "id": "F-e2866b587767"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-a689d2920790"
+        },
+        {
+          "t": "FACT",
+          "text": "Record 0-2 · streak L6",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-430c53f6b0de"
+        },
+        {
+          "t": "FACT",
+          "text": "Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-a8638867df48"
+        },
+        {
+          "t": "FACT",
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-b10e622132e7"
+        },
+        {
+          "t": "FACT",
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+          "id": "F-f3470b03883d"
+        },
+        {
+          "t": "FACT",
+          "text": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+          "src": "Simulation_Ledger profile for POP-00050",
+          "id": "F-d66efbf64730"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "107",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/staged/civic_c107_trevor-shimizu_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Joel Wren",
+        "role": "mentioned",
+        "popid": "POP-00218"
+      },
+      {
+        "name": "Jerald Jensen",
+        "role": "mentioned",
+        "popid": "POP-00280"
+      },
+      {
+        "name": "Coen Cartier",
+        "role": "mentioned",
+        "popid": "POP-00338"
+      },
+      {
+        "name": "Eleanor Rivera",
+        "role": "mentioned",
+        "popid": "POP-00617"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "city-eleanor-rivera-beat-transit",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "You know, at 12th Street, we see how everything outside the station affects what happens inside. Fog, holidays, even a big game downtown - it all changes the flow. People adjust their routines, and we adjust right along with them. It's not just about numbers going up or down - it's about reading the neighborhood's rhythm and keeping things moving.",
+        "sourceRef": "citizenVoice PRESS Eleanor Rivera"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-bab4a35061a7",
+    "draftSha256": "6e832f871b6685677e95a6735fdd820f2e7d9c6d904a162a131d27473d65b0e3",
+    "verdict": "output/cron-compare/civic_c107_trevor-shimizu_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-14T23:17:56.752Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-19T17:00:02.222Z"
+}

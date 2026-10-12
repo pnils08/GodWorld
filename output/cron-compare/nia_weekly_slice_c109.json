@@ -1,0 +1,70 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 109,
+  "empty": false,
+  "pilots": [
+    {
+      "POPID": "POP-00121",
+      "episodes": 2,
+      "creditsDelta": 143,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": true,
+      "name": "Otis Redd",
+      "hood": "Rockridge"
+    },
+    {
+      "POPID": "POP-00190",
+      "episodes": 2,
+      "creditsDelta": 14,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": true,
+      "name": "Jackson Sift",
+      "hood": "West Oakland"
+    },
+    {
+      "POPID": "POP-00141",
+      "episodes": 1,
+      "creditsDelta": 5,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Priya Narang",
+      "hood": "Uptown"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-10-03T01:34:45.871Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00143",
+      "Holder": "Clarissa Dane",
+      "Episodes": 9,
+      "CreditsTotal": 303,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 3,
+      "LastAiredCycle": 107,
+      "CyclesLed": 6,
+      "CurrentStreak": 6
+    }
+  },
+  "story": {
+    "ref": "undocked-week:weekly-c109",
+    "label": "UNDOCKED week-in-review c109",
+    "kind": "undocked-digest",
+    "angle": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Otis Redd, Jackson Sift, Priya Narang), who is climbing and who is fading. Standings: Clarissa Dane leads the board — rank #1, 6 cycle(s) led, current streak 6. Per-pilot facts: Otis Redd — 2 episode(s), partial credits 143, combat 0, mishaps 0; Jackson Sift — 2 episode(s), partial credits 14, combat 0, mishaps 0; Priya Narang — 1 episode(s), credits 5, combat 0, mishaps 0.",
+    "citizens": [
+      "Otis Redd — UNDOCKED cast pilot",
+      "Jackson Sift — UNDOCKED cast pilot",
+      "Priya Narang — UNDOCKED cast pilot"
+    ],
+    "popids": [
+      "POP-00121",
+      "POP-00190",
+      "POP-00141"
+    ]
+  },
+  "generatedAt": "2026-10-03T13:15:01.956Z"
+}

@@ -1,0 +1,54 @@
+# C109 Voice Directives — Mara Vance (AUTO)
+
+**Cycle:** 109
+**Issued:** C109 (auto-derived, cron-civic-run.js --stage=directive, post-close)
+**Source:** close_c109 + world_summary_c109 + engine review HIGHs + tracker + C108 voice record
+
+---
+## Avery Santana — Mayor
+
+- **Agent:** `.claude/agents/civic-office-mayor/`
+- **Address:** File legislative language for Downtown Economic Revitalization (INIT-008) and formalize executive execution on month-eight disbursements for INIT-001 and the design consultant contract for INIT-003.
+- **Why:** The executive board carries 8 constituent complaints above the visibility threshold with zero filed legislative proposals, while seven initiatives (INIT-001, INIT-002, INIT-003, INIT-005, INIT-006, INIT-007, INIT-008) sit at the C110 stall-clock deadline; INIT-008 missed its C108 filing milestone.
+- **Acceptance:** Formal filing of the INIT-008 revitalization ordinance text with the City Clerk and published executive orders confirming INIT-001 month-eight allocations and the INIT-003 design award.
+- **Silence consequence:** Citywide capital sequencing bottlenecks across seven active initiatives, leaving Downtown commercial corridors without statutory relief and stalling pre-development citywide.
+
+## Rose Delgado — City Council District 3
+
+- **Agent:** `.claude/agents/civic-office-council-d3/`
+- **Address:** Introduce a legislative response addressing San Antonio corridor distress and confirm District 3 apprentice placement allocations under INIT-007.
+- **Why:** District 3 carries 3 constituent complaints on the record with no filed proposal, while San Antonio sentiment has dropped to 0.18 against a 0.587 citywide crime average (San Antonio CrimeIndex at 0.64) with stall clocks at C110 for INIT-002, INIT-003, and INIT-007.
+- **Acceptance:** A filed council resolution or appropriation targeted at San Antonio safety and retail recovery, paired with a published D3 placement ledger for the INIT-007 youth training cohort.
+- **Silence consequence:** San Antonio remains Oakland's most depressed corridor for sentiment without targeted municipal intervention, while D3 youth lose intake priority in the first apprenticeship rollout.
+
+## Denise Carter — City Council District 1
+
+- **Agent:** `.claude/agents/civic-office-council-d1/`
+- **Address:** Transmit the formal District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to clear the citywide expansion decision.
+- **Why:** INIT-002 has operated on a C109 dispatch-live evaluation milestone that was carried over from C108 without an official program transmittal, risking stall threshold triggers alongside INIT-001 and INIT-007.
+- **Acceptance:** Publication and committee transmittal of the D1 OARI evaluation report detailing call diversion volumes, response times, and an actionable expansion finding.
+- **Silence consequence:** Citywide alternative emergency dispatch expansion remains stalled at the pilot stage without baseline D1 operational data.
+
+## Leonard Tran — City Council District 2
+
+- **Agent:** `.claude/agents/civic-office-council-d2/`
+- **Address:** Co-sponsor and docket the INIT-008 Downtown Economic Revitalization legislation and certify the Phase II site remediation schedule for the Baylight District (INIT-006).
+- **Why:** INIT-008 missed its C108 legislative filing target while Downtown retail vitality remains constrained (10.96) and INIT-006 requires C109 Phase II remediation sign-off before site mobilization expires.
+- **Acceptance:** Co-filing of the INIT-008 legislative instrument and formal council confirmation of the INIT-006 remediation timeline.
+- **Silence consequence:** Baylight Phase II ground preparation stalls on environmental permitting, and Downtown commercial recovery enters another cycle without legislative backing.
+
+## Janae Rivers — City Council District 5
+
+- **Agent:** `.claude/agents/civic-office-council-d5/`
+- **Address:** Submit the District 5 co-response deployment review for INIT-002 and execute oversight protocols on Baylight District corridor conditions.
+- **Why:** Baylight District exhibits decay momentum 3 despite a low CrimeIndex of 0.45, while both INIT-002 and INIT-007 face C110 stall clocks on the D5 board following C107 dispatch deployment authorizations.
+- **Acceptance:** A filed D5 public safety oversight memo evaluating East Oakland OARI dispatch coverage and confirming apprentice intake numbers for the district.
+- **Silence consequence:** East Oakland dispatch operations proceed without district council oversight, leaving field response teams uncoordinated with neighborhood services.
+
+## Warren Ashford — City Council District 7
+
+- **Agent:** `.claude/agents/civic-office-council-d7/`
+- **Address:** Submit the certified fire-rated wall and drywall inspection sign-off for the Temescal Community Health Center (INIT-005).
+- **Why:** Following C108 MEP verification, INIT-005 is scheduled for drywall installation and certified wall inspection sign-offs in C109, with the project board facing a C110 stall clock.
+- **Acceptance:** Transmittal of the certified building inspection sign-off and drywall authorization for the Temescal facility to the Planning and Building Department.
+- **Silence consequence:** Interior enclosure work on the Temescal facility stops, causing construction delays that compromise the facility's operational delivery schedule.

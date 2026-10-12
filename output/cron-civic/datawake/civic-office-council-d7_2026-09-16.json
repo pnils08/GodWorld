@@ -1,0 +1,15 @@
+{
+  "office": "council_d7",
+  "agentDir": "civic-office-council-d7",
+  "holder": "Warren Ashford",
+  "popid": "POP-00504",
+  "title": "City Council District 7",
+  "date": "2026-09-16",
+  "cycle": 107,
+  "model": "google/gemini-3.7-flash",
+  "statement": "District 7 does not abandon its corridors, but standing with KONO means enforcing strict fiscal accountability rather than signing off on unvetted subsidies. With KONO sentiment sitting at 0.24 against the city baseline of 0.490 despite retail at 8.17 and growth momentum of 6, the corridor's lag is clear. While violent crime remains at 26, property crime at 37 and 8 recorded incidents in cycle 107 require targeted municipal service delivery for businesses like Telegraph Press and KONO Kitchen, backed by measurable data rather than rhetoric.",
+  "action": "Require a targeted service audit aligning public safety and infrastructure delivery in KONO with cycle 107 crime and retail metrics.",
+  "numberMoved": "KONO sentiment 0.24 vs city 0.490; property crime 37; incidents 8",
+  "ranAt": "2026-09-16T10:45:19.724Z",
+  "fellBackFrom": null
+}

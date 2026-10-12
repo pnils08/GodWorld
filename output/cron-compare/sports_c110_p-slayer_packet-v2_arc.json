@@ -1,0 +1,22 @@
+{
+  "status": "arc-seed",
+  "cycle": "110",
+  "desk": "sports",
+  "persona": "p-slayer",
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "Honestly, I'm a bit disappointed after their last preseason game. I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence. I still want to believe they can turn it around, though."
+    },
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive. Even with the preseason loss to the Miami Heat, I believe their effort to connect with us is genuine and that's what matters to me."
+    }
+  ],
+  "claim": "Honestly, I'm a bit disappointed after their last preseason game. I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence. I still want to believe they can turn it around, though.",
+  "src": "citizenVoice PRESS c110",
+  "ranAt": "2026-10-07T18:16:45.283Z"
+}

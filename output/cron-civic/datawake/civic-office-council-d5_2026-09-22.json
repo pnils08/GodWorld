@@ -1,0 +1,26 @@
+{
+  "office": "council_d5",
+  "agentDir": "civic-office-council-d5",
+  "holder": "Janae Rivers",
+  "popid": "POP-00043",
+  "title": "City Council District 5",
+  "date": "2026-09-22",
+  "cycle": 108,
+  "model": "deepseek/deepseek-chat",
+  "statement": "First training cohort placement review isn't just about hitting targets—it's about lives transformed. We set the bar high: East Oakland youth will not be last in line.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-107-civic-office-council-d5",
+        "text": "Confirming district oversight parameters for INIT-002 deployment and INIT-007 enrollment town hall. East Oakland's need is urgent, and we're moving with the urgency it demands.",
+        "directiveCycle": 107,
+        "confrontationSeat": "civic-office-council-d5"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-09-22T10:45:59.815Z",
+  "fellBackFrom": null
+}

@@ -1,0 +1,34 @@
+{
+  "office": "baylight_authority",
+  "cycle": 109,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "Phase II site remediation begins per council directives with independent oversight. Mobilized contractors will execute soil handling protocols while workforce pipelines activate local hires.",
+  "statements": [
+    {
+      "statementId": "STMT-109-baylight_authority-001",
+      "type": "milestone_update",
+      "topic": "Baylight District Phase II Mobilization",
+      "initiative": "INIT-006",
+      "decision": "Remediation crews deployed to site with independent audit protocols active",
+      "quote": "Thirty-eight thousand tons of certified clean fill arrive Tuesday — Baylight's foundation is literally being laid.",
+      "fullStatement": "Baylight Authority Director Keisha Ramos confirmed Phase II site remediation commenced this morning with three crews deploying per BD-83-REB protocols. Independent oversight auditors from CRC are tracking soil handling metrics in real-time. The workforce pipeline has activated 47 local hires through the Building Trades Council, with 22 more in training.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C109: Phase II remediation commenced with independent oversight",
+        "NextScheduledAction": "First soil test results verification",
+        "NextActionCycle": 110
+      }
+    },
+    {
+      "statementId": "STMT-109-baylight_authority-002",
+      "type": "project_response",
+      "topic": "Community Impact Mitigation",
+      "initiative": null,
+      "decision": "24/7 construction hotline established for Elmhurst residents",
+      "quote": "The construction fence has our number — call about dust, noise, or truck routes and it gets handled.",
+      "fullStatement": "The Baylight Authority has activated a dedicated construction response line (510-555-BAYL) for Coliseum-area residents. Elmhurst community liaison Carmen Ruiz will coordinate same-day resolution for any remediation-related impacts. Truck routes avoid school zones during drop-off/pick-up times per the community advisory agreement.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "office": "police_chief",
+  "agentDir": "civic-office-police-chief",
+  "holder": "Rafael Montez",
+  "popid": "POP-00136",
+  "title": "Police Chief",
+  "date": "2026-09-17",
+  "cycle": 107,
+  "model": "deepseek/deepseek-chat",
+  "statement": "No public safety events requiring an official statement from this office occurred this cycle. OPD operations continue uninterrupted with standard deployments and response protocols.",
+  "action": null,
+  "numberMoved": null,
+  "ranAt": "2026-09-17T10:45:36.434Z",
+  "fellBackFrom": null
+}

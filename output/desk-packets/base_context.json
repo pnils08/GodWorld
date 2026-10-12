@@ -1,16 +1,16 @@
 {
   "source": {
     "sheetId": "1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk",
-    "generatedAt": "2026-09-20T20:55:08.895Z"
+    "generatedAt": "2026-10-11T21:29:48.210Z"
   },
   "baseContext": {
-    "cycle": 108,
+    "cycle": 111,
     "simYear": "3",
+    "cycleRef": "Y3C7",
     "season": "Winter",
-    "month": "January",
     "holiday": {
-      "name": "none",
-      "priority": "none"
+      "name": "Valentine's",
+      "priority": "active"
     },
     "isFirstFriday": false,
     "isCreationDay": false,
@@ -25,32 +25,32 @@
       "employment": "",
       "economyDescription": "",
       "incomeDistribution": {
-        "under50k": 36,
-        "50k_100k": 400,
-        "100k_150k": 277,
-        "150k_200k": 61,
-        "over200k": 101
+        "under50k": 39,
+        "50k_100k": 437,
+        "100k_150k": 308,
+        "150k_200k": 65,
+        "over200k": 102
       },
-      "medianIncome": 100000,
-      "totalCitizensWithIncome": 875,
+      "medianIncome": 99869,
+      "totalCitizensWithIncome": 951,
       "educationDistribution": {
-        "bachelors": 194,
-        "masters": 86,
-        "hs-diploma": 494,
-        "associates": 28,
-        "doctorate": 56,
-        "trade-cert": 39,
-        "Elementary": 12,
+        "bachelors": 204,
+        "masters": 91,
+        "hs-diploma": 548,
+        "associates": 31,
+        "doctorate": 59,
+        "trade-cert": 40,
+        "Elementary": 13,
         "Middle School": 8,
-        "High School": 15,
+        "High School": 16,
         "hs-dropout": 4,
-        "Pre-K": 7,
+        "Pre-K": 9,
         "some-college": 9
       },
       "householdStats": {
-        "total": 515,
-        "rentBurdenCount": 44,
-        "averageIncome": 1591436
+        "total": 603,
+        "rentBurdenCount": 54,
+        "averageIncome": 1450856
       },
       "neighborhoodEconomics": [
         {
@@ -60,8 +60,8 @@
         },
         {
           "neighborhood": "Rockridge",
-          "medianIncome": 161284,
-          "medianRent": 4032
+          "medianIncome": 161607,
+          "medianRent": 4040
         },
         {
           "neighborhood": "Piedmont Ave",
@@ -70,58 +70,58 @@
         },
         {
           "neighborhood": "West Oakland",
-          "medianIncome": 144710,
-          "medianRent": 3618
+          "medianIncome": 145289,
+          "medianRent": 3632
         },
         {
           "neighborhood": "Baylight District",
-          "medianIncome": 139860,
-          "medianRent": 3497
+          "medianIncome": 139440,
+          "medianRent": 3486
         },
         {
           "neighborhood": "Brooklyn",
-          "medianIncome": 129870,
-          "medianRent": 3247
+          "medianIncome": 129740,
+          "medianRent": 3244
         },
         {
           "neighborhood": "Downtown",
-          "medianIncome": 120962,
-          "medianRent": 3024
+          "medianIncome": 121689,
+          "medianRent": 3042
         },
         {
           "neighborhood": "Jack London",
-          "medianIncome": 118709,
-          "medianRent": 2968
+          "medianIncome": 119422,
+          "medianRent": 2986
         },
         {
           "neighborhood": "Grand Lake",
-          "medianIncome": 105631,
-          "medianRent": 2641
+          "medianIncome": 106266,
+          "medianRent": 2657
         },
         {
           "neighborhood": "Fruitvale",
-          "medianIncome": 98392,
-          "medianRent": 2460
+          "medianIncome": 98984,
+          "medianRent": 2475
         },
         {
           "neighborhood": "Uptown",
-          "medianIncome": 96770,
-          "medianRent": 2419
+          "medianIncome": 97352,
+          "medianRent": 2434
         },
         {
           "neighborhood": "Adams Point",
-          "medianIncome": 95190,
-          "medianRent": 2380
+          "medianIncome": 95000,
+          "medianRent": 2375
         },
         {
           "neighborhood": "Laurel",
-          "medianIncome": 86000,
-          "medianRent": 2150
+          "medianIncome": 85914,
+          "medianRent": 2148
         },
         {
           "neighborhood": "Chinatown",
-          "medianIncome": 84336,
-          "medianRent": 1968
+          "medianIncome": 84505,
+          "medianRent": 1972
         },
         {
           "neighborhood": "Eastlake",
@@ -135,18 +135,18 @@
         },
         {
           "neighborhood": "Glenview",
-          "medianIncome": 81836,
-          "medianRent": 1637
+          "medianIncome": 81672,
+          "medianRent": 1633
         },
         {
           "neighborhood": "Dimond",
-          "medianIncome": 80000,
-          "medianRent": 1600
+          "medianIncome": 79760,
+          "medianRent": 1595
         },
         {
           "neighborhood": "Ivy Hill",
-          "medianIncome": 78000,
-          "medianRent": 1560
+          "medianIncome": 77844,
+          "medianRent": 1557
         },
         {
           "neighborhood": "East Oakland",
@@ -155,8 +155,8 @@
         },
         {
           "neighborhood": "San Antonio",
-          "medianIncome": 69930,
-          "medianRent": 1632
+          "medianIncome": 69790,
+          "medianRent": 1628
         },
         {
           "neighborhood": "Temescal",
@@ -172,7 +172,7 @@
           "neighborhood": "City-wide",
           "employeeCount": 5201,
           "avgSalary": 74000,
-          "growthRate": "8.66"
+          "growthRate": "7.89"
         },
         {
           "bizId": "BIZ-00025",
@@ -181,16 +181,16 @@
           "neighborhood": "Piedmont Ave",
           "employeeCount": 2601,
           "avgSalary": 102000,
-          "growthRate": "9.17"
+          "growthRate": "9.46"
         },
         {
           "bizId": "BIZ-00015",
           "name": "Oakland Hospital",
           "sector": "Healthcare",
           "neighborhood": "City-wide",
-          "employeeCount": 2401,
+          "employeeCount": 2399,
           "avgSalary": 98000,
-          "growthRate": "8.88"
+          "growthRate": "7.86"
         },
         {
           "bizId": "BIZ-00013",
@@ -199,7 +199,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 2101,
           "avgSalary": 78000,
-          "growthRate": "11"
+          "growthRate": "12"
         },
         {
           "bizId": "BIZ-00019",
@@ -208,7 +208,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 1900,
           "avgSalary": 44312,
-          "growthRate": "10.9"
+          "growthRate": "11.54"
         },
         {
           "bizId": "BIZ-00035",
@@ -217,7 +217,7 @@
           "neighborhood": "City-wide",
           "employeeCount": 1800,
           "avgSalary": 41019,
-          "growthRate": "8.69"
+          "growthRate": "7.82"
         },
         {
           "bizId": "BIZ-00012",
@@ -226,7 +226,7 @@
           "neighborhood": "Jack London",
           "employeeCount": 1501,
           "avgSalary": 95000,
-          "growthRate": "10.69"
+          "growthRate": "9.38"
         },
         {
           "bizId": "BIZ-00032",
@@ -235,16 +235,16 @@
           "neighborhood": "City-wide",
           "employeeCount": 1401,
           "avgSalary": 124345,
-          "growthRate": "9.57"
+          "growthRate": "8.87"
         },
         {
           "bizId": "BIZ-00017",
           "name": "City of Oakland",
           "sector": "Municipal Government",
           "neighborhood": "Downtown",
-          "employeeCount": 1202,
+          "employeeCount": 1201,
           "avgSalary": 88000,
-          "growthRate": "10.93"
+          "growthRate": "10.94"
         },
         {
           "bizId": "BIZ-00014",
@@ -253,7 +253,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 900,
           "avgSalary": 86086,
-          "growthRate": "11"
+          "growthRate": "12.87"
         },
         {
           "bizId": "BIZ-00002",
@@ -262,7 +262,7 @@
           "neighborhood": "Baylight District",
           "employeeCount": 800,
           "avgSalary": 153677,
-          "growthRate": "8.68"
+          "growthRate": "6.25"
         },
         {
           "bizId": "BIZ-00031",
@@ -271,7 +271,7 @@
           "neighborhood": "City-wide",
           "employeeCount": 750,
           "avgSalary": 100439,
-          "growthRate": "10.66"
+          "growthRate": "10.74"
         },
         {
           "bizId": "BIZ-00024",
@@ -289,7 +289,7 @@
           "neighborhood": "Baylight District",
           "employeeCount": 520,
           "avgSalary": 3342924,
-          "growthRate": "9.02"
+          "growthRate": "6.84"
         },
         {
           "bizId": "BIZ-00023",
@@ -298,7 +298,7 @@
           "neighborhood": "City-wide",
           "employeeCount": 452,
           "avgSalary": 79948,
-          "growthRate": "9.69"
+          "growthRate": "9.08"
         },
         {
           "bizId": "BIZ-00020",
@@ -307,7 +307,7 @@
           "neighborhood": "Baylight District",
           "employeeCount": 451,
           "avgSalary": 66868,
-          "growthRate": "5.99"
+          "growthRate": "0.63"
         },
         {
           "bizId": "BIZ-00003",
@@ -316,7 +316,7 @@
           "neighborhood": "Baylight District",
           "employeeCount": 350,
           "avgSalary": 160000,
-          "growthRate": "9.74"
+          "growthRate": "7.29"
         },
         {
           "bizId": "BIZ-00027",
@@ -325,7 +325,7 @@
           "neighborhood": "City-wide",
           "employeeCount": 350,
           "avgSalary": 62000,
-          "growthRate": "9.97"
+          "growthRate": "9.47"
         },
         {
           "bizId": "BIZ-00034",
@@ -334,7 +334,7 @@
           "neighborhood": "City-wide",
           "employeeCount": 320,
           "avgSalary": 72000,
-          "growthRate": "7.95"
+          "growthRate": "7.35"
         },
         {
           "bizId": "BIZ-00021",
@@ -343,7 +343,7 @@
           "neighborhood": "City-wide",
           "employeeCount": 301,
           "avgSalary": 68000,
-          "growthRate": "10.25"
+          "growthRate": "9.27"
         },
         {
           "bizId": "BIZ-00074",
@@ -352,7 +352,7 @@
           "neighborhood": "Baylight District",
           "employeeCount": 250,
           "avgSalary": 15642857,
-          "growthRate": "14.56"
+          "growthRate": "12.29"
         },
         {
           "bizId": "BIZ-00022",
@@ -361,7 +361,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 222,
           "avgSalary": 95000,
-          "growthRate": "10.31"
+          "growthRate": "11.86"
         },
         {
           "bizId": "BIZ-00056",
@@ -370,7 +370,7 @@
           "neighborhood": "West Oakland",
           "employeeCount": 221,
           "avgSalary": 85000,
-          "growthRate": "6.09"
+          "growthRate": "3.77"
         },
         {
           "bizId": "BIZ-00057",
@@ -379,7 +379,7 @@
           "neighborhood": "Jack London",
           "employeeCount": 181,
           "avgSalary": 80000,
-          "growthRate": "9.85"
+          "growthRate": "8.56"
         },
         {
           "bizId": "BIZ-00058",
@@ -388,7 +388,16 @@
           "neighborhood": "West Oakland",
           "employeeCount": 165,
           "avgSalary": 90000,
-          "growthRate": "4.11"
+          "growthRate": "1.97"
+        },
+        {
+          "bizId": "BIZ-00183",
+          "name": "Bayline 6",
+          "sector": "Media & Journalism",
+          "neighborhood": "Jack London",
+          "employeeCount": 141,
+          "avgSalary": 82000,
+          "growthRate": "8.45"
         },
         {
           "bizId": "BIZ-00059",
@@ -397,7 +406,7 @@
           "neighborhood": "Fruitvale",
           "employeeCount": 110,
           "avgSalary": 78000,
-          "growthRate": "7.84"
+          "growthRate": "6.15"
         },
         {
           "bizId": "BIZ-00063",
@@ -406,7 +415,7 @@
           "neighborhood": "Baylight District",
           "employeeCount": 110,
           "avgSalary": 105000,
-          "growthRate": "8.7"
+          "growthRate": "6.52"
         },
         {
           "bizId": "BIZ-00004",
@@ -415,7 +424,7 @@
           "neighborhood": "Baylight District",
           "employeeCount": 100,
           "avgSalary": 115000,
-          "growthRate": "8.7"
+          "growthRate": "6.51"
         },
         {
           "bizId": "BIZ-00100",
@@ -424,7 +433,16 @@
           "neighborhood": "Baylight District",
           "employeeCount": 100,
           "avgSalary": 70000,
-          "growthRate": "1.84"
+          "growthRate": "-0.92"
+        },
+        {
+          "bizId": "BIZ-00028",
+          "name": "West Oakland Community Center",
+          "sector": "Community Services",
+          "neighborhood": "West Oakland",
+          "employeeCount": 96,
+          "avgSalary": 58000,
+          "growthRate": "8.1"
         },
         {
           "bizId": "BIZ-00054",
@@ -433,16 +451,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 96,
           "avgSalary": 112000,
-          "growthRate": "6.62"
-        },
-        {
-          "bizId": "BIZ-00028",
-          "name": "West Oakland Community Center",
-          "sector": "Community Services",
-          "neighborhood": "West Oakland",
-          "employeeCount": 95,
-          "avgSalary": 58000,
-          "growthRate": "7.95"
+          "growthRate": "7.59"
         },
         {
           "bizId": "BIZ-00060",
@@ -451,7 +460,7 @@
           "neighborhood": "West Oakland",
           "employeeCount": 95,
           "avgSalary": 76000,
-          "growthRate": "5.36"
+          "growthRate": "3.24"
         },
         {
           "bizId": "BIZ-00001",
@@ -460,16 +469,16 @@
           "neighborhood": "Baylight District",
           "employeeCount": 86,
           "avgSalary": 185000,
-          "growthRate": "7.79"
+          "growthRate": "4.91"
         },
         {
           "bizId": "BIZ-00089",
           "name": "Atlas Bay Architects",
           "sector": "Architecture",
           "neighborhood": "Downtown",
-          "employeeCount": 85,
+          "employeeCount": 86,
           "avgSalary": 110000,
-          "growthRate": "8.71"
+          "growthRate": "9.86"
         },
         {
           "bizId": "BIZ-00030",
@@ -478,7 +487,7 @@
           "neighborhood": "Uptown",
           "employeeCount": 62,
           "avgSalary": 105000,
-          "growthRate": "9.83"
+          "growthRate": "11.83"
         },
         {
           "bizId": "BIZ-00018",
@@ -487,16 +496,25 @@
           "neighborhood": "Downtown",
           "employeeCount": 61,
           "avgSalary": 73758,
-          "growthRate": "10.94"
+          "growthRate": "12.69"
         },
         {
           "bizId": "BIZ-00053",
           "name": "Ridgeline Studio",
           "sector": "Architecture",
           "neighborhood": "Uptown",
-          "employeeCount": 60,
+          "employeeCount": 61,
           "avgSalary": 108000,
-          "growthRate": "13.47"
+          "growthRate": "13.95"
+        },
+        {
+          "bizId": "BIZ-00095",
+          "name": "Oakland Alternative Response Initiative",
+          "sector": "Public Safety / Crisis Response",
+          "neighborhood": "Downtown",
+          "employeeCount": 47,
+          "avgSalary": 74000,
+          "growthRate": "4.81"
         },
         {
           "bizId": "BIZ-00009",
@@ -505,7 +523,7 @@
           "neighborhood": "West Oakland",
           "employeeCount": 46,
           "avgSalary": 135000,
-          "growthRate": "30.39"
+          "growthRate": "30.7"
         },
         {
           "bizId": "BIZ-00055",
@@ -514,16 +532,16 @@
           "neighborhood": "Lake Merritt",
           "employeeCount": 45,
           "avgSalary": 105000,
-          "growthRate": "10.25"
+          "growthRate": "9.39"
         },
         {
-          "bizId": "BIZ-00095",
-          "name": "Oakland Alternative Response Initiative",
-          "sector": "Public Safety / Crisis Response",
-          "neighborhood": "Downtown",
-          "employeeCount": 45,
-          "avgSalary": 74000,
-          "growthRate": "3"
+          "bizId": "BIZ-00184",
+          "name": "Oakland 12",
+          "sector": "Media & Journalism",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 42,
+          "avgSalary": 58000,
+          "growthRate": "3.46"
         },
         {
           "bizId": "BIZ-00052",
@@ -532,7 +550,7 @@
           "neighborhood": "West Oakland",
           "employeeCount": 41,
           "avgSalary": 230000,
-          "growthRate": "105%"
+          "growthRate": "160%"
         },
         {
           "bizId": "BIZ-00026",
@@ -541,7 +559,16 @@
           "neighborhood": "Fruitvale",
           "employeeCount": 38,
           "avgSalary": 85000,
-          "growthRate": "9.66"
+          "growthRate": "10.25"
+        },
+        {
+          "bizId": "BIZ-00182",
+          "name": "Dillon Clinic",
+          "sector": "Healthcare",
+          "neighborhood": "Rockridge",
+          "employeeCount": 38,
+          "avgSalary": 85000,
+          "growthRate": "2.94"
         },
         {
           "bizId": "BIZ-00090",
@@ -550,7 +577,7 @@
           "neighborhood": "Temescal",
           "employeeCount": 34,
           "avgSalary": 78000,
-          "growthRate": "8.78"
+          "growthRate": "5.86"
         },
         {
           "bizId": "BIZ-00029",
@@ -559,7 +586,7 @@
           "neighborhood": "Coliseum",
           "employeeCount": 31,
           "avgSalary": 105000,
-          "growthRate": "9.4"
+          "growthRate": "8.81"
         },
         {
           "bizId": "BIZ-00051",
@@ -568,7 +595,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 31,
           "avgSalary": 58000,
-          "growthRate": "7"
+          "growthRate": "5.97"
         },
         {
           "bizId": "BIZ-00033",
@@ -577,7 +604,7 @@
           "neighborhood": "Jack London",
           "employeeCount": 30,
           "avgSalary": 65000,
-          "growthRate": "6.94"
+          "growthRate": "5.92"
         },
         {
           "bizId": "BIZ-00036",
@@ -586,7 +613,7 @@
           "neighborhood": "Jack London",
           "employeeCount": 30,
           "avgSalary": 65000,
-          "growthRate": "7"
+          "growthRate": "8.78"
         },
         {
           "bizId": "BIZ-00037",
@@ -595,7 +622,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 30,
           "avgSalary": 66000,
-          "growthRate": "7"
+          "growthRate": "8.53"
         },
         {
           "bizId": "BIZ-00039",
@@ -604,7 +631,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 30,
           "avgSalary": 66000,
-          "growthRate": "7"
+          "growthRate": "8.77"
         },
         {
           "bizId": "BIZ-00040",
@@ -613,7 +640,7 @@
           "neighborhood": "Lake Merritt",
           "employeeCount": 30,
           "avgSalary": 102000,
-          "growthRate": "5.95"
+          "growthRate": "5.32"
         },
         {
           "bizId": "BIZ-00041",
@@ -622,7 +649,7 @@
           "neighborhood": "Jack London",
           "employeeCount": 30,
           "avgSalary": 61000,
-          "growthRate": "6.25"
+          "growthRate": "7.92"
         },
         {
           "bizId": "BIZ-00042",
@@ -631,7 +658,7 @@
           "neighborhood": "Chinatown",
           "employeeCount": 30,
           "avgSalary": 46000,
-          "growthRate": "4.9"
+          "growthRate": "4.3"
         },
         {
           "bizId": "BIZ-00064",
@@ -640,7 +667,7 @@
           "neighborhood": "Uptown",
           "employeeCount": 30,
           "avgSalary": 48000,
-          "growthRate": "5.82"
+          "growthRate": "6.61"
         },
         {
           "bizId": "BIZ-00066",
@@ -649,7 +676,7 @@
           "neighborhood": "Uptown",
           "employeeCount": 30,
           "avgSalary": 53000,
-          "growthRate": "5.91"
+          "growthRate": "6.51"
         },
         {
           "bizId": "BIZ-00068",
@@ -658,25 +685,16 @@
           "neighborhood": "Fruitvale",
           "employeeCount": 30,
           "avgSalary": 51000,
-          "growthRate": "6.98"
-        },
-        {
-          "bizId": "BIZ-00083",
-          "name": "Cathedral of Christ the Light",
-          "sector": "Faith Organization",
-          "neighborhood": "Lake Merritt",
-          "employeeCount": 30,
-          "avgSalary": 62000,
-          "growthRate": "2.22"
+          "growthRate": "7.74"
         },
         {
           "bizId": "BIZ-00078",
-          "name": "Allen Temple Baptist Church",
+          "name": "Foothill Baptist Tabernacle",
           "sector": "Faith Organization",
           "neighborhood": "East Oakland",
           "employeeCount": 26,
           "avgSalary": 58000,
-          "growthRate": "3.06"
+          "growthRate": "2.36"
         },
         {
           "bizId": "BIZ-00006",
@@ -685,7 +703,7 @@
           "neighborhood": "Baylight District",
           "employeeCount": 25,
           "avgSalary": 120000,
-          "growthRate": "7.79"
+          "growthRate": "5.23"
         },
         {
           "bizId": "BIZ-00010",
@@ -694,7 +712,7 @@
           "neighborhood": "Brooklyn Basin",
           "employeeCount": 25,
           "avgSalary": 115000,
-          "growthRate": "12.81"
+          "growthRate": "12.46"
         },
         {
           "bizId": "BIZ-00043",
@@ -703,16 +721,16 @@
           "neighborhood": "Rockridge",
           "employeeCount": 22,
           "avgSalary": 83000,
-          "growthRate": "5.93"
+          "growthRate": "7.41"
         },
         {
           "bizId": "BIZ-00082",
-          "name": "Acts Full Gospel Church",
+          "name": "New Covenant Pentecostal Assembly",
           "sector": "Faith Organization",
           "neighborhood": "West Oakland",
           "employeeCount": 22,
           "avgSalary": 56000,
-          "growthRate": "2.04"
+          "growthRate": "1.57"
         },
         {
           "bizId": "BIZ-00008",
@@ -721,7 +739,7 @@
           "neighborhood": "Temescal",
           "employeeCount": 20,
           "avgSalary": 110000,
-          "growthRate": "27.57"
+          "growthRate": "28.02"
         },
         {
           "bizId": "BIZ-00099",
@@ -730,7 +748,7 @@
           "neighborhood": "West Oakland",
           "employeeCount": 20,
           "avgSalary": 90000,
-          "growthRate": "0.52"
+          "growthRate": "0.73"
         },
         {
           "bizId": "BIZ-00103",
@@ -739,7 +757,7 @@
           "neighborhood": "West Oakland",
           "employeeCount": 20,
           "avgSalary": 76000,
-          "growthRate": "1.34"
+          "growthRate": "-0.09"
         },
         {
           "bizId": "BIZ-00096",
@@ -748,7 +766,16 @@
           "neighborhood": "Fruitvale",
           "employeeCount": 18,
           "avgSalary": 92000,
-          "growthRate": "2.5"
+          "growthRate": "2.97"
+        },
+        {
+          "bizId": "BIZ-00094",
+          "name": "West Oakland Stabilization Fund",
+          "sector": "Community Development",
+          "neighborhood": "West Oakland",
+          "employeeCount": 17,
+          "avgSalary": 78000,
+          "growthRate": "0.56"
         },
         {
           "bizId": "BIZ-00075",
@@ -757,7 +784,7 @@
           "neighborhood": "Dimond",
           "employeeCount": 16,
           "avgSalary": 42000,
-          "growthRate": "4.47"
+          "growthRate": "1.7"
         },
         {
           "bizId": "BIZ-00116",
@@ -766,7 +793,7 @@
           "neighborhood": "Brooklyn",
           "employeeCount": 16,
           "avgSalary": 68000,
-          "growthRate": "7.19"
+          "growthRate": "6.26"
         },
         {
           "bizId": "BIZ-00178",
@@ -775,7 +802,7 @@
           "neighborhood": "Uptown",
           "employeeCount": 16,
           "avgSalary": 53000,
-          "growthRate": "7.07"
+          "growthRate": "8.25"
         },
         {
           "bizId": "BIZ-00104",
@@ -784,7 +811,7 @@
           "neighborhood": "Baylight District",
           "employeeCount": 15,
           "avgSalary": 73000,
-          "growthRate": "3.73"
+          "growthRate": "-1.27"
         },
         {
           "bizId": "BIZ-00169",
@@ -793,7 +820,7 @@
           "neighborhood": "Rockridge",
           "employeeCount": 15,
           "avgSalary": 83000,
-          "growthRate": "4.69"
+          "growthRate": "5.81"
         },
         {
           "bizId": "BIZ-00073",
@@ -802,16 +829,16 @@
           "neighborhood": "West Oakland",
           "employeeCount": 14,
           "avgSalary": 80000,
-          "growthRate": "5.56"
+          "growthRate": "5.36"
         },
         {
-          "bizId": "BIZ-00094",
-          "name": "West Oakland Stabilization Fund",
-          "sector": "Community Development",
-          "neighborhood": "West Oakland",
+          "bizId": "BIZ-00097",
+          "name": "Temescal Community Health Center",
+          "sector": "Healthcare",
+          "neighborhood": "Temescal",
           "employeeCount": 14,
-          "avgSalary": 78000,
-          "growthRate": "0.22"
+          "avgSalary": 88000,
+          "growthRate": "1.27"
         },
         {
           "bizId": "BIZ-00114",
@@ -820,7 +847,7 @@
           "neighborhood": "Brooklyn",
           "employeeCount": 14,
           "avgSalary": 72000,
-          "growthRate": "6.91"
+          "growthRate": "3.8"
         },
         {
           "bizId": "BIZ-00119",
@@ -829,7 +856,7 @@
           "neighborhood": "Chinatown",
           "employeeCount": 14,
           "avgSalary": 44000,
-          "growthRate": "5.8"
+          "growthRate": "4.68"
         },
         {
           "bizId": "BIZ-00148",
@@ -838,7 +865,7 @@
           "neighborhood": "Grand Lake",
           "employeeCount": 14,
           "avgSalary": 55000,
-          "growthRate": "6.71"
+          "growthRate": "7.28"
         },
         {
           "bizId": "BIZ-00165",
@@ -847,7 +874,7 @@
           "neighborhood": "Piedmont Ave",
           "employeeCount": 14,
           "avgSalary": 143000,
-          "growthRate": "3.21"
+          "growthRate": "3.1"
         },
         {
           "bizId": "BIZ-00077",
@@ -856,7 +883,7 @@
           "neighborhood": "Laurel",
           "employeeCount": 13,
           "avgSalary": 45000,
-          "growthRate": "3.51"
+          "growthRate": "-0.07"
         },
         {
           "bizId": "BIZ-00129",
@@ -865,7 +892,7 @@
           "neighborhood": "East Oakland",
           "employeeCount": 13,
           "avgSalary": 40000,
-          "growthRate": "8.57"
+          "growthRate": "4.77"
         },
         {
           "bizId": "BIZ-00156",
@@ -874,7 +901,7 @@
           "neighborhood": "KONO",
           "employeeCount": 13,
           "avgSalary": 43000,
-          "growthRate": "6.64"
+          "growthRate": "6.61"
         },
         {
           "bizId": "BIZ-00007",
@@ -883,25 +910,16 @@
           "neighborhood": "Lake Merritt",
           "employeeCount": 12,
           "avgSalary": 210000,
-          "growthRate": "17.4"
+          "growthRate": "16.44"
         },
         {
           "bizId": "BIZ-00085",
-          "name": "Temple Sinai",
+          "name": "Temple Beth Or",
           "sector": "Faith Organization",
           "neighborhood": "Rockridge",
           "employeeCount": 12,
           "avgSalary": 61000,
-          "growthRate": "2.89"
-        },
-        {
-          "bizId": "BIZ-00097",
-          "name": "Temescal Community Health Center",
-          "sector": "Healthcare",
-          "neighborhood": "Temescal",
-          "employeeCount": 12,
-          "avgSalary": 88000,
-          "growthRate": "1.7"
+          "growthRate": "3.28"
         },
         {
           "bizId": "BIZ-00115",
@@ -910,7 +928,7 @@
           "neighborhood": "Brooklyn",
           "employeeCount": 12,
           "avgSalary": 72000,
-          "growthRate": "7.67"
+          "growthRate": "6.96"
         },
         {
           "bizId": "BIZ-00120",
@@ -919,7 +937,7 @@
           "neighborhood": "Chinatown",
           "employeeCount": 12,
           "avgSalary": 46000,
-          "growthRate": "4.85"
+          "growthRate": "1.12"
         },
         {
           "bizId": "BIZ-00132",
@@ -928,7 +946,7 @@
           "neighborhood": "East Oakland",
           "employeeCount": 12,
           "avgSalary": 37000,
-          "growthRate": "6.98"
+          "growthRate": "5.72"
         },
         {
           "bizId": "BIZ-00134",
@@ -937,7 +955,7 @@
           "neighborhood": "Eastlake",
           "employeeCount": 12,
           "avgSalary": 44000,
-          "growthRate": "3.95"
+          "growthRate": "2.69"
         },
         {
           "bizId": "BIZ-00145",
@@ -946,7 +964,7 @@
           "neighborhood": "Grand Lake",
           "employeeCount": 12,
           "avgSalary": 58000,
-          "growthRate": "5.65"
+          "growthRate": "3.37"
         },
         {
           "bizId": "BIZ-00158",
@@ -955,7 +973,7 @@
           "neighborhood": "KONO",
           "employeeCount": 12,
           "avgSalary": 45000,
-          "growthRate": "6.46"
+          "growthRate": "6.52"
         },
         {
           "bizId": "BIZ-00160",
@@ -964,7 +982,7 @@
           "neighborhood": "Laurel",
           "employeeCount": 12,
           "avgSalary": 47000,
-          "growthRate": "4.48"
+          "growthRate": "0.88"
         },
         {
           "bizId": "BIZ-00172",
@@ -973,7 +991,7 @@
           "neighborhood": "San Antonio",
           "employeeCount": 12,
           "avgSalary": 36000,
-          "growthRate": "2.08"
+          "growthRate": "0.49"
         },
         {
           "bizId": "BIZ-00048",
@@ -982,16 +1000,16 @@
           "neighborhood": "West Oakland",
           "employeeCount": 11,
           "avgSalary": 75000,
-          "growthRate": "5.69"
+          "growthRate": "5.64"
         },
         {
           "bizId": "BIZ-00081",
-          "name": "St. Columba Catholic Church",
+          "name": "St. Esperanza Parish",
           "sector": "Faith Organization",
           "neighborhood": "Fruitvale",
           "employeeCount": 11,
           "avgSalary": 54000,
-          "growthRate": "2.37"
+          "growthRate": "2.43"
         },
         {
           "bizId": "BIZ-00098",
@@ -1000,7 +1018,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 11,
           "avgSalary": 0,
-          "growthRate": "2.89"
+          "growthRate": "4.03"
         },
         {
           "bizId": "BIZ-00109",
@@ -1009,7 +1027,7 @@
           "neighborhood": "Adams Point",
           "employeeCount": 11,
           "avgSalary": 52000,
-          "growthRate": "5.17"
+          "growthRate": "0.29"
         },
         {
           "bizId": "BIZ-00127",
@@ -1018,7 +1036,7 @@
           "neighborhood": "Dimond",
           "employeeCount": 11,
           "avgSalary": 42000,
-          "growthRate": "4.15"
+          "growthRate": "4.34"
         },
         {
           "bizId": "BIZ-00163",
@@ -1027,7 +1045,7 @@
           "neighborhood": "Laurel",
           "employeeCount": 11,
           "avgSalary": 45000,
-          "growthRate": "4.19"
+          "growthRate": "2.36"
         },
         {
           "bizId": "BIZ-00168",
@@ -1036,7 +1054,7 @@
           "neighborhood": "Rockridge",
           "employeeCount": 11,
           "avgSalary": 88000,
-          "growthRate": "5.05"
+          "growthRate": "3.69"
         },
         {
           "bizId": "BIZ-00173",
@@ -1045,7 +1063,7 @@
           "neighborhood": "San Antonio",
           "employeeCount": 11,
           "avgSalary": 39000,
-          "growthRate": "4.38"
+          "growthRate": "0.26"
         },
         {
           "bizId": "BIZ-00062",
@@ -1054,7 +1072,7 @@
           "neighborhood": "Telegraph corridor",
           "employeeCount": 10,
           "avgSalary": 35000,
-          "growthRate": "2.78"
+          "growthRate": "2.26"
         },
         {
           "bizId": "BIZ-00101",
@@ -1063,7 +1081,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 10,
           "avgSalary": 66000,
-          "growthRate": "3.68"
+          "growthRate": "4.88"
         },
         {
           "bizId": "BIZ-00133",
@@ -1072,7 +1090,7 @@
           "neighborhood": "Eastlake",
           "employeeCount": 10,
           "avgSalary": 46000,
-          "growthRate": "3.73"
+          "growthRate": "-0.44"
         },
         {
           "bizId": "BIZ-00144",
@@ -1081,7 +1099,7 @@
           "neighborhood": "Glenview",
           "employeeCount": 10,
           "avgSalary": 43000,
-          "growthRate": "2.71"
+          "growthRate": "0.75"
         },
         {
           "bizId": "BIZ-00076",
@@ -1090,16 +1108,16 @@
           "neighborhood": "Grand Lake",
           "employeeCount": 9,
           "avgSalary": 55000,
-          "growthRate": "7.89"
+          "growthRate": "5.81"
         },
         {
           "bizId": "BIZ-00084",
-          "name": "First Unitarian Church Oakland",
+          "name": "Lakeshore Unitarian Universalist Fellowship",
           "sector": "Faith Organization",
           "neighborhood": "Lake Merritt",
           "employeeCount": 9,
           "avgSalary": 57000,
-          "growthRate": "3.07"
+          "growthRate": "2.12"
         },
         {
           "bizId": "BIZ-00113",
@@ -1108,7 +1126,7 @@
           "neighborhood": "Brooklyn",
           "employeeCount": 9,
           "avgSalary": 65000,
-          "growthRate": "8.1"
+          "growthRate": "6.97"
         },
         {
           "bizId": "BIZ-00123",
@@ -1117,7 +1135,7 @@
           "neighborhood": "Chinatown",
           "employeeCount": 9,
           "avgSalary": 44000,
-          "growthRate": "6"
+          "growthRate": "2.52"
         },
         {
           "bizId": "BIZ-00131",
@@ -1126,7 +1144,7 @@
           "neighborhood": "East Oakland",
           "employeeCount": 9,
           "avgSalary": 40000,
-          "growthRate": "5.81"
+          "growthRate": "4.79"
         },
         {
           "bizId": "BIZ-00136",
@@ -1135,7 +1153,7 @@
           "neighborhood": "Eastlake",
           "employeeCount": 9,
           "avgSalary": 44000,
-          "growthRate": "4.52"
+          "growthRate": "3.34"
         },
         {
           "bizId": "BIZ-00139",
@@ -1144,7 +1162,7 @@
           "neighborhood": "Glenview",
           "employeeCount": 9,
           "avgSalary": 45000,
-          "growthRate": "2.44"
+          "growthRate": "-1.87"
         },
         {
           "bizId": "BIZ-00088",
@@ -1153,7 +1171,7 @@
           "neighborhood": "Lake Merritt",
           "employeeCount": 8,
           "avgSalary": 52000,
-          "growthRate": "3.35"
+          "growthRate": "2.72"
         },
         {
           "bizId": "BIZ-00091",
@@ -1162,7 +1180,7 @@
           "neighborhood": "KONO",
           "employeeCount": 8,
           "avgSalary": 45000,
-          "growthRate": "3.86"
+          "growthRate": "1.26"
         },
         {
           "bizId": "BIZ-00108",
@@ -1171,7 +1189,7 @@
           "neighborhood": "Adams Point",
           "employeeCount": 8,
           "avgSalary": 48000,
-          "growthRate": "6.39"
+          "growthRate": "3.26"
         },
         {
           "bizId": "BIZ-00117",
@@ -1180,7 +1198,7 @@
           "neighborhood": "Brooklyn",
           "employeeCount": 8,
           "avgSalary": 72000,
-          "growthRate": "6.11"
+          "growthRate": "2.98"
         },
         {
           "bizId": "BIZ-00125",
@@ -1189,7 +1207,7 @@
           "neighborhood": "Dimond",
           "employeeCount": 8,
           "avgSalary": 44000,
-          "growthRate": "3.28"
+          "growthRate": "0.97"
         },
         {
           "bizId": "BIZ-00130",
@@ -1198,7 +1216,7 @@
           "neighborhood": "East Oakland",
           "employeeCount": 8,
           "avgSalary": 36000,
-          "growthRate": "5.46"
+          "growthRate": "4.08"
         },
         {
           "bizId": "BIZ-00146",
@@ -1207,7 +1225,7 @@
           "neighborhood": "Grand Lake",
           "employeeCount": 8,
           "avgSalary": 53000,
-          "growthRate": "3.8"
+          "growthRate": "3.19"
         },
         {
           "bizId": "BIZ-00161",
@@ -1216,7 +1234,7 @@
           "neighborhood": "Laurel",
           "employeeCount": 8,
           "avgSalary": 43000,
-          "growthRate": "4.39"
+          "growthRate": "3.13"
         },
         {
           "bizId": "BIZ-00167",
@@ -1225,7 +1243,7 @@
           "neighborhood": "Piedmont Ave",
           "employeeCount": 8,
           "avgSalary": 83000,
-          "growthRate": "3.78"
+          "growthRate": "2.2"
         },
         {
           "bizId": "BIZ-00170",
@@ -1234,7 +1252,7 @@
           "neighborhood": "Rockridge",
           "employeeCount": 8,
           "avgSalary": 152000,
-          "growthRate": "3.03"
+          "growthRate": "3.59"
         },
         {
           "bizId": "BIZ-00176",
@@ -1243,7 +1261,7 @@
           "neighborhood": "San Antonio",
           "employeeCount": 8,
           "avgSalary": 35000,
-          "growthRate": "5.62"
+          "growthRate": "4.13"
         },
         {
           "bizId": "BIZ-00181",
@@ -1252,7 +1270,7 @@
           "neighborhood": "Piedmont Ave",
           "employeeCount": 8,
           "avgSalary": 44000,
-          "growthRate": "1.65"
+          "growthRate": "2.6"
         },
         {
           "bizId": "BIZ-00038",
@@ -1261,7 +1279,7 @@
           "neighborhood": "Temescal",
           "employeeCount": 7,
           "avgSalary": 37000,
-          "growthRate": "3.46"
+          "growthRate": "3.16"
         },
         {
           "bizId": "BIZ-00044",
@@ -1270,7 +1288,7 @@
           "neighborhood": "Jack London",
           "employeeCount": 7,
           "avgSalary": 61000,
-          "growthRate": "5.78"
+          "growthRate": "7.56"
         },
         {
           "bizId": "BIZ-00072",
@@ -1279,16 +1297,7 @@
           "neighborhood": "West Oakland",
           "employeeCount": 7,
           "avgSalary": 80000,
-          "growthRate": "2.35"
-        },
-        {
-          "bizId": "BIZ-00086",
-          "name": "Beth Jacob Congregation",
-          "sector": "Faith Organization",
-          "neighborhood": "Piedmont Ave",
-          "employeeCount": 7,
-          "avgSalary": 55000,
-          "growthRate": "1.68"
+          "growthRate": "2.36"
         },
         {
           "bizId": "BIZ-00110",
@@ -1297,7 +1306,7 @@
           "neighborhood": "Adams Point",
           "employeeCount": 7,
           "avgSalary": 90000,
-          "growthRate": "1.58"
+          "growthRate": "-0.41"
         },
         {
           "bizId": "BIZ-00122",
@@ -1306,7 +1315,7 @@
           "neighborhood": "Chinatown",
           "employeeCount": 7,
           "avgSalary": 46000,
-          "growthRate": "4.88"
+          "growthRate": "1.39"
         },
         {
           "bizId": "BIZ-00124",
@@ -1315,7 +1324,7 @@
           "neighborhood": "Dimond",
           "employeeCount": 7,
           "avgSalary": 40000,
-          "growthRate": "4.1"
+          "growthRate": "3.66"
         },
         {
           "bizId": "BIZ-00143",
@@ -1324,7 +1333,7 @@
           "neighborhood": "Glenview",
           "employeeCount": 7,
           "avgSalary": 45000,
-          "growthRate": "1.8"
+          "growthRate": "-2.42"
         },
         {
           "bizId": "BIZ-00149",
@@ -1333,7 +1342,7 @@
           "neighborhood": "Grand Lake",
           "employeeCount": 7,
           "avgSalary": 58000,
-          "growthRate": "4.62"
+          "growthRate": "2.5"
         },
         {
           "bizId": "BIZ-00154",
@@ -1342,7 +1351,7 @@
           "neighborhood": "Ivy Hill",
           "employeeCount": 7,
           "avgSalary": 41000,
-          "growthRate": "0.66"
+          "growthRate": "-1.71"
         },
         {
           "bizId": "BIZ-00162",
@@ -1351,7 +1360,7 @@
           "neighborhood": "Laurel",
           "employeeCount": 7,
           "avgSalary": 47000,
-          "growthRate": "1.64"
+          "growthRate": "-1.82"
         },
         {
           "bizId": "BIZ-00171",
@@ -1360,7 +1369,7 @@
           "neighborhood": "Rockridge",
           "employeeCount": 7,
           "avgSalary": 88000,
-          "growthRate": "3.75"
+          "growthRate": "2.36"
         },
         {
           "bizId": "BIZ-00175",
@@ -1369,16 +1378,16 @@
           "neighborhood": "San Antonio",
           "employeeCount": 7,
           "avgSalary": 39000,
-          "growthRate": "3.65"
+          "growthRate": "-0.41"
         },
         {
           "bizId": "BIZ-00080",
-          "name": "Islamic Center of Oakland",
+          "name": "Temescal Islamic Center",
           "sector": "Faith Organization",
           "neighborhood": "Temescal",
           "employeeCount": 6,
           "avgSalary": 51000,
-          "growthRate": "4.31"
+          "growthRate": "3.89"
         },
         {
           "bizId": "BIZ-00092",
@@ -1387,7 +1396,7 @@
           "neighborhood": "Piedmont Ave",
           "employeeCount": 6,
           "avgSalary": 56000,
-          "growthRate": "1.86"
+          "growthRate": "2.22"
         },
         {
           "bizId": "BIZ-00105",
@@ -1396,7 +1405,7 @@
           "neighborhood": "Baylight District",
           "employeeCount": 6,
           "avgSalary": 180000,
-          "growthRate": "0.69"
+          "growthRate": "-1.81"
         },
         {
           "bizId": "BIZ-00112",
@@ -1405,7 +1414,7 @@
           "neighborhood": "Adams Point",
           "employeeCount": 6,
           "avgSalary": 52000,
-          "growthRate": "3.65"
+          "growthRate": "1.01"
         },
         {
           "bizId": "BIZ-00121",
@@ -1414,7 +1423,7 @@
           "neighborhood": "Chinatown",
           "employeeCount": 6,
           "avgSalary": 46000,
-          "growthRate": "5"
+          "growthRate": "4.68"
         },
         {
           "bizId": "BIZ-00126",
@@ -1423,7 +1432,7 @@
           "neighborhood": "Dimond",
           "employeeCount": 6,
           "avgSalary": 44000,
-          "growthRate": "2.84"
+          "growthRate": "0.97"
         },
         {
           "bizId": "BIZ-00137",
@@ -1432,7 +1441,7 @@
           "neighborhood": "Eastlake",
           "employeeCount": 6,
           "avgSalary": 46000,
-          "growthRate": "2.81"
+          "growthRate": "-0.8"
         },
         {
           "bizId": "BIZ-00140",
@@ -1441,7 +1450,7 @@
           "neighborhood": "Glenview",
           "employeeCount": 6,
           "avgSalary": 41000,
-          "growthRate": "2.24"
+          "growthRate": "0.66"
         },
         {
           "bizId": "BIZ-00141",
@@ -1450,7 +1459,7 @@
           "neighborhood": "Glenview",
           "employeeCount": 6,
           "avgSalary": 78000,
-          "growthRate": "1.31"
+          "growthRate": "-0.31"
         },
         {
           "bizId": "BIZ-00147",
@@ -1459,7 +1468,7 @@
           "neighborhood": "Grand Lake",
           "employeeCount": 6,
           "avgSalary": 58000,
-          "growthRate": "4.95"
+          "growthRate": "2.38"
         },
         {
           "bizId": "BIZ-00150",
@@ -1468,7 +1477,7 @@
           "neighborhood": "Ivy Hill",
           "employeeCount": 6,
           "avgSalary": 43000,
-          "growthRate": "-0.18"
+          "growthRate": "-6.18"
         },
         {
           "bizId": "BIZ-00157",
@@ -1477,7 +1486,7 @@
           "neighborhood": "KONO",
           "employeeCount": 6,
           "avgSalary": 45000,
-          "growthRate": "5.42"
+          "growthRate": "4.89"
         },
         {
           "bizId": "BIZ-00166",
@@ -1486,7 +1495,7 @@
           "neighborhood": "Piedmont Ave",
           "employeeCount": 6,
           "avgSalary": 83000,
-          "growthRate": "3.97"
+          "growthRate": "2.56"
         },
         {
           "bizId": "BIZ-00179",
@@ -1495,7 +1504,7 @@
           "neighborhood": "Uptown",
           "employeeCount": 6,
           "avgSalary": 53000,
-          "growthRate": "5.86"
+          "growthRate": "4.17"
         },
         {
           "bizId": "BIZ-00011",
@@ -1504,16 +1513,16 @@
           "neighborhood": "Old Oakland",
           "employeeCount": 5,
           "avgSalary": 85000,
-          "growthRate": "40"
+          "growthRate": "37.79"
         },
         {
           "bizId": "BIZ-00079",
-          "name": "Masjid Al-Islam",
+          "name": "Masjid An-Nur Oakland",
           "sector": "Faith Organization",
           "neighborhood": "East Oakland",
           "employeeCount": 5,
           "avgSalary": 49000,
-          "growthRate": "2.89"
+          "growthRate": "2.08"
         },
         {
           "bizId": "BIZ-00093",
@@ -1522,7 +1531,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 5,
           "avgSalary": 53000,
-          "growthRate": "2.76"
+          "growthRate": "3.48"
         },
         {
           "bizId": "BIZ-00106",
@@ -1531,7 +1540,7 @@
           "neighborhood": "Temescal",
           "employeeCount": 5,
           "avgSalary": 37000,
-          "growthRate": "3.56"
+          "growthRate": "3.67"
         },
         {
           "bizId": "BIZ-00107",
@@ -1540,7 +1549,7 @@
           "neighborhood": "Temescal",
           "employeeCount": 5,
           "avgSalary": 37000,
-          "growthRate": "3.56"
+          "growthRate": "2.28"
         },
         {
           "bizId": "BIZ-00111",
@@ -1549,7 +1558,7 @@
           "neighborhood": "Adams Point",
           "employeeCount": 5,
           "avgSalary": 52000,
-          "growthRate": "5.29"
+          "growthRate": "0.31"
         },
         {
           "bizId": "BIZ-00118",
@@ -1558,7 +1567,7 @@
           "neighborhood": "Brooklyn",
           "employeeCount": 5,
           "avgSalary": 72000,
-          "growthRate": "4.79"
+          "growthRate": "3.55"
         },
         {
           "bizId": "BIZ-00135",
@@ -1567,7 +1576,7 @@
           "neighborhood": "Eastlake",
           "employeeCount": 5,
           "avgSalary": 46000,
-          "growthRate": "3.17"
+          "growthRate": "2.28"
         },
         {
           "bizId": "BIZ-00138",
@@ -1576,7 +1585,7 @@
           "neighborhood": "Eastlake",
           "employeeCount": 5,
           "avgSalary": 46000,
-          "growthRate": "2.34"
+          "growthRate": "1.19"
         },
         {
           "bizId": "BIZ-00159",
@@ -1585,7 +1594,7 @@
           "neighborhood": "KONO",
           "employeeCount": 5,
           "avgSalary": 45000,
-          "growthRate": "5.46"
+          "growthRate": "3.26"
         },
         {
           "bizId": "BIZ-00164",
@@ -1594,7 +1603,7 @@
           "neighborhood": "Laurel",
           "employeeCount": 5,
           "avgSalary": 47000,
-          "growthRate": "3.28"
+          "growthRate": "1.22"
         },
         {
           "bizId": "BIZ-00174",
@@ -1603,7 +1612,7 @@
           "neighborhood": "San Antonio",
           "employeeCount": 5,
           "avgSalary": 39000,
-          "growthRate": "2.89"
+          "growthRate": "1.46"
         },
         {
           "bizId": "BIZ-00177",
@@ -1612,7 +1621,7 @@
           "neighborhood": "San Antonio",
           "employeeCount": 5,
           "avgSalary": 39000,
-          "growthRate": "3.81"
+          "growthRate": "2.32"
         },
         {
           "bizId": "BIZ-00061",
@@ -1621,7 +1630,7 @@
           "neighborhood": "Adams Point",
           "employeeCount": 4,
           "avgSalary": 48000,
-          "growthRate": "1.89"
+          "growthRate": "-0.41"
         },
         {
           "bizId": "BIZ-00070",
@@ -1630,7 +1639,7 @@
           "neighborhood": "West Oakland",
           "employeeCount": 4,
           "avgSalary": 80000,
-          "growthRate": "3.87"
+          "growthRate": "1.21"
         },
         {
           "bizId": "BIZ-00087",
@@ -1639,7 +1648,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 4,
           "avgSalary": 47000,
-          "growthRate": "5.39"
+          "growthRate": "6.46"
         },
         {
           "bizId": "BIZ-00128",
@@ -1648,7 +1657,7 @@
           "neighborhood": "Dimond",
           "employeeCount": 4,
           "avgSalary": 44000,
-          "growthRate": "1.6"
+          "growthRate": "1.76"
         },
         {
           "bizId": "BIZ-00142",
@@ -1657,7 +1666,7 @@
           "neighborhood": "Glenview",
           "employeeCount": 4,
           "avgSalary": 45000,
-          "growthRate": "1.52"
+          "growthRate": "0.01"
         },
         {
           "bizId": "BIZ-00151",
@@ -1666,7 +1675,7 @@
           "neighborhood": "Ivy Hill",
           "employeeCount": 4,
           "avgSalary": 39000,
-          "growthRate": "0.48"
+          "growthRate": "-1.92"
         },
         {
           "bizId": "BIZ-00153",
@@ -1675,7 +1684,7 @@
           "neighborhood": "Ivy Hill",
           "employeeCount": 4,
           "avgSalary": 74000,
-          "growthRate": "0.48"
+          "growthRate": "-1.27"
         },
         {
           "bizId": "BIZ-00180",
@@ -1684,7 +1693,16 @@
           "neighborhood": "Rockridge",
           "employeeCount": 4,
           "avgSalary": 42000,
-          "growthRate": "3.13"
+          "growthRate": "1.53"
+        },
+        {
+          "bizId": "BIZ-00185",
+          "name": "Keane Mercantile",
+          "sector": "Retail",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "2"
         },
         {
           "bizId": "BIZ-00102",
@@ -1693,7 +1711,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 3,
           "avgSalary": 120000,
-          "growthRate": "3.63"
+          "growthRate": "5.05"
         },
         {
           "bizId": "BIZ-00152",
@@ -1702,7 +1720,7 @@
           "neighborhood": "Ivy Hill",
           "employeeCount": 3,
           "avgSalary": 43000,
-          "growthRate": "0.7"
+          "growthRate": "-1.41"
         },
         {
           "bizId": "BIZ-00155",
@@ -1711,7 +1729,7 @@
           "neighborhood": "Ivy Hill",
           "employeeCount": 3,
           "avgSalary": 43000,
-          "growthRate": "0.83"
+          "growthRate": "-1.08"
         },
         {
           "bizId": "BIZ-00045",
@@ -1720,7 +1738,7 @@
           "neighborhood": "Fruitvale",
           "employeeCount": 2,
           "avgSalary": 51000,
-          "growthRate": "7"
+          "growthRate": "8.15"
         },
         {
           "bizId": "BIZ-00046",
@@ -1729,7 +1747,7 @@
           "neighborhood": "KONO",
           "employeeCount": 2,
           "avgSalary": 43000,
-          "growthRate": "4.11"
+          "growthRate": "3.84"
         },
         {
           "bizId": "BIZ-00047",
@@ -1738,7 +1756,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 2,
           "avgSalary": 62000,
-          "growthRate": "7"
+          "growthRate": "8.39"
         },
         {
           "bizId": "BIZ-00049",
@@ -1747,7 +1765,7 @@
           "neighborhood": "Downtown",
           "employeeCount": 2,
           "avgSalary": 62000,
-          "growthRate": "7"
+          "growthRate": "8.48"
         },
         {
           "bizId": "BIZ-00050",
@@ -1756,7 +1774,7 @@
           "neighborhood": "Jack London",
           "employeeCount": 2,
           "avgSalary": 61000,
-          "growthRate": "7"
+          "growthRate": "8.66"
         }
       ]
     }
@@ -1829,24 +1847,6 @@
     ],
     "pendingVotes": [
       {
-        "name": "Fruitvale Transit Hub Phase II — Visioning",
-        "initiativeId": "INIT-003",
-        "type": "visioning",
-        "status": "visioning-complete",
-        "budget": "$230M",
-        "voteRequirement": "",
-        "voteCycle": "94",
-        "projection": "uncertain",
-        "leadFaction": "OPP",
-        "oppositionFaction": "",
-        "swingVoter": "",
-        "swingVoter2": "",
-        "swingVoter2Lean": "",
-        "policyDomain": "transit",
-        "affectedNeighborhoods": "Fruitvale",
-        "notes": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented."
-      },
-      {
         "name": "Oakland Youth Apprenticeship Pipeline",
         "initiativeId": "INIT-007",
         "type": "program",
@@ -1862,7 +1862,7 @@
         "swingVoter2Lean": "",
         "policyDomain": "workforce",
         "affectedNeighborhoods": "West Oakland, East Oakland, Fruitvale",
-        "notes": "Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (OUSD MOU C76, Peralta MOU C78, budget allocation C80, A's commitment C83) unverified."
+        "notes": "[ENGINE-CLOCK n=3 from=C109] Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (OUSD MOU C76, Peralta MOU C78, budget allocation C80, A's commitment C83) unverified."
       }
     ],
     "statusAlerts": [],
@@ -1879,9 +1879,9 @@
         "affectedNeighborhoods": "West Oakland",
         "policyDomain": "economic",
         "implementationPhase": "disbursement-active",
-        "milestoneNotes": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.",
-        "nextScheduledAction": "Month-eight disbursement completion and Downtown outreach impact assessment",
-        "nextActionCycle": 108
+        "milestoneNotes": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing — Stabilization Fund, disbursement-active since C78 (economic — not playable, no Delivering gate yet; the untended clock still runs). | C108 retag economic→housing (ruled 2026-09-22 — the Fund is a household anti-displacement fund in canon; engine.255 wires it as the first budgeted disbursement).\nC108: scope recorded as chartered — stabilization grants for long-tenure West Oakland residents priced out as the flats built out (the remnant the charter named), not hood-wide relief; 47 checks (~$4.2M) disbursed under Deputy Mayor Okoro’s authority C84–C90; authorization $28M, ~$23.8M remaining.\nC108: retag reversed — housing→economic (the 2026-09-22 retag was engine-sheet error; the Fund is not a housing fund).\nC109 scope correction: the Fund serves West Oakland businesses and residents. The C107 'Downtown canvass' line and the C108 'residents only' reading are superseded.\nC109: month-eight tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.\nC110: Month-nine disbursement $400K approved; 23-day avg processing time achieved",
+        "nextScheduledAction": "Month-ten disbursement review",
+        "nextActionCycle": 111
       },
       {
         "name": "Oakland Alternative Response Initiative",
@@ -1895,9 +1895,9 @@
         "affectedNeighborhoods": "West Oakland, Fruitvale, East Oakland",
         "policyDomain": "safety",
         "implementationPhase": "dispatch-live",
-        "milestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.",
-        "nextScheduledAction": "District 1 evaluation completion and potential expansion decision",
-        "nextActionCycle": 108
+        "milestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.\nC108 conversion: Stage Standing — OARI, dispatch-live, signed C82 (safety — not playable until the safety lever lands; the untended clock still runs).\nC109: Expanded to District 1 with evaluation metrics",
+        "nextScheduledAction": "Quarterly outcome report",
+        "nextActionCycle": 112
       },
       {
         "name": "Temescal Community Health Center",
@@ -1910,10 +1910,10 @@
         "voteBreakdown": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)",
         "affectedNeighborhoods": "Temescal",
         "policyDomain": "health",
-        "implementationPhase": "construction-active",
-        "milestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule",
-        "nextScheduledAction": "Drywall installation and fire-rated wall inspections",
-        "nextActionCycle": 108
+        "implementationPhase": "operational",
+        "milestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal health center, construction-active since C80 (health — playable; delivers once a treating phase moves hood Sick against its conversion baseline).\nC109: opened — construction complete, open to the public.\nC109: Opened 2 weeks early, $1.2M under budget",
+        "nextScheduledAction": "First quarter utilization review",
+        "nextActionCycle": 113
       },
       {
         "name": "Baylight District — Final Council Vote",
@@ -1926,10 +1926,10 @@
         "voteBreakdown": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes.",
         "affectedNeighborhoods": "Jack London, Downtown",
         "policyDomain": "sports",
-        "implementationPhase": "construction-planning",
-        "milestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins",
-        "nextScheduledAction": "Phase II site remediation",
-        "nextActionCycle": 108
+        "implementationPhase": "construction-active",
+        "milestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent oversight",
+        "nextScheduledAction": "Remediation completion and construction milestone review",
+        "nextActionCycle": 112
       }
     ],
     "executiveBranch": {
@@ -1939,7 +1939,7 @@
         "title": "Mayor",
         "popId": "POP-00034",
         "status": "active",
-        "approvalRating": "68"
+        "approvalRating": "69"
       },
       "deputyMayor": "Brenda Okoro",
       "deputyMayorDetail": {
@@ -2019,7 +2019,7 @@
         "name": "Darrin Davis",
         "tier": "1",
         "roleType": "Left Fielder, Oakland A's Legend",
-        "neighborhood": "Laurel",
+        "neighborhood": "Piedmont Ave",
         "status": "Active",
         "position": null,
         "overall": null,
@@ -2051,7 +2051,7 @@
         "name": "Henry Rivas",
         "tier": "2",
         "roleType": "Starting Pitcher, Oakland A's",
-        "neighborhood": "Uptown",
+        "neighborhood": "West Oakland",
         "status": "Active",
         "position": null,
         "overall": null,
@@ -2211,7 +2211,7 @@
         "name": "Sidney Tumolo",
         "tier": "3",
         "roleType": "Second Baseman, Oakland A's",
-        "neighborhood": "Lake Merritt",
+        "neighborhood": "West Oakland",
         "status": "Active",
         "position": null,
         "overall": null,
@@ -2564,7 +2564,7 @@
         "tier": "2",
         "roleType": "Manager, Oakland A's",
         "neighborhood": "Lake Merritt",
-        "status": "active",
+        "status": "Active",
         "position": null,
         "overall": null,
         "potential": null,
@@ -2659,7 +2659,7 @@
         "name": "Wilson Shepard",
         "tier": "2",
         "roleType": "Head Coach, Oakland Oaks",
-        "neighborhood": "Downtown",
+        "neighborhood": "West Oakland",
         "status": "Active",
         "position": null,
         "overall": null,
@@ -2756,7 +2756,7 @@
         "tier": "4",
         "roleType": "C / The Oaks",
         "neighborhood": "Piedmont Ave",
-        "status": "active",
+        "status": "Active",
         "position": null,
         "overall": null,
         "potential": null,
@@ -2803,7 +2803,7 @@
         "name": "Dillon Brooks",
         "tier": "3",
         "roleType": "SF / The Oaks",
-        "neighborhood": "Uptown",
+        "neighborhood": "West Oakland",
         "status": "Active",
         "position": null,
         "overall": null,
@@ -2867,7 +2867,7 @@
         "name": "Antone Bautista",
         "tier": "4",
         "roleType": "Relief Pitcher / Oakland A's",
-        "neighborhood": "Downtown",
+        "neighborhood": "West Oakland",
         "status": "Active",
         "position": null,
         "overall": null,
@@ -2878,439 +2878,14 @@
         "awards": null,
         "playerStatus": null
       }
-    ],
-    "bullsRoster": [
-      {
-        "name": "Hank Trepagnier",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Josh Giddey",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Adash Stanley",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Matas Buzelis",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Walker Kessler",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Kevin Huerter",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Ayo Dosunmu",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Isaac Okoro",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Patrick Williams",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Jrue Holiday",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Ben Simmons",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Noa Essengue",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Jalen Smith",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Keshad Johnson",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Tyrese Martin",
-        "source": "Chicago_Sports_Feed"
-      },
-      {
-        "name": "Simon Fontecchio",
-        "source": "Chicago_Sports_Feed"
-      }
-    ],
-    "culturalEntities": [
-      {
-        "name": "Marin Tao",
-        "roleType": "Celebrity",
-        "domain": "Arts",
-        "fameScore": 153,
-        "neighborhood": "San Antonio"
-      },
-      {
-        "name": "Rico Valez",
-        "roleType": "Celebrity",
-        "domain": "Arts",
-        "fameScore": 111,
-        "neighborhood": "Rockridge"
-      },
-      {
-        "name": "Jade Orion",
-        "roleType": "musician",
-        "domain": "Arts",
-        "fameScore": 99,
-        "neighborhood": "Downtown"
-      },
-      {
-        "name": "Lena Cross",
-        "roleType": "Celebrity",
-        "domain": "Arts",
-        "fameScore": 97,
-        "neighborhood": "Lake Merritt"
-      },
-      {
-        "name": "Sage Vienta",
-        "roleType": "actor",
-        "domain": "Arts",
-        "fameScore": 94,
-        "neighborhood": "Laurel"
-      },
-      {
-        "name": "Dax Monroe",
-        "roleType": "Celebrity",
-        "domain": "Sports",
-        "fameScore": 88,
-        "neighborhood": "Rockridge"
-      },
-      {
-        "name": "Kato Rivers",
-        "roleType": "athlete",
-        "domain": "Sports",
-        "fameScore": 81,
-        "neighborhood": "Laurel"
-      },
-      {
-        "name": "Nila James",
-        "roleType": "athlete",
-        "domain": "Sports",
-        "fameScore": 78,
-        "neighborhood": "Jack London"
-      },
-      {
-        "name": "Evan Morello",
-        "roleType": "actor",
-        "domain": "Arts",
-        "fameScore": 75,
-        "neighborhood": "Jack London"
-      },
-      {
-        "name": "Rowan Pierce",
-        "roleType": "journalist",
-        "domain": "Media",
-        "fameScore": 71,
-        "neighborhood": "KONO"
-      },
-      {
-        "name": "Tara Ellison",
-        "roleType": "journalist",
-        "domain": "Media",
-        "fameScore": 58,
-        "neighborhood": "Rockridge"
-      },
-      {
-        "name": "Sculptor Alma Vasquez",
-        "roleType": "sculptor",
-        "domain": "Arts",
-        "fameScore": 57,
-        "neighborhood": "Laurel"
-      },
-      {
-        "name": "Nina Reyes",
-        "roleType": "actress",
-        "domain": "Arts",
-        "fameScore": 52,
-        "neighborhood": "Fruitvale"
-      },
-      {
-        "name": "Theo Banks",
-        "roleType": "rapper",
-        "domain": "Arts",
-        "fameScore": 50,
-        "neighborhood": "Uptown"
-      },
-      {
-        "name": "Muralist Dante Reyes",
-        "roleType": "artist",
-        "domain": "Arts",
-        "fameScore": 49,
-        "neighborhood": "Jack London"
-      },
-      {
-        "name": "Marisol Rivera",
-        "roleType": "Community Advocate",
-        "domain": "Civic",
-        "fameScore": 43,
-        "neighborhood": "Rockridge"
-      },
-      {
-        "name": "Brody Kale",
-        "roleType": "influencer",
-        "domain": "Media",
-        "fameScore": 38,
-        "neighborhood": "Laurel"
-      },
-      {
-        "name": "Gallery Owner Mei Chen",
-        "roleType": "gallery curator",
-        "domain": "Arts",
-        "fameScore": 34,
-        "neighborhood": "Jack London"
-      },
-      {
-        "name": "Derek Obi",
-        "roleType": "reporter",
-        "domain": "Media",
-        "fameScore": 28,
-        "neighborhood": "Chinatown"
-      },
-      {
-        "name": "Eric Taveras",
-        "roleType": "A's player",
-        "domain": "Sports",
-        "fameScore": 26,
-        "neighborhood": "Downtown"
-      },
-      {
-        "name": "Vinnie Keane",
-        "roleType": "A's player",
-        "domain": "Sports",
-        "fameScore": 26,
-        "neighborhood": "Rockridge"
-      },
-      {
-        "name": "Celeste Moon",
-        "roleType": "singer",
-        "domain": "Arts",
-        "fameScore": 25,
-        "neighborhood": "KONO"
-      },
-      {
-        "name": "Mark Aitken",
-        "roleType": "A's player",
-        "domain": "Sports",
-        "fameScore": 25,
-        "neighborhood": "Adams Point"
-      },
-      {
-        "name": "Benji Dillon",
-        "roleType": "A's player",
-        "domain": "Sports",
-        "fameScore": 25,
-        "neighborhood": "Dimond"
-      },
-      {
-        "name": "Former A's Star Rodriguez",
-        "roleType": "sports legend",
-        "domain": "Sports",
-        "fameScore": 25,
-        "neighborhood": "KONO"
-      },
-      {
-        "name": "Isley Kelley",
-        "roleType": "Shortstop, Oakland A's Legend",
-        "domain": "Other",
-        "fameScore": 25,
-        "neighborhood": "Rockridge"
-      },
-      {
-        "name": "Mike Paulson",
-        "roleType": "General Manager, Oakland A's & The Oaks",
-        "domain": "Sports",
-        "fameScore": 25,
-        "neighborhood": "Jack London"
-      },
-      {
-        "name": "Arturo Ramos",
-        "roleType": "A's player",
-        "domain": "Sports",
-        "fameScore": 24,
-        "neighborhood": "Baylight District"
-      },
-      {
-        "name": "Community Director Hayes",
-        "roleType": "community leader",
-        "domain": "Civic",
-        "fameScore": 21,
-        "neighborhood": "West Oakland"
-      },
-      {
-        "name": "Heritage Director Rosa Martinez",
-        "roleType": "cultural leader",
-        "domain": "Other",
-        "fameScore": 21,
-        "neighborhood": "Downtown"
-      }
-    ],
-    "reporters": [
-      {
-        "name": "Anthony",
-        "desk": "sports",
-        "role": "Lead Beat Reporter"
-      },
-      {
-        "name": "P Slayer",
-        "desk": "sports",
-        "role": "Fan Columnist"
-      },
-      {
-        "name": "Hal Richmond",
-        "desk": "sports",
-        "role": "Senior Historian"
-      },
-      {
-        "name": "Tanya Cruz",
-        "desk": "sports",
-        "role": "Sideline Reporter"
-      },
-      {
-        "name": "DJ Hartley",
-        "desk": "sports",
-        "role": "Senior Photographer"
-      },
-      {
-        "name": "Simon Leary",
-        "desk": "sports",
-        "role": "The Long View Columnist"
-      },
-      {
-        "name": "Elliot Marbury",
-        "desk": "sports",
-        "role": "Data Desk"
-      },
-      {
-        "name": "Selena Grant",
-        "desk": "chicago",
-        "role": "Bulls Beat Reporter"
-      },
-      {
-        "name": "Talia Finch",
-        "desk": "chicago",
-        "role": "Chicago Ground Reporter"
-      },
-      {
-        "name": "Dr. Lila Mezran",
-        "desk": "metro",
-        "role": "Health Desk"
-      },
-      {
-        "name": "Luis Navarro",
-        "desk": "metro",
-        "role": "Investigations"
-      },
-      {
-        "name": "Carmen Delaine",
-        "desk": "metro",
-        "role": "Civic Ledger"
-      },
-      {
-        "name": "Trevor Shimizu",
-        "desk": "metro",
-        "role": "Transit & Infrastructure"
-      },
-      {
-        "name": "Sgt. Rachel Torres",
-        "desk": "metro",
-        "role": "Public Safety"
-      },
-      {
-        "name": "Maria Keen",
-        "desk": "culture",
-        "role": "Cultural Liaison"
-      },
-      {
-        "name": "Sharon Okafor",
-        "desk": "culture",
-        "role": "Lifestyle"
-      },
-      {
-        "name": "Kai Marston",
-        "desk": "culture",
-        "role": "Arts & Entertainment"
-      },
-      {
-        "name": "Mason Ortega",
-        "desk": "culture",
-        "role": "Food & Hospitality"
-      },
-      {
-        "name": "Angela Reyes",
-        "desk": "culture",
-        "role": "Education"
-      },
-      {
-        "name": "Noah Tan",
-        "desk": "culture",
-        "role": "Weather & Environment"
-      },
-      {
-        "name": "Jordan Velez",
-        "desk": "business",
-        "role": "Economics & Labor"
-      },
-      {
-        "name": "Farrah Del Rio",
-        "desk": "opinion",
-        "role": "Civic & Cultural Opinion"
-      },
-      {
-        "name": "Reed Thompson",
-        "desk": "wire",
-        "role": "TWS Wire"
-      },
-      {
-        "name": "MintConditionOakTown",
-        "desk": "wire",
-        "role": "Speculative Internet Reporter"
-      },
-      {
-        "name": "Celeste Tran",
-        "desk": "wire",
-        "role": "Social Trends"
-      },
-      {
-        "name": "Arman Gutiérrez",
-        "desk": "photography",
-        "role": "Photo Assistant"
-      },
-      {
-        "name": "Mags Corliss",
-        "desk": "editorial",
-        "role": "Editor-in-Chief"
-      },
-      {
-        "name": "Jax Caldera",
-        "desk": "freelance",
-        "role": "Freelance Accountability Columnist"
-      },
-      {
-        "name": "Rhea Morgan",
-        "desk": "editorial",
-        "role": "Copy Chief"
-      }
     ]
   },
   "householdStats": {
-    "activeHouseholds": 515,
-    "cycleEvents": 15,
-    "rentBurdenCount": 44
+    "activeHouseholds": 603,
+    "cycleEvents": 18,
+    "rentBurdenCount": 54
   },
   "bondStats": {
-    "activeBonds": 555
+    "activeBonds": 563
   }
 }

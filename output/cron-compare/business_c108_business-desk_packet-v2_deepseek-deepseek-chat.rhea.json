@@ -1,0 +1,53 @@
+{
+  "draft": "output/cron-compare/business_c108_business-desk_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d7f836a840e914c18b8c880f161b7ebfcfe9e8557f62ecab9a335ab1bdb282da",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen profiles, quotes, and Baylight district development details strictly align with canonical records and packet evidence.",
+  "review": {
+    "profileId": "jordan-economic-labor-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-1",
+    "manifestId": "AM-46830d57ab6d",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Brianna Lee",
+      "Kelvon Ochoa",
+      "Tariq Jello"
+    ],
+    "unverified": [
+      "Baylight Avenue",
+      "Baylight Construction Authority",
+      "Rail Yard Road"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 6108,
+  "parseError": false,
+  "ranAt": "2026-09-21T23:17:37.427Z"
+}

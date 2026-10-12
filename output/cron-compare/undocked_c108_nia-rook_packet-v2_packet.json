@@ -1,0 +1,938 @@
+{
+  "stage": "report",
+  "desk": "undocked",
+  "cycle": "108",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00300-Y3C4-e2",
+      "label": "UNDOCKED: Belle Lopez — up 98 on the night",
+      "kind": "undocked",
+      "angle": "Recap Belle Lopez's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 98, systems Sol, combat 0, mishaps 0, magnitude 3/5. Standings: Clarissa Dane leads the board — rank #1, 5 cycle(s) led, current streak 5.",
+      "citizens": [
+        "Belle Lopez — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00300"
+      ],
+      "hood": "Jack London"
+    }
+  },
+  "angle": "output/cron-compare/undocked_c108_nia-rook_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00300",
+      "name": "Belle Lopez",
+      "quote": "I feel like my own life and the city's dynamics are intertwined, you know? As someone who's always working and trying to make ends meet, I can sense the tension and excitement in the neighborhood. I've been playing to climb, trying to reach new heights, and it feels like the city is doing the same. There's a sense of anticipation and hope in the air, especially with the A's doing well. But at the same time, I've noticed people being more cautious, like they're waiting to see what happens next. It's hard to put my finger on it, but I feel like my own struggles and triumphs are reflected in the city's dynamics, and vice versa.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like my own life and the city's dynamics are intertwined, you know? As someone who's always working and trying to make ends meet, I can sense the tension and excitement in the neighborhood. I've been playing to climb, trying to reach new heights, and it feels like the city is doing the same. There's a sense of anticipation and hope in the air, especially with the A's doing well. But at the same time, I've noticed people being more cautious, like they're waiting to see what happens next. It's hard to put my finger on it, but I feel like my own struggles and triumphs are reflected in the city's dynamics, and vice versa.\",\n  \"fact_ids\": [\"F-78217e633afa\", \"F-251acf1fa6b6\", \"F-c000f69c627a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-78217e633afa",
+          "F-251acf1fa6b6",
+          "F-c000f69c627a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00300-473a92ea12",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like my own life and the city's dynamics are intertwined, you know? As someone who's always working and trying to make ends meet, I can sense the tension and excitement in the neighborhood. I've been playing to climb, trying to reach new heights, and it feels like the city is doing the same. There's a sense of anticipation and hope in the air, especially with the A's doing well. But at the same time, I've noticed people being more cautious, like they're waiting to see what happens next. It's hard to put my finger on it, but I feel like my own struggles and triumphs are reflected in the city's dynamics, and vice versa."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00300",
+          "name": "Belle Lopez",
+          "role": "UNDOCKED cast pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The impact of Belle Lopez's episode on the city's dynamics\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Jack London",
+          "focus": "The impact of Belle Lopez's episode on the city's dynamics",
+          "src": "undocked:undocked-pop00300-Y3C4-e2"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Belle Lopez — UNDOCKED cast pilot",
+          "evidence": [
+            {
+              "id": "EV-980b6462fc",
+              "src": "undocked:undocked-pop00300-Y3C4-e2",
+              "text": "UNDOCKED: Belle Lopez — up 98 on the night"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Belle Lopez — up 98 on the night",
+            "src": "undocked:undocked-pop00300-Y3C4-e2",
+            "id": "F-251acf1fa6b6"
+          },
+          {
+            "t": "FACT",
+            "text": "Belle Lopez — UNDOCKED cast pilot",
+            "src": "Simulation_Ledger profile for POP-00300",
+            "id": "F-c000f69c627a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00273",
+      "name": "Trenton Nawan",
+      "quote": "I've felt the city's dynamics shifting since Belle Lopez's episode, it's like people are more on edge, but I'm trying to stay steady and focused on my work as a server in Jack London.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt the city's dynamics shifting since Belle Lopez's episode, it's like people are more on edge, but I'm trying to stay steady and focused on my work as a server in Jack London.\",\n  \"fact_ids\": [\"F-251acf1fa6b6\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-251acf1fa6b6"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00273-6423a984c2",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt the city's dynamics shifting since Belle Lopez's episode, it's like people are more on edge, but I'm trying to stay steady and focused on my work as a server in Jack London."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00273",
+          "name": "Trenton Nawan",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The impact of Belle Lopez's episode on the city's dynamics\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Jack London",
+          "focus": "The impact of Belle Lopez's episode on the city's dynamics",
+          "src": "undocked:undocked-pop00300-Y3C4-e2"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Trenton Nawan — Server — Jack London",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Belle Lopez — up 98 on the night",
+            "src": "undocked:undocked-pop00300-Y3C4-e2",
+            "id": "F-251acf1fa6b6"
+          },
+          {
+            "t": "FACT",
+            "text": "Trenton Nawan — Server — Jack London",
+            "src": "Simulation_Ledger profile for POP-00273",
+            "id": "F-3886fd06b84e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00642",
+      "name": "Ollie Campbell",
+      "quote": "I've noticed things feel a bit tense around Jack London since Belle Lopez's episode, I'm not really sure what to make of it but it's been on my mind lately.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed things feel a bit tense around Jack London since Belle Lopez's episode, I'm not really sure what to make of it but it's been on my mind lately.\",\n  \"fact_ids\": [\"F-251acf1fa6b6\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-251acf1fa6b6"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00642-6f595ea43a",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed things feel a bit tense around Jack London since Belle Lopez's episode, I'm not really sure what to make of it but it's been on my mind lately."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00642",
+          "name": "Ollie Campbell",
+          "role": "Bakery Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The impact of Belle Lopez's episode on the city's dynamics\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Jack London",
+          "focus": "The impact of Belle Lopez's episode on the city's dynamics",
+          "src": "undocked:undocked-pop00300-Y3C4-e2"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Ollie Campbell — Bakery Worker — Jack London",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Belle Lopez — up 98 on the night",
+            "src": "undocked:undocked-pop00300-Y3C4-e2",
+            "id": "F-251acf1fa6b6"
+          },
+          {
+            "t": "FACT",
+            "text": "Ollie Campbell — Bakery Worker — Jack London",
+            "src": "Simulation_Ledger profile for POP-00642",
+            "id": "F-8b74565a9102"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00643",
+      "name": "Guadalupe Lupe",
+      "quote": "I've noticed the city feels a bit tense lately, and I think it's because of what happened with Belle Lopez, it's all people are talking about when they come into the bar.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed the city feels a bit tense lately, and I think it's because of what happened with Belle Lopez, it's all people are talking about when they come into the bar.\",\n  \"fact_ids\": [\"F-251acf1fa6b6\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-251acf1fa6b6"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00643-bfbcd1b708",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed the city feels a bit tense lately, and I think it's because of what happened with Belle Lopez, it's all people are talking about when they come into the bar."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00643",
+          "name": "Guadalupe Lupe",
+          "role": "Bartender",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The impact of Belle Lopez's episode on the city's dynamics\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Jack London",
+          "focus": "The impact of Belle Lopez's episode on the city's dynamics",
+          "src": "undocked:undocked-pop00300-Y3C4-e2"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Guadalupe Lupe — Bartender — Jack London",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Belle Lopez — up 98 on the night",
+            "src": "undocked:undocked-pop00300-Y3C4-e2",
+            "id": "F-251acf1fa6b6"
+          },
+          {
+            "t": "FACT",
+            "text": "Guadalupe Lupe — Bartender — Jack London",
+            "src": "Simulation_Ledger profile for POP-00643",
+            "id": "F-6769aa54ed95"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00300",
+      "name": "Belle Lopez",
+      "quote": "I feel like my own life and the city's dynamics are intertwined, you know? As someone who's always working and trying to make ends meet, I can sense the tension and excitement in the neighborhood. I've been playing to climb, trying to reach new heights, and it feels like the city is doing the same. There's a sense of anticipation and hope in the air, especially with the A's doing well. But at the same time, I've noticed people being more cautious, like they're waiting to see what happens next. It's hard to put my finger on it, but I feel like my own struggles and triumphs are reflected in the city's dynamics, and vice versa.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like my own life and the city's dynamics are intertwined, you know? As someone who's always working and trying to make ends meet, I can sense the tension and excitement in the neighborhood. I've been playing to climb, trying to reach new heights, and it feels like the city is doing the same. There's a sense of anticipation and hope in the air, especially with the A's doing well. But at the same time, I've noticed people being more cautious, like they're waiting to see what happens next. It's hard to put my finger on it, but I feel like my own struggles and triumphs are reflected in the city's dynamics, and vice versa.\",\n  \"fact_ids\": [\"F-78217e633afa\", \"F-251acf1fa6b6\", \"F-c000f69c627a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-78217e633afa",
+          "F-251acf1fa6b6",
+          "F-c000f69c627a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00300-473a92ea12",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like my own life and the city's dynamics are intertwined, you know? As someone who's always working and trying to make ends meet, I can sense the tension and excitement in the neighborhood. I've been playing to climb, trying to reach new heights, and it feels like the city is doing the same. There's a sense of anticipation and hope in the air, especially with the A's doing well. But at the same time, I've noticed people being more cautious, like they're waiting to see what happens next. It's hard to put my finger on it, but I feel like my own struggles and triumphs are reflected in the city's dynamics, and vice versa."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00300",
+          "name": "Belle Lopez",
+          "role": "UNDOCKED cast pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The impact of Belle Lopez's episode on the city's dynamics\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Jack London",
+          "focus": "The impact of Belle Lopez's episode on the city's dynamics",
+          "src": "undocked:undocked-pop00300-Y3C4-e2"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Belle Lopez — UNDOCKED cast pilot",
+          "evidence": [
+            {
+              "id": "EV-980b6462fc",
+              "src": "undocked:undocked-pop00300-Y3C4-e2",
+              "text": "UNDOCKED: Belle Lopez — up 98 on the night"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Belle Lopez — up 98 on the night",
+            "src": "undocked:undocked-pop00300-Y3C4-e2",
+            "id": "F-251acf1fa6b6"
+          },
+          {
+            "t": "FACT",
+            "text": "Belle Lopez — UNDOCKED cast pilot",
+            "src": "Simulation_Ledger profile for POP-00300",
+            "id": "F-c000f69c627a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00273",
+      "name": "Trenton Nawan",
+      "quote": "I've felt the city's dynamics shifting since Belle Lopez's episode, it's like people are more on edge, but I'm trying to stay steady and focused on my work as a server in Jack London.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt the city's dynamics shifting since Belle Lopez's episode, it's like people are more on edge, but I'm trying to stay steady and focused on my work as a server in Jack London.\",\n  \"fact_ids\": [\"F-251acf1fa6b6\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-251acf1fa6b6"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00273-6423a984c2",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt the city's dynamics shifting since Belle Lopez's episode, it's like people are more on edge, but I'm trying to stay steady and focused on my work as a server in Jack London."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00273",
+          "name": "Trenton Nawan",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The impact of Belle Lopez's episode on the city's dynamics\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Jack London",
+          "focus": "The impact of Belle Lopez's episode on the city's dynamics",
+          "src": "undocked:undocked-pop00300-Y3C4-e2"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Trenton Nawan — Server — Jack London",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Belle Lopez — up 98 on the night",
+            "src": "undocked:undocked-pop00300-Y3C4-e2",
+            "id": "F-251acf1fa6b6"
+          },
+          {
+            "t": "FACT",
+            "text": "Trenton Nawan — Server — Jack London",
+            "src": "Simulation_Ledger profile for POP-00273",
+            "id": "F-3886fd06b84e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00642",
+      "name": "Ollie Campbell",
+      "quote": "I've noticed things feel a bit tense around Jack London since Belle Lopez's episode, I'm not really sure what to make of it but it's been on my mind lately.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed things feel a bit tense around Jack London since Belle Lopez's episode, I'm not really sure what to make of it but it's been on my mind lately.\",\n  \"fact_ids\": [\"F-251acf1fa6b6\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-251acf1fa6b6"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00642-6f595ea43a",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed things feel a bit tense around Jack London since Belle Lopez's episode, I'm not really sure what to make of it but it's been on my mind lately."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00642",
+          "name": "Ollie Campbell",
+          "role": "Bakery Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The impact of Belle Lopez's episode on the city's dynamics\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Jack London",
+          "focus": "The impact of Belle Lopez's episode on the city's dynamics",
+          "src": "undocked:undocked-pop00300-Y3C4-e2"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Ollie Campbell — Bakery Worker — Jack London",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Belle Lopez — up 98 on the night",
+            "src": "undocked:undocked-pop00300-Y3C4-e2",
+            "id": "F-251acf1fa6b6"
+          },
+          {
+            "t": "FACT",
+            "text": "Ollie Campbell — Bakery Worker — Jack London",
+            "src": "Simulation_Ledger profile for POP-00642",
+            "id": "F-8b74565a9102"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00643",
+      "name": "Guadalupe Lupe",
+      "quote": "I've noticed the city feels a bit tense lately, and I think it's because of what happened with Belle Lopez, it's all people are talking about when they come into the bar.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed the city feels a bit tense lately, and I think it's because of what happened with Belle Lopez, it's all people are talking about when they come into the bar.\",\n  \"fact_ids\": [\"F-251acf1fa6b6\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-251acf1fa6b6"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00643-bfbcd1b708",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed the city feels a bit tense lately, and I think it's because of what happened with Belle Lopez, it's all people are talking about when they come into the bar."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00643",
+          "name": "Guadalupe Lupe",
+          "role": "Bartender",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The impact of Belle Lopez's episode on the city's dynamics\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Jack London",
+          "focus": "The impact of Belle Lopez's episode on the city's dynamics",
+          "src": "undocked:undocked-pop00300-Y3C4-e2"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Guadalupe Lupe — Bartender — Jack London",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Belle Lopez — up 98 on the night",
+            "src": "undocked:undocked-pop00300-Y3C4-e2",
+            "id": "F-251acf1fa6b6"
+          },
+          {
+            "t": "FACT",
+            "text": "Guadalupe Lupe — Bartender — Jack London",
+            "src": "Simulation_Ledger profile for POP-00643",
+            "id": "F-6769aa54ed95"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-25T18:20:02.063Z"
+}

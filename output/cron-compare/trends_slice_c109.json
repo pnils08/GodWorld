@@ -1,0 +1,244 @@
+{
+  "version": "TRENDS-SLICE-2",
+  "empty": false,
+  "cycle": 109,
+  "kind": "beat-trends",
+  "seat": {
+    "slug": "celeste-tran",
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "desk": "wire",
+    "domain": "trends",
+    "builder": "buildTrendsSlice.js"
+  },
+  "hood": "San Antonio",
+  "pulse": {
+    "generatedAt": "2026-10-03T07:46:48.567Z",
+    "docs": 864,
+    "citizens": 250
+  },
+  "story": {
+    "kind": "beat-trends",
+    "angle": "Marin Tao leads the conversation (25 mentions); Uptown moves the most — what Oakland is doing together this week",
+    "label": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+    "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+    "hood": "San Antonio",
+    "citizens": [
+      "Marin Tao (POP-00537)",
+      "Dax Monroe (POP-00769)",
+      "Rico Valez (POP-00632)",
+      "Rick Walker (POP-00198)",
+      "Melton Neilon (POP-00170)",
+      "Luca Petrov (POP-00271)"
+    ],
+    "popids": [
+      "POP-00537",
+      "POP-00769",
+      "POP-00632",
+      "POP-00198",
+      "POP-00170",
+      "POP-00271"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C109",
+    "cycle": 109
+  },
+  "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the engine's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00537",
+      "name": "Marin Tao",
+      "role": "Musician",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Marin Tao — Musician — Chinatown",
+      "why": "the city is talking about them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00769",
+      "name": "Dax Monroe",
+      "role": "Artist",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Dax Monroe — Artist — Rockridge",
+      "why": "the city is talking about them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00632",
+      "name": "Rico Valez",
+      "role": "Musician",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Rico Valez — Musician — Fruitvale",
+      "why": "the city is talking about them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00198",
+      "name": "Rick Walker",
+      "role": "K-8 Teacher,Former Line cook",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale",
+      "why": "has been saying it on their own page — the A's, C107: “It’s got me thinking the A’s might just have the pitching depth to make a serious playoff run this year.”"
+    },
+    {
+      "popid": "POP-00170",
+      "name": "Melton Neilon",
+      "role": "Sourdough Baker",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Melton Neilon — Sourdough Baker — Temescal",
+      "why": "has been saying it on their own page — transit, C109: “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.”"
+    },
+    {
+      "popid": "POP-00271",
+      "name": "Luca Petrov",
+      "role": "Dance Choreographer",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Luca Petrov — Dance Choreographer — Uptown",
+      "why": "has been saying it on their own page — the council, C108: “Elliott’s been out front of City Hall a lot, talking to folks, but it feels...”"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    {
+      "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 87",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    {
+      "text": "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    {
+      "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    {
+      "text": "Movement vs C108: Uptown +62 people, Downtown +61 people, Jack London +60 people, Temescal +59 people, KONO +59 people",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C109"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Marin Tao leads the conversation (25 mentions); Uptown moves the most — what Oakland is doing together this week",
+    "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+    "anchorFacts": [
+      "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+      "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 87",
+      "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+      "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+      "Movement vs C108: Uptown +62 people, Downtown +61 people, Jack London +60 people, Temescal +59 people, KONO +59 people"
+    ],
+    "evidence": [
+      {
+        "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 87",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "text": "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "text": "Movement vs C108: Uptown +62 people, Downtown +61 people, Jack London +60 people, Temescal +59 people, KONO +59 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C109"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 108
+    },
+    "hooks": [
+      {
+        "text": "Household in Rockridge spending 54% of income on housing",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Rockridge",
+        "priority": 6
+      },
+      {
+        "text": "Household in Lake Merritt spending 56% of income on housing",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 6
+      },
+      {
+        "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 7
+      },
+      {
+        "text": "Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Laurel",
+        "priority": 6
+      },
+      {
+        "text": "Fruitvale boom sustained — momentum 8/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 7
+      },
+      {
+        "text": "Jack London boom sustained — momentum 9/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Jack London",
+        "priority": 7
+      },
+      {
+        "text": "Rockridge boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Rockridge",
+        "priority": 7
+      },
+      {
+        "text": "Grand Lake boom sustained — momentum 9/10, the block everyone wants onto",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Grand Lake",
+        "priority": 7
+      }
+    ],
+    "note": null,
+    "pageVoices": [
+      "the A's — fading; most of the city over the last two months, still talking this week. Loudest: Rick Walker (Fruitvale), on their own page at C107 (not an interview — colour only, never a quote): “It’s got me thinking the A’s might just have the pitching depth to make a serious playoff run this year.”",
+      "transit — fading; dozens of citizens over the last two months, still talking this week. Loudest: Melton Neilon (Temescal), on their own page at C109 (not an interview — colour only, never a quote): “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.”",
+      "the council — fading; a dozen or so citizens over the last two months, quiet this week. Loudest: Luca Petrov (Uptown), on their own page at C108 (not an interview — colour only, never a quote): “Elliott’s been out front of City Hall a lot, talking to folks, but it feels...”",
+      "faith — rising; dozens of citizens over the last two months, still talking this week. Loudest: Eunice Marston (Downtown), on their own page at C109 (not an interview — colour only, never a quote): “I haven't had any direct involvement with the Gurdwara Singh Sabha Fruitvale, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of…”",
+      "the clinic — fading; a dozen or so citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C109 (not an interview — colour only, never a quote): “From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard.”"
+    ],
+    "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about"
+  },
+  "talkedAbout": 52,
+  "appeared": 1,
+  "moves": 22,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C109",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Celeste Tran this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

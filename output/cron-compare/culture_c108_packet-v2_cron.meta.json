@@ -1,0 +1,17 @@
+{
+  "desk": "culture",
+  "cycle": "108",
+  "model": "deepseek/deepseek-chat",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 8261,
+  "usageOutputTokens": 501,
+  "savedFiles": [
+    "output/cron-compare/culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat.md"
+  ],
+  "compareAgainst": "output/desk-output/culture_c108.md",
+  "durationMs": 36145,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-09-26T17:00:39.936Z"
+}

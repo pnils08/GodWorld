@@ -1,0 +1,47 @@
+{
+  "draft": "output/cron-compare/civic_c107_luis-navarro_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "107",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "fc66b53f3857cf56931f083e0aa4b536a5a5aab15dc675076c966758a6832c5d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Rick Walker bio, exact quote provenance, and investigatory record-gap framing are fully verified against ledger and canon ground truth.",
+  "review": {
+    "profileId": "luis-investigation-record-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "packageVersion": "LUIS-LEP2-1",
+    "manifestId": "AM-ba1382c5cb4d",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Rick Walker"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0098,
+  "durationMs": 5807,
+  "parseError": false,
+  "ranAt": "2026-09-15T23:15:55.150Z"
+}

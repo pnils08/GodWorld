@@ -1,0 +1,520 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00155",
+    "name": "Trevor Shimizu",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+    "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "transit",
+      "hood": null,
+      "facts": [
+        "8 stations + 10 corridors on the record this cycle; total ridership 91,564 (C109: 99,582)",
+        "Lake Merritt: ridership 5,896 (-2,588 vs C109), on-time 84% (-2 pts) — fog; events in Lake Merritt, Chinatown",
+        "MacArthur: ridership 9,996 (-2,034 vs C109), on-time 78% (-6 pts) — fog",
+        "Coliseum: ridership 8,023 (-1,701 vs C109), on-time 76% (-7 pts) — fog; events in East Oakland ×2, Baylight District",
+        "Rockridge: ridership 7,644 (-1,699 vs C109), on-time 75% (-3 pts) — fog",
+        "Fruitvale: ridership 11,735 (+1,321 vs C109), on-time 78% (-3 pts) — fog; game day (Dimond); events in Fruitvale, East Oakland ×2; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+        "19th St Oakland: ridership 16,105 (-999 vs C109), on-time 79% (-7 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt; Baylight District — Final Council Vote: construction-active",
+        "12th St Oakland City Center: ridership 23,485 (-363 vs C109), on-time 81% (-4 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt, West Oakland ×2; Baylight District — Final Council Vote: construction-active",
+        "West Oakland: ridership 8,680 (+45 vs C109), on-time 75% (-6 pts) — fog; game day (Jack London, Downtown); events in West Oakland ×2, Downtown; Baylight District — Final Council Vote: construction-active",
+        "I-880 North: traffic index 100 (+0 vs C109) — fog; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+        "I-880 South: traffic index 99 (-1 vs C109) — fog",
+        "I-580 East: traffic index 100 (+0 vs C109) — fog; game day (Dimond)"
+      ],
+      "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+      "note": null,
+      "engineHooks": [
+        "Notable event: \"High-severity public-works spike in Ivy Hill\". Follow-up recommended. (general coverage)"
+      ],
+      "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-transit",
+    "hood": null,
+    "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+    "plan": {
+      "focus": "Lake Merritt station’s ridership decline and its impact on transit workers.",
+      "closeQuestion": "What’s the human story behind the numbers at Lake Merritt station?"
+    },
+    "runningStories": [
+      "The West Oakland Crime Spike [West Oakland] — ENDED this week after 5 week(s)",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 2",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 2",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — week 2",
+      "Temescal Community Health Center — operational [Temescal] — week 2",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 2",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — week 2",
+      "Downtown Economic Revitalization — announced [Downtown] — week 2"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00280",
+        "name": "Jerald Jensen",
+        "profile": "Jerald Jensen — Janitor",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00280-f1f869f40e",
+        "pop": "POP-00280",
+        "name": "Jerald Jensen",
+        "quote": "You know, I’ve been hearing chatter about Lake Merritt station being quieter lately. It’s not just the fog—though that doesn’t help. People are talking about how it’s hitting the transit workers hard. Less foot traffic means fewer tips, fewer smiles, fewer connections. It’s tough when the lifeblood of a place starts to thin out.",
+        "factIds": [
+          "F-d8d40669c4f7",
+          "F-192a1321c18a"
+        ],
+        "src": "packet.W2[POP-00280]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Trevor Shimizu",
+        "text": "Are there specific times of day when ridership drops more noticeably?",
+        "usable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "Are riders opting for alternative routes or modes of transportation?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C110",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-e491ae296bc1"
+    },
+    {
+      "t": "FACT",
+      "text": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-1fd54cb8752f"
+    },
+    {
+      "t": "FACT",
+      "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster.",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-d8d40669c4f7"
+    },
+    {
+      "t": "FACT",
+      "text": "8 stations + 10 corridors on the record this cycle; total ridership 91,564 (C109: 99,582)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-ae5840cc4dce"
+    },
+    {
+      "t": "FACT",
+      "text": "Lake Merritt: ridership 5,896 (-2,588 vs C109), on-time 84% (-2 pts) — fog; events in Lake Merritt, Chinatown",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-192a1321c18a"
+    },
+    {
+      "t": "FACT",
+      "text": "MacArthur: ridership 9,996 (-2,034 vs C109), on-time 78% (-6 pts) — fog",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-116832be0e26"
+    },
+    {
+      "t": "FACT",
+      "text": "Coliseum: ridership 8,023 (-1,701 vs C109), on-time 76% (-7 pts) — fog; events in East Oakland ×2, Baylight District",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-134e1b506b3e"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge: ridership 7,644 (-1,699 vs C109), on-time 75% (-3 pts) — fog",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-05859793c343"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale: ridership 11,735 (+1,321 vs C109), on-time 78% (-3 pts) — fog; game day (Dimond); events in Fruitvale, East Oakland ×2; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-aabc1db19057"
+    },
+    {
+      "t": "FACT",
+      "text": "19th St Oakland: ridership 16,105 (-999 vs C109), on-time 79% (-7 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt; Baylight District — Final Council Vote: construction-active",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-de3d77a13b46"
+    },
+    {
+      "t": "FACT",
+      "text": "12th St Oakland City Center: ridership 23,485 (-363 vs C109), on-time 81% (-4 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt, West Oakland ×2; Baylight District — Final Council Vote: construction-active",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-c17495985024"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland: ridership 8,680 (+45 vs C109), on-time 75% (-6 pts) — fog; game day (Jack London, Downtown); events in West Oakland ×2, Downtown; Baylight District — Final Council Vote: construction-active",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-b37202034417"
+    },
+    {
+      "t": "FACT",
+      "text": "I-880 North: traffic index 100 (+0 vs C109) — fog; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-c582a62e8256"
+    },
+    {
+      "t": "FACT",
+      "text": "I-880 South: traffic index 99 (-1 vs C109) — fog",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-c777d836370f"
+    },
+    {
+      "t": "FACT",
+      "text": "I-580 East: traffic index 100 (+0 vs C109) — fog; game day (Dimond)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-54200c414a5f"
+    },
+    {
+      "t": "FACT",
+      "text": "I-580 West: traffic index 98 (+2 vs C109) — fog",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-77f862dbeb55"
+    },
+    {
+      "t": "FACT",
+      "text": "I-980: traffic index 100 (+0 vs C109) — fog; game day (Downtown); Baylight District — Final Council Vote: construction-active",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-93c243a62ea9"
+    },
+    {
+      "t": "FACT",
+      "text": "Broadway: traffic index 100 (+0 vs C109) — fog; game day (Downtown)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-414ad09a30d9"
+    },
+    {
+      "t": "FACT",
+      "text": "International Blvd: traffic index 94 (-6 vs C109) — fog",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-9a3853a34c17"
+    },
+    {
+      "t": "FACT",
+      "text": "MacArthur Blvd: traffic index 90 (+13 vs C109) — fog; game day (Dimond)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-87596c90ed3f"
+    },
+    {
+      "t": "FACT",
+      "text": "Telegraph Ave: traffic index 100 (+0 vs C109) — fog; game day (Downtown)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-059905751841"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Ave: traffic index 67 (-6 vs C109) — fog",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "id": "F-4bcb13e09f48"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed transit or infrastructure condition into a clear systems consequence, while keeping timestamps, failures, causal links, and cascade warnings bounded by the supplied record.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "dry third-person infrastructure and transit systems analysis",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed time, place, system condition, or implementation state",
+      "closing": "a bounded forward warning or maintenance question grounded in what remains unknown"
+    },
+    "authorizedTexture": [
+      "plain-language explanation of a Packet-backed infrastructure or transit condition",
+      "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
+      "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
+      "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+    ],
+    "textureConditions": [
+      "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
+      "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
+      "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
+      "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
+    ],
+    "canonBlockers": [
+      "an invented outage, closure, breakdown, delay, route, station, repair, inspection, maintenance event, service change, or infrastructure damage",
+      "an unsupported timestamp, duration, distance, capacity, load, count, budget, deadline, completion state, or performance metric",
+      "an unsupported causal link, cascade, responsible agency, duty, official act, official inaction, promise, or decision",
+      "a named person, place, route, station, system, agency, office, Project, Initiative, business, or organization not found in the supplied record",
+      "raw engine terminology or simulation values presented as an in-world technical measurement"
+    ]
+  },
+  "manifest": {
+    "id": "AM-f614a9218d31",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-e491ae296bc1",
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-1fd54cb8752f",
+        "t": "FACT",
+        "text": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-d8d40669c4f7",
+        "t": "FACT",
+        "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-ae5840cc4dce",
+        "t": "FACT",
+        "text": "8 stations + 10 corridors on the record this cycle; total ridership 91,564 (C109: 99,582)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-192a1321c18a",
+        "t": "FACT",
+        "text": "Lake Merritt: ridership 5,896 (-2,588 vs C109), on-time 84% (-2 pts) — fog; events in Lake Merritt, Chinatown",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-116832be0e26",
+        "t": "FACT",
+        "text": "MacArthur: ridership 9,996 (-2,034 vs C109), on-time 78% (-6 pts) — fog",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-134e1b506b3e",
+        "t": "FACT",
+        "text": "Coliseum: ridership 8,023 (-1,701 vs C109), on-time 76% (-7 pts) — fog; events in East Oakland ×2, Baylight District",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-05859793c343",
+        "t": "FACT",
+        "text": "Rockridge: ridership 7,644 (-1,699 vs C109), on-time 75% (-3 pts) — fog",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-aabc1db19057",
+        "t": "FACT",
+        "text": "Fruitvale: ridership 11,735 (+1,321 vs C109), on-time 78% (-3 pts) — fog; game day (Dimond); events in Fruitvale, East Oakland ×2; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-de3d77a13b46",
+        "t": "FACT",
+        "text": "19th St Oakland: ridership 16,105 (-999 vs C109), on-time 79% (-7 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-c17495985024",
+        "t": "FACT",
+        "text": "12th St Oakland City Center: ridership 23,485 (-363 vs C109), on-time 81% (-4 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt, West Oakland ×2; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-b37202034417",
+        "t": "FACT",
+        "text": "West Oakland: ridership 8,680 (+45 vs C109), on-time 75% (-6 pts) — fog; game day (Jack London, Downtown); events in West Oakland ×2, Downtown; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-c582a62e8256",
+        "t": "FACT",
+        "text": "I-880 North: traffic index 100 (+0 vs C109) — fog; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-c777d836370f",
+        "t": "FACT",
+        "text": "I-880 South: traffic index 99 (-1 vs C109) — fog",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-54200c414a5f",
+        "t": "FACT",
+        "text": "I-580 East: traffic index 100 (+0 vs C109) — fog; game day (Dimond)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-77f862dbeb55",
+        "t": "FACT",
+        "text": "I-580 West: traffic index 98 (+2 vs C109) — fog",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-93c243a62ea9",
+        "t": "FACT",
+        "text": "I-980: traffic index 100 (+0 vs C109) — fog; game day (Downtown); Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-414ad09a30d9",
+        "t": "FACT",
+        "text": "Broadway: traffic index 100 (+0 vs C109) — fog; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-9a3853a34c17",
+        "t": "FACT",
+        "text": "International Blvd: traffic index 94 (-6 vs C109) — fog",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-87596c90ed3f",
+        "t": "FACT",
+        "text": "MacArthur Blvd: traffic index 90 (+13 vs C109) — fog; game day (Dimond)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-059905751841",
+        "t": "FACT",
+        "text": "Telegraph Ave: traffic index 100 (+0 vs C109) — fog; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      },
+      {
+        "id": "F-4bcb13e09f48",
+        "t": "FACT",
+        "text": "Grand Ave: traffic index 67 (-6 vs C109) — fog",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00280-f1f869f40e",
+        "speakerId": "POP-00280",
+        "speakerName": "Jerald Jensen",
+        "text": "You know, I’ve been hearing chatter about Lake Merritt station being quieter lately. It’s not just the fog—though that doesn’t help. People are talking about how it’s hitting the transit workers hard. Less foot traffic means fewer tips, fewer smiles, fewer connections. It’s tough when the lifeblood of a place starts to thin out.",
+        "factIds": [
+          "F-d8d40669c4f7",
+          "F-192a1321c18a"
+        ],
+        "src": "packet.W2[POP-00280]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00280",
+        "name": "Jerald Jensen",
+        "profile": "Jerald Jensen — Janitor",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Trevor Shimizu",
+        "text": "Are there specific times of day when ridership drops more noticeably?",
+        "publishable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "Are riders opting for alternative routes or modes of transportation?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language explanation of a Packet-backed infrastructure or transit condition",
+      "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
+      "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
+      "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+    ],
+    "textureConditions": [
+      "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
+      "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
+      "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
+      "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented outage, closure, breakdown, delay, route, station, repair, inspection, maintenance event, service change, or infrastructure damage",
+      "an unsupported timestamp, duration, distance, capacity, load, count, budget, deadline, completion state, or performance metric",
+      "an unsupported causal link, cascade, responsible agency, duty, official act, official inaction, promise, or decision",
+      "a named person, place, route, station, system, agency, office, Project, Initiative, business, or organization not found in the supplied record",
+      "raw engine terminology or simulation values presented as an in-world technical measurement"
+    ]
+  }
+}

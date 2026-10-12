@@ -1,0 +1,975 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "107",
+  "persona": "freelance-firebrand",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+      "label": "Chinatown: decay [Sentiment -0.060, HousingPressure +0.500] — Sentiment now 0.33 (21 of 22, city median 0.46499999999999997); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "The map says decay; the program roster does not answer it.",
+      "hookLine": null,
+      "hood": "Chinatown",
+      "popids": [
+        "POP-00520",
+        "POP-01112",
+        "POP-00142",
+        "POP-00214",
+        "POP-00246",
+        "POP-00251",
+        "POP-00294",
+        "POP-00295",
+        "POP-00308",
+        "POP-00329",
+        "POP-00341",
+        "POP-00343"
+      ],
+      "citizens": [
+        "Derwin Train — Grocery Store Owner, Chinatown",
+        "Tariq Harris — Dental assistant, Chinatown",
+        "Jonas Patel — MEDICAL EXAMINER, Chinatown",
+        "Jacquez Tearn — Dishwasher, Chinatown",
+        "Dearie Beacon — Security guard, Chinatown",
+        "Shawn Weller — Janitor, Chinatown",
+        "Miguel Joson — Plumber, Chinatown",
+        "Christopher Clerk — Mover, Chinatown",
+        "Cathy Skeet — Elder Tech Liaison, Chinatown",
+        "Aaron Jackson — Tai Chi Instructor, Chinatown",
+        "Emilia Wurford — Tea House Owner, Chinatown",
+        "Iman Horton — Refugee Resettlement Case Worker, Chinatown"
+      ],
+      "stinkClass": "metric-contradiction",
+      "stinkScore": 51
+    }
+  },
+  "angle": "output/cron-compare/civic_c107_freelance-firebrand_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-01112",
+      "name": "Tariq Harris",
+      "quote": "Honestly, I've noticed that Chinatown doesn't seem to be getting the attention it needs. As someone who lives and works here, it's frustrating to see the decay and feel like nothing's being done about it. I've been trying to make ends meet with my dental assistant job, and it's hard not to feel like the neighborhood is being left behind. I've seen new people moving in from West Oakland, but it's not like that's necessarily a good thing - it just means they're being priced out of their own neighborhood. It feels like we're just trying to hold on to what we have, instead of actually moving forward.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I've noticed that Chinatown doesn't seem to be getting the attention it needs. As someone who lives and works here, it's frustrating to see the decay and feel like nothing's being done about it. I've been trying to make ends meet with my dental assistant job, and it's hard not to feel like the neighborhood is being left behind. I've seen new people moving in from West Oakland, but it's not like that's necessarily a good thing - it just means they're being priced out of their own neighborhood. It feels like we're just trying to hold on to what we have, instead of actually moving forward.\",\n  \"fact_ids\": [\"F-e4bffadfb144\", \"F-0ae1b0db5bd7\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e4bffadfb144",
+          "F-0ae1b0db5bd7"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01112-7b001bea66",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, I've noticed that Chinatown doesn't seem to be getting the attention it needs. As someone who lives and works here, it's frustrating to see the decay and feel like nothing's being done about it. I've been trying to make ends meet with my dental assistant job, and it's hard not to feel like the neighborhood is being left behind. I've seen new people moving in from West Oakland, but it's not like that's necessarily a good thing - it just means they're being priced out of their own neighborhood. It feels like we're just trying to hold on to what we have, instead of actually moving forward."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01112",
+          "name": "Tariq Harris",
+          "role": "Dental assistant",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Chinatown's decay and lack of active initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Chinatown",
+          "focus": "Chinatown's decay and lack of active initiatives",
+          "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-signal",
+            "same-neighborhood"
+          ],
+          "self": "Tariq Harris (POP-01112) — role: Dental assistant; neighborhood: Chinatown; born: 1999; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00147; skills: Small Business; tier: 4",
+          "evidence": [
+            {
+              "id": "EV-8c9c101e94",
+              "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+              "text": "Chinatown: decay [Sentiment -0.060, HousingPressure +0.500] — Sentiment now 0.33 (21 of 22, city median 0.46499999999999997); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: decay [Sentiment -0.060, HousingPressure +0.500] — Sentiment now 0.33 (21 of 22, city median 0.46499999999999997); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-e4bffadfb144"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-32fbec4e3579"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 44°F fog, W 8 mph, marine (frontState MARINE), humidity 74, visibility 4",
+            "src": "World_Config/weather snapshot for C107",
+            "id": "F-fe65eb3629dc"
+          },
+          {
+            "t": "FACT",
+            "text": "New residents move in from West Oakland, driven by rising rents, while Dragon Gate Lounge stays lively.",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-0ae1b0db5bd7"
+          },
+          {
+            "t": "FACT",
+            "text": "Tariq Harris (POP-01112) — role: Dental assistant; neighborhood: Chinatown; born: 1999; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00147; skills: Small Business; tier: 4",
+            "src": "Simulation_Ledger profile for POP-01112",
+            "id": "F-25b8bfc7f57b"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00142",
+      "name": "Jonas Patel",
+      "quote": "I've noticed that Chinatown seems to be struggling, and it feels like there's not much being done to address the issues - as a medical examiner, I see the effects of this decay in my work.",
+      "disp": "curious, open to new things",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed that Chinatown seems to be struggling, and it feels like there's not much being done to address the issues - as a medical examiner, I see the effects of this decay in my work.\",\n  \"fact_ids\": [\"F-e4bffadfb144\", \"F-32fbec4e3579\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e4bffadfb144",
+          "F-32fbec4e3579"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00142-0796e0d9ba",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed that Chinatown seems to be struggling, and it feels like there's not much being done to address the issues - as a medical examiner, I see the effects of this decay in my work."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00142",
+          "name": "Jonas Patel",
+          "role": "MEDICAL EXAMINER",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Chinatown's decay and lack of active initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Chinatown",
+          "focus": "Chinatown's decay and lack of active initiatives",
+          "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jonas Patel (POP-00142) — role: MEDICAL EXAMINER; neighborhood: Chinatown; born: 1993; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00017; skills: Government & Civic; tier: 4",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: decay [Sentiment -0.060, HousingPressure +0.500] — Sentiment now 0.33 (21 of 22, city median 0.46499999999999997); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-e4bffadfb144"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-32fbec4e3579"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 44°F fog, W 8 mph, marine (frontState MARINE), humidity 74, visibility 4",
+            "src": "World_Config/weather snapshot for C107",
+            "id": "F-fe65eb3629dc"
+          },
+          {
+            "t": "FACT",
+            "text": "New residents move in from West Oakland, driven by rising rents, while Dragon Gate Lounge stays lively.",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-0ae1b0db5bd7"
+          },
+          {
+            "t": "FACT",
+            "text": "Jonas Patel (POP-00142) — role: MEDICAL EXAMINER; neighborhood: Chinatown; born: 1993; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00017; skills: Government & Civic; tier: 4",
+            "src": "Simulation_Ledger profile for POP-00142",
+            "id": "F-d0b8708722b7"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00214",
+      "name": "Jacquez Tearn",
+      "quote": "I feel like Chinatown's been struggling, you know, it's not as lively as it used to be and I've noticed people talking about how things are falling apart around here. I care about this neighborhood and I wish someone would do something about it.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like Chinatown's been struggling, you know, it's not as lively as it used to be and I've noticed people talking about how things are falling apart around here. I care about this neighborhood and I wish someone would do something about it.\",\n  \"fact_ids\": [\"F-e4bffadfb144\", \"F-32fbec4e3579\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e4bffadfb144",
+          "F-32fbec4e3579"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00214-ac0bdd6cb6",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like Chinatown's been struggling, you know, it's not as lively as it used to be and I've noticed people talking about how things are falling apart around here. I care about this neighborhood and I wish someone would do something about it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00214",
+          "name": "Jacquez Tearn",
+          "role": "Dishwasher",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Chinatown's decay and lack of active initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Chinatown",
+          "focus": "Chinatown's decay and lack of active initiatives",
+          "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jacquez Tearn (POP-00214) — role: Dishwasher; neighborhood: Chinatown; born: 1988; careerStage: senior; wealth: 6; employerBiz: BIZ-00034; skills: The Vulnerable; tier: 4",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: decay [Sentiment -0.060, HousingPressure +0.500] — Sentiment now 0.33 (21 of 22, city median 0.46499999999999997); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-e4bffadfb144"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-32fbec4e3579"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 44°F fog, W 8 mph, marine (frontState MARINE), humidity 74, visibility 4",
+            "src": "World_Config/weather snapshot for C107",
+            "id": "F-fe65eb3629dc"
+          },
+          {
+            "t": "FACT",
+            "text": "New residents move in from West Oakland, driven by rising rents, while Dragon Gate Lounge stays lively.",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-0ae1b0db5bd7"
+          },
+          {
+            "t": "FACT",
+            "text": "Jacquez Tearn (POP-00214) — role: Dishwasher; neighborhood: Chinatown; born: 1988; careerStage: senior; wealth: 6; employerBiz: BIZ-00034; skills: The Vulnerable; tier: 4",
+            "src": "Simulation_Ledger profile for POP-00214",
+            "id": "F-b222c05a1bc8"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00520",
+      "name": "Derwin Train",
+      "quote": null,
+      "disp": "driven, hard to sit still",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've lived and worked in Chinatown my whole life, and I gotta say, it's changing. I see new faces around, people moving in from West Oakland, and it's not all bad. But sometimes I feel like we're losing a bit of our identity, you know? The Dragon Gate Lounge is still lively, but I'm not sure what the future holds. I've seen some initiatives come and go, but nothing that's really stuck. As a grocery store owner, I try to stay focused on my customers and my community, but it's hard not to wonder what's going to happen to our neighborhood.\",\n  \"fact_ids\": [\"F-e4bffadfb144\", \"F-0ae1b0db5bd7\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": \"I've heard rumors of some new developments coming to the area, but I don't know if that's going to help or hurt us.\"\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00520",
+          "name": "Derwin Train",
+          "role": "Grocery Store Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Chinatown's decay and lack of active initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Chinatown",
+          "focus": "Chinatown's decay and lack of active initiatives",
+          "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+        },
+        "exposure": {
+          "basis": [
+            "stink-handle",
+            "same-neighborhood"
+          ],
+          "self": "Derwin Train (POP-00520) — role: Grocery Store Owner; neighborhood: Chinatown; born: 1993; careerStage: senior; wealth: 6; employerBiz: BIZ-00020; skills: Trades; tier: 3",
+          "evidence": [
+            {
+              "id": "EV-115a337c52",
+              "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+              "text": "Chinatown: decay [Sentiment -0.060, HousingPressure +0.500] — Sentiment now 0.33 (21 of 22, city median 0.46499999999999997); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: decay [Sentiment -0.060, HousingPressure +0.500] — Sentiment now 0.33 (21 of 22, city median 0.46499999999999997); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-e4bffadfb144"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-32fbec4e3579"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 44°F fog, W 8 mph, marine (frontState MARINE), humidity 74, visibility 4",
+            "src": "World_Config/weather snapshot for C107",
+            "id": "F-fe65eb3629dc"
+          },
+          {
+            "t": "FACT",
+            "text": "New residents move in from West Oakland, driven by rising rents, while Dragon Gate Lounge stays lively.",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-0ae1b0db5bd7"
+          },
+          {
+            "t": "FACT",
+            "text": "Derwin Train (POP-00520) — role: Grocery Store Owner; neighborhood: Chinatown; born: 1993; careerStage: senior; wealth: 6; employerBiz: BIZ-00020; skills: Trades; tier: 3",
+            "src": "Simulation_Ledger profile for POP-00520",
+            "id": "F-2d81a1db4b59"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01112",
+      "name": "Tariq Harris",
+      "quote": "Honestly, I've noticed that Chinatown doesn't seem to be getting the attention it needs. As someone who lives and works here, it's frustrating to see the decay and feel like nothing's being done about it. I've been trying to make ends meet with my dental assistant job, and it's hard not to feel like the neighborhood is being left behind. I've seen new people moving in from West Oakland, but it's not like that's necessarily a good thing - it just means they're being priced out of their own neighborhood. It feels like we're just trying to hold on to what we have, instead of actually moving forward.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I've noticed that Chinatown doesn't seem to be getting the attention it needs. As someone who lives and works here, it's frustrating to see the decay and feel like nothing's being done about it. I've been trying to make ends meet with my dental assistant job, and it's hard not to feel like the neighborhood is being left behind. I've seen new people moving in from West Oakland, but it's not like that's necessarily a good thing - it just means they're being priced out of their own neighborhood. It feels like we're just trying to hold on to what we have, instead of actually moving forward.\",\n  \"fact_ids\": [\"F-e4bffadfb144\", \"F-0ae1b0db5bd7\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e4bffadfb144",
+          "F-0ae1b0db5bd7"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01112-7b001bea66",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, I've noticed that Chinatown doesn't seem to be getting the attention it needs. As someone who lives and works here, it's frustrating to see the decay and feel like nothing's being done about it. I've been trying to make ends meet with my dental assistant job, and it's hard not to feel like the neighborhood is being left behind. I've seen new people moving in from West Oakland, but it's not like that's necessarily a good thing - it just means they're being priced out of their own neighborhood. It feels like we're just trying to hold on to what we have, instead of actually moving forward."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01112",
+          "name": "Tariq Harris",
+          "role": "Dental assistant",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Chinatown's decay and lack of active initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Chinatown",
+          "focus": "Chinatown's decay and lack of active initiatives",
+          "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-signal",
+            "same-neighborhood"
+          ],
+          "self": "Tariq Harris (POP-01112) — role: Dental assistant; neighborhood: Chinatown; born: 1999; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00147; skills: Small Business; tier: 4",
+          "evidence": [
+            {
+              "id": "EV-8c9c101e94",
+              "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+              "text": "Chinatown: decay [Sentiment -0.060, HousingPressure +0.500] — Sentiment now 0.33 (21 of 22, city median 0.46499999999999997); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: decay [Sentiment -0.060, HousingPressure +0.500] — Sentiment now 0.33 (21 of 22, city median 0.46499999999999997); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-e4bffadfb144"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-32fbec4e3579"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 44°F fog, W 8 mph, marine (frontState MARINE), humidity 74, visibility 4",
+            "src": "World_Config/weather snapshot for C107",
+            "id": "F-fe65eb3629dc"
+          },
+          {
+            "t": "FACT",
+            "text": "New residents move in from West Oakland, driven by rising rents, while Dragon Gate Lounge stays lively.",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-0ae1b0db5bd7"
+          },
+          {
+            "t": "FACT",
+            "text": "Tariq Harris (POP-01112) — role: Dental assistant; neighborhood: Chinatown; born: 1999; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00147; skills: Small Business; tier: 4",
+            "src": "Simulation_Ledger profile for POP-01112",
+            "id": "F-25b8bfc7f57b"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00142",
+      "name": "Jonas Patel",
+      "quote": "I've noticed that Chinatown seems to be struggling, and it feels like there's not much being done to address the issues - as a medical examiner, I see the effects of this decay in my work.",
+      "disp": "curious, open to new things",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed that Chinatown seems to be struggling, and it feels like there's not much being done to address the issues - as a medical examiner, I see the effects of this decay in my work.\",\n  \"fact_ids\": [\"F-e4bffadfb144\", \"F-32fbec4e3579\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e4bffadfb144",
+          "F-32fbec4e3579"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00142-0796e0d9ba",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed that Chinatown seems to be struggling, and it feels like there's not much being done to address the issues - as a medical examiner, I see the effects of this decay in my work."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00142",
+          "name": "Jonas Patel",
+          "role": "MEDICAL EXAMINER",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Chinatown's decay and lack of active initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Chinatown",
+          "focus": "Chinatown's decay and lack of active initiatives",
+          "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jonas Patel (POP-00142) — role: MEDICAL EXAMINER; neighborhood: Chinatown; born: 1993; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00017; skills: Government & Civic; tier: 4",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: decay [Sentiment -0.060, HousingPressure +0.500] — Sentiment now 0.33 (21 of 22, city median 0.46499999999999997); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-e4bffadfb144"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-32fbec4e3579"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 44°F fog, W 8 mph, marine (frontState MARINE), humidity 74, visibility 4",
+            "src": "World_Config/weather snapshot for C107",
+            "id": "F-fe65eb3629dc"
+          },
+          {
+            "t": "FACT",
+            "text": "New residents move in from West Oakland, driven by rising rents, while Dragon Gate Lounge stays lively.",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-0ae1b0db5bd7"
+          },
+          {
+            "t": "FACT",
+            "text": "Jonas Patel (POP-00142) — role: MEDICAL EXAMINER; neighborhood: Chinatown; born: 1993; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00017; skills: Government & Civic; tier: 4",
+            "src": "Simulation_Ledger profile for POP-00142",
+            "id": "F-d0b8708722b7"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00214",
+      "name": "Jacquez Tearn",
+      "quote": "I feel like Chinatown's been struggling, you know, it's not as lively as it used to be and I've noticed people talking about how things are falling apart around here. I care about this neighborhood and I wish someone would do something about it.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like Chinatown's been struggling, you know, it's not as lively as it used to be and I've noticed people talking about how things are falling apart around here. I care about this neighborhood and I wish someone would do something about it.\",\n  \"fact_ids\": [\"F-e4bffadfb144\", \"F-32fbec4e3579\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e4bffadfb144",
+          "F-32fbec4e3579"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00214-ac0bdd6cb6",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like Chinatown's been struggling, you know, it's not as lively as it used to be and I've noticed people talking about how things are falling apart around here. I care about this neighborhood and I wish someone would do something about it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00214",
+          "name": "Jacquez Tearn",
+          "role": "Dishwasher",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Chinatown's decay and lack of active initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Chinatown",
+          "focus": "Chinatown's decay and lack of active initiatives",
+          "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jacquez Tearn (POP-00214) — role: Dishwasher; neighborhood: Chinatown; born: 1988; careerStage: senior; wealth: 6; employerBiz: BIZ-00034; skills: The Vulnerable; tier: 4",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "Chinatown: decay [Sentiment -0.060, HousingPressure +0.500] — Sentiment now 0.33 (21 of 22, city median 0.46499999999999997); HousingPressure now 0.5 (14 of 22, city median 0) — with no matching active initiative",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-e4bffadfb144"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-32fbec4e3579"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 44°F fog, W 8 mph, marine (frontState MARINE), humidity 74, visibility 4",
+            "src": "World_Config/weather snapshot for C107",
+            "id": "F-fe65eb3629dc"
+          },
+          {
+            "t": "FACT",
+            "text": "New residents move in from West Oakland, driven by rising rents, while Dragon Gate Lounge stays lively.",
+            "src": "output/engine_audit_c107.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+            "id": "F-0ae1b0db5bd7"
+          },
+          {
+            "t": "FACT",
+            "text": "Jacquez Tearn (POP-00214) — role: Dishwasher; neighborhood: Chinatown; born: 1988; careerStage: senior; wealth: 6; employerBiz: BIZ-00034; skills: The Vulnerable; tier: 4",
+            "src": "Simulation_Ledger profile for POP-00214",
+            "id": "F-b222c05a1bc8"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-16T18:15:59.380Z"
+}

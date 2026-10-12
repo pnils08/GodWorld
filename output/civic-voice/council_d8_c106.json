@@ -1,0 +1,38 @@
+{
+  "office": "council_d8",
+  "cycle": 106,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "I am directing formal municipal attention to Grand Lake and Eastlake to address slipping commercial momentum through documented inter-agency assessments rather than uncoordinated spending. At the same time, I am holding the administration accountable to rigorous verification standards on citywide pipeline initiatives while acknowledging the community-driven vigilance that keeps Lake Merritt steady.",
+  "statements": [
+    {
+      "statementId": "STMT-106-council_d8-001",
+      "type": "district_statement",
+      "topic": "Grand Lake Commercial Vitality and Eastlake Economic Health",
+      "initiative": null,
+      "decision": "Demand structured inter-departmental review and reporting for Grand Lake storefronts and Eastlake corridor trade",
+      "quote": "Good governance requires documented intervention before neighborhood vitality slips further, not retroactive fixes after corridors empty.",
+      "fullStatement": "We cannot overlook the warning signs in Grand Lake and Eastlake. While crime numbers remain low, foot traffic and street trade in Eastlake are noticeably slow, and Grand Lake is feeling the weight of shifting conditions with zero targeted city programs currently addressing it. Adams Point proved that structured, documented partnerships yield durable results. I am demanding the city administrator provide a comprehensive baseline assessment of small-business conditions and commercial corridor compliance in Grand Lake and Eastlake so we can deploy targeted, procedurally sound support rather than vague promises.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d8-002",
+      "type": "oversight_statement",
+      "topic": "Lake Merritt Baseline and Public Process",
+      "initiative": null,
+      "decision": "Credit community oversight for Lake Merritt's steady trade while establishing formal review channels for neighborhood grievances",
+      "quote": "Lake Merritt's resilience belongs to the residents and merchant associations who stay engaged every single week, not to sudden City Hall gestures.",
+      "fullStatement": "Lake Merritt's steady street trade and ongoing community life are the direct result of vigilant neighborhood associations and local stewards who do the daily work. However, emerging neighborhood grievances and shifting sentiment require transparent, documented processes to resolve before they compound. District 8 will continue to insist on clear timelines, environmental compliance, and open public input so that neighborhood character is safeguarded through established standards rather than reactive policy swings.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d8-003",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline Verification",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Support backlog clearance verification contingent on transparent audit reporting and compliance metrics",
+      "quote": "Apprenticeship backlogs are only truly cleared when administrative data and placement outcomes match on the record.",
+      "fullStatement": "I support the verification of backlog clearance for the Oakland Youth Apprenticeship Pipeline, provided that the administration delivers transparent audit data detailing exact certification timelines and placement completions. Our young people deserve verifiable program outcomes, not administrative paper-shuffling. As with every municipal workforce investment, District 8 demands rigorous tracking metrics to ensure public funds translate directly into documented employment pipelines without procedural shortcuts.",
+      "trackerUpdates": {}
+    }
+  ]
+}

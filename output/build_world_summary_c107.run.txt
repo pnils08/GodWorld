@@ -1,0 +1,6 @@
+◇ injected env (31) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+Wrote 42819 bytes to output/world_summary_c107.md
+Wrote 85769 bytes to output/desk_signal_c107.json — lanes: {"civic":48,"sports":8,"culture":29,"business":47}
+notes:
+  - output/neighborhood_texture_c107.md not present at build time (produced at Step 5.5) — hood refs are forward pointers
+  - 1 Storyline_Ledger thread(s) carried no known desk — routed to civic

@@ -1,0 +1,18 @@
+{
+  "office": "council_d9",
+  "cycle": 107,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "Defended Laurel's sustained progress and highlighted Uptown's success as a product of community-driven investment, positioning both neighborhoods as models for focused, equitable development citywide.",
+  "statements": [
+    {
+      "statementId": "STMT-107-council_d9-001",
+      "type": "vote_statement",
+      "topic": "District Priorities",
+      "initiative": null,
+      "decision": "Defend Laurel's progress and credit Uptown's success to community investment",
+      "quote": "Laurel’s progress isn’t legacy—it’s today’s work paying off.",
+      "fullStatement": "Laurel's stability is hard-won—crime still below city averages with property at 28 and violent at 24 this cycle. Sentiment's holding at 0.36 while we keep housing pressure flat zero. This isn't luck—it's the result of staying focused on what works. Uptown’s success isn’t just window dressing—it’s proof Oakland works. We’re not slowing down now just because the Mayor’s spotlight moved on. I'm pushing back against any distraction from our momentum.",
+      "trackerUpdates": {}
+    }
+  ]
+}

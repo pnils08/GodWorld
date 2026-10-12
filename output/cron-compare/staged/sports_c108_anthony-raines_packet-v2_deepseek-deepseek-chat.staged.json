@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "108",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c108_anthony-raines_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Deacon Seymour",
+        "role": "mentioned",
+        "popid": "POP-00528"
+      },
+      {
+        "name": "Arturo Ramos",
+        "role": "mentioned",
+        "popid": "POP-00025"
+      },
+      {
+        "name": "Danny Horn",
+        "role": "quoted-source",
+        "popid": "POP-00022"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "rockridge-danny-horn-sports-analytics",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Look, I know my numbers haven’t been where I want them this postseason, but I’m grinding every day. This team’s got heart, and I’m gonna do everything I can to help us bring home that championship. The Phillies are tough, but we’ve got the pieces to get it done.",
+        "sourceRef": "citizenVoice PRESS Danny Horn"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-a2917e324908",
+    "draftSha256": "10fe3cce23f8fe651d2ec0f60aeb533dda7b4b227bb46483b2d8baebfd26c951",
+    "verdict": "output/cron-compare/sports_c108_anthony-raines_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-21T23:20:13.462Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:02.646Z"
+}

@@ -1,0 +1,38 @@
+{
+  "office": "council_d7",
+  "cycle": 110,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "Submitted the certified fire-rated wall and drywall inspection sign-off for the Temescal Community Health Center to keep construction milestones moving while enforcing strict closeout audit requirements. Enforced rigorous oversight benchmarks for municipal service delivery in KONO and Temescal to support local commercial corridors. Demanded performance-indexed audit criteria on the Mayor's proposed Downtown Economic Revitalization ordinance before authorizing capital deployment.",
+  "statements": [
+    {
+      "statementId": "STMT-110-council_d7-001",
+      "type": "action_statement",
+      "topic": "Temescal Community Health Center Drywall and Inspection Sign-Off",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Transmitted certified building inspection sign-off and drywall authorization for INIT-005 to the Planning and Building Department while mandating complete closeout audit protocols.",
+      "quote": "District 7 delivers results through rigorous inspection and strict accounting, not executive hand-waving.",
+      "fullStatement": "I am formally submitting the certified fire-rated wall and drywall inspection sign-off for the Temescal Community Health Center directly to the Planning and Building Department. Progress on this facility is achieved by logging every inspection, verifying code compliance, and maintaining strict budget discipline. While the executive office focuses on ribbon-cuttings, District 7 will continue enforcing thorough post-occupancy oversight and comprehensive audit reporting to ensure public capital delivers measurable healthcare value.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d7-002",
+      "type": "constituent_statement",
+      "topic": "District 7 Corridor Oversight and KONO Service Delivery",
+      "initiative": null,
+      "decision": "Directed municipal departments to deliver audited safety and baseline maintenance benchmarks across KONO and Temescal commercial corridors.",
+      "quote": "KONO and Temescal do not run on mayoral rhetoric; they thrive when city services are audited, delivered, and held accountable.",
+      "fullStatement": "Our neighborhoods across District 7 maintain stability because of local merchant vigilance and community diligence. In KONO, steady commercial activity and low crime require dependable, verified municipal safety delivery rather than vague mayoral commitments. In Temescal, where street trade remains sluggish, credit belongs to the merchants persevering on the ground, not to political rhetoric. District 7 will hold every municipal service department accountable to audited performance baselines along all our commercial corridors.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d7-003",
+      "type": "policy_statement",
+      "topic": "Downtown Economic Revitalization Fund Scrutiny",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "Demanded explicit audit criteria and performance-indexed disbursement controls before approving the $15M Downtown Economic Revitalization Fund authorization.",
+      "quote": "A fifteen-million-dollar fund cannot be a blank check without line-item oversight and verifiable performance metrics.",
+      "fullStatement": "The Mayor's proposed fifteen-million-dollar Downtown Economic Revitalization Fund must undergo exhaustive committee review before any allocation occurs. Expedited permitting and vacancy relief programs must have clear clawbacks, measurable return-on-investment benchmarks, and independent audit oversight. Revitalizing commercial districts requires sound fiscal management, and District 7 will examine every line of this ordinance to protect taxpayer dollars.",
+      "trackerUpdates": {}
+    }
+  ]
+}

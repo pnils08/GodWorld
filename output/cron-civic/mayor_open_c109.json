@@ -1,0 +1,36 @@
+{
+  "stage": "mayor-open",
+  "cycle": 109,
+  "model": "moonshotai/kimi-k2",
+  "configuredModel": "moonshotai/kimi-k2",
+  "fellBackFrom": null,
+  "output": "output/civic-voice/mayor_open_c109.json",
+  "reused": false,
+  "statements": 7,
+  "cascadeInjected": 15,
+  "attempts": 1,
+  "usage": {
+    "prompt_tokens": 8664,
+    "completion_tokens": 1448,
+    "total_tokens": 10112,
+    "cost": 0.00826888,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00826888,
+      "upstream_inference_prompt_cost": 0.00493848,
+      "upstream_inference_completions_cost": 0.0033304
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "ranAt": "2026-09-28T06:13:07.385Z"
+}

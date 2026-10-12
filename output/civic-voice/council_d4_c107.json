@@ -1,0 +1,38 @@
+{
+  "office": "council_d4",
+  "cycle": 107,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I'm focusing on the needs of my district, D4, and ensuring that the city's initiatives benefit my constituents. I'm supporting the Oakland Youth Apprenticeship Pipeline and the West Oakland Stabilization Fund Downtown Outreach Expansion, as they align with my commitment to fiscal discipline and constituent accountability. I'm also defending the progress made in Ivy Hill and advocating for targeted support in Glenview.",
+  "statements": [
+    {
+      "statementId": "STMT-107-council_d4-001",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline",
+      "initiative": "INIT-007",
+      "decision": "YES",
+      "quote": "The youth of Oakland deserve a chance to thrive, and this pipeline is a crucial step in providing them with the skills and opportunities they need to succeed.",
+      "fullStatement": "I'm supporting the Oakland Youth Apprenticeship Pipeline because it's a well-structured program that will provide our young people with the skills and training they need to compete in the job market. As a council member, it's my duty to ensure that our city's initiatives are effective and accountable, and I believe this program meets those standards.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d4-002",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund Downtown Outreach Expansion",
+      "initiative": "INIT-001",
+      "decision": "YES",
+      "quote": "We need to take the Stabilization Fund to where the need is moving, and that's Downtown. Our small businesses and families are counting on us to provide support and resources.",
+      "fullStatement": "I'm supporting the expansion of the West Oakland Stabilization Fund to Downtown because it's a targeted approach to addressing the needs of our small businesses and families. As a council member, I've seen firsthand the impact of this fund on our community, and I believe it's essential to continue and expand this support.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d4-003",
+      "type": "statement",
+      "topic": "Ivy Hill and Glenview",
+      "initiative": null,
+      "decision": "DEFEND",
+      "quote": "Ivy Hill's progress is a testament to the city's structured support and the people's resilience. I'll ensure Glenview receives the attention it deserves, with a focus on targeted investment and fiscal discipline.",
+      "fullStatement": "As the council member for D4, I'm committed to defending the progress made in Ivy Hill and advocating for targeted support in Glenview. Our district's success is a result of the city's structured support and the people's resilience, and I'll continue to work tirelessly to ensure that our community receives the resources and attention it needs to thrive.",
+      "trackerUpdates": {}
+    }
+  ]
+}

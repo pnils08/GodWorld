@@ -1,0 +1,366 @@
+{
+  "version": "ECONOMIC-SLICE-3",
+  "empty": false,
+  "cycle": 109,
+  "kind": "food-workplaces",
+  "variant": "food",
+  "hood": "Fruitvale",
+  "pulse": {
+    "className": "hood-kitchens",
+    "score": 15,
+    "label": "Fruitvale kitchens · Fruitvale Diner, Marigold Cafe",
+    "hood": "Fruitvale",
+    "namedBusinesses": [
+      "Fruitvale Diner",
+      "Marigold Cafe"
+    ]
+  },
+  "story": {
+    "angle": "Fruitvale kitchens: Fruitvale Diner, Marigold Cafe — the people who work the shift",
+    "label": "Fruitvale kitchens · Fruitvale Diner, Marigold Cafe",
+    "hookLine": "Hazel Salazar, Line Cook at Fruitvale Diner. 1 named worker at 1 named kitchen in Fruitvale on the ledger this cycle.",
+    "hood": "Fruitvale",
+    "pulseClass": "hood-kitchens",
+    "namedBusinesses": [
+      "Fruitvale Diner",
+      "Marigold Cafe"
+    ],
+    "citizens": [
+      "Hazel Salazar (POP-00873)"
+    ],
+    "popids": [
+      "POP-00873"
+    ],
+    "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+    "cycle": 109
+  },
+  "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "businesses": [
+    {
+      "bizId": "BIZ-00045",
+      "name": "Fruitvale Diner",
+      "sector": "Restaurant & Dining",
+      "hood": "Fruitvale",
+      "employeeCount": 2,
+      "avgSalary": 51000,
+      "annualRevenue": 205022,
+      "growthRate": 8,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00873",
+          "name": "Hazel Salazar",
+          "role": "Line Cook"
+        }
+      ],
+      "delta": {
+        "vsCycle": 108,
+        "employees": 0,
+        "revenue": 315,
+        "growth": 1
+      }
+    },
+    {
+      "bizId": "BIZ-00068",
+      "name": "Marigold Cafe",
+      "sector": "Cafe / dining",
+      "hood": "Fruitvale",
+      "employeeCount": 30,
+      "avgSalary": 51000,
+      "annualRevenue": 3075292,
+      "growthRate": 7.98,
+      "keyPersonnel": null,
+      "staff": [],
+      "delta": {
+        "vsCycle": 108,
+        "employees": 0,
+        "revenue": 4712,
+        "growth": 1
+      }
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "b2390e4f",
+      "hood": "Jack London",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00678",
+          "name": "Celo Patel"
+        },
+        {
+          "popid": "POP-00527",
+          "name": "Mike Paulson"
+        },
+        {
+          "popid": "POP-00471",
+          "name": "Anna Baker"
+        },
+        {
+          "popid": "POP-00252",
+          "name": "Hector Leech"
+        }
+      ],
+      "citizenEvents": [
+        "Celo Patel — navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "Mike Paulson — the holiday market at Jack London Square is bustling, the scent of roasted chestnuts mingling with the sound of carolers",
+        "Anna Baker — caught a stranger humming their song and felt briefly, wrongly, known",
+        "Hector Leech — tried a new recipe that mostly worked"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00012",
+          "name": "Port of Oakland"
+        },
+        {
+          "bizId": "BIZ-00033",
+          "name": "Jack London Square Markets"
+        }
+      ],
+      "otherEntities": null,
+      "magnitude": 25.6,
+      "trend": "carrying, 5.33 strength left of 3-cycle run",
+      "suggestedJournalist": "Jordan Velez",
+      "suggestedAngle": "baseline context piece"
+    },
+    {
+      "seedId": "3282b659",
+      "hood": "Temescal",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00175",
+          "name": "Sara Copper"
+        },
+        {
+          "popid": "POP-00819",
+          "name": "Jada Alvarez"
+        },
+        {
+          "popid": "POP-00169",
+          "name": "Brie Harris"
+        },
+        {
+          "popid": "POP-00538",
+          "name": "Nila James"
+        }
+      ],
+      "citizenEvents": [
+        "Sara Copper — braced for the sound of pile drivers and realized they had already started tuning it out near a cafe near the clinics",
+        "Jada Alvarez — the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Brie Harris — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+        "Nila James — fielded questions at the corner store about the story they'd appeared in"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00008",
+          "name": "Gridiron Analytics"
+        },
+        {
+          "bizId": "BIZ-00080",
+          "name": "Temescal Islamic Center"
+        }
+      ],
+      "otherEntities": "Temescal Islamic Center Food Pantry (program)",
+      "magnitude": 6,
+      "trend": "carrying, 2.00 strength left of 3-cycle run",
+      "suggestedJournalist": "Jordan Velez",
+      "suggestedAngle": "baseline context piece"
+    }
+  ],
+  "citizens": [
+    {
+      "popid": "POP-00873",
+      "name": "Hazel Salazar",
+      "role": "Line Cook",
+      "neighborhood": "Fruitvale",
+      "business": "Fruitvale Diner",
+      "profile": "Hazel Salazar — Line Cook — Fruitvale Diner, Fruitvale",
+      "why": "works at Fruitvale Diner (Employment_Roster)"
+    }
+  ],
+  "closures": [],
+  "contractionWatch": [],
+  "casino": null,
+  "deltas": {
+    "state": "PRIOR_CYCLE_ON_DISK",
+    "vs": 108
+  },
+  "prewrite": {
+    "pulseClass": "hood-kitchens",
+    "angle": "Fruitvale kitchens: Fruitvale Diner, Marigold Cafe — the people who work the shift",
+    "hookLine": "Hazel Salazar, Line Cook at Fruitvale Diner. 1 named worker at 1 named kitchen in Fruitvale on the ledger this cycle.",
+    "namedBusinesses": [
+      "Fruitvale Diner",
+      "Marigold Cafe"
+    ],
+    "anchorFacts": [
+      "Fruitvale Diner · Restaurant & Dining · 2 employees · growth 8% · revenue $205k (+$315 vs C108) · on the roster: Hazel Salazar (Line Cook)",
+      "Marigold Cafe · Cafe / dining · 30 employees · growth 8% · revenue $3.1M (+$5k vs C108)",
+      "ENGINE SEED (Jack London): citizens Celo Patel; Mike Paulson; Anna Baker; Hector Leech · businesses Port of Oakland; Jack London Square Markets",
+      "ENGINE SEED (Temescal): citizens Sara Copper; Jada Alvarez; Brie Harris; Nila James · businesses Gridiron Analytics; Temescal Islamic Center · Temescal Islamic Center Food Pantry (program)"
+    ],
+    "evidence": [
+      {
+        "text": "Fruitvale Diner · Restaurant & Dining · 2 employees · growth 8% · revenue $205k (+$315 vs C108) · on the roster: Hazel Salazar (Line Cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "text": "Marigold Cafe · Cafe / dining · 30 employees · growth 8% · revenue $3.1M (+$5k vs C108)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "text": "ENGINE SEED (Jack London): citizens Celo Patel; Mike Paulson; Anna Baker; Hector Leech · businesses Port of Oakland; Jack London Square Markets",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+      },
+      {
+        "text": "ENGINE SEED (Temescal): citizens Sara Copper; Jada Alvarez; Brie Harris; Nila James · businesses Gridiron Analytics; Temescal Islamic Center · Temescal Islamic Center Food Pantry (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+      }
+    ],
+    "hooks": [
+      {
+        "text": "Unemployment in Lake Merritt up 20%. Economic stress story. Who's affected and why?",
+        "angle": "baseline context piece",
+        "hood": "Lake Merritt"
+      },
+      {
+        "text": "Notable event: \"Medium-severity economic spike in Baylight District\". Follow-up recommended.",
+        "angle": "desk rotation",
+        "hood": "Baylight District"
+      },
+      {
+        "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Camila Osman is the new owner of Claremont Table in Rockridge (C109)",
+        "angle": "desk rotation",
+        "hood": "Rockridge"
+      },
+      {
+        "text": "Mike Kinder has not advanced in 54 years",
+        "angle": "desk rotation",
+        "hood": null
+      },
+      {
+        "text": "Maya Torres-Dillon has not advanced in 54 years",
+        "angle": "desk rotation",
+        "hood": null
+      }
+    ],
+    "forbidden": [
+      "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+      "Do not contradict a role, employer or neighborhood listed here"
+    ]
+  },
+  "rotation": {
+    "pool": [
+      {
+        "hood": "Jack London",
+        "staffed": 2,
+        "workers": 6,
+        "lastCovered": 106
+      },
+      {
+        "hood": "Temescal",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": 108
+      },
+      {
+        "hood": "Rockridge",
+        "staffed": 1,
+        "workers": 3,
+        "lastCovered": 107
+      },
+      {
+        "hood": "Fruitvale",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      }
+    ],
+    "picked": "Fruitvale"
+  },
+  "candidates": [
+    {
+      "className": "hood-kitchens",
+      "hood": "Jack London",
+      "label": "Jack London · 2 staffed / 5 listed",
+      "namedBusinesses": [
+        "Blue Lantern Bar",
+        "Harborline Grill"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Temescal",
+      "label": "Temescal · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "OakTown Social"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Rockridge",
+      "label": "Rockridge · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "OakHouse"
+      ]
+    }
+  ],
+  "signals": {
+    "businessLaneCount": 39,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c109.json patterns[2]; evidence: Neighborhood_Map row(s) 6"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic — economic upside, jobs and footprint in Downtown",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, East Oakland",
+        "ref": "output/engine_audit_c109.json patterns[7]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "ripple",
+        "label": "fold-applied/initiative-implementation | Initiative work landed in 6 neighborhood(s): Downtown, Jack London, West Oakland, Temescal, Fruitvale, East Oakland",
+        "hood": null,
+        "ref": "Ripple_Ledger cycle 109 (CauseType neighborhood-fold); rendered: world_summary_c109.md \"## What Moved\" > \"### neighborhood-fold\""
+      },
+      {
+        "kind": "ripple",
+        "label": "traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity | Edition coverage lifted the city: traffic +0.01, retail +0.146, nightlife +0.05, pu",
+        "hood": null,
+        "ref": "Ripple_Ledger cycle 109 (CauseType edition-coverage); rendered: world_summary_c109.md \"## What Moved\" > \"### edition-coverage\""
+      },
+      {
+        "kind": "ripple",
+        "label": "sentiment | prior-cycle coverage ratings × sentimentWeight × 0.015, clamped ±0.20",
+        "hood": null,
+        "ref": "Ripple_Ledger cycle 109 (CauseType edition-coverage); rendered: world_summary_c109.md \"## What Moved\" > \"### edition-coverage\""
+      }
+    ]
+  },
+  "scene": {
+    "namedOnTop": [
+      "Fruitvale Diner",
+      "Marigold Cafe"
+    ]
+  },
+  "pointers": [
+    "output/beats/Business_Ledger.jsonl (176 rows @C109)",
+    "output/beats/Employment_Roster.jsonl (859 rows)",
+    "output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 4)",
+    "output/beats/prev/Business_Ledger.jsonl (movement vs C108)",
+    "output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 6)",
+    "output/desk_signal_c109.json lanes.business (pointers only)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2"
+  ]
+}

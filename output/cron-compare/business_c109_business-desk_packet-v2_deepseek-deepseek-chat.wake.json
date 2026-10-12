@@ -1,0 +1,38 @@
+{
+  "mode": "wake-write",
+  "desk": "business",
+  "cycle": "109",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "business-desk",
+  "byline": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153",
+    "beatDomain": "ECONOMIC"
+  },
+  "laneEntries": 39,
+  "quotesLanded": 3,
+  "disposition": "flagged",
+  "rheaPass": true,
+  "rheaFlagCount": 1,
+  "contamination": {
+    "fail": true,
+    "findings": [
+      {
+        "check": "repair-chrome",
+        "issue": "approved-quote-narration"
+      }
+    ]
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/business_c109_business-desk_packet-v2_deepseek-deepseek-chat.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "true }\n{\n  \"popId\": \"POP-00153\",\n  \"name\": \"Jordan Velez\",\n  \"recorded\": true,\n  \"text\": \"filed: Enzo Walker leaned against the side of Oakmesh Systems' newest building, his plumber's toolbox at hi\"\n}"
+  },
+  "ranAt": "2026-09-28T23:16:58.217Z",
+  "dispositionReconciledAt": "2026-10-03T17:00:01.954Z"
+}

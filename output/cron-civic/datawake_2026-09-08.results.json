@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-08",
+  "cycle": 106,
+  "results": [
+    {
+      "office": "civic-office-district-attorney",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-district-attorney_2026-09-08.json"
+    },
+    {
+      "office": "civic-office-police-chief",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-police-chief_2026-09-08.json"
+    },
+    {
+      "office": "civic-office-okoro",
+      "ok": false,
+      "error": "no usable JSON statement after retry (model returned empty/invalid content)"
+    }
+  ],
+  "ranAt": "2026-09-08T10:46:11.590Z"
+}

@@ -1,0 +1,546 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00158",
+    "name": "Kai Marston",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Tara Ellison is rising — the acts and the rooms they play",
+    "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the engine's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "arts",
+      "hood": "Rockridge",
+      "facts": [
+        "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108",
+        "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 57, ascending), last seen C86",
+        "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+        "Theo Banks (rapper), Arts, Uptown — fame rising (fame 50, surging), last seen C99",
+        "Oakland Native MVP Davis (sports figure), Sports, Temescal — new on the culture record this cycle (fame 14, rising), last seen C108",
+        "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 97, cooling), last seen C94",
+        "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 71, cooling), last seen C88",
+        "ENGINE SEED (Citywide): Tariq Harris; Emiko Suzuki; Gerald Hoffman",
+        "ENGINE SEED (Lake Merritt): Deacon Seymour; Carmen Mesa; Marisol Guzman · at Cathedral of the Living Word; Estuary Architects",
+        "ENGINE SEED (Fruitvale): Brielle Lewis; Jia Carmichael; Delia Fuentes · at Fruitvale Diner; Fruitvale Transit Hub Authority"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "Uptown boom sustained — momentum 10/10, the block everyone wants onto (desk rotation)",
+        "Philly Rodriguez moved from Temescal to Jack London — moving up from Temescal (desk rotation)",
+        "Blair Patel moved from Jack London to Lake Merritt — moving up from Jack London (desk rotation)",
+        "Sonia Parikh moved from Temescal to Fruitvale — moving up from Temescal (desk rotation)"
+      ],
+      "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "beat-arts",
+    "hood": "Rockridge",
+    "src": "output/beats/Cultural_Ledger.jsonl @C108",
+    "plan": {
+      "focus": "Tara Ellison",
+      "closeQuestion": "What's next for Tara Ellison, and how will she continue to make a name for herself in the journalism world?"
+    },
+    "openThreads": [
+      {
+        "slug": "downtown-tao-lee-beat-faith",
+        "label": "downtown-tao-lee-beat-faith | C107→C107 | 2 article(s) | opened 2",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00764",
+          "POP-00180",
+          "POP-00753"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "east-oakland-marcus-whitfield-beat-neighborhood",
+        "label": "east-oakland-marcus-whitfield-beat-neighborhood | C107→C107 | 1 article(s) | opened 1",
+        "hood": "East Oakland",
+        "popids": [
+          "POP-00532",
+          "POP-01047",
+          "POP-01055",
+          "POP-00119"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "rockridge-mimmie-carlisle-hood-kitchens",
+        "label": "rockridge-mimmie-carlisle-hood-kitchens | C107→C107 | 1 article(s) | opened 1",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00682",
+          "POP-00721",
+          "POP-00905",
+          "POP-00210"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "lake-merritt-vanessa-treary-named-restaurant",
+        "label": "lake-merritt-vanessa-treary-named-restaurant | C105→C106 | 4 article(s) | advanced 3, opened 1",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00781",
+          "POP-00783",
+          "POP-01045",
+          "POP-00135"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "chinatown-kenji-tanaka-beat-faith",
+        "label": "chinatown-kenji-tanaka-beat-faith | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Chinatown",
+        "popids": [
+          "POP-00763",
+          "POP-00759"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "lake-merritt-vanessa-treary-quiet-nightlife",
+        "label": "lake-merritt-vanessa-treary-quiet-nightlife | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00781",
+          "POP-00783",
+          "POP-01045",
+          "POP-00135"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-tomas-renteria-story-signal",
+        "label": "jack-london-tomas-renteria-story-signal | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00744",
+          "POP-00878",
+          "POP-00960"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "lake-merritt-yuki-ji-quiet-nightlife",
+        "label": "lake-merritt-yuki-ji-quiet-nightlife | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00783",
+          "POP-01045",
+          "POP-00135"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-tomas-renteria-hood-kitchens",
+        "label": "jack-london-tomas-renteria-hood-kitchens | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00744",
+          "POP-00878",
+          "POP-00960"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "adams-point-devon-willis-fame-sighting",
+        "label": "adams-point-devon-willis-fame-sighting | C104→C105 | 5 article(s) | advanced 2, opened 3",
+        "hood": "Adams Point",
+        "popids": [
+          "POP-00782",
+          "POP-00645",
+          "POP-00648",
+          "POP-00798"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "city-depak-ying-story-signal",
+        "label": "city-depak-ying-story-signal | C104→C105 | 3 article(s) | advanced 2, opened 1",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00170",
+          "POP-00198",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "dimond-melton-neilon-fame-sighting",
+        "label": "dimond-melton-neilon-fame-sighting | C105→C105 | 2 article(s) | opened 2",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00170",
+          "POP-00198",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00546",
+        "name": "Tara Ellison",
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00546-248cbca327",
+        "pop": "POP-00546",
+        "name": "Tara Ellison",
+        "quote": "I've just been going about my daily life, noticing the usual things in Rockridge like the busy aisles at Canopy Market and the 'For Rent' sign at Denise Simmons' house. As a journalist, I'm used to observing the world around me, but I don't feel like I've seen or felt anything particularly remarkable about myself lately.",
+        "factIds": [
+          "F-2b5f06ca9054"
+        ],
+        "src": "packet.W2[POP-00546]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Kai Marston",
+        "text": "I've heard rumors of a new project she's working on, but I need to verify this information",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C108",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-78217e633afa"
+    },
+    {
+      "t": "FACT",
+      "text": "37 culture figures rising; 1 new on the record",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-d4f51b9388bf"
+    },
+    {
+      "t": "FACT",
+      "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-bc818edcb044"
+    },
+    {
+      "t": "FACT",
+      "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-4f832cac7dfe"
+    },
+    {
+      "t": "FACT",
+      "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 57, ascending), last seen C86",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-4effa0393cfd"
+    },
+    {
+      "t": "FACT",
+      "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-5c40ed1f4718"
+    },
+    {
+      "t": "FACT",
+      "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 50, surging), last seen C99",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-4612e104232f"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Native MVP Davis (sports figure), Sports, Temescal — new on the culture record this cycle (fame 14, rising), last seen C108",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-7b104fd07365"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 97, cooling), last seen C94",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-7bab8413f0eb"
+    },
+    {
+      "t": "FACT",
+      "text": "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 71, cooling), last seen C88",
+      "src": "output/beats/Cultural_Ledger.jsonl @C108",
+      "id": "F-c17c0b9d469e"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Citywide): Tariq Harris; Emiko Suzuki; Gerald Hoffman",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+      "id": "F-d98df39e0c6a"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Lake Merritt): Deacon Seymour; Carmen Mesa; Marisol Guzman · at Cathedral of the Living Word; Estuary Architects",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+      "id": "F-3a8068fa24ea"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Fruitvale): Brielle Lewis; Jia Carmichael; Delia Fuentes · at Fruitvale Diner; Fruitvale Transit Hub Authority",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+      "id": "F-d62cb9a81139"
+    },
+    {
+      "t": "FACT",
+      "text": "Tara Ellison — Journalist — Rockridge",
+      "src": "Simulation_Ledger profile for POP-00546",
+      "id": "F-2b5f06ca9054"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a sourced evening pulse into present-tense arts and entertainment reporting where art, media, and a named place become a neighborhood act. A vivid room grounded in the Packet is success; generic culture roundup and invented nightlife are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "present-tense arts and entertainment scene with grounded neighborhood analysis",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed named event, media slate, sighting, venue, or neighborhood arts consequence",
+      "closing": "an image or open question about what the room, screen, or block is becoming"
+    },
+    "authorizedTexture": [
+      "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
+      "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
+      "metaphor, contrast, and scene transition grounded in the supplied pulse",
+      "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+    ],
+    "textureConditions": [
+      "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
+      "TV, movie, streaming, fame-sighting, event, and venue details must remain tied to the supplied evening source or pulse",
+      "unnamed sensory color may not create a new event, attendance count, quote, review, business action, or public reaction",
+      "the reporter may not claim an interview, attendance, observation, trend, or social-media response that the Packet does not supply",
+      "do not turn a shared evening substrate into a multi-voice culture average; one pulse, one room, one truth"
+    ],
+    "canonBlockers": [
+      "a named artist, celebrity, show, movie, event, venue, business, institution, neighborhood, or organization not found in the supplied record",
+      "an invented opening, screening, performance, appearance, sighting, crowd, attendance figure, review, or social-media reaction",
+      "an unsupported quote, interview, direct observation, career claim, release date, rating, or cultural trend",
+      "raw engine scores, labels, or decimals printed as public-facing cultural evidence",
+      "a causal claim about what a neighborhood or audience feels presented as measured fact",
+      "a generic culture-desk roundup that abandons the assigned evening pulse"
+    ]
+  },
+  "manifest": {
+    "id": "AM-ce66535fc33e",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-78217e633afa",
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-d4f51b9388bf",
+        "t": "FACT",
+        "text": "37 culture figures rising; 1 new on the record",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-bc818edcb044",
+        "t": "FACT",
+        "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-4f832cac7dfe",
+        "t": "FACT",
+        "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-4effa0393cfd",
+        "t": "FACT",
+        "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 57, ascending), last seen C86",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-5c40ed1f4718",
+        "t": "FACT",
+        "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-4612e104232f",
+        "t": "FACT",
+        "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 50, surging), last seen C99",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-7b104fd07365",
+        "t": "FACT",
+        "text": "Oakland Native MVP Davis (sports figure), Sports, Temescal — new on the culture record this cycle (fame 14, rising), last seen C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-7bab8413f0eb",
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 97, cooling), last seen C94",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-c17c0b9d469e",
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 71, cooling), last seen C88",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-d98df39e0c6a",
+        "t": "FACT",
+        "text": "ENGINE SEED (Citywide): Tariq Harris; Emiko Suzuki; Gerald Hoffman",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+      },
+      {
+        "id": "F-3a8068fa24ea",
+        "t": "FACT",
+        "text": "ENGINE SEED (Lake Merritt): Deacon Seymour; Carmen Mesa; Marisol Guzman · at Cathedral of the Living Word; Estuary Architects",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+      },
+      {
+        "id": "F-d62cb9a81139",
+        "t": "FACT",
+        "text": "ENGINE SEED (Fruitvale): Brielle Lewis; Jia Carmichael; Delia Fuentes · at Fruitvale Diner; Fruitvale Transit Hub Authority",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+      },
+      {
+        "id": "F-2b5f06ca9054",
+        "t": "FACT",
+        "text": "Tara Ellison — Journalist — Rockridge",
+        "src": "Simulation_Ledger profile for POP-00546"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00546-248cbca327",
+        "speakerId": "POP-00546",
+        "speakerName": "Tara Ellison",
+        "text": "I've just been going about my daily life, noticing the usual things in Rockridge like the busy aisles at Canopy Market and the 'For Rent' sign at Denise Simmons' house. As a journalist, I'm used to observing the world around me, but I don't feel like I've seen or felt anything particularly remarkable about myself lately.",
+        "factIds": [
+          "F-2b5f06ca9054"
+        ],
+        "src": "packet.W2[POP-00546]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00546",
+        "name": "Tara Ellison",
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Kai Marston",
+        "text": "I've heard rumors of a new project she's working on, but I need to verify this information",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
+      "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
+      "metaphor, contrast, and scene transition grounded in the supplied pulse",
+      "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+    ],
+    "textureConditions": [
+      "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
+      "TV, movie, streaming, fame-sighting, event, and venue details must remain tied to the supplied evening source or pulse",
+      "unnamed sensory color may not create a new event, attendance count, quote, review, business action, or public reaction",
+      "the reporter may not claim an interview, attendance, observation, trend, or social-media response that the Packet does not supply",
+      "do not turn a shared evening substrate into a multi-voice culture average; one pulse, one room, one truth"
+    ],
+    "forbiddenClaimClasses": [
+      "a named artist, celebrity, show, movie, event, venue, business, institution, neighborhood, or organization not found in the supplied record",
+      "an invented opening, screening, performance, appearance, sighting, crowd, attendance figure, review, or social-media reaction",
+      "an unsupported quote, interview, direct observation, career claim, release date, rating, or cultural trend",
+      "raw engine scores, labels, or decimals printed as public-facing cultural evidence",
+      "a causal claim about what a neighborhood or audience feels presented as measured fact",
+      "a generic culture-desk roundup that abandons the assigned evening pulse"
+    ]
+  }
+}

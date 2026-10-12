@@ -1,0 +1,23 @@
+{
+  "office": "health_center",
+  "cycle": 106,
+  "speaker": "Bobby Chen-Ramirez",
+  "cascadeSummary": "Filed certified inspection reports for interior wall framing and MEP rough-ins at the Temescal Community Health Center ahead of schedule. Expanded community transparency by posting daily progress photos at the 47th & Telegraph bulletin board as promised to neighbors.",
+  "statements": [
+    {
+      "statementId": "STMT-106-health_center-001",
+      "type": "operational_status",
+      "topic": "construction_milestone",
+      "initiative": "INIT-005",
+      "decision": "Completed interior wall framing and utility inspections with sign-off",
+      "quote": "The pharmacist's bulletin board now shows conduit runs instead of lost cat posters. That's how you measure real community engagement.",
+      "fullStatement": "Temescal Community Health Center construction update: All interior wall framing passed inspection today with zero deficiencies—16\" on-center spacing verified, fireblocking installed per spec. MEP rough-in inspections completed for first-floor plumbing and second-floor electrical. The pharmacist's bulletin board at 47th & Telegraph now shows conduit runs instead of lost cat posters—that's how you measure real community engagement. Two-shift crews maintain a 7-day lead on schedule without compromising OSHPD-3 standards.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "MilestoneNotes": "C106: Interior framing + MEP rough-ins inspected/signed off; 7-day schedule lead maintained",
+        "NextScheduledAction": "Drywall installation and interior finishes",
+        "NextActionCycle": 107
+      }
+    }
+  ]
+}

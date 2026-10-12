@@ -1,0 +1,48 @@
+{
+  "office": "council_d1",
+  "cycle": 106,
+  "speaker": "Denise Carter",
+  "cascadeSummary": "Approved Month-seven Stabilization Fund disbursements to stabilize more households in West Oakland, demanded immediate action on the Youth Apprenticeship Pipeline backlog, and called for a district-wide collaboration to address incoherence in West Oakland and Fruitvale. Credit for West Oakland's progress goes to community resilience and targeted initiatives.",
+  "statements": [
+    {
+      "statementId": "STMT-106-council_d1-001",
+      "type": "vote_statement",
+      "topic": "Stabilization Fund",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Approved Month-seven disbursement batch",
+      "quote": "Stability isn’t a waiting list—it’s a mandate. We’re hitting the streets this cycle to find the next households in need.",
+      "fullStatement": "The West Oakland Stabilization Fund continues to make significant headway. This month���s disbursement is on track, targeting households in slipping blocks to ensure stability isn’t a waiting list. We’re seeing progress, but the momentum must be sustained. Fifty-seven families stabilized isn’t a milestone—it’s a mandate. We’re hitting the streets this cycle to find the next fifty-seven, because stability shouldn’t be a waiting list.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d1-002",
+      "type": "vote_statement",
+      "topic": "Youth Apprenticeship Pipeline",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Demanded immediate backlog clearance",
+      "quote": "Every young person in this city deserves a shot, not a runaround.",
+      "fullStatement": "The Youth Apprenticeship Pipeline backlog is unacceptable. Fix the pipeline—connect East and West Oakland youth to real jobs, not paperwork. This cycle’s town hall must center student voices. Every young person in this city deserves a shot, not a runaround.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d1-003",
+      "type": "statement",
+      "topic": "Systemic Incoherence",
+      "initiative": null,
+      "decision": "Called for district-wide collaboration",
+      "quote": "High-severity incoherence isn’t a technicality—it’s a crisis.",
+      "fullStatement": "High-severity incoherence in West Oakland, Fruitvale, and East Oakland isn’t a technicality—it’s a crisis. We need boots-on-the-ground collaboration, not more siloed programs. Addressing this incoherence requires immediate action and a united effort across districts.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d1-004",
+      "type": "statement",
+      "topic": "District Constituents",
+      "initiative": null,
+      "decision": "Credited community resilience",
+      "quote": "Brooklyn’s vitality comes from its people—not City Hall’s policies.",
+      "fullStatement": "Brooklyn’s vitality comes from its people—not City Hall’s policies. Let’s invest in the small businesses that kept lights on during lean years. In West Oakland, some programs are paying off, and credit goes to community resilience and targeted initiatives.",
+      "trackerUpdates": {}
+    }
+  ]
+}

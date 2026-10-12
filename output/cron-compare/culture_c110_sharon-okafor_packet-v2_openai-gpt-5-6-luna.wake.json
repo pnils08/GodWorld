@@ -1,0 +1,29 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "110",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "sharon-okafor",
+  "byline": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 28,
+  "quotesLanded": 0,
+  "disposition": "flagged",
+  "rheaPass": false,
+  "rheaFlagCount": 4,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/culture_c110_sharon-okafor_packet-v2_openai-gpt-5-6-luna-1702.md",
+  "selfRecord": null,
+  "ranAt": "2026-10-10T17:02:26.199Z"
+}

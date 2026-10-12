@@ -1,0 +1,48 @@
+{
+  "office": "council_d6",
+  "cycle": 109,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "District 6 is acting directly to protect commercial vitality on Piedmont Avenue by pairing our low crime rates with rigorous municipal service delivery and responsive merchant support. Citywide, I am establishing strict council oversight benchmarks for Baylight Phase II remediation and insisting that all capital and workforce programs deliver transparent, verified returns for Oakland taxpayers.",
+  "statements": [
+    {
+      "statementId": "STMT-109-council_d6-001",
+      "type": "district_statement",
+      "topic": "Piedmont Avenue Commercial Corridor Strategy",
+      "initiative": null,
+      "decision": "Deploy a targeted district support strategy for Piedmont Avenue merchants focusing on municipal service responsiveness and corridor stability.",
+      "quote": "Low crime and active sidewalks are the foundation of Piedmont Avenue, but sustaining merchant confidence requires City Hall to deliver dependable municipal services every single day.",
+      "fullStatement": "Piedmont Avenue continues to demonstrate the strength of neighborhood-level stability with low crime and bustling street trade, yet merchant sentiment signals that we cannot take our commercial districts for granted. District 6 is advancing a focused corridor strategy to ensure our small businesses receive prompt municipal maintenance, streamlined administrative support, and steady public safety coordination. We protect our commercial vitality not through rhetoric, but through reliable, disciplined execution.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d6-002",
+      "type": "oversight_statement",
+      "topic": "Baylight District Phase II Site Remediation Oversight",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Establish independent council oversight criteria and milestone audits for Phase II remediation contracts.",
+      "quote": "Remediation at Baylight cannot run on general progress reports; every environmental metric, hauling contract, and dollar spent demands rigorous public verification.",
+      "fullStatement": "As site remediation begins for Phase II of the Baylight District, the City Council must maintain active, independent oversight over every operational phase. Large-scale remediation projects carry serious environmental and fiscal risks that require structured milestone auditing rather than passive updates. I am establishing concrete council oversight benchmarks to ensure contractor compliance, environmental safety standards, and complete transparency in spending before subsequent project phases proceed.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d6-003",
+      "type": "oversight_statement",
+      "topic": "Youth Apprenticeship Pipeline Placement Verification",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Support publication of cohort placement metrics while mandating quarterly retention audits.",
+      "quote": "Publishing placement metrics is the standard of fiscal accountability Oakland deserves—job training programs must prove they lead directly to durable careers.",
+      "fullStatement": "I support the directed publication of cohort placement metrics for the Youth Apprenticeship Pipeline. Workforce development investments must be evaluated by real employment outcomes, verifiable wage data, and sustained retention. Establishing clear, publicly reported performance indicators protects taxpayer dollars and guarantees that our enrolled youth transition into genuine, long-term careers.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d6-004",
+      "type": "policy_statement",
+      "topic": "Fruitvale Transit Hub Phase II Design Consultant Selection",
+      "initiative": "Fruitvale Transit Hub Phase II — Visioning",
+      "decision": "Condition design consultant authorization on strict cost controls and defined project milestones.",
+      "quote": "Major transit infrastructure requires rigorous cost containment from day one of design selection through project delivery.",
+      "fullStatement": "The selection of design consultants for Phase II of the Fruitvale Transit Hub must be bound to firm cost ceilings, clear deliverable timelines, and transparent reporting. Infrastructure investments succeed when visionary planning is backed by disciplined financial management and enforceable contractual standards.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+# SLICE — food & hospitality (kitchens as workplaces)
+
+Cycle **C110** · kind `food-workplaces` · hood **Laurel**
+
+## THE SLICE
+- Angle: Laurel kitchens: Nino's, Schoolgate Cafe, MacArthur Kitchen — the people who work the shift
+- Hook: Colin Phillips, Bakery Worker at Nino's. 2 named workers at 2 named kitchens in Laurel on the ledger this cycle.
+
+## BUSINESSES (ledger) AND WHO WORKS THERE (roster)
+- **Nino's** — Food & Beverage · 13 employees · growth 3.9% · revenue $1.2M (+$887 vs C109)
+  - Colin Phillips — Bakery Worker
+- **Schoolgate Cafe** — Cafe / dining · 8 employees · growth 4.6% · revenue $691k (+$608 vs C109)
+  - Jori Clame — Server
+- **MacArthur Kitchen** — Restaurant & Dining · 11 employees · growth 3.8% · revenue $994k (+$728 vs C109)
+  - _no roster names — the staff here are yours to paint_
+
+## ENGINE HOOKS (colour, not fact)
+- High concentration of ambitious, driven personalities. Career competition and economic hustle stories. (baseline context piece)
+- defaulted on the debts — the savings are gone and the record carries it (observational analysis)
+- the debts crossed a line this week — sleep comes harder now (desk rotation)
+
+## ENGINE SEEDS (this cycle, business desk)
+- Jack London · carrying, 5.33 strength left of 3-cycle run
+  - citizens: Brianna Scott; LaTrice Desai; Basma Inoue; Belle Lopez
+  - businesses: Harborline Grill; Port of Oakland
+  - colour: Brianna Scott — drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside
+  - colour: LaTrice Desai — learned a useless, wonderful fact and told two people
+  - colour: Basma Inoue — watched the ferry cut across the bay at sunset and felt lucky to live this close to the water
+  - colour: Belle Lopez — adjusted today's plans after last night's gridlock
+- West Oakland · carrying, -6.00 strength left of 4-cycle run
+  - citizens: Elias Varek; Nia Rook; Ilandra Tain; Josefina Williams
+  - businesses: Firehouse 29 West Oakland Baseball Academy; Northgate Construction
+  - colour: Elias Varek — spent the evening sorting a box of things that used to be someone's
+  - colour: Nia Rook — traded produce over a fence and came out ahead
+  - colour: Ilandra Tain — overheard coworkers talking about last night's scene
+  - colour: Josefina Williams — noticed three new pop-up restaurants on Telegraph and wondered how long any of them would last
+
+## APPROACH
+Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.
+
+## FORBIDDEN
+- Do not invent a business, a worker, an owner or a place — every name comes from this slice
+- Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose
+- Do not contradict a role, employer or neighborhood listed here
+
+## ROTATION
+picked **Laurel** (least recently covered). Pool: Jack London (5 staffed, last C106); Downtown (1 staffed, never); Temescal (1 staffed, last C108); Chinatown (1 staffed, never); Rockridge (2 staffed, last C107); Fruitvale (1 staffed, last C109); West Oakland (1 staffed, never); Uptown (1 staffed, never); Grand Lake (1 staffed, never); Laurel (2 staffed, never); East Oakland (1 staffed, never); San Antonio (1 staffed, never)
+
+## DESK SIGNAL (pointers only — not the source)
+- transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale [Fruitvale]
+- economic ailment — economic footprint, affected businesses, workforce impact in West Oakland [West Oakland, East Oakland, Fruitvale]
+- economic ailment — economic footprint, affected businesses, workforce impact in Downtown [Downtown, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, Lake Merritt, Uptown, Baylight District, East Oakland]
+- Baylight District — Final Council Vote — economic upside, jobs and footprint in Jack London [Jack London, Downtown]
+- civic — economic upside, jobs and footprint in Downtown [Downtown]
+
+## POINTERS
+- output/beats/Business_Ledger.jsonl (176 rows @C110)
+- output/beats/Employment_Roster.jsonl (869 rows)
+- output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 5)
+- output/beats/prev/Business_Ledger.jsonl (movement vs C109)
+- output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 3)
+- output/desk_signal_c110.json lanes.business (pointers only)
+- docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2
+
+_Generated by scripts/buildEconomicSlice.js — no LLM. Facts are the names on this page; the room is the reporter's._

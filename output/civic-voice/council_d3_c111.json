@@ -1,0 +1,38 @@
+{
+  "office": "council_d3",
+  "cycle": 111,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "This cycle, I pushed for accelerated progress on the Fruitvale Transit Hub Phase II to meet the Mayor’s deadline, ensuring community input remains central. I also demanded immediate action on the Oakland Youth Apprenticeship Pipeline to fulfill our promise to D3’s youth. Addressing San Antonio’s struggles, I called for targeted safety and economic recovery measures.",
+  "statements": [
+    {
+      "statementId": "STMT-111-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Fruitvale Transit Hub Phase II",
+      "initiative": "INIT-003",
+      "decision": "Accelerate schematics delivery by Cycle 114",
+      "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+      "fullStatement": "The Fruitvale Transit Hub Phase II has lingered too long in visioning. This project is a cornerstone of our community’s future, and delays only hurt the merchants and residents who depend on it. I support the Mayor’s directive to accelerate the schematics delivery by Cycle 114, ensuring we keep momentum while maintaining robust community oversight.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d3-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline",
+      "initiative": "INIT-007",
+      "decision": "Demand cohort placement report by Cycle 112",
+      "quote": "This cohort is our promise in action—we're investing in D3's future, one apprentice at a time.",
+      "fullStatement": "The Oakland Youth Apprenticeship Pipeline is a critical investment in our district’s future. We cannot afford further delays in placing our first cohort. I am demanding an immediate progress report by Cycle 112 to ensure we honor our commitment to D3’s youth.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d3-003",
+      "type": "vote_statement",
+      "topic": "San Antonio Corridor Distress",
+      "initiative": null,
+      "decision": "Push for safety patrols and economic recovery measures",
+      "quote": "San Antonio isn’t just another neighborhood—it’s the heart of D3’s resilience.",
+      "fullStatement": "San Antonio’s struggles demand urgent action. We will push for increased safety patrols and targeted economic recovery programs to restore trust and stability in our corridors. This is not just about restoring trade—it’s about rebuilding community.",
+      "trackerUpdates": {}
+    }
+  ]
+}

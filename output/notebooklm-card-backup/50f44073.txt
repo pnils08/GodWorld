@@ -1,0 +1,217 @@
+PLAYER INTAKE (Batter) — 2041 SEASON
+
+Name: Frank Reyna
+
+ 
+
+Team: Oakland Athletics
+
+ 
+
+Position: RF (LF, CF)
+
+ 
+
+Age: 21
+
+ 
+
+Bats: S
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'3"
+
+ 
+
+Weight: 197 lbs
+
+ 
+
+Born: Pennsylvania
+
+ 
+
+Drafted: Round 1 (2037)
+
+ 
+
+MLB Service: 1.000
+
+ 
+
+Overall: 86
+
+ 
+
+Potential: B
+
+ 
+
+POPID: POP-00079
+
+
+--------------------------------------------------------------------------------
+
+
+2041 REGULAR SEASON
+
+G: 46
+
+ 
+
+PA: 171
+
+ 
+
+AB: 164
+
+ 
+
+R: 31
+
+ 
+
+H: 52
+
+ 
+
+2B: 12
+
+ 
+
+3B: 3
+
+ 
+
+HR: 14
+
+ 
+
+RBI: 34
+
+ 
+
+BB: 6
+
+ 
+
+SO: 18
+
+ 
+
+HBP: 0
+
+ 
+
+SF: 1
+
+ 
+
+SAC: 0
+
+ 
+
+GIDP: 1
+
+AVG: 0.317
+
+ 
+
+OBP: 0.339
+
+ 
+
+SLG: 0.683
+
+ 
+
+OPS: 1.022
+
+ 
+
+TB: 112
+
+SB: 7
+
+ 
+
+CS: 3
+
+ 
+
+SB%: 0.700
+
+
+--------------------------------------------------------------------------------
+
+
+DEFENSE (2041)
+
+PO: 101
+
+ 
+
+A: 4
+
+ 
+
+E: 0
+
+ 
+
+FLD%: 1.000
+
+ 
+
+INN: 375.0
+
+
+--------------------------------------------------------------------------------
+
+
+VALUE
+
+WAR: 2.4
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2041: $780,000
+
+ 
+
+2042: RNW
+
+ 
+
+2043: RNW
+
+ 
+
+2044: ARB
+
+ 
+
+FA: 2046
+
+
+--------------------------------------------------------------------------------
+
+
+Quirks
+
+Switch-Hitting Power Specialist
+
+Flawless Right Field Defense (1.000 FLD%)
+
+High Extra-Base Trajectory (.366 ISO)
+
+[Audit Note on Walks]: Master Stat Sheet displays 34 in raw BB column, but PA of 171, BB% of 3.5%, and exact OBP of .339 mathematically confirm 6 BB.

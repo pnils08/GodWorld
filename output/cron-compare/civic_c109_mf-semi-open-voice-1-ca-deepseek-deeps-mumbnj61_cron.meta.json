@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "109",
+  "model": "deepseek/deepseek-chat",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 13040,
+  "usageOutputTokens": 569,
+  "savedFiles": [
+    "output/cron-compare/civic_c109_carmen-delaine_mf-semi-open-voice-1-ca-deepseek-deeps-mumbnj61_deepseek-deepseek-chat.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c109.md",
+  "durationMs": 15452,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-09-29T06:55:25.420Z"
+}

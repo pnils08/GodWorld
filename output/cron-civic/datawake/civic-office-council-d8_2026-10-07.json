@@ -1,0 +1,24 @@
+{
+  "office": "council_d8",
+  "agentDir": "civic-office-council-d8",
+  "holder": "Nina Chen",
+  "popid": "POP-00505",
+  "title": "City Council District 8",
+  "date": "2026-10-07",
+  "cycle": 110,
+  "model": "google/gemini-3.7-flash",
+  "statement": "District 8 does not leave Adams Point behind. With sentiment at 0.38 against the city average of 0.535 and property crime recorded at 39, the neighborhood requires rigorous procedural oversight and scheduled municipal maintenance to halt decay momentum. We stand firmly with Adams Point by demanding structured commercial corridor stabilization and documented administrative follow-through.",
+  "moves": [
+    {
+      "type": "canvass",
+      "payload": {
+        "hood": "Adams Point",
+        "note": "Reviewing storefront conditions and municipal service delivery with local operators and residents."
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "Adams Point sentiment 0.38 vs city 0.535",
+  "ranAt": "2026-10-07T10:45:29.503Z",
+  "fellBackFrom": null
+}

@@ -1,0 +1,538 @@
+[
+  {
+    "pop": "POP-01022",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01022\",\"name\":\"Wilson Shepard\",\"role\":\"Head Coach, Oakland Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Selena Grant\",\"question\":\"As a resident of Downtown, what have you seen, felt, or understood about \\\"The Oaks' preseason record and their preparation for the upcoming season\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-beat\",\"hood\":\"Downtown\",\"focus\":\"The Oaks' preseason record and their preparation for the upcoming season\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\"},\"exposure\":{\"basis\":[\"named on the Oaks feed C107 (Oakland_Sports_Feed)\",\"same-neighborhood\"],\"self\":\"Wilson Shepard — Head Coach, Oakland Oaks — Downtown\",\"evidence\":[{\"id\":\"EV-956aed9059\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\",\"text\":\"The Oaks are a full go for opening night , starting 5 announced.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state C107 · 0-0 · W0\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\",\"id\":\"F-ec1960037058\"},{\"t\":\"FACT\",\"text\":\"The Oaks are a full go for opening night , starting 5 announced.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\",\"id\":\"F-fcc90f20f531\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-455411084c39\"},{\"t\":\"FACT\",\"text\":\"Record 0-0 · streak W0\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-8d8f1ca03813\"},{\"t\":\"FACT\",\"text\":\"Trigger: pre-season\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-00df7b7c701f\"},{\"t\":\"FACT\",\"text\":\"Franchise stability: uncertain\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-9ff439581220\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — Head Coach, Oakland Oaks — Downtown\",\"src\":\"Simulation_Ledger profile for POP-01022\",\"id\":\"F-5b5a560909b4\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Selena Grant",
+        "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The Oaks' preseason record and their preparation for the upcoming season\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-beat",
+        "hood": "Downtown",
+        "focus": "The Oaks' preseason record and their preparation for the upcoming season",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+      },
+      "exposure": {
+        "basis": [
+          "named on the Oaks feed C107 (Oakland_Sports_Feed)",
+          "same-neighborhood"
+        ],
+        "self": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "evidence": [
+          {
+            "id": "EV-956aed9059",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "text": "The Oaks are a full go for opening night , starting 5 announced."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state C107 · 0-0 · W0",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+          "id": "F-ec1960037058"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks are a full go for opening night , starting 5 announced.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+          "id": "F-fcc90f20f531"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-455411084c39"
+        },
+        {
+          "t": "FACT",
+          "text": "Record 0-0 · streak W0",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-8d8f1ca03813"
+        },
+        {
+          "t": "FACT",
+          "text": "Trigger: pre-season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-00df7b7c701f"
+        },
+        {
+          "t": "FACT",
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-9ff439581220"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "src": "Simulation_Ledger profile for POP-01022",
+          "id": "F-5b5a560909b4"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01023",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01023\",\"name\":\"Adash Stanley\",\"role\":\"PG / The Oaks \",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Selena Grant\",\"question\":\"As a resident of Downtown, what have you seen, felt, or understood about \\\"The Oaks' preseason record and their preparation for the upcoming season\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-beat\",\"hood\":\"Downtown\",\"focus\":\"The Oaks' preseason record and their preparation for the upcoming season\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\"},\"exposure\":{\"basis\":[\"named on the Oaks feed C107 (Oakland_Sports_Feed)\",\"same-neighborhood\"],\"self\":\"Adash Stanley — PG / The Oaks — Downtown\",\"evidence\":[{\"id\":\"EV-13bab9108e\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\",\"text\":\"The Oaks are a full go for opening night , starting 5 announced.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state C107 · 0-0 · W0\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\",\"id\":\"F-ec1960037058\"},{\"t\":\"FACT\",\"text\":\"The Oaks are a full go for opening night , starting 5 announced.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\",\"id\":\"F-fcc90f20f531\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-455411084c39\"},{\"t\":\"FACT\",\"text\":\"Record 0-0 · streak W0\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-8d8f1ca03813\"},{\"t\":\"FACT\",\"text\":\"Trigger: pre-season\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-00df7b7c701f\"},{\"t\":\"FACT\",\"text\":\"Franchise stability: uncertain\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-9ff439581220\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley — PG / The Oaks — Downtown\",\"src\":\"Simulation_Ledger profile for POP-01023\",\"id\":\"F-26cdcab1a2d4\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Selena Grant",
+        "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The Oaks' preseason record and their preparation for the upcoming season\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-beat",
+        "hood": "Downtown",
+        "focus": "The Oaks' preseason record and their preparation for the upcoming season",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+      },
+      "exposure": {
+        "basis": [
+          "named on the Oaks feed C107 (Oakland_Sports_Feed)",
+          "same-neighborhood"
+        ],
+        "self": "Adash Stanley — PG / The Oaks — Downtown",
+        "evidence": [
+          {
+            "id": "EV-13bab9108e",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+            "text": "The Oaks are a full go for opening night , starting 5 announced."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state C107 · 0-0 · W0",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+          "id": "F-ec1960037058"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks are a full go for opening night , starting 5 announced.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+          "id": "F-fcc90f20f531"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-455411084c39"
+        },
+        {
+          "t": "FACT",
+          "text": "Record 0-0 · streak W0",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-8d8f1ca03813"
+        },
+        {
+          "t": "FACT",
+          "text": "Trigger: pre-season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-00df7b7c701f"
+        },
+        {
+          "t": "FACT",
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-9ff439581220"
+        },
+        {
+          "t": "FACT",
+          "text": "Adash Stanley — PG / The Oaks — Downtown",
+          "src": "Simulation_Ledger profile for POP-01023",
+          "id": "F-26cdcab1a2d4"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00212",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00212\",\"name\":\"Jessie Hess\",\"role\":\"Barista\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Selena Grant\",\"question\":\"As a resident of Downtown, what have you seen, felt, or understood about \\\"The Oaks' preseason record and their preparation for the upcoming season\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-beat\",\"hood\":\"Downtown\",\"focus\":\"The Oaks' preseason record and their preparation for the upcoming season\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Jessie Hess — Barista — Downtown\",\"evidence\":[],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state C107 · 0-0 · W0\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\",\"id\":\"F-ec1960037058\"},{\"t\":\"FACT\",\"text\":\"The Oaks are a full go for opening night , starting 5 announced.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\",\"id\":\"F-fcc90f20f531\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-455411084c39\"},{\"t\":\"FACT\",\"text\":\"Record 0-0 · streak W0\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-8d8f1ca03813\"},{\"t\":\"FACT\",\"text\":\"Trigger: pre-season\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-00df7b7c701f\"},{\"t\":\"FACT\",\"text\":\"Franchise stability: uncertain\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-9ff439581220\"},{\"t\":\"FACT\",\"text\":\"Jessie Hess — Barista — Downtown\",\"src\":\"Simulation_Ledger profile for POP-00212\",\"id\":\"F-48795c7c7253\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Selena Grant",
+        "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The Oaks' preseason record and their preparation for the upcoming season\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-beat",
+        "hood": "Downtown",
+        "focus": "The Oaks' preseason record and their preparation for the upcoming season",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Jessie Hess — Barista — Downtown",
+        "evidence": [],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state C107 · 0-0 · W0",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+          "id": "F-ec1960037058"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks are a full go for opening night , starting 5 announced.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+          "id": "F-fcc90f20f531"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-455411084c39"
+        },
+        {
+          "t": "FACT",
+          "text": "Record 0-0 · streak W0",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-8d8f1ca03813"
+        },
+        {
+          "t": "FACT",
+          "text": "Trigger: pre-season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-00df7b7c701f"
+        },
+        {
+          "t": "FACT",
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-9ff439581220"
+        },
+        {
+          "t": "FACT",
+          "text": "Jessie Hess — Barista — Downtown",
+          "src": "Simulation_Ledger profile for POP-00212",
+          "id": "F-48795c7c7253"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00224",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00224\",\"name\":\"Dillon Trevor\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Selena Grant\",\"question\":\"As a resident of Downtown, what have you seen, felt, or understood about \\\"The Oaks' preseason record and their preparation for the upcoming season\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-beat\",\"hood\":\"Downtown\",\"focus\":\"The Oaks' preseason record and their preparation for the upcoming season\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Dillon Trevor — Server — Downtown\",\"evidence\":[],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state C107 · 0-0 · W0\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\",\"id\":\"F-ec1960037058\"},{\"t\":\"FACT\",\"text\":\"The Oaks are a full go for opening night , starting 5 announced.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C107\",\"id\":\"F-fcc90f20f531\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-455411084c39\"},{\"t\":\"FACT\",\"text\":\"Record 0-0 · streak W0\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-8d8f1ca03813\"},{\"t\":\"FACT\",\"text\":\"Trigger: pre-season\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-00df7b7c701f\"},{\"t\":\"FACT\",\"text\":\"Franchise stability: uncertain\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C107\",\"id\":\"F-9ff439581220\"},{\"t\":\"FACT\",\"text\":\"Dillon Trevor — Server — Downtown\",\"src\":\"Simulation_Ledger profile for POP-00224\",\"id\":\"F-80fac7a0ad63\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00224",
+        "name": "Dillon Trevor",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Selena Grant",
+        "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The Oaks' preseason record and their preparation for the upcoming season\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-beat",
+        "hood": "Downtown",
+        "focus": "The Oaks' preseason record and their preparation for the upcoming season",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Dillon Trevor — Server — Downtown",
+        "evidence": [],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state C107 · 0-0 · W0",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+          "id": "F-ec1960037058"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks are a full go for opening night , starting 5 announced.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+          "id": "F-fcc90f20f531"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-455411084c39"
+        },
+        {
+          "t": "FACT",
+          "text": "Record 0-0 · streak W0",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-8d8f1ca03813"
+        },
+        {
+          "t": "FACT",
+          "text": "Trigger: pre-season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-00df7b7c701f"
+        },
+        {
+          "t": "FACT",
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+          "id": "F-9ff439581220"
+        },
+        {
+          "t": "FACT",
+          "text": "Dillon Trevor — Server — Downtown",
+          "src": "Simulation_Ledger profile for POP-00224",
+          "id": "F-80fac7a0ad63"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

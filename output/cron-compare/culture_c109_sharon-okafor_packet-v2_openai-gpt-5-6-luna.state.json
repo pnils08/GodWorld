@@ -1,0 +1,275 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00159",
+    "name": "Sharon Okafor",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Lena Cross is fading — how the city follows its names",
+    "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lifestyle",
+      "hood": "Lake Merritt",
+      "facts": [
+        "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 96, cooling), 17 media mentions",
+        "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 70, cooling), 14 media mentions",
+        "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "Oakland Native MVP Davis (sports figure), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 14, rising), 1 media mentions"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "Household in Lake Merritt spending 56% of income on housing (observational analysis)",
+        "A family bought their home in Downtown (observational analysis)",
+        "The Villanueva line is founded (observational analysis)",
+        "The Dillon family opened Dillon Clinic (observational analysis)"
+      ],
+      "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lifestyle",
+    "hood": "Lake Merritt",
+    "src": "output/beats/Cultural_Ledger.jsonl @C109",
+    "plan": {
+      "focus": "Lena Cross and Rowan Pierce, two individuals who have seen their fame decline in recent times",
+      "closeQuestion": "What does the future hold for those who have experienced fame, but are now struggling to maintain their place in the public eye?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Sharon Okafor",
+        "text": "I've heard rumors of a possible comeback for one of the fading celebrities, but I need to verify this information before pursuing it further",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao leads the fame table; 2 fading, 1 new",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-3f8b0821a097"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 96, cooling), 17 media mentions.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-8011b180d4d7"
+    },
+    {
+      "t": "FACT",
+      "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 96, cooling), 17 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-6f6749f881d1"
+    },
+    {
+      "t": "FACT",
+      "text": "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 70, cooling), 14 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-6750bf963610"
+    },
+    {
+      "t": "FACT",
+      "text": "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-92cb04863b47"
+    },
+    {
+      "t": "FACT",
+      "text": "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-8d85302e7eed"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Native MVP Davis (sports figure), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 14, rising), 1 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "id": "F-ee1d9da1fe65"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "sharon-behavior-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Frame one Packet-supplied venue condition as a behavior question without inventing Sharon's presence, patrons, habits, activity, cause, trend, diagnosis, or social meaning.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "warm evidence-bounded lifestyle brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named venue, location, and condition",
+      "closing": "the human behavior account still needed"
+    },
+    "authorizedTexture": [
+      "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
+      "lifestyle vocabulary used only to pose a question and never as proof of a habit, preference, mood, trend, or diagnosis"
+    ],
+    "textureConditions": [
+      "a quiet venue record proves only the supplied venue condition and location, not patron count, decline, closure, mood, cause, habit, preference, or citywide trend",
+      "first-person visits, every patron, manager, regular, worker, expert, psychologist, quote, action, date, count, behavior change, and social meaning require Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, observation, patron, manager, regular, worker, expert, psychologist, interview, dialogue, quote, line, gathering, habit, preference, behavior change, diagnosis, or social meaning",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, count, or cause",
+      "closure or decline claims, citywide lifestyle trend, collective sentiment, raw engine labels, or economic conclusion presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-e4fb261464b8",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-3f8b0821a097",
+        "t": "FACT",
+        "text": "Marin Tao leads the fame table; 2 fading, 1 new",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-8011b180d4d7",
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 96, cooling), 17 media mentions.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-6f6749f881d1",
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 96, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-6750bf963610",
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 70, cooling), 14 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-92cb04863b47",
+        "t": "FACT",
+        "text": "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-8d85302e7eed",
+        "t": "FACT",
+        "text": "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-ee1d9da1fe65",
+        "t": "FACT",
+        "text": "Oakland Native MVP Davis (sports figure), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 14, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sharon Okafor",
+        "text": "I've heard rumors of a possible comeback for one of the fading celebrities, but I need to verify this information before pursuing it further",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
+      "lifestyle vocabulary used only to pose a question and never as proof of a habit, preference, mood, trend, or diagnosis"
+    ],
+    "textureConditions": [
+      "a quiet venue record proves only the supplied venue condition and location, not patron count, decline, closure, mood, cause, habit, preference, or citywide trend",
+      "first-person visits, every patron, manager, regular, worker, expert, psychologist, quote, action, date, count, behavior change, and social meaning require Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, observation, patron, manager, regular, worker, expert, psychologist, interview, dialogue, quote, line, gathering, habit, preference, behavior change, diagnosis, or social meaning",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, count, or cause",
+      "closure or decline claims, citywide lifestyle trend, collective sentiment, raw engine labels, or economic conclusion presented as fact"
+    ]
+  }
+}

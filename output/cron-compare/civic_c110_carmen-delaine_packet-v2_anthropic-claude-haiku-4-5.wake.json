@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "110",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-4.5",
+  "configuredWriterModel": "anthropic/claude-haiku-4.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "carmen-delaine",
+  "byline": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 102,
+  "quotesLanded": 5,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 1,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "env.local', '.env'] }\n{\n  \"popId\": \"POP-00011\",\n  \"name\": \"Carmen Delaine\",\n  \"recorded\": true,\n  \"text\": \"filed: Nine Months, Seventy-Nine Households: The Stabilization Fund Moves at a 23-Day Pace\"\n}"
+  },
+  "ranAt": "2026-10-05T23:15:50.707Z",
+  "dispositionReconciledAt": "2026-10-10T17:00:04.490Z"
+}

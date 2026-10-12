@@ -1,0 +1,21 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "culture",
+  "persona": "kai-marston",
+  "storyline": {
+    "slug": "rockridge-tara-ellison-beat-arts",
+    "verb": "opened"
+  },
+  "hood": "Rockridge",
+  "quotes": [
+    {
+      "pop": "POP-00546",
+      "name": "Tara Ellison",
+      "quote": "I've just been going about my daily life, noticing the usual things in Rockridge like the busy aisles at Canopy Market and the 'For Rent' sign at Denise Simmons' house. As a journalist, I'm used to observing the world around me, but I don't feel like I've seen or felt anything particularly remarkable about myself lately."
+    }
+  ],
+  "claim": "I've just been going about my daily life, noticing the usual things in Rockridge like the busy aisles at Canopy Market and the 'For Rent' sign at Denise Simmons' house. As a journalist, I'm used to observing the world around me, but I don't feel like I've seen or felt anything particularly remarkable about myself lately.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-25T18:16:43.227Z"
+}

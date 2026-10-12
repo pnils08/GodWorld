@@ -1,0 +1,21 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 111,
+  "primaryVoice": "Chen-Ramirez (health_center-001)",
+  "consolidatedFrom": [
+    "STMT-111-health_center-001 (Chen-Ramirez — post-occupancy audit readiness)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "MilestoneNotes": "C111: Implemented pre-opening clinical intake workflow audits and expenditure reconciliations per D7 directive",
+    "LastWorkCycle": 111,
+    "LastWorkSeat": "civic-office-council-d7, proj-health-center"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-110-civic-office-council-d7-2026-10-07",
+      "MV-110-proj-health-center-2026-10-09"
+    ]
+  }
+}

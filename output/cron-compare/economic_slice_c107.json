@@ -1,0 +1,754 @@
+{
+  "version": "ECONOMIC-SLICE-3",
+  "empty": false,
+  "cycle": 107,
+  "kind": "economic-storefront",
+  "variant": "business",
+  "hood": "Temescal",
+  "pulse": {
+    "className": "hood-businesses",
+    "score": 32,
+    "label": "Temescal businesses · Gridiron Analytics, OakTown Social",
+    "hood": "Temescal",
+    "namedBusinesses": [
+      "Gridiron Analytics",
+      "OakTown Social",
+      "Temescal Community Health Center",
+      "Calderon-Nishi",
+      "Brie Bouquets"
+    ]
+  },
+  "story": {
+    "angle": "Temescal businesses: Gridiron Analytics, OakTown Social, Temescal Community Health Center — the people who work there",
+    "label": "Temescal businesses · Gridiron Analytics, OakTown Social",
+    "hookLine": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 7 named workers at 3 named businesses in Temescal on the ledger this cycle.",
+    "hood": "Temescal",
+    "pulseClass": "hood-businesses",
+    "namedBusinesses": [
+      "Gridiron Analytics",
+      "OakTown Social",
+      "Temescal Community Health Center",
+      "Calderon-Nishi",
+      "Brie Bouquets"
+    ],
+    "citizens": [
+      "Ariana Reyes (POP-00133)",
+      "Dawson Nguyen (POP-00347)",
+      "Jade Soy (POP-00434)",
+      "Wesley Clark (POP-00461)",
+      "Vanessa Treary (POP-00781)",
+      "Vanessa Ramas (POP-01045)",
+      "Bobby Chen-Ramirez (POP-00792)",
+      "Omar Lingio (POP-00206)",
+      "Tanisha Freeman (POP-00848)",
+      "Jia Pena (POP-00916)",
+      "Kevin Nelson (POP-00269)"
+    ],
+    "popids": [
+      "POP-00133",
+      "POP-00347",
+      "POP-00434",
+      "POP-00461",
+      "POP-00781",
+      "POP-01045",
+      "POP-00792",
+      "POP-00206",
+      "POP-00848",
+      "POP-00916",
+      "POP-00269"
+    ],
+    "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107",
+    "cycle": 107
+  },
+  "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "businesses": [
+    {
+      "bizId": "BIZ-00008",
+      "name": "Gridiron Analytics",
+      "sector": "Sports Analytics",
+      "hood": "Temescal",
+      "employeeCount": 20,
+      "avgSalary": 110000,
+      "annualRevenue": 2828611,
+      "growthRate": 27,
+      "keyPersonnel": "Daniel Yoon / Christine Nakamura (Co-Founders)",
+      "staff": [
+        {
+          "popid": "POP-00133",
+          "name": "Ariana Reyes",
+          "role": "Data Analyst (Gridiron Analytics)"
+        },
+        {
+          "popid": "POP-00347",
+          "name": "Dawson Nguyen",
+          "role": "Sports Analytics Lead (Gridiron Analytics)"
+        },
+        {
+          "popid": "POP-00434",
+          "name": "Jade Soy",
+          "role": "Data Analyst (Gridiron Analytics)"
+        },
+        {
+          "popid": "POP-00461",
+          "name": "Wesley Clark",
+          "role": "Sports Analytics Lead (Gridiron Analytics)"
+        }
+      ],
+      "delta": {
+        "vsCycle": 106,
+        "employees": 0,
+        "revenue": 14611,
+        "growth": 1
+      }
+    },
+    {
+      "bizId": "BIZ-00038",
+      "name": "OakTown Social",
+      "sector": "Nightlife & Entertainment",
+      "hood": "Temescal",
+      "employeeCount": 7,
+      "avgSalary": 37000,
+      "annualRevenue": 518498,
+      "growthRate": 3,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00781",
+          "name": "Vanessa Treary",
+          "role": "Barista"
+        },
+        {
+          "popid": "POP-01045",
+          "name": "Vanessa Ramas",
+          "role": "Barista"
+        }
+      ],
+      "delta": {
+        "vsCycle": 106,
+        "employees": 0,
+        "revenue": 299,
+        "growth": 1
+      }
+    },
+    {
+      "bizId": "BIZ-00097",
+      "name": "Temescal Community Health Center",
+      "sector": "Healthcare",
+      "hood": "Temescal",
+      "employeeCount": 12,
+      "avgSalary": 88000,
+      "annualRevenue": 45015657,
+      "growthRate": 1.17,
+      "keyPersonnel": "Bobby Chen-Ramirez, Project Director",
+      "staff": [
+        {
+          "popid": "POP-00792",
+          "name": "Bobby Chen-Ramirez",
+          "role": "Health Center Project Director"
+        }
+      ],
+      "delta": {
+        "vsCycle": 106,
+        "employees": 0,
+        "revenue": 10126,
+        "growth": 0.5299999999999999
+      }
+    },
+    {
+      "bizId": "BIZ-00090",
+      "name": "Calderon-Nishi",
+      "sector": "Construction",
+      "hood": "Temescal",
+      "employeeCount": 34,
+      "avgSalary": 78000,
+      "annualRevenue": 8925692,
+      "growthRate": 8,
+      "keyPersonnel": null,
+      "staff": [],
+      "delta": {
+        "vsCycle": 106,
+        "employees": 0,
+        "revenue": 13711,
+        "growth": 1
+      }
+    },
+    {
+      "bizId": "BIZ-00106",
+      "name": "Brie Bouquets",
+      "sector": "Services",
+      "hood": "Temescal",
+      "employeeCount": 5,
+      "avgSalary": 37000,
+      "annualRevenue": 370353,
+      "growthRate": 2.97,
+      "keyPersonnel": "Brie Harris",
+      "staff": [],
+      "delta": {
+        "vsCycle": 106,
+        "employees": 0,
+        "revenue": 211,
+        "growth": 0.9800000000000002
+      }
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "beed729b",
+      "hood": "Temescal",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00206",
+          "name": "Omar Lingio"
+        },
+        {
+          "popid": "POP-00848",
+          "name": "Tanisha Freeman"
+        },
+        {
+          "popid": "POP-00916",
+          "name": "Jia Pena"
+        },
+        {
+          "popid": "POP-00269",
+          "name": "Kevin Nelson"
+        }
+      ],
+      "citizenEvents": [
+        "Omar Lingio — checked the housing market in Rockridge on their lunch break and realized they could actually afford it near a pharmacy counter",
+        "Tanisha Freeman — listened to a style of music they'd always skipped, twice",
+        "Jia Pena — watched the ninth from a packed bar and walked home in a crowd that didn't want to disperse",
+        "Kevin Nelson — adjusted today's plans after last night's gridlock"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00008",
+          "name": "Gridiron Analytics"
+        },
+        {
+          "bizId": "BIZ-00090",
+          "name": "Calderon-Nishi"
+        }
+      ],
+      "otherEntities": "Islamic Center of Oakland Food Pantry (program)",
+      "magnitude": 6,
+      "trend": "carrying, 6.00 strength left of 3-cycle run",
+      "suggestedJournalist": null,
+      "suggestedAngle": "general coverage"
+    }
+  ],
+  "citizens": [
+    {
+      "popid": "POP-00133",
+      "name": "Ariana Reyes",
+      "role": "Data Analyst (Gridiron Analytics)",
+      "neighborhood": "Temescal",
+      "business": "Gridiron Analytics",
+      "profile": "Ariana Reyes — Data Analyst (Gridiron Analytics) — Gridiron Analytics, Temescal",
+      "why": "works at Gridiron Analytics (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00347",
+      "name": "Dawson Nguyen",
+      "role": "Sports Analytics Lead (Gridiron Analytics)",
+      "neighborhood": "Temescal",
+      "business": "Gridiron Analytics",
+      "profile": "Dawson Nguyen — Sports Analytics Lead (Gridiron Analytics) — Gridiron Analytics, Temescal",
+      "why": "works at Gridiron Analytics (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00434",
+      "name": "Jade Soy",
+      "role": "Data Analyst (Gridiron Analytics)",
+      "neighborhood": "Temescal",
+      "business": "Gridiron Analytics",
+      "profile": "Jade Soy — Data Analyst (Gridiron Analytics) — Gridiron Analytics, Temescal",
+      "why": "works at Gridiron Analytics (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00461",
+      "name": "Wesley Clark",
+      "role": "Sports Analytics Lead (Gridiron Analytics)",
+      "neighborhood": "Temescal",
+      "business": "Gridiron Analytics",
+      "profile": "Wesley Clark — Sports Analytics Lead (Gridiron Analytics) — Gridiron Analytics, Temescal",
+      "why": "works at Gridiron Analytics (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00781",
+      "name": "Vanessa Treary",
+      "role": "Barista",
+      "neighborhood": "Temescal",
+      "business": "OakTown Social",
+      "profile": "Vanessa Treary — Barista — OakTown Social, Temescal",
+      "why": "works at OakTown Social (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01045",
+      "name": "Vanessa Ramas",
+      "role": "Barista",
+      "neighborhood": "Temescal",
+      "business": "OakTown Social",
+      "profile": "Vanessa Ramas — Barista — OakTown Social, Temescal",
+      "why": "works at OakTown Social (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00792",
+      "name": "Bobby Chen-Ramirez",
+      "role": "Health Center Project Director",
+      "neighborhood": "Temescal",
+      "business": "Temescal Community Health Center",
+      "profile": "Bobby Chen-Ramirez — Health Center Project Director — Temescal Community Health Center, Temescal",
+      "why": "works at Temescal Community Health Center (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00206",
+      "name": "Omar Lingio",
+      "role": null,
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Omar Lingio — Temescal",
+      "why": "engine seed for Temescal this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00848",
+      "name": "Tanisha Freeman",
+      "role": null,
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Tanisha Freeman — Temescal",
+      "why": "engine seed for Temescal this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00916",
+      "name": "Jia Pena",
+      "role": null,
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Jia Pena — Temescal",
+      "why": "engine seed for Temescal this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00269",
+      "name": "Kevin Nelson",
+      "role": null,
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Kevin Nelson — Temescal",
+      "why": "engine seed for Temescal this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00214",
+      "name": "Jacquez Tearn",
+      "role": "Dishwasher",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Jacquez Tearn — Dishwasher — Chinatown",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    },
+    {
+      "popid": "POP-00335",
+      "name": "Imie Calero",
+      "role": "Civil Rights Attorney",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Imie Calero — Civil Rights Attorney — Downtown",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    },
+    {
+      "popid": "POP-00435",
+      "name": "Driscoll Fester",
+      "role": "Graphic Designer",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Driscoll Fester — Graphic Designer — Uptown",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    },
+    {
+      "popid": "POP-00481",
+      "name": "Kelvon Ochoa",
+      "role": "AI Safety Researcher (Anthropic)",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Kelvon Ochoa — AI Safety Researcher (Anthropic) — Rockridge",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    },
+    {
+      "popid": "POP-00645",
+      "name": "Ezekiel Campbell",
+      "role": "Taxi driver",
+      "neighborhood": "Adams Point",
+      "business": null,
+      "profile": "Ezekiel Campbell — Taxi driver — Adams Point",
+      "why": "on the Casino_Ledger this cycle — settled a sports wager"
+    }
+  ],
+  "closures": [],
+  "contractionWatch": [],
+  "casino": {
+    "wagers": [
+      {
+        "popid": "POP-00214",
+        "name": "Jacquez Tearn",
+        "market": "sports",
+        "stake": 252,
+        "payout": 0,
+        "settled": true,
+        "status": "settled-loss"
+      },
+      {
+        "popid": "POP-00335",
+        "name": "Imie Calero",
+        "market": "sports",
+        "stake": 267,
+        "payout": 0,
+        "settled": true,
+        "status": "settled-loss"
+      },
+      {
+        "popid": "POP-00435",
+        "name": "Driscoll Fester",
+        "market": "sports",
+        "stake": 245,
+        "payout": 448,
+        "settled": true,
+        "status": "settled-win"
+      },
+      {
+        "popid": "POP-00481",
+        "name": "Kelvon Ochoa",
+        "market": "sports",
+        "stake": 667,
+        "payout": 0,
+        "settled": true,
+        "status": "settled-loss"
+      },
+      {
+        "popid": "POP-00645",
+        "name": "Ezekiel Campbell",
+        "market": "sports",
+        "stake": 336,
+        "payout": 615,
+        "settled": true,
+        "status": "settled-win"
+      }
+    ],
+    "houseFloat": 247028,
+    "totalRows": 35
+  },
+  "deltas": {
+    "state": "PRIOR_CYCLE_ON_DISK",
+    "vs": 106
+  },
+  "prewrite": {
+    "pulseClass": "hood-businesses",
+    "angle": "Temescal businesses: Gridiron Analytics, OakTown Social, Temescal Community Health Center — the people who work there",
+    "hookLine": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 7 named workers at 3 named businesses in Temescal on the ledger this cycle.",
+    "namedBusinesses": [
+      "Gridiron Analytics",
+      "OakTown Social",
+      "Temescal Community Health Center",
+      "Calderon-Nishi",
+      "Brie Bouquets"
+    ],
+    "anchorFacts": [
+      "Gridiron Analytics · Sports Analytics · 20 employees · growth 27% · revenue $2.8M (+$15k vs C106) · key personnel: Daniel Yoon / Christine Nakamura (Co-Founders) · on the roster: Ariana Reyes (Data Analyst (Gridiron Analytics)); Dawson Nguyen (Sports Analytics Lead (Gridiron Analytics)); Jade Soy (Data Analyst (Gridiron Analytics)); Wesley Clark (Sports Analytics Lead (Gridiron Analytics))",
+      "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3% · revenue $518k (+$299 vs C106) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+      "Temescal Community Health Center · Healthcare · 12 employees · growth 1.2% · revenue $45M (+$10k vs C106) · key personnel: Bobby Chen-Ramirez, Project Director · on the roster: Bobby Chen-Ramirez (Health Center Project Director)",
+      "Calderon-Nishi · Construction · 34 employees · growth 8% · revenue $8.9M (+$14k vs C106)",
+      "Brie Bouquets · Services · 5 employees · growth 3% · revenue $370k (+$211 vs C106) · key personnel: Brie Harris",
+      "ENGINE SEED (Temescal): citizens Omar Lingio; Tanisha Freeman; Jia Pena; Kevin Nelson · businesses Gridiron Analytics; Calderon-Nishi · Islamic Center of Oakland Food Pantry (program)",
+      "CASINO: Jacquez Tearn — sports wager, staked $252, settled for $0",
+      "CASINO: Imie Calero — sports wager, staked $267, settled for $0",
+      "CASINO: Driscoll Fester — sports wager, staked $245, settled for $448",
+      "CASINO: Kelvon Ochoa — sports wager, staked $667, settled for $0",
+      "CASINO: Ezekiel Campbell — sports wager, staked $336, settled for $615",
+      "CASINO: the house float stands at $247k"
+    ],
+    "evidence": [
+      {
+        "text": "Gridiron Analytics · Sports Analytics · 20 employees · growth 27% · revenue $2.8M (+$15k vs C106) · key personnel: Daniel Yoon / Christine Nakamura (Co-Founders) · on the roster: Ariana Reyes (Data Analyst (Gridiron Analytics)); Dawson Nguyen (Sports Analytics Lead (Gridiron Analytics)); Jade Soy (Data Analyst (Gridiron Analytics)); Wesley Clark (Sports Analytics Lead (Gridiron Analytics))",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+      },
+      {
+        "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3% · revenue $518k (+$299 vs C106) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+      },
+      {
+        "text": "Temescal Community Health Center · Healthcare · 12 employees · growth 1.2% · revenue $45M (+$10k vs C106) · key personnel: Bobby Chen-Ramirez, Project Director · on the roster: Bobby Chen-Ramirez (Health Center Project Director)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+      },
+      {
+        "text": "Calderon-Nishi · Construction · 34 employees · growth 8% · revenue $8.9M (+$14k vs C106)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+      },
+      {
+        "text": "Brie Bouquets · Services · 5 employees · growth 3% · revenue $370k (+$211 vs C106) · key personnel: Brie Harris",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+      },
+      {
+        "text": "ENGINE SEED (Temescal): citizens Omar Lingio; Tanisha Freeman; Jia Pena; Kevin Nelson · businesses Gridiron Analytics; Calderon-Nishi · Islamic Center of Oakland Food Pantry (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C107"
+      },
+      {
+        "text": "CASINO: Jacquez Tearn — sports wager, staked $252, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C107"
+      },
+      {
+        "text": "CASINO: Imie Calero — sports wager, staked $267, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C107"
+      },
+      {
+        "text": "CASINO: Driscoll Fester — sports wager, staked $245, settled for $448",
+        "src": "output/beats/Casino_Ledger.jsonl @C107"
+      },
+      {
+        "text": "CASINO: Kelvon Ochoa — sports wager, staked $667, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C107"
+      },
+      {
+        "text": "CASINO: Ezekiel Campbell — sports wager, staked $336, settled for $615",
+        "src": "output/beats/Casino_Ledger.jsonl @C107"
+      },
+      {
+        "text": "CASINO: the house float stands at $247k",
+        "src": "output/beats/Casino_Ledger.jsonl @C107"
+      }
+    ],
+    "hooks": [
+      {
+        "text": "Unemployment in Lake Merritt up 17%. Economic stress story. Who's affected and why?",
+        "angle": "baseline context piece",
+        "hood": "Lake Merritt"
+      },
+      {
+        "text": "Notable event: \"food poisoning complaint\". Follow-up recommended.",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+        "angle": "baseline context piece",
+        "hood": null
+      }
+    ],
+    "forbidden": [
+      "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+      "Do not contradict a role, employer or neighborhood listed here"
+    ]
+  },
+  "rotation": {
+    "pool": [
+      {
+        "hood": "Baylight District",
+        "staffed": 2,
+        "workers": 62,
+        "lastCovered": null
+      },
+      {
+        "hood": "Lake Merritt",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "Temescal",
+        "staffed": 3,
+        "workers": 7,
+        "lastCovered": null
+      },
+      {
+        "hood": "West Oakland",
+        "staffed": 2,
+        "workers": 11,
+        "lastCovered": null
+      },
+      {
+        "hood": "Brooklyn Basin",
+        "staffed": 1,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "Jack London",
+        "staffed": 3,
+        "workers": 40,
+        "lastCovered": 106
+      },
+      {
+        "hood": "Downtown",
+        "staffed": 2,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "Piedmont Ave",
+        "staffed": 1,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "Fruitvale",
+        "staffed": 2,
+        "workers": 4,
+        "lastCovered": null
+      },
+      {
+        "hood": "Uptown",
+        "staffed": 1,
+        "workers": 14,
+        "lastCovered": null
+      },
+      {
+        "hood": "Rockridge",
+        "staffed": 1,
+        "workers": 3,
+        "lastCovered": 105
+      }
+    ],
+    "picked": "Temescal"
+  },
+  "candidates": [
+    {
+      "className": "hood-businesses",
+      "hood": "Baylight District",
+      "label": "Baylight District · 2 staffed / 10 listed",
+      "namedBusinesses": [
+        "Anthropic",
+        "Baylight Construction Authority"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Lake Merritt",
+      "label": "Lake Merritt · 1 staffed / 3 listed",
+      "namedBusinesses": [
+        "Ridgeline Ventures"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "West Oakland",
+      "label": "West Oakland · 2 staffed / 9 listed",
+      "namedBusinesses": [
+        "Oakmesh Systems",
+        "Civis Systems"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Brooklyn Basin",
+      "label": "Brooklyn Basin · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "Portside Bio"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Jack London",
+      "label": "Jack London · 3 staffed / 7 listed",
+      "namedBusinesses": [
+        "Port of Oakland",
+        "Blue Lantern Bar",
+        "Harborline Grill"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Downtown",
+      "label": "Downtown · 2 staffed / 11 listed",
+      "namedBusinesses": [
+        "EBMUD",
+        "Atlas Bay Architects"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Piedmont Ave",
+      "label": "Piedmont Ave · 1 staffed / 5 listed",
+      "namedBusinesses": [
+        "Kaiser Permanente Oakland"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Fruitvale",
+      "label": "Fruitvale · 2 staffed / 4 listed",
+      "namedBusinesses": [
+        "Fruitvale Community Clinic",
+        "Fruitvale Diner"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Uptown",
+      "label": "Uptown · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Oakland Tech Collective"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Rockridge",
+      "label": "Rockridge · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "OakHouse"
+      ]
+    }
+  ],
+  "signals": {
+    "businessLaneCount": 47,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "ref": "output/engine_audit_c107.json patterns[10]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "label": "Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c107.json patterns[11]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "kind": "anomaly",
+        "label": "Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in West Oakland",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "ref": "output/engine_audit_c107.json patterns[12]; evidence: Initiative_Tracker row(s) 7"
+      },
+      {
+        "kind": "anomaly",
+        "label": "civic — economic upside, jobs and footprint in Adams Point",
+        "hood": "Adams Point",
+        "ref": "output/engine_audit_c107.json patterns[13]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "label": "civic — economic upside, jobs and footprint in Grand Lake",
+        "hood": "Grand Lake",
+        "ref": "output/engine_audit_c107.json patterns[14]; evidence: Neighborhood_Map row(s) "
+      }
+    ]
+  },
+  "scene": {
+    "namedOnTop": [
+      "Gridiron Analytics",
+      "OakTown Social",
+      "Temescal Community Health Center",
+      "Calderon-Nishi",
+      "Brie Bouquets"
+    ]
+  },
+  "pointers": [
+    "output/beats/Business_Ledger.jsonl (177 rows @C107)",
+    "output/beats/Employment_Roster.jsonl (859 rows)",
+    "output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 3)",
+    "output/beats/prev/Business_Ledger.jsonl (movement vs C106)",
+    "output/beats/Casino_Ledger.jsonl (35 wager rows this cycle)",
+    "output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 3)",
+    "output/desk_signal_c107.json lanes.business (pointers only)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "rachel-torres",
+  "byline": "Sgt. Rachel Torres",
+  "bylinePopid": "POP-00057",
+  "article": "output/cron-compare/staged/civic_c108_rachel-torres_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Dank Abara",
+        "role": "mentioned",
+        "popid": "POP-00796"
+      },
+      {
+        "name": "Delia Vargas-Ruiz",
+        "role": "quoted-source",
+        "popid": "POP-01054"
+      },
+      {
+        "name": "Melton Neilon",
+        "role": "mentioned",
+        "popid": "POP-00170"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "temescal-sonia-parikh-anomaly",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "San Antonio"
+    ],
+    "claims": [
+      {
+        "claim": "I’ve heard San Antonio has more incidents than other neighborhoods, and Lake Merritt’s response times are slow, but I don’t know the specifics. It’s just something people talk about around here.",
+        "sourceRef": "citizenVoice PRESS Dank Abara"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-f3f0e17654c6",
+    "draftSha256": "80aaae04e18cf8472ee143e4f86c1c0b7516dee7d855ffc5f6eb048b3ba2ab85",
+    "verdict": "output/cron-compare/civic_c108_rachel-torres_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-22T23:16:51.074Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:02.546Z"
+}

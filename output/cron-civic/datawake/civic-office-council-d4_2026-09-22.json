@@ -1,0 +1,26 @@
+{
+  "office": "council_d4",
+  "agentDir": "civic-office-council-d4",
+  "holder": "Ramon Vega",
+  "popid": "POP-00042",
+  "title": "City Council District 4",
+  "date": "2026-09-22",
+  "cycle": 108,
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "statement": "Given the current conditions in my district, I will prioritize addressing the pressing concerns of my constituents, focusing on targeted investment and fiscal discipline to support the development needs of Glenview and Ivy Hill.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-105-civic-office-council-d4",
+        "text": "I acknowledge the directive and will consider the Baylight District Phase II development bid in the context of our city's overall development strategy and the needs of my district.",
+        "directiveCycle": 105,
+        "confrontationSeat": "civic-office-council-d4"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-09-22T10:45:19.239Z",
+  "fellBackFrom": null
+}

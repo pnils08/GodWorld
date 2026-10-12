@@ -1,0 +1,444 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "108",
+  "persona": "selena-grant",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00591",
+      "name": "Selena Grant",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks — season-state C108 · - · - — the second club's board read",
+      "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "oaks",
+        "hood": "Jack London",
+        "facts": [
+          "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+          "Trigger: cold-streak",
+          "Franchise stability: uncertain",
+          "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+          "Record 0-1 · streak L1",
+          "Stats (feed): Austin Reaves/22pts/6asst/6rebs, AJ Dybantsa/18pts/11rebs",
+          "Trigger: pre-season"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-oaks-beat",
+      "hood": "Jack London",
+      "score": null,
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+      "nearby": [
+        {
+          "text": "A's | game-result | (playoffs) | Vladimir Gonzalez, Darrin Davis, Isley Kelley, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Pablo Almanzar, Eric Taveras, John Ellis",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (playoffs) | Eric Taveras",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | season-state | (playoffs) | Mike Paulson, Deacon Seymour, Arturo Ramos, Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01022",
+          "name": "Wilson Shepard",
+          "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)",
+          "role": "Head Coach, Oakland Oaks",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-01023",
+          "name": "Adash Stanley",
+          "profile": "Adash Stanley — PG / The Oaks — Downtown",
+          "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)",
+          "role": "PG / The Oaks ",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-01027",
+          "name": "Austin Reaves",
+          "profile": "Austin Reaves — SG / The Oaks — Downtown",
+          "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)",
+          "role": "SG / The Oaks",
+          "hood": "Downtown"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-78217e633afa"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — season-state C108 · - · -",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+        "id": "F-7f35d7fe96b5"
+      },
+      {
+        "t": "FACT",
+        "text": "Coach Wilson Shepard prepares his rookies for preseaon.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+        "id": "F-34099415bb29"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-0fb94ec2157e"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: cold-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-3925dc8003f0"
+      },
+      {
+        "t": "FACT",
+        "text": "Franchise stability: uncertain",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-db52350d2170"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-5e2ee7cdc34d"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 0-1 · streak L1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-94171ad9126c"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Austin Reaves/22pts/6asst/6rebs, AJ Dybantsa/18pts/11rebs",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-46c6bec829be"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: pre-season",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-57c438e541f9"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Selena Grant",
+    "popid": "POP-00591"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-beat",
+      "angle": "Oaks — season-state C108 · - · - — the second club's board read",
+      "label": "Oaks — season-state C108 · - · -",
+      "hookLine": "Coach Wilson Shepard prepares his rookies for preseaon.",
+      "hood": "Jack London",
+      "citizens": [
+        "Wilson Shepard (POP-01022)",
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)"
+      ],
+      "popids": [
+        "POP-01022",
+        "POP-01023",
+        "POP-01027"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+      "cycle": 108
+    },
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OAKS-BEAT-1",
+    "kind": "beat-oaks-beat",
+    "seat": {
+      "slug": "selena-grant",
+      "name": "Selena Grant",
+      "popid": "POP-00591",
+      "desk": "sports",
+      "domain": "oaks",
+      "builder": "buildOaksBeatSlice.js"
+    },
+    "hood": "Jack London",
+    "pulse": {
+      "className": "beat-oaks-beat",
+      "score": 100,
+      "label": "Oaks — season-state C108 · - · -",
+      "hood": "Jack London",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Oaks — season-state C108 · - · - — the second club's board read",
+      "hookLine": "Coach Wilson Shepard prepares his rookies for preseaon.",
+      "anchorFacts": [
+        "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+        "Trigger: cold-streak",
+        "Franchise stability: uncertain",
+        "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+        "Record 0-1 · streak L1",
+        "Stats (feed): Austin Reaves/22pts/6asst/6rebs, AJ Dybantsa/18pts/11rebs",
+        "Trigger: pre-season",
+        "Franchise stability: uncertain"
+      ],
+      "evidence": [
+        {
+          "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Record 0-1 · streak L1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Stats (feed): Austin Reaves/22pts/6asst/6rebs, AJ Dybantsa/18pts/11rebs",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Trigger: pre-season",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+        "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — Downtown",
+        "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Oakland_Sports_Feed.jsonl @C108",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "text": "I'm looking into the Oaks' preseason struggles, trying to understand what's behind their cold streak. I want to know more about Coach Wilson Shepard's approach to preparing his rookies and how the team is responding to the pressure of being a new franchise.",
+    "plan": {
+      "chase": "I'm looking into the Oaks' preseason struggles, trying to understand what's behind their cold streak. I want to know more about Coach Wilson Shepard's approach to preparing his rookies and how the team is responding to the pressure of being a new franchise.",
+      "focus": "Oaks' preseason performance",
+      "why": "To gain insight into the team's dynamics and potential for the upcoming season",
+      "checks": [
+        "Coach Wilson Shepard's experience with rookie players",
+        "Team's overall strategy and mindset"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01022",
+          "question": "What are the biggest challenges Coach Wilson Shepard is facing with the Oaks' rookies?",
+          "basis": "His experience and approach to coaching"
+        },
+        {
+          "pop": "POP-01023",
+          "question": "How is Adash Stanley adjusting to the team's playing style and expectations?",
+          "basis": "His role as point guard and the team's overall performance"
+        }
+      ],
+      "interpretation": "The Oaks' preseason struggles may be a sign of deeper issues with the team's chemistry and strategy. I need to dig deeper to understand the root causes of their cold streak.",
+      "unverifiedLead": [
+        "Rumors of tension between Coach Wilson Shepard and some of the veteran players"
+      ],
+      "closeQuestion": "Can the Oaks turn their preseason struggles around and make a strong showing in the regular season?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | game-result | (playoffs) | Vladimir Gonzalez, Darrin Davis, Isley Kelley, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598",
+        "POP-00021",
+        "POP-00019",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Pablo Almanzar, Eric Taveras, John Ellis",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01078",
+        "POP-00597",
+        "POP-00033"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (playoffs) | Eric Taveras",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00597"
+      ]
+    },
+    {
+      "label": "A's | season-state | (playoffs) | Mike Paulson, Deacon Seymour, Arturo Ramos, Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527",
+        "POP-00528",
+        "POP-00025",
+        "POP-00022"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-01023",
+        "POP-01024"
+      ]
+    }
+  ],
+  "laneEntries": 10,
+  "ranAt": "2026-09-22T11:16:38.199Z"
+}

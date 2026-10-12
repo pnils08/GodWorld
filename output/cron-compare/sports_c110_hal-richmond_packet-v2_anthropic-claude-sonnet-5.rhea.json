@@ -1,0 +1,56 @@
+{
+  "draft": "output/cron-compare/sports_c110_hal-richmond_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "6730192e2c896c574b76988da53965894f976474ae8f13dd4483d7a92c4d0163",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Verified accurate sports record (11-3, W3 streak, championship) and player biographical dossiers with authorized historical texture.",
+  "review": {
+    "profileId": "hal-sports-history-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "hal-sports-history-v1",
+    "packageVersion": "HAL-LEP2-2",
+    "manifestId": "AM-6a6e14c4582e",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Eric Taveras",
+      "Mark Aitken",
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Cy Young",
+      "Cy Youngs",
+      "Gold Gloves",
+      "Most Valuable Player"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 5626,
+  "parseError": false,
+  "ranAt": "2026-10-08T23:16:54.486Z"
+}

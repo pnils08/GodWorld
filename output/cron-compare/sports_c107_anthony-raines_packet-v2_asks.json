@@ -1,0 +1,536 @@
+[
+  {
+    "pop": "POP-00033",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00033\",\"name\":\"John Ellis\",\"role\":\"Starting Pitcher, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Anthony Raines\",\"question\":\"What have you seen, felt, or understood about \\\"John Ellis' 9-inning shutout and its implications for the A's playoff strategy.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sports-analytics\",\"hood\":\"Fruitvale\",\"focus\":\"John Ellis' 9-inning shutout and its implications for the A's playoff strategy.\",\"src\":\"world_summary_c107.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"John Ellis — Starting Pitcher, Oakland A's — Laurel\",\"evidence\":[{\"id\":\"EV-1f232b89a7\",\"src\":\"world_summary_c107.md ## Sports\",\"text\":\"A's close out the ALDS in NY , As 4 vs Yankees 0\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"A's · game-result — A's close out the ALDS in NY , As 4 vs Yankees 0\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-05cc054a13d4\"},{\"t\":\"FACT\",\"text\":\"A's close out the ALDS in NY , As 4 vs Yankees 0\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-2e574a527488\"},{\"t\":\"FACT\",\"text\":\"Feed line: John Ellis/9IP/4H/0ER/9SO\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-2a2e67edaa6a\"},{\"t\":\"FACT\",\"text\":\"Feed line: Eric Taveras/1-4/1HR/1RBI\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-e30514ef879c\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 3-1 · W2\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-4705e8b6646d\"},{\"t\":\"FACT\",\"text\":\"Event kind (feed): A's — game-result (playoffs)\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-edc4d4f566bb\"},{\"t\":\"FACT\",\"text\":\"John Ellis — Starting Pitcher, Oakland A's — Laurel\",\"src\":\"Simulation_Ledger profile for POP-00033\",\"id\":\"F-06d752b0b04a\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00033",
+        "name": "John Ellis",
+        "role": "Starting Pitcher, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Anthony Raines",
+        "question": "What have you seen, felt, or understood about \"John Ellis' 9-inning shutout and its implications for the A's playoff strategy.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sports-analytics",
+        "hood": "Fruitvale",
+        "focus": "John Ellis' 9-inning shutout and its implications for the A's playoff strategy.",
+        "src": "world_summary_c107.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "John Ellis — Starting Pitcher, Oakland A's — Laurel",
+        "evidence": [
+          {
+            "id": "EV-1f232b89a7",
+            "src": "world_summary_c107.md ## Sports",
+            "text": "A's close out the ALDS in NY , As 4 vs Yankees 0"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "A's · game-result — A's close out the ALDS in NY , As 4 vs Yankees 0",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-05cc054a13d4"
+        },
+        {
+          "t": "FACT",
+          "text": "A's close out the ALDS in NY , As 4 vs Yankees 0",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-2e574a527488"
+        },
+        {
+          "t": "FACT",
+          "text": "Feed line: John Ellis/9IP/4H/0ER/9SO",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-2a2e67edaa6a"
+        },
+        {
+          "t": "FACT",
+          "text": "Feed line: Eric Taveras/1-4/1HR/1RBI",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-e30514ef879c"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 3-1 · W2",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-4705e8b6646d"
+        },
+        {
+          "t": "FACT",
+          "text": "Event kind (feed): A's — game-result (playoffs)",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-edc4d4f566bb"
+        },
+        {
+          "t": "FACT",
+          "text": "John Ellis — Starting Pitcher, Oakland A's — Laurel",
+          "src": "Simulation_Ledger profile for POP-00033",
+          "id": "F-06d752b0b04a"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00597",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00597\",\"name\":\"Eric Taveras\",\"role\":\"Second Baseman, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Anthony Raines\",\"question\":\"What have you seen, felt, or understood about \\\"John Ellis' 9-inning shutout and its implications for the A's playoff strategy.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sports-analytics\",\"hood\":\"Fruitvale\",\"focus\":\"John Ellis' 9-inning shutout and its implications for the A's playoff strategy.\",\"src\":\"world_summary_c107.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Eric Taveras — Second Baseman, Oakland A's — Downtown\",\"evidence\":[{\"id\":\"EV-0b77b2485c\",\"src\":\"world_summary_c107.md ## Sports\",\"text\":\"A's close out the ALDS in NY , As 4 vs Yankees 0\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"A's · game-result — A's close out the ALDS in NY , As 4 vs Yankees 0\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-05cc054a13d4\"},{\"t\":\"FACT\",\"text\":\"A's close out the ALDS in NY , As 4 vs Yankees 0\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-2e574a527488\"},{\"t\":\"FACT\",\"text\":\"Feed line: John Ellis/9IP/4H/0ER/9SO\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-2a2e67edaa6a\"},{\"t\":\"FACT\",\"text\":\"Feed line: Eric Taveras/1-4/1HR/1RBI\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-e30514ef879c\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 3-1 · W2\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-4705e8b6646d\"},{\"t\":\"FACT\",\"text\":\"Event kind (feed): A's — game-result (playoffs)\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-edc4d4f566bb\"},{\"t\":\"FACT\",\"text\":\"Eric Taveras — Second Baseman, Oakland A's — Downtown\",\"src\":\"Simulation_Ledger profile for POP-00597\",\"id\":\"F-46c5cbf66afc\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00597",
+        "name": "Eric Taveras",
+        "role": "Second Baseman, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Anthony Raines",
+        "question": "What have you seen, felt, or understood about \"John Ellis' 9-inning shutout and its implications for the A's playoff strategy.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sports-analytics",
+        "hood": "Fruitvale",
+        "focus": "John Ellis' 9-inning shutout and its implications for the A's playoff strategy.",
+        "src": "world_summary_c107.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+        "evidence": [
+          {
+            "id": "EV-0b77b2485c",
+            "src": "world_summary_c107.md ## Sports",
+            "text": "A's close out the ALDS in NY , As 4 vs Yankees 0"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "A's · game-result — A's close out the ALDS in NY , As 4 vs Yankees 0",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-05cc054a13d4"
+        },
+        {
+          "t": "FACT",
+          "text": "A's close out the ALDS in NY , As 4 vs Yankees 0",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-2e574a527488"
+        },
+        {
+          "t": "FACT",
+          "text": "Feed line: John Ellis/9IP/4H/0ER/9SO",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-2a2e67edaa6a"
+        },
+        {
+          "t": "FACT",
+          "text": "Feed line: Eric Taveras/1-4/1HR/1RBI",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-e30514ef879c"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 3-1 · W2",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-4705e8b6646d"
+        },
+        {
+          "t": "FACT",
+          "text": "Event kind (feed): A's — game-result (playoffs)",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-edc4d4f566bb"
+        },
+        {
+          "t": "FACT",
+          "text": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+          "src": "Simulation_Ledger profile for POP-00597",
+          "id": "F-46c5cbf66afc"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00198",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00198\",\"name\":\"Rick Walker\",\"role\":\"K-8 Teacher,Former Line cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Anthony Raines\",\"question\":\"As a resident of Fruitvale, what have you seen, felt, or understood about \\\"John Ellis' 9-inning shutout and its implications for the A's playoff strategy.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sports-analytics\",\"hood\":\"Fruitvale\",\"focus\":\"John Ellis' 9-inning shutout and its implications for the A's playoff strategy.\",\"src\":\"world_summary_c107.md ## Sports\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Rick Walker — K-8 Teacher,Former Line cook — Fruitvale\",\"evidence\":[],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"A's · game-result — A's close out the ALDS in NY , As 4 vs Yankees 0\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-05cc054a13d4\"},{\"t\":\"FACT\",\"text\":\"A's close out the ALDS in NY , As 4 vs Yankees 0\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-2e574a527488\"},{\"t\":\"FACT\",\"text\":\"Feed line: John Ellis/9IP/4H/0ER/9SO\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-2a2e67edaa6a\"},{\"t\":\"FACT\",\"text\":\"Feed line: Eric Taveras/1-4/1HR/1RBI\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-e30514ef879c\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 3-1 · W2\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-4705e8b6646d\"},{\"t\":\"FACT\",\"text\":\"Event kind (feed): A's — game-result (playoffs)\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-edc4d4f566bb\"},{\"t\":\"FACT\",\"text\":\"Rick Walker — K-8 Teacher,Former Line cook — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00198\",\"id\":\"F-dd73052ec46c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Anthony Raines",
+        "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"John Ellis' 9-inning shutout and its implications for the A's playoff strategy.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sports-analytics",
+        "hood": "Fruitvale",
+        "focus": "John Ellis' 9-inning shutout and its implications for the A's playoff strategy.",
+        "src": "world_summary_c107.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale",
+        "evidence": [],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "A's · game-result — A's close out the ALDS in NY , As 4 vs Yankees 0",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-05cc054a13d4"
+        },
+        {
+          "t": "FACT",
+          "text": "A's close out the ALDS in NY , As 4 vs Yankees 0",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-2e574a527488"
+        },
+        {
+          "t": "FACT",
+          "text": "Feed line: John Ellis/9IP/4H/0ER/9SO",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-2a2e67edaa6a"
+        },
+        {
+          "t": "FACT",
+          "text": "Feed line: Eric Taveras/1-4/1HR/1RBI",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-e30514ef879c"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 3-1 · W2",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-4705e8b6646d"
+        },
+        {
+          "t": "FACT",
+          "text": "Event kind (feed): A's — game-result (playoffs)",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-edc4d4f566bb"
+        },
+        {
+          "t": "FACT",
+          "text": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00198",
+          "id": "F-dd73052ec46c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00644",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00644\",\"name\":\"Rafael Pilgrim\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Anthony Raines\",\"question\":\"As a resident of Fruitvale, what have you seen, felt, or understood about \\\"John Ellis' 9-inning shutout and its implications for the A's playoff strategy.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sports-analytics\",\"hood\":\"Fruitvale\",\"focus\":\"John Ellis' 9-inning shutout and its implications for the A's playoff strategy.\",\"src\":\"world_summary_c107.md ## Sports\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Rafael Pilgrim — Server — Fruitvale\",\"evidence\":[],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"A's · game-result — A's close out the ALDS in NY , As 4 vs Yankees 0\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-05cc054a13d4\"},{\"t\":\"FACT\",\"text\":\"A's close out the ALDS in NY , As 4 vs Yankees 0\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-2e574a527488\"},{\"t\":\"FACT\",\"text\":\"Feed line: John Ellis/9IP/4H/0ER/9SO\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-2a2e67edaa6a\"},{\"t\":\"FACT\",\"text\":\"Feed line: Eric Taveras/1-4/1HR/1RBI\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-e30514ef879c\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 3-1 · W2\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-4705e8b6646d\"},{\"t\":\"FACT\",\"text\":\"Event kind (feed): A's — game-result (playoffs)\",\"src\":\"world_summary_c107.md ## Sports\",\"id\":\"F-edc4d4f566bb\"},{\"t\":\"FACT\",\"text\":\"Rafael Pilgrim — Server — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00644\",\"id\":\"F-56d37e2ec062\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Anthony Raines",
+        "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"John Ellis' 9-inning shutout and its implications for the A's playoff strategy.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sports-analytics",
+        "hood": "Fruitvale",
+        "focus": "John Ellis' 9-inning shutout and its implications for the A's playoff strategy.",
+        "src": "world_summary_c107.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Rafael Pilgrim — Server — Fruitvale",
+        "evidence": [],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "A's · game-result — A's close out the ALDS in NY , As 4 vs Yankees 0",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-05cc054a13d4"
+        },
+        {
+          "t": "FACT",
+          "text": "A's close out the ALDS in NY , As 4 vs Yankees 0",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-2e574a527488"
+        },
+        {
+          "t": "FACT",
+          "text": "Feed line: John Ellis/9IP/4H/0ER/9SO",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-2a2e67edaa6a"
+        },
+        {
+          "t": "FACT",
+          "text": "Feed line: Eric Taveras/1-4/1HR/1RBI",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-e30514ef879c"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 3-1 · W2",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-4705e8b6646d"
+        },
+        {
+          "t": "FACT",
+          "text": "Event kind (feed): A's — game-result (playoffs)",
+          "src": "world_summary_c107.md ## Sports",
+          "id": "F-edc4d4f566bb"
+        },
+        {
+          "t": "FACT",
+          "text": "Rafael Pilgrim — Server — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00644",
+          "id": "F-56d37e2ec062"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,249 @@
+{
+  "empty": false,
+  "cycle": 109,
+  "kind": "hal-archive",
+  "desk": "sports",
+  "journalist": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "persona": "hal-richmond",
+    "bagDoc": "docs/media/HAL_ARCHIVE_BAG.md"
+  },
+  "pulse": {
+    "className": "era-door",
+    "score": 80,
+    "label": "A's — game-result — supplied C109 line card",
+    "team": "A's",
+    "eventKind": "game-result",
+    "seasonType": "playoffs",
+    "storyAngle": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough.",
+    "hasStats": true,
+    "record": "1-1",
+    "streak": "L1",
+    "foilNumber": "6IP",
+    "closingNote": "break of continuity",
+    "feedCycle": 109
+  },
+  "bag": {
+    "modes": [
+      {
+        "id": 1,
+        "name": "Era Comparison"
+      },
+      {
+        "id": 8,
+        "name": "Legacy Guarantee Piece"
+      }
+    ],
+    "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+    "closingNote": "break of continuity",
+    "claim": "Present fact: 6IP on the feed. Archive claim: place this against time — Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough. Close toward break of continuity."
+  },
+  "friction": {
+    "a": "Present feed fact: Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough.",
+    "b": "Wire copy / FO strategy / bleacher heat that skips time",
+    "frame": "Present first, then echo — end on break of continuity."
+  },
+  "prewrite": {
+    "reporter": "Hal Richmond",
+    "bagModes": [
+      {
+        "id": 1,
+        "name": "Era Comparison"
+      },
+      {
+        "id": 8,
+        "name": "Legacy Guarantee Piece"
+      }
+    ],
+    "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+    "presentFacts": [
+      "Team record (feed): 1-1 · streak L1",
+      "Event (feed): A's — game-result (playoffs)",
+      "Cycle: C109"
+    ],
+    "dossierFacts": [
+      "Travis Coles TrueSource: 2041 REGULAR SEASON — Games: 32 Games Started: 32 Wins: 22 Losses: 4 Saves: 0 Blown Saves: 0 Holds: 0 Innings Pitched: 215 Hits Allowed: 166 Runs Allo | WAR: 6.2 | AWARDS (Career Reference) - All-Star (2040) - Cy Young (2041) - All-Star (2041) - Strikeou",
+      "Eric Taveras TrueSource: FULL STAT TRUE SOURCE — BATTER Name: Eric Taveras Team: Athletics Position: 2B Jersey: #22 -------------------------------------------------- PROFILE Potential: A Overall: 93 MLB Service: 6.000 Age: 25 Bats: L Throws: R Height: 5'10\" Weight: 184 LBS Drafted: RND 1 (2033) Secondar",
+      "Desmond Morton TrueSource: 2041 REGULAR SEASON G: 80 PA: 313 AB: 285 R: 47 H: 83 2B: 22 3B: 0 HR: 7 RBI: 44 BB: 23 SO: 49 HBP: 3 SF: 2 SAC: 0 GIDP: 6 AVG: 0.291 OBP: 0.348 SLG:  | WAR: 2.5"
+    ],
+    "closingNote": "break of continuity",
+    "priorFiling": "NONE — wall may still inject at wake",
+    "claim": "Present fact: 6IP on the feed. Archive claim: place this against time — Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough. Close toward break of continuity.",
+    "foilNumber": "6IP",
+    "missing": [
+      "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+      "No invented seasons or franchise history beyond packet + feed",
+      "No x-stats / barrel% / invented OPS+",
+      "Not a business-desk storefront assignment",
+      "Not P Slayer charge; not Anthony board architecture as spine"
+    ],
+    "hooks": [
+      {
+        "text": "Oaks struggling — L7. Fan frustration angle. What's going wrong?",
+        "angle": "conflict/tension coverage",
+        "hood": "Downtown"
+      }
+    ]
+  },
+  "hooks": [
+    {
+      "text": "Oaks struggling — L7. Fan frustration angle. What's going wrong?",
+      "angle": "conflict/tension coverage",
+      "hood": "Downtown"
+    }
+  ],
+  "seeds": [],
+  "priorTakes": [],
+  "story": {
+    "angle": "What the supplied C109 line card establishes, and what history remains unsupplied.",
+    "label": "A's — game-result — supplied C109 line card",
+    "hookLine": "A's — game-result — supplied C109 line card",
+    "hood": "Jack London",
+    "pulseClass": "era-door",
+    "team": "A's",
+    "eventKind": "game-result",
+    "closingNote": "break of continuity",
+    "citizens": [
+      "Travis Coles (POP-00533)",
+      "Eric Taveras (POP-00597)",
+      "Desmond Morton (POP-00051)"
+    ],
+    "popids": [
+      "POP-00533",
+      "POP-00597",
+      "POP-00051"
+    ],
+    "ref": "world_summary_c109.md ## Sports",
+    "cycle": 109
+  },
+  "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+  "players": [
+    {
+      "name": "Travis Coles",
+      "popid": "POP-00533",
+      "role": "Starting Pitcher, Oakland A's",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Eric Taveras",
+      "popid": "POP-00597",
+      "role": "Second Baseman, Oakland A's",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Desmond Morton",
+      "popid": "POP-00051",
+      "role": "Left Fielder, Oakland A's",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "Jack London",
+    "record": "1-1",
+    "streak": "L1",
+    "colorRoom": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat."
+  },
+  "candidates": [
+    {
+      "score": 80,
+      "cycle": 109,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough.",
+      "priorHits": 0
+    },
+    {
+      "score": 80,
+      "cycle": 109,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon han",
+      "priorHits": 0
+    },
+    {
+      "score": 80,
+      "cycle": 108,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB ",
+      "priorHits": 0
+    },
+    {
+      "score": 73,
+      "cycle": 108,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Eric Taveras win Post Season MVP",
+      "priorHits": 0
+    },
+    {
+      "score": 73,
+      "cycle": 108,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so f",
+      "priorHits": 0
+    },
+    {
+      "score": 67,
+      "cycle": 108,
+      "team": "Oaks",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+      "priorHits": 0
+    },
+    {
+      "score": 65,
+      "cycle": 107,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "A's close out the ALDS in NY , As 4 vs Yankees 0",
+      "priorHits": 0
+    },
+    {
+      "score": 55,
+      "cycle": 109,
+      "team": "Oaks",
+      "primary": "quiet-road",
+      "hasStats": true,
+      "angle": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchis",
+      "priorHits": 0
+    },
+    {
+      "score": 53,
+      "cycle": 109,
+      "team": "A's",
+      "primary": "season-tide",
+      "hasStats": true,
+      "angle": "Arturo Ramos does enough, Danny Horn shows some life, Frank Reyna doesnt make an out.",
+      "priorHits": 0
+    },
+    {
+      "score": 53,
+      "cycle": 109,
+      "team": "Oaks",
+      "primary": "quiet-road",
+      "hasStats": true,
+      "angle": "The Oaks lose yet again even with strong efforts from Austin Reaves,",
+      "priorHits": 0
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c109.md ## Sports",
+    "docs/media/HAL_ARCHIVE_BAG.md",
+    "scripts/sportsSubstrate.js",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 5",
+    "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+  ]
+}

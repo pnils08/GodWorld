@@ -1,0 +1,146 @@
+{
+  "cycle": "106",
+  "top": 9,
+  "selected": [
+    "civic_c106_noah-tan_packet-v2_deepseek-deepseek-chat",
+    "culture_c106_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "sports_c106_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "civic_c106_angela-reyes_packet-v2_deepseek-deepseek-chat",
+    "civic_c106_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+    "culture_c106_mason-ortega_packet-v2_deepseek-deepseek-chat",
+    "civic_c106_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+    "sports_c106_simon-leary_packet-v2_deepseek-deepseek-chat",
+    "business_c106_business-desk_packet-v2_deepseek-deepseek-chat"
+  ],
+  "ranked": [
+    {
+      "stem": "civic_c106_noah-tan_packet-v2_deepseek-deepseek-chat",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "score": 7,
+      "slug": "city-mina-linas-beat-weather",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c106_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Kai Marston",
+      "desk": "culture",
+      "score": 7,
+      "slug": "lake-merritt-vanessa-treary-named-restaurant",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c106_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Talia Finch",
+      "desk": "sports",
+      "score": 7,
+      "slug": "west-oakland-elio-perez-ripple",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c106_angela-reyes_packet-v2_deepseek-deepseek-chat",
+      "byline": "Angela Reyes",
+      "desk": "civic",
+      "score": 6.5,
+      "slug": "rockridge-mei-wong-beat-schools",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c106_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Jax Caldera",
+      "desk": "civic",
+      "score": 6.5,
+      "slug": "downtown-merkin-jumper-undocked",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c106_mason-ortega_packet-v2_deepseek-deepseek-chat",
+      "byline": "Mason Ortega",
+      "desk": "culture",
+      "score": 6.5,
+      "slug": "jack-london-tomas-renteria-story-signal",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c106_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "score": 6,
+      "slug": "city-elio-perez-anomaly",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c106_maria-keen_packet-v2_deepseek-deepseek-chat",
+      "byline": "Maria Keen",
+      "desk": "culture",
+      "score": 6,
+      "slug": "lake-merritt-vanessa-treary-named-restaurant",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c106_simon-leary_packet-v2_deepseek-deepseek-chat",
+      "byline": "Simon Leary",
+      "desk": "sports",
+      "score": 6,
+      "slug": "jack-london-martin-richards-long-view-signal",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "business_c106_business-desk_packet-v2_deepseek-deepseek-chat",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "score": 5.5,
+      "slug": "west-oakland-toby-lamont-story-signal",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c106_hal-richmond_packet-v2_deepseek-deepseek-chat",
+      "byline": "Hal Richmond",
+      "desk": "sports",
+      "score": 5,
+      "slug": "jack-london-martin-richards-story-signal",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "sports_c106_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "score": 5,
+      "slug": "jack-london-martin-richards-roster-move",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "sports_c106_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Selena Grant",
+      "desk": "sports",
+      "score": 5,
+      "slug": "baylight-district-vinnie-keane-prospect-callup",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "civic_c106_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "score": 4.5,
+      "slug": "west-oakland-elio-perez-initiative",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "culture_c106_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+      "byline": "Sharon Okafor",
+      "desk": "culture",
+      "score": 4.5,
+      "slug": "lake-merritt-vanessa-treary-named-restaurant",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "culture_c106_elliot-graye_packet-v2_deepseek-deepseek-chat",
+      "byline": "Elliot Graye",
+      "desk": "culture",
+      "score": 4,
+      "slug": "chinatown-kenji-tanaka-beat-faith",
+      "verdict": "corrections-needed"
+    }
+  ],
+  "excludedCanonViolations": 2
+}

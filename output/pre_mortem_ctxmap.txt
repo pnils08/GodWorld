@@ -1,0 +1,97 @@
+ORDERING — READ BEFORE WRITE (16 field(s); 1 with an UNDEFAULTED read):
+  execution order: 155 orchestrated slots from runWorldCycle() (production entry), resolved per function
+  caveat: guards are detected per-line; a guard on the following line reads as
+          "no fallback" here. Confirm each site by eye before acting on it.
+------------------------------------------------------------------------------------------
+  allianceBenefits — written at Phase5-Bonds (bondEngine)   [all defaulted]
+      read Phase5-CitizenEvents phase05-citizens/runRelationshipEngine.js:660
+  civicLoad — written at Phase6-CivicLoad (applyCivicLoadIndicator)   [all defaulted]
+      read Phase4-WorldEvents phase04-events/worldEventsEngine.js:68
+      read Phase6-Spotlights phase05-citizens/applyNamedCitizenSpotlight.js:61
+      read Phase5-MediaModeEvents phase05-citizens/generateMediaModeEvents.js:78
+      read Phase5-CivicModeEvents phase05-citizens/generateCivicModeEvents.js:80
+      read Phase6-Prioritize phase06-analysis/prioritizeEvents.js:58
+  cycleWeight — written at Phase8-CycleWeightSignal (applyCycleWeight)   [all defaulted]
+      read Phase7-StorySeeds phase07-evening-media/applyStorySeeds.js:251
+  cycleWeightReason — written at Phase8-CycleWeightSignal (applyCycleWeight)   [all defaulted]
+      read Phase7-StorySeeds phase07-evening-media/applyStorySeeds.js:252
+  demographicDriftFactors — written at Phase8-DemographicDrift (deriveDemographicDrift)   [all defaulted]
+      read Phase3-NeighborhoodDemo phase03-population/updateNeighborhoodDemographics.js:76
+  domainPresence — written at Phase8-V3Preload (domainTracker, v3preLoader)   [all defaulted]
+      read Phase6-EconomicRipple phase06-analysis/economicRippleEngine.js:547
+      read Phase7-StorySeeds phase07-evening-media/applyStorySeeds.js:240
+  eventsGenerated — written at Phase3-CrisisSpikes (generateCrisisSpikes, generateCrisisBuckets, worldEventsEngine, generateGameModeMicroEvents, generateGenericCitizenMicroEvent, runAsUniversePipeline, runEducationEngine, runConductEngine, generateCitizensEvents, checkForPromotions, generateMediaModeEvents, runNeighborhoodEngine, generateGenericCitizens, runHouseholdEngine, runCivicRoleEngine, generateCivicModeEvents, runCareerEngine)   [all defaulted]
+      read Phase2-CityDynamics phase02-world-state/applyCityDynamics.js:110
+  mediaEffects — written at Phase8-V3Preload (mediaFeedbackEngine, v3preLoader)   ** 3 UNDEFAULTED **
+      read Phase2-SeasonalWeights phase02-world-state/applySeasonWeights.js:409
+      read Phase5-Relationships phase05-citizens/runRelationshipEngine.js:558   <-- no fallback
+      read Phase6-ShockMonitor phase06-analysis/applyShockMonitor.js:64
+      read Phase6-Prioritize phase06-analysis/prioritizeEvents.js:67
+      read Phase5-CitizenEvents phase07-evening-media/mediaFeedbackEngine.js:1230   <-- no fallback
+      read Phase5-CitizenEvents phase07-evening-media/mediaFeedbackEngine.js:1330   <-- no fallback
+  migrationDrift — written at Phase6-Migration (applyMigrationDrift)   [all defaulted]
+      read Phase4-WorldEvents phase04-events/worldEventsEngine.js:72
+  nightlifeVolume — written at Phase7-Nightlife (cityEveningSystems, buildNightLife)   [all defaulted]
+      read Phase4-WorldEvents phase04-events/worldEventsEngine.js:69
+  patternFlag — written at Phase6-PatternDetect (applyPatternDetection)   [all defaulted]
+      read Phase4-WorldEvents phase04-events/worldEventsEngine.js:71
+      read Phase6-Spotlights phase05-citizens/applyNamedCitizenSpotlight.js:62
+      read Phase6-CivicLoad phase06-analysis/applyCivicLoadIndicator.js:51
+      read Phase6-Prioritize phase06-analysis/prioritizeEvents.js:64
+      read Phase6-FilterNoise phase06-analysis/filterNoiseEvents.js:46
+  shockFlag — written at Phase6-ShockMonitor (applyShockMonitor)   [all defaulted]
+      read Phase2-CityDynamics phase02-world-state/applyCityDynamics.js:157
+      read Phase4-WorldEvents phase04-events/worldEventsEngine.js:70
+      read Phase6-Spotlights phase05-citizens/applyNamedCitizenSpotlight.js:63
+      read Phase6-CivicLoad phase06-analysis/applyCivicLoadIndicator.js:52
+      read Phase6-Prioritize phase06-analysis/prioritizeEvents.js:65
+  storyHooks — written at Phase5-Initiatives (generationalEventsEngine, neighborhoodTrajectoryEngine, generationalWealthEngine, runConductEngine, generateCitizensEvents, civicInitiativeEngine, householdFormationEngine, processAdvancementIntake, migrationTrackingEngine, educationCareerEngine, bondEngine, updateCivicApprovalRatings, casinoLedgerEngine, storylineWeavingEngine, storyHook, v3preLoader)   [all defaulted]
+      read Phase4-CycleRecovery phase08-v3-chicago/applyCycleRecovery.js:157
+  storySeeds — written at Phase7-StorySeeds (applyStorySeeds, v3preLoader)   [all defaulted]
+      read Phase2-CityDynamics phase02-world-state/applyCityDynamics.js:109
+      read Phase3-Crime phase03-population/updateCrimeMetrics.js:168
+      read Phase5-Bonds phase05-citizens/bondEngine.js:379
+  textureTriggers — written at Phase6-Textures (textureTriggers, v3preLoader)   [all defaulted]
+      read Phase4-CycleRecovery phase08-v3-chicago/applyCycleRecovery.js:152
+  worldEvents — written at Phase3-CrisisSpikes (generateCrisisSpikes, generateCrisisBuckets, worldEventsEngine, faithEventsEngine, applyBusinessDynamics, v3preLoader)   [all defaulted]
+      read Phase3-Population phase01-config/godWorldEngine2.js:882
+      read Phase2-CityDynamics phase02-world-state/applyCityDynamics.js:108
+      read Phase3-Demographics phase03-population/applyDemographicDrift.js:110
+
+AMBIGUOUS — reader runs at several slots, straddling the writer (1 field(s)):
+------------------------------------------------------------------------------------------
+  domainPresence — written at Phase8-V3Preload
+      read Phase6-Textures..Phase8-V3Integration phase07-evening-media/textureTriggers.js:46
+
+DEAD FILES — every top-level function unreachable from runWorldCycle() (22 file(s), 14 field(s) read there; 1 UNDECLARED):
+------------------------------------------------------------------------------------------
+  UNDECLARED utilities/resolveCitizen.js
+  declared (21) — header @cycle-status:
+    phase03-population/generateMonthlyDriftReport.js — off-cycle — Apps Script editor diagnostic, operator-run (SHEETS_MANIFEST §World_Drift_Report)
+    phase05-citizens/generateChicagoCitizensv1.js — retired S229 (engine.2 §3.5, a1eb5690) — Chicago Path B disabled, pool frozen; Phase8-ChicagoCitizens slot commented; kept for the frozen pool
+    phase05-citizens/generateMonthlyCivicSweep.js — off-cycle — standalone operator script (ssOverride signature); never called from godWorldEngine2.js
+    phase07-evening-media/parseMediaRoomMarkdown.js — off-cycle — menu item "Parse Media Room Markdown" (utilities/godWorldMenu.js)
+    phase10-persistence/compileHandoff.js — off-cycle — menu item "Compile Handoff" via compileHandoffFromMenu (utilities/godWorldMenu.js)
+    phase10-persistence/cycleExportAutomation.js — off-cycle — menu items + optional 6-hour Drive-export timer (utilities/godWorldMenu.js)
+    utilities/cycleRollback.js — off-cycle — disaster-recovery one-shot, run from the Apps Script editor
+    utilities/diagnoseDashboardData.js — off-cycle — ad hoc Logger diagnostic, run from the Apps Script editor
+    utilities/exportCitizensSnapshot.js — off-cycle — manual export, run exportCitizensSnapshot_ from the Apps Script editor
+    utilities/exportCycleArtifacts.js — off-cycle — Drive artifact exporter, no menu/trigger wiring; run from the Apps Script editor
+    utilities/exportSchemaHeaders.js — off-cycle — operator export; scripts/regenSchemaHeaders.js is the Node mirror, not a caller
+    utilities/godWorldDashboard.js — off-cycle — menu items (utilities/godWorldMenu.js)
+    utilities/godWorldMenu.js — off-cycle — onOpen is invoked by the Apps Script framework when the spreadsheet opens
+    utilities/restoreCarryForward103.js — off-cycle — one-shot S380 incident recovery, run once from the Apps Script editor
+    utilities/setupCivicLedgerColumns.js — off-cycle — one-time setup, menu item (utilities/godWorldMenu.js)
+    utilities/setupInitiativeTrackerValidation.js — off-cycle — one-time setup, run once from the Apps Script editor
+    utilities/setupSportsFeedValidation.js — off-cycle — one-time setup, menu item (utilities/godWorldMenu.js)
+    utilities/sheetNames.js — off-cycle — payload is the SHEET_NAMES constants object (referenced by 3 files); getSheet_ has no callers
+    utilities/textCrawler.js — off-cycle — Drive text-mirror archival tool, run from the Apps Script editor
+    utilities/v2DeprecationGuide.js — off-cycle — migration-lint helper + v3Random_ fail-loud stub; no callers since S156 by design
+    utilities/webTrigger.js — off-cycle — doGet/doPost are the web-app entry points that CALL runWorldCycle() (upstream of the cycle)
+  note: partially-unreachable helpers inside LIVE files are not listed — a static
+        call graph cannot see non-literal dispatch, so that bucket would over-report.
+
+==========================================================================================
+Connected: 165 | Orphaned: 156 | Phantom: 23
+Read-before-write: 16 field(s), 1 undefaulted
+Files scanned: 184

@@ -1,0 +1,26 @@
+{
+  "office": "council_d5",
+  "agentDir": "civic-office-council-d5",
+  "holder": "Janae Rivers",
+  "popid": "POP-00043",
+  "title": "City Council District 5",
+  "date": "2026-10-06",
+  "cycle": 110,
+  "model": "deepseek/deepseek-chat",
+  "statement": "The first training cohort placement is a watershed moment for East Oakland—not because the numbers meet expectations, but because we're finally prioritizing our youth over bureaucracy. 62% approval tells me the people see what I see: that this program is the lifeline our community has been waiting for. But let's be clear—this isn't check-the-box workforce development. We're building real pathways out of poverty in a neighborhood with 31 violent crimes last cycle while the city averaged 23.9. I'm watching those placements like a hawk to ensure East Oakland's youth aren't getting scraps.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-109-civic-office-council-d5",
+        "text": "The Baylight District corridor conditions demand immediate investment in safety infrastructure alongside apprenticeship opportunities—we won't solve one without the other. I'm calling for co-response teams to partner with cohort supervisors to secure routes to job sites.",
+        "directiveCycle": 109,
+        "confrontationSeat": "civic-office-council-d5"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-06T10:45:14.698Z",
+  "fellBackFrom": null
+}

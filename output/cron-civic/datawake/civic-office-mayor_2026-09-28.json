@@ -1,0 +1,26 @@
+{
+  "office": "mayor",
+  "agentDir": "civic-office-mayor",
+  "holder": "Avery Santana",
+  "popid": "POP-00034",
+  "title": "Mayor",
+  "date": "2026-09-28",
+  "cycle": 109,
+  "model": "moonshotai/kimi-k2",
+  "statement": "Nine months into the West Oakland Stabilization Fund, we're seeing what happens when relief doesn't wait on bureaucracy. The numbers tell the story: West Oakland sentiment at 0.45, outpacing the city average. Property crime down, violent crime stable, families staying instead of being priced out. This fund was never about writing checks—it was about keeping neighbors in their neighborhoods. Month nine means we've learned what works: the direct outreach, the storefront canvassing, the trust built block by block. Brenda Okoro's team has refined the process with each cycle, and the results show in West Oakland's turnaround. But stability isn't a finish line—it's a foundation. The remaining $23.4 million keeps us moving toward a West Oakland where displacement is the exception, not the expectation. Meanwhile, I'm directing my economic development team to transmit the formal INIT-007 Review Findings and Corrective Actions Report to Council this week. The 13-point approval drop in the Fruitvale Transit Hub apprenticeship program demands accountability, not excuses. Apprenticeship intake bottlenecks don't fix themselves, and executive policy direction needs to be steady, not scattered. Council will have that report before the next session.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-104-civic-office-mayor",
+        "text": "The Mayor's office will transmit the formal INIT-007 Review Findings and Corrective Actions Report to City Council this week to address apprenticeship intake bottlenecks and stabilize executive policy direction following the 13-point approval drop in C104.",
+        "directiveCycle": 104,
+        "confrontationSeat": "civic-office-mayor"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "1",
+  "ranAt": "2026-09-28T10:45:52.330Z",
+  "fellBackFrom": null
+}

@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "107",
+  "desk": "undocked",
+  "persona": "nia-rook",
+  "storyline": {
+    "slug": "fruitvale-martin-richards-undocked",
+    "verb": "opened"
+  },
+  "hood": "Fruitvale",
+  "quotes": [
+    {
+      "pop": "POP-00031",
+      "name": "Martin Richards",
+      "quote": "Honestly, I've been trying to process everything that's been happening, and it's hard to put into words. As someone who's lived in Fruitvale for a while, I feel like I'm still trying to make sense of it all. I've seen the city come together in ways that feel really meaningful, but at the same time, I'm still trying to figure out my own place in it."
+    },
+    {
+      "pop": "POP-00644",
+      "name": "Rafael Pilgrim",
+      "quote": "I've seen people around Fruitvale talking about Martin Richards's episode and how it's affecting the UNDOCKED leaderboard, it's like everyone's waiting to see what happens next."
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "I've seen the buzz around Martin Richards's episode, it's all people are talking about in Fruitvale, and honestly, I'm still trying to wrap my head around what it means for the UNDOCKED leaderboard."
+    }
+  ],
+  "claim": "Honestly, I've been trying to process everything that's been happening, and it's hard to put into words. As someone who's lived in Fruitvale for a while, I feel like I'm still trying to make sense of it all. I've seen the city come together in ways that feel really meaningful, but at the same time, I'm still trying to figure out my own place in it.",
+  "src": "citizenVoice PRESS c107",
+  "ranAt": "2026-09-18T18:18:16.635Z"
+}

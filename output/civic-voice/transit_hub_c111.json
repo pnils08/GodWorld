@@ -1,0 +1,34 @@
+{
+  "office": "transit_hub",
+  "cycle": 111,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "With the Mayor's directive to accelerate schematics delivery by Cycle 114, we are moving into final design-phase while maintaining robust community oversight to protect Fruitvale's street vendors and small businesses.",
+  "statements": [
+    {
+      "statementId": "STMT-111-transit_hub-001",
+      "type": "operational_status",
+      "topic": "Fruitvale Transit Hub Phase II",
+      "initiative": "INIT-003",
+      "decision": "Advance to design-phase with Cycle 114 schematics deadline",
+      "quote": "Four cycles of community visioning have shaped these blueprints — now we move to final design with Doña Esperanza's tamale cart and the panadería on E. 12th still thriving.",
+      "fullStatement": "The Mayor has directed Fruitvale Transit Hub Phase II to accelerate schematics delivery by Cycle 114. While this compresses our timeline, we will maintain robust community oversight throughout the design process. The tamales still steam on International, and the abuelas still cross to their panadería — protecting these vital street businesses remains our baseline. Mayer & Associates has demonstrated their commitment to listening to Fruitvale's merchants and residents throughout the visioning process, and we will hold them accountable to that same standard as we move into final design.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C111: Advanced to design-phase per Mayor's directive, schematics due Cycle 114",
+        "NextScheduledAction": "Final schematic review with community oversight",
+        "NextActionCycle": 114
+      }
+    },
+    {
+      "statementId": "STMT-111-transit_hub-002",
+      "type": "constituent_update",
+      "topic": "Fruitvale neighborhood conditions",
+      "initiative": null,
+      "decision": "Maintain focus on street vitality and crime prevention",
+      "quote": "The tamales still steam, the abuelas still cross — our work protects this baseline.",
+      "fullStatement": "Despite the compressed design timeline, our focus remains on protecting Fruitvale's street vitality and preventing displacement of local businesses and residents. The tamales still steam on International, and the abuelas still cross to their panadería — that's the baseline we're protecting. We will continue working with local merchants and community organizations to ensure this transit hub serves Fruitvale first.",
+      "trackerUpdates": {}
+    }
+  ]
+}

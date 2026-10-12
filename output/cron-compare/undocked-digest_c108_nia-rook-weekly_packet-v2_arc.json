@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "undocked-digest",
+  "persona": "nia-rook-weekly",
+  "storyline": {
+    "slug": "city-soo-loo-undocked-digest",
+    "verb": "opened"
+  },
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00663",
+      "name": "Soo Loo",
+      "quote": "I've been feeling like I'm always on, like I'm working myself thin, and it's hard to shake that feeling. I think that's what I've understood about performance - it's not just about doing well, it's about being able to keep going, to keep pushing through. For me, it's about finding that balance between giving it my all and taking care of myself."
+    },
+    {
+      "pop": "POP-00300",
+      "name": "Belle Lopez",
+      "quote": "Honestly, I've been so focused on my own work as a Home Health Aide and trying to make ends meet that I haven't really had the time or energy to think about the performance of others, including UNDOCKED pilots. My mind's been preoccupied with the recent city events and how they're affecting our community, and I've been trying to stay steady and supportive for my family and those around me."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I've heard people talking about the UNDOCKED pilots' performance, and from what I gather, it seems like they're doing a great job navigating through challenging situations, I feel like their ability to adapt is really impressive."
+    }
+  ],
+  "claim": "I've been feeling like I'm always on, like I'm working myself thin, and it's hard to shake that feeling. I think that's what I've understood about performance - it's not just about doing well, it's about being able to keep going, to keep pushing through. For me, it's about finding that balance between giving it my all and taking care of myself.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-26T14:15:49.412Z"
+}

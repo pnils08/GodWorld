@@ -1,0 +1,373 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Ernesto Quintero
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: 1B, 3B, DH
+
+ 
+
+Jersey: #44
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 89
+
+ 
+
+MLB Service: 1.000
+
+ 
+
+Age: 24
+
+ 
+
+Bats: R
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'1"
+
+ 
+
+Weight: 202 lbs
+
+ 
+
+Drafted: Round 2 (2034)
+
+ 
+
+Secondary Position: 3B, 1B
+
+ 
+
+Hitter Tendency: WHOLE FIELD
+
+ 
+
+Born: PENNSYLVANIA
+
+ 
+
+Canonical POPID: POP-00050
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+CON R: 76
+
+ 
+
+CON L: 81
+
+ 
+
+POW R: 88
+
+ 
+
+POW L: 75
+
+ 
+
+VIS: 74
+
+ 
+
+DISC: 70
+
+ 
+
+CLT: 82
+
+ 
+
+BUNT: 25
+
+ 
+
+DBUNT: 20
+
+ 
+
+DUR: 99
+
+ 
+
+FLD: 75
+
+ 
+
+ARM: 82
+
+ 
+
+ACC: 74
+
+ 
+
+REAC: 73
+
+ 
+
+SPD: 52
+
+ 
+
+STEAL: 35
+
+ 
+
+BR AGG: 40
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G    AB   R   H    2B  3B  HR  RBI  BB  SO   SB  CS  AVG   OBP   SLG
+
+ 
+
+2041  ATH   145  554  80  156  25  3   46  92   27  89   6   1   0.282 0.318 0.587
+
+
+--------------------------------------------------------------------------------
+
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  OPS   PA   SF  SAC  GIDP  HBP  IBB  TB   SB%   PO   A    E   FLD%  INN     WAR
+
+ 
+
+2041  ATH   0.905 589  3   1    6     4    1    325  .857  190  108  2   0.993 782.2   5.8
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 145
+
+ 
+
+AB: 554
+
+ 
+
+R: 80
+
+ 
+
+H: 156
+
+ 
+
+2B: 25
+
+ 
+
+3B: 3
+
+ 
+
+HR: 46
+
+ 
+
+RBI: 92
+
+ 
+
+BB: 27
+
+ 
+
+SO: 89
+
+ 
+
+SB: 6
+
+ 
+
+CS: 1
+
+ 
+
+AVG: .281
+
+ 
+
+OBP: .314
+
+ 
+
+SLG: .586
+
+ 
+
+OPS: .899
+
+ 
+
+TB: 325
+
+ 
+
+PO: 190
+
+ 
+
+A: 108
+
+ 
+
+E: 2
+
+ 
+
+FLD%: .993
+
+ 
+
+INN: 782.2
+
+ 
+
+WAR: 5.8
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2042–2043: Renewals (RNW)
+
+ 
+
+2044–2045: Arbitration (ARB)
+
+ 
+
+2046–2049: Free Agent (FA)
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Option: Used
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+QUIRKS
+
+Iron Durability (99 DUR)
+
+Raw Power Pull
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS
+
+Top Prospect Tier 1 (2040)
+
+Rookie of the Year (2041)
+
+All-Star (2041)
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00050
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00050

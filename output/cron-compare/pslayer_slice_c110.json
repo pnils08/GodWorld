@@ -1,0 +1,309 @@
+{
+  "cycle": 110,
+  "builtAt": "2026-10-09T11:15:04.683Z",
+  "empty": false,
+  "journalist": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "persona": "p-slayer"
+  },
+  "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+  "pulse": {
+    "className": "loss",
+    "classes": [
+      "result-pulse",
+      "loss"
+    ],
+    "score": 58,
+    "label": "The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+    "team": "Oaks",
+    "eventKind": "game-result",
+    "seasonType": "preseason",
+    "feedCycle": 110,
+    "record": "0-5",
+    "streak": "L5",
+    "mood": "frustrated",
+    "fanSentiment": "low",
+    "neighborhood": "Downtown",
+    "notes": "The Oaks lose their final preseason game bringing the total franchise record to 0-9 through rookie camp and preseason. Wilson Shepard reassures that the full team has yet to suit up as one and opening night of the season will show a team that hasnt been on display thus far and that he is not worried. Fans on the other hand are worried as having a first year coach in Shepard and first time GM is El",
+    "stats": "Adash Stanley/8PTS/11ASST, Ausin Reaves/20PTS, AJ Dybantsa/11PTS"
+  },
+  "charge": {
+    "bagModes": [
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      },
+      {
+        "id": 4,
+        "name": "Loss Hangover / Empty Win"
+      },
+      {
+        "id": 7,
+        "name": "We Still Believe / We're Done"
+      }
+    ],
+    "fanCharge": "dread",
+    "foilNumber": "0-9",
+    "centralFeeling": "Oakland should name the fear before the next drop.",
+    "palette": [
+      "fury",
+      "euphoria",
+      "dread",
+      "defiance",
+      "confession",
+      "grief",
+      "dare"
+    ]
+  },
+  "prewrite": {
+    "reporter": "P.Slayer",
+    "bagModes": [
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      },
+      {
+        "id": 4,
+        "name": "Loss Hangover / Empty Win"
+      },
+      {
+        "id": 7,
+        "name": "We Still Believe / We're Done"
+      }
+    ],
+    "fanCharge": "dread",
+    "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+    "anchorFacts": [
+      "StoryAngle (feed): The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+      "Team record (feed): 0-5 · streak L5",
+      "Stats (feed): Adash Stanley/8PTS/11ASST, Ausin Reaves/20PTS, AJ Dybantsa/11PTS",
+      "Event: Oaks — game-result (preseason)"
+    ],
+    "foilNumber": "0-9",
+    "centralFeeling": "Oakland should name the fear before the next drop.",
+    "hooks": [
+      {
+        "text": "Heavy sports activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      },
+      {
+        "text": "CHAMPIONSHIP: Historic moment potential. City-wide coverage, celebration preparation, legacy angles.",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      }
+    ]
+  },
+  "hooks": [
+    {
+      "text": "Heavy sports activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    },
+    {
+      "text": "CHAMPIONSHIP: Historic moment potential. City-wide coverage, celebration preparation, legacy angles.",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "aea329f6",
+      "hood": "Citywide",
+      "citizens": [
+        "POP-00024 Henry Rivas",
+        "POP-00022 Danny Horn",
+        "POP-00003 Mark Aitken",
+        "POP-00019 Isley Kelley",
+        "POP-00033 John Ellis",
+        "POP-00597 Eric Taveras"
+      ],
+      "businesses": [],
+      "angle": "conflict/tension coverage"
+    },
+    {
+      "seedId": "8545a66c",
+      "hood": "Downtown",
+      "citizens": [
+        "POP-00965 Bruce Wright",
+        "POP-00257 Farah Lindqvist",
+        "POP-01085 Bruce Wright",
+        "POP-00344 Tobert Lewis"
+      ],
+      "businesses": [
+        "BIZ-00013 AC Transit",
+        "BIZ-00101 Oakland Entertainment Talent Ageny"
+      ],
+      "angle": "conflict/tension coverage"
+    }
+  ],
+  "friction": {
+    "a": "The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+    "b": "Soft both-sides / FO calm",
+    "frame": "Something the stands feel that the release will not say."
+  },
+  "priorTakes": [],
+  "story": {
+    "ref": "Oakland_Sports_Feed cycle 110; world_summary_c110.md \"## Sports\" · The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. T",
+    "label": "The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+    "kind": "loss",
+    "angle": "The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+    "hookLine": "Something the stands feel that the release will not say.",
+    "hood": "Downtown",
+    "team": "Oaks",
+    "eventKind": "game-result",
+    "popids": [
+      "POP-01023",
+      "POP-01027",
+      "POP-01022"
+    ],
+    "citizens": [
+      "Adash Stanley — PG / The Oaks , Downtown",
+      "Austin Reaves — SG / The Oaks, Downtown",
+      "Wilson Shepard — Head Coach, Oakland Oaks, Downtown",
+      "Miami Heat"
+    ],
+    "pulseClass": "loss",
+    "pulseScore": 58,
+    "fanCharge": "dread",
+    "bagModeIds": [
+      3,
+      4,
+      7
+    ]
+  },
+  "players": [
+    {
+      "name": "Adash Stanley",
+      "popid": "POP-01023",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Austin Reaves",
+      "popid": "POP-01027",
+      "role": "SG / The Oaks",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Wilson Shepard",
+      "popid": "POP-01022",
+      "role": "Head Coach, Oakland Oaks",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Miami Heat",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "Downtown",
+    "record": "0-5",
+    "streak": "L5",
+    "mood": "frustrated",
+    "fanSentiment": "low",
+    "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+  },
+  "candidates": [
+    {
+      "score": 58,
+      "cycle": 110,
+      "team": "Oaks",
+      "primary": "loss",
+      "angle": "The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise betwe",
+      "priorHits": 0
+    },
+    {
+      "score": 57,
+      "cycle": 110,
+      "team": "Oaks",
+      "primary": "loss",
+      "angle": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran",
+      "priorHits": 0
+    },
+    {
+      "score": 56,
+      "cycle": 110,
+      "team": "A's",
+      "primary": "win-streak",
+      "angle": "A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and B",
+      "priorHits": 0
+    },
+    {
+      "score": 55,
+      "cycle": 109,
+      "team": "Oaks",
+      "primary": "injury-load",
+      "angle": "The Oaks lose yet again even with strong efforts from Austin Reaves,",
+      "priorHits": 0
+    },
+    {
+      "score": 53,
+      "cycle": 108,
+      "team": "A's",
+      "primary": "injury-load",
+      "angle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 h",
+      "priorHits": 0
+    },
+    {
+      "score": 51,
+      "cycle": 110,
+      "team": "A's",
+      "primary": "win-streak",
+      "angle": "John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly",
+      "priorHits": 0
+    },
+    {
+      "score": 49,
+      "cycle": 109,
+      "team": "A's",
+      "primary": "loss",
+      "angle": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough.",
+      "priorHits": 0
+    },
+    {
+      "score": 49,
+      "cycle": 109,
+      "team": "A's",
+      "primary": "injury-load",
+      "angle": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+      "priorHits": 0
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c110.md ## Sports",
+    "output/desk_signal_c110.json lanes.sports",
+    "docs/media/P_SLAYER_CHARGE_BAG.md",
+    "docs/media/voices/p_slayer.md",
+    "docs/media/P_SLAYER_JOURNEY_INDEX.md",
+    "Oakland_Sports_Feed cycle 110; world_summary_c110.md \"## Sports\" · The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. T",
+    "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+  ],
+  "gaps": {
+    "note": "What would deepen fan-heat further",
+    "missingOrThin": [
+      {
+        "source": "cp-POP-00008 live wall at build time",
+        "status": "wake-time",
+        "why": "reporterWall injects at cron angle; slice uses on-disk prior columns so build stays offline"
+      },
+      {
+        "source": "As_Roster live line for foil",
+        "status": "feed-stats-proxy",
+        "why": "FoilNumber parsed from feed Stats/Notes; live roster sheet would refine without inventing"
+      },
+      {
+        "source": "TrueSource / truesource injury windows",
+        "status": "partial",
+        "why": "Injury-load class relies on feed wording; card detail would strengthen Superman mode"
+      }
+    ]
+  }
+}

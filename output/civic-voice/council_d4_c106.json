@@ -1,0 +1,18 @@
+{
+  "office": "council_d4",
+  "cycle": 106,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I've evaluated the current state of my district, D4, and considered the Mayor's agenda. I recognize the progress made in Ivy Hill and will defend the credit for its success. I also acknowledge the challenges in Glenview, particularly the slow street trade, and will advocate for targeted support. My decisions are guided by a commitment to fiscal discipline, constituent accountability, and the well-being of D4's residents.",
+  "statements": [
+    {
+      "statementId": "STMT-106-council_d4-001",
+      "type": "constituent_focus",
+      "topic": "Glenview and Ivy Hill support",
+      "initiative": null,
+      "decision": "Defend Ivy Hill's progress and advocate for Glenview support",
+      "quote": "Ivy Hill's progress is a testament to the city's structured support and the people's resilience. I'll ensure Glenview receives the attention it deserves, with a focus on targeted investment and fiscal discipline.",
+      "fullStatement": "As the representative of D4, I'm committed to the well-being of my constituents. Ivy Hill's progress demonstrates what can be achieved when the city provides structured support. I'll continue to defend the credit for this success and ensure that Glenview receives the necessary attention, focusing on targeted investment and fiscal discipline to address its challenges, particularly the slow street trade. By doing so, I aim to create a more equitable and prosperous environment for all D4 residents.",
+      "trackerUpdates": {}
+    }
+  ]
+}

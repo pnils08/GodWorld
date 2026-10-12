@@ -1,0 +1,58 @@
+{
+  "draft": "output/cron-compare/civic_c109_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "e1733701e8a987d8da2a2054e99d1fc60633d5ba8f2bc84b5d8751158a973c4b",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, metrics match Ground Truth table, and local scene texture complies with profile authority.",
+  "review": {
+    "profileId": "jax-accountability-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "packageVersion": "JAX-LEP2-1",
+    "manifestId": "AM-7f4c8bdf0271",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "19th"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Jax Caldera",
+      "Tao Lee",
+      "Theo Burkes"
+    ],
+    "unverified": [
+      "Telegraph Presbyterian Fellowship"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0094,
+  "durationMs": 5603,
+  "parseError": false,
+  "ranAt": "2026-10-02T06:41:19.576Z"
+}

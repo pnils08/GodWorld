@@ -1,0 +1,582 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00013",
+    "name": "Maria Keen",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "East Oakland — the programs that hold the block and the people who founded them",
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, and the engine's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders and movement numbers are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "neighborhood",
+      "hood": "East Oakland",
+      "facts": [
+        "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+        "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+        "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+        "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+        "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+        "Allen Temple Academy (tech-education), East Oakland, since C88",
+        "East Oakland this cycle: 451 students, 1,441 adults, 308 seniors — moved vs C106: +10 students, +39 adults, +8 seniors"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "Lake Merritt seeing 15% population growth. New residents arriving—who are they and why? Neighborhood change angle. (observational analysis)",
+        "Multiple community signals detected. Could be coincidence or early pattern. (observational analysis)",
+        "Positive energy in the city. What's driving the mood? Feature opportunity. (street-level mood piece)",
+        "Community engagement elevated. Residents gathering, organizing, connecting. Profile opportunity. (observational analysis)"
+      ],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "beat-neighborhood",
+    "hood": "East Oakland",
+    "src": "output/beats/Community_Programs.jsonl @C107",
+    "plan": {
+      "focus": "Community programs and their founders in East Oakland",
+      "closeQuestion": "How do these community programs reflect the values and priorities of the people who founded them?"
+    },
+    "openThreads": [
+      {
+        "slug": "lake-merritt-vanessa-treary-named-restaurant",
+        "label": "lake-merritt-vanessa-treary-named-restaurant | C105→C106 | 4 article(s) | advanced 3, opened 1",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00781",
+          "POP-00783",
+          "POP-01045",
+          "POP-00135"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "chinatown-kenji-tanaka-beat-faith",
+        "label": "chinatown-kenji-tanaka-beat-faith | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Chinatown",
+        "popids": [
+          "POP-00763",
+          "POP-00759"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "lake-merritt-vanessa-treary-quiet-nightlife",
+        "label": "lake-merritt-vanessa-treary-quiet-nightlife | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00781",
+          "POP-00783",
+          "POP-01045",
+          "POP-00135"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-tomas-renteria-story-signal",
+        "label": "jack-london-tomas-renteria-story-signal | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00744",
+          "POP-00878",
+          "POP-00960"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "lake-merritt-yuki-ji-quiet-nightlife",
+        "label": "lake-merritt-yuki-ji-quiet-nightlife | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00783",
+          "POP-01045",
+          "POP-00135"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-tomas-renteria-hood-kitchens",
+        "label": "jack-london-tomas-renteria-hood-kitchens | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00744",
+          "POP-00878",
+          "POP-00960"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "adams-point-devon-willis-fame-sighting",
+        "label": "adams-point-devon-willis-fame-sighting | C104→C105 | 5 article(s) | advanced 2, opened 3",
+        "hood": "Adams Point",
+        "popids": [
+          "POP-00782",
+          "POP-00645",
+          "POP-00648",
+          "POP-00798"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "city-depak-ying-story-signal",
+        "label": "city-depak-ying-story-signal | C104→C105 | 3 article(s) | advanced 2, opened 1",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00170",
+          "POP-00198",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "dimond-melton-neilon-fame-sighting",
+        "label": "dimond-melton-neilon-fame-sighting | C105→C105 | 2 article(s) | opened 2",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00170",
+          "POP-00198",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "dimond-melton-neilon-story-signal",
+        "label": "dimond-melton-neilon-story-signal | C105→C105 | 1 article(s) | opened 1",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00170",
+          "POP-00198"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "adams-point-devon-willis-hood",
+        "label": "adams-point-devon-willis-hood | C105→C105 | 1 article(s) | opened 1",
+        "hood": "Adams Point",
+        "popids": [
+          "POP-00782",
+          "POP-00645",
+          "POP-00648",
+          "POP-00798"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "city-melton-neilon-city-event",
+        "label": "city-melton-neilon-city-event | C105→C105 | 1 article(s) | opened 1",
+        "hood": null,
+        "popids": [
+          "POP-00170",
+          "POP-00198",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00532",
+        "name": "Marcus Whitfield",
+        "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01047",
+        "name": "Maria Conteras",
+        "profile": "Maria Conteras",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-01055",
+        "name": "Jerome Pittman",
+        "profile": "Jerome Pittman",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00119",
+        "name": "Beverly Peterson",
+        "profile": "Beverly Peterson",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00532-e41c6e73de",
+        "pop": "POP-00532",
+        "name": "Marcus Whitfield",
+        "quote": "I've seen how community programs can really bring people together and make a difference in their lives. As someone who's founded a program myself, I know how much work and dedication goes into making it happen. It's not just about the program itself, but about the people behind it and the impact it has on the community.",
+        "factIds": [
+          "F-cd66e4b49d8c"
+        ],
+        "src": "packet.W2[POP-00532]"
+      },
+      {
+        "id": "Q-POP-01047-d8dab683d6",
+        "pop": "POP-01047",
+        "name": "Maria Conteras",
+        "quote": "I've seen that community programs in East Oakland are really making a difference, and it's great to see people like Marcus Whitfield founding initiatives that help our neighborhood.",
+        "factIds": [
+          "F-cd66e4b49d8c"
+        ],
+        "src": "packet.W2[POP-01047]"
+      },
+      {
+        "id": "Q-POP-01055-0a3803b5e2",
+        "pop": "POP-01055",
+        "name": "Jerome Pittman",
+        "quote": "I feel like community programs and their founders in East Oakland are really making a difference, I see the impact they have on people's lives around here.",
+        "factIds": [
+          "F-ac25a93a42d1",
+          "F-e0f755f45e04"
+        ],
+        "src": "packet.W2[POP-01055]"
+      },
+      {
+        "id": "Q-POP-00119-d8dab683d6",
+        "pop": "POP-00119",
+        "name": "Beverly Peterson",
+        "quote": "I've seen that community programs in East Oakland are really making a difference, and it's great to see people like Marcus Whitfield founding initiatives that help our neighborhood.",
+        "factIds": [
+          "F-cd66e4b49d8c"
+        ],
+        "src": "packet.W2[POP-00119]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "The story behind the founding of these programs could reveal a deeper understanding of the community's needs and strengths",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C107",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-ac25a93a42d1"
+    },
+    {
+      "t": "FACT",
+      "text": "East Oakland: 6 active programs on the record",
+      "src": "output/beats/Community_Programs.jsonl @C107",
+      "id": "F-e0f755f45e04"
+    },
+    {
+      "t": "FACT",
+      "text": "6 active programs in East Oakland; Marcus Whitfield founded one.",
+      "src": "output/beats/Community_Programs.jsonl @C107",
+      "id": "F-cd66e4b49d8c"
+    },
+    {
+      "t": "FACT",
+      "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C107 PRG-005",
+      "id": "F-39029486ffff"
+    },
+    {
+      "t": "FACT",
+      "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C107 PRG-014",
+      "id": "F-e817bf673f8b"
+    },
+    {
+      "t": "FACT",
+      "text": "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+      "src": "output/beats/Community_Programs.jsonl @C107 PRG-022",
+      "id": "F-f9ed907315c3"
+    },
+    {
+      "t": "FACT",
+      "text": "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+      "src": "output/beats/Community_Programs.jsonl @C107 PRG-023",
+      "id": "F-9a373525878f"
+    },
+    {
+      "t": "FACT",
+      "text": "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+      "src": "output/beats/Community_Programs.jsonl @C107 PRG-025",
+      "id": "F-2b759d6fbe14"
+    },
+    {
+      "t": "FACT",
+      "text": "Allen Temple Academy (tech-education), East Oakland, since C88",
+      "src": "output/beats/Community_Programs.jsonl @C107 PRG-030",
+      "id": "F-b511422339f5"
+    },
+    {
+      "t": "FACT",
+      "text": "East Oakland this cycle: 451 students, 1,441 adults, 308 seniors — moved vs C106: +10 students, +39 adults, +8 seniors",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C107 vs prev/",
+      "id": "F-1d954d118656"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-named neighborhood or evening condition into a human-scale ground brief without inventing Maria's attendance, a neighbor, an action, a quote, or a civic outcome.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "intimate neighborhood ground brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named place and condition",
+      "closing": "the human observation still needed"
+    },
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome",
+      "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote",
+      "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-9d17d480a56e",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-ac25a93a42d1",
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-e0f755f45e04",
+        "t": "FACT",
+        "text": "East Oakland: 6 active programs on the record",
+        "src": "output/beats/Community_Programs.jsonl @C107"
+      },
+      {
+        "id": "F-cd66e4b49d8c",
+        "t": "FACT",
+        "text": "6 active programs in East Oakland; Marcus Whitfield founded one.",
+        "src": "output/beats/Community_Programs.jsonl @C107"
+      },
+      {
+        "id": "F-39029486ffff",
+        "t": "FACT",
+        "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C107 PRG-005"
+      },
+      {
+        "id": "F-e817bf673f8b",
+        "t": "FACT",
+        "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C107 PRG-014"
+      },
+      {
+        "id": "F-f9ed907315c3",
+        "t": "FACT",
+        "text": "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+        "src": "output/beats/Community_Programs.jsonl @C107 PRG-022"
+      },
+      {
+        "id": "F-9a373525878f",
+        "t": "FACT",
+        "text": "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+        "src": "output/beats/Community_Programs.jsonl @C107 PRG-023"
+      },
+      {
+        "id": "F-2b759d6fbe14",
+        "t": "FACT",
+        "text": "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+        "src": "output/beats/Community_Programs.jsonl @C107 PRG-025"
+      },
+      {
+        "id": "F-b511422339f5",
+        "t": "FACT",
+        "text": "Allen Temple Academy (tech-education), East Oakland, since C88",
+        "src": "output/beats/Community_Programs.jsonl @C107 PRG-030"
+      },
+      {
+        "id": "F-1d954d118656",
+        "t": "FACT",
+        "text": "East Oakland this cycle: 451 students, 1,441 adults, 308 seniors — moved vs C106: +10 students, +39 adults, +8 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107 vs prev/"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00532-e41c6e73de",
+        "speakerId": "POP-00532",
+        "speakerName": "Marcus Whitfield",
+        "text": "I've seen how community programs can really bring people together and make a difference in their lives. As someone who's founded a program myself, I know how much work and dedication goes into making it happen. It's not just about the program itself, but about the people behind it and the impact it has on the community.",
+        "factIds": [
+          "F-cd66e4b49d8c"
+        ],
+        "src": "packet.W2[POP-00532]"
+      },
+      {
+        "id": "Q-POP-01047-d8dab683d6",
+        "speakerId": "POP-01047",
+        "speakerName": "Maria Conteras",
+        "text": "I've seen that community programs in East Oakland are really making a difference, and it's great to see people like Marcus Whitfield founding initiatives that help our neighborhood.",
+        "factIds": [
+          "F-cd66e4b49d8c"
+        ],
+        "src": "packet.W2[POP-01047]"
+      },
+      {
+        "id": "Q-POP-01055-0a3803b5e2",
+        "speakerId": "POP-01055",
+        "speakerName": "Jerome Pittman",
+        "text": "I feel like community programs and their founders in East Oakland are really making a difference, I see the impact they have on people's lives around here.",
+        "factIds": [
+          "F-ac25a93a42d1",
+          "F-e0f755f45e04"
+        ],
+        "src": "packet.W2[POP-01055]"
+      },
+      {
+        "id": "Q-POP-00119-d8dab683d6",
+        "speakerId": "POP-00119",
+        "speakerName": "Beverly Peterson",
+        "text": "I've seen that community programs in East Oakland are really making a difference, and it's great to see people like Marcus Whitfield founding initiatives that help our neighborhood.",
+        "factIds": [
+          "F-cd66e4b49d8c"
+        ],
+        "src": "packet.W2[POP-00119]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00532",
+        "name": "Marcus Whitfield",
+        "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01047",
+        "name": "Maria Conteras",
+        "profile": "Maria Conteras",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01055",
+        "name": "Jerome Pittman",
+        "profile": "Jerome Pittman",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00119",
+        "name": "Beverly Peterson",
+        "profile": "Beverly Peterson",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "The story behind the founding of these programs could reveal a deeper understanding of the community's needs and strengths",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome",
+      "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote",
+      "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"
+    ]
+  }
+}

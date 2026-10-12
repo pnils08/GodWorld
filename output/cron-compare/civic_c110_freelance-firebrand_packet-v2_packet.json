@@ -1,0 +1,49 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "freelance-firebrand",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s) ",
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 3 cycles",
+      "kind": "anomaly",
+      "angle": "Something does not line up — write into the gap.",
+      "hookLine": null,
+      "hood": null,
+      "popids": [
+        "POP-00002",
+        "POP-00004",
+        "POP-00015",
+        "POP-00020",
+        "POP-01029",
+        "POP-00678",
+        "POP-00641"
+      ],
+      "citizens": [
+        "Amara Keane — Pianist, Philanthropist, Grand Lake",
+        "Lucia Polito — Aura Wellness Practitioner, Fruitvale",
+        "DeShawn Hartley — Photographer, Jack London",
+        "Elena Vásquez — Waterfront Urban Planner, Jack London",
+        "Miguel Allen — Plumber, Fruitvale",
+        "Celo Patel — Container Yard Supervisor, Jack London",
+        "Hector Campbell — Taxi Driver, Rockridge"
+      ],
+      "stinkClass": "crisis-unattended",
+      "stinkScore": 38
+    }
+  },
+  "angle": "output/cron-compare/civic_c110_freelance-firebrand_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-07T18:15:01.719Z"
+}

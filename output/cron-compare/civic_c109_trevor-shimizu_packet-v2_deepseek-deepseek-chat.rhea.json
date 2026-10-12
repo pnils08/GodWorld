@@ -1,0 +1,63 @@
+{
+  "draft": "output/cron-compare/civic_c109_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "2c784525dca77eefddc9d9448a48ec561170a3716e5e321a375ded1a39d76bdd",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen identities, roles, BART/AC Transit stations, and interview quotes verified against canon ground truth and manifest.",
+  "review": {
+    "profileId": "trevor-infrastructure-systems-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "packageVersion": "TREVOR-LEP2-1",
+    "manifestId": "AM-995fe7a414df",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "30%",
+          "4",
+          "3",
+          "24%"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Coen Cartier",
+      "Eleanor Rivera",
+      "Jerald Jensen",
+      "Joel Wren"
+    ],
+    "unverified": [
+      "Even Coliseum Station",
+      "St Oakland City Center"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0102,
+  "durationMs": 7713,
+  "parseError": false,
+  "ranAt": "2026-09-28T23:18:37.384Z"
+}

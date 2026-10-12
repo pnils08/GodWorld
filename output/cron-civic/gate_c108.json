@@ -1,0 +1,14 @@
+{
+  "cycle": 108,
+  "pass": true,
+  "deterministicPass": true,
+  "sanityStatus": "skipped",
+  "failures": [],
+  "touchedInitiatives": [
+    "candidate:MV-108-civic-office-council-d2-2026-09-21"
+  ],
+  "maxRows": 6,
+  "sanity": null,
+  "model": null,
+  "ranAt": "2026-09-25T04:38:14.661Z"
+}

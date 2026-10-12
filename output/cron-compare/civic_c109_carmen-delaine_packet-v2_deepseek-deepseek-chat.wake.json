@@ -1,0 +1,38 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "109",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "carmen-delaine",
+  "byline": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 75,
+  "quotesLanded": 4,
+  "disposition": "flagged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": true,
+    "findings": [
+      {
+        "check": "repair-chrome",
+        "issue": "corrected-article"
+      }
+    ]
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/civic_c109_carmen-delaine_packet-v2_deepseek-deepseek-chat.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "// tip: ⌘ custom filepath { path: '/custom/path/.env' }\n{\n  \"popId\": \"POP-00011\",\n  \"name\": \"Carmen Delaine\",\n  \"recorded\": true,\n  \"text\": \"filed: Here's the corrected civic section for cycle 109:\"\n}"
+  },
+  "ranAt": "2026-09-28T23:15:53.018Z",
+  "dispositionReconciledAt": "2026-10-03T17:00:05.653Z"
+}

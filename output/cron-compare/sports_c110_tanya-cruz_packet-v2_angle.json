@@ -1,0 +1,417 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "110",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00014",
+      "name": "Tanya Cruz",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "A's playoffs update: 4-1",
+      "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+      "creativeBrief": {
+        "kind": "sideline-dispatch",
+        "pulseClass": "record-only-sideline",
+        "bagModes": [
+          "10 Inference Close"
+        ],
+        "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+        "anchorFacts": [
+          "The A's playoffs record is 4-1."
+        ],
+        "accessEvidence": {
+          "state": "ALLOTTED",
+          "facts": [
+            "clubhouse/sideline SET is the reporter's room"
+          ]
+        },
+        "quoteEvidence": {
+          "state": "NOT_SUPPLIED",
+          "quotes": []
+        },
+        "observationEvidence": {
+          "state": "ALLOTTED",
+          "facts": []
+        },
+        "missing": [
+          "Packet player quotes",
+          "injury or team-response facts beyond the supplied record"
+        ],
+        "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+        "sourcePointers": [
+          "output/world_summary_c110.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/TANYA_SIDELINE_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sideline-signal",
+      "hood": "Downtown",
+      "score": null,
+      "src": "world_summary_c110.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | game-result | (playoffs) | Henry Rivas, Danny Horn, Mark Aitken, Isley Kelley",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | John Ellis, Eric Taveras, Vinnie Keane, Benji Dillon",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Austin Reaves, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (championship) | Mike Paulson, Vinnie Keane, Benji Dillon, Mark Aitken, Eric Taveras, Pablo Almanzar, Arturo Ramos, Isley Kelley, Darrin Davis, Frank Reyna",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00033",
+          "name": "John Ellis",
+          "profile": "John Ellis — Starting Pitcher, Oakland A's",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Laurel",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c110.md ## Sports",
+            "pop": "POP-00033",
+            "rowName": "John Ellis",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00597",
+          "name": "Eric Taveras",
+          "profile": "Eric Taveras — Second Baseman, Oakland A's",
+          "role": "Second Baseman, Oakland A's",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c110.md ## Sports",
+            "pop": "POP-00597",
+            "rowName": "Eric Taveras",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Grand Lake",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c110.md ## Sports",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c110.md ## Sports",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "A's playoffs update: 4-1",
+        "src": "world_summary_c110.md ## Sports",
+        "id": "F-49ebf1a7377d"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's playoffs record is 4-1.",
+        "src": "world_summary_c110.md ## Sports",
+        "id": "F-167f836a9c67"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00033",
+        "name": "John Ellis",
+        "role": "Starting Pitcher, Oakland A's",
+        "hood": "Laurel",
+        "profile": "John Ellis — Starting Pitcher, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c110.md ## Sports",
+          "pop": "POP-00033",
+          "rowName": "John Ellis",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00597",
+        "name": "Eric Taveras",
+        "role": "Second Baseman, Oakland A's",
+        "hood": "Downtown",
+        "profile": "Eric Taveras — Second Baseman, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c110.md ## Sports",
+          "pop": "POP-00597",
+          "rowName": "Eric Taveras",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "hood": "Grand Lake",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c110.md ## Sports",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Rockridge",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c110.md ## Sports",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "A's playoffs update: 4-1",
+      "label": "A's playoffs update: 4-1",
+      "hookLine": "A's playoffs update: 4-1",
+      "kind": "sideline-signal",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00033",
+        "POP-00597",
+        "POP-00001",
+        "POP-00018"
+      ],
+      "citizens": [
+        "John Ellis (POP-00033)",
+        "Eric Taveras (POP-00597)",
+        "Vinnie Keane (POP-00001)",
+        "Benji Dillon (POP-00018)"
+      ],
+      "ref": "world_summary_c110.md ## Sports",
+      "cycle": 110
+    },
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "text": "The A's are riding high with a 4-1 playoff record, and the clubhouse energy reflects that. I want to capture the mood after this strong start—how the team is handling the momentum, who's stepping up as leaders, and if there's any caution creeping in despite the wins. The pitching has been stellar, especially from guys like John Ellis, but I'm curious about the quiet contributors too—the ones doing the small things that don't always show up in the box score.",
+    "plan": {
+      "chase": "The A's are riding high with a 4-1 playoff record, and the clubhouse energy reflects that. I want to capture the mood after this strong start—how the team is handling the momentum, who's stepping up as leaders, and if there's any caution creeping in despite the wins. The pitching has been stellar, especially from guys like John Ellis, but I'm curious about the quiet contributors too—the ones doing the small things that don't always show up in the box score.",
+      "focus": "Clubhouse atmosphere post-strong playoff start, with an eye on both the standout performers and the unsung contributors.",
+      "why": "After a hot streak like this, teams can either get overconfident or lock in even harder. I want to see which direction the A's are leaning and how the veterans are guiding the younger players.",
+      "checks": [
+        "How are the players balancing celebration with focus?",
+        "Is there a sense of unfinished business, or are they riding the high?",
+        "Who's setting the tone in the clubhouse—veterans or emerging leaders?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00033",
+          "question": "John, you've been a rock on the mound. How are you keeping the momentum going, and what's the vibe like in here after this start?",
+          "basis": "Ellis has been a key part of the A's strong pitching in the playoffs."
+        },
+        {
+          "pop": "POP-00597",
+          "question": "Eric, you've been steady all year. What's the mindset in the infield right now—are you guys feeling the pressure or just playing loose?",
+          "basis": "Taveras is a consistent presence in the lineup and clubhouse."
+        }
+      ],
+      "interpretation": "This team feels like it's playing with house money—loose but not careless. The veterans seem to be keeping things grounded, but there's an unmistakable confidence in the air.",
+      "unverifiedLead": [
+        "Rumblings about bullpen roles tightening up—are some guys getting more high-leverage looks?",
+        "Heard a few players mentioning 'staying hungry'—is there a specific message being emphasized?"
+      ],
+      "closeQuestion": "Is this team's chemistry as strong as it seems, or are there undercurrents of tension beneath the wins?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | game-result | (playoffs) | Henry Rivas, Danny Horn, Mark Aitken, Isley Kelley",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00024",
+        "POP-00022",
+        "POP-00003",
+        "POP-00019"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | John Ellis, Eric Taveras, Vinnie Keane, Benji Dillon",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00033",
+        "POP-00597",
+        "POP-00001",
+        "POP-00018"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Austin Reaves, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01024",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "A's | game-result | (championship) | Mike Paulson, Vinnie Keane, Benji Dillon, Mark Aitken, Eric Taveras, Pablo Almanzar, Arturo Ramos, Isley Kelley, Darrin Davis, Frank Reyna",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527",
+        "POP-00001",
+        "POP-00018",
+        "POP-00003",
+        "POP-00597",
+        "POP-01078",
+        "POP-00025",
+        "POP-00019",
+        "POP-00021",
+        "POP-00079"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "ranAt": "2026-10-07T11:17:27.693Z"
+}

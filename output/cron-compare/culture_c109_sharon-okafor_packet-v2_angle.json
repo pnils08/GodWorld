@@ -1,0 +1,719 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "109",
+  "persona": "sharon-okafor",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00159",
+      "name": "Sharon Okafor",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Lena Cross is fading — how the city follows its names",
+      "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "lifestyle",
+        "hood": "Lake Merritt",
+        "facts": [
+          "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 96, cooling), 17 media mentions",
+          "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 70, cooling), 14 media mentions",
+          "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+          "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+          "Oakland Native MVP Davis (sports figure), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 14, rising), 1 media mentions"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "Household in Lake Merritt spending 56% of income on housing (observational analysis)",
+          "A family bought their home in Downtown (observational analysis)",
+          "The Villanueva line is founded (observational analysis)",
+          "The Dillon family opened Dillon Clinic (observational analysis)"
+        ],
+        "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-lifestyle",
+      "hood": "Lake Merritt",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C109",
+      "nearby": [
+        {
+          "text": "Temescal neighborhood texture — how residents experience the improvement | Residents of Temescal feel the change firsthand.",
+          "src": "output/engine_audit_c109.json patterns[6]; evidence: Initiative_Tracker row(s) 5"
+        },
+        {
+          "text": "Baylight District | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c109.md \"### Baylight District\"; events: world_summary_c109.md \"## World Events\""
+        },
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c109.md \"### Chinatown\"; events: world_summary_c109.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c109.md \"### Downtown\"; events: world_summary_c109.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c109.md \"### East Oakland\"; events: world_summary_c109.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-912baafccba1"
+      },
+      {
+        "t": "FACT",
+        "text": "Marin Tao leads the fame table; 2 fading, 1 new",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-3f8b0821a097"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 96, cooling), 17 media mentions.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-8011b180d4d7"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 96, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-6f6749f881d1"
+      },
+      {
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 70, cooling), 14 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-6750bf963610"
+      },
+      {
+        "t": "FACT",
+        "text": "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-92cb04863b47"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-8d85302e7eed"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Native MVP Davis (sports figure), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 14, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109",
+        "id": "F-ee1d9da1fe65"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-lifestyle",
+      "angle": "Lena Cross is fading — how the city follows its names",
+      "label": "Marin Tao leads the fame table; 2 fading, 1 new",
+      "hookLine": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 96, cooling), 17 media mentions.",
+      "hood": "Lake Merritt",
+      "citizens": [
+        "Lena Cross (POP-00539)",
+        "Rowan Pierce (POP-00545)",
+        "Marin Tao (POP-00537)",
+        "Rico Valez (POP-00632)"
+      ],
+      "popids": [
+        "POP-00539",
+        "POP-00545",
+        "POP-00537",
+        "POP-00632"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C109",
+      "cycle": 109
+    },
+    "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "named": "Bridge & Barrel",
+      "hood": "Jack London",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Bridge & Barrel (Jack London) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Bridge & Barrel is open and quiet in Jack London. What that condition means is not yet established.",
+      "hookLine": "Bridge & Barrel is open and quiet in Jack London.",
+      "anchorFacts": [
+        "NAMED: Bridge & Barrel",
+        "HOOD: Jack London",
+        "VENUE: Bridge & Barrel",
+        "HOOD: Jack London",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Henry Rivas",
+        "Rico Valez",
+        "Derek Obi"
+      ],
+      "restaurants": [
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Green & Gold Tavern",
+          "hood": "Jack London"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Piedmont Parlor",
+          "hood": "Piedmont Ave"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 6,
+        "vibe": "game-night",
+        "movement": "restricted",
+        "weatherImpact": 1.05
+      },
+      "cityEvents": [
+        "The Reaves Line Founding Celebration",
+        "Lake Merritt Open-Air Book Market",
+        "Temescal Street Vendors Block"
+      ],
+      "tv": [
+        "Breaking Bulletin",
+        "Warm House",
+        "Slow Evenings",
+        "Coliseum to Jack London: An A's Story",
+        "One-on-One with Pablo Almanzar (SP)"
+      ],
+      "movies": [
+        "Rising Star",
+        "Snowlight",
+        "Opening Day"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight - Playoff Special",
+      "streamingTrend": "political commentary surge",
+      "foodTrend": "Playoff tension dining - sports bar surge"
+    },
+    "signals": {
+      "fameCount": 7,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Henry Rivas spotted at Coastline Construction",
+          "name": "Henry Rivas",
+          "venue": "Coastline Construction",
+          "ref": "Ripple_Ledger cycle 109 (CauseType lifestyle-sighting); rendered: world_summary_c109.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "West Oakland",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Rico Valez spotted at Blue Lantern Bar",
+          "name": "Rico Valez",
+          "venue": "Blue Lantern Bar",
+          "ref": "Ripple_Ledger cycle 109 (CauseType lifestyle-sighting); rendered: world_summary_c109.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Jack London",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Derek Obi spotted at Temple Beth Or",
+          "name": "Derek Obi",
+          "venue": "Temple Beth Or",
+          "ref": "Ripple_Ledger cycle 109 (CauseType lifestyle-sighting); rendered: world_summary_c109.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Rockridge",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Green & Gold Tavern",
+          "hood": "Jack London"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Piedmont Parlor",
+          "hood": "Piedmont Ave"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 6,
+        "vibe": "game-night",
+        "movement": "restricted",
+        "weatherImpact": 1.05
+      },
+      "cityEvents": [
+        "The Reaves Line Founding Celebration",
+        "Lake Merritt Open-Air Book Market",
+        "Temescal Street Vendors Block"
+      ],
+      "tv": [
+        "Breaking Bulletin",
+        "Warm House",
+        "Slow Evenings",
+        "Coliseum to Jack London: An A's Story",
+        "One-on-One with Pablo Almanzar (SP)"
+      ],
+      "movies": [
+        "Rising Star",
+        "Snowlight",
+        "Opening Day"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "named": "Bridge & Barrel",
+        "hood": "Jack London"
+      },
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Piedmont Parlor (Piedmont Ave) · quiet night",
+        "named": "Piedmont Parlor",
+        "hood": "Piedmont Ave"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Henry Rivas at Coastline Construction (West Oakland)",
+        "named": "Coastline Construction",
+        "hood": "West Oakland"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Rico Valez at Blue Lantern Bar (Jack London)",
+        "named": "Blue Lantern Bar",
+        "hood": "Jack London"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Derek Obi at Temple Beth Or (Rockridge)",
+        "named": "Temple Beth Or",
+        "hood": "Rockridge"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Harborline Grill (Jack London)",
+        "named": "Harborline Grill",
+        "hood": "Jack London"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Green & Gold Tavern (Jack London)",
+        "named": "Green & Gold Tavern",
+        "hood": "Jack London"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 16,
+        "label": "Eric Taveras — fame rise",
+        "named": "Eric Taveras",
+        "hood": "Downtown"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Harborline Grill (Jack London)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Derek Obi at Temple Beth Or (Rockridge)",
+        "score": 43,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "LIFESTYLE-SLICE-1",
+    "kind": "beat-lifestyle",
+    "seat": {
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "desk": "culture",
+      "domain": "lifestyle",
+      "builder": "buildLifestyleSlice.js"
+    },
+    "hood": "Lake Merritt",
+    "pulse": {
+      "className": "beat-lifestyle",
+      "score": 100,
+      "label": "Marin Tao leads the fame table; 2 fading, 1 new",
+      "hood": "Lake Merritt",
+      "source": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Lena Cross is fading — how the city follows its names",
+      "hookLine": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 96, cooling), 17 media mentions.",
+      "anchorFacts": [
+        "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 96, cooling), 17 media mentions",
+        "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 70, cooling), 14 media mentions",
+        "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+        "Oakland Native MVP Davis (sports figure), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 14, rising), 1 media mentions"
+      ],
+      "evidence": [
+        {
+          "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 96, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C109"
+        },
+        {
+          "text": "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 70, cooling), 14 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C109"
+        },
+        {
+          "text": "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C109"
+        },
+        {
+          "text": "Rico Valez (Celebrity), Arts, Jack London, Iconic-tier — the city knows them (fame 116, viral), 19 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C109"
+        },
+        {
+          "text": "Oakland Native MVP Davis (sports figure), Sports, Temescal, Local-tier — new on the culture record last cycle (fame 14, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C109"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "Household in Lake Merritt spending 56% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 6
+        },
+        {
+          "text": "A family bought their home in Downtown",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 3
+        },
+        {
+          "text": "The Villanueva line is founded",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "San Antonio",
+          "priority": 4
+        },
+        {
+          "text": "The Dillon family opened Dillon Clinic",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Rockridge",
+          "priority": 4
+        },
+        {
+          "text": "Fruitvale boom sustained — momentum 8/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 7
+        },
+        {
+          "text": "Jack London boom sustained — momentum 9/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "felt quietly proud of how they handled something small",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": "Downtown",
+          "priority": 3
+        },
+        {
+          "text": "read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": "Chinatown",
+          "priority": 3
+        },
+        {
+          "text": "saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": "Laurel",
+          "priority": 3
+        },
+        {
+          "text": "watched the fog roll over the port cranes from their front window",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": "Jack London",
+          "priority": 3
+        }
+      ],
+      "note": null,
+      "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00545",
+        "name": "Rowan Pierce",
+        "role": "Freelance Writer",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00537",
+        "name": "Marin Tao",
+        "role": "Musician",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Marin Tao — Musician — Chinatown",
+        "why": "the city knows them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "why": "the city knows them (Cultural_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C109",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Sharon Okafor this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "text": "I'm looking into the story of fading celebrities in Oakland, particularly those in the Lake Merritt area. I want to explore what happens when fame starts to wane and how the city responds to it.",
+    "plan": {
+      "chase": "I'm looking into the story of fading celebrities in Oakland, particularly those in the Lake Merritt area. I want to explore what happens when fame starts to wane and how the city responds to it.",
+      "focus": "Lena Cross and Rowan Pierce, two individuals who have seen their fame decline in recent times",
+      "why": "I'm curious about the human side of fame and how people cope with its fleeting nature",
+      "checks": [
+        "How do people in Lake Merritt perceive Lena Cross and Rowan Pierce?",
+        "What are the implications of fading fame on a person's life and career?"
+      ],
+      "targets": [],
+      "interpretation": "The story of fading fame can be a complex and nuanced one, involving factors such as changing public interests, personal struggles, and the pressures of maintaining a public image",
+      "unverifiedLead": [
+        "I've heard rumors of a possible comeback for one of the fading celebrities, but I need to verify this information before pursuing it further"
+      ],
+      "closeQuestion": "What does the future hold for those who have experienced fame, but are now struggling to maintain their place in the public eye?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Temescal neighborhood texture — how residents experience the improvement | Residents of Temescal feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Temescal",
+      "ref": "output/engine_audit_c109.json patterns[6]; evidence: Initiative_Tracker row(s) 5",
+      "popids": [
+        "POP-00170",
+        "POP-00761",
+        "POP-00799"
+      ]
+    },
+    {
+      "label": "Baylight District | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Baylight District",
+      "ref": "output/neighborhood_texture_c109.md \"### Baylight District\"; events: world_summary_c109.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c109.md \"### Chinatown\"; events: world_summary_c109.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c109.md \"### Downtown\"; events: world_summary_c109.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c109.md \"### East Oakland\"; events: world_summary_c109.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 26,
+  "ranAt": "2026-10-02T11:47:20.837Z"
+}

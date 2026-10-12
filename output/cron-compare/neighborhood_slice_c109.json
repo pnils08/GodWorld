@@ -1,0 +1,147 @@
+{
+  "version": "HOOD-SLICE-2",
+  "empty": false,
+  "cycle": 109,
+  "kind": "beat-neighborhood",
+  "seat": {
+    "slug": "maria-keen",
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "desk": "culture",
+    "domain": "neighborhood",
+    "builder": "buildNeighborhoodSlice.js"
+  },
+  "hood": "Coliseum District",
+  "pulse": {
+    "className": "beat-neighborhood",
+    "score": 100,
+    "label": "Coliseum District: 1 active program on the record",
+    "hood": "Coliseum District",
+    "source": "output/beats/Community_Programs.jsonl @C109"
+  },
+  "story": {
+    "kind": "beat-neighborhood",
+    "angle": "Coliseum District — the programs that hold the block and the people who founded them",
+    "label": "Coliseum District: 1 active program on the record",
+    "hookLine": "1 active programs in Coliseum District; no founder is on the ledger — the block is yours.",
+    "hood": "Coliseum District",
+    "citizens": [],
+    "popids": [],
+    "ref": "output/beats/Community_Programs.jsonl @C109",
+    "cycle": 109
+  },
+  "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the engine's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [],
+  "facts": [
+    {
+      "text": "Coliseum District Vendor Incubator (economic), Coliseum District, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C109 PRG-009"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Coliseum District — the programs that hold the block and the people who founded them",
+    "hookLine": "1 active programs in Coliseum District; no founder is on the ledger — the block is yours.",
+    "anchorFacts": [
+      "Coliseum District Vendor Incubator (economic), Coliseum District, since C101"
+    ],
+    "evidence": [
+      {
+        "text": "Coliseum District Vendor Incubator (economic), Coliseum District, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C109 PRG-009"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 108
+    },
+    "hooks": [
+      {
+        "text": "Lake Merritt seeing 12% population growth. New residents arriving—who are they and why? Neighborhood change angle.",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 3
+      },
+      {
+        "text": "Positive energy in the city. What's driving the mood? Feature opportunity.",
+        "angle": "street-level mood piece",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 2
+      },
+      {
+        "text": "Tomás Villanueva's spouse Renata Villanueva enters the record (household intake C109)",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "San Antonio",
+        "priority": 3
+      },
+      {
+        "text": "Tomás Villanueva's child Sofía Villanueva enters the record (household intake C109)",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "San Antonio",
+        "priority": 3
+      },
+      {
+        "text": "Tomás Villanueva's child Mateo Villanueva enters the record (household intake C109)",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "San Antonio",
+        "priority": 3
+      },
+      {
+        "text": "Tomás Villanueva's household of 4 settles in San Antonio (C109)",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "San Antonio",
+        "priority": 2
+      },
+      {
+        "text": "Household in Rockridge spending 54% of income on housing",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Rockridge",
+        "priority": 6
+      },
+      {
+        "text": "the bad week cost more than the savings could hold — borrowed to cover it",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "KONO",
+        "priority": 3
+      }
+    ],
+    "note": "no program founder in Coliseum District resolves on the ledger",
+    "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+  },
+  "programs": [
+    "Coliseum District Vendor Incubator"
+  ],
+  "rotation": {
+    "index": 1,
+    "of": 9
+  },
+  "careJustice": {
+    "custody": null,
+    "care": null,
+    "debt": {
+      "defaults": [],
+      "overLine": 0,
+      "crisisByHood": {}
+    }
+  },
+  "pointers": [
+    "output/beats/Community_Programs.jsonl @C109",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

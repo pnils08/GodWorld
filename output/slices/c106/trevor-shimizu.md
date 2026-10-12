@@ -3,12 +3,12 @@
 Cycle **C106** · kind `beat-transit`
 
 ## THE SLICE
-- Angle: 12th St Oakland City Center ridership up 10,522 vs C105 | 18 stations on the record — the platforms and the people who run them
-- Hook: 12th St Oakland City Center moved up the most this cycle; 9 transit workers on the roster.
+- Angle: 12th St Oakland City Center ridership up 10,522 vs C105 | 8 stations + 10 corridors on the record — the platforms and the people who run them
+- Hook: 12th St Oakland City Center moved up the most this cycle — above-average ridership; 9 transit workers on the roster.
 - Prior cycle: PRIOR_CYCLE_IN_TABLE (C105)
 
 ## FACTS (each line is a row on the record)
-- 18 stations on the record this cycle; total ridership 85,857 (C105: 33,711)  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
+- 8 stations + 10 corridors on the record this cycle; total ridership 85,857 (C105: 33,711)  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
 - 12th St Oakland City Center: ridership 17,822 (+10,522 vs C105), on-time 81% (+1 pts) — above-average ridership  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
 - 19th St Oakland: ridership 12,666 (+7,631 vs C105), on-time 78% (+3 pts) — above-average ridership  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
 - MacArthur: ridership 12,368 (+7,113 vs C105), on-time 78% (-2 pts) — above-average ridership  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
@@ -17,16 +17,16 @@ Cycle **C106** · kind `beat-transit`
 - Rockridge: ridership 8,867 (+5,385 vs C105), on-time 80% (+5 pts) — above-average ridership  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
 - Lake Merritt: ridership 7,528 (+4,580 vs C105), on-time 82% (+5 pts) — above-average ridership  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
 - West Oakland: ridership 6,845 (+4,285 vs C105), on-time 86% (+8 pts) — above-average ridership  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
-- : ridership 0 (+0 vs C105), on-time 85%, I-880 North — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
-- : ridership 0 (+0 vs C105), on-time 85%, I-880 South — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
-- : ridership 0 (+0 vs C105), on-time 85%, I-580 East — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
-- : ridership 0 (+0 vs C105), on-time 85%, I-580 West — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
-- : ridership 0 (+0 vs C105), on-time 85%, I-980 — moderate delays  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
-- : ridership 0 (+0 vs C105), on-time 85%, Broadway — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
-- : ridership 0 (+0 vs C105), on-time 85%, International Blvd — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
-- : ridership 0 (+0 vs C105), on-time 85%, MacArthur Blvd — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
-- : ridership 0 (+0 vs C105), on-time 85%, Telegraph Ave — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
-- : ridership 0 (+0 vs C105), on-time 85%, Grand Ave — moderate delays  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
+- I-880 North: traffic index 100 (+28 vs C105) — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
+- I-880 South: traffic index 100 (+31 vs C105) — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
+- I-580 East: traffic index 100 (+19 vs C105) — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
+- I-580 West: traffic index 88 (+28 vs C105) — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
+- I-980: traffic index 74 (+31 vs C105) — moderate delays  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
+- Broadway: traffic index 83 (+21 vs C105) — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
+- International Blvd: traffic index 92 (+32 vs C105) — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
+- MacArthur Blvd: traffic index 76 (+31 vs C105) — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
+- Telegraph Ave: traffic index 83 (+28 vs C105) — heavy congestion  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
+- Grand Ave: traffic index 69 (+21 vs C105) — moderate delays  _[output/beats/Transit_Metrics.jsonl Cycle 106]_
 
 ## PEOPLE ON THE RECORD (your sources — real; never invent another)
 - Joel Wren — Mechanic — AC Transit — works at AC Transit (Employment_Roster)

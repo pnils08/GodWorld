@@ -1,0 +1,151 @@
+{
+  "empty": false,
+  "cycle": 107,
+  "kind": "tanya-sideline",
+  "desk": "sports",
+  "journalist": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "persona": "tanya-cruz"
+  },
+  "pulse": {
+    "className": "record-only-sideline",
+    "score": 70,
+    "label": "A's playoffs update: 1-0"
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 10,
+        "name": "Inference Close"
+      }
+    ],
+    "anchorFacts": [
+      "The A's playoffs record is 1-0."
+    ],
+    "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+    "accessEvidence": {
+      "state": "ALLOTTED",
+      "facts": [
+        "clubhouse/sideline SET is the reporter's room"
+      ]
+    },
+    "quoteEvidence": {
+      "state": "NOT_SUPPLIED",
+      "quotes": []
+    },
+    "observationEvidence": {
+      "state": "ALLOTTED",
+      "facts": []
+    },
+    "missing": [
+      "Packet player quotes",
+      "injury or team-response facts beyond the supplied record"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "story": {
+    "angle": "A's playoffs update: 1-0",
+    "label": "A's playoffs update: 1-0",
+    "hookLine": "A's playoffs update: 1-0",
+    "kind": "sideline-signal",
+    "hood": "Eastlake",
+    "popids": [
+      "POP-00533",
+      "POP-00052",
+      "POP-00598",
+      "POP-00051"
+    ],
+    "citizens": [
+      "Travis Coles (POP-00533)",
+      "Clark Saryan (POP-00052)",
+      "Vladimir Gonzalez (POP-00598)",
+      "Desmond Morton (POP-00051)"
+    ],
+    "ref": "world_summary_c107.md ## Sports",
+    "cycle": 107
+  },
+  "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+  "players": [
+    {
+      "name": "Travis Coles",
+      "popid": "POP-00533",
+      "role": "Starting Pitcher, Oakland A's",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Clark Saryan",
+      "popid": "POP-00052",
+      "role": "Closing Pitcher, Las Vegas Aviators (AAA)",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Vladimir Gonzalez",
+      "popid": "POP-00598",
+      "role": "Right Fielder, Oakland A's",
+      "neighborhood": "Fruitvale",
+      "why": "feed-names"
+    },
+    {
+      "name": "Desmond Morton",
+      "popid": "POP-00051",
+      "role": "Left Fielder, Oakland A's",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not."
+  },
+  "candidates": [
+    {
+      "score": 70,
+      "label": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+      "cycle": 107
+    },
+    {
+      "score": 50,
+      "label": "A's take game 3 vs Yankees, A's 8 vs Yankees 4",
+      "cycle": 107
+    },
+    {
+      "score": 50,
+      "label": "A's close out the ALDS in NY , As 4 vs Yankees 0",
+      "cycle": 107
+    },
+    {
+      "score": 40,
+      "label": "Who you starting game 1 of the playoffs?",
+      "cycle": 106
+    },
+    {
+      "score": 40,
+      "label": "The Oaks drop to 0-3 in preason while Stanley and Dybantsa sit for precautionary measures.",
+      "cycle": 105
+    },
+    {
+      "score": 40,
+      "label": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+      "cycle": 105
+    },
+    {
+      "score": 38,
+      "label": "The Oaks are a full go for opening night , starting 5 announced.",
+      "cycle": 107
+    },
+    {
+      "score": 28,
+      "label": "Playoff Rosters set",
+      "cycle": 106
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c107.md ## Sports",
+    "scripts/sportsSubstrate.js",
+    "docs/media/TANYA_SIDELINE_BAG.md"
+  ]
+}

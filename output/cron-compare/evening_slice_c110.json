@@ -1,0 +1,930 @@
+{
+  "empty": false,
+  "cycle": 110,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Warriors Alumni Thompson",
+      "Tara Ellison",
+      "Marcus Duval",
+      "Cultural Ambassador Li Wei"
+    ],
+    "restaurants": [
+      {
+        "name": "Temple Lounge",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Dockhouse BBQ",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Bubic Burgers",
+        "hood": "Baylight District"
+      },
+      {
+        "name": "Harborline Grill",
+        "hood": "Jack London"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "OakTown Social",
+        "hood": "Temescal"
+      },
+      {
+        "name": "3AM Club",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Piedmont Parlor",
+        "hood": "Piedmont Ave"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 9,
+      "vibe": "art-scene",
+      "movement": "fan-surge",
+      "weatherImpact": 1.3
+    },
+    "cityEvents": [
+      "Downtown First Friday Live Music",
+      "Lake Merritt Community Circle",
+      "Piedmont Ave Winter Walk",
+      "Lake Merritt Lantern Parade"
+    ],
+    "tv": [
+      "Gallery Hour",
+      "Community Stories",
+      "Late Weather Watch",
+      "Bay Area Alert",
+      "Warm House",
+      "Fireside Hour",
+      "A's Franchise Spotlight",
+      "The Isley Kelley (SS) Interview"
+    ],
+    "movies": [
+      "Art of the City",
+      "Neighborhood Tales",
+      "Umbrella Line",
+      "Fog Harbor",
+      "New Beginnings",
+      "Snowlight",
+      "Ballpark Dreams"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight - Championship Edition",
+    "streamingTrend": "arts documentaries",
+    "foodTrend": "First Friday arts district dining - gallery crowd"
+  },
+  "signals": {
+    "fameCount": 9,
+    "sightingCount": 4,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c110.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Warriors Alumni Thompson spotted at Da Dough",
+        "name": "Warriors Alumni Thompson",
+        "venue": "Da Dough",
+        "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Temescal",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Tara Ellison spotted at Oakland Athletics",
+        "name": "Tara Ellison",
+        "venue": "Oakland Athletics",
+        "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Baylight District",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Marcus Duval spotted at Point Press Laundry",
+        "name": "Marcus Duval",
+        "venue": "Point Press Laundry",
+        "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Adams Point",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Cultural Ambassador Li Wei spotted at Eastlake Laundry",
+        "name": "Cultural Ambassador Li Wei",
+        "venue": "Eastlake Laundry",
+        "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Eastlake",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Mark Aitken — the city is watching: upgraded a flight seat and didn't think twice about it",
+        "name": "Mark Aitken",
+        "ref": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00003"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Benji Dillon — the city is watching: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "name": "Benji Dillon",
+        "ref": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00018"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Mike Paulson — the city is watching: overheard a stranger asking about rents on a block nobody used to ask about",
+        "name": "Mike Paulson",
+        "ref": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00527"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Alma Vasquez — the city is watching: stared at the Stabilization Fund application requirements until the numbers blurred together",
+        "name": "Alma Vasquez",
+        "ref": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Laurel",
+        "popids": [
+          "POP-01063"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Melton Neilon — the city keeps saying the name: Tier 2 -> 1",
+        "name": "Melton Neilon",
+        "ref": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00170"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Joel Wren — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Joel Wren",
+        "ref": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00218"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Jerald Jensen — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Jerald Jensen",
+        "ref": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00280"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Daniel Cloak — the city keeps saying the name: Tier 3 -> 2",
+        "name": "Daniel Cloak",
+        "ref": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00722"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "fame-sighting",
+    "score": 23,
+    "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+    "named": "Da Dough",
+    "hood": "Temescal",
+    "person": "Warriors Alumni Thompson",
+    "venue": "Da Dough"
+  },
+  "candidates": [
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+      "named": "Da Dough",
+      "hood": "Temescal"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Tara Ellison at Oakland Athletics (Baylight District)",
+      "named": "Oakland Athletics",
+      "hood": "Baylight District"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Marcus Duval at Point Press Laundry (Adams Point)",
+      "named": "Point Press Laundry",
+      "hood": "Adams Point"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Cultural Ambassador Li Wei at Eastlake Laundry (Eastlake)",
+      "named": "Eastlake Laundry",
+      "hood": "Eastlake"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Temple Lounge (Downtown)",
+      "named": "Temple Lounge",
+      "hood": "Downtown"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Dockhouse BBQ (Jack London)",
+      "named": "Dockhouse BBQ",
+      "hood": "Jack London"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Bubic Burgers (Baylight District)",
+      "named": "Bubic Burgers",
+      "hood": "Baylight District"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Harborline Grill (Jack London)",
+      "named": "Harborline Grill",
+      "hood": "Jack London"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "OakTown Social (Temescal)",
+      "named": "OakTown Social",
+      "hood": "Temescal"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "3AM Club (Jack London)",
+      "named": "3AM Club",
+      "hood": "Jack London"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Piedmont Parlor (Piedmont Ave)",
+      "named": "Piedmont Parlor",
+      "hood": "Piedmont Ave"
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Downtown First Friday Live Music",
+      "named": "Downtown First Friday Live Music",
+      "hood": null
+    }
+  ],
+  "pulses": [
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+      "named": "Da Dough",
+      "hood": "Temescal",
+      "names": [
+        "Warriors Alumni Thompson",
+        "Da Dough"
+      ],
+      "person": "Warriors Alumni Thompson",
+      "venue": "Da Dough",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Warriors Alumni Thompson spotted at Da Dough in Temescal — ground truth only, no invented companions",
+      "hookLine": "sighting | Warriors Alumni Thompson spotted at Da Dough",
+      "sceneBits": [
+        "PERSON: Warriors Alumni Thompson",
+        "VENUE: Da Dough",
+        "HOOD: Temescal"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Tara Ellison at Oakland Athletics (Baylight District)",
+      "named": "Oakland Athletics",
+      "hood": "Baylight District",
+      "names": [
+        "Tara Ellison",
+        "Oakland Athletics"
+      ],
+      "person": "Tara Ellison",
+      "venue": "Oakland Athletics",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Tara Ellison spotted at Oakland Athletics in Baylight District — ground truth only, no invented companions",
+      "hookLine": "sighting | Tara Ellison spotted at Oakland Athletics",
+      "sceneBits": [
+        "PERSON: Tara Ellison",
+        "VENUE: Oakland Athletics",
+        "HOOD: Baylight District"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Marcus Duval at Point Press Laundry (Adams Point)",
+      "named": "Point Press Laundry",
+      "hood": "Adams Point",
+      "names": [
+        "Marcus Duval",
+        "Point Press Laundry"
+      ],
+      "person": "Marcus Duval",
+      "venue": "Point Press Laundry",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Marcus Duval spotted at Point Press Laundry in Adams Point — ground truth only, no invented companions",
+      "hookLine": "sighting | Marcus Duval spotted at Point Press Laundry",
+      "sceneBits": [
+        "PERSON: Marcus Duval",
+        "VENUE: Point Press Laundry",
+        "HOOD: Adams Point"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Cultural Ambassador Li Wei at Eastlake Laundry (Eastlake)",
+      "named": "Eastlake Laundry",
+      "hood": "Eastlake",
+      "names": [
+        "Cultural Ambassador Li Wei",
+        "Eastlake Laundry"
+      ],
+      "person": "Cultural Ambassador Li Wei",
+      "venue": "Eastlake Laundry",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Cultural Ambassador Li Wei spotted at Eastlake Laundry in Eastlake — ground truth only, no invented companions",
+      "hookLine": "sighting | Cultural Ambassador Li Wei spotted at Eastlake Laundry",
+      "sceneBits": [
+        "PERSON: Cultural Ambassador Li Wei",
+        "VENUE: Eastlake Laundry",
+        "HOOD: Eastlake"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Temple Lounge (Downtown)",
+      "named": "Temple Lounge",
+      "hood": "Downtown",
+      "names": [
+        "Temple Lounge"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Temple Lounge appears on the evening restaurant list in Downtown. What was happening there is not established.",
+      "hookLine": "Temple Lounge appears on the evening restaurant list in Downtown.",
+      "sceneBits": [
+        "VENUE: Temple Lounge",
+        "HOOD: Downtown"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Dockhouse BBQ (Jack London)",
+      "named": "Dockhouse BBQ",
+      "hood": "Jack London",
+      "names": [
+        "Dockhouse BBQ"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Dockhouse BBQ appears on the evening restaurant list in Jack London. What was happening there is not established.",
+      "hookLine": "Dockhouse BBQ appears on the evening restaurant list in Jack London.",
+      "sceneBits": [
+        "VENUE: Dockhouse BBQ",
+        "HOOD: Jack London"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Bubic Burgers (Baylight District)",
+      "named": "Bubic Burgers",
+      "hood": "Baylight District",
+      "names": [
+        "Bubic Burgers"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Bubic Burgers appears on the evening restaurant list in Baylight District. What was happening there is not established.",
+      "hookLine": "Bubic Burgers appears on the evening restaurant list in Baylight District.",
+      "sceneBits": [
+        "VENUE: Bubic Burgers",
+        "HOOD: Baylight District"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Harborline Grill (Jack London)",
+      "named": "Harborline Grill",
+      "hood": "Jack London",
+      "names": [
+        "Harborline Grill"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Harborline Grill appears on the evening restaurant list in Jack London. What was happening there is not established.",
+      "hookLine": "Harborline Grill appears on the evening restaurant list in Jack London.",
+      "sceneBits": [
+        "VENUE: Harborline Grill",
+        "HOOD: Jack London"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "OakTown Social (Temescal)",
+      "named": "OakTown Social",
+      "hood": "Temescal",
+      "names": [
+        "OakTown Social"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at OakTown Social — who is out and what the block is saying",
+      "hookLine": "OakTown Social holds the evening out in Temescal.",
+      "sceneBits": [
+        "VENUE: OakTown Social",
+        "HOOD: Temescal",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 9,
+        "vibe": "art-scene",
+        "movement": "fan-surge",
+        "weatherImpact": 1.3
+      },
+      "cycle": 110
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "3AM Club (Jack London)",
+      "named": "3AM Club",
+      "hood": "Jack London",
+      "names": [
+        "3AM Club"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at 3AM Club — who is out and what the block is saying",
+      "hookLine": "3AM Club holds the evening out in Jack London.",
+      "sceneBits": [
+        "VENUE: 3AM Club",
+        "HOOD: Jack London",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 9,
+        "vibe": "art-scene",
+        "movement": "fan-surge",
+        "weatherImpact": 1.3
+      },
+      "cycle": 110
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Piedmont Parlor (Piedmont Ave)",
+      "named": "Piedmont Parlor",
+      "hood": "Piedmont Ave",
+      "names": [
+        "Piedmont Parlor"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at Piedmont Parlor — who is out and what the block is saying",
+      "hookLine": "Piedmont Parlor holds the evening out in Piedmont Ave.",
+      "sceneBits": [
+        "VENUE: Piedmont Parlor",
+        "HOOD: Piedmont Ave",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 9,
+        "vibe": "art-scene",
+        "movement": "fan-surge",
+        "weatherImpact": 1.3
+      },
+      "cycle": 110
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Downtown First Friday Live Music",
+      "named": "Downtown First Friday Live Music",
+      "hood": null,
+      "names": [
+        "Downtown First Friday Live Music"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: Downtown First Friday Live Music — present-tense room, not calendar filler",
+      "hookLine": "Downtown First Friday Live Music is on the evening board.",
+      "sceneBits": [
+        "EVENT: Downtown First Friday Live Music",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Mark Aitken — fame rise",
+      "named": "Mark Aitken",
+      "hood": "Jack London",
+      "names": [
+        "Mark Aitken"
+      ],
+      "person": "Mark Aitken",
+      "popids": [
+        "POP-00003"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Mark Aitken — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Mark Aitken — the city is watching: upgraded a flight seat and didn't think twice about it",
+      "sceneBits": [
+        "PERSON: Mark Aitken",
+        "HOOD: Jack London",
+        "LABEL: fame-rise | Mark Aitken — the city is watching: upgraded a flight seat and didn't think twice about it"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Benji Dillon — fame rise",
+      "named": "Benji Dillon",
+      "hood": "Rockridge",
+      "names": [
+        "Benji Dillon"
+      ],
+      "person": "Benji Dillon",
+      "popids": [
+        "POP-00018"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Benji Dillon — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Benji Dillon — the city is watching: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+      "sceneBits": [
+        "PERSON: Benji Dillon",
+        "HOOD: Rockridge",
+        "LABEL: fame-rise | Benji Dillon — the city is watching: navigated the stroller traffic on College Avenue and silently judged the parking jobs"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Mike Paulson — fame rise",
+      "named": "Mike Paulson",
+      "hood": "Jack London",
+      "names": [
+        "Mike Paulson"
+      ],
+      "person": "Mike Paulson",
+      "popids": [
+        "POP-00527"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Mike Paulson — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Mike Paulson — the city is watching: overheard a stranger asking about rents on a block nobody used to ask about",
+      "sceneBits": [
+        "PERSON: Mike Paulson",
+        "HOOD: Jack London",
+        "LABEL: fame-rise | Mike Paulson — the city is watching: overheard a stranger asking about rents on a block nobody used to ask about"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Alma Vasquez — fame rise",
+      "named": "Alma Vasquez",
+      "hood": "Laurel",
+      "names": [
+        "Alma Vasquez"
+      ],
+      "person": "Alma Vasquez",
+      "popids": [
+        "POP-01063"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Alma Vasquez — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Alma Vasquez — the city is watching: stared at the Stabilization Fund application requirements until the numbers blurred together",
+      "sceneBits": [
+        "PERSON: Alma Vasquez",
+        "HOOD: Laurel",
+        "LABEL: fame-rise | Alma Vasquez — the city is watching: stared at the Stabilization Fund application requirements until the numbers blurred together"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Melton Neilon — fame rise",
+      "named": "Melton Neilon",
+      "hood": "Temescal",
+      "names": [
+        "Melton Neilon"
+      ],
+      "person": "Melton Neilon",
+      "popids": [
+        "POP-00170"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Melton Neilon — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Melton Neilon — the city keeps saying the name: Tier 2 -> 1",
+      "sceneBits": [
+        "PERSON: Melton Neilon",
+        "HOOD: Temescal",
+        "LABEL: tier-climb | Melton Neilon — the city keeps saying the name: Tier 2 -> 1"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Joel Wren — fame rise",
+      "named": "Joel Wren",
+      "hood": "West Oakland",
+      "names": [
+        "Joel Wren"
+      ],
+      "person": "Joel Wren",
+      "popids": [
+        "POP-00218"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Joel Wren — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Joel Wren — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Joel Wren",
+        "HOOD: West Oakland",
+        "LABEL: tier-climb | Joel Wren — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Jerald Jensen — fame rise",
+      "named": "Jerald Jensen",
+      "hood": "West Oakland",
+      "names": [
+        "Jerald Jensen"
+      ],
+      "person": "Jerald Jensen",
+      "popids": [
+        "POP-00280"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Jerald Jensen — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Jerald Jensen — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Jerald Jensen",
+        "HOOD: West Oakland",
+        "LABEL: tier-climb | Jerald Jensen — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 110
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Daniel Cloak — fame rise",
+      "named": "Daniel Cloak",
+      "hood": "West Oakland",
+      "names": [
+        "Daniel Cloak"
+      ],
+      "person": "Daniel Cloak",
+      "popids": [
+        "POP-00722"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 110 (CauseType fame-event); rendered: world_summary_c110.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Daniel Cloak — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Daniel Cloak — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Daniel Cloak",
+        "HOOD: West Oakland",
+        "LABEL: tier-climb | Daniel Cloak — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 110
+    }
+  ],
+  "recommend": {
+    "bag": "ground",
+    "slug": "maria-keen",
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+    "reason": "top pulse fame-sighting → ground",
+    "pulseClass": "fame-sighting",
+    "pulseLabel": "Warriors Alumni Thompson at Da Dough (Temescal)"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Temple Lounge (Downtown)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "city-event",
+      "label": "Downtown First Friday Live Music",
+      "score": 31,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "fame-sighting",
+      "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+      "score": 31,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "fame-sighting",
+      "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+      "score": 31,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "named-restaurant",
+      "label": "Temple Lounge (Downtown)",
+      "score": 32,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Warriors Alumni Thompson spotted at Da Dough in Temescal — ground truth only, no invented companions",
+    "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+    "hookLine": "sighting | Warriors Alumni Thompson spotted at Da Dough",
+    "hood": "Temescal",
+    "pulseClass": "fame-sighting",
+    "citizens": [
+      "Warriors Alumni Thompson"
+    ],
+    "popids": [],
+    "named": "Da Dough",
+    "venue": "Da Dough",
+    "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+    "cycle": 110
+  },
+  "prewrite": {
+    "pulseClass": "fame-sighting",
+    "angle": "Warriors Alumni Thompson spotted at Da Dough in Temescal — ground truth only, no invented companions",
+    "hookLine": "sighting | Warriors Alumni Thompson spotted at Da Dough",
+    "anchorFacts": [
+      "NAMED: Da Dough",
+      "PERSON: Warriors Alumni Thompson",
+      "VENUE: Da Dough",
+      "HOOD: Temescal",
+      "PERSON: Warriors Alumni Thompson",
+      "VENUE: Da Dough",
+      "HOOD: Temescal"
+    ],
+    "bagRecommend": "ground",
+    "bagSlug": "maria-keen"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Temple Lounge",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Dockhouse BBQ",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Bubic Burgers",
+        "hood": "Baylight District"
+      },
+      {
+        "name": "Harborline Grill",
+        "hood": "Jack London"
+      },
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      },
+      {
+        "name": "OakTown Social",
+        "hood": "Temescal"
+      },
+      {
+        "name": "3AM Club",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Piedmont Parlor",
+        "hood": "Piedmont Ave"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 9,
+      "vibe": "art-scene",
+      "movement": "fan-surge",
+      "weatherImpact": 1.3
+    },
+    "cityEvents": [
+      "Downtown First Friday Live Music",
+      "Lake Merritt Community Circle",
+      "Piedmont Ave Winter Walk",
+      "Lake Merritt Lantern Parade"
+    ],
+    "tv": [
+      "Gallery Hour",
+      "Community Stories",
+      "Late Weather Watch",
+      "Bay Area Alert",
+      "Warm House",
+      "Fireside Hour",
+      "A's Franchise Spotlight",
+      "The Isley Kelley (SS) Interview"
+    ],
+    "movies": [
+      "Art of the City",
+      "Neighborhood Tales",
+      "Umbrella Line",
+      "Fog Harbor",
+      "New Beginnings",
+      "Snowlight",
+      "Ballpark Dreams"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c110.md ## Evening Texture",
+    "output/desk_signal_c110.json lanes.culture",
+    "docs/media/MARIA_GROUND_BAG.md",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+  ]
+}

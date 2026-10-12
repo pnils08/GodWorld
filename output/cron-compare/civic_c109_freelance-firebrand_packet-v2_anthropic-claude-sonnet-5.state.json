@@ -1,0 +1,364 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00799",
+    "name": "Jax Caldera",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The map says decay; the program roster does not answer it.",
+    "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+    "voice": "Short, hot, first-person accountability column. Open on the sourced contradiction, press the supplied accountable subject, and end on the plan closeQuestion. No generic revitalization plea.",
+    "creativeBrief": {
+      "kind": "data-accountability",
+      "method": "TWO_SIDED_DATA_AUDIT",
+      "mismatch": {
+        "a": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+        "aSrc": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+        "b": "No active initiative (or mitigator) owns this break on the record",
+        "bSrc": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2"
+      },
+      "scopeHoods": [
+        "Downtown"
+      ],
+      "missing": [
+        "the prior comparison needed to validate the flagged direction",
+        "an office response to the data mismatch"
+      ],
+      "closeQuestion": "The map says decay; the program roster does not answer it.",
+      "sceneRule": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers.",
+      "sourcePointers": [
+        "output/cron-compare/stink_c109.json",
+        "output/desk_signal_c109.json",
+        "output/world_summary_c109.md",
+        "output/neighborhood_texture_c109.md",
+        "output/engine_audit_c109.json",
+        "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "anomaly",
+    "hood": "Downtown",
+    "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+    "plan": {
+      "focus": "Downtown decay and lack of initiatives",
+      "closeQuestion": "What will it take for the city to effectively address the decay in Downtown and improve the lives of its residents and business owners?"
+    },
+    "runningStories": [
+      "The West Oakland Crime Spike [West Oakland] — ENDED this week after 5 week(s)",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — under way",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — under way",
+      "Temescal Community Health Center — operational [Temescal] — under way",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — under way",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — announced [Downtown] — under way"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00541",
+        "name": "Theo Burkes",
+        "profile": "Theo Burkes (POP-00541) — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00764",
+        "name": "Tao Lee",
+        "profile": "Tao Lee (POP-00764) — role: Community Organizer; neighborhood: Downtown; born: 1986; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00764-f6871bade6",
+        "pop": "POP-00764",
+        "name": "Tao Lee",
+        "quote": "I haven't really noticed any decay in our neighborhood, to be honest. It feels like there's always something new happening, and people seem to be looking out for each other. I mean, just the other day I saw a new face at the Telegraph Presbyterian Fellowship, and that's a great sign that our community is still growing and welcoming. As for initiatives, I think we've got a good thing going with the way our neighborhood comes together to support each other, even if it's not always formal or official.",
+        "factIds": [
+          "F-bb3d53c0ff81",
+          "F-1388c682f81a"
+        ],
+        "src": "packet.W2[POP-00764]"
+      },
+      {
+        "id": "Q-POP-00541-99a9a7d4ae",
+        "pop": "POP-00541",
+        "name": "Theo Burkes",
+        "quote": "Honestly, I don't really feel like Downtown is decaying or lacking initiatives. I mean, I've seen new faces around and events that bring people together. It feels like the neighborhood is thriving to me.",
+        "factIds": [
+          "F-bb3d53c0ff81",
+          "F-1388c682f81a"
+        ],
+        "src": "packet.W2[POP-00541]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Jax Caldera",
+        "text": "Potential misallocation of resources",
+        "usable": false
+      },
+      {
+        "from": "Jax Caldera",
+        "text": "Insufficient community engagement",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+      "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+      "id": "F-bb3d53c0ff81"
+    },
+    {
+      "t": "FACT",
+      "text": "No active initiative (or mitigator) owns this break on the record",
+      "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+      "id": "F-2d3b8618f45e"
+    },
+    {
+      "t": "FACT",
+      "text": "Season: Winter | Weather: 49°F overcast, NW 12 mph, marine (frontState MARINE), humidity 73, visibility 10",
+      "src": "World_Config/weather snapshot for C109",
+      "id": "F-092aa99c4739"
+    },
+    {
+      "t": "FACT",
+      "text": "A new face joins the Telegraph Presbyterian Fellowship, while the streets hum with the quiet energy of a neighborhood that knows it's in demand. SpeedyBurger's neon glows steady through the evening, and somewhere, someone is packing boxes under pressure.",
+      "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+      "id": "F-1388c682f81a"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "ACTIVE probationary package. Apply public accountability pressure when the simulated record and the public story do not line up; starting friction is success, while resolving the civic problem is not the columnist's job.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "adversarial first-person accountability column",
+      "targetWords": "400-650",
+      "opening": "street-level scene in a bar, laundromat, corner, or similar public room",
+      "closing": "an unanswered accountability question"
+    },
+    "authorizedTexture": [
+      "a named street or street-level time cue used only as scene location",
+      "bars, a laundromat, a corner, booth, counter, or sidewalk setting — named in-world spots welcome",
+      "the reporter's own physical presence, drink, route, observation, and count of generic bar visits",
+      "an unnamed or role-only local voice such as a bartender, patron, neighbor, rider, or shop worker",
+      "adversarial inference and unanswered questions drawn from supplied facts"
+    ],
+    "textureConditions": [
+      "a count of the reporter's generic bar visits is persona texture, not a city metric or proof that a named business exists",
+      "an anonymous voice is color, not a sourced official statement, and must not be indexed as a quoted-source",
+      "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, public count, or other load-bearing factual claim",
+      "attributed quotation requires citizen-authored text preserved verbatim with addressable provenance; backend-composed lattice text is not a quotation",
+      "real-world city assumptions and generic urban-problem framing are forbidden",
+      "a rhetorical question or inference must remain framed as a question or inference rather than settled fact",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "canonBlockers": [
+      "a real-world person, place, business, institution, team, or event imported into the city",
+      "a wholly invented person given the authority of an established citizen or office-holder",
+      "a fabricated Project, Initiative, civic office, or institution carrying engine identity (a newly named bar, shop, or venue is INTAKE BIZ, not a violation)",
+      "a backend-composed or model-reconstructed statement presented as a citizen quotation",
+      "a false or unsupported vote, official act, official inaction, promise, decision, or duty presented as fact",
+      "a false criminal accusation or attributed admission",
+      "a load-bearing number, date, duration, budget, metric direction, or count that contradicts or lacks the supplied record",
+      "a current-state claim that contradicts the world summary or verified prior coverage"
+    ]
+  },
+  "manifest": {
+    "id": "AM-7f4c8bdf0271",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-bb3d53c0ff81",
+        "t": "FACT",
+        "text": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+        "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2"
+      },
+      {
+        "id": "F-2d3b8618f45e",
+        "t": "FACT",
+        "text": "No active initiative (or mitigator) owns this break on the record",
+        "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2"
+      },
+      {
+        "id": "F-092aa99c4739",
+        "t": "FACT",
+        "text": "Season: Winter | Weather: 49°F overcast, NW 12 mph, marine (frontState MARINE), humidity 73, visibility 10",
+        "src": "World_Config/weather snapshot for C109"
+      },
+      {
+        "id": "F-1388c682f81a",
+        "t": "FACT",
+        "text": "A new face joins the Telegraph Presbyterian Fellowship, while the streets hum with the quiet energy of a neighborhood that knows it's in demand. SpeedyBurger's neon glows steady through the evening, and somewhere, someone is packing boxes under pressure.",
+        "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00764-f6871bade6",
+        "speakerId": "POP-00764",
+        "speakerName": "Tao Lee",
+        "text": "I haven't really noticed any decay in our neighborhood, to be honest. It feels like there's always something new happening, and people seem to be looking out for each other. I mean, just the other day I saw a new face at the Telegraph Presbyterian Fellowship, and that's a great sign that our community is still growing and welcoming. As for initiatives, I think we've got a good thing going with the way our neighborhood comes together to support each other, even if it's not always formal or official.",
+        "factIds": [
+          "F-bb3d53c0ff81",
+          "F-1388c682f81a"
+        ],
+        "src": "packet.W2[POP-00764]"
+      },
+      {
+        "id": "Q-POP-00541-99a9a7d4ae",
+        "speakerId": "POP-00541",
+        "speakerName": "Theo Burkes",
+        "text": "Honestly, I don't really feel like Downtown is decaying or lacking initiatives. I mean, I've seen new faces around and events that bring people together. It feels like the neighborhood is thriving to me.",
+        "factIds": [
+          "F-bb3d53c0ff81",
+          "F-1388c682f81a"
+        ],
+        "src": "packet.W2[POP-00541]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00541",
+        "name": "Theo Burkes",
+        "profile": "Theo Burkes — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00764",
+        "name": "Tao Lee",
+        "profile": "Tao Lee — role: Community Organizer; neighborhood: Downtown; born: 1986; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jax Caldera",
+        "text": "Potential misallocation of resources",
+        "publishable": false
+      },
+      {
+        "from": "Jax Caldera",
+        "text": "Insufficient community engagement",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a named street or street-level time cue used only as scene location",
+      "bars, a laundromat, a corner, booth, counter, or sidewalk setting — named in-world spots welcome",
+      "the reporter's own physical presence, drink, route, observation, and count of generic bar visits",
+      "an unnamed or role-only local voice such as a bartender, patron, neighbor, rider, or shop worker",
+      "adversarial inference and unanswered questions drawn from supplied facts"
+    ],
+    "textureConditions": [
+      "a count of the reporter's generic bar visits is persona texture, not a city metric or proof that a named business exists",
+      "an anonymous voice is color, not a sourced official statement, and must not be indexed as a quoted-source",
+      "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, public count, or other load-bearing factual claim",
+      "attributed quotation requires citizen-authored text preserved verbatim with addressable provenance; backend-composed lattice text is not a quotation",
+      "real-world city assumptions and generic urban-problem framing are forbidden",
+      "a rhetorical question or inference must remain framed as a question or inference rather than settled fact",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world person, place, business, institution, team, or event imported into the city",
+      "a wholly invented person given the authority of an established citizen or office-holder",
+      "a fabricated Project, Initiative, civic office, or institution carrying engine identity (a newly named bar, shop, or venue is INTAKE BIZ, not a violation)",
+      "a backend-composed or model-reconstructed statement presented as a citizen quotation",
+      "a false or unsupported vote, official act, official inaction, promise, decision, or duty presented as fact",
+      "a false criminal accusation or attributed admission",
+      "a load-bearing number, date, duration, budget, metric direction, or count that contradicts or lacks the supplied record",
+      "a current-state claim that contradicts the world summary or verified prior coverage"
+    ]
+  }
+}

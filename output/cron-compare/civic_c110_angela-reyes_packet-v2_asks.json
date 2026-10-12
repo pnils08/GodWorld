@@ -1,0 +1,570 @@
+[
+  {
+    "pop": "POP-00317",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00317\",\"name\":\"Lila Bennington\",\"role\":\"Oakland Unified Elementary Teacher\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Angela Reyes\",\"question\":\"What challenges do you face as an elementary teacher in Rockridge, and how does the community support you? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-schools\",\"hood\":\"Rockridge\",\"focus\":\"Rockridge’s school quality index and enrollment trends.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Lila Bennington — Oakland Unified Elementary Teacher\",\"evidence\":[{\"id\":\"EV-ae9017a366\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"text\":\"10 students and educators in Rockridge; the table says why their school reads the way it does.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"Rockridge has the strongest school record on the table (index 8.78)\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-89e88955cec8\"},{\"t\":\"FACT\",\"text\":\"10 students and educators in Rockridge; the table says why their school reads the way it does.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-77ac6b303f91\"},{\"t\":\"FACT\",\"text\":\"Enrollment moved: West Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students, Laurel +1 students, Adams Point +1 students vs C109\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C110\",\"id\":\"F-b47c6858918c\"},{\"t\":\"FACT\",\"text\":\"Ranked by school quality index: Rockridge 8.78, Baylight District 8.11, West Oakland 8.09, Piedmont Ave 8.09, Brooklyn 8.07, Laurel 7.97, Adams Point 7.97, Jack London 7.91, Lake Merritt 7.91, Fruitvale 7.88, Downtown 7.82, Grand Lake 7.79, Uptown 7.71, Eastlake 6.97, Chinatown 6.96, KONO 6.96, Glenview 6.94, Dimond 6.94, San Antonio 6.88, Ivy Hill 6.88, East Oakland 6.85, Temescal 6.7 (22 neighborhoods)\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-174c028aa3d8\"},{\"t\":\"FACT\",\"text\":\"Rockridge: school quality index 8.78 (was 8.87 at C109), graduation 94.81%, college-ready 76.99%, teacher quality 9.06, funding 15,000, 245 students\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-4d12ba431242\"},{\"t\":\"FACT\",\"text\":\"Temescal: school quality index 6.7 (was 6.8 at C109), graduation 85.45%, college-ready 56.5%, teacher quality 6.94, funding 11,500, 312 students\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-dc16bb1a8c85\"},{\"t\":\"FACT\",\"text\":\"The district: Oakland Unified School District — 5,201 employees citywide, growth 8.89%; per-hood funding on the table totals 286,000\",\"src\":\"output/beats/Business_Ledger.jsonl BIZ-00016 @C110\",\"id\":\"F-dea8aaba086c\"},{\"t\":\"FACT\",\"text\":\"Lila Bennington — Oakland Unified Elementary Teacher\",\"src\":\"Simulation_Ledger profile for POP-00317\",\"id\":\"F-f0484626f15c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00317",
+        "name": "Lila Bennington",
+        "role": "Oakland Unified Elementary Teacher",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Angela Reyes",
+        "question": "What challenges do you face as an elementary teacher in Rockridge, and how does the community support you? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-schools",
+        "hood": "Rockridge",
+        "focus": "Rockridge’s school quality index and enrollment trends.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C110"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Lila Bennington — Oakland Unified Elementary Teacher",
+        "evidence": [
+          {
+            "id": "EV-ae9017a366",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+            "text": "10 students and educators in Rockridge; the table says why their school reads the way it does."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "Rockridge has the strongest school record on the table (index 8.78)",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-89e88955cec8"
+        },
+        {
+          "t": "FACT",
+          "text": "10 students and educators in Rockridge; the table says why their school reads the way it does.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-77ac6b303f91"
+        },
+        {
+          "t": "FACT",
+          "text": "Enrollment moved: West Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students, Laurel +1 students, Adams Point +1 students vs C109",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C110",
+          "id": "F-b47c6858918c"
+        },
+        {
+          "t": "FACT",
+          "text": "Ranked by school quality index: Rockridge 8.78, Baylight District 8.11, West Oakland 8.09, Piedmont Ave 8.09, Brooklyn 8.07, Laurel 7.97, Adams Point 7.97, Jack London 7.91, Lake Merritt 7.91, Fruitvale 7.88, Downtown 7.82, Grand Lake 7.79, Uptown 7.71, Eastlake 6.97, Chinatown 6.96, KONO 6.96, Glenview 6.94, Dimond 6.94, San Antonio 6.88, Ivy Hill 6.88, East Oakland 6.85, Temescal 6.7 (22 neighborhoods)",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-174c028aa3d8"
+        },
+        {
+          "t": "FACT",
+          "text": "Rockridge: school quality index 8.78 (was 8.87 at C109), graduation 94.81%, college-ready 76.99%, teacher quality 9.06, funding 15,000, 245 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-4d12ba431242"
+        },
+        {
+          "t": "FACT",
+          "text": "Temescal: school quality index 6.7 (was 6.8 at C109), graduation 85.45%, college-ready 56.5%, teacher quality 6.94, funding 11,500, 312 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-dc16bb1a8c85"
+        },
+        {
+          "t": "FACT",
+          "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.89%; per-hood funding on the table totals 286,000",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C110",
+          "id": "F-dea8aaba086c"
+        },
+        {
+          "t": "FACT",
+          "text": "Lila Bennington — Oakland Unified Elementary Teacher",
+          "src": "Simulation_Ledger profile for POP-00317",
+          "id": "F-f0484626f15c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00321",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00321\",\"name\":\"Jee Lei\",\"role\":\"After-School Program Director\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Angela Reyes\",\"question\":\"Using only the supplied facts, what about \\\"Rockridge’s school quality index and enrollment trends.\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-schools\",\"hood\":\"Rockridge\",\"focus\":\"Rockridge’s school quality index and enrollment trends.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Jee Lei — After-School Program Director\",\"evidence\":[{\"id\":\"EV-b455951214\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"text\":\"10 students and educators in Rockridge; the table says why their school reads the way it does.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"Rockridge has the strongest school record on the table (index 8.78)\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-89e88955cec8\"},{\"t\":\"FACT\",\"text\":\"10 students and educators in Rockridge; the table says why their school reads the way it does.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-77ac6b303f91\"},{\"t\":\"FACT\",\"text\":\"Enrollment moved: West Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students, Laurel +1 students, Adams Point +1 students vs C109\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C110\",\"id\":\"F-b47c6858918c\"},{\"t\":\"FACT\",\"text\":\"Ranked by school quality index: Rockridge 8.78, Baylight District 8.11, West Oakland 8.09, Piedmont Ave 8.09, Brooklyn 8.07, Laurel 7.97, Adams Point 7.97, Jack London 7.91, Lake Merritt 7.91, Fruitvale 7.88, Downtown 7.82, Grand Lake 7.79, Uptown 7.71, Eastlake 6.97, Chinatown 6.96, KONO 6.96, Glenview 6.94, Dimond 6.94, San Antonio 6.88, Ivy Hill 6.88, East Oakland 6.85, Temescal 6.7 (22 neighborhoods)\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-174c028aa3d8\"},{\"t\":\"FACT\",\"text\":\"Rockridge: school quality index 8.78 (was 8.87 at C109), graduation 94.81%, college-ready 76.99%, teacher quality 9.06, funding 15,000, 245 students\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-4d12ba431242\"},{\"t\":\"FACT\",\"text\":\"Temescal: school quality index 6.7 (was 6.8 at C109), graduation 85.45%, college-ready 56.5%, teacher quality 6.94, funding 11,500, 312 students\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-dc16bb1a8c85\"},{\"t\":\"FACT\",\"text\":\"The district: Oakland Unified School District — 5,201 employees citywide, growth 8.89%; per-hood funding on the table totals 286,000\",\"src\":\"output/beats/Business_Ledger.jsonl BIZ-00016 @C110\",\"id\":\"F-dea8aaba086c\"},{\"t\":\"FACT\",\"text\":\"Jee Lei — After-School Program Director\",\"src\":\"Simulation_Ledger profile for POP-00321\",\"id\":\"F-6eabad321953\"}],\"limits\":{\"quoteEligible\":false,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Return abstain. This citizen is not eligible for this interview path.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00321",
+        "name": "Jee Lei",
+        "role": "After-School Program Director",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Angela Reyes",
+        "question": "Using only the supplied facts, what about \"Rockridge’s school quality index and enrollment trends.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-schools",
+        "hood": "Rockridge",
+        "focus": "Rockridge’s school quality index and enrollment trends.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C110"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Jee Lei — After-School Program Director",
+        "evidence": [
+          {
+            "id": "EV-b455951214",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+            "text": "10 students and educators in Rockridge; the table says why their school reads the way it does."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "Rockridge has the strongest school record on the table (index 8.78)",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-89e88955cec8"
+        },
+        {
+          "t": "FACT",
+          "text": "10 students and educators in Rockridge; the table says why their school reads the way it does.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-77ac6b303f91"
+        },
+        {
+          "t": "FACT",
+          "text": "Enrollment moved: West Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students, Laurel +1 students, Adams Point +1 students vs C109",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C110",
+          "id": "F-b47c6858918c"
+        },
+        {
+          "t": "FACT",
+          "text": "Ranked by school quality index: Rockridge 8.78, Baylight District 8.11, West Oakland 8.09, Piedmont Ave 8.09, Brooklyn 8.07, Laurel 7.97, Adams Point 7.97, Jack London 7.91, Lake Merritt 7.91, Fruitvale 7.88, Downtown 7.82, Grand Lake 7.79, Uptown 7.71, Eastlake 6.97, Chinatown 6.96, KONO 6.96, Glenview 6.94, Dimond 6.94, San Antonio 6.88, Ivy Hill 6.88, East Oakland 6.85, Temescal 6.7 (22 neighborhoods)",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-174c028aa3d8"
+        },
+        {
+          "t": "FACT",
+          "text": "Rockridge: school quality index 8.78 (was 8.87 at C109), graduation 94.81%, college-ready 76.99%, teacher quality 9.06, funding 15,000, 245 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-4d12ba431242"
+        },
+        {
+          "t": "FACT",
+          "text": "Temescal: school quality index 6.7 (was 6.8 at C109), graduation 85.45%, college-ready 56.5%, teacher quality 6.94, funding 11,500, 312 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-dc16bb1a8c85"
+        },
+        {
+          "t": "FACT",
+          "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.89%; per-hood funding on the table totals 286,000",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C110",
+          "id": "F-dea8aaba086c"
+        },
+        {
+          "t": "FACT",
+          "text": "Jee Lei — After-School Program Director",
+          "src": "Simulation_Ledger profile for POP-00321",
+          "id": "F-6eabad321953"
+        }
+      ],
+      "limits": {
+        "quoteEligible": false,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Return abstain. This citizen is not eligible for this interview path."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00040",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00040\",\"name\":\"Aaron Whitfield\",\"role\":\"City Manager\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Angela Reyes\",\"question\":\"What have you seen, felt, or understood about \\\"Rockridge’s school quality index and enrollment trends.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-schools\",\"hood\":\"Rockridge\",\"focus\":\"Rockridge’s school quality index and enrollment trends.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Aaron Whitfield — City Manager\",\"evidence\":[{\"id\":\"EV-588f984051\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"text\":\"10 students and educators in Rockridge; the table says why their school reads the way it does.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"Rockridge has the strongest school record on the table (index 8.78)\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-89e88955cec8\"},{\"t\":\"FACT\",\"text\":\"10 students and educators in Rockridge; the table says why their school reads the way it does.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-77ac6b303f91\"},{\"t\":\"FACT\",\"text\":\"Enrollment moved: West Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students, Laurel +1 students, Adams Point +1 students vs C109\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C110\",\"id\":\"F-b47c6858918c\"},{\"t\":\"FACT\",\"text\":\"Ranked by school quality index: Rockridge 8.78, Baylight District 8.11, West Oakland 8.09, Piedmont Ave 8.09, Brooklyn 8.07, Laurel 7.97, Adams Point 7.97, Jack London 7.91, Lake Merritt 7.91, Fruitvale 7.88, Downtown 7.82, Grand Lake 7.79, Uptown 7.71, Eastlake 6.97, Chinatown 6.96, KONO 6.96, Glenview 6.94, Dimond 6.94, San Antonio 6.88, Ivy Hill 6.88, East Oakland 6.85, Temescal 6.7 (22 neighborhoods)\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-174c028aa3d8\"},{\"t\":\"FACT\",\"text\":\"Rockridge: school quality index 8.78 (was 8.87 at C109), graduation 94.81%, college-ready 76.99%, teacher quality 9.06, funding 15,000, 245 students\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-4d12ba431242\"},{\"t\":\"FACT\",\"text\":\"Temescal: school quality index 6.7 (was 6.8 at C109), graduation 85.45%, college-ready 56.5%, teacher quality 6.94, funding 11,500, 312 students\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-dc16bb1a8c85\"},{\"t\":\"FACT\",\"text\":\"The district: Oakland Unified School District — 5,201 employees citywide, growth 8.89%; per-hood funding on the table totals 286,000\",\"src\":\"output/beats/Business_Ledger.jsonl BIZ-00016 @C110\",\"id\":\"F-dea8aaba086c\"},{\"t\":\"FACT\",\"text\":\"Aaron Whitfield — City Manager\",\"src\":\"Simulation_Ledger profile for POP-00040\",\"id\":\"F-a7384f276110\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00040",
+        "name": "Aaron Whitfield",
+        "role": "City Manager",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Angela Reyes",
+        "question": "What have you seen, felt, or understood about \"Rockridge’s school quality index and enrollment trends.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-schools",
+        "hood": "Rockridge",
+        "focus": "Rockridge’s school quality index and enrollment trends.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C110"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Aaron Whitfield — City Manager",
+        "evidence": [
+          {
+            "id": "EV-588f984051",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+            "text": "10 students and educators in Rockridge; the table says why their school reads the way it does."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "Rockridge has the strongest school record on the table (index 8.78)",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-89e88955cec8"
+        },
+        {
+          "t": "FACT",
+          "text": "10 students and educators in Rockridge; the table says why their school reads the way it does.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-77ac6b303f91"
+        },
+        {
+          "t": "FACT",
+          "text": "Enrollment moved: West Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students, Laurel +1 students, Adams Point +1 students vs C109",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C110",
+          "id": "F-b47c6858918c"
+        },
+        {
+          "t": "FACT",
+          "text": "Ranked by school quality index: Rockridge 8.78, Baylight District 8.11, West Oakland 8.09, Piedmont Ave 8.09, Brooklyn 8.07, Laurel 7.97, Adams Point 7.97, Jack London 7.91, Lake Merritt 7.91, Fruitvale 7.88, Downtown 7.82, Grand Lake 7.79, Uptown 7.71, Eastlake 6.97, Chinatown 6.96, KONO 6.96, Glenview 6.94, Dimond 6.94, San Antonio 6.88, Ivy Hill 6.88, East Oakland 6.85, Temescal 6.7 (22 neighborhoods)",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-174c028aa3d8"
+        },
+        {
+          "t": "FACT",
+          "text": "Rockridge: school quality index 8.78 (was 8.87 at C109), graduation 94.81%, college-ready 76.99%, teacher quality 9.06, funding 15,000, 245 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-4d12ba431242"
+        },
+        {
+          "t": "FACT",
+          "text": "Temescal: school quality index 6.7 (was 6.8 at C109), graduation 85.45%, college-ready 56.5%, teacher quality 6.94, funding 11,500, 312 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-dc16bb1a8c85"
+        },
+        {
+          "t": "FACT",
+          "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.89%; per-hood funding on the table totals 286,000",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C110",
+          "id": "F-dea8aaba086c"
+        },
+        {
+          "t": "FACT",
+          "text": "Aaron Whitfield — City Manager",
+          "src": "Simulation_Ledger profile for POP-00040",
+          "id": "F-a7384f276110"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00198",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00198\",\"name\":\"Rick Walker\",\"role\":\"Line cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Angela Reyes\",\"question\":\"What have you seen, felt, or understood about \\\"Rockridge’s school quality index and enrollment trends.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-schools\",\"hood\":\"Rockridge\",\"focus\":\"Rockridge’s school quality index and enrollment trends.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Rick Walker — Line cook\",\"evidence\":[{\"id\":\"EV-9e5a0730c7\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"text\":\"10 students and educators in Rockridge; the table says why their school reads the way it does.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"Rockridge has the strongest school record on the table (index 8.78)\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-89e88955cec8\"},{\"t\":\"FACT\",\"text\":\"10 students and educators in Rockridge; the table says why their school reads the way it does.\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-77ac6b303f91\"},{\"t\":\"FACT\",\"text\":\"Enrollment moved: West Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students, Laurel +1 students, Adams Point +1 students vs C109\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C110\",\"id\":\"F-b47c6858918c\"},{\"t\":\"FACT\",\"text\":\"Ranked by school quality index: Rockridge 8.78, Baylight District 8.11, West Oakland 8.09, Piedmont Ave 8.09, Brooklyn 8.07, Laurel 7.97, Adams Point 7.97, Jack London 7.91, Lake Merritt 7.91, Fruitvale 7.88, Downtown 7.82, Grand Lake 7.79, Uptown 7.71, Eastlake 6.97, Chinatown 6.96, KONO 6.96, Glenview 6.94, Dimond 6.94, San Antonio 6.88, Ivy Hill 6.88, East Oakland 6.85, Temescal 6.7 (22 neighborhoods)\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-174c028aa3d8\"},{\"t\":\"FACT\",\"text\":\"Rockridge: school quality index 8.78 (was 8.87 at C109), graduation 94.81%, college-ready 76.99%, teacher quality 9.06, funding 15,000, 245 students\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-4d12ba431242\"},{\"t\":\"FACT\",\"text\":\"Temescal: school quality index 6.7 (was 6.8 at C109), graduation 85.45%, college-ready 56.5%, teacher quality 6.94, funding 11,500, 312 students\",\"src\":\"output/beats/Neighborhood_Demographics.jsonl @C110\",\"id\":\"F-dc16bb1a8c85\"},{\"t\":\"FACT\",\"text\":\"The district: Oakland Unified School District — 5,201 employees citywide, growth 8.89%; per-hood funding on the table totals 286,000\",\"src\":\"output/beats/Business_Ledger.jsonl BIZ-00016 @C110\",\"id\":\"F-dea8aaba086c\"},{\"t\":\"FACT\",\"text\":\"Rick Walker — Line cook\",\"src\":\"Simulation_Ledger profile for POP-00198\",\"id\":\"F-e89585f18ea1\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "role": "Line cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Angela Reyes",
+        "question": "What have you seen, felt, or understood about \"Rockridge’s school quality index and enrollment trends.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-schools",
+        "hood": "Rockridge",
+        "focus": "Rockridge’s school quality index and enrollment trends.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C110"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Rick Walker — Line cook",
+        "evidence": [
+          {
+            "id": "EV-9e5a0730c7",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+            "text": "10 students and educators in Rockridge; the table says why their school reads the way it does."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "Rockridge has the strongest school record on the table (index 8.78)",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-89e88955cec8"
+        },
+        {
+          "t": "FACT",
+          "text": "10 students and educators in Rockridge; the table says why their school reads the way it does.",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-77ac6b303f91"
+        },
+        {
+          "t": "FACT",
+          "text": "Enrollment moved: West Oakland +2 students, Rockridge +1 students, Piedmont Ave +1 students, Brooklyn +1 students, Laurel +1 students, Adams Point +1 students vs C109",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C110",
+          "id": "F-b47c6858918c"
+        },
+        {
+          "t": "FACT",
+          "text": "Ranked by school quality index: Rockridge 8.78, Baylight District 8.11, West Oakland 8.09, Piedmont Ave 8.09, Brooklyn 8.07, Laurel 7.97, Adams Point 7.97, Jack London 7.91, Lake Merritt 7.91, Fruitvale 7.88, Downtown 7.82, Grand Lake 7.79, Uptown 7.71, Eastlake 6.97, Chinatown 6.96, KONO 6.96, Glenview 6.94, Dimond 6.94, San Antonio 6.88, Ivy Hill 6.88, East Oakland 6.85, Temescal 6.7 (22 neighborhoods)",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-174c028aa3d8"
+        },
+        {
+          "t": "FACT",
+          "text": "Rockridge: school quality index 8.78 (was 8.87 at C109), graduation 94.81%, college-ready 76.99%, teacher quality 9.06, funding 15,000, 245 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-4d12ba431242"
+        },
+        {
+          "t": "FACT",
+          "text": "Temescal: school quality index 6.7 (was 6.8 at C109), graduation 85.45%, college-ready 56.5%, teacher quality 6.94, funding 11,500, 312 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110",
+          "id": "F-dc16bb1a8c85"
+        },
+        {
+          "t": "FACT",
+          "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.89%; per-hood funding on the table totals 286,000",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C110",
+          "id": "F-dea8aaba086c"
+        },
+        {
+          "t": "FACT",
+          "text": "Rick Walker — Line cook",
+          "src": "Simulation_Ledger profile for POP-00198",
+          "id": "F-e89585f18ea1"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

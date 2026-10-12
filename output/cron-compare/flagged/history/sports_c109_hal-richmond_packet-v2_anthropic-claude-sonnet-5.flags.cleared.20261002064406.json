@@ -1,0 +1,11 @@
+{
+  "draft": "sports_c109_hal-richmond_packet-v2_anthropic-claude-sonnet-5.md",
+  "flags": [],
+  "contamination": [
+    {
+      "check": "blight-import",
+      "issue": "falling-apart"
+    }
+  ],
+  "summary": "deterministic world-contamination blocker failed"
+}

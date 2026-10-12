@@ -1,0 +1,28 @@
+{
+  "office": "okoro",
+  "cycle": 107,
+  "speaker": "Brenda Okoro",
+  "cascadeSummary": "Following the Mayor's directive, I'm deploying Stabilization Fund canvassing operations to Downtown immediately, targeting storefront decline signals. For Glenview and KONO, credit goes to the communities themselves—their resilience drives success.",
+  "statements": [
+    {
+      "statementId": "STMT-107-okoro-001",
+      "type": "operational_status",
+      "topic": "West Oakland Stabilization Fund Downtown Outreach Expansion",
+      "initiative": "INIT-001",
+      "decision": "Deploy Stabilization Fund canvassing operations to Downtown immediately per storefront decline signals",
+      "quote": "When storefronts go quiet, families often follow—so we're bringing the Stabilization Fund to where the need is moving.",
+      "fullStatement": "Per the Mayor's directive, we're deploying Stabilization Fund canvassing operations to Downtown immediately. Targeting storefront decline signals, this expansion follows need rather than waiting for it to escalate further. Sixty-nine households stabilized in West Oakland remains progress, but Downtown's emptying sidewalks demand action now. We're resetting deployment early this cycle to meet displacement where it's emerging.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-okoro-002",
+      "type": "field_observation",
+      "topic": "District Crisis and Credit — KONO and Glenview",
+      "initiative": null,
+      "decision": "Credit Glenview's success and KONO's stability to their communities' resilience",
+      "quote": "Glenview's momentum and KONO's energy belong to the people who live there—their resilience drives success.",
+      "fullStatement": "Glenview's upbeat community and KONO's steady streets reflect the neighborhoods themselves. Sustained investment supports progress, but credit belongs to those who shaped it. Glenview's momentum and KONO's energy belong to the people who live there—their resilience drives success. My office signals these stories; we don't claim them.",
+      "trackerUpdates": {}
+    }
+  ]
+}

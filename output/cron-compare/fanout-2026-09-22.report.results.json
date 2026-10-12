@@ -1,0 +1,32 @@
+{
+  "date": "2026-09-22",
+  "stage": "report",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Selena Grant",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-09-22T18:20:58.179Z"
+}

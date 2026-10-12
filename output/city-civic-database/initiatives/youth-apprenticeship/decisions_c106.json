@@ -1,0 +1,23 @@
+{
+  "initiative": "INIT-007",
+  "initiativeId": "INIT-007",
+  "cycle": 106,
+  "primaryVoice": "Mayor gavel (mayor_gavel-001)",
+  "consolidatedFrom": [
+    "STMT-106-council_d1-002 (Carter D1 — Youth Apprenticeship Pipeline)",
+    "STMT-106-council_d3-003 (Delgado D3 — Youth Apprenticeship Pipeline backlog clearance and San Antonio allocation)",
+    "STMT-106-council_d5-002 (Rivers D5 — Oakland Youth Apprenticeship Pipeline)",
+    "STMT-106-council_d6-003 (Crane D6 — Oakland Youth Apprenticeship Pipeline Backlog Clearance)",
+    "STMT-106-council_d8-003 (Chen D8 — Oakland Youth Apprenticeship Pipeline Verification)",
+    "STMT-106-mayor_gavel-001 (Mayor gavel — Youth Apprenticeship Pipeline Backlog Clearance Verification)",
+    "STMT-106-mayor_open-002 (Mayor agenda — Youth Apprenticeship Pipeline Backlog Clearance Verification)",
+    "STMT-106-okoro-002 (okoro — Youth Apprenticeship Pipeline Backlog Clearance Verification)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-007",
+    "ImplementationPhase": "operational",
+    "MilestoneNotes": "C106: Backlog cleared, zero applicants pending, town hall authorized for enrollment launch",
+    "NextScheduledAction": "Public town hall enrollment event",
+    "NextActionCycle": 106
+  }
+}

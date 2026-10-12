@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-001",
+  "initiativeId": "INIT-001",
+  "cycle": 108,
+  "primaryVoice": "move-fold",
+  "consolidatedFrom": [],
+  "trackerUpdates": {
+    "LastWorkCycle": 108,
+    "LastWorkSeat": "proj-stabilization-fund"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-108-proj-stabilization-fund-2026-09-23"
+    ]
+  }
+}

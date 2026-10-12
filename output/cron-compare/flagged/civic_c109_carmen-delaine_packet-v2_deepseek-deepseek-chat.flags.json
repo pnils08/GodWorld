@@ -1,0 +1,14 @@
+{
+  "draft": "civic_c109_carmen-delaine_packet-v2_deepseek-deepseek-chat.md",
+  "draftSha256": "c74e34aa6d8d5d4e733da5b732973eae29d414b7b0032cc18cbb6d66e04c620c",
+  "verdict": "output/cron-compare/civic_c109_carmen-delaine_packet-v2_deepseek-deepseek-chat.rhea.json",
+  "flags": [],
+  "contamination": [
+    {
+      "check": "repair-chrome",
+      "issue": "corrected-article"
+    }
+  ],
+  "summary": "deterministic world-contamination blocker failed",
+  "reviewedAt": "2026-09-28T23:15:31.431Z"
+}

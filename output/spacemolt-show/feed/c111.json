@@ -1,0 +1,25 @@
+{
+  "v": "UNDOCKED-FEED/1",
+  "cycle": 111,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 111,
+      "EventType": "undocked-episode",
+      "POPID": "POP-01053",
+      "Holder": "Rosario Medina",
+      "EpisodeId": "undocked-pop01053-Y3C7",
+      "CreditsDelta": 110,
+      "Systems": [
+        "Sol"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 3,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop01053-2026-10-12T01-30-06.json"
+    }
+  ]
+}

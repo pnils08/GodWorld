@@ -1,0 +1,78 @@
+{
+  "office": "mayor_open",
+  "cycle": 107,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle I advance seven critical decisions: launching the Youth Apprenticeship Pipeline's public enrollment, mobilizing West Oakland Stabilization Fund's Downtown outreach expansion, deploying OARI's East Oakland emergency protocol, securing Fruitvale Transit Hub's merchant covenants, pushing Temescal Health Center through utility inspections, executing Baylight's construction contracts, and claiming credit for Glenview's success while defending KONO's stability. Each decision moves Oakland forward with concrete action, not promises.",
+  "statements": [
+    {
+      "statementId": "STMT-107-mayor_open-001",
+      "type": "executive_order",
+      "topic": "Oakland Youth Apprenticeship Pipeline Public Enrollment Launch",
+      "initiative": "INIT-007",
+      "decision": "Convene public town hall enrollment event and certify operational rollout with open applicant intake and training cohort placement targets",
+      "quote": "Zero applicants pending means zero excuses—this pipeline opens now, and Oakland's young people walk through first.",
+      "fullStatement": "This city doesn't build futures by keeping doors closed. The Oakland Youth Apprenticeship Pipeline cleared its backlog last cycle—today I'm opening public enrollment. We're convening town halls in West Oakland, Fruitvale, and East Oakland because those are the neighborhoods where opportunity hasn't reached far enough. Brenda Okoro's team will certify cohort placement targets by month-end, and my office will receive weekly intake reports until every seat is filled. This is $12.5 million moving from budget line to paycheck—construction, healthcare, green tech. Oaklanders built this city. It's time they built their careers here too.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-mayor_open-002",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund Downtown Outreach Expansion",
+      "initiative": "INIT-001",
+      "decision": "Authorize month-eight disbursement review and deploy Downtown canvass operations immediately",
+      "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+      "fullStatement": "Month seven kept twelve more families in their homes, bringing us to sixty-nine households total. But I'm not blind to what's happening—West Oakland's daily life is visibly declining, and the engine's own review confirms what I'm seeing: storefronts quieter, mood slipping, no city program currently pointed at it. That's why I'm authorizing immediate deployment of Downtown outreach canvassing. The $28 million Stabilization Fund doesn't stop at the district line—it follows displacement pressure where it goes. My housing unit will report back by month-end on storefront engagement and pre-qualified applicants from the expanded zone.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-mayor_open-003",
+      "type": "executive_order",
+      "topic": "Oakland Alternative Response Initiative East Oakland Protocol Deployment",
+      "initiative": "INIT-002",
+      "decision": "Deploy emergency dispatch protocol to East Oakland with immediate effect and mandate monthly reporting to Mayor's office",
+      "quote": "Three districts flashing incoherence means we deploy three times over—starting now in East Oakland.",
+      "fullStatement": "Last cycle I authorized emergency expansion because West Oakland, Fruitvale, and East Oakland all signaled distress at once. This cycle, I'm executing. The $12.5 million OARI program deploys its East Oakland dispatch protocol immediately—mental health crisis response, non-violent intervention, no police unless necessary. The improvement signals are already showing at low severity in all three districts, but incoherence at high severity means we're not out of the woods. My office receives monthly reports on response times, diversion rates, and community feedback. We don't wait for the next budget cycle when neighbors are in crisis.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-mayor_open-004",
+      "type": "authorization_response",
+      "topic": "Fruitvale Transit Hub Phase II Merchant Covenant Signing",
+      "initiative": "INIT-003",
+      "decision": "Execute binding merchant protection covenants and authorize design RFP release",
+      "quote": "Fruitvale's vendors aren't waiting for protection—they're getting it in writing, right now.",
+      "fullStatement": "The Fruitvale Transit Hub moves from promise to contract this cycle. I'm executing the binding merchant protection covenants that council approved—displacement guarantees, rent stabilization, priority vendor space in the new hub. The $230 million investment doesn't work if it displaces the people who built the neighborhood's economy. With covenants signed, we're releasing the design RFP immediately. District 3 businesses have been consulted; their protection is non-negotiable, and now it's enforceable. This is how you build infrastructure without destroying community.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-mayor_open-005",
+      "type": "authorization_response",
+      "topic": "Temescal Community Health Center Utility Inspections and Rough-In Completion",
+      "initiative": "INIT-005",
+      "decision": "Authorize final utility inspections and certify interior systems rough-in completion with second shift continuation",
+      "quote": "Temescal's health center hits schedule because we keep crews on the job—inspections this week, doors next year.",
+      "fullStatement": "The Temescal Community Health Center advances on schedule despite pressure building in the neighborhood. Interior wall framing is complete; MEP rough-ins are advancing with second shift coverage. I'm authorizing final utility inspections this cycle and certifying rough-in completion so we stay on the 2026 opening timeline. The $45 million investment is visible now—walls up, systems in, momentum real. But I'm also watching what the data shows: Temescal's daily life declining, housing pressure building, no program currently pointed at it. This health center is part of the answer, and we're delivering it on time.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-mayor_open-006",
+      "type": "executive_order",
+      "topic": "Baylight District Contract Execution and Site Mobilization",
+      "initiative": "INIT-006",
+      "decision": "Execute construction contracts and authorize immediate site preparation mobilization",
+      "quote": "Council voted, contracts signed, shovels ready—Baylight moves from approval to ground-breaking.",
+      "fullStatement": "The $2.1 billion Baylight District cleared final council vote last cycle. This cycle, I'm executing construction contracts and mobilizing site preparation immediately. This is Oakland's future being built—by Oaklanders, for Oaklanders, with local hire requirements locked in, community benefits enforceable, and nobody taking it from us. The stadium, the housing, the jobs—it's all moving from planning to dirt. My economic development team is coordinating with the building trades on workforce pipeline alignment. When I said this was my legacy project, I meant we'd build it. We're building it.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-mayor_open-007",
+      "type": "public_remark",
+      "topic": "District Crisis and Credit — KONO and Glenview",
+      "initiative": null,
+      "decision": "Claim credit for Glenview's success as result of sustained investment and community partnership; defend KONO's stability as evidence that public safety reform and economic development work in concert",
+      "quote": "Glenview's upbeat because we invested there—KONO's steady because we learned how to keep it that way.",
+      "fullStatement": "Let me name whose work is paying off. Glenview's mood is clearly upbeat because this administration prioritized sustained infrastructure investment and community partnership in that neighborhood—street improvements, small business support, consistent engagement. That's not accident; that's policy. And KONO's stability—upbeat mood, steady street trade, low crime—is the proof that public safety reform and economic development work together. The OARI program's principles, the merchant corridor protections, the consistent presence of city resources—these aren't abstract. They're KONO's lived experience this cycle. I defend both neighborhoods because both show what Oakland can be when we deliver.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "109",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-4.5",
+  "configuredWriterModel": "anthropic/claude-haiku-4.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "kai-marston",
+  "byline": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 26,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 2,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/culture_c109_kai-marston_packet-v2_anthropic-claude-haiku-4-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }\n{\n  \"popId\": \"POP-00158\",\n  \"name\": \"Kai Marston\",\n  \"recorded\": true,\n  \"text\": \"filed: The Ledger Rises: Art and Journalism in Motion\"\n}"
+  },
+  "ranAt": "2026-10-02T23:16:07.128Z",
+  "dispositionReconciledAt": "2026-10-03T17:00:06.190Z"
+}

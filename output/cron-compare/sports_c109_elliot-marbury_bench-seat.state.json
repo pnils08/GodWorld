@@ -1,0 +1,359 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00166",
+    "name": "Elliot Marbury",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Mariano Rosales — 6 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year — what the line proves, on what sample, and what would disprove it",
+    "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "data-desk",
+      "hood": null,
+      "facts": [
+        "Mariano Rosales — CP, Athletics; 6 seasons on the dossier",
+        "Mariano Rosales 2041 ATH: 60 G, 0 GS, 8-3, 42 SV, 63.2 IP, 35 H, 13 ER, 6 HR, 14 BB, 82 SO, ERA 1.84",
+        "Mariano Rosales 2040 BAL: 58 G, 0 GS, 1-5, 38 SV, 56.0 IP, 56 H, 26 ER, 8 HR, 13 BB, 56 SO, ERA 4.18",
+        "Mariano Rosales 2039 BAL: 67 G, 0 GS, 10-6, 2 SV, 77.2 IP, 52 H, 18 ER, 4 HR, 26 BB, 77 SO, ERA 2.09",
+        "Mariano Rosales 2038 BAL: 83 G, 0 GS, 7-9, 1 SV, 89.2 IP, 93 H, 41 ER, 7 HR, 24 BB, 61 SO, ERA 4.11",
+        "Mariano Rosales 2037 BAL: 72 G, 0 GS, 7-8, 0 SV, 77.2 IP, 75 H, 30 ER, 12 HR, 29 BB, 71 SO, ERA 3.48",
+        "Mariano Rosales 2041 rates (63.2 IP): 11.6 K per 9, 2.0 BB per 9, 5.86 K per BB (worked from the season line)",
+        "Mariano Rosales 2040 rates (56.0 IP): 9.0 K per 9, 2.1 BB per 9, 4.31 K per BB (worked from the season line)",
+        "Mariano Rosales 2039 rates (77.2 IP): 8.9 K per 9, 3.0 BB per 9, 2.96 K per BB (worked from the season line)",
+        "Peer — Julio Valencia (CP, Athletics) 2041 ATH: 28 G, 0 GS, 2-0, 1 SV, 24.0 IP, 21 H, 6 ER, 1 HR, 8 BB, 20 SO, ERA 2.25",
+        "Peer — Julio Valencia 2041 rates (24.0 IP): 7.5 K per 9, 3.0 BB per 9, 2.50 K per BB (worked from the season line)",
+        "This cycle (feed notes, playoffs): The bullpen did not help as Clark Sayran and Mariano Rosales both gave up 2 runs each in relief."
+      ],
+      "priorCycle": "DOSSIER",
+      "note": "subject is on this cycle's feed",
+      "engineHooks": [],
+      "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-data-desk",
+    "hood": null,
+    "src": "output/player_truesource_mirror.json POP-00555 @C109",
+    "plan": {
+      "focus": "Mariano Rosales — 6 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+      "closeQuestion": "Which number next season would disprove it?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": []
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales — 6 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+      "src": "output/player_truesource_mirror.json POP-00555 @C109",
+      "id": "F-e8f05464ded3"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales's 2041 line against 5 earlier seasons and 1 peer.",
+      "src": "output/player_truesource_mirror.json POP-00555 @C109",
+      "id": "F-9eaea7d82981"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales — CP, Athletics; 6 seasons on the dossier",
+      "src": "output/player_truesource_mirror.json POP-00555",
+      "id": "F-645e5a37a357"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2041 ATH: 60 G, 0 GS, 8-3, 42 SV, 63.2 IP, 35 H, 13 ER, 6 HR, 14 BB, 82 SO, ERA 1.84",
+      "src": "output/player_truesource_mirror.json POP-00555",
+      "id": "F-e756b04fe70f"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2040 BAL: 58 G, 0 GS, 1-5, 38 SV, 56.0 IP, 56 H, 26 ER, 8 HR, 13 BB, 56 SO, ERA 4.18",
+      "src": "output/player_truesource_mirror.json POP-00555",
+      "id": "F-d24a4ce2f2f1"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2039 BAL: 67 G, 0 GS, 10-6, 2 SV, 77.2 IP, 52 H, 18 ER, 4 HR, 26 BB, 77 SO, ERA 2.09",
+      "src": "output/player_truesource_mirror.json POP-00555",
+      "id": "F-c86b795f906c"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2038 BAL: 83 G, 0 GS, 7-9, 1 SV, 89.2 IP, 93 H, 41 ER, 7 HR, 24 BB, 61 SO, ERA 4.11",
+      "src": "output/player_truesource_mirror.json POP-00555",
+      "id": "F-d1f42debd0a2"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2037 BAL: 72 G, 0 GS, 7-8, 0 SV, 77.2 IP, 75 H, 30 ER, 12 HR, 29 BB, 71 SO, ERA 3.48",
+      "src": "output/player_truesource_mirror.json POP-00555",
+      "id": "F-44915cfbd8c1"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2041 rates (63.2 IP): 11.6 K per 9, 2.0 BB per 9, 5.86 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json POP-00555",
+      "id": "F-feb734950a23"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2040 rates (56.0 IP): 9.0 K per 9, 2.1 BB per 9, 4.31 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json POP-00555",
+      "id": "F-4ec2af41a39b"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2039 rates (77.2 IP): 8.9 K per 9, 3.0 BB per 9, 2.96 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json POP-00555",
+      "id": "F-78c2b1995c28"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Julio Valencia (CP, Athletics) 2041 ATH: 28 G, 0 GS, 2-0, 1 SV, 24.0 IP, 21 H, 6 ER, 1 HR, 8 BB, 20 SO, ERA 2.25",
+      "src": "output/player_truesource_mirror.json POP-00077",
+      "id": "F-0f08663bfeda"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Julio Valencia 2041 rates (24.0 IP): 7.5 K per 9, 3.0 BB per 9, 2.50 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json POP-00077",
+      "id": "F-4123f86a6e69"
+    },
+    {
+      "t": "FACT",
+      "text": "This cycle (feed notes, playoffs): The bullpen did not help as Clark Sayran and Mariano Rosales both gave up 2 runs each in relief.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+      "id": "F-930aac903500"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "marbury-data-desk-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put one audit-grade claim in the paper: a single player's Packet-backed season lines, the rates the Packet has already worked from them, and the peer band, with the sample stated. The memo is the proof. One falsifiable claim the numbers carry is success; a quote, a scene, fan heat, elegy, or a number the Packet does not hold is not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "dry third-person data-desk memo, source-forward",
+      "targetWords": "evidence-bounded; 350-600",
+      "opening": "the one Packet-backed season line or rate that carries the claim",
+      "closing": "the number next season that would disprove the claim"
+    },
+    "authorizedTexture": [
+      "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+      "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+      "a blank or thin sample named as blank or thin rather than filled in"
+    ],
+    "textureConditions": [
+      "every named player, team, position, season, and source must come from the Packet",
+      "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+      "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+      "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+    ],
+    "canonBlockers": [
+      "a statistic or rate attributed to the wrong player or the wrong season, or two players' lines merged into one subject",
+      "a rate, split, projection, or advanced metric the Packet does not supply",
+      "an invented award, contract, salary, injury, roster move, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "a one-season or thin-sample line presented as settled identity"
+    ]
+  },
+  "manifest": {
+    "id": "AM-badcc6f29bfb",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-e8f05464ded3",
+        "t": "FACT",
+        "text": "Mariano Rosales — 6 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+        "src": "output/player_truesource_mirror.json POP-00555 @C109"
+      },
+      {
+        "id": "F-9eaea7d82981",
+        "t": "FACT",
+        "text": "Mariano Rosales's 2041 line against 5 earlier seasons and 1 peer.",
+        "src": "output/player_truesource_mirror.json POP-00555 @C109"
+      },
+      {
+        "id": "F-645e5a37a357",
+        "t": "FACT",
+        "text": "Mariano Rosales — CP, Athletics; 6 seasons on the dossier",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "id": "F-e756b04fe70f",
+        "t": "FACT",
+        "text": "Mariano Rosales 2041 ATH: 60 G, 0 GS, 8-3, 42 SV, 63.2 IP, 35 H, 13 ER, 6 HR, 14 BB, 82 SO, ERA 1.84",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "id": "F-d24a4ce2f2f1",
+        "t": "FACT",
+        "text": "Mariano Rosales 2040 BAL: 58 G, 0 GS, 1-5, 38 SV, 56.0 IP, 56 H, 26 ER, 8 HR, 13 BB, 56 SO, ERA 4.18",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "id": "F-c86b795f906c",
+        "t": "FACT",
+        "text": "Mariano Rosales 2039 BAL: 67 G, 0 GS, 10-6, 2 SV, 77.2 IP, 52 H, 18 ER, 4 HR, 26 BB, 77 SO, ERA 2.09",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "id": "F-d1f42debd0a2",
+        "t": "FACT",
+        "text": "Mariano Rosales 2038 BAL: 83 G, 0 GS, 7-9, 1 SV, 89.2 IP, 93 H, 41 ER, 7 HR, 24 BB, 61 SO, ERA 4.11",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "id": "F-44915cfbd8c1",
+        "t": "FACT",
+        "text": "Mariano Rosales 2037 BAL: 72 G, 0 GS, 7-8, 0 SV, 77.2 IP, 75 H, 30 ER, 12 HR, 29 BB, 71 SO, ERA 3.48",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "id": "F-feb734950a23",
+        "t": "FACT",
+        "text": "Mariano Rosales 2041 rates (63.2 IP): 11.6 K per 9, 2.0 BB per 9, 5.86 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "id": "F-4ec2af41a39b",
+        "t": "FACT",
+        "text": "Mariano Rosales 2040 rates (56.0 IP): 9.0 K per 9, 2.1 BB per 9, 4.31 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "id": "F-78c2b1995c28",
+        "t": "FACT",
+        "text": "Mariano Rosales 2039 rates (77.2 IP): 8.9 K per 9, 3.0 BB per 9, 2.96 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00555"
+      },
+      {
+        "id": "F-0f08663bfeda",
+        "t": "FACT",
+        "text": "Peer — Julio Valencia (CP, Athletics) 2041 ATH: 28 G, 0 GS, 2-0, 1 SV, 24.0 IP, 21 H, 6 ER, 1 HR, 8 BB, 20 SO, ERA 2.25",
+        "src": "output/player_truesource_mirror.json POP-00077"
+      },
+      {
+        "id": "F-4123f86a6e69",
+        "t": "FACT",
+        "text": "Peer — Julio Valencia 2041 rates (24.0 IP): 7.5 K per 9, 3.0 BB per 9, 2.50 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00077"
+      },
+      {
+        "id": "F-930aac903500",
+        "t": "FACT",
+        "text": "This cycle (feed notes, playoffs): The bullpen did not help as Clark Sayran and Mariano Rosales both gave up 2 runs each in relief.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [],
+    "authorizedTexture": [
+      "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+      "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+      "a blank or thin sample named as blank or thin rather than filled in"
+    ],
+    "textureConditions": [
+      "every named player, team, position, season, and source must come from the Packet",
+      "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+      "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+      "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+    ],
+    "forbiddenClaimClasses": [
+      "a statistic or rate attributed to the wrong player or the wrong season, or two players' lines merged into one subject",
+      "a rate, split, projection, or advanced metric the Packet does not supply",
+      "an invented award, contract, salary, injury, roster move, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "a one-season or thin-sample line presented as settled identity"
+    ]
+  }
+}

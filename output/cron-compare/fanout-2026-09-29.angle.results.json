@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-29",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Selena Grant",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": false,
+      "error": "model returned no JSON object"
+    }
+  ],
+  "ranAt": "2026-09-29T11:16:31.252Z"
+}

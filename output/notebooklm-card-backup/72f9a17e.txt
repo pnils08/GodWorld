@@ -1,0 +1,201 @@
+PLAYER INTAKE (Pitcher) — 2041 SEASON
+
+Name: Julio Valencia
+
+ 
+
+Team: Oakland Athletics
+
+ 
+
+Position: CP, RP
+
+ 
+
+Age: 23
+
+ 
+
+Bats: L
+
+ 
+
+Throws: L
+
+ 
+
+Height: 6'0"
+
+ 
+
+Weight: 196 lbs
+
+ 
+
+Born: Dominican Republic
+
+ 
+
+Drafted: Round 1 (2036)
+
+ 
+
+MLB Service: 1.000
+
+ 
+
+Overall: 83
+
+ 
+
+Potential: A
+
+ 
+
+POPID: POP-00077
+
+— 2041 REGULAR SEASON —
+
+Games: 28
+
+ 
+
+Games Started: 0
+
+ 
+
+Wins: 2
+
+ 
+
+Losses: 0
+
+ 
+
+Saves: 1
+
+ 
+
+Blown Saves: 2
+
+ 
+
+Holds: 17
+
+ 
+
+Innings Pitched: 24.0
+
+ 
+
+Hits Allowed: 21
+
+ 
+
+Runs Allowed: 6
+
+ 
+
+Earned Runs: 6
+
+ 
+
+Home Runs Allowed: 1
+
+ 
+
+Walks: 8
+
+ 
+
+Strikeouts: 20
+
+ 
+
+ERA: 2.25
+
+ 
+
+WHIP: 1.21
+
+ 
+
+Winning Percentage: 1.000
+
+ 
+
+Quality Starts: 0
+
+ 
+
+Complete Games: 0
+
+ 
+
+Shutouts: 0
+
+ 
+
+Hit Batters: 0
+
+ 
+
+Wild Pitches: 0
+
+ 
+
+Total Batters Faced: 99
+
+ 
+
+WAR: 0.5
+
+— RATE METRICS —
+
+K/9: 7.50
+
+ 
+
+BB/9: 3.00
+
+ 
+
+HR/9: 0.38
+
+ 
+
+FIP: 2.88
+
+ 
+
+ERC: 2.70
+
+— CONTRACT STATUS —
+
+2041: $100,000
+
+ 
+
+2042: RNW
+
+ 
+
+2043: RNW
+
+ 
+
+2044: ARB
+
+ 
+
+FA: 2046
+
+
+--------------------------------------------------------------------------------
+
+
+Quirks
+
+High Leverage Bullpen Composure
+
+Plus Heavy Sinker Profile

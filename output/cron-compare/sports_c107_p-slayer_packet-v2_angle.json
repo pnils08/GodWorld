@@ -1,0 +1,494 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "107",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00008",
+      "name": "P Slayer",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+      "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "fan-heat",
+        "fanCharge": "euphoria",
+        "bagModes": [
+          "3 Friction Pivot",
+          "4 Loss Hangover / Empty Win",
+          "7 We Still Believe / We're Done"
+        ],
+        "friction": "Euphoria with friction: name the doubter, kill soft contentment.",
+        "centralFeeling": "Oakland should let itself believe — with eyes open.",
+        "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+        "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+      }
+    },
+    "signal": {
+      "kind": "win-streak",
+      "hood": "Eastlake",
+      "score": null,
+      "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+      "nearby": [
+        {
+          "text": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Travis Coles, Clark Saryan, Vladimir Gonzalez, Desmond Morton",
+          "src": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Desmond Morton, Mark Aitken",
+          "src": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | John Ellis, Eric Taveras",
+          "src": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "sentiment | A's W2 [player-energy]; A's W2 [playoffs]; Oaks W0 [pre-season]",
+          "src": "Ripple_Ledger cycle 107 (CauseType sports); rendered: world_summary_c107.md \"## What Moved\" > \"### sports\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00533",
+          "name": "Travis Coles",
+          "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+          "why": "feed-names",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00052",
+          "name": "Clark Saryan",
+          "profile": "Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA) — Downtown",
+          "why": "feed-names",
+          "role": "Closing Pitcher, Las Vegas Aviators (AAA)",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00598",
+          "name": "Vladimir Gonzalez",
+          "profile": "Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale",
+          "why": "feed-names",
+          "role": "Right Fielder, Oakland A's",
+          "hood": "Fruitvale"
+        },
+        {
+          "pop": "POP-00051",
+          "name": "Desmond Morton",
+          "profile": "Desmond Morton — Left Fielder, Oakland A's — Jack London",
+          "why": "feed-names",
+          "role": "Left Fielder, Oakland A's",
+          "hood": "Jack London"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-ac25a93a42d1"
+      },
+      {
+        "t": "FACT",
+        "text": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "id": "F-c6834d5364c4"
+      },
+      {
+        "t": "FACT",
+        "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+        "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "id": "F-4d471279f121"
+      },
+      {
+        "t": "FACT",
+        "text": "StoryAngle (feed): A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "id": "F-7776580ff460"
+      },
+      {
+        "t": "FACT",
+        "text": "Team record (feed): 1-0 · streak W1",
+        "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "id": "F-b775476cc1a5"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI",
+        "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "id": "F-8a7363ff6bda"
+      },
+      {
+        "t": "FACT",
+        "text": "Event: A's — game-result (playoffs)",
+        "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "id": "F-4459d3dfd633"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "P Slayer",
+    "popid": "POP-00008"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+      "label": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+      "kind": "win-streak",
+      "angle": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+      "hookLine": "Euphoria with friction: name the doubter, kill soft contentment.",
+      "hood": "Eastlake",
+      "team": "A's",
+      "eventKind": "game-result",
+      "popids": [
+        "POP-00533",
+        "POP-00052",
+        "POP-00598",
+        "POP-00051"
+      ],
+      "citizens": [
+        "Travis Coles — Starting Pitcher, Oakland A's, Downtown",
+        "Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA), Downtown",
+        "Vladimir Gonzalez — Right Fielder, Oakland A's, Fruitvale",
+        "Desmond Morton — Left Fielder, Oakland A's, Jack London"
+      ],
+      "pulseClass": "win-streak",
+      "pulseScore": 48,
+      "fanCharge": "euphoria",
+      "bagModeIds": [
+        3,
+        4,
+        7
+      ]
+    },
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": {
+    "pulse": {
+      "className": "win-streak",
+      "classes": [
+        "result-pulse",
+        "win-streak"
+      ],
+      "score": 48,
+      "label": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+      "team": "A's",
+      "eventKind": "game-result",
+      "seasonType": "playoffs",
+      "feedCycle": 107,
+      "record": "1-0",
+      "streak": "W1",
+      "mood": "electric",
+      "fanSentiment": "high",
+      "neighborhood": "Eastlake",
+      "notes": "Game 1 of the ALDS was a 14 inning instant classic. Travis Coles took the ball in game 1 and went 6 innings while surrendering 9 hits and 2 runs. Not his dominant norm but more than giving the team a chance to win. Clark Saryan made is MLB debut , after a suprising playoff roster add, went 2 innings in relief striking out 5 hitters. Playing hero on the offensive side , Vladimir Gonzalez with a 2-r",
+      "stats": "Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI"
+    },
+    "charge": {
+      "bagModes": [
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        },
+        {
+          "id": 4,
+          "name": "Loss Hangover / Empty Win"
+        },
+        {
+          "id": 7,
+          "name": "We Still Believe / We're Done"
+        }
+      ],
+      "fanCharge": "euphoria",
+      "foilNumber": "6IP",
+      "centralFeeling": "Oakland should let itself believe — with eyes open.",
+      "palette": [
+        "fury",
+        "euphoria",
+        "dread",
+        "defiance",
+        "confession",
+        "grief",
+        "dare"
+      ]
+    },
+    "prewrite": {
+      "reporter": "P.Slayer",
+      "bagModes": [
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        },
+        {
+          "id": 4,
+          "name": "Loss Hangover / Empty Win"
+        },
+        {
+          "id": 7,
+          "name": "We Still Believe / We're Done"
+        }
+      ],
+      "fanCharge": "euphoria",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "anchorFacts": [
+        "StoryAngle (feed): A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "Team record (feed): 1-0 · streak W1",
+        "Stats (feed): Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI",
+        "Event: A's — game-result (playoffs)"
+      ],
+      "foilNumber": "6IP",
+      "centralFeeling": "Oakland should let itself believe — with eyes open.",
+      "hooks": [
+        {
+          "text": "PLAYOFFS: Championship stakes. Fan fever, watch parties, team coverage. All-hands sports desk.",
+          "angle": "conflict/tension coverage",
+          "hood": null
+        },
+        {
+          "text": "Multiple sports signals detected. Could be coincidence or early pattern.",
+          "angle": "conflict/tension coverage",
+          "hood": null
+        }
+      ]
+    },
+    "friction": {
+      "a": "The numbers / streak say dynasty heat",
+      "b": "The quiet fear that it cannot last — or the nerds reducing it to WAR",
+      "frame": "Euphoria with friction: name the doubter, kill soft contentment."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Travis Coles",
+        "popid": "POP-00533",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Downtown",
+        "why": "feed-names"
+      },
+      {
+        "name": "Clark Saryan",
+        "popid": "POP-00052",
+        "role": "Closing Pitcher, Las Vegas Aviators (AAA)",
+        "neighborhood": "Downtown",
+        "why": "feed-names"
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "popid": "POP-00598",
+        "role": "Right Fielder, Oakland A's",
+        "neighborhood": "Fruitvale",
+        "why": "feed-names"
+      },
+      {
+        "name": "Desmond Morton",
+        "popid": "POP-00051",
+        "role": "Left Fielder, Oakland A's",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Eastlake",
+      "record": "1-0",
+      "streak": "W1",
+      "mood": "electric",
+      "fanSentiment": "high",
+      "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "candidates": [
+      {
+        "score": 62,
+        "cycle": 106,
+        "team": "A's",
+        "primary": "roster-move",
+        "angle": "Refelecting on the players traded this past season",
+        "priorHits": 0
+      },
+      {
+        "score": 50,
+        "cycle": 105,
+        "team": "A's",
+        "primary": "injury-load",
+        "angle": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "priorHits": 0
+      },
+      {
+        "score": 48,
+        "cycle": 107,
+        "team": "A's",
+        "primary": "win-streak",
+        "angle": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+        "priorHits": 0
+      },
+      {
+        "score": 48,
+        "cycle": 107,
+        "team": "A's",
+        "primary": "win-streak",
+        "angle": "A's take game 3 vs Yankees, A's 8 vs Yankees 4",
+        "priorHits": 0
+      },
+      {
+        "score": 48,
+        "cycle": 107,
+        "team": "A's",
+        "primary": "win-streak",
+        "angle": "A's close out the ALDS in NY , As 4 vs Yankees 0",
+        "priorHits": 0
+      },
+      {
+        "score": 48,
+        "cycle": 105,
+        "team": "Oaks",
+        "primary": "injury-load",
+        "angle": "The Oaks drop to 0-3 in preason while Stanley and Dybantsa sit for precautionary measures.",
+        "priorHits": 0
+      }
+    ]
+  },
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "text": "I'm still trying to process the A's win, but I keep thinking about the doubters who said they wouldn't make it this far. I want to explore the story behind their success, and what it means for the city.",
+    "plan": {
+      "chase": "I'm still trying to process the A's win, but I keep thinking about the doubters who said they wouldn't make it this far. I want to explore the story behind their success, and what it means for the city.",
+      "focus": "The A's unexpected win and its impact on the community",
+      "why": "To understand the team's momentum and how it's affecting the fans",
+      "checks": [
+        "Euphoria with friction: name the doubter, kill soft contentment."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00051",
+          "question": "How does Desmond Morton's performance reflect the team's overall strategy?",
+          "basis": "His recent game results"
+        }
+      ],
+      "interpretation": "The A's win is not just about the game, but about the city's perception of itself",
+      "unverifiedLead": [
+        "The team's success might be a turning point for the city's morale"
+      ],
+      "closeQuestion": "Can the A's keep up the momentum, and what does it mean for the city's sense of identity?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-01023",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Travis Coles, Clark Saryan, Vladimir Gonzalez, Desmond Morton",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533",
+        "POP-00052",
+        "POP-00598",
+        "POP-00051"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Desmond Morton, Mark Aitken",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00051",
+        "POP-00003"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | John Ellis, Eric Taveras",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00033",
+        "POP-00597"
+      ]
+    },
+    {
+      "label": "sentiment | A's W2 [player-energy]; A's W2 [playoffs]; Oaks W0 [pre-season]",
+      "kind": "ripple",
+      "ref": "Ripple_Ledger cycle 107 (CauseType sports); rendered: world_summary_c107.md \"## What Moved\" > \"### sports\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 8,
+  "ranAt": "2026-09-18T01:13:06.459Z"
+}

@@ -1,0 +1,70 @@
+{
+  "draft": "output/cron-compare/civic_c109_rachel-torres_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "215ace9f9d822abe4b640727f470398125a27fe84eb76a3b2cfe8d6d68300a05",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "The steam from Jonas Patel's cart rose through the cold morning air as he rearranged jars of preserved plums behind the counter. His stall on Chinatown's Franklin Avenue",
+      "issue": "Jonas Patel (POP-00142) is canonically a Medical Examiner, not a street cart vendor.",
+      "severity": "high"
+    },
+    {
+      "claim": "Laundromat attendant Jacquez Tearn stacked folded shirts near 9th Street.",
+      "issue": "Jacquez Tearn (POP-00214) is canonically a Dishwasher, not a laundromat attendant.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 2,
+  "highSeverityCount": 2,
+  "summary": "Critical occupation misrepresentations for verified citizens Jonas Patel (Medical Examiner cast as stall vendor) and Jacquez Tearn (Dishwasher cast as laundromat attendant).",
+  "review": {
+    "profileId": "rachel-public-safety-v1",
+    "canonIntegrity": "revise",
+    "texture": "overreach"
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "packageVersion": "RACHEL-LEP2-1",
+    "manifestId": "AM-c7f584a41ac5",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "9th"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Jacquez Tearn",
+      "Jonas Patel",
+      "Ronald Williams"
+    ],
+    "unverified": [
+      "Chinatown's Franklin Avenue",
+      "Lucky Dragon"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0116,
+  "durationMs": 12442,
+  "parseError": false,
+  "ranAt": "2026-09-29T23:17:07.269Z"
+}

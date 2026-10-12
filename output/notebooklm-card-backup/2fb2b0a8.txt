@@ -1,0 +1,397 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Jose Colon
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: C
+
+ 
+
+Jersey: #12
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 84
+
+ 
+
+MLB Service: 3.045
+
+ 
+
+Age: 26
+
+ 
+
+Bats: S
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'1"
+
+ 
+
+Weight: 191 lbs
+
+ 
+
+Drafted: Round 5 (2032)
+
+ 
+
+Secondary Position: 3B, LF
+
+ 
+
+Hitter Tendency: PULL / POWER BALANCE
+
+ 
+
+Born: DOMINICAN REPUBLIC
+
+ 
+
+Canonical POPID: POP-00599
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+CON R: 68
+
+ 
+
+CON L: 73
+
+ 
+
+POW R: 74
+
+ 
+
+POW L: 77
+
+ 
+
+VIS: 64
+
+ 
+
+DISC: 59
+
+ 
+
+CLT: 71
+
+ 
+
+BUNT: 35
+
+ 
+
+DBUNT: 42
+
+ 
+
+DUR: 82
+
+ 
+
+FLD: 80
+
+ 
+
+ARM: 85
+
+ 
+
+ACC: 70
+
+ 
+
+REAC: 78
+
+ 
+
+SPD: 61
+
+ 
+
+STEAL: 53
+
+ 
+
+BR AGG: 49
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G    AB   R   H    2B  3B  HR  RBI  BB  SO   SB  CS  AVG   OBP   SLG
+
+ 
+
+2041  ATH   97   332  97  83   13  1   16  42   16  53   7   2   0.250 0.290 0.440
+
+ 
+
+2039  ATH   103  359  54  99   18  2   19  53   27  82   8   1   .276  .329  .496
+
+ 
+
+2038  ATH   21   70   7   20   2   0   2   7    7   15   2   0   .286  .351  .400
+
+ 
+
+2037  ATH   5    16   2   1    0   0   0   1    2   0    0   0   .062  .062  .062
+
+ 
+
+2036  MIL   9    30   2   6    0   1   1   3    1   13   2   3   .200  .273  .300
+
+
+--------------------------------------------------------------------------------
+
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  OPS   PA   SF  SAC  GIDP  HBP  IBB  TB   SB%   PO   A    E   FLD%  INN     WAR
+
+ 
+
+2041  ATH   0.73  352  1   0    4     3    1    146  .777  939  46   5   0.995 836.2   1.7
+
+ 
+
+2039  ATH   .825  390  0   0    0     0    0    178        650  42   3   .996  850.0   1.9
+
+ 
+
+2038  ATH   .751  77   0   0    0     0    0    28         140  10   1   .993  170.0   0.4
+
+ 
+
+2037  ATH   .125  18   0   0    0     0    0    1          30   2    0   1.000 40.0    0.0
+
+ 
+
+2036  MIL   .573  33   0   0    0     0    0    9          55   4    1   .983  70.0    0.1
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 235
+
+ 
+
+AB: 807
+
+ 
+
+R: 162
+
+ 
+
+H: 209
+
+ 
+
+2B: 33
+
+ 
+
+3B: 4
+
+ 
+
+HR: 38
+
+ 
+
+RBI: 106
+
+ 
+
+BB: 53
+
+ 
+
+SO: 163
+
+ 
+
+SB: 19
+
+ 
+
+CS: 6
+
+ 
+
+AVG: .258
+
+ 
+
+OBP: .304
+
+ 
+
+SLG: .448
+
+ 
+
+OPS: .752
+
+ 
+
+TB: 362
+
+ 
+
+PO: 1814
+
+ 
+
+A: 104
+
+ 
+
+E: 10
+
+ 
+
+FLD%: .994
+
+ 
+
+INN: 1966.2
+
+ 
+
+WAR: 4.1
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2042: $3.5M
+
+ 
+
+2043–2045: Arbitration
+
+ 
+
+2046–2049: Free Agent
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Option: Used
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+QUIRKS
+
+Arm Strength Specialist
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00599
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00599

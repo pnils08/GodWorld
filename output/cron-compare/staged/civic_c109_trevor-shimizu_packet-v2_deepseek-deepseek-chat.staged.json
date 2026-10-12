@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/staged/civic_c109_trevor-shimizu_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Joel Wren",
+        "role": "mentioned",
+        "popid": "POP-00218"
+      },
+      {
+        "name": "Jerald Jensen",
+        "role": "mentioned",
+        "popid": "POP-00280"
+      },
+      {
+        "name": "Coen Cartier",
+        "role": "mentioned",
+        "popid": "POP-00338"
+      },
+      {
+        "name": "Eleanor Rivera",
+        "role": "mentioned",
+        "popid": "POP-00617"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "At 12th Street, we've definitely felt the uptick in ridership. It's not just numbers - it's people adjusting their routines, and us adjusting right along with them. The team just... adapts. No big announcements, just everyone doing their part to keep things moving smoothly.",
+        "sourceRef": "citizenVoice PRESS Eleanor Rivera"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-995fe7a414df",
+    "draftSha256": "2c784525dca77eefddc9d9448a48ec561170a3716e5e321a375ded1a39d76bdd",
+    "verdict": "output/cron-compare/civic_c109_trevor-shimizu_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-28T23:18:37.384Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:06.120Z"
+}

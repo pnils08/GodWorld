@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "109",
+  "desk": "civic",
+  "persona": "trevor-shimizu",
+  "storyline": {
+    "slug": "city-eleanor-rivera-beat-transit",
+    "verb": "opened"
+  },
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00617",
+      "name": "Eleanor Rivera",
+      "quote": "At 12th Street, we've definitely felt the uptick in ridership. It's not just numbers - it's people adjusting their routines, and us adjusting right along with them. The team just... adapts. No big announcements, just everyone doing their part to keep things moving smoothly."
+    },
+    {
+      "pop": "POP-00218",
+      "name": "Joel Wren",
+      "quote": "You know, I've been seeing more folks hopping on the buses lately—especially down at 12th Street. It's good to see people out and about, trusting the system again. But what really gets me is the crew keeping those buses running. Those mechanics and drivers? They're the ones putting in the long hours to make sure everyone gets where they need to go, especially with all these extra riders. Makes you appreciate the work that goes on behind the scenes."
+    },
+    {
+      "pop": "POP-00280",
+      "name": "Jerald Jensen",
+      "quote": "You wanna know about 12th Street? I see it in the wear and tear—more coffee spills to mop up, more trash cans overflowing by noon. Used to be you could catch your breath between rushes, but now? It's constant. Folks pouring in for work, for games, for whatever's happening downtown."
+    },
+    {
+      "pop": "POP-00338",
+      "name": "Coen Cartier",
+      "quote": "I’ve seen more folks hopping on the buses lately, especially around 12th Street. It’s been busy, but it feels good to know we’re helping people get where they need to go. The team’s been working hard to keep things running smoothly, and it’s paying off."
+    }
+  ],
+  "claim": "At 12th Street, we've definitely felt the uptick in ridership. It's not just numbers - it's people adjusting their routines, and us adjusting right along with them. The team just... adapts. No big announcements, just everyone doing their part to keep things moving smoothly.",
+  "src": "citizenVoice PRESS c109",
+  "ranAt": "2026-09-28T18:18:41.023Z"
+}

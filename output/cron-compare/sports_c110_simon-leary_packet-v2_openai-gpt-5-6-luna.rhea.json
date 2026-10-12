@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/sports_c110_simon-leary_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1f5f40d88a6a9ac8e43722ea2977c29ac28686feee57bae748b751a75d623f40",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Accurately reflects A's 4-1 record, W3 streak, and Benji Dillon's bullpen role within authorized Simon Longview interpretive texture.",
+  "review": {
+    "profileId": "simon-longview-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "simon-longview-v1",
+    "packageVersion": "SIMON-LEP2-1",
+    "manifestId": "AM-5d8dd5ec05df",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon"
+    ],
+    "unverified": [
+      "For Dillon"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0096,
+  "durationMs": 4625,
+  "parseError": false,
+  "ranAt": "2026-10-08T23:15:56.108Z"
+}

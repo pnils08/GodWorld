@@ -1,0 +1,17 @@
+{
+  "desk": "sports",
+  "cycle": "109",
+  "model": "anthropic/claude-sonnet-5",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 12770,
+  "usageOutputTokens": 2975,
+  "savedFiles": [
+    "output/cron-compare/sports_c109_elliot-marbury_bench-seat2_anthropic-claude-sonnet-5.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c109.md",
+  "durationMs": 34053,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-01T04:58:40.514Z"
+}

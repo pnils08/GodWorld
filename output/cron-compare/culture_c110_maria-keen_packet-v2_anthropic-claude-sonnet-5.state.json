@@ -1,0 +1,327 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00013",
+    "name": "Maria Keen",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Dimond — the programs that hold the block and the people who founded them",
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the engine's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "neighborhood",
+      "hood": "Dimond",
+      "facts": [
+        "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+        "Dimond this cycle: 348 students, 1,476 adults, 316 seniors — moved vs C109: +1 students, +4 adults, +1 seniors",
+        "Dimond: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Dimond: 98 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "Multiple community signals detected. Could be coincidence or early pattern. (observational analysis)",
+        "Positive energy in the city. What's driving the mood? Feature opportunity. (street-level mood piece)",
+        "Community engagement elevated. Residents gathering, organizing, connecting. Profile opportunity. (observational analysis)",
+        "Household in Lake Merritt spending 58% of income on housing (observational analysis)"
+      ],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-neighborhood",
+    "hood": "Dimond",
+    "src": "output/beats/Community_Programs.jsonl @C110",
+    "plan": {
+      "focus": "The impact of community programs on Dimond's residents",
+      "closeQuestion": "What's the most significant challenge facing the community programs in Dimond, and how can they be addressed?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00042",
+        "name": "Ramon Vega",
+        "profile": "Ramon Vega — City Council President - D1",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00170-21156180ee",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "Honestly, Dimond is still a bit of a mystery to me, I mean, I've heard it's a great neighborhood with a lot of heart, but I don't really know much about it beyond that. As a baker in Temescal, I tend to focus on my own community, but I'm always interested in what's going on in other parts of the city. I think community programs can really make a difference in people's lives, and I'd love to learn more about what's happening in Dimond.",
+        "factIds": [
+          "F-9d9313758204"
+        ],
+        "src": "packet.W2[POP-00170]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "I've heard rumors of a new community center being built in Dimond, but I need to verify this information",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C110",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-e491ae296bc1"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimond: 1 active program on the record",
+      "src": "output/beats/Community_Programs.jsonl @C110",
+      "id": "F-549ed60c7ccc"
+    },
+    {
+      "t": "FACT",
+      "text": "1 active programs in Dimond; Mark Aitken founded one.",
+      "src": "output/beats/Community_Programs.jsonl @C110",
+      "id": "F-bb7201edb101"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C110 PRG-007",
+      "id": "F-e03f15635173"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimond this cycle: 348 students, 1,476 adults, 316 seniors — moved vs C109: +1 students, +4 adults, +1 seniors",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C110 vs prev/",
+      "id": "F-72d67ea14409"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimond: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C110 judicial Dimond",
+      "id": "F-f4de3fcb398b"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimond: 98 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C110 hospital Dimond",
+      "id": "F-6e4319924078"
+    },
+    {
+      "t": "INTERPRETATION",
+      "text": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.",
+      "src": "cp-POP-00170-c105-PRESS",
+      "id": "F-9d9313758204"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-named neighborhood or evening condition into a human-scale ground brief without inventing Maria's attendance, a neighbor, an action, a quote, or a civic outcome.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "intimate neighborhood ground brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named place and condition",
+      "closing": "the human observation still needed"
+    },
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome",
+      "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote",
+      "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-a2aa2d0e6649",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-e491ae296bc1",
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-549ed60c7ccc",
+        "t": "FACT",
+        "text": "Dimond: 1 active program on the record",
+        "src": "output/beats/Community_Programs.jsonl @C110"
+      },
+      {
+        "id": "F-bb7201edb101",
+        "t": "FACT",
+        "text": "1 active programs in Dimond; Mark Aitken founded one.",
+        "src": "output/beats/Community_Programs.jsonl @C110"
+      },
+      {
+        "id": "F-e03f15635173",
+        "t": "FACT",
+        "text": "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C110 PRG-007"
+      },
+      {
+        "id": "F-72d67ea14409",
+        "t": "FACT",
+        "text": "Dimond this cycle: 348 students, 1,476 adults, 316 seniors — moved vs C109: +1 students, +4 adults, +1 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C110 vs prev/"
+      },
+      {
+        "id": "F-f4de3fcb398b",
+        "t": "FACT",
+        "text": "Dimond: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C110 judicial Dimond"
+      },
+      {
+        "id": "F-6e4319924078",
+        "t": "FACT",
+        "text": "Dimond: 98 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C110 hospital Dimond"
+      },
+      {
+        "id": "F-9d9313758204",
+        "t": "INTERPRETATION",
+        "text": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.",
+        "src": "cp-POP-00170-c105-PRESS"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00170-21156180ee",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "Honestly, Dimond is still a bit of a mystery to me, I mean, I've heard it's a great neighborhood with a lot of heart, but I don't really know much about it beyond that. As a baker in Temescal, I tend to focus on my own community, but I'm always interested in what's going on in other parts of the city. I think community programs can really make a difference in people's lives, and I'd love to learn more about what's happening in Dimond.",
+        "factIds": [
+          "F-9d9313758204"
+        ],
+        "src": "packet.W2[POP-00170]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00042",
+        "name": "Ramon Vega",
+        "profile": "Ramon Vega — City Council President - D1",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      },
+      {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "I've heard rumors of a new community center being built in Dimond, but I need to verify this information",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome",
+      "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote",
+      "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"
+    ]
+  }
+}

@@ -1,0 +1,1219 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "108",
+  "persona": "anthony-raines",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017"
+  },
+  "assignment": {
+    "story": {
+      "kind": "sports-analytics",
+      "angle": "The season line (.190AVG) has to carry the claim before the narrative does: World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+      "label": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+      "hookLine": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+      "hood": "Rockridge",
+      "pulseClass": "award-board",
+      "team": "A's",
+      "eventKind": "season-state",
+      "citizens": [
+        "Mike Paulson (POP-00527)",
+        "Deacon Seymour (POP-00528)",
+        "Arturo Ramos (POP-00025)",
+        "Danny Horn (POP-00022)"
+      ],
+      "popids": [
+        "POP-00527",
+        "POP-00528",
+        "POP-00025",
+        "POP-00022"
+      ],
+      "ref": "world_summary_c108.md ## Sports",
+      "cycle": 108
+    }
+  },
+  "angle": "output/cron-compare/sports_c108_anthony-raines_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00022",
+      "name": "Danny Horn",
+      "quote": "Look, I know my numbers haven’t been where I want them this postseason, but I’m grinding every day. This team’s got heart, and I’m gonna do everything I can to help us bring home that championship. The Phillies are tough, but we’ve got the pieces to get it done.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, I know my numbers haven’t been where I want them this postseason, but I’m grinding every day. This team’s got heart, and I’m gonna do everything I can to help us bring home that championship. The Phillies are tough, but we’ve got the pieces to get it done.\",\n  \"fact_ids\": [\"F-d2d43282eb21\", \"F-c4545b578d5f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d2d43282eb21",
+          "F-c4545b578d5f"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00022-a57d6f596e",
+        "authoredQuote": true,
+        "publishableQuote": "Look, I know my numbers haven’t been where I want them this postseason, but I’m grinding every day. This team’s got heart, and I’m gonna do everything I can to help us bring home that championship. The Phillies are tough, but we’ve got the pieces to get it done."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00022",
+          "name": "Danny Horn",
+          "role": "Center Fielder, Oakland A's - Best player in the MLB",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "What have you seen, felt, or understood about \"Danny Horn's performance and its impact on the A's World Series chances.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Rockridge",
+          "focus": "Danny Horn's performance and its impact on the A's World Series chances.",
+          "src": "world_summary_c108.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+          "evidence": [
+            {
+              "id": "EV-b4a4511599",
+              "src": "world_summary_c108.md ## Sports",
+              "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c8c06b27c600"
+          },
+          {
+            "t": "FACT",
+            "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-d2d43282eb21"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-98134f64c28d"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-dd826c22d8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c4545b578d5f"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-ac7eeea9e9a7"
+          },
+          {
+            "t": "FACT",
+            "text": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+            "src": "Simulation_Ledger profile for POP-00022",
+            "id": "F-3dc8503c3adc"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00528",
+      "name": "Deacon Seymour",
+      "quote": "Danny Horn’s been grinding, and I respect that. The numbers don’t tell the whole story—he’s a guy who shows up every day, puts in the work, and keeps his head in the game. Right now, he’s not finding the gaps, but I’ve seen him turn it around before. He’s got the discipline, and when he locks in, he can change the momentum of a game. We’re counting on him to step up when it matters most.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake; principled, plays it straight",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"Danny Horn’s been grinding, and I respect that. The numbers don’t tell the whole story—he’s a guy who shows up every day, puts in the work, and keeps his head in the game. Right now, he’s not finding the gaps, but I’ve seen him turn it around before. He’s got the discipline, and when he locks in, he can change the momentum of a game. We’re counting on him to step up when it matters most.\",\"fact_ids\":[\"F-c4545b578d5f\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c4545b578d5f"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00528-89c383cb1a",
+        "authoredQuote": true,
+        "publishableQuote": "Danny Horn’s been grinding, and I respect that. The numbers don’t tell the whole story—he’s a guy who shows up every day, puts in the work, and keeps his head in the game. Right now, he’s not finding the gaps, but I’ve seen him turn it around before. He’s got the discipline, and when he locks in, he can change the momentum of a game. We’re counting on him to step up when it matters most."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00528",
+          "name": "Deacon Seymour",
+          "role": "Manager, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "What have you seen, felt, or understood about \"Danny Horn's performance and its impact on the A's World Series chances.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Rockridge",
+          "focus": "Danny Horn's performance and its impact on the A's World Series chances.",
+          "src": "world_summary_c108.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-7dd0251d87",
+              "src": "world_summary_c108.md ## Sports",
+              "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c8c06b27c600"
+          },
+          {
+            "t": "FACT",
+            "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-d2d43282eb21"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-98134f64c28d"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-dd826c22d8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c4545b578d5f"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-ac7eeea9e9a7"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00528",
+            "id": "F-3375023542ff"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00527",
+      "name": "Mike Paulson",
+      "quote": "Look, Danny’s been grinding through a tough stretch at the plate—no one’s denying that. But here’s the thing: he’s still showing up every day, putting in the work, and contributing in ways that don’t always show up in the box score. This team’s built on depth, and Danny’s part of that. We’re not leaning on any one guy to carry us—that’s why we’re here, chasing that seventh ring.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, Danny’s been grinding through a tough stretch at the plate—no one’s denying that. But here’s the thing: he’s still showing up every day, putting in the work, and contributing in ways that don’t always show up in the box score. This team’s built on depth, and Danny’s part of that. We’re not leaning on any one guy to carry us—that’s why we’re here, chasing that seventh ring.\",\n  \"fact_ids\": [\"F-d2d43282eb21\", \"F-c4545b578d5f\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d2d43282eb21",
+          "F-c4545b578d5f"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00527-ca699a30e9",
+        "authoredQuote": true,
+        "publishableQuote": "Look, Danny’s been grinding through a tough stretch at the plate—no one’s denying that. But here’s the thing: he’s still showing up every day, putting in the work, and contributing in ways that don’t always show up in the box score. This team’s built on depth, and Danny’s part of that. We’re not leaning on any one guy to carry us—that’s why we’re here, chasing that seventh ring."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00527",
+          "name": "Mike Paulson",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "What have you seen, felt, or understood about \"Danny Horn's performance and its impact on the A's World Series chances.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Rockridge",
+          "focus": "Danny Horn's performance and its impact on the A's World Series chances.",
+          "src": "world_summary_c108.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Mike Paulson — General Manager, Oakland A's & The Oaks — Jack London",
+          "evidence": [
+            {
+              "id": "EV-e7e54f95c4",
+              "src": "world_summary_c108.md ## Sports",
+              "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c8c06b27c600"
+          },
+          {
+            "t": "FACT",
+            "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-d2d43282eb21"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-98134f64c28d"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-dd826c22d8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c4545b578d5f"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-ac7eeea9e9a7"
+          },
+          {
+            "t": "FACT",
+            "text": "Mike Paulson — General Manager, Oakland A's & The Oaks — Jack London",
+            "src": "Simulation_Ledger profile for POP-00527",
+            "id": "F-6befd7997ea5"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00025",
+      "name": "Arturo Ramos",
+      "quote": "Look, Danny's been grinding like the rest of us. Numbers don't always tell the whole story—he's got the kind of at-bats that wear pitchers down, and in a long series, that matters. We're not worried. When it clicks for him, it's gonna be big.",
+      "disp": "driven, hard to sit still",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, Danny's been grinding like the rest of us. Numbers don't always tell the whole story—he's got the kind of at-bats that wear pitchers down, and in a long series, that matters. We're not worried. When it clicks for him, it's gonna be big.\",\n  \"fact_ids\": [\"F-c4545b578d5f\", \"F-d2d43282eb21\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c4545b578d5f",
+          "F-d2d43282eb21"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00025-99cb05b249",
+        "authoredQuote": true,
+        "publishableQuote": "Look, Danny's been grinding like the rest of us. Numbers don't always tell the whole story—he's got the kind of at-bats that wear pitchers down, and in a long series, that matters. We're not worried. When it clicks for him, it's gonna be big."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00025",
+          "name": "Arturo Ramos",
+          "role": "Starting Pitcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "What have you seen, felt, or understood about \"Danny Horn's performance and its impact on the A's World Series chances.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Rockridge",
+          "focus": "Danny Horn's performance and its impact on the A's World Series chances.",
+          "src": "world_summary_c108.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Arturo Ramos — Starting Pitcher, Oakland A's — Laurel",
+          "evidence": [
+            {
+              "id": "EV-27e3bfe29f",
+              "src": "world_summary_c108.md ## Sports",
+              "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c8c06b27c600"
+          },
+          {
+            "t": "FACT",
+            "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-d2d43282eb21"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-98134f64c28d"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-dd826c22d8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c4545b578d5f"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-ac7eeea9e9a7"
+          },
+          {
+            "t": "FACT",
+            "text": "Arturo Ramos — Starting Pitcher, Oakland A's — Laurel",
+            "src": "Simulation_Ledger profile for POP-00025",
+            "id": "F-9e1596d41efd"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00022",
+      "name": "Danny Horn",
+      "quote": "Look, I know my numbers haven’t been where I want them this postseason, but I’m grinding every day. This team’s got heart, and I’m gonna do everything I can to help us bring home that championship. The Phillies are tough, but we’ve got the pieces to get it done.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, I know my numbers haven’t been where I want them this postseason, but I’m grinding every day. This team’s got heart, and I’m gonna do everything I can to help us bring home that championship. The Phillies are tough, but we’ve got the pieces to get it done.\",\n  \"fact_ids\": [\"F-d2d43282eb21\", \"F-c4545b578d5f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d2d43282eb21",
+          "F-c4545b578d5f"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00022-a57d6f596e",
+        "authoredQuote": true,
+        "publishableQuote": "Look, I know my numbers haven’t been where I want them this postseason, but I’m grinding every day. This team’s got heart, and I’m gonna do everything I can to help us bring home that championship. The Phillies are tough, but we’ve got the pieces to get it done."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00022",
+          "name": "Danny Horn",
+          "role": "Center Fielder, Oakland A's - Best player in the MLB",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "What have you seen, felt, or understood about \"Danny Horn's performance and its impact on the A's World Series chances.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Rockridge",
+          "focus": "Danny Horn's performance and its impact on the A's World Series chances.",
+          "src": "world_summary_c108.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+          "evidence": [
+            {
+              "id": "EV-b4a4511599",
+              "src": "world_summary_c108.md ## Sports",
+              "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c8c06b27c600"
+          },
+          {
+            "t": "FACT",
+            "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-d2d43282eb21"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-98134f64c28d"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-dd826c22d8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c4545b578d5f"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-ac7eeea9e9a7"
+          },
+          {
+            "t": "FACT",
+            "text": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+            "src": "Simulation_Ledger profile for POP-00022",
+            "id": "F-3dc8503c3adc"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00528",
+      "name": "Deacon Seymour",
+      "quote": "Danny Horn’s been grinding, and I respect that. The numbers don’t tell the whole story—he’s a guy who shows up every day, puts in the work, and keeps his head in the game. Right now, he’s not finding the gaps, but I’ve seen him turn it around before. He’s got the discipline, and when he locks in, he can change the momentum of a game. We’re counting on him to step up when it matters most.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake; principled, plays it straight",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"Danny Horn’s been grinding, and I respect that. The numbers don’t tell the whole story—he’s a guy who shows up every day, puts in the work, and keeps his head in the game. Right now, he’s not finding the gaps, but I’ve seen him turn it around before. He’s got the discipline, and when he locks in, he can change the momentum of a game. We’re counting on him to step up when it matters most.\",\"fact_ids\":[\"F-c4545b578d5f\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c4545b578d5f"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00528-89c383cb1a",
+        "authoredQuote": true,
+        "publishableQuote": "Danny Horn’s been grinding, and I respect that. The numbers don’t tell the whole story—he’s a guy who shows up every day, puts in the work, and keeps his head in the game. Right now, he’s not finding the gaps, but I’ve seen him turn it around before. He’s got the discipline, and when he locks in, he can change the momentum of a game. We’re counting on him to step up when it matters most."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00528",
+          "name": "Deacon Seymour",
+          "role": "Manager, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "What have you seen, felt, or understood about \"Danny Horn's performance and its impact on the A's World Series chances.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Rockridge",
+          "focus": "Danny Horn's performance and its impact on the A's World Series chances.",
+          "src": "world_summary_c108.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-7dd0251d87",
+              "src": "world_summary_c108.md ## Sports",
+              "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c8c06b27c600"
+          },
+          {
+            "t": "FACT",
+            "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-d2d43282eb21"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-98134f64c28d"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-dd826c22d8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c4545b578d5f"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-ac7eeea9e9a7"
+          },
+          {
+            "t": "FACT",
+            "text": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00528",
+            "id": "F-3375023542ff"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00527",
+      "name": "Mike Paulson",
+      "quote": "Look, Danny’s been grinding through a tough stretch at the plate—no one’s denying that. But here’s the thing: he’s still showing up every day, putting in the work, and contributing in ways that don’t always show up in the box score. This team’s built on depth, and Danny’s part of that. We’re not leaning on any one guy to carry us—that’s why we’re here, chasing that seventh ring.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, Danny’s been grinding through a tough stretch at the plate—no one’s denying that. But here’s the thing: he’s still showing up every day, putting in the work, and contributing in ways that don’t always show up in the box score. This team’s built on depth, and Danny’s part of that. We’re not leaning on any one guy to carry us—that’s why we’re here, chasing that seventh ring.\",\n  \"fact_ids\": [\"F-d2d43282eb21\", \"F-c4545b578d5f\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d2d43282eb21",
+          "F-c4545b578d5f"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00527-ca699a30e9",
+        "authoredQuote": true,
+        "publishableQuote": "Look, Danny’s been grinding through a tough stretch at the plate—no one’s denying that. But here’s the thing: he’s still showing up every day, putting in the work, and contributing in ways that don’t always show up in the box score. This team’s built on depth, and Danny’s part of that. We’re not leaning on any one guy to carry us—that’s why we’re here, chasing that seventh ring."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00527",
+          "name": "Mike Paulson",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "What have you seen, felt, or understood about \"Danny Horn's performance and its impact on the A's World Series chances.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Rockridge",
+          "focus": "Danny Horn's performance and its impact on the A's World Series chances.",
+          "src": "world_summary_c108.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Mike Paulson — General Manager, Oakland A's & The Oaks — Jack London",
+          "evidence": [
+            {
+              "id": "EV-e7e54f95c4",
+              "src": "world_summary_c108.md ## Sports",
+              "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c8c06b27c600"
+          },
+          {
+            "t": "FACT",
+            "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-d2d43282eb21"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-98134f64c28d"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-dd826c22d8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c4545b578d5f"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-ac7eeea9e9a7"
+          },
+          {
+            "t": "FACT",
+            "text": "Mike Paulson — General Manager, Oakland A's & The Oaks — Jack London",
+            "src": "Simulation_Ledger profile for POP-00527",
+            "id": "F-6befd7997ea5"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00025",
+      "name": "Arturo Ramos",
+      "quote": "Look, Danny's been grinding like the rest of us. Numbers don't always tell the whole story—he's got the kind of at-bats that wear pitchers down, and in a long series, that matters. We're not worried. When it clicks for him, it's gonna be big.",
+      "disp": "driven, hard to sit still",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, Danny's been grinding like the rest of us. Numbers don't always tell the whole story—he's got the kind of at-bats that wear pitchers down, and in a long series, that matters. We're not worried. When it clicks for him, it's gonna be big.\",\n  \"fact_ids\": [\"F-c4545b578d5f\", \"F-d2d43282eb21\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c4545b578d5f",
+          "F-d2d43282eb21"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00025-99cb05b249",
+        "authoredQuote": true,
+        "publishableQuote": "Look, Danny's been grinding like the rest of us. Numbers don't always tell the whole story—he's got the kind of at-bats that wear pitchers down, and in a long series, that matters. We're not worried. When it clicks for him, it's gonna be big."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00025",
+          "name": "Arturo Ramos",
+          "role": "Starting Pitcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "What have you seen, felt, or understood about \"Danny Horn's performance and its impact on the A's World Series chances.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Rockridge",
+          "focus": "Danny Horn's performance and its impact on the A's World Series chances.",
+          "src": "world_summary_c108.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Arturo Ramos — Starting Pitcher, Oakland A's — Laurel",
+          "evidence": [
+            {
+              "id": "EV-27e3bfe29f",
+              "src": "world_summary_c108.md ## Sports",
+              "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c8c06b27c600"
+          },
+          {
+            "t": "FACT",
+            "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-d2d43282eb21"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-98134f64c28d"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-dd826c22d8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-c4545b578d5f"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+            "src": "world_summary_c108.md ## Sports",
+            "id": "F-ac7eeea9e9a7"
+          },
+          {
+            "t": "FACT",
+            "text": "Arturo Ramos — Starting Pitcher, Oakland A's — Laurel",
+            "src": "Simulation_Ledger profile for POP-00025",
+            "id": "F-9e1596d41efd"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-21T18:19:30.421Z"
+}

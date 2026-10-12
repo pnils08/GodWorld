@@ -1,0 +1,28 @@
+{
+  "office": "council_d9",
+  "cycle": 108,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "This cycle, I prioritized addressing Uptown's commercial distress while ensuring Laurel's hard-won stability is recognized. I supported expanding the West Oakland Stabilization Fund to Uptown and defended Laurel's progress as a model for equitable development.",
+  "statements": [
+    {
+      "statementId": "STMT-108-council_d9-001",
+      "type": "vote_statement",
+      "topic": "Uptown Commercial Distress",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Expand stabilization resources to Uptown",
+      "quote": "Uptown’s vibrant streets are quieting—we can’t let our momentum fade.",
+      "fullStatement": "Uptown’s commercial distress metrics are clear—mood slipping, storefronts quieting, pressure building. We must act now to preserve this vital neighborhood. Expanding the West Oakland Stabilization Fund’s outreach to Uptown is a decisive step forward. Our community-driven approach has proven successful in Laurel, and it’s time to bring that same focus to Uptown. I stand with Uptown’s businesses and residents, ready to ensure they have the resources needed to thrive.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-council_d9-002",
+      "type": "vote_statement",
+      "topic": "Laurel Stability",
+      "initiative": null,
+      "decision": "Highlight Laurel’s progress",
+      "quote": "Laurel’s stability is no accident—it’s the result of staying focused on what works.",
+      "fullStatement": "Laurel’s stability is hard-won—crime below city averages, housing pressure zero, sentiment holding strong. This success isn’t legacy—it’s today’s work paying off. My district chose investment over quick fixes, and we’re reaping the rewards. Let’s honor that progress by ensuring our momentum isn’t derailed by distractions. Laurel stands as proof that community-centered, equity-focused development works, and I’m committed to keeping it that way.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "office": "council_d5",
+  "cycle": 109,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "Supported the Oakland Alternative Response Initiative expansion based on East Oakland's high CrimeIndex, ensuring youth placements are prioritized. Advocated for Baylight District's economic recovery and credited East Oakland's community-driven successes.",
+  "statements": [
+    {
+      "statementId": "STMT-109-council_d5-001",
+      "type": "vote_statement",
+      "topic": "public safety",
+      "initiative": "INIT-002",
+      "decision": "YES - Support OARI expansion to East Oakland",
+      "quote": "East Oakland's crime index isn't a footnote—it's a five-alarm fire demanding action, not promises.",
+      "fullStatement": "East Oakland's CrimeIndex at 0.66—the highest in the city—demands more than incremental solutions. The Oakland Alternative Response Initiative (OARI) has proven its effectiveness in District 1, and now it’s time to expand its deployment to East Oakland. Our community can’t afford to wait while protocols are debated—we need co-response teams on the ground, and we need youth placements tracked and confirmed. Lives are at stake, and our district deserves nothing less than decisive action.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d5-002",
+      "type": "constituent_statement",
+      "topic": "economic recovery",
+      "initiative": null,
+      "decision": "Advocate for Baylight District's economic spike",
+      "quote": "Baylight's slow streets aren't city wins—they're people's victories.",
+      "fullStatement": "Baylight District is showing signs of economic recovery—a clear testament to the resilience of our community. While street trade remains slow, the recent economic spike indicates forward momentum. This isn’t just a statistic; it’s the result of collective effort and investment. As we continue to rebuild, I commit to ensuring that Baylight’s recovery doesn’t stall—it accelerates. Our district deserves not just recovery but thriving, equitable growth.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d5-003",
+      "type": "constituent_statement",
+      "topic": "community success",
+      "initiative": null,
+      "decision": "Credit East Oakland's community health fair",
+      "quote": "East Oakland's peace isn't paperwork—it's people power we haven't unleashed yet.",
+      "fullStatement": "The Foothill Baptist Tabernacle’s community health fair in East Oakland is a shining example of what our district can achieve when we work together. This event wasn’t just a success—it was a testament to the strength and resilience of our community. While City Hall debates protocols, East Oaklanders are building solutions on the ground. I stand with them, amplifying their efforts and ensuring their victories are recognized and supported.",
+      "trackerUpdates": {}
+    }
+  ]
+}

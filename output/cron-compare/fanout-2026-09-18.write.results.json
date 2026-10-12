@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-18",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Celeste Tran",
+      "desk": "wire",
+      "ok": false,
+      "error": "no angle artifact at output/cron-compare/wire_c107_celeste-tran_packet-v2_angle.json — run --stage=angle first"
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-09-18T23:20:48.483Z"
+}

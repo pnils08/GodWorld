@@ -1,0 +1,379 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Vinnie Keane
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: DH / 3B / 2B / SS
+
+ 
+
+Jersey: #10
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 60
+
+ 
+
+MLB Service: 17.000
+
+ 
+
+Age: 36
+
+ 
+
+Bats: S
+
+ 
+
+Throws: R
+
+ 
+
+Height: 5'9"
+
+ 
+
+Weight: 184 lbs
+
+ 
+
+Drafted: Undrafted Free Agent (2025)
+
+ 
+
+Secondary Position: 3B, 2B, SS
+
+ 
+
+Hitter Tendency: WHOLE FIELD
+
+ 
+
+Born: MASSACHUSETTS
+
+ 
+
+Canonical POPID: POP-00001
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+CON R: 43
+
+ 
+
+CON L: 62
+
+ 
+
+POW R: 58
+
+ 
+
+POW L: 68
+
+ 
+
+VIS: 71
+
+ 
+
+DISC: 19
+
+ 
+
+CLT: 56
+
+ 
+
+BUNT: 7
+
+ 
+
+FLD: 52
+
+ 
+
+ARM: 40
+
+ 
+
+ACC: 41
+
+ 
+
+REAC: 47
+
+ 
+
+SPD: 47
+
+ 
+
+STEAL: 47
+
+ 
+
+BR AGG: 47
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G    AB   R    H    2B  3B  HR  RBI  BB   SO   SB  CS  AVG   OBP   SLG
+
+ 
+
+2041  ATH   37   127  25   40   8   1   13  29   0    6    0   0   .315  .308  .701
+
+ 
+
+2040  ATH   58   209  30   60   7   0   14  40   8    35   7   5   .287  .332  .522
+
+ 
+
+2039  ATH   55   164  47   64   14  1   17  47   35   82   5   1   .315  .341  .680
+
+ 
+
+2038  ATH   94   328  84   119  36  4   49  119  49   81   4   4   .362  .398  .680
+
+ 
+
+2037  ATH   150  592  98   174  35  3   34  105  88   157  9   4   .294  .376  .515
+
+ 
+
+2036  ATH   107  409  63   111  28  2   26  62   38   69   17  3   .271  .338  .504
+
+ 
+
+2035  ATH   160  647  115  192  37  6   31  105  67   88   17  5   .317  .390  .582
+
+ 
+
+2034  ATH   150  592  98   174  35  0   24  75   107  157  9   4   .294  .376  .515
+
+ 
+
+2033  ATH   158  626  87   190  53  7   27  64   116  127  7   7   .304  .347  .564
+
+ 
+
+2032  ATH   159  634  120  201  37  5   37  67   88   117  5   5   .317  .390  .582
+
+ 
+
+2031  ATH   160  647  115  192  37  6   35  105  67   88   17  5   .297  .363  .575
+
+ 
+
+2030  ATH   158  626  87   190  53  7   30  64   110  99   7   7   .304  .347  .564
+
+ 
+
+2029  ATH   160  619  86   166  34  7   35  113  73   88   5   7   .268  .346  .515
+
+ 
+
+2028  ATH   160  616  101  166  33  4   40  55   73   73   11  8   .269  .337  .537
+
+ 
+
+2027  ATH   159  623  111  176  44  5   26  67   84   90   9   7   .283  .359  .547
+
+ 
+
+2026  ATH   146  570  96   169  41  5   23  58   74   83   10  7   .309  .375  .514
+
+ 
+
+2025  ATH   144  555  94   153  32  7   29  76   40   83   16  2   .276  .330  .515
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 2130
+
+ 
+
+AB: 8228
+
+ 
+
+R: 1300
+
+ 
+
+H: 2360
+
+ 
+
+2B: 507
+
+ 
+
+3B: 61
+
+ 
+
+HR: 463
+
+ 
+
+RBI: 1317
+
+ 
+
+BB: 772
+
+ 
+
+SO: 1346
+
+ 
+
+SB: 206
+
+ 
+
+CS: 83
+
+ 
+
+AVG: .287
+
+ 
+
+SLG: .532
+
+ 
+
+WAR: 85.6
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2040–2042: $1,500,000 AAV
+
+ 
+
+2043+: Free Agent (FA)
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Options: Exempt / Veteran
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS
+
+Most Valuable Player: 2031
+
+8x All-Star: 2025, 2027, 2028, 2029, 2030, 2031, 2032
+
+3x Gold Glove: 2027, 2031, 2033
+
+5x Silver Slugger: 2027, 2029, 2030, 2031, 2032
+
+3x Home Run Derby Winner: 2027, 2031, 2032
+
+Home Run Champion: 2031
+
+Playoff MVP: 2029
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00001
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00001

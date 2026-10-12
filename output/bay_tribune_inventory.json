@@ -1,0 +1,813 @@
+{
+  "auditedAt": "2026-09-28T16:13:23.467Z",
+  "plan": "docs/plans/2026-04-30-bay-tribune-unified-ingest-rebuild.md (Task 1.1)",
+  "method": "two-pass: list-enumerate + GET-classify",
+  "scope": {
+    "orgTotalItems": 6535,
+    "orgTotalPages": 66,
+    "pagesScanned": 66,
+    "maxPagesFlag": null,
+    "itemsScanned": 6535,
+    "bayTribuneCount": 1564,
+    "dualTaggedCount": 67,
+    "soleBayTribuneCount": 1497,
+    "customIdPresent": 100,
+    "pass2Fetched": 400,
+    "pass2Failed": 0,
+    "maxFetchFlag": 400,
+    "classSumCheck": 400,
+    "sumMatchesFetched": true,
+    "oldestCreatedAt": "2026-03-22T02:06:03.802Z",
+    "newestCreatedAt": "2026-09-26T21:04:14.822Z"
+  },
+  "classes": {
+    "bt-edition-chunk": {
+      "count": 182,
+      "samples": [
+        {
+          "id": "6zdRbUJsMUgNVRCe4F3RJn",
+          "customId": "edition-c100-truesource-team-timeline-v1-0-1",
+          "title": "Cycle Pulse Edition 100 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-06T04:10:38.119Z",
+          "contentHead": "TrueSource Team Timeline v1.0 \\n Classification: Core \\n Source: Manual Extraction \\n Verification: TrueSource Verified \\n —————————————— \\n  \\n ENTITY \\n Team: Oakland Athletics \\n Era Range: 2025–2040 \\n Document Type: Compet"
+        },
+        {
+          "id": "uRyGENcLqeKT5kenEVd5wk",
+          "customId": "edition-c100-lake-merritt-has-a-sea-monster-living-in-it-1",
+          "title": "Cycle Pulse Edition 100 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-06T03:46:55.309Z",
+          "contentHead": "Lake Merritt has a sea monster living in it.txt \\n The “Oak-ness Monster” has been spotted in Lake Merritt since the 1940s. It’s described as your standard Loch Ness-style creature with humps, spikes, an"
+        },
+        {
+          "id": "MSaSyk8yvFqT3AEU9KRRbR",
+          "customId": "edition-c100-weather-environment-noah-tan2-11-1",
+          "title": "Cycle Pulse Edition 100 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-06T03:45:51.091Z",
+          "contentHead": "WEATHER & ENVIRONMENT — Noah Tan \\n  \\n ELEVEN CYCLES OF NORMAL PATTERNING \\n  \\n Oakland saw typical seasonal variation with no anomalies. Fog patterns along the estuary remained consistent, inland temperatures "
+        },
+        {
+          "id": "gmjJPRqWM4sAmjUgR8Fnov",
+          "customId": "edition-c100-noah-tan-weather-environment-1",
+          "title": "Cycle Pulse Edition 100 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-06T03:45:49.606Z",
+          "contentHead": "NOAH TAN — Weather & Environment \\n “The November Volatility: When Weather Stops Making Sense” \\n November 30th through December 3rd has been meteorologically weird. \\n Not dangerous. Not unprecedented. Just… "
+        },
+        {
+          "id": "sxrFmjQxGsfHE3i8hvBYRP",
+          "customId": "edition-c100-economics-desk-jordan-velez2-11-1",
+          "title": "Cycle Pulse Edition 100 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-06T03:43:22.365Z",
+          "contentHead": "ECONOMICS DESK — Jordan Velez \\n  \\n OAKLAND JOB NUMBERS HOLD STRONG AGAINST REGIONAL VARIATION \\n  \\n While other Bay Area metros reported mild volatility, Oakland posted consistent staffing levels across essent"
+        }
+      ]
+    },
+    "unknown": {
+      "count": 101,
+      "samples": [
+        {
+          "id": "zZjQtPP143W2hL41QK9GxC",
+          "customId": "article-c108-sports_c108_simon-leary_packet-v2_deepseek-deepseek-chat",
+          "title": "sports_c108_simon-leary_packet-v2_deepseek-deepseek-chat",
+          "tags": [
+            "bay-tribune",
+            "journalist-POP-00016",
+            "cycle-108",
+            "sports"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-09-26T21:04:14.822Z",
+          "contentHead": "**The Load That Doesn't Bend**   \\n By Simon Leary   \\n  \\n Vladimir Gonzalez stands at the edge of the batting cage, glove tucked under his arm, watching the arc of balls meeting bats. The right fielder’s sta"
+        },
+        {
+          "id": "BsDaQtgs5whgFLUU8t9tP8",
+          "customId": "article-c108-sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+          "title": "sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+          "tags": [
+            "bay-tribune",
+            "journalist-POP-00591",
+            "cycle-108",
+            "sports"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-09-26T21:04:13.827Z",
+          "contentHead": "## Oakland Oaks Struggle in Preseason Opener \\n The near-empty press row at the Oakland Oaks' practice facility was abuzz with concern as Coach Wilson Shepard addressed the media after the team's preseas"
+        },
+        {
+          "id": "h5QDnoPfgVwvfTxLMf6P5D",
+          "customId": "article-c108-sports_c108_anthony-raines_packet-v2_deepseek-deepseek-chat",
+          "title": "sports_c108_anthony-raines_packet-v2_deepseek-deepseek-chat",
+          "tags": [
+            "bay-tribune",
+            "journalist-POP-00017",
+            "cycle-108",
+            "sports"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-09-26T21:04:13.271Z",
+          "contentHead": "The first thing that jumps out on Danny Horn's postseason card is the zero in the home run column. Through forty-two at-bats this October, Oakland's center fielder is hitting a meager .190, with just "
+        },
+        {
+          "id": "KVfBSx3kyWjDZTRgbPyfTh",
+          "customId": "article-c108-culture_c108_mason-ortega_packet-v2_deepseek-deepseek-chat",
+          "title": "culture_c108_mason-ortega_packet-v2_deepseek-deepseek-chat",
+          "tags": [
+            "bay-tribune",
+            "journalist-POP-00160",
+            "cycle-108",
+            "culture"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-09-26T21:04:12.671Z",
+          "contentHead": "# The Rhythm That Holds: At OakTown Social, the Baristas Who Keep Temescal Steady \\n  \\n Vanessa Treary's hands move through muscle memory at OakTown Social's espresso machine—tamping, steaming, pouring—whi"
+        },
+        {
+          "id": "rHiLCfbYERrVKZTe36BF3A",
+          "customId": "article-c108-culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat",
+          "title": "culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat",
+          "tags": [
+            "bay-tribune",
+            "journalist-POP-00013",
+            "cycle-108",
+            "culture"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-09-26T21:04:12.039Z",
+          "contentHead": "Lucia Polito leans against the counter at Aura Wellness, her hands wrapping around a mug of chamomile tea. The scent of lavender lingers in the air, mixing with the faint hum of Fruitvale’s midday bus"
+        }
+      ]
+    },
+    "bt-supplemental": {
+      "count": 36,
+      "samples": [
+        {
+          "id": "ppZdtmXcfYvbi38UaAxmuC",
+          "customId": null,
+          "title": "Cycle Pulse Edition 100 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-03T07:21:35.462Z",
+          "contentHead": "############################################################ \\n THE CYCLE PULSE — SUPPLEMENTAL EDITION \\n VISION IN THE MARGINS \\n The Ultimate Arbitrage | Adash Stanley and the Mike Paulson Philosophy \\n #######"
+        },
+        {
+          "id": "XMjk4jEMJcUCkmejTUdR7e",
+          "customId": null,
+          "title": "Cycle Pulse Edition 102 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-03T07:21:17.975Z",
+          "contentHead": "############################################################ \\n THE CYCLE PULSE — SUPPLEMENTAL EDITION \\n OUT OF THE FRYING PAN: THE TEMESCAL-TO-KONO DISPLACEMENT PIPELINE \\n Cycle 102 | Business & Labor Beat \\n "
+        },
+        {
+          "id": "cirDdB5vhxDkfCKVvbPTPJ",
+          "customId": null,
+          "title": "Cycle Pulse Edition 100 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-03T07:21:13.832Z",
+          "contentHead": "############################################################ \\n THE RICHMOND ARCHIVE — SUPPLEMENTAL EDITION \\n ELLIOT ABRAHAM: THE ARCHITECTURE OF QUIET LEADERSHIP \\n Late-Summer 2026 | Legacy & Dynasty Contex"
+        },
+        {
+          "id": "gtvKChpHd2U2Y6jaxhjd9k",
+          "customId": null,
+          "title": "Cycle Pulse Edition 100 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-03T07:21:05.045Z",
+          "contentHead": "############################################################ \\n THE CYCLE PULSE — SUPPLEMENTAL EDITION \\n POWERLESS IN TEMESCAL \\n Special Report | The True Cost of Aging Infrastructure \\n #######################"
+        },
+        {
+          "id": "nQDHjUzfBmNCr7jMyz5quz",
+          "customId": null,
+          "title": "Cycle Pulse Edition 74 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-03T06:53:29.412Z",
+          "contentHead": "THE CYCLE PULSE — SUPPLEMENTAL EDITION \\n TEMESCAL COMMUNITY HEALTH CENTER PROPOSAL \\n CYCLE 74 | FIRST FRIDAY | PRIDE MONTH.txt \\n  \\n # =========================================================================="
+        }
+      ]
+    },
+    "bt-wiki-appearance": {
+      "count": 28,
+      "samples": [
+        {
+          "id": "KBHtmkvxFayKzkzukUDxwc",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-08-12T05:52:08.813Z",
+          "contentHead": "[TYPE: dispatch | C103] Avery Santana (Mayor of Oakland) appeared in Dispatch 103 in 1 section(s): Dispatch."
+        },
+        {
+          "id": "4qwaWMBioQmBycHEionzZE",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-08-12T05:52:08.146Z",
+          "contentHead": "[TYPE: dispatch | C103] Elias Varek (Founder of Civis Systems, Oakland Oaks Owner) appeared in Dispatch 103 in 1 section(s): Dispatch."
+        },
+        {
+          "id": "JPJiLTLaYX2dfEGvkiVPw2",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-08-12T05:52:07.381Z",
+          "contentHead": "[TYPE: dispatch | C103] Gregory Mims (Organized Crime, West Oakland) appeared in Dispatch 103 in 1 section(s): Dispatch."
+        },
+        {
+          "id": "dazc62rBfNCt7Z3zjKkLVT",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-08-10T06:42:51.455Z",
+          "contentHead": "[TYPE: edition | C102] AJ Dybantsa (Small Forward, Oakland Oaks) appeared in Edition 102 in 1 section(s): Edition."
+        },
+        {
+          "id": "LjUk7fsGs9WYqa87ZE91Ur",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-08-10T06:42:50.823Z",
+          "contentHead": "[TYPE: edition | C102] Adash Stanley (Point Guard, Oakland Oaks) appeared in Edition 102 in 1 section(s): Edition."
+        }
+      ]
+    },
+    "bt-published-other": {
+      "count": 16,
+      "samples": [
+        {
+          "id": "ehmMdj6uBfgVPEiE9DjdWd",
+          "customId": "edition-c108-cycle-pulse-c108-1",
+          "title": "Cycle Pulse Edition 108 (Frame)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-09-26T21:03:01.334Z",
+          "contentHead": "THE CYCLE PULSE — Y2C108 \\n The Bay Tribune — Oakland \\n Narrated by Mags Corliss, Editor-in-Chief \\n  \\n ============================================================ \\n  \\n The morning fog that Noah Tan's reporting ca"
+        },
+        {
+          "id": "Sc7odduo1MDQ7p3cBRGELT",
+          "customId": "edition-c107-cycle-pulse-c107-1",
+          "title": "Cycle Pulse Edition 107 (Frame)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-09-19T21:02:12.701Z",
+          "contentHead": "THE CYCLE PULSE — Y2C107 \\n The Bay Tribune — Oakland \\n Narrated by Mags Corliss, Editor-in-Chief \\n  \\n ============================================================ \\n  \\n THE CYCLE PULSE — Y2C107 \\n  \\n There is a particu"
+        },
+        {
+          "id": "4Fzuqm2kQtzjFFKyATGhjc",
+          "customId": "edition-c106-cycle-pulse-c106-1",
+          "title": "Cycle Pulse Edition 106 (Frame)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-09-12T21:02:17.263Z",
+          "contentHead": "THE CYCLE PULSE — Y2C106 \\n The Bay Tribune — Oakland \\n Narrated by Mags Corliss, Editor-in-Chief \\n  \\n ============================================================ \\n  \\n There's a particular kind of week in this ci"
+        },
+        {
+          "id": "nL6oS4MTHzL7eAUZNiZNbU",
+          "customId": "edition-c105-cycle-pulse-c105-1",
+          "title": "Cycle Pulse Edition 105 (Frame)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-09-05T21:01:54.937Z",
+          "contentHead": "THE CYCLE PULSE — Y2C105 \\n The Bay Tribune — Oakland \\n Narrated by Mags Corliss, Editor-in-Chief \\n  \\n ============================================================ \\n  \\n There is a particular kind of week in this c"
+        },
+        {
+          "id": "e14pvPZmPMdTgn8RV2Ko6t",
+          "customId": "edition-c104-cycle-pulse-c104-1",
+          "title": "Cycle Pulse Edition 104 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-22T21:00:52.963Z",
+          "contentHead": "THE CYCLE PULSE — Y2C104 \\n The Bay Tribune — Oakland \\n Narrated by Mags Corliss, Editor-in-Chief \\n  \\n ============================================================ \\n  \\n The morning I pulled P Slayer's bar dispatch"
+        }
+      ]
+    },
+    "bt-edition": {
+      "count": 15,
+      "samples": [
+        {
+          "id": "PSjVUsjtVZaQs7jGn2aiwb",
+          "customId": "edition-c102-cycle-pulse-edition-102-1",
+          "title": "Cycle Pulse Edition 102 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-10T06:53:02.870Z",
+          "contentHead": "============================================================ \\n THE CYCLE PULSE — EDITION 102 \\n Bay Tribune | Cycle 102 | Y2C50 | Winter, Hanukkah \\n Weather: 52F cool, NW 9 mph, overcast | City Mood: quiet \\n ="
+        },
+        {
+          "id": "aDPkGG6YaRSpwXUNU1U2SF",
+          "customId": null,
+          "title": "Cycle Pulse Edition 92 (Part 1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-03T06:07:40.220Z",
+          "contentHead": "============================================================ \\n THE CYCLE PULSE — EDITION 92 \\n Bay Tribune | Cycle 92 | October 2041 | Fall, First Friday \\n Weather: cool evening, northwest breeze, clear | Ci"
+        },
+        {
+          "id": "nMda7F8hiBSQrku7ZyUktr",
+          "customId": null,
+          "title": "Cycle Pulse Edition 91 (Part 1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-03T06:07:33.555Z",
+          "contentHead": "============================================================ \\n THE CYCLE PULSE — EDITION 91 \\n Bay Tribune | Cycle 91 | October 2041 | Fall \\n Weather: 67°F, NW breeze | City Mood: Energized \\n ================="
+        },
+        {
+          "id": "oetea7bpe6eYxtdd94oajL",
+          "customId": null,
+          "title": "Cycle Pulse Edition 90 (Part 1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-03T06:07:26.144Z",
+          "contentHead": "============================================================ \\n THE CYCLE PULSE — EDITION 90 \\n Bay Tribune | October 2041 | Fall Equinox \\n Weather: 62°F, breeze off the Bay | Sentiment: Optimistic \\n =========="
+        },
+        {
+          "id": "yEdTMGaNHS4sC38fhKBE1P",
+          "customId": null,
+          "title": "Cycle Pulse Edition 88 (Part 1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-03T06:07:12.446Z",
+          "contentHead": "============================================================ \\n THE CYCLE PULSE — EDITION 88 \\n Bay Tribune | September 2041, Week 1 | Fall \\n ============================================================ \\n  \\n FRON"
+        }
+      ]
+    },
+    "bt-supplemental-chunk": {
+      "count": 7,
+      "samples": [
+        {
+          "id": "arpthnHFBP1fDaT5hznj5G",
+          "customId": null,
+          "title": "Cycle Pulse Supplemental 28 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "supplemental",
+          "createdAt": "2026-08-02T09:35:34.400Z",
+          "contentHead": "ANGELA REYES — Education Desk \\n “The Teacher Who Called It First: When Classroom Behavior Signals Community Stress” \\n Cycle 28 – Oakland Unified School District Pattern Recognition \\n Lily Tran, 27, teaches "
+        },
+        {
+          "id": "jQU4JiX2Vc187Ra3yGpjsw",
+          "customId": null,
+          "title": "Cycle Pulse Supplemental 99 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "supplemental",
+          "createdAt": "2026-07-31T05:27:34.944Z",
+          "contentHead": "# Bay Tribune | Arts & Entertainment \\n **The Great Mandela Parkway Deep-Fry Disaster** \\n **By: Kai Marston** \\n **Cycle 99 | Thanksgiving Day** \\n  \\n The overcast sky above West Oakland was locked at 57 degrees, "
+        },
+        {
+          "id": "TUWxL5xdvd39B9fnrhhY1D",
+          "customId": null,
+          "title": "Cycle Pulse Supplemental 88 (Part 2)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "supplemental",
+          "createdAt": "2026-07-31T05:27:07.841Z",
+          "contentHead": "############################################################ \\n  \\n CIVIC OFFICIALS: \\n — (none) \\n  \\n JOURNALISTS: \\n — Angela Reyes (2 articles — first published byline) \\n — Jordan Velez (1 article) \\n  \\n CITIZENS QUOTED ("
+        },
+        {
+          "id": "k1rtFhF9pAcKq7oCY9v4iM",
+          "customId": null,
+          "title": "Cycle Pulse Supplemental 86 (Part 2)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "supplemental",
+          "createdAt": "2026-07-31T05:26:56.114Z",
+          "contentHead": "############################################################ \\n  \\n CIVIC OFFICIALS: \\n -- None \\n  \\n JOURNALISTS: \\n -- Mason Ortega (1 article) \\n -- Maria Keen (1 article) \\n -- Sharon Okafor (1 article) \\n  \\n CITIZENS QUOTED"
+        },
+        {
+          "id": "yjkqe26VsBnea81RfnG5Td",
+          "customId": null,
+          "title": "Cycle Pulse Supplemental 84 (Part 2)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "supplemental",
+          "createdAt": "2026-07-31T05:26:51.299Z",
+          "contentHead": "############################################################ \\n  \\n The Invisible Hand \\n  \\n Oakland's tech sector isn't knocking on City Hall's door. It's already inside. \\n  \\n By Farrah Del Rio | Bay Tribune Opinio"
+        }
+      ]
+    },
+    "bt-wiki-continuity": {
+      "count": 6,
+      "samples": [
+        {
+          "id": "JWko19gN4uymmibDbsbQs5",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-08-01T02:53:57.245Z",
+          "contentHead": "[TYPE: supplemental | C102] Supplemental 102 continuity note: Varek solved the citywide infrasonic cognitive blackout crisis using Civis 4D overlay, gaining sole municipal tech oversight contracts fro"
+        },
+        {
+          "id": "DnazrTzJ26x8UiCFM3LLAq",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-08-01T02:53:56.556Z",
+          "contentHead": "[TYPE: supplemental | C102] Supplemental 102 continuity note: Civis Systems (BIZ-00052) uses proprietary 4D urban modeling algorithms to model Oakland's transit, power grid, utilities, and citizen tel"
+        },
+        {
+          "id": "tEmFfNMxPivNqpKhVaambc",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-08-01T02:53:55.840Z",
+          "contentHead": "[TYPE: supplemental | C102] Supplemental 102 continuity note: Elias Varek (POP-00789) is a 38-year-old billionaire ($10B net worth) born in Oakland to a Port dockworker father and nurse's aide mother."
+        },
+        {
+          "id": "JKoGyihNHQ4wWCqY5gD7px",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-07-31T22:38:30.530Z",
+          "contentHead": "[TYPE: supplemental | C102] Supplemental 102 continuity note: Secondary displacement risks threat senior trade workers in KONO within 10-20 cycles if commercial vacancies persist."
+        },
+        {
+          "id": "Sr7TyvP5soqsQkfn3zeaU5",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-07-31T22:38:29.845Z",
+          "contentHead": "[TYPE: supplemental | C102] Supplemental 102 continuity note: KONO's Telegraph Avenue commercial strip is suffering from a 51-point collapse in retail vitality with widespread storefront closures."
+        }
+      ]
+    },
+    "bt-wiki-returning": {
+      "count": 3,
+      "samples": [
+        {
+          "id": "1Lr9qJnggAEgHYKdCXj822",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-08-12T05:52:11.809Z",
+          "contentHead": "[TYPE: dispatch | C103] Dispatch 103 returning citizen: **POP-00034 (Avery Santana)**: Referenced structurally regarding her flagship apprenticeship initiative failing to place applicants."
+        },
+        {
+          "id": "sfi8KUxhD54q5eirSQezda",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-08-12T05:52:11.111Z",
+          "contentHead": "[TYPE: dispatch | C103] Dispatch 103 returning citizen: **POP-00789 (Elias Varek)**: Warned that stalled city initiatives create a vacuum that figures like Gregory Mims use to build leverage."
+        },
+        {
+          "id": "KjfnCVpeJXmqCgVtoV54zf",
+          "customId": null,
+          "title": "Direct memories (1)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": null,
+          "createdAt": "2026-08-12T05:52:10.412Z",
+          "contentHead": "[TYPE: dispatch | C103] Dispatch 103 returning citizen: **POP-00023 (Gregory Mims)**: Voiced cynicism about the Oakland Youth Apprenticeship Pipeline and compared the empty 12th Street warehouse to a "
+        }
+      ]
+    },
+    "bt-dispatch": {
+      "count": 2,
+      "samples": [
+        {
+          "id": "6usAoWgnVC6aehyM58zi93",
+          "customId": null,
+          "title": "Cycle Pulse Dispatch 102 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "dispatch",
+          "createdAt": "2026-08-04T18:47:47.010Z",
+          "contentHead": "============================================================ \\n THE CYCLE PULSE — DISPATCH 102 \"Before a Game Is Played, the Oaks Take a Hit\" \\n Bay Tribune | Cycle 102 | Y2C50 | Winter, Hanukkah \\n Weather: 5"
+        },
+        {
+          "id": "1inb9KpZ86FKTZtvEKcWPC",
+          "customId": null,
+          "title": "Cycle Pulse Dispatch 102 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "dispatch",
+          "createdAt": "2026-08-04T18:47:09.046Z",
+          "contentHead": "============================================================ \\n THE CYCLE PULSE — DISPATCH 102 \"The Drop Nobody Claimed\" \\n Bay Tribune | Cycle 102 | Y2C50 | Winter, Hanukkah \\n Weather: 52F cool, NW 9 mph, ov"
+        }
+      ]
+    },
+    "bt-interview-article": {
+      "count": 2,
+      "samples": [
+        {
+          "id": "UBvoUV4gt6jtoNRxPKuYXN",
+          "customId": null,
+          "title": "Cycle Pulse Interview Transcript 94 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "interview-transcript",
+          "createdAt": "2026-07-31T05:24:27.691Z",
+          "contentHead": "============================================================ \\n THE CYCLE PULSE — INTERVIEW-TRANSCRIPT 94 \"Mike Paulson / The Let-Walks\" \\n Bay Tribune | Cycle 94 | Y2C42 | Fall \\n Weather: cool overcast, nort"
+        },
+        {
+          "id": "UKCwfLQ82dNbgVjN5Tqrgs",
+          "customId": null,
+          "title": "Cycle Pulse Interview 94 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "interview",
+          "createdAt": "2026-07-31T05:24:24.265Z",
+          "contentHead": "============================================================ \\n THE CYCLE PULSE — INTERVIEW 94 \"Mike Paulson / The Let-Walks\" \\n Bay Tribune | Cycle 94 | Y2C42 | Fall \\n Weather: cool overcast, northwest breez"
+        }
+      ]
+    },
+    "bt-dispatch-chunk": {
+      "count": 1,
+      "samples": [
+        {
+          "id": "PPWKhpXAJgXernzuxgSLPh",
+          "customId": null,
+          "title": "Cycle Pulse Dispatch 102 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "dispatch",
+          "createdAt": "2026-08-03T07:20:40.911Z",
+          "contentHead": "# The Chart Hasn't Moved (v2 — EIC revision) \\n  \\n **By Dr. Lila Mezran | Bay Tribune Health Desk** \\n  \\n Two crews now work the lot at Temescal Avenue and 47th Street — one at dawn, one at dusk. As of last cyc"
+        }
+      ]
+    },
+    "bt-wiki-other": {
+      "count": 1,
+      "samples": [
+        {
+          "id": "iaHy2wWm4UURRjxtDtfZo5",
+          "customId": null,
+          "title": "Cycle Pulse Edition 99 (Full)",
+          "tags": [
+            "bay-tribune"
+          ],
+          "metadataType": "edition",
+          "createdAt": "2026-08-03T06:36:27.621Z",
+          "contentHead": "[TYPE: edition | C99] \\n  \\n # THE CYCLE PULSE — SPECIAL EDITION \\n ## OAKLAND OAKS INAUGURAL OFFSEASON: THE VILLAIN BLUEPRINT \\n **By The Bay Tribune Sports Desk** \\n  \\n OAKLAND — General Manager Mike Paulson stood a"
+        }
+      ]
+    }
+  },
+  "secondaryTagsObserved": {
+    "civic": 24,
+    "sports": 21,
+    "cycle-103": 17,
+    "cycle-105": 16,
+    "culture": 15,
+    "cycle-108": 9,
+    "cycle-107": 9,
+    "cycle-106": 9,
+    "cycle-104": 7,
+    "journalist-POP-00157": 6,
+    "journalist-POP-00017": 5,
+    "journalist-POP-00153": 5,
+    "business": 5,
+    "journalist-POP-00636": 4,
+    "journalist-POP-00008": 4,
+    "journalist-POP-00158": 4,
+    "journalist-POP-00016": 3,
+    "journalist-POP-00160": 3,
+    "journalist-POP-00013": 3,
+    "journalist-POP-00011": 3,
+    "journalist-POP-00154": 3,
+    "journalist-POP-00014": 3,
+    "journalist-POP-00159": 3,
+    "journalist-POP-00591": 2,
+    "journalist-POP-00592": 2,
+    "journalist-POP-00012": 2,
+    "journalist-POP-00155": 2,
+    "journalist-POP-00799": 2,
+    "journalist-POP-00156": 2,
+    "journalist-POP-01076": 2,
+    "undocked": 2,
+    "journalist-POP-00007": 2,
+    "journalist-POP-00057": 2
+  },
+  "anomalies": [
+    {
+      "id": "iaHy2wWm4UURRjxtDtfZo5",
+      "allMatches": [
+        "bt-wiki-other",
+        "bt-published-other"
+      ],
+      "tags": [
+        "bay-tribune"
+      ],
+      "contentHead": "[TYPE: edition | C99] \\n  \\n # THE CYCLE PULSE — SPECIAL EDITION \\n ## OAKLAND OAKS INAUGURAL OFFSEASON: THE VILLAIN BLUEPRINT \\n **By The Bay Tribune Sports Desk** \\n  \\n OAKLAN"
+    },
+    {
+      "id": "JWko19gN4uymmibDbsbQs5",
+      "allMatches": [
+        "bt-wiki-continuity",
+        "bt-supplemental"
+      ],
+      "tags": [
+        "bay-tribune"
+      ],
+      "contentHead": "[TYPE: supplemental | C102] Supplemental 102 continuity note: Varek solved the citywide infrasonic cognitive blackout crisis using Civis 4D overlay, gaining sol"
+    },
+    {
+      "id": "DnazrTzJ26x8UiCFM3LLAq",
+      "allMatches": [
+        "bt-wiki-continuity",
+        "bt-supplemental"
+      ],
+      "tags": [
+        "bay-tribune"
+      ],
+      "contentHead": "[TYPE: supplemental | C102] Supplemental 102 continuity note: Civis Systems (BIZ-00052) uses proprietary 4D urban modeling algorithms to model Oakland's transit"
+    },
+    {
+      "id": "tEmFfNMxPivNqpKhVaambc",
+      "allMatches": [
+        "bt-wiki-continuity",
+        "bt-supplemental"
+      ],
+      "tags": [
+        "bay-tribune"
+      ],
+      "contentHead": "[TYPE: supplemental | C102] Supplemental 102 continuity note: Elias Varek (POP-00789) is a 38-year-old billionaire ($10B net worth) born in Oakland to a Port do"
+    },
+    {
+      "id": "r8ETh8aEi7EeUNkqDsvaSh",
+      "allMatches": [
+        "bt-wiki-appearance",
+        "bt-supplemental"
+      ],
+      "tags": [
+        "bay-tribune"
+      ],
+      "contentHead": "[TYPE: supplemental | C102] Jax Caldera (Freelance Accountability Columnist, Bay Tribune) appeared in Supplemental 102 in 1 section(s): Supplemental."
+    },
+    {
+      "id": "yqPaDbTpqKFjWMeajKZJwc",
+      "allMatches": [
+        "bt-wiki-appearance",
+        "bt-supplemental"
+      ],
+      "tags": [
+        "bay-tribune"
+      ],
+      "contentHead": "[TYPE: supplemental | C102] Elliot Abraham (General Manager, Oakland Oaks (former Civis Operations VP)) appeared in Supplemental 102 in 1 section(s): Supplement"
+    },
+    {
+      "id": "tVNWAQua3cD5VgMK3vei8Z",
+      "allMatches": [
+        "bt-wiki-appearance",
+        "bt-supplemental"
+      ],
+      "tags": [
+        "bay-tribune"
+      ],
+      "contentHead": "[TYPE: supplemental | C102] Elias Varek (Founder, Civis Systems / Owner, Oakland Oaks) appeared in Supplemental 102 in 1 section(s): Supplemental."
+    },
+    {
+      "id": "JKoGyihNHQ4wWCqY5gD7px",
+      "allMatches": [
+        "bt-wiki-continuity",
+        "bt-supplemental"
+      ],
+      "tags": [
+        "bay-tribune"
+      ],
+      "contentHead": "[TYPE: supplemental | C102] Supplemental 102 continuity note: Secondary displacement risks threat senior trade workers in KONO within 10-20 cycles if commercial"
+    },
+    {
+      "id": "Sr7TyvP5soqsQkfn3zeaU5",
+      "allMatches": [
+        "bt-wiki-continuity",
+        "bt-supplemental"
+      ],
+      "tags": [
+        "bay-tribune"
+      ],
+      "contentHead": "[TYPE: supplemental | C102] Supplemental 102 continuity note: KONO's Telegraph Avenue commercial strip is suffering from a 51-point collapse in retail vitality "
+    },
+    {
+      "id": "4ZLWYKDz547Xeh26ZRkBp7",
+      "allMatches": [
+        "bt-wiki-continuity",
+        "bt-supplemental"
+      ],
+      "tags": [
+        "bay-tribune"
+      ],
+      "contentHead": "[TYPE: supplemental | C102] Supplemental 102 continuity note: Funmi Shah and Tatiana Flores are senior trade workers now residing in KONO after being priced out"
+    },
+    {
+      "id": "vYm6qtFEgtizhPAcx9oQQX",
+      "allMatches": [
+        "bt-wiki-appearance",
+        "bt-supplemental"
+      ],
+      "tags": [
+        "bay-tribune"
+      ],
+      "contentHead": "[TYPE: supplemental | C102] Tatiana Flores (HVAC Technician, KONO Resident (former Temescal)) appeared in Supplemental 102 in 1 section(s): Supplemental."
+    },
+    {
+      "id": "wYTLmCoPrRbG5v9KEdsyCH",
+      "allMatches": [
+        "bt-wiki-appearance",
+        "bt-supplemental"
+      ],
+      "tags": [
+        "bay-tribune"
+      ],
+      "contentHead": "[TYPE: supplemental | C102] Funmi Shah (Glazier, KONO Resident (former Temescal)) appeared in Supplemental 102 in 1 section(s): Supplemental."
+    }
+  ]
+}

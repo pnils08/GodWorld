@@ -1,0 +1,52 @@
+{
+  "draft": "output/cron-compare/civic_c108_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c9a7fa48a31d369c2d46fba6ad42a126c2aa545c7cd68202a80d62aa66a074c2",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance; citizen backgrounds and engine metrics for Fruitvale decay match ground truth precisely.",
+  "review": {
+    "profileId": "jax-accountability-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "packageVersion": "JAX-LEP2-1",
+    "manifestId": "AM-53a94b7b5767",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Carmen Solis",
+      "Jax Caldera",
+      "Jessie Hess",
+      "Rick Walker"
+    ],
+    "unverified": [
+      "Esperanza Parish"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0108,
+  "durationMs": 7078,
+  "parseError": false,
+  "ranAt": "2026-09-23T23:16:41.076Z"
+}

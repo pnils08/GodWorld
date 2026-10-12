@@ -1,0 +1,844 @@
+{
+  "cycle": 108,
+  "scannedAt": "2026-09-23T11:15:09.677Z",
+  "signalPath": "/root/GodWorld/output/desk_signal_c108.json",
+  "signalMissing": false,
+  "illnessRate": 4.7,
+  "forceThreshold": 35,
+  "shouldForce": true,
+  "maxScore": 61,
+  "top": {
+    "className": "metric-contradiction",
+    "score": 61,
+    "desk": "civic",
+    "kind": "anomaly",
+    "label": "math-imbalance (high) | Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+    "ref": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+    "hood": "Fruitvale",
+    "popids": [
+      "POP-00031",
+      "POP-00198",
+      "POP-00953"
+    ],
+    "handle": {
+      "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+      "hookLine": "The transit initiative carrying Fruitvale has not advanced in 1 cycles.",
+      "citizens": [
+        "Martin Richards (POP-00031)",
+        "Rick Walker (POP-00198)",
+        "Carmen Solis (POP-00953)"
+      ]
+    },
+    "story": {
+      "ref": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+      "label": "math-imbalance (high) | Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+      "hookLine": "The transit initiative carrying Fruitvale has not advanced in 1 cycles.",
+      "citizens": [
+        "Martin Richards (POP-00031)",
+        "Rick Walker (POP-00198)",
+        "Carmen Solis (POP-00953)"
+      ],
+      "popids": [
+        "POP-00031",
+        "POP-00198",
+        "POP-00953"
+      ],
+      "hood": "Fruitvale",
+      "stinkClass": "metric-contradiction"
+    }
+  },
+  "candidates": [
+    {
+      "className": "metric-contradiction",
+      "score": 61,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (high) | Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00031",
+        "POP-00198",
+        "POP-00953"
+      ],
+      "handle": {
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 1 cycles.",
+        "citizens": [
+          "Martin Richards (POP-00031)",
+          "Rick Walker (POP-00198)",
+          "Carmen Solis (POP-00953)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+        "label": "math-imbalance (high) | Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 1 cycles.",
+        "citizens": [
+          "Martin Richards (POP-00031)",
+          "Rick Walker (POP-00198)",
+          "Carmen Solis (POP-00953)"
+        ],
+        "popids": [
+          "POP-00031",
+          "POP-00198",
+          "POP-00953"
+        ],
+        "hood": "Fruitvale",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 61,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (high) | Grand Lake: decay [Sentiment -0.300, RetailVitality -2.12, HousingPressure +1.000] — Sentiment now 0.33 (12 of 22, city median 0.33); RetailVitality now 8.52 (7 of 22, city median 6.43); HousingPressure now 3 (16 of 22, city median 0) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[8]; evidence: Neighborhood_Map row(s) 10",
+      "hood": "Grand Lake",
+      "popids": [
+        "POP-00001",
+        "POP-00002",
+        "POP-01049"
+      ],
+      "handle": {
+        "angle": "civic gap in Grand Lake — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Grand Lake signal surfaced this cycle.",
+        "citizens": [
+          "Vinnie Keane (POP-00001)",
+          "Sarah Huang (POP-01049)",
+          "Amara Keane (POP-00002)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[8]; evidence: Neighborhood_Map row(s) 10",
+        "label": "math-imbalance (high) | Grand Lake: decay [Sentiment -0.300, RetailVitality -2.12, HousingPressure +1.000] — Sentiment now 0.33 (12 of 22, city median 0.33); RetailVitality now 8.52 (7 of 22, city median 6.43); HousingPressure now 3 (16 of 22, city median 0) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Grand Lake — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Grand Lake signal surfaced this cycle.",
+        "citizens": [
+          "Vinnie Keane (POP-00001)",
+          "Sarah Huang (POP-01049)",
+          "Amara Keane (POP-00002)"
+        ],
+        "popids": [
+          "POP-00001",
+          "POP-00002",
+          "POP-01049"
+        ],
+        "hood": "Grand Lake",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 61,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (high) | Jack London: decay [Sentiment -0.110, RetailVitality -1.07, HousingPressure +1.000] — Sentiment now 0.33 (11 of 22, city median 0.33); RetailVitality now 12.06 (1 of 22, city median 6.43); HousingPressure now 3.5 (17 of 22, city median 0) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[5]; evidence: Neighborhood_Map row(s) 7",
+      "hood": "Jack London",
+      "popids": [
+        "POP-00053",
+        "POP-00156",
+        "POP-01046"
+      ],
+      "handle": {
+        "angle": "civic gap in Jack London — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Jack London signal surfaced this cycle.",
+        "citizens": [
+          "Angela Reyes (POP-00156)",
+          "Kevin Clark (POP-00053)",
+          "Elliot Abraham (POP-01046)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[5]; evidence: Neighborhood_Map row(s) 7",
+        "label": "math-imbalance (high) | Jack London: decay [Sentiment -0.110, RetailVitality -1.07, HousingPressure +1.000] — Sentiment now 0.33 (11 of 22, city median 0.33); RetailVitality now 12.06 (1 of 22, city median 6.43); HousingPressure now 3.5 (17 of 22, city median 0) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Jack London — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Jack London signal surfaced this cycle.",
+        "citizens": [
+          "Angela Reyes (POP-00156)",
+          "Kevin Clark (POP-00053)",
+          "Elliot Abraham (POP-01046)"
+        ],
+        "popids": [
+          "POP-00053",
+          "POP-00156",
+          "POP-01046"
+        ],
+        "hood": "Jack London",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 61,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (high) | Uptown: decay [Sentiment -0.150, RetailVitality -1.26, HousingPressure +1.000] — Sentiment now 0.25 (20 of 22, city median 0.33); RetailVitality now 10.04 (4 of 22, city median 6.43); HousingPressure now 5 (22 of 22, city median 0) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[15]; evidence: Neighborhood_Map row(s) 21",
+      "hood": "Uptown",
+      "popids": [
+        "POP-00035",
+        "POP-00435",
+        "POP-00437"
+      ],
+      "handle": {
+        "angle": "civic gap in Uptown — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Uptown signal surfaced this cycle.",
+        "citizens": [
+          "Laila Cortez (POP-00035)",
+          "Driscoll Fester (POP-00435)",
+          "Amelia Kim (POP-00437)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[15]; evidence: Neighborhood_Map row(s) 21",
+        "label": "math-imbalance (high) | Uptown: decay [Sentiment -0.150, RetailVitality -1.26, HousingPressure +1.000] — Sentiment now 0.25 (20 of 22, city median 0.33); RetailVitality now 10.04 (4 of 22, city median 6.43); HousingPressure now 5 (22 of 22, city median 0) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Uptown — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Uptown signal surfaced this cycle.",
+        "citizens": [
+          "Laila Cortez (POP-00035)",
+          "Driscoll Fester (POP-00435)",
+          "Amelia Kim (POP-00437)"
+        ],
+        "popids": [
+          "POP-00035",
+          "POP-00435",
+          "POP-00437"
+        ],
+        "hood": "Uptown",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | Adams Point: decay [Sentiment -0.280, RetailVitality -1.38] — Sentiment now 0.37 (7 of 22, city median 0.33); RetailVitality now 4.96 (19 of 22, city median 6.43) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[7]; evidence: Neighborhood_Map row(s) 9",
+      "hood": "Adams Point",
+      "popids": [
+        "POP-00645",
+        "POP-00648",
+        "POP-00782"
+      ],
+      "handle": {
+        "angle": "civic gap in Adams Point — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Adams Point signal surfaced this cycle.",
+        "citizens": [
+          "Mart Johns (POP-00648)",
+          "Ezekiel Campbell (POP-00645)",
+          "Devon Willis (POP-00782)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[7]; evidence: Neighborhood_Map row(s) 9",
+        "label": "math-imbalance (medium) | Adams Point: decay [Sentiment -0.280, RetailVitality -1.38] — Sentiment now 0.37 (7 of 22, city median 0.33); RetailVitality now 4.96 (19 of 22, city median 6.43) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Adams Point — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Adams Point signal surfaced this cycle.",
+        "citizens": [
+          "Mart Johns (POP-00648)",
+          "Ezekiel Campbell (POP-00645)",
+          "Devon Willis (POP-00782)"
+        ],
+        "popids": [
+          "POP-00645",
+          "POP-00648",
+          "POP-00782"
+        ],
+        "hood": "Adams Point",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | Brooklyn: decay [Sentiment -0.240, RetailVitality -0.80] — Sentiment now 0.32 (13 of 22, city median 0.33); RetailVitality now 6.07 (12 of 22, city median 6.43) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[10]; evidence: Neighborhood_Map row(s) 13",
+      "hood": "Brooklyn",
+      "popids": [
+        "POP-01010",
+        "POP-01091",
+        "POP-01100"
+      ],
+      "handle": {
+        "angle": "civic gap in Brooklyn — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Brooklyn signal surfaced this cycle.",
+        "citizens": [
+          "Minh Raimon (POP-01010)",
+          "Mateo Nguyen (POP-01091)",
+          "Marco Davis (POP-01100)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[10]; evidence: Neighborhood_Map row(s) 13",
+        "label": "math-imbalance (medium) | Brooklyn: decay [Sentiment -0.240, RetailVitality -0.80] — Sentiment now 0.32 (13 of 22, city median 0.33); RetailVitality now 6.07 (12 of 22, city median 6.43) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Brooklyn — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Brooklyn signal surfaced this cycle.",
+        "citizens": [
+          "Minh Raimon (POP-01010)",
+          "Mateo Nguyen (POP-01091)",
+          "Marco Davis (POP-01100)"
+        ],
+        "popids": [
+          "POP-01010",
+          "POP-01091",
+          "POP-01100"
+        ],
+        "hood": "Brooklyn",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | Chinatown: decay [Sentiment -0.040, RetailVitality -2.07] — Sentiment now 0.29 (17 of 22, city median 0.33); RetailVitality now 7.54 (10 of 22, city median 6.43) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[9]; evidence: Neighborhood_Map row(s) 12",
+      "hood": "Chinatown",
+      "popids": [
+        "POP-00599",
+        "POP-00635",
+        "POP-00763"
+      ],
+      "handle": {
+        "angle": "civic gap in Chinatown — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Chinatown signal surfaced this cycle.",
+        "citizens": [
+          "Kenji Tanaka (POP-00763)",
+          "Jose Colon (POP-00599)",
+          "Mei Chen (POP-00635)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[9]; evidence: Neighborhood_Map row(s) 12",
+        "label": "math-imbalance (medium) | Chinatown: decay [Sentiment -0.040, RetailVitality -2.07] — Sentiment now 0.29 (17 of 22, city median 0.33); RetailVitality now 7.54 (10 of 22, city median 6.43) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Chinatown — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Chinatown signal surfaced this cycle.",
+        "citizens": [
+          "Kenji Tanaka (POP-00763)",
+          "Jose Colon (POP-00599)",
+          "Mei Chen (POP-00635)"
+        ],
+        "popids": [
+          "POP-00599",
+          "POP-00635",
+          "POP-00763"
+        ],
+        "hood": "Chinatown",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | Dimond: decay [Sentiment -0.390, RetailVitality -1.12] — Sentiment now 0.26 (19 of 22, city median 0.33); RetailVitality now 5.67 (16 of 22, city median 6.43) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[12]; evidence: Neighborhood_Map row(s) 16",
+      "hood": "Dimond",
+      "popids": [
+        "POP-01086",
+        "POP-01090",
+        "POP-01104"
+      ],
+      "handle": {
+        "angle": "civic gap in Dimond — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Dimond signal surfaced this cycle.",
+        "citizens": [
+          "Bruce Turner (POP-01086)",
+          "Elijah Walker (POP-01090)",
+          "Nala Okonkwo (POP-01104)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[12]; evidence: Neighborhood_Map row(s) 16",
+        "label": "math-imbalance (medium) | Dimond: decay [Sentiment -0.390, RetailVitality -1.12] — Sentiment now 0.26 (19 of 22, city median 0.33); RetailVitality now 5.67 (16 of 22, city median 6.43) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Dimond — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Dimond signal surfaced this cycle.",
+        "citizens": [
+          "Bruce Turner (POP-01086)",
+          "Elijah Walker (POP-01090)",
+          "Nala Okonkwo (POP-01104)"
+        ],
+        "popids": [
+          "POP-01086",
+          "POP-01090",
+          "POP-01104"
+        ],
+        "hood": "Dimond",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | Downtown: decay [RetailVitality -0.67, HousingPressure +1.000] — RetailVitality now 11.18 (2 of 22, city median 6.43); HousingPressure now 5 (19 of 22, city median 0); Sentiment now 0.33 (10 of 22, city median 0.33) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[2]; evidence: Neighborhood_Map row(s) 2",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00688",
+        "POP-00753",
+        "POP-01027"
+      ],
+      "handle": {
+        "angle": "civic gap in Downtown — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Downtown signal surfaced this cycle.",
+        "citizens": [
+          "Merkin Jumper (POP-00688)",
+          "Austin Reaves (POP-01027)",
+          "Eunice Marston (POP-00753)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[2]; evidence: Neighborhood_Map row(s) 2",
+        "label": "math-imbalance (medium) | Downtown: decay [RetailVitality -0.67, HousingPressure +1.000] — RetailVitality now 11.18 (2 of 22, city median 6.43); HousingPressure now 5 (19 of 22, city median 0); Sentiment now 0.33 (10 of 22, city median 0.33) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Downtown — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Downtown signal surfaced this cycle.",
+        "citizens": [
+          "Merkin Jumper (POP-00688)",
+          "Austin Reaves (POP-01027)",
+          "Eunice Marston (POP-00753)"
+        ],
+        "popids": [
+          "POP-00688",
+          "POP-00753",
+          "POP-01027"
+        ],
+        "hood": "Downtown",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | Glenview: decay [Sentiment -0.280, RetailVitality -0.59] — Sentiment now 0.38 (6 of 22, city median 0.33); RetailVitality now 4.02 (22 of 22, city median 6.43) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[11]; evidence: Neighborhood_Map row(s) 15",
+      "hood": "Glenview",
+      "popids": [
+        "POP-01089",
+        "POP-01102",
+        "POP-01121"
+      ],
+      "handle": {
+        "angle": "civic gap in Glenview — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Glenview signal surfaced this cycle.",
+        "citizens": [
+          "Jacob Perez (POP-01089)",
+          "Colin Perez (POP-01102)",
+          "Guadalupe Holloway (POP-01121)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[11]; evidence: Neighborhood_Map row(s) 15",
+        "label": "math-imbalance (medium) | Glenview: decay [Sentiment -0.280, RetailVitality -0.59] — Sentiment now 0.38 (6 of 22, city median 0.33); RetailVitality now 4.02 (22 of 22, city median 6.43) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Glenview — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Glenview signal surfaced this cycle.",
+        "citizens": [
+          "Jacob Perez (POP-01089)",
+          "Colin Perez (POP-01102)",
+          "Guadalupe Holloway (POP-01121)"
+        ],
+        "popids": [
+          "POP-01089",
+          "POP-01102",
+          "POP-01121"
+        ],
+        "hood": "Glenview",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | Ivy Hill: decay [Sentiment -0.320, RetailVitality -0.91] — Sentiment now 0.29 (18 of 22, city median 0.33); RetailVitality now 4.33 (21 of 22, city median 6.43) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[13]; evidence: Neighborhood_Map row(s) 17",
+      "hood": "Ivy Hill",
+      "popids": [
+        "POP-00784",
+        "POP-01101",
+        "POP-01116"
+      ],
+      "handle": {
+        "angle": "civic gap in Ivy Hill — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Ivy Hill signal surfaced this cycle.",
+        "citizens": [
+          "Darius Hill (POP-01116)",
+          "Isaac Martinez (POP-00784)",
+          "Mateo Baker (POP-01101)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[13]; evidence: Neighborhood_Map row(s) 17",
+        "label": "math-imbalance (medium) | Ivy Hill: decay [Sentiment -0.320, RetailVitality -0.91] — Sentiment now 0.29 (18 of 22, city median 0.33); RetailVitality now 4.33 (21 of 22, city median 6.43) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Ivy Hill — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Ivy Hill signal surfaced this cycle.",
+        "citizens": [
+          "Darius Hill (POP-01116)",
+          "Isaac Martinez (POP-00784)",
+          "Mateo Baker (POP-01101)"
+        ],
+        "popids": [
+          "POP-00784",
+          "POP-01101",
+          "POP-01116"
+        ],
+        "hood": "Ivy Hill",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | Rockridge: decay [Sentiment -0.160, HousingPressure +1.000] — Sentiment now 0.29 (16 of 22, city median 0.33); HousingPressure now 5 (21 of 22, city median 0) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[6]; evidence: Neighborhood_Map row(s) 8",
+      "hood": "Rockridge",
+      "popids": [
+        "POP-00037",
+        "POP-00210",
+        "POP-01021"
+      ],
+      "handle": {
+        "angle": "civic gap in Rockridge — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Rockridge signal surfaced this cycle.",
+        "citizens": [
+          "Depak Ying (POP-00210)",
+          "Vanessa Tran-Muñoz (POP-01021)",
+          "Brenda Okoro (POP-00037)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[6]; evidence: Neighborhood_Map row(s) 8",
+        "label": "math-imbalance (medium) | Rockridge: decay [Sentiment -0.160, HousingPressure +1.000] — Sentiment now 0.29 (16 of 22, city median 0.33); HousingPressure now 5 (21 of 22, city median 0) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Rockridge — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Rockridge signal surfaced this cycle.",
+        "citizens": [
+          "Depak Ying (POP-00210)",
+          "Vanessa Tran-Muñoz (POP-01021)",
+          "Brenda Okoro (POP-00037)"
+        ],
+        "popids": [
+          "POP-00037",
+          "POP-00210",
+          "POP-01021"
+        ],
+        "hood": "Rockridge",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | San Antonio: decay [Sentiment -0.230, RetailVitality -1.02] — Sentiment now 0.31 (15 of 22, city median 0.33); RetailVitality now 4.37 (20 of 22, city median 6.43) — with no matching active initiative",
+      "ref": "output/engine_audit_c108.json patterns[14]; evidence: Neighborhood_Map row(s) 18",
+      "hood": "San Antonio",
+      "popids": [
+        "POP-00778",
+        "POP-00796",
+        "POP-01054"
+      ],
+      "handle": {
+        "angle": "civic gap in San Antonio — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the San Antonio signal surfaced this cycle.",
+        "citizens": [
+          "Delia Vargas-Ruiz (POP-01054)",
+          "Jamal Thompson (POP-00778)",
+          "Dank Abara (POP-00796)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[14]; evidence: Neighborhood_Map row(s) 18",
+        "label": "math-imbalance (medium) | San Antonio: decay [Sentiment -0.230, RetailVitality -1.02] — Sentiment now 0.31 (15 of 22, city median 0.33); RetailVitality now 4.37 (20 of 22, city median 6.43) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in San Antonio — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the San Antonio signal surfaced this cycle.",
+        "citizens": [
+          "Delia Vargas-Ruiz (POP-01054)",
+          "Jamal Thompson (POP-00778)",
+          "Dank Abara (POP-00796)"
+        ],
+        "popids": [
+          "POP-00778",
+          "POP-00796",
+          "POP-01054"
+        ],
+        "hood": "San Antonio",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "crisis-unattended",
+      "score": 38,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "ref": "output/engine_audit_c108.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[1]; evidence: Riley_Digest row(s) ",
+        "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "crisis-unattended"
+      }
+    },
+    {
+      "className": "crisis-unattended",
+      "score": 38,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "repeating-event (medium) | Issue \"world\" (+ 6 co-occurring tokens) recurred 3 cycles",
+      "ref": "output/engine_audit_c108.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[0]; evidence: Riley_Digest row(s) ",
+        "label": "repeating-event (medium) | Issue \"world\" (+ 6 co-occurring tokens) recurred 3 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "crisis-unattended"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 33,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (low) | Temescal: decay [Sentiment -0.080, RetailVitality -1.03] — Sentiment now 0.38 (5 of 22, city median 0.33); RetailVitality now 5.02 (18 of 22, city median 6.43) — despite 1 active mitigator(s) [INIT-005]",
+      "ref": "output/engine_audit_c108.json patterns[3]; evidence: Neighborhood_Map row(s) 3",
+      "hood": "Temescal",
+      "popids": [
+        "POP-00498",
+        "POP-00516",
+        "POP-00595"
+      ],
+      "handle": {
+        "angle": "Temescal Community Health Center stalled in construction-active — remedy path + responsible office",
+        "hookLine": "The civic initiative carrying Temescal has not advanced in 5 cycles.",
+        "citizens": [
+          "Beatrix Santos (POP-00498)",
+          "Luis Mitchell (POP-00516)",
+          "Sarah Corliss (POP-00595)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[3]; evidence: Neighborhood_Map row(s) 3",
+        "label": "math-imbalance (low) | Temescal: decay [Sentiment -0.080, RetailVitality -1.03] — Sentiment now 0.38 (5 of 22, city median 0.33); RetailVitality now 5.02 (18 of 22, city median 6.43) — despite 1 active mitigator(s) [INIT-005]",
+        "kind": "anomaly",
+        "angle": "Temescal Community Health Center stalled in construction-active — remedy path + responsible office",
+        "hookLine": "The civic initiative carrying Temescal has not advanced in 5 cycles.",
+        "citizens": [
+          "Beatrix Santos (POP-00498)",
+          "Luis Mitchell (POP-00516)",
+          "Sarah Corliss (POP-00595)"
+        ],
+        "popids": [
+          "POP-00498",
+          "POP-00516",
+          "POP-00595"
+        ],
+        "hood": "Temescal",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 28,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "ref": "output/engine_audit_c108.json patterns[16]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[16]; evidence: WorldEvents_V3_Ledger row(s) ",
+        "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 28,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "production-imbalance (medium) | 19 neighborhoods report migration flow with zero economic events this cycle",
+      "ref": "output/engine_audit_c108.json patterns[17]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, East Oakland",
+      "popids": [
+        "POP-00212",
+        "POP-00541",
+        "POP-00764"
+      ],
+      "handle": {
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in 5 cycles.",
+        "citizens": [
+          "Tao Lee (POP-00764)",
+          "Jessie Hess (POP-00212)",
+          "Theo Burkes (POP-00541)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[17]; evidence: Neighborhood_Map row(s) ",
+        "label": "production-imbalance (medium) | 19 neighborhoods report migration flow with zero economic events this cycle",
+        "kind": "anomaly",
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in 5 cycles.",
+        "citizens": [
+          "Tao Lee (POP-00764)",
+          "Jessie Hess (POP-00212)",
+          "Theo Burkes (POP-00541)"
+        ],
+        "popids": [
+          "POP-00212",
+          "POP-00541",
+          "POP-00764"
+        ],
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, East Oakland",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Initiative \"Oakland Alternative Response Initiative\" advanced: implementation-active → dispatch-live",
+      "ref": "output/engine_audit_c108.json patterns[18]; evidence: Initiative_Tracker row(s) 3",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "popids": [
+        "POP-00789",
+        "POP-00891",
+        "POP-01113"
+      ],
+      "handle": {
+        "angle": "Oakland Alternative Response Initiative advanced from implementation-active to dispatch-live — what the milestone delivers and who carried it",
+        "hookLine": "Oakland Alternative Response Initiative advanced from implementation-active to dispatch-live; a milestone worth covering, not burying.",
+        "citizens": [
+          "Renée Cabrera (POP-00891)",
+          "Quinn Adeyemi (POP-01113)",
+          "Elias Varek (POP-00789)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[18]; evidence: Initiative_Tracker row(s) 3",
+        "label": "improvement (low) | Initiative \"Oakland Alternative Response Initiative\" advanced: implementation-active → dispatch-live",
+        "kind": "anomaly",
+        "angle": "Oakland Alternative Response Initiative advanced from implementation-active to dispatch-live — what the milestone delivers and who carried it",
+        "hookLine": "Oakland Alternative Response Initiative advanced from implementation-active to dispatch-live; a milestone worth covering, not burying.",
+        "citizens": [
+          "Renée Cabrera (POP-00891)",
+          "Quinn Adeyemi (POP-01113)",
+          "Elias Varek (POP-00789)"
+        ],
+        "popids": [
+          "POP-00789",
+          "POP-00891",
+          "POP-01113"
+        ],
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Remedy overshot expectation on Crime_Metrics.ViolentCrimeIndex: observed -7 (expected -0.05) — from prior \"incoherence\"",
+      "ref": "output/engine_audit_c108.json patterns[19]; evidence: Crime_Metrics row(s) ",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "popids": [
+        "POP-00023",
+        "POP-00722",
+        "POP-00961"
+      ],
+      "handle": {
+        "angle": "INIT-002 posted a positive, named-cause result — what the milestone delivers and who carried it",
+        "hookLine": "INIT-002 posted a positive, named-cause result; a milestone worth covering, not burying.",
+        "citizens": [
+          "Gregory Mims (POP-00023)",
+          "Daniel Cloak (POP-00722)",
+          "Darius Clark (POP-00961)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c108.json patterns[19]; evidence: Crime_Metrics row(s) ",
+        "label": "improvement (low) | Remedy overshot expectation on Crime_Metrics.ViolentCrimeIndex: observed -7 (expected -0.05) — from prior \"incoherence\"",
+        "kind": "anomaly",
+        "angle": "INIT-002 posted a positive, named-cause result — what the milestone delivers and who carried it",
+        "hookLine": "INIT-002 posted a positive, named-cause result; a milestone worth covering, not burying.",
+        "citizens": [
+          "Gregory Mims (POP-00023)",
+          "Daniel Cloak (POP-00722)",
+          "Darius Clark (POP-00961)"
+        ],
+        "popids": [
+          "POP-00023",
+          "POP-00722",
+          "POP-00961"
+        ],
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "stinkClass": "anomaly"
+      }
+    }
+  ],
+  "candidateCount": 20
+}

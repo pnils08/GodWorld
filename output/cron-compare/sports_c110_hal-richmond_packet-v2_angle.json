@@ -1,0 +1,522 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "110",
+  "persona": "hal-richmond",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00007",
+      "name": "Hal Richmond",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "What the supplied C110 line card establishes, and what history remains unsupplied.",
+      "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "sports-history",
+        "pulseClass": "era-door",
+        "bagModes": [
+          "1 Era Comparison",
+          "8 Legacy Guarantee Piece"
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "presentFacts": [
+          "Team record (feed): 11-3 · streak W3",
+          "Event (feed): A's — game-result (championship)",
+          "Cycle: C110"
+        ],
+        "dossierFacts": [
+          "Vinnie Keane TrueSource: 2041 REGULAR SEASON G: 37 PA: 130 AB: 127 R: 25 H: 40 2B: 8 3B: 1 HR: 13 RBI: 29 BB: 0 SO: 6 HBP: 0 SF: 3 SAC: 0 GIDP: 2 AVG: 0.315 OBP: 0.308 SLG: 0. | WAR: 1.1 | AWARDS (Career Reference) - MVP (2031) - 8x All-Star (2025, 2027, 2028, 2029, 2030, 2031,",
+          "Benji Dillon TrueSource: 2041 REGULAR SEASON — Games: 35 Games Started: 28 Wins: 10 Losses: 8 Saves: 1 Blown Saves: 0 Holds: 1 Innings Pitched: 150.1 Hits Allowed: 155 Runs Al | WAR: 2.2 | AWARDS (Career Reference) - Cy Young (2028, 2032, 2033, 2034, 2037) - Rookie of the Year (",
+          "Mark Aitken TrueSource: 2041 REGULAR SEASON G: 138 PA: 572 AB: 540 R: 84 H: 153 2B: 23 3B: 0 HR: 33 RBI: 87 BB: 25 SO: 65 HBP: 3 SF: 3 SAC: 1 GIDP: 7 AVG: 0.283 OBP: 0.317 SL | WAR: 3.2 | AWARDS (Career Reference) - Rookie of the Year (2032) - Gold Glove (2032, 2038, 2039) - Si",
+          "Eric Taveras TrueSource: FULL STAT TRUE SOURCE — BATTER Name: Eric Taveras Team: Athletics Position: 2B Jersey: #22 -------------------------------------------------- PROFILE Potential: A Overall: 93 MLB Service: 6.000 Age: 25 Bats: L Throws: R Height: 5'10\" Weight: 184 LBS Drafted: RND 1 (2033) Secondar"
+        ],
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ],
+        "closingNote": "elegy",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "sceneRule": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.",
+        "sourcePointers": [
+          "output/world_summary_c110.md ## Sports",
+          "docs/media/HAL_ARCHIVE_BAG.md",
+          "scripts/sportsSubstrate.js",
+          "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 5",
+          "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "Downtown",
+      "score": null,
+      "src": "world_summary_c110.md ## Sports",
+      "team": "A's",
+      "nearby": [
+        {
+          "text": "A's | game-result | (playoffs) | Henry Rivas, Danny Horn, Mark Aitken, Isley Kelley",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | John Ellis, Eric Taveras, Vinnie Keane, Benji Dillon",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Austin Reaves, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (championship) | Mike Paulson, Vinnie Keane, Benji Dillon, Mark Aitken, Eric Taveras, Pablo Almanzar, Arturo Ramos, Isley Kelley, Darrin Davis, Frank Reyna",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "A's — game-result — supplied C110 line card",
+        "src": "world_summary_c110.md ## Sports",
+        "id": "F-d62b233e951c"
+      },
+      {
+        "t": "FACT",
+        "text": "Team record (feed): 11-3 · streak W3",
+        "src": "world_summary_c110.md ## Sports",
+        "id": "F-62970aec24fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Event (feed): A's — game-result (championship)",
+        "src": "world_summary_c110.md ## Sports",
+        "id": "F-52fdc7048146"
+      },
+      {
+        "t": "FACT",
+        "text": "Cycle: C110",
+        "src": "world_summary_c110.md ## Sports",
+        "id": "F-e74abf375810"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007"
+  },
+  "assignment": {
+    "story": {
+      "angle": "What the supplied C110 line card establishes, and what history remains unsupplied.",
+      "label": "A's — game-result — supplied C110 line card",
+      "hookLine": "A's — game-result — supplied C110 line card",
+      "hood": "Downtown",
+      "pulseClass": "era-door",
+      "team": "A's",
+      "eventKind": "game-result",
+      "closingNote": "elegy",
+      "citizens": [
+        "Mike Paulson (POP-00527)",
+        "Vinnie Keane (POP-00001)",
+        "Benji Dillon (POP-00018)",
+        "Mark Aitken (POP-00003)",
+        "Eric Taveras (POP-00597)",
+        "Pablo Almanzar (POP-01078)",
+        "Arturo Ramos (POP-00025)",
+        "Isley Kelley (POP-00019)",
+        "Darrin Davis (POP-00021)",
+        "Frank Reyna (POP-00079)"
+      ],
+      "popids": [
+        "POP-00527",
+        "POP-00001",
+        "POP-00018",
+        "POP-00003",
+        "POP-00597",
+        "POP-01078",
+        "POP-00025",
+        "POP-00019",
+        "POP-00021",
+        "POP-00079"
+      ],
+      "ref": "world_summary_c110.md ## Sports",
+      "cycle": 110
+    },
+    "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": {
+    "pulse": {
+      "className": "era-door",
+      "score": 83,
+      "label": "A's — game-result — supplied C110 line card",
+      "team": "A's",
+      "eventKind": "game-result",
+      "seasonType": "championship",
+      "storyAngle": "A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon",
+      "hasStats": true,
+      "record": "11-3",
+      "streak": "W3",
+      "foilNumber": ".339AVG",
+      "closingNote": "elegy",
+      "feedCycle": 110
+    },
+    "bag": {
+      "modes": [
+        {
+          "id": 1,
+          "name": "Era Comparison"
+        },
+        {
+          "id": 8,
+          "name": "Legacy Guarantee Piece"
+        }
+      ],
+      "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+      "closingNote": "elegy",
+      "claim": "Present fact: .339AVG on the feed. Archive claim: place this against time — A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon Close toward elegy."
+    },
+    "prewrite": {
+      "reporter": "Hal Richmond",
+      "bagModes": [
+        {
+          "id": 1,
+          "name": "Era Comparison"
+        },
+        {
+          "id": 8,
+          "name": "Legacy Guarantee Piece"
+        }
+      ],
+      "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+      "presentFacts": [
+        "Team record (feed): 11-3 · streak W3",
+        "Event (feed): A's — game-result (championship)",
+        "Cycle: C110"
+      ],
+      "dossierFacts": [
+        "Vinnie Keane TrueSource: 2041 REGULAR SEASON G: 37 PA: 130 AB: 127 R: 25 H: 40 2B: 8 3B: 1 HR: 13 RBI: 29 BB: 0 SO: 6 HBP: 0 SF: 3 SAC: 0 GIDP: 2 AVG: 0.315 OBP: 0.308 SLG: 0. | WAR: 1.1 | AWARDS (Career Reference) - MVP (2031) - 8x All-Star (2025, 2027, 2028, 2029, 2030, 2031, ",
+        "Benji Dillon TrueSource: 2041 REGULAR SEASON — Games: 35 Games Started: 28 Wins: 10 Losses: 8 Saves: 1 Blown Saves: 0 Holds: 1 Innings Pitched: 150.1 Hits Allowed: 155 Runs Al | WAR: 2.2 | AWARDS (Career Reference) - Cy Young (2028, 2032, 2033, 2034, 2037) - Rookie of the Year (",
+        "Mark Aitken TrueSource: 2041 REGULAR SEASON G: 138 PA: 572 AB: 540 R: 84 H: 153 2B: 23 3B: 0 HR: 33 RBI: 87 BB: 25 SO: 65 HBP: 3 SF: 3 SAC: 1 GIDP: 7 AVG: 0.283 OBP: 0.317 SL | WAR: 3.2 | AWARDS (Career Reference) - Rookie of the Year (2032) - Gold Glove (2032, 2038, 2039) - Si",
+        "Eric Taveras TrueSource: FULL STAT TRUE SOURCE — BATTER Name: Eric Taveras Team: Athletics Position: 2B Jersey: #22 -------------------------------------------------- PROFILE Potential: A Overall: 93 MLB Service: 6.000 Age: 25 Bats: L Throws: R Height: 5'10\" Weight: 184 LBS Drafted: RND 1 (2033) Secondar"
+      ],
+      "closingNote": "elegy",
+      "priorFiling": "NONE — wall may still inject at wake",
+      "claim": "Present fact: .339AVG on the feed. Archive claim: place this against time — A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon Close toward elegy.",
+      "foilNumber": ".339AVG",
+      "missing": [
+        "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+        "No invented seasons or franchise history beyond packet + feed",
+        "No x-stats / barrel% / invented OPS+",
+        "Not a business-desk storefront assignment",
+        "Not P Slayer charge; not Anthony board architecture as spine"
+      ],
+      "hooks": [
+        {
+          "text": "Oaks struggling — L5. Fan frustration angle. What's going wrong?",
+          "angle": "conflict/tension coverage",
+          "hood": "Downtown"
+        }
+      ]
+    },
+    "friction": {
+      "a": "Present feed fact: A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon",
+      "b": "Wire copy / FO strategy / bleacher heat that skips time",
+      "frame": "Present first, then echo — end on elegy."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Mike Paulson",
+        "popid": "POP-00527",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      },
+      {
+        "name": "Vinnie Keane",
+        "popid": "POP-00001",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Grand Lake",
+        "why": "feed-names"
+      },
+      {
+        "name": "Benji Dillon",
+        "popid": "POP-00018",
+        "role": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "why": "feed-names"
+      },
+      {
+        "name": "Mark Aitken",
+        "popid": "POP-00003",
+        "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      },
+      {
+        "name": "Eric Taveras",
+        "popid": "POP-00597",
+        "role": "Second Baseman, Oakland A's",
+        "neighborhood": "Downtown",
+        "why": "feed-names"
+      },
+      {
+        "name": "Pablo Almanzar",
+        "popid": "POP-01078",
+        "role": "SP / Oakland A's",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      },
+      {
+        "name": "Arturo Ramos",
+        "popid": "POP-00025",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Laurel",
+        "why": "feed-names"
+      },
+      {
+        "name": "Isley Kelley",
+        "popid": "POP-00019",
+        "role": "Shortstop, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "why": "feed-names"
+      },
+      {
+        "name": "Darrin Davis",
+        "popid": "POP-00021",
+        "role": "Left Fielder, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "why": "feed-names"
+      },
+      {
+        "name": "Frank Reyna",
+        "popid": "POP-00079",
+        "role": "Right Fielder, Oakland A's",
+        "neighborhood": "Lake Merritt",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Downtown",
+      "record": "11-3",
+      "streak": "W3",
+      "colorRoom": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat."
+    },
+    "candidates": [
+      {
+        "score": 83,
+        "cycle": 110,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for bot",
+        "priorHits": 0
+      },
+      {
+        "score": 81,
+        "cycle": 110,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Er",
+        "priorHits": 0
+      },
+      {
+        "score": 77,
+        "cycle": 110,
+        "team": "Oaks",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless ",
+        "priorHits": 0
+      },
+      {
+        "score": 76,
+        "cycle": 108,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB ",
+        "priorHits": 0
+      },
+      {
+        "score": 75,
+        "cycle": 110,
+        "team": "Oaks",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bull",
+        "priorHits": 0
+      },
+      {
+        "score": 72,
+        "cycle": 109,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough.",
+        "priorHits": 0
+      }
+    ]
+  },
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "text": "I'm reflecting on the A's recent championship win, and how it's brought the community together. As someone who's been following the team for years, it's amazing to see the impact they have on the city. I'm thinking about the players, the coaches, and the fans - everyone who's been a part of this journey. I want to explore the story behind this win, and what it means for the team and the city moving forward.",
+    "plan": {
+      "chase": "I'm reflecting on the A's recent championship win, and how it's brought the community together. As someone who's been following the team for years, it's amazing to see the impact they have on the city. I'm thinking about the players, the coaches, and the fans - everyone who's been a part of this journey. I want to explore the story behind this win, and what it means for the team and the city moving forward.",
+      "focus": "The A's championship win and its impact on the community",
+      "why": "To understand the significance of the win and its effects on the team and the city",
+      "checks": [
+        "The team's performance",
+        "The fans' reactions",
+        "The city's response"
+      ],
+      "targets": [],
+      "interpretation": "The championship win is a testament to the team's hard work and dedication, and it has brought the community together in a way that's rare in sports",
+      "unverifiedLead": [
+        "The potential for a parade or celebration in the city",
+        "The impact on local businesses and economy"
+      ],
+      "closeQuestion": "What does this championship win mean for the future of the A's and the city?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | game-result | (playoffs) | Henry Rivas, Danny Horn, Mark Aitken, Isley Kelley",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00024",
+        "POP-00022",
+        "POP-00003",
+        "POP-00019"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | John Ellis, Eric Taveras, Vinnie Keane, Benji Dillon",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00033",
+        "POP-00597",
+        "POP-00001",
+        "POP-00018"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Austin Reaves, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01024",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "A's | game-result | (championship) | Mike Paulson, Vinnie Keane, Benji Dillon, Mark Aitken, Eric Taveras, Pablo Almanzar, Arturo Ramos, Isley Kelley, Darrin Davis, Frank Reyna",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527",
+        "POP-00001",
+        "POP-00018",
+        "POP-00003",
+        "POP-00597",
+        "POP-01078",
+        "POP-00025",
+        "POP-00019",
+        "POP-00021",
+        "POP-00079"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "ranAt": "2026-10-08T11:16:25.205Z"
+}

@@ -1,0 +1,17 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 106,
+  "primaryVoice": "Mayor gavel (mayor_gavel-004)",
+  "consolidatedFrom": [
+    "STMT-106-health_center-001 (Chen-Ramirez — construction_milestone)",
+    "STMT-106-mayor_gavel-004 (Mayor gavel — Temescal Community Health Center Interior Framing and Inspections)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "ImplementationPhase": "construction-active",
+    "MilestoneNotes": "C106: Interior wall framing and utility inspections authorized; MEP rough-ins advancing with second shift",
+    "NextScheduledAction": "Utility inspections and interior systems rough-in completion",
+    "NextActionCycle": 107
+  }
+}

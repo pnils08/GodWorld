@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "693909235454e32b33aa5d6610565bf3ab96c5d0ef455fb1ce60498affacb5f1",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft verified cleanly against C108 sports feed and proven quotes; positions, stats, and citizen bios are fully canonical.",
+  "review": {
+    "profileId": "selena-grant-oaks-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "packageVersion": "SELENA-OAKS-1",
+    "manifestId": "AM-9237e5e25882",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Austin Reaves",
+      "Trenton Nawan",
+      "Wilson Shepard"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 5901,
+  "parseError": false,
+  "ranAt": "2026-09-22T23:18:17.007Z"
+}

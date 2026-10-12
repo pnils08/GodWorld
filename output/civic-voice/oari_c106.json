@@ -1,0 +1,24 @@
+{
+  "office": "oari",
+  "cycle": 106,
+  "speaker": "Dr. Vanessa Tran-Muñoz",
+  "cascadeSummary": "Published District 1 operational dispatch log and inter-agency coordination report reconciling response coverage with elevated CrimeIndex metrics. Finalized Fruitvale and East Oakland expansion timelines based on D1 operational data, ensuring community-informed deployment.",
+  "statements": [
+    {
+      "statementId": "STMT-106-oari-001",
+      "type": "operational_status",
+      "topic": "District 1 Expansion Evaluation",
+      "initiative": "INIT-002",
+      "decision": "Published District 1 operational dispatch log and inter-agency coordination report",
+      "quote": "When we meet crisis with care instead of cuffs, our communities get safer faster.",
+      "fullStatement": "District 1's first expansion-month evaluation shows our teams meeting crisis with care exactly where it's needed most—bilingual responders, evening and weekend coverage, and protocols built with community input are proving that crisis response can be both compassionate and effective. Fruitvale and D5 implementations will build on this evidence-based model.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "pilot_evaluation",
+        "MilestoneNotes": "C106: Published District 1 operational dispatch log and inter-agency coordination report",
+        "NextScheduledAction": "Finalize Fruitvale and East Oakland expansion timelines",
+        "NextActionCycle": 107
+      }
+    }
+  ]
+}

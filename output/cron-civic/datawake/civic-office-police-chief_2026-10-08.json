@@ -1,0 +1,26 @@
+{
+  "office": "police_chief",
+  "agentDir": "civic-office-police-chief",
+  "holder": "Rafael Montez",
+  "popid": "POP-00136",
+  "title": "Police Chief",
+  "date": "2026-10-08",
+  "cycle": 110,
+  "model": "deepseek/deepseek-chat",
+  "statement": "The Oakland Police Department has completed its patrol coordination plan aligning shift coverage with expanding OARI teams in East and West Oakland. Deployment thresholds ensure operational clarity between sworn patrol and alternative responders in these higher-need districts. Call transfer protocols remain focused on minimizing response gaps while directing behavioral health calls to the most appropriate responders. These adjustments stem from crime index data and neighborhood-specific resource balancing, not political considerations.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-105-civic-office-police-chief",
+        "text": "OPD has instituted updated patrol coordination aligning shift coverage with expanding OARI teams in East and West Oakland. Call transfer thresholds prevent gaps between sworn patrol and alternative responders. Deployment adjustments derive from crime index data and neighborhood-specific resource balancing.",
+        "directiveCycle": 105,
+        "confrontationSeat": "civic-office-police-chief"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-08T10:45:32.333Z",
+  "fellBackFrom": null
+}

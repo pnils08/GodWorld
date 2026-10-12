@@ -1,0 +1,48 @@
+{
+  "office": "council_d1",
+  "cycle": 111,
+  "speaker": "Denise Carter",
+  "cascadeSummary": "This cycle, I ensured the Stabilization Fund delivers tangible relief to West Oakland families facing displacement, accelerated apprenticeship placements to meet our spring target, and filed the Tenant Defense Fund to provide immediate legal support. My focus remains on keeping families rooted in their neighborhoods and creating pathways for youth success.",
+  "statements": [
+    {
+      "statementId": "STMT-111-council_d1-001",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund",
+      "initiative": "INIT-001",
+      "decision": "Month-ten disbursement approved",
+      "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+      "fullStatement": "The month-ten disbursement of $400,000 has been approved to ensure West Oakland families facing displacement receive immediate relief. This fund is critical in keeping our community intact, especially as housing pressures continue to mount. We cannot afford to lose our neighbors to rising costs—this disbursement is a lifeline for those on the brink.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d1-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline",
+      "initiative": "INIT-007",
+      "decision": "Accelerate cohort placements to meet spring target",
+      "quote": "150 apprentices placed by spring—that's the target, and we're accelerating to hit it.",
+      "fullStatement": "The Oakland Youth Apprenticeship Pipeline is crucial for providing opportunities to our young residents. With Cohort Placement Review due this cycle, I am committed to meeting our target of 150 apprentices by spring. This initiative is not just about numbers—it's about building futures and ensuring our youth have the tools they need to succeed.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d1-003",
+      "type": "vote_statement",
+      "topic": "West Oakland Tenant Defense Fund",
+      "initiative": "INIT-010",
+      "decision": "Legislation filed",
+      "quote": "Displacement doesn't wait for process—$4.2 million for legal defense is filed and moving.",
+      "fullStatement": "The West Oakland Tenant Defense Fund has officially been filed this cycle. This $4.2 million fund will provide critical legal aid and rapid response support to families facing eviction notices. Displacement is a crisis that demands immediate action—this fund ensures our neighbors can fight to stay in their homes.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d1-004",
+      "type": "vote_statement",
+      "topic": "District Crisis and Credit",
+      "initiative": null,
+      "decision": "Brooklyn’s vitality comes from its community",
+      "quote": "Brooklyn’s vitality comes from its people—not City Hall’s policies.",
+      "fullStatement": "Brooklyn's upbeat mood and steady street trade are a testament to the resilience and strength of its community. While City Hall plays a role, it is the people of Brooklyn who drive its success. Similarly, West Oakland's stability is a result of local efforts—the Stabilization Fund and Tenant Defense Fund are critical tools in supporting our neighborhoods.",
+      "trackerUpdates": {}
+    }
+  ]
+}

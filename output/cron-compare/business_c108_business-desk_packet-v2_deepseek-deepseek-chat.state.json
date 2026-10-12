@@ -1,0 +1,638 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00153",
+    "name": "Jordan Velez",
+    "role": "desk reporter",
+    "desk": "business"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Baylight District businesses: Baylight Construction Authority, Anthropic, DigitalOcean — the people who work there",
+    "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "economic-storefront",
+      "hood": "Baylight District",
+      "pulseClass": "hood-businesses",
+      "economicFrame": "Baylight District businesses: Baylight Construction Authority, Anthropic, DigitalOcean — the people who work there",
+      "hook": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 8 named workers at 2 named businesses in Baylight District on the ledger this cycle.",
+      "namedBusinesses": [
+        "Baylight Construction Authority",
+        "Anthropic",
+        "DigitalOcean",
+        "Discord",
+        "Civis Systems Field \"The Town\""
+      ],
+      "workplaces": [
+        "Baylight Construction Authority — Construction — Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead)",
+        "Anthropic — AI Research — Broderick Mitchell (Security guard); Jett Walker (Plumber); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic))",
+        "DigitalOcean — Cloud Infrastructure — no roster names",
+        "Discord — Community Platform — no roster names",
+        "Civis Systems Field \"The Town\" — As Stadium — no roster names"
+      ],
+      "engineColour": [
+        "Derek Simmons — kept running into Rick Nelson this week — the neighborhood kind of coincidence",
+        "Tomas Aguilar — overheard coworkers talking about last night's scene",
+        "Vincent Cho — washed hands a beat longer after the health talk going around",
+        "Celo Patel — told the story of their first A's game again, and nobody minded",
+        "Jia Pena — watched the kids on the corner re-enact the play twice, arguing the call both times",
+        "Akua Ortiz — noticed another new spot opening up in Temescal"
+      ],
+      "roomIsYours": "the counter, the hiring board, the back office, what the owner is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Baylight District",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+    "plan": {
+      "focus": "Baylight District businesses: Baylight Construction Authority and Anthropic, their growth, and the people working there.",
+      "closeQuestion": "What does this growth mean for the future of Baylight District?"
+    },
+    "openThreads": [
+      {
+        "slug": "city-civis-systems-recalibration",
+        "label": "city-civis-systems-recalibration | C108→C108 | 0 article(s) | opened 1",
+        "hood": null,
+        "popids": [
+          "POP-00789"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "temescal-ariana-reyes-story-signal",
+        "label": "temescal-ariana-reyes-story-signal | C107→C107 | 1 article(s) | opened 1",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00133",
+          "POP-00347",
+          "POP-00781",
+          "POP-00792"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "temescal-ariana-reyes-hood-businesses",
+        "label": "temescal-ariana-reyes-hood-businesses | C107→C107 | 1 article(s) | opened 1",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00133",
+          "POP-00781",
+          "POP-00347"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "west-oakland-toby-lamont-story-signal",
+        "label": "west-oakland-toby-lamont-story-signal | C106→C106 | 1 article(s) | opened 1",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00183"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "west-oakland-toby-lamont-hood-businesses",
+        "label": "west-oakland-toby-lamont-hood-businesses | C106→C106 | 1 article(s) | opened 1",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00183",
+          "POP-00184",
+          "POP-00188"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "rockridge-depak-ying-story-signal",
+        "label": "rockridge-depak-ying-story-signal | C105→C105 | 1 article(s) | opened 1",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "rockridge-depak-ying-hood-rising",
+        "label": "rockridge-depak-ying-hood-rising | C105→C105 | 1 article(s) | advanced 1",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "grand-lake-vinnie-keane-retail-decay",
+        "label": "grand-lake-vinnie-keane-retail-decay | C104→C104 | 1 article(s) | opened 1",
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00001",
+          "POP-00002",
+          "POP-00170"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "grand-lake-amara-keane-retail-decay",
+        "label": "grand-lake-amara-keane-retail-decay | C104→C104 | 1 article(s) | opened 1",
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00002",
+          "POP-00170",
+          "POP-00198"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "dimond-clarence-moody-hood-cooling",
+        "label": "dimond-clarence-moody-hood-cooling | C103→C103 | 1 article(s) | opened 1 | DORMANT — 5 cycle(s) since coverage",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00730",
+          "POP-00170",
+          "POP-00201"
+        ],
+        "lastCycle": 103
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00041",
+        "name": "Keisha Ramos",
+        "profile": "Keisha Ramos — Director, Baylight Redevelopment Authority — Baylight Construction Authority, Baylight District",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00134",
+        "name": "Brianna Lee",
+        "profile": "Brianna Lee — Historic Preservation Carpenter — Baylight Construction Authority, Baylight District",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00174",
+        "name": "Tariq Jello",
+        "profile": "Tariq Jello — Appliance Repair Technician — Baylight Construction Authority, Baylight District",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00481",
+        "name": "Kelvon Ochoa",
+        "profile": "Kelvon Ochoa — AI Safety Researcher (Anthropic) — Anthropic, Baylight District",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00481-10b0afe9fe",
+        "pop": "POP-00481",
+        "name": "Kelvon Ochoa",
+        "quote": "Working at Anthropic, I've seen the company grow steadily, but what stands out is how it's become part of the neighborhood's rhythm. You see more familiar faces at the coffee shops in the morning—colleagues grabbing their caffeine before heading in. There's a quiet pride in being part of something that's both local and global in impact. The Construction Authority's work is more visible, of course—you can't miss the scaffolding and new facades—but both businesses feel like they're putting down roots here.",
+        "factIds": [
+          "F-cdb2e8fd12b3",
+          "F-a924e1951f17"
+        ],
+        "src": "packet.W2[POP-00481]"
+      },
+      {
+        "id": "Q-POP-00134-f800b6fddf",
+        "pop": "POP-00134",
+        "name": "Brianna Lee",
+        "quote": "You know, working at Baylight Construction Authority, I see the growth firsthand—not just in the numbers, but in the way the neighborhood feels. More people stopping by the coffee shops before heading to work, more faces I don't recognize but nod to anyway. There's a buzz, especially around Anthropic—folks in tech wear walking alongside us in hardhats. It's not just buildings going up; it's the kind of energy that makes you feel like the district's alive, you know?",
+        "factIds": [
+          "F-a924e1951f17",
+          "F-cdb2e8fd12b3"
+        ],
+        "src": "packet.W2[POP-00134]"
+      },
+      {
+        "id": "Q-POP-00174-d4e5dae2a9",
+        "pop": "POP-00174",
+        "name": "Tariq Jello",
+        "quote": "You know, working over at Baylight Construction Authority, I see those Anthropic folks coming and going. They've got that new building going up near the old rail yard - sleek thing, all glass and steel. Different crowd than us blue-collar types, but they keep our coffee shops busy. Funny how the neighborhood's changing - still got the same old problems with the plumbing though, no matter how fancy the offices get.",
+        "factIds": [
+          "F-a924e1951f17",
+          "F-cdb2e8fd12b3"
+        ],
+        "src": "packet.W2[POP-00174]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Are there any challenges or tensions emerging from this rapid growth?",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "How are local residents responding to the changes in the district?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C108",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-78217e633afa"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight District businesses · Baylight Construction Authority, Anthropic",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "id": "F-2051f25f7f2c"
+    },
+    {
+      "t": "FACT",
+      "text": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 8 named workers at 2 named businesses in Baylight District on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "id": "F-b80c89f56f88"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight Construction Authority · Construction · 451 employees · growth 6% · revenue $31.2M (+$36k vs C107) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +46 more",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "id": "F-a924e1951f17"
+    },
+    {
+      "t": "FACT",
+      "text": "Anthropic · AI Research · 86 employees · growth 7.8% · revenue $645.7M (+$966k vs C107) · on the roster: Broderick Mitchell (Security guard); Jett Walker (Plumber); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)) +8 more",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "id": "F-cdb2e8fd12b3"
+    },
+    {
+      "t": "FACT",
+      "text": "DigitalOcean · Cloud Infrastructure · 800 employees · growth 8.7% · revenue $516.8M (+$861k vs C107)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "id": "F-7e3f4edc2e5c"
+    },
+    {
+      "t": "FACT",
+      "text": "Discord · Community Platform · 350 employees · growth 9.7% · revenue $226.2M (+$423k vs C107)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "id": "F-41b3ef8d02ee"
+    },
+    {
+      "t": "FACT",
+      "text": "Civis Systems Field \"The Town\" · As Stadium · 110 employees · growth 8.7% · revenue $19.4M (+$32k vs C107)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "id": "F-5858a6896ef0"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Jack London): citizens Derek Simmons; Tomas Aguilar; Vincent Cho; Celo Patel · businesses Port of Oakland; Blue Lantern Bar",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+      "id": "F-209db194b7f0"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+      "id": "F-e7e329343d01"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Ravi O'Connell — sports wager, staked $263, settled for $434",
+      "src": "output/beats/Casino_Ledger.jsonl @C108",
+      "id": "F-6827d705fc2e"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Derlik Green — undocked wager, staked $510, settled for $0",
+      "src": "output/beats/Casino_Ledger.jsonl @C108",
+      "id": "F-c54a5977da6e"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Joseph Cramp — undocked wager, staked $503, settled for $0",
+      "src": "output/beats/Casino_Ledger.jsonl @C108",
+      "id": "F-5eddc461229e"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Rico Fister — undocked wager, staked $449, settled for $0",
+      "src": "output/beats/Casino_Ledger.jsonl @C108",
+      "id": "F-a1acf98bcc17"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Lila Bennington — sports wager, staked $445, settled for $734",
+      "src": "output/beats/Casino_Ledger.jsonl @C108",
+      "id": "F-130e9cd4e145"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: the house float stands at $243k",
+      "src": "output/beats/Casino_Ledger.jsonl @C108",
+      "id": "F-955e60b693d4"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "grounded third-person economics and labor reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
+      "closing": "an unresolved beneficiary, contract, labor, or livelihood question grounded in the supplied record"
+    },
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "canonBlockers": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-46830d57ab6d",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-78217e633afa",
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-2051f25f7f2c",
+        "t": "FACT",
+        "text": "Baylight District businesses · Baylight Construction Authority, Anthropic",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+      },
+      {
+        "id": "F-b80c89f56f88",
+        "t": "FACT",
+        "text": "Keisha Ramos, Director, Baylight Redevelopment Authority at Baylight Construction Authority. 8 named workers at 2 named businesses in Baylight District on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+      },
+      {
+        "id": "F-a924e1951f17",
+        "t": "FACT",
+        "text": "Baylight Construction Authority · Construction · 451 employees · growth 6% · revenue $31.2M (+$36k vs C107) · on the roster: Keisha Ramos (Director, Baylight Redevelopment Authority); Brianna Lee (Historic Preservation Carpenter); Tariq Jello (Appliance Repair Technician); Talmon Lint (Solar Panel Installation Lead) +46 more",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+      },
+      {
+        "id": "F-cdb2e8fd12b3",
+        "t": "FACT",
+        "text": "Anthropic · AI Research · 86 employees · growth 7.8% · revenue $645.7M (+$966k vs C107) · on the roster: Broderick Mitchell (Security guard); Jett Walker (Plumber); Kelvon Ochoa (AI Safety Researcher (Anthropic)); Iggy Davis (AI Safety Researcher (Anthropic)) +8 more",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+      },
+      {
+        "id": "F-7e3f4edc2e5c",
+        "t": "FACT",
+        "text": "DigitalOcean · Cloud Infrastructure · 800 employees · growth 8.7% · revenue $516.8M (+$861k vs C107)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+      },
+      {
+        "id": "F-41b3ef8d02ee",
+        "t": "FACT",
+        "text": "Discord · Community Platform · 350 employees · growth 9.7% · revenue $226.2M (+$423k vs C107)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+      },
+      {
+        "id": "F-5858a6896ef0",
+        "t": "FACT",
+        "text": "Civis Systems Field \"The Town\" · As Stadium · 110 employees · growth 8.7% · revenue $19.4M (+$32k vs C107)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+      },
+      {
+        "id": "F-209db194b7f0",
+        "t": "FACT",
+        "text": "ENGINE SEED (Jack London): citizens Derek Simmons; Tomas Aguilar; Vincent Cho; Celo Patel · businesses Port of Oakland; Blue Lantern Bar",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+      },
+      {
+        "id": "F-e7e329343d01",
+        "t": "FACT",
+        "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+      },
+      {
+        "id": "F-6827d705fc2e",
+        "t": "FACT",
+        "text": "CASINO: Ravi O'Connell — sports wager, staked $263, settled for $434",
+        "src": "output/beats/Casino_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-c54a5977da6e",
+        "t": "FACT",
+        "text": "CASINO: Derlik Green — undocked wager, staked $510, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-5eddc461229e",
+        "t": "FACT",
+        "text": "CASINO: Joseph Cramp — undocked wager, staked $503, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-a1acf98bcc17",
+        "t": "FACT",
+        "text": "CASINO: Rico Fister — undocked wager, staked $449, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-130e9cd4e145",
+        "t": "FACT",
+        "text": "CASINO: Lila Bennington — sports wager, staked $445, settled for $734",
+        "src": "output/beats/Casino_Ledger.jsonl @C108"
+      },
+      {
+        "id": "F-955e60b693d4",
+        "t": "FACT",
+        "text": "CASINO: the house float stands at $243k",
+        "src": "output/beats/Casino_Ledger.jsonl @C108"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00481-10b0afe9fe",
+        "speakerId": "POP-00481",
+        "speakerName": "Kelvon Ochoa",
+        "text": "Working at Anthropic, I've seen the company grow steadily, but what stands out is how it's become part of the neighborhood's rhythm. You see more familiar faces at the coffee shops in the morning—colleagues grabbing their caffeine before heading in. There's a quiet pride in being part of something that's both local and global in impact. The Construction Authority's work is more visible, of course—you can't miss the scaffolding and new facades—but both businesses feel like they're putting down roots here.",
+        "factIds": [
+          "F-cdb2e8fd12b3",
+          "F-a924e1951f17"
+        ],
+        "src": "packet.W2[POP-00481]"
+      },
+      {
+        "id": "Q-POP-00134-f800b6fddf",
+        "speakerId": "POP-00134",
+        "speakerName": "Brianna Lee",
+        "text": "You know, working at Baylight Construction Authority, I see the growth firsthand—not just in the numbers, but in the way the neighborhood feels. More people stopping by the coffee shops before heading to work, more faces I don't recognize but nod to anyway. There's a buzz, especially around Anthropic—folks in tech wear walking alongside us in hardhats. It's not just buildings going up; it's the kind of energy that makes you feel like the district's alive, you know?",
+        "factIds": [
+          "F-a924e1951f17",
+          "F-cdb2e8fd12b3"
+        ],
+        "src": "packet.W2[POP-00134]"
+      },
+      {
+        "id": "Q-POP-00174-d4e5dae2a9",
+        "speakerId": "POP-00174",
+        "speakerName": "Tariq Jello",
+        "text": "You know, working over at Baylight Construction Authority, I see those Anthropic folks coming and going. They've got that new building going up near the old rail yard - sleek thing, all glass and steel. Different crowd than us blue-collar types, but they keep our coffee shops busy. Funny how the neighborhood's changing - still got the same old problems with the plumbing though, no matter how fancy the offices get.",
+        "factIds": [
+          "F-a924e1951f17",
+          "F-cdb2e8fd12b3"
+        ],
+        "src": "packet.W2[POP-00174]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00041",
+        "name": "Keisha Ramos",
+        "profile": "Keisha Ramos — Director, Baylight Redevelopment Authority — Baylight Construction Authority, Baylight District",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      },
+      {
+        "id": "POP-00134",
+        "name": "Brianna Lee",
+        "profile": "Brianna Lee — Historic Preservation Carpenter — Baylight Construction Authority, Baylight District",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00174",
+        "name": "Tariq Jello",
+        "profile": "Tariq Jello — Appliance Repair Technician — Baylight Construction Authority, Baylight District",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00481",
+        "name": "Kelvon Ochoa",
+        "profile": "Kelvon Ochoa — AI Safety Researcher (Anthropic) — Anthropic, Baylight District",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Are there any challenges or tensions emerging from this rapid growth?",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "How are local residents responding to the changes in the district?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "forbiddenClaimClasses": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  }
+}

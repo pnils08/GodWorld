@@ -22,6 +22,12 @@ Cycle **C106** · kind `food-workplaces` · hood **Jack London**
 - **Dockhouse BBQ** — Restaurant & Dining · 2 employees · growth 5%
   - _no roster names — the staff here are yours to paint_
 
+_Movement: NO_PRIOR_CYCLE — the prior dump rotation starts next cycle._
+
+## ENGINE HOOKS (colour, not fact)
+- Unemployment in Temescal up 14%. Economic stress story. Who's affected and why? (baseline context piece)
+- High concentration of ambitious, driven personalities. Career competition and economic hustle stories. (baseline context piece)
+
 ## ENGINE SEEDS (this cycle, business desk)
 - Jack London · carrying, 6.40 strength left of 3-cycle run
   - citizens: Mei-Lin Kang; Quynh Le; Ileana Vasquez; Anna Baker
@@ -53,6 +59,7 @@ picked **Jack London** (least recently covered). Pool: Jack London (2 staffed, n
 - output/beats/Business_Ledger.jsonl (176 rows @C106)
 - output/beats/Employment_Roster.jsonl (859 rows)
 - output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 2)
+- output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 2)
 - output/desk_signal_c106.json lanes.business (pointers only)
 - docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2
 

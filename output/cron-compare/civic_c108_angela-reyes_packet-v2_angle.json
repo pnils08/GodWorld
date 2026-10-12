@@ -1,0 +1,575 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "angela-reyes",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00156",
+      "name": "Angela Reyes",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Enrollment moved in Fruitvale — Rockridge has the strongest school record on the table (index 8.94) — the students and teachers who live it",
+      "approach": "Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "schools",
+        "hood": "Rockridge",
+        "facts": [
+          "Enrollment moved: Fruitvale +11 students, Glenview +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students, Laurel +9 students vs C107",
+          "Ranked by school quality index: Rockridge 8.94, Baylight District 8.04, Brooklyn 8.03, West Oakland 8.03, Piedmont Ave 8.03, Laurel 7.99, Adams Point 7.99, Jack London 7.99, Fruitvale 7.98, Downtown 7.96, Lake Merritt 7.96, Grand Lake 7.95, Uptown 7.92, Eastlake 6.99, Glenview 6.98, Dimond 6.98, Chinatown 6.98, KONO 6.98, San Antonio 6.96, Ivy Hill 6.96, East Oakland 6.95, Temescal 6.9 (22 neighborhoods)",
+          "Rockridge: school quality index 8.94 (was 9 at C107), graduation 94.97%, college-ready 77.73%, teacher quality 9.02, funding 15,000, 237 students",
+          "Temescal: school quality index 6.9 (was 7 at C107), graduation 85.85%, college-ready 57.5%, teacher quality 6.98, funding 11,500, 303 students",
+          "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.66%; per-hood funding on the table totals 286,000"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "Lake Merritt's student population up 15%. Young families moving in? School capacity angle. (general coverage)"
+        ],
+        "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-schools",
+      "hood": "Rockridge",
+      "score": null,
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C108",
+      "nearby": [
+        {
+          "text": "Rose Delgado (City Council District 3): We're setting the stage for Fruitvale's future—this cohort is our promise in action.",
+          "src": "output/cron-civic/datawake/civic-office-council-d3_2026-09-22.json"
+        },
+        {
+          "text": "Ramon Vega (City Council District 4): Given the current conditions in my district, I will prioritize addressing the pressing concerns of m",
+          "src": "output/cron-civic/datawake/civic-office-council-d4_2026-09-22.json"
+        },
+        {
+          "text": "Janae Rivers (City Council District 5): First training cohort placement review isn't just about hitting targets—it's about lives transformed",
+          "src": "output/cron-civic/datawake/civic-office-council-d5_2026-09-22.json"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"world\" (+ 6 co-occurring tokens) recurred 3 cycles",
+          "src": "output/engine_audit_c108.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+          "src": "output/engine_audit_c108.json patterns[1]; evidence: Riley_Digest row(s)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01036",
+          "name": "Mei Wong",
+          "profile": "Mei Wong — After-school program aide — Rockridge",
+          "why": "on the ledger in Rockridge (Simulation_Ledger)",
+          "role": "After-school program aide",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-00742",
+          "name": "Maya Torres-Dillon",
+          "profile": "Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher — Rockridge",
+          "why": "on the ledger in Rockridge (Simulation_Ledger)",
+          "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-00743",
+          "name": "Rick Dillon",
+          "profile": "Rick Dillon — Grade Schooler — Rockridge",
+          "why": "on the ledger in Rockridge (Simulation_Ledger)",
+          "role": "Grade Schooler",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-00305",
+          "name": "Rico Fister",
+          "profile": "Rico Fister — High School Science Teacher — Rockridge",
+          "why": "on the ledger in Rockridge (Simulation_Ledger)",
+          "role": "High School Science Teacher",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-00312",
+          "name": "Wiu Wiu",
+          "profile": "Wiu Wiu — High School Science Teacher — Rockridge",
+          "why": "on the ledger in Rockridge (Simulation_Ledger)",
+          "role": "High School Science Teacher",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-01096",
+          "name": "Priyanka Raman",
+          "profile": "Priyanka Raman — Principal, Oakland Tech Collective — Rockridge",
+          "why": "on the ledger in Rockridge (Simulation_Ledger)",
+          "role": "Principal, Oakland Tech Collective",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-00827",
+          "name": "Gloria Liu",
+          "profile": "Gloria Liu — School Principal — Rockridge",
+          "why": "on the ledger in Rockridge (Simulation_Ledger)",
+          "role": "School Principal",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-00287",
+          "name": "Simone Adesanya",
+          "profile": "Simone Adesanya — School Principal — Rockridge",
+          "why": "on the ledger in Rockridge (Simulation_Ledger)",
+          "role": "School Principal",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-01001",
+          "name": "Mateo Jilner",
+          "profile": "Mateo Jilner — student — Rockridge",
+          "why": "on the ledger in Rockridge (Simulation_Ledger)",
+          "role": "student",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-01012",
+          "name": "Mateo Wally",
+          "profile": "Mateo Wally — student — Rockridge",
+          "why": "on the ledger in Rockridge (Simulation_Ledger)",
+          "role": "student",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-01018",
+          "name": "Salma Campbell",
+          "profile": "Salma Campbell — student — Rockridge",
+          "why": "on the ledger in Rockridge (Simulation_Ledger)",
+          "role": "student",
+          "hood": "Rockridge"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-78217e633afa"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge has the strongest school record on the table (index 8.94)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C108",
+        "id": "F-fe4f1d4040aa"
+      },
+      {
+        "t": "FACT",
+        "text": "11 students and educators in Rockridge; the table says why their school reads the way it does.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C108",
+        "id": "F-5f9e9fbbd84a"
+      },
+      {
+        "t": "FACT",
+        "text": "Enrollment moved: Fruitvale +11 students, Glenview +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students, Laurel +9 students vs C107",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108",
+        "id": "F-a60994015e6f"
+      },
+      {
+        "t": "FACT",
+        "text": "Ranked by school quality index: Rockridge 8.94, Baylight District 8.04, Brooklyn 8.03, West Oakland 8.03, Piedmont Ave 8.03, Laurel 7.99, Adams Point 7.99, Jack London 7.99, Fruitvale 7.98, Downtown 7.96, Lake Merritt 7.96, Grand Lake 7.95, Uptown 7.92, Eastlake 6.99, Glenview 6.98, Dimond 6.98, Chinatown 6.98, KONO 6.98, San Antonio 6.96, Ivy Hill 6.96, East Oakland 6.95, Temescal 6.9 (22 neighborhoods)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C108",
+        "id": "F-b833f824a288"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: school quality index 8.94 (was 9 at C107), graduation 94.97%, college-ready 77.73%, teacher quality 9.02, funding 15,000, 237 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C108",
+        "id": "F-093a84eace86"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal: school quality index 6.9 (was 7 at C107), graduation 85.85%, college-ready 57.5%, teacher quality 6.98, funding 11,500, 303 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C108",
+        "id": "F-dec7e0ad6af8"
+      },
+      {
+        "t": "FACT",
+        "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.66%; per-hood funding on the table totals 286,000",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C108",
+        "id": "F-62dd80c42d4d"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-schools",
+      "angle": "Enrollment moved in Fruitvale — Rockridge has the strongest school record on the table (index 8.94) — the students and teachers who live it",
+      "label": "Rockridge has the strongest school record on the table (index 8.94)",
+      "hookLine": "11 students and educators in Rockridge; the table says why their school reads the way it does.",
+      "hood": "Rockridge",
+      "citizens": [
+        "Mei Wong (POP-01036)",
+        "Maya Torres-Dillon (POP-00742)",
+        "Rick Dillon (POP-00743)",
+        "Rico Fister (POP-00305)",
+        "Wiu Wiu (POP-00312)",
+        "Priyanka Raman (POP-01096)",
+        "Gloria Liu (POP-00827)",
+        "Simone Adesanya (POP-00287)",
+        "Mateo Jilner (POP-01001)",
+        "Mateo Wally (POP-01012)",
+        "Salma Campbell (POP-01018)"
+      ],
+      "popids": [
+        "POP-01036",
+        "POP-00742",
+        "POP-00743",
+        "POP-00305",
+        "POP-00312",
+        "POP-01096",
+        "POP-00827",
+        "POP-00287",
+        "POP-01001",
+        "POP-01012",
+        "POP-01018"
+      ],
+      "ref": "output/beats/Neighborhood_Demographics.jsonl @C108",
+      "cycle": 108
+    },
+    "approach": "Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "SCHOOLS-SLICE-2",
+    "kind": "beat-schools",
+    "seat": {
+      "slug": "angela-reyes",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "desk": "civic",
+      "domain": "schools",
+      "builder": "buildSchoolsSlice.js"
+    },
+    "hood": "Rockridge",
+    "pulse": {
+      "className": "beat-schools",
+      "score": 100,
+      "label": "Rockridge has the strongest school record on the table (index 8.94)",
+      "hood": "Rockridge",
+      "source": "output/beats/Neighborhood_Demographics.jsonl @C108"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Enrollment moved in Fruitvale — Rockridge has the strongest school record on the table (index 8.94) — the students and teachers who live it",
+      "hookLine": "11 students and educators in Rockridge; the table says why their school reads the way it does.",
+      "anchorFacts": [
+        "Enrollment moved: Fruitvale +11 students, Glenview +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students, Laurel +9 students vs C107",
+        "Ranked by school quality index: Rockridge 8.94, Baylight District 8.04, Brooklyn 8.03, West Oakland 8.03, Piedmont Ave 8.03, Laurel 7.99, Adams Point 7.99, Jack London 7.99, Fruitvale 7.98, Downtown 7.96, Lake Merritt 7.96, Grand Lake 7.95, Uptown 7.92, Eastlake 6.99, Glenview 6.98, Dimond 6.98, Chinatown 6.98, KONO 6.98, San Antonio 6.96, Ivy Hill 6.96, East Oakland 6.95, Temescal 6.9 (22 neighborhoods)",
+        "Rockridge: school quality index 8.94 (was 9 at C107), graduation 94.97%, college-ready 77.73%, teacher quality 9.02, funding 15,000, 237 students",
+        "Temescal: school quality index 6.9 (was 7 at C107), graduation 85.85%, college-ready 57.5%, teacher quality 6.98, funding 11,500, 303 students",
+        "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.66%; per-hood funding on the table totals 286,000"
+      ],
+      "evidence": [
+        {
+          "text": "Enrollment moved: Fruitvale +11 students, Glenview +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students, Laurel +9 students vs C107",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108"
+        },
+        {
+          "text": "Ranked by school quality index: Rockridge 8.94, Baylight District 8.04, Brooklyn 8.03, West Oakland 8.03, Piedmont Ave 8.03, Laurel 7.99, Adams Point 7.99, Jack London 7.99, Fruitvale 7.98, Downtown 7.96, Lake Merritt 7.96, Grand Lake 7.95, Uptown 7.92, Eastlake 6.99, Glenview 6.98, Dimond 6.98, Chinatown 6.98, KONO 6.98, San Antonio 6.96, Ivy Hill 6.96, East Oakland 6.95, Temescal 6.9 (22 neighborhoods)",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C108"
+        },
+        {
+          "text": "Rockridge: school quality index 8.94 (was 9 at C107), graduation 94.97%, college-ready 77.73%, teacher quality 9.02, funding 15,000, 237 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C108"
+        },
+        {
+          "text": "Temescal: school quality index 6.9 (was 7 at C107), graduation 85.85%, college-ready 57.5%, teacher quality 6.98, funding 11,500, 303 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C108"
+        },
+        {
+          "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.66%; per-hood funding on the table totals 286,000",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C108"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 107
+      },
+      "hooks": [
+        {
+          "text": "Lake Merritt's student population up 15%. Young families moving in? School capacity angle.",
+          "angle": "general coverage",
+          "domain": "EDUCATION",
+          "hood": "Lake Merritt",
+          "priority": 2
+        }
+      ],
+      "note": null,
+      "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01036",
+        "name": "Mei Wong",
+        "role": "After-school program aide",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Mei Wong — After-school program aide — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00742",
+        "name": "Maya Torres-Dillon",
+        "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00743",
+        "name": "Rick Dillon",
+        "role": "Grade Schooler",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Rick Dillon — Grade Schooler — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00305",
+        "name": "Rico Fister",
+        "role": "High School Science Teacher",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Rico Fister — High School Science Teacher — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00312",
+        "name": "Wiu Wiu",
+        "role": "High School Science Teacher",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Wiu Wiu — High School Science Teacher — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-01096",
+        "name": "Priyanka Raman",
+        "role": "Principal, Oakland Tech Collective",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Priyanka Raman — Principal, Oakland Tech Collective — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00827",
+        "name": "Gloria Liu",
+        "role": "School Principal",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Gloria Liu — School Principal — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00287",
+        "name": "Simone Adesanya",
+        "role": "School Principal",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Simone Adesanya — School Principal — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-01001",
+        "name": "Mateo Jilner",
+        "role": "student",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Mateo Jilner — student — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-01012",
+        "name": "Mateo Wally",
+        "role": "student",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Mateo Wally — student — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-01018",
+        "name": "Salma Campbell",
+        "role": "student",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Salma Campbell — student — Rockridge",
+        "why": "on the ledger in Rockridge (Simulation_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Neighborhood_Demographics.jsonl @C108",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Angela Reyes this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "text": "I want to understand what makes Rockridge schools consistently top-ranked while enrollment shifts happen elsewhere. The numbers show stability, but I'm curious about the human elements that maintain that quality. With graduation rates near 95% and college readiness at 77%, there's a story in how teachers and students experience this ecosystem day to day.",
+    "plan": {
+      "chase": "I want to understand what makes Rockridge schools consistently top-ranked while enrollment shifts happen elsewhere. The numbers show stability, but I'm curious about the human elements that maintain that quality. With graduation rates near 95% and college readiness at 77%, there's a story in how teachers and students experience this ecosystem day to day.",
+      "focus": "The sustained excellence of Rockridge schools amidst citywide enrollment fluctuations",
+      "why": "Rockridge maintains the highest school quality index (8.94) despite a slight dip from last cycle, while other neighborhoods see more significant enrollment changes. The consistency suggests institutional or cultural factors worth exploring.",
+      "checks": [
+        "Verify if the slight index drop (9 to 8.94) reflects any substantive change in programs or staffing",
+        "Confirm whether the $15,000 per-student funding aligns with observable resources in classrooms",
+        "Cross-reference teacher quality scores (9.02) with educator perspectives on support systems"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00827",
+          "question": "How does your school maintain such consistent outcomes year after year?",
+          "basis": "F-093a84eace86 (Rockridge school stats)"
+        },
+        {
+          "pop": "POP-01036",
+          "question": "What do you see in after-school hours that might explain students' college readiness?",
+          "basis": "F-093a84eace86 (77.73% college-ready)"
+        },
+        {
+          "pop": "POP-01018",
+          "question": "What does a 'good school day' look like to you?",
+          "basis": "F-5f9e9fbbd84a (student perspective needed)"
+        }
+      ],
+      "interpretation": "Excellence here appears systemic rather than accidental, possibly tied to teacher retention or community investment. The funding differential ($15k vs Temescal's $11.5k) may play a role, but money alone doesn't explain cultural consistency.",
+      "unverifiedLead": [
+        "Parental involvement patterns in Rockridge versus other neighborhoods",
+        "Whether veteran teachers mentor newer staff to maintain quality standards",
+        "How the physical school environment reflects the funding difference"
+      ],
+      "closeQuestion": "Is Rockridge's success replicable, or does it depend on specific neighborhood advantages?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Rose Delgado (City Council District 3): We're setting the stage for Fruitvale's future—this cohort is our promise in action.",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d3_2026-09-22.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Ramon Vega (City Council District 4): Given the current conditions in my district, I will prioritize addressing the pressing concerns of m",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d4_2026-09-22.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Janae Rivers (City Council District 5): First training cohort placement review isn't just about hitting targets—it's about lives transformed",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d5_2026-09-22.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"world\" (+ 6 co-occurring tokens) recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c108.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c108.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    }
+  ],
+  "laneEntries": 51,
+  "ranAt": "2026-09-22T11:16:07.755Z"
+}

@@ -1,0 +1,49 @@
+{
+  "draft": "output/cron-compare/civic_c107_noah-tan_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "107",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "487a9e722a9b868d56b34189d4fb5d519fb5a2de0b5c2a258301fbd7aa4f0038",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, roles, quotes, health states, and environmental textures align cleanly with cycle 107 ground truth and packet provenance.",
+  "review": {
+    "profileId": "noah-weather-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-0868ac8755b7",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Lonzo Jailon",
+      "Melton Neilon",
+      "Teri Mitchell"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 7441,
+  "parseError": false,
+  "ranAt": "2026-09-16T23:15:52.802Z"
+}

@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "110",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-4.5",
+  "configuredWriterModel": "anthropic/claude-haiku-4.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "angela-reyes",
+  "byline": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "beatDomain": "EDUCATION"
+  },
+  "laneEntries": 102,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/civic_c110_angela-reyes_packet-v2_anthropic-claude-haiku-4-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ig/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00156\",\n  \"name\": \"Angela Reyes\",\n  \"recorded\": true,\n  \"text\": \"filed: Rockridge Holds Steady While the District Grows\"\n}"
+  },
+  "ranAt": "2026-10-06T23:18:37.039Z",
+  "dispositionReconciledAt": "2026-10-10T17:00:04.476Z"
+}

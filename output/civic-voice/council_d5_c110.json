@@ -1,0 +1,28 @@
+{
+  "office": "council_d5",
+  "cycle": 110,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "This cycle, I prioritize advancing the Oakland Youth Apprenticeship Pipeline to ensure East Oakland youth are first in line for placements. I also demand immediate action on Baylight District's decay momentum, leveraging community-driven solutions.",
+  "statements": [
+    {
+      "statementId": "STMT-110-council_d5-001",
+      "type": "vote_statement",
+      "topic": "Youth Apprenticeship",
+      "initiative": "INIT-007",
+      "decision": "Accelerate cohort placement review, prioritizing East Oakland youth",
+      "quote": "East Oakland's youth deserve more than promises—they deserve pathways to prosperity.",
+      "fullStatement": "The Oakland Youth Apprenticeship Pipeline is our chance to transform lives, not just hit targets. East Oakland's youth have waited long enough. I demand an accelerated cohort placement review to ensure our district's young people are first in line for these opportunities. We owe them more than promises—we owe them pathways to prosperity.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d5-002",
+      "type": "action_statement",
+      "topic": "Baylight District",
+      "initiative": null,
+      "decision": "Deploy community-led solutions to address decay momentum",
+      "quote": "Baylight's decay isn't just a problem—it's a call to action for community-driven solutions.",
+      "fullStatement": "Baylight District's decay momentum is a crisis we can't ignore. But the solution isn't just City Hall bureaucracy—it's community-driven action. I’m calling for immediate deployment of community-led solutions to address this issue. East Oakland’s neighborhoods deserve more than Band-Aid fixes—they deserve sustainable, neighborhood-rooted strategies.",
+      "trackerUpdates": {}
+    }
+  ]
+}

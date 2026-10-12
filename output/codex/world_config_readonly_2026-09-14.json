@@ -1,0 +1,637 @@
+[
+ {
+  "Key": "",
+  "Value": "",
+  "Description": ""
+ },
+ {
+  "Key": "",
+  "Value": "",
+  "Description": ""
+ },
+ {
+  "Key": "migrationRate",
+  "Value": "0.001",
+  "Description": "drift people in and out of the world "
+ },
+ {
+  "Key": "deathRate",
+  "Value": "0.009",
+  "Description": "deaths"
+ },
+ {
+  "Key": "growthRate",
+  "Value": "0.012",
+  "Description": "background population growth"
+ },
+ {
+  "Key": "lastRun",
+  "Value": "9/13/2026",
+  "Description": "engine fills"
+ },
+ {
+  "Key": "cycleCount",
+  "Value": "107",
+  "Description": "Automatically increments each world cycle."
+ },
+ {
+  "Key": "logDriveID",
+  "Value": "1lm-zXxAPeakCW6-xT-JjTK3VATkBsbkdSBlNYMp1-QI",
+  "Description": "Riley_System_Log drive ID for reference."
+ },
+ {
+  "Key": "simulationLedgerID",
+  "Value": "1TQVhY3B-KpoA6FarnIVXMfoXcwyv0_kk",
+  "Description": "Simulation Ledger Sheet ID."
+ },
+ {
+  "Key": "digestSheetID",
+  "Value": "1lm-zXxAPeakCW6-xT-JjTK3VATkBsbkdSBlNYMp1-QI",
+  "Description": "Riley_Digest Sheet ID (same as log for now)."
+ },
+ {
+  "Key": "worldName",
+  "Value": "God World",
+  "Description": "Internal label used by narrative scripts."
+ },
+ {
+  "Key": "bizIdHighWater",
+  "Value": "180",
+  "Description": ""
+ },
+ {
+  "Key": "eclExclusivePools",
+  "Value": "",
+  "Description": ""
+ },
+ {
+  "Key": "eclExclusiveMinLines",
+  "Value": "3",
+  "Description": ""
+ },
+ {
+  "Key": "migrationPopulationFallback",
+  "Value": "386587",
+  "Description": "engine.102 W2a: fallback total population for applyMigrationDrift_ when World_Population is unreadable"
+ },
+ {
+  "Key": "illnessCalmStep",
+  "Value": "0.0004",
+  "Description": "engine.102 W2b: base magnitude of the random illness drift term (rng - 0.6) * step"
+ },
+ {
+  "Key": "illnessStepUp",
+  "Value": "0.0002",
+  "Description": "engine.102 W2b: standard illness upward nudge (weather, chaos, low mood, calendar)"
+ },
+ {
+  "Key": "illnessStepDown",
+  "Value": "0.0002",
+  "Description": "engine.102 W2b: standard illness downward nudge (high community engagement)"
+ },
+ {
+  "Key": "illnessCap",
+  "Value": "0.15",
+  "Description": "engine.102 W2b: hard ceiling for the city illness rate"
+ },
+ {
+  "Key": "illnessSupportThreshold",
+  "Value": "0.08",
+  "Description": "engine.102 W2b: illness rate above which the sample-support rule fires"
+ },
+ {
+  "Key": "illnessSupportCycles",
+  "Value": "3",
+  "Description": "engine.102 W2b: consecutive cycles above threshold before sample-support fires"
+ },
+ {
+  "Key": "illnessFallbackRate",
+  "Value": "0.05",
+  "Description": "engine.102 W2b: loud-default illness rate when demographicDrift.illnessRate missing"
+ },
+ {
+  "Key": "employmentFallbackRate",
+  "Value": "0.96",
+  "Description": "engine.102 W2b: loud-default employment rate when demographicDrift.employmentRate missing"
+ },
+ {
+  "Key": "employmentFloor",
+  "Value": "0.88",
+  "Description": "engine.102 W2b: minimum city employment rate"
+ },
+ {
+  "Key": "employmentAttractor",
+  "Value": "0.96",
+  "Description": "engine.102 W2b: lower bound of the free-prosperity attractor band (0.90-0.93)"
+ },
+ {
+  "Key": "employmentStep",
+  "Value": "0.0003",
+  "Description": "engine.102 W2b: step size toward the employment attractor band"
+ },
+ {
+  "Key": "prosperityEarnedOnly",
+  "Value": "FALSE",
+  "Description": "engine.102 W2b gate: TRUE disables the free-prosperity attractor; employment must be earned"
+ },
+ {
+  "Key": "migrationClampLow",
+  "Value": "-5000",
+  "Description": "engine.102 W2b: lower bound for city migration (exposed for audit/downstream)"
+ },
+ {
+  "Key": "migrationClampHigh",
+  "Value": "5000",
+  "Description": "engine.102 W2b: upper bound for city migration (exposed for audit/downstream)"
+ },
+ {
+  "Key": "hospitalBaseCapacity",
+  "Value": "100",
+  "Description": "engine.102 W2b: baseline hospital census capacity before load strain"
+ },
+ {
+  "Key": "hospitalLoadPerSick",
+  "Value": "1",
+  "Description": "engine.102 W2b: hospital load units per active sick admission"
+ },
+ {
+  "Key": "hospitalTalkbackGain",
+  "Value": "0.001",
+  "Description": "engine.102 W2b: WP illness talk-back gain per load unit above capacity (W4)"
+ },
+ {
+  "Key": "griefDurationCycles",
+  "Value": "3",
+  "Description": ""
+ },
+ {
+  "Key": "griefHolidayDurationCycles",
+  "Value": "5",
+  "Description": ""
+ },
+ {
+  "Key": "griefParticipationMultiplier",
+  "Value": "0.8",
+  "Description": ""
+ },
+ {
+  "Key": "griefPublicActivityMultiplier",
+  "Value": "0.75",
+  "Description": ""
+ },
+ {
+  "Key": "griefSupportMultiplier",
+  "Value": "1.25",
+  "Description": ""
+ },
+ {
+  "Key": "griefResponseChance",
+  "Value": "0.35",
+  "Description": ""
+ },
+ {
+  "Key": "approvalCeilingThreshold",
+  "Value": "80",
+  "Description": "engine.94 approval at or above this value advances the high-approval streak"
+ },
+ {
+  "Key": "approvalCeilingMinStreakCycles",
+  "Value": "3",
+  "Description": "engine.94 minimum consecutive high-approval Cycles before scandal rolls"
+ },
+ {
+  "Key": "approvalCeilingBaseChance",
+  "Value": "0.05",
+  "Description": "engine.94 scandal probability at the minimum streak"
+ },
+ {
+  "Key": "approvalCeilingChanceStep",
+  "Value": "0.05",
+  "Description": "engine.94 added scandal probability per high-approval Cycle beyond the minimum"
+ },
+ {
+  "Key": "approvalCeilingMaxChance",
+  "Value": "0.3",
+  "Description": "engine.94 maximum per-Cycle high-approval scandal probability"
+ },
+ {
+  "Key": "approvalCeilingScandalDurationCycles",
+  "Value": "3",
+  "Description": "engine.94 auto-scandal duration in Cycles"
+ },
+ {
+  "Key": "approvalCeilingApprovalDrop",
+  "Value": "12",
+  "Description": "engine.94 immediate approval-point drop when an auto-scandal fires"
+ },
+ {
+  "Key": "approvalCeilingElectionPenalty",
+  "Value": "25",
+  "Description": "engine.94 incumbent-score penalty while Status is scandal"
+ },
+ {
+  "Key": "worldYearBase",
+  "Value": "2039",
+  "Description": "Gregorian-equivalent year for SimYear 0: worldYear = worldYearBase + Simulation_Calendar.SimYear. Age = worldYear - BirthYear. engine.117 Task 3 — replaces the convention carried in memory."
+ },
+ {
+  "Key": "illnessBaseline",
+  "Value": "0.035",
+  "Description": "engine.133 city illness rate resting level; the attractor pulls the rate here"
+ },
+ {
+  "Key": "illnessAttractorPull",
+  "Value": "0.12",
+  "Description": "engine.133 fraction of the (baseline - rate) gap closed per Cycle"
+ },
+ {
+  "Key": "illnessEventStrain",
+  "Value": "0.015",
+  "Description": "engine.133 city-rate bump per salient weather event that Cycle (frost/snow at half)"
+ },
+ {
+  "Key": "illnessHoodWeightMin",
+  "Value": "0.5",
+  "Description": "engine.133 lower clamp on a hood structural illness weight before envelope normalization"
+ },
+ {
+  "Key": "illnessHoodWeightMax",
+  "Value": "2",
+  "Description": "engine.133 upper clamp on a hood structural illness weight before envelope normalization"
+ },
+ {
+  "Key": "employmentAttractorPull",
+  "Value": "0.12",
+  "Description": "engine.135 fraction of the (attractor - rate) gap the city employment dial closes per Cycle"
+ },
+ {
+  "Key": "employmentHoodWeightMin",
+  "Value": "0.5",
+  "Description": "engine.135 lower clamp on a hood structural employment weight before envelope normalization"
+ },
+ {
+  "Key": "employmentHoodWeightMax",
+  "Value": "2",
+  "Description": "engine.135 upper clamp on a hood structural employment weight before envelope normalization"
+ },
+ {
+  "Key": "employmentConvergenceRate",
+  "Value": "0.25",
+  "Description": "engine.135 fraction of a hood Unemployed gap closed per Cycle (floor 3)"
+ },
+ {
+  "Key": "popIdHighWater",
+  "Value": "1113",
+  "Description": ""
+ },
+ {
+  "Key": "citizenArchiveEnabled",
+  "Value": "1",
+  "Description": ""
+ },
+ {
+  "Key": "citizenArchiveTabLive",
+  "Value": "1",
+  "Description": ""
+ },
+ {
+  "Key": "civicVoiceSentiment",
+  "Value": "0.65",
+  "Description": "Civic voice sentiment, statement-weighted across the cascade (written by applyTrackerUpdates.js --apply; read by Phase2-CivicSentiment)"
+ },
+ {
+  "Key": "civicVoiceSentimentCycle",
+  "Value": "107",
+  "Description": "Cycle the civicVoiceSentiment score was computed for — the engine refuses a score more than one cycle stale"
+ },
+ {
+  "Key": "bizDriftMaxUp",
+  "Value": "1",
+  "Description": "engine.96 max +pp Growth_Rate move per Cycle"
+ },
+ {
+  "Key": "bizDriftMaxDown",
+  "Value": "1",
+  "Description": "engine.96 max -pp Growth_Rate move per Cycle"
+ },
+ {
+  "Key": "bizGrowthCeil",
+  "Value": "40",
+  "Description": "engine.96 Growth_Rate ceiling (pp)"
+ },
+ {
+  "Key": "bizGrowthFloor",
+  "Value": "-10",
+  "Description": "engine.96 Growth_Rate floor (pp)"
+ },
+ {
+  "Key": "bizNoiseBound",
+  "Value": "0.25",
+  "Description": "engine.96 seeded noise half-width (pp), texture only"
+ },
+ {
+  "Key": "bizVitalityNeutral",
+  "Value": "6",
+  "Description": "engine.96 hood RetailVitality at which the vitality term is 0"
+ },
+ {
+  "Key": "bizVitalityGain",
+  "Value": "0.15",
+  "Description": "engine.96 pp drift per vitality point from neutral (clamped +-0.5)"
+ },
+ {
+  "Key": "bizSuccessWindow",
+  "Value": "3",
+  "Description": "engine.96 consecutive prosperous Cycles before success pressure bites (27.10)"
+ },
+ {
+  "Key": "bizSuccessVitalityHigh",
+  "Value": "9",
+  "Description": "engine.96 hood RetailVitality that counts as prosperous"
+ },
+ {
+  "Key": "bizSuccessApprovalHigh",
+  "Value": "85",
+  "Description": "engine.96 mayor approval that counts as golden-era"
+ },
+ {
+  "Key": "bizSuccessPenalty",
+  "Value": "0.3",
+  "Description": "engine.96 pp drift penalty on incumbents under sustained success"
+ },
+ {
+  "Key": "bizDisruptBaseChance",
+  "Value": "2",
+  "Description": "engine.96 % per-Cycle disruption-shock chance per business (seeded)"
+ },
+ {
+  "Key": "bizDisruptSuccessMult",
+  "Value": "3",
+  "Description": "engine.96 disruption-chance multiplier while the success window is active"
+ },
+ {
+  "Key": "bizDisruptShock",
+  "Value": "2",
+  "Description": "engine.96 pp one-Cycle negative shock on disruption"
+ },
+ {
+  "Key": "bizClosureStreak",
+  "Value": "8",
+  "Description": "engine.96 consecutive negative-growth Cycles for closure eligibility (Task 7)"
+ },
+ {
+  "Key": "bizClosureRevenueFloorPct",
+  "Value": "40",
+  "Description": "engine.96 revenue below this % of the sector mint median closes (Task 7, with the streak)"
+ },
+ {
+  "Key": "bizEventShockScale",
+  "Value": "1",
+  "Description": "engine.96 scale of each event-driven pp contribution; event term capped +-2.0"
+ },
+ {
+  "Key": "bizVol_faith",
+  "Value": "0.5",
+  "Description": "engine.96 sector volatility multiplier: faith"
+ },
+ {
+  "Key": "bizVol_retail",
+  "Value": "1.2",
+  "Description": "engine.96 sector volatility multiplier: retail"
+ },
+ {
+  "Key": "bizVol_food",
+  "Value": "1.3",
+  "Description": "engine.96 sector volatility multiplier: food / nightlife"
+ },
+ {
+  "Key": "bizVol_health",
+  "Value": "0.7",
+  "Description": "engine.96 sector volatility multiplier: health"
+ },
+ {
+  "Key": "bizVol_tech",
+  "Value": "1.5",
+  "Description": "engine.96 sector volatility multiplier: tech"
+ },
+ {
+  "Key": "bizVol_professional",
+  "Value": "0.8",
+  "Description": "engine.96 sector volatility multiplier: professional"
+ },
+ {
+  "Key": "bizVol_construction",
+  "Value": "1.1",
+  "Description": "engine.96 sector volatility multiplier: construction"
+ },
+ {
+  "Key": "bizVol_arts",
+  "Value": "1.2",
+  "Description": "engine.96 sector volatility multiplier: arts / media"
+ },
+ {
+  "Key": "bizVol_education",
+  "Value": "0.6",
+  "Description": "engine.96 sector volatility multiplier: education"
+ },
+ {
+  "Key": "bizVol_default",
+  "Value": "1",
+  "Description": "engine.96 sector volatility multiplier: small neighborhood business (fallback)"
+ },
+ {
+  "Key": "bizDeclineStreak",
+  "Value": "4",
+  "Description": "engine.96 Task 6: consecutive negative-growth Cycles before a business sheds headcount (proposed S413, not in the signed table)"
+ },
+ {
+  "Key": "hoodRentShare",
+  "Value": "0.3",
+  "Description": "engine.160 hood MedianRent = this share of Neighborhood_Map MedianIncome / 12; the one rent rule every lease and house price reads"
+ },
+ {
+  "Key": "maneuverClimbBar",
+  "Value": "60",
+  "Description": "engine.157 ambition (drive-weighted blend of drive + openness, 0-100) at/over which a citizen plays to climb; also the openness bar for a willing field change"
+ },
+ {
+  "Key": "maneuverRetreatDebt",
+  "Value": "6",
+  "Description": "engine.157 DebtLevel at/over which a citizen pulls in (retreat) whatever their ambition"
+ },
+ {
+  "Key": "maneuverStandingMargin",
+  "Value": "5",
+  "Description": "engine.157 a heritage line whose standing sits within this many points of the bar below its tier puts its members in retreat"
+ },
+ {
+  "Key": "maneuverClimbOdds",
+  "Value": "1.5",
+  "Description": "engine.157 odds multiplier a climb posture applies to the casino placement, solo door, home purchase and relocation rolls"
+ },
+ {
+  "Key": "maneuverRetreatOdds",
+  "Value": "0.5",
+  "Description": "engine.157 odds multiplier a retreat posture applies to the same rolls"
+ },
+ {
+  "Key": "maneuverDriveWeight",
+  "Value": "0.7",
+  "Description": "engine.157 weight of drive in the ambition blend (openness carries the rest)"
+ },
+ {
+  "Key": "relocationMaxShare",
+  "Value": "0.05",
+  "Description": "engine.161 per-cycle relocation ceiling as a share of the movable units (households + solo citizens with income) — a stampede guard, never a quota; ≈43 of 849 at C105"
+ },
+ {
+  "Key": "hoodCitizenFloor",
+  "Value": "12",
+  "Description": "engine.148 tracked (Active Simulation_Ledger) citizens a neighborhood should hold; below it the hood is under-floor: the generic feeder draws it heavier and the surfacing quota points at it"
+ },
+ {
+  "Key": "gcSurfaceChance",
+  "Value": "0.06",
+  "Description": "engine.58/148 per unnamed ENGINE citizen event, chance the week crosses a Generic_Citizens name — the emergence lottery dial (was the GC_SURFACE_CHANCE code literal)"
+ },
+ {
+  "Key": "hoodFloorPromotePerCycle",
+  "Value": "6",
+  "Description": "engine.148 migration wave (builder-ruled 2026-09-05: the slow drip will not fill ten hoods) — per cycle, Active Generic_Citizens rows promoted straight to the ledger from under-floor hoods, most-deficient hood first, no EmergenceCount gate. 0 disables"
+ },
+ {
+  "Key": "gcPoolFloorFemale",
+  "Value": "120",
+  "Description": "engine.148 (builder 2026-09-05: the sim runs male-heavy, the waiting room should skew female) — Active female Generic_Citizens rows the feeder keeps the pool at; it grows only while a side is under its floor"
+ },
+ {
+  "Key": "gcPoolFloorMale",
+  "Value": "40",
+  "Description": "engine.148 — Active male Generic_Citizens rows the feeder keeps the pool at"
+ },
+ {
+  "Key": "hoodFloorSurfaceQuota",
+  "Value": "20",
+  "Description": "engine.148 per cycle, unnamed ENGINE citizen events whose GC crossing is forced and drawn from under-floor hoods (deficit-weighted); ~45% of offerings tick, 3 ticks earn the row (engine.58). 0 disables"
+ },
+ {
+  "Key": "bizOwnerMintP",
+  "Value": "0.2",
+  "Description": "engine.96 Task 12: per open drip slot, the chance the owner door fires this Cycle (the family door's own odds)"
+ },
+ {
+  "Key": "bizOwnerMaxStaff",
+  "Value": "250",
+  "Description": "engine.96 Task 12: Employee_Count above which a business is an institution and never draws an owner"
+ },
+ {
+  "Key": "bizOwnerMinAge",
+  "Value": "35",
+  "Description": "engine.96 Task 12: youngest a Generic citizen can be to draw as a business owner"
+ },
+ {
+  "Key": "bizOwnerMinProfit",
+  "Value": "0",
+  "Description": "engine.96 Task 12: profit floor (Annual_Revenue - payroll) below which a business never draws an owner; 0 = the profit weight alone orders the pool"
+ },
+ {
+  "Key": "approvalLevelBase",
+  "Value": "50",
+  "Description": "engine.213 the level a seat sits at when its district/city read exactly the middle and the press is flat"
+ },
+ {
+  "Key": "approvalLevelInertia",
+  "Value": "0.2",
+  "Description": "engine.213 share of the gap to the target level closed each Cycle (a poll with memory; 0.2 ≈ 5 Cycles to settle)"
+ },
+ {
+  "Key": "approvalStateGainDistrict",
+  "Value": "5",
+  "Description": "engine.213 target-level points per unit of district composite vs city middle (momentum/crime/sentiment/¼retail, in [-2,2]); ordering term, council seats"
+ },
+ {
+  "Key": "approvalStateGainCity",
+  "Value": "8",
+  "Description": "engine.213 target-level points per unit of MOOD (mean hood Sentiment / approvalStateCitySentimentUnit, [-2,2]); Mayor = city, council = councilCityShare×city + rest×own district"
+ },
+ {
+  "Key": "approvalStateGainPress",
+  "Value": "3",
+  "Description": "engine.213 target-level points per press step (steps ±1/±2)"
+ },
+ {
+  "Key": "approvalStateCouncilCityShare",
+  "Value": "0.5",
+  "Description": "engine.213 share of the city-level term a council seat receives"
+ },
+ {
+  "Key": "approvalMoodSmoothing",
+  "Value": "0.3",
+  "Description": "engine.213 EMA weight of THIS Cycle's hood Sentiment in the smoothed mood the approval level reads (0.3 ≈ a 3-4 Cycle season; city sentiment sawtooths ±0.5/Cycle)"
+ },
+ {
+  "Key": "approvalStateCitySentimentUnit",
+  "Value": "0.25",
+  "Description": "engine.213 mean hood Sentiment that counts as one unit of city level (live C104-C106 means ran +0.25..+0.45)"
+ },
+ {
+  "Key": "approvalMediaStep1",
+  "Value": "1",
+  "Description": "engine.213 |press score| at which coverage moves approval +-1 (score = half CIVIC rating, half all-desk mean; live range -3..+5)"
+ },
+ {
+  "Key": "approvalMediaStep2",
+  "Value": "3",
+  "Description": "engine.213 |press score| at which coverage moves approval +-2"
+ },
+ {
+  "Key": "dialFrictionRentBurden",
+  "Value": "50",
+  "Description": "engine.176 rent as % of household income above which an unbuffered renter takes a pressure tag (Friction, then Strain) — the negative pole from a cause"
+ },
+ {
+  "Key": "dialSetbackLossPct",
+  "Value": "5",
+  "Description": "engine.176 a lost casino stake at/over this % of the citizen's net worth logs [Setback] instead of the ordinary [Casino] loss line"
+ },
+ {
+  "Key": "dialHoodPressureBar",
+  "Value": "3",
+  "Description": "engine.176 Neighborhood_Map HousingPressure (persisted, read via S.neighborhoodState) at/over which a Neighborhood line tints to Friction instead of sociability — live C106: 5 of 22 hoods at/over 3, max 4.5"
+ },
+ {
+  "Key": "dialHoodCrimeBar",
+  "Value": "1.45",
+  "Description": "engine.176/212 MULTIPLE of the city median Neighborhood_Map CrimeIndex (persisted snapshot) at/over which the same tint applies — relative, so the bar cannot rot as the city drifts. Seeded so C107 catches the same 4 hoods the old absolute 1.0 did: live C106 median 0.675 × 1.45 = 0.98"
+ },
+ {
+  "Key": "dialOpenMoveThresholdMult",
+  "Value": "0.8",
+  "Description": "engine.178 an openness +2 citizen clears the misfit-move income ratio at this multiple of MISFIT_INCOME_RATIO (openness -2 never takes the misfit lane)"
+ },
+ {
+  "Key": "dialOwnerStreakRoom",
+  "Value": "1",
+  "Description": "engine.178 decline cycles a steady owner (composure +1/+2) adds before closure, and a volatile owner (-1/-2) loses"
+ },
+ {
+  "Key": "dialOwnerDriveExpandMult",
+  "Value": "1.25",
+  "Description": "engine.178 multiplier on a POSITIVE growth drift when the owner sits in the drive +2 band"
+ },
+ {
+  "Key": "dialIntegrityScandalLow",
+  "Value": "1.5",
+  "Description": "engine.178 approval-ceiling scandal chance multiplier for an officeholder in the integrity -2 band (-1 band = halfway)"
+ },
+ {
+  "Key": "dialIntegrityScandalHigh",
+  "Value": "0.5",
+  "Description": "engine.178 the same multiplier for the integrity +2 band (+1 band = halfway)"
+ },
+ {
+  "Key": "dialBurnoutHealthMult",
+  "Value": "2",
+  "Description": "engine.182 health-event chance multiplier for a citizen whose composure sits in the bottom band (burnout opens the hospital path)"
+ }
+]

@@ -1,0 +1,169 @@
+WIRING CARD — Neighborhood_Demographics (tab)   map: 2026-09-21 / 184 files
+
+DEFINITION
+  utilities/ensureNeighborhoodDemographics.js:21-23  NEIGHBORHOOD_DEMOGRAPHICS_HEADERS
+  Headers: Neighborhood | Students | Adults | Seniors | Unemployed | Sick | LastUpdated
+  Conditional: SchoolQualityIndex (engine.192 appended, line 330-332)
+
+SCHEMA
+  Hood name column: "Neighborhood" (col A)
+  Sick column: "Sick" (col F, index 5)
+  SchoolQualityIndex column: "SchoolQualityIndex" (conditionally added, line 330)
+  Stamp column: "LastUpdated" (col G, index 6)
+  Stamp value: Cycle number (integer), NOT timestamp (set at line 326)
+    utilities/ensureNeighborhoodDemographics.js:326  rowData[iLastUpdated] = cycle;
+
+WRITERS
+  utilities/ensureNeighborhoodDemographics.js:266  batchUpdateNeighborhoodDemographics_(ss, demographicsMap, cycle)
+    Phase position: Phase3-NeighborhoodDemo @ godWorldEngine2.js:314 (production)
+                    Phase3-NeighborhoodDemo @ godWorldEngine2.js:2063 (cycle-phases)
+    Both BEFORE Phase10-ExecuteIntents (line 595 / 2330)
+  Called from: phase03-population/updateNeighborhoodDemographics.js:279
+
+READERS
+  phase05-citizens/civicInitiativeEngine.js::engineClockHold_
+  phase05-citizens/educationCareerEngine.js::checkSchoolQuality_  @ line 683
+  phase05-citizens/educationCareerEngine.js::updateMinorSchoolQuality_  @ line 1329
+  utilities/ensureNeighborhoodDemographics.js::ensureNeighborhoodDemographicsSchema_  @ line 135
+  utilities/ensureNeighborhoodDemographics.js::getNeighborhoodDemographics_
+  utilities/cycleRollback.js::rollbackToCycle78
+
+WRITE PATH
+  DIRECT  sheet.getRange(...).setValues(...) @ utilities/ensureNeighborhoodDemographics.js:350, 356
+
+---
+
+WIRING CARD — Neighborhood_Map (tab)   map: 2026-09-21 / 184 files
+
+DEFINITION
+  phase08-v3-chicago/v3NeighborhoodWriter.js:28-47  NEIGHBORHOOD_MAP_HEADERS
+  Headers (cols A–O, texture block):
+    Timestamp | Cycle | Neighborhood | NightlifeProfile | NoiseIndex | CrimeIndex |
+    RetailVitality | EventAttractiveness | Sentiment | DemographicMarker | Holiday | 
+    HolidayPriority | FirstFriday | CreationDay | SportsSeason
+  Plus persistent columns (hand/replayed):
+    District | ChildAreas | WeatherZone | Adjacent | AttentionWeight | Scenes
+
+SCHEMA
+  Hood name column: "Neighborhood" (col C)
+  RetailVitality column: "RetailVitality" (col G, index 6)
+  NightlifeProfile column: "NightlifeProfile" (col D, index 3)
+  Cycle stamp column: "Cycle" (col B, index 1)
+
+WRITERS
+  phase08-v3-chicago/v3NeighborhoodWriter.js:309  saveV3NeighborhoodMap_(ctx)
+    Phase position: Phase10-NeighborhoodMap @ godWorldEngine2.js:560 (production)
+                    Phase10-NeighborhoodMap @ godWorldEngine2.js:2301 (cycle-phases)
+    Both AFTER Phase10-ExecuteIntents (lines 595 / 2330)
+    Write pattern: replace rows 2:N, cols A–O only (line 583)
+  
+  phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_
+    Called from: phase05-citizens/runNeighborhoodEngine_.js
+    Phase position: Phase5-Neighborhoods @ godWorldEngine2.js:351 (production)
+                    Phase5-Neighborhoods @ godWorldEngine2.js:2100 (cycle-phases)
+    Both BEFORE Phase10-ExecuteIntents
+    Write method: queueCellIntent_ (lines 238, 241, 246, 250, 266, 280)
+    Columns touched: Trajectory, StartCycle, Momentum, Pressure, Income, Rent
+
+READERS
+  phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_  (Phase1)
+  phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_  (Phase2)
+  phase04-events/chaosCarsEngine.js::loadNeighborhoodNames_
+  phase05-citizens/bondEngine.js::loadNeighborhoodsFromSheet_
+  phase05-citizens/civicInitiativeEngine.js::engineClockHold_
+  phase05-citizens/migrationTrackingEngine.js (multiple)
+  phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_
+  phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_
+  lib/wakePerception.js:557  (reads via sheets.getSheetAsObjects)
+
+WRITE PATH (Neighborhood_Map)
+  INTENT  queueCellIntent_(ctx, 'Neighborhood_Map', ...) @ phase05-citizens/neighborhoodTrajectoryEngine.js:238-280
+    Targets: Trajectory, StartCycle, Momentum, Pressure, Income, Rent (Phase5, BEFORE executor)
+  DIRECT  sheet.getRange(...).setValues(...) @ phase08-v3-chicago/v3NeighborhoodWriter.js:583
+    Targets: Timestamp–SportsSeason (Phase10, AFTER executor)
+
+---
+
+HELPER: resolveHoodOrChild_
+
+DEFINITION
+  phase01-config/canonNeighborhoodLoader.js:441  function resolveHoodOrChild_(ctx, name)
+  
+SIGNATURE
+  function resolveHoodOrChild_(ctx, name) → string | null
+
+REQUIRES LOADED
+  ctx.summary.canonHoods object with:
+    - .set: map of lowercased hood names to true
+    - .list: array of canonical hood spellings (sheet row order)
+    - .children: map of lowercased child area names to parent hood names
+  Seeded by: phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_ (Phase1)
+
+LOGIC (lines 441-453)
+  - Requires canonHoods loaded; throws if not seeded (ADR-0016)
+  - Normalizes name to lowercase/trimmed string
+  - If exact hood match (in .set): return canonical spelling from .list
+  - Otherwise: return .children[lowercased] (child → parent fold) or null
+  - Used to fold child areas (Old Oakland, Brooklyn Basin, Montclair) to parent hoods
+
+EXAMPLE CALLER
+  phase02-world-state/commuteFlowEngine.js:131
+    var dh = resolveHoodOrChild_(ctx, bh) || bh;
+
+---
+
+TRANSIT INITIATIVE STATION MEMBERSHIP RULE
+
+FUNCTION
+  phase02-world-state/updateTransitMetrics.js:693  function initiativeTransitEffects_(S)
+
+STATION MEMBERSHIP RULE (lines 438-453)
+  Criteria: domain === 'transit' OR isBaylightInitiative_(name)
+  
+  Hood selection logic:
+    1. Parse Initiative_Tracker "Hood(s)" column value: hoodsStr
+    2. Split by comma or semicolon: tParts = hoodsStr.split(/[,;]+/)
+    3. Trim and filter empty: each part becomes one hood in tHoods array
+    4. Result: transitSlice entry carries hoods: tHoods array
+  
+  Source: phase02-world-state/applyInitiativeImplementationEffects.js:439-443
+    var tHoods = [];
+    var tParts = String(hoodsStr || '').split(/[,;]+/);
+    for (var tp = 0; tp < tParts.length; tp++) {
+      var th = tParts[tp].replace(/^\s+|\s+$/g, '');
+      if (th) tHoods.push(th);
+    }
+
+  The initiative then affects transit metrics for each hood in tHoods
+  via its phase (construction, operational, etc.) as calculated by
+  initiativeTransitEffects_ lines 704-741 (impact multipl
+iers and bonuses)
+
+OPEN WORK
+  engine.212  Crime_Metrics carries forward, PROD @79; open: dead reads at 
+              generateCivicModeEvents.js:200 and updateNeighborhoodDemographics.js:359, 
+              retire NEIGHBORHOOD_CRIME_PROFILES
+              docs/engine/ROLLOUT_PLAN.md:136
+
+HISTORY
+  Neighborhood_Demographics writer:
+    ff949ab0  engine.242c: a hood's quality of life is read from its own measurables
+    5f7b6393  engine.237: crime reaches the citizens
+    0a8013fc  S463 engine.192: the school table breathes (quality/grad/readiness/teacher/funding drift)
+    5337fbff  engine.164: sim-year literal 2041 swept to calendar year
+    2a8f64cb  S423 engine.134 Tasks 4–8 — hood copies read the ledger
+
+  Neighborhood_Map writer (v3NeighborhoodWriter):
+    2a3bbc44  engine.242b: a hood feels its businesses
+    536684df  engine.239: hoods read their own canon
+    ce9dbc75  engine.185 fix-up
+    83707f93  engine.184 — score DemographicMarker
+    a1b4e9d5  engine.165: clamp Sentiment to [-1, 1]
+    3b8b51b4  S428 engine.119 Wave A
+
+  Transit effects:
+    6ee31754  engine.183: transit × hoods — the numbers carry their causes
+    e7c84759  engine.93 Tasks 9-10 — commute flows + housing-supply response
+    904aa1d5  S327 engine.70 T-1: transit salience + ripples
+    af402828  Math.random silent-fallback sweep
+

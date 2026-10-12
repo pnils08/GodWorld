@@ -1,0 +1,393 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Isley Kelley
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: SS
+
+ 
+
+Jersey: #8
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 89
+
+ 
+
+MLB Service: 16.000
+
+ 
+
+Age: 33
+
+ 
+
+Bats: R
+
+ 
+
+Throws: R
+
+ 
+
+Height: 5'7"
+
+ 
+
+Weight: 166 lbs
+
+ 
+
+Drafted: Round 1 (2025)
+
+ 
+
+Secondary Position: 2B, 3B
+
+ 
+
+Hitter Tendency: WHOLE FIELD
+
+ 
+
+Born: MISSISSIPPI
+
+ 
+
+Canonical POPID: POP-00019
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+CON R: 85
+
+ 
+
+CON L: 88
+
+ 
+
+POW R: 84
+
+ 
+
+POW L: 80
+
+ 
+
+VIS: 88
+
+ 
+
+DISC: 82
+
+ 
+
+CLT: 90
+
+ 
+
+BUNT: 45
+
+ 
+
+DBUNT: 35
+
+ 
+
+DUR: 99
+
+ 
+
+FLD: 95
+
+ 
+
+ARM: 88
+
+ 
+
+ACC: 84
+
+ 
+
+REAC: 92
+
+ 
+
+SPD: 72
+
+ 
+
+STEAL: 65
+
+ 
+
+BR AGG: 60
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G    AB   R   H    2B  3B  HR  RBI  BB  SO   SB  CS  AVG   OBP   SLG
+
+ 
+
+2041  ATH   136  563  94  181  41  3   31  103  28  54   7   5   0.321 0.355 0.570
+
+ 
+
+2040  ATH   145  578  77  165  30  4   21  74   47  92   19  5   .285  .340  .460
+
+ 
+
+Career (through 2039) ATH   2126 8451 1290 2398 501 63  447 1370 795 1390 268 110 .284  .346  .516
+
+
+--------------------------------------------------------------------------------
+
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  OPS   PA   SF  SAC  GIDP  HBP  IBB  TB   SB%   PO   A    E   FLD%  INN     WAR
+
+ 
+
+2041  ATH   0.925 605  8   0    6     6    0    321  .583  156  335  3   0.994 1184.2  7.4
+
+ 
+
+2040  ATH   .800  632  0   0    0     0    0    266        194  384  1   .998  1281.2  6.1
+
+ 
+
+Career (through 2039) ATH   .862  9300 0   0    0     0    0    4366       2800 5500 48  .994  18500.0 86.0
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 2407
+
+ 
+
+AB: 9592
+
+ 
+
+R: 1461
+
+ 
+
+H: 2744
+
+ 
+
+2B: 572
+
+ 
+
+3B: 70
+
+ 
+
+HR: 499
+
+ 
+
+RBI: 1547
+
+ 
+
+BB: 870
+
+ 
+
+SO: 1536
+
+ 
+
+SB: 294
+
+ 
+
+CS: 120
+
+ 
+
+AVG: .286
+
+ 
+
+OBP: .345
+
+ 
+
+SLG: .516
+
+ 
+
+OPS: .861
+
+ 
+
+TB: 4953
+
+ 
+
+PO: 3150
+
+ 
+
+A: 6219
+
+ 
+
+E: 52
+
+ 
+
+FLD%: .994
+
+ 
+
+INN: 20965.4
+
+ 
+
+WAR: 99.5
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2042–2050: Free Agent
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Option: Used
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+QUIRKS
+
+Iron Man
+
+Field General
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS
+
+MVP (2032, 2034, 2035)
+
+Rookie of the Year (2026)
+
+All-Star (10x)
+
+Gold Glove (2029, 2030)
+
+Silver Slugger (8x)
+
+World Series MVP (2032)
+
+Gold Glove (2041)
+
+Silver Slugger (2041)
+
+All-Star (2041)
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00019
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00019

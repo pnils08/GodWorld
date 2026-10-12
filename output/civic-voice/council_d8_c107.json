@@ -1,0 +1,48 @@
+{
+  "office": "council_d8",
+  "cycle": 107,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "I am demanding verifiable intake audits and placement tracking before endorsing the full operational rollout of the Youth Apprenticeship Pipeline. Locally, I credit Adams Point's upward momentum to structured neighborhood health coordination while ensuring Lake Merritt's stability is protected by documented municipal oversight rather than uncoordinated claims.",
+  "statements": [
+    {
+      "statementId": "STMT-107-council_d8-001",
+      "type": "district_statement",
+      "topic": "District 8 Neighborhood Stewardship and Adams Point Progress",
+      "initiative": null,
+      "decision": "Formalize inter-agency monitoring for Lake Merritt and commend Adams Point community health coordination",
+      "quote": "Adams Point's gains stem from structured local execution, and Lake Merritt's stability requires verified municipal baseline support, not rhetorical credit.",
+      "fullStatement": "The positive momentum in Adams Point demonstrates the tangible value of structured local coordination, particularly surrounding recent public health programming. That success belongs to the neighborhood partners and residents who execute the work on the ground. Meanwhile, keeping Lake Merritt safe, active, and steady cannot rely on passive assumptions; it demands documented departmental coordination, regular service baselines, and transparent reporting. District 8 succeeds when our administrative processes function consistently across every corridor, from Eastlake to Grand Lake, ensuring commercial vitality and neighborhood security remain anchored in measurable public standards.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d8-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline Public Enrollment",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Support enrollment rollout subject to mandatory monthly verification audits",
+      "quote": "Opening enrollment is a welcome operational milestone, provided intake numbers and cohort placements are verified against auditable records.",
+      "fullStatement": "I support moving the Oakland Youth Apprenticeship Pipeline into its public enrollment launch, but expanding intake requires rigorous procedural follow-through. Clearing application backlogs is meaningful only when placement outcomes, training hours, and employer partner commitments are documented with verifiable metrics. The administration must provide Council with regular compliance updates ensuring that every enrolled participant transitions into a fully certified track without administrative bottlenecks or untracked attrition.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d8-003",
+      "type": "vote_statement",
+      "topic": "Temescal Community Health Center Inspection Certification",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Approve final utility inspections and rough-in certification",
+      "quote": "Rigorous utility inspections protect capital investments and ensure facilities meet code before final buildouts proceed.",
+      "fullStatement": "I vote to certify the completion of interior systems rough-ins and authorize final utility inspections for the Temescal Community Health Center. Maintaining a strict inspection timeline protects public funds and guarantees structural compliance before downstream buildouts occur. As second-shift work continues, the Department of Building and Safety must maintain documented site safety records and environmental compliance filings on schedule.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d8-004",
+      "type": "vote_statement",
+      "topic": "Baylight District Contract Execution and Site Mobilization",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Authorize contract execution contingent on strict environmental compliance filings",
+      "quote": "Ground-breaking must proceed strictly under executed contract terms and verified environmental remediation protocols.",
+      "fullStatement": "With Council approval established, executing construction contracts and mobilizing site preparation for the Baylight District is the correct procedural next step. However, mobilization must adhere strictly to environmental review compliance, dust mitigation standards, and vendor oversight protocols. The city administration must file verified contractor certifications with the Clerk prior to heavy equipment deployment.",
+      "trackerUpdates": {}
+    }
+  ]
+}

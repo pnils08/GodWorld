@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-008",
+  "initiativeId": "INIT-008",
+  "cycle": 110,
+  "primaryVoice": "Mayor gavel (mayor_gavel-003)",
+  "consolidatedFrom": [
+    "STMT-110-mayor_gavel-003 (Mayor gavel — Downtown Economic Revitalization Legislative Filing)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-008",
+    "ImplementationPhase": "legislation-filed",
+    "MilestoneNotes": "C110: Ordinance filed with City Clerk; $15M authorization pending council",
+    "NextScheduledAction": "Council committee referral and hearing",
+    "NextActionCycle": 111
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "office": "health_center",
+  "cycle": 109,
+  "speaker": "Roberta 'Bobby' Chen-Ramirez",
+  "cascadeSummary": "Final closeout documentation submitted for the Temescal Community Health Center, completing all inspections and finishing $1.2M under budget. Neighborhood bulletin board updated with operational hours and services beginning next week.",
+  "statements": [
+    {
+      "statementId": "STMT-109-health_center-001",
+      "type": "operational_status",
+      "topic": "project_closeout",
+      "initiative": "INIT-005",
+      "decision": "Submitted final closeout documentation and released retention payments to contractors",
+      "quote": "That last change order denial in C108 saved exactly $1.219M — every dollar stays in Oakland's health infrastructure fund.",
+      "fullStatement": "Final closeout documentation submitted for the Temescal Community Health Center today: all fire-wall inspections certified, punch-list items resolved, and contractor retention payments processed. We finish $1.2M under the $45M budget — the last change order denial in C108 saved exactly $1.219M after I pulled the original geotechnical report showing the 'unforeseen soil condition' was documented on page 14. Every dollar stays in Oakland's health infrastructure fund. The bulletin board at 47th & Telegraph now shows operational hours and services starting next Tuesday. Neighborhood pharmacy gets first delivery of flu vaccines tomorrow.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "operational",
+        "MilestoneNotes": "C109: Final closeout documentation submitted, $1.2M under budget",
+        "NextScheduledAction": "First patient services begin",
+        "NextActionCycle": 110
+      }
+    },
+    {
+      "statementId": "STMT-109-health_center-002",
+      "type": "constituent_service",
+      "topic": "neighborhood_operations",
+      "initiative": null,
+      "decision": "Posted bilingual service schedules at all Temescal bus stops",
+      "quote": "The 51st Street bench crowd knows the pharmacy hours by heart — now they'll know the clinic hours too.",
+      "fullStatement": "Walked the neighborhood this morning posting bilingual service schedules at all Temescal bus stops — including enlarged-print versions at the 51st Street bench where the retirees wait. The pharmacist across from the site confirmed his first vaccine delivery arrives tomorrow, and we've mapped the footpath between his register and our lobby for elderly patients. Service begins Tuesday with three exam rooms, behavioral health, and the dental suite finishing calibration. The building is done. Now the healing starts.",
+      "trackerUpdates": {}
+    }
+  ]
+}

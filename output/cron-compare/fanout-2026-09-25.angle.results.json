@@ -1,0 +1,38 @@
+{
+  "date": "2026-09-25",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Kai Marston",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Sharon Okafor",
+      "desk": "culture",
+      "ok": false,
+      "error": "invalid W1 output: unverifiedLead must be an array"
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Celeste Tran",
+      "desk": "wire",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-09-25T11:16:49.347Z"
+}

@@ -1,0 +1,600 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00012",
+    "name": "Elliot Graye",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "crisis response at Telegraph Presbyterian Fellowship (Downtown) — the week in faith, and Lake Merritt Mindfulness Sangha in focus",
+    "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "faith",
+      "hood": "Downtown",
+      "facts": [
+        "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+        "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+        "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+        "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+        "Telegraph Presbyterian Fellowship (Downtown), C101 — crisis response: community grief gathering organized (attendance 80)",
+        "B'nai Tikvah Synagogue (Piedmont Ave), C101 — crisis response: congregation opens doors for community support (attendance 34)",
+        "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+        "In focus: Lake Merritt Mindfulness Sangha — Buddhist, Downtown, congregation 500, founded 2007, led by Tao Lee — diverse sangha, social justice dharma",
+        "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+        "Also in Downtown: Telegraph Presbyterian Fellowship (Protestant)"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity. (general coverage)",
+        "Notable event: \"Telegraph Presbyterian Fellowship: congregation opens doors for community support\". Follow-up recommended. (general coverage)"
+      ],
+      "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "beat-faith",
+    "hood": "Downtown",
+    "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\"",
+    "plan": {
+      "focus": "Lake Merritt Mindfulness Sangha",
+      "closeQuestion": "How do the faith events and congregations in Downtown reflect the community's values and needs?"
+    },
+    "openThreads": [
+      {
+        "slug": "lake-merritt-vanessa-treary-named-restaurant",
+        "label": "lake-merritt-vanessa-treary-named-restaurant | C105→C106 | 4 article(s) | advanced 3, opened 1",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00781",
+          "POP-00783",
+          "POP-01045",
+          "POP-00135"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "chinatown-kenji-tanaka-beat-faith",
+        "label": "chinatown-kenji-tanaka-beat-faith | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Chinatown",
+        "popids": [
+          "POP-00763",
+          "POP-00759"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "lake-merritt-vanessa-treary-quiet-nightlife",
+        "label": "lake-merritt-vanessa-treary-quiet-nightlife | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00781",
+          "POP-00783",
+          "POP-01045",
+          "POP-00135"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-tomas-renteria-story-signal",
+        "label": "jack-london-tomas-renteria-story-signal | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00744",
+          "POP-00878",
+          "POP-00960"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "lake-merritt-yuki-ji-quiet-nightlife",
+        "label": "lake-merritt-yuki-ji-quiet-nightlife | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00783",
+          "POP-01045",
+          "POP-00135"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-tomas-renteria-hood-kitchens",
+        "label": "jack-london-tomas-renteria-hood-kitchens | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00744",
+          "POP-00878",
+          "POP-00960"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "adams-point-devon-willis-fame-sighting",
+        "label": "adams-point-devon-willis-fame-sighting | C104→C105 | 5 article(s) | advanced 2, opened 3",
+        "hood": "Adams Point",
+        "popids": [
+          "POP-00782",
+          "POP-00645",
+          "POP-00648",
+          "POP-00798"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "city-depak-ying-story-signal",
+        "label": "city-depak-ying-story-signal | C104→C105 | 3 article(s) | advanced 2, opened 1",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00170",
+          "POP-00198",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "dimond-melton-neilon-fame-sighting",
+        "label": "dimond-melton-neilon-fame-sighting | C105→C105 | 2 article(s) | opened 2",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00170",
+          "POP-00198",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "dimond-melton-neilon-story-signal",
+        "label": "dimond-melton-neilon-story-signal | C105→C105 | 1 article(s) | opened 1",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00170",
+          "POP-00198"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "adams-point-devon-willis-hood",
+        "label": "adams-point-devon-willis-hood | C105→C105 | 1 article(s) | opened 1",
+        "hood": "Adams Point",
+        "popids": [
+          "POP-00782",
+          "POP-00645",
+          "POP-00648",
+          "POP-00798"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "city-melton-neilon-city-event",
+        "label": "city-melton-neilon-city-event | C105→C105 | 1 article(s) | opened 1",
+        "hood": null,
+        "popids": [
+          "POP-00170",
+          "POP-00198",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00764",
+        "name": "Tao Lee",
+        "profile": "Tao Lee — Community Organizer — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00180",
+        "name": "Cameron Wallen",
+        "profile": "Cameron Wallen — Corporate Accountant — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00753",
+        "name": "Eunice Marston",
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00764-c2643c3c42",
+        "pop": "POP-00764",
+        "name": "Tao Lee",
+        "quote": "To be honest, I haven't really thought about the Lake Merritt Mindfulness Sangha that much, but I do know that our neighborhood has a strong sense of community, and it's great to see places like the Telegraph Presbyterian Fellowship opening their doors for support.",
+        "factIds": [
+          "F-ac25a93a42d1",
+          "F-d0dff7c9b7af"
+        ],
+        "src": "packet.W2[POP-00764]"
+      },
+      {
+        "id": "Q-POP-00753-db1fdba53f",
+        "pop": "POP-00753",
+        "name": "Eunice Marston",
+        "quote": "I haven't had any direct involvement with the Lake Merritt Mindfulness Sangha, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.",
+        "factIds": [
+          "F-436ccee6ba3a",
+          "F-d0dff7c9b7af"
+        ],
+        "src": "packet.W2[POP-00753]"
+      },
+      {
+        "id": "Q-POP-00180-2e6b0c1b3a",
+        "pop": "POP-00180",
+        "name": "Cameron Wallen",
+        "quote": "I've recently joined the congregation at Lake Merritt Mindfulness Sangha and I have to say, it's been a really positive experience for me. I feel like it's helped me to cultivate a sense of calm and clarity in my life, which is really important to me, especially with my busy schedule as a Corporate Accountant.",
+        "factIds": [
+          "F-436ccee6ba3a"
+        ],
+        "src": "packet.W2[POP-00180]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Elliot Graye",
+        "text": "The relationship between faith and social justice in Downtown",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C107",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-ac25a93a42d1"
+    },
+    {
+      "t": "FACT",
+      "text": "8 faith events on the record since C101 · Lake Merritt Mindfulness Sangha in Downtown | 11 named on the record",
+      "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\"",
+      "id": "F-436ccee6ba3a"
+    },
+    {
+      "t": "FACT",
+      "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+      "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\"",
+      "id": "F-d0dff7c9b7af"
+    },
+    {
+      "t": "FACT",
+      "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+      "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+      "id": "F-7d24d6975c0b"
+    },
+    {
+      "t": "FACT",
+      "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+      "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+      "id": "F-2e25fe91ddff"
+    },
+    {
+      "t": "FACT",
+      "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+      "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+      "id": "F-fa55233aeb20"
+    },
+    {
+      "t": "FACT",
+      "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+      "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\"",
+      "id": "F-876b8fbb3495"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+      "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\"",
+      "id": "F-f0155f51bf88"
+    },
+    {
+      "t": "FACT",
+      "text": "Telegraph Presbyterian Fellowship (Downtown), C101 — crisis response: community grief gathering organized (attendance 80)",
+      "src": "output/beats/Faith_Ledger.jsonl C101 \"Telegraph Presbyterian Fellowship\"",
+      "id": "F-295571062c25"
+    },
+    {
+      "t": "FACT",
+      "text": "B'nai Tikvah Synagogue (Piedmont Ave), C101 — crisis response: congregation opens doors for community support (attendance 34)",
+      "src": "output/beats/Faith_Ledger.jsonl C101 \"B'nai Tikvah Synagogue\"",
+      "id": "F-19977a90a423"
+    },
+    {
+      "t": "FACT",
+      "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+      "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\"",
+      "id": "F-760718ad78bc"
+    },
+    {
+      "t": "FACT",
+      "text": "In focus: Lake Merritt Mindfulness Sangha — Buddhist, Downtown, congregation 500, founded 2007, led by Tao Lee — diverse sangha, social justice dharma",
+      "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\"",
+      "id": "F-0332b093ebaf"
+    },
+    {
+      "t": "FACT",
+      "text": "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-017",
+      "id": "F-c3ebac270758"
+    },
+    {
+      "t": "FACT",
+      "text": "Also in Downtown: Telegraph Presbyterian Fellowship (Protestant)",
+      "src": "output/beats/Faith_Organizations.jsonl",
+      "id": "F-acd00d075231"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Describe one Packet-supplied faith-community or quiet-care signal through observable function without inventing belief, doctrine, attendance, clergy, service, aid, or institutional action.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "reflective faith-and-ethics ground brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named institution, person, or condition",
+      "closing": "the function or human account still unestablished"
+    },
+    "authorizedTexture": [
+      "ethical or reflective interpretation of a supplied faith-adjacent condition without asserting belief or action",
+      "dignity-first language carrying no invented person, service, gathering, doctrine, or factual premise"
+    ],
+    "textureConditions": [
+      "a sighting proves only the supplied person-place relation, not worship, membership, motive, companionship, or participation",
+      "every clergy member, congregant, worker, gathering, service, aid act, quote, belief, institutional role, and civic effect requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented faith practice, belief, worship, membership, motive, companion, clergy, congregant, worker, pantry, grief room, gathering, service, aid act, quote, or civic effect",
+      "an invented or altered person, institution, tradition, neighborhood, event, relationship, date, count, or quote",
+      "a blocked real-world institution or clergy name, doctrine-war framing, raw engine label, or collective faith-community sentiment presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-9341f81caae4",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-ac25a93a42d1",
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-436ccee6ba3a",
+        "t": "FACT",
+        "text": "8 faith events on the record since C101 · Lake Merritt Mindfulness Sangha in Downtown | 11 named on the record",
+        "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\""
+      },
+      {
+        "id": "F-d0dff7c9b7af",
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+        "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\""
+      },
+      {
+        "id": "F-7d24d6975c0b",
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\""
+      },
+      {
+        "id": "F-2e25fe91ddff",
+        "t": "FACT",
+        "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+        "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\""
+      },
+      {
+        "id": "F-fa55233aeb20",
+        "t": "FACT",
+        "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+        "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\""
+      },
+      {
+        "id": "F-876b8fbb3495",
+        "t": "FACT",
+        "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+        "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\""
+      },
+      {
+        "id": "F-f0155f51bf88",
+        "t": "FACT",
+        "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+        "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\""
+      },
+      {
+        "id": "F-295571062c25",
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C101 — crisis response: community grief gathering organized (attendance 80)",
+        "src": "output/beats/Faith_Ledger.jsonl C101 \"Telegraph Presbyterian Fellowship\""
+      },
+      {
+        "id": "F-19977a90a423",
+        "t": "FACT",
+        "text": "B'nai Tikvah Synagogue (Piedmont Ave), C101 — crisis response: congregation opens doors for community support (attendance 34)",
+        "src": "output/beats/Faith_Ledger.jsonl C101 \"B'nai Tikvah Synagogue\""
+      },
+      {
+        "id": "F-760718ad78bc",
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\""
+      },
+      {
+        "id": "F-0332b093ebaf",
+        "t": "FACT",
+        "text": "In focus: Lake Merritt Mindfulness Sangha — Buddhist, Downtown, congregation 500, founded 2007, led by Tao Lee — diverse sangha, social justice dharma",
+        "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\""
+      },
+      {
+        "id": "F-c3ebac270758",
+        "t": "FACT",
+        "text": "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-017"
+      },
+      {
+        "id": "F-acd00d075231",
+        "t": "FACT",
+        "text": "Also in Downtown: Telegraph Presbyterian Fellowship (Protestant)",
+        "src": "output/beats/Faith_Organizations.jsonl"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00764-c2643c3c42",
+        "speakerId": "POP-00764",
+        "speakerName": "Tao Lee",
+        "text": "To be honest, I haven't really thought about the Lake Merritt Mindfulness Sangha that much, but I do know that our neighborhood has a strong sense of community, and it's great to see places like the Telegraph Presbyterian Fellowship opening their doors for support.",
+        "factIds": [
+          "F-ac25a93a42d1",
+          "F-d0dff7c9b7af"
+        ],
+        "src": "packet.W2[POP-00764]"
+      },
+      {
+        "id": "Q-POP-00753-db1fdba53f",
+        "speakerId": "POP-00753",
+        "speakerName": "Eunice Marston",
+        "text": "I haven't had any direct involvement with the Lake Merritt Mindfulness Sangha, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.",
+        "factIds": [
+          "F-436ccee6ba3a",
+          "F-d0dff7c9b7af"
+        ],
+        "src": "packet.W2[POP-00753]"
+      },
+      {
+        "id": "Q-POP-00180-2e6b0c1b3a",
+        "speakerId": "POP-00180",
+        "speakerName": "Cameron Wallen",
+        "text": "I've recently joined the congregation at Lake Merritt Mindfulness Sangha and I have to say, it's been a really positive experience for me. I feel like it's helped me to cultivate a sense of calm and clarity in my life, which is really important to me, especially with my busy schedule as a Corporate Accountant.",
+        "factIds": [
+          "F-436ccee6ba3a"
+        ],
+        "src": "packet.W2[POP-00180]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00764",
+        "name": "Tao Lee",
+        "profile": "Tao Lee — Community Organizer — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00180",
+        "name": "Cameron Wallen",
+        "profile": "Cameron Wallen — Corporate Accountant — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00753",
+        "name": "Eunice Marston",
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Elliot Graye",
+        "text": "The relationship between faith and social justice in Downtown",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "ethical or reflective interpretation of a supplied faith-adjacent condition without asserting belief or action",
+      "dignity-first language carrying no invented person, service, gathering, doctrine, or factual premise"
+    ],
+    "textureConditions": [
+      "a sighting proves only the supplied person-place relation, not worship, membership, motive, companionship, or participation",
+      "every clergy member, congregant, worker, gathering, service, aid act, quote, belief, institutional role, and civic effect requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented faith practice, belief, worship, membership, motive, companion, clergy, congregant, worker, pantry, grief room, gathering, service, aid act, quote, or civic effect",
+      "an invented or altered person, institution, tradition, neighborhood, event, relationship, date, count, or quote",
+      "a blocked real-world institution or clergy name, doctrine-war framing, raw engine label, or collective faith-community sentiment presented as fact"
+    ]
+  }
+}

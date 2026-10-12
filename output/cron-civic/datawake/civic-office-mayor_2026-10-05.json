@@ -1,0 +1,26 @@
+{
+  "office": "mayor",
+  "agentDir": "civic-office-mayor",
+  "holder": "Avery Santana",
+  "popid": "POP-00034",
+  "title": "Mayor",
+  "date": "2026-10-05",
+  "cycle": 110,
+  "model": "moonshotai/kimi-k2",
+  "statement": "Grand Lake's commercial corridor has been the quiet engine of this neighborhood's momentum — and now we're putting real dollars behind the businesses that made it that way. This $2.5M stabilization fund is about keeping storefronts open, keeping jobs local, and making sure the growth Grand Lake is already seeing doesn't price out the people who built it. The legislation is filed. Next step is Council, and I'm confident we can move fast.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-105-civic-office-mayor",
+        "text": "The Youth Apprenticeship Pipeline backlog is unacceptable — 150 apprentices by spring was the commitment, and we're not waiting for a town hall to act. I'm directing OEWD to clear all pending cohort placements by C112 and report weekly to my office until we're caught up. The pipeline works when it moves fast. We're making it move.",
+        "directiveCycle": 105,
+        "confrontationSeat": "civic-office-mayor"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "1",
+  "ranAt": "2026-10-05T10:45:50.067Z",
+  "fellBackFrom": null
+}

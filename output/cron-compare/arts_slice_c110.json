@@ -1,0 +1,425 @@
+{
+  "version": "ARTS-SLICE-1",
+  "empty": false,
+  "cycle": 110,
+  "kind": "beat-arts",
+  "seat": {
+    "slug": "kai-marston",
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "desk": "culture",
+    "domain": "arts",
+    "builder": "buildArtsSlice.js"
+  },
+  "hood": "Baylight District",
+  "pulse": {
+    "className": "beat-arts",
+    "score": 100,
+    "label": "38 culture figures rising; 1 new on the record",
+    "hood": "Baylight District",
+    "source": "output/beats/Cultural_Ledger.jsonl @C110"
+  },
+  "story": {
+    "kind": "beat-arts",
+    "angle": "Tara Ellison is rising — the acts and the rooms they play",
+    "label": "38 culture figures rising; 1 new on the record",
+    "hookLine": "Tara Ellison (journalist), Media, Baylight District — fame rising (fame 63, surging), last seen C110.",
+    "hood": "Baylight District",
+    "citizens": [
+      "Tara Ellison (POP-00546)",
+      "Alma Vasquez (POP-01063)",
+      "Nina Reyes (POP-01057)",
+      "Theo Banks (POP-01056)",
+      "Lena Cross (POP-00539)",
+      "Rowan Pierce (POP-00545)",
+      "Erica Faulkner (POP-00887)",
+      "Ala Lewis (POP-00660)",
+      "Jacob Perez (POP-01089)",
+      "Ernesto Quintero (POP-00050)",
+      "Rafael Phillips (POP-00958)",
+      "Clarissa Dane (POP-00143)",
+      "Lena Okafor (POP-00530)",
+      "Theo Park (POP-00038)",
+      "Soledad Coleman (POP-00840)",
+      "Camila Cook (POP-01038)",
+      "Rico Fister (POP-00305)"
+    ],
+    "popids": [
+      "POP-00546",
+      "POP-01063",
+      "POP-01057",
+      "POP-01056",
+      "POP-00539",
+      "POP-00545",
+      "POP-00887",
+      "POP-00660",
+      "POP-01089",
+      "POP-00050",
+      "POP-00958",
+      "POP-00143",
+      "POP-00530",
+      "POP-00038",
+      "POP-00840",
+      "POP-01038",
+      "POP-00305"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C110",
+    "cycle": 110
+  },
+  "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the engine's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00546",
+      "name": "Tara Ellison",
+      "role": "Journalist",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Tara Ellison — Journalist — Rockridge",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01063",
+      "name": "Alma Vasquez",
+      "role": "sculptor",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Alma Vasquez — sculptor — Laurel",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01057",
+      "name": "Nina Reyes",
+      "role": "actress",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Nina Reyes — actress — Fruitvale",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01056",
+      "name": "Theo Banks",
+      "role": "rapper",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Theo Banks — rapper — Uptown",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00539",
+      "name": "Lena Cross",
+      "role": "Actor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Lena Cross — Actor — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00545",
+      "name": "Rowan Pierce",
+      "role": "Freelance Writer",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00887",
+      "name": "Erica Faulkner",
+      "role": "Immigration Attorney",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Erica Faulkner — Immigration Attorney — Lake Merritt",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00660",
+      "name": "Ala Lewis",
+      "role": "Tailor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Ala Lewis — Tailor — Piedmont Ave",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01089",
+      "name": "Jacob Perez",
+      "role": "Delivery driver",
+      "neighborhood": "Glenview",
+      "business": null,
+      "profile": "Jacob Perez — Delivery driver — Glenview",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00050",
+      "name": "Ernesto Quintero",
+      "role": "3B/1B , Oakland A's",
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00958",
+      "name": "Rafael Phillips",
+      "role": "Nurse aide",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Rafael Phillips — Nurse aide — Fruitvale",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00143",
+      "name": "Clarissa Dane",
+      "role": "DISTRICT ATTORNEY",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Clarissa Dane — DISTRICT ATTORNEY — West Oakland",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00530",
+      "name": "Lena Okafor",
+      "role": "Daycare Director",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Lena Okafor — Daycare Director — Fruitvale",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00038",
+      "name": "Theo Park",
+      "role": "Communications Director",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Theo Park — Communications Director — Rockridge",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00840",
+      "name": "Soledad Coleman",
+      "role": "AI Safety Researcher (Anthropic)",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Soledad Coleman — AI Safety Researcher (Anthropic) — Rockridge",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01038",
+      "name": "Camila Cook",
+      "role": "Painter",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Camila Cook — Painter — Rockridge",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00305",
+      "name": "Rico Fister",
+      "role": "High School Science Teacher",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Rico Fister — High School Science Teacher — Rockridge",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Tara Ellison (journalist), Media, Baylight District — fame rising (fame 63, surging), last seen C110",
+      "src": "output/beats/Cultural_Ledger.jsonl @C110"
+    },
+    {
+      "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 55, ascending), last seen C86",
+      "src": "output/beats/Cultural_Ledger.jsonl @C110"
+    },
+    {
+      "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+      "src": "output/beats/Cultural_Ledger.jsonl @C110"
+    },
+    {
+      "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 49, surging), last seen C99",
+      "src": "output/beats/Cultural_Ledger.jsonl @C110"
+    },
+    {
+      "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal — new on the culture record this cycle (fame 18, rising), last seen C110",
+      "src": "output/beats/Cultural_Ledger.jsonl @C110"
+    },
+    {
+      "text": "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 95, cooling), last seen C94",
+      "src": "output/beats/Cultural_Ledger.jsonl @C110"
+    },
+    {
+      "text": "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 69, cooling), last seen C88",
+      "src": "output/beats/Cultural_Ledger.jsonl @C110"
+    },
+    {
+      "text": "ENGINE SEED (Citywide): Erica Faulkner; Ala Lewis; Jacob Perez",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C110"
+    },
+    {
+      "text": "ENGINE SEED (Fruitvale): Rafael Phillips; Clarissa Dane; Lena Okafor · at Fruitvale Community Clinic; Fruitvale Transit Hub Authority",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C110"
+    },
+    {
+      "text": "ENGINE SEED (Rockridge): Theo Park; Soledad Coleman; Camila Cook · at Canopy Market; Dillon Clinic",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C110"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Tara Ellison is rising — the acts and the rooms they play",
+    "hookLine": "Tara Ellison (journalist), Media, Baylight District — fame rising (fame 63, surging), last seen C110.",
+    "anchorFacts": [
+      "Tara Ellison (journalist), Media, Baylight District — fame rising (fame 63, surging), last seen C110",
+      "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 55, ascending), last seen C86",
+      "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+      "Theo Banks (rapper), Arts, Uptown — fame rising (fame 49, surging), last seen C99",
+      "Warriors Alumni Thompson (basketball legend), Sports, Temescal — new on the culture record this cycle (fame 18, rising), last seen C110",
+      "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 95, cooling), last seen C94",
+      "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 69, cooling), last seen C88",
+      "ENGINE SEED (Citywide): Erica Faulkner; Ala Lewis; Jacob Perez",
+      "ENGINE SEED (Fruitvale): Rafael Phillips; Clarissa Dane; Lena Okafor · at Fruitvale Community Clinic; Fruitvale Transit Hub Authority",
+      "ENGINE SEED (Rockridge): Theo Park; Soledad Coleman; Camila Cook · at Canopy Market; Dillon Clinic"
+    ],
+    "evidence": [
+      {
+        "text": "Tara Ellison (journalist), Media, Baylight District — fame rising (fame 63, surging), last seen C110",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110"
+      },
+      {
+        "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 55, ascending), last seen C86",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110"
+      },
+      {
+        "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110"
+      },
+      {
+        "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 49, surging), last seen C99",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110"
+      },
+      {
+        "text": "Warriors Alumni Thompson (basketball legend), Sports, Temescal — new on the culture record this cycle (fame 18, rising), last seen C110",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110"
+      },
+      {
+        "text": "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 95, cooling), last seen C94",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110"
+      },
+      {
+        "text": "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 69, cooling), last seen C88",
+        "src": "output/beats/Cultural_Ledger.jsonl @C110"
+      },
+      {
+        "text": "ENGINE SEED (Citywide): Erica Faulkner; Ala Lewis; Jacob Perez",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C110"
+      },
+      {
+        "text": "ENGINE SEED (Fruitvale): Rafael Phillips; Clarissa Dane; Lena Okafor · at Fruitvale Community Clinic; Fruitvale Transit Hub Authority",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C110"
+      },
+      {
+        "text": "ENGINE SEED (Rockridge): Theo Park; Soledad Coleman; Camila Cook · at Canopy Market; Dillon Clinic",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C110"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [
+      {
+        "text": "Heavy culture activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": null,
+        "priority": 3
+      },
+      {
+        "text": "Multiple arts signals detected. Could be coincidence or early pattern.",
+        "angle": "general coverage",
+        "domain": "ARTS",
+        "hood": null,
+        "priority": 2
+      },
+      {
+        "text": "Notable event: \"art installation mishap\". Follow-up recommended.",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": null,
+        "priority": 2
+      },
+      {
+        "text": "upgraded a flight seat and didn't think twice about it",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Jack London",
+        "priority": 3
+      },
+      {
+        "text": "navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Rockridge",
+        "priority": 3
+      },
+      {
+        "text": "overheard a stranger asking about rents on a block nobody used to ask about",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Jack London",
+        "priority": 3
+      },
+      {
+        "text": "stared at the Stabilization Fund application requirements until the numbers blurred together",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Laurel",
+        "priority": 3
+      },
+      {
+        "text": "Multiple nightlife signals detected. Could be coincidence or early pattern.",
+        "angle": "general coverage",
+        "domain": "NIGHTLIFE",
+        "hood": null,
+        "priority": 2
+      },
+      {
+        "text": "First Friday: Monthly art walk tonight. Gallery openings, street vendors, neighborhood energy. Photo walk opportunity.",
+        "angle": "desk rotation",
+        "domain": "CULTURE",
+        "hood": "Uptown",
+        "priority": 2
+      },
+      {
+        "text": "Nightlife surge in the district. Scene report or venue profile opportunity.",
+        "angle": "general coverage",
+        "domain": "NIGHTLIFE",
+        "hood": "Jack London",
+        "priority": 2
+      },
+      {
+        "text": "First Friday nightlife surge expected. Restaurant and bar scene coverage available.",
+        "angle": "general coverage",
+        "domain": "NIGHTLIFE",
+        "hood": "KONO",
+        "priority": 1
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started"
+  },
+  "rising": 38,
+  "appeared": 1,
+  "fading": 2,
+  "seeds": 25,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C110",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Kai Marston this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

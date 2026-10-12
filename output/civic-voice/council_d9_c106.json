@@ -1,0 +1,28 @@
+{
+  "office": "council_d9",
+  "cycle": 106,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "Defended Laurel's sustained progress and highlighted Uptown's success as a product of community-driven investment. Positioned both neighborhoods as models for focused, equitable development citywide.",
+  "statements": [
+    {
+      "statementId": "STMT-106-council_d9-001",
+      "type": "district_statement",
+      "topic": "Laurel stability",
+      "initiative": null,
+      "decision": "Defend Laurel's momentum",
+      "quote": "Laurel’s progress isn’t legacy—it’s today’s work paying off.",
+      "fullStatement": "Laurel’s crime rates remain below city averages, with property crimes at 28 and violent crimes at 24 this cycle—well under the city’s 40.6 and 33.5. Sentiment holds steady at 0.36, and our housing pressure is flat zero. This isn’t a district in crisis—it’s one worth protecting. I’ll defend our momentum by staying focused on what’s working: tangible investments in public safety and community spaces. Laurel isn’t just stable—it’s thriving because we’ve stayed intentional.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d9-002",
+      "type": "district_statement",
+      "topic": "Uptown success",
+      "initiative": null,
+      "decision": "Claim credit for Uptown's momentum",
+      "quote": "Uptown’s success isn’t just window dressing—it’s proof Oakland works.",
+      "fullStatement": "Uptown’s success isn’t just numbers—it’s the people who showed up to build it. This district proves Oakland can thrive when we invest in our communities, not just corporate interests. Uptown’s rebound hasn’t been slick brochures and glossy renderings—it’s been small businesses getting leases renewed and families staying put. If we want the rest of Oakland to feel this momentum, we need to keep building in Uptown—and across D9—while staying rooted in the people who make this city work.",
+      "trackerUpdates": {}
+    }
+  ]
+}

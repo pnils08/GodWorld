@@ -1,0 +1,78 @@
+{
+  "office": "mayor_open",
+  "cycle": 109,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle I'm authorizing the Fruitvale Transit Hub design consultant selection and directing the Youth Apprenticeship Pipeline to publish its first cohort placement metrics. Both initiatives have cleared their prerequisite milestones and are ready for executive action. The Transit Hub moves from visioning to design procurement, and the Pipeline moves from enrollment to verified job placement.",
+  "statements": [
+    {
+      "statementId": "STMT-109-mayor_open-001",
+      "type": "authorization_response",
+      "topic": "Fruitvale Transit Hub Phase II Design Consultant Selection",
+      "initiative": "INIT-003",
+      "decision": "authorized",
+      "quote": "The Fruitvale Transit Hub moves from community vision to design reality — Oaklanders shaped this, and now we're building it.",
+      "fullStatement": "Following the successful completion of public visioning and merchant covenant execution, I am authorizing the selection of the design consultant for the Fruitvale Transit Hub Phase II. This $230 million investment connects our second-busiest BART station to opportunity — not through promises, but through infrastructure that moves people. The RFP requirements reflect direct community input from three town halls and merchant engagement sessions. My office expects the consultant contract executed by Cycle 111, with schematic design to follow. This is what happens when you center community voice in city building.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-mayor_open-002",
+      "type": "executive_order",
+      "topic": "Youth Apprenticeship Pipeline Cohort Placement Metrics Publication",
+      "initiative": "INIT-007",
+      "decision": "directed",
+      "quote": "Enrollment means nothing without placement — here's the proof that Oakland's young people are getting the jobs we promised.",
+      "fullStatement": "I am directing the Office of Economic and Workforce Development to publish the first training cohort placement metrics for the Oakland Youth Apprenticeship Pipeline. Following successful town hall enrollment in Cycle 107, we now have verified placements across Baylight construction, Temescal health center operations, and city infrastructure maintenance. These are not projections — they are paychecks in young Oaklanders' hands. The publication will break down placement by district, trade track, and employer partner. Transparency builds trust, and trust builds the pipeline that replaces generational poverty with generational wealth. My office will receive monthly updates on retention and wage progression.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-mayor_open-003",
+      "type": "policy_position",
+      "topic": "West Oakland Stabilization Fund — Downtown Outreach Acceleration",
+      "initiative": "INIT-001",
+      "decision": "continued",
+      "quote": "The fund follows the need — Downtown storefronts are quiet, so that's where we accelerate.",
+      "fullStatement": "The West Oakland Stabilization Fund's month-eight disbursement is complete, and the Downtown outreach assessment confirms what we expected: foot traffic is down, storefronts are quieter than the rest of the city, and the need is real. I am directing Deputy Mayor Brenda Okoro's team to accelerate intake review for applicants identified through the Downtown canvass. The $28 million fund was chartered to follow displacement pressure wherever it lands — and it's landing in our commercial corridors, not just our residential blocks. We have approximately $23.8 million remaining authorization. My office expects weekly placement reports until the accelerated cohort is processed.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-mayor_open-004",
+      "type": "policy_position",
+      "topic": "Oakland Alternative Response Initiative — District 1 Evaluation Complete",
+      "initiative": "INIT-002",
+      "decision": "continued",
+      "quote": "Three districts, three protocols, one clear result — OARI works, so OARI grows.",
+      "fullStatement": "The District 1 evaluation for the Oakland Alternative Response Initiative is complete. East Oakland's dispatch protocol deployment in Cycle 107 has generated response time and outcome data that matches or exceeds our West Oakland and Fruitvale benchmarks. Mental health crisis calls are receiving appropriate response, police resources are redirecting to violent crime, and community satisfaction metrics show sustained support. I am directing the Department of Violence Prevention to prepare expansion protocols for remaining districts, with a priority assessment for District 6 and District 7 based on call volume analysis. The $12.5 million authorization remains fully deployed against measurable outcomes.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-mayor_open-005",
+      "type": "public_remark",
+      "topic": "Temescal Community Health Center — Opening Celebration",
+      "initiative": "INIT-005",
+      "decision": "acknowledged",
+      "quote": "Ahead of schedule on a health center — that's what happens when you fund public infrastructure like it matters.",
+      "fullStatement": "The Temescal Community Health Center opened its doors this cycle, completing construction ahead of schedule and under the $45 million budget authorization. This is not a ribbon-cutting for a building — it's frontline healthcare access for thousands of Oakland families who previously traveled across the city for basic services. My thanks to the construction crews, the Alameda Health System partnership team, and the community advocates who kept this project honest through every phase. The center is now accepting patients. Oakland's health infrastructure just got stronger.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-mayor_open-006",
+      "type": "public_remark",
+      "topic": "Baylight District Phase II Site Remediation — Progress Update",
+      "initiative": "INIT-006",
+      "decision": "acknowledged",
+      "quote": "Contracts signed, shovels moving, Oakland's future getting built — one remediation truck at a time.",
+      "fullStatement": "Phase II site remediation for the Baylight District is underway. Construction contracts executed in Cycle 107 have mobilized environmental remediation teams across the 55-acre district, with soil treatment and groundwater management now active. This $2.1 billion investment is my signature commitment to Oakland's future — not because stadiums are flashy, but because the 8,000 construction jobs and permanent employment base change what this city can offer its children. The remediation phase protects future residents and workers while preparing for vertical construction. We are building this responsibly, and we are building it to last.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-mayor_open-007",
+      "type": "public_remark",
+      "topic": "District Crisis and Credit — Dimond and West Oakland",
+      "initiative": null,
+      "decision": "addressed",
+      "quote": "West Oakland's turnaround belongs to the people who live there — and to the Stabilization Fund that kept them there.",
+      "fullStatement": "This cycle I want to name two neighborhoods. First, Dimond — where mood reads mildly positive but street trade is slow. My office hears you. The Downtown Economic Revitalization initiative, filed for legislation this cycle, includes commercial corridor support that extends to MacArthur Boulevard. Second, West Oakland — where the mood is clearly upbeat and street trade is steady. This turnaround belongs to the residents who organized, to the small business owners who stayed, and to the West Oakland Stabilization Fund that kept 47 families in their homes during the hardest years. Credit matters. The Fund works. And we're not done.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "label": "stuck-initiative (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"design-phase\" for 3 cycles",
+      "kind": "anomaly",
+      "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+      "hookLine": "The transit initiative carrying Fruitvale has not advanced in 3 cycles.",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00744",
+        "POP-00756",
+        "POP-00953"
+      ],
+      "citizens": [
+        "Tomas Renteria (POP-00744)",
+        "Ramon Solano (POP-00756)",
+        "Carmen Solis (POP-00953)"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/civic_c110_luis-navarro_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00503",
+      "name": "Rose Delgado",
+      "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "council_d3",
+        "statementId": "STMT-110-council_d3-001",
+        "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+        "topic": "Fruitvale Transit Hub Phase II",
+        "initiativeId": "INIT-003",
+        "filePath": "output/civic-voice/council_d3_c110.json",
+        "holderPopid": "POP-00503",
+        "speakerName": "Rose Delgado"
+      }
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "mayor_gavel",
+        "statementId": "STMT-110-mayor_gavel-002",
+        "quote": "Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.",
+        "topic": "Fruitvale Transit Hub Phase II Preliminary Schematics",
+        "initiativeId": "INIT-003",
+        "filePath": "output/civic-voice/mayor_gavel_c110.json",
+        "holderPopid": "POP-00034",
+        "speakerName": "Avery Santana"
+      }
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "Mayer & Associates listens to Fruitvale merchants first, designs second — and now we move to blueprints.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "mayor_open",
+        "statementId": "STMT-110-mayor_open-003",
+        "quote": "Mayer & Associates listens to Fruitvale merchants first, designs second — and now we move to blueprints.",
+        "topic": "Fruitvale Transit Hub Phase II — Preliminary Schematics Advancement",
+        "initiativeId": "INIT-003",
+        "filePath": "output/civic-voice/mayor_open_c110.json",
+        "holderPopid": "POP-00034",
+        "speakerName": "Avery Santana"
+      }
+    },
+    {
+      "pop": "POP-00791",
+      "name": "Elena Soria Dominguez",
+      "quote": "Mayer & Associates doesn’t just draw blueprints—they listen to the tamale vendors and panaderías that make Fruitvale Fruitvale.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "transit_hub",
+        "statementId": "STMT-110-transit_hub-001",
+        "quote": "Mayer & Associates doesn’t just draw blueprints—they listen to the tamale vendors and panaderías that make Fruitvale Fruitvale.",
+        "topic": "Fruitvale Transit Hub Phase II",
+        "initiativeId": "INIT-003",
+        "filePath": "output/civic-voice/transit_hub_c110.json",
+        "holderPopid": "POP-00791",
+        "speakerName": "Elena Soria Dominguez"
+      }
+    }
+  ],
+  "officeRecords": [
+    {
+      "sourceKind": "office-record",
+      "cycle": 110,
+      "officeSlug": "council_d3",
+      "statementId": "STMT-110-council_d3-001",
+      "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+      "topic": "Fruitvale Transit Hub Phase II",
+      "initiativeId": "INIT-003",
+      "filePath": "output/civic-voice/council_d3_c110.json",
+      "holderPopid": "POP-00503",
+      "speakerName": "Rose Delgado"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 110,
+      "officeSlug": "mayor_gavel",
+      "statementId": "STMT-110-mayor_gavel-002",
+      "quote": "Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.",
+      "topic": "Fruitvale Transit Hub Phase II Preliminary Schematics",
+      "initiativeId": "INIT-003",
+      "filePath": "output/civic-voice/mayor_gavel_c110.json",
+      "holderPopid": "POP-00034",
+      "speakerName": "Avery Santana"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 110,
+      "officeSlug": "mayor_open",
+      "statementId": "STMT-110-mayor_open-003",
+      "quote": "Mayer & Associates listens to Fruitvale merchants first, designs second — and now we move to blueprints.",
+      "topic": "Fruitvale Transit Hub Phase II — Preliminary Schematics Advancement",
+      "initiativeId": "INIT-003",
+      "filePath": "output/civic-voice/mayor_open_c110.json",
+      "holderPopid": "POP-00034",
+      "speakerName": "Avery Santana"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 110,
+      "officeSlug": "transit_hub",
+      "statementId": "STMT-110-transit_hub-001",
+      "quote": "Mayer & Associates doesn’t just draw blueprints—they listen to the tamale vendors and panaderías that make Fruitvale Fruitvale.",
+      "topic": "Fruitvale Transit Hub Phase II",
+      "initiativeId": "INIT-003",
+      "filePath": "output/civic-voice/transit_hub_c110.json",
+      "holderPopid": "POP-00791",
+      "speakerName": "Elena Soria Dominguez"
+    }
+  ],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-06T18:15:02.351Z"
+}

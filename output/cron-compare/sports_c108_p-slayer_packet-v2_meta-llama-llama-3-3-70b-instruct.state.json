@@ -1,0 +1,567 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00008",
+    "name": "P Slayer",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "fan-heat",
+      "fanCharge": "grief",
+      "bagModes": [
+        "3 Friction Pivot",
+        "6 Superman We Asked Him to Be",
+        "7 We Still Believe / We're Done"
+      ],
+      "friction": "Grief without inventing medical private life — we demanded too much.",
+      "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "injury-load",
+    "hood": "Downtown",
+    "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads ",
+    "plan": {
+      "focus": "The emotional toll of the game on the players and the fans",
+      "closeQuestion": "Can the A's bounce back from this loss and make it to the World Series?"
+    },
+    "openThreads": [
+      {
+        "slug": "baylight-district-vinnie-keane-prospect-callup",
+        "label": "baylight-district-vinnie-keane-prospect-callup | C104→C107 | 8 article(s) | advanced 4, opened 4",
+        "hood": "Baylight District,Fruitvale",
+        "popids": [
+          "POP-00001",
+          "POP-00050",
+          "POP-00170",
+          "POP-00018",
+          "POP-00003",
+          "POP-00019",
+          "POP-01024",
+          "POP-00198",
+          "POP-00201",
+          "POP-00033",
+          "POP-00597",
+          "POP-00644"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "eastlake-desmond-morton-win-streak",
+        "label": "eastlake-desmond-morton-win-streak | C107→C107 | 2 article(s) | opened 2",
+        "hood": "Eastlake",
+        "popids": [
+          "POP-00533",
+          "POP-00052",
+          "POP-00598",
+          "POP-00051"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "downtown-jessie-hess-beat-oaks-beat",
+        "label": "downtown-jessie-hess-beat-oaks-beat | C107→C107 | 2 article(s) | opened 2",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00212",
+          "POP-00224"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "downtown-wilson-shepard-beat-oaks-ground",
+        "label": "downtown-wilson-shepard-beat-oaks-ground | C107→C107 | 2 article(s) | opened 2",
+        "hood": "Downtown",
+        "popids": [
+          "POP-01022",
+          "POP-01023",
+          "POP-00212",
+          "POP-00224"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "eastlake-travis-coles-sideline-signal",
+        "label": "eastlake-travis-coles-sideline-signal | C107→C107 | 2 article(s) | opened 2",
+        "hood": "Eastlake",
+        "popids": [
+          "POP-00533",
+          "POP-00598",
+          "POP-00051",
+          "POP-00052"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "fruitvale-john-ellis-sports-analytics",
+        "label": "fruitvale-john-ellis-sports-analytics | C107→C107 | 1 article(s) | opened 1",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00033",
+          "POP-00597",
+          "POP-00198",
+          "POP-00644"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "glenview-desmond-morton-long-view-signal",
+        "label": "glenview-desmond-morton-long-view-signal | C107→C107 | 1 article(s) | opened 1",
+        "hood": "Glenview",
+        "popids": [
+          "POP-00051",
+          "POP-00003",
+          "POP-01087",
+          "POP-01089"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "jack-london-martin-richards-roster-move",
+        "label": "jack-london-martin-richards-roster-move | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031",
+          "POP-00273",
+          "POP-00642",
+          "POP-00643"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-martin-richards-long-view-signal",
+        "label": "jack-london-martin-richards-long-view-signal | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031",
+          "POP-00642"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "west-oakland-elio-perez-ripple",
+        "label": "west-oakland-elio-perez-ripple | C106→C106 | 2 article(s) | opened 2",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00201",
+          "POP-00722",
+          "POP-00794",
+          "POP-00961"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-martin-richards-story-signal",
+        "label": "jack-london-martin-richards-story-signal | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031",
+          "POP-00273",
+          "POP-00642",
+          "POP-00643"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-martin-richards-sports-analytics",
+        "label": "jack-london-martin-richards-sports-analytics | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031"
+        ],
+        "lastCycle": 106
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01078",
+        "name": "Pablo Almanzar",
+        "profile": "Pablo Almanzar — SP / Oakland A's — Jack London",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00597",
+        "name": "Eric Taveras",
+        "profile": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00033",
+        "name": "John Ellis",
+        "profile": "John Ellis — Starting Pitcher, Oakland A's — Laurel",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "profile": "Jessie Hess",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00033-4db81026ce",
+        "pop": "POP-00033",
+        "name": "John Ellis",
+        "quote": "The emotional toll of the game is real, I can feel it myself after a tough loss. It's not just about winning or losing, it's about the pressure to perform and the weight of expectation from the fans. Sometimes it feels like we're carrying the whole city on our shoulders.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d"
+        ],
+        "src": "packet.W2[POP-00033]"
+      },
+      {
+        "id": "Q-POP-01078-87173fa6fd",
+        "pop": "POP-01078",
+        "name": "Pablo Almanzar",
+        "quote": "I think the emotional toll of the game can be really high, not just for the players but for the fans too. I've seen how much it means to people around here, like when I'm out in the neighborhood and everyone's talking about the game. It's like the whole city is invested in it.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d"
+        ],
+        "src": "packet.W2[POP-01078]"
+      },
+      {
+        "id": "Q-POP-00597-1f0abeefa1",
+        "pop": "POP-00597",
+        "name": "Eric Taveras",
+        "quote": "I feel like the game can be really tough on us players, both physically and mentally. The pressure to perform is always there, and when we don't do well, it can be hard to shake off the feeling of disappointment. I think the fans feel it too, they're so invested in the team and when we lose, it's like they're feeling the loss just as much as we are.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d",
+          "F-5ac04948751e"
+        ],
+        "src": "packet.W2[POP-00597]"
+      },
+      {
+        "id": "Q-POP-00212-fa2ae54269",
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "quote": "I feel like the game can be really tough on the players and the fans, it's like we're all in it together and when they lose, we feel it too.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d"
+        ],
+        "src": "packet.W2[POP-00212]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "The possibility that the team's performance is affected by the pressure from the fans",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C108",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-78217e633afa"
+    },
+    {
+      "t": "FACT",
+      "text": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+      "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+      "id": "F-dc655a27901d"
+    },
+    {
+      "t": "FACT",
+      "text": "Grief without inventing medical private life — we demanded too much.",
+      "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+      "id": "F-5ac04948751e"
+    },
+    {
+      "t": "FACT",
+      "text": "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+      "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+      "id": "F-55c7803c93af"
+    },
+    {
+      "t": "FACT",
+      "text": "Team record (feed): 4-1 · streak W1",
+      "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+      "id": "F-83325385ff66"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+      "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+      "id": "F-fe8ce179c77b"
+    },
+    {
+      "t": "FACT",
+      "text": "Event: A's — game-result (playoffs)",
+      "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+      "id": "F-cc5f84c5005d"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a Packet-backed sports result or roster move into fan consequence. Owning or doubling down on a prior take and applying fan or front-office pressure are success; press-box analysis and tidy resolution are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "first-person I/we fan-heat column",
+      "targetWords": "400-700",
+      "opening": "a bar, lot, bleacher, sidewalk, or sports-viewing sensory moment",
+      "closing": "a dare, confession, or update with the central friction still live"
+    },
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "canonBlockers": [
+      "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-3615b04f5888",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-78217e633afa",
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-dc655a27901d",
+        "t": "FACT",
+        "text": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+        "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads"
+      },
+      {
+        "id": "F-5ac04948751e",
+        "t": "FACT",
+        "text": "Grief without inventing medical private life — we demanded too much.",
+        "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads"
+      },
+      {
+        "id": "F-55c7803c93af",
+        "t": "FACT",
+        "text": "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+        "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads"
+      },
+      {
+        "id": "F-83325385ff66",
+        "t": "FACT",
+        "text": "Team record (feed): 4-1 · streak W1",
+        "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads"
+      },
+      {
+        "id": "F-fe8ce179c77b",
+        "t": "FACT",
+        "text": "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+        "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads"
+      },
+      {
+        "id": "F-cc5f84c5005d",
+        "t": "FACT",
+        "text": "Event: A's — game-result (playoffs)",
+        "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00033-4db81026ce",
+        "speakerId": "POP-00033",
+        "speakerName": "John Ellis",
+        "text": "The emotional toll of the game is real, I can feel it myself after a tough loss. It's not just about winning or losing, it's about the pressure to perform and the weight of expectation from the fans. Sometimes it feels like we're carrying the whole city on our shoulders.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d"
+        ],
+        "src": "packet.W2[POP-00033]"
+      },
+      {
+        "id": "Q-POP-01078-87173fa6fd",
+        "speakerId": "POP-01078",
+        "speakerName": "Pablo Almanzar",
+        "text": "I think the emotional toll of the game can be really high, not just for the players but for the fans too. I've seen how much it means to people around here, like when I'm out in the neighborhood and everyone's talking about the game. It's like the whole city is invested in it.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d"
+        ],
+        "src": "packet.W2[POP-01078]"
+      },
+      {
+        "id": "Q-POP-00597-1f0abeefa1",
+        "speakerId": "POP-00597",
+        "speakerName": "Eric Taveras",
+        "text": "I feel like the game can be really tough on us players, both physically and mentally. The pressure to perform is always there, and when we don't do well, it can be hard to shake off the feeling of disappointment. I think the fans feel it too, they're so invested in the team and when we lose, it's like they're feeling the loss just as much as we are.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d",
+          "F-5ac04948751e"
+        ],
+        "src": "packet.W2[POP-00597]"
+      },
+      {
+        "id": "Q-POP-00212-fa2ae54269",
+        "speakerId": "POP-00212",
+        "speakerName": "Jessie Hess",
+        "text": "I feel like the game can be really tough on the players and the fans, it's like we're all in it together and when they lose, we feel it too.",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d"
+        ],
+        "src": "packet.W2[POP-00212]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01078",
+        "name": "Pablo Almanzar",
+        "profile": "Pablo Almanzar — SP / Oakland A's — Jack London",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00597",
+        "name": "Eric Taveras",
+        "profile": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00033",
+        "name": "John Ellis",
+        "profile": "John Ellis — Starting Pitcher, Oakland A's — Laurel",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00212",
+        "name": "Jessie Hess",
+        "profile": "Jessie Hess",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "The possibility that the team's performance is affected by the pressure from the fans",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "108",
+  "persona": "selena-grant",
+  "byline": "Selena Grant",
+  "bylinePopid": "POP-00591",
+  "article": "output/cron-compare/staged/sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Wilson Shepard",
+        "role": "quoted-source",
+        "popid": "POP-01022"
+      },
+      {
+        "name": "Adash Stanley",
+        "role": "quoted-source",
+        "popid": "POP-01023"
+      },
+      {
+        "name": "Austin Reaves",
+        "role": "quoted-source",
+        "popid": "POP-01027"
+      },
+      {
+        "name": "Trenton Nawan",
+        "role": "quoted-source",
+        "popid": "POP-00273"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "downtown-wilson-shepard-beat-oaks-ground",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "I've been feeling like we're still finding our rhythm, you know? Preseason's about figuring things out, not about winning every game. The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal.",
+        "sourceRef": "citizenVoice PRESS Wilson Shepard"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-9237e5e25882",
+    "draftSha256": "693909235454e32b33aa5d6610565bf3ab96c5d0ef455fb1ce60498affacb5f1",
+    "verdict": "output/cron-compare/sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-09-22T23:18:17.007Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:03.116Z"
+}

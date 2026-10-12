@@ -1,0 +1,494 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "108",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00008",
+      "name": "P Slayer",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+      "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "fan-heat",
+        "fanCharge": "grief",
+        "bagModes": [
+          "3 Friction Pivot",
+          "6 Superman We Asked Him to Be",
+          "7 We Still Believe / We're Done"
+        ],
+        "friction": "Grief without inventing medical private life — we demanded too much.",
+        "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+        "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+        "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+      }
+    },
+    "signal": {
+      "kind": "injury-load",
+      "hood": "Downtown",
+      "score": null,
+      "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads ",
+      "nearby": [
+        {
+          "text": "A's | game-result | (playoffs) | Vladimir Gonzalez, Darrin Davis, Isley Kelley, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Pablo Almanzar, Eric Taveras, John Ellis",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (playoffs) | Eric Taveras",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | season-state | (playoffs) | Mike Paulson, Deacon Seymour, Arturo Ramos, Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01078",
+          "name": "Pablo Almanzar",
+          "profile": "Pablo Almanzar — SP / Oakland A's — Jack London",
+          "why": "feed-names",
+          "role": "SP / Oakland A's",
+          "hood": "Jack London"
+        },
+        {
+          "pop": "POP-00597",
+          "name": "Eric Taveras",
+          "profile": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+          "why": "feed-names",
+          "role": "Second Baseman, Oakland A's",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00033",
+          "name": "John Ellis",
+          "profile": "John Ellis — Starting Pitcher, Oakland A's — Laurel",
+          "why": "feed-names",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Laurel"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-78217e633afa"
+      },
+      {
+        "t": "FACT",
+        "text": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+        "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+        "id": "F-dc655a27901d"
+      },
+      {
+        "t": "FACT",
+        "text": "Grief without inventing medical private life — we demanded too much.",
+        "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+        "id": "F-5ac04948751e"
+      },
+      {
+        "t": "FACT",
+        "text": "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+        "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+        "id": "F-55c7803c93af"
+      },
+      {
+        "t": "FACT",
+        "text": "Team record (feed): 4-1 · streak W1",
+        "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+        "id": "F-83325385ff66"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+        "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+        "id": "F-fe8ce179c77b"
+      },
+      {
+        "t": "FACT",
+        "text": "Event: A's — game-result (playoffs)",
+        "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+        "id": "F-cc5f84c5005d"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "P Slayer",
+    "popid": "POP-00008"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads ",
+      "label": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+      "kind": "injury-load",
+      "angle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+      "hookLine": "Grief without inventing medical private life — we demanded too much.",
+      "hood": "Downtown",
+      "team": "A's",
+      "eventKind": "game-result",
+      "popids": [
+        "POP-01078",
+        "POP-00597",
+        "POP-00033"
+      ],
+      "citizens": [
+        "Pablo Almanzar — SP / Oakland A's, Jack London",
+        "Eric Taveras — Second Baseman, Oakland A's, Downtown",
+        "John Ellis — Starting Pitcher, Oakland A's, Laurel",
+        "Minnesota Twins"
+      ],
+      "pulseClass": "injury-load",
+      "pulseScore": 70,
+      "fanCharge": "grief",
+      "bagModeIds": [
+        3,
+        6,
+        7
+      ]
+    },
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": {
+    "pulse": {
+      "className": "injury-load",
+      "classes": [
+        "prospect-callup",
+        "injury-load",
+        "result-pulse",
+        "loss",
+        "win-streak"
+      ],
+      "score": 70,
+      "label": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+      "team": "A's",
+      "eventKind": "game-result",
+      "seasonType": "playoffs",
+      "feedCycle": 108,
+      "record": "4-1",
+      "streak": "W1",
+      "mood": "dominant",
+      "fanSentiment": "high",
+      "neighborhood": "Downtown",
+      "notes": "Game 4 Minnesota hosts A's trying to avoid the sweep. After an impressive season in their own right winning 103 games, the Minnesota Twins face one last challenge. John Ellis just pitched a complete game shut out to close out NY in the ALDS. However things would be a little different this time around as Ellis would struggle mightly giving up 5 ER in route to a loss. To make matters worse Twins sta",
+      "stats": "Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI"
+    },
+    "charge": {
+      "bagModes": [
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        },
+        {
+          "id": 6,
+          "name": "Superman We Asked Him to Be"
+        },
+        {
+          "id": 7,
+          "name": "We Still Believe / We're Done"
+        }
+      ],
+      "fanCharge": "grief",
+      "foilNumber": "9IP",
+      "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+      "palette": [
+        "fury",
+        "euphoria",
+        "dread",
+        "defiance",
+        "confession",
+        "grief",
+        "dare"
+      ]
+    },
+    "prewrite": {
+      "reporter": "P.Slayer",
+      "bagModes": [
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        },
+        {
+          "id": 6,
+          "name": "Superman We Asked Him to Be"
+        },
+        {
+          "id": 7,
+          "name": "We Still Believe / We're Done"
+        }
+      ],
+      "fanCharge": "grief",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "anchorFacts": [
+        "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+        "Team record (feed): 4-1 · streak W1",
+        "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+        "Event: A's — game-result (playoffs)"
+      ],
+      "foilNumber": "9IP",
+      "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+      "hooks": [
+        {
+          "text": "PLAYOFFS: Championship stakes. Fan fever, watch parties, team coverage. All-hands sports desk.",
+          "angle": "conflict/tension coverage",
+          "hood": null
+        },
+        {
+          "text": "Multiple sports signals detected. Could be coincidence or early pattern.",
+          "angle": "conflict/tension coverage",
+          "hood": null
+        }
+      ]
+    },
+    "friction": {
+      "a": "Human cost / load on the feed",
+      "b": "We still ask him to be Superman",
+      "frame": "Grief without inventing medical private life — we demanded too much."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Pablo Almanzar",
+        "popid": "POP-01078",
+        "role": "SP / Oakland A's",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      },
+      {
+        "name": "Eric Taveras",
+        "popid": "POP-00597",
+        "role": "Second Baseman, Oakland A's",
+        "neighborhood": "Downtown",
+        "why": "feed-names"
+      },
+      {
+        "name": "John Ellis",
+        "popid": "POP-00033",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Laurel",
+        "why": "feed-names"
+      },
+      {
+        "name": "Minnesota Twins",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Downtown",
+      "record": "4-1",
+      "streak": "W1",
+      "mood": "dominant",
+      "fanSentiment": "high",
+      "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "candidates": [
+      {
+        "score": 70,
+        "cycle": 108,
+        "team": "A's",
+        "primary": "injury-load",
+        "angle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 h",
+        "priorHits": 0
+      },
+      {
+        "score": 57,
+        "cycle": 106,
+        "team": "A's",
+        "primary": "roster-move",
+        "angle": "Refelecting on the players traded this past season",
+        "priorHits": 0
+      },
+      {
+        "score": 54,
+        "cycle": 108,
+        "team": "Oaks",
+        "primary": "loss",
+        "angle": "The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+        "priorHits": 0
+      },
+      {
+        "score": 53,
+        "cycle": 108,
+        "team": "A's",
+        "primary": "win-streak",
+        "angle": "Through 3 games the A's lead the Twins 3-0. Game 1 As (6) Twins (2), Game 2 As (3) Twins (2), Game 3 As (9) Twins (6).",
+        "priorHits": 0
+      },
+      {
+        "score": 52,
+        "cycle": 108,
+        "team": "A's",
+        "primary": "win-streak",
+        "angle": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+        "priorHits": 0
+      },
+      {
+        "score": 49,
+        "cycle": 108,
+        "team": "A's",
+        "primary": "win-streak",
+        "angle": "Eric Taveras win Post Season MVP",
+        "priorHits": 0
+      }
+    ]
+  },
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "text": "I'm still trying to process the A's recent games, especially John Ellis's struggles in the game 4 loss. It's like the whole city is feeling the weight of what we've asked him to carry. I keep thinking about the times I've seen him pitch, the way the crowd erupts when he's on the mound. But now, it's like we're all holding our breath, waiting to see if he can bounce back.",
+    "plan": {
+      "chase": "I'm still trying to process the A's recent games, especially John Ellis's struggles in the game 4 loss. It's like the whole city is feeling the weight of what we've asked him to carry. I keep thinking about the times I've seen him pitch, the way the crowd erupts when he's on the mound. But now, it's like we're all holding our breath, waiting to see if he can bounce back.",
+      "focus": "The emotional toll of the game on the players and the fans",
+      "why": "Because I believe that the fans' emotional investment in the team is what makes the game truly special",
+      "checks": [
+        "The impact of the game on the players' mental health",
+        "The fans' reaction to the team's performance"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00033",
+          "question": "How does John Ellis's performance affect the team's morale?",
+          "basis": "His recent struggles in the game 4 loss"
+        }
+      ],
+      "interpretation": "The team's performance is not just about winning or losing, but about the emotional journey of the players and the fans",
+      "unverifiedLead": [
+        "The possibility that the team's performance is affected by the pressure from the fans"
+      ],
+      "closeQuestion": "Can the A's bounce back from this loss and make it to the World Series?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | game-result | (playoffs) | Vladimir Gonzalez, Darrin Davis, Isley Kelley, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598",
+        "POP-00021",
+        "POP-00019",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Pablo Almanzar, Eric Taveras, John Ellis",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01078",
+        "POP-00597",
+        "POP-00033"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (playoffs) | Eric Taveras",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00597"
+      ]
+    },
+    {
+      "label": "A's | season-state | (playoffs) | Mike Paulson, Deacon Seymour, Arturo Ramos, Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527",
+        "POP-00528",
+        "POP-00025",
+        "POP-00022"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-01023",
+        "POP-01024"
+      ]
+    }
+  ],
+  "laneEntries": 10,
+  "ranAt": "2026-09-23T11:16:05.422Z"
+}

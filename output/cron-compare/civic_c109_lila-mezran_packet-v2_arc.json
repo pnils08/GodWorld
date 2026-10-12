@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "109",
+  "desk": "civic",
+  "persona": "lila-mezran",
+  "storyline": {
+    "slug": "chinatown-yu-zen-beat-health",
+    "verb": "opened"
+  },
+  "hood": "Chinatown",
+  "quotes": [
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone. But there's hope too—seeing someone like Marcus Osei recover gives the rest of us something to hold onto."
+    },
+    {
+      "pop": "POP-00801",
+      "name": "Maurice Franklin",
+      "quote": "Lying here in the hospital, you hear things. Nurses talking, other patients' families visiting. Chinatown's been hit hard this season - seems like every other conversation is about someone else down there getting sick. It makes you realize how connected we all are, even when we're in different neighborhoods. When one part of the city struggles, it ripples out. But what I’ve noticed is how folks rally around each other. It’s not just about getting through it—it’s about finding ways to lift each other up, even when things feel heavy."
+    },
+    {
+      "pop": "POP-00209",
+      "name": "Tiu Xiong",
+      "quote": "Illness hits Chinatown hard, like it does anywhere, but there’s a resilience there that’s hard to miss. People look out for each other, share remedies, and make sure no one’s left behind. It’s a tight-knit community, and that closeness helps them cope."
+    },
+    {
+      "pop": "POP-00227",
+      "name": "Colin Soria",
+      "quote": "You know, I don't live in Chinatown, but I've walked through enough to see how tight-knit that community is. When illness hits, you can feel it in the air—less chatter in the markets, fewer elders sitting out on the benches. But what gets me is how they rally. Neighbors checking in, dropping off meals without being asked. It's not about big gestures; it's the quiet way they carry each other. Reminds me of how my wife's family was when she got sick. Sometimes just knowing someone's there makes the weight a little lighter."
+    }
+  ],
+  "claim": "From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone. But there's hope too—seeing someone like Marcus Osei recover gives the rest of us something to hold onto.",
+  "src": "citizenVoice PRESS c109",
+  "ranAt": "2026-09-28T18:17:49.912Z"
+}

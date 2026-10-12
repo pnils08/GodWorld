@@ -1,0 +1,9 @@
+CHAOS_NBHD_FOLD_JSON @105 (2026-08-31T05:49:44.570Z) -> {}
+PREV_EVENING_JSON @105 (2026-08-31T05:49:51.026Z) -> {}
+PREV_CYCLE_STATE_JSON @105 (2026-08-31T05:49:51.809Z) -> {"econMood":59.28,"neighborhoodDynamics":"{12 keys}","economicRipples":"[4]","migrationDrift":18,"migrationDriftFactors":"[5]","crimeSpikes":"[0]"}
+CHAOS_NBHD_FOLD_JSON @106 (2026-09-07T01:34:01.848Z) -> {}
+PREV_EVENING_JSON @106 (2026-09-07T01:34:06.527Z) -> {}
+PREV_CYCLE_STATE_JSON @106 (2026-09-07T01:34:07.248Z) -> {"econMood":59.54,"neighborhoodDynamics":"{12 keys}","economicRipples":"[4]","migrationDrift":1,"migrationDriftFactors":"[5]","crimeSpikes":"[0]"}
+CHAOS_NBHD_FOLD_JSON @107 (2026-09-14T01:33:24.859Z) -> {}
+PREV_EVENING_JSON @107 (2026-09-14T01:33:29.190Z) -> {}
+PREV_CYCLE_STATE_JSON @107 (2026-09-14T01:33:29.663Z) -> {"econMood":59.01,"neighborhoodDynamics":"{12 keys}","economicRipples":"[5]","approvalHoodMoodEma":"{22 keys}","migrationDrift":14,"migrationDriftFactors":"[5]","crimeSpikes":"[0]"} | top-level keys: cycle,events,chaosCount,sentiment,econMood,pattern,shockFlag,shockStartCycle,civicLoad,civicLoadScore,weatherType,weatherImpact,cycleWeight,cycleWeightScore,recoveryLevel,overloadScore,activeCooldowns,holiday,holidayPriority,isFirstFriday,isCreationDay,sportsSeason,season,mediaEffects,neighborhoodDynamics,domainPresence,dominantDomain,economicRipples,initiativeRipples,initiativePhases,approvalHoodMoodEma,migrationDrift,migrationDriftFactors,bankRate,crimeSpikes,weatherTracking,weatherFrontTracki

@@ -1,0 +1,180 @@
+{
+  "cycle": 109,
+  "v": "CITYHALL/1",
+  "hearing": [
+    {
+      "officeId": "COUNCIL-D7",
+      "popid": "POP-00504",
+      "holder": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "The Temescal Community Health Center opened ahead of schedule not by executive magic, but because District 7 inspected every single conduit, logged every inspection, and held the budget line.",
+      "actionAsked": "Formally certify final fire-rated wall and drywall inspection sign-offs while demanding full closeout audit documentation for the $45M Temescal Community Health Center.",
+      "voiceFile": "output/civic-voice/council_d7_c109.json"
+    },
+    {
+      "officeId": "COUNCIL-D8",
+      "popid": "POP-00505",
+      "holder": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Metric publication is welcome, but legislative verification requires complete applicant intake audits before full cohort deployment.",
+      "actionAsked": "Formalize district audit requirements for INIT-007 intake documentation and verify cohort placement metrics.",
+      "voiceFile": "output/civic-voice/council_d8_c109.json"
+    },
+    {
+      "officeId": "COUNCIL-D6",
+      "popid": "POP-00044",
+      "holder": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Low crime and active sidewalks are the foundation of Piedmont Avenue, but sustaining merchant confidence requires City Hall to deliver dependable municipal services every single day.",
+      "actionAsked": "Deploy a targeted district support strategy for Piedmont Avenue merchants focusing on municipal service responsiveness and corridor stability.",
+      "voiceFile": "output/civic-voice/council_d6_c109.json"
+    },
+    {
+      "officeId": "COUNCIL-D2",
+      "popid": "POP-00502",
+      "holder": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "We must break ground on Baylight now, and we must do it with a clear understanding of the infrastructure and economic impact data.",
+      "actionAsked": "Confirm Phase II site remediation schedule",
+      "voiceFile": "output/civic-voice/council_d2_c109.json"
+    },
+    {
+      "officeId": "COUNCIL-D9",
+      "popid": "POP-00506",
+      "holder": "Terrence Mobley",
+      "district": "D9",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Uptown’s vibrant streets are quieting—we can’t let our momentum fade.",
+      "actionAsked": "Expand stabilization efforts to Uptown",
+      "voiceFile": "output/civic-voice/council_d9_c109.json"
+    },
+    {
+      "officeId": "COUNCIL-D1",
+      "popid": "POP-00501",
+      "holder": "Denise Carter",
+      "district": "D1",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+      "actionAsked": "Expand the Stabilization Fund's Downtown outreach to accelerate support for displaced residents.",
+      "voiceFile": "output/civic-voice/council_d1_c109.json"
+    },
+    {
+      "officeId": "COUNCIL-D5",
+      "popid": "POP-00043",
+      "holder": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "East Oakland's crime index isn't a footnote—it's a five-alarm fire demanding action, not promises.",
+      "actionAsked": "YES - Support OARI expansion to East Oakland",
+      "voiceFile": "output/civic-voice/council_d5_c109.json"
+    },
+    {
+      "officeId": "STAFF-DM-COMM",
+      "popid": "POP-00037",
+      "holder": "Brenda Okoro",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Forty-seven checks kept families in place since C84—that's stabilization working as designed. Downtown's vacancies tell us where to accelerate next.",
+      "actionAsked": "Authorize month-eight disbursement review and expand Downtown outreach capacity",
+      "voiceFile": "output/civic-voice/okoro_c109.json"
+    },
+    {
+      "officeId": "COUNCIL-D3",
+      "popid": "POP-00503",
+      "holder": "Rose Delgado",
+      "district": "D3",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+      "actionAsked": "YES",
+      "voiceFile": "output/civic-voice/council_d3_c109.json"
+    },
+    {
+      "officeId": "COUNCIL-D4",
+      "popid": "POP-00042",
+      "holder": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "The Fruitvale Transit Hub is a crucial step in connecting our communities and promoting economic growth. I'm committed to supporting this initiative and ensuring it benefits the people of D4.",
+      "actionAsked": "YES",
+      "voiceFile": "output/civic-voice/council_d4_c109.json"
+    }
+  ],
+  "votes": [],
+  "gavel": {
+    "officeId": "MAYOR-01",
+    "popid": "POP-00034",
+    "holder": "Avery Santana",
+    "dispositions": [
+      {
+        "initiativeId": "INIT-003",
+        "mayoralAction": "none",
+        "implementationPhase": "design-phase",
+        "note": "C109: Mayer & Associates contracted with community oversight provisions"
+      },
+      {
+        "initiativeId": "INIT-002",
+        "mayoralAction": "none",
+        "implementationPhase": "dispatch-live",
+        "note": "C109: Expanded to District 1 with evaluation metrics"
+      },
+      {
+        "initiativeId": "INIT-001",
+        "mayoralAction": "none",
+        "implementationPhase": null,
+        "note": "C109: Accelerated disbursement to 32 Downtown businesses"
+      },
+      {
+        "initiativeId": "INIT-005",
+        "mayoralAction": "none",
+        "implementationPhase": "operational",
+        "note": "C109: Opened 2 weeks early, $1.2M under budget"
+      }
+    ],
+    "quote": "Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.",
+    "voiceFile": "output/civic-voice/mayor_gavel_c109.json"
+  }
+}

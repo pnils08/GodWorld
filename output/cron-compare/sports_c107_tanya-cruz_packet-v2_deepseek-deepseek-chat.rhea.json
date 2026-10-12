@@ -1,0 +1,43 @@
+{
+  "draft": "output/cron-compare/sports_c107_tanya-cruz_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "107",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "32828114c0076b83c035f145c03c260b4462452357433eb97d1f00dbf1d401c2",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean post-game sports dispatch accurately reflecting A's Game 1 ALDS victory canon and verified player roles.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": null,
+  "nameCheck": {
+    "verified": [
+      "Travis Coles",
+      "Vladimir Gonzalez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0094,
+  "durationMs": 6262,
+  "parseError": false,
+  "ranAt": "2026-09-18T01:12:27.221Z"
+}

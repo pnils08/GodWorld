@@ -1,0 +1,59 @@
+{
+  "draft": "output/cron-compare/civic_c109_rachel-torres_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "85bc258b48b7c84e32e6233d0231fc4e1985e8fb10aa489783a0306888e103fb",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, citizen profiles match ledger records, and public safety framing adheres to canon constraints.",
+  "review": {
+    "profileId": "rachel-public-safety-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "packageVersion": "RACHEL-LEP2-1",
+    "manifestId": "AM-c7f584a41ac5",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "23",
+          "18"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Jacquez Tearn",
+      "Jonas Patel",
+      "Ronald Williams"
+    ],
+    "unverified": [
+      "Is Chinatown"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0099,
+  "durationMs": 5651,
+  "parseError": false,
+  "ranAt": "2026-10-02T06:46:38.420Z"
+}

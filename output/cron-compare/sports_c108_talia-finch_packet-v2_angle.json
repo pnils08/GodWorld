@@ -1,0 +1,487 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "108",
+  "persona": "talia-finch",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00592",
+      "name": "Talia Finch",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks ground read C108 — anxious — the people around the second club",
+      "approach": "Oaks ground approach: this slice is what the Oaks feed says about the people — the mood in the room, the fans, the neighborhood around the park — with the record as context. First-person ground report. The moods and sentiments are feed rows, real; the walk to the park, the vendor, the kid with the glove are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "oaks",
+        "hood": "Jack London",
+        "facts": [
+          "Oaks fans, C108: anxious",
+          "Room mood, C108: uncertain",
+          "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+          "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+          "Home neighborhood (feed): Jack London",
+          "Oaks fans, C108: low",
+          "Room mood, C108: frustrated",
+          "Notebook (feed): In The Oaks first preseason game the story remained the same from rookie camp as the Oaks lose to the Pistons, 104-101. Not for a lack of trying but at a lack of over playing the wins signifigance. As",
+          "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+          "Context: record 0-1 · streak L1",
+          "Home neighborhood (feed): Eastlake"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-oaks-ground",
+      "hood": "Jack London",
+      "score": null,
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+      "nearby": [
+        {
+          "text": "A's | game-result | (playoffs) | Vladimir Gonzalez, Darrin Davis, Isley Kelley, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Pablo Almanzar, Eric Taveras, John Ellis",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (playoffs) | Eric Taveras",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | season-state | (playoffs) | Mike Paulson, Deacon Seymour, Arturo Ramos, Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01022",
+          "name": "Wilson Shepard",
+          "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)",
+          "role": "Head Coach, Oakland Oaks",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-01023",
+          "name": "Adash Stanley",
+          "profile": "Adash Stanley — PG / The Oaks — Downtown",
+          "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)",
+          "role": "PG / The Oaks ",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-01027",
+          "name": "Austin Reaves",
+          "profile": "Austin Reaves — SG / The Oaks — Downtown",
+          "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)",
+          "role": "SG / The Oaks",
+          "hood": "Downtown"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-78217e633afa"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks ground read C108 — anxious",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+        "id": "F-4dc38e0772b1"
+      },
+      {
+        "t": "FACT",
+        "text": "anxious",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+        "id": "F-cbe075ae4846"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks fans, C108: anxious",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-dfe67c3b8dcf"
+      },
+      {
+        "t": "FACT",
+        "text": "Room mood, C108: uncertain",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-17da3278af65"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-5cdb26bc1f70"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-0fb94ec2157e"
+      },
+      {
+        "t": "FACT",
+        "text": "Home neighborhood (feed): Jack London",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-f9ab583733a6"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks fans, C108: low",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-3be43d7b96b0"
+      },
+      {
+        "t": "FACT",
+        "text": "Room mood, C108: frustrated",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-5a90f4c3f0f2"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): In The Oaks first preseason game the story remained the same from rookie camp as the Oaks lose to the Pistons, 104-101. Not for a lack of trying but at a lack of over playing the wins signifigance. As",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-806975e0fb9a"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-5e2ee7cdc34d"
+      },
+      {
+        "t": "FACT",
+        "text": "Context: record 0-1 · streak L1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-a9cc6e010870"
+      },
+      {
+        "t": "FACT",
+        "text": "Home neighborhood (feed): Eastlake",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+        "id": "F-44748c8f0619"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Talia Finch",
+    "popid": "POP-00592"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-ground",
+      "angle": "Oaks ground read C108 — anxious — the people around the second club",
+      "label": "Oaks ground read C108 — anxious",
+      "hookLine": "anxious",
+      "hood": "Jack London",
+      "citizens": [
+        "Wilson Shepard (POP-01022)",
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)"
+      ],
+      "popids": [
+        "POP-01022",
+        "POP-01023",
+        "POP-01027"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+      "cycle": 108
+    },
+    "approach": "Oaks ground approach: this slice is what the Oaks feed says about the people — the mood in the room, the fans, the neighborhood around the park — with the record as context. First-person ground report. The moods and sentiments are feed rows, real; the walk to the park, the vendor, the kid with the glove are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OAKS-GROUND-1",
+    "kind": "beat-oaks-ground",
+    "seat": {
+      "slug": "talia-finch",
+      "name": "Talia Finch",
+      "popid": "POP-00592",
+      "desk": "sports",
+      "domain": "oaks",
+      "builder": "buildOaksGroundSlice.js"
+    },
+    "hood": "Jack London",
+    "pulse": {
+      "className": "beat-oaks-ground",
+      "score": 100,
+      "label": "Oaks ground read C108 — anxious",
+      "hood": "Jack London",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Oaks ground read C108 — anxious — the people around the second club",
+      "hookLine": "anxious",
+      "anchorFacts": [
+        "Oaks fans, C108: anxious",
+        "Room mood, C108: uncertain",
+        "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+        "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+        "Home neighborhood (feed): Jack London",
+        "Oaks fans, C108: low",
+        "Room mood, C108: frustrated",
+        "Notebook (feed): In The Oaks first preseason game the story remained the same from rookie camp as the Oaks lose to the Pistons, 104-101. Not for a lack of trying but at a lack of over playing the wins signifigance. As",
+        "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+        "Context: record 0-1 · streak L1",
+        "Home neighborhood (feed): Eastlake"
+      ],
+      "evidence": [
+        {
+          "text": "Oaks fans, C108: anxious",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Room mood, C108: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Home neighborhood (feed): Jack London",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Oaks fans, C108: low",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Room mood, C108: frustrated",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Notebook (feed): In The Oaks first preseason game the story remained the same from rookie camp as the Oaks lose to the Pistons, 104-101. Not for a lack of trying but at a lack of over playing the wins signifigance. As",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Context: record 0-1 · streak L1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        },
+        {
+          "text": "Home neighborhood (feed): Eastlake",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+        "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — Downtown",
+        "why": "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Oakland_Sports_Feed.jsonl @C108",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Talia Finch",
+    "popid": "POP-00592",
+    "text": "I'm standing outside the Oaks' stadium, feeling the anxious energy of the fans. The room mood is uncertain, and I can sense the frustration in the air. I've been thinking about the Oaks' preseason game and how they stumbled against the Pistons. I want to explore this story further, to understand what's not lining up for the team.",
+    "plan": {
+      "chase": "I'm standing outside the Oaks' stadium, feeling the anxious energy of the fans. The room mood is uncertain, and I can sense the frustration in the air. I've been thinking about the Oaks' preseason game and how they stumbled against the Pistons. I want to explore this story further, to understand what's not lining up for the team.",
+      "focus": "The Oaks' preseason struggles",
+      "why": "To understand the team's dynamics and the fans' concerns",
+      "checks": [
+        "The Oaks' performance in their last game",
+        "The fans' reactions to the team's struggles"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01022",
+          "question": "What's the coach's perspective on the team's preseason performance?",
+          "basis": "The coach's experience and insight into the team's dynamics"
+        },
+        {
+          "pop": "POP-01023",
+          "question": "How do the players feel about the team's struggles, and what are they doing to improve?",
+          "basis": "The players' firsthand experience and commitment to the team"
+        }
+      ],
+      "interpretation": "The Oaks' preseason struggles may be a sign of deeper issues within the team. I need to dig deeper to understand the root causes and how the team plans to address them.",
+      "unverifiedLead": [
+        "The team's lack of cohesion, the coach's strategy, the players' motivation"
+      ],
+      "closeQuestion": "What's the one thing the Oaks need to change to turn their season around?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | game-result | (playoffs) | Vladimir Gonzalez, Darrin Davis, Isley Kelley, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598",
+        "POP-00021",
+        "POP-00019",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Pablo Almanzar, Eric Taveras, John Ellis",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01078",
+        "POP-00597",
+        "POP-00033"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (playoffs) | Eric Taveras",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00597"
+      ]
+    },
+    {
+      "label": "A's | season-state | (playoffs) | Mike Paulson, Deacon Seymour, Arturo Ramos, Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527",
+        "POP-00528",
+        "POP-00025",
+        "POP-00022"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-01023",
+        "POP-01024"
+      ]
+    }
+  ],
+  "laneEntries": 10,
+  "ranAt": "2026-09-24T11:18:15.066Z"
+}

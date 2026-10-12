@@ -1,0 +1,105 @@
+
+--- phase07-evening-media/storyHook.js:521 ---
+  // ═══════════════════════════════════════════════════════════
+  if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+    hooks.push(makeHook(
+
+--- phase07-evening-media/storyHook.js:532 ---
+
+  if (sportsSeason === "championship") {
+    hooks.push(makeHook(
+
+--- phase07-evening-media/storyHook.js:543 ---
+
+  if (sportsSeason === "late-season") {
+    hooks.push(makeHook(
+
+--- phase07-evening-media/mediaFeedbackEngine.js:248 ---
+  // labels stay on the phase word (prose)
+  if (cal.sportsSeason === 'championship') {
+    effects.sportsNarrative = 'championship_fever';
+
+--- phase07-evening-media/mediaFeedbackEngine.js:251 ---
+    effects.coverageProfile.sportsDominance = 'championship';
+  } else if (cal.sportsSeason === 'playoffs') {
+    effects.sportsNarrative = 'playoff_drama';
+
+--- phase07-evening-media/mediaFeedbackEngine.js:254 ---
+    effects.coverageProfile.sportsDominance = 'playoffs';
+  } else if (cal.sportsSeason === 'late-season') {
+    effects.sportsNarrative = 'pennant_race';
+
+--- phase07-evening-media/mediaFeedbackEngine.js:480 ---
+  // v2.1: Sports events during season boost hope
+  if (eventCategories.sports.length > 0 && cal.sportsSeason !== 'off-season') {
+    effects.hopeFactor += 0.1 * eventCategories.sports.length;
+
+--- phase07-evening-media/mediaFeedbackEngine.js:548 ---
+
+    if (cal.sportsSeason === 'championship') {
+      sportsHype = 'championship';
+
+--- phase07-evening-media/mediaFeedbackEngine.js:550 ---
+      sportsHype = 'championship';
+    } else if (cal.sportsSeason === 'playoffs') {
+      sportsHype = 'playoffs';
+
+--- phase07-evening-media/mediaFeedbackEngine.js:552 ---
+      sportsHype = 'playoffs';
+    } else if (cal.sportsSeason === 'late-season') {
+      sportsHype = 'pennant_race';
+
+--- phase07-evening-media/mediaFeedbackEngine.js:560 ---
+    // v2.1: Sports event pools based on season
+    if (cal.sportsSeason === 'championship') {
+      effects.eventPools.sports = [
+
+--- phase07-evening-media/mediaFeedbackEngine.js:568 ---
+      ];
+    } else if (cal.sportsSeason === 'playoffs') {
+      effects.eventPools.sports = [
+
+--- phase07-evening-media/mediaFeedbackEngine.js:626 ---
+    // v2.1: Context-specific celebrity pools
+    if (cal.sportsSeason === 'championship' || cal.sportsSeason === 'playoffs') {
+      effects.eventPools.celebrity = [
+
+--- phase07-evening-media/mediaFeedbackEngine.js:803 ---
+  // v2.1: Calendar-aware narrative determination
+  if (cal.sportsSeason === 'championship') {
+    effects.mediaNarrative = 'championship_fever';
+
+--- phase07-evening-media/mediaFeedbackEngine.js:805 ---
+    effects.mediaNarrative = 'championship_fever';
+  } else if (cal.sportsSeason === 'playoffs') {
+    effects.mediaNarrative = 'playoff_drama';
+
+--- phase07-evening-media/mediaFeedbackEngine.js:1295 ---
+  var sportsPool = pools.sports || [];
+  if (sportsPool.length > 0 && (cal.sportsSeason === 'playoffs' || cal.sportsSeason === 'championship')) {
+    if (rng() < 0.5) {
+
+--- phase07-evening-media/mediaFeedbackEngine.js:1386 ---
+  // v2.1
+  if (topic === 'sports') return cal.sportsSeason === 'championship' || cal.sportsSeason === 'playoffs';
+  if (topic === 'festival') return cal.holiday !== 'none' && cal.holidayPriority === 'oakland';
+
+--- phase09-digest/applyCompressionDigestSummary.js:190 ---
+  var sportsTag = "";
+  if (sportsSeason === "championship") sportsTag = "CHAMP";
+  else if (sportsSeason === "playoffs") sportsTag = "PLYF";
+
+--- phase09-digest/applyCompressionDigestSummary.js:191 ---
+  if (sportsSeason === "championship") sportsTag = "CHAMP";
+  else if (sportsSeason === "playoffs") sportsTag = "PLYF";
+  else if (sportsSeason === "post-season") sportsTag = "POST";
+
+--- phase09-digest/applyCompressionDigestSummary.js:192 ---
+  else if (sportsSeason === "playoffs") sportsTag = "PLYF";
+  else if (sportsSeason === "post-season") sportsTag = "POST";
+  else if (sportsSeason === "late-season") sportsTag = "LATE";
+
+--- phase09-digest/applyCompressionDigestSummary.js:193 ---
+  else if (sportsSeason === "post-season") sportsTag = "POST";
+  else if (sportsSeason === "late-season") sportsTag = "LATE";
+

@@ -1,0 +1,17 @@
+{
+  "desk": "culture",
+  "cycle": "109",
+  "model": "deepseek/deepseek-v4-pro",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 8272,
+  "usageOutputTokens": 3939,
+  "savedFiles": [
+    "output/cron-compare/culture_c109_elliot-graye_bench-wave2_deepseek-deepseek-v4-pro.md"
+  ],
+  "compareAgainst": "output/desk-output/culture_c109.md",
+  "durationMs": 86806,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-01T05:04:42.055Z"
+}

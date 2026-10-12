@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-008",
+  "initiativeId": "INIT-008",
+  "cycle": 111,
+  "primaryVoice": "Mayor gavel (mayor_gavel-004)",
+  "consolidatedFrom": [
+    "STMT-111-mayor_gavel-004 (Mayor gavel — Downtown Economic Revitalization Emergency Hearing)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-008",
+    "ImplementationPhase": "legislation-filed",
+    "MilestoneNotes": "C111: Emergency Economic Development Committee hearing called for Cycle 112.",
+    "NextScheduledAction": "Committee hearing and referral",
+    "NextActionCycle": 112
+  }
+}

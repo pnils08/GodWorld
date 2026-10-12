@@ -1,0 +1,37 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "110",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3.staged-2320.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "UNDOCKED: Simone Adesanya — up 3 on the night",
+        "sourceRef": "undocked:undocked-pop00287-Y3C6"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d0ae56f3b8b9",
+    "draftSha256": "d87ba9703b918e90a821cf777279bdb5c67f3e406e1d45c611483b2d42b9c3b6",
+    "verdict": "output/cron-compare/undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-07T23:20:27.043Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-07T23:20:27.265Z"
+}

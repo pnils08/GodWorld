@@ -1,0 +1,48 @@
+{
+  "office": "okoro",
+  "cycle": 106,
+  "speaker": "Brenda Okoro",
+  "cascadeSummary": "The Mayor has set the agenda; I'm operationalizing it. Month-seven disbursement moves forward with sixty-nine households now stabilized, and I'm directing expanded outreach capacity toward Downtown where the storefront signals are sharpest. The Youth Apprenticeship Pipeline verification proceeds on my clean boundary—disbursement authority only, placement elsewhere. Temescal's momentum belongs to the Health Center construction team and the residents who shaped it; I'm not claiming credit, I'm confirming it.",
+  "statements": [
+    {
+      "statementId": "STMT-106-okoro-001",
+      "type": "operational_status",
+      "topic": "West Oakland Stabilization Fund Month-Seven Disbursement",
+      "initiative": "INIT-001",
+      "decision": "Month-seven disbursement batch approved; twelve additional households stabilized, bringing total to sixty-nine; expanded outreach capacity directed toward Downtown Oakland based on storefront decline signals",
+      "quote": "Sixty-nine households stabilized means keys in hand and rent covered—but West Oakland's storefronts and Downtown's emptying sidewalks tell me the need is moving faster than our outreach. We're resetting deployment this cycle, not next.",
+      "fullStatement": "Month-seven disbursement clears twelve additional households, bringing our stabilization total to sixty-nine families with keys in hand and displacement prevented. That is real money in real pockets. But the storefront signals are unambiguous: West Oakland's daily life is visibly declining, and Downtown's conditions are slipping with no city program currently pointed at it. We're resetting our outreach deployment this cycle—shifting canvass capacity toward Downtown's slipping blocks while maintaining West Oakland presence. The Fund was built for displacement pressure; we're following where that pressure moves. Processing time at OEWD holds steady. District equity tracking now includes Downtown as emerging priority zone.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-okoro-002",
+      "type": "cascade_response",
+      "topic": "Youth Apprenticeship Pipeline Backlog Clearance Verification",
+      "initiative": "INIT-007",
+      "decision": "Verification proceeds; reaffirm disbursement authority boundary—workforce stabilization funds only, not placement decisions",
+      "quote": "My office holds disbursement authority for workforce stabilization funds. Placement decisions sit elsewhere. That boundary is clean, documented, and unchanged.",
+      "fullStatement": "The Mayor's direction on Youth Apprenticeship Pipeline backlog clearance moves forward. My role is specific: disbursement authority for workforce stabilization funds. Placement decisions, program matching, participant intake—those authorities sit with other offices, and I've documented that boundary repeatedly. We're verifying fund flow, not program design. The verification proceeds on that clean line.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-okoro-003",
+      "type": "cascade_response",
+      "topic": "Temescal Community Health Center Construction Milestone and Neighborhood Credit",
+      "initiative": "INIT-005",
+      "decision": "Public acknowledgment of construction momentum; credit assigned to Health Center construction team and resident stakeholders who shaped the project",
+      "quote": "Temescal's momentum belongs to the people who live there and the team building what's been promised. My office confirms the signal; we don't claim the story.",
+      "fullStatement": "Temescal's construction momentum is real—street trade busy, mood clearly upbeat. That success belongs to Director Chen-Ramirez's construction team and the residents who shaped this project from visioning through groundbreaking. My office sees the displacement-prevention signal in that momentum: stable neighborhood conditions, sustained commercial activity. I confirm what the Mayor names. The credit is theirs.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-okoro-004",
+      "type": "field_observation",
+      "topic": "Downtown Oakland Mood Shift and City Attention",
+      "initiative": null,
+      "decision": "Operational commitment to direct Stabilization Fund outreach capacity toward Downtown based on visible storefront decline and housing pressure signals",
+      "quote": "Downtown's daily life is slipping, and I see it too—but seeing isn't enough. We're moving outreach capacity there this cycle because stability funding should follow need, not wait for it to become a headline.",
+      "fullStatement": "The Mayor's acknowledgment of Downtown's declining conditions is matched by operational response. My field observation: storefronts quieter, housing pressure visible, no current city program pointed at it. The Stabilization Fund's outreach reset—already in motion for West Oakland and Fruitvale—expands to include Downtown's slipping blocks this cycle. We're not waiting for the displacement to accelerate. The Fund was built for this. Deployment follows the signal.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "office": "council_d2",
+  "agentDir": "civic-office-council-d2",
+  "holder": "Leonard Tran",
+  "popid": "POP-00502",
+  "title": "City Council District 2",
+  "date": "2026-09-21",
+  "cycle": 108,
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "statement": "As we move forward with the Baylight District project, I emphasize the importance of addressing the economic imbalance in Downtown Oakland. The recent data shows a decline in sentiment and an increase in crime, which necessitates targeted support. I propose we allocate resources to enhance public safety and stimulate local businesses, ensuring the success of the Baylight District benefits the entire community, including Jack London and Chinatown.",
+  "moves": [
+    {
+      "type": "propose",
+      "payload": {
+        "title": "Downtown Economic Revitalization",
+        "intervention": "health-service",
+        "hoods": [
+          "Downtown"
+        ],
+        "problem": "economic imbalance"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "0",
+  "ranAt": "2026-09-21T10:45:41.020Z",
+  "fellBackFrom": null
+}

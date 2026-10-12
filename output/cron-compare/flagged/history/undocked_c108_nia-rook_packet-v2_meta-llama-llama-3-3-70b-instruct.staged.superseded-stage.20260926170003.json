@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "108",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.staged-2317.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Soo Loo",
+        "role": "quoted-source",
+        "popid": "POP-00663"
+      },
+      {
+        "name": "Jessie Hess",
+        "role": "quoted-source",
+        "popid": "POP-00212"
+      },
+      {
+        "name": "Dillon Trevor",
+        "role": "quoted-source",
+        "popid": "POP-00224"
+      },
+      {
+        "name": "Andre Turner",
+        "role": "quoted-source",
+        "popid": "POP-00225"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "downtown-soo-loo-undocked",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "I've noticed the city's energy shifts when the A's are doing well, it's like the whole neighborhood comes together and even the usual routines feel a bit more vibrant.",
+        "sourceRef": "citizenVoice PRESS Soo Loo"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-9548a9a533b0",
+    "draftSha256": "c515ba11d493a4eb120fe97782f290fd6c648b827789d0015f8c3088bddeeee7",
+    "verdict": "output/cron-compare/undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-09-24T23:17:49.867Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-24T23:17:50.182Z"
+}

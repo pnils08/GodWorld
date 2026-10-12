@@ -1,0 +1,79 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 108,
+  "empty": false,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 108,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00300",
+      "Holder": "",
+      "EpisodeId": "undocked-pop00300-Y3C4-e2",
+      "CreditsDelta": 98,
+      "Systems": [
+        "Sol"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 3,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00300-2026-09-25T01-30-07.json"
+    }
+  ],
+  "laneEntries": [
+    {
+      "ref": "undocked:undocked-pop00300-Y3C4-e2",
+      "label": "UNDOCKED: Belle Lopez — up 98 on the night",
+      "kind": "undocked",
+      "popids": [
+        "POP-00300"
+      ],
+      "handle": {
+        "angle": "Recap Belle Lopez's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 98, systems Sol, combat 0, mishaps 0, magnitude 3/5. Standings: Clarissa Dane leads the board — rank #1, 5 cycle(s) led, current streak 5.",
+        "citizens": [
+          "Belle Lopez — UNDOCKED cast pilot"
+        ]
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 108,
+        "EventType": "undocked-episode",
+        "POPID": "POP-00300",
+        "Holder": "",
+        "EpisodeId": "undocked-pop00300-Y3C4-e2",
+        "CreditsDelta": 98,
+        "Systems": [
+          "Sol"
+        ],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 3,
+        "Flags": [
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00300-2026-09-25T01-30-07.json"
+      },
+      "hood": "Jack London"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-09-25T01:40:20.222Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00143",
+      "Holder": "Clarissa Dane",
+      "Episodes": 9,
+      "CreditsTotal": 303,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 3,
+      "LastAiredCycle": 107,
+      "CyclesLed": 5,
+      "CurrentStreak": 5
+    }
+  },
+  "generatedAt": "2026-09-25T11:15:07.120Z"
+}

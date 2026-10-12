@@ -1,0 +1,224 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00016",
+    "name": "Simon Leary",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The A's record is 4-1.",
+    "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sports-long-view",
+      "pulseClass": "role-change-under-continuity",
+      "bagModes": [
+        "2 Keystone Player",
+        "4 Load-Bearing Continuity"
+      ],
+      "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "anchorFacts": [
+        "The A's record is 4-1.",
+        "The A's have won 3 straight."
+      ],
+      "missing": [
+        "why the role change was made",
+        "historical comparison or franchise precedent",
+        "organizational intention or future plan",
+        "citywide, clubhouse, or fan interpretation"
+      ],
+      "sceneRule": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts.",
+      "sourcePointers": [
+        "output/world_summary_c110.md ## Sports",
+        "scripts/sportsSubstrate.js",
+        "docs/media/SIMON_LONGVIEW_BAG.md"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "long-view-signal",
+    "hood": "Downtown",
+    "src": "world_summary_c110.md ## Sports",
+    "plan": {
+      "focus": "Benji Dillon's transition to the bullpen within the context of the A's current winning streak.",
+      "closeQuestion": "What does continuity look like when the pieces are still moving?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Simon Leary",
+        "text": "Whether the bullpen has communicated specific expectations for Dillon's usage.",
+        "usable": false
+      },
+      {
+        "from": "Simon Leary",
+        "text": "If Dillon's preparation routines have shifted with the role change.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C110",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-e491ae296bc1"
+    },
+    {
+      "t": "FACT",
+      "text": "The A's record is 4-1.",
+      "src": "world_summary_c110.md ## Sports",
+      "id": "F-9ffdb25c267d"
+    },
+    {
+      "t": "FACT",
+      "text": "The A's have won 3 straight.",
+      "src": "world_summary_c110.md ## Sports",
+      "id": "F-8b9d200bc278"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "simon-longview-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Interpret one Packet-backed present sports structure as civic architecture without turning metaphor into biography, history, collective memory, or institutional fact.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person contemplative sports essay",
+      "targetWords": "evidence-bounded",
+      "opening": "one supplied present structure",
+      "closing": "one question about what the present record cannot establish"
+    },
+    "authorizedTexture": [
+      "third-person metaphor about structure, continuity, load, or change grounded only in supplied present facts",
+      "a philosophical inference explicitly framed as interpretation and carrying no new person, place, institution, event, number, or history"
+    ],
+    "textureConditions": [
+      "continuity describes only the supplied current record unless a historical fact is explicitly supplied",
+      "every named person, place, institution, team, event, season, statistic, role change, cause, intention, and quote requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented franchise or city history, precedent, collective memory, institutional meaning, or civic behavior",
+      "an invented cause, organizational intention, future plan, clubhouse fact, fan consensus, relationship, quote, event, statistic, or role",
+      "Hal-style witnessed history, P Slayer fan heat, or Anthony-style unsupplied analytics presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-5d8dd5ec05df",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-e491ae296bc1",
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-9ffdb25c267d",
+        "t": "FACT",
+        "text": "The A's record is 4-1.",
+        "src": "world_summary_c110.md ## Sports"
+      },
+      {
+        "id": "F-8b9d200bc278",
+        "t": "FACT",
+        "text": "The A's have won 3 straight.",
+        "src": "world_summary_c110.md ## Sports"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Simon Leary",
+        "text": "Whether the bullpen has communicated specific expectations for Dillon's usage.",
+        "publishable": false
+      },
+      {
+        "from": "Simon Leary",
+        "text": "If Dillon's preparation routines have shifted with the role change.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "third-person metaphor about structure, continuity, load, or change grounded only in supplied present facts",
+      "a philosophical inference explicitly framed as interpretation and carrying no new person, place, institution, event, number, or history"
+    ],
+    "textureConditions": [
+      "continuity describes only the supplied current record unless a historical fact is explicitly supplied",
+      "every named person, place, institution, team, event, season, statistic, role change, cause, intention, and quote requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented franchise or city history, precedent, collective memory, institutional meaning, or civic behavior",
+      "an invented cause, organizational intention, future plan, clubhouse fact, fan consensus, relationship, quote, event, statistic, or role",
+      "Hal-style witnessed history, P Slayer fan heat, or Anthony-style unsupplied analytics presented as fact"
+    ]
+  }
+}

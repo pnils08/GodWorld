@@ -1,0 +1,60 @@
+{
+  "draft": "output/cron-compare/civic_c108_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "260997dd93692bb2d89f05426b370207cc382e94e8f36982e69d295dcd8034d1",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes, transit figures, and citizen profiles match cycle 108 canon and packet provenance without discrepancy.",
+  "review": {
+    "profileId": "trevor-infrastructure-systems-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "packageVersion": "TREVOR-LEP2-1",
+    "manifestId": "AM-9835527b33cc",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "40"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Eleanor Rivera",
+      "Jerald Jensen",
+      "Joel Wren",
+      "Ximena Mehta"
+    ],
+    "unverified": [
+      "Even West Oakland",
+      "Street Oakland City Center"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0101,
+  "durationMs": 5563,
+  "parseError": false,
+  "ranAt": "2026-09-21T23:19:19.562Z"
+}

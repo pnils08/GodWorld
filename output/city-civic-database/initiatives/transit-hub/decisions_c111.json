@@ -1,0 +1,25 @@
+{
+  "initiative": "INIT-003",
+  "initiativeId": "INIT-003",
+  "cycle": 111,
+  "primaryVoice": "Mayor gavel (mayor_gavel-002)",
+  "consolidatedFrom": [
+    "STMT-111-mayor_gavel-002 (Mayor gavel — Fruitvale Transit Hub Phase II Acceleration)",
+    "STMT-111-transit_hub-001 (Soria Dominguez — Fruitvale Transit Hub Phase II)",
+    "STMT-111-transit_hub-002 (Soria Dominguez — Fruitvale neighborhood conditions)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-003",
+    "ImplementationPhase": "design-phase",
+    "MilestoneNotes": "C111: Advanced from visioning to design-phase; schematics delivery mandated Cycle 114.",
+    "NextScheduledAction": "Preliminary schematics community review",
+    "NextActionCycle": 114,
+    "LastWorkCycle": 111,
+    "LastWorkSeat": "proj-transit-hub"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-110-proj-transit-hub-2026-10-09"
+    ]
+  }
+}

@@ -1,0 +1,1117 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00157",
+      "name": "Noah Tan",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "C110 fog, 52°F after overcast — what this weather does to a day in the city",
+      "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "environment",
+        "hood": null,
+        "facts": [
+          "This cycle: fog, 52°F, impact 1.3, comfort 0.4, mood introspective",
+          "Last 3 cycles: C107 fog 44°F, C108 fog 46°F, C109 overcast 49°F",
+          "Jackson Sift — dealt with a seasonal health concern",
+          "Ron Arenson — recovered from a winter illness",
+          "Jessie Hess — finally shook the cold that had been hanging around",
+          "Jett Walker — finally shook the cold that had been hanging around"
+        ],
+        "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+        "note": null,
+        "engineHooks": [
+          "Multiple weather signals detected. Could be coincidence or early pattern. (general coverage)",
+          "Challenging weather (fog) affecting daily routines. Street-level color available. (general coverage)",
+          "Jack London boom sustained — momentum 10/10, the block everyone wants onto (desk rotation)",
+          "San Antonio cooling off: foot traffic down, storefronts quieter than the rest of the city (desk rotation)"
+        ],
+        "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-weather",
+      "hood": null,
+      "score": null,
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 110",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): advance to preliminary schematics with community oversight provisions intact — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): filed legislative language with City Clerk — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved accelerated cohort placement with East Oakland priority — \"150 apprentices placed by spring — that's the target, and we're accelerating to hit it.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): independent oversight maintained; soil test verification proceeding — \"Independent oversight isn't bureaucracy — it's how we build trust while we build the future.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00081",
+          "name": "Carmen Mesa",
+          "profile": "Carmen Mesa — Starting Pitcher, Midland RockHounds (AA)",
+          "role": "Starting Pitcher, Midland RockHounds (AA)",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 110,
+            "tag": "Neighborhood",
+            "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "highlightKind": "weather",
+            "entity": "fog",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00158",
+          "name": "Kai Marston",
+          "profile": "Kai Marston — Journalist, Arts & Entertainment",
+          "role": "Journalist, Arts & Entertainment",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 110,
+            "tag": "Neighborhood",
+            "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "highlightKind": "weather",
+            "entity": "fog",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00214",
+          "name": "Jacquez Tearn",
+          "profile": "Jacquez Tearn — Dishwasher",
+          "role": "Dishwasher",
+          "hood": "Chinatown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 110,
+            "tag": "Neighborhood",
+            "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "highlightKind": "weather",
+            "entity": "fog",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00220",
+          "name": "Shawn Gown",
+          "profile": "Shawn Gown — Taxi driver",
+          "role": "Taxi driver",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 110,
+            "tag": "Neighborhood",
+            "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window near a gallery opening",
+            "highlightKind": "weather",
+            "entity": "fog",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00357",
+          "name": "Andrew Cook",
+          "profile": "Andrew Cook — Neighborhood Watch Captain",
+          "role": "Neighborhood Watch Captain",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 110,
+            "tag": "Neighborhood",
+            "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "highlightKind": "weather",
+            "entity": "fog",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00626",
+          "name": "Fatima Al-Hassan",
+          "profile": "Fatima Al-Hassan — Social Worker",
+          "role": "Social Worker",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 110,
+            "tag": "Neighborhood",
+            "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "highlightKind": "weather",
+            "entity": "fog",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00657",
+          "name": "Aida Jackson",
+          "profile": "Aida Jackson — Orthodontist",
+          "role": "Orthodontist",
+          "hood": "Piedmont Ave",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 110,
+            "tag": "Neighborhood",
+            "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "highlightKind": "weather",
+            "entity": "fog",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00661",
+          "name": "Bianca Crook",
+          "profile": "Bianca Crook — Autonomous Systems Engineer",
+          "role": "Autonomous Systems Engineer",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 110,
+            "tag": "Neighborhood",
+            "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "highlightKind": "weather",
+            "entity": "fog",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00701",
+          "name": "Tee Dee",
+          "profile": "Tee Dee — Smoke Shop Owner",
+          "role": "Smoke Shop Owner",
+          "hood": "Laurel",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 110,
+            "tag": "Neighborhood",
+            "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "highlightKind": "weather",
+            "entity": "fog",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00715",
+          "name": "Nadine Beckett",
+          "profile": "Nadine Beckett — Nurse Practitioner",
+          "role": "Nurse Practitioner",
+          "hood": "Piedmont Ave",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 110,
+            "tag": "Neighborhood",
+            "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "highlightKind": "weather",
+            "entity": "fog",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00940",
+          "name": "Constanza Mensah",
+          "profile": "Constanza Mensah — Physical Therapist",
+          "role": "Physical Therapist",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 110,
+            "tag": "Neighborhood",
+            "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "highlightKind": "weather",
+            "entity": "fog",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-01031",
+          "name": "Aaliyah Yamamoto",
+          "profile": "Aaliyah Yamamoto — Electrician",
+          "role": "Electrician",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 110,
+            "tag": "Neighborhood",
+            "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window near a bar patio",
+            "highlightKind": "weather",
+            "entity": "fog",
+            "predicate": "observe"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "C110 fog, 52°F after overcast",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 110",
+        "id": "F-9dfee0fe404a"
+      },
+      {
+        "t": "FACT",
+        "text": "C110 fog, 52°F after overcast; 4 residents on the record lived it.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 110",
+        "id": "F-a3455d830697"
+      },
+      {
+        "t": "FACT",
+        "text": "This cycle: fog, 52°F, impact 1.3, comfort 0.4, mood introspective",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 110",
+        "id": "F-83429ad7aea9"
+      },
+      {
+        "t": "FACT",
+        "text": "Last 3 cycles: C107 fog 44°F, C108 fog 46°F, C109 overcast 49°F",
+        "src": "output/beats/Cycle_Weather.jsonl",
+        "id": "F-8e1da426bda8"
+      },
+      {
+        "t": "FACT",
+        "text": "Jackson Sift — dealt with a seasonal health concern",
+        "src": "output/world_summary_c110.md ## Who Lived It",
+        "id": "F-f01843551b36"
+      },
+      {
+        "t": "FACT",
+        "text": "Ron Arenson — recovered from a winter illness",
+        "src": "output/world_summary_c110.md ## Who Lived It",
+        "id": "F-6e38b22a105e"
+      },
+      {
+        "t": "FACT",
+        "text": "Jessie Hess — finally shook the cold that had been hanging around",
+        "src": "output/world_summary_c110.md ## Who Lived It",
+        "id": "F-770e3c0cbff9"
+      },
+      {
+        "t": "FACT",
+        "text": "Jett Walker — finally shook the cold that had been hanging around",
+        "src": "output/world_summary_c110.md ## Who Lived It",
+        "id": "F-881f38147bb7"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00081",
+        "name": "Carmen Mesa",
+        "role": "Starting Pitcher, Midland RockHounds (AA)",
+        "hood": "Lake Merritt",
+        "profile": "Carmen Mesa — Starting Pitcher, Midland RockHounds (AA)",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+      },
+      {
+        "pop": "POP-00158",
+        "name": "Kai Marston",
+        "role": "Journalist, Arts & Entertainment",
+        "hood": "Rockridge",
+        "profile": "Kai Marston — Journalist, Arts & Entertainment",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+      },
+      {
+        "pop": "POP-00214",
+        "name": "Jacquez Tearn",
+        "role": "Dishwasher",
+        "hood": "Chinatown",
+        "profile": "Jacquez Tearn — Dishwasher",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+      },
+      {
+        "pop": "POP-00220",
+        "name": "Shawn Gown",
+        "role": "Taxi driver",
+        "hood": "Uptown",
+        "profile": "Shawn Gown — Taxi driver",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window near a gallery opening",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window near a gallery opening"
+      },
+      {
+        "pop": "POP-00357",
+        "name": "Andrew Cook",
+        "role": "Neighborhood Watch Captain",
+        "hood": "West Oakland",
+        "profile": "Andrew Cook — Neighborhood Watch Captain",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+      },
+      {
+        "pop": "POP-00626",
+        "name": "Fatima Al-Hassan",
+        "role": "Social Worker",
+        "hood": "Uptown",
+        "profile": "Fatima Al-Hassan — Social Worker",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+      },
+      {
+        "pop": "POP-00657",
+        "name": "Aida Jackson",
+        "role": "Orthodontist",
+        "hood": "Piedmont Ave",
+        "profile": "Aida Jackson — Orthodontist",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+      },
+      {
+        "pop": "POP-00661",
+        "name": "Bianca Crook",
+        "role": "Autonomous Systems Engineer",
+        "hood": "Lake Merritt",
+        "profile": "Bianca Crook — Autonomous Systems Engineer",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+      },
+      {
+        "pop": "POP-00701",
+        "name": "Tee Dee",
+        "role": "Smoke Shop Owner",
+        "hood": "Laurel",
+        "profile": "Tee Dee — Smoke Shop Owner",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+      },
+      {
+        "pop": "POP-00715",
+        "name": "Nadine Beckett",
+        "role": "Nurse Practitioner",
+        "hood": "Piedmont Ave",
+        "profile": "Nadine Beckett — Nurse Practitioner",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+      },
+      {
+        "pop": "POP-00940",
+        "name": "Constanza Mensah",
+        "role": "Physical Therapist",
+        "hood": "Fruitvale",
+        "profile": "Constanza Mensah — Physical Therapist",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+      },
+      {
+        "pop": "POP-01031",
+        "name": "Aaliyah Yamamoto",
+        "role": "Electrician",
+        "hood": "West Oakland",
+        "profile": "Aaliyah Yamamoto — Electrician",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window near a bar patio",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window near a bar patio"
+      },
+      {
+        "pop": "POP-01089",
+        "name": "Jacob Perez",
+        "role": "Delivery driver",
+        "hood": "Glenview",
+        "profile": "Jacob Perez — Delivery driver",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+      },
+      {
+        "pop": "POP-01107",
+        "name": "Daniel Yoon",
+        "role": "Co-Founder, Gridiron Analytics",
+        "hood": "West Oakland",
+        "profile": "Daniel Yoon — Co-Founder, Gridiron Analytics",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 110,
+          "tag": "Neighborhood",
+          "line": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+      },
+      {
+        "pop": "POP-00169",
+        "name": "Brie Harris",
+        "role": "Flower Shop Owner",
+        "hood": "Temescal",
+        "profile": "Brie Harris — Flower Shop Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "aDfZY9kJXmws4HgtFJbzPG",
+          "customId": "cp-POP-00169-c103-evening",
+          "cycle": 103,
+          "excerpt": "we’ve seen each other through so much, but lately, it’s like we’re ships passing in the fog.",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "we’ve seen each other through so much, but lately, it’s like we’re ships passing in the fog."
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "KB1q2dgK1EHBbC83d9kaig",
+          "customId": "cp-POP-00170-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "The fog wraps Oakland in this quiet, introspective mood—it’s like the city slows down a little, and I find myself tending to my sourdough starter with extra care, almost like it needs the warmth too.",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "The fog wraps Oakland in this quiet, introspective mood—it’s like the city slows down a little, and I find myself tending to my sourdough starter with extra care, almost like it needs the warmth too."
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "hood": "Fruitvale",
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "NS4eqdfPcSDWp8hfuQJojW",
+          "customId": "cp-POP-00198-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "The fog in Oakland wraps everything in a quiet hush, making mornings feel slower and more reflective, especially when I’m walking to school or prepping for the day.",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "The fog in Oakland wraps everything in a quiet hush, making mornings feel slower and more reflective, especially when I’m walking to school or prepping for the day."
+      },
+      {
+        "pop": "POP-00206",
+        "name": "Omar Lingio",
+        "role": "Vintage Clothing Store Owner",
+        "hood": "Temescal",
+        "profile": "Omar Lingio — Vintage Clothing Store Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "KZQkFutFDqaeaK3J7cpZxe",
+          "customId": "cp-POP-00206-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "I was just standing there, watching the fog roll in, and it felt like the whole neighborhood was wrapped in this quiet, peaceful blanket.",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I was just standing there, watching the fog roll in, and it felt like the whole neighborhood was wrapped in this quiet, peaceful blanket."
+      },
+      {
+        "pop": "POP-00240",
+        "name": "Daley Hill",
+        "role": "Painter",
+        "hood": "Downtown",
+        "profile": "Daley Hill — Painter",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "A6vAnxjZeKJiboYmYvgqL4",
+          "customId": "cp-POP-00240-c102-night",
+          "cycle": 102,
+          "excerpt": "The 44th Table had its Christmas lights up early this year, twinkling through the fog, and I caught myself staring too long one night, wondering when holidays stopped feeling like rest and just became more work.",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "The 44th Table had its Christmas lights up early this year, twinkling through the fog, and I caught myself staring too long one night, wondering when holidays stopped feeling like rest and just became more work."
+      },
+      {
+        "pop": "POP-00254",
+        "name": "Tyrie Groin",
+        "role": "Retail worker",
+        "hood": "Laurel",
+        "profile": "Tyrie Groin — Retail worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "h929oAmBcMuzwuPwm1K9UH",
+          "customId": "cp-POP-00254-c108-morning",
+          "cycle": 108,
+          "excerpt": "Like I’m stuck in this loop, and the fog outside mirrors the fog in my head.",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Like I’m stuck in this loop, and the fog outside mirrors the fog in my head."
+      },
+      {
+        "pop": "POP-00280",
+        "name": "Jerald Jensen",
+        "role": "Janitor",
+        "hood": "West Oakland",
+        "profile": "Jerald Jensen — Janitor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "j4P6E5S2JWuLTPdp5aLNoj",
+          "customId": "cp-POP-00280-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I'll tell you—when the fog rolls in thick like it did last week, or when there's some big game downtown, I see it in the trash cans.",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I'll tell you—when the fog rolls in thick like it did last week, or when there's some big game downtown, I see it in the trash cans."
+      },
+      {
+        "pop": "POP-00746",
+        "name": "Shawn Neighbor",
+        "role": "Construction laborer",
+        "hood": "Fruitvale",
+        "profile": "Shawn Neighbor — Construction laborer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "CEf6nyuAmw7DUk1mX53piY",
+          "customId": "cp-POP-00746-c108-CONVO",
+          "cycle": 108,
+          "excerpt": "\" I glance toward the port cranes, barely visible through the fog.",
+          "highlightKind": "weather",
+          "entity": "fog",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "\" I glance toward the port cranes, barely visible through the fog."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-weather",
+      "angle": "C110 fog, 52°F after overcast — what this weather does to a day in the city",
+      "label": "C110 fog, 52°F after overcast",
+      "hookLine": "C110 fog, 52°F after overcast; 4 residents on the record lived it.",
+      "hood": null,
+      "citizens": [
+        "Jackson Sift (POP-00190)",
+        "Ron Arenson (POP-00367)",
+        "Jessie Hess (POP-00212)",
+        "Jett Walker (POP-00230)"
+      ],
+      "popids": [
+        "POP-00190",
+        "POP-00367",
+        "POP-00212",
+        "POP-00230"
+      ],
+      "ref": "output/beats/Cycle_Weather.jsonl CycleID 110",
+      "cycle": 110
+    },
+    "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "ENVIRONMENT-SLICE-2",
+    "kind": "beat-weather",
+    "seat": {
+      "slug": "noah-tan",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "desk": "civic",
+      "domain": "environment",
+      "builder": "buildEnvironmentSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-weather",
+      "score": 100,
+      "label": "C110 fog, 52°F after overcast",
+      "hood": null,
+      "source": "output/beats/Cycle_Weather.jsonl CycleID 110"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "C110 fog, 52°F after overcast — what this weather does to a day in the city",
+      "hookLine": "C110 fog, 52°F after overcast; 4 residents on the record lived it.",
+      "anchorFacts": [
+        "This cycle: fog, 52°F, impact 1.3, comfort 0.4, mood introspective",
+        "Last 3 cycles: C107 fog 44°F, C108 fog 46°F, C109 overcast 49°F",
+        "Jackson Sift — dealt with a seasonal health concern",
+        "Ron Arenson — recovered from a winter illness",
+        "Jessie Hess — finally shook the cold that had been hanging around",
+        "Jett Walker — finally shook the cold that had been hanging around"
+      ],
+      "evidence": [
+        {
+          "text": "This cycle: fog, 52°F, impact 1.3, comfort 0.4, mood introspective",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 110"
+        },
+        {
+          "text": "Last 3 cycles: C107 fog 44°F, C108 fog 46°F, C109 overcast 49°F",
+          "src": "output/beats/Cycle_Weather.jsonl"
+        },
+        {
+          "text": "Jackson Sift — dealt with a seasonal health concern",
+          "src": "output/world_summary_c110.md ## Who Lived It"
+        },
+        {
+          "text": "Ron Arenson — recovered from a winter illness",
+          "src": "output/world_summary_c110.md ## Who Lived It"
+        },
+        {
+          "text": "Jessie Hess — finally shook the cold that had been hanging around",
+          "src": "output/world_summary_c110.md ## Who Lived It"
+        },
+        {
+          "text": "Jett Walker — finally shook the cold that had been hanging around",
+          "src": "output/world_summary_c110.md ## Who Lived It"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_IN_TABLE",
+        "vs": 109
+      },
+      "hooks": [
+        {
+          "text": "Multiple weather signals detected. Could be coincidence or early pattern.",
+          "angle": "general coverage",
+          "domain": "WEATHER",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "Challenging weather (fog) affecting daily routines. Street-level color available.",
+          "angle": "general coverage",
+          "domain": "WEATHER",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "San Antonio cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "San Antonio",
+          "priority": 6
+        },
+        {
+          "text": "Arman Gutierrez moved from Downtown to East Oakland — priced out of Downtown",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "East Oakland",
+          "priority": 5
+        },
+        {
+          "text": "The Davis household (2) moved from Rockridge to West Oakland — leaving Rockridge for a better fit — sold up and bought in West Oakland",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "Dillon Brooks moved from Uptown to West Oakland — moving up from Uptown",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "Ingrid Solberg at severe displacement risk in Rockridge (risk: 10/10)",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Rockridge",
+          "priority": 7
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00190",
+        "name": "Jackson Sift",
+        "role": "Ex-Offender Reentry Counselor",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Jackson Sift — Ex-Offender Reentry Counselor — West Oakland",
+        "why": "lived the weather this cycle (Who Lived It)"
+      },
+      {
+        "popid": "POP-00367",
+        "name": "Ron Arenson",
+        "role": "Maintenance Tech",
+        "neighborhood": "Baylight District",
+        "business": null,
+        "profile": "Ron Arenson — Maintenance Tech — Baylight District",
+        "why": "lived the weather this cycle (Who Lived It)"
+      },
+      {
+        "popid": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Jessie Hess — Barista — Downtown",
+        "why": "lived the weather this cycle (Who Lived It)"
+      },
+      {
+        "popid": "POP-00230",
+        "name": "Jett Walker",
+        "role": "Plumber",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Jett Walker — Plumber — Rockridge",
+        "why": "lived the weather this cycle (Who Lived It)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cycle_Weather.jsonl CycleID 110",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Noah Tan this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "text": "I’m chasing the fog’s impact on daily routines and moods across Oakland. The weather’s been consistent—foggy and cool—and it’s shaping how people move through their days. I want to see how this weather affects plans, who’s out in it, and who’s staying in. The bay’s smell today feels like a thread worth pulling.",
+    "plan": {
+      "chase": "I’m chasing the fog’s impact on daily routines and moods across Oakland. The weather’s been consistent—foggy and cool—and it’s shaping how people move through their days. I want to see how this weather affects plans, who’s out in it, and who’s staying in. The bay’s smell today feels like a thread worth pulling.",
+      "focus": "The fog’s influence on routines and introspection.",
+      "why": "The weather’s been a steady presence, and its impact on mood and daily life feels tangible. I want to explore how it’s shaping the city’s rhythm.",
+      "checks": [
+        "Is the fog affecting foot traffic differently across neighborhoods?",
+        "How are people adapting their plans to the weather?",
+        "Are there patterns in who’s staying indoors versus braving the fog?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00081",
+          "question": "How has the fog influenced your daily routine, especially around Lake Merritt?",
+          "basis": "Observed fog rolling over the port cranes from their front window."
+        },
+        {
+          "pop": "POP-00214",
+          "question": "Has the fog changed how you navigate Chinatown or your work as a dishwasher?",
+          "basis": "Observed fog rolling over the port cranes from their front window."
+        },
+        {
+          "pop": "POP-00626",
+          "question": "How has the fog impacted your work as a social worker in Uptown?",
+          "basis": "Observed fog rolling over the port cranes from their front window."
+        }
+      ],
+      "interpretation": "The fog seems to be drawing people inward, both physically and emotionally. It’s a quiet force shaping routines and moods.",
+      "unverifiedLead": [
+        "Is the fog affecting health recoveries, like those of Jackson Sift and Ron Arenson?",
+        "Are people altering their commutes or errands due to visibility concerns?"
+      ],
+      "closeQuestion": "What does this fog reveal about Oakland’s relationship with its weather?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): advance to preliminary schematics with community oversight provisions intact — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): filed legislative language with City Clerk — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved accelerated cohort placement with East Oakland priority — \"150 apprentices placed by spring — that's the target, and we're accelerating to hit it.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): independent oversight maintained; soil test verification proceeding — \"Independent oversight isn't bureaucracy — it's how we build trust while we build the future.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 102,
+  "ranAt": "2026-10-07T11:15:50.436Z"
+}

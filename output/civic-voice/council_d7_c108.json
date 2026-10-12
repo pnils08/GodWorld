@@ -1,0 +1,28 @@
+{
+  "office": "council_d7",
+  "cycle": 108,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "District 7 has signed off on the certified fire-rated wall inspections for the Temescal Community Health Center, authorizing drywall installation to proceed strictly against verified MEP logs. On corridor operations, I have transmitted a formal municipal service request for KONO safety while demanding verifiable commercial retention data for Temescal and Rockridge rather than unbudgeted executive promises.",
+  "statements": [
+    {
+      "statementId": "STMT-108-council_d7-001",
+      "type": "vote_statement",
+      "topic": "Temescal Community Health Center Drywall and Fire-Rated Wall Inspection Sign-Off",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Authorize fire-rated wall inspection sign-off and drywall installation for INIT-005 following verified MEP completion.",
+      "quote": "The Temescal Community Health Center moves ahead on schedule not because of mayoral rhetoric, but because District 7 inspected every conduit and verified the logs before clearing the next phase.",
+      "fullStatement": "District 7 is signing off on the fire-rated wall inspection transmittal to clear drywall installation for the Temescal Community Health Center. Following the successful MEP rough-in completion last cycle, the physical work meets code and the timeline is holding. However, acceleration cannot become an excuse for fiscal laxity. We are advancing this $45M facility on the foundation of verified milestones, and my office will continue tracking every line item through interior enclosure to ensure District 7 gets the clinical capacity it was promised without cost overruns.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-council_d7-002",
+      "type": "policy_statement",
+      "topic": "District 7 Commercial Corridors and Municipal Service Accountability",
+      "initiative": null,
+      "decision": "Transmit targeted municipal service request for KONO corridor safety and demand merchant data for Temescal and Rockridge.",
+      "quote": "KONO does not need executive platitudes; it needs targeted municipal safety delivery and verified service gap audits on the desk.",
+      "fullStatement": "While the Mayor delivers speeches about neighborhood distress, District 7 operates on data and concrete delivery. In KONO, where community sentiment is under strain, I am formally submitting a municipal service request targeting corridor safety and addressing health response coordination. In Temescal, where public investment is delivering major capital assets despite slowing foot traffic and tagging, credit belongs to rigorous local oversight. We will protect Rockridge, Temescal, and KONO through disciplined service allocation and merchant retention tracking, not unvetted subsidies.",
+      "trackerUpdates": {}
+    }
+  ]
+}

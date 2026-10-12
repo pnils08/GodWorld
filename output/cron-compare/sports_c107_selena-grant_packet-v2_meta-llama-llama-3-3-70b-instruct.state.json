@@ -1,0 +1,502 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00591",
+    "name": "Selena Grant",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Oaks — season-state C107 · 0-0 · W0 — the second club's board read",
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "oaks",
+      "hood": "Downtown",
+      "facts": [
+        "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+        "Record 0-0 · streak W0",
+        "Trigger: pre-season",
+        "Franchise stability: uncertain"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [],
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "beat-oaks-beat",
+    "hood": "Downtown",
+    "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+    "plan": {
+      "focus": "The Oaks' preseason record and their preparation for the upcoming season",
+      "closeQuestion": "Will the Oaks be able to turn their preseason performance into a successful season?"
+    },
+    "openThreads": [
+      {
+        "slug": "baylight-district-vinnie-keane-prospect-callup",
+        "label": "baylight-district-vinnie-keane-prospect-callup | C104→C106 | 7 article(s) | advanced 3, opened 4",
+        "hood": "Baylight District",
+        "popids": [
+          "POP-00001",
+          "POP-00050",
+          "POP-00170",
+          "POP-00018",
+          "POP-00003",
+          "POP-00019",
+          "POP-01024",
+          "POP-00198",
+          "POP-00201"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-martin-richards-roster-move",
+        "label": "jack-london-martin-richards-roster-move | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031",
+          "POP-00273",
+          "POP-00642",
+          "POP-00643"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-martin-richards-long-view-signal",
+        "label": "jack-london-martin-richards-long-view-signal | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031",
+          "POP-00642"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "west-oakland-elio-perez-ripple",
+        "label": "west-oakland-elio-perez-ripple | C106→C106 | 2 article(s) | opened 2",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00201",
+          "POP-00722",
+          "POP-00794",
+          "POP-00961"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-martin-richards-story-signal",
+        "label": "jack-london-martin-richards-story-signal | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031",
+          "POP-00273",
+          "POP-00642",
+          "POP-00643"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-martin-richards-sports-analytics",
+        "label": "jack-london-martin-richards-sports-analytics | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-martin-richards-metrics-poetry",
+        "label": "jack-london-martin-richards-metrics-poetry | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00031",
+          "POP-00273",
+          "POP-00642",
+          "POP-00643"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "city-aj-dybantsa-feed",
+        "label": "city-aj-dybantsa-feed | C106→C106 | 1 article(s) | opened 1",
+        "hood": null,
+        "popids": [
+          "POP-01024",
+          "POP-00170",
+          "POP-00198",
+          "POP-00201"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-isley-kelley-sports-analytics",
+        "label": "jack-london-isley-kelley-sports-analytics | C105→C105 | 2 article(s) | advanced 1, opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00019"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "baylight-district-dame-sarr-sideline-signal",
+        "label": "baylight-district-dame-sarr-sideline-signal | C105→C105 | 2 article(s) | opened 2",
+        "hood": "Baylight District",
+        "popids": [
+          "POP-01025",
+          "POP-01026",
+          "POP-00050"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "jack-london-vinnie-keane-era-door",
+        "label": "jack-london-vinnie-keane-era-door | C105→C105 | 1 article(s) | advanced 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00001",
+          "POP-00003",
+          "POP-00018",
+          "POP-00019"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "jack-london-vinnie-keane-injury-load",
+        "label": "jack-london-vinnie-keane-injury-load | C105→C105 | 1 article(s) | advanced 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00001",
+          "POP-00018",
+          "POP-00019"
+        ],
+        "lastCycle": 105
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "profile": "Jessie Hess",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "profile": "Dillon Trevor",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00212-c2820b6836",
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "quote": "I feel like The Oaks are gearing up for a great season, I've heard they're a full go for opening night and their starting five has been announced, it's got me excited to see how they'll do.",
+        "factIds": [
+          "F-ec1960037058",
+          "F-fcc90f20f531"
+        ],
+        "src": "packet.W2[POP-00212]"
+      },
+      {
+        "id": "Q-POP-00224-16c37d5926",
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "quote": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do. As someone who lives and works in Downtown, I feel like the whole neighborhood is buzzing with energy whenever they play.",
+        "factIds": [
+          "F-ec1960037058",
+          "F-fcc90f20f531"
+        ],
+        "src": "packet.W2[POP-00224]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Selena Grant",
+        "text": "Rumors of team instability",
+        "usable": false
+      },
+      {
+        "from": "Selena Grant",
+        "text": "Potential player trades",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C107",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-ac25a93a42d1"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — season-state C107 · 0-0 · W0",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+      "id": "F-ec1960037058"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oaks are a full go for opening night , starting 5 announced.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+      "id": "F-fcc90f20f531"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+      "id": "F-455411084c39"
+    },
+    {
+      "t": "FACT",
+      "text": "Record 0-0 · streak W0",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+      "id": "F-8d8f1ca03813"
+    },
+    {
+      "t": "FACT",
+      "text": "Trigger: pre-season",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+      "id": "F-00df7b7c701f"
+    },
+    {
+      "t": "FACT",
+      "text": "Franchise stability: uncertain",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C107",
+      "id": "F-9ff439581220"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the Oaks feed rows into an analyst's read of an expansion franchise being built in real time — the rotation, the development, the front office and its silences. Evidence first; belief earned with numbers. NOT fan heat, NOT the street, NOT the A's.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person analyst, clean professional sentences",
+      "targetWords": "400-650",
+      "opening": "a supplied Oaks stat, result, or roster observation — never a scene",
+      "closing": "the decision or number the front office still owes an answer on"
+    },
+    "authorizedTexture": [
+      "press row, the practice facility, or a press conference as the reporter's vantage — no invented named venue",
+      "the expansion frame: measuring a supplied fact against what a first-year franchise is expected to look like",
+      "reading a front-office silence or non-answer as a signal, grounded in a supplied fact",
+      "a sourced-beyond-the-release attribution ('a person with knowledge of the front office's thinking') only when the Packet carries the underlying act"
+    ],
+    "textureConditions": [
+      "every result, name, minute, injury, and quote comes from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "real NBA players and teams are sports-layer canon: name them as the feed does and give them nothing the feed didn't",
+      "Oakland citizens on the feed (Varek, Paulson, Abraham, Shepard, any player the feed made a citizen) get a UsageType",
+      "no piece when the cycle has no Oaks row — never written from A's rows"
+    ],
+    "canonBlockers": [
+      "a real-world venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, result, record, streak, minute, injury, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "a fabricated player, coach, owner, or front-office quote",
+      "a personal life, hometown, family, or citizen record given to a real NBA player the feed only names",
+      "the A's as the subject (five other seats own them)",
+      "Chicago, the Bulls, or any prior bureau",
+      "engine or simulation vocabulary; real-world calendar dates (YYYY-MM-DD)"
+    ]
+  },
+  "manifest": {
+    "id": "AM-37d9f4ee9e6b",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-ac25a93a42d1",
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-ec1960037058",
+        "t": "FACT",
+        "text": "Oaks — season-state C107 · 0-0 · W0",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+      },
+      {
+        "id": "F-fcc90f20f531",
+        "t": "FACT",
+        "text": "The Oaks are a full go for opening night , starting 5 announced.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+      },
+      {
+        "id": "F-455411084c39",
+        "t": "FACT",
+        "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C107"
+      },
+      {
+        "id": "F-8d8f1ca03813",
+        "t": "FACT",
+        "text": "Record 0-0 · streak W0",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C107"
+      },
+      {
+        "id": "F-00df7b7c701f",
+        "t": "FACT",
+        "text": "Trigger: pre-season",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C107"
+      },
+      {
+        "id": "F-9ff439581220",
+        "t": "FACT",
+        "text": "Franchise stability: uncertain",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C107"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00212-c2820b6836",
+        "speakerId": "POP-00212",
+        "speakerName": "Jessie Hess",
+        "text": "I feel like The Oaks are gearing up for a great season, I've heard they're a full go for opening night and their starting five has been announced, it's got me excited to see how they'll do.",
+        "factIds": [
+          "F-ec1960037058",
+          "F-fcc90f20f531"
+        ],
+        "src": "packet.W2[POP-00212]"
+      },
+      {
+        "id": "Q-POP-00224-16c37d5926",
+        "speakerId": "POP-00224",
+        "speakerName": "Dillon Trevor",
+        "text": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do. As someone who lives and works in Downtown, I feel like the whole neighborhood is buzzing with energy whenever they play.",
+        "factIds": [
+          "F-ec1960037058",
+          "F-fcc90f20f531"
+        ],
+        "src": "packet.W2[POP-00224]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00212",
+        "name": "Jessie Hess",
+        "profile": "Jessie Hess",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00224",
+        "name": "Dillon Trevor",
+        "profile": "Dillon Trevor",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Selena Grant",
+        "text": "Rumors of team instability",
+        "publishable": false
+      },
+      {
+        "from": "Selena Grant",
+        "text": "Potential player trades",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "press row, the practice facility, or a press conference as the reporter's vantage — no invented named venue",
+      "the expansion frame: measuring a supplied fact against what a first-year franchise is expected to look like",
+      "reading a front-office silence or non-answer as a signal, grounded in a supplied fact",
+      "a sourced-beyond-the-release attribution ('a person with knowledge of the front office's thinking') only when the Packet carries the underlying act"
+    ],
+    "textureConditions": [
+      "every result, name, minute, injury, and quote comes from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "real NBA players and teams are sports-layer canon: name them as the feed does and give them nothing the feed didn't",
+      "Oakland citizens on the feed (Varek, Paulson, Abraham, Shepard, any player the feed made a citizen) get a UsageType",
+      "no piece when the cycle has no Oaks row — never written from A's rows"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, result, record, streak, minute, injury, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "a fabricated player, coach, owner, or front-office quote",
+      "a personal life, hometown, family, or citizen record given to a real NBA player the feed only names",
+      "the A's as the subject (five other seats own them)",
+      "Chicago, the Bulls, or any prior bureau",
+      "engine or simulation vocabulary; real-world calendar dates (YYYY-MM-DD)"
+    ]
+  }
+}

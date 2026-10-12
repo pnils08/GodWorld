@@ -1,0 +1,69 @@
+{
+  "draft": "output/cron-compare/civic_c110_trevor-shimizu_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "bd7565866609ab13bc67d6be4106c72ea57c11df21377d4f358e987e5a7ee091",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Lake Merritt transit analysis is fully grounded with verbatim quote provenance and canon-consistent station data.",
+  "review": {
+    "profileId": "trevor-infrastructure-systems-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "packageVersion": "TREVOR-LEP2-1",
+    "manifestId": "AM-f614a9218d31",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "84",
+          "86",
+          "78",
+          "1",
+          "76",
+          "75",
+          "999",
+          "79",
+          "363",
+          "81",
+          "45"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Jerald Jensen",
+      "Trevor Shimizu"
+    ],
+    "unverified": [
+      "St Oakland",
+      "St Oakland City Center"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0105,
+  "durationMs": 6826,
+  "parseError": false,
+  "ranAt": "2026-10-05T23:16:51.705Z"
+}

@@ -1,0 +1,922 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "110",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00013",
+      "name": "Maria Keen",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Dimond — the programs that hold the block and the people who founded them",
+      "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the engine's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "neighborhood",
+        "hood": "Dimond",
+        "facts": [
+          "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+          "Dimond this cycle: 348 students, 1,476 adults, 316 seniors — moved vs C109: +1 students, +4 adults, +1 seniors",
+          "Dimond: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "Dimond: 98 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "Multiple community signals detected. Could be coincidence or early pattern. (observational analysis)",
+          "Positive energy in the city. What's driving the mood? Feature opportunity. (street-level mood piece)",
+          "Community engagement elevated. Residents gathering, organizing, connecting. Profile opportunity. (observational analysis)",
+          "Household in Lake Merritt spending 58% of income on housing (observational analysis)"
+        ],
+        "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-neighborhood",
+      "hood": "Dimond",
+      "score": null,
+      "src": "output/beats/Community_Programs.jsonl @C110",
+      "nearby": [
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c110.md \"### East Oakland\"; events: world_summary_c110.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c110.md \"### Fruitvale\"; events: world_summary_c110.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c110.md \"### Grand Lake\"; events: world_summary_c110.md \"## World Events\""
+        },
+        {
+          "text": "Ivy Hill | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c110.md \"### Ivy Hill\"; events: world_summary_c110.md \"## World Events\""
+        },
+        {
+          "text": "Piedmont Ave | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c110.md \"### Piedmont Ave\"; events: world_summary_c110.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00042",
+          "name": "Ramon Vega",
+          "profile": "Ramon Vega — City Council President - D1",
+          "role": "City Council President - D1",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "2BXojNhS2ZkFkTtrjhwr6G",
+            "customId": "cp-POP-00042-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "I see the tamale lady who used to set up by the Dimond Library now working out of her nephew’s food truck because the foot traffic dried up.",
+            "highlightKind": "hood",
+            "entity": "Dimond",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker",
+          "role": "Sourdough Baker",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "u1YKduvbPjbzuUVWhfwvrf",
+            "customId": "cp-POP-00170-c105-PRESS",
+            "cycle": 105,
+            "excerpt": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.",
+            "highlightKind": "hood",
+            "entity": "Dimond",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+          "role": "K-8 Teacher,Former Line cook",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "f9hEJB3ZxY3zGw8mmAQNNQ",
+            "customId": "cp-POP-00198-c105-PRESS",
+            "cycle": 105,
+            "excerpt": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook.",
+            "highlightKind": "hood",
+            "entity": "Dimond",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server",
+          "role": "Server",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "paHBqTxejxgEDRGohUgucA",
+            "customId": "cp-POP-00201-c105-PRESS",
+            "cycle": 105,
+            "excerpt": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland.",
+            "highlightKind": "hood",
+            "entity": "Dimond",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00210",
+          "name": "Depak Ying",
+          "profile": "Depak Ying — Server",
+          "role": "Server",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "eoQByoEWuX3GMVGQNoULzB",
+            "customId": "cp-POP-00210-c105-PRESS",
+            "cycle": 105,
+            "excerpt": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in Rockridge.",
+            "highlightKind": "hood",
+            "entity": "Dimond",
+            "predicate": "observe"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "Dimond: 1 active program on the record",
+        "src": "output/beats/Community_Programs.jsonl @C110",
+        "id": "F-549ed60c7ccc"
+      },
+      {
+        "t": "FACT",
+        "text": "1 active programs in Dimond; Mark Aitken founded one.",
+        "src": "output/beats/Community_Programs.jsonl @C110",
+        "id": "F-bb7201edb101"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C110 PRG-007",
+        "id": "F-e03f15635173"
+      },
+      {
+        "t": "FACT",
+        "text": "Dimond this cycle: 348 students, 1,476 adults, 316 seniors — moved vs C109: +1 students, +4 adults, +1 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C110 vs prev/",
+        "id": "F-72d67ea14409"
+      },
+      {
+        "t": "FACT",
+        "text": "Dimond: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C110 judicial Dimond",
+        "id": "F-f4de3fcb398b"
+      },
+      {
+        "t": "FACT",
+        "text": "Dimond: 98 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C110 hospital Dimond",
+        "id": "F-6e4319924078"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00042",
+        "name": "Ramon Vega",
+        "role": "City Council President - D1",
+        "hood": "Lake Merritt",
+        "profile": "Ramon Vega — City Council President - D1",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "2BXojNhS2ZkFkTtrjhwr6G",
+          "customId": "cp-POP-00042-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "I see the tamale lady who used to set up by the Dimond Library now working out of her nephew’s food truck because the foot traffic dried up.",
+          "highlightKind": "hood",
+          "entity": "Dimond",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I see the tamale lady who used to set up by the Dimond Library now working out of her nephew’s food truck because the foot traffic dried up."
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "u1YKduvbPjbzuUVWhfwvrf",
+          "customId": "cp-POP-00170-c105-PRESS",
+          "cycle": 105,
+          "excerpt": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.",
+          "highlightKind": "hood",
+          "entity": "Dimond",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community."
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "hood": "Fruitvale",
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "f9hEJB3ZxY3zGw8mmAQNNQ",
+          "customId": "cp-POP-00198-c105-PRESS",
+          "cycle": 105,
+          "excerpt": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook.",
+          "highlightKind": "hood",
+          "entity": "Dimond",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook."
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "role": "Server",
+        "hood": "Rockridge",
+        "profile": "Elio Perez — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "paHBqTxejxgEDRGohUgucA",
+          "customId": "cp-POP-00201-c105-PRESS",
+          "cycle": 105,
+          "excerpt": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland.",
+          "highlightKind": "hood",
+          "entity": "Dimond",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland."
+      },
+      {
+        "pop": "POP-00210",
+        "name": "Depak Ying",
+        "role": "Server",
+        "hood": "Rockridge",
+        "profile": "Depak Ying — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "eoQByoEWuX3GMVGQNoULzB",
+          "customId": "cp-POP-00210-c105-PRESS",
+          "cycle": 105,
+          "excerpt": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in Rockridge.",
+          "highlightKind": "hood",
+          "entity": "Dimond",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in Rockridge."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "Dimond — the programs that hold the block and the people who founded them",
+      "label": "Dimond: 1 active program on the record",
+      "hookLine": "1 active programs in Dimond; Mark Aitken founded one.",
+      "hood": "Dimond",
+      "citizens": [
+        "Mark Aitken (POP-00003)"
+      ],
+      "popids": [
+        "POP-00003"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C110",
+      "cycle": 110
+    },
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the engine's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+      "named": "Da Dough",
+      "hood": "Temescal",
+      "person": "Warriors Alumni Thompson",
+      "venue": "Da Dough"
+    },
+    "recommend": {
+      "bag": "ground",
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+      "reason": "top pulse fame-sighting → ground",
+      "pulseClass": "fame-sighting",
+      "pulseLabel": "Warriors Alumni Thompson at Da Dough (Temescal)"
+    },
+    "prewrite": {
+      "pulseClass": "fame-sighting",
+      "angle": "Warriors Alumni Thompson spotted at Da Dough in Temescal — ground truth only, no invented companions",
+      "hookLine": "sighting | Warriors Alumni Thompson spotted at Da Dough",
+      "anchorFacts": [
+        "NAMED: Da Dough",
+        "PERSON: Warriors Alumni Thompson",
+        "VENUE: Da Dough",
+        "HOOD: Temescal",
+        "PERSON: Warriors Alumni Thompson",
+        "VENUE: Da Dough",
+        "HOOD: Temescal"
+      ],
+      "bagRecommend": "ground",
+      "bagSlug": "maria-keen"
+    },
+    "texture": {
+      "famous": [
+        "Warriors Alumni Thompson",
+        "Tara Ellison",
+        "Marcus Duval",
+        "Cultural Ambassador Li Wei"
+      ],
+      "restaurants": [
+        {
+          "name": "Temple Lounge",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Dockhouse BBQ",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Bubic Burgers",
+          "hood": "Baylight District"
+        },
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "OakTown Social",
+          "hood": "Temescal"
+        },
+        {
+          "name": "3AM Club",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Piedmont Parlor",
+          "hood": "Piedmont Ave"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 9,
+        "vibe": "art-scene",
+        "movement": "fan-surge",
+        "weatherImpact": 1.3
+      },
+      "cityEvents": [
+        "Downtown First Friday Live Music",
+        "Lake Merritt Community Circle",
+        "Piedmont Ave Winter Walk",
+        "Lake Merritt Lantern Parade"
+      ],
+      "tv": [
+        "Gallery Hour",
+        "Community Stories",
+        "Late Weather Watch",
+        "Bay Area Alert",
+        "Warm House",
+        "Fireside Hour",
+        "A's Franchise Spotlight",
+        "The Isley Kelley (SS) Interview"
+      ],
+      "movies": [
+        "Art of the City",
+        "Neighborhood Tales",
+        "Umbrella Line",
+        "Fog Harbor",
+        "New Beginnings",
+        "Snowlight",
+        "Ballpark Dreams"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight - Championship Edition",
+      "streamingTrend": "arts documentaries",
+      "foodTrend": "First Friday arts district dining - gallery crowd"
+    },
+    "signals": {
+      "fameCount": 9,
+      "sightingCount": 4,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Warriors Alumni Thompson spotted at Da Dough",
+          "name": "Warriors Alumni Thompson",
+          "venue": "Da Dough",
+          "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Temescal",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Tara Ellison spotted at Oakland Athletics",
+          "name": "Tara Ellison",
+          "venue": "Oakland Athletics",
+          "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Baylight District",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Marcus Duval spotted at Point Press Laundry",
+          "name": "Marcus Duval",
+          "venue": "Point Press Laundry",
+          "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Adams Point",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Cultural Ambassador Li Wei spotted at Eastlake Laundry",
+          "name": "Cultural Ambassador Li Wei",
+          "venue": "Eastlake Laundry",
+          "ref": "Ripple_Ledger cycle 110 (CauseType lifestyle-sighting); rendered: world_summary_c110.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Eastlake",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Temple Lounge",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Dockhouse BBQ",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Bubic Burgers",
+          "hood": "Baylight District"
+        },
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "OakTown Social",
+          "hood": "Temescal"
+        },
+        {
+          "name": "3AM Club",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Piedmont Parlor",
+          "hood": "Piedmont Ave"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 9,
+        "vibe": "art-scene",
+        "movement": "fan-surge",
+        "weatherImpact": 1.3
+      },
+      "cityEvents": [
+        "Downtown First Friday Live Music",
+        "Lake Merritt Community Circle",
+        "Piedmont Ave Winter Walk",
+        "Lake Merritt Lantern Parade"
+      ],
+      "tv": [
+        "Gallery Hour",
+        "Community Stories",
+        "Late Weather Watch",
+        "Bay Area Alert",
+        "Warm House",
+        "Fireside Hour",
+        "A's Franchise Spotlight",
+        "The Isley Kelley (SS) Interview"
+      ],
+      "movies": [
+        "Art of the City",
+        "Neighborhood Tales",
+        "Umbrella Line",
+        "Fog Harbor",
+        "New Beginnings",
+        "Snowlight",
+        "Ballpark Dreams"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+        "named": "Da Dough",
+        "hood": "Temescal"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Tara Ellison at Oakland Athletics (Baylight District)",
+        "named": "Oakland Athletics",
+        "hood": "Baylight District"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Marcus Duval at Point Press Laundry (Adams Point)",
+        "named": "Point Press Laundry",
+        "hood": "Adams Point"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Cultural Ambassador Li Wei at Eastlake Laundry (Eastlake)",
+        "named": "Eastlake Laundry",
+        "hood": "Eastlake"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Temple Lounge (Downtown)",
+        "named": "Temple Lounge",
+        "hood": "Downtown"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Dockhouse BBQ (Jack London)",
+        "named": "Dockhouse BBQ",
+        "hood": "Jack London"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Bubic Burgers (Baylight District)",
+        "named": "Bubic Burgers",
+        "hood": "Baylight District"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Harborline Grill (Jack London)",
+        "named": "Harborline Grill",
+        "hood": "Jack London"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Temple Lounge (Downtown)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "city-event",
+        "label": "Downtown First Friday Live Music",
+        "score": 31,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "fame-sighting",
+        "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+        "score": 31,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "fame-sighting",
+        "label": "Warriors Alumni Thompson at Da Dough (Temescal)",
+        "score": 31,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "named-restaurant",
+        "label": "Temple Lounge (Downtown)",
+        "score": 32,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "HOOD-SLICE-2",
+    "kind": "beat-neighborhood",
+    "seat": {
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "desk": "culture",
+      "domain": "neighborhood",
+      "builder": "buildNeighborhoodSlice.js"
+    },
+    "hood": "Dimond",
+    "pulse": {
+      "className": "beat-neighborhood",
+      "score": 100,
+      "label": "Dimond: 1 active program on the record",
+      "hood": "Dimond",
+      "source": "output/beats/Community_Programs.jsonl @C110"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Dimond — the programs that hold the block and the people who founded them",
+      "hookLine": "1 active programs in Dimond; Mark Aitken founded one.",
+      "anchorFacts": [
+        "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+        "Dimond this cycle: 348 students, 1,476 adults, 316 seniors — moved vs C109: +1 students, +4 adults, +1 seniors",
+        "Dimond: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Dimond: 98 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+      ],
+      "evidence": [
+        {
+          "text": "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C110 PRG-007"
+        },
+        {
+          "text": "Dimond this cycle: 348 students, 1,476 adults, 316 seniors — moved vs C109: +1 students, +4 adults, +1 seniors",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C110 vs prev/"
+        },
+        {
+          "text": "Dimond: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C110 judicial Dimond"
+        },
+        {
+          "text": "Dimond: 98 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C110 hospital Dimond"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 109
+      },
+      "hooks": [
+        {
+          "text": "Multiple community signals detected. Could be coincidence or early pattern.",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "Positive energy in the city. What's driving the mood? Feature opportunity.",
+          "angle": "street-level mood piece",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 2
+        },
+        {
+          "text": "Community engagement elevated. Residents gathering, organizing, connecting. Profile opportunity.",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "Household in Lake Merritt spending 58% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 6
+        },
+        {
+          "text": "Household in Rockridge spending 101% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Rockridge",
+          "priority": 6
+        },
+        {
+          "text": "Household in West Oakland spending 90% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 6
+        },
+        {
+          "text": "Household in Fruitvale spending 62% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 6
+        },
+        {
+          "text": "Household in Piedmont Ave spending 94% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Piedmont Ave",
+          "priority": 6
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00003",
+        "name": "Mark Aitken",
+        "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+        "why": "founded Oakland A's Alumni Youth Clinics (Community_Programs)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Community_Programs.jsonl @C110",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "text": "I'm looking into the community programs in Dimond, particularly the Oakland A's Alumni Youth Clinics, to see how they're impacting the neighborhood and its residents.",
+    "plan": {
+      "chase": "I'm looking into the community programs in Dimond, particularly the Oakland A's Alumni Youth Clinics, to see how they're impacting the neighborhood and its residents.",
+      "focus": "The impact of community programs on Dimond's residents",
+      "why": "I want to understand how these programs are making a difference in the community and what challenges they're facing",
+      "checks": [
+        "How are the programs funded?",
+        "What kind of support do they receive from the community?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00042",
+          "question": "What's the current state of the Oakland A's Alumni Youth Clinics in Dimond?",
+          "basis": "Ramon Vega's observation of the tamale lady's new location"
+        }
+      ],
+      "interpretation": "The community programs in Dimond seem to be an essential part of the neighborhood's fabric, and I'm interested in exploring their role further",
+      "unverifiedLead": [
+        "I've heard rumors of a new community center being built in Dimond, but I need to verify this information"
+      ],
+      "closeQuestion": "What's the most significant challenge facing the community programs in Dimond, and how can they be addressed?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c110.md \"### East Oakland\"; events: world_summary_c110.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c110.md \"### Fruitvale\"; events: world_summary_c110.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c110.md \"### Grand Lake\"; events: world_summary_c110.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Ivy Hill | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Ivy Hill",
+      "ref": "output/neighborhood_texture_c110.md \"### Ivy Hill\"; events: world_summary_c110.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Piedmont Ave | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Piedmont Ave",
+      "ref": "output/neighborhood_texture_c110.md \"### Piedmont Ave\"; events: world_summary_c110.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 28,
+  "ranAt": "2026-10-09T11:16:42.508Z"
+}

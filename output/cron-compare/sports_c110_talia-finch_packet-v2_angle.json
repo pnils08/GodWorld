@@ -1,0 +1,907 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "110",
+  "persona": "talia-finch",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00592",
+      "name": "Talia Finch",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks ground read C110 — low — the people around the second club",
+      "approach": "Oaks ground approach: this slice is what the Oaks feed says about the people — the mood in the room, the fans, the neighborhood around the park — with the record as context. First-person ground report. The moods and sentiments are feed rows, real; the walk to the park, the vendor, the kid with the glove are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "oaks",
+        "hood": "Dimond",
+        "facts": [
+          "Oaks fans, C110: low",
+          "Room mood, C110: frustrated",
+          "Notebook (feed): The Oaks lost in Chicago as Mike Paulson's served as GM last season in Chicago along with his then assistant Elliot Abraham. Abraham now serves as the Oaks GM while Paulson is President of Operations.",
+          "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+          "Context: record 0-4 · streak L4",
+          "Home neighborhood (feed): Dimond",
+          "Notebook (feed): The Oaks lose their final preseason game bringing the total franchise record to 0-9 through rookie camp and preseason. Wilson Shepard reassures that the full team has yet to suit up as one and opening",
+          "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+          "Context: record 0-5 · streak L5",
+          "Home neighborhood (feed): Downtown"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-oaks-ground",
+      "hood": "Dimond",
+      "score": null,
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+      "nearby": [
+        {
+          "text": "A's | game-result | (playoffs) | Henry Rivas, Danny Horn, Mark Aitken, Isley Kelley",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | John Ellis, Eric Taveras, Vinnie Keane, Benji Dillon",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Austin Reaves, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (championship) | Mike Paulson, Vinnie Keane, Benji Dillon, Mark Aitken, Eric Taveras, Pablo Almanzar, Arturo Ramos, Isley Kelley, Darrin Davis, Frank Reyna",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker",
+          "role": "Sourdough Baker",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "1E2GX7pr1vY8Uw1c81czYa",
+            "customId": "cp-POP-00170-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I've heard some folks around Temescal talking about the Oaks analysis, but to be honest, I don't really know what to make of it - as a sourdough baker, I'm more focused on getting my bread just right than following sports news.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+          "role": "K-8 Teacher,Former Line cook",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "mgXsax3i7irgmarYJpd9bp",
+            "customId": "cp-POP-00198-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server",
+          "role": "Server",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "jQ1x55AXJqEnBWBaUX2JyW",
+            "customId": "cp-POP-00201-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00212",
+          "name": "Jessie Hess",
+          "profile": "Jessie Hess — Barista",
+          "role": "Barista",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "HyhQejEenARxJYxp93ae85",
+            "customId": "cp-POP-00212-c110-PRESS",
+            "cycle": 110,
+            "excerpt": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00224",
+          "name": "Dillon Trevor",
+          "profile": "Dillon Trevor — Server",
+          "role": "Server",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+            "customId": "cp-POP-00224-c107-PRESS",
+            "cycle": 107,
+            "excerpt": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00273",
+          "name": "Trenton Nawan",
+          "profile": "Trenton Nawan — Server",
+          "role": "Server",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "eaiRfuJ71vccy5e5JS4URS",
+            "customId": "cp-POP-00273-c108-PRESS",
+            "cycle": 108,
+            "excerpt": "I've seen the Oaks struggle in their preseason performance, it's got me a bit worried about how they'll do this season.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00540",
+          "name": "Jade Orion",
+          "profile": "Jade Orion — Musician",
+          "role": "Musician",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "vAkesst5wo8wCX9mn7Rujt",
+            "customId": "cp-POP-00540-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00642",
+          "name": "Ollie Campbell",
+          "profile": "Ollie Campbell — Bakery Worker",
+          "role": "Bakery Worker",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "WMxfugsYvhohHCtt2vWHm2",
+            "customId": "cp-POP-00642-c103-PRESS",
+            "cycle": 103,
+            "excerpt": "I don't follow the Oaks too close, but 23 points sounds like Adash did his job.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00722",
+          "name": "Daniel Cloak",
+          "profile": "Daniel Cloak — Bakery Worker",
+          "role": "Bakery Worker",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "uBnTZrbAsy2cgjJY5UAbsb",
+            "customId": "cp-POP-00722-c110-PRESS",
+            "cycle": 110,
+            "excerpt": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00794",
+          "name": "Irene Fay",
+          "profile": "Irene Fay — Barista",
+          "role": "Barista",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "toFvMTo3wqpDxkBBseRDVW",
+            "customId": "cp-POP-00794-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00961",
+          "name": "Darius Clark",
+          "profile": "Darius Clark — Bakery Worker",
+          "role": "Bakery Worker",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "eMYpZ1azxUV7vjTZvhkMiT",
+            "customId": "cp-POP-00961-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I feel like the community is pretty supportive of the Oaks team, I see people around here talking about them and it seems like they're trying to engage with us more.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks ground read C110 — low",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+        "id": "F-e236766dcd6e"
+      },
+      {
+        "t": "FACT",
+        "text": "low",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+        "id": "F-4b1bfc197d70"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks fans, C110: low",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-92059d6f5245"
+      },
+      {
+        "t": "FACT",
+        "text": "Room mood, C110: frustrated",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-49b0383ee572"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): The Oaks lost in Chicago as Mike Paulson's served as GM last season in Chicago along with his then assistant Elliot Abraham. Abraham now serves as the Oaks GM while Paulson is President of Operations.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-e4b1716b12ce"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-897c526e0609"
+      },
+      {
+        "t": "FACT",
+        "text": "Context: record 0-4 · streak L4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-408869fc5a91"
+      },
+      {
+        "t": "FACT",
+        "text": "Home neighborhood (feed): Dimond",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-e72a612c973f"
+      },
+      {
+        "t": "FACT",
+        "text": "Notebook (feed): The Oaks lose their final preseason game bringing the total franchise record to 0-9 through rookie camp and preseason. Wilson Shepard reassures that the full team has yet to suit up as one and opening",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-13019e676c4a"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-13437837b8e6"
+      },
+      {
+        "t": "FACT",
+        "text": "Context: record 0-5 · streak L5",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-d90d1ee0e025"
+      },
+      {
+        "t": "FACT",
+        "text": "Home neighborhood (feed): Downtown",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-7342c1364058"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "1E2GX7pr1vY8Uw1c81czYa",
+          "customId": "cp-POP-00170-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I've heard some folks around Temescal talking about the Oaks analysis, but to be honest, I don't really know what to make of it - as a sourdough baker, I'm more focused on getting my bread just right than following sports news.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard some folks around Temescal talking about the Oaks analysis, but to be honest, I don't really know what to make of it - as a sourdough baker, I'm more focused on getting my bread just right than following sports news."
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "hood": "Fruitvale",
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "mgXsax3i7irgmarYJpd9bp",
+          "customId": "cp-POP-00198-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else"
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "role": "Server",
+        "hood": "Rockridge",
+        "profile": "Elio Perez — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jQ1x55AXJqEnBWBaUX2JyW",
+          "customId": "cp-POP-00201-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family"
+      },
+      {
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "hood": "Downtown",
+        "profile": "Jessie Hess — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "HyhQejEenARxJYxp93ae85",
+          "customId": "cp-POP-00212-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence."
+      },
+      {
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "role": "Server",
+        "hood": "Downtown",
+        "profile": "Dillon Trevor — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+          "customId": "cp-POP-00224-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do."
+      },
+      {
+        "pop": "POP-00273",
+        "name": "Trenton Nawan",
+        "role": "Server",
+        "hood": "Jack London",
+        "profile": "Trenton Nawan — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "eaiRfuJ71vccy5e5JS4URS",
+          "customId": "cp-POP-00273-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "I've seen the Oaks struggle in their preseason performance, it's got me a bit worried about how they'll do this season.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've seen the Oaks struggle in their preseason performance, it's got me a bit worried about how they'll do this season."
+      },
+      {
+        "pop": "POP-00540",
+        "name": "Jade Orion",
+        "role": "Musician",
+        "hood": "Lake Merritt",
+        "profile": "Jade Orion — Musician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "vAkesst5wo8wCX9mn7Rujt",
+          "customId": "cp-POP-00540-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap."
+      },
+      {
+        "pop": "POP-00642",
+        "name": "Ollie Campbell",
+        "role": "Bakery Worker",
+        "hood": "Jack London",
+        "profile": "Ollie Campbell — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "WMxfugsYvhohHCtt2vWHm2",
+          "customId": "cp-POP-00642-c103-PRESS",
+          "cycle": 103,
+          "excerpt": "I don't follow the Oaks too close, but 23 points sounds like Adash did his job.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I don't follow the Oaks too close, but 23 points sounds like Adash did his job."
+      },
+      {
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Daniel Cloak — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "uBnTZrbAsy2cgjJY5UAbsb",
+          "customId": "cp-POP-00722-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive."
+      },
+      {
+        "pop": "POP-00794",
+        "name": "Irene Fay",
+        "role": "Barista",
+        "hood": "West Oakland",
+        "profile": "Irene Fay — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "toFvMTo3wqpDxkBBseRDVW",
+          "customId": "cp-POP-00794-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it."
+      },
+      {
+        "pop": "POP-00961",
+        "name": "Darius Clark",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Darius Clark — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "eMYpZ1azxUV7vjTZvhkMiT",
+          "customId": "cp-POP-00961-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I feel like the community is pretty supportive of the Oaks team, I see people around here talking about them and it seems like they're trying to engage with us more.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I feel like the community is pretty supportive of the Oaks team, I see people around here talking about them and it seems like they're trying to engage with us more."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Talia Finch",
+    "popid": "POP-00592"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-ground",
+      "angle": "Oaks ground read C110 — low — the people around the second club",
+      "label": "Oaks ground read C110 — low",
+      "hookLine": "low",
+      "hood": "Dimond",
+      "citizens": [
+        "Austin Reaves (POP-01027)",
+        "Adash Stanley (POP-01023)",
+        "Wilson Shepard (POP-01022)"
+      ],
+      "popids": [
+        "POP-01027",
+        "POP-01023",
+        "POP-01022"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+      "cycle": 110
+    },
+    "approach": "Oaks ground approach: this slice is what the Oaks feed says about the people — the mood in the room, the fans, the neighborhood around the park — with the record as context. First-person ground report. The moods and sentiments are feed rows, real; the walk to the park, the vendor, the kid with the glove are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OAKS-GROUND-1",
+    "kind": "beat-oaks-ground",
+    "seat": {
+      "slug": "talia-finch",
+      "name": "Talia Finch",
+      "popid": "POP-00592",
+      "desk": "sports",
+      "domain": "oaks",
+      "builder": "buildOaksGroundSlice.js"
+    },
+    "hood": "Dimond",
+    "pulse": {
+      "className": "beat-oaks-ground",
+      "score": 100,
+      "label": "Oaks ground read C110 — low",
+      "hood": "Dimond",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl @C110"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Oaks ground read C110 — low — the people around the second club",
+      "hookLine": "low",
+      "anchorFacts": [
+        "Oaks fans, C110: low",
+        "Room mood, C110: frustrated",
+        "Notebook (feed): The Oaks lost in Chicago as Mike Paulson's served as GM last season in Chicago along with his then assistant Elliot Abraham. Abraham now serves as the Oaks GM while Paulson is President of Operations.",
+        "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+        "Context: record 0-4 · streak L4",
+        "Home neighborhood (feed): Dimond",
+        "Oaks fans, C110: low",
+        "Room mood, C110: frustrated",
+        "Notebook (feed): The Oaks lose their final preseason game bringing the total franchise record to 0-9 through rookie camp and preseason. Wilson Shepard reassures that the full team has yet to suit up as one and opening",
+        "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+        "Context: record 0-5 · streak L5",
+        "Home neighborhood (feed): Downtown"
+      ],
+      "evidence": [
+        {
+          "text": "Oaks fans, C110: low",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Room mood, C110: frustrated",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Notebook (feed): The Oaks lost in Chicago as Mike Paulson's served as GM last season in Chicago along with his then assistant Elliot Abraham. Abraham now serves as the Oaks GM while Paulson is President of Operations.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Context: record 0-4 · streak L4",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Home neighborhood (feed): Dimond",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Oaks fans, C110: low",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Room mood, C110: frustrated",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Notebook (feed): The Oaks lose their final preseason game bringing the total franchise record to 0-9 through rookie camp and preseason. Wilson Shepard reassures that the full team has yet to suit up as one and opening",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Context: record 0-5 · streak L5",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Home neighborhood (feed): Downtown",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — Downtown",
+        "why": "named on the Oaks feed C110 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+        "why": "named on the Oaks feed C110 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "why": "named on the Oaks feed C110 (Oakland_Sports_Feed)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Oakland_Sports_Feed.jsonl @C110",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Talia Finch",
+    "popid": "POP-00592",
+    "text": "I plan to explore the mood around the Oaks, focusing on the fans and the neighborhood, considering their recent performance",
+    "plan": {
+      "chase": "I plan to explore the mood around the Oaks, focusing on the fans and the neighborhood, considering their recent performance",
+      "focus": "The Oaks' preseason games and their impact on the community",
+      "why": "To understand the sentiment around the team and how it affects the people around them",
+      "checks": [
+        "Room mood",
+        "Oaks fans sentiment"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00212",
+          "question": "How do you think the Oaks' recent losses have affected the team's morale?",
+          "basis": "Personal opinion as a fan"
+        },
+        {
+          "pop": "POP-00722",
+          "question": "What do you think the Oaks can do to improve their performance and regain fan support?",
+          "basis": "Community engagement"
+        }
+      ],
+      "interpretation": "The Oaks' preseason performance has been disappointing, and it's essential to understand how this affects the team and the community",
+      "unverifiedLead": [
+        "The team's management and coaching staff may be under pressure to improve performance"
+      ],
+      "closeQuestion": "How can the Oaks turn their season around and regain fan support?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | game-result | (playoffs) | Henry Rivas, Danny Horn, Mark Aitken, Isley Kelley",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00024",
+        "POP-00022",
+        "POP-00003",
+        "POP-00019"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | John Ellis, Eric Taveras, Vinnie Keane, Benji Dillon",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00033",
+        "POP-00597",
+        "POP-00001",
+        "POP-00018"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Austin Reaves, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01024",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "A's | game-result | (championship) | Mike Paulson, Vinnie Keane, Benji Dillon, Mark Aitken, Eric Taveras, Pablo Almanzar, Arturo Ramos, Isley Kelley, Darrin Davis, Frank Reyna",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527",
+        "POP-00001",
+        "POP-00018",
+        "POP-00003",
+        "POP-00597",
+        "POP-01078",
+        "POP-00025",
+        "POP-00019",
+        "POP-00021",
+        "POP-00079"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "ranAt": "2026-10-08T11:16:47.791Z"
+}

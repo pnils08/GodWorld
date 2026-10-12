@@ -1,0 +1,760 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00155",
+    "name": "Trevor Shimizu",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "12th St Oakland City Center ridership down 9,631 vs C106 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+    "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "transit",
+      "hood": null,
+      "facts": [
+        "8 stations + 10 corridors on the record this cycle; total ridership 33,277 (C106: 85,857)",
+        "12th St Oakland City Center: ridership 8,191 (-9,631 vs C106), on-time 77% (-4 pts) — fog; holiday; game day (Downtown); events in Downtown ×2, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+        "MacArthur: ridership 4,002 (-8,366 vs C106), on-time 79% (+1 pts) — fog; holiday",
+        "19th St Oakland: ridership 5,491 (-7,175 vs C106), on-time 79% (+1 pts) — fog; holiday; game day (Downtown); events in Downtown ×2, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+        "Fruitvale: ridership 4,749 (-6,485 vs C106), on-time 77% (-6 pts) — fog; holiday; game day (Fruitvale); events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+        "Coliseum: ridership 2,634 (-5,893 vs C106), on-time 82% (-1 pts) — fog; holiday; events in East Oakland",
+        "Rockridge: ridership 3,085 (-5,782 vs C106), on-time 76% (-4 pts) — fog; holiday",
+        "Lake Merritt: ridership 2,482 (-5,046 vs C106), on-time 77% (-5 pts) — fog; holiday; events in Lake Merritt ×2",
+        "West Oakland: ridership 2,643 (-4,202 vs C106), on-time 76% (-10 pts) — fog; holiday; game day (Jack London, Downtown); events in Downtown ×2; Baylight District — Final Council Vote: construction-planning",
+        "I-880 North: traffic index 55 (-45 vs C106) — fog; holiday; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-planning",
+        "I-880 South: traffic index 58 (-42 vs C106) — fog; holiday; game day (Fruitvale)",
+        "I-580 East: traffic index 63 (-37 vs C106) — fog; holiday; game day (Glenview)"
+      ],
+      "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+      "note": null,
+      "engineHooks": [
+        "Multiple infrastructure signals detected. Could be coincidence or early pattern. (general coverage)",
+        "Notable event: \"pothole eruption\". Follow-up recommended. (general coverage)"
+      ],
+      "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "beat-transit",
+    "hood": null,
+    "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+    "plan": {
+      "focus": "Understanding the impact of external factors on transit ridership and operations at 12th St Oakland City Center.",
+      "closeQuestion": "What lessons can be learned from this cycle to better prepare for similar disruptions in the future?"
+    },
+    "openThreads": [
+      {
+        "slug": "west-oakland-elio-perez-initiative",
+        "label": "west-oakland-elio-perez-initiative | C104→C106 | 6 article(s) | advanced 3, opened 3",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00201",
+          "POP-00722",
+          "POP-00794",
+          "POP-00961"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "city-elio-perez-anomaly",
+        "label": "city-elio-perez-anomaly | C104→C106 | 5 article(s) | advanced 3, opened 2",
+        "hood": null,
+        "popids": [
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "downtown-merkin-jumper-undocked",
+        "label": "downtown-merkin-jumper-undocked | C104→C106 | 3 article(s) | advanced 1, opened 2",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00688",
+          "POP-00212",
+          "POP-00224",
+          "POP-00225",
+          "POP-01061",
+          "POP-00753"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "fruitvale-clarissa-dane-undocked",
+        "label": "fruitvale-clarissa-dane-undocked | C105→C106 | 3 article(s) | opened 3",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00143",
+          "POP-00198",
+          "POP-00644",
+          "POP-00744"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "rockridge-mei-wong-beat-schools",
+        "label": "rockridge-mei-wong-beat-schools | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-01036",
+          "POP-00743",
+          "POP-00287",
+          "POP-00742"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "city-mina-linas-beat-weather",
+        "label": "city-mina-linas-beat-weather | C106→C106 | 2 article(s) | opened 2",
+        "hood": null,
+        "popids": [
+          "POP-00183",
+          "POP-00135",
+          "POP-00291",
+          "POP-00178"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "downtown-eunice-marston-anomaly",
+        "label": "downtown-eunice-marston-anomaly | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00753",
+          "POP-00688",
+          "POP-01061"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "chinatown-yu-zen-beat-health",
+        "label": "chinatown-yu-zen-beat-health | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Chinatown",
+        "popids": [
+          "POP-00194",
+          "POP-00801"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "downtown-jessie-hess-beat-safety",
+        "label": "downtown-jessie-hess-beat-safety | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00212"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "city-eleanor-rivera-beat-transit",
+        "label": "city-eleanor-rivera-beat-transit | C106→C106 | 1 article(s) | opened 1",
+        "hood": null,
+        "popids": [
+          "POP-00617",
+          "POP-00218",
+          "POP-00280",
+          "POP-00338"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "temescal-sonia-parikh-anomaly",
+        "label": "temescal-sonia-parikh-anomaly | C104→C105 | 3 article(s) | advanced 2, opened 1",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00745",
+          "POP-00761",
+          "POP-00775",
+          "POP-00170",
+          "POP-00269",
+          "POP-00290"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety",
+        "label": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety | C104→C105 | 3 article(s) | opened 3",
+        "hood": "West Oakland,Fruitvale,East Oakland,West Oakland, Fruitvale, East Oakland",
+        "popids": [
+          "POP-00201",
+          "POP-00198",
+          "POP-00170",
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00218",
+        "name": "Joel Wren",
+        "profile": "Joel Wren — Mechanic — AC Transit",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00280",
+        "name": "Jerald Jensen",
+        "profile": "Jerald Jensen — Janitor — AC Transit",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00338",
+        "name": "Coen Cartier",
+        "profile": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00617",
+        "name": "Eleanor Rivera",
+        "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00617-c004ef4be1",
+        "pop": "POP-00617",
+        "name": "Eleanor Rivera",
+        "quote": "You know, at 12th Street, we see how everything outside the station affects what happens inside. Fog, holidays, even a big game downtown - it all changes the flow. People adjust their routines, and we adjust right along with them. It's not just about numbers going up or down - it's about reading the neighborhood's rhythm and keeping things moving.",
+        "factIds": [
+          "F-74d40705ff08",
+          "F-1abe8b34649c"
+        ],
+        "src": "packet.W2[POP-00617]"
+      },
+      {
+        "id": "Q-POP-00338-6f0ada1024",
+        "pop": "POP-00338",
+        "name": "Coen Cartier",
+        "quote": "Lately at 12th Street, I've noticed the crowds come and go with what's happening around town. When there's a game or some big vote at City Hall, we get that rush before and after. Other days, especially with the fog rolling in, folks seem to stay put more. It's not just one thing - it's how all these pieces fit together that changes who's waiting at the curb when I pull up.",
+        "factIds": [
+          "F-74d40705ff08",
+          "F-1abe8b34649c"
+        ],
+        "src": "packet.W2[POP-00338]"
+      },
+      {
+        "id": "Q-POP-00218-b11f4026db",
+        "pop": "POP-00218",
+        "name": "Joel Wren",
+        "quote": "You know, I've been seeing more folks hopping on the buses lately—especially down at 12th Street. It's good to see people out and about, trusting the system again. But what really gets me is the crew keeping those buses running. Those mechanics and drivers? They're the ones putting in the long hours to make sure everyone gets where they need to go, rain or shine, game day or not.",
+        "factIds": [
+          "F-74d40705ff08",
+          "F-1abe8b34649c"
+        ],
+        "src": "packet.W2[POP-00218]"
+      },
+      {
+        "id": "Q-POP-00280-2dcf44197f",
+        "pop": "POP-00280",
+        "name": "Jerald Jensen",
+        "quote": "You want to know about 12th Street Station? I'll tell you—when the fog rolls in thick like it did last week, or when there's some big game downtown, I see it in the trash cans. Overflowing. More coffee cups, more wrappers, more people rushing through like the place owes them money. And when the Baylight vote happened? Whole different kind of crowd—folks in suits leaving flyers everywhere, talking loud like they own the benches I just cleaned. Ridership numbers? I don't know numbers. But I know my mop water gets dirtier faster when the city's got something brewing.",
+        "factIds": [
+          "F-74d40705ff08",
+          "F-1abe8b34649c"
+        ],
+        "src": "packet.W2[POP-00280]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Trevor Shimizu",
+        "text": "Were there specific incidents or bottlenecks that exacerbated the delays?",
+        "usable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "Did the Baylight District’s construction planning vote cause additional confusion or rerouting?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C107",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-ac25a93a42d1"
+    },
+    {
+      "t": "FACT",
+      "text": "12th St Oakland City Center ridership down 9,631 vs C106 | 8 stations + 10 corridors on the record",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-7dd5918b5b95"
+    },
+    {
+      "t": "FACT",
+      "text": "12th St Oakland City Center moved down the most this cycle — fog; holiday; game day (Downtown); events in Downtown ×2, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-74d40705ff08"
+    },
+    {
+      "t": "FACT",
+      "text": "8 stations + 10 corridors on the record this cycle; total ridership 33,277 (C106: 85,857)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-26fcfa475b82"
+    },
+    {
+      "t": "FACT",
+      "text": "12th St Oakland City Center: ridership 8,191 (-9,631 vs C106), on-time 77% (-4 pts) — fog; holiday; game day (Downtown); events in Downtown ×2, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-1abe8b34649c"
+    },
+    {
+      "t": "FACT",
+      "text": "MacArthur: ridership 4,002 (-8,366 vs C106), on-time 79% (+1 pts) — fog; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-b2c334c089ca"
+    },
+    {
+      "t": "FACT",
+      "text": "19th St Oakland: ridership 5,491 (-7,175 vs C106), on-time 79% (+1 pts) — fog; holiday; game day (Downtown); events in Downtown ×2, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-e852924b2517"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale: ridership 4,749 (-6,485 vs C106), on-time 77% (-6 pts) — fog; holiday; game day (Fruitvale); events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-fbee919507cf"
+    },
+    {
+      "t": "FACT",
+      "text": "Coliseum: ridership 2,634 (-5,893 vs C106), on-time 82% (-1 pts) — fog; holiday; events in East Oakland",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-a758211fa165"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge: ridership 3,085 (-5,782 vs C106), on-time 76% (-4 pts) — fog; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-e88c13c40dcd"
+    },
+    {
+      "t": "FACT",
+      "text": "Lake Merritt: ridership 2,482 (-5,046 vs C106), on-time 77% (-5 pts) — fog; holiday; events in Lake Merritt ×2",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-cd1dbd29c616"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland: ridership 2,643 (-4,202 vs C106), on-time 76% (-10 pts) — fog; holiday; game day (Jack London, Downtown); events in Downtown ×2; Baylight District — Final Council Vote: construction-planning",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-b42aeecdadba"
+    },
+    {
+      "t": "FACT",
+      "text": "I-880 North: traffic index 55 (-45 vs C106) — fog; holiday; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-planning",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-a81917a1e100"
+    },
+    {
+      "t": "FACT",
+      "text": "I-880 South: traffic index 58 (-42 vs C106) — fog; holiday; game day (Fruitvale)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-8091c6949bef"
+    },
+    {
+      "t": "FACT",
+      "text": "I-580 East: traffic index 63 (-37 vs C106) — fog; holiday; game day (Glenview)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-88b507161553"
+    },
+    {
+      "t": "FACT",
+      "text": "I-580 West: traffic index 40 (-48 vs C106) — fog; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-9e9d06fbb23e"
+    },
+    {
+      "t": "FACT",
+      "text": "I-980: traffic index 47 (-27 vs C106) — fog; holiday; game day (Downtown); Baylight District — Final Council Vote: construction-planning",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-c2bb84de460d"
+    },
+    {
+      "t": "FACT",
+      "text": "Broadway: traffic index 37 (-46 vs C106) — fog; holiday; game day (Downtown)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-85e03c53644e"
+    },
+    {
+      "t": "FACT",
+      "text": "International Blvd: traffic index 40 (-52 vs C106) — fog; holiday; game day (Eastlake, Fruitvale)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-5a9b77b7fc8a"
+    },
+    {
+      "t": "FACT",
+      "text": "MacArthur Blvd: traffic index 42 (-34 vs C106) — fog; holiday; game day (Glenview)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-630df86ee270"
+    },
+    {
+      "t": "FACT",
+      "text": "Telegraph Ave: traffic index 45 (-38 vs C106) — fog; holiday; game day (Downtown)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-77dc584cdf1d"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Ave: traffic index 35 (-34 vs C106) — fog; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 107",
+      "id": "F-08c5734a33b5"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed transit or infrastructure condition into a clear systems consequence, while keeping timestamps, failures, causal links, and cascade warnings bounded by the supplied record.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "dry third-person infrastructure and transit systems analysis",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed time, place, system condition, or implementation state",
+      "closing": "a bounded forward warning or maintenance question grounded in what remains unknown"
+    },
+    "authorizedTexture": [
+      "plain-language explanation of a Packet-backed infrastructure or transit condition",
+      "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
+      "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
+      "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+    ],
+    "textureConditions": [
+      "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
+      "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
+      "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
+      "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
+    ],
+    "canonBlockers": [
+      "an invented outage, closure, breakdown, delay, route, station, repair, inspection, maintenance event, service change, or infrastructure damage",
+      "an unsupported timestamp, duration, distance, capacity, load, count, budget, deadline, completion state, or performance metric",
+      "an unsupported causal link, cascade, responsible agency, duty, official act, official inaction, promise, or decision",
+      "a named person, place, route, station, system, agency, office, Project, Initiative, business, or organization not found in the supplied record",
+      "raw engine terminology or simulation values presented as an in-world technical measurement"
+    ]
+  },
+  "manifest": {
+    "id": "AM-bab4a35061a7",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-ac25a93a42d1",
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-7dd5918b5b95",
+        "t": "FACT",
+        "text": "12th St Oakland City Center ridership down 9,631 vs C106 | 8 stations + 10 corridors on the record",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-74d40705ff08",
+        "t": "FACT",
+        "text": "12th St Oakland City Center moved down the most this cycle — fog; holiday; game day (Downtown); events in Downtown ×2, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-26fcfa475b82",
+        "t": "FACT",
+        "text": "8 stations + 10 corridors on the record this cycle; total ridership 33,277 (C106: 85,857)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-1abe8b34649c",
+        "t": "FACT",
+        "text": "12th St Oakland City Center: ridership 8,191 (-9,631 vs C106), on-time 77% (-4 pts) — fog; holiday; game day (Downtown); events in Downtown ×2, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-b2c334c089ca",
+        "t": "FACT",
+        "text": "MacArthur: ridership 4,002 (-8,366 vs C106), on-time 79% (+1 pts) — fog; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-e852924b2517",
+        "t": "FACT",
+        "text": "19th St Oakland: ridership 5,491 (-7,175 vs C106), on-time 79% (+1 pts) — fog; holiday; game day (Downtown); events in Downtown ×2, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-fbee919507cf",
+        "t": "FACT",
+        "text": "Fruitvale: ridership 4,749 (-6,485 vs C106), on-time 77% (-6 pts) — fog; holiday; game day (Fruitvale); events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-a758211fa165",
+        "t": "FACT",
+        "text": "Coliseum: ridership 2,634 (-5,893 vs C106), on-time 82% (-1 pts) — fog; holiday; events in East Oakland",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-e88c13c40dcd",
+        "t": "FACT",
+        "text": "Rockridge: ridership 3,085 (-5,782 vs C106), on-time 76% (-4 pts) — fog; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-cd1dbd29c616",
+        "t": "FACT",
+        "text": "Lake Merritt: ridership 2,482 (-5,046 vs C106), on-time 77% (-5 pts) — fog; holiday; events in Lake Merritt ×2",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-b42aeecdadba",
+        "t": "FACT",
+        "text": "West Oakland: ridership 2,643 (-4,202 vs C106), on-time 76% (-10 pts) — fog; holiday; game day (Jack London, Downtown); events in Downtown ×2; Baylight District — Final Council Vote: construction-planning",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-a81917a1e100",
+        "t": "FACT",
+        "text": "I-880 North: traffic index 55 (-45 vs C106) — fog; holiday; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-planning",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-8091c6949bef",
+        "t": "FACT",
+        "text": "I-880 South: traffic index 58 (-42 vs C106) — fog; holiday; game day (Fruitvale)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-88b507161553",
+        "t": "FACT",
+        "text": "I-580 East: traffic index 63 (-37 vs C106) — fog; holiday; game day (Glenview)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-9e9d06fbb23e",
+        "t": "FACT",
+        "text": "I-580 West: traffic index 40 (-48 vs C106) — fog; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-c2bb84de460d",
+        "t": "FACT",
+        "text": "I-980: traffic index 47 (-27 vs C106) — fog; holiday; game day (Downtown); Baylight District — Final Council Vote: construction-planning",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-85e03c53644e",
+        "t": "FACT",
+        "text": "Broadway: traffic index 37 (-46 vs C106) — fog; holiday; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-5a9b77b7fc8a",
+        "t": "FACT",
+        "text": "International Blvd: traffic index 40 (-52 vs C106) — fog; holiday; game day (Eastlake, Fruitvale)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-630df86ee270",
+        "t": "FACT",
+        "text": "MacArthur Blvd: traffic index 42 (-34 vs C106) — fog; holiday; game day (Glenview)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-77dc584cdf1d",
+        "t": "FACT",
+        "text": "Telegraph Ave: traffic index 45 (-38 vs C106) — fog; holiday; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      },
+      {
+        "id": "F-08c5734a33b5",
+        "t": "FACT",
+        "text": "Grand Ave: traffic index 35 (-34 vs C106) — fog; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 107"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00617-c004ef4be1",
+        "speakerId": "POP-00617",
+        "speakerName": "Eleanor Rivera",
+        "text": "You know, at 12th Street, we see how everything outside the station affects what happens inside. Fog, holidays, even a big game downtown - it all changes the flow. People adjust their routines, and we adjust right along with them. It's not just about numbers going up or down - it's about reading the neighborhood's rhythm and keeping things moving.",
+        "factIds": [
+          "F-74d40705ff08",
+          "F-1abe8b34649c"
+        ],
+        "src": "packet.W2[POP-00617]"
+      },
+      {
+        "id": "Q-POP-00338-6f0ada1024",
+        "speakerId": "POP-00338",
+        "speakerName": "Coen Cartier",
+        "text": "Lately at 12th Street, I've noticed the crowds come and go with what's happening around town. When there's a game or some big vote at City Hall, we get that rush before and after. Other days, especially with the fog rolling in, folks seem to stay put more. It's not just one thing - it's how all these pieces fit together that changes who's waiting at the curb when I pull up.",
+        "factIds": [
+          "F-74d40705ff08",
+          "F-1abe8b34649c"
+        ],
+        "src": "packet.W2[POP-00338]"
+      },
+      {
+        "id": "Q-POP-00218-b11f4026db",
+        "speakerId": "POP-00218",
+        "speakerName": "Joel Wren",
+        "text": "You know, I've been seeing more folks hopping on the buses lately—especially down at 12th Street. It's good to see people out and about, trusting the system again. But what really gets me is the crew keeping those buses running. Those mechanics and drivers? They're the ones putting in the long hours to make sure everyone gets where they need to go, rain or shine, game day or not.",
+        "factIds": [
+          "F-74d40705ff08",
+          "F-1abe8b34649c"
+        ],
+        "src": "packet.W2[POP-00218]"
+      },
+      {
+        "id": "Q-POP-00280-2dcf44197f",
+        "speakerId": "POP-00280",
+        "speakerName": "Jerald Jensen",
+        "text": "You want to know about 12th Street Station? I'll tell you—when the fog rolls in thick like it did last week, or when there's some big game downtown, I see it in the trash cans. Overflowing. More coffee cups, more wrappers, more people rushing through like the place owes them money. And when the Baylight vote happened? Whole different kind of crowd—folks in suits leaving flyers everywhere, talking loud like they own the benches I just cleaned. Ridership numbers? I don't know numbers. But I know my mop water gets dirtier faster when the city's got something brewing.",
+        "factIds": [
+          "F-74d40705ff08",
+          "F-1abe8b34649c"
+        ],
+        "src": "packet.W2[POP-00280]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00218",
+        "name": "Joel Wren",
+        "profile": "Joel Wren — Mechanic — AC Transit",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00280",
+        "name": "Jerald Jensen",
+        "profile": "Jerald Jensen — Janitor — AC Transit",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00338",
+        "name": "Coen Cartier",
+        "profile": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00617",
+        "name": "Eleanor Rivera",
+        "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Trevor Shimizu",
+        "text": "Were there specific incidents or bottlenecks that exacerbated the delays?",
+        "publishable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "Did the Baylight District’s construction planning vote cause additional confusion or rerouting?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language explanation of a Packet-backed infrastructure or transit condition",
+      "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
+      "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
+      "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+    ],
+    "textureConditions": [
+      "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
+      "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
+      "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
+      "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented outage, closure, breakdown, delay, route, station, repair, inspection, maintenance event, service change, or infrastructure damage",
+      "an unsupported timestamp, duration, distance, capacity, load, count, budget, deadline, completion state, or performance metric",
+      "an unsupported causal link, cascade, responsible agency, duty, official act, official inaction, promise, or decision",
+      "a named person, place, route, station, system, agency, office, Project, Initiative, business, or organization not found in the supplied record",
+      "raw engine terminology or simulation values presented as an in-world technical measurement"
+    ]
+  }
+}

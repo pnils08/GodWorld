@@ -1,0 +1,38 @@
+{
+  "office": "council_d2",
+  "cycle": 108,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I am addressing the Baylight District's Phase II site remediation schedule and the need for immediate action to support Downtown Oakland's economic decay. I will vote to confirm the Phase II site remediation proceeds on schedule and emphasize the importance of infrastructure and economic impact data. Additionally, I will claim credit for Jack London's economic success and acknowledge the slipping mood in Downtown Oakland, calling for urgent action to address the math imbalance and economic decay.",
+  "statements": [
+    {
+      "statementId": "STMT-108-council_d2-001",
+      "type": "vote_statement",
+      "topic": "Baylight District",
+      "initiative": "INIT-006",
+      "decision": "Confirm Phase II site remediation proceeds on schedule",
+      "quote": "We must break ground on Baylight now, and we must do it with a clear understanding of the infrastructure and economic impact data.",
+      "fullStatement": "I support the Baylight District's Phase II site remediation schedule and believe it is crucial for the city's economic development. However, I also want to emphasize the importance of infrastructure and economic impact data. We must ensure that this development does not become a debt we pay later. I will vote to confirm the Phase II site remediation proceeds on schedule.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-council_d2-002",
+      "type": "policy_statement",
+      "topic": "Downtown Oakland Economic Decay",
+      "initiative": null,
+      "decision": "Propose a community task force to address economic imbalance and decay",
+      "quote": "Downtown's struggles are real, and I stand with its people - we need targeted support to address the crime and economic imbalance, not just words.",
+      "fullStatement": "I am concerned about the slipping mood in Downtown Oakland and believe it is essential to address the math imbalance and economic decay. I propose a community task force to work with the city and its stakeholders to find solutions to these issues. We need targeted support, not just words, to help the people of Downtown Oakland.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-council_d2-003",
+      "type": "credit_statement",
+      "topic": "Jack London Economic Performance",
+      "initiative": null,
+      "decision": "Claim credit for Jack London's economic success",
+      "quote": "Jack London's success is a testament to our focus on basic infrastructure, safety, and letting businesses operate without unnecessary obstruction.",
+      "fullStatement": "I would like to claim credit for Jack London's economic success, which is a result of our focus on basic infrastructure, safety, and letting businesses operate without unnecessary obstruction. This success is a model for other districts, and I believe we can learn from it to address the challenges facing Downtown Oakland.",
+      "trackerUpdates": {}
+    }
+  ]
+}

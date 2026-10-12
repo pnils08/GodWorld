@@ -1,0 +1,48 @@
+{
+  "office": "council_d5",
+  "cycle": 107,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "This cycle, I voted to deploy the Oakland Alternative Response Initiative to East Oakland with binding oversight, demanded East Oakland intake targets for the Youth Apprenticeship Pipeline, and called for immediate action on incoherence in our districts. East Oakland's needs cannot wait.",
+  "statements": [
+    {
+      "statementId": "STMT-107-council_d5-001",
+      "type": "vote_statement",
+      "topic": "public safety",
+      "initiative": "INIT-002",
+      "decision": "YES on East Oakland protocol deployment with community oversight",
+      "quote": "East Oakland's crime index at 1.17—nearly double the city average—isn't a footnote, it's a five-alarm fire.",
+      "fullStatement": "I vote YES on deploying the Oakland Alternative Response Initiative to East Oakland, but I'm demanding binding monthly audits tied to violent crime disparity reduction and community liaison authority. East Oakland's needs aren't optional—they're urgent. We can't let this community fall through the cracks while resources flow elsewhere.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d5-002",
+      "type": "vote_statement",
+      "topic": "youth employment",
+      "initiative": "INIT-007",
+      "decision": "YES on town hall enrollment with East Oakland intake targets",
+      "quote": "Backlog cleared means nothing if East Oakland youth are still last in line.",
+      "fullStatement": "I vote YES on launching the Oakland Youth Apprenticeship Pipeline town hall, but I'm demanding immediate East Oakland intake targets and a public town hall in our district this cycle. We can't celebrate clearing a backlog if East Oakland youth are still waiting for their chance. This administration must prioritize equitable access.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d5-003",
+      "type": "vote_statement",
+      "topic": "district equity",
+      "initiative": null,
+      "decision": "Demand action on incoherence in East Oakland",
+      "quote": "Incoherence isn't a glitch—it's systemic neglect.",
+      "fullStatement": "I'm filing a resolution this cycle demanding immediate action on incoherence in East Oakland. Systemic neglect isn't an abstract concept—it's the reality for families in my district. We need targeted interventions that answer the specific needs of East Oakland, not generic solutions that leave us behind.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d5-004",
+      "type": "vote_statement",
+      "topic": "district accountability",
+      "initiative": null,
+      "decision": "Credit Baylight's resilience and demand answers for East Oakland",
+      "quote": "Baylight's slow streets aren't city wins—they're people's victories.",
+      "fullStatement": "Baylight District's resilience is a testament to the strength of our community, not city planning alone. And in East Oakland, the upbeat mood despite slow street trade shows a community waiting for City Hall to match their energy. I'll make sure East Oakland gets the answers and resources it deserves.",
+      "trackerUpdates": {}
+    }
+  ]
+}

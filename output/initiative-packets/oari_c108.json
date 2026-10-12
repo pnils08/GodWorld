@@ -4,7 +4,7 @@
     "initiative": "oari",
     "initiativeId": "INIT-002",
     "cycle": 108,
-    "generatedAt": "2026-09-20T20:55:04.840Z",
+    "generatedAt": "2026-09-25T14:12:25.673Z",
     "description": "Oakland Alternative Response Initiative — $12.5M for civilian crisis response teams as alternative to armed police response"
   },
   "initiative": {
@@ -26,11 +26,11 @@
     "mayoralAction": "signed",
     "mayoralActionCycle": "82",
     "notes": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes.",
-    "lastUpdated": "9/13/2026",
+    "lastUpdated": "9/24/2026",
     "implementationPhase": "dispatch-live",
-    "milestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.",
+    "milestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.\nC108 conversion: Stage Standing — OARI, dispatch-live, signed C82 (safety — not playable until the safety lever lands; the untended clock still runs).",
     "nextScheduledAction": "District 1 evaluation completion and potential expansion decision",
-    "nextActionCycle": "108"
+    "nextActionCycle": "109"
   },
   "office": {
     "name": "Oakland Alternative Response Initiative (OARI)",
@@ -96,21 +96,22 @@
       "decisions_c104.json",
       "decisions_c105.json",
       "decisions_c106.json",
-      "decisions_c107.json"
+      "decisions_c107.json",
+      "decisions_c108.json"
     ]
   },
   "maraDirective": null,
   "citizens": {
-    "total": 320,
+    "total": 322,
     "tierBreakdown": {
       "1": 7,
       "2": 23,
-      "3": 54,
-      "4": 236
+      "3": 55,
+      "4": 237
     },
-    "avgIncome": 997796,
+    "avgIncome": 992392,
     "medianIncome": 95000,
-    "atDisplacementRisk": 226,
+    "atDisplacementRisk": 228,
     "linkedProfiles": [],
     "notableCitizens": [
       {
@@ -610,7 +611,7 @@
     },
     {
       "bizId": "BIZ-00078",
-      "name": "Allen Temple Baptist Church",
+      "name": "Foothill Baptist Tabernacle",
       "sector": "Faith Organization",
       "neighborhood": "East Oakland",
       "employeeCount": 26,
@@ -620,7 +621,7 @@
     },
     {
       "bizId": "BIZ-00082",
-      "name": "Acts Full Gospel Church",
+      "name": "New Covenant Pentecostal Assembly",
       "sector": "Faith Organization",
       "neighborhood": "West Oakland",
       "employeeCount": 22,
@@ -730,7 +731,7 @@
     },
     {
       "bizId": "BIZ-00081",
-      "name": "St. Columba Catholic Church",
+      "name": "St. Esperanza Parish",
       "sector": "Faith Organization",
       "neighborhood": "Fruitvale",
       "employeeCount": 11,
@@ -820,7 +821,7 @@
     },
     {
       "bizId": "BIZ-00079",
-      "name": "Masjid Al-Islam",
+      "name": "Masjid An-Nur Oakland",
       "sector": "Faith Organization",
       "neighborhood": "East Oakland",
       "employeeCount": 5,

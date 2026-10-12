@@ -1,0 +1,41 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-10-05T01:36:50.342Z",
+  "POPID": "POP-00770",
+  "Cycle": 110,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00770-2026-10-05T01-30-06",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00770-2026-10-05T01-30-06.json",
+  "Holder": "Kato Rivers",
+  "CreditsDelta": null,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Kato Rivers credits=null systems=alpha_centauri",
+  "DecidedAt": "2026-10-05T01:36:50.345Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 110,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00770",
+    "Holder": "Kato Rivers",
+    "EpisodeId": "undocked-pop00770-Y3C6",
+    "CreditsDelta": null,
+    "Systems": [
+      "alpha_centauri"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00770-2026-10-05T01-30-06.json"
+  }
+}

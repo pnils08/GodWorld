@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "109",
+  "desk": "undocked",
+  "persona": "nia-rook",
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00190",
+      "name": "Jackson Sift",
+      "quote": "I've been feeling the energy in the city, especially with the A's doing well. It's like the whole town is coming together, you know? But when it comes to how the city responds to certain episodes, I think we're still figuring some things out. I've seen how it can impact the standings, and it's not just about the game - it's about the community. As someone who works with reentry programs, I see how it affects people's lives, and I hope we can find a way to make it work for everyone."
+    },
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "I've seen the city trying to respond to the situation, but I'm not sure how it will all play out, it's got me and my neighbors talking about what it could mean for our community."
+    },
+    {
+      "pop": "POP-00794",
+      "name": "Irene Fay",
+      "quote": "I feel like the city's response to what's been going on has been really slow, and it's affecting how people around here are feeling about the whole situation."
+    },
+    {
+      "pop": "POP-00961",
+      "name": "Darius Clark",
+      "quote": "I've seen that the city's response to things can be pretty mixed, and it's hard to tell how it'll all play out for our neighborhood, but I'm just trying to do my job and take care of my community here in West Oakland."
+    }
+  ],
+  "claim": "I've been feeling the energy in the city, especially with the A's doing well. It's like the whole town is coming together, you know? But when it comes to how the city responds to certain episodes, I think we're still figuring some things out. I've seen how it can impact the standings, and it's not just about the game - it's about the community. As someone who works with reentry programs, I see how it affects people's lives, and I hope we can find a way to make it work for everyone.",
+  "src": "citizenVoice PRESS c109",
+  "ranAt": "2026-09-30T18:19:35.502Z"
+}

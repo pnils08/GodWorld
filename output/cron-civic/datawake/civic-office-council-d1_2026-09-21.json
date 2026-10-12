@@ -1,0 +1,26 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-09-21",
+  "cycle": 108,
+  "model": "deepseek/deepseek-chat",
+  "statement": "The month-eight disbursement of the West Oakland Stabilization Fund marks a critical step in our ongoing effort to revitalize the neighborhood. The Downtown outreach assessment shows promising engagement, but the real test will be sustaining momentum beyond the initial canvass. We need to ensure that the funds directly impact residents and businesses in West Oakland, particularly those most affected by displacement.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-106-civic-office-council-d1",
+        "text": "The Stabilization Fund, alongside targeted community engagement, forms the cornerstone of our economic recovery plan for West Oakland. We are actively addressing retail vitality and crime through these efforts, ensuring resources reach those who need them most.",
+        "directiveCycle": 106,
+        "confrontationSeat": "civic-office-council-d1"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-09-21T10:45:33.225Z",
+  "fellBackFrom": null
+}

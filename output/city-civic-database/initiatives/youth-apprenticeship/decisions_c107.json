@@ -1,0 +1,22 @@
+{
+  "initiative": "INIT-007",
+  "initiativeId": "INIT-007",
+  "cycle": 107,
+  "primaryVoice": "Mayor gavel (mayor_gavel-001)",
+  "consolidatedFrom": [
+    "STMT-107-council_d1-002 (Carter D1 — Oakland Youth Apprenticeship Pipeline)",
+    "STMT-107-council_d3-003 (Delgado D3 — Youth Apprenticeship Pipeline)",
+    "STMT-107-council_d4-001 (Vega D4 — Oakland Youth Apprenticeship Pipeline)",
+    "STMT-107-council_d6-002 (Crane D6 — Oakland Youth Apprenticeship Pipeline Public Enrollment Launch)",
+    "STMT-107-council_d8-002 (Chen D8 — Oakland Youth Apprenticeship Pipeline Public Enrollment)",
+    "STMT-107-mayor_gavel-001 (Mayor gavel — Oakland Youth Apprenticeship Pipeline Public Enrollment Launch)",
+    "STMT-107-mayor_open-001 (Mayor agenda — Oakland Youth Apprenticeship Pipeline Public Enrollment Launch)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-007",
+    "ImplementationPhase": "operational",
+    "MilestoneNotes": "C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established.",
+    "NextScheduledAction": "First training cohort placement review",
+    "NextActionCycle": 108
+  }
+}

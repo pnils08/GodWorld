@@ -4,7 +4,7 @@
     "initiative": "health-center",
     "initiativeId": "INIT-005",
     "cycle": 108,
-    "generatedAt": "2026-09-20T20:55:04.846Z",
+    "generatedAt": "2026-09-25T14:12:25.678Z",
     "description": "Temescal Community Health Center — $45M for neighborhood health facility with priority designation"
   },
   "initiative": {
@@ -23,14 +23,14 @@
     "affectedNeighborhoods": "Temescal",
     "policyDomain": "health",
     "consequences": "Initiative approved. Implementation begins.",
-    "mayoralAction": "none",
-    "mayoralActionCycle": "",
+    "mayoralAction": "signed",
+    "mayoralActionCycle": "80",
     "notes": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)",
-    "lastUpdated": "9/13/2026",
+    "lastUpdated": "9/24/2026",
     "implementationPhase": "construction-active",
-    "milestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule",
+    "milestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal health center, construction-active since C80 (health — playable; delivers once a treating phase moves hood Sick against its conversion baseline).",
     "nextScheduledAction": "Drywall installation and fire-rated wall inspections",
-    "nextActionCycle": "108"
+    "nextActionCycle": "109"
   },
   "office": {
     "name": "Temescal Community Health Center Project Office",
@@ -91,21 +91,22 @@
       "decisions_c104.json",
       "decisions_c105.json",
       "decisions_c106.json",
-      "decisions_c107.json"
+      "decisions_c107.json",
+      "decisions_c108.json"
     ]
   },
   "maraDirective": null,
   "citizens": {
-    "total": 159,
+    "total": 157,
     "tierBreakdown": {
       "1": 6,
       "2": 10,
-      "3": 29,
-      "4": 114
+      "3": 28,
+      "4": 113
     },
-    "avgIncome": 1561859,
+    "avgIncome": 1580128,
     "medianIncome": 100000,
-    "atDisplacementRisk": 158,
+    "atDisplacementRisk": 156,
     "linkedProfiles": [],
     "notableCitizens": [
       {
@@ -208,7 +209,7 @@
         "popId": "POP-00761",
         "name": "Idris Karim",
         "tier": 2,
-        "neighborhood": "Rockridge",
+        "neighborhood": "Temescal",
         "occupation": "",
         "displacementRisk": 4
       },
@@ -323,7 +324,7 @@
     },
     {
       "bizId": "BIZ-00085",
-      "name": "Temple Sinai",
+      "name": "Temple Beth Or",
       "sector": "Faith Organization",
       "neighborhood": "Rockridge",
       "employeeCount": 12,
@@ -383,7 +384,7 @@
     },
     {
       "bizId": "BIZ-00080",
-      "name": "Islamic Center of Oakland",
+      "name": "Temescal Islamic Center",
       "sector": "Faith Organization",
       "neighborhood": "Temescal",
       "employeeCount": 6,

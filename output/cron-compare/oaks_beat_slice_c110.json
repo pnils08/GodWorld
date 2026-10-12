@@ -1,0 +1,190 @@
+{
+  "version": "OAKS-BEAT-1",
+  "empty": false,
+  "cycle": 110,
+  "kind": "beat-oaks-beat",
+  "seat": {
+    "slug": "selena-grant",
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "desk": "sports",
+    "domain": "oaks",
+    "builder": "buildOaksBeatSlice.js"
+  },
+  "hood": "Dimond",
+  "pulse": {
+    "className": "beat-oaks-beat",
+    "score": 100,
+    "label": "Oaks — game-result C110 · 0-4 · L4",
+    "hood": "Dimond",
+    "source": "output/beats/Oakland_Sports_Feed.jsonl @C110"
+  },
+  "story": {
+    "kind": "beat-oaks-beat",
+    "angle": "Oaks — game-result C110 · 0-4 · L4 — the second club's board read",
+    "label": "Oaks — game-result C110 · 0-4 · L4",
+    "hookLine": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+    "hood": "Dimond",
+    "citizens": [
+      "Austin Reaves (POP-01027)",
+      "Adash Stanley (POP-01023)",
+      "Wilson Shepard (POP-01022)"
+    ],
+    "popids": [
+      "POP-01027",
+      "POP-01023",
+      "POP-01022"
+    ],
+    "ref": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+    "cycle": 110
+  },
+  "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01027",
+      "name": "Austin Reaves",
+      "role": "SG / The Oaks",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Austin Reaves — SG / The Oaks — Downtown",
+      "why": "named on the Oaks feed C110 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01023",
+      "name": "Adash Stanley",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+      "why": "named on the Oaks feed C110 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01022",
+      "name": "Wilson Shepard",
+      "role": "Head Coach, Oakland Oaks",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+      "why": "named on the Oaks feed C110 (Oakland_Sports_Feed)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+    },
+    {
+      "text": "Record 0-4 · streak L4",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+    },
+    {
+      "text": "Stats (feed): Austin Reaves/17PTS/5ASST, AJ Dybantsa/22PTS/6REB",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+    },
+    {
+      "text": "Trigger: cold-streak",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+    },
+    {
+      "text": "Franchise stability: uncertain",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+    },
+    {
+      "text": "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+    },
+    {
+      "text": "Record 0-5 · streak L5",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+    },
+    {
+      "text": "Stats (feed): Adash Stanley/8PTS/11ASST, Ausin Reaves/20PTS, AJ Dybantsa/11PTS",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+    },
+    {
+      "text": "Trigger: cold-streak",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+    },
+    {
+      "text": "Franchise stability: uncertain",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Oaks — game-result C110 · 0-4 · L4 — the second club's board read",
+    "hookLine": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+    "anchorFacts": [
+      "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+      "Record 0-4 · streak L4",
+      "Stats (feed): Austin Reaves/17PTS/5ASST, AJ Dybantsa/22PTS/6REB",
+      "Trigger: cold-streak",
+      "Franchise stability: uncertain",
+      "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+      "Record 0-5 · streak L5",
+      "Stats (feed): Adash Stanley/8PTS/11ASST, Ausin Reaves/20PTS, AJ Dybantsa/11PTS",
+      "Trigger: cold-streak",
+      "Franchise stability: uncertain"
+    ],
+    "evidence": [
+      {
+        "text": "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+      },
+      {
+        "text": "Record 0-4 · streak L4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+      },
+      {
+        "text": "Stats (feed): Austin Reaves/17PTS/5ASST, AJ Dybantsa/22PTS/6REB",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+      },
+      {
+        "text": "Trigger: cold-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+      },
+      {
+        "text": "Franchise stability: uncertain",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+      },
+      {
+        "text": "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+      },
+      {
+        "text": "Record 0-5 · streak L5",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+      },
+      {
+        "text": "Stats (feed): Adash Stanley/8PTS/11ASST, Ausin Reaves/20PTS, AJ Dybantsa/11PTS",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+      },
+      {
+        "text": "Trigger: cold-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+      },
+      {
+        "text": "Franchise stability: uncertain",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+  },
+  "feedRows": 10,
+  "currentCycleRows": 2,
+  "pointers": [
+    "output/beats/Oakland_Sports_Feed.jsonl @C110",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

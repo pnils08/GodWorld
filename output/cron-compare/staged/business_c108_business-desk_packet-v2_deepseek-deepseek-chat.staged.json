@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "108",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c108_business-desk_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Brianna Lee",
+        "role": "mentioned",
+        "popid": "POP-00134"
+      },
+      {
+        "name": "Tariq Jello",
+        "role": "quoted-source",
+        "popid": "POP-00174"
+      },
+      {
+        "name": "Kelvon Ochoa",
+        "role": "quoted-source",
+        "popid": "POP-00481"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "baylight-district-kelvon-ochoa-story-signal",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Working at Anthropic, I've seen the company grow steadily, but what stands out is how it's become part of the neighborhood's rhythm. You see more familiar faces at the coffee shops in the morning—colleagues grabbing their caffeine before heading in. There's a quiet pride in being part of something that's both local and global in impact. The Construction Authority's work is more visible, of course—you can't miss the scaffolding and new facades—but both businesses feel like they're putting down roots here.",
+        "sourceRef": "citizenVoice PRESS Kelvon Ochoa"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-46830d57ab6d",
+    "draftSha256": "d7f836a840e914c18b8c880f161b7ebfcfe9e8557f62ecab9a335ab1bdb282da",
+    "verdict": "output/cron-compare/business_c108_business-desk_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-21T23:17:37.427Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:02.038Z"
+}

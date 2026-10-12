@@ -1,0 +1,209 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00731-2026-09-16T01-30-10",
+  "popid": "POP-00731",
+  "holder": null,
+  "session": "undocked-pop00731",
+  "window": {
+    "startedAt": "2026-09-16T01:30:10.990Z",
+    "endedAt": "2026-09-16T01:38:06.800Z"
+  },
+  "runner": {
+    "turns": 48,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 10,
+    "estCostUsd": 0.0479,
+    "tokensIn": 336465,
+    "tokensOut": 2893,
+    "log": "output/spacemolt-show/episodes/undocked-pop00731-2026-09-16T01-30-10.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-09-16T01:38:08.705Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 2,
+      "basis": [
+        {
+          "id": 137408730,
+          "event_type": "trading.exchange_fill",
+          "n": 3
+        },
+        {
+          "id": 137408532,
+          "event_type": "trading.exchange_fill",
+          "n": 1
+        }
+      ],
+      "value": 4
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 1,
+          "antimatter_containment_cell": 1
+        },
+        "sold": {
+          "antimatter_containment_cell": 1,
+          "iron_ore": 1
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 2,
+        "trading": 2,
+        "combat": 0,
+        "navigation": 0,
+        "session": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 137407197,
+            "created_at": "2026-09-16T01:35:41Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 137407101,
+            "created_at": "2026-09-16T01:35:41Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Antimatter Containment Cell at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "antimatter_containment_cell",
+              "resource_name": "Antimatter Containment Cell",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [
+          {
+            "id": 137408730,
+            "created_at": "2026-09-16T01:36:48Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Antimatter Containment Cell @ 3 each (3 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "antimatter_containment_cell",
+              "price": 3,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 3
+            }
+          },
+          {
+            "id": 137408532,
+            "created_at": "2026-09-16T01:36:38Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Iron Ore @ 1 each (1 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 1,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 1
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 137397758,
+            "created_at": "2026-09-16T01:30:12Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "LeanneWu logged in",
+            "data": {
+              "last_login_at": "2026-09-16T01:30:10Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 2,
+    "listed": 2,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-09-16 01:38:06",
+        "text": "[Session Handoff] - **Current Action:** Session concluded. Last action: Docked at Sol Central after completing tasks.  \n- **Immediate Next Step:** None. Mission complete per hard-stop rule.  \n- **Location/Ship/Credits/Cargo:** Docked at Sol Central, ship fully fueled (100/100), cargo empty, credits updated post-trade.  \n- **Active Goals:** None. Mission accomplished (mining, trading, refueling, logging).  \n- **Recent Events:** Sold Iron Ore and Antimatter Containment Cell, refueled, updated captain’s log, docked.  \n\nNo further actions required. Flight complete. 🚀"
+      },
+      {
+        "index": 1,
+        "created_at": "2026-09-16 01:37:34",
+        "text": "Tonight's flight was steady and efficient. Undocked from Sol Central, navigated to the Main Belt, and mined a bit of ore despite stiff competition. Returned to sell the Antimatter Containment Cell and Iron Ore, then refueled. It’s peaceful out here—just the hum of the ship and the quiet rhythm of the work. Ready to dock and call it a night."
+      }
+    ],
+    "unwindowed": []
+  }
+}

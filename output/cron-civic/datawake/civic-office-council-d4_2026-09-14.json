@@ -1,0 +1,15 @@
+{
+  "office": "council_d4",
+  "agentDir": "civic-office-council-d4",
+  "holder": "Ramon Vega",
+  "popid": "POP-00042",
+  "title": "City Council District 4",
+  "date": "2026-09-14",
+  "cycle": 107,
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "statement": "I'm committing to a review of current budget allocations to identify opportunities for reallocation to support Glenview and Ivy Hill's development needs, ensuring fiscal discipline while addressing the pressing concerns of my constituents.",
+  "action": null,
+  "numberMoved": null,
+  "ranAt": "2026-09-14T10:45:57.249Z",
+  "fellBackFrom": null
+}

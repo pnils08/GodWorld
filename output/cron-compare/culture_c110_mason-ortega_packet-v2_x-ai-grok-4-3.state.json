@@ -1,0 +1,331 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00160",
+    "name": "Mason Ortega",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Laurel kitchens: Nino's, Schoolgate Cafe, MacArthur Kitchen — the people who work the shift",
+    "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "food-workplaces",
+      "hood": "Laurel",
+      "pulseClass": "hood-kitchens",
+      "economicFrame": "Laurel kitchens: Nino's, Schoolgate Cafe, MacArthur Kitchen — the people who work the shift",
+      "hook": "Colin Phillips, Bakery Worker at Nino's. 2 named workers at 2 named kitchens in Laurel on the ledger this cycle.",
+      "namedBusinesses": [
+        "Nino's",
+        "Schoolgate Cafe",
+        "MacArthur Kitchen"
+      ],
+      "workplaces": [
+        "Nino's — Food & Beverage — Colin Phillips (Bakery Worker)",
+        "Schoolgate Cafe — Cafe / dining — Jori Clame (Server)",
+        "MacArthur Kitchen — Restaurant & Dining — no roster names"
+      ],
+      "engineColour": [
+        "Brianna Scott — drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+        "LaTrice Desai — learned a useless, wonderful fact and told two people",
+        "Basma Inoue — watched the ferry cut across the bay at sunset and felt lucky to live this close to the water",
+        "Belle Lopez — adjusted today's plans after last night's gridlock",
+        "Elias Varek — spent the evening sorting a box of things that used to be someone's",
+        "Nia Rook — traded produce over a fence and came out ahead"
+      ],
+      "roomIsYours": "the line, the regulars, the pace, the tip jar, what the cook is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Laurel",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+    "plan": {
+      "focus": "The daily grind and human stories behind the Laurel kitchens.",
+      "closeQuestion": "What keeps you coming back to the kitchen every day?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00786",
+        "name": "Colin Phillips",
+        "profile": "Colin Phillips — Bakery Worker",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00786-3d5cb3afcb",
+        "pop": "POP-00786",
+        "name": "Colin Phillips",
+        "quote": "Most days at Nino's start before sunrise - mixing dough, shaping loaves, that kind of thing. It's steady work, not glamorous, but there's something satisfying about seeing the racks fill up before the morning rush. Lately I've been training on the pastry side too, which keeps things interesting.",
+        "factIds": [
+          "F-fb7d0167db0a",
+          "F-07cf7bb0960c"
+        ],
+        "src": "packet.W2[POP-00786]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "Is there a particular moment during the shift that stands out for Colin Phillips?",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "How does Jori Clame handle the pressure during peak hours?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C110",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-e491ae296bc1"
+    },
+    {
+      "t": "FACT",
+      "text": "Laurel kitchens · Nino's, Schoolgate Cafe",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "id": "F-317a3340ed6f"
+    },
+    {
+      "t": "FACT",
+      "text": "Colin Phillips, Bakery Worker at Nino's. 2 named workers at 2 named kitchens in Laurel on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "id": "F-fb7d0167db0a"
+    },
+    {
+      "t": "FACT",
+      "text": "Nino's · Food & Beverage · 13 employees · growth 3.9% · revenue $1.2M (+$887 vs C109) · on the roster: Colin Phillips (Bakery Worker)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "id": "F-07cf7bb0960c"
+    },
+    {
+      "t": "FACT",
+      "text": "Schoolgate Cafe · Cafe / dining · 8 employees · growth 4.6% · revenue $691k (+$608 vs C109) · on the roster: Jori Clame (Server)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "id": "F-b82ab2be8041"
+    },
+    {
+      "t": "FACT",
+      "text": "MacArthur Kitchen · Restaurant & Dining · 11 employees · growth 3.8% · revenue $994k (+$728 vs C109)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "id": "F-c88b5d184246"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Jack London): citizens Brianna Scott; LaTrice Desai; Basma Inoue; Belle Lopez · businesses Harborline Grill; Port of Oakland",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C110",
+      "id": "F-b8b44a8cf888"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (West Oakland): citizens Elias Varek; Nia Rook; Ilandra Tain; Josefina Williams · businesses Firehouse 29 West Oakland Baseball Academy; Northgate Construction · Keane Auxiliary Flag Football League (program)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C110",
+      "id": "F-90c83d9704aa"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Treat a Packet-supplied restaurant signal as a workplace question without inventing Mason's presence, a worker, shift, service state, business condition, or labor consequence.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "evidence-bounded kitchen-work brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named restaurant and location",
+      "closing": "the worker or operating account still needed"
+    },
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-7e84091a8b31",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-e491ae296bc1",
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-317a3340ed6f",
+        "t": "FACT",
+        "text": "Laurel kitchens · Nino's, Schoolgate Cafe",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "id": "F-fb7d0167db0a",
+        "t": "FACT",
+        "text": "Colin Phillips, Bakery Worker at Nino's. 2 named workers at 2 named kitchens in Laurel on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "id": "F-07cf7bb0960c",
+        "t": "FACT",
+        "text": "Nino's · Food & Beverage · 13 employees · growth 3.9% · revenue $1.2M (+$887 vs C109) · on the roster: Colin Phillips (Bakery Worker)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "id": "F-b82ab2be8041",
+        "t": "FACT",
+        "text": "Schoolgate Cafe · Cafe / dining · 8 employees · growth 4.6% · revenue $691k (+$608 vs C109) · on the roster: Jori Clame (Server)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "id": "F-c88b5d184246",
+        "t": "FACT",
+        "text": "MacArthur Kitchen · Restaurant & Dining · 11 employees · growth 3.8% · revenue $994k (+$728 vs C109)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "id": "F-b8b44a8cf888",
+        "t": "FACT",
+        "text": "ENGINE SEED (Jack London): citizens Brianna Scott; LaTrice Desai; Basma Inoue; Belle Lopez · businesses Harborline Grill; Port of Oakland",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C110"
+      },
+      {
+        "id": "F-90c83d9704aa",
+        "t": "FACT",
+        "text": "ENGINE SEED (West Oakland): citizens Elias Varek; Nia Rook; Ilandra Tain; Josefina Williams · businesses Firehouse 29 West Oakland Baseball Academy; Northgate Construction · Keane Auxiliary Flag Football League (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C110"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00786-3d5cb3afcb",
+        "speakerId": "POP-00786",
+        "speakerName": "Colin Phillips",
+        "text": "Most days at Nino's start before sunrise - mixing dough, shaping loaves, that kind of thing. It's steady work, not glamorous, but there's something satisfying about seeing the racks fill up before the morning rush. Lately I've been training on the pastry side too, which keeps things interesting.",
+        "factIds": [
+          "F-fb7d0167db0a",
+          "F-07cf7bb0960c"
+        ],
+        "src": "packet.W2[POP-00786]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00786",
+        "name": "Colin Phillips",
+        "profile": "Colin Phillips — Bakery Worker",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "Is there a particular moment during the shift that stands out for Colin Phillips?",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "How does Jori Clame handle the pressure during peak hours?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  }
+}

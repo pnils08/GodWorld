@@ -1,0 +1,387 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Vladimir Gonzalez
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: RF
+
+ 
+
+Jersey: #28
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 91
+
+ 
+
+MLB Service: 2.138
+
+ 
+
+Age: 27
+
+ 
+
+Bats: R
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'0"
+
+ 
+
+Weight: 184 lbs
+
+ 
+
+Drafted: Round 1 (2031)
+
+ 
+
+Secondary Position: LF, CF
+
+ 
+
+Hitter Tendency: PULL HITTER
+
+ 
+
+Born: DOMINICAN REPUBLIC
+
+ 
+
+Canonical POPID: POP-00598
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+CON R: 74
+
+ 
+
+CON L: 82
+
+ 
+
+POW R: 54
+
+ 
+
+POW L: 60
+
+ 
+
+VIS: 89
+
+ 
+
+DISC: 85
+
+ 
+
+CLT: 99
+
+ 
+
+BUNT: 38
+
+ 
+
+DBUNT: 30
+
+ 
+
+DUR: 90
+
+ 
+
+FLD: 79
+
+ 
+
+ARM: 57
+
+ 
+
+ACC: 61
+
+ 
+
+REAC: 61
+
+ 
+
+SPD: 66
+
+ 
+
+STEAL: 57
+
+ 
+
+BR AGG: 57
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G    AB   R   H    2B  3B  HR  RBI  BB  SO   SB  CS  AVG   OBP   SLG
+
+ 
+
+2041  ATH   138  527  90  161  40  4   28  76   37  60   17  7   0.306 0.349 0.556
+
+ 
+
+2039  ATH   127  506  61  137  29  4   14  60   49  78   15  8   .271  .335  .427
+
+ 
+
+2038  ATH   35   120  13  24   8   1   2   10   20  25   7   1   .200  .322  .317
+
+ 
+
+2037  ATH   16   61   7   16   6   0   2   8    4   8    0   1   .262  .318  .459
+
+
+--------------------------------------------------------------------------------
+
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  OPS   PA   SF  SAC  GIDP  HBP  IBB  TB   SB%   PO   A    E   FLD%  INN     WAR
+
+ 
+
+2041  ATH   0.905 567  3   0    5     0    1    293  .708  278  4    3   0.989 1209.2  4.7
+
+ 
+
+2039  ATH   .762  560  0   0    0     0    0    216        220  8    3   .987  1050.0  2.1
+
+ 
+
+2038  ATH   .639  142  0   0    0     0    0    38         60   2    1   .984  280.0   0.4
+
+ 
+
+2037  ATH   .777  66   0   0    0     0    0    28         25   1    0   1.000 120.0   0.3
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 316
+
+ 
+
+AB: 1214
+
+ 
+
+R: 171
+
+ 
+
+H: 338
+
+ 
+
+2B: 83
+
+ 
+
+3B: 9
+
+ 
+
+HR: 46
+
+ 
+
+RBI: 154
+
+ 
+
+BB: 110
+
+ 
+
+SO: 171
+
+ 
+
+SB: 39
+
+ 
+
+CS: 17
+
+ 
+
+AVG: .278
+
+ 
+
+OBP: .338
+
+ 
+
+SLG: .473
+
+ 
+
+OPS: .811
+
+ 
+
+TB: 575
+
+ 
+
+PO: 583
+
+ 
+
+A: 15
+
+ 
+
+E: 7
+
+ 
+
+FLD%: .988
+
+ 
+
+INN: 2659.2
+
+ 
+
+WAR: 7.5
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2042–2044: Arbitration
+
+ 
+
+2045–2049: Free Agent
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Option: Used
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+QUIRKS
+
+Clutch Specialist
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS
+
+World Series MVP (2037)
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00598
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00598

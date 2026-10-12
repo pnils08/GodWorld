@@ -1,0 +1,355 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: JR Rosado
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: LF
+
+ 
+
+Jersey: #38
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: B
+
+ 
+
+Overall: 80
+
+ 
+
+MLB Service: 1.000
+
+ 
+
+Age: 27
+
+ 
+
+Bats: R
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'4"
+
+ 
+
+Weight: 231 lbs
+
+ 
+
+Drafted: Round 1 (2034)
+
+ 
+
+Secondary Position: CF, RF
+
+ 
+
+Hitter Tendency: WHOLE FIELD
+
+ 
+
+Born: DOMINICAN REPUBLIC
+
+ 
+
+Canonical POPID: POP-00054
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+CON R: 68
+
+ 
+
+CON L: 91
+
+ 
+
+POW R: 58
+
+ 
+
+POW L: 62
+
+ 
+
+VIS: 64
+
+ 
+
+DISC: 66
+
+ 
+
+CLT: 65
+
+ 
+
+BUNT: 32
+
+ 
+
+DBUNT: 18
+
+ 
+
+DUR: 85
+
+ 
+
+FLD: 74
+
+ 
+
+ARM: 68
+
+ 
+
+ACC: 72
+
+ 
+
+REAC: 65
+
+ 
+
+SPD: 50
+
+ 
+
+STEAL: 42
+
+ 
+
+BR AGG: 45
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   AB   R   H   2B  3B  HR  RBI  BB  SO  SB  CS  AVG   OBP   SLG
+
+ 
+
+2041  ATH   54  184  24  57  11  2   7   27   12  23  2   2   0.298 0.340 0.487
+
+
+--------------------------------------------------------------------------------
+
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  OPS   PA   SF  SAC  GIDP  HBP  IBB  TB  SB%   PO  A  E  FLD%  INN    WAR
+
+ 
+
+2041  ATH   0.827 206  2   0    0     4    1    93  .500  92  5  2  .980  471.2  0.9
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 54
+
+ 
+
+AB: 184
+
+ 
+
+R: 24
+
+ 
+
+H: 57
+
+ 
+
+2B: 11
+
+ 
+
+3B: 2
+
+ 
+
+HR: 7
+
+ 
+
+RBI: 27
+
+ 
+
+BB: 12
+
+ 
+
+SO: 23
+
+ 
+
+SB: 2
+
+ 
+
+CS: 2
+
+ 
+
+AVG: .298
+
+ 
+
+OBP: .340
+
+ 
+
+SLG: .487
+
+ 
+
+OPS: .827
+
+ 
+
+TB: 93
+
+ 
+
+PO: 92
+
+ 
+
+A: 5
+
+ 
+
+E: 2
+
+ 
+
+FLD%: .980
+
+ 
+
+INN: 471.2
+
+ 
+
+WAR: 0.9
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2041: $780K (Pre-Arb)
+
+ 
+
+2042–2043: Renewals (RNW)
+
+ 
+
+2044–2045: Arbitration (ARB)
+
+ 
+
+2046+: Free Agent (FA)
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Options Used: 1/3
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00054
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00054

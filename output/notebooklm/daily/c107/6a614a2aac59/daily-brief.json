@@ -1,0 +1,661 @@
+{
+  "answer": "### **The Bay Tribune Daily News — Cycle 107**  \n**Date:** SimYear 3, Month 1, Day 3 (Winter, MLK Day) [1] | **Weather:** 44°F fog, W 8 mph, marine (frontState MARINE), humidity 74%, visibility 4 miles [1]  \n**City Snapshot:** Population 391,510 (+1,212 net migration) [1] | Employment 94.1% [1] | Illness 4.9% [1] | City Sentiment +0.51 [2] | Hospital Load 2% (2 in care) [1]\n\n---\n\n### **Citywide Lead: Morale Rebound & Initiative Advancements Lift Citywide Mood**\n**Oakland** enters **Cycle 107** on **MLK Day** under a cold marine fog, registering as a high-signal reporting day marked by a persistent strain-trend, an active shock-flag, and civic load strain [1]. Buoyed by a rising citywide employment rate of **94.1%** [1] and an explosive postseason series victory by the **Oakland Athletics** to advance to the ALCS [3], citywide sentiment has rebounded strongly to **+0.51** (up from +0.25 in Cycle 106) [2]. \n\nThis citywide morale boost coincides with key administrative progress on major municipal programs [4, 5]. **Mayor Avery Santana’s approval rating rebounded 3 points to 65%** [5, 6]. Progressive champions **District 3 Councilmember Rose Delgado and District 5 Councilmember Janae Rivers both gained 2 to 3 points, climbing to 61% and 59% respectively** [5, 6], while **District 1 Councilmember Denise Carter rose 2 points to 59%** [5, 6]. Moderate and independent councilmembers held steady across the board, including **Leonard Tran (D2 at 63%)**, **Ramon Vega (D4 at 60%)**, **Elliott Crane (D6 at 64%)**, **Warren Ashford (D7 at 67%)**, **Nina Chen (D8 at 63%)**, and **Terrence Mobley (D9 at 65%)** [6].\n\n---\n\n### **The Connections That Matter**\n\n#### **Civic Desk: Initiative Milestones & The Civis Telemetry Alert**\n*   **Key Initiative Progressions:** Two major municipal initiatives officially advanced administrative phases this cycle, delivering localized economic, workforce, and transit benefits [4, 5]:\n    *   The **Fruitvale Transit Hub Phase II — Visioning (INIT-003)** entered its active **design-phase**, generating ongoing transit, retail, and community engagement effects (+0.2 magnitude) in **Fruitvale** [4, 7] and yielding an approval boost for District 3 and City Hall [5].\n    *   The **Oakland Youth Apprenticeship Pipeline (INIT-007 / OYAP)** reached **operational** status, expanding workforce and retail effects (+0.9 magnitude) across **West Oakland**, **East Oakland**, and **Fruitvale** [4], providing approval lifts for Districts 1, 3, and 5 [5].\n    *   The **West Oakland Stabilization Fund (INIT-001)** remains disbursement-active (+1.0 magnitude) [4], while the **Oakland Alternative Response Initiative (INIT-002 / OARI)** continues implementation-active safety dispatches (+0.8 magnitude) [4].\n    *   The **Temescal Community Health Center (INIT-005)** remains construction-active (+0.8 magnitude) [4], and the **Baylight District (INIT-006)** is in construction-planning (+0.3 magnitude) [4].\n*   **Civis Telemetry Alert & Baseline Deficits:** The world engine audit flagged a **high-severity incoherence pattern** surrounding OARI (INIT-002) [8]. Municipal monitoring instruments (**Civis Systems**) flagged an alert showing safety indicators in **West Oakland** (CrimeIndex 0.97), **East Oakland** (0.97), and **Fruitvale** (0.89) moving in contradicting directions while OARI is active on paper [8-10]. However, audit checks confirm **there is no historical baseline comparison data available** in the monitoring system, meaning the instrument is alarming without past baseline numbers to evaluate against [8, 10].\n\n#### **Business & Economy Desk: Trajectories, Infrastructure Events, and Promotions**\n*   **Divergent Neighborhood Trajectories:** **Downtown** (+0.33 sentiment, Retail Vitality 10.93) [9] and **Temescal** (+0.46, Retail Vitality 10.35) [9] sustain full **`NEIGHBORHOOD_BOOM`** status [11]. **Uptown (9.90), Jack London (9.52), Rockridge (9.19), and Lake Merritt (7.60)** sustain booms at 9/10 momentum [9, 11]. **Fruitvale, Jack London, Chinatown, and KONO** are officially \"rising\" [11], while **Brooklyn and Glenview** are \"cooling off\" [11]. Conversely, **West Oakland** remains under economic strain with Retail Vitality at **3.53** [9].\n*   **Piedmont Ave Crisis & Infrastructure Events:** **Piedmont Ave** suffered a high-severity civic crisis spike (impact score 55) [12]. Elsewhere, a PG&E crew restored power after an outage in **Ivy Hill** (-0.07 sentiment) [12, 13], a building inspector issued a temporary closure at BIZ-00174 (-6.06 revenue) [12, 13], and sanitation strike delays impacted **West Oakland** (-0.09 sentiment) [12, 13] and local businesses BIZ-00044 (-7.11) and BIZ-00041 (-3.49) [12, 13]. In **Grand Lake**, a police traffic warning helped nudge the CrimeIndex down (-0.08) [12]. In **Temescal**, **Gridiron Analytics (BIZ-00008)** added 2 employees (+6 magnitude) [14].\n*   **Housing Migration & Promotions:** **Tariq Harris** was priced out of West Oakland and forced to relocate to Chinatown [15]. **Carmen Delaine** moved from Chinatown to West Oakland, and **Simone Ellis** moved from Chinatown to Lake Merritt [15]. Fourteen promotions and builder-authored ledger entries were logged today [16]. Six business founders were added as Tier 3 leaders to resolve ledger resolution gaps: **Priya Chandrasekaran** (Ridgeline Ventures), **Daniel Yoon** & **Christine Nakamura** (Gridiron Analytics), **Marcus Tan** (Oakmesh Systems), **Dr. Amara Osei** (Portside Bio), and **Jasmine Torres** (Tenth Street Digital) [16]. Tier 4 emergence promotions included **Marco Davis** (Brooklyn), **Mateo Baker** (Ivy Hill), **Colin Perez** (Glenview), **Ebony Mendoza** (Ivy Hill), **Nala Okonkwo** (Dimond), **Rashida Foster** (Eastlake), **Tariq Harris**, and **Quinn Adeyemi** [16]. **Elio Perez** (West Oakland) climbed to **Tier 1** [17], while **Melton Neilon** (Temescal), **Rick Walker** (Fruitvale), and **Depak Ying** (Rockridge) advanced to **Tier 2** [17]. **Mina Linas**, **Daniel Cloak**, **Yuki Ji**, and **Darius Clark** reached **Tier 3** [17].\n\n#### **Culture & Faith Desk: Faith Lifelines, Health Updates, and Community Sightings**\n*   **Faith Observances:** **Telegraph Presbyterian Fellowship** (Downtown) opened its sanctuary for community crisis response support and celebrated a seniors lunch milestone [12, 18]. **Cathedral of the Living Word** (Lake Merritt) and **St. Esperanza Parish** (Fruitvale) observed Epiphany holy days [12, 18]. **Foothill Baptist Tabernacle** (East Oakland) served neighbors through its food pantry [12, 18], and the **Lake Merritt Mindfulness Sangha** welcomed new member **Cameron Wallen** [16, 19].\n*   **Health & Stabilized Patients:** Hospital patient **Yu Zen (POP-00194)** stabilized and left critical condition [20]. **POP-00622** passed away following a sudden illness [20], while **POP-00449** recovered and **POP-00623** continues recovering from the flu [20].\n*   **Sightings & Community Events:** **Rico Valez** was spotted at Canopy Market in Rockridge [21], **GameGirl Gia** at Telegraph Press in KONO [21], and former A's star **Rodriguez** at KONO Kitchen [21]. Local events included **The Varek Family Block Party** (West Oakland) [21, 22], **Fruitvale Unity Gathering** (Fruitvale) [21, 22], **The Paulson Line Founding Celebration** (Jack London) [21, 22], and the **Jack London Misty Morning Coffee Club** [21, 22].\n\n#### **Sports Desk: A's Defeat Yankees (3-1) to Reach ALCS; Oaks Announce Starting 5**\n*   **Athletics ALDS Victory (A's Win Series 3-1):**\n    *   **Game 1 (A's 5, Yankees 4 in 14 innings):** **Travis Coles** pitched 6 IP (2 ER, 7 K) [3]. Rookie **Clark Saryan** struck out 5 over 2 IP in his MLB debut in relief [3]. **Vladimir Gonzalez** hit a 2-run HR, and **Desmond Morton** hit a solo HR and the walk-off RBI single in the 14th inning [3].\n    *   **Game 3 (A's 8, Yankees 4 in NY):** **Desmond Morton** starred with a home run and 4 RBIs [3]. Pending free agent icon **Mark Aitken** hit a home run, and **Henry Rivas** pitched 6 solid innings (2 ER, 4 K) [3].\n    *   **Game 4 (A's 4, Yankees 0 in NY):** **John Ellis** pitched a brilliant **complete-game shutout** (9 IP, 4 H, 0 ER, 9 K, 107 pitches) in the Bronx to clinch the series [3, 23]. **Eric Taveras** hit his 2nd home run of the series [3, 23].\n    *   **ALCS Matchup:** The A's advance to face the **Minnesota Twins** (season series split 3-3) in the ALCS [3].\n*   **Oakland Oaks Regular Season Starting Five:**\n    *   Head Coach **Wilson Shepard** announced that star point guard **Adash Stanley** and #1 pick **AJ Dybantsa** are 100% healthy and ready for opening night in Cycle 108 [3].\n    *   Shepard confirmed the official **Starting 5 for Opening Night**: **Adash Stanley (PG), Dillon Brooks (SG), AJ Dybantsa (SF), Jerami Grant (PF), and Wendell Carter Jr. (C)** [3].\n\n---\n\n### **Four Questions the Newsroom Should Watch Next:**\n1. **The ALCS Game 1 Rotation:** How will Deacon Seymour structure his rotation against the 107-win Minnesota Twins (Travis Coles vs. Arturo Ramos vs. John Ellis) [3, 24, 25]?\n2. **Oaks Regular Season Opening Night:** How will Wilson Shepard’s starting five perform in their official franchise debut in Cycle 108 [3, 26]?\n3. **The Civis Systems Audit Response:** Will City Hall or OARI program directors establish official baseline metrics to resolve the Civis Systems telemetry alert [8, 10]?\n4. **Chinatown & Public Health:** How will local clinics and health networks support high-density Chinatown as seasonal illness lingering continues [27-29]?\n\n---\n\n### **The Gate Desk**\n\nThe editorial board has conducted an audit of every gate-flagged draft submitted in the source material for Cycle 107 [30-34]. Below is the complete accounting of what each draft reported, what the editorial gate uncovered, and how those findings hold up against the verified world and sports records:\n\n#### **1. `civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat.md`**\n*   **What the Draft Reported:**  \n    This civic affairs draft investigated the **West Oakland Stabilization Fund (INIT-001)** [30]. It reported that despite the fund entering its disbursement-active phase, residents and local workers—including barista Irene Fay at Tiny's Corner, bakery worker Darius Clark, and sourdough baker Daniel Cloak at Red Star Bakery—voiced skepticism over a lack of visible payout records on their blocks [30, 35, 36]. The piece asserted that while the fund's approval vote included provisions for quarterly reporting, no disclosures had surfaced, questioning how residents could verify the fund's stabilization mandate [36].\n*   **What the Gate Found:**  \n    The editorial gate flagged and held back this draft from publication [30]. The gate determined that alleging a municipal violation of quarterly reporting requirements and \"missing disclosure data\" exceeded paper-trail verification boundaries without first confirming whether quarterly reports were legally due or verifying disbursement ledgers through a formal public records request [10, 30, 36].\n*   **Whether the Finding Holds Up:**  \n    **Yes, the gate's decision holds up completely.** The official Initiative Tracker verifies that the West Oakland Stabilization Fund IS disbursement-active and actively firing ongoing economic effects (+1.0 magnitude) in West Oakland [4]. While citizen reflections confirm street-level skepticism and a lack of public visibility into individual payouts [35, 36], asserting a council reporting violation without a verified paper trail or formal public records request violates strict newsroom standards [10, 30, 36]. Holding the draft until formal records are requested maintains paper-trail integrity [10, 30].\n\n#### **2. `culture_c107_maria-keen_packet-v2_deepseek-deepseek-chat-1701.md`**\n*   **What the Draft Reported:**  \n    This culture draft reported on Marcus Whitfield overseeing youth basketball at the Eastside Hoopers Coalition court in East Oakland (founded Cycle 101), Allen Temple Baptist Church's food pantry (since Cycle 78), and the Masjid Al-Islam Emergency Assistance Fund [37, 38]. It quoted Marcus Whitfield, Maria Conteras, and Jerome Pittman reflecting on community programs making a difference in East Oakland [37-39].\n*   **What the Gate Found:**  \n    The editorial gate flagged and held back this draft from publication [31]. The gate identified **synthetic quote repetition and ungrounded narrative claims** [31, 38, 39].\n*   **Whether the Finding Holds Up:**  \n    **Yes, the gate's decision holds up 100%.** Maria Conteras and Jerome Pittman were given nearly identical, canned boilerplate quotes (\"I've seen that community programs in East Oakland are really making a difference\" / \"I feel like community programs and their founders in East Oakland are really making a difference\") [38, 39]. Generating identical, canned phrasing across multiple citizens violates strict newsroom guidelines against synthetic quote duplication [38, 39].\n\n#### **3. `culture_c107_maria-keen_packet-v2_deepseek-deepseek-chat.md` (\"Marcus Whitfield's Court\")**\n*   **What the Draft Reported:**  \n    This culture draft variant profiled Marcus Whitfield standing at the free-throw line at the Eastside Hoopers Coalition court [32]. It quoted Whitfield, Maria Conteras leaning against the chain-link fence, and Jerome Pittman standing in line at the Allen Temple Food Pantry discussing community programs [32, 40].\n*   **What the Gate Found:**  \n    The editorial gate flagged and held back this draft variant from publication [32].\n*   **Whether the Finding Holds Up:**  \n    **Yes, the gate's decision holds up completely.** Like the -1701 variant, Maria Conteras and Jerome Pittman repeat almost verbatim boilerplate claims about community programs \"making a difference\" [40]. This synthetic quote duplication across multiple sources fails basic newsroom quality standards [40].\n\n#### **4. `sports_c107_simon-leary_packet-v2_deepseek-deepseek-chat-1703.md` (\"The Load Shifts, the Line Holds\")**\n*   **What the Draft Reported:**  \n    This sports desk draft reported on A's left fielder Desmond Morton and first baseman Mark Aitken standing on the field and in the dugout reflecting on shifting team roles [33, 41, 42]. It also quoted Marcus King in Glenview and delivery worker Jacob Perez about hearing chatter regarding the A's record [43].\n*   **What the Gate Found:**  \n    The editorial gate flagged and held back this draft from publication [33].\n*   **Whether the Finding Holds Up:**  \n    **Yes, the gate's decision holds up completely.** The draft reported that the A's held a \"2-1 record, winners of their last game\" and framed the piece as a subtle recalibration of an early regular season [33, 43]. However, official C107 sports records confirm the A's were in the middle of a high-stakes postseason ALDS series against the New York Yankees (having won Game 1 5-4, lost Game 2 4-5, won Game 3 8-4, and won Game 4 4-0 to clinch 3-1) [3, 23]. Mischaracterizing ALDS playoff games as a routine early-season 2-1 record is a severe factual blunder [3, 23, 33].\n\n#### **5. `The Load-Bearing Arc` (Simon Leary Variant)**\n*   **What the Draft Reported:**  \n    This sports draft variant depicted Desmond Morton leaning against the padded rail in the A's dugout in Jack London watching a bullpen call-up adjust his cap [34]. It quoted Mark Aitken, Marcus King, and Desmond Morton about team roles, and included OakTown Social barista Vanessa Treary and Gridiron Analytics manager Dawson Nguyen discussing stats and teamwork [44, 45].\n*   **What the Gate Found:**  \n    The editorial gate flagged and held back this draft variant from publication [34].\n*   **Whether the Finding Holds Up:**  \n    **Yes, the gate's decision holds up 100%.** The draft tagged its intake metadata with `STORYLINE: baylight-district-vinnie-keane-prospect-callup` [44], misattributing active A's playoff veterans (Morton and Aitken) to a minor-league prospect call-up storyline [25, 44, 46]. Furthermore, it inserted unrelated coffee shop chatter from Vanessa Treary and Gridiron Analytics manager Dawson Nguyen in Temescal into a sports feature, contaminating the sports beat with un-curated cross-desk filler [45-47].\n\n***\n\n💡 If you'd like to inspect how District 3's Fruitvale Transit Hub advancement (+2 approval) and Chinatown's health uptick align across all nine council districts, I can build a structured comparative model for the newsroom desk.",
+  "conversation_id": "ed033df3-fa05-4d0b-b4f6-cf882a6bd6e1",
+  "sources_used": [
+    "45188a4f-4a6e-4bde-b846-df1ba20c2dde"
+  ],
+  "citations": {
+    "1": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "2": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "3": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "4": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "5": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "6": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "7": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "8": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "9": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "10": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "11": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "12": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "13": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "14": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "15": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "16": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "17": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "18": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "19": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "20": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "21": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "22": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "23": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "24": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "25": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "26": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "27": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "28": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "29": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "30": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "31": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "32": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "33": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "34": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "35": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "36": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "37": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "38": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "39": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "40": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "41": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "42": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "43": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "44": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "45": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "46": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+    "47": "45188a4f-4a6e-4bde-b846-df1ba20c2dde"
+  },
+  "references": [
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 1,
+      "cited_text": "The Bay Tribune Daily News — Cycle 107 Today’s city record World Summary — Cycle 107 Season: Winter | Weather: 44°F fog, W 8 mph, marine (frontState MARINE), humidity 74, visibility 4 Cycle Weight: high-signal | Pattern: strain-trend | Shock: shock-flag | Civic Load: load-strain Cycle Weight Reason: 1 high-severity event(s); High event volume (11); Notable weather impact; Very positive sentiment; Civic load strain. Calendar context: SimYear 3, Month 1, Day 3, Winter, holiday=MLKDay | Sports season: Oaks preseason, A's playoffs | First Friday: false"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 2,
+      "cited_text": "Three-Cycle Trends (C105–C107) Cycle weight: C105 high-signal → C106 high-signal → C107 high-signal Civic load: C105 load-strain → C106 minor-variance → C107 load-strain Pattern flag: C105 strain-trend → C106 strain-trend → C107 strain-trend Shock flag: C105 shock-flag → C106 shock-flag → C107 shock-flag Migration drift: C105 18 → C106 1 → C107 14 Events generated: C105 2081 → C106 2029 → C107 1827 Story seed count: C105 67 → C106 30 → C107 56 City sentiment: C105 0.84 → C106 0.25 → C107 0.51"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 3,
+      "cited_text": "StoryAngle: The Oaks are a full go for opening night , starting 5 announced. Notes: Wilson Shepard meet with the media to address his excitement fot the seaon and is eager to show Oakland what they have in the Oaks. Shepard shared that he felt the Oaks will catch people off guard this season. Shepard shared that Adash Stanley and AJ Dybantsa would be full go for opening night next cycle and confirmed his starting 5 would be ; Adash Stanley, Dillon Brooks, AJ Dybantsa, Jerami Grant, Wendell Carter. Stats: - Record 0-0, Streak W0, Mood hungry, FanSentiment high, Neighborhood Downtown A's — game-result (playoffs): Travis Coles (SP), Clark Saryan (RP), Vladimir Gonzalez (RF), Desmond Morton (LF) StoryAngle: A's take game 1 vs Yankees, A's 5 vs Yankees 4 Notes: Game 1 of the ALDS was a 14 inning instant classic. Travis Coles took the ball in game 1 and went 6 innings while surrendering 9 hits and 2 runs. Not his dominant norm but more than giving the team a chance to win. Clark Saryan made is MLB debut , after a suprising playoff roster add, went 2 innings in relief striking out 5 hitters. Playing hero on the offensive side , Vladimir Gonzalez with a 2-run homerun and Desmond Morton with a solo homerun and the walk off single in the bottom of the 14th to secure the game 1 win. Stats: Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI Record 1-0, Streak W1, Mood electric, FanSentiment high, Neighborhood Eastlake A's — game-result (playoffs): Desmond Morton (LF), Mark Aitken (1B) StoryAngle: A's take game 3 vs Yankees, A's 8 vs Yankees 4 Notes: After a game 2 loss that saw the A's 4 lost to the Yankees 5, the A's bounce back in game 3 to take the series lead back 2-1. Going on the road and to grab game 3 in NY is especially crucial in a best of 5 series. Playing the role hero in game 3 is the same player who filled that role in game 1, Desmond Morton. Desmond Morton would be responsible for 4 rbi and also hit his 2nd homerun of the post season. Pending free agent and A's icon Mark Aitken also hit a homerun in this game. Stats: Henry Rivas/6IP/3H/2ER/4SO, Desmond Morton/2-4/1HR/4RBI, Mark Aitken/2-4/1HR/1RBI Record 2-1, Streak W1, Mood locked-in, FanSentiment high, Neighborhood Glenview A's — game-result (playoffs): John Ellis (SP), Eric Taveras (2B) StoryAngle: A's close out the ALDS in NY , As 4 vs Yankees 0 Notes: John Ellis dazzles in game 4 pitching a complete game shut out and abruptly ending the Yankees season. In what may very well be John Ellis most dominate performance of his career he chose the most oppurtune time to but it on display. In a close out game in NY, Ellis is making sure everyone knows he is not an after thought in this stacked pitching rotation.  Eric Taveras would provide the offense punch hitting his 2nd homerun of the series. The A's will move onto the ALCS next where they will face the 2nd best team in baseball this season the Minnesota Twins. The season series was split 3-3 Stats: John Ellis/9IP/4H/0ER/9SO, Eric Taveras/1-4/1HR/1RBI Record 3-1, Streak W2, Mood electric, FanSentiment high, Neighborhood Fruitvale"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 4,
+      "cited_text": "initiative-implementation (6) retail/sentiment/nightlife | West Oakland Stabilization Fund is disbursement-active — ongoing economic effects in West Oakland | West Oakland | mag 1 | targets West Oakland sentiment/communityEngagement/nightlife | Oakland Alternative Response Initiative is implementation-active — ongoing safety effects in West Oakland, Fruitvale, East Oakland | mag 0.8 | targets West Oakland|Fruitvale|East Oakland retail/traffic/sentiment | Fruitvale Transit Hub Phase II — Visioning is design-phase — ongoing transit effects in Fruitvale | Fruitvale | mag 0.2 | targets Fruitvale sentiment/communityEngagement/publicSpaces | Temescal Community Health Center is construction-active — ongoing health effects in Temescal | Temescal | mag 0.8 | targets Temescal retail/nightlife/traffic/sentiment | Baylight District — Final Council Vote is construction-planning — ongoing sports effects in Jack London, Downtown | mag 0.3 | targets Jack London|Downtown sentiment/communityEngagement/retail | Oakland Youth Apprenticeship Pipeline is operational — ongoing workforce effects in West Oakland, East Oakland, Fruitvale | mag 0.9 | targets West Oakland|East Oakland|Fruitvale"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 5,
+      "cited_text": "approval-shift (4) approval/district-sentiment | West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub Phase II — Visioning advanced (+2); Temescal Community Health Center sitting (0, capped); Baylight District — Final Council Vote sitting (0, capped); Oakland Youth… | CITYWIDE | mag 3 approval/district-sentiment | West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth Apprenticeship Pipeline advanced (+2); level target 57 (mood +1.43 (district 1.38, city 1.48), district -0.84 vs middle) → +0 | D1 | mag 2 | targets West Oakland|Brooklyn approval/district-sentiment | Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub Phase II — Visioning advanced (+2); Oakland Youth Apprenticeship Pipeline advanced (+1); level target 58 (mood +1.45 (district 1.42, city 1.48), district -0.64 vs middle) → +0 | D3 | mag 3 | targets Fruitvale|San Antonio approval/district-sentiment | Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth Apprenticeship Pipeline advanced (+2); level target 57 (mood +1.35 (district 1.22, city 1.48), district -0.69 vs middle) → +0 | D5 | mag 2 | targets Baylight District|East Oakland"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 6,
+      "cited_text": "<cited_table>",
+      "cited_table": {
+        "num_columns": 6,
+        "rows": [
+          [
+            "Office",
+            "Holder",
+            "Faction",
+            "Status",
+            "Approval",
+            "Δ vs C106"
+          ],
+          [
+            "Mayor",
+            "Avery Santana",
+            "OPP",
+            "active",
+            "65",
+            "+3"
+          ],
+          [
+            "City Council District 1 (D1)",
+            "Denise Carter",
+            "OPP",
+            "active",
+            "59",
+            "+2"
+          ],
+          [
+            "City Council District 2 (D2)",
+            "Leonard Tran",
+            "IND",
+            "active",
+            "63",
+            "0"
+          ],
+          [
+            "City Council District 3 (D3)",
+            "Rose Delgado",
+            "OPP",
+            "active",
+            "61",
+            "+3"
+          ],
+          [
+            "City Council District 4 (D4)",
+            "Ramon Vega",
+            "IND",
+            "active",
+            "60",
+            "0"
+          ],
+          [
+            "City Council District 5 (D5)",
+            "Janae Rivers",
+            "OPP",
+            "active",
+            "59",
+            "+2"
+          ],
+          [
+            "City Council District 6 (D6)",
+            "Elliott Crane",
+            "CRC",
+            "active",
+            "64",
+            "0"
+          ],
+          [
+            "City Council District 7 (D7)",
+            "Warren Ashford",
+            "CRC",
+            "active",
+            "67",
+            "0"
+          ],
+          [
+            "City Council District 8 (D8)",
+            "Nina Chen",
+            "CRC",
+            "active",
+            "63",
+            "0"
+          ],
+          [
+            "City Council District 9 (D9)",
+            "Terrence Mobley",
+            "OPP",
+            "active",
+            "65",
+            "0"
+          ]
+        ]
+      }
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 7,
+      "cited_text": "traffic/retail/nightlife/communityEngagement | {\"traffic\":0.28,\"retail\":0.323,\"nightlife\":0.149,\"communityEngagement\":0.15} | Fruitvale | mag 0.28 | targets Fruitvale traffic/retail/nightlife/communityEngagement | {\"traffic\":0.18,\"retail\":0.09800000000000002,\"nightlife\":0.125,\"communityEngagement\":0.15} | Downtown | mag 0.18 | targets Downtown game-night-texture | The town watched — game night shaped 74 citizen day(s) (streak W1) | mag 74 | targets POP-00013|POP-00014|POP-00015|POP-00037|POP-00054|POP-00060|POP-00107|POP-00149|POP-00166|POP-00178|POP-00179|POP-00203|POP-00245|POP-00271|POP-00281|POP-00285|POP-00322|POP-00329|POP-00344|POP-00346|+54 more"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 8,
+      "cited_text": "Engine Review Findings (from output/engine_audit_c107.json ) Total patterns: 25 (1 high, 9 medium, 15 low) Ailments (11): math-imbalance 7, repeating-event 2, coverage-gap 1, production-imbalance 1 Improvements (13): improvement 13 Incoherence (1): incoherence 1 High-Severity Patterns incoherence — Initiative \"Oakland Alternative Response Initiative\" (implementation-active, safety) but 3 affected neighborhoods show contradicting CrimeIndex cyclesInState: 0 Initiatives: INIT-002 Neighborhoods: West Oakland, Fruitvale, East Oakland Mitigator INIT-002 phase=implementation-active effectsFiring=true field=Crime_Metrics.ViolentCrimeIndex observedDelta=7 verdict=effects-firing Evidence: Initiative_Tracker row(s) 3"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 9,
+      "cited_text": "Neighborhood snapshot (Neighborhood_Map cycle 107) <cited_table>",
+      "cited_table": {
+        "num_columns": 5,
+        "rows": [
+          [
+            "Neighborhood",
+            "Sentiment",
+            "RetailVitality",
+            "EventAttractiveness",
+            "CrimeIndex"
+          ],
+          [
+            "Downtown",
+            "+0.33",
+            "10.93",
+            "29.85",
+            "1"
+          ],
+          [
+            "Temescal",
+            "+0.46",
+            "10.35",
+            "26.67",
+            "0.71"
+          ],
+          [
+            "Uptown",
+            "+0.40",
+            "9.90",
+            "30.5",
+            "0.67"
+          ],
+          [
+            "Jack London",
+            "+0.44",
+            "9.52",
+            "47.13",
+            "0.79"
+          ],
+          [
+            "Rockridge",
+            "+0.45",
+            "9.19",
+            "22.26",
+            "0.43"
+          ],
+          [
+            "Grand Lake",
+            "+0.63",
+            "8.96",
+            "24",
+            "0.4"
+          ],
+          [
+            "Chinatown",
+            "+0.33",
+            "8.83",
+            "26.7",
+            "0.79"
+          ],
+          [
+            "Fruitvale",
+            "+0.47",
+            "8.21",
+            "24.89",
+            "0.89"
+          ],
+          [
+            "KONO",
+            "+0.24",
+            "8.17",
+            "28.5",
+            "0.63"
+          ],
+          [
+            "Lake Merritt",
+            "+0.45",
+            "7.60",
+            "24.48",
+            "0.74"
+          ],
+          [
+            "Piedmont Ave",
+            "+0.38",
+            "7.42",
+            "14.31",
+            "0.33"
+          ],
+          [
+            "Laurel",
+            "+0.35",
+            "7.16",
+            "19.63",
+            "0.47"
+          ],
+          [
+            "East Oakland",
+            "+0.60",
+            "6.84",
+            "19.5",
+            "0.97"
+          ],
+          [
+            "Adams Point",
+            "+0.65",
+            "6.83",
+            "17.42",
+            "0.56"
+          ],
+          [
+            "San Antonio",
+            "+0.54",
+            "6.43",
+            "19",
+            "0.72"
+          ],
+          [
+            "Dimond",
+            "+0.65",
+            "6.18",
+            "14",
+            "0.57"
+          ],
+          [
+            "Eastlake",
+            "+0.60",
+            "5.77",
+            "17",
+            "0.54"
+          ],
+          [
+            "Brooklyn",
+            "+0.56",
+            "5.15",
+            "12.16",
+            "0.49"
+          ],
+          [
+            "Glenview",
+            "+0.66",
+            "5.08",
+            "12",
+            "0.32"
+          ],
+          [
+            "Ivy Hill",
+            "+0.61",
+            "4.22",
+            "10",
+            "0.47"
+          ],
+          [
+            "Baylight District",
+            "+0.63",
+            "3.66",
+            "14",
+            "0.79"
+          ],
+          [
+            "West Oakland",
+            "+0.34",
+            "3.53",
+            "17.43",
+            "0.97"
+          ]
+        ]
+      }
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 10,
+      "cited_text": "Perez’s Statement: Perez noted that while the city council talks a lot about accountability, he sees no concrete action that closes the gap for everyday neighbors [7-9]. Ying’s Statement: Ying noted that customers feel the council is not stepping up or hearing what the neighborhoods need [7, 10]. City Accounting Findings: City accounting officially logged a \"civic gap,\" and no formal civic initiative currently on the books answers it [6, 34–35]. Strict Verification Boundaries: Luis Navarro explicitly confirmed he does NOT have a formal request filed to the council , a formal council refusal, or a named councilmember or office whose desk the issue sits on [7, 11]. Downtown Multi-Metric Decay Audit: Reporter Jax Caldera audited eight to nine Downtown blocks outside SpeedyBurger on Telegraph Avenue [5, 22–26]. Downtown's sentiment reading fell to 0.41 (8th out of 22 neighborhoods), retail vitality dropped nearly three full points to 9.55 , and housing pressure jumped to 3 (worse than 18 of 22 neighborhoods) [12, 13]. Field Testimony & Absence of Ownership: Caseworker Merkin Jumper (holding a folder outside SpeedyBurger) expressed a \"wish\" for dedicated initiatives [12, 14], while faith leader Eunice Marston (Telegraph Presbyterian) confirmed seeing no significant initiatives to address decay as her congregation streams past SpeedyBurger [12, 15]. Resident Celeste Moon noted Downtown was packed at night but knew of no mitigation programs [12, 15]. Caldera explicitly confirmed no matching program, task force, or municipal office is assigned to manage Downtown's decline [12, 13, 16]. OARI & East Oakland Response Deficits: The Oakland Alternative Response Initiative (OARI) operates unarmed two-person teams across West Oakland, Fruitvale, and East Oakland [12]. However, telemetry software ( Civis Systems ) flagged negative safety indicators across OARI zones [12]. Crucially, the underlying audit confirmed there is no prior comparison or baseline history available in the system —meaning the tool is alarming without historical data to evaluate against [12]."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 11,
+      "cited_text": "What Moved (Ripple_Ledger, cycle 107 — 67 ripples) trajectory (12) NEIGHBORHOOD_BOOM | Downtown boom sustained — momentum 9/10, the block everyone wants onto | Downtown | mag 7 | targets Downtown NEIGHBORHOOD_BOOM | Temescal boom sustained — momentum 10/10, the block everyone wants onto | Temescal | mag 7 | targets Temescal NEIGHBORHOOD_RISING | Fruitvale turning upward: retail busy, events drawing crowds, people moving in | Fruitvale | mag 5 | targets Fruitvale NEIGHBORHOOD_RISING | Jack London turning upward: retail busy, events drawing crowds, people moving in | Jack London | mag 5 | targets Jack London NEIGHBORHOOD_BOOM | Rockridge boom sustained — momentum 9/10, the block everyone wants onto | Rockridge | mag 7 | targets Rockridge NEIGHBORHOOD_RISING | Chinatown turning upward: retail busy, events drawing crowds, people moving in | Chinatown | mag 5 | targets Chinatown NEIGHBORHOOD_COOLING | Brooklyn cooling off: foot traffic down, storefronts quieter than the rest of the city | Brooklyn | mag 6 | targets Brooklyn NEIGHBORHOOD_COOLING | Glenview cooling off: foot traffic down, storefronts quieter than the rest of the city | Glenview | mag 6 | targets Glenview NEIGHBORHOOD_RISING | KONO turning upward: retail busy, events drawing crowds, people moving in | KONO | mag 5 | targets KONO NEIGHBORHOOD_RISING | Lake Merritt turning upward: retail busy, events drawing crowds, people moving in | Lake Merritt | mag 5 | targets Lake Merritt NEIGHBORHOOD_BOOM | Lake Merritt boom sustained — momentum 9/10, the block everyone wants onto | Lake Merritt | mag 7 | targets Lake Merritt NEIGHBORHOOD_BOOM | Uptown boom sustained — momentum 9/10, the block everyone wants onto | Uptown | mag 7 | targets Uptown"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 12,
+      "cited_text": "Low-severity: HEALTH — crisis-spike — Adams Point: HEALTH event (impactScore 15) FAITH — holy_day — Lake Merritt: Cathedral of the Living Word observes Epiphany FAITH — holy_day — Fruitvale: St. Esperanza Parish observes Epiphany FAITH — community_program — Downtown: Telegraph Presbyterian Fellowship: seniors lunch program marks milestone FAITH — community_program — East Oakland: Foothill Baptist Tabernacle: food pantry serves neighbors in need Chaos Events (Chaos_Cars, cycle 107 — 12 total) <cited_table>",
+      "cited_table": {
+        "num_columns": 6,
+        "rows": [
+          [
+            "Vehicle",
+            "Outcome",
+            "Target",
+            "Metric",
+            "Magnitude",
+            "Floor fired"
+          ],
+          [
+            "mail_truck",
+            "vital_document_delivered",
+            "business BIZ-00162",
+            "Annual_Revenue",
+            "1.68",
+            "FALSE"
+          ],
+          [
+            "oari_van",
+            "welfare_check",
+            "neighborhood Glenview",
+            "Sentiment",
+            "0.04",
+            "FALSE"
+          ],
+          [
+            "mail_truck",
+            "lost_package",
+            "business BIZ-00172",
+            "Annual_Revenue",
+            "2.8",
+            "FALSE"
+          ],
+          [
+            "fire_engine",
+            "minor_fire",
+            "business BIZ-00055",
+            "Annual_Revenue",
+            "-15.22",
+            "FALSE"
+          ],
+          [
+            "garbage_truck",
+            "missed_pickup",
+            "business BIZ-00006",
+            "Annual_Revenue",
+            "-4.24",
+            "FALSE"
+          ],
+          [
+            "pge_truck",
+            "power_outage_restored",
+            "neighborhood Ivy Hill",
+            "Sentiment",
+            "-0.07",
+            "FALSE"
+          ],
+          [
+            "garbage_truck",
+            "sanitation_strike_delay",
+            "neighborhood West Oakland",
+            "Sentiment",
+            "-0.09",
+            "FALSE"
+          ],
+          [
+            "garbage_truck",
+            "sanitation_strike_delay",
+            "business BIZ-00044",
+            "Annual_Revenue",
+            "-7.11",
+            "FALSE"
+          ],
+          [
+            "building_inspector",
+            "forced_temporary_closure",
+            "business BIZ-00174",
+            "Annual_Revenue",
+            "-6.06",
+            "FALSE"
+          ],
+          [
+            "garbage_truck",
+            "sanitation_strike_delay",
+            "business BIZ-00041",
+            "Annual_Revenue",
+            "-3.49",
+            "FALSE"
+          ],
+          [
+            "cop_car",
+            "pulled_over_warning",
+            "neighborhood Grand Lake",
+            "CrimeIndex",
+            "-0.08",
+            "FALSE"
+          ],
+          [
+            "building_inspector",
+            "passed",
+            "business BIZ-00062",
+            "Annual_Revenue",
+            "-14.86",
+            "FALSE"
+          ]
+        ]
+      }
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 13,
+      "cited_text": "Narrative seeds: pge_truck → Ivy Hill: Lights flicker back after hours dark — relief, and the question of why it went out. garbage_truck → West Oakland: Bags piling at the curb — a sanitation delay the whole block can smell. garbage_truck → BIZ-00044: Bags piling at the curb — a sanitation delay the whole block can smell. building_inspector → BIZ-00174: Shuttered pending compliance — staff sent home, regulars turned away at the door. garbage_truck → BIZ-00041: Bags piling at the curb — a sanitation delay the whole block can smell."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 14,
+      "cited_text": "economic-event (5) carryover | carryover: cycle 1 of 3 | Jack London | mag 8 | targets Jack London carryover | carryover: cycle 2 of 3 | Jack London | mag 9.6 | targets Jack London carryover | carryover: cycle 2 of 4 | West Oakland | mag -8 | targets West Oakland sector-impact:services/business | Gridiron Analytics added 2 employees | Temescal | mag 6 | targets BIZ-00008 sector-impact:entertainment/food/retail | Playoff game spending | Jack London | mag 9.6 | targets Jack London sports (4) sentiment | A's W2 [player-energy]; A's W2 [playoffs]; Oaks W0 [pre-season] | mag 0.094"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 15,
+      "cited_text": "migration (9) CITIZEN_RELOCATED | Carmen Delaine moved from Chinatown to West Oakland — moving up from Chinatown | West Oakland | mag 5 | targets POP-00011 CITIZEN_RELOCATED | Simone Ellis moved from Chinatown to Lake Merritt — moving up from Chinatown | Lake Merritt | mag 5 | targets POP-00039 CITIZEN_RELOCATED | Andre Lee moved from Temescal to Jack London — moving up from Temescal | Jack London | mag 5 | targets POP-00311 CITIZEN_RELOCATED | Bethany Foster moved from Jack London to Lake Merritt — moving up from Jack London | Lake Merritt | mag 5 | targets POP-00356 CITIZEN_RELOCATED | Ron Arenson moved from Laurel to Baylight District — moving up from Laurel | Baylight District | mag 5 | targets POP-00367 CITIZEN_RELOCATED | The Brooks household (2) moved from Temescal to Jack London — moving up from Temescal | Jack London | mag 5 | targets POP-00709 CITIZEN_RELOCATED | Debbie Kaplan moved from Jack London to Lake Merritt — moving up from Jack London | Lake Merritt | mag 5 | targets POP-00719 CITIZEN_RELOCATED | Erica Faulkner moved from Fruitvale to Lake Merritt — moving up from Fruitvale | Lake Merritt | mag 5 | targets POP-00887 CITIZEN_RELOCATED | Tariq Harris moved from West Oakland to Chinatown — priced out of West Oakland | Chinatown | mag 5 | targets POP-01112"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 16,
+      "cited_text": "faith-join (1) congregation-growth | 1 citizen(s) joined the congregation at Lake Merritt Mindfulness Sangha | Downtown | mag 0.01 | targets POP-00180 Who Lived It (cycle 107) Promotion (14) POP-01100 Marco Davis — Emerged into Tier-4 in Brooklyn (Brooklyn) POP-01101 Mateo Baker — Emerged into Tier-4 in Ivy Hill (Ivy Hill) POP-01102 Colin Perez — Emerged into Tier-4 in Glenview (Glenview) POP-01103 Ebony Mendoza — Emerged into Tier-4 in Ivy Hill (Ivy Hill) POP-01104 Nala Okonkwo — Emerged into Tier-4 in Dimond (Dimond) POP-01105 Rashida Foster — Emerged into Tier-4 in Eastlake (Eastlake) POP-01106 Priya Chandrasekaran — Added to Simulation_Ledger as Tier 3. Founder, Ridgeline Ventures (BIZ-00007) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID). POP-01107 Daniel Yoon — Added to Simulation_Ledger as Tier 3. Co-Founder, Gridiron Analytics (BIZ-00008) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID). POP-01108 Christine Nakamura — Added to Simulation_Ledger as Tier 3. Co-Founder, Gridiron Analytics (BIZ-00008) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID). POP-01109 Marcus Tan — Added to Simulation_Ledger as Tier 3. Founder, Oakmesh Systems (BIZ-00009) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID). POP-01110 Amara Osei — Added to Simulation_Ledger as Tier 3. Founder, Portside Bio (BIZ-00010) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID). Business_Ledger cell carries the honorific \"Dr.\" — ledger First/Last omit it per naming convention. POP-01111 Jasmine Torres — Added to Simulation_Ledger as Tier 3. Founder, Tenth Street Digital (BIZ-00011) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID). POP-01112 Tariq Harris — Added to Simulation_Ledger as Tier 4. GC emergence promotion — EmergenceCount 3, C107 (engine.58 lottery) POP-01113 Quinn Adeyemi — Added to Simulation_Ledger as Tier 4. GC emergence promotion — EmergenceCount 3, C107 (engine.58 lottery)"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 17,
+      "cited_text": "fame-event (11) fame-rise | Jade Orion — the city is watching: caught the recap at the counter this morning and stayed for the second retelling | Lake Merritt | mag 0.05 | targets POP-00540 fame-rise | Theo Banks — the city is watching: walked the perimeter of the Coliseum District Development and tried to picture what it would look like in five years | Uptown | mag 0.05 | targets POP-01056 fame-rise | Marisol Rivera — the city is watching: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. | Rockridge | mag 0.05 | targets POP-01062 tier-climb | Mina Linas — the city keeps saying the name: Tier 4 -> 3 | Lake Merritt | mag 0.05 | targets POP-00135 tier-climb | Melton Neilon — the city keeps saying the name: Tier 3 -> 2 | Temescal | mag 0.05 | targets POP-00170 tier-climb | Rick Walker — the city keeps saying the name: Tier 3 -> 2 | Fruitvale | mag 0.05 | targets POP-00198 tier-climb | Elio Perez — the city keeps saying the name: Tier 3 -> 1 | West Oakland | mag 0.05 | targets POP-00201 tier-climb | Depak Ying — the city keeps saying the name: Tier 3 -> 2 | Rockridge | mag 0.05 | targets POP-00210 tier-climb | Daniel Cloak — the city keeps saying the name: Tier 4 -> 3 | West Oakland | mag 0.05 | targets POP-00722 tier-climb | Yuki Ji — the city keeps saying the name: Tier 4 -> 3 | Lake Merritt | mag 0.05 | targets POP-00783 tier-climb | Darius Clark — the city keeps saying the name: Tier 4 -> 3 | West Oakland | mag 0.05 | targets POP-00961"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 18,
+      "cited_text": "faith-event (5) crisis_response | congregation opens doors for community support | Downtown | mag 0.02 | targets Telegraph Presbyterian Fellowship holy_day | congregation celebrates Epiphany | Lake Merritt | mag 0.01 | targets Cathedral of the Living Word holy_day | traditional Epiphany rituals observed | Fruitvale | mag 0.01 | targets St. Esperanza Parish community_program | seniors lunch program marks milestone | Downtown | mag 0.01 | targets Telegraph Presbyterian Fellowship community_program | food pantry serves neighbors in need | East Oakland | mag 0.01 | targets Foothill Baptist Tabernacle"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 19,
+      "cited_text": "<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes --> Faith in Practice: A Week of Opening Doors Developing report — edited but not yet published. Faith in Practice: A Week of Opening Doors By Elliot Graye The folding chairs were already set up when Cameron Wallen arrived at the Lake Merritt Mindfulness Sangha on Wednesday evening. Gray cushions lined the floor of the modest Downtown space, and the scent of incense lingered faintly in the air. \"I've recently joined the congregation at Lake Merritt Mindfulness Sangha,\" Wallen said, \"and I have to say, it's been a really positive experience for me. I feel like it's helped me to cultivate a sense of calm and clarity in my life, which is really important to me, especially with my busy schedule as a Corporate Accountant.\""
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 20,
+      "cited_text": "Death (1) POP-00622  — died after a sudden illness Health (2) POP-00449  — recovered from a winter illness POP-00623  — took time to recover from the flu Stabilized (1) POP-00194  — Yu Zen has stabilized and is no longer in critical condition Relationship (6) POP-00023 Gregory Mims — kept interactions brief during heavy fog (West Oakland) POP-00134 Brianna Lee — reconnected with an old friend (Laurel) POP-00135 Mina Linas — felt more comfortable reaching out to others (Lake Merritt) POP-00195 Lonzo Jailon — limited social activity due to winter mood (Lake Merritt) POP-00197 Rigo Ryno — felt distant from people around them (Temescal) POP-00207 Owen Tower — discussed recent city events with someone they knew (Fruitvale)"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 21,
+      "cited_text": "city-event (4) city-event | The Varek Family Block Party (West Oakland) | West Oakland | mag 0.02 city-event | Fruitvale Unity Gathering (Fruitvale) | Fruitvale | mag 0.02 city-event | The Paulson Line Founding Celebration (Jack London) | Jack London | mag 0.02 city-event | Jack London Misty Morning Coffee Club (Jack London) | Jack London | mag 0.02 lifestyle-sighting (3) sighting | Rico Valez spotted at Canopy Market | Rockridge | mag 0.01 | targets BIZ-00168 sighting | GameGirl Gia spotted at Telegraph Press | KONO | mag 0.01 | targets BIZ-00157 sighting | Former A's Star Rodriguez spotted at KONO Kitchen | KONO | mag 0.01 | targets BIZ-00046"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 22,
+      "cited_text": "Record 0-0, Streak -, Mood electric, FanSentiment high, Neighborhood Jack London Evening Texture (Riley_Digest cycle 107) Famous people spotted: Rico Valez, GameGirl Gia, Former A's Star Rodriguez Restaurants: OakHouse (Rockridge), Dockhouse BBQ (Jack London), Harborline Grill (Jack London) Fast food: SpeedyBurger (Downtown) Nightlife: Dragon Gate Lounge (Chinatown), Piedmont Pub (Piedmont Ave). Volume 5, vibe game-night, movement restricted. Weather impact 1.30. City events: The Varek Family Block Party, Fruitvale Unity Gathering, The Paulson Line Founding Celebration, Jack London Misty Morning Coffee Club Evening media TV: Civil Rights Special , Community Stories , Late Weather Watch , Late Shift Live , Lake Merritt Laughs , Jack London Ballpark Stories , One-on-One with Mark Aitken (1B) Evening media movies: Voice of Change , Neighborhood Tales , Storm Window , Fog Harbor , Rising Star , The Closer Sports broadcast: Oakland Sports Tonight - Playoff Special Streaming trend: civil rights documentaries Food trend: Playoff tension dining - sports bar surge"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 23,
+      "cited_text": "Prior Events & Franchise Baselines The Athletics’ ALDS Victory & 127-Win Apparatus: Sports reporter Anthony Raines covered the A's 4–0 ALDS-closing victory over the New York Yankees in New York [48, 60–63]. LHP John Ellis pitched a 9-inning complete-game shutout (4 hits, 0 ER, 9 strikeouts, 0 walks) [48, 60–61]. Eric Taveras hit a solo home run in the 4th inning [48, 61–62]. In Fruitvale, Rick Walker and Rafael Pilgrim listened on the radio and praised the pitching depth [30, 31]. This postseason push follows a historic 127–35 regular season [30, 32, 33]."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 24,
+      "cited_text": "Stats: Peter Busch/656ab/183h/39hr/123rbi/124ko/33sb/.279avg. Cy Newel/16-8/2.84era/169ko, Agustin Rodriguez/605ab/164h/20hr/90rbi/.271avg, Buford Park/334ab/101h/13hr/.302avg Record 127-35, Streak W0, Mood reflective, FanSentiment high, Neighborhood Jack London A's — player-feature (playoffs): Travis Coles (SP), Arturo Ramos (SP) StoryAngle: Who you starting game 1 of the playoffs? Notes: Whom should get the game 1 start in the playoffs? Arturo Ramos was your Ace starting pitcher all season and put up gawdy numbers, but Travis Coles won the Cy Young with equally impressive stat lines. Stats: Arturo Ramos/212.2IP/2.41era/23-1/182ko/41bb/4.6war, Travis Coles/215IP/2.72era/22-4/254ko/39bb/6.2war Record —, Streak W0, Mood dominant, FanSentiment high, Neighborhood Baylight District A's — roster-move (playoffs): JR Rosado (OF), Ian Devine (RP), Clark Saryan (CL), Julio Valencia (CL), Mariano Rosales (CL) StoryAngle: Playoff Rosters set Notes: Playoff rosters set for first round and surprisingly veteran reliever Ian Devine was kept off, Taking his place rookie Clark Saryan, who is making his MLB debut in the playoffs. A's now carry 3 closers on their roster, Julio Valencia, rookie who was called up this season and the official closer Mariano Rosales. Also rookie JR Rosado , who faired decent this season, was left off. Stats: see As roster tab Record 0-0, Streak W0, Mood confident, FanSentiment high, Neighborhood Dimond A's — team-update (playoffs): Benji Dillon (RP), Vinnie Keane (DH), Isley Kelley (SS), Mark Aitken (1B), Darrin Davis (DH) StoryAngle: Oakland A's will play host to the New York Yankees in the ALDS Notes: The stage is set for the ALDS 1st round for the A's as they will face the NY Yankees. #1 seed. A's will be the home team as the #4 NYY will try to steal the homefield avantage. The A's core dynasty legends will take one last swing at it. Stats: see As roster tab Record 0-0, Streak W0, Mood confident, FanSentiment high, Neighborhood Jack London"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 25,
+      "cited_text": "Direct Published Facts vs. Analytical Inferences Direct Published Facts: John Ellis threw a 9-inning shutout (4 H, 0 ER, 9 K) to close out the ALDS [48, 60–61]. Martin Richards spoke on role changes following his trade to the Mets [3, 37–38]. The A's finished the regular season 127–35 [32, 33]. The Oaks are 0–0 entering Opening Night with their starting five announced [49, 71, 83–84]. Analytical Inferences & Unresolved Storylines: Raines, Leary, and Corliss infer that the A's franchise has become an impersonal machine where structure replaces human presence [3, 38–40, 48]. The unresolved storylines entering Cycle Y2C107 are whether John Ellis's shutout is a harbinger of pitching depth or a statistical outlier in the ALCS [30, 40], and how Oakland divides its sports loyalty between the A's ALCS run and the Oaks' NBA debut [37]."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 26,
+      "cited_text": "C105 (8 entries) Oaks — game-result (preseason): Dame Sarr (SG), Coen Carr (SG), Wilson Shepard (Coach) StoryAngle: The Oaks drop to 0-3 in preason while Stanley and Dybantsa sit for precautionary measures. Notes: The Oaks lost their 3rd straight preseason game, albeit while AJ Dybantsa and Adash Stanley (PG) did not participate.  Coach Shepard shared that both sitting were percautionary measures at best. Stanley had left last game at half after jamming his non shooting wrist, while unclear on AJ but reports have been under the weather rather than injury. Whil AJ sat his fellow rookie recent drafties had the oppurtunity to get more touches. Coen Carr showed some touch draining 3 threes and scoring 14pts. Dame Sarr had a tougher time finding his way contributing 7pts but flashed on D with 3 steals."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 27,
+      "cited_text": "<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes --> Chinatown's Illness Toll Ripples Through Tight-Knit Community Developing report — edited but not yet published. Chinatown's Illness Toll Ripples Through Tight-Knit Community From her hospital bed in Rockridge, Yu Zen listens to the nurses' hushed exchanges about neighborhood impacts. \"From this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard,\" she shares. \"It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it.\" Chinatown currently shows concentrated illness activity across Oakland neighborhoods, with East Oakland also registering significant symptoms. The patterns reflect wider seasonal pressures as staff at local pharmacies prepare for typical post-holiday increases in respiratory cases."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 28,
+      "cited_text": "Lake Merritt Fog & Sea Level Monitoring: Civic reporter Noah Tan tracked sea level monitor Lonzo Jailon at Lake Merritt hovering over blurred markers during a three-day rain and thick marine fog layer, forcing him to pause and double-check measurements [3, 4]. Teri Mitchell (recovering from winter illness) noted the heavy fog makes the neighborhood feel like it is holding its breath [20]. Chinatown Illness Toll: Dr. Lila Mezran reported on concentrated seasonal illness activity in Chinatown and East Oakland [47, 80–82]. From a Rockridge hospital bed, Yu Zen listened to nurses discuss Chinatown's heavy illness toll [21, 22]. Recovered Uptown resident Teri Mitchell noted how illness ripples through tight-knit blocks [23]. Marcus Osei's recent recovery offered hope, while Maurice Franklin remained hospitalized with severe seasonal symptoms [21, 23]. The Rockridge School Model: Civic reporter Angela Reyes audited Rockridge's top-ranked public school [4, 20–21]. Principal Simone Adesanya , parent Mei Wong (after-school program worker), and 8th-grader Rick Dillon (\"do homework and play baseball after\") highlighted collective community investment [4, 20–21]. The school logged a school quality index of 9 , 95% graduation rate , and 78% college readiness across 223 enrolled students , supported by the Bay Conservation Alliance [4, 20–21]."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 29,
+      "cited_text": "Analytical Inferences & Unresolved Storylines: Corliss and Mezran question whether Chinatown's illness burden reflects structural care access barriers in high-density areas or standard seasonal pressure [21, 23]. Reyes questions whether the Rockridge model is a replicable civic blueprint or an un-exportable accumulation of neighborhood wealth and private contributions [24, 25]. -------------------------------------------------------------------------------- 3. Business, Commercial Ecosystems, & Mutual Aid Leads Leads: business_c107_business-desk_packet-v2_deepseek-deepseek-chat.staged.md / The Pastry Pulse of OakHouse / culture_c107_maria-keen_packet-v2_deepseek-deepseek-chat-1701.md / culture_c107_maria-keen_packet-v2_deepseek-deepseek-chat.md"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 30,
+      "cited_text": "Bay Tribune newsroom reports civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat.md Gate-flagged draft — held back by the editorial gate, not published. Cover what it reported AND why it was held. PREWRITE: Reporter: Carmen Delaine BagModes: Follow the Money, Implementation Gap AnchorFacts: West Oakland Stabilization Fund | Status passed | phase disbursement-active (Initiative_Tracker INIT-001) Resident quotes on fund visibility (Packet W2) Claim: Despite entering its disbursement phase, the West Oakland Stabilization Fund lacks clear public tracking of where dollars are flowing, leaving residents skeptical of its impact. MissingData: Disbursement totals, recipient lists, timeline for full allocation. PriorFiling: wall cp-POP-00011 (West Oakland stabilization threads C104→C106)"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 31,
+      "cited_text": "INTAKE NAMES: Elio Perez | mentioned NAMES: Daniel Cloak | mentioned NAMES: Irene Fay | mentioned NAMES: Darius Clark | mentioned STORYLINE: west-oakland-elio-perez-initiative | closed HOOD: West Oakland CLAIM: I've heard folks at the diner talking about the stabilization fund, but honestly, it's hard to tell where that money's actually going—I haven't seen any changes on my block or heard from neighbors who've gotten help. | citizenVoice PRESS Elio Perez <!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes --> culture_c107_maria-keen_packet-v2_deepseek-deepseek-chat-1701.md Gate-flagged draft — held back by the editorial gate, not published. Cover what it reported AND why it was held."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 32,
+      "cited_text": "<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes --> culture_c107_maria-keen_packet-v2_deepseek-deepseek-chat.md Gate-flagged draft — held back by the editorial gate, not published. Cover what it reported AND why it was held. Marcus Whitfield's Court The hoops at Eastside Hoopers Coalition still smell like fresh paint, though the cracks in the asphalt tell the truth—three years of sneakers pivoting against time. Marcus Whitfield stands at the free-throw line, a basketball balanced on his fingertips. \"I've seen how community programs can really bring people together and make a difference in their lives,\" he says, watching a group of kids chase down a loose ball. The Coalition's banner flutters above them, its corners frayed from hanging in the same East Oakland wind that carries the scent of fried plantains from somebody's kitchen down the block."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 33,
+      "cited_text": "<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes --> sports_c107_simon-leary_packet-v2_deepseek-deepseek-chat-1703.md Gate-flagged draft — held back by the editorial gate, not published. Cover what it reported AND why it was held. The Load Shifts, the Line Holds By Simon Leary Desmond Morton stood with his back to the outfield wall, tugging absently at his glove’s webbing. The late afternoon light cut across the diamond in clean angles, illuminating the steady choreography of infield warmups. Morton, Oakland’s left fielder for the past seven seasons, watched the current iteration of the A’s move through their drills—a team holding a 2-1 record, winners of their last game. Not dominance, not collapse. Just the steady pulse of adaptation."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 34,
+      "cited_text": "<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes --> The Load-Bearing Arc Gate-flagged draft — held back by the editorial gate, not published. Cover what it reported AND why it was held. The Load-Bearing Arc Desmond Morton leans against the padded rail in the A's dugout, glove hanging loose from his left hand. The afternoon sun cuts across the diamond in Jack London, catching dust motes above the infield dirt. Morton isn't looking at the field—he's watching the bullpen gate swing shut behind their latest call-up, watching how the kid adjusts his cap three times before reaching the mound."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 35,
+      "cited_text": "-------------------------------------------------------------------------------- The steam from Irene Fay’s espresso machine curled toward the ceiling of Tiny’s Corner, a West Oakland café whose cracked front window still hadn’t been fixed. She wiped her hands on her apron before handing a cup to Darius Clark, the bakery worker from down the block. “I’ve heard people talking about the funds,” she said, nodding toward the city hall flyer taped to the register, “but honestly, it’s hard to tell where the money’s going or if it’s even reaching folks who need it most.”"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 36,
+      "cited_text": "Daniel Cloak, slicing sourdough at Red Star Bakery, framed the disconnect more sharply: “It feels like whispers more than clear answers.” The fund’s approval vote last cycle (Mayor Santana: YES, CRC bloc: 5-2-2) included provisions for quarterly reporting, but no such disclosure has surfaced. Unanswered : Without transparent disbursement records, how can residents verify the fund meets its stabilization mandate—or identify who might be left behind? --------------------------------------------------------------------------------"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 37,
+      "cited_text": "The sound of basketballs echoes through the cracked pavement of the Eastside Hoopers Coalition court, where Marcus Whitfield oversees a dozen kids in mismatched jerseys. Whitfield founded this program back in Cycle 101, a response to what he saw as a lack of safe spaces for East Oakland’s youth. \"I’ve seen how community programs can really bring people together and make a difference in their lives,\" he says, wiping sweat from his brow as the kids scramble for rebounds. \"As someone who's founded a program myself, I know how much work and dedication goes into making it happen. It's not just about the program itself, but about the people behind it and the impact it has on the community.\""
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 38,
+      "cited_text": "Down the block, Allen Temple Baptist Church’s food pantry hums with activity. Seniors shuffle in with reusable bags, greeted by volunteers stacking canned goods and fresh produce. The pantry has been a cornerstone of East Oakland since Cycle 78, a quiet testament to the neighborhood’s resilience. Nearby, the Masjid Al-Islam Emergency Assistance Fund operates in a similar rhythm, distributing aid to those in need. \"I’ve seen that community programs in East Oakland are really making a difference,\" says Maria Conteras, a regular at both sites. \"It’s great to see people like Marcus Whitfield founding initiatives that help our neighborhood.\""
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 39,
+      "cited_text": "Jerome Pittman leans against the chain-link fence outside the Hoopers Coalition court, watching Whitfield demonstrate a layup. \"I feel like community programs and their founders in East Oakland are really making a difference,\" he says. \"I see the impact they have on people's lives around here.\" Still, as the kids dribble down the court and the pantry hands out its last bag of rice, a question lingers: how do these programs reflect the values and priorities of the people who founded them? INTAKE NAMES: Marcus Whitfield | mentioned NAMES: Maria Conteras | mentioned NAMES: Jerome Pittman | quoted-source STORYLINE: east-oakland-marcus-whitfield-beat-neighborhood | opened HOOD: East Oakland CLAIM: I've seen how community programs can really bring people together and make a difference in their lives. As someone who's founded a program myself, I know how much work and dedication goes into making it happen. It's not just about the program itself, but about the people behind it and the impact it has on the community. | citizenVoice PRESS Marcus Whitfield"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 40,
+      "cited_text": "Maria Conteras leans against the chain-link fence, nodding as Whitfield talks. \"I've seen that community programs in East Oakland are really making a difference,\" she says, folding her arms against the chill. Around them, the rhythm of dribbles and laughter fills the gaps between words. Down the street, the Allen Temple Food Pantry's line stretches past the bus stop. Jerome Pittman shuffles his feet near the front, rubbing his hands together. \"I feel like community programs and their founders in East Oakland are really making a difference,\" he says."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 41,
+      "cited_text": "\"You know, when the team's rolling like this,\" Morton said, squinting toward the bullpen where a cluster of pitchers loosened their arms, \"it's less about any one guy and more about how we all fit together.\" His voice carried the ease of someone who’d seen cycles of role shifts without structural upheaval. \"I've been around long enough to see how roles shift—some days you're the spark, some days you're just keeping the line moving. It's not always flashy, but it's how you sustain something.\""
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 42,
+      "cited_text": "Down the first baseline, Mark Aitken, the franchise’s long-tenured first baseman turned community liaison, nodded at a pair of groundskeepers rolling the infield dirt smooth. His presence, like Morton’s, was a quiet counterweight to the ephemeral chatter of roster turnover or playoff pushes. \"When you're part of a team that's been around as long as the A's,\" Aitken remarked, \"you start to see how roles evolve—not just on the field, but in the community too. It's like a living structure, where each player's contribution shifts over time, but the core stays the same.\""
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 43,
+      "cited_text": "The metaphor held: Oakland’s current roster, like the city itself, was a study in continuity beneath flux. Two wins, one loss—no seismic shift, just the subtle recalibration of individual weights within a familiar frame. In Glenview, Marcus King admitted he didn’t follow sports closely but had overheard chatter about the team’s start. \"I don’t really follow sports much,\" King said, \"but I’ve heard people talking about the A’s record lately. It seems like they’re doing alright this season.\" Jacob Perez, making deliveries near the stadium, echoed the sentiment: baseline awareness without fever."
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 44,
+      "cited_text": "Who measures the strength of a keystone by its shine? INTAKE NAMES: Desmond Morton | mentioned NAMES: Mark Aitken | quoted-source NAMES: Marcus King | mentioned NAMES: Jacob Perez | mentioned STORYLINE: baylight-district-vinnie-keane-prospect-callup | advanced CLAIM: You know, when the team's rolling like this, it's less about any one guy and more about how we all fit together. I've been around long enough to see how roles shift—some days you're the spark, some days you're just keeping the line moving. It's not always flashy, but it's how you sustain something. Feels like the whole city's leaning into that right now. | citizenVoice PRESS Desmond Morton"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 45,
+      "cited_text": "At OakTown Social three blocks northwest, Vanessa Treary steams milk behind the counter. \"I work at OakTown Social, so I see our regulars come through,\" she says. \"The Gridiron Analytics crowd tends to come in later, usually deep in conversation about stats or games.\" Manager Dawson Nguyen surveys the office, where analysts track player performance metrics across multiple screens. \"Working at Gridiron Analytics, I've seen how tight-knit the team is—everyone's pushing hard but also looking out for each other,\" he says. \"It's not just about the numbers; it's about the people.\""
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 46,
+      "cited_text": "-------------------------------------------------------------------------------- 4. Sports Desk Leads: Athletics Postseason Machine & Oaks Expansion Leads: sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat.staged.md / sports_c107_simon-leary_packet-v2_deepseek-deepseek-chat-1703.md / The Load-Bearing Arc / sports_c107_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md / Clubhouse Current / sports_c107_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md / sports_c107_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md"
+    },
+    {
+      "source_id": "45188a4f-4a6e-4bde-b846-df1ba20c2dde",
+      "citation_number": 47,
+      "cited_text": "West Oakland Community Center & Mutual Aid: Business reporter Jordan Velez covered mutual aid organizer Toby Lamont anchoring operations at the West Oakland Community Center [7, 41–43]. Lamont managed fresh produce deliveries for the mutual aid fridge to meet surging neighborhood demand, drawing praise from local teachers and co-organizers for his quiet fire and hands-on dedication [7, 41–42]. Pastry Pulse / Neighborhood Bakers Baseline: In Cycle Y2C106, culture reporter Maria Keen tracked A's veteran pitcher Benji Dillon’s quiet visit to Dimond Pharmacy [28, 29]. Temescal sourdough baker Melton Neilon and Fruitvale line cook Rick Walker discussed local neighborhood connections [28, 29]. In West Oakland, bakery workers Daniel Cloak and Darius Clark discussed community outreach [3, 17–18]. Source Verification regarding \"OakHouse\": The specific business name \"OakHouse\" is absent from the published text of Cycles Y2C106 and Y2C107 [1–86]. Lead reporting under \"The Pastry Pulse of OakHouse\" builds upon this established baseline of local neighborhood bakers, food service workers, and community spaces."
+    }
+  ]
+}

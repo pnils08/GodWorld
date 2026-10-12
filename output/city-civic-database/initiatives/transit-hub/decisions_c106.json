@@ -1,0 +1,18 @@
+{
+  "initiative": "INIT-003",
+  "initiativeId": "INIT-003",
+  "cycle": 106,
+  "primaryVoice": "Mayor gavel (mayor_gavel-003)",
+  "consolidatedFrom": [
+    "STMT-106-mayor_gavel-003 (Mayor gavel — Fruitvale Transit Hub Phase II Design-Phase Kickoff)",
+    "STMT-106-transit_hub-001 (Soria Dominguez — design-phase kickoff with merchant protection covenants)",
+    "STMT-106-transit_hub-002 (Soria Dominguez — Fruitvale neighborhood conditions and accountability)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-003",
+    "ImplementationPhase": "design-phase",
+    "MilestoneNotes": "C106: Design-phase kickoff approved with binding merchant protection covenants; outreach to District 3 businesses initiated",
+    "NextScheduledAction": "Merchant covenant signing and design RFP release",
+    "NextActionCycle": 107
+  }
+}

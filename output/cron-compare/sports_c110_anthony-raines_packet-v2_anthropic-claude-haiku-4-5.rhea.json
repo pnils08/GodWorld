@@ -1,0 +1,63 @@
+{
+  "draft": "output/cron-compare/sports_c110_anthony-raines_packet-v2_anthropic-claude-haiku-4-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "23aafc8113cc2cae20daf4ac5e0df4a0d6e10c43aa1c7315538246e8aa5e0142",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "Ellis had stumbled in Game Two, the kind of early-series misstep that can seed doubt through a roster.",
+      "issue": "In World Series Game 2, Travis Coles was the starting pitcher who struggled; John Ellis did not pitch in Game 2 (his prior postseason struggle occurred in ALCS Game 4 before bouncing back in WS Game 5).",
+      "severity": "med"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "Accurate analysis of Game 5 stats, title count, and roster lines with a minor attribution slip regarding Ellis's prior postseason start.",
+  "review": {
+    "profileId": "anthony-sports-analytics-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-2",
+    "manifestId": "AM-c5f20a520082",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Darrin Davis",
+      "Eric Taveras",
+      "John Ellis",
+      "Mark Aitken",
+      "Mike Paulson",
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Paulson's Oakland",
+      "World Series"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0116,
+  "durationMs": 9852,
+  "parseError": false,
+  "ranAt": "2026-10-05T23:17:27.878Z"
+}

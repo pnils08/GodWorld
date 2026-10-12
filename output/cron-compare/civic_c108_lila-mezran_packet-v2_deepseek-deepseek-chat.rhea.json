@@ -1,0 +1,51 @@
+{
+  "draft": "output/cron-compare/civic_c108_lila-mezran_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "a29bb795beeebdc93063a7969af386357d7036924a7f76f3bdbba6338ab86be1",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match packet provenance, citizen profiles verified on ledger, and health metrics align with cycle ground truth.",
+  "review": {
+    "profileId": "lila-health-service-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "packageVersion": "LILA-LEP2-1",
+    "manifestId": "AM-1f79afbdf761",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Javier Robertson",
+      "Marcus Osei",
+      "Maurice Franklin",
+      "Ronald Williams",
+      "Yu Zen"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 5870,
+  "parseError": false,
+  "ranAt": "2026-09-21T23:18:29.953Z"
+}

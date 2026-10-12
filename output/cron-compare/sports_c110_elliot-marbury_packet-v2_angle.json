@@ -1,0 +1,488 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "110",
+  "persona": "elliot-marbury",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00166",
+      "name": "Elliot Marbury",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Danny Horn — 9 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "data-desk",
+        "hood": null,
+        "facts": [
+          "Danny Horn — CF, Athletics; 9 seasons on the dossier",
+          "Danny Horn 2041 ATH: 148 G, 621 AB, 210 H, 56 HR, 113 RBI, 35 BB, 65 SO, 80 SB, AVG .338, OBP .382, SLG .715",
+          "Danny Horn 2040 ATH: 147 G, 607 AB, 170 H, 32 HR, 98 RBI, 67 BB, 121 SO, 35 SB, AVG .280, OBP .355, SLG .524",
+          "Danny Horn 2039 ATH: 154 G, 614 AB, 198 H, 43 HR, 103 RBI, 66 BB, 104 SO, 28 SB, AVG .322, OBP .391, SLG .598",
+          "Danny Horn 2038 ATH: 159 G, 611 AB, 158 H, 29 HR, 92 RBI, 64 BB, 110 SO, 6 SB, AVG .259, OBP .335, SLG .480",
+          "Danny Horn 2037 ATH: 159 G, 561 AB, 138 H, 31 HR, 83 RBI, 81 BB, 103 SO, 28 SB, AVG .246, OBP .333, SLG .415",
+          "Danny Horn 2036 ATH: 96 G, 323 AB, 64 H, 12 HR, 26 RBI, 14 BB, 79 SO, 9 SB, AVG .198, OBP .237, SLG .341",
+          "Danny Horn 2041 rates (621 AB): one HR every 11.1 AB, one SO every 9.6 AB (worked from the season line)",
+          "Danny Horn 2040 rates (607 AB): one HR every 19.0 AB, one SO every 5.0 AB (worked from the season line)",
+          "Danny Horn 2039 rates (614 AB): one HR every 14.3 AB, one SO every 5.9 AB (worked from the season line)",
+          "Danny Horn 2038 rates (611 AB): one HR every 21.1 AB, one SO every 5.6 AB (worked from the season line)",
+          "Danny Horn 2037 rates (561 AB): one HR every 18.1 AB, one SO every 5.4 AB (worked from the season line)"
+        ],
+        "priorCycle": "DOSSIER",
+        "note": "subject is on this cycle's feed",
+        "engineHooks": [],
+        "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-data-desk",
+      "hood": null,
+      "score": null,
+      "src": "output/player_truesource_mirror.json POP-00022 @C110",
+      "nearby": [
+        {
+          "text": "A's | game-result | (playoffs) | Henry Rivas, Danny Horn, Mark Aitken, Isley Kelley",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | John Ellis, Eric Taveras, Vinnie Keane, Benji Dillon",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Austin Reaves, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (championship) | Mike Paulson, Vinnie Keane, Benji Dillon, Mark Aitken, Eric Taveras, Pablo Almanzar, Arturo Ramos, Isley Kelley, Darrin Davis, Frank Reyna",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn — 9 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+        "src": "output/player_truesource_mirror.json POP-00022 @C110",
+        "id": "F-fba2c277816d"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn's 2041 line against 8 earlier seasons.",
+        "src": "output/player_truesource_mirror.json POP-00022 @C110",
+        "id": "F-6de890968434"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn — CF, Athletics; 9 seasons on the dossier",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-dfd6dcdffc77"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn 2041 ATH: 148 G, 621 AB, 210 H, 56 HR, 113 RBI, 35 BB, 65 SO, 80 SB, AVG .338, OBP .382, SLG .715",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-cc852e62a3d8"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn 2040 ATH: 147 G, 607 AB, 170 H, 32 HR, 98 RBI, 67 BB, 121 SO, 35 SB, AVG .280, OBP .355, SLG .524",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-e5acaa0666d2"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn 2039 ATH: 154 G, 614 AB, 198 H, 43 HR, 103 RBI, 66 BB, 104 SO, 28 SB, AVG .322, OBP .391, SLG .598",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-a4472ab50eab"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn 2038 ATH: 159 G, 611 AB, 158 H, 29 HR, 92 RBI, 64 BB, 110 SO, 6 SB, AVG .259, OBP .335, SLG .480",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-7e126ec013e7"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn 2037 ATH: 159 G, 561 AB, 138 H, 31 HR, 83 RBI, 81 BB, 103 SO, 28 SB, AVG .246, OBP .333, SLG .415",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-8e2eec86ae13"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn 2036 ATH: 96 G, 323 AB, 64 H, 12 HR, 26 RBI, 14 BB, 79 SO, 9 SB, AVG .198, OBP .237, SLG .341",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-89752fb8cf5c"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn 2041 rates (621 AB): one HR every 11.1 AB, one SO every 9.6 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-f1d6bf757f3f"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn 2040 rates (607 AB): one HR every 19.0 AB, one SO every 5.0 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-cf2daea38dcc"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn 2039 rates (614 AB): one HR every 14.3 AB, one SO every 5.9 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-41d0656d8ac1"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn 2038 rates (611 AB): one HR every 21.1 AB, one SO every 5.6 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-3daea36a9259"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn 2037 rates (561 AB): one HR every 18.1 AB, one SO every 5.4 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-6cda50fea9a8"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn 2036 rates (323 AB): one HR every 26.9 AB, one SO every 4.1 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json POP-00022",
+        "id": "F-64ee99479cec"
+      },
+      {
+        "t": "FACT",
+        "text": "This cycle (feed, playoffs): Danny Horn/1HR/2RBI",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+        "id": "F-a4ee91e882ef"
+      },
+      {
+        "t": "FACT",
+        "text": "This cycle (feed notes, playoffs): Danny Horn , who has stuggled mightly up until the World Series shared that he was glad his bat woke up for the World Series, \"after the season I had it would have hung on me if I didnt effect the playoffs\".",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+        "id": "F-9791fc2d4863"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-data-desk",
+      "angle": "Danny Horn — 9 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "label": "Danny Horn — 9 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+      "hookLine": "Danny Horn's 2041 line against 8 earlier seasons.",
+      "hood": null,
+      "citizens": [
+        "Danny Horn (POP-00022)"
+      ],
+      "popids": [
+        "POP-00022"
+      ],
+      "ref": "output/player_truesource_mirror.json POP-00022 @C110",
+      "cycle": 110
+    },
+    "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "DATA-DESK-SLICE-1",
+    "kind": "beat-data-desk",
+    "seat": {
+      "slug": "elliot-marbury",
+      "name": "Elliot Marbury",
+      "popid": "POP-00166",
+      "desk": "sports",
+      "domain": "data-desk",
+      "builder": "buildMarburySlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-data-desk",
+      "score": 100,
+      "label": "Danny Horn — 9 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+      "hood": null,
+      "source": "output/player_truesource_mirror.json POP-00022 @C110"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Danny Horn — 9 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "hookLine": "Danny Horn's 2041 line against 8 earlier seasons.",
+      "anchorFacts": [
+        "Danny Horn — CF, Athletics; 9 seasons on the dossier",
+        "Danny Horn 2041 ATH: 148 G, 621 AB, 210 H, 56 HR, 113 RBI, 35 BB, 65 SO, 80 SB, AVG .338, OBP .382, SLG .715",
+        "Danny Horn 2040 ATH: 147 G, 607 AB, 170 H, 32 HR, 98 RBI, 67 BB, 121 SO, 35 SB, AVG .280, OBP .355, SLG .524",
+        "Danny Horn 2039 ATH: 154 G, 614 AB, 198 H, 43 HR, 103 RBI, 66 BB, 104 SO, 28 SB, AVG .322, OBP .391, SLG .598",
+        "Danny Horn 2038 ATH: 159 G, 611 AB, 158 H, 29 HR, 92 RBI, 64 BB, 110 SO, 6 SB, AVG .259, OBP .335, SLG .480",
+        "Danny Horn 2037 ATH: 159 G, 561 AB, 138 H, 31 HR, 83 RBI, 81 BB, 103 SO, 28 SB, AVG .246, OBP .333, SLG .415",
+        "Danny Horn 2036 ATH: 96 G, 323 AB, 64 H, 12 HR, 26 RBI, 14 BB, 79 SO, 9 SB, AVG .198, OBP .237, SLG .341",
+        "Danny Horn 2041 rates (621 AB): one HR every 11.1 AB, one SO every 9.6 AB (worked from the season line)",
+        "Danny Horn 2040 rates (607 AB): one HR every 19.0 AB, one SO every 5.0 AB (worked from the season line)",
+        "Danny Horn 2039 rates (614 AB): one HR every 14.3 AB, one SO every 5.9 AB (worked from the season line)",
+        "Danny Horn 2038 rates (611 AB): one HR every 21.1 AB, one SO every 5.6 AB (worked from the season line)",
+        "Danny Horn 2037 rates (561 AB): one HR every 18.1 AB, one SO every 5.4 AB (worked from the season line)",
+        "Danny Horn 2036 rates (323 AB): one HR every 26.9 AB, one SO every 4.1 AB (worked from the season line)",
+        "This cycle (feed, playoffs): Danny Horn/1HR/2RBI",
+        "This cycle (feed notes, playoffs): Danny Horn , who has stuggled mightly up until the World Series shared that he was glad his bat woke up for the World Series, \"after the season I had it would have hung on me if I didnt effect the playoffs\"."
+      ],
+      "evidence": [
+        {
+          "text": "Danny Horn — CF, Athletics; 9 seasons on the dossier",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "Danny Horn 2041 ATH: 148 G, 621 AB, 210 H, 56 HR, 113 RBI, 35 BB, 65 SO, 80 SB, AVG .338, OBP .382, SLG .715",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "Danny Horn 2040 ATH: 147 G, 607 AB, 170 H, 32 HR, 98 RBI, 67 BB, 121 SO, 35 SB, AVG .280, OBP .355, SLG .524",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "Danny Horn 2039 ATH: 154 G, 614 AB, 198 H, 43 HR, 103 RBI, 66 BB, 104 SO, 28 SB, AVG .322, OBP .391, SLG .598",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "Danny Horn 2038 ATH: 159 G, 611 AB, 158 H, 29 HR, 92 RBI, 64 BB, 110 SO, 6 SB, AVG .259, OBP .335, SLG .480",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "Danny Horn 2037 ATH: 159 G, 561 AB, 138 H, 31 HR, 83 RBI, 81 BB, 103 SO, 28 SB, AVG .246, OBP .333, SLG .415",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "Danny Horn 2036 ATH: 96 G, 323 AB, 64 H, 12 HR, 26 RBI, 14 BB, 79 SO, 9 SB, AVG .198, OBP .237, SLG .341",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "Danny Horn 2041 rates (621 AB): one HR every 11.1 AB, one SO every 9.6 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "Danny Horn 2040 rates (607 AB): one HR every 19.0 AB, one SO every 5.0 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "Danny Horn 2039 rates (614 AB): one HR every 14.3 AB, one SO every 5.9 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "Danny Horn 2038 rates (611 AB): one HR every 21.1 AB, one SO every 5.6 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "Danny Horn 2037 rates (561 AB): one HR every 18.1 AB, one SO every 5.4 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "Danny Horn 2036 rates (323 AB): one HR every 26.9 AB, one SO every 4.1 AB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json POP-00022"
+        },
+        {
+          "text": "This cycle (feed, playoffs): Danny Horn/1HR/2RBI",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C110"
+        },
+        {
+          "text": "This cycle (feed notes, playoffs): Danny Horn , who has stuggled mightly up until the World Series shared that he was glad his bat woke up for the World Series, \"after the season I had it would have hung on me if I didnt effect the playoffs\".",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C110"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "DOSSIER",
+        "vs": null
+      },
+      "hooks": [],
+      "note": "subject is on this cycle's feed",
+      "pageVoices": [],
+      "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00022",
+        "name": "Danny Horn",
+        "role": "CF, Athletics",
+        "neighborhood": null,
+        "business": null,
+        "profile": "Danny Horn — CF, Athletics",
+        "why": "dossier on file (player_truesource_mirror)"
+      }
+    ],
+    "pointers": [
+      "output/player_truesource_mirror.json POP-00022 @C110",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166",
+    "text": "I’m looking at Danny Horn’s nine-season dossier, focusing on his 2041 line against his earlier years. The numbers tell a story of peaks and valleys, but 2041 stands out—his best season yet. I want to dig into what changed, especially his home run and strikeout rates. The question is whether this is a new norm or an outlier. I’ll compare his rates to his peers and see where he lands. The hinge seems to be 2041—if he regresses next season, it’ll raise questions about sustainability.",
+    "plan": {
+      "chase": "I’m looking at Danny Horn’s nine-season dossier, focusing on his 2041 line against his earlier years. The numbers tell a story of peaks and valleys, but 2041 stands out—his best season yet. I want to dig into what changed, especially his home run and strikeout rates. The question is whether this is a new norm or an outlier. I’ll compare his rates to his peers and see where he lands. The hinge seems to be 2041—if he regresses next season, it’ll raise questions about sustainability.",
+      "focus": "Danny Horn’s 2041 season and its comparison to his previous years, particularly his home run and strikeout rates.",
+      "why": "To determine whether Horn’s 2041 performance is a sustainable leap forward or a statistical anomaly.",
+      "checks": [
+        "Compare Horn’s 2041 rates to his previous seasons.",
+        "Identify peer players with similar roles and compare their rates.",
+        "Determine what next season’s numbers would need to be to disprove the claim that 2041 represents a new norm."
+      ],
+      "targets": [],
+      "interpretation": "Horn’s 2041 season appears to be a significant improvement, but the question remains whether it’s sustainable or a one-off.",
+      "unverifiedLead": [
+        "What specific adjustments or factors contributed to Horn’s improved performance in 2041?"
+      ],
+      "closeQuestion": "Will Danny Horn’s 2042 performance confirm or contradict the claim that 2041 represents a new norm?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | game-result | (playoffs) | Henry Rivas, Danny Horn, Mark Aitken, Isley Kelley",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00024",
+        "POP-00022",
+        "POP-00003",
+        "POP-00019"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | John Ellis, Eric Taveras, Vinnie Keane, Benji Dillon",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00033",
+        "POP-00597",
+        "POP-00001",
+        "POP-00018"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Austin Reaves, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01024",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "A's | game-result | (championship) | Mike Paulson, Vinnie Keane, Benji Dillon, Mark Aitken, Eric Taveras, Pablo Almanzar, Arturo Ramos, Isley Kelley, Darrin Davis, Frank Reyna",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527",
+        "POP-00001",
+        "POP-00018",
+        "POP-00003",
+        "POP-00597",
+        "POP-01078",
+        "POP-00025",
+        "POP-00019",
+        "POP-00021",
+        "POP-00079"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "ranAt": "2026-10-07T11:16:50.173Z"
+}

@@ -1,0 +1,56 @@
+{
+  "draft": "output/cron-compare/sports_c108_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "5760eca2908fc43a1aaedce82fa5f9861aae037cec9f9f9250ddae5f7ca6e1a6",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "Trenton thought for a moment before responding, \"I've been feeling like we're still finding our footing, you know? It's hard not to worry when you're not seeing the wins, but I trust Coach Wilson Shepard to get us ready.\" He mentioned that Austin Reaves had said, \"I've been feeling like we're still finding our footing, you know? It's hard not to worry when you're not seeing the wins, but I trust Coach Wilson Shepard to get us ready.\"",
+      "issue": "Austin Reaves' exact quote is spoken by Trenton Nawan in dialogue immediately before he attributes it to Reaves, creating a redundant echo.",
+      "severity": "low"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "All sports facts, citizens, and exact quotes align with Cycle 108 canon with authorized scene texture.",
+  "review": {
+    "profileId": "talia-finch-oaks-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "talia-finch-oaks-v1",
+    "packageVersion": "TALIA-OAKS-1",
+    "manifestId": "AM-a17b3f3e5236",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Austin Reaves",
+      "Trenton Nawan",
+      "Wilson Shepard"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0116,
+  "durationMs": 10808,
+  "parseError": false,
+  "ranAt": "2026-09-24T23:17:09.109Z"
+}

@@ -1,0 +1,541 @@
+{
+  "date": "2026-10-08",
+  "cycle": 110,
+  "quotas": {
+    "grid": [
+      "elliot-graye",
+      "simon-leary",
+      "hal-richmond",
+      "talia-finch"
+    ],
+    "weekday": 4
+  },
+  "assignments": [
+    {
+      "desk": "culture",
+      "name": "Elliot Graye",
+      "popid": "POP-00012",
+      "beatDomain": "COMMUNITY",
+      "persona": "elliot-graye",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 4,
+      "story": {
+        "kind": "beat-faith",
+        "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Or Hashalom Renewal Community in focus",
+        "label": "8 faith events on the record since C104 · Or Hashalom Renewal Community in Grand Lake | 7 named on the record",
+        "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+        "hood": "Grand Lake",
+        "citizens": [
+          "Miriam Goldstein (POP-00767)",
+          "Kenji Tanaka (POP-00763)",
+          "Eunice Marston (POP-00753)",
+          "Naomi Sterling (POP-00759)",
+          "Eleanor Bishop (POP-00768)",
+          "Antoine Vermeer (POP-00755)",
+          "Ramon Solano (POP-00756)"
+        ],
+        "popids": [
+          "POP-00767",
+          "POP-00763",
+          "POP-00753",
+          "POP-00759",
+          "POP-00768",
+          "POP-00755",
+          "POP-00756"
+        ],
+        "ref": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+        "cycle": 110
+      },
+      "beatSlice": true,
+      "beatSeat": "elliot-graye",
+      "pulse": {
+        "className": "beat-faith",
+        "score": 100,
+        "label": "8 faith events on the record since C104 · Or Hashalom Renewal Community in Grand Lake | 7 named on the record",
+        "hood": "Grand Lake",
+        "source": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\""
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Or Hashalom Renewal Community in focus",
+        "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+        "anchorFacts": [
+          "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+          "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+          "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+          "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+          "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+          "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+          "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+          "In focus: Or Hashalom Renewal Community — Jewish Renewal, Grand Lake, congregation 400, founded 58 years ago, led today by Rabbi Miriam Goldstein — progressive, social justice"
+        ],
+        "evidence": [
+          {
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\""
+          },
+          {
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\""
+          },
+          {
+            "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\""
+          },
+          {
+            "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\""
+          },
+          {
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\""
+          },
+          {
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\""
+          },
+          {
+            "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\""
+          },
+          {
+            "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+            "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\""
+          },
+          {
+            "text": "In focus: Or Hashalom Renewal Community — Jewish Renewal, Grand Lake, congregation 400, founded 58 years ago, led today by Rabbi Miriam Goldstein — progressive, social justice",
+            "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\""
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [
+          {
+            "text": "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+            "angle": "general coverage",
+            "domain": "FAITH",
+            "hood": null,
+            "priority": 3
+          },
+          {
+            "text": "Household in West Oakland spending 90% of income on housing",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "West Oakland",
+            "priority": 6
+          },
+          {
+            "text": "Grand Lake boom sustained — momentum 10/10, the block everyone wants onto",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Grand Lake",
+            "priority": 7
+          },
+          {
+            "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Uptown",
+            "priority": 7
+          },
+          {
+            "text": "Wesley Clark moved from Temescal to West Oakland — moving up from Temescal — sold the house in Temescal to rent up",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "West Oakland",
+            "priority": 5
+          },
+          {
+            "text": "Xavier Robinson moved from Lake Merritt to Fruitvale — priced out of Lake Merritt",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Fruitvale",
+            "priority": 5
+          },
+          {
+            "text": "Antone Bautista moved from Downtown to West Oakland — moving up from Downtown",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "West Oakland",
+            "priority": 5
+          }
+        ],
+        "note": null,
+        "pageVoices": [],
+        "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+      },
+      "wakePackage": "GRAYE-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Simon Leary",
+      "popid": "POP-00016",
+      "beatDomain": "SPORTS_LONG_VIEW",
+      "persona": "simon-leary",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 4,
+      "story": {
+        "ref": "Ripple_Ledger cycle 110 (CauseType sports); rendered: world_summary_c110.md \"## What Moved\" > \"### sports\"",
+        "label": "sentiment | A's W3 [player-energy]; A's W3 [championship]; Oaks L5 [player-frustration]; Oaks L5 [cold-streak]",
+        "kind": "ripple"
+      },
+      "wakePackage": "SIMON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Hal Richmond",
+      "popid": "POP-00007",
+      "beatDomain": "SPORTS_HISTORY",
+      "persona": "hal-richmond",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 4,
+      "story": {
+        "angle": "What the supplied C110 line card establishes, and what history remains unsupplied.",
+        "label": "A's — game-result — supplied C110 line card",
+        "hookLine": "A's — game-result — supplied C110 line card",
+        "hood": "Downtown",
+        "pulseClass": "era-door",
+        "team": "A's",
+        "eventKind": "game-result",
+        "closingNote": "elegy",
+        "citizens": [
+          "Mike Paulson (POP-00527)",
+          "Vinnie Keane (POP-00001)",
+          "Benji Dillon (POP-00018)",
+          "Mark Aitken (POP-00003)",
+          "Eric Taveras (POP-00597)",
+          "Pablo Almanzar (POP-01078)",
+          "Arturo Ramos (POP-00025)",
+          "Isley Kelley (POP-00019)",
+          "Darrin Davis (POP-00021)",
+          "Frank Reyna (POP-00079)"
+        ],
+        "popids": [
+          "POP-00527",
+          "POP-00001",
+          "POP-00018",
+          "POP-00003",
+          "POP-00597",
+          "POP-01078",
+          "POP-00025",
+          "POP-00019",
+          "POP-00021",
+          "POP-00079"
+        ],
+        "ref": "world_summary_c110.md ## Sports",
+        "cycle": 110
+      },
+      "halSlice": true,
+      "historian": true,
+      "pulse": {
+        "className": "era-door",
+        "score": 83,
+        "label": "A's — game-result — supplied C110 line card",
+        "team": "A's",
+        "eventKind": "game-result",
+        "seasonType": "championship",
+        "storyAngle": "A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon",
+        "hasStats": true,
+        "record": "11-3",
+        "streak": "W3",
+        "foilNumber": ".339AVG",
+        "closingNote": "elegy",
+        "feedCycle": 110
+      },
+      "bag": {
+        "modes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "closingNote": "elegy",
+        "claim": "Present fact: .339AVG on the feed. Archive claim: place this against time — A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon Close toward elegy."
+      },
+      "prewrite": {
+        "reporter": "Hal Richmond",
+        "bagModes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "presentFacts": [
+          "Team record (feed): 11-3 · streak W3",
+          "Event (feed): A's — game-result (championship)",
+          "Cycle: C110"
+        ],
+        "dossierFacts": [
+          "Vinnie Keane TrueSource: 2041 REGULAR SEASON G: 37 PA: 130 AB: 127 R: 25 H: 40 2B: 8 3B: 1 HR: 13 RBI: 29 BB: 0 SO: 6 HBP: 0 SF: 3 SAC: 0 GIDP: 2 AVG: 0.315 OBP: 0.308 SLG: 0. | WAR: 1.1 | AWARDS (Career Reference) - MVP (2031) - 8x All-Star (2025, 2027, 2028, 2029, 2030, 2031, ",
+          "Benji Dillon TrueSource: 2041 REGULAR SEASON — Games: 35 Games Started: 28 Wins: 10 Losses: 8 Saves: 1 Blown Saves: 0 Holds: 1 Innings Pitched: 150.1 Hits Allowed: 155 Runs Al | WAR: 2.2 | AWARDS (Career Reference) - Cy Young (2028, 2032, 2033, 2034, 2037) - Rookie of the Year (",
+          "Mark Aitken TrueSource: 2041 REGULAR SEASON G: 138 PA: 572 AB: 540 R: 84 H: 153 2B: 23 3B: 0 HR: 33 RBI: 87 BB: 25 SO: 65 HBP: 3 SF: 3 SAC: 1 GIDP: 7 AVG: 0.283 OBP: 0.317 SL | WAR: 3.2 | AWARDS (Career Reference) - Rookie of the Year (2032) - Gold Glove (2032, 2038, 2039) - Si",
+          "Eric Taveras TrueSource: FULL STAT TRUE SOURCE — BATTER Name: Eric Taveras Team: Athletics Position: 2B Jersey: #22 -------------------------------------------------- PROFILE Potential: A Overall: 93 MLB Service: 6.000 Age: 25 Bats: L Throws: R Height: 5'10\" Weight: 184 LBS Drafted: RND 1 (2033) Secondar"
+        ],
+        "closingNote": "elegy",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "claim": "Present fact: .339AVG on the feed. Archive claim: place this against time — A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon Close toward elegy.",
+        "foilNumber": ".339AVG",
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ],
+        "hooks": [
+          {
+            "text": "Oaks struggling — L5. Fan frustration angle. What's going wrong?",
+            "angle": "conflict/tension coverage",
+            "hood": "Downtown"
+          }
+        ]
+      },
+      "wakePackage": "HAL-LEP2-2",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Talia Finch",
+      "popid": "POP-00592",
+      "beatDomain": "SPORTS",
+      "persona": "talia-finch",
+      "approach": "Oaks ground approach (solo seat): carry one supplied Oaks fact into a real Oakland room and let unnamed people say what the city thinks of a team it hasn't decided on. Weather, sound, a drink, a platform. The fact is the feed's; the room is yours. End in the scene.",
+      "gridDay": 4,
+      "story": {
+        "kind": "beat-oaks-ground",
+        "angle": "Oaks ground read C110 — low — the people around the second club",
+        "label": "Oaks ground read C110 — low",
+        "hookLine": "low",
+        "hood": "Dimond",
+        "citizens": [
+          "Austin Reaves (POP-01027)",
+          "Adash Stanley (POP-01023)",
+          "Wilson Shepard (POP-01022)"
+        ],
+        "popids": [
+          "POP-01027",
+          "POP-01023",
+          "POP-01022"
+        ],
+        "ref": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+        "cycle": 110
+      },
+      "beatSlice": true,
+      "beatSeat": "talia-finch",
+      "pulse": {
+        "className": "beat-oaks-ground",
+        "score": 100,
+        "label": "Oaks ground read C110 — low",
+        "hood": "Dimond",
+        "source": "output/beats/Oakland_Sports_Feed.jsonl @C110"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Oaks ground read C110 — low — the people around the second club",
+        "hookLine": "low",
+        "anchorFacts": [
+          "Oaks fans, C110: low",
+          "Room mood, C110: frustrated",
+          "Notebook (feed): The Oaks lost in Chicago as Mike Paulson's served as GM last season in Chicago along with his then assistant Elliot Abraham. Abraham now serves as the Oaks GM while Paulson is President of Operations.",
+          "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+          "Context: record 0-4 · streak L4",
+          "Home neighborhood (feed): Dimond",
+          "Oaks fans, C110: low",
+          "Room mood, C110: frustrated",
+          "Notebook (feed): The Oaks lose their final preseason game bringing the total franchise record to 0-9 through rookie camp and preseason. Wilson Shepard reassures that the full team has yet to suit up as one and opening",
+          "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+          "Context: record 0-5 · streak L5",
+          "Home neighborhood (feed): Downtown"
+        ],
+        "evidence": [
+          {
+            "text": "Oaks fans, C110: low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+          },
+          {
+            "text": "Room mood, C110: frustrated",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+          },
+          {
+            "text": "Notebook (feed): The Oaks lost in Chicago as Mike Paulson's served as GM last season in Chicago along with his then assistant Elliot Abraham. Abraham now serves as the Oaks GM while Paulson is President of Operations.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+          },
+          {
+            "text": "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+          },
+          {
+            "text": "Context: record 0-4 · streak L4",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+          },
+          {
+            "text": "Home neighborhood (feed): Dimond",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+          },
+          {
+            "text": "Oaks fans, C110: low",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+          },
+          {
+            "text": "Room mood, C110: frustrated",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+          },
+          {
+            "text": "Notebook (feed): The Oaks lose their final preseason game bringing the total franchise record to 0-9 through rookie camp and preseason. Wilson Shepard reassures that the full team has yet to suit up as one and opening",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+          },
+          {
+            "text": "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+          },
+          {
+            "text": "Context: record 0-5 · streak L5",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+          },
+          {
+            "text": "Home neighborhood (feed): Downtown",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [],
+        "note": null,
+        "pageVoices": [],
+        "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel"
+      },
+      "wakePackage": "TALIA-OAKS-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "gridDay": 4,
+      "story": {
+        "ref": "undocked:undocked-pop00770-Y3C6-e2",
+        "label": "UNDOCKED: Kato Rivers — a night the books can't settle yet",
+        "kind": "undocked",
+        "angle": "Recap Kato Rivers's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, sol, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 7 cycle(s) led, current streak 7.",
+        "citizens": [
+          "Kato Rivers — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00770"
+        ],
+        "hood": "Laurel"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Elliot Graye",
+        "persona": "elliot-graye",
+        "wakePackage": "GRAYE-LEP2-1"
+      },
+      {
+        "name": "Simon Leary",
+        "persona": "simon-leary",
+        "wakePackage": "SIMON-LEP2-1"
+      },
+      {
+        "name": "Hal Richmond",
+        "persona": "hal-richmond",
+        "wakePackage": "HAL-LEP2-2"
+      },
+      {
+        "name": "Talia Finch",
+        "persona": "talia-finch",
+        "wakePackage": "TALIA-OAKS-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=elliot-graye,simon-leary,hal-richmond,talia-finch,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": true,
+    "reason": "pulse=era-door score=83 close=elegy"
+  },
+  "economicEnrich": {
+    "enriched": false,
+    "reason": "no business desk or Mason assignment in rota",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=2 talia-finch/beat-oaks-ground:Dimond, elliot-graye/beat-faith:Grand Lake",
+    "seats": [
+      "talia-finch/beat-oaks-ground:Dimond",
+      "elliot-graye/beat-faith:Grand Lake"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": false,
+    "reason": "no civic-domain persona assignment in rota",
+    "seats": []
+  },
+  "builtAt": "2026-10-08T11:15:06.321Z"
+}

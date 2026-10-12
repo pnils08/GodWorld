@@ -1,0 +1,125 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.7",
+  "canonStatus": "NOT_CANON",
+  "cycle": 110,
+  "generatedAt": "2026-10-08T13:00:06.581Z",
+  "lastAttemptAt": "2026-10-08T13:00:06.581Z",
+  "hours": 36,
+  "packHash": "fc175df7a435450992f94c7477337688dbef6cb56408cbe8a510084f71317df1",
+  "worldSummary": "output/world_summary_c110.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/business_c110_business-desk_packet-v2_openai-gpt-5-6-luna.md"
+    },
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/history/sports_c110_elliot-marbury_packet-v2_anthropic-claude-sonnet-5.cleared.20261008024158.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/business_c110_business-desk_packet-v2_openai-gpt-5-6-luna.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c110_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c110_noah-tan_packet-v2_openai-gpt-5-6-luna.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c110_elliot-marbury_packet-v2_anthropic-claude-sonnet-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c110_p-slayer_packet-v2_x-ai-grok-4-3.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c110_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3.staged-2320.md"
+    }
+  ],
+  "flaggedReports": [
+    "output/cron-compare/flagged/business_c110_business-desk_packet-v2_openai-gpt-5-6-luna.flags.json"
+  ],
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 3,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_6",
+      "REPORTED_THRESHOLD_MET_3"
+    ],
+    "dispositionCounts": {
+      "passed": 6,
+      "rheaFlagged": 0,
+      "neverGated": 0
+    },
+    "fingerprint": "8d2f1c30def12715e7a55e05f7cfbc96b9ed7179d1fa8136db6478028632c226"
+  },
+  "newsroomPulse": {
+    "fingerprint": "7888cf6bc346a764c82459168519ea5f216fba5d8ebf118c6b9fe3cd20b58344",
+    "counts": {
+      "angles": 12,
+      "asks": 5,
+      "fanoutAssignments": 5,
+      "w2Ready": 3,
+      "quotes": 5,
+      "passed": 6,
+      "rheaFlagged": 0,
+      "neverGated": 0,
+      "flagged": 0,
+      "pending": 5
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "dryRun": false,
+  "archiveScope": {
+    "cycles": [
+      109,
+      108
+    ],
+    "sourceIds": [
+      "7d5a94fd-e689-41d6-a444-d266c9ddcafb",
+      "4a9c722e-472c-4bea-bd83-29d12404170a"
+    ]
+  },
+  "boundedSourceHash": "8d261fae9e95c9d6c5ad3b240ba805c82ec742336de5758863e20997054701f0",
+  "boundedSource": "output/notebooklm/daily/c110/fc175df7a435/bounded-newsroom-source.md",
+  "sourceIds": [
+    "94309af1-faf8-4a09-b544-263af6a04a1b"
+  ],
+  "audioDirectionSourceId": "860658e9-121d-47b3-8c8f-bdeca140e5d4",
+  "audioPresentation": {
+    "format": "deep_dive",
+    "length": "default",
+    "source": "router",
+    "profile": "REPORTED_DAY"
+  },
+  "audioArtifactId": "f14afd7e-d0a5-4a3e-9705-f8844d5ba572",
+  "audioPath": "output/notebooklm/daily/c110/fc175df7a435/godworld_daily_c110.m4a",
+  "driveLink": "https://drive.google.com/file/d/1wxKh0776XG-FWH5ocPwcnp_8L_kq5lxw/view?usp=drivesdk",
+  "opsReportArtifactId": "7e7d6762-7a06-45a7-83be-9cc9c342fea5"
+}

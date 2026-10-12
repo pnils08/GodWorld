@@ -1,0 +1,78 @@
+{
+  "office": "mayor_open",
+  "cycle": 108,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle I'm authorizing the Fruitvale Transit Hub design consultant selection and directing my team to publish the Youth Apprenticeship Pipeline's first placement metrics—both milestones that have waited long enough. I'm also advancing the West Oakland Stabilization Fund's month-eight disbursements, completing OARI's District 1 evaluation for expansion, and keeping Baylight and Temescal Health Center on their construction timelines. Four neighborhoods are flashing decline with no city program pointed at them; I'm naming that gap publicly and directing Brenda Okoro to assess which of our existing tools can pivot fastest.",
+  "statements": [
+    {
+      "statementId": "STMT-108-mayor_open-001",
+      "type": "authorization_response",
+      "topic": "Fruitvale Transit Hub Phase II Design Consultant Selection",
+      "initiative": "INIT-003",
+      "decision": "Authorize design consultant selection for Fruitvale Transit Hub Phase II",
+      "quote": "Fruitvale waited forty years for this station to mean something—we're not waiting another day on the design team.",
+      "fullStatement": "This morning I'm authorizing the selection of the design consultant for Fruitvale Transit Hub Phase II. The RFP drew strong competitive response, the community-informed requirements are locked, and the evaluation panel has completed its work. Fruitvale has been a transit-rich neighborhood with transit-poor infrastructure for too long. This consultant award puts us on schedule for environmental clearance by C112 and groundbreaking by C115. The contract will include firm community engagement milestones—no design moves forward without Fruitvale residents seeing it first.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-mayor_open-002",
+      "type": "executive_order",
+      "topic": "Youth Apprenticeship Pipeline Placement Metrics Publication",
+      "initiative": "INIT-007",
+      "decision": "Direct immediate publication of first training cohort placement metrics",
+      "quote": "We promised these young people pathways, not paperwork—now we show the work.",
+      "fullStatement": "I'm directing my Deputy Mayor for Economic Development to publish, within seventy-two hours, the complete placement metrics for the Youth Apprenticeship Pipeline's first training cohort. How many applicants enrolled, how many completed pre-apprenticeship, how many are placed in active job sites, and where—by district, by trade, by employer partner. We opened enrollment with a promise of transparency. These numbers belong to the public, and to the families who trusted us with their sons and daughters. The report will also identify any gap between placement capacity and qualified applicants, so we know where to expand.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-mayor_open-003",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund Month-Eight Disbursement",
+      "initiative": "INIT-001",
+      "decision": "Authorize month-eight disbursement completion and Downtown outreach continuation",
+      "quote": "The fund follows the need—Downtown storefronts are quiet, so that's where we show up now.",
+      "fullStatement": "I'm authorizing the completion of month-eight disbursements for the West Oakland Stabilization Fund and extending the Downtown outreach deployment authorized last cycle. The canvass team has identified eligible households that didn't know the fund existed—landlords who assumed they wouldn't qualify, tenants who thought the program was West Oakland-only. They were wrong, and we're fixing that. Month-eight disbursements will close by end of cycle. The Downtown impact assessment will inform whether we need a geographic expansion of the fund's eligibility criteria in the next budget cycle.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-mayor_open-004",
+      "type": "policy_position",
+      "topic": "Oakland Alternative Response Initiative District Expansion",
+      "initiative": "INIT-002",
+      "decision": "Complete District 1 evaluation and authorize expansion to full citywide deployment",
+      "quote": "Three districts, three protocols, one clear result—OARI works, so OARI grows.",
+      "fullStatement": "The District 1 evaluation of Oakland Alternative Response Initiative is complete, and the data supports what we suspected: response times improved, use-of-force incidents down, community satisfaction up. I'm directing the expansion of OARI to full citywide deployment. West Oakland, Fruitvale, and East Oakland all flagged improvement this cycle—that's not coincidence, that's the protocol working. The $12.5M budget is sufficient for this expansion without additional appropriation. Chief of Staff Cortez will coordinate with OPD and Fire on the revised dispatch matrix. Full deployment by C110.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-mayor_open-005",
+      "type": "public_remark",
+      "topic": "District Crisis and Credit — Fruitvale, Jack London, Grand Lake, Uptown",
+      "initiative": null,
+      "decision": "Publicly name four neighborhoods in daily life decline and direct Deputy Mayor Okoro to assess rapid program pivot",
+      "quote": "Four neighborhoods are hurting and nobody's knocked on their door yet—that ends this week.",
+      "fullStatement": "I'm looking at data that troubles me. Fruitvale, Jack London, Grand Lake, Uptown—daily life visibly declining, mood slipping, storefronts quieter, housing pressure building. And no city program currently pointed at any of them. That's not acceptable to me, and it shouldn't be acceptable to anyone in this building. I'm directing Deputy Mayor Brenda Okoro to assess which of our existing initiatives—Stabilization Fund criteria, OARI deployment sequencing, Apprenticeship Pipeline outreach—can pivot fastest to these four neighborhoods. We have tools. We will use them where they're needed. I expect her preliminary assessment by C109.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-mayor_open-006",
+      "type": "initiative_response",
+      "topic": "Temescal Community Health Center Construction Milestone",
+      "initiative": "INIT-005",
+      "decision": "Acknowledge accelerated timeline and confirm drywall installation proceeds",
+      "quote": "Ahead of schedule on a health center—that's what happens when you fund public infrastructure like it matters.",
+      "fullStatement": "Temescal Community Health Center's MEP rough-ins are certified complete, utility inspections passed ahead of schedule, and drywall installation proceeds this cycle. This project was delayed twice in planning. Now it's running hot because the contractors know we're watching, and because the community made clear what this facility means for mental health access in North Oakland. I want to acknowledge the building trades crews working weekends to keep us on this accelerated path. The fire-rated wall inspections will follow immediately—no gaps between trades. Opening target remains C112.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-mayor_open-007",
+      "type": "initiative_response",
+      "topic": "Baylight District Phase II Site Remediation",
+      "initiative": "INIT-006",
+      "decision": "Confirm site remediation proceeds on schedule",
+      "quote": "Contracts signed, shovels moving, Oakland's future getting built—one remediation truck at a time.",
+      "fullStatement": "Baylight District Phase II site remediation is proceeding on the timeline we committed to Council. The construction contracts executed last cycle have mobilized—soil testing, grading, utility relocation all underway. This is the unglamorous work that has to happen before the stadium steel goes up. I'm monitoring weekly. The environmental review contingencies are clear, the community benefits agreement is binding, and the jobs pipeline is live. Oaklanders will see physical change at the Coliseum site this season. That's not a promise anymore. That's what's happening.",
+      "trackerUpdates": {}
+    }
+  ]
+}

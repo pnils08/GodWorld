@@ -1,0 +1,47 @@
+{
+  "draft": "output/cron-compare/undocked_c109_nia-rook_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "de9293c584e0d2856953950d7d0e4ef7af6973fe974d132a9c473e34dec1df93",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft passes all canon checks with verified citizen resolution and compliant profile texture.",
+  "review": {
+    "profileId": "nia-rook-undocked-recap-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-1",
+    "manifestId": "AM-c93a93f5900f",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Otis Redd"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0089,
+  "durationMs": 5931,
+  "parseError": false,
+  "ranAt": "2026-10-02T23:18:03.017Z"
+}

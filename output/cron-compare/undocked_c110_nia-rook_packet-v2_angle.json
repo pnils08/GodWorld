@@ -1,0 +1,203 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "110",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Recap Aaliyah Brennan's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 2, systems unlisted, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 7 cycle(s) led, current streak 7.",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+    },
+    "signal": {
+      "kind": "undocked",
+      "hood": "Lake Merritt",
+      "score": null,
+      "src": "undocked:undocked-pop00235-Y3C6-e2",
+      "nearby": [
+        {
+          "text": "UNDOCKED: Aaliyah Brennan — up 2 on the night",
+          "src": "undocked:undocked-pop00235-Y3C6-e2"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00235",
+          "name": "Aaliyah Brennan",
+          "profile": "Aaliyah Brennan — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c110.json",
+            "episodeId": "undocked-pop00235-Y3C6-e2",
+            "pop": "POP-00235"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED: Aaliyah Brennan — up 2 on the night",
+        "src": "undocked:undocked-pop00235-Y3C6-e2",
+        "id": "F-a87932c2688f"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00235",
+        "name": "Aaliyah Brennan",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Aaliyah Brennan — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c110.json",
+          "episodeId": "undocked-pop00235-Y3C6-e2",
+          "pop": "POP-00235"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00235-Y3C6-e2",
+      "label": "UNDOCKED: Aaliyah Brennan — up 2 on the night",
+      "kind": "undocked",
+      "angle": "Recap Aaliyah Brennan's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 2, systems unlisted, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 7 cycle(s) led, current streak 7.",
+      "citizens": [
+        "Aaliyah Brennan — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00235"
+      ],
+      "hood": "Lake Merritt"
+    },
+    "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I'm looking at how the city reacts to Aaliyah Brennan's recent performance on UNDOCKED, and how it affects the standings",
+    "plan": {
+      "chase": "I'm looking at how the city reacts to Aaliyah Brennan's recent performance on UNDOCKED, and how it affects the standings",
+      "focus": "The impact of Aaliyah Brennan's episode on the city's conversation",
+      "why": "The city's energy is palpable after the episode, and I want to explore what's driving the discussion",
+      "checks": [
+        "How the episode's outcome affects the standings",
+        "What the city is saying about Aaliyah Brennan's performance"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00235",
+          "question": "What does Aaliyah Brennan's recent success mean for her position in the standings?",
+          "basis": "Her performance on the show"
+        }
+      ],
+      "interpretation": "The city's reaction to the episode will shape the conversation about who's up and who's down",
+      "unverifiedLead": [
+        "The city's excitement about Aaliyah Brennan's performance could lead to a shift in the standings"
+      ],
+      "closeQuestion": "What will be the lasting impact of Aaliyah Brennan's episode on the city's conversation about UNDOCKED?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Aaliyah Brennan — up 2 on the night",
+      "kind": "undocked",
+      "hood": "Lake Merritt",
+      "ref": "undocked:undocked-pop00235-Y3C6-e2",
+      "popids": [
+        "POP-00235"
+      ]
+    }
+  ],
+  "laneEntries": 1,
+  "ranAt": "2026-10-09T11:17:22.920Z"
+}

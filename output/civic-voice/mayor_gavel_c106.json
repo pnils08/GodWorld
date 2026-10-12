@@ -1,0 +1,114 @@
+{
+  "office": "mayor_gavel",
+  "cycle": 106,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "I delivered on seven critical decisions this cycle: cleared the Youth Apprenticeship Pipeline backlog with verified zero backlogs ahead of town hall, accelerated OARI expansion into East Oakland as an emergency response to district incoherence, advanced the Fruitvale Transit Hub to design-phase with merchant-protective conditions, pushed Temescal Health Center to interior framing, celebrated Baylight's council approval moving to contract signing, authorized month-seven Stabilization Fund disbursements with expanded Downtown outreach, and named the Health Center construction team for Temescal's progress. My approval slipped five points because Oaklanders feel the street-level pain I'm seeing too—but we're responding with speed and specificity, not waiting for perfect conditions.",
+  "statements": [
+    {
+      "statementId": "STMT-106-mayor_gavel-001",
+      "type": "authorization_response",
+      "topic": "Youth Apprenticeship Pipeline Backlog Clearance Verification",
+      "initiative": "INIT-007",
+      "decision": "verified complete — zero backlogged applicants confirmed; town hall agenda authorized",
+      "quote": "Every young person in this city deserves a shot, not a runaround—and today, that shot is cleared and ready.",
+      "fullStatement": "This morning I received the final intake verification audit from our workforce development team: the Youth Apprenticeship Pipeline backlog is cleared. Zero applicants waiting. Six agencies processed 847 backlogged files in thirty days because we cut the red tape and held departments accountable. The C106 town hall will proceed with confirmed enrollment slots for every qualified young person who walked through those doors. This is what executive action looks like—identify the blockage, remove it, verify the result. My thanks to the workforce board and the union partners who stepped up intake capacity. Oakland's future workforce is building, and we're not leaving anyone behind.",
+      "trackerUpdates": {
+        "initiative": "INIT-007",
+        "ImplementationPhase": "operational",
+        "MilestoneNotes": "C106: Backlog cleared, zero applicants pending, town hall authorized for enrollment launch",
+        "NextScheduledAction": "Public town hall enrollment event",
+        "NextActionCycle": 106
+      }
+    },
+    {
+      "statementId": "STMT-106-mayor_gavel-002",
+      "type": "executive_order",
+      "topic": "Oakland Alternative Response Initiative Emergency East Oakland Expansion",
+      "initiative": "INIT-002",
+      "decision": "emergency expansion authorized — East Oakland added as expansion district effective immediately",
+      "quote": "When three districts flash incoherence at once, we don't wait for the next budget cycle—we move.",
+      "fullStatement": "The data from District 1 expansion is clear: OARI works. Response times down, community trust up, unnecessary arrests down. But West Oakland, Fruitvale, and East Oakland are all signaling distress at severity levels this office cannot ignore. I'm issuing an executive order to expand OARI into East Oakland immediately, with full pilot protocols and monthly reporting to my office. This is emergency expansion—faster than the original timeline, but with the same accountability framework. Brenda Okoro will coordinate with the Police Chief on dispatch threshold handoffs. Councilmember Rivers will introduce a formal resolution next cycle to make this permanent. We don't let neighborhoods burn while we debate the perfect path forward.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "implementation-active",
+        "MilestoneNotes": "C106: Emergency expansion to East Oakland authorized; District 1 evaluation continues, monthly reporting to Mayor's office",
+        "NextScheduledAction": "East Oakland dispatch protocol deployment",
+        "NextActionCycle": 107
+      }
+    },
+    {
+      "statementId": "STMT-106-mayor_gavel-003",
+      "type": "authorization_response",
+      "topic": "Fruitvale Transit Hub Phase II Design-Phase Kickoff",
+      "initiative": "INIT-003",
+      "decision": "approved — design-phase kickoff authorized with binding District 3 merchant protection covenants",
+      "quote": "Fruitvale's small businesses and vendors aren't just stakeholders—they're the heart of this project, and their protection is non-negotiable.",
+      "fullStatement": "The visioning sessions are complete, the feedback is incorporated, and I'm authorizing the Fruitvale Transit Hub to enter design-phase. This approval comes with binding covenants negotiated with Councilmember Tran: merchant displacement protections, guaranteed affordable vendor space in the final facility, and a local hiring floor of 40% for construction and permanent operations. The $230 million we spend here will circulate through Fruitvale businesses, not around them. I've directed my economic development team to begin merchant outreach immediately—no surprises, no displacement without mitigation. This is infrastructure that builds wealth where it's needed, not where it's already concentrated.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C106: Design-phase kickoff approved with binding merchant protection covenants; outreach to District 3 businesses initiated",
+        "NextScheduledAction": "Merchant covenant signing and design RFP release",
+        "NextActionCycle": 107
+      }
+    },
+    {
+      "statementId": "STMT-106-mayor_gavel-004",
+      "type": "authorization_response",
+      "topic": "Temescal Community Health Center Interior Framing and Inspections",
+      "initiative": "INIT-005",
+      "decision": "approved — progression to interior wall framing and utility inspections authorized",
+      "quote": "Somebody's work is paying off in Temescal—let's name whose: the construction crews hitting schedule, the community that demanded this, and the city that delivered.",
+      "fullStatement": "The structural frame is up ahead of schedule at the Temescal Community Health Center, and I'm authorizing the next phase: interior wall framing and utility inspections. This $45 million investment is moving because we planned it right and we're building it right. The second shift is paying off—MEP rough-ins are advancing faster than baseline, and we're on track for utility inspections this cycle. I want to name the credit here: the Alameda Health System team managing this build, the union crews working double shifts, and the Temescal neighbors who fought for this facility when it was just a line item. This is what Oakland looks like when we build together—ahead of schedule, on budget, and for the people who need it.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C106: Interior wall framing and utility inspections authorized; MEP rough-ins advancing with second shift",
+        "NextScheduledAction": "Utility inspections and interior systems rough-in completion",
+        "NextActionCycle": 107
+      }
+    },
+    {
+      "statementId": "STMT-106-mayor_gavel-005",
+      "type": "initiative_response",
+      "topic": "Baylight District Phase II Bid Final Council Vote",
+      "initiative": "INIT-006",
+      "decision": "celebrated and advanced — construction planning phase active, contract signing proceeding",
+      "quote": "This is Oakland's future being built—by Oaklanders, for Oaklanders, and nobody's taking that from us.",
+      "fullStatement": "The council voted, and Baylight moves forward. Phase II bid is approved, and we're now in construction planning with contract signing on the calendar. This $2.1 billion bet on Oakland's future just became real money, real jobs, and real neighborhood transformation. I want to be clear about what this vote meant: it meant the skeptics didn't win, the auditors didn't delay us into irrelevance, and Oakland chose to build rather than shrink. The Jack London and Downtown improvement signals we're seeing—they're early fruit. Construction planning means we're selecting the local hiring partners, finalizing the community benefits package, and preparing the site. This is my legacy, and it's Oakland's win. We're not looking back.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-planning",
+        "MilestoneNotes": "C106: Final council approval received; construction planning active, contract signing in progress",
+        "NextScheduledAction": "Contract execution and site preparation mobilization",
+        "NextActionCycle": 107
+      }
+    },
+    {
+      "statementId": "STMT-106-mayor_gavel-006",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund Month-Seven Disbursement",
+      "initiative": "INIT-001",
+      "decision": "approved — month-seven disbursement batch authorized with expanded Downtown outreach capacity",
+      "quote": "Month seven means another round of families staying in their homes instead of getting pushed out—and we're not stopping at the district line.",
+      "fullStatement": "I'm approving the month-seven disbursement batch for the West Oakland Stabilization Fund: twelve more households stabilized, bringing our total to sixty-nine families who kept their homes because we intervened. But I'm also directing Brenda Okoro's team to expand outreach capacity toward Downtown Oakland, based on the storefront decline signals we're seeing there. The canvass we launched last month found households who didn't know this fund existed—who were one rent hike from leaving. We're not just cutting checks; we're walking blocks, knocking doors, making sure people who qualify know the money is there. The $28 million we allocated is working, and where it's working, we're expanding. Housing stability isn't a West Oakland issue or a Downtown issue—it's an Oakland issue, and we're treating it that way.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C106: Month-seven batch approved (12 households, total 69); Downtown outreach expansion authorized per storefront decline signals",
+        "NextScheduledAction": "Month-eight disbursement review and Downtown canvass deployment",
+        "NextActionCycle": 107
+      }
+    },
+    {
+      "statementId": "STMT-106-mayor_gavel-007",
+      "type": "public_remark",
+      "topic": "District Crisis and Credit — San Antonio and Temescal",
+      "initiative": null,
+      "decision": "named credit for Temescal progress; acknowledged San Antonio conditions with directed response",
+      "quote": "Temescal's mood is up because we built something there—San Antonio's next if we keep delivering.",
+      "fullStatement": "I want to name what I see this cycle. Temescal's mood is clearly upbeat, street trade is busy, and that's not accidental—that's the Health Center construction, the local hiring, the visible investment that tells a neighborhood the city hasn't forgotten it. The credit belongs to the Alameda Health System crews, the Building Trades Council members working those shifts, and the community partners who kept pressure on. San Antonio is different: mood upbeat but trade slow, which means opportunity isn't reaching the street yet. I'm directing my economic development team to assess San Antonio corridor conditions and report back with targeted intervention options by C108. We celebrate wins where we see them, and we close gaps where we find them. That's how you run a city—not by hoping conditions improve, but by naming them and moving on them.",
+      "trackerUpdates": {}
+    }
+  ]
+}

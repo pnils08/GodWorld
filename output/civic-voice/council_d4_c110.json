@@ -1,0 +1,38 @@
+{
+  "office": "council_d4",
+  "cycle": 110,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I am focusing on addressing the pressing concerns of my constituents in D4, prioritizing targeted investment and fiscal discipline. I support the Mayor's initiatives, including the Downtown Economic Revitalization and the Ivy Hill infrastructure crisis response. I also recognize the progress in Glenview and will ensure it receives the attention it deserves.",
+  "statements": [
+    {
+      "statementId": "STMT-110-council_d4-001",
+      "type": "vote_statement",
+      "topic": "Downtown Economic Revitalization",
+      "initiative": "INIT-008",
+      "decision": "YES",
+      "quote": "Targeted investment and fiscal discipline are crucial for our city's growth, and I believe the Downtown Economic Revitalization initiative aligns with these principles.",
+      "fullStatement": "As the representative of D4, I am committed to supporting initiatives that promote economic growth and development in our city. The Downtown Economic Revitalization initiative, with its focus on commercial vacancy relief and expedited permitting, has the potential to make a positive impact on our local businesses. I will vote in favor of this initiative, as it aligns with my commitment to targeted investment and fiscal discipline.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d4-002",
+      "type": "statement",
+      "topic": "Ivy Hill Infrastructure Crisis",
+      "initiative": null,
+      "decision": "SUPPORT",
+      "quote": "When a neighborhood needs help, we must show up with solutions, not just speeches.",
+      "fullStatement": "The high-severity public-works spike in Ivy Hill requires immediate attention. I support the Mayor's decision to prioritize Ivy Hill infrastructure assessment and deploy an emergency response team. As the representative of D4, I will work to ensure that our district receives the necessary resources to address this crisis.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d4-003",
+      "type": "statement",
+      "topic": "Glenview Progress",
+      "initiative": null,
+      "decision": "RECOGNIZE",
+      "quote": "The progress in Glenview is a testament to the city's structured support and the people's resilience.",
+      "fullStatement": "I would like to recognize the progress made in Glenview, where the mood is clearly upbeat and street trade is slow. As the representative of D4, I will ensure that Glenview continues to receive the attention it deserves, with a focus on targeted investment and fiscal discipline.",
+      "trackerUpdates": {}
+    }
+  ]
+}

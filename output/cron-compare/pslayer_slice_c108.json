@@ -1,0 +1,312 @@
+{
+  "cycle": 108,
+  "builtAt": "2026-09-25T11:15:07.293Z",
+  "empty": false,
+  "journalist": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "persona": "p-slayer"
+  },
+  "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+  "pulse": {
+    "className": "injury-load",
+    "classes": [
+      "prospect-callup",
+      "injury-load",
+      "result-pulse",
+      "loss",
+      "win-streak"
+    ],
+    "score": 70,
+    "label": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+    "team": "A's",
+    "eventKind": "game-result",
+    "seasonType": "playoffs",
+    "feedCycle": 108,
+    "record": "4-1",
+    "streak": "W1",
+    "mood": "dominant",
+    "fanSentiment": "high",
+    "neighborhood": "Downtown",
+    "notes": "Game 4 Minnesota hosts A's trying to avoid the sweep. After an impressive season in their own right winning 103 games, the Minnesota Twins face one last challenge. John Ellis just pitched a complete game shut out to close out NY in the ALDS. However things would be a little different this time around as Ellis would struggle mightly giving up 5 ER in route to a loss. To make matters worse Twins sta",
+    "stats": "Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI"
+  },
+  "charge": {
+    "bagModes": [
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      },
+      {
+        "id": 6,
+        "name": "Superman We Asked Him to Be"
+      },
+      {
+        "id": 7,
+        "name": "We Still Believe / We're Done"
+      }
+    ],
+    "fanCharge": "grief",
+    "foilNumber": "9IP",
+    "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+    "palette": [
+      "fury",
+      "euphoria",
+      "dread",
+      "defiance",
+      "confession",
+      "grief",
+      "dare"
+    ]
+  },
+  "prewrite": {
+    "reporter": "P.Slayer",
+    "bagModes": [
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      },
+      {
+        "id": 6,
+        "name": "Superman We Asked Him to Be"
+      },
+      {
+        "id": 7,
+        "name": "We Still Believe / We're Done"
+      }
+    ],
+    "fanCharge": "grief",
+    "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+    "anchorFacts": [
+      "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+      "Team record (feed): 4-1 · streak W1",
+      "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+      "Event: A's — game-result (playoffs)"
+    ],
+    "foilNumber": "9IP",
+    "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+    "hooks": [
+      {
+        "text": "PLAYOFFS: Championship stakes. Fan fever, watch parties, team coverage. All-hands sports desk.",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      },
+      {
+        "text": "Multiple sports signals detected. Could be coincidence or early pattern.",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      }
+    ]
+  },
+  "hooks": [
+    {
+      "text": "PLAYOFFS: Championship stakes. Fan fever, watch parties, team coverage. All-hands sports desk.",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    },
+    {
+      "text": "Multiple sports signals detected. Could be coincidence or early pattern.",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "ea8f295f",
+      "hood": "Citywide",
+      "citizens": [
+        "POP-00029 Alisha Peña",
+        "POP-00107 Giuseppe Santiago",
+        "POP-00121 Otis Redd",
+        "POP-00126 Orion Kerkering",
+        "POP-00148 Gordon Tate",
+        "POP-00165 Arman Gutierrez"
+      ],
+      "businesses": [],
+      "angle": "conflict/tension coverage"
+    },
+    {
+      "seedId": "03f4b693",
+      "hood": "Rockridge",
+      "citizens": [
+        "POP-00019 Isley Kelley",
+        "POP-00045 Eric Clove",
+        "POP-00194 Yu Zen",
+        "POP-00556 Renata Voss"
+      ],
+      "businesses": [
+        "BIZ-00170 College Avenue Dental",
+        "BIZ-00169 Claremont Table"
+      ],
+      "angle": "conflict/tension coverage"
+    }
+  ],
+  "friction": {
+    "a": "Human cost / load on the feed",
+    "b": "We still ask him to be Superman",
+    "frame": "Grief without inventing medical private life — we demanded too much."
+  },
+  "priorTakes": [],
+  "story": {
+    "ref": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads ",
+    "label": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+    "kind": "injury-load",
+    "angle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+    "hookLine": "Grief without inventing medical private life — we demanded too much.",
+    "hood": "Downtown",
+    "team": "A's",
+    "eventKind": "game-result",
+    "popids": [
+      "POP-01078",
+      "POP-00597",
+      "POP-00033"
+    ],
+    "citizens": [
+      "Pablo Almanzar — SP / Oakland A's, Jack London",
+      "Eric Taveras — Second Baseman, Oakland A's, Downtown",
+      "John Ellis — Starting Pitcher, Oakland A's, Laurel",
+      "Minnesota Twins"
+    ],
+    "pulseClass": "injury-load",
+    "pulseScore": 70,
+    "fanCharge": "grief",
+    "bagModeIds": [
+      3,
+      6,
+      7
+    ]
+  },
+  "players": [
+    {
+      "name": "Pablo Almanzar",
+      "popid": "POP-01078",
+      "role": "SP / Oakland A's",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    },
+    {
+      "name": "Eric Taveras",
+      "popid": "POP-00597",
+      "role": "Second Baseman, Oakland A's",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "John Ellis",
+      "popid": "POP-00033",
+      "role": "Starting Pitcher, Oakland A's",
+      "neighborhood": "Laurel",
+      "why": "feed-names"
+    },
+    {
+      "name": "Minnesota Twins",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "Downtown",
+    "record": "4-1",
+    "streak": "W1",
+    "mood": "dominant",
+    "fanSentiment": "high",
+    "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+  },
+  "candidates": [
+    {
+      "score": 70,
+      "cycle": 108,
+      "team": "A's",
+      "primary": "injury-load",
+      "angle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 h",
+      "priorHits": 0
+    },
+    {
+      "score": 57,
+      "cycle": 106,
+      "team": "A's",
+      "primary": "roster-move",
+      "angle": "Refelecting on the players traded this past season",
+      "priorHits": 0
+    },
+    {
+      "score": 54,
+      "cycle": 108,
+      "team": "Oaks",
+      "primary": "loss",
+      "angle": "The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+      "priorHits": 0
+    },
+    {
+      "score": 53,
+      "cycle": 108,
+      "team": "A's",
+      "primary": "win-streak",
+      "angle": "Through 3 games the A's lead the Twins 3-0. Game 1 As (6) Twins (2), Game 2 As (3) Twins (2), Game 3 As (9) Twins (6).",
+      "priorHits": 0
+    },
+    {
+      "score": 52,
+      "cycle": 108,
+      "team": "A's",
+      "primary": "win-streak",
+      "angle": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+      "priorHits": 0
+    },
+    {
+      "score": 49,
+      "cycle": 108,
+      "team": "A's",
+      "primary": "win-streak",
+      "angle": "Eric Taveras win Post Season MVP",
+      "priorHits": 0
+    },
+    {
+      "score": 39,
+      "cycle": 106,
+      "team": "Oaks",
+      "primary": "loss",
+      "angle": "The Oaks end the preseason 0-4 but are optimistic for the season ahead",
+      "priorHits": 0
+    },
+    {
+      "score": 36,
+      "cycle": 107,
+      "team": "A's",
+      "primary": "win-streak",
+      "angle": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+      "priorHits": 0
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c108.md ## Sports",
+    "output/desk_signal_c108.json lanes.sports",
+    "docs/media/P_SLAYER_CHARGE_BAG.md",
+    "docs/media/voices/p_slayer.md",
+    "docs/media/P_SLAYER_JOURNEY_INDEX.md",
+    "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads ",
+    "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+  ],
+  "gaps": {
+    "note": "What would deepen fan-heat further",
+    "missingOrThin": [
+      {
+        "source": "cp-POP-00008 live wall at build time",
+        "status": "wake-time",
+        "why": "reporterWall injects at cron angle; slice uses on-disk prior columns so build stays offline"
+      },
+      {
+        "source": "As_Roster live line for foil",
+        "status": "feed-stats-proxy",
+        "why": "FoilNumber parsed from feed Stats/Notes; live roster sheet would refine without inventing"
+      },
+      {
+        "source": "TrueSource / truesource injury windows",
+        "status": "partial",
+        "why": "Injury-load class relies on feed wording; card detail would strengthen Superman mode"
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "initiative": "INIT-001",
+  "initiativeId": "INIT-001",
+  "cycle": 106,
+  "primaryVoice": "Mayor gavel (mayor_gavel-006)",
+  "consolidatedFrom": [
+    "STMT-106-mayor_gavel-006 (Mayor gavel — West Oakland Stabilization Fund Month-Seven Disbursement)",
+    "STMT-106-stabilization_fund-001 (Webb — Month-seven disbursement execution)",
+    "STMT-106-stabilization_fund-002 (Webb — West Oakland vitality)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-001",
+    "ImplementationPhase": "disbursement-active",
+    "MilestoneNotes": "C106: Month-seven batch approved (12 households, total 69); Downtown outreach expansion authorized per storefront decline signals",
+    "NextScheduledAction": "Month-eight disbursement review and Downtown canvass deployment",
+    "NextActionCycle": 107
+  }
+}

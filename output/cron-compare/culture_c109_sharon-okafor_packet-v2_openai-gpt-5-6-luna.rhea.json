@@ -1,0 +1,67 @@
+{
+  "draft": "output/cron-compare/culture_c109_sharon-okafor_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "5e87d129de18992e5dfa8d061e4d798103c32f4898e18f6511ca2d63a90c19d1",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Lena Cross belongs to Lake Merritt",
+      "issue": "Contradicts ledger profile bio ground truth; Lena Cross resides in Piedmont Ave, not Lake Merritt.",
+      "severity": "high"
+    },
+    {
+      "claim": "Rowan Pierce, a journalist in KONO",
+      "issue": "Contradicts ledger profile bio ground truth; Rowan Pierce resides in Piedmont Ave, not KONO.",
+      "severity": "high"
+    },
+    {
+      "claim": "Marin Tao, in San Antonio",
+      "issue": "Contradicts ledger profile bio ground truth; Marin Tao resides in Chinatown, not San Antonio.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 3,
+  "highSeverityCount": 3,
+  "summary": "Multiple citizen neighborhood assignments directly contradict canonical ledger profile data.",
+  "review": {
+    "profileId": "sharon-behavior-ground-v1",
+    "canonIntegrity": "fail",
+    "texture": "overreach"
+  },
+  "reviewProfile": {
+    "id": "sharon-behavior-ground-v1",
+    "packageVersion": "SHARON-LEP2-1",
+    "manifestId": "AM-e4fb261464b8",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Lena Cross",
+      "Marin Tao",
+      "Rico Valez",
+      "Rowan Pierce"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0106,
+  "durationMs": 9693,
+  "parseError": false,
+  "ranAt": "2026-10-03T17:02:11.687Z"
+}

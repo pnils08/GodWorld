@@ -1,0 +1,38 @@
+{
+  "office": "council_d1",
+  "cycle": 109,
+  "speaker": "Denise Carter",
+  "cascadeSummary": "This cycle, I prioritized supporting West Oakland's revitalization through the Stabilization Fund expansion and ensuring equitable access to alternative response services in District 1. I also celebrated Brooklyn's community-driven success and reaffirmed my commitment to addressing displacement where it hits hardest.",
+  "statements": [
+    {
+      "statementId": "STMT-109-council_d1-001",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund",
+      "initiative": "INIT-001",
+      "decision": "Expand the Stabilization Fund's Downtown outreach to accelerate support for displaced residents.",
+      "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+      "fullStatement": "The month-eight disbursement of the West Oakland Stabilization Fund marks a critical step in our ongoing effort to revitalize the neighborhood. The Downtown outreach assessment shows promising engagement, but the real test will be sustaining momentum beyond the initial canvass. We need to ensure that the funds directly impact residents and businesses in West Oakland, particularly those most affected by displacement. Expansion is not just an option—it's a necessity.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d1-002",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative",
+      "initiative": "INIT-002",
+      "decision": "Approve permanent dispatch expansion based on District 1 evaluation results.",
+      "quote": "Three districts, three protocols, one clear result—OARI works, so OARI grows.",
+      "fullStatement": "The District 1 evaluation of the Oakland Alternative Response Initiative confirms what we've seen in other districts: OARI works. Call diversion rates are up, response times are down, and residents feel safer knowing they have access to non-police resources. Permanent expansion isn't just justified—it's overdue.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d1-003",
+      "type": "cascade_statement",
+      "topic": "District Crisis and Credit",
+      "initiative": null,
+      "decision": "Celebrate Brooklyn's community-driven success and reaffirm commitment to West Oakland revitalization.",
+      "quote": "Brooklyn’s vitality comes from its people—not City Hall’s policies.",
+      "fullStatement": "Brooklyn's success this cycle is a testament to the strength of its community. The crime drop, the steady street trade, the tangible sense of hope—that's all civic engagement, not City Hall directives. Meanwhile, West Oakland's revitalization is gaining momentum thanks to the Stabilization Fund, but there's still work to do. We owe it to the residents who kept this neighborhood alive to keep pushing.",
+      "trackerUpdates": {}
+    }
+  ]
+}

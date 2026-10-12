@@ -1,0 +1,67 @@
+{
+  "draft": "output/cron-compare/business_c110_business-desk_packet-v2-eval_anthropic-claude-opus-5-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "b21d889665a35abec55daf0df485c5c5d96211f91ffbde22eff7819484eb4ce9",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Verified: All citizen roles, employers, quotes, and economic data points match canonical ledger records and packet provenance.",
+  "review": {
+    "profileId": "jordan-economic-labor-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-1",
+    "manifestId": "AM-62c6b980c93c",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "900",
+          "000"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Andre Turner",
+      "Jordan Velez",
+      "Nina Rines",
+      "Priya Nair",
+      "Sarah Huang",
+      "Theodore Lindqvist",
+      "Tobias Jurko"
+    ],
+    "unverified": [
+      "Atlas Bay Architects",
+      "Bay Tribune Business Desk",
+      "Miso Metro",
+      "Pacific Standard Architecture"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0103,
+  "durationMs": 4055,
+  "parseError": false,
+  "ranAt": "2026-10-07T06:26:52.473Z"
+}

@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-20",
-  "updatedBy": "buildInitiativePackets.js (auto)",
+  "lastUpdated": "2026-10-12",
+  "updatedBy": "initiativeTrackerSnapshot.js (live tab, civic tick 2026-10-12T04:17:03.523Z)",
   "initiatives": [
     {
       "id": "INIT-001",
@@ -17,10 +17,16 @@
       "implementation": {
         "status": "disbursement-active",
         "phase": "disbursement-active",
-        "summary": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.",
-        "nextScheduledAction": "Month-eight disbursement completion and Downtown outreach impact assessment",
-        "nextActionCycle": 108
-      }
+        "summary": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing — Stabilization Fund, disbursement-active since C78 (economic — not playable, no Delivering gate yet; the untended clock still runs). | C108 retag economic→housing (ruled 2026-09-22 — the Fund is a household anti-displacement fund in canon; engine.255 wires it as the first budgeted disbursement).\nC108: scope recorded as chartered — stabilization grants for long-tenure West Oakland residents priced out as the flats built out (the remnant the charter named), not hood-wide relief; 47 checks (~$4.2M) disbursed under Deputy Mayor Okoro’s authority C84–C90; authorization $28M, ~$23.8M remaining.\nC108: retag reversed — housing→economic (the 2026-09-22 retag was engine-sheet error; the Fund is not a housing fund).\nC109 scope correction: the Fund serves West Oakland businesses and residents. The C107 'Downtown canvass' line and the C108 'residents only' reading are superseded.\nC109: month-eight tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.\nC110: Month-nine disbursement $400K approved; 23-day avg processing time achieved\nC111: Month-ten disbursement $400K approved; 23-day processing standard maintained.",
+        "nextScheduledAction": "Month-eleven disbursement review",
+        "nextActionCycle": 112
+      },
+      "stage": "Standing",
+      "state": "Standing — no delivering gate exists for this domain yet",
+      "opensCycle": null,
+      "lastStageChangeCycle": 108,
+      "lastWorkCycle": 111,
+      "budgetRemaining": 22600000
     },
     {
       "id": "INIT-002",
@@ -39,17 +45,23 @@
       "implementation": {
         "status": "dispatch-live",
         "phase": "dispatch-live",
-        "summary": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.",
-        "nextScheduledAction": "District 1 evaluation completion and potential expansion decision",
-        "nextActionCycle": 108
-      }
+        "summary": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.\nC108 conversion: Stage Standing — OARI, dispatch-live, signed C82 (safety — not playable until the safety lever lands; the untended clock still runs).\nC109: Expanded to District 1 with evaluation metrics",
+        "nextScheduledAction": "Quarterly outcome report",
+        "nextActionCycle": 112
+      },
+      "stage": "Standing",
+      "state": "Standing — no delivering gate exists for this domain yet",
+      "opensCycle": null,
+      "lastStageChangeCycle": 108,
+      "lastWorkCycle": 111,
+      "budgetRemaining": 12019230.76
     },
     {
       "id": "INIT-003",
       "name": "Fruitvale Transit Hub Phase II — Visioning",
       "keywords": [],
-      "status": "visioning-complete",
-      "voteCycle": 94,
+      "status": "passed",
+      "voteCycle": 86,
       "vote": "COMPLETED",
       "budget": "$230M",
       "domain": "transit",
@@ -59,10 +71,16 @@
       "implementation": {
         "status": "design-phase",
         "phase": "design-phase",
-        "summary": "C107: Merchant covenants executed, design RFP published with community-informed requirements",
-        "nextScheduledAction": "Design consultant selection",
-        "nextActionCycle": 108
-      }
+        "summary": "C107: Merchant covenants executed, design RFP published with community-informed requirements\nC108 conversion: no council passage on record (VoteCycle 94, Outcome COMPLETED, Status visioning-complete) — enters petition-pending; history above kept, VoteCycle cleared.\nC108 conversion: Stage Proposed — Fruitvale transit hub never had a council vote (builder ruling 2026-09-21): petition-pending, history kept, vote via petition band or a call-vote move.\nC109: Mayer & Associates contracted with community oversight provisions\nC110: Preliminary schematics review authorized; Mayer & Associates contracted with community oversight\nC111: Advanced from visioning to design-phase; schematics delivery mandated Cycle 114.\nC111 correction: the council authorized Phase II at C86 ($230M budget, visioning framework binding, design consultant RFP to follow; projected 6-3). The C108 \"no council passage on record\" line was wrong. Vote restored at C86; no stage.",
+        "nextScheduledAction": "Preliminary schematics community review",
+        "nextActionCycle": 114
+      },
+      "stage": null,
+      "state": null,
+      "opensCycle": null,
+      "lastStageChangeCycle": 108,
+      "lastWorkCycle": 111,
+      "budgetRemaining": 230000000
     },
     {
       "id": "INIT-005",
@@ -77,12 +95,18 @@
         "Temescal"
       ],
       "implementation": {
-        "status": "construction-active",
-        "phase": "construction-active",
-        "summary": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule",
-        "nextScheduledAction": "Drywall installation and fire-rated wall inspections",
-        "nextActionCycle": 108
-      }
+        "status": "operational",
+        "phase": "operational",
+        "summary": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal health center, construction-active since C80 (health — playable; delivers once a treating phase moves hood Sick against its conversion baseline).\nC109: opened — construction complete, open to the public.\nC109: Opened 2 weeks early, $1.2M under budget\nC111: Implemented pre-opening clinical intake workflow audits and expenditure reconciliations per D7 directive",
+        "nextScheduledAction": "First quarter utilization review",
+        "nextActionCycle": 113
+      },
+      "stage": "Standing",
+      "state": "Standing — delivers when Sick moves down against its baseline",
+      "opensCycle": 88,
+      "lastStageChangeCycle": 108,
+      "lastWorkCycle": 111,
+      "budgetRemaining": 17307692.3
     },
     {
       "id": "INIT-006",
@@ -98,12 +122,18 @@
         "Downtown"
       ],
       "implementation": {
-        "status": "construction-planning",
-        "phase": "construction-planning",
-        "summary": "C107: Construction contracts executed; site preparation mobilization begins",
-        "nextScheduledAction": "Phase II site remediation",
-        "nextActionCycle": 108
-      }
+        "status": "construction-active",
+        "phase": "construction-active",
+        "summary": "C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent oversight\nC111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight.",
+        "nextScheduledAction": "Construction milestone review",
+        "nextActionCycle": 115
+      },
+      "stage": null,
+      "state": null,
+      "opensCycle": null,
+      "lastStageChangeCycle": null,
+      "lastWorkCycle": 111,
+      "budgetRemaining": 2100000000
     },
     {
       "id": "INIT-007",
@@ -120,12 +150,122 @@
         "Fruitvale"
       ],
       "implementation": {
-        "status": "operational",
-        "phase": "operational",
-        "summary": "C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established.",
-        "nextScheduledAction": "First training cohort placement review",
-        "nextActionCycle": 108
-      }
+        "status": "implementation-active",
+        "phase": "implementation-active",
+        "summary": "C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established.\nC111: First cohort placement report mandated for Cycle 112; implementation accountability enforced.",
+        "nextScheduledAction": "First cohort placement report delivery",
+        "nextActionCycle": 112
+      },
+      "stage": null,
+      "state": null,
+      "opensCycle": null,
+      "lastStageChangeCycle": null,
+      "lastWorkCycle": null,
+      "budgetRemaining": 12500000
+    },
+    {
+      "id": "INIT-008",
+      "name": "Downtown Economic Revitalization",
+      "keywords": [],
+      "status": "proposed",
+      "voteCycle": null,
+      "vote": null,
+      "budget": "$15M",
+      "domain": "economic",
+      "neighborhoods": [
+        "Downtown"
+      ],
+      "implementation": {
+        "status": "legislation-filed",
+        "phase": "legislation-filed",
+        "summary": "C110: Ordinance filed with City Clerk; $15M authorization pending council\nC111: Emergency Economic Development Committee hearing called for Cycle 112.",
+        "nextScheduledAction": "Committee hearing and referral",
+        "nextActionCycle": 112
+      },
+      "stage": "Proposed",
+      "state": "Proposed — a passed council vote funds it",
+      "opensCycle": null,
+      "lastStageChangeCycle": null,
+      "lastWorkCycle": null,
+      "budgetRemaining": 15000000
+    },
+    {
+      "id": "INIT-009",
+      "name": "Commercial Stabilization for Grand Lake",
+      "keywords": [],
+      "status": "proposed",
+      "voteCycle": null,
+      "vote": null,
+      "budget": "$2.5M",
+      "domain": "economic",
+      "neighborhoods": [
+        "Grand Lake"
+      ],
+      "implementation": {
+        "status": "legislation-filed",
+        "phase": "legislation-filed",
+        "summary": "C111: Referred to Economic Development Committee with mandatory milestone reporting and audit criteria.",
+        "nextScheduledAction": "Committee hearing and vote",
+        "nextActionCycle": 112
+      },
+      "stage": "Proposed",
+      "state": "Proposed — a passed council vote funds it",
+      "opensCycle": null,
+      "lastStageChangeCycle": null,
+      "lastWorkCycle": null,
+      "budgetRemaining": 2500000
+    },
+    {
+      "id": "INIT-010",
+      "name": "West Oakland Tenant Defense Fund",
+      "keywords": [],
+      "status": "pending-vote",
+      "voteCycle": 112,
+      "vote": null,
+      "budget": "$4.2M",
+      "domain": "economic",
+      "neighborhoods": [
+        "West Oakland"
+      ],
+      "implementation": {
+        "status": "vote-scheduled",
+        "phase": "vote-scheduled",
+        "summary": "C111: Referred to Housing and Community Development Committee with legal support analysis.",
+        "nextScheduledAction": "Committee hearing and vote",
+        "nextActionCycle": 112
+      },
+      "stage": "Proposed",
+      "state": "Proposed — a passed council vote funds it",
+      "opensCycle": null,
+      "lastStageChangeCycle": null,
+      "lastWorkCycle": null,
+      "budgetRemaining": 4200000
+    },
+    {
+      "id": "INIT-011",
+      "name": "Ivy Hill Revitalization Initiative",
+      "keywords": [],
+      "status": "proposed",
+      "voteCycle": null,
+      "vote": null,
+      "budget": "$2.5M",
+      "domain": "economic",
+      "neighborhoods": [
+        "Ivy Hill"
+      ],
+      "implementation": {
+        "status": "announced",
+        "phase": "announced",
+        "summary": "",
+        "nextScheduledAction": "legislation-filed",
+        "nextActionCycle": 111
+      },
+      "stage": "Proposed",
+      "state": "Proposed — a passed council vote funds it",
+      "opensCycle": null,
+      "lastStageChangeCycle": null,
+      "lastWorkCycle": null,
+      "budgetRemaining": null
     }
   ]
 }

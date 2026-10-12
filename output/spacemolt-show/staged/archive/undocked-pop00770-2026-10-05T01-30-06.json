@@ -1,0 +1,153 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00770-2026-10-05T01-30-06",
+  "popid": "POP-00770",
+  "holder": "Kato Rivers",
+  "session": "undocked-pop00770",
+  "window": {
+    "startedAt": "2026-10-05T01:30:06.534Z",
+    "endedAt": "2026-10-05T01:36:49.079Z"
+  },
+  "runner": {
+    "turns": 19,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 3,
+    "estCostUsd": 0.0295,
+    "tokensIn": 207989,
+    "tokensOut": 1210,
+    "log": "output/spacemolt-show/episodes/undocked-pop00770-2026-10-05T01-30-06.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-05T01:36:50.314Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "note": "no credit fields on windowed entries",
+      "value": null
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "alpha_centauri"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "combat": 0,
+        "navigation": 1,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 175151147,
+            "created_at": "2026-10-05T01:33:34Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Alpha Centauri",
+            "data": {
+              "arrival_poi": "alpha_centauri_a",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "alpha_centauri",
+              "to_system_name": "Alpha Centauri"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 175157365,
+            "created_at": "2026-10-05T01:36:49Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "KatoRivers logged in",
+            "data": {
+              "last_login_at": "2026-10-05T01:30:08Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 175147637,
+            "created_at": "2026-10-05T01:30:08Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "KatoRivers logged in",
+            "data": {
+              "last_login_at": "2026-10-05T01:30:06Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 2,
+    "listed": 2,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-05 01:36:49",
+        "text": "[Session Handoff] - Currently docked at Alpha Centauri Colonial Station after failed mining attempt\n- Next step: Undock and jump back to Sol system (fuel available: 99)\n- Status: 500cr, empty cargo hold, no mining equipment for ice fields  \n- Recent events: \n  - Depleted Main Belt in Sol\n  - Jumped to Alpha Centauri but couldn't mine ice (no harvester)\n  - Recently unlocked \"Maiden Jump\" and \"First Steps\" achievements\n- Active goal: Find viable mining location in Sol or consider equipment upgrades"
+      },
+      {
+        "index": 1,
+        "created_at": "2026-10-05 01:36:25",
+        "text": "Tonight's flight didn't go as planned. The Main Belt in Sol was depleted, so I ventured to Alpha Centauri, but my ship isn't equipped to mine ice in the Frost Ring. A reminder to always check system resources and ship modules before heading out. At least the view of Alpha Centauri A was spectacular while it lasted."
+      }
+    ],
+    "unwindowed": []
+  }
+}

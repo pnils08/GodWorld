@@ -1,0 +1,17 @@
+{
+  "status": "arc-seed",
+  "cycle": "110",
+  "desk": "undocked",
+  "persona": "nia-rook",
+  "hood": "Lake Merritt",
+  "quotes": [
+    {
+      "pop": "POP-00235",
+      "name": "Aaliyah Brennan",
+      "quote": "To be honest, I'm not sure what my performance means for my standing in the city - I've just been trying to keep up with my work at the mobile clinic and enjoy the little moments, like the A's winning streak. It's been a while since I've felt like I'm really making a difference, but I'm just taking things one day at a time."
+    }
+  ],
+  "claim": "To be honest, I'm not sure what my performance means for my standing in the city - I've just been trying to keep up with my work at the mobile clinic and enjoy the little moments, like the A's winning streak. It's been a while since I've felt like I'm really making a difference, but I'm just taking things one day at a time.",
+  "src": "citizenVoice PRESS c110",
+  "ranAt": "2026-10-06T18:16:59.581Z"
+}

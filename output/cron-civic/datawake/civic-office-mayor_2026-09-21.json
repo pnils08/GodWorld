@@ -1,0 +1,26 @@
+{
+  "office": "mayor",
+  "agentDir": "civic-office-mayor",
+  "holder": "Avery Santana",
+  "popid": "POP-00034",
+  "title": "Mayor",
+  "date": "2026-09-21",
+  "cycle": 108,
+  "model": "moonshotai/kimi-k2",
+  "statement": "The West Oakland Stabilization Fund's month-eight disbursement is complete, and the Downtown outreach assessment shows what we expected: foot traffic is down, storefronts are quieter than the rest of the city, and the need is real. We authorized this canvass because the fund follows the need—not the other way around. My office is directing Brenda Okoro's team to accelerate the intake review for applicants in the Downtown corridor and report back on barriers within two weeks. The $28 million isn't a static number in a ledger—it's money that needs to reach families before displacement becomes eviction. We're also watching the property crime uptick in West Oakland alongside the violent crime numbers, because economic stress and public safety don't stay in separate lanes. The Stabilization Fund was built for moments like this: when a neighborhood cools off, we don't wait for the market to fix it. We show up.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-103-civic-office-mayor",
+        "text": "The OEWD bottlenecks on youth apprenticeship recruitment are unacceptable—six weeks is too long for a young person to wait on paperwork. I'm directing Laila Cortez to convene OEWD and the Workforce Development Board within ten days with a single deliverable: same-week intake for all qualified applicants. If the system can't move that fast, we'll find one that can.",
+        "directiveCycle": 103,
+        "confrontationSeat": "civic-office-mayor"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-09-21T10:45:22.603Z",
+  "fellBackFrom": null
+}

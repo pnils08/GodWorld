@@ -1,0 +1,49 @@
+◇ injected env (31) from ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]
+
+╔══════════════════════════════════════════════════╗
+║  buildInitiativePackets.js v1.1 — Cycle 108       ║
+╚══════════════════════════════════════════════════╝
+
+Loading sheets...
+  Initiatives: 6
+  Active citizens: 906
+  Civic officers: 35
+  Neighborhoods: 22
+  Crime metrics: 22
+  Businesses: 177
+
+  Mara directive (C107): not found
+  Voice decisions (C107): none found
+
+Building stabilization-fund packet...
+  Previous decisions (C107): loaded
+  Previous documents: 9 files
+  ✓ stabilization-fund: 169 citizens, 5 neighborhoods, 39 businesses
+
+Building oari packet...
+  Previous decisions (C107): loaded
+  Previous documents: 9 files
+  ✓ oari: 320 citizens, 5 neighborhoods, 52 businesses
+
+Building transit-hub packet...
+  Previous decisions (C107): loaded
+  Previous documents: 7 files
+  ✓ transit-hub: 92 citizens, 2 neighborhoods, 12 businesses
+
+Building health-center packet...
+  Previous decisions (C107): loaded
+  Previous documents: 7 files
+  ✓ health-center: 159 citizens, 2 neighborhoods, 14 businesses
+
+Building baylight packet...
+  Previous decisions (C107): loaded
+  Previous documents: 11 files
+  ✓ baylight: 167 citizens, 3 neighborhoods, 33 businesses
+
+
+  Initiative tracker refreshed: output/initiative_tracker.json (6 initiatives)
+════════════════════════════════════════════════════
+  5 initiative packets written to output/initiative-packets/
+  Manifest: output/initiative-packets/manifest.json
+════════════════════════════════════════════════════
+

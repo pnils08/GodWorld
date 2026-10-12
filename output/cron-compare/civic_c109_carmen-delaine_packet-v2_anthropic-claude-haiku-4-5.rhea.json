@@ -1,0 +1,59 @@
+{
+  "draft": "output/cron-compare/civic_c109_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "442d703f4f9a44df426dc3b7aa82591e256c9f367802851b8289c66c93ec1eaa",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "Initiative_Tracker records show the fund's status as passed and active in disbursement phase as of this cycle.",
+      "issue": "Raw system table name 'Initiative_Tracker' used in prose; repair cue to use natural civic record phrasing.",
+      "severity": "med"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact Wake-3 manifest provenance and West Oakland Stabilization Fund status aligns with cycle 109 ground truth.",
+  "review": {
+    "profileId": "carmen-civic-ledger-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "packageVersion": "CARMEN-LEP2-2",
+    "manifestId": "AM-c888ca0d750b",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Daniel Cloak",
+      "Darius Clark",
+      "Elena Patel",
+      "Irene Fay"
+    ],
+    "unverified": [
+      "Stabilization Fund"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 6698,
+  "parseError": false,
+  "ranAt": "2026-10-03T17:01:33.462Z"
+}

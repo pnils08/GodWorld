@@ -1,0 +1,555 @@
+[
+  {
+    "pop": "POP-00532",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00532\",\"name\":\"Marcus Whitfield\",\"role\":\"Youth Basketball Coach\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"What have you seen, felt, or understood about \\\"Community programs and their founders in East Oakland\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"East Oakland\",\"focus\":\"Community programs and their founders in East Oakland\",\"src\":\"output/beats/Community_Programs.jsonl @C107\"},\"exposure\":{\"basis\":[\"founded Eastside Hoopers Coalition (Community_Programs)\"],\"self\":\"Marcus Whitfield — Youth Basketball Coach — Fruitvale\",\"evidence\":[{\"id\":\"EV-1c0b490fe7\",\"src\":\"output/beats/Community_Programs.jsonl @C107\",\"text\":\"6 active programs in East Oakland; Marcus Whitfield founded one.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"East Oakland: 6 active programs on the record\",\"src\":\"output/beats/Community_Programs.jsonl @C107\",\"id\":\"F-e0f755f45e04\"},{\"t\":\"FACT\",\"text\":\"6 active programs in East Oakland; Marcus Whitfield founded one.\",\"src\":\"output/beats/Community_Programs.jsonl @C107\",\"id\":\"F-cd66e4b49d8c\"},{\"t\":\"FACT\",\"text\":\"Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-005\",\"id\":\"F-39029486ffff\"},{\"t\":\"FACT\",\"text\":\"East Bay Harm Reduction Alliance (health), East Oakland, since C101\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-014\",\"id\":\"F-e817bf673f8b\"},{\"t\":\"FACT\",\"text\":\"Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-022\",\"id\":\"F-f9ed907315c3\"},{\"t\":\"FACT\",\"text\":\"Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-023\",\"id\":\"F-9a373525878f\"},{\"t\":\"FACT\",\"text\":\"Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-025\",\"id\":\"F-2b759d6fbe14\"},{\"t\":\"FACT\",\"text\":\"Marcus Whitfield — Youth Basketball Coach — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00532\",\"id\":\"F-1e057b4205ad\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00532",
+        "name": "Marcus Whitfield",
+        "role": "Youth Basketball Coach",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "What have you seen, felt, or understood about \"Community programs and their founders in East Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "East Oakland",
+        "focus": "Community programs and their founders in East Oakland",
+        "src": "output/beats/Community_Programs.jsonl @C107"
+      },
+      "exposure": {
+        "basis": [
+          "founded Eastside Hoopers Coalition (Community_Programs)"
+        ],
+        "self": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+        "evidence": [
+          {
+            "id": "EV-1c0b490fe7",
+            "src": "output/beats/Community_Programs.jsonl @C107",
+            "text": "6 active programs in East Oakland; Marcus Whitfield founded one."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "East Oakland: 6 active programs on the record",
+          "src": "output/beats/Community_Programs.jsonl @C107",
+          "id": "F-e0f755f45e04"
+        },
+        {
+          "t": "FACT",
+          "text": "6 active programs in East Oakland; Marcus Whitfield founded one.",
+          "src": "output/beats/Community_Programs.jsonl @C107",
+          "id": "F-cd66e4b49d8c"
+        },
+        {
+          "t": "FACT",
+          "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-005",
+          "id": "F-39029486ffff"
+        },
+        {
+          "t": "FACT",
+          "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-014",
+          "id": "F-e817bf673f8b"
+        },
+        {
+          "t": "FACT",
+          "text": "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-022",
+          "id": "F-f9ed907315c3"
+        },
+        {
+          "t": "FACT",
+          "text": "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-023",
+          "id": "F-9a373525878f"
+        },
+        {
+          "t": "FACT",
+          "text": "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-025",
+          "id": "F-2b759d6fbe14"
+        },
+        {
+          "t": "FACT",
+          "text": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00532",
+          "id": "F-1e057b4205ad"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01047",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01047\",\"name\":\"Maria Conteras\",\"role\":\"High School Teacher\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"As a resident of East Oakland, what have you seen, felt, or understood about \\\"Community programs and their founders in East Oakland\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"East Oakland\",\"focus\":\"Community programs and their founders in East Oakland\",\"src\":\"output/beats/Community_Programs.jsonl @C107\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Maria Conteras — High School Teacher — East Oakland\",\"evidence\":[],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"East Oakland: 6 active programs on the record\",\"src\":\"output/beats/Community_Programs.jsonl @C107\",\"id\":\"F-e0f755f45e04\"},{\"t\":\"FACT\",\"text\":\"6 active programs in East Oakland; Marcus Whitfield founded one.\",\"src\":\"output/beats/Community_Programs.jsonl @C107\",\"id\":\"F-cd66e4b49d8c\"},{\"t\":\"FACT\",\"text\":\"Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-005\",\"id\":\"F-39029486ffff\"},{\"t\":\"FACT\",\"text\":\"East Bay Harm Reduction Alliance (health), East Oakland, since C101\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-014\",\"id\":\"F-e817bf673f8b\"},{\"t\":\"FACT\",\"text\":\"Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-022\",\"id\":\"F-f9ed907315c3\"},{\"t\":\"FACT\",\"text\":\"Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-023\",\"id\":\"F-9a373525878f\"},{\"t\":\"FACT\",\"text\":\"Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-025\",\"id\":\"F-2b759d6fbe14\"},{\"t\":\"FACT\",\"text\":\"Maria Conteras — High School Teacher — East Oakland\",\"src\":\"Simulation_Ledger profile for POP-01047\",\"id\":\"F-4c810fc8249d\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01047",
+        "name": "Maria Conteras",
+        "role": "High School Teacher",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "As a resident of East Oakland, what have you seen, felt, or understood about \"Community programs and their founders in East Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "East Oakland",
+        "focus": "Community programs and their founders in East Oakland",
+        "src": "output/beats/Community_Programs.jsonl @C107"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Maria Conteras — High School Teacher — East Oakland",
+        "evidence": [],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "East Oakland: 6 active programs on the record",
+          "src": "output/beats/Community_Programs.jsonl @C107",
+          "id": "F-e0f755f45e04"
+        },
+        {
+          "t": "FACT",
+          "text": "6 active programs in East Oakland; Marcus Whitfield founded one.",
+          "src": "output/beats/Community_Programs.jsonl @C107",
+          "id": "F-cd66e4b49d8c"
+        },
+        {
+          "t": "FACT",
+          "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-005",
+          "id": "F-39029486ffff"
+        },
+        {
+          "t": "FACT",
+          "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-014",
+          "id": "F-e817bf673f8b"
+        },
+        {
+          "t": "FACT",
+          "text": "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-022",
+          "id": "F-f9ed907315c3"
+        },
+        {
+          "t": "FACT",
+          "text": "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-023",
+          "id": "F-9a373525878f"
+        },
+        {
+          "t": "FACT",
+          "text": "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-025",
+          "id": "F-2b759d6fbe14"
+        },
+        {
+          "t": "FACT",
+          "text": "Maria Conteras — High School Teacher — East Oakland",
+          "src": "Simulation_Ledger profile for POP-01047",
+          "id": "F-4c810fc8249d"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01055",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01055\",\"name\":\"Jerome Pittman\",\"role\":\"Transit Hub D5 Intake Liaison\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"As a resident of East Oakland, what have you seen, felt, or understood about \\\"Community programs and their founders in East Oakland\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"East Oakland\",\"focus\":\"Community programs and their founders in East Oakland\",\"src\":\"output/beats/Community_Programs.jsonl @C107\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland\",\"evidence\":[],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"East Oakland: 6 active programs on the record\",\"src\":\"output/beats/Community_Programs.jsonl @C107\",\"id\":\"F-e0f755f45e04\"},{\"t\":\"FACT\",\"text\":\"6 active programs in East Oakland; Marcus Whitfield founded one.\",\"src\":\"output/beats/Community_Programs.jsonl @C107\",\"id\":\"F-cd66e4b49d8c\"},{\"t\":\"FACT\",\"text\":\"Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-005\",\"id\":\"F-39029486ffff\"},{\"t\":\"FACT\",\"text\":\"East Bay Harm Reduction Alliance (health), East Oakland, since C101\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-014\",\"id\":\"F-e817bf673f8b\"},{\"t\":\"FACT\",\"text\":\"Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-022\",\"id\":\"F-f9ed907315c3\"},{\"t\":\"FACT\",\"text\":\"Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-023\",\"id\":\"F-9a373525878f\"},{\"t\":\"FACT\",\"text\":\"Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-025\",\"id\":\"F-2b759d6fbe14\"},{\"t\":\"FACT\",\"text\":\"Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland\",\"src\":\"Simulation_Ledger profile for POP-01055\",\"id\":\"F-86a51685a77e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01055",
+        "name": "Jerome Pittman",
+        "role": "Transit Hub D5 Intake Liaison",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "As a resident of East Oakland, what have you seen, felt, or understood about \"Community programs and their founders in East Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "East Oakland",
+        "focus": "Community programs and their founders in East Oakland",
+        "src": "output/beats/Community_Programs.jsonl @C107"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland",
+        "evidence": [],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "East Oakland: 6 active programs on the record",
+          "src": "output/beats/Community_Programs.jsonl @C107",
+          "id": "F-e0f755f45e04"
+        },
+        {
+          "t": "FACT",
+          "text": "6 active programs in East Oakland; Marcus Whitfield founded one.",
+          "src": "output/beats/Community_Programs.jsonl @C107",
+          "id": "F-cd66e4b49d8c"
+        },
+        {
+          "t": "FACT",
+          "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-005",
+          "id": "F-39029486ffff"
+        },
+        {
+          "t": "FACT",
+          "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-014",
+          "id": "F-e817bf673f8b"
+        },
+        {
+          "t": "FACT",
+          "text": "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-022",
+          "id": "F-f9ed907315c3"
+        },
+        {
+          "t": "FACT",
+          "text": "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-023",
+          "id": "F-9a373525878f"
+        },
+        {
+          "t": "FACT",
+          "text": "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-025",
+          "id": "F-2b759d6fbe14"
+        },
+        {
+          "t": "FACT",
+          "text": "Jerome Pittman — Transit Hub D5 Intake Liaison — East Oakland",
+          "src": "Simulation_Ledger profile for POP-01055",
+          "id": "F-86a51685a77e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00119",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00119\",\"name\":\"Beverly Peterson\",\"role\":\"Scout, Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"As a resident of East Oakland, what have you seen, felt, or understood about \\\"Community programs and their founders in East Oakland\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"East Oakland\",\"focus\":\"Community programs and their founders in East Oakland\",\"src\":\"output/beats/Community_Programs.jsonl @C107\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Beverly Peterson — Scout, Oakland A's — East Oakland\",\"evidence\":[],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C107\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-ac25a93a42d1\"},{\"t\":\"FACT\",\"text\":\"East Oakland: 6 active programs on the record\",\"src\":\"output/beats/Community_Programs.jsonl @C107\",\"id\":\"F-e0f755f45e04\"},{\"t\":\"FACT\",\"text\":\"6 active programs in East Oakland; Marcus Whitfield founded one.\",\"src\":\"output/beats/Community_Programs.jsonl @C107\",\"id\":\"F-cd66e4b49d8c\"},{\"t\":\"FACT\",\"text\":\"Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-005\",\"id\":\"F-39029486ffff\"},{\"t\":\"FACT\",\"text\":\"East Bay Harm Reduction Alliance (health), East Oakland, since C101\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-014\",\"id\":\"F-e817bf673f8b\"},{\"t\":\"FACT\",\"text\":\"Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-022\",\"id\":\"F-f9ed907315c3\"},{\"t\":\"FACT\",\"text\":\"Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-023\",\"id\":\"F-9a373525878f\"},{\"t\":\"FACT\",\"text\":\"Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78\",\"src\":\"output/beats/Community_Programs.jsonl @C107 PRG-025\",\"id\":\"F-2b759d6fbe14\"},{\"t\":\"FACT\",\"text\":\"Beverly Peterson — Scout, Oakland A's — East Oakland\",\"src\":\"Simulation_Ledger profile for POP-00119\",\"id\":\"F-900bc8fed6c6\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00119",
+        "name": "Beverly Peterson",
+        "role": "Scout, Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "As a resident of East Oakland, what have you seen, felt, or understood about \"Community programs and their founders in East Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "East Oakland",
+        "focus": "Community programs and their founders in East Oakland",
+        "src": "output/beats/Community_Programs.jsonl @C107"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Beverly Peterson — Scout, Oakland A's — East Oakland",
+        "evidence": [],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C107",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-ac25a93a42d1"
+        },
+        {
+          "t": "FACT",
+          "text": "East Oakland: 6 active programs on the record",
+          "src": "output/beats/Community_Programs.jsonl @C107",
+          "id": "F-e0f755f45e04"
+        },
+        {
+          "t": "FACT",
+          "text": "6 active programs in East Oakland; Marcus Whitfield founded one.",
+          "src": "output/beats/Community_Programs.jsonl @C107",
+          "id": "F-cd66e4b49d8c"
+        },
+        {
+          "t": "FACT",
+          "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-005",
+          "id": "F-39029486ffff"
+        },
+        {
+          "t": "FACT",
+          "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-014",
+          "id": "F-e817bf673f8b"
+        },
+        {
+          "t": "FACT",
+          "text": "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-022",
+          "id": "F-f9ed907315c3"
+        },
+        {
+          "t": "FACT",
+          "text": "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-023",
+          "id": "F-9a373525878f"
+        },
+        {
+          "t": "FACT",
+          "text": "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-025",
+          "id": "F-2b759d6fbe14"
+        },
+        {
+          "t": "FACT",
+          "text": "Beverly Peterson — Scout, Oakland A's — East Oakland",
+          "src": "Simulation_Ledger profile for POP-00119",
+          "id": "F-900bc8fed6c6"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

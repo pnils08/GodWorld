@@ -1,0 +1,11 @@
+{
+  "draft": "culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat.md",
+  "flags": [],
+  "contamination": [
+    {
+      "check": "real-oakland-leak",
+      "issue": "international-blvd"
+    }
+  ],
+  "summary": "deterministic world-contamination blocker failed"
+}

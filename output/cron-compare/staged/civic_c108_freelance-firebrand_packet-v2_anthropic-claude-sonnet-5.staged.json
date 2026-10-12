@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "freelance-firebrand",
+  "byline": "Jax Caldera",
+  "bylinePopid": "POP-00799",
+  "article": "output/cron-compare/staged/civic_c108_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      },
+      {
+        "name": "Carmen Solis",
+        "role": "quoted-source",
+        "popid": "POP-00953"
+      },
+      {
+        "name": "Jessie Hess",
+        "role": "quoted-source",
+        "popid": "POP-00212"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "fruitvale-clarissa-dane-undocked",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "I've seen some new faces around the neighborhood, which is great, but at the same time, I feel like there's a lack of energy, you know? It's like the community is just going through the motions. I've been living in Fruitvale for a while now, and I've noticed that there aren't as many initiatives or programs to bring people together or improve the area. It's a shame, because I think we have a lot of potential here.",
+        "sourceRef": "citizenVoice PRESS Rick Walker"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-53a94b7b5767",
+    "draftSha256": "c9a7fa48a31d369c2d46fba6ad42a126c2aa545c7cd68202a80d62aa66a074c2",
+    "verdict": "output/cron-compare/civic_c108_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-09-23T23:16:41.076Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:02.372Z"
+}

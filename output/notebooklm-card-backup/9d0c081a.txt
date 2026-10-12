@@ -1,0 +1,171 @@
+FULL STAT TRUE SOURCE — PITCHER — LIGHTWEIGHT
+
+Name: Clark Saryan
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: CP
+
+ 
+
+Jersey: #52
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 85 (Updated from 78 per 2041 Roster Sheet)
+
+ 
+
+MLB Service: 0.000
+
+ 
+
+Age: 26 (Updated from 25)
+
+ 
+
+Bats: L
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'5"
+
+ 
+
+Weight: 240 lbs
+
+ 
+
+Drafted: Round 2, 2034
+
+ 
+
+Secondary Position: NONE
+
+ 
+
+Born: CALIFORNIA
+
+ 
+
+Canonical POPID: POP-00052
+
+
+--------------------------------------------------------------------------------
+
+
+2041 SEASON STATUS
+
+Recorded 0 MLB innings or decisions in 2041.
+
+ 
+
+Retains developmental depth status. Zero stats fabricated.
+
+
+--------------------------------------------------------------------------------
+
+
+PITCH REPERTOIRE
+
+• 4-Seam Fastball — 93 mph
+
+ 
+
+• Changeup — 84 mph
+
+ 
+
+• Curveball — 79 mph
+
+ 
+
+• Splitter — 86 mph
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2041–2042: Renewals (RNW)
+
+ 
+
+2043–2044: Arbitration (ARB)
+
+ 
+
+2045+: Free Agent (FA)
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: NO
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Option: 1/3 Used
+
+ 
+
+Playoff Eligible: -
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00052-LW
+
+ 
+
+Verification Tag: TrueSource Verified (Lightweight Roster Sync)
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00052

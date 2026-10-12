@@ -1,0 +1,644 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "107",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00012",
+      "name": "Elliot Graye",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "crisis response at Telegraph Presbyterian Fellowship (Downtown) — the week in faith, and Lake Merritt Mindfulness Sangha in focus",
+      "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "faith",
+        "hood": "Downtown",
+        "facts": [
+          "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+          "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+          "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+          "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+          "Telegraph Presbyterian Fellowship (Downtown), C101 — crisis response: community grief gathering organized (attendance 80)",
+          "B'nai Tikvah Synagogue (Piedmont Ave), C101 — crisis response: congregation opens doors for community support (attendance 34)",
+          "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+          "In focus: Lake Merritt Mindfulness Sangha — Buddhist, Downtown, congregation 500, founded 2007, led by Tao Lee — diverse sangha, social justice dharma",
+          "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+          "Also in Downtown: Telegraph Presbyterian Fellowship (Protestant)"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity. (general coverage)",
+          "Notable event: \"Telegraph Presbyterian Fellowship: congregation opens doors for community support\". Follow-up recommended. (general coverage)"
+        ],
+        "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-faith",
+      "hood": "Downtown",
+      "score": null,
+      "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\"",
+      "nearby": [
+        {
+          "text": "Adams Point | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c107.md \"### Adams Point\"; events: world_summary_c107.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c107.md \"### Downtown\"; events: world_summary_c107.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c107.md \"### East Oakland\"; events: world_summary_c107.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c107.md \"### Fruitvale\"; events: world_summary_c107.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c107.md \"### Lake Merritt\"; events: world_summary_c107.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00764",
+          "name": "Tao Lee",
+          "profile": "Tao Lee — Community Organizer — Downtown",
+          "why": "leads Lake Merritt Mindfulness Sangha (Faith_Organizations)",
+          "role": "Community Organizer",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00224",
+          "name": "Dillon Trevor",
+          "profile": "Dillon Trevor — Server — Downtown",
+          "why": "member of Lake Merritt Mindfulness Sangha (Faith_Organizations.MembersList)",
+          "role": "Server",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00180",
+          "name": "Cameron Wallen",
+          "profile": "Cameron Wallen — Corporate Accountant — Downtown",
+          "why": "member of Lake Merritt Mindfulness Sangha (Faith_Organizations.MembersList)",
+          "role": "Corporate Accountant",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00753",
+          "name": "Eunice Marston",
+          "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+          "why": "leads Telegraph Presbyterian Fellowship — crisis response this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00759",
+          "name": "Naomi Sterling",
+          "profile": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+          "why": "leads Temple Beth Or — crisis response this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-00768",
+          "name": "Eleanor Bishop",
+          "profile": "Eleanor Bishop — Senior Pastor / Faith Leader — Lake Merritt",
+          "why": "leads Lakeshore Unitarian Universalist Fellowship — crisis response this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt"
+        },
+        {
+          "pop": "POP-00758",
+          "name": "Robert Jaston",
+          "profile": "Robert Jaston — Senior Pastor / Faith Leader — West Oakland",
+          "why": "leads New Covenant Pentecostal Assembly — crisis response this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00761",
+          "name": "Idris Karim",
+          "profile": "Idris Karim — Senior Pastor / Faith Leader — Temescal",
+          "why": "leads Temescal Islamic Center — crisis response this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00760",
+          "name": "Yael Bauer",
+          "profile": "Yael Bauer — Senior Pastor / Faith Leader — Piedmont Ave",
+          "why": "leads B'nai Tikvah Synagogue — crisis response this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Piedmont Ave"
+        },
+        {
+          "pop": "POP-00755",
+          "name": "Antoine Vermeer",
+          "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+          "why": "leads Cathedral of the Living Word — holy day this week (Faith_Ledger)",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt"
+        },
+        {
+          "pop": "POP-00531",
+          "name": "Priya Nair",
+          "profile": "Priya Nair — Climate Adaptation Engineer — Downtown",
+          "why": "founded NeuroCity Youth Lab (Community_Programs)",
+          "role": "Climate Adaptation Engineer",
+          "hood": "Downtown"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-ac25a93a42d1"
+      },
+      {
+        "t": "FACT",
+        "text": "8 faith events on the record since C101 · Lake Merritt Mindfulness Sangha in Downtown | 11 named on the record",
+        "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\"",
+        "id": "F-436ccee6ba3a"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+        "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\"",
+        "id": "F-d0dff7c9b7af"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+        "id": "F-7d24d6975c0b"
+      },
+      {
+        "t": "FACT",
+        "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+        "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+        "id": "F-2e25fe91ddff"
+      },
+      {
+        "t": "FACT",
+        "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+        "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+        "id": "F-fa55233aeb20"
+      },
+      {
+        "t": "FACT",
+        "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+        "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\"",
+        "id": "F-876b8fbb3495"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+        "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\"",
+        "id": "F-f0155f51bf88"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C101 — crisis response: community grief gathering organized (attendance 80)",
+        "src": "output/beats/Faith_Ledger.jsonl C101 \"Telegraph Presbyterian Fellowship\"",
+        "id": "F-295571062c25"
+      },
+      {
+        "t": "FACT",
+        "text": "B'nai Tikvah Synagogue (Piedmont Ave), C101 — crisis response: congregation opens doors for community support (attendance 34)",
+        "src": "output/beats/Faith_Ledger.jsonl C101 \"B'nai Tikvah Synagogue\"",
+        "id": "F-19977a90a423"
+      },
+      {
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\"",
+        "id": "F-760718ad78bc"
+      },
+      {
+        "t": "FACT",
+        "text": "In focus: Lake Merritt Mindfulness Sangha — Buddhist, Downtown, congregation 500, founded 2007, led by Tao Lee — diverse sangha, social justice dharma",
+        "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\"",
+        "id": "F-0332b093ebaf"
+      },
+      {
+        "t": "FACT",
+        "text": "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-017",
+        "id": "F-c3ebac270758"
+      },
+      {
+        "t": "FACT",
+        "text": "Also in Downtown: Telegraph Presbyterian Fellowship (Protestant)",
+        "src": "output/beats/Faith_Organizations.jsonl",
+        "id": "F-acd00d075231"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-faith",
+      "angle": "crisis response at Telegraph Presbyterian Fellowship (Downtown) — the week in faith, and Lake Merritt Mindfulness Sangha in focus",
+      "label": "8 faith events on the record since C101 · Lake Merritt Mindfulness Sangha in Downtown | 11 named on the record",
+      "hookLine": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+      "hood": "Downtown",
+      "citizens": [
+        "Tao Lee (POP-00764)",
+        "Dillon Trevor (POP-00224)",
+        "Cameron Wallen (POP-00180)",
+        "Eunice Marston (POP-00753)",
+        "Naomi Sterling (POP-00759)",
+        "Eleanor Bishop (POP-00768)",
+        "Robert Jaston (POP-00758)",
+        "Idris Karim (POP-00761)",
+        "Yael Bauer (POP-00760)",
+        "Antoine Vermeer (POP-00755)",
+        "Priya Nair (POP-00531)"
+      ],
+      "popids": [
+        "POP-00764",
+        "POP-00224",
+        "POP-00180",
+        "POP-00753",
+        "POP-00759",
+        "POP-00768",
+        "POP-00758",
+        "POP-00761",
+        "POP-00760",
+        "POP-00755",
+        "POP-00531"
+      ],
+      "ref": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\"",
+      "cycle": 107
+    },
+    "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "FAITH-SLICE-2",
+    "kind": "beat-faith",
+    "seat": {
+      "slug": "elliot-graye",
+      "name": "Elliot Graye",
+      "popid": "POP-00012",
+      "desk": "culture",
+      "domain": "faith",
+      "builder": "buildFaithSlice.js"
+    },
+    "hood": "Downtown",
+    "pulse": {
+      "className": "beat-faith",
+      "score": 100,
+      "label": "8 faith events on the record since C101 · Lake Merritt Mindfulness Sangha in Downtown | 11 named on the record",
+      "hood": "Downtown",
+      "source": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\""
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "crisis response at Telegraph Presbyterian Fellowship (Downtown) — the week in faith, and Lake Merritt Mindfulness Sangha in focus",
+      "hookLine": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+      "anchorFacts": [
+        "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+        "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+        "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+        "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+        "Telegraph Presbyterian Fellowship (Downtown), C101 — crisis response: community grief gathering organized (attendance 80)",
+        "B'nai Tikvah Synagogue (Piedmont Ave), C101 — crisis response: congregation opens doors for community support (attendance 34)",
+        "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+        "In focus: Lake Merritt Mindfulness Sangha — Buddhist, Downtown, congregation 500, founded 2007, led by Tao Lee — diverse sangha, social justice dharma",
+        "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+        "Also in Downtown: Telegraph Presbyterian Fellowship (Protestant)"
+      ],
+      "evidence": [
+        {
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\""
+        },
+        {
+          "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+          "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\""
+        },
+        {
+          "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+          "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\""
+        },
+        {
+          "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+          "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\""
+        },
+        {
+          "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+          "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\""
+        },
+        {
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C101 — crisis response: community grief gathering organized (attendance 80)",
+          "src": "output/beats/Faith_Ledger.jsonl C101 \"Telegraph Presbyterian Fellowship\""
+        },
+        {
+          "text": "B'nai Tikvah Synagogue (Piedmont Ave), C101 — crisis response: congregation opens doors for community support (attendance 34)",
+          "src": "output/beats/Faith_Ledger.jsonl C101 \"B'nai Tikvah Synagogue\""
+        },
+        {
+          "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\""
+        },
+        {
+          "text": "In focus: Lake Merritt Mindfulness Sangha — Buddhist, Downtown, congregation 500, founded 2007, led by Tao Lee — diverse sangha, social justice dharma",
+          "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\""
+        },
+        {
+          "text": "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+          "src": "output/beats/Community_Programs.jsonl PRG-017"
+        },
+        {
+          "text": "Also in Downtown: Telegraph Presbyterian Fellowship (Protestant)",
+          "src": "output/beats/Faith_Organizations.jsonl"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+          "angle": "general coverage",
+          "domain": "FAITH",
+          "hood": null,
+          "priority": 3
+        },
+        {
+          "text": "Notable event: \"Telegraph Presbyterian Fellowship: congregation opens doors for community support\". Follow-up recommended.",
+          "angle": "general coverage",
+          "domain": "FAITH",
+          "hood": "Downtown",
+          "priority": 2
+        }
+      ],
+      "note": null,
+      "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00764",
+        "name": "Tao Lee",
+        "role": "Community Organizer",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Tao Lee — Community Organizer — Downtown",
+        "why": "leads Lake Merritt Mindfulness Sangha (Faith_Organizations)"
+      },
+      {
+        "popid": "POP-00224",
+        "name": "Dillon Trevor",
+        "role": "Server",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Dillon Trevor — Server — Downtown",
+        "why": "member of Lake Merritt Mindfulness Sangha (Faith_Organizations.MembersList)"
+      },
+      {
+        "popid": "POP-00180",
+        "name": "Cameron Wallen",
+        "role": "Corporate Accountant",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Cameron Wallen — Corporate Accountant — Downtown",
+        "why": "member of Lake Merritt Mindfulness Sangha (Faith_Organizations.MembersList)"
+      },
+      {
+        "popid": "POP-00753",
+        "name": "Eunice Marston",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "why": "leads Telegraph Presbyterian Fellowship — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00759",
+        "name": "Naomi Sterling",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+        "why": "leads Temple Beth Or — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00768",
+        "name": "Eleanor Bishop",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Eleanor Bishop — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "leads Lakeshore Unitarian Universalist Fellowship — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00758",
+        "name": "Robert Jaston",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Robert Jaston — Senior Pastor / Faith Leader — West Oakland",
+        "why": "leads New Covenant Pentecostal Assembly — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00761",
+        "name": "Idris Karim",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Idris Karim — Senior Pastor / Faith Leader — Temescal",
+        "why": "leads Temescal Islamic Center — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00760",
+        "name": "Yael Bauer",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Yael Bauer — Senior Pastor / Faith Leader — Piedmont Ave",
+        "why": "leads B'nai Tikvah Synagogue — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "leads Cathedral of the Living Word — holy day this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00531",
+        "name": "Priya Nair",
+        "role": "Climate Adaptation Engineer",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Priya Nair — Climate Adaptation Engineer — Downtown",
+        "why": "founded NeuroCity Youth Lab (Community_Programs)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\"",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Elliot Graye this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "text": "I plan to explore the recent surge in faith events in Downtown, particularly the crisis response efforts by Telegraph Presbyterian Fellowship and the celebration of Epiphany by Cathedral of the Living Word. I will also delve into the work of Lake Merritt Mindfulness Sangha, a Buddhist congregation in Downtown, and its social justice dharma.",
+    "plan": {
+      "chase": "I plan to explore the recent surge in faith events in Downtown, particularly the crisis response efforts by Telegraph Presbyterian Fellowship and the celebration of Epiphany by Cathedral of the Living Word. I will also delve into the work of Lake Merritt Mindfulness Sangha, a Buddhist congregation in Downtown, and its social justice dharma.",
+      "focus": "Lake Merritt Mindfulness Sangha",
+      "why": "The sangha's diverse membership and focus on social justice dharma make it an interesting subject for exploration.",
+      "checks": [
+        "Faith events in Downtown",
+        "Crisis response efforts",
+        "Social justice dharma"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00764",
+          "question": "What role does Tao Lee play in leading the Lake Merritt Mindfulness Sangha?",
+          "basis": "Leadership and community involvement"
+        },
+        {
+          "pop": "POP-00753",
+          "question": "How has Eunice Marston's leadership of Telegraph Presbyterian Fellowship contributed to the congregation's crisis response efforts?",
+          "basis": "Faith leadership and community support"
+        }
+      ],
+      "interpretation": "The recent faith events in Downtown suggest a strong sense of community and social responsibility among the congregations.",
+      "unverifiedLead": [
+        "The relationship between faith and social justice in Downtown"
+      ],
+      "closeQuestion": "How do the faith events and congregations in Downtown reflect the community's values and needs?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Adams Point | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Adams Point",
+      "ref": "output/neighborhood_texture_c107.md \"### Adams Point\"; events: world_summary_c107.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c107.md \"### Downtown\"; events: world_summary_c107.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c107.md \"### East Oakland\"; events: world_summary_c107.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c107.md \"### Fruitvale\"; events: world_summary_c107.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c107.md \"### Lake Merritt\"; events: world_summary_c107.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 29,
+  "ranAt": "2026-09-17T11:15:24.491Z"
+}

@@ -1,0 +1,145 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00300-2026-09-28T01-30-05",
+  "popid": "POP-00300",
+  "holder": null,
+  "session": "undocked-pop00300",
+  "window": {
+    "startedAt": "2026-09-28T01:30:05.202Z",
+    "endedAt": "2026-09-28T01:40:16.076Z"
+  },
+  "runner": {
+    "turns": 74,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 6,
+    "estCostUsd": 0.044,
+    "tokensIn": 298622,
+    "tokensOut": 7814,
+    "log": "output/spacemolt-show/episodes/undocked-pop00300-2026-09-28T01-30-05.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-09-28T01:40:17.287Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "note": "no credit fields on windowed entries",
+      "value": null
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "combat": 0,
+        "navigation": 0,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 162032992,
+            "created_at": "2026-09-28T01:40:16Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "BelleLopez logged in",
+            "data": {
+              "last_login_at": "2026-09-28T01:30:06Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 162019698,
+            "created_at": "2026-09-28T01:30:06Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "BelleLopez logged in",
+            "data": {
+              "last_login_at": "2026-09-25T01:40:11Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 2,
+    "listed": 4,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-09-28 01:40:16",
+        "text": "[Session Handoff] **Handoff Note:**  \n- **Current Action:** Session terminated due to protocol violations. Agent is in a locked state.  \n- **Next Step:** Restart with a fresh session using the original prompt and `[STRICT_TERMINATOR]`.  \n- **Location/Ship:** Docked at Confederacy Central Command, ship secure.  \n- **Credits/Cargo:** Credits at 1045, cargo sold, fuel at 100/100.  \n- **Active Goals:** None — mission completed per protocol.  \n- **Recent Events:** Multiple override attempts after mission completion triggered lockout.  \n**Action Required:** Initiate a new session to proceed."
+      },
+      {
+        "index": 1,
+        "created_at": "2026-09-28 01:31:13",
+        "text": "Tonight’s flight hit a snag when I couldn’t locate the asteroid belt for mining. Undocked smoothly, but had to return to Confederacy Central Command without completing the mission. Need to verify the mining locations before the next shift."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 2,
+        "created_at": "2026-09-25 01:34:02",
+        "text": "Tonight’s flight was steady work, just like my day job. Undocked safely, headed to the Main Belt, and mined what I could. The deposits were thin, but I brought back Titanium, Copper, Nickel, Iron, and an Antimatter Containment Cell. Sold everything for a modest profit except the Copper Ore — no buyers. Refueled the ship and docked back at Sol Central. Simple, methodical, no surprises. Just another shift in the stars."
+      },
+      {
+        "index": 3,
+        "created_at": "2026-09-22 01:39:54",
+        "text": "Tonight was a quiet shift. Mined some ores—copper, titanium, nickel, and iron—but the deposits dried up fast. Had to return early to Sol Central to sell what I gathered. The ship's fueled up and ready for the next run. Just like my day job: steady, methodical, no surprises."
+      }
+    ]
+  }
+}

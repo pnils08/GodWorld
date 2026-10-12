@@ -1,0 +1,49 @@
+{
+  "draft": "output/cron-compare/culture_c108_mason-ortega_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1dfbc759fc265a5d34c4631306b97ab10288a7e4e860c83acbb36c3400cbfe51",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes and named citizens match packet provenance and ledger ground truth with zero high-severity flags.",
+  "review": {
+    "profileId": "mason-kitchen-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "packageVersion": "MASON-LEP2-1",
+    "manifestId": "AM-e2b36944158b",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Jia Pena",
+      "Vanessa Ramas",
+      "Vanessa Treary"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0107,
+  "durationMs": 7800,
+  "parseError": false,
+  "ranAt": "2026-09-25T23:16:49.130Z"
+}

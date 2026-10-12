@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "lila-mezran",
+  "byline": "Dr. Lila Mezran",
+  "bylinePopid": "POP-00154",
+  "article": "output/cron-compare/staged/civic_c108_lila-mezran_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Yu Zen",
+        "role": "mentioned",
+        "popid": "POP-00194"
+      },
+      {
+        "name": "Maurice Franklin",
+        "role": "mentioned",
+        "popid": "POP-00801"
+      },
+      {
+        "name": "Javier Robertson",
+        "role": "mentioned",
+        "popid": "POP-00228"
+      },
+      {
+        "name": "Ronald Williams",
+        "role": "mentioned",
+        "popid": "POP-01041"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "chinatown-yu-zen-beat-health",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone. But there's hope too—seeing someone like Marcus Osei recover gives the rest of us strength.",
+        "sourceRef": "citizenVoice PRESS Yu Zen"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-1f79afbdf761",
+    "draftSha256": "a29bb795beeebdc93063a7969af386357d7036924a7f76f3bdbba6338ab86be1",
+    "verdict": "output/cron-compare/civic_c108_lila-mezran_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-21T23:18:29.953Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:02.405Z"
+}

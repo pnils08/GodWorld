@@ -1,0 +1,598 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00153",
+    "name": "Jordan Velez",
+    "role": "desk reporter",
+    "desk": "business"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Temescal businesses: Gridiron Analytics, OakTown Social, Temescal Community Health Center — the people who work there",
+    "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "economic-storefront",
+      "hood": "Temescal",
+      "pulseClass": "hood-businesses",
+      "economicFrame": "Temescal businesses: Gridiron Analytics, OakTown Social, Temescal Community Health Center — the people who work there",
+      "hook": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 7 named workers at 3 named businesses in Temescal on the ledger this cycle.",
+      "namedBusinesses": [
+        "Gridiron Analytics",
+        "OakTown Social",
+        "Temescal Community Health Center",
+        "Calderon-Nishi",
+        "Brie Bouquets"
+      ],
+      "workplaces": [
+        "Gridiron Analytics — Sports Analytics — Ariana Reyes (Data Analyst (Gridiron Analytics)); Dawson Nguyen (Sports Analytics Lead (Gridiron Analytics)); Jade Soy (Data Analyst (Gridiron Analytics)); Wesley Clark (Sports Analytics Lead (Gridiron Analytics))",
+        "OakTown Social — Nightlife & Entertainment — Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+        "Temescal Community Health Center — Healthcare — Bobby Chen-Ramirez (Health Center Project Director)",
+        "Calderon-Nishi — Construction — no roster names",
+        "Brie Bouquets — Services — no roster names"
+      ],
+      "engineColour": [
+        "Omar Lingio — checked the housing market in Rockridge on their lunch break and realized they could actually afford it near a pharmacy counter",
+        "Tanisha Freeman — listened to a style of music they'd always skipped, twice",
+        "Jia Pena — watched the ninth from a packed bar and walked home in a crowd that didn't want to disperse",
+        "Kevin Nelson — adjusted today's plans after last night's gridlock"
+      ],
+      "roomIsYours": "the counter, the hiring board, the back office, what the owner is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Temescal",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107",
+    "plan": {
+      "focus": "Temescal businesses: Gridiron Analytics, OakTown Social, Temescal Community Health Center — the people who work there",
+      "closeQuestion": "Does the ledger tell the whole story, or is there more beneath the surface?"
+    },
+    "openThreads": [
+      {
+        "slug": "west-oakland-toby-lamont-story-signal",
+        "label": "west-oakland-toby-lamont-story-signal | C106→C106 | 1 article(s) | opened 1",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00183"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "west-oakland-toby-lamont-hood-businesses",
+        "label": "west-oakland-toby-lamont-hood-businesses | C106→C106 | 1 article(s) | opened 1",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00183",
+          "POP-00184",
+          "POP-00188"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "rockridge-depak-ying-story-signal",
+        "label": "rockridge-depak-ying-story-signal | C105→C105 | 1 article(s) | opened 1",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "rockridge-depak-ying-hood-rising",
+        "label": "rockridge-depak-ying-hood-rising | C105→C105 | 1 article(s) | advanced 1",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "grand-lake-vinnie-keane-retail-decay",
+        "label": "grand-lake-vinnie-keane-retail-decay | C104→C104 | 1 article(s) | opened 1",
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00001",
+          "POP-00002",
+          "POP-00170"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "grand-lake-amara-keane-retail-decay",
+        "label": "grand-lake-amara-keane-retail-decay | C104→C104 | 1 article(s) | opened 1",
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00002",
+          "POP-00170",
+          "POP-00198"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "dimond-clarence-moody-hood-cooling",
+        "label": "dimond-clarence-moody-hood-cooling | C103→C103 | 1 article(s) | opened 1",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00730",
+          "POP-00170",
+          "POP-00201"
+        ],
+        "lastCycle": 103
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00133",
+        "name": "Ariana Reyes",
+        "profile": "Ariana Reyes — Data Analyst (Gridiron Analytics) — Gridiron Analytics, Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00347",
+        "name": "Dawson Nguyen",
+        "profile": "Dawson Nguyen — Sports Analytics Lead (Gridiron Analytics) — Gridiron Analytics, Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00781",
+        "name": "Vanessa Treary",
+        "profile": "Vanessa Treary — Barista — OakTown Social, Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00792",
+        "name": "Bobby Chen-Ramirez",
+        "profile": "Bobby Chen-Ramirez — Health Center Project Director — Temescal Community Health Center, Temescal",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00133-13e16085e0",
+        "pop": "POP-00133",
+        "name": "Ariana Reyes",
+        "quote": "Working at Gridiron Analytics, I see how tight-knit the Temescal business community is. We've got this unspoken rhythm—the baristas at OakTown Social know our coffee orders before we walk in, and the folks at Temescal Community Health Center always nod hello when we pass by. It's not just about the work—it's about recognizing faces, knowing we're all part of the same neighborhood fabric.",
+        "factIds": [
+          "F-e6896553e5f6",
+          "F-d43b16276638",
+          "F-71943fe41870"
+        ],
+        "src": "packet.W2[POP-00133]"
+      },
+      {
+        "id": "Q-POP-00781-7507a483f6",
+        "pop": "POP-00781",
+        "name": "Vanessa Treary",
+        "quote": "I work at OakTown Social, so I see our regulars come through - mostly folks winding down after work or meeting up with friends. The Gridiron Analytics crowd tends to come in later, usually deep in conversation about stats or games. As for the health center, I don't know much about the people who work there personally, but I see their staff sometimes grabbing coffee on their breaks - they always seem focused but friendly, like they've got important work waiting for them back at the office.",
+        "factIds": [
+          "F-d43b16276638",
+          "F-b9d4f284b2d8",
+          "F-71943fe41870"
+        ],
+        "src": "packet.W2[POP-00781]"
+      },
+      {
+        "id": "Q-POP-00347-98edfb5457",
+        "pop": "POP-00347",
+        "name": "Dawson Nguyen",
+        "quote": "Working at Gridiron Analytics, I’ve seen how tight-knit the team is—everyone’s pushing hard but also looking out for each other. It’s not just about the numbers; it’s about the people. And walking around Temescal, you can feel that same energy at OakTown Social and the Health Center. It’s a community that’s growing but still feels grounded.",
+        "factIds": [
+          "F-b9d4f284b2d8",
+          "F-d43b16276638",
+          "F-71943fe41870"
+        ],
+        "src": "packet.W2[POP-00347]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Is the growth sustainable, or are there underlying pressures?",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Are workers feeling the benefits of the uptick, or is it just the ledger?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C107",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-ac25a93a42d1"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal businesses · Gridiron Analytics, OakTown Social",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107",
+      "id": "F-e285bd40fc36"
+    },
+    {
+      "t": "FACT",
+      "text": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 7 named workers at 3 named businesses in Temescal on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107",
+      "id": "F-e6896553e5f6"
+    },
+    {
+      "t": "FACT",
+      "text": "Gridiron Analytics · Sports Analytics · 20 employees · growth 27% · revenue $2.8M (+$15k vs C106) · key personnel: Daniel Yoon / Christine Nakamura (Co-Founders) · on the roster: Ariana Reyes (Data Analyst (Gridiron Analytics)); Dawson Nguyen (Sports Analytics Lead (Gridiron Analytics)); Jade Soy (Data Analyst (Gridiron Analytics)); Wesley Clark (Sports Analytics Lead (Gridiron Analytics))",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107",
+      "id": "F-b9d4f284b2d8"
+    },
+    {
+      "t": "FACT",
+      "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3% · revenue $518k (+$299 vs C106) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107",
+      "id": "F-d43b16276638"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal Community Health Center · Healthcare · 12 employees · growth 1.2% · revenue $45M (+$10k vs C106) · key personnel: Bobby Chen-Ramirez, Project Director · on the roster: Bobby Chen-Ramirez (Health Center Project Director)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107",
+      "id": "F-71943fe41870"
+    },
+    {
+      "t": "FACT",
+      "text": "Calderon-Nishi · Construction · 34 employees · growth 8% · revenue $8.9M (+$14k vs C106)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107",
+      "id": "F-c15285772835"
+    },
+    {
+      "t": "FACT",
+      "text": "Brie Bouquets · Services · 5 employees · growth 3% · revenue $370k (+$211 vs C106) · key personnel: Brie Harris",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107",
+      "id": "F-72cb80026691"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Temescal): citizens Omar Lingio; Tanisha Freeman; Jia Pena; Kevin Nelson · businesses Gridiron Analytics; Calderon-Nishi · Islamic Center of Oakland Food Pantry (program)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C107",
+      "id": "F-d337d299996b"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Jacquez Tearn — sports wager, staked $252, settled for $0",
+      "src": "output/beats/Casino_Ledger.jsonl @C107",
+      "id": "F-515b4e0ba027"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Imie Calero — sports wager, staked $267, settled for $0",
+      "src": "output/beats/Casino_Ledger.jsonl @C107",
+      "id": "F-0e23d4268f33"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Driscoll Fester — sports wager, staked $245, settled for $448",
+      "src": "output/beats/Casino_Ledger.jsonl @C107",
+      "id": "F-94dceac647f6"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Kelvon Ochoa — sports wager, staked $667, settled for $0",
+      "src": "output/beats/Casino_Ledger.jsonl @C107",
+      "id": "F-06eaf427dd1d"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Ezekiel Campbell — sports wager, staked $336, settled for $615",
+      "src": "output/beats/Casino_Ledger.jsonl @C107",
+      "id": "F-3df9380dc15a"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: the house float stands at $247k",
+      "src": "output/beats/Casino_Ledger.jsonl @C107",
+      "id": "F-33fe925fcfbe"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "grounded third-person economics and labor reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
+      "closing": "an unresolved beneficiary, contract, labor, or livelihood question grounded in the supplied record"
+    },
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "canonBlockers": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-cdcfaee52425",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-ac25a93a42d1",
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-e285bd40fc36",
+        "t": "FACT",
+        "text": "Temescal businesses · Gridiron Analytics, OakTown Social",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+      },
+      {
+        "id": "F-e6896553e5f6",
+        "t": "FACT",
+        "text": "Ariana Reyes, Data Analyst (Gridiron Analytics) at Gridiron Analytics. 7 named workers at 3 named businesses in Temescal on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+      },
+      {
+        "id": "F-b9d4f284b2d8",
+        "t": "FACT",
+        "text": "Gridiron Analytics · Sports Analytics · 20 employees · growth 27% · revenue $2.8M (+$15k vs C106) · key personnel: Daniel Yoon / Christine Nakamura (Co-Founders) · on the roster: Ariana Reyes (Data Analyst (Gridiron Analytics)); Dawson Nguyen (Sports Analytics Lead (Gridiron Analytics)); Jade Soy (Data Analyst (Gridiron Analytics)); Wesley Clark (Sports Analytics Lead (Gridiron Analytics))",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+      },
+      {
+        "id": "F-d43b16276638",
+        "t": "FACT",
+        "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3% · revenue $518k (+$299 vs C106) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+      },
+      {
+        "id": "F-71943fe41870",
+        "t": "FACT",
+        "text": "Temescal Community Health Center · Healthcare · 12 employees · growth 1.2% · revenue $45M (+$10k vs C106) · key personnel: Bobby Chen-Ramirez, Project Director · on the roster: Bobby Chen-Ramirez (Health Center Project Director)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+      },
+      {
+        "id": "F-c15285772835",
+        "t": "FACT",
+        "text": "Calderon-Nishi · Construction · 34 employees · growth 8% · revenue $8.9M (+$14k vs C106)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+      },
+      {
+        "id": "F-72cb80026691",
+        "t": "FACT",
+        "text": "Brie Bouquets · Services · 5 employees · growth 3% · revenue $370k (+$211 vs C106) · key personnel: Brie Harris",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+      },
+      {
+        "id": "F-d337d299996b",
+        "t": "FACT",
+        "text": "ENGINE SEED (Temescal): citizens Omar Lingio; Tanisha Freeman; Jia Pena; Kevin Nelson · businesses Gridiron Analytics; Calderon-Nishi · Islamic Center of Oakland Food Pantry (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C107"
+      },
+      {
+        "id": "F-515b4e0ba027",
+        "t": "FACT",
+        "text": "CASINO: Jacquez Tearn — sports wager, staked $252, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C107"
+      },
+      {
+        "id": "F-0e23d4268f33",
+        "t": "FACT",
+        "text": "CASINO: Imie Calero — sports wager, staked $267, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C107"
+      },
+      {
+        "id": "F-94dceac647f6",
+        "t": "FACT",
+        "text": "CASINO: Driscoll Fester — sports wager, staked $245, settled for $448",
+        "src": "output/beats/Casino_Ledger.jsonl @C107"
+      },
+      {
+        "id": "F-06eaf427dd1d",
+        "t": "FACT",
+        "text": "CASINO: Kelvon Ochoa — sports wager, staked $667, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C107"
+      },
+      {
+        "id": "F-3df9380dc15a",
+        "t": "FACT",
+        "text": "CASINO: Ezekiel Campbell — sports wager, staked $336, settled for $615",
+        "src": "output/beats/Casino_Ledger.jsonl @C107"
+      },
+      {
+        "id": "F-33fe925fcfbe",
+        "t": "FACT",
+        "text": "CASINO: the house float stands at $247k",
+        "src": "output/beats/Casino_Ledger.jsonl @C107"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00133-13e16085e0",
+        "speakerId": "POP-00133",
+        "speakerName": "Ariana Reyes",
+        "text": "Working at Gridiron Analytics, I see how tight-knit the Temescal business community is. We've got this unspoken rhythm—the baristas at OakTown Social know our coffee orders before we walk in, and the folks at Temescal Community Health Center always nod hello when we pass by. It's not just about the work—it's about recognizing faces, knowing we're all part of the same neighborhood fabric.",
+        "factIds": [
+          "F-e6896553e5f6",
+          "F-d43b16276638",
+          "F-71943fe41870"
+        ],
+        "src": "packet.W2[POP-00133]"
+      },
+      {
+        "id": "Q-POP-00781-7507a483f6",
+        "speakerId": "POP-00781",
+        "speakerName": "Vanessa Treary",
+        "text": "I work at OakTown Social, so I see our regulars come through - mostly folks winding down after work or meeting up with friends. The Gridiron Analytics crowd tends to come in later, usually deep in conversation about stats or games. As for the health center, I don't know much about the people who work there personally, but I see their staff sometimes grabbing coffee on their breaks - they always seem focused but friendly, like they've got important work waiting for them back at the office.",
+        "factIds": [
+          "F-d43b16276638",
+          "F-b9d4f284b2d8",
+          "F-71943fe41870"
+        ],
+        "src": "packet.W2[POP-00781]"
+      },
+      {
+        "id": "Q-POP-00347-98edfb5457",
+        "speakerId": "POP-00347",
+        "speakerName": "Dawson Nguyen",
+        "text": "Working at Gridiron Analytics, I’ve seen how tight-knit the team is—everyone’s pushing hard but also looking out for each other. It’s not just about the numbers; it’s about the people. And walking around Temescal, you can feel that same energy at OakTown Social and the Health Center. It’s a community that’s growing but still feels grounded.",
+        "factIds": [
+          "F-b9d4f284b2d8",
+          "F-d43b16276638",
+          "F-71943fe41870"
+        ],
+        "src": "packet.W2[POP-00347]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00133",
+        "name": "Ariana Reyes",
+        "profile": "Ariana Reyes — Data Analyst (Gridiron Analytics) — Gridiron Analytics, Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00347",
+        "name": "Dawson Nguyen",
+        "profile": "Dawson Nguyen — Sports Analytics Lead (Gridiron Analytics) — Gridiron Analytics, Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00781",
+        "name": "Vanessa Treary",
+        "profile": "Vanessa Treary — Barista — OakTown Social, Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00792",
+        "name": "Bobby Chen-Ramirez",
+        "profile": "Bobby Chen-Ramirez — Health Center Project Director — Temescal Community Health Center, Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Is the growth sustainable, or are there underlying pressures?",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Are workers feeling the benefits of the uptick, or is it just the ledger?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "forbiddenClaimClasses": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "107",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Recap Martin Richards's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems unlisted, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 4 cycle(s) led, current streak 4.",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+    },
+    "signal": {
+      "kind": "undocked",
+      "hood": "Fruitvale",
+      "score": null,
+      "src": "undocked:undocked-pop00031-Y3C3-e2",
+      "nearby": [
+        {
+          "text": "UNDOCKED: Martin Richards — a night the books can't settle yet",
+          "src": "undocked:undocked-pop00031-Y3C3-e2"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00031",
+          "name": "Martin Richards",
+          "profile": "Martin Richards — UNDOCKED cast pilot",
+          "why": "assignment",
+          "role": "UNDOCKED cast pilot",
+          "hood": "Fruitvale"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-ac25a93a42d1"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED: Martin Richards — a night the books can't settle yet",
+        "src": "undocked:undocked-pop00031-Y3C3-e2",
+        "id": "F-c7fb63d25d47"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00031-Y3C3-e2",
+      "label": "UNDOCKED: Martin Richards — a night the books can't settle yet",
+      "kind": "undocked",
+      "angle": "Recap Martin Richards's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems unlisted, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 4 cycle(s) led, current streak 4.",
+      "citizens": [
+        "Martin Richards — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00031"
+      ],
+      "hood": "Fruitvale"
+    },
+    "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I'll be looking into how the latest UNDOCKED episode affects the standings, focusing on who's up and who's down after Martin Richards's performance.",
+    "plan": {
+      "chase": "I'll be looking into how the latest UNDOCKED episode affects the standings, focusing on who's up and who's down after Martin Richards's performance.",
+      "focus": "The impact of Martin Richards's episode on the UNDOCKED leaderboard",
+      "why": "To understand the current state of the competition and what it means for the contestants",
+      "checks": [
+        "Credits unsettled",
+        "Systems unlisted",
+        "Combat and mishaps"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00031",
+          "question": "How does Martin Richards's episode change his position in the standings?",
+          "basis": "Current episode facts"
+        }
+      ],
+      "interpretation": "The episode's outcome has significant implications for the contestants' rankings",
+      "unverifiedLead": [
+        "The city is abuzz with discussion about the episode's impact"
+      ],
+      "closeQuestion": "What will be the lasting effect of Martin Richards's episode on the UNDOCKED competition?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Martin Richards — a night the books can't settle yet",
+      "kind": "undocked",
+      "hood": "Fruitvale",
+      "ref": "undocked:undocked-pop00031-Y3C3-e2",
+      "popids": [
+        "POP-00031"
+      ]
+    }
+  ],
+  "laneEntries": 1,
+  "ranAt": "2026-09-18T11:15:58.490Z"
+}

@@ -1,0 +1,870 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "109",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "Temescal — the programs that hold the block and the people who founded them",
+      "label": "Temescal: 1 active program on the record",
+      "hookLine": "1 active programs in Temescal; no founder is on the ledger — the block is yours.",
+      "hood": "Temescal",
+      "citizens": [],
+      "popids": [],
+      "ref": "output/beats/Community_Programs.jsonl @C109",
+      "cycle": 109
+    }
+  },
+  "angle": "output/cron-compare/culture_c109_maria-keen_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00206",
+      "name": "Omar Lingio",
+      "quote": "You know, it's moments like those that remind me why I love Temescal so much. I was just standing there, watching the fog roll in, and it felt like the whole neighborhood was wrapped in this quiet, peaceful blanket. The rest of the city might have been sunny and bustling, but here, it was like time stood still. I felt grateful to be a part of this community, to have my store here and be able to experience days like that.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, it's moments like those that remind me why I love Temescal so much. I was just standing there, watching the fog roll in, and it felt like the whole neighborhood was wrapped in this quiet, peaceful blanket. The rest of the city might have been sunny and bustling, but here, it was like time stood still. I felt grateful to be a part of this community, to have my store here and be able to experience days like that.\",\n  \"fact_ids\": [\"F-11f442e78a11\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-11f442e78a11"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00206-f7a0528025",
+        "authoredQuote": true,
+        "publishableQuote": "You know, it's moments like those that remind me why I love Temescal so much. I was just standing there, watching the fog roll in, and it felt like the whole neighborhood was wrapped in this quiet, peaceful blanket. The rest of the city might have been sunny and bustling, but here, it was like time stood still. I felt grateful to be a part of this community, to have my store here and be able to experience days like that."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00206",
+          "name": "Omar Lingio",
+          "role": "Vintage Clothing Store Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C5 — [Weather] watched fog settle over Temescal while the rest of the city stayed clear\". What did you notice about Temescal? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Temescal community programs and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Omar Lingio — Vintage Clothing Store Owner",
+          "evidence": [
+            {
+              "id": "EV-LIFE-00c92a95b7",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C5 — [Weather] watched fog settle over Temescal while the rest of the city stayed clear"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C5 — [Weather] watched fog settle over Temescal while the rest of the city stayed clear",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-11f442e78a11"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00241",
+      "name": "Marc Allie",
+      "quote": "I was just walking by and heard some folks talking about the Temescal Holiday Market, sounded like it's going to be a nice event, you know, something to bring the community together. I didn't get all the details, but it seemed like it was going to be on a quiet main street over in Temescal.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I was just walking by and heard some folks talking about the Temescal Holiday Market, sounded like it's going to be a nice event, you know, something to bring the community together. I didn't get all the details, but it seemed like it was going to be on a quiet main street over in Temescal.\",\n  \"fact_ids\": [\"F-44bc92184d7e\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-44bc92184d7e"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00241-9deffcf3f1",
+        "authoredQuote": true,
+        "publishableQuote": "I was just walking by and heard some folks talking about the Temescal Holiday Market, sounded like it's going to be a nice event, you know, something to bring the community together. I didn't get all the details, but it seemed like it was going to be on a quiet main street over in Temescal."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00241",
+          "name": "Marc Allie",
+          "role": "Security guard",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night near a quiet main street\". What did you notice about Temescal? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Temescal community programs and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Marc Allie — Security guard",
+          "evidence": [
+            {
+              "id": "EV-LIFE-7fc83ac9f6",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night near a quiet main street"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night near a quiet main street",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-44bc92184d7e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00190",
+      "name": "Jackson Sift",
+      "quote": "I was talking to some folks last night and they mentioned the Temescal Holiday Market, it sounds like a great way for the community to come together. I'm looking forward to checking it out and seeing what it's all about.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I was talking to some folks last night and they mentioned the Temescal Holiday Market, it sounds like a great way for the community to come together. I'm looking forward to checking it out and seeing what it's all about.\",\n  \"fact_ids\": [\"F-b4f7c51a8a15\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b4f7c51a8a15"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00190-8bafec3d66",
+        "authoredQuote": true,
+        "publishableQuote": "I was talking to some folks last night and they mentioned the Temescal Holiday Market, it sounds like a great way for the community to come together. I'm looking forward to checking it out and seeing what it's all about."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00190",
+          "name": "Jackson Sift",
+          "role": "Ex-Offender Reentry Counselor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night\". What did you notice about Temescal? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Temescal community programs and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Jackson Sift — Ex-Offender Reentry Counselor",
+          "evidence": [
+            {
+              "id": "EV-LIFE-bcaae67e32",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-b4f7c51a8a15"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00286",
+      "name": "Yammie Perez",
+      "quote": "I love how Temescal always has this energy, you know? Like, I was stopped at a light near Temescal Alley and I could hear the bass thumping from a few cars away. It was infectious, I found myself nodding along. It's moments like those that remind me why I love living here - there's always something going on, some rhythm to the neighborhood that just makes you want to move.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I love how Temescal always has this energy, you know? Like, I was stopped at a light near Temescal Alley and I could hear the bass thumping from a few cars away. It was infectious, I found myself nodding along. It's moments like those that remind me why I love living here - there's always something going on, some rhythm to the neighborhood that just makes you want to move.\",\n  \"fact_ids\": [\"F-de7a60cfded3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-de7a60cfded3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00286-2bf3c9078d",
+        "authoredQuote": true,
+        "publishableQuote": "I love how Temescal always has this energy, you know? Like, I was stopped at a light near Temescal Alley and I could hear the bass thumping from a few cars away. It was infectious, I found myself nodding along. It's moments like those that remind me why I love living here - there's always something going on, some rhythm to the neighborhood that just makes you want to move."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00286",
+          "name": "Yammie Perez",
+          "role": "Delivery driver",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C5 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along near Temescal Alley\". What did you notice about Temescal? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Temescal community programs and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Yammie Perez — Delivery driver",
+          "evidence": [
+            {
+              "id": "EV-LIFE-c6b6b19e59",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C5 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along near Temescal Alley"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C5 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along near Temescal Alley",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-de7a60cfded3"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00206",
+      "name": "Omar Lingio",
+      "quote": "You know, it's moments like those that remind me why I love Temescal so much. I was just standing there, watching the fog roll in, and it felt like the whole neighborhood was wrapped in this quiet, peaceful blanket. The rest of the city might have been sunny and bustling, but here, it was like time stood still. I felt grateful to be a part of this community, to have my store here and be able to experience days like that.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, it's moments like those that remind me why I love Temescal so much. I was just standing there, watching the fog roll in, and it felt like the whole neighborhood was wrapped in this quiet, peaceful blanket. The rest of the city might have been sunny and bustling, but here, it was like time stood still. I felt grateful to be a part of this community, to have my store here and be able to experience days like that.\",\n  \"fact_ids\": [\"F-11f442e78a11\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-11f442e78a11"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00206-f7a0528025",
+        "authoredQuote": true,
+        "publishableQuote": "You know, it's moments like those that remind me why I love Temescal so much. I was just standing there, watching the fog roll in, and it felt like the whole neighborhood was wrapped in this quiet, peaceful blanket. The rest of the city might have been sunny and bustling, but here, it was like time stood still. I felt grateful to be a part of this community, to have my store here and be able to experience days like that."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00206",
+          "name": "Omar Lingio",
+          "role": "Vintage Clothing Store Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C5 — [Weather] watched fog settle over Temescal while the rest of the city stayed clear\". What did you notice about Temescal? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Temescal community programs and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Omar Lingio — Vintage Clothing Store Owner",
+          "evidence": [
+            {
+              "id": "EV-LIFE-00c92a95b7",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C5 — [Weather] watched fog settle over Temescal while the rest of the city stayed clear"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C5 — [Weather] watched fog settle over Temescal while the rest of the city stayed clear",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-11f442e78a11"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00241",
+      "name": "Marc Allie",
+      "quote": "I was just walking by and heard some folks talking about the Temescal Holiday Market, sounded like it's going to be a nice event, you know, something to bring the community together. I didn't get all the details, but it seemed like it was going to be on a quiet main street over in Temescal.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I was just walking by and heard some folks talking about the Temescal Holiday Market, sounded like it's going to be a nice event, you know, something to bring the community together. I didn't get all the details, but it seemed like it was going to be on a quiet main street over in Temescal.\",\n  \"fact_ids\": [\"F-44bc92184d7e\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-44bc92184d7e"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00241-9deffcf3f1",
+        "authoredQuote": true,
+        "publishableQuote": "I was just walking by and heard some folks talking about the Temescal Holiday Market, sounded like it's going to be a nice event, you know, something to bring the community together. I didn't get all the details, but it seemed like it was going to be on a quiet main street over in Temescal."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00241",
+          "name": "Marc Allie",
+          "role": "Security guard",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night near a quiet main street\". What did you notice about Temescal? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Temescal community programs and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Marc Allie — Security guard",
+          "evidence": [
+            {
+              "id": "EV-LIFE-7fc83ac9f6",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night near a quiet main street"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night near a quiet main street",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-44bc92184d7e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00190",
+      "name": "Jackson Sift",
+      "quote": "I was talking to some folks last night and they mentioned the Temescal Holiday Market, it sounds like a great way for the community to come together. I'm looking forward to checking it out and seeing what it's all about.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I was talking to some folks last night and they mentioned the Temescal Holiday Market, it sounds like a great way for the community to come together. I'm looking forward to checking it out and seeing what it's all about.\",\n  \"fact_ids\": [\"F-b4f7c51a8a15\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b4f7c51a8a15"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00190-8bafec3d66",
+        "authoredQuote": true,
+        "publishableQuote": "I was talking to some folks last night and they mentioned the Temescal Holiday Market, it sounds like a great way for the community to come together. I'm looking forward to checking it out and seeing what it's all about."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00190",
+          "name": "Jackson Sift",
+          "role": "Ex-Offender Reentry Counselor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night\". What did you notice about Temescal? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Temescal community programs and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Jackson Sift — Ex-Offender Reentry Counselor",
+          "evidence": [
+            {
+              "id": "EV-LIFE-bcaae67e32",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C5 — [PrevEvening] heard about Temescal Holiday Market over in Temescal last night",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-b4f7c51a8a15"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00286",
+      "name": "Yammie Perez",
+      "quote": "I love how Temescal always has this energy, you know? Like, I was stopped at a light near Temescal Alley and I could hear the bass thumping from a few cars away. It was infectious, I found myself nodding along. It's moments like those that remind me why I love living here - there's always something going on, some rhythm to the neighborhood that just makes you want to move.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I love how Temescal always has this energy, you know? Like, I was stopped at a light near Temescal Alley and I could hear the bass thumping from a few cars away. It was infectious, I found myself nodding along. It's moments like those that remind me why I love living here - there's always something going on, some rhythm to the neighborhood that just makes you want to move.\",\n  \"fact_ids\": [\"F-de7a60cfded3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-de7a60cfded3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00286-2bf3c9078d",
+        "authoredQuote": true,
+        "publishableQuote": "I love how Temescal always has this energy, you know? Like, I was stopped at a light near Temescal Alley and I could hear the bass thumping from a few cars away. It was infectious, I found myself nodding along. It's moments like those that remind me why I love living here - there's always something going on, some rhythm to the neighborhood that just makes you want to move."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00286",
+          "name": "Yammie Perez",
+          "role": "Delivery driver",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C5 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along near Temescal Alley\". What did you notice about Temescal? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Temescal",
+          "focus": "Temescal community programs and their founders",
+          "src": "output/beats/Community_Programs.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Yammie Perez — Delivery driver",
+          "evidence": [
+            {
+              "id": "EV-LIFE-c6b6b19e59",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C5 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along near Temescal Alley"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C5 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along near Temescal Alley",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-de7a60cfded3"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-02T18:17:03.933Z"
+}

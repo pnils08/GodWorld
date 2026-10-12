@@ -1,0 +1,67 @@
+{
+  "draft": "output/cron-compare/culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "8ba99b0fb947445c07d493e7e04aa86ac5975d9be5e225fafb41e24c1914d4da",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "11 more students, 39 more adults",
+      "issue": "Unapproved specific demographic counts not directly traced to ledger metrics.",
+      "severity": "low"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, roles, and quotes match verified packet provenance and ledger ground truth with no high-severity violations.",
+  "review": {
+    "profileId": "maria-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "packageVersion": "MARIA-LEP2-1",
+    "manifestId": "AM-d46d6c26eabd",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "11",
+          "39"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Lucia Polito",
+      "Tomas Renteria"
+    ],
+    "unverified": [
+      "Aura Wellness",
+      "Mutual Aid",
+      "Postpartum Oakland Network",
+      "Speed Series"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0099,
+  "durationMs": 5793,
+  "parseError": false,
+  "ranAt": "2026-09-26T17:00:45.968Z"
+}

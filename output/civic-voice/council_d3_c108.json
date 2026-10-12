@@ -1,0 +1,38 @@
+{
+  "office": "council_d3",
+  "cycle": 108,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "I pushed forward on transit equity, youth opportunity, and neighborhood investments this cycle. Approved the Fruitvale design consultant to keep Phase II moving while ensuring merchant protections. Demanded San Antonio's fair share of apprenticeships amid their slow street trade. Called for urgent attention to Fruitvale's slipping mood before it becomes a crisis.",
+  "statements": [
+    {
+      "statementId": "STMT-108-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Fruitvale Transit Hub",
+      "initiative": "INIT-003",
+      "decision": "Approved design consultant selection with amended community oversight provisions",
+      "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+      "fullStatement": "The Transit Hub redesign must lift up the small businesses that make Fruitvale vibrant. While approving the design team today, I've added language requiring monthly walkthroughs with the Merchant Advisory Council during schematic design. Their survival isn't an afterthought—it's the whole point of this station's revival.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-council_d3-002",
+      "type": "directive_response",
+      "topic": "Youth Apprenticeships",
+      "initiative": "INIT-007",
+      "decision": "Submitted D3 placement ledger prioritizing San Antonio applicants",
+      "quote": "Paperwork doesn't punch timecards—my district needs paychecks, not promises.",
+      "fullStatement": "San Antonio's mood is up but commerce is struggling—we're routing 40% of this cohort's placements to their commercial corridors. These apprenticeships must match where the work is actually lagging, not just where the data looks pretty on paper.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-council_d3-003",
+      "type": "district_action",
+      "topic": "Fruitvale Decline",
+      "initiative": null,
+      "decision": "Formally requested Deputy Mayor's needs assessment",
+      "quote": "Fruitvale's slipping—we fix it now or explain later why we watched it fall.",
+      "fullStatement": "Our seniors' lunch program at St. Esperanza is a bright spot, but storefronts are quieter and housing pressure's building. I'm directing my staff to convene an emergency merchant roundtable and formally requesting Deputy Mayor Okoro assess program gaps before this becomes a full-blown crisis.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "office": "council_d2",
+  "cycle": 107,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I am addressing the finalization of the Baylight District contract and the need for immediate action to support Downtown Oakland's economic decay. I will vote to execute the Baylight District contract while emphasizing the importance of infrastructure and economic impact data. Additionally, I will claim credit for Jack London's economic success and acknowledge the slipping mood in Downtown Oakland, calling for urgent action to address the math imbalance and economic decay.",
+  "statements": [
+    {
+      "statementId": "STMT-107-council_d2-001",
+      "type": "vote_statement",
+      "topic": "Baylight District Contract Execution",
+      "initiative": "INIT-006",
+      "decision": "YES",
+      "quote": "We must break ground on Baylight now, but let's not forget that development without infrastructure is a debt we pay later.",
+      "fullStatement": "I am voting yes on the Baylight District contract execution, but I want to emphasize that we need to prioritize infrastructure development to support this project. We cannot afford to pay the debt of neglecting our infrastructure later. I expect to see hard commitments locked in writing to ensure that we are not mortgaging our future.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d2-002",
+      "type": "credit_statement",
+      "topic": "Jack London Economic Performance",
+      "initiative": null,
+      "decision": "CLAIM CREDIT",
+      "quote": "Jack London's success is a testament to our focus on basic infrastructure, safety, and letting businesses operate without unnecessary obstruction.",
+      "fullStatement": "I claim credit for the sustained economic performance in Jack London. Our focus on basic infrastructure, safety, and letting businesses operate without unnecessary obstruction has paid off. We should recognize and build on this success to create more thriving neighborhoods like Jack London.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d2-003",
+      "type": "crisis_statement",
+      "topic": "Downtown Oakland Mood Shift",
+      "initiative": null,
+      "decision": "CALL TO ACTION",
+      "quote": "Downtown's daily life is slipping, and I see it too. We need to act now to address the math imbalance and economic decay.",
+      "fullStatement": "I acknowledge the slipping mood in Downtown Oakland and call for urgent action to address the math imbalance and economic decay. We cannot afford to wait; we need to act now to support our businesses and residents in Downtown Oakland.",
+      "trackerUpdates": {}
+    }
+  ]
+}

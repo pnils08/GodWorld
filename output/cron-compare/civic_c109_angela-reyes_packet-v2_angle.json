@@ -1,0 +1,436 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "angela-reyes",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00156",
+      "name": "Angela Reyes",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Enrollment moved in Fruitvale — Temescal has the weakest school record on the table (index 6.8) — the students and teachers who live it",
+      "approach": "Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "schools",
+        "hood": "Temescal",
+        "facts": [
+          "Enrollment moved: Fruitvale +10 students, Glenview +10 students, Dimond +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students vs C108",
+          "Ranked by school quality index: Rockridge 8.87, Baylight District 8.08, West Oakland 8.06, Piedmont Ave 8.06, Brooklyn 8.05, Laurel 7.98, Adams Point 7.98, Jack London 7.96, Fruitvale 7.94, Lake Merritt 7.93, Downtown 7.9, Grand Lake 7.88, Uptown 7.82, Eastlake 6.98, Chinatown 6.97, KONO 6.97, Glenview 6.96, Dimond 6.96, San Antonio 6.92, Ivy Hill 6.92, East Oakland 6.9, Temescal 6.8 (22 neighborhoods)",
+          "Temescal: school quality index 6.8 (was 6.9 at C108), graduation 85.67%, college-ready 57%, teacher quality 6.96, funding 11,500, 311 students",
+          "Rockridge: school quality index 8.87 (was 8.94 at C108), graduation 94.91%, college-ready 77.4%, teacher quality 9.04, funding 15,000, 244 students",
+          "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.84%; per-hood funding on the table totals 286,000"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "Lake Merritt's student population up 13%. Young families moving in? School capacity angle. (general coverage)"
+        ],
+        "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-schools",
+      "hood": "Temescal",
+      "score": null,
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C109",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"District 1 gets OARI because the numbers prove it works—42% fewer unnecessary police deployments.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): accelerated — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): celebrated — \"Two weeks early and $1.2M under budget—that's how Oakland builds public health infrastructure.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): acknowledged — \"Dimond's slow trade deserves attention, West Oakland's progress deserves recognition.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00667",
+          "name": "Lo Thoop",
+          "profile": "Lo Thoop — Creative Writing Teacher — Temescal",
+          "why": "on the ledger in Temescal (Simulation_Ledger)",
+          "role": "Creative Writing Teacher",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00729",
+          "name": "Patricia Nolan",
+          "profile": "Patricia Nolan — Retired teacher — Temescal",
+          "why": "on the ledger in Temescal (Simulation_Ledger)",
+          "role": "Retired teacher",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00994",
+          "name": "Jun Leu",
+          "profile": "Jun Leu — student — Temescal",
+          "why": "on the ledger in Temescal (Simulation_Ledger)",
+          "role": "student",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00975",
+          "name": "Salma Navarro",
+          "profile": "Salma Navarro — student — Temescal",
+          "why": "on the ledger in Temescal (Simulation_Ledger)",
+          "role": "student",
+          "hood": "Temescal"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-912baafccba1"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal has the weakest school record on the table (index 6.8)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109",
+        "id": "F-5321f9b899bc"
+      },
+      {
+        "t": "FACT",
+        "text": "4 students and educators in Temescal; the table says why their school reads the way it does.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109",
+        "id": "F-7ba187a19598"
+      },
+      {
+        "t": "FACT",
+        "text": "Enrollment moved: Fruitvale +10 students, Glenview +10 students, Dimond +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students vs C108",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C109",
+        "id": "F-3fc65601aece"
+      },
+      {
+        "t": "FACT",
+        "text": "Ranked by school quality index: Rockridge 8.87, Baylight District 8.08, West Oakland 8.06, Piedmont Ave 8.06, Brooklyn 8.05, Laurel 7.98, Adams Point 7.98, Jack London 7.96, Fruitvale 7.94, Lake Merritt 7.93, Downtown 7.9, Grand Lake 7.88, Uptown 7.82, Eastlake 6.98, Chinatown 6.97, KONO 6.97, Glenview 6.96, Dimond 6.96, San Antonio 6.92, Ivy Hill 6.92, East Oakland 6.9, Temescal 6.8 (22 neighborhoods)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109",
+        "id": "F-b63d2a9c7335"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal: school quality index 6.8 (was 6.9 at C108), graduation 85.67%, college-ready 57%, teacher quality 6.96, funding 11,500, 311 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109",
+        "id": "F-a85bff5097ca"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: school quality index 8.87 (was 8.94 at C108), graduation 94.91%, college-ready 77.4%, teacher quality 9.04, funding 15,000, 244 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109",
+        "id": "F-828e89befbcb"
+      },
+      {
+        "t": "FACT",
+        "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.84%; per-hood funding on the table totals 286,000",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C109",
+        "id": "F-4eaa79d30344"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-schools",
+      "angle": "Enrollment moved in Fruitvale — Temescal has the weakest school record on the table (index 6.8) — the students and teachers who live it",
+      "label": "Temescal has the weakest school record on the table (index 6.8)",
+      "hookLine": "4 students and educators in Temescal; the table says why their school reads the way it does.",
+      "hood": "Temescal",
+      "citizens": [
+        "Lo Thoop (POP-00667)",
+        "Patricia Nolan (POP-00729)",
+        "Jun Leu (POP-00994)",
+        "Salma Navarro (POP-00975)"
+      ],
+      "popids": [
+        "POP-00667",
+        "POP-00729",
+        "POP-00994",
+        "POP-00975"
+      ],
+      "ref": "output/beats/Neighborhood_Demographics.jsonl @C109",
+      "cycle": 109
+    },
+    "approach": "Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "SCHOOLS-SLICE-2",
+    "kind": "beat-schools",
+    "seat": {
+      "slug": "angela-reyes",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "desk": "civic",
+      "domain": "schools",
+      "builder": "buildSchoolsSlice.js"
+    },
+    "hood": "Temescal",
+    "pulse": {
+      "className": "beat-schools",
+      "score": 100,
+      "label": "Temescal has the weakest school record on the table (index 6.8)",
+      "hood": "Temescal",
+      "source": "output/beats/Neighborhood_Demographics.jsonl @C109"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Enrollment moved in Fruitvale — Temescal has the weakest school record on the table (index 6.8) — the students and teachers who live it",
+      "hookLine": "4 students and educators in Temescal; the table says why their school reads the way it does.",
+      "anchorFacts": [
+        "Enrollment moved: Fruitvale +10 students, Glenview +10 students, Dimond +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students vs C108",
+        "Ranked by school quality index: Rockridge 8.87, Baylight District 8.08, West Oakland 8.06, Piedmont Ave 8.06, Brooklyn 8.05, Laurel 7.98, Adams Point 7.98, Jack London 7.96, Fruitvale 7.94, Lake Merritt 7.93, Downtown 7.9, Grand Lake 7.88, Uptown 7.82, Eastlake 6.98, Chinatown 6.97, KONO 6.97, Glenview 6.96, Dimond 6.96, San Antonio 6.92, Ivy Hill 6.92, East Oakland 6.9, Temescal 6.8 (22 neighborhoods)",
+        "Temescal: school quality index 6.8 (was 6.9 at C108), graduation 85.67%, college-ready 57%, teacher quality 6.96, funding 11,500, 311 students",
+        "Rockridge: school quality index 8.87 (was 8.94 at C108), graduation 94.91%, college-ready 77.4%, teacher quality 9.04, funding 15,000, 244 students",
+        "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.84%; per-hood funding on the table totals 286,000"
+      ],
+      "evidence": [
+        {
+          "text": "Enrollment moved: Fruitvale +10 students, Glenview +10 students, Dimond +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students vs C108",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C109"
+        },
+        {
+          "text": "Ranked by school quality index: Rockridge 8.87, Baylight District 8.08, West Oakland 8.06, Piedmont Ave 8.06, Brooklyn 8.05, Laurel 7.98, Adams Point 7.98, Jack London 7.96, Fruitvale 7.94, Lake Merritt 7.93, Downtown 7.9, Grand Lake 7.88, Uptown 7.82, Eastlake 6.98, Chinatown 6.97, KONO 6.97, Glenview 6.96, Dimond 6.96, San Antonio 6.92, Ivy Hill 6.92, East Oakland 6.9, Temescal 6.8 (22 neighborhoods)",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+        },
+        {
+          "text": "Temescal: school quality index 6.8 (was 6.9 at C108), graduation 85.67%, college-ready 57%, teacher quality 6.96, funding 11,500, 311 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+        },
+        {
+          "text": "Rockridge: school quality index 8.87 (was 8.94 at C108), graduation 94.91%, college-ready 77.4%, teacher quality 9.04, funding 15,000, 244 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+        },
+        {
+          "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.84%; per-hood funding on the table totals 286,000",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C109"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 108
+      },
+      "hooks": [
+        {
+          "text": "Lake Merritt's student population up 13%. Young families moving in? School capacity angle.",
+          "angle": "general coverage",
+          "domain": "EDUCATION",
+          "hood": "Lake Merritt",
+          "priority": 2
+        }
+      ],
+      "note": null,
+      "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00667",
+        "name": "Lo Thoop",
+        "role": "Creative Writing Teacher",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Lo Thoop — Creative Writing Teacher — Temescal",
+        "why": "on the ledger in Temescal (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00729",
+        "name": "Patricia Nolan",
+        "role": "Retired teacher",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Patricia Nolan — Retired teacher — Temescal",
+        "why": "on the ledger in Temescal (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00994",
+        "name": "Jun Leu",
+        "role": "student",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Jun Leu — student — Temescal",
+        "why": "on the ledger in Temescal (Simulation_Ledger)"
+      },
+      {
+        "popid": "POP-00975",
+        "name": "Salma Navarro",
+        "role": "student",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Salma Navarro — student — Temescal",
+        "why": "on the ledger in Temescal (Simulation_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Neighborhood_Demographics.jsonl @C109",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Angela Reyes this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "text": "Angela wants to understand why Temescal's schools are struggling the most in Oakland right now, especially when nearby neighborhoods like Rockridge are thriving. She's curious about the human stories behind the numbers - what's happening in the classrooms and hallways that isn't captured by the statistics. The slight dip in quality index from 6.9 to 6.8 suggests something's slipping, even as enrollment holds steady at 311 students.",
+    "plan": {
+      "chase": "Angela wants to understand why Temescal's schools are struggling the most in Oakland right now, especially when nearby neighborhoods like Rockridge are thriving. She's curious about the human stories behind the numbers - what's happening in the classrooms and hallways that isn't captured by the statistics. The slight dip in quality index from 6.9 to 6.8 suggests something's slipping, even as enrollment holds steady at 311 students.",
+      "focus": "The lived experience of education in Temescal versus the statistical reality, particularly the gap between graduation rates (85.67%) and college readiness (57%).",
+      "why": "With Temescal ranking lowest in school quality index (6.8) citywide, there's a story about what this means for students' futures and how teachers are navigating these challenges daily.",
+      "checks": [
+        "Verify if the college readiness percentage includes vocational/trade school pathways",
+        "Confirm whether teacher quality scores reflect actual classroom conditions or just credentials",
+        "Check if the $11,500 per student funding is being allocated effectively"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00667",
+          "question": "How do you adapt your creative writing curriculum when nearly half your students won't be college-bound?",
+          "basis": "F-a85bff5097ca (Temescal college-ready 57%)"
+        },
+        {
+          "pop": "POP-00729",
+          "question": "From your retired teacher perspective, what's changed most in Temescal schools over the past decade?",
+          "basis": "F-a85bff5097ca (Temescal historical comparison)"
+        },
+        {
+          "pop": "POP-00994",
+          "question": "What does 'college-ready' mean to you as a student in this system?",
+          "basis": "F-a85bff5097ca (college-ready metric)"
+        }
+      ],
+      "interpretation": "The numbers suggest a system where students are graduating but not necessarily prepared for what comes next, with teachers caught between standards and reality.",
+      "unverifiedLead": [
+        "Possible mismatch between standardized metrics and actual student needs",
+        "Community perception of school quality affecting teacher retention",
+        "Impact of neighborhood changes on school demographics"
+      ],
+      "closeQuestion": "Is Temescal's educational challenge about resources, expectations, or something harder to measure?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"District 1 gets OARI because the numbers prove it works—42% fewer unnecessary police deployments.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): accelerated — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): celebrated — \"Two weeks early and $1.2M under budget—that's how Oakland builds public health infrastructure.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): acknowledged — \"Dimond's slow trade deserves attention, West Oakland's progress deserves recognition.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 74,
+  "ranAt": "2026-09-29T11:15:55.199Z"
+}

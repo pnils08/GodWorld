@@ -1,0 +1,480 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "108",
+  "persona": "mason-ortega",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00160",
+      "name": "Mason Ortega",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Temescal kitchens: OakTown Social — the people who work the shift",
+      "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "food-workplaces",
+        "hood": "Temescal",
+        "pulseClass": "hood-kitchens",
+        "economicFrame": "Temescal kitchens: OakTown Social — the people who work the shift",
+        "hook": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+        "namedBusinesses": [
+          "OakTown Social"
+        ],
+        "workplaces": [
+          "OakTown Social — Nightlife & Entertainment — Vanessa Treary (Barista); Vanessa Ramas (Barista)"
+        ],
+        "engineColour": [
+          "Jia Pena — watched the kids on the corner re-enact the play twice, arguing the call both times",
+          "Akua Ortiz — noticed another new spot opening up in Temescal",
+          "Ross Cabral — connected with friends over something small but intense",
+          "Brie Harris — memorized the starting rotation for the Oaks and tested themselves on the BART ride home"
+        ],
+        "roomIsYours": "the line, the regulars, the pace, the tip jar, what the cook is worried about",
+        "forbidden": [
+          "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+          "Do not contradict a role, employer or neighborhood listed here"
+        ],
+        "sceneRule": null
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "Temescal",
+      "score": null,
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "nearby": [
+        {
+          "text": "Dimond | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### Dimond\"; events: world_summary_c108.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### East Oakland\"; events: world_summary_c108.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### Fruitvale\"; events: world_summary_c108.md \"## World Events\""
+        },
+        {
+          "text": "KONO | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### KONO\"; events: world_summary_c108.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c108.md \"### Lake Merritt\"; events: world_summary_c108.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00781",
+          "name": "Vanessa Treary",
+          "profile": "Vanessa Treary — Barista — OakTown Social, Temescal",
+          "why": "works at OakTown Social (Employment_Roster)",
+          "role": "Barista",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-01045",
+          "name": "Vanessa Ramas",
+          "profile": "Vanessa Ramas — Barista — OakTown Social, Temescal",
+          "why": "works at OakTown Social (Employment_Roster)",
+          "role": "Barista",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00916",
+          "name": "Jia Pena",
+          "profile": "Jia Pena — Temescal",
+          "why": "engine seed for Temescal this cycle (Story_Seed_Deck)",
+          "role": null,
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00948",
+          "name": "Akua Ortiz",
+          "profile": "Akua Ortiz — Temescal",
+          "why": "engine seed for Temescal this cycle (Story_Seed_Deck)",
+          "role": null,
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00055",
+          "name": "Ross Cabral",
+          "profile": "Ross Cabral — Temescal",
+          "why": "engine seed for Temescal this cycle (Story_Seed_Deck)",
+          "role": null,
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00169",
+          "name": "Brie Harris",
+          "profile": "Brie Harris — Temescal",
+          "why": "engine seed for Temescal this cycle (Story_Seed_Deck)",
+          "role": null,
+          "hood": "Temescal"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-78217e633afa"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal kitchens · OakTown Social",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+        "id": "F-462d82d27585"
+      },
+      {
+        "t": "FACT",
+        "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+        "id": "F-2af25844ad98"
+      },
+      {
+        "t": "FACT",
+        "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+        "id": "F-e5b9425fdd14"
+      },
+      {
+        "t": "FACT",
+        "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+        "id": "F-e7e329343d01"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Temescal kitchens: OakTown Social — the people who work the shift",
+      "label": "Temescal kitchens · OakTown Social",
+      "hookLine": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+      "hood": "Temescal",
+      "pulseClass": "hood-kitchens",
+      "namedBusinesses": [
+        "OakTown Social"
+      ],
+      "citizens": [
+        "Vanessa Treary (POP-00781)",
+        "Vanessa Ramas (POP-01045)",
+        "Jia Pena (POP-00916)",
+        "Akua Ortiz (POP-00948)",
+        "Ross Cabral (POP-00055)",
+        "Brie Harris (POP-00169)"
+      ],
+      "popids": [
+        "POP-00781",
+        "POP-01045",
+        "POP-00916",
+        "POP-00948",
+        "POP-00055",
+        "POP-00169"
+      ],
+      "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "cycle": 108
+    },
+    "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": {
+    "version": "ECONOMIC-SLICE-3",
+    "variant": "food",
+    "hood": "Temescal",
+    "pulse": {
+      "className": "hood-kitchens",
+      "score": 19,
+      "label": "Temescal kitchens · OakTown Social",
+      "hood": "Temescal",
+      "namedBusinesses": [
+        "OakTown Social"
+      ]
+    },
+    "prewrite": {
+      "pulseClass": "hood-kitchens",
+      "angle": "Temescal kitchens: OakTown Social — the people who work the shift",
+      "hookLine": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+      "namedBusinesses": [
+        "OakTown Social"
+      ],
+      "anchorFacts": [
+        "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+        "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)"
+      ],
+      "evidence": [
+        {
+          "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+        },
+        {
+          "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+        }
+      ],
+      "hooks": [
+        {
+          "text": "Unemployment in Uptown up 13%. Economic stress story. Who's affected and why?",
+          "angle": "baseline context piece",
+          "hood": "Uptown"
+        },
+        {
+          "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+          "angle": "baseline context piece",
+          "hood": null
+        },
+        {
+          "text": "Jesus Jorden has not advanced in 54 years",
+          "angle": "desk rotation",
+          "hood": null
+        }
+      ],
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ]
+    },
+    "businesses": [
+      {
+        "bizId": "BIZ-00038",
+        "name": "OakTown Social",
+        "sector": "Nightlife & Entertainment",
+        "staff": [
+          {
+            "popid": "POP-00781",
+            "name": "Vanessa Treary",
+            "role": "Barista"
+          },
+          {
+            "popid": "POP-01045",
+            "name": "Vanessa Ramas",
+            "role": "Barista"
+          }
+        ]
+      }
+    ],
+    "seeds": [
+      {
+        "seedId": "f8b8147a",
+        "hood": "Temescal",
+        "citizens": [
+          {
+            "popid": "POP-00916",
+            "name": "Jia Pena"
+          },
+          {
+            "popid": "POP-00948",
+            "name": "Akua Ortiz"
+          },
+          {
+            "popid": "POP-00055",
+            "name": "Ross Cabral"
+          },
+          {
+            "popid": "POP-00169",
+            "name": "Brie Harris"
+          }
+        ]
+      }
+    ],
+    "rotation": {
+      "pool": [
+        {
+          "hood": "Jack London",
+          "staffed": 2,
+          "workers": 6,
+          "lastCovered": 106
+        },
+        {
+          "hood": "Temescal",
+          "staffed": 1,
+          "workers": 2,
+          "lastCovered": null
+        },
+        {
+          "hood": "Rockridge",
+          "staffed": 1,
+          "workers": 3,
+          "lastCovered": 107
+        },
+        {
+          "hood": "Fruitvale",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        }
+      ],
+      "picked": "Temescal"
+    },
+    "candidates": [
+      {
+        "className": "hood-kitchens",
+        "hood": "Jack London",
+        "label": "Jack London · 2 staffed / 5 listed",
+        "namedBusinesses": [
+          "Blue Lantern Bar",
+          "Harborline Grill"
+        ]
+      },
+      {
+        "className": "hood-kitchens",
+        "hood": "Rockridge",
+        "label": "Rockridge · 1 staffed / 2 listed",
+        "namedBusinesses": [
+          "OakHouse"
+        ]
+      },
+      {
+        "className": "hood-kitchens",
+        "hood": "Fruitvale",
+        "label": "Fruitvale · 1 staffed / 2 listed",
+        "namedBusinesses": [
+          "Fruitvale Diner"
+        ]
+      }
+    ]
+  },
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160",
+    "text": "Mason's been thinking about the rhythm of neighborhood spots lately—how the same hands that pull espresso shots at OakTown Social also keep the pulse of Temescal alive. He wants to catch Vanessa Treary mid-shift, see how the place breathes when it's just another Tuesday. Not the grand openings or the late-night rushes, but the steady hum of work that holds a block together.",
+    "plan": {
+      "chase": "Mason's been thinking about the rhythm of neighborhood spots lately—how the same hands that pull espresso shots at OakTown Social also keep the pulse of Temescal alive. He wants to catch Vanessa Treary mid-shift, see how the place breathes when it's just another Tuesday. Not the grand openings or the late-night rushes, but the steady hum of work that holds a block together.",
+      "focus": "The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.",
+      "why": "Because the A's might be heading to the World Series, but Temescal's real MVPs are the ones who keep the coffee flowing and the doors open.",
+      "checks": [
+        "Does OakTown Social's growth (3.5%) reflect in the baristas' shifts, or is it just numbers on paper?",
+        "What’s the gap between the ledger’s 'Nightlife & Entertainment' tag and the actual grind of a barista’s day?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00781",
+          "question": "Vanessa—when the A's are playing, does the crowd change, or is it the same faces, same orders, just louder?",
+          "basis": "OakTown Social’s revenue uptick (+$345) might hint at game-day surges, but the real story’s in the rhythm."
+        },
+        {
+          "pop": "POP-01045",
+          "question": "Vanessa Ramas—do you and Treary ever compare notes on who tips better: the pre-work crowd or the post-game folks?",
+          "basis": "Two baristas, same shop—different shifts might mean different worlds."
+        }
+      ],
+      "interpretation": "The ledger calls it 'Nightlife & Entertainment,' but the truth is probably more about fatigue-worn aprons and memorized orders than glittering lights.",
+      "unverifiedLead": [
+        "Is there a silent understanding among the staff about who handles the post-game rush?",
+        "Do the regulars tip differently when the A's win?"
+      ],
+      "closeQuestion": "What’s the one thing you wish people knew about working a shift that looks easy?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Dimond | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Dimond",
+      "ref": "output/neighborhood_texture_c108.md \"### Dimond\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c108.md \"### East Oakland\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c108.md \"### Fruitvale\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "KONO | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "KONO",
+      "ref": "output/neighborhood_texture_c108.md \"### KONO\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c108.md \"### Lake Merritt\"; events: world_summary_c108.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 20,
+  "ranAt": "2026-09-25T11:15:28.582Z"
+}

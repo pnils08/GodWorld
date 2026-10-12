@@ -1,0 +1,483 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00591",
+    "name": "Selena Grant",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Oaks — game-result C109 · 0-2 · L6 — the second club's board read",
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "oaks",
+      "hood": "Baylight District",
+      "facts": [
+        "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+        "Record 0-2 · streak L6",
+        "Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs",
+        "Trigger: cold-streak",
+        "Franchise stability: uncertain",
+        "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+        "Record 0-3 · streak L7",
+        "Stats (feed): Austin Reaves/24pts/4asst, Dillon Brooks/21pts/8rebs, Wendell Carter Jr/12pts/7rebs"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [],
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-oaks-beat",
+    "hood": "Baylight District",
+    "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+    "plan": {
+      "focus": "The Oaks' cold streak and its impact on the team's morale",
+      "closeQuestion": "Can the Oaks break their losing streak and turn their season around?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01022",
+        "name": "Wilson Shepard",
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "profile": "Austin Reaves — SG / The Oaks — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01079",
+        "name": "Dillon Brooks",
+        "profile": "Dillon Brooks — SF / The Oaks — Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "profile": "Ernesto Quintero",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01022-610a00d901",
+        "pop": "POP-01022",
+        "name": "Wilson Shepard",
+        "quote": "I've been feeling like we're still finding our rhythm, you know? The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal. As for morale, I think the team's doing okay, considering. We're not getting the results we want, but we're not letting it get us down either.",
+        "factIds": [
+          "F-9324fd583a99",
+          "F-b10e622132e7"
+        ],
+        "src": "packet.W2[POP-01022]"
+      },
+      {
+        "id": "Q-POP-01027-0b0ea417a1",
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "quote": "Honestly, it's tough to see the team struggling like this. I feel like we're still finding our footing, and it's hard not to worry when we're not seeing the wins. But I trust that we'll get it together, we just need to keep working and supporting each other.",
+        "factIds": [
+          "F-9324fd583a99",
+          "F-b10e622132e7"
+        ],
+        "src": "packet.W2[POP-01027]"
+      },
+      {
+        "id": "Q-POP-01079-a2c538e916",
+        "pop": "POP-01079",
+        "name": "Dillon Brooks",
+        "quote": "Honestly, I've noticed the team's morale has been a bit down lately, but I think we're all just trying to stay focused and work through this tough stretch. As someone who lives in Uptown, I've seen how much the community loves and supports The Oaks, and I'm confident we'll get back on track soon.",
+        "factIds": [
+          "F-b10e622132e7"
+        ],
+        "src": "packet.W2[POP-01079]"
+      },
+      {
+        "id": "Q-POP-00050-6c512b4d42",
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "quote": "I've seen the team's morale take a hit with this cold streak, it's tough to keep the energy up when we're not winning. I feel like we're all trying to stay focused and support each other, but it's hard not to get discouraged. I'm trying to stay steady and keep my head in the game, but it's definitely affecting us.",
+        "factIds": [
+          "F-b10e622132e7",
+          "F-f3470b03883d"
+        ],
+        "src": "packet.W2[POP-00050]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Selena Grant",
+        "text": "rumors of tension between players",
+        "usable": false
+      },
+      {
+        "from": "Selena Grant",
+        "text": "speculation about the coach's future",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result C109 · 0-2 · L6",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+      "id": "F-9324fd583a99"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C109",
+      "id": "F-e2866b587767"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-a689d2920790"
+    },
+    {
+      "t": "FACT",
+      "text": "Record 0-2 · streak L6",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-430c53f6b0de"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-a8638867df48"
+    },
+    {
+      "t": "FACT",
+      "text": "Trigger: cold-streak",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-b10e622132e7"
+    },
+    {
+      "t": "FACT",
+      "text": "Franchise stability: uncertain",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-f3470b03883d"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-984a9f12e804"
+    },
+    {
+      "t": "FACT",
+      "text": "Record 0-3 · streak L7",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-5274ab408d23"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): Austin Reaves/24pts/4asst, Dillon Brooks/21pts/8rebs, Wendell Carter Jr/12pts/7rebs",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C109",
+      "id": "F-d202a0c8af32"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the Oaks feed rows into an analyst's read of an expansion franchise being built in real time — the rotation, the development, the front office and its silences. Evidence first; belief earned with numbers. NOT fan heat, NOT the street, NOT the A's.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person analyst, clean professional sentences",
+      "targetWords": "400-650",
+      "opening": "a supplied Oaks stat, result, or roster observation — never a scene",
+      "closing": "the decision or number the front office still owes an answer on"
+    },
+    "authorizedTexture": [
+      "press row, the practice facility, or a press conference as the reporter's vantage — no invented named venue",
+      "the expansion frame: measuring a supplied fact against what a first-year franchise is expected to look like",
+      "reading a front-office silence or non-answer as a signal, grounded in a supplied fact",
+      "a sourced-beyond-the-release attribution ('a person with knowledge of the front office's thinking') only when the Packet carries the underlying act"
+    ],
+    "textureConditions": [
+      "every result, name, minute, injury, and quote comes from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "real NBA players and teams are sports-layer canon: name them as the feed does and give them nothing the feed didn't",
+      "Oakland citizens on the feed (Varek, Paulson, Abraham, Shepard, any player the feed made a citizen) get a UsageType",
+      "no piece when the cycle has no Oaks row — never written from A's rows"
+    ],
+    "canonBlockers": [
+      "a real-world venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, result, record, streak, minute, injury, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "a fabricated player, coach, owner, or front-office quote",
+      "a personal life, hometown, family, or citizen record given to a real NBA player the feed only names",
+      "the A's as the subject (five other seats own them)",
+      "Chicago, the Bulls, or any prior bureau",
+      "engine or simulation vocabulary; real-world calendar dates (YYYY-MM-DD)"
+    ]
+  },
+  "manifest": {
+    "id": "AM-45652b0bb68a",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-9324fd583a99",
+        "t": "FACT",
+        "text": "Oaks — game-result C109 · 0-2 · L6",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+      },
+      {
+        "id": "F-e2866b587767",
+        "t": "FACT",
+        "text": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C109"
+      },
+      {
+        "id": "F-a689d2920790",
+        "t": "FACT",
+        "text": "Oaks — game-result (preseason), C109: The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-430c53f6b0de",
+        "t": "FACT",
+        "text": "Record 0-2 · streak L6",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-a8638867df48",
+        "t": "FACT",
+        "text": "Stats (feed): AJ Dybantsa/19pts/7rebs/2asst, Wendell Carter Jr/8pts/8rebs",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-b10e622132e7",
+        "t": "FACT",
+        "text": "Trigger: cold-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-f3470b03883d",
+        "t": "FACT",
+        "text": "Franchise stability: uncertain",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-984a9f12e804",
+        "t": "FACT",
+        "text": "Oaks — game-result (preseason), C109: The Oaks lose yet again even with strong efforts from Austin Reaves,",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-5274ab408d23",
+        "t": "FACT",
+        "text": "Record 0-3 · streak L7",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      },
+      {
+        "id": "F-d202a0c8af32",
+        "t": "FACT",
+        "text": "Stats (feed): Austin Reaves/24pts/4asst, Dillon Brooks/21pts/8rebs, Wendell Carter Jr/12pts/7rebs",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C109"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01022-610a00d901",
+        "speakerId": "POP-01022",
+        "speakerName": "Wilson Shepard",
+        "text": "I've been feeling like we're still finding our rhythm, you know? The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal. As for morale, I think the team's doing okay, considering. We're not getting the results we want, but we're not letting it get us down either.",
+        "factIds": [
+          "F-9324fd583a99",
+          "F-b10e622132e7"
+        ],
+        "src": "packet.W2[POP-01022]"
+      },
+      {
+        "id": "Q-POP-01027-0b0ea417a1",
+        "speakerId": "POP-01027",
+        "speakerName": "Austin Reaves",
+        "text": "Honestly, it's tough to see the team struggling like this. I feel like we're still finding our footing, and it's hard not to worry when we're not seeing the wins. But I trust that we'll get it together, we just need to keep working and supporting each other.",
+        "factIds": [
+          "F-9324fd583a99",
+          "F-b10e622132e7"
+        ],
+        "src": "packet.W2[POP-01027]"
+      },
+      {
+        "id": "Q-POP-01079-a2c538e916",
+        "speakerId": "POP-01079",
+        "speakerName": "Dillon Brooks",
+        "text": "Honestly, I've noticed the team's morale has been a bit down lately, but I think we're all just trying to stay focused and work through this tough stretch. As someone who lives in Uptown, I've seen how much the community loves and supports The Oaks, and I'm confident we'll get back on track soon.",
+        "factIds": [
+          "F-b10e622132e7"
+        ],
+        "src": "packet.W2[POP-01079]"
+      },
+      {
+        "id": "Q-POP-00050-6c512b4d42",
+        "speakerId": "POP-00050",
+        "speakerName": "Ernesto Quintero",
+        "text": "I've seen the team's morale take a hit with this cold streak, it's tough to keep the energy up when we're not winning. I feel like we're all trying to stay focused and support each other, but it's hard not to get discouraged. I'm trying to stay steady and keep my head in the game, but it's definitely affecting us.",
+        "factIds": [
+          "F-b10e622132e7",
+          "F-f3470b03883d"
+        ],
+        "src": "packet.W2[POP-00050]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01022",
+        "name": "Wilson Shepard",
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01027",
+        "name": "Austin Reaves",
+        "profile": "Austin Reaves — SG / The Oaks — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01079",
+        "name": "Dillon Brooks",
+        "profile": "Dillon Brooks — SF / The Oaks — Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00050",
+        "name": "Ernesto Quintero",
+        "profile": "Ernesto Quintero",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Selena Grant",
+        "text": "rumors of tension between players",
+        "publishable": false
+      },
+      {
+        "from": "Selena Grant",
+        "text": "speculation about the coach's future",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "press row, the practice facility, or a press conference as the reporter's vantage — no invented named venue",
+      "the expansion frame: measuring a supplied fact against what a first-year franchise is expected to look like",
+      "reading a front-office silence or non-answer as a signal, grounded in a supplied fact",
+      "a sourced-beyond-the-release attribution ('a person with knowledge of the front office's thinking') only when the Packet carries the underlying act"
+    ],
+    "textureConditions": [
+      "every result, name, minute, injury, and quote comes from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "real NBA players and teams are sports-layer canon: name them as the feed does and give them nothing the feed didn't",
+      "Oakland citizens on the feed (Varek, Paulson, Abraham, Shepard, any player the feed made a citizen) get a UsageType",
+      "no piece when the cycle has no Oaks row — never written from A's rows"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, result, record, streak, minute, injury, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "a fabricated player, coach, owner, or front-office quote",
+      "a personal life, hometown, family, or citizen record given to a real NBA player the feed only names",
+      "the A's as the subject (five other seats own them)",
+      "Chicago, the Bulls, or any prior bureau",
+      "engine or simulation vocabulary; real-world calendar dates (YYYY-MM-DD)"
+    ]
+  }
+}

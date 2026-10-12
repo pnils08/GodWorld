@@ -1,0 +1,33 @@
+{
+  "office": "stabilization_fund",
+  "cycle": 106,
+  "speaker": "Marcus Delano Webb",
+  "cascadeSummary": "Implemented Month-seven disbursement batch as authorized by Mayor Santana and City Council, delivering stabilization assistance to 12 additional West Oakland households with full compliance documentation. Expanded outreach targeting commercial corridors showing decline signals per Deputy Mayor Okoro's directive, while maintaining rigorous eligibility review to protect program integrity.",
+  "statements": [
+    {
+      "statementId": "STMT-106-stabilization_fund-001",
+      "type": "operational_status",
+      "topic": "Month-seven disbursement execution",
+      "initiative": "INIT-001",
+      "decision": "Disbursement authorization processed for 12 additional households",
+      "quote": "Sixty-nine households stabilized means sixty-nine West Oakland families who won't face displacement this month—and every case file meets compliance standards that will survive audit.",
+      "fullStatement": "The West Oakland Stabilization Fund has completed processing of the Month-seven disbursement batch per executive authorization, providing stabilization assistance to twelve additional households—bringing our total to sixty-nine families protected with zero compliance exceptions. All disbursement documentation has been verified against eligibility criteria and walks to the Controller's office today with complete fiscal audit trails. Simultaneously, our expanded outreach teams are actively canvassing commercial corridors identified as showing decline signals, ensuring no eligible applicant falls through cracks in these changing neighborhoods. Every application moves with the same rigor that protects both the families we serve and the program's long-term viability.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "MilestoneNotes": "C106: Month-seven disbursement batch delivered to 12 households (69 total); commercial corridor outreach expanded per slipping-block signals",
+        "NextScheduledAction": "Month-eight eligibility review and outreach verification",
+        "NextActionCycle": 107
+      }
+    },
+    {
+      "statementId": "STMT-106-stabilization_fund-002",
+      "type": "constituent_response",
+      "topic": "West Oakland vitality",
+      "initiative": null,
+      "decision": "Commercial corridor outreach expansion",
+      "quote": "The fading storefronts tell the story before the displacement notices do—we're adjusting outreach now to match what the streets are showing us.",
+      "fullStatement": "To West Oakland residents seeing quieter blocks and fading storefronts: our stabilization teams are adjusting outreach now to match what the streets are showing us. The Month-seven intake includes seven commercial tenants from identified slipping blocks who otherwise might have been missed by standard application channels. This is precisely why we cross-check application patterns against neighborhood vitality indicators—to find the need before it becomes a crisis. Every approved application moves through the same rigorous compliance chain, but the front end must be responsive enough to catch destabilization early.",
+      "trackerUpdates": {}
+    }
+  ]
+}

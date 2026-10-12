@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "109",
+  "desk": "civic",
+  "persona": "rachel-torres",
+  "hood": "Chinatown",
+  "quotes": [
+    {
+      "pop": "POP-01041",
+      "name": "Ronald Williams",
+      "quote": "I hear Chinatown's got more incidents than other spots lately, but honestly, at the restaurant we just keep our heads down and do our work. The numbers don't really change how we move through the day."
+    },
+    {
+      "pop": "POP-00142",
+      "name": "Jonas Patel",
+      "quote": "Working in Chinatown, I've noticed the streets feel busier lately with more incidents, but it's hard to say if that's just my perception or if it's really worse than other neighborhoods. The clearance rates seem low, which makes people nervous."
+    },
+    {
+      "pop": "POP-00214",
+      "name": "Jacquez Tearn",
+      "quote": "Man, I hear Chinatown's got the most trouble right now, but I keep my head down, work my shift. Folks say the cops take their time clearing things up, but what can you do? Just keep moving, stay sharp."
+    }
+  ],
+  "claim": "I hear Chinatown's got more incidents than other spots lately, but honestly, at the restaurant we just keep our heads down and do our work. The numbers don't really change how we move through the day.",
+  "src": "citizenVoice PRESS c109",
+  "ranAt": "2026-09-29T18:16:56.530Z"
+}

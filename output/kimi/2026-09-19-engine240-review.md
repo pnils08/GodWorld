@@ -1,0 +1,58 @@
+# engine.240 pin-fix wave — adversarial review (kimi, 2026-09-19)
+
+Read-only. Seven pin cuts (094134af, d358212e, b9c85cc4, 6c30a898, 1b8c21d5, 43446d32, 17233d75), two follow-up fixes (1c7af123, 2db65214), live writes (ed31af91, d3a60cd1, e2b577ae, 9b2e2de5), cards `output/engine-sheet/2026-09-19-wiring-cards-engine242.md` (engine.240 section — run BEFORE each cut this time), bench evidence `output/engine-sheet/2026-09-19-bench-c108-readouts.md`. Every diff read line-by-line; tests re-run locally where they exist (constructionRippleTyping 19/19, hoodBlindTables 20/20, illnessEnvelope 31/31, crimeCarryForward 55/55, businessOwnerDials 36/36).
+
+**Process credit, plainly:** cards before cuts, pre-declared bench expectations written before the fire, and a false verification claim self-corrected with a guard (below). That is the process working. The findings stand on their own either way.
+
+**Headline:** the pins were deleted, not moved. No hood-name-keyed *numeric* table survives on the cycle path in any of the seven files. The wave missed two pin sites — one of them large — and the largest remaining real-Oakland encoding in the sim is named below.
+
+---
+
+## Per-commit verdicts
+
+**1. 094134af — economic ripples → event hood + canon adjacency — CLEAN.** All 21 trigger hood lists and `HOLIDAY_ECONOMIC_ZONES` verified deleted (`economicRippleEngine.js:50-87`). Replacements are genuinely derived: event hood + `Neighborhood_Map.Adjacent` (`:673-679`), holidays via authored Scenes (`sceneHoods_`, `:143-151`), layoffs/hiring via `hoodOfJobMoves_` → `S._bizLookup` + `resolveHoodOrChild_` (`:156-172`). The rng template draw is gone (`S._rng` at `:187` is now a dead store — sweep it). The one surviving literal, 'Jack London' (`:109`), is the declared pre-stadium fallback and `cal.sportsZones` is itself derived. +4 behavior tests. Fixes FACTORY_CLOSURE→West-Oakland (my pin #1) — the highest-blast-radius pin in the sim is dead.
+
+**2. d358212e — media effects, all 22 hoods × AttentionWeight — CLEAN, one soft spot.** The 8-hood list, `NEIGHBORHOOD_MEDIA_PROFILES`, and `HOLIDAY_MEDIA_NEIGHBOURHOODS` are all gone (`:65-86`); the roster is `getCanonNeighborhoods_` (`:74`); AttentionWeight is the sheet column via `getHoodAttention_` (fail-loud on blank cell, `canonNeighborhoodLoader.js:295-305`); the Jack London sports pin now keys `S.sportsZones` (`:825-826`). Soft spot: if the AttentionWeight **column** is ever dropped, weights silently flatten to 1.0 (`:80`) — inconsistent with the loader's fail-loud philosophy; make a missing column throw. Stale comment at `:1394` still describes the deleted pin. Uptown/KONO/Chinatown/Piedmont Ave are no longer structurally blind (my pin #2).
+
+**3. b9c85cc4 — hoodless world events → canon core-sim pool — CLEAN.** `domainNeighborhoods` deleted (its grave is a comment, `:91-97`); the draw is `ev.neighborhood || core-sim pool` (`:242`) over `getCoreSimNeighborhoods_` (CoreSimRank, fail-loud). No domain steers location anymore. The honest follow-up is filed in the message (texture events should take a hood at creation). No test file exists for this module — the message says so; accurate.
+
+**4. 6c30a898 — signal story seeds → the hood carrying the signal — CONCERNS.** The 12 carded signal seeds are all re-keyed to `hoodTop_` over live maps (migration, strain, shock, mood, economy, nightlife, retail, public space — `:1200-1392`), which kills my pin #4. **But the wave's biggest miss sits in the same file, undeclared:** the `holidaySeeds` bank (`applyStorySeeds.js:791-914`) keys 13 holidays to fixed hoods — Thanksgiving→Fruitvale/Downtown, MLK→Downtown/West Oakland, Juneteenth→West Oakland, CincoDeMayo/DiaDeMuertos→Fruitvale, LunarNewYear→Chinatown, OpeningDay→Jack London, Pride→Downtown/Lake Merritt/Uptown. These feed `buildSeedSignals_`/`applySeedLocalBoost_` — they move next cycle's per-hood culture/engagement/sentiment, so they are cycle-path, not §13 colour, and if Mike re-authors Scenes this table silently disagrees with canon forever. Two smaller misses in the same commit: `:998` hardcodes 'Downtown' for the postseason watch-party seed with `sportsVenue` in scope at `:976`; `:935` text says "Temescal and KONO" while the seed hood is KONO only.
+
+**5. 1b8c21d5 — condition city events → condition carriers — CLEAN.** All six condition pools are `{hood}` templates filled from `rankHoods_` over live maps (`:239-244`); CHAOS reads the world events' own hoods. The no-carrier case produces **no event** (`addEvents_` early return, `:113`) — a true absence, not a silent default hood; that is exactly right. The surviving literal pools (seasonal/weather/holiday colour events) carry no numbers and steer nothing — §13 colour, doctrine-clean. T10 asserts strict carrier behavior across 5 seeds.
+
+**6. 43446d32 — crowd map from canon + live state — CLEAN.** Every pinned modifier replaced: baseline districts → `byLabel('nightlife')` on EmployerCharacter (`:331`); weather → canon WeatherZone; chaos → thins the hoods its own events are in; econ boom/bust → top-3 live economies; cultural → authored 'arts' Scene. Zero `crowd["` literals remain (grep + T11 assertion, exact deltas on the real builder). My pin #6 is dead.
+
+**7. 17233d75 — venues by condition — CONCERNS.** BUDGET/UPSCALE/CHAOS_SPOTS now select from weakest/strongest live economies and this cycle's chaos hoods; the hood-named upscale venues were neutralized (Merritt Club → The Members' Club etc.). **Missed pin at `:364-366`:** `publicSpace >= 1.3` pushes "Open-Air Night Plaza" at literal `"Lake Merritt"` — a condition-gated hood literal on the cycle path, the same class this commit fixed three functions up. Small, real, fix at next touch. Venue names that embed hood words (Laurel Taproom, Rockridge Wine Bar) are fixed establishments — colour, not steering — fine.
+
+## The follow-up fixes (from the 242 review)
+
+- **1c7af123 (QoL median + spread) — verified.** The composite's median now includes zeros (`updateCrimeMetrics.js:1042-1050`, collection loops `:1057-1061` push all finite values); `applyHoodLifeQuality_` no longer calls `crimeMedian_`. The sqrt(Σw²) normalization is internally consistent (ratio exactly 0.44, matching the message). The new tests are genuine regression tests — I confirmed 10q-e/10q-f **fail under the old code** and pass now. The "bench C108 caught it: zero QoL lines" claim is plausible from the code (qolPoolFor_ fires only outside 0.45–0.65; the old compression squeezed all 22 hoods inside it). One prose nuance: "keeps one measure's scale" holds for single-part deviations only; all six parts deviating together amplifies 2.26× before the band. Harmless edge: all-zero medians for work/health still silently disable that part (truthy check `:1073-1074` vs `!== null` elsewhere).
+- **2db65214 (phantom keys + tests) — verified.** Unmapped names (10 live `City-wide` rows, revenue-weighted growth ≈8.79) are now excluded rather than median-polluting; I recomputed the live factors from the beats dump with the child fold: **0.958–1.061 vs the claimed 0.958–1.062**. My +35pp outlier was indeed the raw Old Oakland child key — folded, it lands in Downtown and the band no longer binds anywhere on live data. The 7 new tests are behavior-level with boundary cases; 36/36.
+
+## The live-write chain, including the false claim
+
+- ed31af91/d3a60cd1 (Crime_Metrics) — verified in my prior review; method stands.
+- **e2b577ae's verification claim was indeed false, and 9b2e2de5's correction is sound.** The recalibration script reads the *current* live values as "old," so a post-apply re-run computes a second transform, not a check — the re-run could not confirm the first write. The correction's `--verify` recomputes from the committed pre-write backup and compares to a fresh live read with exact equality on identically-rounded doubles; it would catch a mis-write. The anti-double-apply guard (throw if the backup exists) is the right fix for the actual hazard. Two soft spots: `--verify` never exits non-zero on mismatch (a failed check doesn't fail loud), and the correction's "printed 22 not-yet-equal" anecdote doesn't match the script's actual output format — substance right, narrative reconstructed. No guard bypass: backup committed before the write, write builder-approved, read-back performed.
+- One factual correction to hand back: the map mapping is **not** level/70 — it's `(P+V)/100 + preserved pulse residual` (`recalibrateMapReadings.js:30-31`, matching `v3NeighborhoodWriter.js:511` + chaos fold). Downtown's recalibrated C107 row is **0.53**, not 0.54; the 0.54 in the readouts is the engine-written bench C108 row. All 22 rows are internally consistent under the correct mapping.
+
+## Does the fix fix what was broken — bench evidence
+
+- **Lockstep (my B2, was "partly") → FIXED.** The multi-cycle block (bench @62, C109–C111): the ten newly tracked hoods' per-cycle sentiment deltas run sd 0.041 with mixed signs (C109→C110: 0.07, 0.04, …, −0.03, …, −0.02), vs sd 0 before 239b. C110→C111 shows a citywide Valentine/First Friday rise landing on each hood by its own amount (0.12–0.25) — shared event, hood-specific amplitude. That is the exact signature of the repair.
+- **Papered-over storefront lines (my B3, was "partly") → FIXED.** `papered: 0` in all three bench cycles; `notMuchOpen` fires rarely and in the hoods whose retail actually sits low (Temescal 3, Ivy Hill 1 at C111); `newShop` distributes across 6–8 hoods including West Oakland; `rentNotes` concentrates where housing pressure actually is. Citizen life-lines now read the hood's own numbers.
+- **engine.240's own world-level effects → PENDING, and say so.** The two PRE-DECLARED blocks (readouts :256-269) are expectations written before the fire — the post-fire results are not in the file. The multi-cycle C109–C111 evidence is bench @62 = PROD @101, i.e. **pre-240**. Verdicts above rest on the code audit; the wave still owes the fired bench (city sentiment vs expectation 0.2–0.5, Ripple_Ledger hood check, WorldEvents hood spread, no stereotype-named city events, retail spread not widening).
+
+## What still encodes real-world Oakland
+
+One big one, two small:
+
+1. **`applyStorySeeds.js:791-914` — the holidaySeeds bank.** Thirteen holidays pinned to fixed hoods that reproduce real Oakland's demographic geography (LunarNewYear→Chinatown, CincoDeMayo/DiaDeMuertos→Fruitvale, Juneteenth/MLK→West Oakland). This is the largest remaining real-world encoding in the sim, and it sits on the cycle path through the seed-signal boost. The fix is the same pattern the wave used everywhere else: holiday → authored Scenes (`sceneHoods_` already exists, engine.240a uses it for holiday economics).
+2. `buildNightLife.js:364-366` — Lake Merritt plaza push (above).
+3. `applyStorySeeds.js:998` — Downtown watch-party beside the in-scope `sportsVenue`.
+
+Plus three stale comments describing deleted behavior (mediaFeedbackEngine.js:1394, recordWorldEventsv3.js:16-18, buildNightLife.js:72) — sweep at next touch; stale docs are how pins come back.
+
+## Bottom line
+
+The wave is honest: deletions verified in current source, replacements read canon or live per-hood state, every touched test suite got stronger, no weakened assertions, no paint-over. The 242 fixes both verify, and the self-corrected verification claim was handled the right way (guard + sound method, two soft spots noted). Outstanding: the holidaySeeds bank (the sim's largest surviving real-Oakland pin), the Lake Merritt plaza literal, the Downtown watch-party literal, the AttentionWeight-column silent flatten, and the fired-bench results for the pre-declared 240 expectations.
+
+— kimi, 2026-09-19 (read-only; no commits, no engine edits)

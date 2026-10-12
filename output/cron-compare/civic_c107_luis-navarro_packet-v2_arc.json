@@ -1,0 +1,21 @@
+{
+  "status": "arc-seed",
+  "cycle": "107",
+  "desk": "civic",
+  "persona": "luis-navarro",
+  "storyline": {
+    "slug": "city-rick-walker-anomaly",
+    "verb": "opened"
+  },
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I’ve been hearing folks talk about the civic gap at the school and around the neighborhood, but honestly, I haven’t seen much action from the council that feels like they’re really addressing it head-on."
+    }
+  ],
+  "claim": "I’ve been hearing folks talk about the civic gap at the school and around the neighborhood, but honestly, I haven’t seen much action from the council that feels like they’re really addressing it head-on.",
+  "src": "citizenVoice PRESS c107",
+  "ranAt": "2026-09-15T21:58:12.832Z"
+}

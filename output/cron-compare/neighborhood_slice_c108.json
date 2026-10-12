@@ -1,0 +1,181 @@
+{
+  "version": "HOOD-SLICE-1",
+  "empty": false,
+  "cycle": 108,
+  "kind": "beat-neighborhood",
+  "seat": {
+    "slug": "maria-keen",
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "desk": "culture",
+    "domain": "neighborhood",
+    "builder": "buildNeighborhoodSlice.js"
+  },
+  "hood": "Fruitvale",
+  "pulse": {
+    "className": "beat-neighborhood",
+    "score": 100,
+    "label": "Fruitvale: 3 active programs on the record",
+    "hood": "Fruitvale",
+    "source": "output/beats/Community_Programs.jsonl @C108"
+  },
+  "story": {
+    "kind": "beat-neighborhood",
+    "angle": "Fruitvale — the programs that hold the block and the people who founded them",
+    "label": "Fruitvale: 3 active programs on the record",
+    "hookLine": "3 active programs in Fruitvale; Lucia Polito founded one.",
+    "hood": "Fruitvale",
+    "citizens": [
+      "Lucia Polito (POP-00004)"
+    ],
+    "popids": [
+      "POP-00004"
+    ],
+    "ref": "output/beats/Community_Programs.jsonl @C108",
+    "cycle": 108
+  },
+  "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, and the engine's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders and movement numbers are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00004",
+      "name": "Lucia Polito",
+      "role": "Aura Wellness Practitioner",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+      "why": "founded Postpartum Oakland Network (Community_Programs)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C108 PRG-004"
+    },
+    {
+      "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C108 PRG-010"
+    },
+    {
+      "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C108 PRG-016"
+    },
+    {
+      "text": "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C108 vs prev/"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Fruitvale — the programs that hold the block and the people who founded them",
+    "hookLine": "3 active programs in Fruitvale; Lucia Polito founded one.",
+    "anchorFacts": [
+      "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+      "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+      "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+      "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors"
+    ],
+    "evidence": [
+      {
+        "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C108 PRG-004"
+      },
+      {
+        "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C108 PRG-010"
+      },
+      {
+        "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C108 PRG-016"
+      },
+      {
+        "text": "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C108 vs prev/"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 107
+    },
+    "hooks": [
+      {
+        "text": "Lake Merritt seeing 13% population growth. New residents arriving—who are they and why? Neighborhood change angle.",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 3
+      },
+      {
+        "text": "Positive energy in the city. What's driving the mood? Feature opportunity.",
+        "angle": "street-level mood piece",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 2
+      },
+      {
+        "text": "an anniversary dinner grew past the table until half the block seemed to be in the kitchen",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 4
+      },
+      {
+        "text": "Household in West Oakland spending 53% of income on housing",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 6
+      },
+      {
+        "text": "Household in Lake Merritt spending 51% of income on housing",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 6
+      },
+      {
+        "text": "A family bought their home in Fruitvale",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 3
+      },
+      {
+        "text": "A family bought their home in Fruitvale",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 3
+      },
+      {
+        "text": "A family bought their home in Temescal",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Temescal",
+        "priority": 3
+      }
+    ],
+    "note": null,
+    "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+  },
+  "programs": [
+    "Fruitvale Summer Speed Series",
+    "Fruitvale Transit Corridor Mutual Aid",
+    "Postpartum Oakland Network"
+  ],
+  "rotation": {
+    "index": 4,
+    "of": 8
+  },
+  "pointers": [
+    "output/beats/Community_Programs.jsonl @C108",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "107",
+  "desk": "civic",
+  "persona": "freelance-firebrand",
+  "storyline": {
+    "slug": "chinatown-tariq-harris-anomaly",
+    "verb": "opened"
+  },
+  "hood": "Chinatown",
+  "quotes": [
+    {
+      "pop": "POP-01112",
+      "name": "Tariq Harris",
+      "quote": "Honestly, I've noticed that Chinatown doesn't seem to be getting the attention it needs. As someone who lives and works here, it's frustrating to see the decay and feel like nothing's being done about it. I've been trying to make ends meet with my dental assistant job, and it's hard not to feel like the neighborhood is being left behind. I've seen new people moving in from West Oakland, but it's not like that's necessarily a good thing - it just means they're being priced out of their own neighborhood. It feels like we're just trying to hold on to what we have, instead of actually moving forward."
+    },
+    {
+      "pop": "POP-00142",
+      "name": "Jonas Patel",
+      "quote": "I've noticed that Chinatown seems to be struggling, and it feels like there's not much being done to address the issues - as a medical examiner, I see the effects of this decay in my work."
+    },
+    {
+      "pop": "POP-00214",
+      "name": "Jacquez Tearn",
+      "quote": "I feel like Chinatown's been struggling, you know, it's not as lively as it used to be and I've noticed people talking about how things are falling apart around here. I care about this neighborhood and I wish someone would do something about it."
+    }
+  ],
+  "claim": "Honestly, I've noticed that Chinatown doesn't seem to be getting the attention it needs. As someone who lives and works here, it's frustrating to see the decay and feel like nothing's being done about it. I've been trying to make ends meet with my dental assistant job, and it's hard not to feel like the neighborhood is being left behind. I've seen new people moving in from West Oakland, but it's not like that's necessarily a good thing - it just means they're being priced out of their own neighborhood. It feels like we're just trying to hold on to what we have, instead of actually moving forward.",
+  "src": "citizenVoice PRESS c107",
+  "ranAt": "2026-09-16T18:15:59.382Z"
+}

@@ -1,0 +1,402 @@
+[
+  {
+    "pop": "POP-00212",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00212\",\"name\":\"Jessie Hess\",\"role\":\"Barista\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"Your own page at C110 says: \\\"I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence\\\". Is that still how you see Oaks? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"Dimond\",\"focus\":\"The Oaks' preseason games and their impact on the community\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C110\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Jessie Hess — Barista\",\"evidence\":[{\"id\":\"EV-PAGE-9cc37a6347\",\"src\":\"cp-POP-00212-c110-PRESS\",\"text\":\"I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.\",\"src\":\"cp-POP-00212-c110-PRESS\",\"id\":\"F-195f1af6bf9a\"},{\"t\":\"FACT\",\"text\":\"Jessie Hess — Barista\",\"src\":\"Simulation_Ledger profile for POP-00212\",\"id\":\"F-838e80e48234\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "Your own page at C110 says: \"I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence\". Is that still how you see Oaks? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "Dimond",
+        "focus": "The Oaks' preseason games and their impact on the community",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C110"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Jessie Hess — Barista",
+        "evidence": [
+          {
+            "id": "EV-PAGE-9cc37a6347",
+            "src": "cp-POP-00212-c110-PRESS",
+            "text": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.",
+          "src": "cp-POP-00212-c110-PRESS",
+          "id": "F-195f1af6bf9a"
+        },
+        {
+          "t": "FACT",
+          "text": "Jessie Hess — Barista",
+          "src": "Simulation_Ledger profile for POP-00212",
+          "id": "F-838e80e48234"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00722",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00722\",\"name\":\"Daniel Cloak\",\"role\":\"Bakery Worker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"Your own page at C110 says: \\\"I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive\\\". Is that still how you see Oaks? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"Dimond\",\"focus\":\"The Oaks' preseason games and their impact on the community\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C110\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Daniel Cloak — Bakery Worker\",\"evidence\":[{\"id\":\"EV-PAGE-f13b0eb464\",\"src\":\"cp-POP-00722-c110-PRESS\",\"text\":\"I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.\",\"src\":\"cp-POP-00722-c110-PRESS\",\"id\":\"F-d76c043730bc\"},{\"t\":\"FACT\",\"text\":\"Daniel Cloak — Bakery Worker\",\"src\":\"Simulation_Ledger profile for POP-00722\",\"id\":\"F-3465a8f0a83f\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00722",
+        "name": "Daniel Cloak",
+        "role": "Bakery Worker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "Your own page at C110 says: \"I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive\". Is that still how you see Oaks? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "Dimond",
+        "focus": "The Oaks' preseason games and their impact on the community",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C110"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Daniel Cloak — Bakery Worker",
+        "evidence": [
+          {
+            "id": "EV-PAGE-f13b0eb464",
+            "src": "cp-POP-00722-c110-PRESS",
+            "text": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.",
+          "src": "cp-POP-00722-c110-PRESS",
+          "id": "F-d76c043730bc"
+        },
+        {
+          "t": "FACT",
+          "text": "Daniel Cloak — Bakery Worker",
+          "src": "Simulation_Ledger profile for POP-00722",
+          "id": "F-3465a8f0a83f"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00170",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00170\",\"name\":\"Melton Neilon\",\"role\":\"Sourdough Baker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"Your own page at C106 says: \\\"I've heard some folks around Temescal talking about the Oaks analysis, but to be honest, I don't really know what to make of it - as a sourdough baker, I'm more focused on getting my bread just right than following sports news\\\". Is that still how you see Oaks? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"Dimond\",\"focus\":\"The Oaks' preseason games and their impact on the community\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C110\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Melton Neilon — Sourdough Baker\",\"evidence\":[{\"id\":\"EV-PAGE-e7fd5c5116\",\"src\":\"cp-POP-00170-c106-PRESS\",\"text\":\"I've heard some folks around Temescal talking about the Oaks analysis, but to be honest, I don't really know what to make of it - as a sourdough baker, I'm more focused on getting my bread just right than following sports news.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"I've heard some folks around Temescal talking about the Oaks analysis, but to be honest, I don't really know what to make of it - as a sourdough baker, I'm more focused on getting my bread just right than following sports news.\",\"src\":\"cp-POP-00170-c106-PRESS\",\"id\":\"F-35bbcbd1f074\"},{\"t\":\"FACT\",\"text\":\"Melton Neilon — Sourdough Baker\",\"src\":\"Simulation_Ledger profile for POP-00170\",\"id\":\"F-1c49e2ddc864\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "Your own page at C106 says: \"I've heard some folks around Temescal talking about the Oaks analysis, but to be honest, I don't really know what to make of it - as a sourdough baker, I'm more focused on getting my bread just right than following sports news\". Is that still how you see Oaks? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "Dimond",
+        "focus": "The Oaks' preseason games and their impact on the community",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C110"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Melton Neilon — Sourdough Baker",
+        "evidence": [
+          {
+            "id": "EV-PAGE-e7fd5c5116",
+            "src": "cp-POP-00170-c106-PRESS",
+            "text": "I've heard some folks around Temescal talking about the Oaks analysis, but to be honest, I don't really know what to make of it - as a sourdough baker, I'm more focused on getting my bread just right than following sports news."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "I've heard some folks around Temescal talking about the Oaks analysis, but to be honest, I don't really know what to make of it - as a sourdough baker, I'm more focused on getting my bread just right than following sports news.",
+          "src": "cp-POP-00170-c106-PRESS",
+          "id": "F-35bbcbd1f074"
+        },
+        {
+          "t": "FACT",
+          "text": "Melton Neilon — Sourdough Baker",
+          "src": "Simulation_Ledger profile for POP-00170",
+          "id": "F-1c49e2ddc864"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00198",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00198\",\"name\":\"Rick Walker\",\"role\":\"K-8 Teacher,Former Line cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"Your own page at C106 says: \\\"I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else\\\". Is that still how you see Oaks? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"Dimond\",\"focus\":\"The Oaks' preseason games and their impact on the community\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C110\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Rick Walker — K-8 Teacher,Former Line cook\",\"evidence\":[{\"id\":\"EV-PAGE-08f4987a8d\",\"src\":\"cp-POP-00198-c106-PRESS\",\"text\":\"I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else\",\"src\":\"cp-POP-00198-c106-PRESS\",\"id\":\"F-6689f31efc50\"},{\"t\":\"FACT\",\"text\":\"Rick Walker — K-8 Teacher,Former Line cook\",\"src\":\"Simulation_Ledger profile for POP-00198\",\"id\":\"F-31a3ebe941e2\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "Your own page at C106 says: \"I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else\". Is that still how you see Oaks? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "Dimond",
+        "focus": "The Oaks' preseason games and their impact on the community",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C110"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Rick Walker — K-8 Teacher,Former Line cook",
+        "evidence": [
+          {
+            "id": "EV-PAGE-08f4987a8d",
+            "src": "cp-POP-00198-c106-PRESS",
+            "text": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else",
+          "src": "cp-POP-00198-c106-PRESS",
+          "id": "F-6689f31efc50"
+        },
+        {
+          "t": "FACT",
+          "text": "Rick Walker — K-8 Teacher,Former Line cook",
+          "src": "Simulation_Ledger profile for POP-00198",
+          "id": "F-31a3ebe941e2"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "109",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c109_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Jackson Sift",
+        "role": "quoted-source",
+        "popid": "POP-00190"
+      },
+      {
+        "name": "Daniel Cloak",
+        "role": "quoted-source",
+        "popid": "POP-00722"
+      },
+      {
+        "name": "Irene Fay",
+        "role": "quoted-source",
+        "popid": "POP-00794"
+      },
+      {
+        "name": "Darius Clark",
+        "role": "quoted-source",
+        "popid": "POP-00961"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "I've been feeling the energy in the city, especially with the A's doing well. It's like the whole town is coming together, you know? But when it comes to how the city responds to certain episodes, I think we're still figuring some things out. I've seen how it can impact the standings, and it's not just about the game - it's about the community. As someone who works with reentry programs, I see how it affects people's lives, and I hope we can find a way to make it work for everyone.",
+        "sourceRef": "citizenVoice PRESS Jackson Sift"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-e27ed11d6fb3",
+    "draftSha256": "e8627cd0dbb775a475faa9cc640807bc4ace67bffdbeae19530d11ae42617165",
+    "verdict": "output/cron-compare/undocked_c109_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-09-30T23:18:20.652Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:06.429Z"
+}

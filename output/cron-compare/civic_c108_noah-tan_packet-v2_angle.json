@@ -1,0 +1,408 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00157",
+      "name": "Noah Tan",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "C108 fog, 46°F — 2 cycles of fog — what this weather does to a day in the city",
+      "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "environment",
+        "hood": null,
+        "facts": [
+          "This cycle: fog, 46°F, impact 1.3, comfort 0.4, mood introspective, 2 cycles of fog",
+          "Last 3 cycles: C105 rain 49°F, C106 overcast 52°F, C107 fog 44°F",
+          "Tyrie Groin — relied on familiar social circles during cold period",
+          "Marc Allie — helped the kids with homework at the kitchen table"
+        ],
+        "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+        "note": null,
+        "engineHooks": [
+          "Challenging weather (fog) affecting daily routines. Street-level color available. (general coverage)",
+          "The Park household (2) moved from Temescal to Rockridge — moving up from Temescal (desk rotation)",
+          "Rafael Brannie moved from Laurel to Piedmont Ave — moving up from Laurel (desk rotation)",
+          "Sarah Huang moved from Lake Merritt to Grand Lake — priced out of Lake Merritt (desk rotation)"
+        ],
+        "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-weather",
+      "hood": null,
+      "score": null,
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 108",
+      "nearby": [
+        {
+          "text": "Elliott Crane (City Council District 6): approval 65",
+          "src": "output/cron-civic/datawake/civic-office-council-d6_2026-09-23.json"
+        },
+        {
+          "text": "Warren Ashford (City Council District 7): KONO sentiment at 0.17 vs city 0.330; property crime at 40 with 5 incidents",
+          "src": "output/cron-civic/datawake/civic-office-council-d7_2026-09-23.json"
+        },
+        {
+          "text": "Nina Chen (City Council District 8): Our office maintains continuous procedural oversight across Lake Merritt, Adams Point, Grand Lake, a",
+          "src": "output/cron-civic/datawake/civic-office-council-d8_2026-09-23.json"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"world\" (+ 6 co-occurring tokens) recurred 3 cycles",
+          "src": "output/engine_audit_c108.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+          "src": "output/engine_audit_c108.json patterns[1]; evidence: Riley_Digest row(s)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00254",
+          "name": "Tyrie Groin",
+          "profile": "Tyrie Groin — Retail worker — Laurel",
+          "why": "lived the weather this cycle (Who Lived It)",
+          "role": "Retail worker",
+          "hood": "Laurel"
+        },
+        {
+          "pop": "POP-00241",
+          "name": "Marc Allie",
+          "profile": "Marc Allie — Security guard — Laurel",
+          "why": "lived the weather this cycle (Who Lived It)",
+          "role": "Security guard",
+          "hood": "Laurel"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-78217e633afa"
+      },
+      {
+        "t": "FACT",
+        "text": "C108 fog, 46°F — 2 cycles of fog",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 108",
+        "id": "F-c855a1f8d737"
+      },
+      {
+        "t": "FACT",
+        "text": "C108 fog, 46°F — 2 cycles of fog; 2 residents on the record lived it.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 108",
+        "id": "F-b077f7fd65ff"
+      },
+      {
+        "t": "FACT",
+        "text": "This cycle: fog, 46°F, impact 1.3, comfort 0.4, mood introspective, 2 cycles of fog",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 108",
+        "id": "F-5d632f6e245a"
+      },
+      {
+        "t": "FACT",
+        "text": "Last 3 cycles: C105 rain 49°F, C106 overcast 52°F, C107 fog 44°F",
+        "src": "output/beats/Cycle_Weather.jsonl",
+        "id": "F-0905b8841e29"
+      },
+      {
+        "t": "FACT",
+        "text": "Tyrie Groin — relied on familiar social circles during cold period",
+        "src": "output/world_summary_c108.md ## Who Lived It",
+        "id": "F-a90a30e92f06"
+      },
+      {
+        "t": "FACT",
+        "text": "Marc Allie — helped the kids with homework at the kitchen table",
+        "src": "output/world_summary_c108.md ## Who Lived It",
+        "id": "F-4bfa86444dec"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-weather",
+      "angle": "C108 fog, 46°F — 2 cycles of fog — what this weather does to a day in the city",
+      "label": "C108 fog, 46°F — 2 cycles of fog",
+      "hookLine": "C108 fog, 46°F — 2 cycles of fog; 2 residents on the record lived it.",
+      "hood": null,
+      "citizens": [
+        "Tyrie Groin (POP-00254)",
+        "Marc Allie (POP-00241)"
+      ],
+      "popids": [
+        "POP-00254",
+        "POP-00241"
+      ],
+      "ref": "output/beats/Cycle_Weather.jsonl CycleID 108",
+      "cycle": 108
+    },
+    "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "ENVIRONMENT-SLICE-2",
+    "kind": "beat-weather",
+    "seat": {
+      "slug": "noah-tan",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "desk": "civic",
+      "domain": "environment",
+      "builder": "buildEnvironmentSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-weather",
+      "score": 100,
+      "label": "C108 fog, 46°F — 2 cycles of fog",
+      "hood": null,
+      "source": "output/beats/Cycle_Weather.jsonl CycleID 108"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "C108 fog, 46°F — 2 cycles of fog — what this weather does to a day in the city",
+      "hookLine": "C108 fog, 46°F — 2 cycles of fog; 2 residents on the record lived it.",
+      "anchorFacts": [
+        "This cycle: fog, 46°F, impact 1.3, comfort 0.4, mood introspective, 2 cycles of fog",
+        "Last 3 cycles: C105 rain 49°F, C106 overcast 52°F, C107 fog 44°F",
+        "Tyrie Groin — relied on familiar social circles during cold period",
+        "Marc Allie — helped the kids with homework at the kitchen table"
+      ],
+      "evidence": [
+        {
+          "text": "This cycle: fog, 46°F, impact 1.3, comfort 0.4, mood introspective, 2 cycles of fog",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 108"
+        },
+        {
+          "text": "Last 3 cycles: C105 rain 49°F, C106 overcast 52°F, C107 fog 44°F",
+          "src": "output/beats/Cycle_Weather.jsonl"
+        },
+        {
+          "text": "Tyrie Groin — relied on familiar social circles during cold period",
+          "src": "output/world_summary_c108.md ## Who Lived It"
+        },
+        {
+          "text": "Marc Allie — helped the kids with homework at the kitchen table",
+          "src": "output/world_summary_c108.md ## Who Lived It"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_IN_TABLE",
+        "vs": 107
+      },
+      "hooks": [
+        {
+          "text": "Challenging weather (fog) affecting daily routines. Street-level color available.",
+          "angle": "general coverage",
+          "domain": "WEATHER",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "The Park household (2) moved from Temescal to Rockridge — moving up from Temescal",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Rockridge",
+          "priority": 5
+        },
+        {
+          "text": "Rafael Brannie moved from Laurel to Piedmont Ave — moving up from Laurel",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Piedmont Ave",
+          "priority": 5
+        },
+        {
+          "text": "Sarah Huang moved from Lake Merritt to Grand Lake — priced out of Lake Merritt",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Grand Lake",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00254",
+        "name": "Tyrie Groin",
+        "role": "Retail worker",
+        "neighborhood": "Laurel",
+        "business": null,
+        "profile": "Tyrie Groin — Retail worker — Laurel",
+        "why": "lived the weather this cycle (Who Lived It)"
+      },
+      {
+        "popid": "POP-00241",
+        "name": "Marc Allie",
+        "role": "Security guard",
+        "neighborhood": "Laurel",
+        "business": null,
+        "profile": "Marc Allie — Security guard — Laurel",
+        "why": "lived the weather this cycle (Who Lived It)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cycle_Weather.jsonl CycleID 108",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Noah Tan this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "text": "The fog has been relentless these past two cycles, wrapping the city in a damp, introspective haze. I want to explore how this weather shifts daily routines and interactions. Who ventures out into the fog, and who retreats indoors? What does the bay smell like today? I’ll start by talking to Tyrie Groin and Marc Allie, who lived through this weather, to see how it shaped their days.",
+    "plan": {
+      "chase": "The fog has been relentless these past two cycles, wrapping the city in a damp, introspective haze. I want to explore how this weather shifts daily routines and interactions. Who ventures out into the fog, and who retreats indoors? What does the bay smell like today? I’ll start by talking to Tyrie Groin and Marc Allie, who lived through this weather, to see how it shaped their days.",
+      "focus": "The impact of fog on daily life and routines in Oakland.",
+      "why": "Understanding how weather influences behavior and community interactions.",
+      "checks": [
+        "Verify Tyrie Groin's reliance on familiar social circles during the cold period.",
+        "Confirm Marc Allie's routine of helping kids with homework at the kitchen table."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00254",
+          "question": "How did the fog affect your daily routine and social interactions?",
+          "basis": "Tyrie Groin relied on familiar social circles during the cold period."
+        },
+        {
+          "pop": "POP-00241",
+          "question": "How did the fog influence your family's indoor activities?",
+          "basis": "Marc Allie helped the kids with homework at the kitchen table."
+        }
+      ],
+      "interpretation": "The fog seems to drive people inward, both physically and socially, altering routines and interactions.",
+      "unverifiedLead": [
+        "The bay might carry a distinct smell during the fog, influencing those who venture out."
+      ],
+      "closeQuestion": "How does prolonged fog shape the rhythm of life in Oakland?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Elliott Crane (City Council District 6): approval 65",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d6_2026-09-23.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Warren Ashford (City Council District 7): KONO sentiment at 0.17 vs city 0.330; property crime at 40 with 5 incidents",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d7_2026-09-23.json",
+      "popids": [
+        "POP-00504"
+      ]
+    },
+    {
+      "label": "Nina Chen (City Council District 8): Our office maintains continuous procedural oversight across Lake Merritt, Adams Point, Grand Lake, a",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d8_2026-09-23.json",
+      "popids": [
+        "POP-00505"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"world\" (+ 6 co-occurring tokens) recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c108.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c108.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    }
+  ],
+  "laneEntries": 51,
+  "ranAt": "2026-09-23T11:15:47.906Z"
+}

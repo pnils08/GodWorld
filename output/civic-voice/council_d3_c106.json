@@ -1,0 +1,58 @@
+{
+  "office": "council_d3",
+  "cycle": 106,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "I am demanding binding merchant protection covenants for Fruitvale Transit Hub Phase II, accelerating Alternative Response expansion to my district with Fruitvale-specific adaptation, and insisting the Apprenticeship Pipeline deliver 50% of cleared slots to San Antonio's commercial corridor. The incoherence across West Oakland, Fruitvale, and East Oakland requires district-tailored responses, not replication without grounding.",
+  "statements": [
+    {
+      "statementId": "STMT-106-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Fruitvale Transit Hub Phase II design-phase merchant protections",
+      "initiative": "INIT-003",
+      "decision": "Conditional support for design-phase kickoff pending binding District 3 merchant protection covenants",
+      "quote": "Transit infrastructure must seed storefront revival, not displace it. I want vendor protection covenants in writing before a single blueprint gets finalized.",
+      "fullStatement": "I support the Mayor's design-phase authorization for Fruitvale Transit Hub Phase II, but I am submitting a formal memo to the Transit Hub planning team with non-negotiable requirements: ground-floor retail preservation minimums, temporary relocation guarantees for existing small businesses during construction, and first-right-of-return for displaced vendors. The Mayor says Fruitvale's small businesses are the heart of this project—I'm demanding that heart gets contractual protection, not just rhetorical acknowledgment. San Antonio apprentices, including Jamal Thompson's cohort at the Echo, must be written into maintenance and operations contracts from day one, not added as an afterthought. My approval dropped five points this cycle because my constituents know promises without paper are just wind.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d3-002",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative expansion to District 3",
+      "initiative": "INIT-002",
+      "decision": "Support immediate expansion to Fruitvale with district-adapted mutual aid integration, distinct from D1 model",
+      "quote": "Safety isn't a template. Toby Lamont's street teams and Marisol Achebe's mutual aid networks have been holding Fruitvale together while we debated—now we resource them.",
+      "fullStatement": "The engine flags Fruitvale's daily life visibly declining alongside West Oakland and East Oakland, yet no city program is currently pointed at it. I am done waiting. I support Alternative Response expansion to District 3, but I am explicitly rejecting replication of D7's model without adaptation. Fruitvale's mutual aid infrastructure—Toby Lamont's street teams, the networks Marisol Achebe built through St. Esperanza Parish—must be the foundation, not an add-on. We need response teams that speak Spanish, know the vendor corridors, and can de-escalate without escalating to policing. The D1 expansion launched in C105 with monthly reporting; I want Fruitvale's pilot launched this cycle with the same accountability, but grounded in our own community safety practices, not Temescal's.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d3-003",
+      "type": "vote_statement",
+      "topic": "Youth Apprenticeship Pipeline backlog clearance and San Antonio allocation",
+      "initiative": "INIT-007",
+      "decision": "Support verification pending documented 50% slot allocation to San Antonio commercial corridor projects",
+      "quote": "We're not clearing paperwork—we're clearing pathways. San Antonio's street trade is slow despite upbeat mood; that gap needs bodies and paychecks, not optimism.",
+      "fullStatement": "I support the Mayor's backlog clearance verification, but I am holding my approval contingent on documented delivery of my C105 demand: 50% of cleared backlog slots to San Antonio's commercial corridor projects by quarter's end. San Antonio is living a paradox—upbeat mood, slow street trade, low crime—which means the economic pipeline is broken despite community resilience. The Apprenticeship Pipeline has $12.5 million and administrative orders in place; what it needs is geographic equity enforcement. I want monthly slot allocation reports by corridor, not just citywide aggregates that hide San Antonio's continued exclusion. Jamal Thompson's cohort at the Echo was my promise; I want that cohort's expansion written into this cycle's deliverables.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d3-004",
+      "type": "vote_statement",
+      "topic": "Cross-district incoherence resolution",
+      "initiative": null,
+      "decision": "Demand district-specific program adaptation rather than unified expansion model",
+      "quote": "Fruitvale's success shouldn't clash with East Oakland's needs—but treating them as identical will fail both.",
+      "fullStatement": "The engine flags high-severity incoherence across West Oakland, Fruitvale, and East Oakland with no city program currently answering it. I proposed a task force in C105 to harmonize expansion models; I am now clarifying that harmonization does not mean homogenization. West Oakland needs stabilization funds and anti-displacement guardrails. Fruitvale needs transit-anchored economic development with merchant protections. East Oakland needs housing pressure relief and commercial corridor investment. I am calling for three distinct program adaptations under the Alternative Response and Apprenticeship Pipeline umbrellas, each with district-specific implementation metrics reported separately to Council. The Mayor's agenda acknowledges Downtown's mood shift; I am demanding equivalent granular attention to my district's distinct conditions, not lumped treatment with D1 and D5.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d3-005",
+      "type": "vote_statement",
+      "topic": "Constituent credit and accountability",
+      "initiative": null,
+      "decision": "Claim Fruitvale recovery credit for mutual aid networks and small business owners; demand San Antonio economic intervention",
+      "quote": "Fruitvale's comeback was built by diner owners and street teams. San Antonio's momentum? Still waiting on the investment I demanded.",
+      "fullStatement": "Fruitvale's mood is clearly upbeat, street trade steady, crime low—because Toby Lamont's teams, Marisol Achebe's parish networks, and the small business owners who kept their doors open through the worst did the work. I am naming them. I am also naming what remains undone: San Antonio has the same upbeat mood but slow street trade, which means the economic infrastructure hasn't arrived despite community readiness. My C105 demand for 50% Apprenticeship Pipeline slots to San Antonio was a start; I am now demanding a parallel commercial corridor stabilization fund modeled on West Oakland's, scaled to San Antonio's specific needs. The Mayor's agenda names Temescal's construction milestone and Downtown's mood shift; I am ensuring San Antonio's economic gap and Fruitvale's community-built recovery both get named from this dais.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "angela-reyes",
+  "byline": "Angela Reyes",
+  "bylinePopid": "POP-00156",
+  "article": "output/cron-compare/staged/civic_c110_angela-reyes_packet-v2_anthropic-claude-haiku-4-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Aaron Whitfield",
+        "role": "quoted-source",
+        "popid": "POP-00040"
+      },
+      {
+        "name": "Lila Bennington",
+        "role": "quoted-source",
+        "popid": "POP-00317"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "Oh, I actually teach in Fruitvale, not Rockridge. But I can tell you that teaching anywhere in Oakland means constantly balancing the needs of so many different kids with what resources we actually have. The community here—when they show up for us—it makes all the difference. Just last week, one of my student's grandparents volunteered to help with reading circles. That kind of thing keeps me going.",
+        "sourceRef": "citizenVoice PRESS Lila Bennington"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-54ef10b62ef2",
+    "draftSha256": "f7e51d2a7e08e0cc2107b0fc2ef7b14e11cc52aab3a041f784f8556881f13d9c",
+    "verdict": "output/cron-compare/civic_c110_angela-reyes_packet-v2_anthropic-claude-haiku-4-5.rhea.json",
+    "ranAt": "2026-10-06T23:18:05.134Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.476Z"
+}

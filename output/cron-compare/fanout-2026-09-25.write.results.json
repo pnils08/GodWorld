@@ -1,0 +1,38 @@
+{
+  "date": "2026-09-25",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Kai Marston",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Sharon Okafor",
+      "desk": "culture",
+      "ok": false,
+      "error": "no angle artifact at output/cron-compare/culture_c108_sharon-okafor_packet-v2_angle.json — run --stage=angle first"
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Celeste Tran",
+      "desk": "wire",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-09-25T23:19:23.838Z"
+}

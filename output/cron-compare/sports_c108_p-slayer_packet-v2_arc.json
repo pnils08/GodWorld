@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "sports",
+  "persona": "p-slayer",
+  "storyline": {
+    "slug": "downtown-john-ellis-injury-load",
+    "verb": "opened"
+  },
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00033",
+      "name": "John Ellis",
+      "quote": "The emotional toll of the game is real, I can feel it myself after a tough loss. It's not just about winning or losing, it's about the pressure to perform and the weight of expectation from the fans. Sometimes it feels like we're carrying the whole city on our shoulders."
+    },
+    {
+      "pop": "POP-01078",
+      "name": "Pablo Almanzar",
+      "quote": "I think the emotional toll of the game can be really high, not just for the players but for the fans too. I've seen how much it means to people around here, like when I'm out in the neighborhood and everyone's talking about the game. It's like the whole city is invested in it."
+    },
+    {
+      "pop": "POP-00597",
+      "name": "Eric Taveras",
+      "quote": "I feel like the game can be really tough on us players, both physically and mentally. The pressure to perform is always there, and when we don't do well, it can be hard to shake off the feeling of disappointment. I think the fans feel it too, they're so invested in the team and when we lose, it's like they're feeling the loss just as much as we are."
+    },
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "I feel like the game can be really tough on the players and the fans, it's like we're all in it together and when they lose, we feel it too."
+    }
+  ],
+  "claim": "The emotional toll of the game is real, I can feel it myself after a tough loss. It's not just about winning or losing, it's about the pressure to perform and the weight of expectation from the fans. Sometimes it feels like we're carrying the whole city on our shoulders.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-23T18:17:56.865Z"
+}

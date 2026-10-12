@@ -1,0 +1,35 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "noah-tan",
+  "byline": "Noah Tan",
+  "bylinePopid": "POP-00157",
+  "article": "output/cron-compare/staged/civic_c110_noah-tan_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "C110 fog, 52°F after overcast",
+        "sourceRef": "output/beats/Cycle_Weather.jsonl CycleID 110"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-8ba825281ce8",
+    "draftSha256": "552b5fef61d0a4c4a0e6e2b6b319f2c9e33e98008d19323e7d8a1fddd825aa5b",
+    "verdict": "output/cron-compare/civic_c110_noah-tan_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-07T23:17:54.818Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.595Z"
+}

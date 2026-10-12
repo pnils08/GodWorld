@@ -1,0 +1,1054 @@
+{
+  "cycle": 110,
+  "scannedAt": "2026-10-07T11:15:09.943Z",
+  "signalPath": "/root/GodWorld/output/desk_signal_c110.json",
+  "signalMissing": false,
+  "illnessRate": 4.5,
+  "forceThreshold": 35,
+  "shouldForce": true,
+  "maxScore": 38,
+  "top": {
+    "className": "crisis-unattended",
+    "score": 38,
+    "desk": "civic",
+    "kind": "anomaly",
+    "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 3 cycles",
+    "ref": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s) ",
+    "hood": null,
+    "popids": [],
+    "handle": {
+      "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+      "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+    },
+    "story": {
+      "ref": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s) ",
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 3 cycles",
+      "kind": "anomaly",
+      "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+      "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+      "citizens": null,
+      "popids": [],
+      "hood": null,
+      "stinkClass": "crisis-unattended"
+    }
+  },
+  "candidates": [
+    {
+      "className": "crisis-unattended",
+      "score": 38,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 3 cycles",
+      "ref": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s) ",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[2]; evidence: Riley_Digest row(s) ",
+        "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 3 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "crisis-unattended"
+      }
+    },
+    {
+      "className": "implementation-gap",
+      "score": 30,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "stuck-initiative (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"design-phase\" for 3 cycles",
+      "ref": "output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00744",
+        "POP-00756",
+        "POP-00953"
+      ],
+      "handle": {
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 3 cycles.",
+        "citizens": [
+          "Carmen Solis (POP-00953)",
+          "Tomas Renteria (POP-00744)",
+          "Ramon Solano (POP-00756)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+        "label": "stuck-initiative (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"design-phase\" for 3 cycles",
+        "kind": "anomaly",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 3 cycles.",
+        "citizens": [
+          "Carmen Solis (POP-00953)",
+          "Tomas Renteria (POP-00744)",
+          "Ramon Solano (POP-00756)"
+        ],
+        "popids": [
+          "POP-00744",
+          "POP-00756",
+          "POP-00953"
+        ],
+        "hood": "Fruitvale",
+        "stinkClass": "implementation-gap"
+      }
+    },
+    {
+      "className": "implementation-gap",
+      "score": 30,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "stuck-initiative (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"operational\" for 3 cycles",
+      "ref": "output/engine_audit_c110.json patterns[1]; evidence: Initiative_Tracker row(s) 7",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "popids": [
+        "POP-00891",
+        "POP-01113",
+        "POP-01139"
+      ],
+      "handle": {
+        "angle": "Oakland Youth Apprenticeship Pipeline stalled in operational — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying West Oakland has not advanced in 3 cycles.",
+        "citizens": [
+          "Renée Cabrera (POP-00891)",
+          "Quinn Adeyemi (POP-01113)",
+          "Janelle Rossi (POP-01139)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[1]; evidence: Initiative_Tracker row(s) 7",
+        "label": "stuck-initiative (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"operational\" for 3 cycles",
+        "kind": "anomaly",
+        "angle": "Oakland Youth Apprenticeship Pipeline stalled in operational — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying West Oakland has not advanced in 3 cycles.",
+        "citizens": [
+          "Renée Cabrera (POP-00891)",
+          "Quinn Adeyemi (POP-01113)",
+          "Janelle Rossi (POP-01139)"
+        ],
+        "popids": [
+          "POP-00891",
+          "POP-01113",
+          "POP-01139"
+        ],
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "stinkClass": "implementation-gap"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 28,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "ref": "output/engine_audit_c110.json patterns[3]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[3]; evidence: WorldEvents_V3_Ledger row(s) ",
+        "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 28,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "production-imbalance (medium) | 19 neighborhoods report migration flow with zero economic events this cycle",
+      "ref": "output/engine_audit_c110.json patterns[4]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Downtown, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "popids": [
+        "POP-00127",
+        "POP-01154",
+        "POP-01157"
+      ],
+      "handle": {
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in 6 cycles.",
+        "citizens": [
+          "Felicia Grandberry (POP-01154)",
+          "Wesley Oduya (POP-01157)",
+          "Mason Miller (POP-00127)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[4]; evidence: Neighborhood_Map row(s) ",
+        "label": "production-imbalance (medium) | 19 neighborhoods report migration flow with zero economic events this cycle",
+        "kind": "anomaly",
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in 6 cycles.",
+        "citizens": [
+          "Felicia Grandberry (POP-01154)",
+          "Wesley Oduya (POP-01157)",
+          "Mason Miller (POP-00127)"
+        ],
+        "popids": [
+          "POP-00127",
+          "POP-01154",
+          "POP-01157"
+        ],
+        "hood": "Downtown, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Adams Point sentiment rose 0.15 (0.23 → 0.38)",
+      "ref": "output/engine_audit_c110.json patterns[13]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Adams Point",
+      "popids": [
+        "POP-00645",
+        "POP-00782",
+        "POP-01171"
+      ],
+      "handle": {
+        "angle": "civic gain in Adams Point — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Adams Point this cycle.",
+        "citizens": [
+          "Naomi Fairweather (POP-01171)",
+          "Ezekiel Campbell (POP-00645)",
+          "Devon Willis (POP-00782)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[13]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Adams Point sentiment rose 0.15 (0.23 → 0.38)",
+        "kind": "anomaly",
+        "angle": "civic gain in Adams Point — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Adams Point this cycle.",
+        "citizens": [
+          "Naomi Fairweather (POP-01171)",
+          "Ezekiel Campbell (POP-00645)",
+          "Devon Willis (POP-00782)"
+        ],
+        "popids": [
+          "POP-00645",
+          "POP-00782",
+          "POP-01171"
+        ],
+        "hood": "Adams Point",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Baylight District sentiment rose 0.21 (0.29 → 0.5)",
+      "ref": "output/engine_audit_c110.json patterns[26]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Baylight District",
+      "popids": [
+        "POP-00347",
+        "POP-00777",
+        "POP-01127"
+      ],
+      "handle": {
+        "angle": "economic gain in Baylight District — the positive outcome and its driver",
+        "hookLine": "A economic metric improved in Baylight District this cycle.",
+        "citizens": [
+          "Dawson Nguyen (POP-00347)",
+          "Rico Valdez (POP-00777)",
+          "Freya Rao (POP-01127)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[26]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Baylight District sentiment rose 0.21 (0.29 → 0.5)",
+        "kind": "anomaly",
+        "angle": "economic gain in Baylight District — the positive outcome and its driver",
+        "hookLine": "A economic metric improved in Baylight District this cycle.",
+        "citizens": [
+          "Dawson Nguyen (POP-00347)",
+          "Rico Valdez (POP-00777)",
+          "Freya Rao (POP-01127)"
+        ],
+        "popids": [
+          "POP-00347",
+          "POP-00777",
+          "POP-01127"
+        ],
+        "hood": "Baylight District",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Brooklyn sentiment rose 0.28 (0.27 → 0.55)",
+      "ref": "output/engine_audit_c110.json patterns[17]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Brooklyn",
+      "popids": [
+        "POP-00714",
+        "POP-00988",
+        "POP-01010"
+      ],
+      "handle": {
+        "angle": "civic gain in Brooklyn — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Brooklyn this cycle.",
+        "citizens": [
+          "Drago Helio (POP-00714)",
+          "Sefu Helio (POP-00988)",
+          "Minh Raimon (POP-01010)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[17]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Brooklyn sentiment rose 0.28 (0.27 → 0.55)",
+        "kind": "anomaly",
+        "angle": "civic gain in Brooklyn — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Brooklyn this cycle.",
+        "citizens": [
+          "Drago Helio (POP-00714)",
+          "Sefu Helio (POP-00988)",
+          "Minh Raimon (POP-01010)"
+        ],
+        "popids": [
+          "POP-00714",
+          "POP-00988",
+          "POP-01010"
+        ],
+        "hood": "Brooklyn",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Chinatown sentiment rose 0.30 (0.28 → 0.58)",
+      "ref": "output/engine_audit_c110.json patterns[16]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Chinatown",
+      "popids": [
+        "POP-00036",
+        "POP-00599",
+        "POP-00799"
+      ],
+      "handle": {
+        "angle": "civic gain in Chinatown — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Chinatown this cycle.",
+        "citizens": [
+          "Marcus Osei (POP-00036)",
+          "Jax Caldera (POP-00799)",
+          "Jose Colon (POP-00599)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[16]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Chinatown sentiment rose 0.30 (0.28 → 0.58)",
+        "kind": "anomaly",
+        "angle": "civic gain in Chinatown — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Chinatown this cycle.",
+        "citizens": [
+          "Marcus Osei (POP-00036)",
+          "Jax Caldera (POP-00799)",
+          "Jose Colon (POP-00599)"
+        ],
+        "popids": [
+          "POP-00036",
+          "POP-00599",
+          "POP-00799"
+        ],
+        "hood": "Chinatown",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Dimond sentiment rose 0.24 (0.11 → 0.35)",
+      "ref": "output/engine_audit_c110.json patterns[20]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Dimond",
+      "popids": [
+        "POP-01086",
+        "POP-01146",
+        "POP-01181"
+      ],
+      "handle": {
+        "angle": "civic gain in Dimond — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Dimond this cycle.",
+        "citizens": [
+          "Devin Castellanos (POP-01146)",
+          "Ingeborg Hallstrom (POP-01181)",
+          "Bruce Turner (POP-01086)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[20]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Dimond sentiment rose 0.24 (0.11 → 0.35)",
+        "kind": "anomaly",
+        "angle": "civic gain in Dimond — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Dimond this cycle.",
+        "citizens": [
+          "Devin Castellanos (POP-01146)",
+          "Ingeborg Hallstrom (POP-01181)",
+          "Bruce Turner (POP-01086)"
+        ],
+        "popids": [
+          "POP-01086",
+          "POP-01146",
+          "POP-01181"
+        ],
+        "hood": "Dimond",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Downtown sentiment rose 0.34 (0.28 → 0.62)",
+      "ref": "output/engine_audit_c110.json patterns[6]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00212",
+        "POP-00753",
+        "POP-00764"
+      ],
+      "handle": {
+        "angle": "civic gain in Downtown — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Downtown this cycle.",
+        "citizens": [
+          "Eunice Marston (POP-00753)",
+          "Tao Lee (POP-00764)",
+          "Jessie Hess (POP-00212)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[6]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Downtown sentiment rose 0.34 (0.28 → 0.62)",
+        "kind": "anomaly",
+        "angle": "civic gain in Downtown — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Downtown this cycle.",
+        "citizens": [
+          "Eunice Marston (POP-00753)",
+          "Tao Lee (POP-00764)",
+          "Jessie Hess (POP-00212)"
+        ],
+        "popids": [
+          "POP-00212",
+          "POP-00753",
+          "POP-00764"
+        ],
+        "hood": "Downtown",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | East Oakland sentiment rose 0.28 (0.34 → 0.62)",
+      "ref": "output/engine_audit_c110.json patterns[27]; evidence: Neighborhood_Map row(s) ",
+      "hood": "East Oakland",
+      "popids": [
+        "POP-01047",
+        "POP-01055",
+        "POP-01164"
+      ],
+      "handle": {
+        "angle": "civic gain in East Oakland — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in East Oakland this cycle.",
+        "citizens": [
+          "Maria Conteras (POP-01047)",
+          "Hector Quintanilla (POP-01164)",
+          "Jerome Pittman (POP-01055)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[27]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | East Oakland sentiment rose 0.28 (0.34 → 0.62)",
+        "kind": "anomaly",
+        "angle": "civic gain in East Oakland — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in East Oakland this cycle.",
+        "citizens": [
+          "Maria Conteras (POP-01047)",
+          "Hector Quintanilla (POP-01164)",
+          "Jerome Pittman (POP-01055)"
+        ],
+        "popids": [
+          "POP-01047",
+          "POP-01055",
+          "POP-01164"
+        ],
+        "hood": "East Oakland",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Eastlake sentiment rose 0.17 (0.34 → 0.51)",
+      "ref": "output/engine_audit_c110.json patterns[18]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Eastlake",
+      "popids": [
+        "POP-01088",
+        "POP-01105",
+        "POP-01118"
+      ],
+      "handle": {
+        "angle": "civic gain in Eastlake — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Eastlake this cycle.",
+        "citizens": [
+          "Joel Clark (POP-01088)",
+          "Rashida Foster (POP-01105)",
+          "Hyejin Ward (POP-01118)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[18]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Eastlake sentiment rose 0.17 (0.34 → 0.51)",
+        "kind": "anomaly",
+        "angle": "civic gain in Eastlake — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Eastlake this cycle.",
+        "citizens": [
+          "Joel Clark (POP-01088)",
+          "Rashida Foster (POP-01105)",
+          "Hyejin Ward (POP-01118)"
+        ],
+        "popids": [
+          "POP-01088",
+          "POP-01105",
+          "POP-01118"
+        ],
+        "hood": "Eastlake",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Fruitvale sentiment rose 0.27 (0.42 → 0.69)",
+      "ref": "output/engine_audit_c110.json patterns[10]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00636",
+        "POP-00766",
+        "POP-01057"
+      ],
+      "handle": {
+        "angle": "civic gain in Fruitvale — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Fruitvale this cycle.",
+        "citizens": [
+          "Manjit Singh (POP-00766)",
+          "Nina Reyes (POP-01057)",
+          "Luis Navarro (POP-00636)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[10]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Fruitvale sentiment rose 0.27 (0.42 → 0.69)",
+        "kind": "anomaly",
+        "angle": "civic gain in Fruitvale — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Fruitvale this cycle.",
+        "citizens": [
+          "Manjit Singh (POP-00766)",
+          "Nina Reyes (POP-01057)",
+          "Luis Navarro (POP-00636)"
+        ],
+        "popids": [
+          "POP-00636",
+          "POP-00766",
+          "POP-01057"
+        ],
+        "hood": "Fruitvale",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Glenview sentiment rose 0.22 (0.26 → 0.48)",
+      "ref": "output/engine_audit_c110.json patterns[19]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Glenview",
+      "popids": [
+        "POP-01087",
+        "POP-01151",
+        "POP-01194"
+      ],
+      "handle": {
+        "angle": "civic gain in Glenview — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Glenview this cycle.",
+        "citizens": [
+          "Solveig Anand (POP-01194)",
+          "Luis Ferreira-Nash (POP-01151)",
+          "Marcus King (POP-01087)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[19]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Glenview sentiment rose 0.22 (0.26 → 0.48)",
+        "kind": "anomaly",
+        "angle": "civic gain in Glenview — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Glenview this cycle.",
+        "citizens": [
+          "Solveig Anand (POP-01194)",
+          "Luis Ferreira-Nash (POP-01151)",
+          "Marcus King (POP-01087)"
+        ],
+        "popids": [
+          "POP-01087",
+          "POP-01151",
+          "POP-01194"
+        ],
+        "hood": "Glenview",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Grand Lake sentiment rose 0.21 (0.28 → 0.49)",
+      "ref": "output/engine_audit_c110.json patterns[14]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Grand Lake",
+      "popids": [
+        "POP-00001",
+        "POP-00002",
+        "POP-01049"
+      ],
+      "handle": {
+        "angle": "civic gain in Grand Lake — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Grand Lake this cycle.",
+        "citizens": [
+          "Vinnie Keane (POP-00001)",
+          "Sarah Huang (POP-01049)",
+          "Amara Keane (POP-00002)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[14]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Grand Lake sentiment rose 0.21 (0.28 → 0.49)",
+        "kind": "anomaly",
+        "angle": "civic gain in Grand Lake — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Grand Lake this cycle.",
+        "citizens": [
+          "Vinnie Keane (POP-00001)",
+          "Sarah Huang (POP-01049)",
+          "Amara Keane (POP-00002)"
+        ],
+        "popids": [
+          "POP-00001",
+          "POP-00002",
+          "POP-01049"
+        ],
+        "hood": "Grand Lake",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: construction-planning → construction-active",
+      "ref": "output/engine_audit_c110.json patterns[5]; evidence: Initiative_Tracker row(s) 6",
+      "hood": "Jack London, Downtown",
+      "popids": [
+        "POP-00056",
+        "POP-00688",
+        "POP-01027"
+      ],
+      "handle": {
+        "angle": "Baylight District — Final Council Vote advanced from construction-planning to construction-active — what the milestone delivers and who carried it",
+        "hookLine": "Baylight District — Final Council Vote advanced from construction-planning to construction-active; a milestone worth covering, not burying.",
+        "citizens": [
+          "Austin Reaves (POP-01027)",
+          "Mint Condition (POP-00056)",
+          "Merkin Jumper (POP-00688)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[5]; evidence: Initiative_Tracker row(s) 6",
+        "label": "improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: construction-planning → construction-active",
+        "kind": "anomaly",
+        "angle": "Baylight District — Final Council Vote advanced from construction-planning to construction-active — what the milestone delivers and who carried it",
+        "hookLine": "Baylight District — Final Council Vote advanced from construction-planning to construction-active; a milestone worth covering, not burying.",
+        "citizens": [
+          "Austin Reaves (POP-01027)",
+          "Mint Condition (POP-00056)",
+          "Merkin Jumper (POP-00688)"
+        ],
+        "popids": [
+          "POP-00056",
+          "POP-00688",
+          "POP-01027"
+        ],
+        "hood": "Jack London, Downtown",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Ivy Hill sentiment rose 0.15 (0.19 → 0.34)",
+      "ref": "output/engine_audit_c110.json patterns[21]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Ivy Hill",
+      "popids": [
+        "POP-01101",
+        "POP-01103",
+        "POP-01116"
+      ],
+      "handle": {
+        "angle": "civic gain in Ivy Hill — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Ivy Hill this cycle.",
+        "citizens": [
+          "Mateo Baker (POP-01101)",
+          "Ebony Mendoza (POP-01103)",
+          "Darius Hill (POP-01116)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[21]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Ivy Hill sentiment rose 0.15 (0.19 → 0.34)",
+        "kind": "anomaly",
+        "angle": "civic gain in Ivy Hill — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Ivy Hill this cycle.",
+        "citizens": [
+          "Mateo Baker (POP-01101)",
+          "Ebony Mendoza (POP-01103)",
+          "Darius Hill (POP-01116)"
+        ],
+        "popids": [
+          "POP-01101",
+          "POP-01103",
+          "POP-01116"
+        ],
+        "hood": "Ivy Hill",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Jack London sentiment rose 0.28 (0.36 → 0.64)",
+      "ref": "output/engine_audit_c110.json patterns[11]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Jack London",
+      "popids": [
+        "POP-00003",
+        "POP-00527",
+        "POP-00643"
+      ],
+      "handle": {
+        "angle": "civic gain in Jack London — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Jack London this cycle.",
+        "citizens": [
+          "Guadalupe Lupe (POP-00643)",
+          "Mike Paulson (POP-00527)",
+          "Mark Aitken (POP-00003)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[11]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Jack London sentiment rose 0.28 (0.36 → 0.64)",
+        "kind": "anomaly",
+        "angle": "civic gain in Jack London — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Jack London this cycle.",
+        "citizens": [
+          "Guadalupe Lupe (POP-00643)",
+          "Mike Paulson (POP-00527)",
+          "Mark Aitken (POP-00003)"
+        ],
+        "popids": [
+          "POP-00003",
+          "POP-00527",
+          "POP-00643"
+        ],
+        "hood": "Jack London",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | KONO sentiment rose 0.29 (0.22 → 0.51)",
+      "ref": "output/engine_audit_c110.json patterns[23]; evidence: Neighborhood_Map row(s) ",
+      "hood": "KONO",
+      "popids": [
+        "POP-00889",
+        "POP-01024",
+        "POP-01061"
+      ],
+      "handle": {
+        "angle": "civic gain in KONO — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in KONO this cycle.",
+        "citizens": [
+          "Noor Ng (POP-00889)",
+          "AJ Dybantsa (POP-01024)",
+          "Celeste Moon (POP-01061)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[23]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | KONO sentiment rose 0.29 (0.22 → 0.51)",
+        "kind": "anomaly",
+        "angle": "civic gain in KONO — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in KONO this cycle.",
+        "citizens": [
+          "Noor Ng (POP-00889)",
+          "AJ Dybantsa (POP-01024)",
+          "Celeste Moon (POP-01061)"
+        ],
+        "popids": [
+          "POP-00889",
+          "POP-01024",
+          "POP-01061"
+        ],
+        "hood": "KONO",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Lake Merritt sentiment rose 0.18 (0.36 → 0.54)",
+      "ref": "output/engine_audit_c110.json patterns[24]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Lake Merritt",
+      "popids": [
+        "POP-00041",
+        "POP-00042",
+        "POP-00505"
+      ],
+      "handle": {
+        "angle": "civic gain in Lake Merritt — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Lake Merritt this cycle.",
+        "citizens": [
+          "Keisha Ramos (POP-00041)",
+          "Ramon Vega (POP-00042)",
+          "Nina Chen (POP-00505)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[24]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Lake Merritt sentiment rose 0.18 (0.36 → 0.54)",
+        "kind": "anomaly",
+        "angle": "civic gain in Lake Merritt — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Lake Merritt this cycle.",
+        "citizens": [
+          "Keisha Ramos (POP-00041)",
+          "Ramon Vega (POP-00042)",
+          "Nina Chen (POP-00505)"
+        ],
+        "popids": [
+          "POP-00041",
+          "POP-00042",
+          "POP-00505"
+        ],
+        "hood": "Lake Merritt",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Laurel sentiment rose 0.24 (0.34 → 0.58)",
+      "ref": "output/engine_audit_c110.json patterns[8]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Laurel",
+      "popids": [
+        "POP-00014",
+        "POP-00155",
+        "POP-01059"
+      ],
+      "handle": {
+        "angle": "civic gain in Laurel — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Laurel this cycle.",
+        "citizens": [
+          "Brody Kale (POP-01059)",
+          "Trevor Shimizu (POP-00155)",
+          "Tanya Cruz (POP-00014)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[8]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Laurel sentiment rose 0.24 (0.34 → 0.58)",
+        "kind": "anomaly",
+        "angle": "civic gain in Laurel — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Laurel this cycle.",
+        "citizens": [
+          "Brody Kale (POP-01059)",
+          "Trevor Shimizu (POP-00155)",
+          "Tanya Cruz (POP-00014)"
+        ],
+        "popids": [
+          "POP-00014",
+          "POP-00155",
+          "POP-01059"
+        ],
+        "hood": "Laurel",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Piedmont Ave sentiment rose 0.27 (0.24 → 0.51)",
+      "ref": "output/engine_audit_c110.json patterns[15]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Piedmont Ave",
+      "popids": [
+        "POP-00021",
+        "POP-00154",
+        "POP-01173"
+      ],
+      "handle": {
+        "angle": "civic gain in Piedmont Ave — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Piedmont Ave this cycle.",
+        "citizens": [
+          "Lucille Obuya (POP-01173)",
+          "Darrin Davis (POP-00021)",
+          "Lila Mezran (POP-00154)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[15]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Piedmont Ave sentiment rose 0.27 (0.24 → 0.51)",
+        "kind": "anomaly",
+        "angle": "civic gain in Piedmont Ave — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Piedmont Ave this cycle.",
+        "citizens": [
+          "Lucille Obuya (POP-01173)",
+          "Darrin Davis (POP-00021)",
+          "Lila Mezran (POP-00154)"
+        ],
+        "popids": [
+          "POP-00021",
+          "POP-00154",
+          "POP-01173"
+        ],
+        "hood": "Piedmont Ave",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Rockridge sentiment rose 0.27 (0.28 → 0.55)",
+      "ref": "output/engine_audit_c110.json patterns[12]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Rockridge",
+      "popids": [
+        "POP-00034",
+        "POP-00201",
+        "POP-00504"
+      ],
+      "handle": {
+        "angle": "civic gain in Rockridge — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Rockridge this cycle.",
+        "citizens": [
+          "Elio Perez (POP-00201)",
+          "Avery Santana (POP-00034)",
+          "Warren Ashford (POP-00504)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[12]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Rockridge sentiment rose 0.27 (0.28 → 0.55)",
+        "kind": "anomaly",
+        "angle": "civic gain in Rockridge — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Rockridge this cycle.",
+        "citizens": [
+          "Elio Perez (POP-00201)",
+          "Avery Santana (POP-00034)",
+          "Warren Ashford (POP-00504)"
+        ],
+        "popids": [
+          "POP-00034",
+          "POP-00201",
+          "POP-00504"
+        ],
+        "hood": "Rockridge",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | San Antonio sentiment rose 0.26 (0.18 → 0.44)",
+      "ref": "output/engine_audit_c110.json patterns[22]; evidence: Neighborhood_Map row(s) ",
+      "hood": "San Antonio",
+      "popids": [
+        "POP-01132",
+        "POP-01133",
+        "POP-01149"
+      ],
+      "handle": {
+        "angle": "civic gain in San Antonio — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in San Antonio this cycle.",
+        "citizens": [
+          "Sofía Villanueva (POP-01132)",
+          "Mateo Villanueva (POP-01133)",
+          "Hana Petrosyan (POP-01149)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c110.json patterns[22]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | San Antonio sentiment rose 0.26 (0.18 → 0.44)",
+        "kind": "anomaly",
+        "angle": "civic gain in San Antonio — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in San Antonio this cycle.",
+        "citizens": [
+          "Sofía Villanueva (POP-01132)",
+          "Mateo Villanueva (POP-01133)",
+          "Hana Petrosyan (POP-01149)"
+        ],
+        "popids": [
+          "POP-01132",
+          "POP-01133",
+          "POP-01149"
+        ],
+        "hood": "San Antonio",
+        "stinkClass": "anomaly"
+      }
+    }
+  ],
+  "candidateCount": 28
+}

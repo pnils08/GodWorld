@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "wire",
+  "cycle": "108",
+  "provider": "openrouter",
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "configuredWriterModel": "meta-llama/llama-3.3-70b-instruct",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "celeste-tran",
+  "byline": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 20,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/wire_c108_celeste-tran_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "nv'] }\n{\n  \"popId\": \"POP-00164\",\n  \"name\": \"Celeste Tran\",\n  \"recorded\": true,\n  \"text\": \"filed: Uptown was buzzing with energy as Marin Tao, the musician with 25 media mentions, walked down the st\"\n}"
+  },
+  "ranAt": "2026-09-25T23:18:28.103Z",
+  "dispositionReconciledAt": "2026-09-26T17:00:03.161Z"
+}

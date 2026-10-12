@@ -1,0 +1,510 @@
+{
+  "version": "ECONOMIC-SLICE-4",
+  "empty": false,
+  "cycle": 110,
+  "kind": "food-workplaces",
+  "variant": "food",
+  "hood": "Laurel",
+  "pulse": {
+    "className": "hood-kitchens",
+    "score": 20,
+    "label": "Laurel kitchens · Nino's, Schoolgate Cafe",
+    "hood": "Laurel",
+    "namedBusinesses": [
+      "Nino's",
+      "Schoolgate Cafe",
+      "MacArthur Kitchen"
+    ]
+  },
+  "story": {
+    "angle": "Laurel kitchens: Nino's, Schoolgate Cafe, MacArthur Kitchen — the people who work the shift",
+    "label": "Laurel kitchens · Nino's, Schoolgate Cafe",
+    "hookLine": "Colin Phillips, Bakery Worker at Nino's. 2 named workers at 2 named kitchens in Laurel on the ledger this cycle.",
+    "hood": "Laurel",
+    "pulseClass": "hood-kitchens",
+    "namedBusinesses": [
+      "Nino's",
+      "Schoolgate Cafe",
+      "MacArthur Kitchen"
+    ],
+    "citizens": [
+      "Colin Phillips (POP-00786)",
+      "Jori Clame (POP-00232)"
+    ],
+    "popids": [
+      "POP-00786",
+      "POP-00232"
+    ],
+    "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+    "cycle": 110
+  },
+  "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "businesses": [
+    {
+      "bizId": "BIZ-00077",
+      "name": "Nino's",
+      "sector": "Food & Beverage",
+      "hood": "Laurel",
+      "employeeCount": 13,
+      "avgSalary": 45000,
+      "annualRevenue": 1174514,
+      "growthRate": 3.93,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00786",
+          "name": "Colin Phillips",
+          "role": "Bakery Worker"
+        }
+      ],
+      "delta": {
+        "vsCycle": 109,
+        "employees": 0,
+        "revenue": 887,
+        "growth": -0.36999999999999966
+      }
+    },
+    {
+      "bizId": "BIZ-00161",
+      "name": "Schoolgate Cafe",
+      "sector": "Cafe / dining",
+      "hood": "Laurel",
+      "employeeCount": 8,
+      "avgSalary": 43000,
+      "annualRevenue": 691006,
+      "growthRate": 4.58,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00232",
+          "name": "Jori Clame",
+          "role": "Server"
+        }
+      ],
+      "delta": {
+        "vsCycle": 109,
+        "employees": 0,
+        "revenue": 608,
+        "growth": -0.1299999999999999
+      }
+    },
+    {
+      "bizId": "BIZ-00163",
+      "name": "MacArthur Kitchen",
+      "sector": "Restaurant & Dining",
+      "hood": "Laurel",
+      "employeeCount": 11,
+      "avgSalary": 45000,
+      "annualRevenue": 993917,
+      "growthRate": 3.81,
+      "keyPersonnel": null,
+      "staff": [],
+      "delta": {
+        "vsCycle": 109,
+        "employees": 0,
+        "revenue": 728,
+        "growth": 0.1499999999999999
+      }
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "a9a2f77a",
+      "hood": "Jack London",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00656",
+          "name": "Brianna Scott"
+        },
+        {
+          "popid": "POP-00946",
+          "name": "LaTrice Desai"
+        },
+        {
+          "popid": "POP-00882",
+          "name": "Basma Inoue"
+        },
+        {
+          "popid": "POP-00300",
+          "name": "Belle Lopez"
+        }
+      ],
+      "citizenEvents": [
+        "Brianna Scott — drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+        "LaTrice Desai — learned a useless, wonderful fact and told two people",
+        "Basma Inoue — watched the ferry cut across the bay at sunset and felt lucky to live this close to the water",
+        "Belle Lopez — adjusted today's plans after last night's gridlock"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00044",
+          "name": "Harborline Grill"
+        },
+        {
+          "bizId": "BIZ-00012",
+          "name": "Port of Oakland"
+        }
+      ],
+      "otherEntities": null,
+      "magnitude": 31,
+      "trend": "carrying, 5.33 strength left of 3-cycle run",
+      "suggestedJournalist": "Jordan Velez",
+      "suggestedAngle": "baseline context piece"
+    },
+    {
+      "seedId": "912b7ddf",
+      "hood": "West Oakland",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00789",
+          "name": "Elias Varek"
+        },
+        {
+          "popid": "POP-01076",
+          "name": "Nia Rook"
+        },
+        {
+          "popid": "POP-00675",
+          "name": "Ilandra Tain"
+        },
+        {
+          "popid": "POP-00917",
+          "name": "Josefina Williams"
+        }
+      ],
+      "citizenEvents": [
+        "Elias Varek — spent the evening sorting a box of things that used to be someone's",
+        "Nia Rook — traded produce over a fence and came out ahead",
+        "Ilandra Tain — overheard coworkers talking about last night's scene",
+        "Josefina Williams — noticed three new pop-up restaurants on Telegraph and wondered how long any of them would last"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00103",
+          "name": "Firehouse 29 West Oakland Baseball Academy"
+        },
+        {
+          "bizId": "BIZ-00060",
+          "name": "Northgate Construction"
+        }
+      ],
+      "otherEntities": "Keane Auxiliary Flag Football League (program)",
+      "magnitude": -8,
+      "trend": "carrying, -6.00 strength left of 4-cycle run",
+      "suggestedJournalist": null,
+      "suggestedAngle": "general coverage"
+    }
+  ],
+  "citizens": [
+    {
+      "popid": "POP-00786",
+      "name": "Colin Phillips",
+      "role": "Bakery Worker",
+      "neighborhood": "Laurel",
+      "business": "Nino's",
+      "profile": "Colin Phillips — Bakery Worker — Nino's, Laurel",
+      "why": "works at Nino's (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00232",
+      "name": "Jori Clame",
+      "role": "Server",
+      "neighborhood": "Laurel",
+      "business": "Schoolgate Cafe",
+      "profile": "Jori Clame — Server — Schoolgate Cafe, Laurel",
+      "why": "works at Schoolgate Cafe (Employment_Roster)"
+    }
+  ],
+  "closures": [],
+  "contractionWatch": [],
+  "casino": null,
+  "cityMoney": null,
+  "deltas": {
+    "state": "PRIOR_CYCLE_ON_DISK",
+    "vs": 109
+  },
+  "prewrite": {
+    "pulseClass": "hood-kitchens",
+    "angle": "Laurel kitchens: Nino's, Schoolgate Cafe, MacArthur Kitchen — the people who work the shift",
+    "hookLine": "Colin Phillips, Bakery Worker at Nino's. 2 named workers at 2 named kitchens in Laurel on the ledger this cycle.",
+    "namedBusinesses": [
+      "Nino's",
+      "Schoolgate Cafe",
+      "MacArthur Kitchen"
+    ],
+    "anchorFacts": [
+      "Nino's · Food & Beverage · 13 employees · growth 3.9% · revenue $1.2M (+$887 vs C109) · on the roster: Colin Phillips (Bakery Worker)",
+      "Schoolgate Cafe · Cafe / dining · 8 employees · growth 4.6% · revenue $691k (+$608 vs C109) · on the roster: Jori Clame (Server)",
+      "MacArthur Kitchen · Restaurant & Dining · 11 employees · growth 3.8% · revenue $994k (+$728 vs C109)",
+      "ENGINE SEED (Jack London): citizens Brianna Scott; LaTrice Desai; Basma Inoue; Belle Lopez · businesses Harborline Grill; Port of Oakland",
+      "ENGINE SEED (West Oakland): citizens Elias Varek; Nia Rook; Ilandra Tain; Josefina Williams · businesses Firehouse 29 West Oakland Baseball Academy; Northgate Construction · Keane Auxiliary Flag Football League (program)"
+    ],
+    "evidence": [
+      {
+        "text": "Nino's · Food & Beverage · 13 employees · growth 3.9% · revenue $1.2M (+$887 vs C109) · on the roster: Colin Phillips (Bakery Worker)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "text": "Schoolgate Cafe · Cafe / dining · 8 employees · growth 4.6% · revenue $691k (+$608 vs C109) · on the roster: Jori Clame (Server)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "text": "MacArthur Kitchen · Restaurant & Dining · 11 employees · growth 3.8% · revenue $994k (+$728 vs C109)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      {
+        "text": "ENGINE SEED (Jack London): citizens Brianna Scott; LaTrice Desai; Basma Inoue; Belle Lopez · businesses Harborline Grill; Port of Oakland",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C110"
+      },
+      {
+        "text": "ENGINE SEED (West Oakland): citizens Elias Varek; Nia Rook; Ilandra Tain; Josefina Williams · businesses Firehouse 29 West Oakland Baseball Academy; Northgate Construction · Keane Auxiliary Flag Football League (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C110"
+      }
+    ],
+    "hooks": [
+      {
+        "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "hood": "Ivy Hill"
+      },
+      {
+        "text": "the debts crossed a line this week — sleep comes harder now",
+        "angle": "desk rotation",
+        "hood": "Laurel"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+      "Do not contradict a role, employer or neighborhood listed here"
+    ]
+  },
+  "rotation": {
+    "pool": [
+      {
+        "hood": "Jack London",
+        "staffed": 5,
+        "workers": 12,
+        "lastCovered": 106
+      },
+      {
+        "hood": "Downtown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Temescal",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": 108
+      },
+      {
+        "hood": "Chinatown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Rockridge",
+        "staffed": 2,
+        "workers": 5,
+        "lastCovered": 107
+      },
+      {
+        "hood": "Fruitvale",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": 109
+      },
+      {
+        "hood": "West Oakland",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Uptown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Grand Lake",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Laurel",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "East Oakland",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "San Antonio",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      }
+    ],
+    "picked": "Laurel"
+  },
+  "candidates": [
+    {
+      "className": "hood-kitchens",
+      "hood": "Jack London",
+      "label": "Jack London · 5 staffed / 5 listed",
+      "namedBusinesses": [
+        "Jack London Square Markets",
+        "Blue Lantern Bar",
+        "Green & Gold Tavern"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Downtown",
+      "label": "Downtown · 1 staffed / 5 listed",
+      "namedBusinesses": [
+        "Miso Metro"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Temescal",
+      "label": "Temescal · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "OakTown Social"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Chinatown",
+      "label": "Chinatown · 1 staffed / 3 listed",
+      "namedBusinesses": [
+        "Heritage Bakehouse"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Rockridge",
+      "label": "Rockridge · 2 staffed / 2 listed",
+      "namedBusinesses": [
+        "OakHouse",
+        "Claremont Table"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Fruitvale",
+      "label": "Fruitvale · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "Fruitvale Diner"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "West Oakland",
+      "label": "West Oakland · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "West Side Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Uptown",
+      "label": "Uptown · 1 staffed / 3 listed",
+      "namedBusinesses": [
+        "Art Walk Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Grand Lake",
+      "label": "Grand Lake · 1 staffed / 3 listed",
+      "namedBusinesses": [
+        "Port Grind"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "East Oakland",
+      "label": "East Oakland · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "Sunrise Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "San Antonio",
+      "label": "San Antonio · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "Park Boulevard Cafe"
+      ]
+    }
+  ],
+  "signals": {
+    "businessLaneCount": 78,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in West Oakland",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "ref": "output/engine_audit_c110.json patterns[1]; evidence: Initiative_Tracker row(s) 7"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hood": "Downtown, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "ref": "output/engine_audit_c110.json patterns[4]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "label": "Baylight District — Final Council Vote — economic upside, jobs and footprint in Jack London",
+        "hood": "Jack London, Downtown",
+        "ref": "output/engine_audit_c110.json patterns[5]; evidence: Initiative_Tracker row(s) 6"
+      },
+      {
+        "kind": "anomaly",
+        "label": "civic — economic upside, jobs and footprint in Downtown",
+        "hood": "Downtown",
+        "ref": "output/engine_audit_c110.json patterns[6]; evidence: Neighborhood_Map row(s) "
+      }
+    ]
+  },
+  "scene": {
+    "namedOnTop": [
+      "Nino's",
+      "Schoolgate Cafe",
+      "MacArthur Kitchen"
+    ]
+  },
+  "pointers": [
+    "output/beats/Business_Ledger.jsonl (176 rows @C110)",
+    "output/beats/Employment_Roster.jsonl (869 rows)",
+    "output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 5)",
+    "output/beats/prev/Business_Ledger.jsonl (movement vs C109)",
+    "output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 3)",
+    "output/desk_signal_c110.json lanes.business (pointers only)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2"
+  ]
+}

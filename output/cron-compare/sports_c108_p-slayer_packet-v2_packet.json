@@ -1,0 +1,1220 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "108",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "P Slayer",
+    "popid": "POP-00008"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads ",
+      "label": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+      "kind": "injury-load",
+      "angle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+      "hookLine": "Grief without inventing medical private life — we demanded too much.",
+      "hood": "Downtown",
+      "team": "A's",
+      "eventKind": "game-result",
+      "popids": [
+        "POP-01078",
+        "POP-00597",
+        "POP-00033"
+      ],
+      "citizens": [
+        "Pablo Almanzar — SP / Oakland A's, Jack London",
+        "Eric Taveras — Second Baseman, Oakland A's, Downtown",
+        "John Ellis — Starting Pitcher, Oakland A's, Laurel",
+        "Minnesota Twins"
+      ],
+      "pulseClass": "injury-load",
+      "pulseScore": 70,
+      "fanCharge": "grief",
+      "bagModeIds": [
+        3,
+        6,
+        7
+      ]
+    }
+  },
+  "angle": "output/cron-compare/sports_c108_p-slayer_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00033",
+      "name": "John Ellis",
+      "quote": "The emotional toll of the game is real, I can feel it myself after a tough loss. It's not just about winning or losing, it's about the pressure to perform and the weight of expectation from the fans. Sometimes it feels like we're carrying the whole city on our shoulders.",
+      "disp": "driven, hard to sit still; curious, open to new things",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The emotional toll of the game is real, I can feel it myself after a tough loss. It's not just about winning or losing, it's about the pressure to perform and the weight of expectation from the fans. Sometimes it feels like we're carrying the whole city on our shoulders.\",\n  \"fact_ids\": [\"F-78217e633afa\", \"F-dc655a27901d\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00033-4db81026ce",
+        "authoredQuote": true,
+        "publishableQuote": "The emotional toll of the game is real, I can feel it myself after a tough loss. It's not just about winning or losing, it's about the pressure to perform and the weight of expectation from the fans. Sometimes it feels like we're carrying the whole city on our shoulders."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00033",
+          "name": "John Ellis",
+          "role": "Starting Pitcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The emotional toll of the game on the players and the fans\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "injury-load",
+          "hood": "Downtown",
+          "focus": "The emotional toll of the game on the players and the fans",
+          "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads "
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "John Ellis — Starting Pitcher, Oakland A's — Laurel",
+          "evidence": [
+            {
+              "id": "EV-6ae1a7114c",
+              "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+              "text": "Grief without inventing medical private life — we demanded too much."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-dc655a27901d"
+          },
+          {
+            "t": "FACT",
+            "text": "Grief without inventing medical private life — we demanded too much.",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-5ac04948751e"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-55c7803c93af"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 4-1 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-83325385ff66"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-fe8ce179c77b"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-cc5f84c5005d"
+          },
+          {
+            "t": "FACT",
+            "text": "John Ellis — Starting Pitcher, Oakland A's — Laurel",
+            "src": "Simulation_Ledger profile for POP-00033",
+            "id": "F-06d752b0b04a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01078",
+      "name": "Pablo Almanzar",
+      "quote": "I think the emotional toll of the game can be really high, not just for the players but for the fans too. I've seen how much it means to people around here, like when I'm out in the neighborhood and everyone's talking about the game. It's like the whole city is invested in it.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I think the emotional toll of the game can be really high, not just for the players but for the fans too. I've seen how much it means to people around here, like when I'm out in the neighborhood and everyone's talking about the game. It's like the whole city is invested in it.\",\n  \"fact_ids\": [\"F-78217e633afa\", \"F-dc655a27901d\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01078-87173fa6fd",
+        "authoredQuote": true,
+        "publishableQuote": "I think the emotional toll of the game can be really high, not just for the players but for the fans too. I've seen how much it means to people around here, like when I'm out in the neighborhood and everyone's talking about the game. It's like the whole city is invested in it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01078",
+          "name": "Pablo Almanzar",
+          "role": "SP / Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The emotional toll of the game on the players and the fans\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "injury-load",
+          "hood": "Downtown",
+          "focus": "The emotional toll of the game on the players and the fans",
+          "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads "
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Pablo Almanzar — SP / Oakland A's — Jack London",
+          "evidence": [
+            {
+              "id": "EV-ad13352032",
+              "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+              "text": "Grief without inventing medical private life — we demanded too much."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-dc655a27901d"
+          },
+          {
+            "t": "FACT",
+            "text": "Grief without inventing medical private life — we demanded too much.",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-5ac04948751e"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-55c7803c93af"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 4-1 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-83325385ff66"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-fe8ce179c77b"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-cc5f84c5005d"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar — SP / Oakland A's — Jack London",
+            "src": "Simulation_Ledger profile for POP-01078",
+            "id": "F-7c5207514acb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00597",
+      "name": "Eric Taveras",
+      "quote": "I feel like the game can be really tough on us players, both physically and mentally. The pressure to perform is always there, and when we don't do well, it can be hard to shake off the feeling of disappointment. I think the fans feel it too, they're so invested in the team and when we lose, it's like they're feeling the loss just as much as we are.",
+      "disp": "driven, hard to sit still; curious, open to new things",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the game can be really tough on us players, both physically and mentally. The pressure to perform is always there, and when we don't do well, it can be hard to shake off the feeling of disappointment. I think the fans feel it too, they're so invested in the team and when we lose, it's like they're feeling the loss just as much as we are.\",\n  \"fact_ids\": [\"F-78217e633afa\", \"F-dc655a27901d\", \"F-5ac04948751e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d",
+          "F-5ac04948751e"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00597-1f0abeefa1",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like the game can be really tough on us players, both physically and mentally. The pressure to perform is always there, and when we don't do well, it can be hard to shake off the feeling of disappointment. I think the fans feel it too, they're so invested in the team and when we lose, it's like they're feeling the loss just as much as we are."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00597",
+          "name": "Eric Taveras",
+          "role": "Second Baseman, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The emotional toll of the game on the players and the fans\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "injury-load",
+          "hood": "Downtown",
+          "focus": "The emotional toll of the game on the players and the fans",
+          "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads "
+        },
+        "exposure": {
+          "basis": [
+            "feed-names",
+            "same-neighborhood"
+          ],
+          "self": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+          "evidence": [
+            {
+              "id": "EV-3647870a41",
+              "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+              "text": "Grief without inventing medical private life — we demanded too much."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-dc655a27901d"
+          },
+          {
+            "t": "FACT",
+            "text": "Grief without inventing medical private life — we demanded too much.",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-5ac04948751e"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-55c7803c93af"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 4-1 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-83325385ff66"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-fe8ce179c77b"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-cc5f84c5005d"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+            "src": "Simulation_Ledger profile for POP-00597",
+            "id": "F-46c5cbf66afc"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "I feel like the game can be really tough on the players and the fans, it's like we're all in it together and when they lose, we feel it too.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the game can be really tough on the players and the fans, it's like we're all in it together and when they lose, we feel it too.\",\n  \"fact_ids\": [\"F-78217e633afa\", \"F-dc655a27901d\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00212-fa2ae54269",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like the game can be really tough on the players and the fans, it's like we're all in it together and when they lose, we feel it too."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00212",
+          "name": "Jessie Hess",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The emotional toll of the game on the players and the fans\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "injury-load",
+          "hood": "Downtown",
+          "focus": "The emotional toll of the game on the players and the fans",
+          "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads "
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jessie Hess — Barista — Downtown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-dc655a27901d"
+          },
+          {
+            "t": "FACT",
+            "text": "Grief without inventing medical private life — we demanded too much.",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-5ac04948751e"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-55c7803c93af"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 4-1 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-83325385ff66"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-fe8ce179c77b"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-cc5f84c5005d"
+          },
+          {
+            "t": "FACT",
+            "text": "Jessie Hess — Barista — Downtown",
+            "src": "Simulation_Ledger profile for POP-00212",
+            "id": "F-48795c7c7253"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00033",
+      "name": "John Ellis",
+      "quote": "The emotional toll of the game is real, I can feel it myself after a tough loss. It's not just about winning or losing, it's about the pressure to perform and the weight of expectation from the fans. Sometimes it feels like we're carrying the whole city on our shoulders.",
+      "disp": "driven, hard to sit still; curious, open to new things",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The emotional toll of the game is real, I can feel it myself after a tough loss. It's not just about winning or losing, it's about the pressure to perform and the weight of expectation from the fans. Sometimes it feels like we're carrying the whole city on our shoulders.\",\n  \"fact_ids\": [\"F-78217e633afa\", \"F-dc655a27901d\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00033-4db81026ce",
+        "authoredQuote": true,
+        "publishableQuote": "The emotional toll of the game is real, I can feel it myself after a tough loss. It's not just about winning or losing, it's about the pressure to perform and the weight of expectation from the fans. Sometimes it feels like we're carrying the whole city on our shoulders."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00033",
+          "name": "John Ellis",
+          "role": "Starting Pitcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The emotional toll of the game on the players and the fans\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "injury-load",
+          "hood": "Downtown",
+          "focus": "The emotional toll of the game on the players and the fans",
+          "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads "
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "John Ellis — Starting Pitcher, Oakland A's — Laurel",
+          "evidence": [
+            {
+              "id": "EV-6ae1a7114c",
+              "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+              "text": "Grief without inventing medical private life — we demanded too much."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-dc655a27901d"
+          },
+          {
+            "t": "FACT",
+            "text": "Grief without inventing medical private life — we demanded too much.",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-5ac04948751e"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-55c7803c93af"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 4-1 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-83325385ff66"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-fe8ce179c77b"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-cc5f84c5005d"
+          },
+          {
+            "t": "FACT",
+            "text": "John Ellis — Starting Pitcher, Oakland A's — Laurel",
+            "src": "Simulation_Ledger profile for POP-00033",
+            "id": "F-06d752b0b04a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01078",
+      "name": "Pablo Almanzar",
+      "quote": "I think the emotional toll of the game can be really high, not just for the players but for the fans too. I've seen how much it means to people around here, like when I'm out in the neighborhood and everyone's talking about the game. It's like the whole city is invested in it.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I think the emotional toll of the game can be really high, not just for the players but for the fans too. I've seen how much it means to people around here, like when I'm out in the neighborhood and everyone's talking about the game. It's like the whole city is invested in it.\",\n  \"fact_ids\": [\"F-78217e633afa\", \"F-dc655a27901d\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01078-87173fa6fd",
+        "authoredQuote": true,
+        "publishableQuote": "I think the emotional toll of the game can be really high, not just for the players but for the fans too. I've seen how much it means to people around here, like when I'm out in the neighborhood and everyone's talking about the game. It's like the whole city is invested in it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01078",
+          "name": "Pablo Almanzar",
+          "role": "SP / Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The emotional toll of the game on the players and the fans\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "injury-load",
+          "hood": "Downtown",
+          "focus": "The emotional toll of the game on the players and the fans",
+          "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads "
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Pablo Almanzar — SP / Oakland A's — Jack London",
+          "evidence": [
+            {
+              "id": "EV-ad13352032",
+              "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+              "text": "Grief without inventing medical private life — we demanded too much."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-dc655a27901d"
+          },
+          {
+            "t": "FACT",
+            "text": "Grief without inventing medical private life — we demanded too much.",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-5ac04948751e"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-55c7803c93af"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 4-1 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-83325385ff66"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-fe8ce179c77b"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-cc5f84c5005d"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar — SP / Oakland A's — Jack London",
+            "src": "Simulation_Ledger profile for POP-01078",
+            "id": "F-7c5207514acb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00597",
+      "name": "Eric Taveras",
+      "quote": "I feel like the game can be really tough on us players, both physically and mentally. The pressure to perform is always there, and when we don't do well, it can be hard to shake off the feeling of disappointment. I think the fans feel it too, they're so invested in the team and when we lose, it's like they're feeling the loss just as much as we are.",
+      "disp": "driven, hard to sit still; curious, open to new things",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the game can be really tough on us players, both physically and mentally. The pressure to perform is always there, and when we don't do well, it can be hard to shake off the feeling of disappointment. I think the fans feel it too, they're so invested in the team and when we lose, it's like they're feeling the loss just as much as we are.\",\n  \"fact_ids\": [\"F-78217e633afa\", \"F-dc655a27901d\", \"F-5ac04948751e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d",
+          "F-5ac04948751e"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00597-1f0abeefa1",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like the game can be really tough on us players, both physically and mentally. The pressure to perform is always there, and when we don't do well, it can be hard to shake off the feeling of disappointment. I think the fans feel it too, they're so invested in the team and when we lose, it's like they're feeling the loss just as much as we are."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00597",
+          "name": "Eric Taveras",
+          "role": "Second Baseman, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The emotional toll of the game on the players and the fans\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "injury-load",
+          "hood": "Downtown",
+          "focus": "The emotional toll of the game on the players and the fans",
+          "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads "
+        },
+        "exposure": {
+          "basis": [
+            "feed-names",
+            "same-neighborhood"
+          ],
+          "self": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+          "evidence": [
+            {
+              "id": "EV-3647870a41",
+              "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+              "text": "Grief without inventing medical private life — we demanded too much."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-dc655a27901d"
+          },
+          {
+            "t": "FACT",
+            "text": "Grief without inventing medical private life — we demanded too much.",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-5ac04948751e"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-55c7803c93af"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 4-1 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-83325385ff66"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-fe8ce179c77b"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-cc5f84c5005d"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+            "src": "Simulation_Ledger profile for POP-00597",
+            "id": "F-46c5cbf66afc"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "I feel like the game can be really tough on the players and the fans, it's like we're all in it together and when they lose, we feel it too.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the game can be really tough on the players and the fans, it's like we're all in it together and when they lose, we feel it too.\",\n  \"fact_ids\": [\"F-78217e633afa\", \"F-dc655a27901d\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-78217e633afa",
+          "F-dc655a27901d"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00212-fa2ae54269",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like the game can be really tough on the players and the fans, it's like we're all in it together and when they lose, we feel it too."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00212",
+          "name": "Jessie Hess",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The emotional toll of the game on the players and the fans\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "injury-load",
+          "hood": "Downtown",
+          "focus": "The emotional toll of the game on the players and the fans",
+          "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads "
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jessie Hess — Barista — Downtown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-dc655a27901d"
+          },
+          {
+            "t": "FACT",
+            "text": "Grief without inventing medical private life — we demanded too much.",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-5ac04948751e"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-55c7803c93af"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 4-1 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-83325385ff66"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-fe8ce179c77b"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads",
+            "id": "F-cc5f84c5005d"
+          },
+          {
+            "t": "FACT",
+            "text": "Jessie Hess — Barista — Downtown",
+            "src": "Simulation_Ledger profile for POP-00212",
+            "id": "F-48795c7c7253"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-23T18:17:56.863Z"
+}

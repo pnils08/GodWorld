@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "108",
+  "persona": "mason-ortega",
+  "byline": "Mason Ortega",
+  "bylinePopid": "POP-00160",
+  "article": "output/cron-compare/staged/culture_c108_mason-ortega_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vanessa Treary",
+        "role": "quoted-source",
+        "popid": "POP-00781"
+      },
+      {
+        "name": "Vanessa Ramas",
+        "role": "quoted-source",
+        "popid": "POP-01045"
+      },
+      {
+        "name": "Jia Pena",
+        "role": "quoted-source",
+        "popid": "POP-00916"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "lake-merritt-vanessa-treary-named-restaurant",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "Temescal"
+    ],
+    "claims": [
+      {
+        "claim": "It’s not glamorous, but there’s something steady about it. You get to know people, their routines, their stories. It’s not just about the coffee—it’s about being a small part of their day, something they can count on. That’s what keeps me coming back.",
+        "sourceRef": "citizenVoice PRESS Vanessa Treary"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-e2b36944158b",
+    "draftSha256": "1dfbc759fc265a5d34c4631306b97ab10288a7e4e860c83acbb36c3400cbfe51",
+    "verdict": "output/cron-compare/culture_c108_mason-ortega_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-25T23:16:49.130Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:02.627Z"
+}

@@ -1,0 +1,55 @@
+{
+  "draft": "output/cron-compare/civic_c108_carmen-delaine_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "66c86f4c14a7c4eeea8519e4f2e31424833a7f8a850dc1411c8c8d5ec9fb034a",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, roles, quotes, and initiative statuses verified cleanly against ledger and ground truth.",
+  "review": {
+    "profileId": "carmen-civic-ledger-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "packageVersion": "CARMEN-LEP2-1",
+    "manifestId": "AM-4d3b3a30494d",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Daniel Cloak",
+      "Darius Clark",
+      "Irene Fay",
+      "Talmon Lint"
+    ],
+    "unverified": [
+      "As West Oakland",
+      "Community Bakery",
+      "Stabilization Fund",
+      "West Oakland Stabilization Fund"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 5615,
+  "parseError": false,
+  "ranAt": "2026-09-21T23:16:02.733Z"
+}

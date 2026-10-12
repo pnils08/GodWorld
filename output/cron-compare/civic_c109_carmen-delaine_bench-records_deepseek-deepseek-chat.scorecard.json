@@ -1,0 +1,51 @@
+{
+  "desk": "civic",
+  "cycle": "109",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "reporterVoice": true,
+  "factsCorrect": false,
+  "hallucinationCount": 8,
+  "hallucinations": [
+    {
+      "claim": "$28 million initiative approved by City Council in Cycle 78",
+      "why": "No budget amount or approval cycle specified in world state"
+    },
+    {
+      "claim": "disbursed $4.6 million across nine months",
+      "why": "No disbursement figures exist in world state"
+    },
+    {
+      "claim": "49 grants to date",
+      "why": "No grant count exists in world state"
+    },
+    {
+      "claim": "latest tranche of $400,000 released in Cycle 109",
+      "why": "No disbursement amount specified"
+    },
+    {
+      "claim": "Council voted 6-3 to approve the initiative",
+      "why": "No vote tally exists in world state"
+    },
+    {
+      "claim": "District 4 Councilmember Ramon Vega and District 2 Councilmember Leonard Tran casting opposing votes",
+      "why": "No individual voting records exist"
+    },
+    {
+      "claim": "Deputy Mayor Okoro",
+      "why": "No such official in world state"
+    },
+    {
+      "claim": "Prioritizes households and small businesses most vulnerable to displacement",
+      "why": "No targeting parameters specified"
+    }
+  ],
+  "wordCount": 226,
+  "humanEdits": null,
+  "runtimeSec": 19,
+  "apiCostUsd": 0.0061,
+  "usageInputTokens": 20479,
+  "usageOutputTokens": 712,
+  "notes": "Multiple unsupported numerical claims and vote attributions. Stay within tracker-backed facts.",
+  "ranAt": "2026-10-01T04:08:40.682Z"
+}

@@ -1,0 +1,26 @@
+{
+  "status": "arc-seed",
+  "cycle": "107",
+  "desk": "civic",
+  "persona": "lila-mezran",
+  "storyline": {
+    "slug": "chinatown-yu-zen-beat-health",
+    "verb": "opened"
+  },
+  "hood": "Chinatown",
+  "quotes": [
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "From this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone. But there's hope too—seeing someone like Marcus Osei recover? That reminds us we're not alone in this."
+    },
+    {
+      "pop": "POP-00449",
+      "name": "Teri Mitchell",
+      "quote": "I don't spend much time in Chinatown myself, but I did just get over being sick this winter. It makes you think about how illness can ripple through a community, especially in tight-knit neighborhoods. I hope folks there are taking care of each other."
+    }
+  ],
+  "claim": "From this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone. But there's hope too—seeing someone like Marcus Osei recover? That reminds us we're not alone in this.",
+  "src": "citizenVoice PRESS c107",
+  "ranAt": "2026-09-14T18:18:08.162Z"
+}

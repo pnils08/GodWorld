@@ -1,0 +1,12 @@
+{
+  "draft": "culture_c109_elliot-graye_packet-v2_anthropic-claude-haiku-4-5.md",
+  "flags": [
+    {
+      "claim": "Bhai Manjit Singh has tended the langar kitchen at Gurdwara Singh Sabha Fruitvale since the congregation's founding in 1982.",
+      "issue": "Direct contradiction of ledger bio ground truth: Manjit Singh (POP-00766) was born in 1993, making active tenure since 1982 impossible.",
+      "severity": "high"
+    }
+  ],
+  "contamination": [],
+  "summary": "High-severity bio contradiction: Bhai Manjit Singh (born 1993) cannot have tended kitchen since 1982."
+}

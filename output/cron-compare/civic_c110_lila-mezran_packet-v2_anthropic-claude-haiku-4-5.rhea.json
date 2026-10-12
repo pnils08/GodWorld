@@ -1,0 +1,69 @@
+{
+  "draft": "output/cron-compare/civic_c110_lila-mezran_packet-v2_anthropic-claude-haiku-4-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "56387c167f272aa2c508fe937e6a7ec25772c15da26976794b000d6e290e9c1c",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Seventy-seven residents are in care citywide. In the hospital system, the neighborhood has moved 3 residents into care this cycle; 6 are now in beds, occupying 6 of the city's 76 occupied hospital beds.",
+      "issue": "Direct contradiction of recorded city state: Ground truth establishes Hospital census at 1 in care (1% load), contradicting the claim of 76–77 residents in care citywide and 6 beds from Chinatown.",
+      "severity": "high"
+    },
+    {
+      "claim": "Yu Zen lies in a hospital bed in Rockridge—Yu was admitted after a workplace accident in cycle 105 and remains in active care.",
+      "issue": "Ground truth indicates Yu Zen is recovering and resumed a morning walk routine in Rockridge this cycle, though the supplied packet quote references hospital bed reflection.",
+      "severity": "low"
+    }
+  ],
+  "flagCount": 2,
+  "highSeverityCount": 1,
+  "summary": "Draft uses approved quotes and personas, but directly contradicts ground truth hospital census (1 in care vs. 77 reported).",
+  "review": {
+    "profileId": "lila-health-service-v1",
+    "canonIntegrity": "revise",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "packageVersion": "LILA-LEP2-1",
+    "manifestId": "AM-6b05b88e155f",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "4.5",
+          "6.6"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Daphne Stafford",
+      "Millicent Kumar",
+      "Yu Zen"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0151,
+  "durationMs": 20212,
+  "parseError": false,
+  "ranAt": "2026-10-05T23:16:29.415Z"
+}

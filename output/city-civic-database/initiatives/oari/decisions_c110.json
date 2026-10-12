@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-002",
+  "initiativeId": "INIT-002",
+  "cycle": 110,
+  "primaryVoice": "move-fold",
+  "consolidatedFrom": [],
+  "trackerUpdates": {
+    "LastWorkCycle": 110,
+    "LastWorkSeat": "proj-oari"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-109-proj-oari-2026-09-30"
+    ]
+  }
+}

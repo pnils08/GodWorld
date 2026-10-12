@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "110",
+  "model": "anthropic/claude-haiku-5.5",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 15654,
+  "usageOutputTokens": 6235,
+  "savedFiles": [
+    "output/cron-compare/civic_c110_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c110.md",
+  "durationMs": 28264,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-10T17:00:33.788Z"
+}

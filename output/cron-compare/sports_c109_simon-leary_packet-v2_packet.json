@@ -1,0 +1,371 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "109",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The A's record is 1-0.",
+      "label": "The A's record is 1-0.",
+      "hookLine": "The A's record is 1-0.",
+      "kind": "long-view-signal",
+      "hood": "Jack London",
+      "popids": [
+        "POP-00025",
+        "POP-00022",
+        "POP-00003"
+      ],
+      "citizens": [
+        "Arturo Ramos (POP-00025)",
+        "Danny Horn (POP-00022)",
+        "Mark Aitken (POP-00003)"
+      ],
+      "ref": "world_summary_c109.md ## Sports",
+      "cycle": 109
+    }
+  },
+  "angle": "output/cron-compare/sports_c109_simon-leary_packet-v2_angle.json",
+  "quotesRequested": 3,
+  "quotesLanded": 0,
+  "quotes": [],
+  "interviews": [
+    {
+      "pop": "POP-00025",
+      "name": "Arturo Ramos",
+      "quote": null,
+      "disp": "driven, hard to sit still",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be one to four sentences",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, I'm just here to compete every time I get the ball. Team's 1-0, we're riding a couple wins—that's all that matters. My role? Same as always: give us a chance to win. If they need me to go five innings or seven, I'll be ready. That's the job.\",\n  \"fact_ids\": [\"F-21b8daa6319b\", \"F-a73d2457e8c5\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00025",
+          "name": "Arturo Ramos",
+          "role": "Starting Pitcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "How does Arturo Ramos view his role change in the context of the team's current record? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Jack London",
+          "focus": "The role change inside the A's and its impact on the team's continuity.",
+          "src": "world_summary_c109.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Arturo Ramos — Starting Pitcher, Oakland A's — Laurel",
+          "evidence": [
+            {
+              "id": "EV-ccfabb5ddd",
+              "src": "world_summary_c109.md ## Sports",
+              "text": "The A's record is 1-0."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 1-0.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-21b8daa6319b"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 2 straight.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-a73d2457e8c5"
+          },
+          {
+            "t": "FACT",
+            "text": "Arturo Ramos — Starting Pitcher, Oakland A's — Laurel",
+            "src": "Simulation_Ledger profile for POP-00025",
+            "id": "F-9e1596d41efd"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00022",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: voice: Provider timed out after 6443ms",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00022",
+          "name": "Danny Horn",
+          "role": "Center Fielder, Oakland A's - Best player in the MLB",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "How does Danny Horn perceive the role change's impact on the team's performance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Jack London",
+          "focus": "The role change inside the A's and its impact on the team's continuity.",
+          "src": "world_summary_c109.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+          "evidence": [
+            {
+              "id": "EV-408a064acd",
+              "src": "world_summary_c109.md ## Sports",
+              "text": "The A's record is 1-0."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 1-0.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-21b8daa6319b"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 2 straight.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-a73d2457e8c5"
+          },
+          {
+            "t": "FACT",
+            "text": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+            "src": "Simulation_Ledger profile for POP-00022",
+            "id": "F-3dc8503c3adc"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00003",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: voice: Provider returned error",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00003",
+          "name": "Mark Aitken",
+          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "How does Mark Aitken, as a player rep and community liaison, interpret the role change's significance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Jack London",
+          "focus": "The role change inside the A's and its impact on the team's continuity.",
+          "src": "world_summary_c109.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names",
+            "same-neighborhood"
+          ],
+          "self": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+          "evidence": [
+            {
+              "id": "EV-0669314161",
+              "src": "world_summary_c109.md ## Sports",
+              "text": "The A's record is 1-0."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 1-0.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-21b8daa6319b"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 2 straight.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-a73d2457e8c5"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+            "src": "Simulation_Ledger profile for POP-00003",
+            "id": "F-a2cdfdf33ef7"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-01T18:16:31.514Z"
+}

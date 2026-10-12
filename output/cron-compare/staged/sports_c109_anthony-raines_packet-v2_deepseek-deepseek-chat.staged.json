@@ -1,0 +1,46 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "109",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c109_anthony-raines_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Pablo Almanzar",
+        "role": "mentioned",
+        "popid": "POP-01078"
+      },
+      {
+        "name": "Jose Colon",
+        "role": "mentioned",
+        "popid": "POP-00599"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I felt like I executed my pitches well and trusted my defense. It’s always a team effort, and I’m just glad I could contribute to the win.",
+        "sourceRef": "citizenVoice PRESS Pablo Almanzar"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-8fef32e3fb00",
+    "draftSha256": "5c05543a361b10e6bb63acdc6723250cf1ca3cc2b7b57d856d7d7479c5cff0c6",
+    "verdict": "output/cron-compare/sports_c109_anthony-raines_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-28T23:19:45.348Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:06.342Z"
+}

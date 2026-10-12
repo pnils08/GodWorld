@@ -1,0 +1,31 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-09-30",
+  "cycle": 109,
+  "model": "deepseek/deepseek-chat",
+  "statement": "The month-nine disbursement shows the Stabilization Fund reaching ground level—where rents pinch and leases expire. We see the numbers but we measure by who stays. This isn't just about keeping storefronts lit; it's about keeping keys in hands. West Oakland can't thrive if its soul gets priced block by block. The next phase needs deeper targeting—families getting notices, not just businesses seeing foot traffic dip.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-109-civic-office-council-d1",
+        "text": "District 1 stands with the data—OARI's pilot reduced crisis calls by 22% in our test corridors. We transmit the full evaluation report with a clear recommendation: expand the Oakland Alternative Response Initiative citywide, starting with the high-call zones identified in West Oakland and Brooklyn.",
+        "directiveCycle": 109,
+        "confrontationSeat": "civic-office-council-d1"
+      }
+    }
+  ],
+  "movesRejected": [
+    {
+      "type": "propose",
+      "reason": "second-consequential-move(one per wake — the first valid one stands)"
+    }
+  ],
+  "numberMoved": "1",
+  "ranAt": "2026-09-30T10:45:50.061Z",
+  "fellBackFrom": null
+}

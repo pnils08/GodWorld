@@ -1,0 +1,52 @@
+{
+  "draft": "output/cron-compare/civic_c110_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d9fac9e9ccb731705a45acd5844528393456592f5cb704c7e1cd34322bb3f34e",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Accountability piece properly uses authorized street texture, role-only local color, and analytical framing anchored to engine strain patterns without fabricating tracked citizen quotes or breaching canon.",
+  "review": {
+    "profileId": "jax-accountability-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "packageVersion": "JAX-LEP2-1",
+    "manifestId": "AM-b796a95dcdfe",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Jax Caldera"
+    ],
+    "unverified": [
+      "Low Tide",
+      "Mandela Parkway",
+      "West Oakland Crime Spike"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0117,
+  "durationMs": 9694,
+  "parseError": false,
+  "ranAt": "2026-10-07T23:17:26.346Z"
+}

@@ -1,0 +1,183 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00506",
+    "name": "Terrence Mobley",
+    "role": "City Council District 9",
+    "officeId": "COUNCIL-D9",
+    "district": "D9",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d9",
+    "initiative": null,
+    "dials": {
+      "approval": 65
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "stand with Laurel or leave it"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 213.95454545454547,
+    "label": "Laurel — sentiment 0.35 vs city 0.490",
+    "lever": "stand with Laurel or leave it",
+    "hood": "Laurel",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.35,
+      "citySentiment": 0.4895454545454546,
+      "crime": 0.47,
+      "cityCrime": 0.6477272727272728,
+      "heat": 13.954545454545464,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "stand with Laurel or leave it",
+    "lineFacts": [
+      "approval 65",
+      "Laurel: sentiment 0.35 vs city 0.490; crime index 0.47 vs city 0.648; steady momentum 5",
+      "Laurel crime: property 26, violent 21, incidents 5 (cycle 107) — city property 35.5, violent 28.8, incidents 6.8",
+      "Laurel: sentiment 0.35 vs city 0.490; crime index 0.47 vs city 0.648; retail 7.16; housing pressure 0; steady; momentum 5"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Laurel",
+      "Uptown"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00060",
+        "name": "Marco Fabregas",
+        "neighborhood": "Laurel",
+        "role": "Catcher, Las Vegas Aviators (AAA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Laurel — sentiment 0.35 vs city 0.490"
+      },
+      {
+        "pop": "POP-00092",
+        "name": "Carlos Flores",
+        "neighborhood": "Laurel",
+        "role": "Center Fielder, Midland RockHounds (AA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Laurel — sentiment 0.35 vs city 0.490"
+      },
+      {
+        "pop": "POP-00134",
+        "name": "Brianna Lee",
+        "neighborhood": "Laurel",
+        "role": "Historic Preservation Carpenter",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Laurel — sentiment 0.35 vs city 0.490"
+      },
+      {
+        "pop": "POP-00174",
+        "name": "Tariq Jello",
+        "neighborhood": "Laurel",
+        "role": "Appliance Repair Technician",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Laurel — sentiment 0.35 vs city 0.490"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D9",
+      "t": "FACT",
+      "text": "Terrence Mobley holds COUNCIL-D9 at approval 65",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-Laurel",
+      "t": "FACT",
+      "text": "Laurel: sentiment 0.35 vs city 0.490; crime index 0.47 vs city 0.648; steady momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-Laurel",
+      "t": "FACT",
+      "text": "Laurel crime: property 26, violent 21, incidents 5 (cycle 107) — city property 35.5, violent 28.8, incidents 6.8",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Laurel",
+      "t": "FACT",
+      "text": "Laurel: sentiment 0.35 vs city 0.490; crime index 0.47 vs city 0.648; retail 7.16; housing pressure 0; steady; momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Approval": "65"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

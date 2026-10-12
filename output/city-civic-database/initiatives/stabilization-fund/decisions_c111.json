@@ -1,0 +1,24 @@
+{
+  "initiative": "INIT-001",
+  "initiativeId": "INIT-001",
+  "cycle": 111,
+  "primaryVoice": "Mayor gavel (mayor_gavel-001)",
+  "consolidatedFrom": [
+    "STMT-111-mayor_gavel-001 (Mayor gavel — West Oakland Stabilization Fund Month-Ten Disbursement)",
+    "STMT-111-stabilization_fund-001 (Webb — Month-ten disbursement)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-001",
+    "ImplementationPhase": "disbursement-active",
+    "MilestoneNotes": "C111: Month-ten disbursement $400K approved; 23-day processing standard maintained.",
+    "NextScheduledAction": "Month-eleven disbursement review",
+    "NextActionCycle": 112,
+    "LastWorkCycle": 111,
+    "LastWorkSeat": "proj-stabilization-fund"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-110-proj-stabilization-fund-2026-10-07"
+    ]
+  }
+}

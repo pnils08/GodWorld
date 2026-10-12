@@ -1,0 +1,38 @@
+{
+  "office": "okoro",
+  "cycle": 110,
+  "speaker": "Brenda Okoro",
+  "cascadeSummary": "Authorized month-nine disbursement of $400,000 for West Oakland Stabilization Fund household grants, maintaining focus on long-tenure residents. Pledged heightened Ivy Hill infrastructure response while crediting Fruitvale's momentum to community organizing.",
+  "statements": [
+    {
+      "statementId": "STMT-110-okoro-001",
+      "type": "operational_status",
+      "topic": "West Oakland Stabilization Fund — Month-Nine Disbursement",
+      "initiative": "INIT-001",
+      "decision": "Approved month-nine disbursement of $400,000 for household stabilization grants",
+      "quote": "Nine months in, the Fund's design is holding—targeted relief that flows to tenants before displacement does.",
+      "fullStatement": "We’ve authorized the month-nine disbursement of $400,000 for household stabilization grants under the West Oakland Stabilization Fund. This disbursement continues our focus on long-tenure residents, ensuring relief flows to tenants before displacement does. Forty-seven checks have kept families in place since C84—nine months in, the Fund's design is holding. We’ll continue monthly reporting to Finance Committee, maintaining both transparency and operational speed.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-okoro-002",
+      "type": "cascade_response",
+      "topic": "Ivy Hill Infrastructure Crisis — Response",
+      "initiative": null,
+      "decision": "Pledged heightened infrastructure assessment and emergency response",
+      "quote": "Ivy Hill’s infrastructure needs action, not speeches—and our Public Works team is already mobilizing.",
+      "fullStatement": "The high-severity public-works spike in Ivy Hill demands an immediate response. We’ve directed Public Works to prioritize infrastructure assessment and deploy an emergency response team. When a neighborhood needs help, we show up with shovels—not speeches. Ivy Hill’s streets will see action this cycle.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-okoro-003",
+      "type": "cascade_response",
+      "topic": "Fruitvale Success — Credit Where Due",
+      "initiative": null,
+      "decision": "Credited Fruitvale’s momentum to community organizing",
+      "quote": "Fruitvale’s busy streets didn’t happen by accident—they happened because this community organizes.",
+      "fullStatement": "Fruitvale’s busy streets and upbeat mood didn’t happen by accident—they happened because this community organizes, advocates, and builds. The momentum we see this cycle belongs to Fruitvale’s blocks and porches, not City Hall memos. Credit where it’s due: this neighborhood’s resilience drives its success.",
+      "trackerUpdates": {}
+    }
+  ]
+}

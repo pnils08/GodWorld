@@ -1,0 +1,130 @@
+{
+  "loggedAt": "2026-09-25T11:16:49.536Z",
+  "cycle": 108,
+  "writersWithFiles": [
+    "Anthony Raines",
+    "Hal Richmond",
+    "P Slayer",
+    "Simon Leary",
+    "Tanya Cruz",
+    "Selena Grant",
+    "Talia Finch"
+  ],
+  "rows": [
+    {
+      "n": 1,
+      "team": "A's",
+      "eventType": "game-result",
+      "eventTrigger": "playoffs",
+      "snippet": "Through 3 games the A's lead the Twins",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary"
+      ],
+      "shared": [
+        "world summary",
+        "sports desk packet"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 2,
+      "team": "A's",
+      "eventType": "game-result",
+      "eventTrigger": "playoffs",
+      "snippet": "John Ellis struggles in a game 4 loss,",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary"
+      ],
+      "shared": [
+        "world summary",
+        "sports desk packet"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 3,
+      "team": "A's",
+      "eventType": "player-feature",
+      "eventTrigger": "awards",
+      "snippet": "Eric Taveras win Post Season MVP",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary"
+      ],
+      "shared": [
+        "world summary",
+        "sports desk packet"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 4,
+      "team": "A's",
+      "eventType": "season-state",
+      "eventTrigger": "playoffs",
+      "snippet": "World Series is set, A's vs Phillies. ",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary"
+      ],
+      "shared": [
+        "world summary",
+        "sports desk packet"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 5,
+      "team": "Oaks",
+      "eventType": "season-state",
+      "eventTrigger": "cold-streak",
+      "snippet": "Coach Wilson Shepard prepares his rook",
+      "writers": [
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary",
+        "sports desk packet"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 6,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "pre-season",
+      "snippet": "The Oaks stumble in game 1 of the pres",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary",
+        "sports desk packet"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    }
+  ],
+  "stranded": 0
+}

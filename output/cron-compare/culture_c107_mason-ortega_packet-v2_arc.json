@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "107",
+  "desk": "culture",
+  "persona": "mason-ortega",
+  "storyline": {
+    "slug": "rockridge-mimmie-carlisle-hood-kitchens",
+    "verb": "opened"
+  },
+  "hood": "Rockridge",
+  "quotes": [
+    {
+      "pop": "POP-00682",
+      "name": "Mimmie Carlisle",
+      "quote": "Working with Jesus and Kalyani at OakHouse has been a real push for me—it’s like we’re all climbing toward something bigger, together. I’ve felt that drive in the kitchen, especially lately. It’s not just about the pastries; it’s about creating something that feels like ours."
+    },
+    {
+      "pop": "POP-00721",
+      "name": "Jesus Jorden",
+      "quote": "Working with Mimmie and Kalyani at OakHouse has been a steady rhythm—like the kind of teamwork that doesn’t need much talking. We just know what needs to be done, and it gets done. It’s not flashy, but it’s reliable, and that’s what matters in a kitchen."
+    },
+    {
+      "pop": "POP-00905",
+      "name": "Kalyani Alvarez",
+      "quote": "Working with Mimmie and Jesus at OakHouse has been a real pleasure. We each bring something unique to the table, and it’s been rewarding to see how our different styles complement each other. It’s not just about the pastries we create, but the camaraderie and shared passion that make the team special."
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I’ve heard people around Rockridge talking about how the pastry team at OakHouse—Mimmie, Jesus, and Kalyani—are really raising the bar with their desserts. It’s nice to see such talent in our neighborhood."
+    }
+  ],
+  "claim": "Working with Jesus and Kalyani at OakHouse has been a real push for me—it’s like we’re all climbing toward something bigger, together. I’ve felt that drive in the kitchen, especially lately. It’s not just about the pastries; it’s about creating something that feels like ours.",
+  "src": "citizenVoice PRESS c107",
+  "ranAt": "2026-09-18T18:16:27.104Z"
+}

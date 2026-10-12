@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "civic",
+  "persona": "lila-mezran",
+  "storyline": {
+    "slug": "chinatown-yu-zen-beat-health",
+    "verb": "opened"
+  },
+  "hood": "Chinatown",
+  "quotes": [
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone. But there's hope too—seeing someone like Marcus Osei recover gives the rest of us strength."
+    },
+    {
+      "pop": "POP-00801",
+      "name": "Maurice Franklin",
+      "quote": "Lying here in the hospital, you hear things. Nurses talking, other patients' families visiting. Chinatown's been hit hard this season - seems like every other conversation is about someone else down there getting sick. It makes you realize how connected we all are, even when we're in different neighborhoods. When one part of the city struggles, it ripples through the rest of us."
+    },
+    {
+      "pop": "POP-00228",
+      "name": "Javier Robertson",
+      "quote": "It’s hard not to notice how much Chinatown’s been hit lately. You see it in the way people are moving—slower, more cautious. Families are sticking close, looking out for each other, but there’s this weight in the air, like everyone’s holding their breath. It’s a reminder of how tight-knit that community is, but also how fragile we all are when something like this hits."
+    },
+    {
+      "pop": "POP-01041",
+      "name": "Ronald Williams",
+      "quote": "I've heard folks talking about more people being sick around here lately. At the restaurant, we're just trying to keep things clean and stay healthy ourselves."
+    }
+  ],
+  "claim": "From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone. But there's hope too—seeing someone like Marcus Osei recover gives the rest of us strength.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-21T18:17:36.915Z"
+}

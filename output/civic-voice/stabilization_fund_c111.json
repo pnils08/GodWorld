@@ -1,0 +1,23 @@
+{
+  "office": "stabilization_fund",
+  "cycle": 111,
+  "speaker": "Marcus Webb",
+  "cascadeSummary": "Approved month-ten disbursement of $400,000, maintaining rigorous compliance standards. Adjusted outreach to focus on commercial-residential hybrid cases as West Oakland's economic landscape shifts.",
+  "statements": [
+    {
+      "statementId": "STMT-111-stabilization_fund-001",
+      "type": "operational_status",
+      "topic": "Month-ten disbursement",
+      "initiative": "INIT-001",
+      "decision": "Approved month-ten disbursement of $400,000 for 10 additional households.",
+      "quote": "Ninety-one households stabilized means ninety-one West Oakland families who won’t face displacement this month—and every case file meets compliance standards that will survive audit.",
+      "fullStatement": "The Office of Economic and Workforce Development has approved the month-ten disbursement of $400,000 under Deputy Mayor Okoro’s authority, stabilizing 10 additional households in West Oakland. This brings the total disbursement to $5 million, with rigorous compliance standards ensuring every case file meets audit scrutiny. We’ve adjusted our outreach to focus on commercial-residential hybrid cases as West Oakland’s economic landscape shifts. Ninety-one households stabilized means ninety-one West Oakland families who won’t face displacement this month.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "MilestoneNotes": "C111: month-ten disbursement of $400K approved, focusing on commercial-residential hybrid cases",
+        "NextScheduledAction": "month-eleven disbursement review",
+        "NextActionCycle": 112
+      }
+    }
+  ]
+}

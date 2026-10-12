@@ -1,0 +1,53 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "rachel-torres",
+  "byline": "Sgt. Rachel Torres",
+  "bylinePopid": "POP-00057",
+  "article": "output/cron-compare/staged/civic_c109_rachel-torres_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Ronald Williams",
+        "role": "quoted-source",
+        "popid": "POP-01041"
+      },
+      {
+        "name": "Jonas Patel",
+        "role": "quoted-source",
+        "popid": "POP-00142"
+      },
+      {
+        "name": "Jacquez Tearn",
+        "role": "quoted-source",
+        "popid": "POP-00214"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "I hear Chinatown's got more incidents than other spots lately, but honestly, at the restaurant we just keep our heads down and do our work. The numbers don't really change how we move through the day.",
+        "sourceRef": "citizenVoice PRESS Ronald Williams"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c7f584a41ac5",
+    "draftSha256": "85bc258b48b7c84e32e6233d0231fc4e1985e8fb10aa489783a0306888e103fb",
+    "verdict": "output/cron-compare/civic_c109_rachel-torres_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-02T06:46:38.420Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:06.101Z"
+}

@@ -1,0 +1,197 @@
+PLAYER INTAKE (Pitcher) — 2041 SEASON
+
+Name: John Ellis
+
+ 
+
+Team: Oakland Athletics
+
+ 
+
+Position: SP
+
+ 
+
+Age: 25
+
+ 
+
+Bats: S
+
+ 
+
+Throws: R
+
+ 
+
+Height: 5'10"
+
+ 
+
+Weight: 209 lbs
+
+ 
+
+Born: New York
+
+ 
+
+Drafted: Round 2 (2033)
+
+ 
+
+MLB Service: 2.001
+
+ 
+
+Overall: 86
+
+ 
+
+Potential: A
+
+— 2041 REGULAR SEASON —
+
+Games: 32
+
+ 
+
+Games Started: 32
+
+ 
+
+Wins: 20
+
+ 
+
+Losses: 3
+
+ 
+
+Saves: 0
+
+ 
+
+Blown Saves: 0
+
+ 
+
+Holds: 0
+
+ 
+
+Innings Pitched: 189.2
+
+ 
+
+Hits Allowed: 184
+
+ 
+
+Runs Allowed: 79
+
+ 
+
+Earned Runs: 72
+
+ 
+
+Home Runs Allowed: 18
+
+ 
+
+Walks: 54
+
+ 
+
+Strikeouts: 153
+
+ 
+
+ERA: 3.42
+
+ 
+
+WHIP: 1.25
+
+ 
+
+Winning Percentage: 0.87
+
+ 
+
+Quality Starts: 18
+
+ 
+
+Complete Games: 0
+
+ 
+
+Shutouts: 0
+
+ 
+
+Hit Batters: 5
+
+ 
+
+Wild Pitches: 1
+
+ 
+
+Total Batters Faced: 791
+
+ 
+
+WAR: 3.7
+
+— RATE METRICS —
+
+K/9: 7.26
+
+ 
+
+BB/9: 2.56
+
+ 
+
+HR/9: 0.85
+
+ 
+
+FIP: 3.55
+
+— CONTRACT STATUS —
+
+2042: RNW
+
+ 
+
+2043: ARB
+
+ 
+
+2044: ARB
+
+ 
+
+2045: ARB
+
+ 
+
+FA: 2046
+
+
+--------------------------------------------------------------------------------
+
+
+Quirks
+
+Laser Throwing Arm (99 ARM)
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS (Career Reference)

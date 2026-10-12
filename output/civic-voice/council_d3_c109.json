@@ -1,0 +1,38 @@
+{
+  "office": "council_d3",
+  "cycle": 109,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "I voted to advance the Fruitvale Transit Hub Phase II design consultant selection to keep momentum on a vital community project. I also supported expanding the Oakland Alternative Response Initiative to District 3, recognizing its proven effectiveness in improving public safety. Finally, I highlighted the success of Fruitvale's street trade this cycle as a result of targeted neighborhood investment.",
+  "statements": [
+    {
+      "statementId": "STMT-109-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Fruitvale Transit Hub Phase II",
+      "initiative": "INIT-003",
+      "decision": "YES",
+      "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+      "fullStatement": "The Fruitvale Transit Hub is a generational investment in our community. This design consultant selection moves us from vision to reality while upholding the merchant protections we fought for. I vote YES to keep this project on track.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d3-002",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative",
+      "initiative": "INIT-002",
+      "decision": "YES",
+      "quote": "Safety isn't a template — it's a tailored approach that meets neighborhoods where they are.",
+      "fullStatement": "The Oakland Alternative Response Initiative has proven its value in Districts 1 and 2. Expanding it to District 3 will bring that same proven model of community-responsive public safety to Fruitvale and San Antonio.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-council_d3-003",
+      "type": "crisis_credit_statement",
+      "topic": "District 3 Neighborhoods",
+      "initiative": null,
+      "decision": "Highlight Fruitvale's success",
+      "quote": "Fruitvale's bustling street trade isn't luck — it's the result of deliberate investment in our neighborhoods.",
+      "fullStatement": "This cycle's boosted street trade in Fruitvale shows what happens when we invest in our neighborhoods. It's proof that targeted funding, merchant support, and community engagement get results.",
+      "trackerUpdates": {}
+    }
+  ]
+}

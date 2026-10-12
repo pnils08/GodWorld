@@ -1,0 +1,712 @@
+{
+  "date": "2026-09-28",
+  "cycle": 109,
+  "quotas": {
+    "grid": [
+      "carmen-delaine",
+      "business-desk",
+      "lila-mezran",
+      "trevor-shimizu",
+      "anthony-raines"
+    ],
+    "weekday": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "beatDomain": "CIVIC",
+      "persona": "carmen-delaine",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 1,
+      "story": {
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "kind": "initiative",
+        "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "hood": "West Oakland",
+        "popids": [],
+        "citizens": []
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "carmen-delaine",
+      "pulse": {
+        "className": "civic-ledger",
+        "score": 55,
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hood": "West Oakland",
+        "source": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+          "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c109.json snapshots.Initiative_Tracker",
+          "Temescal Community Health Center — status passed, phase operational, VoteCycle 80, outcome PASSED, budget $45M [Initiative_Tracker]",
+          "Mayor — Avery Santana — approval 69 — active [Civic_Office_Ledger]",
+          "District Attorney — Clarissa Dane — approval 65 — active [Civic_Office_Ledger]",
+          "Public Defender — Caleb Reyes — approval 65 — active [Civic_Office_Ledger]",
+          "City Council District 1 — Denise Carter — approval 62 — active [Civic_Office_Ledger]",
+          "City Council District 2 — Leonard Tran — approval 65 — active [Civic_Office_Ledger]",
+          "City Council District 3 — Rose Delgado — approval 64 — active [Civic_Office_Ledger]",
+          "City Council District 4 — Ramon Vega — approval 62 — active [Civic_Office_Ledger]"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
+        ]
+      },
+      "wakePackage": "CARMEN-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "gridDay": 1,
+      "story": {
+        "angle": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+        "label": "West Oakland businesses · Oakmesh Systems, Civis Systems",
+        "hookLine": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+        "hood": "West Oakland",
+        "pulseClass": "hood-businesses",
+        "namedBusinesses": [
+          "Oakmesh Systems",
+          "Civis Systems",
+          "Coastline Construction",
+          "Mariner Construction",
+          "Northgate Construction"
+        ],
+        "citizens": [
+          "Elijah Roberts (POP-00275)",
+          "Enzo Walker (POP-00291)",
+          "Dom Will (POP-00368)",
+          "Jace Robinson (POP-00483)",
+          "Sam Fazio (POP-00445)",
+          "Catherine Santos (POP-00482)",
+          "Elias  Varek (POP-00789)",
+          "Maurice Franklin (POP-00801)",
+          "Daniel Cloak (POP-00722)",
+          "Marcus Wright (POP-00288)",
+          "Eleanor Rivera (POP-00617)",
+          "Charlene Underwood (POP-00850)"
+        ],
+        "popids": [
+          "POP-00275",
+          "POP-00291",
+          "POP-00368",
+          "POP-00483",
+          "POP-00445",
+          "POP-00482",
+          "POP-00789",
+          "POP-00801",
+          "POP-00722",
+          "POP-00288",
+          "POP-00617",
+          "POP-00850"
+        ],
+        "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+        "cycle": 109
+      },
+      "economicSlice": true,
+      "economicVariant": "business",
+      "pulse": {
+        "className": "hood-businesses",
+        "score": 29,
+        "label": "West Oakland businesses · Oakmesh Systems, Civis Systems",
+        "hood": "West Oakland",
+        "namedBusinesses": [
+          "Oakmesh Systems",
+          "Civis Systems",
+          "Coastline Construction",
+          "Mariner Construction",
+          "Northgate Construction"
+        ]
+      },
+      "prewrite": {
+        "pulseClass": "hood-businesses",
+        "angle": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+        "hookLine": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+        "namedBusinesses": [
+          "Oakmesh Systems",
+          "Civis Systems",
+          "Coastline Construction",
+          "Mariner Construction",
+          "Northgate Construction"
+        ],
+        "anchorFacts": [
+          "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+          "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias  Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+          "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner)",
+          "Mariner Construction · Construction · 165 employees · growth 4.9%",
+          "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner)",
+          "ENGINE SEED (West Oakland): citizens Daniel Cloak; Marcus Wright; Eleanor Rivera; Charlene Underwood · businesses West Side Cafe; Oakmesh Systems · New Covenant Pentecostal Assembly Seniors Lunch Program (program)",
+          "CASINO: Janae Rivers — sports wager, staked $376, settled for $0",
+          "CASINO: Lorenzo Jordan — sports wager, staked $367, settled for $0",
+          "CASINO: Clarissa Dane — sports wager, staked $900, settled for $1k",
+          "CASINO: Jessie Hess — undocked wager, staked $111, settled for $0",
+          "CASINO: Davey Martinez — sports wager, staked $196, settled for $282",
+          "CASINO: the house float stands at $241k"
+        ],
+        "evidence": [
+          {
+            "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+          },
+          {
+            "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias  Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+          },
+          {
+            "text": "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+          },
+          {
+            "text": "Mariner Construction · Construction · 165 employees · growth 4.9%",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+          },
+          {
+            "text": "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+          },
+          {
+            "text": "ENGINE SEED (West Oakland): citizens Daniel Cloak; Marcus Wright; Eleanor Rivera; Charlene Underwood · businesses West Side Cafe; Oakmesh Systems · New Covenant Pentecostal Assembly Seniors Lunch Program (program)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+          },
+          {
+            "text": "CASINO: Janae Rivers — sports wager, staked $376, settled for $0",
+            "src": "output/beats/Casino_Ledger.jsonl @C109"
+          },
+          {
+            "text": "CASINO: Lorenzo Jordan — sports wager, staked $367, settled for $0",
+            "src": "output/beats/Casino_Ledger.jsonl @C109"
+          },
+          {
+            "text": "CASINO: Clarissa Dane — sports wager, staked $900, settled for $1k",
+            "src": "output/beats/Casino_Ledger.jsonl @C109"
+          },
+          {
+            "text": "CASINO: Jessie Hess — undocked wager, staked $111, settled for $0",
+            "src": "output/beats/Casino_Ledger.jsonl @C109"
+          },
+          {
+            "text": "CASINO: Davey Martinez — sports wager, staked $196, settled for $282",
+            "src": "output/beats/Casino_Ledger.jsonl @C109"
+          },
+          {
+            "text": "CASINO: the house float stands at $241k",
+            "src": "output/beats/Casino_Ledger.jsonl @C109"
+          }
+        ],
+        "hooks": [
+          {
+            "text": "Unemployment in Lake Merritt up 20%. Economic stress story. Who's affected and why?",
+            "angle": "baseline context piece",
+            "hood": "Lake Merritt"
+          },
+          {
+            "text": "Notable event: \"Medium-severity economic spike in Baylight District\". Follow-up recommended.",
+            "angle": "desk rotation",
+            "hood": "Baylight District"
+          },
+          {
+            "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+            "angle": "baseline context piece",
+            "hood": null
+          },
+          {
+            "text": "Camila Osman is the new owner of Claremont Table in Rockridge (C109)",
+            "angle": "desk rotation",
+            "hood": "Rockridge"
+          },
+          {
+            "text": "Mike Kinder has not advanced in 54 years",
+            "angle": "desk rotation",
+            "hood": null
+          },
+          {
+            "text": "Maya Torres-Dillon has not advanced in 54 years",
+            "angle": "desk rotation",
+            "hood": null
+          }
+        ],
+        "forbidden": [
+          "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+          "Do not contradict a role, employer or neighborhood listed here"
+        ]
+      },
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Dr. Lila Mezran",
+      "popid": "POP-00154",
+      "beatDomain": "HEALTH",
+      "persona": "lila-mezran",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 1,
+      "story": {
+        "kind": "beat-health",
+        "angle": "Chinatown carries the most sick residents (142) | 4 named on the hospital and cause records",
+        "label": "Chinatown carries the most sick residents (142) | 4 named on the hospital and cause records",
+        "hookLine": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.",
+        "hood": "Chinatown",
+        "citizens": [
+          "Yu Zen (POP-00194)",
+          "Maurice Franklin (POP-00801)",
+          "Tiu Xiong (POP-00209)",
+          "Colin Soria (POP-00227)"
+        ],
+        "popids": [
+          "POP-00194",
+          "POP-00801",
+          "POP-00209",
+          "POP-00227"
+        ],
+        "ref": "output/beats/Neighborhood_Demographics.jsonl Sick @C109 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+        "cycle": 109
+      },
+      "beatSlice": true,
+      "beatSeat": "lila-mezran",
+      "pulse": {
+        "className": "beat-health",
+        "score": 100,
+        "label": "Chinatown carries the most sick residents (142) | 4 named on the hospital and cause records",
+        "hood": "Chinatown",
+        "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C109 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Chinatown carries the most sick residents (142) | 4 named on the hospital and cause records",
+        "hookLine": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.",
+        "anchorFacts": [
+          "Sick residents by neighborhood: Chinatown 142 (+3 vs C108), East Oakland 122 (+3 vs C108), Fruitvale 119 (+3 vs C108), Ivy Hill 119 (+3 vs C108), San Antonio 115 (+1 vs C108), Laurel 114 (+3 vs C108), Grand Lake 108 (+3 vs C108), Rockridge 108 (+0 vs C108) — 1,944 across 22 neighborhoods",
+          "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+          "Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu",
+          "The city illness rate stands at 4.6%, with 1 in hospital care at 1% of capacity.",
+          "Tiu Xiong skipped plans to rest off a stubborn bug (Uptown).",
+          "Colin Soria fought off a head cold that lingered all week (Temescal)."
+        ],
+        "evidence": [
+          {
+            "text": "Sick residents by neighborhood: Chinatown 142 (+3 vs C108), East Oakland 122 (+3 vs C108), Fruitvale 119 (+3 vs C108), Ivy Hill 119 (+3 vs C108), San Antonio 115 (+1 vs C108), Laurel 114 (+3 vs C108), Grand Lake 108 (+3 vs C108), Rockridge 108 (+0 vs C108) — 1,944 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C109"
+          },
+          {
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194"
+          },
+          {
+            "text": "Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801"
+          },
+          {
+            "text": "The city illness rate stands at 4.6%, with 1 in hospital care at 1% of capacity.",
+            "src": "output/world_summary_c109.md \"## City State\""
+          },
+          {
+            "text": "Tiu Xiong skipped plans to rest off a stubborn bug (Uptown).",
+            "src": "output/world_summary_c109.md \"## Who Lived It ### Health\""
+          },
+          {
+            "text": "Colin Soria fought off a head cold that lingered all week (Temescal).",
+            "src": "output/world_summary_c109.md \"## Who Lived It ### Health\""
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 108
+        },
+        "hooks": [
+          {
+            "text": "Illness rates in Baylight District up 18%. Public health concern? Investigation warranted.",
+            "angle": "public health coverage",
+            "domain": "HEALTH",
+            "hood": "Baylight District",
+            "priority": 3
+          }
+        ],
+        "note": "named rows are few (4) — write the neighborhood, not a ward",
+        "roomIsYours": "the waiting room, the walk to the clinic, what a household does when one person is sick, who covers the shift"
+      },
+      "wakePackage": "LILA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Trevor Shimizu",
+      "popid": "POP-00155",
+      "beatDomain": "INFRASTRUCTURE",
+      "persona": "trevor-shimizu",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 1,
+      "story": {
+        "kind": "beat-transit",
+        "angle": "12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+        "label": "12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record",
+        "hookLine": "12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+        "hood": null,
+        "citizens": [
+          "Joel Wren (POP-00218)",
+          "Jerald Jensen (POP-00280)",
+          "Coen Cartier (POP-00338)",
+          "Daire Green (POP-00442)",
+          "Ray Neal (POP-00448)",
+          "Calvin Mwangi (POP-00573)",
+          "Eleanor Rivera (POP-00617)",
+          "Elena Soria-Dominguez (POP-00791)",
+          "Ximena Mehta (POP-01039)"
+        ],
+        "popids": [
+          "POP-00218",
+          "POP-00280",
+          "POP-00338",
+          "POP-00442",
+          "POP-00448",
+          "POP-00573",
+          "POP-00617",
+          "POP-00791",
+          "POP-01039"
+        ],
+        "ref": "output/beats/Transit_Metrics.jsonl Cycle 109",
+        "cycle": 109
+      },
+      "beatSlice": true,
+      "beatSeat": "trevor-shimizu",
+      "pulse": {
+        "className": "beat-transit",
+        "score": 100,
+        "label": "12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record",
+        "hood": null,
+        "source": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+        "hookLine": "12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+        "anchorFacts": [
+          "8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)",
+          "12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+          "Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland",
+          "19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning",
+          "Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+          "MacArthur: ridership 12,030 (+2,923 vs C108), on-time 84% (+5 pts) — overcast; events in Temescal",
+          "West Oakland: ridership 8,635 (+2,697 vs C108), on-time 81% (+3 pts) — overcast; game day (Jack London, Downtown); events in Downtown; Baylight District — Final Council Vote: construction-planning",
+          "Lake Merritt: ridership 8,484 (+2,465 vs C108), on-time 86% (+5 pts) — overcast; game day (Chinatown); events in Lake Merritt ×2",
+          "Rockridge: ridership 9,343 (+2,121 vs C108), on-time 78% (-2 pts) — overcast",
+          "I-880 North: traffic index 100 (+0 vs C108) — overcast; game day (Baylight District, Jack London, Downtown); Baylight District — Final Council Vote: construction-planning",
+          "I-880 South: traffic index 100 (+5 vs C108) — overcast; game day (Baylight District)",
+          "I-580 East: traffic index 100 (+0 vs C108) — overcast",
+          "I-580 West: traffic index 96 (-3 vs C108) — overcast",
+          "I-980: traffic index 100 (+2 vs C108) — overcast; game day (Downtown); Baylight District — Final Council Vote: construction-planning",
+          "Broadway: traffic index 100 (+1 vs C108) — overcast; game day (Downtown)",
+          "International Blvd: traffic index 100 (+0 vs C108) — overcast",
+          "MacArthur Blvd: traffic index 77 (+10 vs C108) — overcast",
+          "Telegraph Ave: traffic index 100 (+11 vs C108) — overcast; game day (Downtown)",
+          "Grand Ave: traffic index 73 (-5 vs C108) — overcast"
+        ],
+        "evidence": [
+          {
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "MacArthur: ridership 12,030 (+2,923 vs C108), on-time 84% (+5 pts) — overcast; events in Temescal",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "West Oakland: ridership 8,635 (+2,697 vs C108), on-time 81% (+3 pts) — overcast; game day (Jack London, Downtown); events in Downtown; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "Lake Merritt: ridership 8,484 (+2,465 vs C108), on-time 86% (+5 pts) — overcast; game day (Chinatown); events in Lake Merritt ×2",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "Rockridge: ridership 9,343 (+2,121 vs C108), on-time 78% (-2 pts) — overcast",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "I-880 North: traffic index 100 (+0 vs C108) — overcast; game day (Baylight District, Jack London, Downtown); Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "I-880 South: traffic index 100 (+5 vs C108) — overcast; game day (Baylight District)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "I-580 East: traffic index 100 (+0 vs C108) — overcast",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "I-580 West: traffic index 96 (-3 vs C108) — overcast",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "I-980: traffic index 100 (+2 vs C108) — overcast; game day (Downtown); Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "Broadway: traffic index 100 (+1 vs C108) — overcast; game day (Downtown)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "International Blvd: traffic index 100 (+0 vs C108) — overcast",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "MacArthur Blvd: traffic index 77 (+10 vs C108) — overcast",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "Telegraph Ave: traffic index 100 (+11 vs C108) — overcast; game day (Downtown)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          },
+          {
+            "text": "Grand Ave: traffic index 73 (-5 vs C108) — overcast",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_IN_TABLE",
+          "vs": 108
+        },
+        "hooks": [],
+        "note": null,
+        "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first"
+      },
+      "wakePackage": "TREVOR-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Anthony Raines",
+      "popid": "POP-00017",
+      "beatDomain": "SPORTS_ANALYTICS",
+      "persona": "anthony-raines",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 1,
+      "story": {
+        "kind": "sports-analytics",
+        "angle": "One line anchors the board read — 7IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+        "label": "A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+        "hookLine": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+        "hood": "Chinatown",
+        "pulseClass": "line-card",
+        "team": "A's",
+        "eventKind": "game-result",
+        "citizens": [
+          "Pablo Almanzar (POP-01078)",
+          "Ernesto Quintero (POP-00050)",
+          "Jose Colon (POP-00599)"
+        ],
+        "popids": [
+          "POP-01078",
+          "POP-00050",
+          "POP-00599"
+        ],
+        "ref": "world_summary_c109.md ## Sports",
+        "cycle": 109
+      },
+      "anthonySlice": true,
+      "analytic": true,
+      "pulse": {
+        "className": "line-card",
+        "score": 71,
+        "label": "A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+        "team": "A's",
+        "eventKind": "game-result",
+        "seasonType": "playoffs",
+        "storyAngle": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+        "hasStats": true,
+        "record": "2-1",
+        "streak": "W1",
+        "foilNumber": "7IP",
+        "feedCycle": 109
+      },
+      "bag": {
+        "tools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 5,
+            "name": "Repertoire vs Results"
+          }
+        ],
+        "claim": "One line anchors the board read — 7IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+        "foilNumber": "7IP"
+      },
+      "prewrite": {
+        "reporter": "Anthony Raines",
+        "bagTools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 5,
+            "name": "Repertoire vs Results"
+          }
+        ],
+        "lineFacts": [
+          "Feed line: Pablo Almanzar/7IP/5H/2ER/7SO",
+          "Feed line: Ernesto Quintero/1HR/1RBI",
+          "Feed line: Jose Colon/1HR/1RBI",
+          "Feed line: Darrin Davis/4-4",
+          "Team record (feed): 2-1 · W1",
+          "Event kind (feed): A's — game-result (playoffs)"
+        ],
+        "dossierFacts": [
+          "Pablo Almanzar TrueSource: 2041 REGULAR SEASON — Games: 5 Games Started: 5 Wins: 2 Losses: 0 Saves: 0 Blown Saves: 0 Holds: 0 Innings Pitched: 34.0 Hits Allowed: 12 Runs Allowed | WAR: 1.4",
+          "Ernesto Quintero TrueSource: 2041 REGULAR SEASON G: 145 PA: 589 AB: 554 R: 80 H: 156 2B: 25 3B: 3 HR: 46 RBI: 92 BB: 27 SO: 89 HBP: 4 SF: 3 SAC: 1 GIDP: 6 AVG: 0.282 OBP: 0.318 SL | WAR: 5.8 | AWARDS (Career Reference) - Top Prospect Tier 1 (2040) - Rookie of the Year (2041) - All-S",
+          "Jose Colon TrueSource: 2041 REGULAR SEASON G: 97 PA: 352 AB: 332 R: 97 H: 83 2B: 13 3B: 1 HR: 16 RBI: 42 BB: 16 SO: 53 HBP: 3 SF: 1 SAC: 0 GIDP: 4 AVG: 0.250 OBP: 0.290 SLG: | WAR: 1.7 | AWARDS (Career Reference)"
+        ],
+        "feedFacts": [
+          "StoryAngle: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+          "Notes: Game 3 of the WS; A's visit the Phillies for game 3. Pablo Almanzar gets the call in a crucial game 3, and does not disappoint. Pablo goes seven innings surrendering 2 runs. In a pitchers dual , the o",
+          "Record/Streak: 2-1 / W1"
+        ],
+        "claim": "One line anchors the board read — 7IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+        "missing": [
+          "x-stats / barrel% / launch angle / OAA not on feed",
+          "contracts or salaries not printed on this feed row",
+          "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)"
+        ],
+        "foilNumber": "7IP",
+        "anchorFacts": [
+          "Feed line: Pablo Almanzar/7IP/5H/2ER/7SO",
+          "Feed line: Ernesto Quintero/1HR/1RBI",
+          "Feed line: Jose Colon/1HR/1RBI",
+          "Feed line: Darrin Davis/4-4"
+        ],
+        "hooks": []
+      },
+      "wakePackage": "ANTHONY-LEP2-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Carmen Delaine",
+        "persona": "carmen-delaine",
+        "wakePackage": "CARMEN-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      },
+      {
+        "name": "Dr. Lila Mezran",
+        "persona": "lila-mezran",
+        "wakePackage": "LILA-LEP2-1"
+      },
+      {
+        "name": "Trevor Shimizu",
+        "persona": "trevor-shimizu",
+        "wakePackage": "TREVOR-LEP2-1"
+      },
+      {
+        "name": "Anthony Raines",
+        "persona": "anthony-raines",
+        "wakePackage": "ANTHONY-LEP2-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=carmen-delaine,business-desk,lila-mezran,trevor-shimizu,anthony-raines)"
+  },
+  "anthonyEnrich": {
+    "enriched": true,
+    "reason": "pulse=line-card score=71 foil=7IP"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "seats=1 business-desk/business:West Oakland",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=2 trevor-shimizu/beat-transit:—, lila-mezran/beat-health:Chinatown",
+    "seats": [
+      "trevor-shimizu/beat-transit:—",
+      "lila-mezran/beat-health:Chinatown"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "carmen-delaine",
+        "domain": "civic-ledger",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active"
+      }
+    ]
+  },
+  "builtAt": "2026-09-28T11:15:05.457Z"
+}

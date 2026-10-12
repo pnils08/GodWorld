@@ -1,0 +1,7 @@
+132:8:32:58 PM	Info	ENGINE61_RATE: 5.39 (steady) prev=5.05 mood=59.54 nudge=0.03 jitter=0.32
+150:8:33:09 PM	Info	runEconomicRippleEngine_ v2.5: mood=54.01 | ripples=5 | prevMigration=1 | layoffs=0
+151:8:33:09 PM	Info	applyMigrationDrift_: totalPopulation=390304 worldMig=1203 (source: World_Population)
+165:8:33:22 PM	Info	v3Integration v3.4: Cycle 107 | Calendar: MLKDay (major) | FirstFriday: false | CreationDay: false | Sports: playoffs
+168:8:33:22 PM	Info	runEconomicRippleEngine_ v2.5: mood=59.01 | ripples=5 | prevMigration=1 | layoffs=0
+170:8:33:22 PM	Info	v3Integration v3.4: Complete | Modules: 6/6 | Arcs: 1 | Textures: 19 | Domains: 13 | Ripples: 5 | Bonds: 609
+210:8:34:19 PM	Info	{"cycle":107,"totalMs":185618,"phaseCount":133,"slowest":[{"phase":"Phase5-Advancement","ms":56071,"ok":true},{"phase":"Phase11-MediaIntake","ms":16564,"ok":true},{"phase":"Phase10-ExecuteIntents","

@@ -1,0 +1,473 @@
+{
+  "version": "TRANSIT-SLICE-1",
+  "empty": false,
+  "cycle": 109,
+  "kind": "beat-transit",
+  "seat": {
+    "slug": "trevor-shimizu",
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155",
+    "desk": "civic",
+    "domain": "transit",
+    "builder": "buildTransitSlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-transit",
+    "score": 100,
+    "label": "12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record",
+    "hood": null,
+    "source": "output/beats/Transit_Metrics.jsonl Cycle 109"
+  },
+  "story": {
+    "kind": "beat-transit",
+    "angle": "12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+    "label": "12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record",
+    "hookLine": "12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+    "hood": null,
+    "citizens": [
+      "Joel Wren (POP-00218)",
+      "Jerald Jensen (POP-00280)",
+      "Coen Cartier (POP-00338)",
+      "Daire Green (POP-00442)",
+      "Ray Neal (POP-00448)",
+      "Calvin Mwangi (POP-00573)",
+      "Eleanor Rivera (POP-00617)",
+      "Elena Soria-Dominguez (POP-00791)",
+      "Ximena Mehta (POP-01039)"
+    ],
+    "popids": [
+      "POP-00218",
+      "POP-00280",
+      "POP-00338",
+      "POP-00442",
+      "POP-00448",
+      "POP-00573",
+      "POP-00617",
+      "POP-00791",
+      "POP-01039"
+    ],
+    "ref": "output/beats/Transit_Metrics.jsonl Cycle 109",
+    "cycle": 109
+  },
+  "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00218",
+      "name": "Joel Wren",
+      "role": "Mechanic",
+      "neighborhood": null,
+      "business": "AC Transit",
+      "profile": "Joel Wren — Mechanic — AC Transit",
+      "why": "works at AC Transit (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00280",
+      "name": "Jerald Jensen",
+      "role": "Janitor",
+      "neighborhood": null,
+      "business": "AC Transit",
+      "profile": "Jerald Jensen — Janitor — AC Transit",
+      "why": "works at AC Transit (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00338",
+      "name": "Coen Cartier",
+      "role": "Transit Operator (AC Transit)",
+      "neighborhood": null,
+      "business": "AC Transit",
+      "profile": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+      "why": "works at AC Transit (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00442",
+      "name": "Daire Green",
+      "role": "Transit Operator (AC Transit)",
+      "neighborhood": null,
+      "business": "AC Transit",
+      "profile": "Daire Green — Transit Operator (AC Transit) — AC Transit",
+      "why": "works at AC Transit (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00448",
+      "name": "Ray Neal",
+      "role": "AC Transit Bus Operator",
+      "neighborhood": null,
+      "business": "AC Transit",
+      "profile": "Ray Neal — AC Transit Bus Operator — AC Transit",
+      "why": "works at AC Transit (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00573",
+      "name": "Calvin Mwangi",
+      "role": "AC Transit Bus Driver",
+      "neighborhood": null,
+      "business": "AC Transit",
+      "profile": "Calvin Mwangi — AC Transit Bus Driver — AC Transit",
+      "why": "works at AC Transit (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00617",
+      "name": "Eleanor Rivera",
+      "role": "BART Station Manager",
+      "neighborhood": null,
+      "business": "BART Oakland Division",
+      "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+      "why": "works at BART Oakland Division (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00791",
+      "name": "Elena Soria-Dominguez",
+      "role": "Transit Hub Planning Lead",
+      "neighborhood": null,
+      "business": "Fruitvale Transit Hub Authority",
+      "profile": "Elena Soria-Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+      "why": "works at Fruitvale Transit Hub Authority (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01039",
+      "name": "Ximena Mehta",
+      "role": "Bart Transit PR",
+      "neighborhood": null,
+      "business": "BART Oakland Division",
+      "profile": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+      "why": "works at BART Oakland Division (Employment_Roster)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "MacArthur: ridership 12,030 (+2,923 vs C108), on-time 84% (+5 pts) — overcast; events in Temescal",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "West Oakland: ridership 8,635 (+2,697 vs C108), on-time 81% (+3 pts) — overcast; game day (Jack London, Downtown); events in Downtown; Baylight District — Final Council Vote: construction-planning",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "Lake Merritt: ridership 8,484 (+2,465 vs C108), on-time 86% (+5 pts) — overcast; game day (Chinatown); events in Lake Merritt ×2",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "Rockridge: ridership 9,343 (+2,121 vs C108), on-time 78% (-2 pts) — overcast",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "I-880 North: traffic index 100 (+0 vs C108) — overcast; game day (Baylight District, Jack London, Downtown); Baylight District — Final Council Vote: construction-planning",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "I-880 South: traffic index 100 (+5 vs C108) — overcast; game day (Baylight District)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "I-580 East: traffic index 100 (+0 vs C108) — overcast",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "I-580 West: traffic index 96 (-3 vs C108) — overcast",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "I-980: traffic index 100 (+2 vs C108) — overcast; game day (Downtown); Baylight District — Final Council Vote: construction-planning",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "Broadway: traffic index 100 (+1 vs C108) — overcast; game day (Downtown)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "International Blvd: traffic index 100 (+0 vs C108) — overcast",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "MacArthur Blvd: traffic index 77 (+10 vs C108) — overcast",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "Telegraph Ave: traffic index 100 (+11 vs C108) — overcast; game day (Downtown)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    },
+    {
+      "text": "Grand Ave: traffic index 73 (-5 vs C108) — overcast",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "12th St Oakland City Center ridership up 5,472 vs C108 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+    "hookLine": "12th St Oakland City Center moved up the most this cycle — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+    "anchorFacts": [
+      "8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)",
+      "12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+      "Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland",
+      "19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning",
+      "Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+      "MacArthur: ridership 12,030 (+2,923 vs C108), on-time 84% (+5 pts) — overcast; events in Temescal",
+      "West Oakland: ridership 8,635 (+2,697 vs C108), on-time 81% (+3 pts) — overcast; game day (Jack London, Downtown); events in Downtown; Baylight District — Final Council Vote: construction-planning",
+      "Lake Merritt: ridership 8,484 (+2,465 vs C108), on-time 86% (+5 pts) — overcast; game day (Chinatown); events in Lake Merritt ×2",
+      "Rockridge: ridership 9,343 (+2,121 vs C108), on-time 78% (-2 pts) — overcast",
+      "I-880 North: traffic index 100 (+0 vs C108) — overcast; game day (Baylight District, Jack London, Downtown); Baylight District — Final Council Vote: construction-planning",
+      "I-880 South: traffic index 100 (+5 vs C108) — overcast; game day (Baylight District)",
+      "I-580 East: traffic index 100 (+0 vs C108) — overcast",
+      "I-580 West: traffic index 96 (-3 vs C108) — overcast",
+      "I-980: traffic index 100 (+2 vs C108) — overcast; game day (Downtown); Baylight District — Final Council Vote: construction-planning",
+      "Broadway: traffic index 100 (+1 vs C108) — overcast; game day (Downtown)",
+      "International Blvd: traffic index 100 (+0 vs C108) — overcast",
+      "MacArthur Blvd: traffic index 77 (+10 vs C108) — overcast",
+      "Telegraph Ave: traffic index 100 (+11 vs C108) — overcast; game day (Downtown)",
+      "Grand Ave: traffic index 73 (-5 vs C108) — overcast"
+    ],
+    "evidence": [
+      {
+        "text": "8 stations + 10 corridors on the record this cycle; total ridership 99,582 (C108: 70,489)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "12th St Oakland City Center: ridership 23,848 (+5,472 vs C108), on-time 85% (+4 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "Coliseum: ridership 9,724 (+4,859 vs C108), on-time 83% (+5 pts) — overcast; game day (Baylight District); events in East Oakland",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "19th St Oakland: ridership 17,104 (+4,800 vs C108), on-time 86% (+10 pts) — overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "Fruitvale: ridership 10,414 (+3,756 vs C108), on-time 81% (+3 pts) — overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "MacArthur: ridership 12,030 (+2,923 vs C108), on-time 84% (+5 pts) — overcast; events in Temescal",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "West Oakland: ridership 8,635 (+2,697 vs C108), on-time 81% (+3 pts) — overcast; game day (Jack London, Downtown); events in Downtown; Baylight District — Final Council Vote: construction-planning",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "Lake Merritt: ridership 8,484 (+2,465 vs C108), on-time 86% (+5 pts) — overcast; game day (Chinatown); events in Lake Merritt ×2",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "Rockridge: ridership 9,343 (+2,121 vs C108), on-time 78% (-2 pts) — overcast",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "I-880 North: traffic index 100 (+0 vs C108) — overcast; game day (Baylight District, Jack London, Downtown); Baylight District — Final Council Vote: construction-planning",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "I-880 South: traffic index 100 (+5 vs C108) — overcast; game day (Baylight District)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "I-580 East: traffic index 100 (+0 vs C108) — overcast",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "I-580 West: traffic index 96 (-3 vs C108) — overcast",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "I-980: traffic index 100 (+2 vs C108) — overcast; game day (Downtown); Baylight District — Final Council Vote: construction-planning",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "Broadway: traffic index 100 (+1 vs C108) — overcast; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "International Blvd: traffic index 100 (+0 vs C108) — overcast",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "MacArthur Blvd: traffic index 77 (+10 vs C108) — overcast",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "Telegraph Ave: traffic index 100 (+11 vs C108) — overcast; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      },
+      {
+        "text": "Grand Ave: traffic index 73 (-5 vs C108) — overcast",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 109"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_IN_TABLE",
+      "vs": 108
+    },
+    "hooks": [],
+    "note": null,
+    "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first"
+  },
+  "stations": [
+    {
+      "station": "12th St Oakland City Center",
+      "ridership": 23848,
+      "onTime": 0.85,
+      "corridor": null,
+      "cause": "overcast; game day (Downtown); events in Downtown, Lake Merritt ×2; Baylight District — Final Council Vote: construction-planning",
+      "dRidership": 5472,
+      "dOnTime": 4
+    },
+    {
+      "station": "19th St Oakland",
+      "ridership": 17104,
+      "onTime": 0.86,
+      "corridor": null,
+      "cause": "overcast; game day (Downtown); events in Downtown, Lake Merritt ×2, Temescal; Baylight District — Final Council Vote: construction-planning",
+      "dRidership": 4800,
+      "dOnTime": 10
+    },
+    {
+      "station": "Lake Merritt",
+      "ridership": 8484,
+      "onTime": 0.86,
+      "corridor": null,
+      "cause": "overcast; game day (Chinatown); events in Lake Merritt ×2",
+      "dRidership": 2465,
+      "dOnTime": 5
+    },
+    {
+      "station": "Fruitvale",
+      "ridership": 10414,
+      "onTime": 0.81,
+      "corridor": null,
+      "cause": "overcast; events in Fruitvale ×2, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+      "dRidership": 3756,
+      "dOnTime": 3
+    },
+    {
+      "station": "Coliseum",
+      "ridership": 9724,
+      "onTime": 0.83,
+      "corridor": null,
+      "cause": "overcast; game day (Baylight District); events in East Oakland",
+      "dRidership": 4859,
+      "dOnTime": 5
+    },
+    {
+      "station": "West Oakland",
+      "ridership": 8635,
+      "onTime": 0.81,
+      "corridor": null,
+      "cause": "overcast; game day (Jack London, Downtown); events in Downtown; Baylight District — Final Council Vote: construction-planning",
+      "dRidership": 2697,
+      "dOnTime": 3
+    },
+    {
+      "station": "MacArthur",
+      "ridership": 12030,
+      "onTime": 0.84,
+      "corridor": null,
+      "cause": "overcast; events in Temescal",
+      "dRidership": 2923,
+      "dOnTime": 5
+    },
+    {
+      "station": "Rockridge",
+      "ridership": 9343,
+      "onTime": 0.78,
+      "corridor": null,
+      "cause": "overcast",
+      "dRidership": 2121,
+      "dOnTime": -2
+    }
+  ],
+  "corridors": [
+    {
+      "corridor": "I-880 North",
+      "traffic": 100,
+      "cause": "overcast; game day (Baylight District, Jack London, Downtown); Baylight District — Final Council Vote: construction-planning",
+      "dTraffic": 0
+    },
+    {
+      "corridor": "I-880 South",
+      "traffic": 100,
+      "cause": "overcast; game day (Baylight District)",
+      "dTraffic": 5
+    },
+    {
+      "corridor": "I-580 East",
+      "traffic": 100,
+      "cause": "overcast",
+      "dTraffic": 0
+    },
+    {
+      "corridor": "I-580 West",
+      "traffic": 96,
+      "cause": "overcast",
+      "dTraffic": -3
+    },
+    {
+      "corridor": "I-980",
+      "traffic": 100,
+      "cause": "overcast; game day (Downtown); Baylight District — Final Council Vote: construction-planning",
+      "dTraffic": 2
+    },
+    {
+      "corridor": "Broadway",
+      "traffic": 100,
+      "cause": "overcast; game day (Downtown)",
+      "dTraffic": 1
+    },
+    {
+      "corridor": "International Blvd",
+      "traffic": 100,
+      "cause": "overcast",
+      "dTraffic": 0
+    },
+    {
+      "corridor": "MacArthur Blvd",
+      "traffic": 77,
+      "cause": "overcast",
+      "dTraffic": 10
+    },
+    {
+      "corridor": "Telegraph Ave",
+      "traffic": 100,
+      "cause": "overcast; game day (Downtown)",
+      "dTraffic": 11
+    },
+    {
+      "corridor": "Grand Ave",
+      "traffic": 73,
+      "cause": "overcast",
+      "dTraffic": -5
+    }
+  ],
+  "pointers": [
+    "output/beats/Transit_Metrics.jsonl Cycle 109",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "draft": "output/cron-compare/sports_c110_tanya-cruz_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "6872212c341fd95a62db6fd491cd518cd7b71bf524863d23e85ddd2ee6ffe2a8",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Sideline clubhouse dispatch verified cleanly against packet quotes and sports ledger record.",
+  "review": {
+    "profileId": "tanya-sideline-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "packageVersion": "TANYA-LEP2-1",
+    "manifestId": "AM-d53eb49231ec",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "John Ellis"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 4901,
+  "parseError": false,
+  "ranAt": "2026-10-07T23:20:00.891Z"
+}

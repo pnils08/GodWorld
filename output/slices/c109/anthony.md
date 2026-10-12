@@ -1,0 +1,72 @@
+# SLICE — analytic (Anthony Raines)
+
+Cycle **C109** · kind `anthony-analytic` · POP-00017
+
+## TOP PULSE
+- **Class:** line-card
+- **Score:** 71
+- **Team / event:** A's — game-result
+- **Label:** A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.
+- **Foil (feed only):** 7IP
+- **Has Stats line:** yes
+
+## PREWRITE (analysis bag)
+- **BagTools:** 1 Box-Card Read; 5 Repertoire vs Results
+- **Claim:** One line anchors the board read — 7IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.
+**LineFacts** (feed only):
+  - Feed line: Pablo Almanzar/7IP/5H/2ER/7SO
+  - Feed line: Ernesto Quintero/1HR/1RBI
+  - Feed line: Jose Colon/1HR/1RBI
+  - Feed line: Darrin Davis/4-4
+  - Team record (feed): 2-1 · W1
+  - Event kind (feed): A's — game-result (playoffs)
+**DossierFacts:**
+  - Pablo Almanzar TrueSource: 2041 REGULAR SEASON — Games: 5 Games Started: 5 Wins: 2 Losses: 0 Saves: 0 Blown Saves: 0 Holds: 0 Innings Pitched: 34.0 Hits Allowed: 12 Runs Allowed | WAR: 1.4
+  - Ernesto Quintero TrueSource: 2041 REGULAR SEASON G: 145 PA: 589 AB: 554 R: 80 H: 156 2B: 25 3B: 3 HR: 46 RBI: 92 BB: 27 SO: 89 HBP: 4 SF: 3 SAC: 1 GIDP: 6 AVG: 0.282 OBP: 0.318 SL | WAR: 5.8 | AWARDS (Career Reference) - Top Prospect Tier 1 (2040) - Rookie of the Year (2041) - All-S
+  - Jose Colon TrueSource: 2041 REGULAR SEASON G: 97 PA: 352 AB: 332 R: 97 H: 83 2B: 13 3B: 1 HR: 16 RBI: 42 BB: 16 SO: 53 HBP: 3 SF: 1 SAC: 0 GIDP: 4 AVG: 0.250 OBP: 0.290 SLG: | WAR: 1.7 | AWARDS (Career Reference)
+**FeedFacts:**
+  - StoryAngle: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.
+  - Notes: Game 3 of the WS; A's visit the Phillies for game 3. Pablo Almanzar gets the call in a crucial game 3, and does not disappoint. Pablo goes seven innings surrendering 2 runs. In a pitchers dual , the o
+  - Record/Streak: 2-1 / W1
+**Missing** (do not invent):
+  - x-stats / barrel% / launch angle / OAA not on feed
+  - contracts or salaries not printed on this feed row
+  - As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)
+
+## APPROACH
+Analytic approach (Anthony Raines): third-person only — never fan "we." One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.
+
+## FRAME
+A: Feed present fact: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.
+B: Soft FO language or bleacher heat that skips the line
+→ Evaluate fit and process with numbers — one claim, third person.
+
+## PLAYERS (feed names — do not invent)
+- Pablo Almanzar (POP-01078) — SP / Oakland A's
+- Ernesto Quintero (POP-00050) — 3B/1B , Oakland A's
+- Jose Colon (POP-00599) — Catcher, Oakland A's
+
+## SCENE
+HOOD: Chinatown
+RECORD/STREAK: 2-1 / W1
+Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers.
+
+## OTHER CANDIDATES
+- [71] C109 A's · line-card · stats — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon han
+- [69] C109 A's · line-card · stats — Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough.
+- [66] C108 A's · award-board · stats — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so f
+- [65] C109 A's · line-card · stats — Arturo Ramos does enough, Danny Horn shows some life, Frank Reyna doesnt make an out.
+- [65] C109 Oaks · line-card · stats — The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchis
+- [64] C108 A's · line-card · stats — John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB 
+- [63] C109 Oaks · line-card · stats — The Oaks lose yet again even with strong efforts from Austin Reaves,
+- [61] C108 A's · award-board · stats — Eric Taveras win Post Season MVP
+- [54] C108 A's · line-card · stats — Through 3 games the A's lead the Twins 3-0. Game 1 As (6) Twins (2), Game 2 As (3) Twins (2), Game 3
+- [54] C108 Oaks · line-card · stats — The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.
+
+## POINTERS
+- output/world_summary_c109.md ## Sports
+- docs/media/ANTHONY_ANALYSIS_BAG.md
+- scripts/sportsSubstrate.js
+- docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 4
+
+_Generated by scripts/buildAnthonySlice.js — no LLM. Shared sports substrate + analysis bag. Not fan heat._

@@ -1,31 +1,40 @@
 {
-  "ranAt": "2026-09-05T17:00:42.578Z",
-  "cycle": 105,
-  "reportComplete": 20,
+  "ranAt": "2026-10-10T17:02:26.216Z",
+  "cycle": 110,
+  "reportComplete": 24,
   "candidates": [
-    "civic_c105_trevor-shimizu_packet-v2",
-    "culture_c105_mason-ortega_packet-v2"
+    "civic_c110_lila-mezran_packet-v2",
+    "culture_c110_kai-marston_packet-v2",
+    "culture_c110_sharon-okafor_packet-v2"
   ],
   "retried": [
     {
-      "stem": "civic_c105_trevor-shimizu_packet-v2",
+      "stem": "civic_c110_lila-mezran_packet-v2",
       "desk": "civic",
-      "persona": "trevor-shimizu",
+      "persona": "lila-mezran",
+      "ok": true,
+      "errorMessage": null,
+      "staged": true
+    },
+    {
+      "stem": "culture_c110_kai-marston_packet-v2",
+      "desk": "culture",
+      "persona": "kai-marston",
       "ok": true,
       "errorMessage": null,
       "staged": false
     },
     {
-      "stem": "culture_c105_mason-ortega_packet-v2",
+      "stem": "culture_c110_sharon-okafor_packet-v2",
       "desk": "culture",
-      "persona": "mason-ortega",
+      "persona": "sharon-okafor",
       "ok": true,
       "errorMessage": null,
       "staged": false
     }
   ],
   "stillUncovered": [
-    "civic_c105_trevor-shimizu_packet-v2",
-    "culture_c105_mason-ortega_packet-v2"
+    "culture_c110_kai-marston_packet-v2",
+    "culture_c110_sharon-okafor_packet-v2"
   ]
 }

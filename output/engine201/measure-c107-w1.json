@@ -1,0 +1,126 @@
+{
+ "label": "W1 bench C107",
+ "sheet": "1FFpUs",
+ "cycleCount": "107",
+ "rows": 942,
+ "parsed": 942,
+ "allNeutral": 424,
+ "allNeutralPct": 45,
+ "wakeDeviation60": 252,
+ "wakePct": 26.8,
+ "pressureRows": 62,
+ "pressureCauses": {
+  "debt": 43,
+  "rent": 7,
+  "overwork": 10,
+  "hood": 4
+ },
+ "adaptedRecords": 0,
+ "dials": {
+  "drive": {
+   "mean": 60.56,
+   "lt40": 0,
+   "gt60": 326,
+   "pin0": 0,
+   "pin100": 1,
+   "contribPos": 77,
+   "contribNeg": 0
+  },
+  "sociability": {
+   "mean": 62.99,
+   "lt40": 0,
+   "gt60": 370,
+   "pin0": 0,
+   "pin100": 4,
+   "contribPos": 547,
+   "contribNeg": 0
+  },
+  "warmth": {
+   "mean": 53.16,
+   "lt40": 0,
+   "gt60": 88,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 24,
+   "contribNeg": 0
+  },
+  "openness": {
+   "mean": 56.24,
+   "lt40": 0,
+   "gt60": 187,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 238,
+   "contribNeg": 0
+  },
+  "composure": {
+   "mean": 53.79,
+   "lt40": 6,
+   "gt60": 166,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 23,
+   "contribNeg": 69
+  },
+  "integrity": {
+   "mean": 51.07,
+   "lt40": 0,
+   "gt60": 26,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 31,
+   "contribNeg": 0
+  },
+  "family": {
+   "mean": 57.23,
+   "lt40": 1,
+   "gt60": 260,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 11,
+   "contribNeg": 0
+  },
+  "outabout": {
+   "mean": 53.7,
+   "lt40": 0,
+   "gt60": 50,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 322,
+   "contribNeg": 0
+  }
+ },
+ "contrib": {
+  "pos": 1273,
+  "neg": 69,
+  "negSharePct": 5.1
+ },
+ "topTags": {
+  "Neighborhood": 521,
+  "Daily": 298,
+  "Civic Perception": 229,
+  "Personal": 187,
+  "Sports": 180,
+  "PrevEvening": 139,
+  "Holiday": 71,
+  "Friction": 55,
+  "Background": 54,
+  "Media": 52,
+  "Lifestyle": 37,
+  "Micro-Event": 33,
+  "Reputation": 31,
+  "Education": 21,
+  "Work": 19,
+  "Maneuver-Climb": 15,
+  "Community": 13,
+  "Untagged": 13,
+  "Casino": 12,
+  "Civic": 11,
+  "Career": 10,
+  "Strain": 8,
+  "Money": 7,
+  "Business": 7,
+  "Relationship": 6
+ },
+ "engineErrorsTotalRows": 0
+}

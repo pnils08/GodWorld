@@ -1,0 +1,368 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00157",
+      "name": "Noah Tan",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "C109 overcast, 49°F after fog — what this weather does to a day in the city",
+      "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "environment",
+        "hood": null,
+        "facts": [
+          "This cycle: overcast, 49°F, impact 1.05, comfort 0.5, mood neutral",
+          "Last 3 cycles: C106 overcast 52°F, C107 fog 44°F, C108 fog 46°F",
+          "Colin Soria — fought off a head cold that lingered all week"
+        ],
+        "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+        "note": null,
+        "engineHooks": [
+          "Multiple weather signals detected. Could be coincidence or early pattern. (general coverage)",
+          "Uptown boom sustained — momentum 10/10, the block everyone wants onto (desk rotation)",
+          "Sarah Corliss moved from Temescal to Jack London — moving up from Temescal (desk rotation)",
+          "Briar Soto moved from Temescal to Jack London — moving up from Temescal (desk rotation)"
+        ],
+        "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-weather",
+      "hood": null,
+      "score": null,
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 109",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"District 1 gets OARI because the numbers prove it works—42% fewer unnecessary police deployments.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): accelerated — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): celebrated — \"Two weeks early and $1.2M under budget—that's how Oakland builds public health infrastructure.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): acknowledged — \"Dimond's slow trade deserves attention, West Oakland's progress deserves recognition.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00227",
+          "name": "Colin Soria",
+          "profile": "Colin Soria — Security guard — Temescal",
+          "why": "lived the weather this cycle (Who Lived It)",
+          "role": "Security guard",
+          "hood": "Temescal"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-912baafccba1"
+      },
+      {
+        "t": "FACT",
+        "text": "C109 overcast, 49°F after fog",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 109",
+        "id": "F-8c552dcaddd5"
+      },
+      {
+        "t": "FACT",
+        "text": "C109 overcast, 49°F after fog; 1 residents on the record lived it.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 109",
+        "id": "F-06707c64bf25"
+      },
+      {
+        "t": "FACT",
+        "text": "This cycle: overcast, 49°F, impact 1.05, comfort 0.5, mood neutral",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 109",
+        "id": "F-7df180b7c53c"
+      },
+      {
+        "t": "FACT",
+        "text": "Last 3 cycles: C106 overcast 52°F, C107 fog 44°F, C108 fog 46°F",
+        "src": "output/beats/Cycle_Weather.jsonl",
+        "id": "F-18b28413f144"
+      },
+      {
+        "t": "FACT",
+        "text": "Colin Soria — fought off a head cold that lingered all week",
+        "src": "output/world_summary_c109.md ## Who Lived It",
+        "id": "F-d7cce4dd9c81"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-weather",
+      "angle": "C109 overcast, 49°F after fog — what this weather does to a day in the city",
+      "label": "C109 overcast, 49°F after fog",
+      "hookLine": "C109 overcast, 49°F after fog; 1 residents on the record lived it.",
+      "hood": null,
+      "citizens": [
+        "Colin Soria (POP-00227)"
+      ],
+      "popids": [
+        "POP-00227"
+      ],
+      "ref": "output/beats/Cycle_Weather.jsonl CycleID 109",
+      "cycle": 109
+    },
+    "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "ENVIRONMENT-SLICE-2",
+    "kind": "beat-weather",
+    "seat": {
+      "slug": "noah-tan",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "desk": "civic",
+      "domain": "environment",
+      "builder": "buildEnvironmentSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-weather",
+      "score": 100,
+      "label": "C109 overcast, 49°F after fog",
+      "hood": null,
+      "source": "output/beats/Cycle_Weather.jsonl CycleID 109"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "C109 overcast, 49°F after fog — what this weather does to a day in the city",
+      "hookLine": "C109 overcast, 49°F after fog; 1 residents on the record lived it.",
+      "anchorFacts": [
+        "This cycle: overcast, 49°F, impact 1.05, comfort 0.5, mood neutral",
+        "Last 3 cycles: C106 overcast 52°F, C107 fog 44°F, C108 fog 46°F",
+        "Colin Soria — fought off a head cold that lingered all week"
+      ],
+      "evidence": [
+        {
+          "text": "This cycle: overcast, 49°F, impact 1.05, comfort 0.5, mood neutral",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 109"
+        },
+        {
+          "text": "Last 3 cycles: C106 overcast 52°F, C107 fog 44°F, C108 fog 46°F",
+          "src": "output/beats/Cycle_Weather.jsonl"
+        },
+        {
+          "text": "Colin Soria — fought off a head cold that lingered all week",
+          "src": "output/world_summary_c109.md ## Who Lived It"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_IN_TABLE",
+        "vs": 108
+      },
+      "hooks": [
+        {
+          "text": "Multiple weather signals detected. Could be coincidence or early pattern.",
+          "angle": "general coverage",
+          "domain": "WEATHER",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 7
+        },
+        {
+          "text": "Sarah Corliss moved from Temescal to Jack London — moving up from Temescal",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 5
+        },
+        {
+          "text": "Briar Soto moved from Temescal to Jack London — moving up from Temescal",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00227",
+        "name": "Colin Soria",
+        "role": "Security guard",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Colin Soria — Security guard — Temescal",
+        "why": "lived the weather this cycle (Who Lived It)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cycle_Weather.jsonl CycleID 109",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Noah Tan this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "text": "Standing at the corner of College and Alcatraz, watching the way people hunch slightly against the damp chill that's settled in after morning fog. The overcast isn't dramatic—just a persistent gray that makes the neighborhood feel like it's moving through molasses. I want to chase how this specific 49-degree limbo alters the rhythm of the day—who pushes through it, who lets it slow them down, and what small adjustments people make without thinking.",
+    "plan": {
+      "chase": "Standing at the corner of College and Alcatraz, watching the way people hunch slightly against the damp chill that's settled in after morning fog. The overcast isn't dramatic—just a persistent gray that makes the neighborhood feel like it's moving through molasses. I want to chase how this specific 49-degree limbo alters the rhythm of the day—who pushes through it, who lets it slow them down, and what small adjustments people make without thinking.",
+      "focus": "The unremarkable but pervasive effect of neutral, chilly overcast on daily routines and decision-making.",
+      "why": "Three straight days of similar weather (overcast/fog in the 40s-50s) suggests a pattern worth examining, especially with Colin Soria's head cold lingering—could be coincidence, could be something more about how our bodies react to this particular dampness.",
+      "checks": [
+        "Verify if local clinics are seeing uptick in respiratory issues",
+        "Check if public spaces (libraries, cafes) are more crowded than usual during daytime hours"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00227",
+          "question": "Did the weather exacerbate your cold symptoms, or make it harder to shake? Notice others dealing with similar things?",
+          "basis": "lived the weather this cycle (Who Lived It)"
+        }
+      ],
+      "interpretation": "This weather feels like a collective shrug—not bad enough to cancel plans, but just unpleasant enough to drain enthusiasm. The kind of day where you leave your jacket on indoors.",
+      "unverifiedLead": [
+        "Possible increase in daytime foot traffic at cafes as people seek warmth",
+        "Parents opting for indoor playgrounds over outdoor parks",
+        "Delivery workers layering differently than they would in clear cold"
+      ],
+      "closeQuestion": "When does 'not bad enough to stay in' become 'not good enough to go out'—and who decides?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"District 1 gets OARI because the numbers prove it works—42% fewer unnecessary police deployments.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): accelerated — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): celebrated — \"Two weeks early and $1.2M under budget—that's how Oakland builds public health infrastructure.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): acknowledged — \"Dimond's slow trade deserves attention, West Oakland's progress deserves recognition.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 75,
+  "ranAt": "2026-09-30T11:15:50.147Z"
+}

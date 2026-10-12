@@ -1,0 +1,1250 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "108",
+  "persona": "talia-finch",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Talia Finch",
+    "popid": "POP-00592"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-ground",
+      "angle": "Oaks ground read C108 — anxious — the people around the second club",
+      "label": "Oaks ground read C108 — anxious",
+      "hookLine": "anxious",
+      "hood": "Jack London",
+      "citizens": [
+        "Wilson Shepard (POP-01022)",
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)"
+      ],
+      "popids": [
+        "POP-01022",
+        "POP-01023",
+        "POP-01027"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+      "cycle": 108
+    }
+  },
+  "angle": "output/cron-compare/sports_c108_talia-finch_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": "I've been feeling like we're still finding our rhythm, you know? Preseason's about figuring things out, not about winning every game. The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal.",
+      "disp": "driven, hard to sit still",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been feeling like we're still finding our rhythm, you know? Preseason's about figuring things out, not about winning every game. The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal.\",\n  \"fact_ids\": [\"F-0fb94ec2157e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-0fb94ec2157e"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01022-621fc4f7b0",
+        "authoredQuote": true,
+        "publishableQuote": "I've been feeling like we're still finding our rhythm, you know? Preseason's about figuring things out, not about winning every game. The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01022",
+          "name": "Wilson Shepard",
+          "role": "Head Coach, Oakland Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What have you seen, felt, or understood about \"The Oaks' preseason struggles\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Jack London",
+          "focus": "The Oaks' preseason struggles",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+          ],
+          "self": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-07c7ba3eff",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+              "text": "anxious"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C108 — anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-4dc38e0772b1"
+          },
+          {
+            "t": "FACT",
+            "text": "anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-cbe075ae4846"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C108: anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-dfe67c3b8dcf"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C108: uncertain",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-17da3278af65"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-5cdb26bc1f70"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-0fb94ec2157e"
+          },
+          {
+            "t": "FACT",
+            "text": "Home neighborhood (feed): Jack London",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-f9ab583733a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01022",
+            "id": "F-5b5a560909b4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "I've felt a bit anxious about the Oaks' preseason, it's like there's a lot of uncertainty in the air. I'm trying to stay even-keeled about it, but it's hard not to worry when everyone around me is talking about it.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt a bit anxious about the Oaks' preseason, it's like there's a lot of uncertainty in the air. I'm trying to stay even-keeled about it, but it's hard not to worry when everyone around me is talking about it.\",\n  \"fact_ids\": [\"F-4dc38e0772b1\", \"F-cbe075ae4846\"],\n  \"basis\": \"lived-context\"\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4dc38e0772b1",
+          "F-cbe075ae4846"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01023-ee9dddd96e",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt a bit anxious about the Oaks' preseason, it's like there's a lot of uncertainty in the air. I'm trying to stay even-keeled about it, but it's hard not to worry when everyone around me is talking about it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks ",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What have you seen, felt, or understood about \"The Oaks' preseason struggles\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Jack London",
+          "focus": "The Oaks' preseason struggles",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+          ],
+          "self": "Adash Stanley — PG / The Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-d794d86b6f",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+              "text": "anxious"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C108 — anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-4dc38e0772b1"
+          },
+          {
+            "t": "FACT",
+            "text": "anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-cbe075ae4846"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C108: anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-dfe67c3b8dcf"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C108: uncertain",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-17da3278af65"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-5cdb26bc1f70"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-0fb94ec2157e"
+          },
+          {
+            "t": "FACT",
+            "text": "Home neighborhood (feed): Jack London",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-f9ab583733a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-26cdcab1a2d4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "I've been feeling like we're still finding our footing, you know? It's hard not to worry when you're not seeing the wins, but I trust Coach Wilson Shepard to get us ready.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been feeling like we're still finding our footing, you know? It's hard not to worry when you're not seeing the wins, but I trust Coach Wilson Shepard to get us ready.\",\n  \"fact_ids\": [\"F-0fb94ec2157e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-0fb94ec2157e"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01027-ed504ac428",
+        "authoredQuote": true,
+        "publishableQuote": "I've been feeling like we're still finding our footing, you know? It's hard not to worry when you're not seeing the wins, but I trust Coach Wilson Shepard to get us ready."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What have you seen, felt, or understood about \"The Oaks' preseason struggles\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Jack London",
+          "focus": "The Oaks' preseason struggles",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+          ],
+          "self": "Austin Reaves — SG / The Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-d32c3acbb3",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+              "text": "anxious"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C108 — anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-4dc38e0772b1"
+          },
+          {
+            "t": "FACT",
+            "text": "anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-cbe075ae4846"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C108: anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-dfe67c3b8dcf"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C108: uncertain",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-17da3278af65"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-5cdb26bc1f70"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-0fb94ec2157e"
+          },
+          {
+            "t": "FACT",
+            "text": "Home neighborhood (feed): Jack London",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-f9ab583733a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-afa8c27895bb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00273",
+      "name": "Trenton Nawan",
+      "quote": "I've felt the anxiety around The Oaks' preseason struggles, it's like a cloud over the neighborhood, and I think we're all waiting to see how the new rookies will perform.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt the anxiety around The Oaks' preseason struggles, it's like a cloud over the neighborhood, and I think we're all waiting to see how the new rookies will perform.\",\n  \"fact_ids\": [\"F-4dc38e0772b1\", \"F-cbe075ae4846\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4dc38e0772b1",
+          "F-cbe075ae4846"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00273-c93bd283e8",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt the anxiety around The Oaks' preseason struggles, it's like a cloud over the neighborhood, and I think we're all waiting to see how the new rookies will perform."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00273",
+          "name": "Trenton Nawan",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The Oaks' preseason struggles\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Jack London",
+          "focus": "The Oaks' preseason struggles",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Trenton Nawan — Server — Jack London",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C108 — anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-4dc38e0772b1"
+          },
+          {
+            "t": "FACT",
+            "text": "anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-cbe075ae4846"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C108: anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-dfe67c3b8dcf"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C108: uncertain",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-17da3278af65"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-5cdb26bc1f70"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-0fb94ec2157e"
+          },
+          {
+            "t": "FACT",
+            "text": "Home neighborhood (feed): Jack London",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-f9ab583733a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Trenton Nawan — Server — Jack London",
+            "src": "Simulation_Ledger profile for POP-00273",
+            "id": "F-3886fd06b84e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": "I've been feeling like we're still finding our rhythm, you know? Preseason's about figuring things out, not about winning every game. The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal.",
+      "disp": "driven, hard to sit still",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been feeling like we're still finding our rhythm, you know? Preseason's about figuring things out, not about winning every game. The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal.\",\n  \"fact_ids\": [\"F-0fb94ec2157e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-0fb94ec2157e"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01022-621fc4f7b0",
+        "authoredQuote": true,
+        "publishableQuote": "I've been feeling like we're still finding our rhythm, you know? Preseason's about figuring things out, not about winning every game. The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01022",
+          "name": "Wilson Shepard",
+          "role": "Head Coach, Oakland Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What have you seen, felt, or understood about \"The Oaks' preseason struggles\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Jack London",
+          "focus": "The Oaks' preseason struggles",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+          ],
+          "self": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-07c7ba3eff",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+              "text": "anxious"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C108 — anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-4dc38e0772b1"
+          },
+          {
+            "t": "FACT",
+            "text": "anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-cbe075ae4846"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C108: anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-dfe67c3b8dcf"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C108: uncertain",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-17da3278af65"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-5cdb26bc1f70"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-0fb94ec2157e"
+          },
+          {
+            "t": "FACT",
+            "text": "Home neighborhood (feed): Jack London",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-f9ab583733a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01022",
+            "id": "F-5b5a560909b4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "I've felt a bit anxious about the Oaks' preseason, it's like there's a lot of uncertainty in the air. I'm trying to stay even-keeled about it, but it's hard not to worry when everyone around me is talking about it.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt a bit anxious about the Oaks' preseason, it's like there's a lot of uncertainty in the air. I'm trying to stay even-keeled about it, but it's hard not to worry when everyone around me is talking about it.\",\n  \"fact_ids\": [\"F-4dc38e0772b1\", \"F-cbe075ae4846\"],\n  \"basis\": \"lived-context\"\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4dc38e0772b1",
+          "F-cbe075ae4846"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01023-ee9dddd96e",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt a bit anxious about the Oaks' preseason, it's like there's a lot of uncertainty in the air. I'm trying to stay even-keeled about it, but it's hard not to worry when everyone around me is talking about it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01023",
+          "name": "Adash Stanley",
+          "role": "PG / The Oaks ",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What have you seen, felt, or understood about \"The Oaks' preseason struggles\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Jack London",
+          "focus": "The Oaks' preseason struggles",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+          ],
+          "self": "Adash Stanley — PG / The Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-d794d86b6f",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+              "text": "anxious"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C108 — anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-4dc38e0772b1"
+          },
+          {
+            "t": "FACT",
+            "text": "anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-cbe075ae4846"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C108: anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-dfe67c3b8dcf"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C108: uncertain",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-17da3278af65"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-5cdb26bc1f70"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-0fb94ec2157e"
+          },
+          {
+            "t": "FACT",
+            "text": "Home neighborhood (feed): Jack London",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-f9ab583733a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Adash Stanley — PG / The Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01023",
+            "id": "F-26cdcab1a2d4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "I've been feeling like we're still finding our footing, you know? It's hard not to worry when you're not seeing the wins, but I trust Coach Wilson Shepard to get us ready.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been feeling like we're still finding our footing, you know? It's hard not to worry when you're not seeing the wins, but I trust Coach Wilson Shepard to get us ready.\",\n  \"fact_ids\": [\"F-0fb94ec2157e\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-0fb94ec2157e"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01027-ed504ac428",
+        "authoredQuote": true,
+        "publishableQuote": "I've been feeling like we're still finding our footing, you know? It's hard not to worry when you're not seeing the wins, but I trust Coach Wilson Shepard to get us ready."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01027",
+          "name": "Austin Reaves",
+          "role": "SG / The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "What have you seen, felt, or understood about \"The Oaks' preseason struggles\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Jack London",
+          "focus": "The Oaks' preseason struggles",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+          ],
+          "self": "Austin Reaves — SG / The Oaks — Downtown",
+          "evidence": [
+            {
+              "id": "EV-d32c3acbb3",
+              "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+              "text": "anxious"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C108 — anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-4dc38e0772b1"
+          },
+          {
+            "t": "FACT",
+            "text": "anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-cbe075ae4846"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C108: anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-dfe67c3b8dcf"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C108: uncertain",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-17da3278af65"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-5cdb26bc1f70"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-0fb94ec2157e"
+          },
+          {
+            "t": "FACT",
+            "text": "Home neighborhood (feed): Jack London",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-f9ab583733a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Austin Reaves — SG / The Oaks — Downtown",
+            "src": "Simulation_Ledger profile for POP-01027",
+            "id": "F-afa8c27895bb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00273",
+      "name": "Trenton Nawan",
+      "quote": "I've felt the anxiety around The Oaks' preseason struggles, it's like a cloud over the neighborhood, and I think we're all waiting to see how the new rookies will perform.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt the anxiety around The Oaks' preseason struggles, it's like a cloud over the neighborhood, and I think we're all waiting to see how the new rookies will perform.\",\n  \"fact_ids\": [\"F-4dc38e0772b1\", \"F-cbe075ae4846\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4dc38e0772b1",
+          "F-cbe075ae4846"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00273-c93bd283e8",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt the anxiety around The Oaks' preseason struggles, it's like a cloud over the neighborhood, and I think we're all waiting to see how the new rookies will perform."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00273",
+          "name": "Trenton Nawan",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Talia Finch",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The Oaks' preseason struggles\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-oaks-ground",
+          "hood": "Jack London",
+          "focus": "The Oaks' preseason struggles",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Trenton Nawan — Server — Jack London",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks ground read C108 — anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-4dc38e0772b1"
+          },
+          {
+            "t": "FACT",
+            "text": "anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "id": "F-cbe075ae4846"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks fans, C108: anxious",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-dfe67c3b8dcf"
+          },
+          {
+            "t": "FACT",
+            "text": "Room mood, C108: uncertain",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-17da3278af65"
+          },
+          {
+            "t": "FACT",
+            "text": "Notebook (feed): After a peak into the rookies in the rookie camp the NBA preseason officially begins this cycle. Rookie AJ Dybantsa showed true potential and 2nd year Adash Stanley continued to show his crafty scorin",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-5cdb26bc1f70"
+          },
+          {
+            "t": "FACT",
+            "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-0fb94ec2157e"
+          },
+          {
+            "t": "FACT",
+            "text": "Home neighborhood (feed): Jack London",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+            "id": "F-f9ab583733a6"
+          },
+          {
+            "t": "FACT",
+            "text": "Trenton Nawan — Server — Jack London",
+            "src": "Simulation_Ledger profile for POP-00273",
+            "id": "F-3886fd06b84e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-24T18:18:43.557Z"
+}

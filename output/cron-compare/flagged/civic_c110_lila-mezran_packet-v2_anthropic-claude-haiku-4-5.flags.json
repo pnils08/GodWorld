@@ -1,0 +1,20 @@
+{
+  "draft": "civic_c110_lila-mezran_packet-v2_anthropic-claude-haiku-4-5.md",
+  "draftSha256": "56387c167f272aa2c508fe937e6a7ec25772c15da26976794b000d6e290e9c1c",
+  "verdict": "output/cron-compare/civic_c110_lila-mezran_packet-v2_anthropic-claude-haiku-4-5.rhea.json",
+  "flags": [
+    {
+      "claim": "Seventy-seven residents are in care citywide. In the hospital system, the neighborhood has moved 3 residents into care this cycle; 6 are now in beds, occupying 6 of the city's 76 occupied hospital beds.",
+      "issue": "Direct contradiction of recorded city state: Ground truth establishes Hospital census at 1 in care (1% load), contradicting the claim of 76–77 residents in care citywide and 6 beds from Chinatown.",
+      "severity": "high"
+    },
+    {
+      "claim": "Yu Zen lies in a hospital bed in Rockridge—Yu was admitted after a workplace accident in cycle 105 and remains in active care.",
+      "issue": "Ground truth indicates Yu Zen is recovering and resumed a morning walk routine in Rockridge this cycle, though the supplied packet quote references hospital bed reflection.",
+      "severity": "low"
+    }
+  ],
+  "contamination": [],
+  "summary": "Draft uses approved quotes and personas, but directly contradicts ground truth hospital census (1 in care vs. 77 reported).",
+  "reviewedAt": "2026-10-05T23:16:29.415Z"
+}

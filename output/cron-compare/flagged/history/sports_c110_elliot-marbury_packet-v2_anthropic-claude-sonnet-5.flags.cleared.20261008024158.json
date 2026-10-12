@@ -1,0 +1,12 @@
+{
+  "draft": "sports_c110_elliot-marbury_packet-v2_anthropic-claude-sonnet-5.md",
+  "flags": [
+    {
+      "severity": "high",
+      "check": "popid-leak",
+      "issue": "raw POPID(s) in prose: POP-00022"
+    }
+  ],
+  "contamination": [],
+  "summary": "Accurate data desk breakdown of Danny Horn's dossier adhering strictly to persona parameters with zero canon violations."
+}

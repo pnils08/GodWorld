@@ -1,0 +1,52 @@
+{
+  "draft": "output/cron-compare/wire_c110_celeste-tran_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "9c1b53aa4dec85ec4c33746f95fd2d502400c60918c4a84a39afea939d7dd98e",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean trend synthesis consistent with cycle 110 culture and sighting data; no high-severity sourcing failures.",
+  "review": {
+    "profileId": "celeste-social-trends-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "celeste-social-trends-v1",
+    "packageVersion": "CELESTE-TRENDS-1",
+    "manifestId": "AM-6ae6f44ebc84",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Dax Monroe",
+      "Marin Tao",
+      "Rico Valez"
+    ],
+    "unverified": [
+      "Warriors Alumni Thompson"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0122,
+  "durationMs": 12224,
+  "parseError": false,
+  "ranAt": "2026-10-09T23:17:51.037Z"
+}

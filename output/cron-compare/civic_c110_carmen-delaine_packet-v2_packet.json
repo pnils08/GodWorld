@@ -1,0 +1,183 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "carmen-delaine",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c110.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "kind": "initiative",
+      "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "hood": "West Oakland",
+      "popids": [],
+      "citizens": []
+    }
+  },
+  "angle": "output/cron-compare/civic_c110_carmen-delaine_packet-v2_angle.json",
+  "quotesRequested": 5,
+  "quotesLanded": 5,
+  "quotes": [
+    {
+      "pop": "POP-00501",
+      "name": "Denise Carter",
+      "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "council_d1",
+        "statementId": "STMT-110-council_d1-001",
+        "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+        "topic": "West Oakland Stabilization Fund",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/council_d1_c110.json",
+        "holderPopid": "POP-00501",
+        "speakerName": "Denise Carter"
+      }
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "mayor_gavel",
+        "statementId": "STMT-110-mayor_gavel-001",
+        "quote": "Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.",
+        "topic": "West Oakland Stabilization Fund Month-Nine Disbursement",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/mayor_gavel_c110.json",
+        "holderPopid": "POP-00034",
+        "speakerName": "Avery Santana"
+      }
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "mayor_open",
+        "statementId": "STMT-110-mayor_open-002",
+        "quote": "Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.",
+        "topic": "West Oakland Stabilization Fund — Month-Nine Disbursement",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/mayor_open_c110.json",
+        "holderPopid": "POP-00034",
+        "speakerName": "Avery Santana"
+      }
+    },
+    {
+      "pop": "POP-00037",
+      "name": "Brenda Okoro",
+      "quote": "Nine months in, the Fund's design is holding—targeted relief that flows to tenants before displacement does.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "okoro",
+        "statementId": "STMT-110-okoro-001",
+        "quote": "Nine months in, the Fund's design is holding—targeted relief that flows to tenants before displacement does.",
+        "topic": "West Oakland Stabilization Fund — Month-Nine Disbursement",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/okoro_c110.json",
+        "holderPopid": "POP-00037",
+        "speakerName": "Brenda Okoro"
+      }
+    },
+    {
+      "pop": "POP-00790",
+      "name": "Marcus Webb",
+      "quote": "Seventy-nine households stabilized means seventy-nine Oakland families with checks in hand before the displacement notices arrive—every dollar moving with compliance that passes the Finance Committee's scrutiny.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 110,
+        "officeSlug": "stabilization_fund",
+        "statementId": "STMT-110-stabilization_fund-001",
+        "quote": "Seventy-nine households stabilized means seventy-nine Oakland families with checks in hand before the displacement notices arrive—every dollar moving with compliance that passes the Finance Committee's scrutiny.",
+        "topic": "Month-nine disbursement",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/stabilization_fund_c110.json",
+        "holderPopid": "POP-00790",
+        "speakerName": "Marcus Webb"
+      }
+    }
+  ],
+  "officeRecords": [
+    {
+      "sourceKind": "office-record",
+      "cycle": 110,
+      "officeSlug": "council_d1",
+      "statementId": "STMT-110-council_d1-001",
+      "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+      "topic": "West Oakland Stabilization Fund",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/council_d1_c110.json",
+      "holderPopid": "POP-00501",
+      "speakerName": "Denise Carter"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 110,
+      "officeSlug": "mayor_gavel",
+      "statementId": "STMT-110-mayor_gavel-001",
+      "quote": "Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.",
+      "topic": "West Oakland Stabilization Fund Month-Nine Disbursement",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/mayor_gavel_c110.json",
+      "holderPopid": "POP-00034",
+      "speakerName": "Avery Santana"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 110,
+      "officeSlug": "mayor_open",
+      "statementId": "STMT-110-mayor_open-002",
+      "quote": "Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.",
+      "topic": "West Oakland Stabilization Fund — Month-Nine Disbursement",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/mayor_open_c110.json",
+      "holderPopid": "POP-00034",
+      "speakerName": "Avery Santana"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 110,
+      "officeSlug": "okoro",
+      "statementId": "STMT-110-okoro-001",
+      "quote": "Nine months in, the Fund's design is holding—targeted relief that flows to tenants before displacement does.",
+      "topic": "West Oakland Stabilization Fund — Month-Nine Disbursement",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/okoro_c110.json",
+      "holderPopid": "POP-00037",
+      "speakerName": "Brenda Okoro"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 110,
+      "officeSlug": "stabilization_fund",
+      "statementId": "STMT-110-stabilization_fund-001",
+      "quote": "Seventy-nine households stabilized means seventy-nine Oakland families with checks in hand before the displacement notices arrive—every dollar moving with compliance that passes the Finance Committee's scrutiny.",
+      "topic": "Month-nine disbursement",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/stabilization_fund_c110.json",
+      "holderPopid": "POP-00790",
+      "speakerName": "Marcus Webb"
+    }
+  ],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-05T18:15:01.788Z"
+}

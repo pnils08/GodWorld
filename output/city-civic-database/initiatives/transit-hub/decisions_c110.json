@@ -1,0 +1,25 @@
+{
+  "initiative": "INIT-003",
+  "initiativeId": "INIT-003",
+  "cycle": 110,
+  "primaryVoice": "Mayor gavel (mayor_gavel-002)",
+  "consolidatedFrom": [
+    "STMT-110-mayor_gavel-002 (Mayor gavel — Fruitvale Transit Hub Phase II Preliminary Schematics)",
+    "STMT-110-transit_hub-001 (Soria Dominguez — Fruitvale Transit Hub Phase II)",
+    "STMT-110-transit_hub-002 (Soria Dominguez — Fruitvale neighborhood conditions)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-003",
+    "ImplementationPhase": "design-phase",
+    "MilestoneNotes": "C110: Preliminary schematics review authorized; Mayer & Associates contracted with community oversight",
+    "NextScheduledAction": "Schematics completion and community review",
+    "NextActionCycle": 112,
+    "LastWorkCycle": 110,
+    "LastWorkSeat": "proj-transit-hub"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-109-proj-transit-hub-2026-10-02"
+    ]
+  }
+}

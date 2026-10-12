@@ -1,0 +1,61 @@
+{
+  "draft": "output/cron-compare/civic_c110_angela-reyes_packet-v2_anthropic-claude-haiku-4-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "f7e51d2a7e08e0cc2107b0fc2ef7b14e11cc52aab3a041f784f8556881f13d9c",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen bios, education metrics, and quotes match canonical ground truth and packet provenance with zero sourcing failures.",
+  "review": {
+    "profileId": "angela-education-stability-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "packageVersion": "ANGELA-LEP2-1",
+    "manifestId": "AM-54ef10b62ef2",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "95",
+          "76",
+          "200",
+          "8.89",
+          "94.81",
+          "76.99"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Aaron Whitfield",
+      "Lila Bennington"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0109,
+  "durationMs": 7985,
+  "parseError": false,
+  "ranAt": "2026-10-06T23:18:05.134Z"
+}

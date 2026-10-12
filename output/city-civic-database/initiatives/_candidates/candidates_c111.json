@@ -1,0 +1,22 @@
+{
+  "cycle": 111,
+  "candidates": {
+    "MV-110-civic-office-council-d4-2026-10-05": {
+      "moveId": "MV-110-civic-office-council-d4-2026-10-05",
+      "cycle": 111,
+      "date": "2026-10-05",
+      "agentDir": "civic-office-council-d4",
+      "popid": "POP-00042",
+      "proposingOffice": "COUNCIL-D4",
+      "title": "Ivy Hill Revitalization Initiative",
+      "category": "economic",
+      "reach": "hood",
+      "hoods": [
+        "Ivy Hill"
+      ],
+      "problem": "Commercial contraction and public safety concerns in Ivy Hill",
+      "budget": "$2.5M",
+      "status": "pending"
+    }
+  }
+}

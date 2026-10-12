@@ -1,0 +1,66 @@
+{
+  "draft": "output/cron-compare/culture_c110_kai-marston_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "91552142d643343b0c30fa8c14fdfa870300ba925159505df1cf22ecc6ac4d5a",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Lena Cross, listed in Arts and tied to Lake Merritt, is on it.",
+      "issue": "Contradicts ledger profile bio ground truth: Lena Cross (POP-00539) resides in Piedmont Ave, not Lake Merritt.",
+      "severity": "high"
+    },
+    {
+      "claim": "Rowan Pierce, a journalist at KONO whose name has been cooling.",
+      "issue": "Contradicts ledger profile bio ground truth: Rowan Pierce (POP-00545) resides in Piedmont Ave and is a Freelance Writer, not a journalist based in KONO.",
+      "severity": "high"
+    },
+    {
+      "claim": "The culture record counts 38 figures rising this cycle, with one new arrival on the list. Ellison is one of the names setting the pace.",
+      "issue": "Direct contradiction of recorded state: Tara Ellison had a lifestyle sighting in Baylight District, but no fame-rise or tier-climb event; the cycle recorded 9 fame events and 62 promotions, not 38 rising figures.",
+      "severity": "med"
+    }
+  ],
+  "flagCount": 3,
+  "highSeverityCount": 2,
+  "summary": "Direct contradiction of ledger bio profiles for Lena Cross and Rowan Pierce regarding neighborhood placement, alongside fabricated culture ranking counts.",
+  "review": {
+    "profileId": "kai-arts-entertainment-v1",
+    "canonIntegrity": "fail",
+    "texture": "overreach"
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "packageVersion": "KAI-LEP2-1",
+    "manifestId": "AM-13419a5d5c38",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Lena Cross",
+      "Rowan Pierce",
+      "Tara Ellison"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0145,
+  "durationMs": 47439,
+  "parseError": false,
+  "ranAt": "2026-10-10T17:02:02.569Z"
+}

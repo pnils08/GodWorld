@@ -1,0 +1,502 @@
+[
+  {
+    "pop": "POP-00764",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00764\",\"name\":\"Tao Lee\",\"role\":\"Community Organizer\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"As a resident of Downtown, what have you seen, felt, or understood about \\\"Downtown decay and lack of initiatives\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Downtown\",\"focus\":\"Downtown decay and lack of initiatives\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\"},\"exposure\":{\"basis\":[\"same-hood-signal\",\"same-neighborhood\"],\"self\":\"Tao Lee (POP-00764) — role: Community Organizer; neighborhood: Downtown; born: 1986; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2\",\"evidence\":[{\"id\":\"EV-4ba872f01a\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"text\":\"Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-bb3d53c0ff81\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-2d3b8618f45e\"},{\"t\":\"FACT\",\"text\":\"Season: Winter | Weather: 49°F overcast, NW 12 mph, marine (frontState MARINE), humidity 73, visibility 10\",\"src\":\"World_Config/weather snapshot for C109\",\"id\":\"F-092aa99c4739\"},{\"t\":\"FACT\",\"text\":\"A new face joins the Telegraph Presbyterian Fellowship, while the streets hum with the quiet energy of a neighborhood that knows it's in demand. SpeedyBurger's neon glows steady through the evening, and somewhere, someone is packing boxes under pressure.\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-1388c682f81a\"},{\"t\":\"FACT\",\"text\":\"Tao Lee (POP-00764) — role: Community Organizer; neighborhood: Downtown; born: 1986; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2\",\"src\":\"Simulation_Ledger profile for POP-00764\",\"id\":\"F-d5f03e80c27c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00764",
+        "name": "Tao Lee",
+        "role": "Community Organizer",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Downtown decay and lack of initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Downtown",
+        "focus": "Downtown decay and lack of initiatives",
+        "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-signal",
+          "same-neighborhood"
+        ],
+        "self": "Tao Lee (POP-00764) — role: Community Organizer; neighborhood: Downtown; born: 1986; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+        "evidence": [
+          {
+            "id": "EV-4ba872f01a",
+            "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+            "text": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-bb3d53c0ff81"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-2d3b8618f45e"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Winter | Weather: 49°F overcast, NW 12 mph, marine (frontState MARINE), humidity 73, visibility 10",
+          "src": "World_Config/weather snapshot for C109",
+          "id": "F-092aa99c4739"
+        },
+        {
+          "t": "FACT",
+          "text": "A new face joins the Telegraph Presbyterian Fellowship, while the streets hum with the quiet energy of a neighborhood that knows it's in demand. SpeedyBurger's neon glows steady through the evening, and somewhere, someone is packing boxes under pressure.",
+          "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-1388c682f81a"
+        },
+        {
+          "t": "FACT",
+          "text": "Tao Lee (POP-00764) — role: Community Organizer; neighborhood: Downtown; born: 1986; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+          "src": "Simulation_Ledger profile for POP-00764",
+          "id": "F-d5f03e80c27c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00335",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00335\",\"name\":\"Imie Calero\",\"role\":\"Civil Rights Attorney\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"As a resident of Downtown, what have you seen, felt, or understood about \\\"Downtown decay and lack of initiatives\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Downtown\",\"focus\":\"Downtown decay and lack of initiatives\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\"},\"exposure\":{\"basis\":[\"same-hood-signal\",\"same-neighborhood\"],\"self\":\"Imie Calero (POP-00335) — role: Civil Rights Attorney; neighborhood: Downtown; born: 1982; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 4\",\"evidence\":[{\"id\":\"EV-f86dba1a0a\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"text\":\"Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-bb3d53c0ff81\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-2d3b8618f45e\"},{\"t\":\"FACT\",\"text\":\"Season: Winter | Weather: 49°F overcast, NW 12 mph, marine (frontState MARINE), humidity 73, visibility 10\",\"src\":\"World_Config/weather snapshot for C109\",\"id\":\"F-092aa99c4739\"},{\"t\":\"FACT\",\"text\":\"A new face joins the Telegraph Presbyterian Fellowship, while the streets hum with the quiet energy of a neighborhood that knows it's in demand. SpeedyBurger's neon glows steady through the evening, and somewhere, someone is packing boxes under pressure.\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-1388c682f81a\"},{\"t\":\"FACT\",\"text\":\"Imie Calero (POP-00335) — role: Civil Rights Attorney; neighborhood: Downtown; born: 1982; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 4\",\"src\":\"Simulation_Ledger profile for POP-00335\",\"id\":\"F-89a94c8e6969\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00335",
+        "name": "Imie Calero",
+        "role": "Civil Rights Attorney",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Downtown decay and lack of initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Downtown",
+        "focus": "Downtown decay and lack of initiatives",
+        "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-signal",
+          "same-neighborhood"
+        ],
+        "self": "Imie Calero (POP-00335) — role: Civil Rights Attorney; neighborhood: Downtown; born: 1982; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 4",
+        "evidence": [
+          {
+            "id": "EV-f86dba1a0a",
+            "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+            "text": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-bb3d53c0ff81"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-2d3b8618f45e"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Winter | Weather: 49°F overcast, NW 12 mph, marine (frontState MARINE), humidity 73, visibility 10",
+          "src": "World_Config/weather snapshot for C109",
+          "id": "F-092aa99c4739"
+        },
+        {
+          "t": "FACT",
+          "text": "A new face joins the Telegraph Presbyterian Fellowship, while the streets hum with the quiet energy of a neighborhood that knows it's in demand. SpeedyBurger's neon glows steady through the evening, and somewhere, someone is packing boxes under pressure.",
+          "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-1388c682f81a"
+        },
+        {
+          "t": "FACT",
+          "text": "Imie Calero (POP-00335) — role: Civil Rights Attorney; neighborhood: Downtown; born: 1982; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 4",
+          "src": "Simulation_Ledger profile for POP-00335",
+          "id": "F-89a94c8e6969"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00212",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00212\",\"name\":\"Jessie Hess\",\"role\":\"Barista\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"As a resident of Downtown, what have you seen, felt, or understood about \\\"Downtown decay and lack of initiatives\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Downtown\",\"focus\":\"Downtown decay and lack of initiatives\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\"},\"exposure\":{\"basis\":[\"stink-handle\",\"same-neighborhood\"],\"self\":\"Jessie Hess (POP-00212) — role: Barista; neighborhood: Downtown; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 3\",\"evidence\":[{\"id\":\"EV-4cbf97e383\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"text\":\"Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-bb3d53c0ff81\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-2d3b8618f45e\"},{\"t\":\"FACT\",\"text\":\"Season: Winter | Weather: 49°F overcast, NW 12 mph, marine (frontState MARINE), humidity 73, visibility 10\",\"src\":\"World_Config/weather snapshot for C109\",\"id\":\"F-092aa99c4739\"},{\"t\":\"FACT\",\"text\":\"A new face joins the Telegraph Presbyterian Fellowship, while the streets hum with the quiet energy of a neighborhood that knows it's in demand. SpeedyBurger's neon glows steady through the evening, and somewhere, someone is packing boxes under pressure.\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-1388c682f81a\"},{\"t\":\"FACT\",\"text\":\"Jessie Hess (POP-00212) — role: Barista; neighborhood: Downtown; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 3\",\"src\":\"Simulation_Ledger profile for POP-00212\",\"id\":\"F-2776eec3e3ed\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Downtown decay and lack of initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Downtown",
+        "focus": "Downtown decay and lack of initiatives",
+        "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2"
+      },
+      "exposure": {
+        "basis": [
+          "stink-handle",
+          "same-neighborhood"
+        ],
+        "self": "Jessie Hess (POP-00212) — role: Barista; neighborhood: Downtown; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 3",
+        "evidence": [
+          {
+            "id": "EV-4cbf97e383",
+            "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+            "text": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-bb3d53c0ff81"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-2d3b8618f45e"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Winter | Weather: 49°F overcast, NW 12 mph, marine (frontState MARINE), humidity 73, visibility 10",
+          "src": "World_Config/weather snapshot for C109",
+          "id": "F-092aa99c4739"
+        },
+        {
+          "t": "FACT",
+          "text": "A new face joins the Telegraph Presbyterian Fellowship, while the streets hum with the quiet energy of a neighborhood that knows it's in demand. SpeedyBurger's neon glows steady through the evening, and somewhere, someone is packing boxes under pressure.",
+          "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-1388c682f81a"
+        },
+        {
+          "t": "FACT",
+          "text": "Jessie Hess (POP-00212) — role: Barista; neighborhood: Downtown; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 3",
+          "src": "Simulation_Ledger profile for POP-00212",
+          "id": "F-2776eec3e3ed"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00541",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00541\",\"name\":\"Theo Burkes\",\"role\":\"Rapper\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"As a resident of Downtown, what have you seen, felt, or understood about \\\"Downtown decay and lack of initiatives\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"anomaly\",\"hood\":\"Downtown\",\"focus\":\"Downtown decay and lack of initiatives\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\"},\"exposure\":{\"basis\":[\"stink-handle\",\"same-neighborhood\"],\"self\":\"Theo Burkes (POP-00541) — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3\",\"evidence\":[{\"id\":\"EV-7551c94bd0\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"text\":\"Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-bb3d53c0ff81\"},{\"t\":\"FACT\",\"text\":\"No active initiative (or mitigator) owns this break on the record\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-2d3b8618f45e\"},{\"t\":\"FACT\",\"text\":\"Season: Winter | Weather: 49°F overcast, NW 12 mph, marine (frontState MARINE), humidity 73, visibility 10\",\"src\":\"World_Config/weather snapshot for C109\",\"id\":\"F-092aa99c4739\"},{\"t\":\"FACT\",\"text\":\"A new face joins the Telegraph Presbyterian Fellowship, while the streets hum with the quiet energy of a neighborhood that knows it's in demand. SpeedyBurger's neon glows steady through the evening, and somewhere, someone is packing boxes under pressure.\",\"src\":\"output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2\",\"id\":\"F-1388c682f81a\"},{\"t\":\"FACT\",\"text\":\"Theo Burkes (POP-00541) — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3\",\"src\":\"Simulation_Ledger profile for POP-00541\",\"id\":\"F-5acbcaffdce5\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00541",
+        "name": "Theo Burkes",
+        "role": "Rapper",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Downtown decay and lack of initiatives\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "anomaly",
+        "hood": "Downtown",
+        "focus": "Downtown decay and lack of initiatives",
+        "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2"
+      },
+      "exposure": {
+        "basis": [
+          "stink-handle",
+          "same-neighborhood"
+        ],
+        "self": "Theo Burkes (POP-00541) — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+        "evidence": [
+          {
+            "id": "EV-7551c94bd0",
+            "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+            "text": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+          "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-bb3d53c0ff81"
+        },
+        {
+          "t": "FACT",
+          "text": "No active initiative (or mitigator) owns this break on the record",
+          "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-2d3b8618f45e"
+        },
+        {
+          "t": "FACT",
+          "text": "Season: Winter | Weather: 49°F overcast, NW 12 mph, marine (frontState MARINE), humidity 73, visibility 10",
+          "src": "World_Config/weather snapshot for C109",
+          "id": "F-092aa99c4739"
+        },
+        {
+          "t": "FACT",
+          "text": "A new face joins the Telegraph Presbyterian Fellowship, while the streets hum with the quiet energy of a neighborhood that knows it's in demand. SpeedyBurger's neon glows steady through the evening, and somewhere, someone is packing boxes under pressure.",
+          "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "id": "F-1388c682f81a"
+        },
+        {
+          "t": "FACT",
+          "text": "Theo Burkes (POP-00541) — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+          "src": "Simulation_Ledger profile for POP-00541",
+          "id": "F-5acbcaffdce5"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

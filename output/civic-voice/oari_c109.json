@@ -1,0 +1,34 @@
+{
+  "office": "oari",
+  "cycle": 109,
+  "speaker": "Dr. Vanessa Tran-Muñoz",
+  "cascadeSummary": "With District 1 evaluation results proving OARI's effectiveness, I am authorizing permanent dispatch expansion to East Oakland as authorized by council. Our teams will begin responding to behavioral health crises within two cycles, building on the evidence-based model that's working in West Oakland.",
+  "statements": [
+    {
+      "statementId": "STMT-109-oari-001",
+      "type": "operational_status",
+      "topic": "OARI Expansion",
+      "initiative": "INIT-002",
+      "decision": "Authorize East Oakland deployment",
+      "quote": "When we meet crisis with care instead of cuffs, our communities get safer faster.",
+      "fullStatement": "The data from District 1 speaks clearly — OARI works. With council authorization and evaluation results in hand, I am directing our teams to begin preparations for East Oakland deployment immediately. Responders will undergo neighborhood-specific training with input from local community partners, and we'll establish bilingual outreach teams to ensure trust and accessibility from day one. Crisis doesn't clock out at five, and neither will we — our East Oakland teams will operate evenings and weekends to meet the need where it's most urgent.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "dispatch-live",
+        "MilestoneNotes": "C109: Permanent dispatch expansion to East Oakland authorized based on District 1 evaluation results",
+        "NextScheduledAction": "East Oakland responder training",
+        "NextActionCycle": 110
+      }
+    },
+    {
+      "statementId": "STMT-109-oari-002",
+      "type": "constituent_update",
+      "topic": "East Oakland Crisis Response",
+      "initiative": null,
+      "decision": "East Oakland gets OARI coverage",
+      "quote": "East Oakland deserves the same crisis care that's proving effective in West Oakland — just faster, because the need won't wait.",
+      "fullStatement": "This cycle's upbeat mood in East Oakland is a testament to community resilience, but we know behavioral health crises don't pause when the polling looks good. That's why OARI is accelerating deployment there — responders undergo neighborhood-specific training next cycle, and teams will be live within two cycles based on the protocols that are working in West Oakland. The people of East Oakland deserve more than promises — they deserve action.",
+      "trackerUpdates": {}
+    }
+  ]
+}

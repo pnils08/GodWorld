@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "110",
+  "desk": "civic",
+  "persona": "lila-mezran",
+  "hood": "Chinatown",
+  "quotes": [
+    {
+      "pop": "POP-00812",
+      "name": "Millicent Kumar",
+      "quote": "Honestly, I haven't noticed much change in my daily routine. I keep my head down, do my work. But I did hear from Selena that some of the older folks on her block have been staying in more, which isn't like them. That's got me a little worried."
+    },
+    {
+      "pop": "POP-00816",
+      "name": "Daphne Stafford",
+      "quote": "It’s been tough for families here in Chinatown. With more people getting sick, there’s a lot of worry about how to care for loved ones while keeping up with work and daily life. Many are juggling doctor visits, medications, and trying to keep everyone healthy at home. It’s a lot to handle, especially when resources feel stretched."
+    },
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "From this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone."
+    }
+  ],
+  "claim": "Honestly, I haven't noticed much change in my daily routine. I keep my head down, do my work. But I did hear from Selena that some of the older folks on her block have been staying in more, which isn't like them. That's got me a little worried.",
+  "src": "citizenVoice PRESS c110",
+  "ranAt": "2026-10-05T18:16:28.328Z"
+}

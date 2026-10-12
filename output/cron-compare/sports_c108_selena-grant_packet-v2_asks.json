@@ -1,0 +1,565 @@
+[
+  {
+    "pop": "POP-01022",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01022\",\"name\":\"Wilson Shepard\",\"role\":\"Head Coach, Oakland Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Selena Grant\",\"question\":\"What have you seen, felt, or understood about \\\"Oaks' preseason performance\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-beat\",\"hood\":\"Jack London\",\"focus\":\"Oaks' preseason performance\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\"},\"exposure\":{\"basis\":[\"named on the Oaks feed C108 (Oakland_Sports_Feed)\"],\"self\":\"Wilson Shepard — Head Coach, Oakland Oaks — Downtown\",\"evidence\":[{\"id\":\"EV-07c7ba3eff\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\",\"text\":\"Coach Wilson Shepard prepares his rookies for preseaon.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state C108 · - · -\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\",\"id\":\"F-7f35d7fe96b5\"},{\"t\":\"FACT\",\"text\":\"Coach Wilson Shepard prepares his rookies for preseaon.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\",\"id\":\"F-34099415bb29\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-0fb94ec2157e\"},{\"t\":\"FACT\",\"text\":\"Trigger: cold-streak\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-3925dc8003f0\"},{\"t\":\"FACT\",\"text\":\"Franchise stability: uncertain\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-db52350d2170\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-5e2ee7cdc34d\"},{\"t\":\"FACT\",\"text\":\"Record 0-1 · streak L1\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-94171ad9126c\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — Head Coach, Oakland Oaks — Downtown\",\"src\":\"Simulation_Ledger profile for POP-01022\",\"id\":\"F-5b5a560909b4\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Selena Grant",
+        "question": "What have you seen, felt, or understood about \"Oaks' preseason performance\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-beat",
+        "hood": "Jack London",
+        "focus": "Oaks' preseason performance",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+      },
+      "exposure": {
+        "basis": [
+          "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+        ],
+        "self": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "evidence": [
+          {
+            "id": "EV-07c7ba3eff",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "text": "Coach Wilson Shepard prepares his rookies for preseaon."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state C108 · - · -",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+          "id": "F-7f35d7fe96b5"
+        },
+        {
+          "t": "FACT",
+          "text": "Coach Wilson Shepard prepares his rookies for preseaon.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+          "id": "F-34099415bb29"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-0fb94ec2157e"
+        },
+        {
+          "t": "FACT",
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-3925dc8003f0"
+        },
+        {
+          "t": "FACT",
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-db52350d2170"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-5e2ee7cdc34d"
+        },
+        {
+          "t": "FACT",
+          "text": "Record 0-1 · streak L1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-94171ad9126c"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "src": "Simulation_Ledger profile for POP-01022",
+          "id": "F-5b5a560909b4"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01023",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01023\",\"name\":\"Adash Stanley\",\"role\":\"PG / The Oaks \",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Selena Grant\",\"question\":\"What have you seen, felt, or understood about \\\"Oaks' preseason performance\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-beat\",\"hood\":\"Jack London\",\"focus\":\"Oaks' preseason performance\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\"},\"exposure\":{\"basis\":[\"named on the Oaks feed C108 (Oakland_Sports_Feed)\"],\"self\":\"Adash Stanley — PG / The Oaks — Downtown\",\"evidence\":[{\"id\":\"EV-d794d86b6f\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\",\"text\":\"Coach Wilson Shepard prepares his rookies for preseaon.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state C108 · - · -\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\",\"id\":\"F-7f35d7fe96b5\"},{\"t\":\"FACT\",\"text\":\"Coach Wilson Shepard prepares his rookies for preseaon.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\",\"id\":\"F-34099415bb29\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-0fb94ec2157e\"},{\"t\":\"FACT\",\"text\":\"Trigger: cold-streak\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-3925dc8003f0\"},{\"t\":\"FACT\",\"text\":\"Franchise stability: uncertain\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-db52350d2170\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-5e2ee7cdc34d\"},{\"t\":\"FACT\",\"text\":\"Record 0-1 · streak L1\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-94171ad9126c\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley — PG / The Oaks — Downtown\",\"src\":\"Simulation_Ledger profile for POP-01023\",\"id\":\"F-26cdcab1a2d4\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Selena Grant",
+        "question": "What have you seen, felt, or understood about \"Oaks' preseason performance\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-beat",
+        "hood": "Jack London",
+        "focus": "Oaks' preseason performance",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+      },
+      "exposure": {
+        "basis": [
+          "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+        ],
+        "self": "Adash Stanley — PG / The Oaks — Downtown",
+        "evidence": [
+          {
+            "id": "EV-d794d86b6f",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "text": "Coach Wilson Shepard prepares his rookies for preseaon."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state C108 · - · -",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+          "id": "F-7f35d7fe96b5"
+        },
+        {
+          "t": "FACT",
+          "text": "Coach Wilson Shepard prepares his rookies for preseaon.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+          "id": "F-34099415bb29"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-0fb94ec2157e"
+        },
+        {
+          "t": "FACT",
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-3925dc8003f0"
+        },
+        {
+          "t": "FACT",
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-db52350d2170"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-5e2ee7cdc34d"
+        },
+        {
+          "t": "FACT",
+          "text": "Record 0-1 · streak L1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-94171ad9126c"
+        },
+        {
+          "t": "FACT",
+          "text": "Adash Stanley — PG / The Oaks — Downtown",
+          "src": "Simulation_Ledger profile for POP-01023",
+          "id": "F-26cdcab1a2d4"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01027",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01027\",\"name\":\"Austin Reaves\",\"role\":\"SG / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Selena Grant\",\"question\":\"What have you seen, felt, or understood about \\\"Oaks' preseason performance\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-beat\",\"hood\":\"Jack London\",\"focus\":\"Oaks' preseason performance\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\"},\"exposure\":{\"basis\":[\"named on the Oaks feed C108 (Oakland_Sports_Feed)\"],\"self\":\"Austin Reaves — SG / The Oaks — Downtown\",\"evidence\":[{\"id\":\"EV-d32c3acbb3\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\",\"text\":\"Coach Wilson Shepard prepares his rookies for preseaon.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state C108 · - · -\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\",\"id\":\"F-7f35d7fe96b5\"},{\"t\":\"FACT\",\"text\":\"Coach Wilson Shepard prepares his rookies for preseaon.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\",\"id\":\"F-34099415bb29\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-0fb94ec2157e\"},{\"t\":\"FACT\",\"text\":\"Trigger: cold-streak\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-3925dc8003f0\"},{\"t\":\"FACT\",\"text\":\"Franchise stability: uncertain\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-db52350d2170\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-5e2ee7cdc34d\"},{\"t\":\"FACT\",\"text\":\"Record 0-1 · streak L1\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-94171ad9126c\"},{\"t\":\"FACT\",\"text\":\"Austin Reaves — SG / The Oaks — Downtown\",\"src\":\"Simulation_Ledger profile for POP-01027\",\"id\":\"F-afa8c27895bb\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Selena Grant",
+        "question": "What have you seen, felt, or understood about \"Oaks' preseason performance\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-beat",
+        "hood": "Jack London",
+        "focus": "Oaks' preseason performance",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+      },
+      "exposure": {
+        "basis": [
+          "named on the Oaks feed C108 (Oakland_Sports_Feed)"
+        ],
+        "self": "Austin Reaves — SG / The Oaks — Downtown",
+        "evidence": [
+          {
+            "id": "EV-d32c3acbb3",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+            "text": "Coach Wilson Shepard prepares his rookies for preseaon."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state C108 · - · -",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+          "id": "F-7f35d7fe96b5"
+        },
+        {
+          "t": "FACT",
+          "text": "Coach Wilson Shepard prepares his rookies for preseaon.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+          "id": "F-34099415bb29"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-0fb94ec2157e"
+        },
+        {
+          "t": "FACT",
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-3925dc8003f0"
+        },
+        {
+          "t": "FACT",
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-db52350d2170"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-5e2ee7cdc34d"
+        },
+        {
+          "t": "FACT",
+          "text": "Record 0-1 · streak L1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-94171ad9126c"
+        },
+        {
+          "t": "FACT",
+          "text": "Austin Reaves — SG / The Oaks — Downtown",
+          "src": "Simulation_Ledger profile for POP-01027",
+          "id": "F-afa8c27895bb"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00273",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00273\",\"name\":\"Trenton Nawan\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Selena Grant\",\"question\":\"As a resident of Jack London, what have you seen, felt, or understood about \\\"Oaks' preseason performance\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-beat\",\"hood\":\"Jack London\",\"focus\":\"Oaks' preseason performance\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Trenton Nawan — Server — Jack London\",\"evidence\":[],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state C108 · - · -\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\",\"id\":\"F-7f35d7fe96b5\"},{\"t\":\"FACT\",\"text\":\"Coach Wilson Shepard prepares his rookies for preseaon.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C108\",\"id\":\"F-34099415bb29\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-0fb94ec2157e\"},{\"t\":\"FACT\",\"text\":\"Trigger: cold-streak\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-3925dc8003f0\"},{\"t\":\"FACT\",\"text\":\"Franchise stability: uncertain\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-db52350d2170\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-5e2ee7cdc34d\"},{\"t\":\"FACT\",\"text\":\"Record 0-1 · streak L1\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C108\",\"id\":\"F-94171ad9126c\"},{\"t\":\"FACT\",\"text\":\"Trenton Nawan — Server — Jack London\",\"src\":\"Simulation_Ledger profile for POP-00273\",\"id\":\"F-3886fd06b84e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00273",
+        "name": "Trenton Nawan",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Selena Grant",
+        "question": "As a resident of Jack London, what have you seen, felt, or understood about \"Oaks' preseason performance\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-beat",
+        "hood": "Jack London",
+        "focus": "Oaks' preseason performance",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C108"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Trenton Nawan — Server — Jack London",
+        "evidence": [],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state C108 · - · -",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+          "id": "F-7f35d7fe96b5"
+        },
+        {
+          "t": "FACT",
+          "text": "Coach Wilson Shepard prepares his rookies for preseaon.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C108",
+          "id": "F-34099415bb29"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state (preseason), C108: Coach Wilson Shepard prepares his rookies for preseaon.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-0fb94ec2157e"
+        },
+        {
+          "t": "FACT",
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-3925dc8003f0"
+        },
+        {
+          "t": "FACT",
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-db52350d2170"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (preseason), C108: The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-5e2ee7cdc34d"
+        },
+        {
+          "t": "FACT",
+          "text": "Record 0-1 · streak L1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C108",
+          "id": "F-94171ad9126c"
+        },
+        {
+          "t": "FACT",
+          "text": "Trenton Nawan — Server — Jack London",
+          "src": "Simulation_Ledger profile for POP-00273",
+          "id": "F-3886fd06b84e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

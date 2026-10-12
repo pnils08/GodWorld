@@ -1,0 +1,62 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "107",
+  "persona": "carmen-delaine",
+  "byline": "Carmen Delaine",
+  "bylinePopid": "POP-00011",
+  "article": "output/cron-compare/staged/civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Elio Perez",
+        "role": "mentioned",
+        "popid": "POP-00201"
+      },
+      {
+        "name": "Daniel Cloak",
+        "role": "quoted-source",
+        "popid": "POP-00722"
+      },
+      {
+        "name": "Irene Fay",
+        "role": "quoted-source",
+        "popid": "POP-00794"
+      },
+      {
+        "name": "Darius Clark",
+        "role": "mentioned",
+        "popid": "POP-00961"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "west-oakland-elio-perez-initiative",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "I've heard folks at the diner talking about the stabilization fund, but honestly, it's hard to tell where that money's actually going—I haven't seen any changes on my block or heard from neighbors who've gotten help.",
+        "sourceRef": "citizenVoice PRESS Elio Perez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-ff6d5bc588c2",
+    "draftSha256": "23b50c8a0e23ea9fee0b2318fbdfb48afa18e221e440fc40ced8508629bbf918",
+    "verdict": "output/cron-compare/civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-19T17:00:24.536Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-19T17:00:29.371Z"
+}

@@ -1,0 +1,18 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 106,
+  "primaryVoice": "Mayor gavel (mayor_gavel-005)",
+  "consolidatedFrom": [
+    "STMT-106-baylight_authority-001 (Ramos — Baylight District Phase II Mobilization)",
+    "STMT-106-baylight_authority-002 (Ramos — Baylight District Community Impact)",
+    "STMT-106-mayor_gavel-005 (Mayor gavel — Baylight District Phase II Bid Final Council Vote)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "ImplementationPhase": "construction-planning",
+    "MilestoneNotes": "C106: Final council approval received; construction planning active, contract signing in progress",
+    "NextScheduledAction": "Contract execution and site preparation mobilization",
+    "NextActionCycle": 107
+  }
+}

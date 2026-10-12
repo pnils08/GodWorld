@@ -1,0 +1,56 @@
+{
+  "draft": "output/cron-compare/culture_c107_elliot-graye_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "107",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "bdd414b5ee449c37d66febd5a6d5f6e24126005cac6d0150740c0298eee4e683",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Verified: all citizen roles, exact quotes, and faith institutions strictly match Cycle 107 ground truth.",
+  "review": {
+    "profileId": "graye-faith-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "packageVersion": "GRAYE-LEP2-1",
+    "manifestId": "AM-9341f81caae4",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Cameron Wallen",
+      "Elliot Graye",
+      "Eunice Marston",
+      "Tao Lee"
+    ],
+    "unverified": [
+      "Corporate Accountant",
+      "Lake Merritt Mindfulness Sangha",
+      "Oakland's Downtown",
+      "Telegraph Presbyterian",
+      "Telegraph Presbyterian Fellowship"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0109,
+  "durationMs": 10557,
+  "parseError": false,
+  "ranAt": "2026-09-17T23:15:55.551Z"
+}

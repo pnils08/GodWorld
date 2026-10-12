@@ -1,0 +1,355 @@
+FULL STAT TRUE SOURCE — PITCHER
+
+Name: Arturo Ramos
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: SP
+
+ 
+
+Jersey: #25
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 91
+
+ 
+
+MLB Service: 3.001
+
+ 
+
+Age: 26
+
+ 
+
+Bats: S
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'0"
+
+ 
+
+Weight: 206 lbs
+
+ 
+
+Drafted: Round 1 (2032)
+
+ 
+
+Secondary Position: NONE
+
+ 
+
+Hitter Tendency: PULL HITTER
+
+ 
+
+Born: PUERTO RICO
+
+ 
+
+Canonical POPID: POP-00025
+
+
+--------------------------------------------------------------------------------
+
+
+PITCH REPERTOIRE
+
+Pitch 1 — 4-Seam Fastball — 93 mph
+
+ 
+
+Pitch 2 — Slider — 86 mph
+
+ 
+
+Pitch 3 — Curveball — 78 mph
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+STA: 88
+
+ 
+
+H/9: 78
+
+ 
+
+K/9: 79
+
+ 
+
+BB/9: 82
+
+ 
+
+HR/9: 71
+
+ 
+
+PCLT: 75
+
+ 
+
+CTRL: 80
+
+ 
+
+VEL: 86
+
+ 
+
+BRK: 78
+
+ 
+
+FLD: 70
+
+ 
+
+ARM: 65
+
+ 
+
+ACC: 60
+
+ 
+
+REAC: 60
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   GS  W   L   SV  BS  HLD  IP      H    R   ER  HR  BB  SO   ERA
+
+ 
+
+2041  ATH   33  33  23  1   0   0   0    212.2   176  57  57  24  41  182  2.41
+
+ 
+
+2040  ATH   32  32  18  5   0   0   0    205.0   170  62  60  22  38  160  2.63
+
+ 
+
+2039  ATH   32  32  19  7   0   0   0    208.2   172  66  65  25  32  155  2.8
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 97
+
+ 
+
+GS: 97
+
+ 
+
+W: 60
+
+ 
+
+L: 13
+
+ 
+
+SV: 0
+
+ 
+
+BS: 0
+
+ 
+
+HLD: 0
+
+ 
+
+IP: 626.1
+
+ 
+
+H: 518
+
+ 
+
+R: 185
+
+ 
+
+ER: 182
+
+ 
+
+HR: 71
+
+ 
+
+BB: 111
+
+ 
+
+SO: 497
+
+ 
+
+ERA: 2.62
+
+ 
+
+WHIP: 1.00
+
+ 
+
+K/9: 7.14
+
+ 
+
+BB/9: 1.59
+
+ 
+
+HR/9: 1.02
+
+ 
+
+WAR: 12.7
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2040–2043: $8.1M per year
+
+ 
+
+2044: Arbitration
+
+ 
+
+2045: Free Agent
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Option: 0/3 Used
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+QUIRKS
+
+Workhorse Delivery
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS
+
+Rookie of the Year (2039)
+
+All-Star (2039)
+
+All-Star (2041)
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00025
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00025

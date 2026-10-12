@@ -1,0 +1,309 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "107",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00014",
+      "name": "Tanya Cruz",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "A's playoffs update: 1-0",
+      "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+      "creativeBrief": {
+        "kind": "sideline-dispatch",
+        "pulseClass": "record-only-sideline",
+        "bagModes": [
+          "10 Inference Close"
+        ],
+        "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+        "anchorFacts": [
+          "The A's playoffs record is 1-0."
+        ],
+        "accessEvidence": {
+          "state": "ALLOTTED",
+          "facts": [
+            "clubhouse/sideline SET is the reporter's room"
+          ]
+        },
+        "quoteEvidence": {
+          "state": "NOT_SUPPLIED",
+          "quotes": []
+        },
+        "observationEvidence": {
+          "state": "ALLOTTED",
+          "facts": []
+        },
+        "missing": [
+          "Packet player quotes",
+          "injury or team-response facts beyond the supplied record"
+        ],
+        "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+        "sourcePointers": [
+          "output/world_summary_c107.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/TANYA_SIDELINE_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sideline-signal",
+      "hood": "Eastlake",
+      "score": null,
+      "src": "world_summary_c107.md ## Sports",
+      "nearby": [
+        {
+          "text": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Travis Coles, Clark Saryan, Vladimir Gonzalez, Desmond Morton",
+          "src": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Desmond Morton, Mark Aitken",
+          "src": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | John Ellis, Eric Taveras",
+          "src": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "sentiment | A's W2 [player-energy]; A's W2 [playoffs]; Oaks W0 [pre-season]",
+          "src": "Ripple_Ledger cycle 107 (CauseType sports); rendered: world_summary_c107.md \"## What Moved\" > \"### sports\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00533",
+          "name": "Travis Coles",
+          "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+          "why": "feed-names",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00052",
+          "name": "Clark Saryan",
+          "profile": "Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA) — Downtown",
+          "why": "feed-names",
+          "role": "Closing Pitcher, Las Vegas Aviators (AAA)",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00598",
+          "name": "Vladimir Gonzalez",
+          "profile": "Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale",
+          "why": "feed-names",
+          "role": "Right Fielder, Oakland A's",
+          "hood": "Fruitvale"
+        },
+        {
+          "pop": "POP-00051",
+          "name": "Desmond Morton",
+          "profile": "Desmond Morton — Left Fielder, Oakland A's — Jack London",
+          "why": "feed-names",
+          "role": "Left Fielder, Oakland A's",
+          "hood": "Jack London"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-ac25a93a42d1"
+      },
+      {
+        "t": "FACT",
+        "text": "A's playoffs update: 1-0",
+        "src": "world_summary_c107.md ## Sports",
+        "id": "F-598fba108cbb"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's playoffs record is 1-0.",
+        "src": "world_summary_c107.md ## Sports",
+        "id": "F-be9ec3e46666"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "A's playoffs update: 1-0",
+      "label": "A's playoffs update: 1-0",
+      "hookLine": "A's playoffs update: 1-0",
+      "kind": "sideline-signal",
+      "hood": "Eastlake",
+      "popids": [
+        "POP-00533",
+        "POP-00052",
+        "POP-00598",
+        "POP-00051"
+      ],
+      "citizens": [
+        "Travis Coles (POP-00533)",
+        "Clark Saryan (POP-00052)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Desmond Morton (POP-00051)"
+      ],
+      "ref": "world_summary_c107.md ## Sports",
+      "cycle": 107
+    },
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "text": "Tanya Cruz is in the clubhouse after the A's take a 1-0 lead in the playoffs. She's looking to capture the team's energy and see how they're handling the early success. With a win under their belt, she wants to gauge if there's any shift in demeanor from the regular season grind to playoff intensity.",
+    "plan": {
+      "chase": "Tanya Cruz is in the clubhouse after the A's take a 1-0 lead in the playoffs. She's looking to capture the team's energy and see how they're handling the early success. With a win under their belt, she wants to gauge if there's any shift in demeanor from the regular season grind to playoff intensity.",
+      "focus": "The team's response to their 1-0 playoff start and the atmosphere in the clubhouse.",
+      "why": "The A's have momentum with two straight wins, and the clubhouse is the best place to feel the pulse of the team.",
+      "checks": [
+        "Is the team riding high, or staying focused?",
+        "Any notable interactions or celebrations among players?",
+        "How are the pitchers and hitters feeding off each other's energy?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00533",
+          "question": "How does it feel to start the playoffs with a win, and what's the mood like in the clubhouse?",
+          "basis": "As a starting pitcher, Travis Coles would have insight into the team's mindset."
+        },
+        {
+          "pop": "POP-00051",
+          "question": "Desmond, the team's on a little streak now—what's different about the energy in here compared to the regular season?",
+          "basis": "As a left fielder, Desmond Morton would sense the shift in energy among position players."
+        }
+      ],
+      "interpretation": "The A's seem to be finding their rhythm at the right time, but Tanya wants to see if the clubhouse reflects cautious optimism or full-on swagger.",
+      "unverifiedLead": [
+        "Are there any subtle tensions or undercurrents despite the win?",
+        "Is there a particular player who's setting the tone for the team's energy?"
+      ],
+      "closeQuestion": "Does this feel like the start of something special, or just business as usual for a playoff-bound team?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-01023",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Travis Coles, Clark Saryan, Vladimir Gonzalez, Desmond Morton",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533",
+        "POP-00052",
+        "POP-00598",
+        "POP-00051"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Desmond Morton, Mark Aitken",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00051",
+        "POP-00003"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | John Ellis, Eric Taveras",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 107; rendered: world_summary_c107.md \"## Sports\" C107 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00033",
+        "POP-00597"
+      ]
+    },
+    {
+      "label": "sentiment | A's W2 [player-energy]; A's W2 [playoffs]; Oaks W0 [pre-season]",
+      "kind": "ripple",
+      "ref": "Ripple_Ledger cycle 107 (CauseType sports); rendered: world_summary_c107.md \"## What Moved\" > \"### sports\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 8,
+  "ranAt": "2026-09-18T01:10:27.020Z"
+}

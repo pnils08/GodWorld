@@ -1,0 +1,63 @@
+{
+  "draft": "output/cron-compare/sports_c108_anthony-raines_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "10fe3cce23f8fe651d2ec0f60aeb533dda7b4b227bb46483b2d8baebfd26c951",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All postseason metrics, player statistics, World Series matchup facts, and quotes verify cleanly against ground truth.",
+  "review": {
+    "profileId": "anthony-sports-analytics-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-1",
+    "manifestId": "AM-a2917e324908",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "286",
+          "324"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Arturo Ramos",
+      "Danny Horn",
+      "Deacon Seymour",
+      "Eric Taveras",
+      "Ernesto Quintero",
+      "Vladimir Gonzalez"
+    ],
+    "unverified": [
+      "With Philadelphia",
+      "World Series"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0108,
+  "durationMs": 7309,
+  "parseError": false,
+  "ranAt": "2026-09-21T23:20:13.462Z"
+}

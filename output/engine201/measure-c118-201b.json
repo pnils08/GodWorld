@@ -1,0 +1,127 @@
+{
+ "label": "c118-201b",
+ "sheet": "1FFpUs",
+ "cycleCount": "119",
+ "rows": 1039,
+ "parsed": 1039,
+ "allNeutral": 630,
+ "allNeutralPct": 60.6,
+ "wakeDeviation60": 229,
+ "wakePct": 22,
+ "pressureRows": 113,
+ "pressureCauses": {
+  "hood": 36,
+  "debt": 46,
+  "rent": 12,
+  "overwork": 25,
+  "unemployed": 7
+ },
+ "adaptedRecords": 56,
+ "dials": {
+  "drive": {
+   "mean": 58.09,
+   "lt40": 0,
+   "gt60": 275,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 688,
+   "contribNeg": 27
+  },
+  "sociability": {
+   "mean": 58.34,
+   "lt40": 0,
+   "gt60": 258,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 750,
+   "contribNeg": 69
+  },
+  "warmth": {
+   "mean": 52.78,
+   "lt40": 0,
+   "gt60": 86,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 238,
+   "contribNeg": 15
+  },
+  "openness": {
+   "mean": 52.88,
+   "lt40": 0,
+   "gt60": 133,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 380,
+   "contribNeg": 580
+  },
+  "composure": {
+   "mean": 53.81,
+   "lt40": 3,
+   "gt60": 162,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 124,
+   "contribNeg": 379
+  },
+  "integrity": {
+   "mean": 50.52,
+   "lt40": 0,
+   "gt60": 23,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 51,
+   "contribNeg": 12
+  },
+  "family": {
+   "mean": 56.36,
+   "lt40": 1,
+   "gt60": 256,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 103,
+   "contribNeg": 126
+  },
+  "outabout": {
+   "mean": 50.82,
+   "lt40": 0,
+   "gt60": 17,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 320,
+   "contribNeg": 561
+  }
+ },
+ "contrib": {
+  "pos": 2654,
+  "neg": 1769,
+  "negSharePct": 40
+ },
+ "topTags": {
+  "Neighborhood": 4780,
+  "Daily": 3754,
+  "Civic Perception": 2948,
+  "Personal": 2309,
+  "PrevEvening": 1595,
+  "Sports": 1232,
+  "StreetsGuarded": 782,
+  "Background": 690,
+  "Lifestyle": 654,
+  "ActivityContracted": 497,
+  "Media": 482,
+  "Micro-Event": 437,
+  "Holiday": 435,
+  "ActivityExpanded": 316,
+  "Strain": 292,
+  "Work": 257,
+  "Education": 212,
+  "FirstFriday": 210,
+  "Community": 116,
+  "Civic": 99,
+  "Career": 93,
+  "Untagged": 90,
+  "ConnectionWithdrawn": 88,
+  "Team": 84,
+  "Cultural": 78
+ },
+ "engineErrorsTotalRows": 0
+}

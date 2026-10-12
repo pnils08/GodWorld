@@ -1,11 +1,11 @@
 {
   "doc:boot": {
-    "lastTouched": "2026-09-05T02:51:10.959Z",
-    "reportPath": "output/audit-reports/session-audit_2026-09-04_215110.md"
+    "lastTouched": "2026-10-12T05:12:29.961Z",
+    "reportPath": "output/audit-reports/session-audit_2026-10-12_001229.md"
   },
   "doc:engine": {
-    "lastTouched": "2026-09-06T07:26:28.722Z",
-    "reportPath": "output/audit-reports/session-audit_2026-09-06_022628.md"
+    "lastTouched": "2026-10-11T06:19:32.323Z",
+    "reportPath": "output/audit-reports/session-audit_2026-10-11_011932.md"
   },
   "skill:cycle-pipeline": {
     "lastTouched": "2026-08-21T07:18:49.808Z",
@@ -16,11 +16,15 @@
     "reportPath": "output/audit-reports/session-audit_2026-08-29_013206.md"
   },
   "doc:data": {
-    "lastTouched": "2026-09-01T02:56:58.556Z",
-    "reportPath": "output/audit-reports/session-audit_2026-08-31_215658.md"
+    "lastTouched": "2026-09-14T06:45:18.134Z",
+    "reportPath": "output/audit-reports/session-audit_2026-09-14_014517.md"
   },
   "doc:infra": {
     "lastTouched": "2026-09-06T07:36:53.932Z",
     "reportPath": "output/audit-reports/session-audit_2026-09-06_023653.md"
+  },
+  "doc:media": {
+    "lastTouched": "2026-09-16T07:43:29.197Z",
+    "reportPath": "output/audit-reports/session-audit_2026-09-16_024329.md"
   }
 }

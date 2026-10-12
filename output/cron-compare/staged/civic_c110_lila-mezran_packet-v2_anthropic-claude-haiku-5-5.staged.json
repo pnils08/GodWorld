@@ -1,0 +1,52 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "lila-mezran",
+  "byline": "Dr. Lila Mezran",
+  "bylinePopid": "POP-00154",
+  "article": "output/cron-compare/staged/civic_c110_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Yu Zen",
+        "role": "quoted-source",
+        "popid": "POP-00194"
+      },
+      {
+        "name": "Millicent Kumar",
+        "role": "mentioned",
+        "popid": "POP-00812"
+      },
+      {
+        "name": "Daphne Stafford",
+        "role": "mentioned",
+        "popid": "POP-00816"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "Honestly, I haven't noticed much change in my daily routine. I keep my head down, do my work. But I did hear from Selena that some of the older folks on her block have been staying in more, which isn't like them. That's got me a little worried.",
+        "sourceRef": "citizenVoice PRESS Millicent Kumar"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-6b05b88e155f",
+    "draftSha256": "6472acfc0a8cc65675d3775e48a709100e1a6100102ededfcf5a5b1e4ae7d845",
+    "verdict": "output/cron-compare/civic_c110_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-10T17:00:42.277Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-10T17:00:44.959Z"
+}

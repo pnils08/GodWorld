@@ -1,0 +1,21 @@
+{
+  "initiative": "INIT-007",
+  "initiativeId": "INIT-007",
+  "cycle": 111,
+  "primaryVoice": "Mayor gavel (mayor_gavel-003)",
+  "consolidatedFrom": [
+    "STMT-111-council_d1-002 (Carter D1 — Oakland Youth Apprenticeship Pipeline)",
+    "STMT-111-council_d3-002 (Delgado D3 — Oakland Youth Apprenticeship Pipeline)",
+    "STMT-111-council_d5-001 (Rivers D5 — Youth Apprenticeship)",
+    "STMT-111-council_d6-004 (Crane D6 — Oakland Youth Apprenticeship Pipeline Reporting)",
+    "STMT-111-mayor_gavel-003 (Mayor gavel — Oakland Youth Apprenticeship Pipeline Cohort Placement Mandate)",
+    "STMT-111-mayor_open-004 (Mayor agenda — Oakland Youth Apprenticeship Pipeline Cohort Placement Mandate)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-007",
+    "ImplementationPhase": "implementation-active",
+    "MilestoneNotes": "C111: First cohort placement report mandated for Cycle 112; implementation accountability enforced.",
+    "NextScheduledAction": "First cohort placement report delivery",
+    "NextActionCycle": 112
+  }
+}

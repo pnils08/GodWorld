@@ -1,0 +1,478 @@
+{
+  "version": "SCHOOLS-SLICE-2",
+  "empty": false,
+  "cycle": 109,
+  "kind": "beat-schools",
+  "seat": {
+    "slug": "angela-reyes",
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "desk": "civic",
+    "domain": "schools",
+    "builder": "buildSchoolsSlice.js"
+  },
+  "hood": "Temescal",
+  "pulse": {
+    "className": "beat-schools",
+    "score": 100,
+    "label": "Temescal has the weakest school record on the table (index 6.8)",
+    "hood": "Temescal",
+    "source": "output/beats/Neighborhood_Demographics.jsonl @C109"
+  },
+  "story": {
+    "kind": "beat-schools",
+    "angle": "Enrollment moved in Fruitvale — Temescal has the weakest school record on the table (index 6.8) — the students and teachers who live it",
+    "label": "Temescal has the weakest school record on the table (index 6.8)",
+    "hookLine": "4 students and educators in Temescal; the table says why their school reads the way it does.",
+    "hood": "Temescal",
+    "citizens": [
+      "Lo Thoop (POP-00667)",
+      "Patricia Nolan (POP-00729)",
+      "Jun Leu (POP-00994)",
+      "Salma Navarro (POP-00975)"
+    ],
+    "popids": [
+      "POP-00667",
+      "POP-00729",
+      "POP-00994",
+      "POP-00975"
+    ],
+    "ref": "output/beats/Neighborhood_Demographics.jsonl @C109",
+    "cycle": 109
+  },
+  "approach": "Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00667",
+      "name": "Lo Thoop",
+      "role": "Creative Writing Teacher",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Lo Thoop — Creative Writing Teacher — Temescal",
+      "why": "on the ledger in Temescal (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-00729",
+      "name": "Patricia Nolan",
+      "role": "Retired teacher",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Patricia Nolan — Retired teacher — Temescal",
+      "why": "on the ledger in Temescal (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-00994",
+      "name": "Jun Leu",
+      "role": "student",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Jun Leu — student — Temescal",
+      "why": "on the ledger in Temescal (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-00975",
+      "name": "Salma Navarro",
+      "role": "student",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Salma Navarro — student — Temescal",
+      "why": "on the ledger in Temescal (Simulation_Ledger)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Enrollment moved: Fruitvale +10 students, Glenview +10 students, Dimond +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students vs C108",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C109"
+    },
+    {
+      "text": "Ranked by school quality index: Rockridge 8.87, Baylight District 8.08, West Oakland 8.06, Piedmont Ave 8.06, Brooklyn 8.05, Laurel 7.98, Adams Point 7.98, Jack London 7.96, Fruitvale 7.94, Lake Merritt 7.93, Downtown 7.9, Grand Lake 7.88, Uptown 7.82, Eastlake 6.98, Chinatown 6.97, KONO 6.97, Glenview 6.96, Dimond 6.96, San Antonio 6.92, Ivy Hill 6.92, East Oakland 6.9, Temescal 6.8 (22 neighborhoods)",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+    },
+    {
+      "text": "Temescal: school quality index 6.8 (was 6.9 at C108), graduation 85.67%, college-ready 57%, teacher quality 6.96, funding 11,500, 311 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+    },
+    {
+      "text": "Rockridge: school quality index 8.87 (was 8.94 at C108), graduation 94.91%, college-ready 77.4%, teacher quality 9.04, funding 15,000, 244 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+    },
+    {
+      "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.84%; per-hood funding on the table totals 286,000",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C109"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Enrollment moved in Fruitvale — Temescal has the weakest school record on the table (index 6.8) — the students and teachers who live it",
+    "hookLine": "4 students and educators in Temescal; the table says why their school reads the way it does.",
+    "anchorFacts": [
+      "Enrollment moved: Fruitvale +10 students, Glenview +10 students, Dimond +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students vs C108",
+      "Ranked by school quality index: Rockridge 8.87, Baylight District 8.08, West Oakland 8.06, Piedmont Ave 8.06, Brooklyn 8.05, Laurel 7.98, Adams Point 7.98, Jack London 7.96, Fruitvale 7.94, Lake Merritt 7.93, Downtown 7.9, Grand Lake 7.88, Uptown 7.82, Eastlake 6.98, Chinatown 6.97, KONO 6.97, Glenview 6.96, Dimond 6.96, San Antonio 6.92, Ivy Hill 6.92, East Oakland 6.9, Temescal 6.8 (22 neighborhoods)",
+      "Temescal: school quality index 6.8 (was 6.9 at C108), graduation 85.67%, college-ready 57%, teacher quality 6.96, funding 11,500, 311 students",
+      "Rockridge: school quality index 8.87 (was 8.94 at C108), graduation 94.91%, college-ready 77.4%, teacher quality 9.04, funding 15,000, 244 students",
+      "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.84%; per-hood funding on the table totals 286,000"
+    ],
+    "evidence": [
+      {
+        "text": "Enrollment moved: Fruitvale +10 students, Glenview +10 students, Dimond +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students vs C108",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C109"
+      },
+      {
+        "text": "Ranked by school quality index: Rockridge 8.87, Baylight District 8.08, West Oakland 8.06, Piedmont Ave 8.06, Brooklyn 8.05, Laurel 7.98, Adams Point 7.98, Jack London 7.96, Fruitvale 7.94, Lake Merritt 7.93, Downtown 7.9, Grand Lake 7.88, Uptown 7.82, Eastlake 6.98, Chinatown 6.97, KONO 6.97, Glenview 6.96, Dimond 6.96, San Antonio 6.92, Ivy Hill 6.92, East Oakland 6.9, Temescal 6.8 (22 neighborhoods)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+      },
+      {
+        "text": "Temescal: school quality index 6.8 (was 6.9 at C108), graduation 85.67%, college-ready 57%, teacher quality 6.96, funding 11,500, 311 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+      },
+      {
+        "text": "Rockridge: school quality index 8.87 (was 8.94 at C108), graduation 94.91%, college-ready 77.4%, teacher quality 9.04, funding 15,000, 244 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+      },
+      {
+        "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.84%; per-hood funding on the table totals 286,000",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C109"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 108
+    },
+    "hooks": [
+      {
+        "text": "Lake Merritt's student population up 13%. Young families moving in? School capacity angle.",
+        "angle": "general coverage",
+        "domain": "EDUCATION",
+        "hood": "Lake Merritt",
+        "priority": 2
+      }
+    ],
+    "note": null,
+    "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05"
+  },
+  "table": [
+    {
+      "hood": "Rockridge",
+      "students": 244,
+      "sqi": 8.87,
+      "grad": 94.91,
+      "college": 77.4,
+      "teacher": 9.04,
+      "funding": 15000
+    },
+    {
+      "hood": "Baylight District",
+      "students": 66,
+      "sqi": 8.08,
+      "grad": 90.87,
+      "college": 65.75,
+      "teacher": 8.04,
+      "funding": 14500
+    },
+    {
+      "hood": "West Oakland",
+      "students": 306,
+      "sqi": 8.06,
+      "grad": 90.85,
+      "college": 65.72,
+      "teacher": 8.04,
+      "funding": 14500
+    },
+    {
+      "hood": "Piedmont Ave",
+      "students": 246,
+      "sqi": 8.06,
+      "grad": 92.48,
+      "college": 71,
+      "teacher": 8.04,
+      "funding": 14500
+    },
+    {
+      "hood": "Brooklyn",
+      "students": 345,
+      "sqi": 8.05,
+      "grad": 90.85,
+      "college": 65.71,
+      "teacher": 8.04,
+      "funding": 14500
+    },
+    {
+      "hood": "Laurel",
+      "students": 334,
+      "sqi": 7.98,
+      "grad": 89.17,
+      "college": 61.54,
+      "teacher": 7.98,
+      "funding": 13000
+    },
+    {
+      "hood": "Adams Point",
+      "students": 271,
+      "sqi": 7.98,
+      "grad": 89.18,
+      "college": 61.54,
+      "teacher": 7.98,
+      "funding": 13000
+    },
+    {
+      "hood": "Jack London",
+      "students": 197,
+      "sqi": 7.96,
+      "grad": 90.78,
+      "college": 65.56,
+      "teacher": 8.04,
+      "funding": 14500
+    },
+    {
+      "hood": "Fruitvale",
+      "students": 418,
+      "sqi": 7.94,
+      "grad": 89.15,
+      "college": 61.47,
+      "teacher": 7.98,
+      "funding": 13000
+    },
+    {
+      "hood": "Lake Merritt",
+      "students": 60,
+      "sqi": 7.93,
+      "grad": 90.76,
+      "college": 65.49,
+      "teacher": 8.04,
+      "funding": 14500
+    },
+    {
+      "hood": "Downtown",
+      "students": 238,
+      "sqi": 7.9,
+      "grad": 90.74,
+      "college": 65.45,
+      "teacher": 8.04,
+      "funding": 14500
+    },
+    {
+      "hood": "Grand Lake",
+      "students": 311,
+      "sqi": 7.88,
+      "grad": 89.1,
+      "college": 61.37,
+      "teacher": 7.98,
+      "funding": 13000
+    },
+    {
+      "hood": "Uptown",
+      "students": 64,
+      "sqi": 7.82,
+      "grad": 89.07,
+      "college": 61.28,
+      "teacher": 7.98,
+      "funding": 13000
+    },
+    {
+      "hood": "Eastlake",
+      "students": 307,
+      "sqi": 6.98,
+      "grad": 86.6,
+      "college": 55.19,
+      "teacher": 6.98,
+      "funding": 12000
+    },
+    {
+      "hood": "Chinatown",
+      "students": 311,
+      "sqi": 6.97,
+      "grad": 86.59,
+      "college": 55.17,
+      "teacher": 6.98,
+      "funding": 12000
+    },
+    {
+      "hood": "KONO",
+      "students": 62,
+      "sqi": 6.97,
+      "grad": 86.6,
+      "college": 55.19,
+      "teacher": 6.98,
+      "funding": 12000
+    },
+    {
+      "hood": "Glenview",
+      "students": 379,
+      "sqi": 6.96,
+      "grad": 86.59,
+      "college": 55.18,
+      "teacher": 6.98,
+      "funding": 12000
+    },
+    {
+      "hood": "Dimond",
+      "students": 347,
+      "sqi": 6.96,
+      "grad": 86.59,
+      "college": 55.18,
+      "teacher": 6.98,
+      "funding": 12000
+    },
+    {
+      "hood": "San Antonio",
+      "students": 384,
+      "sqi": 6.92,
+      "grad": 84.94,
+      "college": 51.86,
+      "teacher": 6.92,
+      "funding": 11000
+    },
+    {
+      "hood": "Ivy Hill",
+      "students": 323,
+      "sqi": 6.92,
+      "grad": 84.94,
+      "college": 51.86,
+      "teacher": 6.92,
+      "funding": 11000
+    },
+    {
+      "hood": "East Oakland",
+      "students": 471,
+      "sqi": 6.9,
+      "grad": 84.93,
+      "college": 51.83,
+      "teacher": 6.92,
+      "funding": 11000
+    },
+    {
+      "hood": "Temescal",
+      "students": 311,
+      "sqi": 6.8,
+      "grad": 85.67,
+      "college": 57,
+      "teacher": 6.96,
+      "funding": 11500
+    }
+  ],
+  "enrollmentMoves": [
+    {
+      "hood": "Fruitvale",
+      "from": 408,
+      "to": 418
+    },
+    {
+      "hood": "Glenview",
+      "from": 369,
+      "to": 379
+    },
+    {
+      "hood": "Dimond",
+      "from": 337,
+      "to": 347
+    },
+    {
+      "hood": "San Antonio",
+      "from": 374,
+      "to": 384
+    },
+    {
+      "hood": "East Oakland",
+      "from": 461,
+      "to": 471
+    },
+    {
+      "hood": "Brooklyn",
+      "from": 336,
+      "to": 345
+    },
+    {
+      "hood": "Laurel",
+      "from": 325,
+      "to": 334
+    },
+    {
+      "hood": "Baylight District",
+      "from": 58,
+      "to": 66
+    },
+    {
+      "hood": "West Oakland",
+      "from": 298,
+      "to": 306
+    },
+    {
+      "hood": "Grand Lake",
+      "from": 303,
+      "to": 311
+    },
+    {
+      "hood": "Eastlake",
+      "from": 299,
+      "to": 307
+    },
+    {
+      "hood": "Chinatown",
+      "from": 303,
+      "to": 311
+    },
+    {
+      "hood": "KONO",
+      "from": 54,
+      "to": 62
+    },
+    {
+      "hood": "Ivy Hill",
+      "from": 315,
+      "to": 323
+    },
+    {
+      "hood": "Temescal",
+      "from": 303,
+      "to": 311
+    },
+    {
+      "hood": "Rockridge",
+      "from": 237,
+      "to": 244
+    },
+    {
+      "hood": "Adams Point",
+      "from": 264,
+      "to": 271
+    },
+    {
+      "hood": "Lake Merritt",
+      "from": 53,
+      "to": 60
+    },
+    {
+      "hood": "Uptown",
+      "from": 57,
+      "to": 64
+    },
+    {
+      "hood": "Piedmont Ave",
+      "from": 240,
+      "to": 246
+    },
+    {
+      "hood": "Downtown",
+      "from": 232,
+      "to": 238
+    },
+    {
+      "hood": "Jack London",
+      "from": 192,
+      "to": 197
+    }
+  ],
+  "district": "Oakland Unified School District",
+  "pointers": [
+    "output/beats/Neighborhood_Demographics.jsonl @C109",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Angela Reyes this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

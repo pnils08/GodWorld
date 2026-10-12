@@ -1,0 +1,452 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00156",
+    "name": "Angela Reyes",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Enrollment moved in Fruitvale — Temescal has the weakest school record on the table (index 6.8) — the students and teachers who live it",
+    "approach": "Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "schools",
+      "hood": "Temescal",
+      "facts": [
+        "Enrollment moved: Fruitvale +10 students, Glenview +10 students, Dimond +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students vs C108",
+        "Ranked by school quality index: Rockridge 8.87, Baylight District 8.08, West Oakland 8.06, Piedmont Ave 8.06, Brooklyn 8.05, Laurel 7.98, Adams Point 7.98, Jack London 7.96, Fruitvale 7.94, Lake Merritt 7.93, Downtown 7.9, Grand Lake 7.88, Uptown 7.82, Eastlake 6.98, Chinatown 6.97, KONO 6.97, Glenview 6.96, Dimond 6.96, San Antonio 6.92, Ivy Hill 6.92, East Oakland 6.9, Temescal 6.8 (22 neighborhoods)",
+        "Temescal: school quality index 6.8 (was 6.9 at C108), graduation 85.67%, college-ready 57%, teacher quality 6.96, funding 11,500, 311 students",
+        "Rockridge: school quality index 8.87 (was 8.94 at C108), graduation 94.91%, college-ready 77.4%, teacher quality 9.04, funding 15,000, 244 students",
+        "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.84%; per-hood funding on the table totals 286,000"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "Lake Merritt's student population up 13%. Young families moving in? School capacity angle. (general coverage)"
+      ],
+      "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-schools",
+    "hood": "Temescal",
+    "src": "output/beats/Neighborhood_Demographics.jsonl @C109",
+    "plan": {
+      "focus": "The lived experience of education in Temescal versus the statistical reality, particularly the gap between graduation rates (85.67%) and college readiness (57%).",
+      "closeQuestion": "Is Temescal's educational challenge about resources, expectations, or something harder to measure?"
+    },
+    "runningStories": [
+      "The West Oakland Crime Spike [West Oakland] — ENDED this week after 5 week(s)",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — under way",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — under way",
+      "Temescal Community Health Center — operational [Temescal] — under way",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — under way",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — announced [Downtown] — under way"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00667",
+        "name": "Lo Thoop",
+        "profile": "Lo Thoop — Creative Writing Teacher — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00729",
+        "name": "Patricia Nolan",
+        "profile": "Patricia Nolan — Retired teacher — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00994",
+        "name": "Jun Leu",
+        "profile": "Jun Leu — student — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00975",
+        "name": "Salma Navarro",
+        "profile": "Salma Navarro — student — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00667-7aff0149db",
+        "pop": "POP-00667",
+        "name": "Lo Thoop",
+        "quote": "You know, living here in Temescal, I’ve seen kids graduate—they walk across that stage, families cheering—but then there’s this quiet worry afterward. Are they really ready for what’s next? It’s like we’re celebrating the finish line, but the race isn’t over. I teach creative writing, and I see it in their essays—bright ideas, but sometimes they’re missing the tools to build on them. It’s not just about getting them out the door; it’s about making sure they’re equipped to walk through the next one.",
+        "factIds": [
+          "F-a85bff5097ca"
+        ],
+        "src": "packet.W2[POP-00667]"
+      },
+      {
+        "id": "Q-POP-00729-c181c953a6",
+        "pop": "POP-00729",
+        "name": "Patricia Nolan",
+        "quote": "You know, after teaching for so many years, I've seen kids walk across that graduation stage who can barely write a proper paragraph. The numbers might say 85% graduate, but half of them aren't ready for what comes next. It's not just about passing classes—it's about whether these kids can actually think critically when they leave here. We celebrate the diploma, but we're not always honest about what it really means.",
+        "factIds": [
+          "F-a85bff5097ca"
+        ],
+        "src": "packet.W2[POP-00729]"
+      },
+      {
+        "id": "Q-POP-00994-1c2aacbca0",
+        "pop": "POP-00994",
+        "name": "Jun Leu",
+        "quote": "I don't really think about graduation rates or college stuff yet. At school, we just do our work and go home. Some kids talk about college, but most just wanna play basketball or hang out after class. My cousin Ira says high school is harder than middle school though.",
+        "factIds": [
+          "F-a85bff5097ca",
+          "F-7ba187a19598"
+        ],
+        "src": "packet.W2[POP-00994]"
+      },
+      {
+        "id": "Q-POP-00975-86d9e08c72",
+        "pop": "POP-00975",
+        "name": "Salma Navarro",
+        "quote": "I don't really think about the numbers. At school, everyone's just trying to get through the day. Some teachers really push us, but others just let things slide. My brother Hector says high school was like that too—you could graduate easy, but actually being ready for what's next? That's different.",
+        "factIds": [
+          "F-a85bff5097ca"
+        ],
+        "src": "packet.W2[POP-00975]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Angela Reyes",
+        "text": "Possible mismatch between standardized metrics and actual student needs",
+        "usable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "Community perception of school quality affecting teacher retention",
+        "usable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "Impact of neighborhood changes on school demographics",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal has the weakest school record on the table (index 6.8)",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C109",
+      "id": "F-5321f9b899bc"
+    },
+    {
+      "t": "FACT",
+      "text": "4 students and educators in Temescal; the table says why their school reads the way it does.",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C109",
+      "id": "F-7ba187a19598"
+    },
+    {
+      "t": "FACT",
+      "text": "Enrollment moved: Fruitvale +10 students, Glenview +10 students, Dimond +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students vs C108",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C109",
+      "id": "F-3fc65601aece"
+    },
+    {
+      "t": "FACT",
+      "text": "Ranked by school quality index: Rockridge 8.87, Baylight District 8.08, West Oakland 8.06, Piedmont Ave 8.06, Brooklyn 8.05, Laurel 7.98, Adams Point 7.98, Jack London 7.96, Fruitvale 7.94, Lake Merritt 7.93, Downtown 7.9, Grand Lake 7.88, Uptown 7.82, Eastlake 6.98, Chinatown 6.97, KONO 6.97, Glenview 6.96, Dimond 6.96, San Antonio 6.92, Ivy Hill 6.92, East Oakland 6.9, Temescal 6.8 (22 neighborhoods)",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C109",
+      "id": "F-b63d2a9c7335"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal: school quality index 6.8 (was 6.9 at C108), graduation 85.67%, college-ready 57%, teacher quality 6.96, funding 11,500, 311 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C109",
+      "id": "F-a85bff5097ca"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge: school quality index 8.87 (was 8.94 at C108), graduation 94.91%, college-ready 77.4%, teacher quality 9.04, funding 15,000, 244 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C109",
+      "id": "F-828e89befbcb"
+    },
+    {
+      "t": "FACT",
+      "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.84%; per-hood funding on the table totals 286,000",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C109",
+      "id": "F-4eaa79d30344"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed school, youth, or apprenticeship Initiative into a warm account of program stability without inventing participants, institutions, access, or outcomes.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "warm, brief third-person education reporting",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-backed school, youth-program, apprenticeship, or continuity fact",
+      "closing": "the next participant, access, continuity, or outcome record still needed"
+    },
+    "authorizedTexture": [
+      "plain-language translation of a supplied education or youth-program implementation fact",
+      "a careful stability or access question that remains explicitly unanswered",
+      "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+    ],
+    "textureConditions": [
+      "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
+      "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
+      "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
+      "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
+      "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-d7c98d365dbb",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-5321f9b899bc",
+        "t": "FACT",
+        "text": "Temescal has the weakest school record on the table (index 6.8)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+      },
+      {
+        "id": "F-7ba187a19598",
+        "t": "FACT",
+        "text": "4 students and educators in Temescal; the table says why their school reads the way it does.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+      },
+      {
+        "id": "F-3fc65601aece",
+        "t": "FACT",
+        "text": "Enrollment moved: Fruitvale +10 students, Glenview +10 students, Dimond +10 students, San Antonio +10 students, East Oakland +10 students, Brooklyn +9 students vs C108",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C109"
+      },
+      {
+        "id": "F-b63d2a9c7335",
+        "t": "FACT",
+        "text": "Ranked by school quality index: Rockridge 8.87, Baylight District 8.08, West Oakland 8.06, Piedmont Ave 8.06, Brooklyn 8.05, Laurel 7.98, Adams Point 7.98, Jack London 7.96, Fruitvale 7.94, Lake Merritt 7.93, Downtown 7.9, Grand Lake 7.88, Uptown 7.82, Eastlake 6.98, Chinatown 6.97, KONO 6.97, Glenview 6.96, Dimond 6.96, San Antonio 6.92, Ivy Hill 6.92, East Oakland 6.9, Temescal 6.8 (22 neighborhoods)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+      },
+      {
+        "id": "F-a85bff5097ca",
+        "t": "FACT",
+        "text": "Temescal: school quality index 6.8 (was 6.9 at C108), graduation 85.67%, college-ready 57%, teacher quality 6.96, funding 11,500, 311 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+      },
+      {
+        "id": "F-828e89befbcb",
+        "t": "FACT",
+        "text": "Rockridge: school quality index 8.87 (was 8.94 at C108), graduation 94.91%, college-ready 77.4%, teacher quality 9.04, funding 15,000, 244 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C109"
+      },
+      {
+        "id": "F-4eaa79d30344",
+        "t": "FACT",
+        "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.84%; per-hood funding on the table totals 286,000",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C109"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00667-7aff0149db",
+        "speakerId": "POP-00667",
+        "speakerName": "Lo Thoop",
+        "text": "You know, living here in Temescal, I’ve seen kids graduate—they walk across that stage, families cheering—but then there’s this quiet worry afterward. Are they really ready for what’s next? It’s like we’re celebrating the finish line, but the race isn’t over. I teach creative writing, and I see it in their essays—bright ideas, but sometimes they’re missing the tools to build on them. It’s not just about getting them out the door; it’s about making sure they’re equipped to walk through the next one.",
+        "factIds": [
+          "F-a85bff5097ca"
+        ],
+        "src": "packet.W2[POP-00667]"
+      },
+      {
+        "id": "Q-POP-00729-c181c953a6",
+        "speakerId": "POP-00729",
+        "speakerName": "Patricia Nolan",
+        "text": "You know, after teaching for so many years, I've seen kids walk across that graduation stage who can barely write a proper paragraph. The numbers might say 85% graduate, but half of them aren't ready for what comes next. It's not just about passing classes—it's about whether these kids can actually think critically when they leave here. We celebrate the diploma, but we're not always honest about what it really means.",
+        "factIds": [
+          "F-a85bff5097ca"
+        ],
+        "src": "packet.W2[POP-00729]"
+      },
+      {
+        "id": "Q-POP-00994-1c2aacbca0",
+        "speakerId": "POP-00994",
+        "speakerName": "Jun Leu",
+        "text": "I don't really think about graduation rates or college stuff yet. At school, we just do our work and go home. Some kids talk about college, but most just wanna play basketball or hang out after class. My cousin Ira says high school is harder than middle school though.",
+        "factIds": [
+          "F-a85bff5097ca",
+          "F-7ba187a19598"
+        ],
+        "src": "packet.W2[POP-00994]"
+      },
+      {
+        "id": "Q-POP-00975-86d9e08c72",
+        "speakerId": "POP-00975",
+        "speakerName": "Salma Navarro",
+        "text": "I don't really think about the numbers. At school, everyone's just trying to get through the day. Some teachers really push us, but others just let things slide. My brother Hector says high school was like that too—you could graduate easy, but actually being ready for what's next? That's different.",
+        "factIds": [
+          "F-a85bff5097ca"
+        ],
+        "src": "packet.W2[POP-00975]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00667",
+        "name": "Lo Thoop",
+        "profile": "Lo Thoop — Creative Writing Teacher — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00729",
+        "name": "Patricia Nolan",
+        "profile": "Patricia Nolan — Retired teacher — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00994",
+        "name": "Jun Leu",
+        "profile": "Jun Leu — student — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00975",
+        "name": "Salma Navarro",
+        "profile": "Salma Navarro — student — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Angela Reyes",
+        "text": "Possible mismatch between standardized metrics and actual student needs",
+        "publishable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "Community perception of school quality affecting teacher retention",
+        "publishable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "Impact of neighborhood changes on school demographics",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language translation of a supplied education or youth-program implementation fact",
+      "a careful stability or access question that remains explicitly unanswered",
+      "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+    ],
+    "textureConditions": [
+      "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
+      "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
+      "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
+      "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
+      "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+    ]
+  }
+}

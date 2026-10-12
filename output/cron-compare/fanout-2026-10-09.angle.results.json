@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-09",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Kai Marston",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Sharon Okafor",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Celeste Tran",
+      "desk": "wire",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-10-09T11:17:22.921Z"
+}

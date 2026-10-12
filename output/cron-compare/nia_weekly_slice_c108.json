@@ -1,0 +1,70 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 108,
+  "empty": false,
+  "pilots": [
+    {
+      "POPID": "POP-00663",
+      "episodes": 2,
+      "creditsDelta": 1,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": true,
+      "name": "Soo Loo",
+      "hood": "Downtown"
+    },
+    {
+      "POPID": "POP-00300",
+      "episodes": 2,
+      "creditsDelta": 98,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": true,
+      "name": "Belle Lopez",
+      "hood": "Jack London"
+    },
+    {
+      "POPID": "POP-00842",
+      "episodes": 2,
+      "creditsDelta": 0,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": true,
+      "name": "Wanjiru Liu",
+      "hood": "Rockridge"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-09-26T01:34:48.313Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00143",
+      "Holder": "Clarissa Dane",
+      "Episodes": 9,
+      "CreditsTotal": 303,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 3,
+      "LastAiredCycle": 107,
+      "CyclesLed": 5,
+      "CurrentStreak": 5
+    }
+  },
+  "story": {
+    "ref": "undocked-week:weekly-c108",
+    "label": "UNDOCKED week-in-review c108",
+    "kind": "undocked-digest",
+    "angle": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Soo Loo, Belle Lopez, Wanjiru Liu), who is climbing and who is fading. Standings: Clarissa Dane leads the board — rank #1, 5 cycle(s) led, current streak 5. Per-pilot facts: Soo Loo — 2 episode(s), partial credits 1, combat 0, mishaps 0; Belle Lopez — 2 episode(s), partial credits 98, combat 0, mishaps 0; Wanjiru Liu — 2 episode(s), partial credits 0, combat 0, mishaps 0.",
+    "citizens": [
+      "Soo Loo — UNDOCKED cast pilot",
+      "Belle Lopez — UNDOCKED cast pilot",
+      "Wanjiru Liu — UNDOCKED cast pilot"
+    ],
+    "popids": [
+      "POP-00663",
+      "POP-00300",
+      "POP-00842"
+    ]
+  },
+  "generatedAt": "2026-09-26T13:15:01.700Z"
+}

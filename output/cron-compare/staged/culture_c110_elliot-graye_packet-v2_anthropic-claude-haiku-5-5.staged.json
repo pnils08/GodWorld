@@ -1,0 +1,37 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "110",
+  "persona": "elliot-graye",
+  "byline": "Elliot Graye",
+  "bylinePopid": "POP-00012",
+  "article": "output/cron-compare/staged/culture_c110_elliot-graye_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Grand Lake"
+    ],
+    "claims": [
+      {
+        "claim": "8 faith events on the record since C104 · Or Hashalom Renewal Community in Grand Lake — 7 named on the record",
+        "sourceRef": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\""
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-aa00c406ea7b",
+    "draftSha256": "7c42d1d7f5cf80aa6591aebd2d2d98bffbb18bcfaf499235800f3122fe6604b7",
+    "verdict": "output/cron-compare/culture_c110_elliot-graye_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-08T23:15:27.146Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.643Z"
+}

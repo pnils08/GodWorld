@@ -1,0 +1,58 @@
+{
+  "office": "council_d6",
+  "cycle": 108,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "District 6 is focusing on preserving the steady street commerce and low crime on Piedmont Avenue while demanding strict municipal oversight across major citywide capital projects. I am establishing concrete oversight criteria for Baylight Phase II remediation and supporting the prompt publication of verifiable job placement metrics for the Youth Apprenticeship Pipeline.",
+  "statements": [
+    {
+      "statementId": "STMT-108-council_d6-001",
+      "type": "district_statement",
+      "topic": "Piedmont Avenue Corridor Strategy and Merchant Sentiment",
+      "initiative": null,
+      "decision": "Deploy a targeted merchant engagement and commercial retention strategy for the Piedmont Avenue corridor",
+      "quote": "Piedmont Avenue demonstrates that low crime and steady foot traffic come from disciplined community stability, but we must stay attentive to our local merchants to keep that foundation solid.",
+      "fullStatement": "While Piedmont Avenue maintains busy street trade and low crime, keeping merchant confidence high requires steady municipal responsiveness rather than complacency. I am implementing a direct merchant engagement strategy for District 6 to ensure city services, lighting, and sidewalk maintenance directly support our local storefronts. Sustaining small business stability in Piedmont Avenue and Montclair remains the core priority of this office.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-council_d6-002",
+      "type": "vote_statement",
+      "topic": "Baylight District Phase II Remediation Oversight",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Establish independent council oversight criteria and monitoring standards for Phase II remediation",
+      "quote": "Baylight's remediation cannot proceed on generic assurances; every truckload, environmental standard, and contract milestone must be accounted for cleanly.",
+      "fullStatement": "As site remediation advances under Phase II, District 6 is filing formal oversight criteria to verify environmental remediation milestones and expenditure controls. Large-scale development requires rigorous transparency at every phase. Shovels moving on the ground must be matched by meticulous compliance and fiscal accounting before further capital phases advance.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-council_d6-003",
+      "type": "vote_statement",
+      "topic": "Youth Apprenticeship Pipeline Placement Metrics",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Approve the immediate publication of verifiable cohort placement metrics",
+      "quote": "Opening enrollment is only the start; municipal competence is proven when training converts directly into documented, long-term employment.",
+      "fullStatement": "I support the immediate publication of placement metrics for the first training cohort. Transparent reporting on verifiable job placements is the only reliable standard for evaluating workforce programs. The public and this council need clear data showing that enrolled participants are successfully transitioning into permanent career placements.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-council_d6-004",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund Month-Eight Disbursement",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Authorize month-eight fund disbursement and continued downtown outreach",
+      "quote": "Targeted stabilization works when every dollar is accounted for and delivered cleanly to the commercial storefronts that need it.",
+      "fullStatement": "I support completing the month-eight disbursements and continuing outreach to quiet commercial corridors. Maintaining rigorous auditing ensures stabilization funds prevent displacement and support local merchant viability without fiscal drift.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-108-council_d6-005",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative Expansion",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Support protocol-driven phased expansion following District 1 evaluation",
+      "quote": "Expanding alternative response requires strict operational protocols and verified dispatch performance at every stage.",
+      "fullStatement": "With District 1 operational evaluation complete, expanding the response model citywide must remain tethered to clear dispatch standards and measurable response times. I support moving forward with structured oversight to ensure public safety coordination remains seamless across all districts.",
+      "trackerUpdates": {}
+    }
+  ]
+}

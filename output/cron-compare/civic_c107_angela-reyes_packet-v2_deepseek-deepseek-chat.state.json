@@ -1,0 +1,485 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00156",
+    "name": "Angela Reyes",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Enrollment moved in Fruitvale — KONO has the weakest school record on the table (index 7) — the students and teachers who live it",
+    "approach": "Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "schools",
+      "hood": "KONO",
+      "facts": [
+        "Enrollment moved: Fruitvale +11 students, East Oakland +10 students, San Antonio +10 students, Glenview +10 students, Brooklyn +9 students, Laurel +9 students vs C106",
+        "The school quality table is unchanged since C106 — no score moved this cycle.",
+        "Ranked by school quality index: Rockridge 9, Fruitvale 8, Brooklyn 8, Laurel 8, Grand Lake 8, West Oakland 8, Adams Point 8, Piedmont Ave 8, Downtown 8, Jack London 8, Baylight District 8, Uptown 8, Lake Merritt 8, East Oakland 7, San Antonio 7, Glenview 7, Dimond 7, Ivy Hill 7, Temescal 7, Chinatown 7, Eastlake 7, KONO 7 (22 neighborhoods)",
+        "KONO: school quality index 7, graduation 87%, college-ready 56%, teacher quality 7, funding 12,000, 46 students",
+        "Rockridge: school quality index 9, graduation 95%, college-ready 78%, teacher quality 9, funding 15,000, 230 students",
+        "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.51%; per-hood funding on the table totals 286,000"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": "no students or educators on the ledger in KONO — the educators below are elsewhere in the city",
+      "engineHooks": [
+        "Lake Merritt's student population up 18%. Young families moving in? School capacity angle. (general coverage)"
+      ],
+      "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "beat-schools",
+    "hood": "KONO",
+    "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+    "plan": {
+      "focus": "The disconnect between KONO's stable-but-low school quality index and the lived experience of its 46 students, despite unchanged citywide metrics.",
+      "closeQuestion": "What would it take for KONO's next enrollment shift to be upward?"
+    },
+    "openThreads": [
+      {
+        "slug": "west-oakland-elio-perez-initiative",
+        "label": "west-oakland-elio-perez-initiative | C104→C106 | 6 article(s) | advanced 3, opened 3",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00201",
+          "POP-00722",
+          "POP-00794",
+          "POP-00961"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "city-elio-perez-anomaly",
+        "label": "city-elio-perez-anomaly | C104→C106 | 5 article(s) | advanced 3, opened 2",
+        "hood": null,
+        "popids": [
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "downtown-merkin-jumper-undocked",
+        "label": "downtown-merkin-jumper-undocked | C104→C106 | 3 article(s) | advanced 1, opened 2",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00688",
+          "POP-00212",
+          "POP-00224",
+          "POP-00225",
+          "POP-01061",
+          "POP-00753"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "fruitvale-clarissa-dane-undocked",
+        "label": "fruitvale-clarissa-dane-undocked | C105→C106 | 3 article(s) | opened 3",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00143",
+          "POP-00198",
+          "POP-00644",
+          "POP-00744"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "rockridge-mei-wong-beat-schools",
+        "label": "rockridge-mei-wong-beat-schools | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-01036",
+          "POP-00743",
+          "POP-00287",
+          "POP-00742"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "city-mina-linas-beat-weather",
+        "label": "city-mina-linas-beat-weather | C106→C106 | 2 article(s) | opened 2",
+        "hood": null,
+        "popids": [
+          "POP-00183",
+          "POP-00135",
+          "POP-00291",
+          "POP-00178"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "downtown-eunice-marston-anomaly",
+        "label": "downtown-eunice-marston-anomaly | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00753",
+          "POP-00688",
+          "POP-01061"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "chinatown-yu-zen-beat-health",
+        "label": "chinatown-yu-zen-beat-health | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Chinatown",
+        "popids": [
+          "POP-00194",
+          "POP-00801"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "downtown-jessie-hess-beat-safety",
+        "label": "downtown-jessie-hess-beat-safety | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00212"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "city-eleanor-rivera-beat-transit",
+        "label": "city-eleanor-rivera-beat-transit | C106→C106 | 1 article(s) | opened 1",
+        "hood": null,
+        "popids": [
+          "POP-00617",
+          "POP-00218",
+          "POP-00280",
+          "POP-00338"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "temescal-sonia-parikh-anomaly",
+        "label": "temescal-sonia-parikh-anomaly | C104→C105 | 3 article(s) | advanced 2, opened 1",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00745",
+          "POP-00761",
+          "POP-00775",
+          "POP-00170",
+          "POP-00269",
+          "POP-00290"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety",
+        "label": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety | C104→C105 | 3 article(s) | opened 3",
+        "hood": "West Oakland,Fruitvale,East Oakland,West Oakland, Fruitvale, East Oakland",
+        "popids": [
+          "POP-00201",
+          "POP-00198",
+          "POP-00170",
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01036",
+        "name": "Mei Wong",
+        "profile": "Mei Wong — After-school program aide — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01036-d47206f93b",
+        "pop": "POP-01036",
+        "name": "Mei Wong",
+        "quote": "I don't work in KONO, so I can't speak directly to what's happening there with their schools. But here in Rockridge, I see how much difference it makes when a whole neighborhood comes together to support education. It's not just about the numbers—it's about the people showing up every day, the extra hours teachers put in, the way local businesses chip in. I imagine in smaller neighborhoods like KONO, where there's only 46 students, those personal connections might matter even more than what any index can measure.",
+        "factIds": [
+          "F-55be1be7576e",
+          "F-493bece5ee76"
+        ],
+        "src": "packet.W2[POP-01036]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Angela Reyes",
+        "text": "Families with means may be leveraging inter-district transfers despite KONO residency",
+        "usable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "The 56% college-ready rate could reflect language barriers not captured by the index",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C107",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-ac25a93a42d1"
+    },
+    {
+      "t": "FACT",
+      "text": "KONO has the weakest school record on the table (index 7)",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+      "id": "F-58f0a2258c55"
+    },
+    {
+      "t": "FACT",
+      "text": "5 educators on the ledger; the table says why their school reads the way it does.",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+      "id": "F-fa36155cbcef"
+    },
+    {
+      "t": "FACT",
+      "text": "Enrollment moved: Fruitvale +11 students, East Oakland +10 students, San Antonio +10 students, Glenview +10 students, Brooklyn +9 students, Laurel +9 students vs C106",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C107",
+      "id": "F-2ab005445e79"
+    },
+    {
+      "t": "FACT",
+      "text": "The school quality table is unchanged since C106 — no score moved this cycle.",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+      "id": "F-87a151462915"
+    },
+    {
+      "t": "FACT",
+      "text": "Ranked by school quality index: Rockridge 9, Fruitvale 8, Brooklyn 8, Laurel 8, Grand Lake 8, West Oakland 8, Adams Point 8, Piedmont Ave 8, Downtown 8, Jack London 8, Baylight District 8, Uptown 8, Lake Merritt 8, East Oakland 7, San Antonio 7, Glenview 7, Dimond 7, Ivy Hill 7, Temescal 7, Chinatown 7, Eastlake 7, KONO 7 (22 neighborhoods)",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+      "id": "F-594550d45bbc"
+    },
+    {
+      "t": "FACT",
+      "text": "KONO: school quality index 7, graduation 87%, college-ready 56%, teacher quality 7, funding 12,000, 46 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+      "id": "F-55be1be7576e"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge: school quality index 9, graduation 95%, college-ready 78%, teacher quality 9, funding 15,000, 230 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C107",
+      "id": "F-493bece5ee76"
+    },
+    {
+      "t": "FACT",
+      "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.51%; per-hood funding on the table totals 286,000",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C107",
+      "id": "F-3bbd8787d327"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed school, youth, or apprenticeship Initiative into a warm account of program stability without inventing participants, institutions, access, or outcomes.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "warm, brief third-person education reporting",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-backed school, youth-program, apprenticeship, or continuity fact",
+      "closing": "the next participant, access, continuity, or outcome record still needed"
+    },
+    "authorizedTexture": [
+      "plain-language translation of a supplied education or youth-program implementation fact",
+      "a careful stability or access question that remains explicitly unanswered",
+      "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+    ],
+    "textureConditions": [
+      "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
+      "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
+      "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
+      "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
+      "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-aa23e8f522f1",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-ac25a93a42d1",
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-58f0a2258c55",
+        "t": "FACT",
+        "text": "KONO has the weakest school record on the table (index 7)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107"
+      },
+      {
+        "id": "F-fa36155cbcef",
+        "t": "FACT",
+        "text": "5 educators on the ledger; the table says why their school reads the way it does.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107"
+      },
+      {
+        "id": "F-2ab005445e79",
+        "t": "FACT",
+        "text": "Enrollment moved: Fruitvale +11 students, East Oakland +10 students, San Antonio +10 students, Glenview +10 students, Brooklyn +9 students, Laurel +9 students vs C106",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C107"
+      },
+      {
+        "id": "F-87a151462915",
+        "t": "FACT",
+        "text": "The school quality table is unchanged since C106 — no score moved this cycle.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107"
+      },
+      {
+        "id": "F-594550d45bbc",
+        "t": "FACT",
+        "text": "Ranked by school quality index: Rockridge 9, Fruitvale 8, Brooklyn 8, Laurel 8, Grand Lake 8, West Oakland 8, Adams Point 8, Piedmont Ave 8, Downtown 8, Jack London 8, Baylight District 8, Uptown 8, Lake Merritt 8, East Oakland 7, San Antonio 7, Glenview 7, Dimond 7, Ivy Hill 7, Temescal 7, Chinatown 7, Eastlake 7, KONO 7 (22 neighborhoods)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107"
+      },
+      {
+        "id": "F-55be1be7576e",
+        "t": "FACT",
+        "text": "KONO: school quality index 7, graduation 87%, college-ready 56%, teacher quality 7, funding 12,000, 46 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107"
+      },
+      {
+        "id": "F-493bece5ee76",
+        "t": "FACT",
+        "text": "Rockridge: school quality index 9, graduation 95%, college-ready 78%, teacher quality 9, funding 15,000, 230 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107"
+      },
+      {
+        "id": "F-3bbd8787d327",
+        "t": "FACT",
+        "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 8.51%; per-hood funding on the table totals 286,000",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C107"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01036-d47206f93b",
+        "speakerId": "POP-01036",
+        "speakerName": "Mei Wong",
+        "text": "I don't work in KONO, so I can't speak directly to what's happening there with their schools. But here in Rockridge, I see how much difference it makes when a whole neighborhood comes together to support education. It's not just about the numbers—it's about the people showing up every day, the extra hours teachers put in, the way local businesses chip in. I imagine in smaller neighborhoods like KONO, where there's only 46 students, those personal connections might matter even more than what any index can measure.",
+        "factIds": [
+          "F-55be1be7576e",
+          "F-493bece5ee76"
+        ],
+        "src": "packet.W2[POP-01036]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01036",
+        "name": "Mei Wong",
+        "profile": "Mei Wong — After-school program aide — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Angela Reyes",
+        "text": "Families with means may be leveraging inter-district transfers despite KONO residency",
+        "publishable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "The 56% college-ready rate could reflect language barriers not captured by the index",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language translation of a supplied education or youth-program implementation fact",
+      "a careful stability or access question that remains explicitly unanswered",
+      "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+    ],
+    "textureConditions": [
+      "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
+      "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
+      "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
+      "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
+      "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+    ]
+  }
+}

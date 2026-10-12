@@ -1,0 +1,48 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "107",
+  "persona": "angela-reyes",
+  "byline": "Angela Reyes",
+  "bylinePopid": "POP-00156",
+  "article": "output/cron-compare/staged/civic_c107_angela-reyes_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Mei Wong",
+        "role": "quoted-source",
+        "popid": "POP-01036"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "rockridge-mei-wong-beat-schools",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "KONO"
+    ],
+    "claims": [
+      {
+        "claim": "I don't work in KONO, so I can't speak directly to what's happening there with their schools. But here in Rockridge, I see how much difference it makes when a whole neighborhood comes together to support education. It's not just about the numbers—it's about the people showing up every day, the extra hours teachers put in, the way local businesses chip in. I imagine in smaller neighborhoods like KONO, where there's only 46 students, those personal connections might matter even more than what any index can measure.",
+        "sourceRef": "citizenVoice PRESS Mei Wong"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-aa23e8f522f1",
+    "draftSha256": "d4d992edaacd57625b0e48c38f5b428bb44ab0d7824c470421e8c98a6809f659",
+    "verdict": "output/cron-compare/civic_c107_angela-reyes_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-15T23:17:14.521Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-19T17:00:02.042Z"
+}

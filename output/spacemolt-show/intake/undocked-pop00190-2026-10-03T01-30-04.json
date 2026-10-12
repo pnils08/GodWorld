@@ -1,0 +1,39 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-10-03T01:34:41.567Z",
+  "POPID": "POP-00190",
+  "Cycle": 109,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00190-2026-10-03T01-30-04",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00190-2026-10-03T01-30-04.json",
+  "Holder": "Jackson Sift",
+  "CreditsDelta": 14,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Jackson Sift credits=14 systems=",
+  "DecidedAt": "2026-10-03T01:34:41.569Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 109,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00190",
+    "Holder": "Jackson Sift",
+    "EpisodeId": "undocked-pop00190-Y3C5-e2",
+    "CreditsDelta": 14,
+    "Systems": [],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00190-2026-10-03T01-30-04.json"
+  }
+}

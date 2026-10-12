@@ -1,0 +1,368 @@
+{
+  "date": "2026-09-10",
+  "cycle": 106,
+  "quotas": {
+    "grid": [
+      "elliot-graye",
+      "simon-leary",
+      "hal-richmond",
+      "talia-finch"
+    ],
+    "weekday": 4
+  },
+  "assignments": [
+    {
+      "desk": "culture",
+      "name": "Elliot Graye",
+      "popid": "POP-00012",
+      "beatDomain": "COMMUNITY",
+      "persona": "elliot-graye",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 4,
+      "story": {
+        "kind": "beat-faith",
+        "angle": "crisis response at Temple Beth Or (Rockridge) — the week in faith, and Bay Pure Land Buddhist Temple in focus",
+        "label": "8 faith events on the record since C100 · Bay Pure Land Buddhist Temple in Chinatown | 8 named on the record",
+        "hookLine": "Temple Beth Or (Rockridge), C104: congregation opens doors for community support",
+        "hood": "Chinatown",
+        "citizens": [
+          "Kenji Tanaka (POP-00763)",
+          "Naomi Sterling (POP-00759)",
+          "Eleanor Bishop (POP-00768)",
+          "Robert Jaston (POP-00758)",
+          "Idris Karim (POP-00761)",
+          "Eunice Marston (POP-00753)",
+          "Yael Bauer (POP-00760)",
+          "Antoine Vermeer (POP-00755)"
+        ],
+        "popids": [
+          "POP-00763",
+          "POP-00759",
+          "POP-00768",
+          "POP-00758",
+          "POP-00761",
+          "POP-00753",
+          "POP-00760",
+          "POP-00755"
+        ],
+        "ref": "output/beats/Faith_Organizations.jsonl \"Bay Pure Land Buddhist Temple\"",
+        "cycle": 106
+      },
+      "beatSlice": true,
+      "beatSeat": "elliot-graye",
+      "pulse": {
+        "className": "beat-faith",
+        "score": 100,
+        "label": "8 faith events on the record since C100 · Bay Pure Land Buddhist Temple in Chinatown | 8 named on the record",
+        "hood": "Chinatown",
+        "source": "output/beats/Faith_Organizations.jsonl \"Bay Pure Land Buddhist Temple\""
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "crisis response at Temple Beth Or (Rockridge) — the week in faith, and Bay Pure Land Buddhist Temple in focus",
+        "hookLine": "Temple Beth Or (Rockridge), C104: congregation opens doors for community support",
+        "anchorFacts": [
+          "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+          "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+          "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+          "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+          "Telegraph Presbyterian Fellowship (Downtown), C101 — crisis response: community grief gathering organized (attendance 80)",
+          "B'nai Tikvah Synagogue (Piedmont Ave), C101 — crisis response: congregation opens doors for community support (attendance 34)",
+          "Telegraph Presbyterian Fellowship (Downtown), C106 — holy day: traditional Epiphany rituals observed (attendance 270)",
+          "Cathedral of the Living Word (Lake Merritt), C106 — holy day: Epiphany observance brings community together (attendance 1,247)",
+          "In focus: Bay Pure Land Buddhist Temple — Buddhist, Chinatown, congregation 300, founded 1926, led by Rev. Kenji Tanaka — Jodo Shinshu, Japanese-American heritage"
+        ],
+        "evidence": [
+          {
+            "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\""
+          },
+          {
+            "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\""
+          },
+          {
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\""
+          },
+          {
+            "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\""
+          },
+          {
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C101 — crisis response: community grief gathering organized (attendance 80)",
+            "src": "output/beats/Faith_Ledger.jsonl C101 \"Telegraph Presbyterian Fellowship\""
+          },
+          {
+            "text": "B'nai Tikvah Synagogue (Piedmont Ave), C101 — crisis response: congregation opens doors for community support (attendance 34)",
+            "src": "output/beats/Faith_Ledger.jsonl C101 \"B'nai Tikvah Synagogue\""
+          },
+          {
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C106 — holy day: traditional Epiphany rituals observed (attendance 270)",
+            "src": "output/beats/Faith_Ledger.jsonl C106 \"Telegraph Presbyterian Fellowship\""
+          },
+          {
+            "text": "Cathedral of the Living Word (Lake Merritt), C106 — holy day: Epiphany observance brings community together (attendance 1,247)",
+            "src": "output/beats/Faith_Ledger.jsonl C106 \"Cathedral of the Living Word\""
+          },
+          {
+            "text": "In focus: Bay Pure Land Buddhist Temple — Buddhist, Chinatown, congregation 300, founded 1926, led by Rev. Kenji Tanaka — Jodo Shinshu, Japanese-American heritage",
+            "src": "output/beats/Faith_Organizations.jsonl \"Bay Pure Land Buddhist Temple\""
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [
+          {
+            "text": "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+            "angle": "general coverage",
+            "domain": "FAITH",
+            "hood": null,
+            "priority": 3
+          }
+        ],
+        "note": null,
+        "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+      },
+      "wakePackage": "GRAYE-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Simon Leary",
+      "popid": "POP-00016",
+      "beatDomain": "SPORTS_LONG_VIEW",
+      "persona": "simon-leary",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 4,
+      "story": {
+        "ref": "Ripple_Ledger cycle 106 (CauseType sports); rendered: world_summary_c106.md \"## What Moved\" > \"### sports\"",
+        "label": "sentiment | A's W0 [player-energy]; A's W0 [playoffs]; Oaks - [player-energy]; Oaks - [community outreach]",
+        "kind": "ripple"
+      },
+      "wakePackage": "SIMON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Hal Richmond",
+      "popid": "POP-00007",
+      "beatDomain": "SPORTS_HISTORY",
+      "persona": "hal-richmond",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 4,
+      "story": {
+        "angle": "What the supplied C106 line card establishes, and what history remains unsupplied.",
+        "label": "A's — player-feature — supplied C106 line card",
+        "hookLine": "A's — player-feature — supplied C106 line card",
+        "hood": "Jack London",
+        "pulseClass": "metrics-poetry",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "closingNote": "quiet pride",
+        "citizens": [
+          "Martin Richards (POP-00031)"
+        ],
+        "popids": [
+          "POP-00031"
+        ],
+        "ref": "world_summary_c106.md ## Sports",
+        "cycle": 106
+      },
+      "halSlice": true,
+      "historian": true,
+      "pulse": {
+        "className": "metrics-poetry",
+        "score": 73,
+        "label": "A's — player-feature — supplied C106 line card",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "seasonType": "playoffs",
+        "storyAngle": "Refelecting on the players traded this past season",
+        "hasStats": true,
+        "record": "127-35",
+        "streak": "W0",
+        "foilNumber": ".279avg",
+        "closingNote": "quiet pride",
+        "feedCycle": 106
+      },
+      "bag": {
+        "modes": [
+          {
+            "id": 4,
+            "name": "Paper Cuts vs Percentiles"
+          },
+          {
+            "id": 7,
+            "name": "Metrics as Poetry"
+          }
+        ],
+        "historicalAnchor": "one feed number as poetry of time (not a grade)",
+        "closingNote": "quiet pride",
+        "claim": "Present fact: .279avg on the feed. Archive claim: place this against time — Refelecting on the players traded this past season Close toward quiet pride."
+      },
+      "prewrite": {
+        "reporter": "Hal Richmond",
+        "bagModes": [
+          {
+            "id": 4,
+            "name": "Paper Cuts vs Percentiles"
+          },
+          {
+            "id": 7,
+            "name": "Metrics as Poetry"
+          }
+        ],
+        "historicalAnchor": "one feed number as poetry of time (not a grade)",
+        "presentFacts": [
+          "Team record (feed): 127-35 · streak W0",
+          "Event (feed): A's — player-feature (playoffs)",
+          "Cycle: C106"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "closingNote": "quiet pride",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "claim": "Present fact: .279avg on the feed. Archive claim: place this against time — Refelecting on the players traded this past season Close toward quiet pride.",
+        "foilNumber": ".279avg",
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ]
+      },
+      "wakePackage": "HAL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Talia Finch",
+      "popid": "POP-00592",
+      "beatDomain": "SPORTS",
+      "persona": "talia-finch",
+      "approach": "Oaks ground approach (solo seat): carry one supplied Oaks fact into a real Oakland room and let unnamed people say what the city thinks of a team it hasn't decided on. Weather, sound, a drink, a platform. The fact is the feed's; the room is yours. End in the scene.",
+      "gridDay": 4,
+      "story": {
+        "ref": "Ripple_Ledger cycle 106 (CauseType sports); rendered: world_summary_c106.md \"## What Moved\" > \"### sports\"",
+        "label": "traffic/retail/nightlife/communityEngagement | {\"traffic\":0.2512,\"retail\":0.3038,\"nightlife\":0.12596,\"communityEngagement\":0.15}",
+        "kind": "ripple",
+        "hood": "West Oakland"
+      },
+      "wakePackage": "TALIA-OAKS-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "gridDay": 4,
+      "story": {
+        "ref": "undocked:undocked-pop00688-Y3C2",
+        "label": "UNDOCKED: Merkin Jumper — a night the books can't settle yet",
+        "kind": "undocked",
+        "angle": "Recap Merkin Jumper's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems sol, alpha_centauri, combat 0, mishaps 0, magnitude 1/5. Standings: Clarissa Dane leads the board — rank #1, 3 cycle(s) led, current streak 3.",
+        "citizens": [
+          "Merkin Jumper — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00688"
+        ],
+        "hood": "Downtown"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Elliot Graye",
+        "persona": "elliot-graye",
+        "wakePackage": "GRAYE-LEP2-1"
+      },
+      {
+        "name": "Simon Leary",
+        "persona": "simon-leary",
+        "wakePackage": "SIMON-LEP2-1"
+      },
+      {
+        "name": "Hal Richmond",
+        "persona": "hal-richmond",
+        "wakePackage": "HAL-LEP2-1"
+      },
+      {
+        "name": "Talia Finch",
+        "persona": "talia-finch",
+        "wakePackage": "TALIA-OAKS-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=elliot-graye,simon-leary,hal-richmond,talia-finch,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": true,
+    "reason": "pulse=metrics-poetry score=73 close=quiet pride"
+  },
+  "economicEnrich": {
+    "enriched": false,
+    "reason": "no business desk or Mason assignment in rota",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=1 elliot-graye/beat-faith:Chinatown",
+    "seats": [
+      "elliot-graye/beat-faith:Chinatown"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": false,
+    "reason": "no civic-domain persona assignment in rota",
+    "seats": []
+  },
+  "builtAt": "2026-09-10T11:15:07.101Z"
+}

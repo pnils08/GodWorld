@@ -1,0 +1,42 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "109",
+  "persona": "sharon-okafor",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-lifestyle",
+      "angle": "Lena Cross is fading — how the city follows its names",
+      "label": "Marin Tao leads the fame table; 2 fading, 1 new",
+      "hookLine": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 96, cooling), 17 media mentions.",
+      "hood": "Lake Merritt",
+      "citizens": [
+        "Lena Cross (POP-00539)",
+        "Rowan Pierce (POP-00545)",
+        "Marin Tao (POP-00537)",
+        "Rico Valez (POP-00632)"
+      ],
+      "popids": [
+        "POP-00539",
+        "POP-00545",
+        "POP-00537",
+        "POP-00632"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C109",
+      "cycle": 109
+    }
+  },
+  "angle": "output/cron-compare/culture_c109_sharon-okafor_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-02T18:15:40.100Z"
+}

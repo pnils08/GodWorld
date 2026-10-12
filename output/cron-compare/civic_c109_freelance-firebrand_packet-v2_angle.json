@@ -1,0 +1,662 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "freelance-firebrand",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00799",
+      "name": "Jax Caldera",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The map says decay; the program roster does not answer it.",
+      "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+      "creativeBrief": {
+        "kind": "data-accountability",
+        "method": "TWO_SIDED_DATA_AUDIT",
+        "mismatch": {
+          "a": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+          "aSrc": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+          "b": "No active initiative (or mitigator) owns this break on the record",
+          "bSrc": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2"
+        },
+        "scopeHoods": [
+          "Downtown"
+        ],
+        "missing": [
+          "the prior comparison needed to validate the flagged direction",
+          "an office response to the data mismatch"
+        ],
+        "closeQuestion": "The map says decay; the program roster does not answer it.",
+        "sceneRule": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers.",
+        "sourcePointers": [
+          "output/cron-compare/stink_c109.json",
+          "output/desk_signal_c109.json",
+          "output/world_summary_c109.md",
+          "output/neighborhood_texture_c109.md",
+          "output/engine_audit_c109.json",
+          "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "Downtown",
+      "score": 51,
+      "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"District 1 gets OARI because the numbers prove it works—42% fewer unnecessary police deployments.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): accelerated — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): celebrated — \"Two weeks early and $1.2M under budget—that's how Oakland builds public health infrastructure.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): acknowledged — \"Dimond's slow trade deserves attention, West Oakland's progress deserves recognition.\"",
+          "src": "output/civic-voice/mayor_gavel_c109.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00212",
+          "name": "Jessie Hess",
+          "profile": "Jessie Hess (POP-00212) — role: Barista; neighborhood: Downtown; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 3",
+          "why": "stink-handle",
+          "role": "Barista",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00541",
+          "name": "Theo Burkes",
+          "profile": "Theo Burkes (POP-00541) — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+          "why": "stink-handle",
+          "role": "Rapper",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00764",
+          "name": "Tao Lee",
+          "profile": "Tao Lee (POP-00764) — role: Community Organizer; neighborhood: Downtown; born: 1986; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+          "why": "same-hood-signal",
+          "role": "Community Organizer",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00335",
+          "name": "Imie Calero",
+          "profile": "Imie Calero (POP-00335) — role: Civil Rights Attorney; neighborhood: Downtown; born: 1982; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 4",
+          "why": "same-hood-signal",
+          "role": "Civil Rights Attorney",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00244",
+          "name": "Derlik Green",
+          "profile": "Derlik Green (POP-00244) — role: Delivery Driver; neighborhood: Downtown; born: 2000; careerStage: mid-career; wealth: 7; employerBiz: UNTRACKED; skills: 2041-Specific; tier: 3",
+          "why": "same-hood-signal",
+          "role": "Delivery Driver",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00857",
+          "name": "Juliet Choi",
+          "profile": "Juliet Choi (POP-00857) — role: Security Guard; neighborhood: Downtown; born: 2018; careerStage: entry-level; wealth: 2; employerBiz: BIZ-00021; skills: Government & Civic; tier: 4",
+          "why": "same-hood-signal",
+          "role": "Security Guard",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-01006",
+          "name": "Santiago Carter",
+          "profile": "Santiago Carter (POP-01006) — role: student; neighborhood: Downtown; born: 2035; careerStage: student; wealth: 0; tier: 4",
+          "why": "bond-hop from interview pool",
+          "role": "student",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00362",
+          "name": "Xavier Davis",
+          "profile": "Xavier Davis (POP-00362) — role: Housing Authority Inspector; neighborhood: Downtown; born: 1998; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00034; skills: Government & Civic; tier: 4",
+          "why": "bond-hop from interview pool",
+          "role": "Housing Authority Inspector",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00048",
+          "name": "Carlos Presti",
+          "profile": "Carlos Presti (POP-00048) — role: Corporate Accountant; neighborhood: Downtown; born: 1995; careerStage: senior; wealth: 6; employerBiz: BIZ-00102; skills: Professional; tier: 4",
+          "why": "bond-hop from interview pool",
+          "role": "Corporate Accountant",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00720",
+          "name": "Russell Hayward",
+          "profile": "Russell Hayward (POP-00720) — role: Insurance Adjuster; neighborhood: Laurel; born: 1997; careerStage: mid-career; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 4",
+          "why": "bond-hop from interview pool",
+          "role": "Insurance Adjuster",
+          "hood": "Laurel"
+        },
+        {
+          "pop": "POP-00439",
+          "name": "Timmie Hall",
+          "profile": "Timmie Hall (POP-00439) — role: Refugee Resettlement Case Worker; neighborhood: Chinatown; born: 1995; careerStage: senior; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 3",
+          "why": "bond-hop from interview pool",
+          "role": "Refugee Resettlement Case Worker",
+          "hood": "Chinatown"
+        },
+        {
+          "pop": "POP-01053",
+          "name": "Rosario Medina",
+          "profile": "Rosario Medina (POP-01053) — role: CBA Compliance Monitor, Fruitvale Transit Hub; neighborhood: Fruitvale; born: 2001; careerStage: mid-career; wealth: 2; employerBiz: BIZ-00096; skills: Government & Civic; tier: 4",
+          "why": "bond-hop from interview pool",
+          "role": "CBA Compliance Monitor, Fruitvale Transit Hub",
+          "hood": "Fruitvale"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-912baafccba1"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+        "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+        "id": "F-bb3d53c0ff81"
+      },
+      {
+        "t": "FACT",
+        "text": "No active initiative (or mitigator) owns this break on the record",
+        "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+        "id": "F-2d3b8618f45e"
+      },
+      {
+        "t": "FACT",
+        "text": "Season: Winter | Weather: 49°F overcast, NW 12 mph, marine (frontState MARINE), humidity 73, visibility 10",
+        "src": "World_Config/weather snapshot for C109",
+        "id": "F-092aa99c4739"
+      },
+      {
+        "t": "FACT",
+        "text": "A new face joins the Telegraph Presbyterian Fellowship, while the streets hum with the quiet energy of a neighborhood that knows it's in demand. SpeedyBurger's neon glows steady through the evening, and somewhere, someone is packing boxes under pressure.",
+        "src": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+        "id": "F-1388c682f81a"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+      "label": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "The map says decay; the program roster does not answer it.",
+      "hookLine": null,
+      "hood": "Downtown",
+      "popids": [
+        "POP-00212",
+        "POP-00541",
+        "POP-00764",
+        "POP-00335",
+        "POP-00244",
+        "POP-00857",
+        "POP-01006",
+        "POP-00362",
+        "POP-00048",
+        "POP-00720",
+        "POP-00439",
+        "POP-01053"
+      ],
+      "citizens": [
+        "Jessie Hess — Barista, Downtown",
+        "Theo Burkes — Rapper, Downtown",
+        "Tao Lee — Community Organizer, Downtown",
+        "Imie Calero — Civil Rights Attorney, Downtown",
+        "Derlik Green — Delivery Driver, Downtown",
+        "Juliet Choi — Security Guard, Downtown",
+        "Santiago Carter — student, Downtown",
+        "Xavier Davis — Housing Authority Inspector, Downtown",
+        "Carlos Presti — Corporate Accountant, Downtown",
+        "Russell Hayward — Insurance Adjuster, Laurel",
+        "Timmie Hall — Refugee Resettlement Case Worker, Chinatown",
+        "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub, Fruitvale"
+      ],
+      "stinkClass": "metric-contradiction",
+      "stinkScore": 51
+    },
+    "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names."
+  },
+  "jaxSlice": {
+    "stink": {
+      "className": "metric-contradiction",
+      "score": 51,
+      "label": "math-imbalance (medium) | Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+      "ref": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+      "kind": "anomaly",
+      "desk": "civic"
+    },
+    "contradiction": {
+      "a": "Downtown: decay [Sentiment -0.050, HousingPressure +1.000] — Sentiment now 0.28 (10 of 22, city median 0.28); HousingPressure now 6 (20 of 22, city median 0) — with no matching active initiative",
+      "b": "No active initiative (or mitigator) owns this break on the record",
+      "frame": "The map says decay; the program roster does not answer it.",
+      "aSrc": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2",
+      "bSrc": "output/engine_audit_c109.json patterns[1]; evidence: Neighborhood_Map row(s) 2"
+    },
+    "scene": {
+      "weather": "Season: Winter | Weather: 49°F overcast, NW 12 mph, marine (frontState MARINE), humidity 73, visibility 10",
+      "hood": "Downtown",
+      "neighborhoodTexture": "A new face joins the Telegraph Presbyterian Fellowship, while the streets hum with the quiet energy of a neighborhood that knows it's in demand. SpeedyBurger's neon glows steady through the evening, and somewhere, someone is packing boxes under pressure.",
+      "whoLivedIt": [],
+      "chaos": [],
+      "colorRoom": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers."
+    },
+    "citizens": [
+      {
+        "popid": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "neighborhood": "Downtown",
+        "careerStage": "retired",
+        "employerBizId": "BIZ-00030",
+        "profile": "Jessie Hess (POP-00212) — role: Barista; neighborhood: Downtown; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 3",
+        "why": "stink-handle"
+      },
+      {
+        "popid": "POP-00541",
+        "name": "Theo Burkes",
+        "role": "Rapper",
+        "neighborhood": "Downtown",
+        "careerStage": "mid-career",
+        "employerBizId": "SELF_EMPLOYED",
+        "profile": "Theo Burkes (POP-00541) — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+        "why": "stink-handle"
+      },
+      {
+        "popid": "POP-00764",
+        "name": "Tao Lee",
+        "role": "Community Organizer",
+        "neighborhood": "Downtown",
+        "careerStage": "mid-career",
+        "employerBizId": "BIZ-00028",
+        "profile": "Tao Lee (POP-00764) — role: Community Organizer; neighborhood: Downtown; born: 1986; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+        "why": "same-hood-signal"
+      },
+      {
+        "popid": "POP-00335",
+        "name": "Imie Calero",
+        "role": "Civil Rights Attorney",
+        "neighborhood": "Downtown",
+        "careerStage": "senior",
+        "employerBizId": "SELF_EMPLOYED",
+        "profile": "Imie Calero (POP-00335) — role: Civil Rights Attorney; neighborhood: Downtown; born: 1982; careerStage: senior; wealth: 8; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 4",
+        "why": "same-hood-signal"
+      },
+      {
+        "popid": "POP-00244",
+        "name": "Derlik Green",
+        "role": "Delivery Driver",
+        "neighborhood": "Downtown",
+        "careerStage": "mid-career",
+        "employerBizId": "UNTRACKED",
+        "profile": "Derlik Green (POP-00244) — role: Delivery Driver; neighborhood: Downtown; born: 2000; careerStage: mid-career; wealth: 7; employerBiz: UNTRACKED; skills: 2041-Specific; tier: 3",
+        "why": "same-hood-signal"
+      },
+      {
+        "popid": "POP-00857",
+        "name": "Juliet Choi",
+        "role": "Security Guard",
+        "neighborhood": "Downtown",
+        "careerStage": "entry-level",
+        "employerBizId": "BIZ-00021",
+        "profile": "Juliet Choi (POP-00857) — role: Security Guard; neighborhood: Downtown; born: 2018; careerStage: entry-level; wealth: 2; employerBiz: BIZ-00021; skills: Government & Civic; tier: 4",
+        "why": "same-hood-signal"
+      },
+      {
+        "popid": "POP-01006",
+        "name": "Santiago Carter",
+        "role": "student",
+        "neighborhood": "Downtown",
+        "careerStage": "student",
+        "employerBizId": null,
+        "profile": "Santiago Carter (POP-01006) — role: student; neighborhood: Downtown; born: 2035; careerStage: student; wealth: 0; tier: 4",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-00362",
+        "name": "Xavier Davis",
+        "role": "Housing Authority Inspector",
+        "neighborhood": "Downtown",
+        "careerStage": "mid-career",
+        "employerBizId": "BIZ-00034",
+        "profile": "Xavier Davis (POP-00362) — role: Housing Authority Inspector; neighborhood: Downtown; born: 1998; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00034; skills: Government & Civic; tier: 4",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-00048",
+        "name": "Carlos Presti",
+        "role": "Corporate Accountant",
+        "neighborhood": "Downtown",
+        "careerStage": "senior",
+        "employerBizId": "BIZ-00102",
+        "profile": "Carlos Presti (POP-00048) — role: Corporate Accountant; neighborhood: Downtown; born: 1995; careerStage: senior; wealth: 6; employerBiz: BIZ-00102; skills: Professional; tier: 4",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-00720",
+        "name": "Russell Hayward",
+        "role": "Insurance Adjuster",
+        "neighborhood": "Laurel",
+        "careerStage": "mid-career",
+        "employerBizId": "SELF_EMPLOYED",
+        "profile": "Russell Hayward (POP-00720) — role: Insurance Adjuster; neighborhood: Laurel; born: 1997; careerStage: mid-career; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 4",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-00439",
+        "name": "Timmie Hall",
+        "role": "Refugee Resettlement Case Worker",
+        "neighborhood": "Chinatown",
+        "careerStage": "senior",
+        "employerBizId": "BIZ-00028",
+        "profile": "Timmie Hall (POP-00439) — role: Refugee Resettlement Case Worker; neighborhood: Chinatown; born: 1995; careerStage: senior; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 3",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-01053",
+        "name": "Rosario Medina",
+        "role": "CBA Compliance Monitor, Fruitvale Transit Hub",
+        "neighborhood": "Fruitvale",
+        "careerStage": "mid-career",
+        "employerBizId": "BIZ-00096",
+        "profile": "Rosario Medina (POP-01053) — role: CBA Compliance Monitor, Fruitvale Transit Hub; neighborhood: Fruitvale; born: 2001; careerStage: mid-career; wealth: 2; employerBiz: BIZ-00096; skills: Government & Civic; tier: 4",
+        "why": "bond-hop from interview pool"
+      }
+    ],
+    "bonds": [
+      {
+        "bondId": "BOND-0F834087",
+        "a": "POP-01006",
+        "b": "POP-00244",
+        "type": "friendship",
+        "intensity": "6",
+        "origin": "neighbor",
+        "neighborhood": "Downtown",
+        "aName": "Santiago Carter",
+        "bName": "Derlik Green",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-13C65C19",
+        "a": "POP-00212",
+        "b": "POP-00362",
+        "type": "friendship",
+        "intensity": "6.44",
+        "origin": "neighbor",
+        "neighborhood": "Downtown",
+        "aName": "Jessie Hess",
+        "bName": "Xavier Davis",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-730097DD",
+        "a": "POP-00048",
+        "b": "POP-00335",
+        "type": "friendship",
+        "intensity": "3.62",
+        "origin": "neighbor",
+        "neighborhood": "Downtown",
+        "aName": "Carlos Presti",
+        "bName": "Imie Calero",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-28121EC3",
+        "a": "POP-00772",
+        "b": "POP-00764",
+        "type": "friendship",
+        "intensity": "5.84",
+        "origin": "random",
+        "neighborhood": "cross-neighborhood",
+        "aName": "Beverly Hayes",
+        "bName": "Tao Lee",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-E96CC3FB",
+        "a": "POP-00764",
+        "b": "POP-00720",
+        "type": "rivalry",
+        "intensity": "10",
+        "origin": "random",
+        "neighborhood": "cross-neighborhood",
+        "aName": "Tao Lee",
+        "bName": "Russell Hayward",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-D4B0B704",
+        "a": "POP-00212",
+        "b": "POP-00439",
+        "type": "rivalry",
+        "intensity": "10",
+        "origin": "random",
+        "neighborhood": "cross-neighborhood",
+        "aName": "Jessie Hess",
+        "bName": "Timmie Hall",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-B58C552F",
+        "a": "POP-01053",
+        "b": "POP-00335",
+        "type": "professional",
+        "intensity": "4.55",
+        "origin": "random",
+        "neighborhood": "cross-neighborhood",
+        "aName": "Rosario Medina",
+        "bName": "Imie Calero",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      }
+    ],
+    "gaps": {
+      "note": "Ledgers/surfaces that would deepen Jax further if wired or fixed",
+      "missingOrThin": [
+        {
+          "source": "EmployerBizId → Business_Ledger name/address",
+          "status": "gap",
+          "why": "RoleType alone; no shop name/street for employer scene color without inventing"
+        },
+        {
+          "source": "Cultural_Ledger venues by neighborhood",
+          "status": "gap-on-disk",
+          "why": "Bar/venue canon list not auto-attached to slice — Jax opens in bars; needs hood venue pointer"
+        },
+        {
+          "source": "Faith_Ledger / Faith_Organizations by hood",
+          "status": "partial",
+          "why": "Texture file sometimes names congregations; not joined to stink hood systematically"
+        },
+        {
+          "source": "LifeHistory_Log raw (beyond Who Lived It digest)",
+          "status": "partial",
+          "why": "Digest is tag-summary; full event prose would deepen street color without inventing people"
+        },
+        {
+          "source": "Relationship_Bonds live refresh",
+          "status": "stale-risk",
+          "why": "bond-ledger-live.tsv may lag; bond-hop quality depends on export freshness"
+        },
+        {
+          "source": "Neighborhood_Map row metrics on slice",
+          "status": "partial",
+          "why": "Stink label carries some decay numbers; full hood board not embedded as color (avoid engine jargon in prose)"
+        },
+        {
+          "source": "Map hoods with zero Simulation_Ledger residents (e.g. Brooklyn on C102)",
+          "status": "sim-gap",
+          "why": "Audit can flag decay for a hood nobody lives in on the ledger — stink is real, interview pool empty; slice walks to next candidate with residents"
+        },
+        {
+          "source": "Citizen pages / DialState",
+          "status": "via-citizenVoice",
+          "why": "Quote stage loads dials; slice does not pre-print dial prose (correct — voice owns it)"
+        }
+      ],
+      "colorAllowed": [
+        "Weather line from Riley/world_summary",
+        "neighborhood_texture paragraph (perception-only, often nameless)",
+        "Who Lived It lines for this hood",
+        "Chaos_Cars rows touching hood/citizen",
+        "Bond edges among pool (professional/friend/family)"
+      ]
+    }
+  },
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "text": "I plan to investigate the discrepancy between the perceived decay in Downtown and the lack of active initiatives to address it. I will start by talking to locals and business owners to understand their experiences and concerns.",
+    "plan": {
+      "chase": "I plan to investigate the discrepancy between the perceived decay in Downtown and the lack of active initiatives to address it. I will start by talking to locals and business owners to understand their experiences and concerns.",
+      "focus": "Downtown decay and lack of initiatives",
+      "why": "To uncover the reasons behind the disconnect between the community's needs and the city's response",
+      "checks": [
+        "Sentiment and HousingPressure metrics",
+        "Active initiatives and their impact"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00764",
+          "question": "What are the main challenges facing Downtown residents and business owners?",
+          "basis": "Community Organizer's perspective"
+        },
+        {
+          "pop": "POP-00335",
+          "question": "How can the city's initiatives be improved to effectively address the decay in Downtown?",
+          "basis": "Civil Rights Attorney's expertise"
+        }
+      ],
+      "interpretation": "The lack of active initiatives to address Downtown's decay suggests a gap between the community's needs and the city's response. Further investigation is needed to understand the reasons behind this disconnect.",
+      "unverifiedLead": [
+        "Potential misallocation of resources",
+        "Insufficient community engagement"
+      ],
+      "closeQuestion": "What will it take for the city to effectively address the decay in Downtown and improve the lives of its residents and business owners?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"District 1 gets OARI because the numbers prove it works—42% fewer unnecessary police deployments.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): accelerated — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): celebrated — \"Two weeks early and $1.2M under budget—that's how Oakland builds public health infrastructure.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): acknowledged — \"Dimond's slow trade deserves attention, West Oakland's progress deserves recognition.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c109.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 75,
+  "ranAt": "2026-09-30T11:15:22.406Z"
+}

@@ -1,0 +1,127 @@
+{
+ "label": "proof C118 window 107-118",
+ "sheet": "1FFpUs",
+ "cycleCount": "118",
+ "rows": 1028,
+ "parsed": 1028,
+ "allNeutral": 617,
+ "allNeutralPct": 60,
+ "wakeDeviation60": 232,
+ "wakePct": 22.6,
+ "pressureRows": 110,
+ "pressureCauses": {
+  "hood": 35,
+  "debt": 46,
+  "rent": 13,
+  "overwork": 23,
+  "unemployed": 5
+ },
+ "adaptedRecords": 56,
+ "dials": {
+  "drive": {
+   "mean": 58.23,
+   "lt40": 0,
+   "gt60": 279,
+   "pin0": 0,
+   "pin100": 1,
+   "contribPos": 682,
+   "contribNeg": 23
+  },
+  "sociability": {
+   "mean": 58.38,
+   "lt40": 0,
+   "gt60": 258,
+   "pin0": 0,
+   "pin100": 4,
+   "contribPos": 699,
+   "contribNeg": 2
+  },
+  "warmth": {
+   "mean": 52.52,
+   "lt40": 0,
+   "gt60": 85,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 229,
+   "contribNeg": 403
+  },
+  "openness": {
+   "mean": 53.5,
+   "lt40": 0,
+   "gt60": 145,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 392,
+   "contribNeg": 0
+  },
+  "composure": {
+   "mean": 53.86,
+   "lt40": 3,
+   "gt60": 160,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 144,
+   "contribNeg": 372
+  },
+  "integrity": {
+   "mean": 50.54,
+   "lt40": 0,
+   "gt60": 23,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 58,
+   "contribNeg": 13
+  },
+  "family": {
+   "mean": 56.45,
+   "lt40": 1,
+   "gt60": 258,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 115,
+   "contribNeg": 118
+  },
+  "outabout": {
+   "mean": 51.09,
+   "lt40": 0,
+   "gt60": 20,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 330,
+   "contribNeg": 204
+  }
+ },
+ "contrib": {
+  "pos": 2649,
+  "neg": 1135,
+  "negSharePct": 30
+ },
+ "topTags": {
+  "Neighborhood": 6078,
+  "Daily": 3779,
+  "Civic Perception": 2923,
+  "Personal": 2460,
+  "PrevEvening": 1648,
+  "Sports": 1336,
+  "Background": 752,
+  "Lifestyle": 693,
+  "Media": 477,
+  "Holiday": 447,
+  "TrustGuarded": 410,
+  "Micro-Event": 389,
+  "ActivityExpanded": 323,
+  "Strain": 292,
+  "Work": 260,
+  "FirstFriday": 232,
+  "Education": 200,
+  "Team": 104,
+  "Civic": 101,
+  "Community": 90,
+  "Untagged": 90,
+  "Career": 89,
+  "Cultural": 87,
+  "Money": 68,
+  "Relationship": 56
+ },
+ "engineErrorsTotalRows": 0
+}

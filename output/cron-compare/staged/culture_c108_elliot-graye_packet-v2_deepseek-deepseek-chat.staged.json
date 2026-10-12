@@ -1,0 +1,48 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "108",
+  "persona": "elliot-graye",
+  "byline": "Elliot Graye",
+  "bylinePopid": "POP-00012",
+  "article": "output/cron-compare/staged/culture_c108_elliot-graye_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Eunice Marston",
+        "role": "quoted-source",
+        "popid": "POP-00753"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "downtown-tao-lee-beat-faith",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "Montclair"
+    ],
+    "claims": [
+      {
+        "claim": "I haven't had any direct involvement with the Bharat Mandir of the East Bay, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.",
+        "sourceRef": "citizenVoice PRESS Eunice Marston"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-f264f0ed04df",
+    "draftSha256": "63a814bddaaa38042eeee6ab49a62ae3ed283ff229573216795aa104015e0547",
+    "verdict": "output/cron-compare/culture_c108_elliot-graye_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-24T23:15:31.405Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:02.586Z"
+}

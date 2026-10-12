@@ -1,0 +1,46 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "110",
+  "persona": "tanya-cruz",
+  "byline": "Tanya Cruz",
+  "bylinePopid": "POP-00014",
+  "article": "output/cron-compare/staged/sports_c110_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "John Ellis",
+        "role": "quoted-source",
+        "popid": "POP-00033"
+      },
+      {
+        "name": "Benji Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00018"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Honestly, Tanya, it's all about staying locked in. The vibe in here? Electric. We're feeding off each other's energy—every guy in this clubhouse knows what's at stake, and we're not letting up. I'm just trying to keep doing my job, pitch by pitch, and trust these guys behind me to keep making plays. The momentum's building, and we're riding it.",
+        "sourceRef": "citizenVoice PRESS John Ellis"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d53eb49231ec",
+    "draftSha256": "6872212c341fd95a62db6fd491cd518cd7b71bf524863d23e85ddd2ee6ffe2a8",
+    "verdict": "output/cron-compare/sports_c110_tanya-cruz_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-07T23:20:00.891Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.815Z"
+}

@@ -1,0 +1,201 @@
+PLAYER INTAKE (Pitcher) — 2041 SEASON
+
+Name: Hitoki Ka
+
+ 
+
+Team: Oakland Athletics
+
+ 
+
+Position: RP
+
+ 
+
+Age: 29
+
+ 
+
+Bats: R
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'2"
+
+ 
+
+Weight: 208 lbs
+
+ 
+
+Born: California
+
+ 
+
+Drafted: Round 3 (2029)
+
+ 
+
+MLB Service: 6.110
+
+ 
+
+Overall: 88
+
+ 
+
+Potential: B
+
+ 
+
+POPID: POP-01081
+
+— 2041 REGULAR SEASON —
+
+Games: 57
+
+ 
+
+Games Started: 0
+
+ 
+
+Wins: 10
+
+ 
+
+Losses: 1
+
+ 
+
+Saves: 1
+
+ 
+
+Blown Saves: 2
+
+ 
+
+Holds: 13
+
+ 
+
+Innings Pitched: 70.0
+
+ 
+
+Hits Allowed: 40
+
+ 
+
+Runs Allowed: 7
+
+ 
+
+Earned Runs: 7
+
+ 
+
+Home Runs Allowed: 4
+
+ 
+
+Walks: 13
+
+ 
+
+Strikeouts: 71
+
+ 
+
+ERA: 0.90
+
+ 
+
+WHIP: 0.76
+
+ 
+
+Winning Percentage: 0.909
+
+ 
+
+Quality Starts: 0
+
+ 
+
+Complete Games: 0
+
+ 
+
+Shutouts: 0
+
+ 
+
+Hit Batters: 3
+
+ 
+
+Wild Pitches: 1
+
+ 
+
+Total Batters Faced: 258
+
+ 
+
+WAR: 1.8
+
+— RATE METRICS —
+
+K/9: 9.14
+
+ 
+
+BB/9: 1.67
+
+ 
+
+HR/9: 0.51
+
+ 
+
+FIP: 2.40
+
+ 
+
+ERC: 1.04
+
+— CONTRACT STATUS —
+
+2041: $7,000,000
+
+ 
+
+2042: $7,000,000
+
+ 
+
+2043: Free Agent (FA)
+
+
+--------------------------------------------------------------------------------
+
+
+Quirks
+
+High Leverage Workhorse
+
+Pinpoint Reliever Command
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS (Career Reference)
+
+AL Relief ERA Leader (<1.00 ERA in 70 IP, 2041)

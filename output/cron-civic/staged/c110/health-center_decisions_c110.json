@@ -1,0 +1,23 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 110,
+  "primaryVoice": "Chen-Ramirez (health_center-001)",
+  "consolidatedFrom": [
+    "STMT-110-health_center-001 (Chen-Ramirez — construction_progress)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "ImplementationPhase": "construction-active",
+    "MilestoneNotes": "C110: Final inspections complete + drywall authorized per D7 audit protocols — ready for interior finishes.",
+    "NextScheduledAction": "Interior finishes + equipment installation",
+    "NextActionCycle": 111,
+    "LastWorkCycle": 110,
+    "LastWorkSeat": "proj-health-center"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-109-proj-health-center-2026-10-02"
+    ]
+  }
+}

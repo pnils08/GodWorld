@@ -1,0 +1,189 @@
+{
+  "cycle": "107",
+  "total": 16,
+  "counts": {
+    "accurate": 11,
+    "corrections-needed": 2,
+    "canon-violation": 3
+  },
+  "accuracyPct": 68.8,
+  "auditModel": "google/gemini-3.7-flash",
+  "trend": [
+    {
+      "cycle": 103,
+      "pct": 75
+    },
+    {
+      "cycle": 104,
+      "pct": 62.5
+    },
+    {
+      "cycle": 105,
+      "pct": 76.5
+    },
+    {
+      "cycle": 106,
+      "pct": 55.6
+    }
+  ],
+  "articles": [
+    {
+      "stem": "business_c107_business-desk_packet-v2_deepseek-deepseek-chat",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c107_angela-reyes_packet-v2_deepseek-deepseek-chat",
+      "byline": "Angela Reyes",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "disbursement-active phase / Initiative Tracker",
+          "class": "engine-verbiage",
+          "why": "The article uses the exact simulation lifecycle state enum ('disbursement-active') and mechanics reference ('Initiative Tracker') directly in civic reporting prose."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c107_lila-mezran_packet-v2_deepseek-deepseek-chat",
+      "byline": "Dr. Lila Mezran",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c107_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "The text explicitly uses simulation engine terminology ('this cycle', 'live pattern', 'the ledger has a flagged gap and an empty column') in journalistic prose.",
+          "class": "engine-verbiage",
+          "why": "Simulation mechanics and tracking terminology (cycles, pattern flags, ledger columns) should be translated into naturalized in-world civic concepts rather than referenced directly."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c107_noah-tan_packet-v2_deepseek-deepseek-chat",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c107_rachel-torres_packet-v2_deepseek-deepseek-chat",
+      "byline": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Vanessa Tran-Muñoz's OARI team isn't listed on this cycle's roster, leaving traditional patrols to handle all calls",
+          "class": "canon-violation",
+          "why": "The cycle ledger"
+        }
+      ]
+    },
+    {
+      "stem": "civic_c107_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+      "byline": "Trevor Shimizu",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c107_elliot-graye_packet-v2_deepseek-deepseek-chat",
+      "byline": "Elliot Graye",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c107_mason-ortega_packet-v2_deepseek-deepseek-chat",
+      "byline": "Mason Ortega",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Locating OakHouse in Rockridge",
+          "class": "canon-violation",
+          "why": "OakHouse is located in Temescal (as established in POP-00721: 'Pastry Chef, OakHouse, Temescal'), and pastry chefs Carlisle, Jorden, and Alvarez are all Temescal residents/workers, contradicting the article's framing of OakHouse as a Rockridge neighborhood venue."
+        }
+      ]
+    },
+    {
+      "stem": "sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c107_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c107_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Selena Grant",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c107_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Talia Finch",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c107_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+      "byline": "Tanya Cruz",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "undocked_c107_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "The article invents a storyline about an 'UNDOCKED episode', 'UNDOCKED leaderboard', and 'UNDOCKED competition' featuring MLB player Martin Richards, none of which exist in the ledger or world summary.",
+          "class": "unsupported-claim",
+          "why": "There is no record of an UNDOCKED show, episode, or leaderboard in the simulation world or sports feed."
+        }
+      ]
+    }
+  ]
+}

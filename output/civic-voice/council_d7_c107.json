@@ -1,0 +1,28 @@
+{
+  "office": "council_d7",
+  "cycle": 107,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "Authorized the utility inspections and interior rough-in certification for the Temescal Community Health Center while conditioning subsequent phase disbursements on strict cost-variance auditing. Asserted District 7 oversight over Temescal's sustained commercial vitality and rejected broad mayoral claims on KONO until municipal service audit numbers are delivered.",
+  "statements": [
+    {
+      "statementId": "STMT-107-council_d7-001",
+      "type": "vote_statement",
+      "topic": "Temescal Community Health Center Utility Inspections and Rough-In Completion",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Approve authorization of final utility inspections and interior systems rough-in certification with mandatory audit reporting on second-shift labor expenditures.",
+      "quote": "We will sign off on the utility rough-ins because the work meets the code, but not a single dollar moves to the next phase without certified inspection logs on my desk.",
+      "fullStatement": "The Temescal Community Health Center is holding to its timeline because District 7 demanded enforceable milestones rather than open-ended promises. Authorizing these utility inspections and certifying rough-in completion keeps the contractors on schedule. However, fiscal discipline does not stop when the drywall goes up. I am voting to approve this inspection milestone with the express requirement that the Auditor's office verify all second-shift overtime billings against the $45M allocation before finishing funds are drawn. We build for our community by keeping the ledger transparent from foundation to roof.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d7-002",
+      "type": "constituent_advocacy",
+      "topic": "District 7 Economic Oversight and Service Accountability",
+      "initiative": null,
+      "decision": "Claim credit for Temescal's economic resilience through targeted fiscal oversight and demand line-item service reviews before approving new administrative outlays for KONO.",
+      "quote": "Temescal's busy corridors are the product of rigorous local oversight, and KONO will maintain its footing through verifiable service delivery, not mayoral press releases.",
+      "fullStatement": "City Hall wants to claim credit for KONO's steady street trade and Temescal's upbeat foot traffic, but our neighborhoods thrive when governance is grounded in fiscal accountability. Temescal’s busy storefronts are succeeding because District 7 insisted on disciplined execution and transparent municipal operations. As for KONO, stability is preserved through rigorous oversight and balanced resources, not generic rhetoric. I will not sign off on blanket executive initiatives for KONO without a comprehensive line-item audit showing exactly where baseline city services and public safety dollars are being spent.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "office": "council_d6",
+  "cycle": 110,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "District 6 is seeing the tangible benefits of active streets and strong community anchors along Piedmont Avenue, and City Hall must uphold its end with reliable municipal service delivery. Citywide, I am backing continued stabilization disbursements alongside rigorous reporting, while demanding verified environmental data for Baylight and strict fiscal guardrails on the new Downtown revitalization proposals.",
+  "statements": [
+    {
+      "statementId": "STMT-110-council_d6-001",
+      "type": "district_statement",
+      "topic": "Piedmont Avenue Commercial Vitality and Neighborhood Services",
+      "initiative": null,
+      "decision": "Prioritize baseline municipal services and merchant support to sustain low crime and active street trade across Piedmont Avenue and Montclair.",
+      "quote": "When community anchors like B'nai Tikvah Synagogue step up for our seniors and street trade is thriving, City Hall's job is simple: deliver baseline services flawlessly.",
+      "fullStatement": "The lifted mood, bustling sidewalks, and low crime rates along Piedmont Avenue demonstrate the resilience of our commercial corridor. Milestone efforts like the seniors lunch program at B'nai Tikvah Synagogue show the strength of our neighborhood fabric. To maintain this momentum, District 6 requires dependable municipal service delivery, clean streets, and responsive public safety so our local merchants and residents can continue to thrive without administrative friction.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d6-002",
+      "type": "vote_statement",
+      "topic": "Downtown Economic Revitalization Fund Ordinance Filing",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "Support filing of the Downtown Economic Revitalization ordinance while requiring strict financial oversight and measurable vacancy reduction benchmarks.",
+      "quote": "A fifteen-million-dollar commitment must come with airtight accountability, expedited permitting that actually cuts red tape, and clear returns for Oakland taxpayers.",
+      "fullStatement": "I support moving the Downtown Economic Revitalization Fund forward to committee. Providing commercial vacancy relief and streamlining ground-floor permitting are sensible steps to re-energize our core commercial district. However, committing fifteen million dollars requires concrete fiscal controls, transparent criteria for relief grants, and measurable vacancy reduction targets before funds are drawn down.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d6-003",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund Month-Nine Disbursement",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Approve month-nine disbursement of $400,000 with mandatory monthly reporting to the Finance Committee.",
+      "quote": "Direct stabilization prevents displacement, but continuous financial reporting to the Finance Committee remains non-negotiable.",
+      "fullStatement": "I vote to approve the month-nine disbursement of $400,000 for household stabilization grants under Deputy Mayor Okoro's authority. Direct aid keeps vulnerable families rooted in Oakland, but upholding the monthly reporting requirement to the Finance Committee ensures every dollar is accounted for and reaching intended recipients efficiently.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d6-004",
+      "type": "vote_statement",
+      "topic": "Baylight District Soil Test Verification",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Accept first soil test results verification under independent oversight provisions.",
+      "quote": "Remediation cannot proceed on assumptions—independent verification of soil safety is the only acceptable basis for Phase II mobilization.",
+      "fullStatement": "I accept the verified first round of soil test results for the Baylight District Phase II site. As I have consistently stated, environmental remediation demands rigorous independent oversight, transparent testing data, and complete public disclosure. Authorizing ongoing mobilization must remain strictly contingent on sustained compliance with environmental and hauling standards.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d6-005",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline Cohort Review",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Support the first cohort placement review targeting 150 placed apprentices by cycle 112.",
+      "quote": "Auditing cohort placements ensures workforce funding translates directly into verified, durable career outcomes.",
+      "fullStatement": "I support directing the first training cohort placement review with the goal of reaching 150 placed apprentices by cycle 112. Job training investments must demonstrate fiscal efficacy by tracking verifiable job placements and sustained employment, ensuring public workforce dollars yield durable economic mobility.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "stage": "angle",
+  "desk": "undocked-digest",
+  "cycle": "109",
+  "persona": "nia-rook-weekly",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked-digest"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Otis Redd, Jackson Sift, Priya Narang), who is climbing and who is fading. Standings: Clarissa Dane leads the board — rank #1, 6 cycle(s) led, current streak 6. Per-pilot facts: Otis Redd — 2 episode(s), partial credits 143, combat 0, mishaps 0; Jackson Sift — 2 episode(s), partial credits 14, combat 0, mishaps 0; Priya Narang — 1 episode(s), credits 5, combat 0, mishaps 0.",
+      "approach": null
+    },
+    "signal": {
+      "kind": "undocked-digest",
+      "hood": null,
+      "score": null,
+      "src": "undocked-week:weekly-c109",
+      "nearby": [
+        {
+          "text": "",
+          "src": ""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00121",
+          "name": null,
+          "profile": "UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c109.json",
+            "episodeId": "undocked-pop00121-Y3C5",
+            "pop": "POP-00121"
+          }
+        },
+        {
+          "pop": "POP-00190",
+          "name": null,
+          "profile": "UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c109.json",
+            "episodeId": "undocked-pop00190-Y3C5",
+            "pop": "POP-00190"
+          }
+        },
+        {
+          "pop": "POP-00141",
+          "name": "Priya Narang",
+          "profile": "Priya Narang — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c109.json",
+            "episodeId": "undocked-pop00141-Y3C5",
+            "pop": "POP-00141"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-912baafccba1"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED week-in-review c109",
+        "src": "undocked-week:weekly-c109",
+        "id": "F-219eded6683a"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00121",
+        "name": null,
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c109.json",
+          "episodeId": "undocked-pop00121-Y3C5",
+          "pop": "POP-00121"
+        }
+      },
+      {
+        "pop": "POP-00190",
+        "name": null,
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c109.json",
+          "episodeId": "undocked-pop00190-Y3C5",
+          "pop": "POP-00190"
+        }
+      },
+      {
+        "pop": "POP-00141",
+        "name": "Priya Narang",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Priya Narang — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c109.json",
+          "episodeId": "undocked-pop00141-Y3C5",
+          "pop": "POP-00141"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked-week:weekly-c109",
+      "label": "UNDOCKED week-in-review c109",
+      "kind": "undocked-digest",
+      "angle": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Otis Redd, Jackson Sift, Priya Narang), who is climbing and who is fading. Standings: Clarissa Dane leads the board — rank #1, 6 cycle(s) led, current streak 6. Per-pilot facts: Otis Redd — 2 episode(s), partial credits 143, combat 0, mishaps 0; Jackson Sift — 2 episode(s), partial credits 14, combat 0, mishaps 0; Priya Narang — 1 episode(s), credits 5, combat 0, mishaps 0.",
+      "citizens": [
+        "Otis Redd — UNDOCKED cast pilot",
+        "Jackson Sift — UNDOCKED cast pilot",
+        "Priya Narang — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00121",
+        "POP-00190",
+        "POP-00141"
+      ]
+    }
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I'm looking into the latest developments in the UNDOCKED leaderboard, where Clarissa Dane is currently in the lead. I want to explore what's behind her success and who's rising through the ranks.",
+    "plan": {
+      "chase": "I'm looking into the latest developments in the UNDOCKED leaderboard, where Clarissa Dane is currently in the lead. I want to explore what's behind her success and who's rising through the ranks.",
+      "focus": "The current standings and recent performances of the pilots",
+      "why": "To provide an update on the UNDOCKED leaderboard and identify trends and surprises",
+      "checks": [
+        "Recent episode performances",
+        "Pilot credits and combat records"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00141",
+          "question": "What's driving Priya Narang's recent performance?",
+          "basis": "Her episode credits and combat records"
+        }
+      ],
+      "interpretation": "The UNDOCKED leaderboard is highly competitive, and pilots are constantly looking for ways to improve their standings",
+      "unverifiedLead": [
+        "Rumors of a new challenger emerging in the next cycle"
+      ],
+      "closeQuestion": "Will Clarissa Dane be able to maintain her lead in the upcoming cycle?"
+    }
+  },
+  "lanePicks": [
+    {
+      "popids": []
+    }
+  ],
+  "laneEntries": 1,
+  "ranAt": "2026-10-03T13:15:21.385Z"
+}

@@ -1,0 +1,49 @@
+{
+  "draft": "output/cron-compare/undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "7c14893c4f378e54693e0e5a42561fc3c74647dd7333778faecc2cf559a3fc53",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean UNDOCKED recap cleanly integrating verified ledger citizens and authorized break-room atmosphere without canon violations.",
+  "review": {
+    "profileId": "nia-rook-undocked-recap-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-1",
+    "manifestId": "AM-34cc773615b7",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Aaliyah Brennan",
+      "Clarissa Dane"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 5851,
+  "parseError": false,
+  "ranAt": "2026-10-09T23:18:19.739Z"
+}

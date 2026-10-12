@@ -1,0 +1,82 @@
+{
+  "stage": "directive",
+  "cycle": 109,
+  "model": "google/gemini-3.7-flash",
+  "mayorModel": "moonshotai/kimi-k2",
+  "closeDerived": true,
+  "targets": [
+    {
+      "agentDir": "civic-office-mayor",
+      "reasons": [
+        "petition pool: 8 complaint(s) ≥ the visibility line (3) with NO proposal filed by this seat",
+        "stall clock: INIT-001, INIT-002, INIT-003, INIT-005, INIT-006, INIT-007, INIT-008 (NextActionCycle ≤ C110)"
+      ]
+    },
+    {
+      "agentDir": "civic-office-council-d1",
+      "reasons": [
+        "stall clock: INIT-001, INIT-002, INIT-007 (NextActionCycle ≤ C110)"
+      ]
+    },
+    {
+      "agentDir": "civic-office-council-d2",
+      "reasons": [
+        "stall clock: INIT-006, INIT-008 (NextActionCycle ≤ C110)"
+      ]
+    },
+    {
+      "agentDir": "civic-office-council-d3",
+      "reasons": [
+        "petition pool: 3 complaint(s) ≥ the visibility line (3) with NO proposal filed by this seat",
+        "stall clock: INIT-002, INIT-003, INIT-007 (NextActionCycle ≤ C110)"
+      ]
+    },
+    {
+      "agentDir": "civic-office-council-d5",
+      "reasons": [
+        "stall clock: INIT-002, INIT-007 (NextActionCycle ≤ C110)"
+      ]
+    },
+    {
+      "agentDir": "civic-office-council-d7",
+      "reasons": [
+        "stall clock: INIT-005 (NextActionCycle ≤ C110)"
+      ]
+    }
+  ],
+  "blocks": [
+    "Avery Santana — Mayor",
+    "Rose Delgado — City Council District 3",
+    "Denise Carter — City Council District 1",
+    "Leonard Tran — City Council District 2",
+    "Janae Rivers — City Council District 5",
+    "Warren Ashford — City Council District 7"
+  ],
+  "rejectedBlocks": [],
+  "usage": {
+    "prompt_tokens": 7135,
+    "completion_tokens": 2419,
+    "total_tokens": 9554,
+    "cost": 0.0144225,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0144225,
+      "upstream_inference_prompt_cost": 0.00535125,
+      "upstream_inference_completions_cost": 0.00907125
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1168,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "note": null,
+  "directive": "output/mara-directives/mara_directive_c109_AUTO.txt",
+  "ranAt": "2026-09-28T06:21:09.650Z"
+}

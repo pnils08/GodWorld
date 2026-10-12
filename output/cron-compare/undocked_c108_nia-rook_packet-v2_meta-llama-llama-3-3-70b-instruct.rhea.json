@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "b4b6268161de947ca7f652454e57409009b15b3a57959c4cd9deaf314a008f5e",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, roles, quotes, and neighborhood settings match canon and deterministic pre-check provenance.",
+  "review": {
+    "profileId": "nia-rook-undocked-recap-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-1",
+    "manifestId": "AM-217627dca058",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Belle Lopez",
+      "Guadalupe Lupe",
+      "Ollie Campbell",
+      "Trenton Nawan"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0095,
+  "durationMs": 4262,
+  "parseError": false,
+  "ranAt": "2026-09-25T23:19:13.126Z"
+}

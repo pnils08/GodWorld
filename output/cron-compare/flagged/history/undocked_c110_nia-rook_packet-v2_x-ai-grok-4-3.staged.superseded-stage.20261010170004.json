@@ -1,0 +1,36 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "110",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Laurel"
+    ],
+    "claims": [
+      {
+        "claim": "UNDOCKED: Kato Rivers — a night the books can't settle yet",
+        "sourceRef": "undocked:undocked-pop00770-Y3C6"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-8b7e1afc35f8",
+    "draftSha256": "a873d25891b66756d710b7a6224fcc0f14a0bf4356b81a446d03cdf02f8fa107",
+    "verdict": "output/cron-compare/undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-05T23:17:54.110Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-05T23:17:54.580Z"
+}

@@ -1,0 +1,86 @@
+# C108 Voice Directives — Mara Vance (AUTO)
+
+**Cycle:** 108
+**Issued:** C108 (auto-derived, cron-civic-run.js --stage=directive)
+**Source:** world_summary_c108 + engine review HIGHs + tracker + C107 voice record
+
+---
+## Avery Santana — Mayor
+
+- **Agent:** `.claude/agents/civic-office-mayor/`
+- **Address:** Authorize the design consultant selection for Fruitvale Transit Hub Phase II (INIT-003) and publish the first training cohort placement metrics for the Youth Apprenticeship Pipeline (INIT-007).
+- **Why:** Following C107 design RFP issuance and public town hall enrollment, C108 marks the scheduled milestone for INIT-003 consultant award and INIT-007 placement review; all six board initiatives sit at stall-clock threshold (NextActionCycle ≤ C109).
+- **Acceptance:** Executive authorization selecting the INIT-003 design consultant and a published INIT-007 placement audit establishing initial cohort numbers across city districts.
+- **Silence consequence:** Transit hub pre-development stalls at procurement, while enrolled apprenticeship applicants remain unassigned to active job placements.
+
+## Rose Delgado — City Council District 3
+
+- **Agent:** `.claude/agents/civic-office-council-d3/`
+- **Address:** Concur on the INIT-003 design consultant selection and submit District 3 intake verification for the Youth Apprenticeship Pipeline cohort review.
+- **Why:** Following C107 merchant covenant execution, C108 requires consultant selection while Fruitvale shows engine review math-imbalance decay (Sentiment -0.030, RetailVitality -1.32 to 9.67, CrimeIndex 0.63).
+- **Acceptance:** Legislative sign-off on the Phase II design consultant contract and a filed D3 placement ledger confirming apprentice allocations.
+- **Silence consequence:** Corridor merchant protections lose architectural coordination during schematic design, and D3 youth intake targets lapse without council confirmation.
+
+## Denise Carter — City Council District 1
+
+- **Agent:** `.claude/agents/civic-office-council-d1/`
+- **Address:** File the District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to determine permanent dispatch expansion.
+- **Why:** Tracker sequencing mandates completion of D1 OARI evaluation in C108 alongside Month-eight stabilization fund completion, as West Oakland registers decay momentum 2 with CrimeIndex at 0.58.
+- **Acceptance:** A formal D1 program evaluation report detailing call diversion rates, response times, and an expansion recommendation for INIT-002.
+- **Silence consequence:** Citywide expansion decisions for alternative response remain blocked without baseline performance data from the pilot district.
+
+## Janae Rivers — City Council District 5
+
+- **Agent:** `.claude/agents/civic-office-council-d5/`
+- **Address:** Transmit the District 5 operational oversight review for OARI East Oakland dispatch deployment and review apprentice placement quotas.
+- **Why:** Following C107 deployment authorization, East Oakland holds the city's highest CrimeIndex at 0.66, while Baylight District exhibits decay momentum 4 with stall clocks at C109 for INIT-002 and INIT-007.
+- **Acceptance:** A published D5 dispatch monitoring memo validating co-response protocols and confirming East Oakland youth cohort placement counts.
+- **Silence consequence:** Field responders in high-incident sectors operate without district-level coordination, risking operational drift.
+
+## Leonard Tran — City Council District 2
+
+- **Agent:** `.claude/agents/civic-office-council-d2/`
+- **Address:** Certify the Phase II site remediation schedule for the Baylight District (INIT-006) and address commercial decay in Jack London and Downtown.
+- **Why:** C108 tracker sequencing advances INIT-006 to Phase II remediation, while Jack London registers an engine review math-imbalance (Sentiment -0.110, RetailVitality -1.07 to 12.06) and Downtown sentiment sits at 0.33.
+- **Acceptance:** A filed Phase II ground remediation timeline for Baylight and an economic support directive addressing corridor storefront decay.
+- **Silence consequence:** Environmental site preparation stalls before ground-breaking, delaying redevelopment deliverables.
+
+## Warren Ashford — City Council District 7
+
+- **Agent:** `.claude/agents/civic-office-council-d7/`
+- **Address:** Sign off on the fire-rated wall inspections and drywall milestone for the Temescal Community Health Center (INIT-005) while addressing KONO district sentiment distress.
+- **Why:** Following C107 MEP rough-in completion, INIT-005 requires C108 drywall inspection approvals; simultaneously, KONO records the lowest sentiment in Oakland (0.17 vs city 0.330, CrimeIndex 0.61).
+- **Acceptance:** Transmittal of the certified fire-rated wall inspection sign-off and a municipal service request targeting KONO corridor safety.
+- **Silence consequence:** Construction crews stall prior to interior enclosure, delaying the operational handover of the Temescal facility.
+
+## Nina Chen — City Council District 8
+
+- **Agent:** `.claude/agents/civic-office-council-d8/`
+- **Address:** Review the verified applicant intake audit for INIT-007 and address Eastlake corridor decay signals.
+- **Why:** In C107 Chen demanded verifiable intake audits before endorsing full rollout; C108 marks the first cohort placement review while Eastlake logs decay momentum 4 with CrimeIndex at 0.61.
+- **Acceptance:** A formal district audit finding on INIT-007 placement transparency and a documented municipal response to Eastlake crime metrics.
+- **Silence consequence:** Operational rollout of apprenticeship cohorts proceeds without legislative audit approval, leaving D8 intake unverified.
+
+## Terrence Mobley — City Council District 9
+
+- **Agent:** `.claude/agents/civic-office-council-d9/`
+- **Address:** Reconcile Uptown commercial distress metrics with district small-business stabilization deployment.
+- **Why:** Despite C107 claims of community success, Uptown triggered a C108 engine review math-imbalance (Sentiment -0.150 to 0.25, RetailVitality -1.26, HousingPressure rank 22 of 22 at 5.000).
+- **Acceptance:** A published Uptown commercial assessment detailing business retention allocations from the Downtown outreach expansion of INIT-001.
+- **Silence consequence:** Severe commercial and housing pressures in Uptown continue unmitigated by municipal stabilization resources.
+
+## Ramon Vega — City Council District 4
+
+- **Agent:** `.claude/agents/civic-office-council-d4/`
+- **Address:** Address commercial contraction in Grand Lake and Glenview by reviewing citywide small-business stabilization coverage.
+- **Why:** Grand Lake triggered a C108 math-imbalance flag (Sentiment -0.300, RetailVitality -2.12 to 8.52, HousingPressure +1.000), while Glenview records decay momentum 2 and a city-low RetailVitality of 4.02.
+- **Acceptance:** Legislative action or committee referral targeting commercial revitalization and retail vacancy relief for D4 commercial nodes.
+- **Silence consequence:** Neighborhood commercial cores face unmonitored retail vitality collapse without council intervention.
+
+## Elliott Crane — City Council District 6
+
+- **Agent:** `.claude/agents/civic-office-council-d6/`
+- **Address:** Formulate an action plan to reverse declining sentiment in Piedmont Avenue and confirm oversight criteria for Baylight remediation.
+- **Why:** Piedmont Avenue sentiment dropped to 0.23 (below city median 0.330) despite low CrimeIndex (0.54), while Baylight mobilization requires independent council oversight.
+- **Acceptance:** A public district strategy addressing Piedmont Avenue merchant sentiment and a filed oversight memorandum for INIT-006 Phase II remediation.
+- **Silence consequence:** Commercial district sentiment continues downward drift while regional project remediation proceeds without cross-district scrutiny.

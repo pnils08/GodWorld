@@ -1,0 +1,600 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00154",
+    "name": "Dr. Lila Mezran",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Chinatown carries the most sick residents (142) | 4 named on the hospital and cause records",
+    "approach": "Health approach: this slice is the illness count by neighborhood, every resident named on the hospital and live cause records, and the residents the cycle summary names under Health/Recovering. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "health",
+      "hood": "Chinatown",
+      "facts": [
+        "Sick residents by neighborhood: Chinatown 142 (+3 vs C108), East Oakland 122 (+3 vs C108), Fruitvale 119 (+3 vs C108), Ivy Hill 119 (+3 vs C108), San Antonio 115 (+1 vs C108), Laurel 114 (+3 vs C108), Grand Lake 108 (+3 vs C108), Rockridge 108 (+0 vs C108) — 1,944 across 22 neighborhoods",
+        "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+        "Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu",
+        "The city illness rate stands at 4.6%, with 1 in hospital care at 1% of capacity.",
+        "Tiu Xiong skipped plans to rest off a stubborn bug (Uptown).",
+        "Colin Soria fought off a head cold that lingered all week (Temescal)."
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": "named rows are few (4) — write the neighborhood, not a ward",
+      "engineHooks": [
+        "Illness rates in Baylight District up 18%. Public health concern? Investigation warranted. (public health coverage)"
+      ],
+      "roomIsYours": "the waiting room, the walk to the clinic, what a household does when one person is sick, who covers the shift",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "beat-health",
+    "hood": "Chinatown",
+    "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C109 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+    "plan": {
+      "focus": "The impact of illness on Chinatown residents and how the community copes.",
+      "closeQuestion": "What steps can the city take to support neighborhoods like Chinatown during illness spikes?"
+    },
+    "openThreads": [
+      {
+        "slug": "west-oakland-elio-perez-initiative",
+        "label": "west-oakland-elio-perez-initiative | C104→C108 | 9 article(s) | advanced 5, opened 4",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00201",
+          "POP-00722",
+          "POP-00794",
+          "POP-00961",
+          "POP-00176"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "city-eleanor-rivera-beat-transit",
+        "label": "city-eleanor-rivera-beat-transit | C106→C108 | 5 article(s) | advanced 2, opened 3",
+        "hood": null,
+        "popids": [
+          "POP-00617",
+          "POP-00218",
+          "POP-00280",
+          "POP-00338",
+          "POP-01039"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "rockridge-mei-wong-beat-schools",
+        "label": "rockridge-mei-wong-beat-schools | C106→C108 | 4 article(s) | advanced 2, opened 2",
+        "hood": "Rockridge,KONO",
+        "popids": [
+          "POP-01036",
+          "POP-00743",
+          "POP-00287",
+          "POP-00742",
+          "POP-00827",
+          "POP-01018"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "chinatown-yu-zen-beat-health",
+        "label": "chinatown-yu-zen-beat-health | C106→C108 | 4 article(s) | advanced 1, opened 3",
+        "hood": "Chinatown",
+        "popids": [
+          "POP-00194",
+          "POP-00801",
+          "POP-00449",
+          "POP-00228",
+          "POP-01041"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "city-rick-walker-anomaly",
+        "label": "city-rick-walker-anomaly | C107→C108 | 3 article(s) | advanced 1, opened 2",
+        "hood": null,
+        "popids": [
+          "POP-00198",
+          "POP-00170",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "city-tyrie-groin-beat-weather",
+        "label": "city-tyrie-groin-beat-weather | C108→C108 | 2 article(s) | opened 2",
+        "hood": null,
+        "popids": [
+          "POP-00254",
+          "POP-00241",
+          "POP-00170",
+          "POP-00198"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "jack-london-belle-lopez-undocked",
+        "label": "jack-london-belle-lopez-undocked | C108→C108 | 2 article(s) | opened 2",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00300",
+          "POP-00273",
+          "POP-00642",
+          "POP-00643"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "san-antonio-marin-tao-beat-trends",
+        "label": "san-antonio-marin-tao-beat-trends | C108→C108 | 2 article(s) | opened 2",
+        "hood": "San Antonio",
+        "popids": [
+          "POP-00537",
+          "POP-00769",
+          "POP-00632",
+          "POP-00796"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "rockridge-gloria-liu-beat-schools",
+        "label": "rockridge-gloria-liu-beat-schools | C108→C108 | 1 article(s) | opened 1",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00827",
+          "POP-01036",
+          "POP-01018",
+          "POP-00742"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "west-oakland-daniel-cloak-initiative",
+        "label": "west-oakland-daniel-cloak-initiative | C108→C108 | 1 article(s) | opened 1",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00722",
+          "POP-00794",
+          "POP-00176",
+          "POP-00961"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "fruitvale-rick-walker-anomaly",
+        "label": "fruitvale-rick-walker-anomaly | C108→C108 | 1 article(s) | opened 1",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00198",
+          "POP-00953",
+          "POP-00212"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "san-antonio-dank-abara-beat-safety",
+        "label": "san-antonio-dank-abara-beat-safety | C108→C108 | 1 article(s) | opened 1",
+        "hood": "San Antonio",
+        "popids": [
+          "POP-00796",
+          "POP-01054",
+          "POP-00170"
+        ],
+        "lastCycle": 108
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00801",
+        "name": "Maurice Franklin",
+        "profile": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00209",
+        "name": "Tiu Xiong",
+        "profile": "Tiu Xiong — Kombucha Brewer — Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00227",
+        "name": "Colin Soria",
+        "profile": "Colin Soria — Security guard — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00194-4733ecca50",
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "quote": "From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone. But there's hope too—seeing someone like Marcus Osei recover gives the rest of us something to hold onto.",
+        "factIds": [
+          "F-d68cbbfd1320",
+          "F-8b2b24ebfdfd"
+        ],
+        "src": "packet.W2[POP-00194]"
+      },
+      {
+        "id": "Q-POP-00801-3712bae2bb",
+        "pop": "POP-00801",
+        "name": "Maurice Franklin",
+        "quote": "Lying here in the hospital, you hear things. Nurses talking, other patients' families visiting. Chinatown's been hit hard this season - seems like every other conversation is about someone else down there getting sick. It makes you realize how connected we all are, even when we're in different neighborhoods. When one part of the city struggles, it ripples out. But what I’ve noticed is how folks rally around each other. It’s not just about getting through it—it’s about finding ways to lift each other up, even when things feel heavy.",
+        "factIds": [
+          "F-d68cbbfd1320",
+          "F-8b2b24ebfdfd"
+        ],
+        "src": "packet.W2[POP-00801]"
+      },
+      {
+        "id": "Q-POP-00209-0c1e033226",
+        "pop": "POP-00209",
+        "name": "Tiu Xiong",
+        "quote": "Illness hits Chinatown hard, like it does anywhere, but there’s a resilience there that’s hard to miss. People look out for each other, share remedies, and make sure no one’s left behind. It’s a tight-knit community, and that closeness helps them cope.",
+        "factIds": [
+          "F-d68cbbfd1320",
+          "F-8b2b24ebfdfd"
+        ],
+        "src": "packet.W2[POP-00209]"
+      },
+      {
+        "id": "Q-POP-00227-0107865da8",
+        "pop": "POP-00227",
+        "name": "Colin Soria",
+        "quote": "You know, I don't live in Chinatown, but I've walked through enough to see how tight-knit that community is. When illness hits, you can feel it in the air—less chatter in the markets, fewer elders sitting out on the benches. But what gets me is how they rally. Neighbors checking in, dropping off meals without being asked. It's not about big gestures; it's the quiet way they carry each other. Reminds me of how my wife's family was when she got sick. Sometimes just knowing someone's there makes the weight a little lighter.",
+        "factIds": [
+          "F-d68cbbfd1320",
+          "F-8b2b24ebfdfd"
+        ],
+        "src": "packet.W2[POP-00227]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "Are there specific community support networks in Chinatown that help manage illness?",
+        "usable": false
+      },
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "How do local businesses adapt when employees fall ill?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown carries the most sick residents (142) | 4 named on the hospital and cause records",
+      "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C109 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+      "id": "F-d68cbbfd1320"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.",
+      "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C109 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+      "id": "F-8b2b24ebfdfd"
+    },
+    {
+      "t": "FACT",
+      "text": "Sick residents by neighborhood: Chinatown 142 (+3 vs C108), East Oakland 122 (+3 vs C108), Fruitvale 119 (+3 vs C108), Ivy Hill 119 (+3 vs C108), San Antonio 115 (+1 vs C108), Laurel 114 (+3 vs C108), Grand Lake 108 (+3 vs C108), Rockridge 108 (+0 vs C108) — 1,944 across 22 neighborhoods",
+      "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C109",
+      "id": "F-8fff65d5b92f"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+      "src": "output/beats/Hospital_Ledger.jsonl POP-00194",
+      "id": "F-fd3a5ebe69ce"
+    },
+    {
+      "t": "FACT",
+      "text": "Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu",
+      "src": "output/beats/Hospital_Ledger.jsonl POP-00801",
+      "id": "F-01863f8f97a1"
+    },
+    {
+      "t": "FACT",
+      "text": "The city illness rate stands at 4.6%, with 1 in hospital care at 1% of capacity.",
+      "src": "output/world_summary_c109.md \"## City State\"",
+      "id": "F-79165044e823"
+    },
+    {
+      "t": "FACT",
+      "text": "Tiu Xiong skipped plans to rest off a stubborn bug (Uptown).",
+      "src": "output/world_summary_c109.md \"## Who Lived It ### Health\"",
+      "id": "F-2e0d1e92557a"
+    },
+    {
+      "t": "FACT",
+      "text": "Colin Soria fought off a head cold that lingered all week (Temescal).",
+      "src": "output/world_summary_c109.md \"## Who Lived It ### Health\"",
+      "id": "F-0a3fdc9c9ce7"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed health-service Initiative or access condition into a careful public record without diagnosing residents or inventing clinical outcomes.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "clinical calm in precise third-person public-service reporting",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-backed health-service, access, place, or implementation fact",
+      "closing": "the next resident-impact, access, capacity, or timeline record still needed"
+    },
+    "authorizedTexture": [
+      "plain-language translation of a supplied health-service implementation fact",
+      "a careful access or human-cost question that remains explicitly unanswered",
+      "transitions between supplied health-service facts that add no patient, diagnosis, outcome, count, or causal claim"
+    ],
+    "textureConditions": [
+      "every named person, clinic, hospital, service, Initiative, Project, office, institution, neighborhood, and organization must come from the Packet",
+      "diagnoses, symptoms, prevalence, treatment results, access changes, capacity, staffing, budgets, dates, durations, counts, measurements, and causal health outcomes require Packet support",
+      "an unestablished human consequence must remain unestablished; do not manufacture a patient, resident, clinician, quote, or collective experience",
+      "raw tracker status, phase labels, source paths, and engine fields may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented diagnosis, symptom, condition, patient, resident, clinician, quote, treatment, outcome, access effect, wait time, capacity, staffing level, budget, measurement, or health cluster",
+      "a named health service, institution, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported opening, closure, delay, service change, official act, duty, response, promise, timeline, or causal health claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, or row metadata printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-4ff72164faca",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-d68cbbfd1320",
+        "t": "FACT",
+        "text": "Chinatown carries the most sick residents (142) | 4 named on the hospital and cause records",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C109 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+      },
+      {
+        "id": "F-8b2b24ebfdfd",
+        "t": "FACT",
+        "text": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C109 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+      },
+      {
+        "id": "F-8fff65d5b92f",
+        "t": "FACT",
+        "text": "Sick residents by neighborhood: Chinatown 142 (+3 vs C108), East Oakland 122 (+3 vs C108), Fruitvale 119 (+3 vs C108), Ivy Hill 119 (+3 vs C108), San Antonio 115 (+1 vs C108), Laurel 114 (+3 vs C108), Grand Lake 108 (+3 vs C108), Rockridge 108 (+0 vs C108) — 1,944 across 22 neighborhoods",
+        "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C109"
+      },
+      {
+        "id": "F-fd3a5ebe69ce",
+        "t": "FACT",
+        "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+        "src": "output/beats/Hospital_Ledger.jsonl POP-00194"
+      },
+      {
+        "id": "F-01863f8f97a1",
+        "t": "FACT",
+        "text": "Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu",
+        "src": "output/beats/Hospital_Ledger.jsonl POP-00801"
+      },
+      {
+        "id": "F-79165044e823",
+        "t": "FACT",
+        "text": "The city illness rate stands at 4.6%, with 1 in hospital care at 1% of capacity.",
+        "src": "output/world_summary_c109.md \"## City State\""
+      },
+      {
+        "id": "F-2e0d1e92557a",
+        "t": "FACT",
+        "text": "Tiu Xiong skipped plans to rest off a stubborn bug (Uptown).",
+        "src": "output/world_summary_c109.md \"## Who Lived It ### Health\""
+      },
+      {
+        "id": "F-0a3fdc9c9ce7",
+        "t": "FACT",
+        "text": "Colin Soria fought off a head cold that lingered all week (Temescal).",
+        "src": "output/world_summary_c109.md \"## Who Lived It ### Health\""
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00194-4733ecca50",
+        "speakerId": "POP-00194",
+        "speakerName": "Yu Zen",
+        "text": "From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone. But there's hope too—seeing someone like Marcus Osei recover gives the rest of us something to hold onto.",
+        "factIds": [
+          "F-d68cbbfd1320",
+          "F-8b2b24ebfdfd"
+        ],
+        "src": "packet.W2[POP-00194]"
+      },
+      {
+        "id": "Q-POP-00801-3712bae2bb",
+        "speakerId": "POP-00801",
+        "speakerName": "Maurice Franklin",
+        "text": "Lying here in the hospital, you hear things. Nurses talking, other patients' families visiting. Chinatown's been hit hard this season - seems like every other conversation is about someone else down there getting sick. It makes you realize how connected we all are, even when we're in different neighborhoods. When one part of the city struggles, it ripples out. But what I’ve noticed is how folks rally around each other. It’s not just about getting through it—it’s about finding ways to lift each other up, even when things feel heavy.",
+        "factIds": [
+          "F-d68cbbfd1320",
+          "F-8b2b24ebfdfd"
+        ],
+        "src": "packet.W2[POP-00801]"
+      },
+      {
+        "id": "Q-POP-00209-0c1e033226",
+        "speakerId": "POP-00209",
+        "speakerName": "Tiu Xiong",
+        "text": "Illness hits Chinatown hard, like it does anywhere, but there’s a resilience there that’s hard to miss. People look out for each other, share remedies, and make sure no one’s left behind. It’s a tight-knit community, and that closeness helps them cope.",
+        "factIds": [
+          "F-d68cbbfd1320",
+          "F-8b2b24ebfdfd"
+        ],
+        "src": "packet.W2[POP-00209]"
+      },
+      {
+        "id": "Q-POP-00227-0107865da8",
+        "speakerId": "POP-00227",
+        "speakerName": "Colin Soria",
+        "text": "You know, I don't live in Chinatown, but I've walked through enough to see how tight-knit that community is. When illness hits, you can feel it in the air—less chatter in the markets, fewer elders sitting out on the benches. But what gets me is how they rally. Neighbors checking in, dropping off meals without being asked. It's not about big gestures; it's the quiet way they carry each other. Reminds me of how my wife's family was when she got sick. Sometimes just knowing someone's there makes the weight a little lighter.",
+        "factIds": [
+          "F-d68cbbfd1320",
+          "F-8b2b24ebfdfd"
+        ],
+        "src": "packet.W2[POP-00227]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00194",
+        "name": "Yu Zen",
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00801",
+        "name": "Maurice Franklin",
+        "profile": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00209",
+        "name": "Tiu Xiong",
+        "profile": "Tiu Xiong — Kombucha Brewer — Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00227",
+        "name": "Colin Soria",
+        "profile": "Colin Soria — Security guard — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "Are there specific community support networks in Chinatown that help manage illness?",
+        "publishable": false
+      },
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "How do local businesses adapt when employees fall ill?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language translation of a supplied health-service implementation fact",
+      "a careful access or human-cost question that remains explicitly unanswered",
+      "transitions between supplied health-service facts that add no patient, diagnosis, outcome, count, or causal claim"
+    ],
+    "textureConditions": [
+      "every named person, clinic, hospital, service, Initiative, Project, office, institution, neighborhood, and organization must come from the Packet",
+      "diagnoses, symptoms, prevalence, treatment results, access changes, capacity, staffing, budgets, dates, durations, counts, measurements, and causal health outcomes require Packet support",
+      "an unestablished human consequence must remain unestablished; do not manufacture a patient, resident, clinician, quote, or collective experience",
+      "raw tracker status, phase labels, source paths, and engine fields may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented diagnosis, symptom, condition, patient, resident, clinician, quote, treatment, outcome, access effect, wait time, capacity, staffing level, budget, measurement, or health cluster",
+      "a named health service, institution, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported opening, closure, delay, service change, official act, duty, response, promise, timeline, or causal health claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, or row metadata printed as public-facing evidence"
+    ]
+  }
+}

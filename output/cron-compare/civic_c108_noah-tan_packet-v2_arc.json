@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "civic",
+  "persona": "noah-tan",
+  "storyline": {
+    "slug": "city-tyrie-groin-beat-weather",
+    "verb": "opened"
+  },
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00254",
+      "name": "Tyrie Groin",
+      "quote": "The fog in Oakland, it’s like a quiet blanket that slows things down, makes you think a little deeper. It’s not just the chill—it’s the way it wraps around you, makes the familiar streets feel different, like you’re seeing them through a new lens. It’s introspective, you know? Makes you appreciate the warmth of family and the comfort of routine even more."
+    },
+    {
+      "pop": "POP-00241",
+      "name": "Marc Allie",
+      "quote": "The fog in Oakland? It’s like a quiet blanket that slows everything down. You feel it in your bones, especially early mornings when I’m heading out for my shift. It’s not just the chill—it’s the way it makes the neighborhood feel smaller, more intimate. Like the world’s holding its breath. It’s grounding, in a way, reminds you to take things one step at a time."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "The fog wraps Oakland in this quiet, introspective mood—it’s like the city slows down a little, and I find myself tending to my sourdough starter with extra care, almost like it needs the warmth too."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "The fog in Oakland wraps everything in a quiet hush, making mornings feel slower and more reflective, especially when I’m walking to school or prepping for the day."
+    }
+  ],
+  "claim": "The fog in Oakland, it’s like a quiet blanket that slows things down, makes you think a little deeper. It’s not just the chill—it’s the way it wraps around you, makes the familiar streets feel different, like you’re seeing them through a new lens. It’s introspective, you know? Makes you appreciate the warmth of family and the comfort of routine even more.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-23T18:17:11.759Z"
+}

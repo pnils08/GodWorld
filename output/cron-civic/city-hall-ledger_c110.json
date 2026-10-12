@@ -1,0 +1,186 @@
+{
+  "cycle": 110,
+  "v": "CITYHALL/1",
+  "hearing": [
+    {
+      "officeId": "COUNCIL-D8",
+      "popid": "POP-00505",
+      "holder": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Lake Merritt's stability is the direct result of consistent municipal maintenance schedules, and Adams Point deserves that exact same operational rigor.",
+      "actionAsked": "Direct Public Works and Economic Development to conduct a municipal baseline review for Adams Point commercial corridors while maintaining verified maintenance schedules across Lake Merritt, Grand Lake, and Eastlake.",
+      "voiceFile": "output/civic-voice/council_d8_c110.json"
+    },
+    {
+      "officeId": "COUNCIL-D6",
+      "popid": "POP-00044",
+      "holder": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "When community anchors like B'nai Tikvah Synagogue step up for our seniors and street trade is thriving, City Hall's job is simple: deliver baseline services flawlessly.",
+      "actionAsked": "Prioritize baseline municipal services and merchant support to sustain low crime and active street trade across Piedmont Avenue and Montclair.",
+      "voiceFile": "output/civic-voice/council_d6_c110.json"
+    },
+    {
+      "officeId": "COUNCIL-D9",
+      "popid": "POP-00506",
+      "holder": "Terrence Mobley",
+      "district": "D9",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Laurel’s stability is no accident—it’s the result of staying focused on what works.",
+      "actionAsked": "Support continued investment in Laurel’s community-led initiatives",
+      "voiceFile": "output/civic-voice/council_d9_c110.json"
+    },
+    {
+      "officeId": "COUNCIL-D7",
+      "popid": "POP-00504",
+      "holder": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "District 7 delivers results through rigorous inspection and strict accounting, not executive hand-waving.",
+      "actionAsked": "Transmitted certified building inspection sign-off and drywall authorization for INIT-005 to the Planning and Building Department while mandating complete closeout audit protocols.",
+      "voiceFile": "output/civic-voice/council_d7_c110.json"
+    },
+    {
+      "officeId": "COUNCIL-D4",
+      "popid": "POP-00042",
+      "holder": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Targeted investment and fiscal discipline are crucial for our city's growth, and I believe the Downtown Economic Revitalization initiative aligns with these principles.",
+      "actionAsked": "YES",
+      "voiceFile": "output/civic-voice/council_d4_c110.json"
+    },
+    {
+      "officeId": "COUNCIL-D2",
+      "popid": "POP-00502",
+      "holder": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "We must break ground on Baylight now, and we must do it with a clear understanding of the infrastructure and economic impact data.",
+      "actionAsked": "Confirm Phase II site remediation proceeds on schedule",
+      "voiceFile": "output/civic-voice/council_d2_c110.json"
+    },
+    {
+      "officeId": "COUNCIL-D5",
+      "popid": "POP-00043",
+      "holder": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "East Oakland's youth deserve more than promises—they deserve pathways to prosperity.",
+      "actionAsked": "Accelerate cohort placement review, prioritizing East Oakland youth",
+      "voiceFile": "output/civic-voice/council_d5_c110.json"
+    },
+    {
+      "officeId": "COUNCIL-D1",
+      "popid": "POP-00501",
+      "holder": "Denise Carter",
+      "district": "D1",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+      "actionAsked": "Approved month-nine disbursement of $400,000 for household stabilization grants",
+      "voiceFile": "output/civic-voice/council_d1_c110.json"
+    },
+    {
+      "officeId": "STAFF-DM-COMM",
+      "popid": "POP-00037",
+      "holder": "Brenda Okoro",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Nine months in, the Fund's design is holding—targeted relief that flows to tenants before displacement does.",
+      "actionAsked": "Approved month-nine disbursement of $400,000 for household stabilization grants",
+      "voiceFile": "output/civic-voice/okoro_c110.json"
+    },
+    {
+      "officeId": "COUNCIL-D3",
+      "popid": "POP-00503",
+      "holder": "Rose Delgado",
+      "district": "D3",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+      "actionAsked": "Direct Mayer & Associates to advance to preliminary schematics review with community oversight provisions intact.",
+      "voiceFile": "output/civic-voice/council_d3_c110.json"
+    }
+  ],
+  "votes": [],
+  "gavel": {
+    "officeId": "MAYOR-01",
+    "popid": "POP-00034",
+    "holder": "Avery Santana",
+    "dispositions": [
+      {
+        "initiativeId": "INIT-001",
+        "mayoralAction": "none",
+        "implementationPhase": "disbursement-active",
+        "note": "C110: Month-nine disbursement $400K approved; 23-day avg processing time achieved"
+      },
+      {
+        "initiativeId": "INIT-003",
+        "mayoralAction": "none",
+        "implementationPhase": "design-phase",
+        "note": "C110: Preliminary schematics review authorized; Mayer & Associates contracted with community oversight"
+      },
+      {
+        "initiativeId": "INIT-008",
+        "mayoralAction": "none",
+        "implementationPhase": "legislation-filed",
+        "note": "C110: Ordinance filed with City Clerk; $15M authorization pending council"
+      },
+      {
+        "initiativeId": "INIT-007",
+        "mayoralAction": "none",
+        "implementationPhase": "implementation-active",
+        "note": "C110: Cohort placement accelerated; East Oakland priority established; 150 target by spring"
+      },
+      {
+        "initiativeId": "INIT-006",
+        "mayoralAction": "none",
+        "implementationPhase": "construction-active",
+        "note": "C110: Soil test verification complete; Phase II remediation proceeds with independent oversight"
+      }
+    ],
+    "quote": "Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.",
+    "voiceFile": "output/civic-voice/mayor_gavel_c110.json"
+  }
+}

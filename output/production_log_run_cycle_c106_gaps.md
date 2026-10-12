@@ -395,3 +395,6 @@
 
 - **G-EC76 [judgment] [LOW] — archive-side follow-ups aren't in the chain.** `buildCitizenCards.js --apply --from-archive` and `dumpLedger.js` ran by hand after the archive flip; the run-cycle skill has 5.56 for the ledger dump but nothing for cards. Add a 5.57 `buildCitizenCards.js --apply` (post-publish already runs it, but a cycle without an edition never refreshes cards). **Status:** OPEN.
 
+## LEG: /city-hall (G-R)
+
+- G-R (AUTO): apply gate blocked — see output/cron-civic/gate_c106.json

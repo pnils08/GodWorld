@@ -1,0 +1,842 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "trevor-shimizu",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00155",
+      "name": "Trevor Shimizu",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "transit",
+        "hood": null,
+        "facts": [
+          "8 stations + 10 corridors on the record this cycle; total ridership 91,564 (C109: 99,582)",
+          "Lake Merritt: ridership 5,896 (-2,588 vs C109), on-time 84% (-2 pts) — fog; events in Lake Merritt, Chinatown",
+          "MacArthur: ridership 9,996 (-2,034 vs C109), on-time 78% (-6 pts) — fog",
+          "Coliseum: ridership 8,023 (-1,701 vs C109), on-time 76% (-7 pts) — fog; events in East Oakland ×2, Baylight District",
+          "Rockridge: ridership 7,644 (-1,699 vs C109), on-time 75% (-3 pts) — fog",
+          "Fruitvale: ridership 11,735 (+1,321 vs C109), on-time 78% (-3 pts) — fog; game day (Dimond); events in Fruitvale, East Oakland ×2; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+          "19th St Oakland: ridership 16,105 (-999 vs C109), on-time 79% (-7 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt; Baylight District — Final Council Vote: construction-active",
+          "12th St Oakland City Center: ridership 23,485 (-363 vs C109), on-time 81% (-4 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt, West Oakland ×2; Baylight District — Final Council Vote: construction-active",
+          "West Oakland: ridership 8,680 (+45 vs C109), on-time 75% (-6 pts) — fog; game day (Jack London, Downtown); events in West Oakland ×2, Downtown; Baylight District — Final Council Vote: construction-active",
+          "I-880 North: traffic index 100 (+0 vs C109) — fog; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+          "I-880 South: traffic index 99 (-1 vs C109) — fog",
+          "I-580 East: traffic index 100 (+0 vs C109) — fog; game day (Dimond)"
+        ],
+        "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+        "note": null,
+        "engineHooks": [
+          "Notable event: \"High-severity public-works spike in Ivy Hill\". Follow-up recommended. (general coverage)"
+        ],
+        "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-transit",
+      "hood": null,
+      "score": null,
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): advance to preliminary schematics with community oversight provisions intact — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): filed legislative language with City Clerk — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): approved accelerated cohort placement with East Oakland priority — \"150 apprentices placed by spring — that's the target, and we're accelerating to hit it.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): independent oversight maintained; soil test verification proceeding — \"Independent oversight isn't bureaucracy — it's how we build trust while we build the future.\"",
+          "src": "output/civic-voice/mayor_gavel_c110.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00200",
+          "name": "Evan Lewis",
+          "profile": "Evan Lewis — Bus driver",
+          "role": "Bus driver",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00200",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00218",
+          "name": "Joel Wren",
+          "profile": "Joel Wren — Mechanic",
+          "role": "Mechanic",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00218",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00280",
+          "name": "Jerald Jensen",
+          "profile": "Jerald Jensen — Janitor",
+          "role": "Janitor",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00280",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00338",
+          "name": "Coen Cartier",
+          "profile": "Coen Cartier — Transit Operator (AC Transit)",
+          "role": "Transit Operator (AC Transit)",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00338",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00442",
+          "name": "Daire Green",
+          "profile": "Daire Green — Transit Operator (AC Transit)",
+          "role": "Transit Operator (AC Transit)",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00442",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00448",
+          "name": "Ray Neal",
+          "profile": "Ray Neal — AC Transit Bus Operator",
+          "role": "AC Transit Bus Operator",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00448",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00573",
+          "name": "Calvin Mwangi",
+          "profile": "Calvin Mwangi — AC Transit Bus Driver",
+          "role": "AC Transit Bus Driver",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00573",
+            "status": "Active"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-1fd54cb8752f"
+      },
+      {
+        "t": "FACT",
+        "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-d8d40669c4f7"
+      },
+      {
+        "t": "FACT",
+        "text": "8 stations + 10 corridors on the record this cycle; total ridership 91,564 (C109: 99,582)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-ae5840cc4dce"
+      },
+      {
+        "t": "FACT",
+        "text": "Lake Merritt: ridership 5,896 (-2,588 vs C109), on-time 84% (-2 pts) — fog; events in Lake Merritt, Chinatown",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-192a1321c18a"
+      },
+      {
+        "t": "FACT",
+        "text": "MacArthur: ridership 9,996 (-2,034 vs C109), on-time 78% (-6 pts) — fog",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-116832be0e26"
+      },
+      {
+        "t": "FACT",
+        "text": "Coliseum: ridership 8,023 (-1,701 vs C109), on-time 76% (-7 pts) — fog; events in East Oakland ×2, Baylight District",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-134e1b506b3e"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: ridership 7,644 (-1,699 vs C109), on-time 75% (-3 pts) — fog",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-05859793c343"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale: ridership 11,735 (+1,321 vs C109), on-time 78% (-3 pts) — fog; game day (Dimond); events in Fruitvale, East Oakland ×2; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-aabc1db19057"
+      },
+      {
+        "t": "FACT",
+        "text": "19th St Oakland: ridership 16,105 (-999 vs C109), on-time 79% (-7 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-de3d77a13b46"
+      },
+      {
+        "t": "FACT",
+        "text": "12th St Oakland City Center: ridership 23,485 (-363 vs C109), on-time 81% (-4 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt, West Oakland ×2; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-c17495985024"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland: ridership 8,680 (+45 vs C109), on-time 75% (-6 pts) — fog; game day (Jack London, Downtown); events in West Oakland ×2, Downtown; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-b37202034417"
+      },
+      {
+        "t": "FACT",
+        "text": "I-880 North: traffic index 100 (+0 vs C109) — fog; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-c582a62e8256"
+      },
+      {
+        "t": "FACT",
+        "text": "I-880 South: traffic index 99 (-1 vs C109) — fog",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-c777d836370f"
+      },
+      {
+        "t": "FACT",
+        "text": "I-580 East: traffic index 100 (+0 vs C109) — fog; game day (Dimond)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-54200c414a5f"
+      },
+      {
+        "t": "FACT",
+        "text": "I-580 West: traffic index 98 (+2 vs C109) — fog",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-77f862dbeb55"
+      },
+      {
+        "t": "FACT",
+        "text": "I-980: traffic index 100 (+0 vs C109) — fog; game day (Downtown); Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-93c243a62ea9"
+      },
+      {
+        "t": "FACT",
+        "text": "Broadway: traffic index 100 (+0 vs C109) — fog; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-414ad09a30d9"
+      },
+      {
+        "t": "FACT",
+        "text": "International Blvd: traffic index 94 (-6 vs C109) — fog",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-9a3853a34c17"
+      },
+      {
+        "t": "FACT",
+        "text": "MacArthur Blvd: traffic index 90 (+13 vs C109) — fog; game day (Dimond)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-87596c90ed3f"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Ave: traffic index 100 (+0 vs C109) — fog; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-059905751841"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Ave: traffic index 67 (-6 vs C109) — fog",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+        "id": "F-4bcb13e09f48"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "workplace",
+    "candidates": [
+      {
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
+        "hood": null,
+        "profile": "Evan Lewis — Bus driver",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00200",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00218",
+        "name": "Joel Wren",
+        "role": "Mechanic",
+        "hood": null,
+        "profile": "Joel Wren — Mechanic",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00218",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00280",
+        "name": "Jerald Jensen",
+        "role": "Janitor",
+        "hood": null,
+        "profile": "Jerald Jensen — Janitor",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00280",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00338",
+        "name": "Coen Cartier",
+        "role": "Transit Operator (AC Transit)",
+        "hood": null,
+        "profile": "Coen Cartier — Transit Operator (AC Transit)",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00338",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00442",
+        "name": "Daire Green",
+        "role": "Transit Operator (AC Transit)",
+        "hood": null,
+        "profile": "Daire Green — Transit Operator (AC Transit)",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00442",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00448",
+        "name": "Ray Neal",
+        "role": "AC Transit Bus Operator",
+        "hood": null,
+        "profile": "Ray Neal — AC Transit Bus Operator",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00448",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00573",
+        "name": "Calvin Mwangi",
+        "role": "AC Transit Bus Driver",
+        "hood": null,
+        "profile": "Calvin Mwangi — AC Transit Bus Driver",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00573",
+          "status": "Active"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-transit",
+      "angle": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "label": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record",
+      "hookLine": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster.",
+      "hood": null,
+      "citizens": [
+        "Evan Lewis (POP-00200)",
+        "Joel Wren (POP-00218)",
+        "Jerald Jensen (POP-00280)",
+        "Coen Cartier (POP-00338)",
+        "Daire Green (POP-00442)",
+        "Ray Neal (POP-00448)",
+        "Calvin Mwangi (POP-00573)",
+        "Eleanor Rivera (POP-00617)",
+        "Elena Soria-Dominguez (POP-00791)",
+        "Ximena Mehta (POP-01039)"
+      ],
+      "popids": [
+        "POP-00200",
+        "POP-00218",
+        "POP-00280",
+        "POP-00338",
+        "POP-00442",
+        "POP-00448",
+        "POP-00573",
+        "POP-00617",
+        "POP-00791",
+        "POP-01039"
+      ],
+      "ref": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "cycle": 110
+    },
+    "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "TRANSIT-SLICE-1",
+    "kind": "beat-transit",
+    "seat": {
+      "slug": "trevor-shimizu",
+      "name": "Trevor Shimizu",
+      "popid": "POP-00155",
+      "desk": "civic",
+      "domain": "transit",
+      "builder": "buildTransitSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-transit",
+      "score": 100,
+      "label": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record",
+      "hood": null,
+      "source": "output/beats/Transit_Metrics.jsonl Cycle 110"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "hookLine": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster.",
+      "anchorFacts": [
+        "8 stations + 10 corridors on the record this cycle; total ridership 91,564 (C109: 99,582)",
+        "Lake Merritt: ridership 5,896 (-2,588 vs C109), on-time 84% (-2 pts) — fog; events in Lake Merritt, Chinatown",
+        "MacArthur: ridership 9,996 (-2,034 vs C109), on-time 78% (-6 pts) — fog",
+        "Coliseum: ridership 8,023 (-1,701 vs C109), on-time 76% (-7 pts) — fog; events in East Oakland ×2, Baylight District",
+        "Rockridge: ridership 7,644 (-1,699 vs C109), on-time 75% (-3 pts) — fog",
+        "Fruitvale: ridership 11,735 (+1,321 vs C109), on-time 78% (-3 pts) — fog; game day (Dimond); events in Fruitvale, East Oakland ×2; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+        "19th St Oakland: ridership 16,105 (-999 vs C109), on-time 79% (-7 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt; Baylight District — Final Council Vote: construction-active",
+        "12th St Oakland City Center: ridership 23,485 (-363 vs C109), on-time 81% (-4 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt, West Oakland ×2; Baylight District — Final Council Vote: construction-active",
+        "West Oakland: ridership 8,680 (+45 vs C109), on-time 75% (-6 pts) — fog; game day (Jack London, Downtown); events in West Oakland ×2, Downtown; Baylight District — Final Council Vote: construction-active",
+        "I-880 North: traffic index 100 (+0 vs C109) — fog; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+        "I-880 South: traffic index 99 (-1 vs C109) — fog",
+        "I-580 East: traffic index 100 (+0 vs C109) — fog; game day (Dimond)",
+        "I-580 West: traffic index 98 (+2 vs C109) — fog",
+        "I-980: traffic index 100 (+0 vs C109) — fog; game day (Downtown); Baylight District — Final Council Vote: construction-active",
+        "Broadway: traffic index 100 (+0 vs C109) — fog; game day (Downtown)",
+        "International Blvd: traffic index 94 (-6 vs C109) — fog",
+        "MacArthur Blvd: traffic index 90 (+13 vs C109) — fog; game day (Dimond)",
+        "Telegraph Ave: traffic index 100 (+0 vs C109) — fog; game day (Downtown)",
+        "Grand Ave: traffic index 67 (-6 vs C109) — fog"
+      ],
+      "evidence": [
+        {
+          "text": "8 stations + 10 corridors on the record this cycle; total ridership 91,564 (C109: 99,582)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "Lake Merritt: ridership 5,896 (-2,588 vs C109), on-time 84% (-2 pts) — fog; events in Lake Merritt, Chinatown",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "MacArthur: ridership 9,996 (-2,034 vs C109), on-time 78% (-6 pts) — fog",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "Coliseum: ridership 8,023 (-1,701 vs C109), on-time 76% (-7 pts) — fog; events in East Oakland ×2, Baylight District",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "Rockridge: ridership 7,644 (-1,699 vs C109), on-time 75% (-3 pts) — fog",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "Fruitvale: ridership 11,735 (+1,321 vs C109), on-time 78% (-3 pts) — fog; game day (Dimond); events in Fruitvale, East Oakland ×2; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "19th St Oakland: ridership 16,105 (-999 vs C109), on-time 79% (-7 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt; Baylight District — Final Council Vote: construction-active",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "12th St Oakland City Center: ridership 23,485 (-363 vs C109), on-time 81% (-4 pts) — fog; game day (Downtown); events in Downtown, Lake Merritt, West Oakland ×2; Baylight District — Final Council Vote: construction-active",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "West Oakland: ridership 8,680 (+45 vs C109), on-time 75% (-6 pts) — fog; game day (Jack London, Downtown); events in West Oakland ×2, Downtown; Baylight District — Final Council Vote: construction-active",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "I-880 North: traffic index 100 (+0 vs C109) — fog; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "I-880 South: traffic index 99 (-1 vs C109) — fog",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "I-580 East: traffic index 100 (+0 vs C109) — fog; game day (Dimond)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "I-580 West: traffic index 98 (+2 vs C109) — fog",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "I-980: traffic index 100 (+0 vs C109) — fog; game day (Downtown); Baylight District — Final Council Vote: construction-active",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "Broadway: traffic index 100 (+0 vs C109) — fog; game day (Downtown)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "International Blvd: traffic index 94 (-6 vs C109) — fog",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "MacArthur Blvd: traffic index 90 (+13 vs C109) — fog; game day (Dimond)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "Telegraph Ave: traffic index 100 (+0 vs C109) — fog; game day (Downtown)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        {
+          "text": "Grand Ave: traffic index 67 (-6 vs C109) — fog",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_IN_TABLE",
+        "vs": 109
+      },
+      "hooks": [
+        {
+          "text": "Notable event: \"High-severity public-works spike in Ivy Hill\". Follow-up recommended.",
+          "angle": "general coverage",
+          "domain": "INFRASTRUCTURE",
+          "hood": "Ivy Hill",
+          "priority": 3
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Evan Lewis — Bus driver — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00218",
+        "name": "Joel Wren",
+        "role": "Mechanic",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Joel Wren — Mechanic — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00280",
+        "name": "Jerald Jensen",
+        "role": "Janitor",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Jerald Jensen — Janitor — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00338",
+        "name": "Coen Cartier",
+        "role": "Transit Operator (AC Transit)",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00442",
+        "name": "Daire Green",
+        "role": "Transit Operator (AC Transit)",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Daire Green — Transit Operator (AC Transit) — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00448",
+        "name": "Ray Neal",
+        "role": "AC Transit Bus Operator",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Ray Neal — AC Transit Bus Operator — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00573",
+        "name": "Calvin Mwangi",
+        "role": "AC Transit Bus Driver",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Calvin Mwangi — AC Transit Bus Driver — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00617",
+        "name": "Eleanor Rivera",
+        "role": "BART Station Manager",
+        "neighborhood": null,
+        "business": "BART Oakland Division",
+        "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "why": "works at BART Oakland Division (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00791",
+        "name": "Elena Soria-Dominguez",
+        "role": "Transit Hub Planning Lead",
+        "neighborhood": null,
+        "business": "Fruitvale Transit Hub Authority",
+        "profile": "Elena Soria-Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+        "why": "works at Fruitvale Transit Hub Authority (Employment_Roster)"
+      },
+      {
+        "popid": "POP-01039",
+        "name": "Ximena Mehta",
+        "role": "Bart Transit PR",
+        "neighborhood": null,
+        "business": "BART Oakland Division",
+        "profile": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+        "why": "works at BART Oakland Division (Employment_Roster)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Trevor Shimizu this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155",
+    "text": "I’m looking into the dip in ridership at Lake Merritt station, which saw the steepest decline this cycle—down 2,588 riders compared to C109. Fog and events in Lake Merritt and Chinatown seem to be factors, but I want to dig deeper. Who’s feeling the impact? Are transit workers noticing changes in their routines or interactions with riders? I’ll start by talking to the transit operators and mechanics on the roster to see if they’ve observed anything unusual or if there’s more to the story than just weather and events.",
+    "plan": {
+      "chase": "I’m looking into the dip in ridership at Lake Merritt station, which saw the steepest decline this cycle—down 2,588 riders compared to C109. Fog and events in Lake Merritt and Chinatown seem to be factors, but I want to dig deeper. Who’s feeling the impact? Are transit workers noticing changes in their routines or interactions with riders? I’ll start by talking to the transit operators and mechanics on the roster to see if they’ve observed anything unusual or if there’s more to the story than just weather and events.",
+      "focus": "Lake Merritt station’s ridership decline and its impact on transit workers.",
+      "why": "Understanding why ridership dropped so sharply at Lake Merritt could reveal broader trends or issues affecting the transit system.",
+      "checks": [
+        "F-d8d40669c4f7",
+        "F-192a1321c18a"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00338",
+          "question": "Have you noticed any changes in rider behavior or station activity at Lake Merritt this cycle?",
+          "basis": "Transit Operator (AC Transit)"
+        },
+        {
+          "pop": "POP-00218",
+          "question": "Are there any mechanical or operational challenges at Lake Merritt station that could be contributing to the ridership decline?",
+          "basis": "Mechanic"
+        }
+      ],
+      "interpretation": "The fog and local events might explain part of the decline, but there could be underlying operational or rider-experience issues at play.",
+      "unverifiedLead": [
+        "Are there specific times of day when ridership drops more noticeably?",
+        "Are riders opting for alternative routes or modes of transportation?"
+      ],
+      "closeQuestion": "What’s the human story behind the numbers at Lake Merritt station?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): advance to preliminary schematics with community oversight provisions intact — \"Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): filed legislative language with City Clerk — \"Downtown businesses shouldn't have to wait for relief while their shelves gather dust.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved accelerated cohort placement with East Oakland priority — \"150 apprentices placed by spring — that's the target, and we're accelerating to hit it.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): independent oversight maintained; soil test verification proceeding — \"Independent oversight isn't bureaucracy — it's how we build trust while we build the future.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c110.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 102,
+  "ranAt": "2026-10-05T11:16:44.031Z"
+}

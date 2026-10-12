@@ -1,0 +1,436 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "110",
+  "persona": "selena-grant",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00591",
+      "name": "Selena Grant",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks — game-result C110 · 0-4 · L4 — the second club's board read",
+      "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "oaks",
+        "hood": "Dimond",
+        "facts": [
+          "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+          "Record 0-4 · streak L4",
+          "Stats (feed): Austin Reaves/17PTS/5ASST, AJ Dybantsa/22PTS/6REB",
+          "Trigger: cold-streak",
+          "Franchise stability: uncertain",
+          "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+          "Record 0-5 · streak L5",
+          "Stats (feed): Adash Stanley/8PTS/11ASST, Ausin Reaves/20PTS, AJ Dybantsa/11PTS"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-oaks-beat",
+      "hood": "Dimond",
+      "score": null,
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+      "nearby": [
+        {
+          "text": "A's | game-result | (playoffs) | Henry Rivas, Danny Horn, Mark Aitken, Isley Kelley",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | John Ellis, Eric Taveras, Vinnie Keane, Benji Dillon",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Austin Reaves, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (championship) | Mike Paulson, Vinnie Keane, Benji Dillon, Mark Aitken, Eric Taveras, Pablo Almanzar, Arturo Ramos, Isley Kelley, Darrin Davis, Frank Reyna",
+          "src": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result C110 · 0-4 · L4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+        "id": "F-84ef51b4c816"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+        "id": "F-240cc9c21b2c"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-897c526e0609"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 0-4 · streak L4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-f9fb4484a6c1"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Austin Reaves/17PTS/5ASST, AJ Dybantsa/22PTS/6REB",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-29054fc45407"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: cold-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-c9f7ebdabaa3"
+      },
+      {
+        "t": "FACT",
+        "text": "Franchise stability: uncertain",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-c68032a03d36"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-13437837b8e6"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 0-5 · streak L5",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-b30c7924af55"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Adash Stanley/8PTS/11ASST, Ausin Reaves/20PTS, AJ Dybantsa/11PTS",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C110",
+        "id": "F-0014afc6293e"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Selena Grant",
+    "popid": "POP-00591"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-beat",
+      "angle": "Oaks — game-result C110 · 0-4 · L4 — the second club's board read",
+      "label": "Oaks — game-result C110 · 0-4 · L4",
+      "hookLine": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+      "hood": "Dimond",
+      "citizens": [
+        "Austin Reaves (POP-01027)",
+        "Adash Stanley (POP-01023)",
+        "Wilson Shepard (POP-01022)"
+      ],
+      "popids": [
+        "POP-01027",
+        "POP-01023",
+        "POP-01022"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C110",
+      "cycle": 110
+    },
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OAKS-BEAT-1",
+    "kind": "beat-oaks-beat",
+    "seat": {
+      "slug": "selena-grant",
+      "name": "Selena Grant",
+      "popid": "POP-00591",
+      "desk": "sports",
+      "domain": "oaks",
+      "builder": "buildOaksBeatSlice.js"
+    },
+    "hood": "Dimond",
+    "pulse": {
+      "className": "beat-oaks-beat",
+      "score": 100,
+      "label": "Oaks — game-result C110 · 0-4 · L4",
+      "hood": "Dimond",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl @C110"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Oaks — game-result C110 · 0-4 · L4 — the second club's board read",
+      "hookLine": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+      "anchorFacts": [
+        "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+        "Record 0-4 · streak L4",
+        "Stats (feed): Austin Reaves/17PTS/5ASST, AJ Dybantsa/22PTS/6REB",
+        "Trigger: cold-streak",
+        "Franchise stability: uncertain",
+        "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+        "Record 0-5 · streak L5",
+        "Stats (feed): Adash Stanley/8PTS/11ASST, Ausin Reaves/20PTS, AJ Dybantsa/11PTS",
+        "Trigger: cold-streak",
+        "Franchise stability: uncertain"
+      ],
+      "evidence": [
+        {
+          "text": "Oaks — game-result (preseason), C110: The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Record 0-4 · streak L4",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Stats (feed): Austin Reaves/17PTS/5ASST, AJ Dybantsa/22PTS/6REB",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Oaks — game-result (preseason), C110: The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Record 0-5 · streak L5",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Stats (feed): Adash Stanley/8PTS/11ASST, Ausin Reaves/20PTS, AJ Dybantsa/11PTS",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        },
+        {
+          "text": "Franchise stability: uncertain",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C110"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — Downtown",
+        "why": "named on the Oaks feed C110 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+        "why": "named on the Oaks feed C110 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "why": "named on the Oaks feed C110 (Oakland_Sports_Feed)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Oakland_Sports_Feed.jsonl @C110",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "text": "I'm looking into the Oaks' recent performance, trying to understand what's behind their losing streak. I want to talk to the players and coaches to get their perspective on what's going wrong and how they plan to turn things around.",
+    "plan": {
+      "chase": "I'm looking into the Oaks' recent performance, trying to understand what's behind their losing streak. I want to talk to the players and coaches to get their perspective on what's going wrong and how they plan to turn things around.",
+      "focus": "The Oaks' struggles in the preseason",
+      "why": "I think it's interesting to explore how a team can bounce back from a tough start, and what factors contribute to their success or failure",
+      "checks": [
+        "stats",
+        "player interviews",
+        "coach's comments"
+      ],
+      "targets": [],
+      "interpretation": "It seems like the Oaks are facing a challenging time, and I'm trying to make sense of it",
+      "unverifiedLead": [
+        "There might be more to the story than just the numbers, perhaps some underlying issues that need to be addressed"
+      ],
+      "closeQuestion": "What's the key to the Oaks' turnaround?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | game-result | (playoffs) | Henry Rivas, Danny Horn, Mark Aitken, Isley Kelley",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00024",
+        "POP-00022",
+        "POP-00003",
+        "POP-00019"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | John Ellis, Eric Taveras, Vinnie Keane, Benji Dillon",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00033",
+        "POP-00597",
+        "POP-00001",
+        "POP-00018"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Austin Reaves, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01023",
+        "POP-01027",
+        "POP-01024",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "A's | game-result | (championship) | Mike Paulson, Vinnie Keane, Benji Dillon, Mark Aitken, Eric Taveras, Pablo Almanzar, Arturo Ramos, Isley Kelley, Darrin Davis, Frank Reyna",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 110; rendered: world_summary_c110.md \"## Sports\" C110 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527",
+        "POP-00001",
+        "POP-00018",
+        "POP-00003",
+        "POP-00597",
+        "POP-01078",
+        "POP-00025",
+        "POP-00019",
+        "POP-00021",
+        "POP-00079"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "ranAt": "2026-10-06T11:16:56.150Z"
+}

@@ -1,0 +1,35 @@
+{
+  "status": "staged",
+  "desk": "undocked-digest",
+  "cycle": "109",
+  "persona": "nia-rook-weekly",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked-digest_c109_nia-rook-weekly_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "UNDOCKED week-in-review c109",
+        "sourceRef": "undocked-week:weekly-c109"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-9370b087ec57",
+    "draftSha256": "1017a3bef202b7df5fa024e885da2a3c56159774ad8a2b89dc8fcad8923d0873",
+    "verdict": "output/cron-compare/undocked-digest_c109_nia-rook-weekly_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-03T15:15:18.249Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:06.425Z"
+}

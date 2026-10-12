@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-009",
+  "initiativeId": "INIT-009",
+  "cycle": 111,
+  "primaryVoice": "Mayor gavel (mayor_gavel-005)",
+  "consolidatedFrom": [
+    "STMT-111-mayor_gavel-005 (Mayor gavel — Commercial Stabilization for Grand Lake Committee Referral)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-009",
+    "ImplementationPhase": "legislation-filed",
+    "MilestoneNotes": "C111: Referred to Economic Development Committee with mandatory milestone reporting and audit criteria.",
+    "NextScheduledAction": "Committee hearing and vote",
+    "NextActionCycle": 112
+  }
+}

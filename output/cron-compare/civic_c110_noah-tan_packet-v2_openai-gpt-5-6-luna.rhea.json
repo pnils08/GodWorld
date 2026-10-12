@@ -1,0 +1,51 @@
+{
+  "draft": "output/cron-compare/civic_c110_noah-tan_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "552b5fef61d0a4c4a0e6e2b6b319f2c9e33e98008d19323e7d8a1fddd825aa5b",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All four citizen health events and weather details match Cycle 110 ground truth precisely without fabricated quotes or canon contradictions.",
+  "review": {
+    "profileId": "noah-weather-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-8ba825281ce8",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Jackson Sift",
+      "Jessie Hess",
+      "Jett Walker",
+      "Ron Arenson"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 4683,
+  "parseError": false,
+  "ranAt": "2026-10-07T23:17:54.818Z"
+}

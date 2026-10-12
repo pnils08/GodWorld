@@ -1,0 +1,15 @@
+{
+  "office": "baylight_authority",
+  "agentDir": "civic-office-baylight-authority",
+  "holder": "Keisha Ramos",
+  "popid": "POP-00041",
+  "title": "Baylight Authority Director",
+  "date": "2026-09-14",
+  "cycle": 107,
+  "model": "deepseek/deepseek-chat",
+  "statement": "Baylight Authority Director Keisha Ramos confirms Phase II construction contracts are executed and site preparation mobilization begins next cycle. Thirty-five thousand seats start with clean ground—Baylight's future is taking shape.",
+  "action": null,
+  "numberMoved": null,
+  "ranAt": "2026-09-14T10:45:40.241Z",
+  "fellBackFrom": null
+}

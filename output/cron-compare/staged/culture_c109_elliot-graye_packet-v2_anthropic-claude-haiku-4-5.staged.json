@@ -1,0 +1,43 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "109",
+  "persona": "elliot-graye",
+  "byline": "Elliot Graye",
+  "bylinePopid": "POP-00012",
+  "article": "output/cron-compare/staged/culture_c109_elliot-graye_packet-v2_anthropic-claude-haiku-4-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Eunice Marston",
+        "role": "quoted-source",
+        "popid": "POP-00753"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "I haven't had any direct involvement with the Gurdwara Singh Sabha Fruitvale, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.",
+        "sourceRef": "citizenVoice PRESS Eunice Marston"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-9f3cac466748",
+    "draftSha256": "c85f2528b46123d4b693e053f8951f9502cb8d26954b4a62fa01bf0ddc9ebb60",
+    "verdict": "output/cron-compare/culture_c109_elliot-graye_packet-v2_anthropic-claude-haiku-4-5.rhea.json",
+    "ranAt": "2026-10-02T06:44:59.471Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:06.163Z"
+}

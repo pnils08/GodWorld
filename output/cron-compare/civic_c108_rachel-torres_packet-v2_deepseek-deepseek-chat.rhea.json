@@ -1,0 +1,49 @@
+{
+  "draft": "output/cron-compare/civic_c108_rachel-torres_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "80aaae04e18cf8472ee143e4f86c1c0b7516dee7d855ffc5f6eb048b3ba2ab85",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, roles, exact quotes, and scene textures match approved packet provenance and ledger ground truth.",
+  "review": {
+    "profileId": "rachel-public-safety-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "packageVersion": "RACHEL-LEP2-1",
+    "manifestId": "AM-f3f0e17654c6",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Dank Abara",
+      "Delia Vargas-Ruiz",
+      "Melton Neilon"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0098,
+  "durationMs": 5972,
+  "parseError": false,
+  "ranAt": "2026-09-22T23:16:51.074Z"
+}

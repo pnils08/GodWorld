@@ -1,0 +1,126 @@
+{
+ "label": "W2 bench C107",
+ "sheet": "1FFpUs",
+ "cycleCount": "107",
+ "rows": 942,
+ "parsed": 942,
+ "allNeutral": 495,
+ "allNeutralPct": 52.5,
+ "wakeDeviation60": 236,
+ "wakePct": 25.1,
+ "pressureRows": 62,
+ "pressureCauses": {
+  "debt": 43,
+  "rent": 7,
+  "overwork": 10,
+  "hood": 4
+ },
+ "adaptedRecords": 0,
+ "dials": {
+  "drive": {
+   "mean": 60.56,
+   "lt40": 0,
+   "gt60": 326,
+   "pin0": 0,
+   "pin100": 1,
+   "contribPos": 77,
+   "contribNeg": 0
+  },
+  "sociability": {
+   "mean": 59.3,
+   "lt40": 0,
+   "gt60": 264,
+   "pin0": 0,
+   "pin100": 4,
+   "contribPos": 100,
+   "contribNeg": 0
+  },
+  "warmth": {
+   "mean": 53.11,
+   "lt40": 0,
+   "gt60": 87,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 24,
+   "contribNeg": 43
+  },
+  "openness": {
+   "mean": 53.86,
+   "lt40": 0,
+   "gt60": 148,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 44,
+   "contribNeg": 0
+  },
+  "composure": {
+   "mean": 53.79,
+   "lt40": 6,
+   "gt60": 166,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 23,
+   "contribNeg": 69
+  },
+  "integrity": {
+   "mean": 51.06,
+   "lt40": 0,
+   "gt60": 26,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 30,
+   "contribNeg": 1
+  },
+  "family": {
+   "mean": 57.22,
+   "lt40": 1,
+   "gt60": 259,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 11,
+   "contribNeg": 8
+  },
+  "outabout": {
+   "mean": 51.06,
+   "lt40": 0,
+   "gt60": 18,
+   "pin0": 0,
+   "pin100": 0,
+   "contribPos": 6,
+   "contribNeg": 52
+  }
+ },
+ "contrib": {
+  "pos": 315,
+  "neg": 173,
+  "negSharePct": 35.5
+ },
+ "topTags": {
+  "Neighborhood": 520,
+  "Daily": 298,
+  "Civic Perception": 229,
+  "Personal": 187,
+  "Sports": 180,
+  "PrevEvening": 139,
+  "Holiday": 71,
+  "Friction": 55,
+  "Background": 54,
+  "Media": 52,
+  "TrustGuarded": 43,
+  "Lifestyle": 37,
+  "Micro-Event": 33,
+  "Reputation": 31,
+  "Education": 21,
+  "Work": 19,
+  "Maneuver-Climb": 15,
+  "Community": 13,
+  "Untagged": 13,
+  "Casino": 12,
+  "Civic": 11,
+  "Career": 10,
+  "Strain": 8,
+  "Money": 7,
+  "Business": 7
+ },
+ "engineErrorsTotalRows": 0
+}

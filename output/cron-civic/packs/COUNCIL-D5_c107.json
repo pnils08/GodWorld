@@ -1,0 +1,197 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00043",
+    "name": "Janae Rivers",
+    "role": "City Council District 5",
+    "officeId": "COUNCIL-D5",
+    "district": "D5",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d5",
+    "initiative": null,
+    "dials": {
+      "approval": 59
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "East Oakland dispatch protocol deployment"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 48,
+    "label": "Oakland Alternative Response Initiative — East Oakland dispatch protocol deployment",
+    "lever": "East Oakland dispatch protocol deployment",
+    "hood": "East Oakland",
+    "initiative": "INIT-002",
+    "vsCity": {
+      "sentiment": 0.6,
+      "citySentiment": 0.4895454545454546,
+      "crime": 0.97,
+      "cityCrime": 0.6477272727272728,
+      "heat": -4.5999999999999925,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "East Oakland dispatch protocol deployment",
+    "lineFacts": [
+      "approval 59",
+      "Oakland Alternative Response Initiative is in implementation-active; budget $12.5M — C106: Emergency expansion to East Oakland authorized; District 1 evaluation continues, monthly reporting to Mayor's office",
+      "due: East Oakland dispatch protocol deployment",
+      "East Oakland crime: property 44, violent 53, incidents 9 (cycle 107) — city property 35.5, violent 28.8, incidents 6.8",
+      "East Oakland: sentiment 0.6 vs city 0.490; crime index 0.97 vs city 0.648; retail 6.84; housing pressure 0; steady; momentum 5"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "East Oakland",
+      "Baylight District"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00119",
+        "name": "Beverly Peterson",
+        "neighborhood": "East Oakland",
+        "role": "Scout, Oakland A's",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Alternative Response Initiative — East Oakland dispatch protocol deployment"
+      },
+      {
+        "pop": "POP-00891",
+        "name": "Renée Cabrera",
+        "neighborhood": "East Oakland",
+        "role": "Physical Therapist",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Alternative Response Initiative — East Oakland dispatch protocol deployment"
+      },
+      {
+        "pop": "POP-01055",
+        "name": "Jerome Pittman",
+        "neighborhood": "East Oakland",
+        "role": "Transit Hub D5 Intake Liaison",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Alternative Response Initiative — East Oakland dispatch protocol deployment"
+      },
+      {
+        "pop": "POP-01113",
+        "name": "Quinn Adeyemi",
+        "neighborhood": "East Oakland",
+        "role": "Warehouse worker",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Alternative Response Initiative — East Oakland dispatch protocol deployment"
+      }
+    ],
+    "businesses": [],
+    "churches": [
+      {
+        "name": "Foothill Baptist Tabernacle",
+        "neighborhood": "East Oakland",
+        "text": "food pantry serves neighbors in need",
+        "src": "world_summary faith-event"
+      }
+    ],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D5",
+      "t": "FACT",
+      "text": "Janae Rivers holds COUNCIL-D5 at approval 59",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-002",
+      "t": "FACT",
+      "text": "Oakland Alternative Response Initiative is in implementation-active; budget $12.5M — C106: Emergency expansion to East Oakland authorized; District 1 evaluation continues, monthly reporting to Mayor's office",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland crime: property 44, violent 53, incidents 9 (cycle 107) — city property 35.5, violent 28.8, incidents 6.8",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland: sentiment 0.6 vs city 0.490; crime index 0.97 vs city 0.648; retail 6.84; housing pressure 0; steady; momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-we-0",
+      "t": "FACT",
+      "text": "FAITH — community_program — East Oakland: Foothill Baptist Tabernacle: food pantry serves neighbors in need",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Approval": "59"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Faction": "OPP",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

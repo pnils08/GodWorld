@@ -1,0 +1,17 @@
+{
+  "desk": "undocked-digest",
+  "cycle": "109",
+  "model": "x-ai/grok-4.3",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 4709,
+  "usageOutputTokens": 1124,
+  "savedFiles": [
+    "output/cron-compare/undocked-digest_c109_nia-rook-weekly_packet-v2_x-ai-grok-4-3.md"
+  ],
+  "compareAgainst": "output/desk-output/undocked-digest_c109.md",
+  "durationMs": 9569,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-03T15:15:12.288Z"
+}

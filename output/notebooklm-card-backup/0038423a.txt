@@ -1,0 +1,349 @@
+FULL STAT TRUE SOURCE — PITCHER
+
+Name: Pablo Almanzar
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: SP
+
+ 
+
+Jersey: #53
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: B
+
+ 
+
+Overall: 85
+
+ 
+
+MLB Service: 1.000
+
+ 
+
+Age: 22
+
+ 
+
+Bats: R
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'5"
+
+ 
+
+Weight: 197 LBS
+
+ 
+
+Drafted: RND 1 (2038)
+
+ 
+
+Secondary Position: NONE
+
+ 
+
+Born: DOMINICAN REPUBLIC
+
+ 
+
+Canonical POPID: POP-01078
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+STA: 84
+
+ 
+
+H/9: 78
+
+ 
+
+K/9: 82
+
+ 
+
+BB/9: 76
+
+ 
+
+HR/9: 74
+
+ 
+
+PCLT: 75
+
+ 
+
+CTRL: 70
+
+ 
+
+VEL: 78
+
+ 
+
+BRK: 75
+
+ 
+
+FLD: 35
+
+ 
+
+ARM: 50
+
+ 
+
+ACC: 50
+
+ 
+
+REAC: 38
+
+
+--------------------------------------------------------------------------------
+
+
+PITCH REPERTOIRE
+
+4-Seam Fastball — 92 MPH
+
+ 
+
+Changeup — 84 MPH
+
+ 
+
+Slider — 84 MPH
+
+ 
+
+Sweeping Curve — 78 MPH
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G  GS  W  L  SV  BS  HLD  IP    H   R  ER  HR  BB  SO  ERA
+
+ 
+
+2041  ATH   5  5   2  0  0   0   0    34.0  12  5  5   1   8   42  1.32
+
+
+--------------------------------------------------------------------------------
+
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  WHIP  WPCT   QS  CG  SHO  HB  WP  TBF  WAR  K/9   BB/9  HR/9  FIP  ERC
+
+ 
+
+2041  ATH   0.59  1.000  5   1   1    1   1   122  1.4  11.12 2.12  0.26  1.71 0.29
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 5
+
+ 
+
+GS: 5
+
+ 
+
+W: 2
+
+ 
+
+L: 0
+
+ 
+
+SV: 0
+
+ 
+
+BS: 0
+
+ 
+
+HLD: 0
+
+ 
+
+IP: 34.0
+
+ 
+
+H: 12
+
+ 
+
+R: 5
+
+ 
+
+ER: 5
+
+ 
+
+HR: 1
+
+ 
+
+BB: 8
+
+ 
+
+SO: 42
+
+ERA: 1.32
+
+ 
+
+WHIP: 0.59
+
+ 
+
+K/9: 11.12
+
+ 
+
+BB/9: 2.12
+
+ 
+
+HR/9: 0.26
+
+ 
+
+WAR: 1.4
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2041: $100K (Pre-Arb)
+
+ 
+
+2042–2043: Renewals (RNW)
+
+ 
+
+2044–2045: Arbitration (ARB)
+
+ 
+
+2046+: Free Agent (FA)
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Options Used: 1/3
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+QUIRKS & NOTABLE ACHIEVEMENTS
+
+Threw a 9.0 IP Complete Game No-Hitter in MLB Debut (1 BB, 10 SO)
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-01078
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-01078

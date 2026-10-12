@@ -1,0 +1,53 @@
+{
+  "draft": "output/cron-compare/civic_c110_luis-navarro_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "783b5fe7ef1fa791a903c3a778115984a17d9f61aa5cea31c0c8c4b2d5b9b2e8",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance and initiative tracking status is consistent with ground truth.",
+  "review": {
+    "profileId": "luis-investigation-record-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "packageVersion": "LUIS-LEP2-1",
+    "manifestId": "AM-c9cd01e9594a",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Avery Santana",
+      "Elena Soria Dominguez",
+      "Rose Delgado"
+    ],
+    "unverified": [
+      "Preliminary Schematics",
+      "Soria Dominguez"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 5640,
+  "parseError": false,
+  "ranAt": "2026-10-06T23:15:35.286Z"
+}

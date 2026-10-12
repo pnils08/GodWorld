@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "110",
+  "desk": "civic",
+  "persona": "luis-navarro",
+  "hood": "Fruitvale",
+  "quotes": [
+    {
+      "pop": "POP-00503",
+      "name": "Rose Delgado",
+      "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant."
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second."
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "Mayer & Associates listens to Fruitvale merchants first, designs second — and now we move to blueprints."
+    },
+    {
+      "pop": "POP-00791",
+      "name": "Elena Soria Dominguez",
+      "quote": "Mayer & Associates doesn’t just draw blueprints—they listen to the tamale vendors and panaderías that make Fruitvale Fruitvale."
+    }
+  ],
+  "claim": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+  "src": "citizenVoice PRESS c110",
+  "ranAt": "2026-10-06T18:15:02.353Z"
+}

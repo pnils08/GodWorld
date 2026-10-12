@@ -1,0 +1,787 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "trevor-shimizu",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-transit",
+      "angle": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "label": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record",
+      "hookLine": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster.",
+      "hood": null,
+      "citizens": [
+        "Evan Lewis (POP-00200)",
+        "Joel Wren (POP-00218)",
+        "Jerald Jensen (POP-00280)",
+        "Coen Cartier (POP-00338)",
+        "Daire Green (POP-00442)",
+        "Ray Neal (POP-00448)",
+        "Calvin Mwangi (POP-00573)",
+        "Eleanor Rivera (POP-00617)",
+        "Elena Soria-Dominguez (POP-00791)",
+        "Ximena Mehta (POP-01039)"
+      ],
+      "popids": [
+        "POP-00200",
+        "POP-00218",
+        "POP-00280",
+        "POP-00338",
+        "POP-00442",
+        "POP-00448",
+        "POP-00573",
+        "POP-00617",
+        "POP-00791",
+        "POP-01039"
+      ],
+      "ref": "output/beats/Transit_Metrics.jsonl Cycle 110",
+      "cycle": 110
+    }
+  },
+  "angle": "output/cron-compare/civic_c110_trevor-shimizu_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00280",
+      "name": "Jerald Jensen",
+      "quote": "You know, I’ve been hearing chatter about Lake Merritt station being quieter lately. It’s not just the fog—though that doesn’t help. People are talking about how it’s hitting the transit workers hard. Less foot traffic means fewer tips, fewer smiles, fewer connections. It’s tough when the lifeblood of a place starts to thin out.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; restless for the new, adventurous; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, I’ve been hearing chatter about Lake Merritt station being quieter lately. It’s not just the fog—though that doesn’t help. People are talking about how it’s hitting the transit workers hard. Less foot traffic means fewer tips, fewer smiles, fewer connections. It’s tough when the lifeblood of a place starts to thin out.\",\n  \"fact_ids\": [\"F-d8d40669c4f7\", \"F-192a1321c18a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d8d40669c4f7",
+          "F-192a1321c18a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00280-f1f869f40e",
+        "authoredQuote": true,
+        "publishableQuote": "You know, I’ve been hearing chatter about Lake Merritt station being quieter lately. It’s not just the fog—though that doesn’t help. People are talking about how it’s hitting the transit workers hard. Less foot traffic means fewer tips, fewer smiles, fewer connections. It’s tough when the lifeblood of a place starts to thin out."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00280",
+          "name": "Jerald Jensen",
+          "role": "Janitor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"Lake Merritt station’s ridership decline and its impact on transit workers.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Lake Merritt station’s ridership decline and its impact on transit workers.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Jerald Jensen — Janitor",
+          "evidence": [
+            {
+              "id": "EV-7f119a5653",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+              "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C110",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-e491ae296bc1"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-1fd54cb8752f"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-d8d40669c4f7"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 91,564 (C109: 99,582)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-ae5840cc4dce"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt: ridership 5,896 (-2,588 vs C109), on-time 84% (-2 pts) — fog; events in Lake Merritt, Chinatown",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-192a1321c18a"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,996 (-2,034 vs C109), on-time 78% (-6 pts) — fog",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-116832be0e26"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum: ridership 8,023 (-1,701 vs C109), on-time 76% (-7 pts) — fog; events in East Oakland ×2, Baylight District",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-134e1b506b3e"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,644 (-1,699 vs C109), on-time 75% (-3 pts) — fog",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-05859793c343"
+          },
+          {
+            "t": "FACT",
+            "text": "Jerald Jensen — Janitor",
+            "src": "Simulation_Ledger profile for POP-00280",
+            "id": "F-049feb8a33d8"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00338",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: voice: Provider returned error",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00338",
+          "name": "Coen Cartier",
+          "role": "Transit Operator (AC Transit)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "Have you noticed any changes in rider behavior or station activity at Lake Merritt this cycle? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Lake Merritt station’s ridership decline and its impact on transit workers.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Coen Cartier — Transit Operator (AC Transit)",
+          "evidence": [
+            {
+              "id": "EV-c24089609c",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+              "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C110",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-e491ae296bc1"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-1fd54cb8752f"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-d8d40669c4f7"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 91,564 (C109: 99,582)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-ae5840cc4dce"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt: ridership 5,896 (-2,588 vs C109), on-time 84% (-2 pts) — fog; events in Lake Merritt, Chinatown",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-192a1321c18a"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,996 (-2,034 vs C109), on-time 78% (-6 pts) — fog",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-116832be0e26"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum: ridership 8,023 (-1,701 vs C109), on-time 76% (-7 pts) — fog; events in East Oakland ×2, Baylight District",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-134e1b506b3e"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,644 (-1,699 vs C109), on-time 75% (-3 pts) — fog",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-05859793c343"
+          },
+          {
+            "t": "FACT",
+            "text": "Coen Cartier — Transit Operator (AC Transit)",
+            "src": "Simulation_Ledger profile for POP-00338",
+            "id": "F-e0ed55f193fe"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00218",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: voice: Provider returned error",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00218",
+          "name": "Joel Wren",
+          "role": "Mechanic",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "Are there any mechanical or operational challenges at Lake Merritt station that could be contributing to the ridership decline? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Lake Merritt station’s ridership decline and its impact on transit workers.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Joel Wren — Mechanic",
+          "evidence": [
+            {
+              "id": "EV-39e7104321",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+              "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C110",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-e491ae296bc1"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-1fd54cb8752f"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-d8d40669c4f7"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 91,564 (C109: 99,582)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-ae5840cc4dce"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt: ridership 5,896 (-2,588 vs C109), on-time 84% (-2 pts) — fog; events in Lake Merritt, Chinatown",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-192a1321c18a"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,996 (-2,034 vs C109), on-time 78% (-6 pts) — fog",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-116832be0e26"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum: ridership 8,023 (-1,701 vs C109), on-time 76% (-7 pts) — fog; events in East Oakland ×2, Baylight District",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-134e1b506b3e"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,644 (-1,699 vs C109), on-time 75% (-3 pts) — fog",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-05859793c343"
+          },
+          {
+            "t": "FACT",
+            "text": "Joel Wren — Mechanic",
+            "src": "Simulation_Ledger profile for POP-00218",
+            "id": "F-7862bc53de9f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00200",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: voice: Provider returned error",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00200",
+          "name": "Evan Lewis",
+          "role": "Bus driver",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"Lake Merritt station’s ridership decline and its impact on transit workers.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Lake Merritt station’s ridership decline and its impact on transit workers.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Evan Lewis — Bus driver",
+          "evidence": [
+            {
+              "id": "EV-46544fe00e",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+              "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C110",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-e491ae296bc1"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-1fd54cb8752f"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-d8d40669c4f7"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 91,564 (C109: 99,582)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-ae5840cc4dce"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt: ridership 5,896 (-2,588 vs C109), on-time 84% (-2 pts) — fog; events in Lake Merritt, Chinatown",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-192a1321c18a"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,996 (-2,034 vs C109), on-time 78% (-6 pts) — fog",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-116832be0e26"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum: ridership 8,023 (-1,701 vs C109), on-time 76% (-7 pts) — fog; events in East Oakland ×2, Baylight District",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-134e1b506b3e"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,644 (-1,699 vs C109), on-time 75% (-3 pts) — fog",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-05859793c343"
+          },
+          {
+            "t": "FACT",
+            "text": "Evan Lewis — Bus driver",
+            "src": "Simulation_Ledger profile for POP-00200",
+            "id": "F-f35c417d1bc1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00280",
+      "name": "Jerald Jensen",
+      "quote": "You know, I’ve been hearing chatter about Lake Merritt station being quieter lately. It’s not just the fog—though that doesn’t help. People are talking about how it’s hitting the transit workers hard. Less foot traffic means fewer tips, fewer smiles, fewer connections. It’s tough when the lifeblood of a place starts to thin out.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; restless for the new, adventurous; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, I’ve been hearing chatter about Lake Merritt station being quieter lately. It’s not just the fog—though that doesn’t help. People are talking about how it’s hitting the transit workers hard. Less foot traffic means fewer tips, fewer smiles, fewer connections. It’s tough when the lifeblood of a place starts to thin out.\",\n  \"fact_ids\": [\"F-d8d40669c4f7\", \"F-192a1321c18a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d8d40669c4f7",
+          "F-192a1321c18a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00280-f1f869f40e",
+        "authoredQuote": true,
+        "publishableQuote": "You know, I’ve been hearing chatter about Lake Merritt station being quieter lately. It’s not just the fog—though that doesn’t help. People are talking about how it’s hitting the transit workers hard. Less foot traffic means fewer tips, fewer smiles, fewer connections. It’s tough when the lifeblood of a place starts to thin out."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00280",
+          "name": "Jerald Jensen",
+          "role": "Janitor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"Lake Merritt station’s ridership decline and its impact on transit workers.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "Lake Merritt station’s ridership decline and its impact on transit workers.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Jerald Jensen — Janitor",
+          "evidence": [
+            {
+              "id": "EV-7f119a5653",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+              "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C110",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-e491ae296bc1"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt ridership down 2,588 vs C109 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-1fd54cb8752f"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt moved down the most this cycle — fog; events in Lake Merritt, Chinatown; 10 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-d8d40669c4f7"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 91,564 (C109: 99,582)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-ae5840cc4dce"
+          },
+          {
+            "t": "FACT",
+            "text": "Lake Merritt: ridership 5,896 (-2,588 vs C109), on-time 84% (-2 pts) — fog; events in Lake Merritt, Chinatown",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-192a1321c18a"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,996 (-2,034 vs C109), on-time 78% (-6 pts) — fog",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-116832be0e26"
+          },
+          {
+            "t": "FACT",
+            "text": "Coliseum: ridership 8,023 (-1,701 vs C109), on-time 76% (-7 pts) — fog; events in East Oakland ×2, Baylight District",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-134e1b506b3e"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,644 (-1,699 vs C109), on-time 75% (-3 pts) — fog",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 110",
+            "id": "F-05859793c343"
+          },
+          {
+            "t": "FACT",
+            "text": "Jerald Jensen — Janitor",
+            "src": "Simulation_Ledger profile for POP-00280",
+            "id": "F-049feb8a33d8"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-05T18:17:57.007Z"
+}

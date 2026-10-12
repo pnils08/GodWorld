@@ -1,0 +1,48 @@
+{
+  "office": "council_d5",
+  "cycle": 106,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "I am filing a formal City Council resolution demanding emergency expansion of the Alternative Response Initiative to East Oakland, with binding monthly audits tied to violent crime disparity reduction and community liaison authority. I am also demanding the Youth Apprenticeship Pipeline establish immediate East Oakland intake targets and a public town hall in our district this cycle. The Mayor's agenda acknowledges problems in West Oakland, Fruitvale, and Downtown while my constituents in East Oakland face the highest crime index and lowest sentiment in the city with no targeted intervention. I will not let East Oakland become invisible in this administration's priorities.",
+  "statements": [
+    {
+      "statementId": "STMT-106-council_d5-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative",
+      "initiative": "INIT-002",
+      "decision": "Conditional YES with formal resolution for emergency East Oakland expansion",
+      "quote": "East Oakland's crime index at 1.17—nearly double the city average—isn't a footnote, it's a five-alarm fire. I'll vote YES on expansion, but I'm filing a resolution this cycle to force East Oakland into the next wave with audits that actually move resources where the violence lives.",
+      "fullStatement": "The Mayor's agenda notes Downtown's decline and Fruitvale's transit needs, but East Oakland's crime index at 1.17—nearly double the city average of 0.699—goes unmentioned. This is not oversight; it's structural erasure. I will vote YES on the Alternative Response Initiative expansion, but I am filing a formal City Council resolution this cycle demanding emergency inclusion of East Oakland in the next expansion wave. The monthly audits I fought for in C105 must now bind resource allocation explicitly to reducing violent crime disparities, and community liaisons like Jerom must have direct input on deployment decisions. Safety isn't a pilot here—it's survival.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d5-002",
+      "type": "action_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline",
+      "initiative": "INIT-007",
+      "decision": "Demand East Oakland intake targets and district town hall this cycle",
+      "quote": "Backlog cleared means nothing if East Oakland youth are still last in line. I want intake targets for our district and a town hall here, not downtown, this cycle.",
+      "fullStatement": "The Mayor celebrates backlog clearance, but I need numbers: how many East Oakland young people are in the pipeline? The engine flags improvement in our district at low severity—that's bureaucratic language for 'not enough.' I am demanding the Department of Workforce Development establish explicit East Oakland intake targets this cycle and hold a town hall in our district, not downtown, so families can see what accountability looks like. East Oakland's youth will lead the rebuild, but only if the city stops making them beg for a seat.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d5-003",
+      "type": "action_statement",
+      "topic": "Engine-flagged incoherence",
+      "initiative": null,
+      "decision": "File resolution for East Oakland public safety and commercial recovery package",
+      "quote": "Incoherence isn't a glitch—it's systemic neglect. I'm done naming the problem; I'm legislating the fix.",
+      "fullStatement": "The engine flags high-severity incoherence in West Oakland, Fruitvale, and East Oakland. I see the Mayor's agenda speak to West Oakland and Fruitvale. I do not see East Oakland named. This is the pattern: our neighborhoods become data points while other districts get interventions. I am filing a targeted district public safety and commercial recovery package this cycle—formal legislative intervention with emergency economic and safety resources directed to East Oakland corridors. Sentiment at 0.28 and retail vitality at 6.01 are not abstract metrics; they are families deciding whether Oakland is worth staying in. Silence is complicity. I will not be complicit.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d5-004",
+      "type": "constituent_statement",
+      "topic": "District 5 constituent accountability",
+      "initiative": null,
+      "decision": "Claim Baylight credit for community resilience; demand East Oakland action",
+      "quote": "Baylight's slow streets aren't city wins—they're people's victories. East Oakland's peace isn't paperwork—it's people power we haven't unleashed yet.",
+      "fullStatement": "Baylight District's upbeat mood despite struggling street trade is not city planning success—it's community resilience in the face of neglect. The credit belongs to the organizers, small business owners, and neighbors who built mutual aid networks when the city looked away. I will continue fighting for the investment Baylight deserves, not the celebration of survival as substitute for support. And East Oakland—my other district, my other heart—deserves the same energy. Mood is upbeat there too, but with crime low and trade slow, that resilience is fragile. I am the one who answers for East Oakland this cycle, with legislation, not speeches. The Mayor's gavel will not stamp my district invisible.",
+      "trackerUpdates": {}
+    }
+  ]
+}

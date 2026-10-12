@@ -1,0 +1,24 @@
+{
+  "office": "stabilization_fund",
+  "cycle": 110,
+  "speaker": "Marcus Webb",
+  "cascadeSummary": "Approved month-nine disbursement of $400,000 for 10 additional households under Deputy Mayor Okoro's authority, bringing total disbursements to $4.6M. Maintained rigorous compliance standards with expanded verification for commercial-residential hybrid cases as directed by the Finance Committee reporting requirements.",
+  "statements": [
+    {
+      "statementId": "STMT-110-stabilization_fund-001",
+      "type": "operational_status",
+      "topic": "Month-nine disbursement",
+      "initiative": "INIT-001",
+      "decision": "Processed disbursement authorization for 10 additional households totaling $400,000",
+      "quote": "Seventy-nine households stabilized means seventy-nine Oakland families with checks in hand before the displacement notices arrive—every dollar moving with compliance that passes the Finance Committee's scrutiny.",
+      "fullStatement": "The West Oakland Stabilization Fund has completed its month-nine disbursement review, authorizing $400,000 in stabilization grants to 10 additional households under Deputy Mayor Okoro's authority. This brings total disbursements to approximately $4.6 million of the $28 million authorization, with 79 households now stabilized. Each case file received expanded verification for commercial-residential hybrid eligibility as required by the Finance Committee's reporting framework. All documentation is audit-ready and will be included in this month's mandatory report to the Finance Committee.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C110: Month-nine disbursement of $400K processed for 10 households, bringing total stabilized to 79",
+        "NextScheduledAction": "Month-ten disbursement review",
+        "NextActionCycle": 111
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "110",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c110_business-desk_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Priya Nair",
+        "role": "quoted-source",
+        "popid": "POP-00531"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "My work at EBMUD focuses on ensuring our water systems can handle the pressures of climate change, especially as the city grows. It’s about balancing the need for reliable infrastructure with the realities of a changing environment. Downtown’s growth adds complexity, but it’s also a chance to innovate and build resilience into the system.",
+        "sourceRef": "citizenVoice PRESS Priya Nair"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-62c6b980c93c",
+    "draftSha256": "28ca313c3a9e4e8e1ccecc972e170dbb3a8dd15798fa8aacc3d5e5ad2dc8386e",
+    "verdict": "output/cron-compare/business_c110_business-desk_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-07T03:50:53.908Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:01.526Z"
+}

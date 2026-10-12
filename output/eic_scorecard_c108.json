@@ -1,0 +1,244 @@
+{
+  "cycle": "108",
+  "total": 20,
+  "counts": {
+    "accurate": 12,
+    "corrections-needed": 5,
+    "canon-violation": 3
+  },
+  "accuracyPct": 60,
+  "auditModel": "google/gemini-3.7-flash",
+  "trend": [
+    {
+      "cycle": 103,
+      "pct": 75
+    },
+    {
+      "cycle": 104,
+      "pct": 62.5
+    },
+    {
+      "cycle": 105,
+      "pct": 76.5
+    },
+    {
+      "cycle": 106,
+      "pct": 55.6
+    },
+    {
+      "cycle": 107,
+      "pct": 68.8
+    }
+  ],
+  "articles": [
+    {
+      "stem": "business_c108_business-desk_packet-v2_deepseek-deepseek-chat",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c108_angela-reyes_packet-v2_deepseek-deepseek-chat",
+      "byline": "Angela Reyes",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "References to 'This cycle' and 'this cycle' in the article prose ('This cycle, Rockridge’s school quality index stands at 8.94...', 'Fruitvale added 11 students this cycle...')",
+          "class": "engine-verbiage",
+          "why": "The word 'cycle' is internal simulation clock terminology leaking directly into in-universe reporting rather than using natural temporal framing like 'this season'"
+        }
+      ]
+    },
+    {
+      "stem": "civic_c108_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c108_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Jax Caldera",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Claiming there is no initiative, program, or fund on"
+        }
+      ]
+    },
+    {
+      "stem": "civic_c108_lila-mezran_packet-v2_deepseek-deepseek-chat",
+      "byline": "Dr. Lila Mezran",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Citywide illness count stated as 1,929"
+        }
+      ]
+    },
+    {
+      "stem": "civic_c108_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c108_noah-tan_packet-v2_deepseek-deepseek-chat",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c108_rachel-torres_packet-v2_deepseek-deepseek-chat",
+      "byline": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "San Antonio Tops Incident Count While Lake Merritt Waits Longest for Responses",
+          "class": "data-misrepresentation",
+          "why": "The world summary neighborhood data does not show San Antonio topping incident counts (CrimeIndex is 0.65, below East Oakland and Dimond at 0.66), nor are emergency response time rankings present in the cycle record."
+        },
+        {
+          "what": "Here's the corrected version that adheres strictly to approved quotes and facts:",
+          "class": "engine-verbiage",
+          "why": "Assistant conversational preamble leaked into the published article copy."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c108_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+      "byline": "Trevor Shimizu",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "C107",
+          "class": "engine-verbiage",
+          "why": "Raw cycle notation ('compared to C107') leaked into journalistic prose."
+        }
+      ]
+    },
+    {
+      "stem": "culture_c108_elliot-graye_packet-v2_deepseek-deepseek-chat",
+      "byline": "Elliot Graye",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c108_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Kai Marston",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "With a surge in her fame rating to 58",
+          "class": "engine-verbiage",
+          "why": "Raw numeric simulation parameter 'fame rating to 58' leaks directly into editorial copy."
+        }
+      ]
+    },
+    {
+      "stem": "culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat",
+      "byline": "Maria Keen",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c108_mason-ortega_packet-v2_deepseek-deepseek-chat",
+      "byline": "Mason Ortega",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c108_anthony-raines_packet-v2_deepseek-deepseek-chat",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c108_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Selena Grant",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c108_simon-leary_packet-v2_deepseek-deepseek-chat",
+      "byline": "Simon Leary",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c108_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Talia Finch",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "UNDOCKED episode / playing to climb",
+          "class": "engine-verbiage",
+          "why": "Engine/system simulation vocabulary and internal run tags ('UNDOCKED', 'playing to climb') have leaked into citizen dialogue and narrative framing as if they were in-world events."
+        }
+      ]
+    },
+    {
+      "stem": "wire_c108_celeste-tran_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Celeste Tran",
+      "desk": "wire",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "the musician with 25 media mentions",
+          "class": "engine-verbiage",
+          "why": "Raw simulation tracking metric '25 media mentions' leaks system vocabulary directly into prose."
+        }
+      ]
+    }
+  ]
+}

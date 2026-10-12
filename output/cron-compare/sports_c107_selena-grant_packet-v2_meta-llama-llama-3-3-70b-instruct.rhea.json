@@ -1,0 +1,48 @@
+{
+  "draft": "output/cron-compare/sports_c107_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "107",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "ee2a3f7920f0836e172898518522b79b27d0e931d3535ee998988106cf477501",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes and claims regarding the Oaks opening night and starting five match cycle 107 canon and exact quote provenance.",
+  "review": {
+    "profileId": "selena-grant-oaks-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "packageVersion": "SELENA-OAKS-1",
+    "manifestId": "AM-37d9f4ee9e6b",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Dillon Trevor",
+      "Jessie Hess"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0102,
+  "durationMs": 7079,
+  "parseError": false,
+  "ranAt": "2026-09-15T23:17:42.721Z"
+}

@@ -1,0 +1,1222 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "107",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "reporter": null,
+  "assignment": {
+    "story": {
+      "ref": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+      "label": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+      "kind": "win-streak",
+      "angle": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+      "hookLine": "Euphoria with friction: name the doubter, kill soft contentment.",
+      "hood": "Eastlake",
+      "team": "A's",
+      "eventKind": "game-result",
+      "popids": [
+        "POP-00533",
+        "POP-00052",
+        "POP-00598",
+        "POP-00051"
+      ],
+      "citizens": [
+        "Travis Coles — Starting Pitcher, Oakland A's, Downtown",
+        "Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA), Downtown",
+        "Vladimir Gonzalez — Right Fielder, Oakland A's, Fruitvale",
+        "Desmond Morton — Left Fielder, Oakland A's, Jack London"
+      ],
+      "pulseClass": "win-streak",
+      "pulseScore": 48,
+      "fanCharge": "euphoria",
+      "bagModeIds": [
+        3,
+        4,
+        7
+      ]
+    }
+  },
+  "angle": "output/cron-compare/sports_c107_p-slayer_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00051",
+      "name": "Desmond Morton",
+      "quote": "I've seen the community come together, feeling a sense of pride and excitement about the team's win. It's like a spark has been lit, and people are talking about it everywhere. I feel it too, it's a great feeling to be a part of something that brings people joy.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the community come together, feeling a sense of pride and excitement about the team's win. It's like a spark has been lit, and people are talking about it everywhere. I feel it too, it's a great feeling to be a part of something that brings people joy.\",\n  \"fact_ids\": [\"F-c6834d5364c4\", \"F-4d471279f121\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c6834d5364c4",
+          "F-4d471279f121"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00051-2956efc60b",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the community come together, feeling a sense of pride and excitement about the team's win. It's like a spark has been lit, and people are talking about it everywhere. I feel it too, it's a great feeling to be a part of something that brings people joy."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00051",
+          "name": "Desmond Morton",
+          "role": "Left Fielder, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The A's unexpected win and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "win-streak",
+          "hood": "Eastlake",
+          "focus": "The A's unexpected win and its impact on the community",
+          "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Desmond Morton — Left Fielder, Oakland A's — Jack London",
+          "evidence": [
+            {
+              "id": "EV-a5c56981ef",
+              "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+              "text": "Euphoria with friction: name the doubter, kill soft contentment."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-c6834d5364c4"
+          },
+          {
+            "t": "FACT",
+            "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4d471279f121"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-7776580ff460"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 1-0 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-b775476cc1a5"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-8a7363ff6bda"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4459d3dfd633"
+          },
+          {
+            "t": "FACT",
+            "text": "Desmond Morton — Left Fielder, Oakland A's — Jack London",
+            "src": "Simulation_Ledger profile for POP-00051",
+            "id": "F-e7c09456fa01"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00533",
+      "name": "Travis Coles",
+      "quote": "I've felt the city's energy shift with our recent wins, it's like the whole community is coming together and feeding off our momentum. As a player, it's an incredible feeling to know that our performance is having a direct impact on the people around us.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt the city's energy shift with our recent wins, it's like the whole community is coming together and feeding off our momentum. As a player, it's an incredible feeling to know that our performance is having a direct impact on the people around us.\",\n  \"fact_ids\": [\"F-c6834d5364c4\", \"F-4d471279f121\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c6834d5364c4",
+          "F-4d471279f121"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00533-5ddf663203",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt the city's energy shift with our recent wins, it's like the whole community is coming together and feeding off our momentum. As a player, it's an incredible feeling to know that our performance is having a direct impact on the people around us."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00533",
+          "name": "Travis Coles",
+          "role": "Starting Pitcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The A's unexpected win and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "win-streak",
+          "hood": "Eastlake",
+          "focus": "The A's unexpected win and its impact on the community",
+          "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+          "evidence": [
+            {
+              "id": "EV-371f225583",
+              "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+              "text": "Euphoria with friction: name the doubter, kill soft contentment."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-c6834d5364c4"
+          },
+          {
+            "t": "FACT",
+            "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4d471279f121"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-7776580ff460"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 1-0 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-b775476cc1a5"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-8a7363ff6bda"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4459d3dfd633"
+          },
+          {
+            "t": "FACT",
+            "text": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+            "src": "Simulation_Ledger profile for POP-00533",
+            "id": "F-311b78d2af00"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00052",
+      "name": "Clark Saryan",
+      "quote": "I've seen how a win like that can bring the community together, it's like a spark that ignites a sense of pride and belonging. As someone who's been around the game, I know how it feels to be part of a team that's on a roll, and I think that energy is infectious. It's not just about the game itself, but about the way it makes people feel - like they're part of something bigger than themselves.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen how a win like that can bring the community together, it's like a spark that ignites a sense of pride and belonging. As someone who's been around the game, I know how it feels to be part of a team that's on a roll, and I think that energy is infectious. It's not just about the game itself, but about the way it makes people feel - like they're part of something bigger than themselves.\",\n  \"fact_ids\": [\"F-c6834d5364c4\", \"F-4d471279f121\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c6834d5364c4",
+          "F-4d471279f121"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00052-6f83b5b3d7",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen how a win like that can bring the community together, it's like a spark that ignites a sense of pride and belonging. As someone who's been around the game, I know how it feels to be part of a team that's on a roll, and I think that energy is infectious. It's not just about the game itself, but about the way it makes people feel - like they're part of something bigger than themselves."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00052",
+          "name": "Clark Saryan",
+          "role": "Closing Pitcher, Las Vegas Aviators (AAA)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The A's unexpected win and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "win-streak",
+          "hood": "Eastlake",
+          "focus": "The A's unexpected win and its impact on the community",
+          "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA) — Downtown",
+          "evidence": [
+            {
+              "id": "EV-873cc2d65a",
+              "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+              "text": "Euphoria with friction: name the doubter, kill soft contentment."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-c6834d5364c4"
+          },
+          {
+            "t": "FACT",
+            "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4d471279f121"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-7776580ff460"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 1-0 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-b775476cc1a5"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-8a7363ff6bda"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4459d3dfd633"
+          },
+          {
+            "t": "FACT",
+            "text": "Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA) — Downtown",
+            "src": "Simulation_Ledger profile for POP-00052",
+            "id": "F-e0808a6445dd"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00598",
+      "name": "Vladimir Gonzalez",
+      "quote": "It's been amazing to see how the community has come together after our win, I feel like it's brought a lot of energy and excitement to the neighborhood. As a player, it's great to see how our performance can impact the people around us.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"It's been amazing to see how the community has come together after our win, I feel like it's brought a lot of energy and excitement to the neighborhood. As a player, it's great to see how our performance can impact the people around us.\",\n  \"fact_ids\": [\"F-c6834d5364c4\"],\n  \"basis\": \"lived-context\"\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c6834d5364c4"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00598-587b214dec",
+        "authoredQuote": true,
+        "publishableQuote": "It's been amazing to see how the community has come together after our win, I feel like it's brought a lot of energy and excitement to the neighborhood. As a player, it's great to see how our performance can impact the people around us."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00598",
+          "name": "Vladimir Gonzalez",
+          "role": "Right Fielder, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The A's unexpected win and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "win-streak",
+          "hood": "Eastlake",
+          "focus": "The A's unexpected win and its impact on the community",
+          "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-8063deab7b",
+              "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+              "text": "Euphoria with friction: name the doubter, kill soft contentment."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-c6834d5364c4"
+          },
+          {
+            "t": "FACT",
+            "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4d471279f121"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-7776580ff460"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 1-0 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-b775476cc1a5"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-8a7363ff6bda"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4459d3dfd633"
+          },
+          {
+            "t": "FACT",
+            "text": "Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00598",
+            "id": "F-80925c703562"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00051",
+      "name": "Desmond Morton",
+      "quote": "I've seen the community come together, feeling a sense of pride and excitement about the team's win. It's like a spark has been lit, and people are talking about it everywhere. I feel it too, it's a great feeling to be a part of something that brings people joy.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the community come together, feeling a sense of pride and excitement about the team's win. It's like a spark has been lit, and people are talking about it everywhere. I feel it too, it's a great feeling to be a part of something that brings people joy.\",\n  \"fact_ids\": [\"F-c6834d5364c4\", \"F-4d471279f121\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c6834d5364c4",
+          "F-4d471279f121"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00051-2956efc60b",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the community come together, feeling a sense of pride and excitement about the team's win. It's like a spark has been lit, and people are talking about it everywhere. I feel it too, it's a great feeling to be a part of something that brings people joy."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00051",
+          "name": "Desmond Morton",
+          "role": "Left Fielder, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The A's unexpected win and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "win-streak",
+          "hood": "Eastlake",
+          "focus": "The A's unexpected win and its impact on the community",
+          "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Desmond Morton — Left Fielder, Oakland A's — Jack London",
+          "evidence": [
+            {
+              "id": "EV-a5c56981ef",
+              "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+              "text": "Euphoria with friction: name the doubter, kill soft contentment."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-c6834d5364c4"
+          },
+          {
+            "t": "FACT",
+            "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4d471279f121"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-7776580ff460"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 1-0 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-b775476cc1a5"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-8a7363ff6bda"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4459d3dfd633"
+          },
+          {
+            "t": "FACT",
+            "text": "Desmond Morton — Left Fielder, Oakland A's — Jack London",
+            "src": "Simulation_Ledger profile for POP-00051",
+            "id": "F-e7c09456fa01"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00533",
+      "name": "Travis Coles",
+      "quote": "I've felt the city's energy shift with our recent wins, it's like the whole community is coming together and feeding off our momentum. As a player, it's an incredible feeling to know that our performance is having a direct impact on the people around us.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt the city's energy shift with our recent wins, it's like the whole community is coming together and feeding off our momentum. As a player, it's an incredible feeling to know that our performance is having a direct impact on the people around us.\",\n  \"fact_ids\": [\"F-c6834d5364c4\", \"F-4d471279f121\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c6834d5364c4",
+          "F-4d471279f121"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00533-5ddf663203",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt the city's energy shift with our recent wins, it's like the whole community is coming together and feeding off our momentum. As a player, it's an incredible feeling to know that our performance is having a direct impact on the people around us."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00533",
+          "name": "Travis Coles",
+          "role": "Starting Pitcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The A's unexpected win and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "win-streak",
+          "hood": "Eastlake",
+          "focus": "The A's unexpected win and its impact on the community",
+          "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+          "evidence": [
+            {
+              "id": "EV-371f225583",
+              "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+              "text": "Euphoria with friction: name the doubter, kill soft contentment."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-c6834d5364c4"
+          },
+          {
+            "t": "FACT",
+            "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4d471279f121"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-7776580ff460"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 1-0 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-b775476cc1a5"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-8a7363ff6bda"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4459d3dfd633"
+          },
+          {
+            "t": "FACT",
+            "text": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+            "src": "Simulation_Ledger profile for POP-00533",
+            "id": "F-311b78d2af00"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00052",
+      "name": "Clark Saryan",
+      "quote": "I've seen how a win like that can bring the community together, it's like a spark that ignites a sense of pride and belonging. As someone who's been around the game, I know how it feels to be part of a team that's on a roll, and I think that energy is infectious. It's not just about the game itself, but about the way it makes people feel - like they're part of something bigger than themselves.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen how a win like that can bring the community together, it's like a spark that ignites a sense of pride and belonging. As someone who's been around the game, I know how it feels to be part of a team that's on a roll, and I think that energy is infectious. It's not just about the game itself, but about the way it makes people feel - like they're part of something bigger than themselves.\",\n  \"fact_ids\": [\"F-c6834d5364c4\", \"F-4d471279f121\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c6834d5364c4",
+          "F-4d471279f121"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00052-6f83b5b3d7",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen how a win like that can bring the community together, it's like a spark that ignites a sense of pride and belonging. As someone who's been around the game, I know how it feels to be part of a team that's on a roll, and I think that energy is infectious. It's not just about the game itself, but about the way it makes people feel - like they're part of something bigger than themselves."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00052",
+          "name": "Clark Saryan",
+          "role": "Closing Pitcher, Las Vegas Aviators (AAA)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The A's unexpected win and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "win-streak",
+          "hood": "Eastlake",
+          "focus": "The A's unexpected win and its impact on the community",
+          "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA) — Downtown",
+          "evidence": [
+            {
+              "id": "EV-873cc2d65a",
+              "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+              "text": "Euphoria with friction: name the doubter, kill soft contentment."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-c6834d5364c4"
+          },
+          {
+            "t": "FACT",
+            "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4d471279f121"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-7776580ff460"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 1-0 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-b775476cc1a5"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-8a7363ff6bda"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4459d3dfd633"
+          },
+          {
+            "t": "FACT",
+            "text": "Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA) — Downtown",
+            "src": "Simulation_Ledger profile for POP-00052",
+            "id": "F-e0808a6445dd"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00598",
+      "name": "Vladimir Gonzalez",
+      "quote": "It's been amazing to see how the community has come together after our win, I feel like it's brought a lot of energy and excitement to the neighborhood. As a player, it's great to see how our performance can impact the people around us.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"It's been amazing to see how the community has come together after our win, I feel like it's brought a lot of energy and excitement to the neighborhood. As a player, it's great to see how our performance can impact the people around us.\",\n  \"fact_ids\": [\"F-c6834d5364c4\"],\n  \"basis\": \"lived-context\"\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c6834d5364c4"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00598-587b214dec",
+        "authoredQuote": true,
+        "publishableQuote": "It's been amazing to see how the community has come together after our win, I feel like it's brought a lot of energy and excitement to the neighborhood. As a player, it's great to see how our performance can impact the people around us."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00598",
+          "name": "Vladimir Gonzalez",
+          "role": "Right Fielder, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "What have you seen, felt, or understood about \"The A's unexpected win and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "win-streak",
+          "hood": "Eastlake",
+          "focus": "The A's unexpected win and its impact on the community",
+          "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-8063deab7b",
+              "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+              "text": "Euphoria with friction: name the doubter, kill soft contentment."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C107",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-ac25a93a42d1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-c6834d5364c4"
+          },
+          {
+            "t": "FACT",
+            "text": "Euphoria with friction: name the doubter, kill soft contentment.",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4d471279f121"
+          },
+          {
+            "t": "FACT",
+            "text": "StoryAngle (feed): A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-7776580ff460"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 1-0 · streak W1",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-b775476cc1a5"
+          },
+          {
+            "t": "FACT",
+            "text": "Stats (feed): Travis Coles/6IP/9H/2ER/7SO, Clark Saryan/2IP/1H/5SO, Vladimir Gonzalez/2-6/1HR/2RBI, Desmond Morton/2-6/1HR/2RBI",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-8a7363ff6bda"
+          },
+          {
+            "t": "FACT",
+            "text": "Event: A's — game-result (playoffs)",
+            "src": "Oakland_Sports_Feed cycle 107; world_summary_c107.md \"## Sports\" · A's take game 1 vs Yankees, A's 5 vs Yankees 4",
+            "id": "F-4459d3dfd633"
+          },
+          {
+            "t": "FACT",
+            "text": "Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00598",
+            "id": "F-80925c703562"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-18T01:14:15.646Z"
+}

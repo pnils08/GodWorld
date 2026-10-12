@@ -1,0 +1,20 @@
+{
+  "draft": "business_c109_business-desk_packet-v2_deepseek-deepseek-chat.md",
+  "draftSha256": "74811fd90cd33ca6a9046004d91d9bb9ef023d99726d1d5e0c91ccd7b82aef81",
+  "verdict": "output/cron-compare/business_c109_business-desk_packet-v2_deepseek-deepseek-chat.rhea.json",
+  "flags": [
+    {
+      "claim": "said Walker, using the exact words from his approved statement / sticking to his authorized quote",
+      "issue": "Meta-scaffolding phrasing embedded in narrative prose; stylistic artifact, not a canon violation.",
+      "severity": "low"
+    }
+  ],
+  "contamination": [
+    {
+      "check": "repair-chrome",
+      "issue": "approved-quote-narration"
+    }
+  ],
+  "summary": "deterministic world-contamination blocker failed",
+  "reviewedAt": "2026-09-28T23:16:47.899Z"
+}

@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "wire",
+  "cycle": "108",
+  "persona": "celeste-tran",
+  "byline": "Celeste Tran",
+  "bylinePopid": "POP-00164",
+  "article": "output/cron-compare/staged/wire_c108_celeste-tran_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Marin Tao",
+        "role": "mentioned",
+        "popid": "POP-00537"
+      },
+      {
+        "name": "Dax Monroe",
+        "role": "mentioned",
+        "popid": "POP-00769"
+      },
+      {
+        "name": "Rico Valez",
+        "role": "mentioned",
+        "popid": "POP-00632"
+      },
+      {
+        "name": "Dank Abara",
+        "role": "quoted-source",
+        "popid": "POP-00796"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "san-antonio-marin-tao-beat-trends",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "San Antonio"
+    ],
+    "claims": [
+      {
+        "claim": "Honestly, I don't think about it that much. I'm just doing my thing, playing music, and trying to make a living. If people are talking about me, that's cool, but it's not something I focus on. I'm just trying to be true to myself and my art.",
+        "sourceRef": "citizenVoice PRESS Marin Tao"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-8be1961e07ba",
+    "draftSha256": "175f28a0bc09c70aa5d94db61cdc65da6524c9230f69e4685c98cbd3ea40b5cf",
+    "verdict": "output/cron-compare/wire_c108_celeste-tran_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-09-25T23:18:19.302Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:03.161Z"
+}

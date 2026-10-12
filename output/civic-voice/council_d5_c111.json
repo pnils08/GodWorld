@@ -1,0 +1,28 @@
+{
+  "office": "council_d5",
+  "cycle": 111,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "This cycle, I pushed for immediate action on the Oakland Youth Apprenticeship Pipeline, demanding prioritized placements for East Oakland youth. I also rallied community-driven solutions to address the ongoing decay in Baylight District.",
+  "statements": [
+    {
+      "statementId": "STMT-111-council_d5-001",
+      "type": "vote_statement",
+      "topic": "Youth Apprenticeship",
+      "initiative": "INIT-007",
+      "decision": "Demand prioritized placements for East Oakland youth in the first cohort",
+      "quote": "East Oakland's youth deserve more than promises—they deserve pathways to prosperity.",
+      "fullStatement": "This program is a lifeline for our community, and we cannot afford to let it stall. East Oakland's youth must be first in line for placements, not last. I demand immediate action to ensure the first cohort reflects the communities that need this most.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d5-002",
+      "type": "vote_statement",
+      "topic": "Baylight District",
+      "initiative": null,
+      "decision": "Community-driven solutions to address decay",
+      "quote": "Baylight's decay isn't just a problem—it's a call to action for community-driven solutions.",
+      "fullStatement": "The people of Baylight District are living with the consequences of neglect every day. We need solutions that come from the community, not just City Hall. I am committed to ensuring that these voices are heard and that we take meaningful action this cycle.",
+      "trackerUpdates": {}
+    }
+  ]
+}

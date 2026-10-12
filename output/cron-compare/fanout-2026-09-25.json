@@ -1,0 +1,805 @@
+{
+  "date": "2026-09-25",
+  "cycle": 108,
+  "quotas": {
+    "grid": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "celeste-tran"
+    ],
+    "weekday": 5
+  },
+  "assignments": [
+    {
+      "desk": "culture",
+      "name": "Mason Ortega",
+      "popid": "POP-00160",
+      "beatDomain": "CULTURE",
+      "persona": "mason-ortega",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 5,
+      "story": {
+        "angle": "Temescal kitchens: OakTown Social — the people who work the shift",
+        "label": "Temescal kitchens · OakTown Social",
+        "hookLine": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+        "hood": "Temescal",
+        "pulseClass": "hood-kitchens",
+        "namedBusinesses": [
+          "OakTown Social"
+        ],
+        "citizens": [
+          "Vanessa Treary (POP-00781)",
+          "Vanessa Ramas (POP-01045)",
+          "Jia Pena (POP-00916)",
+          "Akua Ortiz (POP-00948)",
+          "Ross Cabral (POP-00055)",
+          "Brie Harris (POP-00169)"
+        ],
+        "popids": [
+          "POP-00781",
+          "POP-01045",
+          "POP-00916",
+          "POP-00948",
+          "POP-00055",
+          "POP-00169"
+        ],
+        "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+        "cycle": 108
+      },
+      "economicSlice": true,
+      "economicVariant": "food",
+      "pulse": {
+        "className": "hood-kitchens",
+        "score": 19,
+        "label": "Temescal kitchens · OakTown Social",
+        "hood": "Temescal",
+        "namedBusinesses": [
+          "OakTown Social"
+        ]
+      },
+      "prewrite": {
+        "pulseClass": "hood-kitchens",
+        "angle": "Temescal kitchens: OakTown Social — the people who work the shift",
+        "hookLine": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+        "namedBusinesses": [
+          "OakTown Social"
+        ],
+        "anchorFacts": [
+          "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+          "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)"
+        ],
+        "evidence": [
+          {
+            "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+          },
+          {
+            "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+          }
+        ],
+        "hooks": [
+          {
+            "text": "Unemployment in Uptown up 13%. Economic stress story. Who's affected and why?",
+            "angle": "baseline context piece",
+            "hood": "Uptown"
+          },
+          {
+            "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+            "angle": "baseline context piece",
+            "hood": null
+          },
+          {
+            "text": "Jesus Jorden has not advanced in 54 years",
+            "angle": "desk rotation",
+            "hood": null
+          }
+        ],
+        "forbidden": [
+          "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+          "Do not contradict a role, employer or neighborhood listed here"
+        ]
+      },
+      "wakePackage": "MASON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Kai Marston",
+      "popid": "POP-00158",
+      "beatDomain": "CULTURE",
+      "persona": "kai-marston",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 5,
+      "story": {
+        "kind": "beat-arts",
+        "angle": "Tara Ellison is rising — the acts and the rooms they play",
+        "label": "37 culture figures rising; 1 new on the record",
+        "hookLine": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108.",
+        "hood": "Rockridge",
+        "citizens": [
+          "Tara Ellison (POP-00546)",
+          "Alma Vasquez (POP-01063)",
+          "Nina Reyes (POP-01057)",
+          "Theo Banks (POP-01056)",
+          "Lena Cross (POP-00539)",
+          "Rowan Pierce (POP-00545)",
+          "Tariq Harris (POP-01112)",
+          "Emiko Suzuki (POP-00856)",
+          "Gerald Hoffman (POP-00513)",
+          "Benji Dillon (POP-00018)",
+          "Deacon Seymour (POP-00528)",
+          "Carmen Mesa (POP-00081)",
+          "Marisol Guzman (POP-00147)",
+          "Alisha Peña (POP-00029)",
+          "Brielle Lewis (POP-00459)",
+          "Jia Carmichael (POP-00876)",
+          "Delia Fuentes (POP-00973)",
+          "Isaac Renteria (POP-01042)"
+        ],
+        "popids": [
+          "POP-00546",
+          "POP-01063",
+          "POP-01057",
+          "POP-01056",
+          "POP-00539",
+          "POP-00545",
+          "POP-01112",
+          "POP-00856",
+          "POP-00513",
+          "POP-00018",
+          "POP-00528",
+          "POP-00081",
+          "POP-00147",
+          "POP-00029",
+          "POP-00459",
+          "POP-00876",
+          "POP-00973",
+          "POP-01042"
+        ],
+        "ref": "output/beats/Cultural_Ledger.jsonl @C108",
+        "cycle": 108
+      },
+      "beatSlice": true,
+      "beatSeat": "kai-marston",
+      "pulse": {
+        "className": "beat-arts",
+        "score": 100,
+        "label": "37 culture figures rising; 1 new on the record",
+        "hood": "Rockridge",
+        "source": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Tara Ellison is rising — the acts and the rooms they play",
+        "hookLine": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108.",
+        "anchorFacts": [
+          "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108",
+          "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 57, ascending), last seen C86",
+          "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+          "Theo Banks (rapper), Arts, Uptown — fame rising (fame 50, surging), last seen C99",
+          "Oakland Native MVP Davis (sports figure), Sports, Temescal — new on the culture record this cycle (fame 14, rising), last seen C108",
+          "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 97, cooling), last seen C94",
+          "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 71, cooling), last seen C88",
+          "ENGINE SEED (Citywide): Tariq Harris; Emiko Suzuki; Gerald Hoffman",
+          "ENGINE SEED (Lake Merritt): Deacon Seymour; Carmen Mesa; Marisol Guzman · at Cathedral of the Living Word; Estuary Architects",
+          "ENGINE SEED (Fruitvale): Brielle Lewis; Jia Carmichael; Delia Fuentes · at Fruitvale Diner; Fruitvale Transit Hub Authority"
+        ],
+        "evidence": [
+          {
+            "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 57, ascending), last seen C86",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 50, surging), last seen C99",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Oakland Native MVP Davis (sports figure), Sports, Temescal — new on the culture record this cycle (fame 14, rising), last seen C108",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 97, cooling), last seen C94",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 71, cooling), last seen C88",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "ENGINE SEED (Citywide): Tariq Harris; Emiko Suzuki; Gerald Hoffman",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+          },
+          {
+            "text": "ENGINE SEED (Lake Merritt): Deacon Seymour; Carmen Mesa; Marisol Guzman · at Cathedral of the Living Word; Estuary Architects",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+          },
+          {
+            "text": "ENGINE SEED (Fruitvale): Brielle Lewis; Jia Carmichael; Delia Fuentes · at Fruitvale Diner; Fruitvale Transit Hub Authority",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [
+          {
+            "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Uptown",
+            "priority": 7
+          },
+          {
+            "text": "Philly Rodriguez moved from Temescal to Jack London — moving up from Temescal",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Jack London",
+            "priority": 5
+          },
+          {
+            "text": "Blair Patel moved from Jack London to Lake Merritt — moving up from Jack London",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Lake Merritt",
+            "priority": 5
+          },
+          {
+            "text": "Sonia Parikh moved from Temescal to Fruitvale — moving up from Temescal",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Fruitvale",
+            "priority": 5
+          },
+          {
+            "text": "Yasmin Robinson at severe displacement risk in Lake Merritt (risk: 9/10)",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Lake Merritt",
+            "priority": 7
+          }
+        ],
+        "note": null,
+        "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started"
+      },
+      "wakePackage": "KAI-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "beatDomain": "CULTURE",
+      "persona": "sharon-okafor",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 5,
+      "story": {
+        "kind": "beat-lifestyle",
+        "angle": "Lena Cross is fading — how the city follows its names",
+        "label": "Marin Tao leads the fame table; 2 fading, 1 new",
+        "hookLine": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 97, cooling), 17 media mentions.",
+        "hood": "Lake Merritt",
+        "citizens": [
+          "Lena Cross (POP-00539)",
+          "Rowan Pierce (POP-00545)",
+          "Marin Tao (POP-00537)",
+          "Rico Valez (POP-00632)"
+        ],
+        "popids": [
+          "POP-00539",
+          "POP-00545",
+          "POP-00537",
+          "POP-00632"
+        ],
+        "ref": "output/beats/Cultural_Ledger.jsonl @C108",
+        "cycle": 108
+      },
+      "beatSlice": true,
+      "beatSeat": "sharon-okafor",
+      "pulse": {
+        "className": "beat-lifestyle",
+        "score": 100,
+        "label": "Marin Tao leads the fame table; 2 fading, 1 new",
+        "hood": "Lake Merritt",
+        "source": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Lena Cross is fading — how the city follows its names",
+        "hookLine": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 97, cooling), 17 media mentions.",
+        "anchorFacts": [
+          "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 97, cooling), 17 media mentions",
+          "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 71, cooling), 14 media mentions",
+          "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+          "Rico Valez (Celebrity), Arts, Rockridge, Iconic-tier — the city knows them (fame 111, viral), 18 media mentions",
+          "Oakland Native MVP Davis (sports figure), Sports, Temescal, Local-tier — new on the culture record this cycle (fame 14, rising), 1 media mentions"
+        ],
+        "evidence": [
+          {
+            "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 97, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 71, cooling), 14 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Rico Valez (Celebrity), Arts, Rockridge, Iconic-tier — the city knows them (fame 111, viral), 18 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Oakland Native MVP Davis (sports figure), Sports, Temescal, Local-tier — new on the culture record this cycle (fame 14, rising), 1 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [
+          {
+            "text": "The Reaves line is founded",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Downtown",
+            "priority": 4
+          },
+          {
+            "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Downtown",
+            "priority": 7
+          },
+          {
+            "text": "Jack London boom sustained — momentum 8/10, the block everyone wants onto",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Jack London",
+            "priority": 7
+          },
+          {
+            "text": "Rockridge boom sustained — momentum 10/10, the block everyone wants onto",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Rockridge",
+            "priority": 7
+          },
+          {
+            "text": "Grand Lake turning upward: retail busy, events drawing crowds, people moving in",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Grand Lake",
+            "priority": 5
+          },
+          {
+            "text": "Eastlake cooling off: foot traffic down, storefronts quieter than the rest of the city",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Eastlake",
+            "priority": 6
+          }
+        ],
+        "note": null,
+        "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to"
+      },
+      "wakePackage": "SHARON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "beatDomain": "CULTURE_GROUND",
+      "persona": "maria-keen",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 5,
+      "story": {
+        "kind": "beat-neighborhood",
+        "angle": "Fruitvale — the programs that hold the block and the people who founded them",
+        "label": "Fruitvale: 3 active programs on the record",
+        "hookLine": "3 active programs in Fruitvale; Lucia Polito founded one.",
+        "hood": "Fruitvale",
+        "citizens": [
+          "Lucia Polito (POP-00004)"
+        ],
+        "popids": [
+          "POP-00004"
+        ],
+        "ref": "output/beats/Community_Programs.jsonl @C108",
+        "cycle": 108
+      },
+      "beatSlice": true,
+      "beatSeat": "maria-keen",
+      "pulse": {
+        "className": "beat-neighborhood",
+        "score": 100,
+        "label": "Fruitvale: 3 active programs on the record",
+        "hood": "Fruitvale",
+        "source": "output/beats/Community_Programs.jsonl @C108"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Fruitvale — the programs that hold the block and the people who founded them",
+        "hookLine": "3 active programs in Fruitvale; Lucia Polito founded one.",
+        "anchorFacts": [
+          "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+          "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+          "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+          "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors"
+        ],
+        "evidence": [
+          {
+            "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-004"
+          },
+          {
+            "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-010"
+          },
+          {
+            "text": "Postpartum Oakland Network (health), Fruitvale — founded by Lucia Polito, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C108 PRG-016"
+          },
+          {
+            "text": "Fruitvale this cycle: 408 students, 1,497 adults, 339 seniors — moved vs C107: +11 students, +39 adults, +8 seniors",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C108 vs prev/"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 107
+        },
+        "hooks": [
+          {
+            "text": "Lake Merritt seeing 13% population growth. New residents arriving—who are they and why? Neighborhood change angle.",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Lake Merritt",
+            "priority": 3
+          },
+          {
+            "text": "Positive energy in the city. What's driving the mood? Feature opportunity.",
+            "angle": "street-level mood piece",
+            "domain": "COMMUNITY",
+            "hood": "Lake Merritt",
+            "priority": 2
+          },
+          {
+            "text": "an anniversary dinner grew past the table until half the block seemed to be in the kitchen",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Fruitvale",
+            "priority": 4
+          },
+          {
+            "text": "Household in West Oakland spending 53% of income on housing",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "West Oakland",
+            "priority": 6
+          },
+          {
+            "text": "Household in Lake Merritt spending 51% of income on housing",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Lake Merritt",
+            "priority": 6
+          },
+          {
+            "text": "A family bought their home in Fruitvale",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Fruitvale",
+            "priority": 3
+          },
+          {
+            "text": "A family bought their home in Fruitvale",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Fruitvale",
+            "priority": 3
+          },
+          {
+            "text": "A family bought their home in Temescal",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Temescal",
+            "priority": 3
+          }
+        ],
+        "note": null,
+        "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+      },
+      "wakePackage": "MARIA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "wire",
+      "name": "Celeste Tran",
+      "popid": "POP-00164",
+      "beatDomain": "CULTURE",
+      "persona": "celeste-tran",
+      "approach": "Report what the record shows, then find the citizen living it. Facts from the record are immutable; the feel of the day is yours.",
+      "gridDay": 5,
+      "story": {
+        "kind": "beat-trends",
+        "angle": "Marin Tao leads the conversation (25 mentions); Uptown moves the most — what Oakland is doing together this week",
+        "label": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+        "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+        "hood": "San Antonio",
+        "citizens": [
+          "Marin Tao (POP-00537)",
+          "Dax Monroe (POP-00769)",
+          "Rico Valez (POP-00632)"
+        ],
+        "popids": [
+          "POP-00537",
+          "POP-00769",
+          "POP-00632"
+        ],
+        "ref": "output/beats/Cultural_Ledger.jsonl @C108",
+        "cycle": 108
+      },
+      "beatSlice": true,
+      "beatSeat": "celeste-tran",
+      "pulse": {
+        "className": "beat-trends",
+        "score": 100,
+        "label": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+        "hood": "San Antonio",
+        "source": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Marin Tao leads the conversation (25 mentions); Uptown moves the most — what Oakland is doing together this week",
+        "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+        "anchorFacts": [
+          "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+          "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88",
+          "Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111",
+          "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+          "Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people"
+        ],
+        "evidence": [
+          {
+            "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108"
+          },
+          {
+            "text": "Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people",
+            "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 107
+        },
+        "hooks": [
+          {
+            "text": "Household in West Oakland spending 53% of income on housing",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "West Oakland",
+            "priority": 6
+          },
+          {
+            "text": "Household in Lake Merritt spending 51% of income on housing",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Lake Merritt",
+            "priority": 6
+          },
+          {
+            "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Downtown",
+            "priority": 7
+          },
+          {
+            "text": "West Oakland cooling off: foot traffic down, storefronts quieter than the rest of the city",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "West Oakland",
+            "priority": 6
+          },
+          {
+            "text": "Jack London boom sustained — momentum 8/10, the block everyone wants onto",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Jack London",
+            "priority": 7
+          },
+          {
+            "text": "Rockridge boom sustained — momentum 10/10, the block everyone wants onto",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Rockridge",
+            "priority": 7
+          },
+          {
+            "text": "Grand Lake turning upward: retail busy, events drawing crowds, people moving in",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Grand Lake",
+            "priority": 5
+          },
+          {
+            "text": "Grand Lake boom sustained — momentum 8/10, the block everyone wants onto",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Grand Lake",
+            "priority": 7
+          }
+        ],
+        "note": null,
+        "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about"
+      },
+      "wakePackage": "CELESTE-TRENDS-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "gridDay": 5,
+      "story": {
+        "ref": "undocked:undocked-pop00300-Y3C4-e2",
+        "label": "UNDOCKED: Belle Lopez — up 98 on the night",
+        "kind": "undocked",
+        "angle": "Recap Belle Lopez's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 98, systems Sol, combat 0, mishaps 0, magnitude 3/5. Standings: Clarissa Dane leads the board — rank #1, 5 cycle(s) led, current streak 5.",
+        "citizens": [
+          "Belle Lopez — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00300"
+        ],
+        "hood": "Jack London"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Mason Ortega",
+        "persona": "mason-ortega",
+        "wakePackage": "MASON-LEP2-1"
+      },
+      {
+        "name": "Kai Marston",
+        "persona": "kai-marston",
+        "wakePackage": "KAI-LEP2-1"
+      },
+      {
+        "name": "Sharon Okafor",
+        "persona": "sharon-okafor",
+        "wakePackage": "SHARON-LEP2-1"
+      },
+      {
+        "name": "Maria Keen",
+        "persona": "maria-keen",
+        "wakePackage": "MARIA-LEP2-1"
+      },
+      {
+        "name": "Celeste Tran",
+        "persona": "celeste-tran",
+        "wakePackage": "CELESTE-TRENDS-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=mason-ortega,kai-marston,sharon-okafor,maria-keen,celeste-tran,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "seats=1 mason-ortega/food:Temescal",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=4 celeste-tran/beat-trends:San Antonio, maria-keen/beat-neighborhood:Fruitvale, sharon-okafor/beat-lifestyle:Lake Merritt, kai-marston/beat-arts:Rockridge",
+    "seats": [
+      "celeste-tran/beat-trends:San Antonio",
+      "maria-keen/beat-neighborhood:Fruitvale",
+      "sharon-okafor/beat-lifestyle:Lake Merritt",
+      "kai-marston/beat-arts:Rockridge"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": false,
+    "reason": "no civic-domain persona assignment in rota",
+    "seats": []
+  },
+  "builtAt": "2026-09-25T11:15:08.336Z"
+}

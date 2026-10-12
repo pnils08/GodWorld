@@ -1,0 +1,144 @@
+[
+  {
+    "pop": "POP-00531",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00531\",\"name\":\"Priya Nair\",\"role\":\"Climate Adaptation Engineer\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"How does your work as a Climate Adaptation Engineer intersect with EBMUD's growth and the city's infrastructure challenges? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Downtown\",\"focus\":\"The human side of economic movement in Downtown—how growth and adaptation ripple through workplaces and workers' lives.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Priya Nair — Climate Adaptation Engineer\",\"evidence\":[{\"id\":\"EV-4c1ecd95ab\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110\",\"text\":\"Priya Nair, Climate Adaptation Engineer at EBMUD. 4 named workers at 4 named businesses in Downtown on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"Downtown businesses · EBMUD, Atlas Bay Architects\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110\",\"id\":\"F-49af9e000c96\"},{\"t\":\"FACT\",\"text\":\"Priya Nair, Climate Adaptation Engineer at EBMUD. 4 named workers at 4 named businesses in Downtown on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110\",\"id\":\"F-fd354edf6c40\"},{\"t\":\"FACT\",\"text\":\"EBMUD · Utilities · 1900 employees · growth 11.7% · revenue $656.6M (+$1.5M vs C109) · on the roster: Priya Nair (Climate Adaptation Engineer)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110\",\"id\":\"F-1465bdf169d3\"},{\"t\":\"FACT\",\"text\":\"Atlas Bay Architects · Architecture · 86 employees · growth 9.6% · revenue $42.3M (+$78k vs C109) · key personnel: Sarah Huang (Healthcare Director) · on the roster: Tobias Jurko (Landscape Architect)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110\",\"id\":\"F-4ab9b4b003dd\"},{\"t\":\"FACT\",\"text\":\"Oakland Entertainment Talent Ageny · Talent Management · 10 employees · growth 4.5% · revenue $1.3M (+$1k vs C109) · on the roster: Nina Rines (Actress)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110\",\"id\":\"F-57a5b94595d7\"},{\"t\":\"FACT\",\"text\":\"Miso Metro · Restaurant & Dining · 2 employees · growth 7.8% · revenue $250k (+$376 vs C109) · on the roster: Andre Turner (Line cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110\",\"id\":\"F-479e53d0ab01\"},{\"t\":\"FACT\",\"text\":\"Pacific Standard Architecture · Architecture · 96 employees · growth 7.4% · revenue $48.3M (+$69k vs C109) · key personnel: Theodore Lindqvist (principal)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110\",\"id\":\"F-06d4d9017f38\"},{\"t\":\"FACT\",\"text\":\"Priya Nair — Climate Adaptation Engineer\",\"src\":\"Simulation_Ledger profile for POP-00531\",\"id\":\"F-5db822fffedb\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00531",
+        "name": "Priya Nair",
+        "role": "Climate Adaptation Engineer",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "How does your work as a Climate Adaptation Engineer intersect with EBMUD's growth and the city's infrastructure challenges? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Downtown",
+        "focus": "The human side of economic movement in Downtown—how growth and adaptation ripple through workplaces and workers' lives.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Priya Nair — Climate Adaptation Engineer",
+        "evidence": [
+          {
+            "id": "EV-4c1ecd95ab",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+            "text": "Priya Nair, Climate Adaptation Engineer at EBMUD. 4 named workers at 4 named businesses in Downtown on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown businesses · EBMUD, Atlas Bay Architects",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "id": "F-49af9e000c96"
+        },
+        {
+          "t": "FACT",
+          "text": "Priya Nair, Climate Adaptation Engineer at EBMUD. 4 named workers at 4 named businesses in Downtown on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "id": "F-fd354edf6c40"
+        },
+        {
+          "t": "FACT",
+          "text": "EBMUD · Utilities · 1900 employees · growth 11.7% · revenue $656.6M (+$1.5M vs C109) · on the roster: Priya Nair (Climate Adaptation Engineer)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "id": "F-1465bdf169d3"
+        },
+        {
+          "t": "FACT",
+          "text": "Atlas Bay Architects · Architecture · 86 employees · growth 9.6% · revenue $42.3M (+$78k vs C109) · key personnel: Sarah Huang (Healthcare Director) · on the roster: Tobias Jurko (Landscape Architect)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "id": "F-4ab9b4b003dd"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Entertainment Talent Ageny · Talent Management · 10 employees · growth 4.5% · revenue $1.3M (+$1k vs C109) · on the roster: Nina Rines (Actress)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "id": "F-57a5b94595d7"
+        },
+        {
+          "t": "FACT",
+          "text": "Miso Metro · Restaurant & Dining · 2 employees · growth 7.8% · revenue $250k (+$376 vs C109) · on the roster: Andre Turner (Line cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "id": "F-479e53d0ab01"
+        },
+        {
+          "t": "FACT",
+          "text": "Pacific Standard Architecture · Architecture · 96 employees · growth 7.4% · revenue $48.3M (+$69k vs C109) · key personnel: Theodore Lindqvist (principal)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "id": "F-06d4d9017f38"
+        },
+        {
+          "t": "FACT",
+          "text": "Priya Nair — Climate Adaptation Engineer",
+          "src": "Simulation_Ledger profile for POP-00531",
+          "id": "F-5db822fffedb"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

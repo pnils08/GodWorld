@@ -1,0 +1,66 @@
+{
+  "office": "mayor_gavel",
+  "cycle": 107,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "I authorized the Youth Apprenticeship Pipeline public enrollment launch, directed Stabilization Fund canvassing to Downtown, and endorsed OARI's East Oakland deployment. The hearing confirmed what I already decided: when neighborhoods flash distress, we move resources before families pay the price.",
+  "statements": [
+    {
+      "statementId": "STMT-107-mayor_gavel-001",
+      "type": "authorization_response",
+      "topic": "Oakland Youth Apprenticeship Pipeline Public Enrollment Launch",
+      "initiative": "INIT-007",
+      "decision": "approved",
+      "quote": "Zero applicants waiting means zero excuses—this pipeline opens today.",
+      "fullStatement": "The backlog is cleared. The intake pipeline is ready. And today I'm convening the public town hall enrollment event for the Oakland Youth Apprenticeship Pipeline—open applicant intake starts now, with training cohort placement targets set for the next phase. This is what happens when we clear the bureaucracy and get to work.",
+      "trackerUpdates": {
+        "initiative": "INIT-007",
+        "ImplementationPhase": "operational",
+        "MilestoneNotes": "C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established.",
+        "NextScheduledAction": "First training cohort placement review",
+        "NextActionCycle": 108
+      }
+    },
+    {
+      "statementId": "STMT-107-mayor_gavel-002",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund Downtown Outreach Expansion",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "When storefronts go quiet, families go next—so we're taking the fund to where the need is moving.",
+      "fullStatement": "Brenda Okoro's team is deploying Stabilization Fund canvassing operations to Downtown immediately. The month-eight disbursement review proceeds alongside this expansion. We've seen the storefront decline signals—we're not waiting for West Oakland's pain to migrate before we respond.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.",
+        "NextScheduledAction": "Month-eight disbursement completion and Downtown outreach impact assessment",
+        "NextActionCycle": 108
+      }
+    },
+    {
+      "statementId": "STMT-107-mayor_gavel-003",
+      "type": "authorization_response",
+      "topic": "Oakland Alternative Response Initiative East Oakland Protocol Deployment",
+      "initiative": "INIT-002",
+      "decision": "approved",
+      "quote": "Three districts flashing incoherence means we deploy three times over—starting now in East Oakland.",
+      "fullStatement": "The emergency expansion to East Oakland is authorized. District 1 evaluation continues with monthly reporting to my office. When West Oakland, Fruitvale, and East Oakland all signal distress, we don't triage—we scale. OARI dispatch protocol goes live in East Oakland this cycle.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "dispatch-live",
+        "MilestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.",
+        "NextScheduledAction": "District 1 evaluation completion and potential expansion decision",
+        "NextActionCycle": 108
+      }
+    },
+    {
+      "statementId": "STMT-107-mayor_gavel-004",
+      "type": "policy_position",
+      "topic": "District Crisis and Credit — KONO and Glenview",
+      "initiative": null,
+      "decision": "affirmed",
+      "quote": "Glenview's upbeat because we invested there—KONO's steady because we learned how to keep it that way.",
+      "fullStatement": "KONO's mood is clearly upbeat, street trade steady, crime low—that's not accident, that's investment paying off. Glenview's upbeat too, and that's because we put resources there early. The lesson isn't to pick winners—it's to replicate what works until every district feels this way.",
+      "trackerUpdates": {}
+    }
+  ]
+}

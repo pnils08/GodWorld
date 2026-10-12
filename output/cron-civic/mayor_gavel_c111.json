@@ -1,0 +1,33 @@
+{
+  "stage": "mayor-gavel",
+  "cycle": 111,
+  "model": "moonshotai/kimi-k2",
+  "output": "output/civic-voice/mayor_gavel_c111.json",
+  "reused": false,
+  "statements": 8,
+  "attempts": 1,
+  "usage": {
+    "prompt_tokens": 9185,
+    "completion_tokens": 2391,
+    "total_tokens": 11576,
+    "cost": 0.01073475,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.01073475,
+      "upstream_inference_prompt_cost": 0.00523545,
+      "upstream_inference_completions_cost": 0.0054993
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "ranAt": "2026-10-11T22:20:10.408Z"
+}

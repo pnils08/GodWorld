@@ -1,0 +1,55 @@
+{
+  "draft": "output/cron-compare/business_c107_business-desk_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "107",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "94c23f6b469e2b175be6ac384a4628300418edbae19a33e1ef2e55bc247b4946",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance and citizen roles, businesses, and locations align with canon ground truth.",
+  "review": {
+    "profileId": "jordan-economic-labor-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-1",
+    "manifestId": "AM-cdcfaee52425",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Ariana Reyes",
+      "Bobby Chen-Ramirez",
+      "Dawson Nguyen",
+      "Vanessa Treary"
+    ],
+    "unverified": [
+      "Down Telegraph Avenue",
+      "Gridiron Analytics",
+      "Gridiron Analytics' Temescal",
+      "Temescal's Data-Driven Rhythm"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0105,
+  "durationMs": 6452,
+  "parseError": false,
+  "ranAt": "2026-09-14T23:16:03.026Z"
+}

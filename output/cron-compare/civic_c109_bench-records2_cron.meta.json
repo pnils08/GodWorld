@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "109",
+  "model": "deepseek/deepseek-chat",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 9956,
+  "usageOutputTokens": 921,
+  "savedFiles": [
+    "output/cron-compare/civic_c109_carmen-delaine_bench-records2_deepseek-deepseek-chat.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c109.md",
+  "durationMs": 19259,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-01T04:09:29.100Z"
+}

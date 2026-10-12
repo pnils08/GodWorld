@@ -1,0 +1,349 @@
+FULL STAT TRUE SOURCE — PITCHER
+
+Name: Hitoki Ka
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: RP
+
+ 
+
+Jersey: #23
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: B
+
+ 
+
+Overall: 88
+
+ 
+
+MLB Service: 6.110
+
+ 
+
+Age: 29
+
+ 
+
+Bats: R
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'2"
+
+ 
+
+Weight: 208 lbs
+
+ 
+
+Drafted: Round 3 (2029)
+
+ 
+
+Secondary Position: NONE
+
+ 
+
+Hitter Tendency: WHOLE FIELD
+
+ 
+
+Born: CALIFORNIA
+
+ 
+
+Canonical POPID: POP-01081
+
+
+--------------------------------------------------------------------------------
+
+
+PITCH REPERTOIRE
+
+4-Seam Fastball (95 mph)
+
+ 
+
+Slider (87 mph)
+
+ 
+
+Changeup (84 mph)
+
+ 
+
+Curveball (81 mph)
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+STA: 45
+
+ 
+
+H/9: 85
+
+ 
+
+K/9: 82
+
+ 
+
+BB/9: 78
+
+ 
+
+HR/9: 84
+
+ 
+
+PCLT: 82
+
+ 
+
+CTRL: 68
+
+ 
+
+VEL: 88
+
+ 
+
+BRK: 76
+
+ 
+
+FLD: 58
+
+ 
+
+ARM: 65
+
+ 
+
+ACC: 62
+
+ 
+
+REAC: 58
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   GS  W   L   SV  BS  HLD  IP    H   R   ER  HR  BB  SO   ERA
+
+ 
+
+2041  ATH   57  0   10  1   1   2   13   70.0  40  7   7   4   13  71   0.90
+
+ 
+
+2039  ATH   79  0   7   4   5   4   9    83.1  71  42  34  9   45  91   3.67
+
+ 
+
+2038  ATH   74  0   7   5   4   5   10   85.0  60  23  20  4   33  84   2.12
+
+ 
+
+2037  ATH   69  0   5   3   1   1   10   81.2  75  23  23  6   34  77   2.53
+
+ 
+
+2036  ATH   27  0   1   1   0   0   5    30.2  26  12  11  4   16  28   3.23
+
+ 
+
+2035  TOT   72  0   4   3   1   1   12   78.2  73  44  41  11  38  81   4.69
+
+ 
+
+2034  AZ    77  0   6   4   4   11  8    76.1  74  37  31  12  38  74   3.43
+
+ 
+
+2033  AZ    19  0   1   0   0   0   3    21.1  23  13  12  5   11  12   5.06
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 474
+
+ 
+
+GS: 0
+
+ 
+
+W: 42
+
+ 
+
+L: 18
+
+ 
+
+SV: 14
+
+ 
+
+BS: 25
+
+ 
+
+HLD: 75
+
+ 
+
+IP: 552.0
+
+ 
+
+H: 444
+
+ 
+
+R: 201
+
+ 
+
+ER: 179
+
+ 
+
+HR: 55
+
+ 
+
+BB: 214
+
+ 
+
+SO: 511
+
+ERA: 2.92
+
+ 
+
+WHIP: 1.19
+
+ 
+
+K/9: 8.33
+
+ 
+
+BB/9: 3.49
+
+ 
+
+HR/9: 0.90
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2040–2042: $7,000,000 per year
+
+ 
+
+2043–2049: Free Agent (FA)
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Options Used: 2/3
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-01081
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-01081

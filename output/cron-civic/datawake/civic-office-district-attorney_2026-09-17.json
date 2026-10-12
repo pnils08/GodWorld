@@ -1,0 +1,15 @@
+{
+  "office": "district_attorney",
+  "agentDir": "civic-office-district-attorney",
+  "holder": "Clarissa Dane",
+  "popid": "POP-00143",
+  "title": "District Attorney",
+  "date": "2026-09-17",
+  "cycle": 107,
+  "model": "moonshotai/kimi-k2",
+  "statement": "The DA's office has reviewed the East Oakland dispatch protocol deployment for OARI's District 2 expansion. Under California Penal Code Section 830 et seq., our office has established evidentiary protocols with alternative response teams to ensure case continuity when incidents escalate to criminal jurisdiction. We are coordinating with OPD and OARI leadership on dispatch-integration procedures. The matter is under operational review.",
+  "action": null,
+  "numberMoved": null,
+  "ranAt": "2026-09-17T10:45:13.089Z",
+  "fellBackFrom": null
+}

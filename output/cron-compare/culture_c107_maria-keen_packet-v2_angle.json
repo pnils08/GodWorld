@@ -1,0 +1,879 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "107",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00013",
+      "name": "Maria Keen",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "East Oakland — the programs that hold the block and the people who founded them",
+      "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, and the engine's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders and movement numbers are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "neighborhood",
+        "hood": "East Oakland",
+        "facts": [
+          "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+          "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+          "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+          "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+          "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+          "Allen Temple Academy (tech-education), East Oakland, since C88",
+          "East Oakland this cycle: 451 students, 1,441 adults, 308 seniors — moved vs C106: +10 students, +39 adults, +8 seniors"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "Lake Merritt seeing 15% population growth. New residents arriving—who are they and why? Neighborhood change angle. (observational analysis)",
+          "Multiple community signals detected. Could be coincidence or early pattern. (observational analysis)",
+          "Positive energy in the city. What's driving the mood? Feature opportunity. (street-level mood piece)",
+          "Community engagement elevated. Residents gathering, organizing, connecting. Profile opportunity. (observational analysis)"
+        ],
+        "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-neighborhood",
+      "hood": "East Oakland",
+      "score": null,
+      "src": "output/beats/Community_Programs.jsonl @C107",
+      "nearby": [
+        {
+          "text": "Adams Point | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c107.md \"### Adams Point\"; events: world_summary_c107.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c107.md \"### Downtown\"; events: world_summary_c107.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c107.md \"### East Oakland\"; events: world_summary_c107.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c107.md \"### Fruitvale\"; events: world_summary_c107.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c107.md \"### Lake Merritt\"; events: world_summary_c107.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00532",
+          "name": "Marcus Whitfield",
+          "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+          "why": "founded Eastside Hoopers Coalition (Community_Programs)",
+          "role": "Youth Basketball Coach",
+          "hood": "Fruitvale"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C107",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-ac25a93a42d1"
+      },
+      {
+        "t": "FACT",
+        "text": "East Oakland: 6 active programs on the record",
+        "src": "output/beats/Community_Programs.jsonl @C107",
+        "id": "F-e0f755f45e04"
+      },
+      {
+        "t": "FACT",
+        "text": "6 active programs in East Oakland; Marcus Whitfield founded one.",
+        "src": "output/beats/Community_Programs.jsonl @C107",
+        "id": "F-cd66e4b49d8c"
+      },
+      {
+        "t": "FACT",
+        "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C107 PRG-005",
+        "id": "F-39029486ffff"
+      },
+      {
+        "t": "FACT",
+        "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C107 PRG-014",
+        "id": "F-e817bf673f8b"
+      },
+      {
+        "t": "FACT",
+        "text": "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+        "src": "output/beats/Community_Programs.jsonl @C107 PRG-022",
+        "id": "F-f9ed907315c3"
+      },
+      {
+        "t": "FACT",
+        "text": "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+        "src": "output/beats/Community_Programs.jsonl @C107 PRG-023",
+        "id": "F-9a373525878f"
+      },
+      {
+        "t": "FACT",
+        "text": "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+        "src": "output/beats/Community_Programs.jsonl @C107 PRG-025",
+        "id": "F-2b759d6fbe14"
+      },
+      {
+        "t": "FACT",
+        "text": "Allen Temple Academy (tech-education), East Oakland, since C88",
+        "src": "output/beats/Community_Programs.jsonl @C107 PRG-030",
+        "id": "F-b511422339f5"
+      },
+      {
+        "t": "FACT",
+        "text": "East Oakland this cycle: 451 students, 1,441 adults, 308 seniors — moved vs C106: +10 students, +39 adults, +8 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C107 vs prev/",
+        "id": "F-1d954d118656"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "East Oakland — the programs that hold the block and the people who founded them",
+      "label": "East Oakland: 6 active programs on the record",
+      "hookLine": "6 active programs in East Oakland; Marcus Whitfield founded one.",
+      "hood": "East Oakland",
+      "citizens": [
+        "Marcus Whitfield (POP-00532)"
+      ],
+      "popids": [
+        "POP-00532"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C107",
+      "cycle": 107
+    },
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, and the engine's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders and movement numbers are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Dragon Gate Lounge (Chinatown) · quiet night",
+      "named": "Dragon Gate Lounge",
+      "hood": "Chinatown",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Dragon Gate Lounge (Chinatown) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Dragon Gate Lounge is open and quiet in Chinatown. What that condition means is not yet established.",
+      "hookLine": "Dragon Gate Lounge is open and quiet in Chinatown.",
+      "anchorFacts": [
+        "NAMED: Dragon Gate Lounge",
+        "HOOD: Chinatown",
+        "VENUE: Dragon Gate Lounge",
+        "HOOD: Chinatown",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Rico Valez",
+        "GameGirl Gia",
+        "Former A's Star Rodriguez"
+      ],
+      "restaurants": [
+        {
+          "name": "OakHouse",
+          "hood": "Rockridge"
+        },
+        {
+          "name": "Dockhouse BBQ",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Dragon Gate Lounge",
+          "hood": "Chinatown"
+        },
+        {
+          "name": "Piedmont Pub",
+          "hood": "Piedmont Ave"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "game-night",
+        "movement": "restricted",
+        "weatherImpact": 1.3
+      },
+      "cityEvents": [
+        "The Varek Family Block Party",
+        "Fruitvale Unity Gathering",
+        "The Paulson Line Founding Celebration",
+        "Jack London Misty Morning Coffee Club"
+      ],
+      "tv": [
+        "Civil Rights Special",
+        "Community Stories",
+        "Late Weather Watch",
+        "Late Shift Live",
+        "Lake Merritt Laughs",
+        "Jack London Ballpark Stories",
+        "One-on-One with Mark Aitken (1B)"
+      ],
+      "movies": [
+        "Voice of Change",
+        "Neighborhood Tales",
+        "Storm Window",
+        "Fog Harbor",
+        "Rising Star",
+        "The Closer"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight - Playoff Special",
+      "streamingTrend": "civil rights documentaries",
+      "foodTrend": "Playoff tension dining - sports bar surge"
+    },
+    "signals": {
+      "fameCount": 11,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Rico Valez spotted at Canopy Market",
+          "name": "Rico Valez",
+          "venue": "Canopy Market",
+          "ref": "Ripple_Ledger cycle 107 (CauseType lifestyle-sighting); rendered: world_summary_c107.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Rockridge",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | GameGirl Gia spotted at Telegraph Press",
+          "name": "GameGirl Gia",
+          "venue": "Telegraph Press",
+          "ref": "Ripple_Ledger cycle 107 (CauseType lifestyle-sighting); rendered: world_summary_c107.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "KONO",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Former A's Star Rodriguez spotted at KONO Kitchen",
+          "name": "Former A's Star Rodriguez",
+          "venue": "KONO Kitchen",
+          "ref": "Ripple_Ledger cycle 107 (CauseType lifestyle-sighting); rendered: world_summary_c107.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "KONO",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "OakHouse",
+          "hood": "Rockridge"
+        },
+        {
+          "name": "Dockhouse BBQ",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Dragon Gate Lounge",
+          "hood": "Chinatown"
+        },
+        {
+          "name": "Piedmont Pub",
+          "hood": "Piedmont Ave"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 5,
+        "vibe": "game-night",
+        "movement": "restricted",
+        "weatherImpact": 1.3
+      },
+      "cityEvents": [
+        "The Varek Family Block Party",
+        "Fruitvale Unity Gathering",
+        "The Paulson Line Founding Celebration",
+        "Jack London Misty Morning Coffee Club"
+      ],
+      "tv": [
+        "Civil Rights Special",
+        "Community Stories",
+        "Late Weather Watch",
+        "Late Shift Live",
+        "Lake Merritt Laughs",
+        "Jack London Ballpark Stories",
+        "One-on-One with Mark Aitken (1B)"
+      ],
+      "movies": [
+        "Voice of Change",
+        "Neighborhood Tales",
+        "Storm Window",
+        "Fog Harbor",
+        "Rising Star",
+        "The Closer"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Dragon Gate Lounge (Chinatown) · quiet night",
+        "named": "Dragon Gate Lounge",
+        "hood": "Chinatown"
+      },
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Piedmont Pub (Piedmont Ave) · quiet night",
+        "named": "Piedmont Pub",
+        "hood": "Piedmont Ave"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Rico Valez at Canopy Market (Rockridge)",
+        "named": "Canopy Market",
+        "hood": "Rockridge"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "GameGirl Gia at Telegraph Press (KONO)",
+        "named": "Telegraph Press",
+        "hood": "KONO"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Former A's Star Rodriguez at KONO Kitchen (KONO)",
+        "named": "KONO Kitchen",
+        "hood": "KONO"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "OakHouse (Rockridge)",
+        "named": "OakHouse",
+        "hood": "Rockridge"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Dockhouse BBQ (Jack London)",
+        "named": "Dockhouse BBQ",
+        "hood": "Jack London"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Harborline Grill (Jack London)",
+        "named": "Harborline Grill",
+        "hood": "Jack London"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "OakHouse (Rockridge)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Dragon Gate Lounge (Chinatown) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Dragon Gate Lounge (Chinatown) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Dragon Gate Lounge (Chinatown) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Rico Valez at Canopy Market (Rockridge)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "HOOD-SLICE-1",
+    "kind": "beat-neighborhood",
+    "seat": {
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "desk": "culture",
+      "domain": "neighborhood",
+      "builder": "buildNeighborhoodSlice.js"
+    },
+    "hood": "East Oakland",
+    "pulse": {
+      "className": "beat-neighborhood",
+      "score": 100,
+      "label": "East Oakland: 6 active programs on the record",
+      "hood": "East Oakland",
+      "source": "output/beats/Community_Programs.jsonl @C107"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "East Oakland — the programs that hold the block and the people who founded them",
+      "hookLine": "6 active programs in East Oakland; Marcus Whitfield founded one.",
+      "anchorFacts": [
+        "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+        "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+        "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+        "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+        "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+        "Allen Temple Academy (tech-education), East Oakland, since C88",
+        "East Oakland this cycle: 451 students, 1,441 adults, 308 seniors — moved vs C106: +10 students, +39 adults, +8 seniors"
+      ],
+      "evidence": [
+        {
+          "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-005"
+        },
+        {
+          "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-014"
+        },
+        {
+          "text": "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-022"
+        },
+        {
+          "text": "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-023"
+        },
+        {
+          "text": "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-025"
+        },
+        {
+          "text": "Allen Temple Academy (tech-education), East Oakland, since C88",
+          "src": "output/beats/Community_Programs.jsonl @C107 PRG-030"
+        },
+        {
+          "text": "East Oakland this cycle: 451 students, 1,441 adults, 308 seniors — moved vs C106: +10 students, +39 adults, +8 seniors",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C107 vs prev/"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 106
+      },
+      "hooks": [
+        {
+          "text": "Lake Merritt seeing 15% population growth. New residents arriving—who are they and why? Neighborhood change angle.",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 3
+        },
+        {
+          "text": "Multiple community signals detected. Could be coincidence or early pattern.",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "Positive energy in the city. What's driving the mood? Feature opportunity.",
+          "angle": "street-level mood piece",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 2
+        },
+        {
+          "text": "Community engagement elevated. Residents gathering, organizing, connecting. Profile opportunity.",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "Household in West Oakland spending 53% of income on housing",
+          "angle": null,
+          "domain": "RENT_BURDEN_CRISIS",
+          "hood": "West Oakland",
+          "priority": 6
+        },
+        {
+          "text": "the debts crossed a line this week — sleep comes harder now",
+          "angle": null,
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 3
+        },
+        {
+          "text": "the debts crossed a line this week — sleep comes harder now",
+          "angle": null,
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 3
+        },
+        {
+          "text": "A family bought their home in Fruitvale",
+          "angle": null,
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 3
+        },
+        {
+          "text": "Downtown boom sustained — momentum 9/10, the block everyone wants onto",
+          "angle": null,
+          "domain": "NEIGHBORHOOD_BOOM",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "Temescal boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": null,
+          "domain": "NEIGHBORHOOD_BOOM",
+          "hood": "Temescal",
+          "priority": 7
+        },
+        {
+          "text": "Fruitvale turning upward: retail busy, events drawing crowds, people moving in",
+          "angle": null,
+          "domain": "NEIGHBORHOOD_RISING",
+          "hood": "Fruitvale",
+          "priority": 5
+        },
+        {
+          "text": "Jack London turning upward: retail busy, events drawing crowds, people moving in",
+          "angle": null,
+          "domain": "NEIGHBORHOOD_RISING",
+          "hood": "Jack London",
+          "priority": 5
+        },
+        {
+          "text": "Rockridge boom sustained — momentum 9/10, the block everyone wants onto",
+          "angle": null,
+          "domain": "NEIGHBORHOOD_BOOM",
+          "hood": "Rockridge",
+          "priority": 7
+        },
+        {
+          "text": "Chinatown turning upward: retail busy, events drawing crowds, people moving in",
+          "angle": null,
+          "domain": "NEIGHBORHOOD_RISING",
+          "hood": "Chinatown",
+          "priority": 5
+        },
+        {
+          "text": "Brooklyn cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "angle": null,
+          "domain": "NEIGHBORHOOD_COOLING",
+          "hood": "Brooklyn",
+          "priority": 6
+        },
+        {
+          "text": "Glenview cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "angle": null,
+          "domain": "NEIGHBORHOOD_COOLING",
+          "hood": "Glenview",
+          "priority": 6
+        },
+        {
+          "text": "KONO turning upward: retail busy, events drawing crowds, people moving in",
+          "angle": null,
+          "domain": "NEIGHBORHOOD_RISING",
+          "hood": "KONO",
+          "priority": 5
+        },
+        {
+          "text": "Lake Merritt turning upward: retail busy, events drawing crowds, people moving in",
+          "angle": null,
+          "domain": "NEIGHBORHOOD_RISING",
+          "hood": "Lake Merritt",
+          "priority": 5
+        },
+        {
+          "text": "Lake Merritt boom sustained — momentum 9/10, the block everyone wants onto",
+          "angle": null,
+          "domain": "NEIGHBORHOOD_BOOM",
+          "hood": "Lake Merritt",
+          "priority": 7
+        },
+        {
+          "text": "Uptown boom sustained — momentum 9/10, the block everyone wants onto",
+          "angle": null,
+          "domain": "NEIGHBORHOOD_BOOM",
+          "hood": "Uptown",
+          "priority": 7
+        },
+        {
+          "text": "Carmen Delaine moved from Chinatown to West Oakland — moving up from Chinatown",
+          "angle": null,
+          "domain": "CITIZEN_RELOCATED",
+          "hood": "West Oakland",
+          "priority": 5
+        },
+        {
+          "text": "Simone Ellis moved from Chinatown to Lake Merritt — moving up from Chinatown",
+          "angle": null,
+          "domain": "CITIZEN_RELOCATED",
+          "hood": "Lake Merritt",
+          "priority": 5
+        },
+        {
+          "text": "Andre Lee moved from Temescal to Jack London — moving up from Temescal",
+          "angle": null,
+          "domain": "CITIZEN_RELOCATED",
+          "hood": "Jack London",
+          "priority": 5
+        },
+        {
+          "text": "Bethany Foster moved from Jack London to Lake Merritt — moving up from Jack London",
+          "angle": null,
+          "domain": "CITIZEN_RELOCATED",
+          "hood": "Lake Merritt",
+          "priority": 5
+        },
+        {
+          "text": "Ron Arenson moved from Laurel to Baylight District — moving up from Laurel",
+          "angle": null,
+          "domain": "CITIZEN_RELOCATED",
+          "hood": "Baylight District",
+          "priority": 5
+        },
+        {
+          "text": "The Brooks household (2) moved from Temescal to Jack London — moving up from Temescal",
+          "angle": null,
+          "domain": "CITIZEN_RELOCATED",
+          "hood": "Jack London",
+          "priority": 5
+        },
+        {
+          "text": "Debbie Kaplan moved from Jack London to Lake Merritt — moving up from Jack London",
+          "angle": null,
+          "domain": "CITIZEN_RELOCATED",
+          "hood": "Lake Merritt",
+          "priority": 5
+        },
+        {
+          "text": "Erica Faulkner moved from Fruitvale to Lake Merritt — moving up from Fruitvale",
+          "angle": null,
+          "domain": "CITIZEN_RELOCATED",
+          "hood": "Lake Merritt",
+          "priority": 5
+        },
+        {
+          "text": "Tariq Harris moved from West Oakland to Chinatown — priced out of West Oakland",
+          "angle": null,
+          "domain": "CITIZEN_RELOCATED",
+          "hood": "Chinatown",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00532",
+        "name": "Marcus Whitfield",
+        "role": "Youth Basketball Coach",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale",
+        "why": "founded Eastside Hoopers Coalition (Community_Programs)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Community_Programs.jsonl @C107",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "text": "I'm planning to explore the community programs in East Oakland, focusing on the people who founded them and the impact they have on the neighborhood. I want to understand what drives these programs and how they contribute to the area's growth and development.",
+    "plan": {
+      "chase": "I'm planning to explore the community programs in East Oakland, focusing on the people who founded them and the impact they have on the neighborhood. I want to understand what drives these programs and how they contribute to the area's growth and development.",
+      "focus": "Community programs and their founders in East Oakland",
+      "why": "To showcase the positive impact of these programs on the community and highlight the people behind them",
+      "checks": [
+        "Eastside Hoopers Coalition",
+        "East Bay Harm Reduction Alliance",
+        "Allen Temple Baptist Church Food Pantry"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00532",
+          "question": "What inspired you to found the Eastside Hoopers Coalition?",
+          "basis": "Founder of Eastside Hoopers Coalition"
+        }
+      ],
+      "interpretation": "The community programs in East Oakland play a vital role in shaping the neighborhood's identity and providing essential services to its residents",
+      "unverifiedLead": [
+        "The story behind the founding of these programs could reveal a deeper understanding of the community's needs and strengths"
+      ],
+      "closeQuestion": "How do these community programs reflect the values and priorities of the people who founded them?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Adams Point | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Adams Point",
+      "ref": "output/neighborhood_texture_c107.md \"### Adams Point\"; events: world_summary_c107.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c107.md \"### Downtown\"; events: world_summary_c107.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c107.md \"### East Oakland\"; events: world_summary_c107.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c107.md \"### Fruitvale\"; events: world_summary_c107.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c107.md \"### Lake Merritt\"; events: world_summary_c107.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 29,
+  "ranAt": "2026-09-18T11:15:47.499Z"
+}

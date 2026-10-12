@@ -1,0 +1,22 @@
+{
+  "draft": "wire_c109_celeste-tran_packet-v2_x-ai-grok-4-3.md",
+  "flags": [
+    {
+      "claim": "Uptown gaining 62 residents, the largest neighborhood shift recorded, ahead of Downtown's 61 and Jack London Square's 60",
+      "issue": "Fabricated neighborhood population movement numbers (62, 61, 60) not present in cycle 109 ground truth or approved packet data.",
+      "severity": "high"
+    },
+    {
+      "claim": "153 fame score attached to Marin Tao",
+      "issue": "Raw engine score printed as public-facing evidence, directly violating persona canon blockers.",
+      "severity": "high"
+    },
+    {
+      "claim": "Dax Monroe's 20 established sports mentions",
+      "issue": "Dax Monroe is a registered Artist (POP-00769), misattributed here to sports.",
+      "severity": "med"
+    }
+  ],
+  "contamination": [],
+  "summary": "Draft fails sourcing due to raw engine metric disclosure and unapproved fabricated neighborhood movement counts."
+}

@@ -1,0 +1,342 @@
+{
+  "cycle": 107,
+  "entries": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Zero applicants waiting means zero excuses—this pipeline opens today.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c107.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"When storefronts go quiet, families go next—so we're taking the fund to where the need is moving.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c107.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Three districts flashing incoherence means we deploy three times over—starting now in East Oakland.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c107.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): affirmed — \"Glenview's upbeat because we invested there—KONO's steady because we learned how to keep it that way.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c107.json",
+      "popids": []
+    },
+    {
+      "label": "Ramon Vega (council d4): YES — \"The youth of Oakland deserve a chance to thrive, and this pipeline is a crucial step in providing them with the skills and opportunities they need to succeed.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c107.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): YES — \"We need to take the Stabilization Fund to where the need is moving, and that's Downtown. Our small businesses and families are counting on us to provide support and resources.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c107.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): DEFEND — \"Ivy Hill's progress is a testament to the city's structured support and the people's resilience. I'll ensure Glenview receives the attention it deserves, with a focus on targeted invest",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c107.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Warren Ashford (council d7): Approve authorization of final utility inspections and interior systems rough-in certification with mandatory audit reporting on second-shift labor expenditures. — \"We will sign off on the ut",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d7_c107.json",
+      "popids": [
+        "POP-00504"
+      ]
+    },
+    {
+      "label": "Warren Ashford (council d7): Claim credit for Temescal's economic resilience through targeted fiscal oversight and demand line-item service reviews before approving new administrative outlays for KONO. — \"Temescal's busy",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d7_c107.json",
+      "popids": [
+        "POP-00504"
+      ]
+    },
+    {
+      "label": "Nina Chen (council d8): Formalize inter-agency monitoring for Lake Merritt and commend Adams Point community health coordination — \"Adams Point's gains stem from structured local execution, and Lake Merritt's stability r",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d8_c107.json",
+      "popids": [
+        "POP-00505"
+      ]
+    },
+    {
+      "label": "Nina Chen (council d8): Support enrollment rollout subject to mandatory monthly verification audits — \"Opening enrollment is a welcome operational milestone, provided intake numbers and cohort placements are verified aga",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d8_c107.json",
+      "popids": [
+        "POP-00505"
+      ]
+    },
+    {
+      "label": "Nina Chen (council d8): Approve final utility inspections and rough-in certification — \"Rigorous utility inspections protect capital investments and ensure facilities meet code before final buildouts proceed.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d8_c107.json",
+      "popids": [
+        "POP-00505"
+      ]
+    },
+    {
+      "label": "Nina Chen (council d8): Authorize contract execution contingent on strict environmental compliance filings — \"Ground-breaking must proceed strictly under executed contract terms and verified environmental remediation pro",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d8_c107.json",
+      "popids": [
+        "POP-00505"
+      ]
+    },
+    {
+      "label": "Elliott Crane (council d6): Affirm municipal support for Piedmont Avenue's commercial vitality and safety baseline. — \"Piedmont Avenue's steady street trade and low crime show what happens when public safety and local bu",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d6_c107.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Elliott Crane (council d6): Support operational launch with strict placement metric tracking. — \"Opening enrollment is a necessary step, but municipal competence will be judged by verifiable job placements.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d6_c107.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Elliott Crane (council d6): Support month-eight disbursement review and canvass deployment with fiscal tracking. — \"Targeted stabilization works when every dollar is accounted for and delivered cleanly to the storefronts",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d6_c107.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Elliott Crane (council d6): Condition contract execution on strict milestone reporting and construction oversight. — \"Baylight's potential is immense, but only if we hold every contract and mobilization milestone fully a",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d6_c107.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Leonard Tran (council d2): YES — \"We must break ground on Baylight now, but let's not forget that development without infrastructure is a debt we pay later.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d2_c107.json",
+      "popids": [
+        "POP-00502"
+      ]
+    },
+    {
+      "label": "Leonard Tran (council d2): CLAIM CREDIT — \"Jack London's success is a testament to our focus on basic infrastructure, safety, and letting businesses operate without unnecessary obstruction.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d2_c107.json",
+      "popids": [
+        "POP-00502"
+      ]
+    },
+    {
+      "label": "Leonard Tran (council d2): CALL TO ACTION — \"Downtown's daily life is slipping, and I see it too. We need to act now to address the math imbalance and economic decay.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d2_c107.json",
+      "popids": [
+        "POP-00502"
+      ]
+    },
+    {
+      "label": "Terrence Mobley (council d9): Defend Laurel's progress and credit Uptown's success to community investment — \"Laurel’s progress isn’t legacy—it’s today’s work paying off.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d9_c107.json",
+      "popids": [
+        "POP-00506"
+      ]
+    },
+    {
+      "label": "Rafael Montez (police chief): Transmitted joint dispatch boundary directive to City Planning and OARI program leadership. — \"Clear transfer thresholds between OPD and OARI dispatchers prevent gaps in emergency coverage—t",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/police_chief_c107.json",
+      "popids": [
+        "POP-00136"
+      ]
+    },
+    {
+      "label": "Brenda Okoro (okoro): Deploy Stabilization Fund canvassing operations to Downtown immediately per storefront decline signals — \"When storefronts go quiet, families often follow—so we're bringing the Stabilization Fund to",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/okoro_c107.json",
+      "popids": [
+        "POP-00037"
+      ]
+    },
+    {
+      "label": "Brenda Okoro (okoro): Credit Glenview's success and KONO's stability to their communities' resilience — \"Glenview's momentum and KONO's energy belong to the people who live there—their resilience drives success.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/okoro_c107.json",
+      "popids": [
+        "POP-00037"
+      ]
+    },
+    {
+      "label": "Janae Rivers (council d5): YES on East Oakland protocol deployment with community oversight — \"East Oakland's crime index at 1.17—nearly double the city average—isn't a footnote, it's a five-alarm fire.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d5_c107.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "Janae Rivers (council d5): YES on town hall enrollment with East Oakland intake targets — \"Backlog cleared means nothing if East Oakland youth are still last in line.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d5_c107.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "Janae Rivers (council d5): Demand action on incoherence in East Oakland — \"Incoherence isn't a glitch—it's systemic neglect.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d5_c107.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "Janae Rivers (council d5): Credit Baylight's resilience and demand answers for East Oakland — \"Baylight's slow streets aren't city wins—they're people's victories.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d5_c107.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "Rose Delgado (council d3): Approved the merchant protection covenants for Fruitvale Transit Hub Phase II — \"Transit infrastructure must seed storefront revival, not displace it.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d3_c107.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Rose Delgado (council d3): Called for district-specific adaptation of the initiative — \"Safety isn't a template.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d3_c107.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Rose Delgado (council d3): Advocated for San Antonio to receive 50% of cleared slots — \"We're not clearing paperwork—we're clearing pathways.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d3_c107.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Authorize month-eight disbursement review and deploy Downtown canvass operations immediately. — \"When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c107.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Convene public town hall enrollment event and certify operational rollout. — \"Every young person in this city deserves a shot, not a runaround.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c107.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Demand coordinated action to address high-severity incoherence in West Oakland, Fruitvale, and East Oakland. — \"High-severity incoherence isn’t a technicality—it’s a crisis.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c107.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Defend West Oakland's stability and credit Brooklyn’s vitality to community resilience. — \"Brooklyn’s vitality comes from its people—not City Hall’s policies.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c107.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Marcus Webb (stabilization fund): Approved Month-eight disbursement batch and deployed Downtown canvass teams — \"Twelve more households stabilized means twelve more families who won’t face displacement this month—and eve",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/stabilization_fund_c107.json",
+      "popids": [
+        "POP-00790"
+      ]
+    },
+    {
+      "label": "Dr. Vanessa Tran-Munoz (oari): Activated East Oakland emergency dispatch with joint OPD-OARI thresholds — \"East Oakland gets the same crisis care model that's working in West Oakland—just faster, because the need won't w",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/oari_c107.json",
+      "popids": [
+        "POP-01021"
+      ]
+    },
+    {
+      "label": "Dr. Vanessa Tran-Munoz (oari): Published West Oakland operational metrics to inform Fruitvale adaptation — \"Data doesn't lie—when we meet crisis with care instead of cuffs, our communities get safer faster.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/oari_c107.json",
+      "popids": [
+        "POP-01021"
+      ]
+    },
+    {
+      "label": "Bobby Chen-Ramirez (health center): Certified utility inspections and completed MEP rough-ins — \"Every conduit, every duct, every junction box—inspected, tested, and signed off before drywall goes up.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/health_center_c107.json",
+      "popids": [
+        "POP-00792"
+      ]
+    },
+    {
+      "label": "Bobby Chen-Ramirez (health center): Expanded daily progress photo postings — \"The bulletin board at 47th & Telegraph tells the story better than any status report ever could.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/health_center_c107.json",
+      "popids": [
+        "POP-00792"
+      ]
+    },
+    {
+      "label": "Elena Soria Dominguez (transit hub): Executed merchant covenants and published design RFP — \"These covenants mean Doña María keeps her elote cart through construction and the panadería on E. 12th doesn't become another c",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/transit_hub_c107.json",
+      "popids": [
+        "POP-00791"
+      ]
+    },
+    {
+      "label": "Elena Soria Dominguez (transit hub): Monitor covenant implementation — \"The tamales still steam on International, the abuelas still cross to their panadería—that's the baseline we're protecting.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/transit_hub_c107.json",
+      "popids": [
+        "POP-00791"
+      ]
+    },
+    {
+      "label": "Keisha Ramos (baylight authority): Execute master development contract and mobilize site preparation crews — \"Thirty-five thousand seats start with clean ground—remediation crews mobilize next cycle.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/baylight_authority_c107.json",
+      "popids": [
+        "POP-00041"
+      ]
+    }
+  ],
+  "builtAt": "2026-09-14T02:11:22.006Z"
+}

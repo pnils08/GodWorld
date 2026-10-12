@@ -1,0 +1,375 @@
+FULL STAT TRUE SOURCE — PITCHER
+
+Name: Henry Rivas
+
+ 
+
+Team: Athletics
+
+ 
+
+Position: SP
+
+ 
+
+Jersey: #24
+
+
+--------------------------------------------------------------------------------
+
+
+PROFILE
+
+Potential: A
+
+ 
+
+Overall: 92
+
+ 
+
+MLB Service: 8.002
+
+ 
+
+Age: 29
+
+ 
+
+Bats: L
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'0"
+
+ 
+
+Weight: 173 lbs
+
+ 
+
+Drafted: Round 1 (2029)
+
+ 
+
+Secondary Position: NONE
+
+ 
+
+Hitter Tendency: PULL HITTER
+
+ 
+
+Born: PUERTO RICO
+
+ 
+
+Canonical POPID: POP-00024
+
+
+--------------------------------------------------------------------------------
+
+
+PITCH REPERTOIRE
+
+Pitch 1 — 2-Seam Fastball (94 mph)
+
+ 
+
+Pitch 2 — Sinker (90 mph)
+
+ 
+
+Pitch 3 — 12–6 Curve (75 mph)
+
+ 
+
+Pitch 4 — Circle Change (78 mph)
+
+ 
+
+Pitch 5 — Slider (80 mph)
+
+
+--------------------------------------------------------------------------------
+
+
+ATTRIBUTES
+
+STA: 80
+
+ 
+
+H/9: 76
+
+ 
+
+K/9: 85
+
+ 
+
+BB/9: 78
+
+ 
+
+HR/9: 63
+
+ 
+
+PCLT: 76
+
+ 
+
+CTRL: 75
+
+ 
+
+VEL: 91
+
+ 
+
+BRK: 74
+
+ 
+
+FLD: 91
+
+ 
+
+ARM: 60
+
+ 
+
+ACC: 58
+
+ 
+
+REAC: 58
+
+
+--------------------------------------------------------------------------------
+
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   GS  W   L   SV  BS  HLD  IP      H    R   ER  HR  BB  SO   ERA
+
+ 
+
+2041  ATH   22  22  11  4   0   0   0    136.1   123  42  40  16  24  133  2.64
+
+ 
+
+2040  ATH   33  33  14  12  0   0   0    184.2   176  77  76  24  59  169  3.7
+
+ 
+
+2039  ATH   33  33  17  5   0   0   0    187.2   191  85  80  21  38  184  3.84
+
+ 
+
+2038  ATH   33  33  14  5   0   0   0    183.1   188  75  69  24  39  175  3.39
+
+ 
+
+2037  PHI   32  32  9   15  0   0   0    170.0   180  83  60  27  52  157  3.18
+
+ 
+
+2036  PHI   33  33  13  14  0   0   0    181.2   191  84  63  18  50  149  4.65
+
+ 
+
+2035  PHI   33  33  16  9   0   0   0    187.2   203  77  65  22  54  193  3.13
+
+ 
+
+2034  PHI   23  23  10  4   0   0   0    130.1   105  35  31  11  39  128  2.21
+
+
+--------------------------------------------------------------------------------
+
+
+CAREER TOTALS
+
+G: 242
+
+ 
+
+GS: 242
+
+ 
+
+W: 104
+
+ 
+
+L: 68
+
+ 
+
+SV: 0
+
+ 
+
+BS: 0
+
+ 
+
+HLD: 0
+
+ 
+
+IP: 1361.2
+
+ 
+
+H: 1357
+
+ 
+
+R: 558
+
+ 
+
+ER: 484
+
+ 
+
+HR: 163
+
+ 
+
+BB: 355
+
+ 
+
+SO: 1288
+
+ 
+
+ERA: 3.20
+
+ 
+
+WHIP: 1.26
+
+ 
+
+K/9: 8.51
+
+ 
+
+BB/9: 2.35
+
+ 
+
+HR/9: 1.08
+
+ 
+
+WAR: 24.7
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2040–2044: $28,200,000 per year
+
+ 
+
+2045–2049: Free Agent
+
+
+--------------------------------------------------------------------------------
+
+
+ROSTER STATUS
+
+On Active Roster: YES
+
+ 
+
+On 40-Man Roster: YES
+
+ 
+
+Minor League Option: 0/3 Used
+
+ 
+
+Playoff Eligible: YES
+
+ 
+
+On Waivers: NO
+
+ 
+
+Designated for Assignment: NO
+
+ 
+
+Cleared Optional Waivers: NO
+
+ 
+
+Cleared Outright Waivers: NO
+
+ 
+
+Cleared Trade Waivers: NO
+
+ 
+
+Eligible for Rule 5 Draft: NO
+
+ 
+
+Contract Option: NONE
+
+
+--------------------------------------------------------------------------------
+
+
+QUIRKS
+
+Precision Command
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS
+
+All-Star (Multiple)
+
+
+--------------------------------------------------------------------------------
+
+
+METADATA & VERIFICATION FOOTER
+
+TS Code: TS-MLB-ATH-2041-00024
+
+ 
+
+Verification Tag: TrueSource Verified
+
+ 
+
+Date Stamp: 2026-09-26
+
+ 
+
+Steward of Record: Builder Approved / Antigravity Staged
+
+ 
+
+POPID: POP-00024

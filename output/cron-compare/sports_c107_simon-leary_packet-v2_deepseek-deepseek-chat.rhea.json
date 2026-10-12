@@ -1,0 +1,64 @@
+{
+  "draft": "output/cron-compare/sports_c107_simon-leary_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "107",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "9453e0b3809f6551534aeeb4dbcc53791599df2f0c5657baee4395dd88f8f239",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "a team holding a 2-1 record, winners of their last game. Not dominance, not collapse... Two wins, one loss",
+      "issue": "Direct contradiction of recorded C107 sports state; the A's won Game 4 4-0 to close out the ALDS 3-1 and advance to the ALCS.",
+      "severity": "high"
+    },
+    {
+      "claim": "Morton, Oakland’s left fielder for the past seven seasons",
+      "issue": "Invented player tenure for early-career player POP-00051 (born 2018), violating Simon Longview profile canon blocker against unsupplied franchise history.",
+      "severity": "med"
+    }
+  ],
+  "flagCount": 2,
+  "highSeverityCount": 1,
+  "summary": "Contradicts C107 final ALDS record (3-1, not 2-1) and invents a seven-season tenure for early-career outfielder Desmond Morton.",
+  "review": {
+    "profileId": "simon-longview-v1",
+    "canonIntegrity": "revise",
+    "texture": "overreach"
+  },
+  "reviewProfile": {
+    "id": "simon-longview-v1",
+    "packageVersion": "SIMON-LEP2-1",
+    "manifestId": "AM-7cc36947e152",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Desmond Morton",
+      "Jacob Perez",
+      "Marcus King",
+      "Mark Aitken",
+      "Simon Leary"
+    ],
+    "unverified": [
+      "Line Holds"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0143,
+  "durationMs": 18285,
+  "parseError": false,
+  "ranAt": "2026-09-19T17:03:03.866Z"
+}

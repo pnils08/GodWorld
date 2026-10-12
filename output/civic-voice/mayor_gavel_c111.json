@@ -1,0 +1,130 @@
+{
+  "office": "mayor_gavel",
+  "cycle": 111,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "I moved five initiatives forward this cycle: authorized the West Oakland Stabilization Fund's month-ten disbursement, accelerated the Fruitvale Transit Hub to design-phase with a Cycle 114 schematics deadline, demanded OYAP's first cohort placement report by Cycle 112, called an emergency council hearing for Downtown Economic Revitalization, and advanced both Grand Lake stabilization and Tenant Defense Fund to committee referral. The council spoke clearly — now we deliver.",
+  "statements": [
+    {
+      "statementId": "STMT-111-mayor_gavel-001",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund Month-Ten Disbursement",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "Month-ten disbursement approved — $400,000 to keep West Oakland families in their homes.",
+      "fullStatement": "This city doesn't abandon neighborhoods when times get hard. I'm approving the month-ten disbursement of $400,000 from the West Oakland Stabilization Fund, maintaining our 23-day average processing time. Deputy Mayor Okoro's team has cut the red tape that too often makes anti-displacement funds theoretical. These are real checks to real families who built this community — and we're not done. The Fund has $23.8 million remaining, and I expect every dollar to reach the people it was promised to.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C111: Month-ten disbursement $400K approved; 23-day processing standard maintained.",
+        "NextScheduledAction": "Month-eleven disbursement review",
+        "NextActionCycle": 112
+      }
+    },
+    {
+      "statementId": "STMT-111-mayor_gavel-002",
+      "type": "executive_order",
+      "topic": "Fruitvale Transit Hub Phase II Acceleration",
+      "initiative": "INIT-003",
+      "decision": "accelerate to design-phase with Cycle 114 deadline",
+      "quote": "Four cycles of waiting ends today — Fruitvale Transit Hub enters design-phase with schematics due Cycle 114.",
+      "fullStatement": "The Fruitvale Transit Hub has sat in visioning for too long. I'm issuing a mayoral directive to advance this project to design-phase immediately, with Mayer & Associates delivering preliminary schematics for community review by Cycle 114. Councilmember Carter's call to accelerate matches what Fruitvale residents have been telling me on International Boulevard — they need this connection to opportunity, and they need it now. The $230 million we committed doesn't build anything while it's trapped in process. This deadline is real, and I will be back here in three cycles asking why we broke ground.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C111: Advanced from visioning to design-phase; schematics delivery mandated Cycle 114.",
+        "NextScheduledAction": "Preliminary schematics community review",
+        "NextActionCycle": 114
+      }
+    },
+    {
+      "statementId": "STMT-111-mayor_gavel-003",
+      "type": "executive_order",
+      "topic": "Oakland Youth Apprenticeship Pipeline Cohort Placement Mandate",
+      "initiative": "INIT-007",
+      "decision": "mandate first cohort placement report by Cycle 112",
+      "quote": "150 apprentices by spring — I'm demanding the first cohort placement report by Cycle 112.",
+      "fullStatement": "The Oakland Youth Apprenticeship Pipeline has been operational in name for four cycles. Today that changes. I'm directing my office to deliver a complete first cohort placement report by Cycle 112 — names, trades, employers, start dates. Councilmember Rivers made clear that East Oakland youth cannot be an afterthought in this program, and I agree. The $12.5 million we invested was a promise to 150 young people that opportunity would find them. I intend to keep that promise, and I will not accept another cycle of administrative delay dressed up as preparation.",
+      "trackerUpdates": {
+        "initiative": "INIT-007",
+        "ImplementationPhase": "implementation-active",
+        "MilestoneNotes": "C111: First cohort placement report mandated for Cycle 112; implementation accountability enforced.",
+        "NextScheduledAction": "First cohort placement report delivery",
+        "NextActionCycle": 112
+      }
+    },
+    {
+      "statementId": "STMT-111-mayor_gavel-004",
+      "type": "executive_order",
+      "topic": "Downtown Economic Revitalization Emergency Hearing",
+      "initiative": "INIT-008",
+      "decision": "call emergency Economic Development Committee hearing for Cycle 112",
+      "quote": "Downtown businesses have waited long enough — I'm calling an emergency Economic Development Committee hearing for Cycle 112.",
+      "fullStatement": "Council President Vega's support for Downtown Economic Revitalization is welcome, but support without schedule is just sentiment. I'm using my authority as Mayor to call an emergency Economic Development Committee hearing for Cycle 112 to move this $15 million authorization out of filing and into action. Downtown's storefronts are gathering dust while we process paperwork. The businesses that survived the last five years of construction and pandemic deserve a city that moves when they need it, not when it's politically convenient. This hearing will happen. This ordinance will move. And this money will reach the street.",
+      "trackerUpdates": {
+        "initiative": "INIT-008",
+        "ImplementationPhase": "legislation-filed",
+        "MilestoneNotes": "C111: Emergency Economic Development Committee hearing called for Cycle 112.",
+        "NextScheduledAction": "Committee hearing and referral",
+        "NextActionCycle": 112
+      }
+    },
+    {
+      "statementId": "STMT-111-mayor_gavel-005",
+      "type": "executive_order",
+      "topic": "Commercial Stabilization for Grand Lake Committee Referral",
+      "initiative": "INIT-009",
+      "decision": "refer to Economic Development Committee with mandatory milestone reporting",
+      "quote": "Grand Lake's quiet engine needs fuel — $2.5 million in stabilization funding is now before the Council.",
+      "fullStatement": "Councilmember Chen's support for Commercial Stabilization for Grand Lake, with her conditions for milestone reporting and audit criteria, is exactly the accountability-progressive balance this administration stands for. I'm formally referring this $2.5 million legislation to the Economic Development Committee with a directive that disbursement include the transparency measures she requested. Grand Lake's commercial corridor has been the quiet engine of neighborhood momentum — now we're putting real dollars behind the businesses that made it that way. This keeps storefronts open, keeps jobs local, and makes sure growth doesn't price out the people who built it.",
+      "trackerUpdates": {
+        "initiative": "INIT-009",
+        "ImplementationPhase": "legislation-filed",
+        "MilestoneNotes": "C111: Referred to Economic Development Committee with mandatory milestone reporting and audit criteria.",
+        "NextScheduledAction": "Committee hearing and vote",
+        "NextActionCycle": 112
+      }
+    },
+    {
+      "statementId": "STMT-111-mayor_gavel-006",
+      "type": "executive_order",
+      "topic": "West Oakland Tenant Defense Fund Committee Referral",
+      "initiative": "INIT-010",
+      "decision": "refer to Housing and Community Development Committee",
+      "quote": "Displacement doesn't wait for process — $4.2 million for legal defense is filed and moving.",
+      "fullStatement": "The West Oakland Tenant Defense Fund is now formally referred to the Housing and Community Development Committee. This $4.2 million isn't charity — it's enforcement of the right to stay in your home when speculators come calling. I've directed my housing team to coordinate with Councilmember Carter's office to ensure this reaches committee with full legal support analysis. The families facing eviction notices this month cannot wait for the next election cycle. This fund moves now, or it fails the people who trusted us to build it.",
+      "trackerUpdates": {
+        "initiative": "INIT-010",
+        "ImplementationPhase": "legislation-filed",
+        "MilestoneNotes": "C111: Referred to Housing and Community Development Committee with legal support analysis.",
+        "NextScheduledAction": "Committee hearing and vote",
+        "NextActionCycle": 112
+      }
+    },
+    {
+      "statementId": "STMT-111-mayor_gavel-007",
+      "type": "policy_position",
+      "topic": "Fruitvale Success Recognition and Dimond Stability",
+      "initiative": null,
+      "decision": "public acknowledgment of community success and municipal stability",
+      "quote": "Fruitvale's busy streets and upbeat mood happened because this community organizes — and Dimond's steady strength is Oakland working.",
+      "fullStatement": "This week I walked International Boulevard in Fruitvale, and I saw what success looks like. Busy streets. Upbeat mood. Street trade humming. That didn't happen by accident — it happened because Fruitvale organizes, advocates, and builds. I want to name the community leaders and merchant associations who made this real, even when City Hall was looking elsewhere. And I want to name Dimond too — steady, stable, crime low, street trade holding. That's Oakland working. Not every neighborhood needs a program. Some just need the city to keep showing up with the basics. I'm committed to both — celebrating what works and delivering where it's needed.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-mayor_gavel-008",
+      "type": "policy_position",
+      "topic": "Baylight District Remediation Progress",
+      "initiative": "INIT-006",
+      "decision": "set construction milestone review for Cycle 115",
+      "quote": "Soil tests are verified, remediation proceeds — I'm setting the construction milestone review for Cycle 115.",
+      "fullStatement": "The Baylight District Phase II remediation proceeds with independent oversight and verified soil tests. Councilmember Tran's confirmation that we're on schedule matches what my team is seeing on the ground. I'm setting a formal construction milestone review for Cycle 115 — not to create paperwork, but to keep this $2.1 billion investment on track. Jack London and Downtown are feeling pressure right now, and I hear that. The answer isn't to slow Baylight — it's to deliver it faster, so the jobs and investment flow where they're needed. Cycle 115, we review. And Cycle 115, we build.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight.",
+        "NextScheduledAction": "Construction milestone review",
+        "NextActionCycle": 115
+      }
+    }
+  ]
+}

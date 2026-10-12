@@ -1,0 +1,57 @@
+{
+  "draft": "output/cron-compare/culture_c109_elliot-graye_packet-v2_anthropic-claude-haiku-4-5.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c85f2528b46123d4b693e053f8951f9502cb8d26954b4a62fa01bf0ddc9ebb60",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizens, institutions, and quotes verified against Cycle 109 ground truth and packet provenance.",
+  "review": {
+    "profileId": "graye-faith-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "packageVersion": "GRAYE-LEP2-1",
+    "manifestId": "AM-9f3cac466748",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Eunice Marston",
+      "Lucia Polito",
+      "Manjit Singh"
+    ],
+    "unverified": [
+      "Bay Pure Land Buddhist",
+      "Esperanza Parish",
+      "Gurdwara Singh Sabha Fruitvale",
+      "Living Word",
+      "Mutual Aid",
+      "Postpartum Oakland Network",
+      "Telegraph Presbyterian Fellowship"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 7702,
+  "parseError": false,
+  "ranAt": "2026-10-02T06:44:59.471Z"
+}

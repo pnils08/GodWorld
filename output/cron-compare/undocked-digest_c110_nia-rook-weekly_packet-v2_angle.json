@@ -1,0 +1,265 @@
+{
+  "stage": "angle",
+  "desk": "undocked-digest",
+  "cycle": "110",
+  "persona": "nia-rook-weekly",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked-digest"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Kato Rivers, Aaliyah Brennan, Simone Adesanya), who is climbing and who is fading. Standings: Clarissa Dane leads the board — rank #1, 7 cycle(s) led, current streak 7. Per-pilot facts: Kato Rivers — 2 episode(s), partial credits 0, combat 0, mishaps 0; Aaliyah Brennan — 2 episode(s), partial credits 2, combat 0, mishaps 0; Simone Adesanya — 2 episode(s), partial credits 3, combat 0, mishaps 0.",
+      "approach": null
+    },
+    "signal": {
+      "kind": "undocked-digest",
+      "hood": null,
+      "score": null,
+      "src": "undocked-week:weekly-c110",
+      "nearby": [
+        {
+          "text": "",
+          "src": ""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00770",
+          "name": "Kato Rivers",
+          "profile": "Kato Rivers — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c110.json",
+            "episodeId": "undocked-pop00770-Y3C6",
+            "pop": "POP-00770"
+          }
+        },
+        {
+          "pop": "POP-00235",
+          "name": "Aaliyah Brennan",
+          "profile": "Aaliyah Brennan — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c110.json",
+            "episodeId": "undocked-pop00235-Y3C6",
+            "pop": "POP-00235"
+          }
+        },
+        {
+          "pop": "POP-00287",
+          "name": "Simone Adesanya",
+          "profile": "Simone Adesanya — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c110.json",
+            "episodeId": "undocked-pop00287-Y3C6",
+            "pop": "POP-00287"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-e491ae296bc1"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED week-in-review c110",
+        "src": "undocked-week:weekly-c110",
+        "id": "F-a66344bdff34"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00770",
+        "name": "Kato Rivers",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Kato Rivers — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c110.json",
+          "episodeId": "undocked-pop00770-Y3C6",
+          "pop": "POP-00770"
+        }
+      },
+      {
+        "pop": "POP-00235",
+        "name": "Aaliyah Brennan",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Aaliyah Brennan — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c110.json",
+          "episodeId": "undocked-pop00235-Y3C6",
+          "pop": "POP-00235"
+        }
+      },
+      {
+        "pop": "POP-00287",
+        "name": "Simone Adesanya",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Simone Adesanya — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c110.json",
+          "episodeId": "undocked-pop00287-Y3C6",
+          "pop": "POP-00287"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked-week:weekly-c110",
+      "label": "UNDOCKED week-in-review c110",
+      "kind": "undocked-digest",
+      "angle": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Kato Rivers, Aaliyah Brennan, Simone Adesanya), who is climbing and who is fading. Standings: Clarissa Dane leads the board — rank #1, 7 cycle(s) led, current streak 7. Per-pilot facts: Kato Rivers — 2 episode(s), partial credits 0, combat 0, mishaps 0; Aaliyah Brennan — 2 episode(s), partial credits 2, combat 0, mishaps 0; Simone Adesanya — 2 episode(s), partial credits 3, combat 0, mishaps 0.",
+      "citizens": [
+        "Kato Rivers — UNDOCKED cast pilot",
+        "Aaliyah Brennan — UNDOCKED cast pilot",
+        "Simone Adesanya — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00770",
+        "POP-00235",
+        "POP-00287"
+      ]
+    }
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I'm looking into the recent performances of UNDOCKED pilots, trying to understand who's on the rise and who's falling behind.",
+    "plan": {
+      "chase": "I'm looking into the recent performances of UNDOCKED pilots, trying to understand who's on the rise and who's falling behind.",
+      "focus": "The current standings and recent episodes",
+      "why": "To provide an update on the UNDOCKED leaderboard and identify trends",
+      "checks": [
+        "Recent episode performances",
+        "Pilot standings"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00770",
+          "question": "What's behind Kato Rivers' recent performance?",
+          "basis": "Recent episodes and standings"
+        },
+        {
+          "pop": "POP-00235",
+          "question": "How has Aaliyah Brennan's strategy changed over the cycles?",
+          "basis": "Episode analysis and pilot interviews"
+        },
+        {
+          "pop": "POP-00287",
+          "question": "What's driving Simone Adesanya's success in the current cycle?",
+          "basis": "Recent episodes and expert commentary"
+        }
+      ],
+      "interpretation": "The UNDOCKED leaderboard is highly competitive, and pilots are constantly adapting their strategies to stay ahead",
+      "unverifiedLead": [
+        "Rumors of a new pilot entering the competition"
+      ],
+      "closeQuestion": "Will the current leader maintain their position in the next cycle?"
+    }
+  },
+  "lanePicks": [
+    {
+      "popids": []
+    }
+  ],
+  "laneEntries": 1,
+  "ranAt": "2026-10-10T13:15:14.765Z"
+}

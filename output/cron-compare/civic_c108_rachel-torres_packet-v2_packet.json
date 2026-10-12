@@ -1,0 +1,1031 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "rachel-torres",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-safety",
+      "angle": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "label": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+      "hookLine": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+      "hood": "San Antonio",
+      "citizens": [
+        "Vanessa Tran-Muñoz (POP-01021)"
+      ],
+      "popids": [
+        "POP-01021"
+      ],
+      "ref": "output/beats/Crime_Metrics.jsonl @C108",
+      "cycle": 108
+    }
+  },
+  "angle": "output/cron-compare/civic_c108_rachel-torres_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00796",
+      "name": "Dank Abara",
+      "quote": "I’ve heard San Antonio has more incidents than other neighborhoods, and Lake Merritt’s response times are slow, but I don’t know the specifics. It’s just something people talk about around here.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard San Antonio has more incidents than other neighborhoods, and Lake Merritt’s response times are slow, but I don’t know the specifics. It’s just something people talk about around here.\",\"fact_ids\":[\"F-737c8d77b4da\",\"F-96e1bd4aba15\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-737c8d77b4da",
+          "F-96e1bd4aba15"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00796-0314c23bc8",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard San Antonio has more incidents than other neighborhoods, and Lake Merritt’s response times are slow, but I don’t know the specifics. It’s just something people talk about around here."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00796",
+          "name": "Dank Abara",
+          "role": "Waiter",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of San Antonio, what have you seen, felt, or understood about \"Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "San Antonio",
+          "focus": "Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.",
+          "src": "output/beats/Crime_Metrics.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Dank Abara — Waiter — San Antonio",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-737c8d77b4da"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-96e1bd4aba15"
+          },
+          {
+            "t": "FACT",
+            "text": "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e894e19aa8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e6a6de140c64"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-5b44dbdfb31c"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: East Oakland, Dimond; easing: none",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-841adbede11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Dank Abara — Waiter — San Antonio",
+            "src": "Simulation_Ledger profile for POP-00796",
+            "id": "F-041b4819c814"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01054",
+      "name": "Delia Vargas-Ruiz",
+      "quote": "Working at the transit hub, I hear people talk about the response times, but honestly, most folks around here just keep their heads down and go about their day. The numbers are what they are.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Working at the transit hub, I hear people talk about the response times, but honestly, most folks around here just keep their heads down and go about their day. The numbers are what they are.\",\n  \"fact_ids\": [\"F-e6a6de140c64\", \"F-5b44dbdfb31c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e6a6de140c64",
+          "F-5b44dbdfb31c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01054-aa9e2cd212",
+        "authoredQuote": true,
+        "publishableQuote": "Working at the transit hub, I hear people talk about the response times, but honestly, most folks around here just keep their heads down and go about their day. The numbers are what they are."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01054",
+          "name": "Delia Vargas-Ruiz",
+          "role": "Transit Hub D3 Intake Liaison",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of San Antonio, what have you seen, felt, or understood about \"Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "San Antonio",
+          "focus": "Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.",
+          "src": "output/beats/Crime_Metrics.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Delia Vargas-Ruiz — Transit Hub D3 Intake Liaison — San Antonio",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-737c8d77b4da"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-96e1bd4aba15"
+          },
+          {
+            "t": "FACT",
+            "text": "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e894e19aa8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e6a6de140c64"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-5b44dbdfb31c"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: East Oakland, Dimond; easing: none",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-841adbede11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Delia Vargas-Ruiz — Transit Hub D3 Intake Liaison — San Antonio",
+            "src": "Simulation_Ledger profile for POP-01054",
+            "id": "F-dee2c25632f2"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard San Antonio’s been hit hard lately, and Lake Merritt’s taking longer to get help—it’s worrying, but I trust folks are doing what they can with what they’ve got.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard San Antonio’s been hit hard lately, and Lake Merritt’s taking longer to get help—it’s worrying, but I trust folks are doing what they can with what they’ve got.\",\"fact_ids\":[\"F-96e1bd4aba15\",\"F-5b44dbdfb31c\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-96e1bd4aba15",
+          "F-5b44dbdfb31c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-4162764026",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard San Antonio’s been hit hard lately, and Lake Merritt’s taking longer to get help—it’s worrying, but I trust folks are doing what they can with what they’ve got."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "What have you seen, felt, or understood about \"Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "San Antonio",
+          "focus": "Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.",
+          "src": "output/beats/Crime_Metrics.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-737c8d77b4da"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-96e1bd4aba15"
+          },
+          {
+            "t": "FACT",
+            "text": "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e894e19aa8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e6a6de140c64"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-5b44dbdfb31c"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: East Oakland, Dimond; easing: none",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-841adbede11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-01021",
+      "name": "Vanessa Tran-Muñoz",
+      "quote": null,
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; curious, open to new things; principled, plays it straight",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"abstain\",\n  \"quote\": null,\n  \"fact_ids\": [],\n  \"basis\": null,\n  \"unverifiedLead\": [],\n  \"abstain_reason\": \"no_lived_basis\"\n}\n```",
+      "claims": {
+        "answer": "abstain",
+        "factIds": [],
+        "basis": null,
+        "unverifiedLead": [],
+        "abstainReason": "no_lived_basis",
+        "quoteId": null,
+        "authoredQuote": false,
+        "publishableQuote": null
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01021",
+          "name": "Vanessa Tran-Muñoz",
+          "role": "OARI Program Director",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "Using only the supplied facts, what about \"Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "San Antonio",
+          "focus": "Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.",
+          "src": "output/beats/Crime_Metrics.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "works at Oakland Alternative Response Initiative (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+          "evidence": [
+            {
+              "id": "EV-9b8e04ed93",
+              "src": "output/beats/Crime_Metrics.jsonl @C108",
+              "text": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-737c8d77b4da"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-96e1bd4aba15"
+          },
+          {
+            "t": "FACT",
+            "text": "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e894e19aa8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e6a6de140c64"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-5b44dbdfb31c"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: East Oakland, Dimond; easing: none",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-841adbede11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+            "src": "Simulation_Ledger profile for POP-01021",
+            "id": "F-9b5455ac6638"
+          }
+        ],
+        "limits": {
+          "quoteEligible": false,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Return abstain. This citizen is not eligible for this interview path."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00796",
+      "name": "Dank Abara",
+      "quote": "I’ve heard San Antonio has more incidents than other neighborhoods, and Lake Merritt’s response times are slow, but I don’t know the specifics. It’s just something people talk about around here.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard San Antonio has more incidents than other neighborhoods, and Lake Merritt’s response times are slow, but I don’t know the specifics. It’s just something people talk about around here.\",\"fact_ids\":[\"F-737c8d77b4da\",\"F-96e1bd4aba15\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-737c8d77b4da",
+          "F-96e1bd4aba15"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00796-0314c23bc8",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard San Antonio has more incidents than other neighborhoods, and Lake Merritt’s response times are slow, but I don’t know the specifics. It’s just something people talk about around here."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00796",
+          "name": "Dank Abara",
+          "role": "Waiter",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of San Antonio, what have you seen, felt, or understood about \"Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "San Antonio",
+          "focus": "Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.",
+          "src": "output/beats/Crime_Metrics.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Dank Abara — Waiter — San Antonio",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-737c8d77b4da"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-96e1bd4aba15"
+          },
+          {
+            "t": "FACT",
+            "text": "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e894e19aa8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e6a6de140c64"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-5b44dbdfb31c"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: East Oakland, Dimond; easing: none",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-841adbede11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Dank Abara — Waiter — San Antonio",
+            "src": "Simulation_Ledger profile for POP-00796",
+            "id": "F-041b4819c814"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01054",
+      "name": "Delia Vargas-Ruiz",
+      "quote": "Working at the transit hub, I hear people talk about the response times, but honestly, most folks around here just keep their heads down and go about their day. The numbers are what they are.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Working at the transit hub, I hear people talk about the response times, but honestly, most folks around here just keep their heads down and go about their day. The numbers are what they are.\",\n  \"fact_ids\": [\"F-e6a6de140c64\", \"F-5b44dbdfb31c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e6a6de140c64",
+          "F-5b44dbdfb31c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01054-aa9e2cd212",
+        "authoredQuote": true,
+        "publishableQuote": "Working at the transit hub, I hear people talk about the response times, but honestly, most folks around here just keep their heads down and go about their day. The numbers are what they are."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01054",
+          "name": "Delia Vargas-Ruiz",
+          "role": "Transit Hub D3 Intake Liaison",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "As a resident of San Antonio, what have you seen, felt, or understood about \"Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "San Antonio",
+          "focus": "Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.",
+          "src": "output/beats/Crime_Metrics.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Delia Vargas-Ruiz — Transit Hub D3 Intake Liaison — San Antonio",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-737c8d77b4da"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-96e1bd4aba15"
+          },
+          {
+            "t": "FACT",
+            "text": "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e894e19aa8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e6a6de140c64"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-5b44dbdfb31c"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: East Oakland, Dimond; easing: none",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-841adbede11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Delia Vargas-Ruiz — Transit Hub D3 Intake Liaison — San Antonio",
+            "src": "Simulation_Ledger profile for POP-01054",
+            "id": "F-dee2c25632f2"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard San Antonio’s been hit hard lately, and Lake Merritt’s taking longer to get help—it’s worrying, but I trust folks are doing what they can with what they’ve got.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard San Antonio’s been hit hard lately, and Lake Merritt’s taking longer to get help—it’s worrying, but I trust folks are doing what they can with what they’ve got.\",\"fact_ids\":[\"F-96e1bd4aba15\",\"F-5b44dbdfb31c\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-96e1bd4aba15",
+          "F-5b44dbdfb31c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-4162764026",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard San Antonio’s been hit hard lately, and Lake Merritt’s taking longer to get help—it’s worrying, but I trust folks are doing what they can with what they’ve got."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "What have you seen, felt, or understood about \"Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-safety",
+          "hood": "San Antonio",
+          "focus": "Understanding the factors contributing to San Antonio's high incident count and Lake Merritt's slow response times.",
+          "src": "output/beats/Crime_Metrics.jsonl @C108"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-737c8d77b4da"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-96e1bd4aba15"
+          },
+          {
+            "t": "FACT",
+            "text": "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e894e19aa8c0"
+          },
+          {
+            "t": "FACT",
+            "text": "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-e6a6de140c64"
+          },
+          {
+            "t": "FACT",
+            "text": "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-5b44dbdfb31c"
+          },
+          {
+            "t": "FACT",
+            "text": "Moved this cycle — rising: East Oakland, Dimond; easing: none",
+            "src": "output/beats/Crime_Metrics.jsonl @C108",
+            "id": "F-841adbede11c"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-22T18:17:36.546Z"
+}

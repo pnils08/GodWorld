@@ -1,0 +1,326 @@
+{
+  "date": "2026-09-23",
+  "cycle": 108,
+  "quotas": {
+    "grid": [
+      "freelance-firebrand",
+      "noah-tan",
+      "p-slayer"
+    ],
+    "weekday": 3
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Jax Caldera",
+      "popid": "POP-00799",
+      "beatDomain": "ACCOUNTABILITY",
+      "persona": "freelance-firebrand",
+      "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay numbers, crisis signal with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Sparing heat: one stink, not a roundup.",
+      "gridDay": 3,
+      "wakePackage": "JAX-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "beatDomain": "ENVIRONMENT",
+      "persona": "noah-tan",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 3,
+      "story": {
+        "kind": "beat-weather",
+        "angle": "C108 fog, 46°F — 2 cycles of fog — what this weather does to a day in the city",
+        "label": "C108 fog, 46°F — 2 cycles of fog",
+        "hookLine": "C108 fog, 46°F — 2 cycles of fog; 2 residents on the record lived it.",
+        "hood": null,
+        "citizens": [
+          "Tyrie Groin (POP-00254)",
+          "Marc Allie (POP-00241)"
+        ],
+        "popids": [
+          "POP-00254",
+          "POP-00241"
+        ],
+        "ref": "output/beats/Cycle_Weather.jsonl CycleID 108",
+        "cycle": 108
+      },
+      "beatSlice": true,
+      "beatSeat": "noah-tan",
+      "pulse": {
+        "className": "beat-weather",
+        "score": 100,
+        "label": "C108 fog, 46°F — 2 cycles of fog",
+        "hood": null,
+        "source": "output/beats/Cycle_Weather.jsonl CycleID 108"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "C108 fog, 46°F — 2 cycles of fog — what this weather does to a day in the city",
+        "hookLine": "C108 fog, 46°F — 2 cycles of fog; 2 residents on the record lived it.",
+        "anchorFacts": [
+          "This cycle: fog, 46°F, impact 1.3, comfort 0.4, mood introspective, 2 cycles of fog",
+          "Last 3 cycles: C105 rain 49°F, C106 overcast 52°F, C107 fog 44°F",
+          "Tyrie Groin — relied on familiar social circles during cold period",
+          "Marc Allie — helped the kids with homework at the kitchen table"
+        ],
+        "evidence": [
+          {
+            "text": "This cycle: fog, 46°F, impact 1.3, comfort 0.4, mood introspective, 2 cycles of fog",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 108"
+          },
+          {
+            "text": "Last 3 cycles: C105 rain 49°F, C106 overcast 52°F, C107 fog 44°F",
+            "src": "output/beats/Cycle_Weather.jsonl"
+          },
+          {
+            "text": "Tyrie Groin — relied on familiar social circles during cold period",
+            "src": "output/world_summary_c108.md ## Who Lived It"
+          },
+          {
+            "text": "Marc Allie — helped the kids with homework at the kitchen table",
+            "src": "output/world_summary_c108.md ## Who Lived It"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_IN_TABLE",
+          "vs": 107
+        },
+        "hooks": [
+          {
+            "text": "Challenging weather (fog) affecting daily routines. Street-level color available.",
+            "angle": "general coverage",
+            "domain": "WEATHER",
+            "hood": null,
+            "priority": 2
+          },
+          {
+            "text": "The Park household (2) moved from Temescal to Rockridge — moving up from Temescal",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Rockridge",
+            "priority": 5
+          },
+          {
+            "text": "Rafael Brannie moved from Laurel to Piedmont Ave — moving up from Laurel",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Piedmont Ave",
+            "priority": 5
+          },
+          {
+            "text": "Sarah Huang moved from Lake Merritt to Grand Lake — priced out of Lake Merritt",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Grand Lake",
+            "priority": 5
+          }
+        ],
+        "note": null,
+        "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+      },
+      "wakePackage": "NOAH-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "P Slayer",
+      "popid": "POP-00008",
+      "beatDomain": "SPORTS",
+      "persona": "p-slayer",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 3,
+      "story": {
+        "ref": "Oakland_Sports_Feed cycle 108; world_summary_c108.md \"## Sports\" · John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads ",
+        "label": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+        "kind": "injury-load",
+        "angle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+        "hookLine": "Grief without inventing medical private life — we demanded too much.",
+        "hood": "Downtown",
+        "team": "A's",
+        "eventKind": "game-result",
+        "popids": [
+          "POP-01078",
+          "POP-00597",
+          "POP-00033"
+        ],
+        "citizens": [
+          "Pablo Almanzar — SP / Oakland A's, Jack London",
+          "Eric Taveras — Second Baseman, Oakland A's, Downtown",
+          "John Ellis — Starting Pitcher, Oakland A's, Laurel",
+          "Minnesota Twins"
+        ],
+        "pulseClass": "injury-load",
+        "pulseScore": 70,
+        "fanCharge": "grief",
+        "bagModeIds": [
+          3,
+          6,
+          7
+        ]
+      },
+      "pslayerSlice": true,
+      "fanHeat": true,
+      "pulse": {
+        "className": "injury-load",
+        "classes": [
+          "prospect-callup",
+          "injury-load",
+          "result-pulse",
+          "loss",
+          "win-streak"
+        ],
+        "score": 70,
+        "label": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB debut pitching a 1 hit shutout. Game 4 As (4) Twins (9), Game 5 As (4) Twins (0).",
+        "team": "A's",
+        "eventKind": "game-result",
+        "seasonType": "playoffs",
+        "feedCycle": 108,
+        "record": "4-1",
+        "streak": "W1",
+        "mood": "dominant",
+        "fanSentiment": "high",
+        "neighborhood": "Downtown",
+        "notes": "Game 4 Minnesota hosts A's trying to avoid the sweep. After an impressive season in their own right winning 103 games, the Minnesota Twins face one last challenge. John Ellis just pitched a complete game shut out to close out NY in the ALDS. However things would be a little different this time around as Ellis would struggle mightly giving up 5 ER in route to a loss. To make matters worse Twins sta",
+        "stats": "Pablo Almanzar/9IP/1H/0ER/3SO, Eric Taveras/3-7/2HR/3RBI"
+      },
+      "charge": {
+        "bagModes": [
+          {
+            "id": 3,
+            "name": "Friction Pivot"
+          },
+          {
+            "id": 6,
+            "name": "Superman We Asked Him to Be"
+          },
+          {
+            "id": 7,
+            "name": "We Still Believe / We're Done"
+          }
+        ],
+        "fanCharge": "grief",
+        "foilNumber": "9IP",
+        "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+        "palette": [
+          "fury",
+          "euphoria",
+          "dread",
+          "defiance",
+          "confession",
+          "grief",
+          "dare"
+        ]
+      },
+      "wakePackage": "PSLAYER-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "gridDay": 3,
+      "story": {
+        "ref": "undocked:undocked-pop00842-Y3C4",
+        "label": "UNDOCKED: Wanjiru Liu — a night the books can't settle yet",
+        "kind": "undocked",
+        "angle": "Recap Wanjiru Liu's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems unlisted, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 5 cycle(s) led, current streak 5.",
+        "citizens": [
+          "Wanjiru Liu — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00842"
+        ],
+        "hood": "Rockridge"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 1,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Jax Caldera",
+        "persona": "freelance-firebrand",
+        "wakePackage": "JAX-LEP2-1"
+      },
+      {
+        "name": "Noah Tan",
+        "persona": "noah-tan",
+        "wakePackage": "NOAH-LEP2-1"
+      },
+      {
+        "name": "P Slayer",
+        "persona": "p-slayer",
+        "wakePackage": "PSLAYER-LEP2-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": true,
+    "reason": "pulse=injury-load score=70 charge=grief"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": false,
+    "reason": "no business desk or Mason assignment in rota",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=1 noah-tan/beat-weather:—",
+    "seats": [
+      "noah-tan/beat-weather:—"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": false,
+    "reason": "no civic-domain persona assignment in rota",
+    "seats": []
+  },
+  "builtAt": "2026-09-23T11:15:09.402Z"
+}

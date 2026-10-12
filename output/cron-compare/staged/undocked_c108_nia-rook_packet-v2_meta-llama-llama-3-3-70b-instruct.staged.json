@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "108",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Belle Lopez",
+        "role": "quoted-source",
+        "popid": "POP-00300"
+      },
+      {
+        "name": "Trenton Nawan",
+        "role": "quoted-source",
+        "popid": "POP-00273"
+      },
+      {
+        "name": "Ollie Campbell",
+        "role": "quoted-source",
+        "popid": "POP-00642"
+      },
+      {
+        "name": "Guadalupe Lupe",
+        "role": "quoted-source",
+        "popid": "POP-00643"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "jack-london-belle-lopez-undocked",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "I feel like my own life and the city's dynamics are intertwined, you know? As someone who's always working and trying to make ends meet, I can sense the tension and excitement in the neighborhood. I've been playing to climb, trying to reach new heights, and it feels like the city is doing the same. There's a sense of anticipation and hope in the air, especially with the A's doing well. But at the same time, I've noticed people being more cautious, like they're waiting to see what happens next. It's hard to put my finger on it, but I feel like my own struggles and triumphs are reflected in the city's dynamics, and vice versa.",
+        "sourceRef": "citizenVoice PRESS Belle Lopez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-217627dca058",
+    "draftSha256": "b4b6268161de947ca7f652454e57409009b15b3a57959c4cd9deaf314a008f5e",
+    "verdict": "output/cron-compare/undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-09-25T23:19:13.126Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:03.148Z"
+}

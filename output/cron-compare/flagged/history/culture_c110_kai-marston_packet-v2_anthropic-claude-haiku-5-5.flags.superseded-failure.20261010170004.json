@@ -1,0 +1,12 @@
+{
+  "draft": "culture_c110_kai-marston_packet-v2_anthropic-claude-haiku-5-5.md",
+  "flags": [
+    {
+      "claim": "Lena Cross, listed under Celebrity and tied to Lake Merritt",
+      "issue": "Contradicts bio ground truth: Lena Cross's canonical neighborhood is Piedmont Ave, not Lake Merritt.",
+      "severity": "high"
+    }
+  ],
+  "contamination": [],
+  "summary": "High-severity bio contradiction: Lena Cross is canonically based in Piedmont Ave, not Lake Merritt."
+}

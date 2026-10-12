@@ -1,0 +1,44 @@
+{
+  "stage": "directive",
+  "cycle": 108,
+  "model": "google/gemini-3.7-flash",
+  "mayorModel": "moonshotai/kimi-k2",
+  "blocks": [
+    "Avery Santana — Mayor",
+    "Rose Delgado — City Council District 3",
+    "Denise Carter — City Council District 1",
+    "Janae Rivers — City Council District 5",
+    "Leonard Tran — City Council District 2",
+    "Warren Ashford — City Council District 7",
+    "Nina Chen — City Council District 8",
+    "Terrence Mobley — City Council District 9",
+    "Ramon Vega — City Council District 4",
+    "Elliott Crane — City Council District 6"
+  ],
+  "rejectedBlocks": [],
+  "usage": {
+    "prompt_tokens": 7535,
+    "completion_tokens": 3580,
+    "total_tokens": 11115,
+    "cost": 0.01907625,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.01907625,
+      "upstream_inference_prompt_cost": 0.00565125,
+      "upstream_inference_completions_cost": 0.013425
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1767,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "directive": "output/mara-directives/mara_directive_c108_AUTO.txt",
+  "ranAt": "2026-09-21T02:00:27.373Z"
+}

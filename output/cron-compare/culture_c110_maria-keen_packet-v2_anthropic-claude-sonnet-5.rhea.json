@@ -1,0 +1,52 @@
+{
+  "draft": "output/cron-compare/culture_c110_maria-keen_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "a9e8ad8beb7733261205a13d6d5f8615571d1775cbdffcddbdfd9ca76a01199b",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, roles, quotes, and neighborhood details match C110 canon ground truth and packet provenance.",
+  "review": {
+    "profileId": "maria-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "packageVersion": "MARIA-LEP2-1",
+    "manifestId": "AM-a2aa2d0e6649",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Mark Aitken",
+      "Melton Neilon"
+    ],
+    "unverified": [
+      "Alumni Youth Clinics",
+      "Mark Aitken's Oakland A"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0101,
+  "durationMs": 4947,
+  "parseError": false,
+  "ranAt": "2026-10-09T23:17:17.151Z"
+}

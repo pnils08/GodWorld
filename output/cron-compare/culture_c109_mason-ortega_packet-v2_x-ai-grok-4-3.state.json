@@ -1,0 +1,317 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00160",
+    "name": "Mason Ortega",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Fruitvale kitchens: Fruitvale Diner, Marigold Cafe — the people who work the shift",
+    "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "food-workplaces",
+      "hood": "Fruitvale",
+      "pulseClass": "hood-kitchens",
+      "economicFrame": "Fruitvale kitchens: Fruitvale Diner, Marigold Cafe — the people who work the shift",
+      "hook": "Hazel Salazar, Line Cook at Fruitvale Diner. 1 named worker at 1 named kitchen in Fruitvale on the ledger this cycle.",
+      "namedBusinesses": [
+        "Fruitvale Diner",
+        "Marigold Cafe"
+      ],
+      "workplaces": [
+        "Fruitvale Diner — Restaurant & Dining — Hazel Salazar (Line Cook)",
+        "Marigold Cafe — Cafe / dining — no roster names"
+      ],
+      "engineColour": [
+        "Celo Patel — navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "Mike Paulson — the holiday market at Jack London Square is bustling, the scent of roasted chestnuts mingling with the sound of carolers",
+        "Anna Baker — caught a stranger humming their song and felt briefly, wrongly, known",
+        "Hector Leech — tried a new recipe that mostly worked",
+        "Sara Copper — braced for the sound of pile drivers and realized they had already started tuning it out near a cafe near the clinics",
+        "Jada Alvarez — the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever."
+      ],
+      "roomIsYours": "the line, the regulars, the pace, the tip jar, what the cook is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Fruitvale",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+    "plan": {
+      "focus": "Hazel Salazar, Line Cook at Fruitvale Diner, will be the central figure. The article will paint a vivid picture of her shift, the atmosphere of the diner, and the community it serves.",
+      "closeQuestion": "What does the rhythm of a shift in Fruitvale's kitchens reveal about the neighborhood's character?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00873",
+        "name": "Hazel Salazar",
+        "profile": "Hazel Salazar — Line Cook",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00873-7bb645ea3e",
+        "pop": "POP-00873",
+        "name": "Hazel Salazar",
+        "quote": "A typical shift at Fruitvale Diner starts early for me. I come in, get the kitchen prepped, and start cooking breakfast orders. It’s busy, but I like the rhythm of it—flipping eggs, plating pancakes, keeping things moving. The regulars come in, and it feels like a little community. By lunch, it’s more sandwiches and salads, and I’m juggling orders with the other cook. It’s steady work, and I take pride in making sure people leave satisfied.",
+        "factIds": [
+          "F-c7ff95b50b7a",
+          "F-febf85368af4"
+        ],
+        "src": "packet.W2[POP-00873]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "How do the regulars at Fruitvale Diner interact with the kitchen staff?",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "What are the unspoken worries of a Line Cook during a busy shift?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale kitchens · Fruitvale Diner, Marigold Cafe",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+      "id": "F-f55fbc9b40a9"
+    },
+    {
+      "t": "FACT",
+      "text": "Hazel Salazar, Line Cook at Fruitvale Diner. 1 named worker at 1 named kitchen in Fruitvale on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+      "id": "F-c7ff95b50b7a"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale Diner · Restaurant & Dining · 2 employees · growth 8% · revenue $205k (+$315 vs C108) · on the roster: Hazel Salazar (Line Cook)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+      "id": "F-febf85368af4"
+    },
+    {
+      "t": "FACT",
+      "text": "Marigold Cafe · Cafe / dining · 30 employees · growth 8% · revenue $3.1M (+$5k vs C108)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+      "id": "F-ccb7cc52cd7f"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Jack London): citizens Celo Patel; Mike Paulson; Anna Baker; Hector Leech · businesses Port of Oakland; Jack London Square Markets",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C109",
+      "id": "F-5cf377202e1f"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Temescal): citizens Sara Copper; Jada Alvarez; Brie Harris; Nila James · businesses Gridiron Analytics; Temescal Islamic Center · Temescal Islamic Center Food Pantry (program)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C109",
+      "id": "F-78aae837dd30"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Treat a Packet-supplied restaurant signal as a workplace question without inventing Mason's presence, a worker, shift, service state, business condition, or labor consequence.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "evidence-bounded kitchen-work brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named restaurant and location",
+      "closing": "the worker or operating account still needed"
+    },
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-5529ca8378d9",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-f55fbc9b40a9",
+        "t": "FACT",
+        "text": "Fruitvale kitchens · Fruitvale Diner, Marigold Cafe",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "id": "F-c7ff95b50b7a",
+        "t": "FACT",
+        "text": "Hazel Salazar, Line Cook at Fruitvale Diner. 1 named worker at 1 named kitchen in Fruitvale on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "id": "F-febf85368af4",
+        "t": "FACT",
+        "text": "Fruitvale Diner · Restaurant & Dining · 2 employees · growth 8% · revenue $205k (+$315 vs C108) · on the roster: Hazel Salazar (Line Cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "id": "F-ccb7cc52cd7f",
+        "t": "FACT",
+        "text": "Marigold Cafe · Cafe / dining · 30 employees · growth 8% · revenue $3.1M (+$5k vs C108)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "id": "F-5cf377202e1f",
+        "t": "FACT",
+        "text": "ENGINE SEED (Jack London): citizens Celo Patel; Mike Paulson; Anna Baker; Hector Leech · businesses Port of Oakland; Jack London Square Markets",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+      },
+      {
+        "id": "F-78aae837dd30",
+        "t": "FACT",
+        "text": "ENGINE SEED (Temescal): citizens Sara Copper; Jada Alvarez; Brie Harris; Nila James · businesses Gridiron Analytics; Temescal Islamic Center · Temescal Islamic Center Food Pantry (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00873-7bb645ea3e",
+        "speakerId": "POP-00873",
+        "speakerName": "Hazel Salazar",
+        "text": "A typical shift at Fruitvale Diner starts early for me. I come in, get the kitchen prepped, and start cooking breakfast orders. It’s busy, but I like the rhythm of it—flipping eggs, plating pancakes, keeping things moving. The regulars come in, and it feels like a little community. By lunch, it’s more sandwiches and salads, and I’m juggling orders with the other cook. It’s steady work, and I take pride in making sure people leave satisfied.",
+        "factIds": [
+          "F-c7ff95b50b7a",
+          "F-febf85368af4"
+        ],
+        "src": "packet.W2[POP-00873]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00873",
+        "name": "Hazel Salazar",
+        "profile": "Hazel Salazar — Line Cook",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "How do the regulars at Fruitvale Diner interact with the kitchen staff?",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "What are the unspoken worries of a Line Cook during a busy shift?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  }
+}

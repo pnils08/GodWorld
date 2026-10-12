@@ -1,0 +1,26 @@
+{
+  "office": "police_chief",
+  "agentDir": "civic-office-police-chief",
+  "holder": "Rafael Montez",
+  "popid": "POP-00136",
+  "title": "Police Chief",
+  "date": "2026-09-24",
+  "cycle": 108,
+  "model": "deepseek/deepseek-chat",
+  "statement": "The Oakland Police Department remains focused on operational coordination and public safety outcomes in East and West Oakland. Our patrol deployments continue to align with call volume data and neighborhood needs. Behavioral health calls are routed appropriately through OARI co-response protocols. Clear transfer thresholds between sworn officers and alternative responders prevent gaps in emergency coverage—that’s operational necessity, not politics. OPD’s commitment to neighborhood safety is unwavering.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-103-civic-office-police-chief",
+        "text": "OPD is implementing targeted patrol realignments in East and West Oakland based on call volume data. These operational adjustments ensure resources are deployed where they’re needed most. Behavioral health calls are handled through OARI co-response protocols with clear transfer thresholds to prevent gaps in emergency coverage. This approach balances sworn officer presence with alternative response capabilities.",
+        "directiveCycle": 103,
+        "confrontationSeat": "civic-office-police-chief"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-09-24T10:46:29.794Z",
+  "fellBackFrom": null
+}

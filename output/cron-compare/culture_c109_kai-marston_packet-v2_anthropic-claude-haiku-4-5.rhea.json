@@ -1,0 +1,63 @@
+{
+  "draft": "output/cron-compare/culture_c109_kai-marston_packet-v2_anthropic-claude-haiku-4-5.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c60d44895fd7ff4c7b21fe849ade46508fa95b65f7d7f8326ad50dfa2605fdb6",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "She is a journalist—Media, the ledger says... Fifty-eight on the cultural chart... thirty-seven culture figures rising this cycle... The ledger is ruthless",
+      "issue": "Draft relies heavily on overt engine/ledger mechanics and system vocabulary as public-facing text, which serves as a repair cue under system-vocab rules.",
+      "severity": "med"
+    },
+    {
+      "claim": "Rowan Pierce at KONO",
+      "issue": "Rowan Pierce's canonical residence/base is Piedmont Ave on the ledger, though referring to them working/cooling at KONO is permissible texture if framed as venue/scene.",
+      "severity": "low"
+    }
+  ],
+  "flagCount": 2,
+  "highSeverityCount": 0,
+  "summary": "Passes verification with zero high-severity flags; meta-ledger phrasing noted as medium repair cue.",
+  "review": {
+    "profileId": "kai-arts-entertainment-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "packageVersion": "KAI-LEP2-1",
+    "manifestId": "AM-b11e02fb90f8",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Alma Vasquez",
+      "Lena Cross",
+      "Nina Reyes",
+      "Rowan Pierce",
+      "Tara Ellison",
+      "Theo Banks"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.011,
+  "durationMs": 9866,
+  "parseError": false,
+  "ranAt": "2026-10-02T23:15:57.994Z"
+}

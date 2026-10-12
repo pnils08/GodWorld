@@ -1,0 +1,203 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "109",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Recap Otis Redd's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 143, systems unlisted, combat 0, mishaps 0, magnitude 3/5. Standings: Clarissa Dane leads the board — rank #1, 6 cycle(s) led, current streak 6.",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+    },
+    "signal": {
+      "kind": "undocked",
+      "hood": "Rockridge",
+      "score": null,
+      "src": "undocked:undocked-pop00121-Y3C5-e2",
+      "nearby": [
+        {
+          "text": "UNDOCKED: Otis Redd — up 143 on the night",
+          "src": "undocked:undocked-pop00121-Y3C5-e2"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00121",
+          "name": "Otis Redd",
+          "profile": "Otis Redd — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c109.json",
+            "episodeId": "undocked-pop00121-Y3C5-e2",
+            "pop": "POP-00121"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-912baafccba1"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED: Otis Redd — up 143 on the night",
+        "src": "undocked:undocked-pop00121-Y3C5-e2",
+        "id": "F-31c260265e54"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00121",
+        "name": "Otis Redd",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Otis Redd — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c109.json",
+          "episodeId": "undocked-pop00121-Y3C5-e2",
+          "pop": "POP-00121"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00121-Y3C5-e2",
+      "label": "UNDOCKED: Otis Redd — up 143 on the night",
+      "kind": "undocked",
+      "angle": "Recap Otis Redd's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 143, systems unlisted, combat 0, mishaps 0, magnitude 3/5. Standings: Clarissa Dane leads the board — rank #1, 6 cycle(s) led, current streak 6.",
+      "citizens": [
+        "Otis Redd — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00121"
+      ],
+      "hood": "Rockridge"
+    },
+    "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I'm looking into how Otis Redd's recent success on UNDOCKED is impacting the city's dynamics, particularly in terms of who's up and who's down",
+    "plan": {
+      "chase": "I'm looking into how Otis Redd's recent success on UNDOCKED is impacting the city's dynamics, particularly in terms of who's up and who's down",
+      "focus": "The implications of Otis Redd's 143-credit gain",
+      "why": "To understand the significance of this event and its potential effects on the community",
+      "checks": [
+        "How does this impact the current standings?",
+        "What does this mean for Clarissa Dane's lead?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00121",
+          "question": "How will Otis Redd's success change the landscape of UNDOCKED?",
+          "basis": "Recent episode performance"
+        }
+      ],
+      "interpretation": "A shift in power dynamics",
+      "unverifiedLead": [
+        "The city is buzzing with speculation about what's next for Otis Redd"
+      ],
+      "closeQuestion": "Will Otis Redd's momentum continue to shake up the UNDOCKED standings?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Otis Redd — up 143 on the night",
+      "kind": "undocked",
+      "hood": "Rockridge",
+      "ref": "undocked:undocked-pop00121-Y3C5-e2",
+      "popids": [
+        "POP-00121"
+      ]
+    }
+  ],
+  "laneEntries": 1,
+  "ranAt": "2026-10-02T11:16:54.012Z"
+}

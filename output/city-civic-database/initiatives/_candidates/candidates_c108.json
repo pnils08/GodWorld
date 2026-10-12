@@ -1,0 +1,21 @@
+{
+  "cycle": 108,
+  "candidates": {
+    "MV-108-civic-office-council-d2-2026-09-21": {
+      "moveId": "MV-108-civic-office-council-d2-2026-09-21",
+      "cycle": 108,
+      "date": "2026-09-21",
+      "agentDir": "civic-office-council-d2",
+      "popid": "POP-00502",
+      "proposingOffice": "COUNCIL-D2",
+      "title": "Downtown Economic Revitalization",
+      "intervention": "health-service",
+      "hoods": [
+        "Downtown"
+      ],
+      "problem": "economic imbalance",
+      "budget": null,
+      "status": "pending"
+    }
+  }
+}

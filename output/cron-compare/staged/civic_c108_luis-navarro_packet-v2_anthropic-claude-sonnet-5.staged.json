@@ -1,0 +1,61 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "luis-navarro",
+  "byline": "Luis Navarro",
+  "bylinePopid": "POP-00636",
+  "article": "output/cron-compare/staged/civic_c108_luis-navarro_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Melton Neilon",
+        "role": "mentioned",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "mentioned",
+        "popid": "POP-00198"
+      },
+      {
+        "name": "Elio Perez",
+        "role": "mentioned",
+        "popid": "POP-00201"
+      },
+      {
+        "name": "Depak Ying",
+        "role": "mentioned",
+        "popid": "POP-00210"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "city-rick-walker-anomaly",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I’ve heard folks around here talking about the Fruitvale Transit Hub Phase II, but honestly, it feels like the council’s been dragging their feet. People want accountability, but it’s hard to tell who’s really stepping up to make things happen.",
+        "sourceRef": "citizenVoice PRESS Rick Walker"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-b46322cb9c5d",
+    "draftSha256": "ee26a3c2c9141825bdd6582c70ac3ab96e97005e188ec20f8ade8ae8d0edc06c",
+    "verdict": "output/cron-compare/civic_c108_luis-navarro_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-09-22T23:16:16.291Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:02.450Z"
+}

@@ -1,0 +1,19 @@
+{
+  "initiative": "INIT-002",
+  "initiativeId": "INIT-002",
+  "cycle": 107,
+  "primaryVoice": "Mayor gavel (mayor_gavel-003)",
+  "consolidatedFrom": [
+    "STMT-107-mayor_gavel-003 (Mayor gavel — Oakland Alternative Response Initiative East Oakland Protocol Deployment)",
+    "STMT-107-oari-001 (Tran-Muñoz — East Oakland deployment)",
+    "STMT-107-oari-002 (Tran-Muñoz — District 1 evaluation findings)",
+    "STMT-107-police_chief-001 (Chief — OARI Co-Response Protocol Alignment)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-002",
+    "ImplementationPhase": "dispatch-live",
+    "MilestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.",
+    "NextScheduledAction": "District 1 evaluation completion and potential expansion decision",
+    "NextActionCycle": 108
+  }
+}

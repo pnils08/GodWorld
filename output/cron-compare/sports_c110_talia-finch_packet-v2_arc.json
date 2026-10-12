@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "110",
+  "desk": "sports",
+  "persona": "talia-finch",
+  "hood": "Dimond",
+  "quotes": [
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "Honestly, I'm still trying to process how the Oaks did in their preseason games. I was really looking forward to seeing what they could do, but that loss to the Miami Heat was a letdown. I want to believe they can turn it around, but it's hard to shake off the feeling that it's going to be a tough season."
+    },
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "I still feel that way about the Oaks, they're really making an effort to be part of the community and that's something positive. I've seen it with the preseason games, they're trying to reach out and it's great to see."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "Honestly, I still don't really know what to make of the Oaks analysis. As a sourdough baker, I'm more focused on getting my bread just right than following sports news. I've got my regulars to think about and making sure they've got their favorite loaves. That's what keeps me up at night, not the Oaks' preseason games."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "Honestly, I'm still trying to keep up with the news like everyone else, but it's tough when the team's performance is all over the place. I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team."
+    }
+  ],
+  "claim": "Honestly, I'm still trying to process how the Oaks did in their preseason games. I was really looking forward to seeing what they could do, but that loss to the Miami Heat was a letdown. I want to believe they can turn it around, but it's hard to shake off the feeling that it's going to be a tough season.",
+  "src": "citizenVoice PRESS c110",
+  "ranAt": "2026-10-08T18:17:04.080Z"
+}

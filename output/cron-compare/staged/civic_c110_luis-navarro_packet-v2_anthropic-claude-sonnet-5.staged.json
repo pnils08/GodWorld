@@ -1,0 +1,53 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "luis-navarro",
+  "byline": "Luis Navarro",
+  "bylinePopid": "POP-00636",
+  "article": "output/cron-compare/staged/civic_c110_luis-navarro_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Rose Delgado",
+        "role": "quoted-source",
+        "popid": "POP-00503"
+      },
+      {
+        "name": "Avery Santana",
+        "role": "quoted-source",
+        "popid": "POP-00034"
+      },
+      {
+        "name": "Elena Soria Dominguez",
+        "role": "mentioned",
+        "popid": "POP-00791"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+        "sourceRef": "citizenVoice PRESS Rose Delgado"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c9cd01e9594a",
+    "draftSha256": "783b5fe7ef1fa791a903c3a778115984a17d9f61aa5cea31c0c8c4b2d5b9b2e8",
+    "verdict": "output/cron-compare/civic_c110_luis-navarro_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-10-06T23:15:35.286Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.578Z"
+}

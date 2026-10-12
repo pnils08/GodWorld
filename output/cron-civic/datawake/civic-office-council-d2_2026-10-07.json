@@ -1,0 +1,23 @@
+{
+  "office": "council_d2",
+  "agentDir": "civic-office-council-d2",
+  "holder": "Leonard Tran",
+  "popid": "POP-00502",
+  "title": "City Council District 2",
+  "date": "2026-10-07",
+  "cycle": 110,
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "statement": "As we review the remediation completion and construction milestone for the Baylight District, I want to emphasize the importance of continued oversight and community engagement to ensure this project benefits the entire community, particularly Jack London and Downtown Oakland. I am pleased to see the soil test verification complete and Phase II remediation proceeding with independent oversight. I will closely monitor the progress, prioritizing economic momentum and public safety, and expect a detailed report on the project's status at our next meeting.",
+  "moves": [
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-006"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-07T10:45:41.146Z",
+  "fellBackFrom": null
+}

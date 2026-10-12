@@ -1,0 +1,1134 @@
+{
+  "stage": "report",
+  "desk": "business",
+  "cycle": "109",
+  "persona": "business-desk",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153"
+  },
+  "assignment": {
+    "story": {
+      "angle": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+      "label": "West Oakland businesses · Oakmesh Systems, Civis Systems",
+      "hookLine": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+      "hood": "West Oakland",
+      "pulseClass": "hood-businesses",
+      "namedBusinesses": [
+        "Oakmesh Systems",
+        "Civis Systems",
+        "Coastline Construction",
+        "Mariner Construction",
+        "Northgate Construction"
+      ],
+      "citizens": [
+        "Elijah Roberts (POP-00275)",
+        "Enzo Walker (POP-00291)",
+        "Dom Will (POP-00368)",
+        "Jace Robinson (POP-00483)",
+        "Sam Fazio (POP-00445)",
+        "Catherine Santos (POP-00482)",
+        "Elias  Varek (POP-00789)",
+        "Maurice Franklin (POP-00801)",
+        "Daniel Cloak (POP-00722)",
+        "Marcus Wright (POP-00288)",
+        "Eleanor Rivera (POP-00617)",
+        "Charlene Underwood (POP-00850)"
+      ],
+      "popids": [
+        "POP-00275",
+        "POP-00291",
+        "POP-00368",
+        "POP-00483",
+        "POP-00445",
+        "POP-00482",
+        "POP-00789",
+        "POP-00801",
+        "POP-00722",
+        "POP-00288",
+        "POP-00617",
+        "POP-00850"
+      ],
+      "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+      "cycle": 109
+    }
+  },
+  "angle": "output/cron-compare/business_c109_business-desk_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00445",
+      "name": "Sam Fazio",
+      "quote": "Working at Civis Systems, I’ve seen how West Oakland businesses like ours, Oakmesh Systems, and Coastline Construction are really shaping the neighborhood. It’s not just about the jobs—it’s about the community we’re building together. People here are passionate about what they do, whether it’s urban systems intelligence or construction. There’s a sense of pride in contributing to something bigger.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Working at Civis Systems, I’ve seen how West Oakland businesses like ours, Oakmesh Systems, and Coastline Construction are really shaping the neighborhood. It’s not just about the jobs—it’s about the community we’re building together. People here are passionate about what they do, whether it’s urban systems intelligence or construction. There’s a sense of pride in contributing to something bigger.\",\n  \"fact_ids\": [\"F-959406e9b257\", \"F-b921a6b5458d\", \"F-032d5126b451\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-959406e9b257",
+          "F-b921a6b5458d",
+          "F-032d5126b451"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00445-6d21fc5b25",
+        "authoredQuote": true,
+        "publishableQuote": "Working at Civis Systems, I’ve seen how West Oakland businesses like ours, Oakmesh Systems, and Coastline Construction are really shaping the neighborhood. It’s not just about the jobs—it’s about the community we’re building together. People here are passionate about what they do, whether it’s urban systems intelligence or construction. There’s a sense of pride in contributing to something bigger."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00445",
+          "name": "Sam Fazio",
+          "role": "Digital Twin Architect",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "West Oakland",
+          "focus": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "works at Civis Systems (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Sam Fazio — Digital Twin Architect — Civis Systems, West Oakland",
+          "evidence": [
+            {
+              "id": "EV-bf68f8af3a",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+              "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland businesses · Oakmesh Systems, Civis Systems",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-14b1ba588707"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-8c40d814d550"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-b921a6b5458d"
+          },
+          {
+            "t": "FACT",
+            "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-959406e9b257"
+          },
+          {
+            "t": "FACT",
+            "text": "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-032d5126b451"
+          },
+          {
+            "t": "FACT",
+            "text": "Mariner Construction · Construction · 165 employees · growth 4.9%",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-4c346664a433"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-fad23116a354"
+          },
+          {
+            "t": "FACT",
+            "text": "Sam Fazio — Digital Twin Architect — Civis Systems, West Oakland",
+            "src": "Simulation_Ledger profile for POP-00445",
+            "id": "F-bd985ff749f4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00291",
+      "name": "Enzo Walker",
+      "quote": "Honestly? Those tech firms like Oakmesh and Civis—they're changing the block faster than we can keep up. I work at Oakmesh, and half the time I'm fixing pipes in buildings that didn't exist last year. The money's there, sure, but it's not sticking around here. Guys like Elias at Civis talk about 'systems' and 'efficiency,' but ask the folks at the bus stop if they feel any of that. We're all just trying to keep the water running while the city builds over us.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly? Those tech firms like Oakmesh and Civis—they're changing the block faster than we can keep up. I work at Oakmesh, and half the time I'm fixing pipes in buildings that didn't exist last year. The money's there, sure, but it's not sticking around here. Guys like Elias at Civis talk about 'systems' and 'efficiency,' but ask the folks at the bus stop if they feel any of that. We're all just trying to keep the water running while the city builds over us.\",\n  \"fact_ids\": [\"F-b921a6b5458d\", \"F-959406e9b257\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b921a6b5458d",
+          "F-959406e9b257"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00291-cebe12f65c",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly? Those tech firms like Oakmesh and Civis—they're changing the block faster than we can keep up. I work at Oakmesh, and half the time I'm fixing pipes in buildings that didn't exist last year. The money's there, sure, but it's not sticking around here. Guys like Elias at Civis talk about 'systems' and 'efficiency,' but ask the folks at the bus stop if they feel any of that. We're all just trying to keep the water running while the city builds over us."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00291",
+          "name": "Enzo Walker",
+          "role": "Plumber",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "West Oakland",
+          "focus": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "works at Oakmesh Systems (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Enzo Walker — Plumber — Oakmesh Systems, West Oakland",
+          "evidence": [
+            {
+              "id": "EV-56fa319291",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+              "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland businesses · Oakmesh Systems, Civis Systems",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-14b1ba588707"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-8c40d814d550"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-b921a6b5458d"
+          },
+          {
+            "t": "FACT",
+            "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-959406e9b257"
+          },
+          {
+            "t": "FACT",
+            "text": "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-032d5126b451"
+          },
+          {
+            "t": "FACT",
+            "text": "Mariner Construction · Construction · 165 employees · growth 4.9%",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-4c346664a433"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-fad23116a354"
+          },
+          {
+            "t": "FACT",
+            "text": "Enzo Walker — Plumber — Oakmesh Systems, West Oakland",
+            "src": "Simulation_Ledger profile for POP-00291",
+            "id": "F-6dddde9b6651"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00368",
+      "name": "Dom Will",
+      "quote": "Oakmesh feels like we're building something real here - not just another tech bubble. Marcus keeps us focused on civic impact, not just profit. Civis down the street? Elias runs a tight ship, all that urban intelligence work. You see their drone fleet buzzing around sometimes. Coastline's got cranes up everywhere - hard to miss them. But it's the small crews, like our construction guys, that make the neighborhood hum.",
+      "disp": "driven, hard to sit still",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Oakmesh feels like we're building something real here - not just another tech bubble. Marcus keeps us focused on civic impact, not just profit. Civis down the street? Elias runs a tight ship, all that urban intelligence work. You see their drone fleet buzzing around sometimes. Coastline's got cranes up everywhere - hard to miss them. But it's the small crews, like our construction guys, that make the neighborhood hum.\",\n  \"fact_ids\": [\"F-b921a6b5458d\", \"F-959406e9b257\", \"F-032d5126b451\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b921a6b5458d",
+          "F-959406e9b257",
+          "F-032d5126b451"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00368-ab8c40d69d",
+        "authoredQuote": true,
+        "publishableQuote": "Oakmesh feels like we're building something real here - not just another tech bubble. Marcus keeps us focused on civic impact, not just profit. Civis down the street? Elias runs a tight ship, all that urban intelligence work. You see their drone fleet buzzing around sometimes. Coastline's got cranes up everywhere - hard to miss them. But it's the small crews, like our construction guys, that make the neighborhood hum."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00368",
+          "name": "Dom Will",
+          "role": "Machine Learning Engineer (Oakmesh Systems)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "West Oakland",
+          "focus": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "works at Oakmesh Systems (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Dom Will — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+          "evidence": [
+            {
+              "id": "EV-e6aeb0ec8f",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+              "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland businesses · Oakmesh Systems, Civis Systems",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-14b1ba588707"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-8c40d814d550"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-b921a6b5458d"
+          },
+          {
+            "t": "FACT",
+            "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-959406e9b257"
+          },
+          {
+            "t": "FACT",
+            "text": "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-032d5126b451"
+          },
+          {
+            "t": "FACT",
+            "text": "Mariner Construction · Construction · 165 employees · growth 4.9%",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-4c346664a433"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-fad23116a354"
+          },
+          {
+            "t": "FACT",
+            "text": "Dom Will — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+            "src": "Simulation_Ledger profile for POP-00368",
+            "id": "F-8a41c786f03f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00275",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: voice: Provider returned error",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00275",
+          "name": "Elijah Roberts",
+          "role": "Construction laborer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "West Oakland",
+          "focus": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "works at Oakmesh Systems (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Elijah Roberts — Construction laborer — Oakmesh Systems, West Oakland",
+          "evidence": [
+            {
+              "id": "EV-ed0bd74286",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+              "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland businesses · Oakmesh Systems, Civis Systems",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-14b1ba588707"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-8c40d814d550"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-b921a6b5458d"
+          },
+          {
+            "t": "FACT",
+            "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-959406e9b257"
+          },
+          {
+            "t": "FACT",
+            "text": "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-032d5126b451"
+          },
+          {
+            "t": "FACT",
+            "text": "Mariner Construction · Construction · 165 employees · growth 4.9%",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-4c346664a433"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-fad23116a354"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Roberts — Construction laborer — Oakmesh Systems, West Oakland",
+            "src": "Simulation_Ledger profile for POP-00275",
+            "id": "F-fbf5aecff075"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00445",
+      "name": "Sam Fazio",
+      "quote": "Working at Civis Systems, I’ve seen how West Oakland businesses like ours, Oakmesh Systems, and Coastline Construction are really shaping the neighborhood. It’s not just about the jobs—it’s about the community we’re building together. People here are passionate about what they do, whether it’s urban systems intelligence or construction. There’s a sense of pride in contributing to something bigger.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Working at Civis Systems, I’ve seen how West Oakland businesses like ours, Oakmesh Systems, and Coastline Construction are really shaping the neighborhood. It’s not just about the jobs—it’s about the community we’re building together. People here are passionate about what they do, whether it’s urban systems intelligence or construction. There’s a sense of pride in contributing to something bigger.\",\n  \"fact_ids\": [\"F-959406e9b257\", \"F-b921a6b5458d\", \"F-032d5126b451\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-959406e9b257",
+          "F-b921a6b5458d",
+          "F-032d5126b451"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00445-6d21fc5b25",
+        "authoredQuote": true,
+        "publishableQuote": "Working at Civis Systems, I’ve seen how West Oakland businesses like ours, Oakmesh Systems, and Coastline Construction are really shaping the neighborhood. It’s not just about the jobs—it’s about the community we’re building together. People here are passionate about what they do, whether it’s urban systems intelligence or construction. There’s a sense of pride in contributing to something bigger."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00445",
+          "name": "Sam Fazio",
+          "role": "Digital Twin Architect",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "West Oakland",
+          "focus": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "works at Civis Systems (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Sam Fazio — Digital Twin Architect — Civis Systems, West Oakland",
+          "evidence": [
+            {
+              "id": "EV-bf68f8af3a",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+              "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland businesses · Oakmesh Systems, Civis Systems",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-14b1ba588707"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-8c40d814d550"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-b921a6b5458d"
+          },
+          {
+            "t": "FACT",
+            "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-959406e9b257"
+          },
+          {
+            "t": "FACT",
+            "text": "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-032d5126b451"
+          },
+          {
+            "t": "FACT",
+            "text": "Mariner Construction · Construction · 165 employees · growth 4.9%",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-4c346664a433"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-fad23116a354"
+          },
+          {
+            "t": "FACT",
+            "text": "Sam Fazio — Digital Twin Architect — Civis Systems, West Oakland",
+            "src": "Simulation_Ledger profile for POP-00445",
+            "id": "F-bd985ff749f4"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00291",
+      "name": "Enzo Walker",
+      "quote": "Honestly? Those tech firms like Oakmesh and Civis—they're changing the block faster than we can keep up. I work at Oakmesh, and half the time I'm fixing pipes in buildings that didn't exist last year. The money's there, sure, but it's not sticking around here. Guys like Elias at Civis talk about 'systems' and 'efficiency,' but ask the folks at the bus stop if they feel any of that. We're all just trying to keep the water running while the city builds over us.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly? Those tech firms like Oakmesh and Civis—they're changing the block faster than we can keep up. I work at Oakmesh, and half the time I'm fixing pipes in buildings that didn't exist last year. The money's there, sure, but it's not sticking around here. Guys like Elias at Civis talk about 'systems' and 'efficiency,' but ask the folks at the bus stop if they feel any of that. We're all just trying to keep the water running while the city builds over us.\",\n  \"fact_ids\": [\"F-b921a6b5458d\", \"F-959406e9b257\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b921a6b5458d",
+          "F-959406e9b257"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00291-cebe12f65c",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly? Those tech firms like Oakmesh and Civis—they're changing the block faster than we can keep up. I work at Oakmesh, and half the time I'm fixing pipes in buildings that didn't exist last year. The money's there, sure, but it's not sticking around here. Guys like Elias at Civis talk about 'systems' and 'efficiency,' but ask the folks at the bus stop if they feel any of that. We're all just trying to keep the water running while the city builds over us."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00291",
+          "name": "Enzo Walker",
+          "role": "Plumber",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "West Oakland",
+          "focus": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "works at Oakmesh Systems (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Enzo Walker — Plumber — Oakmesh Systems, West Oakland",
+          "evidence": [
+            {
+              "id": "EV-56fa319291",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+              "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland businesses · Oakmesh Systems, Civis Systems",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-14b1ba588707"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-8c40d814d550"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-b921a6b5458d"
+          },
+          {
+            "t": "FACT",
+            "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-959406e9b257"
+          },
+          {
+            "t": "FACT",
+            "text": "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-032d5126b451"
+          },
+          {
+            "t": "FACT",
+            "text": "Mariner Construction · Construction · 165 employees · growth 4.9%",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-4c346664a433"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-fad23116a354"
+          },
+          {
+            "t": "FACT",
+            "text": "Enzo Walker — Plumber — Oakmesh Systems, West Oakland",
+            "src": "Simulation_Ledger profile for POP-00291",
+            "id": "F-6dddde9b6651"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00368",
+      "name": "Dom Will",
+      "quote": "Oakmesh feels like we're building something real here - not just another tech bubble. Marcus keeps us focused on civic impact, not just profit. Civis down the street? Elias runs a tight ship, all that urban intelligence work. You see their drone fleet buzzing around sometimes. Coastline's got cranes up everywhere - hard to miss them. But it's the small crews, like our construction guys, that make the neighborhood hum.",
+      "disp": "driven, hard to sit still",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Oakmesh feels like we're building something real here - not just another tech bubble. Marcus keeps us focused on civic impact, not just profit. Civis down the street? Elias runs a tight ship, all that urban intelligence work. You see their drone fleet buzzing around sometimes. Coastline's got cranes up everywhere - hard to miss them. But it's the small crews, like our construction guys, that make the neighborhood hum.\",\n  \"fact_ids\": [\"F-b921a6b5458d\", \"F-959406e9b257\", \"F-032d5126b451\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b921a6b5458d",
+          "F-959406e9b257",
+          "F-032d5126b451"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00368-ab8c40d69d",
+        "authoredQuote": true,
+        "publishableQuote": "Oakmesh feels like we're building something real here - not just another tech bubble. Marcus keeps us focused on civic impact, not just profit. Civis down the street? Elias runs a tight ship, all that urban intelligence work. You see their drone fleet buzzing around sometimes. Coastline's got cranes up everywhere - hard to miss them. But it's the small crews, like our construction guys, that make the neighborhood hum."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00368",
+          "name": "Dom Will",
+          "role": "Machine Learning Engineer (Oakmesh Systems)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "West Oakland",
+          "focus": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+        },
+        "exposure": {
+          "basis": [
+            "works at Oakmesh Systems (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Dom Will — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+          "evidence": [
+            {
+              "id": "EV-e6aeb0ec8f",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+              "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland businesses · Oakmesh Systems, Civis Systems",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-14b1ba588707"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-8c40d814d550"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-b921a6b5458d"
+          },
+          {
+            "t": "FACT",
+            "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-959406e9b257"
+          },
+          {
+            "t": "FACT",
+            "text": "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-032d5126b451"
+          },
+          {
+            "t": "FACT",
+            "text": "Mariner Construction · Construction · 165 employees · growth 4.9%",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-4c346664a433"
+          },
+          {
+            "t": "FACT",
+            "text": "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "id": "F-fad23116a354"
+          },
+          {
+            "t": "FACT",
+            "text": "Dom Will — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+            "src": "Simulation_Ledger profile for POP-00368",
+            "id": "F-8a41c786f03f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-28T18:16:54.533Z"
+}

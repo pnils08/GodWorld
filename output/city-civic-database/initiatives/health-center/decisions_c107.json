@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 107,
+  "primaryVoice": "Chen-Ramirez (health_center-001)",
+  "consolidatedFrom": [
+    "STMT-107-health_center-001 (Chen-Ramirez — construction_progress)",
+    "STMT-107-health_center-002 (Chen-Ramirez — community_transparency)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "MilestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule",
+    "NextScheduledAction": "Drywall installation and fire-rated wall inspections",
+    "NextActionCycle": 108
+  }
+}

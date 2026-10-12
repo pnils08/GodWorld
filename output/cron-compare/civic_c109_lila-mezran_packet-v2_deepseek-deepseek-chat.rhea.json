@@ -1,0 +1,51 @@
+{
+  "draft": "output/cron-compare/civic_c109_lila-mezran_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "f833043b1b0d5aacf7ae4ac2e3cee17f375a70749745b5ed40c30c3d4ceb18eb",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen profiles and quotes verified against packet manifest with authorized health texture.",
+  "review": {
+    "profileId": "lila-health-service-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "packageVersion": "LILA-LEP2-1",
+    "manifestId": "AM-4ff72164faca",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Colin Soria",
+      "Marcus Osei",
+      "Maurice Franklin",
+      "Tiu Xiong",
+      "Yu Zen"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0103,
+  "durationMs": 7209,
+  "parseError": false,
+  "ranAt": "2026-09-28T23:17:30.133Z"
+}

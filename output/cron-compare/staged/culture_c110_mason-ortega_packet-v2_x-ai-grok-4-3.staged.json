@@ -1,0 +1,41 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "110",
+  "persona": "mason-ortega",
+  "byline": "Mason Ortega",
+  "bylinePopid": "POP-00160",
+  "article": "output/cron-compare/staged/culture_c110_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Colin Phillips",
+        "role": "quoted-source",
+        "popid": "POP-00786"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Most days at Nino's start before sunrise - mixing dough, shaping loaves, that kind of thing. It's steady work, not glamorous, but there's something satisfying about seeing the racks fill up before the morning rush. Lately I've been training on the pastry side too, which keeps things interesting.",
+        "sourceRef": "citizenVoice PRESS Colin Phillips"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-7e84091a8b31",
+    "draftSha256": "8fb4b17ae85897824849abe05ca5703e63d67d5f91b2fa7224fe0297e02f78fc",
+    "verdict": "output/cron-compare/culture_c110_mason-ortega_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-09T23:15:20.306Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.691Z"
+}

@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "109",
+  "desk": "civic",
+  "persona": "carmen-delaine",
+  "storyline": {
+    "slug": "west-oakland-daniel-cloak-initiative",
+    "verb": "opened"
+  },
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "I’ve heard folks talking about the Stabilization Fund at the bakery, but honestly, I’m not sure yet how it’s touching the ground here. It feels like something big, but I’m waiting to see it in action."
+    },
+    {
+      "pop": "POP-00794",
+      "name": "Irene Fay",
+      "quote": "I've heard folks at the coffee shop talking about the Stabilization Fund, but honestly, it's hard to tell where that money's actually going. People seem hopeful but also kinda skeptical—like they're waiting to see if it'll really make a difference on our block."
+    },
+    {
+      "pop": "POP-00961",
+      "name": "Darius Clark",
+      "quote": "I heard about that fund at the bakery - couple regulars were talking how it's supposed to help keep folks in their homes. Haven't seen much change on my block yet, but I hope it works out."
+    },
+    {
+      "pop": "POP-01030",
+      "name": "Elena Patel",
+      "quote": "I heard about the Stabilization Fund at the community center last month, but honestly, I haven't noticed any changes on my block yet."
+    }
+  ],
+  "claim": "I’ve heard folks talking about the Stabilization Fund at the bakery, but honestly, I’m not sure yet how it’s touching the ground here. It feels like something big, but I’m waiting to see it in action.",
+  "src": "citizenVoice PRESS c109",
+  "ranAt": "2026-09-28T18:16:05.419Z"
+}

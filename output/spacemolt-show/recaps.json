@@ -40,5 +40,149 @@
     "cycle": "105",
     "stem": "undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
     "disposition": "staged"
+  },
+  "undocked-pop00143-Y3C2": {
+    "at": "2026-09-08T23:18:24.026Z",
+    "cycle": "106",
+    "stem": "undocked_c106_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00962-Y3C2": {
+    "at": "2026-09-09T23:19:31.248Z",
+    "cycle": "106",
+    "stem": "undocked_c106_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00688-Y3C2": {
+    "at": "2026-09-10T23:17:52.919Z",
+    "cycle": "106",
+    "stem": "undocked_c106_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00143-Y3C2-e2": {
+    "at": "2026-09-11T23:18:42.748Z",
+    "cycle": "106",
+    "stem": "undocked_c106_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00031-Y3C3": {
+    "at": "2026-09-15T23:18:25.583Z",
+    "cycle": "107",
+    "stem": "undocked_c107_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "flagged"
+  },
+  "undocked-pop00731-Y3C3": {
+    "at": "2026-09-16T23:16:25.875Z",
+    "cycle": "107",
+    "stem": "undocked_c107_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "flagged"
+  },
+  "undocked-pop00495-Y3C3": {
+    "at": "2026-09-17T23:17:33.535Z",
+    "cycle": "107",
+    "stem": "undocked_c107_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "flagged"
+  },
+  "undocked-pop00031-Y3C3-e2": {
+    "at": "2026-09-18T23:20:39.277Z",
+    "cycle": "107",
+    "stem": "undocked_c107_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00663-Y3C4": {
+    "at": "2026-09-21T23:20:32.998Z",
+    "cycle": "108",
+    "stem": "undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00300-Y3C4": {
+    "at": "2026-09-22T23:18:47.047Z",
+    "cycle": "108",
+    "stem": "undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00842-Y3C4": {
+    "at": "2026-09-23T23:19:52.007Z",
+    "cycle": "108",
+    "stem": "undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00663-Y3C4-e2": {
+    "at": "2026-09-24T23:17:50.183Z",
+    "cycle": "108",
+    "stem": "undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00300-Y3C4-e2": {
+    "at": "2026-09-25T23:19:13.354Z",
+    "cycle": "108",
+    "stem": "undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00121-Y3C5": {
+    "at": "2026-09-30T23:18:21.227Z",
+    "cycle": "109",
+    "stem": "undocked_c109_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00190-Y3C5": {
+    "at": "2026-09-30T23:18:21.227Z",
+    "cycle": "109",
+    "stem": "undocked_c109_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00141-Y3C5": {
+    "at": "2026-10-01T23:17:40.019Z",
+    "cycle": "109",
+    "stem": "undocked_c109_nia-rook_packet-v2_x-ai-grok-4-3",
+    "disposition": "staged"
+  },
+  "undocked-pop00121-Y3C5-e2": {
+    "at": "2026-10-02T23:18:03.311Z",
+    "cycle": "109",
+    "stem": "undocked_c109_nia-rook_packet-v2_x-ai-grok-4-3",
+    "disposition": "staged"
+  },
+  "weekly-c109": {
+    "at": "2026-10-03T15:15:20.763Z",
+    "cycle": "109",
+    "stem": "undocked-digest_c109_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+    "disposition": "staged"
+  },
+  "undocked-pop00770-Y3C6": {
+    "at": "2026-10-05T23:17:54.586Z",
+    "cycle": "110",
+    "stem": "undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3",
+    "disposition": "staged"
+  },
+  "undocked-pop00235-Y3C6": {
+    "at": "2026-10-06T23:20:09.765Z",
+    "cycle": "110",
+    "stem": "undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3",
+    "disposition": "staged"
+  },
+  "undocked-pop00287-Y3C6": {
+    "at": "2026-10-07T23:20:27.266Z",
+    "cycle": "110",
+    "stem": "undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3",
+    "disposition": "staged"
+  },
+  "undocked-pop00770-Y3C6-e2": {
+    "at": "2026-10-08T23:18:00.870Z",
+    "cycle": "110",
+    "stem": "undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3",
+    "disposition": "staged"
+  },
+  "undocked-pop00235-Y3C6-e2": {
+    "at": "2026-10-09T23:18:19.948Z",
+    "cycle": "110",
+    "stem": "undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3",
+    "disposition": "staged"
+  },
+  "weekly-c110": {
+    "at": "2026-10-10T15:15:19.398Z",
+    "cycle": "110",
+    "stem": "undocked-digest_c110_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+    "disposition": "staged"
   }
 }

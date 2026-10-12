@@ -1,0 +1,565 @@
+[
+  {
+    "pop": "POP-00537",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00537\",\"name\":\"Marin Tao\",\"role\":\"Musician\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What have you seen, felt, or understood about \\\"The impact of Marin Tao's rising fame on Oakland's cultural scene\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"San Antonio\",\"focus\":\"The impact of Marin Tao's rising fame on Oakland's cultural scene\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\"},\"exposure\":{\"basis\":[\"the city is talking about them (Cultural_Ledger)\"],\"self\":\"Marin Tao — Musician — Chinatown\",\"evidence\":[{\"id\":\"EV-6ff1549508\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"text\":\"Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"Marin Tao leads the conversation (25 mentions); Uptown moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-2d706c97794d\"},{\"t\":\"FACT\",\"text\":\"Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-d7b022dc0c27\"},{\"t\":\"FACT\",\"text\":\"Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-2fab856fb7b6\"},{\"t\":\"FACT\",\"text\":\"Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-16889ed63f66\"},{\"t\":\"FACT\",\"text\":\"Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-c4082aab131d\"},{\"t\":\"FACT\",\"text\":\"Oakland Native MVP Davis (Sports) — new on the culture record C108\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-69371833824b\"},{\"t\":\"FACT\",\"text\":\"Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108\",\"id\":\"F-09177454b07b\"},{\"t\":\"FACT\",\"text\":\"Marin Tao — Musician — Chinatown\",\"src\":\"Simulation_Ledger profile for POP-00537\",\"id\":\"F-5cfd163bed8d\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00537",
+        "name": "Marin Tao",
+        "role": "Musician",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What have you seen, felt, or understood about \"The impact of Marin Tao's rising fame on Oakland's cultural scene\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "San Antonio",
+        "focus": "The impact of Marin Tao's rising fame on Oakland's cultural scene",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      "exposure": {
+        "basis": [
+          "the city is talking about them (Cultural_Ledger)"
+        ],
+        "self": "Marin Tao — Musician — Chinatown",
+        "evidence": [
+          {
+            "id": "EV-6ff1549508",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108",
+            "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-2d706c97794d"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-d7b022dc0c27"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-2fab856fb7b6"
+        },
+        {
+          "t": "FACT",
+          "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-16889ed63f66"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-c4082aab131d"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-69371833824b"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108",
+          "id": "F-09177454b07b"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao — Musician — Chinatown",
+          "src": "Simulation_Ledger profile for POP-00537",
+          "id": "F-5cfd163bed8d"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00769",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00769\",\"name\":\"Dax Monroe\",\"role\":\"Artist\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What have you seen, felt, or understood about \\\"The impact of Marin Tao's rising fame on Oakland's cultural scene\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"San Antonio\",\"focus\":\"The impact of Marin Tao's rising fame on Oakland's cultural scene\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\"},\"exposure\":{\"basis\":[\"the city is talking about them (Cultural_Ledger)\"],\"self\":\"Dax Monroe — Artist — Rockridge\",\"evidence\":[{\"id\":\"EV-819cf15e7b\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"text\":\"Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"Marin Tao leads the conversation (25 mentions); Uptown moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-2d706c97794d\"},{\"t\":\"FACT\",\"text\":\"Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-d7b022dc0c27\"},{\"t\":\"FACT\",\"text\":\"Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-2fab856fb7b6\"},{\"t\":\"FACT\",\"text\":\"Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-16889ed63f66\"},{\"t\":\"FACT\",\"text\":\"Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-c4082aab131d\"},{\"t\":\"FACT\",\"text\":\"Oakland Native MVP Davis (Sports) — new on the culture record C108\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-69371833824b\"},{\"t\":\"FACT\",\"text\":\"Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108\",\"id\":\"F-09177454b07b\"},{\"t\":\"FACT\",\"text\":\"Dax Monroe — Artist — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00769\",\"id\":\"F-9e0d1a641a6e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00769",
+        "name": "Dax Monroe",
+        "role": "Artist",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What have you seen, felt, or understood about \"The impact of Marin Tao's rising fame on Oakland's cultural scene\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "San Antonio",
+        "focus": "The impact of Marin Tao's rising fame on Oakland's cultural scene",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      "exposure": {
+        "basis": [
+          "the city is talking about them (Cultural_Ledger)"
+        ],
+        "self": "Dax Monroe — Artist — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-819cf15e7b",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108",
+            "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-2d706c97794d"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-d7b022dc0c27"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-2fab856fb7b6"
+        },
+        {
+          "t": "FACT",
+          "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-16889ed63f66"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-c4082aab131d"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-69371833824b"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108",
+          "id": "F-09177454b07b"
+        },
+        {
+          "t": "FACT",
+          "text": "Dax Monroe — Artist — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00769",
+          "id": "F-9e0d1a641a6e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00632",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00632\",\"name\":\"Rico Valez\",\"role\":\"Musician\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What have you seen, felt, or understood about \\\"The impact of Marin Tao's rising fame on Oakland's cultural scene\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"San Antonio\",\"focus\":\"The impact of Marin Tao's rising fame on Oakland's cultural scene\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\"},\"exposure\":{\"basis\":[\"the city is talking about them (Cultural_Ledger)\"],\"self\":\"Rico Valez — Musician — Fruitvale\",\"evidence\":[{\"id\":\"EV-08bb9c8c91\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"text\":\"Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"Marin Tao leads the conversation (25 mentions); Uptown moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-2d706c97794d\"},{\"t\":\"FACT\",\"text\":\"Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-d7b022dc0c27\"},{\"t\":\"FACT\",\"text\":\"Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-2fab856fb7b6\"},{\"t\":\"FACT\",\"text\":\"Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-16889ed63f66\"},{\"t\":\"FACT\",\"text\":\"Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-c4082aab131d\"},{\"t\":\"FACT\",\"text\":\"Oakland Native MVP Davis (Sports) — new on the culture record C108\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-69371833824b\"},{\"t\":\"FACT\",\"text\":\"Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108\",\"id\":\"F-09177454b07b\"},{\"t\":\"FACT\",\"text\":\"Rico Valez — Musician — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00632\",\"id\":\"F-addc622b548f\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What have you seen, felt, or understood about \"The impact of Marin Tao's rising fame on Oakland's cultural scene\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "San Antonio",
+        "focus": "The impact of Marin Tao's rising fame on Oakland's cultural scene",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      "exposure": {
+        "basis": [
+          "the city is talking about them (Cultural_Ledger)"
+        ],
+        "self": "Rico Valez — Musician — Fruitvale",
+        "evidence": [
+          {
+            "id": "EV-08bb9c8c91",
+            "src": "output/beats/Cultural_Ledger.jsonl @C108",
+            "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-2d706c97794d"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-d7b022dc0c27"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-2fab856fb7b6"
+        },
+        {
+          "t": "FACT",
+          "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-16889ed63f66"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-c4082aab131d"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-69371833824b"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108",
+          "id": "F-09177454b07b"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez — Musician — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00632",
+          "id": "F-addc622b548f"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00796",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00796\",\"name\":\"Dank Abara\",\"role\":\"Waiter\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"As a resident of San Antonio, what have you seen, felt, or understood about \\\"The impact of Marin Tao's rising fame on Oakland's cultural scene\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"San Antonio\",\"focus\":\"The impact of Marin Tao's rising fame on Oakland's cultural scene\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Dank Abara — Waiter — San Antonio\",\"evidence\":[],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C108\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-78217e633afa\"},{\"t\":\"FACT\",\"text\":\"Marin Tao leads the conversation (25 mentions); Uptown moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-2d706c97794d\"},{\"t\":\"FACT\",\"text\":\"Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-d7b022dc0c27\"},{\"t\":\"FACT\",\"text\":\"Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-2fab856fb7b6\"},{\"t\":\"FACT\",\"text\":\"Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-16889ed63f66\"},{\"t\":\"FACT\",\"text\":\"Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-c4082aab131d\"},{\"t\":\"FACT\",\"text\":\"Oakland Native MVP Davis (Sports) — new on the culture record C108\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C108\",\"id\":\"F-69371833824b\"},{\"t\":\"FACT\",\"text\":\"Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108\",\"id\":\"F-09177454b07b\"},{\"t\":\"FACT\",\"text\":\"Dank Abara — Waiter — San Antonio\",\"src\":\"Simulation_Ledger profile for POP-00796\",\"id\":\"F-041b4819c814\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00796",
+        "name": "Dank Abara",
+        "role": "Waiter",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "As a resident of San Antonio, what have you seen, felt, or understood about \"The impact of Marin Tao's rising fame on Oakland's cultural scene\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "San Antonio",
+        "focus": "The impact of Marin Tao's rising fame on Oakland's cultural scene",
+        "src": "output/beats/Cultural_Ledger.jsonl @C108"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Dank Abara — Waiter — San Antonio",
+        "evidence": [],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C108",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-78217e633afa"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-2d706c97794d"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-d7b022dc0c27"
+        },
+        {
+          "t": "FACT",
+          "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-2fab856fb7b6"
+        },
+        {
+          "t": "FACT",
+          "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 88",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-16889ed63f66"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-c4082aab131d"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Native MVP Davis (Sports) — new on the culture record C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C108",
+          "id": "F-69371833824b"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C107: Uptown +61 people, Downtown +60 people, Jack London +59 people, KONO +58 people, Baylight District +58 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C108",
+          "id": "F-09177454b07b"
+        },
+        {
+          "t": "FACT",
+          "text": "Dank Abara — Waiter — San Antonio",
+          "src": "Simulation_Ledger profile for POP-00796",
+          "id": "F-041b4819c814"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

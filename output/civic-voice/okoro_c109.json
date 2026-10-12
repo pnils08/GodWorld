@@ -1,0 +1,28 @@
+{
+  "office": "okoro",
+  "cycle": 109,
+  "speaker": "Brenda Okoro",
+  "cascadeSummary": "Authorized month-eight disbursement review for West Oakland Stabilization Fund, confirming 47 checks totaling $4.2M disbursed since C84. Directed acceleration of Downtown outreach based on storefront vacancy patterns. Credited West Oakland's stability to long-term residents and targeted Fund disbursements rather than short-term interventions.",
+  "statements": [
+    {
+      "statementId": "STMT-109-okoro-001",
+      "type": "operational_status",
+      "topic": "West Oakland Stabilization Fund disbursement",
+      "initiative": "INIT-001",
+      "decision": "Authorize month-eight disbursement review and expand Downtown outreach capacity",
+      "quote": "Forty-seven checks kept families in place since C84—that's stabilization working as designed. Downtown's vacancies tell us where to accelerate next.",
+      "fullStatement": "The month-eight disbursement review confirms the West Oakland Stabilization Fund is operating as chartered—47 checks totaling approximately $4.2M disbursed since C84 to the long-tenure residents the Fund exists to protect. Downtown's storefront patterns show need moving; we're reallocating two outreach teams there this cycle because stabilization funding must follow the evidence, not the headlines.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-109-okoro-002",
+      "type": "field_observation",
+      "topic": "District crisis and credit",
+      "initiative": null,
+      "decision": "Attribute West Oakland's stability to residents and Fund targeting rather than external interventions",
+      "quote": "West Oakland's resilience belongs to the people who held their ground—and the Fund that recognized their tenure matters.",
+      "fullStatement": "West Oakland's positive indicators this cycle reflect what happens when stabilization targets the right cohort—long-term residents who built the neighborhood's character. The Fund's disciplined scope recognized that protecting this group sustains community continuity. Credit belongs to them, not to short-term programs. As for Dimond—low crime doesn't mean no concerns. We're reviewing economic signals there for next cycle's adjustment.",
+      "trackerUpdates": {}
+    }
+  ]
+}

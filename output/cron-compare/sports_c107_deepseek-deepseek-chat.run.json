@@ -1,0 +1,21 @@
+{
+  "desk": "sports",
+  "cycle": "107",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "gateModel": "sonnet",
+  "disposition": "flagged",
+  "rheaPass": false,
+  "rheaFlagCount": 1,
+  "rheaHighSeverity": 0,
+  "scorecard": {
+    "reporterVoice": true,
+    "factsCorrect": true,
+    "hallucinationCount": 0,
+    "wordCount": 489,
+    "apiCostUsd": 0.0106
+  },
+  "gateCostUsd": 0,
+  "draft": "output/cron-compare/flagged/sports_c107_deepseek-deepseek-chat.md",
+  "ranAt": "2026-09-16T04:23:02.586Z"
+}

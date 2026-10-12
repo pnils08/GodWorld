@@ -1,0 +1,391 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "109",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00016",
+      "name": "Simon Leary",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The A's record is 1-0.",
+      "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+      "creativeBrief": {
+        "kind": "sports-long-view",
+        "pulseClass": "role-change-under-continuity",
+        "bagModes": [
+          "2 Keystone Player",
+          "4 Load-Bearing Continuity"
+        ],
+        "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+        "anchorFacts": [
+          "The A's record is 1-0.",
+          "The A's have won 2 straight."
+        ],
+        "missing": [
+          "why the role change was made",
+          "historical comparison or franchise precedent",
+          "organizational intention or future plan",
+          "citywide, clubhouse, or fan interpretation"
+        ],
+        "sceneRule": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts.",
+        "sourcePointers": [
+          "output/world_summary_c109.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/SIMON_LONGVIEW_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "long-view-signal",
+      "hood": "Jack London",
+      "score": null,
+      "src": "world_summary_c109.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | game-result | (playoffs) | Arturo Ramos, Danny Horn, Mark Aitken",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Travis Coles, Eric Taveras, Desmond Morton",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Pablo Almanzar, Ernesto Quintero, Jose Colon",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | AJ Dybantsa, Wendell Carter Jr",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Wilson Shepard, Austin Reaves, Dillon Brooks",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00025",
+          "name": "Arturo Ramos",
+          "profile": "Arturo Ramos — Starting Pitcher, Oakland A's — Laurel",
+          "why": "feed-names",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Laurel"
+        },
+        {
+          "pop": "POP-00022",
+          "name": "Danny Horn",
+          "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+          "why": "feed-names",
+          "role": "Center Fielder, Oakland A's - Best player in the MLB",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00003",
+          "name": "Mark Aitken",
+          "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+          "why": "feed-names",
+          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "hood": "Jack London"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-912baafccba1"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's record is 1-0.",
+        "src": "world_summary_c109.md ## Sports",
+        "id": "F-21b8daa6319b"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's have won 2 straight.",
+        "src": "world_summary_c109.md ## Sports",
+        "id": "F-a73d2457e8c5"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The A's record is 1-0.",
+      "label": "The A's record is 1-0.",
+      "hookLine": "The A's record is 1-0.",
+      "kind": "long-view-signal",
+      "hood": "Jack London",
+      "popids": [
+        "POP-00025",
+        "POP-00022",
+        "POP-00003"
+      ],
+      "citizens": [
+        "Arturo Ramos (POP-00025)",
+        "Danny Horn (POP-00022)",
+        "Mark Aitken (POP-00003)"
+      ],
+      "ref": "world_summary_c109.md ## Sports",
+      "cycle": 109
+    },
+    "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": {
+    "pulse": {
+      "className": "role-change-under-continuity",
+      "score": 56,
+      "label": "The A's record is 1-0."
+    },
+    "prewrite": {
+      "bagModes": [
+        {
+          "id": 2,
+          "name": "Keystone Player"
+        },
+        {
+          "id": 4,
+          "name": "Load-Bearing Continuity"
+        }
+      ],
+      "anchorFacts": [
+        "The A's record is 1-0.",
+        "The A's have won 2 straight."
+      ],
+      "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "missing": [
+        "why the role change was made",
+        "historical comparison or franchise precedent",
+        "organizational intention or future plan",
+        "citywide, clubhouse, or fan interpretation"
+      ],
+      "hooks": []
+    },
+    "players": [
+      {
+        "name": "Arturo Ramos",
+        "popid": "POP-00025",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Laurel",
+        "why": "feed-names"
+      },
+      {
+        "name": "Danny Horn",
+        "popid": "POP-00022",
+        "role": "Center Fielder, Oakland A's - Best player in the MLB",
+        "neighborhood": "Temescal",
+        "why": "feed-names"
+      },
+      {
+        "name": "Mark Aitken",
+        "popid": "POP-00003",
+        "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+    },
+    "candidates": [
+      {
+        "score": 72,
+        "cycle": 109,
+        "team": "A's",
+        "label": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough."
+      },
+      {
+        "score": 56,
+        "cycle": 109,
+        "team": "A's",
+        "label": "Arturo Ramos does enough, Danny Horn shows some life, Frank Reyna doesnt make an out."
+      },
+      {
+        "score": 56,
+        "cycle": 109,
+        "team": "A's",
+        "label": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense."
+      },
+      {
+        "score": 54,
+        "cycle": 108,
+        "team": "A's",
+        "label": "Through 3 games the A's lead the Twins 3-0. Game 1 As (6) Twins (2), Game 2 As (3) Twins (2), Game 3 As (9) Twins (6)."
+      },
+      {
+        "score": 54,
+        "cycle": 108,
+        "team": "A's",
+        "label": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero"
+      },
+      {
+        "score": 54,
+        "cycle": 107,
+        "team": "A's",
+        "label": "A's take game 3 vs Yankees, A's 8 vs Yankees 4"
+      }
+    ]
+  },
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "text": "I'm looking into the role change within the A's, focusing on how it fits into their current record and the continuity of the team. The fact that they've won two straight games suggests a certain stability, but the role change introduces an element of adaptation. I want to explore how this change supports the team's structure without making assumptions about its historical significance or organizational intent.",
+    "plan": {
+      "chase": "I'm looking into the role change within the A's, focusing on how it fits into their current record and the continuity of the team. The fact that they've won two straight games suggests a certain stability, but the role change introduces an element of adaptation. I want to explore how this change supports the team's structure without making assumptions about its historical significance or organizational intent.",
+      "focus": "The role change inside the A's and its impact on the team's continuity.",
+      "why": "To understand how a role change can support a team's structure without establishing franchise history or organizational intent.",
+      "checks": [
+        "Is the role change a response to specific performance metrics?",
+        "How does the role change affect the team's dynamics?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00025",
+          "question": "How does Arturo Ramos view his role change in the context of the team's current record?",
+          "basis": "As a starting pitcher, Ramos's perspective on his role change could provide insight into the team's continuity."
+        },
+        {
+          "pop": "POP-00022",
+          "question": "How does Danny Horn perceive the role change's impact on the team's performance?",
+          "basis": "As the best player in the MLB, Horn's view could highlight the role change's effect on team dynamics."
+        },
+        {
+          "pop": "POP-00003",
+          "question": "How does Mark Aitken, as a player rep and community liaison, interpret the role change's significance?",
+          "basis": "Aitken's role within the team and community could offer a broader perspective on the role change."
+        }
+      ],
+      "interpretation": "The role change within the A's can be seen as a structural adjustment that supports the team's continuity, rather than a significant shift in franchise history or organizational intent.",
+      "unverifiedLead": [
+        "Is the role change a strategic move to maintain the team's winning streak?",
+        "How does the role change affect the team's overall strategy?"
+      ],
+      "closeQuestion": "What does the role change reveal about the A's approach to maintaining their current record?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | game-result | (playoffs) | Arturo Ramos, Danny Horn, Mark Aitken",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00025",
+        "POP-00022",
+        "POP-00003"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Travis Coles, Eric Taveras, Desmond Morton",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533",
+        "POP-00597",
+        "POP-00051"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Pablo Almanzar, Ernesto Quintero, Jose Colon",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01078",
+        "POP-00050",
+        "POP-00599"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | AJ Dybantsa, Wendell Carter Jr",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01024",
+        "POP-01028"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Wilson Shepard, Austin Reaves, Dillon Brooks",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-01027",
+        "POP-01079"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "ranAt": "2026-10-01T11:15:54.043Z"
+}

@@ -1,0 +1,20 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 109,
+  "primaryVoice": "Ramos (baylight_authority-001)",
+  "consolidatedFrom": [
+    "STMT-109-baylight_authority-001 (Ramos — Baylight District Phase II Mobilization)",
+    "STMT-109-baylight_authority-002 (Ramos — Community Impact Mitigation)",
+    "STMT-109-council_d2-001 (Tran D2 — Baylight District Phase II Site Remediation)",
+    "STMT-109-council_d6-002 (Crane D6 — Baylight District Phase II Site Remediation Oversight)",
+    "STMT-109-mayor_open-006 (Mayor agenda — Baylight District Phase II Site Remediation — Progress Update)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "ImplementationPhase": "construction-active",
+    "MilestoneNotes": "C109: Phase II remediation commenced with independent oversight",
+    "NextScheduledAction": "First soil test results verification",
+    "NextActionCycle": 110
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "draft": "output/cron-compare/undocked-digest_c109_nia-rook-weekly_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1017a3bef202b7df5fa024e885da2a3c56159774ad8a2b89dc8fcad8923d0873",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Undocked weekly digest draft cleanly verifies against ledger citizens and profile constraints with zero high-severity flags.",
+  "review": {
+    "profileId": "nia-rook-undocked-weekly-digest-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-WEEKLY-1",
+    "manifestId": "AM-9370b087ec57",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "143",
+          "14",
+          "5"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Clarissa Dane",
+      "Jackson Sift",
+      "Otis Redd",
+      "Priya Narang"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0091,
+  "durationMs": 5602,
+  "parseError": false,
+  "ranAt": "2026-10-03T15:15:18.249Z"
+}

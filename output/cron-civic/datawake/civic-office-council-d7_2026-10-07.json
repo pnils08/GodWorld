@@ -1,0 +1,23 @@
+{
+  "office": "council_d7",
+  "agentDir": "civic-office-council-d7",
+  "holder": "Warren Ashford",
+  "popid": "POP-00504",
+  "title": "City Council District 7",
+  "date": "2026-10-07",
+  "cycle": 110,
+  "model": "google/gemini-3.7-flash",
+  "statement": "The first quarter utilization review for the Temescal Community Health Center must anchor directly to line-item audit standards, tracking intake efficiency against the 102 sick residents in Temescal, 110 in Rockridge, and 18 in KONO. Operational status is a baseline, not an achievement; District 7 will audit every service delivery metric and verify that the remaining $17,653,846.15 allocation produces measurable recovery across our corridors.",
+  "moves": [
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-005"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "INIT-005 first quarter utilization review audited against 102 sick residents in Temescal",
+  "ranAt": "2026-10-07T10:45:15.646Z",
+  "fellBackFrom": null
+}

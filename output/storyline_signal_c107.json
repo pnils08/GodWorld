@@ -1,0 +1,506 @@
+{
+  "cycle": "107",
+  "signals": [
+    {
+      "slug": "west-oakland-elio-perez-initiative",
+      "advanced": 1,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+        "civic_c107_carmen-delaine_packet-v2_arc"
+      ],
+      "hoods": [
+        "West Oakland"
+      ],
+      "citizens": [
+        "POP-00201",
+        "POP-00722",
+        "POP-00794",
+        "POP-00961"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "chinatown-yu-zen-beat-health",
+      "advanced": 1,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c107_lila-mezran_packet-v2_deepseek-deepseek-chat",
+        "civic_c107_lila-mezran_packet-v2_arc"
+      ],
+      "hoods": [
+        "Chinatown"
+      ],
+      "citizens": [
+        "POP-00194",
+        "POP-00449"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "city-eleanor-rivera-beat-transit",
+      "advanced": 1,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c107_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+        "civic_c107_trevor-shimizu_packet-v2_arc"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00218",
+        "POP-00280",
+        "POP-00338",
+        "POP-00617"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "downtown-tao-lee-beat-faith",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c107_elliot-graye_packet-v2_deepseek-deepseek-chat",
+        "culture_c107_elliot-graye_packet-v2_arc"
+      ],
+      "hoods": [
+        "Downtown"
+      ],
+      "citizens": [
+        "POP-00764",
+        "POP-00180",
+        "POP-00753"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "eastlake-desmond-morton-win-streak",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c107_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+        "sports_c107_p-slayer_packet-v2_arc"
+      ],
+      "hoods": [
+        "Eastlake"
+      ],
+      "citizens": [
+        "POP-00533",
+        "POP-00052",
+        "POP-00598",
+        "POP-00051"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "downtown-jessie-hess-beat-oaks-beat",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c107_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+        "sports_c107_selena-grant_packet-v2_arc"
+      ],
+      "hoods": [
+        "Downtown"
+      ],
+      "citizens": [
+        "POP-00212",
+        "POP-00224"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "downtown-wilson-shepard-beat-oaks-ground",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c107_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+        "sports_c107_talia-finch_packet-v2_arc"
+      ],
+      "hoods": [
+        "Downtown"
+      ],
+      "citizens": [
+        "POP-01022",
+        "POP-01023",
+        "POP-00212",
+        "POP-00224"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "eastlake-travis-coles-sideline-signal",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c107_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+        "sports_c107_tanya-cruz_packet-v2_arc"
+      ],
+      "hoods": [
+        "Eastlake"
+      ],
+      "citizens": [
+        "POP-00533",
+        "POP-00598",
+        "POP-00051",
+        "POP-00052"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "temescal-ariana-reyes-story-signal",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "business_c107_business-desk_packet-v2_deepseek-deepseek-chat"
+      ],
+      "hoods": [
+        "Temescal"
+      ],
+      "citizens": [
+        "POP-00133",
+        "POP-00347",
+        "POP-00781",
+        "POP-00792"
+      ],
+      "desks": [
+        "business"
+      ]
+    },
+    {
+      "slug": "rockridge-mei-wong-beat-schools",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c107_angela-reyes_packet-v2_deepseek-deepseek-chat"
+      ],
+      "hoods": [
+        "KONO"
+      ],
+      "citizens": [
+        "POP-01036"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "fruitvale-clarissa-dane-undocked",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c107_luis-navarro_packet-v2_anthropic-claude-sonnet-5"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00198"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "temescal-sonia-parikh-anomaly",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c107_noah-tan_packet-v2_deepseek-deepseek-chat"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00449",
+        "POP-00195",
+        "POP-00170"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "baylight-district-vinnie-keane-prospect-callup",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat"
+      ],
+      "hoods": [
+        "Fruitvale"
+      ],
+      "citizens": [
+        "POP-00033",
+        "POP-00597",
+        "POP-00198",
+        "POP-00644"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "temescal-ariana-reyes-hood-businesses",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "business_c107_business-desk_packet-v2_arc"
+      ],
+      "hoods": [
+        "Temescal"
+      ],
+      "citizens": [
+        "POP-00133",
+        "POP-00781",
+        "POP-00347"
+      ],
+      "desks": [
+        "business"
+      ]
+    },
+    {
+      "slug": "kono-mei-wong-beat-schools",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c107_angela-reyes_packet-v2_arc"
+      ],
+      "hoods": [
+        "KONO"
+      ],
+      "citizens": [
+        "POP-01036"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "chinatown-tariq-harris-anomaly",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c107_freelance-firebrand_packet-v2_arc"
+      ],
+      "hoods": [
+        "Chinatown"
+      ],
+      "citizens": [
+        "POP-01112",
+        "POP-00142",
+        "POP-00214"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "city-rick-walker-anomaly",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c107_luis-navarro_packet-v2_arc"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00198"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "city-teri-mitchell-beat-weather",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c107_noah-tan_packet-v2_arc"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00449",
+        "POP-00195",
+        "POP-00170"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "downtown-jessie-hess-beat-safety",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c107_rachel-torres_packet-v2_arc"
+      ],
+      "hoods": [
+        "Downtown"
+      ],
+      "citizens": [
+        "POP-00212"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "east-oakland-marcus-whitfield-beat-neighborhood",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c107_maria-keen_packet-v2_arc"
+      ],
+      "hoods": [
+        "East Oakland"
+      ],
+      "citizens": [
+        "POP-00532",
+        "POP-01047",
+        "POP-01055",
+        "POP-00119"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "rockridge-mimmie-carlisle-hood-kitchens",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c107_mason-ortega_packet-v2_arc"
+      ],
+      "hoods": [
+        "Rockridge"
+      ],
+      "citizens": [
+        "POP-00682",
+        "POP-00721",
+        "POP-00905",
+        "POP-00210"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "fruitvale-john-ellis-sports-analytics",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c107_anthony-raines_packet-v2_arc"
+      ],
+      "hoods": [
+        "Fruitvale"
+      ],
+      "citizens": [
+        "POP-00033",
+        "POP-00597",
+        "POP-00198",
+        "POP-00644"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "glenview-desmond-morton-long-view-signal",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c107_simon-leary_packet-v2_arc"
+      ],
+      "hoods": [
+        "Glenview"
+      ],
+      "citizens": [
+        "POP-00051",
+        "POP-00003",
+        "POP-01087",
+        "POP-01089"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "fruitvale-martin-richards-undocked",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "undocked_c107_nia-rook_packet-v2_arc"
+      ],
+      "hoods": [
+        "Fruitvale"
+      ],
+      "citizens": [
+        "POP-00031",
+        "POP-00644",
+        "POP-00744"
+      ],
+      "desks": [
+        "undocked"
+      ]
+    }
+  ]
+}

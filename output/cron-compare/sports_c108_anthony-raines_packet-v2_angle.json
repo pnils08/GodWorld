@@ -1,0 +1,500 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "108",
+  "persona": "anthony-raines",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00017",
+      "name": "Anthony Raines",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The season line (.190AVG) has to carry the claim before the narrative does: World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+      "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "sports-analytics",
+        "pulseClass": "award-board",
+        "bagTools": [
+          "1 Box-Card Read",
+          "7 Is-It-Real (ledger PANDAS)"
+        ],
+        "claim": "The season line (.190AVG) has to carry the claim before the narrative does: World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+        "lineFacts": [
+          "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+          "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+          "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+          "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+          "Feed line: Vladimir Gonzalez/35AB/4HR/8RBI/.286AVG",
+          "Feed line: Ernesto Quintero/37AB/3HR/6RBI/.324AVG"
+        ],
+        "missing": [
+          "x-stats / barrel% / launch angle / OAA not on feed",
+          "contracts or salaries not printed on this feed row",
+          "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)",
+          "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies"
+        ],
+        "sceneRule": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers.",
+        "sourcePointers": [
+          "output/world_summary_c108.md ## Sports",
+          "docs/media/ANTHONY_ANALYSIS_BAG.md",
+          "scripts/sportsSubstrate.js",
+          "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 4"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sports-analytics",
+      "hood": "Rockridge",
+      "score": null,
+      "src": "world_summary_c108.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | game-result | (playoffs) | Vladimir Gonzalez, Darrin Davis, Isley Kelley, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Pablo Almanzar, Eric Taveras, John Ellis",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (playoffs) | Eric Taveras",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | season-state | (playoffs) | Mike Paulson, Deacon Seymour, Arturo Ramos, Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00527",
+          "name": "Mike Paulson",
+          "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks — Jack London",
+          "why": "feed-names",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "hood": "Jack London"
+        },
+        {
+          "pop": "POP-00528",
+          "name": "Deacon Seymour",
+          "profile": "Deacon Seymour — Manager, Oakland A's — Lake Merritt",
+          "why": "feed-names",
+          "role": "Manager, Oakland A's",
+          "hood": "Lake Merritt"
+        },
+        {
+          "pop": "POP-00025",
+          "name": "Arturo Ramos",
+          "profile": "Arturo Ramos — Starting Pitcher, Oakland A's — Laurel",
+          "why": "feed-names",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Laurel"
+        },
+        {
+          "pop": "POP-00022",
+          "name": "Danny Horn",
+          "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+          "why": "feed-names",
+          "role": "Center Fielder, Oakland A's - Best player in the MLB",
+          "hood": "Temescal"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-78217e633afa"
+      },
+      {
+        "t": "FACT",
+        "text": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+        "src": "world_summary_c108.md ## Sports",
+        "id": "F-c8c06b27c600"
+      },
+      {
+        "t": "FACT",
+        "text": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+        "src": "world_summary_c108.md ## Sports",
+        "id": "F-d2d43282eb21"
+      },
+      {
+        "t": "FACT",
+        "text": "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+        "src": "world_summary_c108.md ## Sports",
+        "id": "F-98134f64c28d"
+      },
+      {
+        "t": "FACT",
+        "text": "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+        "src": "world_summary_c108.md ## Sports",
+        "id": "F-dd826c22d8c0"
+      },
+      {
+        "t": "FACT",
+        "text": "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+        "src": "world_summary_c108.md ## Sports",
+        "id": "F-c4545b578d5f"
+      },
+      {
+        "t": "FACT",
+        "text": "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+        "src": "world_summary_c108.md ## Sports",
+        "id": "F-ac7eeea9e9a7"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017"
+  },
+  "assignment": {
+    "story": {
+      "kind": "sports-analytics",
+      "angle": "The season line (.190AVG) has to carry the claim before the narrative does: World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+      "label": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+      "hookLine": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+      "hood": "Rockridge",
+      "pulseClass": "award-board",
+      "team": "A's",
+      "eventKind": "season-state",
+      "citizens": [
+        "Mike Paulson (POP-00527)",
+        "Deacon Seymour (POP-00528)",
+        "Arturo Ramos (POP-00025)",
+        "Danny Horn (POP-00022)"
+      ],
+      "popids": [
+        "POP-00527",
+        "POP-00528",
+        "POP-00025",
+        "POP-00022"
+      ],
+      "ref": "world_summary_c108.md ## Sports",
+      "cycle": 108
+    },
+    "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": {
+    "pulse": {
+      "className": "award-board",
+      "score": 77,
+      "label": "A's · season-state — World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Er",
+      "team": "A's",
+      "eventKind": "season-state",
+      "seasonType": "playoffs",
+      "storyAngle": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+      "hasStats": true,
+      "record": "7-2",
+      "streak": "W1",
+      "foilNumber": ".190AVG",
+      "feedCycle": 108
+    },
+    "bag": {
+      "tools": [
+        {
+          "id": 1,
+          "name": "Box-Card Read"
+        },
+        {
+          "id": 7,
+          "name": "Is-It-Real (ledger PANDAS)"
+        }
+      ],
+      "claim": "The season line (.190AVG) has to carry the claim before the narrative does: World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+      "foilNumber": ".190AVG"
+    },
+    "prewrite": {
+      "reporter": "Anthony Raines",
+      "bagTools": [
+        {
+          "id": 1,
+          "name": "Box-Card Read"
+        },
+        {
+          "id": 7,
+          "name": "Is-It-Real (ledger PANDAS)"
+        }
+      ],
+      "lineFacts": [
+        "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+        "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+        "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+        "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG",
+        "Feed line: Vladimir Gonzalez/35AB/4HR/8RBI/.286AVG",
+        "Feed line: Ernesto Quintero/37AB/3HR/6RBI/.324AVG"
+      ],
+      "dossierFacts": [
+        "NONE — offline slice; use packet TrueSource only if wake supplies"
+      ],
+      "feedFacts": [
+        "StoryAngle: World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+        "Notes: The table is set for the World Series as The A's will play the Phillies and the A's will have home field advantage. Mike Paulson spoke on how special the season has been and chasing a 7th championship",
+        "Record/Streak: 7-2 / W1"
+      ],
+      "claim": "The season line (.190AVG) has to carry the claim before the narrative does: World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+      "missing": [
+        "x-stats / barrel% / launch angle / OAA not on feed",
+        "contracts or salaries not printed on this feed row",
+        "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)",
+        "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies"
+      ],
+      "foilNumber": ".190AVG",
+      "anchorFacts": [
+        "Feed line: Arturo Ramos/14IP/1-0/6SO/1.93ERA",
+        "Feed line: Travis Coles/12.1IP/1-0/11SO/2.92ERA",
+        "Feed line: Danny Horn/42AB/0HR/3RBI/.190AVG",
+        "Feed line: Eric Taveras/39AB/4HR/5RBI/.359AVG"
+      ],
+      "hooks": []
+    },
+    "friction": {
+      "a": "Feed present fact: World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero",
+      "b": "Soft FO language or bleacher heat that skips the line",
+      "frame": "Evaluate fit and process with numbers — one claim, third person."
+    },
+    "players": [
+      {
+        "name": "Mike Paulson",
+        "popid": "POP-00527",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      },
+      {
+        "name": "Deacon Seymour",
+        "popid": "POP-00528",
+        "role": "Manager, Oakland A's",
+        "neighborhood": "Lake Merritt",
+        "why": "feed-names"
+      },
+      {
+        "name": "Arturo Ramos",
+        "popid": "POP-00025",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Laurel",
+        "why": "feed-names"
+      },
+      {
+        "name": "Danny Horn",
+        "popid": "POP-00022",
+        "role": "Center Fielder, Oakland A's - Best player in the MLB",
+        "neighborhood": "Temescal",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Rockridge",
+      "record": "7-2",
+      "streak": "W1",
+      "colorRoom": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers."
+    },
+    "candidates": [
+      {
+        "score": 77,
+        "cycle": 108,
+        "team": "A's",
+        "primary": "award-board",
+        "hasStats": true,
+        "angle": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so f"
+      },
+      {
+        "score": 75,
+        "cycle": 108,
+        "team": "A's",
+        "primary": "line-card",
+        "hasStats": true,
+        "angle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB "
+      },
+      {
+        "score": 72,
+        "cycle": 108,
+        "team": "A's",
+        "primary": "award-board",
+        "hasStats": true,
+        "angle": "Eric Taveras win Post Season MVP"
+      },
+      {
+        "score": 70,
+        "cycle": 106,
+        "team": "A's",
+        "primary": "roster-architecture",
+        "hasStats": true,
+        "angle": "Refelecting on the players traded this past season"
+      },
+      {
+        "score": 65,
+        "cycle": 108,
+        "team": "A's",
+        "primary": "line-card",
+        "hasStats": true,
+        "angle": "Through 3 games the A's lead the Twins 3-0. Game 1 As (6) Twins (2), Game 2 As (3) Twins (2), Game 3"
+      },
+      {
+        "score": 65,
+        "cycle": 108,
+        "team": "Oaks",
+        "primary": "line-card",
+        "hasStats": true,
+        "angle": "The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks."
+      }
+    ]
+  },
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "text": "The World Series is set, A's vs Phillies, with Arturo Ramos taking the mound in Game 1. The offensive stars so far this playoffs—Eric Taveras, Vladimir Gonzalez, Ernesto Quintero—have been carrying the team. But Danny Horn's .190AVG raises questions about his contribution. I need to dig into whether his slump is a temporary blip or a deeper issue that could affect the Series.",
+    "plan": {
+      "chase": "The World Series is set, A's vs Phillies, with Arturo Ramos taking the mound in Game 1. The offensive stars so far this playoffs—Eric Taveras, Vladimir Gonzalez, Ernesto Quintero—have been carrying the team. But Danny Horn's .190AVG raises questions about his contribution. I need to dig into whether his slump is a temporary blip or a deeper issue that could affect the Series.",
+      "focus": "Danny Horn's performance and its impact on the A's World Series chances.",
+      "why": "Horn's .190AVG stands out against the strong performances of Taveras, Gonzalez, and Quintero. Understanding his slump is crucial to evaluating the A's offensive balance.",
+      "checks": [
+        "Is Danny Horn's .190AVG a recent trend or a season-long issue?",
+        "How does Horn's performance compare to his career averages?",
+        "What adjustments, if any, has Horn made to address his slump?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00022",
+          "question": "What has been the biggest challenge for you at the plate this postseason?",
+          "basis": "feed-names"
+        },
+        {
+          "pop": "POP-00528",
+          "question": "How are you managing Danny Horn's slump heading into the World Series?",
+          "basis": "feed-names"
+        }
+      ],
+      "interpretation": "Horn's struggles could be a critical vulnerability for the A's, especially against a Phillies team known for their pitching depth.",
+      "unverifiedLead": [
+        "Is there a mechanical issue with Horn's swing?",
+        "Could fatigue be a factor in Horn's performance?"
+      ],
+      "closeQuestion": "Can the A's afford to carry Horn's slump into the World Series, or will they need to make lineup adjustments?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | game-result | (playoffs) | Vladimir Gonzalez, Darrin Davis, Isley Kelley, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598",
+        "POP-00021",
+        "POP-00019",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Pablo Almanzar, Eric Taveras, John Ellis",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01078",
+        "POP-00597",
+        "POP-00033"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (playoffs) | Eric Taveras",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00597"
+      ]
+    },
+    {
+      "label": "A's | season-state | (playoffs) | Mike Paulson, Deacon Seymour, Arturo Ramos, Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527",
+        "POP-00528",
+        "POP-00025",
+        "POP-00022"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (preseason) | Wilson Shepard, Adash Stanley, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 108; rendered: world_summary_c108.md \"## Sports\" C108 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-01023",
+        "POP-01024"
+      ]
+    }
+  ],
+  "laneEntries": 10,
+  "ranAt": "2026-09-21T11:17:15.692Z"
+}

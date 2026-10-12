@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "107",
+  "desk": "civic",
+  "persona": "carmen-delaine",
+  "storyline": {
+    "slug": "west-oakland-elio-perez-initiative",
+    "verb": "opened"
+  },
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I've heard folks at the diner talking about the stabilization fund, but honestly, it's hard to tell where that money's actually going—I haven't seen any changes on my block or heard from neighbors who've gotten help."
+    },
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "I’ve heard folks talking about the funds coming in, but it’s hard to tell who’s really getting helped—it feels like whispers more than clear answers."
+    },
+    {
+      "pop": "POP-00794",
+      "name": "Irene Fay",
+      "quote": "I’ve heard people talking about the funds, but honestly, it’s hard to tell where the money’s going or if it’s even reaching folks who need it most."
+    },
+    {
+      "pop": "POP-00961",
+      "name": "Darius Clark",
+      "quote": "I've heard about the West Oakland Stabilization Fund, and I think it's important that the money gets to the people and businesses who really need it, but I haven't seen much detail on how they're tracking it."
+    }
+  ],
+  "claim": "I've heard folks at the diner talking about the stabilization fund, but honestly, it's hard to tell where that money's actually going—I haven't seen any changes on my block or heard from neighbors who've gotten help.",
+  "src": "citizenVoice PRESS c107",
+  "ranAt": "2026-09-14T18:16:15.704Z"
+}

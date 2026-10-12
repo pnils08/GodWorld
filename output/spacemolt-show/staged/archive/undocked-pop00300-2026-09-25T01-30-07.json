@@ -1,0 +1,248 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00300-2026-09-25T01-30-07",
+  "popid": "POP-00300",
+  "holder": null,
+  "session": "undocked-pop00300",
+  "window": {
+    "startedAt": "2026-09-25T01:30:07.358Z",
+    "endedAt": "2026-09-25T01:40:11.311Z"
+  },
+  "runner": {
+    "turns": 51,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 2,
+    "estCostUsd": 0.0737,
+    "tokensIn": 515105,
+    "tokensOut": 5520,
+    "log": "output/spacemolt-show/episodes/undocked-pop00300-2026-09-25T01-30-07.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-09-25T01:40:12.148Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 4,
+      "basis": [
+        {
+          "id": 156024622,
+          "event_type": "trading.exchange_fill",
+          "n": 3
+        },
+        {
+          "id": 156024398,
+          "event_type": "trading.exchange_fill",
+          "n": 40
+        },
+        {
+          "id": 156024243,
+          "event_type": "trading.exchange_fill",
+          "n": 54
+        },
+        {
+          "id": 156023854,
+          "event_type": "trading.exchange_fill",
+          "n": 1
+        }
+      ],
+      "value": 98
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "antimatter_containment_cell": 1
+        },
+        "sold": {
+          "antimatter_containment_cell": 1,
+          "titanium_ore": 1,
+          "nickel_ore": 1,
+          "iron_ore": 1
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 1,
+        "trading": 4,
+        "combat": 0,
+        "navigation": 0,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 156025269,
+            "created_at": "2026-09-25T01:33:56Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Antimatter Containment Cell at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "antimatter_containment_cell",
+              "resource_name": "Antimatter Containment Cell",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [
+          {
+            "id": 156024622,
+            "created_at": "2026-09-25T01:33:24Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Antimatter Containment Cell @ 3 each (3 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "antimatter_containment_cell",
+              "price": 3,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 3
+            }
+          },
+          {
+            "id": 156024398,
+            "created_at": "2026-09-25T01:33:14Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Titanium Ore @ 40 each (40 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "titanium_ore",
+              "price": 40,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 40
+            }
+          },
+          {
+            "id": 156024243,
+            "created_at": "2026-09-25T01:33:04Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Nickel Ore @ 54 each (54 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "nickel_ore",
+              "price": 54,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 54
+            }
+          },
+          {
+            "id": 156023854,
+            "created_at": "2026-09-25T01:32:43Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Iron Ore @ 1 each (1 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 1,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 1
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 156033494,
+            "created_at": "2026-09-25T01:40:11Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "BelleLopez logged in",
+            "data": {
+              "last_login_at": "2026-09-25T01:30:09Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 156020869,
+            "created_at": "2026-09-25T01:30:09Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "BelleLopez logged in",
+            "data": {
+              "last_login_at": "2026-09-22T01:40:14Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 2,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-09-25 01:34:02",
+        "text": "Tonight’s flight was steady work, just like my day job. Undocked safely, headed to the Main Belt, and mined what I could. The deposits were thin, but I brought back Titanium, Copper, Nickel, Iron, and an Antimatter Containment Cell. Sold everything for a modest profit except the Copper Ore — no buyers. Refueled the ship and docked back at Sol Central. Simple, methodical, no surprises. Just another shift in the stars."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 1,
+        "created_at": "2026-09-22 01:39:54",
+        "text": "Tonight was a quiet shift. Mined some ores—copper, titanium, nickel, and iron—but the deposits dried up fast. Had to return early to Sol Central to sell what I gathered. The ship's fueled up and ready for the next run. Just like my day job: steady, methodical, no surprises."
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "date": "2026-09-14",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    },
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Trevor Shimizu",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-09-14T11:17:21.678Z"
+}

@@ -1,0 +1,65 @@
+{
+  "draft": "output/cron-compare/culture_c107_maria-keen_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "107",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c82b91d27d0e14317b46af4af763931e19c7ca7e0d259c8de2284f41335e8b05",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Allen Temple Baptist Church’s food pantry hums with activity",
+      "issue": "Uses blocked real-world faith institution name 'Allen Temple Baptist Church' instead of canonical 'Foothill Baptist Tabernacle'",
+      "severity": "high"
+    },
+    {
+      "claim": "Masjid Al-Islam Emergency Assistance Fund operates in a similar rhythm",
+      "issue": "Uses blocked real-world faith institution name 'Masjid Al-Islam' instead of canonical 'Masjid An-Nur Oakland'",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 2,
+  "highSeverityCount": 2,
+  "summary": "Draft violates authoritative faith mappings by naming blocked real-world entities Allen Temple Baptist Church and Masjid Al-Islam.",
+  "review": {
+    "profileId": "maria-ground-v1",
+    "canonIntegrity": "fail",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "packageVersion": "MARIA-LEP2-1",
+    "manifestId": "AM-9d17d480a56e",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Jerome Pittman",
+      "Marcus Whitfield",
+      "Maria Conteras"
+    ],
+    "unverified": [
+      "Allen Temple Baptist Church",
+      "Eastside Hoopers Coalition",
+      "Hoopers Coalition",
+      "Masjid Al-Islam Emergency Assistance"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0108,
+  "durationMs": 7860,
+  "parseError": false,
+  "ranAt": "2026-09-19T17:01:54.059Z"
+}

@@ -1,0 +1,570 @@
+[
+  {
+    "pop": "POP-00767",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00767\",\"name\":\"Miriam Goldstein\",\"role\":\"Senior Pastor / Faith Leader\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Elliot Graye\",\"question\":\"What inspired the Or Hashalom Renewal Community to focus on social justice initiatives? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-faith\",\"hood\":\"Grand Lake\",\"focus\":\"Or Hashalom Renewal Community\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Miriam Goldstein — Senior Pastor / Faith Leader — Lake Merritt\",\"evidence\":[{\"id\":\"EV-e2e9406122\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\",\"text\":\"Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"8 faith events on the record since C104 · Or Hashalom Renewal Community in Grand Lake | 7 named on the record\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\",\"id\":\"F-68f5957dd5ef\"},{\"t\":\"FACT\",\"text\":\"Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\",\"id\":\"F-bb15a11b0e9d\"},{\"t\":\"FACT\",\"text\":\"Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)\",\"src\":\"output/beats/Faith_Ledger.jsonl C109 \\\"Bay Pure Land Buddhist Temple\\\"\",\"id\":\"F-61024524d215\"},{\"t\":\"FACT\",\"text\":\"Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)\",\"src\":\"output/beats/Faith_Ledger.jsonl C107 \\\"Telegraph Presbyterian Fellowship\\\"\",\"id\":\"F-7d24d6975c0b\"},{\"t\":\"FACT\",\"text\":\"Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)\",\"src\":\"output/beats/Faith_Ledger.jsonl C104 \\\"Temple Beth Or\\\"\",\"id\":\"F-2e25fe91ddff\"},{\"t\":\"FACT\",\"text\":\"Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)\",\"src\":\"output/beats/Faith_Ledger.jsonl C104 \\\"Lakeshore Unitarian Universalist Fellowship\\\"\",\"id\":\"F-fa55233aeb20\"},{\"t\":\"FACT\",\"text\":\"Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)\",\"src\":\"output/beats/Faith_Ledger.jsonl C109 \\\"Telegraph Presbyterian Fellowship\\\"\",\"id\":\"F-c6268244f8ea\"},{\"t\":\"FACT\",\"text\":\"Miriam Goldstein — Senior Pastor / Faith Leader — Lake Merritt\",\"src\":\"Simulation_Ledger profile for POP-00767\",\"id\":\"F-151abeb19f55\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00767",
+        "name": "Miriam Goldstein",
+        "role": "Senior Pastor / Faith Leader",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Elliot Graye",
+        "question": "What inspired the Or Hashalom Renewal Community to focus on social justice initiatives? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-faith",
+        "hood": "Grand Lake",
+        "focus": "Or Hashalom Renewal Community",
+        "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\""
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Miriam Goldstein — Senior Pastor / Faith Leader — Lake Merritt",
+        "evidence": [
+          {
+            "id": "EV-e2e9406122",
+            "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "8 faith events on the record since C104 · Or Hashalom Renewal Community in Grand Lake | 7 named on the record",
+          "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+          "id": "F-68f5957dd5ef"
+        },
+        {
+          "t": "FACT",
+          "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+          "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+          "id": "F-bb15a11b0e9d"
+        },
+        {
+          "t": "FACT",
+          "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+          "id": "F-61024524d215"
+        },
+        {
+          "t": "FACT",
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+          "id": "F-7d24d6975c0b"
+        },
+        {
+          "t": "FACT",
+          "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+          "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+          "id": "F-2e25fe91ddff"
+        },
+        {
+          "t": "FACT",
+          "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+          "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+          "id": "F-fa55233aeb20"
+        },
+        {
+          "t": "FACT",
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+          "id": "F-c6268244f8ea"
+        },
+        {
+          "t": "FACT",
+          "text": "Miriam Goldstein — Senior Pastor / Faith Leader — Lake Merritt",
+          "src": "Simulation_Ledger profile for POP-00767",
+          "id": "F-151abeb19f55"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00763",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00763\",\"name\":\"Kenji Tanaka\",\"role\":\"Senior Pastor / Faith Leader\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Elliot Graye\",\"question\":\"What have you seen, felt, or understood about \\\"Or Hashalom Renewal Community\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-faith\",\"hood\":\"Grand Lake\",\"focus\":\"Or Hashalom Renewal Community\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown\",\"evidence\":[{\"id\":\"EV-5f64faef09\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\",\"text\":\"Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"8 faith events on the record since C104 · Or Hashalom Renewal Community in Grand Lake | 7 named on the record\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\",\"id\":\"F-68f5957dd5ef\"},{\"t\":\"FACT\",\"text\":\"Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\",\"id\":\"F-bb15a11b0e9d\"},{\"t\":\"FACT\",\"text\":\"Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)\",\"src\":\"output/beats/Faith_Ledger.jsonl C109 \\\"Bay Pure Land Buddhist Temple\\\"\",\"id\":\"F-61024524d215\"},{\"t\":\"FACT\",\"text\":\"Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)\",\"src\":\"output/beats/Faith_Ledger.jsonl C107 \\\"Telegraph Presbyterian Fellowship\\\"\",\"id\":\"F-7d24d6975c0b\"},{\"t\":\"FACT\",\"text\":\"Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)\",\"src\":\"output/beats/Faith_Ledger.jsonl C104 \\\"Temple Beth Or\\\"\",\"id\":\"F-2e25fe91ddff\"},{\"t\":\"FACT\",\"text\":\"Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)\",\"src\":\"output/beats/Faith_Ledger.jsonl C104 \\\"Lakeshore Unitarian Universalist Fellowship\\\"\",\"id\":\"F-fa55233aeb20\"},{\"t\":\"FACT\",\"text\":\"Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)\",\"src\":\"output/beats/Faith_Ledger.jsonl C109 \\\"Telegraph Presbyterian Fellowship\\\"\",\"id\":\"F-c6268244f8ea\"},{\"t\":\"FACT\",\"text\":\"Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown\",\"src\":\"Simulation_Ledger profile for POP-00763\",\"id\":\"F-d98f55e040fe\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00763",
+        "name": "Kenji Tanaka",
+        "role": "Senior Pastor / Faith Leader",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Elliot Graye",
+        "question": "What have you seen, felt, or understood about \"Or Hashalom Renewal Community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-faith",
+        "hood": "Grand Lake",
+        "focus": "Or Hashalom Renewal Community",
+        "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\""
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+        "evidence": [
+          {
+            "id": "EV-5f64faef09",
+            "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "8 faith events on the record since C104 · Or Hashalom Renewal Community in Grand Lake | 7 named on the record",
+          "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+          "id": "F-68f5957dd5ef"
+        },
+        {
+          "t": "FACT",
+          "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+          "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+          "id": "F-bb15a11b0e9d"
+        },
+        {
+          "t": "FACT",
+          "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+          "id": "F-61024524d215"
+        },
+        {
+          "t": "FACT",
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+          "id": "F-7d24d6975c0b"
+        },
+        {
+          "t": "FACT",
+          "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+          "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+          "id": "F-2e25fe91ddff"
+        },
+        {
+          "t": "FACT",
+          "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+          "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+          "id": "F-fa55233aeb20"
+        },
+        {
+          "t": "FACT",
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+          "id": "F-c6268244f8ea"
+        },
+        {
+          "t": "FACT",
+          "text": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+          "src": "Simulation_Ledger profile for POP-00763",
+          "id": "F-d98f55e040fe"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00753",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00753\",\"name\":\"Eunice Marston\",\"role\":\"Senior Pastor / Faith Leader\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Elliot Graye\",\"question\":\"What have you seen, felt, or understood about \\\"Or Hashalom Renewal Community\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-faith\",\"hood\":\"Grand Lake\",\"focus\":\"Or Hashalom Renewal Community\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Eunice Marston — Senior Pastor / Faith Leader — Downtown\",\"evidence\":[{\"id\":\"EV-645a3135ca\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\",\"text\":\"Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"8 faith events on the record since C104 · Or Hashalom Renewal Community in Grand Lake | 7 named on the record\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\",\"id\":\"F-68f5957dd5ef\"},{\"t\":\"FACT\",\"text\":\"Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\",\"id\":\"F-bb15a11b0e9d\"},{\"t\":\"FACT\",\"text\":\"Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)\",\"src\":\"output/beats/Faith_Ledger.jsonl C109 \\\"Bay Pure Land Buddhist Temple\\\"\",\"id\":\"F-61024524d215\"},{\"t\":\"FACT\",\"text\":\"Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)\",\"src\":\"output/beats/Faith_Ledger.jsonl C107 \\\"Telegraph Presbyterian Fellowship\\\"\",\"id\":\"F-7d24d6975c0b\"},{\"t\":\"FACT\",\"text\":\"Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)\",\"src\":\"output/beats/Faith_Ledger.jsonl C104 \\\"Temple Beth Or\\\"\",\"id\":\"F-2e25fe91ddff\"},{\"t\":\"FACT\",\"text\":\"Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)\",\"src\":\"output/beats/Faith_Ledger.jsonl C104 \\\"Lakeshore Unitarian Universalist Fellowship\\\"\",\"id\":\"F-fa55233aeb20\"},{\"t\":\"FACT\",\"text\":\"Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)\",\"src\":\"output/beats/Faith_Ledger.jsonl C109 \\\"Telegraph Presbyterian Fellowship\\\"\",\"id\":\"F-c6268244f8ea\"},{\"t\":\"FACT\",\"text\":\"Eunice Marston — Senior Pastor / Faith Leader — Downtown\",\"src\":\"Simulation_Ledger profile for POP-00753\",\"id\":\"F-29275625963c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00753",
+        "name": "Eunice Marston",
+        "role": "Senior Pastor / Faith Leader",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Elliot Graye",
+        "question": "What have you seen, felt, or understood about \"Or Hashalom Renewal Community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-faith",
+        "hood": "Grand Lake",
+        "focus": "Or Hashalom Renewal Community",
+        "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\""
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "evidence": [
+          {
+            "id": "EV-645a3135ca",
+            "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "8 faith events on the record since C104 · Or Hashalom Renewal Community in Grand Lake | 7 named on the record",
+          "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+          "id": "F-68f5957dd5ef"
+        },
+        {
+          "t": "FACT",
+          "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+          "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+          "id": "F-bb15a11b0e9d"
+        },
+        {
+          "t": "FACT",
+          "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+          "id": "F-61024524d215"
+        },
+        {
+          "t": "FACT",
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+          "id": "F-7d24d6975c0b"
+        },
+        {
+          "t": "FACT",
+          "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+          "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+          "id": "F-2e25fe91ddff"
+        },
+        {
+          "t": "FACT",
+          "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+          "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+          "id": "F-fa55233aeb20"
+        },
+        {
+          "t": "FACT",
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+          "id": "F-c6268244f8ea"
+        },
+        {
+          "t": "FACT",
+          "text": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+          "src": "Simulation_Ledger profile for POP-00753",
+          "id": "F-29275625963c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00759",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00759\",\"name\":\"Naomi Sterling\",\"role\":\"Senior Pastor / Faith Leader\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Elliot Graye\",\"question\":\"What have you seen, felt, or understood about \\\"Or Hashalom Renewal Community\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-faith\",\"hood\":\"Grand Lake\",\"focus\":\"Or Hashalom Renewal Community\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Naomi Sterling — Senior Pastor / Faith Leader — Rockridge\",\"evidence\":[{\"id\":\"EV-f0617f1a30\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\",\"text\":\"Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C110\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-e491ae296bc1\"},{\"t\":\"FACT\",\"text\":\"8 faith events on the record since C104 · Or Hashalom Renewal Community in Grand Lake | 7 named on the record\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\",\"id\":\"F-68f5957dd5ef\"},{\"t\":\"FACT\",\"text\":\"Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support\",\"src\":\"output/beats/Faith_Organizations.jsonl \\\"Or Hashalom Renewal Community\\\"\",\"id\":\"F-bb15a11b0e9d\"},{\"t\":\"FACT\",\"text\":\"Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)\",\"src\":\"output/beats/Faith_Ledger.jsonl C109 \\\"Bay Pure Land Buddhist Temple\\\"\",\"id\":\"F-61024524d215\"},{\"t\":\"FACT\",\"text\":\"Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)\",\"src\":\"output/beats/Faith_Ledger.jsonl C107 \\\"Telegraph Presbyterian Fellowship\\\"\",\"id\":\"F-7d24d6975c0b\"},{\"t\":\"FACT\",\"text\":\"Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)\",\"src\":\"output/beats/Faith_Ledger.jsonl C104 \\\"Temple Beth Or\\\"\",\"id\":\"F-2e25fe91ddff\"},{\"t\":\"FACT\",\"text\":\"Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)\",\"src\":\"output/beats/Faith_Ledger.jsonl C104 \\\"Lakeshore Unitarian Universalist Fellowship\\\"\",\"id\":\"F-fa55233aeb20\"},{\"t\":\"FACT\",\"text\":\"Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)\",\"src\":\"output/beats/Faith_Ledger.jsonl C109 \\\"Telegraph Presbyterian Fellowship\\\"\",\"id\":\"F-c6268244f8ea\"},{\"t\":\"FACT\",\"text\":\"Naomi Sterling — Senior Pastor / Faith Leader — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00759\",\"id\":\"F-31f4090db03e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00759",
+        "name": "Naomi Sterling",
+        "role": "Senior Pastor / Faith Leader",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Elliot Graye",
+        "question": "What have you seen, felt, or understood about \"Or Hashalom Renewal Community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-faith",
+        "hood": "Grand Lake",
+        "focus": "Or Hashalom Renewal Community",
+        "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\""
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-f0617f1a30",
+            "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C110",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-e491ae296bc1"
+        },
+        {
+          "t": "FACT",
+          "text": "8 faith events on the record since C104 · Or Hashalom Renewal Community in Grand Lake | 7 named on the record",
+          "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+          "id": "F-68f5957dd5ef"
+        },
+        {
+          "t": "FACT",
+          "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+          "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\"",
+          "id": "F-bb15a11b0e9d"
+        },
+        {
+          "t": "FACT",
+          "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+          "id": "F-61024524d215"
+        },
+        {
+          "t": "FACT",
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+          "id": "F-7d24d6975c0b"
+        },
+        {
+          "t": "FACT",
+          "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+          "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+          "id": "F-2e25fe91ddff"
+        },
+        {
+          "t": "FACT",
+          "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+          "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+          "id": "F-fa55233aeb20"
+        },
+        {
+          "t": "FACT",
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+          "id": "F-c6268244f8ea"
+        },
+        {
+          "t": "FACT",
+          "text": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00759",
+          "id": "F-31f4090db03e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,228 @@
+diff --git a/scripts/articleContamination.js b/scripts/articleContamination.js
+index f7f35bb5..3fdb9317 100644
+--- a/scripts/articleContamination.js
++++ b/scripts/articleContamination.js
+@@ -32,7 +32,10 @@ const REAL_OAKLAND = [
+ ];
+ 
+ const REPAIR_CHROME = [
+-  { id: 'corrected-article', re: /here['’]?s the corrected article/i },
++  { id: 'corrected-article', re: /here(?:['’]?s| is) the (?:corrected|revised|repaired) (?:article|draft|piece|version|[a-z]+ section)/i },
++  // The repair pass's instruction narrated as prose ("said Walker, using the
++  // exact words from his approved statement" — business C109, staged).
++  { id: 'approved-quote-narration', re: /\b(?:his|her|their) (?:approved|authorized) (?:statement|quote|wording)\b|\bexact (?:words|wording) from (?:his|her|their)\b/i },
+   { id: 'unapproved-quotes-removed', re: /unapproved quotes removed/i },
+   { id: 'no-fabricated-speech', re: /no fabricated speech/i },
+   { id: 'packet-narration', re: /\bthe Packet does not\b/i },
+@@ -55,7 +58,12 @@ const ROOM_SOURCED_SPEECH = [
+ // the packet blob for that anomaly's own vocabulary before blocking; absent
+ // any such signal, the phrase blocks exactly as before.
+ const BLIGHT = [
+-  { id: 'decay-narrative', re: /\bdecay(?:'s|s)?\b.{0,40}\b(?:eating|metrics|epicenter|neighborhood|chinatown|west oakland)\b|\b(?:eating away at|epicenter of the city's decay)\b/i },
++  // Same class, C109 Caldera/Downtown (2026-09-30): the slice assigned "Downtown:
++  // decay [Sentiment -0.050, ...]" and two citizens answered "I haven't noticed
++  // any decay in our neighborhood" — the piece blocked on the word its own
++  // assignment handed it. Grounded only by the labeled anomaly form, not the
++  // bare word: Jax's approach text says "decay" every run.
++  { id: 'decay-narrative', re: /\bdecay(?:'s|s)?\b.{0,40}\b(?:eating|metrics|epicenter|neighborhood|chinatown|west oakland)\b|\b(?:eating away at|epicenter of the city's decay)\b/i, groundedBy: /:\s*decay\s*\[/i },
+   { id: 'real-life-struggles', re: /real-life struggles/i, groundedBy: /\bdecay\b|\banomaly\b|\bcrisis\b/i },
+   { id: 'falling-apart', re: /falling apart/i, groundedBy: /\bdecay\b|\banomaly\b/i },
+   { id: 'isnt-safe', re: /isn['’]?t safe|city isn['’]?t safe/i, groundedBy: /\bcrime\b|\bviolentcrimeindex\b|\bsafety\b|\bunsafe\b/i },
+diff --git a/scripts/articleContamination.test.js b/scripts/articleContamination.test.js
+index 5d2c09f9..3422806e 100644
+--- a/scripts/articleContamination.test.js
++++ b/scripts/articleContamination.test.js
+@@ -60,6 +60,25 @@ assert(roomTalk.findings.some(f => f.check === 'unsupplied-access' && f.issue ==
+ const chrome = scan('Here\'s the corrected article with all unapproved quotes removed:\n\nNightline was open.', { desk: 'culture' });
+ assert(chrome.findings.some(f => f.check === 'repair-chrome'));
+ 
++const chromeSection = scan('Here\'s the corrected civic section for cycle 109:\n\nThe bakery was open.', { desk: 'civic' });
++assert(chromeSection.findings.some(f => f.issue === 'corrected-article'), JSON.stringify(chromeSection.findings));
++const quoteNarration = scan('"The money is there," said Walker, using the exact words from his approved statement.', { desk: 'business' });
++assert(quoteNarration.findings.some(f => f.issue === 'approved-quote-narration'), JSON.stringify(quoteNarration.findings));
++const councilApproved = scan('The council approved statement language for the fund on the record.', { desk: 'civic' });
++assert.equal(councilApproved.findings.filter(f => f.check === 'repair-chrome').length, 0,
++  'an approved statement that is not a quote instruction passes');
++
++// C109 Caldera/Downtown: a citizen answering the assigned anomaly by its own label.
++const decayQuote = '"I haven\'t really noticed any decay in our neighborhood, to be honest," Tao said.';
++const decayGrounded = scan(decayQuote, { desk: 'civic',
++  packet: { known: [{ text: 'Downtown: decay [Sentiment -0.050, HousingPressure +1.000]' }] } });
++assert.equal(decayGrounded.findings.filter(f => f.issue === 'decay-narrative').length, 0,
++  'the labeled anomaly grounds the word: ' + JSON.stringify(decayGrounded.findings));
++const decayBare = scan(decayQuote, { desk: 'civic',
++  packet: { task: { approach: 'boomtown copy vs decay, crisis with no owner' } } });
++assert(decayBare.findings.some(f => f.issue === 'decay-narrative'),
++  'the bare word in an approach line does not ground it');
++
+ const tinas = scan([
+   '# Game day',
+   '',
+diff --git a/scripts/cron-desk-writer.js b/scripts/cron-desk-writer.js
+index 101f99fb..66fe32eb 100644
+--- a/scripts/cron-desk-writer.js
++++ b/scripts/cron-desk-writer.js
+@@ -367,8 +367,7 @@ function formatStrictSourceHygiene(nameCheck, packet) {
+ 
+ function stripRepairChrome(text) {
+   return String(text || '')
+-    .replace(/^\s*here['’]?s the corrected article[^\n]*\n+/i, '')
+-    .replace(/^\s*here is the corrected article[^\n]*\n+/i, '')
++    .replace(/^\s*here(?:['’]?s| is) the (?:corrected|revised|repaired) (?:article|draft|piece|version|[a-z]+ section)[^\n]*\n+/i, '')
+     .replace(/^\s*corrected article with all unapproved quotes removed[^\n]*\n+/i, '');
+ }
+ 
+diff --git a/scripts/cron-saturday-run.js b/scripts/cron-saturday-run.js
+index f1b9a27b..95b99bf1 100644
+--- a/scripts/cron-saturday-run.js
++++ b/scripts/cron-saturday-run.js
+@@ -98,6 +98,19 @@ function isCodeRenderedBrief(articleText) {
+   return require('./livedArticleShape').isSummaryArticle(articleText).fail;
+ }
+ 
++// The write wake scans against its packet, so a phrase grounded by the story's
++// own assignment (articleContamination `groundedBy`) stages clean; this door
++// re-scanned with no packet and would turn the same Article away. Read the
++// handoff packet the stage wrote beside it; absent or unreadable → no packet,
++// which is the strict reading.
++function stagedHandoffPacket(side) {
++  const m = /^(.*_packet-v\d+_)/.exec(path.basename(String(side && side.article || '')));
++  if (!m) return null;
++  try {
++    return JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'cron-compare', m[1] + 'packet.json'), 'utf8'));
++  } catch (_) { return null; }
++}
++
+ function verifyStagedProof(side, articleText, fallbackVerdict) {
+   if (!side || side.status !== 'staged') return { ok: false, reason: 'sidecar status is not staged' };
+   const articleSha256 = crypto.createHash('sha256').update(articleText).digest('hex');
+@@ -107,7 +120,7 @@ function verifyStagedProof(side, articleText, fallbackVerdict) {
+     const passed = proofs.some(proof => proof.pass === true);
+     return { ok: false, reason: passed ? 'Rhea pass hash does not match staged Article' : 'no exact Rhea pass proof' };
+   }
+-  const contamination = articleContamination.scan(articleText, { desk: side.desk });
++  const contamination = articleContamination.scan(articleText, { desk: side.desk, packet: stagedHandoffPacket(side) });
+   if (contamination.fail) {
+     return { ok: false, articleSha256,
+       reason: 'deterministic world-contamination blocker failed', contamination };
+diff --git a/scripts/livedExperiencePacket.js b/scripts/livedExperiencePacket.js
+index b49df735..b5781923 100644
+--- a/scripts/livedExperiencePacket.js
++++ b/scripts/livedExperiencePacket.js
+@@ -397,7 +397,8 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane
+       assignment: clean(story.angle || story.label, 500), approach: clean(approach, 900) || null,
+       ...(creativeBrief ? { creativeBrief } : {}) },
+     signal: { kind: story.kind || 'story-signal', hood: story.hood || null,
+-      score: story.stinkScore == null ? null : story.stinkScore, src },
++      score: story.stinkScore == null ? null : story.stinkScore, src,
++      ...(clean(story.team, 60) ? { team: clean(story.team, 60) } : {}) },
+     exposure: { basis: ['editor-assignment', 'desk-signal'],
+       candidates: candidates.map(c => ({ pop: c.pop, name: c.name, profile: clean(c.profile, 300),
+         why: c.why, role: c.role, hood: c.hood })) },
+@@ -485,8 +486,18 @@ function chaseReplacesAssignment(chase, input) {
+   const tokens = blob.split(/[^a-z0-9-]+/).filter(function (w) {
+     return w.replace(/-/g, '').length >= 5;
+   });
+-  if (!tokens.length) return false;
+-  const c = clean(chase).toLowerCase();
++  // The team is the one canon noun the 5-letter floor can never admit ("Oaks",
++  // "A's"), so a fan-heat chase about "the Oaks' latest loss" that names no
++  // player failed as off-assignment (P Slayer C109: 3 of 4 samples). It rides
++  // signal.team and matches as a whole word at any length; lowering the floor
++  // itself would let "with"/"from" pass anything.
++  const team = clean((input && input.signal && input.signal.team) || '').toLowerCase().replace(/’/g, "'");
++  if (!tokens.length && !team) return false;
++  const c = clean(chase).toLowerCase().replace(/’/g, "'");
++  if (team) {
++    const esc = team.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
++    if (new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])').test(c)) return false;
++  }
+   return !tokens.some(function (t) { return c.indexOf(t) >= 0; });
+ }
+ 
+@@ -498,8 +509,18 @@ function reporterChaseText(plan) {
+ }
+ 
+ function validateAngleOutput(value, input) {
+-  const out = typeof value === 'string' ? parseJsonObject(value) : value;
++  const raw = typeof value === 'string' ? parseJsonObject(value) : value;
++  const out = raw && typeof raw === 'object' && !Array.isArray(raw) ? Object.assign({}, raw) : raw;
+   const errs = [];
++  // A lead filed as one string, or left null when there is none, is the same
++  // plan in a different shape (Nia Rook C109, Sharon Okafor C108 each lost the
++  // day to it) — the W2 contract already accepts "array or one string".
++  if (out && typeof out === 'object' && !Array.isArray(out.unverifiedLead)) {
++    const lead = clean(out.unverifiedLead);
++    if (out.unverifiedLead == null || typeof out.unverifiedLead === 'string') {
++      out.unverifiedLead = lead ? [lead] : [];
++    }
++  }
+   for (const k of ['focus', 'why', 'interpretation', 'closeQuestion']) if (!clean(out && out[k])) errs.push('missing ' + k);
+   if (!clean(out && out.chase)) errs.push('missing chase');
+   else if (chaseIsJsonShaped(out.chase)) errs.push('chase is JSON-shaped');
+@@ -622,6 +643,19 @@ function questionFor(candidate, anglePlan, story) {
+   if (/council|mayor|official|director|chief/.test(role)) {
+     return 'Using only the supplied facts, what about "' + focus + '" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.';
+   }
++  // W1 makes the reporter write one question per target, and until C109 W2
++  // threw it away: every citizen of every reporter answered the stock question
++  // below, and every quote came back "I've heard folks talking about <focus>,
++  // but honestly...". The reporter's question goes to the person it was written
++  // for; the stock one stays for candidates the reporter never targeted.
++  const planned = (anglePlan && anglePlan.targets || []).find(function (t) {
++    return t && candidate && t.pop === candidate.pop;
++  });
++  const plannedQuestion = clean(planned && planned.question, 400);
++  if (plannedQuestion) {
++    return plannedQuestion + (/[?.!]$/.test(plannedQuestion) ? '' : '?') +
++      ' Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.';
++  }
+   if (candidate && candidate.hood && story.hood && candidate.hood === story.hood) {
+     return 'As a resident of ' + story.hood + ', what have you seen, felt, or understood about "' + focus + '"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.';
+   }
+diff --git a/scripts/livedExperiencePacket.test.js b/scripts/livedExperiencePacket.test.js
+index 08168d2c..3c157259 100644
+--- a/scripts/livedExperiencePacket.test.js
++++ b/scripts/livedExperiencePacket.test.js
+@@ -249,4 +249,41 @@ const differentStoryEv = p.buildReportPacket({ cycle: 999, desk: 'civic', report
+ assert.notEqual(differentStoryEv.exposure.evidence[0].id, official.exposure.evidence[0].id,
+   'evidence id is derived from pop+ref — a different story yields a different id for the same citizen');
+ 
++// C109 P Slayer: a fan-heat chase that names the team but no player is on-assignment.
++const teamStory = { ...story, label: 'The TEST-ONLY side lose yet again', angle: 'The TEST-ONLY side lose yet again',
++  hookLine: null, team: 'Oaks' };
++const teamW1 = p.buildAnglePacket({ cycle: 999, desk: 'sports', reporter: { popid: 'TEST-REPORTER', name: 'Test Reporter' },
++  story: teamStory, approach: 'Test the heat', slice: null, lane: [] });
++assert.equal(teamW1.signal.team, 'Oaks', 'the story team rides the W1 signal');
++assert.equal(w1.signal.team, undefined, 'a story with no team adds no key');
++const teamPlan = { focus: 'x', why: 'x', checks: [], targets: [], interpretation: 'x', unverifiedLead: [], closeQuestion: 'x' };
++assert.doesNotThrow(() => p.validateAngleOutput({ ...teamPlan,
++  chase: "I keep turning over the Oaks' latest night and what we asked of them." }, teamW1));
++assert.throws(() => p.validateAngleOutput({ ...teamPlan,
++  chase: 'The soaks at the car wash are the real story tonight.' }, teamW1), /replaces the assignment/,
++  'the team matches as a whole word only');
++const asW1 = JSON.parse(JSON.stringify(teamW1));
++asW1.signal.team = "A's";
++assert.doesNotThrow(() => p.validateAngleOutput({ ...teamPlan,
++  chase: 'I am still sitting with the A’s week and the weight we put on them.' }, asW1));
++
++// C109 Nia Rook / C108 Sharon Okafor: one lead as a string, or none as null, is the same plan.
++const baseLeadPlan = withChase(w1, { focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: [],
++  targets: [], interpretation: 'x', closeQuestion: 'Who owns the response?' });
++assert.deepEqual(p.validateAngleOutput({ ...baseLeadPlan, unverifiedLead: 'one loose lead' }, w1).unverifiedLead,
++  ['one loose lead']);
++assert.deepEqual(p.validateAngleOutput({ ...baseLeadPlan, unverifiedLead: null }, w1).unverifiedLead, []);
++assert.throws(() => p.validateAngleOutput({ ...baseLeadPlan, unverifiedLead: { a: 1 } }, w1), /unverifiedLead must be an array/);
++
++// The reporter's own W1 question reaches the citizen it was written for.
++const askedPlan = { ...plan, targets: [{ pop: 'TEST-POP-02', question: 'What changed on your block this week', basis: 'resident' }] };
++const asked = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter: { name: 'Test Reporter' },
++  angleInput: w1, anglePlan: askedPlan, story, candidate: candidates[1] });
++assert.match(asked.task.question, /^What changed on your block this week\? Speak from your life\./);
++assert.match(asked.task.question, /has not happened to you, say so/);
++const askedOfficial = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter: { name: 'Test Reporter' },
++  angleInput: w1, anglePlan: { ...plan, targets: [{ pop: 'TEST-POP-01', question: 'Why did you stall it?', basis: 'assigned-official' }] },
++  story, candidate: candidates[0] });
++assert.match(askedOfficial.task.question, /creates accountability/, 'an official still gets the bounded accountability question');
++
+ console.log('livedExperiencePacket.test.js: PASS');

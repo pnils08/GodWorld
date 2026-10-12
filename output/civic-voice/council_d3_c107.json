@@ -1,0 +1,38 @@
+{
+  "office": "council_d3",
+  "cycle": 107,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "I voted to approve the merchant protection covenants for Fruitvale Transit Hub Phase II, ensuring local businesses are safeguarded during the design process. I also pushed for district-specific adaptation of the Oakland Alternative Response Initiative, emphasizing Fruitvale's unique needs. Finally, I demanded that San Antonio receive its fair share of apprenticeship opportunities to address the slow street trade.",
+  "statements": [
+    {
+      "statementId": "STMT-107-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Merchant Protection Covenants",
+      "initiative": "INIT-003",
+      "decision": "Approved the merchant protection covenants for Fruitvale Transit Hub Phase II",
+      "quote": "Transit infrastructure must seed storefront revival, not displace it.",
+      "fullStatement": "Fruitvale's vendors aren't waiting for protection—they're getting it in writing, right now. These covenants ensure that local businesses remain at the heart of our transit improvements, fostering economic stability alongside infrastructural growth.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d3-002",
+      "type": "statement",
+      "topic": "Oakland Alternative Response Initiative",
+      "initiative": "INIT-002",
+      "decision": "Called for district-specific adaptation of the initiative",
+      "quote": "Safety isn't a template.",
+      "fullStatement": "Fruitvale's unique dynamics demand a tailored approach to public safety. Toby Lamont's street teams and Marisol Achebe's mutual aid networks have been holding the community together—now it's time to resource them properly with a district-specific adaptation of the Oakland Alternative Response Initiative.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-107-council_d3-003",
+      "type": "statement",
+      "topic": "Youth Apprenticeship Pipeline",
+      "initiative": "INIT-007",
+      "decision": "Advocated for San Antonio to receive 50% of cleared slots",
+      "quote": "We're not clearing paperwork—we're clearing pathways.",
+      "fullStatement": "San Antonio's street trade is slow despite an upbeat mood. This gap needs bodies and paychecks, not just optimism. By allocating 50% of the Youth Apprenticeship Pipeline's cleared slots to San Antonio, we can turn potential into tangible progress.",
+      "trackerUpdates": {}
+    }
+  ]
+}

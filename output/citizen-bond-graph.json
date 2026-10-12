@@ -2,16 +2,16 @@
   "directed": false,
   "multigraph": false,
   "graph": {
-    "generatedAt": "2026-09-07T04:07:06.389Z",
+    "generatedAt": "2026-10-12T04:07:03.316Z",
     "source": "/root/GodWorld/output/bond-ledger-live.tsv",
     "stats": {
-      "rowsRead": 601,
+      "rowsRead": 617,
       "skippedBlank": 0,
       "skippedInactive": 2,
-      "keptUnrecognized": 1,
+      "keptUnrecognized": 10,
       "minIntensity": 0,
-      "nodes": 633,
-      "links": 599
+      "nodes": 643,
+      "links": 615
     }
   },
   "nodes": [
@@ -289,13 +289,6 @@
       "degree": 2
     },
     {
-      "id": "pop-00051",
-      "label": "Desmond Morton",
-      "group": "Jack London",
-      "neighborhood": "Jack London",
-      "degree": 1
-    },
-    {
       "id": "pop-00052",
       "label": "Clark Saryan",
       "group": "Downtown",
@@ -489,7 +482,7 @@
       "label": "Marcus Hollowell",
       "group": "Chinatown",
       "neighborhood": "Chinatown",
-      "degree": 3
+      "degree": 4
     },
     {
       "id": "pop-00141",
@@ -611,6 +604,13 @@
       "degree": 2
     },
     {
+      "id": "pop-00170",
+      "label": "Melton Neilon",
+      "group": "East Oakland",
+      "neighborhood": "East Oakland",
+      "degree": 1
+    },
+    {
       "id": "pop-00171",
       "label": "Sofia Jordan",
       "group": "Downtown",
@@ -643,7 +643,7 @@
       "label": "Talmon Lint",
       "group": "West Oakland",
       "neighborhood": "West Oakland",
-      "degree": 1
+      "degree": 2
     },
     {
       "id": "pop-00181",
@@ -674,6 +674,13 @@
       "degree": 2
     },
     {
+      "id": "pop-00187",
+      "label": "Isla Sike",
+      "group": "West Oakland",
+      "neighborhood": "West Oakland",
+      "degree": 1
+    },
+    {
       "id": "pop-00188",
       "label": "Simone Cleng",
       "group": "West Oakland",
@@ -685,14 +692,14 @@
       "label": "Blair Patel",
       "group": "Jack London",
       "neighborhood": "Jack London",
-      "degree": 2
+      "degree": 1
     },
     {
       "id": "pop-00190",
       "label": "Jackson Sift",
       "group": "West Oakland",
       "neighborhood": "West Oakland",
-      "degree": 3
+      "degree": 4
     },
     {
       "id": "pop-00194",
@@ -713,7 +720,7 @@
       "label": "Mateo Allen",
       "group": "Laurel",
       "neighborhood": "Laurel",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "pop-00201",
@@ -1084,7 +1091,7 @@
       "label": "Evan Bing",
       "group": "cross-neighborhood",
       "neighborhood": "cross-neighborhood",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "pop-00275",
@@ -1133,7 +1140,7 @@
       "label": "Tyrone Lulu",
       "group": "Temescal",
       "neighborhood": "Temescal",
-      "degree": 1
+      "degree": 3
     },
     {
       "id": "pop-00286",
@@ -1220,6 +1227,13 @@
       "degree": 2
     },
     {
+      "id": "pop-00300",
+      "label": "Belle Lopez",
+      "group": "East Oakland",
+      "neighborhood": "East Oakland",
+      "degree": 1
+    },
+    {
       "id": "pop-00301",
       "label": "Lila Leap",
       "group": "West Oakland",
@@ -1266,6 +1280,13 @@
       "label": "Soria Herrin",
       "group": "cross-neighborhood",
       "neighborhood": "cross-neighborhood",
+      "degree": 1
+    },
+    {
+      "id": "pop-00314",
+      "label": "Lemante Naruto",
+      "group": "Jack London",
+      "neighborhood": "Jack London",
       "degree": 1
     },
     {
@@ -1738,6 +1759,13 @@
       "degree": 2
     },
     {
+      "id": "pop-00470",
+      "label": "Maren Johns",
+      "group": "Rockridge",
+      "neighborhood": "Rockridge",
+      "degree": 4
+    },
+    {
       "id": "pop-00471",
       "label": "Anna Baker",
       "group": "Jack London",
@@ -1952,14 +1980,14 @@
       "label": "Shai Diaz",
       "group": "Fruitvale",
       "neighborhood": "Fruitvale",
-      "degree": 2
+      "degree": 4
     },
     {
       "id": "pop-00518",
       "label": "Chase West",
       "group": "Fruitvale",
       "neighborhood": "Fruitvale",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "pop-00519",
@@ -2127,7 +2155,7 @@
       "label": "Beth Hayes",
       "group": "West Oakland",
       "neighborhood": "West Oakland",
-      "degree": 1
+      "degree": 2
     },
     {
       "id": "pop-00588",
@@ -2190,7 +2218,7 @@
       "label": "Vladimir Gonzalez",
       "group": "Fruitvale",
       "neighborhood": "Fruitvale",
-      "degree": 2
+      "degree": 1
     },
     {
       "id": "pop-00603",
@@ -2226,13 +2254,6 @@
       "group": "cross-neighborhood",
       "neighborhood": "cross-neighborhood",
       "degree": 1
-    },
-    {
-      "id": "pop-00622",
-      "label": "Marisela Rios",
-      "group": "Fruitvale",
-      "neighborhood": "Fruitvale",
-      "degree": 2
     },
     {
       "id": "pop-00623",
@@ -2410,13 +2431,6 @@
       "degree": 1
     },
     {
-      "id": "pop-00655",
-      "label": "Antwan Warren",
-      "group": "Jack London",
-      "neighborhood": "Jack London",
-      "degree": 3
-    },
-    {
       "id": "pop-00656",
       "label": "Brianna Scott",
       "group": "Jack London",
@@ -2477,7 +2491,7 @@
       "label": "Lo Thoop",
       "group": "Temescal",
       "neighborhood": "Temescal",
-      "degree": 3
+      "degree": 5
     },
     {
       "id": "pop-00668",
@@ -2610,7 +2624,7 @@
       "label": "Eloise Jackson",
       "group": "Jack London",
       "neighborhood": "Jack London",
-      "degree": 4
+      "degree": 5
     },
     {
       "id": "pop-00691",
@@ -2701,7 +2715,7 @@
       "label": "Jessie Berry",
       "group": "Jack London",
       "neighborhood": "Jack London",
-      "degree": 3
+      "degree": 2
     },
     {
       "id": "pop-00706",
@@ -3072,7 +3086,7 @@
       "label": "Beverly Hayes",
       "group": "cross-neighborhood",
       "neighborhood": "cross-neighborhood",
-      "degree": 1
+      "degree": 2
     },
     {
       "id": "pop-00774",
@@ -3128,7 +3142,7 @@
       "label": "Terrence Wussin",
       "group": "Jack London",
       "neighborhood": "Jack London",
-      "degree": 2
+      "degree": 1
     },
     {
       "id": "pop-00789",
@@ -3139,7 +3153,7 @@
     },
     {
       "id": "pop-00791",
-      "label": "Eloise Soria-Dominguez",
+      "label": "Elena Soria Dominguez",
       "group": "cross-neighborhood",
       "neighborhood": "cross-neighborhood",
       "degree": 1
@@ -3147,8 +3161,8 @@
     {
       "id": "pop-00792",
       "label": "Bobby Chen-Ramirez",
-      "group": "Temescal",
-      "neighborhood": "Temescal",
+      "group": "Jack London",
+      "neighborhood": "Jack London",
       "degree": 1
     },
     {
@@ -3185,13 +3199,6 @@
       "group": "Temescal",
       "neighborhood": "Temescal",
       "degree": 5
-    },
-    {
-      "id": "pop-00800",
-      "label": "Rhea Morgan",
-      "group": "Fruitvale",
-      "neighborhood": "Fruitvale",
-      "degree": 1
     },
     {
       "id": "pop-00801",
@@ -3264,13 +3271,6 @@
       "degree": 2
     },
     {
-      "id": "pop-00814",
-      "label": "POP-00814",
-      "group": "Jack London",
-      "neighborhood": "Jack London",
-      "degree": 1
-    },
-    {
       "id": "pop-00815",
       "label": "Amal Nair",
       "group": "KONO",
@@ -3296,7 +3296,7 @@
       "label": "Latasha Rivera",
       "group": "Rockridge",
       "neighborhood": "Rockridge",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "pop-00819",
@@ -3416,6 +3416,13 @@
       "group": "Lake Merritt",
       "neighborhood": "Lake Merritt",
       "degree": 2
+    },
+    {
+      "id": "pop-00840",
+      "label": "Soledad Coleman",
+      "group": "Rockridge",
+      "neighborhood": "Rockridge",
+      "degree": 1
     },
     {
       "id": "pop-00841",
@@ -3674,7 +3681,7 @@
       "label": "Maryam Dawson",
       "group": "Downtown",
       "neighborhood": "Downtown",
-      "degree": 1
+      "degree": 2
     },
     {
       "id": "pop-00895",
@@ -3877,7 +3884,7 @@
       "label": "Constanza Mensah",
       "group": "Fruitvale",
       "neighborhood": "Fruitvale",
-      "degree": 1
+      "degree": 2
     },
     {
       "id": "pop-00941",
@@ -3919,13 +3926,20 @@
       "label": "LaTrice Desai",
       "group": "Jack London",
       "neighborhood": "Jack London",
-      "degree": 1
+      "degree": 2
     },
     {
       "id": "pop-00950",
       "label": "Mojisola Cook",
       "group": "cross-neighborhood",
       "neighborhood": "cross-neighborhood",
+      "degree": 1
+    },
+    {
+      "id": "pop-00961",
+      "label": "Darius Clark",
+      "group": "West Oakland",
+      "neighborhood": "West Oakland",
       "degree": 1
     },
     {
@@ -4440,10 +4454,66 @@
       "degree": 3
     },
     {
+      "id": "pop-01055",
+      "label": "Jerome Pittman",
+      "group": "East Oakland",
+      "neighborhood": "East Oakland",
+      "degree": 3
+    },
+    {
       "id": "pop-01071",
       "label": "Claire Ashford",
       "group": "Piedmont Ave",
       "neighborhood": "Piedmont Ave",
+      "degree": 1
+    },
+    {
+      "id": "pop-01100",
+      "label": "Marco Davis",
+      "group": "Brooklyn",
+      "neighborhood": "Brooklyn",
+      "degree": 1
+    },
+    {
+      "id": "pop-01110",
+      "label": "Amara Osei",
+      "group": "Jack London",
+      "neighborhood": "Jack London",
+      "degree": 2
+    },
+    {
+      "id": "pop-01112",
+      "label": "Tariq Harris",
+      "group": "West Oakland",
+      "neighborhood": "West Oakland",
+      "degree": 3
+    },
+    {
+      "id": "pop-01113",
+      "label": "Quinn Adeyemi",
+      "group": "West Oakland",
+      "neighborhood": "West Oakland",
+      "degree": 1
+    },
+    {
+      "id": "pop-01122",
+      "label": "Joel Roberts",
+      "group": "West Oakland",
+      "neighborhood": "West Oakland",
+      "degree": 3
+    },
+    {
+      "id": "pop-01195",
+      "label": "Elijah Brown",
+      "group": "Rockridge",
+      "neighborhood": "Rockridge",
+      "degree": 1
+    },
+    {
+      "id": "pop-01196",
+      "label": "Itzel Murakami",
+      "group": "West Oakland",
+      "neighborhood": "West Oakland",
       "degree": 1
     }
   ],
@@ -4452,28 +4522,28 @@
       "source": "pop-00001",
       "target": "pop-00002",
       "relation": "family",
-      "weight": 8,
+      "weight": 9.48,
       "status": "active"
     },
     {
       "source": "pop-00001",
       "target": "pop-00305",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.77,
       "status": "active"
     },
     {
       "source": "pop-00002",
       "target": "pop-00641",
       "relation": "friendship",
-      "weight": 5.2,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-00003",
       "target": "pop-00705",
       "relation": "friendship",
-      "weight": 7.07,
+      "weight": 8.17,
       "status": "active"
     },
     {
@@ -4487,119 +4557,119 @@
       "source": "pop-00005",
       "target": "pop-00594",
       "relation": "family",
-      "weight": 10,
+      "weight": 7.65,
       "status": "active"
     },
     {
       "source": "pop-00007",
       "target": "pop-00142",
       "relation": "neighbor",
-      "weight": 2.8,
+      "weight": 3.55,
       "status": "active"
     },
     {
       "source": "pop-00007",
       "target": "pop-00677",
       "relation": "neighbor",
-      "weight": 2.8,
+      "weight": 3.55,
       "status": "active"
     },
     {
       "source": "pop-00007",
       "target": "pop-00776",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.05,
       "status": "active"
     },
     {
       "source": "pop-00007",
       "target": "pop-00977",
       "relation": "neighbor",
-      "weight": 2.8,
-      "status": "active"
+      "weight": 0.3,
+      "status": "dormant"
     },
     {
       "source": "pop-00008",
       "target": "pop-00684",
       "relation": "friendship",
-      "weight": 4.03,
+      "weight": 6.03,
       "status": "active"
     },
     {
       "source": "pop-00009",
       "target": "pop-00257",
       "relation": "friendship",
-      "weight": 6.64,
+      "weight": 6.09,
       "status": "active"
     },
     {
       "source": "pop-00010",
       "target": "pop-00519",
       "relation": "friendship",
-      "weight": 8,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00010",
       "target": "pop-00933",
       "relation": "friendship",
-      "weight": 7.6,
+      "weight": 7.8,
       "status": "active"
     },
     {
       "source": "pop-00010",
       "target": "pop-01015",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 4.1,
       "status": "active"
     },
     {
       "source": "pop-00012",
       "target": "pop-01045",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.1,
       "status": "active"
     },
     {
       "source": "pop-00013",
       "target": "pop-00871",
       "relation": "professional",
-      "weight": 3.8,
+      "weight": 4.27,
       "status": "active"
     },
     {
       "source": "pop-00014",
       "target": "pop-00010",
       "relation": "friendship",
-      "weight": 5.2,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-00014",
       "target": "pop-00945",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.5,
       "status": "active"
     },
     {
       "source": "pop-00016",
       "target": "pop-00885",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 6.4,
       "status": "active"
     },
     {
       "source": "pop-00016",
       "target": "pop-01001",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 3.1,
       "status": "active"
     },
     {
       "source": "pop-00017",
       "target": "pop-00019",
       "relation": "friendship",
-      "weight": 5.04,
+      "weight": 7.04,
       "status": "active"
     },
     {
@@ -4613,203 +4683,203 @@
       "source": "pop-00018",
       "target": "pop-00742",
       "relation": "family",
-      "weight": 8.8,
+      "weight": 8.97,
       "status": "active"
     },
     {
       "source": "pop-00018",
       "target": "pop-00743",
       "relation": "family",
-      "weight": 10,
+      "weight": 8.4,
       "status": "active"
     },
     {
       "source": "pop-00020",
       "target": "pop-00678",
       "relation": "friendship",
-      "weight": 7.23,
+      "weight": 8.33,
       "status": "active"
     },
     {
       "source": "pop-00021",
       "target": "pop-00136",
       "relation": "alliance",
-      "weight": 7.2,
+      "weight": 7.79,
       "status": "active"
     },
     {
       "source": "pop-00021",
       "target": "pop-00912",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.14,
       "status": "active"
     },
     {
       "source": "pop-00021",
       "target": "pop-01032",
       "relation": "friendship",
-      "weight": 6.11,
+      "weight": 6.46,
       "status": "active"
     },
     {
       "source": "pop-00023",
       "target": "pop-01030",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.45,
       "status": "active"
     },
     {
       "source": "pop-00024",
       "target": "pop-01031",
       "relation": "family",
-      "weight": 10,
+      "weight": 9.1,
       "status": "active"
     },
     {
       "source": "pop-00025",
       "target": "pop-00358",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.7,
       "status": "active"
     },
     {
       "source": "pop-00025",
       "target": "pop-00982",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 3.1,
       "status": "active"
     },
     {
       "source": "pop-00029",
       "target": "pop-00041",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 5,
       "status": "active"
     },
     {
       "source": "pop-00030",
       "target": "pop-00205",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 6.97,
       "status": "active"
     },
     {
       "source": "pop-00033",
       "target": "pop-00892",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 2.2,
       "status": "active"
     },
     {
       "source": "pop-00033",
       "target": "pop-00928",
       "relation": "rivalry",
-      "weight": 6.8,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00035",
       "target": "pop-01033",
       "relation": "family",
-      "weight": 9,
+      "weight": 8.45,
       "status": "active"
     },
     {
       "source": "pop-00036",
       "target": "pop-00294",
       "relation": "friendship",
-      "weight": 4.84,
+      "weight": 6.08,
       "status": "active"
     },
     {
       "source": "pop-00037",
       "target": "pop-00188",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.84,
       "status": "active"
     },
     {
       "source": "pop-00037",
       "target": "pop-00201",
       "relation": "family",
-      "weight": 9,
+      "weight": 9.24,
       "status": "active"
     },
     {
       "source": "pop-00037",
       "target": "pop-01011",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 2.17,
       "status": "active"
     },
     {
       "source": "pop-00037",
       "target": "pop-01034",
       "relation": "family",
-      "weight": 10,
+      "weight": 9.85,
       "status": "active"
     },
     {
       "source": "pop-00038",
       "target": "pop-01035",
       "relation": "family",
-      "weight": 9,
+      "weight": 8.45,
       "status": "active"
     },
     {
       "source": "pop-00040",
       "target": "pop-01036",
       "relation": "family",
-      "weight": 8.8,
+      "weight": 9.55,
       "status": "active"
     },
     {
       "source": "pop-00041",
       "target": "pop-00789",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.55,
       "status": "active"
     },
     {
       "source": "pop-00042",
       "target": "pop-00211",
       "relation": "friendship",
-      "weight": 7.6,
+      "weight": 7.8,
       "status": "active"
     },
     {
       "source": "pop-00043",
       "target": "pop-00044",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 6.4,
       "status": "active"
     },
     {
       "source": "pop-00043",
       "target": "pop-00830",
       "relation": "friendship",
-      "weight": 6.26,
+      "weight": 7.51,
       "status": "active"
     },
     {
       "source": "pop-00044",
       "target": "pop-00673",
       "relation": "friendship",
-      "weight": 4.23,
+      "weight": 6.23,
       "status": "active"
     },
     {
       "source": "pop-00045",
       "target": "pop-00546",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.05,
       "status": "active"
     },
     {
       "source": "pop-00048",
       "target": "pop-00335",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 4.87,
       "status": "active"
     },
     {
@@ -4823,14 +4893,14 @@
       "source": "pop-00049",
       "target": "pop-00210",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.74,
       "status": "active"
     },
     {
       "source": "pop-00053",
       "target": "pop-00250",
       "relation": "friendship",
-      "weight": 5.05,
+      "weight": 5.4,
       "status": "active"
     },
     {
@@ -4844,56 +4914,56 @@
       "source": "pop-00060",
       "target": "pop-00234",
       "relation": "friendship",
-      "weight": 4.2,
+      "weight": 4.4,
       "status": "active"
     },
     {
       "source": "pop-00077",
       "target": "pop-00868",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 5.8,
       "status": "active"
     },
     {
       "source": "pop-00078",
       "target": "pop-00250",
       "relation": "friendship",
-      "weight": 4.23,
+      "weight": 5.48,
       "status": "active"
     },
     {
       "source": "pop-00078",
       "target": "pop-00889",
       "relation": "friendship",
-      "weight": 4.2,
+      "weight": 5.3,
       "status": "active"
     },
     {
       "source": "pop-00079",
       "target": "pop-00363",
       "relation": "friendship",
-      "weight": 4.64,
+      "weight": 4.84,
       "status": "active"
     },
     {
       "source": "pop-00080",
       "target": "pop-00897",
       "relation": "friendship",
-      "weight": 3.2,
+      "weight": 2.3,
       "status": "active"
     },
     {
       "source": "pop-00083",
       "target": "pop-00328",
       "relation": "friendship",
-      "weight": 6.64,
+      "weight": 7.89,
       "status": "active"
     },
     {
       "source": "pop-00083",
       "target": "pop-00339",
       "relation": "friendship",
-      "weight": 6.23,
+      "weight": 8.23,
       "status": "active"
     },
     {
@@ -4907,36 +4977,36 @@
       "source": "pop-00085",
       "target": "pop-00345",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 5.85,
       "status": "active"
     },
     {
       "source": "pop-00103",
       "target": "pop-00879",
       "relation": "friendship",
-      "weight": 6.6,
+      "weight": 7.7,
       "status": "active"
     },
     {
       "source": "pop-00115",
       "target": "pop-00235",
       "relation": "friendship",
-      "weight": 6.64,
+      "weight": 8.73,
       "status": "active"
     },
     {
       "source": "pop-00115",
       "target": "pop-01045",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 4.05,
       "status": "active"
     },
     {
       "source": "pop-00116",
       "target": "pop-00354",
       "relation": "professional",
-      "weight": 3.1,
-      "status": "active"
+      "weight": 0.7,
+      "status": "dormant"
     },
     {
       "source": "pop-00117",
@@ -4949,560 +5019,553 @@
       "source": "pop-00119",
       "target": "pop-00432",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 6,
       "status": "active"
     },
     {
       "source": "pop-00121",
       "target": "pop-00556",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 5.1,
       "status": "active"
     },
     {
       "source": "pop-00121",
       "target": "pop-00842",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.7,
       "status": "active"
     },
     {
       "source": "pop-00131",
       "target": "pop-00836",
       "relation": "friendship",
-      "weight": 7.64,
+      "weight": 8.74,
       "status": "active"
     },
     {
       "source": "pop-00131",
       "target": "pop-00846",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 3.3,
       "status": "active"
     },
     {
       "source": "pop-00140",
       "target": "pop-00893",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.7,
       "status": "active"
     },
     {
       "source": "pop-00140",
       "target": "pop-01041",
       "relation": "friendship",
-      "weight": 4.2,
+      "weight": 5.3,
       "status": "active"
     },
     {
       "source": "pop-00141",
       "target": "pop-00465",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 2.5,
       "status": "active"
     },
     {
       "source": "pop-00148",
       "target": "pop-00033",
       "relation": "rivalry",
-      "weight": 7,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00149",
       "target": "pop-00729",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 1.9,
       "status": "active"
     },
     {
       "source": "pop-00149",
       "target": "pop-00994",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 1.1,
       "status": "active"
     },
     {
       "source": "pop-00150",
       "target": "pop-00205",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 4.4,
       "status": "active"
     },
     {
       "source": "pop-00150",
       "target": "pop-00263",
       "relation": "alliance",
-      "weight": 4.6,
+      "weight": 7.6,
       "status": "active"
     },
     {
       "source": "pop-00153",
       "target": "pop-00057",
       "relation": "friendship",
-      "weight": 6.95,
+      "weight": 7.15,
       "status": "active"
     },
     {
       "source": "pop-00153",
       "target": "pop-00506",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 4.4,
       "status": "active"
     },
     {
       "source": "pop-00156",
       "target": "pop-00725",
       "relation": "friendship",
-      "weight": 7.6,
+      "weight": 6.7,
       "status": "active"
     },
     {
       "source": "pop-00160",
       "target": "pop-00831",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 3.9,
       "status": "active"
     },
     {
       "source": "pop-00161",
       "target": "pop-00430",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 4.4,
       "status": "active"
     },
     {
       "source": "pop-00162",
       "target": "pop-00679",
       "relation": "family",
-      "weight": 8,
+      "weight": 8.1,
       "status": "active"
     },
     {
       "source": "pop-00162",
       "target": "pop-00785",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.05,
       "status": "active"
     },
     {
       "source": "pop-00164",
       "target": "pop-00190",
       "relation": "friendship",
-      "weight": 7.26,
+      "weight": 9.41,
       "status": "active"
     },
     {
       "source": "pop-00164",
       "target": "pop-00732",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.7,
       "status": "active"
     },
     {
       "source": "pop-00165",
       "target": "pop-00747",
       "relation": "friendship",
-      "weight": 7.6,
+      "weight": 6.7,
       "status": "active"
     },
     {
       "source": "pop-00165",
       "target": "pop-01002",
       "relation": "friendship",
-      "weight": 7.2,
+      "weight": 4.3,
       "status": "active"
     },
     {
       "source": "pop-00166",
       "target": "pop-00216",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 4.4,
       "status": "active"
     },
     {
       "source": "pop-00167",
       "target": "pop-00928",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 4.4,
       "status": "active"
     },
     {
       "source": "pop-00169",
       "target": "pop-00315",
       "relation": "friendship",
-      "weight": 6.64,
+      "weight": 8.64,
       "status": "active"
     },
     {
       "source": "pop-00169",
       "target": "pop-00863",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 2.35,
       "status": "active"
     },
     {
       "source": "pop-00171",
       "target": "pop-01004",
       "relation": "friendship",
-      "weight": 7.23,
+      "weight": 4.76,
       "status": "active"
     },
     {
       "source": "pop-00172",
       "target": "pop-00903",
       "relation": "friendship",
-      "weight": 6.68,
+      "weight": 7.03,
       "status": "active"
     },
     {
       "source": "pop-00175",
       "target": "pop-00675",
       "relation": "professional",
-      "weight": 2.3,
+      "weight": 3.4,
       "status": "active"
     },
     {
       "source": "pop-00176",
       "target": "pop-00722",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.77,
       "status": "active"
     },
     {
       "source": "pop-00182",
       "target": "pop-00039",
       "relation": "friendship",
-      "weight": 5.82,
+      "weight": 7.97,
       "status": "active"
     },
     {
       "source": "pop-00182",
       "target": "pop-00449",
       "relation": "friendship",
-      "weight": 4.03,
+      "weight": 6.18,
       "status": "active"
     },
     {
       "source": "pop-00185",
       "target": "pop-00368",
       "relation": "friendship",
-      "weight": 7.2,
+      "weight": 9.2,
       "status": "active"
     },
     {
       "source": "pop-00188",
       "target": "pop-00850",
       "relation": "friendship",
-      "weight": 6.64,
+      "weight": 8.79,
       "status": "active"
     },
     {
       "source": "pop-00189",
       "target": "pop-00788",
       "relation": "friendship",
-      "weight": 5.1,
+      "weight": 5.44,
       "status": "active"
-    },
-    {
-      "source": "pop-00189",
-      "target": "pop-00814",
-      "relation": "friendship",
-      "weight": 3.42,
-      "status": "severed"
     },
     {
       "source": "pop-00190",
       "target": "pop-00037",
       "relation": "friendship",
-      "weight": 5.15,
+      "weight": 6.51,
       "status": "active"
     },
     {
       "source": "pop-00190",
       "target": "pop-00201",
       "relation": "friendship",
-      "weight": 6.15,
+      "weight": 8.4,
       "status": "active"
     },
     {
       "source": "pop-00198",
       "target": "pop-00632",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 4.1,
       "status": "active"
     },
     {
       "source": "pop-00199",
       "target": "pop-00289",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.45,
       "status": "active"
     },
     {
       "source": "pop-00199",
       "target": "pop-00724",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.7,
       "status": "active"
     },
     {
       "source": "pop-00201",
       "target": "pop-00188",
       "relation": "friendship",
-      "weight": 8.1,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00201",
       "target": "pop-00202",
       "relation": "friendship",
-      "weight": 5.29,
+      "weight": 6.65,
       "status": "active"
     },
     {
       "source": "pop-00201",
       "target": "pop-01034",
       "relation": "family",
-      "weight": 9,
+      "weight": 9.8,
       "status": "active"
     },
     {
       "source": "pop-00203",
       "target": "pop-00673",
       "relation": "friendship",
-      "weight": 5.26,
+      "weight": 2.76,
       "status": "active"
     },
     {
       "source": "pop-00205",
       "target": "pop-00078",
       "relation": "friendship",
-      "weight": 5.23,
+      "weight": 6.48,
       "status": "active"
     },
     {
       "source": "pop-00207",
       "target": "pop-00133",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.74,
       "status": "active"
     },
     {
       "source": "pop-00207",
       "target": "pop-00941",
       "relation": "alliance",
-      "weight": 7.1,
+      "weight": 9.13,
       "status": "active"
     },
     {
       "source": "pop-00209",
       "target": "pop-00321",
-      "relation": "tension",
-      "weight": 4,
+      "relation": "professional",
+      "weight": 1.65,
       "status": "active"
     },
     {
       "source": "pop-00209",
       "target": "pop-00467",
-      "relation": "tension",
-      "weight": 5.5,
+      "relation": "rivalry",
+      "weight": 9.56,
       "status": "active"
     },
     {
       "source": "pop-00209",
       "target": "pop-01003",
       "relation": "neighbor",
-      "weight": 4,
+      "weight": 4.8,
       "status": "active"
     },
     {
       "source": "pop-00209",
       "target": "pop-01040",
       "relation": "neighbor",
-      "weight": 4,
+      "weight": 4.17,
       "status": "active"
     },
     {
       "source": "pop-00210",
       "target": "pop-00124",
       "relation": "friendship",
-      "weight": 5.68,
+      "weight": 3.45,
       "status": "active"
     },
     {
       "source": "pop-00211",
       "target": "pop-00715",
       "relation": "rivalry",
-      "weight": 7.5,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00212",
       "target": "pop-00362",
       "relation": "friendship",
-      "weight": 5.64,
+      "weight": 7.64,
       "status": "active"
     },
     {
       "source": "pop-00212",
       "target": "pop-00439",
       "relation": "rivalry",
-      "weight": 7,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00214",
       "target": "pop-00036",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.13,
       "status": "active"
     },
     {
       "source": "pop-00214",
       "target": "pop-00329",
       "relation": "friendship",
-      "weight": 6.68,
+      "weight": 7,
       "status": "active"
     },
     {
       "source": "pop-00215",
       "target": "pop-00498",
       "relation": "alliance",
-      "weight": 4.1,
+      "weight": 5.6,
       "status": "active"
     },
     {
       "source": "pop-00220",
       "target": "pop-01033",
       "relation": "friendship",
-      "weight": 6.05,
+      "weight": 7.3,
       "status": "active"
     },
     {
       "source": "pop-00221",
       "target": "pop-00292",
       "relation": "friendship",
-      "weight": 6.1,
+      "weight": 7.35,
       "status": "active"
     },
     {
       "source": "pop-00222",
       "target": "pop-00547",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.5,
       "status": "active"
     },
     {
       "source": "pop-00222",
       "target": "pop-00594",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 4.06,
       "status": "active"
     },
     {
       "source": "pop-00225",
       "target": "pop-00748",
       "relation": "professional",
-      "weight": 2.3,
+      "weight": 3.4,
       "status": "active"
     },
     {
       "source": "pop-00225",
       "target": "pop-00884",
       "relation": "friendship",
-      "weight": 3.26,
+      "weight": 3.6,
       "status": "active"
     },
     {
       "source": "pop-00229",
       "target": "pop-00500",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.58,
       "status": "active"
     },
     {
       "source": "pop-00229",
       "target": "pop-00695",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.14,
       "status": "active"
     },
     {
       "source": "pop-00229",
       "target": "pop-00823",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.77,
       "status": "active"
     },
     {
       "source": "pop-00230",
       "target": "pop-00476",
       "relation": "professional",
-      "weight": 5.1,
+      "weight": 6.15,
       "status": "active"
     },
     {
       "source": "pop-00230",
       "target": "pop-00504",
       "relation": "friendship",
-      "weight": 5.03,
+      "weight": 7.03,
       "status": "active"
     },
     {
       "source": "pop-00231",
       "target": "pop-00339",
       "relation": "friendship",
-      "weight": 7.68,
+      "weight": 8.87,
       "status": "active"
     },
     {
       "source": "pop-00231",
       "target": "pop-00361",
       "relation": "professional",
-      "weight": 6.1,
+      "weight": 6.55,
       "status": "active"
     },
     {
       "source": "pop-00231",
       "target": "pop-01037",
       "relation": "family",
-      "weight": 7.8,
+      "weight": 7.76,
       "status": "active"
     },
     {
       "source": "pop-00233",
       "target": "pop-00885",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 5.38,
       "status": "active"
     },
     {
       "source": "pop-00239",
       "target": "pop-00646",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 2.95,
       "status": "active"
     },
     {
       "source": "pop-00239",
       "target": "pop-00760",
       "relation": "friendship",
-      "weight": 7.26,
+      "weight": 7.86,
       "status": "active"
     },
     {
       "source": "pop-00239",
       "target": "pop-01000",
       "relation": "friendship",
-      "weight": 5.42,
+      "weight": 2.88,
       "status": "active"
     },
     {
       "source": "pop-00240",
       "target": "pop-00052",
       "relation": "friendship",
-      "weight": 7,
+      "weight": 7.2,
       "status": "active"
     },
     {
@@ -5516,217 +5579,231 @@
       "source": "pop-00250",
       "target": "pop-00458",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 6.4,
       "status": "active"
     },
     {
       "source": "pop-00254",
       "target": "pop-00496",
       "relation": "friendship",
-      "weight": 6.23,
+      "weight": 8.23,
       "status": "active"
     },
     {
       "source": "pop-00255",
       "target": "pop-00168",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.77,
       "status": "active"
     },
     {
       "source": "pop-00255",
       "target": "pop-00352",
       "relation": "friendship",
-      "weight": 8.05,
+      "weight": 7.35,
       "status": "active"
     },
     {
       "source": "pop-00257",
       "target": "pop-00543",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 5.51,
       "status": "active"
     },
     {
       "source": "pop-00258",
       "target": "pop-00274",
       "relation": "alliance",
-      "weight": 6.1,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00260",
       "target": "pop-00839",
       "relation": "friendship",
-      "weight": 6.6,
+      "weight": 7.7,
       "status": "active"
     },
     {
       "source": "pop-00261",
       "target": "pop-00812",
       "relation": "friendship",
-      "weight": 3.64,
+      "weight": 3.84,
       "status": "active"
     },
     {
       "source": "pop-00262",
       "target": "pop-00267",
       "relation": "family",
-      "weight": 9.3,
+      "weight": 8.1,
       "status": "active"
     },
     {
       "source": "pop-00264",
       "target": "pop-00317",
       "relation": "friendship",
-      "weight": 5.64,
+      "weight": 5.99,
       "status": "active"
     },
     {
       "source": "pop-00264",
       "target": "pop-00513",
       "relation": "professional",
-      "weight": 2.3,
+      "weight": 1.85,
       "status": "active"
     },
     {
       "source": "pop-00265",
       "target": "pop-01039",
       "relation": "friendship",
-      "weight": 5.84,
+      "weight": 7.09,
       "status": "active"
     },
     {
       "source": "pop-00266",
       "target": "pop-00311",
       "relation": "friendship",
-      "weight": 5.68,
+      "weight": 6.78,
       "status": "active"
     },
     {
       "source": "pop-00266",
       "target": "pop-00315",
       "relation": "friendship",
-      "weight": 6.1,
+      "weight": 8.1,
       "status": "active"
     },
     {
       "source": "pop-00267",
       "target": "pop-00035",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 5.1,
       "status": "active"
     },
     {
       "source": "pop-00267",
       "target": "pop-00054",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 5,
       "status": "active"
     },
     {
       "source": "pop-00270",
       "target": "pop-00795",
       "relation": "friendship",
-      "weight": 3.64,
+      "weight": 5.39,
       "status": "active"
     },
     {
       "source": "pop-00274",
       "target": "pop-00749",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 4.4,
       "status": "active"
     },
     {
       "source": "pop-00275",
       "target": "pop-00573",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 5.8,
       "status": "active"
     },
     {
       "source": "pop-00275",
       "target": "pop-00984",
       "relation": "friendship",
-      "weight": 7,
+      "weight": 8.1,
       "status": "active"
     },
     {
       "source": "pop-00276",
       "target": "pop-00592",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.7,
       "status": "active"
     },
     {
       "source": "pop-00276",
       "target": "pop-01017",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 4.7,
       "status": "active"
     },
     {
       "source": "pop-00278",
       "target": "pop-00722",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.77,
       "status": "active"
     },
     {
       "source": "pop-00278",
       "target": "pop-00984",
       "relation": "friendship",
-      "weight": 6.68,
+      "weight": 7.93,
       "status": "active"
     },
     {
       "source": "pop-00280",
       "target": "pop-00722",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.7,
       "status": "active"
     },
     {
       "source": "pop-00284",
       "target": "pop-00462",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 5.7,
+      "status": "active"
+    },
+    {
+      "source": "pop-00284",
+      "target": "pop-00690",
+      "relation": "sports_rival",
+      "weight": 7,
+      "status": "active"
+    },
+    {
+      "source": "pop-00284",
+      "target": "pop-01110",
+      "relation": "sports_rival",
+      "weight": 8.5,
       "status": "active"
     },
     {
       "source": "pop-00286",
       "target": "pop-00475",
       "relation": "friendship",
-      "weight": 4.23,
+      "weight": 4.36,
       "status": "active"
     },
     {
       "source": "pop-00286",
       "target": "pop-00593",
       "relation": "friendship",
-      "weight": 5.23,
+      "weight": 5.34,
       "status": "active"
     },
     {
       "source": "pop-00290",
       "target": "pop-00236",
       "relation": "friendship",
-      "weight": 7.64,
+      "weight": 8.8,
       "status": "active"
     },
     {
       "source": "pop-00292",
       "target": "pop-00666",
       "relation": "friendship",
-      "weight": 7.89,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00293",
       "target": "pop-00005",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.7,
       "status": "active"
     },
     {
@@ -5740,231 +5817,231 @@
       "source": "pop-00294",
       "target": "pop-00816",
       "relation": "friendship",
-      "weight": 8.1,
+      "weight": 9.35,
       "status": "active"
     },
     {
       "source": "pop-00298",
       "target": "pop-01032",
       "relation": "friendship",
-      "weight": 7.6,
+      "weight": 8.5,
       "status": "active"
     },
     {
       "source": "pop-00298",
       "target": "pop-01043",
       "relation": "friendship",
-      "weight": 6.2,
+      "weight": 7.1,
       "status": "active"
     },
     {
       "source": "pop-00301",
       "target": "pop-00288",
       "relation": "friendship",
-      "weight": 6.84,
+      "weight": 4.3,
       "status": "active"
     },
     {
       "source": "pop-00301",
       "target": "pop-00291",
       "relation": "friendship",
-      "weight": 7.68,
+      "weight": 8.93,
       "status": "active"
     },
     {
       "source": "pop-00302",
       "target": "pop-00085",
       "relation": "friendship",
-      "weight": 4.68,
+      "weight": 5.73,
       "status": "active"
     },
     {
       "source": "pop-00304",
       "target": "pop-00504",
       "relation": "professional",
-      "weight": 5.1,
+      "weight": 6.15,
       "status": "active"
     },
     {
       "source": "pop-00311",
       "target": "pop-00889",
       "relation": "rivalry",
-      "weight": 8,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00315",
       "target": "pop-00319",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.7,
       "status": "active"
     },
     {
       "source": "pop-00316",
       "target": "pop-00348",
       "relation": "family",
-      "weight": 8.8,
+      "weight": 6.7,
       "status": "active"
     },
     {
       "source": "pop-00318",
       "target": "pop-00091",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 5.35,
       "status": "active"
     },
     {
       "source": "pop-00319",
       "target": "pop-00175",
       "relation": "friendship",
-      "weight": 6.26,
+      "weight": 7.51,
       "status": "active"
     },
     {
       "source": "pop-00325",
       "target": "pop-00746",
       "relation": "friendship",
-      "weight": 4.23,
+      "weight": 5.06,
       "status": "active"
     },
     {
       "source": "pop-00330",
       "target": "pop-00168",
       "relation": "friendship",
-      "weight": 7.26,
+      "weight": 9.41,
       "status": "active"
     },
     {
       "source": "pop-00332",
       "target": "pop-00691",
       "relation": "rivalry",
-      "weight": 6,
+      "weight": 9.75,
       "status": "active"
     },
     {
       "source": "pop-00336",
       "target": "pop-00263",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 1.9,
       "status": "active"
     },
     {
       "source": "pop-00336",
       "target": "pop-00299",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 3.06,
       "status": "active"
     },
     {
       "source": "pop-00337",
       "target": "pop-00140",
       "relation": "sports_rival",
-      "weight": 5,
+      "weight": 9.5,
       "status": "active"
     },
     {
       "source": "pop-00337",
       "target": "pop-00148",
       "relation": "neighbor",
-      "weight": 3,
+      "weight": 3.1,
       "status": "active"
     },
     {
       "source": "pop-00337",
       "target": "pop-00215",
       "relation": "friendship",
-      "weight": 4.23,
+      "weight": 5.38,
       "status": "active"
     },
     {
       "source": "pop-00341",
       "target": "pop-00007",
       "relation": "professional",
-      "weight": 3.8,
+      "weight": 5.1,
       "status": "active"
     },
     {
       "source": "pop-00341",
       "target": "pop-00497",
       "relation": "friendship",
-      "weight": 5.23,
+      "weight": 5.43,
       "status": "active"
     },
     {
       "source": "pop-00341",
       "target": "pop-00698",
       "relation": "friendship",
-      "weight": 6.64,
+      "weight": 8.64,
       "status": "active"
     },
     {
       "source": "pop-00344",
       "target": "pop-00624",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 7.35,
       "status": "active"
     },
     {
       "source": "pop-00345",
       "target": "pop-00672",
       "relation": "family",
-      "weight": 10,
+      "weight": 7.1,
       "status": "active"
     },
     {
       "source": "pop-00347",
       "target": "pop-00055",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 4.12,
       "status": "active"
     },
     {
       "source": "pop-00347",
       "target": "pop-00799",
       "relation": "professional",
-      "weight": 3.1,
+      "weight": 2,
       "status": "active"
     },
     {
       "source": "pop-00348",
       "target": "pop-00531",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 6.82,
       "status": "active"
     },
     {
       "source": "pop-00350",
       "target": "pop-00214",
       "relation": "friendship",
-      "weight": 6.1,
+      "weight": 7.32,
       "status": "active"
     },
     {
       "source": "pop-00351",
       "target": "pop-00624",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.7,
       "status": "active"
     },
     {
       "source": "pop-00351",
       "target": "pop-00685",
       "relation": "friendship",
-      "weight": 7.23,
+      "weight": 8.33,
       "status": "active"
     },
     {
       "source": "pop-00351",
       "target": "pop-01027",
       "relation": "professional",
-      "weight": 6.1,
+      "weight": 6.5,
       "status": "active"
     },
     {
       "source": "pop-00351",
       "target": "pop-01048",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.05,
       "status": "active"
     },
     {
@@ -5985,259 +6062,287 @@
       "source": "pop-00359",
       "target": "pop-01006",
       "relation": "friendship",
-      "weight": 6.05,
+      "weight": 3.35,
       "status": "active"
     },
     {
       "source": "pop-00359",
       "target": "pop-01022",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 5.92,
       "status": "active"
     },
     {
       "source": "pop-00362",
       "target": "pop-00894",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 4.92,
       "status": "active"
     },
     {
       "source": "pop-00363",
       "target": "pop-00702",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.05,
       "status": "active"
     },
     {
       "source": "pop-00363",
       "target": "pop-00755",
       "relation": "friendship",
-      "weight": 5.26,
+      "weight": 5.46,
       "status": "active"
     },
     {
       "source": "pop-00364",
       "target": "pop-00017",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 4.9,
       "status": "active"
     },
     {
       "source": "pop-00366",
       "target": "pop-00299",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 3.23,
       "status": "active"
     },
     {
       "source": "pop-00433",
       "target": "pop-00456",
       "relation": "friendship",
-      "weight": 5.2,
+      "weight": 4.5,
       "status": "active"
     },
     {
       "source": "pop-00434",
       "target": "pop-00321",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 2.12,
       "status": "active"
     },
     {
       "source": "pop-00434",
       "target": "pop-00506",
       "relation": "friendship",
-      "weight": 7.6,
+      "weight": 8.5,
       "status": "active"
     },
     {
       "source": "pop-00434",
       "target": "pop-00681",
       "relation": "friendship",
-      "weight": 3.23,
+      "weight": 4.13,
       "status": "active"
     },
     {
       "source": "pop-00436",
       "target": "pop-00523",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 3.7,
       "status": "active"
     },
     {
       "source": "pop-00436",
       "target": "pop-00987",
       "relation": "rivalry",
-      "weight": 6.8,
+      "weight": 9.6,
       "status": "active"
     },
     {
       "source": "pop-00438",
       "target": "pop-00338",
       "relation": "friendship",
-      "weight": 5.64,
+      "weight": 6.74,
       "status": "active"
     },
     {
       "source": "pop-00440",
       "target": "pop-00678",
       "relation": "family",
-      "weight": 10,
+      "weight": 7.5,
       "status": "active"
     },
     {
       "source": "pop-00440",
       "target": "pop-00690",
       "relation": "friendship",
-      "weight": 3.41,
-      "status": "active"
+      "weight": 0.51,
+      "status": "dormant"
     },
     {
       "source": "pop-00440",
       "target": "pop-01007",
       "relation": "family",
-      "weight": 7.6,
+      "weight": 4.1,
       "status": "active"
     },
     {
       "source": "pop-00441",
       "target": "pop-00932",
       "relation": "professional",
-      "weight": 3.9,
+      "weight": 3,
       "status": "active"
     },
     {
       "source": "pop-00444",
       "target": "pop-00458",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 5.5,
       "status": "active"
     },
     {
       "source": "pop-00446",
       "target": "pop-00216",
       "relation": "friendship",
-      "weight": 4.64,
+      "weight": 4.98,
       "status": "active"
     },
     {
       "source": "pop-00447",
       "target": "pop-00906",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 5.7,
       "status": "active"
     },
     {
       "source": "pop-00450",
       "target": "pop-00809",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.05,
       "status": "active"
     },
     {
       "source": "pop-00452",
       "target": "pop-00711",
       "relation": "friendship",
-      "weight": 5.05,
+      "weight": 5.25,
       "status": "active"
     },
     {
       "source": "pop-00455",
       "target": "pop-00847",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 6.9,
       "status": "active"
     },
     {
       "source": "pop-00457",
       "target": "pop-00811",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 4.05,
       "status": "active"
     },
     {
       "source": "pop-00458",
       "target": "pop-00649",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.7,
       "status": "active"
     },
     {
       "source": "pop-00458",
       "target": "pop-00910",
       "relation": "friendship",
-      "weight": 4.2,
+      "weight": 5.3,
       "status": "active"
     },
     {
       "source": "pop-00459",
       "target": "pop-00633",
       "relation": "friendship",
-      "weight": 8,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00466",
       "target": "pop-00220",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 6.4,
+      "status": "active"
+    },
+    {
+      "source": "pop-00470",
+      "target": "pop-00199",
+      "relation": "rivalry",
+      "weight": 9,
+      "status": "active"
+    },
+    {
+      "source": "pop-00470",
+      "target": "pop-00274",
+      "relation": "rivalry",
+      "weight": 9,
+      "status": "active"
+    },
+    {
+      "source": "pop-00470",
+      "target": "pop-00818",
+      "relation": "rivalry",
+      "weight": 6.5,
+      "status": "active"
+    },
+    {
+      "source": "pop-00470",
+      "target": "pop-00940",
+      "relation": "rivalry",
+      "weight": 6.5,
       "status": "active"
     },
     {
       "source": "pop-00471",
       "target": "pop-00650",
       "relation": "professional",
-      "weight": 5.1,
+      "weight": 4.85,
       "status": "active"
     },
     {
       "source": "pop-00473",
       "target": "pop-00636",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 3.9,
       "status": "active"
     },
     {
       "source": "pop-00474",
       "target": "pop-00337",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 4.85,
       "status": "active"
     },
     {
       "source": "pop-00476",
       "target": "pop-01036",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 8,
       "status": "active"
     },
     {
       "source": "pop-00477",
       "target": "pop-00529",
       "relation": "friendship",
-      "weight": 5.2,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-00478",
       "target": "pop-00078",
       "relation": "alliance",
-      "weight": 4.1,
+      "weight": 4.9,
       "status": "active"
     },
     {
       "source": "pop-00481",
       "target": "pop-00045",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 5.65,
       "status": "active"
     },
     {
       "source": "pop-00484",
       "target": "pop-00667",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.7,
       "status": "active"
     },
     {
@@ -6251,315 +6356,329 @@
       "source": "pop-00485",
       "target": "pop-00344",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.7,
       "status": "active"
     },
     {
       "source": "pop-00486",
       "target": "pop-00703",
       "relation": "professional",
-      "weight": 3.1,
+      "weight": 3.5,
       "status": "active"
     },
     {
       "source": "pop-00493",
       "target": "pop-00649",
       "relation": "friendship",
-      "weight": 4.2,
+      "weight": 4.4,
       "status": "active"
     },
     {
       "source": "pop-00494",
       "target": "pop-00137",
       "relation": "rivalry",
-      "weight": 7.25,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00495",
       "target": "pop-00033",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.05,
       "status": "active"
     },
     {
       "source": "pop-00495",
       "target": "pop-00234",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.05,
       "status": "active"
     },
     {
       "source": "pop-00497",
       "target": "pop-00986",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 3.5,
       "status": "active"
     },
     {
       "source": "pop-00500",
       "target": "pop-00186",
       "relation": "friendship",
-      "weight": 4.64,
+      "weight": 5.86,
       "status": "active"
     },
     {
       "source": "pop-00500",
       "target": "pop-00451",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 5.4,
       "status": "active"
     },
     {
       "source": "pop-00500",
       "target": "pop-00888",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7.9,
       "status": "active"
     },
     {
       "source": "pop-00501",
       "target": "pop-00979",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 2.7,
       "status": "active"
     },
     {
       "source": "pop-00502",
       "target": "pop-00043",
       "relation": "alliance",
-      "weight": 6.7,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00503",
       "target": "pop-00653",
       "relation": "alliance",
-      "weight": 5.6,
+      "weight": 9.6,
       "status": "active"
     },
     {
       "source": "pop-00503",
       "target": "pop-00762",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 4.92,
       "status": "active"
     },
     {
       "source": "pop-00503",
       "target": "pop-00929",
       "relation": "friendship",
-      "weight": 3.4,
-      "status": "active"
+      "weight": 0.9,
+      "status": "dormant"
     },
     {
       "source": "pop-00503",
       "target": "pop-00940",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 7.1,
       "status": "active"
     },
     {
       "source": "pop-00504",
       "target": "pop-00034",
       "relation": "friendship",
-      "weight": 5.22,
+      "weight": 7.22,
       "status": "active"
     },
     {
       "source": "pop-00504",
       "target": "pop-00037",
       "relation": "rivalry",
-      "weight": 8,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00504",
       "target": "pop-00792",
       "relation": "rivalry",
-      "weight": 7,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00504",
       "target": "pop-01071",
       "relation": "family",
-      "weight": 7,
+      "weight": 7.1,
       "status": "active"
     },
     {
       "source": "pop-00507",
       "target": "pop-00364",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 5.3,
       "status": "active"
     },
     {
       "source": "pop-00509",
       "target": "pop-00658",
       "relation": "friendship",
-      "weight": 3,
-      "status": "active"
+      "weight": 0.65,
+      "status": "dormant"
     },
     {
       "source": "pop-00509",
       "target": "pop-00723",
       "relation": "professional",
-      "weight": 2.9,
-      "status": "active"
+      "weight": 0.7,
+      "status": "dormant"
     },
     {
       "source": "pop-00509",
       "target": "pop-01038",
       "relation": "family",
-      "weight": 9.8,
+      "weight": 6.9,
       "status": "active"
     },
     {
       "source": "pop-00511",
       "target": "pop-00850",
       "relation": "friendship",
-      "weight": 5.2,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-00513",
       "target": "pop-00186",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 4.74,
       "status": "active"
     },
     {
       "source": "pop-00514",
       "target": "pop-00943",
       "relation": "family",
-      "weight": 7.6,
+      "weight": 7.05,
+      "status": "active"
+    },
+    {
+      "source": "pop-00517",
+      "target": "pop-00518",
+      "relation": "neighbor",
+      "weight": 3,
       "status": "active"
     },
     {
       "source": "pop-00517",
       "target": "pop-00733",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 1.9,
       "status": "active"
     },
     {
       "source": "pop-00517",
       "target": "pop-00807",
       "relation": "friendship",
-      "weight": 4.2,
+      "weight": 5.3,
+      "status": "active"
+    },
+    {
+      "source": "pop-00517",
+      "target": "pop-01100",
+      "relation": "tension",
+      "weight": 4,
       "status": "active"
     },
     {
       "source": "pop-00518",
       "target": "pop-00588",
       "relation": "friendship",
-      "weight": 5.2,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-00521",
       "target": "pop-00275",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.7,
       "status": "active"
     },
     {
       "source": "pop-00522",
       "target": "pop-01037",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7.7,
       "status": "active"
     },
     {
       "source": "pop-00527",
       "target": "pop-00120",
       "relation": "professional",
-      "weight": 5.1,
+      "weight": 4.65,
       "status": "active"
     },
     {
       "source": "pop-00527",
       "target": "pop-00528",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.01,
       "status": "active"
     },
     {
       "source": "pop-00527",
       "target": "pop-01046",
       "relation": "mentorship",
-      "weight": 8.6,
+      "weight": 8.5,
       "status": "active"
     },
     {
       "source": "pop-00528",
       "target": "pop-01039",
       "relation": "family",
-      "weight": 8.5,
+      "weight": 8.29,
       "status": "active"
     },
     {
       "source": "pop-00536",
       "target": "pop-01040",
       "relation": "family",
-      "weight": 10,
+      "weight": 8.65,
       "status": "active"
     },
     {
       "source": "pop-00537",
       "target": "pop-00313",
       "relation": "friendship",
-      "weight": 4.62,
+      "weight": 5.67,
       "status": "active"
     },
     {
       "source": "pop-00538",
       "target": "pop-00022",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 4.6,
       "status": "active"
     },
     {
       "source": "pop-00539",
       "target": "pop-00217",
       "relation": "friendship",
-      "weight": 5.14,
+      "weight": 5.49,
       "status": "active"
     },
     {
       "source": "pop-00539",
       "target": "pop-01028",
       "relation": "professional",
-      "weight": 5.1,
+      "weight": 4.65,
       "status": "active"
     },
     {
       "source": "pop-00540",
       "target": "pop-00664",
       "relation": "friendship",
-      "weight": 7.03,
+      "weight": 6.33,
       "status": "active"
     },
     {
       "source": "pop-00540",
       "target": "pop-00669",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 2,
       "status": "active"
     },
     {
       "source": "pop-00540",
       "target": "pop-01039",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 5.8,
       "status": "active"
     },
     {
       "source": "pop-00542",
       "target": "pop-00843",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 4.7,
       "status": "active"
     },
     {
@@ -6580,126 +6699,112 @@
       "source": "pop-00576",
       "target": "pop-00850",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 6.7,
       "status": "active"
     },
     {
       "source": "pop-00591",
       "target": "pop-00812",
       "relation": "friendship",
-      "weight": 6.6,
+      "weight": 7.45,
       "status": "active"
     },
     {
       "source": "pop-00591",
       "target": "pop-01041",
       "relation": "family",
-      "weight": 9,
+      "weight": 9.75,
       "status": "active"
     },
     {
       "source": "pop-00617",
       "target": "pop-00164",
       "relation": "friendship",
-      "weight": 4.2,
+      "weight": 5.3,
       "status": "active"
     },
     {
       "source": "pop-00617",
       "target": "pop-00337",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.05,
       "status": "active"
     },
     {
       "source": "pop-00618",
       "target": "pop-00590",
       "relation": "friendship",
-      "weight": 8,
+      "weight": 9.1,
       "status": "active"
     },
     {
       "source": "pop-00620",
       "target": "pop-00943",
       "relation": "professional",
-      "weight": 4.3,
-      "status": "active"
-    },
-    {
-      "source": "pop-00622",
-      "target": "pop-00598",
-      "relation": "friendship",
-      "weight": 7.6,
-      "status": "active"
-    },
-    {
-      "source": "pop-00622",
-      "target": "pop-00800",
-      "relation": "friendship",
-      "weight": 5,
+      "weight": 4.05,
       "status": "active"
     },
     {
       "source": "pop-00623",
       "target": "pop-00716",
       "relation": "friendship",
-      "weight": 5.2,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-00625",
       "target": "pop-01014",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 2.9,
       "status": "active"
     },
     {
       "source": "pop-00626",
       "target": "pop-00631",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.7,
       "status": "active"
     },
     {
       "source": "pop-00631",
       "target": "pop-00245",
       "relation": "friendship",
-      "weight": 4.23,
+      "weight": 4.43,
       "status": "active"
     },
     {
       "source": "pop-00634",
       "target": "pop-00493",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 5.5,
       "status": "active"
     },
     {
       "source": "pop-00634",
       "target": "pop-00642",
       "relation": "friendship",
-      "weight": 7.6,
+      "weight": 7.8,
       "status": "active"
     },
     {
       "source": "pop-00636",
       "target": "pop-00325",
       "relation": "friendship",
-      "weight": 8.05,
+      "weight": 8.8,
       "status": "active"
     },
     {
       "source": "pop-00641",
       "target": "pop-01018",
       "relation": "family",
-      "weight": 7.8,
+      "weight": 5.3,
       "status": "active"
     },
     {
       "source": "pop-00642",
       "target": "pop-01017",
       "relation": "family",
-      "weight": 10,
+      "weight": 9.95,
       "status": "active"
     },
     {
@@ -6713,168 +6818,154 @@
       "source": "pop-00644",
       "target": "pop-01016",
       "relation": "family",
-      "weight": 7.8,
+      "weight": 5.1,
       "status": "active"
     },
     {
       "source": "pop-00645",
       "target": "pop-00798",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 6.7,
       "status": "active"
     },
     {
       "source": "pop-00646",
       "target": "pop-00049",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 4.4,
       "status": "active"
     },
     {
       "source": "pop-00647",
       "target": "pop-01015",
       "relation": "family",
-      "weight": 7.8,
+      "weight": 5.1,
       "status": "active"
     },
     {
       "source": "pop-00649",
       "target": "pop-00821",
       "relation": "professional",
-      "weight": 5.1,
+      "weight": 5.5,
       "status": "active"
     },
     {
       "source": "pop-00651",
       "target": "pop-00544",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 4,
       "status": "active"
     },
     {
       "source": "pop-00651",
       "target": "pop-01018",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 1.5,
       "status": "active"
     },
     {
       "source": "pop-00652",
       "target": "pop-01014",
       "relation": "family",
-      "weight": 10,
+      "weight": 7.5,
       "status": "active"
     },
     {
       "source": "pop-00653",
       "target": "pop-00831",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 2.1,
       "status": "active"
     },
     {
       "source": "pop-00653",
       "target": "pop-01013",
       "relation": "family",
-      "weight": 8,
+      "weight": 5.5,
       "status": "active"
     },
     {
       "source": "pop-00654",
       "target": "pop-01012",
       "relation": "family",
-      "weight": 8,
-      "status": "active"
-    },
-    {
-      "source": "pop-00655",
-      "target": "pop-00051",
-      "relation": "friendship",
-      "weight": 5.05,
-      "status": "active"
-    },
-    {
-      "source": "pop-00655",
-      "target": "pop-00705",
-      "relation": "friendship",
-      "weight": 7.1,
+      "weight": 5.5,
       "status": "active"
     },
     {
       "source": "pop-00656",
       "target": "pop-00690",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 3.4,
       "status": "active"
     },
     {
       "source": "pop-00658",
       "target": "pop-00742",
       "relation": "friendship",
-      "weight": 6.82,
+      "weight": 8.07,
       "status": "active"
     },
     {
       "source": "pop-00658",
       "target": "pop-01038",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.14,
       "status": "active"
     },
     {
       "source": "pop-00661",
       "target": "pop-00131",
       "relation": "sports_rival",
-      "weight": 7,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00661",
       "target": "pop-00603",
       "relation": "sports_rival",
-      "weight": 7,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00661",
       "target": "pop-00640",
       "relation": "professional",
-      "weight": 4,
+      "weight": 2.9,
       "status": "active"
     },
     {
       "source": "pop-00661",
       "target": "pop-00711",
-      "relation": "tension",
-      "weight": 5.5,
+      "relation": "rivalry",
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00662",
       "target": "pop-01041",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 4.35,
       "status": "active"
     },
     {
       "source": "pop-00663",
       "target": "pop-00638",
       "relation": "professional",
-      "weight": 4.1,
+      "weight": 5.15,
       "status": "active"
     },
     {
       "source": "pop-00665",
       "target": "pop-01011",
       "relation": "family",
-      "weight": 9.5,
+      "weight": 7.59,
       "status": "active"
     },
     {
       "source": "pop-00666",
       "target": "pop-00975",
       "relation": "friendship",
-      "weight": 5.82,
+      "weight": 3.47,
       "status": "active"
     },
     {
@@ -6888,217 +6979,231 @@
       "source": "pop-00666",
       "target": "pop-01038",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 4.14,
       "status": "active"
     },
     {
       "source": "pop-00667",
       "target": "pop-00038",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 5.82,
+      "status": "active"
+    },
+    {
+      "source": "pop-00667",
+      "target": "pop-00894",
+      "relation": "sports_rival",
+      "weight": 6.5,
+      "status": "active"
+    },
+    {
+      "source": "pop-00667",
+      "target": "pop-00946",
+      "relation": "rivalry",
+      "weight": 7,
       "status": "active"
     },
     {
       "source": "pop-00667",
       "target": "pop-00975",
       "relation": "friendship",
-      "weight": 6.23,
+      "weight": 3.73,
       "status": "active"
     },
     {
       "source": "pop-00668",
       "target": "pop-00037",
       "relation": "friendship",
-      "weight": 6.84,
+      "weight": 4.3,
       "status": "active"
     },
     {
       "source": "pop-00669",
       "target": "pop-01009",
       "relation": "family",
-      "weight": 10,
+      "weight": 6.9,
       "status": "active"
     },
     {
       "source": "pop-00671",
       "target": "pop-00646",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 2.4,
       "status": "active"
     },
     {
       "source": "pop-00673",
       "target": "pop-01008",
       "relation": "family",
-      "weight": 9,
+      "weight": 9.1,
       "status": "active"
     },
     {
       "source": "pop-00678",
       "target": "pop-01007",
       "relation": "family",
-      "weight": 10,
+      "weight": 7.5,
       "status": "active"
     },
     {
       "source": "pop-00680",
       "target": "pop-01006",
       "relation": "family",
-      "weight": 8,
+      "weight": 5.1,
       "status": "active"
     },
     {
       "source": "pop-00682",
       "target": "pop-00143",
       "relation": "friendship",
-      "weight": 4.62,
+      "weight": 4.82,
       "status": "active"
     },
     {
       "source": "pop-00683",
       "target": "pop-01005",
       "relation": "family",
-      "weight": 9.8,
+      "weight": 6.9,
       "status": "active"
     },
     {
       "source": "pop-00685",
       "target": "pop-00148",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 7.35,
       "status": "active"
     },
     {
       "source": "pop-00685",
       "target": "pop-00853",
       "relation": "rivalry",
-      "weight": 6.5,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00685",
       "target": "pop-01004",
       "relation": "family",
-      "weight": 9,
+      "weight": 6.5,
       "status": "active"
     },
     {
       "source": "pop-00686",
       "target": "pop-00016",
       "relation": "friendship",
-      "weight": 4.23,
+      "weight": 4.43,
       "status": "active"
     },
     {
       "source": "pop-00686",
       "target": "pop-01003",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.45,
       "status": "active"
     },
     {
       "source": "pop-00688",
       "target": "pop-01002",
       "relation": "family",
-      "weight": 9.8,
+      "weight": 7.1,
       "status": "active"
     },
     {
       "source": "pop-00690",
       "target": "pop-00273",
       "relation": "friendship",
-      "weight": 6.05,
+      "weight": 5.35,
       "status": "active"
     },
     {
       "source": "pop-00691",
       "target": "pop-01001",
       "relation": "family",
-      "weight": 7.6,
+      "weight": 4.9,
       "status": "active"
     },
     {
       "source": "pop-00692",
       "target": "pop-00976",
       "relation": "friendship",
-      "weight": 5.03,
+      "weight": 2.53,
       "status": "active"
     },
     {
       "source": "pop-00692",
       "target": "pop-01000",
       "relation": "family",
-      "weight": 9.8,
+      "weight": 7.3,
       "status": "active"
     },
     {
       "source": "pop-00693",
       "target": "pop-00205",
       "relation": "friendship",
-      "weight": 6.26,
+      "weight": 7.51,
       "status": "active"
     },
     {
       "source": "pop-00696",
       "target": "pop-00998",
       "relation": "family",
-      "weight": 9,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-00697",
       "target": "pop-00875",
       "relation": "friendship",
-      "weight": 4.64,
+      "weight": 4.84,
       "status": "active"
     },
     {
       "source": "pop-00697",
       "target": "pop-00997",
       "relation": "family",
-      "weight": 10,
+      "weight": 7.3,
       "status": "active"
     },
     {
       "source": "pop-00699",
       "target": "pop-00996",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.25,
       "status": "active"
     },
     {
       "source": "pop-00700",
       "target": "pop-00995",
       "relation": "family",
-      "weight": 10,
+      "weight": 8.8,
       "status": "active"
     },
     {
       "source": "pop-00701",
       "target": "pop-00809",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.7,
       "status": "active"
     },
     {
       "source": "pop-00703",
       "target": "pop-00038",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 4.92,
       "status": "active"
     },
     {
       "source": "pop-00703",
       "target": "pop-00994",
       "relation": "family",
-      "weight": 7.8,
+      "weight": 5.35,
       "status": "active"
     },
     {
       "source": "pop-00705",
       "target": "pop-00555",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 4.7,
       "status": "active"
     },
     {
@@ -7112,539 +7217,532 @@
       "source": "pop-00706",
       "target": "pop-00993",
       "relation": "family",
-      "weight": 10,
+      "weight": 7.1,
       "status": "active"
     },
     {
       "source": "pop-00707",
       "target": "pop-00740",
       "relation": "friendship",
-      "weight": 7,
+      "weight": 8.1,
       "status": "active"
     },
     {
       "source": "pop-00707",
       "target": "pop-00992",
       "relation": "family",
-      "weight": 10,
+      "weight": 7.5,
       "status": "active"
     },
     {
       "source": "pop-00708",
       "target": "pop-00991",
       "relation": "family",
-      "weight": 8,
+      "weight": 8.75,
       "status": "active"
     },
     {
       "source": "pop-00708",
       "target": "pop-01040",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 7.1,
       "status": "active"
     },
     {
       "source": "pop-00709",
       "target": "pop-00745",
       "relation": "friendship",
-      "weight": 6.2,
+      "weight": 7.3,
       "status": "active"
     },
     {
       "source": "pop-00709",
       "target": "pop-00990",
       "relation": "family",
-      "weight": 8,
+      "weight": 5.3,
       "status": "active"
     },
     {
       "source": "pop-00710",
       "target": "pop-00255",
       "relation": "rivalry",
-      "weight": 7.5,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00710",
       "target": "pop-00989",
       "relation": "family",
-      "weight": 8.8,
+      "weight": 6.1,
       "status": "active"
     },
     {
       "source": "pop-00711",
       "target": "pop-00928",
       "relation": "friendship",
-      "weight": 4.64,
+      "weight": 4.84,
       "status": "active"
     },
     {
       "source": "pop-00712",
       "target": "pop-01034",
       "relation": "friendship",
-      "weight": 6.23,
+      "weight": 6.43,
       "status": "active"
     },
     {
       "source": "pop-00714",
       "target": "pop-00988",
       "relation": "family",
-      "weight": 8.8,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-00715",
       "target": "pop-00987",
       "relation": "family",
-      "weight": 8,
+      "weight": 5.1,
       "status": "active"
     },
     {
       "source": "pop-00716",
       "target": "pop-00454",
       "relation": "alliance",
-      "weight": 5.6,
+      "weight": 8.6,
       "status": "active"
     },
     {
       "source": "pop-00716",
       "target": "pop-00986",
       "relation": "family",
-      "weight": 9,
+      "weight": 6.5,
       "status": "active"
     },
     {
       "source": "pop-00717",
       "target": "pop-00438",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 4.05,
       "status": "active"
     },
     {
       "source": "pop-00717",
       "target": "pop-00624",
       "relation": "rivalry",
-      "weight": 7.5,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00718",
       "target": "pop-00985",
       "relation": "family",
-      "weight": 9,
+      "weight": 6.5,
       "status": "active"
     },
     {
       "source": "pop-00722",
       "target": "pop-00984",
       "relation": "family",
-      "weight": 10,
+      "weight": 9.45,
       "status": "active"
     },
     {
       "source": "pop-00723",
       "target": "pop-00983",
       "relation": "family",
-      "weight": 7.6,
+      "weight": 5.1,
       "status": "active"
     },
     {
       "source": "pop-00724",
       "target": "pop-00837",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 5.1,
       "status": "active"
     },
     {
       "source": "pop-00724",
       "target": "pop-00888",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 5.5,
       "status": "active"
     },
     {
       "source": "pop-00724",
       "target": "pop-00982",
       "relation": "family",
-      "weight": 8,
+      "weight": 5.3,
       "status": "active"
     },
     {
       "source": "pop-00726",
       "target": "pop-00981",
       "relation": "family",
-      "weight": 9,
+      "weight": 6.5,
       "status": "active"
     },
     {
       "source": "pop-00727",
       "target": "pop-00202",
       "relation": "friendship",
-      "weight": 6.64,
+      "weight": 4.1,
       "status": "active"
     },
     {
       "source": "pop-00728",
       "target": "pop-00980",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.45,
       "status": "active"
     },
     {
       "source": "pop-00729",
       "target": "pop-00761",
       "relation": "friendship",
-      "weight": 5.62,
+      "weight": 3.12,
       "status": "active"
     },
     {
       "source": "pop-00732",
       "target": "pop-00979",
       "relation": "family",
-      "weight": 8,
+      "weight": 5.3,
       "status": "active"
     },
     {
       "source": "pop-00735",
       "target": "pop-00675",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 4.1,
       "status": "active"
     },
     {
       "source": "pop-00736",
       "target": "pop-00592",
       "relation": "friendship",
-      "weight": 7.2,
+      "weight": 9.2,
       "status": "active"
     },
     {
       "source": "pop-00736",
       "target": "pop-00824",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 4.1,
       "status": "active"
     },
     {
       "source": "pop-00737",
       "target": "pop-00978",
       "relation": "family",
-      "weight": 9,
+      "weight": 6.5,
       "status": "active"
     },
     {
       "source": "pop-00738",
       "target": "pop-00977",
       "relation": "family",
-      "weight": 8,
+      "weight": 5.1,
       "status": "active"
     },
     {
       "source": "pop-00740",
       "target": "pop-00669",
       "relation": "friendship",
-      "weight": 5.03,
+      "weight": 4.13,
       "status": "active"
     },
     {
       "source": "pop-00740",
       "target": "pop-00697",
       "relation": "friendship",
-      "weight": 5.23,
+      "weight": 5.43,
       "status": "active"
     },
     {
       "source": "pop-00740",
       "target": "pop-00976",
       "relation": "family",
-      "weight": 8,
+      "weight": 5.3,
       "status": "active"
     },
     {
       "source": "pop-00741",
       "target": "pop-00221",
       "relation": "friendship",
-      "weight": 7.64,
+      "weight": 7.8,
       "status": "active"
     },
     {
       "source": "pop-00741",
       "target": "pop-00975",
       "relation": "family",
-      "weight": 8,
+      "weight": 5.35,
       "status": "active"
     },
     {
       "source": "pop-00742",
       "target": "pop-00743",
       "relation": "family",
-      "weight": 9,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-00743",
       "target": "pop-00842",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 3.3,
       "status": "active"
     },
     {
       "source": "pop-00745",
       "target": "pop-00498",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 5.5,
       "status": "active"
     },
     {
       "source": "pop-00746",
       "target": "pop-00467",
       "relation": "rivalry",
-      "weight": 7.5,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00747",
       "target": "pop-00637",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 3.9,
       "status": "active"
     },
     {
       "source": "pop-00747",
       "target": "pop-00638",
       "relation": "friendship",
-      "weight": 3.6,
+      "weight": 3.8,
       "status": "active"
     },
     {
       "source": "pop-00747",
       "target": "pop-00750",
       "relation": "family",
-      "weight": 9,
+      "weight": 7.8,
       "status": "active"
     },
     {
       "source": "pop-00747",
       "target": "pop-00974",
       "relation": "family",
-      "weight": 8.8,
+      "weight": 5.9,
       "status": "active"
     },
     {
       "source": "pop-00748",
       "target": "pop-00167",
       "relation": "friendship",
-      "weight": 8.05,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00748",
       "target": "pop-00875",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.7,
       "status": "active"
     },
     {
       "source": "pop-00748",
       "target": "pop-00906",
       "relation": "friendship",
-      "weight": 4.2,
+      "weight": 6.2,
       "status": "active"
     },
     {
       "source": "pop-00748",
       "target": "pop-00928",
       "relation": "friendship",
-      "weight": 4.2,
+      "weight": 6.2,
       "status": "active"
     },
     {
       "source": "pop-00750",
       "target": "pop-00974",
       "relation": "family",
-      "weight": 9,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-00754",
       "target": "pop-00728",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.7,
       "status": "active"
     },
     {
       "source": "pop-00756",
       "target": "pop-00728",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.5,
       "status": "active"
     },
     {
       "source": "pop-00758",
       "target": "pop-00722",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 4.7,
       "status": "active"
     },
     {
       "source": "pop-00759",
       "target": "pop-00927",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.05,
       "status": "active"
     },
     {
       "source": "pop-00761",
       "target": "pop-00347",
       "relation": "friendship",
-      "weight": 6.03,
+      "weight": 6.23,
       "status": "active"
     },
     {
       "source": "pop-00762",
       "target": "pop-00143",
       "relation": "friendship",
-      "weight": 4.22,
+      "weight": 5.32,
       "status": "active"
     },
     {
       "source": "pop-00764",
       "target": "pop-00720",
       "relation": "rivalry",
-      "weight": 8,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00765",
       "target": "pop-00779",
       "relation": "friendship",
-      "weight": 3.21,
+      "weight": 4.11,
       "status": "active"
     },
     {
       "source": "pop-00766",
       "target": "pop-00298",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 2.85,
       "status": "active"
     },
     {
       "source": "pop-00766",
       "target": "pop-00744",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 5.85,
       "status": "active"
     },
     {
       "source": "pop-00768",
       "target": "pop-00513",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.5,
       "status": "active"
     },
     {
       "source": "pop-00769",
       "target": "pop-00194",
       "relation": "friendship",
-      "weight": 8.1,
+      "weight": 9.35,
       "status": "active"
     },
     {
       "source": "pop-00772",
       "target": "pop-00764",
       "relation": "friendship",
-      "weight": 5.04,
+      "weight": 7.04,
       "status": "active"
     },
     {
       "source": "pop-00774",
       "target": "pop-00143",
       "relation": "friendship",
-      "weight": 3.6,
+      "weight": 5.6,
       "status": "active"
     },
     {
       "source": "pop-00779",
       "target": "pop-00040",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 5.7,
       "status": "active"
     },
     {
       "source": "pop-00779",
       "target": "pop-00464",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 5.9,
       "status": "active"
     },
     {
       "source": "pop-00779",
       "target": "pop-00749",
       "relation": "friendship",
-      "weight": 7.2,
+      "weight": 8.3,
       "status": "active"
     },
     {
       "source": "pop-00780",
       "target": "pop-00298",
       "relation": "professional",
-      "weight": 3.1,
+      "weight": 3.3,
       "status": "active"
     },
     {
       "source": "pop-00787",
       "target": "pop-00077",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 3.9,
       "status": "active"
     },
     {
       "source": "pop-00787",
       "target": "pop-00278",
       "relation": "friendship",
-      "weight": 4.42,
+      "weight": 4.76,
       "status": "active"
     },
     {
       "source": "pop-00787",
       "target": "pop-00675",
       "relation": "friendship",
-      "weight": 5.82,
-      "status": "active"
-    },
-    {
-      "source": "pop-00788",
-      "target": "pop-00655",
-      "relation": "friendship",
-      "weight": 5.05,
+      "weight": 6.02,
       "status": "active"
     },
     {
       "source": "pop-00789",
       "target": "pop-00527",
       "relation": "rivalry",
-      "weight": 8,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00791",
       "target": "pop-00276",
       "relation": "alliance",
-      "weight": 4.6,
+      "weight": 6.6,
       "status": "active"
     },
     {
       "source": "pop-00795",
       "target": "pop-00887",
       "relation": "friendship",
-      "weight": 7.6,
+      "weight": 9.6,
       "status": "active"
     },
     {
       "source": "pop-00797",
       "target": "pop-00794",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 4.35,
       "status": "active"
     },
     {
@@ -7658,14 +7756,14 @@
       "source": "pop-00799",
       "target": "pop-00333",
       "relation": "professional",
-      "weight": 4.1,
+      "weight": 3.2,
       "status": "active"
     },
     {
       "source": "pop-00799",
       "target": "pop-00640",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 3.7,
       "status": "active"
     },
     {
@@ -7679,224 +7777,224 @@
       "source": "pop-00801",
       "target": "pop-00818",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 5.7,
       "status": "active"
     },
     {
       "source": "pop-00806",
       "target": "pop-00666",
       "relation": "friendship",
-      "weight": 6.05,
+      "weight": 8.2,
       "status": "active"
     },
     {
       "source": "pop-00808",
       "target": "pop-00909",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 5.8,
       "status": "active"
     },
     {
       "source": "pop-00810",
       "target": "pop-00929",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 3.7,
       "status": "active"
     },
     {
       "source": "pop-00811",
       "target": "pop-00041",
       "relation": "friendship",
-      "weight": 6.6,
+      "weight": 7.7,
       "status": "active"
     },
     {
       "source": "pop-00815",
       "target": "pop-00802",
       "relation": "friendship",
-      "weight": 6.6,
+      "weight": 6.8,
       "status": "active"
     },
     {
       "source": "pop-00817",
       "target": "pop-00218",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 5.02,
       "status": "active"
     },
     {
       "source": "pop-00818",
       "target": "pop-00718",
       "relation": "rivalry",
-      "weight": 8,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00819",
       "target": "pop-00333",
       "relation": "friendship",
-      "weight": 5.21,
+      "weight": 2.51,
       "status": "active"
     },
     {
       "source": "pop-00820",
       "target": "pop-01028",
       "relation": "friendship",
-      "weight": 4,
+      "weight": 5.1,
       "status": "active"
     },
     {
       "source": "pop-00823",
       "target": "pop-00472",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 2.3,
       "status": "active"
     },
     {
       "source": "pop-00823",
       "target": "pop-00837",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 6,
       "status": "active"
     },
     {
       "source": "pop-00824",
       "target": "pop-00861",
       "relation": "alliance",
-      "weight": 2.9,
+      "weight": 1.9,
       "status": "active"
     },
     {
       "source": "pop-00826",
       "target": "pop-00508",
       "relation": "friendship",
-      "weight": 3.4,
-      "status": "active"
+      "weight": 0.7,
+      "status": "dormant"
     },
     {
       "source": "pop-00827",
       "target": "pop-00287",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 3.25,
       "status": "active"
     },
     {
       "source": "pop-00829",
       "target": "pop-00339",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.7,
       "status": "active"
     },
     {
       "source": "pop-00830",
       "target": "pop-00181",
       "relation": "friendship",
-      "weight": 3.23,
+      "weight": 4.47,
       "status": "active"
     },
     {
       "source": "pop-00831",
       "target": "pop-00868",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 3.1,
       "status": "active"
     },
     {
       "source": "pop-00832",
       "target": "pop-01045",
       "relation": "friendship",
-      "weight": 6.2,
+      "weight": 6.4,
       "status": "active"
     },
     {
       "source": "pop-00833",
       "target": "pop-01016",
       "relation": "friendship",
-      "weight": 7.2,
+      "weight": 4.7,
       "status": "active"
     },
     {
       "source": "pop-00835",
       "target": "pop-00356",
       "relation": "friendship",
-      "weight": 5.82,
+      "weight": 5.12,
       "status": "active"
     },
     {
       "source": "pop-00835",
       "target": "pop-01007",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 2.9,
       "status": "active"
     },
     {
       "source": "pop-00837",
       "target": "pop-00092",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 5.3,
       "status": "active"
     },
     {
       "source": "pop-00838",
       "target": "pop-01029",
       "relation": "friendship",
-      "weight": 7.6,
+      "weight": 8.7,
       "status": "active"
     },
     {
       "source": "pop-00839",
       "target": "pop-00621",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 5.5,
       "status": "active"
     },
     {
       "source": "pop-00841",
       "target": "pop-00296",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 3.97,
       "status": "active"
     },
     {
       "source": "pop-00842",
       "target": "pop-00864",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 5.35,
       "status": "active"
     },
     {
       "source": "pop-00845",
       "target": "pop-00889",
       "relation": "professional",
-      "weight": 4.1,
+      "weight": 4.5,
       "status": "active"
     },
     {
       "source": "pop-00848",
       "target": "pop-00332",
       "relation": "friendship",
-      "weight": 4.23,
+      "weight": 6.23,
       "status": "active"
     },
     {
       "source": "pop-00848",
       "target": "pop-00926",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.05,
       "status": "active"
     },
     {
       "source": "pop-00852",
       "target": "pop-00333",
       "relation": "friendship",
-      "weight": 4.23,
+      "weight": 4.43,
       "status": "active"
     },
     {
       "source": "pop-00856",
       "target": "pop-00845",
       "relation": "friendship",
-      "weight": 7.2,
+      "weight": 8.1,
       "status": "active"
     },
     {
@@ -7910,42 +8008,42 @@
       "source": "pop-00858",
       "target": "pop-00455",
       "relation": "friendship",
-      "weight": 5.2,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-00859",
       "target": "pop-00867",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 5,
       "status": "active"
     },
     {
       "source": "pop-00860",
       "target": "pop-00996",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 6.1,
       "status": "active"
     },
     {
       "source": "pop-00863",
       "target": "pop-00228",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 4.3,
       "status": "active"
     },
     {
       "source": "pop-00870",
       "target": "pop-01036",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 6.6,
       "status": "active"
     },
     {
       "source": "pop-00872",
       "target": "pop-01027",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 7.8,
       "status": "active"
     },
     {
@@ -7959,147 +8057,147 @@
       "source": "pop-00876",
       "target": "pop-00208",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 4.3,
       "status": "active"
     },
     {
       "source": "pop-00876",
       "target": "pop-01037",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 6.7,
       "status": "active"
     },
     {
       "source": "pop-00879",
       "target": "pop-01048",
       "relation": "friendship",
-      "weight": 6.6,
+      "weight": 7.7,
       "status": "active"
     },
     {
       "source": "pop-00880",
       "target": "pop-00217",
       "relation": "friendship",
-      "weight": 5.89,
+      "weight": 7.14,
       "status": "active"
     },
     {
       "source": "pop-00882",
       "target": "pop-00931",
       "relation": "friendship",
-      "weight": 7.2,
+      "weight": 8.1,
       "status": "active"
     },
     {
       "source": "pop-00884",
       "target": "pop-00253",
       "relation": "friendship",
-      "weight": 4.64,
+      "weight": 3.94,
       "status": "active"
     },
     {
       "source": "pop-00885",
       "target": "pop-00639",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 7.6,
       "status": "active"
     },
     {
       "source": "pop-00886",
       "target": "pop-00283",
       "relation": "rivalry",
-      "weight": 7.8,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00887",
       "target": "pop-01037",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7.9,
       "status": "active"
     },
     {
       "source": "pop-00892",
       "target": "pop-00623",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 5.2,
       "status": "active"
     },
     {
       "source": "pop-00896",
       "target": "pop-00775",
       "relation": "friendship",
-      "weight": 4,
+      "weight": 4.9,
       "status": "active"
     },
     {
       "source": "pop-00896",
       "target": "pop-00819",
       "relation": "friendship",
-      "weight": 6.6,
+      "weight": 3.9,
       "status": "active"
     },
     {
       "source": "pop-00897",
       "target": "pop-00222",
       "relation": "friendship",
-      "weight": 6.41,
+      "weight": 7.31,
       "status": "active"
     },
     {
       "source": "pop-00901",
       "target": "pop-00690",
       "relation": "alliance",
-      "weight": 6.6,
+      "weight": 6.9,
       "status": "active"
     },
     {
       "source": "pop-00902",
       "target": "pop-00459",
       "relation": "friendship",
-      "weight": 3.6,
+      "weight": 3.8,
       "status": "active"
     },
     {
       "source": "pop-00905",
       "target": "pop-00430",
       "relation": "friendship",
-      "weight": 4,
+      "weight": 3.3,
       "status": "active"
     },
     {
       "source": "pop-00905",
       "target": "pop-00761",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 3.12,
       "status": "active"
     },
     {
       "source": "pop-00908",
       "target": "pop-00251",
       "relation": "friendship",
-      "weight": 7.23,
+      "weight": 7.43,
       "status": "active"
     },
     {
       "source": "pop-00908",
       "target": "pop-01014",
       "relation": "friendship",
-      "weight": 7,
+      "weight": 4.3,
       "status": "active"
     },
     {
       "source": "pop-00910",
       "target": "pop-00440",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 1.9,
       "status": "active"
     },
     {
       "source": "pop-00918",
       "target": "pop-00039",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 4.8,
       "status": "active"
     },
     {
@@ -8120,28 +8218,28 @@
       "source": "pop-00927",
       "target": "pop-00481",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 4.4,
       "status": "active"
     },
     {
       "source": "pop-00930",
       "target": "pop-01034",
       "relation": "professional",
-      "weight": 2.3,
+      "weight": 2.7,
       "status": "active"
     },
     {
       "source": "pop-00932",
       "target": "pop-00675",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 4.92,
       "status": "active"
     },
     {
       "source": "pop-00934",
       "target": "pop-00867",
       "relation": "friendship",
-      "weight": 6.6,
+      "weight": 3.7,
       "status": "active"
     },
     {
@@ -8155,21 +8253,21 @@
       "source": "pop-00935",
       "target": "pop-00910",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.5,
       "status": "active"
     },
     {
       "source": "pop-00937",
       "target": "pop-00327",
       "relation": "rivalry",
-      "weight": 6.75,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00937",
       "target": "pop-00830",
       "relation": "neighbor",
-      "weight": 3.5,
+      "weight": 3.4,
       "status": "active"
     },
     {
@@ -8183,462 +8281,546 @@
       "source": "pop-00939",
       "target": "pop-00005",
       "relation": "friendship",
-      "weight": 8,
+      "weight": 8.2,
       "status": "active"
     },
     {
       "source": "pop-00942",
       "target": "pop-00464",
       "relation": "friendship",
-      "weight": 5.6,
+      "weight": 4.9,
       "status": "active"
     },
     {
       "source": "pop-00942",
       "target": "pop-00554",
       "relation": "professional",
-      "weight": 5.1,
+      "weight": 4.85,
       "status": "active"
     },
     {
       "source": "pop-00943",
       "target": "pop-00005",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7,
       "status": "active"
     },
     {
       "source": "pop-00944",
       "target": "pop-00518",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 2.4,
       "status": "active"
     },
     {
       "source": "pop-00944",
       "target": "pop-00995",
       "relation": "friendship",
-      "weight": 6.2,
+      "weight": 4.4,
       "status": "active"
     },
     {
       "source": "pop-00945",
       "target": "pop-00223",
       "relation": "friendship",
-      "weight": 4.23,
+      "weight": 4.58,
       "status": "active"
     },
     {
       "source": "pop-00945",
       "target": "pop-00229",
       "relation": "friendship",
-      "weight": 4.26,
+      "weight": 5.3,
       "status": "active"
     },
     {
       "source": "pop-00946",
       "target": "pop-00910",
       "relation": "friendship",
-      "weight": 3.4,
+      "weight": 4.3,
       "status": "active"
     },
     {
       "source": "pop-00950",
       "target": "pop-00895",
       "relation": "rivalry",
-      "weight": 8,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-00977",
       "target": "pop-00923",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 1.7,
       "status": "active"
     },
     {
       "source": "pop-00981",
       "target": "pop-00294",
       "relation": "friendship",
-      "weight": 6.68,
+      "weight": 4.33,
       "status": "active"
     },
     {
       "source": "pop-00982",
       "target": "pop-00174",
       "relation": "friendship",
-      "weight": 5.26,
+      "weight": 2.47,
       "status": "active"
     },
     {
       "source": "pop-00983",
       "target": "pop-00474",
       "relation": "friendship",
-      "weight": 5,
+      "weight": 2.1,
       "status": "active"
     },
     {
       "source": "pop-00984",
       "target": "pop-00521",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 3.05,
       "status": "active"
     },
     {
       "source": "pop-00988",
       "target": "pop-00039",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 3.5,
       "status": "active"
     },
     {
       "source": "pop-00989",
       "target": "pop-00662",
       "relation": "professional",
-      "weight": 4.1,
+      "weight": 1.9,
       "status": "active"
     },
     {
       "source": "pop-00991",
       "target": "pop-00281",
       "relation": "friendship",
-      "weight": 5.05,
+      "weight": 7.05,
       "status": "active"
     },
     {
       "source": "pop-00993",
       "target": "pop-00134",
       "relation": "friendship",
-      "weight": 6.23,
+      "weight": 4.13,
       "status": "active"
     },
     {
       "source": "pop-00996",
       "target": "pop-00658",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 6.77,
       "status": "active"
     },
     {
       "source": "pop-00998",
       "target": "pop-00923",
       "relation": "friendship",
-      "weight": 3.4,
-      "status": "active"
+      "weight": 0.5,
+      "status": "dormant"
     },
     {
       "source": "pop-00999",
       "target": "pop-00222",
       "relation": "friendship",
-      "weight": 4.23,
+      "weight": 1.53,
       "status": "active"
     },
     {
       "source": "pop-00999",
       "target": "pop-00997",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 2.5,
       "status": "active"
     },
     {
       "source": "pop-00999",
       "target": "pop-01044",
       "relation": "family",
-      "weight": 9,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-00999",
       "target": "pop-01045",
       "relation": "family",
-      "weight": 10,
+      "weight": 7.1,
       "status": "active"
     },
     {
       "source": "pop-01001",
       "target": "pop-00658",
       "relation": "friendship",
-      "weight": 6.41,
+      "weight": 4.06,
       "status": "active"
     },
     {
       "source": "pop-01002",
       "target": "pop-00225",
       "relation": "friendship",
-      "weight": 5.84,
+      "weight": 3.49,
       "status": "active"
     },
     {
       "source": "pop-01005",
       "target": "pop-00318",
       "relation": "professional",
-      "weight": 6.3,
+      "weight": 4.1,
       "status": "active"
     },
     {
       "source": "pop-01005",
       "target": "pop-00533",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 1.9,
       "status": "active"
     },
     {
       "source": "pop-01006",
       "target": "pop-00244",
       "relation": "friendship",
-      "weight": 7,
+      "weight": 4.5,
       "status": "active"
     },
     {
       "source": "pop-01008",
       "target": "pop-00449",
       "relation": "friendship",
-      "weight": 6.2,
+      "weight": 7.3,
       "status": "active"
     },
     {
       "source": "pop-01009",
       "target": "pop-00999",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 2.5,
       "status": "active"
     },
     {
       "source": "pop-01013",
       "target": "pop-00237",
       "relation": "professional",
-      "weight": 5.3,
+      "weight": 3.22,
       "status": "active"
     },
     {
       "source": "pop-01014",
       "target": "pop-00497",
       "relation": "professional",
-      "weight": 6.1,
+      "weight": 3.5,
       "status": "active"
     },
     {
       "source": "pop-01014",
       "target": "pop-00803",
       "relation": "friendship",
-      "weight": 7,
+      "weight": 4.3,
       "status": "active"
     },
     {
       "source": "pop-01016",
       "target": "pop-01043",
       "relation": "professional",
-      "weight": 2.9,
-      "status": "active"
+      "weight": 0.5,
+      "status": "dormant"
     },
     {
       "source": "pop-01022",
       "target": "pop-00257",
       "relation": "friendship",
-      "weight": 5.82,
+      "weight": 6.17,
       "status": "active"
     },
     {
       "source": "pop-01022",
       "target": "pop-00603",
       "relation": "friendship",
-      "weight": 7.2,
+      "weight": 7.4,
       "status": "active"
     },
     {
       "source": "pop-01023",
       "target": "pop-01030",
       "relation": "professional",
-      "weight": 4.1,
+      "weight": 3.85,
       "status": "active"
     },
     {
       "source": "pop-01024",
       "target": "pop-00899",
       "relation": "friendship",
-      "weight": 7,
+      "weight": 7.2,
       "status": "active"
     },
     {
       "source": "pop-01025",
       "target": "pop-01002",
       "relation": "friendship",
-      "weight": 3.6,
-      "status": "active"
+      "weight": 0.1,
+      "status": "dormant"
     },
     {
       "source": "pop-01026",
       "target": "pop-00466",
       "relation": "friendship",
-      "weight": 6.6,
+      "weight": 4.1,
       "status": "active"
     },
     {
       "source": "pop-01027",
       "target": "pop-00554",
       "relation": "friendship",
-      "weight": 7,
+      "weight": 7.2,
       "status": "active"
     },
     {
       "source": "pop-01028",
       "target": "pop-00227",
       "relation": "professional",
-      "weight": 4.1,
+      "weight": 4.57,
       "status": "active"
     },
     {
       "source": "pop-01028",
       "target": "pop-00330",
       "relation": "friendship",
-      "weight": 5.21,
+      "weight": 6.31,
       "status": "active"
     },
     {
       "source": "pop-01029",
       "target": "pop-00876",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 7.1,
       "status": "active"
     },
     {
       "source": "pop-01030",
       "target": "pop-00301",
       "relation": "professional",
-      "weight": 3.3,
+      "weight": 2.95,
       "status": "active"
     },
     {
       "source": "pop-01030",
       "target": "pop-00647",
       "relation": "professional",
-      "weight": 4.3,
+      "weight": 3.85,
       "status": "active"
     },
     {
       "source": "pop-01030",
       "target": "pop-00787",
       "relation": "friendship",
-      "weight": 3.2,
+      "weight": 2.3,
       "status": "active"
     },
     {
       "source": "pop-01031",
       "target": "pop-01033",
       "relation": "friendship",
-      "weight": 8,
+      "weight": 7.3,
       "status": "active"
     },
     {
       "source": "pop-01032",
       "target": "pop-00829",
       "relation": "friendship",
-      "weight": 4.6,
+      "weight": 4.8,
       "status": "active"
     },
     {
       "source": "pop-01033",
       "target": "pop-00307",
       "relation": "friendship",
-      "weight": 5.89,
+      "weight": 6.79,
       "status": "active"
     },
     {
       "source": "pop-01034",
       "target": "pop-00021",
       "relation": "rivalry",
-      "weight": 8,
+      "weight": 10,
       "status": "active"
     },
     {
       "source": "pop-01034",
       "target": "pop-00684",
       "relation": "friendship",
-      "weight": 4.23,
+      "weight": 6.23,
       "status": "active"
     },
     {
       "source": "pop-01037",
       "target": "pop-00675",
       "relation": "alliance",
-      "weight": 4.1,
+      "weight": 7.1,
       "status": "active"
     },
     {
       "source": "pop-01042",
       "target": "pop-01029",
       "relation": "friendship",
-      "weight": 5.2,
+      "weight": 6.3,
       "status": "active"
     },
     {
       "source": "pop-01042",
       "target": "pop-01043",
       "relation": "family",
-      "weight": 7.6,
+      "weight": 7.7,
       "status": "active"
     },
     {
       "source": "pop-01043",
       "target": "pop-00590",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 6.9,
       "status": "active"
     },
     {
       "source": "pop-01043",
       "target": "pop-00762",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 5.02,
       "status": "active"
     },
     {
       "source": "pop-01043",
       "target": "pop-00838",
       "relation": "friendship",
-      "weight": 3.4,
+      "weight": 4.5,
       "status": "active"
     },
     {
       "source": "pop-01044",
       "target": "pop-01045",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.5,
       "status": "active"
     },
     {
       "source": "pop-01048",
       "target": "pop-00597",
       "relation": "friendship",
-      "weight": 7.6,
+      "weight": 8.5,
       "status": "active"
     },
     {
       "source": "pop-01050",
       "target": "pop-00929",
       "relation": "friendship",
-      "weight": 5,
+      "weight": 2.1,
       "status": "active"
     },
     {
       "source": "pop-01053",
       "target": "pop-00335",
       "relation": "professional",
-      "weight": 5.1,
+      "weight": 4.67,
       "status": "active"
     },
     {
       "source": "pop-01053",
       "target": "pop-00598",
       "relation": "friendship",
-      "weight": 6.2,
+      "weight": 6.4,
       "status": "active"
     },
     {
       "source": "pop-01053",
       "target": "pop-00774",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 5,
+      "status": "active"
+    },
+    {
+      "source": "pop-01055",
+      "target": "pop-00140",
+      "relation": "professional",
+      "weight": 3.15,
+      "status": "active"
+    },
+    {
+      "source": "pop-01055",
+      "target": "pop-00170",
+      "relation": "professional",
+      "weight": 4.16,
+      "status": "active"
+    },
+    {
+      "source": "pop-01055",
+      "target": "pop-00300",
+      "relation": "professional",
+      "weight": 4.15,
+      "status": "active"
+    },
+    {
+      "source": "pop-01110",
+      "target": "pop-00314",
+      "relation": "friendship",
+      "weight": 4.6,
+      "status": "active"
+    },
+    {
+      "source": "pop-01112",
+      "target": "pop-00190",
+      "relation": "friendship",
+      "weight": 4.72,
+      "status": "active"
+    },
+    {
+      "source": "pop-01112",
+      "target": "pop-00772",
+      "relation": "friendship",
+      "weight": 4.6,
+      "status": "active"
+    },
+    {
+      "source": "pop-01112",
+      "target": "pop-00961",
+      "relation": "friendship",
+      "weight": 2.8,
+      "status": "active"
+    },
+    {
+      "source": "pop-01113",
+      "target": "pop-00176",
+      "relation": "friendship",
+      "weight": 4.72,
+      "status": "active"
+    },
+    {
+      "source": "pop-01122",
+      "target": "pop-00187",
+      "relation": "friendship",
+      "weight": 3.39,
+      "status": "active"
+    },
+    {
+      "source": "pop-01122",
+      "target": "pop-00576",
+      "relation": "friendship",
+      "weight": 3.1,
+      "status": "active"
+    },
+    {
+      "source": "pop-01195",
+      "target": "pop-00840",
+      "relation": "friendship",
+      "weight": 3.4,
+      "status": "active"
+    },
+    {
+      "source": "pop-01196",
+      "target": "pop-01122",
+      "relation": "friendship",
+      "weight": 3.4,
       "status": "active"
     }
   ]

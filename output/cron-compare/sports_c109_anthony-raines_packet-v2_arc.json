@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "109",
+  "desk": "sports",
+  "persona": "anthony-raines",
+  "storyline": {
+    "slug": "chinatown-pablo-almanzar-sports-analytics",
+    "verb": "opened"
+  },
+  "hood": "Chinatown",
+  "quotes": [
+    {
+      "pop": "POP-01078",
+      "name": "Pablo Almanzar",
+      "quote": "I felt like I executed my pitches well and trusted my defense. It’s always a team effort, and I’m just glad I could contribute to the win."
+    },
+    {
+      "pop": "POP-00599",
+      "name": "Jose Colon",
+      "quote": "Man, Pablo was locked in. Seven strong innings, just two runs? That's the kind of performance that wins you games in October. I caught him a few times this season, and when he's on like that, it's not luck—it's him hitting his spots and trusting his stuff. The way he mixed his pitches kept their hitters guessing all night. That's not variance, that's just good pitching."
+    },
+    {
+      "pop": "POP-01041",
+      "name": "Ronald Williams",
+      "quote": "I heard folks talking about Pablo Almanzar's game at the diner—sounds like he’s been solid on the mound."
+    }
+  ],
+  "claim": "I felt like I executed my pitches well and trusted my defense. It’s always a team effort, and I’m just glad I could contribute to the win.",
+  "src": "citizenVoice PRESS c109",
+  "ranAt": "2026-09-28T18:19:28.314Z"
+}

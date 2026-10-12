@@ -1,0 +1,26 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-09-24",
+  "cycle": 108,
+  "model": "deepseek/deepseek-chat",
+  "statement": "The month-eight disbursement of the West Oakland Stabilization Fund has reached completion, marking a significant milestone in our revitalization efforts. The Downtown outreach assessment indicates that engagement is promising, but sustained momentum requires continued focus on West Oakland residents and businesses most impacted by displacement.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-108-civic-office-council-d1",
+        "text": "The Oakland Alternative Response Initiative evaluation report will be filed to assess the program's impact and plan for permanent dispatch expansion in West Oakland.",
+        "directiveCycle": 108,
+        "confrontationSeat": "civic-office-council-d1"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-09-24T10:47:03.843Z",
+  "fellBackFrom": null
+}

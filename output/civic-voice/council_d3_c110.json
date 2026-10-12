@@ -1,0 +1,38 @@
+{
+  "office": "council_d3",
+  "cycle": 110,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "This cycle, I prioritized advancing the Fruitvale Transit Hub Phase II to keep momentum on a critical community project. I also ensured District 3's youth will benefit from the Oakland Youth Apprenticeship Pipeline by confirming our cohort placement allocations. Finally, I addressed San Antonio's downturn by calling for targeted safety and retail recovery initiatives.",
+  "statements": [
+    {
+      "statementId": "STMT-110-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Fruitvale Transit Hub Phase II",
+      "initiative": "INIT-003",
+      "decision": "Direct Mayer & Associates to advance to preliminary schematics review with community oversight provisions intact.",
+      "quote": "Phase II's blueprints belong to the merchants who'll live with them—we're signing more than a contract, we're signing a covenant.",
+      "fullStatement": "The Fruitvale Transit Hub Phase II is more than infrastructure—it's a commitment to our community's future. Moving forward with preliminary schematics ensures that Fruitvale merchants remain at the heart of every decision. This project is a testament to what happens when we invest in neighborhoods deliberately. We're not just building a transit hub—we're building opportunity.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d3-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline",
+      "initiative": "INIT-007",
+      "decision": "Confirm District 3 cohort placement allocations and accelerate intake for underserved districts.",
+      "quote": "This cohort is our promise in action—we're investing in D3's future, one apprentice at a time.",
+      "fullStatement": "The Oakland Youth Apprenticeship Pipeline is a lifeline for our community's young people. By confirming District 3's cohort placements, we're ensuring that our youth have access to opportunities that pave the way for a brighter future. This isn't just a program—it's a promise to our next generation. We'll accelerate intake and prioritize underserved areas because every young person deserves a fair shot.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d3-003",
+      "type": "vote_statement",
+      "topic": "San Antonio Corridor Distress",
+      "initiative": null,
+      "decision": "Introduce a legislative response targeting San Antonio safety and retail recovery.",
+      "quote": "San Antonio isn’t just another neighborhood—it’s the heart of D3’s resilience.",
+      "fullStatement": "San Antonio's downturn demands immediate and targeted action. With sentiment at 0.18 and crime higher than the city average, we cannot afford to wait. I'm calling for increased safety patrols, community engagement, and retail recovery initiatives to restore trust and vitality to this corridor. We'll invest in programs that bring people together, not policies that push them apart. San Antonio deserves our full attention—and action.",
+      "trackerUpdates": {}
+    }
+  ]
+}

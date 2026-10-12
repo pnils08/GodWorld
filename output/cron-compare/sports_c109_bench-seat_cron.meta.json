@@ -1,0 +1,17 @@
+{
+  "desk": "sports",
+  "cycle": "109",
+  "model": "anthropic/claude-haiku-4.5",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 9536,
+  "usageOutputTokens": 961,
+  "savedFiles": [
+    "output/cron-compare/sports_c109_elliot-marbury_bench-seat_anthropic-claude-haiku-4-5.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c109.md",
+  "durationMs": 12153,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-01T04:57:33.436Z"
+}

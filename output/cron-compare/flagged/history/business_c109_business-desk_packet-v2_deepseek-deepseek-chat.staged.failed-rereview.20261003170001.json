@@ -1,0 +1,57 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "109",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c109_business-desk_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Enzo Walker",
+        "role": "quoted-source",
+        "popid": "POP-00291"
+      },
+      {
+        "name": "Dom Will",
+        "role": "quoted-source",
+        "popid": "POP-00368"
+      },
+      {
+        "name": "Sam Fazio",
+        "role": "mentioned",
+        "popid": "POP-00445"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "west-oakland-sam-fazio-story-signal",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "Working at Civis Systems, I’ve seen how West Oakland businesses like ours, Oakmesh Systems, and Coastline Construction are really shaping the neighborhood. It’s not just about the jobs—it’s about the community we’re building together. People here are passionate about what they do, whether it’s urban systems intelligence or construction. There’s a sense of pride in contributing to something bigger.",
+        "sourceRef": "citizenVoice PRESS Sam Fazio"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d6cb151eb33d",
+    "draftSha256": "74811fd90cd33ca6a9046004d91d9bb9ef023d99726d1d5e0c91ccd7b82aef81",
+    "verdict": "output/cron-compare/business_c109_business-desk_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-28T23:16:47.899Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-28T23:16:48.331Z"
+}

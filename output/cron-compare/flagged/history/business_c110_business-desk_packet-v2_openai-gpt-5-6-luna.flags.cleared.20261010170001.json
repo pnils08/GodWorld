@@ -1,0 +1,11 @@
+{
+  "draft": "business_c110_business-desk_packet-v2_openai-gpt-5-6-luna.md",
+  "flags": [],
+  "contamination": [
+    {
+      "check": "real-oakland-leak",
+      "issue": "ebmud"
+    }
+  ],
+  "summary": "deterministic world-contamination blocker failed"
+}

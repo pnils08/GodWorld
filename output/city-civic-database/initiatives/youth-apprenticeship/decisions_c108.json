@@ -1,0 +1,14 @@
+{
+  "initiative": "INIT-007",
+  "initiativeId": "INIT-007",
+  "cycle": 108,
+  "primaryVoice": "Crane D6 (council_d6-003)",
+  "consolidatedFrom": [
+    "STMT-108-council_d6-003 (Crane D6 — Youth Apprenticeship Pipeline Placement Metrics)",
+    "STMT-108-council_d8-001 (Chen D8 — Apprenticeship Intake Audit and Metric Publication)",
+    "STMT-108-mayor_open-002 (Mayor agenda — Youth Apprenticeship Pipeline Placement Metrics Publication)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-007"
+  }
+}

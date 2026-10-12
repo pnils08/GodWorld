@@ -1,0 +1,636 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00153",
+    "name": "Jordan Velez",
+    "role": "desk reporter",
+    "desk": "business"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+    "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "economic-storefront",
+      "hood": "West Oakland",
+      "pulseClass": "hood-businesses",
+      "economicFrame": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+      "hook": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+      "namedBusinesses": [
+        "Oakmesh Systems",
+        "Civis Systems",
+        "Coastline Construction",
+        "Mariner Construction",
+        "Northgate Construction"
+      ],
+      "workplaces": [
+        "Oakmesh Systems — Civic Tech — Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems))",
+        "Civis Systems — Urban Systems Intelligence Firm — Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+        "Coastline Construction — Construction — no roster names",
+        "Mariner Construction — Construction — no roster names",
+        "Northgate Construction — Construction — no roster names"
+      ],
+      "engineColour": [
+        "Daniel Cloak — painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "Marcus Wright — noticed a familiar face missing from the morning routine",
+        "Eleanor Rivera — watched the ferry cut across the bay at sunset and felt lucky to live this close to the water",
+        "Charlene Underwood — snaked a drain on the first try and didn't brag about it, much"
+      ],
+      "roomIsYours": "the counter, the hiring board, the back office, what the owner is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "West Oakland",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+    "plan": {
+      "focus": "West Oakland businesses: Oakmesh Systems, Civis Systems, Coastline Construction — the people who work there",
+      "closeQuestion": "What’s the next big move for West Oakland’s businesses?"
+    },
+    "openThreads": [
+      {
+        "slug": "baylight-district-kelvon-ochoa-story-signal",
+        "label": "baylight-district-kelvon-ochoa-story-signal | C108→C108 | 1 article(s) | opened 1",
+        "hood": null,
+        "popids": [
+          "POP-00134",
+          "POP-00174",
+          "POP-00481"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "baylight-district-kelvon-ochoa-hood-businesses",
+        "label": "baylight-district-kelvon-ochoa-hood-businesses | C108→C108 | 1 article(s) | opened 1",
+        "hood": "Baylight District",
+        "popids": [
+          "POP-00481",
+          "POP-00134",
+          "POP-00174"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "city-civis-systems-recalibration",
+        "label": "city-civis-systems-recalibration | C108→C108 | 0 article(s) | opened 1",
+        "hood": null,
+        "popids": [
+          "POP-00789"
+        ],
+        "lastCycle": 108
+      },
+      {
+        "slug": "temescal-ariana-reyes-story-signal",
+        "label": "temescal-ariana-reyes-story-signal | C107→C107 | 1 article(s) | opened 1",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00133",
+          "POP-00347",
+          "POP-00781",
+          "POP-00792"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "temescal-ariana-reyes-hood-businesses",
+        "label": "temescal-ariana-reyes-hood-businesses | C107→C107 | 1 article(s) | opened 1",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00133",
+          "POP-00781",
+          "POP-00347"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "west-oakland-toby-lamont-story-signal",
+        "label": "west-oakland-toby-lamont-story-signal | C106→C106 | 1 article(s) | opened 1",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00183"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "west-oakland-toby-lamont-hood-businesses",
+        "label": "west-oakland-toby-lamont-hood-businesses | C106→C106 | 1 article(s) | opened 1",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00183",
+          "POP-00184",
+          "POP-00188"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "rockridge-depak-ying-story-signal",
+        "label": "rockridge-depak-ying-story-signal | C105→C105 | 1 article(s) | opened 1",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "rockridge-depak-ying-hood-rising",
+        "label": "rockridge-depak-ying-hood-rising | C105→C105 | 1 article(s) | advanced 1",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "grand-lake-vinnie-keane-retail-decay",
+        "label": "grand-lake-vinnie-keane-retail-decay | C104→C104 | 1 article(s) | opened 1 | DORMANT — 5 cycle(s) since coverage",
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00001",
+          "POP-00002",
+          "POP-00170"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "grand-lake-amara-keane-retail-decay",
+        "label": "grand-lake-amara-keane-retail-decay | C104→C104 | 1 article(s) | opened 1 | DORMANT — 5 cycle(s) since coverage",
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00002",
+          "POP-00170",
+          "POP-00198"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "dimond-clarence-moody-hood-cooling",
+        "label": "dimond-clarence-moody-hood-cooling | C103→C103 | 1 article(s) | opened 1 | DORMANT — 6 cycle(s) since coverage",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00730",
+          "POP-00170",
+          "POP-00201"
+        ],
+        "lastCycle": 103
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00291",
+        "name": "Enzo Walker",
+        "profile": "Enzo Walker — Plumber — Oakmesh Systems, West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00368",
+        "name": "Dom Will",
+        "profile": "Dom Will — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00445",
+        "name": "Sam Fazio",
+        "profile": "Sam Fazio — Digital Twin Architect — Civis Systems, West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00445-6d21fc5b25",
+        "pop": "POP-00445",
+        "name": "Sam Fazio",
+        "quote": "Working at Civis Systems, I’ve seen how West Oakland businesses like ours, Oakmesh Systems, and Coastline Construction are really shaping the neighborhood. It’s not just about the jobs—it’s about the community we’re building together. People here are passionate about what they do, whether it’s urban systems intelligence or construction. There’s a sense of pride in contributing to something bigger.",
+        "factIds": [
+          "F-959406e9b257",
+          "F-b921a6b5458d",
+          "F-032d5126b451"
+        ],
+        "src": "packet.W2[POP-00445]"
+      },
+      {
+        "id": "Q-POP-00291-cebe12f65c",
+        "pop": "POP-00291",
+        "name": "Enzo Walker",
+        "quote": "Honestly? Those tech firms like Oakmesh and Civis—they're changing the block faster than we can keep up. I work at Oakmesh, and half the time I'm fixing pipes in buildings that didn't exist last year. The money's there, sure, but it's not sticking around here. Guys like Elias at Civis talk about 'systems' and 'efficiency,' but ask the folks at the bus stop if they feel any of that. We're all just trying to keep the water running while the city builds over us.",
+        "factIds": [
+          "F-b921a6b5458d",
+          "F-959406e9b257"
+        ],
+        "src": "packet.W2[POP-00291]"
+      },
+      {
+        "id": "Q-POP-00368-ab8c40d69d",
+        "pop": "POP-00368",
+        "name": "Dom Will",
+        "quote": "Oakmesh feels like we're building something real here - not just another tech bubble. Marcus keeps us focused on civic impact, not just profit. Civis down the street? Elias runs a tight ship, all that urban intelligence work. You see their drone fleet buzzing around sometimes. Coastline's got cranes up everywhere - hard to miss them. But it's the small crews, like our construction guys, that make the neighborhood hum.",
+        "factIds": [
+          "F-b921a6b5458d",
+          "F-959406e9b257",
+          "F-032d5126b451"
+        ],
+        "src": "packet.W2[POP-00368]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Are there any unrecorded layoffs or closures in West Oakland?",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "How are the construction companies like Coastline Construction managing their growth?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland businesses · Oakmesh Systems, Civis Systems",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+      "id": "F-14b1ba588707"
+    },
+    {
+      "t": "FACT",
+      "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+      "id": "F-8c40d814d550"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+      "id": "F-b921a6b5458d"
+    },
+    {
+      "t": "FACT",
+      "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+      "id": "F-959406e9b257"
+    },
+    {
+      "t": "FACT",
+      "text": "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+      "id": "F-032d5126b451"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariner Construction · Construction · 165 employees · growth 4.9%",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+      "id": "F-4c346664a433"
+    },
+    {
+      "t": "FACT",
+      "text": "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+      "id": "F-fad23116a354"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (West Oakland): citizens Daniel Cloak; Marcus Wright; Eleanor Rivera; Charlene Underwood · businesses West Side Cafe; Oakmesh Systems · New Covenant Pentecostal Assembly Seniors Lunch Program (program)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C109",
+      "id": "F-c99c995650e9"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Janae Rivers — sports wager, staked $376, settled for $0",
+      "src": "output/beats/Casino_Ledger.jsonl @C109",
+      "id": "F-f3d631a19a2a"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Lorenzo Jordan — sports wager, staked $367, settled for $0",
+      "src": "output/beats/Casino_Ledger.jsonl @C109",
+      "id": "F-eb6407d3f0dc"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Clarissa Dane — sports wager, staked $900, settled for $1k",
+      "src": "output/beats/Casino_Ledger.jsonl @C109",
+      "id": "F-b8d95666a5cc"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Jessie Hess — undocked wager, staked $111, settled for $0",
+      "src": "output/beats/Casino_Ledger.jsonl @C109",
+      "id": "F-49491336ad89"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: Davey Martinez — sports wager, staked $196, settled for $282",
+      "src": "output/beats/Casino_Ledger.jsonl @C109",
+      "id": "F-69666b3021bb"
+    },
+    {
+      "t": "FACT",
+      "text": "CASINO: the house float stands at $241k",
+      "src": "output/beats/Casino_Ledger.jsonl @C109",
+      "id": "F-8bcfe4e1eec8"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "grounded third-person economics and labor reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
+      "closing": "an unresolved beneficiary, contract, labor, or livelihood question grounded in the supplied record"
+    },
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "canonBlockers": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-d6cb151eb33d",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-14b1ba588707",
+        "t": "FACT",
+        "text": "West Oakland businesses · Oakmesh Systems, Civis Systems",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "id": "F-8c40d814d550",
+        "t": "FACT",
+        "text": "Elijah Roberts, Construction laborer at Oakmesh Systems. 8 named workers at 2 named businesses in West Oakland on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "id": "F-b921a6b5458d",
+        "t": "FACT",
+        "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 31.4% · revenue $9.2M (+$55k vs C108) · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "id": "F-959406e9b257",
+        "t": "FACT",
+        "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · revenue $60.1M (+$24k vs C108) · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "id": "F-032d5126b451",
+        "t": "FACT",
+        "text": "Coastline Construction · Construction · 221 employees · growth 6.9% · revenue $185.8M (+$246k vs C108) · key personnel: Desmond Achebe (managing partner)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "id": "F-4c346664a433",
+        "t": "FACT",
+        "text": "Mariner Construction · Construction · 165 employees · growth 4.9%",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "id": "F-fad23116a354",
+        "t": "FACT",
+        "text": "Northgate Construction · Construction · 95 employees · growth 6.4% · revenue $78.3M (+$96k vs C108) · key personnel: Helena Voss-Adeyemi (managing partner)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      {
+        "id": "F-c99c995650e9",
+        "t": "FACT",
+        "text": "ENGINE SEED (West Oakland): citizens Daniel Cloak; Marcus Wright; Eleanor Rivera; Charlene Underwood · businesses West Side Cafe; Oakmesh Systems · New Covenant Pentecostal Assembly Seniors Lunch Program (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+      },
+      {
+        "id": "F-f3d631a19a2a",
+        "t": "FACT",
+        "text": "CASINO: Janae Rivers — sports wager, staked $376, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-eb6407d3f0dc",
+        "t": "FACT",
+        "text": "CASINO: Lorenzo Jordan — sports wager, staked $367, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-b8d95666a5cc",
+        "t": "FACT",
+        "text": "CASINO: Clarissa Dane — sports wager, staked $900, settled for $1k",
+        "src": "output/beats/Casino_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-49491336ad89",
+        "t": "FACT",
+        "text": "CASINO: Jessie Hess — undocked wager, staked $111, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-69666b3021bb",
+        "t": "FACT",
+        "text": "CASINO: Davey Martinez — sports wager, staked $196, settled for $282",
+        "src": "output/beats/Casino_Ledger.jsonl @C109"
+      },
+      {
+        "id": "F-8bcfe4e1eec8",
+        "t": "FACT",
+        "text": "CASINO: the house float stands at $241k",
+        "src": "output/beats/Casino_Ledger.jsonl @C109"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00445-6d21fc5b25",
+        "speakerId": "POP-00445",
+        "speakerName": "Sam Fazio",
+        "text": "Working at Civis Systems, I’ve seen how West Oakland businesses like ours, Oakmesh Systems, and Coastline Construction are really shaping the neighborhood. It’s not just about the jobs—it’s about the community we’re building together. People here are passionate about what they do, whether it’s urban systems intelligence or construction. There’s a sense of pride in contributing to something bigger.",
+        "factIds": [
+          "F-959406e9b257",
+          "F-b921a6b5458d",
+          "F-032d5126b451"
+        ],
+        "src": "packet.W2[POP-00445]"
+      },
+      {
+        "id": "Q-POP-00291-cebe12f65c",
+        "speakerId": "POP-00291",
+        "speakerName": "Enzo Walker",
+        "text": "Honestly? Those tech firms like Oakmesh and Civis—they're changing the block faster than we can keep up. I work at Oakmesh, and half the time I'm fixing pipes in buildings that didn't exist last year. The money's there, sure, but it's not sticking around here. Guys like Elias at Civis talk about 'systems' and 'efficiency,' but ask the folks at the bus stop if they feel any of that. We're all just trying to keep the water running while the city builds over us.",
+        "factIds": [
+          "F-b921a6b5458d",
+          "F-959406e9b257"
+        ],
+        "src": "packet.W2[POP-00291]"
+      },
+      {
+        "id": "Q-POP-00368-ab8c40d69d",
+        "speakerId": "POP-00368",
+        "speakerName": "Dom Will",
+        "text": "Oakmesh feels like we're building something real here - not just another tech bubble. Marcus keeps us focused on civic impact, not just profit. Civis down the street? Elias runs a tight ship, all that urban intelligence work. You see their drone fleet buzzing around sometimes. Coastline's got cranes up everywhere - hard to miss them. But it's the small crews, like our construction guys, that make the neighborhood hum.",
+        "factIds": [
+          "F-b921a6b5458d",
+          "F-959406e9b257",
+          "F-032d5126b451"
+        ],
+        "src": "packet.W2[POP-00368]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00291",
+        "name": "Enzo Walker",
+        "profile": "Enzo Walker — Plumber — Oakmesh Systems, West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00368",
+        "name": "Dom Will",
+        "profile": "Dom Will — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00445",
+        "name": "Sam Fazio",
+        "profile": "Sam Fazio — Digital Twin Architect — Civis Systems, West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Are there any unrecorded layoffs or closures in West Oakland?",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "How are the construction companies like Coastline Construction managing their growth?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "forbiddenClaimClasses": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  }
+}

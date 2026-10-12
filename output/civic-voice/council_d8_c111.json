@@ -1,0 +1,38 @@
+{
+  "office": "council_d8",
+  "cycle": 111,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "District 8 advances the $2.5 million Commercial Stabilization for Grand Lake legislation, requiring auditable disbursement frameworks and concrete operational timelines. We mandate administrative service audits for Adams Point to address sluggish commercial trade, while formally attributing Lake Merritt's steady performance to documented municipal maintenance schedules.",
+  "statements": [
+    {
+      "statementId": "STMT-111-council_d8-001",
+      "type": "vote_statement",
+      "topic": "Grand Lake Commercial Corridor Stabilization",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Support legislative filing for Commercial Stabilization for Grand Lake with mandatory milestone reporting and disbursement audit criteria",
+      "quote": "A two-and-a-half million dollar stabilization fund must be governed by clear disbursement protocols, verified eligibility baselines, and transparent administrative oversight.",
+      "fullStatement": "District 8 welcomes the formal legislative filing of the Commercial Stabilization for Grand Lake initiative. While our small businesses urgently need targeted intervention, fiscal accountability requires that every dollar deployed from this $2.5 million allocation be attached to measurable performance benchmarks. We are establishing formal oversight provisions requiring quarterly disbursement reporting, auditable merchant assistance criteria, and clear administrative timelines. Economic stabilization succeeds when procedural rigor guarantees that public funds reach their intended commercial storefronts without bureaucratic drift.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d8-002",
+      "type": "oversight_statement",
+      "topic": "Grand Lake Neighborhood Economic Indicators",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Establish municipal service audits and commercial storefront baseline tracking for Grand Lake",
+      "quote": "Addressing quiet storefronts and shifting neighborhood momentum requires structured data, scheduled municipal follow-through, and verified commercial assistance.",
+      "fullStatement": "Grand Lake remains a vital commercial anchor for District 8, but recent indicators show quiet storefronts and building pressure across our commercial corridors. Reversing this trend cannot rely on vague promises; it demands documented municipal service coordination and structured commercial baseline assessments. In parallel with pending stabilization funding, our office is mandating routine administrative condition reports to ensure public infrastructure, sanitation, and corridor maintenance actively support Grand Lake merchants and residents.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d8-003",
+      "type": "district_statement",
+      "topic": "District 8 Corridor Parity and Maintenance Credit",
+      "initiative": null,
+      "decision": "Direct public works maintenance parity for Adams Point while crediting consistent municipal schedules for Lake Merritt stability",
+      "quote": "Lake Merritt's steady street trade proves that scheduled municipal maintenance works; Adams Point deserves that exact same administrative follow-through.",
+      "fullStatement": "We must recognize why Lake Merritt maintains steady commercial activity and low crime: it is the direct outcome of documented, consistent municipal maintenance schedules carried out by city workers. However, Adams Point continues to face sluggish street trade despite low crime and positive community spirit. District 8 insists on operational parity across our neighborhoods. We are calling for an immediate audit of city service delivery to ensure Adams Point receives the scheduled street maintenance and corridor support necessary to match Lake Merritt's stability.",
+      "trackerUpdates": {}
+    }
+  ]
+}

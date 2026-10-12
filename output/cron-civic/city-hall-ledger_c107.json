@@ -1,0 +1,188 @@
+{
+  "cycle": 107,
+  "v": "CITYHALL/1",
+  "hearing": [
+    {
+      "officeId": "COUNCIL-D4",
+      "popid": "POP-00042",
+      "holder": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "The youth of Oakland deserve a chance to thrive, and this pipeline is a crucial step in providing them with the skills and opportunities they need to succeed.",
+      "actionAsked": "YES",
+      "voiceFile": "output/civic-voice/council_d4_c107.json"
+    },
+    {
+      "officeId": "COUNCIL-D7",
+      "popid": "POP-00504",
+      "holder": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "We will sign off on the utility rough-ins because the work meets the code, but not a single dollar moves to the next phase without certified inspection logs on my desk.",
+      "actionAsked": "Approve authorization of final utility inspections and interior systems rough-in certification with mandatory audit reporting on second-shift labor expenditures.",
+      "voiceFile": "output/civic-voice/council_d7_c107.json"
+    },
+    {
+      "officeId": "COUNCIL-D8",
+      "popid": "POP-00505",
+      "holder": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Adams Point's gains stem from structured local execution, and Lake Merritt's stability requires verified municipal baseline support, not rhetorical credit.",
+      "actionAsked": "Formalize inter-agency monitoring for Lake Merritt and commend Adams Point community health coordination",
+      "voiceFile": "output/civic-voice/council_d8_c107.json"
+    },
+    {
+      "officeId": "COUNCIL-D6",
+      "popid": "POP-00044",
+      "holder": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Piedmont Avenue's steady street trade and low crime show what happens when public safety and local business stability align.",
+      "actionAsked": "Affirm municipal support for Piedmont Avenue's commercial vitality and safety baseline.",
+      "voiceFile": "output/civic-voice/council_d6_c107.json"
+    },
+    {
+      "officeId": "COUNCIL-D2",
+      "popid": "POP-00502",
+      "holder": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "We must break ground on Baylight now, but let's not forget that development without infrastructure is a debt we pay later.",
+      "actionAsked": "YES",
+      "voiceFile": "output/civic-voice/council_d2_c107.json"
+    },
+    {
+      "officeId": "COUNCIL-D9",
+      "popid": "POP-00506",
+      "holder": "Terrence Mobley",
+      "district": "D9",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Laurel’s progress isn’t legacy—it’s today’s work paying off.",
+      "actionAsked": "Defend Laurel's progress and credit Uptown's success to community investment",
+      "voiceFile": "output/civic-voice/council_d9_c107.json"
+    },
+    {
+      "officeId": "CHIEF-POLICE",
+      "popid": "POP-00136",
+      "holder": "Rafael Montez",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Clear transfer thresholds between OPD and OARI dispatchers prevent gaps in emergency coverage—that's operational necessity, not optional paperwork.",
+      "actionAsked": "Transmitted joint dispatch boundary directive to City Planning and OARI program leadership.",
+      "voiceFile": "output/civic-voice/police_chief_c107.json"
+    },
+    {
+      "officeId": "STAFF-DM-COMM",
+      "popid": "POP-00037",
+      "holder": "Brenda Okoro",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "When storefronts go quiet, families often follow—so we're bringing the Stabilization Fund to where the need is moving.",
+      "actionAsked": "Deploy Stabilization Fund canvassing operations to Downtown immediately per storefront decline signals",
+      "voiceFile": "output/civic-voice/okoro_c107.json"
+    },
+    {
+      "officeId": "COUNCIL-D5",
+      "popid": "POP-00043",
+      "holder": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "East Oakland's crime index at 1.17—nearly double the city average—isn't a footnote, it's a five-alarm fire.",
+      "actionAsked": "YES on East Oakland protocol deployment with community oversight",
+      "voiceFile": "output/civic-voice/council_d5_c107.json"
+    },
+    {
+      "officeId": "COUNCIL-D3",
+      "popid": "POP-00503",
+      "holder": "Rose Delgado",
+      "district": "D3",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Transit infrastructure must seed storefront revival, not displace it.",
+      "actionAsked": "Approved the merchant protection covenants for Fruitvale Transit Hub Phase II",
+      "voiceFile": "output/civic-voice/council_d3_c107.json"
+    },
+    {
+      "officeId": "COUNCIL-D1",
+      "popid": "POP-00501",
+      "holder": "Denise Carter",
+      "district": "D1",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+      "actionAsked": "Authorize month-eight disbursement review and deploy Downtown canvass operations immediately.",
+      "voiceFile": "output/civic-voice/council_d1_c107.json"
+    }
+  ],
+  "votes": [],
+  "gavel": {
+    "officeId": "MAYOR-01",
+    "popid": "POP-00034",
+    "holder": "Avery Santana",
+    "dispositions": [
+      {
+        "initiativeId": "INIT-007",
+        "mayoralAction": "none",
+        "implementationPhase": "operational",
+        "note": "C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established."
+      },
+      {
+        "initiativeId": "INIT-001",
+        "mayoralAction": "none",
+        "implementationPhase": "disbursement-active",
+        "note": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review."
+      },
+      {
+        "initiativeId": "INIT-002",
+        "mayoralAction": "none",
+        "implementationPhase": "dispatch-live",
+        "note": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues."
+      }
+    ],
+    "quote": "Zero applicants waiting means zero excuses—this pipeline opens today.",
+    "voiceFile": "output/civic-voice/mayor_gavel_c107.json"
+  }
+}

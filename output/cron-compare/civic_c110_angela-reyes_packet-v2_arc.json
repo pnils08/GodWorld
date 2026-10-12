@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "110",
+  "desk": "civic",
+  "persona": "angela-reyes",
+  "hood": "Rockridge",
+  "quotes": [
+    {
+      "pop": "POP-00317",
+      "name": "Lila Bennington",
+      "quote": "Oh, I actually teach in Fruitvale, not Rockridge. But I can tell you that teaching anywhere in Oakland means constantly balancing the needs of so many different kids with what resources we actually have. The community here—when they show up for us—it makes all the difference. Just last week, one of my student's grandparents volunteered to help with reading circles. That kind of thing keeps me going."
+    },
+    {
+      "pop": "POP-00040",
+      "name": "Aaron Whitfield",
+      "quote": "Rockridge schools have always been a point of pride for the neighborhood. The quality index speaks for itself, and it’s clear that families here value education deeply. Enrollment’s been steady, which tells me people are committed to maintaining that standard."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I hear Rockridge schools are top-notch, but honestly, it feels like we're always playing catch-up here in Fruitvale. Those numbers don't tell the whole story - it's about the community behind them."
+    }
+  ],
+  "claim": "Oh, I actually teach in Fruitvale, not Rockridge. But I can tell you that teaching anywhere in Oakland means constantly balancing the needs of so many different kids with what resources we actually have. The community here—when they show up for us—it makes all the difference. Just last week, one of my student's grandparents volunteered to help with reading circles. That kind of thing keeps me going.",
+  "src": "citizenVoice PRESS c110",
+  "ranAt": "2026-10-06T18:16:21.953Z"
+}

@@ -1,0 +1,35 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "109",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "freelance-firebrand",
+  "byline": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "beatDomain": "ACCOUNTABILITY"
+  },
+  "laneEntries": 75,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": true,
+    "findings": [
+      {
+        "check": "blight-import",
+        "issue": "decay-narrative"
+      }
+    ]
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/civic_c109_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "selfRecord": null,
+  "ranAt": "2026-09-30T23:16:02.272Z",
+  "dispositionReconciledAt": "2026-10-03T17:00:05.689Z"
+}

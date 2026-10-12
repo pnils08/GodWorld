@@ -1,0 +1,18 @@
+{
+  "initiative": "INIT-002",
+  "initiativeId": "INIT-002",
+  "cycle": 106,
+  "primaryVoice": "Mayor gavel (mayor_gavel-002)",
+  "consolidatedFrom": [
+    "STMT-106-mayor_gavel-002 (Mayor gavel — Oakland Alternative Response Initiative Emergency East Oakland Expansion)",
+    "STMT-106-oari-001 (Tran-Muñoz — District 1 Expansion Evaluation)",
+    "STMT-106-police_chief-001 (Chief — Patrol Deployment Realignment and OARI Co-Response Boundaries)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-002",
+    "ImplementationPhase": "implementation-active",
+    "MilestoneNotes": "C106: Emergency expansion to East Oakland authorized; District 1 evaluation continues, monthly reporting to Mayor's office",
+    "NextScheduledAction": "East Oakland dispatch protocol deployment",
+    "NextActionCycle": 107
+  }
+}

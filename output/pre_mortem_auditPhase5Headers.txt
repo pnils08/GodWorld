@@ -1,0 +1,162 @@
+◇ injected env (31) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
+
+╔════════════════════════════════════════════════════════════════════╗
+║   Phase 5 Sheet Header Audit                                      ║
+╚════════════════════════════════════════════════════════════════════╝
+
+Connecting to Google Sheets...
+Connected: Simulation_Narrative
+
+═══════════════════════════════════════════════════════════════
+RESULTS
+═══════════════════════════════════════════════════════════════
+
+✗ Simulation_Ledger
+  Readers: citizenContextBuilder.js, householdFormationEngine.js, godWorldEngine2.js (processIntake_), bondEngine.js
+  Columns: 55 in sheet | 16 required by code | 15 found | 1 missing
+  Rows: 943
+  ⚠  MISSING: "Middle" — none of [Middle , Middle] found
+
+✓ Generic_Citizens
+  Readers: citizenContextBuilder.js
+  Columns: 12 in sheet | 8 required by code | 8 found | 0 missing
+  Rows: 321
+
+✓ Household_Ledger
+  Readers: householdFormationEngine.js
+  Columns: 13 in sheet | 12 required by code | 12 found | 0 missing
+  Rows: 748
+
+✓ Civic_Office_Ledger
+  Readers: updateCivicLedgerFactions.js, civicInitiativeEngine.js
+  Columns: 22 in sheet | 7 required by code | 7 found | 0 missing
+  Rows: 999
+
+✓ Initiative_Tracker
+  Readers: civicInitiativeEngine.js
+  Columns: 31 in sheet | 1 required by code | 1 found | 0 missing
+  Rows: 6
+  Optional: SwingVoter2: present
+
+✓ Relationship_Bonds
+  Readers: citizenContextBuilder.js, bondPersistence.js
+  Columns: 17 in sheet | 7 required by code | 7 found | 0 missing
+  Rows: 609
+  Optional: UNI: absent (handled gracefully)
+  Optional: MED: absent (handled gracefully)
+  Optional: CIV: absent (handled gracefully)
+  Optional: NH: absent (handled gracefully)
+
+✓ LifeHistory_Log
+  Readers: citizenContextBuilder.js
+  Columns: 7 in sheet | 5 required by code | 5 found | 0 missing
+  Rows: 16851
+  Optional: Source: absent (handled gracefully)
+
+✓ Citizen_Media_Usage
+  Readers: citizenContextBuilder.js
+  Columns: 16 in sheet | 5 required by code | 5 found | 0 missing
+  Rows: 770
+
+✓ Storyline_Tracker
+  Readers: 
+  Columns: 26 in sheet | 16 required by code | 16 found | 0 missing
+  Rows: 239
+
+✗ Story_Hook_Deck
+  Readers: hookLifecycleEngine.js
+  Columns: 14 in sheet | 10 required by code | 3 found | 7 missing
+  Rows: 1771
+  ⚠  MISSING: "Severity" — indexOf returns -1
+  ⚠  MISSING: "CreatedCycle" — indexOf returns -1
+  ⚠  MISSING: "HookAge" — indexOf returns -1
+  ⚠  MISSING: "ExpiresAfter" — indexOf returns -1
+  ⚠  MISSING: "IsExpired" — indexOf returns -1
+  ⚠  MISSING: "PickedUp" — indexOf returns -1
+  ⚠  MISSING: "PickupCycle" — indexOf returns -1
+
+✓ World_Population
+  Readers: finalizeWorldPopulation.js
+  Columns: 22 in sheet | 0 required by code | 0 found | 0 missing
+  Rows: 1
+  Optional: season: absent (handled gracefully)
+
+═══════════════════════════════════════════════════════════════
+SUMMARY: 9 OK, 2 have missing columns, 11 total
+═══════════════════════════════════════════════════════════════
+
+─── HEADER DUMPS (misaligned sheets) ───
+
+Simulation_Ledger:
+  Col 0: "POPID"
+  Col 1: "First"
+  Col 2: "MaidenName"
+  Col 3: "Last"
+  Col 4: "OriginGame"
+  Col 5: "UNI (y/n)"
+  Col 6: "MED (y/n)"
+  Col 7: "CIV (y/n)"
+  Col 8: "ClockMode"
+  Col 9: "Tier"
+  Col 10: "RoleType"
+  Col 11: "Status"
+  Col 12: "BirthYear"
+  Col 13: "OrginCity"
+  Col 14: "LifeHistory"
+  Col 15: "SpouseId"
+  Col 16: "LastUpdated"
+  Col 17: "TraitProfile"
+  Col 18: "UsageCount"
+  Col 19: "Neighborhood"
+  Col 20: "HouseholdId"
+  Col 21: "MaritalStatus"
+  Col 22: "NumChildren"
+  Col 23: "ParentIds"
+  Col 24: "ChildrenIds"
+  Col 25: "WealthLevel"
+  Col 26: "Income"
+  Col 27: "InheritanceReceived"
+  Col 28: "NetWorth"
+  Col 29: "SavingsRate"
+  Col 30: "DebtLevel"
+  Col 31: "EducationLevel"
+  Col 32: "SchoolQuality"
+  Col 33: "CareerStage"
+  Col 34: "YearsInCareer"
+  Col 35: "CareerMobility"
+  Col 36: "LastPromotionCycle"
+  Col 37: "DisplacementRisk"
+  Col 38: "MigrationIntent"
+  Col 39: "MigrationReason"
+  Col 40: "MigrationDestination"
+  Col 41: "MigratedCycle"
+  Col 42: "ReturnedCycle"
+  Col 43: "EconomicProfileKey"
+  Col 44: "EmployerBizId"
+  Col 45: "CitizenBio"
+  Col 46: "Gender"
+  Col 47: "DialState"
+  Col 48: "SMPageId"
+  Col 49: "MemoryRegisters"
+  Col 50: "StatusStartCycle"
+  Col 51: "HealthCause"
+  Col 52: "LineageId"
+  Col 53: "SkillTags"
+  Col 54: "Famous"
+
+Story_Hook_Deck:
+  Col 0: "Timestamp"
+  Col 1: "Cycle"
+  Col 2: "HookId"
+  Col 3: "HookType"
+  Col 4: "Domain"
+  Col 5: "Neighborhood"
+  Col 6: "Priority"
+  Col 7: "HookText"
+  Col 8: "LinkedArcID"
+  Col 9: "SuggestedDesks"
+  Col 10: "SuggestedJournalist"
+  Col 11: "SuggestedAngle"
+  Col 12: "VoiceGuidance"
+  Col 13: "MatchConfidence"
+

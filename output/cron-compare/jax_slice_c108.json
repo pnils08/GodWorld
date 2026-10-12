@@ -1,0 +1,498 @@
+{
+  "cycle": 108,
+  "builtAt": "2026-09-23T11:15:09.673Z",
+  "empty": false,
+  "kind": "jax-accountability",
+  "journalist": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "persona": "freelance-firebrand"
+  },
+  "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+  "scandalRows": [],
+  "hooks": [],
+  "stink": {
+    "className": "metric-contradiction",
+    "score": 61,
+    "label": "math-imbalance (high) | Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+    "ref": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+    "kind": "anomaly",
+    "desk": "civic"
+  },
+  "contradiction": {
+    "a": "Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+    "b": "No active initiative (or mitigator) owns this break on the record",
+    "frame": "The map says decay; the program roster does not answer it.",
+    "aSrc": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+    "bSrc": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6"
+  },
+  "story": {
+    "ref": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+    "label": "Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+    "kind": "anomaly",
+    "angle": "The map says decay; the program roster does not answer it.",
+    "hookLine": null,
+    "hood": "Fruitvale",
+    "popids": [
+      "POP-00198",
+      "POP-00953",
+      "POP-00212",
+      "POP-00541",
+      "POP-00764",
+      "POP-00789",
+      "POP-00891",
+      "POP-01113",
+      "POP-00023",
+      "POP-00722",
+      "POP-00961",
+      "POP-00745"
+    ],
+    "citizens": [
+      "Rick Walker — K-8 Teacher,Former Line cook, Fruitvale",
+      "Carmen Solis — Community Advocate, Fruitvale",
+      "Jessie Hess — Barista, Downtown",
+      "Theo Burkes — Rapper, Downtown",
+      "Tao Lee — Community Organizer, Downtown",
+      "Elias Varek — Founder of Civis Systems, West Oakland",
+      "Renée Cabrera — Physical Therapist, East Oakland",
+      "Quinn Adeyemi — Warehouse worker, East Oakland",
+      "Gregory Mims — Organized Crime, West Oakland",
+      "Daniel Cloak — Bakery Worker, West Oakland",
+      "Darius Clark — Bakery Worker, West Oakland",
+      "Sonia Parikh — Podcast Host / Software Engineer, Fruitvale"
+    ],
+    "stinkClass": "metric-contradiction",
+    "stinkScore": 61
+  },
+  "prewrite": {
+    "method": "TWO_SIDED_DATA_AUDIT",
+    "anchorFacts": [
+      "Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+      "No active initiative (or mitigator) owns this break on the record"
+    ],
+    "evidence": [
+      {
+        "side": "A",
+        "text": "Fruitvale: decay [Sentiment -0.030, RetailVitality -1.32, HousingPressure +1.000] — Sentiment now 0.44 (2 of 22, city median 0.33); RetailVitality now 9.67 (5 of 22, city median 6.43); HousingPressure now 1.5 (15 of 22, city median 0) — with no matching active initiative",
+        "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6"
+      },
+      {
+        "side": "B",
+        "text": "No active initiative (or mitigator) owns this break on the record",
+        "src": "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6"
+      }
+    ],
+    "scopeHoods": [
+      "Fruitvale"
+    ],
+    "missing": [
+      "the prior comparison needed to validate the flagged direction",
+      "an office response to the data mismatch"
+    ],
+    "closeQuestion": "The map says decay; the program roster does not answer it."
+  },
+  "citizens": [
+    {
+      "popid": "POP-00198",
+      "name": "Rick Walker",
+      "role": "K-8 Teacher,Former Line cook",
+      "neighborhood": "Fruitvale",
+      "careerStage": "senior",
+      "employerBizId": "BIZ-00016",
+      "profile": "Rick Walker (POP-00198) — role: K-8 Teacher,Former Line cook; neighborhood: Fruitvale; born: 1983; careerStage: senior; wealth: 8; employerBiz: BIZ-00016; skills: Education|Food & Culture; tier: 2",
+      "why": "stink-handle"
+    },
+    {
+      "popid": "POP-00953",
+      "name": "Carmen Solis",
+      "role": "Community Advocate",
+      "neighborhood": "Fruitvale",
+      "careerStage": "mid-career",
+      "employerBizId": "UNTRACKED",
+      "profile": "Carmen Solis (POP-00953) — role: Community Advocate; neighborhood: Fruitvale; born: 2003; careerStage: mid-career; wealth: 5; employerBiz: UNTRACKED; skills: Faith & Community; tier: 2",
+      "why": "stink-handle"
+    },
+    {
+      "popid": "POP-00212",
+      "name": "Jessie Hess",
+      "role": "Barista",
+      "neighborhood": "Downtown",
+      "careerStage": "retired",
+      "employerBizId": "BIZ-00030",
+      "profile": "Jessie Hess (POP-00212) — role: Barista; neighborhood: Downtown; born: 1977; careerStage: retired; wealth: 8; employerBiz: BIZ-00030; skills: Tech & Innovation; tier: 3",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00541",
+      "name": "Theo Burkes",
+      "role": "Rapper",
+      "neighborhood": "Downtown",
+      "careerStage": "mid-career",
+      "employerBizId": "SELF_EMPLOYED",
+      "profile": "Theo Burkes (POP-00541) — role: Rapper; neighborhood: Downtown; born: 2007; careerStage: mid-career; wealth: 4; employerBiz: SELF_EMPLOYED; skills: Professional; tier: 3",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00764",
+      "name": "Tao Lee",
+      "role": "Community Organizer",
+      "neighborhood": "Downtown",
+      "careerStage": "mid-career",
+      "employerBizId": "BIZ-00028",
+      "profile": "Tao Lee (POP-00764) — role: Community Organizer; neighborhood: Downtown; born: 1986; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00789",
+      "name": "Elias Varek",
+      "role": "Founder of Civis Systems",
+      "neighborhood": "West Oakland",
+      "careerStage": "mid-career",
+      "employerBizId": "BIZ-00052",
+      "profile": "Elias Varek (POP-00789) — role: Founder of Civis Systems; neighborhood: West Oakland; born: 2003; careerStage: mid-career; wealth: 12; employerBiz: BIZ-00052; skills: Tech & Innovation; tier: 1",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00891",
+      "name": "Renée Cabrera",
+      "role": "Physical Therapist",
+      "neighborhood": "East Oakland",
+      "careerStage": "entry-level",
+      "employerBizId": "BIZ-00015",
+      "profile": "Renée Cabrera (POP-00891) — role: Physical Therapist; neighborhood: East Oakland; born: 2017; careerStage: entry-level; wealth: 2; employerBiz: BIZ-00015; skills: Healthcare; tier: 4",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-01113",
+      "name": "Quinn Adeyemi",
+      "role": "Warehouse worker",
+      "neighborhood": "East Oakland",
+      "careerStage": "senior",
+      "employerBizId": "BIZ-00136",
+      "profile": "Quinn Adeyemi (POP-01113) — role: Warehouse worker; neighborhood: East Oakland; born: 1982; careerStage: senior; wealth: 8; employerBiz: BIZ-00136; skills: Small Business; tier: 4",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00023",
+      "name": "Gregory Mims",
+      "role": "Organized Crime",
+      "neighborhood": "West Oakland",
+      "careerStage": "senior",
+      "employerBizId": "BIZ-00100",
+      "profile": "Gregory Mims (POP-00023) — role: Organized Crime; neighborhood: West Oakland; born: 1990; careerStage: senior; wealth: 9; employerBiz: BIZ-00100; skills: Organized_Crime; tier: 3",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00722",
+      "name": "Daniel Cloak",
+      "role": "Bakery Worker",
+      "neighborhood": "West Oakland",
+      "careerStage": "mid-career",
+      "employerBizId": "BIZ-00028",
+      "profile": "Daniel Cloak (POP-00722) — role: Bakery Worker; neighborhood: West Oakland; born: 1986; careerStage: mid-career; wealth: 7; employerBiz: BIZ-00028; skills: Faith & Community; tier: 3",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00961",
+      "name": "Darius Clark",
+      "role": "Bakery Worker",
+      "neighborhood": "West Oakland",
+      "careerStage": "mid-career",
+      "employerBizId": "UNTRACKED",
+      "profile": "Darius Clark (POP-00961) — role: Bakery Worker; neighborhood: West Oakland; born: 2001; careerStage: mid-career; wealth: 0; employerBiz: UNTRACKED; skills: Food & Culture; tier: 3",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00745",
+      "name": "Sonia Parikh",
+      "role": "Podcast Host / Software Engineer",
+      "neighborhood": "Fruitvale",
+      "careerStage": "early-career",
+      "employerBizId": "SELF_EMPLOYED",
+      "profile": "Sonia Parikh (POP-00745) — role: Podcast Host / Software Engineer; neighborhood: Fruitvale; born: 2013; careerStage: early-career; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Creative & Arts; tier: 3",
+      "why": "same-hood-signal"
+    }
+  ],
+  "bonds": [
+    {
+      "bondId": "BOND-93E80E96",
+      "a": "POP-00023",
+      "b": "POP-01030",
+      "type": "family",
+      "intensity": "7",
+      "origin": "household",
+      "neighborhood": "West Oakland",
+      "aName": "Gregory Mims",
+      "bName": "Elena Patel",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-E6DF89B3",
+      "a": "POP-00722",
+      "b": "POP-00984",
+      "type": "family",
+      "intensity": "9",
+      "origin": "household",
+      "neighborhood": "West Oakland",
+      "aName": "Daniel Cloak",
+      "bName": "Jaylen Cloak",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-D06561BB",
+      "a": "POP-00758",
+      "b": "POP-00722",
+      "type": "professional",
+      "intensity": "3.95",
+      "origin": "neighbor",
+      "neighborhood": "West Oakland",
+      "aName": "Robert Jaston",
+      "bName": "Daniel Cloak",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-B011BC53",
+      "a": "POP-00278",
+      "b": "POP-00722",
+      "type": "professional",
+      "intensity": "2.99",
+      "origin": "neighbor",
+      "neighborhood": "West Oakland",
+      "aName": "Colt Biker",
+      "bName": "Daniel Cloak",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-13C65C19",
+      "a": "POP-00212",
+      "b": "POP-00362",
+      "type": "friendship",
+      "intensity": "6.44",
+      "origin": "neighbor",
+      "neighborhood": "Downtown",
+      "aName": "Jessie Hess",
+      "bName": "Xavier Davis",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-1AA07B5E",
+      "a": "POP-00709",
+      "b": "POP-00745",
+      "type": "friendship",
+      "intensity": "7",
+      "origin": "neighbor",
+      "neighborhood": "Temescal",
+      "aName": "Jessica Brooks",
+      "bName": "Sonia Parikh",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-28121EC3",
+      "a": "POP-00772",
+      "b": "POP-00764",
+      "type": "friendship",
+      "intensity": "5.84",
+      "origin": "random",
+      "neighborhood": "cross-neighborhood",
+      "aName": "Beverly Hayes",
+      "bName": "Tao Lee",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-96A506B1",
+      "a": "POP-00198",
+      "b": "POP-00632",
+      "type": "friendship",
+      "intensity": "3.8",
+      "origin": "neighbor",
+      "neighborhood": "Fruitvale",
+      "aName": "Rick Walker",
+      "bName": "Rico Valez",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-B6E1D40D",
+      "a": "POP-00176",
+      "b": "POP-00722",
+      "type": "professional",
+      "intensity": "5.99",
+      "origin": "neighbor",
+      "neighborhood": "West Oakland",
+      "aName": "Talmon Lint",
+      "bName": "Daniel Cloak",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-EE438892",
+      "a": "POP-00280",
+      "b": "POP-00722",
+      "type": "professional",
+      "intensity": "2.95",
+      "origin": "neighbor",
+      "neighborhood": "West Oakland",
+      "aName": "Jerald Jensen",
+      "bName": "Daniel Cloak",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-36F0A155",
+      "a": "POP-00745",
+      "b": "POP-00498",
+      "type": "friendship",
+      "intensity": "4.3",
+      "origin": "neighbor",
+      "neighborhood": "Temescal",
+      "aName": "Sonia Parikh",
+      "bName": "Beatrix Santos",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-E96CC3FB",
+      "a": "POP-00764",
+      "b": "POP-00720",
+      "type": "rivalry",
+      "intensity": "10",
+      "origin": "random",
+      "neighborhood": "cross-neighborhood",
+      "aName": "Tao Lee",
+      "bName": "Russell Hayward",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-D4B0B704",
+      "a": "POP-00212",
+      "b": "POP-00439",
+      "type": "rivalry",
+      "intensity": "10",
+      "origin": "random",
+      "neighborhood": "cross-neighborhood",
+      "aName": "Jessie Hess",
+      "bName": "Timmie Hall",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "uooytqbq",
+      "a": "POP-00041",
+      "b": "POP-00789",
+      "type": "professional",
+      "intensity": "5.45",
+      "origin": "canon",
+      "neighborhood": null,
+      "aName": "Keisha Ramos",
+      "bName": "Elias Varek",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "bo34qczy",
+      "a": "POP-00789",
+      "b": "POP-00527",
+      "type": "rivalry",
+      "intensity": "9.5",
+      "origin": "canon",
+      "neighborhood": null,
+      "aName": "Elias Varek",
+      "bName": "Mike Paulson",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "bcn6mc9t",
+      "a": "POP-01112",
+      "b": "POP-00961",
+      "type": "friendship",
+      "intensity": "2.5",
+      "origin": "emergence",
+      "neighborhood": "West Oakland",
+      "aName": "Tariq Harris",
+      "bName": "Darius Clark",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "5dng9bpn",
+      "a": "POP-01113",
+      "b": "POP-00176",
+      "type": "friendship",
+      "intensity": "3.43",
+      "origin": "emergence",
+      "neighborhood": "West Oakland",
+      "aName": "Quinn Adeyemi",
+      "bName": "Talmon Lint",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    }
+  ],
+  "scene": {
+    "weather": "Season: Winter | Weather: 46°F fog, W 9 mph, marine (frontState MARINE), humidity 70, visibility 4",
+    "hood": "Fruitvale",
+    "neighborhoodTexture": "The seniors lunch program at St. Esperanza Parish celebrates its milestone with a full dining hall. New faces are spotted on the block, unpacking boxes.",
+    "whoLivedIt": [],
+    "chaos": [],
+    "colorRoom": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers."
+  },
+  "gaps": {
+    "note": "Ledgers/surfaces that would deepen Jax further if wired or fixed",
+    "missingOrThin": [
+      {
+        "source": "EmployerBizId → Business_Ledger name/address",
+        "status": "gap",
+        "why": "RoleType alone; no shop name/street for employer scene color without inventing"
+      },
+      {
+        "source": "Cultural_Ledger venues by neighborhood",
+        "status": "gap-on-disk",
+        "why": "Bar/venue canon list not auto-attached to slice — Jax opens in bars; needs hood venue pointer"
+      },
+      {
+        "source": "Faith_Ledger / Faith_Organizations by hood",
+        "status": "partial",
+        "why": "Texture file sometimes names congregations; not joined to stink hood systematically"
+      },
+      {
+        "source": "LifeHistory_Log raw (beyond Who Lived It digest)",
+        "status": "partial",
+        "why": "Digest is tag-summary; full event prose would deepen street color without inventing people"
+      },
+      {
+        "source": "Relationship_Bonds live refresh",
+        "status": "stale-risk",
+        "why": "bond-ledger-live.tsv may lag; bond-hop quality depends on export freshness"
+      },
+      {
+        "source": "Neighborhood_Map row metrics on slice",
+        "status": "partial",
+        "why": "Stink label carries some decay numbers; full hood board not embedded as color (avoid engine jargon in prose)"
+      },
+      {
+        "source": "Map hoods with zero Simulation_Ledger residents (e.g. Brooklyn on C102)",
+        "status": "sim-gap",
+        "why": "Audit can flag decay for a hood nobody lives in on the ledger — stink is real, interview pool empty; slice walks to next candidate with residents"
+      },
+      {
+        "source": "Citizen pages / DialState",
+        "status": "via-citizenVoice",
+        "why": "Quote stage loads dials; slice does not pre-print dial prose (correct — voice owns it)"
+      }
+    ],
+    "colorAllowed": [
+      "Weather line from Riley/world_summary",
+      "neighborhood_texture paragraph (perception-only, often nameless)",
+      "Who Lived It lines for this hood",
+      "Chaos_Cars rows touching hood/citizen",
+      "Bond edges among pool (professional/friend/family)"
+    ]
+  },
+  "pointers": [
+    "output/cron-compare/stink_c108.json",
+    "output/desk_signal_c108.json",
+    "output/world_summary_c108.md",
+    "output/neighborhood_texture_c108.md",
+    "output/engine_audit_c108.json",
+    "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+    "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+    "output/engine_audit_c108.json patterns[4]; evidence: Neighborhood_Map row(s) 6"
+  ],
+  "reportMeta": {
+    "illnessRate": 4.7,
+    "maxScore": 61,
+    "shouldForce": true,
+    "candidateCount": 20
+  }
+}

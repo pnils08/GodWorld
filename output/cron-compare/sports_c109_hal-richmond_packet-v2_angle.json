@@ -1,0 +1,482 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "109",
+  "persona": "hal-richmond",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00007",
+      "name": "Hal Richmond",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "What the supplied C109 line card establishes, and what history remains unsupplied.",
+      "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "sports-history",
+        "pulseClass": "era-door",
+        "bagModes": [
+          "1 Era Comparison",
+          "8 Legacy Guarantee Piece"
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "presentFacts": [
+          "Team record (feed): 1-1 · streak L1",
+          "Event (feed): A's — game-result (playoffs)",
+          "Cycle: C109"
+        ],
+        "dossierFacts": [
+          "Travis Coles TrueSource: 2041 REGULAR SEASON — Games: 32 Games Started: 32 Wins: 22 Losses: 4 Saves: 0 Blown Saves: 0 Holds: 0 Innings Pitched: 215 Hits Allowed: 166 Runs Allo | WAR: 6.2 | AWARDS (Career Reference) - All-Star (2040) - Cy Young (2041) - All-Star (2041) - Strikeou",
+          "Eric Taveras TrueSource: FULL STAT TRUE SOURCE — BATTER Name: Eric Taveras Team: Athletics Position: 2B Jersey: #22 -------------------------------------------------- PROFILE Potential: A Overall: 93 MLB Service: 6.000 Age: 25 Bats: L Throws: R Height: 5'10\" Weight: 184 LBS Drafted: RND 1 (2033) Secondar",
+          "Desmond Morton TrueSource: 2041 REGULAR SEASON G: 80 PA: 313 AB: 285 R: 47 H: 83 2B: 22 3B: 0 HR: 7 RBI: 44 BB: 23 SO: 49 HBP: 3 SF: 2 SAC: 0 GIDP: 6 AVG: 0.291 OBP: 0.348 SLG: | WAR: 2.5"
+        ],
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ],
+        "closingNote": "break of continuity",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "sceneRule": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.",
+        "sourcePointers": [
+          "output/world_summary_c109.md ## Sports",
+          "docs/media/HAL_ARCHIVE_BAG.md",
+          "scripts/sportsSubstrate.js",
+          "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 5",
+          "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "Jack London",
+      "score": null,
+      "src": "world_summary_c109.md ## Sports",
+      "team": "A's",
+      "nearby": [
+        {
+          "text": "A's | game-result | (playoffs) | Arturo Ramos, Danny Horn, Mark Aitken",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Travis Coles, Eric Taveras, Desmond Morton",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (playoffs) | Pablo Almanzar, Ernesto Quintero, Jose Colon",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | AJ Dybantsa, Wendell Carter Jr",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (preseason) | Wilson Shepard, Austin Reaves, Dillon Brooks",
+          "src": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00533",
+          "name": "Travis Coles",
+          "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+          "why": "feed-names",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00597",
+          "name": "Eric Taveras",
+          "profile": "Eric Taveras — Second Baseman, Oakland A's — Downtown",
+          "why": "feed-names",
+          "role": "Second Baseman, Oakland A's",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-00051",
+          "name": "Desmond Morton",
+          "profile": "Desmond Morton — Left Fielder, Oakland A's — Jack London",
+          "why": "feed-names",
+          "role": "Left Fielder, Oakland A's",
+          "hood": "Jack London"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-912baafccba1"
+      },
+      {
+        "t": "FACT",
+        "text": "A's — game-result — supplied C109 line card",
+        "src": "world_summary_c109.md ## Sports",
+        "id": "F-a6e9d3f81c0a"
+      },
+      {
+        "t": "FACT",
+        "text": "Team record (feed): 1-1 · streak L1",
+        "src": "world_summary_c109.md ## Sports",
+        "id": "F-a29a8818d616"
+      },
+      {
+        "t": "FACT",
+        "text": "Event (feed): A's — game-result (playoffs)",
+        "src": "world_summary_c109.md ## Sports",
+        "id": "F-43d5fef15e11"
+      },
+      {
+        "t": "FACT",
+        "text": "Cycle: C109",
+        "src": "world_summary_c109.md ## Sports",
+        "id": "F-ee25508e022c"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007"
+  },
+  "assignment": {
+    "story": {
+      "angle": "What the supplied C109 line card establishes, and what history remains unsupplied.",
+      "label": "A's — game-result — supplied C109 line card",
+      "hookLine": "A's — game-result — supplied C109 line card",
+      "hood": "Jack London",
+      "pulseClass": "era-door",
+      "team": "A's",
+      "eventKind": "game-result",
+      "closingNote": "break of continuity",
+      "citizens": [
+        "Travis Coles (POP-00533)",
+        "Eric Taveras (POP-00597)",
+        "Desmond Morton (POP-00051)"
+      ],
+      "popids": [
+        "POP-00533",
+        "POP-00597",
+        "POP-00051"
+      ],
+      "ref": "world_summary_c109.md ## Sports",
+      "cycle": 109
+    },
+    "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": {
+    "pulse": {
+      "className": "era-door",
+      "score": 80,
+      "label": "A's — game-result — supplied C109 line card",
+      "team": "A's",
+      "eventKind": "game-result",
+      "seasonType": "playoffs",
+      "storyAngle": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough.",
+      "hasStats": true,
+      "record": "1-1",
+      "streak": "L1",
+      "foilNumber": "6IP",
+      "closingNote": "break of continuity",
+      "feedCycle": 109
+    },
+    "bag": {
+      "modes": [
+        {
+          "id": 1,
+          "name": "Era Comparison"
+        },
+        {
+          "id": 8,
+          "name": "Legacy Guarantee Piece"
+        }
+      ],
+      "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+      "closingNote": "break of continuity",
+      "claim": "Present fact: 6IP on the feed. Archive claim: place this against time — Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough. Close toward break of continuity."
+    },
+    "prewrite": {
+      "reporter": "Hal Richmond",
+      "bagModes": [
+        {
+          "id": 1,
+          "name": "Era Comparison"
+        },
+        {
+          "id": 8,
+          "name": "Legacy Guarantee Piece"
+        }
+      ],
+      "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+      "presentFacts": [
+        "Team record (feed): 1-1 · streak L1",
+        "Event (feed): A's — game-result (playoffs)",
+        "Cycle: C109"
+      ],
+      "dossierFacts": [
+        "Travis Coles TrueSource: 2041 REGULAR SEASON — Games: 32 Games Started: 32 Wins: 22 Losses: 4 Saves: 0 Blown Saves: 0 Holds: 0 Innings Pitched: 215 Hits Allowed: 166 Runs Allo | WAR: 6.2 | AWARDS (Career Reference) - All-Star (2040) - Cy Young (2041) - All-Star (2041) - Strikeou",
+        "Eric Taveras TrueSource: FULL STAT TRUE SOURCE — BATTER Name: Eric Taveras Team: Athletics Position: 2B Jersey: #22 -------------------------------------------------- PROFILE Potential: A Overall: 93 MLB Service: 6.000 Age: 25 Bats: L Throws: R Height: 5'10\" Weight: 184 LBS Drafted: RND 1 (2033) Secondar",
+        "Desmond Morton TrueSource: 2041 REGULAR SEASON G: 80 PA: 313 AB: 285 R: 47 H: 83 2B: 22 3B: 0 HR: 7 RBI: 44 BB: 23 SO: 49 HBP: 3 SF: 2 SAC: 0 GIDP: 6 AVG: 0.291 OBP: 0.348 SLG:  | WAR: 2.5"
+      ],
+      "closingNote": "break of continuity",
+      "priorFiling": "NONE — wall may still inject at wake",
+      "claim": "Present fact: 6IP on the feed. Archive claim: place this against time — Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough. Close toward break of continuity.",
+      "foilNumber": "6IP",
+      "missing": [
+        "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+        "No invented seasons or franchise history beyond packet + feed",
+        "No x-stats / barrel% / invented OPS+",
+        "Not a business-desk storefront assignment",
+        "Not P Slayer charge; not Anthony board architecture as spine"
+      ],
+      "hooks": [
+        {
+          "text": "Oaks struggling — L7. Fan frustration angle. What's going wrong?",
+          "angle": "conflict/tension coverage",
+          "hood": "Downtown"
+        }
+      ]
+    },
+    "friction": {
+      "a": "Present feed fact: Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough.",
+      "b": "Wire copy / FO strategy / bleacher heat that skips time",
+      "frame": "Present first, then echo — end on break of continuity."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Travis Coles",
+        "popid": "POP-00533",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Downtown",
+        "why": "feed-names"
+      },
+      {
+        "name": "Eric Taveras",
+        "popid": "POP-00597",
+        "role": "Second Baseman, Oakland A's",
+        "neighborhood": "Downtown",
+        "why": "feed-names"
+      },
+      {
+        "name": "Desmond Morton",
+        "popid": "POP-00051",
+        "role": "Left Fielder, Oakland A's",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Jack London",
+      "record": "1-1",
+      "streak": "L1",
+      "colorRoom": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat."
+    },
+    "candidates": [
+      {
+        "score": 80,
+        "cycle": 109,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough.",
+        "priorHits": 0
+      },
+      {
+        "score": 80,
+        "cycle": 109,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon han",
+        "priorHits": 0
+      },
+      {
+        "score": 80,
+        "cycle": 108,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "John Ellis struggles in a game 4 loss, while Pablo Almanzar playoff debut reads almost like his MLB ",
+        "priorHits": 0
+      },
+      {
+        "score": 73,
+        "cycle": 108,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Eric Taveras win Post Season MVP",
+        "priorHits": 0
+      },
+      {
+        "score": 73,
+        "cycle": 108,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so f",
+        "priorHits": 0
+      },
+      {
+        "score": 67,
+        "cycle": 108,
+        "team": "Oaks",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "The Oaks stumble in game 1 of the preseason and have yet to get a win in the era of The Oaks.",
+        "priorHits": 0
+      }
+    ]
+  },
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "text": "I'm looking into the A's recent game results, trying to understand what's behind their current streak. I've been thinking about the team's performance, and I'm curious to see how they'll bounce back from their last loss.",
+    "plan": {
+      "chase": "I'm looking into the A's recent game results, trying to understand what's behind their current streak. I've been thinking about the team's performance, and I'm curious to see how they'll bounce back from their last loss.",
+      "focus": "The A's playoff run",
+      "why": "To gain insight into the team's dynamics and strategy",
+      "checks": [
+        "Team record",
+        "Recent game results"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00533",
+          "question": "What's the key to Travis Coles' success as a starting pitcher?",
+          "basis": "His performance in the playoffs"
+        },
+        {
+          "pop": "POP-00597",
+          "question": "How does Eric Taveras' batting style contribute to the team's overall offense?",
+          "basis": "His stats in the current season"
+        }
+      ],
+      "interpretation": "The A's are at a critical point in their season, and understanding the strengths and weaknesses of their players is crucial to their success.",
+      "unverifiedLead": [
+        "The team's ability to adapt to pressure situations may be a deciding factor in their playoff run"
+      ],
+      "closeQuestion": "Can the A's regain their momentum and make a deep playoff run?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | game-result | (playoffs) | Arturo Ramos, Danny Horn, Mark Aitken",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00025",
+        "POP-00022",
+        "POP-00003"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Travis Coles, Eric Taveras, Desmond Morton",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533",
+        "POP-00597",
+        "POP-00051"
+      ]
+    },
+    {
+      "label": "A's | game-result | (playoffs) | Pablo Almanzar, Ernesto Quintero, Jose Colon",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01078",
+        "POP-00050",
+        "POP-00599"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | AJ Dybantsa, Wendell Carter Jr",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01024",
+        "POP-01028"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (preseason) | Wilson Shepard, Austin Reaves, Dillon Brooks",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 109; rendered: world_summary_c109.md \"## Sports\" C109 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-01027",
+        "POP-01079"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "ranAt": "2026-10-01T11:16:10.852Z"
+}

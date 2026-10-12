@@ -1,0 +1,231 @@
+{
+  "version": "LIFESTYLE-SLICE-1",
+  "empty": false,
+  "cycle": 107,
+  "kind": "beat-lifestyle",
+  "seat": {
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "desk": "culture",
+    "domain": "lifestyle",
+    "builder": "buildLifestyleSlice.js"
+  },
+  "hood": "Lake Merritt",
+  "pulse": {
+    "className": "beat-lifestyle",
+    "score": 100,
+    "label": "Marin Tao leads the fame table; 2 fading, 2 new",
+    "hood": "Lake Merritt",
+    "source": "output/beats/Cultural_Ledger.jsonl @C107"
+  },
+  "story": {
+    "kind": "beat-lifestyle",
+    "angle": "Lena Cross is fading — how the city follows its names",
+    "label": "Marin Tao leads the fame table; 2 fading, 2 new",
+    "hookLine": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 98, cooling), 17 media mentions.",
+    "hood": "Lake Merritt",
+    "citizens": [
+      "Lena Cross (POP-00539)",
+      "Rowan Pierce (POP-00545)",
+      "Marin Tao (POP-00537)",
+      "Rico Valez (POP-00632)",
+      "Isley Kelley (POP-00019)",
+      "Mike Paulson (POP-00527)"
+    ],
+    "popids": [
+      "POP-00539",
+      "POP-00545",
+      "POP-00537",
+      "POP-00632",
+      "POP-00019",
+      "POP-00527"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C107",
+    "cycle": 107
+  },
+  "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00539",
+      "name": "Lena Cross",
+      "role": "Actor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Lena Cross — Actor — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00545",
+      "name": "Rowan Pierce",
+      "role": "Freelance Writer",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00537",
+      "name": "Marin Tao",
+      "role": "Musician",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Marin Tao — Musician — Chinatown",
+      "why": "the city knows them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00632",
+      "name": "Rico Valez",
+      "role": "Musician",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Rico Valez — Musician — Fruitvale",
+      "why": "the city knows them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00019",
+      "name": "Isley Kelley",
+      "role": "Shortstop, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
+      "why": "new on the culture record last cycle (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00527",
+      "name": "Mike Paulson",
+      "role": "General Manager, Oakland A's & The Oaks",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks — Jack London",
+      "why": "new on the culture record last cycle (Cultural_Ledger)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 98, cooling), 17 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C107"
+    },
+    {
+      "text": "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 72, cooling), 14 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C107"
+    },
+    {
+      "text": "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C107"
+    },
+    {
+      "text": "Rico Valez (Celebrity), Arts, Rockridge, Iconic-tier — the city knows them (fame 111, viral), 18 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C107"
+    },
+    {
+      "text": "Isley Kelley (Shortstop, Oakland A's Legend), Other, Rockridge, Local-tier — new on the culture record last cycle (fame 25, rising), 1 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C107"
+    },
+    {
+      "text": "Mike Paulson (General Manager, Oakland A's & The Oaks), Sports, Jack London, Local-tier — new on the culture record last cycle (fame 25, rising), 1 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C107"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Lena Cross is fading — how the city follows its names",
+    "hookLine": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading (fame 98, cooling), 17 media mentions.",
+    "anchorFacts": [
+      "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 98, cooling), 17 media mentions",
+      "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 72, cooling), 14 media mentions",
+      "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+      "Rico Valez (Celebrity), Arts, Rockridge, Iconic-tier — the city knows them (fame 111, viral), 18 media mentions",
+      "Isley Kelley (Shortstop, Oakland A's Legend), Other, Rockridge, Local-tier — new on the culture record last cycle (fame 25, rising), 1 media mentions",
+      "Mike Paulson (General Manager, Oakland A's & The Oaks), Sports, Jack London, Local-tier — new on the culture record last cycle (fame 25, rising), 1 media mentions"
+    ],
+    "evidence": [
+      {
+        "text": "Lena Cross (Celebrity), Arts, Lake Merritt, Global-tier — fading — the where-are-they-now file (fame 98, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C107"
+      },
+      {
+        "text": "Rowan Pierce (journalist), Media, KONO, Regional-tier — fading — the where-are-they-now file (fame 72, cooling), 14 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C107"
+      },
+      {
+        "text": "Marin Tao (Celebrity), Arts, San Antonio, Iconic-tier — the city knows them (fame 153, viral), 25 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C107"
+      },
+      {
+        "text": "Rico Valez (Celebrity), Arts, Rockridge, Iconic-tier — the city knows them (fame 111, viral), 18 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C107"
+      },
+      {
+        "text": "Isley Kelley (Shortstop, Oakland A's Legend), Other, Rockridge, Local-tier — new on the culture record last cycle (fame 25, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C107"
+      },
+      {
+        "text": "Mike Paulson (General Manager, Oakland A's & The Oaks), Sports, Jack London, Local-tier — new on the culture record last cycle (fame 25, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C107"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [
+      {
+        "text": "Unemployment in Lake Merritt up 17%. Economic stress story. Who's affected and why?",
+        "angle": "baseline context piece",
+        "domain": "BUSINESS",
+        "hood": "Lake Merritt",
+        "priority": 3
+      },
+      {
+        "text": "Lake Merritt's student population up 18%. Young families moving in? School capacity angle.",
+        "angle": "general coverage",
+        "domain": "EDUCATION",
+        "hood": "Lake Merritt",
+        "priority": 2
+      },
+      {
+        "text": "Notable event: \"influencer filming\". Follow-up recommended.",
+        "angle": "general coverage",
+        "domain": "CELEBRITY",
+        "hood": null,
+        "priority": 2
+      },
+      {
+        "text": "caught the recap at the counter this morning and stayed for the second retelling",
+        "angle": null,
+        "domain": "CULTURE",
+        "hood": "Lake Merritt",
+        "priority": 3
+      },
+      {
+        "text": "walked the perimeter of the Coliseum District Development and tried to picture what it would look like in five years",
+        "angle": null,
+        "domain": "CULTURE",
+        "hood": "Uptown",
+        "priority": 3
+      },
+      {
+        "text": "the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "angle": null,
+        "domain": "CULTURE",
+        "hood": "Rockridge",
+        "priority": 3
+      }
+    ],
+    "note": null,
+    "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to"
+  },
+  "known": 51,
+  "fading": 2,
+  "appeared": 2,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C107",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Sharon Okafor this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

@@ -1,0 +1,557 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00160",
+    "name": "Mason Ortega",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Temescal kitchens: OakTown Social — the people who work the shift",
+    "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "food-workplaces",
+      "hood": "Temescal",
+      "pulseClass": "hood-kitchens",
+      "economicFrame": "Temescal kitchens: OakTown Social — the people who work the shift",
+      "hook": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+      "namedBusinesses": [
+        "OakTown Social"
+      ],
+      "workplaces": [
+        "OakTown Social — Nightlife & Entertainment — Vanessa Treary (Barista); Vanessa Ramas (Barista)"
+      ],
+      "engineColour": [
+        "Jia Pena — watched the kids on the corner re-enact the play twice, arguing the call both times",
+        "Akua Ortiz — noticed another new spot opening up in Temescal",
+        "Ross Cabral — connected with friends over something small but intense",
+        "Brie Harris — memorized the starting rotation for the Oaks and tested themselves on the BART ride home"
+      ],
+      "roomIsYours": "the line, the regulars, the pace, the tip jar, what the cook is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Temescal",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+    "plan": {
+      "focus": "The unglamorous endurance of neighborhood work—what keeps someone like Vanessa Treary coming back to the same espresso machine, the same regulars, day after day.",
+      "closeQuestion": "What’s the one thing you wish people knew about working a shift that looks easy?"
+    },
+    "openThreads": [
+      {
+        "slug": "downtown-tao-lee-beat-faith",
+        "label": "downtown-tao-lee-beat-faith | C107→C107 | 2 article(s) | opened 2",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00764",
+          "POP-00180",
+          "POP-00753"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "east-oakland-marcus-whitfield-beat-neighborhood",
+        "label": "east-oakland-marcus-whitfield-beat-neighborhood | C107→C107 | 1 article(s) | opened 1",
+        "hood": "East Oakland",
+        "popids": [
+          "POP-00532",
+          "POP-01047",
+          "POP-01055",
+          "POP-00119"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "rockridge-mimmie-carlisle-hood-kitchens",
+        "label": "rockridge-mimmie-carlisle-hood-kitchens | C107→C107 | 1 article(s) | opened 1",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00682",
+          "POP-00721",
+          "POP-00905",
+          "POP-00210"
+        ],
+        "lastCycle": 107
+      },
+      {
+        "slug": "lake-merritt-vanessa-treary-named-restaurant",
+        "label": "lake-merritt-vanessa-treary-named-restaurant | C105→C106 | 4 article(s) | advanced 3, opened 1",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00781",
+          "POP-00783",
+          "POP-01045",
+          "POP-00135"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "chinatown-kenji-tanaka-beat-faith",
+        "label": "chinatown-kenji-tanaka-beat-faith | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Chinatown",
+        "popids": [
+          "POP-00763",
+          "POP-00759"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "lake-merritt-vanessa-treary-quiet-nightlife",
+        "label": "lake-merritt-vanessa-treary-quiet-nightlife | C106→C106 | 2 article(s) | opened 2",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00781",
+          "POP-00783",
+          "POP-01045",
+          "POP-00135"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-tomas-renteria-story-signal",
+        "label": "jack-london-tomas-renteria-story-signal | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00744",
+          "POP-00878",
+          "POP-00960"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "lake-merritt-yuki-ji-quiet-nightlife",
+        "label": "lake-merritt-yuki-ji-quiet-nightlife | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00783",
+          "POP-01045",
+          "POP-00135"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "jack-london-tomas-renteria-hood-kitchens",
+        "label": "jack-london-tomas-renteria-hood-kitchens | C106→C106 | 1 article(s) | opened 1",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00744",
+          "POP-00878",
+          "POP-00960"
+        ],
+        "lastCycle": 106
+      },
+      {
+        "slug": "adams-point-devon-willis-fame-sighting",
+        "label": "adams-point-devon-willis-fame-sighting | C104→C105 | 5 article(s) | advanced 2, opened 3",
+        "hood": "Adams Point",
+        "popids": [
+          "POP-00782",
+          "POP-00645",
+          "POP-00648",
+          "POP-00798"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "city-depak-ying-story-signal",
+        "label": "city-depak-ying-story-signal | C104→C105 | 3 article(s) | advanced 2, opened 1",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00170",
+          "POP-00198",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      },
+      {
+        "slug": "dimond-melton-neilon-fame-sighting",
+        "label": "dimond-melton-neilon-fame-sighting | C105→C105 | 2 article(s) | opened 2",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00170",
+          "POP-00198",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 105
+      }
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00781",
+        "name": "Vanessa Treary",
+        "profile": "Vanessa Treary — Barista — OakTown Social, Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01045",
+        "name": "Vanessa Ramas",
+        "profile": "Vanessa Ramas — Barista — OakTown Social, Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00916",
+        "name": "Jia Pena",
+        "profile": "Jia Pena — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00948",
+        "name": "Akua Ortiz",
+        "profile": "Akua Ortiz — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00781-c7b4ef1668",
+        "pop": "POP-00781",
+        "name": "Vanessa Treary",
+        "quote": "It’s not glamorous, but there’s something steady about it. You get to know people, their routines, their stories. It’s not just about the coffee—it’s about being a small part of their day, something they can count on. That’s what keeps me coming back.",
+        "factIds": [
+          "F-2af25844ad98",
+          "F-b32914e5fa63"
+        ],
+        "src": "packet.W2[POP-00781]"
+      },
+      {
+        "id": "Q-POP-01045-0cb404c3a6",
+        "pop": "POP-01045",
+        "name": "Vanessa Ramas",
+        "quote": "You know, it's not about glamour—it's about the rhythm of it. The regulars who come in and don't even have to say their order because you already know it. There's something steadying about that, especially in a city that's always changing. Tobias says I could find a job that pays more, but it's not just about the money. It's about knowing your place in the neighborhood, even if it's just pulling shots and remembering who takes oat milk.",
+        "factIds": [
+          "F-46b8c415de08",
+          "F-e5b9425fdd14"
+        ],
+        "src": "packet.W2[POP-01045]"
+      },
+      {
+        "id": "Q-POP-00916-ccc31cb149",
+        "pop": "POP-00916",
+        "name": "Jia Pena",
+        "quote": "It's the rhythm of it, I think. The way the neighborhood moves and breathes, and you’re part of that. It’s not glamorous, but it’s steady. You know the faces, the routines, and there’s something comforting in that. It’s like being part of a bigger thing, even if it’s just pulling shots or cleaning the machine.",
+        "factIds": [
+          "F-2af25844ad98"
+        ],
+        "src": "packet.W2[POP-00916]"
+      },
+      {
+        "id": "Q-POP-00948-f7acd10e70",
+        "pop": "POP-00948",
+        "name": "Akua Ortiz",
+        "quote": "You know, it's the rhythm of it all. The familiar faces, the routine—it’s comforting in a way. It’s not about the glamour; it’s about being part of something steady, something that people rely on. That’s what keeps folks like Vanessa coming back, day after day.",
+        "factIds": [
+          "F-2af25844ad98"
+        ],
+        "src": "packet.W2[POP-00948]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "Is there a silent understanding among the staff about who handles the post-game rush?",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "Do the regulars tip differently when the A's win?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C108",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-78217e633afa"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal kitchens · OakTown Social",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "id": "F-462d82d27585"
+    },
+    {
+      "t": "FACT",
+      "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "id": "F-2af25844ad98"
+    },
+    {
+      "t": "FACT",
+      "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108",
+      "id": "F-e5b9425fdd14"
+    },
+    {
+      "t": "FACT",
+      "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C108",
+      "id": "F-e7e329343d01"
+    },
+    {
+      "t": "FACT",
+      "text": "Vanessa Treary — Barista — OakTown Social, Temescal",
+      "src": "Simulation_Ledger profile for POP-00781",
+      "id": "F-b32914e5fa63"
+    },
+    {
+      "t": "FACT",
+      "text": "Vanessa Ramas — Barista — OakTown Social, Temescal",
+      "src": "Simulation_Ledger profile for POP-01045",
+      "id": "F-46b8c415de08"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Treat a Packet-supplied restaurant signal as a workplace question without inventing Mason's presence, a worker, shift, service state, business condition, or labor consequence.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "evidence-bounded kitchen-work brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named restaurant and location",
+      "closing": "the worker or operating account still needed"
+    },
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-e2b36944158b",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-78217e633afa",
+        "t": "FACT",
+        "text": "Current cycle: C108",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-462d82d27585",
+        "t": "FACT",
+        "text": "Temescal kitchens · OakTown Social",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+      },
+      {
+        "id": "F-2af25844ad98",
+        "t": "FACT",
+        "text": "Vanessa Treary, Barista at OakTown Social. 2 named workers at 1 named kitchen in Temescal on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+      },
+      {
+        "id": "F-e5b9425fdd14",
+        "t": "FACT",
+        "text": "OakTown Social · Nightlife & Entertainment · 7 employees · growth 3.5% · revenue $519k (+$345 vs C107) · on the roster: Vanessa Treary (Barista); Vanessa Ramas (Barista)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C108"
+      },
+      {
+        "id": "F-e7e329343d01",
+        "t": "FACT",
+        "text": "ENGINE SEED (Temescal): citizens Jia Pena; Akua Ortiz; Ross Cabral; Brie Harris · businesses Gridiron Analytics; Brie Bouquets · Temescal Islamic Center (faith)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C108"
+      },
+      {
+        "id": "F-b32914e5fa63",
+        "t": "FACT",
+        "text": "Vanessa Treary — Barista — OakTown Social, Temescal",
+        "src": "Simulation_Ledger profile for POP-00781"
+      },
+      {
+        "id": "F-46b8c415de08",
+        "t": "FACT",
+        "text": "Vanessa Ramas — Barista — OakTown Social, Temescal",
+        "src": "Simulation_Ledger profile for POP-01045"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00781-c7b4ef1668",
+        "speakerId": "POP-00781",
+        "speakerName": "Vanessa Treary",
+        "text": "It’s not glamorous, but there’s something steady about it. You get to know people, their routines, their stories. It’s not just about the coffee—it’s about being a small part of their day, something they can count on. That’s what keeps me coming back.",
+        "factIds": [
+          "F-2af25844ad98",
+          "F-b32914e5fa63"
+        ],
+        "src": "packet.W2[POP-00781]"
+      },
+      {
+        "id": "Q-POP-01045-0cb404c3a6",
+        "speakerId": "POP-01045",
+        "speakerName": "Vanessa Ramas",
+        "text": "You know, it's not about glamour—it's about the rhythm of it. The regulars who come in and don't even have to say their order because you already know it. There's something steadying about that, especially in a city that's always changing. Tobias says I could find a job that pays more, but it's not just about the money. It's about knowing your place in the neighborhood, even if it's just pulling shots and remembering who takes oat milk.",
+        "factIds": [
+          "F-46b8c415de08",
+          "F-e5b9425fdd14"
+        ],
+        "src": "packet.W2[POP-01045]"
+      },
+      {
+        "id": "Q-POP-00916-ccc31cb149",
+        "speakerId": "POP-00916",
+        "speakerName": "Jia Pena",
+        "text": "It's the rhythm of it, I think. The way the neighborhood moves and breathes, and you’re part of that. It’s not glamorous, but it’s steady. You know the faces, the routines, and there’s something comforting in that. It’s like being part of a bigger thing, even if it’s just pulling shots or cleaning the machine.",
+        "factIds": [
+          "F-2af25844ad98"
+        ],
+        "src": "packet.W2[POP-00916]"
+      },
+      {
+        "id": "Q-POP-00948-f7acd10e70",
+        "speakerId": "POP-00948",
+        "speakerName": "Akua Ortiz",
+        "text": "You know, it's the rhythm of it all. The familiar faces, the routine—it’s comforting in a way. It’s not about the glamour; it’s about being part of something steady, something that people rely on. That’s what keeps folks like Vanessa coming back, day after day.",
+        "factIds": [
+          "F-2af25844ad98"
+        ],
+        "src": "packet.W2[POP-00948]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00781",
+        "name": "Vanessa Treary",
+        "profile": "Vanessa Treary — Barista — OakTown Social, Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01045",
+        "name": "Vanessa Ramas",
+        "profile": "Vanessa Ramas — Barista — OakTown Social, Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00916",
+        "name": "Jia Pena",
+        "profile": "Jia Pena — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00948",
+        "name": "Akua Ortiz",
+        "profile": "Akua Ortiz — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "Is there a silent understanding among the staff about who handles the post-game rush?",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "Do the regulars tip differently when the A's win?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  }
+}

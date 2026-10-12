@@ -1,0 +1,21 @@
+{
+  "office": "health_center",
+  "cycle": 111,
+  "speaker": "Bobby Chen-Ramirez",
+  "cascadeSummary": "District 7's audit directive means operational transparency starts now—not after opening. We'll pre-audit every intake workflow and expenditure line before the first patient walks in.",
+  "statements": [
+    {
+      "statementId": "STMT-111-health_center-001",
+      "type": "operational_transparency",
+      "topic": "post-occupancy audit readiness",
+      "initiative": "INIT-005",
+      "decision": "Implement pre-opening clinical intake workflow audits and expenditure reconciliations.",
+      "quote": "The 51st Street bench crowd knows the pharmacy hours by heart—now they'll know where every dollar went too.",
+      "fullStatement": "District 7's audit directive means operational transparency starts now—not after opening. We'll pre-audit every intake workflow and expenditure line before the first patient walks in. Every inspection report, every certificate, every audit-ready spreadsheet—that's how you build Temescal's trust.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "MilestoneNotes": "C111: Implemented pre-opening clinical intake workflow audits and expenditure reconciliations per D7 directive"
+      }
+    }
+  ]
+}

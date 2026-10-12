@@ -1,0 +1,34 @@
+{
+  "office": "transit_hub",
+  "cycle": 107,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "Executed binding merchant protection covenants for 47 small businesses and street vendors along the E. 12th corridor, ensuring displacement protections are enforceable before construction begins. Published the Phase II design RFP with explicit local-hire and pedestrian-access requirements per community feedback from St. Esperanza Parish sessions.",
+  "statements": [
+    {
+      "statementId": "STMT-107-transit_hub-001",
+      "type": "operational_status",
+      "topic": "Fruitvale merchant protections",
+      "initiative": "INIT-003",
+      "decision": "Executed merchant covenants and published design RFP",
+      "quote": "These covenants mean Doña María keeps her elote cart through construction and the panadería on E. 12th doesn't become another casualty of progress.",
+      "fullStatement": "As of this cycle, 47 small businesses and street vendors along the E. 12th corridor now have binding merchant protection covenants ensuring their right to operate through and after Phase II construction. The panaderías, pupuserías, and vendor carts that make Fruitvale vibrant won't be priced out. Concurrently, we've published the Phase II design RFP with explicit requirements for protected vendor zones during construction, elder-safe pedestrian crossings, and local-hire pathways prioritizing Fruitvale residents—all direct outcomes from our St. Esperanza Parish visioning sessions.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C107: Merchant covenants executed, design RFP published with community-informed requirements",
+        "NextScheduledAction": "Design consultant selection",
+        "NextActionCycle": 108
+      }
+    },
+    {
+      "statementId": "STMT-107-transit_hub-002",
+      "type": "constituent_update",
+      "topic": "Fruitvale street vitality",
+      "initiative": null,
+      "decision": "Monitor covenant implementation",
+      "quote": "The tamales still steam on International, the abuelas still cross to their panadería—that's the baseline we're protecting.",
+      "fullStatement": "While Fruitvale's street trade remains steady this cycle, we're not just observing—we're actively monitoring the first implementation of merchant protection covenants. My team will track daily vendor presence counts at key locations (International/35th, E. 12th/BART plaza) to ensure no displacement occurs during pre-construction mobilization. This isn't passive data collection—we've trained three community monitors from the St. Esperanza Parish youth group to document any violations in real time.",
+      "trackerUpdates": {}
+    }
+  ]
+}

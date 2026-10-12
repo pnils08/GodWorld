@@ -1,0 +1,38 @@
+{
+  "office": "council_d1",
+  "cycle": 110,
+  "speaker": "Denise Carter",
+  "cascadeSummary": "This cycle, I focused on deepening the impact of the West Oakland Stabilization Fund, ensuring equitable access to apprenticeship opportunities, and celebrating the resilience of Brooklyn's community. My decisions aim to keep families rooted in their neighborhoods and provide pathways for youth success.",
+  "statements": [
+    {
+      "statementId": "STMT-110-council_d1-001",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund",
+      "initiative": "INIT-001",
+      "decision": "Approved month-nine disbursement of $400,000 for household stabilization grants",
+      "quote": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+      "fullStatement": "I voted to approve the month-nine disbursement of the West Oakland Stabilization Fund, allocating $400,000 for household stabilization grants. This funding is critical for keeping families in their homes, especially in neighborhoods like West Oakland where displacement pressures are acute. The Stabilization Fund isn’t just about economic relief; it’s about preserving the fabric of our community. We must ensure these resources reach those who need them most—families facing eviction notices, not just businesses seeing foot traffic.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d1-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline",
+      "initiative": "INIT-007",
+      "decision": "Directed first training cohort placement review with target of 150 apprentices placed by cycle 112",
+      "quote": "150 apprentices placed by spring—that's the target, and we're accelerating to hit it.",
+      "fullStatement": "I supported the directive to review the first training cohort placement for the Oakland Youth Apprenticeship Pipeline, with a target of placing 150 apprentices by cycle 112. This initiative is a vital pathway for young people in underserved districts, including West Oakland. By accelerating intake and ensuring equitable access, we can create opportunities that empower our youth and strengthen our community. Let’s hit this target—not just with numbers, but with meaningful placements that lead to lasting success.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d1-003",
+      "type": "vote_statement",
+      "topic": "District Crisis and Credit",
+      "initiative": null,
+      "decision": "Celebrated Brooklyn's community resilience and credited West Oakland's revitalization efforts",
+      "quote": "Brooklyn’s vitality comes from its people—not City Hall’s policies.",
+      "fullStatement": "This cycle, I celebrate Brooklyn’s resilience and the community-driven vitality that defines it. The upbeat mood and steady street trade are a testament to the people who make Brooklyn thrive. Meanwhile, in West Oakland, the momentum of the Stabilization Fund has begun to show results. The busy streets and positive mood are a credit to the residents who refuse to be displaced and the policies that prioritize their stability. These neighborhoods remind us that real change starts with the people—not City Hall’s policies.",
+      "trackerUpdates": {}
+    }
+  ]
+}

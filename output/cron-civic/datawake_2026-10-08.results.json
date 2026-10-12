@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-08",
+  "cycle": 110,
+  "results": [
+    {
+      "office": "civic-office-council-d9",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d9_2026-10-08.json"
+    },
+    {
+      "office": "civic-office-police-chief",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-police-chief_2026-10-08.json"
+    },
+    {
+      "office": "civic-office-council-d3",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d3_2026-10-08.json"
+    }
+  ],
+  "ranAt": "2026-10-08T10:45:45.418Z"
+}

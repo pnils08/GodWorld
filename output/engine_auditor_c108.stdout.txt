@@ -1,0 +1,33 @@
+◇ injected env (31) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
+=== Engine Auditor (Phase 38.1 + 38.7 + 38.8) ===
+
+Cycle: 108
+Reading sheets...
+Running ailment detectors (38.1)...
+  detectStuckInitiatives: 0
+  detectRepeatingEvents: 2
+  detectMathImbalances: 15
+  detectCascadeFailures: 0
+  detectWritebackDrift: 0
+  detectProductionImbalance: 1
+  detectImprovements: 2
+  detectIncoherence: 0
+  detectLedgerCompleteness: 0
+Running enrichers (38.2 + 38.3 + 38.4)...
+  checkMitigators: enriched 20 patterns
+  recommendRemedy: enriched 20 patterns
+  resolveAffectedCitizens: enriched 20 patterns
+  generateTribuneFraming: enriched 20 patterns
+  measureRemedies: enriched 20 patterns
+  checkOrphanAilments: enriched 20 patterns
+Running anomaly detector (38.7)...
+  detectAnomalies: 22
+Generating baseline briefs (38.8)...
+  generateBaselineBriefs: 87
+Wrote /root/GodWorld/output/carry_forward_c108.json
+
+Wrote /root/GodWorld/output/engine_audit_c108.json
+Wrote /root/GodWorld/output/engine_anomalies_c108.json
+Wrote /root/GodWorld/output/baseline_briefs_c108.json
+Ailments: 20 | Anomalies: 22 | Briefs: 87
+Elapsed: 2.3s

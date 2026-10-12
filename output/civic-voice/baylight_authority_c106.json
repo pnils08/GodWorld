@@ -1,0 +1,34 @@
+{
+  "office": "baylight_authority",
+  "cycle": 106,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "With council authorization secured and the Phase II bid finalized, we're executing contracts and mobilizing the remediation team. The Baylight Authority has submitted the finalized contractor package to city planning, meeting our C107 deadline. Site work begins next cycle as scheduled.",
+  "statements": [
+    {
+      "statementId": "STMT-106-baylight_authority-001",
+      "type": "milestone_update",
+      "topic": "Baylight District Phase II Mobilization",
+      "initiative": "INIT-006",
+      "decision": "Contract execution timeline submitted ahead of schedule",
+      "quote": "Thirty-five thousand seats start with clean ground — remediation crews mobilize next cycle.",
+      "fullStatement": "Baylight Authority Director Keisha Ramos confirmed the Phase II contract package has been delivered to the City Planning Department, meeting the C107 deadline with one cycle to spare. Finalized terms for infrastructure obligations and environmental remediation schedules are included, with the selected consortium ready to begin site work within two cycles. 'Every hour counts when you're building the largest civic project in Oakland history,' Ramos stated. The remediation team will focus on soil handling protocols before foundation work begins.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-planning",
+        "MilestoneNotes": "C106: Phase II contractor package delivered to City Planning",
+        "NextScheduledAction": "Remediation crew mobilization",
+        "NextActionCycle": 107
+      }
+    },
+    {
+      "statementId": "STMT-106-baylight_authority-002",
+      "type": "project_response",
+      "topic": "Baylight District Community Impact",
+      "initiative": null,
+      "decision": "Deployment of neighborhood liaison team",
+      "quote": "Elmhurst residents will have a direct line to the construction team starting tomorrow.",
+      "fullStatement": "In response to community feedback, the Baylight Authority is deploying a neighborhood liaison team to coordinate with Elmhurst and Coliseum-area residents during Phase II construction. The six-member team, drawn from existing staff, will handle noise complaints, traffic pattern updates, and workforce pipeline inquiries. 'We build with the community, not through it,' Director Ramos noted. The team begins operations tomorrow with a community advisory meeting at Elmhurst Community Center.",
+      "trackerUpdates": {}
+    }
+  ]
+}

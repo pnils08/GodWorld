@@ -1,0 +1,411 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-weather",
+      "angle": "C110 fog, 52°F after overcast — what this weather does to a day in the city",
+      "label": "C110 fog, 52°F after overcast",
+      "hookLine": "C110 fog, 52°F after overcast; 4 residents on the record lived it.",
+      "hood": null,
+      "citizens": [
+        "Jackson Sift (POP-00190)",
+        "Ron Arenson (POP-00367)",
+        "Jessie Hess (POP-00212)",
+        "Jett Walker (POP-00230)"
+      ],
+      "popids": [
+        "POP-00190",
+        "POP-00367",
+        "POP-00212",
+        "POP-00230"
+      ],
+      "ref": "output/beats/Cycle_Weather.jsonl CycleID 110",
+      "cycle": 110
+    }
+  },
+  "angle": "output/cron-compare/civic_c110_noah-tan_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00081",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: voice: Provider returned error",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00081",
+          "name": "Carmen Mesa",
+          "role": "Starting Pitcher, Midland RockHounds (AA)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Your own current-cycle line says: \"Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window\". What did you notice about fog? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "The fog’s influence on routines and introspection.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Carmen Mesa — Starting Pitcher, Midland RockHounds (AA)",
+          "evidence": [
+            {
+              "id": "EV-LIFE-c7ffc6c5c3",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-476ac476abc1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": false,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Return abstain. This citizen is not eligible for this interview path."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00214",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: voice: Provider returned error",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00214",
+          "name": "Jacquez Tearn",
+          "role": "Dishwasher",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Your own current-cycle line says: \"Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window\". What did you notice about fog? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "The fog’s influence on routines and introspection.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Jacquez Tearn — Dishwasher",
+          "evidence": [
+            {
+              "id": "EV-LIFE-4042a4ee2a",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-476ac476abc1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00626",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: voice: Provider returned error",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00626",
+          "name": "Fatima Al-Hassan",
+          "role": "Social Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Your own current-cycle line says: \"Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window\". What did you notice about fog? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "The fog’s influence on routines and introspection.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Fatima Al-Hassan — Social Worker",
+          "evidence": [
+            {
+              "id": "EV-LIFE-5971003fd6",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-476ac476abc1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": false,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Return abstain. This citizen is not eligible for this interview path."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00158",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: voice: Provider returned error",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00158",
+          "name": "Kai Marston",
+          "role": "Journalist, Arts & Entertainment",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Your own current-cycle line says: \"Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window\". What did you notice about fog? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "The fog’s influence on routines and introspection.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Kai Marston — Journalist, Arts & Entertainment",
+          "evidence": [
+            {
+              "id": "EV-LIFE-b29904f8e5",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C6 — [Neighborhood] watched the fog roll over the port cranes from their front window",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-476ac476abc1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-07T18:15:21.385Z"
+}

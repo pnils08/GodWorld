@@ -1,0 +1,21 @@
+{
+  "office": "council_d2",
+  "agentDir": "civic-office-council-d2",
+  "holder": "Leonard Tran",
+  "popid": "POP-00502",
+  "title": "City Council District 2",
+  "date": "2026-09-28",
+  "cycle": 109,
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "statement": "As we move forward with Phase II site remediation, I emphasize the importance of addressing economic momentum in Jack London, ensuring the success of Baylight District benefits the entire community. We've seen sustained growth and a boom in the area with 9/10 momentum, and I believe targeted support for local businesses and public safety is crucial to maintaining this trajectory.",
+  "moves": [],
+  "movesRejected": [
+    {
+      "type": "propose",
+      "reason": "hood-out-of-district(\"Grand Lake\" folds to Grand Lake, not in D2)"
+    }
+  ],
+  "numberMoved": null,
+  "ranAt": "2026-09-28T10:45:39.062Z",
+  "fellBackFrom": null
+}

@@ -1,0 +1,385 @@
+{
+  "date": "2026-09-17",
+  "cycle": 107,
+  "quotas": {
+    "grid": [
+      "elliot-graye",
+      "simon-leary",
+      "tanya-cruz",
+      "talia-finch"
+    ],
+    "weekday": 4
+  },
+  "assignments": [
+    {
+      "desk": "culture",
+      "name": "Elliot Graye",
+      "popid": "POP-00012",
+      "beatDomain": "COMMUNITY",
+      "persona": "elliot-graye",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 4,
+      "story": {
+        "kind": "beat-faith",
+        "angle": "crisis response at Telegraph Presbyterian Fellowship (Downtown) — the week in faith, and Lake Merritt Mindfulness Sangha in focus",
+        "label": "8 faith events on the record since C101 · Lake Merritt Mindfulness Sangha in Downtown | 11 named on the record",
+        "hookLine": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+        "hood": "Downtown",
+        "citizens": [
+          "Tao Lee (POP-00764)",
+          "Dillon Trevor (POP-00224)",
+          "Cameron Wallen (POP-00180)",
+          "Eunice Marston (POP-00753)",
+          "Naomi Sterling (POP-00759)",
+          "Eleanor Bishop (POP-00768)",
+          "Robert Jaston (POP-00758)",
+          "Idris Karim (POP-00761)",
+          "Yael Bauer (POP-00760)",
+          "Antoine Vermeer (POP-00755)",
+          "Priya Nair (POP-00531)"
+        ],
+        "popids": [
+          "POP-00764",
+          "POP-00224",
+          "POP-00180",
+          "POP-00753",
+          "POP-00759",
+          "POP-00768",
+          "POP-00758",
+          "POP-00761",
+          "POP-00760",
+          "POP-00755",
+          "POP-00531"
+        ],
+        "ref": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\"",
+        "cycle": 107
+      },
+      "beatSlice": true,
+      "beatSeat": "elliot-graye",
+      "pulse": {
+        "className": "beat-faith",
+        "score": 100,
+        "label": "8 faith events on the record since C101 · Lake Merritt Mindfulness Sangha in Downtown | 11 named on the record",
+        "hood": "Downtown",
+        "source": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\""
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "crisis response at Telegraph Presbyterian Fellowship (Downtown) — the week in faith, and Lake Merritt Mindfulness Sangha in focus",
+        "hookLine": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+        "anchorFacts": [
+          "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+          "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+          "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+          "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+          "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+          "Telegraph Presbyterian Fellowship (Downtown), C101 — crisis response: community grief gathering organized (attendance 80)",
+          "B'nai Tikvah Synagogue (Piedmont Ave), C101 — crisis response: congregation opens doors for community support (attendance 34)",
+          "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+          "In focus: Lake Merritt Mindfulness Sangha — Buddhist, Downtown, congregation 500, founded 2007, led by Tao Lee — diverse sangha, social justice dharma",
+          "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+          "Also in Downtown: Telegraph Presbyterian Fellowship (Protestant)"
+        ],
+        "evidence": [
+          {
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\""
+          },
+          {
+            "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\""
+          },
+          {
+            "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\""
+          },
+          {
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\""
+          },
+          {
+            "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\""
+          },
+          {
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C101 — crisis response: community grief gathering organized (attendance 80)",
+            "src": "output/beats/Faith_Ledger.jsonl C101 \"Telegraph Presbyterian Fellowship\""
+          },
+          {
+            "text": "B'nai Tikvah Synagogue (Piedmont Ave), C101 — crisis response: congregation opens doors for community support (attendance 34)",
+            "src": "output/beats/Faith_Ledger.jsonl C101 \"B'nai Tikvah Synagogue\""
+          },
+          {
+            "text": "Cathedral of the Living Word (Lake Merritt), C107 — holy day: congregation celebrates Epiphany (attendance 1,185)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Cathedral of the Living Word\""
+          },
+          {
+            "text": "In focus: Lake Merritt Mindfulness Sangha — Buddhist, Downtown, congregation 500, founded 2007, led by Tao Lee — diverse sangha, social justice dharma",
+            "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\""
+          },
+          {
+            "text": "NeuroCity Youth Lab (tech-education), Downtown, founded by Priya Nair, since C101",
+            "src": "output/beats/Community_Programs.jsonl PRG-017"
+          },
+          {
+            "text": "Also in Downtown: Telegraph Presbyterian Fellowship (Protestant)",
+            "src": "output/beats/Faith_Organizations.jsonl"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [
+          {
+            "text": "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+            "angle": "general coverage",
+            "domain": "FAITH",
+            "hood": null,
+            "priority": 3
+          },
+          {
+            "text": "Notable event: \"Telegraph Presbyterian Fellowship: congregation opens doors for community support\". Follow-up recommended.",
+            "angle": "general coverage",
+            "domain": "FAITH",
+            "hood": "Downtown",
+            "priority": 2
+          }
+        ],
+        "note": null,
+        "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+      },
+      "wakePackage": "GRAYE-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Simon Leary",
+      "popid": "POP-00016",
+      "beatDomain": "SPORTS_LONG_VIEW",
+      "persona": "simon-leary",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 4,
+      "story": {
+        "ref": "Ripple_Ledger cycle 107 (CauseType sports); rendered: world_summary_c107.md \"## What Moved\" > \"### sports\"",
+        "label": "sentiment | A's W2 [player-energy]; A's W2 [playoffs]; Oaks W0 [pre-season]",
+        "kind": "ripple"
+      },
+      "wakePackage": "SIMON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Tanya Cruz",
+      "popid": "POP-00014",
+      "beatDomain": "SPORTS_SIDELINE",
+      "persona": "tanya-cruz",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 4,
+      "story": {
+        "ref": "Ripple_Ledger cycle 107 (CauseType sports); rendered: world_summary_c107.md \"## What Moved\" > \"### sports\"",
+        "label": "traffic/retail/nightlife/communityEngagement | {\"traffic\":0.28,\"retail\":0.323,\"nightlife\":0.149,\"communityEngagement\":0.15}",
+        "kind": "ripple",
+        "hood": "Fruitvale"
+      },
+      "wakePackage": "TANYA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Talia Finch",
+      "popid": "POP-00592",
+      "beatDomain": "SPORTS",
+      "persona": "talia-finch",
+      "approach": "Oaks ground approach (solo seat): carry one supplied Oaks fact into a real Oakland room and let unnamed people say what the city thinks of a team it hasn't decided on. Weather, sound, a drink, a platform. The fact is the feed's; the room is yours. End in the scene.",
+      "gridDay": 4,
+      "story": {
+        "kind": "beat-oaks-ground",
+        "angle": "Oaks ground read C107 — high — the people around the second club",
+        "label": "Oaks ground read C107 — high",
+        "hookLine": "high",
+        "hood": "Downtown",
+        "citizens": [
+          "Wilson Shepard (POP-01022)",
+          "Adash Stanley (POP-01023)"
+        ],
+        "popids": [
+          "POP-01022",
+          "POP-01023"
+        ],
+        "ref": "output/beats/Oakland_Sports_Feed.jsonl @C107",
+        "cycle": 107
+      },
+      "beatSlice": true,
+      "beatSeat": "talia-finch",
+      "pulse": {
+        "className": "beat-oaks-ground",
+        "score": 100,
+        "label": "Oaks ground read C107 — high",
+        "hood": "Downtown",
+        "source": "output/beats/Oakland_Sports_Feed.jsonl @C107"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Oaks ground read C107 — high — the people around the second club",
+        "hookLine": "high",
+        "anchorFacts": [
+          "Oaks fans, C107: high",
+          "Room mood, C107: hungry",
+          "Notebook (feed): Wilson Shepard meet with the media to address his excitement fot the seaon and is eager to show Oakland what they have in the Oaks. Shepard shared that he felt the Oaks will catch people off guard thi",
+          "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+          "Context: record 0-0 · streak W0",
+          "Home neighborhood (feed): Downtown"
+        ],
+        "evidence": [
+          {
+            "text": "Oaks fans, C107: high",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107"
+          },
+          {
+            "text": "Room mood, C107: hungry",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107"
+          },
+          {
+            "text": "Notebook (feed): Wilson Shepard meet with the media to address his excitement fot the seaon and is eager to show Oakland what they have in the Oaks. Shepard shared that he felt the Oaks will catch people off guard thi",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107"
+          },
+          {
+            "text": "Oaks — season-state (preseason), C107: The Oaks are a full go for opening night , starting 5 announced.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107"
+          },
+          {
+            "text": "Context: record 0-0 · streak W0",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107"
+          },
+          {
+            "text": "Home neighborhood (feed): Downtown",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C107"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [],
+        "note": null,
+        "roomIsYours": "the walk from the bus stop, the vendor who knows the regulars, what the crowd sounds like when the club is losing, the kid waiting by the tunnel"
+      },
+      "wakePackage": "TALIA-OAKS-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "gridDay": 4,
+      "story": {
+        "ref": "undocked:undocked-pop00495-Y3C3",
+        "label": "UNDOCKED: POP-00495 — up 3 on the night",
+        "kind": "undocked",
+        "angle": "Recap the pilot's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 3, systems Sol, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 4 cycle(s) led, current streak 4.",
+        "citizens": [
+          "POP-00495 — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00495"
+        ],
+        "hood": "Laurel"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Elliot Graye",
+        "persona": "elliot-graye",
+        "wakePackage": "GRAYE-LEP2-1"
+      },
+      {
+        "name": "Simon Leary",
+        "persona": "simon-leary",
+        "wakePackage": "SIMON-LEP2-1"
+      },
+      {
+        "name": "Tanya Cruz",
+        "persona": "tanya-cruz",
+        "wakePackage": "TANYA-LEP2-1"
+      },
+      {
+        "name": "Talia Finch",
+        "persona": "talia-finch",
+        "wakePackage": "TALIA-OAKS-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=elliot-graye,simon-leary,tanya-cruz,talia-finch,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": false,
+    "reason": "no business desk or Mason assignment in rota",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=2 talia-finch/beat-oaks-ground:Downtown, elliot-graye/beat-faith:Downtown",
+    "seats": [
+      "talia-finch/beat-oaks-ground:Downtown",
+      "elliot-graye/beat-faith:Downtown"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": false,
+    "reason": "no civic-domain persona assignment in rota",
+    "seats": []
+  },
+  "builtAt": "2026-09-17T11:15:07.978Z"
+}

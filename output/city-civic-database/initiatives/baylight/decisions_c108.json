@@ -1,0 +1,21 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 108,
+  "primaryVoice": "Tran D2 (council_d2-001)",
+  "consolidatedFrom": [
+    "STMT-108-council_d2-001 (Tran D2 — Baylight District)",
+    "STMT-108-council_d6-002 (Crane D6 — Baylight District Phase II Remediation Oversight)",
+    "STMT-108-mayor_open-007 (Mayor agenda — Baylight District Phase II Site Remediation)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "LastWorkCycle": 108,
+    "LastWorkSeat": "proj-baylight"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-108-proj-baylight-2026-09-25"
+    ]
+  }
+}

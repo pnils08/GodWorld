@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-14",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    },
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Trevor Shimizu",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": false,
+      "error": "W3: zero publishable answers — fail closed, do not open W3"
+    }
+  ],
+  "ranAt": "2026-09-14T23:18:06.599Z"
+}

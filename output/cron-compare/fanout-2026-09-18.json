@@ -1,0 +1,677 @@
+{
+  "date": "2026-09-18",
+  "cycle": 107,
+  "quotas": {
+    "grid": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "celeste-tran"
+    ],
+    "weekday": 5
+  },
+  "assignments": [
+    {
+      "desk": "culture",
+      "name": "Mason Ortega",
+      "popid": "POP-00160",
+      "beatDomain": "CULTURE",
+      "persona": "mason-ortega",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 5,
+      "story": {
+        "angle": "Rockridge kitchens: OakHouse, Claremont Table — the people who work the shift",
+        "label": "Rockridge kitchens · OakHouse, Claremont Table",
+        "hookLine": "Mimmie Carlisle, Pastry Chef at OakHouse. 3 named workers at 1 named kitchen in Rockridge on the ledger this cycle.",
+        "hood": "Rockridge",
+        "pulseClass": "hood-kitchens",
+        "namedBusinesses": [
+          "OakHouse",
+          "Claremont Table"
+        ],
+        "citizens": [
+          "Mimmie Carlisle (POP-00682)",
+          "Jesus Jorden (POP-00721)",
+          "Kalyani Alvarez (POP-00905)"
+        ],
+        "popids": [
+          "POP-00682",
+          "POP-00721",
+          "POP-00905"
+        ],
+        "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107",
+        "cycle": 107
+      },
+      "economicSlice": true,
+      "economicVariant": "food",
+      "pulse": {
+        "className": "hood-kitchens",
+        "score": 17,
+        "label": "Rockridge kitchens · OakHouse, Claremont Table",
+        "hood": "Rockridge",
+        "namedBusinesses": [
+          "OakHouse",
+          "Claremont Table"
+        ]
+      },
+      "prewrite": {
+        "pulseClass": "hood-kitchens",
+        "angle": "Rockridge kitchens: OakHouse, Claremont Table — the people who work the shift",
+        "hookLine": "Mimmie Carlisle, Pastry Chef at OakHouse. 3 named workers at 1 named kitchen in Rockridge on the ledger this cycle.",
+        "namedBusinesses": [
+          "OakHouse",
+          "Claremont Table"
+        ],
+        "anchorFacts": [
+          "OakHouse · Restaurant & Dining · 22 employees · growth 6% · revenue $3.7M (+$4k vs C106) · on the roster: Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)",
+          "Claremont Table · Restaurant & Dining · 15 employees · growth 5% · revenue $2.5M (+$2k vs C106)",
+          "ENGINE SEED (Jack London): citizens Mariano Rosales; Quynh Le; Erica Le; Talia Finch · businesses Jack London Square Markets; Port of Oakland",
+          "ENGINE SEED (West Oakland): citizens Alexa Ward; Robert Jaston; Calvin Mwangi; Dom Will · businesses Acts Full Gospel Church; Vance's Vintage · Keane Auxiliary Flag Football League (program)"
+        ],
+        "evidence": [
+          {
+            "text": "OakHouse · Restaurant & Dining · 22 employees · growth 6% · revenue $3.7M (+$4k vs C106) · on the roster: Mimmie Carlisle (Pastry Chef); Jesus Jorden (Pastry Chef, OakHouse); Kalyani Alvarez (Pastry Chef)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+          },
+          {
+            "text": "Claremont Table · Restaurant & Dining · 15 employees · growth 5% · revenue $2.5M (+$2k vs C106)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C107"
+          },
+          {
+            "text": "ENGINE SEED (Jack London): citizens Mariano Rosales; Quynh Le; Erica Le; Talia Finch · businesses Jack London Square Markets; Port of Oakland",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C107"
+          },
+          {
+            "text": "ENGINE SEED (West Oakland): citizens Alexa Ward; Robert Jaston; Calvin Mwangi; Dom Will · businesses Acts Full Gospel Church; Vance's Vintage · Keane Auxiliary Flag Football League (program)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C107"
+          }
+        ],
+        "hooks": [
+          {
+            "text": "Unemployment in Lake Merritt up 17%. Economic stress story. Who's affected and why?",
+            "angle": "baseline context piece",
+            "hood": "Lake Merritt"
+          },
+          {
+            "text": "Notable event: \"food poisoning complaint\". Follow-up recommended.",
+            "angle": "baseline context piece",
+            "hood": null
+          },
+          {
+            "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+            "angle": "baseline context piece",
+            "hood": null
+          }
+        ],
+        "forbidden": [
+          "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+          "Do not contradict a role, employer or neighborhood listed here"
+        ]
+      },
+      "wakePackage": "MASON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "beatDomain": "CULTURE_GROUND",
+      "persona": "maria-keen",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 5,
+      "story": {
+        "kind": "beat-neighborhood",
+        "angle": "East Oakland — the programs that hold the block and the people who founded them",
+        "label": "East Oakland: 6 active programs on the record",
+        "hookLine": "6 active programs in East Oakland; Marcus Whitfield founded one.",
+        "hood": "East Oakland",
+        "citizens": [
+          "Marcus Whitfield (POP-00532)"
+        ],
+        "popids": [
+          "POP-00532"
+        ],
+        "ref": "output/beats/Community_Programs.jsonl @C107",
+        "cycle": 107
+      },
+      "beatSlice": true,
+      "beatSeat": "maria-keen",
+      "pulse": {
+        "className": "beat-neighborhood",
+        "score": 100,
+        "label": "East Oakland: 6 active programs on the record",
+        "hood": "East Oakland",
+        "source": "output/beats/Community_Programs.jsonl @C107"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "East Oakland — the programs that hold the block and the people who founded them",
+        "hookLine": "6 active programs in East Oakland; Marcus Whitfield founded one.",
+        "anchorFacts": [
+          "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+          "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+          "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+          "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+          "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+          "Allen Temple Academy (tech-education), East Oakland, since C88",
+          "East Oakland this cycle: 451 students, 1,441 adults, 308 seniors — moved vs C106: +10 students, +39 adults, +8 seniors"
+        ],
+        "evidence": [
+          {
+            "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C107 PRG-005"
+          },
+          {
+            "text": "East Bay Harm Reduction Alliance (health), East Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C107 PRG-014"
+          },
+          {
+            "text": "Allen Temple Baptist Church Food Pantry (mutual-aid), East Oakland, since C78",
+            "src": "output/beats/Community_Programs.jsonl @C107 PRG-022"
+          },
+          {
+            "text": "Allen Temple Baptist Church Seniors Lunch Program (health), East Oakland, since C78",
+            "src": "output/beats/Community_Programs.jsonl @C107 PRG-023"
+          },
+          {
+            "text": "Masjid Al-Islam Emergency Assistance Fund (mutual-aid), East Oakland, since C78",
+            "src": "output/beats/Community_Programs.jsonl @C107 PRG-025"
+          },
+          {
+            "text": "Allen Temple Academy (tech-education), East Oakland, since C88",
+            "src": "output/beats/Community_Programs.jsonl @C107 PRG-030"
+          },
+          {
+            "text": "East Oakland this cycle: 451 students, 1,441 adults, 308 seniors — moved vs C106: +10 students, +39 adults, +8 seniors",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C107 vs prev/"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 106
+        },
+        "hooks": [
+          {
+            "text": "Lake Merritt seeing 15% population growth. New residents arriving—who are they and why? Neighborhood change angle.",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Lake Merritt",
+            "priority": 3
+          },
+          {
+            "text": "Multiple community signals detected. Could be coincidence or early pattern.",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": null,
+            "priority": 2
+          },
+          {
+            "text": "Positive energy in the city. What's driving the mood? Feature opportunity.",
+            "angle": "street-level mood piece",
+            "domain": "COMMUNITY",
+            "hood": "Lake Merritt",
+            "priority": 2
+          },
+          {
+            "text": "Community engagement elevated. Residents gathering, organizing, connecting. Profile opportunity.",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": null,
+            "priority": 2
+          },
+          {
+            "text": "Household in West Oakland spending 53% of income on housing",
+            "angle": null,
+            "domain": "RENT_BURDEN_CRISIS",
+            "hood": "West Oakland",
+            "priority": 6
+          },
+          {
+            "text": "the debts crossed a line this week — sleep comes harder now",
+            "angle": null,
+            "domain": "COMMUNITY",
+            "hood": "Downtown",
+            "priority": 3
+          },
+          {
+            "text": "the debts crossed a line this week — sleep comes harder now",
+            "angle": null,
+            "domain": "COMMUNITY",
+            "hood": "West Oakland",
+            "priority": 3
+          },
+          {
+            "text": "A family bought their home in Fruitvale",
+            "angle": null,
+            "domain": "COMMUNITY",
+            "hood": "Fruitvale",
+            "priority": 3
+          },
+          {
+            "text": "Downtown boom sustained — momentum 9/10, the block everyone wants onto",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_BOOM",
+            "hood": "Downtown",
+            "priority": 7
+          },
+          {
+            "text": "Temescal boom sustained — momentum 10/10, the block everyone wants onto",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_BOOM",
+            "hood": "Temescal",
+            "priority": 7
+          },
+          {
+            "text": "Fruitvale turning upward: retail busy, events drawing crowds, people moving in",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_RISING",
+            "hood": "Fruitvale",
+            "priority": 5
+          },
+          {
+            "text": "Jack London turning upward: retail busy, events drawing crowds, people moving in",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_RISING",
+            "hood": "Jack London",
+            "priority": 5
+          },
+          {
+            "text": "Rockridge boom sustained — momentum 9/10, the block everyone wants onto",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_BOOM",
+            "hood": "Rockridge",
+            "priority": 7
+          },
+          {
+            "text": "Chinatown turning upward: retail busy, events drawing crowds, people moving in",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_RISING",
+            "hood": "Chinatown",
+            "priority": 5
+          },
+          {
+            "text": "Brooklyn cooling off: foot traffic down, storefronts quieter than the rest of the city",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_COOLING",
+            "hood": "Brooklyn",
+            "priority": 6
+          },
+          {
+            "text": "Glenview cooling off: foot traffic down, storefronts quieter than the rest of the city",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_COOLING",
+            "hood": "Glenview",
+            "priority": 6
+          },
+          {
+            "text": "KONO turning upward: retail busy, events drawing crowds, people moving in",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_RISING",
+            "hood": "KONO",
+            "priority": 5
+          },
+          {
+            "text": "Lake Merritt turning upward: retail busy, events drawing crowds, people moving in",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_RISING",
+            "hood": "Lake Merritt",
+            "priority": 5
+          },
+          {
+            "text": "Lake Merritt boom sustained — momentum 9/10, the block everyone wants onto",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_BOOM",
+            "hood": "Lake Merritt",
+            "priority": 7
+          },
+          {
+            "text": "Uptown boom sustained — momentum 9/10, the block everyone wants onto",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_BOOM",
+            "hood": "Uptown",
+            "priority": 7
+          },
+          {
+            "text": "Carmen Delaine moved from Chinatown to West Oakland — moving up from Chinatown",
+            "angle": null,
+            "domain": "CITIZEN_RELOCATED",
+            "hood": "West Oakland",
+            "priority": 5
+          },
+          {
+            "text": "Simone Ellis moved from Chinatown to Lake Merritt — moving up from Chinatown",
+            "angle": null,
+            "domain": "CITIZEN_RELOCATED",
+            "hood": "Lake Merritt",
+            "priority": 5
+          },
+          {
+            "text": "Andre Lee moved from Temescal to Jack London — moving up from Temescal",
+            "angle": null,
+            "domain": "CITIZEN_RELOCATED",
+            "hood": "Jack London",
+            "priority": 5
+          },
+          {
+            "text": "Bethany Foster moved from Jack London to Lake Merritt — moving up from Jack London",
+            "angle": null,
+            "domain": "CITIZEN_RELOCATED",
+            "hood": "Lake Merritt",
+            "priority": 5
+          },
+          {
+            "text": "Ron Arenson moved from Laurel to Baylight District — moving up from Laurel",
+            "angle": null,
+            "domain": "CITIZEN_RELOCATED",
+            "hood": "Baylight District",
+            "priority": 5
+          },
+          {
+            "text": "The Brooks household (2) moved from Temescal to Jack London — moving up from Temescal",
+            "angle": null,
+            "domain": "CITIZEN_RELOCATED",
+            "hood": "Jack London",
+            "priority": 5
+          },
+          {
+            "text": "Debbie Kaplan moved from Jack London to Lake Merritt — moving up from Jack London",
+            "angle": null,
+            "domain": "CITIZEN_RELOCATED",
+            "hood": "Lake Merritt",
+            "priority": 5
+          },
+          {
+            "text": "Erica Faulkner moved from Fruitvale to Lake Merritt — moving up from Fruitvale",
+            "angle": null,
+            "domain": "CITIZEN_RELOCATED",
+            "hood": "Lake Merritt",
+            "priority": 5
+          },
+          {
+            "text": "Tariq Harris moved from West Oakland to Chinatown — priced out of West Oakland",
+            "angle": null,
+            "domain": "CITIZEN_RELOCATED",
+            "hood": "Chinatown",
+            "priority": 5
+          }
+        ],
+        "note": null,
+        "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+      },
+      "wakePackage": "MARIA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "wire",
+      "name": "Celeste Tran",
+      "popid": "POP-00164",
+      "beatDomain": "CULTURE",
+      "persona": "celeste-tran",
+      "approach": "Report what the record shows, then find the citizen living it. Facts from the record are immutable; the feel of the day is yours.",
+      "gridDay": 5,
+      "story": {
+        "kind": "beat-trends",
+        "angle": "Marin Tao leads the conversation (25 mentions); Uptown moves the most — what Oakland is doing together this week",
+        "label": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+        "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+        "hood": "San Antonio",
+        "citizens": [
+          "Marin Tao (POP-00537)",
+          "Dax Monroe (POP-00769)",
+          "Rico Valez (POP-00632)"
+        ],
+        "popids": [
+          "POP-00537",
+          "POP-00769",
+          "POP-00632"
+        ],
+        "ref": "output/beats/Cultural_Ledger.jsonl @C107",
+        "cycle": 107
+      },
+      "beatSlice": true,
+      "beatSeat": "celeste-tran",
+      "pulse": {
+        "className": "beat-trends",
+        "score": 100,
+        "label": "Marin Tao leads the conversation (25 mentions); Uptown moves the most",
+        "hood": "San Antonio",
+        "source": "output/beats/Cultural_Ledger.jsonl @C107"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Marin Tao leads the conversation (25 mentions); Uptown moves the most — what Oakland is doing together this week",
+        "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+        "anchorFacts": [
+          "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+          "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 89",
+          "Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111",
+          "Isley Kelley (Other) — new on the culture record C106",
+          "Mike Paulson (Sports) — new on the culture record C106",
+          "Movement vs C106: Uptown +61 people, Downtown +60 people, Jack London +59 people, Baylight District +58 people, Temescal +57 people"
+        ],
+        "evidence": [
+          {
+            "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
+            "src": "output/beats/Cultural_Ledger.jsonl @C107"
+          },
+          {
+            "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 89",
+            "src": "output/beats/Cultural_Ledger.jsonl @C107"
+          },
+          {
+            "text": "Rico Valez (Celebrity), Arts — 18 media mentions, viral, fame 111",
+            "src": "output/beats/Cultural_Ledger.jsonl @C107"
+          },
+          {
+            "text": "Isley Kelley (Other) — new on the culture record C106",
+            "src": "output/beats/Cultural_Ledger.jsonl @C107"
+          },
+          {
+            "text": "Mike Paulson (Sports) — new on the culture record C106",
+            "src": "output/beats/Cultural_Ledger.jsonl @C107"
+          },
+          {
+            "text": "Movement vs C106: Uptown +61 people, Downtown +60 people, Jack London +59 people, Baylight District +58 people, Temescal +57 people",
+            "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C107"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 106
+        },
+        "hooks": [
+          {
+            "text": "Household in West Oakland spending 53% of income on housing",
+            "angle": null,
+            "domain": "RENT_BURDEN_CRISIS",
+            "hood": "West Oakland",
+            "priority": 6
+          },
+          {
+            "text": "Downtown boom sustained — momentum 9/10, the block everyone wants onto",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_BOOM",
+            "hood": "Downtown",
+            "priority": 7
+          },
+          {
+            "text": "Temescal boom sustained — momentum 10/10, the block everyone wants onto",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_BOOM",
+            "hood": "Temescal",
+            "priority": 7
+          },
+          {
+            "text": "Fruitvale turning upward: retail busy, events drawing crowds, people moving in",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_RISING",
+            "hood": "Fruitvale",
+            "priority": 5
+          },
+          {
+            "text": "Jack London turning upward: retail busy, events drawing crowds, people moving in",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_RISING",
+            "hood": "Jack London",
+            "priority": 5
+          },
+          {
+            "text": "Rockridge boom sustained — momentum 9/10, the block everyone wants onto",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_BOOM",
+            "hood": "Rockridge",
+            "priority": 7
+          },
+          {
+            "text": "Chinatown turning upward: retail busy, events drawing crowds, people moving in",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_RISING",
+            "hood": "Chinatown",
+            "priority": 5
+          },
+          {
+            "text": "Brooklyn cooling off: foot traffic down, storefronts quieter than the rest of the city",
+            "angle": null,
+            "domain": "NEIGHBORHOOD_COOLING",
+            "hood": "Brooklyn",
+            "priority": 6
+          }
+        ],
+        "note": null,
+        "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about"
+      },
+      "wakePackage": "CELESTE-TRENDS-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "gridDay": 5,
+      "story": {
+        "ref": "undocked:undocked-pop00031-Y3C3-e2",
+        "label": "UNDOCKED: Martin Richards — a night the books can't settle yet",
+        "kind": "undocked",
+        "angle": "Recap Martin Richards's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems unlisted, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 4 cycle(s) led, current streak 4.",
+        "citizens": [
+          "Martin Richards — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00031"
+        ],
+        "hood": "Fruitvale"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [
+    {
+      "desk": "kai-marston",
+      "wanted": 1,
+      "got": 0
+    },
+    {
+      "desk": "sharon-okafor",
+      "wanted": 1,
+      "got": 0
+    }
+  ],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Mason Ortega",
+        "persona": "mason-ortega",
+        "wakePackage": "MASON-LEP2-1"
+      },
+      {
+        "name": "Maria Keen",
+        "persona": "maria-keen",
+        "wakePackage": "MARIA-LEP2-1"
+      },
+      {
+        "name": "Celeste Tran",
+        "persona": "celeste-tran",
+        "wakePackage": "CELESTE-TRENDS-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=mason-ortega,kai-marston,sharon-okafor,maria-keen,celeste-tran,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "seats=1 mason-ortega/food:Rockridge",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=2 celeste-tran/beat-trends:San Antonio, maria-keen/beat-neighborhood:East Oakland",
+    "seats": [
+      "celeste-tran/beat-trends:San Antonio",
+      "maria-keen/beat-neighborhood:East Oakland"
+    ],
+    "dropped": [
+      "sharon-okafor: stale slice — already filed at c107",
+      "kai-marston: stale slice — already filed at c107"
+    ]
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": false,
+    "reason": "no civic-domain persona assignment in rota",
+    "seats": []
+  },
+  "builtAt": "2026-09-18T11:15:08.806Z"
+}

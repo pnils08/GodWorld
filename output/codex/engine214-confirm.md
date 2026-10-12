@@ -1,0 +1,4 @@
+LAND
+
+- Nonblocking evidence overclaim: T9 proves the real wrapper returns false, calls the error logger, and publishes no partial dynamics; it does **not** prove an Engine_Errors row. `logEngineError_` is replaced with an array-push spy (`scripts/clusterMembership.test.js:223-242`). Actual row persistence is conditional and can fail independently (`phase01-config/godWorldEngine2.js:103-130`). Narrow the T9 description or test the real logger against an in-memory sheet stub; the owner's ruled failure policy is not reopened.
+- Nonblocking test weakness: “published anchors are a copy” mutates one result and checks a fresh sandbox/run, so it cannot detect aliasing within the original result (`scripts/clusterMembership.test.js:180-184`). Assert that the original result's membership array stays unchanged after mutating its anchors. The implementation already makes separate copies (`phase02-world-state/applyCityDynamics.js:651-653`, `:763-766`).

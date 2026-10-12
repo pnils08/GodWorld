@@ -1,0 +1,24 @@
+{
+  "office": "baylight_authority",
+  "cycle": 107,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "With council authorization secured, we're executing construction contracts and mobilizing the remediation team for Baylight's Phase II site preparation. The Baylight Authority has submitted the finalized contractor package to city planning, meeting our C107 deadline on schedule.",
+  "statements": [
+    {
+      "statementId": "STMT-107-baylight_authority-001",
+      "type": "milestone_update",
+      "topic": "Baylight District Phase II Mobilization",
+      "initiative": "INIT-006",
+      "decision": "Execute master development contract and mobilize site preparation crews",
+      "quote": "Thirty-five thousand seats start with clean ground—remediation crews mobilize next cycle.",
+      "fullStatement": "Baylight Authority Director Keisha Ramos confirmed that construction mobilization is underway following council approval. 'With contracts executed and the Phase II bid finalized, we're moving dirt within two cycles—Baylight's future starts now,' Ramos said. The Baylight Authority has submitted the finalized contractor package to City Planning Director Mara Vance's office for verification. Site remediation begins next cycle, marking the first major construction milestone for Oakland's largest civic development.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-planning",
+        "MilestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins",
+        "NextScheduledAction": "Phase II site remediation",
+        "NextActionCycle": 108
+      }
+    }
+  ]
+}

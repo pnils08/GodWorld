@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/sports_c108_simon-leary_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "85bb32b57e97306acdd7afd170c8b10408a2f6a583c5cbfcafc9a15a476d1eb0",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All named figures, quotes, and sports streak records verified against Cycle 108 ground truth and approved interview manifests.",
+  "review": {
+    "profileId": "simon-longview-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "simon-longview-v1",
+    "packageVersion": "SIMON-LEP2-1",
+    "manifestId": "AM-1ac418d2814f",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Darrin Davis",
+      "Simon Leary",
+      "Vinnie Keane",
+      "Vladimir Gonzalez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 7253,
+  "parseError": false,
+  "ranAt": "2026-09-24T23:16:24.686Z"
+}

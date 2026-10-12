@@ -1,0 +1,39 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-10-10T01:40:15.909Z",
+  "POPID": "POP-00287",
+  "Cycle": 110,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00287-2026-10-10T01-30-04",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00287-2026-10-10T01-30-04.json",
+  "Holder": "Simone Adesanya",
+  "CreditsDelta": null,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Simone Adesanya credits=null systems=",
+  "DecidedAt": "2026-10-10T01:40:15.919Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 110,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00287",
+    "Holder": "Simone Adesanya",
+    "EpisodeId": "undocked-pop00287-Y3C6-e2",
+    "CreditsDelta": null,
+    "Systems": [],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00287-2026-10-10T01-30-04.json"
+  }
+}

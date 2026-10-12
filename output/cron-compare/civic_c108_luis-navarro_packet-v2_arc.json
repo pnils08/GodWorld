@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "civic",
+  "persona": "luis-navarro",
+  "storyline": {
+    "slug": "city-rick-walker-anomaly",
+    "verb": "opened"
+  },
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I’ve heard folks around here talking about the Fruitvale Transit Hub Phase II, but honestly, it feels like the council’s been dragging their feet. People want accountability, but it’s hard to tell who’s really stepping up to make things happen."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard folks talking about the Fruitvale Transit Hub Phase II, and it feels like there’s a lot of uncertainty about who’s really driving it forward. It’s frustrating when you don’t know who’s accountable or what’s being done to make it happen."
+    },
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I’ve heard people talking about the Fruitvale Transit Hub Phase II, but it feels like the council’s been dragging their feet. It’s frustrating because we need that kind of investment in our neighborhoods."
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I’ve heard people talking about the Fruitvale Transit Hub Phase II visioning, and it feels like there’s a lot of confusion about who’s really in charge and what’s being done. It’s frustrating because it’s such an important project for the community."
+    }
+  ],
+  "claim": "I’ve heard folks around here talking about the Fruitvale Transit Hub Phase II, but honestly, it feels like the council’s been dragging their feet. People want accountability, but it’s hard to tell who’s really stepping up to make things happen.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-22T18:16:36.886Z"
+}

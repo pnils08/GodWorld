@@ -1,0 +1,41 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-09-08T01:40:23.083Z",
+  "POPID": "POP-00143",
+  "Cycle": 106,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00143-2026-09-08T01-30-06",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00143-2026-09-08T01-30-06.json",
+  "Holder": "Clarissa Dane",
+  "CreditsDelta": null,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Clarissa Dane credits=null systems=sol",
+  "DecidedAt": "2026-09-08T01:40:23.085Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 106,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00143",
+    "Holder": "Clarissa Dane",
+    "EpisodeId": "undocked-pop00143-Y3C2",
+    "CreditsDelta": null,
+    "Systems": [
+      "sol"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-08T01-30-06.json"
+  }
+}

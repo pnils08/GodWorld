@@ -1,0 +1,48 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "110",
+  "persona": "rachel-torres",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-safety",
+      "angle": "KONO logged the most incidents (10) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "label": "KONO logged the most incidents (10) | 22 neighborhoods on the table",
+      "hookLine": "KONO leads the incident count; Lake Merritt waits longest for a response; 68 in custody citywide; 7 public-safety staff on the roster.",
+      "hood": "KONO",
+      "citizens": [
+        "Rafael Montez (POP-00136)",
+        "Kimberly Cho (POP-00137)",
+        "Leonard Briggs (POP-00138)",
+        "Samantha Viteri (POP-00139)",
+        "Marcus Hollowell (POP-00140)",
+        "Priya Narang (POP-00141)",
+        "Vanessa Tran-Muñoz (POP-01021)"
+      ],
+      "popids": [
+        "POP-00136",
+        "POP-00137",
+        "POP-00138",
+        "POP-00139",
+        "POP-00140",
+        "POP-00141",
+        "POP-01021"
+      ],
+      "ref": "output/beats/Crime_Metrics.jsonl @C110",
+      "cycle": 110
+    }
+  },
+  "angle": "output/cron-compare/civic_c110_rachel-torres_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": "no matching current-cycle office statement; tier-2 adapter unavailable",
+  "interviews": [],
+  "ranAt": "2026-10-06T18:15:02.394Z"
+}

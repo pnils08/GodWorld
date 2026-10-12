@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "108",
+  "model": "deepseek/deepseek-chat",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 8236,
+  "usageOutputTokens": 394,
+  "savedFiles": [
+    "output/cron-compare/civic_c108_noah-tan_packet-v2_deepseek-deepseek-chat.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c108.md",
+  "durationMs": 25659,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-09-23T23:17:25.324Z"
+}

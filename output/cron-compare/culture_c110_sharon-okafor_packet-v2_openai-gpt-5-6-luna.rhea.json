@@ -1,0 +1,74 @@
+{
+  "draft": "output/cron-compare/culture_c110_sharon-okafor_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1e528f17d0bfa465b37d6e7588af82e4f3359e38deb90a759897f4db390f97a0",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Lena Cross is still a Global-tier Arts celebrity in Lake Merritt.",
+      "issue": "Lena Cross canonically resides in Piedmont Ave, not Lake Merritt.",
+      "severity": "high"
+    },
+    {
+      "claim": "Marin Tao, an Iconic-tier Arts celebrity in San Antonio",
+      "issue": "Marin Tao canonically resides in Chinatown, not San Antonio.",
+      "severity": "high"
+    },
+    {
+      "claim": "Rico Valez, another Iconic-tier Arts celebrity, is similarly viral from Jack London",
+      "issue": "Rico Valez canonically resides in Fruitvale, not Jack London.",
+      "severity": "high"
+    },
+    {
+      "claim": "Rowan Pierce, a Regional-tier journalist in KONO",
+      "issue": "Rowan Pierce canonically resides in Piedmont Ave, not KONO.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 4,
+  "highSeverityCount": 4,
+  "summary": "Draft directly contradicts ledger ground truth by mislocating multiple verified citizens (Cross, Tao, Valez, Pierce) into wrong neighborhoods.",
+  "review": {
+    "profileId": "sharon-behavior-ground-v1",
+    "canonIntegrity": "fail",
+    "texture": "overreach"
+  },
+  "reviewProfile": {
+    "id": "sharon-behavior-ground-v1",
+    "packageVersion": "SHARON-LEP2-1",
+    "manifestId": "AM-6ec96e05d426",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Lena Cross",
+      "Marin Tao",
+      "Rico Valez",
+      "Rowan Pierce"
+    ],
+    "unverified": [
+      "For Cross"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0107,
+  "durationMs": 7859,
+  "parseError": false,
+  "ranAt": "2026-10-10T17:02:26.178Z"
+}

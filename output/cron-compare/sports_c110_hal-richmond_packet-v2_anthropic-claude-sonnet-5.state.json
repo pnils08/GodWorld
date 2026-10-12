@@ -1,0 +1,272 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00007",
+    "name": "Hal Richmond",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "What the supplied C110 line card establishes, and what history remains unsupplied.",
+    "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sports-history",
+      "pulseClass": "era-door",
+      "bagModes": [
+        "1 Era Comparison",
+        "8 Legacy Guarantee Piece"
+      ],
+      "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+      "presentFacts": [
+        "Team record (feed): 11-3 · streak W3",
+        "Event (feed): A's — game-result (championship)",
+        "Cycle: C110"
+      ],
+      "dossierFacts": [
+        "Vinnie Keane TrueSource: 2041 REGULAR SEASON G: 37 PA: 130 AB: 127 R: 25 H: 40 2B: 8 3B: 1 HR: 13 RBI: 29 BB: 0 SO: 6 HBP: 0 SF: 3 SAC: 0 GIDP: 2 AVG: 0.315 OBP: 0.308 SLG: 0. | WAR: 1.1 | AWARDS (Career Reference) - MVP (2031) - 8x All-Star (2025, 2027, 2028, 2029, 2030, 2031,",
+        "Benji Dillon TrueSource: 2041 REGULAR SEASON — Games: 35 Games Started: 28 Wins: 10 Losses: 8 Saves: 1 Blown Saves: 0 Holds: 1 Innings Pitched: 150.1 Hits Allowed: 155 Runs Al | WAR: 2.2 | AWARDS (Career Reference) - Cy Young (2028, 2032, 2033, 2034, 2037) - Rookie of the Year (",
+        "Mark Aitken TrueSource: 2041 REGULAR SEASON G: 138 PA: 572 AB: 540 R: 84 H: 153 2B: 23 3B: 0 HR: 33 RBI: 87 BB: 25 SO: 65 HBP: 3 SF: 3 SAC: 1 GIDP: 7 AVG: 0.283 OBP: 0.317 SL | WAR: 3.2 | AWARDS (Career Reference) - Rookie of the Year (2032) - Gold Glove (2032, 2038, 2039) - Si",
+        "Eric Taveras TrueSource: FULL STAT TRUE SOURCE — BATTER Name: Eric Taveras Team: Athletics Position: 2B Jersey: #22 -------------------------------------------------- PROFILE Potential: A Overall: 93 MLB Service: 6.000 Age: 25 Bats: L Throws: R Height: 5'10\" Weight: 184 LBS Drafted: RND 1 (2033) Secondar"
+      ],
+      "missing": [
+        "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+        "No invented seasons or franchise history beyond packet + feed",
+        "No x-stats / barrel% / invented OPS+",
+        "Not a business-desk storefront assignment",
+        "Not P Slayer charge; not Anthony board architecture as spine"
+      ],
+      "closingNote": "elegy",
+      "priorFiling": "NONE — wall may still inject at wake",
+      "sceneRule": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.",
+      "sourcePointers": [
+        "output/world_summary_c110.md ## Sports",
+        "docs/media/HAL_ARCHIVE_BAG.md",
+        "scripts/sportsSubstrate.js",
+        "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 5",
+        "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Downtown",
+    "src": "world_summary_c110.md ## Sports",
+    "plan": {
+      "focus": "The A's championship win and its impact on the community",
+      "closeQuestion": "What does this championship win mean for the future of the A's and the city?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Hal Richmond",
+        "text": "The potential for a parade or celebration in the city",
+        "usable": false
+      },
+      {
+        "from": "Hal Richmond",
+        "text": "The impact on local businesses and economy",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C110",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-e491ae296bc1"
+    },
+    {
+      "t": "FACT",
+      "text": "A's — game-result — supplied C110 line card",
+      "src": "world_summary_c110.md ## Sports",
+      "id": "F-d62b233e951c"
+    },
+    {
+      "t": "FACT",
+      "text": "Team record (feed): 11-3 · streak W3",
+      "src": "world_summary_c110.md ## Sports",
+      "id": "F-62970aec24fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Event (feed): A's — game-result (championship)",
+      "src": "world_summary_c110.md ## Sports",
+      "id": "F-52fdc7048146"
+    },
+    {
+      "t": "FACT",
+      "text": "Cycle: C110",
+      "src": "world_summary_c110.md ## Sports",
+      "id": "F-e74abf375810"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "hal-sports-history-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Frame one Packet-backed present sports fact across time. Historical baseball echo (franchise figures, era comps, a legend against the living line) is the historian's job — the Packet will not contain 1973. Invented current stats and real-world Oakland geography still fail.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "first-person reflective sports history",
+      "targetWords": "long-form literary Article, 800-1200 words, bounded by the supplied evidence",
+      "opening": "one Packet-backed present fact",
+      "closing": "continuity or its loss, with the historical echo named"
+    },
+    "authorizedTexture": [
+      "the reporter's reflective stance or emotional interpretation without claiming a witnessed event",
+      "an unnamed desk or archive transition",
+      "metaphor about time or continuity grounded in a supplied present fact",
+      "era comparison and predecessor ghost: a known baseball-history figure (including pre-sim legends) set against the Packet-present line"
+    ],
+    "textureConditions": [
+      "the present fact, current statistic, and living roster name must come from the Packet",
+      "historical baseball echo does not require the legend to appear in the Packet; it may not invent a current season, current stat, or Oakland geography",
+      "first person may remember and compare; it may not invent a witnessed current-cycle scene the Packet does not support",
+      "an unresolved feed subject may retain the supplied label but may not receive a POPID, biography, role, quote, or historical connection"
+    ],
+    "canonBlockers": [
+      "a real-world Oakland place or landmark imported as if it were this city",
+      "an invented current-cycle statistic, season, roster move, or player line",
+      "an invented roster move, player identity, relationship, quote, interview, result, contract, injury, projection, or advanced metric",
+      "an unresolved feed spelling silently assigned a POPID, biography, role, or historical identity",
+      "fan consensus, front-office strategy, or analytic-board grading replacing the supplied present fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-6a6e14c4582e",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-e491ae296bc1",
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-d62b233e951c",
+        "t": "FACT",
+        "text": "A's — game-result — supplied C110 line card",
+        "src": "world_summary_c110.md ## Sports"
+      },
+      {
+        "id": "F-62970aec24fe",
+        "t": "FACT",
+        "text": "Team record (feed): 11-3 · streak W3",
+        "src": "world_summary_c110.md ## Sports"
+      },
+      {
+        "id": "F-52fdc7048146",
+        "t": "FACT",
+        "text": "Event (feed): A's — game-result (championship)",
+        "src": "world_summary_c110.md ## Sports"
+      },
+      {
+        "id": "F-e74abf375810",
+        "t": "FACT",
+        "text": "Cycle: C110",
+        "src": "world_summary_c110.md ## Sports"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Hal Richmond",
+        "text": "The potential for a parade or celebration in the city",
+        "publishable": false
+      },
+      {
+        "from": "Hal Richmond",
+        "text": "The impact on local businesses and economy",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the reporter's reflective stance or emotional interpretation without claiming a witnessed event",
+      "an unnamed desk or archive transition",
+      "metaphor about time or continuity grounded in a supplied present fact",
+      "era comparison and predecessor ghost: a known baseball-history figure (including pre-sim legends) set against the Packet-present line"
+    ],
+    "textureConditions": [
+      "the present fact, current statistic, and living roster name must come from the Packet",
+      "historical baseball echo does not require the legend to appear in the Packet; it may not invent a current season, current stat, or Oakland geography",
+      "first person may remember and compare; it may not invent a witnessed current-cycle scene the Packet does not support",
+      "an unresolved feed subject may retain the supplied label but may not receive a POPID, biography, role, quote, or historical connection"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world Oakland place or landmark imported as if it were this city",
+      "an invented current-cycle statistic, season, roster move, or player line",
+      "an invented roster move, player identity, relationship, quote, interview, result, contract, injury, projection, or advanced metric",
+      "an unresolved feed spelling silently assigned a POPID, biography, role, or historical identity",
+      "fan consensus, front-office strategy, or analytic-board grading replacing the supplied present fact"
+    ]
+  }
+}

@@ -1,0 +1,811 @@
+{
+  "stage": "angle",
+  "desk": "business",
+  "cycle": "110",
+  "persona": null,
+  "packetContract": "LEP/2",
+  "inputPacket": null,
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00531",
+        "name": "Priya Nair",
+        "role": "Climate Adaptation Engineer",
+        "hood": "Downtown",
+        "profile": "Priya Nair — Climate Adaptation Engineer — EBMUD, Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00531",
+          "rowName": "Priya Nair",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00132",
+        "name": "Tobias Jurko",
+        "role": "Landscape Architect",
+        "hood": "Downtown",
+        "profile": "Tobias Jurko — Landscape Architect — Atlas Bay Architects, Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00132",
+          "rowName": "Tobias Jurko",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00542",
+        "name": "Nina Rines",
+        "role": "Actress",
+        "hood": "Downtown",
+        "profile": "Nina Rines — Actress — Oakland Entertainment Talent Ageny, Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00542",
+          "rowName": "Nina Rines",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00225",
+        "name": "Andre Turner",
+        "role": "Line cook",
+        "hood": "Downtown",
+        "profile": "Andre Turner — Line cook — Miso Metro, Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00225",
+          "rowName": "Andre Turner",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00972",
+        "name": "Elena Reyes",
+        "role": null,
+        "hood": "Downtown",
+        "profile": "Elena Reyes — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00972",
+          "rowName": "Elena Reyes",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00737",
+        "name": "Everly Rainey",
+        "role": null,
+        "hood": "Downtown",
+        "profile": "Everly Rainey — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00737",
+          "rowName": "Everly Rainey",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00637",
+        "name": "Brooks Wright",
+        "role": null,
+        "hood": "Downtown",
+        "profile": "Brooks Wright — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00637",
+          "rowName": "Brooks Wright",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00723",
+        "name": "Ronald Wough",
+        "role": null,
+        "hood": "Downtown",
+        "profile": "Ronald Wough — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00723",
+          "rowName": "Ronald Wough",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00040",
+        "name": "Aaron Whitfield",
+        "role": "City Manager",
+        "hood": "Rockridge",
+        "profile": "Aaron Whitfield — City Manager — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00040",
+          "rowName": "Aaron Whitfield",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00147",
+        "name": "Marisol Guzman",
+        "role": "DEPUTY PUBLIC DEFENDER",
+        "hood": "Lake Merritt",
+        "profile": "Marisol Guzman — DEPUTY PUBLIC DEFENDER — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00147",
+          "rowName": "Marisol Guzman",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00251",
+        "name": "Shawn Weller",
+        "role": "Janitor",
+        "hood": "Chinatown",
+        "profile": "Shawn Weller — Janitor — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00251",
+          "rowName": "Shawn Weller",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00257",
+        "name": "Farah Lindqvist",
+        "role": "City Building Inspector",
+        "hood": "Downtown",
+        "profile": "Farah Lindqvist — City Building Inspector — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00257",
+          "rowName": "Farah Lindqvist",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00289",
+        "name": "Joesph Allen",
+        "role": "Taxi driver",
+        "hood": "Laurel",
+        "profile": "Joesph Allen — Taxi driver — Laurel",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00289",
+          "rowName": "Joesph Allen",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00784",
+        "name": "Isaac Martinez",
+        "role": "Plumber",
+        "hood": "Ivy Hill",
+        "profile": "Isaac Martinez — Plumber — Ivy Hill",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00784",
+          "rowName": "Isaac Martinez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00798",
+        "name": "Grace Yamamoto",
+        "role": "Independent Bookstore Owner",
+        "hood": "Adams Point",
+        "profile": "Grace Yamamoto — Independent Bookstore Owner — Adams Point",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00798",
+          "rowName": "Grace Yamamoto",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00963",
+        "name": "Jose Wright",
+        "role": "Electrician",
+        "hood": "Temescal",
+        "profile": "Jose Wright — Electrician — Temescal",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00963",
+          "rowName": "Jose Wright",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00971",
+        "name": "Shawn Nguyen",
+        "role": "Construction Laborer",
+        "hood": "Fruitvale",
+        "profile": "Shawn Nguyen — Construction Laborer — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-00971",
+          "rowName": "Shawn Nguyen",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01017",
+        "name": "Valentina Campbell",
+        "role": "Server",
+        "hood": "Jack London",
+        "profile": "Valentina Campbell — Server — Jack London",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+          "pop": "POP-01017",
+          "rowName": "Valentina Campbell",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": null,
+  "assignment": {
+    "story": {
+      "angle": "Downtown businesses: EBMUD, Atlas Bay Architects, Oakland Entertainment Talent Ageny — the people who work there",
+      "label": "Downtown businesses · EBMUD, Atlas Bay Architects",
+      "hookLine": "Priya Nair, Climate Adaptation Engineer at EBMUD. 4 named workers at 4 named businesses in Downtown on the ledger this cycle.",
+      "hood": "Downtown",
+      "pulseClass": "hood-businesses",
+      "namedBusinesses": [
+        "EBMUD",
+        "Atlas Bay Architects",
+        "Oakland Entertainment Talent Ageny",
+        "Miso Metro",
+        "Pacific Standard Architecture"
+      ],
+      "citizens": [
+        "Priya Nair (POP-00531)",
+        "Tobias Jurko (POP-00132)",
+        "Nina Rines (POP-00542)",
+        "Andre Turner (POP-00225)",
+        "Elena Reyes (POP-00972)",
+        "Everly Rainey (POP-00737)",
+        "Brooks Wright (POP-00637)",
+        "Ronald Wough (POP-00723)"
+      ],
+      "popids": [
+        "POP-00531",
+        "POP-00132",
+        "POP-00542",
+        "POP-00225",
+        "POP-00972",
+        "POP-00737",
+        "POP-00637",
+        "POP-00723"
+      ],
+      "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110",
+      "cycle": 110
+    },
+    "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": {
+    "version": "ECONOMIC-SLICE-4",
+    "variant": "business",
+    "hood": "Downtown",
+    "pulse": {
+      "className": "hood-businesses",
+      "score": 33,
+      "label": "Downtown businesses · EBMUD, Atlas Bay Architects",
+      "hood": "Downtown",
+      "namedBusinesses": [
+        "EBMUD",
+        "Atlas Bay Architects",
+        "Oakland Entertainment Talent Ageny",
+        "Miso Metro",
+        "Pacific Standard Architecture"
+      ]
+    },
+    "prewrite": {
+      "pulseClass": "hood-businesses",
+      "angle": "Downtown businesses: EBMUD, Atlas Bay Architects, Oakland Entertainment Talent Ageny — the people who work there",
+      "hookLine": "Priya Nair, Climate Adaptation Engineer at EBMUD. 4 named workers at 4 named businesses in Downtown on the ledger this cycle.",
+      "namedBusinesses": [
+        "EBMUD",
+        "Atlas Bay Architects",
+        "Oakland Entertainment Talent Ageny",
+        "Miso Metro",
+        "Pacific Standard Architecture"
+      ],
+      "anchorFacts": [
+        "EBMUD · Utilities · 1900 employees · growth 11.7% · revenue $656.6M (+$1.5M vs C109) · on the roster: Priya Nair (Climate Adaptation Engineer)",
+        "Atlas Bay Architects · Architecture · 86 employees · growth 9.6% · revenue $42.3M (+$78k vs C109) · key personnel: Sarah Huang (Healthcare Director) · on the roster: Tobias Jurko (Landscape Architect)",
+        "Oakland Entertainment Talent Ageny · Talent Management · 10 employees · growth 4.5% · revenue $1.3M (+$1k vs C109) · on the roster: Nina Rines (Actress)",
+        "Miso Metro · Restaurant & Dining · 2 employees · growth 7.8% · revenue $250k (+$376 vs C109) · on the roster: Andre Turner (Line cook)",
+        "Pacific Standard Architecture · Architecture · 96 employees · growth 7.4% · revenue $48.3M (+$69k vs C109) · key personnel: Theodore Lindqvist (principal)",
+        "ENGINE SEED (Downtown): citizens Elena Reyes; Everly Rainey; Brooks Wright; Ronald Wough · businesses Oakland Alternative Response Initiative; Oakland Entertainment Talent Ageny · Telegraph Presbyterian Fellowship (faith)",
+        "CASINO: Aaron Whitfield — undocked wager, staked $463, settled for $847",
+        "CASINO: Marisol Guzman — undocked wager, staked $346, settled for $0",
+        "CASINO: Shawn Weller — undocked wager, staked $450, settled for $824",
+        "CASINO: Farah Lindqvist — undocked wager, staked $504, settled for $922",
+        "CASINO: Joesph Allen — undocked wager, staked $220, settled for $403",
+        "CASINO: the house float stands at $244k",
+        "CITY MONEY: The city treasury opened this cycle at $100M",
+        "CITY MONEY: City treasury this cycle took in $5.2M: $5M the weekly budget allocation, $500 1 ticket, $153,351 court money on 34 cleared charges",
+        "CITY MONEY: City treasury balance at the close: $105.2M (from $0)",
+        "DEBT: Debt this cycle: 1 household's debts crossed the line this cycle (Laurel 1); 5 defaulted: Isaac Martinez (Ivy Hill), Grace Yamamoto (Adams Point), Jose Wright (Temescal), Shawn Nguyen (Fruitvale), Valentina Campbell (Jack London)",
+        "DEBT: 97 tracked residents on the ledger carry debt at or over the crisis line — most in Fruitvale 14, Uptown 13, West Oakland 12, Downtown 9"
+      ],
+      "evidence": [
+        {
+          "text": "EBMUD · Utilities · 1900 employees · growth 11.7% · revenue $656.6M (+$1.5M vs C109) · on the roster: Priya Nair (Climate Adaptation Engineer)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+        },
+        {
+          "text": "Atlas Bay Architects · Architecture · 86 employees · growth 9.6% · revenue $42.3M (+$78k vs C109) · key personnel: Sarah Huang (Healthcare Director) · on the roster: Tobias Jurko (Landscape Architect)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+        },
+        {
+          "text": "Oakland Entertainment Talent Ageny · Talent Management · 10 employees · growth 4.5% · revenue $1.3M (+$1k vs C109) · on the roster: Nina Rines (Actress)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+        },
+        {
+          "text": "Miso Metro · Restaurant & Dining · 2 employees · growth 7.8% · revenue $250k (+$376 vs C109) · on the roster: Andre Turner (Line cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+        },
+        {
+          "text": "Pacific Standard Architecture · Architecture · 96 employees · growth 7.4% · revenue $48.3M (+$69k vs C109) · key personnel: Theodore Lindqvist (principal)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C110"
+        },
+        {
+          "text": "ENGINE SEED (Downtown): citizens Elena Reyes; Everly Rainey; Brooks Wright; Ronald Wough · businesses Oakland Alternative Response Initiative; Oakland Entertainment Talent Ageny · Telegraph Presbyterian Fellowship (faith)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C110"
+        },
+        {
+          "text": "CASINO: Aaron Whitfield — undocked wager, staked $463, settled for $847",
+          "src": "output/beats/Casino_Ledger.jsonl @C110"
+        },
+        {
+          "text": "CASINO: Marisol Guzman — undocked wager, staked $346, settled for $0",
+          "src": "output/beats/Casino_Ledger.jsonl @C110"
+        },
+        {
+          "text": "CASINO: Shawn Weller — undocked wager, staked $450, settled for $824",
+          "src": "output/beats/Casino_Ledger.jsonl @C110"
+        },
+        {
+          "text": "CASINO: Farah Lindqvist — undocked wager, staked $504, settled for $922",
+          "src": "output/beats/Casino_Ledger.jsonl @C110"
+        },
+        {
+          "text": "CASINO: Joesph Allen — undocked wager, staked $220, settled for $403",
+          "src": "output/beats/Casino_Ledger.jsonl @C110"
+        },
+        {
+          "text": "CASINO: the house float stands at $244k",
+          "src": "output/beats/Casino_Ledger.jsonl @C110"
+        },
+        {
+          "text": "CITY MONEY: The city treasury opened this cycle at $100M",
+          "src": "output/beats/City_Treasury.jsonl @C110"
+        },
+        {
+          "text": "CITY MONEY: City treasury this cycle took in $5.2M: $5M the weekly budget allocation, $500 1 ticket, $153,351 court money on 34 cleared charges",
+          "src": "output/beats/City_Treasury.jsonl @C110"
+        },
+        {
+          "text": "CITY MONEY: City treasury balance at the close: $105.2M (from $0)",
+          "src": "output/beats/City_Treasury.jsonl @C110"
+        },
+        {
+          "text": "DEBT: Debt this cycle: 1 household's debts crossed the line this cycle (Laurel 1); 5 defaulted: Isaac Martinez (Ivy Hill), Grace Yamamoto (Adams Point), Jose Wright (Temescal), Shawn Nguyen (Fruitvale), Valentina Campbell (Jack London)",
+          "src": "output/beats/Story_Hook_Deck.jsonl DEBT_CRISIS/DEBT_DEFAULT + Simulation_Ledger DialState"
+        },
+        {
+          "text": "DEBT: 97 tracked residents on the ledger carry debt at or over the crisis line — most in Fruitvale 14, Uptown 13, West Oakland 12, Downtown 9",
+          "src": "output/simulation_ledger_snapshot.jsonl DebtLevel >= 5"
+        }
+      ],
+      "hooks": [
+        {
+          "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+          "angle": "baseline context piece",
+          "hood": null
+        },
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "observational analysis",
+          "hood": "Ivy Hill"
+        },
+        {
+          "text": "the debts crossed a line this week — sleep comes harder now",
+          "angle": "desk rotation",
+          "hood": "Laurel"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ]
+    },
+    "businesses": [
+      {
+        "bizId": "BIZ-00019",
+        "name": "EBMUD",
+        "sector": "Utilities",
+        "staff": [
+          {
+            "popid": "POP-00531",
+            "name": "Priya Nair",
+            "role": "Climate Adaptation Engineer"
+          }
+        ]
+      },
+      {
+        "bizId": "BIZ-00089",
+        "name": "Atlas Bay Architects",
+        "sector": "Architecture",
+        "staff": [
+          {
+            "popid": "POP-00132",
+            "name": "Tobias Jurko",
+            "role": "Landscape Architect"
+          }
+        ]
+      },
+      {
+        "bizId": "BIZ-00101",
+        "name": "Oakland Entertainment Talent Ageny",
+        "sector": "Talent Management",
+        "staff": [
+          {
+            "popid": "POP-00542",
+            "name": "Nina Rines",
+            "role": "Actress"
+          }
+        ]
+      },
+      {
+        "bizId": "BIZ-00047",
+        "name": "Miso Metro",
+        "sector": "Restaurant & Dining",
+        "staff": [
+          {
+            "popid": "POP-00225",
+            "name": "Andre Turner",
+            "role": "Line cook"
+          }
+        ]
+      },
+      {
+        "bizId": "BIZ-00054",
+        "name": "Pacific Standard Architecture",
+        "sector": "Architecture",
+        "staff": []
+      }
+    ],
+    "seeds": [
+      {
+        "seedId": "9a41b12b",
+        "hood": "Downtown",
+        "citizens": [
+          {
+            "popid": "POP-00972",
+            "name": "Elena Reyes"
+          },
+          {
+            "popid": "POP-00737",
+            "name": "Everly Rainey"
+          },
+          {
+            "popid": "POP-00637",
+            "name": "Brooks Wright"
+          },
+          {
+            "popid": "POP-00723",
+            "name": "Ronald Wough"
+          }
+        ]
+      }
+    ],
+    "rotation": {
+      "pool": [
+        {
+          "hood": "Baylight District",
+          "staffed": 2,
+          "workers": 50,
+          "lastCovered": 108
+        },
+        {
+          "hood": "Lake Merritt",
+          "staffed": 1,
+          "workers": 2,
+          "lastCovered": null
+        },
+        {
+          "hood": "Temescal",
+          "staffed": 4,
+          "workers": 10,
+          "lastCovered": 107
+        },
+        {
+          "hood": "West Oakland",
+          "staffed": 7,
+          "workers": 15,
+          "lastCovered": 109
+        },
+        {
+          "hood": "Brooklyn Basin",
+          "staffed": 1,
+          "workers": 4,
+          "lastCovered": null
+        },
+        {
+          "hood": "Jack London",
+          "staffed": 7,
+          "workers": 43,
+          "lastCovered": 106
+        },
+        {
+          "hood": "Downtown",
+          "staffed": 4,
+          "workers": 4,
+          "lastCovered": null
+        },
+        {
+          "hood": "Piedmont Ave",
+          "staffed": 2,
+          "workers": 6,
+          "lastCovered": null
+        },
+        {
+          "hood": "Fruitvale",
+          "staffed": 3,
+          "workers": 3,
+          "lastCovered": null
+        },
+        {
+          "hood": "Uptown",
+          "staffed": 3,
+          "workers": 12,
+          "lastCovered": null
+        },
+        {
+          "hood": "Chinatown",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "Rockridge",
+          "staffed": 2,
+          "workers": 5,
+          "lastCovered": null
+        },
+        {
+          "hood": "Grand Lake",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        },
+        {
+          "hood": "Laurel",
+          "staffed": 3,
+          "workers": 3,
+          "lastCovered": null
+        },
+        {
+          "hood": "East Oakland",
+          "staffed": 2,
+          "workers": 2,
+          "lastCovered": null
+        },
+        {
+          "hood": "San Antonio",
+          "staffed": 1,
+          "workers": 1,
+          "lastCovered": null
+        }
+      ],
+      "picked": "Downtown"
+    },
+    "candidates": [
+      {
+        "className": "hood-businesses",
+        "hood": "Baylight District",
+        "label": "Baylight District · 2 staffed / 10 listed",
+        "namedBusinesses": [
+          "Anthropic",
+          "Baylight Construction Authority"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Lake Merritt",
+        "label": "Lake Merritt · 1 staffed / 3 listed",
+        "namedBusinesses": [
+          "Ridgeline Ventures"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Temescal",
+        "label": "Temescal · 4 staffed / 6 listed",
+        "namedBusinesses": [
+          "Gridiron Analytics",
+          "OakTown Social",
+          "Calderon-Nishi"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "West Oakland",
+        "label": "West Oakland · 7 staffed / 9 listed",
+        "namedBusinesses": [
+          "Oakmesh Systems",
+          "West Side Cafe",
+          "Civis Systems"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Brooklyn Basin",
+        "label": "Brooklyn Basin · 1 staffed / 1 listed",
+        "namedBusinesses": [
+          "Portside Bio"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Jack London",
+        "label": "Jack London · 7 staffed / 7 listed",
+        "namedBusinesses": [
+          "Port of Oakland",
+          "Jack London Square Markets",
+          "Blue Lantern Bar"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Piedmont Ave",
+        "label": "Piedmont Ave · 2 staffed / 5 listed",
+        "namedBusinesses": [
+          "Kaiser Permanente Oakland",
+          "Mayday Movers"
+        ]
+      },
+      {
+        "className": "hood-businesses",
+        "hood": "Fruitvale",
+        "label": "Fruitvale · 3 staffed / 4 listed",
+        "namedBusinesses": [
+          "Fruitvale Community Clinic",
+          "Fruitvale Diner",
+          "Foothill Builders"
+        ]
+      }
+    ]
+  },
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": {
+    "facts": [
+      {
+        "fact": "East Bay Municipal Utility District (EBMUD) is a primary utility anchor headquartered in Downtown Oakland, employing 1,900 personnel with an average salary of $44,312, annual revenues of $655,079,793, and an annual growth rate of 10.72%.",
+        "ref": "output/cron-compare/business_c110_packet-v2_benchmark-biz-c110-haiku_nlm-canon.md:23"
+      },
+      {
+        "fact": "EBMUD dispatched assessment crews along International Boulevard in Fruitvale during Cycle 88 following localized water-pressure drops that impacted small food businesses during peak holiday prep.",
+        "ref": "output/cron-compare/business_c110_packet-v2_benchmark-biz-c110-haiku_nlm-canon.md:25"
+      },
+      {
+        "fact": "Dante Nelson, 41, a security guard who works and lives Downtown, has followed the Stabilization Fund debate closely but isn't sure it will reach the people who need it most.",
+        "ref": "editions/cycle_pulse_edition_79.txt:123"
+      }
+    ],
+    "source": "model",
+    "trace": [],
+    "nlmBrief": "output/cron-compare/business_c110_packet-v2_benchmark-biz-c110-haiku_nlm-canon.md"
+  },
+  "angleRead": null,
+  "lanePicks": [
+    {
+      "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale | Business conditions in Fruitvale track the transit picture.",
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "ref": "output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "popids": [
+        "POP-00744",
+        "POP-00756",
+        "POP-00953"
+      ]
+    },
+    {
+      "label": "economic ailment — economic footprint, affected businesses, workforce impact in West Oakland | Business conditions in West Oakland track the economic picture.",
+      "kind": "anomaly",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "ref": "output/engine_audit_c110.json patterns[1]; evidence: Initiative_Tracker row(s) 7",
+      "popids": [
+        "POP-00891",
+        "POP-01113",
+        "POP-01139"
+      ]
+    },
+    {
+      "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown | Business conditions in Downtown track the economic picture.",
+      "kind": "anomaly",
+      "hood": "Downtown, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "ref": "output/engine_audit_c110.json patterns[4]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00127",
+        "POP-01154",
+        "POP-01157"
+      ]
+    },
+    {
+      "label": "Baylight District — Final Council Vote — economic upside, jobs and footprint in Jack London | Business momentum in Jack London tracks the economic gain.",
+      "kind": "anomaly",
+      "hood": "Jack London, Downtown",
+      "ref": "output/engine_audit_c110.json patterns[5]; evidence: Initiative_Tracker row(s) 6",
+      "popids": [
+        "POP-00056",
+        "POP-00688",
+        "POP-01027"
+      ]
+    },
+    {
+      "label": "civic — economic upside, jobs and footprint in Downtown | Business momentum in Downtown tracks the civic gain.",
+      "kind": "anomaly",
+      "hood": "Downtown",
+      "ref": "output/engine_audit_c110.json patterns[6]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00212",
+        "POP-00753",
+        "POP-00764"
+      ]
+    }
+  ],
+  "laneEntries": 78,
+  "ranAt": "2026-10-07T03:37:09.551Z"
+}

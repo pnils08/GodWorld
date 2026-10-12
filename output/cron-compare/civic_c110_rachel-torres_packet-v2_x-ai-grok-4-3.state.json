@@ -1,0 +1,349 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00057",
+    "name": "Sgt. Rachel Torres",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "KONO logged the most incidents (10) | 22 neighborhoods on the table — what the table says and who answers for it",
+    "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "public-safety",
+      "hood": "KONO",
+      "facts": [
+        "156 incidents across 22 neighborhoods; most in KONO 10, Chinatown 9, East Oakland 8, San Antonio 8, West Oakland 8; fewest in Rockridge 5, Temescal 5, Lake Merritt 5",
+        "KONO: 10 incidents (+2 vs C109), response 10.7 min, clearance 22%, property index 35, violent index 25",
+        "Slowest response: Lake Merritt: 5 incidents (+1 vs C109), response 11 min, clearance 22%, property index 31, violent index 20",
+        "Citywide custody this cycle: 34 arrests (0 tracked, 34 other residents); 68 in custody at the close",
+        "Adams Point: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Baylight District: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Brooklyn: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Chinatown: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Downtown: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": "desk-signal incident rows attached as pointers (5)",
+      "engineHooks": [],
+      "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-safety",
+    "hood": "KONO",
+    "src": "output/beats/Crime_Metrics.jsonl @C110",
+    "plan": {
+      "focus": "Understanding the factors contributing to KONO's high incident count and the efficiency of response times across neighborhoods.",
+      "closeQuestion": "What measures can be implemented to reduce incident counts and improve response times in high-crime neighborhoods?"
+    },
+    "runningStories": [
+      "The West Oakland Crime Spike [West Oakland] — ENDED this week after 5 week(s)",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 2",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 2",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — week 2",
+      "Temescal Community Health Center — operational [Temescal] — week 2",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 2",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — week 2",
+      "Downtown Economic Revitalization — announced [Downtown] — week 2"
+    ]
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Potential discrepancies in incident reporting across neighborhoods.",
+        "usable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Community-specific factors influencing crime rates.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C110",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-e491ae296bc1"
+    },
+    {
+      "t": "FACT",
+      "text": "KONO logged the most incidents (10) | 22 neighborhoods on the table",
+      "src": "output/beats/Crime_Metrics.jsonl @C110",
+      "id": "F-29821a06b5d3"
+    },
+    {
+      "t": "FACT",
+      "text": "KONO leads the incident count; Lake Merritt waits longest for a response; 68 in custody citywide; 7 public-safety staff on the roster.",
+      "src": "output/beats/Crime_Metrics.jsonl @C110",
+      "id": "F-871783bd39b8"
+    },
+    {
+      "t": "FACT",
+      "text": "156 incidents across 22 neighborhoods; most in KONO 10, Chinatown 9, East Oakland 8, San Antonio 8, West Oakland 8; fewest in Rockridge 5, Temescal 5, Lake Merritt 5",
+      "src": "output/beats/Crime_Metrics.jsonl @C110",
+      "id": "F-4e3bb82771d9"
+    },
+    {
+      "t": "FACT",
+      "text": "KONO: 10 incidents (+2 vs C109), response 10.7 min, clearance 22%, property index 35, violent index 25",
+      "src": "output/beats/Crime_Metrics.jsonl @C110",
+      "id": "F-a44a1710504a"
+    },
+    {
+      "t": "FACT",
+      "text": "Slowest response: Lake Merritt: 5 incidents (+1 vs C109), response 11 min, clearance 22%, property index 31, violent index 20",
+      "src": "output/beats/Crime_Metrics.jsonl @C110",
+      "id": "F-10214754deef"
+    },
+    {
+      "t": "FACT",
+      "text": "Citywide custody this cycle: 34 arrests (0 tracked, 34 other residents); 68 in custody at the close",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 city",
+      "id": "F-b2a1b2c5facc"
+    },
+    {
+      "t": "FACT",
+      "text": "Adams Point: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Adams Point",
+      "id": "F-eba60d465f44"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight District: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Baylight District",
+      "id": "F-68d9f1fad416"
+    },
+    {
+      "t": "FACT",
+      "text": "Brooklyn: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Brooklyn",
+      "id": "F-d1e9c586e42f"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Chinatown",
+      "id": "F-8f4f2052b842"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Downtown",
+      "id": "F-c6a5b3657d6e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Trace one Packet-backed public-safety incident, classification gap, or OARI response question without sensationalism or invented case detail.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "measured third-person public-safety reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed safety signal, place, or resident consequence",
+      "closing": "an unresolved accountability or practical-safety question grounded in the record"
+    },
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "canonBlockers": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  },
+  "manifest": {
+    "id": "AM-cb7a0b63e177",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-e491ae296bc1",
+        "t": "FACT",
+        "text": "Current cycle: C110",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-29821a06b5d3",
+        "t": "FACT",
+        "text": "KONO logged the most incidents (10) | 22 neighborhoods on the table",
+        "src": "output/beats/Crime_Metrics.jsonl @C110"
+      },
+      {
+        "id": "F-871783bd39b8",
+        "t": "FACT",
+        "text": "KONO leads the incident count; Lake Merritt waits longest for a response; 68 in custody citywide; 7 public-safety staff on the roster.",
+        "src": "output/beats/Crime_Metrics.jsonl @C110"
+      },
+      {
+        "id": "F-4e3bb82771d9",
+        "t": "FACT",
+        "text": "156 incidents across 22 neighborhoods; most in KONO 10, Chinatown 9, East Oakland 8, San Antonio 8, West Oakland 8; fewest in Rockridge 5, Temescal 5, Lake Merritt 5",
+        "src": "output/beats/Crime_Metrics.jsonl @C110"
+      },
+      {
+        "id": "F-a44a1710504a",
+        "t": "FACT",
+        "text": "KONO: 10 incidents (+2 vs C109), response 10.7 min, clearance 22%, property index 35, violent index 25",
+        "src": "output/beats/Crime_Metrics.jsonl @C110"
+      },
+      {
+        "id": "F-10214754deef",
+        "t": "FACT",
+        "text": "Slowest response: Lake Merritt: 5 incidents (+1 vs C109), response 11 min, clearance 22%, property index 31, violent index 20",
+        "src": "output/beats/Crime_Metrics.jsonl @C110"
+      },
+      {
+        "id": "F-b2a1b2c5facc",
+        "t": "FACT",
+        "text": "Citywide custody this cycle: 34 arrests (0 tracked, 34 other residents); 68 in custody at the close",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 city"
+      },
+      {
+        "id": "F-eba60d465f44",
+        "t": "FACT",
+        "text": "Adams Point: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Adams Point"
+      },
+      {
+        "id": "F-68d9f1fad416",
+        "t": "FACT",
+        "text": "Baylight District: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Baylight District"
+      },
+      {
+        "id": "F-d1e9c586e42f",
+        "t": "FACT",
+        "text": "Brooklyn: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Brooklyn"
+      },
+      {
+        "id": "F-8f4f2052b842",
+        "t": "FACT",
+        "text": "Chinatown: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Chinatown"
+      },
+      {
+        "id": "F-c6a5b3657d6e",
+        "t": "FACT",
+        "text": "Downtown: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C110 Downtown"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Potential discrepancies in incident reporting across neighborhoods.",
+        "publishable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Community-specific factors influencing crime rates.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "forbiddenClaimClasses": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  }
+}

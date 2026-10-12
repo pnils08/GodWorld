@@ -1,0 +1,73 @@
+{
+  "draft": "output/cron-compare/civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "12065cb0394bdd4a428ed388e834c76d16211c40ddf054f2e3cab9b4a2327956",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "Initiative_Tracker logs the arc... / it appears in the Initiative_Tracker as a control gate",
+      "issue": "Raw system/table vocabulary 'Initiative_Tracker' used in published prose.",
+      "severity": "med"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact provenance, civic facts and citizen profiles align with canon, with minor system-vocabulary flags in prose.",
+  "review": {
+    "profileId": "carmen-civic-ledger-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "packageVersion": "CARMEN-LEP2-2",
+    "manifestId": "AM-9fd541c76e1a",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "-110"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Avery Santana",
+      "Brenda Okoro",
+      "Carmen Delaine",
+      "Denise Carter",
+      "Elliott Crane",
+      "Leonard Tran",
+      "Marcus Webb",
+      "Ramon Vega"
+    ],
+    "unverified": [
+      "City Council District",
+      "Finance Committee",
+      "Month Nine",
+      "Stabilization Fund"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0112,
+  "durationMs": 7176,
+  "parseError": false,
+  "ranAt": "2026-10-05T23:15:36.173Z"
+}

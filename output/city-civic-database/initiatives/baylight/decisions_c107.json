@@ -1,0 +1,20 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 107,
+  "primaryVoice": "Ramos (baylight_authority-001)",
+  "consolidatedFrom": [
+    "STMT-107-baylight_authority-001 (Ramos — Baylight District Phase II Mobilization)",
+    "STMT-107-council_d2-001 (Tran D2 — Baylight District Contract Execution)",
+    "STMT-107-council_d6-004 (Crane D6 — Baylight District Contract Execution and Site Mobilization)",
+    "STMT-107-council_d8-004 (Chen D8 — Baylight District Contract Execution and Site Mobilization)",
+    "STMT-107-mayor_open-006 (Mayor agenda — Baylight District Contract Execution and Site Mobilization)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "ImplementationPhase": "construction-planning",
+    "MilestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins",
+    "NextScheduledAction": "Phase II site remediation",
+    "NextActionCycle": 108
+  }
+}

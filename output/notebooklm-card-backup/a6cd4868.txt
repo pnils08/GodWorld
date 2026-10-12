@@ -1,0 +1,215 @@
+PLAYER INTAKE (Batter) — 2041 SEASON
+
+Name: JR Rosado
+
+ 
+
+Team: Oakland Athletics
+
+ 
+
+Position: LF (CF, RF)
+
+ 
+
+Age: 27
+
+ 
+
+Bats: R
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'4"
+
+ 
+
+Weight: 231 lbs
+
+ 
+
+Born: Dominican Republic
+
+ 
+
+Drafted: Round 1 (2034)
+
+ 
+
+MLB Service: 1.000
+
+ 
+
+Overall: 80
+
+ 
+
+Potential: B
+
+ 
+
+POPID: POP-00054
+
+
+--------------------------------------------------------------------------------
+
+
+2041 REGULAR SEASON
+
+G: 54
+
+ 
+
+PA: 206
+
+ 
+
+AB: 184
+
+ 
+
+R: 24
+
+ 
+
+H: 57
+
+ 
+
+2B: 11
+
+ 
+
+3B: 2
+
+ 
+
+HR: 7
+
+ 
+
+RBI: 27
+
+ 
+
+BB: 12
+
+ 
+
+SO: 23
+
+ 
+
+HBP: 4
+
+ 
+
+SF: 2
+
+ 
+
+SAC: 0
+
+ 
+
+GIDP: 0
+
+AVG: 0.298
+
+ 
+
+OBP: 0.340
+
+ 
+
+SLG: 0.487
+
+ 
+
+OPS: 0.827
+
+ 
+
+TB: 93
+
+SB: 2
+
+ 
+
+CS: 2
+
+ 
+
+SB%: 0.500
+
+
+--------------------------------------------------------------------------------
+
+
+DEFENSE (2041)
+
+PO: 92
+
+ 
+
+A: 5
+
+ 
+
+E: 2
+
+ 
+
+FLD%: 0.980
+
+ 
+
+INN: 471.2
+
+
+--------------------------------------------------------------------------------
+
+
+VALUE
+
+WAR: 0.9
+
+
+--------------------------------------------------------------------------------
+
+
+CONTRACT STATUS
+
+2041: $780,000
+
+ 
+
+2042: RNW
+
+ 
+
+2043: RNW
+
+ 
+
+2044: ARB
+
+ 
+
+FA: 2046
+
+
+--------------------------------------------------------------------------------
+
+
+Quirks
+
+Southpaw Crusher (CON L 91)
+
+Durable Rotational Outfielder
+
+[Audit Note on OPS]: Master Stat Sheet displays 0.487 in OPS column (duplicating SLG). Correct calculated OPS (OBP .340 + SLG .487) is 0.827.

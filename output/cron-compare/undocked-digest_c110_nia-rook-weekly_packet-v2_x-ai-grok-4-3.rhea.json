@@ -1,0 +1,53 @@
+{
+  "draft": "output/cron-compare/undocked-digest_c110_nia-rook-weekly_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "768ee09a19f6ae45c7a49bf1d7e001f84c4185900150c5110e09169c4649c160",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft verified: quotes match packet interview provenance exactly, citizen roles align with ledger records, and no canon or fourth-wall violations detected.",
+  "review": {
+    "profileId": "nia-rook-undocked-weekly-digest-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-WEEKLY-1",
+    "manifestId": "AM-d75cc850c43a",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Aaliyah Brennan",
+      "Clarissa Dane",
+      "Kato Rivers",
+      "Simone Adesanya"
+    ],
+    "unverified": [
+      "World Series"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0101,
+  "durationMs": 4997,
+  "parseError": false,
+  "ranAt": "2026-10-10T15:15:16.813Z"
+}

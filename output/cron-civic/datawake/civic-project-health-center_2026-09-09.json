@@ -1,0 +1,15 @@
+{
+  "office": "health_center",
+  "agentDir": "civic-project-health-center",
+  "holder": "Bobby Chen-Ramirez",
+  "popid": "POP-00792",
+  "title": "Health Center Project Director",
+  "date": "2026-09-09",
+  "cycle": 106,
+  "model": "deepseek/deepseek-chat",
+  "statement": "Wall framing inspection starts Tuesday—we're checking every stud spacing before drywall goes up. The electricians are pulling wire on the second floor while plumbers test the first-floor risers. Two-shift crews keep us ahead of schedule without cutting corners.",
+  "action": "On-site at dawn Tuesday to inspect first-wall framing with contractor foreman—verifying 16\" on-center spacing and fireblocking before drywall crew arrives.",
+  "numberMoved": null,
+  "ranAt": "2026-09-09T10:45:28.159Z",
+  "fellBackFrom": null
+}

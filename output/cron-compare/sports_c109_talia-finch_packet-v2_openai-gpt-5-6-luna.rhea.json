@@ -1,0 +1,51 @@
+{
+  "draft": "output/cron-compare/sports_c109_talia-finch_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "b5203cca8fbcbb08e0df5e37f2cec74513fe4c54600fc0da6388ad7352288e58",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Flawless verification: exact quote provenance matches packet, Oaks stats and 0-3/L7 record verified against sports feed, authorized Baylight texture.",
+  "review": {
+    "profileId": "talia-finch-oaks-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "talia-finch-oaks-v1",
+    "packageVersion": "TALIA-OAKS-1",
+    "manifestId": "AM-66814b2a1d97",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Austin Reaves",
+      "Dillon Brooks",
+      "Wilson Shepard"
+    ],
+    "unverified": [
+      "Wendell Carter"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0096,
+  "durationMs": 6256,
+  "parseError": false,
+  "ranAt": "2026-10-01T23:17:09.764Z"
+}

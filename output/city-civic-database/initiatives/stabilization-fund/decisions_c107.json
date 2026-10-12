@@ -1,0 +1,17 @@
+{
+  "initiative": "INIT-001",
+  "initiativeId": "INIT-001",
+  "cycle": 107,
+  "primaryVoice": "Mayor gavel (mayor_gavel-002)",
+  "consolidatedFrom": [
+    "STMT-107-mayor_gavel-002 (Mayor gavel — West Oakland Stabilization Fund Downtown Outreach Expansion)",
+    "STMT-107-stabilization_fund-001 (Webb — Disbursement Review)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-001",
+    "ImplementationPhase": "disbursement-active",
+    "MilestoneNotes": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.",
+    "NextScheduledAction": "Month-eight disbursement completion and Downtown outreach impact assessment",
+    "NextActionCycle": 108
+  }
+}

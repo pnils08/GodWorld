@@ -1,0 +1,17 @@
+{
+  "status": "arc-seed",
+  "cycle": "110",
+  "desk": "civic",
+  "persona": "trevor-shimizu",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00280",
+      "name": "Jerald Jensen",
+      "quote": "You know, I’ve been hearing chatter about Lake Merritt station being quieter lately. It’s not just the fog—though that doesn’t help. People are talking about how it’s hitting the transit workers hard. Less foot traffic means fewer tips, fewer smiles, fewer connections. It’s tough when the lifeblood of a place starts to thin out."
+    }
+  ],
+  "claim": "You know, I’ve been hearing chatter about Lake Merritt station being quieter lately. It’s not just the fog—though that doesn’t help. People are talking about how it’s hitting the transit workers hard. Less foot traffic means fewer tips, fewer smiles, fewer connections. It’s tough when the lifeblood of a place starts to thin out.",
+  "src": "citizenVoice PRESS c110",
+  "ranAt": "2026-10-05T18:17:57.008Z"
+}

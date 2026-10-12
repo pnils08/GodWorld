@@ -1,0 +1,12 @@
+{
+  "draft": "culture_c107_maria-keen_packet-v2_deepseek-deepseek-chat.md",
+  "flags": [
+    {
+      "claim": "Down the street, the Allen Temple Food Pantry's line stretches past the bus stop.",
+      "issue": "Uses blocked real-world institution name 'Allen Temple' instead of canon entity 'Foothill Baptist Tabernacle'.",
+      "severity": "high"
+    }
+  ],
+  "contamination": [],
+  "summary": "Draft uses blocked real-world faith institution name 'Allen Temple' instead of canon 'Foothill Baptist Tabernacle'."
+}

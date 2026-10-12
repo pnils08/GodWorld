@@ -1,0 +1,22 @@
+{
+  "draft": "culture_c110_kai-marston_packet-v2_anthropic-claude-haiku-5-5.md",
+  "flags": [
+    {
+      "claim": "Lena Cross, listed in Arts and tied to Lake Merritt, is on it.",
+      "issue": "Contradicts ledger profile bio ground truth: Lena Cross (POP-00539) resides in Piedmont Ave, not Lake Merritt.",
+      "severity": "high"
+    },
+    {
+      "claim": "Rowan Pierce, a journalist at KONO whose name has been cooling.",
+      "issue": "Contradicts ledger profile bio ground truth: Rowan Pierce (POP-00545) resides in Piedmont Ave and is a Freelance Writer, not a journalist based in KONO.",
+      "severity": "high"
+    },
+    {
+      "claim": "The culture record counts 38 figures rising this cycle, with one new arrival on the list. Ellison is one of the names setting the pace.",
+      "issue": "Direct contradiction of recorded state: Tara Ellison had a lifestyle sighting in Baylight District, but no fame-rise or tier-climb event; the cycle recorded 9 fame events and 62 promotions, not 38 rising figures.",
+      "severity": "med"
+    }
+  ],
+  "contamination": [],
+  "summary": "Direct contradiction of ledger bio profiles for Lena Cross and Rowan Pierce regarding neighborhood placement, alongside fabricated culture ranking counts."
+}

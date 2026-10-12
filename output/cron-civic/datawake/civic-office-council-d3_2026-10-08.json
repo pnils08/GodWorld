@@ -1,0 +1,26 @@
+{
+  "office": "council_d3",
+  "agentDir": "civic-office-council-d3",
+  "holder": "Rose Delgado",
+  "popid": "POP-00503",
+  "title": "City Council District 3",
+  "date": "2026-10-08",
+  "cycle": 110,
+  "model": "deepseek/deepseek-chat",
+  "statement": "San Antonio isn’t just another neighborhood—it’s the heart of D3’s resilience. With sentiment lagging and crime above city averages, we double down on community-led safety investments and neighborhood revitalization. The covenant renewal grants merchant protections—this is how we anchor stability in our corridors.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-108-civic-office-council-d3",
+        "text": "I concur on the INIT-003 design consultant selection and submit District 3 intake verification for the Youth Apprenticeship Pipeline cohort review.",
+        "directiveCycle": 108,
+        "confrontationSeat": "civic-office-council-d3"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-08T10:45:44.058Z",
+  "fellBackFrom": null
+}

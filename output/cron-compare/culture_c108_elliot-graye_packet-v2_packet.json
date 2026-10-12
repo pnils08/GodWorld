@@ -1,0 +1,788 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "108",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-faith",
+      "angle": "crisis response at Telegraph Presbyterian Fellowship (Downtown) — the week in faith, and Bharat Mandir of the East Bay in focus",
+      "label": "8 faith events on the record since C102 · Bharat Mandir of the East Bay in Montclair | 8 named on the record",
+      "hookLine": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+      "hood": "Montclair",
+      "citizens": [
+        "Anand Krishnamurthy (POP-00765)",
+        "Eunice Marston (POP-00753)",
+        "Naomi Sterling (POP-00759)",
+        "Eleanor Bishop (POP-00768)",
+        "Robert Jaston (POP-00758)",
+        "Idris Karim (POP-00761)",
+        "Antoine Vermeer (POP-00755)",
+        "Ramon Solano (POP-00756)"
+      ],
+      "popids": [
+        "POP-00765",
+        "POP-00753",
+        "POP-00759",
+        "POP-00768",
+        "POP-00758",
+        "POP-00761",
+        "POP-00755",
+        "POP-00756"
+      ],
+      "ref": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+      "cycle": 108
+    }
+  },
+  "angle": "output/cron-compare/culture_c108_elliot-graye_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00753",
+      "name": "Eunice Marston",
+      "quote": "I haven't had any direct involvement with the Bharat Mandir of the East Bay, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I haven't had any direct involvement with the Bharat Mandir of the East Bay, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.\",\n  \"fact_ids\": [\"F-78217e633afa\", \"F-d4d41119b5b8\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-78217e633afa",
+          "F-d4d41119b5b8"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00753-c5f017c41a",
+        "authoredQuote": true,
+        "publishableQuote": "I haven't had any direct involvement with the Bharat Mandir of the East Bay, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00753",
+          "name": "Eunice Marston",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Bharat Mandir of the East Bay\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Montclair",
+          "focus": "Bharat Mandir of the East Bay",
+          "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\""
+        },
+        "exposure": {
+          "basis": [
+            "leads Telegraph Presbyterian Fellowship — crisis response this week (Faith_Ledger)"
+          ],
+          "self": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+          "evidence": [
+            {
+              "id": "EV-fdec4edad0",
+              "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+              "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C102 · Bharat Mandir of the East Bay in Montclair | 8 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+            "id": "F-d4d41119b5b8"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+            "id": "F-bb0b0465cfc1"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+            "id": "F-2e25fe91ddff"
+          },
+          {
+            "t": "FACT",
+            "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+            "id": "F-fa55233aeb20"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-876b8fbb3495"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\"",
+            "id": "F-f0155f51bf88"
+          },
+          {
+            "t": "FACT",
+            "text": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+            "src": "Simulation_Ledger profile for POP-00753",
+            "id": "F-29275625963c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00765",
+      "name": "Anand Krishnamurthy",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: quote requires at least one supplied fact id",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the impact of faith organizations in our community, and I believe places like Bharat Mandir of the East Bay play a vital role in bringing people together and providing support.\",\n  \"fact_ids\": [],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00765",
+          "name": "Anand Krishnamurthy",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Bharat Mandir of the East Bay\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Montclair",
+          "focus": "Bharat Mandir of the East Bay",
+          "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\""
+        },
+        "exposure": {
+          "basis": [
+            "leads Bharat Mandir of the East Bay (Faith_Organizations)"
+          ],
+          "self": "Anand Krishnamurthy — Senior Pastor / Faith Leader — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-52922f8497",
+              "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+              "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C102 · Bharat Mandir of the East Bay in Montclair | 8 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+            "id": "F-d4d41119b5b8"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+            "id": "F-bb0b0465cfc1"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+            "id": "F-2e25fe91ddff"
+          },
+          {
+            "t": "FACT",
+            "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+            "id": "F-fa55233aeb20"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-876b8fbb3495"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\"",
+            "id": "F-f0155f51bf88"
+          },
+          {
+            "t": "FACT",
+            "text": "Anand Krishnamurthy — Senior Pastor / Faith Leader — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00765",
+            "id": "F-1878e9ac1135"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00753",
+      "name": "Eunice Marston",
+      "quote": "I haven't had any direct involvement with the Bharat Mandir of the East Bay, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I haven't had any direct involvement with the Bharat Mandir of the East Bay, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.\",\n  \"fact_ids\": [\"F-78217e633afa\", \"F-d4d41119b5b8\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-78217e633afa",
+          "F-d4d41119b5b8"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00753-c5f017c41a",
+        "authoredQuote": true,
+        "publishableQuote": "I haven't had any direct involvement with the Bharat Mandir of the East Bay, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00753",
+          "name": "Eunice Marston",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Bharat Mandir of the East Bay\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Montclair",
+          "focus": "Bharat Mandir of the East Bay",
+          "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\""
+        },
+        "exposure": {
+          "basis": [
+            "leads Telegraph Presbyterian Fellowship — crisis response this week (Faith_Ledger)"
+          ],
+          "self": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+          "evidence": [
+            {
+              "id": "EV-fdec4edad0",
+              "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+              "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C102 · Bharat Mandir of the East Bay in Montclair | 8 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+            "id": "F-d4d41119b5b8"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+            "id": "F-bb0b0465cfc1"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+            "id": "F-2e25fe91ddff"
+          },
+          {
+            "t": "FACT",
+            "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+            "id": "F-fa55233aeb20"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-876b8fbb3495"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\"",
+            "id": "F-f0155f51bf88"
+          },
+          {
+            "t": "FACT",
+            "text": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+            "src": "Simulation_Ledger profile for POP-00753",
+            "id": "F-29275625963c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00759",
+      "name": "Naomi Sterling",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: quote requires at least one supplied fact id",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't had much direct interaction with the Bharat Mandir of the East Bay, but I've seen how different faith organizations in our area have come together to support each other during difficult times, and that's something that resonates with me as a faith leader.\",\n  \"fact_ids\": [],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00759",
+          "name": "Naomi Sterling",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Bharat Mandir of the East Bay\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Montclair",
+          "focus": "Bharat Mandir of the East Bay",
+          "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\""
+        },
+        "exposure": {
+          "basis": [
+            "leads Temple Beth Or — crisis response this week (Faith_Ledger)"
+          ],
+          "self": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-f11d37c2b0",
+              "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+              "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C102 · Bharat Mandir of the East Bay in Montclair | 8 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+            "id": "F-d4d41119b5b8"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+            "id": "F-bb0b0465cfc1"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+            "id": "F-2e25fe91ddff"
+          },
+          {
+            "t": "FACT",
+            "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+            "id": "F-fa55233aeb20"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-876b8fbb3495"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\"",
+            "id": "F-f0155f51bf88"
+          },
+          {
+            "t": "FACT",
+            "text": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00759",
+            "id": "F-31f4090db03e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00768",
+      "name": "Eleanor Bishop",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"abstain\",\n  \"quote\": null,\n  \"fact_ids\": [],\n  \"basis\": \"no_lived_basis\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": \"no_lived_basis\"\n}\n```",
+      "claims": {
+        "answer": "abstain",
+        "factIds": [],
+        "basis": "no_lived_basis",
+        "unverifiedLead": [],
+        "abstainReason": "no_lived_basis",
+        "quoteId": null,
+        "authoredQuote": false,
+        "publishableQuote": null
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00768",
+          "name": "Eleanor Bishop",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Bharat Mandir of the East Bay\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Montclair",
+          "focus": "Bharat Mandir of the East Bay",
+          "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\""
+        },
+        "exposure": {
+          "basis": [
+            "leads Lakeshore Unitarian Universalist Fellowship — crisis response this week (Faith_Ledger)"
+          ],
+          "self": "Eleanor Bishop — Senior Pastor / Faith Leader — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-063cc3dddb",
+              "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+              "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C102 · Bharat Mandir of the East Bay in Montclair | 8 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+            "id": "F-d4d41119b5b8"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\"",
+            "id": "F-bb0b0465cfc1"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+            "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-7d24d6975c0b"
+          },
+          {
+            "t": "FACT",
+            "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+            "id": "F-2e25fe91ddff"
+          },
+          {
+            "t": "FACT",
+            "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+            "id": "F-fa55233aeb20"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C102 — crisis response: congregation opens doors for community support (attendance 157)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-876b8fbb3495"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Islamic Center (Temescal), C102 — crisis response: pastoral counseling services expanded (attendance 94)",
+            "src": "output/beats/Faith_Ledger.jsonl C102 \"Temescal Islamic Center\"",
+            "id": "F-f0155f51bf88"
+          },
+          {
+            "t": "FACT",
+            "text": "Eleanor Bishop — Senior Pastor / Faith Leader — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00768",
+            "id": "F-718ee624d9eb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-24T18:15:48.664Z"
+}

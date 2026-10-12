@@ -1,0 +1,78 @@
+{
+  "office": "mayor_open",
+  "cycle": 110,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "I am filing the Downtown Economic Revitalization ordinance this cycle, releasing month-nine disbursements for the West Oakland Stabilization Fund, and advancing the Fruitvale Transit Hub to preliminary schematics review. These moves clear critical bottlenecks and keep Oakland's signature projects moving.",
+  "statements": [
+    {
+      "statementId": "STMT-110-mayor_open-001",
+      "type": "executive_order",
+      "topic": "Downtown Economic Revitalization — Legislative Filing",
+      "initiative": "INIT-008",
+      "decision": "File ordinance with City Clerk establishing Downtown Economic Revitalization Fund with $15M authorization, commercial vacancy relief program, and expedited permitting pathway for ground-floor retail",
+      "quote": "Downtown businesses shouldn't have to wait for relief while their shelves gather dust.",
+      "fullStatement": "This morning I directed Chief of Staff Laila Cortez to file the Downtown Economic Revitalization ordinance with the City Clerk. This $15 million package delivers what our commercial corridors need: direct relief for businesses hit by vacancy spirals, expedited permitting to get storefronts filled fast, and targeted support for the entrepreneurs who stayed. Downtown Oakland built this city's tax base for generations. We're not walking away from it now.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-mayor_open-002",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund — Month-Nine Disbursement",
+      "initiative": "INIT-001",
+      "decision": "Approve month-nine disbursement of $400,000 for household stabilization grants under Deputy Mayor Brenda Okoro's authority, with continued monthly reporting to Finance Committee",
+      "quote": "Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.",
+      "fullStatement": "I'm authorizing the month-nine tranche of the West Oakland Stabilization Fund: $400,000 in household grants administered by Deputy Mayor Okoro's team. The numbers validate what we believed — West Oakland sentiment at 0.45, outpacing citywide averages, property crime down, families staying. This fund works because we trusted community organizations to identify need faster than any city office could. Month nine means we've disbursed over $4.6 million and kept hundreds of households housed. The Fund continues.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-mayor_open-003",
+      "type": "executive_order",
+      "topic": "Fruitvale Transit Hub Phase II — Preliminary Schematics Advancement",
+      "initiative": "INIT-003",
+      "decision": "Direct Mayer & Associates to advance to preliminary schematics review with community oversight provisions intact, target presentation to council committee within two cycles",
+      "quote": "Mayer & Associates listens to Fruitvale merchants first, designs second — and now we move to blueprints.",
+      "fullStatement": "I'm directing our design partner Mayer & Associates to advance the Fruitvale Transit Hub to preliminary schematics review. The merchant covenants are executed, community requirements are embedded in the RFP, and this $230 million investment is ready for the next phase. Fruitvale's busy streets and upbeat mood didn't happen by accident — they happened because this community organizes, advocates, and builds. The Hub honors that by putting merchant voices at the center of design. Preliminary schematics come to council committee within two cycles.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-mayor_open-004",
+      "type": "public_remark",
+      "topic": "Ivy Hill Infrastructure Crisis — Response",
+      "initiative": null,
+      "decision": "Direct Public Works to prioritize Ivy Hill infrastructure assessment and deploy emergency response team for high-severity public-works spike",
+      "quote": "When a neighborhood needs help, we show up with shovels, not speeches.",
+      "fullStatement": "Ivy Hill faced a high-severity infrastructure spike this cycle, and I've directed Public Works to prioritize assessment and deploy emergency response. The residents there are upbeat despite slow trade — that resilience deserves matching action from City Hall. We're not waiting for a council vote to move equipment. My office is tracking daily until the spike resolves.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-mayor_open-005",
+      "type": "public_remark",
+      "topic": "Fruitvale Success — Credit Where Due",
+      "initiative": null,
+      "decision": "Publicly credit Fruitvale community organizing and district leadership for economic momentum",
+      "quote": "Fruitvale's busy streets and upbeat mood didn't happen by accident — they happened because this community organizes, advocates, and builds.",
+      "fullStatement": "I want to name what we're seeing in Fruitvale: busy street trade, clearly upbeat neighborhood mood, and the kind of economic energy every district deserves. This didn't happen by accident. It happened because Fruitvale residents organize, because merchants collaborate, because community institutions like St. Esperanza Parish show up for seniors and families. My Transit Hub investment builds on that foundation — it doesn't create it. The credit belongs to the neighborhood first.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-mayor_open-006",
+      "type": "executive_order",
+      "topic": "Baylight District — Soil Test Verification",
+      "initiative": "INIT-006",
+      "decision": "Accept first soil test results verification with independent oversight provisions, authorize continued Phase II remediation mobilization",
+      "quote": "Independent oversight isn't bureaucracy — it's how we build trust while we build the future.",
+      "fullStatement": "I've reviewed the first soil test results for Baylight with our independent oversight panel, and I'm authorizing continued Phase II remediation mobilization. This $2.1 billion district is Oakland's signature investment, and we're doing it right — transparent, verified, accountable. The improvement flagged in Jack London and Downtown tells me the work is working. We keep building.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-mayor_open-007",
+      "type": "executive_order",
+      "topic": "Oakland Youth Apprenticeship Pipeline — Cohort Placement Review",
+      "initiative": "INIT-007",
+      "decision": "Direct first training cohort placement review with target of 150 apprentices placed by cycle 112, accelerate intake for underserved districts",
+      "quote": "150 apprentices placed by spring — that's the target, and we're accelerating to hit it.",
+      "fullStatement": "I'm directing Deputy Mayor Cortez to complete first cohort placement review for the Oakland Youth Apprenticeship Pipeline, with a hard target of 150 apprentices placed by cycle 112. We've had three cycles of intake operations — now we move to placement velocity. Priority goes to applicants from West Oakland, East Oakland, and Fruitvale, the districts where this $12.5 million investment matters most. The town halls proved demand. Now we prove delivery.",
+      "trackerUpdates": {}
+    }
+  ]
+}

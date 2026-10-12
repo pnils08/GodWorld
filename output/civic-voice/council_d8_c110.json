@@ -1,0 +1,48 @@
+{
+  "office": "council_d8",
+  "cycle": 110,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "District 8 establishes procedural requirements for the Downtown Economic Revitalization Fund while accepting independent soil test verification for Baylight Phase II remediation. We demand municipal service audits to address slow commercial foot traffic in Adams Point while crediting documented, routine municipal maintenance for Lake Merritt's steady performance. We also maintain strict intake audit benchmarks for the Youth Apprenticeship Pipeline cohort expansion.",
+  "statements": [
+    {
+      "statementId": "STMT-110-council_d8-001",
+      "type": "constituent_advocacy",
+      "topic": "District 8 Commercial Corridor Oversight and Municipal Maintenance",
+      "initiative": null,
+      "decision": "Direct Public Works and Economic Development to conduct a municipal baseline review for Adams Point commercial corridors while maintaining verified maintenance schedules across Lake Merritt, Grand Lake, and Eastlake.",
+      "quote": "Lake Merritt's stability is the direct result of consistent municipal maintenance schedules, and Adams Point deserves that exact same operational rigor.",
+      "fullStatement": "Lake Merritt's steady trade and upbeat conditions demonstrate what predictable, documented municipal maintenance delivers for our public corridors. However, Adams Point continues to experience sluggish commercial trade despite low crime and positive community engagement. Economic stability requires baseline municipal support—clean corridors, functioning infrastructure, and predictable city services. District 8 requests a formal municipal baseline review for Adams Point to ensure public works allocations match neighborhood needs, while ensuring our maintenance standards at Grand Lake and Eastlake remain documented and uninterrupted.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d8-002",
+      "type": "vote_statement",
+      "topic": "Downtown Economic Revitalization Fund Legislative Filing",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "Support filing the Downtown Economic Revitalization Fund ordinance with mandated quarterly audit provisions and objective criteria for vacancy relief distribution.",
+      "quote": "A fifteen-million-dollar revitalization fund must be anchored by rigorous eligibility rules, verified disbursement tracking, and transparent permitting audits.",
+      "fullStatement": "Downtown recovery requires investment, but fiscal accountability must be established before authorizations are drawn. As the ordinance for the Downtown Economic Revitalization Fund moves forward with its fifteen-million-dollar authorization, District 8 insists on binding procedural guardrails. Vacancy relief grants must follow clear, auditable eligibility criteria, and expedited ground-floor permitting must maintain standard environmental and safety compliance checks. Streamlined administrative pathways only succeed when supported by robust reporting to the Finance Committee.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d8-003",
+      "type": "vote_statement",
+      "topic": "Baylight District Soil Test Verification and Phase II Remediation",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Accept independent verification of initial soil testing results and authorize Phase II mobilization subject to strict environmental protocol reporting.",
+      "quote": "Environmental review compliance is non-negotiable; independent verification of soil test results gives the public the documentation they are entitled to.",
+      "fullStatement": "Independent oversight is the foundation of sound capital execution. District 8 accepts the verified first soil test results for the Baylight District Phase II mobilization, acknowledging that third-party technical reviews provide necessary assurance to surrounding communities. As remediation proceeds, our office will continue to require complete, unredacted environmental monitoring data and strict adherence to executed remediation timelines before subsequent site milestones are certified.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-council_d8-004",
+      "type": "vote_statement",
+      "topic": "Youth Apprenticeship Pipeline Placement Review",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Approve cohort placement review toward the 150-apprentice target conditional on verified applicant intake auditing and district-level reporting.",
+      "quote": "Targeting 150 apprentice placements is commendable, but legislative oversight requires auditable intake records and clear tracking across all districts.",
+      "fullStatement": "District 8 supports accelerating the intake and placement of the first training cohort toward the cycle 112 target of 150 apprentices. However, scaling workforce programs must not bypass intake verification. We require program administrators to provide auditable documentation demonstrating balanced applicant outreach, transparent qualification screening, and geographic distribution across underserved areas. Clear metrics protect both the public investment and the participants entering the workforce.",
+      "trackerUpdates": {}
+    }
+  ]
+}

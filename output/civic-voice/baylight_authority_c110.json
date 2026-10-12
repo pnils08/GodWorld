@@ -1,0 +1,23 @@
+{
+  "office": "baylight_authority",
+  "cycle": 110,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "Phase II site remediation progresses with independent oversight. Soil test verification confirms compliance, enabling continued mobilization.",
+  "statements": [
+    {
+      "statementId": "STMT-110-baylight_authority-001",
+      "type": "milestone_update",
+      "topic": "Baylight District Soil Test Verification",
+      "initiative": "INIT-006",
+      "decision": "Accept soil test results with independent oversight, authorize continued Phase II remediation",
+      "quote": "Independent oversight confirms our soil is clean — Baylight builds on a solid foundation.",
+      "fullStatement": "Baylight Authority Director Keisha Ramos confirmed that Phase II site remediation continues following independent verification of soil test results. 'Independent oversight confirms our soil is clean — Baylight builds on a solid foundation,' Ramos said. The Baylight Authority has mobilized remediation crews to execute soil handling protocols while workforce pipelines activate local hires.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "MilestoneNotes": "C110: Soil test verification confirms compliance, enabling continued Phase II remediation mobilization",
+        "NextScheduledAction": "Phase II remediation progress reporting",
+        "NextActionCycle": 111
+      }
+    }
+  ]
+}

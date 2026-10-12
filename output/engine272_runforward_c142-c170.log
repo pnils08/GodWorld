@@ -1,0 +1,57 @@
+fire 1: HTTP 200 in 233s | {"ok":true,"ranMs":226287,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C142 | rows 1125 | errors 4 | cohort 861 | wearing 42 max d 5 | slippery(<40) 0 | crime-reachable 0 | min integrity 43.7 | status {"active":1086,"retired":38,"hospitalized":1}
+fire 2: HTTP 200 in 219s | {"ok":true,"ranMs":213107,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C143 | rows 1131 | errors 4 | cohort 867 | wearing 40 max d 7 | slippery(<40) 0 | crime-reachable 0 | min integrity 41.9 | status {"active":1092,"retired":38,"recovering":1}
+fire 3: HTTP 200 in 214s | {"ok":true,"ranMs":209960,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C144 | rows 1135 | errors 4 | cohort 871 | wearing 39 max d 9 | slippery(<40) 0 | crime-reachable 0 | min integrity 40.1 | status {"active":1096,"retired":38,"recovering":1}
+fire 4: HTTP 200 in 231s | {"ok":true,"ranMs":225771,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C145 | rows 1139 | errors 4 | cohort 875 | wearing 43 max d 11 | slippery(<40) 35 | crime-reachable 0 | min integrity 38.3 | status {"active":1100,"retired":38,"recovering":1}
+fire 5: HTTP 200 in 236s | {"ok":true,"ranMs":222287,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C146 | rows 1142 | errors 4 | cohort 877 | wearing 40 max d 13 | slippery(<40) 35 | crime-reachable 0 | min integrity 36.5 | status {"active":1103,"retired":38,"detained":1}
+fire 6: HTTP 200 in 230s | {"ok":true,"ranMs":220747,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C147 | rows 1142 | errors 4 | cohort 877 | wearing 41 max d 15 | slippery(<40) 36 | crime-reachable 0 | min integrity 35.0 | status {"active":1103,"retired":38,"detained":1}
+fire 7: HTTP 200 in 183s | {"ok":true,"ranMs":179585,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C148 | rows 1143 | errors 4 | cohort 878 | wearing 42 max d 17 | slippery(<40) 36 | crime-reachable 0 | min integrity 33.0 | status {"active":1104,"retired":38,"detained":1}
+fire 8: HTTP 200 in 183s | {"ok":true,"ranMs":178655,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C149 | rows 1148 | errors 4 | cohort 882 | wearing 44 max d 19 | slippery(<40) 36 | crime-reachable 0 | min integrity 29.4 | status {"active":1108,"retired":38,"detained":2}
+fire 9: HTTP 200 in 185s | {"ok":true,"ranMs":180402,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C150 | rows 1150 | errors 4 | cohort 884 | wearing 42 max d 21 | slippery(<40) 36 | crime-reachable 0 | min integrity 28.5 | status {"active":1112,"retired":38}
+fire 10: HTTP 200 in 246s | {"ok":true,"ranMs":239047,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C151 | rows 1155 | errors 4 | cohort 889 | wearing 42 max d 23 | slippery(<40) 36 | crime-reachable 0 | min integrity 27.0 | status {"active":1116,"retired":38,"hospitalized":1}
+fire 11: HTTP 200 in 225s | {"ok":true,"ranMs":219992,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C152 | rows 1157 | errors 4 | cohort 891 | wearing 42 max d 25 | slippery(<40) 36 | crime-reachable 0 | min integrity 25.0 | status {"active":1118,"retired":38,"recovering":1}
+fire 12: HTTP 200 in 206s | {"ok":true,"ranMs":201618,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C153 | rows 1161 | errors 4 | cohort 894 | wearing 40 max d 27 | slippery(<40) 36 | crime-reachable 0 | min integrity 23.0 | status {"active":1122,"retired":38,"detained":1}
+fire 13: HTTP 200 in 196s | {"ok":true,"ranMs":192252,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C154 | rows 1168 | errors 4 | cohort 900 | wearing 39 max d 29 | slippery(<40) 36 | crime-reachable 0 | min integrity 21.0 | status {"active":1130,"retired":38}
+fire 14: HTTP 200 in 205s | {"ok":true,"ranMs":200136,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C155 | rows 1176 | errors 4 | cohort 908 | wearing 40 max d 31 | slippery(<40) 36 | crime-reachable 34 | min integrity 19.0 | status {"active":1138,"retired":38}
+fire 15: HTTP 200 in 199s | {"ok":true,"ranMs":195402,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C156 | rows 1180 | errors 4 | cohort 912 | wearing 41 max d 33 | slippery(<40) 36 | crime-reachable 34 | min integrity 17.0 | status {"active":1142,"retired":38}
+fire 16: HTTP 200 in 447s | {"ok":true,"ranMs":231179,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C158 | rows 1186 | errors 4 | cohort 918 | wearing 41 max d 37 | slippery(<40) 36 | crime-reachable 36 | min integrity 13.0 | status {"active":1148,"retired":37,"hospitalized":1}
+fire 17: HTTP 200 in 210s | {"ok":true,"ranMs":206095,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C159 | rows 1195 | errors 4 | cohort 927 | wearing 40 max d 39 | slippery(<40) 36 | crime-reachable 36 | min integrity 11.0 | status {"active":1157,"retired":37,"hospitalized":1}
+fire 18: HTTP 200 in 255s | {"ok":true,"ranMs":249342,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C160 | rows 1198 | errors 4 | cohort 930 | wearing 38 max d 40 | slippery(<40) 36 | crime-reachable 36 | min integrity 10.0 | status {"active":1160,"retired":37,"hospitalized":1}
+fire 19: HTTP 200 in 259s | {"ok":true,"ranMs":254084,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C161 | rows 1204 | errors 4 | cohort 935 | wearing 41 max d 40 | slippery(<40) 36 | crime-reachable 36 | min integrity 10.0 | status {"active":1166,"retired":37,"recovering":1}
+fire 20: HTTP 200 in 219s | {"ok":true,"ranMs":213114,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C162 | rows 1206 | errors 4 | cohort 937 | wearing 40 max d 40 | slippery(<40) 36 | crime-reachable 36 | min integrity 10.0 | status {"active":1168,"retired":37,"serious-condition":1}
+fire 21: HTTP 200 in 186s | {"ok":true,"ranMs":182665,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C163 | rows 1215 | errors 4 | cohort 946 | wearing 41 max d 40 | slippery(<40) 36 | crime-reachable 36 | min integrity 10.0 | status {"active":1177,"retired":37,"serious-condition":1}
+fire 22: HTTP 200 in 218s | {"ok":true,"ranMs":213027,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C164 | rows 1223 | errors 4 | cohort 953 | wearing 43 max d 40 | slippery(<40) 36 | crime-reachable 36 | min integrity 10.0 | status {"active":1185,"retired":37,"serious-condition":1}
+fire 23: HTTP 200 in 218s | {"ok":true,"ranMs":213911,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C165 | rows 1229 | errors 4 | cohort 959 | wearing 41 max d 40 | slippery(<40) 36 | crime-reachable 36 | min integrity 10.0 | status {"active":1191,"retired":37,"serious-condition":1}
+fire 24: HTTP 200 in 213s | {"ok":true,"ranMs":208393,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C166 | rows 1234 | errors 4 | cohort 964 | wearing 41 max d 40 | slippery(<40) 36 | crime-reachable 36 | min integrity 10.0 | status {"active":1196,"retired":37,"serious-condition":1}
+fire 25: HTTP 200 in 184s | {"ok":true,"ranMs":179298,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C167 | rows 1239 | errors 4 | cohort 969 | wearing 43 max d 40 | slippery(<40) 37 | crime-reachable 36 | min integrity 10.0 | status {"active":1201,"retired":37,"critical":1}
+fire 26: HTTP 200 in 235s | {"ok":true,"ranMs":229949,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C168 | rows 1240 | errors 4 | cohort 970 | wearing 44 max d 40 | slippery(<40) 37 | crime-reachable 36 | min integrity 10.0 | status {"active":1203,"retired":37}
+fire 27: HTTP 200 in 205s | {"ok":true,"ranMs":200406,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C169 | rows 1249 | errors 4 | cohort 979 | wearing 44 max d 40 | slippery(<40) 37 | crime-reachable 36 | min integrity 9.2 | status {"active":1212,"retired":37}
+fire 28: HTTP 200 in 223s | {"ok":true,"ranMs":217713,"failed":[],"keys":["ok","ranMs","diag59","diag61","timing","diag187","citi
+C170 | rows 1256 | errors 4 | cohort 986 | wearing 42 max d 40 | slippery(<40) 37 | crime-reachable 36 | min integrity 9.4 | status {"active":1219,"retired":37}
+DONE Thu Oct  1 13:33:28 CDT 2026

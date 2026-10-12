@@ -1,0 +1,61 @@
+{
+  "draft": "output/cron-compare/civic_c109_carmen-delaine_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c74e34aa6d8d5d4e733da5b732973eae29d414b7b0032cc18cbb6d66e04c620c",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen identities, exact quotes, and initiative statuses verified against cycle 109 canon.",
+  "review": {
+    "profileId": "carmen-civic-ledger-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "packageVersion": "CARMEN-LEP2-1",
+    "manifestId": "AM-c888ca0d750b",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "14th"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Daniel Cloak",
+      "Darius Clark",
+      "Elena Patel",
+      "Irene Fay"
+    ],
+    "unverified": [
+      "Initiative Tracker",
+      "Stabilization Fund",
+      "West Oakland Stabilization Fund"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 6215,
+  "parseError": false,
+  "ranAt": "2026-09-28T23:15:31.431Z"
+}

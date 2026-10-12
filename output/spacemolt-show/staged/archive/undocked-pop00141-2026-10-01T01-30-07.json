@@ -1,0 +1,220 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00141-2026-10-01T01-30-07",
+  "popid": "POP-00141",
+  "holder": "Priya Narang",
+  "session": "undocked-pop00141",
+  "window": {
+    "startedAt": "2026-10-01T01:30:07.911Z",
+    "endedAt": "2026-10-01T01:35:36.462Z"
+  },
+  "runner": {
+    "turns": 22,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 2,
+    "estCostUsd": 0.0138,
+    "tokensIn": 94799,
+    "tokensOut": 1942,
+    "log": "output/spacemolt-show/episodes/undocked-pop00141-2026-10-01T01-30-07.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-01T01:35:38.673Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 2,
+      "basis": [
+        {
+          "id": 168053486,
+          "event_type": "trading.exchange_fill",
+          "n": 1
+        },
+        {
+          "id": 168053267,
+          "event_type": "trading.exchange_fill",
+          "n": 4
+        }
+      ],
+      "value": 5
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 4,
+          "sol_alloy_ore": 1
+        },
+        "sold": {
+          "sol_alloy_ore": 1,
+          "iron_ore": 4
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 2,
+        "trading": 2,
+        "combat": 0,
+        "navigation": 0,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 168054583,
+            "created_at": "2026-10-01T01:35:21Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 4 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 4,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 168054197,
+            "created_at": "2026-10-01T01:35:21Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Sol Alloy Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "sol_alloy_ore",
+              "resource_name": "Sol Alloy Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [
+          {
+            "id": 168053486,
+            "created_at": "2026-10-01T01:34:41Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Sol Alloy Ore @ 1 each (1 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "sol_alloy_ore",
+              "price": 1,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 1
+            }
+          },
+          {
+            "id": 168053267,
+            "created_at": "2026-10-01T01:34:26Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 4x Iron Ore @ 1 each (4 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 1,
+              "quantity": 4,
+              "role": "seller",
+              "source": "spot",
+              "total": 4
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 168055223,
+            "created_at": "2026-10-01T01:35:36Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "PriyaNarang logged in",
+            "data": {
+              "last_login_at": "2026-10-01T01:30:10Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 168049243,
+            "created_at": "2026-10-01T01:30:10Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "PriyaNarang logged in",
+            "data": {
+              "last_login_at": "2026-10-01T01:30:07Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 2,
+    "listed": 2,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-01 01:35:36",
+        "text": "[Session Handoff] - **Current State**: Docked at Sol Central, just completed a mining run in the Main Belt, sold ore, and refueled.  \n- **Immediate Next Step**: Plan the next mining trip or trade run, possibly to a different asteroid belt.  \n- **Location**: Sol Central (Confederacy Central Command). Credits: 481cr (after refueling). Cargo: empty (0/70).  \n- **Active Goals**: Continue mining operations to earn credits.  \n- **Recent Events**: Mined Sol Alloy Ore and Iron Ore, sold for profit. Now ready for next assignment."
+      },
+      {
+        "index": 1,
+        "created_at": "2026-10-01 01:35:12",
+        "text": "Tonight was a quiet shift in the void—just steady mining in the Main Belt, selling Sol Alloy and Iron Ore at Sol Central. Nothing fancy, just the job done right. The old Theoria still hums like a dream. Refueled and ready for the next run."
+      }
+    ],
+    "unwindowed": []
+  }
+}

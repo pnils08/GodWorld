@@ -1,0 +1,154 @@
+{
+  "cycle": "108",
+  "top": 9,
+  "selected": [
+    "civic_c108_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+    "civic_c108_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+    "sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "business_c108_business-desk_packet-v2_deepseek-deepseek-chat",
+    "culture_c108_mason-ortega_packet-v2_deepseek-deepseek-chat",
+    "sports_c108_anthony-raines_packet-v2_deepseek-deepseek-chat",
+    "sports_c108_simon-leary_packet-v2_deepseek-deepseek-chat",
+    "civic_c108_noah-tan_packet-v2_deepseek-deepseek-chat",
+    "culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat"
+  ],
+  "ranked": [
+    {
+      "stem": "civic_c108_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "score": 7,
+      "slug": "west-oakland-elio-perez-initiative",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c108_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "score": 7,
+      "slug": "city-rick-walker-anomaly",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Selena Grant",
+      "desk": "sports",
+      "score": 7,
+      "slug": "downtown-wilson-shepard-beat-oaks-ground",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c108_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Talia Finch",
+      "desk": "sports",
+      "score": 7,
+      "slug": "downtown-wilson-shepard-beat-oaks-ground",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "business_c108_business-desk_packet-v2_deepseek-deepseek-chat",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "score": 6.5,
+      "slug": "baylight-district-kelvon-ochoa-story-signal",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c108_mason-ortega_packet-v2_deepseek-deepseek-chat",
+      "byline": "Mason Ortega",
+      "desk": "culture",
+      "score": 6.5,
+      "slug": "lake-merritt-vanessa-treary-named-restaurant",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c108_anthony-raines_packet-v2_deepseek-deepseek-chat",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "score": 6.5,
+      "slug": "rockridge-danny-horn-sports-analytics",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c108_simon-leary_packet-v2_deepseek-deepseek-chat",
+      "byline": "Simon Leary",
+      "desk": "sports",
+      "score": 6.5,
+      "slug": "baylight-district-vinnie-keane-prospect-callup",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c108_noah-tan_packet-v2_deepseek-deepseek-chat",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "score": 6,
+      "slug": "city-tyrie-groin-beat-weather",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat",
+      "byline": "Maria Keen",
+      "desk": "culture",
+      "score": 6,
+      "slug": "jack-london-tomas-renteria-story-signal",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c108_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "score": 6,
+      "slug": "baylight-district-vinnie-keane-prospect-callup",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c108_elliot-graye_packet-v2_deepseek-deepseek-chat",
+      "byline": "Elliot Graye",
+      "desk": "culture",
+      "score": 5.5,
+      "slug": "downtown-tao-lee-beat-faith",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c108_angela-reyes_packet-v2_deepseek-deepseek-chat",
+      "byline": "Angela Reyes",
+      "desk": "civic",
+      "score": 5,
+      "slug": "rockridge-mei-wong-beat-schools",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "civic_c108_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+      "byline": "Trevor Shimizu",
+      "desk": "civic",
+      "score": 5,
+      "slug": "city-eleanor-rivera-beat-transit",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "score": 5,
+      "slug": "jack-london-belle-lopez-undocked",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "wire_c108_celeste-tran_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Celeste Tran",
+      "desk": "wire",
+      "score": 5,
+      "slug": "san-antonio-marin-tao-beat-trends",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "culture_c108_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Kai Marston",
+      "desk": "culture",
+      "score": 3.5,
+      "slug": "rockridge-tara-ellison-beat-arts",
+      "verdict": "corrections-needed"
+    }
+  ],
+  "excludedCanonViolations": 3
+}

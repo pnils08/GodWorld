@@ -1,0 +1,38 @@
+{
+  "office": "council_d7",
+  "cycle": 106,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "In Cycle 106, I advanced the Temescal Community Health Center into utility inspections while tying construction milestones to ongoing fiscal audit checkpoints. For Rockridge, I requested a targeted commercial corridor assessment from Economic Development rather than approving blank-check programs. Across KONO and Temescal, I defended District 7 by demanding transparent service-gap accounting and taking credit for the disciplined execution keeping Temescal projects on schedule.",
+  "statements": [
+    {
+      "statementId": "STMT-106-council_d7-001",
+      "type": "vote_statement",
+      "topic": "Temescal Community Health Center Construction Milestone",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Authorize progression to interior wall framing and utility inspections subject to budget audit verification",
+      "quote": "The frame is up because District 7 demanded strict timelines, and we will keep the ledger balanced as utility inspections begin.",
+      "fullStatement": "The structural frame of the Temescal Community Health Center stands ahead of schedule because we treated the $45 million budget with rigorous oversight rather than casual rhetoric. Moving into interior framing and utility inspections this cycle is the direct result of operational discipline on the ground. I support advancing to this phase, but City Hall must remember that speed cannot outpace fiscal accountability. We will inspect every conduit and audit every dollar before final disbursement.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d7-002",
+      "type": "policy_statement",
+      "topic": "Rockridge Commercial Corridor Assessment",
+      "initiative": null,
+      "decision": "Direct Economic Development to conduct a targeted merchant retention audit for Rockridge",
+      "quote": "We do not solve quiet storefronts in Rockridge by throwing money into the dark—we demand data on merchant retention first.",
+      "fullStatement": "Rockridge is experiencing subtle commercial friction and shifting daily activity, yet City Hall's default response is either total neglect or unmetered spending. I am directing the Economic Development Department to deliver a comprehensive merchant retention audit and retail vacancy report for College Avenue. District 7 requires targeted, data-backed stabilization that protects existing local businesses rather than broad municipal subsidies that lack performance metrics.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d7-003",
+      "type": "oversight_statement",
+      "topic": "District 7 Economic Oversight and Service Allocation",
+      "initiative": null,
+      "decision": "Order service gap reports for KONO and formally claim credit for Temescal capital project execution",
+      "quote": "Temescal is thriving because of District 7 discipline, and KONO will get targeted support only when the service gap audit is on my desk.",
+      "fullStatement": "While others rush to claim credit for Temescal's upbeat momentum and bustling street activity, that success was built on District 7 holding contractors and city departments to strict performance benchmarks. In KONO, steady commercial activity does not excuse City Hall from delivering basic municipal services. I will not endorse blanket funding without the pending Economic Development service gap analysis in hand. We govern District 7 by the numbers, not by guesswork.",
+      "trackerUpdates": {}
+    }
+  ]
+}

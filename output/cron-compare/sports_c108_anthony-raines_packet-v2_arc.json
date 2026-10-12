@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "sports",
+  "persona": "anthony-raines",
+  "storyline": {
+    "slug": "rockridge-danny-horn-sports-analytics",
+    "verb": "opened"
+  },
+  "hood": "Rockridge",
+  "quotes": [
+    {
+      "pop": "POP-00022",
+      "name": "Danny Horn",
+      "quote": "Look, I know my numbers haven’t been where I want them this postseason, but I’m grinding every day. This team’s got heart, and I’m gonna do everything I can to help us bring home that championship. The Phillies are tough, but we’ve got the pieces to get it done."
+    },
+    {
+      "pop": "POP-00528",
+      "name": "Deacon Seymour",
+      "quote": "Danny Horn’s been grinding, and I respect that. The numbers don’t tell the whole story—he’s a guy who shows up every day, puts in the work, and keeps his head in the game. Right now, he’s not finding the gaps, but I’ve seen him turn it around before. He’s got the discipline, and when he locks in, he can change the momentum of a game. We’re counting on him to step up when it matters most."
+    },
+    {
+      "pop": "POP-00527",
+      "name": "Mike Paulson",
+      "quote": "Look, Danny’s been grinding through a tough stretch at the plate—no one’s denying that. But here’s the thing: he’s still showing up every day, putting in the work, and contributing in ways that don’t always show up in the box score. This team’s built on depth, and Danny’s part of that. We’re not leaning on any one guy to carry us—that’s why we’re here, chasing that seventh ring."
+    },
+    {
+      "pop": "POP-00025",
+      "name": "Arturo Ramos",
+      "quote": "Look, Danny's been grinding like the rest of us. Numbers don't always tell the whole story—he's got the kind of at-bats that wear pitchers down, and in a long series, that matters. We're not worried. When it clicks for him, it's gonna be big."
+    }
+  ],
+  "claim": "Look, I know my numbers haven’t been where I want them this postseason, but I’m grinding every day. This team’s got heart, and I’m gonna do everything I can to help us bring home that championship. The Phillies are tough, but we’ve got the pieces to get it done.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-21T18:19:30.423Z"
+}

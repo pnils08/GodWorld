@@ -1,0 +1,401 @@
+{
+  "version": "SAFETY-SLICE-2",
+  "empty": false,
+  "cycle": 108,
+  "kind": "beat-safety",
+  "seat": {
+    "slug": "rachel-torres",
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057",
+    "desk": "civic",
+    "domain": "public-safety",
+    "builder": "buildSafetySlice.js"
+  },
+  "hood": "San Antonio",
+  "pulse": {
+    "className": "beat-safety",
+    "score": 100,
+    "label": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+    "hood": "San Antonio",
+    "source": "output/beats/Crime_Metrics.jsonl @C108"
+  },
+  "story": {
+    "kind": "beat-safety",
+    "angle": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+    "label": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table",
+    "hookLine": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+    "hood": "San Antonio",
+    "citizens": [
+      "Vanessa Tran-Muñoz (POP-01021)"
+    ],
+    "popids": [
+      "POP-01021"
+    ],
+    "ref": "output/beats/Crime_Metrics.jsonl @C108",
+    "cycle": 108
+  },
+  "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — and the public-safety staff on the roster. Measured, third person, incident structure and classification gaps. The numbers and the officials are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01021",
+      "name": "Vanessa Tran-Muñoz",
+      "role": "OARI Program Director",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+      "src": "output/beats/Crime_Metrics.jsonl @C108"
+    },
+    {
+      "text": "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+      "src": "output/beats/Crime_Metrics.jsonl @C108"
+    },
+    {
+      "text": "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+      "src": "output/beats/Crime_Metrics.jsonl @C108"
+    },
+    {
+      "text": "Moved this cycle — rising: East Oakland, Dimond; easing: none",
+      "src": "output/beats/Crime_Metrics.jsonl @C108"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "San Antonio logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+    "hookLine": "San Antonio leads the incident count; Lake Merritt waits longest for a response; 1 public-safety staff on the roster.",
+    "anchorFacts": [
+      "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+      "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+      "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+      "Moved this cycle — rising: East Oakland, Dimond; easing: none"
+    ],
+    "evidence": [
+      {
+        "text": "120 incidents across 22 neighborhoods; most in San Antonio 8, Uptown 8, Chinatown 7, Rockridge 7, Glenview 6; fewest in Dimond 4, Laurel 4, Jack London 3",
+        "src": "output/beats/Crime_Metrics.jsonl @C108"
+      },
+      {
+        "text": "San Antonio: 8 incidents (+0 vs C107), response 11 min, clearance 18%, property index 38, violent index 27",
+        "src": "output/beats/Crime_Metrics.jsonl @C108"
+      },
+      {
+        "text": "Slowest response: Lake Merritt: 6 incidents (-1 vs C107), response 11.2 min, clearance 20%, property index 32, violent index 20",
+        "src": "output/beats/Crime_Metrics.jsonl @C108"
+      },
+      {
+        "text": "Moved this cycle — rising: East Oakland, Dimond; easing: none",
+        "src": "output/beats/Crime_Metrics.jsonl @C108"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 107
+    },
+    "hooks": [
+      {
+        "text": "Cooling down in West Oakland: The West Oakland Crime Spike — West Oakland recovering — pressure lifting Follow-up angle available.",
+        "angle": "historical reflection",
+        "domain": "SAFETY",
+        "hood": "West Oakland",
+        "priority": 2
+      },
+      {
+        "text": "Notable event: \"graffiti tagging\". Follow-up recommended.",
+        "angle": "general coverage",
+        "domain": "SAFETY",
+        "hood": null,
+        "priority": 2
+      }
+    ],
+    "note": "desk-signal incident rows attached as pointers (5)",
+    "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first"
+  },
+  "table": [
+    {
+      "hood": "San Antonio",
+      "property": 38,
+      "violent": 27,
+      "response": 11,
+      "clearance": 0.18,
+      "incidents": 8,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.09
+    },
+    {
+      "hood": "Uptown",
+      "property": 32,
+      "violent": 20,
+      "response": 11.1,
+      "clearance": 0.2,
+      "incidents": 8,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.87
+    },
+    {
+      "hood": "Chinatown",
+      "property": 36,
+      "violent": 24,
+      "response": 10.4,
+      "clearance": 0.17,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.01
+    },
+    {
+      "hood": "Rockridge",
+      "property": 34,
+      "violent": 20,
+      "response": 10.4,
+      "clearance": 0.16,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.91
+    },
+    {
+      "hood": "Glenview",
+      "property": 34,
+      "violent": 27,
+      "response": 10.7,
+      "clearance": 0.16,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.03
+    },
+    {
+      "hood": "Baylight District",
+      "property": 31,
+      "violent": 24,
+      "response": 10.3,
+      "clearance": 0.16,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.92
+    },
+    {
+      "hood": "Brooklyn",
+      "property": 33,
+      "violent": 24,
+      "response": 11.1,
+      "clearance": 0.18,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.96
+    },
+    {
+      "hood": "Lake Merritt",
+      "property": 32,
+      "violent": 20,
+      "response": 11.2,
+      "clearance": 0.2,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.87
+    },
+    {
+      "hood": "East Oakland",
+      "property": 34,
+      "violent": 32,
+      "response": 10.7,
+      "clearance": 0.21,
+      "incidents": 5,
+      "trend": "rising",
+      "hotspot": null,
+      "pressure": 1.11
+    },
+    {
+      "hood": "Fruitvale",
+      "property": 37,
+      "violent": 27,
+      "response": 10.5,
+      "clearance": 0.18,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.08
+    },
+    {
+      "hood": "Eastlake",
+      "property": 36,
+      "violent": 25,
+      "response": 11.1,
+      "clearance": 0.18,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.03
+    },
+    {
+      "hood": "Grand Lake",
+      "property": 38,
+      "violent": 25,
+      "response": 11.2,
+      "clearance": 0.21,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.06
+    },
+    {
+      "hood": "West Oakland",
+      "property": 34,
+      "violent": 24,
+      "response": 10.3,
+      "clearance": 0.19,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.97
+    },
+    {
+      "hood": "Adams Point",
+      "property": 39,
+      "violent": 23,
+      "response": 10.4,
+      "clearance": 0.21,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.04
+    },
+    {
+      "hood": "Ivy Hill",
+      "property": 36,
+      "violent": 23,
+      "response": 11.2,
+      "clearance": 0.16,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.99
+    },
+    {
+      "hood": "Piedmont Ave",
+      "property": 31,
+      "violent": 23,
+      "response": 10.1,
+      "clearance": 0.18,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.91
+    },
+    {
+      "hood": "Temescal",
+      "property": 43,
+      "violent": 22,
+      "response": 10.6,
+      "clearance": 0.21,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.09
+    },
+    {
+      "hood": "KONO",
+      "property": 40,
+      "violent": 21,
+      "response": 10.7,
+      "clearance": 0.2,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.03
+    },
+    {
+      "hood": "Downtown",
+      "property": 33,
+      "violent": 20,
+      "response": 10.5,
+      "clearance": 0.18,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.89
+    },
+    {
+      "hood": "Dimond",
+      "property": 40,
+      "violent": 26,
+      "response": 10.4,
+      "clearance": 0.21,
+      "incidents": 4,
+      "trend": "rising",
+      "hotspot": null,
+      "pressure": 1.11
+    },
+    {
+      "hood": "Laurel",
+      "property": 36,
+      "violent": 22,
+      "response": 9.8,
+      "clearance": 0.18,
+      "incidents": 4,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.97
+    },
+    {
+      "hood": "Jack London",
+      "property": 36,
+      "violent": 17,
+      "response": 10.7,
+      "clearance": 0.18,
+      "incidents": 3,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.89
+    }
+  ],
+  "signalPointers": [
+    {
+      "label": "improvement (low) | Initiative \"Oakland Alternative Response Initiative\" advanced: implementation-active → dispatch-live",
+      "ref": "output/engine_audit_c108.json patterns[18]; evidence: Initiative_Tracker row(s) 3",
+      "hood": "West Oakland, Fruitvale, East Oakland"
+    },
+    {
+      "label": "improvement (low) | Remedy overshot expectation on Crime_Metrics.ViolentCrimeIndex: observed -7 (expected -0.05) — from prior \"incoherence\"",
+      "ref": "output/engine_audit_c108.json patterns[19]; evidence: Crime_Metrics row(s) ",
+      "hood": "West Oakland, Fruitvale, East Oakland"
+    },
+    {
+      "label": "Oakland Alternative Response Initiative | Status passed | phase dispatch-live",
+      "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c108.json snapshots.Initiative_Tracker",
+      "hood": "West Oakland, Fruitvale, East Oakland"
+    },
+    {
+      "label": "Oakland Alternative Response Initiative | District 1 evaluation completion and potential expansion decision C108",
+      "ref": "Initiative_Tracker (InitiativeID INIT-002)",
+      "hood": null
+    },
+    {
+      "label": "sentiment/communityEngagement/nightlife | Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oak",
+      "ref": "Ripple_Ledger cycle 108 (CauseType initiative-implementation); rendered: world_summary_c108.md \"## What Moved\" > \"### initiative-implementation\"",
+      "hood": null
+    }
+  ],
+  "pointers": [
+    "output/beats/Crime_Metrics.jsonl @C108",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Sgt. Rachel Torres this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "108",
+  "persona": "kai-marston",
+  "byline": "Kai Marston",
+  "bylinePopid": "POP-00158",
+  "article": "output/cron-compare/staged/culture_c108_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Tara Ellison",
+        "role": "quoted-source",
+        "popid": "POP-00546"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "rockridge-tara-ellison-beat-arts",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "I've just been going about my daily life, noticing the usual things in Rockridge like the busy aisles at Canopy Market and the 'For Rent' sign at Denise Simmons' house. As a journalist, I'm used to observing the world around me, but I don't feel like I've seen or felt anything particularly remarkable about myself lately.",
+        "sourceRef": "citizenVoice PRESS Tara Ellison"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-ce66535fc33e",
+    "draftSha256": "656a0d13bf1d53690bb13e91ba2f404518f8a019cb802f36b5fb551d8420e13c",
+    "verdict": "output/cron-compare/culture_c108_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-09-25T23:17:10.511Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:02.610Z"
+}

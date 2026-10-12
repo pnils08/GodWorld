@@ -1,0 +1,44 @@
+◇ injected env (31) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
+
+╔════════════════════════════════════════════════════════════════════╗
+║   Remaining Sheet Header Audit (corrected schemas)                ║
+╚════════════════════════════════════════════════════════════════════╝
+
+Connecting to Google Sheets...
+Connected: Simulation_Narrative
+
+═══════════════════════════════════════════════════════════════
+RESULTS
+═══════════════════════════════════════════════════════════════
+
+✓ Riley_Digest (godWorldEngine2.js (writeDigest_))
+  Writer: 28 cols | Sheet: 28 cols | Rows: 105
+
+✓ Engine_Errors (godWorldEngine2.js (error handler))
+  Writer: 5 cols | Sheet: 10 cols | Rows: 0
+  +5 extra: Class, Source, Severity, Resolved, Hash
+
+✓ Chicago_Citizens (generateChicagoCitizensv1.js)
+  Writer: 10 cols | Sheet: 10 cols | Rows: 124
+
+✓ Election_Log (runCivicElectionsv1.js)
+  Writer: 14 cols | Sheet: 14 cols | Rows: 0
+
+✓ Health_Cause_Queue (healthCauseIntake.js)
+  Writer: 11 cols | Sheet: 11 cols | Rows: 3
+
+✓ Relationship_Bond_Ledger (bondEngine.js (saveV3BondsToLedger_))
+  Writer: 19 cols | Sheet: 19 cols | Rows: 6845
+
+✓ Crime_Metrics (ensureCrimeMetrics.js (CRIME_METRICS_HEADERS))
+  Writer: 7 cols | Sheet: 10 cols | Rows: 22
+  +3 extra: PropertyLevel, ViolentLevel, QolLevel
+
+✓ Transit_Metrics (ensureTransitMetrics.js (TRANSIT_METRICS_HEADERS))
+  Writer: 8 cols | Sheet: 9 cols | Rows: 540
+  +1 extra: Factors
+
+═══════════════════════════════════════════════════════════════
+SUMMARY: 8 aligned, 0 misaligned, 0 not found, 8 total
+═══════════════════════════════════════════════════════════════
+

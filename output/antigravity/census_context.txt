@@ -1,0 +1,1628 @@
+
+--- phase04-events/worldEventsEngine.js:93 ---
+
+  // Recovery suppression
+  var eventSupp = (typeof S.eventSuppression === 'number') ? S.eventSuppression : 1.0;
+  if (!isFinite(eventSupp) || eventSupp <= 0) eventSupp = 1.0;
+  var recoveryLevel = (S.recoveryLevel || 'none').toString();
+
+  // Calendar context
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = !!S.isFirstFriday;
+  var isCreationDay = !!S.isCreationDay;
+
+  var sportsSeason = (S.sportsSeason || "off-season").toString().trim().toLowerCase();
+  var sportsSource = (S.sportsSource || "").toString();
+
+  var IN_SEASON = (sportsSeason !== 'off-season');
+  var makerOverrideSports = (sportsSource === 'config-override');
+  var allowPlayoffFlavor = makerOverrideSports && (sportsSeason === 'playoffs' || sportsSeason === 'post-season');
+  var allowChampFlavor = makerOverrideSports && (sportsSeason === 'championship');
+
+
+--- phase04-events/worldEventsEngine.js:95 ---
+  var eventSupp = (typeof S.eventSuppression === 'number') ? S.eventSuppression : 1.0;
+  if (!isFinite(eventSupp) || eventSupp <= 0) eventSupp = 1.0;
+  var recoveryLevel = (S.recoveryLevel || 'none').toString();
+
+  // Calendar context
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = !!S.isFirstFriday;
+  var isCreationDay = !!S.isCreationDay;
+
+  var sportsSeason = (S.sportsSeason || "off-season").toString().trim().toLowerCase();
+  var sportsSource = (S.sportsSource || "").toString();
+
+  var IN_SEASON = (sportsSeason !== 'off-season');
+  var makerOverrideSports = (sportsSource === 'config-override');
+  var allowPlayoffFlavor = makerOverrideSports && (sportsSeason === 'playoffs' || sportsSeason === 'post-season');
+  var allowChampFlavor = makerOverrideSports && (sportsSeason === 'championship');
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // BASE CATEGORY POOLS (now with _domain tags)
+
+--- phase04-events/worldEventsEngine.js:96 ---
+  if (!isFinite(eventSupp) || eventSupp <= 0) eventSupp = 1.0;
+  var recoveryLevel = (S.recoveryLevel || 'none').toString();
+
+  // Calendar context
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = !!S.isFirstFriday;
+  var isCreationDay = !!S.isCreationDay;
+
+  var sportsSeason = (S.sportsSeason || "off-season").toString().trim().toLowerCase();
+  var sportsSource = (S.sportsSource || "").toString();
+
+  var IN_SEASON = (sportsSeason !== 'off-season');
+  var makerOverrideSports = (sportsSource === 'config-override');
+  var allowPlayoffFlavor = makerOverrideSports && (sportsSeason === 'playoffs' || sportsSeason === 'post-season');
+  var allowChampFlavor = makerOverrideSports && (sportsSeason === 'championship');
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // BASE CATEGORY POOLS (now with _domain tags)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+--- phase04-events/generateGameModeMicroEvents.js:99 ---
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = !!S.isFirstFriday;
+  var isCreationDay = !!S.isCreationDay;
+  // Sports atmosphere only when Maker-declared (S302 gate). Neutral is "" —
+  // must not match ANY season pool here, including offseasonPool (inventing
+  // "slower offseason pace" texture is as wrong as inventing playoff fever).
+  var sportsSeason = (S.sportsAtmosphereEnabled === true) ? (S.sportsSeason || "off-season") : "";
+
+  var calendarTags = (function() {
+    var t = [];
+    if (holiday !== "none") t.push("holiday:" + holiday);
+    if (holidayPriority !== "none") t.push("holidayPriority:" + holidayPriority);
+    if (isFirstFriday) t.push("firstFriday");
+    if (isCreationDay) t.push("creationDay");
+    if (sportsSeason && sportsSeason !== "off-season") t.push("sportsSeason:" + sportsSeason);
+    return t;
+  })();
+
+  function mergeTags(a, b) {
+
+--- phase04-events/generateGameModeMicroEvents.js:419 ---
+        pool = pool.concat(civicWork, civicPublic, civicPersonal, staffPool);
+        break;
+      default:
+        break;
+    }
+
+    // Phase 15.5: Trait-specific events for MLB players
+    if (traitProfile && citizenType.indexOf("mlb-") === 0) {
+      var archetype = traitProfile.split("/")[0];
+      if (archetype && traitPools[archetype]) {
+        pool = pool.concat(traitPools[archetype]);
+      }
+    }
+
+    if (citizenType.indexOf("mlb-") === 0) {
+      if (sportsSeason === "championship") pool = pool.concat(championshipPool);
+      else if (sportsSeason === "playoffs" || sportsSeason === "post-season") pool = pool.concat(playoffPool);
+      else if (sportsSeason === "off-season") pool = pool.concat(offseasonPool);
+    }
+
+
+--- phase04-events/generateGameModeMicroEvents.js:420 ---
+        break;
+      default:
+        break;
+    }
+
+    // Phase 15.5: Trait-specific events for MLB players
+    if (traitProfile && citizenType.indexOf("mlb-") === 0) {
+      var archetype = traitProfile.split("/")[0];
+      if (archetype && traitPools[archetype]) {
+        pool = pool.concat(traitPools[archetype]);
+      }
+    }
+
+    if (citizenType.indexOf("mlb-") === 0) {
+      if (sportsSeason === "championship") pool = pool.concat(championshipPool);
+      else if (sportsSeason === "playoffs" || sportsSeason === "post-season") pool = pool.concat(playoffPool);
+      else if (sportsSeason === "off-season") pool = pool.concat(offseasonPool);
+    }
+
+    if (holiday !== "none" && holidayPublicPool[holiday]) {
+
+--- phase04-events/generateGameModeMicroEvents.js:421 ---
+      default:
+        break;
+    }
+
+    // Phase 15.5: Trait-specific events for MLB players
+    if (traitProfile && citizenType.indexOf("mlb-") === 0) {
+      var archetype = traitProfile.split("/")[0];
+      if (archetype && traitPools[archetype]) {
+        pool = pool.concat(traitPools[archetype]);
+      }
+    }
+
+    if (citizenType.indexOf("mlb-") === 0) {
+      if (sportsSeason === "championship") pool = pool.concat(championshipPool);
+      else if (sportsSeason === "playoffs" || sportsSeason === "post-season") pool = pool.concat(playoffPool);
+      else if (sportsSeason === "off-season") pool = pool.concat(offseasonPool);
+    }
+
+    if (holiday !== "none" && holidayPublicPool[holiday]) {
+      pool = pool.concat(
+
+--- phase04-events/generateGameModeMicroEvents.js:502 ---
+
+    var citizenType = getCitizenType_(row);
+
+    var chance = 0.04;
+    if (tier === 1) chance += 0.02;
+    else if (tier === 2) chance += 0.01;
+
+    if (weather.impact >= 1.3) chance += 0.005;
+    if (chaos.length > 0) chance += 0.01;
+    if (Math.abs(dynamics.sentiment || 0) >= 0.3) chance += 0.01;
+
+    if (holidayPriority === "major" || holidayPriority === "oakland") chance += 0.01;
+    if (isFirstFriday) chance += 0.005;
+
+    if (citizenType.indexOf("mlb-") === 0) {
+      if (sportsSeason === "championship") chance += 0.02;
+      else if (sportsSeason === "playoffs" || sportsSeason === "post-season") chance += 0.015;
+      else if (sportsSeason === "regular") chance += 0.01;
+    }
+
+
+--- phase04-events/generateGameModeMicroEvents.js:503 ---
+    var citizenType = getCitizenType_(row);
+
+    var chance = 0.04;
+    if (tier === 1) chance += 0.02;
+    else if (tier === 2) chance += 0.01;
+
+    if (weather.impact >= 1.3) chance += 0.005;
+    if (chaos.length > 0) chance += 0.01;
+    if (Math.abs(dynamics.sentiment || 0) >= 0.3) chance += 0.01;
+
+    if (holidayPriority === "major" || holidayPriority === "oakland") chance += 0.01;
+    if (isFirstFriday) chance += 0.005;
+
+    if (citizenType.indexOf("mlb-") === 0) {
+      if (sportsSeason === "championship") chance += 0.02;
+      else if (sportsSeason === "playoffs" || sportsSeason === "post-season") chance += 0.015;
+      else if (sportsSeason === "regular") chance += 0.01;
+    }
+
+    // engine.32 T5 — Out-and-About dial scales public-figure micro-event
+
+--- phase04-events/generateGameModeMicroEvents.js:504 ---
+
+    var chance = 0.04;
+    if (tier === 1) chance += 0.02;
+    else if (tier === 2) chance += 0.01;
+
+    if (weather.impact >= 1.3) chance += 0.005;
+    if (chaos.length > 0) chance += 0.01;
+    if (Math.abs(dynamics.sentiment || 0) >= 0.3) chance += 0.01;
+
+    if (holidayPriority === "major" || holidayPriority === "oakland") chance += 0.01;
+    if (isFirstFriday) chance += 0.005;
+
+    if (citizenType.indexOf("mlb-") === 0) {
+      if (sportsSeason === "championship") chance += 0.02;
+      else if (sportsSeason === "playoffs" || sportsSeason === "post-season") chance += 0.015;
+      else if (sportsSeason === "regular") chance += 0.01;
+    }
+
+    // engine.32 T5 — Out-and-About dial scales public-figure micro-event
+    // frequency (0.5..1.5). null bands (no DialState) -> base rates unchanged.
+
+--- phase04-events/generateGenericCitizenMicroEvent.js:331 ---
+    if (prevCityEvs.length > 0 && prevCityEvs[0] && prevCityEvs[0].name) {
+      prevEvePool.push("heard about " + prevCityEvs[0].name + " from last night");
+      if (prevCityEvs.length > 1 && prevCityEvs[1] && prevCityEvs[1].name) {
+        prevEvePool.push("caught talk of " + prevCityEvs[1].name + (prevCityEvs[1].neighborhood ? " in " + prevCityEvs[1].neighborhood : ""));
+      }
+    }
+  }
+
+  // Build basePool
+  var basePool = base
+    .concat(seasonal, weatherPool, moodPool, chaosPool, sentimentPool, econPool, culturalActivityPool, communityPool, prevEvePool);
+
+  if (holiday !== "none" && holidayPools[holiday]) basePool = basePool.concat(holidayPools[holiday]);
+  if (isFirstFriday) basePool = basePool.concat(firstFridayPool);
+  if (isCreationDay) basePool = basePool.concat(creationDayPool);
+  if (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) basePool = basePool.concat(sportsSeasonPools[sportsSeason]);
+
+  var artsNeighborhoods = hoodNamesWithScene_(ctx, 'arts'); // engine.148 P3 — Neighborhood_Map.Scenes
+
+  // Fast tag lookup using indexOf (ES5 compatible)
+
+--- phase04-events/generateGenericCitizenMicroEvent.js:337 ---
+  }
+
+  // Build basePool
+  var basePool = base
+    .concat(seasonal, weatherPool, moodPool, chaosPool, sentimentPool, econPool, culturalActivityPool, communityPool, prevEvePool);
+
+  if (holiday !== "none" && holidayPools[holiday]) basePool = basePool.concat(holidayPools[holiday]);
+  if (isFirstFriday) basePool = basePool.concat(firstFridayPool);
+  if (isCreationDay) basePool = basePool.concat(creationDayPool);
+  if (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) basePool = basePool.concat(sportsSeasonPools[sportsSeason]);
+
+  var artsNeighborhoods = hoodNamesWithScene_(ctx, 'arts'); // engine.148 P3 — Neighborhood_Map.Scenes
+
+  // Fast tag lookup using indexOf (ES5 compatible)
+  var holidayPoolArr = (holiday !== "none" && holidayPools[holiday]) ? holidayPools[holiday] : [];
+  var sportsPoolArr = (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) ? sportsSeasonPools[sportsSeason] : [];
+
+  // NEW: global per-cycle uniqueness (citywide) - using object for ES5 compatibility
+  var usedGlobalObj = Object.create(null);
+
+
+--- phase04-events/generateGenericCitizenMicroEvent.js:433 ---
+    if (econMood <= 35 || econMood >= 65) chance += 0.005;
+    if (chaos.length > 0) chance += 0.015;
+
+    if (holidayPriority === "major") chance += 0.015;
+    else if (holidayPriority === "oakland") chance += 0.015;
+    else if (holidayPriority === "cultural") chance += 0.012;
+    else if (holidayPriority === "minor") chance += 0.008;
+
+    if (isFirstFriday) {
+      chance += 0.012;
+      if (artsNeighborhoods.indexOf(neighborhood) >= 0) chance += 0.01;
+    }
+
+    if (isCreationDay) chance += 0.008;
+
+    if (sportsSeason === "championship") chance += 0.012;
+    else if (sportsSeason === "playoffs" || sportsSeason === "post-season") chance += 0.008;
+
+    if ((dynamics.culturalActivity || 1) >= 1.4) chance += 0.008;
+    if ((dynamics.communityEngagement || 1) >= 1.3) chance += 0.005;
+
+--- phase04-events/generateGenericCitizenMicroEvent.js:434 ---
+    if (chaos.length > 0) chance += 0.015;
+
+    if (holidayPriority === "major") chance += 0.015;
+    else if (holidayPriority === "oakland") chance += 0.015;
+    else if (holidayPriority === "cultural") chance += 0.012;
+    else if (holidayPriority === "minor") chance += 0.008;
+
+    if (isFirstFriday) {
+      chance += 0.012;
+      if (artsNeighborhoods.indexOf(neighborhood) >= 0) chance += 0.01;
+    }
+
+    if (isCreationDay) chance += 0.008;
+
+    if (sportsSeason === "championship") chance += 0.012;
+    else if (sportsSeason === "playoffs" || sportsSeason === "post-season") chance += 0.008;
+
+    if ((dynamics.culturalActivity || 1) >= 1.4) chance += 0.008;
+    if ((dynamics.communityEngagement || 1) >= 1.3) chance += 0.005;
+
+
+--- phase05-citizens/generateCitizensEvents.js:800 ---
+    var out = [];
+    function add(t) { if (t && !seen[t]) { seen[t] = true; out.push(t); } }
+    var base = baseTags || [];
+    var extra = extraTags || [];
+    for (var bi = 0; bi < base.length; bi++) { add(base[bi]); }
+    for (var ei = 0; ei < extra.length; ei++) { add(extra[ei]); }
+    return out;
+  }
+
+  var calendarTags = (function() {
+    var tags = [];
+    if (holiday !== "none") tags.push("holiday:" + holiday);
+    if (holidayPriority !== "none") tags.push("holidayPriority:" + holidayPriority);
+    if (isFirstFriday) tags.push("firstFriday");
+    if (isCreationDay) tags.push("creationDay");
+    if (sportsSeason && sportsSeason !== "off-season") tags.push("sportsSeason:" + sportsSeason);
+    return tags;
+  })();
+
+  function primaryFromTags(tags) {
+
+--- phase05-citizens/generateCitizensEvents.js:2440 ---
+
+    if (isFirstFriday) {
+      for (var ffi2 = 0; ffi2 < firstFridayPool.length; ffi2++) {
+        var ffEntry = firstFridayPool[ffi2];
+        pool.push(makeEntry(ffEntry.text, mergeTags(ffEntry.tags, calendarTags), ffEntry.weight, false));
+      }
+    }
+
+    if (isCreationDay) {
+      for (var cdi2 = 0; cdi2 < creationDayPool.length; cdi2++) {
+        var cdEntry = creationDayPool[cdi2];
+        pool.push(makeEntry(cdEntry.text, mergeTags(cdEntry.tags, calendarTags), cdEntry.weight, false));
+      }
+    }
+
+    if (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) {
+      var sTexts = sportsSeasonPools[sportsSeason];
+      for (var si = 0; si < sTexts.length; si++) {
+        pool.push(makeEntry(sTexts[si], mergeTags(["source:sports"], calendarTags), 1.05, false));
+      }
+
+--- phase05-citizens/checkForPromotions.js:444 ---
+      }
+    }
+
+    if (isFirstFriday) {
+      if (artsNeighborhoods.indexOf(neigh) >= 0) {
+        context += "First Friday art walk brought them into the spotlight. ";
+      } else {
+        context += "First Friday energy rippled across the city. ";
+      }
+    }
+
+    if (isCreationDay) {
+      context += "Creation Day marked their entry into Oakland's story. ";
+    }
+
+    if (sportsSeason === "championship") {
+      context += "Championship excitement elevated community visibility. ";
+    } else if (sportsSeason === "playoffs") {
+      context += "Playoff energy increased neighborhood activity. ";
+    }
+
+--- phase05-citizens/checkForPromotions.js:446 ---
+
+    if (isFirstFriday) {
+      if (artsNeighborhoods.indexOf(neigh) >= 0) {
+        context += "First Friday art walk brought them into the spotlight. ";
+      } else {
+        context += "First Friday energy rippled across the city. ";
+      }
+    }
+
+    if (isCreationDay) {
+      context += "Creation Day marked their entry into Oakland's story. ";
+    }
+
+    if (sportsSeason === "championship") {
+      context += "Championship excitement elevated community visibility. ";
+    } else if (sportsSeason === "playoffs") {
+      context += "Playoff energy increased neighborhood activity. ";
+    }
+
+    if (dynamics.culturalActivity >= 1.4) {
+
+--- phase05-citizens/bondPersistence.js:339 ---
+    if (b.status === 'active') counts.active++;
+    else if (b.status === 'dormant') counts.dormant++;
+    else if (b.status === 'resolved') counts.resolved++;
+    else if (b.status === 'severed') counts.severed++;
+
+    // Count by type
+    var type = b.bondType || 'unknown';
+    counts.byType[type] = (counts.byType[type] || 0) + 1;
+
+    // v2.1: Count by calendar context
+    if (b.holiday && b.holiday !== 'none') {
+      counts.byHoliday[b.holiday] = (counts.byHoliday[b.holiday] || 0) + 1;
+    }
+    if (b.isFirstFriday) counts.firstFridayBonds++;
+    if (b.isCreationDay) counts.creationDayBonds++;
+    if (b.sportsSeason && b.sportsSeason !== 'off-season') {
+      counts.bySportsSeason[b.sportsSeason] = (counts.bySportsSeason[b.sportsSeason] || 0) + 1;
+    }
+  }
+
+
+--- phase05-citizens/bondPersistence.js:550 ---
+      result.push(b);
+    }
+  }
+  return result;
+}
+
+
+/**
+ * Get all bonds formed during a specific sports season.
+ */
+function getBondsBySportsSeason_(ctx, sportsSeason) {
+  var bonds = ctx.summary.relationshipBonds || [];
+  var result = [];
+  for (var i = 0; i < bonds.length; i++) {
+    var b = bonds[i];
+    if (b && b.sportsSeason === sportsSeason) {
+      result.push(b);
+    }
+  }
+  return result;
+
+--- phase05-citizens/generateMediaModeEvents.js:157 ---
+
+    return pool;
+  }
+
+  function buildColumnistPool_() {
+    var pool = [];
+
+    pool.push(
+      ev("stared at a blank page for twenty minutes before the column came", ["media:columnist", "type:writing"], "Media"),
+      ev("filed a column that landed harder than expected", ["media:columnist", "type:writing"], "Media"),
+      ev("argued with an editor about word count", ["media:columnist", "type:internal"], "Media"),
+      ev("reread old columns looking for a thread to pull", ["media:columnist", "type:reflection"], "Personal"),
+      ev("took notes at the game, listening to the crowd more than the commentary", ["media:columnist", "type:observation"], "Media")
+    );
+
+    if (sportsSeason !== "off-season") {
+      pool.push(
+        ev("worked on a piece connecting the team's season to something larger", ["media:columnist", "type:sports"], "Media"),
+        ev("watched film of the last series, looking for the detail everyone missed", ["media:columnist", "type:sports"], "Media")
+      );
+
+--- phase05-citizens/generateMediaModeEvents.js:217 ---
+    }
+
+    return pool;
+  }
+
+  function buildPodcastHostPool_() {
+    var pool = [];
+
+    pool.push(
+      ev("recorded a segment that went long because the guest wouldn't stop talking", ["media:podcast", "type:production"], "Media"),
+      ev("edited audio for two hours trying to find the right cut", ["media:podcast", "type:production"], "Media"),
+      ev("booked a guest who's been avoiding the press", ["media:podcast", "type:sourcing"], "Media"),
+      ev("reviewed listener feedback and adjusted the format", ["media:podcast", "type:audience"], "Media")
+    );
+
+    if (sportsSeason !== "off-season") {
+      pool.push(ev("planned an episode around the latest series", ["media:podcast", "type:sports"], "Media"));
+    }
+
+    return pool;
+
+--- phase05-citizens/generateMediaModeEvents.js:286 ---
+    ev("stayed late at the newsroom, watching the city go dark through the window", ["type:personal"], "Personal"),
+    ev("skipped lunch and didn't notice until 4 PM", ["type:personal"], "Personal"),
+    ev("walked home through the neighborhood instead of driving", ["type:personal"], "Personal"),
+    ev("thought about whether the work still matters the way it used to", ["type:personal"], "Personal")
+  ];
+
+  var holidayPool = [];
+  if (holiday !== "none") {
+    holidayPool.push(
+      ev("covered the " + (S.holidayLabel || holiday) + " celebrations across the city", ["type:holiday", "holiday:" + holiday], "Media"),
+      ev("filed a " + (S.holidayLabel || holiday) + " feature with more feeling than usual", ["type:holiday", "holiday:" + holiday], "Media")
+    );
+  }
+
+  var sportsPool = [];
+  if (sportsSeason !== "off-season") {
+    sportsPool.push(
+      ev("followed the A's series from the press box", ["type:sports"], "Media"),
+      ev("caught a detail in the dugout that nobody else saw", ["type:sports"], "Media")
+    );
+
+--- phase05-citizens/generateGenericCitizens.js:700 ---
+      }
+    }
+
+    if (isFirstFriday) {
+      if (artsNeighborhoods.indexOf(neighborhood) >= 0) {
+        worldContext += " First Friday's creative energy drew them to the arts district.";
+      } else {
+        worldContext += " First Friday evening welcomed new faces.";
+      }
+    }
+
+    if (isCreationDay) {
+      worldContext += " Creation Day marked their entry into Oakland's story.";
+    }
+
+    if (sportsSeason === "championship") {
+      worldContext += " Championship fever filled the city.";
+    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+      worldContext += " Playoff excitement energized the city.";
+    }
+
+--- phase05-citizens/generateGenericCitizens.js:702 ---
+
+    if (isFirstFriday) {
+      if (artsNeighborhoods.indexOf(neighborhood) >= 0) {
+        worldContext += " First Friday's creative energy drew them to the arts district.";
+      } else {
+        worldContext += " First Friday evening welcomed new faces.";
+      }
+    }
+
+    if (isCreationDay) {
+      worldContext += " Creation Day marked their entry into Oakland's story.";
+    }
+
+    if (sportsSeason === "championship") {
+      worldContext += " Championship fever filled the city.";
+    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+      worldContext += " Playoff excitement energized the city.";
+    }
+
+    if (dynamics.culturalActivity >= 1.4) {
+
+--- phase05-citizens/bondEngine.js:835 ---
+    // maintained or not. One party present fades it by half the full rate; neither, the full rate.
+    // engine.178 (S438): WARMTH IS MAINTENANCE — a warm pair's neglected bond fades slower
+    // (x0.75 at +2/+2), a cold pair's faster (x1.25) (doctrine §11: marriage is years of a
+    // MAINTAINED bond).
+    if (!(aActive && bActive)) {
+      var fadeRate = (aActive || bActive) ? BOND_FADE_ONE_ABSENT : BOND_FADE_BOTH_ABSENT;
+      intensity -= fadeRate * (2 - bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB));
+    }
+
+    // v2.2: Festival bonds decay faster outside festivals
+    if (bond.bondType === BOND_TYPES.FESTIVAL && holiday === 'none') {
+      intensity -= 0.3;
+    }
+
+    // v2.2: Sports rivalries decay in off-season
+    if (bond.bondType === BOND_TYPES.SPORTS_RIVAL && sportsSeason === 'off-season') {
+      intensity -= 0.4;
+    }
+
+    if (intensity < 0) intensity = 0;
+
+--- phase05-citizens/bondEngine.js:1207 ---
+      // draw scales with the week's intensity; the hoods are where the sport is (S.sportsZones)
+      var sportsCityB = (ctx.summary && ctx.summary.sportsCity) || {};
+      if (typeof sportsBandAtLeast_ === 'function' && sportsBandAtLeast_(sportsCityB, 'high')) {
+        var sportsHoods = (ctx.summary && ctx.summary.sportsZones) || [];
+        var inSportsZone = sportsHoods.indexOf(nhA) >= 0 || sportsHoods.indexOf(nhB) >= 0;
+
+        if (inSportsZone && rng() < 0.3 * Math.min(1, Number(sportsCityB.intensity) || 0)) {
+          newBonds.push(makeBond_(
+            citizenA, citizenB,
+            BOND_TYPES.SPORTS_RIVAL,
+            BOND_ORIGINS.SPORTS_SEASON,
+            'SPORTS',
+            nhA || nhB || 'Jack London',
+            5,
+            currentCycle,
+            sportsSeason === 'championship' ? 'Championship rivalry sparked.' : 'Playoff debate turned heated.',
+            ctx
+          ));
+          bondsCreated++;
+          continue;
+
+--- phase06-analysis/applyShockMonitor.js:142 ---
+  if (travelHolidays.indexOf(holiday) >= 0) {
+    migrationThresholdMod += 50;
+  }
+
+  if (crowdHolidays.indexOf(holiday) >= 0) {
+    chaosThresholdMod += 2;
+  }
+
+  if (isFirstFriday) {
+    eventThresholdMod += 2;
+    chaosThresholdMod += 1;
+  }
+
+  // Sports: only apply big shock boosts when Maker override is active
+  if (sportsIsOverride) {
+    if (sportsSeason === "championship") {
+      eventThresholdMod += 4;
+      chaosThresholdMod += 3;
+      migrationThresholdMod += 60;
+    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+
+--- phase06-analysis/applyShockMonitor.js:146 ---
+  if (crowdHolidays.indexOf(holiday) >= 0) {
+    chaosThresholdMod += 2;
+  }
+
+  if (isFirstFriday) {
+    eventThresholdMod += 2;
+    chaosThresholdMod += 1;
+  }
+
+  // Sports: only apply big shock boosts when Maker override is active
+  if (sportsIsOverride) {
+    if (sportsSeason === "championship") {
+      eventThresholdMod += 4;
+      chaosThresholdMod += 3;
+      migrationThresholdMod += 60;
+    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+      eventThresholdMod += 2;
+      chaosThresholdMod += 2;
+      migrationThresholdMod += 40;
+    }
+
+--- phase06-analysis/applyShockMonitor.js:323 ---
+  // engine.187 part 4: CRISIS saturation stays — that measures crisis coverage crowding out the
+  // rest, which is a real signal. Generic `coverageIntensity === "saturated"` is cut: it reads
+  // "the newsroom is busy", which in a 600-event city is every cycle (saturated 8 of 8 on bench,
+  // 90 of 103 live Media_Ledger rows per engine.227), and it fed a loop — the shock flag added
+  // +0.3 to that same intensity in mediaFeedbackEngine, so each flag helped re-arm itself.
+  if (mediaEffects.crisisSaturation && mediaEffects.crisisSaturation >= 0.8) { shock = true; shockReasons.push("media crisis saturation"); }
+
+  // 13) CALENDAR-SPECIFIC SHOCKS — engine.38 B3: dead-zone is <10% of normal
+  // volume on a major holiday (was absolute <5, unreachable at high volume).
+  if (holidayPriority === "major" && curEvents < Math.max(5, eventRef * 0.10) && curChaos === 0) {
+    shock = true;
+    shockReasons.push("holiday dead-zone");
+  }
+
+  // Only apply "championship tension" when override is active
+  if (sportsIsOverride && sportsSeason === "championship" && curSent <= -0.4) {
+    shock = true;
+    shockReasons.push("championship tension");
+  }
+
+
+--- phase06-analysis/economicRippleEngine.js:1045 ---
+      localMood += Math.min(8, 8 * (Number(vwk.unsigned) || 0) * (Number(vwk.venueShare) || 0));
+    }
+    
+    localMood = Math.round(Math.max(0, Math.min(100, localMood)) * 100) / 100;
+    
+    var desc = describeHoodEconomy_(localMood);
+    
+    nhEconomies[nh] = {
+      mood: localMood,
+      descriptor: desc,
+      activeRipples: localRipples,
+      sectors: profile.primary,
+      isHolidayZone: holidayZones.indexOf(nh) >= 0,
+      // T7: a set, not a string — during the changeover the city has live sport
+      // in two districts at once.
+      isSportsZone: (cal.sportsZones || []).indexOf(nh) >= 0 && cal.sportsSeason !== 'off-season'
+    };
+  }
+  
+  S.neighborhoodEconomies = nhEconomies;
+
+--- phase07-evening-media/culturalLedger.js:361 ---
+  var iLastHoliday = col('LastSeenHoliday');
+  var iCalendarContext = col('CalendarContext');
+  var iUniverse = col('UniverseLinks');
+
+  // v2.6: POPID cross-ref for UniverseLinks (col H) — resolved once per call,
+  // used by both the CREATE row and the UPDATE empty-cell backfill below.
+  var popId = resolveLedgerPopId_(ctx, name);
+
+  // Build calendar context string (v2.2) — hoisted, referenced from both
+  // first-call and registry-hit branches below.
+  function buildCalendarContext_() {
+    var parts = [];
+    if (holiday !== "none") parts.push(holiday);
+    if (isFirstFriday) parts.push("FirstFriday");
+    if (isCreationDay) parts.push("CreationDay");
+    if (sportsSeason !== "off-season") parts.push(sportsSeason);
+    return parts.join(", ") || "";
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+
+--- phase07-evening-media/textureTriggers.js:272 ---
+  if (isFirstFriday) {
+    cappedPush(makeTrigger('ARTS', 'Uptown', 'gallery_crawl', 'Gallery doors open, art enthusiasts flowing between venues', 'high'));
+    cappedPush(makeTrigger('ARTS', 'KONO', 'street_art_energy', 'Creative energy spilling into the streets', 'high'));
+    cappedPush(makeTrigger('ARTS', 'Temescal', 'art_walk_crowds', 'Art walk crowds browsing galleries', 'moderate'));
+    cappedPush(makeTrigger('NIGHTLIFE', 'Uptown', 'wine_and_art', 'Wine glasses and art conversations', 'moderate'));
+    cappedPush(makeTrigger('COMMUNITY', '', 'creative_buzz', 'Creative community buzz throughout Oakland', 'moderate'));
+  }
+
+  if (isCreationDay) {
+    cappedPush(makeTrigger('CIVIC', 'Downtown', 'founders_ceremony', 'Founders ceremony preparations', 'moderate'));
+    cappedPush(makeTrigger('COMMUNITY', 'West Oakland', 'heritage_walks', 'Heritage walking tours in progress', 'moderate'));
+    cappedPush(makeTrigger('CIVIC', '', 'oakland_history', 'Oakland history on display', 'moderate'));
+    cappedPush(makeTrigger('COMMUNITY', 'Lake Merritt', 'community_gathering', 'Community gathering to celebrate Oakland', 'moderate'));
+  }
+
+  if (sportsSeason === 'championship') {
+    cappedPush(makeTrigger('SPORTS', 'Jack London', 'championship_fever', 'Championship fever gripping the waterfront', 'high'));
+    cappedPush(makeTrigger('SPORTS', 'Downtown', 'championship_anticipation', 'City-wide championship anticipation', 'high'));
+    cappedPush(makeTrigger('SPORTS', '', 'team_colors_everywhere', 'Team colors visible on every block', 'high'));
+    cappedPush(makeTrigger('COMMUNITY', '', 'united_fanbase', 'City united behind the team', 'high'));
+
+--- phase07-evening-media/textureTriggers.js:277 ---
+    cappedPush(makeTrigger('COMMUNITY', '', 'creative_buzz', 'Creative community buzz throughout Oakland', 'moderate'));
+  }
+
+  if (isCreationDay) {
+    cappedPush(makeTrigger('CIVIC', 'Downtown', 'founders_ceremony', 'Founders ceremony preparations', 'moderate'));
+    cappedPush(makeTrigger('COMMUNITY', 'West Oakland', 'heritage_walks', 'Heritage walking tours in progress', 'moderate'));
+    cappedPush(makeTrigger('CIVIC', '', 'oakland_history', 'Oakland history on display', 'moderate'));
+    cappedPush(makeTrigger('COMMUNITY', 'Lake Merritt', 'community_gathering', 'Community gathering to celebrate Oakland', 'moderate'));
+  }
+
+  if (sportsSeason === 'championship') {
+    cappedPush(makeTrigger('SPORTS', 'Jack London', 'championship_fever', 'Championship fever gripping the waterfront', 'high'));
+    cappedPush(makeTrigger('SPORTS', 'Downtown', 'championship_anticipation', 'City-wide championship anticipation', 'high'));
+    cappedPush(makeTrigger('SPORTS', '', 'team_colors_everywhere', 'Team colors visible on every block', 'high'));
+    cappedPush(makeTrigger('COMMUNITY', '', 'united_fanbase', 'City united behind the team', 'high'));
+  } else if (sportsSeason === 'playoffs') {
+    cappedPush(makeTrigger('SPORTS', 'Jack London', 'playoff_energy', 'Playoff energy at sports bars and venues', 'high'));
+    cappedPush(makeTrigger('SPORTS', 'Downtown', 'watch_party_crowds', 'Watch party crowds gathering', 'moderate'));
+    cappedPush(makeTrigger('SPORTS', '', 'playoff_buzz', 'Playoff buzz in conversations citywide', 'moderate'));
+  } else if (sportsSeason === 'late-season') {
+
+--- phase07-evening-media/textureTriggers.js:281 ---
+    cappedPush(makeTrigger('CIVIC', 'Downtown', 'founders_ceremony', 'Founders ceremony preparations', 'moderate'));
+    cappedPush(makeTrigger('COMMUNITY', 'West Oakland', 'heritage_walks', 'Heritage walking tours in progress', 'moderate'));
+    cappedPush(makeTrigger('CIVIC', '', 'oakland_history', 'Oakland history on display', 'moderate'));
+    cappedPush(makeTrigger('COMMUNITY', 'Lake Merritt', 'community_gathering', 'Community gathering to celebrate Oakland', 'moderate'));
+  }
+
+  if (sportsSeason === 'championship') {
+    cappedPush(makeTrigger('SPORTS', 'Jack London', 'championship_fever', 'Championship fever gripping the waterfront', 'high'));
+    cappedPush(makeTrigger('SPORTS', 'Downtown', 'championship_anticipation', 'City-wide championship anticipation', 'high'));
+    cappedPush(makeTrigger('SPORTS', '', 'team_colors_everywhere', 'Team colors visible on every block', 'high'));
+    cappedPush(makeTrigger('COMMUNITY', '', 'united_fanbase', 'City united behind the team', 'high'));
+  } else if (sportsSeason === 'playoffs') {
+    cappedPush(makeTrigger('SPORTS', 'Jack London', 'playoff_energy', 'Playoff energy at sports bars and venues', 'high'));
+    cappedPush(makeTrigger('SPORTS', 'Downtown', 'watch_party_crowds', 'Watch party crowds gathering', 'moderate'));
+    cappedPush(makeTrigger('SPORTS', '', 'playoff_buzz', 'Playoff buzz in conversations citywide', 'moderate'));
+  } else if (sportsSeason === 'late-season') {
+    cappedPush(makeTrigger('SPORTS', 'Jack London', 'pennant_race', 'Pennant race tension building', 'moderate'));
+    cappedPush(makeTrigger('SPORTS', '', 'sports_chatter', 'Elevated sports chatter in the city', 'low'));
+  }
+
+
+--- phase07-evening-media/buildMediaPacket.js:369 ---
+  pkt.push('SummaryLine: ' + (s.compressedLine || '(none)'));
+
+  // v2.2: Calendar editorial hints
+  if (holiday !== 'none' && holidayPriority === 'major') {
+    pkt.push('MAJOR HOLIDAY - expect holiday-themed coverage');
+  }
+  if (holiday !== 'none' && holidayPriority === 'oakland') {
+    pkt.push('OAKLAND CELEBRATION - the city marking one of its own days');
+  }
+  if (isFirstFriday) {
+    pkt.push('FIRST FRIDAY - arts & culture focus');
+  }
+  if (isCreationDay) {
+    pkt.push('CREATION DAY - Oakland history & heritage angle');
+  }
+  if (sportsSeason === 'championship') {
+    pkt.push('CHAMPIONSHIP SEASON - sports fever citywide');
+  }
+  if (sportsSeason === 'playoffs') {
+    pkt.push('PLAYOFF SEASON - heightened sports attention');
+
+--- phase07-evening-media/buildMediaPacket.js:372 ---
+  if (holiday !== 'none' && holidayPriority === 'major') {
+    pkt.push('MAJOR HOLIDAY - expect holiday-themed coverage');
+  }
+  if (holiday !== 'none' && holidayPriority === 'oakland') {
+    pkt.push('OAKLAND CELEBRATION - the city marking one of its own days');
+  }
+  if (isFirstFriday) {
+    pkt.push('FIRST FRIDAY - arts & culture focus');
+  }
+  if (isCreationDay) {
+    pkt.push('CREATION DAY - Oakland history & heritage angle');
+  }
+  if (sportsSeason === 'championship') {
+    pkt.push('CHAMPIONSHIP SEASON - sports fever citywide');
+  }
+  if (sportsSeason === 'playoffs') {
+    pkt.push('PLAYOFF SEASON - heightened sports attention');
+  }
+  pkt.push('');
+
+
+--- phase07-evening-media/buildEveningFood.js:121 ---
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FAST FOOD — the ledger's quick-service rows. One tracked chain is one name.
+  // ═══════════════════════════════════════════════════════════════════════════
+  var fastCandidates = dedupeByName_(index.fast);
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PICK FINAL OUTPUT
+  // ═══════════════════════════════════════════════════════════════════════════
+  var restaurantCount = rng() < 0.3 ? 3 : 2;
+  if (holidayPriority === "major" || holidayPriority === "oakland") restaurantCount = 3;
+  if (isFirstFriday) restaurantCount = 3;
+  if (sportsBand === "top") restaurantCount = 4;
+
+  var selectedRestaurants = weightedDrawWithoutReplacement_(candidates, weight, restaurantCount, rng);
+  var selectedFast = weightedDrawWithoutReplacement_(fastCandidates, {}, sportsSeason !== "off-season" ? 2 : 1, rng);
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // BUILD TREND DESCRIPTION (v2.2 - calendar-aware)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+--- phase07-evening-media/buildEveningFood.js:136 ---
+  var selectedFast = weightedDrawWithoutReplacement_(fastCandidates, {}, sportsSeason !== "off-season" ? 2 : 1, rng);
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // BUILD TREND DESCRIPTION (v2.2 - calendar-aware)
+  // ═══════════════════════════════════════════════════════════════════════════
+  var trend = "Standard evening dining rhythm";
+
+  if (holiday === "Thanksgiving") {
+    trend = "Thanksgiving feast dining - family gatherings";
+  } else if (holiday === "Holiday" || holiday === "NewYearsEve") {
+    trend = "Holiday celebration dining - festive atmosphere";
+  } else if (isFirstFriday) {
+    trend = "First Friday arts district dining - gallery crowd";
+  } else if (isCreationDay) {
+    trend = "Creation Day community dining - local roots";
+  } else if (sportsSeason === "championship") {
+    trend = "Championship fever dining - game day crowds";
+  } else if (sportsSeason === "playoffs") {
+    trend = "Playoff tension dining - sports bar surge";
+  } else if (chaos.length > 0) {
+
+--- phase07-evening-media/buildEveningFood.js:138 ---
+  // ═══════════════════════════════════════════════════════════════════════════
+  // BUILD TREND DESCRIPTION (v2.2 - calendar-aware)
+  // ═══════════════════════════════════════════════════════════════════════════
+  var trend = "Standard evening dining rhythm";
+
+  if (holiday === "Thanksgiving") {
+    trend = "Thanksgiving feast dining - family gatherings";
+  } else if (holiday === "Holiday" || holiday === "NewYearsEve") {
+    trend = "Holiday celebration dining - festive atmosphere";
+  } else if (isFirstFriday) {
+    trend = "First Friday arts district dining - gallery crowd";
+  } else if (isCreationDay) {
+    trend = "Creation Day community dining - local roots";
+  } else if (sportsSeason === "championship") {
+    trend = "Championship fever dining - game day crowds";
+  } else if (sportsSeason === "playoffs") {
+    trend = "Playoff tension dining - sports bar surge";
+  } else if (chaos.length > 0) {
+    trend = "High mobility / civic-tension food trend";
+  } else if (nightlife >= 7) {
+
+--- phase07-evening-media/buildEveningMedia.js:394 ---
+    var nameShows = [
+      "The " + featuredName + " Interview",
+      featuredName + ": In Focus",
+      "One-on-One with " + featuredName,
+      featuredName + " — Player Profile",
+      "Film Room with " + featuredName
+    ];
+    tv.push(pickRandom(nameShows));
+  }
+
+  // Sports broadcast
+  var sportsShow = "";
+  if (sports && sports !== "(none)") {
+    sportsShow = "Oakland Sports Tonight";
+
+    if (sportsSeason === "championship" || sportsSeason === "world-series") {
+      sportsShow = sportsShow + " - Championship Edition";
+    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+      sportsShow = sportsShow + " - Playoff Special";
+    }
+
+--- phase07-evening-media/buildEveningMedia.js:396 ---
+      featuredName + ": In Focus",
+      "One-on-One with " + featuredName,
+      featuredName + " — Player Profile",
+      "Film Room with " + featuredName
+    ];
+    tv.push(pickRandom(nameShows));
+  }
+
+  // Sports broadcast
+  var sportsShow = "";
+  if (sports && sports !== "(none)") {
+    sportsShow = "Oakland Sports Tonight";
+
+    if (sportsSeason === "championship" || sportsSeason === "world-series") {
+      sportsShow = sportsShow + " - Championship Edition";
+    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+      sportsShow = sportsShow + " - Playoff Special";
+    }
+  }
+
+
+--- phase07-evening-media/buildNightLife.js:260 ---
+  // ───────────────────────────────────────────────────────────────────────────
+  if (isFirstFriday) {
+    pool = pool.concat(FIRST_FRIDAY_SPOTS, FIRST_FRIDAY_SPOTS, DANCE);
+  }
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // CREATION DAY (v2.2)
+  // ───────────────────────────────────────────────────────────────────────────
+  if (isCreationDay) {
+    pool = pool.concat(CREATION_DAY_SPOTS, CREATION_DAY_SPOTS);
+  }
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // SPORTS SEASON (v2.2)
+  // ───────────────────────────────────────────────────────────────────────────
+  if (sportsSeason === "championship") {
+    pool = pool.concat(CHAMPIONSHIP_SPOTS, CHAMPIONSHIP_SPOTS, SPORTS_BARS);
+  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+    pool = pool.concat(SPORTS_BARS, SPORTS_BARS);
+  } else if (sportsSeason === "late-season") {
+
+--- phase07-evening-media/buildNightLife.js:262 ---
+    pool = pool.concat(FIRST_FRIDAY_SPOTS, FIRST_FRIDAY_SPOTS, DANCE);
+  }
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // CREATION DAY (v2.2)
+  // ───────────────────────────────────────────────────────────────────────────
+  if (isCreationDay) {
+    pool = pool.concat(CREATION_DAY_SPOTS, CREATION_DAY_SPOTS);
+  }
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // SPORTS SEASON (v2.2)
+  // ───────────────────────────────────────────────────────────────────────────
+  if (sportsSeason === "championship") {
+    pool = pool.concat(CHAMPIONSHIP_SPOTS, CHAMPIONSHIP_SPOTS, SPORTS_BARS);
+  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+    pool = pool.concat(SPORTS_BARS, SPORTS_BARS);
+  } else if (sportsSeason === "late-season") {
+    pool = pool.concat(SPORTS_BARS);
+  }
+
+--- phase07-evening-media/buildNightLife.js:264 ---
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // CREATION DAY (v2.2)
+  // ───────────────────────────────────────────────────────────────────────────
+  if (isCreationDay) {
+    pool = pool.concat(CREATION_DAY_SPOTS, CREATION_DAY_SPOTS);
+  }
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // SPORTS SEASON (v2.2)
+  // ───────────────────────────────────────────────────────────────────────────
+  if (sportsSeason === "championship") {
+    pool = pool.concat(CHAMPIONSHIP_SPOTS, CHAMPIONSHIP_SPOTS, SPORTS_BARS);
+  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+    pool = pool.concat(SPORTS_BARS, SPORTS_BARS);
+  } else if (sportsSeason === "late-season") {
+    pool = pool.concat(SPORTS_BARS);
+  }
+
+  // ───────────────────────────────────────────────────────────────────────────
+
+--- phase07-evening-media/buildNightLife.js:436 ---
+  // ═══════════════════════════════════════════════════════════════════════════
+  // BUILD VIBE DESCRIPTION (v2.2 - calendar-aware)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  var vibe = "steady";
+
+  // Calendar vibes take priority
+  if (holiday === "NewYearsEve") {
+    vibe = "celebratory";
+  } else if (holiday === "Halloween") {
+    vibe = "festive-spooky";
+  } else if (isFirstFriday) {
+    vibe = "art-scene";
+  } else if (isCreationDay) {
+    vibe = "community-pride";
+  } else if (sportsSeason === "championship") {
+    vibe = "sports-fever";
+  } else if (sportsSeason === "playoffs") {
+    vibe = "game-night";
+  } else if (volume >= 8) {
+
+--- phase07-evening-media/buildNightLife.js:438 ---
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  var vibe = "steady";
+
+  // Calendar vibes take priority
+  if (holiday === "NewYearsEve") {
+    vibe = "celebratory";
+  } else if (holiday === "Halloween") {
+    vibe = "festive-spooky";
+  } else if (isFirstFriday) {
+    vibe = "art-scene";
+  } else if (isCreationDay) {
+    vibe = "community-pride";
+  } else if (sportsSeason === "championship") {
+    vibe = "sports-fever";
+  } else if (sportsSeason === "playoffs") {
+    vibe = "game-night";
+  } else if (volume >= 8) {
+    vibe = "lively";
+  } else if (volume >= 6) {
+
+--- phase07-evening-media/buildNightLife.js:469 ---
+  // ═══════════════════════════════════════════════════════════════════════════
+  // BUILD MOVEMENT CONTEXT
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  var movement = "normal";
+
+  if (traffic >= 1.3) movement = "traffic-slowed";
+  if (weather.impact >= 1.4) movement = "weather-limited";
+  if (chaos.length >= 3) movement = "restricted";
+  if (sentiment <= -0.3) movement = "hesitant";
+  if (econMood <= 30) movement = "cautious";
+
+  // v2.2: Holiday movement overrides
+  if (holiday === "NewYearsEve") movement = "high-energy";
+  if (isFirstFriday) movement = "art-walk";
+  if (sportsSeason === "championship") movement = "fan-surge";
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // OUTPUT
+  // ═══════════════════════════════════════════════════════════════════════════
+
+--- phase07-evening-media/mediaFeedbackEngine.js:248 ---
+    }
+  }
+
+  // Party holidays = nightlife coverage
+  var partyHolidays = ['NewYearsEve', 'Halloween'];
+  if (partyHolidays.indexOf(cal.holiday) >= 0) {
+    effects.coverageProfile.nightlifeFocus = true;
+    effects.holidayNarrative = 'party_coverage';
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // SPORTS SEASON NARRATIVES
+  // ─────────────────────────────────────────────────────────────
+
+  // labels stay on the phase word (prose)
+  if (cal.sportsSeason === 'championship') {
+    effects.sportsNarrative = 'championship_fever';
+    effects.coverageProfile.sportsDominance = 'championship';
+  } else if (cal.sportsSeason === 'playoffs') {
+    effects.sportsNarrative = 'playoff_drama';
+
+--- phase07-evening-media/mediaFeedbackEngine.js:251 ---
+  // Party holidays = nightlife coverage
+  var partyHolidays = ['NewYearsEve', 'Halloween'];
+  if (partyHolidays.indexOf(cal.holiday) >= 0) {
+    effects.coverageProfile.nightlifeFocus = true;
+    effects.holidayNarrative = 'party_coverage';
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // SPORTS SEASON NARRATIVES
+  // ─────────────────────────────────────────────────────────────
+
+  // labels stay on the phase word (prose)
+  if (cal.sportsSeason === 'championship') {
+    effects.sportsNarrative = 'championship_fever';
+    effects.coverageProfile.sportsDominance = 'championship';
+  } else if (cal.sportsSeason === 'playoffs') {
+    effects.sportsNarrative = 'playoff_drama';
+    effects.coverageProfile.sportsDominance = 'playoffs';
+  } else if (cal.sportsSeason === 'late-season') {
+    effects.sportsNarrative = 'pennant_race';
+
+--- phase07-evening-media/mediaFeedbackEngine.js:254 ---
+    effects.coverageProfile.nightlifeFocus = true;
+    effects.holidayNarrative = 'party_coverage';
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // SPORTS SEASON NARRATIVES
+  // ─────────────────────────────────────────────────────────────
+
+  // labels stay on the phase word (prose)
+  if (cal.sportsSeason === 'championship') {
+    effects.sportsNarrative = 'championship_fever';
+    effects.coverageProfile.sportsDominance = 'championship';
+  } else if (cal.sportsSeason === 'playoffs') {
+    effects.sportsNarrative = 'playoff_drama';
+    effects.coverageProfile.sportsDominance = 'playoffs';
+  } else if (cal.sportsSeason === 'late-season') {
+    effects.sportsNarrative = 'pennant_race';
+    effects.coverageProfile.sportsDominance = 'late-season';
+  }
+
+
+--- phase07-evening-media/mediaFeedbackEngine.js:480 ---
+      effects.anxietyFactor += 0.2 * majorCrimesCount;
+    }
+  }
+
+  // Cultural events boost hope
+  if (eventCategories.culture.length > 0) {
+    effects.hopeFactor += 0.1 * eventCategories.culture.length;
+  }
+
+  // v2.1: Festival events boost hope significantly
+  if (eventCategories.festival.length > 0) {
+    effects.hopeFactor += 0.15 * eventCategories.festival.length;
+  }
+
+  // v2.1: Sports events during season boost hope
+  if (eventCategories.sports.length > 0 && cal.sportsSeason !== 'off-season') {
+    effects.hopeFactor += 0.1 * eventCategories.sports.length;
+  }
+}
+
+
+--- phase07-evening-media/mediaFeedbackEngine.js:548 ---
+    effects.anxietyFactor += 0.05;
+    effects.coverageProfile.streamingMood = 'anxious';
+  } else if (streaming.indexOf('comfort') !== -1 || streaming.indexOf('comedy') !== -1 || streaming.indexOf('holiday') !== -1) {
+    effects.hopeFactor += 0.05;
+    effects.coverageProfile.streamingMood = 'relaxed';
+  }
+
+  // v2.1: Enhanced sports coverage based on season
+  if (sportsBroadcast && sportsBroadcast.indexOf('Game') !== -1) {
+    var sportsHype = 'moderate';
+    // engine.204/205 §2.2: hope follows how the week went — a losing week adds none past
+    // the .05 floor; the hype label stays on the phase word (prose)
+    var sportsCityM = cal.sportsCity || {};
+    var hopeBoost = 0.05 + 0.10 * Math.max(0, Number(sportsCityM.signed) || 0) * (Number(sportsCityM.reach) || 0);
+
+    if (cal.sportsSeason === 'championship') {
+      sportsHype = 'championship';
+    } else if (cal.sportsSeason === 'playoffs') {
+      sportsHype = 'playoffs';
+    } else if (cal.sportsSeason === 'late-season') {
+
+--- phase07-evening-media/mediaFeedbackEngine.js:550 ---
+  } else if (streaming.indexOf('comfort') !== -1 || streaming.indexOf('comedy') !== -1 || streaming.indexOf('holiday') !== -1) {
+    effects.hopeFactor += 0.05;
+    effects.coverageProfile.streamingMood = 'relaxed';
+  }
+
+  // v2.1: Enhanced sports coverage based on season
+  if (sportsBroadcast && sportsBroadcast.indexOf('Game') !== -1) {
+    var sportsHype = 'moderate';
+    // engine.204/205 §2.2: hope follows how the week went — a losing week adds none past
+    // the .05 floor; the hype label stays on the phase word (prose)
+    var sportsCityM = cal.sportsCity || {};
+    var hopeBoost = 0.05 + 0.10 * Math.max(0, Number(sportsCityM.signed) || 0) * (Number(sportsCityM.reach) || 0);
+
+    if (cal.sportsSeason === 'championship') {
+      sportsHype = 'championship';
+    } else if (cal.sportsSeason === 'playoffs') {
+      sportsHype = 'playoffs';
+    } else if (cal.sportsSeason === 'late-season') {
+      sportsHype = 'pennant_race';
+    }
+
+--- phase07-evening-media/mediaFeedbackEngine.js:552 ---
+    effects.coverageProfile.streamingMood = 'relaxed';
+  }
+
+  // v2.1: Enhanced sports coverage based on season
+  if (sportsBroadcast && sportsBroadcast.indexOf('Game') !== -1) {
+    var sportsHype = 'moderate';
+    // engine.204/205 §2.2: hope follows how the week went — a losing week adds none past
+    // the .05 floor; the hype label stays on the phase word (prose)
+    var sportsCityM = cal.sportsCity || {};
+    var hopeBoost = 0.05 + 0.10 * Math.max(0, Number(sportsCityM.signed) || 0) * (Number(sportsCityM.reach) || 0);
+
+    if (cal.sportsSeason === 'championship') {
+      sportsHype = 'championship';
+    } else if (cal.sportsSeason === 'playoffs') {
+      sportsHype = 'playoffs';
+    } else if (cal.sportsSeason === 'late-season') {
+      sportsHype = 'pennant_race';
+    }
+
+    effects.coverageProfile.sportsHype = sportsHype;
+
+--- phase07-evening-media/mediaFeedbackEngine.js:560 ---
+    var sportsCityM = cal.sportsCity || {};
+    var hopeBoost = 0.05 + 0.10 * Math.max(0, Number(sportsCityM.signed) || 0) * (Number(sportsCityM.reach) || 0);
+
+    if (cal.sportsSeason === 'championship') {
+      sportsHype = 'championship';
+    } else if (cal.sportsSeason === 'playoffs') {
+      sportsHype = 'playoffs';
+    } else if (cal.sportsSeason === 'late-season') {
+      sportsHype = 'pennant_race';
+    }
+
+    effects.coverageProfile.sportsHype = sportsHype;
+    effects.hopeFactor += hopeBoost;
+
+    // v2.1: Sports event pools based on season
+    if (cal.sportsSeason === 'championship') {
+      effects.eventPools.sports = [
+        "couldn't escape the championship coverage",
+        "felt the whole city buzzing about the championship",
+        "joined the citywide championship watch party energy",
+
+--- phase07-evening-media/mediaFeedbackEngine.js:568 ---
+      sportsHype = 'pennant_race';
+    }
+
+    effects.coverageProfile.sportsHype = sportsHype;
+    effects.hopeFactor += hopeBoost;
+
+    // v2.1: Sports event pools based on season
+    if (cal.sportsSeason === 'championship') {
+      effects.eventPools.sports = [
+        "couldn't escape the championship coverage",
+        "felt the whole city buzzing about the championship",
+        "joined the citywide championship watch party energy",
+        "got caught up in championship fever",
+        "wore team colors to work for the big game"
+      ];
+    } else if (cal.sportsSeason === 'playoffs') {
+      effects.eventPools.sports = [
+        "watched the playoff game with neighbors",
+        "felt the playoff tension around the city",
+        "discussed playoff scenarios with coworkers",
+
+--- phase07-evening-media/mediaFeedbackEngine.js:626 ---
+    totalBuzz += 2; // Athletes in spotlight
+  }
+
+  effects.celebrityBuzz = Math.min(1, totalBuzz * 0.12);
+
+  if (totalBuzz > 0) {
+    effects.coverageProfile.celebrity = {
+      count: totalBuzz,
+      names: famousPeople.slice(0, 5),
+      intensity: totalBuzz >= 5 ? 'heavy' : totalBuzz >= 3 ? 'moderate' : 'light'
+    };
+
+    effects.trendAmplification.celebrity = totalBuzz * 0.1;
+
+    // v2.1: Context-specific celebrity pools
+    if (cal.sportsSeason === 'championship' || cal.sportsSeason === 'playoffs') {
+      effects.eventPools.celebrity = [
+        "spotted athletes out in the city",
+        "noticed sports celebrities trending everywhere",
+        "overheard people discussing the team's stars",
+
+--- phase07-evening-media/mediaFeedbackEngine.js:803 ---
+ * Calculates how media is pushing city sentiment.
+ */
+function calculateSentimentPressure_(ctx) {
+  var S = ctx.summary;
+  var effects = S.mediaEffects;
+  var cal = ctx.mediaCalendarContext || {};
+
+  var netPressure = effects.hopeFactor - effects.anxietyFactor;
+  effects.sentimentPressure = Math.round(Math.max(-1, Math.min(1, netPressure)) * 100) / 100;
+
+  // Round factors
+  effects.anxietyFactor = Math.round(effects.anxietyFactor * 100) / 100;
+  effects.hopeFactor = Math.round(effects.hopeFactor * 100) / 100;
+
+  // v2.1: Calendar-aware narrative determination
+  if (cal.sportsSeason === 'championship') {
+    effects.mediaNarrative = 'championship_fever';
+  } else if (cal.sportsSeason === 'playoffs') {
+    effects.mediaNarrative = 'playoff_drama';
+  } else if (cal.holiday !== 'none' && cal.holidayPriority === 'oakland') {
+
+--- phase07-evening-media/mediaFeedbackEngine.js:805 ---
+function calculateSentimentPressure_(ctx) {
+  var S = ctx.summary;
+  var effects = S.mediaEffects;
+  var cal = ctx.mediaCalendarContext || {};
+
+  var netPressure = effects.hopeFactor - effects.anxietyFactor;
+  effects.sentimentPressure = Math.round(Math.max(-1, Math.min(1, netPressure)) * 100) / 100;
+
+  // Round factors
+  effects.anxietyFactor = Math.round(effects.anxietyFactor * 100) / 100;
+  effects.hopeFactor = Math.round(effects.hopeFactor * 100) / 100;
+
+  // v2.1: Calendar-aware narrative determination
+  if (cal.sportsSeason === 'championship') {
+    effects.mediaNarrative = 'championship_fever';
+  } else if (cal.sportsSeason === 'playoffs') {
+    effects.mediaNarrative = 'playoff_drama';
+  } else if (cal.holiday !== 'none' && cal.holidayPriority === 'oakland') {
+    effects.mediaNarrative = 'festival_celebration';
+  } else if (cal.isCreationDay) {
+
+--- phase07-evening-media/mediaFeedbackEngine.js:1295 ---
+      text: holidayPool[Math.floor(rng() * holidayPool.length)],
+      tag: 'Media-Holiday'
+    };
+  }
+
+  var artsPool = pools.arts || [];
+  if (artsPool.length > 0 && cal.isFirstFriday && rng() < 0.35) {
+    return {
+      text: artsPool[Math.floor(rng() * artsPool.length)],
+      tag: 'Media-Arts'
+    };
+  }
+
+  // Sports during playoffs/championship
+  var sportsPool = pools.sports || [];
+  if (sportsPool.length > 0 && (cal.sportsSeason === 'playoffs' || cal.sportsSeason === 'championship')) {
+    if (rng() < 0.5) {
+      return {
+        text: sportsPool[Math.floor(rng() * sportsPool.length)],
+        tag: 'Media-Sports'
+
+--- phase07-evening-media/mediaFeedbackEngine.js:1386 ---
+}
+
+/**
+ * Checks if media is currently saturated with a topic.
+ */
+function isMediaSaturated_(ctx, topic) {
+  // Defensive check for optional chaining replacement
+  var effects = (ctx.summary && ctx.summary.mediaEffects) ? ctx.summary.mediaEffects : null;
+  var cal = ctx.mediaCalendarContext || {};
+  if (!effects) return false;
+
+  if (topic === 'crisis') return effects.crisisSaturation > 0.6;
+  if (topic === 'celebrity') return effects.celebrityBuzz > 0.5;
+  if (topic === 'any') return effects.coverageIntensity === COVERAGE_INTENSITY.SATURATED;
+  // v2.1
+  if (topic === 'sports') return cal.sportsSeason === 'championship' || cal.sportsSeason === 'playoffs';
+  if (topic === 'festival') return cal.holiday !== 'none' && cal.holidayPriority === 'oakland';
+
+  return false;
+}
+
+--- phase07-evening-media/storyHook.js:521 ---
+    if (creationDayAnniversary !== null && creationDayAnniversary > 0) {
+      hooks.push(makeHook(
+        'CIVIC',
+        '',
+        2,
+        'Creation Day marks ' + creationDayAnniversary + ' year' + (creationDayAnniversary > 1 ? 's' : '') + '. Anniversary retrospective opportunity.',
+        null,
+        'creationday'
+      ));
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // SPORTS SEASON HOOKS
+  // ═══════════════════════════════════════════════════════════
+  if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+    hooks.push(makeHook(
+      'SPORTS',
+      '',
+      3,
+
+--- phase07-evening-media/storyHook.js:532 ---
+
+  // ═══════════════════════════════════════════════════════════
+  // SPORTS SEASON HOOKS
+  // ═══════════════════════════════════════════════════════════
+  if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+    hooks.push(makeHook(
+      'SPORTS',
+      '',
+      3,
+      'PLAYOFFS: Championship stakes. Fan fever, watch parties, team coverage. All-hands sports desk.',
+      null,
+      'sports'
+    ));
+  }
+
+  if (sportsSeason === "championship") {
+    hooks.push(makeHook(
+      'SPORTS',
+      '',
+      3,
+
+--- phase07-evening-media/storyHook.js:543 ---
+      'sports'
+    ));
+  }
+
+  if (sportsSeason === "championship") {
+    hooks.push(makeHook(
+      'SPORTS',
+      '',
+      3,
+      'CHAMPIONSHIP: Historic moment potential. City-wide coverage, celebration preparation, legacy angles.',
+      null,
+      'sports'
+    ));
+  }
+
+  if (sportsSeason === "late-season") {
+    hooks.push(makeHook(
+      'SPORTS',
+      '',
+      2,
+
+--- phase08-v3-chicago/v3preLoader.js:51 ---
+  // Explicitly preserve issues if present
+  if (!Array.isArray(S.auditIssues)) {
+    S.auditIssues = [];
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v3.3: CALENDAR CONTEXT DEFAULTS
+  // ═══════════════════════════════════════════════════════════════════════════
+  // These should be set by buildCalendarContext_ in Phase 1, but ensure
+  // fallback defaults exist for safety
+  
+  if (S.holiday === undefined) S.holiday = 'none';
+  if (S.holidayPriority === undefined) S.holidayPriority = 'none';
+  if (S.isFirstFriday === undefined) S.isFirstFriday = false;
+  if (S.isCreationDay === undefined) S.isCreationDay = false;
+  if (S.sportsSeason === undefined) S.sportsSeason = 'off-season';
+  if (S.season === undefined) S.season = 'unknown';
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CORE V3 SYSTEMS
+
+--- phase08-v3-chicago/v3DomainWriter.js:279 ---
+  }
+
+  // First Friday boosts ARTS
+  if (isFirstFriday) {
+    presence['ARTS'] = (presence['ARTS'] || 0) + 2;
+    presence['CULTURE'] = (presence['CULTURE'] || 0) + 1;
+  }
+
+  // Creation Day boosts CIVIC
+  if (isCreationDay) {
+    presence['CIVIC'] = (presence['CIVIC'] || 0) + 1;
+    presence['COMMUNITY'] = (presence['COMMUNITY'] || 0) + 1;
+  }
+
+  // Sports season boosts SPORTS
+  if (sportsSeason && sportsSeason !== 'off-season') {
+    presence['SPORTS'] = (presence['SPORTS'] || 0) + 1;
+    if (sportsRung === 'championship') {
+      presence['SPORTS'] = (presence['SPORTS'] || 0) + 2;
+    } else if (sportsRung === 'playoffs') {
+
+--- phase09-digest/applyCompressionDigestSummary.js:190 ---
+      "Holiday": "HOL",
+      "NewYear": "NY",
+      "NewYearsEve": "NYE",
+      "Valentine": "VAL",
+      "Easter": "ESTR",
+      "Halloween": "HWEEN",
+      "MothersDay": "MOM",
+      "FathersDay": "DAD",
+      "SecondDawn": "DAWN"
+    };
+    calendarTag = holidayAbbrev[holiday] || holiday.substring(0, 4).toUpperCase();
+  }
+
+  // v2.2: Build sports tag
+  var sportsTag = "";
+  if (sportsSeason === "championship") sportsTag = "CHAMP";
+  else if (sportsSeason === "playoffs") sportsTag = "PLYF";
+  else if (sportsSeason === "post-season") sportsTag = "POST";
+  else if (sportsSeason === "late-season") sportsTag = "LATE";
+
+
+--- phase09-digest/applyCompressionDigestSummary.js:191 ---
+      "NewYear": "NY",
+      "NewYearsEve": "NYE",
+      "Valentine": "VAL",
+      "Easter": "ESTR",
+      "Halloween": "HWEEN",
+      "MothersDay": "MOM",
+      "FathersDay": "DAD",
+      "SecondDawn": "DAWN"
+    };
+    calendarTag = holidayAbbrev[holiday] || holiday.substring(0, 4).toUpperCase();
+  }
+
+  // v2.2: Build sports tag
+  var sportsTag = "";
+  if (sportsSeason === "championship") sportsTag = "CHAMP";
+  else if (sportsSeason === "playoffs") sportsTag = "PLYF";
+  else if (sportsSeason === "post-season") sportsTag = "POST";
+  else if (sportsSeason === "late-season") sportsTag = "LATE";
+
+  var parts = [
+
+--- phase09-digest/applyCompressionDigestSummary.js:192 ---
+      "NewYearsEve": "NYE",
+      "Valentine": "VAL",
+      "Easter": "ESTR",
+      "Halloween": "HWEEN",
+      "MothersDay": "MOM",
+      "FathersDay": "DAD",
+      "SecondDawn": "DAWN"
+    };
+    calendarTag = holidayAbbrev[holiday] || holiday.substring(0, 4).toUpperCase();
+  }
+
+  // v2.2: Build sports tag
+  var sportsTag = "";
+  if (sportsSeason === "championship") sportsTag = "CHAMP";
+  else if (sportsSeason === "playoffs") sportsTag = "PLYF";
+  else if (sportsSeason === "post-season") sportsTag = "POST";
+  else if (sportsSeason === "late-season") sportsTag = "LATE";
+
+  var parts = [
+    "C" + cycle,
+
+--- phase09-digest/applyCompressionDigestSummary.js:193 ---
+      "Valentine": "VAL",
+      "Easter": "ESTR",
+      "Halloween": "HWEEN",
+      "MothersDay": "MOM",
+      "FathersDay": "DAD",
+      "SecondDawn": "DAWN"
+    };
+    calendarTag = holidayAbbrev[holiday] || holiday.substring(0, 4).toUpperCase();
+  }
+
+  // v2.2: Build sports tag
+  var sportsTag = "";
+  if (sportsSeason === "championship") sportsTag = "CHAMP";
+  else if (sportsSeason === "playoffs") sportsTag = "PLYF";
+  else if (sportsSeason === "post-season") sportsTag = "POST";
+  else if (sportsSeason === "late-season") sportsTag = "LATE";
+
+  var parts = [
+    "C" + cycle,
+    "ev:" + events,
+
+--- utilities/rosterLookup.js:563 ---
+  // Default fallback
+  return 'Luis Navarro or Carmen Delaine';
+}
+
+/**
+ * Get sports desk assignment based on season.
+ *
+ * @param {string} sportsSeason - Season (championship, playoffs, spring-training, etc.)
+ * @returns {string} Assignment string
+ */
+function getSportsAssignment_(sportsSeason) {
+  var anthony = getJournalist_('Anthony');
+  var pslayer = getJournalist_('P Slayer');
+  var hal = getJournalist_('Hal Richmond');
+
+  if (sportsSeason === 'championship') {
+    return 'Anthony (Lead) + Full Sports Desk — P Slayer on fan pulse, Hal Richmond on history';
+  }
+  if (sportsSeason === 'playoffs') {
+    return 'Anthony (Lead) + Hal Richmond (History)';
+
+--- utilities/rosterLookup.js:566 ---
+
+/**
+ * Get sports desk assignment based on season.
+ *
+ * @param {string} sportsSeason - Season (championship, playoffs, spring-training, etc.)
+ * @returns {string} Assignment string
+ */
+function getSportsAssignment_(sportsSeason) {
+  var anthony = getJournalist_('Anthony');
+  var pslayer = getJournalist_('P Slayer');
+  var hal = getJournalist_('Hal Richmond');
+
+  if (sportsSeason === 'championship') {
+    return 'Anthony (Lead) + Full Sports Desk — P Slayer on fan pulse, Hal Richmond on history';
+  }
+  if (sportsSeason === 'playoffs') {
+    return 'Anthony (Lead) + Hal Richmond (History)';
+  }
+  if (sportsSeason === 'spring-training') {
+    return 'Anthony on roster coverage, P Slayer on fan expectations';
+
+--- utilities/rosterLookup.js:569 ---
+ *
+ * @param {string} sportsSeason - Season (championship, playoffs, spring-training, etc.)
+ * @returns {string} Assignment string
+ */
+function getSportsAssignment_(sportsSeason) {
+  var anthony = getJournalist_('Anthony');
+  var pslayer = getJournalist_('P Slayer');
+  var hal = getJournalist_('Hal Richmond');
+
+  if (sportsSeason === 'championship') {
+    return 'Anthony (Lead) + Full Sports Desk — P Slayer on fan pulse, Hal Richmond on history';
+  }
+  if (sportsSeason === 'playoffs') {
+    return 'Anthony (Lead) + Hal Richmond (History)';
+  }
+  if (sportsSeason === 'spring-training') {
+    return 'Anthony on roster coverage, P Slayer on fan expectations';
+  }
+
+  // Default

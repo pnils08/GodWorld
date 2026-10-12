@@ -1,0 +1,425 @@
+--- a/phase01-config/engine94SheetContract.js
++++ b/phase01-config/engine94SheetContract.js
+@@ -13,6 +13,7 @@
+  */
+ 
+ var ENGINE94_CONFIG_SEEDS = [
++  ['folkMemoryWindow', 8, 'engine.94 Cycles of recent folk memory (runtime capped at 12)', 1, 52, true],
+   ['griefDurationCycles', 3, 'engine.94 ordinary grief duration in Cycles', 1, 52, true],
+   ['griefHolidayDurationCycles', 5, 'engine.94 stress-holiday grief duration in Cycles', 1, 52, true],
+   ['griefParticipationMultiplier', 0.80, 'engine.94 active-grief atmospheric participation multiplier', 0, 2, false],
+--- a/phase02-world-state/loadEventContentLedger.js
++++ b/phase02-world-state/loadEventContentLedger.js
+@@ -110,7 +110,15 @@
+   warmth:       { kind: 'num' },
+   drive:        { kind: 'num' },
+   // engine.208: Dial 9, the citizen's live fandom (base+mood, 0-100); null fails the term
+-  fandom:       { kind: 'num' }
++  fandom:       { kind: 'num' },
++  bereaved:     { kind: 'num' },     // Cycles since DialState.grief.l
++  charged:      { kind: 'num' },     // Cycles since latest Judicial_Ledger.ArrestCycle
++  defaulted:    { kind: 'num' },     // Cycles since DialState.debtDefault.l
++  rival:        { kind: 'flag' },    // active rivalry or sports_rival bond
++  hooddeaths:   { kind: 'num' },     // tracked Death lines in the hood window
++  hoodcharged:  { kind: 'num' },     // Judicial_Ledger arrests in the hood window
++  hoodhospital: { kind: 'num' },     // Hospitalized + Critical lines
++  hoodclosed:   { kind: 'num' }      // stamped RoutineRetrenched LifeHistory lines
+ };
+ 
+ /**
+--- a/phase05-citizens/generateCitizensEvents.js
++++ b/phase05-citizens/generateCitizensEvents.js
+@@ -234,6 +234,52 @@
+   "Piedmont Ave": ["a neighborhood meetup", "a local volunteer circle"]
+ };
+ 
++// engine.94 B.1: bounded, code-locked history vocabulary. Exact primary tags
++// only; an unknown log tag cannot broaden an authored condition.
++var FOLK_MEMORY_LOG_TAGS_ = {
++  Death: 1, Setback: 1, Rivalry: 1, 'Transgression-Serious': 1,
++  Hospitalized: 1, Critical: 1, Recovering: 1
++};
++
++function folkMemoryAdd_(memory, pop, hood, tag, eventCycle) {
++  if (hood) {
++    var hc = memory.byHood[hood] || (memory.byHood[hood] = {});
++    hc[tag] = (hc[tag] || 0) + 1;
++  }
++  if (pop) {
++    var pc = memory.byCitizen[pop] || (memory.byCitizen[pop] = {});
++    if (pc[tag] == null || eventCycle > pc[tag]) pc[tag] = eventCycle;
++  }
++}
++
++function folkMemorySince_(stamp, cycle) {
++  if (!stamp || stamp.l === '' || stamp.l === null || stamp.l === undefined) return null;
++  var last = Number(stamp.l);
++  return isFinite(last) && Math.floor(last) === last && last >= 0 && last <= cycle ? cycle - last : null;
++}
++
++function folkMemoryScopes_(memory, pop, hood, cycle, dialCell, bonds) {
++  var dial = null;
++  try { dial = dialCell ? JSON.parse(String(dialCell)) : null; } catch (e) {}
++  var pc = memory.byCitizen[pop] || {};
++  var hc = memory.byHood[hood] || {};
++  var rival = false;
++  for (var i = 0; bonds && i < bonds.length; i++) {
++    var b = bonds[i];
++    if (b && b.status === 'active' && (b.bondType === 'rivalry' || b.bondType === 'sports_rival')) { rival = true; break; }
++  }
++  return {
++    bereaved: folkMemorySince_(dial && dial.grief, cycle),
++    charged: pc.Charged == null ? null : cycle - pc.Charged,
++    defaulted: folkMemorySince_(dial && dial.debtDefault, cycle),
++    rival: rival,
++    hooddeaths: hc.Death || 0,
++    hoodcharged: hc.Charged || 0,
++    hoodhospital: (hc.Hospitalized || 0) + (hc.Critical || 0),
++    hoodclosed: hc.RoutineRetrenched || 0
++  };
++}
++
+ function generateCitizensEvents_(ctx) {
+   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+   if (!ctx.ledger) {
+@@ -290,6 +336,7 @@
+   var iWealth = idx("WealthLevel");
+   var iDisplRisk = idx("DisplacementRisk");
+   var iMemReg = idx("MemoryRegisters"); // engine.38 B3 read (S283, seams Task 9) — unlived echo source
++  var iDialState = idx("DialState");
+ 
+   if (iTier < 0 || iClock < 0 || iLife < 0 || iLastU < 0 || iPopID < 0) return;
+ 
+@@ -297,6 +344,34 @@
+   var S = ctx.summary || (ctx.summary = {});
+   var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+ 
++  // The self-arm supplies 8 on live Sheets. The cap follows the log's 12-Cycle
++  // retention even when an operator has a larger valid World_Config value.
++  var rawFolkWindow = ctx.config && ctx.config.folkMemoryWindow;
++  var folkWindow = rawFolkWindow == null ? 8 : Number(rawFolkWindow);
++  if (!isFinite(folkWindow) || Math.floor(folkWindow) !== folkWindow || folkWindow < 1) {
++    throw new Error('engine.94: invalid World_Config.folkMemoryWindow');
++  }
++  folkWindow = Math.min(folkWindow, 12);
++  var folkMemory = S.folkMemory = { byHood: {}, byCitizen: {} };
++  var hoodByPop = {};
++  for (var fm = 0; fm < rows.length; fm++) {
++    var fmPop = String(rows[fm][iPopID] || '').trim().toUpperCase();
++    var fmHood = iNeighborhood >= 0 ? String(rows[fm][iNeighborhood] || '').trim() : '';
++    if (!fmPop) continue;
++    if (fmHood) hoodByPop[fmPop] = fmHood;
++    // RoutineRetrenched is written only to the ledger's LifeHistory column.
++    var fmLife = String(rows[fm][iLife] || '').split('\n');
++    for (var fl = 0; fl < fmLife.length; fl++) {
++      if (fmLife[fl].indexOf('[RoutineRetrenched]') < 0) continue;
++      var stamp = fmLife[fl].match(/^Y([0-9]+)C([0-9]+)\b/);
++      if (!stamp || Number(stamp[2]) < 1 || Number(stamp[2]) > 52) continue;
++      var stampCycle = (Number(stamp[1]) - 1) * 52 + Number(stamp[2]);
++      if (stampCycle <= cycle && cycle - stampCycle < folkWindow) {
++        folkMemoryAdd_(folkMemory, fmPop, fmHood, 'RoutineRetrenched', stampCycle);
++      }
++    }
++  }
++
+   // engine.38 A2 — anti-inert floor signal. LifeHistory_Log is append-only (no
+   // clearer, compressor doesn't touch it), so its Cycle column is a persistent
+   // per-citizen "last event cycle" — and it sees coverage from ALL generators,
+@@ -309,6 +384,8 @@
+     var logHdr = logVals[0] || [];
+     var iLogPop = logHdr.indexOf("POPID");
+     var iLogCyc = logHdr.indexOf("Cycle");
++    var iLogTag = logHdr.indexOf("EventTag");
++    var iLogHood = logHdr.indexOf("Neighborhood");
+     if (iLogPop >= 0 && iLogCyc >= 0) {
+       for (var lv = 1; lv < logVals.length; lv++) {
+         var lp = logVals[lv][iLogPop];
+@@ -316,10 +393,37 @@
+         if (lp && (!(lp in lastEventCycleByPop) || lc > lastEventCycleByPop[lp])) {
+           lastEventCycleByPop[lp] = lc;
+         }
++        if (iLogTag < 0 || !lp || !lc || lc > cycle || cycle - lc >= folkWindow) continue;
++        var primary = String(logVals[lv][iLogTag] || '').split('|')[0].trim();
++        if (!FOLK_MEMORY_LOG_TAGS_[primary]) continue;
++        var lpNorm = String(lp).trim().toUpperCase();
++        var logHood = iLogHood >= 0 ? String(logVals[lv][iLogHood] || '').trim() : '';
++        folkMemoryAdd_(folkMemory, lpNorm, hoodByPop[lpNorm] || logHood, primary, lc);
+       }
+     }
+   }
+ 
++  // Judicial rows have their own hood and arrest Cycle; the LifeHistory arrest
++  // text is not a bracket tag. Reuse the cache already opened by the lifecycle.
++  var judicial = ctx.cache && ctx.cache.getData('Judicial_Ledger');
++  if (ctx.cache && (!judicial || !judicial.exists || !judicial.values || !judicial.values.length)) {
++    throw new Error('engine.94: Judicial_Ledger cache missing');
++  }
++  if (judicial && judicial.values && judicial.values.length) {
++    var jv = judicial.values, jh = jv[0];
++    var jPop = jh.indexOf('POPID'), jHood = jh.indexOf('Neighborhood'), jCycle = jh.indexOf('ArrestCycle');
++    if (jPop < 0 || jHood < 0 || jCycle < 0) throw new Error('engine.94: Judicial_Ledger header missing');
++    for (var ji = 1; ji < jv.length; ji++) {
++      var arrest = jv[ji][jCycle];
++      if (arrest === '' || arrest === null || arrest === undefined) continue;
++      var arrestCycle = Number(arrest);
++      if (!isFinite(arrestCycle) || Math.floor(arrestCycle) !== arrestCycle ||
++          arrestCycle < 0 || arrestCycle > cycle || cycle - arrestCycle >= folkWindow) continue;
++      folkMemoryAdd_(folkMemory, String(jv[ji][jPop] || '').trim().toUpperCase(),
++        String(jv[ji][jHood] || '').trim(), 'Charged', arrestCycle);
++    }
++  }
++
+   // S280 depth-step: POPID -> display-name map so relationship/arc texture can
+   // name the actual counterpart (bonds store IDs only). One pass over rows
+   // already in memory; no sheet read.
+@@ -516,7 +620,6 @@
+     if (iTraitProfile < 0) iTraitProfile = idx("OriginVault");
+     // engine.31 Phase 5: DialState carries the machine truth the dial-band seam
+     // reads (getCitizenDialBands_). Inert (-1 -> "") until the column exists.
+-    var iDialState = idx("DialState");
+ 
+     for (var ri = 0; ri < rows.length; ri++) {
+       var rowL = rows[ri];
+@@ -2737,7 +2840,19 @@
+     if (contentLedger && contentLedger.lineCount) {
+       var hoodStateForCond = (S.neighborhoodState && neighborhood) ? S.neighborhoodState[neighborhood] : null;
+       var eclEligibleByPool = {}; // engine.79 item 7: per-pool eligible count for THIS citizen (post-cap)
++      var memoryScopes = folkMemoryScopes_(folkMemory, popIdNorm, neighborhood, cycle,
++        iDialState >= 0 ? row[iDialState] : '', citizenBonds);
+       var condScopes = {
++        // B.1: personal stamps are null until they exist; hood counts are zero.
++        // The evaluator already fails numeric terms on null.
++        bereaved: memoryScopes.bereaved,
++        charged: memoryScopes.charged,
++        defaulted: memoryScopes.defaulted,
++        rival: memoryScopes.rival,
++        hooddeaths: memoryScopes.hooddeaths,
++        hoodcharged: memoryScopes.hoodcharged,
++        hoodhospital: memoryScopes.hoodhospital,
++        hoodclosed: memoryScopes.hoodclosed,
+         wealth: wealthLvl,
+         children: kidCount,
+         married: maritalLc === "married",
+--- a/scripts/contentLedgerCompose.test.js
++++ b/scripts/contentLedgerCompose.test.js
+@@ -247,5 +247,53 @@
+   assert('fandom>=60 row never reaches fandom 40', fanGateWrong === 0, `hits=${fanGateWrong}`);
+ }
+ 
++console.log('═══ engine.94 B.1: one bounded history build from fixtures');
++{
++  const owner = makeRow('POP-TEST-OWNER', { hood: 'Fixture Hood',
++    life: 'Y2C48 — [RoutineRetrenched] a synthetic closure' });
++  const fallback = makeRow('POP-TEST-FALLBACK', { hood: '' });
++  fallback[7] = '';
++  const ctx = makeCtx([owner, fallback], mulberry32(94), [LEDGER_HDR]);
++  ctx.config.folkMemoryWindow = 8;
++  ctx.ss.getSheetByName = name => name === 'LifeHistory_Log' ? {
++    getLastRow: () => 7,
++    getRange: () => ({ setValues: () => {} }),
++    getDataRange: () => ({ getValues: () => [
++      ['POPID', 'EventTag', 'Neighborhood', 'Cycle'],
++      ['POP-TEST-OWNER', 'Death|source:death', '', 93],
++      ['POP-TEST-OWNER', 'Critical|source:health', 'Wrong Log Hood', 100],
++      ['POP-TEST-OWNER', 'Death|source:death', '', 92],
++      ['POP-TEST-OWNER', 'Death|source:death', '', 89],
++      ['POP-TEST-OWNER', 'Death|source:death', '', 88],
++      ['POP-TEST-FALLBACK', 'Hospitalized|source:health', 'Fallback Fixture Hood', 99]
++    ] })
++  } : null;
++  ctx.cache = { getData: name => name === 'Judicial_Ledger' ? {
++    exists: true, values: [
++      ['POPID', 'Neighborhood', 'ArrestCycle'],
++      ['POP-TEST-OWNER', 'Fixture Hood', 99],
++      ['POP-TEST-OWNER', 'Fixture Hood', 90]
++    ]
++  } : null };
++  generateCitizensEvents_(ctx);
++  const m = ctx.summary.folkMemory;
++  assert('ledger hood wins over log; window excludes C92',
++    m.byHood['Fixture Hood'].Death === 1 && m.byHood['Fixture Hood'].Critical === 1 &&
++    !m.byHood['Wrong Log Hood']);
++  assert('blank ledger hood falls back to log Neighborhood',
++    m.byHood['Fallback Fixture Hood'].Hospitalized === 1);
++  assert('closure stamp and Judicial_Ledger arrest contribute once in window',
++    m.byHood['Fixture Hood'].RoutineRetrenched === 1 && m.byHood['Fixture Hood'].Charged === 1 &&
++    m.byCitizen['POP-TEST-OWNER'].Charged === 99);
++  const capped = makeCtx([makeRow('POP-TEST-OWNER', { hood: 'Fixture Hood' })], mulberry32(95), [LEDGER_HDR]);
++  capped.config.folkMemoryWindow = 52;
++  capped.ss = ctx.ss;
++  capped.cache = ctx.cache;
++  generateCitizensEvents_(capped);
++  assert('operator window above 12 is capped to 12 Cycles',
++    capped.summary.folkMemory.byHood['Fixture Hood'].Death === 3 &&
++    capped.summary.folkMemory.byHood['Fixture Hood'].Charged === 2);
++}
++
+ console.log(`\n${passed} passed, ${failed} failed`);
+ process.exit(failed ? 1 : 0);
+--- a/scripts/contentLedgerLoader.test.js
++++ b/scripts/contentLedgerLoader.test.js
+@@ -181,5 +181,44 @@
+   check('both bad rows counted as skipped', L.skipped === 2);
+ }
+ 
++// 10. engine.94 B.1 — locked history vocabulary and fixture-backed scope values
++{
++  const names = ['bereaved', 'charged', 'defaulted', 'hooddeaths',
++    'hoodcharged', 'hoodhospital', 'hoodclosed'];
++  const terms = names.map(name => name + '>=0').join('; ') + '; rival';
++  const ctx = mockCtx([
++    HDR,
++    ['line', 'memory.ok', '', 'remembered a week', '', terms, 'source:continuity', '', ''],
++    ['line', 'memory.bad', '', 'bad memory typo', '', 'hoodhospitol>=1', 'source:continuity', '', ''],
++    ['line', 'memory.badflag', '', 'bad rival operator', '', 'rival=1', 'source:continuity', '', '']
++  ]);
++  loadEventContentLedger_(ctx);
++  const L = ctx.summary.contentLedger;
++  const compiled = L.lines['memory.ok'][0].conditions;
++  check('B.1 seven numeric terms and one bare rival flag compile',
++    compiled.length === 8 && compiled.slice(0, 7).every(t => t.op === '>=' && t.v === 0) &&
++    compiled[7].f === 'rival' && compiled[7].op === 'flag');
++  check('B.1 typo and operated flag reject whole rows', L.skipped === 2 && !L.lines['memory.bad'] && !L.lines['memory.badflag']);
++
++  const genSource = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generateCitizensEvents.js'), 'utf8');
++  const scopes = new Function(genSource + '\nreturn folkMemoryScopes_;')();
++  const memory = {
++    byCitizen: { 'POP-TEST-A': { Charged: 105 } },
++    byHood: { 'Fixture Hood': { Death: 2, Charged: 4, Hospitalized: 3, Critical: 1, RoutineRetrenched: 2 } }
++  };
++  const bonds = [{ bondType: 'sports_rival', status: 'active' }];
++  const actual = scopes(memory, 'POP-TEST-A', 'Fixture Hood', 109,
++    JSON.stringify({ grief: { l: 100 }, debtDefault: { l: 65 } }), bonds);
++  check('B.1 personal ages and active sports rival resolve',
++    actual.bereaved === 9 && actual.charged === 4 && actual.defaulted === 44 && actual.rival === true);
++  check('B.1 hood counts use tracked lines and cases',
++    actual.hooddeaths === 2 && actual.hoodcharged === 4 && actual.hoodhospital === 4 && actual.hoodclosed === 2);
++  const empty = scopes(memory, 'POP-TEST-B', 'Empty Fixture Hood', 109, '',
++    [{ bondType: 'rivalry', status: 'severed' }]);
++  check('B.1 absent personal history is null; empty hood counts are zero',
++    empty.bereaved === null && empty.charged === null && empty.defaulted === null && empty.rival === false &&
++    empty.hooddeaths === 0 && empty.hoodcharged === 0 && empty.hoodhospital === 0 && empty.hoodclosed === 0);
++}
++
+ console.log('\n' + pass + '/' + (pass + fail) + ' passed');
+ process.exit(fail ? 1 : 0);
+--- a/scripts/engine94SheetContract.test.js
++++ b/scripts/engine94SheetContract.test.js
+@@ -118,9 +118,9 @@
+ const migrationRows = griefMigration.CONFIG_ROWS.concat(approvalMigration.CONFIG_ROWS);
+ 
+ console.log('═══ A. Code-carried payload matches reviewed migrations');
+-check('A1 fourteen config seeds are code-carried', C.seeds.length === 14);
++check('A1 fifteen config seeds are code-carried', C.seeds.length === 15 && C.seeds[0][0] === 'folkMemoryWindow' && C.seeds[0][1] === 8);
+ check('A2 seed key/value/description payload matches both migration scripts',
+-  JSON.stringify(C.seeds.map(row => row.slice(0, 3))) === JSON.stringify(migrationRows));
++  JSON.stringify(C.seeds.slice(1).map(row => row.slice(0, 3))) === JSON.stringify(migrationRows));
+ check('A3 three state columns match the migration script',
+   JSON.stringify(C.columns) === JSON.stringify(approvalMigration.CIVIC_COLUMNS));
+ 
+@@ -133,7 +133,7 @@
+   const result = C.ensure(f.ss);
+   const configPlan = C.inspectConfig(f.config.getDataRange().getValues());
+   const headerPlan = C.inspectHeader(f.civic.values[0]);
+-  check('B1 all fourteen missing config rows seeded', result.configSeeded === 14);
++  check('B1 all fifteen missing config rows seeded', result.configSeeded === 15);
+   check('B2 all three missing civic headers added', result.civicHeadersAdded === 3);
+   check('B3 post-write config is complete', configPlan.additions.length === 0);
+   check('B4 post-write civic header is complete', headerPlan.additions.length === 0);
+--- a/scripts/griefPeriod.test.js
++++ b/scripts/griefPeriod.test.js
+@@ -116,8 +116,8 @@
+ }
+ 
+ const REG_HEADERS = ['POPID', 'LifeHistory', 'TraitProfile', 'DialState', 'MemoryRegisters'];
+-function registerCtx(cycle, memory, cascades) {
+-  const beforeDial = '{"future":{"keep":true},"base":{"drive":50}}';
++function registerCtx(cycle, memory, cascades, dialState) {
++  const beforeDial = dialState || '{"future":{"keep":true},"base":{"drive":50}}';
+   return {
+     ctx: {
+       mode: {},
+@@ -143,22 +143,24 @@
+   assert('C1 compress-ineligible survivor still persists grief', regs.grief && regs.grief.startCycle === 101 && regs.grief.throughCycle === 103);
+   assert('C2 duplicate bonds to same deceased dedupe source', regs.grief.sourceIds.length === 1 && regs.grief.sourceIds[0] === 'POP-00001');
+   assert('C3 biases/unlived/unknown fields survive', regs.biases.length === 1 && regs.unlived.length === 1 && regs.future.keep === true);
+-  assert('C4 grief storage leaves DialState byte-identical', box.ctx.ledger.rows[0][3] === box.beforeDial);
++  assert('C4 grief writes a durable DialState stamp and keeps other fields',
++    JSON.parse(box.ctx.ledger.rows[0][3]).grief.l === 100 &&
++    JSON.parse(box.ctx.ledger.rows[0][3]).future.keep === true);
+   assert('C5 summary exposes one applied envelope change', box.ctx.summary.lifeHistoryCompression.griefApplied === 1 && box.ctx.summary.lifeHistoryCompression.griefCitizens === 1);
+ 
+   assert('C6 created Cycle inactive', C.activeGriefFromRegisters_(persistedRegister, 100) === null);
+   assert('C7 C+1 through C+D active', [101, 102, 103].every((cy) => !!C.activeGriefFromRegisters_(persistedRegister, cy)));
+   assert('C8 C+D+1 inactive', C.activeGriefFromRegisters_(persistedRegister, 104) === null);
+ 
+-  const activeBox = registerCtx(102, persistedRegister, []);
++  const activeBox = registerCtx(102, persistedRegister, [], box.ctx.ledger.rows[0][3]);
+   C.compressLifeHistory_(activeBox.ctx);
+   assert('C8a active envelope needs no Phase-9 rewrite', activeBox.ctx.ledger.rows[0][4] === persistedRegister && activeBox.ctx.ledger.dirty === false);
+ 
+-  const expireBox = registerCtx(104, persistedRegister, []);
++  const expireBox = registerCtx(104, persistedRegister, [], box.ctx.ledger.rows[0][3]);
+   C.compressLifeHistory_(expireBox.ctx);
+   const expired = JSON.parse(expireBox.ctx.ledger.rows[0][4]);
+   assert('C9 first Phase 9 after expiry removes only grief', !('grief' in expired) && expired.biases.length === 1 && expired.unlived.length === 1 && expired.future.keep === true);
+-  assert('C10 expiry leaves DialState byte-identical', expireBox.ctx.ledger.rows[0][3] === expireBox.beforeDial);
++  assert('C10 expiry preserves the durable DialState stamp', JSON.parse(expireBox.ctx.ledger.rows[0][3]).grief.l === 100);
+   assert('C11 malformed null-cycle state is inactive', C.activeGriefFromRegisters_(JSON.stringify({ grief: { startCycle: null, throughCycle: 3 } }), 1) === null);
+ 
+   const missingTarget = registerCtx(100, seedRegister, ordinaryCascades.concat([{
+--- a/utilities/citizenMemory.js
++++ b/utilities/citizenMemory.js
+@@ -257,6 +257,7 @@
+   if (c.pressure) o.pressure = c.pressure;
+   if (c.wear) o.wear = c.wear;
+   if (c.debtDefault) o.debtDefault = c.debtDefault;
++  if (c.grief) o.grief = c.grief;
+   if (c.fan) o.fan = c.fan; // engine.208 the team a fan follows: 'as' | 'oaks' | 'both'
+   return o;
+ }
+@@ -274,6 +275,7 @@
+     if (obj.pressure) c.pressure = obj.pressure; // engine.201 W1f per-cause pressure run {cause:{n,l}}
+     if (obj.wear) c.wear = obj.wear;             // engine.272 integrity wear {d, l}
+     if (obj.debtDefault) c.debtDefault = obj.debtDefault; // engine.276 default mark {l, n} — the money loop writes it, the home roll reads it
++    if (obj.grief) c.grief = obj.grief; // engine.94 B.1 latest bereavement Cycle
+     if (obj.fan) c.fan = obj.fan;                 // engine.208 the team a fan follows — seed / household / mint write it
+   }
+   return c;
+--- a/utilities/compressLifeHistory.js
++++ b/utilities/compressLifeHistory.js
+@@ -629,9 +629,12 @@
+       regsDirty = true;
+     }
+ 
++    var griefStampDue = false;
+     if (griefPending.length && regs) {
+       var griefN = foldGriefCascades_(regs, griefPending);
+       if (griefN > 0) { griefApplied += griefN; regsDirty = true; }
++      // The active envelope expires; this stamp survives for history conditions.
++      griefStampDue = griefN > 0;
+       griefCitizens++;
+     }
+ 
+@@ -705,6 +708,13 @@
+     }
+ 
+     if (dialRmwNeeded) row[iDialState] = serializeDialState_(c);
++    if (griefStampDue) {
++      // Grief-only maintenance keeps the rest of DialState, including unknown
++      // additive fields, without normalizing the dial body.
++      var stampedDial = parseDialState_(row[iDialState] ? String(row[iDialState]) : '');
++      stampedDial.grief = { l: cycle };
++      row[iDialState] = JSON.stringify(stampedDial);
++    }
+     rows[r] = row;
+     updated++;
+   }
+@@ -1378,6 +1388,7 @@
+   if (c.pressure) o.pressure = c.pressure; // engine.201 W1f per-cause pressure run {cause:{n,l}} — written by emitPressureTag_ in Phase 5
+   if (c.wear) o.wear = c.wear; // engine.272 integrity wear {d, l} — points worn off, last step Cycle
+   if (c.debtDefault) o.debtDefault = c.debtDefault; // engine.276 default mark {l, n} — written by the money loop in Phase 5, read by the home roll
++  if (c.grief) o.grief = c.grief; // engine.94 B.1 durable bereavement stamp
+   if (c.fan) o.fan = c.fan; // engine.208 the team a fan follows ('as' | 'oaks' | 'both')
+   return JSON.stringify(o);
+ }

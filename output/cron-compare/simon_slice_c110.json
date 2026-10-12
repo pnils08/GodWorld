@@ -1,0 +1,160 @@
+{
+  "empty": false,
+  "cycle": 110,
+  "kind": "simon-longview",
+  "desk": "sports",
+  "journalist": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "persona": "simon-leary"
+  },
+  "pulse": {
+    "className": "role-change-under-continuity",
+    "score": 84,
+    "label": "The A's record is 4-1."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 2,
+        "name": "Keystone Player"
+      },
+      {
+        "id": 4,
+        "name": "Load-Bearing Continuity"
+      }
+    ],
+    "anchorFacts": [
+      "The A's record is 4-1.",
+      "The A's have won 3 straight."
+    ],
+    "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+    "missing": [
+      "why the role change was made",
+      "historical comparison or franchise precedent",
+      "organizational intention or future plan",
+      "citywide, clubhouse, or fan interpretation"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "civicFacts": [
+    "FranchiseStability (feed): stable — sports feed",
+    "EconomicFootprint (feed): growing — sports feed",
+    "EventTrigger (feed): cold-streak — sports feed",
+    "HomeNeighborhood (feed): Jack London — sports feed",
+    "FranchiseStability (feed): stable — sports feed",
+    "EconomicFootprint (feed): growing — sports feed"
+  ],
+  "story": {
+    "angle": "The A's record is 4-1.",
+    "label": "The A's record is 4-1.",
+    "hookLine": "The A's record is 4-1.",
+    "kind": "long-view-signal",
+    "hood": "Downtown",
+    "popids": [
+      "POP-00033",
+      "POP-00597",
+      "POP-00001",
+      "POP-00018"
+    ],
+    "citizens": [
+      "John Ellis (POP-00033)",
+      "Eric Taveras (POP-00597)",
+      "Vinnie Keane (POP-00001)",
+      "Benji Dillon (POP-00018)"
+    ],
+    "ref": "world_summary_c110.md ## Sports",
+    "cycle": 110
+  },
+  "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+  "players": [
+    {
+      "name": "John Ellis",
+      "popid": "POP-00033",
+      "role": "Starting Pitcher, Oakland A's",
+      "neighborhood": "Laurel",
+      "why": "feed-names"
+    },
+    {
+      "name": "Eric Taveras",
+      "popid": "POP-00597",
+      "role": "Second Baseman, Oakland A's",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "why": "feed-names"
+    },
+    {
+      "name": "Benji Dillon",
+      "popid": "POP-00018",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+  },
+  "candidates": [
+    {
+      "score": 84,
+      "cycle": 110,
+      "team": "A's",
+      "label": "John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games."
+    },
+    {
+      "score": 56,
+      "cycle": 110,
+      "team": "A's",
+      "label": "Henry Rivas shines in game 4, while Horn stays hot and Mark Aitken and Isley Kelley provide power."
+    },
+    {
+      "score": 54,
+      "cycle": 108,
+      "team": "A's",
+      "label": "Through 3 games the A's lead the Twins 3-0. Game 1 As (6) Twins (2), Game 2 As (3) Twins (2), Game 3 As (9) Twins (6)."
+    },
+    {
+      "score": 54,
+      "cycle": 108,
+      "team": "A's",
+      "label": "World Series is set, A's vs Phillies. Arturo Ramos to take the mound in game 1. Offensive stars so far this playoffs; Eric Taveras, Vladimir Gonzalez, Ernesto Quintero"
+    },
+    {
+      "score": 44,
+      "cycle": 110,
+      "team": "Oaks",
+      "label": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran the the front office last season, gets the better of him in this matchup"
+    },
+    {
+      "score": 44,
+      "cycle": 110,
+      "team": "Oaks",
+      "label": "The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise between rookie camp and preseason."
+    },
+    {
+      "score": 42,
+      "cycle": 109,
+      "team": "A's",
+      "label": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough."
+    },
+    {
+      "score": 38,
+      "cycle": 110,
+      "team": "A's",
+      "label": "A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon"
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c110.md ## Sports",
+    "scripts/sportsSubstrate.js",
+    "docs/media/SIMON_LONGVIEW_BAG.md"
+  ]
+}

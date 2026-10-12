@@ -1,0 +1,23 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-10-06",
+  "cycle": 110,
+  "model": "moonshotai/kimi-k2",
+  "statement": "The West Oakland Tenant Defense Fund is filed and ready. Four million dollars to keep families in their homes when notices hit—legal aid, rapid response, the works. I've seen too many neighbors pack boxes because they couldn't find a lawyer in time. This fund meets people at the moment of crisis, not after they've already lost. The Stabilization Fund kept our storefronts breathing; this keeps our families rooted. Council should move fast—every week of delay is another household gone.",
+  "moves": [
+    {
+      "type": "call-vote",
+      "payload": {
+        "initiativeId": "INIT-010"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-06T10:46:48.772Z",
+  "fellBackFrom": "deepseek/deepseek-chat"
+}

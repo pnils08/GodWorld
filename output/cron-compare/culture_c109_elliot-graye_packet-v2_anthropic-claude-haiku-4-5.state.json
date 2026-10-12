@@ -1,0 +1,426 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00012",
+    "name": "Elliot Graye",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and Gurdwara Singh Sabha Fruitvale in focus",
+    "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "faith",
+      "hood": "Fruitvale",
+      "facts": [
+        "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+        "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+        "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+        "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+        "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+        "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+        "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+        "In focus: Gurdwara Singh Sabha Fruitvale — Sikh, Fruitvale, congregation 350, founded 1982, led by Bhai Manjit Singh — langar kitchen, community service",
+        "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+        "Postpartum Oakland Network (health), Fruitvale, founded by Lucia Polito, since C101"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity. (general coverage)",
+        "Notable event: \"Bay Pure Land Buddhist Temple: congregation opens doors for community support\". Follow-up recommended. (general coverage)",
+        "Juan White moved from Temescal to Fruitvale — moving up from Temescal (desk rotation)",
+        "Denise Simmons moved from Rockridge to Fruitvale — displaced from Rockridge (risk 9/10) (desk rotation)"
+      ],
+      "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-faith",
+    "hood": "Fruitvale",
+    "src": "output/beats/Faith_Organizations.jsonl \"Gurdwara Singh Sabha Fruitvale\"",
+    "plan": {
+      "focus": "Gurdwara Singh Sabha Fruitvale",
+      "closeQuestion": "How can faith-based organizations in Fruitvale work together to address the community's most pressing needs?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00753",
+        "name": "Eunice Marston",
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00753-6d9d786ae7",
+        "pop": "POP-00753",
+        "name": "Eunice Marston",
+        "quote": "I haven't had any direct involvement with the Gurdwara Singh Sabha Fruitvale, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.",
+        "factIds": [
+          "F-1385523ec234"
+        ],
+        "src": "packet.W2[POP-00753]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Elliot Graye",
+        "text": "The potential for interfaith collaboration and cooperation in community support efforts",
+        "usable": false
+      },
+      {
+        "from": "Elliot Graye",
+        "text": "The impact of faith-based community support on community cohesion and well-being",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "8 faith events on the record since C103 · Gurdwara Singh Sabha Fruitvale in Fruitvale | 8 named on the record",
+      "src": "output/beats/Faith_Organizations.jsonl \"Gurdwara Singh Sabha Fruitvale\"",
+      "id": "F-1385523ec234"
+    },
+    {
+      "t": "FACT",
+      "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+      "src": "output/beats/Faith_Organizations.jsonl \"Gurdwara Singh Sabha Fruitvale\"",
+      "id": "F-ea9d32785b01"
+    },
+    {
+      "t": "FACT",
+      "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+      "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+      "id": "F-61024524d215"
+    },
+    {
+      "t": "FACT",
+      "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+      "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\"",
+      "id": "F-7d24d6975c0b"
+    },
+    {
+      "t": "FACT",
+      "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+      "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\"",
+      "id": "F-2e25fe91ddff"
+    },
+    {
+      "t": "FACT",
+      "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+      "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\"",
+      "id": "F-fa55233aeb20"
+    },
+    {
+      "t": "FACT",
+      "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+      "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+      "id": "F-c6268244f8ea"
+    },
+    {
+      "t": "FACT",
+      "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+      "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+      "id": "F-2e38ae74adc2"
+    },
+    {
+      "t": "FACT",
+      "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+      "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\"",
+      "id": "F-53d1f53fb120"
+    },
+    {
+      "t": "FACT",
+      "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+      "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\"",
+      "id": "F-3cbfd5530d60"
+    },
+    {
+      "t": "FACT",
+      "text": "In focus: Gurdwara Singh Sabha Fruitvale — Sikh, Fruitvale, congregation 350, founded 1982, led by Bhai Manjit Singh — langar kitchen, community service",
+      "src": "output/beats/Faith_Organizations.jsonl \"Gurdwara Singh Sabha Fruitvale\"",
+      "id": "F-79f8898ec079"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-004",
+      "id": "F-d36eee7f47b5"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-010",
+      "id": "F-8f8b47280edd"
+    },
+    {
+      "t": "FACT",
+      "text": "Postpartum Oakland Network (health), Fruitvale, founded by Lucia Polito, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-016",
+      "id": "F-535a79178865"
+    },
+    {
+      "t": "FACT",
+      "text": "Also in Fruitvale: St. Esperanza Parish (Catholic)",
+      "src": "output/beats/Faith_Organizations.jsonl",
+      "id": "F-733079f62459"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Describe one Packet-supplied faith-community or quiet-care signal through observable function without inventing belief, doctrine, attendance, clergy, service, aid, or institutional action.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "reflective faith-and-ethics ground brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named institution, person, or condition",
+      "closing": "the function or human account still unestablished"
+    },
+    "authorizedTexture": [
+      "ethical or reflective interpretation of a supplied faith-adjacent condition without asserting belief or action",
+      "dignity-first language carrying no invented person, service, gathering, doctrine, or factual premise"
+    ],
+    "textureConditions": [
+      "a sighting proves only the supplied person-place relation, not worship, membership, motive, companionship, or participation",
+      "every clergy member, congregant, worker, gathering, service, aid act, quote, belief, institutional role, and civic effect requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented faith practice, belief, worship, membership, motive, companion, clergy, congregant, worker, pantry, grief room, gathering, service, aid act, quote, or civic effect",
+      "an invented or altered person, institution, tradition, neighborhood, event, relationship, date, count, or quote",
+      "a blocked real-world institution or clergy name, doctrine-war framing, raw engine label, or collective faith-community sentiment presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-9f3cac466748",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-1385523ec234",
+        "t": "FACT",
+        "text": "8 faith events on the record since C103 · Gurdwara Singh Sabha Fruitvale in Fruitvale | 8 named on the record",
+        "src": "output/beats/Faith_Organizations.jsonl \"Gurdwara Singh Sabha Fruitvale\""
+      },
+      {
+        "id": "F-ea9d32785b01",
+        "t": "FACT",
+        "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+        "src": "output/beats/Faith_Organizations.jsonl \"Gurdwara Singh Sabha Fruitvale\""
+      },
+      {
+        "id": "F-61024524d215",
+        "t": "FACT",
+        "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\""
+      },
+      {
+        "id": "F-7d24d6975c0b",
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C107 — crisis response: congregation opens doors for community support (attendance 72)",
+        "src": "output/beats/Faith_Ledger.jsonl C107 \"Telegraph Presbyterian Fellowship\""
+      },
+      {
+        "id": "F-2e25fe91ddff",
+        "t": "FACT",
+        "text": "Temple Beth Or (Rockridge), C104 — crisis response: congregation opens doors for community support (attendance 104)",
+        "src": "output/beats/Faith_Ledger.jsonl C104 \"Temple Beth Or\""
+      },
+      {
+        "id": "F-fa55233aeb20",
+        "t": "FACT",
+        "text": "Lakeshore Unitarian Universalist Fellowship (Lake Merritt), C104 — crisis response: emergency assistance fund activated (attendance 53)",
+        "src": "output/beats/Faith_Ledger.jsonl C104 \"Lakeshore Unitarian Universalist Fellowship\""
+      },
+      {
+        "id": "F-c6268244f8ea",
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\""
+      },
+      {
+        "id": "F-2e38ae74adc2",
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\""
+      },
+      {
+        "id": "F-53d1f53fb120",
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C108 — holy day: traditional Epiphany rituals observed (attendance 1,077)",
+        "src": "output/beats/Faith_Ledger.jsonl C108 \"Cathedral of the Living Word\""
+      },
+      {
+        "id": "F-3cbfd5530d60",
+        "t": "FACT",
+        "text": "St. Esperanza Parish (Fruitvale), C108 — holy day: congregation celebrates Epiphany (attendance 374)",
+        "src": "output/beats/Faith_Ledger.jsonl C108 \"St. Esperanza Parish\""
+      },
+      {
+        "id": "F-79f8898ec079",
+        "t": "FACT",
+        "text": "In focus: Gurdwara Singh Sabha Fruitvale — Sikh, Fruitvale, congregation 350, founded 1982, led by Bhai Manjit Singh — langar kitchen, community service",
+        "src": "output/beats/Faith_Organizations.jsonl \"Gurdwara Singh Sabha Fruitvale\""
+      },
+      {
+        "id": "F-d36eee7f47b5",
+        "t": "FACT",
+        "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-004"
+      },
+      {
+        "id": "F-8f8b47280edd",
+        "t": "FACT",
+        "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-010"
+      },
+      {
+        "id": "F-535a79178865",
+        "t": "FACT",
+        "text": "Postpartum Oakland Network (health), Fruitvale, founded by Lucia Polito, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-016"
+      },
+      {
+        "id": "F-733079f62459",
+        "t": "FACT",
+        "text": "Also in Fruitvale: St. Esperanza Parish (Catholic)",
+        "src": "output/beats/Faith_Organizations.jsonl"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00753-6d9d786ae7",
+        "speakerId": "POP-00753",
+        "speakerName": "Eunice Marston",
+        "text": "I haven't had any direct involvement with the Gurdwara Singh Sabha Fruitvale, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community.",
+        "factIds": [
+          "F-1385523ec234"
+        ],
+        "src": "packet.W2[POP-00753]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00753",
+        "name": "Eunice Marston",
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Elliot Graye",
+        "text": "The potential for interfaith collaboration and cooperation in community support efforts",
+        "publishable": false
+      },
+      {
+        "from": "Elliot Graye",
+        "text": "The impact of faith-based community support on community cohesion and well-being",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "ethical or reflective interpretation of a supplied faith-adjacent condition without asserting belief or action",
+      "dignity-first language carrying no invented person, service, gathering, doctrine, or factual premise"
+    ],
+    "textureConditions": [
+      "a sighting proves only the supplied person-place relation, not worship, membership, motive, companionship, or participation",
+      "every clergy member, congregant, worker, gathering, service, aid act, quote, belief, institutional role, and civic effect requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented faith practice, belief, worship, membership, motive, companion, clergy, congregant, worker, pantry, grief room, gathering, service, aid act, quote, or civic effect",
+      "an invented or altered person, institution, tradition, neighborhood, event, relationship, date, count, or quote",
+      "a blocked real-world institution or clergy name, doctrine-war framing, raw engine label, or collective faith-community sentiment presented as fact"
+    ]
+  }
+}

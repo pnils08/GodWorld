@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "109",
+  "persona": "luis-navarro",
+  "byline": "Luis Navarro",
+  "bylinePopid": "POP-00636",
+  "article": "output/cron-compare/staged/civic_c109_luis-navarro_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Melton Neilon",
+        "role": "mentioned",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      },
+      {
+        "name": "Elio Perez",
+        "role": "quoted-source",
+        "popid": "POP-00201"
+      },
+      {
+        "name": "Depak Ying",
+        "role": "mentioned",
+        "popid": "POP-00210"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Honestly, I hear teachers and parents at school talking about how the city keeps promising things for Fruitvale but nothing ever moves forward. We see the same empty lots year after year, and nobody ever explains why.",
+        "sourceRef": "citizenVoice PRESS Rick Walker"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c6c39ed593ce",
+    "draftSha256": "2a9050275dc719f5b3ff0193ff57bf9ac89805c44f301541b02b582eeb5887a2",
+    "verdict": "output/cron-compare/civic_c109_luis-navarro_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-09-29T23:16:02.524Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-03T17:00:05.971Z"
+}

@@ -1,0 +1,38 @@
+{
+  "office": "council_d4",
+  "cycle": 111,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "As the representative of D4, I am committed to addressing the pressing concerns of my constituents. I acknowledge the progress in Glenview and the steady strength in Dimond, and I will work to ensure that both neighborhoods receive the attention they deserve. I support the Mayor's initiatives, including the Downtown Economic Revitalization and the Ivy Hill infrastructure crisis response, as they align with my goals of targeted investment and fiscal discipline.",
+  "statements": [
+    {
+      "statementId": "STMT-111-council_d4-001",
+      "type": "support_statement",
+      "topic": "Downtown Economic Revitalization",
+      "initiative": "INIT-008",
+      "decision": "I will support the Downtown Economic Revitalization initiative",
+      "quote": "Targeted investment and fiscal discipline are crucial for our city's growth, and I believe the Downtown Economic Revitalization initiative aligns with these principles.",
+      "fullStatement": "As the representative of D4, I am committed to supporting initiatives that promote targeted investment and fiscal discipline. The Downtown Economic Revitalization initiative aligns with these goals, and I believe it has the potential to drive growth and development in our city. I will work with the Mayor and my fellow council members to ensure that this initiative is implemented effectively and efficiently.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d4-002",
+      "type": "acknowledgement_statement",
+      "topic": "Glenview Progress",
+      "initiative": null,
+      "decision": "I acknowledge the progress in Glenview",
+      "quote": "The progress in Glenview is a testament to the city's structured support and the people's resilience.",
+      "fullStatement": "I would like to take a moment to acknowledge the progress that has been made in Glenview. The city's structured support and the people's resilience have come together to create a positive impact in this neighborhood. I will continue to work to ensure that Glenview receives the attention it deserves, with a focus on targeted investment and fiscal discipline.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d4-003",
+      "type": "support_statement",
+      "topic": "Ivy Hill Infrastructure Crisis Response",
+      "initiative": null,
+      "decision": "I will support the Ivy Hill infrastructure crisis response",
+      "quote": "When a neighborhood needs help, we must show up with solutions, not just speeches.",
+      "fullStatement": "The recent data shows a concerning trend of decay momentum and crime index in Ivy Hill, which demands our immediate attention. As the representative of D4, I am committed to working with the city to find solutions that support the local businesses and residents of Ivy Hill. I will support the Ivy Hill infrastructure crisis response and work to ensure that it is implemented effectively and efficiently.",
+      "trackerUpdates": {}
+    }
+  ]
+}

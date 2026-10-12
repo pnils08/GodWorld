@@ -4,7 +4,7 @@
     "initiative": "baylight",
     "initiativeId": "INIT-006",
     "cycle": 108,
-    "generatedAt": "2026-09-20T20:55:04.849Z",
+    "generatedAt": "2026-09-25T14:12:25.681Z",
     "description": "Baylight District Development — $2.1B mixed-use waterfront development with 5 deliverables due September 15"
   },
   "initiative": {
@@ -26,11 +26,11 @@
     "mayoralAction": "signed",
     "mayoralActionCycle": "83",
     "notes": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes.",
-    "lastUpdated": "9/13/2026",
+    "lastUpdated": "9/24/2026",
     "implementationPhase": "construction-planning",
     "milestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins",
     "nextScheduledAction": "Phase II site remediation",
-    "nextActionCycle": "108"
+    "nextActionCycle": "109"
   },
   "office": {
     "name": "Baylight Authority",
@@ -99,7 +99,8 @@
       "decisions_c104.json",
       "decisions_c105.json",
       "decisions_c106.json",
-      "decisions_c107.json"
+      "decisions_c107.json",
+      "decisions_c108.json"
     ]
   },
   "maraDirective": null,

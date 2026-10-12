@@ -1,0 +1,58 @@
+{
+  "office": "council_d6",
+  "cycle": 111,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "Piedmont Avenue demonstrates that neighborhood commerce flourishes when community anchors lead and streets remain safe, underscoring City Hall's fundamental obligation to maintain seamless baseline services. Across the city, I support timely workforce placement reports and stabilization disbursements while insisting on strict fiscal auditing and committee scrutiny for all newly filed funds.",
+  "statements": [
+    {
+      "statementId": "STMT-111-council_d6-001",
+      "type": "district_statement",
+      "topic": "Piedmont Avenue Commercial Vitality and Municipal Reliability",
+      "initiative": null,
+      "decision": "Prioritize baseline municipal infrastructure and core city services to support thriving commercial corridors in Piedmont Avenue and Montclair.",
+      "quote": "When our neighborhood corridors are thriving and safe, the city's highest duty is to get the fundamentals right and support local commerce.",
+      "fullStatement": "Piedmont Avenue is thriving with busy street trade, active sidewalks, and low crime. This success is driven by local business owners and strong community anchors. City Hall does not need to over-engineer solutions here; our responsibility is municipal reliability—ensuring clean streets, functioning lighting, and responsive public services so that our neighborhood corridors across District 6 continue to prosper.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d6-002",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund Month-Ten Disbursement",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Support month-ten disbursement while maintaining mandatory financial accounting to the Finance Committee.",
+      "quote": "Direct relief prevents displacement, but transparent accounting must accompany every single disbursement.",
+      "fullStatement": "I support the month-ten disbursement for the West Oakland Stabilization Fund. Getting designated relief to eligible families without unnecessary bureaucratic delays fulfills the program's intent. However, disciplined municipal management requires that regular reconciliation reports continue to come before the Council so taxpayers know every dollar is accounted for.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d6-003",
+      "type": "oversight_statement",
+      "topic": "Downtown Economic Revitalization Hearing Preparation",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "Participate in the Cycle 112 Economic Development Committee hearing with focus on permit streamlining and fiscal guardrails.",
+      "quote": "Revitalizing downtown requires real regulatory relief and measurable economic returns, not open-ended municipal spending.",
+      "fullStatement": "I welcome the Mayor's call for an Economic Development Committee hearing in Cycle 112 on Downtown Revitalization. District 6 residents expect that any major downtown investment includes concrete permitting reform, clear benchmarks for private sector revitalization, and ironclad fiscal guardrails before appropriations advance.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d6-004",
+      "type": "oversight_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline Reporting",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Support the Cycle 112 cohort placement report requirement to verify workforce training outcomes.",
+      "quote": "Accountability in workforce development means auditing actual placements, not just celebrating enrollment goals.",
+      "fullStatement": "Demanding a verified cohort placement report by Cycle 112 is the right move for the Oakland Youth Apprenticeship Pipeline. Workforce funding must translate directly into durable, long-term employment. Regular verification protects public funds and ensures our young people receive the career pathways promised.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-111-council_d6-005",
+      "type": "policy_statement",
+      "topic": "Fiscal Review of Grand Lake and Tenant Defense Filings",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Demand comprehensive fiscal analysis and committee hearings on newly filed stabilization and legal defense measures.",
+      "quote": "New multi-million dollar appropriations must go through rigorous committee review before touching the city ledger.",
+      "fullStatement": "With $2.5 million filed for Grand Lake commercial stabilization and $4.2 million proposed for tenant legal defense, the Council must apply rigorous fiscal scrutiny. Every new spending measure requires clear revenue offsets, transparent eligibility criteria, and thorough committee evaluation before reaching the floor for a final vote.",
+      "trackerUpdates": {}
+    }
+  ]
+}

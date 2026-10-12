@@ -4,17 +4,17 @@
     "initiative": "transit-hub",
     "initiativeId": "INIT-003",
     "cycle": 108,
-    "generatedAt": "2026-09-20T20:55:04.843Z",
+    "generatedAt": "2026-09-25T14:12:25.676Z",
     "description": "Fruitvale Transit Hub Modernization — $230M for transit-oriented development and community hub"
   },
   "initiative": {
     "id": "INIT-003",
     "name": "Fruitvale Transit Hub Phase II — Visioning",
     "type": "visioning",
-    "status": "visioning-complete",
+    "status": "proposed",
     "budget": "$230M",
     "voteRequirement": "",
-    "voteCycle": "94",
+    "voteCycle": "",
     "projection": "uncertain",
     "outcome": "COMPLETED",
     "leadFaction": "OPP",
@@ -26,11 +26,11 @@
     "mayoralAction": "none",
     "mayoralActionCycle": "",
     "notes": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented.",
-    "lastUpdated": "9/13/2026",
+    "lastUpdated": "9/24/2026",
     "implementationPhase": "design-phase",
-    "milestoneNotes": "C107: Merchant covenants executed, design RFP published with community-informed requirements",
+    "milestoneNotes": "C107: Merchant covenants executed, design RFP published with community-informed requirements\nC108 conversion: no council passage on record (VoteCycle 94, Outcome COMPLETED, Status visioning-complete) — enters petition-pending; history above kept, VoteCycle cleared.\nC108 conversion: Stage Proposed — Fruitvale transit hub never had a council vote (builder ruling 2026-09-21): petition-pending, history kept, vote via petition band or a call-vote move.",
     "nextScheduledAction": "Design consultant selection",
-    "nextActionCycle": "108"
+    "nextActionCycle": "109"
   },
   "office": {
     "name": "Fruitvale Transit Hub Planning Office",
@@ -92,7 +92,8 @@
       "decisions_c104.json",
       "decisions_c105.json",
       "decisions_c106.json",
-      "decisions_c107.json"
+      "decisions_c107.json",
+      "decisions_c108.json"
     ]
   },
   "maraDirective": null,
@@ -294,7 +295,7 @@
     },
     {
       "bizId": "BIZ-00081",
-      "name": "St. Columba Catholic Church",
+      "name": "St. Esperanza Parish",
       "sector": "Faith Organization",
       "neighborhood": "Fruitvale",
       "employeeCount": 11,

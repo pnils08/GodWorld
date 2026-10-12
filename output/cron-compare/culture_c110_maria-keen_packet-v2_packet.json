@@ -1,0 +1,555 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "110",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "Dimond — the programs that hold the block and the people who founded them",
+      "label": "Dimond: 1 active program on the record",
+      "hookLine": "1 active programs in Dimond; Mark Aitken founded one.",
+      "hood": "Dimond",
+      "citizens": [
+        "Mark Aitken (POP-00003)"
+      ],
+      "popids": [
+        "POP-00003"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C110",
+      "cycle": 110
+    }
+  },
+  "angle": "output/cron-compare/culture_c110_maria-keen_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "Honestly, Dimond is still a bit of a mystery to me, I mean, I've heard it's a great neighborhood with a lot of heart, but I don't really know much about it beyond that. As a baker in Temescal, I tend to focus on my own community, but I'm always interested in what's going on in other parts of the city. I think community programs can really make a difference in people's lives, and I'd love to learn more about what's happening in Dimond.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; devoted, family is everything; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, Dimond is still a bit of a mystery to me, I mean, I've heard it's a great neighborhood with a lot of heart, but I don't really know much about it beyond that. As a baker in Temescal, I tend to focus on my own community, but I'm always interested in what's going on in other parts of the city. I think community programs can really make a difference in people's lives, and I'd love to learn more about what's happening in Dimond.\",\n  \"fact_ids\": [\"F-9d9313758204\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9d9313758204"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-21156180ee",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, Dimond is still a bit of a mystery to me, I mean, I've heard it's a great neighborhood with a lot of heart, but I don't really know much about it beyond that. As a baker in Temescal, I tend to focus on my own community, but I'm always interested in what's going on in other parts of the city. I think community programs can really make a difference in people's lives, and I'd love to learn more about what's happening in Dimond."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own page at C105 says: \"I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community\". Is that still how you see Dimond? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Dimond",
+          "focus": "The impact of community programs on Dimond's residents",
+          "src": "output/beats/Community_Programs.jsonl @C110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Melton Neilon — Sourdough Baker",
+          "evidence": [
+            {
+              "id": "EV-PAGE-7bc71c0819",
+              "src": "cp-POP-00170-c105-PRESS",
+              "text": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.",
+            "src": "cp-POP-00170-c105-PRESS",
+            "id": "F-9d9313758204"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-1c49e2ddc864"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00042",
+      "name": "Ramon Vega",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; principled, plays it straight",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null; citizen is not quote eligible",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, it's still tough to see the tamale lady having to adapt like that. I remember when she used to set up by the Dimond Library and it was always bustling. Now, with the foot traffic dried up, it's a different story. I've seen her working out of her nephew's food truck, and I'm glad she's found a way to keep going, but it's a reminder that we need to do more to support our local businesses and bring life back to our neighborhoods.\",\n  \"fact_ids\": [\"F-d80a2222ebde\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": \"I'd like to explore ways to increase foot traffic in the Dimond area, maybe through community events or initiatives that bring people together.\"\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00042",
+          "name": "Ramon Vega",
+          "role": "City Council President - D1",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own page at C102 says: \"I see the tamale lady who used to set up by the Dimond Library now working out of her nephew’s food truck because the foot traffic dried up\". Is that still how you see Dimond? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Dimond",
+          "focus": "The impact of community programs on Dimond's residents",
+          "src": "output/beats/Community_Programs.jsonl @C110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ramon Vega — City Council President - D1",
+          "evidence": [
+            {
+              "id": "EV-PAGE-97079c8f22",
+              "src": "cp-POP-00042-c102-PRESS",
+              "text": "I see the tamale lady who used to set up by the Dimond Library now working out of her nephew’s food truck because the foot traffic dried up."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "I see the tamale lady who used to set up by the Dimond Library now working out of her nephew’s food truck because the foot traffic dried up.",
+            "src": "cp-POP-00042-c102-PRESS",
+            "id": "F-d80a2222ebde"
+          },
+          {
+            "t": "FACT",
+            "text": "Ramon Vega — City Council President - D1",
+            "src": "Simulation_Ledger profile for POP-00042",
+            "id": "F-54dcea97959e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": false,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Return abstain. This citizen is not eligible for this interview path."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "Honestly, Dimond is still a bit of a mystery to me, I mean, I've heard it's a great neighborhood with a lot of heart, but I don't really know much about it beyond that. As a baker in Temescal, I tend to focus on my own community, but I'm always interested in what's going on in other parts of the city. I think community programs can really make a difference in people's lives, and I'd love to learn more about what's happening in Dimond.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; devoted, family is everything; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, Dimond is still a bit of a mystery to me, I mean, I've heard it's a great neighborhood with a lot of heart, but I don't really know much about it beyond that. As a baker in Temescal, I tend to focus on my own community, but I'm always interested in what's going on in other parts of the city. I think community programs can really make a difference in people's lives, and I'd love to learn more about what's happening in Dimond.\",\n  \"fact_ids\": [\"F-9d9313758204\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9d9313758204"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-21156180ee",
+        "authoredQuote": true,
+        "publishableQuote": "Honestly, Dimond is still a bit of a mystery to me, I mean, I've heard it's a great neighborhood with a lot of heart, but I don't really know much about it beyond that. As a baker in Temescal, I tend to focus on my own community, but I'm always interested in what's going on in other parts of the city. I think community programs can really make a difference in people's lives, and I'd love to learn more about what's happening in Dimond."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own page at C105 says: \"I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community\". Is that still how you see Dimond? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Dimond",
+          "focus": "The impact of community programs on Dimond's residents",
+          "src": "output/beats/Community_Programs.jsonl @C110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Melton Neilon — Sourdough Baker",
+          "evidence": [
+            {
+              "id": "EV-PAGE-7bc71c0819",
+              "src": "cp-POP-00170-c105-PRESS",
+              "text": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.",
+            "src": "cp-POP-00170-c105-PRESS",
+            "id": "F-9d9313758204"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-1c49e2ddc864"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": null,
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; restless for the new, adventurous; steady, hard to shake; devoted, family is everything; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I still see Dimond as a bit of a trek from Fruitvale, but it's a trip I'm willing to make if it means catching up with some of the old crowd or trying out a new spot. I've got a lot of love for the community programs around here, they really bring people together.\",\n  \"fact_ids\": [\"F-25885f61129e\", \"F-31a3ebe941e2\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": \"I've heard the seniors lunch program at St. Esperanza Parish is doing some great work, maybe I'll have to check it out and see how I can get involved.\"\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "K-8 Teacher,Former Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own page at C105 says: \"I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook\". Is that still how you see Dimond? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Dimond",
+          "focus": "The impact of community programs on Dimond's residents",
+          "src": "output/beats/Community_Programs.jsonl @C110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Rick Walker — K-8 Teacher,Former Line cook",
+          "evidence": [
+            {
+              "id": "EV-PAGE-487be0c827",
+              "src": "cp-POP-00198-c105-PRESS",
+              "text": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook.",
+            "src": "cp-POP-00198-c105-PRESS",
+            "id": "F-25885f61129e"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — K-8 Teacher,Former Line cook",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-31a3ebe941e2"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": null,
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I don't know much about what's going on in Dimond, I'm always busy working as a server in Rockridge, but I do know that community programs can make a big difference in people's lives. I've seen it in my own neighborhood, and I think it's great that there are people like Benji Dillon who care about what's happening in our city.\",\n  \"fact_ids\": [\"F-1e8de86c1e20\", \"F-c70d1f4eed7f\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": \"I'd love to learn more about the community programs in Dimond and how they're impacting residents.\"\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00201",
+          "name": "Elio Perez",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own page at C105 says: \"I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland\". Is that still how you see Dimond? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "Dimond",
+          "focus": "The impact of community programs on Dimond's residents",
+          "src": "output/beats/Community_Programs.jsonl @C110"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Elio Perez — Server",
+          "evidence": [
+            {
+              "id": "EV-PAGE-4e73939baa",
+              "src": "cp-POP-00201-c105-PRESS",
+              "text": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland.",
+            "src": "cp-POP-00201-c105-PRESS",
+            "id": "F-1e8de86c1e20"
+          },
+          {
+            "t": "FACT",
+            "text": "Elio Perez — Server",
+            "src": "Simulation_Ledger profile for POP-00201",
+            "id": "F-c70d1f4eed7f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-09T18:16:43.649Z"
+}

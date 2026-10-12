@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "108",
+  "desk": "sports",
+  "persona": "selena-grant",
+  "storyline": {
+    "slug": "jack-london-wilson-shepard-beat-oaks-beat",
+    "verb": "opened"
+  },
+  "hood": "Jack London",
+  "quotes": [
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": "I've been feeling like we're still finding our rhythm, you know? Preseason's about figuring things out, not about winning every game. The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal."
+    },
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season."
+    },
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "I've been feeling like we're still finding our footing, you know? Preseason's a time to work out the kinks, but it's hard not to worry when you're not seeing the wins. I trust Coach Wilson Shepard to get us ready, though."
+    },
+    {
+      "pop": "POP-00273",
+      "name": "Trenton Nawan",
+      "quote": "I've seen the Oaks struggle in their preseason performance, it's got me a bit worried about how they'll do this season. As someone who lives in Jack London, I'm really invested in seeing them succeed."
+    }
+  ],
+  "claim": "I've been feeling like we're still finding our rhythm, you know? Preseason's about figuring things out, not about winning every game. The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal.",
+  "src": "citizenVoice PRESS c108",
+  "ranAt": "2026-09-22T18:19:54.657Z"
+}

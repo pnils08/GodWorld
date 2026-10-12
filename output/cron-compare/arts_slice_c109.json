@@ -1,0 +1,386 @@
+{
+  "version": "ARTS-SLICE-1",
+  "empty": false,
+  "cycle": 109,
+  "kind": "beat-arts",
+  "seat": {
+    "slug": "kai-marston",
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "desk": "culture",
+    "domain": "arts",
+    "builder": "buildArtsSlice.js"
+  },
+  "hood": "Rockridge",
+  "pulse": {
+    "className": "beat-arts",
+    "score": 100,
+    "label": "37 culture figures rising; 1 new on the record",
+    "hood": "Rockridge",
+    "source": "output/beats/Cultural_Ledger.jsonl @C109"
+  },
+  "story": {
+    "kind": "beat-arts",
+    "angle": "Tara Ellison is rising — the acts and the rooms they play",
+    "label": "37 culture figures rising; 1 new on the record",
+    "hookLine": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108.",
+    "hood": "Rockridge",
+    "citizens": [
+      "Tara Ellison (POP-00546)",
+      "Alma Vasquez (POP-01063)",
+      "Nina Reyes (POP-01057)",
+      "Theo Banks (POP-01056)",
+      "Lena Cross (POP-00539)",
+      "Rowan Pierce (POP-00545)",
+      "Sarah Huang (POP-01049)",
+      "Austin Reaves (POP-01027)",
+      "Jire Hilt (POP-00649)",
+      "Mireya Pinckney (POP-00890)",
+      "Daphne Stafford (POP-00816)",
+      "Kenji Tanaka (POP-00763)",
+      "Dearie Beacon (POP-00246)",
+      "Marisio Curazo (POP-00698)",
+      "Amir Delia (POP-00603)",
+      "Lena Carrow (POP-00009)",
+      "Maryam Dawson (POP-00894)",
+      "Jessie Hess (POP-00212)"
+    ],
+    "popids": [
+      "POP-00546",
+      "POP-01063",
+      "POP-01057",
+      "POP-01056",
+      "POP-00539",
+      "POP-00545",
+      "POP-01049",
+      "POP-01027",
+      "POP-00649",
+      "POP-00890",
+      "POP-00816",
+      "POP-00763",
+      "POP-00246",
+      "POP-00698",
+      "POP-00603",
+      "POP-00009",
+      "POP-00894",
+      "POP-00212"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C109",
+    "cycle": 109
+  },
+  "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the engine's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00546",
+      "name": "Tara Ellison",
+      "role": "Journalist",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Tara Ellison — Journalist — Rockridge",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01063",
+      "name": "Alma Vasquez",
+      "role": "sculptor",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Alma Vasquez — sculptor — Laurel",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01057",
+      "name": "Nina Reyes",
+      "role": "actress",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Nina Reyes — actress — Fruitvale",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01056",
+      "name": "Theo Banks",
+      "role": "rapper",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Theo Banks — rapper — Uptown",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00539",
+      "name": "Lena Cross",
+      "role": "Actor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Lena Cross — Actor — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00545",
+      "name": "Rowan Pierce",
+      "role": "Freelance Writer",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01049",
+      "name": "Sarah Huang",
+      "role": "Healthcare Director, Atlas Bay Architects",
+      "neighborhood": "Grand Lake",
+      "business": null,
+      "profile": "Sarah Huang — Healthcare Director, Atlas Bay Architects — Grand Lake",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01027",
+      "name": "Austin Reaves",
+      "role": "SG / The Oaks",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Austin Reaves — SG / The Oaks — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00649",
+      "name": "Jire Hilt",
+      "role": "Line Cook",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Jire Hilt — Line Cook — Jack London",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00890",
+      "name": "Mireya Pinckney",
+      "role": "Community Organizer",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Mireya Pinckney — Community Organizer — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00816",
+      "name": "Daphne Stafford",
+      "role": "Home Health Aide",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Daphne Stafford — Home Health Aide — Chinatown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00763",
+      "name": "Kenji Tanaka",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00246",
+      "name": "Dearie Beacon",
+      "role": "Security guard",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Dearie Beacon — Security guard — Chinatown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00698",
+      "name": "Marisio Curazo",
+      "role": "Elder Care Coordinator",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Marisio Curazo — Elder Care Coordinator — Chinatown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00603",
+      "name": "Amir Delia",
+      "role": "Home Health Aide",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Amir Delia — Home Health Aide — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00009",
+      "name": "Lena Carrow",
+      "role": "Field Reporter",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Lena Carrow — Field Reporter — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00894",
+      "name": "Maryam Dawson",
+      "role": "Community Organizer",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Maryam Dawson — Community Organizer — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00212",
+      "name": "Jessie Hess",
+      "role": "Barista",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Jessie Hess — Barista — Downtown",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    {
+      "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 56, ascending), last seen C86",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    {
+      "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    {
+      "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 50, surging), last seen C99",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    {
+      "text": "Oakland Native MVP Davis (sports figure), Sports, Temescal — new on the culture record last cycle (fame 14, rising), last seen C108",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    {
+      "text": "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 96, cooling), last seen C94",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    {
+      "text": "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 70, cooling), last seen C88",
+      "src": "output/beats/Cultural_Ledger.jsonl @C109"
+    },
+    {
+      "text": "ENGINE SEED (Citywide): Sarah Huang; Austin Reaves; Jire Hilt",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+    },
+    {
+      "text": "ENGINE SEED (Chinatown): Daphne Stafford; Kenji Tanaka; Dearie Beacon · at Ninth Street Kitchen; Golden Lotus Market",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+    },
+    {
+      "text": "ENGINE SEED (Downtown): Amir Delia; Lena Carrow; Maryam Dawson · at Miso Metro; Lake Merritt Mindfulness Sangha",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Tara Ellison is rising — the acts and the rooms they play",
+    "hookLine": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108.",
+    "anchorFacts": [
+      "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108",
+      "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 56, ascending), last seen C86",
+      "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+      "Theo Banks (rapper), Arts, Uptown — fame rising (fame 50, surging), last seen C99",
+      "Oakland Native MVP Davis (sports figure), Sports, Temescal — new on the culture record last cycle (fame 14, rising), last seen C108",
+      "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 96, cooling), last seen C94",
+      "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 70, cooling), last seen C88",
+      "ENGINE SEED (Citywide): Sarah Huang; Austin Reaves; Jire Hilt",
+      "ENGINE SEED (Chinatown): Daphne Stafford; Kenji Tanaka; Dearie Beacon · at Ninth Street Kitchen; Golden Lotus Market",
+      "ENGINE SEED (Downtown): Amir Delia; Lena Carrow; Maryam Dawson · at Miso Metro; Lake Merritt Mindfulness Sangha"
+    ],
+    "evidence": [
+      {
+        "text": "Tara Ellison (journalist), Media, Rockridge — fame rising (fame 58, surging), last seen C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "text": "Sculptor Alma Vasquez (sculptor), Arts, Laurel — fame rising (fame 56, ascending), last seen C86",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "text": "Nina Reyes (actress), Arts, Fruitvale — fame rising (fame 52, surging), last seen C101",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "text": "Theo Banks (rapper), Arts, Uptown — fame rising (fame 50, surging), last seen C99",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "text": "Oakland Native MVP Davis (sports figure), Sports, Temescal — new on the culture record last cycle (fame 14, rising), last seen C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "text": "Lena Cross (Celebrity), Arts, Lake Merritt — fading — the where-are-they-now file (fame 96, cooling), last seen C94",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "text": "Rowan Pierce (journalist), Media, KONO — fading — the where-are-they-now file (fame 70, cooling), last seen C88",
+        "src": "output/beats/Cultural_Ledger.jsonl @C109"
+      },
+      {
+        "text": "ENGINE SEED (Citywide): Sarah Huang; Austin Reaves; Jire Hilt",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+      },
+      {
+        "text": "ENGINE SEED (Chinatown): Daphne Stafford; Kenji Tanaka; Dearie Beacon · at Ninth Street Kitchen; Golden Lotus Market",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+      },
+      {
+        "text": "ENGINE SEED (Downtown): Amir Delia; Lena Carrow; Maryam Dawson · at Miso Metro; Lake Merritt Mindfulness Sangha",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C109"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [
+      {
+        "text": "felt quietly proud of how they handled something small",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Downtown",
+        "priority": 3
+      },
+      {
+        "text": "read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Chinatown",
+        "priority": 3
+      },
+      {
+        "text": "saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Laurel",
+        "priority": 3
+      },
+      {
+        "text": "watched the fog roll over the port cranes from their front window",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Jack London",
+        "priority": 3
+      }
+    ],
+    "note": null,
+    "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started"
+  },
+  "rising": 37,
+  "appeared": 1,
+  "fading": 2,
+  "seeds": 27,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C109",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Kai Marston this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

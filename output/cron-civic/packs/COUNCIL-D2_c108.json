@@ -1,0 +1,422 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00502",
+    "name": "Leonard Tran",
+    "role": "City Council District 2",
+    "officeId": "COUNCIL-D2",
+    "district": "D2",
+    "faction": "IND",
+    "agentDir": "civic-office-council-d2",
+    "initiative": null,
+    "dials": {
+      "approval": 65
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "Phase II site remediation"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 48,
+    "label": "Baylight District — Final Council Vote — Phase II site remediation",
+    "lever": "Phase II site remediation",
+    "hood": "Jack London",
+    "initiative": "INIT-006",
+    "vsCity": {
+      "sentiment": 0.33,
+      "citySentiment": 0.33045454545454545,
+      "crime": 0.53,
+      "cityCrime": 0.5831818181818181,
+      "heat": 0.04545454545454297,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "Phase II site remediation",
+    "lineFacts": [
+      "approval 65",
+      "Baylight District — Final Council Vote is in construction-planning; budget $2.1B — C107: Construction contracts executed; site preparation mobilization begins",
+      "due: Phase II site remediation",
+      "Jack London crime: property 36, violent 17, incidents 3 (cycle 108) — city property 35.6, violent 23.5, incidents 5.5",
+      "Jack London: sentiment 0.33 vs city 0.330; crime index 0.53 vs city 0.583; retail 12.06; housing pressure 3.5; growth; momentum 8"
+    ],
+    "missing": [
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "No move for this seat in the available ledgers through C108.",
+      "moves": []
+    },
+    "board": [
+      {
+        "id": "INIT-006",
+        "name": "Baylight District — Final Council Vote",
+        "domain": "sports",
+        "phase": "construction-planning",
+        "status": "passed",
+        "voteCycle": 83,
+        "stage": null,
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "Jack London",
+          "Downtown"
+        ],
+        "needsNext": "Phase II site remediation",
+        "requirement": null,
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-006"
+    ],
+    "boardText": "Your board:\n- INIT-006 Baylight District — Final Council Vote [construction-planning] — Phase II site remediation",
+    "interventions": {
+      "available": true,
+      "playable": [
+        {
+          "key": "health-service",
+          "domain": "health",
+          "label": "Clinic, health center or care program"
+        },
+        {
+          "key": "transit-project",
+          "domain": "transit",
+          "label": "Station, line or transit hub"
+        },
+        {
+          "key": "school-program",
+          "domain": "education",
+          "label": "School funding or education program"
+        }
+      ],
+      "text": "Interventions you may propose (closed catalog):\n- health-service (health) — Clinic, health center or care program\n- transit-project (transit) — Station, line or transit hub\n- school-program (education) — School funding or education program"
+    },
+    "petitionPool": {
+      "available": false,
+      "complaints": [],
+      "participation": [],
+      "text": "Petition pool unavailable — Reflection_Intake is not in the beats dump yet (Task 6)."
+    },
+    "workingCity": {
+      "available": false,
+      "text": "No work-wake reflections on disk yet (Reflection_Intake beats dump lands with Task 6)."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-104-civic-office-council-d2",
+          "cycle": 104,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.\n- **Why:** Engine audit data in C104 flagged Grand Lake with an active math-imbalance decay signal (RetailVitality drop of -5.03, HousingPressure increase of +0.500, sentiment -0.070) with zero active municipal initiatives deployed to mitigate commercial loss.\n- **Acceptance:** A filed council resolution or formal OEWD referral proposing commercial relief and tenant protections for the Grand Lake corridor.\n- **Silence consequence:** Continued commercial erosion and unchecked housing pressure in Grand Lake without an active civic mitigator.\n",
+          "src": "output/mara-directives/mara_directive_c104_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-106-civic-office-council-d2",
+          "cycle": 106,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Formulate a legislative response to documented economic decay in Downtown (RetailVitality down 2.76, Sentiment down 0.400) and Grand Lake (RetailVitality down 2.17, Sentiment down 0.670).",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Formulate a legislative response to documented economic decay in Downtown (RetailVitality down 2.76, Sentiment down 0.400) and Grand Lake (RetailVitality down 2.17, Sentiment down 0.670).\n- **Why:** After formally declining stabilization action in C105 citing lack of economic data, C106 engine audit flags high-severity math imbalances and severe retail vitality drops in both Downtown and Grand Lake.\n- **Acceptance:** A recorded council referral or committee hearing request addressing commercial decay and housing pressure in D2 corridors.\n- **Silence consequence:** Commercial deterioration in Grand Lake and Downtown continues unaddressed by the district office.\n",
+          "src": "output/mara-directives/mara_directive_c106_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-council-d2",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Certify the Phase II site remediation schedule for the Baylight District (INIT-006) and address commercial decay in Jack London and Downtown.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Certify the Phase II site remediation schedule for the Baylight District (INIT-006) and address commercial decay in Jack London and Downtown.\n- **Why:** C108 tracker sequencing advances INIT-006 to Phase II remediation, while Jack London registers an engine review math-imbalance (Sentiment -0.110, RetailVitality -1.07 to 12.06) and Downtown sentiment sits at 0.33.\n- **Acceptance:** A filed Phase II ground remediation timeline for Baylight and an economic support directive addressing corridor storefront decay.\n- **Silence consequence:** Environmental site preparation stalls before ground-breaking, delaying redevelopment deliverables.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "open": [
+        {
+          "id": "CONF-104-civic-office-council-d2",
+          "cycle": 104,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.\n- **Why:** Engine audit data in C104 flagged Grand Lake with an active math-imbalance decay signal (RetailVitality drop of -5.03, HousingPressure increase of +0.500, sentiment -0.070) with zero active municipal initiatives deployed to mitigate commercial loss.\n- **Acceptance:** A filed council resolution or formal OEWD referral proposing commercial relief and tenant protections for the Grand Lake corridor.\n- **Silence consequence:** Continued commercial erosion and unchecked housing pressure in Grand Lake without an active civic mitigator.\n",
+          "src": "output/mara-directives/mara_directive_c104_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-106-civic-office-council-d2",
+          "cycle": 106,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Formulate a legislative response to documented economic decay in Downtown (RetailVitality down 2.76, Sentiment down 0.400) and Grand Lake (RetailVitality down 2.17, Sentiment down 0.670).",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Formulate a legislative response to documented economic decay in Downtown (RetailVitality down 2.76, Sentiment down 0.400) and Grand Lake (RetailVitality down 2.17, Sentiment down 0.670).\n- **Why:** After formally declining stabilization action in C105 citing lack of economic data, C106 engine audit flags high-severity math imbalances and severe retail vitality drops in both Downtown and Grand Lake.\n- **Acceptance:** A recorded council referral or committee hearing request addressing commercial decay and housing pressure in D2 corridors.\n- **Silence consequence:** Commercial deterioration in Grand Lake and Downtown continues unaddressed by the district office.\n",
+          "src": "output/mara-directives/mara_directive_c106_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-council-d2",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d2",
+          "demand": "Leonard Tran — City Council District 2 — Certify the Phase II site remediation schedule for the Baylight District (INIT-006) and address commercial decay in Jack London and Downtown.",
+          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Certify the Phase II site remediation schedule for the Baylight District (INIT-006) and address commercial decay in Jack London and Downtown.\n- **Why:** C108 tracker sequencing advances INIT-006 to Phase II remediation, while Jack London registers an engine review math-imbalance (Sentiment -0.110, RetailVitality -1.07 to 12.06) and Downtown sentiment sits at 0.33.\n- **Acceptance:** A filed Phase II ground remediation timeline for Baylight and an economic support directive addressing corridor storefront decay.\n- **Silence consequence:** Environmental site preparation stalls before ground-breaking, delaying redevelopment deliverables.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": []
+    },
+    "confrontation": {
+      "id": "CONF-104-civic-office-council-d2",
+      "cycle": 104,
+      "agentDir": "civic-office-council-d2",
+      "demand": "Leonard Tran — City Council District 2 — Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.",
+      "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.\n- **Why:** Engine audit data in C104 flagged Grand Lake with an active math-imbalance decay signal (RetailVitality drop of -5.03, HousingPressure increase of +0.500, sentiment -0.070) with zero active municipal initiatives deployed to mitigate commercial loss.\n- **Acceptance:** A filed council resolution or formal OEWD referral proposing commercial relief and tenant protections for the Grand Lake corridor.\n- **Silence consequence:** Continued commercial erosion and unchecked housing pressure in Grand Lake without an active civic mitigator.\n",
+      "src": "output/mara-directives/mara_directive_c104_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 108,
+      "problems": [
+        {
+          "id": "[\"Chinatown\",\"housing.hardshipHouseholds\"]",
+          "hood": "Chinatown",
+          "conditionKey": "housing.hardshipHouseholds",
+          "label": "rent-burden households",
+          "count": 1,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Chinatown\",\"health.sickResidents\"]",
+          "hood": "Chinatown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 139,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Downtown\",\"housing.hardshipHouseholds\"]",
+          "hood": "Downtown",
+          "conditionKey": "housing.hardshipHouseholds",
+          "label": "rent-burden households",
+          "count": 6,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Downtown\",\"health.sickResidents\"]",
+          "hood": "Downtown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 93,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Jack London\",\"housing.hardshipHouseholds\"]",
+          "hood": "Jack London",
+          "conditionKey": "housing.hardshipHouseholds",
+          "label": "rent-burden households",
+          "count": 4,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Jack London\",\"health.sickResidents\"]",
+          "hood": "Jack London",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 83,
+          "cycle": 108
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Chinatown\",\"housing.hardshipHouseholds\"]",
+          "hood": "Chinatown",
+          "conditionKey": "housing.hardshipHouseholds",
+          "label": "rent-burden households",
+          "count": 1,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Chinatown\",\"health.sickResidents\"]",
+          "hood": "Chinatown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 139,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Downtown\",\"housing.hardshipHouseholds\"]",
+          "hood": "Downtown",
+          "conditionKey": "housing.hardshipHouseholds",
+          "label": "rent-burden households",
+          "count": 6,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Downtown\",\"health.sickResidents\"]",
+          "hood": "Downtown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 93,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Jack London\",\"housing.hardshipHouseholds\"]",
+          "hood": "Jack London",
+          "conditionKey": "housing.hardshipHouseholds",
+          "label": "rent-burden households",
+          "count": 4,
+          "cycle": 108
+        },
+        {
+          "id": "[\"Jack London\",\"health.sickResidents\"]",
+          "hood": "Jack London",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 83,
+          "cycle": 108
+        }
+      ],
+      "passedOver": [],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Condition problems at C108; prior Sunday folds through C107.\n- Chinatown: rent-burden households 1\n- Chinatown: sick residents 139\n- Downtown: rent-burden households 6\n- Downtown: sick residents 93\n- Jack London: rent-burden households 4\n- Jack London: sick residents 83\nNo earlier pack proves a displayed condition."
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Downtown",
+      "Chinatown",
+      "Jack London"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00028",
+        "name": "Manfred Owens",
+        "neighborhood": "Jack London",
+        "role": "Booky",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Jack London — Baylight District — Final Council Vote — Phase II site remediation"
+      },
+      {
+        "pop": "POP-00078",
+        "name": "Sergio Aybar",
+        "neighborhood": "Jack London",
+        "role": "Catcher, Midland RockHounds (AA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Jack London — Baylight District — Final Council Vote — Phase II site remediation"
+      },
+      {
+        "pop": "POP-00150",
+        "name": "Helena Morr",
+        "neighborhood": "Jack London",
+        "role": "City Ombudsman",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Jack London — Baylight District — Final Council Vote — Phase II site remediation"
+      },
+      {
+        "pop": "POP-00177",
+        "name": "Elle Lilo",
+        "neighborhood": "Jack London",
+        "role": "Harbor Tugboat Captain",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Jack London — Baylight District — Final Council Vote — Phase II site remediation"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D2",
+      "t": "FACT",
+      "text": "Leonard Tran holds COUNCIL-D2 at approval 65",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-006",
+      "t": "FACT",
+      "text": "Baylight District — Final Council Vote is in construction-planning; budget $2.1B — C107: Construction contracts executed; site preparation mobilization begins",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-JackLondon",
+      "t": "FACT",
+      "text": "Jack London crime: property 36, violent 17, incidents 3 (cycle 108) — city property 35.6, violent 23.5, incidents 5.5",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-JackLondon",
+      "t": "FACT",
+      "text": "Jack London: sentiment 0.33 vs city 0.330; crime index 0.53 vs city 0.583; retail 12.06; housing pressure 3.5; growth; momentum 8",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-traj-1",
+      "t": "FACT",
+      "text": "Jack London boom sustained — momentum 8/10, the block everyone wants onto",
+      "src": "world_summary trajectory"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D2",
+        "PopId": "POP-00502",
+        "Holder": "Leonard Tran",
+        "District": "D2",
+        "Approval": "65"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D4",
+        "PopId": "POP-00042",
+        "Holder": "Ramon Vega",
+        "District": "D4",
+        "Faction": "IND",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

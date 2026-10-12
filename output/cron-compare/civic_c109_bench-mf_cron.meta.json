@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "109",
+  "model": "openai/gpt-5.6-luna",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 8685,
+  "usageOutputTokens": 1358,
+  "savedFiles": [
+    "output/cron-compare/civic_c109_carmen-delaine_bench-mf_openai-gpt-5-6-luna.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c109.md",
+  "durationMs": 14674,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-01T04:33:27.319Z"
+}

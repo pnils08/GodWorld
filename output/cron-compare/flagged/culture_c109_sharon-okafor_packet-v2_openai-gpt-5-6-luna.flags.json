@@ -1,0 +1,22 @@
+{
+  "draft": "culture_c109_sharon-okafor_packet-v2_openai-gpt-5-6-luna.md",
+  "flags": [
+    {
+      "claim": "Lena Cross belongs to Lake Merritt",
+      "issue": "Contradicts ledger profile bio ground truth; Lena Cross resides in Piedmont Ave, not Lake Merritt.",
+      "severity": "high"
+    },
+    {
+      "claim": "Rowan Pierce, a journalist in KONO",
+      "issue": "Contradicts ledger profile bio ground truth; Rowan Pierce resides in Piedmont Ave, not KONO.",
+      "severity": "high"
+    },
+    {
+      "claim": "Marin Tao, in San Antonio",
+      "issue": "Contradicts ledger profile bio ground truth; Marin Tao resides in Chinatown, not San Antonio.",
+      "severity": "high"
+    }
+  ],
+  "contamination": [],
+  "summary": "Multiple citizen neighborhood assignments directly contradict canonical ledger profile data."
+}

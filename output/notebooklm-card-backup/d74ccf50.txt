@@ -1,0 +1,189 @@
+PLAYER INTAKE (Pitcher) — 2041 SEASON
+
+Name: Louis Cross
+
+ 
+
+Team: Oakland Athletics
+
+ 
+
+Position: RP
+
+ 
+
+Age: 30
+
+ 
+
+Bats: L
+
+ 
+
+Throws: L
+
+ 
+
+Height: 6'0"
+
+ 
+
+Weight: 185 lbs
+
+ 
+
+Born: Tennessee
+
+ 
+
+Drafted: Round 3 (2028)
+
+ 
+
+MLB Service: 9.063
+
+ 
+
+Overall: 89
+
+ 
+
+Potential: A
+
+ 
+
+POPID: POP-01080
+
+— 2041 REGULAR SEASON —
+
+Games: 47
+
+ 
+
+Games Started: 0
+
+ 
+
+Wins: 3
+
+ 
+
+Losses: 2
+
+ 
+
+Saves: 6
+
+ 
+
+Blown Saves: 0
+
+ 
+
+Holds: 9
+
+ 
+
+Innings Pitched: 64.1
+
+ 
+
+Hits Allowed: 43
+
+ 
+
+Runs Allowed: 19
+
+ 
+
+Earned Runs: 19
+
+ 
+
+Home Runs Allowed: 9
+
+ 
+
+Walks: 16
+
+ 
+
+Strikeouts: 70
+
+ 
+
+ERA: 2.66
+
+ 
+
+WHIP: 0.92
+
+ 
+
+Winning Percentage: 0.600
+
+ 
+
+Quality Starts: 0
+
+ 
+
+Complete Games: 0
+
+ 
+
+Shutouts: 0
+
+ 
+
+Hit Batters: 2
+
+ 
+
+Wild Pitches: 1
+
+ 
+
+Total Batters Faced: 250
+
+ 
+
+WAR: 0.9
+
+— RATE METRICS —
+
+K/9: 9.79
+
+ 
+
+BB/9: 2.24
+
+ 
+
+HR/9: 1.26
+
+ 
+
+FIP: 3.48
+
+ 
+
+ERC: 2.00
+
+— CONTRACT STATUS —
+
+2041: $12,000,000
+
+ 
+
+2042: Free Agent (FA)
+
+
+--------------------------------------------------------------------------------
+
+
+Quirks
+
+High Leverage Setup Specialist
+
+Deceptive Southpaw Delivery

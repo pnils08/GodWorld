@@ -1,0 +1,51 @@
+{
+  "status": "staged",
+  "desk": "undocked-digest",
+  "cycle": "110",
+  "persona": "nia-rook-weekly",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked-digest_c110_nia-rook-weekly_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Aaliyah Brennan",
+        "role": "subject",
+        "popid": "POP-00235"
+      },
+      {
+        "name": "Simone Adesanya",
+        "role": "subject",
+        "popid": "POP-00287"
+      },
+      {
+        "name": "Kato Rivers",
+        "role": "subject",
+        "popid": "POP-00770"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "To be honest, I'm not sure I've really changed my strategy, I've just been trying to keep up with my work at the mobile clinic and enjoy the little moments. Lately, I've been filling every quiet moment with movement, whether it's restocking clinic supplies or reorganizing my bookshelves, just to keep my mind off things.",
+        "sourceRef": "citizenVoice PRESS Aaliyah Brennan"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d75cc850c43a",
+    "draftSha256": "768ee09a19f6ae45c7a49bf1d7e001f84c4185900150c5110e09169c4649c160",
+    "verdict": "output/cron-compare/undocked-digest_c110_nia-rook-weekly_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-10T15:15:16.813Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.822Z"
+}

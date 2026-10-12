@@ -1,0 +1,35 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "109",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "hal-richmond",
+  "byline": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 1,
+  "contamination": {
+    "fail": true,
+    "findings": [
+      {
+        "check": "blight-import",
+        "issue": "falling-apart"
+      }
+    ]
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/sports_c109_hal-richmond_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "selfRecord": null,
+  "ranAt": "2026-10-01T23:16:47.723Z",
+  "dispositionReconciledAt": "2026-10-03T17:00:06.360Z"
+}

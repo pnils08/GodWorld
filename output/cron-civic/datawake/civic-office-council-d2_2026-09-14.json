@@ -1,0 +1,15 @@
+{
+  "office": "council_d2",
+  "agentDir": "civic-office-council-d2",
+  "holder": "Leonard Tran",
+  "popid": "POP-00502",
+  "title": "City Council District 2",
+  "date": "2026-09-14",
+  "cycle": 107,
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "statement": "Downtown's struggles are real, and I stand with its people - we need targeted support to address the crime and economic imbalance, not just words, and I'm willing to work with anyone who shares this goal",
+  "action": "propose a community task force",
+  "numberMoved": "0",
+  "ranAt": "2026-09-14T10:45:48.824Z",
+  "fellBackFrom": null
+}

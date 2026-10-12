@@ -1,0 +1,38 @@
+{
+  "office": "council_d6",
+  "cycle": 106,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "Piedmont Avenue's steady street trade and low crime show what happens when local corridors maintain stability and direct community engagement. I am supporting the month-seven disbursement for the West Oakland Stabilization Fund while confirming backlog verification for the Youth Apprenticeship Pipeline with continued fiscal oversight.",
+  "statements": [
+    {
+      "statementId": "STMT-106-council_d6-001",
+      "type": "district_statement",
+      "topic": "Piedmont Ave Commercial Vitality and Public Safety",
+      "initiative": null,
+      "decision": "Maintain district-level oversight and protect merchant corridor stability on Piedmont Avenue",
+      "quote": "Piedmont Avenue demonstrates that when public safety and local business stability align, the entire neighborhood prospers.",
+      "fullStatement": "Piedmont Avenue is showing real strength this cycle with steady street trade, low crime rates, and upbeat neighborhood sentiment. We cannot take these solid numbers for granted or assume commercial corridors maintain themselves without consistent attention. Following our safety walks and merchant touchpoints, District 6 will remain focused on practical public safety, reliable street-level maintenance, and direct accountability so that our small businesses and residents continue to feel secure and supported.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d6-002",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund Month-Seven Disbursement",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Approve Month-Seven Disbursement with standard fiscal oversight",
+      "quote": "Targeted stabilization prevents displacement, provided every dollar is accounted for and delivered cleanly.",
+      "fullStatement": "I have supported the West Oakland Stabilization Fund because targeted intervention protects vulnerable households from sudden dislocation, which ultimately preserves stability across our city. With month-seven disbursements approved, City Hall must maintain clean records and verify that administrative costs remain contained while direct support reaches the residents who need it most.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-council_d6-003",
+      "type": "oversight_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline Backlog Clearance",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Accept backlog verification and insist on sustained tracking of career placements",
+      "quote": "Clearing the backlog is basic municipal competence; the real test is sustained job placement.",
+      "fullStatement": "Verifying the clearance of the Youth Apprenticeship Pipeline backlog is an important administrative milestone. Our young people deserve prompt access to vocational training rather than procedural delays. Moving forward, I will be looking for clear metrics showing how these verified participants transition into active apprenticeships and lasting employment across our region.",
+      "trackerUpdates": {}
+    }
+  ]
+}

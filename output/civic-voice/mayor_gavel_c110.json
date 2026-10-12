@@ -1,0 +1,108 @@
+{
+  "office": "mayor_gavel",
+  "cycle": 110,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "I approved month-nine disbursements for the West Oakland Stabilization Fund, advanced the Fruitvale Transit Hub to preliminary schematics, filed the Downtown Economic Revitalization legislation, and moved the Youth Apprenticeship Pipeline toward cohort placement. These are the moves that keep Oakland building — relief for neighbors, infrastructure for workers, opportunity for young people, and recovery for our commercial corridors.",
+  "statements": [
+    {
+      "statementId": "STMT-110-mayor_gavel-001",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund Month-Nine Disbursement",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "Nine months in, we're proving that relief without bureaucracy keeps neighbors in their neighborhoods.",
+      "fullStatement": "This morning I authorized the month-nine disbursement from the West Oakland Stabilization Fund — $400,000 in household stabilization grants for families facing displacement. Deputy Mayor Okoro's team has cut the average processing time from 94 days to 23. That's not paperwork speed — that's keeping a grandmother in her home, a child in their school, a neighborhood intact. We're nine months into this experiment, and the results speak: West Oakland sentiment at 0.45, outpacing citywide average. Property crime down. Families staying. This is what happens when City Hall decides that relief shouldn't wait on bureaucracy.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C110: Month-nine disbursement $400K approved; 23-day avg processing time achieved",
+        "NextScheduledAction": "Month-ten disbursement review",
+        "NextActionCycle": 111
+      }
+    },
+    {
+      "statementId": "STMT-110-mayor_gavel-002",
+      "type": "executive_order",
+      "topic": "Fruitvale Transit Hub Phase II Preliminary Schematics",
+      "initiative": "INIT-003",
+      "decision": "advance to preliminary schematics with community oversight provisions intact",
+      "quote": "Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.",
+      "fullStatement": "I've directed Mayer & Associates to advance to preliminary schematics review for the Fruitvale Transit Hub Phase II, with community oversight provisions locked in. This isn't a rubber stamp — it's a milestone earned through three cycles of merchant covenants, design RFPs with community-informed requirements, and hard negotiation. The Fruitvale Business Improvement District will have a seat at the table through every design iteration. When this hub opens, it won't just move people — it'll move opportunity into the neighborhood that fought for it.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C110: Preliminary schematics review authorized; Mayer & Associates contracted with community oversight",
+        "NextScheduledAction": "Schematics completion and community review",
+        "NextActionCycle": 112
+      }
+    },
+    {
+      "statementId": "STMT-110-mayor_gavel-003",
+      "type": "executive_order",
+      "topic": "Downtown Economic Revitalization Legislative Filing",
+      "initiative": "INIT-008",
+      "decision": "filed legislative language with City Clerk",
+      "quote": "Downtown businesses shouldn't have to wait for relief while their shelves gather dust.",
+      "fullStatement": "This morning I filed the Downtown Economic Revitalization ordinance with the City Clerk — statutory relief for commercial corridors that have carried this city through hard years. INIT-008 creates the framework for facade improvement grants, small business stabilization loans, and streamlined permitting for ground-floor activation. The $15 million authorization is ready. The council calendar is open. Downtown Oakland deserves the same urgency we brought to West Oakland — and now they have the legislative vehicle to get it.",
+      "trackerUpdates": {
+        "initiative": "INIT-008",
+        "ImplementationPhase": "legislation-filed",
+        "MilestoneNotes": "C110: Ordinance filed with City Clerk; $15M authorization pending council",
+        "NextScheduledAction": "Council committee referral and hearing",
+        "NextActionCycle": 111
+      }
+    },
+    {
+      "statementId": "STMT-110-mayor_gavel-004",
+      "type": "authorization_response",
+      "topic": "Oakland Youth Apprenticeship Pipeline Cohort Placement",
+      "initiative": "INIT-007",
+      "decision": "approved accelerated cohort placement with East Oakland priority",
+      "quote": "150 apprentices placed by spring — that's the target, and we're accelerating to hit it.",
+      "fullStatement": "I've approved accelerated cohort placement for the Oakland Youth Apprenticeship Pipeline, with priority placement for East Oakland applicants as requested by Councilmember Rivers. The first training cohort review shows we're on track for 150 apprentices by spring — not next year, this spring. These are union-track jobs in building trades, green infrastructure, and public works. Real wages, real careers, real futures. We're not just training young people — we're building the workforce that will construct this city's next decade.",
+      "trackerUpdates": {
+        "initiative": "INIT-007",
+        "ImplementationPhase": "implementation-active",
+        "MilestoneNotes": "C110: Cohort placement accelerated; East Oakland priority established; 150 target by spring",
+        "NextScheduledAction": "First cohort completion and placement verification",
+        "NextActionCycle": 112
+      }
+    },
+    {
+      "statementId": "STMT-110-mayor_gavel-005",
+      "type": "policy_position",
+      "topic": "Baylight District Soil Test Verification",
+      "initiative": "INIT-006",
+      "decision": "independent oversight maintained; soil test verification proceeding",
+      "quote": "Independent oversight isn't bureaucracy — it's how we build trust while we build the future.",
+      "fullStatement": "The first soil test results for the Baylight District are in, and independent oversight confirms Phase II remediation proceeds on schedule. This is a $2.1 billion investment in Oakland's future — and we're building it right. The independent monitors aren't slowing us down; they're ensuring that when we cut the ribbon, every community member can trust what's beneath their feet. Construction contracts are executed. Site preparation is mobilized. This city is being built to last.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C110: Soil test verification complete; Phase II remediation proceeds with independent oversight",
+        "NextScheduledAction": "Remediation completion and construction milestone review",
+        "NextActionCycle": 112
+      }
+    },
+    {
+      "statementId": "STMT-110-mayor_gavel-006",
+      "type": "public_remark",
+      "topic": "Ivy Hill Infrastructure Crisis Response",
+      "initiative": null,
+      "decision": "directed emergency public works response",
+      "quote": "When a neighborhood needs help, we show up with shovels, not speeches.",
+      "fullStatement": "Ivy Hill faced a high-severity infrastructure spike this cycle — a 44-point public works emergency that demanded immediate response. I directed Public Works and Economic Development to deploy emergency crews and conduct corridor stabilization. The mood there is upbeat despite the strain; crime is low, and the community is resilient. But resilience shouldn't mean going it alone. City Hall is there with resources, crews, and follow-through. That's the partnership Oakland deserves.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-110-mayor_gavel-007",
+      "type": "public_remark",
+      "topic": "Fruitvale Success Recognition",
+      "initiative": null,
+      "decision": "credit to community organizing and sustained investment",
+      "quote": "Fruitvale's busy streets and upbeat mood didn't happen by accident — they happened because this community organizes, advocates, and builds.",
+      "fullStatement": "Walk through Fruitvale this week and you'll feel it — busy streets, upbeat mood, commerce humming. This didn't happen by accident. It happened because the Fruitvale community organizes, advocates, and builds. The merchant covenants, the transit hub visioning, the years of neighborhood planning — that's the work that creates the conditions for prosperity. My administration is proud to partner with this community, but the credit belongs to the residents and business owners who never stopped believing in their neighborhood. We're just catching up to their vision.",
+      "trackerUpdates": {}
+    }
+  ]
+}

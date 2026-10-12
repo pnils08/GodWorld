@@ -1,0 +1,51 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "noah-tan",
+  "byline": "Noah Tan",
+  "bylinePopid": "POP-00157",
+  "article": "output/cron-compare/staged/civic_c108_noah-tan_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Tyrie Groin",
+        "role": "mentioned",
+        "popid": "POP-00254"
+      },
+      {
+        "name": "Marc Allie",
+        "role": "quoted-source",
+        "popid": "POP-00241"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "city-tyrie-groin-beat-weather",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "The fog in Oakland, it’s like a quiet blanket that slows things down, makes you think a little deeper. It’s not just the chill—it’s the way it wraps around you, makes the familiar streets feel different, like you’re seeing them through a new lens. It’s introspective, you know? Makes you appreciate the warmth of family and the comfort of routine even more.",
+        "sourceRef": "citizenVoice PRESS Tyrie Groin"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-427c297f74da",
+    "draftSha256": "425414c8ab982a508cdd3f04d6eddbc643f3f280388566f6061ade6356440ac4",
+    "verdict": "output/cron-compare/civic_c108_noah-tan_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-23T23:17:30.986Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-26T17:00:02.503Z"
+}

@@ -4,7 +4,7 @@
     "initiative": "stabilization-fund",
     "initiativeId": "INIT-001",
     "cycle": 108,
-    "generatedAt": "2026-09-20T20:55:04.836Z",
+    "generatedAt": "2026-09-25T14:12:25.668Z",
     "description": "Neighborhood Stabilization Fund — $28M for housing stability, small business support, and workforce development in displacement-risk neighborhoods"
   },
   "initiative": {
@@ -23,14 +23,14 @@
     "affectedNeighborhoods": "West Oakland",
     "policyDomain": "economic",
     "consequences": "Initiative approved. Implementation begins.",
-    "mayoralAction": "none",
-    "mayoralActionCycle": "",
+    "mayoralAction": "signed",
+    "mayoralActionCycle": "78",
     "notes": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)",
-    "lastUpdated": "9/13/2026",
+    "lastUpdated": "9/24/2026",
     "implementationPhase": "disbursement-active",
-    "milestoneNotes": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.",
+    "milestoneNotes": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing — Stabilization Fund, disbursement-active since C78 (economic — not playable, no Delivering gate yet; the untended clock still runs). | C108 retag economic→housing (ruled 2026-09-22 — the Fund is a household anti-displacement fund in canon; engine.255 wires it as the first budgeted disbursement).\nC108: scope recorded as chartered — stabilization grants for long-tenure West Oakland residents priced out as the flats built out (the remnant the charter named), not hood-wide relief; 47 checks (~$4.2M) disbursed under Deputy Mayor Okoro’s authority C84–C90; authorization $28M, ~$23.8M remaining.\nC108: retag reversed — housing→economic (the 2026-09-22 retag was engine-sheet error; the Fund is not a housing fund).",
     "nextScheduledAction": "Month-eight disbursement completion and Downtown outreach impact assessment",
-    "nextActionCycle": "108"
+    "nextActionCycle": "109"
   },
   "office": {
     "name": "Office of Economic and Workforce Development (OEWD)",
@@ -94,21 +94,22 @@
       "decisions_c104.json",
       "decisions_c105.json",
       "decisions_c106.json",
-      "decisions_c107.json"
+      "decisions_c107.json",
+      "decisions_c108.json"
     ]
   },
   "maraDirective": null,
   "citizens": {
-    "total": 169,
+    "total": 171,
     "tierBreakdown": {
       "1": 2,
       "2": 14,
-      "3": 34,
-      "4": 119
+      "3": 35,
+      "4": 120
     },
-    "avgIncome": 829234,
+    "avgIncome": 821030,
     "medianIncome": 91000,
-    "atDisplacementRisk": 107,
+    "atDisplacementRisk": 109,
     "linkedProfiles": [
       {
         "popId": "POP-00772",
@@ -464,7 +465,7 @@
     },
     {
       "bizId": "BIZ-00078",
-      "name": "Allen Temple Baptist Church",
+      "name": "Foothill Baptist Tabernacle",
       "sector": "Faith Organization",
       "neighborhood": "East Oakland",
       "employeeCount": 26,
@@ -474,7 +475,7 @@
     },
     {
       "bizId": "BIZ-00082",
-      "name": "Acts Full Gospel Church",
+      "name": "New Covenant Pentecostal Assembly",
       "sector": "Faith Organization",
       "neighborhood": "West Oakland",
       "employeeCount": 22,
@@ -604,7 +605,7 @@
     },
     {
       "bizId": "BIZ-00081",
-      "name": "St. Columba Catholic Church",
+      "name": "St. Esperanza Parish",
       "sector": "Faith Organization",
       "neighborhood": "Fruitvale",
       "employeeCount": 11,
@@ -694,7 +695,7 @@
     },
     {
       "bizId": "BIZ-00079",
-      "name": "Masjid Al-Islam",
+      "name": "Masjid An-Nur Oakland",
       "sector": "Faith Organization",
       "neighborhood": "East Oakland",
       "employeeCount": 5,

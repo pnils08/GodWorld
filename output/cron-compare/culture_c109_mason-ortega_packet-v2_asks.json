@@ -1,0 +1,138 @@
+[
+  {
+    "pop": "POP-00873",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00873\",\"name\":\"Hazel Salazar\",\"role\":\"Line Cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"What does a typical shift look like for Hazel Salazar at Fruitvale Diner? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Fruitvale\",\"focus\":\"Hazel Salazar, Line Cook at Fruitvale Diner, will be the central figure. The article will paint a vivid picture of her shift, the atmosphere of the diner, and the community it serves.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Hazel Salazar — Line Cook\",\"evidence\":[{\"id\":\"EV-5b681f4fbc\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109\",\"text\":\"Hazel Salazar, Line Cook at Fruitvale Diner. 1 named worker at 1 named kitchen in Fruitvale on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C109\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-912baafccba1\"},{\"t\":\"FACT\",\"text\":\"Fruitvale kitchens · Fruitvale Diner, Marigold Cafe\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109\",\"id\":\"F-f55fbc9b40a9\"},{\"t\":\"FACT\",\"text\":\"Hazel Salazar, Line Cook at Fruitvale Diner. 1 named worker at 1 named kitchen in Fruitvale on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109\",\"id\":\"F-c7ff95b50b7a\"},{\"t\":\"FACT\",\"text\":\"Fruitvale Diner · Restaurant & Dining · 2 employees · growth 8% · revenue $205k (+$315 vs C108) · on the roster: Hazel Salazar (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109\",\"id\":\"F-febf85368af4\"},{\"t\":\"FACT\",\"text\":\"Marigold Cafe · Cafe / dining · 30 employees · growth 8% · revenue $3.1M (+$5k vs C108)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109\",\"id\":\"F-ccb7cc52cd7f\"},{\"t\":\"FACT\",\"text\":\"ENGINE SEED (Jack London): citizens Celo Patel; Mike Paulson; Anna Baker; Hector Leech · businesses Port of Oakland; Jack London Square Markets\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C109\",\"id\":\"F-5cf377202e1f\"},{\"t\":\"FACT\",\"text\":\"ENGINE SEED (Temescal): citizens Sara Copper; Jada Alvarez; Brie Harris; Nila James · businesses Gridiron Analytics; Temescal Islamic Center · Temescal Islamic Center Food Pantry (program)\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C109\",\"id\":\"F-78aae837dd30\"},{\"t\":\"FACT\",\"text\":\"Hazel Salazar — Line Cook\",\"src\":\"Simulation_Ledger profile for POP-00873\",\"id\":\"F-419bc14ffc17\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00873",
+        "name": "Hazel Salazar",
+        "role": "Line Cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "What does a typical shift look like for Hazel Salazar at Fruitvale Diner? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Fruitvale",
+        "focus": "Hazel Salazar, Line Cook at Fruitvale Diner, will be the central figure. The article will paint a vivid picture of her shift, the atmosphere of the diner, and the community it serves.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Hazel Salazar — Line Cook",
+        "evidence": [
+          {
+            "id": "EV-5b681f4fbc",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+            "text": "Hazel Salazar, Line Cook at Fruitvale Diner. 1 named worker at 1 named kitchen in Fruitvale on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C109",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-912baafccba1"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale kitchens · Fruitvale Diner, Marigold Cafe",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+          "id": "F-f55fbc9b40a9"
+        },
+        {
+          "t": "FACT",
+          "text": "Hazel Salazar, Line Cook at Fruitvale Diner. 1 named worker at 1 named kitchen in Fruitvale on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+          "id": "F-c7ff95b50b7a"
+        },
+        {
+          "t": "FACT",
+          "text": "Fruitvale Diner · Restaurant & Dining · 2 employees · growth 8% · revenue $205k (+$315 vs C108) · on the roster: Hazel Salazar (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+          "id": "F-febf85368af4"
+        },
+        {
+          "t": "FACT",
+          "text": "Marigold Cafe · Cafe / dining · 30 employees · growth 8% · revenue $3.1M (+$5k vs C108)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C109",
+          "id": "F-ccb7cc52cd7f"
+        },
+        {
+          "t": "FACT",
+          "text": "ENGINE SEED (Jack London): citizens Celo Patel; Mike Paulson; Anna Baker; Hector Leech · businesses Port of Oakland; Jack London Square Markets",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C109",
+          "id": "F-5cf377202e1f"
+        },
+        {
+          "t": "FACT",
+          "text": "ENGINE SEED (Temescal): citizens Sara Copper; Jada Alvarez; Brie Harris; Nila James · businesses Gridiron Analytics; Temescal Islamic Center · Temescal Islamic Center Food Pantry (program)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C109",
+          "id": "F-78aae837dd30"
+        },
+        {
+          "t": "FACT",
+          "text": "Hazel Salazar — Line Cook",
+          "src": "Simulation_Ledger profile for POP-00873",
+          "id": "F-419bc14ffc17"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

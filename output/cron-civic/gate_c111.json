@@ -1,0 +1,29 @@
+{
+  "cycle": 111,
+  "pass": true,
+  "deterministicPass": true,
+  "sanityStatus": "pass",
+  "failures": [],
+  "touchedInitiatives": [
+    "INIT-006",
+    "INIT-005",
+    "INIT-001",
+    "INIT-003",
+    "INIT-007",
+    "INIT-008",
+    "INIT-009",
+    "INIT-010",
+    "candidate:MV-110-civic-office-council-d4-2026-10-05"
+  ],
+  "maxRows": 9,
+  "sanity": {
+    "pass": true,
+    "issues": [
+      "INIT-006: NextScheduledAction changes from 'Remediation completion and construction milestone review' to 'Construction milestone review' without explicit remediation completion noted in MilestoneNotes for C111, though this may be implied by 'remediation proceeds with oversight'.",
+      "INIT-009: MilestoneNotes states 'Referred to Economic Development Committee' in C111, but prior row shows no prior committee referral or hearing, which is consistent with phase progression (announced → legislation-filed). No contradiction, but worth noting for clarity.",
+      "INIT-010: Status changes from 'proposed' to 'pending-vote' in the same write, which is consistent with VoteCycle being set to '112', but the prior row had no VoteCycle. This is a valid progression, not a contradiction."
+    ]
+  },
+  "model": "mistralai/mistral-large",
+  "ranAt": "2026-10-11T22:21:49.682Z"
+}

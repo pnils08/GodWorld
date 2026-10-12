@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "107",
+  "desk": "sports",
+  "persona": "tanya-cruz",
+  "storyline": {
+    "slug": "eastlake-travis-coles-sideline-signal",
+    "verb": "opened"
+  },
+  "hood": "Eastlake",
+  "quotes": [
+    {
+      "pop": "POP-00533",
+      "name": "Travis Coles",
+      "quote": "The energy in the clubhouse is electric right now. Everyone’s locked in, focused, and you can feel the confidence building after that first win. It’s like we’ve all got this shared understanding—we’re here to compete, and we’re not backing down."
+    },
+    {
+      "pop": "POP-00051",
+      "name": "Desmond Morton",
+      "quote": "When you're in a groove like this, it's less about individual moments and more about how everyone fits together. The atmosphere in the clubhouse is steady—no highs, no lows, just a quiet confidence that we’re all pulling in the same direction. It’s not flashy, but it’s how you sustain momentum."
+    },
+    {
+      "pop": "POP-00052",
+      "name": "Clark Saryan",
+      "quote": "Starting the playoffs with a win like that, you can feel the energy shift in the clubhouse. Everyone’s locked in, but there’s also this quiet confidence—like we know what we’re capable of, and we’re just waiting to show it."
+    },
+    {
+      "pop": "POP-00598",
+      "name": "Vladimir Gonzalez",
+      "quote": "You know, starting the playoffs with a win always sets a good tone. The clubhouse feels loose but focused—guys are joking around but you can tell everyone's locked in. It's that quiet confidence, you know? Like we've been here before and we know what it takes."
+    }
+  ],
+  "claim": "The energy in the clubhouse is electric right now. Everyone’s locked in, focused, and you can feel the confidence building after that first win. It’s like we’ve all got this shared understanding—we’re here to compete, and we’re not backing down.",
+  "src": "citizenVoice PRESS c107",
+  "ranAt": "2026-09-18T01:11:26.843Z"
+}

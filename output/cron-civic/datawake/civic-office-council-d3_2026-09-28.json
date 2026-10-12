@@ -1,0 +1,26 @@
+{
+  "office": "council_d3",
+  "agentDir": "civic-office-council-d3",
+  "holder": "Rose Delgado",
+  "popid": "POP-00503",
+  "title": "City Council District 3",
+  "date": "2026-09-28",
+  "cycle": 109,
+  "model": "deepseek/deepseek-chat",
+  "statement": "San Antonio isn’t just another neighborhood—it’s the heart of D3’s resilience. With sentiment at 0.18 and crime higher than the city average, we need targeted action. We'll push for increased safety patrols and community engagement to restore trust. Let’s invest in programs that bring people together, not policies that push them apart.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-106-civic-office-council-d3",
+        "text": "We’re coordinating with the Transit Hub planning team to ensure small business protections are prioritized. Elevated crime in Fruitvale will be addressed through increased patrols and community outreach. This is a dual commitment to safety and economic vitality.",
+        "directiveCycle": 106,
+        "confrontationSeat": "civic-office-council-d3"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-09-28T10:46:13.242Z",
+  "fellBackFrom": null
+}

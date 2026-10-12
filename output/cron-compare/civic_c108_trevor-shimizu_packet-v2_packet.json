@@ -1,0 +1,1284 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "108",
+  "persona": "trevor-shimizu",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-transit",
+      "angle": "12th St Oakland City Center ridership up 10,185 vs C107 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "label": "12th St Oakland City Center ridership up 10,185 vs C107 | 8 stations + 10 corridors on the record",
+      "hookLine": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+      "hood": null,
+      "citizens": [
+        "Joel Wren (POP-00218)",
+        "Jerald Jensen (POP-00280)",
+        "Coen Cartier (POP-00338)",
+        "Daire Green (POP-00442)",
+        "Ray Neal (POP-00448)",
+        "Calvin Mwangi (POP-00573)",
+        "Eleanor Rivera (POP-00617)",
+        "Elena Soria-Dominguez (POP-00791)",
+        "Ximena Mehta (POP-01039)"
+      ],
+      "popids": [
+        "POP-00218",
+        "POP-00280",
+        "POP-00338",
+        "POP-00442",
+        "POP-00448",
+        "POP-00573",
+        "POP-00617",
+        "POP-00791",
+        "POP-01039"
+      ],
+      "ref": "output/beats/Transit_Metrics.jsonl Cycle 108",
+      "cycle": 108
+    }
+  },
+  "angle": "output/cron-compare/civic_c108_trevor-shimizu_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00617",
+      "name": "Eleanor Rivera",
+      "quote": "At 12th Street, we've definitely felt the uptick in ridership. It's not just numbers - it's people adjusting their routines, and us adjusting right along with them. The team just... adapts. No big announcements, just everyone doing their part to keep things moving smoothly.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"At 12th Street, we've definitely felt the uptick in ridership. It's not just numbers - it's people adjusting their routines, and us adjusting right along with them. The team just... adapts. No big announcements, just everyone doing their part to keep things moving smoothly.\",\n  \"fact_ids\": [\"F-555f91812528\", \"F-2ced873a1094\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-555f91812528",
+          "F-2ced873a1094"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00617-03c2d26c3a",
+        "authoredQuote": true,
+        "publishableQuote": "At 12th Street, we've definitely felt the uptick in ridership. It's not just numbers - it's people adjusting their routines, and us adjusting right along with them. The team just... adapts. No big announcements, just everyone doing their part to keep things moving smoothly."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00617",
+          "name": "Eleanor Rivera",
+          "role": "BART Station Manager",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"12th St Oakland City Center's surge in ridership and the human infrastructure behind it.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "12th St Oakland City Center's surge in ridership and the human infrastructure behind it.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 108"
+        },
+        "exposure": {
+          "basis": [
+            "works at BART Oakland Division (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+          "evidence": [
+            {
+              "id": "EV-78a0f21670",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+              "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership up 10,185 vs C107 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-555f91812528"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-2ced873a1094"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 70,489 (C107: 33,277)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6865006b7421"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center: ridership 18,376 (+10,185 vs C107), on-time 81% (+4 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-5ea790fbf70f"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland: ridership 12,304 (+6,813 vs C107), on-time 76% (-3 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-317c7b538fdb"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,107 (+5,105 vs C107), on-time 79% — fog; weekend; game day (Rockridge)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-7a478eac0717"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,222 (+4,137 vs C107), on-time 80% (+4 pts) — fog; weekend; game day (Rockridge); events in Piedmont Ave",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6f565c639644"
+          },
+          {
+            "t": "FACT",
+            "text": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+            "src": "Simulation_Ledger profile for POP-00617",
+            "id": "F-6412715ef9fb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01039",
+      "name": "Ximena Mehta",
+      "quote": "I’ve noticed more people at 12th St Oakland City Center lately—it feels like a hub of activity, especially with all the events and the Baylight District vote. It’s not just numbers; it’s the energy of people moving through, connecting parts of the city.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I’ve noticed more people at 12th St Oakland City Center lately—it feels like a hub of activity, especially with all the events and the Baylight District vote. It’s not just numbers; it’s the energy of people moving through, connecting parts of the city.\",\n  \"fact_ids\": [\"F-2ced873a1094\", \"F-5ea790fbf70f\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2ced873a1094",
+          "F-5ea790fbf70f"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01039-af57c05944",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve noticed more people at 12th St Oakland City Center lately—it feels like a hub of activity, especially with all the events and the Baylight District vote. It’s not just numbers; it’s the energy of people moving through, connecting parts of the city."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01039",
+          "name": "Ximena Mehta",
+          "role": "Bart Transit PR",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"12th St Oakland City Center's surge in ridership and the human infrastructure behind it.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "12th St Oakland City Center's surge in ridership and the human infrastructure behind it.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 108"
+        },
+        "exposure": {
+          "basis": [
+            "works at BART Oakland Division (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+          "evidence": [
+            {
+              "id": "EV-64adbae7ed",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+              "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership up 10,185 vs C107 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-555f91812528"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-2ced873a1094"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 70,489 (C107: 33,277)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6865006b7421"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center: ridership 18,376 (+10,185 vs C107), on-time 81% (+4 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-5ea790fbf70f"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland: ridership 12,304 (+6,813 vs C107), on-time 76% (-3 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-317c7b538fdb"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,107 (+5,105 vs C107), on-time 79% — fog; weekend; game day (Rockridge)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-7a478eac0717"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,222 (+4,137 vs C107), on-time 80% (+4 pts) — fog; weekend; game day (Rockridge); events in Piedmont Ave",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6f565c639644"
+          },
+          {
+            "t": "FACT",
+            "text": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+            "src": "Simulation_Ledger profile for POP-01039",
+            "id": "F-68d81ed0c396"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00218",
+      "name": "Joel Wren",
+      "quote": "You know, I've been seeing more folks hopping on the buses lately—especially down at 12th Street. It's good to see people out and about, trusting the system again. But what really gets me is the crew keeping those buses running. Those mechanics and drivers? They're the ones putting in the long hours to make sure everyone gets where they need to go.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, I've been seeing more folks hopping on the buses lately—especially down at 12th Street. It's good to see people out and about, trusting the system again. But what really gets me is the crew keeping those buses running. Those mechanics and drivers? They're the ones putting in the long hours to make sure everyone gets where they need to go.\",\n  \"fact_ids\": [\"F-555f91812528\", \"F-2ced873a1094\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-555f91812528",
+          "F-2ced873a1094"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00218-a8943f1e00",
+        "authoredQuote": true,
+        "publishableQuote": "You know, I've been seeing more folks hopping on the buses lately—especially down at 12th Street. It's good to see people out and about, trusting the system again. But what really gets me is the crew keeping those buses running. Those mechanics and drivers? They're the ones putting in the long hours to make sure everyone gets where they need to go."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00218",
+          "name": "Joel Wren",
+          "role": "Mechanic",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"12th St Oakland City Center's surge in ridership and the human infrastructure behind it.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "12th St Oakland City Center's surge in ridership and the human infrastructure behind it.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 108"
+        },
+        "exposure": {
+          "basis": [
+            "works at AC Transit (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Joel Wren — Mechanic — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-f31209c7f7",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+              "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership up 10,185 vs C107 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-555f91812528"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-2ced873a1094"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 70,489 (C107: 33,277)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6865006b7421"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center: ridership 18,376 (+10,185 vs C107), on-time 81% (+4 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-5ea790fbf70f"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland: ridership 12,304 (+6,813 vs C107), on-time 76% (-3 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-317c7b538fdb"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,107 (+5,105 vs C107), on-time 79% — fog; weekend; game day (Rockridge)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-7a478eac0717"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,222 (+4,137 vs C107), on-time 80% (+4 pts) — fog; weekend; game day (Rockridge); events in Piedmont Ave",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6f565c639644"
+          },
+          {
+            "t": "FACT",
+            "text": "Joel Wren — Mechanic — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00218",
+            "id": "F-65e9463e842a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00280",
+      "name": "Jerald Jensen",
+      "quote": "You wanna know about 12th Street? I see it in the wear and tear—more coffee spills to mop up, more trash cans overflowing by noon. Used to be you could catch your breath between rushes, but now? It's constant. Folks pouring in for work, for games, for whatever's happening downtown. And yeah, the fog rolls in, and suddenly everyone's in a bigger hurry, like the station's gotta apologize for the weather. But here's the thing—somebody's gotta keep it clean, keep it running. That's me. That's us. You don't think about the janitors until the bathroom's a mess, but we're the ones making sure it doesn't stay that way.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; restless for the new, adventurous; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You wanna know about 12th Street? I see it in the wear and tear—more coffee spills to mop up, more trash cans overflowing by noon. Used to be you could catch your breath between rushes, but now? It's constant. Folks pouring in for work, for games, for whatever's happening downtown. And yeah, the fog rolls in, and suddenly everyone's in a bigger hurry, like the station's gotta apologize for the weather. But here's the thing—somebody's gotta keep it clean, keep it running. That's me. That's us. You don't think about the janitors until the bathroom's a mess, but we're the ones making sure it doesn't stay that way.\",\n  \"fact_ids\": [\"F-5ea790fbf70f\", \"F-2ced873a1094\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5ea790fbf70f",
+          "F-2ced873a1094"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00280-8dc2d5841d",
+        "authoredQuote": true,
+        "publishableQuote": "You wanna know about 12th Street? I see it in the wear and tear—more coffee spills to mop up, more trash cans overflowing by noon. Used to be you could catch your breath between rushes, but now? It's constant. Folks pouring in for work, for games, for whatever's happening downtown. And yeah, the fog rolls in, and suddenly everyone's in a bigger hurry, like the station's gotta apologize for the weather. But here's the thing—somebody's gotta keep it clean, keep it running. That's me. That's us. You don't think about the janitors until the bathroom's a mess, but we're the ones making sure it doesn't stay that way."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00280",
+          "name": "Jerald Jensen",
+          "role": "Janitor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"12th St Oakland City Center's surge in ridership and the human infrastructure behind it.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "12th St Oakland City Center's surge in ridership and the human infrastructure behind it.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 108"
+        },
+        "exposure": {
+          "basis": [
+            "works at AC Transit (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Jerald Jensen — Janitor — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-5a78b23359",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+              "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership up 10,185 vs C107 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-555f91812528"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-2ced873a1094"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 70,489 (C107: 33,277)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6865006b7421"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center: ridership 18,376 (+10,185 vs C107), on-time 81% (+4 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-5ea790fbf70f"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland: ridership 12,304 (+6,813 vs C107), on-time 76% (-3 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-317c7b538fdb"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,107 (+5,105 vs C107), on-time 79% — fog; weekend; game day (Rockridge)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-7a478eac0717"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,222 (+4,137 vs C107), on-time 80% (+4 pts) — fog; weekend; game day (Rockridge); events in Piedmont Ave",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6f565c639644"
+          },
+          {
+            "t": "FACT",
+            "text": "Jerald Jensen — Janitor — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00280",
+            "id": "F-767f2a765161"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00617",
+      "name": "Eleanor Rivera",
+      "quote": "At 12th Street, we've definitely felt the uptick in ridership. It's not just numbers - it's people adjusting their routines, and us adjusting right along with them. The team just... adapts. No big announcements, just everyone doing their part to keep things moving smoothly.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"At 12th Street, we've definitely felt the uptick in ridership. It's not just numbers - it's people adjusting their routines, and us adjusting right along with them. The team just... adapts. No big announcements, just everyone doing their part to keep things moving smoothly.\",\n  \"fact_ids\": [\"F-555f91812528\", \"F-2ced873a1094\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-555f91812528",
+          "F-2ced873a1094"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00617-03c2d26c3a",
+        "authoredQuote": true,
+        "publishableQuote": "At 12th Street, we've definitely felt the uptick in ridership. It's not just numbers - it's people adjusting their routines, and us adjusting right along with them. The team just... adapts. No big announcements, just everyone doing their part to keep things moving smoothly."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00617",
+          "name": "Eleanor Rivera",
+          "role": "BART Station Manager",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"12th St Oakland City Center's surge in ridership and the human infrastructure behind it.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "12th St Oakland City Center's surge in ridership and the human infrastructure behind it.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 108"
+        },
+        "exposure": {
+          "basis": [
+            "works at BART Oakland Division (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+          "evidence": [
+            {
+              "id": "EV-78a0f21670",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+              "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership up 10,185 vs C107 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-555f91812528"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-2ced873a1094"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 70,489 (C107: 33,277)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6865006b7421"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center: ridership 18,376 (+10,185 vs C107), on-time 81% (+4 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-5ea790fbf70f"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland: ridership 12,304 (+6,813 vs C107), on-time 76% (-3 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-317c7b538fdb"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,107 (+5,105 vs C107), on-time 79% — fog; weekend; game day (Rockridge)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-7a478eac0717"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,222 (+4,137 vs C107), on-time 80% (+4 pts) — fog; weekend; game day (Rockridge); events in Piedmont Ave",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6f565c639644"
+          },
+          {
+            "t": "FACT",
+            "text": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+            "src": "Simulation_Ledger profile for POP-00617",
+            "id": "F-6412715ef9fb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01039",
+      "name": "Ximena Mehta",
+      "quote": "I’ve noticed more people at 12th St Oakland City Center lately—it feels like a hub of activity, especially with all the events and the Baylight District vote. It’s not just numbers; it’s the energy of people moving through, connecting parts of the city.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I’ve noticed more people at 12th St Oakland City Center lately—it feels like a hub of activity, especially with all the events and the Baylight District vote. It’s not just numbers; it’s the energy of people moving through, connecting parts of the city.\",\n  \"fact_ids\": [\"F-2ced873a1094\", \"F-5ea790fbf70f\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2ced873a1094",
+          "F-5ea790fbf70f"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01039-af57c05944",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve noticed more people at 12th St Oakland City Center lately—it feels like a hub of activity, especially with all the events and the Baylight District vote. It’s not just numbers; it’s the energy of people moving through, connecting parts of the city."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01039",
+          "name": "Ximena Mehta",
+          "role": "Bart Transit PR",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"12th St Oakland City Center's surge in ridership and the human infrastructure behind it.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "12th St Oakland City Center's surge in ridership and the human infrastructure behind it.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 108"
+        },
+        "exposure": {
+          "basis": [
+            "works at BART Oakland Division (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+          "evidence": [
+            {
+              "id": "EV-64adbae7ed",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+              "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership up 10,185 vs C107 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-555f91812528"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-2ced873a1094"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 70,489 (C107: 33,277)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6865006b7421"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center: ridership 18,376 (+10,185 vs C107), on-time 81% (+4 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-5ea790fbf70f"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland: ridership 12,304 (+6,813 vs C107), on-time 76% (-3 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-317c7b538fdb"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,107 (+5,105 vs C107), on-time 79% — fog; weekend; game day (Rockridge)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-7a478eac0717"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,222 (+4,137 vs C107), on-time 80% (+4 pts) — fog; weekend; game day (Rockridge); events in Piedmont Ave",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6f565c639644"
+          },
+          {
+            "t": "FACT",
+            "text": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+            "src": "Simulation_Ledger profile for POP-01039",
+            "id": "F-68d81ed0c396"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00218",
+      "name": "Joel Wren",
+      "quote": "You know, I've been seeing more folks hopping on the buses lately—especially down at 12th Street. It's good to see people out and about, trusting the system again. But what really gets me is the crew keeping those buses running. Those mechanics and drivers? They're the ones putting in the long hours to make sure everyone gets where they need to go.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, I've been seeing more folks hopping on the buses lately—especially down at 12th Street. It's good to see people out and about, trusting the system again. But what really gets me is the crew keeping those buses running. Those mechanics and drivers? They're the ones putting in the long hours to make sure everyone gets where they need to go.\",\n  \"fact_ids\": [\"F-555f91812528\", \"F-2ced873a1094\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-555f91812528",
+          "F-2ced873a1094"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00218-a8943f1e00",
+        "authoredQuote": true,
+        "publishableQuote": "You know, I've been seeing more folks hopping on the buses lately—especially down at 12th Street. It's good to see people out and about, trusting the system again. But what really gets me is the crew keeping those buses running. Those mechanics and drivers? They're the ones putting in the long hours to make sure everyone gets where they need to go."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00218",
+          "name": "Joel Wren",
+          "role": "Mechanic",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"12th St Oakland City Center's surge in ridership and the human infrastructure behind it.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "12th St Oakland City Center's surge in ridership and the human infrastructure behind it.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 108"
+        },
+        "exposure": {
+          "basis": [
+            "works at AC Transit (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Joel Wren — Mechanic — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-f31209c7f7",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+              "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership up 10,185 vs C107 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-555f91812528"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-2ced873a1094"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 70,489 (C107: 33,277)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6865006b7421"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center: ridership 18,376 (+10,185 vs C107), on-time 81% (+4 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-5ea790fbf70f"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland: ridership 12,304 (+6,813 vs C107), on-time 76% (-3 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-317c7b538fdb"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,107 (+5,105 vs C107), on-time 79% — fog; weekend; game day (Rockridge)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-7a478eac0717"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,222 (+4,137 vs C107), on-time 80% (+4 pts) — fog; weekend; game day (Rockridge); events in Piedmont Ave",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6f565c639644"
+          },
+          {
+            "t": "FACT",
+            "text": "Joel Wren — Mechanic — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00218",
+            "id": "F-65e9463e842a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00280",
+      "name": "Jerald Jensen",
+      "quote": "You wanna know about 12th Street? I see it in the wear and tear—more coffee spills to mop up, more trash cans overflowing by noon. Used to be you could catch your breath between rushes, but now? It's constant. Folks pouring in for work, for games, for whatever's happening downtown. And yeah, the fog rolls in, and suddenly everyone's in a bigger hurry, like the station's gotta apologize for the weather. But here's the thing—somebody's gotta keep it clean, keep it running. That's me. That's us. You don't think about the janitors until the bathroom's a mess, but we're the ones making sure it doesn't stay that way.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; restless for the new, adventurous; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You wanna know about 12th Street? I see it in the wear and tear—more coffee spills to mop up, more trash cans overflowing by noon. Used to be you could catch your breath between rushes, but now? It's constant. Folks pouring in for work, for games, for whatever's happening downtown. And yeah, the fog rolls in, and suddenly everyone's in a bigger hurry, like the station's gotta apologize for the weather. But here's the thing—somebody's gotta keep it clean, keep it running. That's me. That's us. You don't think about the janitors until the bathroom's a mess, but we're the ones making sure it doesn't stay that way.\",\n  \"fact_ids\": [\"F-5ea790fbf70f\", \"F-2ced873a1094\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5ea790fbf70f",
+          "F-2ced873a1094"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00280-8dc2d5841d",
+        "authoredQuote": true,
+        "publishableQuote": "You wanna know about 12th Street? I see it in the wear and tear—more coffee spills to mop up, more trash cans overflowing by noon. Used to be you could catch your breath between rushes, but now? It's constant. Folks pouring in for work, for games, for whatever's happening downtown. And yeah, the fog rolls in, and suddenly everyone's in a bigger hurry, like the station's gotta apologize for the weather. But here's the thing—somebody's gotta keep it clean, keep it running. That's me. That's us. You don't think about the janitors until the bathroom's a mess, but we're the ones making sure it doesn't stay that way."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00280",
+          "name": "Jerald Jensen",
+          "role": "Janitor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "What have you seen, felt, or understood about \"12th St Oakland City Center's surge in ridership and the human infrastructure behind it.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-transit",
+          "hood": null,
+          "focus": "12th St Oakland City Center's surge in ridership and the human infrastructure behind it.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 108"
+        },
+        "exposure": {
+          "basis": [
+            "works at AC Transit (Employment_Roster)",
+            "same-neighborhood"
+          ],
+          "self": "Jerald Jensen — Janitor — AC Transit",
+          "evidence": [
+            {
+              "id": "EV-5a78b23359",
+              "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+              "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C108",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-78217e633afa"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center ridership up 10,185 vs C107 | 8 stations + 10 corridors on the record",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-555f91812528"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center moved up the most this cycle — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning; 9 transit workers on the roster.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-2ced873a1094"
+          },
+          {
+            "t": "FACT",
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 70,489 (C107: 33,277)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6865006b7421"
+          },
+          {
+            "t": "FACT",
+            "text": "12th St Oakland City Center: ridership 18,376 (+10,185 vs C107), on-time 81% (+4 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-5ea790fbf70f"
+          },
+          {
+            "t": "FACT",
+            "text": "19th St Oakland: ridership 12,304 (+6,813 vs C107), on-time 76% (-3 pts) — fog; weekend; game day (Downtown, Lake Merritt); events in Downtown ×3, Lake Merritt; Baylight District — Final Council Vote: construction-planning",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-317c7b538fdb"
+          },
+          {
+            "t": "FACT",
+            "text": "MacArthur: ridership 9,107 (+5,105 vs C107), on-time 79% — fog; weekend; game day (Rockridge)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-7a478eac0717"
+          },
+          {
+            "t": "FACT",
+            "text": "Rockridge: ridership 7,222 (+4,137 vs C107), on-time 80% (+4 pts) — fog; weekend; game day (Rockridge); events in Piedmont Ave",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 108",
+            "id": "F-6f565c639644"
+          },
+          {
+            "t": "FACT",
+            "text": "Jerald Jensen — Janitor — AC Transit",
+            "src": "Simulation_Ledger profile for POP-00280",
+            "id": "F-767f2a765161"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-21T18:18:27.754Z"
+}

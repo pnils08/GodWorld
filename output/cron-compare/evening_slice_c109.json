@@ -1,0 +1,851 @@
+{
+  "empty": false,
+  "cycle": 109,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Henry Rivas",
+      "Rico Valez",
+      "Derek Obi"
+    ],
+    "restaurants": [
+      {
+        "name": "Harborline Grill",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Green & Gold Tavern",
+        "hood": "Jack London"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "Bridge & Barrel",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Piedmont Parlor",
+        "hood": "Piedmont Ave"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 6,
+      "vibe": "game-night",
+      "movement": "restricted",
+      "weatherImpact": 1.05
+    },
+    "cityEvents": [
+      "The Reaves Line Founding Celebration",
+      "Lake Merritt Open-Air Book Market",
+      "Temescal Street Vendors Block"
+    ],
+    "tv": [
+      "Breaking Bulletin",
+      "Warm House",
+      "Slow Evenings",
+      "Coliseum to Jack London: An A's Story",
+      "One-on-One with Pablo Almanzar (SP)"
+    ],
+    "movies": [
+      "Rising Star",
+      "Snowlight",
+      "Opening Day"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight - Playoff Special",
+    "streamingTrend": "political commentary surge",
+    "foodTrend": "Playoff tension dining - sports bar surge"
+  },
+  "signals": {
+    "fameCount": 7,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c109.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Henry Rivas spotted at Coastline Construction",
+        "name": "Henry Rivas",
+        "venue": "Coastline Construction",
+        "ref": "Ripple_Ledger cycle 109 (CauseType lifestyle-sighting); rendered: world_summary_c109.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "West Oakland",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Rico Valez spotted at Blue Lantern Bar",
+        "name": "Rico Valez",
+        "venue": "Blue Lantern Bar",
+        "ref": "Ripple_Ledger cycle 109 (CauseType lifestyle-sighting); rendered: world_summary_c109.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Jack London",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Derek Obi spotted at Temple Beth Or",
+        "name": "Derek Obi",
+        "venue": "Temple Beth Or",
+        "ref": "Ripple_Ledger cycle 109 (CauseType lifestyle-sighting); rendered: world_summary_c109.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Rockridge",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Eric Taveras — the city is watching: felt quietly proud of how they handled something small",
+        "name": "Eric Taveras",
+        "ref": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00597"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Mei Chen — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "name": "Mei Chen",
+        "ref": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Chinatown",
+        "popids": [
+          "POP-00635"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Alma Vasquez — the city is watching: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "name": "Alma Vasquez",
+        "ref": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Laurel",
+        "popids": [
+          "POP-01063"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Dante Reyes — the city is watching: watched the fog roll over the port cranes from their front window",
+        "name": "Dante Reyes",
+        "ref": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Jack London",
+        "popids": [
+          "POP-01066"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Rick Walker — the city keeps saying the name: Tier 2 -> 1",
+        "name": "Rick Walker",
+        "ref": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00198"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Trenton Nawan — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Trenton Nawan",
+        "ref": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Jack London",
+        "popids": [
+          "POP-00273"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Mei Wong — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Mei Wong",
+        "ref": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-01036"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "quiet-nightlife",
+    "score": 24,
+    "label": "Bridge & Barrel (Jack London) · quiet night",
+    "named": "Bridge & Barrel",
+    "hood": "Jack London",
+    "person": null,
+    "venue": null
+  },
+  "candidates": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "named": "Bridge & Barrel",
+      "hood": "Jack London"
+    },
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Piedmont Parlor (Piedmont Ave) · quiet night",
+      "named": "Piedmont Parlor",
+      "hood": "Piedmont Ave"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Henry Rivas at Coastline Construction (West Oakland)",
+      "named": "Coastline Construction",
+      "hood": "West Oakland"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Rico Valez at Blue Lantern Bar (Jack London)",
+      "named": "Blue Lantern Bar",
+      "hood": "Jack London"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Derek Obi at Temple Beth Or (Rockridge)",
+      "named": "Temple Beth Or",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Harborline Grill (Jack London)",
+      "named": "Harborline Grill",
+      "hood": "Jack London"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Green & Gold Tavern (Jack London)",
+      "named": "Green & Gold Tavern",
+      "hood": "Jack London"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Eric Taveras — fame rise",
+      "named": "Eric Taveras",
+      "hood": "Downtown"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Mei Chen — fame rise",
+      "named": "Mei Chen",
+      "hood": "Chinatown"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Alma Vasquez — fame rise",
+      "named": "Alma Vasquez",
+      "hood": "Laurel"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Dante Reyes — fame rise",
+      "named": "Dante Reyes",
+      "hood": "Jack London"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Rick Walker — fame rise",
+      "named": "Rick Walker",
+      "hood": "Fruitvale"
+    }
+  ],
+  "pulses": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "named": "Bridge & Barrel",
+      "hood": "Jack London",
+      "names": [
+        "Bridge & Barrel"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Bridge & Barrel is open and quiet in Jack London. What that condition means is not yet established.",
+      "hookLine": "Bridge & Barrel is open and quiet in Jack London.",
+      "sceneBits": [
+        "VENUE: Bridge & Barrel",
+        "HOOD: Jack London",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 6,
+        "vibe": "game-night",
+        "movement": "restricted",
+        "weatherImpact": 1.05
+      },
+      "cycle": 109
+    },
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Piedmont Parlor (Piedmont Ave) · quiet night",
+      "named": "Piedmont Parlor",
+      "hood": "Piedmont Ave",
+      "names": [
+        "Piedmont Parlor"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Piedmont Parlor is open and quiet in Piedmont Ave. What that condition means is not yet established.",
+      "hookLine": "Piedmont Parlor is open and quiet in Piedmont Ave.",
+      "sceneBits": [
+        "VENUE: Piedmont Parlor",
+        "HOOD: Piedmont Ave",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 6,
+        "vibe": "game-night",
+        "movement": "restricted",
+        "weatherImpact": 1.05
+      },
+      "cycle": 109
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Henry Rivas at Coastline Construction (West Oakland)",
+      "named": "Coastline Construction",
+      "hood": "West Oakland",
+      "names": [
+        "Henry Rivas",
+        "Coastline Construction"
+      ],
+      "person": "Henry Rivas",
+      "venue": "Coastline Construction",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 109 (CauseType lifestyle-sighting); rendered: world_summary_c109.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Henry Rivas spotted at Coastline Construction in West Oakland — ground truth only, no invented companions",
+      "hookLine": "sighting | Henry Rivas spotted at Coastline Construction",
+      "sceneBits": [
+        "PERSON: Henry Rivas",
+        "VENUE: Coastline Construction",
+        "HOOD: West Oakland"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Rico Valez at Blue Lantern Bar (Jack London)",
+      "named": "Blue Lantern Bar",
+      "hood": "Jack London",
+      "names": [
+        "Rico Valez",
+        "Blue Lantern Bar"
+      ],
+      "person": "Rico Valez",
+      "venue": "Blue Lantern Bar",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 109 (CauseType lifestyle-sighting); rendered: world_summary_c109.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Rico Valez spotted at Blue Lantern Bar in Jack London — ground truth only, no invented companions",
+      "hookLine": "sighting | Rico Valez spotted at Blue Lantern Bar",
+      "sceneBits": [
+        "PERSON: Rico Valez",
+        "VENUE: Blue Lantern Bar",
+        "HOOD: Jack London"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Derek Obi at Temple Beth Or (Rockridge)",
+      "named": "Temple Beth Or",
+      "hood": "Rockridge",
+      "names": [
+        "Derek Obi",
+        "Temple Beth Or"
+      ],
+      "person": "Derek Obi",
+      "venue": "Temple Beth Or",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 109 (CauseType lifestyle-sighting); rendered: world_summary_c109.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Derek Obi spotted at Temple Beth Or in Rockridge — ground truth only, no invented companions",
+      "hookLine": "sighting | Derek Obi spotted at Temple Beth Or",
+      "sceneBits": [
+        "PERSON: Derek Obi",
+        "VENUE: Temple Beth Or",
+        "HOOD: Rockridge"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Harborline Grill (Jack London)",
+      "named": "Harborline Grill",
+      "hood": "Jack London",
+      "names": [
+        "Harborline Grill"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Harborline Grill appears on the evening restaurant list in Jack London. What was happening there is not established.",
+      "hookLine": "Harborline Grill appears on the evening restaurant list in Jack London.",
+      "sceneBits": [
+        "VENUE: Harborline Grill",
+        "HOOD: Jack London"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Green & Gold Tavern (Jack London)",
+      "named": "Green & Gold Tavern",
+      "hood": "Jack London",
+      "names": [
+        "Green & Gold Tavern"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Green & Gold Tavern appears on the evening restaurant list in Jack London. What was happening there is not established.",
+      "hookLine": "Green & Gold Tavern appears on the evening restaurant list in Jack London.",
+      "sceneBits": [
+        "VENUE: Green & Gold Tavern",
+        "HOOD: Jack London"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Eric Taveras — fame rise",
+      "named": "Eric Taveras",
+      "hood": "Downtown",
+      "names": [
+        "Eric Taveras"
+      ],
+      "person": "Eric Taveras",
+      "popids": [
+        "POP-00597"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Eric Taveras — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Eric Taveras — the city is watching: felt quietly proud of how they handled something small",
+      "sceneBits": [
+        "PERSON: Eric Taveras",
+        "HOOD: Downtown",
+        "LABEL: fame-rise | Eric Taveras — the city is watching: felt quietly proud of how they handled something small"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Mei Chen — fame rise",
+      "named": "Mei Chen",
+      "hood": "Chinatown",
+      "names": [
+        "Mei Chen"
+      ],
+      "person": "Mei Chen",
+      "popids": [
+        "POP-00635"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Mei Chen — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Mei Chen — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "sceneBits": [
+        "PERSON: Mei Chen",
+        "HOOD: Chinatown",
+        "LABEL: fame-rise | Mei Chen — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Alma Vasquez — fame rise",
+      "named": "Alma Vasquez",
+      "hood": "Laurel",
+      "names": [
+        "Alma Vasquez"
+      ],
+      "person": "Alma Vasquez",
+      "popids": [
+        "POP-01063"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Alma Vasquez — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Alma Vasquez — the city is watching: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "sceneBits": [
+        "PERSON: Alma Vasquez",
+        "HOOD: Laurel",
+        "LABEL: fame-rise | Alma Vasquez — the city is watching: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Dante Reyes — fame rise",
+      "named": "Dante Reyes",
+      "hood": "Jack London",
+      "names": [
+        "Dante Reyes"
+      ],
+      "person": "Dante Reyes",
+      "popids": [
+        "POP-01066"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Dante Reyes — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Dante Reyes — the city is watching: watched the fog roll over the port cranes from their front window",
+      "sceneBits": [
+        "PERSON: Dante Reyes",
+        "HOOD: Jack London",
+        "LABEL: fame-rise | Dante Reyes — the city is watching: watched the fog roll over the port cranes from their front window"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Rick Walker — fame rise",
+      "named": "Rick Walker",
+      "hood": "Fruitvale",
+      "names": [
+        "Rick Walker"
+      ],
+      "person": "Rick Walker",
+      "popids": [
+        "POP-00198"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Rick Walker — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Rick Walker — the city keeps saying the name: Tier 2 -> 1",
+      "sceneBits": [
+        "PERSON: Rick Walker",
+        "HOOD: Fruitvale",
+        "LABEL: tier-climb | Rick Walker — the city keeps saying the name: Tier 2 -> 1"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Trenton Nawan — fame rise",
+      "named": "Trenton Nawan",
+      "hood": "Jack London",
+      "names": [
+        "Trenton Nawan"
+      ],
+      "person": "Trenton Nawan",
+      "popids": [
+        "POP-00273"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Trenton Nawan — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Trenton Nawan — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Trenton Nawan",
+        "HOOD: Jack London",
+        "LABEL: tier-climb | Trenton Nawan — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Mei Wong — fame rise",
+      "named": "Mei Wong",
+      "hood": "Rockridge",
+      "names": [
+        "Mei Wong"
+      ],
+      "person": "Mei Wong",
+      "popids": [
+        "POP-01036"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 109 (CauseType fame-event); rendered: world_summary_c109.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Mei Wong — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Mei Wong — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Mei Wong",
+        "HOOD: Rockridge",
+        "LABEL: tier-climb | Mei Wong — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Breaking Bulletin; Warm House; Slow Evenings",
+      "named": "Breaking Bulletin",
+      "hood": null,
+      "names": [
+        "Breaking Bulletin",
+        "Warm House",
+        "Slow Evenings",
+        "Coliseum to Jack London: An A's Story",
+        "One-on-One with Pablo Almanzar (SP)"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media TV",
+      "angle": "Evening TV slate — Breaking Bulletin, Warm House, Slow Evenings; sports desk: Oakland Sports Tonight - Playoff Special",
+      "hookLine": "On the box tonight: Breaking Bulletin, Warm House.",
+      "sceneBits": [
+        "TV: Breaking Bulletin; Warm House; Slow Evenings; Coliseum to Jack London: An A's Story; One-on-One with Pablo Almanzar (SP)",
+        "SPORTS BROADCAST: Oakland Sports Tonight - Playoff Special"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "The Reaves Line Founding Celebration",
+      "named": "The Reaves Line Founding Celebration",
+      "hood": null,
+      "names": [
+        "The Reaves Line Founding Celebration"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: The Reaves Line Founding Celebration — present-tense room, not calendar filler",
+      "hookLine": "The Reaves Line Founding Celebration is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Reaves Line Founding Celebration"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Lake Merritt Open-Air Book Market",
+      "named": "Lake Merritt Open-Air Book Market",
+      "hood": null,
+      "names": [
+        "Lake Merritt Open-Air Book Market"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Lake Merritt Open-Air Book Market — present-tense room, not calendar filler",
+      "hookLine": "Lake Merritt Open-Air Book Market is on the evening board.",
+      "sceneBits": [
+        "EVENT: Lake Merritt Open-Air Book Market"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Temescal Street Vendors Block",
+      "named": "Temescal Street Vendors Block",
+      "hood": null,
+      "names": [
+        "Temescal Street Vendors Block"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Temescal Street Vendors Block — present-tense room, not calendar filler",
+      "hookLine": "Temescal Street Vendors Block is on the evening board.",
+      "sceneBits": [
+        "EVENT: Temescal Street Vendors Block"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "fast-food",
+      "score": 13,
+      "label": "SpeedyBurger (Downtown)",
+      "named": "SpeedyBurger",
+      "hood": "Downtown",
+      "names": [
+        "SpeedyBurger"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Fast food",
+      "angle": "SpeedyBurger appears on the evening fast-food list in Downtown. What was happening there is not established.",
+      "hookLine": "SpeedyBurger appears on the evening fast-food list in Downtown.",
+      "sceneBits": [
+        "VENUE: SpeedyBurger",
+        "HOOD: Downtown"
+      ],
+      "cycle": 109
+    },
+    {
+      "className": "movie-slate",
+      "score": 13,
+      "label": "Movies: Rising Star; Snowlight; Opening Day",
+      "named": "Rising Star",
+      "hood": null,
+      "names": [
+        "Rising Star",
+        "Snowlight",
+        "Opening Day"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media movies",
+      "angle": "Evening movie slate — Rising Star, Snowlight, Opening Day",
+      "hookLine": "Screens tonight: Rising Star, Snowlight, Opening Day.",
+      "sceneBits": [
+        "MOVIES: Rising Star; Snowlight; Opening Day"
+      ],
+      "cycle": 109
+    }
+  ],
+  "recommend": {
+    "bag": "lifestyle",
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "reason": "top pulse quiet-nightlife → lifestyle",
+    "pulseClass": "quiet-nightlife",
+    "pulseLabel": "Bridge & Barrel (Jack London) · quiet night"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Harborline Grill (Jack London)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "score": 32,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "score": 32,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "score": 32,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "fame-sighting",
+      "label": "Derek Obi at Temple Beth Or (Rockridge)",
+      "score": 43,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Bridge & Barrel is open and quiet in Jack London. What that condition means is not yet established.",
+    "label": "Bridge & Barrel (Jack London) · quiet night",
+    "hookLine": "Bridge & Barrel is open and quiet in Jack London.",
+    "hood": "Jack London",
+    "pulseClass": "quiet-nightlife",
+    "citizens": [],
+    "popids": [],
+    "named": "Bridge & Barrel",
+    "venue": "Bridge & Barrel",
+    "ref": "world_summary ## Evening Texture · Nightlife",
+    "cycle": 109
+  },
+  "prewrite": {
+    "pulseClass": "quiet-nightlife",
+    "angle": "Bridge & Barrel is open and quiet in Jack London. What that condition means is not yet established.",
+    "hookLine": "Bridge & Barrel is open and quiet in Jack London.",
+    "anchorFacts": [
+      "NAMED: Bridge & Barrel",
+      "HOOD: Jack London",
+      "VENUE: Bridge & Barrel",
+      "HOOD: Jack London",
+      "EVENING RECORD: open and quiet"
+    ],
+    "bagRecommend": "lifestyle",
+    "bagSlug": "sharon-okafor"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Harborline Grill",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Green & Gold Tavern",
+        "hood": "Jack London"
+      },
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Bridge & Barrel",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Piedmont Parlor",
+        "hood": "Piedmont Ave"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 6,
+      "vibe": "game-night",
+      "movement": "restricted",
+      "weatherImpact": 1.05
+    },
+    "cityEvents": [
+      "The Reaves Line Founding Celebration",
+      "Lake Merritt Open-Air Book Market",
+      "Temescal Street Vendors Block"
+    ],
+    "tv": [
+      "Breaking Bulletin",
+      "Warm House",
+      "Slow Evenings",
+      "Coliseum to Jack London: An A's Story",
+      "One-on-One with Pablo Almanzar (SP)"
+    ],
+    "movies": [
+      "Rising Star",
+      "Snowlight",
+      "Opening Day"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c109.md ## Evening Texture",
+    "output/desk_signal_c109.json lanes.culture",
+    "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+  ]
+}

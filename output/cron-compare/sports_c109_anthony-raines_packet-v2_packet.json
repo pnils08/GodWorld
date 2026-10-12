@@ -1,0 +1,1052 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "109",
+  "persona": "anthony-raines",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017"
+  },
+  "assignment": {
+    "story": {
+      "kind": "sports-analytics",
+      "angle": "One line anchors the board read — 7IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+      "label": "A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+      "hookLine": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+      "hood": "Chinatown",
+      "pulseClass": "line-card",
+      "team": "A's",
+      "eventKind": "game-result",
+      "citizens": [
+        "Pablo Almanzar (POP-01078)",
+        "Ernesto Quintero (POP-00050)",
+        "Jose Colon (POP-00599)"
+      ],
+      "popids": [
+        "POP-01078",
+        "POP-00050",
+        "POP-00599"
+      ],
+      "ref": "world_summary_c109.md ## Sports",
+      "cycle": 109
+    }
+  },
+  "angle": "output/cron-compare/sports_c109_anthony-raines_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-01078",
+      "name": "Pablo Almanzar",
+      "quote": "I felt like I executed my pitches well and trusted my defense. It’s always a team effort, and I’m just glad I could contribute to the win.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I felt like I executed my pitches well and trusted my defense. It’s always a team effort, and I’m just glad I could contribute to the win.\",\n  \"fact_ids\": [\"F-51e10563cc33\", \"F-2272cdb95a09\", \"F-e3ea047420ad\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-51e10563cc33",
+          "F-2272cdb95a09",
+          "F-e3ea047420ad"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01078-64f44c4bca",
+        "authoredQuote": true,
+        "publishableQuote": "I felt like I executed my pitches well and trusted my defense. It’s always a team effort, and I’m just glad I could contribute to the win."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01078",
+          "name": "Pablo Almanzar",
+          "role": "SP / Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "What have you seen, felt, or understood about \"Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Chinatown",
+          "focus": "Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.",
+          "src": "world_summary_c109.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Pablo Almanzar — SP / Oakland A's — Jack London",
+          "evidence": [
+            {
+              "id": "EV-f41493a97e",
+              "src": "world_summary_c109.md ## Sports",
+              "text": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-51e10563cc33"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-2272cdb95a09"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Pablo Almanzar/7IP/5H/2ER/7SO",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-e3ea047420ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Ernesto Quintero/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-c24b3af6a0f2"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Jose Colon/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-68761f57cebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Darrin Davis/4-4",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-be77152ef4d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar — SP / Oakland A's — Jack London",
+            "src": "Simulation_Ledger profile for POP-01078",
+            "id": "F-7c5207514acb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00599",
+      "name": "Jose Colon",
+      "quote": "Man, Pablo was locked in. Seven strong innings, just two runs? That's the kind of performance that wins you games in October. I caught him a few times this season, and when he's on like that, it's not luck—it's him hitting his spots and trusting his stuff. The way he mixed his pitches kept their hitters guessing all night. That's not variance, that's just good pitching.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, Pablo was locked in. Seven strong innings, just two runs? That's the kind of performance that wins you games in October. I caught him a few times this season, and when he's on like that, it's not luck—it's him hitting his spots and trusting his stuff. The way he mixed his pitches kept their hitters guessing all night. That's not variance, that's just good pitching.\",\n  \"fact_ids\": [\"F-51e10563cc33\", \"F-e3ea047420ad\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-51e10563cc33",
+          "F-e3ea047420ad"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00599-f36bbce272",
+        "authoredQuote": true,
+        "publishableQuote": "Man, Pablo was locked in. Seven strong innings, just two runs? That's the kind of performance that wins you games in October. I caught him a few times this season, and when he's on like that, it's not luck—it's him hitting his spots and trusting his stuff. The way he mixed his pitches kept their hitters guessing all night. That's not variance, that's just good pitching."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00599",
+          "name": "Jose Colon",
+          "role": "Catcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Chinatown",
+          "focus": "Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.",
+          "src": "world_summary_c109.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names",
+            "same-neighborhood"
+          ],
+          "self": "Jose Colon — Catcher, Oakland A's — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-e51e4ea70a",
+              "src": "world_summary_c109.md ## Sports",
+              "text": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-51e10563cc33"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-2272cdb95a09"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Pablo Almanzar/7IP/5H/2ER/7SO",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-e3ea047420ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Ernesto Quintero/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-c24b3af6a0f2"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Jose Colon/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-68761f57cebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Darrin Davis/4-4",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-be77152ef4d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Jose Colon — Catcher, Oakland A's — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00599",
+            "id": "F-818df9e397ff"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01041",
+      "name": "Ronald Williams",
+      "quote": "I heard folks talking about Pablo Almanzar's game at the diner—sounds like he’s been solid on the mound.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I heard folks talking about Pablo Almanzar's game at the diner—sounds like he’s been solid on the mound.\",\"fact_ids\":[\"F-51e10563cc33\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-51e10563cc33"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01041-18485a5778",
+        "authoredQuote": true,
+        "publishableQuote": "I heard folks talking about Pablo Almanzar's game at the diner—sounds like he’s been solid on the mound."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01041",
+          "name": "Ronald Williams",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Chinatown",
+          "focus": "Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.",
+          "src": "world_summary_c109.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Ronald Williams — Line cook — Chinatown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-51e10563cc33"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-2272cdb95a09"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Pablo Almanzar/7IP/5H/2ER/7SO",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-e3ea047420ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Ernesto Quintero/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-c24b3af6a0f2"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Jose Colon/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-68761f57cebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Darrin Davis/4-4",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-be77152ef4d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Williams — Line cook — Chinatown",
+            "src": "Simulation_Ledger profile for POP-01041",
+            "id": "F-b41370f1cda1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-01078",
+      "name": "Pablo Almanzar",
+      "quote": "I felt like I executed my pitches well and trusted my defense. It’s always a team effort, and I’m just glad I could contribute to the win.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I felt like I executed my pitches well and trusted my defense. It’s always a team effort, and I’m just glad I could contribute to the win.\",\n  \"fact_ids\": [\"F-51e10563cc33\", \"F-2272cdb95a09\", \"F-e3ea047420ad\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-51e10563cc33",
+          "F-2272cdb95a09",
+          "F-e3ea047420ad"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01078-64f44c4bca",
+        "authoredQuote": true,
+        "publishableQuote": "I felt like I executed my pitches well and trusted my defense. It’s always a team effort, and I’m just glad I could contribute to the win."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01078",
+          "name": "Pablo Almanzar",
+          "role": "SP / Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "What have you seen, felt, or understood about \"Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Chinatown",
+          "focus": "Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.",
+          "src": "world_summary_c109.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Pablo Almanzar — SP / Oakland A's — Jack London",
+          "evidence": [
+            {
+              "id": "EV-f41493a97e",
+              "src": "world_summary_c109.md ## Sports",
+              "text": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-51e10563cc33"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-2272cdb95a09"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Pablo Almanzar/7IP/5H/2ER/7SO",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-e3ea047420ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Ernesto Quintero/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-c24b3af6a0f2"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Jose Colon/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-68761f57cebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Darrin Davis/4-4",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-be77152ef4d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar — SP / Oakland A's — Jack London",
+            "src": "Simulation_Ledger profile for POP-01078",
+            "id": "F-7c5207514acb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00050",
+      "name": "Ernesto Quintero",
+      "quote": null,
+      "disp": "driven, hard to sit still; draws people in, deep with them; steady, hard to shake",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be one to four sentences",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Pablo? Man, he was painting corners all night in Philly. Seven innings, two runs—that's not luck, that's craft. When he's on like that, you can see him reading hitters two pitches ahead. We just had to give him a little run support and let him work.\",\n  \"fact_ids\": [\"F-51e10563cc33\", \"F-e3ea047420ad\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": []\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00050",
+          "name": "Ernesto Quintero",
+          "role": "3B/1B , Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "What have you seen, felt, or understood about \"Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Chinatown",
+          "focus": "Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.",
+          "src": "world_summary_c109.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+          "evidence": [
+            {
+              "id": "EV-057bfbd6a6",
+              "src": "world_summary_c109.md ## Sports",
+              "text": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-51e10563cc33"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-2272cdb95a09"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Pablo Almanzar/7IP/5H/2ER/7SO",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-e3ea047420ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Ernesto Quintero/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-c24b3af6a0f2"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Jose Colon/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-68761f57cebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Darrin Davis/4-4",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-be77152ef4d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+            "src": "Simulation_Ledger profile for POP-00050",
+            "id": "F-d66efbf64730"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00599",
+      "name": "Jose Colon",
+      "quote": "Man, Pablo was locked in. Seven strong innings, just two runs? That's the kind of performance that wins you games in October. I caught him a few times this season, and when he's on like that, it's not luck—it's him hitting his spots and trusting his stuff. The way he mixed his pitches kept their hitters guessing all night. That's not variance, that's just good pitching.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, Pablo was locked in. Seven strong innings, just two runs? That's the kind of performance that wins you games in October. I caught him a few times this season, and when he's on like that, it's not luck—it's him hitting his spots and trusting his stuff. The way he mixed his pitches kept their hitters guessing all night. That's not variance, that's just good pitching.\",\n  \"fact_ids\": [\"F-51e10563cc33\", \"F-e3ea047420ad\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-51e10563cc33",
+          "F-e3ea047420ad"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00599-f36bbce272",
+        "authoredQuote": true,
+        "publishableQuote": "Man, Pablo was locked in. Seven strong innings, just two runs? That's the kind of performance that wins you games in October. I caught him a few times this season, and when he's on like that, it's not luck—it's him hitting his spots and trusting his stuff. The way he mixed his pitches kept their hitters guessing all night. That's not variance, that's just good pitching."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00599",
+          "name": "Jose Colon",
+          "role": "Catcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Chinatown",
+          "focus": "Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.",
+          "src": "world_summary_c109.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names",
+            "same-neighborhood"
+          ],
+          "self": "Jose Colon — Catcher, Oakland A's — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-e51e4ea70a",
+              "src": "world_summary_c109.md ## Sports",
+              "text": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-51e10563cc33"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-2272cdb95a09"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Pablo Almanzar/7IP/5H/2ER/7SO",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-e3ea047420ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Ernesto Quintero/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-c24b3af6a0f2"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Jose Colon/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-68761f57cebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Darrin Davis/4-4",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-be77152ef4d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Jose Colon — Catcher, Oakland A's — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00599",
+            "id": "F-818df9e397ff"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01041",
+      "name": "Ronald Williams",
+      "quote": "I heard folks talking about Pablo Almanzar's game at the diner—sounds like he’s been solid on the mound.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I heard folks talking about Pablo Almanzar's game at the diner—sounds like he’s been solid on the mound.\",\"fact_ids\":[\"F-51e10563cc33\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-51e10563cc33"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01041-18485a5778",
+        "authoredQuote": true,
+        "publishableQuote": "I heard folks talking about Pablo Almanzar's game at the diner—sounds like he’s been solid on the mound."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01041",
+          "name": "Ronald Williams",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "As a resident of Chinatown, what have you seen, felt, or understood about \"Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Chinatown",
+          "focus": "Evaluating Pablo Almanzar's Game 3 performance: architecture or variance.",
+          "src": "world_summary_c109.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Ronald Williams — Line cook — Chinatown",
+          "evidence": [],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · game-result — Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-51e10563cc33"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-2272cdb95a09"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Pablo Almanzar/7IP/5H/2ER/7SO",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-e3ea047420ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Ernesto Quintero/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-c24b3af6a0f2"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Jose Colon/1HR/1RBI",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-68761f57cebc"
+          },
+          {
+            "t": "FACT",
+            "text": "Feed line: Darrin Davis/4-4",
+            "src": "world_summary_c109.md ## Sports",
+            "id": "F-be77152ef4d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Ronald Williams — Line cook — Chinatown",
+            "src": "Simulation_Ledger profile for POP-01041",
+            "id": "F-b41370f1cda1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-28T18:19:28.312Z"
+}

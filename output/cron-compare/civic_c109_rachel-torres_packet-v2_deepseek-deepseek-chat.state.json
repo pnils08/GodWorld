@@ -1,0 +1,411 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00057",
+    "name": "Sgt. Rachel Torres",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Chinatown logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+    "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — and the public-safety staff on the roster. Measured, third person, incident structure and classification gaps. The numbers and the officials are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "public-safety",
+      "hood": "Chinatown",
+      "facts": [
+        "138 incidents across 22 neighborhoods; most in Chinatown 8, Glenview 8, Laurel 8, KONO 8, Temescal 8; fewest in Eastlake 4, Piedmont Ave 4, Lake Merritt 4",
+        "Chinatown: 8 incidents (+1 vs C108), response 10.5 min, clearance 23%, property index 37, violent index 26",
+        "Slowest response: Laurel: 8 incidents (+4 vs C108), response 10.8 min, clearance 18%, property index 38, violent index 24",
+        "Moved this cycle — rising: none; easing: KONO"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": "desk-signal incident rows attached as pointers (4)",
+      "engineHooks": [
+        "Multiple safety signals detected. Could be coincidence or early pattern. (general coverage)"
+      ],
+      "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first",
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-safety",
+    "hood": "Chinatown",
+    "src": "output/beats/Crime_Metrics.jsonl @C109",
+    "plan": {
+      "focus": "Patterns and clearance rates in Chinatown's incidents.",
+      "closeQuestion": "Is Chinatown being unfairly labeled as 'high crime' because of how incidents are logged, or is there a real gap in public safety resources here?"
+    },
+    "runningStories": [
+      "The West Oakland Crime Spike [West Oakland] — ENDED this week after 5 week(s)",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — under way",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — under way",
+      "Temescal Community Health Center — operational [Temescal] — under way",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — under way",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — announced [Downtown] — under way"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01041",
+        "name": "Ronald Williams",
+        "profile": "Ronald Williams",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00142",
+        "name": "Jonas Patel",
+        "profile": "Jonas Patel",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00214",
+        "name": "Jacquez Tearn",
+        "profile": "Jacquez Tearn",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01041-0ce687420c",
+        "pop": "POP-01041",
+        "name": "Ronald Williams",
+        "quote": "I hear Chinatown's got more incidents than other spots lately, but honestly, at the restaurant we just keep our heads down and do our work. The numbers don't really change how we move through the day.",
+        "factIds": [
+          "F-ebba208e4636",
+          "F-111a31fe4e1c"
+        ],
+        "src": "packet.W2[POP-01041]"
+      },
+      {
+        "id": "Q-POP-00142-2346c2a664",
+        "pop": "POP-00142",
+        "name": "Jonas Patel",
+        "quote": "Working in Chinatown, I've noticed the streets feel busier lately with more incidents, but it's hard to say if that's just my perception or if it's really worse than other neighborhoods. The clearance rates seem low, which makes people nervous.",
+        "factIds": [
+          "F-111a31fe4e1c",
+          "F-ebba208e4636"
+        ],
+        "src": "packet.W2[POP-00142]"
+      },
+      {
+        "id": "Q-POP-00214-e6de4601ac",
+        "pop": "POP-00214",
+        "name": "Jacquez Tearn",
+        "quote": "Man, I hear Chinatown's got the most trouble right now, but I keep my head down, work my shift. Folks say the cops take their time clearing things up, but what can you do? Just keep moving, stay sharp.",
+        "factIds": [
+          "F-ebba208e4636",
+          "F-111a31fe4e1c"
+        ],
+        "src": "packet.W2[POP-00214]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Possible underreporting of minor incidents in other neighborhoods skewing Chinatown's numbers.",
+        "usable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Are businesses or residents less likely to cooperate with investigations here compared to other areas?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C109",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-912baafccba1"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown logged the most incidents (8) | 22 neighborhoods on the table",
+      "src": "output/beats/Crime_Metrics.jsonl @C109",
+      "id": "F-ebba208e4636"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown leads the incident count; Laurel waits longest for a response; 1 public-safety staff on the roster.",
+      "src": "output/beats/Crime_Metrics.jsonl @C109",
+      "id": "F-5b009aa3127a"
+    },
+    {
+      "t": "FACT",
+      "text": "138 incidents across 22 neighborhoods; most in Chinatown 8, Glenview 8, Laurel 8, KONO 8, Temescal 8; fewest in Eastlake 4, Piedmont Ave 4, Lake Merritt 4",
+      "src": "output/beats/Crime_Metrics.jsonl @C109",
+      "id": "F-d67acf0ded31"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown: 8 incidents (+1 vs C108), response 10.5 min, clearance 23%, property index 37, violent index 26",
+      "src": "output/beats/Crime_Metrics.jsonl @C109",
+      "id": "F-111a31fe4e1c"
+    },
+    {
+      "t": "FACT",
+      "text": "Slowest response: Laurel: 8 incidents (+4 vs C108), response 10.8 min, clearance 18%, property index 38, violent index 24",
+      "src": "output/beats/Crime_Metrics.jsonl @C109",
+      "id": "F-05f5f1ad643a"
+    },
+    {
+      "t": "FACT",
+      "text": "Moved this cycle — rising: none; easing: KONO",
+      "src": "output/beats/Crime_Metrics.jsonl @C109",
+      "id": "F-fea2f2783fcd"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Trace one Packet-backed public-safety incident, classification gap, or OARI response question without sensationalism or invented case detail.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "measured third-person public-safety reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed safety signal, place, or resident consequence",
+      "closing": "an unresolved accountability or practical-safety question grounded in the record"
+    },
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "canonBlockers": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  },
+  "manifest": {
+    "id": "AM-c7f584a41ac5",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-912baafccba1",
+        "t": "FACT",
+        "text": "Current cycle: C109",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-ebba208e4636",
+        "t": "FACT",
+        "text": "Chinatown logged the most incidents (8) | 22 neighborhoods on the table",
+        "src": "output/beats/Crime_Metrics.jsonl @C109"
+      },
+      {
+        "id": "F-5b009aa3127a",
+        "t": "FACT",
+        "text": "Chinatown leads the incident count; Laurel waits longest for a response; 1 public-safety staff on the roster.",
+        "src": "output/beats/Crime_Metrics.jsonl @C109"
+      },
+      {
+        "id": "F-d67acf0ded31",
+        "t": "FACT",
+        "text": "138 incidents across 22 neighborhoods; most in Chinatown 8, Glenview 8, Laurel 8, KONO 8, Temescal 8; fewest in Eastlake 4, Piedmont Ave 4, Lake Merritt 4",
+        "src": "output/beats/Crime_Metrics.jsonl @C109"
+      },
+      {
+        "id": "F-111a31fe4e1c",
+        "t": "FACT",
+        "text": "Chinatown: 8 incidents (+1 vs C108), response 10.5 min, clearance 23%, property index 37, violent index 26",
+        "src": "output/beats/Crime_Metrics.jsonl @C109"
+      },
+      {
+        "id": "F-05f5f1ad643a",
+        "t": "FACT",
+        "text": "Slowest response: Laurel: 8 incidents (+4 vs C108), response 10.8 min, clearance 18%, property index 38, violent index 24",
+        "src": "output/beats/Crime_Metrics.jsonl @C109"
+      },
+      {
+        "id": "F-fea2f2783fcd",
+        "t": "FACT",
+        "text": "Moved this cycle — rising: none; easing: KONO",
+        "src": "output/beats/Crime_Metrics.jsonl @C109"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01041-0ce687420c",
+        "speakerId": "POP-01041",
+        "speakerName": "Ronald Williams",
+        "text": "I hear Chinatown's got more incidents than other spots lately, but honestly, at the restaurant we just keep our heads down and do our work. The numbers don't really change how we move through the day.",
+        "factIds": [
+          "F-ebba208e4636",
+          "F-111a31fe4e1c"
+        ],
+        "src": "packet.W2[POP-01041]"
+      },
+      {
+        "id": "Q-POP-00142-2346c2a664",
+        "speakerId": "POP-00142",
+        "speakerName": "Jonas Patel",
+        "text": "Working in Chinatown, I've noticed the streets feel busier lately with more incidents, but it's hard to say if that's just my perception or if it's really worse than other neighborhoods. The clearance rates seem low, which makes people nervous.",
+        "factIds": [
+          "F-111a31fe4e1c",
+          "F-ebba208e4636"
+        ],
+        "src": "packet.W2[POP-00142]"
+      },
+      {
+        "id": "Q-POP-00214-e6de4601ac",
+        "speakerId": "POP-00214",
+        "speakerName": "Jacquez Tearn",
+        "text": "Man, I hear Chinatown's got the most trouble right now, but I keep my head down, work my shift. Folks say the cops take their time clearing things up, but what can you do? Just keep moving, stay sharp.",
+        "factIds": [
+          "F-ebba208e4636",
+          "F-111a31fe4e1c"
+        ],
+        "src": "packet.W2[POP-00214]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      },
+      {
+        "id": "POP-01041",
+        "name": "Ronald Williams",
+        "profile": "Ronald Williams",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00142",
+        "name": "Jonas Patel",
+        "profile": "Jonas Patel",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00214",
+        "name": "Jacquez Tearn",
+        "profile": "Jacquez Tearn",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Possible underreporting of minor incidents in other neighborhoods skewing Chinatown's numbers.",
+        "publishable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Are businesses or residents less likely to cooperate with investigations here compared to other areas?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "forbiddenClaimClasses": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  }
+}

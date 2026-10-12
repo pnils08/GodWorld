@@ -1,0 +1,63 @@
+{
+  "draft": "output/cron-compare/civic_c110_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "6472acfc0a8cc65675d3775e48a709100e1a6100102ededfcf5a5b1e4ae7d845",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, exact quotes, health status events, and illness metrics verified against canon and packet provenance with zero sourcing violations.",
+  "review": {
+    "profileId": "lila-health-service-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "packageVersion": "LILA-LEP2-1",
+    "manifestId": "AM-6b05b88e155f",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "6.6",
+          "4.5"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Daphne Stafford",
+      "Jackson Sift",
+      "Jessie Hess",
+      "Jett Walker",
+      "Maurice Franklin",
+      "Millicent Kumar",
+      "Ron Arenson",
+      "Yu Zen"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0109,
+  "durationMs": 8147,
+  "parseError": false,
+  "ranAt": "2026-10-10T17:00:42.277Z"
+}

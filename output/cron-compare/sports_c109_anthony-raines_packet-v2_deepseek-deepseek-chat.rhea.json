@@ -1,0 +1,62 @@
+{
+  "draft": "output/cron-compare/sports_c109_anthony-raines_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "109",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "5c05543a361b10e6bb63acdc6723250cf1ca3cc2b7b57d856d7d7479c5cff0c6",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Game 3 stats, player roles, and Jose Colon quote match canon and packet provenance without contradictions.",
+  "review": {
+    "profileId": "anthony-sports-analytics-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-1",
+    "manifestId": "AM-8fef32e3fb00",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "-2",
+          "92",
+          "-94",
+          "80%"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Anthony Raines",
+      "Ernesto Quintero",
+      "Jose Colon",
+      "Pablo Almanzar"
+    ],
+    "unverified": [
+      "Commanding Seven"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0098,
+  "durationMs": 6399,
+  "parseError": false,
+  "ranAt": "2026-09-28T23:19:45.348Z"
+}

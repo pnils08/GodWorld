@@ -1,0 +1,51 @@
+{
+  "draft": "output/cron-compare/sports_c110_p-slayer_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "110",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "bb2025cfd92b3477d25034ba937b16beecbc9a4aaf16264a85824de0940c065e",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, citizen bios align with ledger, and 0-5 preseason record matches sports feed.",
+  "review": {
+    "profileId": "p-slayer-fan-heat-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "packageVersion": "PSLAYER-LEP2-1",
+    "manifestId": "AM-06681914dc6a",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Daniel Cloak",
+      "Jessie Hess"
+    ],
+    "unverified": [
+      "Miami Heat"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0103,
+  "durationMs": 5242,
+  "parseError": false,
+  "ranAt": "2026-10-07T23:19:21.166Z"
+}

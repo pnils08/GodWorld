@@ -1,0 +1,11 @@
+{
+  "draft": "sports_c107_deepseek-deepseek-chat.md",
+  "flags": [
+    {
+      "severity": "high",
+      "check": "intake-missing",
+      "issue": "no ## INTAKE block in draft"
+    }
+  ],
+  "summary": "verdict parse failed"
+}

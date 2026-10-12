@@ -1,0 +1,57 @@
+{
+  "draft": "output/cron-compare/culture_c108_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "108",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "656a0d13bf1d53690bb13e91ba2f404518f8a019cb802f36b5fb551d8420e13c",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "With a surge in her fame rating to 58, she's becoming a notable figure in Rockridge's media scene.",
+      "issue": "Raw engine metric ('fame rating to 58') surfaced directly in article body prose.",
+      "severity": "med"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "Verified against cycle 108 canon; quote matches proven manifest verbatim and entities exist; flagged raw engine metric in prose as medium repair cue.",
+  "review": {
+    "profileId": "kai-arts-entertainment-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "packageVersion": "KAI-LEP2-1",
+    "manifestId": "AM-ce66535fc33e",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Denise Simmons",
+      "Tara Ellison"
+    ],
+    "unverified": [
+      "Canopy Market",
+      "For Rent"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0101,
+  "durationMs": 6270,
+  "parseError": false,
+  "ranAt": "2026-09-25T23:17:10.511Z"
+}

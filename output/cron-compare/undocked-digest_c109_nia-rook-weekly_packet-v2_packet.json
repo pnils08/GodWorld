@@ -1,0 +1,359 @@
+{
+  "stage": "report",
+  "desk": "undocked-digest",
+  "cycle": "109",
+  "persona": "nia-rook-weekly",
+  "packetContract": "LEP/2",
+  "reporter": null,
+  "assignment": {
+    "story": {
+      "ref": "undocked-week:weekly-c109",
+      "label": "UNDOCKED week-in-review c109",
+      "kind": "undocked-digest",
+      "angle": "Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (Otis Redd, Jackson Sift, Priya Narang), who is climbing and who is fading. Standings: Clarissa Dane leads the board — rank #1, 6 cycle(s) led, current streak 6. Per-pilot facts: Otis Redd — 2 episode(s), partial credits 143, combat 0, mishaps 0; Jackson Sift — 2 episode(s), partial credits 14, combat 0, mishaps 0; Priya Narang — 1 episode(s), credits 5, combat 0, mishaps 0.",
+      "citizens": [
+        "Otis Redd — UNDOCKED cast pilot",
+        "Jackson Sift — UNDOCKED cast pilot",
+        "Priya Narang — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00121",
+        "POP-00190",
+        "POP-00141"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/undocked-digest_c109_nia-rook-weekly_packet-v2_angle.json",
+  "quotesRequested": 3,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00141",
+      "name": "Priya Narang",
+      "quote": null,
+      "disp": "draws people in, deep with them; close to family",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: quote requires at least one supplied fact id",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I've been preoccupied with some tough cases at work lately. It's been weighing on my mind, thinking about what could've been done differently to prevent some of the injuries I've seen. It's not just about the job, it's about the people and their families. I care deeply about my community and it's hard not to take it personally when things don't go as well as they could.\",\n  \"fact_ids\": [],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00141",
+          "name": "Priya Narang",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What's driving Priya Narang's recent performance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "The current standings and recent performances of the pilots",
+          "src": "undocked-week:weekly-c109"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Priya Narang — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-efadd106f7",
+              "src": "undocked-week:weekly-c109",
+              "text": "UNDOCKED week-in-review c109"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c109",
+            "src": "undocked-week:weekly-c109",
+            "id": "F-219eded6683a"
+          },
+          {
+            "t": "FACT",
+            "text": "Priya Narang — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00141",
+            "id": "F-2a7875b9aa28"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00121",
+      "name": "Otis Redd",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"abstain\",\n  \"quote\": null,\n  \"fact_ids\": [],\n  \"basis\": \"no_lived_basis\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": \"no_lived_basis\"\n}\n```",
+      "claims": {
+        "answer": "abstain",
+        "factIds": [],
+        "basis": "no_lived_basis",
+        "unverifiedLead": [],
+        "abstainReason": "no_lived_basis",
+        "quoteId": null,
+        "authoredQuote": false,
+        "publishableQuote": null
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00121",
+          "name": null,
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What have you seen, felt, or understood about \"The current standings and recent performances of the pilots\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "The current standings and recent performances of the pilots",
+          "src": "undocked-week:weekly-c109"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-15eaf3d1e6",
+              "src": "undocked-week:weekly-c109",
+              "text": "UNDOCKED week-in-review c109"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c109",
+            "src": "undocked-week:weekly-c109",
+            "id": "F-219eded6683a"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00121",
+            "id": "F-223923bcb9ba"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00190",
+      "name": "Jackson Sift",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: quote requires at least one supplied fact id",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I haven't been paying much attention to the standings and performances of the pilots. I've been busy with my work as a reentry counselor and trying to stay connected with my community here in West Oakland. I do know that the energy in the city has been electric with the A's doing well, and it's been great to see people coming together to support them.\",\n  \"fact_ids\": [],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00190",
+          "name": null,
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What have you seen, felt, or understood about \"The current standings and recent performances of the pilots\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "The current standings and recent performances of the pilots",
+          "src": "undocked-week:weekly-c109"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-636015f61e",
+              "src": "undocked-week:weekly-c109",
+              "text": "UNDOCKED week-in-review c109"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C109",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-912baafccba1"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c109",
+            "src": "undocked-week:weekly-c109",
+            "id": "F-219eded6683a"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00190",
+            "id": "F-faff8db90783"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-03T14:15:52.399Z"
+}

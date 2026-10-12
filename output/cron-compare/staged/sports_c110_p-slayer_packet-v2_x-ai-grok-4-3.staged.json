@@ -1,0 +1,46 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "110",
+  "persona": "p-slayer",
+  "byline": "P Slayer",
+  "bylinePopid": "POP-00008",
+  "article": "output/cron-compare/staged/sports_c110_p-slayer_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Jessie Hess",
+        "role": "mentioned",
+        "popid": "POP-00212"
+      },
+      {
+        "name": "Daniel Cloak",
+        "role": "mentioned",
+        "popid": "POP-00722"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Honestly, I'm a bit disappointed after their last preseason game. I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence. I still want to believe they can turn it around, though.",
+        "sourceRef": "citizenVoice PRESS Jessie Hess"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-06681914dc6a",
+    "draftSha256": "bb2025cfd92b3477d25034ba937b16beecbc9a4aaf16264a85824de0940c065e",
+    "verdict": "output/cron-compare/sports_c110_p-slayer_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-07T23:19:21.166Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-10-10T17:00:04.742Z"
+}

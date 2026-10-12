@@ -1,0 +1,22 @@
+{
+  "initiative": "INIT-010",
+  "initiativeId": "INIT-010",
+  "cycle": 111,
+  "primaryVoice": "Mayor gavel (mayor_gavel-006)",
+  "consolidatedFrom": [
+    "STMT-111-mayor_gavel-006 (Mayor gavel — West Oakland Tenant Defense Fund Committee Referral)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-010",
+    "ImplementationPhase": "vote-scheduled",
+    "MilestoneNotes": "C111: Referred to Housing and Community Development Committee with legal support analysis.",
+    "NextScheduledAction": "Committee hearing and vote",
+    "NextActionCycle": 112,
+    "Status": "pending-vote",
+    "VoteCycle": 112
+  },
+  "_callVote": {
+    "moveId": "MV-110-civic-office-council-d1-2026-10-06",
+    "agentDir": "civic-office-council-d1"
+  }
+}

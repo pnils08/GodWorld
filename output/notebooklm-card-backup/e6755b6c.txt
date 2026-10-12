@@ -1,0 +1,187 @@
+PLAYER INTAKE (Pitcher) — 2041 SEASON
+
+Name: Henry Rivas
+
+ 
+
+Team: Oakland Athletics
+
+ 
+
+Position: SP
+
+ 
+
+Age: 29
+
+ 
+
+Bats: L
+
+ 
+
+Throws: R
+
+ 
+
+Height: 6'0"
+
+ 
+
+Weight: 173 lbs
+
+ 
+
+Born: Puerto Rico
+
+ 
+
+Drafted: Round 1 (2029)
+
+ 
+
+MLB Service: 8.002
+
+ 
+
+Overall: 92
+
+ 
+
+Potential: A
+
+— 2041 REGULAR SEASON —
+
+Games: 22
+
+ 
+
+Games Started: 22
+
+ 
+
+Wins: 11
+
+ 
+
+Losses: 4
+
+ 
+
+Saves: 0
+
+ 
+
+Blown Saves: 0
+
+ 
+
+Holds: 0
+
+ 
+
+Innings Pitched: 136.1
+
+ 
+
+Hits Allowed: 123
+
+ 
+
+Runs Allowed: 42
+
+ 
+
+Earned Runs: 40
+
+ 
+
+Home Runs Allowed: 16
+
+ 
+
+Walks: 24
+
+ 
+
+Strikeouts: 133
+
+ 
+
+ERA: 2.64
+
+ 
+
+WHIP: 1.08
+
+ 
+
+Winning Percentage: 0.733
+
+ 
+
+Quality Starts: 15
+
+ 
+
+Complete Games: 0
+
+ 
+
+Shutouts: 0
+
+ 
+
+Hit Batters: 3
+
+ 
+
+Wild Pitches: 2
+
+ 
+
+Total Batters Faced: 548
+
+ 
+
+WAR: 3.2
+
+— RATE METRICS —
+
+K/9: 8.78
+
+ 
+
+BB/9: 1.58
+
+ 
+
+HR/9: 1.06
+
+ 
+
+FIP: 3.17
+
+— CONTRACT STATUS —
+
+2042: $28.2M
+
+ 
+
+FA: 2043
+
+
+--------------------------------------------------------------------------------
+
+
+Quirks
+
+Precision Command
+
+
+--------------------------------------------------------------------------------
+
+
+AWARDS (Career Reference)
+
+All-Star (Multiple)

@@ -203,6 +203,7 @@ function detect(ctx) {
 
   // --- Crime metric outlier (3σ from rolling 6-cycle mean) ---
   const crime = snapshot.Crime_Metrics || [];
+  // prior is newest-first (loadPreviousAudits c−1..c−6; a fixture prior is unshifted to the front)
   const lastCrime = (prior[0] && prior[0].snapshots && prior[0].snapshots.Crime_Metrics) || [];
   const weekMoves = crimeWeekMoves(crime, lastCrime);
   for (let i = 0; i < crime.length; i++) {

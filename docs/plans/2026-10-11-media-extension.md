@@ -33,7 +33,7 @@ pointers:
 
 > "it's not that I don't want to have Carmen cover the politics cause that's what keeps them honest but them as the citizens is likely more important than the civic initiatives, health desk should be covering the citizens and their health. Mentioning the numbers is fine if they are being used to state a change but [dropping] them without any context doesn't do much."
 
-> "Let's start make it part of a media extension plan … making sure each are writing for a purpose, what lane they cover and why, and injecting citizens lives into slices that make sense and deciding who is the journalist that should just report on random citizens … We can walk through tech reporter and understand what they do and why."
+> "Let's start make it part of a media extension plan … making sure each are writing for a purpose, what lane they cover and why, and injecting citizens lives into slices that make sense and deciding who is the journalist that should just report on random citizens … We can walk through tech reporter and understand what they do and why." — "tech reporter" is dictation for **each reporter** (misread as a tech seat 2026-10-11, corrected the same session).
 
 > "I'd be careful making direct changes without proper reviews and blast radius code checks with wiring cards."
 
@@ -84,7 +84,6 @@ The lane is what the seat covers. "Lives" is whose week leads the piece. Fed tod
 
 **Not on the grid (live roster, Bay_Tribune_Oakland):** Lena Carrow (Field Reporter), Dana Reeve (Lead Journalist), Farrah Del Rio (Civic & Cultural Opinion), Reed Thompson (TWS Wire Reporter), Ariana Reyes (Gridiron Analytics), Mint Condition (Speculative Internet).
 
-**No tech reporter exists.** The roster has no Science/Tech seat, and there is no agent file for one. Benji Dillon's good (Calm) maps to the Science / Tech Pulse section (`.claude/rules/newsroom.md` Five Goods), and nobody is staffed to write it. This is the walk-through the builder asked for.
 
 ## Tasks
 
@@ -92,7 +91,7 @@ Every code task gets an `engine-wiring` card for each function, field or tab it 
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Walk the seat table with the builder, one seat at a time, starting with the tech reporter question. Each row gets a builder-confirmed lane, a reason, and the lives it leads with. Where a journalist's identity is not obvious, it comes from a deep canon search of everything they have published (NotebookLM canon + `search_articles`), not from the agent file or the roster title. | Mags + builder | not started |
+| 1 | Walk the seat table with the builder, one seat at a time: what they do and why. Each row gets a builder-confirmed lane, a reason, and the lives it leads with. Where a journalist's identity is not obvious, it comes from a deep canon search of everything they have published (NotebookLM canon + `search_articles`), not from the agent file or the roster title. | Mags + builder | not started |
 | 2 | Pick the citizens' reporter: one seat whose job is citizens whose week was the news, in any lane (the casino loss, the divorce, the opening, the ambulance). Candidates: Lena Carrow (Field Reporter, unseated), Dana Reeve (Lead Journalist, unseated). Recommendation: Lena Carrow. | builder | not started |
 | 3 | Wiring cards and blast radius for `dumpBeatTabs.js` BEAT_TABS, `beatSliceKit.js` `wire().build/load`, `buildHealthSlice.js` `ineligible`, and `buildWorldSummary.js` `emitDeskSignal` and `WHO_LIVED_IT_TAGS`. Consumers of each: the 13 slice builders, `cron-desk-run.js`, `newsroom-fanout.js` laneSeeds, the six desk-signal readers, and the tests. | es | not started |
 | 4 | Dump what citizens lived: add `LifeHistory_Log` to the beat dump, windowed to the last 6 cycles so an arc rides whole (ambulance, then recovering, then recovered). | es | not started — a draft was written and reverted 2026-10-11 pending Task 3 |
@@ -140,8 +139,8 @@ Every code task gets an `engine-wiring` card for each function, field or tab it 
 
 - Should a Tier-2 A's manager be able to get hurt by the ambulance chaos event in the middle of a championship run? This is a sim judgement for the builder, outside this plan's code.
 - Why did the A's championship run go uncovered as a citizens' story? This blocks Task 1 for the sports seats.
-- Who is the tech reporter: a new mint through Intake, an unseated roster member, or no seat? This blocks Task 1.
 
 ## Changelog
 
+- 2026-10-11 (engine-sheet) — Corrected: "tech reporter" was dictation for "each reporter"; the tech-seat section and open question removed.
 - 2026-10-11 (engine-sheet) — Created from builder direction S553. A draft kit and dump change was written and reverted, pending wiring cards and review.

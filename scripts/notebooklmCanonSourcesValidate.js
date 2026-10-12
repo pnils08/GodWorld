@@ -41,7 +41,16 @@ function requireObject(value, label) {
   }
 }
 
-function validatePolicy(inventory, policy) {
+// Strict (default): every notebook source must be classified and decided -- the
+// audit the CLI runs. Scoped ({ scoped: true }): what the canon search runs. The
+// search only ever reads the published / canon-reference IDs it selects, so a
+// source added to the notebook after the last review (unclassified), a renamed
+// title, or a deleted excluded/lore source cannot stop a published-lane query;
+// those surface in the result instead of throwing. Everything the search will
+// actually select is still checked hard: it must exist in the live inventory
+// and carry a decision.
+function validatePolicy(inventory, policy, options = {}) {
+  const scoped = Boolean(options.scoped);
   requireObject(inventory, 'inventory');
   requireObject(policy, 'policy');
   if (policy.policyMode !== 'fail_closed') {
@@ -76,7 +85,11 @@ function validatePolicy(inventory, policy) {
       if (!id) throw new Error(bucket + ' contains an empty source ID');
       if (seenInBucket.has(id)) throw new Error(bucket + ' contains duplicate ID ' + id);
       seenInBucket.add(id);
-      if (!inventoryById.has(id)) throw new Error(bucket + ' contains unknown ID ' + id);
+      if (!inventoryById.has(id)) {
+        const searchable = bucket === 'allowedPublishedSourceIds' || bucket === 'allowedCanonReferenceSourceIds';
+        if (scoped && !searchable) continue;
+        throw new Error(bucket + ' contains unknown ID ' + id);
+      }
       if (assigned.has(id)) {
         throw new Error('source ID ' + id + ' appears in both ' + assigned.get(id) + ' and ' + bucket);
       }
@@ -84,22 +97,24 @@ function validatePolicy(inventory, policy) {
     }
   }
 
-  if (assigned.size !== inventoryById.size) {
-    const missing = [...inventoryById.keys()].filter((id) => !assigned.has(id));
-    throw new Error('policy leaves inventory IDs unclassified: ' + missing.join(', '));
+  const unclassifiedIds = [...inventoryById.keys()].filter((id) => !assigned.has(id));
+  if (unclassifiedIds.length && !scoped) {
+    throw new Error('policy leaves inventory IDs unclassified: ' + unclassifiedIds.join(', '));
   }
 
   const decisionIds = Object.keys(policy.decisions);
   const unknownDecisions = decisionIds.filter((id) => !inventoryById.has(id));
-  if (unknownDecisions.length) {
+  if (unknownDecisions.length && !scoped) {
     throw new Error('policy.decisions contains unknown IDs: ' + unknownDecisions.join(', '));
   }
-  const missingDecisions = [...inventoryById.keys()].filter((id) => !policy.decisions[id]);
+  const missingDecisions = [...assigned.keys()].filter((id) => !policy.decisions[id]);
   if (missingDecisions.length) {
     throw new Error('policy.decisions is missing IDs: ' + missingDecisions.join(', '));
   }
 
+  const renamedIds = [];
   for (const [id, source] of inventoryById.entries()) {
+    if (!assigned.has(id)) continue;
     const decision = policy.decisions[id];
     requireObject(decision, 'decision ' + id);
     const bucket = assigned.get(id);
@@ -108,7 +123,8 @@ function validatePolicy(inventory, policy) {
       throw new Error('decision ' + id + ' classification does not match ' + bucket);
     }
     if (decision.title !== source.title) {
-      throw new Error('decision ' + id + ' title does not match inventory');
+      if (!scoped) throw new Error('decision ' + id + ' title does not match inventory');
+      renamedIds.push(id);
     }
     if (!String(decision.reason || '').trim()) {
       throw new Error('decision ' + id + ' has no reason');
@@ -136,7 +152,8 @@ function validatePolicy(inventory, policy) {
     counts,
     crossBucketDuplicates: 0,
     unknownIds: 0,
-    unclassifiedIds: 0,
+    unclassifiedIds: unclassifiedIds.length,
+    ...(scoped ? { scoped: true, renamedIds } : {}),
   };
 }
 

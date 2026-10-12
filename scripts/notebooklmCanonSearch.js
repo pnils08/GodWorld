@@ -382,7 +382,16 @@ function main(argv) {
     const config = readJson(CONFIG_PATH, 'NotebookLM configuration');
     const policy = readJson(POLICY_PATH, 'NotebookLM canon-source policy');
     const inventory = readJson(INVENTORY_PATH, 'NotebookLM source inventory');
-    validatePolicy(inventory, policy);
+    // Scoped: sources added after the last review sit outside the published lane
+    // and must not stop it. `node scripts/notebooklmCanonSourcesValidate.js` is
+    // the strict audit that lists them.
+    const scope = validatePolicy(inventory, policy, { scoped: true });
+    if (scope.unclassifiedIds > 0 || scope.renamedIds.length > 0) {
+      console.error(
+        'canon search note: ' + scope.unclassifiedIds + ' notebook source(s) unclassified and ' +
+        scope.renamedIds.length + ' renamed; neither is in this search lane.'
+      );
+    }
     if (!config.notebookId || config.notebookId !== policy.notebookId) {
       throw new Error('configured notebook ID does not match canon-source policy');
     }

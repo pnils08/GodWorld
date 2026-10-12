@@ -89,7 +89,40 @@ function testDecisionContractFails() {
   }
 }
 
+function testScopedToleratesNewRenamedAndDeleted() {
+  const { inventory, policy } = fixture();
+  inventory.sources.push({ id: 'NONCANON_TEST_NEW', title: 'NONCANON_TEST Added Later' });
+  inventory.sources[0].title = 'NONCANON_TEST Edition Renamed';
+  policy.excludedSourceIds.push('NONCANON_TEST_GONE');
+  policy.decisions.NONCANON_TEST_GONE = {};
+  assert.throws(() => validatePolicy(inventory, policy), /unknown ID|unclassified/);
+  const result = validatePolicy(inventory, policy, { scoped: true });
+  assert.strictEqual(result.valid, true);
+  assert.strictEqual(result.unclassifiedIds, 1);
+  assert.deepStrictEqual(result.renamedIds, ['NONCANON_TEST_PUBLISHED']);
+}
+
+function testScopedStillGuardsWhatSearchReads() {
+  {
+    const { inventory, policy } = fixture();
+    policy.allowedPublishedSourceIds.push('NONCANON_TEST_DELETED');
+    assert.throws(() => validatePolicy(inventory, policy, { scoped: true }), /unknown ID/);
+  }
+  {
+    const { inventory, policy } = fixture();
+    delete policy.decisions.NONCANON_TEST_PUBLISHED;
+    assert.throws(() => validatePolicy(inventory, policy, { scoped: true }), /missing IDs/);
+  }
+  {
+    const { inventory, policy } = fixture();
+    policy.excludedSourceIds.push('NONCANON_TEST_PUBLISHED');
+    assert.throws(() => validatePolicy(inventory, policy, { scoped: true }), /appears in both/);
+  }
+}
+
 testValidPolicy();
+testScopedToleratesNewRenamedAndDeleted();
+testScopedStillGuardsWhatSearchReads();
 testCrossBucketDuplicateFails();
 testUnknownAndMissingFail();
 testDecisionContractFails();

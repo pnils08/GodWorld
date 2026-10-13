@@ -256,7 +256,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   return { system, user, disp, prov };
 }
 
-async function generateVoice(system, user) {
+async function voiceOnce(system, user) {
   const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://godworld.local' },
@@ -264,7 +264,20 @@ async function generateVoice(system, user) {
   });
   const j = await r.json();
   if (j.error) throw new Error('voice: ' + (j.error.message || JSON.stringify(j.error)));
-  return String(j.choices?.[0]?.message?.content || '').trim();
+  const text = String(j.choices?.[0]?.message?.content || '').trim();
+  if (!text) throw new Error('voice: empty reply');
+  return text;
+}
+
+// One retry after a short wait: a provider error, timeout or empty reply is usually
+// transient (the 2026-10-12 midday wake lost its citizen to one). A key limit is not.
+async function generateVoice(system, user) {
+  try { return await voiceOnce(system, user); } catch (e) {
+    if (/key limit/i.test(e.message)) throw e;
+    logLine('voice retry after: ' + e.message);
+    await new Promise((res) => setTimeout(res, 5000));
+    return voiceOnce(system, user);
+  }
 }
 
 (async () => {

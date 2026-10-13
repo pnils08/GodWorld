@@ -98,6 +98,20 @@ pointers:
 - **Automatic:** the Rhea gate, the daily rota, edition ratings and the crontab (generic, no per-seat entry).
 - **Read:** a new seat reads from a slice built on the dumped pages (`output/citizen_pages/index.jsonl`), so no new sheet tab is needed unless the builder wants one.
 
+**Citizen coverage — what can be compiled (rb, 2026-10-13, builder asked: "what can be compiled in reflections and occurrences from the engine"; counts read from LifeHistory_Log, the page dump, C108–C111).**
+
+*Three streams, each a different kind of coverage:*
+1. **Occurrences — person events as news.** The milestone tags (Promotion, Wedding, Birth, Death, Retirement, Graduation, Health, Recovering, Stabilized, Relationship, Household) run 26 / 31 / 77 rows in C108 / C109 / C110 (C110's 77 includes Tier-4 emergences; C111's world summary lists 21). One person each. Today they reach a desk as one pointer item (`WHO_LIVED_IT_TAGS` filter), if at all.
+2. **Ambient life — the block's day.** LifeHistory_Log carries 2,579 / 2,771 rows in C110 / C111 across about 1,000 citizens a cycle, nearly all texture: Neighborhood 704, Daily 435, Civic Perception 324, Personal 254, Sports 146, Lifestyle 76, Undocked-Audience 63, Strain 53, Work 33, Faith 6. Examples, as the engine wrote them: "heard the rent talk on the block turn sharp"; "the block put UNDOCKED on and went quiet when the belt haul came up"; "watched a neighbor pack up for somewhere cheaper". Individually small; by hood and tag they say what a neighbourhood is noticing. No seat reads this log (the slices exclude LifeHistory).
+3. **Voices — reflections, tensions, exchanges.** 75 / 112 / 90 citizens with a page per cycle, 120–170 docs, plus the daily exchange. In the citizen's own words.
+
+*The finding that shapes the seats:* the people in stream 1 and stream 3 are mostly different people. Milestone-event people with a reflection page the same or next cycle: 6 of 26 (C108), 2 of 30 (C109), 5 of 77 (C110). The wake picks citizens living a big live delta and rotates, so a promotion or a birth almost never arrives with the person's own words. But the page writers do each have life-log rows the same cycle (C110: 73 of 75 page-writers have log events), so a voices seat can pair a person's page with their own day (stream 2) even when no milestone happened.
+
+*Draft answer to the builder's two questions (his to cut):*
+- **Trending, system angle vs citizen angle.** Celeste keeps the system angle: what the city is talking about, which hood, which direction (pulse + Cultural_Ledger + hood deltas), citizens quoted as voices on a theme. The citizen angle is a different job, so it goes to the citizen seat(s), not to Celeste; otherwise she writes both and the person gets lost in the theme again.
+- **One seat or two.** The data splits two ways, not three: **Lives** (stream 1: the event is the story, with the person's page or day alongside when one exists; crosses over to health, business, civic and sports seats on purpose) and **Voices** (streams 3 + 2: what a citizen said this cycle and what their day was; the interview/profile mode lives here, not as a third seat). One seat can start on either; the other follows. Which one first is the builder's.
+- **Open:** stream 2 by hood (what a neighbourhood noticed) is either Celeste's system angle (hood mood as trend) or the Voices seat's; unplaced until the builder rules.
+
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
 **Rows:** pipeline.73 · **Owner:** research-build with engine-sheet

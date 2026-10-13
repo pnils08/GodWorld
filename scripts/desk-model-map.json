@@ -2,140 +2,140 @@
   "_comment": "Per-desk + persona model routing (research.25; grok firebrand 2026-08-07). Desk default: DeepSeek (S332 — pennies, canon-ok). Firebrand is a separate seat: needs more heat/voice than deepseek-chat's tidy default without leaving the penny band. Live OpenRouter prices (2026-08-07): deepseek/deepseek-chat ~$0.26/$1.03 per 1M; llama-3.3-70b ~$0.10/$0.32; hermes-4-70b ~$0.13/$0.40; x-ai/grok-4.x ~$1–2/$2–6 (too rich for M–F cron). Override per-run with --provider/--model.",
   "sports": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat"
+    "model": "deepseek/deepseek-v4-flash-0731"
   },
   "civic": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat"
+    "model": "deepseek/deepseek-v4-flash-0731"
   },
   "business": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat"
+    "model": "deepseek/deepseek-v4-flash-0731"
   },
   "culture": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat"
+    "model": "deepseek/deepseek-v4-flash-0731"
   },
   "letters": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat"
+    "model": "deepseek/deepseek-v4-flash-0731"
   },
   "podcast": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat"
+    "model": "deepseek/deepseek-v4-flash-0731"
   },
   "freelance-firebrand": {
     "provider": "openrouter",
-    "model": "meta-llama/llama-3.3-70b-instruct",
+    "model": "meta-llama/llama-4-maverick",
     "note": "Legacy/manual fallback only. The scheduled JAX-LEP2-1 package in newsroom-wake-packages.json owns live routing: Llama 3.3 70B for angle/report and Sonnet 5 for write."
   },
   "p-slayer": {
     "provider": "openrouter",
-    "model": "meta-llama/llama-3.3-70b-instruct",
+    "model": "meta-llama/llama-4-maverick",
     "note": "Legacy/manual fallback only. The scheduled PSLAYER-LEP2-1 package in newsroom-wake-packages.json owns live all-Llama routing. Fan heat favors confrontation over press-box calm; solo persona, not multi-voice sports-desk."
   },
   "business-desk": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "Legacy/manual fallback only. The scheduled JORDAN-LEP2-1 package in newsroom-wake-packages.json owns live all-DeepSeek routing for Jordan Velez."
   },
   "anthony-raines": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "Anthony analytic seat (grok 2026-08-07). DeepSeek is fine for number-first press-box — heat models sand less relevant than clear structure. Solo persona, not multi-voice sports-desk."
   },
   "hal-richmond": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "Hal legacy seat (grok 2026-08-07). Literary long-view on DeepSeek penny band; upgrade only if voice flattens to wire. Solo persona, not multi-voice sports-desk."
   },
   "carmen-delaine": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "Carmen civic ledger solo (grok 2026-08-07). DeepSeek penny band for precise accretion. Multi-voice civic-desk is legacy for headless."
   },
   "luis-navarro": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "Luis investigations solo (grok 2026-08-07). Persistent fair pressure — not Jax Llama heat. DeepSeek default."
   },
   "trevor-shimizu": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "Trevor systems solo (grok 2026-08-07). Infrastructure/transit. DeepSeek default."
   },
   "rachel-torres": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "Torres safety solo (grok 2026-08-07). Procedural public safety. DeepSeek default."
   },
   "lila-mezran": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "Mezran health solo (grok 2026-08-07). Clinical human-cost. DeepSeek default."
   },
   "_default": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat"
+    "model": "deepseek/deepseek-v4-flash-0731"
   },
   "maria-keen": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "maria-keen solo (grok 2026-08-07). DeepSeek default."
   },
   "elliot-graye": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "elliot-graye solo (grok 2026-08-07). DeepSeek default."
   },
   "kai-marston": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "kai-marston solo (grok 2026-08-07). DeepSeek default."
   },
   "mason-ortega": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "mason-ortega solo (grok 2026-08-07). DeepSeek default."
   },
   "angela-reyes": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "angela-reyes solo (grok 2026-08-07). DeepSeek default."
   },
   "noah-tan": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "noah-tan solo (grok 2026-08-07). DeepSeek default."
   },
   "tanya-cruz": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "tanya-cruz solo (grok 2026-08-07). DeepSeek default."
   },
   "simon-leary": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "simon-leary solo (grok 2026-08-07). DeepSeek default."
   },
   "elliot-marbury": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "Marbury deep analysis (grok 2026-08-07). DeepSeek for precise numeric memos; not Llama heat."
   },
   "ariana-reyes": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "Ariana sports analytics deep (grok). DeepSeek numeric memos."
   },
   "sharon-okafor": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "Sharon lifestyle solo (grok). DeepSeek default."
   },
   "dj-hartley": {
     "provider": "openrouter",
-    "model": "deepseek/deepseek-chat",
+    "model": "deepseek/deepseek-v4-flash-0731",
     "note": "DJ Hartley visual (grok). DeepSeek; photo prompts not heat."
   }
 }

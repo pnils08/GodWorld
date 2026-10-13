@@ -57,7 +57,7 @@ const RECORD = ARGV.includes('--record');
 // read-only so a bounded interview cannot write PRESS state.
 const EVIDENCE_BOUND = ARGV.includes('--evidence-bound');
 const arg = (k, d) => { const m = ARGV.find((a) => a.startsWith(`--${k}=`)); return m ? m.split('=')[1] : d; };
-const DEFAULT_MODEL = 'deepseek/deepseek-chat';
+const DEFAULT_MODEL = 'deepseek/deepseek-v4-flash-0731';
 const MODEL = arg('model', DEFAULT_MODEL);
 
 // Tension register — same file, cap, and expiry as citizen-wake.js (B2 index; the page is
@@ -92,6 +92,7 @@ async function generate(system, user, maxTokens, temperature, model) {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://godworld.local' },
     body: JSON.stringify({ model: selectedModel, max_tokens: maxTokens,
+      ...(/^deepseek\/deepseek-v4/.test(selectedModel) ? { reasoning: { enabled: false } } : {}), // builder 2026-10-12
       temperature: temperature == null ? 0.85 : temperature,
       messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
   });

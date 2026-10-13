@@ -2336,7 +2336,7 @@ async function runCanonResearch(cycle, desk, story, reporter, stem) {
     'Return ONLY JSON: {"facts":[{"fact":"...","ref":"..."}]}';
   let trace = [];
   for (let attempt = 0; attempt < 2; attempt++) {
-    const r = await openRouterToolLoop({ model: 'deepseek/deepseek-chat', system, user, maxToolCalls: 3, maxTokens: 900 });
+    const r = await openRouterToolLoop({ model: 'deepseek/deepseek-v4-flash-0731', system, user, maxToolCalls: 3, maxTokens: 900 });
     trace = trace.concat(r.trace);
     let parsed = null;
     try {

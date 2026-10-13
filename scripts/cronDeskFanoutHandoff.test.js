@@ -39,15 +39,15 @@ assert.deepStrictEqual(
     '--state-file', 'output/cron-compare/civic.state.md',
     '--artifact-tag', 'dr-lila-mezran',
     '--provider', 'openrouter',
-    '--model', 'deepseek/deepseek-chat',
+    '--model', 'deepseek/deepseek-v4-flash-0731',
   ]
 );
 
 const expectedRosterDraft =
-  stageStem(102, 'civic', rosterTag) + 'deepseek-deepseek-chat.md';
+  stageStem(102, 'civic', rosterTag) + 'deepseek-deepseek-v4-flash-0731.md';
 const emittedRosterDraft =
   'civic_c102_' +
-  buildOutputSlug(null, rosterTag, 'deepseek-deepseek-chat') +
+  buildOutputSlug(null, rosterTag, 'deepseek-deepseek-v4-flash-0731') +
   '.md';
 assert.strictEqual(emittedRosterDraft, expectedRosterDraft);
 
@@ -73,7 +73,7 @@ assert.deepStrictEqual(
     '--state-file', 'output/cron-compare/civic.state.md',
     '--persona', 'freelance-firebrand',
     '--provider', 'openrouter',
-    '--model', 'meta-llama/llama-3.3-70b-instruct',
+    '--model', 'meta-llama/llama-4-maverick',
   ]
 );
 
@@ -94,10 +94,10 @@ assert.deepStrictEqual(
     '--persona', 'freelance-firebrand',
     '--artifact-tag', 'packet-v2',
     '--provider', 'openrouter',
-    '--model', 'anthropic/claude-sonnet-5',
+    '--model', 'anthropic/claude-sonnet-5.5',
   ]
 );
-const sonnetSlug = 'anthropic-claude-sonnet-5';
+const sonnetSlug = 'anthropic-claude-sonnet-5-5';
 const expectedPackagedDraft =
   stageStem(102, 'civic', personaAssignment.persona) +
   'packet-v2_' + sonnetSlug + '.md';
@@ -110,8 +110,8 @@ const emittedPackagedDraft =
   ) +
   '.md';
 assert.strictEqual(emittedPackagedDraft, expectedPackagedDraft);
-// Firebrand routes to llama-3.3-70b (heat seat); slug must match desk-model-map.
-const firebrandSlug = 'meta-llama-llama-3-3-70b-instruct';
+// Firebrand routes to llama-4-maverick (heat seat); slug must match desk-model-map.
+const firebrandSlug = 'meta-llama-llama-4-maverick';
 const expectedPersonaDraft =
   stageStem(102, 'civic', personaAssignment.persona) +
   firebrandSlug + '.md';
@@ -166,9 +166,9 @@ const liveContext = activateWakeContext(personaAssignment, personaAssignment.per
 assert.equal(liveContext.packetContract, 'v2');
 assert.equal(liveContext.wakePackage.version, 'JAX-LEP2-1');
 assert.equal(stageRoute('civic', personaAssignment.persona, 'angle').model,
-  'meta-llama/llama-3.3-70b-instruct');
+  'meta-llama/llama-4-maverick');
 assert.equal(stageRoute('civic', personaAssignment.persona, 'write').model,
-  'anthropic/claude-sonnet-5');
+  'anthropic/claude-sonnet-5.5');
 
 const jordanAssignment = {
   name: 'Jordan Velez',
@@ -185,9 +185,9 @@ for (const file of ['IDENTITY.md', 'LENS.md', 'RULES.md']) {
     jordanAssignment.persona, file)), 'Jordan control-plane identity missing ' + file);
 }
 assert.equal(stageRoute('business', jordanAssignment.persona, 'angle').model,
-  'deepseek/deepseek-chat');
+  'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('business', jordanAssignment.persona, 'report').model,
-  'deepseek/deepseek-chat');
+  'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('business', jordanAssignment.persona, 'write').model,
   'anthropic/claude-opus-5.5');
 
@@ -202,9 +202,9 @@ const kaiContext = activateWakeContext(kaiAssignment, kaiAssignment.persona);
 assert.equal(kaiContext.packetContract, 'v2');
 assert.equal(kaiContext.wakePackage.version, 'KAI-LEP2-1');
 assert.equal(stageRoute('culture', kaiAssignment.persona, 'angle').model,
-  'meta-llama/llama-3.3-70b-instruct');
+  'meta-llama/llama-4-maverick');
 assert.equal(stageRoute('culture', kaiAssignment.persona, 'report').model,
-  'meta-llama/llama-3.3-70b-instruct');
+  'meta-llama/llama-4-maverick');
 assert.equal(stageRoute('culture', kaiAssignment.persona, 'write').model,
   'anthropic/claude-haiku-5.5');
 
@@ -216,9 +216,9 @@ const lilaContext = activateWakeContext(lilaAssignment, lilaAssignment.persona);
 assert.equal(lilaContext.packetContract, 'v2');
 assert.equal(lilaContext.wakePackage.version, 'LILA-LEP2-1');
 assert.equal(stageRoute('civic', lilaAssignment.persona, 'angle').model,
-  'deepseek/deepseek-chat');
+  'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('civic', lilaAssignment.persona, 'report').model,
-  'deepseek/deepseek-chat');
+  'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('civic', lilaAssignment.persona, 'write').model,
   'anthropic/claude-haiku-5.5');
 
@@ -239,9 +239,9 @@ for (const file of [
     'Angela active newsroom source carries a real-world school reference: ' + file);
 }
 assert.equal(stageRoute('civic', angelaAssignment.persona, 'angle').model,
-  'deepseek/deepseek-chat');
+  'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('civic', angelaAssignment.persona, 'report').model,
-  'deepseek/deepseek-chat');
+  'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('civic', angelaAssignment.persona, 'write').model,
   'anthropic/claude-haiku-5.5');
 
@@ -253,7 +253,7 @@ const noahContext = activateWakeContext(noahAssignment, noahAssignment.persona);
 assert.equal(noahContext.packetContract, 'v2');
 assert.equal(noahContext.wakePackage.version, 'NOAH-LEP2-1');
 assert.equal(stageRoute('civic', noahAssignment.persona, 'angle').model,
-  'deepseek/deepseek-chat');
+  'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('civic', noahAssignment.persona, 'write').model,
   'openai/gpt-5.6-luna');
 

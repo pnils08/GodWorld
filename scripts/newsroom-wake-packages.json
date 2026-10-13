@@ -16,15 +16,15 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-sonnet-5"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {
@@ -83,11 +83,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
@@ -142,15 +142,15 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-sonnet-5"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {
@@ -200,11 +200,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
@@ -259,11 +259,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "write": {
         "provider": "openrouter",
@@ -322,11 +322,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
@@ -380,15 +380,15 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-sonnet-5"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {
@@ -438,15 +438,15 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-sonnet-5"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {
@@ -497,11 +497,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
@@ -551,11 +551,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
@@ -604,15 +604,15 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-sonnet-5"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {
@@ -657,11 +657,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "write": {
         "provider": "openrouter",
@@ -710,11 +710,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
@@ -763,11 +763,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "write": {
         "provider": "openrouter",
@@ -816,11 +816,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
@@ -877,11 +877,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "write": {
         "provider": "openrouter",
@@ -938,11 +938,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
@@ -994,11 +994,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
@@ -1051,11 +1051,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
@@ -1108,11 +1108,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       },
       "write": {
         "provider": "openrouter",
@@ -1165,11 +1165,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "write": {
         "provider": "openrouter",
@@ -1234,11 +1234,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "write": {
         "provider": "openrouter",
@@ -1304,11 +1304,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "write": {
         "provider": "openrouter",
@@ -1366,11 +1366,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "write": {
         "provider": "openrouter",
@@ -1428,11 +1428,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "meta-llama/llama-4-maverick"
       },
       "write": {
         "provider": "openrouter",

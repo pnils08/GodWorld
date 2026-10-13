@@ -192,7 +192,7 @@ const DESK_ROUTE = (!PROVIDER_FLAG || !MODEL_FLAG) ? loadDeskRoute(DESK, PERSONA
 // and in that case the safe landing is the rail everything else is on, not a
 // silent drop onto the Anthropic key. The --provider flag still overrides.
 const PROVIDER = PROVIDER_FLAG || (DESK_ROUTE && DESK_ROUTE.provider) || 'openrouter';   // 'anthropic' | 'openrouter'
-const MODEL = MODEL_FLAG || (DESK_ROUTE && DESK_ROUTE.model) || (PROVIDER === 'openrouter' ? 'deepseek/deepseek-chat' : 'claude-sonnet-5');
+const MODEL = MODEL_FLAG || (DESK_ROUTE && DESK_ROUTE.model) || (PROVIDER === 'openrouter' ? 'deepseek/deepseek-v4-flash-0731' : 'claude-sonnet-5-5');
 const MODEL_SLUG = MODEL.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
 const MAX_TURNS = parseInt(arg('--max-turns', '15'), 10);
 const MAX_TOKENS = parseInt(arg('--max-tokens', '16000'), 10);   // a full multi-article section > 8k (S325: 8k truncated Sonnet mid-Article-2)
@@ -233,6 +233,14 @@ const RATES = {
   'meta-llama/llama-3.3-70b-instruct': [0.10, 0.32],
   'nousresearch/hermes-4-70b': [0.13, 0.40],
   'deepseek/deepseek-v4-flash': [0.09, 0.18],
+  // OpenRouter list 2026-10-12 — the seats' live routes
+  'anthropic/claude-sonnet-5.5': [2, 10],
+  'anthropic/claude-opus-5.5': [4, 20],
+  'anthropic/claude-haiku-5.5': [0.10, 0.50],
+  'openai/gpt-5.6-luna': [0.20, 1.20],
+  'x-ai/grok-4.3': [1.25, 2.50],
+  'deepseek/deepseek-v4-flash-0731': [0.016, 0.64],
+  'meta-llama/llama-4-maverick': [0.188, 0.652],
   _default: [0.5, 1.5]
 };
 function costUsd(model, tin, tout) {
@@ -532,6 +540,8 @@ function callModel(client, system, messages) {
 // OpenRouter (OpenAI-compatible) raw POST — shared by the compose call and the
 // Task 2.5.5 tool loop. Returns the parsed response body.
 function callOpenRouterRaw(payloadObj) {
+  // builder 2026-10-12: newer DeepSeek runs with its hidden reasoning off
+  if (/^deepseek\/deepseek-v4/.test(payloadObj.model) && !payloadObj.reasoning) payloadObj = Object.assign({ reasoning: { enabled: false } }, payloadObj);
   return new Promise((resolve, reject) => {
     const payload = JSON.stringify(payloadObj);
     const req = https.request({

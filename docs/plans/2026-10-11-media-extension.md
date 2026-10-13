@@ -1,7 +1,7 @@
 ---
 title: Media Extension Plan — every desk writes for a purpose, citizens' lives in the slices
 created: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-12
 type: plan
 tags: [media, newsroom, draft]
 sources:
@@ -63,43 +63,61 @@ pointers:
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Map the reporters (builder 2026-10-12: a map, not a conversion): for each of the 23, what they cover and why, taken from what they have actually written (deep canon search) and the voice file; fill the table below as evidence, then read it together with the builder for crossover, gaps and the week rotations. The table has 24 seat rows; the builder counts 23 journalists, so reconcile the count first (Bay_Tribune_Oakland roster vs the weekly grid vs the Fri/daily seats). | Mags + builder | not started |
+| 1 | **Map filled 2026-10-12 — builder reads it next.** Map the reporters (builder 2026-10-12: a map, not a conversion): for each of the 23, what they cover and why, taken from what they have actually written (deep canon search) and the voice file; fill the table below as evidence, then read it together with the builder for crossover, gaps and the week rotations. The table has 24 seat rows; the builder counts 23 journalists, so reconcile the count first (Bay_Tribune_Oakland roster vs the weekly grid vs the Fri/daily seats). | Mags + builder | map filled; read with builder pending |
 | 2 | With the builder: which slices citizens' lives make sense in. | Mags + builder | not started |
 | 3 | With the builder: who is the journalist that just reports on random citizens. | builder | not started |
 | 4 | Any code that follows from 1–3 gets wiring cards, blast-radius checks and a review before it changes. | es | not started |
 
-## Reporter table (to be filled by Task 1)
+## Reporter map (Task 1 — filled 2026-10-12, descriptive only; the builder reads it, nothing here changes a lane)
 
-Seat and day are from the weekly grid (`scripts/newsroom-fanout.js:47`). The roster title is from the Bay_Tribune_Oakland tab. "Fed today" is what the code hands the seat now. Purpose, lane and why are blank until the walk.
+**Count reconciled.** The weekly grid (`scripts/newsroom-fanout.js:47`) holds 23 seats (5+4+5+4+5) — the plan's earlier "22" predates Marbury's seating 2026-09-30. Nia Rook runs daily on top = 24 seat rows. Active wake packages = 25 (the extra is `nia-rook-weekly`, the UNDOCKED leaderboard digest, not required daily). The builder's 23 = the grid; Nia is the 24th. On the roster tab but not the grid: Lena Carrow, Dana Reeve, Farrah Del Rio, Reed Thompson, Ariana Reyes, Mint Condition (carried from the 2026-10-11 roster read, not re-read).
 
-| Seat | Day | Roster title | Fed today | Purpose / lane / why |
+**Sources.** Desk, slice, and "told to cover" come from code: wake packages (`scripts/newsroomWakePackages`, field `reviewProfile.purpose`), slice wiring (`scripts/cron-desk-run.js` angle stage ~1462–1660), slice builders (`scripts/build*Slice.js`). "Wrote" comes from the published editions (`editions/`, bylines C78–C110, census by byline) and the staged cron-era articles C107–C111 (`output/cron-compare/staged/`). Four readers each read ≥5 published pieces per seat spread across the range plus every staged piece, not every article. Spot-checked against the files by me: Yu Zen in Lila's staged C107–C111 ✓; Stabilization Fund in all four of Carmen's staged pieces ✓; Selena and Talia both quote Jessie Hess C107 ✓; Kai and Sharon both name Lena Cross and Rowan Pierce C109 ✓; one reader claim (Kai C109 repeats Celeste's Marin Tao figures) was wrong and is dropped — the real overlap is Sharon and Celeste on Marin Tao C110.
+
+| Seat (day) | Desk / domain | Slice it gets | Told to cover (package purpose, short) | Wrote (editions C78–C110 + staged C107–C111) |
 |---|---|---|---|---|
-| Carmen Delaine | Mon | Civic Affairs Reporter | desk-signal civic lane | |
-| Business desk (Jordan Velez) | Mon | Economics & Labor | desk-signal business lane | |
-| Dr. Lila Mezran | Mon | Health Desk | health slice | |
-| Trevor Shimizu | Mon | Transit & Infrastructure | transit slice | |
-| Anthony Raines | Mon | Lead Beat Reporter - Oakland A's | Anthony slice / sports lane | |
-| Luis Navarro | Tue | Investigations | desk-signal civic lane | |
-| Rachel Torres | Tue | Public Safety | safety slice | |
-| Angela Reyes | Tue | Education | schools slice | |
-| Selena Grant | Tue | Oaks Beat Reporter | Oaks beat slice | |
-| Jax Caldera | Wed | freelance accountability writer | stink slice | |
-| Noah Tan | Wed | Weather & Environment | environment slice | |
-| Elliot Marbury | Wed | Journalist, Data Desk | data-desk slice | |
-| P Slayer | Wed | Fan Columnist - Sports | P Slayer slice | |
-| Tanya Cruz | Wed | Sideline Reporter | desk-signal sports lane | |
-| Elliot Graye | Thu | Ethics & Faith Journalist | faith slice | |
-| Simon Leary | Thu | The Long View Columnist - Sports | desk-signal sports lane | |
-| Hal Richmond | Thu | Senior Historian | Hal slice / sports lane | |
-| Talia Finch | Thu | Oaks Ground Reporter | Oaks ground slice | |
-| Mason Ortega | Fri | Food & Hospitality | desk-signal culture lane | |
-| Kai Marston | Fri | Arts & Entertainment | arts slice | |
-| Sharon Okafor | Fri | Lifestyle | lifestyle slice | |
-| Maria Keen | Fri | Cultural Liaison | neighborhood slice | |
-| Celeste Tran | Fri | Social Trends | trends slice | |
-| Nia Rook | daily | UNDOCKED Recap Journalist | UNDOCKED feed slice | |
+| Carmen Delaine (Mon) | civic / CIVIC | civic-domain slice (desk signal + civic decisions/datawakes, no Sheets) | Trace votes, Initiatives, money, clocks; interviews no citizens | 37 editions pieces C78–C110: fund vote/queue, OARI clock, Fruitvale/Baylight votes. Stabilization Fund in C107–C110, four cycles running. C107–C109 are citizen quotes with no officials, C110 officials only. Citizen-centred: C87 Beverly Hayes' check, C92 Patricia Nolan |
+| Jordan Velez, business-desk (Mon) | business / ECONOMIC | economic slice (one hood's Business_Ledger + Employment_Roster workers + business seeds) | Follow money, labor, development to the people carrying it | 30 pieces C79–C109. C79–C92 Stabilization Fund (same story as Carmen), C83–C99 Baylight bond/RFP; C100 and C101 are citizens' own promotions (Elio Perez, Joaquín Nakamura); C107–C111 firm rosters per hood; C103 Dimond stub with no people |
+| Dr. Lila Mezran (Mon) | civic / HEALTH | health slice (Sick per hood, Hospital_Ledger, Health_Cause_Queue, Who Lived It) | One health-service Initiative or access condition; no diagnosing | C79–C102 Temescal health center (vote, floor plan, licensing, land, construction). C107–C111: Chinatown illness count, same story each cycle, with hospitalized Yu Zen (workplace accident) quoted in all five — a citizen's hospital stay, written as a census |
+| Trevor Shimizu (Mon) | civic / INFRASTRUCTURE | transit slice (Transit_Metrics, transit workers, hooks) | One transit/infrastructure condition → systems consequence | C79–C101 culverts, water pressure, $60M maintenance gap, Hub groundbreaking; C107–C111 12th Street Station ridership (C107–C109, C111) + Lake Merritt dip (C110), frontline transit workers quoted |
+| Anthony Raines (Mon) | sports / SPORTS_ANALYTICS | Anthony slice (shared sports substrate + TrueSource dossiers) | One sourced analytic claim; sample limits stated | 34 pieces (byline "Anthony" to C93, "Anthony Raines" from C94): game/player analysis; ~15 of 17 read are athlete lines. Paulson/Oaks front-office pieces C96–C101. Staged C110 and C111 are two models on the same Ellis Game Five |
+| Luis Navarro (Tue) | civic / CIVIC | civic-domain slice | What the Packet establishes vs what stays open; documented silence | C79–C102 CRC silence, OARI clock, Baylight, KONO blackout (C96), crime drop (C102). C103–C110: the same "who owns the civic gap / Fruitvale Hub" story seven cycles, built on a recurring citizen cast (Rick Walker, Elio Perez, Depak Ying, Melton Neilon); C110 three officials, one sentence |
+| Sgt. Rachel Torres (Tue) | civic / SAFETY | safety slice (Crime_Metrics, Judicial_Ledger, custody trail) | One public-safety incident, classification gap, or OARI question | 4 editions pieces (C96, C97, C105). Staged C107–C110: neighborhood incident/response-time tables, not an incident; none of the four found in editions. No piece centred on a citizen's own incident |
+| Angela Reyes (Tue) | civic / EDUCATION | schools slice (enrollment drift, SchoolQuality, district card, hooks) | One school/youth/apprenticeship Initiative as program stability | C85 volunteer, C89 church tutoring, C90 population surge, C103 apprenticeship stub; C106–C110 Rockridge school quality four cycles. Apprenticeship Initiative appears once |
+| Selena Grant (Tue) | sports / SPORTS | Oaks beat slice (Oaks rows of Oakland_Sports_Feed) | Analyst's read of the expansion build; "NOT fan heat, NOT the street" | C78–C90 Bulls-era Chicago Bureau pieces (records, officials). From C107 Oaks: opening night, losing preseason C108–C110. C107–C109 read as fan sentiment with resident quotes; only C110 is board-read |
+| Jax Caldera (Wed) | civic / ACCOUNTABILITY | Jax stink slice (top stink, contradiction frame, scene pack) | Accountability pressure where record and public story diverge | 8 pieces C91–C106 + staged C107–C110. Frame "map says decay, roster says nothing" repeats C102, C106–C109 (Chinatown, Fruitvale, Downtown); C110 West Oakland crime spike marked ended. Every piece is a bar/street scene; officials/tracker rows carry ~9 of 12 |
+| Noah Tan (Wed) | civic / ENVIRONMENT | environment slice (Cycle_Weather + season-feel citizens) | What the season moved; weather is context, live a person on a day like this | C82 air check, C83 KONO disturbance, C104 Sandra Velazquez (seasonal health), C106–C110 fog/overcast with residents' moods; C110 centres residents' health |
+| Elliot Marbury (Wed) | sports / GENERAL | data-desk slice (player dossier, rates, two peers) | One audit-grade claim a number carries; interviews nobody | One published piece, C110 "The Horn Line" (peer band blank, said so). Staged C110 identical |
+| P Slayer (Wed) | sports / SPORTS | P Slayer slice (sports feed pulse, charge bag, prior takes) | Turn a result into fan consequence; own or double down on a prior take | 25 pieces C79–C110. C84–C92 Taveras hate-the-signing → I-was-wrong arc. ~11 of 17 read built on athletes/roster, ~6 on fans (Ed 91 Dante Turner; c110 Hess, Cloak). Cron-era c107/C108 are player quotes at bars with little take |
+| Tanya Cruz (Wed) | sports / SPORTS_SIDELINE | Tanya slice (shared sports substrate) | Short clubhouse dispatch; room is allotted texture | 5 pieces: C79 wiffleball day for the Fund, C103 and C104 number restatements with no clubhouse, C105, C110 clubhouse. Staged C107 not in editions. Players only |
+| Elliot Graye (Thu) | culture / COMMUNITY | faith slice (Faith_Ledger 7 cycles + Faith_Organizations rotation) | One faith-community or quiet-care signal through observable function | C78–C89 congregations opening doors (Allen Temple, meal programs); C82 Calvin Turner starts at the meal program after his mother passed; C107–C110 one congregation each cycle, C110 attendance counts and no resident. Cron-era piece says "I haven't had any direct involvement" |
+| Simon Leary (Thu) | sports / SPORTS_LONG_VIEW | Simon slice (shared sports substrate) | One present sports structure as civic architecture | 7 pieces C96–C109: Kelley as guest priest (C96), Dillon's role move, "continuity through role change" C103, C106, C108, C109, C110. All athletes; one citizen quote (Ollie Campbell, C106) |
+| Hal Richmond (Thu) | sports / SPORTS_HISTORY | Hal slice (sports substrate + dossier + his prior filings) | One present fact across time; historical echo | 20 pieces C79–C105 + staged C109, C110. Keane/Kelley farewell season C79–C100; 1967 Oaks C93; trades C101; Abraham C102. Staged pieces refuse to invent. Athletes and history; citizens in background |
+| Talia Finch (Thu) | sports / SPORTS | Oaks ground slice (PlayerMood, FanSentiment, neighborhood around the park) | A supplied Oaks fact carried into a room; what the city thinks | C78–C90 Chicago bars and porches (Paulson leaving; Paulette Okafor recurs, C87 "The Umbrella She Didn't Bring"). C106–C110 Oaks: a bar per cycle (West Oakland, Downtown, Webster, Baylight fence, Dimond); cron-era resident quotes are templated "I feel like…" lines; C109 no residents |
+| Mason Ortega (Fri) | culture / CULTURE | economic slice (food filter) | Restaurant signal as a workplace question | 6 pieces C87–C110, 8 of 8 read built on kitchen workers, none on officials. C106–C110 one named worker describing a typical shift each cycle (Harborline, OakHouse, OakTown Social, Fruitvale Diner, Nino's); no labor consequence or life event |
+| Kai Marston (Fri) | culture / CULTURE | arts slice (Cultural_Ledger risers/fadeers, culture seeds) + evening pack | Present-tense arts/entertainment scene; a named place as neighborhood act | 12 pieces C79–C106: First Friday ×5, festivals, Janmashtami; C104–C106 templated resident quotes. Cron C108 Tara Ellison, C109 ledger rundown (self-score sim-state-cited=no) |
+| Sharon Okafor (Fri) | culture / CULTURE | lifestyle slice (Cultural_Ledger fame) + evening pack | One venue condition as a behavior question | One published piece (C104, an Aitken sighting at a church). Unstaged cron output C109 and C110 "When a Name Stops Arriving" — the same Lena Cross fade, two cycles, fame-ledger essay not a venue |
+| Maria Keen (Fri) | culture / CULTURE_GROUND | neighborhood slice (Community_Programs, hood population drift) + evening pack | One named neighborhood or evening condition as human-scale ground brief | 34 pieces C79–C109. Early: Fourth of July, church gatherings (C84, C93, C94, C100 — faith lane), grief gathering C93, Dillon sighting C105. C108–C110 ledger counts + generic neighbor quotes ("Dimond is still a bit of a mystery to me") |
+| Celeste Tran (Fri) | wire / CULTURE | trends slice (Cultural_Ledger MediaCount, hood movement) | Fast trend read; count is hers, mood hers to name | No Cycle Pulse byline (one supplemental, C84 "The Oakland Stack", tech registry). Staged C108 Marin Tao 25 mentions with four residents saying they haven't thought about it; C110 Marin Tao again + hood population (Downtown +10), no citizen voice |
+| Nia Rook (daily) | undocked / CULTURE | UNDOCKED feed slice (gate-approved feed pack + standings sidecar) | Recap the gate-approved episode: who's up, who's down | 3 editions pieces C104–C109; staged one pilot per cycle (C104 Merkin Jumper … C111 Rosario Medina). Model-dependent: llama pieces reuse generic scaffolds and mention "the A's doing well"; grok pieces use credit deltas and an unnamed crowd. Clarissa Dane holds the top slot seven cycles |
 
-On the roster but not on the grid: Lena Carrow (Field Reporter), Dana Reeve (Lead Journalist), Farrah Del Rio (Civic & Cultural Opinion), Reed Thompson (TWS Wire Reporter), Ariana Reyes (Data Analyst, Gridiron Analytics), Mint Condition (Speculative Internet).
+**Same story, one seat, many cycles (as written):** Carmen — the Fund (C84–C98, C107–C110); Luis — Fruitvale/civic gap (C103–C110); Jax — decay frame (C102, C106–C109); Lila — Chinatown illness / Yu Zen (C107–C111); Trevor — 12th Street ridership (C107–C111); Angela — Rockridge (C106–C110); Noah — fog (C106–C110); Mason — one kitchen worker each cycle (C106–C110); Simon — role change continuity (C103–C110); Selena/Talia — losing preseason (C108–C110).
+
+**Crossover (same fact or same people, two or more seats):**
+- Oaks: Selena + Talia on the same facts and the same residents every cycle C107–C110 (Hess, Trevor, Nawan; Dimond bar C110); P Slayer c110 uses Hess and Cloak; Tanya, Selena, P Slayer share the "electric/energy" quote register c104–c110; Nia's llama pieces reuse the same residents (Nawan, Cloak, Fay, Clark).
+- Culture ledger: Kai + Sharon C109 (Lena Cross, Rowan Pierce); Sharon + Celeste C110 (Marin Tao 25 mentions, Rico Valez 19) — three seats read the same Cultural_Ledger rows the same weeks.
+- Stabilization Fund: Carmen and Jordan Velez C79–C92; also Jax C93/C98, Graye C78/C84, Tanya C79, Anthony C78. Fruitvale Hub: Luis + Trevor C103, Carmen. OARI: Carmen, Luis, Rachel C96–C97, Maria C84.
+- Faith: Maria C84/C93/C94/C100, Angela C89, Simon C96 (Kelley as guest priest) all in Graye's lane. Health: Noah C104 and C110, Maria C110 (arrests, hospital beds). Sports front office: Anthony C96–C101, Hal C101/C102, Jax C95, Jordan C94.
+- Same player, two sports seats: Horn (Anthony c108, Marbury c110); Ellis (Tanya, Anthony C110); Richards (Hal C101, Simon c106).
+
+**Gaps (what no seat wrote):**
+- Deacon Seymour's workplace injury and hospital stay (C105 → recovery): grep of C105–C110 editions and all staged files finds no piece naming Seymour with hospital/injury/accident/recovery. The seats that carry the A's (Anthony, P Slayer, Hal, Tanya, Simon) have none; Lila's health slice drops sports figures by rule.
+- A citizen's own life event as the subject is rare: Lila C107–C111 (Yu Zen), Graye C82 (Calvin Turner), Jordan C100/C101 (promotions), Carmen C87/C92, Talia C87. None in the cron-era sports, culture or wire seats.
+- Cron-era quotes: templated resident lines and disclaimers ("I haven't really thought about Marin Tao…" Celeste C108; "I haven't had any direct involvement…" Graye C109) in Talia, Kai, Maria, Mason, Celeste, Nia llama.
+- Thin or absent record: Celeste no edition byline; Sharon one piece; Marbury one; Rachel and Jax staged C107–C110 not found in editions (staged ≠ published).
+- Feed concentration: eight seats draw on sports material (P Slayer, Anthony, Hal, Tanya, Simon on one shared sports substrate; Selena and Talia on the Oaks feed; Marbury on player dossiers) = 8 of 24. Eight civic-family seats (Carmen, Luis, Jax, Rachel, Trevor, Lila, Angela, Noah) plus Jordan on business. Four on the culture ledger (Kai, Sharon, Celeste, Maria). No slice carries LifeHistory_Log (the beat dump excludes it).
+
+**Not decided here (builder reads this table, then):** week rotations; whether an existing seat is the citizens'-stories journalist or a desk is minted (Task 3); which slices citizens' lives go into (Task 2).
 
 ## Record (measured 2026-10-11, data only)
 

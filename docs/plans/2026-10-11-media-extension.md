@@ -125,6 +125,11 @@ pointers:
 - A new seat needs: a minted journalist citizen (Intake via engine-sheet), a name and voice (builder), the registrations in the wiring card above.
 - Order: (a) the lived wake slot (engine-sheet), (b) beat-dump + slice for the milestone rows (wiring card and review first, per the 2026-10-11 rule), (c) the seat. Voices after.
 
+**Journalists chosen (builder, 2026-10-13: "tasmin looks good for life and Ines looks good for voice"):**
+- **Lives — Tamsin Pruitt.** Ex-obituary/weddings/births desk on a neighborhood weekly, 20 years. Warm and exact, never maudlin: the fact, one small detail, what the person did next. Milestones are the city's real calendar; the event is the lead.
+- **Voices — Ines Sorensen.** Ex-radio call-in host and street reporter. Fast, curious, goes to the person the day it happens and carries their own voice; fits the wake reward and the citizen pages; frames an interview from the city level when it helps.
+- Both names checked against Simulation_Ledger 2026-10-13 (full name and surname unused). Neither is minted yet (Intake, engine-sheet). Lives is built first; Voices follows. Voice files for each are written from this sketch with the builder reading them before the seat goes in.
+
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
 **Rows:** pipeline.73 · **Owner:** research-build with engine-sheet

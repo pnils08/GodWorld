@@ -120,6 +120,7 @@ pointers:
 
 **Lives seat — what it is (draft, builder edits):**
 - Covers the person events of the cycle as news: the milestone tags, plus the people the element tabs already name (a hospital stay, a household formed, a hire, a business opened, a court case, a loss at the casino) — each as a life, with the element desk covering the system from its side (a hospital stay is Lives and Health, on purpose).
+- Runs daily, not on the week grid (see her cadence above); the wiring card's grid-slot item becomes the daily block in `newsroom-fanout.js` plus a covered list.
 - Reads: the milestone rows of `LifeHistory_Log` (not in the beat dump today; the 2026-10-11 draft that added it was reverted pending review), the person's page and their own log rows when they exist, the named-resident rows in `Household_Ledger`, `Hospital_Ledger`, `Health_Cause_Queue`, `Employment_Roster`, `Business_Ledger`, `Judicial_Ledger`, `Casino_Ledger` (all in the dump already).
 - Subject exclusion `sportsSubject` does not apply (ruling above): a manager's hospital stay is in.
 - A new seat needs: a minted journalist citizen (Intake via engine-sheet), a name and voice (builder), the registrations in the wiring card above.
@@ -138,7 +139,9 @@ pointers:
 
 *Opening.* The person and the event in the first sentence, plain: who, what, where on the map (neighbourhood), when (the cycle). Never a trend, never a number first. The one small true detail comes second.
 
-*Two shapes.* (a) **A life** — one person, 150–300 words: event, detail, what came next. (b) **The calendar** — when several land in a cycle, a roll of short lines, one per person, same discipline. The builder picks one or both.
+*Shape (builder 2026-10-13: "she should be covering the citizens, not just 1 … these are more to cover the cycle activity, however many words seem necessary and how many days they run since cron wake daily"):* one piece covers the citizens of the day, as many as the day's record holds, as long as it needs to be. Each person gets their own short passage, same discipline: event, detail, what came next. A heavier event (a death, a hospital stay, a birth) can run longer within the piece. Not one life per piece; the piece is the page, the calendar.
+
+*Cadence.* Daily, like the citizen wakes (citizen-wake runs 07:30 / 12:30 / 21:30 every day). The model in code is Nia Rook: "daily on top" of the grid (`scripts/newsroom-fanout.js:512`, hard-coded to her persona), not a week-grid slot. Two facts shape the daily run: the milestone events are stamped once per cycle (C111's fire was a Sunday), and the wakes land new pages every day. So each day she covers the people not yet covered: the next batch of the cycle's events, plus the citizens woken that day. A covered list (POPID + event) is needed or she repeats the same people all week, which is the Carmen/Luis failure (no memory of prior cycles). Open: the newsroom crons run Mon–Fri (`1-5`); seven days needs her own cron entries. The work/life doctrine puts weekend life on the wakes, so Mon–Fri on the existing run is the zero-change default; seven days is the builder's call.
 
 *Exemplar (built only on the C111 log line for POP-00280; facts as logged, nothing added; this is a shape, not a piece):*
 > Jerald Jensen got the nod for the lead role at AC Transit this cycle, after fourteen years as a janitor there. West Oakland. [the detail the log carries, or none] [what he did next, or "he had not said yet"]

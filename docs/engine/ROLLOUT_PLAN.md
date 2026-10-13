@@ -5,7 +5,7 @@
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C111 (fired 2026-10-11 ~16:18 CDT, 0 errors, 148 s); next live fire C112, Sunday 2026-10-18.
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (45)** — each plan, its rows and the state each is in:
+**Plans in motion (46)** — each plan, its rows and the state each is in:
 
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, pipeline.71 ready, engine.287 live-observing, engine.288 live-observing, engine.289 blocked
@@ -44,6 +44,7 @@
 - [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
 - [[../output/notebooklm-card-backup/pair-report.json]]: pipeline.72 ready
+- [[../docs/plans/2026-10-11-media-extension.md]]: pipeline.73 ready
 - [[../research/2026-10-11-codex-engine194-cut]]: engine.194 live-observing
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
 - `docs/research/2026-10-08-codex-engine95-design.md`: engine.285 ready
@@ -97,7 +98,7 @@
 | engine.281 | Sports-week ladder + venue (a–d) LIVE since 2026-10-06. (e) the column surface folds into the engine.204/205 ripple + option-sync review (2026-10-07) | in-progress | engine-sheet / research-build | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §5 |
 | engine.273 | Holidays LIVE; first Second Dawn C131. Open Court Week LIVE PROD `ae9278aa` (position 6, citywide, First Friday week; first live C162; unit-proven). Meaning sentences approved as working lines (rb carries to desks); running-on-its-own week held until it happens | in-progress | engine-sheet / research-build | [[../plans/2026-09-29-sim-holiday-calendar]] §Builder's words (2026-10-07) |
 | engine.193 | Adversity tiers LIVE; (b) settle LIVE `ae9278aa`. C111: self-armed, 7 of 9 toward norm, magnitude unverified, AC Transit / City flat — add per-institution settle log line, read C112 (G-EC50). Then (a) public-employer budget squeeze; then CAT-layer design for the builder | in-progress | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §engine.193 Builder's words (2026-10-07) |
-| pipeline.70 | Read the staged C110 pieces for the story test, then flip; watch the first unattended Opus business run | live-observing | research-build | [[../plans/2026-10-03-citizen-pages-drive-canon]] |
+| pipeline.70 | Read the staged pieces for the story test at C112 (Sun 2026-10-18), then flip; watch the first unattended Opus business run | live-observing | research-build | [[../plans/2026-10-03-citizen-pages-drive-canon]] |
 | engine.53 | Organic: the first exchange-line candidate in a street pool. Mon 2026-10-05 fanout read 2026-10-08: none, because no transcript sentence named that day's highlights (fog, Oaks; 0 of 66 turns) | live-observing | research-build | [[../plans/2026-07-11-agent-exchange-engine]] |
 | research.27 | Next unattended flight (20:30 CDT 2026-10-11): pilot runs the new rules, a closed contract's credits reach the feed row + board (§3.2 acceptance). Stations Bayline 6 / Oakland 12 minted, seats open (builder 2026-10-12: leave open until the pipeline.73 reporter walk). | live-observing | research-build | [[../plans/2026-08-07-spacemolt-game-show]] §3.2 + §Post-ship (e) |
 | engine.48 | Organic: the first T8 tension-seed result off the cron; none recorded yet | live-observing | research-build | [[../plans/2026-07-06-citizen-loop-deepening]] |
@@ -125,8 +126,8 @@
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.71 | Media hood read: live vs the INSTITUTIONS seed (today every reader gets prev-Cycle delta only — baseline_briefs, buildWorldSummary classifyDelta). Builder 2026-10-10: the seed is the permanent referent; coverage says 'used to be' when the data moves. Spec after engine.214 lands | ready | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Reviews reconciled A4 |
-| pipeline.72 | One TrueSource card per player, updated each season (builder 2026-10-11): fold the _2041 intake fields the FULL card lacks (season WAR, FIP, batters faced, Vinnie OPS/TB/PA, Saryan rating delta) and the _2040 history into the FULL card, then retire the intakes. 18 duplicate _2041 copies already deleted from the notebook. Henry Rivas contract RULED 2026-10-12: FA 2045 (the FULL card's year; the _2041 copy's 2043 is dropped in the fold) | ready | research-build | output/notebooklm-card-backup/pair-report.json |
-| pipeline.73 | Media extension (builder 2026-10-11): each desk covers the citizens who lived its lane, not the system; seat purpose table; LifeHistory into slices; citizens' reporter seat; walk each reporter | draft | research-build + engine-sheet | docs/plans/2026-10-11-media-extension.md |
+| pipeline.72 | One TrueSource card per player (builder 2026-10-11): fold the _2041 intake fields and _2040 history into the FULL card, retire the intakes. Rivas FA 2045 RULED 2026-10-12 | ready | research-build | output/notebooklm-card-backup/pair-report.json |
+| pipeline.73 | Media map (builder 2026-10-12): a clean session maps all 23 journalists — what each covers, crossover, gaps, week rotations, citizens-stories seat or minted desk. A map, not a citizen conversion | ready | research-build + engine-sheet | docs/plans/2026-10-11-media-extension.md |
 | engine.287 | Citywide crime gate: floor 3 carried spikes, half share on each hood (builder 2026-10-10). Built as engine.214 Task 19 `1ce99668`, benched @14 (the C112 wave gone). Rides the engine.214 PROD. Live counts on record 2/0/0/1/1/1 | live-observing | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Tasks 17/18/19 — mechanism |
 | engine.288 | Mood gates read both seed lists (builder 2026-10-10: "the second option") — the newsroom's deck carried beside the engine list. Built `5c6c551d` + `1d0d7b83`, benched @16: active seed hoods 7 → 14 at C112, city unchanged. Rides the engine.214 PROD | live-observing | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.288 bench results |
 | engine.289 | Absolute CULTURE gates (`wCulture >= 3 / >= 6` in `applyCityDynamics.js`) were written while the seed input was dead; they have input for the first time on the engine.214 PROD. Waits on live C113 (Sun 2026-10-25): re-read, then keep, re-tier, or move to the relative shape | blocked | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Tasks 17/18/19 — mechanism → Bench results |

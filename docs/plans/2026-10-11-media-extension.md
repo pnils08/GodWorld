@@ -61,6 +61,17 @@ pointers:
 
 **Question the map must answer (builder 2026-10-12):** is there a journalist whose job is citizens' stories (an existing seat), or does a citizen-stories desk have to be minted? Read with the map's other outputs (what each of the 23 covers and what slice each gets). Feeds from engine.286 N31 (the wake as the citizen's turn to act: money and job levers missing, es is formulating that plan). Decide after the map is read together, not before.
 
+> (2026-10-13, reading the map) "The idea behind the map is to try to identify what journalists cover what, which should get citizens quotes, which are covering the citizens. The journalists should all be covering systems the engine runs. So for example the education desk is covering that aspect of the sim, health, business, sports, faith, undocked, arts. These all align with data we track, and citizens reaching and/or effected by that data. The cross overs are what make it a city. Deacon Seymour hospital stay is a mention in sports but it's the headline for health. Kono illness spike is likely its arc is following so it creates gaps like those. Also these stories are all fed via the engine, not sure the crons tools. So how the cron would know Deacon Seymour is even the As manager. So the system mostly works and is in place and newer slices have only ran a couple weeks at best. The citizens wakes, reflection trends and covering the citizens is likely a new journalist or 2. Pulling real reflections, interviews, building canon depth on citizens. We can ultimately review them each but you can apply some of this to the research and plan."
+
+**Applied (rb, 2026-10-13):**
+- **The frame.** Each of the 23 seats is one engine system (education, health, business, sports, faith, UNDOCKED, arts, and so on). The seat covers the tracked data of that system and quotes the citizens that data reaches or affects. The map reads each seat against that frame: does it cover its system, and do its quotes come from the citizens the system touched.
+- **Crossover is the city, not a defect.** One event in two seats (a mention in sports, the headline in health) is the design. The map's "crossover" lists are read as that, not as waste. A gap is when the seat whose headline it is never gets the event.
+- **Seymour re-read.** Sports mentions him, health should headline him (builder). The health slice cannot: `scripts/buildHealthSlice.js` header and `sportsSubject` (`scripts/beatSliceKit.js:357`) drop a pro athlete from the hospital record as "a sports story, not a health one." That rule and the builder's frame disagree on this case. Not changed; builder call whether a sports figure's hospital stay reaches health. Whether the cron knows he is the A's manager is not traced: the C105 desk-signal item read "A's | team-update | (playoffs) | Deacon Seymour" with no role field seen. Engine-feed trace (what the feed says about who he is) is an open read for engine-sheet.
+- **"Kono illness spike"** — no match for "Kono" in staged C107–C111 output; not read, ask builder what it points to. The reading offered: an illness arc a seat follows across cycles leaves gaps in other seats for the same reason.
+- **Slices are new.** Slice wiring has run about two weeks. The map's gaps for slice-era seats are provisional; the sampled editions C78–C110 mix pre-slice and slice-era output. Weigh gaps accordingly; do not call a seat broken on a two-week record.
+- **Task 3 narrows.** Builder expects one or two new journalists for the citizens' side: real reflections, interviews, canon depth on citizens, fed by the wakes and reflection trends. Treated as likely-mint, still a builder decision; the design (feeds, lane, how it differs from the element seats) is made with him after the walk.
+- **Review.** Each seat is reviewed individually with the builder; the map is the evidence, not the verdict.
+
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
 **Rows:** pipeline.73 · **Owner:** research-build with engine-sheet
@@ -71,7 +82,7 @@ pointers:
 |---|------|-------|--------|
 | 1 | **Map filled 2026-10-12 — builder reads it next.** Map the reporters (builder 2026-10-12: a map, not a conversion): for each of the 23, what they cover and why, taken from what they have actually written (deep canon search) and the voice file; fill the table below as evidence, then read it together with the builder for crossover, gaps and the week rotations. The table has 24 seat rows; the builder counts 23 journalists, so reconcile the count first (Bay_Tribune_Oakland roster vs the weekly grid vs the Fri/daily seats). | Mags + builder | map filled; read with builder pending |
 | 2 | With the builder: which slices citizens' lives make sense in. | Mags + builder | not started |
-| 3 | With the builder: who is the journalist that just reports on random citizens. | builder | not started |
+| 3 | With the builder: the citizens' side — likely one or two minted journalists (wake reflections, interviews, canon depth on citizens), per builder 2026-10-13; design with him after the walk. | builder | not started |
 | 4 | Any code that follows from 1–3 gets wiring cards, blast-radius checks and a review before it changes. | es | not started |
 
 ## Reporter map (Task 1 — filled 2026-10-12, descriptive only; the builder reads it, nothing here changes a lane)
@@ -289,6 +300,8 @@ Each entry: **Beat** (the seat's standing purpose from its wake package) · **Sl
 - Why did the A's championship run go uncovered? The builder raised it ("The As are in a championship run and no one covers that?").
 
 ## Changelog
+
+- 2026-10-13 (research-build) — Builder's map framing recorded (seat = engine system + the citizens it touches; crossover = the city; Seymour re-read against the health-slice sports rule; slices two weeks old; citizens' side likely 1–2 new journalists). Task 3 reworded. No lane or code changed.
 
 - 2026-10-12 (engine-sheet) — Builder's words and the share measurements added. No design added.
 

@@ -51,6 +51,10 @@ pointers:
 
 **Start-of-session evidence (rb, 2026-10-12, Carmen Delaine as the sample):** her angle was the same fixed item (West Oakland Stabilization Fund, disbursement-active) C107–C111, five straight cycles; her C111 interviews were the mayor, deputy mayor, fund director and a council-level quote, all press-release lines; her voice file says "follows the money, not the press release." Prior diagnosis to read first: supermemory 2026-09-24 "Why 24 journalists read like 4 (verified S433)" — `scripts/cron-desk-run.js` maps reporters onto few builders. Method: deep canon search of what each journalist has actually written; descriptive first, no lane changes proposed before the map is read together.
 
+> (2026-10-12, tying the wake design to the media map) "Yeah es is formulating that plan and it feeds into what you're next session will be about in the media mapping and what they cover, what slice they get, ultimately does a journalist exists to cover citizens stories or will a desk need to be minted."
+
+**Question the map must answer (builder 2026-10-12):** is there a journalist whose job is citizens' stories (an existing seat), or does a citizen-stories desk have to be minted? Read with the map's other outputs (what each of the 23 covers and what slice each gets). Feeds from engine.286 N31 (the wake as the citizen's turn to act: money and job levers missing, es is formulating that plan). Decide after the map is read together, not before.
+
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
 **Rows:** pipeline.73 · **Owner:** research-build with engine-sheet

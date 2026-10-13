@@ -101,7 +101,7 @@ pointers:
 **Citizen coverage — what can be compiled (rb, 2026-10-13, builder asked: "what can be compiled in reflections and occurrences from the engine"; counts read from LifeHistory_Log, the page dump, C108–C111).**
 
 *Three streams, each a different kind of coverage:*
-1. **Occurrences — person events as news.** The milestone tags (Promotion, Wedding, Birth, Death, Retirement, Graduation, Health, Recovering, Stabilized, Relationship, Household) run 26 / 31 / 77 rows in C108 / C109 / C110 (C110's 77 includes Tier-4 emergences; C111's world summary lists 21). One person each. Today they reach a desk as one pointer item (`WHO_LIVED_IT_TAGS` filter), if at all.
+1. **Occurrences — person events as news.** The milestone tags (Promotion, Wedding, Birth, Death, Retirement, Graduation, Health, Recovering, Stabilized, Relationship, Household) run 26 / 31 / 77 / 21 rows in C108 / C109 / C110 / C111, but most of the C110 surplus is intake bookkeeping ("Emerged into Tier-4"). **Corrected count (bookkeeping removed, 2026-10-13): 16 / 18 / 20 / 15 / 15 real rows in C107–C111,** and of those only about 5–7 a cycle are news-grade (birth, death, retirement, hospital/recovering, promotion); the rest are small moments (Relationship 4–8: "reconnected with an old friend"; Household 3–6: often "spent a calm evening in their living space"). One person each. Today they reach a desk as one pointer item (`WHO_LIVED_IT_TAGS` filter), if at all.
 2. **Ambient life — the block's day.** LifeHistory_Log carries 2,579 / 2,771 rows in C110 / C111 across about 1,000 citizens a cycle, nearly all texture: Neighborhood 704, Daily 435, Civic Perception 324, Personal 254, Sports 146, Lifestyle 76, Undocked-Audience 63, Strain 53, Work 33, Faith 6. Examples, as the engine wrote them: "heard the rent talk on the block turn sharp"; "the block put UNDOCKED on and went quiet when the belt haul came up"; "watched a neighbor pack up for somewhere cheaper". Individually small; by hood and tag they say what a neighbourhood is noticing. No seat reads this log (the slices exclude LifeHistory).
 3. **Voices — reflections, tensions, exchanges.** 75 / 112 / 90 citizens with a page per cycle, 120–170 docs, plus the daily exchange. In the citizen's own words.
 
@@ -156,6 +156,30 @@ pointers:
 - Cover the system the event belongs to (the hospital, the transit authority): the element desks do; she covers the person, and the crossover is on purpose.
 
 *Slice she reads (not built):* the cycle's milestone rows plus the person's own log rows and page when they exist; named-resident rows from the hospital, household, employment, business, court and casino tabs. Her wall will be her own `cp-POP-xxxxx` page once minted.
+
+**Who runs when, and who does what (read from the crontab and the page dump, 2026-10-13; server clock times):**
+
+| Time | What runs | What it makes | Who reads it |
+|---|---|---|---|
+| 05:45 Mon–Thu | civic office datawakes | office statements | civic seats (Carmen, Luis) |
+| 06:00 | newsroom digest | morning digest | builder |
+| 06:15 Mon–Fri | newsroom **angle** | rebuilds the slices from the beat dump and the page dump; builds the day's rota (7 seats/day); Nia on top | every seat |
+| 07:30, 12:30, 21:30 daily | citizen wakes (3 a day) | one citizen reflection each (a page) | pages, pulse, Celeste |
+| 07:00, 12:00, 19:00 daily | Mags' own wakes | Mags's page | Mags |
+| 13:15 Mon–Fri | newsroom **report** | the reporter interviews a citizen the story touched → **PRESS** reply pages | the seat's write stage |
+| 17:00 daily | citizen exchange | one conversation, street interview or debate (two or three citizens) | /sift; each citizen's own lines land on their page |
+| 18:15 Mon–Fri | newsroom **write** (gate) | the day's articles, 18:45 delivered | the paper |
+| 20:18 Tue/Thu | work-wake | 10 working citizens reflect on their work data | pages |
+| 20:30 daily | UNDOCKED flight | the day's episode | Nia |
+| Sun (cycle fire) | engine cycle | the week's life-log rows, tabs, milestones | all slices next day |
+
+*What this means for the new seats.* The newsroom runs once a day, Mon–Fri, three stages. The slices are rebuilt at 06:15, so a day's piece is built on yesterday's wakes, exchange and PRESS replies; today's 07:30 and 12:30 wakes miss it. The cycle is weekly (a Sunday fire), so the engine's life events are stamped once a week and the citizens' reflections arrive daily: Lives has a week of events to spread over the days, Voices has fresh pages daily.
+
+**What the pages really are (counts per cycle, C108 / C109 / C110):** PRESS replies 118 / 90 / 62 (citizens answering reporters' questions; 86 / 63 / 44 citizens); the citizen's own wakes 32 / 33 / 33 (morning, midday, night; 3 a day, ~19 different citizens a cycle); work-wake 10; conversation lines 10 / 10 / 14. So only about 5 self-initiated reflections a day, plus the exchange, exist for a Voices seat; the bulk of the page record is reporters' interviews, which already fed the day's articles.
+
+**Wake capacity vs life events (2026-10-13):** 3 wakes a day is 21 a cycle against 15–20 real life-event rows a cycle (about 5–7 news-grade). A "lived" wake slot for the news-grade events fits inside the 21 wakes without starving the rotation; for all 15–20 it would take most of them.
+
+**Ines Sorensen — Voices, built from that (draft, builder edits):** reads the citizens' own wake pages and work-wake pages (about 5 a day), the day's exchange, and the Lives seat's covered people (when a life-event wake lands, her page and Tamsin's event meet). PRESS replies are context, not source: the reporters already used them. Her interview is the existing report stage at 13:15, aimed at a citizen chosen from the wake pages instead of from a story's subject, framed from the city level when useful. One difference from Tamsin: she writes fewer, longer passages per day (the words are the product), never counts, never a statistic. Runs daily like Tamsin, on the same schedule decision.
 
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 

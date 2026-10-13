@@ -74,6 +74,23 @@ pointers:
 - **Task 3 narrows.** Builder expects one or two new journalists for the citizens' side: real reflections, interviews, canon depth on citizens, fed by the wakes and reflection trends. Treated as likely-mint, still a builder decision; the design (feeds, lane, how it differs from the element seats) is made with him after the walk.
 - **Review.** Each seat is reviewed individually with the builder; the map is the evidence, not the verdict.
 
+**Citizens' side — draft for the builder to edit (rb, 2026-10-13; builder direction: "rather than audit all the journalists first maybe we build out what the citizen journalist is and what they cover, reflections, what's everyone saying / trending, stuff like that").**
+
+*What exists to cover (read from disk, C104–C111):*
+- Citizen pages: 1,729 admitted docs (1,116 reflections, 613 tensions), roughly 120–170 a cycle from about 75 citizens (C110: 75). PRESS slot (replies to a journalist's interview) is 555 of them, CONVO 108, INTERVIEW 10. C111 shows 40 so far (a partial day on disk, not a drop).
+- Exchanges (`scripts/citizen-exchange.js`): one a day, a bonded pair's conversation, a reporter street interview, or a debate; transcripts in `output/exchanges/` (44 files), each citizen's own lines also land on their own page. Today these are source candidates for /sift, nothing publishes them.
+- Day and week digests (`scripts/buildCitizenWeekDigest.js`): "Today in Oakland, told by its people" from reflections and life events. It feeds only the NotebookLM audio drop.
+- The pulse (`scripts/buildPulseSlice.js`): what the pages talk about over an 8-cycle window, top voices per theme (the A's, rent, the clinic, and so on), counted from ENGINE-clock citizens. It feeds only Celeste Tran's slice. Celeste is the existing trends seat, with no edition byline (map above).
+
+*So the "what's everyone saying / trending" lane already has a seat and a feed (Celeste, pulse); what no seat does is publish individual citizens' own reflections, their exchanges, or go deep on one person.*
+
+*Draft shape, two jobs (for the builder to cut, merge or rename):*
+1. **Reflections seat** — each cycle, who is carrying what: tensions and reflections in the citizens' own words, the day's exchange, the digest's "big moments". Fed by pages + exchanges + the day digest. Quotes are the citizen's text as written; the seat adds the setting, not the thoughts.
+2. **Profile / interview seat** — one citizen at a time, for canon depth: their page history, LifeHistory tail, bonds, a real interview through the interview contract (`scripts/newsroomInterviewContract.js`). Output is a piece about a person, and what it surfaces goes into canon.
+- Trending stays with Celeste unless the builder moves it; open: why she has published nothing, and whether the pulse should also reach the reflections seat.
+
+*Cautions from the data:* PRESS replies are 32% of all pages, so reporters' interviews already generate part of what the pulse counts; the pulse excludes MEDIA-clock pages for that reason (`buildPulseSlice.js` header), and a seat reading pages should do the same. The pulse is colour, never a published statistic (its own rule). A new seat needs a minted journalist citizen (ledger row, MEDIA clock) — not decided, builder's.
+
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
 **Rows:** pipeline.73 · **Owner:** research-build with engine-sheet

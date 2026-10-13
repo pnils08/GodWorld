@@ -233,8 +233,8 @@ var SEARCH_TOOL = {
 // baseURL, so it points at /api. REFLECTION_PROVIDER=anthropic reverts.
 var REFLECTION_PROVIDER = process.env.REFLECTION_PROVIDER || 'openrouter';
 var REFLECTION_MODEL = REFLECTION_PROVIDER === 'anthropic'
-  ? 'claude-sonnet-4-6'
-  : 'anthropic/claude-sonnet-4.6';
+  ? 'claude-sonnet-5-5'
+  : 'anthropic/claude-sonnet-5.5'; // builder 2026-10-12: newer + cheaper ($3/$15 -> $2/$10)
 
 async function callClaude(systemPrompt, userPrompt) {
   var claude;

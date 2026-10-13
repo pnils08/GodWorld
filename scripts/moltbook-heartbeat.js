@@ -328,10 +328,12 @@ async function loadMoltbookContext() {
 // a silent fallback to Anthropic would be silent billing.
 // ---------------------------------------------------------------------------
 const PROVIDER = process.env.MOLTBOOK_PROVIDER || 'openrouter';
-const OR_MODEL = process.env.MOLTBOOK_MODEL || 'deepseek/deepseek-chat';
+const OR_MODEL = process.env.MOLTBOOK_MODEL || 'deepseek/deepseek-v4-flash-0731';
 const claude = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 function callOpenRouterRaw(payloadObj) {
+  // builder 2026-10-12: newer DeepSeek runs with its hidden reasoning off
+  if (/^deepseek\/deepseek-v4/.test(payloadObj.model) && !payloadObj.reasoning) payloadObj = Object.assign({ reasoning: { enabled: false } }, payloadObj);
   return new Promise((resolve, reject) => {
     const payload = JSON.stringify(payloadObj);
     const req = https.request({
@@ -373,7 +375,7 @@ async function askClaude(systemPrompt, userPrompt) {
     return (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || '';
   }
   var response = await claude.messages.create({
-    model: 'claude-sonnet-4-6',
+    model: 'claude-sonnet-5-5',
     max_tokens: MAX_RESPONSE_TOKENS,
     system: systemPrompt,
     messages: [{ role: 'user', content: userPrompt }]

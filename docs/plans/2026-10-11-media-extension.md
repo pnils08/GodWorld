@@ -112,6 +112,19 @@ pointers:
 - **One seat or two.** The data splits two ways, not three: **Lives** (stream 1: the event is the story, with the person's page or day alongside when one exists; crosses over to health, business, civic and sports seats on purpose) and **Voices** (streams 3 + 2: what a citizen said this cycle and what their day was; the interview/profile mode lives here, not as a third seat). One seat can start on either; the other follows. Which one first is the builder's.
 - **Open:** stream 2 by hood (what a neighbourhood noticed) is either Celeste's system angle (hood mood as trend) or the Voices seat's; unplaced until the builder rules.
 
+> (2026-10-13, ruling on the citizen seats) "Let's start with lives, Celeste will cover the trending data and the lives and voices desk will cover the street level experience, which can be framed from city level for an interview but the pages and reflections are there to use, you also caught a gap that 'life events' should reward with a wake."
+
+**Ruled (2026-10-13):** (1) Celeste = the trending data. (2) A lives-and-voices desk = street-level experience; an interview can be framed from the city level, and the citizens' pages and reflections are the material. (3) **Lives is built first**; Voices follows. (4) A life event should reward the citizen with a wake.
+
+**The wake gap, read from code (rb, 2026-10-13):** `scripts/citizen-wake.js` `selectCitizen` picks by a seeded weighted draw (1 + eventMag×2 + dial deviation), a 1-in-5 voiced-citizen slot, and since engine.180 a POSTURE slot (a citizen whose game state moved this cycle wakes the day it happened). Milestone events have no slot: they only raise the weight through the dial nudge in `recentEventMagnitude` (`lib/wakePerception.js:34`), so a promotion or a birth gets a page by chance (2–6 of 26–77 milestone people a cycle). The posture slot is the precedent for a "lived" slot: a citizen with a milestone tag stamped on the current cycle, not woken since, speaks the day it happened. Engine-sheet's lane (wake selection, engine.286 N31 wake design); the same wake would give the Lives seat the person's own words.
+
+**Lives seat — what it is (draft, builder edits):**
+- Covers the person events of the cycle as news: the milestone tags, plus the people the element tabs already name (a hospital stay, a household formed, a hire, a business opened, a court case, a loss at the casino) — each as a life, with the element desk covering the system from its side (a hospital stay is Lives and Health, on purpose).
+- Reads: the milestone rows of `LifeHistory_Log` (not in the beat dump today; the 2026-10-11 draft that added it was reverted pending review), the person's page and their own log rows when they exist, the named-resident rows in `Household_Ledger`, `Hospital_Ledger`, `Health_Cause_Queue`, `Employment_Roster`, `Business_Ledger`, `Judicial_Ledger`, `Casino_Ledger` (all in the dump already).
+- Subject exclusion `sportsSubject` does not apply (ruling above): a manager's hospital stay is in.
+- A new seat needs: a minted journalist citizen (Intake via engine-sheet), a name and voice (builder), the registrations in the wiring card above.
+- Order: (a) the lived wake slot (engine-sheet), (b) beat-dump + slice for the milestone rows (wiring card and review first, per the 2026-10-11 rule), (c) the seat. Voices after.
+
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
 **Rows:** pipeline.73 · **Owner:** research-build with engine-sheet

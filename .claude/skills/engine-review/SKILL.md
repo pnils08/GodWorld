@@ -118,6 +118,10 @@ Render in three parts:
 
 3. **Win callout.** If any pattern this cycle reads `verdict: 'remedy-firing-as-expected'` AND its prior-cycle entry in `measurementHistory[]` was `remedy-not-firing`, name it in voice: the gap closed — that's a story candidate, not just a data point. One line under the table.
 
+## Step 8 — Citizen scoreboard (engine.286 R2-3)
+
+The audit JSON carries `citizenScoreboard`: the Cycle's real outcomes by citizen (`counts` / `outcomes` — married, born, promoted, laid off, hired, bought a home, sold a home, forced to sell, heritage step), out of `linesThisCycle` stamped lines; and `changes` vs the last audit's `citizenStates` (tier up / down, newly married, became an owner, stopped owning, died, new citizens). This is the citizens' approval rating — the rate of wins and losses the builder tunes (rate and severity are the dials). Render it as a table with names, never as a line count. A zero is a finding: a week with no wedding, no purchase and no layoff across ~1,000 citizens says the dice are too quiet. When `changes` is null, write the auditor's `note`.
+
 ## Output File
 
 Write to `output/engine_review_c{XX}.md`:
@@ -131,6 +135,14 @@ Write to `output/engine_review_c{XX}.md`:
 - `output/engine_audit_c{XX}.json` — {N} patterns
 - `output/engine_anomalies_c{XX}.json` — {N} anomalies
 - `output/baseline_briefs_c{XX}.json` — {N} briefs
+
+## Citizen Scoreboard
+
+| Outcome | Citizens | Who |
+|---|---|---|
+| [married / born / promoted / laid off / hired / bought / sold / forced sale / heritage] | [N] | [names] |
+
+Real outcomes {outcomeLines} of {linesThisCycle} lines. Since C{sinceCycle}: tier up {N} · tier down {N} · newly married {N} · new owners {N} · stopped owning {N} · died {N} · new citizens {N}.
 
 ## Ailments
 

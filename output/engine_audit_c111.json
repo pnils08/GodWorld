@@ -12901,5 +12901,6258 @@
       "Transit_Metrics"
     ],
     "notLoaded": []
-  }
+  },
+  "citizenStates": {
+    "POP-00001": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00002": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00003": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00004": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00005": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00007": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00008": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00009": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00010": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00011": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00012": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00013": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00014": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00015": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00016": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00017": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00018": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00019": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00020": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00021": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00022": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00023": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00024": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00025": {
+      "t": 1,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00027": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00028": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00029": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00030": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00031": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00033": {
+      "t": 2,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00034": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00035": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00036": {
+      "t": 2,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00037": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00038": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00039": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00040": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00041": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00042": {
+      "t": 2,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00043": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00044": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00045": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00046": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00047": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00048": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00049": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00050": {
+      "t": 1,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00051": {
+      "t": 2,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00052": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00053": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00054": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00055": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00056": {
+      "t": 2,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00057": {
+      "t": 2,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00058": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00060": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00077": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00078": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00079": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00080": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00081": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00083": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00085": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00091": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00092": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00103": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00106": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00107": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00114": {
+      "t": 1,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00115": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00116": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00117": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00118": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00119": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00120": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00121": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00123": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00124": {
+      "t": 1,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00125": {
+      "t": 1,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00126": {
+      "t": 2,
+      "m": "single",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00127": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00128": {
+      "t": 2,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00129": {
+      "t": 2,
+      "m": "divorced",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00131": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00132": {
+      "t": 4,
+      "m": "single",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00133": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00134": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00135": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00136": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00137": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00138": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00139": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00140": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00141": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00142": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00143": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00144": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00145": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00146": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00147": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00148": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00149": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00150": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00151": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00152": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00153": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00154": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00155": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00156": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00157": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00158": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00159": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00160": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00161": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00162": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00164": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00165": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00166": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00167": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00168": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00169": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00170": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00171": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00172": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00173": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00174": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00175": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00176": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00177": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00178": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00179": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00180": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00181": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00182": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00183": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00184": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00185": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00186": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00187": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00188": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00189": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00190": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00191": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00192": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00193": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00194": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00195": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00196": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00197": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00198": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00199": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00200": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00201": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00202": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00203": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00204": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00205": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00206": {
+      "t": 3,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00207": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00208": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00209": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00210": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00211": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00212": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00213": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00214": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00215": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00216": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00217": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00218": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00219": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00220": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00221": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00222": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00223": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00224": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00225": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00226": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00227": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00228": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00229": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00230": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00231": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00232": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00233": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00234": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00235": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00236": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00237": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00238": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00239": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00240": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00241": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00242": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00243": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00244": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00245": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00246": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00247": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00248": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00249": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00250": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00251": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00252": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00253": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00254": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00255": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00256": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00257": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00258": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00259": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00260": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00261": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00262": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00263": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00264": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00265": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00266": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00267": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00268": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00269": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00270": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00271": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00272": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00273": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00274": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00275": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00276": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00277": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00278": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00279": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00280": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00281": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00282": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00283": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00284": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00285": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00286": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00287": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00288": {
+      "t": 2,
+      "m": "widowed",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00289": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00290": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00291": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00292": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00293": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00294": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00295": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00296": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00297": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00298": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00299": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00300": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00301": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00302": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00303": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00304": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00305": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00306": {
+      "t": 4,
+      "m": "married",
+      "s": "retired",
+      "o": 1
+    },
+    "POP-00307": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00308": {
+      "t": 4,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00309": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00310": {
+      "t": 4,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00311": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00312": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00313": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00314": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00315": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00316": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00317": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00318": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00319": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00320": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00321": {
+      "t": 4,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00322": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00323": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00324": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00325": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00326": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00327": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00328": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00329": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00330": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00332": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00333": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00334": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00335": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00336": {
+      "t": 4,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00337": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00338": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00339": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00340": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00341": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00342": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00343": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00344": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00345": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00346": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00347": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00348": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00349": {
+      "t": 4,
+      "m": "widowed",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00350": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00351": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00352": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00353": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00354": {
+      "t": 4,
+      "m": "widowed",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00355": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00356": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00357": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00358": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00359": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00360": {
+      "t": 4,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00361": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00362": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00363": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00364": {
+      "t": 3,
+      "m": "partnered",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00365": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00366": {
+      "t": 4,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00367": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00368": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00430": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00431": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00432": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00433": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00434": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00435": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00436": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00437": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00438": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00439": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00440": {
+      "t": 3,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00441": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00442": {
+      "t": 3,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00443": {
+      "t": 3,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00444": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00445": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00446": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00447": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00448": {
+      "t": 3,
+      "m": "married",
+      "s": "retired",
+      "o": 1
+    },
+    "POP-00449": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00450": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00451": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00452": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00453": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00454": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00455": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00456": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00457": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00458": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00459": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00460": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00461": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00462": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00463": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00464": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00465": {
+      "t": 4,
+      "m": "widowed",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00466": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00467": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00468": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00469": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00470": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00471": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00472": {
+      "t": 4,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00473": {
+      "t": 4,
+      "m": "widowed",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00474": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00475": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00476": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00477": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00478": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00479": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00480": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00481": {
+      "t": 3,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00482": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00483": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00484": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00485": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00486": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00487": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00488": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00489": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00490": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00491": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00493": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00494": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00495": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00496": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00497": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00498": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00499": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00500": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00501": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00502": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00503": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00504": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00505": {
+      "t": 2,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00506": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00507": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00508": {
+      "t": 2,
+      "m": "single",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00509": {
+      "t": 2,
+      "m": "married",
+      "s": "retired",
+      "o": 1
+    },
+    "POP-00510": {
+      "t": 2,
+      "m": "divorced",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00511": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00512": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00513": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00514": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00515": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00516": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00517": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00518": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00519": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00520": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00521": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00522": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00523": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00524": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00525": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00526": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00527": {
+      "t": 1,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00528": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00529": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00530": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00531": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00532": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00533": {
+      "t": 1,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00534": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00535": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00536": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00537": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00538": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00539": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00540": {
+      "t": 2,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00541": {
+      "t": 3,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00542": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00543": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00544": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00545": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00546": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00547": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00554": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00555": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00556": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00573": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00576": {
+      "t": 3,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00588": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00589": {
+      "t": 4,
+      "m": "divorced",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00590": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00591": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00592": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00593": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00594": {
+      "t": 3,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00595": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00596": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00597": {
+      "t": 1,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00598": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00599": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00603": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00604": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00617": {
+      "t": 3,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00618": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00619": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00620": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00621": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00623": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00624": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00625": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00626": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00627": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00628": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00629": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00630": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00631": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00632": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00633": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00634": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00635": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00636": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00637": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00638": {
+      "t": 3,
+      "m": "partnered",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00639": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00640": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00641": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00642": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00643": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00644": {
+      "t": 3,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00645": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00646": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00647": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00648": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00649": {
+      "t": 3,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00650": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00651": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00652": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00653": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00654": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00656": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00657": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00658": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00659": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00660": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00661": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00662": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00663": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00664": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00665": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00666": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00667": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00668": {
+      "t": 4,
+      "m": "divorced",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00669": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00670": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00671": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00672": {
+      "t": 4,
+      "m": "married",
+      "s": "retired",
+      "o": 1
+    },
+    "POP-00673": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00674": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00675": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00676": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00677": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00678": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00679": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00680": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00681": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00682": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00683": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00684": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00685": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00686": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00687": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00688": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00689": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00690": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00691": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00692": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00693": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00695": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00696": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00697": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00698": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00699": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00700": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00701": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00702": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00703": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00704": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00705": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00706": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00707": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00708": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00709": {
+      "t": 3,
+      "m": "widowed",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00710": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00711": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00712": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00714": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00715": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00716": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00717": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00718": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00719": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00720": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00721": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00722": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00723": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00724": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00725": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00726": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00727": {
+      "t": 4,
+      "m": "",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00728": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00729": {
+      "t": 4,
+      "m": "",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00730": {
+      "t": 4,
+      "m": "",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00731": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00732": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00733": {
+      "t": 4,
+      "m": "",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00734": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00735": {
+      "t": 4,
+      "m": "",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00736": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00737": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00738": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00739": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00740": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00741": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00742": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00743": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00744": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00745": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00746": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00747": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00748": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00749": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00750": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00753": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00754": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00755": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00756": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00757": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00758": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00759": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00760": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00761": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00762": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00763": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00764": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00765": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00766": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00767": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00768": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00769": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00770": {
+      "t": 3,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00771": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00772": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00773": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00774": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00775": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00776": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00777": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00778": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00779": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00780": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00781": {
+      "t": 3,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00782": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00783": {
+      "t": 3,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00784": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00785": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00786": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00787": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00788": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00789": {
+      "t": 1,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00790": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00791": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00792": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00794": {
+      "t": 3,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00795": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00796": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00797": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00798": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00799": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00800": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00801": {
+      "t": 3,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00802": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00803": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00804": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00805": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00806": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00807": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00808": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00809": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00810": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00811": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00812": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00813": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00815": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00816": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00817": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00818": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00819": {
+      "t": 4,
+      "m": "widowed",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00820": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00821": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00822": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00823": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00824": {
+      "t": 4,
+      "m": "widowed",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00825": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00826": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00827": {
+      "t": 4,
+      "m": "divorced",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00829": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00830": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00831": {
+      "t": 4,
+      "m": "divorced",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00832": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00833": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00834": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00835": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00836": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00837": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00838": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00839": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00840": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00841": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00842": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00843": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00844": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00845": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00846": {
+      "t": 4,
+      "m": "single",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00847": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00848": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00849": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00850": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00851": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00852": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00853": {
+      "t": 4,
+      "m": "widowed",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00854": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00855": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00856": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00857": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00858": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00859": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00860": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00861": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00862": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00863": {
+      "t": 4,
+      "m": "married",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00864": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00865": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00866": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00867": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00868": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00869": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00870": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00871": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00872": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00873": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00874": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00875": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00876": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00877": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00878": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00879": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00880": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00881": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00882": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00883": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00884": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00885": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00886": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00887": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00888": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00889": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00890": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00891": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00892": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00893": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00894": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00895": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00896": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00897": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00898": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00899": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00900": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00901": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00902": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00903": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00904": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00905": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00906": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00907": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00908": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00909": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00910": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00911": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00912": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00913": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00914": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00915": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00916": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00917": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00918": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00919": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00920": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00921": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00922": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00923": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00924": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00925": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00926": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00927": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00928": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00929": {
+      "t": 4,
+      "m": "divorced",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00930": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00931": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00932": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00933": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00934": {
+      "t": 4,
+      "m": "widowed",
+      "s": "retired",
+      "o": 0
+    },
+    "POP-00935": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00936": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00937": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00938": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00939": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00940": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00941": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00942": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00943": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00944": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00945": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00946": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00947": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00948": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00949": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00950": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00951": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00952": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00953": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00954": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00955": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00956": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00957": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00958": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00959": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00960": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00961": {
+      "t": 2,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00962": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00963": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00964": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00965": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00966": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00967": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00968": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00969": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00970": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00971": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00972": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00973": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00974": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00975": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00976": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00977": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00978": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00979": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00980": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00981": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00982": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00983": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00984": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00985": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00986": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00987": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00988": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00989": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00990": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00991": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00992": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00993": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00994": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00995": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00996": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00997": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-00998": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-00999": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01000": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01001": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01002": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01003": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01004": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01005": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01006": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01007": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01008": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01009": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01010": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01011": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01012": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01013": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01014": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01015": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01016": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01017": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01018": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01019": {
+      "t": 3,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01020": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01021": {
+      "t": 2,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01022": {
+      "t": 2,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01023": {
+      "t": 1,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01024": {
+      "t": 2,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01025": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01026": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01027": {
+      "t": 2,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01028": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01046": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01029": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01030": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01031": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01032": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01033": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01034": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01035": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01036": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01037": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01038": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01039": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01040": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01041": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01042": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01043": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01044": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01045": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01047": {
+      "t": 3,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01048": {
+      "t": 3,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01049": {
+      "t": 3,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01050": {
+      "t": 4,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01051": {
+      "t": 3,
+      "m": "",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01053": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01054": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01055": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01056": {
+      "t": 2,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01057": {
+      "t": 2,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01058": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01059": {
+      "t": 2,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01060": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01061": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01062": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01063": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01064": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01065": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01066": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01067": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01068": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01069": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01070": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01071": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01072": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01073": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01074": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01075": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01076": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01077": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01078": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01079": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01080": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01081": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01082": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01083": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01084": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01085": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01086": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01087": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01088": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01089": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01090": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01091": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01092": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01093": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01094": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01095": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01096": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01097": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01098": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01099": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01100": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01101": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01102": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01103": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01104": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01105": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01106": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01107": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01108": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01109": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01110": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01111": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01112": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01113": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01114": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01115": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01116": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01117": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01118": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01119": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01120": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01121": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01122": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01123": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 1
+    },
+    "POP-01124": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01125": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01126": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01127": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01128": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01129": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01130": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01131": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01132": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01133": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01134": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01135": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01136": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01137": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01138": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01139": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01140": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01141": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01142": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01143": {
+      "t": 4,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01144": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01145": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01146": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01147": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01148": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01149": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01150": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01151": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01152": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01153": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01154": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01155": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01156": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01157": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01158": {
+      "t": 4,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01159": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01160": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01161": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01162": {
+      "t": 3,
+      "m": "partnered",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01163": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01164": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01165": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01166": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01167": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01168": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01169": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01170": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01171": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01172": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01173": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01174": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01175": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01176": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01177": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01178": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01179": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01180": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01181": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01182": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01183": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01184": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01185": {
+      "t": 3,
+      "m": "divorced",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01186": {
+      "t": 3,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01187": {
+      "t": 3,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01188": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01189": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01190": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01191": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01192": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01193": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01194": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01195": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01196": {
+      "t": 4,
+      "m": "married",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01197": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01198": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01199": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01200": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01201": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01202": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    },
+    "POP-01203": {
+      "t": 4,
+      "m": "single",
+      "s": "active",
+      "o": 0
+    }
+  },
+  "citizenScoreboard": {
+    "cycle": 111,
+    "stamp": "Y3C7",
+    "linesThisCycle": 2759,
+    "outcomeLines": 6,
+    "counts": {
+      "married": 0,
+      "born": 1,
+      "promoted": 2,
+      "laidOff": 0,
+      "hired": 2,
+      "boughtHome": 0,
+      "soldHome": 0,
+      "forcedSale": 0,
+      "heritage": 1
+    },
+    "outcomes": {
+      "married": [],
+      "born": [
+        {
+          "popId": "POP-01197",
+          "name": "Rosa Zhou"
+        }
+      ],
+      "promoted": [
+        {
+          "popId": "POP-00280",
+          "name": "Jerald Jensen"
+        },
+        {
+          "popId": "POP-00488",
+          "name": "Rupert Ochoa"
+        }
+      ],
+      "laidOff": [],
+      "hired": [
+        {
+          "popId": "POP-01062",
+          "name": "Marisol Rivera"
+        },
+        {
+          "popId": "POP-01068",
+          "name": "Kai Tanaka"
+        }
+      ],
+      "boughtHome": [],
+      "soldHome": [],
+      "forcedSale": [],
+      "heritage": [
+        {
+          "popId": "POP-00001",
+          "name": "Vinnie Keane"
+        }
+      ]
+    },
+    "changes": null,
+    "note": "first persisted citizen-state snapshot — week-over-week changes start next Cycle"
+  },
+  "citizenStatesNote": "seeded after the fact from the live sheet between the C111 close and the C112 fire (engine.286 R2-3) — includes any post-fire hand or Intake writes"
 }

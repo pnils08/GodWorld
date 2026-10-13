@@ -311,6 +311,41 @@ function buildFixtureCtx() {
       errored.length > 0 ? `errored: ${errored.map(([k]) => k).join(',')}` : '');
   }
 
+  // ─── Test 12: citizen scoreboard (engine.286 R2-3) ───
+  // Outcomes are counted by citizen from this Cycle's stamped lines; the state
+  // diff reads the newest prior audit that persisted citizenStates.
+  console.log('\nTest 12: citizen scoreboard counts outcomes and diffs state');
+  {
+    const { buildCitizenScoreboard, buildCitizenStates, cycleStamp } = require('./engineAuditor');
+    const st = cycleStamp(111), old = cycleStamp(110);
+    assert('cycleStamp C111 = Y3C7', st === 'Y3C7', st);
+    const ledger = [
+      { POPID: 'S-1', First: 'Ana', Last: 'One', Tier: 3, MaritalStatus: 'married', Status: 'Active',
+        LifeHistory: [old + ' — [Wedding] married someone last week', st + ' — [Wedding] married Bo Two; a household begins in Temescal',
+          st + ' — [Promotion] Got the nod at X', st + ' — [Daily] walked the dog'].join('\n') },
+      { POPID: 'S-2', First: 'Bo', Last: 'Two', Tier: 4, MaritalStatus: 'married', Status: 'Active',
+        LifeHistory: [st + ' — [Home] sold the place in Uptown — $1 back', st + ' — [LifeEvent-Home-Down-L] Had to sell the house in Uptown'].join('\n') },
+      { POPID: 'S-3', First: 'Cy', Last: 'Three', Tier: 4, MaritalStatus: 'single', Status: 'Active',
+        LifeHistory: st + ' — [Home] paid $900 in property tax on the place in Rockridge' },
+    ];
+    const hh = [{ Status: 'active', HousingType: 'owned', Members: '["S-3"]' }];
+    const states = buildCitizenStates(ledger, hh);
+    assert('states: owner from an active owned household', states['S-3'].o === 1 && states['S-1'].o === 0);
+    const first = buildCitizenScoreboard(111, ledger, states, []);
+    assert('scoreboard: only this Cycle counted, one per citizen', first.counts.married === 1 && first.counts.promoted === 1 &&
+      first.counts.soldHome === 1 && first.counts.forcedSale === 1 && first.counts.boughtHome === 0, JSON.stringify(first.counts));
+    assert('scoreboard: a property-tax [Home] line is not an outcome', first.outcomeLines === 4 && first.linesThisCycle === 6, first.outcomeLines + '/' + first.linesThisCycle);
+    assert('scoreboard: no prior snapshot -> no diff, says so', first.changes === null && /first persisted/.test(first.note));
+    const priorStates = { 'S-1': { t: 4, m: 'single', s: 'active', o: 0 }, 'S-2': { t: 4, m: 'married', s: 'active', o: 1 }, 'S-3': { t: 4, m: 'single', s: 'active', o: 0 } };
+    const next = buildCitizenScoreboard(111, ledger, states, [{ cycle: 110, citizenStates: priorStates }]);
+    const c = next.changes;
+    assert('diff: tier 4 -> 3 is a tier-up; marriage, new owner, lost ownership', c.sinceCycle === 110 &&
+      c.tierUp.join() === 'S-1' && c.newlyMarried.join() === 'S-1' && c.becameOwner.join() === 'S-3' && c.stoppedOwning.join() === 'S-2' &&
+      c.tierDown.length === 0 && c.newCitizens.length === 0, JSON.stringify(c));
+    assert('auditOutput carries citizenScoreboard + citizenStates',
+      result.auditOutput.citizenScoreboard && typeof result.auditOutput.citizenStates === 'object');
+  }
+
   console.log('\n' + '═'.repeat(60));
   console.log(`${passed} passed, ${failed} failed`);
   process.exit(failed === 0 ? 0 : 1);

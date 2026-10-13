@@ -88,6 +88,8 @@ const SHEETS_TO_READ = [
   // initiative CONTRIBUTED this cycle, instead of inferring silence from a net
   // column delta that other drivers swamp.
   'Ripple_Ledger',
+  // engine.286 R2-3: who owns a home, for the citizen scoreboard's week-over-week diff.
+  'Household_Ledger',
 ];
 
 async function getCurrentCycle() {
@@ -176,6 +178,86 @@ function buildCitizenIncomes(ledger) {
   return out;
 }
 
+// engine.286 R2-3 (builder 2026-10-12: "rate and severity are the dials"; civic has
+// approval, citizens had nothing read back) — the citizen scoreboard. Counts the
+// Cycle's real outcomes by citizen, not lines emitted: what was stamped this Cycle
+// (LifeHistory cells are the full record; the log misses cell-only writers, A18), and
+// what changed in each citizen's state since the last audit that persisted one.
+const SCOREBOARD_TAGS = {
+  married: t => t === 'Wedding',
+  born: t => t === 'Birth',
+  promoted: t => t === 'Promotion',
+  laidOff: t => t === 'Career-Layoff',
+  hired: t => t === 'Career-Hired',
+  boughtHome: (t, text) => t === 'LifeEvent-Home-Up-L' || (t === 'Home' && /^bought the place/.test(text)),
+  soldHome: (t, text) => t === 'Home' && /^sold the place/.test(text),
+  forcedSale: t => t === 'LifeEvent-Home-Down-L',
+  heritage: t => t === 'Heritage',
+};
+function cycleStamp(cycle) {
+  return 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+}
+function buildCitizenStates(ledger, households) {
+  const owners = new Set();
+  for (const h of households || []) {
+    if (String(h.Status || '').toLowerCase() !== 'active' || String(h.HousingType || '').toLowerCase() !== 'owned') continue;
+    let mem = [];
+    try { mem = JSON.parse(h.Members || '[]'); } catch (e) { mem = []; }
+    for (const m of mem) owners.add(String(m).trim());
+  }
+  const out = {};
+  for (const r of ledger || []) {
+    const id = String(r.POPID || '').trim();
+    if (!id) continue;
+    out[id] = { t: Number(r.Tier) || null, m: String(r.MaritalStatus || '').toLowerCase(),
+      s: String(r.Status || '').toLowerCase(), o: owners.has(id) ? 1 : 0 };
+  }
+  return out;
+}
+function buildCitizenScoreboard(cycle, ledger, states, prior) {
+  const stamp = cycleStamp(cycle);
+  const outcomes = {};
+  for (const k of Object.keys(SCOREBOARD_TAGS)) outcomes[k] = [];
+  let lines = 0, outcomeLines = 0;
+  for (const r of ledger || []) {
+    const id = String(r.POPID || '').trim();
+    if (!id) continue;
+    const name = ((r.First || '') + ' ' + (r.Last || '')).trim();
+    const hit = {};
+    for (const line of String(r.LifeHistory || '').split('\n')) {
+      if (!line.startsWith(stamp + ' ')) continue;
+      lines++;
+      const m = line.match(/^\S+ — \[([^\]]+)\] ?(.*)$/);
+      if (!m) continue;
+      for (const [k, test] of Object.entries(SCOREBOARD_TAGS)) {
+        if (!test(m[1], m[2])) continue;
+        outcomeLines++;
+        if (!hit[k]) { hit[k] = 1; outcomes[k].push({ popId: id, name }); }
+      }
+    }
+  }
+  const counts = {};
+  for (const k of Object.keys(outcomes)) counts[k] = outcomes[k].length;
+  // Week-over-week: the newest prior audit that persisted citizen states.
+  const base = (prior || []).find(a => a && a.citizenStates && a.cycle < cycle);
+  let changes = null;
+  if (base) {
+    changes = { sinceCycle: base.cycle, tierUp: [], tierDown: [], newlyMarried: [], becameOwner: [], stoppedOwning: [], died: [], newCitizens: [] };
+    for (const [id, now] of Object.entries(states)) {
+      const was = base.citizenStates[id];
+      if (!was) { changes.newCitizens.push(id); continue; }
+      if (now.t && was.t && now.t < was.t) changes.tierUp.push(id);     // Tier 1 is the top
+      if (now.t && was.t && now.t > was.t) changes.tierDown.push(id);
+      if (now.m === 'married' && was.m !== 'married') changes.newlyMarried.push(id);
+      if (now.o && !was.o) changes.becameOwner.push(id);
+      if (!now.o && was.o) changes.stoppedOwning.push(id);
+      if (now.s === 'deceased' && was.s !== 'deceased') changes.died.push(id);
+    }
+  }
+  return { cycle, stamp, linesThisCycle: lines, outcomeLines, counts, outcomes, changes,
+    note: changes ? null : 'first persisted citizen-state snapshot — week-over-week changes start next Cycle' };
+}
+
 // S217 engine.16 Phase 2.7 — pure orchestration extracted from main() so the
 // integration test can feed a synthetic ctx without going through lib/sheets.
 // No behavior change: ailment detectors → enrichers → anomalies → briefs in
@@ -245,6 +327,15 @@ async function runEngineAudit(ctx) {
     Crime_Metrics: snapshot.Crime_Metrics || [],
   };
   const citizenIncomes = buildCitizenIncomes(snapshot.Simulation_Ledger || []);
+  const citizenStates = buildCitizenStates(snapshot.Simulation_Ledger || [], snapshot.Household_Ledger || []);
+  let citizenScoreboard = null;
+  try {
+    citizenScoreboard = buildCitizenScoreboard(cycle, snapshot.Simulation_Ledger || [], citizenStates, ctx.prior || []);
+    console.log('Citizen scoreboard: ' + JSON.stringify(citizenScoreboard.counts));
+  } catch (err) {
+    console.error(`  citizenScoreboard FAILED: ${err.message}`);
+    detectorVersions.citizenScoreboard = 'ERROR';
+  }
 
   const auditOutput = {
     cycle,
@@ -258,6 +349,9 @@ async function runEngineAudit(ctx) {
     detectorNotes: ctx.detectorNotes || [],
     snapshots: persistedSnapshots,
     citizenIncomes,
+    // engine.286 R2-3 — the Cycle's outcomes by citizen + the state the next audit diffs against.
+    citizenScoreboard,
+    citizenStates,
     // S215 civic.10c — orphan-ailment summary (HIGH-severity patterns with
     // neighborhoods lacking a district owner per Neighborhood_Map.District).
     orphanAilments: ctx.orphanAilments || { highImpactChecked: 0, orphanCount: 0, unmappedNeighborhoods: [], patterns: [] },
@@ -481,4 +575,4 @@ if (require.main === module && process.argv.includes('--hand-write-check')) {
   });
 }
 
-module.exports = { main, runEngineAudit, handWriteCheck };
+module.exports = { main, runEngineAudit, handWriteCheck, buildCitizenScoreboard, buildCitizenStates, cycleStamp };

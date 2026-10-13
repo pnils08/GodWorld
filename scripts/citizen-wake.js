@@ -260,7 +260,7 @@ async function voiceOnce(system, user) {
   const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://godworld.local' },
-    body: JSON.stringify({ model: 'deepseek/deepseek-chat', max_tokens: 260, temperature: 0.85, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
+    body: JSON.stringify({ model: 'deepseek/deepseek-v4-flash-0731', reasoning: { enabled: false }, max_tokens: 260, temperature: 0.85, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
   });
   const j = await r.json();
   if (j.error) throw new Error('voice: ' + (j.error.message || JSON.stringify(j.error)));

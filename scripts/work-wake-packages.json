@@ -11,7 +11,7 @@
     "models": {
       "reflect": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       }
     },
     "dutyDays": ["tue"],
@@ -32,7 +32,7 @@
     "models": {
       "reflect": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       }
     },
     "dutyDays": ["tue"],
@@ -53,7 +53,7 @@
     "models": {
       "reflect": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       }
     },
     "dutyDays": ["thu"],
@@ -74,7 +74,7 @@
     "models": {
       "reflect": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       }
     },
     "dutyDays": ["thu"],
@@ -95,7 +95,7 @@
     "models": {
       "reflect": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       }
     },
     "dutyDays": ["thu"],
@@ -115,7 +115,7 @@
     "models": {
       "reflect": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       }
     },
     "dutyDays": ["tue", "thu"],
@@ -135,7 +135,7 @@
     "models": {
       "reflect": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       }
     },
     "dutyDays": ["tue", "thu"],
@@ -176,7 +176,7 @@
     "models": {
       "reflect": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       }
     },
     "dutyDays": ["tue", "thu"],
@@ -197,7 +197,7 @@
     "models": {
       "reflect": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "deepseek/deepseek-v4-flash-0731"
       }
     },
     "dutyDays": ["tue", "thu"],

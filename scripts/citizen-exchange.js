@@ -79,7 +79,7 @@ async function generate(system, messages, maxTokens) {
   const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://godworld.local' },
-    body: JSON.stringify({ model: 'deepseek/deepseek-chat', max_tokens: maxTokens || 260, temperature: 0.85, messages: [{ role: 'system', content: system }, ...messages] }),
+    body: JSON.stringify({ model: 'deepseek/deepseek-v4-flash-0731', reasoning: { enabled: false }, max_tokens: maxTokens || 260, temperature: 0.85, messages: [{ role: 'system', content: system }, ...messages] }),
   });
   const j = await r.json();
   if (j.error) throw new Error('exchange: ' + (j.error.message || JSON.stringify(j.error)));

@@ -41,6 +41,10 @@ pointers:
 
 > (2026-10-12) "Civic is likely 10% and Citizens is likely 90%. Same with seeds from the engine, I'd say is 5-10% civic and 90-95% everything else." — "my point is civic is the least important part of the sim and makes up for almost all of the coverage." — "it's the same story written since c 89 yet the As manager gets hurt at work and no one covered it. The crons aren't covering the news, they are writing the same story over and over." — "The reason is there is very little civic to cover, no one is paying attention to it, it's what you're obsessed with pushing on me."
 
+> (2026-10-12, correcting rb's approach to the Carmen Delaine walk) "You're taking the wrong approach to that but we will do that work last, finish the smaller items and then we will look at the failed crons and the media will get its own session, we aren't changing them all to talk about citizens. We are graphing who they are what they cover and why. Maybe some of these will get a citizen angle but most won't so you have the approach wrong."
+
+**Reading (2026-10-12):** the media work is a MAP — who each reporter is, what they cover, why — not a conversion of every desk to citizen stories. Some seats will get a citizen angle; most will not. Do not propose a lane change per reporter (the Carmen walk proposed three, all citizen-leaning; the builder rejected the framing). Order: smaller builder-call items first, then the failed crons, then media in its own session, last.
+
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
 **Rows:** pipeline.73 · **Owner:** research-build with engine-sheet

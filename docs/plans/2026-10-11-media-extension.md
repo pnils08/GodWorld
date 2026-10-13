@@ -59,7 +59,7 @@ pointers:
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Walk each reporter with the builder: what they do and why — their purpose and their lane. Where it is not obvious, a deep canon search of what they have written decides who they are. Each row of the table below is filled from that walk, not before. | Mags + builder | not started |
+| 1 | Map the reporters (builder 2026-10-12: a map, not a conversion): for each of the 23, what they cover and why, taken from what they have actually written (deep canon search) and the voice file; fill the table below as evidence, then read it together with the builder for crossover, gaps and the week rotations. The table has 24 seat rows; the builder counts 23 journalists, so reconcile the count first (Bay_Tribune_Oakland roster vs the weekly grid vs the Fri/daily seats). | Mags + builder | not started |
 | 2 | With the builder: which slices citizens' lives make sense in. | Mags + builder | not started |
 | 3 | With the builder: who is the journalist that just reports on random citizens. | builder | not started |
 | 4 | Any code that follows from 1–3 gets wiring cards, blast-radius checks and a review before it changes. | es | not started |

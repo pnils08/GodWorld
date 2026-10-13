@@ -10,9 +10,9 @@
       "judgeNote": "The c101 scorecards above were produced by a gemini-3.5-flash judge. The default judge moved to gemini-3.7-flash on 2026-08-20 (infrastructure.7, cost). Scores produced under the new judge are NOT directly comparable to these — re-baseline the friction seats before reading a new scorecard against this assignment.",
       "frictionSeats": {
         "MAYOR-01": "moonshotai/kimi-k2 (S432 2026-09-06, builder-approved: mistral-large scored voice 10 at S343 but 13 provider errors + 6 grounding failures in the retained logs, halted the chain twice on 2026-09-06; kimi voice 9, 0 grounding, 0 provider errors)",
-        "OPP": "deepseek/deepseek-chat (civic.34 S431: qwen's grounding rate ~10x deepseek's)",
+        "OPP": "deepseek/deepseek-v4-flash-0731 (civic.34 S431: qwen's grounding rate ~10x deepseek's)",
         "CRC": "google/gemini-3.7-flash (S432: distinct family from OPP — builder rule 2026-09-06: different parties never share a model; already this chain's directive + sanity-read model)",
-        "IND": "meta-llama/llama-3.3-70b-instruct (S432: distinct family from the mayor; the newsroom's desk-writer model, proven for voice at volume)"
+        "IND": "meta-llama/llama-4-maverick (S432: distinct family from the mayor; the newsroom's desk-writer model, proven for voice at volume)"
       },
       "note": "S432 re-seat (builder rule 2026-09-06: different parties never share a model — same model = same voice; with a limited proven roster we work with what we've got): mayor=kimi, OPP=deepseek, CRC=gemini-3.7-flash, IND=llama-3.3-70b — 4 distinct families, all already paid for elsewhere in the pipeline. mistral (mayor) and qwen (OPP) retired for reliability/grounding, see civic.34 + the C106 gap log. First unattended Sunday chain is the proof for the two families new to the number gate (gemini, llama). Original S343 note: 4 distinct families across the friction seats. kimi->IND over CRC (9+7.5=16.5 beats 9.5+5=14.5 total). STAFF/projects/clerk -> deepseek (cheapest passing, matches all-desks-DeepSeek precedent S332). z-ai/glm-4.7 DROPPED: returned empty content on 3 of 4 offices."
     }
@@ -84,7 +84,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "COUNCIL-D2",
@@ -101,7 +101,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "meta-llama/llama-3.3-70b-instruct"
+      "model": "meta-llama/llama-4-maverick"
     },
     {
       "officeId": "COUNCIL-D3",
@@ -118,7 +118,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "COUNCIL-D4",
@@ -135,7 +135,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "meta-llama/llama-3.3-70b-instruct"
+      "model": "meta-llama/llama-4-maverick"
     },
     {
       "officeId": "COUNCIL-D5",
@@ -152,7 +152,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "COUNCIL-D6",
@@ -220,7 +220,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "STAFF-COS",
@@ -237,7 +237,7 @@
         "Initiative_Tracker"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "STAFF-DM-ECON",
@@ -254,7 +254,7 @@
         "output/world_summary_c{XX}.md §economy"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "STAFF-DM-COMM",
@@ -271,7 +271,7 @@
         "output/world_summary_c{XX}.md §neighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "STAFF-COMMS",
@@ -288,7 +288,7 @@
         "output/civic_sentiment_c{XX}.json"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "STAFF-LEGAL",
@@ -304,7 +304,7 @@
         "Initiative_Tracker"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "STAFF-MANAGER",
@@ -321,7 +321,7 @@
         "output/world_summary_c{XX}.md"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "STAFF-BAYLIGHT",
@@ -342,7 +342,7 @@
         "output/city-civic-database/initiatives/baylight/"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "CHIEF-POLICE",
@@ -359,7 +359,7 @@
         "neighborhood crime slices"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "CHIEF-FIRE",
@@ -375,7 +375,7 @@
         "output/world_summary_c{XX}.md §events"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "DCOP-OPS",
@@ -391,7 +391,7 @@
         "output/world_summary_c{XX}.md §crime"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "DCOP-COMM",
@@ -408,7 +408,7 @@
         "neighborhood sentiment"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "IAD-LEAD",
@@ -424,7 +424,7 @@
         "OARI initiative state"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "EMS-DIR",
@@ -440,7 +440,7 @@
         "output/world_summary_c{XX}.md §health"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "MED-EXAM",
@@ -456,7 +456,7 @@
         "LifeHistory_Log deaths"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "EMERG-DIR",
@@ -473,7 +473,7 @@
         "output/world_summary_c{XX}.md §events"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "ADA-MAJOR",
@@ -489,7 +489,7 @@
         "output/world_summary_c{XX}.md §crime"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "ADA-SAFETY",
@@ -506,7 +506,7 @@
         "OARI initiative state"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "DPD-DEPUTY",
@@ -522,7 +522,7 @@
         "output/world_summary_c{XX}.md §crime"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "COURT-LIAISON",
@@ -538,7 +538,7 @@
         "output/world_summary_c{XX}.md §crime"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "CPRB-CHAIR",
@@ -555,7 +555,7 @@
         "civic sentiment"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "OMBUDSMAN",
@@ -571,7 +571,7 @@
         "output/civic_sentiment_c{XX}.json"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "REENTRY-DIR",
@@ -587,7 +587,7 @@
         "output/world_summary_c{XX}.md §crime"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "officeId": "PLANNING-DIR",
@@ -604,7 +604,7 @@
         "output/world_summary_c{XX}.md §neighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     }
   ],
   "projects": [
@@ -619,7 +619,7 @@
         "West Oakland"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "projectId": "PROJ-OARI",
@@ -634,7 +634,7 @@
         "East Oakland"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "projectId": "PROJ-HEALTHCTR",
@@ -647,7 +647,7 @@
         "Temescal"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     },
     {
       "projectId": "PROJ-TRANSITHUB",
@@ -661,7 +661,7 @@
       ],
       "_note": "S344: ledger FullName corrected Eloise->Elena by Mike; the ledger veered back to Eloise; S516 ruling re-affirms Elena (agent files are the canon) and the ledger row reconciles to it",
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "deepseek/deepseek-v4-flash-0731"
     }
   ],
   "_projectsMeta": {

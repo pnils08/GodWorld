@@ -91,7 +91,10 @@ const modelFamily = slug => String(slug).split('/')[0];
 // the rule fired FATAL, no tracker write — and four rows would have read as
 // silence at the C107 fire (Mayor projected -16 in one cycle).
 const GATE_MODEL_CANDIDATES = [
-  'google/gemini-3.7-flash', 'mistralai/mistral-large', 'anthropic/claude-haiku-5.5', 'nousresearch/hermes-4-70b'
+  // builder 2026-10-12: newer and cheaper first. Anthropic is never a civic writer
+  // family, so Haiku 5.5 always clears the independence rule; mistral-large (2024,
+  // $2/$6 per MTok, picked every Cycle) stays only as a fallback.
+  'anthropic/claude-haiku-5.5', 'google/gemini-3.7-flash', 'mistralai/mistral-large'
 ];
 
 // Every manifest a chain stage writes. decide_c is the interactive-era name;

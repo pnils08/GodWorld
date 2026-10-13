@@ -5,7 +5,7 @@
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C111 (fired 2026-10-11 ~16:18 CDT, 0 errors, 148 s); next live fire C112, Sunday 2026-10-18.
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (44)** — each plan, its rows and the state each is in:
+**Plans in motion (45)** — each plan, its rows and the state each is in:
 
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, pipeline.71 ready, engine.287 live-observing, engine.288 live-observing, engine.289 blocked
@@ -33,7 +33,7 @@
 - [[../plans/2026-09-13-run-cycle-packages-the-world]]: pipeline.69 in-progress
 - [[../plans/2026-08-29-boot-doc-consolidation]]: governance.51 in-progress
 - [[../plans/2026-08-16-city-hall-nine-seat-table]]: civic.24 ready
-- [[../canon/INSTITUTIONS]]: canon.5 ready
+- [[../canon/INSTITUTIONS]]: canon.5 in-progress
 - [[../engine/archive/LEDGER_REPAIR_HOUSEHOLDS]]: engine.5 in-progress
 - [[../plans/2026-06-24-engine-output-canon-coverage]]: engine.41 ready
 - [[../plans/2026-07-07-citizen-intake-unification]]: engine.51 ready
@@ -43,6 +43,7 @@
 - [[../reference/DEPLOY_HISTORY]]: engine.213 in-progress
 - [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
+- [[../output/notebooklm-card-backup/pair-report.json]]: pipeline.72 ready
 - [[../research/2026-10-11-codex-engine194-cut]]: engine.194 live-observing
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
 - `docs/research/2026-10-08-codex-engine95-design.md`: engine.285 ready
@@ -135,7 +136,7 @@
 | engine.194 | Record-driven sentiment + game-night intensity LIVE PROD `ae9278aa` (codex cut: share = 0.5 × signed result vs expectation × reach, ±0.10; parser 72/72). C111 had no logged game week — pricing first reads on the first logged WeekRecord (Oaks open C112) | live-observing | engine-sheet | [[../research/2026-10-11-codex-engine194-cut]] |
 | engine.270 | Review 1 ruled 2026-10-08: build the anomaly tag (D1), no age on first-seen stages (D2), Task 7 step 1 attach pass. Queued, not dispatched (es on other work). Step 2 and the scorer rewire wait the C113 read | ready | engine-sheet | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Review 1 Disposition |
 | engine.285 | Phase-11 and executor kill hazards on every fire (LifeHistory trim clear-before-rewrite, BusinessArchive copy-then-delete, CitizenArchive skip-on-copy, MediaIntake mark-before-write, ensure-tab header, batch-append retry address). engine.95 shrinks exposure, does not fix them | ready | engine-sheet | `docs/research/2026-10-08-codex-engine95-design.md` §7 |
-| engine.286 | Life-event dice: Tasks 6 + 2 LIVE PROD `63754ca8`; C111 read: 19 civic-role (2 L: POP-00147, POP-00792), 24 promotion, 17 home lines, 0 repeats, 0 faults. Forced-sale rate LIVE 2026-10-12: `homeLossChance` .017 (1 per ~19 Cycles at 3 at risk; follows the at-risk count), read C112 expects ~0.05 sales a Cycle, 0 Phase5-HomeDie errors; then Tasks 11/3/5/7/8 (rb) | live-observing | research-build | [[../plans/2026-10-08-engine-286-game-of-life-events]] |
+| engine.286 | Life-event dice LIVE (`63754ca8`); forced sale .017 live; own-record wake `6489ab23`; scoreboard `c421b5d9`. Read at C112; wake-as-turn waits on the builder naming the game (N31/N32) | live-observing | research-build | [[../plans/2026-10-08-engine-286-game-of-life-events]] |
 | engine.20d | Initiative seeds on movement only in buildWorldSummary's civic lane. Released from the engine.270 wait 2026-10-08; spec only, no code yet. Not dispatched | ready | engine-sheet | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
 | engine.280 | Fandom dial follow-up (read-before §2.9) | ready | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
 | engine.104 | Mint economy: arrivals born with role-consistent salary, education, career stage; plan revision first, codex vets | ready | research-build | [[../plans/2026-08-10-economy-native-rebuild]] |

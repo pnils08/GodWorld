@@ -140,6 +140,12 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD config only — engine.286 `homeLossChance` .00625 → .017 (2026-10-12 ~20:30 CDT, engine-sheet; builder lifted auto mode for the write)
+- **Live sheet write, read back:** World_Config row 17 `homeLossChance` B .00625 → .017, C description matched to the seed in `c47dcc0b`. No clasp push; the code seed rides the next PROD stage.
+- **Proof:** the real `loadNeighborhoodState_` + `trackHomeOwnership_` run offline over a copy of live C111 state: 124 owned, 5 savings-covered, 3 at risk, 0 errors; 2000 seeded trials each: .00625 → .0215 sales/Cycle, .017 → .0525 (1 per 19). Rate = 1 − 0.95^(1/n); n moves (HH-0084-169 Lake Merritt is ~$1.2k from n=4).
+- **Expectation at C112 (Sunday 2026-10-18):** forced sale ~0.05 a Cycle — none is the normal outcome; 0 `Phase5-HomeDie` Engine_Errors.
+- **Rollback:** set World_Config `homeLossChance` back to .00625.
+
 ### PROD stage 4 (`9687e42f` applyBusinessDynamics.js over PROD ae9278aa) — G-EC50 per-institution settle log line (2026-10-11 ~21:10 CDT, engine-sheet)
 - **LANDED 2026-10-11** before the C112 live fire (Sun 2026-10-18). Fresh PROD pull byte-equal to `output/engine-sheet/stage3.sha256` (no drift), one file over it (`phase05-citizens/applyBusinessDynamics.js` at `9687e42f`); stage hash `output/engine-sheet/stage4.sha256`; pull-back 167 js + manifest byte-identical (`push-stage4-prod.DONE`). Log-only: no write, no config, no sheet replay.
 - **Bench proof:** 1004 @23 from the @22 stage-3 state at C112: fire `&expect=112` → ok 164.4 s, 487 intents, 0 persist errors, EE 4 → 4, cycleCount 113 (`output/engine-sheet/2026-10-11-stage4-bench-c113-@23.json`). Logger lines are not in the fire JSON; the proof is "runs clean", the numbers come off the live execution log.

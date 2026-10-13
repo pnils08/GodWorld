@@ -91,6 +91,13 @@ pointers:
 
 *Cautions from the data:* PRESS replies are 32% of all pages, so reporters' interviews already generate part of what the pulse counts; the pulse excludes MEDIA-clock pages for that reason (`buildPulseSlice.js` header), and a seat reading pages should do the same. The pulse is colour, never a published statistic (its own rule). A new seat needs a minted journalist citizen (ledger row, MEDIA clock) — not decided, builder's.
 
+*Wiring card for adding one beat-slice seat (subagent read 2026-10-13, Celeste and Marbury as worked examples; the grid, both builder maps and Celeste's lines spot-checked by rb):*
+- **Must add, by slug (nothing picks these up):** wake-package entry `scripts/newsroom-wake-packages.json` (also the live model route and the Rhea profile); a week-grid slot `scripts/newsroom-fanout.js:47`; the builder map in BOTH `scripts/newsroom-fanout.js:~700` and `scripts/cron-desk-run.js:~58` (two copies, easy to miss); `BEAT_NAME_RE` and `beatSlugForName` in `cron-desk-run.js:61–77`; `scripts/persona-map.json` (cron-desk-run throws if missing; `beatDomain` must be a Domain_Tracker column); a new `scripts/build<Seat>Slice.js` on `beatSliceKit`; the voice files under `.claude/agents/<slug>/`; then the hard-coded counts in `scripts/newsroomWakePackages.test.js` and the per-seat model asserts in `cronDeskFanoutHandoff.test.js`.
+- **Also:** the journalist's ledger row lives in the Sheets (not in the repo; engine-sheet's hand), plus roster lookups (`utilities/rosterLookup.js`, `schemas/bay_tribune_roster.json`).
+- **Optional or by-name:** stance line `cron-desk-run.js:~868`, a writer stance, `desk-model-map.json`, `desk-approach-map.json`, `gradeEdition.js` desk list (Celeste is absent there), docs index entries.
+- **Automatic:** the Rhea gate, the daily rota, edition ratings and the crontab (generic, no per-seat entry).
+- **Read:** a new seat reads from a slice built on the dumped pages (`output/citizen_pages/index.jsonl`), so no new sheet tab is needed unless the builder wants one.
+
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
 **Rows:** pipeline.73 · **Owner:** research-build with engine-sheet

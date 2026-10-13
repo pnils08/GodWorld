@@ -252,7 +252,7 @@ var ENGINE286_CONFIG_SEEDS = [
   ['lifeEventPromotionDrop', 0.5, 'engine.286 life events: promotion-queue wait multiplier while a medium setback holds (above 0 — a zero would read as no drop)', 0.05, 1, false],
   ['lifeEventPromotionOwnChance', 0.05, 'engine.286 life events: per-Cycle chance a citizen holding a medium break gets the raise through the writer', 0, 1, false],
   ['lifeEventHomeRollBoost', 3, 'engine.286 life events: multiplier on a qualified household\'s home-buying roll the Cycle a medium home break lands', 1, 20, false],
-  ['homeLossChance', 0.00625, 'engine.286 life events: per-Cycle chance an at-risk owned household (over lifeEventHomeCarryBar, or a default mark) is forced to sell — a standing risk beside the weekly dice, about one sale in 20 Cycles citywide at 8 stretched households', 0, 0.5, false],
+  ['homeLossChance', 0.017, 'engine.286 life events: per-Cycle chance an at-risk owned household (over lifeEventHomeCarryBar and savings short of the financed share, or a default mark) is forced to sell — a standing risk beside the weekly dice. Builder 2026-10-12: one sale in 20 Cycles citywide; at n at-risk households p = 1 - 0.95^(1/n) (n=3 at C111: .017); the rate rides n', 0, 0.5, false],
   ['lifeEventHomeCarryBar', 0.5, 'engine.286 life events: an owned household is at risk of a forced sale when its own payment plus property tax exceeds this share of HouseholdIncome, or a member carries a default mark', 0.1, 1, false]
 ];
 

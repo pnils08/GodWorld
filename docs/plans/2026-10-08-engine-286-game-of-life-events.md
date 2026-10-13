@@ -1,7 +1,7 @@
 ---
 title: engine.286 — events that are the game the crons play
 created: 2026-10-08
-updated: 2026-10-11
+updated: 2026-10-12
 type: plan
 tags: [engine, citizens, crons, draft]
 sources:
@@ -42,7 +42,7 @@ pointers:
 
 **Builder's words (2026-10-11, verbatim selections — the same four calls, answered in the es seat):** (1) "Keep it rare" — "Scale the job-loss and promotion dice down so they stay rare, closer to a few a year citywide. Smaller moments (a good or bad week at work) still happen every week." (2) "Over half" — "Only the 8 truly stretched households are at risk. Losing a house stays rare and always has a reason." (3) "Own small chance" — "A medium good week gives the citizen a small personal shot at a real raise, so it can actually matter." (4) "Keep them out" — "Their jobs are their roles and are authored by hand. The dice only touch everyday working citizens." es reading: (1) agrees with the rb-seat ruling — the .05 / .08 / .01 seeds stand; (2) the explicit pick is the 50% bar (8 owned households at C110), which supersedes the rb-seat 30% reading of "the idea is rarity on these" — `HomeCarryBar` .50; (3) RULED — M promotion gets a small own roll at the writer over the 2-Cycle window; (4) RULED — the writer's boundary stays.
 
-**Builder's words (2026-10-11, verbatim selection — codex F4, the forced sale vs the size order):** "Sale is its own thing" — "Treat the forced sale as a standing risk a stretched mortgage carries, outside the weekly dice and their size order. Rate stays about once every 20 weeks. The size rule keeps governing everything else." es reading: `homeLossChance` (.00625 per at-risk owned household per Cycle) is a ruled exception to R5's S ≥ M ≥ L for the owner path; every weekly ladder keeps the order structurally (`civicRoleBands_`).
+**Builder's words (2026-10-11, verbatim selection — codex F4, the forced sale vs the size order):** "Sale is its own thing" — "Treat the forced sale as a standing risk a stretched mortgage carries, outside the weekly dice and their size order. Rate stays about once every 20 weeks. The size rule keeps governing everything else." es reading: `homeLossChance` (per at-risk owned household per Cycle; .00625 when ruled, .017 live from 2026-10-12 so the citywide rate lands near 1 in 20 Cycles) is a ruled exception to R5's S ≥ M ≥ L for the owner path; every weekly ladder keeps the order structurally (`civicRoleBands_`).
 
 **Builder's words (2026-10-11, verbatim — on the forced-sale arithmetic, one in ~600 Cycles at the seeds):** "work with es so its more like 1 every 20 cycles". rb reading: the TARGET is the ruling — a forced home sale about once in 20 Cycles citywide (≈ 0.05 a Cycle) at the over-half bar (8 stretched households at C110), i.e. ≈ 1 in 160 per stretched household per Cycle; the mechanism is es engineering. The rate rides the stretched count — more stretched households, more sales — which is the sim speaking (drift over static). Bench-read against the target.
 
@@ -291,6 +291,18 @@ Every correction in the codex plan review, and where it landed. `folded` = chang
 | R4 | **No engine-born citizen starts protected.** Births, intake hires and the two GC spouse mints write explicit `no/no/no`. A protected seat is authored by hand or by the authored seat path, never inferred from a parent or a job title. A future mint path that must certify one names its field then. The 81 blank rows stay a separate hand-reviewed action (N14). | Task 8 exception closed | `createChildRow_`, `processAdvancementRowsBody_`, `processGCCourtship_`, `processGCMarriageLottery_` (A28) |
 | R5 | **Text follows weight** (ruled the same day on Task 6): a larger event carries more weight and lower probability than a small, and reads larger — band-keyed ECL pools. Applies to every kind added under R1. | Tasks 2, 4 content contract | `civicRolePickText_` pattern (`98b56fc0`) |
 
+## Review 2 — engine-sheet plan read, 2026-10-12 (findings folded by rb; es made no plan edits beyond its own N31 row)
+
+| # | Finding | Disposition | Owner |
+|---|---------|-------------|-------|
+| R2-1 | No task owns the wake-as-turn. Goal says the engine supplies the world, not the moves; N12/N29 gate wake work; A15 bounds the wake to dials; N31 (builder 2026-10-12) says the wake is the citizen's turn, a hard game, never a menu. Tasks 1–12 are all engine-side. | ACCEPTED. A wake-as-turn task is added when es's wake-as-turn plan lands (builder: es is formulating it); until then Tasks 11/3/5/7/8 are not extended for it. | es plan, rb folds |
+| R2-2 | Acceptance 2 ("a missed or declined opportunity is reachable") assumes agency no citizen has: nothing can be declined. | ACCEPTED. Read it as "missed" only until the wake-as-turn task exists; "declined" returns with it. | rb |
+| R2-3 | No scoreboard. engine_review_c111 counts lines emitted (19 civic-role / 24 promotion / 17 home), not outcomes per Cycle: marriages, births, purchases, forced sales, promotions, layoffs, tier-ups, heritage entries. Rate and severity are the dials; civic has approval, citizens have nothing read back. | ACCEPTED. Engineering, inside the existing engine review (no new file). Readable at the C112 fire. | es |
+| R2-4 | Almost nobody plays: 94 wakes and 69 citizens in a month, 61 woke once, the 4 voiced pillars took ~22; pool 237 of ~1,032. "Wakes build on wakes" needs repeat turns. | RECORDED as a constraint on the wake-as-turn design; no change now. | es / rb |
+| R2-5 | Existing levers, code-read (cites in N31): bond nudge ±0.25/wake cap 0.5/Cycle on existing bonds only (an unknown pair returns 'missed', so no wake or exchange can introduce strangers; romance at 8 marries); exchange writes intake + bond counterpart; resolve → posture push → climb → engine.260 civic-openings mover pool (a job lever; sets the casino drive factor); newsroomSourcing reads reflection docs. reflection → quote → citation → Tier is UNTRACED. | RECORDED. Money and jobs are the missing levers (a house follows money). | es |
+| R2-6 | The player can't see the board: the payload carries no Tier, NetWorth or rent stress by ruling ("NEVER an engine number"), against a "game an AI must fight." | BUILDER QUESTION, not a recommendation: the ruling and N31 pull against each other. Put to the builder when the wake-as-turn plan is read. | builder |
+| R2-7 | Stale: Task 10/12 say "not started" though codex reviewed and suites ran; P4/P5/P6 are proven by the Task 2 bench and were never moved to Agreed; line 45 carried .00625; frontmatter date. | Line 45 and the date FIXED here. Task 10/12 state and P4–P6 → Agreed need es's evidence per row; es flips them with the evidence, not rb on a relay. | es |
+
 ## Changelog
 
 - 2026-10-08 (research-build) — Created: merges the rb read-before and codex's independent run into Agreed / Needs proof / New concepts with pointers; engine.284 folded in; builds on engine.67.
@@ -325,3 +337,4 @@ Every correction in the codex plan review, and where it landed. `folded` = chang
 - 2026-10-12 (engine-sheet) — N31 amended with the builder's pushback (a game for an AI to fight, not a choice menu) and the code-read of the levers a wake already pulls: bond nudge → romance → marriage at 8, dials, newsroom sourcing; no money or job lever.
 - 2026-10-12 (engine-sheet) — N31: builder's closing frame recorded — the citizen wake is the civic game's twin (approval keeps a seat; family, home, job, tier, Heritage are a citizen's score); wakes build on wakes, the engine's random events knock them off.
 - 2026-10-12 (engine-sheet) — N31 corrected: a wake's resolve does reach jobs (posture push → `climb` → the civic-openings mover pool); wake reach measured (94 wakes / 69 citizens a month, 61 once).
+- 2026-10-12 (research-build) — Review 2 folded from es's plan read (R2-1..R2-7); .00625 on line 45 corrected to the live .017; builder question R2-6 recorded (payload hides the board vs 'a game an AI must fight').

@@ -13,48 +13,53 @@ Mechanical sub-steps (5):
 ========================================================================
 
 --- [1/5] session summary → Supermemory (best-effort) ---
-⚠ session-summary bridge skipped: no session summary rows found for this session (claude-mem may not have captured it yet)
+✓ session log → Supermemory [session-logs] doc CVwsZHd12d9XEhAuY8fnQ8 (2698 chars, 5 summary rows folded)
 
 --- [2/5] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-10-11T21:57:44.779Z
-  Plans scanned: 138
+  Generated: 2026-10-14T05:06:03.490Z
+  Plans scanned: 139
   No frontmatter: 7
   No changelog: 8
-  No status-verb match: 121
+  No status-verb match: 122
   Drifts found: 0
   
   No plan-tag drift detected.
   ✓ no drift detected
 
 --- [3/5] ROLLOUT conformance lint (informational) ---
-  # rolloutSweep — APPLY
-  
-  Would move 2 rows:
-    - engine.282  [engine-sheet]
-    - engine.283  [engine-sheet]
-  
-  APPLIED.
-    ROLLOUT_PLAN:    147 → 145 lines (-2)
-    ROLLOUT_ARCHIVE: 1983 → 1992 lines (+9)
-    Rows moved: 2
-  ROLLOUT LINT: 5 non-conforming row(s) — state-cell breaks the sweep, or item cell over the 280-char pointer budget:
-    L93 engine.95: item cell 340 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L97 engine.273: item cell 417 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L98 engine.193: item cell 527 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L132 engine.203d: item cell 474 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L133 engine.194: item cell 436 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+  ROLLOUT LINT: 1 non-conforming row(s) — state-cell breaks the sweep, or item cell over the 280-char pointer budget:
+    L94 engine.214: item cell 364 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
   ROLLOUT OVERDUE: 1 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
-    L99 pipeline.70: latest Cycle named C110, live is C111
+    L103 research.27: latest date named 2026-10-12, today is 2026-10-14
 
 --- [4/5] cross-terminal git stack check (read-only) ---
-  ⚠ 5 unpushed commit(s) ahead of origin/main:
-    85f87a00 cron-saturday-run: Pulse title/narrator clock reads the in-world calendar (Y = ceil(cycle/52), C = cycle-of-year) instead of a hard-coded 'Y2C' — C103–C110 editions were titled Y2C1xx; C111 Pulse will read Y3C7 (builder-confirmed 2026-10-11)
-    34cb87c0 C110 Cycle Pulse edition text + its NotebookLM canon-source registration (cron output, landed by engine-sheet at Mike's ask)
-    91de9ccb cron-lore-run: snapshot quarantine one level down so per-citizen subfolders mirror to Drive
-    b6128100 C111 true-up: institutions row = direction yes / magnitude unverified (AC Transit flat, City +0.01 → G-EC50 MED), civic-role sentences deduped 19/19, engine.94 C111 read + engine.201 resnap landed; ROLLOUT rows 95/193/203d/194/286/94/201 trued to the live read [engine-sheet]
-    442e32f7 C111 run-cycle: live fire read (stage 3 + engine.286 + engine.95 every expectation met), review, world summary, gap log G-EC1–57; engine.282/283 done-pending-archive [engine-sheet]
+  ⚠ 24 unpushed commit(s) ahead of origin/main:
+    4a975a0b pipeline.73: run-order table, true page and life-event counts (corrects 77), wake capacity, Ines draft [research-build]
+    fa6ba43e pipeline.73: Tamsin covers the day's citizens, daily, no repeats (covered list); Nia is the daily-on-top model [research-build]
+    f9d09d2f engine.214 pair: accepted codex review filed to docs/research, cites updated; trigger-inventory gap named [engine/sheet]
+    8c84c9a3 SESSION_CONTEXT: unpushed count points at git, not a number that goes stale [engine/sheet]
+    0b1bcc91 engine.214 pair declared: stage 4 vs stage 5 on frozen BASELINE-1004-C111, C112 CitySentiment 0.07 -> 0.13, hood mean +0.185 [engine/sheet]
+    c8a08f2a pipeline.73: Tamsin Pruitt voice sketch (Lives) for builder read [research-build]
+    e5e2a172 pipeline.73: journalists chosen — Tamsin Pruitt (Lives), Ines Sorensen (Voices) [research-build]
+    ae54b260 pipeline.73: builder ruling — Lives first, Celeste trending, lives-and-voices desk, life events reward a wake; wake gap read from citizen-wake [research-build]
+    2eb7cf0a pipeline.73: citizen coverage — three streams (occurrences, ambient log, voices), the people barely overlap; trending split and seat count drafted [research-build]
+    74402914 pipeline.73: wiring card for adding a beat-slice seat recorded (Task 4) [research-build]
+    81488b06 pipeline.73: citizens' side drafted — what exists to cover (pages, exchanges, digest, pulse) and two-job draft for the builder [research-build]
+    cd61442b engine.214 pair: codex procedure review folded into the bench pointer — frozen C111 image for both legs, guard 0 after each reset, clearfire 114 then 112, state-aware checkpoint clear, deployment id verified @24, carry-diagnostic gate on A [engine/sheet]
+    519b34e5 pipeline.73: builder scope — sports-subject exclusion lifted at every call site; Task 4 first item set [research-build]
+    65e1b520 pipeline.73: builder ruling recorded — citizens are citizens, no privacy; sports-subject exclusion blast radius mapped, change routed to Task 4 [research-build]
+    b33232a6 pipeline.73: builder's map framing recorded — seat = engine system + citizens it touches, crossover = the city, Seymour vs health-slice sports rule, slices two weeks old, citizens' side likely 1-2 new seats [research-build]
+    838875ed engine.214 pair: codex procedure-review task filed; bench reset to live C111 (84/84 tabs, cycleCount 111 read back) [engine/sheet]
+    1c5fcbb2 pipeline.73 map: why Carmen and Luis get one repeating item — tie-break by list position, no memory of prior cycles (C111 slice read) [research-build]
+    3e3f2e17 pipeline.73 map: rebuilt as one entry per journalist — beat, slice, what the slice tells them to write, what they wrote [research-build]
+    8ae7576a pipeline.73 map: what each seat's slice tells it to write — all 24 seats, verbatim from the latest run files [research-build]
+    ac3eedca pipeline.73 map: politics seats — what each is actually handed, from the latest run files [research-build]
+    6257a133 pipeline.73 walk: civic = the politics seats (Carmen, Luis, Jax), builder correction recorded [research-build]
+    791fb567 pipeline.73 walk: civic desk — builder's lead-voice ruling recorded, approval lever and civic seat days checked in code [research-build]
+    7ac85471 pipeline.73: builder's walk method recorded — one seat or desk at a time; sports overlap read at the sports desk [research-build]
+    f4879219 pipeline.73 Task 1: reporter map filled — 24 seats, slice, stated purpose, what each wrote, crossover, gaps [research-build]
   Model decision: push if all yours, hold if other terminals stacked.
 
 --- [5/5] pm2 restart ---

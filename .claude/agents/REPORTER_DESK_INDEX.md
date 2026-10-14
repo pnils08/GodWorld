@@ -47,8 +47,8 @@ These reporters map 1:1 to a desk agent. Voice file's `**Desk:**` header is cano
 | Selena Grant | `docs/media/voices/selena_grant.md` | `selena-grant` (solo) | Oaks beat — roster construction, player development, the expansion front office (pipeline.67) |
 | Talia Finch | `docs/media/voices/talia_finch.md` | `talia-finch` (solo) | Oaks from the street — bars, platforms, who is deciding to become a fan (pipeline.67) |
 | Celeste Tran | `docs/media/voices/celeste_tran.md` | `celeste-tran` (solo) | Social trends — culture-record mentions, new arrivals, neighborhood movement (Friday WEEK_GRID seat) |
-| Tamsin Pruitt | `docs/media/voices/tamsin_pruitt.md` | `tamsin-pruitt` (solo, agent folder pending step 3) | Lives — the cycle's person events as news, Mon–Fri (pipeline.73; mints C112) |
-| Ines Sorensen | `docs/media/voices/ines_sorensen.md` | `ines-sorensen` (solo, agent folder pending step 4) | Voices — citizens' own wake pages and exchanges, verbatim, Wed–Sun (pipeline.73; mints C112) |
+| Tamsin Pruitt | `docs/media/voices/tamsin_pruitt.md` | `tamsin-pruitt` (solo) | Lives — the cycle's person events as news, Mon–Fri (pipeline.73; mints C112) |
+| Ines Sorensen | `docs/media/voices/ines_sorensen.md` | `ines-sorensen` (solo) | Voices — citizens' own wake pages and exchanges, verbatim, Wed–Sun (pipeline.73; mints C112) |
 | Letters | (anonymous slate) | `letters-desk` | Citizen letters reacting to the edition |
 
 ## Beat-axis routing (multi-desk reporters)

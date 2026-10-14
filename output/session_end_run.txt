@@ -13,12 +13,12 @@ Mechanical sub-steps (5):
 ========================================================================
 
 --- [1/5] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc CVwsZHd12d9XEhAuY8fnQ8 (2698 chars, 5 summary rows folded)
+✓ session log → Supermemory [session-logs] doc CVwsZHd12d9XEhAuY8fnQ8 (2766 chars, 29 summary rows folded)
 
 --- [2/5] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-10-14T05:06:03.490Z
+  Generated: 2026-10-14T22:05:33.361Z
   Plans scanned: 139
   No frontmatter: 7
   No changelog: 8
@@ -29,13 +29,43 @@ Mechanical sub-steps (5):
   ✓ no drift detected
 
 --- [3/5] ROLLOUT conformance lint (informational) ---
-  ROLLOUT LINT: 1 non-conforming row(s) — state-cell breaks the sweep, or item cell over the 280-char pointer budget:
-    L94 engine.214: item cell 364 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+  ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.
   ROLLOUT OVERDUE: 1 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
     L103 research.27: latest date named 2026-10-12, today is 2026-10-14
 
 --- [4/5] cross-terminal git stack check (read-only) ---
-  ⚠ 24 unpushed commit(s) ahead of origin/main:
+  ⚠ 55 unpushed commit(s) ahead of origin/main:
+    21a7655e S557 session-end: PIN bump, pipeline.73 ROLLOUT row says what was built and what waits on the mint [research-build]
+    c859e927 pipeline.73: hourly wakes shut off at the builder's word; the Sunday landing waits on the POPID message [research-build]
+    a7bd855a pipeline.73: desk index rows no longer say the agent folders are pending [research-build]
+    fce213f7 S557 NEXT[research-build]: pipeline.73 steps 1–4 landed, waiting on the C112 mint for the POPID registrations [research-build]
+    6e49d46b NEXT[engine-sheet]: POPIDs go to the plan + rb after the C112 mint; Ines first run Wed 10-21 [engine/sheet]
+    e84086cb pipeline.73 steps 3–4: Tamsin Pruitt Lives slice + Ines Sorensen Voices slice, tests, agent folders, builder maps, weekend page refresh [research-build]
+    d4cf9a49 NEXT[engine-sheet]: C112 readback carries the journalist mint, roster rows, first lived wakes [engine/sheet]
+    f94a7be3 pipeline.73 step 2: codex impl review folded — one-generation dump publish, positive stamp before reads, input columns checked, six slice versions bumped, athlete debt-default + pulse tests [engine/sheet]
+    74cb3c3a pipeline.73 step 2: codex implementation review task [engine/sheet]
+    14ea6999 pipeline.73 step 2: LifeHistory_Log window + Lived_Events in the beat dump; sportsSubject lifted at all eight sites [engine/sheet]
+    1570002d pipeline.73 step 2: codex card review task [engine/sheet]
+    a896e8ce pipeline.73 step 2 wiring card: LifeHistory_Log window + Lived_Events rows into the beat dump, sportsSubject lift at all eight sites (engine already gates GAME from court and default), roster rows after the C112 mint [engine/sheet]
+    934380cf PROD stage 4c recorded: PIN, bench pointer @26, deploy history [engine/sheet]
+    7244a45e pipeline.73 step 1: codex impl review folded — fixed voice sentences, ordered survivors, unique receipts, household across wakes; PROD = stage 4c, journalists queued on live [engine/sheet]
+    ede37a96 pipeline.73: builder's overnight direction recorded — hourly wakes, stage passing seats for the 10-15 run, no approval-prompt waits between lanes [research-build]
+    63ade2f8 pipeline.73 mint flags: an unreadable flag is logged and left blank, never thrown [engine/sheet]
+    82423601 pipeline.73 step 1: codex implementation review task [engine/sheet]
+    4681760d pipeline.73 step 1: the lived wake slot — news-grade life events wake their citizen the week they happen [engine/sheet]
+    47315ba5 pipeline.73 mint flags benched: stage 4b (PROD + 8d449968) on 1004 @25, C112 off BASELINE-1004-C111 ok, Tamsin Pruitt POP-01211 / Ines Sorensen POP-01212 minted MEDIA + MED yes + BIZ-00018 (bench ids); PROD push script, dry run green [engine/sheet]
+    a0df04e0 pipeline.73: builder passed both voices — Tamsin Pruitt and Ines Sorensen voice files land, desk index registered, steps 3–4 gate now steps 1–2 [research-build]
+    8d449968 pipeline.73 mint door: CIV/MED/UNI intake flags reach the new ledger row beside ClockMode; engine employer rules synced to the mapping's 10-11 station rules [engine/sheet]
+    7f2f2d4d pipeline.73: Ines Sorensen voice sketch drafted for the builder (exemplar from a live C111 wake page) [research-build]
+    75ba8ce7 pipeline.73 step 1: builder rulings (floor lifted for news-grade, death = survivor's wake, mint carries flags) + mint facts for Tamsin and Ines [research-build]
+    0f5c9842 pipeline.73 step 1: codex review task for the lived-wake wiring card [engine/sheet]
+    1df8749e pipeline.73 step 1 card: tag set from the writers (Recovering is texture unless the hospital text), household dedupe, dry-run rule, mint via Advancement_Intake1 ClockMode, disposition samples for the floor call [engine/sheet]
+    aabed292 pipeline.73 step 1 wiring card: lived wake slot + journalist mint, read from code and live C108–C111 [engine/sheet]
+    79a22a8d S556 soft close: NEXT[research-build] — pipeline.73 citizen seats, es step 1 out [research-build]
+    6cc471cb pipeline.73: schedule approved; build order recorded [research-build]
+    9268bb66 pipeline.73: schedule revised — Tamsin Mon-Fri (needs the cycle slice), Ines Wed-Sun incl. Sunday (pages, not the dump) [research-build]
+    c3fc4ab0 S556 session-end persistence rotation [engine-sheet]
+    5552078a pipeline.73: wake rule (news-grade only) and schedule — Tamsin Sun-Thu, Ines Wed-Sun; grid keyed by weekday; Sunday-after-fire timing open [research-build]
     4a975a0b pipeline.73: run-order table, true page and life-event counts (corrects 77), wake capacity, Ines draft [research-build]
     fa6ba43e pipeline.73: Tamsin covers the day's citizens, daily, no repeats (covered list); Nia is the daily-on-top model [research-build]
     f9d09d2f engine.214 pair: accepted codex review filed to docs/research, cites updated; trigger-inventory gap named [engine/sheet]

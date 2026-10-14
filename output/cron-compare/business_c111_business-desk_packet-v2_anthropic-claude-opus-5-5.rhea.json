@@ -1,0 +1,79 @@
+{
+  "draft": "output/cron-compare/business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c8f47884193e4037bfe54eeeda194bfe1563f0e7811356dd7ca2e1e5dced8e10",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, citizen profiles align with ledger records, and economic texture remains strictly within authorized profile bounds.",
+  "review": {
+    "profileId": "jordan-economic-labor-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-1",
+    "manifestId": "AM-299ee10b1a6f",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "501",
+          "000"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Blair Patel",
+      "Briar Soto",
+      "Bruce Wright",
+      "Dmitri Soto",
+      "Elena Leon",
+      "Elle Lilo",
+      "Guadalupe Lee",
+      "Guadalupe Lupe",
+      "Hector Leech",
+      "Jalen Hill",
+      "Jordan Velez",
+      "Marguerite Salcedo",
+      "Quynh Le",
+      "Tomas Renteria",
+      "Travis Golin",
+      "Trenton Nawan",
+      "Valentina Campbell",
+      "Yuki Ji"
+    ],
+    "unverified": [
+      "Anchor Build",
+      "Blue Lantern Bar",
+      "Business Reporter",
+      "Gold Tavern",
+      "Harborline Grill"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0107,
+  "durationMs": 7211,
+  "parseError": false,
+  "ranAt": "2026-10-12T23:16:22.362Z"
+}

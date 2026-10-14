@@ -1,0 +1,569 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00503",
+    "name": "Rose Delgado",
+    "role": "City Council District 3",
+    "officeId": "COUNCIL-D3",
+    "district": "D3",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d3",
+    "initiative": null,
+    "dials": {
+      "approval": 62
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "Preliminary schematics community review"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 30,
+    "label": "Fruitvale Transit Hub Phase II — Visioning — Preliminary schematics community review",
+    "lever": "Preliminary schematics community review",
+    "hood": "Fruitvale",
+    "initiative": "INIT-003",
+    "vsCity": {
+      "sentiment": 0.52,
+      "citySentiment": 0.34,
+      "crime": 0.63,
+      "cityCrime": 0.5827272727272726,
+      "heat": -17.054545454545455,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "Preliminary schematics community review",
+    "lineFacts": [
+      "approval 62",
+      "Fruitvale Transit Hub Phase II — Visioning is in design-phase; budget $230M — C107: Merchant covenants executed, design RFP published with community-informed requirements\nC108 conversion: no council passage on record (VoteCycle 94, Outcome COMPLETED, Status visioning-complete) — enters petition-pending; history…",
+      "due: Preliminary schematics community review",
+      "Fruitvale crime: property 36, violent 27, incidents 5 (cycle 111) — city property 35.2, violent 23.8, incidents 6.4",
+      "Fruitvale: sentiment 0.52 vs city 0.340; crime index 0.63 vs city 0.583; retail 10.55; housing pressure 4.5; growth; momentum 10"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC110 - answer CONF-108-civic-office-council-d3: awaiting the Sunday fold\nNo applied or failed outcome in the available ledgers.",
+      "moves": [
+        {
+          "moveId": "MV-110-civic-office-council-d3-2026-10-08",
+          "cycle": 110,
+          "date": "2026-10-08",
+          "agentDir": "civic-office-council-d3",
+          "popid": "POP-00503",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-108-civic-office-council-d3",
+            "text": "I concur on the INIT-003 design consultant selection and submit District 3 intake verification for the Youth Apprenticeship Pipeline cohort review.",
+            "directiveCycle": 108,
+            "confrontationSeat": "civic-office-council-d3"
+          },
+          "status": "pending",
+          "at": "2026-10-08T10:45:44.058Z"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-002",
+        "name": "Oakland Alternative Response Initiative",
+        "domain": "safety",
+        "phase": "dispatch-live",
+        "status": "passed",
+        "voteCycle": 82,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 3,
+        "lastStageChangeCycle": 108,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "Fruitvale",
+          "East Oakland"
+        ],
+        "needsNext": "Standing — no delivering gate exists for this domain yet",
+        "budget": "budget $12,019,230.76 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "no-delivering-gate",
+          "text": "Standing — no delivering gate exists for this domain yet"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-003",
+        "name": "Fruitvale Transit Hub Phase II — Visioning",
+        "domain": "transit",
+        "phase": "design-phase",
+        "status": "passed",
+        "voteCycle": 86,
+        "stage": null,
+        "cyclesSinceStageChange": 3,
+        "lastStageChangeCycle": 108,
+        "sponsored": false,
+        "hoods": [
+          "Fruitvale"
+        ],
+        "needsNext": "Preliminary schematics community review",
+        "budget": "budget $230,000,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-007",
+        "name": "Oakland Youth Apprenticeship Pipeline",
+        "domain": "workforce",
+        "phase": "implementation-active",
+        "status": "announced",
+        "voteCycle": null,
+        "stage": null,
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "East Oakland",
+          "Fruitvale"
+        ],
+        "needsNext": "First cohort placement report delivery",
+        "budget": "budget $12,500,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-002",
+      "INIT-003",
+      "INIT-007"
+    ],
+    "boardText": "Your board:\n- INIT-002 Oakland Alternative Response Initiative [dispatch-live] — Standing — no delivering gate exists for this domain yet — budget $12,019,230.76 left, renewable\n- INIT-003 Fruitvale Transit Hub Phase II — Visioning [design-phase] — Preliminary schematics community review — budget $230,000,000 left\n- INIT-007 Oakland Youth Apprenticeship Pipeline [implementation-active] — First cohort placement report delivery — budget $12,500,000 left",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [],
+      "participation": [],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 109,
+      "throughCycle": 111,
+      "window": "Complaint display C109–C111; condition counter C111 only.",
+      "text": "Complaint display C109–C111; condition counter C111 only.\nNo Civic complaints from your turf in this window."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 4,
+      "text": "The working city:\n- Vanessa Tran-Muñoz: Two dispatches came out of the blue tonight—one at 6:12, one at 7:40—both in the same stretch near the… (C111)\n- Marcus Webb: Ninety-one households this cycle. That number’s real, but so’s the stack waiting for the next review — I can… (C111)\n- Elena Soria Dominguez: I can already trace the walk from the staging lot to the panadería in my sleep – counted every curb cut… (C110)\n- Bobby Chen-Ramirez: The crane’s shadows stretched long today, and I caught myself staring up at it like it was some kind of… (C110)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-104-civic-office-council-d3",
+          "cycle": 104,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Introduce District 3's community benefit stipulations for the Baylight Phase II RFP process to protect surrounding West Oakland and Jack London commercial corridors.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Introduce District 3's community benefit stipulations for the Baylight Phase II RFP process to protect surrounding West Oakland and Jack London commercial corridors.\n- **Why:** District 3 experienced a 7-point approval drop (83, -7) in C104 following the C103 shortlist release, while West Oakland retail vitality remains at 3.52.\n- **Acceptance:** Formal submission of District 3 priority terms regarding local business contracting and infrastructure linkages for the Baylight Phase II RFP.\n- **Silence consequence:** Baylight procurement proceeds without enforceable D3 community protections, deepening commercial disparities in neighboring corridors.\n",
+          "src": "output/mara-directives/mara_directive_c104_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-106-civic-office-council-d3",
+          "cycle": 106,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Coordinate with the Transit Hub planning team on Fruitvale small business protections and address persistent elevated crime (CrimeIndex 1.00).",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Coordinate with the Transit Hub planning team on Fruitvale small business protections and address persistent elevated crime (CrimeIndex 1.00).\n- **Why:** With INIT-003 entering its design phase in C106 and D3 constituent approval dropping 5 points (71 in C106), local merchants require council advocacy on construction mitigations.\n- **Acceptance:** A filed memorandum to the Transit Hub Planning Lead outlining merchant mitigation priorities for E. 12th Street and San Antonio.\n- **Silence consequence:** Fruitvale small businesses risk unmitigated disruption during the Phase II design and pre-construction stages.\n",
+          "src": "output/mara-directives/mara_directive_c106_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-107-civic-office-council-d3",
+          "cycle": 107,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Review and ratify the executed merchant protection covenants for the Fruitvale Transit Hub Phase II design RFP release.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Review and ratify the executed merchant protection covenants for the Fruitvale Transit Hub Phase II design RFP release.\n- **Why:** District 3 commercial stability depends on binding protections during transit design, with Fruitvale RetailVitality at 8.21 and CrimeIndex at 0.89 in C107.\n- **Acceptance:** Formal legislative concurrence or district sign-off on the INIT-003 merchant covenant framework.\n- **Silence consequence:** Lack of district ratification stalls RFP issuance and creates uncertainty for local business owners.\n",
+          "src": "output/mara-directives/mara_directive_c107_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-council-d3",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Concur on the INIT-003 design consultant selection and submit District 3 intake verification for the Youth Apprenticeship Pipeline cohort review.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Concur on the INIT-003 design consultant selection and submit District 3 intake verification for the Youth Apprenticeship Pipeline cohort review.\n- **Why:** Following C107 merchant covenant execution, C108 requires consultant selection while Fruitvale shows engine review math-imbalance decay (Sentiment -0.030, RetailVitality -1.32 to 9.67, CrimeIndex 0.63).\n- **Acceptance:** Legislative sign-off on the Phase II design consultant contract and a filed D3 placement ledger confirming apprentice allocations.\n- **Silence consequence:** Corridor merchant protections lose architectural coordination during schematic design, and D3 youth intake targets lapse without council confirmation.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-109-civic-office-council-d3",
+          "cycle": 109,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Introduce a legislative response addressing San Antonio corridor distress and confirm District 3 apprentice placement allocations under INIT-007.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Introduce a legislative response addressing San Antonio corridor distress and confirm District 3 apprentice placement allocations under INIT-007.\n- **Why:** District 3 carries 3 constituent complaints on the record with no filed proposal, while San Antonio sentiment has dropped to 0.18 against a 0.587 citywide crime average (San Antonio CrimeIndex at 0.64) with stall clocks at C110 for INIT-002, INIT-003, and INIT-007.\n- **Acceptance:** A filed council resolution or appropriation targeted at San Antonio safety and retail recovery, paired with a published D3 placement ledger for the INIT-007 youth training cohort.\n- **Silence consequence:** San Antonio remains Oakland's most depressed corridor for sentiment without targeted municipal intervention, while D3 youth lose intake priority in the first apprenticeship rollout.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-111-civic-office-council-d3",
+          "cycle": 111,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Deliver preliminary schematics with merchant covenant protections for INIT-003 and submit a targeted recovery package for San Antonio.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Deliver preliminary schematics with merchant covenant protections for INIT-003 and submit a targeted recovery package for San Antonio.\n- **Why:** INIT-003 approaches its C112 schematics completion deadline, while San Antonio is carrying a decay momentum of 3, sentiment of 0.28, and depressed retail vitality of 4.88.\n- **Acceptance:** Published preliminary schematics for the Fruitvale Transit Hub Phase II and a filed commercial/safety recovery plan for San Antonio in C112.\n- **Silence consequence:** Transit Hub design milestones stall before environmental review, and San Antonio's corridor downturn continues unaddressed.\n",
+          "src": "output/mara-directives/mara_directive_c111_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "open": [
+        {
+          "id": "CONF-109-civic-office-council-d3",
+          "cycle": 109,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Introduce a legislative response addressing San Antonio corridor distress and confirm District 3 apprentice placement allocations under INIT-007.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Introduce a legislative response addressing San Antonio corridor distress and confirm District 3 apprentice placement allocations under INIT-007.\n- **Why:** District 3 carries 3 constituent complaints on the record with no filed proposal, while San Antonio sentiment has dropped to 0.18 against a 0.587 citywide crime average (San Antonio CrimeIndex at 0.64) with stall clocks at C110 for INIT-002, INIT-003, and INIT-007.\n- **Acceptance:** A filed council resolution or appropriation targeted at San Antonio safety and retail recovery, paired with a published D3 placement ledger for the INIT-007 youth training cohort.\n- **Silence consequence:** San Antonio remains Oakland's most depressed corridor for sentiment without targeted municipal intervention, while D3 youth lose intake priority in the first apprenticeship rollout.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-111-civic-office-council-d3",
+          "cycle": 111,
+          "agentDir": "civic-office-council-d3",
+          "demand": "Rose Delgado — City Council District 3 — Deliver preliminary schematics with merchant covenant protections for INIT-003 and submit a targeted recovery package for San Antonio.",
+          "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Deliver preliminary schematics with merchant covenant protections for INIT-003 and submit a targeted recovery package for San Antonio.\n- **Why:** INIT-003 approaches its C112 schematics completion deadline, while San Antonio is carrying a decay momentum of 3, sentiment of 0.28, and depressed retail vitality of 4.88.\n- **Acceptance:** Published preliminary schematics for the Fruitvale Transit Hub Phase II and a filed commercial/safety recovery plan for San Antonio in C112.\n- **Silence consequence:** Transit Hub design milestones stall before environmental review, and San Antonio's corridor downturn continues unaddressed.\n",
+          "src": "output/mara-directives/mara_directive_c111_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": [
+        "CONF-104-civic-office-council-d3",
+        "CONF-106-civic-office-council-d3",
+        "CONF-107-civic-office-council-d3",
+        "CONF-108-civic-office-council-d3"
+      ]
+    },
+    "confrontation": {
+      "id": "CONF-109-civic-office-council-d3",
+      "cycle": 109,
+      "agentDir": "civic-office-council-d3",
+      "demand": "Rose Delgado — City Council District 3 — Introduce a legislative response addressing San Antonio corridor distress and confirm District 3 apprentice placement allocations under INIT-007.",
+      "sourceText": "## Rose Delgado — City Council District 3\n\n- **Agent:** `.claude/agents/civic-office-council-d3/`\n- **Address:** Introduce a legislative response addressing San Antonio corridor distress and confirm District 3 apprentice placement allocations under INIT-007.\n- **Why:** District 3 carries 3 constituent complaints on the record with no filed proposal, while San Antonio sentiment has dropped to 0.18 against a 0.587 citywide crime average (San Antonio CrimeIndex at 0.64) with stall clocks at C110 for INIT-002, INIT-003, and INIT-007.\n- **Acceptance:** A filed council resolution or appropriation targeted at San Antonio safety and retail recovery, paired with a published D3 placement ledger for the INIT-007 youth training cohort.\n- **Silence consequence:** San Antonio remains Oakland's most depressed corridor for sentiment without targeted municipal intervention, while D3 youth lose intake priority in the first apprenticeship rollout.\n",
+      "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 111,
+      "problems": [
+        {
+          "id": "[\"Fruitvale\",\"health.sickResidents\"]",
+          "hood": "Fruitvale",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 118,
+          "cycle": 111
+        },
+        {
+          "id": "[\"Fruitvale\",\"safety.aboveMedianHoods\"]",
+          "hood": "Fruitvale",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 111
+        },
+        {
+          "id": "[\"San Antonio\",\"health.sickResidents\"]",
+          "hood": "San Antonio",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 112,
+          "cycle": 111
+        },
+        {
+          "id": "[\"San Antonio\",\"safety.aboveMedianHoods\"]",
+          "hood": "San Antonio",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 111
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"San Antonio\",\"health.sickResidents\"]",
+          "hood": "San Antonio",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 112,
+          "cycle": 111,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"San Antonio\",\"safety.aboveMedianHoods\"]",
+          "hood": "San Antonio",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 111,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"Fruitvale\",\"health.sickResidents\"]",
+          "hood": "Fruitvale",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 118,
+          "cycle": 111
+        },
+        {
+          "id": "[\"Fruitvale\",\"safety.aboveMedianHoods\"]",
+          "hood": "Fruitvale",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 111
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"San Antonio\",\"health.sickResidents\"]",
+          "hood": "San Antonio",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 112,
+          "cycle": 111,
+          "passedOverCycle": 110
+        },
+        {
+          "id": "[\"San Antonio\",\"safety.aboveMedianHoods\"]",
+          "hood": "San Antonio",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 111,
+          "passedOverCycle": 110
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Condition problems at C111; prior Sunday folds through C110.\n- San Antonio: sick residents 112 [passed over C110]\n- San Antonio: hoods above city violent-level median 1 [passed over C110]\n- Fruitvale: sick residents 118\n- Fruitvale: hoods above city violent-level median 1\n"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Fruitvale",
+      "San Antonio"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00083",
+        "name": "Chad Tipre",
+        "neighborhood": "Fruitvale",
+        "role": "Relief Pitcher, Midland RockHounds (AA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Fruitvale — Fruitvale Transit Hub Phase II — Visioning — Preliminary schematics community review"
+      },
+      {
+        "pop": "POP-00173",
+        "name": "Kaila Braun",
+        "neighborhood": "Fruitvale",
+        "role": "Immigrant Legal Aid Worker",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Fruitvale — Fruitvale Transit Hub Phase II — Visioning — Preliminary schematics community review"
+      },
+      {
+        "pop": "POP-00183",
+        "name": "Toby Lamont",
+        "neighborhood": "Fruitvale",
+        "role": "Mutual Aid Network Organizer",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Fruitvale — Fruitvale Transit Hub Phase II — Visioning — Preliminary schematics community review"
+      },
+      {
+        "pop": "POP-00184",
+        "name": "Brooklyn Nguyen",
+        "neighborhood": "Fruitvale",
+        "role": "Teacher",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Fruitvale — Fruitvale Transit Hub Phase II — Visioning — Preliminary schematics community review"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D3",
+      "t": "FACT",
+      "text": "Rose Delgado holds COUNCIL-D3 at approval 62",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-003",
+      "t": "FACT",
+      "text": "Fruitvale Transit Hub Phase II — Visioning is in design-phase; budget $230M — C107: Merchant covenants executed, design RFP published with community-informed requirements\nC108 conversion: no council passage on record (VoteCycle 94, Outcome COMPLETED, Status visioning-complete) — enters petition-pending; history…",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-Fruitvale",
+      "t": "FACT",
+      "text": "Fruitvale crime: property 36, violent 27, incidents 5 (cycle 111) — city property 35.2, violent 23.8, incidents 6.4",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Fruitvale",
+      "t": "FACT",
+      "text": "Fruitvale: sentiment 0.52 vs city 0.340; crime index 0.63 vs city 0.583; retail 10.55; housing pressure 4.5; growth; momentum 10",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-traj-0",
+      "t": "FACT",
+      "text": "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto",
+      "src": "world_summary trajectory"
+    },
+    {
+      "id": "F-we-0",
+      "t": "FACT",
+      "text": "CIVIC — crisis-spike — Fruitvale: Medium-severity civic spike in Fruitvale (impactScore 33)",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Approval": "62"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Faction": "OPP",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

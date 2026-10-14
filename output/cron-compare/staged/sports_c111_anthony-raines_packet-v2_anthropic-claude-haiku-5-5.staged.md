@@ -1,0 +1,19 @@
+# Ellis's Game Five Line Carries the Title
+
+The line that matters from Game Five is short: six innings, two earned runs, five strikeouts for John Ellis. On the feed, those three numbers are the whole of his box for the night, and they are enough to explain why the A's are one win from the cup of their chapter and why the rest of the lineup's stat lines read as support rather than headline. The club's team record on the feed stands at 4-1 with a three-game winning streak, and Game Five completed the sequence that delivered the A's their seventh World Series title under Mike Paulson.
+
+Start with the pitching, because it did the most work. Six innings against a single game's ceiling is a full outing, and two earned runs over that span is the kind of line a manager builds a closing argument around. Five strikeouts add a second layer: Ellis did not survive on contact alone, and the feed records the strikeouts as the element that kept the outing controlled. The strikeout total is a number a reader can check against the innings without any further arithmetic from this desk, and it points toward a pitcher who was getting outs with his own stuff rather than waiting for the defense to help.
+
+The hitters carried the rest of the sheet. Eric Taveras went 1HR and 2RBI, which is the power the club needed in a game that was not going to be decided by singles. Darrin Davis put up 1HR, 2RBI and a 3-4 night, the most complete offensive line the feed records for any Game Five bat. Mark Aitken added 1HR and 1RBI. The feed frames Taveras as the source of the power and the two veterans, Davis and Aitken, as the contributors around him, and the stat lines support that division: three players with home runs, two of them with multiple runs driven in, one a three-hit night from the middle of the order.
+
+Here is where the analyst has to slow down. The Is-It-Real test asks whether a pattern has the volume to bear the weight placed on it. One start is one start. Six innings and five strikeouts on a single night is evidence of what Ellis did in Game Five, not a sample that says how he will handle the next high-leverage inning, or the next series. The same logic applies to the hitters. A home run, two runs driven in and a three-hit game are the kind of single-game production that makes a box score look like a turning point. A reader should not confuse the feed's clean line with a season-long identity for any of these players.
+
+The Box-Card Read, applied properly, asks for the card before the story. The card on the feed is a clean one: Ellis's innings and earned runs, the hitters' homers and RBI, and a team record that now carries the club through a title. What the card does not supply is the context that would turn a single game into a trend. There is no salary on this feed row, no season-to-date ERA beyond what the Game Five line implies, and no prior-start sequence that would show whether the six-inning outing was a step in a pattern or an isolated good night. Those are the missing pieces.
+
+Vinnie Keane and Benji Dillon also appear in their final games, a detail the club's record acknowledges without this feed giving a line for either beyond their presence in the closing sequence. That absence is itself a reason to wait for the fuller record before judging the roster's construction.
+
+The question the game leaves open is the one the feed cannot answer on its own: what does Ellis's Game Five performance reveal about his ability to handle pressure in high-stakes moments? The answer requires more than one line on one night, starts beyond this one, and the season-level numbers that have not yet been printed on this feed.
+
+## INTAKE
+CLAIM: A's · game-result — John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly | world_summary_c111.md ## Sports
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=no; sim-state-cited=no -->

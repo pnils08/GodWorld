@@ -1,0 +1,26 @@
+{
+  "office": "council_d8",
+  "agentDir": "civic-office-council-d8",
+  "holder": "Nina Chen",
+  "popid": "POP-00505",
+  "title": "City Council District 8",
+  "date": "2026-10-14",
+  "cycle": 111,
+  "model": "google/gemini-3.7-flash",
+  "statement": "District 8 will not leave Adams Point behind. With neighborhood sentiment recorded at 0.2 against the city baseline of 0.340 and decay momentum standing at 3, procedural stabilization and scheduled municipal maintenance are necessary to arrest commercial decline. We stand with Adams Point by enforcing structured oversight, clear eligibility criteria, and verified corridor relief.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-111-civic-office-council-d8",
+        "text": "I am advancing the legislative oversight framework for INIT-009 to ensure commercial stabilization funds operate under auditable disbursement protocols and transparent criteria for Grand Lake and Adams Point.",
+        "directiveCycle": 111,
+        "confrontationSeat": "civic-office-council-d8"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "Adams Point sentiment tracked at 0.2 against city average 0.340, with decay momentum at 3 and property crime recorded at 34.",
+  "ranAt": "2026-10-14T10:45:46.897Z",
+  "fellBackFrom": null
+}

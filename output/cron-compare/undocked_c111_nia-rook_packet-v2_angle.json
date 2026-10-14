@@ -1,0 +1,203 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "111",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Recap Briar Soto's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 8 cycle(s) led, current streak 8.",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+    },
+    "signal": {
+      "kind": "undocked",
+      "hood": "Jack London",
+      "score": null,
+      "src": "undocked:undocked-pop00926-Y3C7",
+      "nearby": [
+        {
+          "text": "UNDOCKED: Briar Soto — a night the books can't settle yet",
+          "src": "undocked:undocked-pop00926-Y3C7"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00926",
+          "name": "Briar Soto",
+          "profile": "Briar Soto — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c111.json",
+            "episodeId": "undocked-pop00926-Y3C7",
+            "pop": "POP-00926"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED: Briar Soto — a night the books can't settle yet",
+        "src": "undocked:undocked-pop00926-Y3C7",
+        "id": "F-266e9c48cb19"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00926",
+        "name": "Briar Soto",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Briar Soto — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c111.json",
+          "episodeId": "undocked-pop00926-Y3C7",
+          "pop": "POP-00926"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00926-Y3C7",
+      "label": "UNDOCKED: Briar Soto — a night the books can't settle yet",
+      "kind": "undocked",
+      "angle": "Recap Briar Soto's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 8 cycle(s) led, current streak 8.",
+      "citizens": [
+        "Briar Soto — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00926"
+      ],
+      "hood": "Jack London"
+    },
+    "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I'm leaning into the vibe in Jack London—the kind of energy where people are still talking about the episode long after the screen goes dark. Briar Soto put on a show that left the books unsettled, and that's where the story is. I'll focus on the friction between the clean technical run—no mishaps, no combat—and the fact that the credits are still a mess. While Clarissa Dane keeps her grip on the top spot, Briar's night is the one people are actually chewing on. I'll keep the technicals as the skeleton but lead with the social fallout.",
+    "plan": {
+      "chase": "I'm leaning into the vibe in Jack London—the kind of energy where people are still talking about the episode long after the screen goes dark. Briar Soto put on a show that left the books unsettled, and that's where the story is. I'll focus on the friction between the clean technical run—no mishaps, no combat—and the fact that the credits are still a mess. While Clarissa Dane keeps her grip on the top spot, Briar's night is the one people are actually chewing on. I'll keep the technicals as the skeleton but lead with the social fallout.",
+      "focus": "The gap between a clean flight and an unsettled ledger.",
+      "why": "The city cares less about the magnitude 2/5 and more about who is actually winning the narrative when the numbers don't add up.",
+      "checks": [
+        "Verify the specific tension in the pilot's packet interview regarding the unsettled credits.",
+        "Confirm the current gap between Briar's performance and Clarissa Dane's #1 rank."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00926",
+          "question": "How do you reconcile a flight with zero mishaps and solid systems with a ledger that the books can't settle yet?",
+          "basis": "undocked:undocked-pop00926-Y3C7"
+        }
+      ],
+      "interpretation": "A technically sound performance that fails to translate into a clean win, creating a vacuum for public debate.",
+      "unverifiedLead": [
+        "The specific nature of the 'unsettled' credits and why they aren't closing."
+      ],
+      "closeQuestion": "Is a perfect flight worth anything if the books don't agree?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Briar Soto — a night the books can't settle yet",
+      "kind": "undocked",
+      "hood": "Jack London",
+      "ref": "undocked:undocked-pop00926-Y3C7",
+      "popids": [
+        "POP-00926"
+      ]
+    }
+  ],
+  "laneEntries": 1,
+  "ranAt": "2026-10-14T11:17:14.176Z"
+}

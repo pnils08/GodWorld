@@ -184,5 +184,17 @@
     "cycle": "110",
     "stem": "undocked-digest_c110_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
     "disposition": "staged"
+  },
+  "undocked-pop01053-Y3C7": {
+    "at": "2026-10-12T23:19:02.943Z",
+    "cycle": "111",
+    "stem": "undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3",
+    "disposition": "staged"
+  },
+  "undocked-pop00597-Y3C7": {
+    "at": "2026-10-13T23:16:30.946Z",
+    "cycle": "111",
+    "stem": "undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3",
+    "disposition": "staged"
   }
 }

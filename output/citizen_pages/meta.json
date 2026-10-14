@@ -1,21 +1,21 @@
 {
   "source": "citizen-pages",
-  "generatedAt": "2026-10-09T11:15:12.504Z",
+  "generatedAt": "2026-10-14T11:15:14.234Z",
   "generatedBy": "scripts/scanCitizenPages.js --dump",
-  "liveCycle": 110,
-  "listed": 2238,
-  "admitted": 1652,
+  "liveCycle": 111,
+  "listed": 2399,
+  "admitted": 1748,
   "excluded": {
     "id": 0,
-    "type": 488,
-    "slot": 74,
+    "type": 549,
+    "slot": 78,
     "cycle": 24,
     "empty": 0
   },
-  "fetchedThisRun": 16,
+  "fetchedThisRun": 19,
   "failedThisRun": 0,
-  "rows": 1652,
-  "citizens": 372,
+  "rows": 1748,
+  "citizens": 382,
   "byCycle": {
     "97": 12,
     "98": 6,
@@ -30,7 +30,8 @@
     "107": 135,
     "108": 170,
     "109": 143,
-    "110": 82
+    "110": 119,
+    "111": 59
   },
   "rule": "customId cp-POP-xxxxx-c<N>-<slot>; metadata.type in {reflection,tension}; slot matches ^(?:morning|midday|afternoon|evening|night|work|PRESS|CONVO|INTERVIEW|DISCORD)(?:-tension(?:-resolved)?)?$; cycle <= live cycle; non-empty content"
 }

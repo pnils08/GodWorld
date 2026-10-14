@@ -1,0 +1,36 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "111",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "UNDOCKED: Rosario Medina — up 110 on the night",
+        "sourceRef": "undocked:undocked-pop01053-Y3C7"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-711e4f13cb62",
+    "draftSha256": "01ce0f6a21035dad958e8ae4607255efda99527ba6c0f4f796c1faad0397d96a",
+    "verdict": "output/cron-compare/undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-12T23:19:02.354Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-12T23:19:02.941Z"
+}

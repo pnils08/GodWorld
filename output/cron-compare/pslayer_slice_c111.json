@@ -1,0 +1,270 @@
+{
+  "cycle": 111,
+  "builtAt": "2026-10-14T11:15:04.251Z",
+  "empty": false,
+  "journalist": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "persona": "p-slayer"
+  },
+  "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+  "pulse": {
+    "className": "award-board",
+    "classes": [
+      "award-board"
+    ],
+    "score": 44,
+    "label": "The A's parade roll through Downtown.",
+    "team": "A's",
+    "eventKind": "editorial-note",
+    "seasonType": "off-season",
+    "feedCycle": 111,
+    "record": "-",
+    "streak": "-",
+    "mood": "electric",
+    "fanSentiment": "euphoric",
+    "neighborhood": "Downtown",
+    "notes": "The Oakland A's celebrated their 7th World Series championship in the Paulson era with a parade and rally in Downtown. Despite the colder temps the Oakland citizens were out in masses to honor their beloved A's. Mike Paulson , Vinnie Keane, Benji Dillon all stood a front the double decker bus cheering and waving to their fans. Darrin Davis, Isley Kelley, and Mark Aitken all laughing and celebratin",
+    "stats": "-"
+  },
+  "charge": {
+    "bagModes": [
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      },
+      {
+        "id": 5,
+        "name": "Paper Cuts vs the Nerds"
+      },
+      {
+        "id": 9,
+        "name": "Breakout Feeling"
+      }
+    ],
+    "fanCharge": "defiance",
+    "foilNumber": "The Oakland A's celebrated their 7",
+    "centralFeeling": "Oakland should refuse the soft rewrite of what just happened.",
+    "palette": [
+      "fury",
+      "euphoria",
+      "dread",
+      "defiance",
+      "confession",
+      "grief",
+      "dare"
+    ]
+  },
+  "prewrite": {
+    "reporter": "P.Slayer",
+    "bagModes": [
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      },
+      {
+        "id": 5,
+        "name": "Paper Cuts vs the Nerds"
+      },
+      {
+        "id": 9,
+        "name": "Breakout Feeling"
+      }
+    ],
+    "fanCharge": "defiance",
+    "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+    "anchorFacts": [
+      "StoryAngle (feed): The A's parade roll through Downtown.",
+      "Event: A's — editorial-note (off-season)",
+      "NamesUsed: Mike Paulson",
+      "FanSentiment: euphoric · Mood: electric"
+    ],
+    "foilNumber": "The Oakland A's celebrated their 7",
+    "centralFeeling": "Oakland should refuse the soft rewrite of what just happened.",
+    "hooks": [
+      {
+        "text": "A's CHAMPIONSHIP! City-wide celebration. Legacy story. All desks mobilize.",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      },
+      {
+        "text": "Oaks struggling — L5. Fan frustration angle. What's going wrong?",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      }
+    ]
+  },
+  "hooks": [
+    {
+      "text": "A's CHAMPIONSHIP! City-wide celebration. Legacy story. All desks mobilize.",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    },
+    {
+      "text": "Oaks struggling — L5. Fan frustration angle. What's going wrong?",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    }
+  ],
+  "seeds": [],
+  "friction": {
+    "a": "The numbers / streak say dynasty heat",
+    "b": "The quiet fear that it cannot last — or the nerds reducing it to WAR",
+    "frame": "Euphoria with friction: name the doubter, kill soft contentment."
+  },
+  "priorTakes": [],
+  "story": {
+    "ref": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown.",
+    "label": "The A's parade roll through Downtown.",
+    "kind": "award-board",
+    "angle": "The A's parade roll through Downtown.",
+    "hookLine": "Euphoria with friction: name the doubter, kill soft contentment.",
+    "hood": "Downtown",
+    "team": "A's",
+    "eventKind": "editorial-note",
+    "popids": [
+      "POP-00527",
+      "POP-00001",
+      "POP-00018"
+    ],
+    "citizens": [
+      "Mike Paulson — General Manager, Oakland A's & The Oaks, Jack London",
+      "Vinnie Keane — Designated Hitter, Oakland A's Legend, Grand Lake",
+      "Benji Dillon — Pitcher, Oakland A's Legend, Rockridge"
+    ],
+    "pulseClass": "award-board",
+    "pulseScore": 44,
+    "fanCharge": "defiance",
+    "bagModeIds": [
+      3,
+      5,
+      9
+    ]
+  },
+  "players": [
+    {
+      "name": "Mike Paulson",
+      "popid": "POP-00527",
+      "role": "General Manager, Oakland A's & The Oaks",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    },
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "why": "feed-names"
+    },
+    {
+      "name": "Benji Dillon",
+      "popid": "POP-00018",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "Downtown",
+    "record": "-",
+    "streak": "-",
+    "mood": "electric",
+    "fanSentiment": "euphoric",
+    "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+  },
+  "candidates": [
+    {
+      "score": 50,
+      "cycle": 109,
+      "team": "Oaks",
+      "primary": "injury-load",
+      "angle": "The Oaks lose yet again even with strong efforts from Austin Reaves,",
+      "priorHits": 0
+    },
+    {
+      "score": 46,
+      "cycle": 110,
+      "team": "Oaks",
+      "primary": "loss",
+      "angle": "The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless as a franchise betwe",
+      "priorHits": 0
+    },
+    {
+      "score": 45,
+      "cycle": 110,
+      "team": "Oaks",
+      "primary": "loss",
+      "angle": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bulls, where Paulson ran",
+      "priorHits": 0
+    },
+    {
+      "score": 44,
+      "cycle": 111,
+      "team": "A's",
+      "primary": "award-board",
+      "angle": "The A's parade roll through Downtown.",
+      "priorHits": 0
+    },
+    {
+      "score": 44,
+      "cycle": 110,
+      "team": "A's",
+      "primary": "win-streak",
+      "angle": "A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and B",
+      "priorHits": 0
+    },
+    {
+      "score": 44,
+      "cycle": 109,
+      "team": "A's",
+      "primary": "loss",
+      "angle": "Travis Coles and the bullpen struggle, Eric Taveras shows up big again but not enough.",
+      "priorHits": 0
+    },
+    {
+      "score": 44,
+      "cycle": 109,
+      "team": "A's",
+      "primary": "injury-load",
+      "angle": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon handle the offense.",
+      "priorHits": 0
+    },
+    {
+      "score": 41,
+      "cycle": 109,
+      "team": "Oaks",
+      "primary": "loss",
+      "angle": "The Oaks host game 2 of the preason vs the Warriors and are unable to give Oaklands new NBA franchise its first victory,",
+      "priorHits": 0
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c111.md ## Sports",
+    "output/desk_signal_c111.json lanes.sports",
+    "docs/media/P_SLAYER_CHARGE_BAG.md",
+    "docs/media/voices/p_slayer.md",
+    "docs/media/P_SLAYER_JOURNEY_INDEX.md",
+    "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown.",
+    "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+  ],
+  "gaps": {
+    "note": "What would deepen fan-heat further",
+    "missingOrThin": [
+      {
+        "source": "cp-POP-00008 live wall at build time",
+        "status": "wake-time",
+        "why": "reporterWall injects at cron angle; slice uses on-disk prior columns so build stays offline"
+      },
+      {
+        "source": "As_Roster live line for foil",
+        "status": "feed-stats-proxy",
+        "why": "FoilNumber parsed from feed Stats/Notes; live roster sheet would refine without inventing"
+      },
+      {
+        "source": "TrueSource / truesource injury windows",
+        "status": "partial",
+        "why": "Injury-load class relies on feed wording; card detail would strengthen Superman mode"
+      }
+    ]
+  }
+}

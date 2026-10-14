@@ -1,0 +1,26 @@
+{
+  "office": "council_d3",
+  "agentDir": "civic-office-council-d3",
+  "holder": "Rose Delgado",
+  "popid": "POP-00503",
+  "title": "City Council District 3",
+  "date": "2026-10-14",
+  "cycle": 111,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "The preliminary schematics for the Fruitvale Transit Hub Phase II are a covenant with our merchants, not just blueprints. I've walked the corridor with the design team and our community partners — the staging lot access, the panadería sightlines, the curb cuts that Elena Soria Dominguez counted — and these drawings honor the merchant protections we executed at C107. My D3 neighbors in Fruitvale carry a sentiment at 0.52 against a city at 0.34, and crime still runs above the city median. This project is our anchor. I'm bringing the community review to the merchants before this moves past visioning, and I'm answering the call on San Antonio corridor distress with the same urgency. We committed to the cohort under INIT-007 — now we confirm the D3 apprentice placements are locked in.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-109-civic-office-council-d3",
+        "text": "I'm introducing a resolution that pairs San Antonio corridor revitalization with a confirmed D3 apprentice placement allocation under INIT-007. The design-phase schematics for the Fruitvale Transit Hub must include the merchant covenant protections we signed at C107, and the corridor needs the same community-led safety investments we promised last cycle.",
+        "directiveCycle": 109,
+        "confrontationSeat": "civic-office-council-d3"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-14T10:45:56.622Z",
+  "fellBackFrom": null
+}

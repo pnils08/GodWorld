@@ -1,0 +1,26 @@
+{
+  "office": "council_d5",
+  "agentDir": "civic-office-council-d5",
+  "holder": "Janae Rivers",
+  "popid": "POP-00043",
+  "title": "City Council District 5",
+  "date": "2026-10-13",
+  "cycle": 111,
+  "model": "deepseek/deepseek-v4-flash-0731",
+  "statement": "The quarterly outcome report on the Alternative Response Initiative tells the story I already knew from the streets: East Oakland's violent crime sits at 31 against a city average of 23.8 — we are still paying for decades of under-investment. But the dispatch-live protocol is changing how we answer. Sentiment here runs 0.48 against the city's 0.34 — folks feel the difference when a health worker shows up instead of a squad car. I'm filing my District 5 dispatch performance audit now, because the numbers only matter if we hold the city accountable to them. This isn't about a report — it's about whether East Oakland finally gets the response we've been demanding. The Masjid An-Nur pantry feeds our neighbors every week; our response system should feed their safety the same way. That's the standard.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-111-civic-office-council-d5",
+        "text": "District 5 cohort placement intake numbers are on file: first cohort placed ahead of the initial schedule, with youth entering apprenticeship tracks across health and workforce sectors. The dispatch performance audit for INIT-002 in East Oakland confirms the alternative response protocol is live and active in our district — dispatched calls are routing to health responders consistent with the deployment authorized in C107. Both items are submitted and on the record for the quarterly review.",
+        "directiveCycle": 111,
+        "confrontationSeat": "civic-office-council-d5"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-10-13T10:45:21.149Z",
+  "fellBackFrom": null
+}

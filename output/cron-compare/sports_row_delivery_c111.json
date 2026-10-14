@@ -1,0 +1,108 @@
+{
+  "loggedAt": "2026-10-14T11:17:14.202Z",
+  "cycle": 111,
+  "writersWithFiles": [
+    "Anthony Raines",
+    "Hal Richmond",
+    "P Slayer",
+    "Simon Leary",
+    "Tanya Cruz",
+    "Selena Grant",
+    "Talia Finch"
+  ],
+  "rows": [
+    {
+      "n": 1,
+      "team": "A's",
+      "eventType": "editorial-note",
+      "eventTrigger": "championship",
+      "snippet": "The A's parade roll through Downtown.",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 2,
+      "team": "A's",
+      "eventType": "community-outreach",
+      "eventTrigger": "championship",
+      "snippet": "The Oakland A's and Vladimir Gonzales ",
+      "writers": [],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": true,
+      "unprobeable": false
+    },
+    {
+      "n": 3,
+      "team": "A's",
+      "eventType": "editorial-note",
+      "eventTrigger": "championship",
+      "snippet": "The city celebrates its championship, ",
+      "writers": [
+        "Hal Richmond",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 4,
+      "team": "A's",
+      "eventType": "player-feature",
+      "eventTrigger": "championship",
+      "snippet": "Open space to cover A's players/team",
+      "writers": [
+        "Hal Richmond"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 5,
+      "team": "Oaks",
+      "eventType": "season-state",
+      "eventTrigger": "cold-streak",
+      "snippet": "Elliot Abraham faces the media, is Dra",
+      "writers": [
+        "Selena Grant"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 6,
+      "team": "Oaks",
+      "eventType": "player-feature",
+      "eventTrigger": "cold-streak",
+      "snippet": "Adash Stanley in attendance at the A's",
+      "writers": [
+        "Selena Grant"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    }
+  ],
+  "stranded": 1
+}

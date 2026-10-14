@@ -1,0 +1,136 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "111",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-weather",
+      "angle": "C111 mild, 57°F after fog — what this weather does to a day in the city",
+      "label": "C111 mild, 57°F after fog",
+      "hookLine": "C111 mild, 57°F after fog; 1 residents on the record lived it.",
+      "hood": null,
+      "citizens": [
+        "Javier Robertson (POP-00228)"
+      ],
+      "popids": [
+        "POP-00228"
+      ],
+      "ref": "output/beats/Cycle_Weather.jsonl CycleID 111",
+      "cycle": 111
+    }
+  },
+  "angle": "output/cron-compare/civic_c111_noah-tan_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00042",
+      "name": "Ramon Vega",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; principled, plays it straight",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: citizen is not quote eligible; direct reaction exceeds 80 words; direct reaction must be one to four sentences; direct reaction claims unsupplied history or experience",
+      "raw": "{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, that line came from a place of frustration. I've seen too many plans that promise the world and deliver a shrug. Mild positivity is how we end up with a new bench when we needed a health center. But today? After the fog, the sun hit the water just right, and I watched folks actually sitting and talking, not just passing through. Maybe mild isn't always bullshit. Maybe sometimes it's just honest. But I still want more than that for this city.\",\n  \"fact_ids\": [\"F-54dcea97959e\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00042",
+          "name": "Ramon Vega",
+          "role": "City Council President - D1",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "Your own page at C102 says: \"And don’t give me that \"mild positivity\" bullshit\". Is that still how you see mild? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-weather",
+          "hood": null,
+          "focus": "What a single mild day after a foggy stretch moves — who it pulls out, who it leaves inside, and what the city's plans look like from the street level.",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 111"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ramon Vega — City Council President - D1",
+          "evidence": [
+            {
+              "id": "EV-PAGE-97079c8f22",
+              "src": "cp-POP-00042-c102-PRESS",
+              "text": "And don’t give me that \"mild positivity\" bullshit."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "And don’t give me that \"mild positivity\" bullshit.",
+            "src": "cp-POP-00042-c102-PRESS",
+            "id": "F-3494c1f7fdf6"
+          },
+          {
+            "t": "FACT",
+            "text": "Ramon Vega — City Council President - D1",
+            "src": "Simulation_Ledger profile for POP-00042",
+            "id": "F-54dcea97959e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": false,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Return abstain. This citizen is not eligible for this interview path."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-14T18:15:35.727Z"
+}

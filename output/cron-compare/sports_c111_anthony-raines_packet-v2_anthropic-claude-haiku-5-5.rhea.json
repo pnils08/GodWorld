@@ -1,0 +1,64 @@
+{
+  "draft": "output/cron-compare/sports_c111_anthony-raines_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "36070bcc756994ee3e204190e654b9aec8343739f2239066eb83370f45703682",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Game 5 pitching and batting lines, series record (4-1, W3), and roster details match C110 feed canon.",
+  "review": {
+    "profileId": "anthony-sports-analytics-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-2",
+    "manifestId": "AM-7afdfa4219be",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "4",
+          "-1"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Darrin Davis",
+      "Eric Taveras",
+      "John Ellis",
+      "Mark Aitken",
+      "Mike Paulson",
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "World Series"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0097,
+  "durationMs": 5012,
+  "parseError": false,
+  "ranAt": "2026-10-12T23:18:33.350Z"
+}

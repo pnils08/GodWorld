@@ -1,6 +1,6 @@
 {
   "v": "UNDOCKED-STANDINGS/1",
-  "computedAt": "2026-10-12T01:37:27.958Z",
+  "computedAt": "2026-10-14T01:40:22.758Z",
   "rows": [
     {
       "Rank": 1,
@@ -186,6 +186,19 @@
     },
     {
       "Rank": 15,
+      "POPID": "POP-00597",
+      "Holder": "Eric Taveras",
+      "Episodes": 1,
+      "CreditsTotal": 0,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 3,
+      "LastAiredCycle": 112,
+      "CyclesLed": 0,
+      "CurrentStreak": 0
+    },
+    {
+      "Rank": 16,
       "POPID": "POP-00842",
       "Holder": "Wanjiru Liu",
       "Episodes": 2,
@@ -198,7 +211,20 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 16,
+      "Rank": 17,
+      "POPID": "POP-00926",
+      "Holder": "Briar Soto",
+      "Episodes": 1,
+      "CreditsTotal": 0,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 2,
+      "LastAiredCycle": 112,
+      "CyclesLed": 0,
+      "CurrentStreak": 0
+    },
+    {
+      "Rank": 18,
       "POPID": "POP-00962",
       "Holder": "Marcus Walker",
       "Episodes": 7,

@@ -1,45 +1,47 @@
 # Today in Oakland — told by its people
 
-A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 110). Everything below is sourced from the world ledger — nothing is invented.
+A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 111). Everything below is sourced from the world ledger — nothing is invented.
 
 ## The big moments
 
-- **Clearence Leighton** (Piedmont Ave) — Left Oakland Hospital for an opening at Temescal Community Health Center
-- **Adash Stanley** (Downtown) — worked the campus job and studied on the clock when it was slow
-- **Itzel Murakami** (West Oakland) — Added to Simulation_Ledger as Tier 4. GC emergence promotion — EmergenceCount 3, C110 (engine.58 lottery)
-- **Elijah Brown** (Rockridge) — Added to Simulation_Ledger as Tier 4. GC emergence promotion — EmergenceCount 3, C110 (engine.58 lottery)
-- **Solveig Anand** (Glenview) — Added to Simulation_Ledger as Tier 4. School nurse, Oakland Unified.
-- **Caspian Yarbrough** (Uptown) — Added to Simulation_Ledger as Tier 4. Music teacher, Oakland Unified.
-- **Bernadette Whitaker-Lund** (Eastlake) — Added to Simulation_Ledger as Tier 4. School counselor, Oakland Unified.
-- **Rafael Santillan** (Ivy Hill) — Added to Simulation_Ledger as Tier 4. Kindergarten teacher, Oakland Unified.
-- **Adaeze Onwuka** (East Oakland) — Added to Simulation_Ledger as Tier 4. High school English teacher, Oakland Unified.
-- **Tobiah Nakagawa** (KONO) — Added to Simulation_Ledger as Tier 4. Middle school math teacher, Oakland Unified.
+- **Rafael Brannie** (Piedmont Ave) — A coworker at Mayday Movers with less time in got the assignment they had asked about.
+- **Clearence Leighton** (Piedmont Ave) — A supervisor at Temescal Community Health Center corrected them in front of a customer.
+- **Tariq Mitchell** (Uptown) — A manager at Marigold Cafe asked them to redo work that had already been approved.
+- **Miguel Joson** (Chinatown) — A manager at Foothill Builders stopped by their desk to say the last stretch of work had not gone unnoticed.
+- **Ingrid Bautista** (Chinatown) — The owner at West Oakland Community Center said hours are being looked at across the board.
+- **Sammie Soft** (West Oakland) — A colleague at West Oakland Community Center said the team runs smoother on their days.
+- **Hana Petrosyan** (San Antonio) — A client thanked them by name in front of the whole floor at Oakland Police Department.
+- **Devin Castellanos** (Dimond) — A quiet nod from the owner at Oakland Police Department on the way out, the kind that means something.
+- **Samuel Adeyemi** (Ivy Hill) — Heard secondhand that the opening at Oakland Fire Department they wanted had been filled from outside.
+- **Leo Leonard** (Downtown) — Their name came up in a good way at the Alameda County Courts staff meeting.
 
 ## The people, in their own words
 
-### Tom Jilner — Wine Bar Owner — Rockridge
+### Benji Dillon — Pitcher, Oakland A's Legend — Rockridge
 
-> *Sipping my coffee, I raise an eyebrow at Diego* "Still got that knack for bringing up old news, huh? The gallery closed two years back—running a wine bar now, over on College. Mor *(talking with Diego Remo)*
+> Maya. Hey. I was just thinking about you—watching that streetlight creep across the kitchen floor last night, reminded me of the quiet we used to share this late. How’s Rick doing? *(talking with Maya Torres-Dillon)*
 
-*Around the neighborhood: split the last of the coffee and the morning's plans with their partner*
+*Around the neighborhood: felt a quiet tradeoff settle into place*
 
-### Diego Remo — Independent Bookstore Owner — Temescal
+### Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher — Rockridge
 
-> "Tom, long time no see. Funny how Temescal keeps us crossing paths, huh? Still running that gallery over in Rockridge?" *I fold my arms, leaning slightly on the bookstore doorframe *(talking with Tom Jilner)*
+> Benji. It's good to hear your voice. Rick's doing well—he's been really into his science fair project on watersheds, which I can't help but be proud of. He's got your focus, that's *(talking with Benji Dillon)*
 
-### Lila Mezran — Journalist, Health Desk — Piedmont Ave
+### Travis Coles — Starting Pitcher, Oakland A's — Downtown
 
-> filed: Chinatown Carries the Most Sick Residents, and the Care Trail Stops Short of the Bed
+> Four earned. That’s the number that stays with me no matter how many times I replay the slider that didn’t bite or the fastball that sat flat. Six innings is six innings, but again
 
-### Henry Rivas — Starting Pitcher, Oakland A's — West Oakland
+*Around the neighborhood: checked the housing market in Rockridge on their lunch break and realized they could actually afford it*
 
-> Man, this feeling... it's like winning the Series lit something in me I didn’t know was flickering. The parade, the kids looking up like I’m some kinda hero—what if I can’t keep de
+### Eric Taveras — Second Baseman, Oakland A's — Downtown
 
-### Simone Adesanya — School Principal — Rockridge
+> To be honest, I haven't heard anything about unsettled credits. I'm not sure what you're referring to.
 
-> To be honest, I don't think I've had any major successes recently, I've just been handling my responsibilities as a school principal and trying to stay connected with my community.
+### Rachel Torres — Public Safety — Uptown
 
-*Around the neighborhood: handled responsibilities that didn't make the news*
+> filed: San Antonio recorded nine incidents this cycle, the highest total among the twenty-two neighborhoods
+
+*Around the neighborhood: moved money between two accounts to cover a bill without anyone noticing*
 
 ---
-*Assembled 2026-10-11 from Reflection_Intake (9 reflections, 9 citizens) and LifeHistory_Log (82 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*
+*Assembled 2026-10-14 from Reflection_Intake (15 reflections, 15 citizens) and LifeHistory_Log (48 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*

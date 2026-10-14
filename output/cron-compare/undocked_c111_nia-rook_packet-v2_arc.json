@@ -1,0 +1,17 @@
+{
+  "status": "arc-seed",
+  "cycle": "111",
+  "desk": "undocked",
+  "persona": "nia-rook",
+  "hood": "Jack London",
+  "quotes": [
+    {
+      "pop": "POP-00926",
+      "name": "Briar Soto",
+      "quote": "To be honest, I've never really had to deal with a situation where everything went smoothly but the books didn't balance out. I mean, I've worked on some tricky electrical jobs, but that's a different story. I don't really know how to reconcile that."
+    }
+  ],
+  "claim": "To be honest, I've never really had to deal with a situation where everything went smoothly but the books didn't balance out. I mean, I've worked on some tricky electrical jobs, but that's a different story. I don't really know how to reconcile that.",
+  "src": "citizenVoice PRESS c111",
+  "ranAt": "2026-10-14T18:17:02.749Z"
+}

@@ -1,0 +1,61 @@
+{
+  "draft": "output/cron-compare/civic_c111_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "7000dd5022b5499765d9e84e3f98925050d6ea2ababe9981a63ebd3cf184d3a5",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, citizen profiles align with canon ledger, and health access figures follow authorized persona bounds.",
+  "review": {
+    "profileId": "lila-health-service-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "packageVersion": "LILA-LEP2-1",
+    "manifestId": "AM-2d181013b3e1",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "6.6"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Lila Mezran",
+      "Mai Tse",
+      "Maurice Franklin",
+      "Niani Oakley",
+      "Yu Zen"
+    ],
+    "unverified": [
+      "By Dr"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0107,
+  "durationMs": 7555,
+  "parseError": false,
+  "ranAt": "2026-10-12T23:17:16.645Z"
+}

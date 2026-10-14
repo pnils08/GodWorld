@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-14",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Elliot Marbury",
+      "desk": "sports",
+      "ok": false,
+      "error": "model returned no JSON object"
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-10-14T11:17:14.185Z"
+}

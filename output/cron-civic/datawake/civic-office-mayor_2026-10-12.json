@@ -1,0 +1,26 @@
+{
+  "office": "mayor",
+  "agentDir": "civic-office-mayor",
+  "holder": "Avery Santana",
+  "popid": "POP-00034",
+  "title": "Mayor",
+  "date": "2026-10-12",
+  "cycle": 111,
+  "model": "moonshotai/kimi-k2",
+  "statement": "The Ivy Hill Revitalization Initiative is now before the Council — $2.5 million to turn momentum into movement in a neighborhood that's been waiting. This isn't charity. It's investment in a community where property crime sits above city average and families feel the pressure. I've walked those blocks. I've heard from residents like Isaac Martinez, Mateo Baker, Ebony Mendoza, Darius Hill — people who live here, work here, and deserve to see something built. The legislation is filed. Now we deliver.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-106-civic-office-mayor",
+        "text": "The Youth Apprenticeship Pipeline town hall is scheduled for Cycle 112 — I'm directing Brenda Okoro's team to coordinate with OUSD, Peralta, and Building Trades Council to certify zero backlog cases by that date. 150 apprentices by spring means every partner agency clears their queue now, not eventually.",
+        "directiveCycle": 106,
+        "confrontationSeat": "civic-office-mayor"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "1",
+  "ranAt": "2026-10-12T10:45:23.692Z",
+  "fellBackFrom": null
+}

@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-13",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": false,
+      "error": "Expected ',' or ']' after array element in JSON at position 2849 — model text begins: \"{ \\\"chase\\\": \\\"The Youth Apprenticeship Pipeline has been sitting in operational limbo for four cycles now. The mayor's bee\""
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": false,
+      "error": "Expected ',' or ']' after array element in JSON at position 2586 — model text begins: \"{ \\\"chase\\\": \\\"I'm standing at the corner of Telegraph and 51st, watching the 3:05 bell spill kids onto the sidewalk. Temes\""
+    },
+    {
+      "name": "Selena Grant",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-10-13T11:17:42.260Z"
+}

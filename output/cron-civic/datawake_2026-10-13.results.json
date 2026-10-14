@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-13",
+  "cycle": 111,
+  "results": [
+    {
+      "office": "civic-office-council-d5",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d5_2026-10-13.json"
+    },
+    {
+      "office": "civic-office-council-d6",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d6_2026-10-13.json"
+    },
+    {
+      "office": "civic-office-council-d2",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d2_2026-10-13.json"
+    }
+  ],
+  "ranAt": "2026-10-13T10:45:39.883Z"
+}

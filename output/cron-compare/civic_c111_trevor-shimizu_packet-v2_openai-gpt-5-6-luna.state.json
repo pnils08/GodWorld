@@ -1,0 +1,625 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00155",
+    "name": "Trevor Shimizu",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "12th St Oakland City Center ridership down 15,192 vs C110 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+    "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "transit",
+      "hood": null,
+      "facts": [
+        "8 stations + 10 corridors on the record this cycle; total ridership 36,303 (C110: 91,564)",
+        "12th St Oakland City Center: ridership 8,293 (-15,192 vs C110), on-time 86% (+5 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+        "19th St Oakland: ridership 5,155 (-10,950 vs C110), on-time 77% (-2 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+        "Fruitvale: ridership 4,178 (-7,557 vs C110), on-time 85% (+7 pts) — mild; holiday; events in Fruitvale, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+        "West Oakland: ridership 2,706 (-5,974 vs C110), on-time 84% (+9 pts) — mild; holiday; events in Jack London, Downtown; Baylight District — Final Council Vote: construction-active",
+        "Coliseum: ridership 3,397 (-4,626 vs C110), on-time 79% (+3 pts) — mild; holiday; events in East Oakland",
+        "MacArthur: ridership 5,587 (-4,409 vs C110), on-time 83% (+5 pts) — mild; holiday; events in Rockridge",
+        "Rockridge: ridership 4,310 (-3,334 vs C110), on-time 83% (+8 pts) — mild; holiday; events in Rockridge, Piedmont Ave",
+        "Lake Merritt: ridership 2,677 (-3,219 vs C110), on-time 86% (+2 pts) — mild; holiday",
+        "I-880 North: traffic index 62 (-38 vs C110) — mild; holiday; Baylight District — Final Council Vote: construction-active",
+        "I-880 South: traffic index 38 (-61 vs C110) — mild; holiday",
+        "I-580 East: traffic index 58 (-42 vs C110) — mild; holiday"
+      ],
+      "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+      "note": null,
+      "engineHooks": [],
+      "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-transit",
+    "hood": null,
+    "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+    "plan": {
+      "focus": "The disconnect between 12th Street's improved on-time stats and its steep ridership drop, particularly against the backdrop of Baylight District construction approvals.",
+      "closeQuestion": "Who benefited from 12th Street's missing 15,192 riders?"
+    },
+    "runningStories": [
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 3",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 3",
+      "Temescal Community Health Center — operational [Temescal] — week 3",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 3",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — week 3",
+      "Downtown Economic Revitalization — legislation-filed [Downtown] — under way",
+      "Commercial Stabilization for Grand Lake — announced [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — announced [West Oakland] — under way",
+      "Downtown Economic Revitalization — announced [Downtown] — ENDED this week after 3 week(s); now legislation-filed"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "profile": "Evan Lewis — Bus driver",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00218",
+        "name": "Joel Wren",
+        "profile": "Joel Wren — Mechanic",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00448",
+        "name": "Ray Neal",
+        "profile": "Ray Neal — AC Transit Bus Operator",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00573",
+        "name": "Calvin Mwangi",
+        "profile": "Calvin Mwangi — AC Transit Bus Driver",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00448-2610ebe1bd",
+        "pop": "POP-00448",
+        "name": "Ray Neal",
+        "quote": "You know, it’s quieter now. Fewer folks waiting, fewer folks boarding. Feels like the energy’s shifted somewhere else, but I can’t quite put my finger on where.",
+        "factIds": [
+          "F-c015c9e48ad0"
+        ],
+        "src": "packet.W2[POP-00448]"
+      },
+      {
+        "id": "Q-POP-00573-897c08b911",
+        "pop": "POP-00573",
+        "name": "Calvin Mwangi",
+        "quote": "Nah, can't say I've heard my regulars talk much about avoiding 12th Street specifically. Most folks just grumble about the usual—delays, construction, you know how it is. But no, nothing about the council vote coming up in conversation.",
+        "factIds": [
+          "F-c015c9e48ad0",
+          "F-fe34bfee06f8"
+        ],
+        "src": "packet.W2[POP-00573]"
+      },
+      {
+        "id": "Q-POP-00200-0735344cda",
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "quote": "You know, it's funny—on paper, the numbers look good, right? Better on-time stats should mean happier riders. But driving the route, I see it different. When they start tearing up streets for these big projects, people just... find another way. Doesn't matter if the bus shows up on time if the sidewalks are blocked and the air's full of dust. Folks in my neighborhood talk about it at the stop—they're tired of detours and noise, so they walk, bike, or just stay home. The stats don't show that frustration.",
+        "factIds": [
+          "F-fe34bfee06f8",
+          "F-c015c9e48ad0"
+        ],
+        "src": "packet.W2[POP-00200]"
+      },
+      {
+        "id": "Q-POP-00218-c083930a7c",
+        "pop": "POP-00218",
+        "name": "Joel Wren",
+        "quote": "I’ve been noticing fewer folks at the 12th Street station lately, even though the buses are running smoother than ever. It’s strange—people used to pack in there, but now it feels quieter. Maybe it’s the Baylight construction approvals making folks rethink their routes. Hard to say, but something’s shifted.",
+        "factIds": [
+          "F-fe34bfee06f8",
+          "F-c015c9e48ad0"
+        ],
+        "src": "packet.W2[POP-00218]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Trevor Shimizu",
+        "text": "Whispers about fare inspectors concentrating at 12th Street post-vote",
+        "usable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "Possible unlogged shuttle buses for Baylight contractors",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C111",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-a43c5d888b36"
+    },
+    {
+      "t": "FACT",
+      "text": "12th St Oakland City Center ridership down 15,192 vs C110 | 8 stations + 10 corridors on the record",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-53a06f0591d1"
+    },
+    {
+      "t": "FACT",
+      "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active; 10 transit workers on the roster.",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-c015c9e48ad0"
+    },
+    {
+      "t": "FACT",
+      "text": "8 stations + 10 corridors on the record this cycle; total ridership 36,303 (C110: 91,564)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-6ac4c6af0788"
+    },
+    {
+      "t": "FACT",
+      "text": "12th St Oakland City Center: ridership 8,293 (-15,192 vs C110), on-time 86% (+5 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-fe34bfee06f8"
+    },
+    {
+      "t": "FACT",
+      "text": "19th St Oakland: ridership 5,155 (-10,950 vs C110), on-time 77% (-2 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-f4361cec59af"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale: ridership 4,178 (-7,557 vs C110), on-time 85% (+7 pts) — mild; holiday; events in Fruitvale, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-d02d744053f5"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland: ridership 2,706 (-5,974 vs C110), on-time 84% (+9 pts) — mild; holiday; events in Jack London, Downtown; Baylight District — Final Council Vote: construction-active",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-e9a4539a8294"
+    },
+    {
+      "t": "FACT",
+      "text": "Coliseum: ridership 3,397 (-4,626 vs C110), on-time 79% (+3 pts) — mild; holiday; events in East Oakland",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-91b7b7815a00"
+    },
+    {
+      "t": "FACT",
+      "text": "MacArthur: ridership 5,587 (-4,409 vs C110), on-time 83% (+5 pts) — mild; holiday; events in Rockridge",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-fb8c804e33db"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge: ridership 4,310 (-3,334 vs C110), on-time 83% (+8 pts) — mild; holiday; events in Rockridge, Piedmont Ave",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-8cdd748c5e2f"
+    },
+    {
+      "t": "FACT",
+      "text": "Lake Merritt: ridership 2,677 (-3,219 vs C110), on-time 86% (+2 pts) — mild; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-1425baed386c"
+    },
+    {
+      "t": "FACT",
+      "text": "I-880 North: traffic index 62 (-38 vs C110) — mild; holiday; Baylight District — Final Council Vote: construction-active",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-6411ae78b93e"
+    },
+    {
+      "t": "FACT",
+      "text": "I-880 South: traffic index 38 (-61 vs C110) — mild; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-521ca214a79c"
+    },
+    {
+      "t": "FACT",
+      "text": "I-580 East: traffic index 58 (-42 vs C110) — mild; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-c46d57b5efb1"
+    },
+    {
+      "t": "FACT",
+      "text": "I-580 West: traffic index 37 (-61 vs C110) — mild; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-e96a719f5a1d"
+    },
+    {
+      "t": "FACT",
+      "text": "I-980: traffic index 33 (-67 vs C110) — mild; holiday; Baylight District — Final Council Vote: construction-active",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-b26f11b14110"
+    },
+    {
+      "t": "FACT",
+      "text": "Broadway: traffic index 38 (-62 vs C110) — mild; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-19a130450bb7"
+    },
+    {
+      "t": "FACT",
+      "text": "International Blvd: traffic index 36 (-58 vs C110) — mild; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-926a0f42a86f"
+    },
+    {
+      "t": "FACT",
+      "text": "MacArthur Blvd: traffic index 40 (-50 vs C110) — mild; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-498fbfcdeed7"
+    },
+    {
+      "t": "FACT",
+      "text": "Telegraph Ave: traffic index 31 (-69 vs C110) — mild; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-b897f44adaf2"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Ave: traffic index 30 (-37 vs C110) — mild; holiday",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "id": "F-b55ff43192dc"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed transit or infrastructure condition into a clear systems consequence, while keeping timestamps, failures, causal links, and cascade warnings bounded by the supplied record.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "dry third-person infrastructure and transit systems analysis",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed time, place, system condition, or implementation state",
+      "closing": "a bounded forward warning or maintenance question grounded in what remains unknown"
+    },
+    "authorizedTexture": [
+      "plain-language explanation of a Packet-backed infrastructure or transit condition",
+      "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
+      "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
+      "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+    ],
+    "textureConditions": [
+      "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
+      "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
+      "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
+      "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
+    ],
+    "canonBlockers": [
+      "an invented outage, closure, breakdown, delay, route, station, repair, inspection, maintenance event, service change, or infrastructure damage",
+      "an unsupported timestamp, duration, distance, capacity, load, count, budget, deadline, completion state, or performance metric",
+      "an unsupported causal link, cascade, responsible agency, duty, official act, official inaction, promise, or decision",
+      "a named person, place, route, station, system, agency, office, Project, Initiative, business, or organization not found in the supplied record",
+      "raw engine terminology or simulation values presented as an in-world technical measurement"
+    ]
+  },
+  "manifest": {
+    "id": "AM-22c168b8a035",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-a43c5d888b36",
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-53a06f0591d1",
+        "t": "FACT",
+        "text": "12th St Oakland City Center ridership down 15,192 vs C110 | 8 stations + 10 corridors on the record",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-c015c9e48ad0",
+        "t": "FACT",
+        "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active; 10 transit workers on the roster.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-6ac4c6af0788",
+        "t": "FACT",
+        "text": "8 stations + 10 corridors on the record this cycle; total ridership 36,303 (C110: 91,564)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-fe34bfee06f8",
+        "t": "FACT",
+        "text": "12th St Oakland City Center: ridership 8,293 (-15,192 vs C110), on-time 86% (+5 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-f4361cec59af",
+        "t": "FACT",
+        "text": "19th St Oakland: ridership 5,155 (-10,950 vs C110), on-time 77% (-2 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-d02d744053f5",
+        "t": "FACT",
+        "text": "Fruitvale: ridership 4,178 (-7,557 vs C110), on-time 85% (+7 pts) — mild; holiday; events in Fruitvale, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-e9a4539a8294",
+        "t": "FACT",
+        "text": "West Oakland: ridership 2,706 (-5,974 vs C110), on-time 84% (+9 pts) — mild; holiday; events in Jack London, Downtown; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-91b7b7815a00",
+        "t": "FACT",
+        "text": "Coliseum: ridership 3,397 (-4,626 vs C110), on-time 79% (+3 pts) — mild; holiday; events in East Oakland",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-fb8c804e33db",
+        "t": "FACT",
+        "text": "MacArthur: ridership 5,587 (-4,409 vs C110), on-time 83% (+5 pts) — mild; holiday; events in Rockridge",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-8cdd748c5e2f",
+        "t": "FACT",
+        "text": "Rockridge: ridership 4,310 (-3,334 vs C110), on-time 83% (+8 pts) — mild; holiday; events in Rockridge, Piedmont Ave",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-1425baed386c",
+        "t": "FACT",
+        "text": "Lake Merritt: ridership 2,677 (-3,219 vs C110), on-time 86% (+2 pts) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-6411ae78b93e",
+        "t": "FACT",
+        "text": "I-880 North: traffic index 62 (-38 vs C110) — mild; holiday; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-521ca214a79c",
+        "t": "FACT",
+        "text": "I-880 South: traffic index 38 (-61 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-c46d57b5efb1",
+        "t": "FACT",
+        "text": "I-580 East: traffic index 58 (-42 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-e96a719f5a1d",
+        "t": "FACT",
+        "text": "I-580 West: traffic index 37 (-61 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-b26f11b14110",
+        "t": "FACT",
+        "text": "I-980: traffic index 33 (-67 vs C110) — mild; holiday; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-19a130450bb7",
+        "t": "FACT",
+        "text": "Broadway: traffic index 38 (-62 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-926a0f42a86f",
+        "t": "FACT",
+        "text": "International Blvd: traffic index 36 (-58 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-498fbfcdeed7",
+        "t": "FACT",
+        "text": "MacArthur Blvd: traffic index 40 (-50 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-b897f44adaf2",
+        "t": "FACT",
+        "text": "Telegraph Ave: traffic index 31 (-69 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      },
+      {
+        "id": "F-b55ff43192dc",
+        "t": "FACT",
+        "text": "Grand Ave: traffic index 30 (-37 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00448-2610ebe1bd",
+        "speakerId": "POP-00448",
+        "speakerName": "Ray Neal",
+        "text": "You know, it’s quieter now. Fewer folks waiting, fewer folks boarding. Feels like the energy’s shifted somewhere else, but I can’t quite put my finger on where.",
+        "factIds": [
+          "F-c015c9e48ad0"
+        ],
+        "src": "packet.W2[POP-00448]"
+      },
+      {
+        "id": "Q-POP-00573-897c08b911",
+        "speakerId": "POP-00573",
+        "speakerName": "Calvin Mwangi",
+        "text": "Nah, can't say I've heard my regulars talk much about avoiding 12th Street specifically. Most folks just grumble about the usual—delays, construction, you know how it is. But no, nothing about the council vote coming up in conversation.",
+        "factIds": [
+          "F-c015c9e48ad0",
+          "F-fe34bfee06f8"
+        ],
+        "src": "packet.W2[POP-00573]"
+      },
+      {
+        "id": "Q-POP-00200-0735344cda",
+        "speakerId": "POP-00200",
+        "speakerName": "Evan Lewis",
+        "text": "You know, it's funny—on paper, the numbers look good, right? Better on-time stats should mean happier riders. But driving the route, I see it different. When they start tearing up streets for these big projects, people just... find another way. Doesn't matter if the bus shows up on time if the sidewalks are blocked and the air's full of dust. Folks in my neighborhood talk about it at the stop—they're tired of detours and noise, so they walk, bike, or just stay home. The stats don't show that frustration.",
+        "factIds": [
+          "F-fe34bfee06f8",
+          "F-c015c9e48ad0"
+        ],
+        "src": "packet.W2[POP-00200]"
+      },
+      {
+        "id": "Q-POP-00218-c083930a7c",
+        "speakerId": "POP-00218",
+        "speakerName": "Joel Wren",
+        "text": "I’ve been noticing fewer folks at the 12th Street station lately, even though the buses are running smoother than ever. It’s strange—people used to pack in there, but now it feels quieter. Maybe it’s the Baylight construction approvals making folks rethink their routes. Hard to say, but something’s shifted.",
+        "factIds": [
+          "F-fe34bfee06f8",
+          "F-c015c9e48ad0"
+        ],
+        "src": "packet.W2[POP-00218]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00200",
+        "name": "Evan Lewis",
+        "profile": "Evan Lewis — Bus driver",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00218",
+        "name": "Joel Wren",
+        "profile": "Joel Wren — Mechanic",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00448",
+        "name": "Ray Neal",
+        "profile": "Ray Neal — AC Transit Bus Operator",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00573",
+        "name": "Calvin Mwangi",
+        "profile": "Calvin Mwangi — AC Transit Bus Driver",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Trevor Shimizu",
+        "text": "Whispers about fare inspectors concentrating at 12th Street post-vote",
+        "publishable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "Possible unlogged shuttle buses for Baylight contractors",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language explanation of a Packet-backed infrastructure or transit condition",
+      "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
+      "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
+      "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+    ],
+    "textureConditions": [
+      "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
+      "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
+      "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
+      "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented outage, closure, breakdown, delay, route, station, repair, inspection, maintenance event, service change, or infrastructure damage",
+      "an unsupported timestamp, duration, distance, capacity, load, count, budget, deadline, completion state, or performance metric",
+      "an unsupported causal link, cascade, responsible agency, duty, official act, official inaction, promise, or decision",
+      "a named person, place, route, station, system, agency, office, Project, Initiative, business, or organization not found in the supplied record",
+      "raw engine terminology or simulation values presented as an in-world technical measurement"
+    ]
+  }
+}

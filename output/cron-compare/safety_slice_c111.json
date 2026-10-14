@@ -1,0 +1,895 @@
+{
+  "version": "SAFETY-SLICE-3",
+  "empty": false,
+  "cycle": 111,
+  "kind": "beat-safety",
+  "seat": {
+    "slug": "rachel-torres",
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057",
+    "desk": "civic",
+    "domain": "public-safety",
+    "builder": "buildSafetySlice.js"
+  },
+  "hood": "San Antonio",
+  "pulse": {
+    "className": "beat-safety",
+    "score": 100,
+    "label": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table",
+    "hood": "San Antonio",
+    "source": "output/beats/Crime_Metrics.jsonl @C111"
+  },
+  "story": {
+    "kind": "beat-safety",
+    "angle": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table — what the table says and who answers for it",
+    "label": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table",
+    "hookLine": "San Antonio leads the incident count; Uptown waits longest for a response; 64 in custody citywide; 7 public-safety staff on the roster.",
+    "hood": "San Antonio",
+    "citizens": [
+      "Rafael Montez (POP-00136)",
+      "Kimberly Cho (POP-00137)",
+      "Leonard Briggs (POP-00138)",
+      "Samantha Viteri (POP-00139)",
+      "Marcus Hollowell (POP-00140)",
+      "Priya Narang (POP-00141)",
+      "Vanessa Tran-Muñoz (POP-01021)"
+    ],
+    "popids": [
+      "POP-00136",
+      "POP-00137",
+      "POP-00138",
+      "POP-00139",
+      "POP-00140",
+      "POP-00141",
+      "POP-01021"
+    ],
+    "ref": "output/beats/Crime_Metrics.jsonl @C111",
+    "cycle": 111
+  },
+  "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00136",
+      "name": "Rafael Montez",
+      "role": "Police Chief",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Rafael Montez — Police Chief — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00137",
+      "name": "Kimberly Cho",
+      "role": "DEPUTY CHIEF OF OPERATIONS",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00138",
+      "name": "Leonard Briggs",
+      "role": "DEPUTY CHIEF OF COMMUNITY ENGAGEMENT",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00139",
+      "name": "Samantha Viteri",
+      "role": "INTERNAL AFFAIRS DIVISION LEAD",
+      "neighborhood": null,
+      "business": "Oakland Police Department",
+      "profile": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department",
+      "why": "works at Oakland Police Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00140",
+      "name": "Marcus Hollowell",
+      "role": "FIRE CHIEF",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Marcus Hollowell — FIRE CHIEF — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00141",
+      "name": "Priya Narang",
+      "role": "EMS DIRECTOR",
+      "neighborhood": null,
+      "business": "Oakland Fire Department",
+      "profile": "Priya Narang — EMS DIRECTOR — Oakland Fire Department",
+      "why": "works at Oakland Fire Department (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01021",
+      "name": "Vanessa Tran-Muñoz",
+      "role": "OARI Program Director",
+      "neighborhood": null,
+      "business": "Oakland Alternative Response Initiative",
+      "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+      "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "140 incidents across 22 neighborhoods; most in San Antonio 9, Glenview 8, Ivy Hill 8, Grand Lake 8, Adams Point 8; fewest in Lake Merritt 5, Jack London 5, Downtown 4",
+      "src": "output/beats/Crime_Metrics.jsonl @C111"
+    },
+    {
+      "text": "San Antonio: 9 incidents (+1 vs C110), response 10.4 min, clearance 21%, property index 36, violent index 27",
+      "src": "output/beats/Crime_Metrics.jsonl @C111"
+    },
+    {
+      "text": "Slowest response: Uptown: 6 incidents (+0 vs C110), response 11.4 min, clearance 21%, property index 36, violent index 20",
+      "src": "output/beats/Crime_Metrics.jsonl @C111"
+    },
+    {
+      "text": "Moved this cycle — rising: East Oakland; easing: Adams Point, Jack London",
+      "src": "output/beats/Crime_Metrics.jsonl @C111"
+    },
+    {
+      "text": "Citywide custody this cycle: 30 arrests (0 tracked, 30 other residents); 64 in custody at the close; 34 left",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 city"
+    },
+    {
+      "text": "Adams Point: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Adams Point"
+    },
+    {
+      "text": "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Baylight District"
+    },
+    {
+      "text": "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Chinatown"
+    },
+    {
+      "text": "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Grand Lake"
+    },
+    {
+      "text": "San Antonio: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 San Antonio"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table — what the table says and who answers for it",
+    "hookLine": "San Antonio leads the incident count; Uptown waits longest for a response; 64 in custody citywide; 7 public-safety staff on the roster.",
+    "anchorFacts": [
+      "140 incidents across 22 neighborhoods; most in San Antonio 9, Glenview 8, Ivy Hill 8, Grand Lake 8, Adams Point 8; fewest in Lake Merritt 5, Jack London 5, Downtown 4",
+      "San Antonio: 9 incidents (+1 vs C110), response 10.4 min, clearance 21%, property index 36, violent index 27",
+      "Slowest response: Uptown: 6 incidents (+0 vs C110), response 11.4 min, clearance 21%, property index 36, violent index 20",
+      "Moved this cycle — rising: East Oakland; easing: Adams Point, Jack London",
+      "Citywide custody this cycle: 30 arrests (0 tracked, 30 other residents); 64 in custody at the close; 34 left",
+      "Adams Point: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "San Antonio: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked"
+    ],
+    "evidence": [
+      {
+        "text": "140 incidents across 22 neighborhoods; most in San Antonio 9, Glenview 8, Ivy Hill 8, Grand Lake 8, Adams Point 8; fewest in Lake Merritt 5, Jack London 5, Downtown 4",
+        "src": "output/beats/Crime_Metrics.jsonl @C111"
+      },
+      {
+        "text": "San Antonio: 9 incidents (+1 vs C110), response 10.4 min, clearance 21%, property index 36, violent index 27",
+        "src": "output/beats/Crime_Metrics.jsonl @C111"
+      },
+      {
+        "text": "Slowest response: Uptown: 6 incidents (+0 vs C110), response 11.4 min, clearance 21%, property index 36, violent index 20",
+        "src": "output/beats/Crime_Metrics.jsonl @C111"
+      },
+      {
+        "text": "Moved this cycle — rising: East Oakland; easing: Adams Point, Jack London",
+        "src": "output/beats/Crime_Metrics.jsonl @C111"
+      },
+      {
+        "text": "Citywide custody this cycle: 30 arrests (0 tracked, 30 other residents); 64 in custody at the close; 34 left",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 city"
+      },
+      {
+        "text": "Adams Point: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Adams Point"
+      },
+      {
+        "text": "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Baylight District"
+      },
+      {
+        "text": "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Chinatown"
+      },
+      {
+        "text": "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Grand Lake"
+      },
+      {
+        "text": "San Antonio: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 San Antonio"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 110
+    },
+    "hooks": [],
+    "note": "desk-signal incident rows attached as pointers (4)",
+    "pageVoices": [],
+    "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first"
+  },
+  "table": [
+    {
+      "hood": "San Antonio",
+      "property": 36,
+      "violent": 27,
+      "response": 10.4,
+      "clearance": 0.21,
+      "incidents": 9,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.06
+    },
+    {
+      "hood": "Glenview",
+      "property": 34,
+      "violent": 28,
+      "response": 10.4,
+      "clearance": 0.18,
+      "incidents": 8,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.04
+    },
+    {
+      "hood": "Ivy Hill",
+      "property": 38,
+      "violent": 26,
+      "response": 10.2,
+      "clearance": 0.21,
+      "incidents": 8,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.08
+    },
+    {
+      "hood": "Grand Lake",
+      "property": 36,
+      "violent": 24,
+      "response": 9.9,
+      "clearance": 0.2,
+      "incidents": 8,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.01
+    },
+    {
+      "hood": "Adams Point",
+      "property": 34,
+      "violent": 21,
+      "response": 11,
+      "clearance": 0.21,
+      "incidents": 8,
+      "trend": "falling",
+      "hotspot": null,
+      "pressure": 0.92
+    },
+    {
+      "hood": "Chinatown",
+      "property": 34,
+      "violent": 25,
+      "response": 10.4,
+      "clearance": 0.22,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.99
+    },
+    {
+      "hood": "West Oakland",
+      "property": 32,
+      "violent": 25,
+      "response": 10.5,
+      "clearance": 0.23,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.96
+    },
+    {
+      "hood": "Rockridge",
+      "property": 32,
+      "violent": 23,
+      "response": 10.5,
+      "clearance": 0.24,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.92
+    },
+    {
+      "hood": "Baylight District",
+      "property": 27,
+      "violent": 22,
+      "response": 10,
+      "clearance": 0.23,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.82
+    },
+    {
+      "hood": "Temescal",
+      "property": 43,
+      "violent": 21,
+      "response": 9.9,
+      "clearance": 0.21,
+      "incidents": 7,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.08
+    },
+    {
+      "hood": "East Oakland",
+      "property": 39,
+      "violent": 31,
+      "response": 11.2,
+      "clearance": 0.2,
+      "incidents": 6,
+      "trend": "rising",
+      "hotspot": null,
+      "pressure": 1.18
+    },
+    {
+      "hood": "Brooklyn",
+      "property": 34,
+      "violent": 26,
+      "response": 10.2,
+      "clearance": 0.23,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.01
+    },
+    {
+      "hood": "Eastlake",
+      "property": 34,
+      "violent": 25,
+      "response": 10.5,
+      "clearance": 0.21,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.99
+    },
+    {
+      "hood": "Piedmont Ave",
+      "property": 36,
+      "violent": 21,
+      "response": 11.2,
+      "clearance": 0.21,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.96
+    },
+    {
+      "hood": "Uptown",
+      "property": 36,
+      "violent": 20,
+      "response": 11.4,
+      "clearance": 0.21,
+      "incidents": 6,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.94
+    },
+    {
+      "hood": "Fruitvale",
+      "property": 36,
+      "violent": 27,
+      "response": 11,
+      "clearance": 0.22,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.06
+    },
+    {
+      "hood": "Laurel",
+      "property": 37,
+      "violent": 26,
+      "response": 10.9,
+      "clearance": 0.2,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.06
+    },
+    {
+      "hood": "KONO",
+      "property": 38,
+      "violent": 24,
+      "response": 10.4,
+      "clearance": 0.2,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.04
+    },
+    {
+      "hood": "Dimond",
+      "property": 39,
+      "violent": 23,
+      "response": 10.4,
+      "clearance": 0.2,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 1.04
+    },
+    {
+      "hood": "Lake Merritt",
+      "property": 32,
+      "violent": 20,
+      "response": 11,
+      "clearance": 0.19,
+      "incidents": 5,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.87
+    },
+    {
+      "hood": "Jack London",
+      "property": 32,
+      "violent": 18,
+      "response": 10.1,
+      "clearance": 0.2,
+      "incidents": 5,
+      "trend": "falling",
+      "hotspot": null,
+      "pressure": 0.84
+    },
+    {
+      "hood": "Downtown",
+      "property": 35,
+      "violent": 20,
+      "response": 10.7,
+      "clearance": 0.19,
+      "incidents": 4,
+      "trend": "steady",
+      "hotspot": null,
+      "pressure": 0.92
+    }
+  ],
+  "signalPointers": [
+    {
+      "label": "Oakland Alternative Response Initiative | Status passed | phase dispatch-live",
+      "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c111.json snapshots.Initiative_Tracker; storyline INIT-002:dispatch-live",
+      "hood": "West Oakland, Fruitvale, East Oakland"
+    },
+    {
+      "label": "Oakland Alternative Response Initiative | Quarterly outcome report C112",
+      "ref": "Initiative_Tracker (InitiativeID INIT-002); storyline INIT-002:dispatch-live",
+      "hood": null
+    },
+    {
+      "label": "sentiment/communityEngagement/nightlife | Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oak",
+      "ref": "Ripple_Ledger cycle 111 (CauseType initiative-implementation); rendered: world_summary_c111.md \"## What Moved\" > \"### initiative-implementation\"; storyline INIT-002:dispatch-live",
+      "hood": null
+    },
+    {
+      "label": "approval/district-sentiment | Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth Apprenticeship Pipeline sitting (0, capped); level targ",
+      "ref": "Ripple_Ledger cycle 111 (CauseType approval-shift); rendered: world_summary_c111.md \"## What Moved\" > \"### approval-shift\"",
+      "hood": "D3"
+    }
+  ],
+  "court": {
+    "state": "NO_CASES",
+    "cases": [],
+    "sportsCases": 0
+  },
+  "custodyTrail": {
+    "state": "ON_RECORD",
+    "city": {
+      "scope": "city",
+      "hood": null,
+      "complete": true,
+      "completeness": "complete",
+      "demand": null,
+      "intakes": 30,
+      "tracked": 0,
+      "other": 30,
+      "closing": 64,
+      "trackedOcc": 0,
+      "otherOcc": 64,
+      "beds": null,
+      "exits": 34,
+      "names": []
+    },
+    "unallocated": {
+      "scope": "unallocated",
+      "hood": null,
+      "complete": true,
+      "completeness": "complete",
+      "demand": null,
+      "intakes": 0,
+      "tracked": 0,
+      "other": 0,
+      "closing": 0,
+      "trackedOcc": 0,
+      "otherOcc": 0,
+      "beds": null,
+      "exits": 0,
+      "names": []
+    },
+    "hoods": [
+      {
+        "scope": "neighborhood",
+        "hood": "Adams Point",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 8,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Baylight District",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 7,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Chinatown",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 7,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Grand Lake",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 8,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "San Antonio",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 9,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "West Oakland",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 7,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 4,
+        "trackedOcc": 0,
+        "otherOcc": 4,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Ivy Hill",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 8,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Rockridge",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 7,
+        "intakes": 2,
+        "tracked": 0,
+        "other": 2,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Brooklyn",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 6,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Downtown",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 4,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "East Oakland",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 6,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "KONO",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 5,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Laurel",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 5,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Piedmont Ave",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 6,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 3,
+        "trackedOcc": 0,
+        "otherOcc": 3,
+        "beds": null,
+        "exits": 2,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Dimond",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 5,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Eastlake",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 6,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Fruitvale",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 5,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Glenview",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 8,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Jack London",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 5,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Lake Merritt",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 5,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Temescal",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 7,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      },
+      {
+        "scope": "neighborhood",
+        "hood": "Uptown",
+        "complete": true,
+        "completeness": "complete",
+        "demand": 6,
+        "intakes": 1,
+        "tracked": 0,
+        "other": 1,
+        "closing": 2,
+        "trackedOcc": 0,
+        "otherOcc": 2,
+        "beds": null,
+        "exits": 1,
+        "names": []
+      }
+    ]
+  },
+  "pointers": [
+    "output/beats/Crime_Metrics.jsonl @C111",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

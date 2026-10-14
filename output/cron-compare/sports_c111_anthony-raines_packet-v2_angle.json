@@ -1,0 +1,448 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "anthony-raines",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00017",
+      "name": "Anthony Raines",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The season line (6IP) has to carry the claim before the narrative does: John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games.",
+      "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "sports-analytics",
+        "pulseClass": "award-board",
+        "bagTools": [
+          "1 Box-Card Read",
+          "7 Is-It-Real (ledger PANDAS)"
+        ],
+        "claim": "The season line (6IP) has to carry the claim before the narrative does: John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games.",
+        "lineFacts": [
+          "Feed line: John Ellis/6IP/2ER/5SO",
+          "Feed line: Eric Taveras/1HR/2RBI",
+          "Feed line: Darrin Davis/1HR/2RBI/3-4",
+          "Feed line: Mark Aitken/1HR/1RBI",
+          "Feed line: Vinnie Keane/1H/1RBI",
+          "Team record (feed): 4-1 · W3"
+        ],
+        "missing": [
+          "x-stats / barrel% / launch angle / OAA not on feed",
+          "contracts or salaries not printed on this feed row",
+          "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)"
+        ],
+        "sceneRule": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers.",
+        "sourcePointers": [
+          "output/world_summary_c111.md ## Sports",
+          "docs/media/ANTHONY_ANALYSIS_BAG.md",
+          "scripts/sportsSubstrate.js",
+          "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 4"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sports-analytics",
+      "hood": "Downtown",
+      "score": null,
+      "src": "world_summary_c111.md ## Sports",
+      "team": "A's",
+      "nearby": [
+        {
+          "text": "A's | editorial-note | (off-season) | Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Vladimir Gonzalez",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | editorial-note | (off-season) | Mark Aitken, Carmen Mesa, Desmond Morton, Frank Reyna, Kevin Clark",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season)",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Elliot Abraham",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "A's · game-result — John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-acf172dddd79"
+      },
+      {
+        "t": "FACT",
+        "text": "John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games.",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-8d4edad6596f"
+      },
+      {
+        "t": "FACT",
+        "text": "Feed line: John Ellis/6IP/2ER/5SO",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-3cebc2df8eec"
+      },
+      {
+        "t": "FACT",
+        "text": "Feed line: Eric Taveras/1HR/2RBI",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-f15fe705b893"
+      },
+      {
+        "t": "FACT",
+        "text": "Feed line: Darrin Davis/1HR/2RBI/3-4",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-3909b6603f35"
+      },
+      {
+        "t": "FACT",
+        "text": "Feed line: Mark Aitken/1HR/1RBI",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-abdf63471e8e"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017"
+  },
+  "assignment": {
+    "story": {
+      "kind": "sports-analytics",
+      "angle": "The season line (6IP) has to carry the claim before the narrative does: John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games.",
+      "label": "A's · game-result — John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly",
+      "hookLine": "John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games.",
+      "hood": "Downtown",
+      "pulseClass": "award-board",
+      "team": "A's",
+      "eventKind": "game-result",
+      "citizens": [
+        "John Ellis (POP-00033)",
+        "Eric Taveras (POP-00597)",
+        "Vinnie Keane (POP-00001)",
+        "Benji Dillon (POP-00018)"
+      ],
+      "popids": [
+        "POP-00033",
+        "POP-00597",
+        "POP-00001",
+        "POP-00018"
+      ],
+      "ref": "world_summary_c111.md ## Sports",
+      "cycle": 110
+    },
+    "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": {
+    "pulse": {
+      "className": "award-board",
+      "score": 66,
+      "label": "A's · game-result — John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly",
+      "team": "A's",
+      "eventKind": "game-result",
+      "seasonType": "playoffs",
+      "storyAngle": "John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games.",
+      "hasStats": true,
+      "record": "4-1",
+      "streak": "W3",
+      "foilNumber": "6IP",
+      "feedCycle": 110
+    },
+    "bag": {
+      "tools": [
+        {
+          "id": 1,
+          "name": "Box-Card Read"
+        },
+        {
+          "id": 7,
+          "name": "Is-It-Real (ledger PANDAS)"
+        }
+      ],
+      "claim": "The season line (6IP) has to carry the claim before the narrative does: John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games.",
+      "foilNumber": "6IP"
+    },
+    "prewrite": {
+      "reporter": "Anthony Raines",
+      "bagTools": [
+        {
+          "id": 1,
+          "name": "Box-Card Read"
+        },
+        {
+          "id": 7,
+          "name": "Is-It-Real (ledger PANDAS)"
+        }
+      ],
+      "lineFacts": [
+        "Feed line: John Ellis/6IP/2ER/5SO",
+        "Feed line: Eric Taveras/1HR/2RBI",
+        "Feed line: Darrin Davis/1HR/2RBI/3-4",
+        "Feed line: Mark Aitken/1HR/1RBI",
+        "Feed line: Vinnie Keane/1H/1RBI",
+        "Team record (feed): 4-1 · W3"
+      ],
+      "dossierFacts": [
+        "John Ellis TrueSource: 2041 REGULAR SEASON — Games: 32 Games Started: 32 Wins: 20 Losses: 3 Saves: 0 Blown Saves: 0 Holds: 0 Innings Pitched: 189.2 Hits Allowed: 184 Runs Al | WAR: 3.7 | AWARDS (Career Reference)",
+        "Eric Taveras TrueSource: FULL STAT TRUE SOURCE — BATTER Name: Eric Taveras Team: Athletics Position: 2B Jersey: #22 -------------------------------------------------- PROFILE Potential: A Overall: 93 MLB Service: 6.000 Age: 25 Bats: L Throws: R Height: 5'10\" Weight: 184 LBS Drafted: RND 1 (2033) Secondar",
+        "Vinnie Keane TrueSource: 2041 REGULAR SEASON G: 37 PA: 130 AB: 127 R: 25 H: 40 2B: 8 3B: 1 HR: 13 RBI: 29 BB: 0 SO: 6 HBP: 0 SF: 3 SAC: 0 GIDP: 2 AVG: 0.315 OBP: 0.308 SLG: 0. | WAR: 1.1 | AWARDS (Career Reference) - MVP (2031) - 8x All-Star (2025, 2027, 2028, 2029, 2030, 2031, ",
+        "Benji Dillon TrueSource: 2041 REGULAR SEASON — Games: 35 Games Started: 28 Wins: 10 Losses: 8 Saves: 1 Blown Saves: 0 Holds: 1 Innings Pitched: 150.1 Hits Allowed: 155 Runs Al | WAR: 2.2 | AWARDS (Career Reference) - Cy Young (2028, 2032, 2033, 2034, 2037) - Rookie of the Year ("
+      ],
+      "feedFacts": [
+        "StoryAngle: John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games.",
+        "Notes: Game 5 of the WS; A's visit the Phillies for game 5. The Oakland A's win the World Series behing John Ellis continued string of strong pitching only giving up 3 earned runs. The bullpen stayed hot in ",
+        "Record/Streak: 4-1 / W3"
+      ],
+      "claim": "The season line (6IP) has to carry the claim before the narrative does: John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games.",
+      "missing": [
+        "x-stats / barrel% / launch angle / OAA not on feed",
+        "contracts or salaries not printed on this feed row",
+        "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)"
+      ],
+      "foilNumber": "6IP",
+      "anchorFacts": [
+        "Feed line: John Ellis/6IP/2ER/5SO",
+        "Feed line: Eric Taveras/1HR/2RBI",
+        "Feed line: Darrin Davis/1HR/2RBI/3-4",
+        "Feed line: Mark Aitken/1HR/1RBI"
+      ],
+      "hooks": []
+    },
+    "friction": {
+      "a": "Feed present fact: John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Eric Taveras fittingly provides the power along with veterans Darrin Davis , and Mark Aitken. Vinnie Keane , Benji Dillon appear in their final games.",
+      "b": "Soft FO language or bleacher heat that skips the line",
+      "frame": "Evaluate fit and process with numbers — one claim, third person."
+    },
+    "players": [
+      {
+        "name": "John Ellis",
+        "popid": "POP-00033",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Laurel",
+        "why": "feed-names"
+      },
+      {
+        "name": "Eric Taveras",
+        "popid": "POP-00597",
+        "role": "Second Baseman, Oakland A's",
+        "neighborhood": "Downtown",
+        "why": "feed-names"
+      },
+      {
+        "name": "Vinnie Keane",
+        "popid": "POP-00001",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Grand Lake",
+        "why": "feed-names"
+      },
+      {
+        "name": "Benji Dillon",
+        "popid": "POP-00018",
+        "role": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Downtown",
+      "record": "4-1",
+      "streak": "W3",
+      "colorRoom": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers."
+    },
+    "candidates": [
+      {
+        "score": 66,
+        "cycle": 110,
+        "team": "A's",
+        "primary": "award-board",
+        "hasStats": true,
+        "angle": "John Ellis bounces back in game 5 to win the A's their 7th World Series title under Mike Paulson. Er"
+      },
+      {
+        "score": 66,
+        "cycle": 110,
+        "team": "A's",
+        "primary": "award-board",
+        "hasStats": true,
+        "angle": "A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for bot"
+      },
+      {
+        "score": 57,
+        "cycle": 110,
+        "team": "Oaks",
+        "primary": "line-card",
+        "hasStats": true,
+        "angle": "The Oaks visit the Chicago Bulls, The Oaks lose their 4th straight pre-season game. The Chicago Bull"
+      },
+      {
+        "score": 57,
+        "cycle": 110,
+        "team": "Oaks",
+        "primary": "line-card",
+        "hasStats": true,
+        "angle": "The Oaks welcome the Miami Heat to Oakland to lose their final preseason game. The Oaks are winless "
+      },
+      {
+        "score": 55,
+        "cycle": 109,
+        "team": "A's",
+        "primary": "line-card",
+        "hasStats": true,
+        "angle": "Pablo Almanzar gets the call in game 3, and continues to dazzle. Ernesto Quintero and Jose Colon han"
+      },
+      {
+        "score": 54,
+        "cycle": 110,
+        "team": "A's",
+        "primary": "line-card",
+        "hasStats": true,
+        "angle": "Henry Rivas shines in game 4, while Horn stays hot and Mark Aitken and Isley Kelley provide power."
+      }
+    ]
+  },
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "text": "I’m focusing on John Ellis’s bounce-back performance in Game 5, which clinched the A’s their seventh World Series title under Mike Paulson. The numbers tell the story: 6 innings pitched, 2 earned runs, and 5 strikeouts. Eric Taveras provided the power with a home run and two RBIs, supported by veterans Darrin Davis and Mark Aitken. This feels like a moment to dig into how Ellis steadied himself after earlier struggles and how Taveras stepped up when it mattered most.",
+    "plan": {
+      "chase": "I’m focusing on John Ellis’s bounce-back performance in Game 5, which clinched the A’s their seventh World Series title under Mike Paulson. The numbers tell the story: 6 innings pitched, 2 earned runs, and 5 strikeouts. Eric Taveras provided the power with a home run and two RBIs, supported by veterans Darrin Davis and Mark Aitken. This feels like a moment to dig into how Ellis steadied himself after earlier struggles and how Taveras stepped up when it mattered most.",
+      "focus": "John Ellis’s performance in Game 5 and Eric Taveras’s contributions.",
+      "why": "The season line (6IP) carries the claim before the narrative does. Ellis’s bounce-back and Taveras’s power are key to understanding how the A’s secured their seventh title.",
+      "checks": [
+        "Verify Ellis’s season stats leading up to Game 5.",
+        "Confirm Taveras’s role in critical moments throughout the series."
+      ],
+      "targets": [],
+      "interpretation": "Ellis’s ability to rebound in Game 5 underscores his resilience, while Taveras’s timely hitting highlights his clutch performance. Together, they exemplify the depth and experience that propelled the A’s to another championship.",
+      "unverifiedLead": [
+        "How did Ellis adjust his approach after earlier struggles?",
+        "What role did Taveras’s preparation play in his Game 5 performance?"
+      ],
+      "closeQuestion": "What does Ellis’s Game 5 performance reveal about his ability to handle pressure in high-stakes moments?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | editorial-note | (off-season) | Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Vladimir Gonzalez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598"
+      ]
+    },
+    {
+      "label": "A's | editorial-note | (off-season) | Mark Aitken, Carmen Mesa, Desmond Morton, Frank Reyna, Kevin Clark",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00081",
+        "POP-00051",
+        "POP-00079",
+        "POP-00053"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Elliot Abraham",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01046"
+      ]
+    }
+  ],
+  "laneEntries": 8,
+  "ranAt": "2026-10-12T11:17:28.308Z"
+}

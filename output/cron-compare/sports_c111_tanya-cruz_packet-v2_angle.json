@@ -1,0 +1,292 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00014",
+      "name": "Tanya Cruz",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "A's off-season update: -",
+      "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+      "creativeBrief": {
+        "kind": "sideline-dispatch",
+        "pulseClass": "record-only-sideline",
+        "bagModes": [
+          "10 Inference Close"
+        ],
+        "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+        "anchorFacts": [],
+        "accessEvidence": {
+          "state": "ALLOTTED",
+          "facts": [
+            "clubhouse/sideline SET is the reporter's room"
+          ]
+        },
+        "quoteEvidence": {
+          "state": "NOT_SUPPLIED",
+          "quotes": []
+        },
+        "observationEvidence": {
+          "state": "ALLOTTED",
+          "facts": []
+        },
+        "missing": [
+          "Packet player quotes",
+          "injury or team-response facts beyond the supplied record"
+        ],
+        "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+        "sourcePointers": [
+          "output/world_summary_c111.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/TANYA_SIDELINE_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sideline-signal",
+      "hood": "Downtown",
+      "score": null,
+      "src": "world_summary_c111.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | editorial-note | (off-season) | Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Vladimir Gonzalez",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | editorial-note | (off-season) | Mark Aitken, Carmen Mesa, Desmond Morton, Frank Reyna, Kevin Clark",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season)",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Elliot Abraham",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00527",
+          "name": "Mike Paulson",
+          "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00527",
+            "rowName": "Mike Paulson",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "A's off-season update: -",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-7540b298860a"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00527",
+        "name": "Mike Paulson",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "hood": "Jack London",
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00527",
+          "rowName": "Mike Paulson",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "A's off-season update: -",
+      "label": "A's off-season update: -",
+      "hookLine": "A's off-season update: -",
+      "kind": "sideline-signal",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00527"
+      ],
+      "citizens": [
+        "Mike Paulson (POP-00527)"
+      ],
+      "ref": "world_summary_c111.md ## Sports",
+      "cycle": 111
+    },
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "text": "The clubhouse is quiet in a way it never is in October. I stand near the empty stalls and think about how a season ends and another one starts before anyone has caught their breath. Mike Paulson's name is on everyone's lips but he isn't here, and that absence is the story. I want to watch how the room fills back up, who lingers, who leaves early. The off-season is a waiting game and I am good at waiting.",
+    "plan": {
+      "chase": "The clubhouse is quiet in a way it never is in October. I stand near the empty stalls and think about how a season ends and another one starts before anyone has caught their breath. Mike Paulson's name is on everyone's lips but he isn't here, and that absence is the story. I want to watch how the room fills back up, who lingers, who leaves early. The off-season is a waiting game and I am good at waiting.",
+      "focus": "The shape of the A's off-season as it takes form in the clubhouse, before any official moves are announced.",
+      "why": "The record is blank — an off-season update with nothing on it yet. That blank is the story. The decisions Mike Paulson faces will land on these stalls, these lockers, these men. I want to be in the room when the weather changes.",
+      "checks": [
+        "Walk the clubhouse during open hours and note which players are around, which are gone.",
+        "Listen for how the coaching staff talks about the season ahead without saying anything official.",
+        "Watch for small signals — who is packing up, who is already talking about next year.",
+        "Keep an ear out for community outreach plans, like Vladimir Gonzalez's work, that keep the team tied to Oakland even in the off months."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00527",
+          "question": "What does Mike Paulson see when he looks at this roster and this city, and how does he balance the pressure of a seventh championship with the reality of an off-season full of choices?",
+          "basis": "He is the general manager and the editorial note centers on the decisions he faces this off-season."
+        }
+      ],
+      "interpretation": "The off-season is a held breath. The clubhouse is the place where that breath becomes visible — in the empty stalls, the quiet conversations, the players who stay late. Mike Paulson's choices will land here first, and I want to catch that moment.",
+      "unverifiedLead": [
+        "A sense that the clubhouse is quieter than usual for this time of year, as if everyone is waiting for something.",
+        "A feeling that the community outreach work, like Vladimir Gonzalez's, is being leaned on more heavily to keep the team present in Oakland while the front office works."
+      ],
+      "closeQuestion": "What does a championship team look like when it is not playing — and who decides what comes next?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | editorial-note | (off-season) | Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Vladimir Gonzalez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598"
+      ]
+    },
+    {
+      "label": "A's | editorial-note | (off-season) | Mark Aitken, Carmen Mesa, Desmond Morton, Frank Reyna, Kevin Clark",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00081",
+        "POP-00051",
+        "POP-00079",
+        "POP-00053"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Elliot Abraham",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01046"
+      ]
+    }
+  ],
+  "laneEntries": 8,
+  "ranAt": "2026-10-14T11:17:00.001Z"
+}

@@ -1,0 +1,740 @@
+{
+  "empty": false,
+  "cycle": 111,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Pixel Pete",
+      "Sienna Vale",
+      "Lumi Crest"
+    ],
+    "restaurants": [
+      {
+        "name": "Romano's",
+        "hood": "Dimond"
+      },
+      {
+        "name": "West Side Cafe",
+        "hood": "West Oakland"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "Neighborhood Response Hub",
+        "hood": "East Oakland"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 4,
+      "vibe": "tense",
+      "movement": "restricted",
+      "weatherImpact": 1
+    },
+    "cityEvents": [
+      "Chinatown Neighborhood Stabilization Panel",
+      "Downtown Neon Terrace DJ Night",
+      "The Dillon Family Block Party",
+      "West Oakland Club Crawl"
+    ],
+    "tv": [
+      "Valentine Special",
+      "Breaking Bulletin",
+      "Warm House",
+      "A's Sports Central",
+      "One-on-One with Vladimir Gonzalez (RF)"
+    ],
+    "movies": [
+      "Love in Oakland",
+      "Rising Star",
+      "Diamond City"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight",
+    "streamingTrend": "romantic comedies",
+    "foodTrend": "High mobility / civic-tension food trend"
+  },
+  "signals": {
+    "fameCount": 1,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c111.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Pixel Pete spotted at Blue Lantern Bar",
+        "name": "Pixel Pete",
+        "venue": "Blue Lantern Bar",
+        "ref": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Jack London",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Sienna Vale spotted at The Northgate Bar",
+        "name": "Sienna Vale",
+        "venue": "The Northgate Bar",
+        "ref": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "KONO",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Lumi Crest spotted at Sunrise Cafe",
+        "name": "Lumi Crest",
+        "venue": "Sunrise Cafe",
+        "ref": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "East Oakland",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Vinnie Keane — the city is watching: realized the week had passed without a single thing worth retelling near a storefront window",
+        "name": "Vinnie Keane",
+        "ref": "Ripple_Ledger cycle 111 (CauseType fame-event); rendered: world_summary_c111.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00001"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "quiet-nightlife",
+    "score": 24,
+    "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+    "named": "Neighborhood Response Hub",
+    "hood": "East Oakland",
+    "person": null,
+    "venue": null
+  },
+  "candidates": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+      "named": "Neighborhood Response Hub",
+      "hood": "East Oakland"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Pixel Pete at Blue Lantern Bar (Jack London)",
+      "named": "Blue Lantern Bar",
+      "hood": "Jack London"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Sienna Vale at The Northgate Bar (KONO)",
+      "named": "The Northgate Bar",
+      "hood": "KONO"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Lumi Crest at Sunrise Cafe (East Oakland)",
+      "named": "Sunrise Cafe",
+      "hood": "East Oakland"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Romano's (Dimond)",
+      "named": "Romano's",
+      "hood": "Dimond"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "West Side Cafe (West Oakland)",
+      "named": "West Side Cafe",
+      "hood": "West Oakland"
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Dillon Family Block Party",
+      "named": "The Dillon Family Block Party",
+      "hood": null
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Vinnie Keane — fame rise",
+      "named": "Vinnie Keane",
+      "hood": "Grand Lake"
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Valentine Special; Breaking Bulletin; Warm House",
+      "named": "Valentine Special",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Chinatown Neighborhood Stabilization Panel",
+      "named": "Chinatown Neighborhood Stabilization Panel",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Downtown Neon Terrace DJ Night",
+      "named": "Downtown Neon Terrace DJ Night",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "West Oakland Club Crawl",
+      "named": "West Oakland Club Crawl",
+      "hood": null
+    }
+  ],
+  "pulses": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+      "named": "Neighborhood Response Hub",
+      "hood": "East Oakland",
+      "names": [
+        "Neighborhood Response Hub"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Neighborhood Response Hub is open and quiet in East Oakland. What that condition means is not yet established.",
+      "hookLine": "Neighborhood Response Hub is open and quiet in East Oakland.",
+      "sceneBits": [
+        "VENUE: Neighborhood Response Hub",
+        "HOOD: East Oakland",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 4,
+        "vibe": "tense",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cycle": 111
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Pixel Pete at Blue Lantern Bar (Jack London)",
+      "named": "Blue Lantern Bar",
+      "hood": "Jack London",
+      "names": [
+        "Pixel Pete",
+        "Blue Lantern Bar"
+      ],
+      "person": "Pixel Pete",
+      "venue": "Blue Lantern Bar",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Pixel Pete spotted at Blue Lantern Bar in Jack London — ground truth only, no invented companions",
+      "hookLine": "sighting | Pixel Pete spotted at Blue Lantern Bar",
+      "sceneBits": [
+        "PERSON: Pixel Pete",
+        "VENUE: Blue Lantern Bar",
+        "HOOD: Jack London"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Sienna Vale at The Northgate Bar (KONO)",
+      "named": "The Northgate Bar",
+      "hood": "KONO",
+      "names": [
+        "Sienna Vale",
+        "The Northgate Bar"
+      ],
+      "person": "Sienna Vale",
+      "venue": "The Northgate Bar",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Sienna Vale spotted at The Northgate Bar in KONO — ground truth only, no invented companions",
+      "hookLine": "sighting | Sienna Vale spotted at The Northgate Bar",
+      "sceneBits": [
+        "PERSON: Sienna Vale",
+        "VENUE: The Northgate Bar",
+        "HOOD: KONO"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Lumi Crest at Sunrise Cafe (East Oakland)",
+      "named": "Sunrise Cafe",
+      "hood": "East Oakland",
+      "names": [
+        "Lumi Crest",
+        "Sunrise Cafe"
+      ],
+      "person": "Lumi Crest",
+      "venue": "Sunrise Cafe",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 111 (CauseType lifestyle-sighting); rendered: world_summary_c111.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Lumi Crest spotted at Sunrise Cafe in East Oakland — ground truth only, no invented companions",
+      "hookLine": "sighting | Lumi Crest spotted at Sunrise Cafe",
+      "sceneBits": [
+        "PERSON: Lumi Crest",
+        "VENUE: Sunrise Cafe",
+        "HOOD: East Oakland"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Romano's (Dimond)",
+      "named": "Romano's",
+      "hood": "Dimond",
+      "names": [
+        "Romano's"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Romano's appears on the evening restaurant list in Dimond. What was happening there is not established.",
+      "hookLine": "Romano's appears on the evening restaurant list in Dimond.",
+      "sceneBits": [
+        "VENUE: Romano's",
+        "HOOD: Dimond"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "West Side Cafe (West Oakland)",
+      "named": "West Side Cafe",
+      "hood": "West Oakland",
+      "names": [
+        "West Side Cafe"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "West Side Cafe appears on the evening restaurant list in West Oakland. What was happening there is not established.",
+      "hookLine": "West Side Cafe appears on the evening restaurant list in West Oakland.",
+      "sceneBits": [
+        "VENUE: West Side Cafe",
+        "HOOD: West Oakland"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Dillon Family Block Party",
+      "named": "The Dillon Family Block Party",
+      "hood": null,
+      "names": [
+        "The Dillon Family Block Party"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: The Dillon Family Block Party — present-tense room, not calendar filler",
+      "hookLine": "The Dillon Family Block Party is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Dillon Family Block Party",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Vinnie Keane — fame rise",
+      "named": "Vinnie Keane",
+      "hood": "Grand Lake",
+      "names": [
+        "Vinnie Keane"
+      ],
+      "person": "Vinnie Keane",
+      "popids": [
+        "POP-00001"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 111 (CauseType fame-event); rendered: world_summary_c111.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Vinnie Keane — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Vinnie Keane — the city is watching: realized the week had passed without a single thing worth retelling near a storefront window",
+      "sceneBits": [
+        "PERSON: Vinnie Keane",
+        "HOOD: Grand Lake",
+        "LABEL: fame-rise | Vinnie Keane — the city is watching: realized the week had passed without a single thing worth retelling near a storefront window"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Valentine Special; Breaking Bulletin; Warm House",
+      "named": "Valentine Special",
+      "hood": null,
+      "names": [
+        "Valentine Special",
+        "Breaking Bulletin",
+        "Warm House",
+        "A's Sports Central",
+        "One-on-One with Vladimir Gonzalez (RF)"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media TV",
+      "angle": "Evening TV slate — Valentine Special, Breaking Bulletin, Warm House; sports desk: Oakland Sports Tonight",
+      "hookLine": "On the box tonight: Valentine Special, Breaking Bulletin.",
+      "sceneBits": [
+        "TV: Valentine Special; Breaking Bulletin; Warm House; A's Sports Central; One-on-One with Vladimir Gonzalez (RF)",
+        "SPORTS BROADCAST: Oakland Sports Tonight"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Chinatown Neighborhood Stabilization Panel",
+      "named": "Chinatown Neighborhood Stabilization Panel",
+      "hood": null,
+      "names": [
+        "Chinatown Neighborhood Stabilization Panel"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Chinatown Neighborhood Stabilization Panel — present-tense room, not calendar filler",
+      "hookLine": "Chinatown Neighborhood Stabilization Panel is on the evening board.",
+      "sceneBits": [
+        "EVENT: Chinatown Neighborhood Stabilization Panel"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Downtown Neon Terrace DJ Night",
+      "named": "Downtown Neon Terrace DJ Night",
+      "hood": null,
+      "names": [
+        "Downtown Neon Terrace DJ Night"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Downtown Neon Terrace DJ Night — present-tense room, not calendar filler",
+      "hookLine": "Downtown Neon Terrace DJ Night is on the evening board.",
+      "sceneBits": [
+        "EVENT: Downtown Neon Terrace DJ Night"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "West Oakland Club Crawl",
+      "named": "West Oakland Club Crawl",
+      "hood": null,
+      "names": [
+        "West Oakland Club Crawl"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: West Oakland Club Crawl — present-tense room, not calendar filler",
+      "hookLine": "West Oakland Club Crawl is on the evening board.",
+      "sceneBits": [
+        "EVENT: West Oakland Club Crawl"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "fast-food",
+      "score": 13,
+      "label": "SpeedyBurger (Downtown)",
+      "named": "SpeedyBurger",
+      "hood": "Downtown",
+      "names": [
+        "SpeedyBurger"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Fast food",
+      "angle": "SpeedyBurger appears on the evening fast-food list in Downtown. What was happening there is not established.",
+      "hookLine": "SpeedyBurger appears on the evening fast-food list in Downtown.",
+      "sceneBits": [
+        "VENUE: SpeedyBurger",
+        "HOOD: Downtown"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "movie-slate",
+      "score": 13,
+      "label": "Movies: Love in Oakland; Rising Star; Diamond City",
+      "named": "Love in Oakland",
+      "hood": null,
+      "names": [
+        "Love in Oakland",
+        "Rising Star",
+        "Diamond City"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media movies",
+      "angle": "Evening movie slate — Love in Oakland, Rising Star, Diamond City",
+      "hookLine": "Screens tonight: Love in Oakland, Rising Star, Diamond City.",
+      "sceneBits": [
+        "MOVIES: Love in Oakland; Rising Star; Diamond City"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Pixel Pete spotted (Riley famous list)",
+      "named": "Pixel Pete",
+      "hood": null,
+      "names": [
+        "Pixel Pete"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Pixel Pete is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Pixel Pete is being seen around town.",
+      "sceneBits": [
+        "NAME: Pixel Pete"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Sienna Vale spotted (Riley famous list)",
+      "named": "Sienna Vale",
+      "hood": null,
+      "names": [
+        "Sienna Vale"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Sienna Vale is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Sienna Vale is being seen around town.",
+      "sceneBits": [
+        "NAME: Sienna Vale"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Lumi Crest spotted (Riley famous list)",
+      "named": "Lumi Crest",
+      "hood": null,
+      "names": [
+        "Lumi Crest"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Lumi Crest is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Lumi Crest is being seen around town.",
+      "sceneBits": [
+        "NAME: Lumi Crest"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "faith-overlap",
+      "score": 11,
+      "label": "Faith / quiet work overlap with evening city",
+      "named": null,
+      "hood": null,
+      "names": [],
+      "requiresName": false,
+      "source": "Faith_Organizations tab (LeaderPOPID-linked)",
+      "angle": "Quiet institutional care against the evening board — congregations, not doctrine wars",
+      "hookLine": "Faith work continues while the city evenings out.",
+      "sceneBits": [
+        "FAITH REGISTRY: present"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "food-trend",
+      "score": 9,
+      "label": "High mobility / civic-tension food trend",
+      "named": "High mobility / civic-tension food trend",
+      "hood": null,
+      "names": [
+        "High mobility / civic-tension food trend"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Food trend",
+      "angle": "Food trend under stress: High mobility / civic-tension food trend",
+      "hookLine": "Food trend line: High mobility / civic-tension food trend.",
+      "sceneBits": [
+        "FOOD TREND: High mobility / civic-tension food trend"
+      ],
+      "cycle": 111
+    },
+    {
+      "className": "streaming-trend",
+      "score": 8,
+      "label": "romantic comedies",
+      "named": "romantic comedies",
+      "hood": null,
+      "names": [
+        "romantic comedies"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Streaming trend",
+      "angle": "Streaming trend: romantic comedies — what people choose when they stay in",
+      "hookLine": "Streaming leans romantic comedies.",
+      "sceneBits": [
+        "STREAMING: romantic comedies"
+      ],
+      "cycle": 111
+    }
+  ],
+  "recommend": {
+    "bag": "lifestyle",
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "reason": "top pulse quiet-nightlife → lifestyle",
+    "pulseClass": "quiet-nightlife",
+    "pulseLabel": "Neighborhood Response Hub (East Oakland) · quiet night"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Romano's (Dimond)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+      "score": 32,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+      "score": 32,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+      "score": 32,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "fame-sighting",
+      "label": "Pixel Pete at Blue Lantern Bar (Jack London)",
+      "score": 31,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Neighborhood Response Hub is open and quiet in East Oakland. What that condition means is not yet established.",
+    "label": "Neighborhood Response Hub (East Oakland) · quiet night",
+    "hookLine": "Neighborhood Response Hub is open and quiet in East Oakland.",
+    "hood": "East Oakland",
+    "pulseClass": "quiet-nightlife",
+    "citizens": [],
+    "popids": [],
+    "named": "Neighborhood Response Hub",
+    "venue": "Neighborhood Response Hub",
+    "ref": "world_summary ## Evening Texture · Nightlife",
+    "cycle": 111
+  },
+  "prewrite": {
+    "pulseClass": "quiet-nightlife",
+    "angle": "Neighborhood Response Hub is open and quiet in East Oakland. What that condition means is not yet established.",
+    "hookLine": "Neighborhood Response Hub is open and quiet in East Oakland.",
+    "anchorFacts": [
+      "NAMED: Neighborhood Response Hub",
+      "HOOD: East Oakland",
+      "VENUE: Neighborhood Response Hub",
+      "HOOD: East Oakland",
+      "EVENING RECORD: open and quiet"
+    ],
+    "bagRecommend": "lifestyle",
+    "bagSlug": "sharon-okafor"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Romano's",
+        "hood": "Dimond"
+      },
+      {
+        "name": "West Side Cafe",
+        "hood": "West Oakland"
+      },
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Neighborhood Response Hub",
+        "hood": "East Oakland"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 4,
+      "vibe": "tense",
+      "movement": "restricted",
+      "weatherImpact": 1
+    },
+    "cityEvents": [
+      "Chinatown Neighborhood Stabilization Panel",
+      "Downtown Neon Terrace DJ Night",
+      "The Dillon Family Block Party",
+      "West Oakland Club Crawl"
+    ],
+    "tv": [
+      "Valentine Special",
+      "Breaking Bulletin",
+      "Warm House",
+      "A's Sports Central",
+      "One-on-One with Vladimir Gonzalez (RF)"
+    ],
+    "movies": [
+      "Love in Oakland",
+      "Rising Star",
+      "Diamond City"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c111.md ## Evening Texture",
+    "output/desk_signal_c111.json lanes.culture",
+    "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+  ]
+}

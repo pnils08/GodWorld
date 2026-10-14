@@ -1,0 +1,774 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "P Slayer",
+    "popid": "POP-00008"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown.",
+      "label": "The A's parade roll through Downtown.",
+      "kind": "award-board",
+      "angle": "The A's parade roll through Downtown.",
+      "hookLine": "Euphoria with friction: name the doubter, kill soft contentment.",
+      "hood": "Downtown",
+      "team": "A's",
+      "eventKind": "editorial-note",
+      "popids": [
+        "POP-00527",
+        "POP-00001",
+        "POP-00018"
+      ],
+      "citizens": [
+        "Mike Paulson — General Manager, Oakland A's & The Oaks, Jack London",
+        "Vinnie Keane — Designated Hitter, Oakland A's Legend, Grand Lake",
+        "Benji Dillon — Pitcher, Oakland A's Legend, Rockridge"
+      ],
+      "pulseClass": "award-board",
+      "pulseScore": 44,
+      "fanCharge": "defiance",
+      "bagModeIds": [
+        3,
+        5,
+        9
+      ]
+    }
+  },
+  "angle": "output/cron-compare/sports_c111_p-slayer_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-01107",
+      "name": "Daniel Yoon",
+      "quote": "I just picked up a new A's jersey. Honestly, I'm still riding the high from that win last night.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n\"answer\": \"quote\",\n\"quote\": \"I just picked up a new A's jersey. Honestly, I'm still riding the high from that win last night.\",\n\"fact_ids\": [\"F-f79c88b81a20\"],\n\"basis\": \"direct-reaction\",\n\"unverifiedLead\": null,\n\"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f79c88b81a20"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01107-dc9d887bab",
+        "authoredQuote": true,
+        "publishableQuote": "I just picked up a new A's jersey. Honestly, I'm still riding the high from that win last night."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01107",
+          "name": "Daniel Yoon",
+          "role": "Co-Founder, Gridiron Analytics",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own current-cycle line says: \"Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win\". What did you do as a fan of A's? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Downtown",
+          "focus": "The defiance behind the euphoria; refusing the sanitized version of the championship parade.",
+          "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Daniel Yoon — Co-Founder, Gridiron Analytics",
+          "evidence": [
+            {
+              "id": "EV-LIFE-89fd2066a6",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-f79c88b81a20"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00145",
+      "name": "Janelle Rourke",
+      "quote": "I bought a new A's jersey and, honestly, it's been really exciting to put it on. There's this sense of anticipation hanging in the air that I just can't shake. I'm looking forward to the next season, maybe even catching a game or two.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I bought a new A's jersey and, honestly, it's been really exciting to put it on. There's this sense of anticipation hanging in the air that I just can't shake. I'm looking forward to the next season, maybe even catching a game or two.\",\n  \"fact_ids\": [\"F-03ef48e7a71a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-03ef48e7a71a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00145-6519d443da",
+        "authoredQuote": true,
+        "publishableQuote": "I bought a new A's jersey and, honestly, it's been really exciting to put it on. There's this sense of anticipation hanging in the air that I just can't shake. I'm looking forward to the next season, maybe even catching a game or two."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00145",
+          "name": "Janelle Rourke",
+          "role": "ASSISTANT DISTRICT ATTORNEY (Community Safety)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own current-cycle line says: \"Y3C7 — [Sports] bought a new A's jersey and a sense of anticipation hangs in the air\". What did you do as a fan of A's? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Downtown",
+          "focus": "The defiance behind the euphoria; refusing the sanitized version of the championship parade.",
+          "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Janelle Rourke — ASSISTANT DISTRICT ATTORNEY (Community Safety)",
+          "evidence": [
+            {
+              "id": "EV-LIFE-3646cbd23f",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [Sports] bought a new A's jersey and a sense of anticipation hangs in the air"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [Sports] bought a new A's jersey and a sense of anticipation hangs in the air",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-03ef48e7a71a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00196",
+      "name": "Inga Creator",
+      "quote": "I'm still on cloud nine after last night's win! I celebrated by buying a new A's jersey - it's my way of showing team spirit. The energy around here is electric, and I'm loving every minute of it.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I'm still on cloud nine after last night's win! I celebrated by buying a new A's jersey - it's my way of showing team spirit. The energy around here is electric, and I'm loving every minute of it.\",\"fact_ids\":[\"F-f79c88b81a20\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f79c88b81a20"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00196-e8626da7c9",
+        "authoredQuote": true,
+        "publishableQuote": "I'm still on cloud nine after last night's win! I celebrated by buying a new A's jersey - it's my way of showing team spirit. The energy around here is electric, and I'm loving every minute of it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00196",
+          "name": "Inga Creator",
+          "role": "Boutique Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own current-cycle line says: \"Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win\". What did you do as a fan of A's? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Downtown",
+          "focus": "The defiance behind the euphoria; refusing the sanitized version of the championship parade.",
+          "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Inga Creator — Boutique Owner",
+          "evidence": [
+            {
+              "id": "EV-LIFE-3e3c939568",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-f79c88b81a20"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01107",
+      "name": "Daniel Yoon",
+      "quote": "I just picked up a new A's jersey. Honestly, I'm still riding the high from that win last night.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n\"answer\": \"quote\",\n\"quote\": \"I just picked up a new A's jersey. Honestly, I'm still riding the high from that win last night.\",\n\"fact_ids\": [\"F-f79c88b81a20\"],\n\"basis\": \"direct-reaction\",\n\"unverifiedLead\": null,\n\"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f79c88b81a20"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01107-dc9d887bab",
+        "authoredQuote": true,
+        "publishableQuote": "I just picked up a new A's jersey. Honestly, I'm still riding the high from that win last night."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01107",
+          "name": "Daniel Yoon",
+          "role": "Co-Founder, Gridiron Analytics",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own current-cycle line says: \"Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win\". What did you do as a fan of A's? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Downtown",
+          "focus": "The defiance behind the euphoria; refusing the sanitized version of the championship parade.",
+          "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Daniel Yoon — Co-Founder, Gridiron Analytics",
+          "evidence": [
+            {
+              "id": "EV-LIFE-89fd2066a6",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-f79c88b81a20"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00190",
+      "name": "Jackson Sift",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "```json\n{\n \"answer\": \"Yeah, the energy is definitely there, and man, seven championships? That's something. But you see that parade rolling through Downtown, and it's a little too clean for me. I love the win, but I don't need the sanitized version of it. The real euphoria is in the defiance, you know? It's about us winning in a city that people always try to write off.\",\n \"fact_ids\": [\n  \"F-2d593215bd52\",\n  \"F-7e4096751dbd\"\n ],\n \"basis\": \"direct-reaction\",\n \"unverifiedLead\": null,\n \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00190",
+          "name": "Jackson Sift",
+          "role": "Ex-Offender Reentry Counselor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own page at C109 says: \"I've been feeling the energy in the city, especially with the A's doing well\". Is that still how you see A's? Speak only from that and your own reaction."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Downtown",
+          "focus": "The defiance behind the euphoria; refusing the sanitized version of the championship parade.",
+          "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Jackson Sift — Ex-Offender Reentry Counselor",
+          "evidence": [
+            {
+              "id": "EV-PAGE-288dd55551",
+              "src": "cp-POP-00190-c109-PRESS",
+              "text": "I've been feeling the energy in the city, especially with the A's doing well."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "INTERPRETATION",
+            "text": "I've been feeling the energy in the city, especially with the A's doing well.",
+            "src": "cp-POP-00190-c109-PRESS",
+            "id": "F-2d593215bd52"
+          },
+          {
+            "t": "FACT",
+            "text": "Jackson Sift — Ex-Offender Reentry Counselor",
+            "src": "Simulation_Ledger profile for POP-00190",
+            "id": "F-7e4096751dbd"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00145",
+      "name": "Janelle Rourke",
+      "quote": "I bought a new A's jersey and, honestly, it's been really exciting to put it on. There's this sense of anticipation hanging in the air that I just can't shake. I'm looking forward to the next season, maybe even catching a game or two.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I bought a new A's jersey and, honestly, it's been really exciting to put it on. There's this sense of anticipation hanging in the air that I just can't shake. I'm looking forward to the next season, maybe even catching a game or two.\",\n  \"fact_ids\": [\"F-03ef48e7a71a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-03ef48e7a71a"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00145-6519d443da",
+        "authoredQuote": true,
+        "publishableQuote": "I bought a new A's jersey and, honestly, it's been really exciting to put it on. There's this sense of anticipation hanging in the air that I just can't shake. I'm looking forward to the next season, maybe even catching a game or two."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00145",
+          "name": "Janelle Rourke",
+          "role": "ASSISTANT DISTRICT ATTORNEY (Community Safety)",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own current-cycle line says: \"Y3C7 — [Sports] bought a new A's jersey and a sense of anticipation hangs in the air\". What did you do as a fan of A's? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Downtown",
+          "focus": "The defiance behind the euphoria; refusing the sanitized version of the championship parade.",
+          "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Janelle Rourke — ASSISTANT DISTRICT ATTORNEY (Community Safety)",
+          "evidence": [
+            {
+              "id": "EV-LIFE-3646cbd23f",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [Sports] bought a new A's jersey and a sense of anticipation hangs in the air"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [Sports] bought a new A's jersey and a sense of anticipation hangs in the air",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-03ef48e7a71a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00196",
+      "name": "Inga Creator",
+      "quote": "I'm still on cloud nine after last night's win! I celebrated by buying a new A's jersey - it's my way of showing team spirit. The energy around here is electric, and I'm loving every minute of it.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I'm still on cloud nine after last night's win! I celebrated by buying a new A's jersey - it's my way of showing team spirit. The energy around here is electric, and I'm loving every minute of it.\",\"fact_ids\":[\"F-f79c88b81a20\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f79c88b81a20"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00196-e8626da7c9",
+        "authoredQuote": true,
+        "publishableQuote": "I'm still on cloud nine after last night's win! I celebrated by buying a new A's jersey - it's my way of showing team spirit. The energy around here is electric, and I'm loving every minute of it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00196",
+          "name": "Inga Creator",
+          "role": "Boutique Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "P Slayer",
+          "question": "Your own current-cycle line says: \"Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win\". What did you do as a fan of A's? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "award-board",
+          "hood": "Downtown",
+          "focus": "The defiance behind the euphoria; refusing the sanitized version of the championship parade.",
+          "src": "Oakland_Sports_Feed cycle 111; world_summary_c111.md \"## Sports\" · The A's parade roll through Downtown."
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Inga Creator — Boutique Owner",
+          "evidence": [
+            {
+              "id": "EV-LIFE-3e3c939568",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C7 — [Sports] bought a new A's jersey and still riding the high from last night's win",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-f79c88b81a20"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-14T18:16:27.935Z"
+}

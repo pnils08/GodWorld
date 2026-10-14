@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "111",
+  "desk": "business",
+  "persona": "business-desk",
+  "hood": "Jack London",
+  "quotes": [
+    {
+      "pop": "POP-00177",
+      "name": "Elle Lilo",
+      "quote": "The Port's growth? It's been steady, but honestly, my day-to-day hasn't changed much. I'm still out there guiding ships, same as always. The bustle's a bit louder, sure, but it's the kind of noise you get used to. What keeps me up at night is making sure we keep that balance—growth without losing the soul of this place."
+    },
+    {
+      "pop": "POP-00189",
+      "name": "Blair Patel",
+      "quote": "The Port’s expansion? Yeah, I’ve been watching it closely. More ships coming in means more work for us, but it’s not all smooth sailing. The docks are busier than ever, and the pressure’s on to keep up with repairs and maintenance. It’s a double-edged sword—good for jobs, but the pace is relentless. And honestly, I’m not sure the infrastructure can handle it long-term without some serious upgrades."
+    },
+    {
+      "pop": "POP-00276",
+      "name": "Dmitri Soto",
+      "quote": "The role’s gotten busier, no doubt. More ships coming in means more containers to manage, more coordination with the teams on the ground. It’s not just about stacking boxes anymore—it’s about keeping the flow smooth, making sure everyone’s on the same page. Feels like we’re the backbone of the whole operation."
+    },
+    {
+      "pop": "POP-00193",
+      "name": "Elena Leon",
+      "quote": "Elle? She's got that quiet strength about her—the kind that keeps the port running smooth even when the tides turn. I've seen her maneuver those tugs like they're extensions of her own body. As for Jack London... well, the money's moving differently these days. More glass towers going up where the old warehouses stood, but the docks? We're holding steady. You can feel the shift though—like the whole neighborhood's holding its breath waiting to see who benefits and who gets left behind."
+    }
+  ],
+  "claim": "The Port's growth? It's been steady, but honestly, my day-to-day hasn't changed much. I'm still out there guiding ships, same as always. The bustle's a bit louder, sure, but it's the kind of noise you get used to. What keeps me up at night is making sure we keep that balance—growth without losing the soul of this place.",
+  "src": "citizenVoice PRESS c111",
+  "ranAt": "2026-10-12T18:16:14.076Z"
+}

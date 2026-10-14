@@ -1,0 +1,267 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": true,
+  "actor": {
+    "id": "POP-00044",
+    "name": "Elliott Crane",
+    "role": "City Council District 6",
+    "officeId": "COUNCIL-D6",
+    "district": "D6",
+    "faction": "CRC",
+    "agentDir": "civic-office-council-d6",
+    "initiative": null,
+    "dials": {
+      "approval": 62
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "no move this cycle"
+  },
+  "pulse": null,
+  "prewrite": {
+    "claim": null,
+    "lineFacts": [],
+    "missing": [
+      "no due action on this seat this cycle"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC109 - answer CONF-108-civic-office-council-d6: awaiting the Sunday fold\nNo applied or failed outcome in the available ledgers.",
+      "moves": [
+        {
+          "moveId": "MV-109-civic-office-council-d6-2026-09-29",
+          "cycle": 109,
+          "date": "2026-09-29",
+          "agentDir": "civic-office-council-d6",
+          "popid": "POP-00044",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-108-civic-office-council-d6",
+            "text": "Our action plan pairs focused municipal service delivery and health responsiveness in Piedmont Avenue with strict milestone-based auditing and public contract verification for Baylight remediation.",
+            "directiveCycle": 108,
+            "confrontationSeat": "civic-office-council-d6"
+          },
+          "status": "pending",
+          "at": "2026-09-29T10:45:53.550Z"
+        }
+      ]
+    },
+    "board": [],
+    "boardAvailable": true,
+    "boardIds": [],
+    "boardText": "Your board is empty: no initiative sponsors you or touches your turf.",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [],
+      "participation": [],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 109,
+      "throughCycle": 111,
+      "window": "Complaint display C109–C111; condition counter C111 only.",
+      "text": "Complaint display C109–C111; condition counter C111 only.\nNo Civic complaints from your turf in this window."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 4,
+      "shownStaff": 4,
+      "text": "The working city:\n- Elena Soria Dominguez: I can already trace the walk from the staging lot to the panadería in my sleep – counted every curb cut… (C110)\n- Bobby Chen-Ramirez: The crane’s shadows stretched long today, and I caught myself staring up at it like it was some kind of… (C110)\n- Vanessa Tran-Muñoz: Today was heavy — another call for an elder in Chinatown took too long to get a response. I keep thinking… (C110)\n- Marcus Webb: I keep circling back to the Johnson application—missing proof of residence from April. One document holding… (C110)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "text": "City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-104-civic-office-council-d6",
+          "cycle": 104,
+          "agentDir": "civic-office-council-d6",
+          "demand": "Elliott Crane — City Council District 6 — Submit the formal CRC caucus oversight motion specifying the required audit parameters for the Temescal Health Center and Youth Apprenticeship Pipeline.",
+          "sourceText": "## Elliott Crane — City Council District 6\n\n- **Agent:** `.claude/agents/civic-office-council-d6/`\n- **Address:** Submit the formal CRC caucus oversight motion specifying the required audit parameters for the Temescal Health Center and Youth Apprenticeship Pipeline.\n- **Why:** The CRC caucus raised fiscal objections in C103 regarding accelerated construction spending and apprenticeship expansion that require formal legislative framing.\n- **Acceptance:** Formal filing of a council audit motion or committee inquiry specifying the financial records requested from OEWD and project leads.\n- **Silence consequence:** Unresolved caucus disputes stall committee hearings and delay scheduled project appropriations.\n",
+          "src": "output/mara-directives/mara_directive_c104_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-council-d6",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d6",
+          "demand": "Elliott Crane — City Council District 6 — Formulate an action plan to reverse declining sentiment in Piedmont Avenue and confirm oversight criteria for Baylight remediation.",
+          "sourceText": "## Elliott Crane — City Council District 6\n\n- **Agent:** `.claude/agents/civic-office-council-d6/`\n- **Address:** Formulate an action plan to reverse declining sentiment in Piedmont Avenue and confirm oversight criteria for Baylight remediation.\n- **Why:** Piedmont Avenue sentiment dropped to 0.23 (below city median 0.330) despite low CrimeIndex (0.54), while Baylight mobilization requires independent council oversight.\n- **Acceptance:** A public district strategy addressing Piedmont Avenue merchant sentiment and a filed oversight memorandum for INIT-006 Phase II remediation.\n- **Silence consequence:** Commercial district sentiment continues downward drift while regional project remediation proceeds without cross-district scrutiny.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "open": [],
+      "answeredIds": [
+        "CONF-104-civic-office-council-d6",
+        "CONF-108-civic-office-council-d6"
+      ]
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 111,
+      "problems": [
+        {
+          "id": "[\"Piedmont Ave\",\"health.sickResidents\"]",
+          "hood": "Piedmont Ave",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 101,
+          "cycle": 111
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Piedmont Ave\",\"health.sickResidents\"]",
+          "hood": "Piedmont Ave",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 101,
+          "cycle": 111,
+          "passedOverCycle": 108
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"Piedmont Ave\",\"health.sickResidents\"]",
+          "hood": "Piedmont Ave",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 101,
+          "cycle": 111,
+          "passedOverCycle": 108
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Condition problems at C111; prior Sunday folds through C110.\n- Piedmont Ave: sick residents 101 [passed over C108]\n"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Piedmont Ave"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D6",
+        "PopId": "POP-00044",
+        "Holder": "Elliott Crane",
+        "District": "D6",
+        "Approval": "62"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D7",
+        "PopId": "POP-00504",
+        "Holder": "Warren Ashford",
+        "District": "D7",
+        "Faction": "CRC",
+        "Approval": 51
+      },
+      {
+        "OfficeId": "COUNCIL-D8",
+        "PopId": "POP-00505",
+        "Holder": "Nina Chen",
+        "District": "D8",
+        "Faction": "CRC",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

@@ -1,0 +1,359 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "selena-grant",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00591",
+      "name": "Selena Grant",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks — season-state C111 · - · - — the second club's board read",
+      "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "oaks",
+        "hood": "Jack London",
+        "facts": [
+          "Oaks — season-state (early-season), C111: Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+          "Trigger: cold-streak",
+          "Franchise stability: unstable",
+          "Oaks — player-feature (early-season), C111: Adash Stanley in attendance at the A's rally to show support."
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-oaks-beat",
+      "hood": "Jack London",
+      "score": null,
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C111",
+      "nearby": [
+        {
+          "text": "A's | editorial-note | (off-season) | Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Vladimir Gonzalez",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | editorial-note | (off-season) | Mark Aitken, Carmen Mesa, Desmond Morton, Frank Reyna, Kevin Clark",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season)",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Elliot Abraham",
+          "src": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — season-state C111 · - · -",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C111",
+        "id": "F-dd6c93f94660"
+      },
+      {
+        "t": "FACT",
+        "text": "Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C111",
+        "id": "F-cbac40f28bc2"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — season-state (early-season), C111: Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111",
+        "id": "F-dd658aa385e8"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: cold-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111",
+        "id": "F-25f52b330ad0"
+      },
+      {
+        "t": "FACT",
+        "text": "Franchise stability: unstable",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111",
+        "id": "F-1bdc67d7db8e"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — player-feature (early-season), C111: Adash Stanley in attendance at the A's rally to show support.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111",
+        "id": "F-9c04d2808c86"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Selena Grant",
+    "popid": "POP-00591"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-beat",
+      "angle": "Oaks — season-state C111 · - · - — the second club's board read",
+      "label": "Oaks — season-state C111 · - · -",
+      "hookLine": "Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+      "hood": "Jack London",
+      "citizens": [
+        "Elliot Abraham (POP-01046)",
+        "Adash Stanley (POP-01023)"
+      ],
+      "popids": [
+        "POP-01046",
+        "POP-01023"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C111",
+      "cycle": 111
+    },
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OAKS-BEAT-1",
+    "kind": "beat-oaks-beat",
+    "seat": {
+      "slug": "selena-grant",
+      "name": "Selena Grant",
+      "popid": "POP-00591",
+      "desk": "sports",
+      "domain": "oaks",
+      "builder": "buildOaksBeatSlice.js"
+    },
+    "hood": "Jack London",
+    "pulse": {
+      "className": "beat-oaks-beat",
+      "score": 100,
+      "label": "Oaks — season-state C111 · - · -",
+      "hood": "Jack London",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl @C111"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Oaks — season-state C111 · - · - — the second club's board read",
+      "hookLine": "Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+      "anchorFacts": [
+        "Oaks — season-state (early-season), C111: Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+        "Trigger: cold-streak",
+        "Franchise stability: unstable",
+        "Oaks — player-feature (early-season), C111: Adash Stanley in attendance at the A's rally to show support.",
+        "Trigger: cold-streak",
+        "Franchise stability: unstable"
+      ],
+      "evidence": [
+        {
+          "text": "Oaks — season-state (early-season), C111: Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+        },
+        {
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+        },
+        {
+          "text": "Franchise stability: unstable",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+        },
+        {
+          "text": "Oaks — player-feature (early-season), C111: Adash Stanley in attendance at the A's rally to show support.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+        },
+        {
+          "text": "Trigger: cold-streak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+        },
+        {
+          "text": "Franchise stability: unstable",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01046",
+        "name": "Elliot Abraham",
+        "role": "General Manager, Oakland Oaks",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Elliot Abraham — General Manager, Oakland Oaks — Jack London",
+        "why": "named on the Oaks feed C111 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+        "why": "named on the Oaks feed C111 (Oakland_Sports_Feed)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Oakland_Sports_Feed.jsonl @C111",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "text": "I'm heading into a press row that feels way too empty for the amount of noise being made about this cold streak. The vibe is unstable, and the air is thick with that specific kind of desperation you only get when the record is ugly. I need to get in front of Elliot Abraham and see if he'll actually give a straight answer on Draymond's return, or if he's just going to lean on the usual scripts while the franchise shakes. Meanwhile, seeing Adash Stanley over at the A's rally is a weird touch—support is good, but it's a distraction when the Oaks are sliding.",
+    "plan": {
+      "chase": "I'm heading into a press row that feels way too empty for the amount of noise being made about this cold streak. The vibe is unstable, and the air is thick with that specific kind of desperation you only get when the record is ugly. I need to get in front of Elliot Abraham and see if he'll actually give a straight answer on Draymond's return, or if he's just going to lean on the usual scripts while the franchise shakes. Meanwhile, seeing Adash Stanley over at the A's rally is a weird touch—support is good, but it's a distraction when the Oaks are sliding.",
+      "focus": "The intersection of the Oaks' cold streak and the uncertainty surrounding Draymond's return.",
+      "why": "The franchise stability is listed as unstable and the team is in a cold streak; the media availability with Elliot Abraham is the primary window to gauge the actual state of the club.",
+      "checks": [
+        "Confirm the specific nature of the 'cold-streak' triggers.",
+        "Verify if Elliot Abraham provides a definitive timeline or denial regarding Draymond."
+      ],
+      "targets": [],
+      "interpretation": "The team is spiraling early in the season, and the focus on individual returns like Draymond's is a symptom of a lack of collective stability.",
+      "unverifiedLead": [
+        "Whether the internal tension regarding the cold streak is affecting the locker room beyond what is seen on the court."
+      ],
+      "closeQuestion": "Is the push for Draymond's return a genuine strategic move or a desperate attempt to stabilize a sinking ship?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | editorial-note | (off-season) | Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Vladimir Gonzalez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598"
+      ]
+    },
+    {
+      "label": "A's | editorial-note | (off-season) | Mark Aitken, Carmen Mesa, Desmond Morton, Frank Reyna, Kevin Clark",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00081",
+        "POP-00051",
+        "POP-00079",
+        "POP-00053"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Elliot Abraham",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 111; rendered: world_summary_c111.md \"## Sports\" C111 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01046"
+      ]
+    }
+  ],
+  "laneEntries": 8,
+  "ranAt": "2026-10-13T11:17:23.543Z"
+}

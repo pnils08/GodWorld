@@ -1,0 +1,30 @@
+{
+  "office": "council_d4",
+  "agentDir": "civic-office-council-d4",
+  "holder": "Ramon Vega",
+  "popid": "POP-00042",
+  "title": "City Council District 4",
+  "date": "2026-10-12",
+  "cycle": 111,
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "statement": "As the representative of District 4, I stand with Dimond in addressing the pressing issues of commercial contraction and public safety. The recent data shows a concerning trend of decay momentum and crime index, which demands our immediate attention. I believe targeted investment and fiscal discipline are crucial for our city's growth, and I am committed to working with the city to find solutions that support the local businesses and residents of Dimond.",
+  "moves": [
+    {
+      "type": "propose",
+      "payload": {
+        "title": "Dimond Revitalization Initiative",
+        "problem": "Commercial contraction and public safety concerns in Dimond",
+        "category": "economic",
+        "reach": "hood",
+        "hoods": [
+          "Dimond"
+        ],
+        "budget": "$2.5M"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "0",
+  "ranAt": "2026-10-12T10:45:10.491Z",
+  "fellBackFrom": null
+}

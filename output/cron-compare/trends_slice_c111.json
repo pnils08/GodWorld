@@ -1,5 +1,5 @@
 {
-  "version": "TRENDS-SLICE-2",
+  "version": "TRENDS-SLICE-3",
   "empty": false,
   "cycle": 111,
   "kind": "beat-trends",
@@ -12,7 +12,11 @@
     "builder": "buildTrendsSlice.js"
   },
   "hood": "Chinatown",
-  "pulse": null,
+  "pulse": {
+    "generatedAt": "2026-10-14T11:15:14.370Z",
+    "docs": 780,
+    "citizens": 253
+  },
   "story": {
     "kind": "beat-trends",
     "angle": "Marin Tao leads the conversation (25 mentions); West Oakland moves the most — what Oakland is doing together this week",
@@ -22,12 +26,18 @@
     "citizens": [
       "Marin Tao (POP-00537)",
       "Dax Monroe (POP-00769)",
-      "Rico Valez (POP-00632)"
+      "Rico Valez (POP-00632)",
+      "Vinnie Keane (POP-00001)",
+      "Melton Neilon (POP-00170)",
+      "Eunice Marston (POP-00753)"
     ],
     "popids": [
       "POP-00537",
       "POP-00769",
-      "POP-00632"
+      "POP-00632",
+      "POP-00001",
+      "POP-00170",
+      "POP-00753"
     ],
     "ref": "output/beats/Cultural_Ledger.jsonl @C111",
     "cycle": 111
@@ -60,6 +70,33 @@
       "business": null,
       "profile": "Rico Valez — Musician — Fruitvale",
       "why": "the city is talking about them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00001",
+      "name": "Vinnie Keane",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "business": null,
+      "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+      "why": "has been saying it on their own page — the A's, C109: “Not just the Coliseum, but the soul of the place.”"
+    },
+    {
+      "popid": "POP-00170",
+      "name": "Melton Neilon",
+      "role": "Sourdough Baker",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Melton Neilon — Sourdough Baker — Temescal",
+      "why": "has been saying it on their own page — transit, C109: “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.”"
+    },
+    {
+      "popid": "POP-00753",
+      "name": "Eunice Marston",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+      "why": "has been saying it on their own page — faith, C110: “I haven't had any direct involvement with the Or Hashalom Renewal Community, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of…”"
     }
   ],
   "facts": [
@@ -186,8 +223,14 @@
         "priority": 5
       }
     ],
-    "note": "no pulse on disk for this Cycle (buildPulseSlice.js) — the pages are silent in this slice",
-    "pageVoices": [],
+    "note": null,
+    "pageVoices": [
+      "the A's — fading; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C109 (not an interview — colour only, never a quote): “Not just the Coliseum, but the soul of the place.”",
+      "transit — fading; dozens of citizens over the last two months, still talking this week. Loudest: Melton Neilon (Temescal), on their own page at C109 (not an interview — colour only, never a quote): “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.”",
+      "faith — fading; dozens of citizens over the last two months, quiet this week. Loudest: Eunice Marston (Downtown), on their own page at C110 (not an interview — colour only, never a quote): “I haven't had any direct involvement with the Or Hashalom Renewal Community, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of…”",
+      "the Oaks — fading; dozens of citizens over the last two months, quiet this week. Loudest: Jessie Hess (Downtown), on their own page at C110 (not an interview — colour only, never a quote): “I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.”",
+      "the council — steady; a dozen or so citizens over the last two months, still talking this week. Loudest: Elio Perez (Rockridge), on their own page at C108 (not an interview — colour only, never a quote): “I’ve heard people talking about the Fruitvale Transit Hub Phase II, but it feels like the council’s been dragging their feet.”"
+    ],
     "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about"
   },
   "talkedAbout": 53,

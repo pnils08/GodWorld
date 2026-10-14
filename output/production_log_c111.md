@@ -40,3 +40,13 @@
 
 ### Media Handoff
 City hall ran headless this cycle. The voice decisions above are locked canon; project operational details live in output/civic-voice/*_c111.json. Desks report FROM this section.
+
+## Newsroom wire (AUTO — cron-desk-run.js)
+- c111 undocked | Nia Rook: "In a downtown break-room the screen lingered on Eric Taveras's quiet stretch through sol a" (staged)
+- c111 sports | Selena Grant: "The Oaks’ Draymond Question Is Now a Test of the Build" (staged)
+- c111 civic | Sgt. Rachel Torres: "San Antonio recorded nine incidents this cycle, the highest total among the twenty-two nei" (staged)
+- c111 undocked | Nia Rook: "In Fruitvale the screens glowed against the night while the city watched Rosario Medina ta" (staged)
+- c111 sports | Anthony Raines: "Ellis's Game Five Line Carries the Title" (staged)
+- c111 civic | Trevor Shimizu: "12th Street Is Running Better. The People Are Somewhere Else." (staged)
+- c111 civic | Dr. Lila Mezran: "Chinatown's Line Is Shorter Than Its Count" (staged)
+- c111 business | Jordan Velez: "The Port Got Louder. Down the Block, the Ledger Barely Moved." (staged)

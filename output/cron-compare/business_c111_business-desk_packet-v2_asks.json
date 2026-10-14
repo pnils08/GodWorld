@@ -1,0 +1,570 @@
+[
+  {
+    "pop": "POP-00177",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00177\",\"name\":\"Elle Lilo\",\"role\":\"Harbor Tugboat Captain\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"How has the Port’s growth impacted your day-to-day work? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Jack London\",\"focus\":\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland, and the broader economic shifts in Jack London businesses.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Elle Lilo — Harbor Tugboat Captain\",\"evidence\":[{\"id\":\"EV-8ad99ef2ef\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"text\":\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C111\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-a43c5d888b36\"},{\"t\":\"FACT\",\"text\":\"Jack London businesses · Port of Oakland, Green & Gold Tavern\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-9b72d6e0f17a\"},{\"t\":\"FACT\",\"text\":\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-d0dffecca1a2\"},{\"t\":\"FACT\",\"text\":\"Port of Oakland · Port & Logistics · 1501 employees · growth 9.4% · revenue $425.1M (+$765k vs C110) · on the roster: Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)); Xanny Allen (Warehouse worker) +25 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-61f9f10229f4\"},{\"t\":\"FACT\",\"text\":\"Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-23d3e9625f4e\"},{\"t\":\"FACT\",\"text\":\"Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-12c97a380b04\"},{\"t\":\"FACT\",\"text\":\"Anchor Build · Construction · 181 employees · growth 8.6% · revenue $146.6M (+$241k vs C110) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-a1b31ee97e4e\"},{\"t\":\"FACT\",\"text\":\"Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-cbc6f8ed4434\"},{\"t\":\"FACT\",\"text\":\"Elle Lilo — Harbor Tugboat Captain\",\"src\":\"Simulation_Ledger profile for POP-00177\",\"id\":\"F-f4987e0a6c57\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00177",
+        "name": "Elle Lilo",
+        "role": "Harbor Tugboat Captain",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "How has the Port’s growth impacted your day-to-day work? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Jack London",
+        "focus": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland, and the broader economic shifts in Jack London businesses.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Elle Lilo — Harbor Tugboat Captain",
+        "evidence": [
+          {
+            "id": "EV-8ad99ef2ef",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+            "text": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C111",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-a43c5d888b36"
+        },
+        {
+          "t": "FACT",
+          "text": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-9b72d6e0f17a"
+        },
+        {
+          "t": "FACT",
+          "text": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-d0dffecca1a2"
+        },
+        {
+          "t": "FACT",
+          "text": "Port of Oakland · Port & Logistics · 1501 employees · growth 9.4% · revenue $425.1M (+$765k vs C110) · on the roster: Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)); Xanny Allen (Warehouse worker) +25 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-61f9f10229f4"
+        },
+        {
+          "t": "FACT",
+          "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-23d3e9625f4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-12c97a380b04"
+        },
+        {
+          "t": "FACT",
+          "text": "Anchor Build · Construction · 181 employees · growth 8.6% · revenue $146.6M (+$241k vs C110) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-a1b31ee97e4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-cbc6f8ed4434"
+        },
+        {
+          "t": "FACT",
+          "text": "Elle Lilo — Harbor Tugboat Captain",
+          "src": "Simulation_Ledger profile for POP-00177",
+          "id": "F-f4987e0a6c57"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00189",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00189\",\"name\":\"Blair Patel\",\"role\":\"Ship Repair Foreman\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"What challenges or opportunities have you noticed with the Port’s expansion? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Jack London\",\"focus\":\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland, and the broader economic shifts in Jack London businesses.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Blair Patel — Ship Repair Foreman\",\"evidence\":[{\"id\":\"EV-5c6ba1d3e6\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"text\":\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C111\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-a43c5d888b36\"},{\"t\":\"FACT\",\"text\":\"Jack London businesses · Port of Oakland, Green & Gold Tavern\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-9b72d6e0f17a\"},{\"t\":\"FACT\",\"text\":\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-d0dffecca1a2\"},{\"t\":\"FACT\",\"text\":\"Port of Oakland · Port & Logistics · 1501 employees · growth 9.4% · revenue $425.1M (+$765k vs C110) · on the roster: Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)); Xanny Allen (Warehouse worker) +25 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-61f9f10229f4\"},{\"t\":\"FACT\",\"text\":\"Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-23d3e9625f4e\"},{\"t\":\"FACT\",\"text\":\"Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-12c97a380b04\"},{\"t\":\"FACT\",\"text\":\"Anchor Build · Construction · 181 employees · growth 8.6% · revenue $146.6M (+$241k vs C110) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-a1b31ee97e4e\"},{\"t\":\"FACT\",\"text\":\"Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-cbc6f8ed4434\"},{\"t\":\"FACT\",\"text\":\"Blair Patel — Ship Repair Foreman\",\"src\":\"Simulation_Ledger profile for POP-00189\",\"id\":\"F-bfac11bb3097\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00189",
+        "name": "Blair Patel",
+        "role": "Ship Repair Foreman",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "What challenges or opportunities have you noticed with the Port’s expansion? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Jack London",
+        "focus": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland, and the broader economic shifts in Jack London businesses.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Blair Patel — Ship Repair Foreman",
+        "evidence": [
+          {
+            "id": "EV-5c6ba1d3e6",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+            "text": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C111",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-a43c5d888b36"
+        },
+        {
+          "t": "FACT",
+          "text": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-9b72d6e0f17a"
+        },
+        {
+          "t": "FACT",
+          "text": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-d0dffecca1a2"
+        },
+        {
+          "t": "FACT",
+          "text": "Port of Oakland · Port & Logistics · 1501 employees · growth 9.4% · revenue $425.1M (+$765k vs C110) · on the roster: Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)); Xanny Allen (Warehouse worker) +25 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-61f9f10229f4"
+        },
+        {
+          "t": "FACT",
+          "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-23d3e9625f4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-12c97a380b04"
+        },
+        {
+          "t": "FACT",
+          "text": "Anchor Build · Construction · 181 employees · growth 8.6% · revenue $146.6M (+$241k vs C110) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-a1b31ee97e4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-cbc6f8ed4434"
+        },
+        {
+          "t": "FACT",
+          "text": "Blair Patel — Ship Repair Foreman",
+          "src": "Simulation_Ledger profile for POP-00189",
+          "id": "F-bfac11bb3097"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00276",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00276\",\"name\":\"Dmitri Soto\",\"role\":\"Container Yard Supervisor\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"How has the Container Yard Supervisor role evolved with the Port’s growth? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Jack London\",\"focus\":\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland, and the broader economic shifts in Jack London businesses.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Dmitri Soto — Container Yard Supervisor\",\"evidence\":[{\"id\":\"EV-20ad752ea2\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"text\":\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C111\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-a43c5d888b36\"},{\"t\":\"FACT\",\"text\":\"Jack London businesses · Port of Oakland, Green & Gold Tavern\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-9b72d6e0f17a\"},{\"t\":\"FACT\",\"text\":\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-d0dffecca1a2\"},{\"t\":\"FACT\",\"text\":\"Port of Oakland · Port & Logistics · 1501 employees · growth 9.4% · revenue $425.1M (+$765k vs C110) · on the roster: Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)); Xanny Allen (Warehouse worker) +25 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-61f9f10229f4\"},{\"t\":\"FACT\",\"text\":\"Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-23d3e9625f4e\"},{\"t\":\"FACT\",\"text\":\"Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-12c97a380b04\"},{\"t\":\"FACT\",\"text\":\"Anchor Build · Construction · 181 employees · growth 8.6% · revenue $146.6M (+$241k vs C110) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-a1b31ee97e4e\"},{\"t\":\"FACT\",\"text\":\"Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-cbc6f8ed4434\"},{\"t\":\"FACT\",\"text\":\"Dmitri Soto — Container Yard Supervisor\",\"src\":\"Simulation_Ledger profile for POP-00276\",\"id\":\"F-62ea762b5c50\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00276",
+        "name": "Dmitri Soto",
+        "role": "Container Yard Supervisor",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "How has the Container Yard Supervisor role evolved with the Port’s growth? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Jack London",
+        "focus": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland, and the broader economic shifts in Jack London businesses.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Dmitri Soto — Container Yard Supervisor",
+        "evidence": [
+          {
+            "id": "EV-20ad752ea2",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+            "text": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C111",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-a43c5d888b36"
+        },
+        {
+          "t": "FACT",
+          "text": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-9b72d6e0f17a"
+        },
+        {
+          "t": "FACT",
+          "text": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-d0dffecca1a2"
+        },
+        {
+          "t": "FACT",
+          "text": "Port of Oakland · Port & Logistics · 1501 employees · growth 9.4% · revenue $425.1M (+$765k vs C110) · on the roster: Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)); Xanny Allen (Warehouse worker) +25 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-61f9f10229f4"
+        },
+        {
+          "t": "FACT",
+          "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-23d3e9625f4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-12c97a380b04"
+        },
+        {
+          "t": "FACT",
+          "text": "Anchor Build · Construction · 181 employees · growth 8.6% · revenue $146.6M (+$241k vs C110) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-a1b31ee97e4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-cbc6f8ed4434"
+        },
+        {
+          "t": "FACT",
+          "text": "Dmitri Soto — Container Yard Supervisor",
+          "src": "Simulation_Ledger profile for POP-00276",
+          "id": "F-62ea762b5c50"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00193",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00193\",\"name\":\"Elena Leon\",\"role\":\"Longshoreman (Port of Oakland)\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"What have you seen, felt, or understood about \\\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland, and the broader economic shifts in Jack London businesses.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Jack London\",\"focus\":\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland, and the broader economic shifts in Jack London businesses.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Elena Leon — Longshoreman (Port of Oakland)\",\"evidence\":[{\"id\":\"EV-246bc2954f\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"text\":\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C111\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-a43c5d888b36\"},{\"t\":\"FACT\",\"text\":\"Jack London businesses · Port of Oakland, Green & Gold Tavern\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-9b72d6e0f17a\"},{\"t\":\"FACT\",\"text\":\"Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-d0dffecca1a2\"},{\"t\":\"FACT\",\"text\":\"Port of Oakland · Port & Logistics · 1501 employees · growth 9.4% · revenue $425.1M (+$765k vs C110) · on the roster: Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)); Xanny Allen (Warehouse worker) +25 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-61f9f10229f4\"},{\"t\":\"FACT\",\"text\":\"Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-23d3e9625f4e\"},{\"t\":\"FACT\",\"text\":\"Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-12c97a380b04\"},{\"t\":\"FACT\",\"text\":\"Anchor Build · Construction · 181 employees · growth 8.6% · revenue $146.6M (+$241k vs C110) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-a1b31ee97e4e\"},{\"t\":\"FACT\",\"text\":\"Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111\",\"id\":\"F-cbc6f8ed4434\"},{\"t\":\"FACT\",\"text\":\"Elena Leon — Longshoreman (Port of Oakland)\",\"src\":\"Simulation_Ledger profile for POP-00193\",\"id\":\"F-98d655688e5a\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00193",
+        "name": "Elena Leon",
+        "role": "Longshoreman (Port of Oakland)",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "What have you seen, felt, or understood about \"Elle Lilo, Harbor Tugboat Captain at Port of Oakland, and the broader economic shifts in Jack London businesses.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Jack London",
+        "focus": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland, and the broader economic shifts in Jack London businesses.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Elena Leon — Longshoreman (Port of Oakland)",
+        "evidence": [
+          {
+            "id": "EV-246bc2954f",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+            "text": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C111",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-a43c5d888b36"
+        },
+        {
+          "t": "FACT",
+          "text": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-9b72d6e0f17a"
+        },
+        {
+          "t": "FACT",
+          "text": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-d0dffecca1a2"
+        },
+        {
+          "t": "FACT",
+          "text": "Port of Oakland · Port & Logistics · 1501 employees · growth 9.4% · revenue $425.1M (+$765k vs C110) · on the roster: Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)); Xanny Allen (Warehouse worker) +25 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-61f9f10229f4"
+        },
+        {
+          "t": "FACT",
+          "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-23d3e9625f4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-12c97a380b04"
+        },
+        {
+          "t": "FACT",
+          "text": "Anchor Build · Construction · 181 employees · growth 8.6% · revenue $146.6M (+$241k vs C110) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-a1b31ee97e4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+          "id": "F-cbc6f8ed4434"
+        },
+        {
+          "t": "FACT",
+          "text": "Elena Leon — Longshoreman (Port of Oakland)",
+          "src": "Simulation_Ledger profile for POP-00193",
+          "id": "F-98d655688e5a"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,1219 @@
+{
+  "version": "ECONOMIC-SLICE-4",
+  "empty": false,
+  "cycle": 111,
+  "kind": "economic-storefront",
+  "variant": "business",
+  "hood": "Jack London",
+  "pulse": {
+    "className": "hood-businesses",
+    "score": 41,
+    "label": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+    "hood": "Jack London",
+    "namedBusinesses": [
+      "Port of Oakland",
+      "Green & Gold Tavern",
+      "Harborline Grill",
+      "Anchor Build",
+      "Blue Lantern Bar"
+    ]
+  },
+  "story": {
+    "angle": "Jack London businesses: Port of Oakland, Green & Gold Tavern, Harborline Grill — the people who work there",
+    "label": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+    "hookLine": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+    "hood": "Jack London",
+    "pulseClass": "hood-businesses",
+    "namedBusinesses": [
+      "Port of Oakland",
+      "Green & Gold Tavern",
+      "Harborline Grill",
+      "Anchor Build",
+      "Blue Lantern Bar"
+    ],
+    "citizens": [
+      "Elle Lilo (POP-00177)",
+      "Blair Patel (POP-00189)",
+      "Elena Leon (POP-00193)",
+      "Xanny Allen (POP-00243)",
+      "Hector Leech (POP-00252)",
+      "Trenton Nawan (POP-00273)",
+      "Guadalupe Lupe (POP-00643)",
+      "Valentina Campbell (POP-01017)",
+      "Tomas Renteria (POP-00744)",
+      "Quynh Le (POP-00878)",
+      "Jalen Hill (POP-00960)",
+      "Bruce Wright (POP-00965)",
+      "Travis Golin (POP-00205)",
+      "Briar Soto (POP-00926)",
+      "Yuki Ji (POP-00783)",
+      "Guadalupe Lee (POP-00970)",
+      "Ty Yule (POP-00250)",
+      "Lamine Sissoko (POP-00149)",
+      "Derek Simmons (POP-00030)",
+      "Vincent Cho (POP-00736)"
+    ],
+    "popids": [
+      "POP-00177",
+      "POP-00189",
+      "POP-00193",
+      "POP-00243",
+      "POP-00252",
+      "POP-00273",
+      "POP-00643",
+      "POP-01017",
+      "POP-00744",
+      "POP-00878",
+      "POP-00960",
+      "POP-00965",
+      "POP-00205",
+      "POP-00926",
+      "POP-00783",
+      "POP-00970",
+      "POP-00250",
+      "POP-00149",
+      "POP-00030",
+      "POP-00736"
+    ],
+    "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111",
+    "cycle": 111
+  },
+  "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there — plus what moved since last cycle: revenue and headcount deltas, contractions, closures on the archive, and the week's casino action. When the record shows a business closing or shedding workers, that is the story. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "businesses": [
+    {
+      "bizId": "BIZ-00012",
+      "name": "Port of Oakland",
+      "sector": "Port & Logistics",
+      "hood": "Jack London",
+      "employeeCount": 1501,
+      "avgSalary": 95000,
+      "annualRevenue": 425107604,
+      "growthRate": 9.38,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00177",
+          "name": "Elle Lilo",
+          "role": "Harbor Tugboat Captain"
+        },
+        {
+          "popid": "POP-00189",
+          "name": "Blair Patel",
+          "role": "Ship Repair Foreman"
+        },
+        {
+          "popid": "POP-00193",
+          "name": "Elena Leon",
+          "role": "Longshoreman (Port of Oakland)"
+        },
+        {
+          "popid": "POP-00243",
+          "name": "Xanny Allen",
+          "role": "Warehouse worker"
+        },
+        {
+          "popid": "POP-00276",
+          "name": "Dmitri Soto",
+          "role": "Container Yard Supervisor"
+        },
+        {
+          "popid": "POP-00293",
+          "name": "Malot Bielo",
+          "role": "Warehouse worker"
+        },
+        {
+          "popid": "POP-00304",
+          "name": "Alma Lewis",
+          "role": "International Trade Consultant"
+        },
+        {
+          "popid": "POP-00314",
+          "name": "Lemante Naruto",
+          "role": "Crane Operator (Port of Oakland)"
+        },
+        {
+          "popid": "POP-00356",
+          "name": "Bethany Foster",
+          "role": "Ship Repair Foreman"
+        },
+        {
+          "popid": "POP-00440",
+          "name": "Xing Patel",
+          "role": "Ship Repair Foreman"
+        },
+        {
+          "popid": "POP-00471",
+          "name": "Anna Baker",
+          "role": "Trade Union Representative"
+        },
+        {
+          "popid": "POP-00477",
+          "name": "Timothy Leal",
+          "role": "Maritime Safety Inspector"
+        },
+        {
+          "popid": "POP-00493",
+          "name": "Lima Fila",
+          "role": "Maritime Safety Inspector"
+        },
+        {
+          "popid": "POP-00529",
+          "name": "Tomas Aguilar",
+          "role": "Freight Logistics Coordinator (Port of Oakland)"
+        },
+        {
+          "popid": "POP-00621",
+          "name": "Delvon Pratt",
+          "role": "Warehouse Supervisor"
+        },
+        {
+          "popid": "POP-00654",
+          "name": "Willy Wally",
+          "role": "International Trade Consultant"
+        },
+        {
+          "popid": "POP-00655",
+          "name": "Antwan Warren",
+          "role": "Container Yard Supervisor"
+        },
+        {
+          "popid": "POP-00678",
+          "name": "Celo Patel",
+          "role": "Container Yard Supervisor"
+        },
+        {
+          "popid": "POP-00681",
+          "name": "Moltin Tilton",
+          "role": "International Trade Consultant"
+        },
+        {
+          "popid": "POP-00693",
+          "name": "Mina Temp",
+          "role": "Port Logistics Coordinator"
+        },
+        {
+          "popid": "POP-00705",
+          "name": "Jessie Berry",
+          "role": "Harbor Tugboat Captain"
+        },
+        {
+          "popid": "POP-00719",
+          "name": "Debbie Kaplan",
+          "role": "Harbor Tugboat Captain"
+        },
+        {
+          "popid": "POP-00725",
+          "name": "Matthew Welker",
+          "role": "Trade Union Representative"
+        },
+        {
+          "popid": "POP-00797",
+          "name": "Curtis Boone",
+          "role": "Longshoreman"
+        },
+        {
+          "popid": "POP-00814",
+          "name": "Margarita Tanaka",
+          "role": "Trade Union Representative"
+        },
+        {
+          "popid": "POP-00835",
+          "name": "Mei-Lin Kang",
+          "role": "Trade Union Representative"
+        },
+        {
+          "popid": "POP-00893",
+          "name": "Erica Le",
+          "role": "Trade Union Representative"
+        },
+        {
+          "popid": "POP-00931",
+          "name": "Devika Desai",
+          "role": "Trade Union Representative"
+        },
+        {
+          "popid": "POP-00946",
+          "name": "LaTrice Desai",
+          "role": "Trade Union Representative"
+        }
+      ],
+      "delta": {
+        "vsCycle": 110,
+        "employees": 0,
+        "revenue": 765448,
+        "growth": -3.3099999999999987
+      }
+    },
+    {
+      "bizId": "BIZ-00041",
+      "name": "Green & Gold Tavern",
+      "sector": "Sports Bar & Dining",
+      "hood": "Jack London",
+      "employeeCount": 30,
+      "avgSalary": 61000,
+      "annualRevenue": 3688187,
+      "growthRate": 7.92,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00252",
+          "name": "Hector Leech",
+          "role": "Dishwasher"
+        },
+        {
+          "popid": "POP-00273",
+          "name": "Trenton Nawan",
+          "role": "Server"
+        },
+        {
+          "popid": "POP-00643",
+          "name": "Guadalupe Lupe",
+          "role": "Bartender"
+        },
+        {
+          "popid": "POP-01017",
+          "name": "Valentina Campbell",
+          "role": "Server"
+        }
+      ],
+      "delta": {
+        "vsCycle": 110,
+        "employees": 0,
+        "revenue": 5609,
+        "growth": -0.33000000000000007
+      }
+    },
+    {
+      "bizId": "BIZ-00044",
+      "name": "Harborline Grill",
+      "sector": "Restaurant & Dining",
+      "hood": "Jack London",
+      "employeeCount": 7,
+      "avgSalary": 61000,
+      "annualRevenue": 860207,
+      "growthRate": 7.56,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00744",
+          "name": "Tomas Renteria",
+          "role": "Podcast Host / Line Cook"
+        },
+        {
+          "popid": "POP-00878",
+          "name": "Quynh Le",
+          "role": "Line Cook"
+        },
+        {
+          "popid": "POP-00960",
+          "name": "Jalen Hill",
+          "role": "Line Cook"
+        },
+        {
+          "popid": "POP-00965",
+          "name": "Bruce Wright",
+          "role": "Line Cook"
+        }
+      ],
+      "delta": {
+        "vsCycle": 110,
+        "employees": 0,
+        "revenue": 1249,
+        "growth": -0.22000000000000064
+      }
+    },
+    {
+      "bizId": "BIZ-00057",
+      "name": "Anchor Build",
+      "sector": "Construction",
+      "hood": "Jack London",
+      "employeeCount": 181,
+      "avgSalary": 80000,
+      "annualRevenue": 146615810,
+      "growthRate": 8.56,
+      "keyPersonnel": "Marguerite Salcedo (managing partner)",
+      "staff": [
+        {
+          "popid": "POP-00205",
+          "name": "Travis Golin",
+          "role": "Construction laborer"
+        },
+        {
+          "popid": "POP-00926",
+          "name": "Briar Soto",
+          "role": "Electrician"
+        }
+      ],
+      "delta": {
+        "vsCycle": 110,
+        "employees": 0,
+        "revenue": 240956,
+        "growth": -3.1500000000000004
+      }
+    },
+    {
+      "bizId": "BIZ-00036",
+      "name": "Blue Lantern Bar",
+      "sector": "Nightlife & Entertainment",
+      "hood": "Jack London",
+      "employeeCount": 30,
+      "avgSalary": 65000,
+      "annualRevenue": 3932949,
+      "growthRate": 8.78,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00783",
+          "name": "Yuki Ji",
+          "role": "Bartender"
+        },
+        {
+          "popid": "POP-00970",
+          "name": "Guadalupe Lee",
+          "role": "Bartender"
+        }
+      ],
+      "delta": {
+        "vsCycle": 110,
+        "employees": 0,
+        "revenue": 6629,
+        "growth": -0.22000000000000064
+      }
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "3bcb3a20",
+      "hood": "Jack London",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00250",
+          "name": "Ty Yule"
+        },
+        {
+          "popid": "POP-00149",
+          "name": "Lamine Sissoko"
+        },
+        {
+          "popid": "POP-00030",
+          "name": "Derek Simmons"
+        },
+        {
+          "popid": "POP-00736",
+          "name": "Vincent Cho"
+        }
+      ],
+      "citizenEvents": [
+        "Ty Yule — felt quietly proud of how they handled something small",
+        "Lamine Sissoko — noticed the new streetlights went in before anyone had to ask",
+        "Derek Simmons — read about something unfamiliar and kept pulling the thread",
+        "Vincent Cho — noticed another new spot opening up in Jack London"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00183",
+          "name": "Bayline 6"
+        },
+        {
+          "bizId": "BIZ-00036",
+          "name": "Blue Lantern Bar"
+        }
+      ],
+      "otherEntities": null,
+      "magnitude": 23,
+      "trend": "carrying, 10.00 strength left of 3-cycle run",
+      "suggestedJournalist": "Jordan Velez",
+      "suggestedAngle": "baseline context piece"
+    }
+  ],
+  "citizens": [
+    {
+      "popid": "POP-00177",
+      "name": "Elle Lilo",
+      "role": "Harbor Tugboat Captain",
+      "neighborhood": "Jack London",
+      "business": "Port of Oakland",
+      "profile": "Elle Lilo — Harbor Tugboat Captain — Port of Oakland, Jack London",
+      "why": "works at Port of Oakland (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00189",
+      "name": "Blair Patel",
+      "role": "Ship Repair Foreman",
+      "neighborhood": "Jack London",
+      "business": "Port of Oakland",
+      "profile": "Blair Patel — Ship Repair Foreman — Port of Oakland, Jack London",
+      "why": "works at Port of Oakland (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00193",
+      "name": "Elena Leon",
+      "role": "Longshoreman (Port of Oakland)",
+      "neighborhood": "Jack London",
+      "business": "Port of Oakland",
+      "profile": "Elena Leon — Longshoreman (Port of Oakland) — Port of Oakland, Jack London",
+      "why": "works at Port of Oakland (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00243",
+      "name": "Xanny Allen",
+      "role": "Warehouse worker",
+      "neighborhood": "Jack London",
+      "business": "Port of Oakland",
+      "profile": "Xanny Allen — Warehouse worker — Port of Oakland, Jack London",
+      "why": "works at Port of Oakland (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00252",
+      "name": "Hector Leech",
+      "role": "Dishwasher",
+      "neighborhood": "Jack London",
+      "business": "Green & Gold Tavern",
+      "profile": "Hector Leech — Dishwasher — Green & Gold Tavern, Jack London",
+      "why": "works at Green & Gold Tavern (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00273",
+      "name": "Trenton Nawan",
+      "role": "Server",
+      "neighborhood": "Jack London",
+      "business": "Green & Gold Tavern",
+      "profile": "Trenton Nawan — Server — Green & Gold Tavern, Jack London",
+      "why": "works at Green & Gold Tavern (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00643",
+      "name": "Guadalupe Lupe",
+      "role": "Bartender",
+      "neighborhood": "Jack London",
+      "business": "Green & Gold Tavern",
+      "profile": "Guadalupe Lupe — Bartender — Green & Gold Tavern, Jack London",
+      "why": "works at Green & Gold Tavern (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01017",
+      "name": "Valentina Campbell",
+      "role": "Server",
+      "neighborhood": "Jack London",
+      "business": "Green & Gold Tavern",
+      "profile": "Valentina Campbell — Server — Green & Gold Tavern, Jack London",
+      "why": "works at Green & Gold Tavern (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00744",
+      "name": "Tomas Renteria",
+      "role": "Podcast Host / Line Cook",
+      "neighborhood": "Jack London",
+      "business": "Harborline Grill",
+      "profile": "Tomas Renteria — Podcast Host / Line Cook — Harborline Grill, Jack London",
+      "why": "works at Harborline Grill (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00878",
+      "name": "Quynh Le",
+      "role": "Line Cook",
+      "neighborhood": "Jack London",
+      "business": "Harborline Grill",
+      "profile": "Quynh Le — Line Cook — Harborline Grill, Jack London",
+      "why": "works at Harborline Grill (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00960",
+      "name": "Jalen Hill",
+      "role": "Line Cook",
+      "neighborhood": "Jack London",
+      "business": "Harborline Grill",
+      "profile": "Jalen Hill — Line Cook — Harborline Grill, Jack London",
+      "why": "works at Harborline Grill (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00965",
+      "name": "Bruce Wright",
+      "role": "Line Cook",
+      "neighborhood": "Jack London",
+      "business": "Harborline Grill",
+      "profile": "Bruce Wright — Line Cook — Harborline Grill, Jack London",
+      "why": "works at Harborline Grill (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00205",
+      "name": "Travis Golin",
+      "role": "Construction laborer",
+      "neighborhood": "Jack London",
+      "business": "Anchor Build",
+      "profile": "Travis Golin — Construction laborer — Anchor Build, Jack London",
+      "why": "works at Anchor Build (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00926",
+      "name": "Briar Soto",
+      "role": "Electrician",
+      "neighborhood": "Jack London",
+      "business": "Anchor Build",
+      "profile": "Briar Soto — Electrician — Anchor Build, Jack London",
+      "why": "works at Anchor Build (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00783",
+      "name": "Yuki Ji",
+      "role": "Bartender",
+      "neighborhood": "Jack London",
+      "business": "Blue Lantern Bar",
+      "profile": "Yuki Ji — Bartender — Blue Lantern Bar, Jack London",
+      "why": "works at Blue Lantern Bar (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00970",
+      "name": "Guadalupe Lee",
+      "role": "Bartender",
+      "neighborhood": "Jack London",
+      "business": "Blue Lantern Bar",
+      "profile": "Guadalupe Lee — Bartender — Blue Lantern Bar, Jack London",
+      "why": "works at Blue Lantern Bar (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00250",
+      "name": "Ty Yule",
+      "role": null,
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Ty Yule — Jack London",
+      "why": "engine seed for Jack London this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00149",
+      "name": "Lamine Sissoko",
+      "role": null,
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Lamine Sissoko — Jack London",
+      "why": "engine seed for Jack London this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00030",
+      "name": "Derek Simmons",
+      "role": null,
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Derek Simmons — Jack London",
+      "why": "engine seed for Jack London this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00736",
+      "name": "Vincent Cho",
+      "role": null,
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Vincent Cho — Jack London",
+      "why": "engine seed for Jack London this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00142",
+      "name": "Jonas Patel",
+      "role": "MEDICAL EXAMINER",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Jonas Patel — MEDICAL EXAMINER — Chinatown",
+      "why": "on the Casino_Ledger this cycle — settled a undocked wager"
+    },
+    {
+      "popid": "POP-00160",
+      "name": "Mason Ortega",
+      "role": "Journalist, Food & Hospitality",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Mason Ortega — Journalist, Food & Hospitality — Uptown",
+      "why": "on the Casino_Ledger this cycle — settled a undocked wager"
+    },
+    {
+      "popid": "POP-00185",
+      "name": "Lila Patty",
+      "role": "Solar Panel Installation Lead",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Lila Patty — Solar Panel Installation Lead — West Oakland",
+      "why": "on the Casino_Ledger this cycle — settled a undocked wager"
+    },
+    {
+      "popid": "POP-00217",
+      "name": "Kenton Pearl",
+      "role": "Plumber",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Kenton Pearl — Plumber — Piedmont Ave",
+      "why": "on the Casino_Ledger this cycle — settled a undocked wager"
+    },
+    {
+      "popid": "POP-00279",
+      "name": "Mac Hillie",
+      "role": "Bakery worker",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Mac Hillie — Bakery worker — Uptown",
+      "why": "on the Casino_Ledger this cycle — settled a undocked wager"
+    },
+    {
+      "popid": "POP-00782",
+      "name": "Devon Willis",
+      "role": "Server",
+      "neighborhood": "Adams Point",
+      "business": null,
+      "profile": "Devon Willis — Server — Adams Point",
+      "why": "defaulted on the debts this cycle (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-00961",
+      "name": "Darius Clark",
+      "role": "Bakery Worker",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Darius Clark — Bakery Worker — West Oakland",
+      "why": "defaulted on the debts this cycle (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-01019",
+      "name": "Patrick Hill",
+      "role": "Line cook",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Patrick Hill — Line cook — Laurel",
+      "why": "defaulted on the debts this cycle (Simulation_Ledger)"
+    }
+  ],
+  "closures": [],
+  "contractionWatch": [],
+  "casino": {
+    "wagers": [
+      {
+        "popid": "POP-00142",
+        "name": "Jonas Patel",
+        "market": "undocked",
+        "stake": 288,
+        "payout": 527,
+        "settled": true,
+        "status": "settled-win"
+      },
+      {
+        "popid": "POP-00160",
+        "name": "Mason Ortega",
+        "market": "undocked",
+        "stake": 133,
+        "payout": 0,
+        "settled": true,
+        "status": "settled-loss"
+      },
+      {
+        "popid": "POP-00185",
+        "name": "Lila Patty",
+        "market": "undocked",
+        "stake": 263,
+        "payout": 0,
+        "settled": true,
+        "status": "settled-loss"
+      },
+      {
+        "popid": "POP-00217",
+        "name": "Kenton Pearl",
+        "market": "undocked",
+        "stake": 475,
+        "payout": 869,
+        "settled": true,
+        "status": "settled-win"
+      },
+      {
+        "popid": "POP-00279",
+        "name": "Mac Hillie",
+        "market": "undocked",
+        "stake": 291,
+        "payout": 0,
+        "settled": true,
+        "status": "settled-loss"
+      }
+    ],
+    "houseFloat": 243629,
+    "totalRows": 40
+  },
+  "cityMoney": {
+    "treasury": {
+      "state": "ON_RECORD",
+      "opening": 105153851,
+      "closing": 110289093,
+      "income": {
+        "WEEKLY-ALLOCATION": {
+          "amount": 5000000,
+          "count": 1,
+          "charges": null
+        },
+        "COURT": {
+          "amount": 135242,
+          "count": 1,
+          "charges": 30
+        }
+      },
+      "outflows": []
+    },
+    "debt": {
+      "defaults": [
+        "POP-00782",
+        "POP-00961",
+        "POP-00970",
+        "POP-01019"
+      ],
+      "overLine": 91,
+      "crisisByHood": {
+        "Adams Point": {
+          "crisis": 0,
+          "defaults": 1
+        },
+        "West Oakland": {
+          "crisis": 0,
+          "defaults": 1
+        },
+        "Uptown": {
+          "crisis": 0,
+          "defaults": 1
+        },
+        "Laurel": {
+          "crisis": 0,
+          "defaults": 1
+        },
+        "Rockridge": {
+          "crisis": 1,
+          "defaults": 0
+        }
+      }
+    }
+  },
+  "deltas": {
+    "state": "PRIOR_CYCLE_ON_DISK",
+    "vs": 110
+  },
+  "prewrite": {
+    "pulseClass": "hood-businesses",
+    "angle": "Jack London businesses: Port of Oakland, Green & Gold Tavern, Harborline Grill — the people who work there",
+    "hookLine": "Elle Lilo, Harbor Tugboat Captain at Port of Oakland. 16 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+    "namedBusinesses": [
+      "Port of Oakland",
+      "Green & Gold Tavern",
+      "Harborline Grill",
+      "Anchor Build",
+      "Blue Lantern Bar"
+    ],
+    "anchorFacts": [
+      "Port of Oakland · Port & Logistics · 1501 employees · growth 9.4% · revenue $425.1M (+$765k vs C110) · on the roster: Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)); Xanny Allen (Warehouse worker) +25 more",
+      "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)",
+      "Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+      "Anchor Build · Construction · 181 employees · growth 8.6% · revenue $146.6M (+$241k vs C110) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician)",
+      "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+      "ENGINE SEED (Jack London): citizens Ty Yule; Lamine Sissoko; Derek Simmons; Vincent Cho · businesses Bayline 6; Blue Lantern Bar",
+      "CASINO: Jonas Patel — undocked wager, staked $288, settled for $527",
+      "CASINO: Mason Ortega — undocked wager, staked $133, settled for $0",
+      "CASINO: Lila Patty — undocked wager, staked $263, settled for $0",
+      "CASINO: Kenton Pearl — undocked wager, staked $475, settled for $869",
+      "CASINO: Mac Hillie — undocked wager, staked $291, settled for $0",
+      "CASINO: the house float stands at $244k",
+      "CITY MONEY: City treasury this cycle took in $5.1M: $5M the weekly budget allocation, $135,242 court money on 30 cleared charges",
+      "CITY MONEY: City treasury balance at the close: $110.3M (from $105.2M)",
+      "DEBT: Debt this cycle: 1 household's debts crossed the line this cycle (Rockridge 1); 4 defaulted: Devon Willis (Adams Point), Darius Clark (West Oakland), Guadalupe Lee (Uptown), Patrick Hill (Laurel)",
+      "DEBT: 91 tracked residents on the ledger carry debt at or over the crisis line — most in Fruitvale 15, Uptown 12, West Oakland 11, Downtown 8"
+    ],
+    "evidence": [
+      {
+        "text": "Port of Oakland · Port & Logistics · 1501 employees · growth 9.4% · revenue $425.1M (+$765k vs C110) · on the roster: Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)); Xanny Allen (Warehouse worker) +25 more",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 7.9% · revenue $3.7M (+$6k vs C110) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Valentina Campbell (Server)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 7.6% · revenue $860k (+$1k vs C110) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "text": "Anchor Build · Construction · 181 employees · growth 8.6% · revenue $146.6M (+$241k vs C110) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "text": "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 8.8% · revenue $3.9M (+$7k vs C110) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C111"
+      },
+      {
+        "text": "ENGINE SEED (Jack London): citizens Ty Yule; Lamine Sissoko; Derek Simmons; Vincent Cho · businesses Bayline 6; Blue Lantern Bar",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C111"
+      },
+      {
+        "text": "CASINO: Jonas Patel — undocked wager, staked $288, settled for $527",
+        "src": "output/beats/Casino_Ledger.jsonl @C111"
+      },
+      {
+        "text": "CASINO: Mason Ortega — undocked wager, staked $133, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C111"
+      },
+      {
+        "text": "CASINO: Lila Patty — undocked wager, staked $263, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C111"
+      },
+      {
+        "text": "CASINO: Kenton Pearl — undocked wager, staked $475, settled for $869",
+        "src": "output/beats/Casino_Ledger.jsonl @C111"
+      },
+      {
+        "text": "CASINO: Mac Hillie — undocked wager, staked $291, settled for $0",
+        "src": "output/beats/Casino_Ledger.jsonl @C111"
+      },
+      {
+        "text": "CASINO: the house float stands at $244k",
+        "src": "output/beats/Casino_Ledger.jsonl @C111"
+      },
+      {
+        "text": "CITY MONEY: City treasury this cycle took in $5.1M: $5M the weekly budget allocation, $135,242 court money on 30 cleared charges",
+        "src": "output/beats/City_Treasury.jsonl @C111"
+      },
+      {
+        "text": "CITY MONEY: City treasury balance at the close: $110.3M (from $105.2M)",
+        "src": "output/beats/City_Treasury.jsonl @C111"
+      },
+      {
+        "text": "DEBT: Debt this cycle: 1 household's debts crossed the line this cycle (Rockridge 1); 4 defaulted: Devon Willis (Adams Point), Darius Clark (West Oakland), Guadalupe Lee (Uptown), Patrick Hill (Laurel)",
+        "src": "output/beats/Story_Hook_Deck.jsonl DEBT_CRISIS/DEBT_DEFAULT + Simulation_Ledger DialState"
+      },
+      {
+        "text": "DEBT: 91 tracked residents on the ledger carry debt at or over the crisis line — most in Fruitvale 15, Uptown 12, West Oakland 11, Downtown 8",
+        "src": "output/simulation_ledger_snapshot.jsonl DebtLevel >= 5"
+      }
+    ],
+    "hooks": [
+      {
+        "text": "Notable event: \"Port of Oakland: berth delay — the waterfront, the shops and the builders who run on its cargo take the hit\". Follow-up recommended.",
+        "angle": "baseline context piece",
+        "hood": "Jack London"
+      },
+      {
+        "text": "Baylight District unemployment down 10%. Recovery story. What's driving job growth?",
+        "angle": "baseline context piece",
+        "hood": "Baylight District"
+      },
+      {
+        "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+        "angle": "general coverage",
+        "hood": null
+      },
+      {
+        "text": "Iman Horton has not advanced in 55 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "hood": "Adams Point"
+      },
+      {
+        "text": "the debts crossed a line this week — sleep comes harder now",
+        "angle": "observational analysis",
+        "hood": "Rockridge"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+      "Do not contradict a role, employer or neighborhood listed here"
+    ]
+  },
+  "rotation": {
+    "pool": [
+      {
+        "hood": "Baylight District",
+        "staffed": 2,
+        "workers": 50,
+        "lastCovered": 108
+      },
+      {
+        "hood": "Lake Merritt",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "Temescal",
+        "staffed": 4,
+        "workers": 10,
+        "lastCovered": 107
+      },
+      {
+        "hood": "West Oakland",
+        "staffed": 7,
+        "workers": 15,
+        "lastCovered": 109
+      },
+      {
+        "hood": "Brooklyn Basin",
+        "staffed": 1,
+        "workers": 4,
+        "lastCovered": null
+      },
+      {
+        "hood": "Jack London",
+        "staffed": 7,
+        "workers": 43,
+        "lastCovered": null
+      },
+      {
+        "hood": "Downtown",
+        "staffed": 4,
+        "workers": 4,
+        "lastCovered": 110
+      },
+      {
+        "hood": "Piedmont Ave",
+        "staffed": 2,
+        "workers": 6,
+        "lastCovered": null
+      },
+      {
+        "hood": "Fruitvale",
+        "staffed": 3,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "Uptown",
+        "staffed": 3,
+        "workers": 12,
+        "lastCovered": null
+      },
+      {
+        "hood": "Chinatown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Rockridge",
+        "staffed": 2,
+        "workers": 5,
+        "lastCovered": null
+      },
+      {
+        "hood": "Grand Lake",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Laurel",
+        "staffed": 3,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "East Oakland",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "San Antonio",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      }
+    ],
+    "picked": "Jack London"
+  },
+  "candidates": [
+    {
+      "className": "hood-businesses",
+      "hood": "Baylight District",
+      "label": "Baylight District · 2 staffed / 10 listed",
+      "namedBusinesses": [
+        "Anthropic",
+        "Baylight Construction Authority"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Lake Merritt",
+      "label": "Lake Merritt · 1 staffed / 3 listed",
+      "namedBusinesses": [
+        "Ridgeline Ventures"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Temescal",
+      "label": "Temescal · 4 staffed / 6 listed",
+      "namedBusinesses": [
+        "Gridiron Analytics",
+        "OakTown Social",
+        "Calderon-Nishi"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "West Oakland",
+      "label": "West Oakland · 7 staffed / 9 listed",
+      "namedBusinesses": [
+        "Oakmesh Systems",
+        "West Side Cafe",
+        "Civis Systems"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Brooklyn Basin",
+      "label": "Brooklyn Basin · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "Portside Bio"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Downtown",
+      "label": "Downtown · 4 staffed / 11 listed",
+      "namedBusinesses": [
+        "EBMUD",
+        "Miso Metro",
+        "Atlas Bay Architects"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Piedmont Ave",
+      "label": "Piedmont Ave · 2 staffed / 5 listed",
+      "namedBusinesses": [
+        "Kaiser Permanente Oakland",
+        "Mayday Movers"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Fruitvale",
+      "label": "Fruitvale · 3 staffed / 4 listed",
+      "namedBusinesses": [
+        "Fruitvale Community Clinic",
+        "Fruitvale Diner",
+        "Foothill Builders"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Uptown",
+      "label": "Uptown · 3 staffed / 6 listed",
+      "namedBusinesses": [
+        "Oakland Tech Collective",
+        "Art Walk Cafe",
+        "Night Walk Records"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Chinatown",
+      "label": "Chinatown · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Heritage Bakehouse"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Rockridge",
+      "label": "Rockridge · 2 staffed / 7 listed",
+      "namedBusinesses": [
+        "OakHouse",
+        "Claremont Table"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Grand Lake",
+      "label": "Grand Lake · 1 staffed / 7 listed",
+      "namedBusinesses": [
+        "Port Grind"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Laurel",
+      "label": "Laurel · 3 staffed / 6 listed",
+      "namedBusinesses": [
+        "Nino's",
+        "Laurel Market",
+        "Schoolgate Cafe"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "East Oakland",
+      "label": "East Oakland · 2 staffed / 4 listed",
+      "namedBusinesses": [
+        "Eastside Family Market",
+        "Sunrise Cafe"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "San Antonio",
+      "label": "San Antonio · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Park Boulevard Cafe"
+      ]
+    }
+  ],
+  "signals": {
+    "businessLaneCount": 46,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c111.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in West Oakland",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "ref": "output/engine_audit_c111.json patterns[1]; evidence: Initiative_Tracker row(s) 7"
+      },
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c111.json patterns[6]; evidence: Neighborhood_Map row(s) 6"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Piedmont Ave, Chinatown, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "ref": "output/engine_audit_c111.json patterns[22]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "label": "Downtown Economic Revitalization — economic upside, jobs and footprint in Downtown",
+        "hood": "Downtown",
+        "ref": "output/engine_audit_c111.json patterns[23]; evidence: Initiative_Tracker row(s) 8"
+      }
+    ]
+  },
+  "scene": {
+    "namedOnTop": [
+      "Port of Oakland",
+      "Green & Gold Tavern",
+      "Harborline Grill",
+      "Anchor Build",
+      "Blue Lantern Bar"
+    ]
+  },
+  "pointers": [
+    "output/beats/Business_Ledger.jsonl (179 rows @C111)",
+    "output/beats/Employment_Roster.jsonl (869 rows)",
+    "output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 4)",
+    "output/beats/prev/Business_Ledger.jsonl (movement vs C110)",
+    "output/beats/Casino_Ledger.jsonl (40 wager rows this cycle)",
+    "output/beats/City_Treasury.jsonl (the city's money this cycle)",
+    "output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 6)",
+    "output/desk_signal_c111.json lanes.business (pointers only)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2"
+  ]
+}

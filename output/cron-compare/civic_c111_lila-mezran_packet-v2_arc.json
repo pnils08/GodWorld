@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "111",
+  "desk": "civic",
+  "persona": "lila-mezran",
+  "hood": "Chinatown",
+  "quotes": [
+    {
+      "pop": "POP-00951",
+      "name": "Niani Oakley",
+      "quote": "Most folks around here, if it's not an emergency but they need more than home remedies, they'll head over to the community clinic on 8th Street. It's close, and they know how to handle the usual stuff without making a big deal out of it."
+    },
+    {
+      "pop": "POP-00977",
+      "name": "Mai Tse",
+      "quote": "I see the clinic lines every morning when I walk to school. Mostly, it's older people who go in, and sometimes parents with little kids. I don't see many people my age there. Some people wait for a while, but others just look at the line and walk away. I don't know why they leave—maybe it's too long, or they don't think they need it."
+    },
+    {
+      "pop": "POP-00194",
+      "name": "Yu Zen",
+      "quote": "From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone."
+    },
+    {
+      "pop": "POP-00801",
+      "name": "Maurice Franklin",
+      "quote": "Lying here in the hospital, you hear things. Nurses talking, other patients' families visiting. Chinatown's been hit hard this season - seems like every other conversation is about someone else down there getting sick. It makes you realize how connected we all are, even when we're in different neighborhoods."
+    }
+  ],
+  "claim": "Most folks around here, if it's not an emergency but they need more than home remedies, they'll head over to the community clinic on 8th Street. It's close, and they know how to handle the usual stuff without making a big deal out of it.",
+  "src": "citizenVoice PRESS c111",
+  "ranAt": "2026-10-12T18:17:23.602Z"
+}

@@ -5,7 +5,6 @@ Cycle **C111** · kind `beat-trends` · hood **Chinatown**
 ## THE SLICE
 - Angle: Marin Tao leads the conversation (25 mentions); West Oakland moves the most — what Oakland is doing together this week
 - Hook: Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.
-- Note: no pulse on disk for this Cycle (buildPulseSlice.js) — the pages are silent in this slice
 - Prior cycle: PRIOR_CYCLE_ON_DISK (C110)
 
 ## FACTS (each line is a row on the record)
@@ -19,6 +18,9 @@ Cycle **C111** · kind `beat-trends` · hood **Chinatown**
 - Marin Tao — Musician — Chinatown — the city is talking about them (Cultural_Ledger)
 - Dax Monroe — Artist — Rockridge — the city is talking about them (Cultural_Ledger)
 - Rico Valez — Musician — Fruitvale — the city is talking about them (Cultural_Ledger)
+- Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake — has been saying it on their own page — the A's, C109: “Not just the Coliseum, but the soul of the place.”
+- Melton Neilon — Sourdough Baker — Temescal — has been saying it on their own page — transit, C109: “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.”
+- Eunice Marston — Senior Pastor / Faith Leader — Downtown — has been saying it on their own page — faith, C110: “I haven't had any direct involvement with the Or Hashalom Renewal Community, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of…”
 
 ## ENGINE HOOKS FOR YOU (colour, not fact)
 - Downtown boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)
@@ -29,6 +31,13 @@ Cycle **C111** · kind `beat-trends` · hood **Chinatown**
 - Uptown boom sustained — momentum 10/10, the block everyone wants onto (desk rotation)
 - Hal Richmond moved from Chinatown to West Oakland — moving up from Chinatown (desk rotation)
 - Philly Rodriguez moved from Jack London to West Oakland — moving up from Jack London (desk rotation)
+
+## THE PAGES SAY (the citizens' own words — colour and sourcing, never a number in print)
+- the A's — fading; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C109 (not an interview — colour only, never a quote): “Not just the Coliseum, but the soul of the place.”
+- transit — fading; dozens of citizens over the last two months, still talking this week. Loudest: Melton Neilon (Temescal), on their own page at C109 (not an interview — colour only, never a quote): “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.”
+- faith — fading; dozens of citizens over the last two months, quiet this week. Loudest: Eunice Marston (Downtown), on their own page at C110 (not an interview — colour only, never a quote): “I haven't had any direct involvement with the Or Hashalom Renewal Community, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of…”
+- the Oaks — fading; dozens of citizens over the last two months, quiet this week. Loudest: Jessie Hess (Downtown), on their own page at C110 (not an interview — colour only, never a quote): “I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.”
+- the council — steady; a dozen or so citizens over the last two months, still talking this week. Loudest: Elio Perez (Rockridge), on their own page at C108 (not an interview — colour only, never a quote): “I’ve heard people talking about the Fruitvale Transit Hub Phase II, but it feels like the council’s been dragging their feet.”
 
 ## THE ROOM IS YOURS
 the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about

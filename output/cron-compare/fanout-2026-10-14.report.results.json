@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-14",
+  "stage": "report",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Elliot Marbury",
+      "desk": "sports",
+      "ok": false,
+      "error": "no angle artifact at output/cron-compare/sports_c111_elliot-marbury_packet-v2_angle.json — run --stage=angle first"
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-10-14T18:17:02.750Z"
+}

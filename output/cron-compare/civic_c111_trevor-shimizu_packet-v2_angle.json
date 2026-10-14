@@ -1,0 +1,832 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "111",
+  "persona": "trevor-shimizu",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00155",
+      "name": "Trevor Shimizu",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "12th St Oakland City Center ridership down 15,192 vs C110 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "transit",
+        "hood": null,
+        "facts": [
+          "8 stations + 10 corridors on the record this cycle; total ridership 36,303 (C110: 91,564)",
+          "12th St Oakland City Center: ridership 8,293 (-15,192 vs C110), on-time 86% (+5 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+          "19th St Oakland: ridership 5,155 (-10,950 vs C110), on-time 77% (-2 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+          "Fruitvale: ridership 4,178 (-7,557 vs C110), on-time 85% (+7 pts) — mild; holiday; events in Fruitvale, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+          "West Oakland: ridership 2,706 (-5,974 vs C110), on-time 84% (+9 pts) — mild; holiday; events in Jack London, Downtown; Baylight District — Final Council Vote: construction-active",
+          "Coliseum: ridership 3,397 (-4,626 vs C110), on-time 79% (+3 pts) — mild; holiday; events in East Oakland",
+          "MacArthur: ridership 5,587 (-4,409 vs C110), on-time 83% (+5 pts) — mild; holiday; events in Rockridge",
+          "Rockridge: ridership 4,310 (-3,334 vs C110), on-time 83% (+8 pts) — mild; holiday; events in Rockridge, Piedmont Ave",
+          "Lake Merritt: ridership 2,677 (-3,219 vs C110), on-time 86% (+2 pts) — mild; holiday",
+          "I-880 North: traffic index 62 (-38 vs C110) — mild; holiday; Baylight District — Final Council Vote: construction-active",
+          "I-880 South: traffic index 38 (-61 vs C110) — mild; holiday",
+          "I-580 East: traffic index 58 (-42 vs C110) — mild; holiday"
+        ],
+        "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-transit",
+      "hood": null,
+      "score": null,
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Month-ten disbursement approved — $400,000 to keep West Oakland families in their homes.\"",
+          "src": "output/civic-voice/mayor_gavel_c111.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): accelerate to design-phase with Cycle 114 deadline — \"Four cycles of waiting ends today — Fruitvale Transit Hub enters design-phase with schematics due Cycle 114.\"",
+          "src": "output/civic-voice/mayor_gavel_c111.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): mandate first cohort placement report by Cycle 112 — \"150 apprentices by spring — I'm demanding the first cohort placement report by Cycle 112.\"",
+          "src": "output/civic-voice/mayor_gavel_c111.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): call emergency Economic Development Committee hearing for Cycle 112 — \"Downtown businesses have waited long enough — I'm calling an emergency Economic Development Committee hearing for Cycle",
+          "src": "output/civic-voice/mayor_gavel_c111.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): refer to Economic Development Committee with mandatory milestone reporting — \"Grand Lake's quiet engine needs fuel — $2.5 million in stabilization funding is now before the Council.\"",
+          "src": "output/civic-voice/mayor_gavel_c111.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00200",
+          "name": "Evan Lewis",
+          "profile": "Evan Lewis — Bus driver",
+          "role": "Bus driver",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00200",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00218",
+          "name": "Joel Wren",
+          "profile": "Joel Wren — Mechanic",
+          "role": "Mechanic",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00218",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00280",
+          "name": "Jerald Jensen",
+          "profile": "Jerald Jensen — Janitor",
+          "role": "Janitor",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00280",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00338",
+          "name": "Coen Cartier",
+          "profile": "Coen Cartier — Transit Operator (AC Transit)",
+          "role": "Transit Operator (AC Transit)",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00338",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00442",
+          "name": "Daire Green",
+          "profile": "Daire Green — Transit Operator (AC Transit)",
+          "role": "Transit Operator (AC Transit)",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00442",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00448",
+          "name": "Ray Neal",
+          "profile": "Ray Neal — AC Transit Bus Operator",
+          "role": "AC Transit Bus Operator",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00448",
+            "status": "Active"
+          }
+        },
+        {
+          "pop": "POP-00573",
+          "name": "Calvin Mwangi",
+          "profile": "Calvin Mwangi — AC Transit Bus Driver",
+          "role": "AC Transit Bus Driver",
+          "hood": null,
+          "mode": "workplace",
+          "sourceKind": "active-roster",
+          "evidence": {
+            "source": "output/beats/Employment_Roster.jsonl",
+            "bizId": "BIZ-00013",
+            "pop": "POP-00573",
+            "status": "Active"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "12th St Oakland City Center ridership down 15,192 vs C110 | 8 stations + 10 corridors on the record",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-53a06f0591d1"
+      },
+      {
+        "t": "FACT",
+        "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active; 10 transit workers on the roster.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-c015c9e48ad0"
+      },
+      {
+        "t": "FACT",
+        "text": "8 stations + 10 corridors on the record this cycle; total ridership 36,303 (C110: 91,564)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-6ac4c6af0788"
+      },
+      {
+        "t": "FACT",
+        "text": "12th St Oakland City Center: ridership 8,293 (-15,192 vs C110), on-time 86% (+5 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-fe34bfee06f8"
+      },
+      {
+        "t": "FACT",
+        "text": "19th St Oakland: ridership 5,155 (-10,950 vs C110), on-time 77% (-2 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-f4361cec59af"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale: ridership 4,178 (-7,557 vs C110), on-time 85% (+7 pts) — mild; holiday; events in Fruitvale, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-d02d744053f5"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland: ridership 2,706 (-5,974 vs C110), on-time 84% (+9 pts) — mild; holiday; events in Jack London, Downtown; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-e9a4539a8294"
+      },
+      {
+        "t": "FACT",
+        "text": "Coliseum: ridership 3,397 (-4,626 vs C110), on-time 79% (+3 pts) — mild; holiday; events in East Oakland",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-91b7b7815a00"
+      },
+      {
+        "t": "FACT",
+        "text": "MacArthur: ridership 5,587 (-4,409 vs C110), on-time 83% (+5 pts) — mild; holiday; events in Rockridge",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-fb8c804e33db"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: ridership 4,310 (-3,334 vs C110), on-time 83% (+8 pts) — mild; holiday; events in Rockridge, Piedmont Ave",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-8cdd748c5e2f"
+      },
+      {
+        "t": "FACT",
+        "text": "Lake Merritt: ridership 2,677 (-3,219 vs C110), on-time 86% (+2 pts) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-1425baed386c"
+      },
+      {
+        "t": "FACT",
+        "text": "I-880 North: traffic index 62 (-38 vs C110) — mild; holiday; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-6411ae78b93e"
+      },
+      {
+        "t": "FACT",
+        "text": "I-880 South: traffic index 38 (-61 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-521ca214a79c"
+      },
+      {
+        "t": "FACT",
+        "text": "I-580 East: traffic index 58 (-42 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-c46d57b5efb1"
+      },
+      {
+        "t": "FACT",
+        "text": "I-580 West: traffic index 37 (-61 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-e96a719f5a1d"
+      },
+      {
+        "t": "FACT",
+        "text": "I-980: traffic index 33 (-67 vs C110) — mild; holiday; Baylight District — Final Council Vote: construction-active",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-b26f11b14110"
+      },
+      {
+        "t": "FACT",
+        "text": "Broadway: traffic index 38 (-62 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-19a130450bb7"
+      },
+      {
+        "t": "FACT",
+        "text": "International Blvd: traffic index 36 (-58 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-926a0f42a86f"
+      },
+      {
+        "t": "FACT",
+        "text": "MacArthur Blvd: traffic index 40 (-50 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-498fbfcdeed7"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Ave: traffic index 31 (-69 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-b897f44adaf2"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Ave: traffic index 30 (-37 vs C110) — mild; holiday",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111",
+        "id": "F-b55ff43192dc"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "workplace",
+    "candidates": [
+      {
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
+        "hood": null,
+        "profile": "Evan Lewis — Bus driver",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00200",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00218",
+        "name": "Joel Wren",
+        "role": "Mechanic",
+        "hood": null,
+        "profile": "Joel Wren — Mechanic",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00218",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00280",
+        "name": "Jerald Jensen",
+        "role": "Janitor",
+        "hood": null,
+        "profile": "Jerald Jensen — Janitor",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00280",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00338",
+        "name": "Coen Cartier",
+        "role": "Transit Operator (AC Transit)",
+        "hood": null,
+        "profile": "Coen Cartier — Transit Operator (AC Transit)",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00338",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00442",
+        "name": "Daire Green",
+        "role": "Transit Operator (AC Transit)",
+        "hood": null,
+        "profile": "Daire Green — Transit Operator (AC Transit)",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00442",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00448",
+        "name": "Ray Neal",
+        "role": "AC Transit Bus Operator",
+        "hood": null,
+        "profile": "Ray Neal — AC Transit Bus Operator",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00448",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00573",
+        "name": "Calvin Mwangi",
+        "role": "AC Transit Bus Driver",
+        "hood": null,
+        "profile": "Calvin Mwangi — AC Transit Bus Driver",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00013",
+          "pop": "POP-00573",
+          "status": "Active"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-transit",
+      "angle": "12th St Oakland City Center ridership down 15,192 vs C110 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "label": "12th St Oakland City Center ridership down 15,192 vs C110 | 8 stations + 10 corridors on the record",
+      "hookLine": "12th St Oakland City Center moved down the most this cycle — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active; 10 transit workers on the roster.",
+      "hood": null,
+      "citizens": [
+        "Evan Lewis (POP-00200)",
+        "Joel Wren (POP-00218)",
+        "Jerald Jensen (POP-00280)",
+        "Coen Cartier (POP-00338)",
+        "Daire Green (POP-00442)",
+        "Ray Neal (POP-00448)",
+        "Calvin Mwangi (POP-00573)",
+        "Eleanor Rivera (POP-00617)",
+        "Elena Soria-Dominguez (POP-00791)",
+        "Ximena Mehta (POP-01039)"
+      ],
+      "popids": [
+        "POP-00200",
+        "POP-00218",
+        "POP-00280",
+        "POP-00338",
+        "POP-00442",
+        "POP-00448",
+        "POP-00573",
+        "POP-00617",
+        "POP-00791",
+        "POP-01039"
+      ],
+      "ref": "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "cycle": 111
+    },
+    "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "TRANSIT-SLICE-1",
+    "kind": "beat-transit",
+    "seat": {
+      "slug": "trevor-shimizu",
+      "name": "Trevor Shimizu",
+      "popid": "POP-00155",
+      "desk": "civic",
+      "domain": "transit",
+      "builder": "buildTransitSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-transit",
+      "score": 100,
+      "label": "12th St Oakland City Center ridership down 15,192 vs C110 | 8 stations + 10 corridors on the record",
+      "hood": null,
+      "source": "output/beats/Transit_Metrics.jsonl Cycle 111"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "12th St Oakland City Center ridership down 15,192 vs C110 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+      "hookLine": "12th St Oakland City Center moved down the most this cycle — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active; 10 transit workers on the roster.",
+      "anchorFacts": [
+        "8 stations + 10 corridors on the record this cycle; total ridership 36,303 (C110: 91,564)",
+        "12th St Oakland City Center: ridership 8,293 (-15,192 vs C110), on-time 86% (+5 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+        "19th St Oakland: ridership 5,155 (-10,950 vs C110), on-time 77% (-2 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+        "Fruitvale: ridership 4,178 (-7,557 vs C110), on-time 85% (+7 pts) — mild; holiday; events in Fruitvale, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+        "West Oakland: ridership 2,706 (-5,974 vs C110), on-time 84% (+9 pts) — mild; holiday; events in Jack London, Downtown; Baylight District — Final Council Vote: construction-active",
+        "Coliseum: ridership 3,397 (-4,626 vs C110), on-time 79% (+3 pts) — mild; holiday; events in East Oakland",
+        "MacArthur: ridership 5,587 (-4,409 vs C110), on-time 83% (+5 pts) — mild; holiday; events in Rockridge",
+        "Rockridge: ridership 4,310 (-3,334 vs C110), on-time 83% (+8 pts) — mild; holiday; events in Rockridge, Piedmont Ave",
+        "Lake Merritt: ridership 2,677 (-3,219 vs C110), on-time 86% (+2 pts) — mild; holiday",
+        "I-880 North: traffic index 62 (-38 vs C110) — mild; holiday; Baylight District — Final Council Vote: construction-active",
+        "I-880 South: traffic index 38 (-61 vs C110) — mild; holiday",
+        "I-580 East: traffic index 58 (-42 vs C110) — mild; holiday",
+        "I-580 West: traffic index 37 (-61 vs C110) — mild; holiday",
+        "I-980: traffic index 33 (-67 vs C110) — mild; holiday; Baylight District — Final Council Vote: construction-active",
+        "Broadway: traffic index 38 (-62 vs C110) — mild; holiday",
+        "International Blvd: traffic index 36 (-58 vs C110) — mild; holiday",
+        "MacArthur Blvd: traffic index 40 (-50 vs C110) — mild; holiday",
+        "Telegraph Ave: traffic index 31 (-69 vs C110) — mild; holiday",
+        "Grand Ave: traffic index 30 (-37 vs C110) — mild; holiday"
+      ],
+      "evidence": [
+        {
+          "text": "8 stations + 10 corridors on the record this cycle; total ridership 36,303 (C110: 91,564)",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "12th St Oakland City Center: ridership 8,293 (-15,192 vs C110), on-time 86% (+5 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "19th St Oakland: ridership 5,155 (-10,950 vs C110), on-time 77% (-2 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "Fruitvale: ridership 4,178 (-7,557 vs C110), on-time 85% (+7 pts) — mild; holiday; events in Fruitvale, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "West Oakland: ridership 2,706 (-5,974 vs C110), on-time 84% (+9 pts) — mild; holiday; events in Jack London, Downtown; Baylight District — Final Council Vote: construction-active",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "Coliseum: ridership 3,397 (-4,626 vs C110), on-time 79% (+3 pts) — mild; holiday; events in East Oakland",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "MacArthur: ridership 5,587 (-4,409 vs C110), on-time 83% (+5 pts) — mild; holiday; events in Rockridge",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "Rockridge: ridership 4,310 (-3,334 vs C110), on-time 83% (+8 pts) — mild; holiday; events in Rockridge, Piedmont Ave",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "Lake Merritt: ridership 2,677 (-3,219 vs C110), on-time 86% (+2 pts) — mild; holiday",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "I-880 North: traffic index 62 (-38 vs C110) — mild; holiday; Baylight District — Final Council Vote: construction-active",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "I-880 South: traffic index 38 (-61 vs C110) — mild; holiday",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "I-580 East: traffic index 58 (-42 vs C110) — mild; holiday",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "I-580 West: traffic index 37 (-61 vs C110) — mild; holiday",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "I-980: traffic index 33 (-67 vs C110) — mild; holiday; Baylight District — Final Council Vote: construction-active",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "Broadway: traffic index 38 (-62 vs C110) — mild; holiday",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "International Blvd: traffic index 36 (-58 vs C110) — mild; holiday",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "MacArthur Blvd: traffic index 40 (-50 vs C110) — mild; holiday",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "Telegraph Ave: traffic index 31 (-69 vs C110) — mild; holiday",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        },
+        {
+          "text": "Grand Ave: traffic index 30 (-37 vs C110) — mild; holiday",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_IN_TABLE",
+        "vs": 110
+      },
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Evan Lewis — Bus driver — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00218",
+        "name": "Joel Wren",
+        "role": "Mechanic",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Joel Wren — Mechanic — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00280",
+        "name": "Jerald Jensen",
+        "role": "Janitor",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Jerald Jensen — Janitor — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00338",
+        "name": "Coen Cartier",
+        "role": "Transit Operator (AC Transit)",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00442",
+        "name": "Daire Green",
+        "role": "Transit Operator (AC Transit)",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Daire Green — Transit Operator (AC Transit) — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00448",
+        "name": "Ray Neal",
+        "role": "AC Transit Bus Operator",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Ray Neal — AC Transit Bus Operator — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00573",
+        "name": "Calvin Mwangi",
+        "role": "AC Transit Bus Driver",
+        "neighborhood": null,
+        "business": "AC Transit",
+        "profile": "Calvin Mwangi — AC Transit Bus Driver — AC Transit",
+        "why": "works at AC Transit (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00617",
+        "name": "Eleanor Rivera",
+        "role": "BART Station Manager",
+        "neighborhood": null,
+        "business": "BART Oakland Division",
+        "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "why": "works at BART Oakland Division (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00791",
+        "name": "Elena Soria-Dominguez",
+        "role": "Transit Hub Planning Lead",
+        "neighborhood": null,
+        "business": "Fruitvale Transit Hub Authority",
+        "profile": "Elena Soria-Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+        "why": "works at Fruitvale Transit Hub Authority (Employment_Roster)"
+      },
+      {
+        "popid": "POP-01039",
+        "name": "Ximena Mehta",
+        "role": "Bart Transit PR",
+        "neighborhood": null,
+        "business": "BART Oakland Division",
+        "profile": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+        "why": "works at BART Oakland Division (Employment_Roster)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Transit_Metrics.jsonl Cycle 111",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155",
+    "text": "Trevor's chasing the quiet story behind the numbers—why 12th Street's platforms felt emptier even as on-time performance ticked up. He wants to stand at the fare gates during the 7:40am surge and listen to what regulars complain about. The holiday dip is obvious, but something about the Baylight District construction vote doesn't add up—if it's 'construction-active,' where are the workers?",
+    "plan": {
+      "chase": "Trevor's chasing the quiet story behind the numbers—why 12th Street's platforms felt emptier even as on-time performance ticked up. He wants to stand at the fare gates during the 7:40am surge and listen to what regulars complain about. The holiday dip is obvious, but something about the Baylight District construction vote doesn't add up—if it's 'construction-active,' where are the workers?",
+      "focus": "The disconnect between 12th Street's improved on-time stats and its steep ridership drop, particularly against the backdrop of Baylight District construction approvals.",
+      "why": "Because numbers don't breathe—but the station does. If platforms are emptier while trains run smoother, someone's making tradeoffs.",
+      "checks": [
+        "Verify if Baylight construction crews are using alternate routes",
+        "Check holiday service reduction schedules against ridership patterns",
+        "Confirm whether downtown event shuttles siphoned riders"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00448",
+          "question": "Ray—when your bus passes 12th Street now, what's different about the crowd flow?",
+          "basis": "AC Transit operators see the station's pulse from the curb daily"
+        },
+        {
+          "pop": "POP-00573",
+          "question": "Calvin—do your regulars mention avoiding 12th Street since the council vote?",
+          "basis": "Drivers hear the unfiltered gripes about route changes"
+        }
+      ],
+      "interpretation": "This feels like a calibration issue—the system optimized for metrics (on-time performance) while riders reacted to intangible friction (construction dread, holiday disruptions).",
+      "unverifiedLead": [
+        "Whispers about fare inspectors concentrating at 12th Street post-vote",
+        "Possible unlogged shuttle buses for Baylight contractors"
+      ],
+      "closeQuestion": "Who benefited from 12th Street's missing 15,192 riders?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Month-ten disbursement approved — $400,000 to keep West Oakland families in their homes.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): accelerate to design-phase with Cycle 114 deadline — \"Four cycles of waiting ends today — Fruitvale Transit Hub enters design-phase with schematics due Cycle 114.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): mandate first cohort placement report by Cycle 112 — \"150 apprentices by spring — I'm demanding the first cohort placement report by Cycle 112.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): call emergency Economic Development Committee hearing for Cycle 112 — \"Downtown businesses have waited long enough — I'm calling an emergency Economic Development Committee hearing for Cycle ",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): refer to Economic Development Committee with mandatory milestone reporting — \"Grand Lake's quiet engine needs fuel — $2.5 million in stabilization funding is now before the Council.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 96,
+  "ranAt": "2026-10-12T11:17:06.103Z"
+}

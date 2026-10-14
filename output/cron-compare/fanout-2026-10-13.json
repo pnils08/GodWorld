@@ -1,0 +1,535 @@
+{
+  "date": "2026-10-13",
+  "cycle": 111,
+  "quotas": {
+    "grid": [
+      "luis-navarro",
+      "rachel-torres",
+      "angela-reyes",
+      "selena-grant"
+    ],
+    "weekday": 2
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Luis Navarro",
+      "popid": "POP-00636",
+      "beatDomain": "CIVIC",
+      "persona": "luis-navarro",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 2,
+      "story": {
+        "ref": "output/engine_audit_c111.json patterns[1]; evidence: Initiative_Tracker row(s) 7",
+        "label": "stuck-initiative (medium) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"operational\" for 4 cycles",
+        "kind": "anomaly",
+        "angle": "Oakland Youth Apprenticeship Pipeline stalled in operational — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying West Oakland has not advanced in 4 cycles.",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [
+          "POP-00198",
+          "POP-00953"
+        ],
+        "citizens": [
+          "Rick Walker (POP-00198)",
+          "Carmen Solis (POP-00953)"
+        ]
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "luis-navarro",
+      "pulse": {
+        "className": "accountability-anomaly",
+        "score": 80,
+        "label": "stuck-initiative (medium) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"operational\" for 4 cycles",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "source": "output/engine_audit_c111.json patterns[1]; evidence: Initiative_Tracker row(s) 7"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "stuck-initiative (medium) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"operational\" for 4 cycles"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ],
+        "schema": "INVESTIGATION-BRIEF-1",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "excludedCandidates": [
+          {
+            "popid": "POP-00031",
+            "reason": "PRO_ATHLETE_CIVIC_INELIGIBLE"
+          }
+        ]
+      },
+      "wakePackage": "LUIS-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Sgt. Rachel Torres",
+      "popid": "POP-00057",
+      "beatDomain": "SAFETY",
+      "persona": "rachel-torres",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 2,
+      "story": {
+        "kind": "beat-safety",
+        "angle": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table — what the table says and who answers for it",
+        "label": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table",
+        "hookLine": "San Antonio leads the incident count; Uptown waits longest for a response; 64 in custody citywide; 7 public-safety staff on the roster.",
+        "hood": "San Antonio",
+        "citizens": [
+          "Rafael Montez (POP-00136)",
+          "Kimberly Cho (POP-00137)",
+          "Leonard Briggs (POP-00138)",
+          "Samantha Viteri (POP-00139)",
+          "Marcus Hollowell (POP-00140)",
+          "Priya Narang (POP-00141)",
+          "Vanessa Tran-Muñoz (POP-01021)"
+        ],
+        "popids": [
+          "POP-00136",
+          "POP-00137",
+          "POP-00138",
+          "POP-00139",
+          "POP-00140",
+          "POP-00141",
+          "POP-01021"
+        ],
+        "ref": "output/beats/Crime_Metrics.jsonl @C111",
+        "cycle": 111
+      },
+      "beatSlice": true,
+      "beatSeat": "rachel-torres",
+      "pulse": {
+        "className": "beat-safety",
+        "score": 100,
+        "label": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table",
+        "hood": "San Antonio",
+        "source": "output/beats/Crime_Metrics.jsonl @C111"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table — what the table says and who answers for it",
+        "hookLine": "San Antonio leads the incident count; Uptown waits longest for a response; 64 in custody citywide; 7 public-safety staff on the roster.",
+        "anchorFacts": [
+          "140 incidents across 22 neighborhoods; most in San Antonio 9, Glenview 8, Ivy Hill 8, Grand Lake 8, Adams Point 8; fewest in Lake Merritt 5, Jack London 5, Downtown 4",
+          "San Antonio: 9 incidents (+1 vs C110), response 10.4 min, clearance 21%, property index 36, violent index 27",
+          "Slowest response: Uptown: 6 incidents (+0 vs C110), response 11.4 min, clearance 21%, property index 36, violent index 20",
+          "Moved this cycle — rising: East Oakland; easing: Adams Point, Jack London",
+          "Citywide custody this cycle: 30 arrests (0 tracked, 30 other residents); 64 in custody at the close; 34 left",
+          "Adams Point: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "San Antonio: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked"
+        ],
+        "evidence": [
+          {
+            "text": "140 incidents across 22 neighborhoods; most in San Antonio 9, Glenview 8, Ivy Hill 8, Grand Lake 8, Adams Point 8; fewest in Lake Merritt 5, Jack London 5, Downtown 4",
+            "src": "output/beats/Crime_Metrics.jsonl @C111"
+          },
+          {
+            "text": "San Antonio: 9 incidents (+1 vs C110), response 10.4 min, clearance 21%, property index 36, violent index 27",
+            "src": "output/beats/Crime_Metrics.jsonl @C111"
+          },
+          {
+            "text": "Slowest response: Uptown: 6 incidents (+0 vs C110), response 11.4 min, clearance 21%, property index 36, violent index 20",
+            "src": "output/beats/Crime_Metrics.jsonl @C111"
+          },
+          {
+            "text": "Moved this cycle — rising: East Oakland; easing: Adams Point, Jack London",
+            "src": "output/beats/Crime_Metrics.jsonl @C111"
+          },
+          {
+            "text": "Citywide custody this cycle: 30 arrests (0 tracked, 30 other residents); 64 in custody at the close; 34 left",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 city"
+          },
+          {
+            "text": "Adams Point: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Adams Point"
+          },
+          {
+            "text": "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Baylight District"
+          },
+          {
+            "text": "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Chinatown"
+          },
+          {
+            "text": "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Grand Lake"
+          },
+          {
+            "text": "San Antonio: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 San Antonio"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 110
+        },
+        "hooks": [],
+        "note": "desk-signal incident rows attached as pointers (4)",
+        "pageVoices": [],
+        "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first"
+      },
+      "wakePackage": "RACHEL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "beatDomain": "EDUCATION",
+      "persona": "angela-reyes",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 2,
+      "story": {
+        "kind": "beat-schools",
+        "angle": "Enrollment moved in West Oakland — Temescal has the weakest school record on the table (index 6.6) — the students and teachers who live it",
+        "label": "Temescal has the weakest school record on the table (index 6.6)",
+        "hookLine": "4 students and educators in Temescal; the table says why their school reads the way it does.",
+        "hood": "Temescal",
+        "citizens": [
+          "Lo Thoop (POP-00667)",
+          "Patricia Nolan (POP-00729)",
+          "Jun Leu (POP-00994)",
+          "Salma Navarro (POP-00975)"
+        ],
+        "popids": [
+          "POP-00667",
+          "POP-00729",
+          "POP-00994",
+          "POP-00975"
+        ],
+        "ref": "output/beats/Neighborhood_Demographics.jsonl @C111",
+        "cycle": 111
+      },
+      "beatSlice": true,
+      "beatSeat": "angela-reyes",
+      "pulse": {
+        "className": "beat-schools",
+        "score": 100,
+        "label": "Temescal has the weakest school record on the table (index 6.6)",
+        "hood": "Temescal",
+        "source": "output/beats/Neighborhood_Demographics.jsonl @C111"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Enrollment moved in West Oakland — Temescal has the weakest school record on the table (index 6.6) — the students and teachers who live it",
+        "hookLine": "4 students and educators in Temescal; the table says why their school reads the way it does.",
+        "anchorFacts": [
+          "Enrollment moved: West Oakland +3 students, East Oakland +2 students, Rockridge +1 students, Baylight District -1 students, Piedmont Ave +1 students, Brooklyn +1 students vs C110",
+          "Ranked by school quality index: Rockridge 8.7, Baylight District 8.14, Piedmont Ave 8.12, West Oakland 8.11, Brooklyn 8.09, Laurel 7.96, Adams Point 7.96, Lake Merritt 7.9, Jack London 7.84, Fruitvale 7.8, Downtown 7.73, Grand Lake 7.68, Uptown 7.61, Eastlake 6.96, KONO 6.95, Chinatown 6.94, Glenview 6.92, Dimond 6.92, San Antonio 6.84, Ivy Hill 6.84, East Oakland 6.81, Temescal 6.6 (22 neighborhoods)",
+          "Temescal: school quality index 6.6 (was 6.7 at C110), graduation 85.21%, college-ready 56%, teacher quality 6.92, funding 11,500, 313 students",
+          "Rockridge: school quality index 8.7 (was 8.78 at C110), graduation 94.68%, college-ready 76.53%, teacher quality 9.07, funding 15,000, 246 students",
+          "The district: Oakland Unified School District — 5,201 employees citywide, growth 7.89%; per-hood funding on the table totals 286,000"
+        ],
+        "evidence": [
+          {
+            "text": "Enrollment moved: West Oakland +3 students, East Oakland +2 students, Rockridge +1 students, Baylight District -1 students, Piedmont Ave +1 students, Brooklyn +1 students vs C110",
+            "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C111"
+          },
+          {
+            "text": "Ranked by school quality index: Rockridge 8.7, Baylight District 8.14, Piedmont Ave 8.12, West Oakland 8.11, Brooklyn 8.09, Laurel 7.96, Adams Point 7.96, Lake Merritt 7.9, Jack London 7.84, Fruitvale 7.8, Downtown 7.73, Grand Lake 7.68, Uptown 7.61, Eastlake 6.96, KONO 6.95, Chinatown 6.94, Glenview 6.92, Dimond 6.92, San Antonio 6.84, Ivy Hill 6.84, East Oakland 6.81, Temescal 6.6 (22 neighborhoods)",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C111"
+          },
+          {
+            "text": "Temescal: school quality index 6.6 (was 6.7 at C110), graduation 85.21%, college-ready 56%, teacher quality 6.92, funding 11,500, 313 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C111"
+          },
+          {
+            "text": "Rockridge: school quality index 8.7 (was 8.78 at C110), graduation 94.68%, college-ready 76.53%, teacher quality 9.07, funding 15,000, 246 students",
+            "src": "output/beats/Neighborhood_Demographics.jsonl @C111"
+          },
+          {
+            "text": "The district: Oakland Unified School District — 5,201 employees citywide, growth 7.89%; per-hood funding on the table totals 286,000",
+            "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C111"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 110
+        },
+        "hooks": [
+          {
+            "text": "Brooklyn cooling off: foot traffic down, storefronts quieter than the rest of the city",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Brooklyn",
+            "priority": 6
+          },
+          {
+            "text": "Philly Rodriguez moved from Jack London to West Oakland — moving up from Jack London",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "West Oakland",
+            "priority": 5
+          },
+          {
+            "text": "Yasmin Robinson moved from Lake Merritt to East Oakland — priced out of Lake Merritt",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "East Oakland",
+            "priority": 5
+          },
+          {
+            "text": "Arjun Venkataraman moved from Temescal to Jack London — moving up from Temescal",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Jack London",
+            "priority": 5
+          }
+        ],
+        "note": null,
+        "pageVoices": [],
+        "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05"
+      },
+      "wakePackage": "ANGELA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Selena Grant",
+      "popid": "POP-00591",
+      "beatDomain": "SPORTS",
+      "persona": "selena-grant",
+      "approach": "Oaks analysis approach (solo seat): open on a supplied number or roster observation, never a scene. The Oaks rows of the sports feed are the skeleton; the story is what a first-year franchise's decision means — the rotation, the sit, the signing, the silence. Real NBA names are the roster, not citizens. Belief is earned with numbers. End on what the front office still owes.",
+      "gridDay": 2,
+      "story": {
+        "kind": "beat-oaks-beat",
+        "angle": "Oaks — season-state C111 · - · - — the second club's board read",
+        "label": "Oaks — season-state C111 · - · -",
+        "hookLine": "Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+        "hood": "Jack London",
+        "citizens": [
+          "Elliot Abraham (POP-01046)",
+          "Adash Stanley (POP-01023)"
+        ],
+        "popids": [
+          "POP-01046",
+          "POP-01023"
+        ],
+        "ref": "output/beats/Oakland_Sports_Feed.jsonl @C111",
+        "cycle": 111
+      },
+      "beatSlice": true,
+      "beatSeat": "selena-grant",
+      "pulse": {
+        "className": "beat-oaks-beat",
+        "score": 100,
+        "label": "Oaks — season-state C111 · - · -",
+        "hood": "Jack London",
+        "source": "output/beats/Oakland_Sports_Feed.jsonl @C111"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Oaks — season-state C111 · - · - — the second club's board read",
+        "hookLine": "Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+        "anchorFacts": [
+          "Oaks — season-state (early-season), C111: Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+          "Trigger: cold-streak",
+          "Franchise stability: unstable",
+          "Oaks — player-feature (early-season), C111: Adash Stanley in attendance at the A's rally to show support.",
+          "Trigger: cold-streak",
+          "Franchise stability: unstable"
+        ],
+        "evidence": [
+          {
+            "text": "Oaks — season-state (early-season), C111: Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+          },
+          {
+            "text": "Trigger: cold-streak",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+          },
+          {
+            "text": "Franchise stability: unstable",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+          },
+          {
+            "text": "Oaks — player-feature (early-season), C111: Adash Stanley in attendance at the A's rally to show support.",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+          },
+          {
+            "text": "Trigger: cold-streak",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+          },
+          {
+            "text": "Franchise stability: unstable",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [],
+        "note": null,
+        "pageVoices": [],
+        "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+      },
+      "wakePackage": "SELENA-OAKS-2",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "gridDay": 2,
+      "story": {
+        "ref": "undocked:undocked-pop00597-Y3C7",
+        "label": "UNDOCKED: Eric Taveras — a night the books can't settle yet",
+        "kind": "undocked",
+        "angle": "Recap Eric Taveras's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, sol, sirius, combat 0, mishaps 0, magnitude 3/5. Standings: Clarissa Dane leads the board — rank #1, 8 cycle(s) led, current streak 8.",
+        "citizens": [
+          "Eric Taveras — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00597"
+        ],
+        "hood": "Downtown"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Luis Navarro",
+        "persona": "luis-navarro",
+        "wakePackage": "LUIS-LEP2-1"
+      },
+      {
+        "name": "Sgt. Rachel Torres",
+        "persona": "rachel-torres",
+        "wakePackage": "RACHEL-LEP2-1"
+      },
+      {
+        "name": "Angela Reyes",
+        "persona": "angela-reyes",
+        "wakePackage": "ANGELA-LEP2-1"
+      },
+      {
+        "name": "Selena Grant",
+        "persona": "selena-grant",
+        "wakePackage": "SELENA-OAKS-2"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=luis-navarro,rachel-torres,angela-reyes,selena-grant,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": false,
+    "reason": "no business desk or Mason assignment in rota",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=3 selena-grant/beat-oaks-beat:Jack London, angela-reyes/beat-schools:Temescal, rachel-torres/beat-safety:San Antonio",
+    "seats": [
+      "selena-grant/beat-oaks-beat:Jack London",
+      "angela-reyes/beat-schools:Temescal",
+      "rachel-torres/beat-safety:San Antonio"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "luis-navarro",
+        "domain": "accountability-anomaly",
+        "label": "stuck-initiative (medium) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"operational\" for 4 cycles"
+      }
+    ]
+  },
+  "builtAt": "2026-10-13T11:15:04.994Z"
+}

@@ -1,0 +1,190 @@
+{
+  "version": "ENVIRONMENT-SLICE-2",
+  "empty": false,
+  "cycle": 111,
+  "kind": "beat-weather",
+  "seat": {
+    "slug": "noah-tan",
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "desk": "civic",
+    "domain": "environment",
+    "builder": "buildEnvironmentSlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-weather",
+    "score": 100,
+    "label": "C111 mild, 57°F after fog",
+    "hood": null,
+    "source": "output/beats/Cycle_Weather.jsonl CycleID 111"
+  },
+  "story": {
+    "kind": "beat-weather",
+    "angle": "C111 mild, 57°F after fog — what this weather does to a day in the city",
+    "label": "C111 mild, 57°F after fog",
+    "hookLine": "C111 mild, 57°F after fog; 1 residents on the record lived it.",
+    "hood": null,
+    "citizens": [
+      "Javier Robertson (POP-00228)"
+    ],
+    "popids": [
+      "POP-00228"
+    ],
+    "ref": "output/beats/Cycle_Weather.jsonl CycleID 111",
+    "cycle": 111
+  },
+  "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00228",
+      "name": "Javier Robertson",
+      "role": "Delivery driver",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Javier Robertson — Delivery driver — Temescal",
+      "why": "lived the weather this cycle (Who Lived It)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "This cycle: mild, 57°F, impact 1, comfort 0.75, mood content",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 111"
+    },
+    {
+      "text": "Last 3 cycles: C108 fog 46°F, C109 overcast 49°F, C110 fog 52°F",
+      "src": "output/beats/Cycle_Weather.jsonl"
+    },
+    {
+      "text": "Javier Robertson — limited social activity due to winter mood",
+      "src": "output/world_summary_c111.md ## Who Lived It"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "C111 mild, 57°F after fog — what this weather does to a day in the city",
+    "hookLine": "C111 mild, 57°F after fog; 1 residents on the record lived it.",
+    "anchorFacts": [
+      "This cycle: mild, 57°F, impact 1, comfort 0.75, mood content",
+      "Last 3 cycles: C108 fog 46°F, C109 overcast 49°F, C110 fog 52°F",
+      "Javier Robertson — limited social activity due to winter mood"
+    ],
+    "evidence": [
+      {
+        "text": "This cycle: mild, 57°F, impact 1, comfort 0.75, mood content",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 111"
+      },
+      {
+        "text": "Last 3 cycles: C108 fog 46°F, C109 overcast 49°F, C110 fog 52°F",
+        "src": "output/beats/Cycle_Weather.jsonl"
+      },
+      {
+        "text": "Javier Robertson — limited social activity due to winter mood",
+        "src": "output/world_summary_c111.md ## Who Lived It"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_IN_TABLE",
+      "vs": 110
+    },
+    "hooks": [
+      {
+        "text": "Seismic activity reported. Resident reactions and structural checks warranted.",
+        "angle": "general coverage",
+        "domain": "ENVIRONMENT",
+        "hood": null,
+        "priority": 3
+      },
+      {
+        "text": "Raymond Torres moved from Laurel to Lake Merritt — moving up from Laurel",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 5
+      },
+      {
+        "text": "Wilson Shepard moved from Downtown to West Oakland — moving up from Downtown",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 5
+      },
+      {
+        "text": "Juliet Choi at severe displacement risk in Downtown (risk: 10/10)",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 7
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+  },
+  "weather": {
+    "CycleID": "111",
+    "Type": "mild",
+    "Temp": "57",
+    "Impact": "1",
+    "Advisory": "",
+    "Comfort": "0.75",
+    "Mood": "content",
+    "Alerts": "",
+    "Streak": "1",
+    "StreakType": "clear",
+    "Timestamp": "Y3C7"
+  },
+  "recent": [
+    {
+      "CycleID": "108",
+      "Type": "fog",
+      "Temp": "46",
+      "Impact": "1.3",
+      "Advisory": "",
+      "Comfort": "0.4",
+      "Mood": "introspective",
+      "Alerts": "",
+      "Streak": "2",
+      "StreakType": "fog",
+      "Timestamp": "Y3C4"
+    },
+    {
+      "CycleID": "109",
+      "Type": "overcast",
+      "Temp": "49",
+      "Impact": "1.05",
+      "Advisory": "",
+      "Comfort": "0.5",
+      "Mood": "neutral",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "overcast",
+      "Timestamp": "Y3C5"
+    },
+    {
+      "CycleID": "110",
+      "Type": "fog",
+      "Temp": "52",
+      "Impact": "1.3",
+      "Advisory": "",
+      "Comfort": "0.4",
+      "Mood": "introspective",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "fog",
+      "Timestamp": "Y3C6"
+    }
+  ],
+  "pointers": [
+    "output/beats/Cycle_Weather.jsonl CycleID 111",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Noah Tan this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

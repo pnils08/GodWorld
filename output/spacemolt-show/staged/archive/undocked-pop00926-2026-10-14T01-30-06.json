@@ -1,0 +1,186 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00926-2026-10-14T01-30-06",
+  "popid": "POP-00926",
+  "holder": "Briar Soto",
+  "session": "undocked-pop00926",
+  "window": {
+    "startedAt": "2026-10-14T01:30:06.039Z",
+    "endedAt": "2026-10-14T01:40:14.632Z"
+  },
+  "runner": {
+    "turns": 43,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 1,
+    "estCostUsd": 0.1136,
+    "tokensIn": 804505,
+    "tokensOut": 3294,
+    "log": "output/spacemolt-show/episodes/undocked-pop00926-2026-10-14T01-30-06.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-14T01:40:17.956Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "note": "no credit fields on windowed entries",
+      "value": null
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 3,
+          "copper_ore": 2
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 2,
+        "trading": 0,
+        "mission": 2,
+        "combat": 0,
+        "navigation": 0,
+        "session": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 192731663,
+            "created_at": "2026-10-14T01:35:20Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 3 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 3,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 3
+            }
+          },
+          {
+            "id": 192731595,
+            "created_at": "2026-10-14T01:35:20Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 2,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          }
+        ],
+        "trading": [],
+        "mission": [
+          {
+            "id": 192736695,
+            "created_at": "2026-10-14T01:37:37Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Copper Requisition",
+            "data": {
+              "mission_id": "d9ae8b4d48f3964f908161f03503d3d2",
+              "template_id": "copper_requisition",
+              "title": "Copper Requisition",
+              "type": "mining"
+            }
+          },
+          {
+            "id": 192725632,
+            "created_at": "2026-10-14T01:30:28Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Iron Supply Run",
+            "data": {
+              "mission_id": "a8aea6b47cb53d027469c2950bb7fd06",
+              "template_id": "iron_supply_run",
+              "title": "Iron Supply Run",
+              "type": "mining"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 192724401,
+            "created_at": "2026-10-14T01:30:07Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "BriarSoto logged in",
+            "data": {
+              "last_login_at": "2026-10-14T01:30:05Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 1,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-14 01:40:14",
+        "text": "[Session Handoff] - **Mid-action state**: Actively mining in the Main Belt (metallic asteroid belt), just collected 1 Copper Ore (100% depletion).  \n- **Next step**: Continue mining to gather resources for active missions or check belt conditions if depleted.  \n- **Current location/ship**: Main Belt, credits: 500cr, cargo: 5 Iron Ore, 5 Copper Ore, 1 Sol Alloy Ore, 1 Titanium Ore.  \n- **Active missions**:  \n  1. *Iron Supply Run*: 5/30 Iron Ore mined.  \n  2. *Copper Requisition*: 5/25 Copper Ore mined.  \n- **Recent events**:  \n  - Accepted *Copper Requisition* mission.  \n  - Mined 1 Iron Ore and 3 Copper Ore in current session.  \n  - Belt has fluctuating deposits (Iron/Copper dwindling)."
+      }
+    ],
+    "unwindowed": []
+  }
+}

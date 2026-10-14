@@ -1,0 +1,291 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00597-2026-10-13T01-30-05",
+  "popid": "POP-00597",
+  "holder": "Eric Taveras",
+  "session": "undocked-pop00597",
+  "window": {
+    "startedAt": "2026-10-13T01:30:05.689Z",
+    "endedAt": "2026-10-13T01:40:13.733Z"
+  },
+  "runner": {
+    "turns": 39,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 1,
+    "estCostUsd": 0.0923,
+    "tokensIn": 653433,
+    "tokensOut": 2899,
+    "log": "output/spacemolt-show/episodes/undocked-pop00597-2026-10-13T01-30-05.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-13T01:40:16.650Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "note": "no credit fields on windowed entries",
+      "value": null
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol",
+        "sol",
+        "sirius"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "titanium_ore": 3,
+          "copper_ore": 30,
+          "nickel_ore": 1,
+          "iron_ore": 6,
+          "sol_alloy_ore": 1
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 7,
+        "trading": 0,
+        "mission": 1,
+        "combat": 0,
+        "navigation": 2,
+        "session": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 190457496,
+            "created_at": "2026-10-13T01:38:21Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Titanium Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "titanium_ore",
+              "resource_name": "Titanium Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 190457334,
+            "created_at": "2026-10-13T01:38:21Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 24 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 24,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 8
+            }
+          },
+          {
+            "id": 190456983,
+            "created_at": "2026-10-13T01:38:21Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Nickel Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "nickel_ore",
+              "resource_name": "Nickel Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 190448551,
+            "created_at": "2026-10-13T01:33:19Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Titanium Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 2,
+              "resource_id": "titanium_ore",
+              "resource_name": "Titanium Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 190448197,
+            "created_at": "2026-10-13T01:33:19Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 6 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 6,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 190448027,
+            "created_at": "2026-10-13T01:33:19Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Sol Alloy Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "sol_alloy_ore",
+              "resource_name": "Sol Alloy Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 190447849,
+            "created_at": "2026-10-13T01:33:18Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 6 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 6,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          }
+        ],
+        "trading": [],
+        "mission": [
+          {
+            "id": 190444728,
+            "created_at": "2026-10-13T01:30:29Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Iron Supply Run",
+            "data": {
+              "mission_id": "e346d015c9e1432ea83bb40eba4e3670",
+              "template_id": "iron_supply_run",
+              "title": "Iron Supply Run",
+              "type": "mining"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 190457368,
+            "created_at": "2026-10-13T01:38:21Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Sol",
+            "data": {
+              "arrival_poi": "saturn",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "sol",
+              "to_system_name": "Sol"
+            }
+          },
+          {
+            "id": 190455025,
+            "created_at": "2026-10-13T01:36:57Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Sirius",
+            "data": {
+              "arrival_poi": "sirius_gas_pocket",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "sirius",
+              "to_system_name": "Sirius"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 190444336,
+            "created_at": "2026-10-13T01:30:08Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "EricTaveras logged in",
+            "data": {
+              "last_login_at": "2026-10-13T01:30:05Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 1,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-13 01:40:13",
+        "text": "[Session Handoff] - **Current Action:** Actively mining for Iron Ore at Main Belt (Sol system), just extracted 3 Copper Ore from a deposit (114 units remaining)\n- **Next Step:** Continue mining attempts at Main Belt to gather more Iron Ore (only 6/30 collected for contract)\n- **Location/Status:** \n  - Sol system (Main Belt asteroid field)\n  - Starship cargo: 41/70 used (6 Iron Ore, 30 Copper Ore, 3 Titanium Ore, 1 Sol Alloy Ore, 1 Nickel Ore)\n  - Credits: 500cr\n- **Active Goal:** \"Iron Supply Run\" contract (need 24 more Iron Ore units)\n- **Recent Events:** \n  - Unsuccessful trip to Sirius system (no viable mining locations)\n  - Just returned to Sol's Main Belt\n  - XP gains in deep_core_mining, mining, and piloting"
+      }
+    ],
+    "unwindowed": []
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "111",
+  "desk": "civic",
+  "persona": "trevor-shimizu",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00448",
+      "name": "Ray Neal",
+      "quote": "You know, it’s quieter now. Fewer folks waiting, fewer folks boarding. Feels like the energy’s shifted somewhere else, but I can’t quite put my finger on where."
+    },
+    {
+      "pop": "POP-00573",
+      "name": "Calvin Mwangi",
+      "quote": "Nah, can't say I've heard my regulars talk much about avoiding 12th Street specifically. Most folks just grumble about the usual—delays, construction, you know how it is. But no, nothing about the council vote coming up in conversation."
+    },
+    {
+      "pop": "POP-00200",
+      "name": "Evan Lewis",
+      "quote": "You know, it's funny—on paper, the numbers look good, right? Better on-time stats should mean happier riders. But driving the route, I see it different. When they start tearing up streets for these big projects, people just... find another way. Doesn't matter if the bus shows up on time if the sidewalks are blocked and the air's full of dust. Folks in my neighborhood talk about it at the stop—they're tired of detours and noise, so they walk, bike, or just stay home. The stats don't show that frustration."
+    },
+    {
+      "pop": "POP-00218",
+      "name": "Joel Wren",
+      "quote": "I’ve been noticing fewer folks at the 12th Street station lately, even though the buses are running smoother than ever. It’s strange—people used to pack in there, but now it feels quieter. Maybe it’s the Baylight construction approvals making folks rethink their routes. Hard to say, but something’s shifted."
+    }
+  ],
+  "claim": "You know, it’s quieter now. Fewer folks waiting, fewer folks boarding. Feels like the energy’s shifted somewhere else, but I can’t quite put my finger on where.",
+  "src": "citizenVoice PRESS c111",
+  "ranAt": "2026-10-12T18:18:17.168Z"
+}

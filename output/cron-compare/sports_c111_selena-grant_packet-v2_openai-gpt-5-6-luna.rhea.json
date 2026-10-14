@@ -1,0 +1,55 @@
+{
+  "draft": "output/cron-compare/sports_c111_selena-grant_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "51789cc12f183828c44c1ae8d7222ebdfe993a1aa986752e0ea8b3c45df74349",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "It is a player-feature in this cycle...",
+      "issue": "Uses feed category terminology directly in analytical prose, but permissible as low-severity trade/data vocabulary.",
+      "severity": "low"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "Accurately verifies against C111 Oaks sports feed rows regarding Elliot Abraham, Draymond Green inquiry, and Adash Stanley with zero high-severity flags.",
+  "review": {
+    "profileId": "selena-grant-oaks-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "packageVersion": "SELENA-OAKS-2",
+    "manifestId": "AM-8a022581de6a",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Elliot Abraham"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0096,
+  "durationMs": 7047,
+  "parseError": false,
+  "ranAt": "2026-10-13T23:16:01.759Z"
+}

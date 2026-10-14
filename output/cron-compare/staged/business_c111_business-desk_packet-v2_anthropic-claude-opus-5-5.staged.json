@@ -1,0 +1,57 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "111",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Elle Lilo",
+        "role": "quoted-source",
+        "popid": "POP-00177"
+      },
+      {
+        "name": "Blair Patel",
+        "role": "mentioned",
+        "popid": "POP-00189"
+      },
+      {
+        "name": "Elena Leon",
+        "role": "quoted-source",
+        "popid": "POP-00193"
+      },
+      {
+        "name": "Dmitri Soto",
+        "role": "mentioned",
+        "popid": "POP-00276"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "The Port's growth? It's been steady, but honestly, my day-to-day hasn't changed much. I'm still out there guiding ships, same as always. The bustle's a bit louder, sure, but it's the kind of noise you get used to. What keeps me up at night is making sure we keep that balance—growth without losing the soul of this place.",
+        "sourceRef": "citizenVoice PRESS Elle Lilo"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-299ee10b1a6f",
+    "draftSha256": "c8f47884193e4037bfe54eeeda194bfe1563f0e7811356dd7ca2e1e5dced8e10",
+    "verdict": "output/cron-compare/business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5.rhea.json",
+    "ranAt": "2026-10-12T23:16:22.362Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-12T23:16:25.097Z"
+}

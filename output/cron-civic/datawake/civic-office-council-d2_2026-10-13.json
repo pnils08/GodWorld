@@ -1,0 +1,26 @@
+{
+  "office": "council_d2",
+  "agentDir": "civic-office-council-d2",
+  "holder": "Leonard Tran",
+  "popid": "POP-00502",
+  "title": "City Council District 2",
+  "date": "2026-10-13",
+  "cycle": 111,
+  "model": "meta-llama/llama-4-maverick",
+  "statement": "The completion of soil test verification and the progress of Phase II remediation with independent oversight provide the evidence-based assurance I require. Seeing the Baylight District move steadily through these construction milestones ensures that the growth in Jack London is built on a stable, safe foundation for our businesses and residents.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-106-civic-office-council-d2",
+        "text": "To address the economic decay in Downtown and Grand Lake, I propose a dual-track approach focusing on targeted infrastructure safety and retail stability. For Downtown, we must move beyond rhetoric to implement the Downtown Economic Revitalization plan specifically to curb the crime imbalance affecting retail vitality. For Grand Lake, I support the Commercial Stabilization initiative to protect small businesses from the current downturn.",
+        "directiveCycle": 106,
+        "confrontationSeat": "civic-office-council-d2"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "1",
+  "ranAt": "2026-10-13T10:45:38.628Z",
+  "fellBackFrom": null
+}

@@ -1,0 +1,143 @@
+{
+  "version": "OAKS-BEAT-1",
+  "empty": false,
+  "cycle": 111,
+  "kind": "beat-oaks-beat",
+  "seat": {
+    "slug": "selena-grant",
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "desk": "sports",
+    "domain": "oaks",
+    "builder": "buildOaksBeatSlice.js"
+  },
+  "hood": "Jack London",
+  "pulse": {
+    "className": "beat-oaks-beat",
+    "score": 100,
+    "label": "Oaks — season-state C111 · - · -",
+    "hood": "Jack London",
+    "source": "output/beats/Oakland_Sports_Feed.jsonl @C111"
+  },
+  "story": {
+    "kind": "beat-oaks-beat",
+    "angle": "Oaks — season-state C111 · - · - — the second club's board read",
+    "label": "Oaks — season-state C111 · - · -",
+    "hookLine": "Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+    "hood": "Jack London",
+    "citizens": [
+      "Elliot Abraham (POP-01046)",
+      "Adash Stanley (POP-01023)"
+    ],
+    "popids": [
+      "POP-01046",
+      "POP-01023"
+    ],
+    "ref": "output/beats/Oakland_Sports_Feed.jsonl @C111",
+    "cycle": 111
+  },
+  "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01046",
+      "name": "Elliot Abraham",
+      "role": "General Manager, Oakland Oaks",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Elliot Abraham — General Manager, Oakland Oaks — Jack London",
+      "why": "named on the Oaks feed C111 (Oakland_Sports_Feed)"
+    },
+    {
+      "popid": "POP-01023",
+      "name": "Adash Stanley",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Adash Stanley — PG / The Oaks  — Downtown",
+      "why": "named on the Oaks feed C111 (Oakland_Sports_Feed)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Oaks — season-state (early-season), C111: Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+    },
+    {
+      "text": "Trigger: cold-streak",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+    },
+    {
+      "text": "Franchise stability: unstable",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+    },
+    {
+      "text": "Oaks — player-feature (early-season), C111: Adash Stanley in attendance at the A's rally to show support.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+    },
+    {
+      "text": "Trigger: cold-streak",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+    },
+    {
+      "text": "Franchise stability: unstable",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Oaks — season-state C111 · - · - — the second club's board read",
+    "hookLine": "Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+    "anchorFacts": [
+      "Oaks — season-state (early-season), C111: Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+      "Trigger: cold-streak",
+      "Franchise stability: unstable",
+      "Oaks — player-feature (early-season), C111: Adash Stanley in attendance at the A's rally to show support.",
+      "Trigger: cold-streak",
+      "Franchise stability: unstable"
+    ],
+    "evidence": [
+      {
+        "text": "Oaks — season-state (early-season), C111: Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+      },
+      {
+        "text": "Trigger: cold-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+      },
+      {
+        "text": "Franchise stability: unstable",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+      },
+      {
+        "text": "Oaks — player-feature (early-season), C111: Adash Stanley in attendance at the A's rally to show support.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+      },
+      {
+        "text": "Trigger: cold-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+      },
+      {
+        "text": "Franchise stability: unstable",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+  },
+  "feedRows": 11,
+  "currentCycleRows": 2,
+  "pointers": [
+    "output/beats/Oakland_Sports_Feed.jsonl @C111",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

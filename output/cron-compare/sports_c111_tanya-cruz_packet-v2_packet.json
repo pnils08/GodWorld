@@ -1,0 +1,142 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "A's off-season update: -",
+      "label": "A's off-season update: -",
+      "hookLine": "A's off-season update: -",
+      "kind": "sideline-signal",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00527"
+      ],
+      "citizens": [
+        "Mike Paulson (POP-00527)"
+      ],
+      "ref": "world_summary_c111.md ## Sports",
+      "cycle": 111
+    }
+  },
+  "angle": "output/cron-compare/sports_c111_tanya-cruz_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00527",
+      "name": "Mike Paulson",
+      "quote": null,
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake; a real fan, plans around games",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "```json\n{\n  \"answer\": \"Look, I see a roster that's got the scars to prove it's been through the wringer, and a city that's learned to breathe with the tide. Seven rings — that's not pressure, that's a debt we owe to every kid who's ever snuck into the Coliseum. The off-season? It's like standing on the docks at low tide — you see all the muck you gotta sort through before the next ship comes in. I balance it the same way I balance everything: one freight train at a time, timing my breathing to the clank. You make the calls you can live with, and you trust the guys in the room to carry the rest.\",\n  \"fact_ids\": [\"F-7540b298860a\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00527",
+          "name": "Mike Paulson",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "What does Mike Paulson see when he looks at this roster and this city, and how does he balance the pressure of a seventh championship with the reality of an off-season full of choices? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Downtown",
+          "focus": "The shape of the A's off-season as it takes form in the clubhouse, before any official moves are announced.",
+          "src": "world_summary_c111.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+          "evidence": [
+            {
+              "id": "EV-c450362d65",
+              "src": "world_summary_c111.md ## Sports",
+              "text": "A's off-season update: -"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C111",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-a43c5d888b36"
+          },
+          {
+            "t": "FACT",
+            "text": "A's off-season update: -",
+            "src": "world_summary_c111.md ## Sports",
+            "id": "F-7540b298860a"
+          },
+          {
+            "t": "FACT",
+            "text": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+            "src": "Simulation_Ledger profile for POP-00527",
+            "id": "F-361f212af77a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-10-14T18:16:39.984Z"
+}

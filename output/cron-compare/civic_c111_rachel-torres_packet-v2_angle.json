@@ -1,0 +1,472 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "111",
+  "persona": "rachel-torres",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00057",
+      "name": "Sgt. Rachel Torres",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "public-safety",
+        "hood": "San Antonio",
+        "facts": [
+          "140 incidents across 22 neighborhoods; most in San Antonio 9, Glenview 8, Ivy Hill 8, Grand Lake 8, Adams Point 8; fewest in Lake Merritt 5, Jack London 5, Downtown 4",
+          "San Antonio: 9 incidents (+1 vs C110), response 10.4 min, clearance 21%, property index 36, violent index 27",
+          "Slowest response: Uptown: 6 incidents (+0 vs C110), response 11.4 min, clearance 21%, property index 36, violent index 20",
+          "Moved this cycle — rising: East Oakland; easing: Adams Point, Jack London",
+          "Citywide custody this cycle: 30 arrests (0 tracked, 30 other residents); 64 in custody at the close; 34 left",
+          "Adams Point: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "San Antonio: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": "desk-signal incident rows attached as pointers (4)",
+        "engineHooks": [],
+        "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-safety",
+      "hood": "San Antonio",
+      "score": null,
+      "src": "output/beats/Crime_Metrics.jsonl @C111",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): approved — \"Month-ten disbursement approved — $400,000 to keep West Oakland families in their homes.\"",
+          "src": "output/civic-voice/mayor_gavel_c111.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): accelerate to design-phase with Cycle 114 deadline — \"Four cycles of waiting ends today — Fruitvale Transit Hub enters design-phase with schematics due Cycle 114.\"",
+          "src": "output/civic-voice/mayor_gavel_c111.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): mandate first cohort placement report by Cycle 112 — \"150 apprentices by spring — I'm demanding the first cohort placement report by Cycle 112.\"",
+          "src": "output/civic-voice/mayor_gavel_c111.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): call emergency Economic Development Committee hearing for Cycle 112 — \"Downtown businesses have waited long enough — I'm calling an emergency Economic Development Committee hearing for Cycle",
+          "src": "output/civic-voice/mayor_gavel_c111.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): refer to Economic Development Committee with mandatory milestone reporting — \"Grand Lake's quiet engine needs fuel — $2.5 million in stabilization funding is now before the Council.\"",
+          "src": "output/civic-voice/mayor_gavel_c111.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-a43c5d888b36"
+      },
+      {
+        "t": "FACT",
+        "text": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table",
+        "src": "output/beats/Crime_Metrics.jsonl @C111",
+        "id": "F-634bb8434005"
+      },
+      {
+        "t": "FACT",
+        "text": "San Antonio leads the incident count; Uptown waits longest for a response; 64 in custody citywide; 7 public-safety staff on the roster.",
+        "src": "output/beats/Crime_Metrics.jsonl @C111",
+        "id": "F-39b0e3210349"
+      },
+      {
+        "t": "FACT",
+        "text": "140 incidents across 22 neighborhoods; most in San Antonio 9, Glenview 8, Ivy Hill 8, Grand Lake 8, Adams Point 8; fewest in Lake Merritt 5, Jack London 5, Downtown 4",
+        "src": "output/beats/Crime_Metrics.jsonl @C111",
+        "id": "F-f515d0e9936e"
+      },
+      {
+        "t": "FACT",
+        "text": "San Antonio: 9 incidents (+1 vs C110), response 10.4 min, clearance 21%, property index 36, violent index 27",
+        "src": "output/beats/Crime_Metrics.jsonl @C111",
+        "id": "F-907ec33b49a9"
+      },
+      {
+        "t": "FACT",
+        "text": "Slowest response: Uptown: 6 incidents (+0 vs C110), response 11.4 min, clearance 21%, property index 36, violent index 20",
+        "src": "output/beats/Crime_Metrics.jsonl @C111",
+        "id": "F-6f13d39805af"
+      },
+      {
+        "t": "FACT",
+        "text": "Moved this cycle — rising: East Oakland; easing: Adams Point, Jack London",
+        "src": "output/beats/Crime_Metrics.jsonl @C111",
+        "id": "F-08b0413a533a"
+      },
+      {
+        "t": "FACT",
+        "text": "Citywide custody this cycle: 30 arrests (0 tracked, 30 other residents); 64 in custody at the close; 34 left",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 city",
+        "id": "F-9dc36f844b92"
+      },
+      {
+        "t": "FACT",
+        "text": "Adams Point: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Adams Point",
+        "id": "F-952421eada7c"
+      },
+      {
+        "t": "FACT",
+        "text": "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Baylight District",
+        "id": "F-1c31f45da6f9"
+      },
+      {
+        "t": "FACT",
+        "text": "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Chinatown",
+        "id": "F-e884c44c1967"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Grand Lake",
+        "id": "F-0037ce2ee01e"
+      },
+      {
+        "t": "FACT",
+        "text": "San Antonio: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 San Antonio",
+        "id": "F-81972ffeb8a2"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "offices",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-safety",
+      "angle": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "label": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table",
+      "hookLine": "San Antonio leads the incident count; Uptown waits longest for a response; 64 in custody citywide; 7 public-safety staff on the roster.",
+      "hood": "San Antonio",
+      "citizens": [
+        "Rafael Montez (POP-00136)",
+        "Kimberly Cho (POP-00137)",
+        "Leonard Briggs (POP-00138)",
+        "Samantha Viteri (POP-00139)",
+        "Marcus Hollowell (POP-00140)",
+        "Priya Narang (POP-00141)",
+        "Vanessa Tran-Muñoz (POP-01021)"
+      ],
+      "popids": [
+        "POP-00136",
+        "POP-00137",
+        "POP-00138",
+        "POP-00139",
+        "POP-00140",
+        "POP-00141",
+        "POP-01021"
+      ],
+      "ref": "output/beats/Crime_Metrics.jsonl @C111",
+      "cycle": 111
+    },
+    "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "SAFETY-SLICE-3",
+    "kind": "beat-safety",
+    "seat": {
+      "slug": "rachel-torres",
+      "name": "Sgt. Rachel Torres",
+      "popid": "POP-00057",
+      "desk": "civic",
+      "domain": "public-safety",
+      "builder": "buildSafetySlice.js"
+    },
+    "hood": "San Antonio",
+    "pulse": {
+      "className": "beat-safety",
+      "score": 100,
+      "label": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table",
+      "hood": "San Antonio",
+      "source": "output/beats/Crime_Metrics.jsonl @C111"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table — what the table says and who answers for it",
+      "hookLine": "San Antonio leads the incident count; Uptown waits longest for a response; 64 in custody citywide; 7 public-safety staff on the roster.",
+      "anchorFacts": [
+        "140 incidents across 22 neighborhoods; most in San Antonio 9, Glenview 8, Ivy Hill 8, Grand Lake 8, Adams Point 8; fewest in Lake Merritt 5, Jack London 5, Downtown 4",
+        "San Antonio: 9 incidents (+1 vs C110), response 10.4 min, clearance 21%, property index 36, violent index 27",
+        "Slowest response: Uptown: 6 incidents (+0 vs C110), response 11.4 min, clearance 21%, property index 36, violent index 20",
+        "Moved this cycle — rising: East Oakland; easing: Adams Point, Jack London",
+        "Citywide custody this cycle: 30 arrests (0 tracked, 30 other residents); 64 in custody at the close; 34 left",
+        "Adams Point: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "San Antonio: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked"
+      ],
+      "evidence": [
+        {
+          "text": "140 incidents across 22 neighborhoods; most in San Antonio 9, Glenview 8, Ivy Hill 8, Grand Lake 8, Adams Point 8; fewest in Lake Merritt 5, Jack London 5, Downtown 4",
+          "src": "output/beats/Crime_Metrics.jsonl @C111"
+        },
+        {
+          "text": "San Antonio: 9 incidents (+1 vs C110), response 10.4 min, clearance 21%, property index 36, violent index 27",
+          "src": "output/beats/Crime_Metrics.jsonl @C111"
+        },
+        {
+          "text": "Slowest response: Uptown: 6 incidents (+0 vs C110), response 11.4 min, clearance 21%, property index 36, violent index 20",
+          "src": "output/beats/Crime_Metrics.jsonl @C111"
+        },
+        {
+          "text": "Moved this cycle — rising: East Oakland; easing: Adams Point, Jack London",
+          "src": "output/beats/Crime_Metrics.jsonl @C111"
+        },
+        {
+          "text": "Citywide custody this cycle: 30 arrests (0 tracked, 30 other residents); 64 in custody at the close; 34 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 city"
+        },
+        {
+          "text": "Adams Point: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Adams Point"
+        },
+        {
+          "text": "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Baylight District"
+        },
+        {
+          "text": "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Chinatown"
+        },
+        {
+          "text": "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Grand Lake"
+        },
+        {
+          "text": "San Antonio: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 San Antonio"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 110
+      },
+      "hooks": [],
+      "note": "desk-signal incident rows attached as pointers (4)",
+      "pageVoices": [],
+      "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00136",
+        "name": "Rafael Montez",
+        "role": "Police Chief",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Rafael Montez — Police Chief — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00137",
+        "name": "Kimberly Cho",
+        "role": "DEPUTY CHIEF OF OPERATIONS",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00138",
+        "name": "Leonard Briggs",
+        "role": "DEPUTY CHIEF OF COMMUNITY ENGAGEMENT",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00139",
+        "name": "Samantha Viteri",
+        "role": "INTERNAL AFFAIRS DIVISION LEAD",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department",
+        "why": "works at Oakland Police Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00140",
+        "name": "Marcus Hollowell",
+        "role": "FIRE CHIEF",
+        "neighborhood": null,
+        "business": "Oakland Fire Department",
+        "profile": "Marcus Hollowell — FIRE CHIEF — Oakland Fire Department",
+        "why": "works at Oakland Fire Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-00141",
+        "name": "Priya Narang",
+        "role": "EMS DIRECTOR",
+        "neighborhood": null,
+        "business": "Oakland Fire Department",
+        "profile": "Priya Narang — EMS DIRECTOR — Oakland Fire Department",
+        "why": "works at Oakland Fire Department (Employment_Roster)"
+      },
+      {
+        "popid": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "role": "OARI Program Director",
+        "neighborhood": null,
+        "business": "Oakland Alternative Response Initiative",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative",
+        "why": "works at Oakland Alternative Response Initiative (Employment_Roster)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Crime_Metrics.jsonl @C111",
+      "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Rachel Torres",
+    "popid": "POP-00057",
+    "text": "Standing on the corner of 14th and Fruitvale, watching the evening crowd move between the taquerias and the bus stop, I keep coming back to the same number: nine incidents in San Antonio, one more than last cycle, and yet the clearance rate sits at 21 percent. That means roughly two out of every nine calls end with someone answering for it. The response time is 10.4 minutes — not the slowest in the city, but not fast enough when you're the one waiting. I want to walk the blocks where those nine calls came in, talk to the people on the porches, find out what they saw and what they think got missed. The property index at 36 and violent index at 27 tell me this isn't just one kind of trouble —",
+    "plan": {
+      "chase": "Standing on the corner of 14th and Fruitvale, watching the evening crowd move between the taquerias and the bus stop, I keep coming back to the same number: nine incidents in San Antonio, one more than last cycle, and yet the clearance rate sits at 21 percent. That means roughly two out of every nine calls end with someone answering for it. The response time is 10.4 minutes — not the slowest in the city, but not fast enough when you're the one waiting. I want to walk the blocks where those nine calls came in, talk to the people on the porches, find out what they saw and what they think got missed. The property index at 36 and violent index at 27 tell me this isn't just one kind of trouble — ",
+      "focus": "San Antonio's nine incidents and the gap between calls, charges, and custody",
+      "why": "San Antonio leads the city in incidents this cycle, yet its clearance rate and custody numbers suggest a disconnect between what gets reported and what gets resolved. That gap is where public trust either holds or breaks.",
+      "checks": [
+        "Confirm the nine incidents in San Antonio and the one-incident increase from the prior cycle",
+        "Verify the 10.4-minute response time and 21% clearance rate for San Antonio",
+        "Cross-check the property index of 36 and violent index of 27 against the citywide picture",
+        "Confirm the custody trail: 9 charges, 2 arrests, 4 in custody at close for San Antonio",
+        "Compare San Antonio's numbers against the neighborhoods with the fewest incidents — Lake Merritt, Jack London, Downtown"
+      ],
+      "targets": [],
+      "interpretation": "The numbers suggest a neighborhood that is actively reporting trouble but not seeing it move through the system. The low clearance rate paired with the modest custody count points to either resource constraints or a classification gap — incidents logged but not pursued to arrest. The rise from last cycle adds urgency.",
+      "unverifiedLead": [
+        "Residents on the Fruitvale side of San Antonio have mentioned calls that don't seem to go anywhere — reports filed, no follow-up, no one contacted afterward",
+        "A neighborhood watch volunteer said the same addresses keep coming up in the incident log, which might mean the response isn't addressing the root cause",
+        "There may be a pattern in what types of incidents get cleared versus which ones stall — property versus violent, daytime versus nighttime"
+      ],
+      "closeQuestion": "Why does a neighborhood with the most incidents in the city see so few of them end in an arrest?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): approved — \"Month-ten disbursement approved — $400,000 to keep West Oakland families in their homes.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): accelerate to design-phase with Cycle 114 deadline — \"Four cycles of waiting ends today — Fruitvale Transit Hub enters design-phase with schematics due Cycle 114.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): mandate first cohort placement report by Cycle 112 — \"150 apprentices by spring — I'm demanding the first cohort placement report by Cycle 112.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): call emergency Economic Development Committee hearing for Cycle 112 — \"Downtown businesses have waited long enough — I'm calling an emergency Economic Development Committee hearing for Cycle ",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): refer to Economic Development Committee with mandatory milestone reporting — \"Grand Lake's quiet engine needs fuel — $2.5 million in stabilization funding is now before the Council.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c111.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 96,
+  "ranAt": "2026-10-13T11:16:46.396Z"
+}

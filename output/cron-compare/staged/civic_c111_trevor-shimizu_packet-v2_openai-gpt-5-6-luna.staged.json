@@ -1,0 +1,55 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "111",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/staged/civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Evan Lewis",
+        "role": "quoted-source",
+        "popid": "POP-00200"
+      },
+      {
+        "name": "Joel Wren",
+        "role": "quoted-source",
+        "popid": "POP-00218"
+      },
+      {
+        "name": "Ray Neal",
+        "role": "quoted-source",
+        "popid": "POP-00448"
+      },
+      {
+        "name": "Calvin Mwangi",
+        "role": "quoted-source",
+        "popid": "POP-00573"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "You know, it’s quieter now. Fewer folks waiting, fewer folks boarding. Feels like the energy’s shifted somewhere else, but I can’t quite put my finger on where.",
+        "sourceRef": "citizenVoice PRESS Ray Neal"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-22c168b8a035",
+    "draftSha256": "dbfb2169d9a505d5002b1caf157c2e679ef5c1a746c112e67baaef6a44f21804",
+    "verdict": "output/cron-compare/civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-10-12T23:17:57.472Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-12T23:17:58.147Z"
+}

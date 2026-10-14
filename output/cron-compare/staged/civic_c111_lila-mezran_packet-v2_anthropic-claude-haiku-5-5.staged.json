@@ -1,0 +1,57 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "111",
+  "persona": "lila-mezran",
+  "byline": "Dr. Lila Mezran",
+  "bylinePopid": "POP-00154",
+  "article": "output/cron-compare/staged/civic_c111_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Yu Zen",
+        "role": "quoted-source",
+        "popid": "POP-00194"
+      },
+      {
+        "name": "Maurice Franklin",
+        "role": "quoted-source",
+        "popid": "POP-00801"
+      },
+      {
+        "name": "Niani Oakley",
+        "role": "quoted-source",
+        "popid": "POP-00951"
+      },
+      {
+        "name": "Mai Tse",
+        "role": "quoted-source",
+        "popid": "POP-00977"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "Most folks around here, if it's not an emergency but they need more than home remedies, they'll head over to the community clinic on 8th Street. It's close, and they know how to handle the usual stuff without making a big deal out of it.",
+        "sourceRef": "citizenVoice PRESS Niani Oakley"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-2d181013b3e1",
+    "draftSha256": "7000dd5022b5499765d9e84e3f98925050d6ea2ababe9981a63ebd3cf184d3a5",
+    "verdict": "output/cron-compare/civic_c111_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-12T23:17:16.645Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-12T23:17:17.300Z"
+}

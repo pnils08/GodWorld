@@ -1,0 +1,276 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00591",
+    "name": "Selena Grant",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Oaks — season-state C111 · - · - — the second club's board read",
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "oaks",
+      "hood": "Jack London",
+      "facts": [
+        "Oaks — season-state (early-season), C111: Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+        "Trigger: cold-streak",
+        "Franchise stability: unstable",
+        "Oaks — player-feature (early-season), C111: Adash Stanley in attendance at the A's rally to show support."
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [],
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-oaks-beat",
+    "hood": "Jack London",
+    "src": "output/beats/Oakland_Sports_Feed.jsonl @C111",
+    "plan": {
+      "focus": "The intersection of the Oaks' cold streak and the uncertainty surrounding Draymond's return.",
+      "closeQuestion": "Is the push for Draymond's return a genuine strategic move or a desperate attempt to stabilize a sinking ship?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Selena Grant",
+        "text": "Whether the internal tension regarding the cold streak is affecting the locker room beyond what is seen on the court.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C111",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-a43c5d888b36"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — season-state C111 · - · -",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C111",
+      "id": "F-dd6c93f94660"
+    },
+    {
+      "t": "FACT",
+      "text": "Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C111",
+      "id": "F-cbac40f28bc2"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — season-state (early-season), C111: Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C111",
+      "id": "F-dd658aa385e8"
+    },
+    {
+      "t": "FACT",
+      "text": "Trigger: cold-streak",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C111",
+      "id": "F-25f52b330ad0"
+    },
+    {
+      "t": "FACT",
+      "text": "Franchise stability: unstable",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C111",
+      "id": "F-1bdc67d7db8e"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks — player-feature (early-season), C111: Adash Stanley in attendance at the A's rally to show support.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl C111",
+      "id": "F-9c04d2808c86"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the Oaks feed rows into an analyst's read of an expansion franchise being built in real time — the rotation, the development, the front office and its silences. Evidence first; belief earned with numbers. NOT fan heat, NOT the street, NOT the A's.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person analyst, clean professional sentences",
+      "targetWords": "400-650",
+      "opening": "a supplied Oaks stat, result, or roster observation — never a scene",
+      "closing": "the decision or number the front office still owes an answer on"
+    },
+    "authorizedTexture": [
+      "press row, the practice facility, or a press conference as the reporter's vantage — no invented named venue",
+      "the expansion frame: measuring a supplied fact against what a first-year franchise is expected to look like",
+      "reading a front-office silence or non-answer as a signal, grounded in a supplied fact",
+      "a sourced-beyond-the-release attribution ('a person with knowledge of the front office's thinking') only when the Packet carries the underlying act"
+    ],
+    "textureConditions": [
+      "every result, name, minute, injury, and quote comes from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "real NBA players and teams are sports-layer canon: name them as the feed does and give them nothing the feed didn't",
+      "Oakland citizens on the feed (Varek, Paulson, Abraham, Shepard, any player the feed made a citizen) get a UsageType",
+      "no piece when the cycle has no Oaks row — never written from A's rows"
+    ],
+    "canonBlockers": [
+      "a real-world venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, result, record, streak, minute, injury, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "a fabricated player, coach, owner, or front-office quote",
+      "a personal life, hometown, family, or citizen record given to a real NBA player the feed only names",
+      "the A's as the subject (five other seats own them)",
+      "Chicago, the Bulls, or any prior bureau",
+      "engine or simulation vocabulary; real-world calendar dates (YYYY-MM-DD)"
+    ]
+  },
+  "manifest": {
+    "id": "AM-8a022581de6a",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-a43c5d888b36",
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-dd6c93f94660",
+        "t": "FACT",
+        "text": "Oaks — season-state C111 · - · -",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C111"
+      },
+      {
+        "id": "F-cbac40f28bc2",
+        "t": "FACT",
+        "text": "Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C111"
+      },
+      {
+        "id": "F-dd658aa385e8",
+        "t": "FACT",
+        "text": "Oaks — season-state (early-season), C111: Elliot Abraham faces the media, is Draymond coming back to the Oaks?",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+      },
+      {
+        "id": "F-25f52b330ad0",
+        "t": "FACT",
+        "text": "Trigger: cold-streak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+      },
+      {
+        "id": "F-1bdc67d7db8e",
+        "t": "FACT",
+        "text": "Franchise stability: unstable",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+      },
+      {
+        "id": "F-9c04d2808c86",
+        "t": "FACT",
+        "text": "Oaks — player-feature (early-season), C111: Adash Stanley in attendance at the A's rally to show support.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C111"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Selena Grant",
+        "text": "Whether the internal tension regarding the cold streak is affecting the locker room beyond what is seen on the court.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "press row, the practice facility, or a press conference as the reporter's vantage — no invented named venue",
+      "the expansion frame: measuring a supplied fact against what a first-year franchise is expected to look like",
+      "reading a front-office silence or non-answer as a signal, grounded in a supplied fact",
+      "a sourced-beyond-the-release attribution ('a person with knowledge of the front office's thinking') only when the Packet carries the underlying act"
+    ],
+    "textureConditions": [
+      "every result, name, minute, injury, and quote comes from the Packet's Oaks feed rows (TeamsUsed: Oaks)",
+      "real NBA players and teams are sports-layer canon: name them as the feed does and give them nothing the feed didn't",
+      "Oakland citizens on the feed (Varek, Paulson, Abraham, Shepard, any player the feed made a citizen) get a UsageType",
+      "no piece when the cycle has no Oaks row — never written from A's rows"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, result, record, streak, minute, injury, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "a fabricated player, coach, owner, or front-office quote",
+      "a personal life, hometown, family, or citizen record given to a real NBA player the feed only names",
+      "the A's as the subject (five other seats own them)",
+      "Chicago, the Bulls, or any prior bureau",
+      "engine or simulation vocabulary; real-world calendar dates (YYYY-MM-DD)"
+    ]
+  }
+}

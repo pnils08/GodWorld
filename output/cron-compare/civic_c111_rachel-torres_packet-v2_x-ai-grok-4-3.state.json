@@ -1,0 +1,373 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00057",
+    "name": "Sgt. Rachel Torres",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table — what the table says and who answers for it",
+    "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "public-safety",
+      "hood": "San Antonio",
+      "facts": [
+        "140 incidents across 22 neighborhoods; most in San Antonio 9, Glenview 8, Ivy Hill 8, Grand Lake 8, Adams Point 8; fewest in Lake Merritt 5, Jack London 5, Downtown 4",
+        "San Antonio: 9 incidents (+1 vs C110), response 10.4 min, clearance 21%, property index 36, violent index 27",
+        "Slowest response: Uptown: 6 incidents (+0 vs C110), response 11.4 min, clearance 21%, property index 36, violent index 20",
+        "Moved this cycle — rising: East Oakland; easing: Adams Point, Jack London",
+        "Citywide custody this cycle: 30 arrests (0 tracked, 30 other residents); 64 in custody at the close; 34 left",
+        "Adams Point: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "San Antonio: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": "desk-signal incident rows attached as pointers (4)",
+      "engineHooks": [],
+      "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-safety",
+    "hood": "San Antonio",
+    "src": "output/beats/Crime_Metrics.jsonl @C111",
+    "plan": {
+      "focus": "San Antonio's nine incidents and the gap between calls, charges, and custody",
+      "closeQuestion": "Why does a neighborhood with the most incidents in the city see so few of them end in an arrest?"
+    },
+    "runningStories": [
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 3",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 3",
+      "Temescal Community Health Center — operational [Temescal] — week 3",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 3",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — week 3",
+      "Downtown Economic Revitalization — legislation-filed [Downtown] — under way",
+      "Commercial Stabilization for Grand Lake — announced [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — announced [West Oakland] — under way",
+      "Downtown Economic Revitalization — announced [Downtown] — ENDED this week after 3 week(s); now legislation-filed"
+    ]
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Residents on the Fruitvale side of San Antonio have mentioned calls that don't seem to go anywhere — reports filed, no follow-up, no one contacted afterward",
+        "usable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "A neighborhood watch volunteer said the same addresses keep coming up in the incident log, which might mean the response isn't addressing the root cause",
+        "usable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "There may be a pattern in what types of incidents get cleared versus which ones stall — property versus violent, daytime versus nighttime",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C111",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-a43c5d888b36"
+    },
+    {
+      "t": "FACT",
+      "text": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table",
+      "src": "output/beats/Crime_Metrics.jsonl @C111",
+      "id": "F-634bb8434005"
+    },
+    {
+      "t": "FACT",
+      "text": "San Antonio leads the incident count; Uptown waits longest for a response; 64 in custody citywide; 7 public-safety staff on the roster.",
+      "src": "output/beats/Crime_Metrics.jsonl @C111",
+      "id": "F-39b0e3210349"
+    },
+    {
+      "t": "FACT",
+      "text": "140 incidents across 22 neighborhoods; most in San Antonio 9, Glenview 8, Ivy Hill 8, Grand Lake 8, Adams Point 8; fewest in Lake Merritt 5, Jack London 5, Downtown 4",
+      "src": "output/beats/Crime_Metrics.jsonl @C111",
+      "id": "F-f515d0e9936e"
+    },
+    {
+      "t": "FACT",
+      "text": "San Antonio: 9 incidents (+1 vs C110), response 10.4 min, clearance 21%, property index 36, violent index 27",
+      "src": "output/beats/Crime_Metrics.jsonl @C111",
+      "id": "F-907ec33b49a9"
+    },
+    {
+      "t": "FACT",
+      "text": "Slowest response: Uptown: 6 incidents (+0 vs C110), response 11.4 min, clearance 21%, property index 36, violent index 20",
+      "src": "output/beats/Crime_Metrics.jsonl @C111",
+      "id": "F-6f13d39805af"
+    },
+    {
+      "t": "FACT",
+      "text": "Moved this cycle — rising: East Oakland; easing: Adams Point, Jack London",
+      "src": "output/beats/Crime_Metrics.jsonl @C111",
+      "id": "F-08b0413a533a"
+    },
+    {
+      "t": "FACT",
+      "text": "Citywide custody this cycle: 30 arrests (0 tracked, 30 other residents); 64 in custody at the close; 34 left",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 city",
+      "id": "F-9dc36f844b92"
+    },
+    {
+      "t": "FACT",
+      "text": "Adams Point: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Adams Point",
+      "id": "F-952421eada7c"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Baylight District",
+      "id": "F-1c31f45da6f9"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Chinatown",
+      "id": "F-e884c44c1967"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Grand Lake",
+      "id": "F-0037ce2ee01e"
+    },
+    {
+      "t": "FACT",
+      "text": "San Antonio: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 San Antonio",
+      "id": "F-81972ffeb8a2"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Trace one Packet-backed public-safety incident, classification gap, or OARI response question without sensationalism or invented case detail.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "measured third-person public-safety reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed safety signal, place, or resident consequence",
+      "closing": "an unresolved accountability or practical-safety question grounded in the record"
+    },
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "canonBlockers": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  },
+  "manifest": {
+    "id": "AM-05498534f67b",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-a43c5d888b36",
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-634bb8434005",
+        "t": "FACT",
+        "text": "San Antonio logged the most incidents (9) | 22 neighborhoods on the table",
+        "src": "output/beats/Crime_Metrics.jsonl @C111"
+      },
+      {
+        "id": "F-39b0e3210349",
+        "t": "FACT",
+        "text": "San Antonio leads the incident count; Uptown waits longest for a response; 64 in custody citywide; 7 public-safety staff on the roster.",
+        "src": "output/beats/Crime_Metrics.jsonl @C111"
+      },
+      {
+        "id": "F-f515d0e9936e",
+        "t": "FACT",
+        "text": "140 incidents across 22 neighborhoods; most in San Antonio 9, Glenview 8, Ivy Hill 8, Grand Lake 8, Adams Point 8; fewest in Lake Merritt 5, Jack London 5, Downtown 4",
+        "src": "output/beats/Crime_Metrics.jsonl @C111"
+      },
+      {
+        "id": "F-907ec33b49a9",
+        "t": "FACT",
+        "text": "San Antonio: 9 incidents (+1 vs C110), response 10.4 min, clearance 21%, property index 36, violent index 27",
+        "src": "output/beats/Crime_Metrics.jsonl @C111"
+      },
+      {
+        "id": "F-6f13d39805af",
+        "t": "FACT",
+        "text": "Slowest response: Uptown: 6 incidents (+0 vs C110), response 11.4 min, clearance 21%, property index 36, violent index 20",
+        "src": "output/beats/Crime_Metrics.jsonl @C111"
+      },
+      {
+        "id": "F-08b0413a533a",
+        "t": "FACT",
+        "text": "Moved this cycle — rising: East Oakland; easing: Adams Point, Jack London",
+        "src": "output/beats/Crime_Metrics.jsonl @C111"
+      },
+      {
+        "id": "F-9dc36f844b92",
+        "t": "FACT",
+        "text": "Citywide custody this cycle: 30 arrests (0 tracked, 30 other residents); 64 in custody at the close; 34 left",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 city"
+      },
+      {
+        "id": "F-952421eada7c",
+        "t": "FACT",
+        "text": "Adams Point: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Adams Point"
+      },
+      {
+        "id": "F-1c31f45da6f9",
+        "t": "FACT",
+        "text": "Baylight District: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Baylight District"
+      },
+      {
+        "id": "F-e884c44c1967",
+        "t": "FACT",
+        "text": "Chinatown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Chinatown"
+      },
+      {
+        "id": "F-0037ce2ee01e",
+        "t": "FACT",
+        "text": "Grand Lake: 8 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 Grand Lake"
+      },
+      {
+        "id": "F-81972ffeb8a2",
+        "t": "FACT",
+        "text": "San Antonio: 9 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C111 San Antonio"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Residents on the Fruitvale side of San Antonio have mentioned calls that don't seem to go anywhere — reports filed, no follow-up, no one contacted afterward",
+        "publishable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "A neighborhood watch volunteer said the same addresses keep coming up in the incident log, which might mean the response isn't addressing the root cause",
+        "publishable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "There may be a pattern in what types of incidents get cleared versus which ones stall — property versus violent, daytime versus nighttime",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "forbiddenClaimClasses": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  }
+}

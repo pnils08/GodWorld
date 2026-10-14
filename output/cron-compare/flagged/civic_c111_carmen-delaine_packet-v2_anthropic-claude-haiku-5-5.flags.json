@@ -1,0 +1,11 @@
+{
+  "draft": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.md",
+  "flags": [],
+  "contamination": [
+    {
+      "check": "repair-chrome",
+      "issue": "packet-narration"
+    }
+  ],
+  "summary": "deterministic world-contamination blocker failed"
+}

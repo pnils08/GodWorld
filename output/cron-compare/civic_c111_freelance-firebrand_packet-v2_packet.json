@@ -1,0 +1,59 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "111",
+  "persona": "freelance-firebrand",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c111.json patterns[6]; evidence: Neighborhood_Map row(s) 6",
+      "label": "Fruitvale: decay [Sentiment -0.170, RetailVitality -2.04, HousingPressure +1.000] — Sentiment now 0.52 (1 of 22, city median 0.32); RetailVitality now 10.55 (5 of 22, city median 8.275); HousingPressure now 4.5 (17 of 22, city median 0) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "The map says decay; the program roster does not answer it.",
+      "hookLine": null,
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00231",
+        "POP-00744",
+        "POP-00756",
+        "POP-00198",
+        "POP-00953",
+        "POP-00437",
+        "POP-00004",
+        "POP-01057",
+        "POP-01158",
+        "POP-01029",
+        "POP-01037",
+        "POP-00339"
+      ],
+      "citizens": [
+        "Calvin Turner — Mechanic, Fruitvale",
+        "Tomas Renteria — Podcast Host / Line Cook, Fruitvale",
+        "Ramon Solano — Senior Pastor / Faith Leader, Fruitvale",
+        "Rick Walker — K-8 Teacher,Former Line cook, Fruitvale",
+        "Carmen Solis — Community Advocate, Fruitvale",
+        "Amelia Kim — Fashion Designer, Uptown",
+        "Lucia Polito — Aura Wellness Practitioner, Fruitvale",
+        "Nina Reyes — actress, Fruitvale",
+        "Priscilla Chang — Firefighter, Fruitvale",
+        "Miguel Allen — Plumber, Fruitvale",
+        "Ivy Tran — Driver, Fruitvale",
+        "Kaila Nguyen — Pupuseria Owner, Fruitvale"
+      ],
+      "stinkClass": "metric-contradiction",
+      "stinkScore": 61
+    }
+  },
+  "angle": "output/cron-compare/civic_c111_freelance-firebrand_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-14T18:15:01.879Z"
+}

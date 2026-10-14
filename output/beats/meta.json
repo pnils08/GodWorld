@@ -1,5 +1,5 @@
 {
-  "source": "beat tabs (25)",
+  "source": "beat tabs (25) + LifeHistory_Log window (Cycle 110–111) + Lived_Events (derived)",
   "cycle": 111,
   "prevCycle": 110,
   "rows": {
@@ -21,15 +21,17 @@
     "Business_Archive": 2,
     "Cultural_Ledger": 53,
     "Oakland_Sports_Feed": 243,
-    "Initiative_Tracker": 9,
+    "Initiative_Tracker": 10,
     "Civic_Office_Ledger": 999,
     "Election_Log": 0,
-    "Reflection_Intake": 1780,
+    "Reflection_Intake": 1820,
     "City_Treasury": 9,
     "Judicial_Ledger": 0,
-    "Care_Justice_Census": 432
+    "Care_Justice_Census": 432,
+    "LifeHistory_Log": 5350,
+    "Lived_Events": 5
   },
-  "generatedAt": "2026-10-11T21:27:51.710Z",
+  "generatedAt": "2026-10-14T06:12:22.528Z",
   "generatedBy": "scripts/dumpBeatTabs.js",
-  "note": "pipeline.68 Task 1 — beat-tab dump for the slice builders. Stable filenames, overwritten each cycle; prior cycle kept in prev/."
+  "note": "pipeline.68 Task 1 — beat-tab dump for the slice builders. Stable filenames, overwritten each cycle; prior cycle kept in prev/. Published as one generation (directory swap)."
 }

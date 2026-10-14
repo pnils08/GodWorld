@@ -222,6 +222,8 @@ pointers:
 
 **Schedule approved (builder 2026-10-14: "That schedule works"):** Tamsin Mon–Fri, Ines Wed–Sun (Mon–Tue Tamsin, Wed–Fri both, Sat–Sun Ines).
 
+**Overnight run (builder 2026-10-14, verbatim): "You can turn on your hourly wakes to see this plan to its end overnight, any test runs that pass for the new journalists stage them for tomorrow's run, be sure that you and es know not to leave each other in an approval prompt."** So: rb runs hourly wakes until the plan's steps are landed; a seat whose tests pass is staged into the live Mon–Fri newsroom path so the 2026-10-15 06:15 angle picks it up (the next unattended run is the acceptance test); neither lane blocks on the other's approval — a message that would sit in a permission prompt is written to the plan instead, and a tool call that needs an approval nobody is there to give is skipped and logged, not waited on. Codex's context is cleared (`/new` to its pane) once es has its step 1 review.
+
 **Build order (Task 4), each step with a wiring card and a review before it lands:**
 1. *engine-sheet:* the lived wake slot in `scripts/citizen-wake.js` (news-grade milestone events only, modelled on the engine.180 posture slot); mint Tamsin Pruitt and Ines Sorensen through Intake (MEDIA clock; ledger rows are the sheets' side).
 2. *engine-sheet with rb:* the milestone and tracker-person rows into the slice data (`LifeHistory_Log` into the beat dump; the 2026-10-11 draft was reverted pending this review); lift `sportsSubject` at its call sites.

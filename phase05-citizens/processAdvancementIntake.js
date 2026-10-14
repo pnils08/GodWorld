@@ -644,6 +644,10 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
   var iGenderQ = findColByName_(intakeHeaders, 'Gender');
   var iOwnerBiz = findColByName_(intakeHeaders, 'OwnerOfBizId'); // engine.96 Task 12 — owner-door payload (blank on every other row)
   var iBioQ = findColByName_(intakeHeaders, 'CitizenBio'); // engine.96 Task 12 (builder-direct): an authored row's bio lands on the ledger row, not in the notes
+  // pipeline.73 (builder 2026-10-14, "a means to properly intake citizens with flags and clock modes"):
+  // the CIV / MED / UNI intake columns (G/H/I) reach the new ledger row beside ClockMode.
+  var FLAG_COLS_ = [['CIV', 'CIV (y/n)'], ['MED', 'MED (y/n)'], ['UNI', 'UNI (y/n)']];
+  var flagCols = FLAG_COLS_.map(function(f) { return { name: f[0], i: findColByName_(intakeHeaders, f[0]), l: findColByName_(ledgerHeaders, f[1]) }; });
 
   var lPopId = findColByName_(ledgerHeaders, 'POPID');
   var lFirst = findColByName_(ledgerHeaders, 'First');
@@ -832,6 +836,17 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
       if (lTier >= 0) newRow[lTier] = tier;
       if (lRoleType >= 0) newRow[lRoleType] = newRoleType;
       if (lClockMode >= 0) newRow[lClockMode] = clockMode;
+      // pipeline.73: a flag the intake row carries lands as the ledger's own yes/no; a blank stays blank
+      // (every queued row before this carried blanks); anything else is a typo and stops here, naming the row.
+      for (var fc = 0; fc < flagCols.length; fc++) {
+        var fSpec = flagCols[fc];
+        if (fSpec.i < 0 || fSpec.l < 0) continue;
+        var fRaw = String(row[fSpec.i] || '').trim().toLowerCase();
+        if (!fRaw) continue;
+        if (fRaw === 'y' || fRaw === 'yes') newRow[fSpec.l] = 'yes';
+        else if (fRaw === 'n' || fRaw === 'no') newRow[fSpec.l] = 'no';
+        else throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + first + ' ' + last + '" carries ' + fSpec.name + ' "' + row[fSpec.i] + '" — use y or n.');
+      }
       if (lStatus >= 0) newRow[lStatus] = 'Active';
       if (lLifeHistory >= 0) newRow[lLifeHistory] = 'Promoted to Tier ' + tier + ' in Cycle ' + cycle + '. ' + notes;
       if (lCreatedAt >= 0) newRow[lCreatedAt] = now;
@@ -1536,9 +1551,10 @@ function buildMintBizPool_(ss) {
 // scripts/mintEmployerPick.test.js fails when any list drifts from its source —
 // a mapping edit means a matching edit here.
 var MINT_PARENTHETICAL = {
-  'Port of Oakland': 'BIZ-00012', 'Anthropic': 'BIZ-00001', 'Gridiron Analytics': 'BIZ-00008', 'Oakmesh Systems': 'BIZ-00009', 'Portside Bio': 'BIZ-00010', 'Highland Hospital': 'BIZ-00015', 'AC Transit': 'BIZ-00013', 'Ridgeline Ventures': 'BIZ-00007', 'Community Affairs': 'BIZ-00017', 'UCSD': 'BIZ-00035', 'Private': 'SELF_EMPLOYED'
+  'Port of Oakland': 'BIZ-00012', 'Anthropic': 'BIZ-00001', 'Gridiron Analytics': 'BIZ-00008', 'Oakmesh Systems': 'BIZ-00009', 'Portside Bio': 'BIZ-00010', 'Highland Hospital': 'BIZ-00015', 'AC Transit': 'BIZ-00013', 'Ridgeline Ventures': 'BIZ-00007', 'Community Affairs': 'BIZ-00017', 'UCSD': 'BIZ-00035', 'Private': 'SELF_EMPLOYED', 'Bayline 6': 'BIZ-00183', 'Oakland 12': 'BIZ-00184', 'OakTown Echo': 'BIZ-00099'
 };
 var MINT_KEYWORD_RULES = [
+  ['Bayline 6', 'BIZ-00183'], ['Oakland 12', 'BIZ-00184'], ['OakTown Echo', 'BIZ-00099'], // research.27 §3.2 (2026-10-11), mapping order
   ['AC Transit', 'BIZ-00013'], ['BART', 'BIZ-00014'], ['Longshoreman', 'BIZ-00012'], ['Crane Operator', 'BIZ-00012'],
   ['Dockworker', 'BIZ-00012'], ['Harbor', 'BIZ-00012'], ['Ship Pilot', 'BIZ-00012'], ['Maritime', 'BIZ-00012'],
   ['Container Yard', 'BIZ-00012'], ['Port Logistics', 'BIZ-00012'], ['Tugboat', 'BIZ-00012'],

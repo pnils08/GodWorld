@@ -243,5 +243,28 @@ console.log('\n5. the plumbing — cap, order, keys:');
   check('no Math.random in the door', !/Math\.random/.test(src.slice(src.indexOf('THE OWNER DOOR'), src.indexOf('THE HOUSEHOLD DOOR'))));
 }
 
+console.log('\n5. pipeline.73 — the intake flags reach the minted row beside ClockMode:');
+{
+  const w = world();
+  const q = w.sheets.Advancement_Intake1;
+  const r = (o) => { const x = ADV_H.map(() => ''); Object.keys(o).forEach(k => { x[ADV_H.indexOf(k)] = o[k]; }); return x; };
+  q.rows.push(r({ First: 'Tamsin', Last: 'Pruitt', RoleType: 'Journalist, Lives', Tier: 4, ClockMode: 'MEDIA', MED: 'y', BirthYear: 1994, Neighborhood: 'Fruitvale' }));
+  q.rows.push(r({ First: 'Plain', Last: 'Mint', Tier: 4, BirthYear: 1990, Neighborhood: 'Temescal' }));
+  q.rows.push(r({ First: 'Civic', Last: 'Hand', Tier: 3, ClockMode: 'CIVIC', CIV: 'Yes', MED: 'n', UNI: ' no ', BirthYear: 1980, Neighborhood: 'Fruitvale' }));
+  const before = w.ctx.ledger.rows.length;
+  E.processAdvancementRows_(w.ctx, 'C' + CYCLE, CYCLE);
+  const nu = w.ctx.ledger.rows.slice(before);
+  const by = (f) => nu.find(x => x[col('First')] === f);
+  const t = by('Tamsin'), p = by('Plain'), c = by('Civic');
+  check('three rows minted', nu.length === 3, String(nu.length));
+  check('MED=y + ClockMode MEDIA land as MED "yes" / MEDIA; CIV and UNI stay blank', t && t[col('MED (y/n)')] === 'yes' && t[col('ClockMode')] === 'MEDIA' && t[col('CIV (y/n)')] === '' && t[col('UNI (y/n)')] === '', t && JSON.stringify([t[col('MED (y/n)')], t[col('CIV (y/n)')], t[col('UNI (y/n)')], t[col('ClockMode')]]));
+  check('a row with blank flags mints with blank flags (every queued row before pipeline.73)', p && p[col('MED (y/n)')] === '' && p[col('CIV (y/n)')] === '' && p[col('UNI (y/n)')] === '' && p[col('ClockMode')] === 'ENGINE');
+  check('Yes / n / " no " fold to the ledger spelling', c && c[col('CIV (y/n)')] === 'yes' && c[col('MED (y/n)')] === 'no' && c[col('UNI (y/n)')] === 'no', c && JSON.stringify([c[col('CIV (y/n)')], c[col('MED (y/n)')], c[col('UNI (y/n)')]]));
+  const w2 = world();
+  w2.sheets.Advancement_Intake1.rows.push(r({ First: 'Typo', Last: 'Flag', Tier: 4, MED: 'maybe', BirthYear: 1990, Neighborhood: 'Temescal' }));
+  let err = null; try { E.processAdvancementRows_(w2.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err = e; }
+  check('an unreadable flag stops the mint, naming the row and the value', !!err && /Typo Flag/.test(err.message) && /MED "maybe"/.test(err.message), err && err.message);
+}
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

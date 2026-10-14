@@ -262,8 +262,14 @@ console.log('\n5. pipeline.73 — the intake flags reach the minted row beside C
   check('Yes / n / " no " fold to the ledger spelling', c && c[col('CIV (y/n)')] === 'yes' && c[col('MED (y/n)')] === 'no' && c[col('UNI (y/n)')] === 'no', c && JSON.stringify([c[col('CIV (y/n)')], c[col('MED (y/n)')], c[col('UNI (y/n)')]]));
   const w2 = world();
   w2.sheets.Advancement_Intake1.rows.push(r({ First: 'Typo', Last: 'Flag', Tier: 4, MED: 'maybe', BirthYear: 1990, Neighborhood: 'Temescal' }));
+  w2.sheets.Advancement_Intake1.rows.push(r({ First: 'Tier', Last: 'Review', CIV: 'pending', Tier: 4, BirthYear: 1988, Neighborhood: 'Temescal', Notes: 'Media profiled' }));
+  logs.length = 0;
+  const b2 = w2.ctx.ledger.rows.length;
   let err = null; try { E.processAdvancementRows_(w2.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err = e; }
-  check('an unreadable flag stops the mint, naming the row and the value', !!err && /Typo Flag/.test(err.message) && /MED "maybe"/.test(err.message), err && err.message);
+  const typo = w2.ctx.ledger.rows.slice(b2).find(x => x[col('First')] === 'Typo');
+  check('an unreadable flag never stops the pass: the row mints with that flag blank, and the log names it', !err && typo && typo[col('MED (y/n)')] === '' && logs.some(m => /Typo Flag/.test(m) && /MED "maybe"/.test(m)), err ? err.message : JSON.stringify(logs.slice(-3)));
+  const tr = w2.ctx.ledger.rows.slice(b2).find(x => x[col('First')] === 'Tier');
+  check('the media tier-review shape ("pending" in G) mints with CIV blank', !err && tr && tr[col('CIV (y/n)')] === '');
 }
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed');

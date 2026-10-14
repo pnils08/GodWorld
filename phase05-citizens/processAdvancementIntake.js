@@ -837,7 +837,9 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
       if (lRoleType >= 0) newRow[lRoleType] = newRoleType;
       if (lClockMode >= 0) newRow[lClockMode] = clockMode;
       // pipeline.73: a flag the intake row carries lands as the ledger's own yes/no; a blank stays blank
-      // (every queued row before this carried blanks); anything else is a typo and stops here, naming the row.
+      // (every queued row before this carried blanks). Anything else is left blank and logged, never
+      // thrown: flagCitizenForTierReview_ (mediaRoomIntake.js) queues 'pending' in G, and one such row
+      // must not stop the whole pass (codex impl review 2026-10-14, hunt 6).
       for (var fc = 0; fc < flagCols.length; fc++) {
         var fSpec = flagCols[fc];
         if (fSpec.i < 0 || fSpec.l < 0) continue;
@@ -845,7 +847,7 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
         if (!fRaw) continue;
         if (fRaw === 'y' || fRaw === 'yes') newRow[fSpec.l] = 'yes';
         else if (fRaw === 'n' || fRaw === 'no') newRow[fSpec.l] = 'no';
-        else throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + first + ' ' + last + '" carries ' + fSpec.name + ' "' + row[fSpec.i] + '" — use y or n.');
+        else Logger.log('processAdvancementIntake_: "' + first + ' ' + last + '" carries ' + fSpec.name + ' "' + row[fSpec.i] + '" — not y/n, left blank');
       }
       if (lStatus >= 0) newRow[lStatus] = 'Active';
       if (lLifeHistory >= 0) newRow[lLifeHistory] = 'Promoted to Tier ' + tier + ' in Cycle ' + cycle + '. ' + notes;

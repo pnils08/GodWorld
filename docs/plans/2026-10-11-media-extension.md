@@ -131,7 +131,7 @@ pointers:
 - **Voices — Ines Sorensen.** Ex-radio call-in host and street reporter. Fast, curious, goes to the person the day it happens and carries their own voice; fits the wake reward and the citizen pages; frames an interview from the city level when it helps.
 - Both names checked against Simulation_Ledger 2026-10-13 (full name and surname unused). Neither is minted yet (Intake, engine-sheet). Lives is built first; Voices follows. Voice files for each are written from this sketch with the builder reading them before the seat goes in.
 
-**Voice sketch — Tamsin Pruitt, Lives (draft for the builder to read and cut; rb 2026-10-13; the shape of `docs/media/voices/*.md`: essence, opening, exemplar, moves, do-nots; lives here in the plan until the builder passes it, then becomes the voice file):**
+**Voice sketch — Tamsin Pruitt, Lives (rb 2026-10-13; passed by the builder 2026-10-14 "Voices look good" → voice file `docs/media/voices/tamsin_pruitt.md`; the text below is the draft as passed):**
 
 *Desk:* Lives (the lives-and-voices desk) | *Beat:* the person events of the cycle — births, weddings, deaths, retirements, promotions, graduations, hospital stays and recoveries, new households, hires, a business opened, a court date, a loss — whoever it happens to, an A's manager included.
 
@@ -157,7 +157,7 @@ pointers:
 
 *Slice she reads (not built):* the cycle's milestone rows plus the person's own log rows and page when they exist; named-resident rows from the hospital, household, employment, business, court and casino tabs. Her wall will be her own `cp-POP-xxxxx` page once minted.
 
-**Voice sketch — Ines Sorensen, Voices (draft for the builder to read and cut; rb 2026-10-14; same shape as Tamsin's, lives here until the builder passes it):**
+**Voice sketch — Ines Sorensen, Voices (rb 2026-10-14; passed by the builder 2026-10-14 "Voices look good" → voice file `docs/media/voices/ines_sorensen.md`; the text below is the draft as passed):**
 
 *Desk:* Lives (the lives-and-voices desk) | *Beat:* what citizens said in their own words — the morning, midday and night wake pages, the work-wake pages, the day's exchange. The person is the subject; the city is the frame when it helps.
 
@@ -271,7 +271,7 @@ pointers:
 
 3. *rb:* Tamsin's slice builder, wake package, grid slots (Mon–Fri), persona-map entry, builder-map entries in both files, voice files, covered list, test updates.
 4. *rb:* Ines's slice builder (pages and exchanges only), her package and grid slots (Wed–Sat), Saturday and Sunday cron entries that run her alone, voice files.
-Steps 3 and 4 wait on the builder reading the voice files; step 1 on engine-sheet being free of the engine.214 pair.
+Voice files passed by the builder 2026-10-14 ("Voices look good"); steps 3 and 4 now wait only on steps 1–2 (the lived slot, the mint at C112, the life rows in the dump).
 
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
@@ -501,6 +501,8 @@ Each entry: **Beat** (the seat's standing purpose from its wake package) · **Sl
 - Why did the A's championship run go uncovered? The builder raised it ("The As are in a championship run and no one covers that?").
 
 ## Changelog
+
+- 2026-10-14 (research-build) — Builder passed both voices. Voice files written (`docs/media/voices/tamsin_pruitt.md`, `ines_sorensen.md`), registered in `.claude/agents/REPORTER_DESK_INDEX.md`. Steps 3–4 gate is now steps 1–2 only.
 
 - 2026-10-14 (research-build) — Ines Sorensen voice sketch drafted (exemplar from the C111 night page of POP-00186).
 - 2026-10-14 (research-build) — Step 1 rulings recorded (floor lifted for news-grade only; death = survivor's wake; mint carries CIV/MED/UNI from Advancement_Intake1 to the ledger). Mint facts for Tamsin and Ines. Sent to engine-sheet.

@@ -44,7 +44,7 @@
 - [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
 - [[../output/notebooklm-card-backup/pair-report.json]]: pipeline.72 ready
-- [[../docs/plans/2026-10-11-media-extension.md]]: pipeline.73 ready
+- [[../docs/plans/2026-10-11-media-extension.md]]: pipeline.73 in-progress
 - [[../research/2026-10-11-codex-engine194-cut]]: engine.194 live-observing
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
 - `docs/research/2026-10-08-codex-engine95-design.md`: engine.285 ready
@@ -127,7 +127,7 @@
 |---|------|-------|----------|---------|
 | pipeline.71 | Media hood read: live vs the INSTITUTIONS seed (today every reader gets prev-Cycle delta only — baseline_briefs, buildWorldSummary classifyDelta). Builder 2026-10-10: the seed is the permanent referent; coverage says 'used to be' when the data moves. Spec after engine.214 lands | ready | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Reviews reconciled A4 |
 | pipeline.72 | One TrueSource card per player (builder 2026-10-11): fold the _2041 intake fields and _2040 history into the FULL card, retire the intakes. Rivas FA 2045 RULED 2026-10-12 | ready | research-build | output/notebooklm-card-backup/pair-report.json |
-| pipeline.73 | Media map (builder 2026-10-12): a clean session maps all 23 journalists — what each covers, crossover, gaps, week rotations, citizens-stories seat or minted desk. A map, not a citizen conversion | ready | research-build + engine-sheet | docs/plans/2026-10-11-media-extension.md |
+| pipeline.73 | Two citizen seats built (Tamsin Pruitt = Lives, Ines Sorensen = Voices): lived wake + Lived_Events in the dump (es), slice builders + agent folders + tests (rb). Waits on the C112 mint Sun 2026-10-18 → POPID registrations in one rb commit; first runs Mon 10-19 / Wed 10-21 | in-progress | research-build + engine-sheet | docs/plans/2026-10-11-media-extension.md |
 | engine.287 | Citywide crime gate: floor 3 carried spikes, half share on each hood (builder 2026-10-10). Built as engine.214 Task 19 `1ce99668`, benched @14 (the C112 wave gone). Rides the engine.214 PROD. Live counts on record 2/0/0/1/1/1 | live-observing | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Tasks 17/18/19 — mechanism |
 | engine.288 | Mood gates read both seed lists (builder 2026-10-10: "the second option") — the newsroom's deck carried beside the engine list. Built `5c6c551d` + `1d0d7b83`, benched @16: active seed hoods 7 → 14 at C112, city unchanged. Rides the engine.214 PROD | live-observing | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.288 bench results |
 | engine.289 | Absolute CULTURE gates (`wCulture >= 3 / >= 6` in `applyCityDynamics.js`) were written while the seed input was dead; they have input for the first time on the engine.214 PROD. Waits on live C113 (Sun 2026-10-25): re-read, then keep, re-tier, or move to the relative shape | blocked | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Tasks 17/18/19 — mechanism → Bench results |

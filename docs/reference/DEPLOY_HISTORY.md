@@ -142,6 +142,9 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 4c (`63ade2f8` processAdvancementIntake.js over stage 4) — pipeline.73 mint flags (2026-10-14, engine-sheet; builder lifted auto mode for the push)
+CIV/MED/UNI intake columns reach the new ledger row beside ClockMode (y/n → yes/no, blank stays blank, other values logged and left blank), and the engine employer rules are synced to the mapping's Bayline 6 / Oakland 12 / OakTown Echo rules. Stage 4b (`8d449968`, throw on a bad flag) went up first, benched @25; codex found `flagCitizenForTierReview_` queues 'pending' in G, so 4c replaced it the same night, benched @26 (C112 off BASELINE-1004-C111 ok, persist errors [], Engine_Errors 4 → 4, a CIV=pending row minted with CIV blank). Both pushes `output/engine-sheet/push-stage4{b,c}-prod.sh`, pull-back 167/167. Smoke: the C112 fire Sun 2026-10-18 mints Tamsin Pruitt + Ines Sorensen (live Advancement_Intake1 rows 124–125).
+
 ### PROD config only — engine.286 `homeLossChance` .00625 → .017 (2026-10-12 ~20:30 CDT, engine-sheet; builder lifted auto mode for the write)
 - **Live sheet write, read back:** World_Config row 17 `homeLossChance` B .00625 → .017, C description matched to the seed in `c47dcc0b`. No clasp push; the code seed rides the next PROD stage.
 - **Proof:** the real `loadNeighborhoodState_` + `trackHomeOwnership_` run offline over a copy of live C111 state: 124 owned, 5 savings-covered, 3 at risk, 0 errors; 2000 seeded trials each: .00625 → .0215 sales/Cycle, .017 → .0525 (1 per 19). Rate = 1 − 0.95^(1/n); n moves (HH-0084-169 Lake Merritt is ~$1.2k from n=4).

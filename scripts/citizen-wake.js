@@ -187,7 +187,7 @@ function selectCitizen(pool, state, cycle, lived) {
   // pipeline.73 step 1 — the LIVED slot: a news-grade life event (birth, death's survivor, hospital,
   // retirement, promotion) wakes its citizen before posture. Picked upstream by pickLived (cap, window,
   // age, once per event); a livedOnly citizen (under the shaped floor) is reachable from here alone.
-  if (lived) return { c: lived.c, slot: 'lived', event: lived.event };
+  if (lived) return { c: lived.c, slot: 'lived', event: lived.event, rel: lived.rel };
 
   // engine.180 (S438) — the POSTURE slot: a citizen whose game state moved this cycle
   // (a [Maneuver-*] line stamped on the current cycle) and who has not woken since
@@ -297,14 +297,14 @@ async function generateVoice(system, user) {
   const livedEvents = cycle ? await loadLivedEvents(cycle) : [];
   if (livedEvents.error) logLine('lived events read failed (non-fatal, no lived slot this wake): ' + livedEvents.error);
   const livedList = Array.isArray(livedEvents) ? livedEvents : [];
-  const pool = await buildPool({ include: new Set(livedList.map((e) => e.recipient)) });
+  const pool = await buildPool({ include: new Set(livedList.flatMap((e) => (e.recipients || []).map((r) => r.pop))) });
   logLine(`pool: ${pool.length} shaped citizens with lived history (wake=${WAKE}, cycle=${cycle}, dry=${DRY}, lived events=${livedList.length})`);
   if (!pool.length) { logLine('empty pool — nothing to wake'); process.exit(0); }
 
   const state = loadState();
   const lived = (FORCE_POP || !cycle) ? null : pickLived(livedList, pool, state, cycle, require('/root/GodWorld/lib/citizenDerivation').currentSimYear());
   const picked = selectCitizen(pool, state, cycle, lived);
-  const livedLine = picked.slot === 'lived' ? renderLivedLine(picked.event, cycle) : '';
+  const livedLine = picked.slot === 'lived' ? renderLivedLine(picked.event, cycle, picked.rel) : '';
   const c = picked.c;
   const neighbors = await coResidents(c.nh, c.popId);
   const sportsLine = await loadSportsSlice();                 // T1b — one feed read, shared across the wake

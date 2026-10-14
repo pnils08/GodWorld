@@ -194,6 +194,15 @@ pointers:
 - **Result:** Mon–Tue Tamsin, Wed–Fri both, Sat–Sun Ines. Only Ines needs Saturday and Sunday entries; the after-the-fire Sunday guard above is dropped.
 - **Still true:** Ines's weekend entries must run her alone and not wake the other 23; Saturday already carries the UNDOCKED weekly digest, the Saturday run and delivery.
 
+**Schedule approved (builder 2026-10-14: "That schedule works"):** Tamsin Mon–Fri, Ines Wed–Sun (Mon–Tue Tamsin, Wed–Fri both, Sat–Sun Ines).
+
+**Build order (Task 4), each step with a wiring card and a review before it lands:**
+1. *engine-sheet:* the lived wake slot in `scripts/citizen-wake.js` (news-grade milestone events only, modelled on the engine.180 posture slot); mint Tamsin Pruitt and Ines Sorensen through Intake (MEDIA clock; ledger rows are the sheets' side).
+2. *engine-sheet with rb:* the milestone and tracker-person rows into the slice data (`LifeHistory_Log` into the beat dump; the 2026-10-11 draft was reverted pending this review); lift `sportsSubject` at its call sites.
+3. *rb:* Tamsin's slice builder, wake package, grid slots (Mon–Fri), persona-map entry, builder-map entries in both files, voice files, covered list, test updates.
+4. *rb:* Ines's slice builder (pages and exchanges only), her package and grid slots (Wed–Sat), Saturday and Sunday cron entries that run her alone, voice files.
+Steps 3 and 4 wait on the builder reading the voice files; step 1 on engine-sheet being free of the engine.214 pair.
+
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
 **Rows:** pipeline.73 · **Owner:** research-build with engine-sheet

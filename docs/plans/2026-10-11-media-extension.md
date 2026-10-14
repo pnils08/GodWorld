@@ -224,6 +224,25 @@ pointers:
 - **(i) The shaped floor.** Lived wakes bring in citizens the floor kept out as too unshaped to have a distinct voice. What they would wake with today (`buildPool({ shapedMin: 0 })`, `dials.disposition`): Maren Johns (retired psychotherapist, deviation 16) "even-keeled, unremarkable"; Geneva Zhou (new parent, 23) "close to family"; Maurice Franklin (discharged, 16) "even-keeled, unremarkable". Against the floor: Jerald Jensen (promoted janitor, 151) "can't switch off, working themselves thin; magnetic, center of every room; restless for the new, adventurous; steady, hard to shake". The event and the life tail carry the wake; the temperament line goes thin. Accept that for news-grade events, or keep the floor and get about 2 a week?
 - **(ii) Death.** No living row carries it. Is a death the survivor's wake (household or bond), or out of this slot?
 - (iii) is closed (above); only the character facts are open.
+**Step 1 rulings (builder through rb, 2026-10-14):**
+- **(i) Shaped floor:** lifted for news-grade events only. A citizen the floor keeps out as unshaped still gets the lived wake the Cycle their own birth, retirement, promotion or hospital recovery is stamped; the floor stays for every other slot. Builder: "I agree with your lean."
+- **(ii) Death:** the survivor's wake — the household (or bond) row that carries the loss, not the archived row. Builder: same.
+- **(iii) Mint — "a means to properly intake citizens with flags and clock modes" (builder).** Path: `Advancement_Intake1`, which already carries RoleType, Tier, ClockMode, BirthYear, Neighborhood, Gender, EmployerBizId, CitizenBio and the CIV/MED/UNI columns (G/H/I, `mediaRoomIntake.js:446–455`). Gap read by rb: the mint (`processAdvancementIntake.js:829–850`) copies ClockMode to the ledger row but not the three flag columns, so a journalist row would land MEDIA-clocked with no MED flag, and the flags are canon guardrails (ledger-flags memory, 2026-10-08). The mint carries the flags from the intake row to the ledger row; then Tamsin and Ines are two ordinary intake rows (MED = y, ClockMode = MEDIA) that mint at the C112 fire, and every later journalist, official or athlete mints the same way. Engine-sheet's code, wiring card and review as usual.
+
+**Mint facts (rb proposed from the approved sketches, builder 2026-10-14 "open to however you want to handle this"):**
+
+| | Tamsin Pruitt | Ines Sorensen |
+|---|---|---|
+| Seat | Lives | Voices |
+| BirthYear | 1994 (48 at Y3) | 2004 (38 at Y3) |
+| Gender | female | female |
+| Neighborhood | Fruitvale | Uptown |
+| Tier | 4 (as Celeste POP-00164, Nia POP-01076) | 4 |
+| ClockMode / flag | MEDIA / MED | MEDIA / MED |
+| Employer | Bay Tribune (BIZ-00018, as Nia) | same |
+| RoleType | Journalist, Lives | Journalist, Voices |
+| CitizenBio | Twenty years on a neighborhood weekly's births, weddings and obituaries page; now writes the Tribune's Lives page — the city's real calendar, one person at a time. | Ex-radio call-in host and street reporter; goes to the person the day it happens and carries their own words into the Tribune's Voices page. |
+
 3. *rb:* Tamsin's slice builder, wake package, grid slots (Mon–Fri), persona-map entry, builder-map entries in both files, voice files, covered list, test updates.
 4. *rb:* Ines's slice builder (pages and exchanges only), her package and grid slots (Wed–Sat), Saturday and Sunday cron entries that run her alone, voice files.
 Steps 3 and 4 wait on the builder reading the voice files; step 1 on engine-sheet being free of the engine.214 pair.
@@ -456,6 +475,8 @@ Each entry: **Beat** (the seat's standing purpose from its wake package) · **Sl
 - Why did the A's championship run go uncovered? The builder raised it ("The As are in a championship run and no one covers that?").
 
 ## Changelog
+
+- 2026-10-14 (research-build) — Step 1 rulings recorded (floor lifted for news-grade only; death = survivor's wake; mint carries CIV/MED/UNI from Advancement_Intake1 to the ledger). Mint facts for Tamsin and Ines. Sent to engine-sheet.
 
 - 2026-10-13 (research-build) — Builder's map framing recorded (seat = engine system + the citizens it touches; crossover = the city; Seymour re-read against the health-slice sports rule; slices two weeks old; citizens' side likely 1–2 new journalists). Task 3 reworded. No lane or code changed.
 

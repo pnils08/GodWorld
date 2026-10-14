@@ -18,7 +18,7 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'rachel-torres', name: 'Sgt. Rachel Torres', popid: 'POP-00057', desk: 'civic',
   kind: 'beat-safety', domain: 'public-safety', artifact: 'safety', builder: 'buildSafetySlice.js',
-  version: 'SAFETY-SLICE-3', nameRe: /rachel\s*torres/i,
+  version: 'SAFETY-SLICE-4', nameRe: /rachel\s*torres/i,
   tabs: ['Crime_Metrics', 'Employment_Roster', 'Business_Ledger', 'Story_Hook_Deck', 'Judicial_Ledger', 'City_Treasury', 'Care_Justice_Census'],
   approach: 'Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours.',
   roomIsYours: 'the corner after the call, the dispatcher\'s pause, who was on the porch, what the neighborhood watch captain saw first',

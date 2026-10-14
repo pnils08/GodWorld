@@ -26,7 +26,7 @@ const pulseSlice = require('./buildPulseSlice');
 const SEAT = {
   slug: 'celeste-tran', name: 'Celeste Tran', popid: 'POP-00164', desk: 'wire',
   kind: 'beat-trends', domain: 'trends', artifact: 'trends', builder: 'buildTrendsSlice.js',
-  version: 'TRENDS-SLICE-2', nameRe: /celeste\s*tran/i,
+  version: 'TRENDS-SLICE-3', nameRe: /celeste\s*tran/i,
   tabs: ['Cultural_Ledger', 'Neighborhood_Demographics', 'Story_Hook_Deck'],
   // + output/cron-compare/pulse_c{N}.json (pipeline.70), read soft
   approach: 'Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the engine\'s hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours.',

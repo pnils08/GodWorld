@@ -33,7 +33,7 @@ const K = require('./beatSliceKit');
 const pages = require('./scanCitizenPages');
 
 const ROOT = '/root/GodWorld';
-const VERSION = 'PULSE-1';
+const VERSION = 'PULSE-2'; // pipeline.73: athletes' pages count (a PULSE-1 artifact still excludes them)
 const WINDOW = 8;
 const TOP_THEMES = 5;
 const VOICES = 3;

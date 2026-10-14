@@ -976,7 +976,7 @@ function buildCivicDomainSlice(cycle, { root = ROOT } = {}) {
     [slug, packetForEntries(entries, slug, profiles, deck)]));
   const nonempty = Object.values(packets).filter(packet => packet && !packet.empty);
   return {
-    version: 'CIVIC-DOMAIN-SLICE-6',
+    version: 'CIVIC-DOMAIN-SLICE-7',
     cycle: Number(cycle),
     kind: 'civic-domain',
     empty: nonempty.length === 0,
@@ -1058,7 +1058,7 @@ function writeCivicDomainSlice(cycle, slice, root = ROOT) {
 
 function loadCivicDomainSlice(cycle, root = ROOT) {
   const existing = loadJson(slicePaths(cycle, root).json);
-  if (existing && existing.version === 'CIVIC-DOMAIN-SLICE-6') return existing;
+  if (existing && existing.version === 'CIVIC-DOMAIN-SLICE-7') return existing;
   const slice = buildCivicDomainSlice(cycle, { root });
   if (!slice.empty) writeCivicDomainSlice(cycle, slice, root);
   return slice.empty ? null : slice;

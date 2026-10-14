@@ -464,6 +464,22 @@ try {
   ok('talia: fans + mood lead', /Oaks fans, C103: restless/.test(tf.facts[0].text) && tf.facts.some(f => /Room mood, C103: frustrated/.test(f.text)));
   ok('talia: record is context, not the lead', tf.facts.some(f => /Context: record 12-30 · streak L4/.test(f.text)) && /Jack London/.test(tf.hood));
 
+  console.log('pipeline.73 — athletes on every beat (builder 2026-10-13, "citizens are citizens"):');
+  {
+    const prof = new Map([['POP-90002', { Name: 'Test Pro Athlete', POPID: 'POP-90002', RoleType: 'Right Fielder, Test Team', EconomicProfileKey: 'SPORTS_OVERRIDE', Neighborhood: 'Downtown', DebtLevel: '7',
+      DialState: JSON.stringify({ debtDefault: { l: CYCLE } }) }]]);
+    const dp = K.debtPattern(prof, [], CYCLE, 'test');
+    ok('an athlete\'s default this Cycle is named, and the athlete is on the over-line count', dp.defaults.some(d => d.popid === 'POP-90002') && dp.overLine === 1, JSON.stringify({ defaults: dp.defaults.map(d => d.popid), overLine: dp.overLine }));
+    const pdir = path.join(root, 'output', 'citizen_pages');
+    fs.mkdirSync(pdir, { recursive: true });
+    fs.writeFileSync(path.join(pdir, 'index.jsonl'), JSON.stringify({ customId: 'cp-POP-90002-c' + CYCLE + '-night', popId: 'POP-90002', cycle: CYCLE, slot: 'night', type: 'reflection', daypart: 'night', createdAt: '2026-01-01T00:00:00Z',
+      content: 'The rent on the block went up again and I keep thinking about the neighbors who cannot cover it.' }) + '\n');
+    const pulseMod = require('./buildPulseSlice');
+    const pl = pulseMod.build(CYCLE, { root });
+    fs.rmSync(pdir, { recursive: true, force: true });
+    ok('an athlete\'s own page counts in the pulse; no GAME-clock exclusion counter remains', pl.counted.docs === 1 && pl.counted.citizens === 1 && !('game' in pl.counted.excluded), JSON.stringify(pl.counted));
+  }
+
   console.log('trends (celeste):');
   const ct = trends.buildTrendsSlice(CYCLE, { root });
   ok('celeste: most-mentioned leads the conversation', /Test Fading Actor \(Actor\), Media — 21 media mentions, fading/.test(ct.facts[0].text));

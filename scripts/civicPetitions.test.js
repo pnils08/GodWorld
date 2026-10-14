@@ -210,20 +210,33 @@ test('beats dump treats Reflection_Intake as optional, including empty and prese
     const writes = new Map(), reads = [], errors = [];
     const synthetic = [{ POPID: 'POP-99901', Cycle: '999', Tag: 'Civic', ReflectionExcerpt: 'SYNTHETIC' }];
     const fakeFs = { mkdirSync() {}, existsSync() { return false; }, readFileSync() { throw new Error('no prior dump'); },
-      writeFileSync(file, data) { writes.set(path.basename(file), data); } };
-    vm.runInNewContext(source, {
-      __dirname, console: { log() {}, error(...m) { errors.push(m.join(' ')); } },
-      process: { argv: ['node', 'dumpBeatTabs.js', '999', '--quiet'], exit(code) { throw new Error('dump exited ' + code); } },
-      require(name) {
+      writeFileSync(file, data) { writes.set(path.basename(file), data); },
+      rmSync() {}, renameSync() {}, readdirSync() { return []; }, copyFileSync() {} }; // pipeline.73: the generation swap
+    // pipeline.73 step 2: the dump also reads three raw tabs for the lived window (header + one row each).
+    const RAW = {
+      LifeHistory_Log: [['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighborhood', 'Cycle'], ['Y3C8', 'POP-99902', '', 'Daily', 'walked', '', '999']],
+      Hospital_Ledger: [['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause', 'AdmitCycle', 'StatusNow', 'LastTransitionCycle', 'DischargeCycle']],
+      Simulation_Ledger: [['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'HouseholdId', 'Status', 'BirthYear'], ['POP-99902', 'Syn', 'Thetic', 'Downtown', 'Clerk', '', 'Active', '1990']],
+    };
+    const mod = { exports: {} };
+    const req = (name) => {
         if (name.endsWith('/lib/env')) return {};
         if (name === 'fs') return fakeFs;
         if (name === 'path') return path;
+        if (name === '../lib/wakePerception') return require('../lib/wakePerception');
         if (name === '../lib/sheets') return {
           async listSheets() { return required.concat(present ? ['Reflection_Intake'] : []).map(title => ({ title })); },
           async getSheetAsObjects(tab) { reads.push(tab); return tab === 'Reflection_Intake' ? synthetic : []; },
+          async getRawSheetData(tab) { return RAW[tab] || []; },
         };
         throw new Error('Unexpected dependency ' + name);
-      },
+    };
+    req.main = mod;
+    vm.runInNewContext(source, {
+      module: mod,
+      __dirname, console: { log() {}, error(...m) { errors.push(m.join(' ')); } },
+      process: { argv: ['node', 'dumpBeatTabs.js', '999', '--quiet'], exit(code) { throw new Error('dump exited ' + code); } },
+      require: req,
     }, { filename: 'dumpBeatTabs.js' });
     await new Promise(resolve => setImmediate(resolve));
     assert.deepEqual(errors, []);

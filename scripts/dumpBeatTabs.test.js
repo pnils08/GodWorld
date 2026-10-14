@@ -2,7 +2,8 @@
 // pipeline.73 step 2 — the beat dump's derived files: the LifeHistory_Log window and Lived_Events.
 // Pure helpers only (the sheet reads and the staged publish run in main()).
 // Run: node scripts/dumpBeatTabs.test.js
-const { lifeWindowRows, livedEventRows } = require('./dumpBeatTabs');
+const { lifeWindowRows, livedEventRows, resolveStamp, requireCols, publishGeneration } = require('./dumpBeatTabs');
+const fs = require('fs'), os = require('os'), path = require('path');
 let pass = 0, fail = 0;
 const ok = (n, c, d) => { if (c) { pass++; console.log('  ok   ' + n); } else { fail++; console.log('  FAIL ' + n + (d ? ' — ' + d : '')); } };
 
@@ -33,6 +34,35 @@ ok('the wake\'s set: retirement (C111), birth, death; texture lines out', ev.map
 ok('names, hood and role joined from the ledger read', by('birth').subjectName === 'Geneva Zhou' && by('birth').neighborhood === 'West Oakland' && by('birth').roleType === 'Elevator Mechanic');
 ok('the deceased is named from the archive, the survivor from the ledger', by('death').subjectName === 'Ana Ruiz' && by('death').neighborhood === 'Fruitvale' && by('death').recipients[0].pop === 'POP-00601' && by('death').recipients[0].rel === 'spouse' && by('death').recipients[0].name === 'Luis Ruiz', JSON.stringify(by('death')));
 ok('row shape: id, kind, cycle, subject, subjectName, neighborhood, roleType, recipients', ['id', 'kind', 'cycle', 'subject', 'subjectName', 'neighborhood', 'roleType', 'recipients'].every(k => k in by('retirement')));
+
+console.log('stamp resolution');
+const thr = (f) => { try { f(); return null; } catch (x) { return x.message; } };
+ok('the request stamps; a backward request keeps the prior', resolveStamp({ cycle: 111 }, '112') === 112 && resolveStamp({ cycle: 111 }, '110') === 111);
+ok('no request → the prior meta Cycle', resolveStamp({ cycle: 111 }, null) === 111);
+ok('a null, blank or zero prior is no stamp — never Cycle 0', [{ cycle: null }, { cycle: '' }, { cycle: 0 }, null].every(m => /no positive Cycle/.test(thr(() => resolveStamp(m, null)) || '')));
+ok('a zero, negative or non-integer request is refused', ['0', '-3', '11.5', 'abc'].every(a => /not a positive integer/.test(thr(() => resolveStamp({ cycle: 111 }, a)) || '')));
+
+console.log('required columns');
+ok('a missing column names itself', /missing column\(s\): Cycle/.test(thr(() => requireCols('LifeHistory_Log', [['POPID', 'EventTag']], ['POPID', 'Cycle'], false))));
+ok('an empty read fails when rows are required, passes when the tab may be empty', /no data rows/.test(thr(() => requireCols('Simulation_Ledger', [['POPID']], ['POPID'], true))) && thr(() => requireCols('Hospital_Ledger', [['POPID']], ['POPID'], false)) === null);
+ok('a non-array read fails', /did not return rows/.test(thr(() => requireCols('X', null, [], false))));
+
+console.log('generation publish (directory swap)');
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'beats-'));
+const out = path.join(tmp, 'beats');
+const read = (f) => fs.readFileSync(path.join(out, f), 'utf8');
+publishGeneration(out, { A: ['{"c":111}'] }, { cycle: 111 }, false);
+ok('first publish: files + meta, empty prev/', read('A.jsonl') === '{"c":111}\n' && JSON.parse(read('meta.json')).cycle === 111 && fs.readdirSync(path.join(out, 'prev')).length === 0);
+publishGeneration(out, { A: ['{"c":112}'], B: [] }, { cycle: 112 }, true);
+ok('advancing: the old generation becomes prev/, the new one is live', read('A.jsonl') === '{"c":112}\n' && read('B.jsonl') === '' && fs.readFileSync(path.join(out, 'prev', 'A.jsonl'), 'utf8') === '{"c":111}\n' && JSON.parse(fs.readFileSync(path.join(out, 'prev', 'meta.json'), 'utf8')).cycle === 111);
+publishGeneration(out, { A: ['{"c":112,"again":1}'], B: [] }, { cycle: 112 }, false);
+ok('same-Cycle rerun: live replaced, prev/ kept as it was', read('A.jsonl') === '{"c":112,"again":1}\n' && fs.readFileSync(path.join(out, 'prev', 'A.jsonl'), 'utf8') === '{"c":111}\n');
+const boom = Object.assign({}, fs, { writeFileSync: (f, d) => { if (/meta\.json$/.test(f)) throw new Error('disk full'); return fs.writeFileSync(f, d); } });
+const err = thr(() => publishGeneration(out, { A: ['{"c":113}'] }, { cycle: 113 }, true, boom));
+ok('a failure before the swap leaves the live dump and prev/ untouched', /disk full/.test(err || '') && read('A.jsonl') === '{"c":112,"again":1}\n' && JSON.parse(read('meta.json')).cycle === 112 && fs.readFileSync(path.join(out, 'prev', 'A.jsonl'), 'utf8') === '{"c":111}\n');
+publishGeneration(out, { A: ['{"c":113}'] }, { cycle: 113 }, true);
+ok('the retry after a failure publishes cleanly (no leftover .next)', read('A.jsonl') === '{"c":113}\n' && !fs.existsSync(out + '.next') && !fs.existsSync(out + '.old') && fs.readFileSync(path.join(out, 'prev', 'A.jsonl'), 'utf8') === '{"c":112,"again":1}\n');
+fs.rmSync(tmp, { recursive: true, force: true });
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

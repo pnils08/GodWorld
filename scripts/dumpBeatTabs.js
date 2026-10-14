@@ -16,7 +16,8 @@
  * same monotonic cycle stamp (G-PF35 — never stamp backward), read-only.
  *
  * Usage:
- *   node scripts/dumpBeatTabs.js [cycle] [--quiet]
+ *   node scripts/dumpBeatTabs.js <cycle> [--quiet]   (the cycle may be omitted only when meta.json
+ *   already carries a positive Cycle — pipeline.73 step 2; the dump never stamps null or 0)
  *
  * Outputs:
  *   output/beats/<Tab>.jsonl   — one row object per line, header keys verbatim
@@ -118,25 +119,55 @@ function livedEventRows(src, stamp) {
     return out;
   });
 }
-module.exports = { lifeWindowRows, livedEventRows, toObjects };
+module.exports = { lifeWindowRows, livedEventRows, toObjects, resolveStamp, requireCols, publishGeneration };
 
 function readMeta(p) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; } }
 
-function rotatePrev(priorMeta, stamp) {
-  // Keep exactly one prior dump, and only when the cycle actually advanced.
-  if (!priorMeta || !Number.isFinite(stamp) || !Number.isFinite(Number(priorMeta.cycle))) return false;
-  if (Number(priorMeta.cycle) >= stamp) return false;
-  fs.rmSync(PREV_DIR, { recursive: true, force: true });
-  fs.mkdirSync(PREV_DIR, { recursive: true });
-  for (const f of fs.readdirSync(OUT_DIR)) {
-    if (f === 'prev' || f === '.staging') continue;
-    fs.renameSync(path.join(OUT_DIR, f), path.join(PREV_DIR, f));
+const posInt = (v) => { if (v === null || v === undefined || String(v).trim() === '') return null; const n = Number(v); return Number.isInteger(n) && n > 0 ? n : null; };
+// The Cycle this dump is stamped with: the request, never below the prior meta (G-PF35), always a
+// positive integer. A blank / null / zero prior stamp is "none", not Cycle 0.
+function resolveStamp(priorMeta, cycleArg) {
+  const prior = posInt(priorMeta && priorMeta.cycle);
+  const wanted = cycleArg == null ? null : posInt(cycleArg);
+  if (cycleArg != null && wanted == null) throw new Error('cycle argument "' + cycleArg + '" is not a positive integer');
+  const stamp = wanted == null ? prior : (prior != null && wanted < prior ? prior : wanted);
+  if (stamp == null) throw new Error('no positive Cycle to stamp — pass the fired Cycle (no prior meta.json carries one)');
+  return stamp;
+}
+// A header-first raw read with the named columns; mustHaveRows = a data row is required too.
+function requireCols(tab, raw, cols, mustHaveRows) {
+  if (!Array.isArray(raw)) throw new Error(tab + ' did not return rows');
+  const h = (raw[0] || []).map(String);
+  const miss = cols.filter(c => h.indexOf(c) < 0);
+  if (miss.length) throw new Error(tab + ' is missing column(s): ' + miss.join(', '));
+  if (mustHaveRows && raw.length < 2) throw new Error(tab + ' has no data rows');
+  return raw;
+}
+// One generation, published by a directory swap: the whole new dir (files, meta, prev/) is built
+// beside the live one, then the live dir is renamed aside and the new one renamed in. A failure
+// before the swap leaves the live dump untouched; prev/ is copied, never moved, until the swap.
+function publishGeneration(outDir, files, meta, advancing, fsx) {
+  const F = fsx || fs;
+  const next = outDir + '.next', old = outDir + '.old';
+  F.rmSync(next, { recursive: true, force: true });
+  F.mkdirSync(path.join(next, 'prev'), { recursive: true });
+  for (const k of Object.keys(files)) F.writeFileSync(path.join(next, k + '.jsonl'), files[k].length ? files[k].join('\n') + '\n' : '');
+  F.writeFileSync(path.join(next, 'meta.json'), JSON.stringify(meta, null, 2) + '\n');
+  const live = F.existsSync(outDir) ? F.readdirSync(outDir) : [];
+  if (advancing) {
+    for (const f of live) if (/\.(jsonl|json)$/.test(f)) F.copyFileSync(path.join(outDir, f), path.join(next, 'prev', f));
+  } else if (F.existsSync(path.join(outDir, 'prev'))) {
+    for (const f of F.readdirSync(path.join(outDir, 'prev'))) F.copyFileSync(path.join(outDir, 'prev', f), path.join(next, 'prev', f));
   }
-  return true;
+  F.rmSync(old, { recursive: true, force: true });
+  if (F.existsSync(outDir)) F.renameSync(outDir, old);
+  F.renameSync(next, outDir);
+  F.rmSync(old, { recursive: true, force: true });
 }
 
 async function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
+  resolveStamp(readMeta(META), cycleArg); // fail before any Sheet read when no positive Cycle can be stamped
 
   // Every required beat tab must exist — a missing one is a schema event, not a
   // soft skip. Optional (lazy-created) tabs absent from the sheet dump empty.
@@ -164,59 +195,43 @@ async function main() {
 
   // G-PF35 monotonic stamp, same rule as dumpLedger.js.
   const priorMeta = readMeta(META);
-  const priorCycle = priorMeta ? Number(priorMeta.cycle) : NaN;
-  const wanted = cycleArg ? Number(cycleArg) : null;
-  let stamp = wanted;
-  if (Number.isFinite(priorCycle) && Number.isFinite(wanted) && wanted < priorCycle) {
-    console.error(`dumpBeatTabs: REFUSING to stamp backward — asked for cycle ${wanted}, dump is at ${priorCycle}. `
+  const stamp = resolveStamp(priorMeta, cycleArg);
+  const priorCycle = posInt(priorMeta && priorMeta.cycle);
+  if (cycleArg && priorCycle != null && Number(cycleArg) < priorCycle) {
+    console.error(`dumpBeatTabs: REFUSING to stamp backward — asked for cycle ${cycleArg}, dump is at ${priorCycle}. `
       + `Rows refreshed from the live sheet; meta keeps cycle ${priorCycle}.`);
-    stamp = priorCycle;
   }
-  if (!Number.isFinite(wanted) && Number.isFinite(priorCycle)) stamp = priorCycle;
 
-  // pipeline.73 step 2 — the derived files are built from the EFFECTIVE stamp (a backward request keeps
-  // the higher meta Cycle), before anything rotates or writes; a failed read aborts here.
-  if (!Number.isInteger(stamp)) {
-    console.error('dumpBeatTabs: ABORT — no integer Cycle stamp for the LifeHistory_Log window / Lived_Events (pass the fired Cycle).');
-    process.exit(1);
-  }
+  // pipeline.73 step 2 — the derived files, from the EFFECTIVE stamp; every input read and checked
+  // before anything is written.
   log('dumpBeatTabs: reading LifeHistory_Log, Hospital_Ledger, Simulation_Ledger for the lived window…');
-  const [logRaw, hospRaw, ledgerRaw] = [await sheets.getRawSheetData('LifeHistory_Log'), await sheets.getRawSheetData('Hospital_Ledger'), await sheets.getRawSheetData('Simulation_Ledger')];
-  if (![logRaw, hospRaw, ledgerRaw].every(Array.isArray)) { console.error('dumpBeatTabs: ABORT — a lived-window tab did not return rows.'); process.exit(1); }
+  const logRaw = requireCols('LifeHistory_Log', await sheets.getRawSheetData('LifeHistory_Log'), ['POPID', 'EventTag', 'EventText', 'Cycle'], true);
+  const hospRaw = requireCols('Hospital_Ledger', await sheets.getRawSheetData('Hospital_Ledger'), ['AdmissionId', 'POPID', 'AdmitCycle', 'DischargeCycle', 'Cause'], false);
+  const ledgerRaw = requireCols('Simulation_Ledger', await sheets.getRawSheetData('Simulation_Ledger'), ['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'HouseholdId', 'Status', 'BirthYear'], true);
   const lifeRows = lifeWindowRows(logRaw, stamp);
   const anyDeath = lifeRows.some(r => /^Death$/i.test(String(r.EventTag || '').trim()));
-  const [archiveRaw, bondsRaw] = anyDeath ? [await sheets.getRawSheetData('Citizen_Archive'), await sheets.getRawSheetData('Relationship_Bond_Ledger')] : [[], []];
-  if (anyDeath && ![archiveRaw, bondsRaw].every(Array.isArray)) { console.error('dumpBeatTabs: ABORT — a death in the window but Citizen_Archive / Relationship_Bond_Ledger did not read.'); process.exit(1); }
+  const archiveRaw = anyDeath ? requireCols('Citizen_Archive', await sheets.getRawSheetData('Citizen_Archive'), ['POPID', 'First', 'Last', 'HouseholdId', 'SpouseId'], true) : [];
+  const bondsRaw = anyDeath ? requireCols('Relationship_Bond_Ledger', await sheets.getRawSheetData('Relationship_Bond_Ledger'), ['CitizenA', 'CitizenB', 'Intensity', 'Status'], false) : [];
   const livedRows = livedEventRows({ log: logRaw, hospital: hospRaw, ledger: ledgerRaw, archive: archiveRaw, bonds: bondsRaw }, stamp);
-  const DERIVED = { LifeHistory_Log: lifeRows, Lived_Events: livedRows };
 
-  // Every line serialized before the rotation; files land in a staging dir and move into place, meta last.
   const files = {};
   for (const tab of ALL_TABS) files[tab] = data[tab].map(r => JSON.stringify(r));
-  for (const k of Object.keys(DERIVED)) files[k] = DERIVED[k].map(r => JSON.stringify(r));
-  const STAGE = path.join(OUT_DIR, '.staging');
-  fs.mkdirSync(STAGE, { recursive: true });
-  for (const k of Object.keys(files)) fs.writeFileSync(path.join(STAGE, k + '.jsonl'), files[k].length ? files[k].join('\n') + '\n' : '');
-
-  const rotated = rotatePrev(priorMeta, stamp);
-
-  const counts = {};
-  for (const k of Object.keys(files)) {
-    fs.renameSync(path.join(STAGE, k + '.jsonl'), path.join(OUT_DIR, k + '.jsonl'));
-    counts[k] = files[k].length;   // LifeHistory_Log = the window rows written, not the tab's full count
-  }
+  files.LifeHistory_Log = lifeRows.map(r => JSON.stringify(r));
+  files.Lived_Events = livedRows.map(r => JSON.stringify(r));
+  const counts = Object.fromEntries(Object.keys(files).map(k => [k, files[k].length])); // LifeHistory_Log = the window rows written
+  const advancing = priorCycle != null && stamp > priorCycle;
   const meta = {
     source: 'beat tabs (' + ALL_TABS.length + ') + LifeHistory_Log window (Cycle ' + (stamp - LIVED_WINDOW) + '–' + stamp + ') + Lived_Events (derived)',
-    cycle: Number.isFinite(stamp) ? stamp : null,
-    prevCycle: rotated ? Number(priorMeta.cycle) : (fs.existsSync(path.join(PREV_DIR, 'meta.json')) ? Number((readMeta(path.join(PREV_DIR, 'meta.json')) || {}).cycle) : null),
+    cycle: stamp,
+    prevCycle: advancing ? priorCycle : (readMeta(path.join(PREV_DIR, 'meta.json')) || {}).cycle ?? null,
     rows: counts,
     generatedAt: new Date().toISOString(),
     generatedBy: 'scripts/dumpBeatTabs.js',
-    note: 'pipeline.68 Task 1 — beat-tab dump for the slice builders. Stable filenames, overwritten each cycle; prior cycle kept in prev/.',
+    note: 'pipeline.68 Task 1 — beat-tab dump for the slice builders. Stable filenames, overwritten each cycle; prior cycle kept in prev/. Published as one generation (directory swap).',
   };
-  fs.writeFileSync(META, JSON.stringify(meta, null, 2) + '\n');
+  publishGeneration(OUT_DIR, files, meta, advancing);
 
-  log(`dumpBeatTabs: wrote ${ALL_TABS.length} tabs → ${path.relative(ROOT, OUT_DIR)}/` + (rotated ? ` (prior cycle ${priorMeta.cycle} kept in prev/)` : ''));
+  log(`dumpBeatTabs: wrote ${ALL_TABS.length} tabs + 2 derived → ${path.relative(ROOT, OUT_DIR)}/` + (advancing ? ` (prior cycle ${priorCycle} kept in prev/)` : ''));
   if (!quiet) console.log(JSON.stringify({ ok: true, cycle: meta.cycle, prevCycle: meta.prevCycle, rows: counts }));
 }
 

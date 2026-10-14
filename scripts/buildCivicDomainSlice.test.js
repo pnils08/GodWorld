@@ -234,7 +234,7 @@ try {
   stale.packets['luis-navarro'].prewrite = { anchorFacts: ['STALE TEST-ONLY FACT'] };
   fs.writeFileSync(paths.json, JSON.stringify(stale, null, 2));
   const rebuilt = civic.loadCivicDomainSlice(103, root);
-  assert.strictEqual(rebuilt.version, 'CIVIC-DOMAIN-SLICE-6');
+  assert.strictEqual(rebuilt.version, 'CIVIC-DOMAIN-SLICE-7');
   assert.strictEqual(rebuilt.packets['luis-navarro'].prewrite.schema, 'INVESTIGATION-BRIEF-1');
   assert.notDeepStrictEqual(rebuilt.packets['luis-navarro'].prewrite.anchorFacts, ['STALE TEST-ONLY FACT']);
 

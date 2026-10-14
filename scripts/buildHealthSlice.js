@@ -25,7 +25,7 @@ const { loadHealthEntries } = require('./buildCivicDomainSlice');
 const SEAT = {
   slug: 'lila-mezran', name: 'Dr. Lila Mezran', popid: 'POP-00154', desk: 'civic',
   kind: 'beat-health', domain: 'health', artifact: 'health', builder: 'buildHealthSlice.js',
-  version: 'HEALTH-SLICE-4', nameRe: /lila\s*mezran/i,
+  version: 'HEALTH-SLICE-5', nameRe: /lila\s*mezran/i,
   tabs: ['Neighborhood_Demographics', 'Hospital_Ledger', 'Health_Cause_Queue', 'Story_Hook_Deck', 'Care_Justice_Census'],
   approach: 'Health approach: this slice is the illness count by neighborhood, every resident named on the hospital and live cause records, the residents the cycle summary names under Health/Recovering, and the care trail — sick residents to admissions to who is in a bed, hood by hood, tracked and other residents apart. A person listed as living in a neighborhood where illness is up is a neighbour to quote about the block, not a patient — nothing on the record says they are sick. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward.',
   roomIsYours: 'the waiting room, the walk to the clinic, what a household does when one person is sick, who covers the shift',

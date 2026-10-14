@@ -56,9 +56,11 @@ const BEAT_BUILDERS = {
   'selena-grant': 'buildOaksBeatSlice',
   'talia-finch': 'buildOaksGroundSlice',
   'celeste-tran': 'buildTrendsSlice',
-  'elliot-marbury': 'buildMarburySlice'
+  'elliot-marbury': 'buildMarburySlice',
+  'tamsin-pruitt': 'buildLivesSlice',   // pipeline.73 Lives — daily, Mon–Fri grid
+  'ines-sorensen': 'buildVoicesSlice'   // pipeline.73 Voices — Wed–Fri grid + own Sat/Sun crons
 };
-const BEAT_NAME_RE = /elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran/i;
+const BEAT_NAME_RE = /elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
 function beatSlugForName(name) {
   const n = String(name || '');
   if (/elliot\s*marbury/i.test(n)) return 'elliot-marbury';
@@ -74,6 +76,8 @@ function beatSlugForName(name) {
   if (/selena\s*grant/i.test(n)) return 'selena-grant';
   if (/talia\s*finch/i.test(n)) return 'talia-finch';
   if (/celeste\s*tran/i.test(n)) return 'celeste-tran';
+  if (/tamsin\s*pruitt/i.test(n)) return 'tamsin-pruitt';
+  if (/ines\s*sorensen/i.test(n)) return 'ines-sorensen';
   return null;
 } // --no-gate ungated review samples (S332): never canon
 
@@ -868,6 +872,12 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     } else if (persona.name && /celeste\s*tran/i.test(persona.name)) {
       L.push('STANCE: social trends. Fast, reactive, grounded — a trend claim needs a window and a number from the slice.');
       L.push('ONE piece — not multi-voice culture-desk average.');
+    } else if (persona.name && /tamsin\s*pruitt/i.test(persona.name)) {
+      L.push('STANCE: lives. The person and the event first, plain; one true detail from the slice; what came next only if the record says. Each person their own passage. Never a trend, never a number first.');
+      L.push('ONE piece — the day\'s page of lives, not a roundup and not a feature on one person.');
+    } else if (persona.name && /ines\s*sorensen/i.test(persona.name)) {
+      L.push('STANCE: voices. The citizen\'s own line first, verbatim, before their name; one plain clause on who they are; what in the city they were answering. Never paraphrase, never count, never explain what they meant.');
+      L.push('ONE piece — two to four people, each their own passage, the words are the product.');
     } else if (persona.name && /simon\s*leary/i.test(persona.name)) {
       L.push('STANCE: long view. Sports as civic architecture. Quiet continuity.');
       L.push('ONE piece — not multi-voice sports-desk average.');
@@ -1418,6 +1428,9 @@ async function runAngle(assign) {
   // R2 — ledger snapshot freshness before any profile resolution this wake
   // (S252/S329 pattern; desk doctrine: refresh + degrade-not-drop, never halt)
   require('./canon-name-check').ensureLedgerSnapshot(cycle);
+  // pipeline.73: a direct --persona angle (Ines's Sat/Sun runs) refreshes the page index too — the
+  // fanout does it once before its loop; without this a weekend seat reads Friday's pages.
+  if (!assign && PERSONA) await refreshCitizenPages(cycle);
   const persona = personaInfo(personaSlug);
   const asker = persona || (assign ? { name: assign.name, popid: assign.popid } : null);
   const digest = lane.slice(0, 12).map(e => '- ' + (e.label || '(no label)') + (e.hood ? ' [' + e.hood + ']' : '')).join('\n');

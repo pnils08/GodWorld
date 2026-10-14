@@ -293,6 +293,24 @@ pointers:
 4. *rb:* Ines's slice builder (pages and exchanges only), her package and grid slots (Wed–Sat), Saturday and Sunday cron entries that run her alone, voice files.
 Voice files passed by the builder 2026-10-14 ("Voices look good"); steps 3 and 4 now wait only on steps 1–2 (the lived slot, the mint at C112, the life rows in the dump).
 
+**Steps 3–4 as built (research-build, 2026-10-14) — everything that needs no POPID. Tests pass; nothing waits but the ledger.**
+
+*Landed (commit on this date, path-specific):*
+- `scripts/buildLivesSlice.js` (Tamsin, LIVES-SLICE-1) on `beatSliceKit`: reads `Lived_Events` (news-grade, heaviest first: death → hospital → birth → retirement → promotion), `LifeHistory_Log` (the small moments — Wedding/Graduation/Relationship/Household/Stabilized — bookkeeping rows out; and "what came next" only from a LATER Cycle's line), open `Hospital_Ledger` stays (no DischargeCycle), family/household/hospital hooks, the person's own self-initiated page as THE PAGES SAY. Daily batch of 4 events + 3 moments + 2 stays; a covered list at `output/cron-compare/lives_covered.json` (event id → POPID, kind, Cycle, day; two Cycles of memory) so the week moves on. One passage per person per Cycle. A death is the first survivor's passage.
+- `scripts/buildVoicesSlice.js` (Ines, VOICES-SLICE-1): reads `output/citizen_pages/index.jsonl` only — slots morning/midday/afternoon/evening/night/work/CONVO, the last 36 h, ≥ 80 chars, on the ledger snapshot, MEDIA clock or MED flag out (journalists and the masthead), athletes in. One page per citizen per day (the longest), one conversation passage a day, up to 4 people; covered list `voices_covered.json` by page docId. Never calls the beat-dump gate (empty `tabs`, own build/load), so a Sunday run is safe either side of the fire. Names Lives' covered people in the person's `why` so the two pieces meet.
+- Both: the story `ref` carries the day — `newsroom-fanout.js staleBeatRef` drops a beat seat whose ref was already filed this Cycle, right for a weekly seat and fatal for a daily one. Same-day cache (angle → report → write read one slice), a new day rebuilds.
+- `scripts/cron-desk-run.js`: `BEAT_BUILDERS`, `BEAT_NAME_RE`, `beatSlugForName`, two STANCE lines; a direct `--persona` angle run now calls `refreshCitizenPages` (the fanout did it once before its loop; without it Ines's weekend run read Friday's pages). `scripts/newsroom-fanout.js`: `BEAT_BUILDERS`.
+- `.claude/agents/tamsin-pruitt/` and `.claude/agents/ines-sorensen/` (SKILL / IDENTITY / LENS / RULES on Celeste's shape; the POPID line reads "mints at C112" until it does).
+- Tests: `scripts/buildLivesSlice.test.js`, `scripts/buildVoicesSlice.test.js` (fixtures on es's step 2 shape and a page index with every exclusion); `beatSlices`, `newsroomWakePackages`, `cronDeskFanoutHandoff` still pass. Live read against the C111 dump: Lives = Franklin home from hospital, Zhou's child, Johns retiring, Jensen promoted + 3 small moments; Voices = Varek, Cramp, one side of the Dillon conversation, 7 more waiting.
+
+*Lands on the POPIDs (es posts them after the C112 readback, Sun 2026-10-18; one rb commit, then Tamsin's first run Mon 10-19 and Ines's Wed 10-21 — or Sun 10-18 if the rows land before her Sunday angle):*
+1. `scripts/newsroom-wake-packages.json` — two entries, `desk: 'culture'`, `beatDomain: 'COMMUNITY'`, `requiredDaily: true` (Tamsin) / `true` (Ines), `sourcing: 'street'`, models as Celeste's (angle/report maverick, write grok-4.3), `packetContract: 'v2'`, versions `TAMSIN-LIVES-1` / `INES-VOICES-1`, `reviewProfile` ids `tamsin-lives-v1` / `ines-voices-v1` (canonPolicy load-bearing; texture = the plain respect / the frame around a quote; blockers = any person, event, quote, venue or employer not on the slice; a paraphrased quote; a statistic or trend open; engine language).
+2. `scripts/persona-map.json` — `tamsin-pruitt` and `ines-sorensen` with name, popid, `beatDomain: 'COMMUNITY'`, note.
+3. `scripts/newsroom-fanout.js` `WEEK_GRID` — `tamsin-pruitt` on days 1–5, `ines-sorensen` on 3–5.
+4. Crontab, Ines alone (`--desk culture --persona ines-sorensen`, never `--fanout`): Saturday angle 07:15 / report 09:15 / write 11:15 (before the 12:00 sweep and the 16:00 compile, Nia's proven shape); Sunday angle 06:15 / report 09:15 / write 12:15 (before the afternoon fire) + a Sunday `deliver-articles.js` at 12:45.
+5. `.claude/agents/*/IDENTITY.md` POPID lines; `docs/media/voices/*.md` ledger lines.
+6. Tests: `scripts/newsroomWakePackages.test.js` rota count 24 → 26 and per-desk map; `cronDeskFanoutHandoff.test.js` per-seat routes if it pins the culture seats.
+
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
 **Rows:** pipeline.73 · **Owner:** research-build with engine-sheet
@@ -521,6 +539,8 @@ Each entry: **Beat** (the seat's standing purpose from its wake package) · **Sl
 - Why did the A's championship run go uncovered? The builder raised it ("The As are in a championship run and no one covers that?").
 
 ## Changelog
+
+- 2026-10-14 (research-build) — Steps 3–4 built: both slice builders, tests, agent folders, builder maps, stances, the weekend page refresh. Recorded the POPID-bound landing list for Sunday. First live runs Tamsin Mon 10-19, Ines Wed 10-21 (not 10-15: three gates need the ledger POPID).
 
 - 2026-10-14 (research-build) — Builder passed both voices. Voice files written (`docs/media/voices/tamsin_pruitt.md`, `ines_sorensen.md`), registered in `.claude/agents/REPORTER_DESK_INDEX.md`. Steps 3–4 gate is now steps 1–2 only.
 

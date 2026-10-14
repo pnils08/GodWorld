@@ -199,6 +199,30 @@ pointers:
 **Build order (Task 4), each step with a wiring card and a review before it lands:**
 1. *engine-sheet:* the lived wake slot in `scripts/citizen-wake.js` (news-grade milestone events only, modelled on the engine.180 posture slot); mint Tamsin Pruitt and Ines Sorensen through Intake (MEDIA clock; ledger rows are the sheets' side).
 2. *engine-sheet with rb:* the milestone and tracker-person rows into the slice data (`LifeHistory_Log` into the beat dump; the 2026-10-11 draft was reverted pending this review); lift `sportsSubject` at its call sites.
+
+**Step 1 wiring card (engine-sheet, 2026-10-14) — read from code and live data. No code yet; review first.**
+
+*Where the slot sits.* `scripts/citizen-wake.js:164` `selectCitizen(pool, state, cycle)`: forced → voiced (seeded 1 in 5, :174) → posture (engine.180, :186–196; `p.postureChangedCycle === cycle && !recent.has`) → seeded weighted rotation (:198). Capacity: 3 crons a day (morning 07:30, midday 12:30, night 21:30) = 21 wakes a week. The last 24 logged wakes: posture 11, voiced 4, rotation 4, forced 5.
+
+*The pool.* `lib/wakePerception.js:376` `buildPool` reads Simulation_Ledger once and drops a row when DialState is missing, dial deviation < `SHAPED_MIN` 60 (:26), LifeHistory < 25 chars, no name or hood, or Corliss. The tail is 3 salient + 2 texture lines (`SALIENT_TAG` :374). Callers: `citizen-wake.js:35`, `citizenVoice.js:49`, `citizen-exchange.js:40`, `employerSuccess.test.js:530`.
+
+*Measured (live, C108–C111, ledger LifeHistory column).* News-grade tags stamped per Cycle: C108 Birth 2, Recovering 2, Retirement 2; C109 Birth 2, Retirement 2, Promotion 1, Recovery 1, Health 2; C110 Recovering 5, Health 2; C111 Birth 2, Retirement 1, Promotion 2, Recovery 1, Health 2, LifeEvent-Promotion-Up-M 1. No `Death` tag on any active row: the dead leave for the archive. **Only 2 of C111's 10 news-grade citizens pass the pool** (POP-00168 deviation 144, POP-00280 deviation 151; the rest 3–33). A posture-style slot on the shaped pool would wake about 2 a week, not 5–7. The C111 list includes the newborn POP-01197 ("born to Geneva Zhou"); the parent POP-00892 carries "welcomed a new child".
+
+*The change, proposed.*
+1. `buildPool({ livedCycle })`, opt-in: a row that fails only the shaped floor but carries a news-grade line stamped `livedCycle` (`absCycleOf`) joins the pool with `livedOnly: true` and `livedTag`. Rows with no DialState, life under 25 chars, or no name or hood stay out. Every other caller passes nothing and gets today's pool byte-for-byte.
+2. `NEWS_GRADE = /^(Birth|Retirement|Promotion|LifeEvent-Promotion-Up-(M|L)|Hospitalized|Critical|Recovering|Recovery)$/`. Plain `Health` (sore back, flu) is out, and so is `LifeEvent-Promotion-Down-*` (hours cut). C111 under this set: 6 people once the newborn is excluded (age < 16 is out; the parent speaks for the birth). C108: 6. C110: 5.
+3. `selectCitizen`: a `lived` slot after voiced, before posture. Candidates are `livedTag` rows on the current Cycle not yet woken *for that Cycle's event*, oldest-woken first. "Not woken since" reads `state.lived[popId] === cycle`, not the 100-deep `recent` list, so a citizen woken by rotation three weeks ago still gets the wake the week their child is born. `livedOnly` rows are filtered out of posture and rotation.
+4. Log `slot=lived tag=<tag>`. The prompt already carries the line (salient tail); no prompt change.
+5. Tests: `lib/wakePerception.test.js` (opt-in pool), a selection test for slot order and once-per-event, and the existing wake tests unchanged.
+
+*Budget.* About 6 lived + up to 7 posture + about 4 voiced fits in 21 and leaves rotation 4 or more. Lived runs before posture, so in a heavy posture week (C111 had 7) posture drains later in the week.
+
+*Mint (part b) — the path as written doesn't exist.* `processIntake_` (`phase01-config/godWorldEngine2.js:1492`): a lone name on `Intake` goes to `Generic_Citizens` and earns a ledger row at EmergenceCount 3 (engine.58). The Intake schema has no ClockMode column. A complete household mints directly (engine.109, Family + Relation). Neither path writes `ClockMode=MEDIA`. Names checked: no First or Last match on the ledger, and `canon-name-check` returns both as unverified (not in use).
+
+*Calls this card can't make (sim judgement, builder through rb):*
+- **(i) The shaped floor.** Lived wakes bring in citizens the floor kept out as too unshaped to have a distinct voice (deviation 3–33). Accept flatter voices for news-grade events, or keep the floor and live with about 2 a week?
+- **(ii) Death.** No living row carries it. Is a death the survivor's wake (household or bond), or out of this slot?
+- **(iii) Mint.** Which path puts Tamsin and Ines on the ledger with the MEDIA clock: Intake plus a deliberate ClockMode cell, a one-person household intake plus the cell, or a minted-journalist path that doesn't exist yet?
 3. *rb:* Tamsin's slice builder, wake package, grid slots (Mon–Fri), persona-map entry, builder-map entries in both files, voice files, covered list, test updates.
 4. *rb:* Ines's slice builder (pages and exchanges only), her package and grid slots (Wed–Sat), Saturday and Sunday cron entries that run her alone, voice files.
 Steps 3 and 4 wait on the builder reading the voice files; step 1 on engine-sheet being free of the engine.214 pair.

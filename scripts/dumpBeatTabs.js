@@ -34,6 +34,7 @@ require('/root/GodWorld/lib/env');  // GODWORLD_SHEET_ID + GOOGLE_APPLICATION_CR
 const fs = require('fs');
 const path = require('path');
 const sheets = require('../lib/sheets');
+const { livedEventsFrom, LIVED_WINDOW } = require('../lib/wakePerception'); // pipeline.73 step 2 — the wake's own event set
 
 const ROOT = path.resolve(__dirname, '..');
 const OUT_DIR = path.join(ROOT, 'output', 'beats');
@@ -85,6 +86,40 @@ const quiet = args.includes('--quiet');
 const cycleArg = args.find(a => !a.startsWith('--')) || null;
 function log(...m) { if (!quiet) console.error(...m); }
 
+// pipeline.73 step 2 — two derived files beside the tabs (not tabs: never listed in ALL_TABS).
+// LifeHistory_Log.jsonl = the raw tab's rows for the stamped Cycle and the one before, header keys verbatim.
+// Lived_Events.jsonl     = the lived wake's news-grade events for that window, names joined from the
+//                          same Simulation_Ledger read (the archive for the deceased).
+const hdrOf = (rows) => (rows && rows[0]) || [];
+function toObjects(rows) { const h = hdrOf(rows); return (rows || []).slice(1).map(r => Object.fromEntries(h.map((k, i) => [k, r[i] === undefined ? '' : r[i]]))); }
+function lifeWindowRows(logRaw, stamp) {
+  const h = hdrOf(logRaw), iC = h.indexOf('Cycle');
+  if (iC < 0) throw new Error('LifeHistory_Log has no Cycle column');
+  const lo = stamp - LIVED_WINDOW;
+  return toObjects([h].concat((logRaw || []).slice(1).filter(r => { const c = Number(r[iC]); return c >= lo && c <= stamp; })));
+}
+function livedEventRows(src, stamp) {
+  const people = new Map();
+  for (const rows of [src.archive || [], src.ledger || []]) {   // ledger second: a living row wins over an archived one
+    const h = hdrOf(rows), f = (n) => h.indexOf(n);
+    const iP = f('POPID'), iF = f('First'), iL = f('Last'), iN = f('Neighborhood'), iR = f('RoleType');
+    for (const r of rows.slice(1)) {
+      const pop = String(r[iP] || '').toUpperCase(); if (!pop) continue;
+      people.set(pop, { name: [r[iF], r[iL]].filter(Boolean).join(' ').trim(), hood: iN >= 0 ? String(r[iN] || '') : '', role: iR >= 0 ? String(r[iR] || '') : '' });
+    }
+  }
+  return livedEventsFrom(src, stamp).map(ev => {
+    const s = people.get(ev.subject) || {};
+    const out = { id: ev.id, kind: ev.kind, cycle: ev.cycle, subject: ev.subject, subjectName: s.name || ev.deceasedName || '', neighborhood: s.hood || '', roleType: s.role || '' };
+    if (ev.phase) out.phase = ev.phase;
+    if (ev.cause) out.cause = ev.cause;
+    if (ev.deceasedName) out.deceasedName = ev.deceasedName;
+    out.recipients = (ev.recipients || []).map(r => ({ pop: r.pop, rel: r.rel, name: (people.get(r.pop) || {}).name || '' }));
+    return out;
+  });
+}
+module.exports = { lifeWindowRows, livedEventRows, toObjects };
+
 function readMeta(p) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; } }
 
 function rotatePrev(priorMeta, stamp) {
@@ -94,7 +129,7 @@ function rotatePrev(priorMeta, stamp) {
   fs.rmSync(PREV_DIR, { recursive: true, force: true });
   fs.mkdirSync(PREV_DIR, { recursive: true });
   for (const f of fs.readdirSync(OUT_DIR)) {
-    if (f === 'prev') continue;
+    if (f === 'prev' || f === '.staging') continue;
     fs.renameSync(path.join(OUT_DIR, f), path.join(PREV_DIR, f));
   }
   return true;
@@ -139,16 +174,39 @@ async function main() {
   }
   if (!Number.isFinite(wanted) && Number.isFinite(priorCycle)) stamp = priorCycle;
 
+  // pipeline.73 step 2 — the derived files are built from the EFFECTIVE stamp (a backward request keeps
+  // the higher meta Cycle), before anything rotates or writes; a failed read aborts here.
+  if (!Number.isInteger(stamp)) {
+    console.error('dumpBeatTabs: ABORT — no integer Cycle stamp for the LifeHistory_Log window / Lived_Events (pass the fired Cycle).');
+    process.exit(1);
+  }
+  log('dumpBeatTabs: reading LifeHistory_Log, Hospital_Ledger, Simulation_Ledger for the lived window…');
+  const [logRaw, hospRaw, ledgerRaw] = [await sheets.getRawSheetData('LifeHistory_Log'), await sheets.getRawSheetData('Hospital_Ledger'), await sheets.getRawSheetData('Simulation_Ledger')];
+  if (![logRaw, hospRaw, ledgerRaw].every(Array.isArray)) { console.error('dumpBeatTabs: ABORT — a lived-window tab did not return rows.'); process.exit(1); }
+  const lifeRows = lifeWindowRows(logRaw, stamp);
+  const anyDeath = lifeRows.some(r => /^Death$/i.test(String(r.EventTag || '').trim()));
+  const [archiveRaw, bondsRaw] = anyDeath ? [await sheets.getRawSheetData('Citizen_Archive'), await sheets.getRawSheetData('Relationship_Bond_Ledger')] : [[], []];
+  if (anyDeath && ![archiveRaw, bondsRaw].every(Array.isArray)) { console.error('dumpBeatTabs: ABORT — a death in the window but Citizen_Archive / Relationship_Bond_Ledger did not read.'); process.exit(1); }
+  const livedRows = livedEventRows({ log: logRaw, hospital: hospRaw, ledger: ledgerRaw, archive: archiveRaw, bonds: bondsRaw }, stamp);
+  const DERIVED = { LifeHistory_Log: lifeRows, Lived_Events: livedRows };
+
+  // Every line serialized before the rotation; files land in a staging dir and move into place, meta last.
+  const files = {};
+  for (const tab of ALL_TABS) files[tab] = data[tab].map(r => JSON.stringify(r));
+  for (const k of Object.keys(DERIVED)) files[k] = DERIVED[k].map(r => JSON.stringify(r));
+  const STAGE = path.join(OUT_DIR, '.staging');
+  fs.mkdirSync(STAGE, { recursive: true });
+  for (const k of Object.keys(files)) fs.writeFileSync(path.join(STAGE, k + '.jsonl'), files[k].length ? files[k].join('\n') + '\n' : '');
+
   const rotated = rotatePrev(priorMeta, stamp);
 
   const counts = {};
-  for (const tab of ALL_TABS) {
-    const lines = data[tab].map(r => JSON.stringify(r));
-    fs.writeFileSync(path.join(OUT_DIR, tab + '.jsonl'), lines.length ? lines.join('\n') + '\n' : '');
-    counts[tab] = data[tab].length;
+  for (const k of Object.keys(files)) {
+    fs.renameSync(path.join(STAGE, k + '.jsonl'), path.join(OUT_DIR, k + '.jsonl'));
+    counts[k] = files[k].length;   // LifeHistory_Log = the window rows written, not the tab's full count
   }
   const meta = {
-    source: 'beat tabs (' + ALL_TABS.length + ')',
+    source: 'beat tabs (' + ALL_TABS.length + ') + LifeHistory_Log window (Cycle ' + (stamp - LIVED_WINDOW) + '–' + stamp + ') + Lived_Events (derived)',
     cycle: Number.isFinite(stamp) ? stamp : null,
     prevCycle: rotated ? Number(priorMeta.cycle) : (fs.existsSync(path.join(PREV_DIR, 'meta.json')) ? Number((readMeta(path.join(PREV_DIR, 'meta.json')) || {}).cycle) : null),
     rows: counts,
@@ -162,4 +220,4 @@ async function main() {
   if (!quiet) console.log(JSON.stringify({ ok: true, cycle: meta.cycle, prevCycle: meta.prevCycle, rows: counts }));
 }
 
-main().catch(err => { console.error('dumpBeatTabs: FAILED —', err.message); process.exit(1); });
+if (require.main === module) main().catch(err => { console.error('dumpBeatTabs: FAILED —', err.message); process.exit(1); });

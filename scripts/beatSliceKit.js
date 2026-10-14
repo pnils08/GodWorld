@@ -433,7 +433,7 @@ const HOSPITAL_OPEN_STATES = /^(hospitalized|critical|serious-condition|injured|
 /**
  * Judicial_Ledger cases that moved this cycle or still hold someone, joined to the
  * fine the court took (City_Treasury COURT-NAMED, by case ID). A GAME-clock
- * citizen's case is counted, never named. Returns { cases, sportsCases }.
+ * citizen's case is named like anyone's (pipeline.73 (builder 2026-10-13): "Citizens are citizens" — an athlete on the record is on every beat; sports keeps the availability/team-effect angle.). Returns { cases }.
  */
 function courtCases(judicialRows, treasuryRows, cycle, profiles, src) {
   const fines = new Map();
@@ -443,7 +443,6 @@ function courtCases(judicialRows, treasuryRows, cycle, profiles, src) {
     if (m) fines.set(m[1].replace(/,$/, ''), num(r.Amount));
   }
   const cases = [];
-  let sportsCases = 0;
   for (const c of judicialRows || []) {
     const caseId = String(c.CaseId || '').trim();
     if (!caseId) continue;
@@ -451,7 +450,6 @@ function courtCases(judicialRows, treasuryRows, cycle, profiles, src) {
     const inCustody = CUSTODY_STATES.test(String(c.StatusNow || '').trim());
     if (!touched && !inCustody) continue;
     const popid = String(c.POPID || '').toUpperCase();
-    if (sportsSubject(profiles, popid)) { sportsCases += 1; continue; }
     const name = String(c.Name || '').trim();
     if (!name) continue;
     const hood = String(c.Neighborhood || '').trim() || null;
@@ -470,7 +468,7 @@ function courtCases(judicialRows, treasuryRows, cycle, profiles, src) {
       text: bits.join(', '), src: src + ' ' + caseId });
   }
   cases.sort((a, b) => (b.arrestedThisCycle - a.arrestedThisCycle) || (b.resolvedThisCycle - a.resolvedThisCycle) || (b.inCustody - a.inCustody) || a.name.localeCompare(b.name));
-  return { cases, sportsCases };
+  return { cases };
 }
 
 /**
@@ -547,7 +545,6 @@ function custodyNamesByHood(judicialRows, profiles) {
   const m = new Map();
   for (const c of judicialRows || []) {
     if (!CUSTODY_STATES.test(String(c.StatusNow || '').trim()) || !c.Name) continue;
-    if (sportsSubject(profiles, c.POPID)) continue;
     const k = hoodKey(c.Neighborhood);
     if (!m.has(k)) m.set(k, []);
     m.get(k).push(String(c.Name).trim());
@@ -558,7 +555,6 @@ function careNamesByHood(hospitalRows, profiles) {
   const m = new Map();
   for (const r of hospitalRows || []) {
     if (!HOSPITAL_OPEN_STATES.test(String(r.StatusNow || '').trim()) || !r.Name) continue;
-    if (sportsSubject(profiles, r.POPID)) continue;
     const k = hoodKey(r.Neighborhood);
     if (!m.has(k)) m.set(k, []);
     m.get(k).push(String(r.Name).trim());
@@ -598,12 +594,12 @@ function debtPattern(profiles, hookRows, cycle, src, hood) {
     const h = String(p.Neighborhood || '').trim();
     if (want != null && hoodKey(h) !== want) continue;
     const lvl = num(p.DebtLevel);
-    if (lvl != null && lvl >= DEBT_CRISIS_LINE && !sportsSubject(profiles, p.POPID)) {
+    if (lvl != null && lvl >= DEBT_CRISIS_LINE) {
       overLine += 1;
       overLineByHood.set(h, (overLineByHood.get(h) || 0) + 1);
     }
     const ds = parseDialState(p.DialState);
-    if (ds && ds.debtDefault && Number(ds.debtDefault.l) === Number(cycle) && !sportsSubject(profiles, p.POPID)) {
+    if (ds && ds.debtDefault && Number(ds.debtDefault.l) === Number(cycle)) {
       defaults.push(person(String(p.POPID).toUpperCase(), String(p.Name || '').trim(), String(p.RoleType || '').trim() || null, h || null,
         'defaulted on the debts this cycle (Simulation_Ledger)'));
     }

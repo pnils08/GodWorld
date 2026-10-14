@@ -32,7 +32,6 @@ const SEAT = {
   build
 };
 
-const ineligible = K.sportsSubject;
 
 // The engine's own illness measure (applyStorySeeds hood health seed): Sick
 // over Students + Adults + Seniors. SPIKE_WATCH is its 6% watch bar; SPIKE_RISE
@@ -69,7 +68,7 @@ function spikeNeighbours(profiles, hood, cycle, people) {
     if (K.hoodKey(p.Neighborhood) !== want || !String(p.Name || '').trim()) continue;
     // Dead, in a bed (the ledger's own status, whatever the dump's hospital tab
     // caught) or a sports subject: never a neighbour.
-    if (/deceased|dead|hospital/i.test(String(p.Status || '')) || ineligible(profiles, popid)) continue;
+    if (/deceased|dead|hospital/i.test(String(p.Status || ''))) continue; // pipeline.73 (builder 2026-10-13): "Citizens are citizens" — an athlete on the record is on every beat; sports keeps the availability/team-effect angle.
     if (people.some(q => q.popid === popid)) continue;
     pool.push(popid);
   }
@@ -97,7 +96,7 @@ function build(cycle, { root, beats, profiles }) {
     }).join(', ') + ' — ' + K.fmtInt(total) + ' across ' + demo.length + ' neighborhoods',
     src: demoSrc
   }];
-  const ok = r => r.POPID && r.Name && !ineligible(profiles, r.POPID);
+  const ok = r => r.POPID && r.Name; // a manager in the hospital is the health headline (pipeline.73 (builder 2026-10-13): "Citizens are citizens" — an athlete on the record is on every beat; sports keeps the availability/team-effect angle.)
   const people = [];
   for (const r of (beats.Hospital_Ledger || []).filter(ok)) {
     const p = K.personFromProfile(profiles, r.POPID, 'on Hospital_Ledger this cycle', r.Neighborhood) ||

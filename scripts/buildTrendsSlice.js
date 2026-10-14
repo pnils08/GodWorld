@@ -107,14 +107,14 @@ function build(cycle, { root, beats, profiles }) {
     /^(NEIGHBORHOOD_BOOM|NEIGHBORHOOD_RISING|NEIGHBORHOOD_COOLING|CITIZEN_RELOCATED|RENT_BURDEN_CRISIS)$/).slice(0, 8);
 
   // pipeline.70 seam 3: the pages. The loudest voice on each of the top three themes becomes a
-  // person on the record (her sources), the top five themes ride as colour. Never a GAME-clock
-  // citizen (buildPulseSlice already excludes them and MEDIA seats).
+  // person on the record (her sources), the top five themes ride as colour. Athletes count like
+  // anyone (pipeline.73); MEDIA seats stay out (buildPulseSlice).
   const pulse = pulseSlice.load(cycle, root);
   const pageVoices = pulse ? pulseSlice.voiceLines(pulse, 5) : [];
   if (pulse) {
     for (const t of pulse.themes.filter(t => t.voices.length).slice(0, 3)) {
       const v = t.voices[0];
-      if (people.some(p => p.popid === v.popid) || K.sportsSubject(profiles, v.popid)) continue;
+      if (people.some(p => p.popid === v.popid)) continue;
       const p = K.personFromProfile(profiles, v.popid, 'has been saying it on their own page — ' + t.label + ', C' + v.cycle + ': “' + v.excerpt + '”', v.hood);
       if (p) people.push(p);
     }

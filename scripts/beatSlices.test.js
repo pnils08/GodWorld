@@ -247,17 +247,17 @@ try {
   ok('queue row named', h.facts.some(f => /Test Queue Patient \(Chinatown\), 67 — recovering, car accident, 2 cycles/.test(f.text)));
   ok('queue fossil (StatusStartCycle 0) never rides', !JSON.stringify(h).includes('Test Fossil Patient'));
   ok('processed queue row never rides', !JSON.stringify(h).includes('Test Processed Patient'));
-  ok('pro athlete excluded', !JSON.stringify(h).includes('Test Pro Athlete'));
+  ok('pipeline.73: the athlete on the hospital record is named — citizens are citizens', h.citizens.some(c => c.popid === 'POP-90002' && c.why === 'on Hospital_Ledger this cycle'));
   ok('no prev/ → typed state', h.prewrite.deltas.state === 'NO_PRIOR_CYCLE');
   ok('world-summary Health resident joins the slice', h.citizens.some(c => c.popid === 'POP-90004' && c.role === 'Bus Operator') &&
     h.facts.some(f => /Test Seasonal Resident dealt with a seasonal health concern/.test(f.text) && /world_summary_c103\.md/.test(f.src)));
-  ok('few-named note', /named rows are few \(3\)/.test(h.prewrite.note));
+  ok('few-named note', /named rows are few \(4\)/.test(h.prewrite.note));
   ok('only this cycle\'s hook', h.prewrite.hooks.length === 1 && h.prewrite.hooks[0].text === 'Heavy health activity this cycle.');
   ok('care trail: city line off the city scope only', h.facts.some(f => f.text === 'Citywide hospital this cycle: 6 admissions (3 tracked, 3 other residents); 8 in care at the close, 6 beds occupied' && /Care_Justice_Census.*city$/.test(f.src)));
   ok('care trail: hood line = sick → admissions → in care → beds, typed row never added to the all row', h.facts.some(f => f.text === 'Chinatown: 125 sick residents → 4 admissions (1 tracked) → 6 in care at the close (0 tracked, 6 other residents) → 5 beds occupied; tracked: none tracked'));
   // Temescal has no Neighborhood_Demographics row in this fixture → no demand clause; the trail still reads.
   ok('care trail: tracked patient named off the hospital record', h.facts.some(f => f.text === 'Temescal: 1 admission (1 tracked) → 1 in care at the close (1 tracked, 0 other residents) → 1 beds occupied; tracked: Test Clinic Patient'));
-  ok('care trail: a sports-clock patient is counted, never named', h.facts.some(f => /^Downtown: .*tracked: tracked residents not named on this beat$/.test(f.text)) && !JSON.stringify(h).includes('Test Pro Athlete'));
+  ok('care trail: the athlete in care is named on the block line', h.facts.some(f => f.text === 'Downtown: 1 admission (1 tracked) → 1 in care at the close (1 tracked, 0 other residents) → 0 beds occupied; tracked: Test Pro Athlete'));
   ok('care trail: hook line carries the citywide close', /8 in hospital care citywide, 6 beds occupied\.$/.test(h.story.hookLine));
 
   console.log('schools:');
@@ -329,12 +329,12 @@ try {
   const r = safety.buildSafetySlice(CYCLE, { root });
   ok('lead hood = most incidents', r.hood === 'Fruitvale' && /Fruitvale logged the most incidents \(9\)/.test(r.story.label));
   ok('slowest response named', r.facts.some(x => /Slowest response: Rockridge: 3 incidents, response 12.4 min, clearance 40%/.test(x.text)));
-  ok('public-safety staff by BIZ_ID join only (plus the court record\'s defendants)', r.story.citizens.includes('Test Chief (POP-90023)') && r.story.citizens.length === 3 && !r.story.citizens.some(c => /Operator|Bartender|Farmer/.test(c)));
+  ok('public-safety staff by BIZ_ID join only (plus the court record\'s defendants)', r.story.citizens.includes('Test Chief (POP-90023)') && r.story.citizens.length === 4 && r.story.citizens.includes('Test Pro Athlete (POP-90002)') && !r.story.citizens.some(c => /Operator|Bartender|Farmer/.test(c)));
   ok('"Vertical Farm Systems Engineer" never matches a safety regex', !JSON.stringify(r.citizens).includes('Farmer'));
   ok('legacy loadSafetySlice export still works', typeof safety.loadSafetySlice === 'function');
   ok('court: resolved case joined to its fine, prose carries no case ID', r.facts.some(f => f.text === 'COURT: Test Defendant (Fruitvale) — misdemeanor charge after a bar fight, released, outcome diverted this cycle, fined $1,200 by the court' && /Judicial_Ledger.*J-C101-POP-90040$/.test(f.src)));
   ok('court: arrested this cycle and held', r.facts.some(f => f.text === 'COURT: Test Held Resident (Fruitvale) — felony charge, arrested this cycle, in custody (held)'));
-  ok('court: old case never rides; sports-clock case counted not named', !JSON.stringify(r).includes('Test Old Case') && !JSON.stringify(r).includes('Test Pro Athlete') && r.facts.some(f => f.text === 'COURT: 1 further case on the record belongs to the sports desks'));
+  ok('court: old case never rides; the athlete\'s case is named like anyone\'s, no sports-desk aside', !JSON.stringify(r).includes('Test Old Case') && r.facts.some(f => f.text === 'COURT: Test Pro Athlete (Downtown) — misdemeanor charge, arrested this cycle, in custody (pending)') && !r.facts.some(f => /sports desks/.test(f.text)) && !('sportsCases' in r.court));
   ok('court: defendants are people on the record', r.citizens.some(c => c.popid === 'POP-90040' && c.role === 'Line Cook' && /court record/.test(c.why)) && r.citizens.some(c => c.popid === 'POP-90041' && /in custody/.test(c.why)));
   ok('court: COURT_FINE hook deduped against the case it names', !r.facts.some(f => /^COURT: Test Defendant — fined/.test(f.text)));
   ok('custody trail: city line', r.facts.some(f => f.text === 'Citywide custody this cycle: 4 arrests (2 tracked, 2 other residents); 5 in custody at the close; 1 left'));
@@ -343,7 +343,7 @@ try {
   ok('custody trail: incomplete scope withholds its numbers', r.facts.some(f => f.text === 'Chinatown: census incomplete this cycle — numbers withheld'));
   ok('custody trail: never the unallocated or prior-cycle rows', !JSON.stringify(r.facts).includes('99'));
   ok('safety hooks by type: COURT_FINE reaches Rachel with no journalist on the row', r.prewrite.hooks.some(hk => /Test Defendant — fined \$1200/.test(hk.text)));
-  ok('hook line carries the court and the custody close', /2 cases on the court record; 5 in custody citywide/.test(r.story.hookLine));
+  ok('hook line carries the court and the custody close', /3 cases on the court record; 5 in custody citywide/.test(r.story.hookLine));
   ok('every safety fact sourced to disk', r.facts.every(f => /^output\//.test(f.src)));
 
   console.log('culture lane (kai / sharon / maria):');
@@ -382,12 +382,12 @@ try {
   })());
   ok('maria: deltas typed', m.prewrite.deltas && (m.prewrite.deltas.state === 'NO_PRIOR_CYCLE' || m.prewrite.deltas.state === 'PRIOR_CYCLE_ON_DISK'));
   // Downtown has no Crime_Metrics row and a blank Sick in this fixture → no demand clause on either line.
-  ok('maria: the block\'s own custody line, one scope', m.facts.some(f => f.text === 'Downtown: 1 arrest (1 tracked) → 1 in custody at the close (1 tracked, 0 other residents); tracked: tracked residents not named on this beat') && !JSON.stringify(m.facts).includes('Fruitvale:'));
-  ok('maria: the block\'s own care line', m.facts.some(f => f.text === 'Downtown: 1 admission (1 tracked) → 1 in care at the close (1 tracked, 0 other residents) → 0 beds occupied; tracked: tracked residents not named on this beat'));
+  ok('maria: the block\'s own custody line, one scope', m.facts.some(f => f.text === 'Downtown: 1 arrest (1 tracked) → 1 in custody at the close (1 tracked, 0 other residents); tracked: Test Pro Athlete') && !JSON.stringify(m.facts).includes('Fruitvale:'));
+  ok('maria: the block\'s own care line', m.facts.some(f => f.text === 'Downtown: 1 admission (1 tracked) → 1 in care at the close (1 tracked, 0 other residents) → 0 beds occupied; tracked: Test Pro Athlete'));
   ok('maria: tax day for the block only', m.facts.some(f => f.text === 'Tax day in Downtown — 9 owner households paid $71,800 in property tax') && !JSON.stringify(m.facts).includes('$310.1M'));
   ok('maria: debt on the block only — no default named from another hood', m.facts.some(f => f.text === "Downtown debt this cycle: 1 household's debts crossed the line this cycle") && !JSON.stringify(m).includes('Test Civic Resident defaulted'));
-  ok('maria: the over-the-line count rides only beside a debt event (Downtown has the event, no one over the line → no count line)', !m.facts.some(f => /over the crisis line/.test(f.text)));
-  ok('maria: sports-clock citizen never a person on the slice', !m.citizens.some(c => c.popid === 'POP-90002'));
+  ok('maria: the over-the-line count rides beside a debt event — the athlete at debt 7 is on the block\'s count', m.facts.some(f => f.text === '1 tracked residents of Downtown carry debt at or over the crisis line'));
+  ok('maria: the athlete on the court record is a person on the block slice', m.citizens.some(c => c.popid === 'POP-90002' && c.why === 'in custody on the court record'));
 
   console.log('engine.254 Task 10 — empty tabs (the live shape until the first fire):');
   {
@@ -427,10 +427,10 @@ try {
     const nb = h1.citizens.filter(c => /a neighbour to quote, not a patient/.test(c.why));
     ok('spike hood → two neighbours, tagged, from the hood', nb.length === 2 && nb.every(c => c.neighborhood === 'Chinatown' && /lives in Chinatown, where illness is up this cycle/.test(c.why)));
     ok('a resident already on the record is not doubled', h1.citizens.filter(c => c.popid === 'POP-90007').length === 1 && !nb.some(c => c.popid === 'POP-90007'));
-    ok('sports subject, dead and hospitalized residents never ride as neighbours', !JSON.stringify(h1).includes('Test Chinatown Pitcher') && !JSON.stringify(h1).includes('Test Chinatown Late') && !JSON.stringify(h1).includes('Test Chinatown Bedridden'));
-    ok('pick is deterministic by POPID from a cycle-rotated start', nb.map(c => c.popid).join(',') === ['POP-90032', 'POP-90033', 'POP-90034'].slice(CYCLE % 3).concat(['POP-90032', 'POP-90033', 'POP-90034']).slice(0, 2).join(','));
+    ok('dead and hospitalized residents never ride as neighbours; a pitcher who lives there can', !JSON.stringify(h1).includes('Test Chinatown Late') && !JSON.stringify(h1).includes('Test Chinatown Bedridden') && nb.some(c => c.popid === 'POP-90035'));
+    ok('pick is deterministic by POPID from a cycle-rotated start', nb.map(c => c.popid).join(',') === ['POP-90032', 'POP-90033', 'POP-90034', 'POP-90035'].slice(CYCLE % 4).concat(['POP-90032', 'POP-90033', 'POP-90034', 'POP-90035']).slice(0, 2).join(','));
     ok('spike fact is the engine share, hood only, no names', h1.facts.some(f => f.text === 'Chinatown: 170 sick of 2,680 residents, 6.3% — at or over the 6% watch bar' && /Neighborhood_Demographics\.jsonl Sick\/Students\+Adults\+Seniors @C103$/.test(f.src)));
-    ok('record count, lead name and few-named note exclude the neighbours', /\| 3 named on the hospital and cause records$/.test(h1.story.label) && /named rows are few \(3\)/.test(h1.prewrite.note) && h1.story.hookLine.startsWith(h0.story.hookLine.replace(/\.$/, '')));
+    ok('record count, lead name and few-named note exclude the neighbours', /\| 4 named on the hospital and cause records$/.test(h1.story.label) && /named rows are few \(4\)/.test(h1.prewrite.note) && h1.story.hookLine.startsWith(h0.story.hookLine.replace(/\.$/, '')));
     ok('hook line names the block and its neighbours', /; illness is up in Chinatown — .+ and .+ can speak for the block\.$/.test(h1.story.hookLine));
     ok('typed on the slice', h1.spikeHood && h1.spikeHood.hood === 'Chinatown' && h1.spikeHood.overBar === true && h1.spikeHood.risen === false && h1.spikeHood.neighbours.length === 2);
     // Fruitvale over the bar (160 / 2,350 = 6.8%) with no tracked resident of the hood in the profiles → the fact rides, nobody is added.

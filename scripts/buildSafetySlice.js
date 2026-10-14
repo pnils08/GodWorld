@@ -70,7 +70,6 @@ function build(cycle, { root, beats, profiles }) {
         K.person(c.popid, c.name, null, c.hood, c.inCustody ? 'in custody on the court record' : 'on the court record this cycle'));
     }
   }
-  if (court.sportsCases) facts.push({ text: 'COURT: ' + court.sportsCases + ' further case' + (court.sportsCases === 1 ? '' : 's') + ' on the record belong' + (court.sportsCases === 1 ? 's' : '') + ' to the sports desks', src: courtSrc });
   const fineFacts = K.receiptHookFacts(beats.Story_Hook_Deck, cycle, /^COURT_FINE$/, 'output/beats/Story_Hook_Deck.jsonl');
   for (const f of fineFacts) if (!court.cases.some(c => f.text.startsWith(c.name))) facts.push({ text: 'COURT: ' + f.text, src: f.src });
 
@@ -99,7 +98,7 @@ function build(cycle, { root, beats, profiles }) {
     deltas: { state: prev.state, vs: prev.vs },
     hooks: K.domainHooks(beats, cycle, SEAT.name, /^(COURT_FINE|CITIZEN_ARRESTED|SAFETY)$/),
     note: pointers.length ? 'desk-signal incident rows attached as pointers (' + pointers.length + ')' : null,
-    extra: { table: rows, signalPointers: pointers, court: { state: court.cases.length || court.sportsCases ? 'ON_RECORD' : 'NO_CASES', cases: court.cases, sportsCases: court.sportsCases }, custodyTrail: trail }
+    extra: { table: rows, signalPointers: pointers, court: { state: court.cases.length ? 'ON_RECORD' : 'NO_CASES', cases: court.cases }, custodyTrail: trail }
   });
 }
 

@@ -197,6 +197,9 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     if (ptr.error) throw new Error('ensurePagePointer_: ' + ptr.error);
     const appended = await page.appendReflection_(c.popId, said.spoken, {
       cycle, daypart: 'PRESS',
+      // pipeline.77: a reporter's "graded:" line keeps its own doc — one PRESS id per Cycle let it
+      // overwrite the same Cycle's "filed:" line (C111 reruns, 2026-10-15).
+      ...(preText != null && /^graded: /.test(String(preText)) ? { key: 'graded' } : {}),
       extra: { affect: cls.affect || null, event: cls.event || null, ask: String(ask).slice(0, 120) },
     });
     if (appended.error) throw new Error('appendReflection_: ' + appended.error);

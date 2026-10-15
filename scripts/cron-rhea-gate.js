@@ -77,6 +77,9 @@ const ARTICLE_PACKET_FILE = arg('--article-packet', null);
 // separate call. Rhea's sourcing verdict is untouched (truth stays on the deterministic checks and
 // her canon review); this scores only opening, closing, purpose and length.
 const CONTRACT_SCORE = process.argv.includes('--contract-score');
+// pipeline.77: a draft the runner blocked before Rhea (contamination, assignment swap) is still
+// graded for shape — score only, to <base>.contract.json; no verdict is written or changed.
+const CONTRACT_ONLY = process.argv.includes('--contract-only');
 
 const log = {
   info: (...a) => console.log('[INFO]', new Date().toISOString(), ...a),
@@ -364,6 +367,26 @@ function parseContractScore(text, profile, words) {
   return out;
 }
 
+async function contractOnly(draftAbs) {
+  const packagesApi = require('./newsroomWakePackages');
+  const pkg = PERSONA ? packagesApi.packageForAssignment({ persona: PERSONA }) : null;
+  const profile = pkg && pkg.reviewProfile;
+  let contractScore;
+  if (BACKEND !== 'api') contractScore = { error: 'contract score runs on the api backend only' };
+  else if (!(profile && profile.articleContract)) contractScore = { error: 'no seat contract in the review profile' };
+  else {
+    try {
+      const cp = buildContractPrompt(profile, articleProseForReview(fs.readFileSync(draftAbs, 'utf8')));
+      const cr = await callOpenRouter(API_MODEL, cp.system, cp.user);
+      contractScore = Object.assign(parseContractScore(cr.text, profile, cp.words), { model: API_MODEL, scoredWithoutRhea: true });
+    } catch (e) { contractScore = { error: 'contract score call failed: ' + e.message }; }
+  }
+  const outPath = path.join(COMPARE_DIR, path.basename(draftAbs).replace(/\.md$/, '') + '.contract.json');
+  fs.writeFileSync(outPath, JSON.stringify({ draft: path.relative(ROOT, draftAbs), contractScore, ranAt: new Date().toISOString() }, null, 2));
+  console.log('contract score (no Rhea): ' + (contractScore.error || contractScore.score + '/4 — ' + (contractScore.short || 'nothing short')));
+  process.exit(0);
+}
+
 function readAgentFile(rel) {
   try { return fs.readFileSync(path.join(ROOT, rel), 'utf8'); } catch (_) { return ''; }
 }
@@ -515,6 +538,7 @@ async function main() {
   if (!DRAFT) throw new Error('--draft <path> is required');
   const draftAbs = path.resolve(ROOT, DRAFT);
   if (!fs.existsSync(draftAbs)) throw new Error('draft not found: ' + draftAbs);
+  if (CONTRACT_ONLY) return contractOnly(draftAbs);
 
   // Cycle from the DRAFT filename first (e.g. sports_c101_...) — the draft's own
   // cycle, NOT the newest cycle (the sim may have advanced since the draft ran).

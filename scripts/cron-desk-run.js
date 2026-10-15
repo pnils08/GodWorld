@@ -2984,6 +2984,7 @@ async function runWrite(assign) {
   // Slot findings (missing '?', assignment-token overlap, phase words in a
   // lede) are observations for the log, never a reason a draft goes unseen.
   let rhea = null, pass = false, rheaProof = null;
+  let blockedContractScore = null; // pipeline.77
   const assignmentSwap = PACKET_ACTIVE &&
     s344Gate.findings.some(row => row.issue === 'assignment-intake-mismatch');
   if (assignmentSwap) log('assignment swap — INTAKE does not belong to this story; Rhea skipped');
@@ -3013,6 +3014,15 @@ async function runWrite(assign) {
       writerTools && writePacket && writePacket.manifest ? writePacket.manifest.id : null);
     pass = rheaProof.ok;
     if (rhea && rhea.pass === true && !pass) log('Rhea pass rejected: ' + rheaProof.reason);
+  } else if (rewardLoop) {
+    // pipeline.77: blocked before Rhea, still graded for shape (C111 Carmen: contamination flag, no grade).
+    try {
+      execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
+        '--contract-only', '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle,
+        ...(personaSlug ? ['--persona', personaSlug] : [])], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
+      const co = readJson(path.join(COMPARE, base + '.contract.json'));
+      if (co && co.contractScore) blockedContractScore = co.contractScore;
+    } catch (e) { log('contract score (no Rhea) failed (non-fatal): ' + e.message); }
   }
   if (pass && checkFlags.length) { pass = false; log('Rhea pass overridden by deterministic checks: ' + checkFlags.join('; ')); }
 
@@ -3127,7 +3137,7 @@ async function runWrite(assign) {
 
   // pipeline.77 — the grade rides the reporter's own page into the next W1, pass or flag alike
   // (a flagged piece's shape is still feedback). Same --record-text path as "filed:".
-  const contractScore = rewardLoop && rhea && rhea.contractScore || null;
+  const contractScore = rewardLoop && (rhea && rhea.contractScore || blockedContractScore) || null;
   let gradeRecord = null;
   if (rewardLoop && byline && contractScore && Number.isInteger(contractScore.score)) {
     const gradeLine = gradedLine(contractScore);

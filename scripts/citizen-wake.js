@@ -261,7 +261,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   const prov = selectProvocation(c.popId, cycle, WAKE, {
     citizen: { name: c.name, occ: c.occ, nh: c.nh, age: c.age, disp: disp },
     neighbors: neighbors, sportsLine: sportsLine, lifeArc: lifeArc,
-    textureLine: textureLine, bondsLine: bondsLine, traj: traj,
+    textureLine: textureLine, bondsLine: bondsLine, traj: traj, livedLine: livedLine,
   });
   const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nIn 4-5 sentences, think on the page the way you actually would — private, honest, first person. Don't narrate events like a story; just sit with it.`;
   return { system, user, disp, prov };

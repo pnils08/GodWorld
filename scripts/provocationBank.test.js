@@ -81,5 +81,20 @@ console.log('═══ T5e — signal-gating: sparse citizen never latches an ab
   assert('T5e sparse citizen only gets always-available types (never a missing-signal latch)', ok, detail.slice(0, 3).join(' '));
 }
 
+console.log('═══ T5f — pipeline.73: a lived wake latches its event, never the bank');
+{
+  const lived = Object.assign(richSignals('Maurice Franklin', 'drone fleet coordinator', 'Rockridge'), { livedLine: 'This week you came home from the hospital' });
+  let ok = true, detail = [];
+  for (let cy = 100; cy < 120; cy++) {
+    for (const dp of ['morning', 'midday', 'night']) {
+      const p = selectProvocation('POP-00801', cy, dp, lived);
+      if (p.id !== 'lived_event' || p.text.indexOf('This week you came home from the hospital. ') !== 0) { ok = false; detail.push(dp + '/' + cy + ':' + p.id); }
+    }
+  }
+  assert('T5f lived line drives every pick', ok, detail.slice(0, 3).join(' '));
+  const plain = selectProvocation('POP-00801', 111, 'midday', richSignals('Maurice Franklin', 'drone fleet coordinator', 'Rockridge'));
+  assert('T5f no lived line -> bank pick unchanged', plain.id !== 'lived_event', plain.id);
+}
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

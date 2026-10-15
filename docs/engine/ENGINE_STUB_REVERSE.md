@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-10-11 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-10-15 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1685 · **S.* fields:** 374 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1686 · **S.* fields:** 374 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -181,7 +181,7 @@
 | `S.famousSightings` | `phase07-evening-media/buildEveningFamous.js::buildEveningFamous_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_` | 2 | 2 |
 | `S.famousSightingsContext` | `phase07-evening-media/buildEveningFamous.js::buildEveningFamous_` | _(none)_ | 1 | 0 |
 | `S.folkMemory` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | _(none)_ | 1 | 0 |
-| `S.franchiseWeight` | `phase01-config/loadPreviousEvening.js::seedCarriedFranchiseWeight_` | `phase01-config/loadPreviousEvening.js::seedCarriedFranchiseWeight_`, `phase02-world-state/applySportsSeason.js::applySportsSeason_`, `phase09-digest/finalizeCycleState.js::savePreviousCycleState_` | 1 | 3 |
+| `S.franchiseWeight` | `phase01-config/loadPreviousEvening.js::seedCarriedFranchiseWeight_` | `phase01-config/loadPreviousEvening.js::seedCarriedFranchiseWeight_`, `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase02-world-state/applySportsSeason.js::applySportsSeason_`, `phase09-digest/finalizeCycleState.js::savePreviousCycleState_` | 1 | 4 |
 | `S.franchiseWeightCarry` | `phase01-config/loadPreviousEvening.js::seedCarriedFranchiseWeight_` | `utilities/sportsWeekRecord.js::driftFranchiseWeight_` | 1 | 1 |
 | `S.frequentCitizens` | _(none)_ | `utilities/exportCycleArtifacts.js::buildContinuityHints_` | 0 | 1 |
 | `S.gameModeMicroEventDetails` | `phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_` | _(none)_ | 1 | 0 |

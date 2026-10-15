@@ -292,5 +292,18 @@ function run(S, opts) {
   eq(c.map(r => r.neighborhood).sort().join(','), 'Baylight District,Jack London', 'each at its own primary venue');
 }
 
+// engine.290 move 1 — a row writes only the columns its kind computes
+{
+  run({});
+  const rows = appends.filter(a => a.tab === 'Transit_Metrics').reduce((x, a) => x.concat(a.rows), []);
+  const st = rows.filter(r => r[2] !== ''), co = rows.filter(r => r[2] === '');
+  eq(st.length, 8, '8 station rows written');
+  eq(co.length, 10, '10 corridor rows written');
+  ok(st.every(r => r[5] === ''), 'every station row: TrafficIndex blank');
+  ok(st.every(r => typeof r[3] === 'number' && typeof r[4] === 'number'), 'every station row: ridership + on-time are numbers');
+  ok(co.every(r => r[3] === '' && r[4] === ''), 'every corridor row: ridership + on-time blank');
+  ok(co.every(r => typeof r[5] === 'number' && r[6] !== ''), 'every corridor row: TrafficIndex a number + corridor named');
+}
+
 console.log('transitCauses: ' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

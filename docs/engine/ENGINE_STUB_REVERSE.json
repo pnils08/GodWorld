@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-11",
+  "generated": "2026-10-15",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1685,
+  "functionsMapped": 1686,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1844,6 +1844,7 @@
       ],
       "readers": [
         "phase01-config/loadPreviousEvening.js::seedCarriedFranchiseWeight_",
+        "phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_",
         "phase02-world-state/applySportsSeason.js::applySportsSeason_",
         "phase09-digest/finalizeCycleState.js::savePreviousCycleState_"
       ]

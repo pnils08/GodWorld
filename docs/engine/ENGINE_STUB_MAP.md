@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-11 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-15 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -464,7 +464,7 @@
 - **buildActiveSportsFromOverride_(oaklandState)**
 
 - **applySportsFeedTriggers_(ctx)**
-  Reads: S.cycle, S.cycleId, S.sentiment, S.sportsAftermath, S.sportsSentimentBoost, S.sportsWeek
+  Reads: S.cycle, S.cycleId, S.franchiseWeight, S.sentiment, S.sportsAftermath, S.sportsSentimentBoost, S.sportsWeek
   Writes: S.sportsAftermath, S.sportsEventTriggers, S.sportsSentimentBoost
   Sheets: Oakland_Sports_Feed
 
@@ -472,7 +472,7 @@
 
 - **reduceFeedTeamState_(data, cols, uptoCycle, feedTz)**
 
-- **feedTeamShare_(state)**
+- **feedTeamShare_(state, wk)**
 
 - **parseWinPercentage_(record)**
 
@@ -4296,6 +4296,8 @@
 
 - **getTransitSummary_(ss, cycle)**
 
+- **transitMetricsRow_(timestamp, cycle, m)**
+
 - **recordTransitMetrics_(ctx, metrics)**
   Reads: S.absoluteCycle
   Sheets: Transit_Metrics
@@ -4688,4 +4690,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1685
+**Functions mapped:** 1686

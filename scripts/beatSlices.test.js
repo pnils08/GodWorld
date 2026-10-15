@@ -35,16 +35,16 @@ function writeDump(dir, cycle) {
   fs.mkdirSync(dir, { recursive: true });
   const tabs = {
     Transit_Metrics: [
-      { Cycle: String(cycle - 1), Station: 'Test Central', RidershipVolume: '1000', OnTimePerformance: '0.80', TrafficIndex: '50', Corridor: '', Notes: 'light' },
-      { Cycle: String(cycle - 1), Station: 'Test North', RidershipVolume: '500', OnTimePerformance: '0.90', TrafficIndex: '40', Corridor: '', Notes: '' },
-      { Cycle: String(cycle), Station: 'Test Central', RidershipVolume: '1600', OnTimePerformance: '0.75', TrafficIndex: '55', Corridor: 'Test Corridor', Notes: 'above-average ridership' },
-      { Cycle: String(cycle), Station: 'Test North', RidershipVolume: '450', OnTimePerformance: '0.92', TrafficIndex: '40', Corridor: '', Notes: '', Factors: 'game day: Test Park; storm front' },
+      { Cycle: String(cycle - 1), Station: 'Test Central', RidershipVolume: '1000', OnTimePerformance: '0.80', TrafficIndex: '', Corridor: '', Notes: 'light' },
+      { Cycle: String(cycle - 1), Station: 'Test North', RidershipVolume: '500', OnTimePerformance: '0.90', TrafficIndex: '', Corridor: '', Notes: '' },
+      { Cycle: String(cycle), Station: 'Test Central', RidershipVolume: '1600', OnTimePerformance: '0.75', TrafficIndex: '', Corridor: 'Test Corridor', Notes: 'above-average ridership' },
+      { Cycle: String(cycle), Station: 'Test North', RidershipVolume: '450', OnTimePerformance: '0.92', TrafficIndex: '', Corridor: '', Notes: '', Factors: 'game day: Test Park; storm front' },
       // Corridor rows carry no Station — they used to collide under '' in the
       // prev-cycle lookup; these two must produce DISTINCT deltas.
-      { Cycle: String(cycle - 1), Station: '', RidershipVolume: '0', OnTimePerformance: '0.85', TrafficIndex: '50', Corridor: 'Test Freeway', Notes: 'moderate delays' },
-      { Cycle: String(cycle - 1), Station: '', RidershipVolume: '0', OnTimePerformance: '0.85', TrafficIndex: '40', Corridor: 'Test Avenue', Notes: 'light traffic' },
-      { Cycle: String(cycle), Station: '', RidershipVolume: '0', OnTimePerformance: '0.85', TrafficIndex: '65', Corridor: 'Test Freeway', Notes: 'heavy congestion; weather-related slowdowns' },
-      { Cycle: String(cycle), Station: '', RidershipVolume: '0', OnTimePerformance: '0.85', TrafficIndex: '38', Corridor: 'Test Avenue', Notes: 'light traffic' }
+      { Cycle: String(cycle - 1), Station: '', RidershipVolume: '', OnTimePerformance: '', TrafficIndex: '50', Corridor: 'Test Freeway', Notes: 'moderate delays' },
+      { Cycle: String(cycle - 1), Station: '', RidershipVolume: '', OnTimePerformance: '', TrafficIndex: '40', Corridor: 'Test Avenue', Notes: 'light traffic' },
+      { Cycle: String(cycle), Station: '', RidershipVolume: '', OnTimePerformance: '', TrafficIndex: '65', Corridor: 'Test Freeway', Notes: 'heavy congestion; weather-related slowdowns' },
+      { Cycle: String(cycle), Station: '', RidershipVolume: '', OnTimePerformance: '', TrafficIndex: '38', Corridor: 'Test Avenue', Notes: 'light traffic' }
     ],
     Crime_Metrics: [
       { Neighborhood: 'Fruitvale', PropertyCrimeIndex: '40', ViolentCrimeIndex: '30', ResponseTimeAvg: '8.1', ClearanceRate: '0.2', IncidentCount: '9', LastUpdated: String(cycle) },

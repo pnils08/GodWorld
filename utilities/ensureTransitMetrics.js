@@ -409,6 +409,30 @@ function getTransitSummary_(ss, cycle) {
 // ============================================================================
 
 /**
+ * engine.290 move 1 — one row, only the columns its kind computes. A station
+ * row carries ridership + on-time and a blank TrafficIndex; a corridor row
+ * carries TrafficIndex and blank ridership / on-time. The kind is decided by
+ * `station !== ''`, never by truthiness: the old `|| 0.85` / `|| 50` turned a
+ * computed 0 into a pseudo-value on every row (272/272 station TrafficIndex 50,
+ * 340/340 corridor OnTimePerformance 0.85, C78-C111).
+ */
+function transitMetricsRow_(timestamp, cycle, m) {
+  var isStation = (m.station || '') !== '';
+  var num = function(v) { return (typeof v === 'number' && isFinite(v)) ? v : ''; };
+  return [
+    timestamp,
+    cycle,
+    m.station || '',
+    isStation ? num(m.ridershipVolume) : '',
+    isStation ? num(m.onTimePerformance) : '',
+    isStation ? '' : num(m.trafficIndex),
+    m.corridor || '',
+    m.notes || '',
+    m.factors || ''
+  ];
+}
+
+/**
  * Record transit metrics for a station/corridor.
  *
  * @param {Object} ctx - Engine context
@@ -418,17 +442,7 @@ function recordTransitMetrics_(ctx, metrics) {
   var cycle = (ctx.summary && ctx.summary.absoluteCycle) || 0;
   var timestamp = inWorldStamp_(ctx);
 
-  var rowData = [
-    timestamp,
-    cycle,
-    metrics.station || '',
-    metrics.ridershipVolume || 0,
-    metrics.onTimePerformance || 0.85,
-    metrics.trafficIndex || 50,
-    metrics.corridor || '',
-    metrics.notes || '',
-    metrics.factors || ''
-  ];
+  var rowData = transitMetricsRow_(timestamp, cycle, metrics);
 
   if (typeof queueAppendIntent_ === 'function') {
     queueAppendIntent_(ctx, TRANSIT_METRICS_SHEET_NAME, rowData,
@@ -454,18 +468,7 @@ function batchRecordTransitMetrics_(ctx, metricsArray) {
 
   var rows = [];
   for (var i = 0; i < metricsArray.length; i++) {
-    var m = metricsArray[i];
-    rows.push([
-      timestamp,
-      cycle,
-      m.station || '',
-      m.ridershipVolume || 0,
-      m.onTimePerformance || 0.85,
-      m.trafficIndex || 50,
-      m.corridor || '',
-      m.notes || '',
-      m.factors || ''
-    ]);
+    rows.push(transitMetricsRow_(timestamp, cycle, metricsArray[i]));
   }
 
   if (typeof queueBatchAppendIntent_ === 'function') {

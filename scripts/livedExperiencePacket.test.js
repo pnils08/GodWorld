@@ -348,4 +348,12 @@ for (const why of ['assignment', 'stink-handle', 'feed-names', 'on Hospital_Ledg
   assert.equal(p.isProximityCandidate({ why }), false, why + ' is story-linked');
 }
 
+// pipeline.74 codex — one complete fenced plan inside brace-bearing commentary parses; two fences stay invalid
+{
+  const plan = '{"chase":"TEST-ONLY chase","checks":[1,2]}';
+  const fence = '```json\n' + plan + '\n```';
+  assert.deepStrictEqual(p.parseJsonObject('Plan {draft}:\n' + fence + '\nnote {x}').checks, [1, 2]);
+  assert.throws(() => p.parseJsonObject(fence + '\n' + fence));
+}
+
 console.log('livedExperiencePacket.test.js: PASS');

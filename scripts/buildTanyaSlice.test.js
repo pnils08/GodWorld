@@ -129,4 +129,12 @@ function synthFixtureRoot(cycle, journalist, withDecks) {
   assert.ok(off.prewrite.anchorFacts.every(f => !/\(feed\)/.test(f) && f.length <= 500));
 }
 
+// pipeline.74 codex — a placeholder StoryAngle ("Open space …") never becomes the assignment
+{
+  const { score } = require('./buildTanyaSlice');
+  const base = { cycle: 912, eventKind: 'player-feature', notes: '', namesUsed: '', stats: '-' };
+  assert.ok(score(Object.assign({ storyAngle: 'Open space to cover the club' }, base), 912) <
+    score(Object.assign({ storyAngle: 'SYNTH the club signs a reliever' }, base), 912));
+}
+
 console.log('buildTanyaSlice tests: PASS');

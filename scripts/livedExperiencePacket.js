@@ -455,6 +455,11 @@ function parseJsonObject(text) {
   const fenced = raw.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/i);
   if (fenced) raw = fenced[1].trim();
   try { return JSON.parse(raw); } catch (_) {}
+  // pipeline.74 codex: one complete fenced object inside commentary that carries braces of its
+  // own failed the first-{..last-} span. Exactly one fence that parses is the plan; two
+  // competing fences stay invalid (they fall through to the span and fail).
+  const fences = [...raw.matchAll(/```(?:json)?\s*([\s\S]*?)\s*```/gi)];
+  if (fences.length === 1) { try { return JSON.parse(fences[0][1].trim()); } catch (_) {} }
   const start = raw.indexOf('{');
   const end = raw.lastIndexOf('}');
   if (start < 0 || end <= start) throw new Error('model returned no JSON object');

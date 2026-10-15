@@ -11,9 +11,13 @@ const TANYA_APPROACH =
   'Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. ' +
   'No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.';
 
+// A feed placeholder ("Open space to cover A's players/team", C111) is an invitation, not a story.
+const PLACEHOLDER_ANGLE = /^open space\b/i;
+
 function score(row, cycle) {
   const blob = [row.eventKind, row.storyAngle, row.notes].join(' ').toLowerCase();
   let value = row.cycle === Number(cycle) ? 30 : 0;
+  if (PLACEHOLDER_ANGLE.test(String(row.storyAngle || '').trim())) value -= 40; // pipeline.74 codex: never the assignment
   if (/clubhouse|press|manager|locker|sideline|injur|debut|return/.test(blob)) value += 20;
   if (sports.hasUsableStats(row)) value += 12;
   if (row.namesUsed) value += 8;
@@ -51,7 +55,7 @@ function publishableAnchorFacts(row, players, cycle) {
 function proseAnchorFacts(row) {
   const facts = [];
   const angle = String(row.storyAngle || '').trim();
-  if (angle && !/^open space\b/i.test(angle)) facts.push(/[.!?]$/.test(angle) ? angle : angle + '.');
+  if (angle && !PLACEHOLDER_ANGLE.test(angle)) facts.push(/[.!?]$/.test(angle) ? angle : angle + '.');
   // Whole sentences in chunks under the packet's 500-char fact clip (livedExperiencePacket
   // clean(fact, 500)); at most three chunks, so a long editorial note can't crowd the plan.
   const notes = String(row.notes || '').replace(/\s+/g, ' ').trim();
@@ -93,7 +97,7 @@ function buildTanyaSlice(cycle, opts) {
   // her. A record with no number labels from the StoryAngle.
   const hasRecord = /\d/.test(row.record || '');
   const storyLabel = [
-    (!hasRecord && row.storyAngle) ? row.storyAngle.replace(/\.\s*$/, '') :
+    (!hasRecord && row.storyAngle && !PLACEHOLDER_ANGLE.test(row.storyAngle.trim())) ? row.storyAngle.replace(/\.\s*$/, '') :
       row.team + (row.seasonType ? ' ' + row.seasonType : '') +
         (hasRecord ? ' update: ' + row.record : ' update'),
     statFacts.find(fact => !fact.startsWith('The ' + row.team)) || null,

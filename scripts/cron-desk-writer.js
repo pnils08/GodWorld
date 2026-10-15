@@ -227,6 +227,8 @@ const PACKET_ONLY = process.argv.includes('--packet-only');
 // traces what each call returned, and memory_note does not write. Scheduled runs never pass it
 // (ADR-0017 §Decision 3 holds until the builder accepts otherwise).
 const TOOLS_AB = process.argv.includes('--tools-ab');
+// --tools-forced: the first turn must call a tool (tool_choice 'required') — the "reminder" arm.
+const TOOLS_FORCED = TOOLS_AB && process.argv.includes('--tools-forced');
 
 // Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).
 // Live OpenRouter check 2026-08-10 (prompt/completion per 1M).
@@ -677,7 +679,8 @@ async function openRouterToolLoop(opts) {
     const toolsOn = calls < maxCalls;
     const j = await callOpenRouterRaw({
       model, max_tokens: opts.maxTokens || MAX_TOKENS, messages,
-      ...(toolsOn ? { tools: toolset } : {})
+      ...(toolsOn ? { tools: toolset } : {}),
+      ...(toolsOn && opts.forceFirstTool && calls === 0 ? { tool_choice: 'required' } : {})
     });
     const msg = (j.choices && j.choices[0] && j.choices[0].message) || {};
     const u = j.usage || {};
@@ -761,8 +764,8 @@ async function main() {
       '--brief-requirement-file requires --artifact-tag and --state-file'
     );
   }
-  if (TOOLS_AB && (!PACKET_ONLY || ARTIFACT_TAG !== 'tools-ab')) {
-    throw new Error('--tools-ab is the pipeline.75 test run: it requires --packet-only and --artifact-tag tools-ab');
+  if (TOOLS_AB && (!PACKET_ONLY || !/^tools-ab(-forced)?$/.test(ARTIFACT_TAG || ''))) {
+    throw new Error('--tools-ab is the pipeline.75 test run: it requires --packet-only and --artifact-tag tools-ab or tools-ab-forced');
   }
   if (STRICT_SOURCE_HYGIENE && (!ARTIFACT_TAG || !STATE_FILE)) {
     throw new Error(
@@ -1108,6 +1111,7 @@ async function main() {
     const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser,
       maxToolCalls: PACKET_ONLY && !TOOLS_AB ? 0 : 6,
       traceResults: TOOLS_AB,
+      forceFirstTool: TOOLS_FORCED,
       memCtx: BYLINE_POPID ? { popId: BYLINE_POPID, cycle }
         : (abPop ? { popId: abPop, cycle, dryNote: true } : null) });
     usageIn += r.usageIn; usageOut += r.usageOut; turns = 1 + r.trace.length;

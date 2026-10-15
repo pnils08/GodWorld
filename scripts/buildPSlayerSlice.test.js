@@ -114,6 +114,9 @@ if (!fs.existsSync(summaryPath) && !fs.existsSync(signalPath)) {
   ok('assignment desk sports', a && a.desk === 'sports');
   ok('assignment fanHeat', a && a.fanHeat === true);
   ok('assignment story has angle', a && a.story && (a.story.angle || a.story.label));
+  ok('pipeline.74 citizens carry (POP-x) when resolved, bare name otherwise',
+    (slice.story.citizens || []).every((c, i) => slice.players[i] && (slice.players[i].popid
+      ? c === slice.players[i].name + ' (' + slice.players[i].popid + ')' : c === slice.players[i].name)));
 
   const live = writePSlayerSlice(102, slice);
   ok('wrote md', fs.existsSync(live.md));

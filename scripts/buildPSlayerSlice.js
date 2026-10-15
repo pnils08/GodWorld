@@ -537,9 +537,9 @@ function buildPSlayerSlice(cycle, opts) {
     team: row.team,
     eventKind: row.eventKind,
     popids: players.map(p => p.popid).filter(Boolean),
-    citizens: players.map(p =>
-      p.name + (p.role ? ' — ' + p.role : '') + (p.neighborhood ? ', ' + p.neighborhood : '')
-    ),
+    // pipeline.74 — "Name (POP-x)" like every other slice: citizenBrief resolves on the POPID,
+    // then the bare name. The old "Name — role, hood" string missed both (C111: 0/3 profiles).
+    citizens: players.map(p => p.popid ? p.name + ' (' + p.popid + ')' : p.name),
     pulseClass: cls.primary,
     pulseScore: score,
     fanCharge,

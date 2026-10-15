@@ -59,9 +59,14 @@ function buildTanyaSlice(cycle, opts) {
   const row = top.row;
   const players = sports.resolveFeedPlayers(row, o.ledger || sports.loadLedgerNameIndex(root), 8);
   const anchorFacts = publishableAnchorFacts(row, players, cycle);
+  // pipeline.74 — an off-season row carries Record '-', so the record label read
+  // "A's off-season update: -" and the row's StoryAngle (the C111 parade) never reached
+  // her. A record with no number labels from the StoryAngle.
+  const hasRecord = /\d/.test(row.record || '');
   const storyLabel = [
-    row.team + (row.seasonType ? ' ' + row.seasonType : '') +
-      (row.record ? ' update: ' + row.record : ' update'),
+    (!hasRecord && row.storyAngle) ? row.storyAngle.replace(/\.\s*$/, '') :
+      row.team + (row.seasonType ? ' ' + row.seasonType : '') +
+        (hasRecord ? ' update: ' + row.record : ' update'),
     anchorFacts.find(fact => !fact.startsWith('The ' + row.team)) || null,
   ].filter(Boolean).join(' — ');
   const story = {

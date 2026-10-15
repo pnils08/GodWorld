@@ -99,4 +99,23 @@ function synthFixtureRoot(cycle, journalist, withDecks) {
   assert.doesNotMatch(formatTanyaSliceMarkdown(bare), /## ENGINE HOOKS/);
 }
 
+// pipeline.74 — an off-season row (Record '-') labels from its StoryAngle, never "update: -"
+{
+  const FIX_CYCLE = 911;
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'gw-tanya-offseason-'));
+  fs.mkdirSync(path.join(root, 'output'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'output', 'world_summary_c' + FIX_CYCLE + '.md'), [
+    '# World Summary C' + FIX_CYCLE + ' (SYNTHETIC TEST FIXTURE — not canon)', '', '## Sports', '',
+    '### C' + FIX_CYCLE + ' (1 entries)', '',
+    "- **A's — editorial-note (off-season):** Danny Horn",
+    '  - StoryAngle: SYNTH parade rolls through Downtown.',
+    '  - Notes: SYNTHETIC fixture row',
+    '  - Stats: -',
+    '  - Record -, Streak -, Mood electric, FanSentiment euphoric, Neighborhood Downtown', ''
+  ].join('\n'));
+  const off = buildTanyaSlice(FIX_CYCLE, { root });
+  assert.equal(off.story.label, 'SYNTH parade rolls through Downtown');
+  assert.doesNotMatch(off.story.angle, /update: -/);
+}
+
 console.log('buildTanyaSlice tests: PASS');

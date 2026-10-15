@@ -1976,7 +1976,10 @@ async function runAngle(assign) {
           '--pop=' + asker.popid, '--ask=' + ask, '--cycle=' + cycle, '--json',
           ...(PACKET_ACTIVE ? ['--evidence-bound'] : []),
           ...(angleModel ? ['--model=' + angleModel] : []),
-          '--max-tokens=' + (PACKET_ACTIVE ? '700' : '320')],
+          // pipeline.74 — 700 truncated DeepSeek v4-flash plans mid-JSON (7 of 12 calls stopped at
+          // exactly 700, 10-13/10-14; resample hit the same wall). Its whole plans ran 532–658+ where
+          // deepseek-chat ran 353–547. A cut plan is worthless; the chase is clipped to 700 chars downstream.
+          '--max-tokens=' + (PACKET_ACTIVE ? '1600' : '320')],
           { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
         const outTrim = out.trim();
         // tolerate dotenv banner lines before the JSON — line-anchored: the rotating

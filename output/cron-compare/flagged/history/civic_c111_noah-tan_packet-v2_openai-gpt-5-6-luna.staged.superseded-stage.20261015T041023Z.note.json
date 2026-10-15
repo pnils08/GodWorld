@@ -1,0 +1,6 @@
+{
+  "superseded": "civic_c111_noah-tan_packet-v2_openai-gpt-5-6-luna.staged",
+  "by": "output/cron-compare/staged/civic_c111_noah-tan_packet-v2_x-ai-grok-4-3.staged.md",
+  "why": "superseded by civic_c111_noah-tan_packet-v2_x-ai-grok-4-3.staged — builder 2026-10-14 (\"Yes supercede\"); the C111 reward-loop rerun replaces the 2026-10-14 fan-out piece so Saturday's sweep lands one piece per seat",
+  "movedAt": "20261015T041023Z"
+}

@@ -12,3 +12,10 @@ I'm standing at the corner of College and Manila, coffee in hand, watching peopl
 ## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
 
 
+## §4 THE ARTICLE (wake 3)
+- draft: output/cron-compare/staged/civic_c111_noah-tan_packet-v2_openai-gpt-5-6-luna.staged.md
+- disposition: staged
+- rhea: PASS
+- self-score footer: present
+- tool use: none
+

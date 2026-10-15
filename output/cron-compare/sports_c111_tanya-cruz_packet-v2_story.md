@@ -13,3 +13,10 @@ The clubhouse is quiet in a way it never is in October. I stand near the empty s
 ## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
 
 
+## §4 THE ARTICLE (wake 3)
+- draft: output/cron-compare/staged/sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md
+- disposition: staged
+- rhea: PASS
+- self-score footer: present
+- tool use: none
+

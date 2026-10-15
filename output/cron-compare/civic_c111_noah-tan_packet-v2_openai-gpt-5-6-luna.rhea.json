@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/civic_c111_noah-tan_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "ca71d3d0e6b96d4a3fe26dd9fb0ebfe82ba9e13a3c87191e9f2be18abd4bc1bb",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean verification: Javier Robertson winter mood event and C111 57°F mild weather accurately sourced with zero fabrications or contradictions.",
+  "review": {
+    "profileId": "noah-weather-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-219f4baf0e5e",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Javier Robertson"
+    ],
+    "unverified": [
+      "For Robertson"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0093,
+  "durationMs": 6254,
+  "parseError": false,
+  "ranAt": "2026-10-14T23:16:08.582Z"
+}

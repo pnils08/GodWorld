@@ -1,0 +1,46 @@
+{
+  "draft": "output/cron-compare/sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "bcdb5639226a6106e109145e2f3837024305a20748a845ac697f5cf7c4dd7af3",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Off-season clubhouse scene contains no fabricated quotes, contradicted metrics, or fourth-wall violations.",
+  "review": {
+    "profileId": "tanya-sideline-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "packageVersion": "TANYA-LEP2-1",
+    "manifestId": "AM-b578c52d7298",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0094,
+  "durationMs": 8372,
+  "parseError": false,
+  "ranAt": "2026-10-14T23:17:24.293Z"
+}

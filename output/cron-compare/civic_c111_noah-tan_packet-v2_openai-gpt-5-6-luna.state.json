@@ -1,0 +1,295 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00157",
+    "name": "Noah Tan",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "C111 mild, 57°F after fog — what this weather does to a day in the city",
+    "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "environment",
+      "hood": null,
+      "facts": [
+        "This cycle: mild, 57°F, impact 1, comfort 0.75, mood content",
+        "Last 3 cycles: C108 fog 46°F, C109 overcast 49°F, C110 fog 52°F",
+        "Javier Robertson — limited social activity due to winter mood"
+      ],
+      "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+      "note": null,
+      "engineHooks": [
+        "Seismic activity reported. Resident reactions and structural checks warranted. (general coverage)",
+        "Raymond Torres moved from Laurel to Lake Merritt — moving up from Laurel (desk rotation)",
+        "Wilson Shepard moved from Downtown to West Oakland — moving up from Downtown (desk rotation)",
+        "Juliet Choi at severe displacement risk in Downtown (risk: 10/10) (desk rotation)"
+      ],
+      "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-weather",
+    "hood": null,
+    "src": "output/beats/Cycle_Weather.jsonl CycleID 111",
+    "plan": {
+      "focus": "What a single mild day after a foggy stretch moves — who it pulls out, who it leaves inside, and what the city's plans look like from the street level.",
+      "closeQuestion": "Does a mild day undo a winter mood, or just pause it?"
+    },
+    "runningStories": [
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 3",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — week 3",
+      "Temescal Community Health Center — operational [Temescal] — week 3",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — week 3",
+      "Oakland Youth Apprenticeship Pipeline — operational [West Oakland, East Oakland, Fruitvale] — week 3",
+      "Downtown Economic Revitalization — legislation-filed [Downtown] — under way",
+      "Commercial Stabilization for Grand Lake — announced [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — announced [West Oakland] — under way",
+      "Downtown Economic Revitalization — announced [Downtown] — ENDED this week after 3 week(s); now legislation-filed"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00042",
+        "name": "Ramon Vega",
+        "profile": "Ramon Vega — City Council President - D1",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Noah Tan",
+        "text": "A neighbor on my block mentioned their kid had been cooped up all week and today was the first day they let them walk to the rec center alone — not confirmed, just overheard.",
+        "usable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "There's a sense around the lake that the regulars are back out today, but I haven't counted anyone yet.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C111",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-a43c5d888b36"
+    },
+    {
+      "t": "FACT",
+      "text": "C111 mild, 57°F after fog",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 111",
+      "id": "F-ead7a016297d"
+    },
+    {
+      "t": "FACT",
+      "text": "C111 mild, 57°F after fog; 1 residents on the record lived it.",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 111",
+      "id": "F-df6a4141ed29"
+    },
+    {
+      "t": "FACT",
+      "text": "This cycle: mild, 57°F, impact 1, comfort 0.75, mood content",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 111",
+      "id": "F-af15aebe7a5a"
+    },
+    {
+      "t": "FACT",
+      "text": "Last 3 cycles: C108 fog 46°F, C109 overcast 49°F, C110 fog 52°F",
+      "src": "output/beats/Cycle_Weather.jsonl",
+      "id": "F-0b994f47bb97"
+    },
+    {
+      "t": "FACT",
+      "text": "Javier Robertson — limited social activity due to winter mood",
+      "src": "output/world_summary_c111.md ## Who Lived It",
+      "id": "F-7bb4d78effc9"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Show what this season moved in GodWorld. The weather snapshot is context, never the Article. Live a Packet-backed person or place on a day like this.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person civic environment reporting from the street",
+      "targetWords": "400-700",
+      "opening": "a named person or Packet-named place living this cycle's season",
+      "closing": "what is still unfinished for them"
+    },
+    "authorizedTexture": [
+      "sensory dress of a Packet-named place already in the season-feel facts",
+      "the reporter's presence at that place",
+      "transitions that add no forecast or unsupplied measurement"
+    ],
+    "textureConditions": [
+      "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
+      "do not announce season or temperature as the lede",
+      "do not import real-world Oakland winter tropes absent from the Packet",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
+      "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
+      "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
+      "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-219f4baf0e5e",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-a43c5d888b36",
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-ead7a016297d",
+        "t": "FACT",
+        "text": "C111 mild, 57°F after fog",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 111"
+      },
+      {
+        "id": "F-df6a4141ed29",
+        "t": "FACT",
+        "text": "C111 mild, 57°F after fog; 1 residents on the record lived it.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 111"
+      },
+      {
+        "id": "F-af15aebe7a5a",
+        "t": "FACT",
+        "text": "This cycle: mild, 57°F, impact 1, comfort 0.75, mood content",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 111"
+      },
+      {
+        "id": "F-0b994f47bb97",
+        "t": "FACT",
+        "text": "Last 3 cycles: C108 fog 46°F, C109 overcast 49°F, C110 fog 52°F",
+        "src": "output/beats/Cycle_Weather.jsonl"
+      },
+      {
+        "id": "F-7bb4d78effc9",
+        "t": "FACT",
+        "text": "Javier Robertson — limited social activity due to winter mood",
+        "src": "output/world_summary_c111.md ## Who Lived It"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [
+      {
+        "id": "POP-00042",
+        "name": "Ramon Vega",
+        "profile": "Ramon Vega — City Council President - D1",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Noah Tan",
+        "text": "A neighbor on my block mentioned their kid had been cooped up all week and today was the first day they let them walk to the rec center alone — not confirmed, just overheard.",
+        "publishable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "There's a sense around the lake that the regulars are back out today, but I haven't counted anyone yet.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "sensory dress of a Packet-named place already in the season-feel facts",
+      "the reporter's presence at that place",
+      "transitions that add no forecast or unsupplied measurement"
+    ],
+    "textureConditions": [
+      "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
+      "do not announce season or temperature as the lede",
+      "do not import real-world Oakland winter tropes absent from the Packet",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
+      "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
+      "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
+      "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+    ]
+  }
+}

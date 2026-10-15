@@ -305,6 +305,10 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
   // engine terms: reuses validateEdition's list
   assert.deepStrictEqual(cdr.engineTermCheck('The tension score rose.\n\n## INTAKE\ncivic load'), ['tension score']);
   assert.deepStrictEqual(cdr.engineTermCheck('Nothing odd here at all.'), []);
+  // codex pipeline.75 #4 — a *** divider mid-body does not end the count
+  const divided = '# Head\n\n' + body(100) + '\n\n***\n\n' + body(100) + '\n\n## INTAKE\n' + body(50);
+  assert.equal(cdr.thinCheck(divided).words, 201);
+  assert.deepStrictEqual(cdr.engineTermCheck(body(10) + '\n\n***\n\nThe tension score rose.'), ['tension score']);
   // verbatim: event text from a Who Lived It row, 6+ word run; the name alone never hits
   const pk = { known: [
     { t: 'FACT', text: 'Javier Robertson — limited social activity due to winter mood', src: 'output/world_summary_c111.md ## Who Lived It' },

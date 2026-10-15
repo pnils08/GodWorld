@@ -1398,8 +1398,15 @@ function uniqueDest(dir, name) {
 const THIN_WORDS = 150;
 const VERBATIM_RUN = 6;
 const VERBATIM_SRC = /Who Lived It|LifeHistory|Lived_Events/i;
+// The Article body for these checks: everything above ## INTAKE, minus code fences and HTML
+// comments. Not articleContamination.proseOnly — that stops at the first *** divider or a long
+// # rule, which would count half an article and flag it thin (codex pipeline.75 #4).
+function checkBody(text) {
+  return String(text || '').split(/^##\s+INTAKE\s*$/im)[0]
+    .replace(/```[\s\S]*?```/g, '').replace(/<!--[\s\S]*?-->/g, '').trim();
+}
 function draftWordCount(text) {
-  return (articleContamination.proseOnly(text).match(/[A-Za-z0-9][A-Za-z0-9'’-]*/g) || []).length;
+  return (checkBody(text).match(/[A-Za-z0-9][A-Za-z0-9'’-]*/g) || []).length;
 }
 function thinCheck(text, targetWords, floor) {
   const words = draftWordCount(text);
@@ -1409,7 +1416,7 @@ function thinCheck(text, targetWords, floor) {
 }
 // Reuses validateEdition's ENGINE_TERMS through its exported checker — one list, not a copy.
 function engineTermCheck(text) {
-  return require('./validateEdition').checkEngineLanguage(articleContamination.proseOnly(text))
+  return require('./validateEdition').checkEngineLanguage(checkBody(text))
     .map(i => (String(i.detail).match(/Found "([^"]+)"/) || [])[1] || i.detail);
 }
 function wordsOf(text) {
@@ -1426,7 +1433,7 @@ const VERBATIM_STOP = new Set(['the', 'and', 'for', 'due', 'with', 'from', 'into
 function verbatimSliceRuns(text, packet) {
   const rows = [].concat((packet && packet.known) || [],
     (packet && packet.manifest && packet.manifest.approvedFacts) || []);
-  const proseText = articleContamination.proseOnly(text);
+  const proseText = checkBody(text);
   const prose = ' ' + wordsOf(proseText).join(' ') + ' ';
   const sentences = proseText.split(/(?<=[.!?])\s+|\n+/).map(x => new Set(wordsOf(x)));
   const hits = [];
@@ -3026,10 +3033,16 @@ async function runWrite(assign) {
       .replace(/^#+\s*/, '').replace(/[*_`]/g, '').slice(0, 90).trim();
     appendWireEntry(cycle, '- c' + cycle + ' ' + desk + ' | ' + (byline ? byline.name : 'desk') + ': "' + headline + '" (staged)');
   } else {
+    // pipeline.75 (codex #3): a check-flagged draft carries its check reasons — delivery prints
+    // this file's flags, and a Rhea PASS summary alone would read as no reason at all.
     fs.writeFileSync(path.join(FLAGGED, base + '.flags.json'),
-      JSON.stringify({ draft: draftName, flags: (rhea && rhea.flags) || [],
+      JSON.stringify({ draft: draftName,
+        flags: checkFlags.map(f => ({ severity: 'high', claim: 'deterministic check', issue: f }))
+          .concat((rhea && rhea.flags) || []),
+        checkFlags,
         contamination: contamination.findings,
         summary: contamination.fail ? 'deterministic world-contamination blocker failed' :
+          checkFlags.length ? 'deterministic checks: ' + checkFlags.join('; ') :
           (rhea && rhea.summary) || 'no rhea verdict' }, null, 2));
   }
 
@@ -3507,6 +3520,6 @@ module.exports = {
   noteQuoteState,
   assertPublishableQuotesStrict,
   // pipeline.75 checks
-  draftWordCount, thinCheck, engineTermCheck, verbatimSliceRuns, angleCapHit,
+  checkBody, draftWordCount, thinCheck, engineTermCheck, verbatimSliceRuns, angleCapHit,
   fanoutCheckTotals, formatCheckTotals, THIN_WORDS,
 };

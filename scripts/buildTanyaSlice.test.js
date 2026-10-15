@@ -137,4 +137,26 @@ function synthFixtureRoot(cycle, journalist, withDecks) {
     score(Object.assign({ storyAngle: 'SYNTH the club signs a reliever' }, base), 912));
 }
 
+// codex pipeline.75 #1 — a prose fragment never resolves through a bare surname; a title-led
+// name resolves exact; an unambiguous near-spelling of a sports surname resolves
+{
+  const sports = require('./sportsSubstrate');
+  const row = (name, pop, role) => ({ Name: name, POPID: pop, RoleType: role });
+  const led = { byPop: new Map(), byName: new Map([
+    ['test square', row('Test Square', 'POP-99990', "Pitcher, Oakland A's")],
+    ['deacon testmore', row('Deacon Testmore', 'POP-99991', "Manager, Oakland A's")],
+    ['ernesto testino', row('Ernesto Testino', 'POP-99992', "3B/1B , Oakland A's")]]) };
+  const got = sports.resolveFeedPlayers({ namesUsed: '', storyAngle: '',
+    notes: 'Jake London Square was busy. Manager Deacon Testmore waved. Ernestor Testino threw beads.' }, led, 8, { proseUnion: true });
+  assert.deepStrictEqual(got.map(p => p.popid), ['POP-99991', 'POP-99992']);
+}
+// codex pipeline.75 #2 — a sentence over 480 chars is split, never dropped; leftovers are counted
+{
+  const { proseAnchorFacts } = require('./buildTanyaSlice');
+  const long = Array.from({ length: 120 }, (_, i) => 'word' + i).join(' ') + '.';
+  const facts = proseAnchorFacts({ storyAngle: 'SYNTH angle', notes: long });
+  assert.ok(facts.length >= 3 && facts.slice(1).every(f => f.length <= 480), 'long sentence carried in pieces');
+  assert.ok(facts.join(' ').includes('word0') && facts.join(' ').includes('word119'));
+}
+
 console.log('buildTanyaSlice tests: PASS');

@@ -201,6 +201,30 @@ function extractPlayerNames(text) {
   return [...new Set(out)];
 }
 
+const SPORTS_ROLE = /A's|Athletics|Pitcher|Baseman|Fielder|Catcher|Shortstop|Basketball|Oaks|Manager|General Manager/i;
+function resolveProseName(name, ledger) {
+  const raw = String(name || '').replace(/\s+/g, ' ').trim();
+  const canon = NAME_ALIASES[raw.toLowerCase()] || raw;
+  let row = ledger.byName.get(canon.toLowerCase());
+  // A title the extractor swept in ("Manager Deacon Seymour"): the last two words, exact.
+  if (!row && canon.split(' ').length === 3) row = ledger.byName.get(canon.toLowerCase().split(' ').slice(1).join(' '));
+  if (!row) {
+    const parts = canon.toLowerCase().split(' ');
+    const first = parts[0], last = parts[parts.length - 1];
+    const same = [...ledger.byName.entries()].filter(([n, r]) => {
+      const np = n.split(' ');
+      return np.length >= 2 && np[np.length - 1] === last && SPORTS_ROLE.test(String(r.RoleType || ''));
+    });
+    if (same.length === 1 && first.length >= 3 && same[0][0].slice(0, 3) === first.slice(0, 3)) row = same[0][1];
+  }
+  return {
+    name: row ? String(row.Name).replace(/\s+/g, ' ').trim() : canon,
+    popid: row ? row.POPID : null,
+    role: row ? (row.RoleType || null) : null,
+    neighborhood: row ? (row.Neighborhood || null) : null
+  };
+}
+
 function resolvePlayer(name, ledger) {
   const raw = String(name || '').replace(/\s+/g, ' ').trim();
   const key = raw.toLowerCase();
@@ -516,8 +540,13 @@ function resolveFeedPlayers(row, ledger, limit, opts) {
   const seenPop = new Set();
   const led = ledger || { byName: new Map(), byPop: new Map() };
   for (const n of namePool) {
-    const p = resolvePlayer(n, led);
-    if (o.proseUnion && explicitNames.length && !explicitSet.has(n.toLowerCase()) && !p.popid) continue;
+    const proseOnly = o.proseUnion && !explicitSet.has(n.toLowerCase());
+    // codex pipeline.75 #1: a prose-only name never takes resolvePlayer's first-surname
+    // fallback (it put "Jake London Square" on a pitcher named Square). Exact or alias, or one
+    // unambiguous sports-role surname whose first name shares its first three letters
+    // ("Ernestor Quintero" → Ernesto Quintero). Otherwise it stays out, NamesUsed or not.
+    const p = proseOnly ? resolveProseName(n, led) : resolvePlayer(n, led);
+    if (proseOnly && !p.popid) continue;
     if (p.popid && seenPop.has(p.popid)) continue;
     if (p.popid) seenPop.add(p.popid);
     players.push({

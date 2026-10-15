@@ -52,28 +52,46 @@ function publishableAnchorFacts(row, players, cycle) {
 // pipeline.75 (builder 2026-10-14) — the row's StoryAngle and Notes are the feed's
 // own words about the day; off-season they are the only facts the row has. Natural
 // sentences, no "(feed)" label (the 2026-08-13 graduation kept labels out of prose).
+// Notes in whole-sentence chunks under the packet's 500-char fact clip (livedExperiencePacket
+// clean(fact, 500)); a sentence over 480 is split at a word boundary, never skipped. At most
+// three chunks so a long editorial note can't crowd the plan; what is left over is counted.
+function notesChunks(row) {
+  const notes = String(row.notes || '').replace(/\s+/g, ' ').trim();
+  if (!notes || notes === '-') return { chunks: [], sentences: 0, carried: 0 };
+  const pieces = [];
+  for (const raw of notes.match(/[^.!?]+(?:[.!?]+|$)/g) || [notes]) {
+    let rest = raw.trim();
+    while (rest.length > 480) {
+      const cut = rest.lastIndexOf(' ', 480);
+      pieces.push(rest.slice(0, cut > 200 ? cut : 480).trim());
+      rest = rest.slice(cut > 200 ? cut : 480).trim();
+    }
+    if (rest) pieces.push(rest);
+  }
+  const chunks = [];
+  let chunk = '', carried = 0;
+  for (const piece of pieces) {
+    if (chunk && (chunk + ' ' + piece).length > 480) {
+      chunks.push(chunk);
+      chunk = '';
+      if (chunks.length >= 3) break;
+    }
+    chunk = chunk ? chunk + ' ' + piece : piece;
+    carried++;
+  }
+  if (chunk && chunks.length < 3) chunks.push(chunk);
+  else if (chunk) carried--;
+  return { chunks, sentences: pieces.length, carried: Math.min(carried, pieces.length) };
+}
+
+// pipeline.75 (builder 2026-10-14) — the row's StoryAngle and Notes are the feed's
+// own words about the day; off-season they are the only facts the row has. Natural
+// sentences, no "(feed)" label (the 2026-08-13 graduation kept labels out of prose).
 function proseAnchorFacts(row) {
   const facts = [];
   const angle = String(row.storyAngle || '').trim();
   if (angle && !PLACEHOLDER_ANGLE.test(angle)) facts.push(/[.!?]$/.test(angle) ? angle : angle + '.');
-  // Whole sentences in chunks under the packet's 500-char fact clip (livedExperiencePacket
-  // clean(fact, 500)); at most three chunks, so a long editorial note can't crowd the plan.
-  const notes = String(row.notes || '').replace(/\s+/g, ' ').trim();
-  if (!notes || notes === '-') return facts;
-  const sentences = notes.match(/[^.!?]+(?:[.!?]+|$)/g) || [notes];
-  let chunk = '';
-  for (const raw of sentences) {
-    const sentence = raw.trim();
-    if (!sentence || sentence.length > 480) continue;
-    if (chunk && (chunk + ' ' + sentence).length > 480) {
-      facts.push(chunk);
-      if (facts.length >= 4) return facts;
-      chunk = '';
-    }
-    chunk = chunk ? chunk + ' ' + sentence : sentence;
-  }
-  if (chunk && facts.length < 4) facts.push(chunk);
-  return facts;
+  return facts.concat(notesChunks(row).chunks);
 }
 
 function buildTanyaSlice(cycle, opts) {
@@ -91,6 +109,8 @@ function buildTanyaSlice(cycle, opts) {
   // pipeline.75 — NamesUsed ∪ StoryAngle ∪ full Notes, prose names only when ledger-resolved
   const players = sports.resolveFeedPlayers(row, o.ledger || sports.loadLedgerNameIndex(root), 12, { proseUnion: true });
   const statFacts = publishableAnchorFacts(row, players, cycle);
+  const notes = notesChunks(row);
+  const notesLeft = notes.sentences - notes.carried;
   const anchorFacts = statFacts.concat(proseAnchorFacts(row));
   // pipeline.74 — an off-season row carries Record '-', so the record label read
   // "A's off-season update: -" and the row's StoryAngle (the C111 parade) never reached
@@ -122,12 +142,15 @@ function buildTanyaSlice(cycle, opts) {
       accessEvidence: { state: 'ALLOTTED', facts: ['clubhouse/sideline SET is the reporter\'s room'] },
       quoteEvidence: { state: 'NOT_SUPPLIED', quotes: [] },
       observationEvidence: { state: 'ALLOTTED', facts: [] },
-      missing: ['Packet player quotes', 'injury or team-response facts beyond the supplied record'],
+      missing: ['Packet player quotes', 'injury or team-response facts beyond the supplied record']
+        .concat(notesLeft > 0 ? ['the rest of the feed notes (' + notesLeft + ' more sentence' + (notesLeft === 1 ? '' : 's') + ' not carried)'] : []),
       hooks
     },
     hooks,
     seeds,
-    story, approach: TANYA_APPROACH, players,
+    // codex pipeline.75 #2: Notes report speech in paraphrase ("Stanley shared that …"); a Notes
+    // fact is a feed claim, never an approved quote.
+    story, approach: TANYA_APPROACH + (notes.chunks.length ? ' The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.' : ''), players,
     scene: { colorRoom: 'Clubhouse SET is authorized. Invented player quotes and real-world venues are not.' },
     candidates: ranked.slice(0, 8).map(item => ({ score: item.score,
       label: item.row.storyAngle || item.row.rawHeader, cycle: item.row.cycle })),

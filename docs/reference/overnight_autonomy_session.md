@@ -129,6 +129,9 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 
 03:31 rb — UNDOCKED rules: the pilot brief now carries the show, the objective (the board = total credits across nights; nothing else scores) and a contracts-first flight plan; adapter now fetches the game's `mission` category. Built from the game's own manual, server not called. Three sim calls are yours: (1) citizens still have no line that says what the board scores — want 2–3 authored lines (sheet append, es or you), or leave the city to learn it from Nia? (2) one closed contract (1,500–3,500 cr) laps the whole board (leader 303 cr over 9 nights) — fine as-is, or a season boundary / fresh board from the first contract night? (3) still open since August: who airs UNDOCKED in Oakland (a broadcaster name shapes Nia's voice and a sponsor thread). Plan §3.2 has the detail.
 
+02:45 rb — engine.290 transit: the plan ships the BART crew governor OFF (dial transitStaffingGovernor 0) until crew exists, because armed before any conductor row it would write "BART on-time fell, no crew" as canon on the next fire. The crew comes only from you: four Intake rows (Advancement_Intake1) titled BART Train Conductor, BART Train Operator, BART Rail Dispatcher, BART Track Maintenance Technician — names are yours, any neighborhood. Say go (and the names) and es arms the governor the fire after they land. Plan: docs/plans/2026-10-15-engine-290-transit-rides-the-sim.md.
+02:45 rb — engine.290: BART Oakland Division and AC Transit are real-world names on the Business_Ledger (BIZ-00014 / BIZ-00013). Keep them as legacy canon (as the A's are), or rename in-world? The build does not touch the names either way; the chaos car and the ECL rows say "BART train" until you rule.
+
 ## 7. Working ledger
 
 Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman register, results first. Purge at the start of each night (git keeps history); do not write narrative here.

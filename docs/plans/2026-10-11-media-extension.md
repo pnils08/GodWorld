@@ -312,6 +312,7 @@ Voice files passed by the builder 2026-10-14 ("Voices look good"); steps 3 and 4
 4. Crontab, Ines alone (`--desk culture --persona ines-sorensen`, never `--fanout`): Saturday angle 07:15 / report 09:15 / write 11:15 (before the 12:00 sweep and the 16:00 compile, Nia's proven shape); Sunday angle 06:15 / report 09:15 / write 12:15 (before the afternoon fire) + a Sunday `deliver-articles.js` at 12:45.
 5. `.claude/agents/*/IDENTITY.md` POPID lines; `docs/media/voices/*.md` ledger lines.
 6. Tests: `scripts/newsroomWakePackages.test.js` rota count 24 → 26 and per-desk map; `cronDeskFanoutHandoff.test.js` per-seat routes if it pins the culture seats.
+7. `thinFloor` on both packages (pipeline.75 thin check, `cron-desk-run.js` thinCheck, default 150 words flags over a Rhea PASS): Tamsin `40` — a Lives notice is one person and "however many words seem necessary" (builder 2026-10-13); Ines `80` — two passages minimum. Read with es that thinCheck takes the package field before the default; back-read their first week before tightening.
 
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 

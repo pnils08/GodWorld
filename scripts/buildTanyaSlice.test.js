@@ -109,13 +109,24 @@ function synthFixtureRoot(cycle, journalist, withDecks) {
     '### C' + FIX_CYCLE + ' (1 entries)', '',
     "- **A's — editorial-note (off-season):** Danny Horn",
     '  - StoryAngle: SYNTH parade rolls through Downtown.',
-    '  - Notes: SYNTHETIC fixture row',
+    '  - Notes: Quinn Sample and Remy Testcase waved from the bus. Jake London Square was packed.',
     '  - Stats: -',
     '  - Record -, Streak -, Mood electric, FanSentiment euphoric, Neighborhood Downtown', ''
   ].join('\n'));
-  const off = buildTanyaSlice(FIX_CYCLE, { root });
+  const ledgerRow = (name, pop) => ({ Name: name, POPID: pop, RoleType: "Pitcher, Oakland A's", Neighborhood: 'Downtown' });
+  const ledger = { byPop: new Map(), byName: new Map([
+    ['danny horn', ledgerRow('Danny Horn', 'POP-99901')],
+    ['quinn sample', ledgerRow('Quinn Sample', 'POP-99902')],
+    ['remy testcase', ledgerRow('Remy Testcase', 'POP-99903')]]) };
+  const off = buildTanyaSlice(FIX_CYCLE, { root, ledger });
   assert.equal(off.story.label, 'SYNTH parade rolls through Downtown');
   assert.doesNotMatch(off.story.angle, /update: -/);
+  // pipeline.75 — NamesUsed ∪ prose names, prose names only when ledger-resolved
+  assert.deepStrictEqual(off.story.popids, ['POP-99901', 'POP-99902', 'POP-99903']);
+  assert.ok(!off.players.some(p => /Jake London/.test(p.name)), 'unresolved prose fragment never becomes a player');
+  assert.ok(off.prewrite.anchorFacts.includes('SYNTH parade rolls through Downtown.'));
+  assert.ok(off.prewrite.anchorFacts.some(f => /Quinn Sample and Remy Testcase waved/.test(f)));
+  assert.ok(off.prewrite.anchorFacts.every(f => !/\(feed\)/.test(f) && f.length <= 500));
 }
 
 console.log('buildTanyaSlice tests: PASS');

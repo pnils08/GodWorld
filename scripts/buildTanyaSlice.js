@@ -45,6 +45,33 @@ function publishableAnchorFacts(row, players, cycle) {
   return facts.slice(0, 8);
 }
 
+// pipeline.75 (builder 2026-10-14) — the row's StoryAngle and Notes are the feed's
+// own words about the day; off-season they are the only facts the row has. Natural
+// sentences, no "(feed)" label (the 2026-08-13 graduation kept labels out of prose).
+function proseAnchorFacts(row) {
+  const facts = [];
+  const angle = String(row.storyAngle || '').trim();
+  if (angle && !/^open space\b/i.test(angle)) facts.push(/[.!?]$/.test(angle) ? angle : angle + '.');
+  // Whole sentences in chunks under the packet's 500-char fact clip (livedExperiencePacket
+  // clean(fact, 500)); at most three chunks, so a long editorial note can't crowd the plan.
+  const notes = String(row.notes || '').replace(/\s+/g, ' ').trim();
+  if (!notes || notes === '-') return facts;
+  const sentences = notes.match(/[^.!?]+(?:[.!?]+|$)/g) || [notes];
+  let chunk = '';
+  for (const raw of sentences) {
+    const sentence = raw.trim();
+    if (!sentence || sentence.length > 480) continue;
+    if (chunk && (chunk + ' ' + sentence).length > 480) {
+      facts.push(chunk);
+      if (facts.length >= 4) return facts;
+      chunk = '';
+    }
+    chunk = chunk ? chunk + ' ' + sentence : sentence;
+  }
+  if (chunk && facts.length < 4) facts.push(chunk);
+  return facts;
+}
+
 function buildTanyaSlice(cycle, opts) {
   const o = opts || {};
   const root = o.root || ROOT;
@@ -57,8 +84,10 @@ function buildTanyaSlice(cycle, opts) {
   const ranked = rows.map(row => ({ row, score: score(row, cycle) })).sort((a, b) => b.score - a.score);
   const top = ranked[0];
   const row = top.row;
-  const players = sports.resolveFeedPlayers(row, o.ledger || sports.loadLedgerNameIndex(root), 8);
-  const anchorFacts = publishableAnchorFacts(row, players, cycle);
+  // pipeline.75 — NamesUsed ∪ StoryAngle ∪ full Notes, prose names only when ledger-resolved
+  const players = sports.resolveFeedPlayers(row, o.ledger || sports.loadLedgerNameIndex(root), 12, { proseUnion: true });
+  const statFacts = publishableAnchorFacts(row, players, cycle);
+  const anchorFacts = statFacts.concat(proseAnchorFacts(row));
   // pipeline.74 — an off-season row carries Record '-', so the record label read
   // "A's off-season update: -" and the row's StoryAngle (the C111 parade) never reached
   // her. A record with no number labels from the StoryAngle.
@@ -67,7 +96,7 @@ function buildTanyaSlice(cycle, opts) {
     (!hasRecord && row.storyAngle) ? row.storyAngle.replace(/\.\s*$/, '') :
       row.team + (row.seasonType ? ' ' + row.seasonType : '') +
         (hasRecord ? ' update: ' + row.record : ' update'),
-    anchorFacts.find(fact => !fact.startsWith('The ' + row.team)) || null,
+    statFacts.find(fact => !fact.startsWith('The ' + row.team)) || null,
   ].filter(Boolean).join(' — ');
   const story = {
     angle: storyLabel,
@@ -171,4 +200,4 @@ if (require.main === module) {
   console.log(JSON.stringify(buildTanyaSlice(cycle), null, 2));
 }
 
-module.exports = { buildTanyaSlice, loadTanyaSlice, formatTanyaSliceMarkdown, score, publishableAnchorFacts, TANYA_APPROACH };
+module.exports = { proseAnchorFacts, buildTanyaSlice, loadTanyaSlice, formatTanyaSliceMarkdown, score, publishableAnchorFacts, TANYA_APPROACH };

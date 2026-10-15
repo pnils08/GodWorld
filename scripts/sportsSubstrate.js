@@ -495,15 +495,21 @@ function loadSportsRows(cycle, opts) {
 /**
  * Resolve feed name pool → player objects with optional ledger POPID/RoleType.
  */
-function resolveFeedPlayers(row, ledger, limit) {
+function resolveFeedPlayers(row, ledger, limit, opts) {
+  const o = opts || {};
   const explicitNames = extractPlayerNames(row.namesUsed);
   const fallbackNames = [
     ...extractPlayerNames(row.storyAngle),
-    ...extractPlayerNames((row.notes || '').slice(0, 280))
+    ...extractPlayerNames(o.proseUnion ? (row.notes || '') : (row.notes || '').slice(0, 280))
   ];
   // NamesUsed is the feed's explicit subject field. When present, do not let
   // prose fragments or alternate spellings become additional people.
-  const namePool = (explicitNames.length ? explicitNames : fallbackNames)
+  // pipeline.75 (builder 2026-10-14, "give Tanya names used") — opts.proseUnion takes
+  // NamesUsed ∪ StoryAngle ∪ the full Notes; a prose-only name joins ONLY when it
+  // resolves on the ledger, so a fragment ("Jake London Square") never becomes a person.
+  const explicitSet = new Set(explicitNames.map(n => n.toLowerCase()));
+  const namePool = (o.proseUnion ? explicitNames.concat(fallbackNames)
+    : (explicitNames.length ? explicitNames : fallbackNames))
     .filter((n, i, a) => a.findIndex(x => x.toLowerCase() === n.toLowerCase()) === i);
 
   const players = [];
@@ -511,6 +517,7 @@ function resolveFeedPlayers(row, ledger, limit) {
   const led = ledger || { byName: new Map(), byPop: new Map() };
   for (const n of namePool) {
     const p = resolvePlayer(n, led);
+    if (o.proseUnion && explicitNames.length && !explicitSet.has(n.toLowerCase()) && !p.popid) continue;
     if (p.popid && seenPop.has(p.popid)) continue;
     if (p.popid) seenPop.add(p.popid);
     players.push({

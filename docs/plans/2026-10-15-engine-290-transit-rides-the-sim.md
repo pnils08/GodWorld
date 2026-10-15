@@ -98,6 +98,7 @@ Canon writes, in order, each read back before the next live fire (codex §8):
 | codex plan review v1 2026-10-15 (HOLD) | `docs/for-claude-review/2026-10-15-codex-engine290-plan.md` | reconciled (v2, below) |
 | agy share read-before 2026-10-15 | `output/antigravity/2026-10-15-engine290-share-readbefore.md` | folded into move 3 / Task 3 |
 | codex diff review Tasks 6–8 2026-10-15 (FIX on §2–§5) | `docs/for-claude-review/2026-10-15-codex-engine290-impl-tasks6-8.md` | folded by es `ac1d38bb` (runtime gate on commute rows, `--poolkey`, Transit Dispatcher unrouted, voice-role additions reverted, docs wording); rb verified 05:35; bounded re-check dispatched |
+| codex bounded re-check 2026-10-15 (FIX: apply fail-open, plan wording) | `docs/for-claude-review/2026-10-15-codex-engine290-fold2-recheck.md` | folded by es `4ea5d6dd` (transit pool never applies without `--poolkey`; plan body reconciled; catalog read-back 306 → 309); rb verified 05:50 |
 | codex diff review Tasks 1–5 2026-10-15 (FIX on §1, §3) | `docs/for-claude-review/2026-10-15-codex-engine290-impl-tasks1-5.md` | folded by es `254163a6`; rb verified 04:50 |
 
 ### Agreed

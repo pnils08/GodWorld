@@ -65,4 +65,27 @@ assert.ok(faithPrompt.user.includes('AUTHORITATIVE FAITH CORRECTIONS FORWARD'));
 assert.ok(faithPrompt.user.includes('BLOCKED "Beth Jacob Congregation" => CANON "B\'nai Tikvah Synagogue"'));
 assert.ok(faithPrompt.user.includes('canon name on the right is not an invention'));
 
+// pipeline.77 — contract score: shape only; length is code when the contract has one range
+{
+  const g = require('./cron-rhea-gate');
+  assert.deepStrictEqual(g.contractWordRange('400-700'), { lo: 400, hi: 700 });
+  assert.deepStrictEqual(g.contractWordRange('evidence-bounded; 350-600'), { lo: 350, hi: 600 });
+  assert.equal(g.contractWordRange('evidence-bounded'), null);
+  assert.equal(g.contractWordRange('180-280 without; 450-750 with'), null, 'two ranges -> the judge reads it');
+  const profile = { purpose: 'TEST-ONLY purpose', articleContract: { voice: 'dry', opening: 'TEST-ONLY open', closing: 'TEST-ONLY close', targetWords: '400-700' } };
+  const cp = g.buildContractPrompt(profile, 'one two three');
+  assert.equal(cp.words, 3);
+  assert.ok(cp.user.includes('TEST-ONLY open') && cp.user.includes('TEST-ONLY close') && cp.user.includes('this piece has 3 words'));
+  assert.ok(/do not check facts/i.test(cp.system));
+  const judged = g.parseContractScore('{"opened":true,"closed":false,"purposeMet":true,"inTarget":true,"short":"It closed on a recap."}', profile, 3);
+  assert.equal(judged.inTarget, false, 'code overrides the judge on a single range');
+  assert.equal(judged.score, 2);
+  assert.equal(judged.short, 'It closed on a recap.');
+  const open = g.parseContractScore('{"opened":true,"closed":true,"purposeMet":true,"inTarget":true,"short":""}',
+    { purpose: 'p', articleContract: { targetWords: 'evidence-bounded' } }, 90);
+  assert.equal(open.inTargetBy, 'judge');
+  assert.equal(open.score, 4);
+  assert.ok(g.parseContractScore('not json', profile, 3).error);
+}
+
 console.log('cronRheaPersonaGate.test.js: PASS');

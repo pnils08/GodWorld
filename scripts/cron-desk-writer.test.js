@@ -129,3 +129,15 @@ console.log('cron-desk-writer artifact-tag tests: PASS');
   }
 }
 console.log('cron-desk-writer pipeline.76 dossier_read tests: PASS');
+
+// pipeline.77 — the group sees its contract; its INTAKE carries no code-stamped SELF-SCORE
+{
+  const { rubricBlock, renderPacketIntake: rpi } = require('./cron-desk-writer');
+  const block = rubricBlock({ reviewProfile: { purpose: 'TEST-ONLY purpose', articleContract: { opening: 'TEST-ONLY open', closing: 'TEST-ONLY close', targetWords: '400-700' } } });
+  assert.ok(block.includes('Purpose: TEST-ONLY purpose') && block.includes('Open on: TEST-ONLY open') && block.includes('Length: 400-700'));
+  assert.equal(rubricBlock({}), '');
+  const pk = { known: [{ t: 'FACT', text: 'TEST-ONLY fact', src: 'TEST-ONLY src' }], exposure: { sources: [] } };
+  assert.ok(rpi('# T\n\nBody.\n', pk).includes('SELF-SCORE'));
+  assert.ok(!rpi('# T\n\nBody.\n', pk, { noSelfScore: true }).includes('SELF-SCORE'));
+}
+console.log('cron-desk-writer pipeline.77 rubric tests: PASS');

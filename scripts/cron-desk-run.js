@@ -1474,14 +1474,32 @@ function fanoutCheckTotals(seats) {
     thin: list.filter(x => x.thin).length,
     engineTerm: list.filter(x => x.engineTerms && x.engineTerms.length).length,
     verbatim: list.filter(x => x.verbatim && x.verbatim.length).length,
+    graded: list.filter(x => Number.isInteger(x.contractScore)).length,
+    gradeSum: list.reduce((a, x) => a + (Number.isInteger(x.contractScore) ? x.contractScore : 0), 0),
   };
 }
 function formatCheckTotals(t, stage) {
   if (stage === 'angle') return 'cap-hits ' + t.capHits;
   return 'tools ' + t.toolSeats + '/' + t.seats + ' · cap-hits ' + t.capHits + ' · thin ' + t.thin +
-    ' · engine-term ' + t.engineTerm + ' · verbatim ' + t.verbatim + ' (warn)';
+    ' · engine-term ' + t.engineTerm + ' · verbatim ' + t.verbatim + ' (warn)' +
+    (t.graded ? ' · graded ' + t.graded + ' avg ' + (t.gradeSum / t.graded).toFixed(1) + '/4' : '');
 }
 let SEAT_CHECKS = null; // the current seat's checks; the fan-out loop collects it after each seat
+
+// pipeline.77 — reward-loop group helpers. The page line and the W1 read are one format.
+function gradedLine(cs) {
+  return 'graded: ' + cs.score + '/4 — ' + (cs.short || 'nothing fell short');
+}
+function lastGradedLine(posts) {
+  const hit = (posts || []).map(p => String(p && p.content || '').trim()).find(t => /^graded: \d\/4\b/.test(t));
+  return hit ? hit.slice(0, 300) : null;
+}
+// One line per seat per run, the watch file through C113 (rb reads it into the row).
+function appendRewardLoopRead(cycle, row) {
+  try {
+    fs.appendFileSync(path.join(COMPARE, 'reward-loop-c' + cycle + '.jsonl'), JSON.stringify(row) + '\n');
+  } catch (e) { log('reward-loop read not written (non-fatal): ' + e.message); }
+}
 
 // WAKE 1 — ANGLE: the reporter's own citizen voice reads the beat and says what
 // smells off (the Antigravity/Jax pattern: ask in the reporter's lingo, get
@@ -2046,6 +2064,19 @@ async function runAngle(assign) {
         candidates: sourcingPool ? sourcingPool.candidates : [],
       });
       ask = livedPacket.prompt(inputPacket);
+      // pipeline.77 — the reward-loop group reads its own last grade before planning.
+      if (ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.rewardLoop && asker && asker.popid) {
+        try {
+          const { recentPage_ } = require(path.join(ROOT, 'lib', 'citizenPage'));
+          const page = await recentPage_(asker.popid, 12);
+          const last = lastGradedLine((page && page.results || []).map(d => ({ content: d.content })));
+          if (last) {
+            ask += '\n\nYour last piece came back from the desk ' + last.replace(/^graded:/, 'graded') +
+              '. Plan this one so it does what the contract asks.';
+            log('reward loop: last grade read — ' + last);
+          } else log('reward loop: no graded line on the page yet');
+        } catch (e) { log('reward loop grade read failed (non-fatal): ' + e.message); }
+      }
     }
     log('asking ' + asker.name + ' (' + asker.popid + ') ' +
       (PACKET_ACTIVE ? 'for a typed reporter plan...' : 'what smells off...'));
@@ -2870,6 +2901,9 @@ async function runWrite(assign) {
   const writerTools = PACKET_ACTIVE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.writerTools &&
     ACTIVE_WAKE_PACKAGE.writerTools.maxToolCalls || 0;
   if (writerTools) { writerArgs.push('--writer-tools', String(writerTools)); log('writer tools ON (package): max ' + writerTools + ' calls'); }
+  // pipeline.77 — the reward-loop group: rubric at W3, contract score at the gate, grade carried.
+  const rewardLoop = PACKET_ACTIVE && !!(ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.rewardLoop);
+  if (rewardLoop) { writerArgs.push('--rubric'); log('reward loop ON (package): rubric shown, contract scored, grade carried'); }
   else if (byline && byline.popid) writerArgs.push('--byline-popid', byline.popid);
   // Live W3 is always the persona writer. Packet-only + auditArticle +
   // contamination scan remain the hard walls.
@@ -2963,7 +2997,8 @@ async function runWrite(assign) {
         '--packet', path.relative(ROOT, packetPath),
         // Task 2.5.3: wake-1 validated canon facts ride into the gate as
         // verified prior coverage (cited history is not a contradiction).
-        ...(angle && angle.canonResearch ? ['--canon-facts', path.relative(ROOT, anglePath)] : [])],
+        ...(angle && angle.canonResearch ? ['--canon-facts', path.relative(ROOT, anglePath)] : []),
+        ...(rewardLoop ? ['--contract-score'] : [])],
         { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
     } catch (_) { /* gate exit 2/3 — verdict json still written */ }
     const verdictPath = path.join(COMPARE, base + '.rhea.json');
@@ -3083,6 +3118,21 @@ async function runWrite(assign) {
     } catch (e) { selfRecord = { recorded: false, reason: e.status === 2 ? 'no-dials (fallback)' : e.message }; log('self-record fallback: ' + (selfRecord.reason)); }
   }
 
+  // pipeline.77 — the grade rides the reporter's own page into the next W1, pass or flag alike
+  // (a flagged piece's shape is still feedback). Same --record-text path as "filed:".
+  const contractScore = rewardLoop && rhea && rhea.contractScore || null;
+  let gradeRecord = null;
+  if (rewardLoop && byline && contractScore && Number.isInteger(contractScore.score)) {
+    const gradeLine = gradedLine(contractScore);
+    try {
+      execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
+        '--pop=' + byline.popid, '--record-text=' + gradeLine, '--cycle=' + cycle],
+        { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
+      gradeRecord = { recorded: true, line: gradeLine };
+      log('reporter grade carried: ' + gradeLine);
+    } catch (e) { gradeRecord = { recorded: false, line: gradeLine, reason: e.message }; log('grade carry failed (non-fatal): ' + e.message); }
+  }
+
   // Task 2.5.3 — self-scoring footer check (pressure-test #6, deterministic).
   const footerPresent = /<!--\s*SELF-SCORE:/.test(fs.readFileSync(draftPath, 'utf8'));
   // Task 2.5.5 — tool-use scoreboard column (pressure-test #5): did the writer dig?
@@ -3099,19 +3149,29 @@ async function runWrite(assign) {
     disposition: NO_GATE ? 'ungated-sample' : (pass ? 'staged' : 'flagged'),
     rheaPass: rhea ? rhea.pass : null, rheaFlagCount: rhea ? rhea.flagCount : null,
     contamination,
-    footerPresent,
+    footerPresent: rewardLoop ? null : footerPresent,
     toolUse: traceArt ? traceArt.calls.map(t => t.tool) : [],
     // pipeline.75 checks
     toolCalls: traceArt ? traceArt.calls.length : 0,
     wordCount: thin.words, targetWords,
     capHit: Number(angle && angle.angleCapHits) || 0,
     checkFlags, engineTerms, verbatimWarn: verbatim,
+    // pipeline.77 group — shape score from the gate; the SELF-SCORE footer is retired for the group
+    rewardLoop, contractScore, gradeRecord,
     article: path.relative(ROOT, destPath),
     selfRecord, ranAt: new Date().toISOString()
   };
   fs.writeFileSync(path.join(COMPARE, base + '.wake.json'), JSON.stringify(record, null, 2));
   SEAT_CHECKS = { stage: 'write', toolCalls: record.toolCalls, capHits: record.capHit, thin: thin.thin,
-    engineTerms, verbatim, words: thin.words };
+    engineTerms, verbatim, words: thin.words,
+    contractScore: contractScore && Number.isInteger(contractScore.score) ? contractScore.score : null };
+  if (rewardLoop) appendRewardLoopRead(cycle, {
+    date: new Date().toISOString().slice(0, 10), name: byline && byline.name, persona: personaSlug, model: route.model,
+    contractScore: contractScore ? (contractScore.error ? { error: contractScore.error } : {
+      score: contractScore.score, opened: contractScore.opened, closed: contractScore.closed,
+      purposeMet: contractScore.purposeMet, inTarget: contractScore.inTarget, short: contractScore.short }) : null,
+    rheaPass: rhea ? rhea.pass : null, disposition: record.disposition, words: thin.words,
+    thin: thin.thin, verbatim: verbatim.length, toolCalls: record.toolCalls, capHit: record.capHit });
   // Task 2.5.3 — §4 closes the growing story doc: where the article landed.
   storyDocAppend(stem, '§4 THE ARTICLE (wake 3)',
     '- draft: ' + path.relative(ROOT, destPath) + '\n- disposition: ' + record.disposition +
@@ -3522,4 +3582,5 @@ module.exports = {
   // pipeline.75 checks
   checkBody, draftWordCount, thinCheck, engineTermCheck, verbatimSliceRuns, angleCapHit,
   fanoutCheckTotals, formatCheckTotals, THIN_WORDS,
+  gradedLine, lastGradedLine, // pipeline.77
 };

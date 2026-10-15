@@ -232,6 +232,10 @@ const TOOLS_FORCED = TOOLS_AB && process.argv.includes('--tools-forced');
 // pipeline.76 — package writer tools (builder 2026-10-14: "take one journalist and give them
 // tools"). cron-desk-run passes --writer-tools N only for a package with writerTools; every other
 // typed Packet run stays at 0. Tool lines the Article uses join the claim manifest before audit.
+// pipeline.77 — the reward-loop group: the seat's own contract shown as what a good one looks like
+// (the same rubric the gate's contract score reads), and no code-stamped SELF-SCORE footer — its
+// question-answered=no was hardcoded, never the writer's report; the score lives in the sidecar.
+const RUBRIC = process.argv.includes('--rubric');
 const WRITER_TOOLS = Math.max(0, Math.min(8, parseInt(arg('--writer-tools', '0'), 10) || 0));
 
 // Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).
@@ -427,7 +431,22 @@ function intakeSlug(packet) {
 // pilot, discard any model footer and render INTAKE from the supplied evidence
 // plus names the Article actually printed. This is deterministic formatting,
 // not editorial rewriting.
-function renderPacketIntake(draftText, packet) {
+function rubricBlock(packet) {
+  const profile = packet && packet.reviewProfile;
+  const c = profile && profile.articleContract;
+  if (!c) return '';
+  return '\n\n=== WHAT A GOOD ONE LOOKS LIKE (your contract — the same rubric your piece is graded on) ===\n' +
+    (profile.purpose ? 'Purpose: ' + profile.purpose + '\n' : '') +
+    (c.voice ? 'Voice: ' + c.voice + '\n' : '') +
+    (c.opening ? 'Open on: ' + c.opening + '\n' : '') +
+    (c.closing ? 'Close on: ' + c.closing + '\n' : '') +
+    (c.targetWords ? 'Length: ' + c.targetWords + ' words\n' : '') +
+    'Graded yes/no on four things: opened as contracted, closed as contracted, purpose met, within length. ' +
+    'Sourcing is checked separately and the rubric never licenses a fact the Packet does not hold.\n' +
+    '=== END CONTRACT ===';
+}
+
+function renderPacketIntake(draftText, packet, opts) {
   const body = stripModelMetadataTail(draftText);
   const lines = [body, '', '## INTAKE'];
   const people = new Map();
@@ -465,9 +484,11 @@ function renderPacketIntake(draftText, packet) {
         ' | ' + String(f.src).replace(/\|/g, '—').replace(/\s+/g, ' ').trim());
     }
   }
-  lines.push('<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=' +
-    (((packet && packet.exposure && packet.exposure.sources) || []).length ? 'yes' : 'no') +
-    '; sim-state-cited=' + (quoted ? 'yes' : 'no') + ' -->');
+  if (!(opts && opts.noSelfScore)) {
+    lines.push('<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=' +
+      (((packet && packet.exposure && packet.exposure.sources) || []).length ? 'yes' : 'no') +
+      '; sim-state-cited=' + (quoted ? 'yes' : 'no') + ' -->');
+  }
   return lines.join('\n') + '\n';
 }
 
@@ -801,6 +822,7 @@ async function main() {
       '--brief-requirement-file requires --artifact-tag and --state-file'
     );
   }
+  if (RUBRIC && !PACKET_ONLY) throw new Error('--rubric is a typed Packet package setting: it requires --packet-only');
   if (WRITER_TOOLS && (!PACKET_ONLY || TOOLS_AB)) {
     throw new Error('--writer-tools is a typed Packet package setting: it requires --packet-only and excludes --tools-ab');
   }
@@ -1076,7 +1098,8 @@ async function main() {
             '- sheet_read(tab): a slice of a live city sheet (Oakland_Sports_Feed for this cycle\'s line).\n' +
             'Every number you bring in from a tool is printed exactly as the tool returned it and named to its source in the memo ("his dossier", "the feed"). Do no arithmetic on it.\n' +
             '=== END TOOLS ==='
-          : '')
+          : '') +
+        (RUBRIC ? rubricBlock(packetState) : '')
       : '');
 
   const kickoff = STATE_FILE
@@ -1257,7 +1280,7 @@ async function main() {
         log.info('tool facts → manifest: none used (' + toolTrace.length + ' call(s))');
       }
     }
-    let normalized = renderPacketIntake(fs.readFileSync(savedFiles[0], 'utf8'), packet);
+    let normalized = renderPacketIntake(fs.readFileSync(savedFiles[0], 'utf8'), packet, { noSelfScore: RUBRIC });
     fs.writeFileSync(savedFiles[0], normalized);
     const parsed = require('../lib/articleIntake').parse(normalized);
     if (!parsed.found || parsed.errors.length) {
@@ -1304,7 +1327,7 @@ async function main() {
           return m ? m[1] : repairText;
         })());
         if (String(unfenced || '').trim()) {
-          const renormalized = renderPacketIntake(unfenced, packet);
+          const renormalized = renderPacketIntake(unfenced, packet, { noSelfScore: RUBRIC });
           const reparsed = require('../lib/articleIntake').parse(renormalized);
           if (reparsed.found && !reparsed.errors.length) {
             const reaudit = lep.auditArticle(renormalized, packet);
@@ -1404,6 +1427,7 @@ if (require.main === module) {
 
 module.exports = {
   toolDossierRead, // pipeline.76
+  rubricBlock, // pipeline.77
   normalizeArtifactTag,
   buildOutputSlug,
   formatStrictSourceHygiene,

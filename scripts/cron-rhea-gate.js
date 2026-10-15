@@ -73,6 +73,10 @@ const PACKET_FILE = arg('--packet', null);
 // distinguish persona-authorized street texture from load-bearing canon claims.
 const PERSONA = arg('--persona', null);
 const ARTICLE_PACKET_FILE = arg('--article-packet', null);
+// pipeline.77 — the reward-loop group: score the draft's SHAPE against its seat's contract in a
+// separate call. Rhea's sourcing verdict is untouched (truth stays on the deterministic checks and
+// her canon review); this scores only opening, closing, purpose and length.
+const CONTRACT_SCORE = process.argv.includes('--contract-score');
 
 const log = {
   info: (...a) => console.log('[INFO]', new Date().toISOString(), ...a),
@@ -309,6 +313,55 @@ function callOpenRouter(model, system, user) {
     req.on('error', reject);
     req.write(payload); req.end();
   });
+}
+
+// pipeline.77 contract score. Pure prompt + parse; the length check is code when the contract
+// gives exactly one word range, else the judge reads it with the counted words in hand.
+function contractWordRange(targetWords) {
+  const ranges = String(targetWords || '').match(/\d+\s*[-–]\s*\d+/g) || [];
+  if (ranges.length !== 1) return null;
+  const [lo, hi] = ranges[0].split(/[-–]/).map(n => parseInt(n, 10));
+  return { lo, hi };
+}
+function contractWordCount(prose) {
+  return (String(prose || '').replace(/<!--[\s\S]*?-->/g, '').match(/[A-Za-z0-9][A-Za-z0-9'’-]*/g) || []).length;
+}
+function buildContractPrompt(profile, prose) {
+  const c = profile.articleContract || {};
+  const words = contractWordCount(prose);
+  const system = 'You grade the SHAPE of one newspaper piece against its writer\'s contract. You do not check facts, ' +
+    'sourcing, or canon — another reviewer does that. Return ONLY JSON: {"opened": true|false, "closed": true|false, ' +
+    '"purposeMet": true|false, "inTarget": true|false, "short": "<one sentence: what fell short, or empty if nothing>"}';
+  const user = [
+    'THE CONTRACT',
+    'Purpose: ' + (profile.purpose || '(none)'),
+    'Voice: ' + (c.voice || '(none)'),
+    'Opening: ' + (c.opening || '(none)'),
+    'Closing: ' + (c.closing || '(none)'),
+    'Target words: ' + (c.targetWords || '(none)') + ' — this piece has ' + words + ' words.',
+    '',
+    'opened = the first paragraph does what "Opening" says. closed = the last paragraph does what "Closing" says. ' +
+    'purposeMet = the piece as a whole does what "Purpose" says. inTarget = the length fits "Target words" for this piece.',
+    '',
+    '=== THE PIECE ===',
+    prose,
+  ].join('\n');
+  return { system, user, words };
+}
+function parseContractScore(text, profile, words) {
+  let j;
+  try { const m = String(text).match(/\{[\s\S]*\}/); j = JSON.parse(m ? m[0] : text); }
+  catch (_) { return { error: 'contract score parse failed', raw: String(text).slice(0, 300) }; }
+  const range = contractWordRange(profile.articleContract && profile.articleContract.targetWords);
+  const out = {
+    opened: j.opened === true, closed: j.closed === true, purposeMet: j.purposeMet === true,
+    inTarget: range ? (words >= range.lo && words <= range.hi) : j.inTarget === true,
+    inTargetBy: range ? 'code ' + range.lo + '-' + range.hi : 'judge',
+    words,
+    short: String(j.short || '').replace(/\s+/g, ' ').trim().slice(0, 240),
+  };
+  out.score = [out.opened, out.closed, out.purposeMet, out.inTarget].filter(Boolean).length;
+  return out;
 }
 
 function readAgentFile(rel) {
@@ -745,6 +798,23 @@ async function main() {
     };
   }
 
+  if (CONTRACT_SCORE) {
+    if (BACKEND !== 'api') {
+      out.contractScore = { error: 'contract score runs on the api backend only' };
+    } else if (!(reviewContext && reviewContext.profile && reviewContext.profile.articleContract)) {
+      out.contractScore = { error: 'no seat contract in the review profile' };
+    } else {
+      try {
+        const cp = buildContractPrompt(reviewContext.profile, articleProseForReview(draftText));
+        const cr = await callOpenRouter(API_MODEL, cp.system, cp.user);
+        out.contractScore = Object.assign(parseContractScore(cr.text, reviewContext.profile, cp.words), { model: API_MODEL });
+        const rates = API_RATES[API_MODEL] || API_RATES._default;
+        out.contractScore.costUsd = +(((cr.usageIn / 1e6) * rates[0]) + ((cr.usageOut / 1e6) * rates[1])).toFixed(4);
+        console.log('contract score: ' + (out.contractScore.error || out.contractScore.score + '/4 — ' + (out.contractScore.short || 'nothing short')));
+      } catch (e) { out.contractScore = { error: 'contract score call failed: ' + e.message }; }
+    }
+  }
+
   fs.mkdirSync(COMPARE_DIR, { recursive: true });
   const base = path.basename(draftAbs).replace(/\.md$/, '');
   const outPath = path.join(COMPARE_DIR, base + '.rhea.json');
@@ -771,4 +841,5 @@ module.exports = {
   scanEngineVerbiage,
   scanStructuralJunk,
   scanPopidLeak,
+  contractWordRange, contractWordCount, buildContractPrompt, parseContractScore, // pipeline.77
 };

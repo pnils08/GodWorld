@@ -335,9 +335,16 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
     { toolCalls: 0, capHits: 1, thin: true, engineTerms: [], verbatim: [] },
     { toolCalls: 2, capHits: 0, thin: false, engineTerms: ['tension score'], verbatim: [{ run: 'x' }] },
     null]);
-  assert.deepStrictEqual(totals, { seats: 2, toolSeats: 1, capHits: 1, thin: 1, engineTerm: 1, verbatim: 1 });
+  assert.deepStrictEqual(totals, { seats: 2, toolSeats: 1, capHits: 1, thin: 1, engineTerm: 1, verbatim: 1, graded: 0, gradeSum: 0 });
   assert.equal(cdr.formatCheckTotals(totals, 'write'), 'tools 1/2 · cap-hits 1 · thin 1 · engine-term 1 · verbatim 1 (warn)');
   assert.equal(cdr.formatCheckTotals(totals, 'angle'), 'cap-hits 1');
+  // pipeline.77 — graded line round-trips; group totals show the average
+  const line = cdr.gradedLine({ score: 3, short: 'It closed on a recap.' });
+  assert.equal(line, 'graded: 3/4 — It closed on a recap.');
+  assert.equal(cdr.lastGradedLine([{ content: 'filed: X' }, { content: line }, { content: 'graded: 1/4 — older' }]), line);
+  assert.equal(cdr.lastGradedLine([{ content: 'filed: X' }]), null);
+  const g = cdr.fanoutCheckTotals([{ contractScore: 3 }, { contractScore: 4 }, { contractScore: null }]);
+  assert.match(cdr.formatCheckTotals(g, 'write'), /graded 2 avg 3\.5\/4$/);
   // live read-backs when the C111 artifacts are on disk
   const tanya = path.join(__dirname, '..', 'output', 'cron-compare', 'staged', 'sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md');
   if (fs.existsSync(tanya)) assert.equal(cdr.thinCheck(fs.readFileSync(tanya, 'utf8')).thin, true, 'C111 Tanya (58 words) reads thin');

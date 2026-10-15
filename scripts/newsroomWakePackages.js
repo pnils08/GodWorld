@@ -35,6 +35,11 @@ function validatePackage(key, value) {
   if (value && value.thinFloor !== undefined && !(Number.isInteger(value.thinFloor) && value.thinFloor > 0)) {
     errors.push('thinFloor must be a positive integer');
   }
+  // pipeline.77 — the watched reward-loop group (builder 2026-10-14): rubric shown at W3, contract
+  // score from the gate, the grade carried on the reporter's page into the next W1.
+  if (value && value.rewardLoop !== undefined && typeof value.rewardLoop !== 'boolean') {
+    errors.push('rewardLoop must be boolean');
+  }
   // pipeline.76 — writer tools are a per-package exception to ADR-0017 (builder 2026-10-14).
   if (value && value.writerTools !== undefined) {
     const n = value.writerTools && value.writerTools.maxToolCalls;

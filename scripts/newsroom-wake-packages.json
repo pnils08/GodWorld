@@ -69,6 +69,7 @@
   },
   "carmen-delaine": {
     "version": "CARMEN-LEP2-2",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "carmen-delaine",
@@ -128,6 +129,7 @@
   },
   "luis-navarro": {
     "version": "LUIS-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "luis-navarro",
@@ -366,6 +368,7 @@
   },
   "elliot-marbury": {
     "version": "MARBURY-LEP2-2",
+    "rewardLoop": true,
     "writerTools": {
       "maxToolCalls": 6
     },
@@ -486,6 +489,7 @@
   },
   "tanya-cruz": {
     "version": "TANYA-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "tanya-cruz",
@@ -1097,6 +1101,7 @@
   },
   "noah-tan": {
     "version": "NOAH-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "noah-tan",

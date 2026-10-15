@@ -166,6 +166,10 @@ const marbury = packages['elliot-marbury'];
 assert.equal(marbury.version, 'MARBURY-LEP2-2');
 // pipeline.76 — Marbury is the one package with writer tools; every other package has none
 assert.equal(marbury.writerTools.maxToolCalls, 6);
+// pipeline.77 — the watched reward-loop group, exactly these five
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.rewardLoop).map(([k]) => k).sort(),
+  ['carmen-delaine', 'elliot-marbury', 'luis-navarro', 'noah-tan', 'tanya-cruz']);
+assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
 assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['elliot-marbury']);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { writerTools: { maxToolCalls: 9 } })), /writerTools/);
 assert.equal(marbury.assignment.popid, 'POP-00166');

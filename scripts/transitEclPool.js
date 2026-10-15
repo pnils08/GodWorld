@@ -17,8 +17,9 @@
  * No `$` (the loader reads it as a fragment slot).
  *
  *   node scripts/transitEclPool.js                              # validate + print
- *   node scripts/undockedEclPoolApply.js --pool transit          # dry-run vs live
- *   node scripts/undockedEclPoolApply.js --pool transit --apply  # append missing (plan §Sequencing step 2)
+ *   node scripts/undockedEclPoolApply.js --pool transit --poolkey occupation.transit          # dry-run vs live
+ *   node scripts/undockedEclPoolApply.js --pool transit --poolkey occupation.transit --apply  # plan §Sequencing step 2
+ *   (occupation.bartCrew waits on the builder's title ruling; the transit pool never applies without --poolkey)
  */
 const U = require('./undockedEclPool');
 const HDR = U.HDR;

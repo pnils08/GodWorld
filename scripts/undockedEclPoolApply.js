@@ -24,6 +24,10 @@ const MATCH = (function () { const i = process.argv.indexOf('--match'); return i
 // --poolkey <key>: append only the missing rows of one PoolKey (engine.290: the commute rows
 // occupation.transit go live while the crew rows occupation.bartCrew await the builder's titles).
 const POOLKEY = (function () { const i = process.argv.indexOf('--poolkey'); return i >= 0 ? String(process.argv[i + 1] || '') : null; })();
+if (POOLKEY === '' || (POOLKEY && POOLKEY.indexOf('--') === 0)) throw new Error('--poolkey needs a PoolKey value');
+// engine.290: the transit pool holds rows the builder has not cleared (the crew titles) — it
+// never applies whole; every transit run names its PoolKey (fail closed, codex 2026-10-15).
+if (POOL_ARG === 'transit' && !POOLKEY) throw new Error('--pool transit requires --poolkey <occupation.transit|occupation.bartCrew>');
 
 function norm(t) {
   return String(t || '').replace(/\s+/g, ' ').trim().toLowerCase();

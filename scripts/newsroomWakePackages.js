@@ -12,6 +12,8 @@ function slug(value) {
   return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
+const WRITER_TOOLS_SEATS = ['elliot-marbury']; // pipeline.76, builder 2026-10-14
+
 function validatePackage(key, value) {
   const errors = [];
   if (!value || typeof value !== 'object' || Array.isArray(value)) errors.push('must be an object');
@@ -44,6 +46,8 @@ function validatePackage(key, value) {
   if (value && value.writerTools !== undefined) {
     const n = value.writerTools && value.writerTools.maxToolCalls;
     if (!(Number.isInteger(n) && n >= 1 && n <= 8)) errors.push('writerTools.maxToolCalls must be an integer 1-8');
+    // codex pipeline.76 #1: the builder granted tools to one journalist; another seat needs his word.
+    if (!WRITER_TOOLS_SEATS.includes(key)) errors.push('writerTools is granted only to ' + WRITER_TOOLS_SEATS.join(', '));
   }
   if (value && value.sourcing !== undefined && !SOURCING.includes(value.sourcing)) {
     errors.push('sourcing must be one of ' + SOURCING.join(', '));

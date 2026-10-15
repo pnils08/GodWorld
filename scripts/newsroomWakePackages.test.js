@@ -172,6 +172,7 @@ assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.rewardL
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
 assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['elliot-marbury']);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { writerTools: { maxToolCalls: 9 } })), /writerTools/);
+assert.throws(() => packagesApi.validatePackage(jax.persona, Object.assign({}, jax, { writerTools: { maxToolCalls: 6 } })), /granted only to elliot-marbury/);
 assert.equal(marbury.assignment.popid, 'POP-00166');
 assert.equal(packagesApi.routeFor(marbury, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(hal.active, true);

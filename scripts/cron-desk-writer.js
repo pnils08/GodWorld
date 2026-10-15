@@ -640,8 +640,13 @@ function toolDossierRead(input) {
     const M = require('./buildMarburySlice');
     const mirror = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'player_truesource_mirror.json'), 'utf8'));
     const cards = Object.values(mirror).map(M.parseCard).filter(Boolean);
-    const card = cards.find(c => c.name.toLowerCase() === want) ||
-      cards.find(c => c.name.toLowerCase().includes(want) || want.includes(c.name.toLowerCase()));
+    // codex pipeline.76 #4: exact name, or a partial that matches exactly one card; never the first of many.
+    let card = cards.find(c => c.name.toLowerCase() === want);
+    if (!card) {
+      const hits = cards.filter(c => c.name.toLowerCase().includes(want) || want.includes(c.name.toLowerCase()));
+      if (hits.length > 1) return { text: '"' + input.player + '" matches ' + hits.length + ' dossiers: ' + hits.map(c => c.name).join(', ') + '. Ask again by full name.', lines: [] };
+      card = hits[0];
+    }
     if (!card) return { text: 'No dossier for "' + input.player + '". Dossiers on file: ' + cards.map(c => c.name).join(', '), lines: [] };
     const src = 'tool:dossier_read:' + card.name + (season ? ':' + season : '');
     const seasons = season ? card.seasons.filter(x => x.year === season) : card.seasons;
@@ -825,6 +830,13 @@ async function main() {
   if (RUBRIC && !PACKET_ONLY) throw new Error('--rubric is a typed Packet package setting: it requires --packet-only');
   if (WRITER_TOOLS && (!PACKET_ONLY || TOOLS_AB)) {
     throw new Error('--writer-tools is a typed Packet package setting: it requires --packet-only and excludes --tools-ab');
+  }
+  // codex pipeline.76 #1: the exception is bound here too, not only in the runner — the persona's
+  // own package must grant at least this many calls.
+  if (WRITER_TOOLS) {
+    const pkg = PERSONA ? require('./newsroomWakePackages').packageForAssignment({ persona: PERSONA }) : null;
+    const granted = pkg && pkg.writerTools && pkg.writerTools.maxToolCalls || 0;
+    if (granted < WRITER_TOOLS) throw new Error('--writer-tools ' + WRITER_TOOLS + ' not granted by the ' + (PERSONA || 'unnamed') + ' package');
   }
   if (TOOLS_AB && (!PACKET_ONLY || !/^tools-ab(-forced)?$/.test(ARTIFACT_TAG || ''))) {
     throw new Error('--tools-ab is the pipeline.75 test run: it requires --packet-only and --artifact-tag tools-ab or tools-ab-forced');
@@ -1193,7 +1205,10 @@ async function main() {
         : (abPop ? { popId: abPop, cycle, dryNote: true } : null) });
     usageIn += r.usageIn; usageOut += r.usageOut; turns = 1 + r.trace.length;
     try {
-      const traceName = (ARTIFACT_TAG ? DESK + '_c' + cycle + '_' + ARTIFACT_TAG : DESK + '_c' + cycle) + '.tooltrace.json';
+      // codex pipeline.76 #6: one trace per seat — a desk+tag name was overwritten by the next
+      // sports seat in the same fan-out.
+      const traceName = (ARTIFACT_TAG ? DESK + '_c' + cycle + '_' + ARTIFACT_TAG : DESK + '_c' + cycle) +
+        (PERSONA ? '_' + PERSONA : '') + '.tooltrace.json';
       fs.writeFileSync(path.join(COMPARE_DIR, traceName), JSON.stringify({ model: MODEL,
         calls: r.trace.map(({ result, lines, ...rest }) => rest), ranAt: new Date().toISOString() }, null, 2));
       toolTrace = r.trace;

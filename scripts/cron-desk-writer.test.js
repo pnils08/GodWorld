@@ -125,6 +125,10 @@ console.log('cron-desk-writer artifact-tag tests: PASS');
     const one = toolDossierRead({ player: card.name, season: card.seasons[0].year });
     assert.ok(one.lines.every(l => l.src === 'tool:dossier_read:' + card.name + ':' + card.seasons[0].year));
     assert.match(toolDossierRead({ player: 'TEST-ONLY Nobody' }).text, /No dossier/);
+    // codex #4: a partial that matches several cards asks again, never picks the first
+    const cardsAll = Object.values(JSON.parse(fs.readFileSync(mirrorPath, 'utf8'))).map(M.parseCard).filter(Boolean);
+    const shared = ['Mar', 'Ra', 'a'].find(q => cardsAll.filter(c => c.name.toLowerCase().includes(q.toLowerCase())).length > 1);
+    if (shared) { const amb = toolDossierRead({ player: shared }); assert.equal(amb.lines.length, 0); assert.match(amb.text, /matches \d+ dossiers/); }
     assert.ok(!all.text.includes('POP-'), 'no POPID in tool output');
   }
 }

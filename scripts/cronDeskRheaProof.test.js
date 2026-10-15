@@ -17,6 +17,10 @@ const verdict = {
 
 assert.equal(exactRheaProof(verdict, article).ok, true);
 assert.equal(exactRheaProof({ ...verdict, pass: false }, article).ok, false);
+// pipeline.76 (codex #3): a writer-tools run binds the pass to the amended manifest
+assert.equal(exactRheaProof({ ...verdict, reviewProfile: { manifestId: 'AM-new' } }, article, 'AM-new').ok, true);
+assert.match(exactRheaProof({ ...verdict, reviewProfile: { manifestId: 'AM-old' } }, article, 'AM-new').reason, /manifest/);
+assert.equal(exactRheaProof(verdict, article, null).ok, true, 'no manifest bound -> unchanged');
 assert.equal(exactRheaProof({ ...verdict, draftSha256: '0'.repeat(64) }, article).ok, false);
 assert.equal(exactRheaProof(verdict, article + 'mutation').ok, false);
 

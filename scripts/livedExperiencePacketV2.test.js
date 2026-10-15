@@ -768,30 +768,36 @@ assert.throws(() => interviewContract.validateInterviewOutput(liveQuote, residen
   /lived-context basis requires addressable story-linked evidence/,
   'lived-context basis is rejected when exposure.evidence is absent');
 
-// pipeline.76 — writer-tool lines the Article uses join the manifest; unused lines do not
+// pipeline.76 — writer-tool lines join the manifest only when one body unit carries the line's
+// anchor and two of its numbers; canon_search and quote-bearing lines never do (codex #2)
 {
   const fixture = path.join(__dirname, '..', 'output', 'cron-compare', 'sports_c110_elliot-marbury_packet-v2_anthropic-claude-sonnet-5.state.json');
   if (fs.existsSync(fixture)) {
     const pk = JSON.parse(fs.readFileSync(fixture, 'utf8'));
+    const D = 'tool:dossier_read:TEST-ONLY Player';
     const cands = [
-      { text: 'TEST-ONLY Player 2037 TST: 30 G, 4321 AB, 913 HR', src: 'tool:dossier_read:TEST-ONLY Player' },
-      { text: 'TEST-ONLY Player 2036 TST: 12 G, 8765 AB, 1 HR', src: 'tool:dossier_read:TEST-ONLY Player' },
-      { text: 'TEST-ONLY Other (POP-00999) is a shortstop in Rockridge since forever ago', src: 'tool:citizen_lookup:TEST-ONLY Other' },
+      { text: 'TEST-ONLY Player 2037 TST: 30 G, 4321 AB, 913 HR', src: D },
+      { text: 'TEST-ONLY Player 2036 TST: 12 G, 8765 AB, 31 HR', src: D },
+      { text: 'Quinn Testcase (POP-00999) — pitcher, born 1998, 41 starts', src: 'tool:citizen_lookup:Quinn Testcase' },
+      { text: 'Prior coverage: 2037 was 4321 AB and 913 HR', src: 'tool:canon_search:richards' },
+      { text: 'TEST-ONLY Player 2035 said "4321 and 913 were mine"', src: D },
+      { text: 'TEST-ONLY Player 2034 TST: 3 awards, the season line does not say', src: D },
     ];
-    const draft = 'That season he had 4321 AB and 913 HR. TEST-ONLY Other is a shortstop in Rockridge since forever.\n\n## INTAKE\nCLAIM: x | y\n';
+    const draft = 'In 2037 he had 4321 AB and 913 HR.\nQuinn Testcase, born 1998, made 41 starts. He had 3 hits; the season line does not say more.\n\n## INTAKE\nCLAIM: x | y\n';
     const used = p.selectUsedToolLines(draft, cands, pk);
-    assert.deepStrictEqual(used.map(u => u.text.slice(0, 26)), ['TEST-ONLY Player 2037 TST:', 'TEST-ONLY Other (POP-00999']);
-    const before = p.auditArticle(draft, pk);
+    assert.deepStrictEqual(used.map(u => u.src), [D, 'tool:citizen_lookup:Quinn Testcase'],
+      'the 2037 line and the profile; never 2036 (not in the body), canon_search, a quote, or a shared 3 / generic phrase');
     const numFindings = a => a.errors.concat(a.observations || []).filter(e => e.code === 'UNAPPROVED_NUMBER');
-    assert.ok(numFindings(before).length, 'tool numbers are unapproved before the amend (load-bearing: an observation)');
+    assert.ok(numFindings(p.auditArticle(draft, pk)).length, 'tool numbers are unapproved before the amend');
     const { packet: amended, added } = p.appendToolFacts(pk, used);
     assert.equal(added.length, 2);
     assert.notEqual(amended.manifest.id, pk.manifest.id, 'manifest id moves with the facts');
     assert.ok(!amended.manifest.approvedFacts.some(f => /POP-\d+/.test(f.text)), 'no POPID enters a fact');
-    const after = p.auditArticle(draft, amended);
-    assert.ok(!numFindings(after).some(e => e.values.some(v => ['4321', '913'].includes(v))),
-      'tool numbers the Article used are approved after the amend');
+    assert.ok(!numFindings(p.auditArticle(draft, amended)).some(e => e.values.some(v => ['4321', '913', '41'].includes(v))));
     assert.throws(() => p.appendToolFacts(pk, [{ text: 'x 1', src: 'output/somewhere.json' }]), /tool:<name>/);
+    // a fact the packet already holds under another source is not added twice (codex #4)
+    const dup = pk.known.find(k => k.t === 'FACT');
+    assert.equal(p.appendToolFacts(pk, [{ text: dup.text, src: 'tool:dossier_read:dup' }]).added.length, 0);
     assert.equal(pk.manifest.approvedFacts.length, JSON.parse(fs.readFileSync(fixture, 'utf8')).manifest.approvedFacts.length, 'input packet untouched');
   }
 }

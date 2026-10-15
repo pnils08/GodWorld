@@ -594,9 +594,16 @@ function renderSourceBrief(packet) {
 // with source tool:<name>:<args> BEFORE the audit and Rhea run, so a tool-fetched number is
 // verified, not flagged. The evidence boundary moves by exactly the lines used; nothing a tool
 // returned and the Article left alone is approved.
-const TOOL_RUN_WORDS = 5;
-function wordsOfText(text) {
-  return String(text || '').toLowerCase().replace(/[’']/g, '').match(/[a-z0-9.]+/g) || [];
+// Claim-specific admission (codex pipeline.76 #2 — the first rule admitted unrelated lines on a
+// shared "3" or a generic five-word phrase). A tool line is used only when ONE unit of the body
+// (a line, or a sentence inside a line) carries the line's anchor AND two of its significant
+// numbers (two+ digits or a decimal), at least one not already approved. Anchor: a dossier
+// line's season year; any other line's full two-word name. canon_search results (prior
+// coverage, staged drafts) and any line holding quotation marks never become approved facts —
+// retrieved speech is never laundered into the manifest.
+const TOOL_FACT_SOURCES = /^tool:(dossier_read|sheet_read|citizen_lookup):/;
+function significantNumbers(text) {
+  return numericTokens(text).map(v => v.toLowerCase()).filter(v => /\d{2,}|\d*\.\d+/.test(v));
 }
 function selectUsedToolLines(draftText, candidates, packet) {
   const body = String(draftText || '').split(/^##\s+INTAKE\s*$/im)[0];
@@ -604,20 +611,29 @@ function selectUsedToolLines(draftText, candidates, packet) {
     ...((packet && packet.manifest && packet.manifest.approvedFacts) || []).map(r => r.text),
     ...((packet && packet.manifest && packet.manifest.approvedQuotes) || []).map(r => r.text),
   ].join('\n')).map(v => v.toLowerCase()));
-  const bodyNums = new Set(numericTokens(body).map(v => v.toLowerCase()));
-  const bodyWords = ' ' + wordsOfText(body).join(' ') + ' ';
+  const units = [];
+  for (const line of body.split('\n')) {
+    if (!line.trim()) continue;
+    units.push(line);
+    for (const sent of line.split(/(?<=[.!?])\s+/)) if (sent !== line && sent.trim()) units.push(sent);
+  }
+  const unitNums = units.map(u => new Set(significantNumbers(u)));
   const out = [];
   const seen = new Set();
   for (const c of candidates || []) {
     const text = clean(c && c.text, 500);
-    if (!text || seen.has(text)) continue;
-    const newNum = numericTokens(text).map(v => v.toLowerCase()).some(v => bodyNums.has(v) && !allowed.has(v));
-    let run = false;
-    const w = wordsOfText(text);
-    for (let i = 0; !run && i + TOOL_RUN_WORDS <= w.length; i++) {
-      run = bodyWords.includes(' ' + w.slice(i, i + TOOL_RUN_WORDS).join(' ') + ' ');
-    }
-    if (newNum || run) { seen.add(text); out.push({ text, src: clean(c.src, 300) }); }
+    const src = clean(c && c.src, 300);
+    if (!text || seen.has(text) || !TOOL_FACT_SOURCES.test(src) || /["“”]/.test(text)) continue;
+    const dossier = /^tool:dossier_read:/.test(src);
+    const year = dossier ? (text.match(/\b(19|20)\d{2}\b/) || [])[0] : null;
+    const name = dossier ? null : (text.match(/\b[A-Z][a-z'’-]+ [A-Z][a-z'’-]+\b/) || [])[0];
+    const anchor = year || name;
+    if (!anchor) continue;
+    const nums = significantNumbers(text).filter(v => v !== anchor);
+    const hit = units.some((u, i) => u.includes(anchor) &&
+      nums.filter(v => unitNums[i].has(v)).length >= 2 &&
+      nums.some(v => unitNums[i].has(v) && !allowed.has(v)));
+    if (hit) { seen.add(text); out.push({ text, src }); }
   }
   return out;
 }
@@ -630,6 +646,10 @@ function appendToolFacts(packet, lines) {
     const text = clean(String(line.text || '').replace(/\s*\(POP-\d+\)/ig, '').replace(/\bPOP-\d+\b/ig, ''), 500);
     const src = clean(line.src, 300);
     if (!text || !/^tool:[a-z_]+:/.test(src)) throw new Error('tool fact requires text and a tool:<name>:<args> source');
+    // codex #4: the same fact under a second source is not a second fact (a dossier line the slice
+    // already carries, with or without the slice's "Peer — " prefix).
+    const norm = t => clean(String(t || '').replace(/^Peer — /, '')).toLowerCase();
+    if ((next.known || []).some(k => norm(k.text) === norm(text))) continue;
     const claim = { t: 'FACT', text, src };
     claim.id = claimId(claim);
     if (have.has(claim.id)) continue;

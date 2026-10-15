@@ -81,11 +81,15 @@ function beatSlugForName(name) {
   return null;
 } // --no-gate ungated review samples (S332): never canon
 
-function exactRheaProof(rhea, articleText) {
+function exactRheaProof(rhea, articleText, manifestId) {
   const articleSha256 = crypto.createHash('sha256').update(articleText).digest('hex');
   if (!rhea || rhea.pass !== true) return { ok: false, articleSha256, reason: 'Rhea did not pass' };
   if (!rhea.draftSha256 || rhea.draftSha256 !== articleSha256) {
     return { ok: false, articleSha256, reason: 'Rhea verdict hash does not match Article' };
+  }
+  // codex pipeline.76 #3: a writer-tools run amends the manifest; the pass must be for THIS one.
+  if (manifestId && !(rhea.reviewProfile && rhea.reviewProfile.manifestId === manifestId)) {
+    return { ok: false, articleSha256, reason: 'Rhea verdict manifest does not match the Packet' };
   }
   return { ok: true, articleSha256 };
 }
@@ -2987,6 +2991,8 @@ async function runWrite(assign) {
   if (NO_GATE) {
     log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
   } else if (!skipRhea) {
+    // codex pipeline.76 #3: a fresh verdict or none — a stale same-name verdict is never re-read.
+    fs.rmSync(path.join(COMPARE, base + '.rhea.json'), { force: true });
     log('gating...');
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
@@ -3003,7 +3009,8 @@ async function runWrite(assign) {
     } catch (_) { /* gate exit 2/3 — verdict json still written */ }
     const verdictPath = path.join(COMPARE, base + '.rhea.json');
     rhea = readJson(verdictPath);
-    rheaProof = exactRheaProof(rhea, fs.readFileSync(draftPath, 'utf8'));
+    rheaProof = exactRheaProof(rhea, fs.readFileSync(draftPath, 'utf8'),
+      writerTools && writePacket && writePacket.manifest ? writePacket.manifest.id : null);
     pass = rheaProof.ok;
     if (rhea && rhea.pass === true && !pass) log('Rhea pass rejected: ' + rheaProof.reason);
   }
@@ -3136,7 +3143,9 @@ async function runWrite(assign) {
   // Task 2.5.3 — self-scoring footer check (pressure-test #6, deterministic).
   const footerPresent = /<!--\s*SELF-SCORE:/.test(fs.readFileSync(draftPath, 'utf8'));
   // Task 2.5.5 — tool-use scoreboard column (pressure-test #5): did the writer dig?
-  const traceArt = readJson(path.join(COMPARE, (artifactTag ? desk + '_c' + cycle + '_' + artifactTag : desk + '_c' + cycle) + '.tooltrace.json'));
+  const traceStem = artifactTag ? desk + '_c' + cycle + '_' + artifactTag : desk + '_c' + cycle;
+  const traceArt = personaSlug ? readJson(path.join(COMPARE, traceStem + '_' + personaSlug + '.tooltrace.json'))
+    : readJson(path.join(COMPARE, traceStem + '.tooltrace.json'));
   const record = {
     mode: 'wake-write', desk, cycle,
     provider: route.provider,

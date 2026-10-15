@@ -91,8 +91,9 @@ function loadReportComplete(cycle) {
 function loadStagedStems() {
   if (!fs.existsSync(STAGED)) return [];
   return fs.readdirSync(STAGED)
-    .filter(f => f.endsWith('.staged.json'))
-    .map(f => f.replace(/\.staged\.json$/, ''));
+    .map(f => require('../lib/articleIntake').parseStagedSidecar(f))   // pipeline.78: plain or S492 suffix
+    .filter(Boolean)
+    .map(p => p.base);
 }
 
 function isCovered(stem, stagedStems) {

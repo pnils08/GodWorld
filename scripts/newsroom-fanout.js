@@ -101,7 +101,7 @@ function stagedTally(cycle, dir) {
   const stagedDir = dir || path.join(COMPARE, 'staged');
   const out = { total: 0, byByline: {} };
   let files = [];
-  try { files = fs.readdirSync(stagedDir).filter(f => f.endsWith('.staged.json')); } catch (_) { return out; }
+  try { files = fs.readdirSync(stagedDir).filter(f => require('../lib/articleIntake').isStagedSidecar(f)); } catch (_) { return out; }   // pipeline.78
   for (const f of files) {
     let j; try { j = JSON.parse(fs.readFileSync(path.join(stagedDir, f), 'utf8')); } catch (_) { continue; }
     if (String(j.cycle) !== String(cycle)) continue;

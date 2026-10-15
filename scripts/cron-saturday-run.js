@@ -171,9 +171,11 @@ function loadArcSeeds(cycle) {
 
 function loadStagedSet(cycle) {
   const out = [];
+  const seenSha = new Set(); // pipeline.78: one Article under two sidecar names lands once
   if (!fs.existsSync(STAGED)) return out;
   for (const f of fs.readdirSync(STAGED).sort()) {
-    if (!f.endsWith('.staged.json')) continue;
+    const named = require('../lib/articleIntake').parseStagedSidecar(f); // pipeline.78: plain or S492 suffix
+    if (!named) continue;
     let side;
     try { side = JSON.parse(fs.readFileSync(path.join(STAGED, f), 'utf8')); } catch (_) { continue; }
     if (String(side.cycle) !== String(cycle)) continue;
@@ -187,15 +189,17 @@ function loadStagedSet(cycle) {
     let fallbackVerdict = null;
     try {
       fallbackVerdict = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'cron-compare',
-        f.replace(/\.staged\.json$/, '.rhea.json')), 'utf8'));
+        named.base + '.rhea.json'), 'utf8'));   // the root verdict carries the base name
     } catch (_) { /* reconciled sidecars carry the proof inline */ }
     const proof = verifyStagedProof(side, text, fallbackVerdict);
     if (!proof.ok) {
       console.log('[skip] unproved staged Article ' + f + ': ' + proof.reason);
       continue;
     }
+    if (seenSha.has(proof.articleSha256)) { console.log('[skip] duplicate Article bytes under a second sidecar: ' + f); continue; }
+    seenSha.add(proof.articleSha256);
     out.push({
-      stem: f.replace(/\.staged\.json$/, ''),
+      stem: named.stem,   // X, or X-HHMM for a suffixed filing — distinct canon customIds
       sidecar: side,
       text,
       articleSha256: proof.articleSha256
@@ -386,7 +390,8 @@ async function stepSheets(cycle) {
 }
 function entryByline(stem) {
   try {
-    const side = JSON.parse(fs.readFileSync(path.join(STAGED, stem + '.staged.json'), 'utf8'));
+    const name = require('../lib/articleIntake').stagedSidecarNames(stem).find(n => fs.existsSync(path.join(STAGED, n)));
+    const side = JSON.parse(fs.readFileSync(path.join(STAGED, name || stem + '.staged.json'), 'utf8'));
     return side.byline || '';
   } catch (_) { return ''; }
 }

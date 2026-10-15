@@ -190,7 +190,7 @@ function collectNewsroomPulse(options) {
     cycleFromArtifact(record.file, record.data) === cycle);
 
   const stagedRecords = walkFiles(path.join(compareDir, 'staged'))
-    .filter((file) => file.endsWith('.staged.json') && fs.statSync(file).mtimeMs >= cutoff)
+    .filter((file) => require('../lib/articleIntake').isStagedSidecar(file) && fs.statSync(file).mtimeMs >= cutoff)   // pipeline.78
     .map((file) => ({ file, mtimeMs: fs.statSync(file).mtimeMs, proof: verifiedStagedRecord(file, root) }));
   const verified = stagedRecords.filter((record) => record.proof.ok);
   const currentFilings = verified.filter((record) => record.proof.cycle === cycle)

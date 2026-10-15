@@ -2539,7 +2539,7 @@ function yesterdaysFilings(desk, cycle) {
     if (!fs.existsSync(STAGED)) return out;
     const yday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
     for (const f of fs.readdirSync(STAGED)) {
-      if (!f.endsWith('.staged.json') || out.length >= FILINGS_MAX) continue;
+      if (!require('../lib/articleIntake').isStagedSidecar(f) || out.length >= FILINGS_MAX) continue;   // pipeline.78
       const side = readJson(path.join(STAGED, f));
       if (!side || side.desk !== desk || String(side.cycle) !== String(cycle)) continue;
       if (String(side.stagedAt || '').slice(0, 10) !== yday) continue;

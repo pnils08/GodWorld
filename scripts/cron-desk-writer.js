@@ -222,6 +222,11 @@ const STRICT_SOURCE_HYGIENE =
 // canon/sheet/memory tool is exposed, so a scheduled package cannot silently
 // enlarge its evidence set mid-run.
 const PACKET_ONLY = process.argv.includes('--packet-only');
+// pipeline.75 (3) — the builder's tools A/B: a typed Packet run with the five live tools
+// re-exposed (max 6 calls). Test-only: requires --packet-only and --artifact-tag tools-ab,
+// traces what each call returned, and memory_note does not write. Scheduled runs never pass it
+// (ADR-0017 §Decision 3 holds until the builder accepts otherwise).
+const TOOLS_AB = process.argv.includes('--tools-ab');
 
 // Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).
 // Live OpenRouter check 2026-08-10 (prompt/completion per 1M).
@@ -643,6 +648,7 @@ async function toolMemoryNote(popId, input, cycle) {
 }
 
 async function execOpenRouterTool(name, input, memCtx) {
+  if (name === 'memory_note' && memCtx && memCtx.dryNote) return 'noted (test run — not saved): ' + String(input && input.note || '').slice(0, 200);
   if (name === 'canon_search') return toolSearchWorld({ query: input.query });
   if (name === 'citizen_lookup') return toolCitizenLookup(input);
   if (name === 'sheet_read') return toolSheetRead(input);
@@ -685,7 +691,8 @@ async function openRouterToolLoop(opts) {
           ? String(await execOpenRouterTool(tc.function.name, input, opts.memCtx))
           : 'tool budget exhausted — compose from what you have.';
         calls++;
-        trace.push({ tool: tc.function.name, input, resultChars: result.length });
+        trace.push({ tool: tc.function.name, input, resultChars: result.length,
+          ...(opts.traceResults ? { resultHead: result.slice(0, 600) } : {}) });
         messages.push({ role: 'tool', tool_call_id: tc.id, content: cap(result, 8000) });
       }
       continue;
@@ -753,6 +760,9 @@ async function main() {
     throw new Error(
       '--brief-requirement-file requires --artifact-tag and --state-file'
     );
+  }
+  if (TOOLS_AB && (!PACKET_ONLY || ARTIFACT_TAG !== 'tools-ab')) {
+    throw new Error('--tools-ab is the pipeline.75 test run: it requires --packet-only and --artifact-tag tools-ab');
   }
   if (STRICT_SOURCE_HYGIENE && (!ARTIFACT_TAG || !STATE_FILE)) {
     throw new Error(
@@ -1003,7 +1013,17 @@ async function main() {
         'Never output Names Index, EVIDENCE, ARTICLE TABLE ENTRIES, CITIZEN USAGE LOG, CONTINUITY NOTES, or FACTUAL ASSERTIONS. ' +
         'When packet.manifest.policy is load-bearing, create only the street texture explicitly authorized by packet.manifest.authorizedTexture and packet.manifest.textureConditions. Texture creates lived experience; it never enlarges the canon facts. ' +
         'Repeat one NAMES/BIZ/HOOD/CLAIM record per line; omit empty record types; never combine records with commas.\n' +
-        '=== END TYPED PACKET OUTPUT CONTRACT ==='
+        '=== END TYPED PACKET OUTPUT CONTRACT ===' +
+        (TOOLS_AB
+          ? '\n\n=== YOUR TOOLS (up to 6 calls, read-only) ===\n' +
+            '- canon_search: prior Tribune coverage and city records — use it for history and depth behind a Packet fact.\n' +
+            '- citizen_lookup: one citizen\'s ledger profile by name — use it before you characterize anyone the Packet names.\n' +
+            '- sheet_read: a slice of a live city sheet (Initiative_Tracker, Neighborhood_Map, Oakland_Sports_Feed, Civic_Office_Ledger) — use it to check a current number.\n' +
+            '- memory_recall: your own past reflections and working notes — use it to pick up a thread you were following.\n' +
+            '- memory_note: one short working note for your next wake — a source or thread to revisit, not the article.\n' +
+            'A fact a tool returns may enter the Article; a name, number or quote no tool and no Packet line supports may not.\n' +
+            '=== END TOOLS ==='
+          : '')
       : '');
 
   const kickoff = STATE_FILE
@@ -1073,7 +1093,7 @@ async function main() {
     // max 6 calls, every call traced). Supersedes the Thread-B compose-only
     // design — the comparison era is over, this is the production wake.
     log.info((PACKET_ONLY ? 'packet-only compose' : 'tool-loop write') + ' via OpenRouter (' + MODEL +
-      (PACKET_ONLY ? ', 0 live tools' : ', max 6 calls') + ')...');
+      (PACKET_ONLY && !TOOLS_AB ? ', 0 live tools' : ', max 6 calls') + ')...');
     const composeUser = kickoff +
       '\n\nWRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +
       'markdown, built ONLY from the events/names/records in the world state above plus what your tools ' +
@@ -1082,10 +1102,14 @@ async function main() {
           ? 'You are this journalist in GodWorld this cycle. Nobody was interviewed for this piece: the Packet holds no approved quote. Write it from the record. Open the way packet.reviewProfile.articleContract.opening says — on a supplied line, figure, vote or filing — and close the way its closing says. Write no quoted speech and attribute no statement, mood or intention to anyone. Do not stage a scene, a street, a bar or a room to carry the facts. Name a source the way a reader would — the city\'s initiative record, his career line — never the Packet, a tab or file name, or a bracketed tag. Never lead with a tracker phase label, a feed label, or a bullet list of approved facts. Do not import real-world Oakland tropes the Packet did not name. Do not invent names, numbers, quotes, or events, and do no arithmetic the Packet has not already done. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
           : 'You are this journalist in GodWorld this cycle. The Packet facts are the physics — what the engine did. The Article is someone living under that physics. Open on a named interviewed person or a Packet-named place, in a body, doing something. Use every approved quote as spoken speech in a scene, not as a caption under a recap. Never announce the season or the temperature; if it is winter, show a Packet-backed thing that moved on a day like this. Never lead with a tracker phase, a feed label, a bullet list of approved facts, or the words supplied record / listed as / what remains to be learned. Do not import real-world Oakland winter tropes the Packet did not name. Do not invent names, numbers, quotes, or events. Texture may only dress Packet-named places and approved speakers. If you cannot write the life, stop. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
         : 'Use your tools FIRST where the state runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ') +
+      (TOOLS_AB ? 'Use your tools where the Packet runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ' : '') +
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
+    const abPop = TOOLS_AB && packetState && packetState.actor && /^POP-\d+$/.test(packetState.actor.id) ? packetState.actor.id : null;
     const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser,
-      maxToolCalls: PACKET_ONLY ? 0 : 6,
-      memCtx: BYLINE_POPID ? { popId: BYLINE_POPID, cycle } : null });
+      maxToolCalls: PACKET_ONLY && !TOOLS_AB ? 0 : 6,
+      traceResults: TOOLS_AB,
+      memCtx: BYLINE_POPID ? { popId: BYLINE_POPID, cycle }
+        : (abPop ? { popId: abPop, cycle, dryNote: true } : null) });
     usageIn += r.usageIn; usageOut += r.usageOut; turns = 1 + r.trace.length;
     try {
       const traceName = (ARTIFACT_TAG ? DESK + '_c' + cycle + '_' + ARTIFACT_TAG : DESK + '_c' + cycle) + '.tooltrace.json';

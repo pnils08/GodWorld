@@ -7,9 +7,9 @@
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
 **Plans in motion (48)** — each plan, its rows and the state each is in:
 
+- [[../plans/2026-10-11-media-extension]]: pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, pipeline.71 ready, engine.287 live-observing, engine.288 live-observing, engine.289 blocked
-- [[../plans/2026-10-11-media-extension]]: pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 ready, engine.264 ready, engine.261 ready
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 in-progress

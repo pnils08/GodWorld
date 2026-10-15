@@ -134,6 +134,153 @@ function transitDayMult_(context) {
   return 1;
 }
 
+// engine.290 move 3 — the base this engine computes ridership from. 2 = the
+// ledger share; a Cycle whose previous carry is not 2 is the rebase Cycle.
+var TRANSIT_BASE_VERSION = 2;
+
+/**
+ * engine.290 move 3 — each station's share of the city's riders, from the
+ * ledgers and dimensionless (two scales never mixed):
+ *
+ *   w(h) = (α·r(h) + (1−α)·k(h)) × (1 + ρ(h))
+ *   r(h) = Adults(h) / ΣAdults                     hood-scale residents
+ *   k(h) = S.commuteInbound[h] / Σ                 ledger-scale workers (the
+ *          inbound tally already includes the diagonal — commuteFlowEngine
+ *          adds flows[oh][dh] over every origin, oh === dh included)
+ *   ρ(h) = transitRetailWeight × clamp(RetailVitality(h)/cityMedian − 1, ±0.5)
+ *          — a bounded hot-spot lift (a multiplier: added to shares near
+ *          1/22 it zeroed six hoods on the C111 read-before)
+ *
+ * A station whose own hood is h is primary for h; one listing h only in its
+ * catchment is secondary. With primaries, (1 − s)·w(h) splits among them and
+ * s·w(h) among the secondaries (s = transitCatchmentShare); with none, all of
+ * w(h) splits among the secondaries. Names fold through resolveHoodOrChild_
+ * (Coliseum, Elmhurst → East Oakland; North Oakland → Temescal; Montclair →
+ * Piedmont Ave), each hood once per station. Shares sum to 1.
+ *
+ * @return {{byStation:Object, missing:Object}|null} null = no demographics
+ */
+function transitStationShares_(ctx, demographics, dials, stations) {
+  var S = ctx.summary || {};
+  var demoKeys = Object.keys(demographics || {});
+  if (!demoKeys.length || !stations.length) return null;
+  var fold = function(n) { return resolveHoodOrChild_(ctx, n); };
+  var hoods = (S.canonHoods && S.canonHoods.list) ? S.canonHoods.list.slice() : demoKeys.slice();
+
+  var sumA = 0, sumK = 0, i, h;
+  var inbound = S.commuteInbound || {};
+  for (i = 0; i < hoods.length; i++) {
+    h = hoods[i];
+    sumA += Number((demographics[h] || {}).adults) || 0;
+    sumK += Number(inbound[h]) || 0;
+  }
+  var retail = [], ns = S.neighborhoodState || {};
+  for (i = 0; i < hoods.length; i++) {
+    var rv = Number((ns[hoods[i]] || {}).retailVitality);
+    if (isFinite(rv) && rv > 0) retail.push(rv);
+  }
+  retail.sort(function(a, b) { return a - b; });
+  var median = retail.length ? (retail.length % 2 ? retail[(retail.length - 1) / 2]
+    : (retail[retail.length / 2 - 1] + retail[retail.length / 2]) / 2) : 0;
+
+  var alpha = dials.transitResidentWeight;
+  var w = {};
+  for (i = 0; i < hoods.length; i++) {
+    h = hoods[i];
+    var r = sumA > 0 ? (Number((demographics[h] || {}).adults) || 0) / sumA : 0;
+    var k = sumK > 0 ? (Number(inbound[h]) || 0) / sumK : 0;
+    var hrv = Number((ns[h] || {}).retailVitality);
+    var rho = (median > 0 && isFinite(hrv) && hrv > 0)
+      ? dials.transitRetailWeight * Math.max(-0.5, Math.min(0.5, hrv / median - 1)) : 0;
+    w[h] = (alpha * r + (1 - alpha) * k) * (1 + rho);
+  }
+
+  var primary = {}, secondary = {}, missing = {};
+  for (i = 0; i < stations.length; i++) {
+    var st = stations[i];
+    missing[st.station] = [];
+    var own = fold(st.neighborhood);
+    var seen = {};
+    if (own) { seen[own] = true; (primary[own] = primary[own] || []).push(st.station); }
+    else missing[st.station].push(st.neighborhood);
+    var list = st.corridors || [];
+    for (var c = 0; c < list.length; c++) {
+      var ch = fold(list[c]);
+      if (!ch) { missing[st.station].push(list[c]); continue; }
+      if (seen[ch]) continue;
+      seen[ch] = true;
+      (secondary[ch] = secondary[ch] || []).push(st.station);
+    }
+    // a served hood with no demographics row and no workers carries 0 — named
+    var served = Object.keys(seen);
+    for (var sv = 0; sv < served.length; sv++) {
+      if (!demographics[served[sv]] && !(Number(inbound[served[sv]]) > 0)) missing[st.station].push(served[sv]);
+    }
+  }
+
+  var s = dials.transitCatchmentShare;
+  var load = {};
+  for (i = 0; i < stations.length; i++) load[stations[i].station] = 0;
+  for (i = 0; i < hoods.length; i++) {
+    h = hoods[i];
+    var P = primary[h] || [], C = secondary[h] || [];
+    var j;
+    if (P.length) {
+      var pShare = C.length ? (1 - s) : 1;
+      for (j = 0; j < P.length; j++) load[P[j]] += pShare * w[h] / P.length;
+      for (j = 0; j < C.length; j++) load[C[j]] += s * w[h] / C.length;
+    } else if (C.length) {
+      for (j = 0; j < C.length; j++) load[C[j]] += w[h] / C.length;
+    }
+  }
+  var total = 0;
+  for (var ks in load) if (load.hasOwnProperty(ks)) total += load[ks];
+  if (!(total > 0)) return null;
+  var byStation = {};
+  for (var kb in load) if (load.hasOwnProperty(kb)) byStation[kb] = load[kb] / total;
+  return { byStation: byStation, missing: missing };
+}
+
+/**
+ * engine.290 move 3 — the corridors' traffic base from the sim: each canon
+ * hood's S.neighborhoodDynamics[h].traffic multiplier and the city mean.
+ * null when the dynamics are absent (the authored table is the fallback).
+ */
+function transitCorridorBase_(S, dials) {
+  var nd = S.neighborhoodDynamics;
+  if (!nd) return null;
+  var sum = 0, n = 0;
+  for (var h in nd) {
+    if (!nd.hasOwnProperty(h)) continue;
+    var t = Number((nd[h] || {}).traffic);
+    if (isFinite(t) && t > 0) { sum += t; n++; }
+  }
+  if (!n) return null;
+  return { traffic: nd, cityMean: sum / n };
+}
+
+function transitCorridorBaseFor_(corridor, cb, dials) {
+  var hoods = corridor.hoods || [];
+  var sum = 0;
+  for (var i = 0; i < hoods.length; i++) {
+    var t = Number((cb.traffic[hoods[i]] || {}).traffic);
+    sum += (isFinite(t) && t > 0) ? t : 1.0;   // a hood with no dynamics row counts 1.0
+  }
+  var mean = hoods.length ? sum / hoods.length : 1.0;
+  return dials.transitCityTraffic * (mean / cb.cityMean) * (corridor.freeway ? dials.transitFreewayMult : 1);
+}
+
+/**
+ * engine.290 move 3 — the base tags every row leads with: where the base came
+ * from, the rebase Cycle, and any served name with no row.
+ */
+function transitBaseCauses_(context, missing) {
+  var out = [context.shares ? 'base: ledger' : 'base: table'];
+  if (context.rebased) out.push('rebased');
+  for (var i = 0; i < (missing || []).length; i++) out.push('no row: ' + missing[i]);
+  return out;
+}
+
 // ============================================================================
 // MAIN ENGINE FUNCTION
 // ============================================================================
@@ -203,6 +350,17 @@ function updateTransitMetrics_Phase2_(ctx) {
     demographics = getNeighborhoodDemographics_(ss);
   }
 
+  // engine.290 move 3 — ridership and street traffic from the ledgers. Shares
+  // computed once per Cycle; the first Cycle on the new base says so on every
+  // row (previousCycleState.transitBaseVersion, finalizeCycleState).
+  var shares = transitStationShares_(ctx, demographics, dials, OAKLAND_BART_STATIONS || []);
+  var corridorBase = transitCorridorBase_(S, dials);
+  var prevBaseVersion = S.previousCycleState ? Number(S.previousCycleState.transitBaseVersion) || 0 : 0;
+  var baseVersion = shares ? TRANSIT_BASE_VERSION : 1;
+  var rebased = baseVersion === TRANSIT_BASE_VERSION && prevBaseVersion !== TRANSIT_BASE_VERSION;
+  var capacity = S.cityDynamicsCapacity || {};
+  var transitCongestion = Number(capacity.transitCongestion) || 0;
+
   // Build context for modifiers
   var context = {
     weather: weatherType,
@@ -218,6 +376,10 @@ function updateTransitMetrics_Phase2_(ctx) {
     holiday: holiday,
     firstFriday: !!S.isFirstFriday,
     dials: dials,
+    shares: shares,
+    corridorBase: corridorBase,
+    rebased: rebased,
+    transitCongestion: transitCongestion,
     // engine.93 Task 9: the commute matrix rides along so per-station ridership
     // can weight by who commutes IN, not just who lives nearby.
     summary: S
@@ -255,6 +417,7 @@ function updateTransitMetrics_Phase2_(ctx) {
   S.transitMetrics = {
     updated: true,
     cycle: cycle,
+    baseVersion: baseVersion,
     totalRidership: sumRidership_(stationMetrics),
     avgOnTime: avgOnTime_(stationMetrics),
     avgTraffic: avgTraffic_(corridorMetrics),
@@ -263,6 +426,9 @@ function updateTransitMetrics_Phase2_(ctx) {
       dayType: dayType,
       holiday: holiday ? holiday.label + (holiday.major ? ' (major)' : '') : '',
       firstFriday: !!S.isFirstFriday,
+      base: shares ? 'ledger' : 'table',
+      rebased: rebased,
+      transitCongestion: transitCongestion,
       majorEvents: majorEvents,
       gameDay: gameDay,
       // engine.183 — the whole causal frame in one place
@@ -417,8 +583,13 @@ function updateTransitMetrics_Phase2_(ctx) {
  * @return {Object}
  */
 function calculateStationMetrics_(station, context, demographics, rng) {
-  // Base ridership
-  var baseRidership = station.baseRidership || 5000;
+  // engine.290 move 3 — base = transitCityRiders × this station's ledger share.
+  // The authored baseRidership is read only when the shares cannot be built
+  // (no Neighborhood_Demographics), and the row says `base: table`.
+  var share = context.shares && context.shares.byStation[station.station];
+  var baseRidership = (share !== undefined && share !== null)
+    ? context.dials.transitCityRiders * share
+    : (station.baseRidership || 5000);
 
   // Apply ridership modifier
   var ridershipMod = 1.0;
@@ -428,31 +599,8 @@ function calculateStationMetrics_(station, context, demographics, rng) {
     ridershipMod = calculateRidershipModLocal_(context);
   }
 
-  // Demographic adjustment (working population)
-  var hood = station.neighborhood;
-  var demo = demographics[hood] || {};
-  var adults = Number(demo.adults) || 0;
-  var students = Number(demo.students) || 0;
-  var seniors = Number(demo.seniors) || 0;
-  var totalPop = adults + students + seniors;
-  var adultsRatio = totalPop > 0 ? (adults / totalPop) : 0.6;
-  ridershipMod *= (0.7 + adultsRatio * 0.5); // More working adults = more riders
-
-  // engine.93 Task 9: a station's riders are not just the people who live
-  // around it. Commuters arriving from other hoods are exactly who a
-  // weekday-morning platform is full of, and before the commute matrix existed
-  // this term was blind to them — a downtown station scored purely off downtown
-  // residents. Bounded lift so an employment centre never runs away with
-  // ridership: +30% at the cap.
-  var commuteS = (context && context.summary) || null;
-  if (commuteS && commuteS.commuteFlows && typeof commuteInboundExternal_ === 'function') {
-    var inbound = commuteInboundExternal_(commuteS, hood);
-    if (inbound > 0) {
-      var localWorkers = adults > 0 ? adults : 1;
-      var inboundRatio = inbound / (inbound + localWorkers);
-      ridershipMod *= (1 + Math.min(0.30, inboundRatio * 0.5));
-    }
-  }
+  // engine.290 move 3: the adults-ratio and commute-inbound multipliers that
+  // stood here are the share now (residents, workers and retail per hood).
 
   // engine.290 move 2 — the one day-type rule (weekend / major holiday)
   ridershipMod *= transitDayMult_(context);
@@ -523,14 +671,17 @@ function calculateStationMetrics_(station, context, demographics, rng) {
   } else if (context.weather === 'rain' || context.weather === 'fog') {
     onTime -= 0.05;
   }
-  if (context.events > 2) {
-    onTime -= 0.03; // Crowding affects performance
+  // engine.290 move 3 — crowding from the sim: the city's own transit
+  // congestion (applyCityDynamics_, 0-0.38) replaces the events>2 hardcode.
+  if (context.transitCongestion > 0) {
+    onTime -= context.transitCongestion * context.dials.transitCongestionOnTimeMult;
   }
   onTime += onTimeDelta;
   onTime += (rng() - 0.5) * TRANSIT_FACTORS.ON_TIME_VARIANCE;
   onTime = Math.max(0.6, Math.min(0.98, onTime));
 
-  var notes = generateStationNotes_(station, ridership, onTime, gameDayHere);
+  causes = transitBaseCauses_(context, context.shares ? (context.shares.missing[station.station] || []) : []).concat(causes);
+  var notes = generateStationNotes_(station, ridership, onTime, gameDayHere, baseRidership);
   return {
     station: station.station,
     ridershipVolume: ridership,
@@ -590,8 +741,11 @@ function rowCauses_(allMetrics) {
  * @return {Object}
  */
 function calculateCorridorTraffic_(corridor, context, rng) {
-  // Base traffic index
-  var baseTraffic = corridor.baseTrafficIndex || 50;
+  // engine.290 move 3 — base = transitCityTraffic × the corridor's hoods'
+  // traffic multiplier against the city mean (× transitFreewayMult on a
+  // freeway). The authored baseTrafficIndex is the no-dynamics fallback.
+  var cb = context.corridorBase;
+  var baseTraffic = cb ? transitCorridorBaseFor_(corridor, cb, context.dials) : (corridor.baseTrafficIndex || 50);
 
   // Apply traffic modifier
   var trafficMod = 1.0;
@@ -638,6 +792,9 @@ function calculateCorridorTraffic_(corridor, context, rng) {
     extraTraffic += eff.traffic;
     causes.push(eff.tag);
   }
+
+  causes = transitBaseCauses_(context, []).concat(causes);
+  if (!cb) causes[0] = 'base: table';
 
   // Random variance
   var variance = (rng() - 0.5) * TRANSIT_FACTORS.TRAFFIC_VARIANCE;
@@ -949,7 +1106,8 @@ function avgTraffic_(corridorMetrics) {
 /**
  * Generate station notes.
  */
-function generateStationNotes_(station, ridership, onTime, gameDayHere) {
+function generateStationNotes_(station, ridership, onTime, gameDayHere, base) {
+  var ref = base || station.baseRidership;
   var notes = [];
 
   if (gameDayHere) {
@@ -960,9 +1118,9 @@ function generateStationNotes_(station, ridership, onTime, gameDayHere) {
   } else if (onTime > 0.92) {
     notes.push('smooth operations');
   }
-  if (ridership > station.baseRidership * 1.2) {
+  if (ridership > ref * 1.2) {
     notes.push('above-average ridership');
-  } else if (ridership < station.baseRidership * 0.6) {
+  } else if (ridership < ref * 0.6) {
     notes.push('light ridership');
   }
 

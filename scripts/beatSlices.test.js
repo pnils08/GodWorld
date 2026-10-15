@@ -239,6 +239,25 @@ try {
   ok('bartender at "BART Bar" never attaches', !JSON.stringify(t.citizens).includes('Bartender'));
   ok('profile shape', t.citizens[0].profile === 'Test Operator — Transit Operator (AC Transit) — Test Transit Agency');
 
+  // engine.290 move 3: a rebase cycle prints no deltas, no mover, no total comparison
+  {
+    const rb = fs.mkdtempSync(path.join(os.tmpdir(), 'godworld-beat-slices-rebase-'));
+    const beats = path.join(rb, 'output', 'beats');
+    writeDump(beats, CYCLE);
+    writeJsonl(path.join(beats, 'Transit_Metrics.jsonl'), [
+      { Cycle: String(CYCLE - 1), Station: 'Test Central', RidershipVolume: '12500', OnTimePerformance: '0.85', TrafficIndex: '50', Corridor: '', Notes: '' },
+      { Cycle: String(CYCLE - 1), Station: '', RidershipVolume: '0', OnTimePerformance: '0.85', TrafficIndex: '70', Corridor: 'Test Freeway', Notes: '' },
+      { Cycle: String(CYCLE), Station: 'Test Central', RidershipVolume: '6000', OnTimePerformance: '0.84', TrafficIndex: '', Corridor: '', Notes: '', Factors: 'base: ledger; rebased' },
+      { Cycle: String(CYCLE), Station: '', RidershipVolume: '', OnTimePerformance: '', TrafficIndex: '58', Corridor: 'Test Freeway', Notes: '', Factors: 'base: ledger; rebased' }
+    ]);
+    const rt = transit.buildTransitSlice(CYCLE, { root: rb });
+    ok('rebase: total says not comparable', rt.facts[0].text.indexOf('total ridership 6,000 (rebased this cycle — not comparable)') >= 0);
+    ok('rebase: no station delta', rt.facts.some(f => /Test Central: ridership 6,000 \(rebased this cycle — not comparable\), on-time 84%/.test(f.text)) && !rt.facts.some(f => /vs C102/.test(f.text)));
+    ok('rebase: no corridor delta', rt.facts.some(f => /Test Freeway: traffic index 58 \(rebased this cycle — not comparable\)/.test(f.text)));
+    ok('rebase: no lead-mover label', !/ up | down /.test(rt.story.label) && /rebased this cycle — not comparable/.test(rt.story.label));
+    fs.rmSync(rb, { recursive: true, force: true });
+  }
+
   console.log('health:');
   const h = health.buildHealthSlice(CYCLE, { root });
   ok('lead hood = most Sick', h.hood === 'Chinatown');

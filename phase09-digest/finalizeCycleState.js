@@ -171,6 +171,10 @@ function finalizeCycleState_(ctx) {
     // dedupes consecutive disruption cycles against it (a 3-cycle storm is one
     // disruption story, not three).
     transitDisrupted: !!(S.transitState && S.transitState.disruptionOngoing),
+    // engine.290 move 3: which base the transit engine computed from this Cycle
+    // (2 = the ledger share). A next Cycle that reads anything else marks every
+    // Transit_Metrics row `rebased` and the slice prints no deltas. 1 byte.
+    transitBaseVersion: (S.transitMetrics && S.transitMetrics.baseVersion) || 0,
 
     // v1.9 (engine.71 CR-2/3): crisis arcs live across cycles on this carry
     // (weatherFrontTracking pattern — the detector re-evaluates channel state

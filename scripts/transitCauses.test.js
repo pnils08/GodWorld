@@ -14,6 +14,9 @@ const R = (p) => fs.readFileSync(path.resolve(__dirname, '..', p), 'utf8');
 let pass = 0, fail = 0;
 function ok(cond, msg) { if (cond) { pass++; } else { fail++; console.log('  FAIL: ' + msg); } }
 function eq(a, b, msg) { ok(a === b, msg + ' (got ' + JSON.stringify(a) + ', want ' + JSON.stringify(b) + ')'); }
+// engine.290: the base is a ledger share (non-integer), so a ×mult comparison
+// against an already-rounded row can land one rider off.
+function near(a, b, msg) { ok(Math.abs(a - b) <= 1, msg + ' (got ' + a + ', want ' + b + ' ±1)'); }
 
 // ── fake spreadsheet ────────────────────────────────────────────────────────
 function fakeSheet(rows) {
@@ -38,6 +41,16 @@ function fakeSS(opts) {
   return { getSheetByName: (n) => tabs[n] || null, _tabs: tabs };
 }
 
+// engine.290 — the C111 22-hood fixture (Neighborhood_Demographics Adults,
+// commute-inbound workers from the ledger snapshot, Neighborhood_Map
+// RetailVitality + ChildAreas), read 2026-10-15 for the Task 3 read-before.
+const C111 = {"hoods":{"Downtown":[2286,154,11.9],"Temescal":[2118,53,5.5],"Laurel":[1494,25,6.47],"West Oakland":[1651,96,8.65],"Fruitvale":[1546,45,10.55],"Jack London":[2176,71,13.75],"Rockridge":[1489,24,10.2],"Adams Point":[1781,3,5.58],"Grand Lake":[1638,5,10.39],"Piedmont Ave":[1492,17,11.55],"Chinatown":[1485,26,9.27],"Brooklyn":[1483,5,7.63],"Eastlake":[1636,7,6.72],"Glenview":[1481,6,4.38],"Dimond":[1481,9,9.78],"Ivy Hill":[1334,6,4.53],"San Antonio":[1513,5,4.88],"KONO":[420,6,8.48],"Lake Merritt":[453,22,8.07],"Uptown":[500,64,12.49],"Baylight District":[411,125,5.72],"East Oakland":[1530,4,5.99]},"children":{"old oakland":"Downtown","city center":"Downtown","telegraph corridor":"Temescal","longfellow":"Temescal","shafter":"Temescal","maxwell park":"Laurel","golden gate":"West Oakland","mcclymonds":"West Oakland","prescott":"West Oakland","hoover-foster":"West Oakland","jack london square":"Jack London","brooklyn basin":"Jack London","claremont":"Rockridge","montclair":"Piedmont Ave","koreatown-northgate":"KONO","koreatown":"KONO","northgate":"KONO","lakeshore":"Lake Merritt","coliseum":"East Oakland","elmhurst":"East Oakland"}};
+function c111Summary() {
+  const list = Object.keys(C111.hoods), set = {}, ns = {}, inbound = {};
+  list.forEach(h => { set[h.toLowerCase()] = true; ns[h] = { retailVitality: C111.hoods[h][2] }; inbound[h] = C111.hoods[h][1]; });
+  return { canonHoods: { list, set, children: C111.children, core: list }, neighborhoodState: ns, commuteInbound: inbound };
+}
+
 // ── transit engine harness ──────────────────────────────────────────────────
 const appends = [], ripples = [];
 const sandbox = {
@@ -49,20 +62,22 @@ const sandbox = {
   queueAppendIntent_: (ctx, tab, row) => appends.push({ tab, rows: [row] }),
   recordRipple_: (ctx, r) => ripples.push(r),
   inWorldStamp_: () => 'Y3C2',
-  getNeighborhoodDemographics_: () => ({
-    'East Oakland': { adults: 100, students: 0, seniors: 0 },
-    'Fruitvale': { adults: 60, students: 20, seniors: 20 }
-  })
+  getNeighborhoodDemographics_: () => {
+    const out = {};
+    Object.keys(C111.hoods).forEach(h => { out[h] = { adults: C111.hoods[h][0], students: 0, seniors: 0 }; });
+    return out;
+  }
 };
 const T = new Function(...Object.keys(sandbox),
   R('phase01-config/engine94SheetContract.js') + '\n' +
+  R('phase01-config/canonNeighborhoodLoader.js') + '\n' +
   R('utilities/ensureTransitMetrics.js') + '\n' + R('phase02-world-state/updateTransitMetrics.js') +
-  '\nreturn { ENGINE290_CONFIG_SEEDS, transitDials_, updateTransitMetrics_Phase2_, getTransitStorySignals_, isGameDay_, gameDayHoodsFor_, initiativeTransitEffects_, OAKLAND_BART_STATIONS, TRAFFIC_CORRIDORS, TRANSIT_METRICS_HEADERS };'
+  '\nreturn { ENGINE290_CONFIG_SEEDS, transitDials_, transitStationShares_, updateTransitMetrics_Phase2_, getTransitStorySignals_, isGameDay_, gameDayHoodsFor_, initiativeTransitEffects_, OAKLAND_BART_STATIONS, TRAFFIC_CORRIDORS, TRANSIT_METRICS_HEADERS };'
 )(...Object.values(sandbox));
 
 function run(S, opts) {
   appends.length = 0; ripples.length = 0;
-  const ctx = { ss: fakeSS(opts || {}), summary: Object.assign({ absoluteCycle: 107, season: 'spring', weather: { type: 'clear' } }, S), rng: () => 0.5 };
+  const ctx = { ss: fakeSS(opts || {}), summary: Object.assign({ absoluteCycle: 107, season: 'spring', weather: { type: 'clear' } }, c111Summary(), S), rng: () => 0.5 };
   const all = T.updateTransitMetrics_Phase2_(ctx);
   const by = {}; all.forEach(m => { by[m.station || m.corridor] = m; });
   return { ctx, S: ctx.summary, all, by };
@@ -89,7 +104,9 @@ function run(S, opts) {
   eq(appends[0].rows[0].length, 9, 'row has 9 cells (Factors last)');
   eq(appends[0].rows[0][8], r.all[0].factors, 'Factors cell = the row factors');
   eq(Object.keys(r.S.transitMetrics.causes).length, 18, 'S.transitMetrics.causes keyed per row');
-  eq(r.by['12th St Oakland City Center'].factors, 'ordinary weekday', 'a quiet row still names its frame');
+  eq(r.by['12th St Oakland City Center'].factors, 'base: ledger; rebased', 'a quiet row still names its frame (first Cycle on the ledger base)');
+  const q = run({ sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2 } });
+  eq(q.by['12th St Oakland City Center'].factors, 'base: ledger', 'a quiet row after the rebase names only its base');
 }
 
 // 3. Feed row in Baylight → Coliseum + I-880 take the game, Broadway/12th St do not
@@ -114,7 +131,7 @@ function run(S, opts) {
   const away = run({ sportsFeedEntries: [{ homeNeighborhood: 'Baylight District' }], sportsWeek: { Oaks: { h: 0, g: 2, unsigned: 0.4, venueShare: 0, venue: ['Baylight District'] } }, sportsZones: ['Baylight District'] });
   eq(away.S.transitMetrics.factors.gameDay, false, 'an away week (typed hood or not) → no game day');
   const half = run({ sportsWeek: { Oaks: { h: 1, g: 2, unsigned: 0.5, venueShare: 0.5, venue: ['Baylight District'] } }, sportsZones: ['Baylight District'] });
-  eq(half.by['Coliseum'].ridershipVolume, Math.round(base.by['Coliseum'].ridershipVolume * 1.075), 'Coliseum +30% × home volume .25 = +7.5%');
+  near(half.by['Coliseum'].ridershipVolume, Math.round(base.by['Coliseum'].ridershipVolume * 1.075), 'Coliseum +30% × home volume .25 = +7.5%');
 }
 
 // 4. Legacy zones (feed row without a hood) → Jack London / Downtown stations + corridors
@@ -128,10 +145,11 @@ function run(S, opts) {
   ok(r.by['I-880 South'].factors.indexOf('game day') < 0, 'I-880 South does not');
 }
 
-// 5. Coliseum uses East Oakland demographics (adults ratio 1.0 → ×1.2, not the 0.6 default → ×1.0)
+// 5. engine.290: the Coliseum station's base is its ledger share (East Oakland
+// primary + Baylight District catchment), not the authored table's 6000.
 {
   const r = run({ sportsFeedEntries: [] });
-  eq(r.by['Coliseum'].ridershipVolume, Math.round(6000 * 1.2), 'Coliseum ridership priced off East Oakland adults');
+  ok(r.by['Coliseum'].ridershipVolume !== 6000 && /^base: ledger/.test(r.by['Coliseum'].factors), 'Coliseum ridership priced off the ledger share');
 }
 
 // 6. V3 events lift the stations serving their hoods; major count includes domain
@@ -149,7 +167,7 @@ function run(S, opts) {
   ok(r.by['Fruitvale'].factors.indexOf('events in Fruitvale ×2') >= 0, 'Fruitvale row names its events');
   // ×1.10 = the existing city-wide major-event modifier (2 × 5%); ×1.08 = the hood lift (2 × 4%) — the served-hood list counts Fruitvale once
   eq(r.by['Fruitvale'].ridershipVolume, Math.round(base.by['Fruitvale'].ridershipVolume * 1.10 * 1.08), 'Fruitvale +8% for two events on top of the city-wide event modifier');
-  eq(r.by['Rockridge'].ridershipVolume, Math.round(base.by['Rockridge'].ridershipVolume * 1.10), 'Rockridge takes only the city-wide modifier');
+  near(r.by['Rockridge'].ridershipVolume, Math.round(base.by['Rockridge'].ridershipVolume * 1.10), 'Rockridge takes only the city-wide modifier');
   ok(r.by['MacArthur'].factors.indexOf('events in Temescal') >= 0, 'MacArthur (Temescal) names its event');
   ok(r.by['Rockridge'].factors.indexOf('events') < 0, 'Rockridge unaffected');
   // Coliseum serves 'East Oakland' — and Fruitvale station's corridors include East Oakland, not the other way round
@@ -183,7 +201,7 @@ function run(S, opts) {
   eq(r.by['Fruitvale'].ridershipVolume, Math.round(base.by['Fruitvale'].ridershipVolume * 1.2), 'upkeep 1: a tended hub pays the full ×1.20');
   ok(r.by['Fruitvale'].factors.indexOf('upkeep') < 0, 'upkeep 1: a tended hub carries no upkeep note');
   r = run(tended('operational', 0.3));
-  eq(r.by['Fruitvale'].ridershipVolume, Math.round(base.by['Fruitvale'].ridershipVolume * 1.06), 'upkeep floor 0.3: the lift fades to ×1.06');
+  near(r.by['Fruitvale'].ridershipVolume, Math.round(base.by['Fruitvale'].ridershipVolume * 1.06), 'upkeep floor 0.3: the lift fades to ×1.06');
   ok(r.by['Fruitvale'].ridershipVolume > base.by['Fruitvale'].ridershipVolume, 'a neglected hub is never below an ordinary station');
   ok(r.by['Fruitvale'].factors.indexOf('Fruitvale Transit Hub Phase II: operational (upkeep 0.30)') >= 0, 'the Fruitvale row names the slip');
   r = run(tended('construction-active', 0.3));
@@ -193,7 +211,7 @@ function run(S, opts) {
   // Baylight under construction on the site → the station serving it + the freeways; the street does not
   const bay = (phase, hoods) => ({ sportsFeedEntries: [], initiativeImplementationEffects: { transit: [{ name: 'Baylight District — Final Council Vote', phase, intensity: 0.3, domain: 'sports', hoods, baylight: true }] } });
   r = run(bay('construction-planning', ['Baylight District']));
-  eq(r.by['Coliseum'].ridershipVolume, Math.round(base.by['Coliseum'].ridershipVolume * 1.05), 'Baylight build: Coliseum ×1.05');
+  near(r.by['Coliseum'].ridershipVolume, Math.round(base.by['Coliseum'].ridershipVolume * 1.05), 'Baylight build: Coliseum ×1.05');
   eq(r.by['I-880 North'].trafficIndex, base.by['I-880 North'].trafficIndex + 6, 'Baylight build: I-880 North +6');
   eq(r.by['I-880 South'].trafficIndex, base.by['I-880 South'].trafficIndex + 6, 'Baylight build: I-880 South +6');
   eq(r.by['International Blvd'].trafficIndex, base.by['International Blvd'].trafficIndex, 'Baylight build: street unchanged');
@@ -342,6 +360,52 @@ function run(S, opts) {
   ok(ff.by['Telegraph Ave'].trafficIndex >= base.by['Telegraph Ave'].trafficIndex && /First Friday/.test(ff.by['Broadway'].factors), 'First Friday on Telegraph + Broadway');
   const n19 = T.OAKLAND_BART_STATIONS.filter(x => x.station === '19th St Oakland')[0];
   ok(n19.corridors.indexOf('Uptown') >= 0 && n19.corridors.indexOf('KONO') >= 0, '19th St catchment carries Uptown + KONO');
+}
+
+// engine.290 move 3 — ridership share from the ledgers (C111 22-hood fixture)
+{
+  const r = run({ sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2 } });
+  const sh = T.transitStationShares_(r.ctx, (() => { const o = {}; Object.keys(C111.hoods).forEach(h => o[h] = { adults: C111.hoods[h][0] }); return o; })(), T.transitDials_({}), T.OAKLAND_BART_STATIONS);
+  const total = Object.values(sh.byStation).reduce((a, b) => a + b, 0);
+  ok(Math.abs(total - 1) < 1e-9, 'shares sum to 1 over the 8 stations (' + total + ')');
+  eq(Object.keys(sh.byStation).length, 8, 'a share per station');
+  ok(sh.byStation['12th St Oakland City Center'] > sh.byStation['West Oakland'], '12th St ranks above West Oakland station (' + sh.byStation['12th St Oakland City Center'].toFixed(3) + ' vs ' + sh.byStation['West Oakland'].toFixed(3) + ')');
+  const n12 = T.OAKLAND_BART_STATIONS.filter(x => x.station === '12th St Oakland City Center')[0];
+  const nWO = T.OAKLAND_BART_STATIONS.filter(x => x.station === 'West Oakland')[0];
+  eq(n12.neighborhood, 'Downtown', '12th St is a Downtown primary');
+  ok(nWO.corridors.indexOf('Downtown') < 0, 'West Oakland station no longer splits Downtown');
+  ok(n12.corridors.indexOf('Jack London') >= 0, '12th St serves Jack London');
+  eq(sh.missing['MacArthur'].join(','), 'North Oakland', 'a served name with no hood row is named (North Oakland is not a ChildArea on the map)');
+  ok(/no row: North Oakland/.test(r.by['MacArthur'].factors), 'MacArthur row says so: ' + r.by['MacArthur'].factors);
+  eq(sh.missing['Coliseum'].length, 0, 'Coliseum / Elmhurst fold to East Oakland');
+  eq(sh.missing['Rockridge'].length, 0, 'Montclair folds to Piedmont Ave');
+  const sumRiders = Object.keys(sh.byStation).reduce((a, k) => a + 60000 * sh.byStation[k], 0);
+  ok(Math.abs(sumRiders - 60000) < 1e-6, 'base riders sum to transitCityRiders');
+  // retail is a bounded lift (±transitRetailWeight×0.5): Temescal from below the median to the cap
+  const hot = run({ sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2 }, neighborhoodState: Object.assign({}, c111Summary().neighborhoodState, { Temescal: { retailVitality: 99 } }) });
+  ok(hot.by['MacArthur'].ridershipVolume > r.by['MacArthur'].ridershipVolume, 'a retail hot spot lifts the station serving it');
+  // no demographics → the authored table, tagged
+  const T0 = T.transitStationShares_(r.ctx, {}, T.transitDials_({}), T.OAKLAND_BART_STATIONS);
+  eq(T0, null, 'no demographics → no share (table fallback)');
+  // corridor base from the hoods' traffic multiplier against the city mean
+  const nd = {}; Object.keys(C111.hoods).forEach(h => nd[h] = { traffic: 1 });
+  const flat = run({ sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2 }, neighborhoodDynamics: nd });
+  ok(Math.abs(flat.by['Grand Ave'].trafficIndex - 50) <= 8, 'a city at mean traffic → a surface street near transitCityTraffic (' + flat.by['Grand Ave'].trafficIndex + ')');
+  ok(Math.abs(flat.by['I-580 East'].trafficIndex - 60) <= 8, 'a freeway at mean → ×transitFreewayMult (' + flat.by['I-580 East'].trafficIndex + ')');
+  const nd2 = Object.assign({}, nd, { Fruitvale: { traffic: 3 } });
+  const busy = run({ sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2 }, neighborhoodDynamics: nd2 });
+  ok(busy.by['International Blvd'].trafficIndex > flat.by['International Blvd'].trafficIndex || T.TRAFFIC_CORRIDORS.filter(c => c.corridor === 'International Blvd')[0].hoods.indexOf('Fruitvale') < 0, 'a busy hood raises the street through it');
+  ok(/^base: ledger/.test(flat.by['Grand Ave'].factors), 'corridor rows carry base: ledger');
+  const noDyn = run({ sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2 } });
+  ok(/^base: table/.test(noDyn.by['Grand Ave'].factors), 'no dynamics → corridor base: table');
+  // congestion replaces the events>2 hardcode
+  const cong = run({ sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2 }, cityDynamicsCapacity: { transitCongestion: 0.38 } });
+  eq(cong.by['Fruitvale'].onTimePerformance, Math.round((r.by['Fruitvale'].onTimePerformance - 0.38 * 0.25) * 100) / 100, 'on-time loses transitCongestion × transitCongestionOnTimeMult');
+  // rebase cycle
+  const reb = run({ sportsFeedEntries: [] });
+  ok(reb.all.every(m => /rebased/.test(m.factors)), 'first Cycle on the ledger base: every row says rebased');
+  eq(reb.S.transitMetrics.baseVersion, 2, 'S.transitMetrics.baseVersion = 2 (carried by finalizeCycleState)');
+  ok(r.all.every(m => !/rebased/.test(m.factors)), 'after the carry reads 2: no row says rebased');
 }
 
 console.log('transitCauses: ' + pass + ' passed, ' + fail + ' failed');

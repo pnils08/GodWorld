@@ -40,7 +40,9 @@ var OAKLAND_BART_STATIONS = [
     neighborhood: 'Downtown',
     baseRidership: 12500,
     character: 'downtown hub, transfers',
-    corridors: ['Downtown', 'Lake Merritt', 'West Oakland']
+    // engine.290: + Jack London — no station stands in Jack London; the downtown
+    // hub is its walk (I-880 North already runs JL–West Oakland–Downtown as one strip).
+    corridors: ['Downtown', 'Lake Merritt', 'West Oakland', 'Jack London']
   },
   {
     station: '19th St Oakland',
@@ -82,7 +84,9 @@ var OAKLAND_BART_STATIONS = [
     neighborhood: 'West Oakland',
     baseRidership: 4500,
     character: 'industrial transition',
-    corridors: ['West Oakland', 'Jack London', 'Downtown']
+    // engine.290: Downtown dropped — Downtown has its own two stations (12th St,
+    // 19th St); the legacy list split it three ways (agy read-before §6).
+    corridors: ['West Oakland', 'Jack London']
   },
   {
     station: 'MacArthur',

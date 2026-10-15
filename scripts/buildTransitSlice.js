@@ -24,7 +24,12 @@ function build(cycle, { beats }) {
   const all = beats.Transit_Metrics || [];
   const rows = all.filter(r => Number(r.Cycle) === cycle);
   if (!rows.length) return K.emptySlice(SEAT, cycle, 'no Transit_Metrics rows for C' + cycle);
-  const prev = all.filter(r => Number(r.Cycle) === cycle - 1);
+  // engine.290 move 3: the engine moved to the ledger-share base this cycle —
+  // every row carries `rebased` in Factors, and last cycle's numbers were on
+  // the old authored table. No delta, lead mover or total comparison is true.
+  const rebased = rows.some(r => /\brebased\b/.test(r.Factors || ''));
+  const prev = rebased ? [] : all.filter(r => Number(r.Cycle) === cycle - 1);
+  const REBASED = 'rebased this cycle — not comparable';
   // Composite key: corridor rows carry no Station and used to collide under
   // the empty string — every corridor delta read off one shared prev entry.
   // Stations key by station name, corridors by corridor name.
@@ -61,13 +66,13 @@ function build(cycle, { beats }) {
   const inventory = stations.length + ' stations' + (corridors.length ? ' + ' + corridors.length + ' corridors' : '');
   const facts = [{
     text: inventory + ' on the record this cycle; total ridership ' + K.fmtInt(total) +
-      (prev.length ? ' (C' + (cycle - 1) + ': ' + K.fmtInt(prevTotal) + ')' : ' (no prior cycle in the table)'),
+      (rebased ? ' (' + REBASED + ')' : prev.length ? ' (C' + (cycle - 1) + ': ' + K.fmtInt(prevTotal) + ')' : ' (no prior cycle in the table)'),
     src
   }];
   for (const st of (movers.length ? movers : stations)) {
     facts.push({
       text: st.station + ': ridership ' + K.fmtInt(st.ridership) +
-        (st.dRidership != null ? ' (' + (st.dRidership >= 0 ? '+' : '') + K.fmtInt(st.dRidership) + ' vs C' + (cycle - 1) + ')' : '') +
+        (st.dRidership != null ? ' (' + (st.dRidership >= 0 ? '+' : '') + K.fmtInt(st.dRidership) + ' vs C' + (cycle - 1) + ')' : rebased ? ' (' + REBASED + ')' : '') +
         (st.onTime != null ? ', on-time ' + Math.round(st.onTime * 100) + '%' : '') +
         (st.dOnTime ? ' (' + (st.dOnTime > 0 ? '+' : '') + st.dOnTime + ' pts)' : '') +
         (st.corridor ? ', ' + st.corridor : '') + (st.cause ? ' — ' + st.cause : ''),
@@ -77,7 +82,7 @@ function build(cycle, { beats }) {
   for (const co of corridors) {
     facts.push({
       text: co.corridor + ': traffic index ' + K.fmtInt(co.traffic) +
-        (co.dTraffic != null ? ' (' + (co.dTraffic >= 0 ? '+' : '') + K.fmtInt(co.dTraffic) + ' vs C' + (cycle - 1) + ')' : '') +
+        (co.dTraffic != null ? ' (' + (co.dTraffic >= 0 ? '+' : '') + K.fmtInt(co.dTraffic) + ' vs C' + (cycle - 1) + ')' : rebased ? ' (' + REBASED + ')' : '') +
         (co.cause ? ' — ' + co.cause : ''),
       src
     });
@@ -86,14 +91,14 @@ function build(cycle, { beats }) {
     .map(w => K.person(w.popid, w.name, w.role, null, 'works at ' + w.business + ' (Employment_Roster)', w.business));
   const dir = lead.dRidership == null ? null : (lead.dRidership >= 0 ? 'up' : 'down');
   const label = lead.station + (dir ? ' ridership ' + dir + ' ' + K.fmtInt(Math.abs(lead.dRidership)) + ' vs C' + (cycle - 1)
-    : ' ridership ' + K.fmtInt(lead.ridership)) + ' | ' + inventory + ' on the record';
+    : ' ridership ' + K.fmtInt(lead.ridership)) + ' | ' + inventory + ' on the record' + (rebased ? ' (' + REBASED + ')' : '');
   return K.makeSlice(SEAT, cycle, beats, {
     ref: src, hood: null, label,
     angle: label + ' — the platforms and the people who run them',
     hookLine: lead.station + (dir ? ' moved ' + dir + ' the most' : ' carried the most riders') + ' this cycle' +
       (lead.cause ? ' — ' + lead.cause : '') + '; ' + people.length + ' transit workers on the roster.',
     facts, people,
-    deltas: { state: prev.length ? 'PRIOR_CYCLE_IN_TABLE' : 'NO_PRIOR_CYCLE', vs: prev.length ? cycle - 1 : null },
+    deltas: { state: rebased ? 'REBASED' : prev.length ? 'PRIOR_CYCLE_IN_TABLE' : 'NO_PRIOR_CYCLE', vs: prev.length ? cycle - 1 : null },
     hooks: K.hooksFor(beats, cycle, SEAT.name),
     note: people.length ? null : 'no transit workers on the roster this cycle',
     extra: { stations, corridors }

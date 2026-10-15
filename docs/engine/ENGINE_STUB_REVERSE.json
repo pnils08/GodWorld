@@ -2,7 +2,7 @@
   "generated": "2026-10-15",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1701,
+  "functionsMapped": 1703,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2943,6 +2943,8 @@
       "readers": [
         "phase04-events/chaosCarsEngine.js::runChaosEvent_",
         "phase04-events/chaosCarsEngine.test.js::reset",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/generateCitizensEvents.js::transitChaosTrainHoods_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },

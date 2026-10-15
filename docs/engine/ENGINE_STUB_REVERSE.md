@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1701 · **S.* fields:** 376 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1703 · **S.* fields:** 376 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -66,7 +66,7 @@
 | `S.chaosFriction` | `phase04-events/chaosCarsEngine.js::writeChaosFrictionLog_` | _(none)_ | 1 | 0 |
 | `S.chaosNeighborhoodFold` | `phase04-events/chaosCarsEngine.js::accumulateNeighborhoodFold_`, `phase04-events/chaosCarsEngine.js::resolveChaosNeighborhoodFold_` | `phase04-events/chaosCarsEngine.js::accumulateNeighborhoodFold_`, `phase04-events/chaosCarsEngine.js::resolveChaosNeighborhoodFold_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_` | 2 | 4 |
 | `S.chaosShip` | `phase04-events/chaosCarsEngine.js::runChaosShip_` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 2 |
-| `S.chaosTransit` | `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_`, `phase04-events/chaosCarsEngine.js::runChaosEvent_` | `phase04-events/chaosCarsEngine.js::runChaosEvent_`, `phase04-events/chaosCarsEngine.test.js::reset`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 2 | 3 |
+| `S.chaosTransit` | `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_`, `phase04-events/chaosCarsEngine.js::runChaosEvent_` | `phase04-events/chaosCarsEngine.js::runChaosEvent_`, `phase04-events/chaosCarsEngine.test.js::reset`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/generateCitizensEvents.js::transitChaosTrainHoods_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 2 | 5 |
 | `S.citizenBonds` | _(none)_ | `phase07-evening-media/storyHook.js::storyHookEngine_` | 0 | 1 |
 | `S.citizenEventMemory` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 1 |
 | `S.citizenEvents` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase05-citizens/bondEngine.js::ensureBondEngineData_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase06-analysis/economicRippleEngine.js::detectNewRipples_` | 1 | 5 |

@@ -86,6 +86,38 @@ function balanceContentLedgerPoolWeights_(pool) {
   return pool;
 }
 
+// engine.290 move 6 — the commute lines (Event_Content_Ledger PoolKey
+// occupation.transit, Conditions transitdisrupted) enter a citizen's pool with
+// the mass the single hardcoded commute line had (1.15) however many rows the
+// library holds: rows split it by their own Weight. The gate decides IF a
+// citizen gets a commute moment; the library decides which words.
+var TRANSIT_COMMUTE_POOL = 'occupation.transit';
+var TRANSIT_COMMUTE_MASS = 1.15;
+
+function transitCommuteMass_(pool) {
+  var total = 0, i;
+  for (i = 0; i < pool.length; i++) if (pool[i].transitCommute) total += Math.max(0.001, Number(pool[i].weight || 1));
+  if (!(total > 0)) return pool;
+  for (i = 0; i < pool.length; i++) {
+    if (!pool[i].transitCommute) continue;
+    pool[i].weight = TRANSIT_COMMUTE_MASS * Math.max(0.001, Number(pool[i].weight || 1)) / total;
+  }
+  return pool;
+}
+
+/**
+ * engine.290 move 6 — the hoods a BART-train chaos hit reached this cycle with
+ * a real delay (S.chaosTransit, Phase 4; a clean run is no commute moment).
+ */
+function transitChaosTrainHoods_(S) {
+  var out = [];
+  var hits = (S && S.chaosTransit && S.chaosTransit.hits) || [];
+  for (var i = 0; i < hits.length; i++) {
+    if (Number(hits[i].d) > 0 && hits[i].h && out.indexOf(hits[i].h) < 0) out.push(hits[i].h);
+  }
+  return out;
+}
+
 // engine.94 Task 3 — bounded grief response content. These lines never name or
 // infer the deceased; machine provenance remains in MemoryRegisters.grief.
 // Category choice is deliberately uniform/structural. World_Config controls
@@ -2823,16 +2855,16 @@ function generateCitizensEvents_(ctx) {
     // commute; the engine.67 hard gate below re-checks via source:occupation's
     // work class). Affected hoods draw harder. No status flips — transit
     // inconveniences, it doesn't hospitalize.
-    if (S.transitState && S.transitState.disruptionOngoing &&
+    // engine.290 move 6: the gate (same draw, same odds) now produces the
+    // content-ledger flag `transitdisrupted`; the lines are Event_Content_Ledger
+    // rows under PoolKey occupation.transit, held to today's one-line mass
+    // (transitCommuteMass_). A chaos-train hit this cycle (S.chaosTransit, Phase
+    // 4) makes its hood an affected hood even on a cycle with no disruption.
+    var trainHoods = transitChaosTrainHoods_(S);
+    var inTrainHood = trainHoods.indexOf(neighborhood) >= 0;
+    var transitDisruptedHit = !!(S.transitState && (S.transitState.disruptionOngoing || inTrainHood) &&
         lifeState && lifeState.working === 'working' &&
-        chanceHit((S.transitState.affectedHoods || []).indexOf(neighborhood) >= 0 ? 0.30 : 0.12)) {
-      pool.push(makeEntry(pickOne([
-        "lost an hour of the morning to the transit shutdown",
-        "waited out the delays with everyone else on the platform",
-        "gave up on the train and found another way in to work",
-        "was late to a shift when the line went down"
-      ]), mergeTags(["source:occupation", "transit:disruption"], calendarTags), 1.15, false));
-    }
+        chanceHit((inTrainHood || (S.transitState.affectedHoods || []).indexOf(neighborhood) >= 0) ? 0.30 : 0.12));
 
     if (typeof getMediaInfluencedEvent_ === "function" && chanceHit(0.2)) {
       var mediaEvent = getMediaInfluencedEvent_(ctx);
@@ -2921,7 +2953,9 @@ function generateCitizensEvents_(ctx) {
         drive: dialBands ? dialBands.current.drive : null,
         // engine.208: a ledger row can aim at who cares — fandom>=60 (a playoff bar), fandom<40
         // (dragged along). The CURRENT value, as warmth/drive: how they feel this week.
-        fandom: dialBands ? dialBands.current.fandom : null
+        fandom: dialBands ? dialBands.current.fandom : null,
+        // engine.290 move 6: this citizen drew a commute moment this cycle
+        transitdisrupted: transitDisruptedHit
       };
       for (var clk in contentLedger.lines) {
         if (!contentLedger.lines.hasOwnProperty(clk)) continue;
@@ -2944,12 +2978,17 @@ function generateCitizensEvents_(ctx) {
           clPooled.ledgerLine = clEntry;      // draw-time compose hook
           clPooled.ledgerScopes = condScopes; // fragment eligibility at compose
           clPooled.eclKey = eclRowKey_(clk, clEntry.text); // S329 telemetry identity
-          clPooled.eclPoolKey = clk;           // PoolKey mass-balancing identity
+          // engine.290: the commute pool is held to one line's mass (transitCommuteMass_),
+          // outside the per-PoolKey balancing — its odds are the gate's, not the library's size.
+          if (clk === TRANSIT_COMMUTE_POOL) clPooled.transitCommute = true;
+          else clPooled.eclPoolKey = clk;      // PoolKey mass-balancing identity
           eclTelemetry.eligible[clPooled.eclKey] = (eclTelemetry.eligible[clPooled.eclKey] || 0) + 1;
           eclEligibleByPool[clk] = (eclEligibleByPool[clk] || 0) + 1;
           pool.push(clPooled);
         }
       }
+
+      transitCommuteMass_(pool); // engine.290 move 6
 
       // engine.79 item 7 (S357): exclusive-pool check. For each World_Config
       // eclExclusivePools entry whose ledger pool reached eclExclusiveMinLines

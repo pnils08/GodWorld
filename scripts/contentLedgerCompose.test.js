@@ -318,5 +318,62 @@ console.log('═══ engine.94 B.1: one bounded history build from fixtures');
     capped.summary.folkMemory.byHood['Fixture Hood'].Charged === 2);
 }
 
+console.log('═══ engine.290 move 6: transit commute lines from the ledger');
+{
+  const parse = new Function(loaderSrc + '\nreturn parseContentConditions_;')();
+  const terms = parse('transitdisrupted');
+  assert('loader accepts the transitdisrupted flag', Array.isArray(terms) && terms.length === 1 && terms[0].op === 'flag');
+  assert('the flag takes no operator', parse('transitdisrupted=1') === null);
+  const mass = new Function(genSrc + '\nreturn transitCommuteMass_;')();
+  const pool = [{ weight: 1.15, transitCommute: true }, { weight: 1.15, transitCommute: true }, { weight: 2.3, transitCommute: true }, { weight: 1, text: 'other' }];
+  mass(pool);
+  const tm = pool.filter(e => e.transitCommute).reduce((a, e) => a + e.weight, 0);
+  assert('commute rows hold the old single line\'s 1.15 mass, split by Weight', Math.abs(tm - 1.15) < 1e-9 && Math.abs(pool[2].weight - 0.575) < 1e-9 && pool[3].weight === 1);
+  const trainHoods = new Function(genSrc + '\nreturn transitChaosTrainHoods_;')();
+  assert('a chaos-train hit with a delay makes its hood affected; a clean run does not',
+    trainHoods({ chaosTransit: { hits: [{ h: 'Fruitvale', d: 0.06 }, { h: 'Rockridge', d: 0 }] } }).join() === 'Fruitvale');
+
+  const TP = require('./transitEclPool');
+  const commuteTexts = TP.ROWS.filter(r => r.PoolKey === 'occupation.transit').map(r => r.Text);
+  const ledger = [LEDGER_HDR].concat(TP.toSheetValues());
+  const hadLS = global.deriveLifeState_;
+  global.deriveLifeState_ = (o) => String(o.status || '').toLowerCase() === 'retired'
+    ? { working: 'retired', band: 'senior', ageBand: 'senior', age: 70, isMinor: false }
+    : { working: 'working', band: 'adult', ageBand: 'adult', age: 35, isMinor: false };
+  const genLS = new Function(genSrc + '\nreturn generateCitizensEvents_;')();
+  const commuteCount = (ctx) => emittedLines(ctx).filter(l => commuteTexts.some(t => l.indexOf(t) >= 0)).length;
+  const runWith = (rows, transitState, seed) => {
+    const ctx = makeCtx(rows, mulberry32(seed), ledger);
+    ctx.summary.transitState = transitState;
+    genLS(ctx);
+    return ctx;
+  };
+  let working = 0, quiet = 0, retired = 0;
+  for (let seed = 1; seed <= 6; seed++) {
+    const rows = []; for (let i = 0; i < 60; i++) rows.push(makeRow('POP-W' + seed + '-' + i, { hood: 'Temescal' }));
+    working += commuteCount(runWith(rows, { disruptionOngoing: true, affectedHoods: ['Temescal'] }, seed));
+    const qrows = []; for (let i = 0; i < 60; i++) qrows.push(makeRow('POP-Q' + seed + '-' + i, { hood: 'Temescal' }));
+    quiet += commuteCount(runWith(qrows, { disruptionOngoing: false, affectedHoods: [] }, seed));
+    const rrows = []; for (let i = 0; i < 60; i++) rrows.push(makeRow('POP-R' + seed + '-' + i, { hood: 'Temescal', status: 'retired' }));
+    retired += commuteCount(runWith(rrows, { disruptionOngoing: true, affectedHoods: ['Temescal'] }, seed));
+  }
+  let train = 0;
+  for (let seed = 1; seed <= 6; seed++) {
+    const rows = []; for (let i = 0; i < 60; i++) rows.push(makeRow('POP-T' + seed + '-' + i, { hood: 'Temescal' }));
+    const ctx = makeCtx(rows, mulberry32(seed), ledger);
+    ctx.summary.transitState = { disruptionOngoing: false, affectedHoods: [] };
+    ctx.summary.chaosTransit = { cycle: 100, hits: [{ h: 'Temescal', s: ['MacArthur'], o: 'signal_failure', d: 0.06 }] };
+    genLS(ctx);
+    train += commuteCount(ctx);
+  }
+  assert('a chaos-train week on the hood draws commute lines with no system disruption (' + train + ')', train > 0);
+  assert('a disruption cycle: working citizens draw commute lines from the ledger (' + working + ')', working > 0);
+  assert('no disruption, no chaos train: no commute line ever', quiet === 0, String(quiet));
+  assert('a retiree never draws a commute line', retired === 0, String(retired));
+  const genSrcNow = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generateCitizensEvents.js'), 'utf8');
+  assert('the inline commute pool is gone from the generator', genSrcNow.indexOf('pickOne([\n        "lost an hour of the morning') < 0 && genSrcNow.indexOf('"waited out the delays with everyone else on the platform"') < 0);
+  if (hadLS === undefined) delete global.deriveLifeState_; else global.deriveLifeState_ = hadLS;
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

@@ -120,7 +120,11 @@ var CONTENT_LEDGER_DSL_FIELDS = {
   hooddeaths:   { kind: 'num' },     // tracked Death lines in the hood window
   hoodcharged:  { kind: 'num' },     // Judicial_Ledger arrests in the hood window
   hoodhospital: { kind: 'num' },     // Hospitalized + Critical lines
-  hoodclosed:   { kind: 'num' }      // stamped RoutineRetrenched LifeHistory lines
+  hoodclosed:   { kind: 'num' },     // stamped RoutineRetrenched LifeHistory lines
+  // engine.290 move 6: this working citizen drew a commute moment this cycle
+  // (the transit gate — disruption or a chaos-train hood, 0.30 affected / 0.12
+  // elsewhere — computed once in generateCitizensEvents_)
+  transitdisrupted: { kind: 'flag' }
 };
 
 /**

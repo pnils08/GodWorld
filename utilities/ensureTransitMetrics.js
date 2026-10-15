@@ -47,7 +47,9 @@ var OAKLAND_BART_STATIONS = [
     neighborhood: 'Downtown',
     baseRidership: 8500,
     character: 'uptown arts district',
-    corridors: ['Downtown', 'Lake Merritt', 'Temescal']
+    // engine.290: its own character is the uptown arts district, and no other
+    // station serves Uptown or KONO — so this one does (codex §2).
+    corridors: ['Downtown', 'Lake Merritt', 'Temescal', 'Uptown', 'KONO']
   },
   {
     station: 'Lake Merritt',
@@ -506,13 +508,8 @@ function calculateRidershipModifier_(context) {
     mod *= 0.95; // 5% reduction
   }
 
-  // Day type impacts
-  var dayType = (context.dayType || '').toLowerCase();
-  if (dayType === 'weekend') {
-    mod *= 0.6; // 40% reduction on weekends
-  } else if (dayType === 'holiday') {
-    mod *= 0.4; // 60% reduction on holidays
-  }
+  // engine.290: day type lives in transitDayMult_ (updateTransitMetrics.js),
+  // applied once by the caller on the World_Config dials
 
   // Season impacts
   var season = (context.season || '').toLowerCase();

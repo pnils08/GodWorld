@@ -316,6 +316,45 @@ function ensureEngine209Config_(ss) {
   return plan;
 }
 
+// engine.290 — transit rides the sim (docs/plans/2026-10-15-engine-290-transit-rides-the-sim.md).
+// Same self-arm contract, its own list. updateTransitMetrics reads ctx.config
+// each Cycle through transitDials_; a missing or out-of-range cell reads the
+// seed below. transitStaffingGovernor ships 0 and is armed only after the BART
+// crew Intake mints read back (plan §Sequencing step 4).
+var ENGINE290_CONFIG_SEEDS = [
+  ['transitCityRiders', 60000, 'engine.290 citywide BART riders the eight Oakland stations split by ledger share (residents, workers, retail hot spots)', 0, 1000000, true],
+  ['transitCityTraffic', 50, 'engine.290 city-mean corridor traffic index; a corridor scales by its hoods traffic multiplier against the city mean', 0, 100, false],
+  ['transitFreewayMult', 1.2, 'engine.290 freeway corridors carry this multiple of a surface street', 0.5, 3, false],
+  ['transitResidentWeight', 0.5, 'engine.290 share of a hood rider weight from residents (Adults); the rest from who works there (commute matrix)', 0, 1, false],
+  ['transitCatchmentShare', 0.3, 'engine.290 share of a hood riders that go to stations listing it only as catchment when the hood has its own station', 0, 1, false],
+  ['transitRetailWeight', 0.2, 'engine.290 how far a retail hot spot (RetailVitality vs the city median, clamped +-0.5) lifts a hood rider weight', 0, 1, false],
+  ['transitWeekendMult', 0.6, 'engine.290 ridership and corridor traffic in a weekend-dominant Cycle (S.isWeekend)', 0, 1.5, false],
+  ['transitMajorHolidayMult', 0.4, 'engine.290 ridership and corridor traffic on a major holiday; minor and Oakland holidays cut nothing', 0, 1.5, false],
+  ['transitHolidayHoodLift', 0.25, 'engine.290 lift on the station(s) and surface streets of the holiday hood', 0, 2, false],
+  ['transitFirstFridayLift', 0.15, 'engine.290 First Friday lift on the stations serving KONO / Uptown / Downtown and on Telegraph + Broadway', 0, 2, false],
+  ['transitCongestionOnTimeMult', 0.25, 'engine.290 on-time lost per unit of citywide transit congestion (S.cityDynamicsCapacity.transitCongestion, 0-0.38)', 0, 1, false],
+  ['transitStaffingGovernor', 0, 'engine.290 1 = BART service feels a missing crew class (no conductor + no operator, no dispatcher, no maintenance); 0 = off. Armed only after the crew rows read back', 0, 1, true],
+  ['transitNoCrewOnTimeDrop', 0.10, 'engine.290 on-time lost with no conductor and no operator on the ledger (governor armed)', 0, 0.5, false],
+  ['transitNoCrewRidershipMult', 0.85, 'engine.290 ridership with no conductor and no operator on the ledger (governor armed)', 0, 1, false],
+  ['transitNoDispatchOnTimeDrop', 0.05, 'engine.290 on-time lost with no dispatcher (governor armed); the rain/fog penalty doubles', 0, 0.5, false],
+  ['transitChaosWeight', 0.5, 'engine.290 how often the BART train chaos car is drawn against the other vehicles (its baseFrequencyWeight)', 0, 5, false]
+];
+
+function ensureEngine290Config_(ss) {
+  if (!ss) throw new Error('engine.290 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.290 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE290_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE290_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.290 config: seed write did not land (' + verified.additions.length + ' still missing)');
+    Logger.log('ensureEngine290Config_: seeded ' + plan.additions.length + ' transit key(s)');
+  }
+  if (plan.invalid && plan.invalid.length > 0) throw new Error('engine.290 config invalid: ' + plan.invalid.join('; '));
+  return plan;
+}
+
 var ENGINE275_CONFIG_SEEDS = [
   ['fireGuardMinutes', 60, 'engine.275 a Cycle is refused if the last one STARTED fewer than this many minutes ago (a Cycle cannot fire twice). Live stays 60. 0 = no time test — bench only, where back-to-back fires are deliberate and the web trigger\'s expect= guards repeats', 0, 1440, false]
 ];

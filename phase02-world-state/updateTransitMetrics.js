@@ -86,11 +86,53 @@ var TRANSIT_FACTORS = {
 
   // Game day special handling
   GAMEDAY_RIDERSHIP_BOOST: 0.3,
-  GAMEDAY_TRAFFIC_INCREASE: 0.25,
-
-  // Day type probability (cycles = weeks, so each cycle contains weekdays + weekends)
-  WEEKEND_PROBABILITY: 2 / 7
+  GAMEDAY_TRAFFIC_INCREASE: 0.25
 };
+
+// engine.290 move 2 — First Friday is the art walk: the stations whose
+// catchment reaches these hoods and the two streets that carry it.
+var TRANSIT_FIRST_FRIDAY_HOODS = ['KONO', 'Uptown', 'Downtown'];
+var TRANSIT_FIRST_FRIDAY_CORRIDORS = ['Telegraph Ave', 'Broadway'];
+
+/**
+ * engine.290 — the transit dials, read from World_Config (ctx.config) each
+ * Cycle. ensureEngine290Config_ seeds missing rows and refuses an invalid one
+ * before Phase 1, so a value here is in range; a key absent from ctx.config
+ * (a harness without the sheet) reads its seed.
+ *
+ * @param {Object} ctx
+ * @return {Object} key -> number
+ */
+function transitDials_(ctx) {
+  if (typeof ENGINE290_CONFIG_SEEDS === 'undefined') throw new Error('engine.290: ENGINE290_CONFIG_SEEDS not loaded');
+  var cfg = (ctx && ctx.config) || {};
+  var out = {};
+  for (var i = 0; i < ENGINE290_CONFIG_SEEDS.length; i++) {
+    var spec = ENGINE290_CONFIG_SEEDS[i];
+    var raw = cfg[spec[0]];
+    var v = Number(raw);
+    out[spec[0]] = (raw === '' || raw === null || raw === undefined || typeof raw === 'boolean' ||
+      !isFinite(v) || v < spec[3] || v > spec[4]) ? spec[1] : v;
+  }
+  return out;
+}
+
+/**
+ * engine.290 move 2 — the one day-type rule. A major holiday cuts riders and
+ * street traffic by transitMajorHolidayMult (and outranks the weekend — the
+ * two never stack); otherwise a weekend-dominant Cycle takes
+ * transitWeekendMult. A minor / Oakland / cultural holiday cuts nothing; the
+ * Factors string names it.
+ *
+ * @param {Object} context
+ * @return {number}
+ */
+function transitDayMult_(context) {
+  var d = context.dials;
+  if (context.holiday && context.holiday.major) return d.transitMajorHolidayMult;
+  if (context.dayType === 'weekend') return d.transitWeekendMult;
+  return 1;
+}
 
 // ============================================================================
 // MAIN ENGINE FUNCTION
@@ -123,8 +165,18 @@ function updateTransitMetrics_Phase2_(ctx) {
   // real signal off frontState so both branches fire as authored.
   if (weather.frontState === 'STORM') weatherType = 'storm';
   var season = S.season || 'spring';
-  var holiday = S.holiday || '';
-  var dayType = (holiday && holiday !== 'none') ? 'holiday' : (rng() < TRANSIT_FACTORS.WEEKEND_PROBABILITY ? 'weekend' : 'weekday');
+  // engine.290 move 2 — the sim's clock, not a private one. Phase 1 sets
+  // S.isWeekend / S.holiday* / S.isFirstFriday before Phase2-Transit on both
+  // entry points; the weekend rng draw this used to make is gone.
+  var dials = transitDials_(ctx);
+  var dayType = S.isWeekend ? 'weekend' : 'weekday';
+  var holidayName = S.holiday || '';
+  var holiday = (holidayName && holidayName !== 'none') ? {
+    label: S.holidayLabel || holidayName,
+    priority: S.holidayPriority || 'none',
+    major: S.holidayPriority === 'major',
+    hood: S.holidayNeighborhood || ''
+  } : null;
 
   // Read PREVIOUS cycle events — current cycle events don't exist yet (generated in Phase 4)
   // engine.183: from WorldEvents_V3_Ledger, which carries Domain + Neighborhood.
@@ -163,6 +215,9 @@ function updateTransitMetrics_Phase2_(ctx) {
     gameDayPeak: gameDayPeak,
     eventHoods: eventSummary.byHood,
     initiatives: initiativeEffects,
+    holiday: holiday,
+    firstFriday: !!S.isFirstFriday,
+    dials: dials,
     // engine.93 Task 9: the commute matrix rides along so per-station ridership
     // can weight by who commutes IN, not just who lives nearby.
     summary: S
@@ -206,6 +261,8 @@ function updateTransitMetrics_Phase2_(ctx) {
     factors: {
       weather: weatherType,
       dayType: dayType,
+      holiday: holiday ? holiday.label + (holiday.major ? ' (major)' : '') : '',
+      firstFriday: !!S.isFirstFriday,
       majorEvents: majorEvents,
       gameDay: gameDay,
       // engine.183 — the whole causal frame in one place
@@ -397,10 +454,25 @@ function calculateStationMetrics_(station, context, demographics, rng) {
     }
   }
 
+  // engine.290 move 2 — the one day-type rule (weekend / major holiday)
+  ridershipMod *= transitDayMult_(context);
+
   var causes = [];
   // the station's own hood + the hoods it serves, each once
   var servedHoods = intersectHoods_([station.neighborhood].concat(station.corridors || []),
                                     [station.neighborhood].concat(station.corridors || []));
+
+  // engine.290 move 2 — the holiday's own hood fills its station(s); First
+  // Friday fills the stations whose catchment reaches the art walk.
+  var hol = context.holiday;
+  if (hol && hol.hood && station.neighborhood === hol.hood) {
+    ridershipMod *= (1 + context.dials.transitHolidayHoodLift);
+    causes.push(hol.label + ' in ' + hol.hood);
+  }
+  if (context.firstFriday && intersectHoods_(servedHoods, TRANSIT_FIRST_FRIDAY_HOODS).length > 0) {
+    ridershipMod *= (1 + context.dials.transitFirstFridayLift);
+    causes.push('First Friday');
+  }
 
   // engine.183: game day lands on the stations serving where the game IS
   // (the home franchise's venue, engine.204/205), not on a station named 'Coliseum'.
@@ -491,6 +563,8 @@ function factorsString_(context, causes) {
   var w = context.weather || 'clear';
   if (w !== 'clear') parts.push(w);
   if (context.dayType && context.dayType !== 'weekday') parts.push(context.dayType);
+  // engine.290: every holiday is named; only a major one cuts (transitDayMult_)
+  if (context.holiday) parts.push('holiday: ' + context.holiday.label + (context.holiday.major ? ' (major)' : ' (no cut)'));
   for (var i = 0; i < (causes || []).length; i++) parts.push(causes[i]);
   return parts.length ? parts.join('; ') : 'ordinary weekday';
 }
@@ -527,15 +601,22 @@ function calculateCorridorTraffic_(corridor, context, rng) {
     trafficMod = calculateTrafficModLocal_(context);
   }
 
-  // Weekend reduction
-  if (context.dayType === 'weekend') {
-    trafficMod *= 0.7;
-  } else if (context.dayType === 'holiday') {
-    trafficMod *= 0.5;
-  }
+  // engine.290 move 2 — the one day-type rule (weekend / major holiday)
+  trafficMod *= transitDayMult_(context);
 
   var causes = [];
   var hoods = corridor.hoods || [];
+
+  // engine.290 move 2 — the holiday hood's surface streets; First Friday's two.
+  var hol = context.holiday;
+  if (hol && hol.hood && !corridor.freeway && hoods.indexOf(hol.hood) >= 0) {
+    trafficMod *= (1 + context.dials.transitHolidayHoodLift);
+    causes.push(hol.label + ' in ' + hol.hood);
+  }
+  if (context.firstFriday && TRANSIT_FIRST_FRIDAY_CORRIDORS.indexOf(corridor.corridor) >= 0) {
+    trafficMod *= (1 + context.dials.transitFirstFridayLift);
+    causes.push('First Friday');
+  }
 
   // engine.183: game-day traffic loads the corridors through the game's hoods
   // (Baylight → I-880; the legacy Jack London / Downtown zones → I-880 North,
@@ -589,9 +670,7 @@ function calculateRidershipModLocal_(context) {
   else if (weather === 'rain') mod *= 0.9;
   else if (weather === 'heatwave') mod *= 0.95;
 
-  var dayType = (context.dayType || '').toLowerCase();
-  if (dayType === 'weekend') mod *= 0.6;
-  else if (dayType === 'holiday') mod *= 0.4;
+  // engine.290: day type lives in transitDayMult_, applied once by the caller
 
   var events = context.events || 0;
   if (events > 0) mod *= (1 + events * 0.05);
@@ -997,6 +1076,8 @@ function transitDriversPhrase_(factors) {
   for (var i = 0; i < (f.initiatives || []).length; i++) parts.push(f.initiatives[i]);
   if (f.weather && f.weather !== 'clear') parts.push(f.weather);
   if (f.dayType && f.dayType !== 'weekday') parts.push(f.dayType);
+  if (f.holiday) parts.push(f.holiday);
+  if (f.firstFriday) parts.push('First Friday');
   return parts.join('; ');
 }
 

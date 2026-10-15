@@ -55,8 +55,9 @@ const sandbox = {
   })
 };
 const T = new Function(...Object.keys(sandbox),
+  R('phase01-config/engine94SheetContract.js') + '\n' +
   R('utilities/ensureTransitMetrics.js') + '\n' + R('phase02-world-state/updateTransitMetrics.js') +
-  '\nreturn { updateTransitMetrics_Phase2_, getTransitStorySignals_, isGameDay_, gameDayHoodsFor_, initiativeTransitEffects_, OAKLAND_BART_STATIONS, TRAFFIC_CORRIDORS, TRANSIT_METRICS_HEADERS };'
+  '\nreturn { ENGINE290_CONFIG_SEEDS, transitDials_, updateTransitMetrics_Phase2_, getTransitStorySignals_, isGameDay_, gameDayHoodsFor_, initiativeTransitEffects_, OAKLAND_BART_STATIONS, TRAFFIC_CORRIDORS, TRANSIT_METRICS_HEADERS };'
 )(...Object.values(sandbox));
 
 function run(S, opts) {
@@ -303,6 +304,44 @@ function run(S, opts) {
   ok(st.every(r => typeof r[3] === 'number' && typeof r[4] === 'number'), 'every station row: ridership + on-time are numbers');
   ok(co.every(r => r[3] === '' && r[4] === ''), 'every corridor row: ridership + on-time blank');
   ok(co.every(r => typeof r[5] === 'number' && r[6] !== ''), 'every corridor row: TrafficIndex a number + corridor named');
+}
+
+// engine.290 move 2 — same clocks: dayType is S.isWeekend; only a major holiday cuts
+{
+  eq(T.ENGINE290_CONFIG_SEEDS.length, 16, 'engine.290 seeds sixteen dials');
+  eq(T.ENGINE290_CONFIG_SEEDS.filter(x => x[0] === 'transitStaffingGovernor')[0][1], 0, 'governor seeds 0');
+  eq(T.transitDials_({ config: { transitWeekendMult: 0.5 } }).transitWeekendMult, 0.5, 'a World_Config cell is read');
+  eq(T.transitDials_({ config: { transitWeekendMult: 9 } }).transitWeekendMult, 0.6, 'an out-of-range cell reads the seed');
+  const st = (r, n) => r.by[n].ridershipVolume;
+  const base = run({ isWeekend: false });
+  eq(base.S.transitMetrics.factors.dayType, 'weekday', 'isWeekend false → weekday');
+  const wk = run({ isWeekend: true });
+  eq(wk.S.transitMetrics.factors.dayType, 'weekend', 'isWeekend true → weekend');
+  eq(st(wk, 'Fruitvale'), Math.round(st(base, 'Fruitvale') * 0.6) , 'weekend → ×transitWeekendMult on ridership');
+  ok(/weekend/.test(wk.by['Fruitvale'].factors), 'weekend named in Factors');
+  const minor = run({ isWeekend: false, holiday: 'Valentine', holidayLabel: "Valentine's", holidayPriority: 'minor', holidayNeighborhood: null });
+  eq(st(minor, 'Fruitvale'), st(base, 'Fruitvale'), 'a minor holiday leaves ridership uncut');
+  ok(/holiday: Valentine's \(no cut\)/.test(minor.by['Fruitvale'].factors), 'a minor holiday is tagged: ' + minor.by['Fruitvale'].factors);
+  eq(minor.S.transitMetrics.factors.dayType, 'weekday', 'a holiday no longer overwrites dayType');
+  const major = run({ isWeekend: true, holiday: 'Easter', holidayLabel: 'Easter', holidayPriority: 'major', holidayNeighborhood: null });
+  eq(st(major, 'Fruitvale'), Math.round(st(base, 'Fruitvale') * 0.4), 'a major holiday cuts by transitMajorHolidayMult (outranks the weekend, never stacks)');
+  ok(/holiday: Easter \(major\)/.test(major.by['Fruitvale'].factors), 'a major holiday is tagged major');
+  const corBase = base.by['Grand Ave'].trafficIndex, corMajor = major.by['Grand Ave'].trafficIndex;
+  ok(corMajor < corBase, 'a major holiday cuts corridor traffic too (' + corBase + ' → ' + corMajor + ')');
+  const hal = run({ isWeekend: false, holiday: 'Halloween', holidayLabel: 'Halloween', holidayPriority: 'major', holidayNeighborhood: 'Temescal' });
+  const majorNoHood = run({ isWeekend: false, holiday: 'Easter', holidayLabel: 'Easter', holidayPriority: 'major', holidayNeighborhood: null });
+  ok(st(hal, 'MacArthur') > st(majorNoHood, 'MacArthur'), 'the holiday hood lifts its primary station (MacArthur → Temescal)');
+  ok(/Halloween in Temescal/.test(hal.by['MacArthur'].factors), 'holiday-hood lift named');
+  eq(st(hal, 'Fruitvale'), st(majorNoHood, 'Fruitvale'), 'a station outside the holiday hood gets no hood lift');
+  ok(/Halloween in Temescal/.test(hal.by['Telegraph Ave'].factors) || T.TRAFFIC_CORRIDORS.filter(c => c.corridor === 'Telegraph Ave')[0].hoods.indexOf('Temescal') < 0, 'the surface street through the holiday hood is lifted');
+  ok(!/Halloween in Temescal/.test(hal.by['I-580 West'].factors), 'a freeway through the holiday hood is not');
+  const ff = run({ isWeekend: false, isFirstFriday: true });
+  ok(st(ff, '19th St Oakland') > st(base, '19th St Oakland'), 'First Friday lifts 19th St');
+  ok(/First Friday/.test(ff.by['19th St Oakland'].factors), 'First Friday named on 19th St');
+  eq(st(ff, 'Rockridge'), st(base, 'Rockridge'), 'First Friday leaves Rockridge alone');
+  ok(ff.by['Telegraph Ave'].trafficIndex >= base.by['Telegraph Ave'].trafficIndex && /First Friday/.test(ff.by['Broadway'].factors), 'First Friday on Telegraph + Broadway');
+  const n19 = T.OAKLAND_BART_STATIONS.filter(x => x.station === '19th St Oakland')[0];
+  ok(n19.corridors.indexOf('Uptown') >= 0 && n19.corridors.indexOf('KONO') >= 0, '19th St catchment carries Uptown + KONO');
 }
 
 console.log('transitCauses: ' + pass + ' passed, ' + fail + ' failed');

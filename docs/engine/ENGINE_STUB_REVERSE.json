@@ -2,7 +2,7 @@
   "generated": "2026-10-15",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1686,
+  "functionsMapped": 1689,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -194,6 +194,7 @@
         "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_"
       ],
       "readers": [
+        "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase05-citizens/bondEngine.js::detectNewBonds_",
         "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
@@ -211,6 +212,7 @@
       ],
       "readers": [
         "phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_",
+        "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
         "phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_",
@@ -233,6 +235,7 @@
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_",
         "phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_",
+        "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
         "phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
@@ -369,6 +372,7 @@
         "phase02-world-state/applyWeatherModel.js::hasWeatherCondition_",
         "phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_",
         "phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_",
+        "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
         "phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
@@ -429,7 +433,8 @@
         "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_"
       ],
       "readers": [
-        "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_"
+        "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_",
+        "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_"
       ]
     },
     "month": {
@@ -4573,6 +4578,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine275Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine276Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine286Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine290Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase01-config/engine94SheetContract.js::ensureEngine95Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine96Config_",

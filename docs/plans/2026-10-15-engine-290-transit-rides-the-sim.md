@@ -55,7 +55,7 @@ Seven moves, all inside existing files. No new phase file. Every new number is a
 
 Canon writes, in order, each read back before the next live fire (codex §8):
 
-1. **Code to PROD** after the bench (Tasks 1–9): the engine.290 seed list self-arms the sixteen World_Config rows on the first fire; es reads them back.
+1. **Code to PROD** after the bench (Tasks 1–9): the engine.290 seed list self-arms the sixteen World_Config rows on the first fire; es reads them back. **Same step (found at the bench, es 05:30):** the engine reads the role catalog from the live `Economic_Parameters` tab, so the three new roles (Train Conductor, Train Operator, Transit Maintenance Technician) go to PROD with `node scripts/syncEconomicParameters.js` — append-only, never rewrites or deletes, JSON order checked; read back 309 → 312 rows before the first fire.
 2. **Event_Content_Ledger rows** (move 6): es writes them to PROD through `lib/sheets.js` after the bench proves the loader accepts the flag; read back; `Active=no` is the kill switch. Until the rows exist the pool is simply empty (the gate still fires, nothing draws — the one cycle this can happen is the deploy cycle, acceptable). **Crew rows (`occupation.bartCrew`) wait on the §6 title answer; commute rows do not.**
 3. **Intake mints are the builder's** (§6 morning line): `Advancement_Intake1` rows titled `BART Train Conductor`, `BART Train Operator`, `BART Rail Dispatcher`, `BART Track Maintenance Technician`. Nothing here authors a citizen.
 4. **Governor arming**: only after `node scripts/dumpLedger.js` shows the four rows at BIZ-00014 with `Status=Active` **and** the role regexes classify all four (es runs the classifier against the snapshot), es flips `transitStaffingGovernor` to 1 on PROD World_Config and reads it back. Before that, an armed governor would write "BART on-time fell — no crew" as canon on every station row (doctrine §8). The named crew-short cause needs no gate — it fires only on a real row.
@@ -97,6 +97,7 @@ Canon writes, in order, each read back before the next live fire (codex §8):
 | agy adversarial review 2026-10-14 | `output/antigravity/2026-10-14-review-engine290-transit.md` | reconciled (v1) |
 | codex plan review v1 2026-10-15 (HOLD) | `docs/for-claude-review/2026-10-15-codex-engine290-plan.md` | reconciled (v2, below) |
 | agy share read-before 2026-10-15 | `output/antigravity/2026-10-15-engine290-share-readbefore.md` | folded into move 3 / Task 3 |
+| codex diff review Tasks 6–8 2026-10-15 (FIX on §2–§5) | `docs/for-claude-review/2026-10-15-codex-engine290-impl-tasks6-8.md` | folded by es `ac1d38bb` (runtime gate on commute rows, `--poolkey`, Transit Dispatcher unrouted, voice-role additions reverted, docs wording); rb verified 05:35; bounded re-check dispatched |
 | codex diff review Tasks 1–5 2026-10-15 (FIX on §1, §3) | `docs/for-claude-review/2026-10-15-codex-engine290-impl-tasks1-5.md` | folded by es `254163a6`; rb verified 04:50 |
 
 ### Agreed

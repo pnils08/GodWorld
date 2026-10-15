@@ -808,6 +808,8 @@ function calculateStationMetrics_(station, context, demographics, rng) {
   // congestion (applyCityDynamics_, 0-0.38) replaces the events>2 hardcode.
   if (context.transitCongestion > 0) {
     onTime -= context.transitCongestion * context.dials.transitCongestionOnTimeMult;
+    // rb 2026-10-15: every on-time term is named (C114 lost 7-11 pts here unexplained)
+    causes.push('crowded platforms (city transit congestion ' + context.transitCongestion.toFixed(2) + ')');
   }
   onTime += onTimeDelta;
   onTime += (rng() - 0.5) * TRANSIT_FACTORS.ON_TIME_VARIANCE;

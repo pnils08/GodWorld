@@ -162,7 +162,7 @@ console.log('\nTest 10: Gate 5 + engine.199 — the job catalog has one runtime 
   assert('sheet read reproduces every JSON role, field for field',
     got.length === json.length && got.every((p, i) => pick(p) === pick(json[i])),
     `got ${got.length} of ${json.length}`);
-  assert('one sheet open per execution, logged once', L.opens() === 1 && L.logs.filter(m => /Economic_Parameters: loaded 306 roles/.test(m)).length === 1,
+  assert('one sheet open per execution, logged once', L.opens() === 1 && L.logs.filter(m => new RegExp('Economic_Parameters: loaded ' + json.length + ' roles').test(m)).length === 1,
     `opens=${L.opens()} logs=${JSON.stringify(L.logs)}`);
   assert('lookupIncome_ reads the sheet catalog', L.sb.lookupIncome_('Longshoreman') === 138000);
   const throws = (values, seed) => { try { load(values, seed).sb.economicParameters_(); return null; } catch (e) { return e.message; } };

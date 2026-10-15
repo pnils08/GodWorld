@@ -378,48 +378,6 @@
     "notes": "PE-licensed. Bridge, tunnel, roadway design. Climate-adaptation infrastructure is major growth area."
   },
   {
-    "role": "Train Conductor",
-    "category": "Transit & Infrastructure",
-    "incomeRange": [
-      68000,
-      98000
-    ],
-    "medianIncome": 84000,
-    "effectiveTaxRate": 0.25,
-    "economicOutputCategory": "Transit/Infrastructure",
-    "housingBurdenPct": 0.38,
-    "consumerProfile": "moderate",
-    "notes": "engine.290: rides the train, runs the doors and the announcements; shift work, seniority-bid runs."
-  },
-  {
-    "role": "Train Operator",
-    "category": "Transit & Infrastructure",
-    "incomeRange": [
-      76000,
-      112000
-    ],
-    "medianIncome": 94000,
-    "effectiveTaxRate": 0.25,
-    "economicOutputCategory": "Transit/Infrastructure",
-    "housingBurdenPct": 0.38,
-    "consumerProfile": "moderate",
-    "notes": "engine.290: drives the train; certified, seniority-bid runs, overtime on disruption days."
-  },
-  {
-    "role": "Transit Maintenance Technician",
-    "category": "Transit & Infrastructure",
-    "incomeRange": [
-      64000,
-      96000
-    ],
-    "medianIncome": 80000,
-    "effectiveTaxRate": 0.25,
-    "economicOutputCategory": "Transit/Infrastructure",
-    "housingBurdenPct": 0.38,
-    "consumerProfile": "moderate",
-    "notes": "engine.290: track, switch and systems maintenance, mostly overnight windows."
-  },
-  {
     "role": "Transit Dispatcher",
     "category": "Transit & Infrastructure",
     "incomeRange": [
@@ -4324,5 +4282,47 @@
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
     "notes": "Same band as Personal Trainer. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Train Conductor",
+    "category": "Transit & Infrastructure",
+    "incomeRange": [
+      68000,
+      98000
+    ],
+    "medianIncome": 84000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Transit/Infrastructure",
+    "housingBurdenPct": 0.38,
+    "consumerProfile": "moderate",
+    "notes": "engine.290: rides the train, runs the doors and the announcements; shift work, seniority-bid runs."
+  },
+  {
+    "role": "Train Operator",
+    "category": "Transit & Infrastructure",
+    "incomeRange": [
+      76000,
+      112000
+    ],
+    "medianIncome": 94000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Transit/Infrastructure",
+    "housingBurdenPct": 0.38,
+    "consumerProfile": "moderate",
+    "notes": "engine.290: drives the train; certified, seniority-bid runs, overtime on disruption days."
+  },
+  {
+    "role": "Transit Maintenance Technician",
+    "category": "Transit & Infrastructure",
+    "incomeRange": [
+      64000,
+      96000
+    ],
+    "medianIncome": 80000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Transit/Infrastructure",
+    "housingBurdenPct": 0.38,
+    "consumerProfile": "moderate",
+    "notes": "engine.290: track, switch and systems maintenance, mostly overnight windows."
   }
 ]

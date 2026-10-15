@@ -411,6 +411,8 @@ function run(S, opts) {
   // congestion replaces the events>2 hardcode
   const cong = run({ sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2 }, cityDynamicsCapacity: { transitCongestion: 0.38 } });
   eq(cong.by['Fruitvale'].onTimePerformance, Math.round((r.by['Fruitvale'].onTimePerformance - 0.38 * 0.25) * 100) / 100, 'on-time loses transitCongestion × transitCongestionOnTimeMult');
+  ok(/crowded platforms \(city transit congestion 0\.38\)/.test(cong.by['Fruitvale'].factors), 'and Factors name it: ' + cong.by['Fruitvale'].factors);
+  ok(!/crowded platforms/.test(r.by['Fruitvale'].factors), 'no congestion, no crowding cause');
   // rebase cycle
   const reb = run({ sportsFeedEntries: [] });
   ok(reb.all.every(m => /rebased/.test(m.factors)), 'first Cycle on the ledger base: every row says rebased');

@@ -80,6 +80,7 @@ const CONTRACT_SCORE = process.argv.includes('--contract-score');
 // pipeline.77: a draft the runner blocked before Rhea (contamination, assignment swap) is still
 // graded for shape — score only, to <base>.contract.json; no verdict is written or changed.
 const CONTRACT_ONLY = process.argv.includes('--contract-only');
+const CONTRACT_TIMEOUT_MS = 120000;
 
 const log = {
   info: (...a) => console.log('[INFO]', new Date().toISOString(), ...a),
@@ -283,7 +284,7 @@ function scanEngineVerbiage(draftText) {
 
 const API_RATES = { 'google/gemini-3.7-flash': [0.375, 1.875], 'google/gemini-3.5-flash': [1.5, 9], 'google/gemini-3.5-flash-lite': [0.3, 2.5], _default: [0.375, 1.875] };
 
-function callOpenRouter(model, system, user) {
+function callOpenRouter(model, system, user, timeoutMs) {
   return new Promise((resolve, reject) => {
     const payload = JSON.stringify({
       // headroom for gemini-flash reasoning_tokens — at 2000 the model spent the
@@ -314,6 +315,9 @@ function callOpenRouter(model, system, user) {
       });
     });
     req.on('error', reject);
+    // pipeline.77 (codex #1): an optional call (the contract score) carries a deadline; Rhea's
+    // own verdict call keeps none, as before.
+    if (timeoutMs) req.setTimeout(timeoutMs, () => req.destroy(new Error('timed out after ' + timeoutMs + 'ms')));
     req.write(payload); req.end();
   });
 }
@@ -321,13 +325,17 @@ function callOpenRouter(model, system, user) {
 // pipeline.77 contract score. Pure prompt + parse; the length check is code when the contract
 // gives exactly one word range, else the judge reads it with the counted words in hand.
 function contractWordRange(targetWords) {
+  // codex #6: "evidence-bounded" means the evidence sets the length; the range is a guide the judge
+  // weighs, not a hard limit code enforces (Marbury: "evidence-bounded; 350-600").
+  if (/evidence-bounded/i.test(String(targetWords || ''))) return null;
   const ranges = String(targetWords || '').match(/\d+\s*[-–]\s*\d+/g) || [];
   if (ranges.length !== 1) return null;
   const [lo, hi] = ranges[0].split(/[-–]/).map(n => parseInt(n, 10));
   return { lo, hi };
 }
 function contractWordCount(prose) {
-  return (String(prose || '').replace(/<!--[\s\S]*?-->/g, '').match(/[A-Za-z0-9][A-Za-z0-9'’-]*/g) || []).length;
+  // Same body as cron-desk-run checkBody/draftWordCount: no fences, no comments (codex #6).
+  return (String(prose || '').replace(/```[\s\S]*?```/g, '').replace(/<!--[\s\S]*?-->/g, '').match(/[A-Za-z0-9][A-Za-z0-9'’-]*/g) || []).length;
 }
 function buildContractPrompt(profile, prose) {
   const c = profile.articleContract || {};
@@ -377,7 +385,7 @@ async function contractOnly(draftAbs) {
   else {
     try {
       const cp = buildContractPrompt(profile, articleProseForReview(fs.readFileSync(draftAbs, 'utf8')));
-      const cr = await callOpenRouter(API_MODEL, cp.system, cp.user);
+      const cr = await callOpenRouter(API_MODEL, cp.system, cp.user, CONTRACT_TIMEOUT_MS);
       contractScore = Object.assign(parseContractScore(cr.text, profile, cp.words), { model: API_MODEL, scoredWithoutRhea: true });
     } catch (e) { contractScore = { error: 'contract score call failed: ' + e.message }; }
   }
@@ -822,6 +830,12 @@ async function main() {
     };
   }
 
+  fs.mkdirSync(COMPARE_DIR, { recursive: true });
+  const base = path.basename(draftAbs).replace(/\.md$/, '');
+  const outPath = path.join(COMPARE_DIR, base + '.rhea.json');
+  fs.writeFileSync(outPath, JSON.stringify(out, null, 2));
+  // pipeline.77 (codex #1): the verdict is on disk BEFORE the optional shape score, which has a
+  // deadline — a slow or failed score can neither hold Rhea's verdict back nor leave a stale one read.
   if (CONTRACT_SCORE) {
     if (BACKEND !== 'api') {
       out.contractScore = { error: 'contract score runs on the api backend only' };
@@ -830,7 +844,7 @@ async function main() {
     } else {
       try {
         const cp = buildContractPrompt(reviewContext.profile, articleProseForReview(draftText));
-        const cr = await callOpenRouter(API_MODEL, cp.system, cp.user);
+        const cr = await callOpenRouter(API_MODEL, cp.system, cp.user, CONTRACT_TIMEOUT_MS);
         out.contractScore = Object.assign(parseContractScore(cr.text, reviewContext.profile, cp.words), { model: API_MODEL });
         const rates = API_RATES[API_MODEL] || API_RATES._default;
         out.contractScore.costUsd = +(((cr.usageIn / 1e6) * rates[0]) + ((cr.usageOut / 1e6) * rates[1])).toFixed(4);
@@ -839,10 +853,7 @@ async function main() {
     }
   }
 
-  fs.mkdirSync(COMPARE_DIR, { recursive: true });
-  const base = path.basename(draftAbs).replace(/\.md$/, '');
-  const outPath = path.join(COMPARE_DIR, base + '.rhea.json');
-  fs.writeFileSync(outPath, JSON.stringify(out, null, 2));
+  if (out.contractScore) fs.writeFileSync(outPath, JSON.stringify(out, null, 2));
 
   console.log('\n--- rhea verdict ---');
   console.log(JSON.stringify(out, null, 2));

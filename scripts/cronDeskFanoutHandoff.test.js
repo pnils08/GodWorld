@@ -346,7 +346,9 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
   const g = cdr.fanoutCheckTotals([{ contractScore: 3 }, { contractScore: 4 }, { contractScore: null }]);
   assert.match(cdr.formatCheckTotals(g, 'write'), /graded 2 avg 3\.5\/4$/);
   // live read-backs when the C111 artifacts are on disk
-  const tanya = path.join(__dirname, '..', 'output', 'cron-compare', 'staged', 'sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md');
+  // the 10-14 58-word piece, superseded out of staged/ (builder 2026-10-14); its plain name now holds the rerun
+  const tanya = path.join(__dirname, '..', 'output', 'cron-compare', 'flagged', 'history',
+    'sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.superseded-stage.20261015T041023Z.md');
   if (fs.existsSync(tanya)) assert.equal(cdr.thinCheck(fs.readFileSync(tanya, 'utf8')).thin, true, 'C111 Tanya (58 words) reads thin');
   const noahMd = path.join(__dirname, '..', 'output', 'cron-compare', 'civic_c111_noah-tan_packet-v2_openai-gpt-5-6-luna.md');
   const noahState = noahMd.replace(/\.md$/, '.state.json');

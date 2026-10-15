@@ -69,7 +69,8 @@ assert.ok(faithPrompt.user.includes('canon name on the right is not an invention
 {
   const g = require('./cron-rhea-gate');
   assert.deepStrictEqual(g.contractWordRange('400-700'), { lo: 400, hi: 700 });
-  assert.deepStrictEqual(g.contractWordRange('evidence-bounded; 350-600'), { lo: 350, hi: 600 });
+  assert.equal(g.contractWordRange('evidence-bounded; 350-600'), null, 'evidence-bounded -> the judge weighs the range (codex #6)');
+  assert.equal(g.contractWordCount('one two\n```\nfenced words here\n```\n<!-- c -->three'), 3, 'same body as thinCheck: no fences, no comments');
   assert.equal(g.contractWordRange('evidence-bounded'), null);
   assert.equal(g.contractWordRange('180-280 without; 450-750 with'), null, 'two ranges -> the judge reads it');
   const profile = { purpose: 'TEST-ONLY purpose', articleContract: { voice: 'dry', opening: 'TEST-ONLY open', closing: 'TEST-ONLY close', targetWords: '400-700' } };

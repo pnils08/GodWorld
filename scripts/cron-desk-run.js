@@ -2130,6 +2130,10 @@ async function runAngle(assign) {
         }
         lastAngleRaw = String(r.text);
         const plan = PACKET_ACTIVE ? livedPacket.validateAngleOutput(r.text, inputPacket) : null;
+        // pipeline.77 (codex #4): the grade is feedback for planning, never plan text that rides to W3.
+        if (plan && /\bgraded:?\s*\d\s*\/\s*4\b/i.test(JSON.stringify(plan))) {
+          throw new Error('W1 plan echoes the desk grade — resampling');
+        }
         angleRead = { name: r.name, popid: r.popId,
           text: PACKET_ACTIVE ? livedPacket.reporterChaseText(plan) : r.text,
           ...(plan ? { plan } : {}) };
@@ -3206,7 +3210,7 @@ async function runWrite(assign) {
   storyDocAppend(stem, '§4 THE ARTICLE (wake 3)',
     '- draft: ' + path.relative(ROOT, destPath) + '\n- disposition: ' + record.disposition +
     (rhea ? '\n- rhea: ' + (rhea.pass ? 'PASS' : 'flagged (' + rhea.flagCount + ')') : '') +
-    '\n- self-score footer: ' + (footerPresent ? 'present' : 'MISSING') +
+    '\n- self-score footer: ' + (rewardLoop ? 'retired (reward loop — score in .wake.json contractScore)' : (footerPresent ? 'present' : 'MISSING')) +
     '\n- tool use: ' + (record.toolUse.length ? record.toolUse.join(', ') : 'none'));
   console.log('\n=== write disposition: ' + record.disposition.toUpperCase() + ' ===');
   console.log(JSON.stringify(record, null, 2));

@@ -131,6 +131,7 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 
 02:45 rb — engine.290 transit: the plan ships the BART crew governor OFF (dial transitStaffingGovernor 0) until crew exists, because armed before any conductor row it would write "BART on-time fell, no crew" as canon on the next fire. The crew comes only from you: four Intake rows (Advancement_Intake1) titled BART Train Conductor, BART Train Operator, BART Rail Dispatcher, BART Track Maintenance Technician — names are yours, any neighborhood. Say go (and the names) and es arms the governor the fire after they land. Plan: docs/plans/2026-10-15-engine-290-transit-rides-the-sim.md.
 02:45 rb — engine.290: BART Oakland Division and AC Transit are real-world names on the Business_Ledger (BIZ-00014 / BIZ-00013). Keep them as legacy canon (as the A's are), or rename in-world? The build does not touch the names either way; the chaos car and the ECL rows say "BART train" until you rule.
++04:30 es — engine.290 transit: two station-catchment edits made overnight so the downtown hub outranks West Oakland on the C111 numbers. West Oakland station no longer counts Downtown (Downtown has its own two stations), and 12th St now counts Jack London (no station stands there). With them: 12th St 18% of riders, West Oakland 13%, 19th St 20% (Uptown's workers and shops). Say so if the map says otherwise and es reverses them. Also: North Oakland is not a child area of any hood on Neighborhood_Map, so MacArthur's row says "no row: North Oakland" — add it under Temescal on the map if that is canon.
 
 ## 7. Working ledger
 
@@ -238,3 +239,9 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 13:03 rb CLAIM codex rb civic.38 renew-move stall-clock check (read-only → docs/for-claude-review/2026-10-04-codex-civic38-renew-check.md); moved off kimi (out for the week) at the builder's word. NEXT[kimi]/NEXT[codex] updated.
 02:35 rb CHECK engine.290 — plan written + committed 6e0099e6; codex plan review dispatched (TASK 2026-10-15-engine290-plan-review-TASK.md); agy + codex cleared 03:xx; es idle at empty prompt, boots after the fold.
 03:14 rb CHECK engine.290 — codex plan review HOLD (8 hunts) + agy share read-before folded into plan v2; codex + agy RELEASE + /clear; es handed Tasks 1-9.
+03:19 es COMMIT f4178346 engine.290 Task 1 write boundary — station rows blank TrafficIndex, corridor rows blank ridership/OTP; transitCauses 104/0, beatSlices PASS.
+03:22 es COMMIT 5cf36f1d engine.290 Task 2 clocks — dayType from S.isWeekend, major-only holiday cut, holiday-hood + First Friday lifts, 16-dial seed list (governor 0); transitCauses 128/0.
+03:30 es COMMIT 9619cb6d engine.290 Task 3 ledger shares + corridor base + congestion + rebase token/slice; 3 mechanism corrections in plan changelog; §6 line for 2 catchment edits. transitCauses 151/0, beatSlices PASS.
+03:32 es COMMIT 644fc208 engine.290 Task 4 crew — S.transitStaffing, governor (seeded 0), named crew-short cause; transitCauses 170/0.
+03:42 es COMMIT f495246c engine.290 Task 5 chaos train (bart_train, filters, carry, stalled-train disruption, weight dial); npm test 290/290. CLAIM codex es engine.290 Tasks 1-5 diff review (TASK 2026-10-15-engine290-impl-tasks1-5-review-TASK.md).
+03:43 rb CHECK engine.290 — es Tasks 1-5 verified against the plan (f4178346 5cf36f1d 9619cb6d 644fc208 f495246c; Task 3's three deviations accepted, commuteInbound already holds the diagonal); codex on the Tasks 1-5 diff; es on Task 6.

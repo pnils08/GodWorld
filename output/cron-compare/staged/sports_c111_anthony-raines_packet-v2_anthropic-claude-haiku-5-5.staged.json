@@ -27,7 +27,21 @@
     "manifestId": "AM-7afdfa4219be",
     "draftSha256": "36070bcc756994ee3e204190e654b9aec8343739f2239066eb83370f45703682",
     "verdict": "output/cron-compare/sports_c111_anthony-raines_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
-    "ranAt": "2026-10-12T23:18:33.350Z"
+    "ranAt": "2026-10-12T23:18:33.350Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 662,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "scoredBy": "pipeline.79 post-hoc backfill (C111 staged before the loop)",
+      "draftSha256": "36070bcc756994ee3e204190e654b9aec8343739f2239066eb83370f45703682"
+    }
   },
   "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
   "stagedAt": "2026-10-12T23:18:34.015Z"

@@ -102,7 +102,10 @@ function stagedRheaProof(rhea, articleSha256, verdictPath) {
     manifestId: rhea.reviewProfile && rhea.reviewProfile.manifestId || null,
     draftSha256: articleSha256,
     verdict: path.relative(ROOT, verdictPath),
-    ranAt: rhea.ranAt || null
+    ranAt: rhea.ranAt || null,
+    // pipeline.79 (builder 2026-10-15): the grade travels with the filing — Saturday ranks on it,
+    // and the root verdict a rerun overwrites can't speak for an earlier filing.
+    ...(rhea.contractScore && Number.isInteger(rhea.contractScore.score) ? { contractScore: rhea.contractScore } : {})
   };
 }
 

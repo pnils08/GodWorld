@@ -28,7 +28,21 @@
     "manifestId": "AM-2db04e6da6d9",
     "draftSha256": "8820c1e07aa618e7325b7b0d4f754b998cba12184f54aa6798fd8b483f3cfa7b",
     "verdict": "output/cron-compare/undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3.rhea.json",
-    "ranAt": "2026-10-13T23:16:30.686Z"
+    "ranAt": "2026-10-13T23:16:30.686Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": false,
+      "inTarget": false,
+      "inTargetBy": "code 350-600",
+      "words": 84,
+      "short": "At only 84 words, the piece severely misses the word target and fails to deliver a full arc-tracking entertainment recap.",
+      "score": 2,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "scoredBy": "pipeline.79 post-hoc backfill (C111 staged before the loop)",
+      "draftSha256": "8820c1e07aa618e7325b7b0d4f754b998cba12184f54aa6798fd8b483f3cfa7b"
+    }
   },
   "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
   "stagedAt": "2026-10-13T23:16:30.944Z"

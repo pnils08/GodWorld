@@ -29,7 +29,21 @@
     "manifestId": "AM-05498534f67b",
     "draftSha256": "32808b843b0d2ce4731b9c6538148aa3a43608bd463c7e4dea9099856dc8d247",
     "verdict": "output/cron-compare/civic_c111_rachel-torres_packet-v2_x-ai-grok-4-3.rhea.json",
-    "ranAt": "2026-10-13T23:15:21.965Z"
+    "ranAt": "2026-10-13T23:15:21.965Z",
+    "contractScore": {
+      "opened": true,
+      "closed": false,
+      "purposeMet": false,
+      "inTarget": false,
+      "inTargetBy": "code 500-800",
+      "words": 178,
+      "short": "The piece is far under the target word count, does not trace a single focused incident or question, and ends on a summary statement rather than an unresolved accountability or practical-safety question.",
+      "score": 1,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "scoredBy": "pipeline.79 post-hoc backfill (C111 staged before the loop)",
+      "draftSha256": "32808b843b0d2ce4731b9c6538148aa3a43608bd463c7e4dea9099856dc8d247"
+    }
   },
   "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
   "stagedAt": "2026-10-13T23:15:24.645Z"

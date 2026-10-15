@@ -50,7 +50,21 @@
     "manifestId": "AM-299ee10b1a6f",
     "draftSha256": "c8f47884193e4037bfe54eeeda194bfe1563f0e7811356dd7ca2e1e5dced8e10",
     "verdict": "output/cron-compare/business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5.rhea.json",
-    "ranAt": "2026-10-12T23:16:22.362Z"
+    "ranAt": "2026-10-12T23:16:22.362Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code 500-800",
+      "words": 829,
+      "short": "The piece exceeds the maximum target length of 800 words at 829 words.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "scoredBy": "pipeline.79 post-hoc backfill (C111 staged before the loop)",
+      "draftSha256": "c8f47884193e4037bfe54eeeda194bfe1563f0e7811356dd7ca2e1e5dced8e10"
+    }
   },
   "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
   "stagedAt": "2026-10-12T23:16:25.097Z"

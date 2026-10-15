@@ -27,7 +27,21 @@
     "manifestId": "AM-5598afd32540",
     "draftSha256": "70ce2198329d7e5069b6d2f9b8cea1b098a1431e983ad7be486f9cfc112c952c",
     "verdict": "output/cron-compare/sports_c111_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
-    "ranAt": "2026-10-15T03:26:36.697Z"
+    "ranAt": "2026-10-15T03:26:36.697Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "judge",
+      "words": 793,
+      "short": "The piece exceeds the 350-600 word target at 793 words.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "scoredBy": "pipeline.79 post-hoc backfill (C111 staged before the loop)",
+      "draftSha256": "70ce2198329d7e5069b6d2f9b8cea1b098a1431e983ad7be486f9cfc112c952c"
+    }
   },
   "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
   "stagedAt": "2026-10-15T03:26:39.241Z"

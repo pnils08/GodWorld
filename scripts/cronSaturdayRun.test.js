@@ -215,5 +215,15 @@ console.log('Test 6: mergeStorylineLedger');
   assert('extractLight_ takes the first in-vocab word, null otherwise', extractLight_('Negative — blamed.') === 'negative' && extractLight_('neutral') === 'neutral' && extractLight_('positive') === 'positive' && extractLight_('unsure') === null && LIGHT_VOCAB.length === 3);
 }
 
+{
+  // pipeline.79 — the grade of THESE bytes only
+  const { stagedGrade } = require('./cron-saturday-run');
+  const sha = 'a'.repeat(64);
+  assert('stagedGrade reads the sidecar proof', stagedGrade({ rhea: { pass: true, draftSha256: sha, contractScore: { score: 3 } } }, null, sha) === 3);
+  assert('stagedGrade falls back to a root verdict on the same hash', stagedGrade({ rhea: { pass: true, draftSha256: sha } }, { pass: true, draftSha256: sha, contractScore: { score: 4 } }, sha) === 4);
+  assert('stagedGrade ignores a root verdict for other bytes', stagedGrade({ rhea: { pass: true, draftSha256: sha } }, { pass: true, draftSha256: 'b'.repeat(64), contractScore: { score: 4 } }, sha) === null);
+  assert('stagedGrade is null when never graded', stagedGrade({ rhea: { pass: true, draftSha256: sha } }, null, sha) === null);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

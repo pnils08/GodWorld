@@ -1,0 +1,50 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "111",
+  "persona": "freelance-firebrand",
+  "byline": "Jax Caldera",
+  "bylinePopid": "POP-00799",
+  "article": "output/cron-compare/staged/civic_c111_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "Fruitvale: decay [Sentiment -0.170, RetailVitality -2.04, HousingPressure +1.000] — Sentiment now 0.52 (1 of 22, city median 0.32); RetailVitality now 10.55 (5 of 22, city median 8.275); HousingPressure now 4.5 (17 of 22, city median 0) — with no matching active initiative",
+        "sourceRef": "output/engine_audit_c111.json patterns[6]; evidence: Neighborhood_Map row(s) 6"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-3f143afc0ff7",
+    "draftSha256": "ee28533d40da28e405d62b845686692cbe0e02604ed554052ad69e2a05d2d2c7",
+    "verdict": "output/cron-compare/civic_c111_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-14T23:15:32.779Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code 400-650",
+      "words": 592,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "scoredBy": "pipeline.79 post-hoc backfill (C111 staged before the loop)",
+      "draftSha256": "ee28533d40da28e405d62b845686692cbe0e02604ed554052ad69e2a05d2d2c7"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-14T23:15:35.381Z"
+}

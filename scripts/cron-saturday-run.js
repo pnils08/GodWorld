@@ -8,7 +8,7 @@
  *   1 audit    — EIC accuracy audit → eic_scorecard_c{N}.{json,md} (the %-to-90
  *                answer; graduation window per plan §Phase 4). LLM: gemini-flash
  *                + deterministic INTAKE-name ledger re-check (hard fail class).
- *   2 curate   — mechanical rank (storyline moves + audit verdict), storyline
+ *   2 curate   — grade first (pipeline.79), then storyline moves + audit verdict; storyline
  *                dedup, top ~9 → edition_curation_c{N}.json. Canon-violations
  *                never publish.
  *   3 narrate  — Mags narrates the Pulse from the curated set (Sonnet, the one
@@ -121,6 +121,18 @@ function stagedWritePacket(side) {
   return root && want && idOf(root) === want ? root : null;
 }
 
+// pipeline.79 (builder 2026-10-15: "highlight the best articles of the week on Saturday") —
+// the seat-contract grade (0-4) of THESE bytes: the sidecar's own proof first, else the root
+// verdict only when it proved the same hash. null = never graded (pre-loop filings, lore).
+function stagedGrade(side, fallbackVerdict, articleSha256) {
+  for (const proof of [side && side.rhea, fallbackVerdict]) {
+    if (!proof || proof.pass !== true || proof.draftSha256 !== articleSha256) continue;
+    const cs = proof.contractScore;
+    if (cs && Number.isInteger(cs.score)) return cs.score;
+  }
+  return null;
+}
+
 function verifyStagedProof(side, articleText, fallbackVerdict) {
   if (!side || side.status !== 'staged') return { ok: false, reason: 'sidecar status is not staged' };
   const articleSha256 = crypto.createHash('sha256').update(articleText).digest('hex');
@@ -220,6 +232,7 @@ function loadStagedSet(cycle) {
     out.push({
       stem,
       sidecarFile: f,
+      grade: stagedGrade(side, fallbackVerdict, proof.articleSha256),
       sidecar: side,
       text,
       articleSha256: proof.articleSha256
@@ -363,10 +376,23 @@ function citationSnippet(text, name) {
   return hits.slice(0, 4).join(' ').slice(0, 1200);
 }
 
+// pipeline.79 (builder 2026-10-15: print is "where journalist usage for tiers come from") —
+// each printed filing earns its author 'byline-published' (processAdvancementIntake engine.88:
+// MEDIA climbs on these alone). ingestPublishedEntities' ARTICLE TABLE path never matched this
+// edition shape, so none were written after C102. Context = the stem, like byline-landed.
+function bylinePublishedRows(cycle, set) {
+  const curation = readJsonSafe(path.join(ROOT, 'output', 'edition_curation_c' + cycle + '.json'));
+  if (!curation || !Array.isArray(curation.selected)) return [];
+  const printed = new Set(curation.selected);
+  return set.filter(e => printed.has(e.stem) && e.sidecar.byline)
+    .map(e => ({ name: e.sidecar.byline, popid: e.sidecar.bylinePopid || null,
+      usageType: 'byline-published', context: e.stem, snippet: '', byline: true }));
+}
+
 async function stepSheets(cycle) {
   console.log('--- step 6: Citizen_Media_Usage ingest from INTAKE ---');
   const set = loadStagedSetExcludingCanonViolations(cycle);
-  const wanted = set.flatMap(e => usageRowsFor(e));
+  const wanted = set.flatMap(e => usageRowsFor(e)).concat(bylinePublishedRows(cycle, set));
   if (!wanted.length) { console.log('no INTAKE usage rows for c' + cycle); return { written: 0 }; }
   if (!APPLY) {
     for (const w of wanted) console.log('(dry-run) would append: ' + w.name + ' | ' + w.usageType + ' | ' + w.context + (w.snippet ? ' | light: (classified on --apply)' : ' | light: no snippet'));
@@ -381,6 +407,7 @@ async function stepSheets(cycle) {
   // A failed or absent judgment leaves the cell blank — the engine reads blank as neutral.
   const { classifyCitationLight } = require(path.join(ROOT, 'lib', 'reflectionClassifier'));
   for (const w of wanted) {
+    if (w.byline) continue;   // the author's own work is never coverage of them (engine.152)
     const res = await classifyCitationLight(w.name, w.snippet);
     w.sentiment = res.light || '';
     console.log('light: ' + w.name + ' -> ' + (res.light || '(unclassified: ' + String(res.raw).slice(0, 60) + ')'));
@@ -398,7 +425,7 @@ async function stepSheets(cycle) {
         case 'CitizenName': return w.name;
         case 'UsageType':   return w.usageType;
         case 'Context':     return w.context;
-        case 'Reporter':    return entryByline(w.context);
+        case 'Reporter':    return w.byline ? w.name : entryByline(w.context);
         case 'Sentiment':   return w.sentiment || '';   // engine.152
         default:            return '';
       }
@@ -874,8 +901,11 @@ async function stepCurate(cycle) {
   const ranked = set
     .filter(e => (byStem[e.stem] || {}).verdict !== 'canon-violation')
     .map(e => ({ stem: e.stem, byline: e.sidecar.byline || '', desk: e.sidecar.desk || '',
+      grade: e.grade == null ? null : e.grade,
       score: curationScore(e, byStem[e.stem]), slug: primarySlug(e), verdict: (byStem[e.stem] || {}).verdict || 'unaudited' }))
-    .sort((a, b) => b.score - a.score);
+    // pipeline.79: the week's best-graded work leads; the storyline/names/audit count breaks
+    // ties; an ungraded filing ranks below every graded one.
+    .sort((a, b) => ((b.grade == null ? -1 : b.grade) - (a.grade == null ? -1 : a.grade)) || (b.score - a.score));
   // Two passes: unique storyline threads first, then best remainders fill leftover slots.
   const seen = new Set(), selected = [];
   for (const r of ranked) {
@@ -892,7 +922,7 @@ async function stepCurate(cycle) {
   const out = { cycle: String(cycle), top, selected, ranked, excludedCanonViolations: excluded };
   const p = path.join(ROOT, 'output', 'edition_curation_c' + cycle + '.json');
   fs.writeFileSync(p, JSON.stringify(out, null, 2));
-  for (const r of ranked.slice(0, top)) console.log('  ' + String(r.score).padStart(5) + '  ' + r.stem + (selected.includes(r.stem) ? '' : '  (storyline-dedup deferred)'));
+  for (const r of ranked.slice(0, top)) console.log('  ' + (r.grade == null ? '-' : r.grade + '/4') + ' ' + String(r.score).padStart(5) + '  ' + r.stem + (selected.includes(r.stem) ? '' : '  (storyline-dedup deferred)'));
   console.log(selected.length + ' selected of ' + set.length + ' staged (' + excluded + ' canon-violation excluded) → ' + path.relative(ROOT, p));
   return out;
 }
@@ -985,7 +1015,6 @@ async function stepPublish(cycle) {
     console.log('(dry-run) would run:');
     console.log('  node scripts/ingestEdition.js ' + path.relative(ROOT, outPath) + ' --cycle ' + cycle);
     console.log('  nlm source add <permanent notebookId> --file ' + path.relative(ROOT, outPath));
-    console.log('  node scripts/ingestPublishedEntities.js ' + path.relative(ROOT, outPath) + ' --cycle ' + cycle + ' --apply  (NAMES INDEX parser — verify INTAKE compatibility first)');
     return { published: false };
   }
   const { spawnSync } = require('child_process');
@@ -1034,7 +1063,7 @@ async function stepPublish(cycle) {
       console.log('SATURDAY AUDIO SKIPPED (non-blocking): ' + e.message);
     }
   }
-  console.log('[follow-up] ingestPublishedEntities (byline-published fame rows) parses NAMES INDEX — run manually until its INTAKE adaptation lands.');
+  // pipeline.79: byline-published rows are written by stepSheets from the curated set.
   return { published: true, path: outPath };
 }
 
@@ -1141,4 +1170,4 @@ if (require.main === module) {
 
 module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
-  isCodeRenderedBrief };
+  isCodeRenderedBrief, stagedGrade, bylinePublishedRows };

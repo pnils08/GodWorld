@@ -2,6 +2,7 @@
   "_comment": "ADR-0017 live wake packages. The scheduled fan-out is package-only: a journalist must have one active entry before any wake runs. Models are explicit per wake; reviewProfile is the machine-readable authority Rhea uses to distinguish canon assertions from persona-authorized texture.",
   "freelance-firebrand": {
     "version": "JAX-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "freelance-firebrand",
@@ -188,6 +189,7 @@
   },
   "trevor-shimizu": {
     "version": "TREVOR-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "trevor-shimizu",
@@ -247,6 +249,7 @@
   },
   "p-slayer": {
     "version": "PSLAYER-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "p-slayer",
@@ -310,6 +313,7 @@
   },
   "anthony-raines": {
     "version": "ANTHONY-LEP2-2",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "anthony-raines",
@@ -430,6 +434,7 @@
   },
   "hal-richmond": {
     "version": "HAL-LEP2-2",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "hal-richmond",
@@ -544,6 +549,7 @@
   },
   "simon-leary": {
     "version": "SIMON-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "simon-leary",
@@ -597,6 +603,7 @@
   },
   "maria-keen": {
     "version": "MARIA-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "maria-keen",
@@ -650,6 +657,7 @@
   },
   "elliot-graye": {
     "version": "GRAYE-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "elliot-graye",
@@ -703,6 +711,7 @@
   },
   "mason-ortega": {
     "version": "MASON-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "mason-ortega",
@@ -756,6 +765,7 @@
   },
   "sharon-okafor": {
     "version": "SHARON-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "sharon-okafor",
@@ -809,6 +819,7 @@
   },
   "business-desk": {
     "version": "JORDAN-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "business-desk",
@@ -870,6 +881,7 @@
   },
   "kai-marston": {
     "version": "KAI-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "kai-marston",
@@ -931,6 +943,7 @@
   },
   "rachel-torres": {
     "version": "RACHEL-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "rachel-torres",
@@ -987,6 +1000,7 @@
   },
   "lila-mezran": {
     "version": "LILA-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "lila-mezran",
@@ -1044,6 +1058,7 @@
   },
   "angela-reyes": {
     "version": "ANGELA-LEP2-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "angela-reyes",
@@ -1159,6 +1174,7 @@
   },
   "nia-rook": {
     "version": "NIAROOK-UNDOCKED-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "nia-rook",
@@ -1228,6 +1244,7 @@
   },
   "nia-rook-weekly": {
     "version": "NIAROOK-UNDOCKED-WEEKLY-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": false,
     "persona": "nia-rook-weekly",
@@ -1298,6 +1315,7 @@
   },
   "selena-grant": {
     "version": "SELENA-OAKS-2",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "selena-grant",
@@ -1360,6 +1378,7 @@
   },
   "talia-finch": {
     "version": "TALIA-OAKS-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "talia-finch",
@@ -1422,6 +1441,7 @@
   },
   "celeste-tran": {
     "version": "CELESTE-TRENDS-1",
+    "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
     "persona": "celeste-tran",

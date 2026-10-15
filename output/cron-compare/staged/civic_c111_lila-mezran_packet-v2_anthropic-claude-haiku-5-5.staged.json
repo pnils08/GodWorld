@@ -50,7 +50,21 @@
     "manifestId": "AM-2d181013b3e1",
     "draftSha256": "7000dd5022b5499765d9e84e3f98925050d6ea2ababe9981a63ebd3cf184d3a5",
     "verdict": "output/cron-compare/civic_c111_lila-mezran_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
-    "ranAt": "2026-10-12T23:17:16.645Z"
+    "ranAt": "2026-10-12T23:17:16.645Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 785,
+      "short": "",
+      "score": 4,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "scoredBy": "pipeline.79 post-hoc backfill (C111 staged before the loop)",
+      "draftSha256": "7000dd5022b5499765d9e84e3f98925050d6ea2ababe9981a63ebd3cf184d3a5"
+    }
   },
   "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
   "stagedAt": "2026-10-12T23:17:17.300Z"

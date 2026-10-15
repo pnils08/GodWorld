@@ -1,0 +1,66 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "p-slayer",
+  "byline": "P Slayer",
+  "bylinePopid": "POP-00008",
+  "article": "output/cron-compare/staged/sports_c111_p-slayer_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Janelle Rourke",
+        "role": "quoted-source",
+        "popid": "POP-00145"
+      },
+      {
+        "name": "Inga Creator",
+        "role": "quoted-source",
+        "popid": "POP-00196"
+      },
+      {
+        "name": "Daniel Yoon",
+        "role": "quoted-source",
+        "popid": "POP-01107"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "I just picked up a new A's jersey. Honestly, I'm still riding the high from that win last night.",
+        "sourceRef": "citizenVoice PRESS Daniel Yoon"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-70ae5bc40507",
+    "draftSha256": "715b250076a8ca3d057db9b5e8a2123b29ac1370adecc3ee84d3ac1bf45bb18d",
+    "verdict": "output/cron-compare/sports_c111_p-slayer_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-14T23:16:46.780Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code 400-700",
+      "words": 315,
+      "short": "The piece falls short of the minimum 400-word target at 315 words.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "scoredBy": "pipeline.79 post-hoc backfill (C111 staged before the loop)",
+      "draftSha256": "715b250076a8ca3d057db9b5e8a2123b29ac1370adecc3ee84d3ac1bf45bb18d"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-14T23:16:47.280Z"
+}

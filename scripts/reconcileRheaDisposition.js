@@ -246,7 +246,8 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
         manifestId: verdict.reviewProfile && verdict.reviewProfile.manifestId || null,
         draftSha256,
         verdict: path.relative(root, verdictAbs),
-        ranAt: verdict.ranAt || null
+        ranAt: verdict.ranAt || null,
+        ...(verdict.contractScore && Number.isInteger(verdict.contractScore.score) ? { contractScore: verdict.contractScore } : {})
       },
       note: 'Rhea-cleared weekday probation stage; not canon until the Saturday gate.',
       stagedAt: now.toISOString()

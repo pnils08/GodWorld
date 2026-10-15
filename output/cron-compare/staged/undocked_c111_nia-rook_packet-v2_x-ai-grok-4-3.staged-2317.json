@@ -1,0 +1,57 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "111",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3.staged-2317.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Briar Soto",
+        "role": "mentioned",
+        "popid": "POP-00926"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I've never really had to deal with a situation where everything went smoothly but the books didn't balance out. I mean, I've worked on some tricky electrical jobs, but that's a different story. I don't really know how to reconcile that.",
+        "sourceRef": "citizenVoice PRESS Briar Soto"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c226d21b7f41",
+    "draftSha256": "ff0f1b8e3e260a04ae8d2d9430f4a8710f84186edd85ad9cbe05c20d14bd32b5",
+    "verdict": "output/cron-compare/undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-14T23:17:57.489Z",
+    "contractScore": {
+      "opened": true,
+      "closed": true,
+      "purposeMet": true,
+      "inTarget": false,
+      "inTargetBy": "code 350-600",
+      "words": 165,
+      "short": "The piece is significantly under the minimum target length of 350 words.",
+      "score": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "scoredBy": "pipeline.79 post-hoc backfill (C111 staged before the loop)",
+      "draftSha256": "ff0f1b8e3e260a04ae8d2d9430f4a8710f84186edd85ad9cbe05c20d14bd32b5"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-14T23:17:57.768Z"
+}

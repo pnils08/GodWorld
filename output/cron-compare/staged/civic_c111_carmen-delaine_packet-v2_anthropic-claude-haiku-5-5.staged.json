@@ -1,0 +1,62 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "111",
+  "persona": "carmen-delaine",
+  "byline": "Carmen Delaine",
+  "bylinePopid": "POP-00011",
+  "article": "output/cron-compare/staged/civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Denise Carter",
+        "role": "quoted-source",
+        "popid": "POP-00501"
+      },
+      {
+        "name": "Avery Santana",
+        "role": "quoted-source",
+        "popid": "POP-00034"
+      },
+      {
+        "name": "Brenda Okoro",
+        "role": "quoted-source",
+        "popid": "POP-00037"
+      },
+      {
+        "name": "Marcus Webb",
+        "role": "quoted-source",
+        "popid": "POP-00790"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-001:disbursement-active",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving.",
+        "sourceRef": "citizenVoice PRESS Denise Carter"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-31b4295cf07b",
+    "draftSha256": "fb136d6e404cf18004cb280fb287d70a0a0288c7c2d1eb15d5faab62f2e95acb",
+    "verdict": "output/cron-compare/civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-10-15T04:04:32.495Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-15T04:04:38.430Z"
+}

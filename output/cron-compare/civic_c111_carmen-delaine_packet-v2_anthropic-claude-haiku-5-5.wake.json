@@ -14,17 +14,12 @@
   },
   "laneEntries": 93,
   "quotesLanded": 5,
-  "disposition": "flagged",
-  "rheaPass": null,
-  "rheaFlagCount": null,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
   "contamination": {
-    "fail": true,
-    "findings": [
-      {
-        "check": "invented-voice",
-        "issue": "Marcus Webb (POP-00790) cannot be quoted: INSTITUTIONAL"
-      }
-    ]
+    "fail": false,
+    "findings": []
   },
   "footerPresent": null,
   "toolUse": [],
@@ -36,9 +31,26 @@
   "engineTerms": [],
   "verbatimWarn": [],
   "rewardLoop": true,
-  "contractScore": null,
-  "gradeRecord": null,
-  "article": "output/cron-compare/flagged/civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5-0349.md",
-  "selfRecord": null,
-  "ranAt": "2026-10-15T03:49:18.638Z"
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code 500-900",
+    "words": 639,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "costUsd": 0.0008
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "rom ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00011\",\n  \"name\": \"Carmen Delaine\",\n  \"recorded\": true,\n  \"text\": \"filed: Ninety-One Households, One Ledger\"\n}"
+  },
+  "ranAt": "2026-10-15T04:05:10.784Z"
 }

@@ -124,6 +124,10 @@ const GATE_API_MODEL = arg('--gate-api-model', 'google/gemini-3.7-flash');
 // output is NOT canon — it routes to samples/ marked ungated, for review only.
 const NO_GATE = process.argv.includes('--no-gate');
 const DRY_RUN = process.argv.includes('--dry-run');
+// --regate: re-run W3's gate and everything after it on the draft and W3 state already on disk —
+// no writer call, no rebuilt Packet (C111 Carmen, after the invented-voice wall was trued to the
+// S515 ruling). Requires --only, so it touches one seat.
+const REGATE = process.argv.includes('--regate');
 // Submission budget (headless plan "What's left" #2, S339): hard weekly ceiling
 // on gate-cleared (staged) articles per cycle-week — the ~20–28/wk cost envelope.
 // At the cap a write wake exits BEFORE any writer spend. --no-gate samples are
@@ -2880,7 +2884,8 @@ async function runWrite(assign) {
       runningStories: storylineLines(loadStorylines(cycle, desk)),
       reviewProfile: ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.reviewProfile,
     });
-    fs.writeFileSync(stateFile, JSON.stringify(writePacket, null, 2));
+    if (REGATE && fs.existsSync(stateFile)) writePacket = readJson(stateFile) || writePacket; // the state the writer saw
+    else fs.writeFileSync(stateFile, JSON.stringify(writePacket, null, 2));
   } else {
     fs.writeFileSync(stateFile, buildLaneState(desk, cycle, lane, byline, quotes, persona,
       angle && angle.angleRead ? angle.angleRead.text : null, assignment, wallBlock));
@@ -2920,7 +2925,13 @@ async function runWrite(assign) {
     log('draft would be: ' + path.relative(ROOT, draftPath));
     return;
   }
-  execFileSync('node', writerArgs, { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+  if (REGATE) {
+    if (!arg('--only', null)) throw new Error('--regate re-gates one seat: pass --only "<name>"');
+    if (!fs.existsSync(draftPath)) throw new Error('--regate: no draft at ' + path.relative(ROOT, draftPath));
+    log('REGATE — reusing the draft and W3 state on disk; writer not called');
+  } else {
+    execFileSync('node', writerArgs, { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+  }
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
   // pipeline.76 — a writer-tools run amends the claim manifest in the state file; every check
   // below (contamination, verbatim, Rhea's --article-packet) reads the amended Packet.

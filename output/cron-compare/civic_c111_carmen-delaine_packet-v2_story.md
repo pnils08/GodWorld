@@ -22,3 +22,10 @@ The money's moving — $400K out the door again, month ten, and the tracker says
 - self-score footer: MISSING
 - tool use: none
 
+## §4 THE ARTICLE (wake 3)
+- draft: output/cron-compare/staged/civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.staged.md
+- disposition: staged
+- rhea: PASS
+- self-score footer: MISSING
+- tool use: none
+

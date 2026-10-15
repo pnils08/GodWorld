@@ -1,0 +1,77 @@
+{
+  "draft": "output/cron-compare/civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "fb136d6e404cf18004cb280fb287d70a0a0288c7c2d1eb15d5faab62f2e95acb",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes, civic data, and citizen attributions verified against cycle 111 ground truth and packet manifests with zero integrity flags.",
+  "review": {
+    "profileId": "carmen-civic-ledger-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "packageVersion": "CARMEN-LEP2-2",
+    "manifestId": "AM-31b4295cf07b",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "1"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Avery Santana",
+      "Brenda Okoro",
+      "Denise Carter",
+      "Elliott Crane",
+      "Leonard Tran",
+      "Marcus Webb",
+      "Ramon Vega"
+    ],
+    "unverified": [
+      "Commercial Stabilization",
+      "Defense Fund",
+      "Stabilization Fund"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0102,
+  "durationMs": 8576,
+  "parseError": false,
+  "ranAt": "2026-10-15T04:04:32.495Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code 500-900",
+    "words": 639,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "costUsd": 0.0008
+  }
+}

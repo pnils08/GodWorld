@@ -3,12 +3,12 @@
   "cycle": "111",
   "backend": "api",
   "model": "google/gemini-3.7-flash",
-  "draftSha256": "bcdb5639226a6106e109145e2f3837024305a20748a845ac697f5cf7c4dd7af3",
+  "draftSha256": "76f53592276f68151e3e9393f30cc44eebc21aa1d0e91c498322783b3cd5124c",
   "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "Off-season clubhouse scene contains no fabricated quotes, contradicted metrics, or fourth-wall violations.",
+  "summary": "All player quotes match packet provenance verbatim and scene elements conform to C111 sports feed ground truth.",
   "review": {
     "profileId": "tanya-sideline-v1",
     "canonIntegrity": "pass",
@@ -17,20 +17,25 @@
   "reviewProfile": {
     "id": "tanya-sideline-v1",
     "packageVersion": "TANYA-LEP2-1",
-    "manifestId": "AM-b578c52d7298",
+    "manifestId": "AM-d67d2452a036",
     "lexicalObservations": []
   },
   "nameCheck": {
-    "verified": [],
+    "verified": [
+      "Benji Dillon",
+      "Mark Aitken",
+      "Mike Paulson",
+      "Vinnie Keane"
+    ],
     "unverified": []
   },
   "intake": {
     "found": true,
     "counts": {
-      "names": 0,
+      "names": 3,
       "businesses": 0,
       "storylines": 0,
-      "hoods": 0,
+      "hoods": 1,
       "claims": 1
     },
     "grammarErrors": 0,
@@ -39,8 +44,20 @@
     "pageContradictions": [],
     "packetChecked": true
   },
-  "apiCostUsd": 0.0094,
-  "durationMs": 8372,
+  "apiCostUsd": 0.0101,
+  "durationMs": 8856,
   "parseError": false,
-  "ranAt": "2026-10-14T23:17:24.293Z"
+  "ranAt": "2026-10-15T03:56:15.784Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 460,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "costUsd": 0.001
+  }
 }

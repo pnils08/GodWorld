@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-13",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 588,
+        "contractScore": 2
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 1,
+    "toolSeats": 0,
+    "capHits": 0,
+    "thin": 0,
+    "engineTerm": 0,
+    "verbatim": 0,
+    "graded": 1,
+    "gradeSum": 2
+  },
+  "ranAt": "2026-10-15T03:50:59.676Z"
+}

@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-14",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 1,
+    "toolSeats": 0,
+    "capHits": 0,
+    "thin": 0,
+    "engineTerm": 0,
+    "verbatim": 0,
+    "graded": 0,
+    "gradeSum": 0
+  },
+  "ranAt": "2026-10-15T03:51:25.749Z"
+}

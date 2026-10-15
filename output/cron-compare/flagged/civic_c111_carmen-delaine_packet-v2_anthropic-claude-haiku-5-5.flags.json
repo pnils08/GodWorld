@@ -1,10 +1,11 @@
 {
   "draft": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.md",
   "flags": [],
+  "checkFlags": [],
   "contamination": [
     {
-      "check": "repair-chrome",
-      "issue": "packet-narration"
+      "check": "invented-voice",
+      "issue": "Marcus Webb (POP-00790) cannot be quoted: INSTITUTIONAL"
     }
   ],
   "summary": "deterministic world-contamination blocker failed"

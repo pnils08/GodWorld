@@ -8,7 +8,7 @@
 - DESK APPROACH: Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup.
 
 ## §2 THE REPORTER'S PLAN (wake 1, their own voice)
-I’m digging into the West Oakland Stabilization Fund’s disbursement phase. The numbers are moving—$400K approved this cycle, $22.6M left in the pot—but I need to see where this money is landing. Who’s tracking it? Who’s accountable? The mayor’s office is pushing it, but I want to know if the funds are reaching the families they’re meant to stabilize.
+The money's moving — $400K out the door again, month ten, and the tracker says the processing time is holding at 23 days. That's the good news. But I've been around long enough to know that a clean number on a page doesn't tell you if a family actually got the check, or if the landlord's still circling. The mayor's office is happy to talk about approvals. I want to see the paper trail — who's actually receiving this money, and what happens when the clock slips. The next review is Cycle 112, and I'll be watching whether the city can keep its own pace. My hunch: the disbursement is real, but the visibility is still murky. That's the story I'm chasing.
 ## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
 - Denise Carter (POP-00501): "When storefronts go quiet, families go next—so we're taking the Stabilization Fund to where the need is moving."
 - Avery Santana (POP-00034): "Month-ten disbursement approved — $400,000 to keep West Oakland families in their homes."
@@ -17,8 +17,8 @@ I’m digging into the West Oakland Stabilization Fund’s disbursement phase. T
 - Marcus Webb (POP-00790): "Ninety-one households stabilized means ninety-one West Oakland families who won’t face displacement this month—and every case file meets compliance standards that will survive audit."
 
 ## §4 THE ARTICLE (wake 3)
-- draft: output/cron-compare/flagged/civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.md
+- draft: output/cron-compare/flagged/civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5-0349.md
 - disposition: flagged
-- self-score footer: present
+- self-score footer: MISSING
 - tool use: none
 

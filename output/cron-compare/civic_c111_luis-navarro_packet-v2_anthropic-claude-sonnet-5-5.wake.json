@@ -1,0 +1,56 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "111",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "luis-navarro",
+  "byline": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 93,
+  "quotesLanded": 5,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 588,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 588,
+    "short": "The opening lacks the unresolved question in the first paragraph, and the closing ends on a rhetorical question rather than the next needed record or answer.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "costUsd": 0.0015
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The opening lacks the unresolved question in the first paragraph, and the closing ends on a rhetorical question rather than the next needed record or answer."
+  },
+  "article": "output/cron-compare/staged/civic_c111_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "dworld/.env // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00636\",\n  \"name\": \"Luis Navarro\",\n  \"recorded\": true,\n  \"text\": \"filed: The Pipeline Is Running. The Count Isn't Moving.\"\n}"
+  },
+  "ranAt": "2026-10-15T03:50:59.671Z"
+}

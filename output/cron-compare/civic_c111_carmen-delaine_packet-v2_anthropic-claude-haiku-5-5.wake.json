@@ -12,7 +12,7 @@
     "popid": "POP-00011",
     "beatDomain": "CIVIC"
   },
-  "laneEntries": 96,
+  "laneEntries": 93,
   "quotesLanded": 5,
   "disposition": "flagged",
   "rheaPass": null,
@@ -21,14 +21,24 @@
     "fail": true,
     "findings": [
       {
-        "check": "repair-chrome",
-        "issue": "packet-narration"
+        "check": "invented-voice",
+        "issue": "Marcus Webb (POP-00790) cannot be quoted: INSTITUTIONAL"
       }
     ]
   },
-  "footerPresent": true,
+  "footerPresent": null,
   "toolUse": [],
-  "article": "output/cron-compare/flagged/civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5.md",
+  "toolCalls": 0,
+  "wordCount": 639,
+  "targetWords": "500-900",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": null,
+  "gradeRecord": null,
+  "article": "output/cron-compare/flagged/civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5-0349.md",
   "selfRecord": null,
-  "ranAt": "2026-10-12T23:15:25.380Z"
+  "ranAt": "2026-10-15T03:49:18.638Z"
 }

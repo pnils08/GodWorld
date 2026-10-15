@@ -9,8 +9,8 @@
   },
   "task": {
     "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
-    "assignment": "A's off-season update: -",
-    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+    "assignment": "The A's parade roll through Downtown",
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
     "voice": null,
     "creativeBrief": {
       "kind": "sideline-dispatch",
@@ -19,7 +19,12 @@
         "10 Inference Close"
       ],
       "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
-      "anchorFacts": [],
+      "anchorFacts": [
+        "The A's parade roll through Downtown.",
+        "The Oakland A's celebrated their 7th World Series championship in the Paulson era with a parade and rally in Downtown. Despite the colder temps the Oakland citizens were out in masses to honor their beloved A's. Mike Paulson , Vinnie Keane, Benji Dillon all stood a front the double decker bus cheering and waving to their fans.",
+        "Darrin Davis, Isley Kelley, and Mark Aitken all laughing and celebrating together to what may likely have a much different feel with Keane and Dillon retiring and Aitken pending free agency unknown. Manager Deacon Seymour and rookie phenon Ernestor Quintero were seen throwing A's beads into the crowd. Playoff MVP Eric Taveras and A's ace Arturo Ramos taking selfie snapshots with fans and dancing with the crowds. The parade ran through Downtown and Jake London Square.",
+        "After a season of near perfection, the city of Oakland celebrates together, the choices for the direction for next season remain unclear in a few areas but what can be expected is yet another run and the pursuit if championship number 8."
+      ],
       "accessEvidence": {
         "state": "ALLOTTED",
         "facts": [
@@ -52,23 +57,80 @@
     "hood": "Downtown",
     "src": "world_summary_c111.md ## Sports",
     "plan": {
-      "focus": "The shape of the A's off-season as it takes form in the clubhouse, before any official moves are announced.",
-      "closeQuestion": "What does a championship team look like when it is not playing — and who decides what comes next?"
+      "focus": "The emotional undertow inside the clubhouse as the celebration winds down, with retirements and free agency looming.",
+      "closeQuestion": "When the last bus pulls away and the confetti settles, what does a championship room look like when it knows it won't all be back?"
     },
     "runningStories": []
   },
   "exposure": {
-    "subjects": [],
-    "sources": [],
+    "subjects": [
+      {
+        "pop": "POP-00527",
+        "name": "Mike Paulson",
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00003",
+        "name": "Mark Aitken",
+        "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00003-4a051ab51a",
+        "pop": "POP-00003",
+        "name": "Mark Aitken",
+        "quote": "You know, the bus was loud — the music, the chanting, the guys spraying champagne everywhere. But when it quiets down, when we're just rolling through Downtown and the fans are still out there waving, that's when it hits you. I look over at Vinnie and Benji and I know they're taking it all in, every last wave, because this is it for them. And me? I'm taking it in too, but for a different reason. I don't know what's next. None of us do. So yeah, the laugh is easy because we just won a championship — that's real. But the quiet moments on that bus, when everyone's just staring out the window at the crowds? That's where the weight sits. We're not just celebrating a win. We're saying goodbye to something, whether we're ready to or not.",
+        "factIds": [
+          "F-731f113cc872",
+          "F-54a0f07f96b5",
+          "F-27e67f1576a1"
+        ],
+        "src": "packet.W2[POP-00003]"
+      },
+      {
+        "id": "Q-POP-00018-aa5b652297",
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "quote": "Yeah, there's a moment. When the bus finally stops and the engine cuts, and you hear the crowd still going — that's when it lands. Not the confetti, not the waving, not the noise. It's the quiet after the noise, when you're standing there with your teammates and you realize you don't have to do it again. That's when it hits. That's when you feel the weight of everything you've carried, and it's finally okay to put it down.",
+        "factIds": [
+          "F-54a0f07f96b5",
+          "F-27e67f1576a1"
+        ],
+        "src": "packet.W2[POP-00018]"
+      },
+      {
+        "id": "Q-POP-00527-9e891b6810",
+        "pop": "POP-00527",
+        "name": "Mike Paulson",
+        "quote": "You know, the parade was something else — seeing the whole city out there, kids on shoulders, old-timers crying. But I'll tell you, there's a moment on that bus where you look down the line and you see Vinnie and Benji laughing, and you know it's the last time they're doing that as players. And Mark's right there with them, and you don't know if he's coming back. That's the part nobody sees. The confetti's still in your hair, and you're already doing the math in your head — who stays, who goes, who's got one more year in them. It's heavy. You want to just sit in the moment, but the moment's already slipping, and you're the one who's got to figure out what comes next. That's the undertow. The celebration's real, but underneath it, there's this current pulling you toward decisions you're not ready to make.",
+        "factIds": [
+          "F-54a0f07f96b5",
+          "F-27e67f1576a1"
+        ],
+        "src": "packet.W2[POP-00527]"
+      }
+    ],
     "excludedLeads": [
       {
         "from": "Tanya Cruz",
-        "text": "A sense that the clubhouse is quieter than usual for this time of year, as if everyone is waiting for something.",
+        "text": "The clubhouse felt different after the bus pulled in — some guys lingered longer than others.",
         "usable": false
       },
       {
         "from": "Tanya Cruz",
-        "text": "A feeling that the community outreach work, like Vladimir Gonzalez's, is being leaned on more heavily to keep the team present in Oakland while the front office works.",
+        "text": "There was a moment near the lockers where the celebration noise dropped, and the room got heavy.",
         "usable": false
       }
     ]
@@ -82,9 +144,33 @@
     },
     {
       "t": "FACT",
-      "text": "A's off-season update: -",
+      "text": "The A's parade roll through Downtown",
       "src": "world_summary_c111.md ## Sports",
-      "id": "F-7540b298860a"
+      "id": "F-731f113cc872"
+    },
+    {
+      "t": "FACT",
+      "text": "The A's parade roll through Downtown.",
+      "src": "world_summary_c111.md ## Sports",
+      "id": "F-6980eab0b3f7"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oakland A's celebrated their 7th World Series championship in the Paulson era with a parade and rally in Downtown. Despite the colder temps the Oakland citizens were out in masses to honor their beloved A's. Mike Paulson , Vinnie Keane, Benji Dillon all stood a front the double decker bus cheering and waving to their fans.",
+      "src": "world_summary_c111.md ## Sports",
+      "id": "F-54a0f07f96b5"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis, Isley Kelley, and Mark Aitken all laughing and celebrating together to what may likely have a much different feel with Keane and Dillon retiring and Aitken pending free agency unknown. Manager Deacon Seymour and rookie phenon Ernestor Quintero were seen throwing A's beads into the crowd. Playoff MVP Eric Taveras and A's ace Arturo Ramos taking selfie snapshots with fans and dancing with the crowds. The parade ran through Downtown and Jake London Square.",
+      "src": "world_summary_c111.md ## Sports",
+      "id": "F-27e67f1576a1"
+    },
+    {
+      "t": "FACT",
+      "text": "After a season of near perfection, the city of Oakland celebrates together, the choices for the direction for next season remain unclear in a few areas but what can be expected is yet another run and the pursuit if championship number 8.",
+      "src": "world_summary_c111.md ## Sports",
+      "id": "F-1f384b526a1f"
     }
   ],
   "limits": {
@@ -104,7 +190,7 @@
       "invent a date or number",
       "import a real-world Oakland entity"
     ],
-    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
   },
   "output": {
     "format": "markdown-article",
@@ -160,7 +246,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-b578c52d7298",
+    "id": "AM-d67d2452a036",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -170,14 +256,95 @@
         "src": "cron-desk-run explicit cycle argument"
       },
       {
-        "id": "F-7540b298860a",
+        "id": "F-731f113cc872",
         "t": "FACT",
-        "text": "A's off-season update: -",
+        "text": "The A's parade roll through Downtown",
+        "src": "world_summary_c111.md ## Sports"
+      },
+      {
+        "id": "F-6980eab0b3f7",
+        "t": "FACT",
+        "text": "The A's parade roll through Downtown.",
+        "src": "world_summary_c111.md ## Sports"
+      },
+      {
+        "id": "F-54a0f07f96b5",
+        "t": "FACT",
+        "text": "The Oakland A's celebrated their 7th World Series championship in the Paulson era with a parade and rally in Downtown. Despite the colder temps the Oakland citizens were out in masses to honor their beloved A's. Mike Paulson , Vinnie Keane, Benji Dillon all stood a front the double decker bus cheering and waving to their fans.",
+        "src": "world_summary_c111.md ## Sports"
+      },
+      {
+        "id": "F-27e67f1576a1",
+        "t": "FACT",
+        "text": "Darrin Davis, Isley Kelley, and Mark Aitken all laughing and celebrating together to what may likely have a much different feel with Keane and Dillon retiring and Aitken pending free agency unknown. Manager Deacon Seymour and rookie phenon Ernestor Quintero were seen throwing A's beads into the crowd. Playoff MVP Eric Taveras and A's ace Arturo Ramos taking selfie snapshots with fans and dancing with the crowds. The parade ran through Downtown and Jake London Square.",
+        "src": "world_summary_c111.md ## Sports"
+      },
+      {
+        "id": "F-1f384b526a1f",
+        "t": "FACT",
+        "text": "After a season of near perfection, the city of Oakland celebrates together, the choices for the direction for next season remain unclear in a few areas but what can be expected is yet another run and the pursuit if championship number 8.",
         "src": "world_summary_c111.md ## Sports"
       }
     ],
-    "approvedQuotes": [],
-    "approvedSubjects": [],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00003-4a051ab51a",
+        "speakerId": "POP-00003",
+        "speakerName": "Mark Aitken",
+        "text": "You know, the bus was loud — the music, the chanting, the guys spraying champagne everywhere. But when it quiets down, when we're just rolling through Downtown and the fans are still out there waving, that's when it hits you. I look over at Vinnie and Benji and I know they're taking it all in, every last wave, because this is it for them. And me? I'm taking it in too, but for a different reason. I don't know what's next. None of us do. So yeah, the laugh is easy because we just won a championship — that's real. But the quiet moments on that bus, when everyone's just staring out the window at the crowds? That's where the weight sits. We're not just celebrating a win. We're saying goodbye to something, whether we're ready to or not.",
+        "factIds": [
+          "F-731f113cc872",
+          "F-54a0f07f96b5",
+          "F-27e67f1576a1"
+        ],
+        "src": "packet.W2[POP-00003]"
+      },
+      {
+        "id": "Q-POP-00018-aa5b652297",
+        "speakerId": "POP-00018",
+        "speakerName": "Benji Dillon",
+        "text": "Yeah, there's a moment. When the bus finally stops and the engine cuts, and you hear the crowd still going — that's when it lands. Not the confetti, not the waving, not the noise. It's the quiet after the noise, when you're standing there with your teammates and you realize you don't have to do it again. That's when it hits. That's when you feel the weight of everything you've carried, and it's finally okay to put it down.",
+        "factIds": [
+          "F-54a0f07f96b5",
+          "F-27e67f1576a1"
+        ],
+        "src": "packet.W2[POP-00018]"
+      },
+      {
+        "id": "Q-POP-00527-9e891b6810",
+        "speakerId": "POP-00527",
+        "speakerName": "Mike Paulson",
+        "text": "You know, the parade was something else — seeing the whole city out there, kids on shoulders, old-timers crying. But I'll tell you, there's a moment on that bus where you look down the line and you see Vinnie and Benji laughing, and you know it's the last time they're doing that as players. And Mark's right there with them, and you don't know if he's coming back. That's the part nobody sees. The confetti's still in your hair, and you're already doing the math in your head — who stays, who goes, who's got one more year in them. It's heavy. You want to just sit in the moment, but the moment's already slipping, and you're the one who's got to figure out what comes next. That's the undertow. The celebration's real, but underneath it, there's this current pulling you toward decisions you're not ready to make.",
+        "factIds": [
+          "F-54a0f07f96b5",
+          "F-27e67f1576a1"
+        ],
+        "src": "packet.W2[POP-00527]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00527",
+        "name": "Mike Paulson",
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00018",
+        "name": "Benji Dillon",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00003",
+        "name": "Mark Aitken",
+        "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
     "permittedInterpretationSlots": [
       {
         "id": "P_EMPHASIS",
@@ -195,12 +362,12 @@
     "unverifiedLeads": [
       {
         "from": "Tanya Cruz",
-        "text": "A sense that the clubhouse is quieter than usual for this time of year, as if everyone is waiting for something.",
+        "text": "The clubhouse felt different after the bus pulled in — some guys lingered longer than others.",
         "publishable": false
       },
       {
         "from": "Tanya Cruz",
-        "text": "A feeling that the community outreach work, like Vladimir Gonzalez's, is being leaned on more heavily to keep the team present in Oakland while the front office works.",
+        "text": "There was a moment near the lockers where the celebration noise dropped, and the room got heavy.",
         "publishable": false
       }
     ],

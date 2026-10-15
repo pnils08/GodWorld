@@ -1,0 +1,55 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "111",
+  "persona": "luis-navarro",
+  "byline": "Luis Navarro",
+  "bylinePopid": "POP-00636",
+  "article": "output/cron-compare/staged/civic_c111_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Denise Carter",
+        "role": "quoted-source",
+        "popid": "POP-00501"
+      },
+      {
+        "name": "Rose Delgado",
+        "role": "quoted-source",
+        "popid": "POP-00503"
+      },
+      {
+        "name": "Janae Rivers",
+        "role": "quoted-source",
+        "popid": "POP-00043"
+      },
+      {
+        "name": "Avery Santana",
+        "role": "quoted-source",
+        "popid": "POP-00034"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "150 apprentices placed by spring—that's the target, and we're accelerating to hit it.",
+        "sourceRef": "citizenVoice PRESS Denise Carter"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-838f3a1c07ec",
+    "draftSha256": "e05b1ff60d7ad36e0c3e4cc66afd5ad57e8faebb15933683f58720a09095eac0",
+    "verdict": "output/cron-compare/civic_c111_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-15T03:50:28.065Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-15T03:50:37.168Z"
+}

@@ -586,34 +586,44 @@
   "angleRead": {
     "name": "Carmen Delaine",
     "popid": "POP-00011",
-    "text": "I’m digging into the West Oakland Stabilization Fund’s disbursement phase. The numbers are moving—$400K approved this cycle, $22.6M left in the pot—but I need to see where this money is landing. Who’s tracking it? Who’s accountable? The mayor’s office is pushing it, but I want to know if the funds are reaching the families they’re meant to stabilize.",
+    "text": "The money's moving — $400K out the door again, month ten, and the tracker says the processing time is holding at 23 days. That's the good news. But I've been around long enough to know that a clean number on a page doesn't tell you if a family actually got the check, or if the landlord's still circling. The mayor's office is happy to talk about approvals. I want to see the paper trail — who's actually receiving this money, and what happens when the clock slips. The next review is Cycle 112, and I'll be watching whether the city can keep its own pace. My hunch: the disbursement is real, but the visibility is still murky. That's the story I'm chasing.",
     "plan": {
-      "chase": "I’m digging into the West Oakland Stabilization Fund’s disbursement phase. The numbers are moving—$400K approved this cycle, $22.6M left in the pot—but I need to see where this money is landing. Who’s tracking it? Who’s accountable? The mayor’s office is pushing it, but I want to know if the funds are reaching the families they’re meant to stabilize.",
-      "focus": "The visibility and accountability of the West Oakland Stabilization Fund disbursements.",
-      "why": "The fund is active, but the public deserves clarity on how and where the money is being used.",
+      "chase": "The money's moving — $400K out the door again, month ten, and the tracker says the processing time is holding at 23 days. That's the good news. But I've been around long enough to know that a clean number on a page doesn't tell you if a family actually got the check, or if the landlord's still circling. The mayor's office is happy to talk about approvals. I want to see the paper trail — who's actually receiving this money, and what happens when the clock slips. The next review is Cycle 112, and I'll be watching whether the city can keep its own pace. My hunch: the disbursement is real, but the visibility is still murky. That's the story I'm chasing.",
+      "focus": "West Oakland Stabilization Fund month-ten disbursement — $400K approved, 23-day processing standard maintained, next review Cycle 112.",
+      "why": "The fund is the city's biggest promise to West Oakland, and the gap between approval and pavement is where trust gets built or broken. The mayor's gavel is loud; the ledger is quiet. I want to know if the money is actually landing.",
       "checks": [
-        "F-68c15b255c05",
-        "F-028b021df183",
-        "F-e5b6743fd1e1"
+        "Pull the month-ten disbursement record and verify the $400K amount and 23-day processing claim against the tracker.",
+        "Cross-check the remaining balance ($22.6M) and the next scheduled review (Cycle 112) to see if the pace is sustainable.",
+        "Ask the mayor's office for the list of recipients or any public-facing report on where the money went — if they can't produce one, that's a story."
       ],
       "targets": [
         {
           "pop": "POP-00034",
-          "question": "What metrics are being used to ensure the stabilization fund reaches the intended families?",
-          "basis": "F-4198ad4bc3fa"
+          "question": "Mayor Santana, you approved the month-ten disbursement — can you show us the actual recipients and how the 23-day processing standard is being measured?",
+          "basis": "Mayor's public approval of the month-ten disbursement (STMT-111-mayor_gavel-001) and the tracker's claim of a 23-day standard."
         },
         {
           "pop": "POP-00501",
-          "question": "How is the council verifying the impact of the disbursements?",
-          "basis": "F-f87861995493"
+          "question": "Councilmember Carter, you've been a voice on this fund — what oversight exists to ensure the $400K reaches families and not just administrative costs?",
+          "basis": "Councilmember's recorded statement on the West Oakland Stabilization Fund (STMT-111-council_d1-001)."
+        },
+        {
+          "pop": "POP-00037",
+          "question": "Councilmember Okoro, you've spoken on the month-ten disbursement — what metrics are you using to judge whether this is working for the neighborhood?",
+          "basis": "Councilmember's recorded statement on the month-ten disbursement (STMT-111-okoro-001)."
+        },
+        {
+          "pop": "POP-00790",
+          "question": "Mr. Webb, you're listed as a contact on the fund — can you walk me through the actual disbursement process, from approval to check-in-hand?",
+          "basis": "Recorded statement on the stabilization fund (STMT-111-stabilization_fund-001)."
         }
       ],
-      "interpretation": "The fund’s disbursement phase is moving forward, but transparency remains a concern. The public needs assurance that the money is hitting its mark.",
+      "interpretation": "The fund is on autopilot — same amount, same pace, same approval. That's either a sign of boring competence or a sign that nobody's actually checking the details. I lean toward the latter, because in this city, when things run too smooth, someone's cutting a corner.",
       "unverifiedLead": [
-        "Are there specific neighborhoods or households benefiting from the disbursements?",
-        "Is there a lag between disbursement and impact?"
+        "I've heard whispers that some of the money is going to landlords rather than tenants — not confirmed, but worth a follow-up.",
+        "The 23-day processing time might be an average that hides delays in specific cases — need to see the raw data."
       ],
-      "closeQuestion": "Is the stabilization fund truly stabilizing West Oakland, or is it just moving money?"
+      "closeQuestion": "If the money's moving on time, why can't the city show us where it lands?"
     }
   },
   "lanePicks": [
@@ -648,6 +658,7 @@
       "popids": []
     }
   ],
-  "laneEntries": 96,
-  "ranAt": "2026-10-12T11:15:52.964Z"
+  "laneEntries": 93,
+  "angleCapHits": 0,
+  "ranAt": "2026-10-15T03:48:57.641Z"
 }

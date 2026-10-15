@@ -1,0 +1,56 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "111",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "noah-tan",
+  "byline": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "beatDomain": "ENVIRONMENT"
+  },
+  "laneEntries": 93,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 273,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code 400-700",
+    "words": 273,
+    "short": "The piece is under the 400-word minimum and concludes with a rhetorical question rather than what remains unfinished for the subject.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/4 — The piece is under the 400-word minimum and concludes with a rhetorical question rather than what remains unfinished for the subject."
+  },
+  "article": "output/cron-compare/staged/civic_c111_noah-tan_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "tauth.com]\n{\n  \"popId\": \"POP-00157\",\n  \"name\": \"Noah Tan\",\n  \"recorded\": true,\n  \"text\": \"filed: Javier Robertson kept his movements limited through the stretch of fog and overcast days that marked\"\n}"
+  },
+  "ranAt": "2026-10-15T03:52:58.250Z"
+}

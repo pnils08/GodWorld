@@ -1,0 +1,189 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "111",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c111.json patterns[1]; evidence: Initiative_Tracker row(s) 7",
+      "label": "stuck-initiative (medium) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"operational\" for 4 cycles",
+      "kind": "anomaly",
+      "angle": "Oakland Youth Apprenticeship Pipeline stalled in operational — remedy path + responsible office",
+      "hookLine": "The economic initiative carrying West Oakland has not advanced in 4 cycles.",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "popids": [
+        "POP-00198",
+        "POP-00953"
+      ],
+      "citizens": [
+        "Rick Walker (POP-00198)",
+        "Carmen Solis (POP-00953)"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/civic_c111_luis-navarro_packet-v2_angle.json",
+  "quotesRequested": 5,
+  "quotesLanded": 5,
+  "quotes": [
+    {
+      "pop": "POP-00501",
+      "name": "Denise Carter",
+      "quote": "150 apprentices placed by spring—that's the target, and we're accelerating to hit it.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 111,
+        "officeSlug": "council_d1",
+        "statementId": "STMT-111-council_d1-002",
+        "quote": "150 apprentices placed by spring—that's the target, and we're accelerating to hit it.",
+        "topic": "Oakland Youth Apprenticeship Pipeline",
+        "initiativeId": "INIT-007",
+        "filePath": "output/civic-voice/council_d1_c111.json",
+        "holderPopid": "POP-00501",
+        "speakerName": "Denise Carter"
+      }
+    },
+    {
+      "pop": "POP-00503",
+      "name": "Rose Delgado",
+      "quote": "This cohort is our promise in action—we're investing in D3's future, one apprentice at a time.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 111,
+        "officeSlug": "council_d3",
+        "statementId": "STMT-111-council_d3-002",
+        "quote": "This cohort is our promise in action—we're investing in D3's future, one apprentice at a time.",
+        "topic": "Oakland Youth Apprenticeship Pipeline",
+        "initiativeId": "INIT-007",
+        "filePath": "output/civic-voice/council_d3_c111.json",
+        "holderPopid": "POP-00503",
+        "speakerName": "Rose Delgado"
+      }
+    },
+    {
+      "pop": "POP-00043",
+      "name": "Janae Rivers",
+      "quote": "East Oakland's youth deserve more than promises—they deserve pathways to prosperity.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 111,
+        "officeSlug": "council_d5",
+        "statementId": "STMT-111-council_d5-001",
+        "quote": "East Oakland's youth deserve more than promises—they deserve pathways to prosperity.",
+        "topic": "Youth Apprenticeship",
+        "initiativeId": "INIT-007",
+        "filePath": "output/civic-voice/council_d5_c111.json",
+        "holderPopid": "POP-00043",
+        "speakerName": "Janae Rivers"
+      }
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "150 apprentices by spring — I'm demanding the first cohort placement report by Cycle 112.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 111,
+        "officeSlug": "mayor_gavel",
+        "statementId": "STMT-111-mayor_gavel-003",
+        "quote": "150 apprentices by spring — I'm demanding the first cohort placement report by Cycle 112.",
+        "topic": "Oakland Youth Apprenticeship Pipeline Cohort Placement Mandate",
+        "initiativeId": "INIT-007",
+        "filePath": "output/civic-voice/mayor_gavel_c111.json",
+        "holderPopid": "POP-00034",
+        "speakerName": "Avery Santana"
+      }
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "150 apprentices by spring — that was the promise, and I'm demanding the first cohort placement report by Cycle 112.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 111,
+        "officeSlug": "mayor_open",
+        "statementId": "STMT-111-mayor_open-004",
+        "quote": "150 apprentices by spring — that was the promise, and I'm demanding the first cohort placement report by Cycle 112.",
+        "topic": "Oakland Youth Apprenticeship Pipeline Cohort Placement Mandate",
+        "initiativeId": "INIT-007",
+        "filePath": "output/civic-voice/mayor_open_c111.json",
+        "holderPopid": "POP-00034",
+        "speakerName": "Avery Santana"
+      }
+    }
+  ],
+  "officeRecords": [
+    {
+      "sourceKind": "office-record",
+      "cycle": 111,
+      "officeSlug": "council_d1",
+      "statementId": "STMT-111-council_d1-002",
+      "quote": "150 apprentices placed by spring—that's the target, and we're accelerating to hit it.",
+      "topic": "Oakland Youth Apprenticeship Pipeline",
+      "initiativeId": "INIT-007",
+      "filePath": "output/civic-voice/council_d1_c111.json",
+      "holderPopid": "POP-00501",
+      "speakerName": "Denise Carter"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 111,
+      "officeSlug": "council_d3",
+      "statementId": "STMT-111-council_d3-002",
+      "quote": "This cohort is our promise in action—we're investing in D3's future, one apprentice at a time.",
+      "topic": "Oakland Youth Apprenticeship Pipeline",
+      "initiativeId": "INIT-007",
+      "filePath": "output/civic-voice/council_d3_c111.json",
+      "holderPopid": "POP-00503",
+      "speakerName": "Rose Delgado"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 111,
+      "officeSlug": "council_d5",
+      "statementId": "STMT-111-council_d5-001",
+      "quote": "East Oakland's youth deserve more than promises—they deserve pathways to prosperity.",
+      "topic": "Youth Apprenticeship",
+      "initiativeId": "INIT-007",
+      "filePath": "output/civic-voice/council_d5_c111.json",
+      "holderPopid": "POP-00043",
+      "speakerName": "Janae Rivers"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 111,
+      "officeSlug": "mayor_gavel",
+      "statementId": "STMT-111-mayor_gavel-003",
+      "quote": "150 apprentices by spring — I'm demanding the first cohort placement report by Cycle 112.",
+      "topic": "Oakland Youth Apprenticeship Pipeline Cohort Placement Mandate",
+      "initiativeId": "INIT-007",
+      "filePath": "output/civic-voice/mayor_gavel_c111.json",
+      "holderPopid": "POP-00034",
+      "speakerName": "Avery Santana"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 111,
+      "officeSlug": "mayor_open",
+      "statementId": "STMT-111-mayor_open-004",
+      "quote": "150 apprentices by spring — that was the promise, and I'm demanding the first cohort placement report by Cycle 112.",
+      "topic": "Oakland Youth Apprenticeship Pipeline Cohort Placement Mandate",
+      "initiativeId": "INIT-007",
+      "filePath": "output/civic-voice/mayor_open_c111.json",
+      "holderPopid": "POP-00034",
+      "speakerName": "Avery Santana"
+    }
+  ],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-15T03:50:01.597Z"
+}

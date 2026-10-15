@@ -1,0 +1,71 @@
+{
+  "draft": "output/cron-compare/civic_c111_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "e05b1ff60d7ad36e0c3e4cc66afd5ad57e8faebb15933683f58720a09095eac0",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes, initiative statuses, and civic records verified against Cycle 111 ground truth with complete fidelity.",
+  "review": {
+    "profileId": "luis-investigation-record-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "packageVersion": "LUIS-LEP2-1",
+    "manifestId": "AM-838f3a1c07ec",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "1",
+          "5"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Avery Santana",
+      "Denise Carter",
+      "Janae Rivers",
+      "Rose Delgado"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0099,
+  "durationMs": 7300,
+  "parseError": false,
+  "ranAt": "2026-10-15T03:50:28.065Z",
+  "contractScore": {
+    "opened": false,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 588,
+    "short": "The opening lacks the unresolved question in the first paragraph, and the closing ends on a rhetorical question rather than the next needed record or answer.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "costUsd": 0.0015
+  }
+}

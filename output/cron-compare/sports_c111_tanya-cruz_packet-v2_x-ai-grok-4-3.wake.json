@@ -13,7 +13,7 @@
     "beatDomain": "SPORTS"
   },
   "laneEntries": 8,
-  "quotesLanded": 0,
+  "quotesLanded": 3,
   "disposition": "staged",
   "rheaPass": true,
   "rheaFlagCount": 0,
@@ -21,12 +21,36 @@
     "fail": false,
     "findings": []
   },
-  "footerPresent": true,
+  "footerPresent": null,
   "toolUse": [],
-  "article": "output/cron-compare/staged/sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
+  "toolCalls": 0,
+  "wordCount": 460,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 460,
+    "short": "",
+    "score": 4,
+    "model": "google/gemini-3.7-flash",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 4/4 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.staged-0356.md",
   "selfRecord": {
     "recorded": true,
-    "out": "'.env'] }\n{\n  \"popId\": \"POP-00014\",\n  \"name\": \"Tanya Cruz\",\n  \"recorded\": true,\n  \"text\": \"filed: The A's off-season update sits blank this cycle. In the clubhouse the lights stay low and the usual\"\n}"
+    "out": "/.env' }\n{\n  \"popId\": \"POP-00014\",\n  \"name\": \"Tanya Cruz\",\n  \"recorded\": true,\n  \"text\": \"filed: The A's parade rolled through Downtown, the double-decker bus carrying Mike Paulson, Vinnie Keane, a\"\n}"
   },
-  "ranAt": "2026-10-14T23:17:35.270Z"
+  "ranAt": "2026-10-15T03:56:39.810Z"
 }

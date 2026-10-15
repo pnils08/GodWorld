@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-14",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 0,
+        "capHits": 0,
+        "thin": false,
+        "engineTerms": [],
+        "verbatim": [],
+        "words": 460,
+        "contractScore": 4
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 1,
+    "toolSeats": 0,
+    "capHits": 0,
+    "thin": 0,
+    "engineTerm": 0,
+    "verbatim": 0,
+    "graded": 1,
+    "gradeSum": 4
+  },
+  "ranAt": "2026-10-15T03:56:39.813Z"
+}

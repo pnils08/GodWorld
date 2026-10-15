@@ -1,0 +1,62 @@
+{
+  "draft": "output/cron-compare/civic_c111_noah-tan_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "2fb9f41014ad8d1c803c913c503e0eac3a895135456c4e5c99933dc513c7754d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Verified: Grounded in C111 weather and Javier Robertson's recorded winter mood life event with authorized sensory texture and no canon violations.",
+  "review": {
+    "profileId": "noah-weather-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-219f4baf0e5e",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Javier Robertson"
+    ],
+    "unverified": [
+      "For Robertson"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.009,
+  "durationMs": 5972,
+  "parseError": false,
+  "ranAt": "2026-10-15T03:52:30.977Z",
+  "contractScore": {
+    "opened": true,
+    "closed": false,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code 400-700",
+    "words": 273,
+    "short": "The piece is under the 400-word minimum and concludes with a rhetorical question rather than what remains unfinished for the subject.",
+    "score": 2,
+    "model": "google/gemini-3.7-flash",
+    "costUsd": 0.001
+  }
+}

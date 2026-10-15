@@ -1,0 +1,53 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "tanya-cruz",
+  "byline": "Tanya Cruz",
+  "bylinePopid": "POP-00014",
+  "article": "output/cron-compare/staged/sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.staged-0356.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Mike Paulson",
+        "role": "quoted-source",
+        "popid": "POP-00527"
+      },
+      {
+        "name": "Benji Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00018"
+      },
+      {
+        "name": "Mark Aitken",
+        "role": "quoted-source",
+        "popid": "POP-00003"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "You know, the bus was loud — the music, the chanting, the guys spraying champagne everywhere. But when it quiets down, when we're just rolling through Downtown and the fans are still out there waving, that's when it hits you. I look over at Vinnie and Benji and I know they're taking it all in, every last wave, because this is it for them. And me? I'm taking it in too, but for a different reason. I don't know what's next. None of us do. So yeah, the laugh is easy because we just won a championship — that's real. But the quiet moments on that bus, when everyone's just staring out the window at the crowds? That's where the weight sits. We're not just celebrating a win. We're saying goodbye to something, whether we're ready to or not.",
+        "sourceRef": "citizenVoice PRESS Mark Aitken"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d67d2452a036",
+    "draftSha256": "76f53592276f68151e3e9393f30cc44eebc21aa1d0e91c498322783b3cd5124c",
+    "verdict": "output/cron-compare/sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-15T03:56:15.784Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-15T03:56:21.570Z"
+}

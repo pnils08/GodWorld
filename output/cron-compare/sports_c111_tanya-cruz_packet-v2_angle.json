@@ -15,8 +15,8 @@
     },
     "task": {
       "goal": "Plan one Article chase without choosing a new assignment",
-      "assignment": "A's off-season update: -",
-      "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+      "assignment": "The A's parade roll through Downtown",
+      "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
       "creativeBrief": {
         "kind": "sideline-dispatch",
         "pulseClass": "record-only-sideline",
@@ -24,7 +24,12 @@
           "10 Inference Close"
         ],
         "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
-        "anchorFacts": [],
+        "anchorFacts": [
+          "The A's parade roll through Downtown.",
+          "The Oakland A's celebrated their 7th World Series championship in the Paulson era with a parade and rally in Downtown. Despite the colder temps the Oakland citizens were out in masses to honor their beloved A's. Mike Paulson , Vinnie Keane, Benji Dillon all stood a front the double decker bus cheering and waving to their fans.",
+          "Darrin Davis, Isley Kelley, and Mark Aitken all laughing and celebrating together to what may likely have a much different feel with Keane and Dillon retiring and Aitken pending free agency unknown. Manager Deacon Seymour and rookie phenon Ernestor Quintero were seen throwing A's beads into the crowd. Playoff MVP Eric Taveras and A's ace Arturo Ramos taking selfie snapshots with fans and dancing with the crowds. The parade ran through Downtown and Jake London Square.",
+          "After a season of near perfection, the city of Oakland celebrates together, the choices for the direction for next season remain unclear in a few areas but what can be expected is yet another run and the pursuit if championship number 8."
+        ],
         "accessEvidence": {
           "state": "ALLOTTED",
           "facts": [
@@ -99,6 +104,141 @@
             "rowName": "Mike Paulson",
             "kind": "slice-row"
           }
+        },
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Grand Lake",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00021",
+          "name": "Darrin Davis",
+          "profile": "Darrin Davis — Left Fielder, Oakland A's Legend",
+          "role": "Left Fielder, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00021",
+            "rowName": "Darrin Davis",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00019",
+          "name": "Isley Kelley",
+          "profile": "Isley Kelley — Shortstop, Oakland A's Legend",
+          "role": "Shortstop, Oakland A's Legend",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00019",
+            "rowName": "Isley Kelley",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00003",
+          "name": "Mark Aitken",
+          "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00003",
+            "rowName": "Mark Aitken",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00528",
+          "name": "Deacon Seymour",
+          "profile": "Deacon Seymour — Manager, Oakland A's",
+          "role": "Manager, Oakland A's",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00528",
+            "rowName": "Deacon Seymour",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00050",
+          "name": "Ernesto Quintero",
+          "profile": "Ernesto Quintero — 3B/1B , Oakland A's",
+          "role": "3B/1B , Oakland A's",
+          "hood": "Baylight District",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00050",
+            "rowName": "Ernesto Quintero",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00597",
+          "name": "Eric Taveras",
+          "profile": "Eric Taveras — Second Baseman, Oakland A's",
+          "role": "Second Baseman, Oakland A's",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00597",
+            "rowName": "Eric Taveras",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00025",
+          "name": "Arturo Ramos",
+          "profile": "Arturo Ramos — Starting Pitcher, Oakland A's",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Laurel",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c111.md ## Sports",
+            "pop": "POP-00025",
+            "rowName": "Arturo Ramos",
+            "kind": "slice-row"
+          }
         }
       ]
     },
@@ -111,9 +251,33 @@
       },
       {
         "t": "FACT",
-        "text": "A's off-season update: -",
+        "text": "The A's parade roll through Downtown",
         "src": "world_summary_c111.md ## Sports",
-        "id": "F-7540b298860a"
+        "id": "F-731f113cc872"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's parade roll through Downtown.",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-6980eab0b3f7"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oakland A's celebrated their 7th World Series championship in the Paulson era with a parade and rally in Downtown. Despite the colder temps the Oakland citizens were out in masses to honor their beloved A's. Mike Paulson , Vinnie Keane, Benji Dillon all stood a front the double decker bus cheering and waving to their fans.",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-54a0f07f96b5"
+      },
+      {
+        "t": "FACT",
+        "text": "Darrin Davis, Isley Kelley, and Mark Aitken all laughing and celebrating together to what may likely have a much different feel with Keane and Dillon retiring and Aitken pending free agency unknown. Manager Deacon Seymour and rookie phenon Ernestor Quintero were seen throwing A's beads into the crowd. Playoff MVP Eric Taveras and A's ace Arturo Ramos taking selfie snapshots with fans and dancing with the crowds. The parade ran through Downtown and Jake London Square.",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-27e67f1576a1"
+      },
+      {
+        "t": "FACT",
+        "text": "After a season of near perfection, the city of Oakland celebrates together, the choices for the direction for next season remain unclear in a few areas but what can be expected is yet another run and the pursuit if championship number 8.",
+        "src": "world_summary_c111.md ## Sports",
+        "id": "F-1f384b526a1f"
       }
     ],
     "limits": {
@@ -176,6 +340,141 @@
           "rowName": "Mike Paulson",
           "kind": "slice-row"
         }
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "hood": "Grand Lake",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Rockridge",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00021",
+        "name": "Darrin Davis",
+        "role": "Left Fielder, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Darrin Davis — Left Fielder, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00021",
+          "rowName": "Darrin Davis",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00019",
+        "name": "Isley Kelley",
+        "role": "Shortstop, Oakland A's Legend",
+        "hood": "Rockridge",
+        "profile": "Isley Kelley — Shortstop, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00019",
+          "rowName": "Isley Kelley",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00003",
+        "name": "Mark Aitken",
+        "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+        "hood": "Jack London",
+        "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00003",
+          "rowName": "Mark Aitken",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00528",
+        "name": "Deacon Seymour",
+        "role": "Manager, Oakland A's",
+        "hood": "Lake Merritt",
+        "profile": "Deacon Seymour — Manager, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00528",
+          "rowName": "Deacon Seymour",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "hood": "Baylight District",
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00050",
+          "rowName": "Ernesto Quintero",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00597",
+        "name": "Eric Taveras",
+        "role": "Second Baseman, Oakland A's",
+        "hood": "Downtown",
+        "profile": "Eric Taveras — Second Baseman, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00597",
+          "rowName": "Eric Taveras",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00025",
+        "name": "Arturo Ramos",
+        "role": "Starting Pitcher, Oakland A's",
+        "hood": "Laurel",
+        "profile": "Arturo Ramos — Starting Pitcher, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c111.md ## Sports",
+          "pop": "POP-00025",
+          "rowName": "Arturo Ramos",
+          "kind": "slice-row"
+        }
       }
     ],
     "officeRecords": []
@@ -186,21 +485,39 @@
   },
   "assignment": {
     "story": {
-      "angle": "A's off-season update: -",
-      "label": "A's off-season update: -",
-      "hookLine": "A's off-season update: -",
+      "angle": "The A's parade roll through Downtown",
+      "label": "The A's parade roll through Downtown",
+      "hookLine": "The A's parade roll through Downtown",
       "kind": "sideline-signal",
       "hood": "Downtown",
       "popids": [
-        "POP-00527"
+        "POP-00527",
+        "POP-00001",
+        "POP-00018",
+        "POP-00021",
+        "POP-00019",
+        "POP-00003",
+        "POP-00528",
+        "POP-00050",
+        "POP-00597",
+        "POP-00025"
       ],
       "citizens": [
-        "Mike Paulson (POP-00527)"
+        "Mike Paulson (POP-00527)",
+        "Vinnie Keane (POP-00001)",
+        "Benji Dillon (POP-00018)",
+        "Darrin Davis (POP-00021)",
+        "Isley Kelley (POP-00019)",
+        "Mark Aitken (POP-00003)",
+        "Deacon Seymour (POP-00528)",
+        "Ernesto Quintero (POP-00050)",
+        "Eric Taveras (POP-00597)",
+        "Arturo Ramos (POP-00025)"
       ],
       "ref": "world_summary_c111.md ## Sports",
       "cycle": 111
     },
-    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview."
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech."
   },
   "jaxSlice": null,
   "pslayerSlice": null,
@@ -217,30 +534,39 @@
   "angleRead": {
     "name": "Tanya Cruz",
     "popid": "POP-00014",
-    "text": "The clubhouse is quiet in a way it never is in October. I stand near the empty stalls and think about how a season ends and another one starts before anyone has caught their breath. Mike Paulson's name is on everyone's lips but he isn't here, and that absence is the story. I want to watch how the room fills back up, who lingers, who leaves early. The off-season is a waiting game and I am good at waiting.",
+    "text": "The parade's over and the streets are still wet with confetti. I'm standing at the edge of the clubhouse, watching the last of the champagne get wiped off the lockers. The bus rolled through Downtown and Jack London Square and everybody waved, but the real story is in here — the quiet between the laughs. Keane and Dillon are done after this, and Aitken doesn't know if he's coming back. That changes the room. I want to catch the moments after the celebration settles, when the guys who are leaving take one last look around and the guys who are staying start figuring out what comes next. The city's already talking about number eight, but the clubhouse knows the math is different now.",
     "plan": {
-      "chase": "The clubhouse is quiet in a way it never is in October. I stand near the empty stalls and think about how a season ends and another one starts before anyone has caught their breath. Mike Paulson's name is on everyone's lips but he isn't here, and that absence is the story. I want to watch how the room fills back up, who lingers, who leaves early. The off-season is a waiting game and I am good at waiting.",
-      "focus": "The shape of the A's off-season as it takes form in the clubhouse, before any official moves are announced.",
-      "why": "The record is blank — an off-season update with nothing on it yet. That blank is the story. The decisions Mike Paulson faces will land on these stalls, these lockers, these men. I want to be in the room when the weather changes.",
+      "chase": "The parade's over and the streets are still wet with confetti. I'm standing at the edge of the clubhouse, watching the last of the champagne get wiped off the lockers. The bus rolled through Downtown and Jack London Square and everybody waved, but the real story is in here — the quiet between the laughs. Keane and Dillon are done after this, and Aitken doesn't know if he's coming back. That changes the room. I want to catch the moments after the celebration settles, when the guys who are leaving take one last look around and the guys who are staying start figuring out what comes next. The city's already talking about number eight, but the clubhouse knows the math is different now.",
+      "focus": "The emotional undertow inside the clubhouse as the celebration winds down, with retirements and free agency looming.",
+      "why": "The parade is the public face, but the clubhouse is where the real shift happens. The same guys laughing on the bus are about to scatter, and that tension is the story the crowd doesn't see.",
       "checks": [
-        "Walk the clubhouse during open hours and note which players are around, which are gone.",
-        "Listen for how the coaching staff talks about the season ahead without saying anything official.",
-        "Watch for small signals — who is packing up, who is already talking about next year.",
-        "Keep an ear out for community outreach plans, like Vladimir Gonzalez's work, that keep the team tied to Oakland even in the off months."
+        "Stick to the clubhouse SET — no invented player quotes, no real-world venues beyond what's supplied.",
+        "Use only the supplied sports line facts: parade route, who was on the bus, retirements, free agency, pursuit of number eight.",
+        "Keep the tone sideline — observational, first-person, no fabricated access or dialogue."
       ],
       "targets": [
         {
-          "pop": "POP-00527",
-          "question": "What does Mike Paulson see when he looks at this roster and this city, and how does he balance the pressure of a seventh championship with the reality of an off-season full of choices?",
-          "basis": "He is the general manager and the editorial note centers on the decisions he faces this off-season."
+          "pop": "POP-00003",
+          "question": "Mark Aitken's laugh on the bus seemed easy, but with free agency pending, what does the clubhouse feel like when he thinks no one's watching?",
+          "basis": "Supplied as laughing and celebrating with Davis and Kelley, with free agency unknown."
+        },
+        {
+          "pop": "POP-00001",
+          "question": "Vinnie Keane waved to the crowd all the way down Broadway — what does the last ride feel like from the inside?",
+          "basis": "Supplied as standing on the double-decker bus, with retirement noted."
+        },
+        {
+          "pop": "POP-00018",
+          "question": "Benji Dillon cheered through the whole route — is there a moment after the bus stops where it hits that this is it?",
+          "basis": "Supplied as standing on the bus with Keane and Paulson, with retirement noted."
         }
       ],
-      "interpretation": "The off-season is a held breath. The clubhouse is the place where that breath becomes visible — in the empty stalls, the quiet conversations, the players who stay late. Mike Paulson's choices will land here first, and I want to catch that moment.",
+      "interpretation": "The celebration is real, but it's layered. The public sees seven rings and a city that won't leave the streets. The clubhouse sees a roster that's about to change shape. The laughter on the bus and the quiet in the room afterward are two sides of the same moment.",
       "unverifiedLead": [
-        "A sense that the clubhouse is quieter than usual for this time of year, as if everyone is waiting for something.",
-        "A feeling that the community outreach work, like Vladimir Gonzalez's, is being leaned on more heavily to keep the team present in Oakland while the front office works."
+        "The clubhouse felt different after the bus pulled in — some guys lingered longer than others.",
+        "There was a moment near the lockers where the celebration noise dropped, and the room got heavy."
       ],
-      "closeQuestion": "What does a championship team look like when it is not playing — and who decides what comes next?"
+      "closeQuestion": "When the last bus pulls away and the confetti settles, what does a championship room look like when it knows it won't all be back?"
     }
   },
   "lanePicks": [
@@ -288,5 +614,6 @@
     }
   ],
   "laneEntries": 8,
-  "ranAt": "2026-10-14T11:17:00.001Z"
+  "angleCapHits": 0,
+  "ranAt": "2026-10-15T03:55:04.526Z"
 }

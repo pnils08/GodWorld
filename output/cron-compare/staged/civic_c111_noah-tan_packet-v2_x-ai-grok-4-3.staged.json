@@ -1,0 +1,34 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "111",
+  "persona": "noah-tan",
+  "byline": "Noah Tan",
+  "bylinePopid": "POP-00157",
+  "article": "output/cron-compare/staged/civic_c111_noah-tan_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "C111 mild, 57°F after fog",
+        "sourceRef": "output/beats/Cycle_Weather.jsonl CycleID 111"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-219f4baf0e5e",
+    "draftSha256": "2fb9f41014ad8d1c803c913c503e0eac3a895135456c4e5c99933dc513c7754d",
+    "verdict": "output/cron-compare/civic_c111_noah-tan_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-10-15T03:52:30.977Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-15T03:52:38.166Z"
+}

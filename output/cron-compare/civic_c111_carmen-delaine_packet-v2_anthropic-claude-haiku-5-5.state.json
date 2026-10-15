@@ -20,8 +20,8 @@
     "hood": "West Oakland",
     "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c111.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
     "plan": {
-      "focus": "The visibility and accountability of the West Oakland Stabilization Fund disbursements.",
-      "closeQuestion": "Is the stabilization fund truly stabilizing West Oakland, or is it just moving money?"
+      "focus": "West Oakland Stabilization Fund month-ten disbursement — $400K approved, 23-day processing standard maintained, next review Cycle 112.",
+      "closeQuestion": "If the money's moving on time, why can't the city show us where it lands?"
     },
     "runningStories": [
       "West Oakland Stabilization Fund — disbursement-active [West Oakland] — week 3",
@@ -183,12 +183,12 @@
     "excludedLeads": [
       {
         "from": "Carmen Delaine",
-        "text": "Are there specific neighborhoods or households benefiting from the disbursements?",
+        "text": "I've heard whispers that some of the money is going to landlords rather than tenants — not confirmed, but worth a follow-up.",
         "usable": false
       },
       {
         "from": "Carmen Delaine",
-        "text": "Is there a lag between disbursement and impact?",
+        "text": "The 23-day processing time might be an average that hides delays in specific cases — need to see the raw data.",
         "usable": false
       }
     ]
@@ -714,12 +714,12 @@
     "unverifiedLeads": [
       {
         "from": "Carmen Delaine",
-        "text": "Are there specific neighborhoods or households benefiting from the disbursements?",
+        "text": "I've heard whispers that some of the money is going to landlords rather than tenants — not confirmed, but worth a follow-up.",
         "publishable": false
       },
       {
         "from": "Carmen Delaine",
-        "text": "Is there a lag between disbursement and impact?",
+        "text": "The 23-day processing time might be an average that hides delays in specific cases — need to see the raw data.",
         "publishable": false
       }
     ],

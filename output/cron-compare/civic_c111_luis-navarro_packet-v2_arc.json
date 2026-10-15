@@ -1,0 +1,37 @@
+{
+  "status": "arc-seed",
+  "cycle": "111",
+  "desk": "civic",
+  "persona": "luis-navarro",
+  "hood": "West Oakland, East Oakland, Fruitvale",
+  "quotes": [
+    {
+      "pop": "POP-00501",
+      "name": "Denise Carter",
+      "quote": "150 apprentices placed by spring—that's the target, and we're accelerating to hit it."
+    },
+    {
+      "pop": "POP-00503",
+      "name": "Rose Delgado",
+      "quote": "This cohort is our promise in action—we're investing in D3's future, one apprentice at a time."
+    },
+    {
+      "pop": "POP-00043",
+      "name": "Janae Rivers",
+      "quote": "East Oakland's youth deserve more than promises—they deserve pathways to prosperity."
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "150 apprentices by spring — I'm demanding the first cohort placement report by Cycle 112."
+    },
+    {
+      "pop": "POP-00034",
+      "name": "Avery Santana",
+      "quote": "150 apprentices by spring — that was the promise, and I'm demanding the first cohort placement report by Cycle 112."
+    }
+  ],
+  "claim": "150 apprentices placed by spring—that's the target, and we're accelerating to hit it.",
+  "src": "citizenVoice PRESS c111",
+  "ranAt": "2026-10-15T03:50:01.598Z"
+}

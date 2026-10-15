@@ -819,6 +819,7 @@
         "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_",
         "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
         "phase02-world-state/applyInitiativeImplementationEffects.js::buildDisbursementSlice_",
+        "phase02-world-state/updateTransitMetrics.js::transitCorridorBase_",
         "phase02-world-state/updateTransitMetrics.js::transitStationShares_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/civicInitiativeEngine.js::applyCivicStageBaseline_",

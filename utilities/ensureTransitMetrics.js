@@ -389,24 +389,31 @@ function getTransitSummary_(ss, cycle) {
     };
   }
 
+  // engine.290: on-time averages over station rows, traffic over corridor rows
+  // (a row writes only the columns its kind computes; a blank is not a zero).
   var totalRidership = 0;
   var sumOnTime = 0;
   var sumTraffic = 0;
-  var count = 0;
+  var stations = 0;
+  var corridors = 0;
 
   for (var i = 0; i < metrics.length; i++) {
     var m = metrics[i];
-    totalRidership += m.ridershipVolume;
-    sumOnTime += m.onTimePerformance;
-    sumTraffic += m.trafficIndex;
-    count++;
+    if (m.station) {
+      totalRidership += m.ridershipVolume;
+      sumOnTime += m.onTimePerformance;
+      stations++;
+    } else {
+      sumTraffic += m.trafficIndex;
+      corridors++;
+    }
   }
 
   return {
     totalRidership: totalRidership,
-    avgOnTime: count > 0 ? Math.round((sumOnTime / count) * 100) / 100 : 0.85,
-    avgTraffic: count > 0 ? Math.round(sumTraffic / count) : 50,
-    stationsReported: count
+    avgOnTime: stations > 0 ? Math.round((sumOnTime / stations) * 100) / 100 : 0.85,
+    avgTraffic: corridors > 0 ? Math.round(sumTraffic / corridors) : 50,
+    stationsReported: stations
   };
 }
 

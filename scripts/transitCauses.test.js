@@ -58,6 +58,8 @@ const BART_MGR = ['POP-00617', 'Eleanor', 'Rivera', 'BART Station Manager', 'Act
 const BART_PR = ['POP-01039', 'Ximena', 'Mehta', 'Bart Transit PR', 'Active', 'BIZ-00014'];
 const crewRow = (id, first, role, status) => [id, first, 'Test', role, status, 'BIZ-00014'];
 
+let DEMO_OFF = false;   // engine.290: a Cycle with no Neighborhood_Demographics read
+
 // ── transit engine harness ──────────────────────────────────────────────────
 const appends = [], ripples = [];
 const sandbox = {
@@ -70,6 +72,7 @@ const sandbox = {
   recordRipple_: (ctx, r) => ripples.push(r),
   inWorldStamp_: () => 'Y3C2',
   getNeighborhoodDemographics_: () => {
+    if (DEMO_OFF) return {};
     const out = {};
     Object.keys(C111.hoods).forEach(h => { out[h] = { adults: C111.hoods[h][0], students: 0, seniors: 0 }; });
     return out;
@@ -79,7 +82,7 @@ const T = new Function(...Object.keys(sandbox),
   R('phase01-config/engine94SheetContract.js') + '\n' +
   R('phase01-config/canonNeighborhoodLoader.js') + '\n' +
   R('utilities/ensureTransitMetrics.js') + '\n' + R('phase02-world-state/updateTransitMetrics.js') +
-  '\nreturn { transitStaffing_, transitCrewClass_, ENGINE290_CONFIG_SEEDS, transitDials_, transitStationShares_, updateTransitMetrics_Phase2_, getTransitStorySignals_, isGameDay_, gameDayHoodsFor_, initiativeTransitEffects_, OAKLAND_BART_STATIONS, TRAFFIC_CORRIDORS, TRANSIT_METRICS_HEADERS };'
+  '\nreturn { getTransitSummary_, transitCorridorBase_, transitStaffing_, transitCrewClass_, ENGINE290_CONFIG_SEEDS, transitDials_, transitStationShares_, updateTransitMetrics_Phase2_, getTransitStorySignals_, isGameDay_, gameDayHoodsFor_, initiativeTransitEffects_, OAKLAND_BART_STATIONS, TRAFFIC_CORRIDORS, TRANSIT_METRICS_HEADERS };'
 )(...Object.values(sandbox));
 
 function run(S, opts) {
@@ -484,6 +487,28 @@ function run(S, opts) {
   const ctxR = { ss: fakeSS({}), ledger: ledgerOf([]), summary: Object.assign({ absoluteCycle: 107, season: 'spring', weather: { type: 'clear' }, sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2 } }, c111Summary()), rng: () => { draws++; return 0.5; } };
   T.updateTransitMetrics_Phase2_(ctxR);
   eq(draws, 8 * 2 + 10, 'rng draws = 2 per station + 1 per corridor (no weekend roll, no breakdown roll)');
+}
+
+// codex 2026-10-15 fold — summary reader, rebase both ways, partial dynamics
+{
+  const H = ['Timestamp', 'Cycle', 'Station', 'RidershipVolume', 'OnTimePerformance', 'TrafficIndex', 'Corridor', 'Notes', 'Factors'];
+  const ss = { getSheetByName: () => fakeSheet([H, ['t', 5, 'A', 1000, 0.85, '', '', '', ''], ['t', 5, 'B', 500, 0.75, '', '', '', ''], ['t', 5, '', '', '', 50, 'X', '', ''], ['t', 5, '', '', '', 70, 'Y', '', '']]) };
+  const sum = T.getTransitSummary_(ss, 5);
+  eq(sum.avgOnTime, 0.8, 'getTransitSummary_: on-time averages station rows only');
+  eq(sum.avgTraffic, 60, 'getTransitSummary_: traffic averages corridor rows only');
+  eq(sum.stationsReported, 2, 'getTransitSummary_: stations counted, corridors not');
+  // a fall back to the table after a ledger Cycle is a rebase too
+  DEMO_OFF = true;
+  const back = run({ sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2 } });
+  DEMO_OFF = false;
+  ok(back.all.filter(m => m.station).every(m => /^base: table; rebased/.test(m.factors)), 'a fall back to the table after a ledger Cycle says rebased: ' + back.by['Fruitvale'].factors);
+  eq(back.S.transitMetrics.baseVersion, 1, 'table base carries version 1');
+  const shTable = T.transitStationShares_({ summary: c111Summary() }, {}, T.transitDials_({}), T.OAKLAND_BART_STATIONS);
+  eq(shTable, null, 'no demographics → table');
+  // partial dynamics: one busy hood present, the rest missing → missing count 1.0 in the city mean
+  const S1 = Object.assign(c111Summary(), { neighborhoodDynamics: { Fruitvale: { traffic: 3 } } });
+  const cb = T.transitCorridorBase_(S1, T.transitDials_({}));
+  ok(Math.abs(cb.cityMean - (3 + 21) / 22) < 1e-9, 'city mean runs over the canon hoods with missing = 1.0 (' + cb.cityMean + ')');
 }
 
 console.log('transitCauses: ' + pass + ' passed, ' + fail + ' failed');

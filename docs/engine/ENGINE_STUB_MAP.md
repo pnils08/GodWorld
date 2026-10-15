@@ -622,7 +622,7 @@
   Reads: S.canonHoods, S.commuteInbound, S.neighborhoodState
 
 - **transitCorridorBase_(S, dials)**
-  Reads: S.neighborhoodDynamics
+  Reads: S.canonHoods, S.neighborhoodDynamics
 
 - **transitCorridorBaseFor_(corridor, cb, dials)**
 

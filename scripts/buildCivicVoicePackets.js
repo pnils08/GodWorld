@@ -408,7 +408,7 @@ async function main() {
       station: t.Station,
       ridership: parseNum(t.RidershipVolume),
       onTimePerformance: parseNum(t.OnTimePerformance),
-      trafficIndex: parseNum(t.TrafficIndex),
+      trafficIndex: parseNum(t.TrafficIndex, null), // engine.290: station rows carry no traffic index
       notes: t.Notes
     }));
 

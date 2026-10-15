@@ -1593,9 +1593,12 @@ app.get('/api/transit', async (req, res) => {
   const transit = data.map(r => ({
     cycle: r.Cycle,
     station: r.Station,
-    ridership: parseInt(r.RidershipVolume) || 0,
-    onTime: parseFloat(r.OnTimePerformance) || 0,
-    trafficIndex: parseFloat(r.TrafficIndex) || 0,
+    // engine.290: a row writes only the columns its kind computes — a blank is
+    // "not measured for this row" (station: no traffic; corridor: no riders/on-time), never 0
+    ridership: r.RidershipVolume === '' ? null : (parseInt(r.RidershipVolume) || 0),
+    onTime: r.OnTimePerformance === '' ? null : (parseFloat(r.OnTimePerformance) || 0),
+    trafficIndex: r.TrafficIndex === '' ? null : (parseFloat(r.TrafficIndex) || 0),
+    corridor: r.Corridor || null,
     crowding: r.CrowdingLevel || null,
     dayType: r.DayType || null,
   }));

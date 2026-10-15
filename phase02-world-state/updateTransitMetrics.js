@@ -325,14 +325,17 @@ function transitStationShares_(ctx, demographics, dials, stations) {
 function transitCorridorBase_(S, dials) {
   var nd = S.neighborhoodDynamics;
   if (!nd) return null;
-  var sum = 0, n = 0;
-  for (var h in nd) {
-    if (!nd.hasOwnProperty(h)) continue;
-    var t = Number((nd[h] || {}).traffic);
-    if (isFinite(t) && t > 0) { sum += t; n++; }
+  // The city mean runs over the same hood set and missing rule the corridors
+  // use (canon list; a hood with no dynamics row counts 1.0), so a partial
+  // dynamics read cannot make the whole city look quiet (codex 2026-10-15 §3).
+  var hoods = (S.canonHoods && S.canonHoods.list) ? S.canonHoods.list : Object.keys(nd);
+  var sum = 0, present = 0;
+  for (var i = 0; i < hoods.length; i++) {
+    var t = Number((nd[hoods[i]] || {}).traffic);
+    if (isFinite(t) && t > 0) { sum += t; present++; } else sum += 1.0;
   }
-  if (!n) return null;
-  return { traffic: nd, cityMean: sum / n };
+  if (!present) return null;
+  return { traffic: nd, cityMean: sum / hoods.length };
 }
 
 function transitCorridorBaseFor_(corridor, cb, dials) {
@@ -351,7 +354,7 @@ function transitCorridorBaseFor_(corridor, cb, dials) {
  * from, the rebase Cycle, and any served name with no row.
  */
 function transitBaseCauses_(context, missing) {
-  var out = [context.shares ? 'base: ledger' : 'base: table'];
+  var out = [context.shares ? 'base: ledger' : 'base: table'];   // table = no demographics, or a zero-weight read
   if (context.rebased) out.push('rebased');
   for (var i = 0; i < (missing || []).length; i++) out.push('no row: ' + missing[i]);
   return out;
@@ -433,7 +436,9 @@ function updateTransitMetrics_Phase2_(ctx) {
   var corridorBase = transitCorridorBase_(S, dials);
   var prevBaseVersion = S.previousCycleState ? Number(S.previousCycleState.transitBaseVersion) || 0 : 0;
   var baseVersion = shares ? TRANSIT_BASE_VERSION : 1;
-  var rebased = baseVersion === TRANSIT_BASE_VERSION && prevBaseVersion !== TRANSIT_BASE_VERSION;
+  // either direction: onto the ledger base, or a fall back to the authored table
+  // after a ledger Cycle (codex 2026-10-15 §3) — last Cycle's numbers are not comparable
+  var rebased = baseVersion !== prevBaseVersion;
   // engine.290 move 5 — last week's train trouble (the chaos car's carry)
   var chaosHits = transitChaosCarry_(S, cycle);
 

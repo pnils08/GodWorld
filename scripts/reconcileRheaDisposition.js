@@ -93,6 +93,30 @@ function validateReviewedDraft(verdict, draftAbs) {
   return actualHash;
 }
 
+// pipeline.78 (codex #1): every staged pair of this base — plain X.staged.md or the S492
+// suffix X.staged-HHMM.md a second filing in the Cycle takes. Each is a distinct filing.
+function stagedPairsFor(stagedDir, base) {
+  if (!fs.existsSync(stagedDir)) return [];
+  const out = [];
+  for (const f of fs.readdirSync(stagedDir).sort()) {
+    const m = /^(.+)\.staged(?:-\d{3,4})?\.md$/.exec(f);
+    if (!m || m[1] !== base) continue;
+    const md = path.join(stagedDir, f);
+    out.push({ md, json: md.replace(/\.md$/, '.json'), sha: sha256File(md) });
+  }
+  return out;
+}
+
+// The plain name when free, else the writer's uniqueDest form (-HHMM, stepped past any taken).
+function freeStagedName(stagedDir, base, now) {
+  const plain = path.join(stagedDir, base + '.staged.md');
+  if (!fs.existsSync(plain)) return plain;
+  for (let n = Number(now.toISOString().slice(11, 16).replace(':', '')); ; n++) {
+    const q = path.join(stagedDir, base + '.staged-' + String(n).padStart(4, '0') + '.md');
+    if (!fs.existsSync(q)) return q;
+  }
+}
+
 function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new Date() }) {
   const compare = path.join(root, 'output', 'cron-compare');
   const staged = path.join(compare, 'staged');
@@ -133,28 +157,54 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
     throw new Error('wake record lacks desk or stable byline identity for ' + base);
   }
   // groundedBy support (articleContamination.js, 2026-09-17 Chinatown/Caldera
-  // false-positive fix) needs the same facts the writer packet carried; the
-  // wake-3 state's manifest.approvedFacts already holds that grounding text.
-  const contamination = articleContamination.scanFile(draftAbs, { desk: wake.desk, packet: state && state.manifest });
+  // false-positive fix) needs the same facts the writer packet carried. pipeline.78:
+  // scan against the whole wake-3 state, as the write (cron-desk-run) and Saturday do —
+  // manifest alone dropped the Packet provenance the invented-voice wall reads, and
+  // flagged C111 Carmen's office-record quote that her write had staged clean.
+  const contamination = articleContamination.scanFile(draftAbs, { desk: wake.desk, packet: state });
   const effectivePass = verdict.pass && !contamination.fail;
 
   const stamp = now.toISOString().replace(/\D/g, '').slice(0, 14);
-  const stagedArticle = path.join(staged, base + '.staged.md');
-  const stagedSidecar = path.join(staged, base + '.staged.json');
+  const pairs = stagedPairsFor(staged, base);
+  const filed = effectivePass ? pairs.find(p => p.sha === draftSha256) : null;
+  const stagedArticle = filed ? filed.md : freeStagedName(staged, base, now);
+  const stagedSidecar = stagedArticle.replace(/\.md$/, '.json');
+  const packetDir = path.join(compare, 'staged-packets');
+  const packetFile = path.join(packetDir, require('../lib/articleIntake').stagedPacketName(stagedArticle));
   const flaggedArticle = path.join(flagged, base + '.md');
   const flaggedSidecar = path.join(flagged, base + '.flags.json');
   const actions = [];
 
-  if (effectivePass) {
+  // A draft archived as superseded-stage (a rerun replaced it, builder ruling) stays retired;
+  // its root verdict still reads PASS, and re-staging it would resurrect the replaced piece.
+  const retired = effectivePass && !filed && fs.existsSync(history) && fs.readdirSync(history)
+    .filter(f => f.startsWith(base + '.staged') && /\.superseded-stage\.[^.]+\.md$/.test(f))
+    .some(f => sha256File(path.join(history, f)) === draftSha256);
+
+  if (retired) {
+    actions.push('superseded filing stays retired (history holds these bytes)');
+    return { base, cycle, disposition: 'superseded', actions };
+  }
+  if (effectivePass && filed) {
+    // Already staged under some name (plain or suffixed): nothing to re-file. A different
+    // staged pair of this base is a separate filing and is left where it is.
     archiveFile(flaggedArticle, history, 'cleared', stamp, actions, apply);
     archiveFile(flaggedSidecar, history, 'cleared', stamp, actions, apply);
-    if (fs.existsSync(stagedArticle) && sha256File(stagedArticle) !== draftSha256) {
-      archiveFile(stagedArticle, history, 'superseded-stage', stamp, actions, apply);
-      archiveFile(stagedSidecar, history, 'superseded-stage', stamp, actions, apply);
-    }
+    actions.push('already staged as ' + path.relative(root, stagedArticle));
+    wake.disposition = 'staged';
+    wake.rheaPass = true;
+    wake.article = path.relative(root, stagedArticle);
+  } else if (effectivePass) {
+    archiveFile(flaggedArticle, history, 'cleared', stamp, actions, apply);
+    archiveFile(flaggedSidecar, history, 'cleared', stamp, actions, apply);
     ensureDir(staged, apply);
     actions.push('stage ' + draftAbs + ' -> ' + stagedArticle);
     if (apply) fs.copyFileSync(draftAbs, stagedArticle);
+    // The filing's own Packet, for Saturday's contamination re-scan (see cron-saturday-run).
+    if (state) {
+      actions.push('bind packet ' + path.relative(root, packetFile));
+      if (apply) { ensureDir(packetDir, apply); writeJsonAtomic(packetFile, state); }
+    }
 
     const { buildIntakeSidecar, storylineTagFor } = require('./cron-desk-run');
     // engine.270: the storyline is resolved from the assignment's ref, which the
@@ -209,8 +259,12 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
     wake.gateModel = verdict.model || wake.gateModel;
     wake.article = path.relative(root, stagedArticle);
   } else {
-    archiveFile(stagedArticle, history, 'failed-rereview', stamp, actions, apply);
-    archiveFile(stagedSidecar, history, 'failed-rereview', stamp, actions, apply);
+    // Only a staged pair holding these exact bytes fails with this verdict; another filing of
+    // the base carries its own proof and stays staged.
+    for (const p of pairs.filter(p => p.sha === draftSha256)) {
+      archiveFile(p.md, history, 'failed-rereview', stamp, actions, apply);
+      archiveFile(p.json, history, 'failed-rereview', stamp, actions, apply);
+    }
     archiveFile(flaggedArticle, history, 'superseded-failure', stamp, actions, apply);
     archiveFile(flaggedSidecar, history, 'superseded-failure', stamp, actions, apply);
     ensureDir(flagged, apply);

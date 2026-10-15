@@ -100,11 +100,15 @@ function usageHistory() {
 function stagedTally(cycle, dir) {
   const stagedDir = dir || path.join(COMPARE, 'staged');
   const out = { total: 0, byByline: {} };
+  const seen = new Set();
   let files = [];
   try { files = fs.readdirSync(stagedDir).filter(f => require('../lib/articleIntake').isStagedSidecar(f)); } catch (_) { return out; }   // pipeline.78
   for (const f of files) {
     let j; try { j = JSON.parse(fs.readFileSync(path.join(stagedDir, f), 'utf8')); } catch (_) { continue; }
     if (String(j.cycle) !== String(cycle)) continue;
+    // pipeline.78 (codex #4): one Article under two sidecar names spends one slot, as Saturday lands it once.
+    const key = j.rhea && j.rhea.draftSha256;
+    if (key) { if (seen.has(key)) continue; seen.add(key); }
     out.total++;
     if (j.byline) out.byByline[j.byline] = (out.byByline[j.byline] || 0) + 1;
   }

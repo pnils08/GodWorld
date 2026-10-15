@@ -102,16 +102,23 @@ function isCodeRenderedBrief(articleText) {
 // The write wake scans against its packet, so a phrase grounded by the story's
 // own assignment (articleContamination `groundedBy`) stages clean; this door
 // re-scanned with no packet and would turn the same Article away. Read the
-// SAME packet the write wake scanned against — its `.state.json`, written
-// beside the draft under the staged file's own stem. Absent or unreadable →
-// no packet, which is the strict reading.
+// SAME packet the write wake scanned against. pipeline.78 (codex #3): the root
+// `.state.json` is rewritten by every later write of the base, so a filing's
+// own copy (staged-packets/, bound at stage time) comes first; the root state
+// is used only when its manifest is the one Rhea proved. Otherwise no packet —
+// the strict reading.
 function stagedWritePacket(side) {
-  const base = path.basename(String(side && side.article || ''));
-  const m = /^(.*_packet-v\d+_.+?)\.staged(?:-\d{4})?\.md$/.exec(base);
-  if (!m) return null;
-  try {
-    return JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'cron-compare', m[1] + '.state.json'), 'utf8'));
-  } catch (_) { return null; }
+  const intake = require('../lib/articleIntake');
+  const art = path.basename(String(side && side.article || ''));
+  if (!/\.staged(?:-\d{3,4})?\.md$/.test(art)) return null;
+  const want = side.rhea && side.rhea.manifestId || null;
+  const idOf = st => st && st.manifest && st.manifest.id || null;
+  const read = file => { try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch (_) { return null; } };
+  const bound = read(path.join(ROOT, 'output', 'cron-compare', 'staged-packets', intake.stagedPacketName(art)));
+  if (bound && (!want || idOf(bound) === want)) return bound;
+  const base = art.replace(/\.staged(?:-\d{3,4})?\.md$/, '');
+  const root = read(path.join(ROOT, 'output', 'cron-compare', base + '.state.json'));
+  return root && want && idOf(root) === want ? root : null;
 }
 
 function verifyStagedProof(side, articleText, fallbackVerdict) {
@@ -169,9 +176,12 @@ function loadArcSeeds(cycle) {
   return out;
 }
 
+const STAGED_SIDECAR_BY_STEM = new Map();   // stem -> the sidecar file loadStagedSet read it from
+
 function loadStagedSet(cycle) {
   const out = [];
   const seenSha = new Set(); // pipeline.78: one Article under two sidecar names lands once
+  const seenStem = new Set();
   if (!fs.existsSync(STAGED)) return out;
   for (const f of fs.readdirSync(STAGED).sort()) {
     const named = require('../lib/articleIntake').parseStagedSidecar(f); // pipeline.78: plain or S492 suffix
@@ -198,8 +208,18 @@ function loadStagedSet(cycle) {
     }
     if (seenSha.has(proof.articleSha256)) { console.log('[skip] duplicate Article bytes under a second sidecar: ' + f); continue; }
     seenSha.add(proof.articleSha256);
+    // pipeline.78 (codex #2): X.staged-2316 and a plain X-2316.staged both read stem X-2316 —
+    // a second filing on a taken stem gets its bytes' hash so two articles never share a customId.
+    let stem = named.stem;   // X, or X-HHMM for a suffixed filing — distinct canon customIds
+    if (seenStem.has(stem)) {
+      stem += '-' + proof.articleSha256.slice(0, 8);
+      console.log('[stem] ' + f + ' collides with an earlier filing — landing as ' + stem);
+    }
+    seenStem.add(stem);
+    STAGED_SIDECAR_BY_STEM.set(stem, f);
     out.push({
-      stem: named.stem,   // X, or X-HHMM for a suffixed filing — distinct canon customIds
+      stem,
+      sidecarFile: f,
       sidecar: side,
       text,
       articleSha256: proof.articleSha256
@@ -390,7 +410,9 @@ async function stepSheets(cycle) {
 }
 function entryByline(stem) {
   try {
-    const name = require('../lib/articleIntake').stagedSidecarNames(stem).find(n => fs.existsSync(path.join(STAGED, n)));
+    // pipeline.78 (codex #2): the exact sidecar loadStagedSet read, never a reverse map of the stem.
+    const name = STAGED_SIDECAR_BY_STEM.get(stem) ||
+      require('../lib/articleIntake').stagedSidecarNames(stem).find(n => fs.existsSync(path.join(STAGED, n)));
     const side = JSON.parse(fs.readFileSync(path.join(STAGED, name || stem + '.staged.json'), 'utf8'));
     return side.byline || '';
   } catch (_) { return ''; }

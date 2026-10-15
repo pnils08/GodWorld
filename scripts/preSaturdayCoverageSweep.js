@@ -121,8 +121,9 @@ function saveAttempted(cycle, set) {
 // after writing its .rhea.json but before filing) just sat there forever,
 // neither staged nor flagged, invisible to everything downstream. Running it
 // for the whole live cycle before the stuck-detection pass below is safe to
-// repeat: reconcileVerdict() is a no-op on a verdict whose draft hash already
-// matches what's filed, and only re-files when something actually changed.
+// repeat: reconcileVerdict() files nothing for a verdict whose draft bytes are
+// already staged under any name (plain or -HHMM), and a new pass lands beside —
+// never over — a different staged filing of the same base (pipeline.78).
 function runReconcile(cycle, dryRun) {
   console.log('\n[reconcile] sweeping unfiled Rhea verdicts for cycle ' + cycle + '...');
   const args = [path.join(ROOT, 'scripts', 'reconcileRheaDisposition.js'), '--cycle', String(cycle)];

@@ -39,6 +39,7 @@ const COMPARE = path.join(ROOT, 'output', 'cron-compare');
 const PUBLISHED = path.join(COMPARE, 'published');
 const FLAGGED = path.join(COMPARE, 'flagged');
 const STAGED = path.join(COMPARE, 'staged');   // Phase 2 probation wall (S332): M–F articles stage here, NOT canon-ingested
+const STAGED_PACKETS = path.join(COMPARE, 'staged-packets');   // pipeline.78: per-filing write Packet
 const SAMPLES = path.join(COMPARE, 'samples');
 // pipeline.68 Task 4 — one beat slice per journalist, built from the beat dump
 // (scripts/dumpBeatTabs.js). Each builder fails loud on a missing or stale dump;
@@ -1396,7 +1397,11 @@ function uniqueDest(dir, name) {
   const p = path.join(dir, name);
   if (!fs.existsSync(p)) return p;
   const stamp = new Date().toISOString().slice(11, 16).replace(':', '');
-  return path.join(dir, name.replace(/\.md$/, '-' + stamp + '.md'));
+  // pipeline.78 (codex #4): two reruns in one minute took the same -HHMM name and overwrote.
+  for (let n = Number(stamp); ; n++) {
+    const q = path.join(dir, name.replace(/\.md$/, '-' + String(n).padStart(4, '0') + '.md'));
+    if (!fs.existsSync(q)) return q;
+  }
 }
 
 // pipeline.75 — deterministic draft checks (builder 2026-10-14: "add any automation checks
@@ -3095,6 +3100,13 @@ async function runWrite(assign) {
       note: 'M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.',
       stagedAt: new Date().toISOString()
     }, null, 2));
+    // pipeline.78 (codex #3): bind this filing's own Packet — Saturday's contamination re-scan
+    // reads it, not the root state a later write of the same base overwrites.
+    if (PACKET_ACTIVE && writePacket && typeof writePacket === 'object') {
+      fs.mkdirSync(STAGED_PACKETS, { recursive: true });
+      fs.writeFileSync(path.join(STAGED_PACKETS, require('../lib/articleIntake').stagedPacketName(destPath)),
+        JSON.stringify(writePacket, null, 2));
+    }
     // Task 2.5.3 — wire pulse: the staged filing hits the room's wire.
     const headline = String(fs.readFileSync(draftPath, 'utf8').split('\n').find(l => l.trim()) || '')
       .replace(/^#+\s*/, '').replace(/[*_`]/g, '').slice(0, 90).trim();

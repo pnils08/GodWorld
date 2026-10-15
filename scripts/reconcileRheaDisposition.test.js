@@ -138,6 +138,48 @@ try {
   assert.deepStrictEqual(digestSide.intake.names,
     [{ name: 'Test Pilot', role: 'subject', popid: 'POP-99998' }]);
 
+  console.log('Test 6 (pipeline.78): distinct staged filings of one base all survive a new pass');
+  const multi = fixture('civic_c999_test-multi', true);
+  fs.mkdirSync(staged, { recursive: true });
+  fs.writeFileSync(path.join(staged, 'civic_c999_test-multi.staged.md'), 'earlier filing A');
+  writeJson(path.join(staged, 'civic_c999_test-multi.staged.json'), { status: 'staged', cycle: '999' });
+  fs.writeFileSync(path.join(staged, 'civic_c999_test-multi.staged-2316.md'), 'earlier filing B');
+  writeJson(path.join(staged, 'civic_c999_test-multi.staged-2316.json'), { status: 'staged', cycle: '999' });
+  const landed = reconcileVerdict({ root, verdictPath: multi.verdict, apply: true,
+    now: new Date('2026-08-13T23:16:30.000Z') });
+  assert.equal(landed.disposition, 'staged');
+  assert.equal(fs.readFileSync(path.join(staged, 'civic_c999_test-multi.staged.md'), 'utf8'), 'earlier filing A');
+  assert.equal(fs.readFileSync(path.join(staged, 'civic_c999_test-multi.staged-2316.md'), 'utf8'), 'earlier filing B');
+  assert.equal(sha256File(path.join(staged, 'civic_c999_test-multi.staged-2317.md')), sha256File(multi.draft),
+    'the new pass takes the next free -HHMM name');
+  assert(fs.existsSync(path.join(staged, 'civic_c999_test-multi.staged-2317.json')));
+  assert(fs.existsSync(path.join(compare, 'staged-packets', 'civic_c999_test-multi.staged-2317.packet.json')));
+
+  console.log('Test 7 (pipeline.78): bytes already staged under a suffix are a no-op');
+  const before = fs.readdirSync(staged).length;
+  const again = reconcileVerdict({ root, verdictPath: multi.verdict, apply: true,
+    now: new Date('2026-08-14T01:00:00.000Z') });
+  assert.equal(again.disposition, 'staged');
+  assert(again.actions.some(a => a.includes('already staged as') && a.includes('staged-2317')));
+  assert.equal(fs.readdirSync(staged).length, before);
+
+  console.log('Test 8 (pipeline.78): a failed re-review retires only its own bytes');
+  const multiFail = JSON.parse(fs.readFileSync(multi.verdict, 'utf8'));
+  multiFail.pass = false;
+  writeJson(multi.verdict, multiFail);
+  reconcileVerdict({ root, verdictPath: multi.verdict, apply: true, now: new Date('2026-08-14T02:00:00.000Z') });
+  assert(!fs.existsSync(path.join(staged, 'civic_c999_test-multi.staged-2317.md')));
+  assert(fs.existsSync(path.join(staged, 'civic_c999_test-multi.staged.md')));
+  assert(fs.existsSync(path.join(staged, 'civic_c999_test-multi.staged-2316.md')));
+
+  console.log('Test 9 (pipeline.78): a superseded-stage archive keeps its bytes retired');
+  const retired = fixture('civic_c999_test-retired', true);
+  const hist = path.join(flagged, 'history');
+  fs.copyFileSync(retired.draft, path.join(hist, 'civic_c999_test-retired.staged.superseded-stage.20261015T041023Z.md'));
+  const kept = reconcileVerdict({ root, verdictPath: retired.verdict, apply: true });
+  assert.equal(kept.disposition, 'superseded');
+  assert(!fs.existsSync(path.join(staged, 'civic_c999_test-retired.staged.md')));
+
   console.log('reconcileRheaDisposition.test.js: PASS');
 } finally {
   fs.rmSync(root, { recursive: true, force: true });

@@ -322,16 +322,14 @@ function callOpenRouter(model, system, user, timeoutMs) {
   });
 }
 
-// pipeline.77 contract score. Pure prompt + parse; the length check is code when the contract
-// gives exactly one word range, else the judge reads it with the counted words in hand.
-function contractWordRange(targetWords) {
-  // codex #6: "evidence-bounded" means the evidence sets the length; the range is a guide the judge
-  // weighs, not a hard limit code enforces (Marbury: "evidence-bounded; 350-600").
-  if (/evidence-bounded/i.test(String(targetWords || ''))) return null;
+// pipeline.77 contract score. Pure prompt + parse. pipeline.80 (builder 2026-10-15: "The word floor
+// would be an issue not a too long article.") — length is a FLOOR: too short fails, running long
+// never does. Code holds the floor when the contract gives exactly one word range (its low end,
+// "evidence-bounded; 350-600" included); otherwise the judge reads it, told the same rule.
+function contractWordFloor(targetWords) {
   const ranges = String(targetWords || '').match(/\d+\s*[-–]\s*\d+/g) || [];
   if (ranges.length !== 1) return null;
-  const [lo, hi] = ranges[0].split(/[-–]/).map(n => parseInt(n, 10));
-  return { lo, hi };
+  return parseInt(ranges[0].split(/[-–]/)[0], 10);
 }
 function contractWordCount(prose) {
   // Same body as cron-desk-run checkBody/draftWordCount: no fences, no comments (codex #6).
@@ -352,7 +350,8 @@ function buildContractPrompt(profile, prose) {
     'Target words: ' + (c.targetWords || '(none)') + ' — this piece has ' + words + ' words.',
     '',
     'opened = the first paragraph does what "Opening" says. closed = the last paragraph does what "Closing" says. ' +
-    'purposeMet = the piece as a whole does what "Purpose" says. inTarget = the length fits "Target words" for this piece.',
+    'purposeMet = the piece as a whole does what "Purpose" says. inTarget = the piece is NOT too short for "Target words" ' +
+    '(running longer than the target is never a fault; only falling short of it is). Never name length as a shortfall unless the piece is too short.',
     '',
     '=== THE PIECE ===',
     prose,
@@ -363,11 +362,11 @@ function parseContractScore(text, profile, words) {
   let j;
   try { const m = String(text).match(/\{[\s\S]*\}/); j = JSON.parse(m ? m[0] : text); }
   catch (_) { return { error: 'contract score parse failed', raw: String(text).slice(0, 300) }; }
-  const range = contractWordRange(profile.articleContract && profile.articleContract.targetWords);
+  const floor = contractWordFloor(profile.articleContract && profile.articleContract.targetWords);
   const out = {
     opened: j.opened === true, closed: j.closed === true, purposeMet: j.purposeMet === true,
-    inTarget: range ? (words >= range.lo && words <= range.hi) : j.inTarget === true,
-    inTargetBy: range ? 'code ' + range.lo + '-' + range.hi : 'judge',
+    inTarget: floor != null ? words >= floor : j.inTarget === true,
+    inTargetBy: floor != null ? 'code floor ' + floor : 'judge',
     words,
     short: String(j.short || '').replace(/\s+/g, ' ').trim().slice(0, 240),
   };
@@ -876,5 +875,5 @@ module.exports = {
   scanEngineVerbiage,
   scanStructuralJunk,
   scanPopidLeak,
-  contractWordRange, contractWordCount, buildContractPrompt, parseContractScore, // pipeline.77
+  contractWordFloor, contractWordCount, buildContractPrompt, parseContractScore, // pipeline.77
 };

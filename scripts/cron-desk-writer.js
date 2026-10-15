@@ -440,8 +440,8 @@ function rubricBlock(packet) {
     (c.voice ? 'Voice: ' + c.voice + '\n' : '') +
     (c.opening ? 'Open on: ' + c.opening + '\n' : '') +
     (c.closing ? 'Close on: ' + c.closing + '\n' : '') +
-    (c.targetWords ? 'Length: ' + c.targetWords + ' words\n' : '') +
-    'Graded yes/no on four things: opened as contracted, closed as contracted, purpose met, within length. ' +
+    (c.targetWords ? 'Length: ' + c.targetWords + ' words — a floor, not a ceiling: too short fails, running long when the story needs it does not\n' : '') +
+    'Graded yes/no on four things: opened as contracted, closed as contracted, purpose met, long enough. ' +
     'Sourcing is checked separately and the rubric never licenses a fact the Packet does not hold.\n' +
     '=== END CONTRACT ===';
 }

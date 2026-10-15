@@ -1507,8 +1507,13 @@ function gradedLine(cs) {
   return 'graded: ' + cs.score + '/4 — ' + (cs.short || 'nothing fell short');
 }
 function lastGradedLine(posts) {
-  const hit = (posts || []).map(p => String(p && p.content || '').trim()).find(t => /^graded: \d\/4\b/.test(t));
-  return hit ? hit.slice(0, 300) : null;
+  // pipeline.80: a rerun in the same Cycle upserts the same page key and Supermemory appends
+  // ("old\n\n---\n\nnew") — the newest grade is the LAST graded line in the newest doc.
+  for (const p of posts || []) {
+    const hits = String(p && p.content || '').match(/^graded: \d\/4\b.*$/gm);
+    if (hits) return hits[hits.length - 1].trim().slice(0, 300);
+  }
+  return null;
 }
 // One line per seat per run, the watch file through C113 (rb reads it into the row).
 function appendRewardLoopRead(cycle, row) {

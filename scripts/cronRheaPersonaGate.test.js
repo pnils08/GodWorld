@@ -68,11 +68,16 @@ assert.ok(faithPrompt.user.includes('canon name on the right is not an invention
 // pipeline.77 — contract score: shape only; length is code when the contract has one range
 {
   const g = require('./cron-rhea-gate');
-  assert.deepStrictEqual(g.contractWordRange('400-700'), { lo: 400, hi: 700 });
-  assert.equal(g.contractWordRange('evidence-bounded; 350-600'), null, 'evidence-bounded -> the judge weighs the range (codex #6)');
+  // pipeline.80: length is a floor
+  assert.equal(g.contractWordFloor('400-700'), 400);
+  assert.equal(g.contractWordFloor('evidence-bounded; 350-600'), 350, 'evidence-bounded still has a floor');
   assert.equal(g.contractWordCount('one two\n```\nfenced words here\n```\n<!-- c -->three'), 3, 'same body as thinCheck: no fences, no comments');
-  assert.equal(g.contractWordRange('evidence-bounded'), null);
-  assert.equal(g.contractWordRange('180-280 without; 450-750 with'), null, 'two ranges -> the judge reads it');
+  assert.equal(g.contractWordFloor('evidence-bounded'), null);
+  assert.equal(g.contractWordFloor('180-280 without; 450-750 with'), null, 'two ranges -> the judge reads it');
+  const long = g.parseContractScore('{"opened":true,"closed":true,"purposeMet":true,"inTarget":false,"short":""}',
+    { purpose: 'p', articleContract: { targetWords: 'evidence-bounded; 350-600' } }, 793);
+  assert.equal(long.inTarget, true, 'Marbury 793 over 350-600 is not a fault');
+  assert.equal(long.score, 4);
   const profile = { purpose: 'TEST-ONLY purpose', articleContract: { voice: 'dry', opening: 'TEST-ONLY open', closing: 'TEST-ONLY close', targetWords: '400-700' } };
   const cp = g.buildContractPrompt(profile, 'one two three');
   assert.equal(cp.words, 3);

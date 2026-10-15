@@ -75,7 +75,7 @@ Canon writes, in order, each read back before the next live fire (codex §8):
 | 6 | ECL: gate computed once per citizen into `condScopes.transitdisrupted`; flag registered in the loader; inline pool removed; four moved rows + ≥6 authored rows prepared as a JSON fixture in the commit (under `data/` next to the other authored content, es names the file); PROD rows written in Sequencing step 2. Tests as in move 6. | es | done `f50903cd` (rows in `scripts/transitEclPool.js`, PROD write = Sequencing step 2) |
 | 7 | Hiring plumbing: catalog + both keyword lists (order before `Transit Hub`) + voice roles + the employer-aware settle line; `mintEmployerPick.test.js` green; a fixture mint `Train Conductor` with room lands at BIZ-00014. | es | done `55b6a50b` (settle line sits in `runCareerEngine.js`, the BART entry hire → Train Operator; mint 56/0, employerSuccess 83/0) |
 | 8 | Docs same commit: `docs/engine/EVENT_SYSTEM_MAP.md` (transit, chaos train, ECL flag), `docs/engine/ENGINE_COUPLING_MAP.md` §transit, `docs/engine/SHEETS_MANIFEST.md` only if a sheet read is new, the engine.290 dial list wherever engine.94/133 dials are documented, ROLLOUT engine.290 pointer. | es | done `f72efb8f` (coupling map §updateTransitMetrics + 16 dials, EVENT_SYSTEM_MAP; no new sheet read, SHEETS_MANIFEST untouched; ROLLOUT row already repointed by rb) |
-| 9 | Bench on SANDBOX 1004 off stage 4c: C113 + C114 fires (bench stood at cycleCount 112 on stage 4c; C113 is the rebase cycle), 0 Engine_Errors; station rows blank TrafficIndex, corridor rows blank OTP; dayType equals `S.isWeekend`; Factors carry `base: ledger` and (C113 only) `rebased`; slice prints the rebase notice; carry blob < 9 KB; chaos train proven by unit test and, if the dice allow, a Chaos_Cars row. Then PROD with the governor at 0; Sequencing steps 1–2. | es | not started |
+| 9 | Bench on SANDBOX 1004 off stage 4c: C113 + C114 fires (bench stood at cycleCount 112 on stage 4c; C113 is the rebase cycle), 0 Engine_Errors; station rows blank TrafficIndex, corridor rows blank OTP; dayType equals `S.isWeekend`; Factors carry `base: ledger` and (C113 only) `rebased`; slice prints the rebase notice; carry blob measured (bench C113: 12.3 KB; it was 16.8 / 13.1 KB at C111 / C112 before engine.290 and already rides the engine.223 sheet ring — engine.290 adds ~45 B); chaos train proven by unit test and, if the dice allow, a Chaos_Cars row. Then PROD with the governor at 0; Sequencing steps 1–2. | es | not started |
 | 10 | Morning §6 lines for the builder: the four Intake mints (names), governor arming, BART/AC Transit names — **filed 02:45**. | rb | done `9569b13d` |
 
 ## Acceptance
@@ -118,7 +118,7 @@ Canon writes, in order, each read back before the next live fire (codex §8):
 ### Needs proof
 - agy's staffing magnitudes (OTP 0.85 → 0.70; ridership ×0.60; crowding ×3) are asserted, not measured → dials with milder defaults; the builder moves them.
 - "OTP never collapses" (agy §Verdict 2): the `Math.max(0.6, …)` floor is a sim call — held; the chaos train and the governor are what reach it.
-- Carry blob size with `chaosTransit` present (codex §5) → bench check, Task 9.
+- Carry blob size with `chaosTransit` present (codex §5) → measured on the C113 bench: 12.3 KB, already on the sheet ring before engine.290 (C111 16.8 KB); engine.290 adds ~45 B. Not a new overflow.
 - The share table under the primary/catchment rule → es re-runs agy's script logic on the new rule before cutting (Task 3).
 
 ### New concepts (held)

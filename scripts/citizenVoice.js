@@ -79,6 +79,7 @@ function openTensionsFor(state, popId, cycle) {
 
 // Cross-call token accounting (acceptance 6) — per-call lines + batch total, stderr only.
 const usageTotals = { calls: 0, prompt: 0, completion: 0 };
+let lastCall = null; // pipeline.75 — the last generate()'s completion/maxTokens/finish, for the --json envelope
 
 async function readStdin() {
   let buf = '';
@@ -103,6 +104,7 @@ async function generate(system, user, maxTokens, temperature, model) {
   usageTotals.prompt += Number(u.prompt_tokens) || 0;
   usageTotals.completion += Number(u.completion_tokens) || 0;
   console.error(`[tokens] call ${usageTotals.calls}: model=${selectedModel} prompt=${u.prompt_tokens || '?'} completion=${u.completion_tokens || '?'}`);
+  lastCall = { completion: Number(u.completion_tokens) || 0, maxTokens, finish: j.choices?.[0]?.finish_reason || null }; // pipeline.75 cap-hit
   return String(j.choices?.[0]?.message?.content || '').trim();
 }
 
@@ -323,6 +325,6 @@ async function runBatch(batchPath, cycle) {
     process.exit(e.code || 1);
   }
   if (DRY) process.exit(0);
-  if (JSON_OUT) console.log(JSON.stringify({ popId: r.popId, name: r.name, nh: r.nh, occ: r.occ, disposition: r.disposition, text: r.text }, null, 2));
+  if (JSON_OUT) console.log(JSON.stringify({ popId: r.popId, name: r.name, nh: r.nh, occ: r.occ, disposition: r.disposition, text: r.text, usage: lastCall }, null, 2));
   else console.log(r.text);
 })().catch((e) => { console.error('citizenVoice ERR: ' + e.message); process.exit(1); });

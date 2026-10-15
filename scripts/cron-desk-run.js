@@ -1391,6 +1391,90 @@ function uniqueDest(dir, name) {
   return path.join(dir, name.replace(/\.md$/, '-' + stamp + '.md'));
 }
 
+// pipeline.75 — deterministic draft checks (builder 2026-10-14: "add any automation checks
+// that may help them"). Pure; runWrite applies them before disposition and the fan-out
+// summary totals them. thin + engine-term flag the draft; verbatim slice text is WARN-only
+// for a week (rb reads the hit rate before it blocks); a cap hit is counted, never fatal.
+const THIN_WORDS = 150;
+const VERBATIM_RUN = 6;
+const VERBATIM_SRC = /Who Lived It|LifeHistory|Lived_Events/i;
+function draftWordCount(text) {
+  return (articleContamination.proseOnly(text).match(/[A-Za-z0-9][A-Za-z0-9'’-]*/g) || []).length;
+}
+function thinCheck(text, targetWords) {
+  const words = draftWordCount(text);
+  return { words, thin: words < THIN_WORDS,
+    reason: words < THIN_WORDS ? 'thin: ' + words + ' words (seat target ' + (targetWords || 'unset') + ')' : null };
+}
+// Reuses validateEdition's ENGINE_TERMS through its exported checker — one list, not a copy.
+function engineTermCheck(text) {
+  return require('./validateEdition').checkEngineLanguage(articleContamination.proseOnly(text))
+    .map(i => (String(i.detail).match(/Found "([^"]+)"/) || [])[1] || i.detail);
+}
+function wordsOf(text) {
+  return String(text || '').toLowerCase().replace(/[’']/g, '').match(/[a-z0-9]+/g) || [];
+}
+// A packet fact sourced from a citizen's event record ("Name — event text") reprinted on the
+// page: the engine's own sentence as prose. Noah C111 printed "limited social activity because
+// of winter mood" for "limited social activity due to winter mood" — no 6-word exact run, so
+// the test is near-verbatim: one prose sentence carrying >= 80% of the event's content words
+// (4+ of them), or any exact run of VERBATIM_RUN words. The name is meant to print; only the
+// event text counts.
+const VERBATIM_STOP = new Set(['the', 'and', 'for', 'due', 'with', 'from', 'into', 'onto', 'that', 'this',
+  'was', 'were', 'has', 'had', 'have', 'their', 'his', 'her', 'its', 'after', 'before', 'over', 'about']);
+function verbatimSliceRuns(text, packet) {
+  const rows = [].concat((packet && packet.known) || [],
+    (packet && packet.manifest && packet.manifest.approvedFacts) || []);
+  const proseText = articleContamination.proseOnly(text);
+  const prose = ' ' + wordsOf(proseText).join(' ') + ' ';
+  const sentences = proseText.split(/(?<=[.!?])\s+|\n+/).map(x => new Set(wordsOf(x)));
+  const hits = [];
+  const seen = new Set();
+  for (const row of rows) {
+    if (!row || !VERBATIM_SRC.test(String(row.src || ''))) continue;
+    const full = String(row.text || '');
+    if (seen.has(full)) continue;
+    seen.add(full);
+    const event = full.includes(' — ') ? full.split(' — ').slice(1).join(' — ') : full;
+    const w = wordsOf(event);
+    let run = null;
+    for (let i = 0; !run && i + VERBATIM_RUN <= w.length; i++) {
+      const r = w.slice(i, i + VERBATIM_RUN).join(' ');
+      if (prose.includes(' ' + r + ' ')) run = r;
+    }
+    const content = [...new Set(w.filter(x => x.length >= 3 && !VERBATIM_STOP.has(x)))];
+    if (!run && content.length >= 4) {
+      const need = Math.ceil(content.length * 0.8);
+      const sent = sentences.find(set => content.filter(x => set.has(x)).length >= need);
+      if (sent) run = content.filter(x => sent.has(x)).join(' ');
+    }
+    if (run) hits.push({ text: full.slice(0, 160), run });
+  }
+  return hits;
+}
+// usage = citizenVoice --json envelope's { completion, maxTokens, finish }
+function angleCapHit(usage) {
+  if (!usage) return false;
+  return usage.finish === 'length' || (usage.maxTokens > 0 && usage.completion >= usage.maxTokens);
+}
+function fanoutCheckTotals(seats) {
+  const list = (seats || []).filter(Boolean);
+  return {
+    seats: list.length,
+    toolSeats: list.filter(x => x.toolCalls > 0).length,
+    capHits: list.reduce((a, x) => a + (Number(x.capHits) || 0), 0),
+    thin: list.filter(x => x.thin).length,
+    engineTerm: list.filter(x => x.engineTerms && x.engineTerms.length).length,
+    verbatim: list.filter(x => x.verbatim && x.verbatim.length).length,
+  };
+}
+function formatCheckTotals(t, stage) {
+  if (stage === 'angle') return 'cap-hits ' + t.capHits;
+  return 'tools ' + t.toolSeats + '/' + t.seats + ' · cap-hits ' + t.capHits + ' · thin ' + t.thin +
+    ' · engine-term ' + t.engineTerm + ' · verbatim ' + t.verbatim + ' (warn)';
+}
+let SEAT_CHECKS = null; // the current seat's checks; the fan-out loop collects it after each seat
+
 // WAKE 1 — ANGLE: the reporter's own citizen voice reads the beat and says what
 // smells off (the Antigravity/Jax pattern: ask in the reporter's lingo, get
 // friction leads back in their voice). Persona reporters get their authored
@@ -1416,6 +1500,8 @@ async function refreshCitizenPages(cycle) {
 }
 
 async function runAngle(assign) {
+  SEAT_CHECKS = null;
+  let angleCapHits = 0; // pipeline.75 — rides the angle artifact into the write record
   const cycle = arg('--cycle', null) || detectCycle();
   const desk = assign ? assign.desk : DESK;
   const personaSlug = assign ? assign.persona : PERSONA;
@@ -1968,6 +2054,7 @@ async function runAngle(assign) {
     // off-assignment, and that one still fails closed on the second attempt.
     const ANGLE_ATTEMPTS = 2;
     let angleErr = null;
+    SEAT_CHECKS = { stage: 'angle', capHits: 0 };
     let lastAngleRaw = null;
     for (let attempt = 1; attempt <= ANGLE_ATTEMPTS; attempt++) {
       lastAngleRaw = null;
@@ -1988,6 +2075,12 @@ async function runAngle(assign) {
         const jsonStart = outTrim.search(/^\{/m);
         if (jsonStart === -1) throw new Error('citizenVoice --json returned no JSON envelope: ' + outTrim.slice(0, 200));
         const r = JSON.parse(outTrim.slice(jsonStart));
+        if (angleCapHit(r.usage)) {
+          SEAT_CHECKS.capHits++;
+          angleCapHits++;
+          log('angle attempt ' + attempt + ' CAP HIT: completion=' + r.usage.completion + ' of max ' + r.usage.maxTokens +
+            (r.usage.finish ? ' (finish=' + r.usage.finish + ')' : ''));
+        }
         lastAngleRaw = String(r.text);
         const plan = PACKET_ACTIVE ? livedPacket.validateAngleOutput(r.text, inputPacket) : null;
         angleRead = { name: r.name, popid: r.popId,
@@ -2129,6 +2222,7 @@ async function runAngle(assign) {
     angleRead,
     lanePicks: lane.slice(0, 5).map(e => ({ label: e.label, kind: e.kind, hood: e.hood, ref: e.ref, popids: e.popids || [] })),
     laneEntries: lane.length,
+    angleCapHits,
     ranAt: new Date().toISOString()
   }, null, 2));
   console.log('angle → ' + path.relative(ROOT, anglePath));
@@ -2615,6 +2709,7 @@ function buildIntakeSidecar(draftText, quotes, storylineTag) {
 // WAKE 3 — WRITE (+ gate + route + self-record): requires angle + packet
 // artifacts — no angle, no write (no filing on stale data).
 async function runWrite(assign) {
+  SEAT_CHECKS = null;
   const cycle = arg('--cycle', null) || detectCycle();
   const desk = assign ? assign.desk : DESK;
   const personaSlug = assign ? assign.persona : PERSONA;
@@ -2806,6 +2901,18 @@ async function runWrite(assign) {
     log('article shape observations: ' + shape.observations.join(','));
   }
 
+  // pipeline.75 — deterministic checks. thin + engine-term flag the draft whatever Rhea says;
+  // verbatim slice text is a WARN in the record only.
+  const targetWords = writePacket && writePacket.reviewProfile && writePacket.reviewProfile.articleContract &&
+    writePacket.reviewProfile.articleContract.targetWords || null;
+  const thin = thinCheck(draftText, targetWords);
+  const engineTerms = engineTermCheck(draftText);
+  const verbatim = PACKET_ACTIVE ? verbatimSliceRuns(draftText, writePacket) : [];
+  const checkFlags = [].concat(thin.thin ? [thin.reason] : [],
+    engineTerms.length ? ['engine-term: ' + engineTerms.join(', ')] : []);
+  if (checkFlags.length) log('deterministic check flags: ' + checkFlags.join('; '));
+  if (verbatim.length) log('WARN verbatim slice text: ' + verbatim.map(h => '"' + h.run + '"').join('; '));
+
   // gate (skipped for --no-gate samples)
   //
   // pipeline.62 — Rhea is the gate. Two things skip her, both §4.7 doctrine:
@@ -2845,6 +2952,7 @@ async function runWrite(assign) {
     pass = rheaProof.ok;
     if (rhea && rhea.pass === true && !pass) log('Rhea pass rejected: ' + rheaProof.reason);
   }
+  if (pass && checkFlags.length) { pass = false; log('Rhea pass overridden by deterministic checks: ' + checkFlags.join('; ')); }
 
   // route (the wall — identical semantics to runWake)
   const destDir = NO_GATE ? SAMPLES : (pass ? STAGED : FLAGGED);
@@ -2967,10 +3075,17 @@ async function runWrite(assign) {
     contamination,
     footerPresent,
     toolUse: traceArt ? traceArt.calls.map(t => t.tool) : [],
+    // pipeline.75 checks
+    toolCalls: traceArt ? traceArt.calls.length : 0,
+    wordCount: thin.words, targetWords,
+    capHit: Number(angle && angle.angleCapHits) || 0,
+    checkFlags, engineTerms, verbatimWarn: verbatim,
     article: path.relative(ROOT, destPath),
     selfRecord, ranAt: new Date().toISOString()
   };
   fs.writeFileSync(path.join(COMPARE, base + '.wake.json'), JSON.stringify(record, null, 2));
+  SEAT_CHECKS = { stage: 'write', toolCalls: record.toolCalls, capHits: record.capHit, thin: thin.thin,
+    engineTerms, verbatim, words: thin.words };
   // Task 2.5.3 — §4 closes the growing story doc: where the article landed.
   storyDocAppend(stem, '§4 THE ARTICLE (wake 3)',
     '- draft: ' + path.relative(ROOT, destPath) + '\n- disposition: ' + record.disposition +
@@ -3232,24 +3347,28 @@ async function runFanoutStage() {
   if (STAGE === 'angle') await refreshCitizenPages(fanout.cycle);
   const results = [];
   for (const a of list) {
+    SEAT_CHECKS = null;
     try {
       if (STAGE === 'angle') await runAngle(a);
       else if (STAGE === 'report') await runReport(a);
       else await runWrite(a);
-      results.push({ name: a.name, desk: a.desk, ok: true });
+      results.push({ name: a.name, desk: a.desk, ok: true, checks: SEAT_CHECKS });
     } catch (e) {
       console.error('[fanout] ' + a.name + ' (' + a.desk + ') FAILED: ' + e.message);
-      results.push({ name: a.name, desk: a.desk, ok: false, error: e.message });
+      results.push({ name: a.name, desk: a.desk, ok: false, error: e.message, checks: SEAT_CHECKS });
     }
   }
+  // pipeline.75 — the check totals ride the summary line and the failure ping.
+  const checkTotals = STAGE === 'report' ? null : fanoutCheckTotals(results.map(r => r.checks));
   const rPath = path.join(COMPARE, 'fanout-' + date + '.' + STAGE + '.results.json');
-  fs.writeFileSync(rPath, JSON.stringify({ date, stage: STAGE, results, ranAt: new Date().toISOString() }, null, 2));
+  fs.writeFileSync(rPath, JSON.stringify({ date, stage: STAGE, results, checkTotals, ranAt: new Date().toISOString() }, null, 2));
   const failed = results.filter(r => !r.ok);
   console.log('\n=== fan-out ' + STAGE + ': ' + (results.length - failed.length) + '/' + results.length + ' ok' +
-    (failed.length ? ' — FAILED: ' + failed.map(f => f.name).join(', ') : '') + ' ===');
+    (failed.length ? ' — FAILED: ' + failed.map(f => f.name).join(', ') : '') +
+    (checkTotals ? ' · ' + formatCheckTotals(checkTotals, STAGE) : '') + ' ===');
   console.log('results → ' + path.relative(ROOT, rPath));
   if (STAGE === 'angle') logSportsRowDelivery(fanout.cycle);
-  if (failed.length) await notifyFanoutFailures(date, failed, results.length);
+  if (failed.length) await notifyFanoutFailures(date, failed, results.length, checkTotals);
 }
 
 // Sports row delivery (Mike-asked 2026-09-19): after the angle wake builds the
@@ -3279,12 +3398,13 @@ function logSportsRowDelivery(cycle) {
 // Failure ping (2026-07-26): a failed wake should reach Mike's phone, not wait
 // for a terminal boot to read the log. Webhook pattern per notify-paulson-interview.js.
 // Non-blocking: a dead webhook must never fail the wake itself.
-function notifyFanoutFailures(date, failed, total) {
+function notifyFanoutFailures(date, failed, total, checkTotals) {
   return new Promise((resolve) => {
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
     if (!webhookUrl) { console.log('[fanout] failure ping skipped: DISCORD_WEBHOOK_URL not set'); return resolve(); }
     const lines = ['**NEWSROOM WAKE FAILURES — ' + date + ' ' + STAGE + '** (' + failed.length + '/' + total + ')'];
     for (const f of failed) lines.push('- ' + f.name + ' (' + f.desk + '): ' + String(f.error).slice(0, 140));
+    if (checkTotals) lines.push('checks: ' + formatCheckTotals(checkTotals, STAGE));
     lines.push('log: `logs/newsroom-fanout.log` — recover: `cron-desk-run.js --stage=' + STAGE + ' --fanout --only "<name>"' +
       (STAGE === 'write' ? ' --gate-backend api' : '') + '`');   // the default claude gate may not grade a Claude-written draft
     const parsed = new URL(webhookUrl);
@@ -3373,4 +3493,7 @@ module.exports = {
   humanChaseOrThrow,
   noteQuoteState,
   assertPublishableQuotesStrict,
+  // pipeline.75 checks
+  draftWordCount, thinCheck, engineTermCheck, verbatimSliceRuns, angleCapHit,
+  fanoutCheckTotals, formatCheckTotals, THIN_WORDS,
 };

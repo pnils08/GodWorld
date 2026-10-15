@@ -255,7 +255,7 @@ assert.equal(noahContext.wakePackage.version, 'NOAH-LEP2-1');
 assert.equal(stageRoute('civic', noahAssignment.persona, 'angle').model,
   'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('civic', noahAssignment.persona, 'write').model,
-  'openai/gpt-5.6-luna');
+  'x-ai/grok-4.3');   // pipeline.74 — the scene seats' model (was gpt-5.6-luna)
 
 const handoffAngle = {
   stage: 'angle', cycle: '103', persona: 'luis-navarro', packetContract: 'v2',
@@ -285,5 +285,59 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
 assert.throws(() => validateWakeHandoff(handoffAngle,
   Object.assign({}, handoffPacket, { assignment: { story: { ref: 'TEST-OTHER' } } }),
   handoffExpected), /assigned story mismatch/);
+
+// --- pipeline.75 deterministic draft checks ---------------------------------
+{
+  const cdr = require('./cron-desk-run');
+  const body = n => Array.from({ length: n }, (_, i) => 'word' + i).join(' ');
+  // thin: INTAKE footer excluded from the count
+  const thinDraft = '# Head\n\n' + body(40) + '\n\n## INTAKE\n' + body(300) + '\n';
+  const t = cdr.thinCheck(thinDraft, '400-700');
+  assert.equal(t.thin, true);
+  assert.match(t.reason, /^thin: \d+ words \(seat target 400-700\)$/);
+  assert.ok(t.words < 50, 'INTAKE words not counted: ' + t.words);
+  assert.equal(cdr.thinCheck('# Head\n\n' + body(200), null).thin, false);
+  // engine terms: reuses validateEdition's list
+  assert.deepStrictEqual(cdr.engineTermCheck('The tension score rose.\n\n## INTAKE\ncivic load'), ['tension score']);
+  assert.deepStrictEqual(cdr.engineTermCheck('Nothing odd here at all.'), []);
+  // verbatim: event text from a Who Lived It row, 6+ word run; the name alone never hits
+  const pk = { known: [
+    { t: 'FACT', text: 'Javier Robertson — limited social activity due to winter mood', src: 'output/world_summary_c111.md ## Who Lived It' },
+    { t: 'FACT', text: 'The A’s parade rolled through Downtown with the whole roster aboard', src: 'world_summary ## Sports' }] };
+  const hit = cdr.verbatimSliceRuns('Javier Robertson has had limited social activity due to winter mood lately.', pk);
+  assert.equal(hit.length, 1);
+  assert.equal(hit[0].run, 'limited social activity due to winter');
+  // near-verbatim (the C111 print): one sentence carrying >=80% of the event's content words
+  const near = cdr.verbatimSliceRuns('Robertson, however, has had limited social activity because of winter mood.', pk);
+  assert.equal(near.length, 1);
+  assert.equal(near[0].run, 'limited social activity winter mood');
+  // the same words spread over separate sentences are not a reprint
+  assert.deepStrictEqual(cdr.verbatimSliceRuns('Activity was limited. Social plans waited. Winter has a mood.', pk), []);
+  assert.deepStrictEqual(cdr.verbatimSliceRuns('Javier Robertson stayed in more this week.', pk), []);
+  assert.deepStrictEqual(cdr.verbatimSliceRuns('The A’s parade rolled through Downtown with the whole roster aboard.', pk), [],
+    'non-event sources are not checked');
+  // cap hit
+  assert.equal(cdr.angleCapHit({ completion: 700, maxTokens: 700, finish: 'length' }), true);
+  assert.equal(cdr.angleCapHit({ completion: 1600, maxTokens: 1600, finish: null }), true);
+  assert.equal(cdr.angleCapHit({ completion: 616, maxTokens: 1600, finish: 'stop' }), false);
+  assert.equal(cdr.angleCapHit(null), false);
+  // totals + summary format
+  const totals = cdr.fanoutCheckTotals([
+    { toolCalls: 0, capHits: 1, thin: true, engineTerms: [], verbatim: [] },
+    { toolCalls: 2, capHits: 0, thin: false, engineTerms: ['tension score'], verbatim: [{ run: 'x' }] },
+    null]);
+  assert.deepStrictEqual(totals, { seats: 2, toolSeats: 1, capHits: 1, thin: 1, engineTerm: 1, verbatim: 1 });
+  assert.equal(cdr.formatCheckTotals(totals, 'write'), 'tools 1/2 · cap-hits 1 · thin 1 · engine-term 1 · verbatim 1 (warn)');
+  assert.equal(cdr.formatCheckTotals(totals, 'angle'), 'cap-hits 1');
+  // live read-backs when the C111 artifacts are on disk
+  const tanya = path.join(__dirname, '..', 'output', 'cron-compare', 'staged', 'sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md');
+  if (fs.existsSync(tanya)) assert.equal(cdr.thinCheck(fs.readFileSync(tanya, 'utf8')).thin, true, 'C111 Tanya (58 words) reads thin');
+  const noahMd = path.join(__dirname, '..', 'output', 'cron-compare', 'civic_c111_noah-tan_packet-v2_openai-gpt-5-6-luna.md');
+  const noahState = noahMd.replace(/\.md$/, '.state.json');
+  if (fs.existsSync(noahMd) && fs.existsSync(noahState)) {
+    assert.ok(cdr.verbatimSliceRuns(fs.readFileSync(noahMd, 'utf8'), JSON.parse(fs.readFileSync(noahState, 'utf8'))).length >= 1,
+      'C111 Noah prints the winter-mood line');
+  }
+}
 
 console.log('cron fan-out filename handoff tests: PASS');

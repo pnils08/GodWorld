@@ -55,6 +55,26 @@
       "bizId": "BIZ-00014"
     },
     {
+      "pattern": "Train Conductor",
+      "bizId": "BIZ-00014"
+    },
+    {
+      "pattern": "Train Operator",
+      "bizId": "BIZ-00014"
+    },
+    {
+      "pattern": "Rail Dispatcher",
+      "bizId": "BIZ-00014"
+    },
+    {
+      "pattern": "Transit Dispatcher",
+      "bizId": "BIZ-00014"
+    },
+    {
+      "pattern": "Track Maintenance",
+      "bizId": "BIZ-00014"
+    },
+    {
       "pattern": "Longshoreman",
       "bizId": "BIZ-00012"
     },

@@ -1754,6 +1754,9 @@ function runCareerEngine_(ctx) {
           if (curField !== cat) {
             var eduRank = Number(pool[hIdx].edu) || 0;
             var newRole = SETTLE_ROLES_BY_FIELD[cat][eduRank >= 4 ? 'rich' : eduRank >= 1 ? 'solid' : 'rough'];
+            // engine.290: the transit entry job at BART is a train, not a bus — the floor of
+            // named crew comes from the builder's mints; this only grows the headcount.
+            if (newRole === 'Transit Operator Trainee' && bizId2 === 'BIZ-00014') newRole = 'Train Operator';
             hRow[iRoleM] = newRole;
             if (typeof setCurrentField_ === 'function') hRow[iTags] = setCurrentField_(hRow[iTags], cat);
             if (typeof jobReferencePay_ === 'function') { var np = jobReferencePay_(newRole, hRow[iTags], hRow[idx('CareerStage')], hRow[iPopID], (typeof payProfileFromRow_ === 'function') ? payProfileFromRow_(ctx.ledger.headers, hRow, bGrow >= 0 ? Number(bizData[br3][bGrow]) : null) : null); if (np !== null) hRow[iIncome] = np; }

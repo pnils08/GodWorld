@@ -342,10 +342,10 @@ const DIE_WAKE = {};
       EmployerBizId: 'BIZ-SYNTHETIC-W1', LifeHistory: careerState }, overrides));
     return r.concat(['Updated:c199', w.serializeDialState_(c)]);
   }
-  function run(r, growth, stated, sequence, maneuver, cfgOver) {
+  function run(r, growth, stated, sequence, maneuver, cfgOver, bizOver) {
     errors.length = 0; writes.length = 0;
     let draw = 0;
-    const business = [BLH.slice(), ['BIZ-SYNTHETIC-W1', 'Synthetic W1 Business', 'Bakery', 'Temescal', stated, 50000, 100000, growth]];
+    const business = [BLH.slice(), (bizOver || ['BIZ-SYNTHETIC-W1', 'Synthetic W1 Business', 'Bakery', 'Temescal']).concat([stated, 50000, 100000, growth])];
     const ctx = { mode: {}, config: Object.assign({ cycleCount: 200, judicialDismissAfterCycles: 3 }, LIFE_EVENT_OFF, cfgOver || {}), now: 'C200',
       cache: { getData: tab => tab === 'Judicial_Ledger' ? { exists: true, values: [w.JUDICIAL_CASE_FIELDS_.slice()] } : { exists: false, values: [] } },
       summary: { absoluteCycle: 200, maneuver: { byPop: maneuver || {} } },
@@ -396,6 +396,17 @@ const DIE_WAKE = {};
       { 'SYNTHETIC-W1-CAREER': { posture: 'climb', openness: 80 } }),
     'Career-FieldChange', { drive: 3, openness: 3 },
     ctx => ctx.summary.careerSignals.rehires.hired === 1 && ctx.summary.careerSignals.rehires.crossField === 1);
+
+  // engine.290 move 7 — a field-change hire into BART takes the train job, not the bus job.
+  {
+    const bart = run(fixture({ EmployerBizId: '', SkillTags: 'Healthcare', RoleType: 'Nurse' }), 100, 52, [0.999, 0.999, 0.5],
+      { 'SYNTHETIC-W1-CAREER': { posture: 'climb', openness: 80 } }, null, ['BIZ-00014', 'BART Oakland Division', 'Public Transit', 'Downtown']);
+    const r0 = bart.ctx.ledger.rows[0];
+    const role = r0[ix('RoleType')];
+    assert('engine.290 a solid-band field change into BIZ-00014 is hired as a Train Operator, not a Transit Operator Trainee',
+      r0[ix('EmployerBizId')] === 'BIZ-00014' && role === 'Train Operator',
+      JSON.stringify({ role, emp: r0[ix('EmployerBizId')] }));
+  }
 
   // engine.286 Task 2 — the promotion die through the real career engine (synthetic rows).
   // Sequence: two texture draws miss, then the die (fire, sign, band, text, the writer's income

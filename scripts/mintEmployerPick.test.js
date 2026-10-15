@@ -28,6 +28,7 @@ const BIZ = [
   ['BIZ-00027', 'Oakland Parks & Recreation', 'Municipal Parks', 'Lake Merritt', 300],
   ['BIZ-00015', 'Oakland Hospital', 'Healthcare', 'City-wide', 1200],
   ['BIZ-00013', 'AC Transit', 'Public Transit', 'Downtown', 800],
+  ['BIZ-00014', 'BART Oakland Division', 'Public Transit', 'Downtown', 2],
   ['BIZ-N', 'EBMUD', 'Water Utility', 'Downtown', 500],
   ['BIZ-D', 'Temescal Clinic', 'Community Health Clinic', 'Temescal', 40],
   ['BIZ-E', 'Anchor Build', 'Construction', 'Jack London', 60],
@@ -130,6 +131,17 @@ check('6.5 a role with no field and no named organisation is UNTRACKED, never th
 const dead = pick('Plumber', 'Temescal', 'ENGINE', 's', null);
 check('6.6 an unreadable Business_Ledger leaves a fielded role seeking (the caller writes the line)', dead.seeking === true && !dead.bizId && !dead.sentinel, JSON.stringify(dead));
 check('6.7 Trades reads as its field through the alias', E.roleFieldOf_('Plumber') !== null && E.skillTagField_(E.roleFieldOf_('Plumber')) === 'Construction & Baylight', String(E.roleFieldOf_('Plumber')));
+
+console.log('\n6b. engine.290 — the BART crew titles land at BART:');
+const noBart = (id) => id !== 'BIZ-00014' && room(id);
+['Train Conductor', 'Train Operator', 'Rail Dispatcher', 'Transit Dispatcher', 'Track Maintenance Technician', 'BART Train Conductor'].forEach(function (role) {
+  const p = pick(role, 'Fruitvale');
+  check('6b ' + role + ' with room → BIZ-00014', p.bizId === 'BIZ-00014', JSON.stringify(p));
+});
+check('6b.2 the crew rules sit ahead of Transit Hub (first substring wins)', E.MINT_KEYWORD_RULES.findIndex(r => r[0] === 'Train Conductor') < E.MINT_KEYWORD_RULES.findIndex(r => r[0] === 'Transit Hub'));
+const full = pick('Train Conductor', 'Fruitvale', 'ENGINE', 'seed-1', pool, noBart);
+check('6b.3 no room at BART → the field pick, exactly as any full employer', full.bizId !== 'BIZ-00014' && (full.bizId || full.sentinel), JSON.stringify(full));
+check('6b.4 the catalog carries the three new titles under Transit & Infrastructure', ['Train Conductor', 'Train Operator', 'Transit Maintenance Technician'].every(r => E.roleFieldOf_(r) === 'Transit & Infrastructure'), ['Train Conductor', 'Train Operator', 'Transit Maintenance Technician'].map(r => E.roleFieldOf_(r)).join());
 
 console.log('\n7. the ported lists match their sources:');
 const mapping = JSON.parse(R('data/employer_mapping.json'));

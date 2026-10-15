@@ -56,6 +56,7 @@ var DEMOGRAPHIC_VOICE_ROLES = [
   'Site Foreman', 'Ironworker', 'Construction Engineer', 'Construction Safety Inspector', 'Construction Laborer',
   // Transit & Infrastructure
   'BART Station Manager', 'Bus Driver', 'Smart Grid Technician', 'Sea Level Monitoring Technician',
+  'BART Train Conductor', 'BART Train Operator', 'BART Rail Dispatcher',   // engine.290
   // Healthcare
   'ER Nurse', 'Trauma Surgeon', 'Mental Health Counselor', 'Nurse Aide', 'Home Health Aide',
   // Education
@@ -1557,7 +1558,11 @@ var MINT_PARENTHETICAL = {
 };
 var MINT_KEYWORD_RULES = [
   ['Bayline 6', 'BIZ-00183'], ['Oakland 12', 'BIZ-00184'], ['OakTown Echo', 'BIZ-00099'], // research.27 §3.2 (2026-10-11), mapping order
-  ['AC Transit', 'BIZ-00013'], ['BART', 'BIZ-00014'], ['Longshoreman', 'BIZ-00012'], ['Crane Operator', 'BIZ-00012'],
+  ['AC Transit', 'BIZ-00013'], ['BART', 'BIZ-00014'],
+  // engine.290: the BART crew titles, ahead of 'Transit Hub' (first substring wins)
+  ['Train Conductor', 'BIZ-00014'], ['Train Operator', 'BIZ-00014'], ['Rail Dispatcher', 'BIZ-00014'],
+  ['Transit Dispatcher', 'BIZ-00014'], ['Track Maintenance', 'BIZ-00014'],
+  ['Longshoreman', 'BIZ-00012'], ['Crane Operator', 'BIZ-00012'],
   ['Dockworker', 'BIZ-00012'], ['Harbor', 'BIZ-00012'], ['Ship Pilot', 'BIZ-00012'], ['Maritime', 'BIZ-00012'],
   ['Container Yard', 'BIZ-00012'], ['Port Logistics', 'BIZ-00012'], ['Tugboat', 'BIZ-00012'],
   ['Trade Union', 'BIZ-00012'], ['Mayor', 'BIZ-00017'], ['Council', 'BIZ-00017'], ['Deputy Mayor', 'BIZ-00017'],

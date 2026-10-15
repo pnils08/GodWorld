@@ -1,0 +1,13 @@
+# TASK — codex review: engine.290 implementation, Tasks 1–5
+
+**Target:** `git diff f8e89077..f495246c` (5 commits: f4178346, 5cf36f1d, 9619cb6d, 644fc208, f495246c). Read-only source review; no cron, model, Sheet, bench or canon run.
+**Plan:** `docs/plans/2026-10-15-engine-290-transit-rides-the-sim.md` v2 + the es changelog entries (Task 3 and Task 5 mechanism notes — read them, they are deliberate).
+**Write to:** `docs/for-claude-review/2026-10-15-codex-engine290-impl-tasks1-5.md`. Gate SHIP / FIX / HOLD per hunt, file:line evidence. Do not commit.
+
+## Hunts
+1. **Write boundary.** `transitMetricsRow_` (`utilities/ensureTransitMetrics.js`): any Transit_Metrics reader (dashboard, civic packets, buildTransitSlice, getTransitSummary_, anything else you find) that breaks or lies on a blank cell?
+2. **Clocks.** `dayType` from `S.isWeekend`; `transitDayMult_` major-holiday-outranks-weekend; holiday-hood and First Friday lifts. Any path where a minor holiday still cuts, or a lift double-applies (station listed twice, corridor through the hood twice)?
+3. **Ledger share.** `transitStationShares_`: shares sum to 1; primary/catchment split; `resolveHoodOrChild_` folding; scale mixing; a hood with zero Adults and zero workers; division by zero on an empty `neighborhoodState` or `commuteInbound`; the table fallback. `transitCorridorBase_` with partial `neighborhoodDynamics`. Rebase token: `transitBaseVersion` carry in `finalizeCycleState.js` and `buildTransitSlice.js` suppression — any path where a rebase Cycle still prints a delta or a non-rebase Cycle suppresses them?
+4. **Crew.** `transitStaffing_`: role regex collisions (a title matching two classes; "Transit Hub" / "Systems" / "Maintenance" outside BART), Status casing, the care/custody set. Governor 0 must move nothing and name nothing (canon safety — today's ledger has no conductor/operator/dispatcher/maintenance).
+5. **Chaos train.** `bart_train` config; `pickCitizenTarget_` / `pickNeighborhoodTarget_` filters (one rng draw each; other vehicles' behavior and draw counts unchanged); `chaosConfigsForCycle_` copy (no shared mutation); `S.chaosTransit` hits + `compactChaosTransit_` carry size against the ~9 KB previousCycleState budget; Phase 2 consumption gate `c === cycle − 1`; max-delay rule; the stalled-train disruption replacing the breakdown roll. Any path where a stalled train or a crew read writes "no crew" style canon while the governor is 0?
+6. **rng stream.** List every draw removed/added in Phase 2 and Phase 4 by this diff. Anything that now draws conditionally where it used to draw unconditionally (a determinism hazard beyond the expected one-time shift)?

@@ -1,0 +1,34 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "elliot-marbury",
+  "byline": "Elliot Marbury",
+  "bylinePopid": "POP-00166",
+  "article": "output/cron-compare/staged/sports_c111_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Martin Richards — 9 seasons on the dossier, 2041 the latest — hitter density memo, multi-year",
+        "sourceRef": "output/player_truesource_mirror.json Martin Richards @C111"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-5598afd32540",
+    "draftSha256": "70ce2198329d7e5069b6d2f9b8cea1b098a1431e983ad7be486f9cfc112c952c",
+    "verdict": "output/cron-compare/sports_c111_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-10-15T03:26:36.697Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-10-15T03:26:39.241Z"
+}

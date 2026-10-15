@@ -1,0 +1,36 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "111",
+  "persona": "elliot-marbury",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-data-desk",
+      "angle": "Martin Richards — 9 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "label": "Martin Richards — 9 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+      "hookLine": "Martin Richards's 2041 line against 8 earlier seasons and 1 peer.",
+      "hood": null,
+      "citizens": [
+        "Martin Richards (POP-00031)"
+      ],
+      "popids": [
+        "POP-00031"
+      ],
+      "ref": "output/player_truesource_mirror.json Martin Richards @C111",
+      "cycle": 111
+    }
+  },
+  "angle": "output/cron-compare/sports_c111_elliot-marbury_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-10-15T03:25:53.664Z"
+}

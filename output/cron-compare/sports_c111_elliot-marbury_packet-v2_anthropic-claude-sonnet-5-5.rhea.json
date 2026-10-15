@@ -1,0 +1,59 @@
+{
+  "draft": "output/cron-compare/sports_c111_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "111",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "70ce2198329d7e5069b6d2f9b8cea1b098a1431e983ad7be486f9cfc112c952c",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Audit-grade statistical analysis strictly conforming to Packet career data, sports feed context, and persona constraints with zero fabricated speech or canon contradictions.",
+  "review": {
+    "profileId": "marbury-data-desk-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "marbury-data-desk-v1",
+    "packageVersion": "MARBURY-LEP2-2",
+    "manifestId": "AM-5598afd32540",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "460",
+          "2042",
+          "6.5"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Ernesto Quintero",
+      "Kevin Clark",
+      "Martin Richards"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0099,
+  "durationMs": 7052,
+  "parseError": false,
+  "ranAt": "2026-10-15T03:26:36.697Z"
+}

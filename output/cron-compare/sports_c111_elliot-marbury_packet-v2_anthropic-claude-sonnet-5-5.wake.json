@@ -1,0 +1,42 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "111",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "elliot-marbury",
+  "byline": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166",
+    "beatDomain": "GENERAL"
+  },
+  "laneEntries": 8,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [
+    "dossier_read",
+    "dossier_read"
+  ],
+  "toolCalls": 2,
+  "wordCount": 793,
+  "targetWords": "evidence-bounded; 350-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "article": "output/cron-compare/staged/sports_c111_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "xisting { override: true }\n{\n  \"popId\": \"POP-00166\",\n  \"name\": \"Elliot Marbury\",\n  \"recorded\": true,\n  \"text\": \"filed: Richards Struck Out Less in 2039, 2040 and 2041 Than in Any Season Before Them\"\n}"
+  },
+  "ranAt": "2026-10-15T03:26:47.914Z"
+}

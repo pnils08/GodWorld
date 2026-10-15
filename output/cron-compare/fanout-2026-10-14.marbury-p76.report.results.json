@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-14",
+  "stage": "report",
+  "results": [
+    {
+      "name": "Elliot Marbury",
+      "desk": "sports",
+      "ok": true,
+      "checks": null
+    }
+  ],
+  "checkTotals": null,
+  "ranAt": "2026-10-15T03:25:53.667Z"
+}

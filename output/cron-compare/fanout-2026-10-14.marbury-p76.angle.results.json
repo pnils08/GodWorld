@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-14",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Elliot Marbury",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 1,
+    "toolSeats": 0,
+    "capHits": 0,
+    "thin": 0,
+    "engineTerm": 0,
+    "verbatim": 0
+  },
+  "ranAt": "2026-10-15T03:25:47.326Z"
+}

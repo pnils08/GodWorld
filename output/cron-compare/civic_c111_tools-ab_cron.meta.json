@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "111",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 36644,
+  "usageOutputTokens": 4178,
+  "savedFiles": [
+    "output/cron-compare/civic_c111_freelance-firebrand_tools-ab_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c111.md",
+  "durationMs": 30728,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-15T02:39:27.111Z"
+}

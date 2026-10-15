@@ -1,0 +1,510 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00166",
+    "name": "Elliot Marbury",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Martin Richards — 9 seasons on the dossier, 2041 the latest | hitter density memo, multi-year — what the line proves, on what sample, and what would disprove it",
+    "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "data-desk",
+      "hood": null,
+      "facts": [
+        "Martin Richards — 3B, Athletics; 9 seasons on the dossier",
+        "Martin Richards 2041 ATH: 120 G, 463 AB, 140 H, 27 HR, 65 RBI, 35 BB, 70 SO, 8 SB, AVG .302, OBP .355, SLG .551",
+        "Martin Richards 2040 ATH: 129 G, 499 AB, 148 H, 26 HR, 76 RBI, 62 BB, 74 SO, 8 SB, AVG .297, OBP .377, SLG .523",
+        "Martin Richards 2039 ATH: 90 G, 348 AB, 105 H, 25 HR, 54 RBI, 42 BB, 44 SO, 6 SB, AVG .302, OBP .379, SLG .514",
+        "Martin Richards 2038 ATH: 130 G, 508 AB, 147 H, 30 HR, 72 RBI, 58 BB, 100 SO, 9 SB, AVG .289, OBP .380, SLG .498",
+        "Martin Richards 2037 ATH: 128 G, 503 AB, 122 H, 18 HR, 55 RBI, 70 BB, 97 SO, 14 SB, AVG .272, OBP .364, SLG .437",
+        "Martin Richards 2036 ATH: 150 G, 604 AB, 188 H, 30 HR, 84 RBI, 72 BB, 113 SO, 10 SB, AVG .311, OBP .390, SLG .523",
+        "Martin Richards 2041 rates (463 AB): one HR every 17.1 AB, one SO every 6.6 AB (worked from the season line)",
+        "Martin Richards 2040 rates (499 AB): one HR every 19.2 AB, one SO every 6.7 AB (worked from the season line)",
+        "Martin Richards 2039 rates (348 AB): one HR every 13.9 AB, one SO every 7.9 AB (worked from the season line)",
+        "Martin Richards 2038 rates (508 AB): one HR every 16.9 AB, one SO every 5.1 AB (worked from the season line)",
+        "Martin Richards 2037 rates (503 AB): one HR every 27.9 AB, one SO every 5.2 AB (worked from the season line)"
+      ],
+      "priorCycle": "DOSSIER",
+      "note": "subject is on this cycle's feed",
+      "engineHooks": [],
+      "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-data-desk",
+    "hood": null,
+    "src": "output/player_truesource_mirror.json Martin Richards @C111",
+    "plan": {
+      "focus": "Martin Richards' strikeout rate decline across 2039-2041 and what it means for his profile as the A's weigh everyday at-bats at third base.",
+      "closeQuestion": "If Richards' strikeout rate stays around one per 6.5 AB next season, does he become a more valuable asset than the raw numbers suggest — and does that change how the A's should think about the position?"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Elliot Marbury",
+        "text": "Whether Richards changed his approach at the plate starting in 2039 — possibly related to the reduced games that season — is not in the dossier and would need a conversation with someone who watched him daily.",
+        "usable": false
+      },
+      {
+        "from": "Elliot Marbury",
+        "text": "Whether the organization's preference for contact is a factor in how Richards is evaluated this offseason is suggested by the Kevin Clark comparison but not confirmed by any team statement.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C111",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-a43c5d888b36"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards — 9 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+      "src": "output/player_truesource_mirror.json Martin Richards @C111",
+      "id": "F-2f3bf3a4a49f"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards's 2041 line against 8 earlier seasons and 1 peer.",
+      "src": "output/player_truesource_mirror.json Martin Richards @C111",
+      "id": "F-94c1ee5c5556"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards — 3B, Athletics; 9 seasons on the dossier",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-9cb37fcab4cf"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2041 ATH: 120 G, 463 AB, 140 H, 27 HR, 65 RBI, 35 BB, 70 SO, 8 SB, AVG .302, OBP .355, SLG .551",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-6df93a21973b"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2040 ATH: 129 G, 499 AB, 148 H, 26 HR, 76 RBI, 62 BB, 74 SO, 8 SB, AVG .297, OBP .377, SLG .523",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-5e85cc07e16b"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2039 ATH: 90 G, 348 AB, 105 H, 25 HR, 54 RBI, 42 BB, 44 SO, 6 SB, AVG .302, OBP .379, SLG .514",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-05d55ddf0d90"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2038 ATH: 130 G, 508 AB, 147 H, 30 HR, 72 RBI, 58 BB, 100 SO, 9 SB, AVG .289, OBP .380, SLG .498",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-c8359854b6cc"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2037 ATH: 128 G, 503 AB, 122 H, 18 HR, 55 RBI, 70 BB, 97 SO, 14 SB, AVG .272, OBP .364, SLG .437",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-784ed6de6d09"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2036 ATH: 150 G, 604 AB, 188 H, 30 HR, 84 RBI, 72 BB, 113 SO, 10 SB, AVG .311, OBP .390, SLG .523",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-907e5422792d"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2041 rates (463 AB): one HR every 17.1 AB, one SO every 6.6 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-38928b580bc5"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2040 rates (499 AB): one HR every 19.2 AB, one SO every 6.7 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-8b79505141e0"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2039 rates (348 AB): one HR every 13.9 AB, one SO every 7.9 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-bfa3f911fa1c"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2038 rates (508 AB): one HR every 16.9 AB, one SO every 5.1 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-24a65e02c0f3"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2037 rates (503 AB): one HR every 27.9 AB, one SO every 5.2 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-3f7a0b5c7034"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2036 rates (604 AB): one HR every 20.1 AB, one SO every 5.3 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Martin Richards",
+      "id": "F-3c447fcdba4a"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Kevin Clark (3B, Athletics) 2041 ATH: 18 G, 64 AB, 19 H, 3 HR, 12 RBI, 1 BB, 3 SO, 6 SB, AVG .297, OBP .313, SLG .547",
+      "src": "output/player_truesource_mirror.json Kevin Clark",
+      "id": "F-4c21d7a792c7"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Kevin Clark 2041 rates (64 AB): one HR every 21.3 AB, one SO every 21.3 AB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Kevin Clark",
+      "id": "F-fa9d0fbc7b1d"
+    },
+    {
+      "t": "FACT",
+      "text": "This cycle (feed notes, off-season): However similar to Martin Richards being traded away to allow the everyday bats for Ernesto Quintero the same script may be the one to read for Kevin Clark.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C111",
+      "id": "F-6e312c51d277"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2035 ATH: 130 G, 469 AB, 123 H, 12 HR, 50 RBI, 69 BB, 91 SO, 3 SB, AVG .260, OBP .361, SLG .409",
+      "src": "tool:dossier_read:Martin Richards",
+      "id": "F-b083e858f65f"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2034 ATH: 106 G, 500 AB, 137 H, 10 HR, 61 RBI, 61 BB, 89 SO, 2 SB, AVG .243, OBP .342, SLG .368",
+      "src": "tool:dossier_read:Martin Richards",
+      "id": "F-752e31051892"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2033 ATH: 16 G, 57 AB, 12 H, 1 HR, 5 RBI, 14 BB, 2 SO, 0 SB, AVG .211, OBP .281, SLG .263",
+      "src": "tool:dossier_read:Martin Richards",
+      "id": "F-45e3eba3a482"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2035 rates (469 AB): one HR every 39.1 AB, one SO every 5.2 AB (worked from the season line)",
+      "src": "tool:dossier_read:Martin Richards",
+      "id": "F-c57875b6777e"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2034 rates (500 AB): one HR every 50.0 AB, one SO every 5.6 AB (worked from the season line)",
+      "src": "tool:dossier_read:Martin Richards",
+      "id": "F-79d60db4e009"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards 2033 rates (57 AB): one HR every 57.0 AB, one SO every 28.5 AB (worked from the season line)",
+      "src": "tool:dossier_read:Martin Richards",
+      "id": "F-951ed8105ca6"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "marbury-data-desk-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put one audit-grade claim in the paper: a single player's Packet-backed season lines, the rates the Packet has already worked from them, and the peer band, with the sample stated. The memo is the proof. One falsifiable claim the numbers carry is success; a quote, a scene, fan heat, elegy, or a number the Packet does not hold is not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "dry third-person data-desk memo, source-forward",
+      "targetWords": "evidence-bounded; 350-600",
+      "opening": "the one Packet-backed season line or rate that carries the claim",
+      "closing": "the number next season that would disprove the claim"
+    },
+    "authorizedTexture": [
+      "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+      "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+      "a blank or thin sample named as blank or thin rather than filled in"
+    ],
+    "textureConditions": [
+      "every named player, team, position, season, and source must come from the Packet",
+      "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+      "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+      "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+    ],
+    "canonBlockers": [
+      "a statistic or rate attributed to the wrong player or the wrong season, or two players' lines merged into one subject",
+      "a rate, split, projection, or advanced metric the Packet does not supply",
+      "an invented award, contract, salary, injury, roster move, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "a one-season or thin-sample line presented as settled identity"
+    ]
+  },
+  "manifest": {
+    "id": "AM-5598afd32540",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-a43c5d888b36",
+        "t": "FACT",
+        "text": "Current cycle: C111",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-2f3bf3a4a49f",
+        "t": "FACT",
+        "text": "Martin Richards — 9 seasons on the dossier, 2041 the latest | hitter density memo, multi-year",
+        "src": "output/player_truesource_mirror.json Martin Richards @C111"
+      },
+      {
+        "id": "F-94c1ee5c5556",
+        "t": "FACT",
+        "text": "Martin Richards's 2041 line against 8 earlier seasons and 1 peer.",
+        "src": "output/player_truesource_mirror.json Martin Richards @C111"
+      },
+      {
+        "id": "F-9cb37fcab4cf",
+        "t": "FACT",
+        "text": "Martin Richards — 3B, Athletics; 9 seasons on the dossier",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-6df93a21973b",
+        "t": "FACT",
+        "text": "Martin Richards 2041 ATH: 120 G, 463 AB, 140 H, 27 HR, 65 RBI, 35 BB, 70 SO, 8 SB, AVG .302, OBP .355, SLG .551",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-5e85cc07e16b",
+        "t": "FACT",
+        "text": "Martin Richards 2040 ATH: 129 G, 499 AB, 148 H, 26 HR, 76 RBI, 62 BB, 74 SO, 8 SB, AVG .297, OBP .377, SLG .523",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-05d55ddf0d90",
+        "t": "FACT",
+        "text": "Martin Richards 2039 ATH: 90 G, 348 AB, 105 H, 25 HR, 54 RBI, 42 BB, 44 SO, 6 SB, AVG .302, OBP .379, SLG .514",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-c8359854b6cc",
+        "t": "FACT",
+        "text": "Martin Richards 2038 ATH: 130 G, 508 AB, 147 H, 30 HR, 72 RBI, 58 BB, 100 SO, 9 SB, AVG .289, OBP .380, SLG .498",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-784ed6de6d09",
+        "t": "FACT",
+        "text": "Martin Richards 2037 ATH: 128 G, 503 AB, 122 H, 18 HR, 55 RBI, 70 BB, 97 SO, 14 SB, AVG .272, OBP .364, SLG .437",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-907e5422792d",
+        "t": "FACT",
+        "text": "Martin Richards 2036 ATH: 150 G, 604 AB, 188 H, 30 HR, 84 RBI, 72 BB, 113 SO, 10 SB, AVG .311, OBP .390, SLG .523",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-38928b580bc5",
+        "t": "FACT",
+        "text": "Martin Richards 2041 rates (463 AB): one HR every 17.1 AB, one SO every 6.6 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-8b79505141e0",
+        "t": "FACT",
+        "text": "Martin Richards 2040 rates (499 AB): one HR every 19.2 AB, one SO every 6.7 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-bfa3f911fa1c",
+        "t": "FACT",
+        "text": "Martin Richards 2039 rates (348 AB): one HR every 13.9 AB, one SO every 7.9 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-24a65e02c0f3",
+        "t": "FACT",
+        "text": "Martin Richards 2038 rates (508 AB): one HR every 16.9 AB, one SO every 5.1 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-3f7a0b5c7034",
+        "t": "FACT",
+        "text": "Martin Richards 2037 rates (503 AB): one HR every 27.9 AB, one SO every 5.2 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-3c447fcdba4a",
+        "t": "FACT",
+        "text": "Martin Richards 2036 rates (604 AB): one HR every 20.1 AB, one SO every 5.3 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Martin Richards"
+      },
+      {
+        "id": "F-4c21d7a792c7",
+        "t": "FACT",
+        "text": "Peer — Kevin Clark (3B, Athletics) 2041 ATH: 18 G, 64 AB, 19 H, 3 HR, 12 RBI, 1 BB, 3 SO, 6 SB, AVG .297, OBP .313, SLG .547",
+        "src": "output/player_truesource_mirror.json Kevin Clark"
+      },
+      {
+        "id": "F-fa9d0fbc7b1d",
+        "t": "FACT",
+        "text": "Peer — Kevin Clark 2041 rates (64 AB): one HR every 21.3 AB, one SO every 21.3 AB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Kevin Clark"
+      },
+      {
+        "id": "F-6e312c51d277",
+        "t": "FACT",
+        "text": "This cycle (feed notes, off-season): However similar to Martin Richards being traded away to allow the everyday bats for Ernesto Quintero the same script may be the one to read for Kevin Clark.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C111"
+      },
+      {
+        "id": "F-b083e858f65f",
+        "t": "FACT",
+        "text": "Martin Richards 2035 ATH: 130 G, 469 AB, 123 H, 12 HR, 50 RBI, 69 BB, 91 SO, 3 SB, AVG .260, OBP .361, SLG .409",
+        "src": "tool:dossier_read:Martin Richards"
+      },
+      {
+        "id": "F-752e31051892",
+        "t": "FACT",
+        "text": "Martin Richards 2034 ATH: 106 G, 500 AB, 137 H, 10 HR, 61 RBI, 61 BB, 89 SO, 2 SB, AVG .243, OBP .342, SLG .368",
+        "src": "tool:dossier_read:Martin Richards"
+      },
+      {
+        "id": "F-45e3eba3a482",
+        "t": "FACT",
+        "text": "Martin Richards 2033 ATH: 16 G, 57 AB, 12 H, 1 HR, 5 RBI, 14 BB, 2 SO, 0 SB, AVG .211, OBP .281, SLG .263",
+        "src": "tool:dossier_read:Martin Richards"
+      },
+      {
+        "id": "F-c57875b6777e",
+        "t": "FACT",
+        "text": "Martin Richards 2035 rates (469 AB): one HR every 39.1 AB, one SO every 5.2 AB (worked from the season line)",
+        "src": "tool:dossier_read:Martin Richards"
+      },
+      {
+        "id": "F-79d60db4e009",
+        "t": "FACT",
+        "text": "Martin Richards 2034 rates (500 AB): one HR every 50.0 AB, one SO every 5.6 AB (worked from the season line)",
+        "src": "tool:dossier_read:Martin Richards"
+      },
+      {
+        "id": "F-951ed8105ca6",
+        "t": "FACT",
+        "text": "Martin Richards 2033 rates (57 AB): one HR every 57.0 AB, one SO every 28.5 AB (worked from the season line)",
+        "src": "tool:dossier_read:Martin Richards"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Elliot Marbury",
+        "text": "Whether Richards changed his approach at the plate starting in 2039 — possibly related to the reduced games that season — is not in the dossier and would need a conversation with someone who watched him daily.",
+        "publishable": false
+      },
+      {
+        "from": "Elliot Marbury",
+        "text": "Whether the organization's preference for contact is a factor in how Richards is evaluated this offseason is suggested by the Kevin Clark comparison but not confirmed by any team statement.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+      "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+      "a blank or thin sample named as blank or thin rather than filled in"
+    ],
+    "textureConditions": [
+      "every named player, team, position, season, and source must come from the Packet",
+      "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+      "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+      "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+    ],
+    "forbiddenClaimClasses": [
+      "a statistic or rate attributed to the wrong player or the wrong season, or two players' lines merged into one subject",
+      "a rate, split, projection, or advanced metric the Packet does not supply",
+      "an invented award, contract, salary, injury, roster move, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "a one-season or thin-sample line presented as settled identity"
+    ],
+    "toolFacts": [
+      "F-b083e858f65f",
+      "F-752e31051892",
+      "F-45e3eba3a482",
+      "F-c57875b6777e",
+      "F-79d60db4e009",
+      "F-951ed8105ca6"
+    ]
+  }
+}

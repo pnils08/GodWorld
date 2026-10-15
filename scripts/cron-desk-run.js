@@ -1401,10 +1401,11 @@ const VERBATIM_SRC = /Who Lived It|LifeHistory|Lived_Events/i;
 function draftWordCount(text) {
   return (articleContamination.proseOnly(text).match(/[A-Za-z0-9][A-Za-z0-9'’-]*/g) || []).length;
 }
-function thinCheck(text, targetWords) {
+function thinCheck(text, targetWords, floor) {
   const words = draftWordCount(text);
-  return { words, thin: words < THIN_WORDS,
-    reason: words < THIN_WORDS ? 'thin: ' + words + ' words (seat target ' + (targetWords || 'unset') + ')' : null };
+  const min = Number.isInteger(floor) && floor > 0 ? floor : THIN_WORDS; // package thinFloor, else 150
+  return { words, floor: min, thin: words < min,
+    reason: words < min ? 'thin: ' + words + ' words (floor ' + min + ', seat target ' + (targetWords || 'unset') + ')' : null };
 }
 // Reuses validateEdition's ENGINE_TERMS through its exported checker — one list, not a copy.
 function engineTermCheck(text) {
@@ -2109,6 +2110,11 @@ async function runAngle(assign) {
   }
   // Task 2.5.3 §2 — canon research through the 2.5.5 tool loop, validated
   // deterministically. Non-fatal: a research failure never kills the wake.
+  // The persona gate is deliberate (pipeline.75 decision, engine-sheet 2026-10-14): the researcher
+  // runs a live canon_search tool loop, and every scheduled fan-out seat is a persona seat whose
+  // Packet is the evidence boundary (ADR-0017, zero live research tools at W3). It runs on the
+  // non-persona desk wake — benchmarks and evaluations (business C110, 2026-10-06/07). Putting it
+  // on persona seats rides the builder's tools decision (pipeline.75 A/B), not a code call.
   let canonResearch = null;
   if (!persona && story) {
     try { canonResearch = await runCanonResearch(cycle, desk, story, asker, stem); }
@@ -2905,7 +2911,7 @@ async function runWrite(assign) {
   // verbatim slice text is a WARN in the record only.
   const targetWords = writePacket && writePacket.reviewProfile && writePacket.reviewProfile.articleContract &&
     writePacket.reviewProfile.articleContract.targetWords || null;
-  const thin = thinCheck(draftText, targetWords);
+  const thin = thinCheck(draftText, targetWords, ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.thinFloor);
   const engineTerms = engineTermCheck(draftText);
   const verbatim = PACKET_ACTIVE ? verbatimSliceRuns(draftText, writePacket) : [];
   const checkFlags = [].concat(thin.thin ? [thin.reason] : [],

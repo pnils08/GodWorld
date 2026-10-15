@@ -294,7 +294,12 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
   const thinDraft = '# Head\n\n' + body(40) + '\n\n## INTAKE\n' + body(300) + '\n';
   const t = cdr.thinCheck(thinDraft, '400-700');
   assert.equal(t.thin, true);
-  assert.match(t.reason, /^thin: \d+ words \(seat target 400-700\)$/);
+  assert.match(t.reason, /^thin: \d+ words \(floor 150, seat target 400-700\)$/);
+  // package thinFloor (Tamsin 40, Ines 80) replaces the 150 default; invalid floors fall back
+  assert.equal(cdr.thinCheck('# Head\n\n' + body(45), null, 40).thin, false);
+  assert.equal(cdr.thinCheck('# Head\n\n' + body(45), null, 80).thin, true);
+  assert.equal(cdr.thinCheck('# Head\n\n' + body(45), null, undefined).floor, 150);
+  assert.equal(cdr.thinCheck('# Head\n\n' + body(45), null, 'x').floor, 150);
   assert.ok(t.words < 50, 'INTAKE words not counted: ' + t.words);
   assert.equal(cdr.thinCheck('# Head\n\n' + body(200), null).thin, false);
   // engine terms: reuses validateEdition's list

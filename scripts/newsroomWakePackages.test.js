@@ -339,6 +339,13 @@ assert.ok(gate.skipped.every(row => row.reason === 'no-active-wake-package'));
 
 assert.throws(() => packagesApi.routeFor(jax, 'publish'), /unknown wake stage/);
 assert.throws(() => packagesApi.validatePackage('bad', { active: true }), /invalid wake package/);
+// pipeline.75 — thinFloor optional; when present, a positive integer
+{
+  const ok = JSON.parse(JSON.stringify(jax));
+  assert.doesNotThrow(() => packagesApi.validatePackage(ok.persona, Object.assign({}, ok, { thinFloor: 40 })));
+  assert.throws(() => packagesApi.validatePackage(ok.persona, Object.assign({}, ok, { thinFloor: 0 })), /thinFloor/);
+  assert.throws(() => packagesApi.validatePackage(ok.persona, Object.assign({}, ok, { thinFloor: '40' })), /thinFloor/);
+}
 
 const { applyWakePackageGate, activeRotaCandidates, boundDailyAssignments,
   DAILY_QUOTAS } = require('./newsroom-fanout');

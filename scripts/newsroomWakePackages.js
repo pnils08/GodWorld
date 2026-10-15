@@ -30,6 +30,11 @@ function validatePackage(key, value) {
       errors.push('models.' + stage + ' requires an explicit OpenRouter model');
     }
   }
+  // pipeline.75 — a seat whose form is short by design (a Lives notice, a Voices pair) sets its own
+  // thin floor; absent, cron-desk-run's 150-word default applies.
+  if (value && value.thinFloor !== undefined && !(Number.isInteger(value.thinFloor) && value.thinFloor > 0)) {
+    errors.push('thinFloor must be a positive integer');
+  }
   if (value && value.sourcing !== undefined && !SOURCING.includes(value.sourcing)) {
     errors.push('sourcing must be one of ' + SOURCING.join(', '));
   }

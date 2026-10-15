@@ -371,6 +371,17 @@ console.log('═══ engine.290 move 6: transit commute lines from the ledger'
   assert('no disruption, no chaos train: no commute line ever', quiet === 0, String(quiet));
   assert('a retiree never draws a commute line', retired === 0, String(retired));
   const genSrcNow = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generateCitizensEvents.js'), 'utf8');
+  // a malformed sheet row under the commute PoolKey (no Conditions) still draws only behind the gate
+  const loose = [LEDGER_HDR, ['line', 'occupation.transit', '', 'stood under the departures board reading the same delay twice', '50', '', 'source:occupation,transit:disruption', 'citizen', 'yes']];
+  let looseQuiet = 0;
+  for (let seed = 1; seed <= 4; seed++) {
+    const rows = []; for (let i = 0; i < 60; i++) rows.push(makeRow('POP-L' + seed + '-' + i, { hood: 'Temescal' }));
+    const ctx = makeCtx(rows, mulberry32(seed), loose);
+    ctx.summary.transitState = { disruptionOngoing: false, affectedHoods: [] };
+    genLS(ctx);
+    looseQuiet += emittedLines(ctx).filter(l => l.indexOf('reading the same delay twice') >= 0).length;
+  }
+  assert('a commute-PoolKey row with no Conditions never draws when the gate is shut', looseQuiet === 0, String(looseQuiet));
   assert('the inline commute pool is gone from the generator', genSrcNow.indexOf('pickOne([\n        "lost an hour of the morning') < 0 && genSrcNow.indexOf('"waited out the delays with everyone else on the platform"') < 0);
   if (hadLS === undefined) delete global.deriveLifeState_; else global.deriveLifeState_ = hadLS;
 }

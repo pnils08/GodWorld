@@ -2971,6 +2971,10 @@ function generateCitizensEvents_(ctx) {
           // long tail gets the probability mass instead. Soft: hardcoded
           // pools unaffected, cap generous vs ~700 active citizens.
           if ((eclTelemetry.draws[eclRowKey_(clk, clEntry.text)] || 0) >= 40) continue;
+          // engine.290 (codex 2026-10-15 §2): a commute row draws only behind the gate,
+          // whatever its own Conditions cell says — the flag already means "working, and
+          // this citizen drew a commute moment this cycle".
+          if (clk === TRANSIT_COMMUTE_POOL && !transitDisruptedHit) continue;
           if (!evalContentConditions_(clEntry.conditions, condScopes)) continue;
           if (!contentSlotsFillable_(clEntry, contentLedger, condScopes)) continue;
           var clTags = clEntry.grain ? mergeTags(clEntry.tags, ["grain:" + clEntry.grain]) : clEntry.tags;

@@ -21,6 +21,9 @@ const APPLY = process.argv.includes('--apply');
 // --match <regex>: append only the missing rows whose Text matches. Rows authored
 // but deliberately undeployed (the 4a wager lines, S407) stay out of a targeted apply.
 const MATCH = (function () { const i = process.argv.indexOf('--match'); return i >= 0 ? new RegExp(String(process.argv[i + 1] || ''), 'i') : null; })();
+// --poolkey <key>: append only the missing rows of one PoolKey (engine.290: the commute rows
+// occupation.transit go live while the crew rows occupation.bartCrew await the builder's titles).
+const POOLKEY = (function () { const i = process.argv.indexOf('--poolkey'); return i >= 0 ? String(process.argv[i + 1] || '') : null; })();
 
 function norm(t) {
   return String(t || '').replace(/\s+/g, ' ').trim().toLowerCase();
@@ -38,7 +41,8 @@ async function main() {
   const seen = {};
   data.slice(1).forEach(function (r) { seen[norm(r[iText])] = true; });
 
-  const missing = P.ROWS.filter(function (row) { return !seen[norm(row.Text)] && (!MATCH || MATCH.test(row.Text)); });
+  if (POOLKEY && !P.ROWS.some(function (row) { return row.PoolKey === POOLKEY; })) throw new Error('--poolkey ' + POOLKEY + ' names no authored row');
+  const missing = P.ROWS.filter(function (row) { return !seen[norm(row.Text)] && (!MATCH || MATCH.test(row.Text)) && (!POOLKEY || row.PoolKey === POOLKEY); });
   console.log('live rows=' + (data.length - 1) + ' authored=' + P.ROWS.length + ' missing=' + missing.length);
   missing.forEach(function (r) {
     console.log('  NEW [' + r.PoolKey + '] ' + r.Conditions + ' :: ' + r.Text);

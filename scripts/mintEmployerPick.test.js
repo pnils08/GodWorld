@@ -134,10 +134,11 @@ check('6.7 Trades reads as its field through the alias', E.roleFieldOf_('Plumber
 
 console.log('\n6b. engine.290 — the BART crew titles land at BART:');
 const noBart = (id) => id !== 'BIZ-00014' && room(id);
-['Train Conductor', 'Train Operator', 'Rail Dispatcher', 'Transit Dispatcher', 'Track Maintenance Technician', 'BART Train Conductor'].forEach(function (role) {
+['Train Conductor', 'Train Operator', 'Rail Dispatcher', 'Track Maintenance Technician', 'BART Train Conductor'].forEach(function (role) {
   const p = pick(role, 'Fruitvale');
   check('6b ' + role + ' with room → BIZ-00014', p.bizId === 'BIZ-00014', JSON.stringify(p));
 });
+check('6b.1 a generic Transit Dispatcher is not claimed for BART (buses dispatch too)', E.mintNamedEmployer_('Transit Dispatcher') !== 'BIZ-00014');
 check('6b.2 the crew rules sit ahead of Transit Hub (first substring wins)', E.MINT_KEYWORD_RULES.findIndex(r => r[0] === 'Train Conductor') < E.MINT_KEYWORD_RULES.findIndex(r => r[0] === 'Transit Hub'));
 const full = pick('Train Conductor', 'Fruitvale', 'ENGINE', 'seed-1', pool, noBart);
 check('6b.3 no room at BART → the field pick, exactly as any full employer', full.bizId !== 'BIZ-00014' && (full.bizId || full.sentinel), JSON.stringify(full));

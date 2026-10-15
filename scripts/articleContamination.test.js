@@ -114,6 +114,21 @@ const texture = scan([
 ].join('\n'), { desk: 'culture' });
 assert.equal(texture.fail, false, 'anonymous texture must pass: ' + JSON.stringify(texture.findings));
 
+// pipeline.77 — an office-holder's quote the Packet carries with provenance is not an invented
+// voice (builder 2026-10-01: media may quote civic offices); without provenance it still is.
+{
+  const prose = '# TEST-ONLY\n\n"TEST-ONLY sentence about the fund," Marcus Webb said on the record.\n';
+  const blocked = scan(prose, { desk: 'civic' }).findings.filter(f => f.check === 'invented-voice');
+  assert.equal(blocked.length, 1, 'an unsourced office quote is blocked');
+  const w3 = { manifest: { approvedQuotes: [{ speakerId: 'POP-00790', text: 'TEST-ONLY' }] } };
+  assert.equal(scan(prose, { desk: 'civic', packet: w3 }).findings.filter(f => f.check === 'invented-voice').length, 0);
+  const w2 = { quotes: [{ pop: 'POP-00790', quote: 'TEST-ONLY', sourceKind: 'office-record' }] };
+  assert.equal(scan(prose, { desk: 'civic', packet: w2 }).findings.filter(f => f.check === 'invented-voice').length, 0);
+  const other = { manifest: { approvedQuotes: [{ speakerId: 'POP-00034', text: 'TEST-ONLY' }] } };
+  assert.equal(scan(prose, { desk: 'civic', packet: other }).findings.filter(f => f.check === 'invented-voice').length, 1,
+    'another speaker\'s approval does not cover this one');
+}
+
 console.log('articleContamination.test.js PASS');
 console.log('  vacuum findings:', v.findings.length);
 console.log('  caldera findings:', c.findings.length);

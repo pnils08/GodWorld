@@ -124,8 +124,24 @@ function namedAttributions(prose) {
   return [...names];
 }
 
-function scanVoices(prose, desk) {
+// Speakers whose quotes the Packet carries with provenance: the W3 manifest's approved quotes,
+// W3 exposure sources, or the W2 packet's quotes (interview or office record).
+function approvedSpeakers(packet) {
+  const pops = new Set();
+  const add = v => { if (/^POP-\d+$/i.test(String(v || ''))) pops.add(String(v).toUpperCase()); };
+  for (const q of (packet && packet.manifest && packet.manifest.approvedQuotes) || []) add(q && q.speakerId);
+  for (const q of (packet && packet.exposure && packet.exposure.sources) || []) add(q && q.pop);
+  for (const q of (packet && packet.quotes) || []) if (q && String(q.quote || '').trim()) add(q.pop);
+  return pops;
+}
+
+function scanVoices(prose, desk, packet) {
   const hits = [];
+  // Builder 2026-10-01 (S515): media may quote civic offices. An office-holder's quote the
+  // Packet carries (Carmen C111: Marcus Webb's office-record statement) is sourced speech, not an
+  // invented voice. Before this the wall turned on phrasing — "Webb said" tripped it while
+  // "Okoro put the stakes" and "Santana announced" in the same piece did not.
+  const sourced = approvedSpeakers(packet);
   for (const name of namedAttributions(prose)) {
     if (/^The |^A |Bartender|Mayor|Tribune/i.test(name)) continue;
     // Resolve via snapshot through quoteIneligibility's ledger loader.
@@ -139,7 +155,7 @@ function scanVoices(prose, desk) {
       desk || inferDesk(prose),
       { kind: desk === 'civic' ? 'anomaly' : 'article', angle: prose.slice(0, 120) }
     );
-    if (block) {
+    if (block && !sourced.has(String(row.POPID).toUpperCase())) {
       hits.push({
         check: 'invented-voice',
         issue: name + ' (' + row.POPID + ') cannot be quoted: ' + block,
@@ -205,7 +221,7 @@ function scan(text, opts) {
   findings.push(...scanPatterns(prose, BLIGHT, 'blight-import', blob));
   findings.push(...scanPatterns(prose, REPAIR_CHROME, 'repair-chrome'));
   findings.push(...scanUnsuppliedAccess(prose, packet));
-  findings.push(...scanVoices(prose, desk));
+  findings.push(...scanVoices(prose, desk, packet));
   const seen = new Set();
   const uniq = [];
   for (const f of findings) {

@@ -589,6 +589,61 @@ function renderSourceBrief(packet) {
   return lines.filter(line => line !== null).join('\n');
 }
 
+// pipeline.76 — the one package with writer tools (builder 2026-10-14: "take one journalist
+// and give them tools"). A tool-result line the Article uses joins the claim manifest as a FACT
+// with source tool:<name>:<args> BEFORE the audit and Rhea run, so a tool-fetched number is
+// verified, not flagged. The evidence boundary moves by exactly the lines used; nothing a tool
+// returned and the Article left alone is approved.
+const TOOL_RUN_WORDS = 5;
+function wordsOfText(text) {
+  return String(text || '').toLowerCase().replace(/[’']/g, '').match(/[a-z0-9.]+/g) || [];
+}
+function selectUsedToolLines(draftText, candidates, packet) {
+  const body = String(draftText || '').split(/^##\s+INTAKE\s*$/im)[0];
+  const allowed = new Set(numericTokens([
+    ...((packet && packet.manifest && packet.manifest.approvedFacts) || []).map(r => r.text),
+    ...((packet && packet.manifest && packet.manifest.approvedQuotes) || []).map(r => r.text),
+  ].join('\n')).map(v => v.toLowerCase()));
+  const bodyNums = new Set(numericTokens(body).map(v => v.toLowerCase()));
+  const bodyWords = ' ' + wordsOfText(body).join(' ') + ' ';
+  const out = [];
+  const seen = new Set();
+  for (const c of candidates || []) {
+    const text = clean(c && c.text, 500);
+    if (!text || seen.has(text)) continue;
+    const newNum = numericTokens(text).map(v => v.toLowerCase()).some(v => bodyNums.has(v) && !allowed.has(v));
+    let run = false;
+    const w = wordsOfText(text);
+    for (let i = 0; !run && i + TOOL_RUN_WORDS <= w.length; i++) {
+      run = bodyWords.includes(' ' + w.slice(i, i + TOOL_RUN_WORDS).join(' ') + ' ');
+    }
+    if (newNum || run) { seen.add(text); out.push({ text, src: clean(c.src, 300) }); }
+  }
+  return out;
+}
+function appendToolFacts(packet, lines) {
+  const next = clone(packet);
+  const have = new Set((next.known || []).map(c => c.id));
+  const added = [];
+  for (const line of lines || []) {
+    // INTAKE rides into the paper: no POPID in a fact's text (citizen_lookup carries one).
+    const text = clean(String(line.text || '').replace(/\s*\(POP-\d+\)/ig, '').replace(/\bPOP-\d+\b/ig, ''), 500);
+    const src = clean(line.src, 300);
+    if (!text || !/^tool:[a-z_]+:/.test(src)) throw new Error('tool fact requires text and a tool:<name>:<args> source');
+    const claim = { t: 'FACT', text, src };
+    claim.id = claimId(claim);
+    if (have.has(claim.id)) continue;
+    have.add(claim.id);
+    next.known.push(claim);
+    next.manifest.approvedFacts.push({ id: claim.id, t: claim.t, text: claim.text, src: claim.src });
+    added.push(claim.id);
+  }
+  next.manifest.id = manifestId(next);
+  next.manifest.toolFacts = (next.manifest.toolFacts || []).concat(added);
+  assertBase(next, 'W3');
+  return { packet: next, added };
+}
+
 function auditArticle(draftText, packet) {
   assertBase(packet, 'W3');
   const bodyText = String(draftText || '').split(/^##\s+INTAKE\s*$/im)[0];
@@ -700,6 +755,7 @@ module.exports = {
   validateReportOutput,
   buildWritePacket,
   auditArticle,
+  selectUsedToolLines, appendToolFacts, numericTokens, // pipeline.76
   renderRecordsBrief,
   renderSourceBrief,
   prompt,

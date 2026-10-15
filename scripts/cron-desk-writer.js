@@ -229,6 +229,10 @@ const PACKET_ONLY = process.argv.includes('--packet-only');
 const TOOLS_AB = process.argv.includes('--tools-ab');
 // --tools-forced: the first turn must call a tool (tool_choice 'required') — the "reminder" arm.
 const TOOLS_FORCED = TOOLS_AB && process.argv.includes('--tools-forced');
+// pipeline.76 — package writer tools (builder 2026-10-14: "take one journalist and give them
+// tools"). cron-desk-run passes --writer-tools N only for a package with writerTools; every other
+// typed Packet run stays at 0. Tool lines the Article uses join the claim manifest before audit.
+const WRITER_TOOLS = Math.max(0, Math.min(8, parseInt(arg('--writer-tools', '0'), 10) || 0));
 
 // Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).
 // Live OpenRouter check 2026-08-10 (prompt/completion per 1M).
@@ -594,6 +598,10 @@ const OPENROUTER_TOOLS = [
   { type: 'function', function: { name: 'citizen_lookup', description: 'Exact citizen lookup in the simulation ledger by name. Returns the canonical profile (role, neighborhood, birth year) — these facts are immutable.', parameters: { type: 'object', properties: { name: { type: 'string', description: 'full name, e.g. "Lucia Polito"' } }, required: ['name'] } } },
   { type: 'function', function: { name: 'sheet_read', description: 'Read a bounded slice of one allowlisted live city sheet: Initiative_Tracker, Neighborhood_Map, Oakland_Sports_Feed, Civic_Office_Ledger.', parameters: { type: 'object', properties: { tab: { type: 'string' } }, required: ['tab'] } } }
 ];
+// pipeline.76 — the stats surface: a dossier player's season lines and the rates worked in code,
+// the same lines and arithmetic as the data-desk slice (buildMarburySlice), so the memo still
+// does no arithmetic of its own.
+const DOSSIER_TOOL = { type: 'function', function: { name: 'dossier_read', description: 'Read one player\'s dossier: every season line on file plus the rates already worked from it (K/9, BB/9, K/BB for a pitcher; AB per HR, AB per SO for a hitter). Optional season narrows to one year. Use it for another season or another peer.', parameters: { type: 'object', properties: { player: { type: 'string', description: 'player name, e.g. "Arturo Ramos"' }, season: { type: 'string', description: 'optional four-digit year' } }, required: ['player'] } } };
 const SHEET_READ_ALLOWLIST = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed', 'Civic_Office_Ledger'];
 // memory tools appear in the loop only when the run knows whose page it is
 // (--byline-popid from cron-desk-run, or the persona's own POPID).
@@ -601,6 +609,31 @@ const MEMORY_TOOLS = [
   { type: 'function', function: { name: 'memory_recall', description: 'Read your OWN reporter memory (your citizen page): your recent reflections and working notes from past wakes. Optional query narrows by topic.', parameters: { type: 'object', properties: { query: { type: 'string', description: 'optional topic keywords' } }, required: [] } } },
   { type: 'function', function: { name: 'memory_note', description: 'Write ONE short working note to your OWN reporter memory (your citizen page) — a thread you want to pick up next wake, a source to revisit. Not the article.', parameters: { type: 'object', properties: { note: { type: 'string' } }, required: ['note'] } } }
 ];
+
+// Returns { text, lines:[{text, src}] } — lines are the fact candidates (pipeline.76).
+function toolDossierRead(input) {
+  const want = String(input && input.player || '').trim().toLowerCase();
+  const season = String(input && input.season || '').trim();
+  if (!want) return { text: 'dossier_read needs a player name.', lines: [] };
+  try {
+    const M = require('./buildMarburySlice');
+    const mirror = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'player_truesource_mirror.json'), 'utf8'));
+    const cards = Object.values(mirror).map(M.parseCard).filter(Boolean);
+    const card = cards.find(c => c.name.toLowerCase() === want) ||
+      cards.find(c => c.name.toLowerCase().includes(want) || want.includes(c.name.toLowerCase()));
+    if (!card) return { text: 'No dossier for "' + input.player + '". Dossiers on file: ' + cards.map(c => c.name).join(', '), lines: [] };
+    const src = 'tool:dossier_read:' + card.name + (season ? ':' + season : '');
+    const seasons = season ? card.seasons.filter(x => x.year === season) : card.seasons;
+    if (!seasons.length) return { text: card.name + ' has no ' + season + ' season on the dossier. Seasons: ' + card.seasons.map(x => x.year).join(', '), lines: [] };
+    const lines = [{ text: card.name + ' — ' + [card.position, card.team].filter(Boolean).join(', ') + '; ' + card.seasons.length + ' season' + (card.seasons.length === 1 ? '' : 's') + ' on the dossier', src }];
+    for (const x of seasons) lines.push({ text: card.name + ' ' + M.seasonLine(card, x), src });
+    for (const x of seasons) {
+      const r = M.rateLine(card, x);
+      if (r) lines.push({ text: card.name + ' ' + r + ' (worked from the season line)', src });
+    }
+    return { text: lines.map(l => l.text).join('\n'), lines };
+  } catch (e) { return { text: '(dossier read failed: ' + e.message + ')', lines: [] }; }
+}
 
 function toolCitizenLookup(input) {
   try {
@@ -650,6 +683,7 @@ async function toolMemoryNote(popId, input, cycle) {
 }
 
 async function execOpenRouterTool(name, input, memCtx) {
+  if (name === 'dossier_read') return toolDossierRead(input);
   if (name === 'memory_note' && memCtx && memCtx.dryNote) return 'noted (test run — not saved): ' + String(input && input.note || '').slice(0, 200);
   if (name === 'canon_search') return toolSearchWorld({ query: input.query });
   if (name === 'citizen_lookup') return toolCitizenLookup(input);
@@ -671,7 +705,7 @@ async function openRouterToolLoop(opts) {
   // truthiness here: `0 || 6` silently re-enables the live research tools.
   const maxCalls = resolveMaxToolCalls(opts.maxToolCalls);
   // memCtx {popId, cycle}: enables the reporter's own-page memory tool pair.
-  const toolset = opts.memCtx ? OPENROUTER_TOOLS.concat(MEMORY_TOOLS) : OPENROUTER_TOOLS;
+  const toolset = opts.toolset || (opts.memCtx ? OPENROUTER_TOOLS.concat(MEMORY_TOOLS) : OPENROUTER_TOOLS);
   const messages = [{ role: 'system', content: opts.system }, { role: 'user', content: opts.user }];
   const trace = [];
   let usageIn = 0, usageOut = 0, calls = 0;
@@ -690,12 +724,15 @@ async function openRouterToolLoop(opts) {
       for (const tc of msg.tool_calls) {
         let input = {};
         try { input = JSON.parse(tc.function.arguments || '{}'); } catch (_) {}
-        const result = calls < maxCalls
-          ? String(await execOpenRouterTool(tc.function.name, input, opts.memCtx))
+        const raw = calls < maxCalls
+          ? await execOpenRouterTool(tc.function.name, input, opts.memCtx)
           : 'tool budget exhausted — compose from what you have.';
+        // dossier_read returns { text, lines }; every other tool returns its text.
+        const result = String(raw && typeof raw === 'object' ? raw.text : raw);
         calls++;
         trace.push({ tool: tc.function.name, input, resultChars: result.length,
-          ...(opts.traceResults ? { resultHead: result.slice(0, 600) } : {}) });
+          ...(opts.traceResults ? { resultHead: result.slice(0, 600) } : {}),
+          ...(opts.keepResults ? { result, lines: raw && typeof raw === 'object' ? raw.lines : null } : {}) });
         messages.push({ role: 'tool', tool_call_id: tc.id, content: cap(result, 8000) });
       }
       continue;
@@ -763,6 +800,9 @@ async function main() {
     throw new Error(
       '--brief-requirement-file requires --artifact-tag and --state-file'
     );
+  }
+  if (WRITER_TOOLS && (!PACKET_ONLY || TOOLS_AB)) {
+    throw new Error('--writer-tools is a typed Packet package setting: it requires --packet-only and excludes --tools-ab');
   }
   if (TOOLS_AB && (!PACKET_ONLY || !/^tools-ab(-forced)?$/.test(ARTIFACT_TAG || ''))) {
     throw new Error('--tools-ab is the pipeline.75 test run: it requires --packet-only and --artifact-tag tools-ab or tools-ab-forced');
@@ -1026,6 +1066,16 @@ async function main() {
             '- memory_note: one short working note for your next wake — a source or thread to revisit, not the article.\n' +
             'A fact a tool returns may enter the Article; a name, number or quote no tool and no Packet line supports may not.\n' +
             '=== END TOOLS ==='
+          : '') +
+        (WRITER_TOOLS
+          ? '\n\n=== YOUR TOOLS — DEPTH, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
+            'The slice is your story and your claim. The tools are for depth: another season, a third peer, prior coverage, a current feed line. A tool call never changes the assignment.\n' +
+            '- dossier_read(player, season?): a player\'s season lines and the rates already worked from them — use it for another season or another peer at the position.\n' +
+            '- canon_search(query): prior Tribune coverage and city records — use it for what the paper has already said about this player.\n' +
+            '- citizen_lookup(name): one person\'s ledger profile — use it before you characterize anyone.\n' +
+            '- sheet_read(tab): a slice of a live city sheet (Oakland_Sports_Feed for this cycle\'s line).\n' +
+            'Every number you bring in from a tool is printed exactly as the tool returned it and named to its source in the memo ("his dossier", "the feed"). Do no arithmetic on it.\n' +
+            '=== END TOOLS ==='
           : '')
       : '');
 
@@ -1088,6 +1138,7 @@ async function main() {
       worldState;
 
   let usageIn = 0, usageOut = 0, turns = 0;
+  let toolTrace = null; // pipeline.76 — full tool results, for the used-line manifest amend
 
   if (PROVIDER === 'openrouter') {
     // Task 2.5.5 — explore-then-compose with the bounded read-only tool loop.
@@ -1106,18 +1157,23 @@ async function main() {
           : 'You are this journalist in GodWorld this cycle. The Packet facts are the physics — what the engine did. The Article is someone living under that physics. Open on a named interviewed person or a Packet-named place, in a body, doing something. Use every approved quote as spoken speech in a scene, not as a caption under a recap. Never announce the season or the temperature; if it is winter, show a Packet-backed thing that moved on a day like this. Never lead with a tracker phase, a feed label, a bullet list of approved facts, or the words supplied record / listed as / what remains to be learned. Do not import real-world Oakland winter tropes the Packet did not name. Do not invent names, numbers, quotes, or events. Texture may only dress Packet-named places and approved speakers. If you cannot write the life, stop. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
         : 'Use your tools FIRST where the state runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ') +
       (TOOLS_AB ? 'Use your tools where the Packet runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ' : '') +
+      (WRITER_TOOLS ? 'The slice is the story. Before you write, use your tools for depth the slice does not hold — another season, a third peer, what the paper said before — then compose, citing each tool-fetched number to its source. ' : '') +
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
     const abPop = TOOLS_AB && packetState && packetState.actor && /^POP-\d+$/.test(packetState.actor.id) ? packetState.actor.id : null;
     const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser,
-      maxToolCalls: PACKET_ONLY && !TOOLS_AB ? 0 : 6,
-      traceResults: TOOLS_AB,
+      maxToolCalls: PACKET_ONLY && !TOOLS_AB ? WRITER_TOOLS : 6,
+      traceResults: TOOLS_AB || WRITER_TOOLS > 0,
+      keepResults: WRITER_TOOLS > 0,
+      ...(WRITER_TOOLS ? { toolset: OPENROUTER_TOOLS.concat([DOSSIER_TOOL]) } : {}),
       forceFirstTool: TOOLS_FORCED,
       memCtx: BYLINE_POPID ? { popId: BYLINE_POPID, cycle }
         : (abPop ? { popId: abPop, cycle, dryNote: true } : null) });
     usageIn += r.usageIn; usageOut += r.usageOut; turns = 1 + r.trace.length;
     try {
       const traceName = (ARTIFACT_TAG ? DESK + '_c' + cycle + '_' + ARTIFACT_TAG : DESK + '_c' + cycle) + '.tooltrace.json';
-      fs.writeFileSync(path.join(COMPARE_DIR, traceName), JSON.stringify({ model: MODEL, calls: r.trace, ranAt: new Date().toISOString() }, null, 2));
+      fs.writeFileSync(path.join(COMPARE_DIR, traceName), JSON.stringify({ model: MODEL,
+        calls: r.trace.map(({ result, lines, ...rest }) => rest), ranAt: new Date().toISOString() }, null, 2));
+      toolTrace = r.trace;
       log.info('tool trace: ' + r.trace.length + ' call(s) → ' + traceName);
     } catch (e) { log.warn('tool trace write failed: ' + e.message); }
     // DeepSeek habitually wraps the whole article in a ``` fence despite "Output
@@ -1179,6 +1235,28 @@ async function main() {
     let packet;
     try { packet = JSON.parse(worldState); }
     catch (e) { throw new Error('typed Packet state is not JSON: ' + e.message); }
+    // pipeline.76 — tool lines the draft used join the claim manifest before INTAKE and the
+    // audit; the amended Packet is written back so Rhea reads the same manifest.
+    if (WRITER_TOOLS && toolTrace && toolTrace.length && packet.v === 'LEP/2') {
+      const lep2 = require('./livedExperiencePacketV2');
+      const candidates = [];
+      for (const call of toolTrace) {
+        if (Array.isArray(call.lines)) { candidates.push(...call.lines); continue; }
+        const argsTag = Object.values(call.input || {}).map(v => String(v).replace(/[:\s]+/g, ' ').trim()).join(' ').slice(0, 80);
+        for (const line of String(call.result || '').split('\n')) {
+          if (line.trim()) candidates.push({ text: line, src: 'tool:' + call.tool + ':' + argsTag });
+        }
+      }
+      const used = lep2.selectUsedToolLines(fs.readFileSync(savedFiles[0], 'utf8'), candidates, packet);
+      if (used.length) {
+        const amended = lep2.appendToolFacts(packet, used);
+        packet = amended.packet;
+        fs.writeFileSync(resolveInRepo(STATE_FILE), JSON.stringify(packet, null, 2));
+        log.info('tool facts → manifest: ' + amended.added.length + ' line(s) from ' + toolTrace.length + ' call(s) (' + packet.manifest.id + ')');
+      } else {
+        log.info('tool facts → manifest: none used (' + toolTrace.length + ' call(s))');
+      }
+    }
     let normalized = renderPacketIntake(fs.readFileSync(savedFiles[0], 'utf8'), packet);
     fs.writeFileSync(savedFiles[0], normalized);
     const parsed = require('../lib/articleIntake').parse(normalized);
@@ -1325,6 +1403,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  toolDossierRead, // pipeline.76
   normalizeArtifactTag,
   buildOutputSlug,
   formatStrictSourceHygiene,

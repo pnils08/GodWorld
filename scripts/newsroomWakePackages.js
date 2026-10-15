@@ -35,6 +35,11 @@ function validatePackage(key, value) {
   if (value && value.thinFloor !== undefined && !(Number.isInteger(value.thinFloor) && value.thinFloor > 0)) {
     errors.push('thinFloor must be a positive integer');
   }
+  // pipeline.76 — writer tools are a per-package exception to ADR-0017 (builder 2026-10-14).
+  if (value && value.writerTools !== undefined) {
+    const n = value.writerTools && value.writerTools.maxToolCalls;
+    if (!(Number.isInteger(n) && n >= 1 && n <= 8)) errors.push('writerTools.maxToolCalls must be an integer 1-8');
+  }
   if (value && value.sourcing !== undefined && !SOURCING.includes(value.sourcing)) {
     errors.push('sourcing must be one of ' + SOURCING.join(', '));
   }

@@ -108,3 +108,24 @@ console.log('cron-desk-writer artifact-tag tests: PASS');
   assert.ok(!stray.includes('STORYLINE:'), 'and it opens or closes nothing');
   assert.equal(require('../lib/articleIntake').parse(quoted).errors.length, 0);
 }
+
+// pipeline.76 — dossier_read returns the slice's own lines (same parser, same worked rates), sourced tool:dossier_read
+{
+  const fs = require('fs');
+  const path = require('path');
+  const mirrorPath = path.join(__dirname, '..', 'output', 'player_truesource_mirror.json');
+  if (fs.existsSync(mirrorPath)) {
+    const { toolDossierRead } = require('./cron-desk-writer');
+    const M = require('./buildMarburySlice');
+    const card = Object.values(JSON.parse(fs.readFileSync(mirrorPath, 'utf8'))).map(M.parseCard).find(Boolean);
+    const all = toolDossierRead({ player: card.name });
+    assert.ok(all.lines.length >= 1 + card.seasons.length);
+    assert.ok(all.lines.every(l => l.src === 'tool:dossier_read:' + card.name));
+    assert.ok(all.lines.some(l => l.text === card.name + ' ' + M.seasonLine(card, card.seasons[0])));
+    const one = toolDossierRead({ player: card.name, season: card.seasons[0].year });
+    assert.ok(one.lines.every(l => l.src === 'tool:dossier_read:' + card.name + ':' + card.seasons[0].year));
+    assert.match(toolDossierRead({ player: 'TEST-ONLY Nobody' }).text, /No dossier/);
+    assert.ok(!all.text.includes('POP-'), 'no POPID in tool output');
+  }
+}
+console.log('cron-desk-writer pipeline.76 dossier_read tests: PASS');

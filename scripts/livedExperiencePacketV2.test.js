@@ -768,4 +768,32 @@ assert.throws(() => interviewContract.validateInterviewOutput(liveQuote, residen
   /lived-context basis requires addressable story-linked evidence/,
   'lived-context basis is rejected when exposure.evidence is absent');
 
+// pipeline.76 — writer-tool lines the Article uses join the manifest; unused lines do not
+{
+  const fixture = path.join(__dirname, '..', 'output', 'cron-compare', 'sports_c110_elliot-marbury_packet-v2_anthropic-claude-sonnet-5.state.json');
+  if (fs.existsSync(fixture)) {
+    const pk = JSON.parse(fs.readFileSync(fixture, 'utf8'));
+    const cands = [
+      { text: 'TEST-ONLY Player 2037 TST: 30 G, 4321 AB, 913 HR', src: 'tool:dossier_read:TEST-ONLY Player' },
+      { text: 'TEST-ONLY Player 2036 TST: 12 G, 8765 AB, 1 HR', src: 'tool:dossier_read:TEST-ONLY Player' },
+      { text: 'TEST-ONLY Other (POP-00999) is a shortstop in Rockridge since forever ago', src: 'tool:citizen_lookup:TEST-ONLY Other' },
+    ];
+    const draft = 'That season he had 4321 AB and 913 HR. TEST-ONLY Other is a shortstop in Rockridge since forever.\n\n## INTAKE\nCLAIM: x | y\n';
+    const used = p.selectUsedToolLines(draft, cands, pk);
+    assert.deepStrictEqual(used.map(u => u.text.slice(0, 26)), ['TEST-ONLY Player 2037 TST:', 'TEST-ONLY Other (POP-00999']);
+    const before = p.auditArticle(draft, pk);
+    const numFindings = a => a.errors.concat(a.observations || []).filter(e => e.code === 'UNAPPROVED_NUMBER');
+    assert.ok(numFindings(before).length, 'tool numbers are unapproved before the amend (load-bearing: an observation)');
+    const { packet: amended, added } = p.appendToolFacts(pk, used);
+    assert.equal(added.length, 2);
+    assert.notEqual(amended.manifest.id, pk.manifest.id, 'manifest id moves with the facts');
+    assert.ok(!amended.manifest.approvedFacts.some(f => /POP-\d+/.test(f.text)), 'no POPID enters a fact');
+    const after = p.auditArticle(draft, amended);
+    assert.ok(!numFindings(after).some(e => e.values.some(v => ['4321', '913'].includes(v))),
+      'tool numbers the Article used are approved after the amend');
+    assert.throws(() => p.appendToolFacts(pk, [{ text: 'x 1', src: 'output/somewhere.json' }]), /tool:<name>/);
+    assert.equal(pk.manifest.approvedFacts.length, JSON.parse(fs.readFileSync(fixture, 'utf8')).manifest.approvedFacts.length, 'input packet untouched');
+  }
+}
+
 console.log('livedExperiencePacketV2.test.js: PASS');

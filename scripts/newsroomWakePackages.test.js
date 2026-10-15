@@ -163,7 +163,11 @@ for (const [mode, keys] of Object.entries(modeKeys)) for (const key of keys) {
 assert.equal(packagesApi.sourcingFor({}), 'named');
 assert.throws(() => packagesApi.sourcingFor({ sourcing: 'people' }), /unknown sourcing mode/);
 const marbury = packages['elliot-marbury'];
-assert.equal(marbury.version, 'MARBURY-LEP2-1');
+assert.equal(marbury.version, 'MARBURY-LEP2-2');
+// pipeline.76 — Marbury is the one package with writer tools; every other package has none
+assert.equal(marbury.writerTools.maxToolCalls, 6);
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['elliot-marbury']);
+assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { writerTools: { maxToolCalls: 9 } })), /writerTools/);
 assert.equal(marbury.assignment.popid, 'POP-00166');
 assert.equal(packagesApi.routeFor(marbury, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(hal.active, true);

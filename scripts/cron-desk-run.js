@@ -2859,6 +2859,10 @@ async function runWrite(assign) {
   // Task 2.5.5: hand the writer the byline's POPID so the memory tool pair
   // (own citizen page, cp-<popid>) joins the tool loop.
   if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
+  // pipeline.76 — the one package exception to ADR-0017's zero writer tools.
+  const writerTools = PACKET_ACTIVE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.writerTools &&
+    ACTIVE_WAKE_PACKAGE.writerTools.maxToolCalls || 0;
+  if (writerTools) { writerArgs.push('--writer-tools', String(writerTools)); log('writer tools ON (package): max ' + writerTools + ' calls'); }
   else if (byline && byline.popid) writerArgs.push('--byline-popid', byline.popid);
   // Live W3 is always the persona writer. Packet-only + auditArticle +
   // contamination scan remain the hard walls.
@@ -2873,6 +2877,9 @@ async function runWrite(assign) {
   }
   execFileSync('node', writerArgs, { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
+  // pipeline.76 — a writer-tools run amends the claim manifest in the state file; every check
+  // below (contamination, verbatim, Rhea's --article-packet) reads the amended Packet.
+  if (writerTools) writePacket = readJson(stateFile) || writePacket;
 
   const draftText = fs.readFileSync(draftPath, 'utf8');
   const shape = require('./livedArticleShape').isSummaryArticle(draftText);

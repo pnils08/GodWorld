@@ -365,7 +365,10 @@
     }
   },
   "elliot-marbury": {
-    "version": "MARBURY-LEP2-1",
+    "version": "MARBURY-LEP2-2",
+    "writerTools": {
+      "maxToolCalls": 6
+    },
     "active": true,
     "requiredDaily": true,
     "persona": "elliot-marbury",

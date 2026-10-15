@@ -192,6 +192,24 @@ function transitStaffing_(ctx) {
   return out;
 }
 
+/**
+ * engine.290 move 5 — last Cycle's BART-train chaos hits (chaosCarsEngine,
+ * Phase 4), carried on previousCycleState.chaosTransit. Read only when the
+ * carry is from the Cycle just before this one — a stale carry (a skipped or
+ * replayed Cycle) is ignored.
+ *
+ * @return {Array<{h:string, s:Array<string>, o:string, d:number}>}
+ */
+function transitChaosCarry_(S, cycle) {
+  var prev = S.previousCycleState && S.previousCycleState.chaosTransit;
+  if (!prev || !prev.hits || Number(prev.c) !== cycle - 1) return [];
+  return prev.hits;
+}
+
+function transitChaosWords_(outcome) {
+  return String(outcome || '').replace(/_/g, ' ');
+}
+
 // engine.290 move 3 — the base this engine computes ridership from. 2 = the
 // ledger share; a Cycle whose previous carry is not 2 is the rebase Cycle.
 var TRANSIT_BASE_VERSION = 2;
@@ -416,6 +434,9 @@ function updateTransitMetrics_Phase2_(ctx) {
   var prevBaseVersion = S.previousCycleState ? Number(S.previousCycleState.transitBaseVersion) || 0 : 0;
   var baseVersion = shares ? TRANSIT_BASE_VERSION : 1;
   var rebased = baseVersion === TRANSIT_BASE_VERSION && prevBaseVersion !== TRANSIT_BASE_VERSION;
+  // engine.290 move 5 — last week's train trouble (the chaos car's carry)
+  var chaosHits = transitChaosCarry_(S, cycle);
+
   // engine.290 move 4 — the crew is felt (governor) and named (always)
   var staffing = transitStaffing_(ctx);
   S.transitStaffing = staffing;
@@ -442,6 +463,7 @@ function updateTransitMetrics_Phase2_(ctx) {
     rebased: rebased,
     transitCongestion: transitCongestion,
     staffing: staffing,
+    chaosHits: chaosHits,
     // engine.93 Task 9: the commute matrix rides along so per-station ridership
     // can weight by who commutes IN, not just who lives nearby.
     summary: S
@@ -515,9 +537,13 @@ function updateTransitMetrics_Phase2_(ctx) {
   var avgOT = S.transitMetrics.avgOnTime;
   var avgTR = S.transitMetrics.avgTraffic;
   var prevDisrupted = !!(S.previousCycleState && S.previousCycleState.transitDisrupted);
-  var breakdownRoll = rng() < 0.015;
-  var disruptedNow = (avgOT < 0.72) || breakdownRoll;
-  var disruptionCause = breakdownRoll ? 'equipment breakdown' :
+  // engine.290 move 5: the old 1.5% breakdown roll is gone — the dice live in
+  // the chaos engine. A stalled train carried from last week (the train's one
+  // high-severity outcome) is the no-weather "BART broke down" disruption.
+  var stalled = null;
+  for (var sc = 0; sc < chaosHits.length; sc++) if (chaosHits[sc].o === 'stalled_train') { stalled = chaosHits[sc]; break; }
+  var disruptedNow = (avgOT < 0.72) || !!stalled;
+  var disruptionCause = stalled ? 'BART train: stalled train in ' + stalled.h + ' (last week)' :
     (weatherType === 'storm' ? 'storm conditions' : 'system strain');
   // engine.290 move 4: a crew member out names the disruption
   if (staffing.short.length) {
@@ -531,6 +557,7 @@ function updateTransitMetrics_Phase2_(ctx) {
     return a.onTimePerformance - b.onTimePerformance;
   });
   var affectedHoods = [];
+  if (stalled && stalled.h) affectedHoods.push(stalled.h);   // engine.290: the stall's own hood leads
   for (var ah = 0; ah < Math.min(3, otSorted.length); ah++) {
     var ahStation = null;
     for (var ahs = 0; ahs < OAKLAND_BART_STATIONS.length; ahs++) {
@@ -748,6 +775,18 @@ function calculateStationMetrics_(station, context, demographics, rng) {
   for (var cs = 0; crew && cs < crew.short.length; cs++) {
     causes.push('crew short: ' + crew.short[cs].name + ' (' + crew.short[cs].role + ')');
   }
+
+  // engine.290 move 5 — a chaos-train hit last week at this station: the worst
+  // delay applies (many hits never stack; a clean run never cancels one), and
+  // every hit is named.
+  var chaosDelay = 0;
+  var hits = context.chaosHits || [];
+  for (var ch = 0; ch < hits.length; ch++) {
+    if ((hits[ch].s || []).indexOf(station.station) < 0) continue;
+    chaosDelay = Math.max(chaosDelay, Number(hits[ch].d) || 0);
+    causes.push('BART train: ' + transitChaosWords_(hits[ch].o) + ' in ' + hits[ch].h + ' (last week)');
+  }
+  onTimeDelta -= chaosDelay;
 
   // Random variance
   var variance = 0.9 + (rng() * 0.2); // 90-110%

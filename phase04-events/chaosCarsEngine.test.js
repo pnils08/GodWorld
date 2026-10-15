@@ -41,6 +41,10 @@ global.Session = { getScriptTimeZone: () => 'UTC' };
 // — an Apps Script global). Stub it for the Node harness, same pattern as the others.
 global.inWorldStamp_ = (ctx) => (ctx && ctx.summary && ctx.summary.cycleRef) || 'C100';
 
+// engine.290: the chaos engine reads the transit dials (train weight) and the BART
+// station table (the train's hood filter) — Apps Script globals from Phase 2 / utilities.
+global.transitDials_ = (ctx) => Object.assign({ transitChaosWeight: 0.5, transitStaffingGovernor: 0 }, (ctx && ctx._transitDials) || {});
+global.OAKLAND_BART_STATIONS = new Function(require('fs').readFileSync(require('path').join(__dirname, '..', 'utilities', 'ensureTransitMetrics.js'), 'utf8') + '\nreturn OAKLAND_BART_STATIONS;')();
 const eng = require('./chaosCarsEngine');
 
 let passed = 0, failed = 0;
@@ -586,6 +590,74 @@ console.log('\nTask 7b: named calls and loop reweight');
     throwsNaming(() => eng.runChaosNamedPass_(fail, fail.rng, 100, [arrestOnly], []),
       'synthetic source row failure') && !(fail.summary.judicialEvents || []).length);
   global.writeChaosCarsRow_ = writer;
+}
+
+// ── engine.290 move 5: the BART train ──
+console.log('engine.290: the chaos train');
+{
+  reset();
+  const train = cfg.VEHICLE_CONFIGS.filter(v => v.name === 'bart_train')[0];
+  assert('290-1 bart_train is a configured vehicle (neighborhood + citizen, transit-served)',
+    !!train && train.scopes.join(',') === 'neighborhood,citizen' && train.hoodFilter === 'transit-served');
+  assert('290-2 the shipped config validates', cfg.validateAllChaosConfigs_() === true);
+  const bad = (patch) => { const t = JSON.parse(JSON.stringify(train)); patch(t); try { cfg.validateAllChaosConfigs_([t]); return false; } catch (e) { return true; } };
+  assert('290-3 validator rejects delay 0.5', bad(t => { t.textureOutcomes[0].delay = 0.5; }));
+  assert('290-4 validator rejects a missing delay', bad(t => { delete t.textureOutcomes[1].delay; }));
+  assert('290-5 validator rejects an unknown hoodFilter', bad(t => { t.hoodFilter = 'everywhere'; }));
+  const stalled = train.textureOutcomes.filter(o => o.outcome === 'stalled_train')[0];
+  assert('290-6 the stalled train is the one high outcome and never a citizen hit (no Tier-1 cascade)',
+    stalled.severity === 'high' && stalled.scopes.join() === 'neighborhood' &&
+    train.textureOutcomes.filter(o => o.severity === 'high').length === 1);
+  assert('290-7 every citizen-reachable train outcome carries a real tag',
+    cfg.chaosOutcomePool_(train, 'citizen').filter(o => o.lifeHistoryTag).every(o => o.lifeHistoryTag === 'Friction'));
+
+  // neighborhood filter: one draw, only hoods with a station
+  const c = makeCtx(5);
+  c._chaosNbCache = ['Fruitvale', 'Laurel', 'Temescal', 'Glenview'];
+  let draws = 0; const r0 = () => { draws++; return 0.99; };
+  const hood = eng.pickTargetByScope_(r0, c, 'neighborhood', train);
+  assert('290-8 train hood pick draws once, from served hoods only', draws === 1 && hood.neighborhood === 'Temescal', JSON.stringify(hood) + ' draws ' + draws);
+  draws = 0;
+  const other = eng.pickTargetByScope_(r0, c, 'neighborhood', { name: 'ice_cream_truck' });
+  assert('290-9 other vehicles keep the full hood list', draws === 1 && other.neighborhood === 'Glenview');
+  assert('290-10 the shared name cache is not narrowed', c._chaosNbCache.length === 4);
+
+  // citizen filter: a working resident of a served hood
+  const cc = makeCtx(6);
+  const iNb = cc.ledger.headers.indexOf('Neighborhood');
+  cc.ledger.rows.forEach((r, i) => { r[iNb] = i === 3 ? 'Fruitvale' : 'Laurel'; });
+  draws = 0;
+  const who = eng.pickTargetByScope_(r0, cc, 'citizen', train);
+  assert('290-11 train citizen pick: only a served-hood resident, one draw', draws === 1 && who && who.popId === 'POP-00004', JSON.stringify(who));
+  const oldLS = global.deriveLifeState_, oldSY = global.simYearOf_;
+  global.simYearOf_ = () => 2042;
+  global.deriveLifeState_ = () => ({ working: 'student', isMinor: true, age: 15 });
+  assert('290-12 a non-working served-hood resident is not a train target', eng.pickTargetByScope_(r0, cc, 'citizen', train) === null);
+  if (oldLS === undefined) delete global.deriveLifeState_; else global.deriveLifeState_ = oldLS;
+  if (oldSY === undefined) delete global.simYearOf_; else global.simYearOf_ = oldSY;
+
+  // the Cycle's weight comes from World_Config; doubled only by the armed governor with no maintenance
+  const w = (dials, staffing) => { const x = makeCtx(1); x._transitDials = dials; x.summary.transitStaffing = staffing; return eng.chaosConfigsForCycle_(x, cfg.VEHICLE_CONFIGS).filter(v => v.name === 'bart_train')[0].baseFrequencyWeight; };
+  assert('290-13 weight = transitChaosWeight', w({ transitChaosWeight: 0.8 }, { maintenance: 0 }) === 0.8);
+  assert('290-14 governor 0: no maintenance does not double', w({ transitChaosWeight: 0.5, transitStaffingGovernor: 0 }, { maintenance: 0 }) === 0.5);
+  assert('290-15 governor 1 + no maintenance doubles', w({ transitChaosWeight: 0.5, transitStaffingGovernor: 1 }, { maintenance: 0 }) === 1);
+  assert('290-16 governor 1 + maintenance on the ledger does not', w({ transitChaosWeight: 0.5, transitStaffingGovernor: 1 }, { maintenance: 1 }) === 0.5);
+  assert('290-17 the shared VEHICLE_CONFIGS never mutates', train.baseFrequencyWeight === 0.5);
+
+  // a hit lands on S.chaosTransit and the Chaos_Cars row says TransitDelay
+  reset();
+  const e = makeCtx(9); e.summary.chaosCarsEvents = []; e.summary.tier1ChaosEvents = []; e.summary.chaosTransit = { cycle: 99, hits: [] };
+  const always = (name) => Object.assign({}, train, { textureOutcomes: train.textureOutcomes.map(o => Object.assign({}, o, { weight: o.outcome === name ? 1 : 0 })) });
+  eng.runChaosEvent_(e, () => 0.5, 99, always('stalled_train'), 'neighborhood', { neighborhood: 'Downtown' }, [], 't');
+  const hit = e.summary.chaosTransit.hits[0];
+  assert('290-18 a Downtown hit names both Downtown stations', hit && hit.h === 'Downtown' && hit.s.join('|') === '12th St Oakland City Center|19th St Oakland' && hit.o === 'stalled_train' && hit.d === 0.1, JSON.stringify(hit));
+  assert('290-19 the Chaos_Cars row: TransitDelay = the delay', chaosRows[0].primaryMetric === 'TransitDelay' && chaosRows[0].metricMagnitude === 0.1, JSON.stringify(chaosRows[0]));
+  assert('290-20 a stalled train seeds the neighborhood story (narrativeSeed ripple gate)', !!chaosRows[0].narrativeSeed);
+
+  // a full engine run initialises the carry shape
+  const full = makeCtx(12345);
+  eng.runChaosCarsEngine_(full);
+  assert('290-21 runChaosCarsEngine_ publishes S.chaosTransit {cycle, hits[]}', full.summary.chaosTransit && Array.isArray(full.summary.chaosTransit.hits) && full.summary.chaosTransit.cycle === 99);
 }
 
 console.log('\n' + '─'.repeat(60));

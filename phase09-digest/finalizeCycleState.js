@@ -30,6 +30,15 @@
  * ============================================================================
  */
 
+/**
+ * engine.290 move 5 — the carried train hits, worst delay first, at most four.
+ */
+function compactChaosTransit_(ct) {
+  if (!ct || !ct.hits || !ct.hits.length) return null;
+  var hits = ct.hits.slice().sort(function(a, b) { return (Number(b.d) || 0) - (Number(a.d) || 0); }).slice(0, 4);
+  return { c: ct.cycle, hits: hits };
+}
+
 function finalizeCycleState_(ctx) {
   var S = ctx.summary || (ctx.summary = {});
   var dynamics = S.cityDynamics || { sentiment: 0 };
@@ -175,6 +184,10 @@ function finalizeCycleState_(ctx) {
     // (2 = the ledger share). A next Cycle that reads anything else marks every
     // Transit_Metrics row `rebased` and the slice prints no deltas. 1 byte.
     transitBaseVersion: (S.transitMetrics && S.transitMetrics.baseVersion) || 0,
+    // engine.290 move 5: this Cycle's BART-train chaos hits, read by next Cycle's
+    // transit (Phase 2) only when c === its cycle − 1. Compact keys, worst four
+    // by delay (Phase 2 applies the max per station), null when none. ~60 B a hit.
+    chaosTransit: compactChaosTransit_(S.chaosTransit),
 
     // v1.9 (engine.71 CR-2/3): crisis arcs live across cycles on this carry
     // (weatherFrontTracking pattern — the detector re-evaluates channel state

@@ -454,5 +454,37 @@ function run(S, opts) {
   ok(threw, 'no ledger → throws (fail loud)');
 }
 
+// engine.290 move 5 — the chaos train's carry
+{
+  const prev = (hits, c) => ({ sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2, chaosTransit: { c: c === undefined ? 106 : c, hits } } });
+  const base = run({ sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2 } });
+  const ot = (r, n) => r.by[n].onTimePerformance;
+  const st = run(prev([{ h: 'Fruitvale', s: ['Fruitvale'], o: 'stalled_train', d: 0.10 }]));
+  eq(ot(st, 'Fruitvale'), Math.round((ot(base, 'Fruitvale') - 0.10) * 100) / 100, 'a carried stalled train lowers Fruitvale on-time by its delay');
+  ok(/BART train: stalled train in Fruitvale \(last week\)/.test(st.by['Fruitvale'].factors), 'and names itself: ' + st.by['Fruitvale'].factors);
+  eq(ot(st, 'Rockridge'), ot(base, 'Rockridge'), 'other stations untouched');
+  eq(st.S.transitState.disruptionOngoing, true, 'a stalled train is a disruption');
+  eq(st.S.transitState.disruptionCause, 'BART train: stalled train in Fruitvale (last week)', 'cause names the train');
+  eq(st.S.transitState.affectedHoods[0], 'Fruitvale', 'the stall hood leads affectedHoods');
+  const two = run(prev([{ h: 'Fruitvale', s: ['Fruitvale'], o: 'signal_failure', d: 0.06 }, { h: 'Fruitvale', s: ['Fruitvale'], o: 'door_fault_holds_the_line', d: 0.03 }]));
+  eq(ot(two, 'Fruitvale'), Math.round((ot(base, 'Fruitvale') - 0.06) * 100) / 100, 'two hits keep the max delay, never the sum');
+  ok(/signal failure/.test(two.by['Fruitvale'].factors) && /door fault holds the line/.test(two.by['Fruitvale'].factors), 'both outcomes named');
+  eq(two.S.transitState.disruptionOngoing, false, 'lesser delays move on-time only (no disruption at this level)');
+  const clean = run(prev([{ h: 'Fruitvale', s: ['Fruitvale'], o: 'signal_failure', d: 0.06 }, { h: 'Fruitvale', s: ['Fruitvale'], o: 'clean_run', d: 0 }]));
+  eq(ot(clean, 'Fruitvale'), ot(two, 'Fruitvale'), 'a clean run never cancels a delay');
+  const stale = run(prev([{ h: 'Fruitvale', s: ['Fruitvale'], o: 'stalled_train', d: 0.10 }], 105));
+  eq(ot(stale, 'Fruitvale'), ot(base, 'Fruitvale'), 'a stale carry (cycle − 2) is ignored');
+  ok(!/BART train/.test(stale.by['Fruitvale'].factors), 'and not named');
+  eq(stale.S.transitState.disruptionOngoing, false, 'and is no disruption');
+  const dt = run(prev([{ h: 'Downtown', s: ['12th St Oakland City Center', '19th St Oakland'], o: 'signal_failure', d: 0.06 }]));
+  ok(ot(dt, '12th St Oakland City Center') < ot(base, '12th St Oakland City Center') && ot(dt, '19th St Oakland') < ot(base, '19th St Oakland'), 'a Downtown hit reaches both Downtown stations');
+  // the breakdown roll is gone: a quiet cycle draws only the per-row variance
+  let draws = 0;
+  appends.length = 0;
+  const ctxR = { ss: fakeSS({}), ledger: ledgerOf([]), summary: Object.assign({ absoluteCycle: 107, season: 'spring', weather: { type: 'clear' }, sportsFeedEntries: [], previousCycleState: { transitBaseVersion: 2 } }, c111Summary()), rng: () => { draws++; return 0.5; } };
+  T.updateTransitMetrics_Phase2_(ctxR);
+  eq(draws, 8 * 2 + 10, 'rng draws = 2 per station + 1 per corridor (no weekend roll, no breakdown roll)');
+}
+
 console.log('transitCauses: ' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

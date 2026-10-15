@@ -2,7 +2,7 @@
   "generated": "2026-10-15",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1695,
+  "functionsMapped": 1701,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1735,6 +1735,7 @@
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_",
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
+        "phase02-world-state/updateTransitMetrics.js::transitChaosCarry_",
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase03-population/applyDemographicDrift.js::businessDistressShare_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
@@ -2606,7 +2607,9 @@
       "writers": [
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_"
       ],
-      "readers": []
+      "readers": [
+        "phase04-events/chaosCarsEngine.js::chaosConfigsForCycle_"
+      ]
     },
     "transitState": {
       "writers": [
@@ -2930,6 +2933,17 @@
         "phase04-events/chaosCarsEngine.js::runChaosEvent_",
         "phase04-events/chaosCarsEngine.js::runChaosShip_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_"
+      ]
+    },
+    "chaosTransit": {
+      "writers": [
+        "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
+        "phase04-events/chaosCarsEngine.js::runChaosEvent_"
+      ],
+      "readers": [
+        "phase04-events/chaosCarsEngine.js::runChaosEvent_",
+        "phase04-events/chaosCarsEngine.test.js::reset",
+        "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
     "hospitalEvents": {

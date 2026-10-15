@@ -198,13 +198,54 @@ function impactsForScope_(vehicle, scope, outcomeName) {
 
 // ── target pickers (T3.3 / T3.4 / T3.5) ──────────────────────────────────────
 
+// engine.290 move 5 — the Cycle's vehicle list. The train's picker weight is
+// World_Config.transitChaosWeight, doubled when the armed crew governor finds no
+// maintenance on the ledger (move 4). A copy: the shared VEHICLE_CONFIGS never mutates.
+function chaosConfigsForCycle_(ctx, configs) {
+  if (typeof transitDials_ !== 'function') throw new Error('chaos_cars: transitDials_ not loaded (engine.290 train weight)');
+  var dials = transitDials_(ctx);
+  var crew = ctx.summary && ctx.summary.transitStaffing;
+  var noMaint = dials.transitStaffingGovernor === 1 && crew && crew.maintenance === 0;
+  var out = [];
+  for (var i = 0; i < configs.length; i++) {
+    if (configs[i].name !== 'bart_train') { out.push(configs[i]); continue; }
+    var copy = {};
+    for (var k in configs[i]) if (configs[i].hasOwnProperty(k)) copy[k] = configs[i][k];
+    copy.baseFrequencyWeight = dials.transitChaosWeight * (noMaint ? 2 : 1);
+    out.push(copy);
+  }
+  return out;
+}
+
+// engine.290 move 5 — the hoods a 'transit-served' vehicle may hit: the canon hoods
+// with a primary BART station (OAKLAND_BART_STATIONS[].neighborhood are canon names).
+function chaosTransitServedHoods_() {
+  if (typeof OAKLAND_BART_STATIONS === 'undefined') throw new Error('chaos_cars: OAKLAND_BART_STATIONS not loaded (transit-served filter)');
+  var out = [];
+  for (var i = 0; i < OAKLAND_BART_STATIONS.length; i++) {
+    var h = OAKLAND_BART_STATIONS[i].neighborhood;
+    if (h && out.indexOf(h) < 0) out.push(h);
+  }
+  return out;
+}
+
+// engine.290 move 5 — the station(s) whose own hood this is (Downtown has two;
+// Phase 2 applies the max delay per station, so both feel it).
+function chaosTransitStationsFor_(hood) {
+  var out = [];
+  for (var i = 0; i < OAKLAND_BART_STATIONS.length; i++) {
+    if (OAKLAND_BART_STATIONS[i].neighborhood === hood) out.push(OAKLAND_BART_STATIONS[i].station);
+  }
+  return out;
+}
+
 // T3.3 — uniform-random citizen from the shared ledger (no tier protection, §S205).
 // engine.67 step 2 (S325): eligibility filter — chaos can only hit citizens who
 // are actually IN the city. Deceased/inactive/traded/pending are unreachable
 // (the S325 conditioning matrix caught deceased rows as pickable). Being hit by
 // street chaos is possible at any age, so no age gate here — status only.
 // Filter consumes no rng; the pick stays one draw over the eligible set.
-function pickCitizenTarget_(rng, ctx) {
+function pickCitizenTarget_(rng, ctx, vehicle) {
   if (!ctx.ledger || !ctx.ledger.rows || ctx.ledger.rows.length === 0) return null;
   var header = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
@@ -212,11 +253,28 @@ function pickCitizenTarget_(rng, ctx) {
   var iTier = header.indexOf('Tier');
   var iNb = header.indexOf('Neighborhood');
   var iStatus = header.indexOf('Status');
+  // engine.290 move 5: a 'transit-served' vehicle reaches only a working resident of
+  // a served hood — 'working' by the same life-state the ECL commute gate and the
+  // workplace-accident gate read. The filter consumes no rng; still one draw.
+  var served = (vehicle && vehicle.hoodFilter === 'transit-served') ? chaosTransitServedHoods_() : null;
+  var iBY = header.indexOf('BirthYear'), iRT = header.indexOf('RoleType');
   var eligible = [];
   for (var ei = 0; ei < rows.length; ei++) {
     if (iStatus >= 0) {
       var st = String(rows[ei][iStatus] || '').trim().toLowerCase();
       if (st === 'deceased' || st === 'inactive' || st === 'traded' || st === 'pending' || st === 'detained') continue;
+    }
+    if (served) {
+      if (iNb < 0 || served.indexOf(String(rows[ei][iNb] || '').trim()) < 0) continue;
+      // deriveLifeState_ is the citizenContextBuilder global, present on every live
+      // run; optional here exactly as chaosCitizenTargetAt_ treats it (Node harnesses).
+      if (typeof deriveLifeState_ !== 'function') { eligible.push(ei); continue; }
+      var ls = deriveLifeState_({
+        birthYear: iBY >= 0 ? rows[ei][iBY] : 0, simYear: simYearOf_(ctx),
+        status: iStatus >= 0 ? rows[ei][iStatus] : '',
+        occupation: iRT >= 0 ? rows[ei][iRT] : '', roleType: iRT >= 0 ? rows[ei][iRT] : ''
+      });
+      if (!ls || ls.working !== 'working') continue;
     }
     eligible.push(ei);
   }
@@ -330,8 +388,16 @@ function loadNeighborhoodNames_(ctx) {
   return names;
 }
 
-function pickNeighborhoodTarget_(rng, ctx) {
+function pickNeighborhoodTarget_(rng, ctx, vehicle) {
   var names = loadNeighborhoodNames_(ctx);
+  // engine.290 move 5: a 'transit-served' vehicle draws only hoods with a station
+  // (filter first, one draw — the shared name cache is never narrowed).
+  if (vehicle && vehicle.hoodFilter === 'transit-served') {
+    var served = chaosTransitServedHoods_();
+    var kept = [];
+    for (var i = 0; i < names.length; i++) if (served.indexOf(names[i]) >= 0) kept.push(names[i]);
+    names = kept;
+  }
   if (!names.length) return null;
   return { neighborhood: pickFromArrayChaos_(rng, names) };
 }
@@ -650,9 +716,9 @@ function pickTargetByScope_(rng, ctx, scope, vehicle) {
       (scope === 'citizen' || scope === 'neighborhood')) {
     return pickCareJusticeTarget_(rng, ctx, scope, vehicle);
   }
-  if (scope === 'citizen') return pickCitizenTarget_(rng, ctx);
+  if (scope === 'citizen') return pickCitizenTarget_(rng, ctx, vehicle);
   if (scope === 'business') return pickBusinessTarget_(rng, ctx);
-  if (scope === 'neighborhood') return pickNeighborhoodTarget_(rng, ctx);
+  if (scope === 'neighborhood') return pickNeighborhoodTarget_(rng, ctx, vehicle);
   return null;
 }
 
@@ -671,6 +737,14 @@ function runChaosEvent_(ctx, rng, cycle, vehicle, scope, target, friction, label
     if (k === 0) { primaryMetric = impacts[k].column; primaryMagnitude = mag; }
   }
   if (scope === 'business') { primaryMetric = 'Growth_Rate'; primaryMagnitude = Number(outcome.bizEvent) || 0; }
+  // engine.290 move 5: the train's hit is an on-time delay at the serving station(s)
+  // next Cycle — the Chaos_Cars row says so, and S.chaosTransit carries it.
+  var transitHit = null;
+  if (vehicle.name === 'bart_train') {
+    primaryMetric = 'TransitDelay';
+    primaryMagnitude = Number(outcome.delay) || 0;
+    transitHit = { h: target.neighborhood, s: chaosTransitStationsFor_(target.neighborhood), o: outcome.outcome, d: primaryMagnitude };
+  }
 
   var text = chaosEventText_(vehicle, outcome, target, scope);
 
@@ -684,8 +758,10 @@ function runChaosEvent_(ctx, rng, cycle, vehicle, scope, target, friction, label
   var receipt = null; // hospital (ambulance) or judicial (cop_car) — one hit is never both
   if (scope === 'citizen') {
     receipt = writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text);
-    primaryMetric = outcome.lifeHistoryTag; // citizen "metric" = the dial tag (provenance)
-    primaryMagnitude = 0;
+    if (!transitHit) {
+      primaryMetric = outcome.lifeHistoryTag; // citizen "metric" = the dial tag (provenance)
+      primaryMagnitude = 0;
+    }
   } else if (scope === 'business') {
     accumulateBusinessEvent_(ctx, target.bizId, outcome.bizEvent);
   } else if (scope === 'neighborhood') {
@@ -709,6 +785,10 @@ function runChaosEvent_(ctx, rng, cycle, vehicle, scope, target, friction, label
   };
   if (typeof writeChaosCarsRow_ === 'function') writeChaosCarsRow_(ctx, payload);
   ctx.summary.chaosCarsEvents.push(payload);
+  if (transitHit) {
+    if (!ctx.summary.chaosTransit) ctx.summary.chaosTransit = { cycle: cycle, hits: [] };
+    ctx.summary.chaosTransit.hits.push(transitHit);
+  }
   if (consequenceFloorFired) ctx.summary.tier1ChaosEvents.push(payload);
   if (receipt && receipt.system === 'judicial') {
     receipt.sourceEventId = 'patrol:' + payload.eventId + ':' + receipt.popId;
@@ -879,6 +959,10 @@ function runChaosCarsEngine_(ctx) {
   if (!ctx.summary.tier1ChaosEvents) ctx.summary.tier1ChaosEvents = [];
   if (!ctx.summary.careJusticeDemand) throw new Error('chaos_cars: S.careJusticeDemand missing');
   var friction = [];
+  // engine.290 move 5: this Cycle's train hits (carried to the next Cycle's transit
+  // by finalizeCycleState) and the train's picker weight from World_Config.
+  ctx.summary.chaosTransit = { cycle: cycle, hits: [] };
+  configs = chaosConfigsForCycle_(ctx, configs);
 
   var n = pickEventCount_(rng);
   for (var i = 0; i < n; i++) {
@@ -1091,6 +1175,8 @@ if (typeof module !== 'undefined' && module.exports) {
     resolveChaosNeighborhoodFold_: resolveChaosNeighborhoodFold_,
     accumulateBusinessEvent_: accumulateBusinessEvent_,
     runChaosShip_: runChaosShip_,
+    chaosConfigsForCycle_: chaosConfigsForCycle_,
+    chaosTransitServedHoods_: chaosTransitServedHoods_,
     chaosShipFactor_: chaosShipFactor_,
     writeCitizenEvent_: writeCitizenEvent_,
     chaosTicketFine_: chaosTicketFine_, CHAOS_TICKET_OUTCOMES: CHAOS_TICKET_OUTCOMES,

@@ -613,6 +613,11 @@
 
 - **transitStaffing_(ctx)**
 
+- **transitChaosCarry_(S, cycle)**
+  Reads: S.previousCycleState
+
+- **transitChaosWords_(outcome)**
+
 - **transitStationShares_(ctx, demographics, dials, stations)**
   Reads: S.canonHoods, S.commuteInbound, S.neighborhoodState
 
@@ -909,7 +914,14 @@
 
 - **impactsForScope_(vehicle, scope, outcomeName)**
 
-- **pickCitizenTarget_(rng, ctx)**
+- **chaosConfigsForCycle_(ctx, configs)**
+  Reads: S.transitStaffing
+
+- **chaosTransitServedHoods_()**
+
+- **chaosTransitStationsFor_(hood)**
+
+- **pickCitizenTarget_(rng, ctx, vehicle)**
 
 - **chaosCitizenTargetAt_(ctx, r)**
 
@@ -921,7 +933,7 @@
 - **loadNeighborhoodNames_(ctx)**
   Sheets: Neighborhood_Map
 
-- **pickNeighborhoodTarget_(rng, ctx)**
+- **pickNeighborhoodTarget_(rng, ctx, vehicle)**
 
 - **pickCareJusticeTarget_(rng, ctx, scope, vehicle)**
   Reads: S.careJusticeDemand
@@ -950,8 +962,8 @@
 - **pickTargetByScope_(rng, ctx, scope, vehicle)**
 
 - **runChaosEvent_(ctx, rng, cycle, vehicle, scope, target, friction, label)**
-  Reads: S.chaosCarsEvents, S.contractSeeds, S.hospitalEvents, S.judicialEvents, S.storySeeds, S.tier1ChaosEvents
-  Writes: S.chaosCarsEvents, S.hospitalEvents, S.judicialEvents, S.tier1ChaosEvents
+  Reads: S.chaosCarsEvents, S.chaosTransit, S.contractSeeds, S.hospitalEvents, S.judicialEvents, S.storySeeds, S.tier1ChaosEvents
+  Writes: S.chaosCarsEvents, S.chaosTransit, S.hospitalEvents, S.judicialEvents, S.tier1ChaosEvents
 
 - **chaosLog1p_(x)**
 
@@ -962,7 +974,7 @@
 
 - **runChaosCarsEngine_(ctx)**
   Reads: S.absoluteCycle, S.careJusticeDemand, S.chaosBusinessFold, S.chaosCarsEvents, S.cycle, S.cycleId, S.tier1ChaosEvents, S.weatherEvents
-  Writes: S.chaosCarsEvents, S.tier1ChaosEvents
+  Writes: S.chaosCarsEvents, S.chaosTransit, S.tier1ChaosEvents
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -991,6 +1003,7 @@
   Sheets: Business_Ledger
 
 - **reset()**
+  Reads: S.chaosTransit
   Sheets: Business_Ledger, LifeHistory_Log, Neighborhood_Map
 
 ### faithEventsEngine.js
@@ -3367,8 +3380,10 @@
   Config: ctx.config.cycleCount
 
 ### finalizeCycleState.js
+- **compactChaosTransit_(ct)**
+
 - **finalizeCycleState_(ctx)**
-  Reads: S.activeCooldowns, S.approvalHoodMoodEma, S.approvalNeighborhoodEffects, S.bankRate, S.businessDynamicsState, S.chaosShip, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.crisisArcsActive, S.crisisMemory, S.crisisMemoryActive, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicMood, S.economicRipples, S.eventsGenerated, S.holiday, S.holidayPriority, S.hospitalEvents, S.initiativeEnginePhaseMoves, S.initiativePhases, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDrift, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.previousCycleState, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitMetrics, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
+  Reads: S.activeCooldowns, S.approvalHoodMoodEma, S.approvalNeighborhoodEffects, S.bankRate, S.businessDynamicsState, S.chaosShip, S.chaosTransit, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.crisisArcsActive, S.crisisMemory, S.crisisMemoryActive, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicMood, S.economicRipples, S.eventsGenerated, S.holiday, S.holidayPriority, S.hospitalEvents, S.initiativeEnginePhaseMoves, S.initiativePhases, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDrift, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.previousCycleState, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitMetrics, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
   Writes: S.cycleFinalState, S.cycleFinalizedAt, S.previousCycleState
   Config: ctx.config.cycleCount
 
@@ -3876,7 +3891,7 @@
 
 - **chaosOutcomePool_(vehicle, scope)**
 
-- **validateAllChaosConfigs_()**
+- **validateAllChaosConfigs_(configs)**
 
 ### chaosCarsConfig.test.js
 - **assert(label, cond, detail)**
@@ -4711,4 +4726,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1695
+**Functions mapped:** 1701

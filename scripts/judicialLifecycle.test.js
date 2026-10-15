@@ -27,6 +27,10 @@ global.queueAppendIntent_ = () => {};
 
 const jl = require('../phase05-citizens/judicialLifecycle.js');
 global.admitJudicialReceipt_ = jl.admitJudicialReceipt_;
+// engine.290: the chaos engine reads the transit dials (train weight) and the BART
+// station table (the train's hood filter) — Apps Script globals from Phase 2 / utilities.
+global.transitDials_ = (ctx) => Object.assign({ transitChaosWeight: 0.5, transitStaffingGovernor: 0 }, (ctx && ctx._transitDials) || {});
+global.OAKLAND_BART_STATIONS = new Function(require('fs').readFileSync(require('path').join(__dirname, '..', 'utilities', 'ensureTransitMetrics.js'), 'utf8') + '\nreturn OAKLAND_BART_STATIONS;')();
 const eng = require('../phase04-events/chaosCarsEngine.js');
 const acct = require('../utilities/careJusticeAccounting.js');
 

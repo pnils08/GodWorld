@@ -318,6 +318,29 @@ var VEHICLE_CONFIGS = [
       { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [0.05, 0.15] }
     ]
   },
+  // engine.290 move 5 — the BART train. Off-chance trouble on the line, drawn only where
+  // a station stands (hoodFilter 'transit-served': the canon hoods with a primary
+  // station) and, for a citizen, only a working resident of one. Each outcome carries a
+  // `delay` (on-time points) the serving station(s) lose NEXT Cycle — carried on
+  // previousCycleState.chaosTransit, applied by updateTransitMetrics_Phase2_; this is
+  // the one place transit's dice live (the old 1.5% breakdown roll is gone).
+  // Severity is the schema's low/high: stalled_train is the one 'high' and is
+  // neighborhood-only, so a stalled train is never a Tier-1 cascade. Picker weight is
+  // World_Config.transitChaosWeight (set per Cycle in runChaosCarsEngine_; 0.5 here = the seed).
+  {
+    name: 'bart_train', displayName: 'BART train',
+    scopes: ['neighborhood', 'citizen'], baseFrequencyWeight: 0.5, hoodFilter: 'transit-served',
+    textureOutcomes: [
+      { outcome: 'signal_failure',            weight: 0.25, severity: 'low',  delay: 0.06, lifeHistoryTag: 'Friction', role: 'subject' },
+      { outcome: 'stalled_train',             weight: 0.15, severity: 'high', delay: 0.10, scopes: ['neighborhood'],
+        narrativeSeed: 'A train dead on the track between stations — riders walked the tunnel, and the morning never recovered.' },
+      { outcome: 'door_fault_holds_the_line', weight: 0.20, severity: 'low',  delay: 0.03, lifeHistoryTag: 'Friction', role: 'subject' },
+      { outcome: 'platform_overcrowding',     weight: 0.20, severity: 'low',  delay: 0.02, lifeHistoryTag: 'Friction', role: 'subject' },
+      { outcome: 'medical_hold_on_board',     weight: 0.10, severity: 'low',  delay: 0.05, lifeHistoryTag: 'Friction', role: 'subject' },
+      { outcome: 'clean_run',                 weight: 0.10, severity: 'low',  delay: 0,    scopes: ['neighborhood'] }
+    ],
+    metricImpacts: []
+  },
   // engine.193 cut 3b (builder 2026-09-26): the ship — the one vehicle that reaches many
   // businesses at once, and the only one that lasts. EPISODIC: never drawn by the per-event
   // picker (weight 0); runChaosShip_ rolls it once a Cycle, only when no episode is running.
@@ -380,13 +403,30 @@ function chaosOutcomePool_(vehicle, scope) {
  *  - a metricImpact column not in the known real-column set
  * @returns {true}
  */
-function validateAllChaosConfigs_() {
+// engine.290 — the target filters a vehicle may name (chaosCarsEngine applies them).
+var CHAOS_HOOD_FILTERS = { 'transit-served': true };
+
+function validateAllChaosConfigs_(configs) {
   var KNOWN_COLUMNS = {
     'Sentiment': true, 'CrimeIndex': true, 'RetailVitality': true, 'EventAttractiveness': true
   };
-  for (var v = 0; v < VEHICLE_CONFIGS.length; v++) {
-    var cfg = VEHICLE_CONFIGS[v];
+  var list = configs || VEHICLE_CONFIGS;
+  for (var v = 0; v < list.length; v++) {
+    var cfg = list[v];
     validateVehicleConfig(cfg);
+    // engine.290: a hood filter must be one the engine knows; the train's every
+    // outcome carries an on-time delay in [0, 0.2] (Phase 2 applies it next Cycle).
+    if (cfg.hoodFilter !== undefined && !CHAOS_HOOD_FILTERS[cfg.hoodFilter]) {
+      throw new Error('chaos_cars: vehicle "' + cfg.name + '" hoodFilter "' + cfg.hoodFilter + '" is not a known filter');
+    }
+    if (cfg.name === 'bart_train') {
+      for (var d = 0; d < (cfg.textureOutcomes || []).length; d++) {
+        var dl = cfg.textureOutcomes[d].delay;
+        if (typeof dl !== 'number' || !isFinite(dl) || dl < 0 || dl > 0.2) {
+          throw new Error('chaos_cars: vehicle "' + cfg.name + '" outcome "' + cfg.textureOutcomes[d].outcome + '" delay must be a number in [0, 0.2]');
+        }
+      }
+    }
     if (!isArrayChaos_(cfg.scopes) || cfg.scopes.length === 0) {
       throw new Error('chaos_cars: vehicle "' + cfg.name + '" has no scopes');
     }
@@ -459,6 +499,7 @@ if (typeof module !== 'undefined' && module.exports) {
     validateVehicleConfig: validateVehicleConfig,
     VEHICLE_CONFIGS: VEHICLE_CONFIGS,
     CHAOS_SHIP_PORT_SECTORS: CHAOS_SHIP_PORT_SECTORS,
+    CHAOS_HOOD_FILTERS: CHAOS_HOOD_FILTERS,
     chaosOutcomePool_: chaosOutcomePool_,
     loadChaosCarsConfig_: loadChaosCarsConfig_,
     validateAllChaosConfigs_: validateAllChaosConfigs_

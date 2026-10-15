@@ -609,6 +609,10 @@
 
 - **transitDayMult_(context)**
 
+- **transitCrewClass_(roleType)**
+
+- **transitStaffing_(ctx)**
+
 - **transitStationShares_(ctx, demographics, dials, stations)**
   Reads: S.canonHoods, S.commuteInbound, S.neighborhoodState
 
@@ -621,7 +625,7 @@
 
 - **updateTransitMetrics_Phase2_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamicsCapacity, S.commuteFlows, S.holiday, S.holidayLabel, S.holidayNeighborhood, S.holidayPriority, S.isFirstFriday, S.isWeekend, S.previousCycleState, S.season, S.sportsWeek, S.transitMetrics, S.transitState, S.weather
-  Writes: S.transitMetrics, S.transitState
+  Writes: S.transitMetrics, S.transitStaffing, S.transitState
   RNG: ctx.rng / safeRand_(ctx)
 
 - **calculateStationMetrics_(station, context, demographics, rng)**
@@ -4707,4 +4711,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1693
+**Functions mapped:** 1695

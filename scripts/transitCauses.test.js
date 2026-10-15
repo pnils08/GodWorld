@@ -51,6 +51,13 @@ function c111Summary() {
   return { canonHoods: { list, set, children: C111.children, core: list }, neighborhoodState: ns, commuteInbound: inbound };
 }
 
+// engine.290 move 4 — a Simulation_Ledger slice for the crew read
+const LEDGER_H = ['POPID', 'First', 'Last', 'RoleType', 'Status', 'EmployerBizId'];
+function ledgerOf(rows) { return { headers: LEDGER_H.slice(), rows: rows.map(r => r.slice()) }; }
+const BART_MGR = ['POP-00617', 'Eleanor', 'Rivera', 'BART Station Manager', 'Active', 'BIZ-00014'];
+const BART_PR = ['POP-01039', 'Ximena', 'Mehta', 'Bart Transit PR', 'Active', 'BIZ-00014'];
+const crewRow = (id, first, role, status) => [id, first, 'Test', role, status, 'BIZ-00014'];
+
 // ── transit engine harness ──────────────────────────────────────────────────
 const appends = [], ripples = [];
 const sandbox = {
@@ -72,12 +79,12 @@ const T = new Function(...Object.keys(sandbox),
   R('phase01-config/engine94SheetContract.js') + '\n' +
   R('phase01-config/canonNeighborhoodLoader.js') + '\n' +
   R('utilities/ensureTransitMetrics.js') + '\n' + R('phase02-world-state/updateTransitMetrics.js') +
-  '\nreturn { ENGINE290_CONFIG_SEEDS, transitDials_, transitStationShares_, updateTransitMetrics_Phase2_, getTransitStorySignals_, isGameDay_, gameDayHoodsFor_, initiativeTransitEffects_, OAKLAND_BART_STATIONS, TRAFFIC_CORRIDORS, TRANSIT_METRICS_HEADERS };'
+  '\nreturn { transitStaffing_, transitCrewClass_, ENGINE290_CONFIG_SEEDS, transitDials_, transitStationShares_, updateTransitMetrics_Phase2_, getTransitStorySignals_, isGameDay_, gameDayHoodsFor_, initiativeTransitEffects_, OAKLAND_BART_STATIONS, TRAFFIC_CORRIDORS, TRANSIT_METRICS_HEADERS };'
 )(...Object.values(sandbox));
 
 function run(S, opts) {
   appends.length = 0; ripples.length = 0;
-  const ctx = { ss: fakeSS(opts || {}), summary: Object.assign({ absoluteCycle: 107, season: 'spring', weather: { type: 'clear' } }, c111Summary(), S), rng: () => 0.5 };
+  const ctx = { ss: fakeSS(opts || {}), ledger: (opts && opts.ledger) || ledgerOf([]), summary: Object.assign({ absoluteCycle: 107, season: 'spring', weather: { type: 'clear' } }, c111Summary(), S), rng: () => 0.5 };
   const all = T.updateTransitMetrics_Phase2_(ctx);
   const by = {}; all.forEach(m => { by[m.station || m.corridor] = m; });
   return { ctx, S: ctx.summary, all, by };
@@ -406,6 +413,45 @@ function run(S, opts) {
   ok(reb.all.every(m => /rebased/.test(m.factors)), 'first Cycle on the ledger base: every row says rebased');
   eq(reb.S.transitMetrics.baseVersion, 2, 'S.transitMetrics.baseVersion = 2 (carried by finalizeCycleState)');
   ok(r.all.every(m => !/rebased/.test(m.factors)), 'after the carry reads 2: no row says rebased');
+}
+
+// engine.290 move 4 — the crew is felt (governor) and named (always)
+{
+  const today = ledgerOf([BART_MGR, BART_PR]);
+  const st = T.transitStaffing_({ ledger: today });
+  eq(st.stationManager, 1, 'today: one station manager');
+  eq(st.conductor + st.operator + st.dispatcher + st.maintenance, 0, 'today: no conductor / operator / dispatcher / maintenance');
+  eq(st.total, 1, 'the PR specialist is not crew');
+  eq(T.transitCrewClass_('BART Train Conductor'), 'conductor', 'class: conductor');
+  eq(T.transitCrewClass_('BART Train Operator'), 'operator', 'class: operator');
+  eq(T.transitCrewClass_('BART Rail Dispatcher'), 'dispatcher', 'class: dispatcher');
+  eq(T.transitCrewClass_('BART Track Maintenance Technician'), 'maintenance', 'class: maintenance');
+  const prev = { previousCycleState: { transitBaseVersion: 2 } };
+  const off = run(Object.assign({ sportsFeedEntries: [] }, prev), { ledger: today });
+  const armed = run(Object.assign({ sportsFeedEntries: [] }, prev), { ledger: today });
+  // arm through ctx.config: re-run with the dial at 1
+  appends.length = 0;
+  const ctxA = { ss: fakeSS({}), ledger: today, config: { transitStaffingGovernor: 1 }, summary: Object.assign({ absoluteCycle: 107, season: 'spring', weather: { type: 'clear' }, sportsFeedEntries: [] }, c111Summary(), prev), rng: () => 0.5 };
+  const allA = T.updateTransitMetrics_Phase2_(ctxA); const byA = {}; allA.forEach(m => { byA[m.station || m.corridor] = m; });
+  eq(byA['Fruitvale'].onTimePerformance, Math.round((off.by['Fruitvale'].onTimePerformance - 0.10 - 0.05) * 100) / 100, 'governor 1, no crew + no dispatcher: on-time −0.10 −0.05');
+  near(byA['Fruitvale'].ridershipVolume, Math.round(off.by['Fruitvale'].ridershipVolume * 0.85), 'governor 1, no crew: ridership ×0.85');
+  ok(/no crew: no conductor or operator on the ledger/.test(byA['Fruitvale'].factors) && /no dispatcher/.test(byA['Fruitvale'].factors), 'governor 1: Factors say why');
+  ok(!/no crew|no dispatcher/.test(off.by['Fruitvale'].factors), 'governor 0: nothing named');
+  eq(off.by['Fruitvale'].onTimePerformance, armed.by['Fruitvale'].onTimePerformance, 'governor 0: nothing moves');
+  const full = ledgerOf([BART_MGR, crewRow('P1', 'Ana', 'BART Train Conductor', 'Active'), crewRow('P2', 'Ben', 'BART Train Operator', 'Active'), crewRow('P3', 'Cy', 'BART Rail Dispatcher', 'Active'), crewRow('P4', 'Di', 'BART Track Maintenance Technician', 'Active')]);
+  const ctxF = Object.assign({}, ctxA, { ledger: full, summary: Object.assign({}, ctxA.summary) });
+  const allF = T.updateTransitMetrics_Phase2_(ctxF); const byF = {}; allF.forEach(m => { byF[m.station || m.corridor] = m; });
+  eq(byF['Fruitvale'].onTimePerformance, off.by['Fruitvale'].onTimePerformance, 'governor 1 with a full crew: nothing moves');
+  const sick = ledgerOf([BART_MGR, crewRow('P1', 'Ana', 'BART Train Conductor', 'hospitalized'), crewRow('P5', 'Ed', 'BART Train Conductor', 'Retired')]);
+  const hs = run(Object.assign({ sportsFeedEntries: [] }, prev), { ledger: sick });
+  ok(/crew short: Ana Test \(conductor\)/.test(hs.by['Fruitvale'].factors), 'a hospitalized conductor is named on the station rows: ' + hs.by['Fruitvale'].factors);
+  ok(!/Ed Test/.test(hs.by['Fruitvale'].factors), 'a retired conductor is not');
+  eq(hs.S.transitStaffing.conductor, 0, 'a hospitalized conductor is not on shift');
+  eq(hs.S.transitStaffing.short.length, 1, 'S.transitStaffing.short names one');
+  const stormSick = run(Object.assign({ sportsFeedEntries: [], weather: { type: 'rain', frontState: 'STORM' } }, prev), { ledger: sick });
+  ok(stormSick.S.transitState.disruptionOngoing === true && /^storm conditions; crew short: Ana Test \(conductor\)$/.test(stormSick.S.transitState.disruptionCause), 'a storm disruption names the crew member out: ' + stormSick.S.transitState.disruptionCause);
+  let threw = false; try { T.transitStaffing_({}); } catch (e) { threw = true; }
+  ok(threw, 'no ledger → throws (fail loud)');
 }
 
 console.log('transitCauses: ' + pass + ' passed, ' + fail + ' failed');

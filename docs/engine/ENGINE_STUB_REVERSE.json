@@ -2,7 +2,7 @@
   "generated": "2026-10-15",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1693,
+  "functionsMapped": 1695,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2601,6 +2601,12 @@
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
+    },
+    "transitStaffing": {
+      "writers": [
+        "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_"
+      ],
+      "readers": []
     },
     "transitState": {
       "writers": [

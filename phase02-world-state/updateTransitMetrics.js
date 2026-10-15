@@ -134,6 +134,64 @@ function transitDayMult_(context) {
   return 1;
 }
 
+// engine.290 move 4 — the BART crew, read off the ledger. Role classes match
+// RoleType at BART Oakland Division (first class that matches wins); a crew
+// row in care or custody is named as the cause but is not on shift.
+var TRANSIT_CREW_EMPLOYER = 'BIZ-00014';
+var TRANSIT_CREW_CLASSES = [
+  ['conductor', /conductor/i],
+  ['operator', /train operator|train engineer|rail operator/i],
+  ['dispatcher', /dispatch/i],
+  ['maintenance', /track|maintenance|systems tech/i],
+  ['stationManager', /station manager/i]
+];
+// Care / custody vocabulary (generationalEventsEngine, runCareerEngine,
+// judicialLifecycle). retired / deceased are not crew at all.
+var TRANSIT_CREW_OUT_STATUSES = ['hospitalized', 'critical', 'serious-condition', 'injured', 'recovering', 'detained'];
+
+function transitCrewClass_(roleType) {
+  var role = String(roleType || '');
+  for (var i = 0; i < TRANSIT_CREW_CLASSES.length; i++) {
+    if (TRANSIT_CREW_CLASSES[i][1].test(role)) return TRANSIT_CREW_CLASSES[i][0];
+  }
+  return null;
+}
+
+/**
+ * engine.290 move 4 — who is on shift at BART Oakland Division. Active rows
+ * count by role class; a crew row whose Status is care/custody (employer and
+ * role still held) goes on `short` and is named on every station row. Phase 4/5
+ * write those Statuses and Phase 10 persists them, so a Phase 2 read sees them
+ * the following Cycle — a one-Cycle lag by construction.
+ *
+ * @return {{conductor:number, operator:number, dispatcher:number, maintenance:number,
+ *           stationManager:number, total:number, short:Array<{name, role, status}>}}
+ */
+function transitStaffing_(ctx) {
+  if (!ctx.ledger || !ctx.ledger.headers) throw new Error('engine.290 transitStaffing_: ctx.ledger not loaded');
+  var h = ctx.ledger.headers;
+  var iEmp = h.indexOf('EmployerBizId'), iRole = h.indexOf('RoleType'), iStatus = h.indexOf('Status');
+  var iFirst = h.indexOf('First'), iLast = h.indexOf('Last'), iPop = h.indexOf('POPID');
+  if (iEmp < 0 || iRole < 0 || iStatus < 0) throw new Error('engine.290 transitStaffing_: Simulation_Ledger lacks EmployerBizId / RoleType / Status');
+  var out = { conductor: 0, operator: 0, dispatcher: 0, maintenance: 0, stationManager: 0, total: 0, short: [] };
+  var rows = ctx.ledger.rows || [];
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (String(row[iEmp] || '').trim() !== TRANSIT_CREW_EMPLOYER) continue;
+    var cls = transitCrewClass_(row[iRole]);
+    if (!cls) continue;
+    var status = String(row[iStatus] || '').trim().toLowerCase();
+    if (status === 'active') {
+      out[cls]++;
+      out.total++;
+    } else if (TRANSIT_CREW_OUT_STATUSES.indexOf(status) >= 0) {
+      var name = ((iFirst >= 0 ? String(row[iFirst] || '') : '') + ' ' + (iLast >= 0 ? String(row[iLast] || '') : '')).trim();
+      out.short.push({ name: name || (iPop >= 0 ? String(row[iPop] || '') : ''), role: cls, status: status });
+    }
+  }
+  return out;
+}
+
 // engine.290 move 3 — the base this engine computes ridership from. 2 = the
 // ledger share; a Cycle whose previous carry is not 2 is the rebase Cycle.
 var TRANSIT_BASE_VERSION = 2;
@@ -358,6 +416,9 @@ function updateTransitMetrics_Phase2_(ctx) {
   var prevBaseVersion = S.previousCycleState ? Number(S.previousCycleState.transitBaseVersion) || 0 : 0;
   var baseVersion = shares ? TRANSIT_BASE_VERSION : 1;
   var rebased = baseVersion === TRANSIT_BASE_VERSION && prevBaseVersion !== TRANSIT_BASE_VERSION;
+  // engine.290 move 4 — the crew is felt (governor) and named (always)
+  var staffing = transitStaffing_(ctx);
+  S.transitStaffing = staffing;
   var capacity = S.cityDynamicsCapacity || {};
   var transitCongestion = Number(capacity.transitCongestion) || 0;
 
@@ -380,6 +441,7 @@ function updateTransitMetrics_Phase2_(ctx) {
     corridorBase: corridorBase,
     rebased: rebased,
     transitCongestion: transitCongestion,
+    staffing: staffing,
     // engine.93 Task 9: the commute matrix rides along so per-station ridership
     // can weight by who commutes IN, not just who lives nearby.
     summary: S
@@ -457,6 +519,12 @@ function updateTransitMetrics_Phase2_(ctx) {
   var disruptedNow = (avgOT < 0.72) || breakdownRoll;
   var disruptionCause = breakdownRoll ? 'equipment breakdown' :
     (weatherType === 'storm' ? 'storm conditions' : 'system strain');
+  // engine.290 move 4: a crew member out names the disruption
+  if (staffing.short.length) {
+    var shortNames = [];
+    for (var sn = 0; sn < staffing.short.length; sn++) shortNames.push(staffing.short[sn].name + ' (' + staffing.short[sn].role + ')');
+    disruptionCause += '; crew short: ' + shortNames.join(', ');
+  }
 
   // worst 3 stations name the affected hoods (entities attached at generation)
   var otSorted = stationMetrics.slice().sort(function(a, b) {
@@ -660,6 +728,27 @@ function calculateStationMetrics_(station, context, demographics, rng) {
     causes.push(eff.tag);
   }
 
+  // engine.290 move 4 — the crew. Armed governor: no conductor and no
+  // operator → fewer riders, later trains; no dispatcher → later trains and
+  // weather bites twice as hard. Named cause (armed or not): a crew row in
+  // care or custody.
+  var crew = context.staffing;
+  var governed = crew && context.dials.transitStaffingGovernor === 1;
+  var noCrew = governed && crew.conductor === 0 && crew.operator === 0;
+  var noDispatch = governed && crew.dispatcher === 0;
+  if (noCrew) {
+    ridershipMod *= context.dials.transitNoCrewRidershipMult;
+    onTimeDelta -= context.dials.transitNoCrewOnTimeDrop;
+    causes.push('no crew: no conductor or operator on the ledger');
+  }
+  if (noDispatch) {
+    onTimeDelta -= context.dials.transitNoDispatchOnTimeDrop;
+    causes.push('no dispatcher');
+  }
+  for (var cs = 0; crew && cs < crew.short.length; cs++) {
+    causes.push('crew short: ' + crew.short[cs].name + ' (' + crew.short[cs].role + ')');
+  }
+
   // Random variance
   var variance = 0.9 + (rng() * 0.2); // 90-110%
   var ridership = Math.round(baseRidership * ridershipMod * variance);
@@ -669,7 +758,7 @@ function calculateStationMetrics_(station, context, demographics, rng) {
   if (context.weather === 'storm') {
     onTime -= 0.15;
   } else if (context.weather === 'rain' || context.weather === 'fog') {
-    onTime -= 0.05;
+    onTime -= noDispatch ? 0.10 : 0.05;   // engine.290: no dispatcher, the weather penalty doubles
   }
   // engine.290 move 3 — crowding from the sim: the city's own transit
   // congestion (applyCityDynamics_, 0-0.38) replaces the events>2 hardcode.

@@ -128,7 +128,9 @@ function stagedGrade(side, fallbackVerdict, articleSha256) {
   for (const proof of [side && side.rhea, fallbackVerdict]) {
     if (!proof || proof.pass !== true || proof.draftSha256 !== articleSha256) continue;
     const cs = proof.contractScore;
-    if (cs && Number.isInteger(cs.score)) return cs.score;
+    // codex .79 #1: the score must be for these bytes (when it carries its own hash) and in 0-4.
+    if (cs && cs.draftSha256 && cs.draftSha256 !== articleSha256) continue;
+    if (cs && Number.isInteger(cs.score) && cs.score >= 0 && cs.score <= 4) return cs.score;
   }
   return null;
 }
@@ -381,12 +383,32 @@ function citationSnippet(text, name) {
 // MEDIA climbs on these alone). ingestPublishedEntities' ARTICLE TABLE path never matched this
 // edition shape, so none were written after C102. Context = the stem, like byline-landed.
 function bylinePublishedRows(cycle, set) {
-  const curation = readJsonSafe(path.join(ROOT, 'output', 'edition_curation_c' + cycle + '.json'));
-  if (!curation || !Array.isArray(curation.selected)) return [];
-  const printed = new Set(curation.selected);
+  // Credit only what the canon door published (stepPublish writes this after ingest + notebook).
+  const pub = readJsonSafe(path.join(ROOT, 'output', 'edition_published_c' + cycle + '.json'));
+  if (!pub || !Array.isArray(pub.selected)) {
+    console.log('[byline-published] none: c' + cycle + ' edition not published (recover: --step publish --apply, then --step sheets --apply)');
+    return [];
+  }
+  const printed = new Set(pub.selected);
   return set.filter(e => printed.has(e.stem) && e.sidecar.byline)
     .map(e => ({ name: e.sidecar.byline, popid: e.sidecar.bylinePopid || null,
       usageType: 'byline-published', context: e.stem, snippet: '', byline: true }));
+}
+
+// The engine credits by name (processAdvancementIntake splitUsageName_: one leading honorific off,
+// then First Last). A byline row lands only when that name is the sidecar's own POPID on the
+// ledger — a miss or a mismatch is loud and skipped, never a credit to the wrong citizen.
+function bylineResolves(row, ledger) {
+  const h = ledger[0] || [];
+  const iP = h.indexOf('POPID'), iF = h.indexOf('First'), iL = h.indexOf('Last');
+  const norm = x => String(x || '').toLowerCase().replace(/[^a-z\s'-]/g, '').replace(/\s+/g, ' ').trim();
+  const name = norm(String(row.name).replace(/^\s*[A-Za-z]{1,5}\.\s+/, ''));
+  const hits = ledger.slice(1).filter(r => norm(r[iF] + ' ' + r[iL]) === name);
+  if (hits.length !== 1) return { ok: false, why: hits.length ? 'ambiguous name (' + hits.length + ' ledger rows)' : 'name not on the ledger' };
+  if (row.popid && String(hits[0][iP]).trim() !== String(row.popid).trim()) {
+    return { ok: false, why: 'name resolves to ' + hits[0][iP] + ', sidecar says ' + row.popid };
+  }
+  return { ok: true, popid: String(hits[0][iP]).trim() };
 }
 
 async function stepSheets(cycle) {
@@ -403,6 +425,14 @@ async function stepSheets(cycle) {
   const data = await sheets.getRawSheetData('Citizen_Media_Usage');
   const h = data[0] || [];
   const iN = h.indexOf('CitizenName'), iT = h.indexOf('UsageType'), iC = h.indexOf('Context');
+  if (wanted.some(w => w.byline)) {
+    const ledger = await sheets.getRawSheetData('Simulation_Ledger');
+    for (let i = wanted.length - 1; i >= 0; i--) {
+      if (!wanted[i].byline) continue;
+      const r = bylineResolves(wanted[i], ledger);
+      if (!r.ok) { console.error('[byline-published] SKIPPED ' + wanted[i].name + ' (' + wanted[i].context + '): ' + r.why); wanted.splice(i, 1); }
+    }
+  }
   // engine.152: classify the light each citation casts (cheap model, one call per row).
   // A failed or absent judgment leaves the cell blank — the engine reads blank as neutral.
   const { classifyCitationLight } = require(path.join(ROOT, 'lib', 'reflectionClassifier'));
@@ -898,31 +928,40 @@ async function stepCurate(cycle) {
   const byStem = {}; for (const a of scorecard.articles) byStem[a.stem] = a;
   const set = loadStagedSet(cycle);
   const top = Number(arg('--top', 9));
+  // codex .79 #2: only filings the EIC audit actually read are eligible — a stem staged or renamed
+  // after the audit has no verdict and waits for next week's.
+  const unaudited = set.filter(e => !byStem[e.stem]).map(e => e.stem);
+  for (const st of unaudited) console.log('  [skip] not in the EIC scorecard: ' + st);
   const ranked = set
-    .filter(e => (byStem[e.stem] || {}).verdict !== 'canon-violation')
+    .filter(e => byStem[e.stem] && byStem[e.stem].verdict !== 'canon-violation')
     .map(e => ({ stem: e.stem, byline: e.sidecar.byline || '', desk: e.sidecar.desk || '',
       grade: e.grade == null ? null : e.grade,
-      score: curationScore(e, byStem[e.stem]), slug: primarySlug(e), verdict: (byStem[e.stem] || {}).verdict || 'unaudited' }))
+      score: curationScore(e, byStem[e.stem]), slug: primarySlug(e), verdict: byStem[e.stem].verdict }))
     // pipeline.79: the week's best-graded work leads; the storyline/names/audit count breaks
     // ties; an ungraded filing ranks below every graded one.
     .sort((a, b) => ((b.grade == null ? -1 : b.grade) - (a.grade == null ? -1 : a.grade)) || (b.score - a.score));
-  // Two passes: unique storyline threads first, then best remainders fill leftover slots.
+  // Storyline variety works INSIDE a grade (codex .79 #2): a lower grade never takes a slot from a
+  // higher one for being on a fresh thread. Per grade: unique threads first, then that grade's rest.
   const seen = new Set(), selected = [];
-  for (const r of ranked) {
-    if (selected.length >= top) break;
-    if (r.slug && seen.has(r.slug)) continue;
-    if (r.slug) seen.add(r.slug);
-    selected.push(r.stem);
+  const tiers = [...new Set(ranked.map(r => r.grade))];
+  for (const g of tiers) {
+    const tier = ranked.filter(r => r.grade === g);
+    for (const r of tier) {
+      if (selected.length >= top) break;
+      if (r.slug && seen.has(r.slug)) continue;
+      if (r.slug) seen.add(r.slug);
+      selected.push(r.stem);
+    }
+    for (const r of tier) {
+      if (selected.length >= top) break;
+      if (!selected.includes(r.stem)) selected.push(r.stem);
+    }
   }
-  for (const r of ranked) {
-    if (selected.length >= top) break;
-    if (!selected.includes(r.stem)) selected.push(r.stem);
-  }
-  const excluded = set.length - ranked.length;
-  const out = { cycle: String(cycle), top, selected, ranked, excludedCanonViolations: excluded };
+  const excluded = set.length - ranked.length - unaudited.length;
+  const out = { cycle: String(cycle), top, selected, ranked, excludedCanonViolations: excluded, unaudited };
   const p = path.join(ROOT, 'output', 'edition_curation_c' + cycle + '.json');
   fs.writeFileSync(p, JSON.stringify(out, null, 2));
-  for (const r of ranked.slice(0, top)) console.log('  ' + (r.grade == null ? '-' : r.grade + '/4') + ' ' + String(r.score).padStart(5) + '  ' + r.stem + (selected.includes(r.stem) ? '' : '  (storyline-dedup deferred)'));
+  for (const r of ranked) console.log((selected.includes(r.stem) ? '  PRINT ' : '        ') + (r.grade == null ? '-  ' : r.grade + '/4') + ' ' + String(r.score).padStart(5) + '  ' + r.stem);
   console.log(selected.length + ' selected of ' + set.length + ' staged (' + excluded + ' canon-violation excluded) → ' + path.relative(ROOT, p));
   return out;
 }
@@ -1030,6 +1069,12 @@ async function stepPublish(cycle) {
   // real publish threw despite the source landing in the notebook correctly.
   if (!add.ok) throw new Error('NotebookLM source add failed: ' + String(add.out || '').slice(0, 200));
   console.log('published: canon ingest + permanent notebook (' + config.notebookName + ')');
+  // pipeline.79 (codex .79 #3): the canon door completed for exactly these stems — the only thing
+  // that lets stepSheets write byline-published (MEDIA tier credit).
+  fs.writeFileSync(path.join(ROOT, 'output', 'edition_published_c' + cycle + '.json'), JSON.stringify({
+    cycle: String(cycle), selected: curation.selected, edition: path.relative(ROOT, outPath),
+    editionSha256: crypto.createHash('sha256').update(fs.readFileSync(outPath)).digest('hex'),
+    publishedAt: new Date().toISOString() }, null, 2));
   const sourceIdMatch = String(add.out || '').match(/Source ID:\s*(\S+)/);
   const sourceId = sourceIdMatch ? sourceIdMatch[1] : null;
   // S429 — the edition is canon the moment it lands; record it in the fail-closed source
@@ -1170,4 +1215,4 @@ if (require.main === module) {
 
 module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
-  isCodeRenderedBrief, stagedGrade, bylinePublishedRows };
+  isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves };

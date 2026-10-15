@@ -344,6 +344,8 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
   assert.equal(cdr.lastGradedLine([{ content: 'filed: X' }, { content: line }, { content: 'graded: 1/4 — older' }]), line);
   assert.equal(cdr.lastGradedLine([{ content: 'filed: X' }]), null);
   assert.equal(cdr.lastGradedLine([{ content: 'graded: 3/4 — too long.\n\n---\n\ngraded: 4/4 — nothing fell short.' }]), 'graded: 4/4 — nothing fell short.', 'pipeline.80: same-key upsert appends; newest wins');
+  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-01076-c111-PRESS-graded-nia-rook-weekly', content: 'graded: 1/4 — weekly.' },
+    { customId: 'cp-POP-01076-c111-PRESS-graded-nia-rook', content: 'graded: 3/4 — daily.' }], 'nia-rook'), 'graded: 3/4 — daily.', 'a seat reads only its own package grade');
   const g = cdr.fanoutCheckTotals([{ contractScore: 3 }, { contractScore: 4 }, { contractScore: null }]);
   assert.match(cdr.formatCheckTotals(g, 'write'), /graded 2 avg 3\.5\/4$/);
   // live read-backs when the C111 artifacts are on disk

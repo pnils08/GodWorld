@@ -223,6 +223,14 @@ console.log('Test 6: mergeStorylineLedger');
   assert('stagedGrade falls back to a root verdict on the same hash', stagedGrade({ rhea: { pass: true, draftSha256: sha } }, { pass: true, draftSha256: sha, contractScore: { score: 4 } }, sha) === 4);
   assert('stagedGrade ignores a root verdict for other bytes', stagedGrade({ rhea: { pass: true, draftSha256: sha } }, { pass: true, draftSha256: 'b'.repeat(64), contractScore: { score: 4 } }, sha) === null);
   assert('stagedGrade is null when never graded', stagedGrade({ rhea: { pass: true, draftSha256: sha } }, null, sha) === null);
+  assert('stagedGrade rejects a score bound to other bytes', stagedGrade({ rhea: { pass: true, draftSha256: sha, contractScore: { score: 4, draftSha256: 'c'.repeat(64) } } }, null, sha) === null);
+  assert('stagedGrade rejects an out-of-range score', stagedGrade({ rhea: { pass: true, draftSha256: sha, contractScore: { score: 9 } } }, null, sha) === null);
+  const { bylineResolves } = require('./cron-saturday-run');
+  const L = [['POPID', 'First', 'Last'], ['POP-00001', 'Rachel', 'Torres'], ['POP-00002', 'Sam', 'Lee'], ['POP-00003', 'Sam', 'Lee']];
+  assert('byline with an honorific resolves to its POPID', bylineResolves({ name: 'Sgt. Rachel Torres', popid: 'POP-00001' }, L).ok);
+  assert('byline POPID mismatch is refused', !bylineResolves({ name: 'Rachel Torres', popid: 'POP-00009' }, L).ok);
+  assert('ambiguous byline is refused', !bylineResolves({ name: 'Sam Lee', popid: 'POP-00002' }, L).ok);
+  assert('unknown byline is refused', !bylineResolves({ name: 'Nobody Here' }, L).ok);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

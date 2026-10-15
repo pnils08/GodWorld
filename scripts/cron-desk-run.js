@@ -1506,10 +1506,14 @@ let SEAT_CHECKS = null; // the current seat's checks; the fan-out loop collects 
 function gradedLine(cs) {
   return 'graded: ' + cs.score + '/4 — ' + (cs.short || 'nothing fell short');
 }
-function lastGradedLine(posts) {
+function lastGradedLine(posts, persona) {
   // pipeline.80: a rerun in the same Cycle upserts the same page key and Supermemory appends
   // ("old\n\n---\n\nnew") — the newest grade is the LAST graded line in the newest doc.
+  // pipeline.79 (codex #4): with a persona, only that package's grade docs (graded-<persona>, or
+  // the pre-key 'graded' docs of the first five seats) — Nia's daily and weekly seats share a POPID.
   for (const p of posts || []) {
+    const id = String(p && p.customId || '');
+    if (persona && id && !(id.endsWith('-graded-' + persona) || id.endsWith('-graded'))) continue;
     const hits = String(p && p.content || '').match(/^graded: \d\/4\b.*$/gm);
     if (hits) return hits[hits.length - 1].trim().slice(0, 300);
   }
@@ -2090,7 +2094,8 @@ async function runAngle(assign) {
         try {
           const { recentPage_ } = require(path.join(ROOT, 'lib', 'citizenPage'));
           const page = await recentPage_(asker.popid, 12);
-          const last = lastGradedLine((page && page.results || []).map(d => ({ content: d.content })));
+          const last = lastGradedLine((page && page.results || []).map(d => ({ content: d.content, customId: d.customId })),
+            ACTIVE_WAKE_PACKAGE.persona);
           if (last) {
             ask += '\n\nYour last piece came back from the desk ' + last.replace(/^graded:/, 'graded') +
               '. Plan this one so it does what the contract asks.';
@@ -3178,7 +3183,8 @@ async function runWrite(assign) {
     const gradeLine = gradedLine(contractScore);
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
-        '--pop=' + byline.popid, '--record-text=' + gradeLine, '--cycle=' + cycle],
+        '--pop=' + byline.popid, '--record-text=' + gradeLine, '--cycle=' + cycle,
+        ...(personaSlug ? ['--page-key=graded-' + personaSlug] : [])],
         { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
       gradeRecord = { recorded: true, line: gradeLine };
       log('reporter grade carried: ' + gradeLine);

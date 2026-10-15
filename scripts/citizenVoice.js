@@ -111,7 +111,7 @@ async function generate(system, user, maxTokens, temperature, model) {
 /* Voice one citizen. Returns {popId,name,nh,occ,disposition,text,recorded}.
  * Throws {code:2} when unvoiceable (no dials / not in ledger) so single-call
  * mode keeps its exit-2 contract and batch mode maps it to a fallback. */
-async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, evidenceBound,
+async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, pageKey, evidenceBound,
   interviewMode, livedContextAllowed, model }) {
   const c = pool.find((p) => p.popId === popId);
   if (!c) { const e = new Error(`${popId} not voiceable (no DialState / not in ledger / no name+hood)`); e.code = 2; throw e; }
@@ -199,7 +199,9 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
       cycle, daypart: 'PRESS',
       // pipeline.77: a reporter's "graded:" line keeps its own doc — one PRESS id per Cycle let it
       // overwrite the same Cycle's "filed:" line (C111 reruns, 2026-10-15).
-      ...(preText != null && /^graded: /.test(String(preText)) ? { key: 'graded' } : {}),
+      // pipeline.79 (codex #4): keyed per package (graded-<persona>) so two seats on one POPID
+      // (Nia daily + weekly) never share a grade doc.
+      ...(preText != null && /^graded: /.test(String(preText)) ? { key: pageKey || 'graded' } : {}),
       extra: { affect: cls.affect || null, event: cls.event || null, ask: String(ask).slice(0, 120) },
     });
     if (appended.error) throw new Error('appendReflection_: ' + appended.error);
@@ -297,7 +299,7 @@ async function runBatch(batchPath, cycle) {
     let r;
     try {
       r = await voiceOne(pool, rtPop, 'You filed a story for the Tribune: ' + recordText, {
-        cycle, maxTokens: 60, record: !DRY, dry: DRY, preText: recordText,
+        cycle, maxTokens: 60, record: !DRY, dry: DRY, preText: recordText, pageKey: arg('page-key', null),
         model: MODEL,
       });
     } catch (e) { console.error('citizenVoice record-text: ' + e.message); process.exit(e.code || 1); }

@@ -385,7 +385,8 @@ async function contractOnly(draftAbs) {
     try {
       const cp = buildContractPrompt(profile, articleProseForReview(fs.readFileSync(draftAbs, 'utf8')));
       const cr = await callOpenRouter(API_MODEL, cp.system, cp.user, CONTRACT_TIMEOUT_MS);
-      contractScore = Object.assign(parseContractScore(cr.text, profile, cp.words), { model: API_MODEL, scoredWithoutRhea: true });
+      contractScore = Object.assign(parseContractScore(cr.text, profile, cp.words), { model: API_MODEL, scoredWithoutRhea: true,
+        draftSha256: crypto.createHash('sha256').update(fs.readFileSync(draftAbs)).digest('hex') });
     } catch (e) { contractScore = { error: 'contract score call failed: ' + e.message }; }
   }
   const outPath = path.join(COMPARE_DIR, path.basename(draftAbs).replace(/\.md$/, '') + '.contract.json');
@@ -420,6 +421,9 @@ function loadReviewContext(persona, articlePacketFile, draftText) {
     : { ok: true, manifestId: null, errors: [], observations: [] };
   return {
     profile,
+    // pipeline.79 (codex #4): grade against the contract the writer was SHOWN — a W3 Packet can
+    // rewrite it (Luis's RECORDS_BRIEF swaps his two-range contract for 400-700 + its own open/close).
+    contractProfile: packet && packet.reviewProfile && packet.reviewProfile.articleContract ? packet.reviewProfile : profile,
     manifest: packet && packet.manifest ? packet.manifest : null,
     audit,
     packageVersion: wakePackage && wakePackage.version || null,
@@ -838,13 +842,15 @@ async function main() {
   if (CONTRACT_SCORE) {
     if (BACKEND !== 'api') {
       out.contractScore = { error: 'contract score runs on the api backend only' };
-    } else if (!(reviewContext && reviewContext.profile && reviewContext.profile.articleContract)) {
+    } else if (!(reviewContext && (reviewContext.contractProfile || reviewContext.profile || {}).articleContract)) {
       out.contractScore = { error: 'no seat contract in the review profile' };
     } else {
       try {
-        const cp = buildContractPrompt(reviewContext.profile, articleProseForReview(draftText));
+        const cprof = reviewContext.contractProfile || reviewContext.profile;
+        const cp = buildContractPrompt(cprof, articleProseForReview(draftText));
         const cr = await callOpenRouter(API_MODEL, cp.system, cp.user, CONTRACT_TIMEOUT_MS);
-        out.contractScore = Object.assign(parseContractScore(cr.text, reviewContext.profile, cp.words), { model: API_MODEL });
+        // draftSha256: the grade is bound to the bytes it judged (codex .79 #1).
+        out.contractScore = Object.assign(parseContractScore(cr.text, cprof, cp.words), { model: API_MODEL, draftSha256: out.draftSha256 });
         const rates = API_RATES[API_MODEL] || API_RATES._default;
         out.contractScore.costUsd = +(((cr.usageIn / 1e6) * rates[0]) + ((cr.usageOut / 1e6) * rates[1])).toFixed(4);
         console.log('contract score: ' + (out.contractScore.error || out.contractScore.score + '/4 — ' + (out.contractScore.short || 'nothing short')));

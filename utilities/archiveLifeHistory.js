@@ -211,14 +211,19 @@ function runArchive_(dryRun, opts) {
     ' rows to LifeHistory_Archive (now ' + (archiveLastRow + archiveRows.length) + ' rows)');
 
   // --- Rewrite LifeHistory_Log with only kept rows ---
-  // Clear all data rows (keep header)
-  if (logSheet.getLastRow() > 1) {
-    logSheet.getRange(2, 1, logSheet.getLastRow() - 1, logSheet.getLastColumn()).clearContent();
-  }
-
-  // Write back kept rows
+  // engine.285: write the kept rows over the top FIRST, then clear what is left
+  // below them. Every original row is by now either in the archive (appended
+  // above) or in keepRows, so a fire killed anywhere in here leaves duplicate
+  // lines at worst, never a loss. (It cleared every data row and then wrote the
+  // kept ones back: a kill between the two lost all retained history — and above
+  // the row trigger this runs on every fire.)
+  var lastBefore = logSheet.getLastRow();
   if (keepRows.length > 0) {
     logSheet.getRange(2, 1, keepRows.length, keepRows[0].length).setValues(keepRows);
+  }
+  var leftover = lastBefore - (keepRows.length + 1);
+  if (leftover > 0) {
+    logSheet.getRange(keepRows.length + 2, 1, leftover, logSheet.getLastColumn()).clearContent();
   }
 
   // Delete any extra empty rows beyond the data (clean up sheet size)

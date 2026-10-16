@@ -120,5 +120,30 @@ function buildLog(maxCycle, span, perCycle) {
   ok('T3 the cycle never created the tab', !ss._sheets['LifeHistory_Archive']);
 }
 
+// ── Test 4 (engine.285): a fire killed after the trim's FIRST write to the log
+// loses nothing — every original row is in the archive or still on the log ──
+{
+  logged = [];
+  const rows = buildLog(120, 20, 700); // 14000 rows > trigger
+  const log = makeSheet(HEADER, rows);
+  const ss = makeSS(log);
+  ss._sheets['LifeHistory_Archive'] = makeSheet(HEADER, []);
+  // Kill switch: the second mutation of LifeHistory_Log throws (Apps Script's
+  // 6-minute cap landing mid-trim). Reads stay live.
+  let writes = 0;
+  const realGetRange = log.getRange.bind(log);
+  log.getRange = (r, c, n, m) => {
+    const rg = realGetRange(r, c, n, m);
+    const guard = (fn) => function () { if (++writes === 2) throw new Error('killed'); return fn.apply(rg, arguments); };
+    return { setValues: guard(rg.setValues), clearContent: guard(rg.clearContent) };
+  };
+  let killed = null;
+  try { maintainLifeHistoryLog_({ ss }); } catch (e) { killed = e; }
+  ok('T4 the kill landed mid-trim', !!killed && killed.message === 'killed', killed ? killed.message : 'no kill');
+  const have = new Set(log._rows.concat(ss._sheets['LifeHistory_Archive']._rows).map(r => r[1]).filter(Boolean));
+  const lost = rows.filter(r => !have.has(r[1]));
+  ok('T4 nothing lost after a kill between the two writes', lost.length === 0, lost.length + ' rows gone (e.g. ' + (lost[0] || [])[1] + ')');
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

@@ -22,8 +22,11 @@ grep -q 1hL59VnByrXfWdz6EKZZQ1ss8DH1PFfDT9vVDvmjqHY_pwLyTB_N1iKW5 .clasp.json &&
 $REPO/node_modules/.bin/clasp-real deployments
 if [ "${1:-}" != "--go" ]; then echo "DRY RUN — pass --go to push + bump the PROD web app"; exit 0; fi
 CLAUDE_CTL=1 $REPO/node_modules/.bin/clasp push -f | grep -c "└─"
-DEP=$($REPO/node_modules/.bin/clasp-real deployments | grep -v "@HEAD" | grep -o "AKfycb[A-Za-z0-9_-]*" | head -1)
-echo "bumping $DEP"
+# The live web app is the deploymentId pinned in the repo .clasp.json (@135 on 2026-10-16) — never the
+# first non-HEAD row (that is "@1 - Mags", a different endpoint).
+DEP=$(grep -o '"deploymentId": "[^"]*"' .clasp.json | cut -d'"' -f4)
+$REPO/node_modules/.bin/clasp-real deployments | grep -q "$DEP" || { echo "pinned deployment $DEP not in the listing — STOP"; exit 1; }
+echo "bumping the pinned PROD web app $DEP"
 CLAUDE_CTL=1 $REPO/node_modules/.bin/clasp deploy -i "$DEP" -d "engine.292: a zero night pushes (casinoLedgerEngine.js only, over stage 4d) — bench 1004 @31 C112"
 $REPO/node_modules/.bin/clasp-real deployments
 echo "pull-back check:"; mkdir -p /tmp/e292-pullback && cp .clasp.json /tmp/e292-pullback/ && (cd /tmp/e292-pullback && $REPO/node_modules/.bin/clasp-real pull >/dev/null && cmp phase05-citizens/casinoLedgerEngine.js $REPO/phase05-citizens/casinoLedgerEngine.js && echo "  PROD casinoLedgerEngine.js == repo HEAD")

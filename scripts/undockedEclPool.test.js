@@ -25,12 +25,17 @@ check('wager lines undocked-gated', P.SHOW_ROWS.filter(function (r) { return /ec
 check('wager lines have no numbers', P.SHOW_ROWS.filter(function (r) { return /ecl:kind:wager/.test(r.Tags); }).every(function (r) {
   return !/\d/.test(r.Text);
 }));
+check('token rows exist', P.SHOW_ROWS.filter(function (r) { return /\$(PILOT|PILOTROLE|LEADER)\b/.test(r.Text); }).length >= 10);
+check('no hand-named pilot left', P.ROWS.every(function (r) { return !/\bWalker\b|\bthe DA\b|\bJumper\b|dishwasher/.test(r.Text); }));
 check('no mechanism words', P.ROWS.every(function (r) { return !/\btier\b|FameScore|UsageCount|adapter|CreditsDelta|EpisodeId/.test(r.Text); }));
 
 P.ROWS.forEach(function (r, i) {
   check('row ' + i + ' source:undocked first', P.firstTag(r.Tags) === 'source:undocked');
   check('row ' + i + ' comma tags', r.Tags.indexOf(';') < 0);
-  check('row ' + i + ' no $SLOT', r.Text.indexOf('$') === -1);
+  // engine.291: $PILOT / $PILOTROLE / $LEADER are the only slots a row may carry
+  check('row ' + i + ' no $SLOT but the three entity slots', !/\$(?!PILOTROLE\b|PILOT\b|LEADER\b)/.test(r.Text));
+  check('row ' + i + ' never $PILOT with $LEADER', !(/\$PILOT\b/.test(r.Text) && /\$LEADER\b/.test(r.Text)));
+  if (r.was != null) check('row ' + i + ' retag keeps a non-empty was', !!r.was && r.was !== r.Text && r.was.indexOf('$') === -1);
 });
 
 const loader = fs.readFileSync(path.join(__dirname, '..', 'phase02-world-state', 'loadEventContentLedger.js'), 'utf8');

@@ -34,6 +34,13 @@ function row(pool, kind, text, weight, conditions, grain) {
   };
 }
 
+// research.29 Move 4 (engine.291): a row that names a pilot by hand is retagged to the
+// draw-time entity slots $PILOT / $PILOTROLE / $LEADER. `was` = the live Text it
+// replaces (undockedEclPoolApply --retag matches the live row on it; `was:` is the
+// revert map, same convention as the feed backfill). Never $PILOT and $LEADER in one
+// line — the board leader can also be an airing pilot (C112: Eric Taveras is both).
+function retag(r, was) { r.was = was; return r; }
+
 const PILOT_ROWS = [
   row(POOL_PILOT, 'pilot', 'sat the chair and felt the night get small around the instruments', 1.6, 'undockedpilot'),
   row(POOL_PILOT, 'pilot', 'sold the haul and then watched the tank price sit down on them', 1.55, 'undockedpilot'),
@@ -50,27 +57,27 @@ const SHOW_ROWS = [
   row(POOL_SHOW, 'watch', 'the block put UNDOCKED on and went quiet when the belt haul came up', 1.2, 'undocked'),
   row(POOL_SHOW, 'watch', 'made a night of it for UNDOCKED — chairs in the hallway, someone keeping score on a napkin', 1.15, 'undocked'),
   row(POOL_SHOW, 'watch', 'loved the A\'s on principle and still cleared the night for UNDOCKED', 1.15, 'undocked'),
-  row(POOL_SHOW, 'watch', 'heard two strangers on the 12 arguing the dishwasher\'s sell like it was civic business', 1.1, 'undocked'),
-  row(POOL_SHOW, 'watch', 'the kids knew Walker\'s name before they knew the mayor\'s', 1.0, 'undocked;children>=1'),
+  retag(row(POOL_SHOW, 'watch', 'heard two strangers on the 12 arguing $PILOT\'s sell like it was civic business', 1.1, 'undocked'), 'heard two strangers on the 12 arguing the dishwasher\'s sell like it was civic business'),
+  retag(row(POOL_SHOW, 'watch', 'the kids could say $PILOT before they could say the mayor\'s name', 1.0, 'undocked;children>=1'), 'the kids knew Walker\'s name before they knew the mayor\'s'),
   row(POOL_SHOW, 'watch', 'Jack London pretended it was just another night and then every window had UNDOCKED on', 0.85, 'undocked;hood=Jack London'),
 
-  row(POOL_SHOW, 'argue', 'told the table Walker got robbed by the fuel price and would not hear otherwise', 1.0, 'undocked'),
-  row(POOL_SHOW, 'argue', 'spent the walk home insisting the DA should have sold instead of holding', 1.0, 'undocked'),
-  row(POOL_SHOW, 'argue', 'got into it over whether Jumper froze or just refused to take the cheap shot', 1.0, 'undocked'),
+  retag(row(POOL_SHOW, 'argue', 'told the table $PILOT got robbed by the fuel price and would not hear otherwise', 1.0, 'undocked'), 'told the table Walker got robbed by the fuel price and would not hear otherwise'),
+  retag(row(POOL_SHOW, 'argue', 'spent the walk home insisting $PILOT should have sold instead of holding', 1.0, 'undocked'), 'spent the walk home insisting the DA should have sold instead of holding'),
+  retag(row(POOL_SHOW, 'argue', 'got into it over whether $PILOT froze or just refused to take the cheap shot', 1.0, 'undocked'), 'got into it over whether Jumper froze or just refused to take the cheap shot'),
   row(POOL_SHOW, 'argue', 'said the lottery is the only honest draw in the city and then refused to explain what that meant', 0.95, 'undocked'),
 
-  row(POOL_SHOW, 'love', 'cheered the dishwasher like he had already made the paper', 1.0, 'undocked;warmth>=60'),
-  row(POOL_SHOW, 'love', 'told anyone who would listen Walker was going to get noticed this time', 1.0, 'undocked;warmth>=60'),
+  retag(row(POOL_SHOW, 'love', 'cheered $PILOT like the paper had already called', 1.0, 'undocked;warmth>=60'), 'cheered the dishwasher like he had already made the paper'),
+  retag(row(POOL_SHOW, 'love', 'told anyone who would listen $PILOT was going to get noticed this time', 1.0, 'undocked;warmth>=60'), 'told anyone who would listen Walker was going to get noticed this time'),
   row(POOL_SHOW, 'love', 'rewound the belt haul on the walk home and smiled at nothing in particular', 0.95, 'undocked;warmth>=60'),
 
-  row(POOL_SHOW, 'sting', 'muttered they could have flown that chair better than the dishwasher', 0.85, 'undocked;warmth<=39'),
-  row(POOL_SHOW, 'sting', 'could not watch Walker get the cameras without tasting it', 0.85, 'undocked;warmth<=39'),
+  retag(row(POOL_SHOW, 'sting', 'muttered they could have flown that chair better than $PILOT', 0.85, 'undocked;warmth<=39'), 'muttered they could have flown that chair better than the dishwasher'),
+  retag(row(POOL_SHOW, 'sting', 'could not watch $PILOT get the cameras without tasting it', 0.85, 'undocked;warmth<=39'), 'could not watch Walker get the cameras without tasting it'),
   row(POOL_SHOW, 'sting', 'said out loud that some people just get looked at and the rest of us wash dishes', 0.8, 'undocked;warmth<=39'),
 
   row(POOL_SHOW, 'lottery', 'kept the secret that they check the UNDOCKED names every cycle the way some people check scores', 1.15, 'undocked;fame=0;lifestate=working'),
   row(POOL_SHOW, 'lottery', 'practiced what they would say if the draw ever landed on them', 1.1, 'undocked;fame=0;lifestate=working'),
   row(POOL_SHOW, 'lottery', 'wondered what it would take to sit that chair for one episode', 1.1, 'undocked;fame=0;lifestate=working'),
-  row(POOL_SHOW, 'lottery', 'caught themselves planning a better episode than Walker\'s while the water ran', 1.05, 'undocked;fame=0;drive>=60'),
+  retag(row(POOL_SHOW, 'lottery', 'caught themselves planning a better episode than $PILOT flew while the water ran', 1.05, 'undocked;fame=0;drive>=60'), 'caught themselves planning a better episode than Walker\'s while the water ran'),
 
   row(POOL_SHOW, 'aspire', 'watched UNDOCKED like someone who already knew what a camera does to a week', 0.75, 'undocked;fame>=25'),
 
@@ -86,10 +93,24 @@ const SHOW_ROWS = [
   // docs/for-claude-review/2026-08-31-grok-casino-ledger.md Task 0.
   row(POOL_SHOW, 'wager', 'Baylight treated the UNDOCKED board like weather — you checked it whether you meant to or not', 1.15, 'undocked'),
   row(POOL_SHOW, 'wager', 'Casino Town put the belt haul next to the A\'s and the window did not pretend they were different nights', 1.1, 'undocked'),
-  row(POOL_SHOW, 'wager', 'folded a slip for the dishwasher and then would not look at the table', 1.05, 'undocked', 'citizen'),
-  row(POOL_SHOW, 'wager', 'asked Manfred whether the dishwasher was on the board and then pretended they were asking for a friend', 1.0, 'undocked', 'citizen'),
+  retag(row(POOL_SHOW, 'wager', 'folded a slip for $PILOT and then would not look at the table', 1.05, 'undocked', 'citizen'), 'folded a slip for the dishwasher and then would not look at the table'),
+  retag(row(POOL_SHOW, 'wager', 'asked Manfred whether $PILOT was on the board and then pretended they were asking for a friend', 1.0, 'undocked', 'citizen'), 'asked Manfred whether the dishwasher was on the board and then pretended they were asking for a friend'),
   row(POOL_SHOW, 'wager', 'walked past the window twice before they went in, then acted like it was nothing', 0.95, 'undocked;drive>=60', 'citizen'),
   row(POOL_SHOW, 'wager', 'someone at the bar called a napkin a ledger and nobody laughed', 0.9, 'undocked'),
+  // research.29 Move 4 crossover rows — only make sense because of who is in the
+  // chair. $PILOTROLE renders lowercase with no article ("second baseman"); $LEADER
+  // is the board leader (no self-exclusion: the leader may draw a line about
+  // themselves — rare, accepted, logged in the plan changelog).
+  row(POOL_SHOW, 'watch', 'watched a $PILOTROLE fly UNDOCKED and the whole block had a stake in it by the second mission', 1.05, 'undocked'),
+  row(POOL_SHOW, 'watch', 'put UNDOCKED on at work because a $PILOTROLE was in the chair and that felt like a reason', 1.0, 'undocked'),
+  row(POOL_SHOW, 'watch', 'checked the board on the walk to work and $LEADER was still the name at the top', 1.0, 'undocked'),
+  row(POOL_SHOW, 'argue', 'argued whether a $PILOTROLE belongs in a cockpit at all and lost the argument to the belt haul', 1.0, 'undocked'),
+  row(POOL_SHOW, 'argue', 'said a $PILOTROLE flies like a $PILOTROLE and would not say whether that was praise', 0.95, 'undocked'),
+  row(POOL_SHOW, 'argue', 'argued at the bar that $LEADER only leads because nobody has flown a real contract yet', 0.95, 'undocked'),
+  row(POOL_SHOW, 'love', 'was prouder of $PILOT in the chair than of anything the city had asked them to be', 0.95, 'undocked;warmth>=60'),
+  row(POOL_SHOW, 'sting', 'said a $PILOTROLE has no business in that chair and then watched the whole episode anyway', 0.85, 'undocked;warmth<=39'),
+  row(POOL_SHOW, 'lottery', 'did the math on how many nights it would take to catch $LEADER and kept the number to themselves', 1.0, 'undocked;fame=0;lifestate=working'),
+  row(POOL_SHOW, 'aspire', 'knew exactly what a week on UNDOCKED does to a $PILOTROLE and watched $PILOT find out', 0.75, 'undocked;fame>=25'),
 ];
 
 const ROWS = PILOT_ROWS.concat(SHOW_ROWS);
@@ -114,6 +135,10 @@ function validateRows(rows) {
     if (r.PoolKey !== POOL_PILOT && r.PoolKey !== POOL_SHOW) errors.push(i + ': PoolKey');
     if (!r.Text) errors.push(i + ': empty Text');
     if (FOURTH_WALL.test(r.Text) || FOURTH_WALL.test(r.Tags)) errors.push(i + ': fourth-wall');
+    // engine.291 entity slots are the only $ allowed; $PILOT and $LEADER never share a line
+    if (/\$(?!PILOTROLE\b|PILOT\b|LEADER\b)/.test(r.Text)) errors.push(i + ': unknown $slot');
+    if (/\$PILOT\b/.test(r.Text) && /\$LEADER\b/.test(r.Text)) errors.push(i + ': $PILOT and $LEADER in one line');
+    if (r.was != null && (!r.was || r.was === r.Text)) errors.push(i + ': was must differ');
     if (firstTag(r.Tags) !== 'source:undocked') errors.push(i + ': first tag must be source:undocked');
     if (r.Tags.indexOf(';') >= 0) errors.push(i + ': tags must be comma-split (live loader)');
     if (r.PoolKey === POOL_PILOT && !/(^|;)undockedpilot(;|$)/.test(r.Conditions)) {

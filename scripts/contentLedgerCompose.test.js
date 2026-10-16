@@ -52,6 +52,7 @@ const genSrc = fs.readFileSync(path.resolve(__dirname, '../utilities/sportsWeekR
 const generateCitizensEvents_ = new Function(genSrc + '\nreturn generateCitizensEvents_;')();
 const loaderSrc = fs.readFileSync(path.resolve(__dirname, '../phase02-world-state/loadEventContentLedger.js'), 'utf8');
 const loadEventContentLedger_ = new Function(loaderSrc + '\nreturn loadEventContentLedger_;')();
+const loadUndockedFeed_ = new Function(loaderSrc + '\nreturn loadUndockedFeed_;')(); // engine.291: the board + the airing pilots
 
 let passed = 0, failed = 0;
 function assert(label, cond, detail) {
@@ -66,14 +67,14 @@ const HEADERS = ['POPID', 'First', 'Last', 'Tier', 'ClockMode', 'LifeHistory', '
 function makeRow(popId, opts) {
   const o = opts || {};
   return [popId, 'Test', popId, 3, 'ENGINE', o.life || '', '',
-    o.hood || 'Temescal', 1990, 'teacher', '', '', '', 0,
+    o.hood || 'Temescal', 1990, o.occ || 'teacher', '', '', '', 0,
     '', o.status || '', o.marital || '', o.children || 0,
     o.wealth != null ? o.wealth : '', o.displ || 0];
 }
 
 const LEDGER_HDR = ['Kind', 'PoolKey', 'Slot', 'Text', 'Weight', 'Conditions', 'Tags', 'Grain', 'Active'];
 
-function makeCtx(rows, rng, ledgerRows) {
+function makeCtx(rows, rng, ledgerRows, feedRows) {
   const ctx = {
     now: new Date(0),
     rng,
@@ -82,6 +83,9 @@ function makeCtx(rows, rng, ledgerRows) {
       getSheetByName: (name) => {
         if (name === 'Event_Content_Ledger' && ledgerRows) {
           return { getDataRange: () => ({ getValues: () => ledgerRows }) };
+        }
+        if (name === 'Undocked_Feed' && feedRows) {
+          return { getDataRange: () => ({ getValues: () => feedRows }) };
         }
         return null;
       }
@@ -384,6 +388,108 @@ console.log('═══ engine.290 move 6: transit commute lines from the ledger'
   assert('a commute-PoolKey row with no Conditions never draws when the gate is shut', looseQuiet === 0, String(looseQuiet));
   assert('the inline commute pool is gone from the generator', genSrcNow.indexOf('pickOne([\n        "lost an hour of the morning') < 0 && genSrcNow.indexOf('"waited out the delays with everyone else on the platform"') < 0);
   if (hadLS === undefined) delete global.deriveLifeState_; else global.deriveLifeState_ = hadLS;
+}
+
+console.log('═══ engine.291 (research.29 Move 4): the city names who is flying');
+{
+  // Live Undocked_Feed header (2026-10-16). Holder blank on most rows, as on the
+  // C108–C110 pushes — the name must come from the ledger.
+  const FEED_HDR = ['TargetCycle', 'Cycle', 'EventType', 'POPID', 'Holder', 'EpisodeId', 'CreditsDelta', 'Systems', 'CombatEvents', 'MishapCount', 'Magnitude', 'Flags'];
+  const ep = (target, pop, credits, holder) => [target, target - 1, 'undocked-episode', pop, holder || '', 'ep-' + pop + '-' + target, credits == null ? '' : credits, '', '', '', '', ''];
+  const FEED = [
+    FEED_HDR,
+    ep(98, 'POP-P2', 300),        // aired earlier: 300, not flying tonight
+    ep(99, 'POP-P1', 250),        // aired earlier
+    ep(100, 'POP-P1', null),      // airing: blank is NOT zero
+    ep(100, 'POP-P3', 100),       // airing
+    ep(100, 'POP-P1', 50),        // airing: P1 cumulative 300 — ties P2, lower POPID leads
+    ep(100, 'POP-P4', null),      // airing, nothing settled
+    ep(100, 'POP-P9', 1, 'Ghost Holder'), // airing, no ledger row: Holder is the fallback name
+    ep(101, 'POP-P3', 5000)       // approved for NEXT cycle: not aired, must not count
+  ];
+  const TOKEN_ROWS = [
+    ['line', 'culture.spacemolt-show', '', 'watched $PILOT the $PILOTROLE fly and argued about it', '50', 'undocked', 'source:undocked,show:undocked,ecl:kind:watch', '', ''],
+    ['line', 'culture.spacemolt-show', '', 'heard $PILOT was in the chair tonight', '50', 'undocked', 'source:undocked,show:undocked,ecl:kind:watch', '', ''],
+    ['line', 'culture.spacemolt-show', '', 'said $LEADER still leads the board', '50', 'undocked', 'source:undocked,show:undocked,ecl:kind:argue', '', '']
+  ];
+  const NOFLAG_ROW = ['line', 'test.noflag', '', 'told everyone $PILOT would be on tonight', '5000', '', 'source:undocked,show:undocked,ecl:kind:watch', '', ''];
+  const citizens = (n) => {
+    const rows = [
+      makeRow('POP-P1', { occ: 'DISTRICT ATTORNEY' }),
+      makeRow('POP-P2', { occ: 'Dishwasher' }),
+      makeRow('POP-P3', { occ: 'Second Baseman, Oakland A\'s' }),
+      makeRow('POP-P4', { occ: 'CBA Compliance Monitor, Fruitvale Transit Hub' })
+    ];
+    for (let i = 0; i < n; i++) rows.push(makeRow('POP-A' + i, { hood: i % 2 ? 'Temescal' : 'Fruitvale' }));
+    return rows;
+  };
+  const run = (seed, ledgerRows, feedRows, n) => {
+    const ctx = makeCtx(citizens(n || 60), mulberry32(seed), ledgerRows, feedRows);
+    ctx.config.cycleCount = 100; // loadUndockedFeed_ matches TargetCycle against S.cycle || config.cycleCount
+    loadUndockedFeed_(ctx);
+    generateCitizensEvents_(ctx);
+    return ctx;
+  };
+
+  // The loader's board
+  const ctxB = run(1, FIXTURE, FEED, 2);
+  const board = ctxB.summary.undockedBoard;
+  assert('board: leader is cumulative known credits over aired rows, tie -> lower POPID', board.leaderPopId === 'POP-P1' && board.leaderCredits === 300, JSON.stringify(board));
+  assert('board: a row approved for a later cycle does not count yet', board.totals['POP-P3'] === 100, JSON.stringify(board.totals));
+  assert('board: blank CreditsDelta is not zero', board.totals['POP-P4'] === undefined, JSON.stringify(board.totals));
+  assert('airing index holds tonight\'s pilots only', ctxB.summary.undockedPilots['POP-P1'] && ctxB.summary.undockedPilots['POP-P4'] && ctxB.summary.undockedPilots['POP-P9'] && !ctxB.summary.undockedPilots['POP-P2'], JSON.stringify(ctxB.summary.undockedPilots));
+
+  // The composer
+  const ROLE = { 'Test POP-P1': 'district attorney', 'Test POP-P3': 'second baseman', 'Test POP-P4': 'CBA compliance monitor' };
+  let pairLines = 0, badPair = 0, ghost = 0, notAiring = 0, leaderOk = 0, leaderBad = 0, raw = 0, pilotOnly = 0, firstBad = '';
+  for (let seed = 11; seed < 16; seed++) {
+    const lines = emittedLines(run(seed, FIXTURE.concat(TOKEN_ROWS), FEED));
+    for (const l of lines) {
+      if (/\$[A-Z_]+/.test(l)) raw++;
+      let m = l.match(/watched (.+?) the (.+?) fly and argued/);
+      if (m) {
+        pairLines++;
+        if (ROLE[m[1]] !== m[2]) { badPair++; if (!firstBad) firstBad = l; }
+      }
+      m = l.match(/heard (.+?) was in the chair tonight/);
+      if (m) {
+        pilotOnly++;
+        if (m[1] === 'Ghost Holder') ghost++;
+        else if (m[1] === 'Test POP-P2' || !/^Test POP-P[134]$/.test(m[1])) notAiring++;
+      }
+      m = l.match(/said (.+?) still leads the board/);
+      if (m) { if (m[1] === 'Test POP-P1') leaderOk++; else leaderBad++; }
+    }
+  }
+  assert('$PILOT + $PILOTROLE lines were drawn (' + pairLines + ')', pairLines > 0);
+  assert('$PILOT and $PILOTROLE in one line are the same pilot; the role reads mid-clause', badPair === 0, 'bad=' + badPair + ' e.g. ' + firstBad);
+  assert('a pilot with no ledger row names the feed Holder (' + ghost + ')', ghost > 0);
+  assert('$PILOT never names a pilot who is not flying tonight', notAiring === 0, 'hits=' + notAiring);
+  assert('$LEADER is the board leader (' + leaderOk + ')', leaderOk > 0 && leaderBad === 0, 'bad=' + leaderBad);
+  assert('no raw $PILOT/$PILOTROLE/$LEADER reaches LifeHistory', raw === 0, 'raw=' + raw);
+  const d1 = emittedLines(run(777, FIXTURE.concat(TOKEN_ROWS), FEED)).join('||');
+  const d2 = emittedLines(run(777, FIXTURE.concat(TOKEN_ROWS), FEED)).join('||');
+  assert('token lines: same seed -> byte-identical', d1 === d2);
+
+  // Inert when nothing names a pilot: the feed alone moves no draw
+  const i1 = emittedLines(run(555, FIXTURE, FEED)).join('||');
+  const i2 = emittedLines(run(555, FIXTURE, null)).join('||');
+  assert('a loaded feed with no token rows changes no draw (no eager roll)', i1 === i2);
+
+  // No show tonight: token rows never enter a pool, flag or no flag
+  const EMPTY_FEED = [FEED_HDR];
+  const q = emittedLines(run(99, FIXTURE.concat(TOKEN_ROWS, [NOFLAG_ROW]), EMPTY_FEED));
+  assert('empty feed: zero pilot/leader lines', q.filter(l => /in the chair tonight|leads the board|fly and argued|would be on tonight/.test(l)).length === 0);
+  const n1 = emittedLines(run(99, FIXTURE.concat([NOFLAG_ROW]), EMPTY_FEED)).join('||');
+  const n2 = emittedLines(run(99, FIXTURE, EMPTY_FEED)).join('||');
+  assert('a $PILOT row without the undocked flag never enters the pool when no one flies (byte-identical with the row absent)', n1 === n2);
+  // Past-only board, nobody flying: $LEADER still resolves (the board outlives the night), $PILOT does not
+  const PAST_FEED = [FEED_HDR, ep(98, 'POP-P2', 300)];
+  const LEADER_ANYWEEK = ['line', 'culture.spacemolt-show', '', 'said $LEADER still leads the board', '50', '', 'source:undocked,show:undocked,ecl:kind:argue', '', ''];
+  const p = emittedLines(run(31, FIXTURE.concat(TOKEN_ROWS, [LEADER_ANYWEEK]), PAST_FEED));
+  assert('no pilot tonight: $PILOT rows silent; an unflagged $LEADER row names the board leader from past nights', p.filter(l => /in the chair tonight|fly and argued/.test(l)).length === 0 && p.some(l => l.indexOf('said Test POP-P2 still leads the board') >= 0), p.filter(l => /leads the board/.test(l)).slice(0, 2).join(' || '));
+  const z = emittedLines(run(31, FIXTURE.concat([LEADER_ANYWEEK]), EMPTY_FEED));
+  assert('no board at all: an unflagged $LEADER row never enters the pool', z.filter(l => /leads the board/.test(l)).length === 0);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

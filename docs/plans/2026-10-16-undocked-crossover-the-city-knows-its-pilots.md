@@ -17,7 +17,7 @@ pointers:
 
 # research.29 — UNDOCKED crossover: the city knows its pilots
 
-**State:** PLAN — holding for the builder's go. No code, no dispatch, no sheet write yet.
+**State:** GO (builder 2026-10-16 ~00:30 CDT). Building in §5 order.
 
 **Deadline that matters:** Nia's weekly digest fires **Sat 2026-10-17 08:15 CDT** (angle) → 09:15 (report) → 10:15 (write), on the C111 feed. Eric Taveras is in that feed with his 1,170 and the lead. Move 1 lands before 08:15 or her Saturday piece introduces him as "UNDOCKED cast pilot" again.
 
@@ -77,6 +77,7 @@ So the payout exists and fires **only if Nia's piece prints** (grading, pipeline
 - **Engine (es, bench → rides the engine.214 re-pair → C113 push 10-25):** draw-time substitution for UNDOCKED rows only: `{pilot}` → this cycle's pilot Holder (`S.undockedFeedEntries`), `{leader}` → standings leader, `{pilotrole}` → the pilot's Occupation from `ctx.ledger`. Applied at `generateCitizensEvents.js:3213` for rows under the `undocked` flag; rows without tokens unchanged; rng order untouched (string op after the draw).
 - **Rows (rb, after the engine lands):** retag the Walker / DA / Jumper / dishwasher rows to tokens; add crossover rows that only make sense because of who's in the chair ("argued whether an MVP belongs in a cockpit at all", "{pilotrole} on UNDOCKED and the whole block had a stake") under the `undocked` flag, via `undockedEclPoolApply`.
 - **Until C113:** the crossover lives in Nia's piece (Move 1) and the sports desk (Move 5). No static Eric rows — they would rot exactly like Walker's.
+- **es, as built (2026-10-16, engine.291):** three code-side entity slots on the engine.38 line composer — `$PILOT`, `$PILOTROLE`, `$LEADER` (`CONTENT_ENTITY_SLOTS`, `phase05-citizens/generateCitizensEvents.js`), the same path `$VENUE` / `$CONTACT` already take; not a new substitution pass. Rules, as code: (1) the name comes from the ledger by POPID; the feed's Holder is the fallback only (Holder is blank on the whole C108–C110 pushes). (2) **One pilot per line, equal weight over the cycle's distinct airing pilots** — C112 airs three, each gets an audience; `$PILOT` and `$PILOTROLE` in one line are the same person. (3) `$PILOTROLE` = RoleType before the first comma, lowercased except a 2–4 letter acronym: "Second Baseman, Oakland A's" → second baseman; "DISTRICT ATTORNEY" → district attorney; "CBA Compliance Monitor, Fruitvale Transit Hub" → CBA compliance monitor. (4) `$LEADER` = the board as `loadUndockedFeed_` now derives it from the same tab read (`S.undockedBoard`): cumulative known CreditsDelta over rows with TargetCycle ≤ cycle, blank ≠ 0, ties by POPID — the standings recompute's own rule, so the engine and `standings.json` name the same leader. (5) A slot with no value this cycle makes its rows unfillable — they never enter a pool, so an unflagged `$PILOT` row cannot compose-null across the city. (6) Lazy: a line without a token costs no roll; a loaded feed alone moves no draw (proven byte-identical). Composer defect fixed on the way: split/join on `$PILOT` ate the head of `$PILOTROLE` ("Test POP-P3ROLE" in the first test run); whole-token replace now. Tests: `scripts/contentLedgerCompose.test.js` 53/0 (16 new). Bench: inert inside the 214 re-pair B stack (no token rows on the bench ECL), then one smoke fire with bench-only token rows; PROD with the 214 push C113 10-25. **For the row author (rb):** tokens are `$PILOT` / `$PILOTROLE` / `$LEADER`, not `{pilot}`; a `$LEADER` row may omit the `undocked` flag when the board should be talked about on a week with no episode (it still goes silent while the board is empty).
 
 ### Move 5 — who covers the crossover (newsroom structure, rb; ruling b)
 Proposed default: **Nia owns the UNDOCKED story and names the career** (Move 1). **The sports desk sees the board** — when a pilot on the feed is on a team roster, one line enters the sports slices (Tanya / P Slayer / Selena / Ariana): "UNDOCKED: Eric Taveras (A's 2B) leads the board, 1,170 credits" — so the A's beat can react to their MVP flying, in their own voice. Civic desks the same when the pilot holds an office (Clarissa Dane, DA → Carmen / Luis). Deterministic: a `crossoverLine()` in `buildNiaSlice` exported to the other slice builders, keyed on RoleType. Builder's call on the default (§4).
@@ -87,7 +88,15 @@ Proposed default: **Nia owns the UNDOCKED story and names the career** (Move 1).
 - Review: **agy** reviews this plan after the go (as engine.214 / engine.290). **codex** rechecks the implementation — it found the defects.
 - Canon writes in this plan: standings re-score (Move 2, builder's call), ECL rows (Move 4, apply path), Citizen_Media_Usage — untouched (fires through Saturday as today).
 
-## 4. Builder's calls
+## 4. Builder's calls — answered (verbatim, 2026-10-16 ~00:30 CDT)
+
+> **1 -** yes the script wasnt written so the past runs knew what to do , which makes Clarissa run even more impressive. yes lets back fill her missing  points and and the other missing data on that ledger , scores and names. I really want this to work properly as its a lottery of chance and covered daily and dont want it to be a waste of my money being half wired.
+>
+> **2 -** I agree and whoever is the trending journalist or and likely what maybe mags would pick up on saturday to combine the all angles to give citizens that are correctly crossing over their attention.
+
+Rulings: **(1) Backfill** — re-score the whole archive (credits, measured zeros, unknowns) AND repair the blank Holder names on the feed/ledger rows (feed c107/c108 rows carry `Holder: ''`). The show is a lottery of chance covered daily; half-wired is waste. **(2) Crossover owner** — Nia names the career (Move 1); the desk line goes to the trending journalist; and Mags's Saturday pass combines all angles for citizens who are genuinely crossing systems. Move 5 becomes a Saturday-curation concern, not a per-desk slice line only.
+
+Original questions kept for the record:
 1. **Re-score history?** Move 2's rule changes one past number (Clarissa +14, rank unchanged) and turns 33 blank nights into measured zeros or labelled unknowns. Backfill the archive, or run the rule forward from the next flight only?
 2. **Crossover owner.** Move 5's default (Nia names the career; sports/civic desks get one board line when their citizen is flying). Yes, or a different split?
 
@@ -100,3 +109,5 @@ Proposed default: **Nia owns the UNDOCKED story and names the career** (Move 1).
 
 ## Changelog
 - 2026-10-16 (rb, S561): plan written from the codex read, every claim verified against the files; builder's three rulings recorded verbatim; held for go.
+- 2026-10-16 (es, S562): Move 4 built and unit-proven as engine.291 — see Move 4 "es, as built"; the multi-pilot rule (equal weight over the night's pilots) and the `$LEADER` source (the feed tab, standings rule) are es's calls, published here. Bench pending; nothing to PROD before the C112 readback.
+- 2026-10-16 ~00:30 (rb): builder answered both calls — backfill the archive incl. blank names; crossover goes to the trending journalist + Mags's Saturday pass. GO.

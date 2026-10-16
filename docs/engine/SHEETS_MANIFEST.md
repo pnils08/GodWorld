@@ -83,7 +83,11 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
   episode (research.27 2.3, S376). Written by `scripts/undockedShowGate.js --push`
   AFTER editorial approval; read by `loadUndockedFeed_`
   (`phase02-world-state/loadEventContentLedger.js`) at Phase-2 on
-  `TargetCycle == current`. TargetCycle is when an episode AIRS, Cycle is when it
+  `TargetCycle == current`. The same read derives the board (`S.undockedBoard`,
+  engine.291): cumulative known CreditsDelta per POPID over rows with
+  `TargetCycle <= current`, blank is not zero, ties by POPID — the
+  `scripts/undockedStandings.js` rule — for the Phase-5 `$LEADER` entity slot.
+  TargetCycle is when an episode AIRS, Cycle is when it
   was flown — they differ when approval lands after a cycle closes. Transport
   window, not an archive: the git-tracked feed packs under
   `output/spacemolt-show/feed/` are the track record.

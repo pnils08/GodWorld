@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15",
+  "generated": "2026-10-16",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
   "functionsMapped": 1703,
@@ -2575,6 +2575,15 @@
         "phase02-world-state/loadEventContentLedger.js::loadEventContentLedger_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/runCivicRoleEngine.js::eclPoolLines_"
+      ]
+    },
+    "undockedBoard": {
+      "writers": [
+        "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_"
+      ],
+      "readers": [
+        "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
     },
     "undockedPilots": {

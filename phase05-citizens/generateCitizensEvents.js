@@ -460,12 +460,36 @@ function generateCitizensEvents_(ctx) {
   // name the actual counterpart (bonds store IDs only). One pass over rows
   // already in memory; no sheet read.
   var nameByPop = Object.create(null);
+  var roleByPop = Object.create(null); // engine.291: the job column (RoleType), for $PILOTROLE
   for (var nbi = 0; nbi < rows.length; nbi++) {
     var nbPop = rows[nbi][iPopID];
     if (!nbPop) continue;
     var nbName = (((iFirst >= 0 ? rows[nbi][iFirst] : "") || "") + " " + ((iLast >= 0 ? rows[nbi][iLast] : "") || "")).trim();
     if (nbName) nameByPop[String(nbPop).trim().toUpperCase()] = nbName;
+    var nbRole = iOccupation >= 0 ? String(rows[nbi][iOccupation] || "").trim() : "";
+    if (nbRole) roleByPop[String(nbPop).trim().toUpperCase()] = nbRole;
   }
+
+  // engine.291: who is in the chair this cycle (distinct POPIDs, feed order) and who
+  // leads the board. Computed once; a token line draws ONE pilot from this list.
+  var undockedAiringPilots = [];
+  (function () {
+    var fe = S.undockedFeedEntries || [];
+    for (var ui = 0; ui < fe.length; ui++) {
+      var up = String(fe[ui].popId || "").trim().toUpperCase();
+      if (up && undockedAiringPilots.indexOf(up) < 0) undockedAiringPilots.push(up);
+    }
+  })();
+  var undockedLeaderName = (function () {
+    var b = S.undockedBoard;
+    if (!b || !b.leaderPopId) return "";
+    return nameByPop[b.leaderPopId] || b.leaderHolder || "";
+  })();
+  var eclEntityAvail_ = {
+    PILOT: undockedAiringPilots.length > 0,
+    PILOTROLE: undockedAiringPilots.length > 0,
+    LEADER: !!undockedLeaderName
+  };
 
   // engine.38 B1 (S283): named public figures — the bias-lite pool's target
   // universe (Design B1 v1: public figures only, Mike S281). Rides the same
@@ -1079,7 +1103,13 @@ function generateCitizensEvents_(ctx) {
   // eligibility, a line whose fragment slots can't fill for this citizen never
   // enters the pool, and raw $SLOT text can never reach LifeHistory.
   // ===========================================================================
-  var CONTENT_ENTITY_SLOTS = { VENUE: 1, INSTITUTION: 1, CONTACT: 1 }; // resolved code-side, not from fragments
+  // research.29 Move 4 (engine.291): PILOT / PILOTROLE / LEADER — the city names who
+  // is flying UNDOCKED this cycle and who leads the board, resolved at draw from
+  // S.undockedFeedEntries + the ledger (never the feed's Holder cell alone — it is
+  // blank on whole pushes). An entity slot with no value this cycle is marked
+  // unavailable in eclEntityAvail_ so its rows never enter a pool (a $PILOT row
+  // with no `undocked` flag would otherwise compose-null on every citizen).
+  var CONTENT_ENTITY_SLOTS = { VENUE: 1, INSTITUTION: 1, CONTACT: 1, PILOT: 1, PILOTROLE: 1, LEADER: 1 }; // resolved code-side, not from fragments
 
   // engine.79 item 7 (S357): proving-ground exclusive pools. When a pool named
   // in World_Config eclExclusivePools has enough eligible ledger lines for
@@ -1133,7 +1163,10 @@ function generateCitizensEvents_(ctx) {
     if (!le.slots) le.slots = contentSlotTokens_(le.text);
     for (var si = 0; si < le.slots.length; si++) {
       var slot = le.slots[si];
-      if (CONTENT_ENTITY_SLOTS[slot]) continue;
+      if (CONTENT_ENTITY_SLOTS[slot]) {
+        if (eclEntityAvail_[slot] === false) return false; // engine.291: no pilot / no leader this cycle
+        continue;
+      }
       var frags = ledger.fragments[slot];
       if (!frags || !frags.length) return false;
       var any = false;
@@ -1185,7 +1218,11 @@ function generateCitizensEvents_(ctx) {
         }
       }
       if (!value) return null;
-      text = text.split("$" + slot).join(value);
+      // engine.291: whole-token replace. split/join on "$PILOT" also ate the head of
+      // "$PILOTROLE" (the compose test caught "Test POP-P3ROLE"); the lookahead stops
+      // at a slot-name character. Function replacer: a value is literal, never a
+      // String.replace pattern.
+      text = text.replace(new RegExp("\\$" + slot + "(?![A-Z_])", "g"), function () { return value; });
     }
     return text.replace(/\s+/g, " ").trim();
   }
@@ -1213,6 +1250,22 @@ function generateCitizensEvents_(ctx) {
   // engine.148 P3: S.localEntities had no writer — the occupation flavor is the
   // literal; hood venues/institutions come from the character pools below.
   var entities = defaultEntities;
+
+  // engine.291: a RoleType as it reads mid-clause. The part before the first comma
+  // ("Second Baseman, Oakland A's" -> second baseman); words lowercased except a
+  // short all-caps acronym ("CBA Compliance Monitor" -> CBA compliance monitor,
+  // "DISTRICT ATTORNEY" -> district attorney).
+  function pilotRoleText_(raw) {
+    var head = String(raw || "").split(",")[0].replace(/\s+/g, " ").trim();
+    if (!head) return "";
+    var words = head.split(" ");
+    for (var wi = 0; wi < words.length; wi++) {
+      var w = words[wi];
+      if (/^[A-Z]{2,4}$/.test(w)) continue; // acronym stays
+      words[wi] = w.toLowerCase();
+    }
+    return words.join(" ");
+  }
 
   function pickVenue_(neighborhood) {
     var list = hoodTexturePool_(ctx, neighborhood, CITIZEN_VENUES_BY_CHARACTER_, CITIZEN_VENUES_BESPOKE_, 'generateCitizensEvents_.pickVenue_');
@@ -3229,16 +3282,39 @@ function generateCitizensEvents_(ctx) {
     // are clauses, so ledger lines follow the same convention). Null compose =
     // drop this emit slot, never raw $SLOT into LifeHistory.
     if (entry.ledgerLine) {
-      var clVenue = "", clUsedContact = false;
+      var clVenue = "", clUsedContact = false, clWantsPilot = false;
       var clSlots = entry.ledgerLine.slots || [];
       for (var cls = 0; cls < clSlots.length; cls++) {
         if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood) || (mem && mem.lastVenue) || "";
         else if (clSlots[cls] === "CONTACT") clUsedContact = true;
+        else if (clSlots[cls] === "PILOT" || clSlots[cls] === "PILOTROLE") clWantsPilot = true;
+      }
+      // engine.291: resolve the pilot only when the drawn line names one (lazy — a
+      // line without the slot costs no roll). One pilot per line, equal weight over
+      // the cycle's distinct airing pilots, so $PILOT and $PILOTROLE in the same
+      // line are the same person. Name from the ledger; the feed's Holder is the
+      // fallback. Empty -> composeContentLine_ returns null -> the slot is dropped.
+      var clPilotName = "", clPilotRole = "";
+      if (clWantsPilot && undockedAiringPilots.length) {
+        var clPilotOpts = [];
+        for (var cpo = 0; cpo < undockedAiringPilots.length; cpo++) clPilotOpts.push({ pop: undockedAiringPilots[cpo], weight: 1 });
+        var clPilotPop = pickWeighted_(clPilotOpts).pop;
+        clPilotName = nameByPop[clPilotPop] || "";
+        if (!clPilotName) {
+          var clFeed = S.undockedFeedEntries || [];
+          for (var cfh = 0; cfh < clFeed.length; cfh++) {
+            if (String(clFeed[cfh].popId || "").trim().toUpperCase() === clPilotPop && clFeed[cfh].holder) { clPilotName = clFeed[cfh].holder; break; }
+          }
+        }
+        clPilotRole = pilotRoleText_(roleByPop[clPilotPop]);
       }
       var composedText = composeContentLine_(entry.ledgerLine, S.contentLedger, {
         VENUE: clVenue,
         INSTITUTION: pickInstitution_(neighborhood) || "a local office",
-        CONTACT: contact.name || "someone familiar"
+        CONTACT: contact.name || "someone familiar",
+        PILOT: clPilotName,
+        PILOTROLE: clPilotRole,
+        LEADER: undockedLeaderName
       }, entry.ledgerScopes);
       if (composedText === null) {
         if (entry.eclKey) eclTelemetry.composeNull[entry.eclKey] = (eclTelemetry.composeNull[entry.eclKey] || 0) + 1;

@@ -308,6 +308,13 @@ function loadUndockedFeed_(ctx) {
   var S = ctx.summary || (ctx.summary = {});
   S.undockedFeedEntries = [];
   S.undockedPilots = {};
+  // research.29 Move 4 (engine.291): the board, as the engine knows it. The same
+  // recompute scripts/undockedStandings.js runs — cumulative KNOWN CreditsDelta
+  // per POPID over every row that has aired (TargetCycle <= this cycle), blank is
+  // not zero, ties break by POPID. Read by the Phase-5 $LEADER entity slot; a
+  // Holder cell can be blank on the feed, so the reader resolves the name from
+  // the ledger and falls back to leaderHolder.
+  S.undockedBoard = { leaderPopId: '', leaderHolder: '', leaderCredits: null, totals: {} };
 
   var ss = ctx.ss;
   if (!ss) return;
@@ -345,11 +352,19 @@ function loadUndockedFeed_(ctx) {
       .filter(function (s) { return s.length; });
   };
 
+  var boardHolder = {};
   for (var r = 1; r < data.length; r++) {
     var row = data[r];
-    if (Number(row[iTarget]) !== cycle) continue;
+    var target = Number(row[iTarget]);
     var pop = String(row[iPop] == null ? '' : row[iPop]).trim().toUpperCase();
     if (!pop) continue;
+    if (target <= cycle) {
+      var aired = num(row, iCredits);
+      if (aired !== null) S.undockedBoard.totals[pop] = (S.undockedBoard.totals[pop] || 0) + aired;
+      var bh = iHolder >= 0 ? String(row[iHolder] || '').trim() : '';
+      if (bh) boardHolder[pop] = bh;
+    }
+    if (target !== cycle) continue;
     S.undockedFeedEntries.push({
       popId: pop,
       holder: iHolder >= 0 ? String(row[iHolder] || '').trim() : '',
@@ -365,6 +380,16 @@ function loadUndockedFeed_(ctx) {
     // POPID index so a per-citizen check is O(1) inside the Phase-5 loop
     // rather than a scan per citizen across ~960 rows.
     S.undockedPilots[pop] = true;
+  }
+
+  var boardPops = Object.keys(S.undockedBoard.totals).sort();
+  for (var bp = 0; bp < boardPops.length; bp++) {
+    var bt = S.undockedBoard.totals[boardPops[bp]];
+    if (S.undockedBoard.leaderCredits === null || bt > S.undockedBoard.leaderCredits) {
+      S.undockedBoard.leaderPopId = boardPops[bp];
+      S.undockedBoard.leaderHolder = boardHolder[boardPops[bp]] || '';
+      S.undockedBoard.leaderCredits = bt;
+    }
   }
 
   if (S.undockedFeedEntries.length) {

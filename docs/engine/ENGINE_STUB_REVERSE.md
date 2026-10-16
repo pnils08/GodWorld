@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-10-15 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-10-16 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1703 · **S.* fields:** 376 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1703 · **S.* fields:** 377 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -373,6 +373,7 @@
 | `S.transitState` | `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_` | `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_`, `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 4 |
 | `S.transitStorySignals` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_` | _(none)_ | 2 | 0 |
 | `S.treasury` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | `phase02-world-state/applyInitiativeImplementationEffects.js::postTreasuryRevenue_`, `phase05-citizens/generationalWealthEngine.js::collectPropertyTax_` | 1 | 2 |
+| `S.undockedBoard` | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_` | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 2 |
 | `S.undockedFeedEntries` | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_`, `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 5 |
 | `S.undockedNextCast` | `phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_` | `phase05-citizens/casinoLedgerEngine.js::casinoUpcoming_`, `phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_` | 1 | 2 |
 | `S.undockedPilots` | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_` | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_`, `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 3 |

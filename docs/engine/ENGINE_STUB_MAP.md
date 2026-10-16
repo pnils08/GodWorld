@@ -2363,7 +2363,7 @@
 - **processMediaUsage_(ctx, now, cycle)**
   Sheets: Citizen_Media_Usage, Generic_Citizens, LifeHistory_Log
 
-- **advancementLogBuffer_(sheet)**
+- **advancementLogBuffer_(sheet, label)**
 
 - **processAdvancementRows_(ctx, now, cycle)**
   Sheets: LifeHistory_Log
@@ -3196,6 +3196,8 @@
 - **parseCitizenEntry_(entry, section, team)**
 
 - **citizenExistsInLedger_(ledgerData, firstName, lastName)**
+
+- **markRowRuns_(sheet, idx, col, value)**
 
 - **appendLeanIntakeRow_(intakeSheet, f)**
 
@@ -4731,4 +4733,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1703
+**Functions mapped:** 1704

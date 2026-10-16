@@ -65,12 +65,13 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Live:** PROD engine files = **stage 4i** = stage 4h + `utilities/archiveLifeHistory.js` at `aa0bf7e7` (engine.285 1/6: the LifeHistory trim writes the kept rows first, clears the tail after — a fire killed mid-trim can no longer lose the retained log) — **PROD web app @140**, pushed 2026-10-16 ~08:56 CDT by engine-sheet (`output/engine285/push-prod.sh --go`), pull-back 168 = `output/engine-sheet/stage4i-e285.sha256`, differs from 4h in exactly that file. Stage 4h = 4g + `checkForPromotions.js` at `bdcfb5c4` (@139, `stage4h-e293.sha256`). Rollback: `output/engine293/prod-stage` (= 4h) push + version cut.
+**Live:** PROD engine files = **stage 4j** = stage 4i + six files at `0d4f2ca2` (engine.285 hazards 2–6: the executor's batch append keeps one tail under retry; an existing empty tab gets its ensure headers; Business_Archive / Citizen_Archive remove a row without a second copy only when an identical copy is already on the archive; media routing writes one block per target and marks per target; the two dormant intake readers write before they mark) — **PROD web app @141**, pushed 2026-10-16 ~15:30 CDT by engine-sheet (`output/engine285/push-prod-2to6.sh --go`; the @141 version text says "bench @36" — the code is `0d4f2ca2`, benched @37), pull-back 168 = `output/engine-sheet/stage4j-e285b.sha256`, differs from 4i in exactly the six files. Stage 4i = 4h + `utilities/archiveLifeHistory.js` at `aa0bf7e7` (@140, `stage4i-e285.sha256`). Rollback: `output/engine285/prod-stage` (= 4i) push + version cut.
 
 **Recent PROD bumps** (last 5 — older → [[DEPLOY_HISTORY]] §PROD deploy log):
 
 | PROD | Date | Wave | Plan |
 |---|---|---|---|
+| @141 | 2026-10-16 | engine.285 (2–6) a fire killed mid-write no longer doubles or strands records — 6 files over stage 4i (stage 4j) | ROLLOUT engine.285; [[../research/2026-10-16-codex-engine285-hazards2-6-review]] |
 | @140 | 2026-10-16 | engine.285 (1/6) the LifeHistory trim writes kept rows first, clears the tail after — `archiveLifeHistory.js` over stage 4h (stage 4i) | ROLLOUT engine.285; `docs/research/2026-10-08-codex-engine95-design.md` §7 |
 | @139 | 2026-10-16 | engine.293 (1) the promotion door prices arrivals by the job — `checkForPromotions.js` over stage 4g (stage 4h) | ROLLOUT engine.293; [[../plans/2026-08-10-economy-native-rebuild]] §Read 2026-10-16 |
 | @138 | 2026-10-16 | engine.291 fixes + engine.294 — `$LEADER` self-exclusion, a/an before `$PILOTROLE`, no raw-token fragment (2 files over stage 4f; stage 4g) | ROLLOUT engine.291, engine.294 |

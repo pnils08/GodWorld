@@ -5,17 +5,19 @@
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C111 (fired 2026-10-11 ~16:18 CDT, 0 errors, 148 s); next live fire C112, Sunday 2026-10-18.
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (49)** — each plan, its rows and the state each is in:
+**Plans in motion (47)** — each plan, its rows and the state each is in:
 
 - [[../plans/2026-10-11-media-extension]]: pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, pipeline.71 ready, engine.287 live-observing, engine.288 live-observing, engine.289 blocked
-- [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 ready, engine.264 ready, engine.261 ready
+- [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 ready, engine.264 needs-info, engine.261 ready
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing
-- [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]: research.29 in-progress, engine.292 live-observing, engine.291 live-observing
+- [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]: research.29 live-observing, engine.292 live-observing, engine.291 live-observing
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 in-progress
+- [[../plans/2026-08-10-economy-native-rebuild]]: engine.295 in-progress, engine.293 live-observing, engine.104 ready
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
+- [[../reference/DEPLOY_HISTORY]]: engine.213 in-progress, engine.294 live-observing
 - [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 ready
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
@@ -30,7 +32,6 @@
 - [[../plans/2026-07-11-agent-exchange-engine]]: engine.53 live-observing
 - [[../plans/2026-08-07-spacemolt-game-show]]: research.27 live-observing
 - [[../plans/2026-07-06-citizen-loop-deepening]]: engine.48 live-observing
-- [[../plans/2026-09-07-beat-slices-from-sheets-plan]]: pipeline.68 ready
 - [[../plans/2026-08-09-citizen-day-digest]]: pipeline.53 ready
 - [[../plans/2026-09-13-run-cycle-packages-the-world]]: pipeline.69 in-progress
 - [[../plans/2026-08-29-boot-doc-consolidation]]: governance.51 in-progress
@@ -42,18 +43,15 @@
 - [[../plans/2026-07-31-canon-ingest-backfill]]: engine.91 in-progress
 - [[../plans/2026-08-02-neighborhood-truth-source-migration]]: engine.99 in-progress
 - [[../plans/2026-08-17-sheet-weight-reduction]]: engine.116 in-progress
-- [[../reference/DEPLOY_HISTORY]]: engine.213 in-progress
 - [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
 - [[../plans/2026-10-15-engine-290-transit-rides-the-sim]]: engine.290 live-observing
-- [[../output/notebooklm-card-backup/pair-report.json]]: pipeline.72 ready
+- [[../output/notebooklm-card-backup/fold-plan.json]]: pipeline.72 in-progress
 - [[../docs/plans/2026-10-11-media-extension.md]]: pipeline.73 in-progress
 - [[../research/2026-10-11-codex-engine194-cut]]: engine.194 live-observing
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
-- `docs/research/2026-10-08-codex-engine95-design.md`: engine.285 ready
 - [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
-- [[../plans/2026-08-10-economy-native-rebuild]]: engine.104 ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
 - [[../plans/2026-09-19-civic-wake-game-loop]]: engine.253 ready
 <!-- /generated -->

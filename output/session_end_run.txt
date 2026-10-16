@@ -13,12 +13,12 @@ Mechanical sub-steps (5):
 ========================================================================
 
 --- [1/5] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc uX85JmqBgxjB6piz7mrDZe (2789 chars, 14 summary rows folded)
+✓ session log → Supermemory [session-logs] doc VzqcYqVzbAquX7qVE88czF (2486 chars, 16 summary rows folded)
 
 --- [2/5] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-10-16T07:12:35.046Z
+  Generated: 2026-10-16T19:01:49.875Z
   Plans scanned: 141
   No frontmatter: 7
   No changelog: 8
@@ -29,37 +29,21 @@ Mechanical sub-steps (5):
   ✓ no drift detected
 
 --- [3/5] ROLLOUT conformance lint (informational) ---
-  ROLLOUT LINT: 3 non-conforming row(s) — state-cell breaks the sweep, or item cell over the 280-char pointer budget:
-    L97 research.29: item cell 526 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L133 engine.292: item cell 562 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L134 engine.291: item cell 532 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-  ROLLOUT OVERDUE: 2 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
-    L138 pipeline.74: latest date named 2026-10-15, today is 2026-10-16
-    L139 pipeline.75: latest date named 2026-10-15, today is 2026-10-16
+  ROLLOUT LINT: 7 non-conforming row(s) — state-cell breaks the sweep, or item cell over the 280-char pointer budget:
+    L108 pipeline.68: NO clean state-token cell → the sweep SILENTLY SKIPS this row (never archives). Fix: a bare `| <state> |` cell, no prose/pipes mangling it.
+    L132 engine.294: item cell 401 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L133 engine.295: item cell 721 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L134 engine.293: item cell 497 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L137 pipeline.72: item cell 916 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L145 pipeline.80: item cell 328 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L154 engine.285: NO clean state-token cell → the sweep SILENTLY SKIPS this row (never archives). Fix: a bare `| <state> |` cell, no prose/pipes mangling it.
+  ROLLOUT OVERDUE: 3 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
+    L139 pipeline.74: latest date named 2026-10-15, today is 2026-10-16
+    L140 pipeline.75: latest date named 2026-10-15, today is 2026-10-16
+    L145 pipeline.80: names no Cycle or date — overdue can't see it; name the fire it waits on or start the item 'Organic:'
 
 --- [4/5] cross-terminal git stack check (read-only) ---
-  ⚠ 20 unpushed commit(s) ahead of origin/main:
-    7cfd122e research.29: changelog — engine.292 LIVE PROD stage 4e @136 (builder's hand), pull-back verified by es [research-build]
-    a1a80d3b engine.292 LIVE PROD @136 — stage 4e = 4d + casinoLedgerEngine.js (fd51c70c), pushed 2026-10-16 by the builder's hand after the es deploy classifier refused; pull-back 168 files = stage4e-e292.sha256 (differs from 4d in exactly the one file, 0 test files), the three zero-night rules read in the live file; ROLLOUT engine.292 live-observing; PIN + NEXT[engine-sheet] (C112 readback: POP-00301's slip → void-gate) [engine-sheet]
-    dd919406 research.29: builder ruled — engine.292 casino fix goes to PROD before C112 ("push the casino fix"); GO relayed to es [research-build]
-    65b32186 research.29: changelog — engine.292 casino zero-night fix bench-proven as an isolated PROD candidate; POP-00301's slip is the live stake; builder's call pending [research-build]
-    819d4533 engine.292 push-prod.sh: bump the deploymentId pinned in .clasp.json (the live web app @135), never the first non-HEAD listing row (that is '@1 - Mags', a different endpoint); assert it is listed before bumping [engine-sheet]
-    bb6fd68b engine.292 bench PASS isolated — SANDBOX 1004 @31 = PROD 4d + casinoLedgerEngine.js, C112 on live-C111: Briar Soto's zero-night 'neg' slip → void-gate (was a 1.83× win), every other show slip as before, EE 4→4; stage + push-prod.sh in output/engine292; ROLLOUT engine.292 needs-info (builder's call: PROD before Sunday); PIN + NEXT[engine-sheet] [engine-sheet]
-    fd51c70c engine.292: a zero night pushes — credits_sign net 0 is neither sign (void, stake back), night_winner needs credits > 0; engine.291: $PILOTROLE needs a pilot with a job column (agy research.29 review hunts 3 + 5, relayed by rb, both verified against code)
-    fcd5ebd8 research.29: changelog count trued to the readback (11 unknown, 22 measured zeros) [research-build]
-    66b06d8d research.29: changelog — agy review dispositions, engine.291 smoke PASS [research-build]
-    f02980b9 research.29: agy plan-review fixes (hunts 1, 2, 4, 6) — identity + career ride the Packet as typed facts (story.facts → W1 known → W3 approvedFacts; angle under the 500-char cap), a measured zero needs gameplay evidence (12 session-only nights revert to unknown), a written log is never a stall, career lines lose the cNNN/TrueSource shorthand [research-build]
-    a1d58b49 engine.291 bench smoke PASS — SANDBOX 1004 @30 = HEAD (4d + 214 stack + 291) C112 on live-C111: 24 token lines, the three pilots, leader Eric Taveras, 0 raw, 0 self-naming, EE 4→4; PIN S562 + NEXT[engine-sheet] (214 re-pair on the C112 base after Sunday, then PROD before C113) [engine-sheet]
-    762f6fec research.29: changelog — Move 5 shipped, Saturday 10-17 is the first unattended test [research-build]
-    d258f56e research.29 Move 5: citizens crossing the city's systems — detected in Saturday curation (INTAKE or full name in the body, two or more desks), a storyline-move tie-break inside a grade, and handed to Mags's narration as the week's crossings [research-build]
-    d88efe6f engine.291: a pilot never draws an audience line naming themselves — the citizen's own POPID is dropped from the $PILOT options at the draw
-    f16f8971 research.29: plan changelog + ROLLOUT row — backfill applied, Moves 1–3 shipped, Move 4 = engine.291 (es), Move 5 next [research-build]
-    57cd17fa research.29 backfill applied: 38 UNDOCKED nights re-scored on the Undocked_Feed tab + the disk record (33 measured zeros, Clarissa Dane +14 → 317, 8 pilots named on 16 blank rows); board recomputed, no rank/CyclesLed/streak change [research-build]
-    f6aa9c65 research.29 Moves 2+3: every earned credit lands (trading.fuel_sold scored, measured zero vs unknown, --rescore-archive backfill) + the flight stops when the pilot stops flying (8 idle turns) [research-build]
-    e652f0aa engine.291 (research.29 Move 4): the city names who is flying UNDOCKED — $PILOT / $PILOTROLE / $LEADER entity slots on the ECL composer; the board leader derived from the feed tab; composer whole-token fix
-    b93ee2a4 research.29 Move 1: Nia knows who is in the chair — ledger RoleType + the sports feed's own sentences about the pilot ride her daily and weekly slices [research-build]
-    66a710e2 research.29: UNDOCKED crossover plan — the city knows its pilots (codex read verified claim by claim; builder's three rulings verbatim; held for go) [research-build]
-  Model decision: push if all yours, hold if other terminals stacked.
+  ✓ stack clean (origin/main..HEAD empty)
 
 --- [5/5] pm2 restart ---
   ✓ godworld-dashboard restarted

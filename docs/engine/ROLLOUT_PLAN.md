@@ -5,13 +5,14 @@
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C111 (fired 2026-10-11 ~16:18 CDT, 0 errors, 148 s); next live fire C112, Sunday 2026-10-18.
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (48)** — each plan, its rows and the state each is in:
+**Plans in motion (49)** — each plan, its rows and the state each is in:
 
 - [[../plans/2026-10-11-media-extension]]: pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, pipeline.71 ready, engine.287 live-observing, engine.288 live-observing, engine.289 blocked
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 ready, engine.264 ready, engine.261 ready
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing
+- [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]: research.29 in-progress, engine.292 live-observing, engine.291 in-progress
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 in-progress
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
@@ -93,7 +94,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| research.29 | UNDOCKED crossover: Moves 1–3 shipped + backfill applied 2026-10-16 (Nia's slice carries RoleType + sports-feed career; adapter scores fuel sales, measured zero vs unknown; 38 nights re-scored, Clarissa 317; runner idle-stop 8 turns). Open: agy review read; Move 4 = engine.291 (es bench → C113) then pool rows retag with $PILOT/$PILOTROLE/$LEADER; Move 5 shipped (Saturday curation crossovers → Mags). First unattended tests Sat 10-17: Nia's 08:15 digest + the Saturday run's crossover block (C111: Eric Taveras, Briar Soto). | in-progress | research-build | [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]] |
+| research.29 | UNDOCKED crossover: Moves 1–3+5 live, backfill applied, engine.292 LIVE @136. Next: Sat 10-17 digest + crossover block read; `$PILOT` pool rows after the 214+291 PROD push → plan changelog | in-progress | research-build | [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]] |
 | engine.214 | Mood per hood + Tasks 17/18/19 + engine.288: paired on 1004 (C111 step −0.10; stack vs PROD on BASELINE-1004-C111, C112 CitySentiment 0.07 → 0.13, DEPLOY_HISTORY). PROD after the live C112 readback Sun 2026-10-18, first fire C113 Sun 2026-10-25; then Tasks 12–13 | live-observing | engine-sheet / research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] |
 | engine.95 | Checkpoint/resume LIVE `c49074fc`, gate armed (330000/60000/6000). C111 read: 131 phases, 148 s, no checkpoint, tab empty. Next: grow `tailReserveMs` when Phase11-MaintainLifeHistoryLog grows (25.4 s at C111); reconcile notes in DEPLOY_HISTORY §PROD c49074fc | live-observing | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] §Changelog bench steps 0–5 |
 | engine.204 | Game-day city impact LIVE since 2026-10-06. Column removal HELD (builder 2026-10-07): ripple map of every feed column + dashboard/sheet/code option-sync audit first; the CommunityInvestment carrier waits on it | in-progress | engine-sheet | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §4 Builder's words (2026-10-07) |

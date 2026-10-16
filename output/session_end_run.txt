@@ -1,5 +1,5 @@
 ========================================================================
-sessionEndMechanical: terminal=engine-sheet, rotate-history=false, dry-run=false
+sessionEndMechanical: terminal=research-build, rotate-history=false, dry-run=false
 ========================================================================
 Expected upstream model step (BEFORE this script):
   1. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated
@@ -13,88 +13,57 @@ Mechanical sub-steps (5):
 ========================================================================
 
 --- [1/5] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc CVwsZHd12d9XEhAuY8fnQ8 (2766 chars, 29 summary rows folded)
+✓ session log → Supermemory [session-logs] doc uX85JmqBgxjB6piz7mrDZe (2789 chars, 14 summary rows folded)
 
 --- [2/5] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-10-14T22:05:33.361Z
-  Plans scanned: 139
+  Generated: 2026-10-16T07:12:35.046Z
+  Plans scanned: 141
   No frontmatter: 7
   No changelog: 8
-  No status-verb match: 122
+  No status-verb match: 124
   Drifts found: 0
   
   No plan-tag drift detected.
   ✓ no drift detected
 
 --- [3/5] ROLLOUT conformance lint (informational) ---
-  ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.
-  ROLLOUT OVERDUE: 1 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
-    L103 research.27: latest date named 2026-10-12, today is 2026-10-14
+  ROLLOUT LINT: 3 non-conforming row(s) — state-cell breaks the sweep, or item cell over the 280-char pointer budget:
+    L97 research.29: item cell 526 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L133 engine.292: item cell 562 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L134 engine.291: item cell 532 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+  ROLLOUT OVERDUE: 2 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
+    L138 pipeline.74: latest date named 2026-10-15, today is 2026-10-16
+    L139 pipeline.75: latest date named 2026-10-15, today is 2026-10-16
 
 --- [4/5] cross-terminal git stack check (read-only) ---
-  ⚠ 55 unpushed commit(s) ahead of origin/main:
-    21a7655e S557 session-end: PIN bump, pipeline.73 ROLLOUT row says what was built and what waits on the mint [research-build]
-    c859e927 pipeline.73: hourly wakes shut off at the builder's word; the Sunday landing waits on the POPID message [research-build]
-    a7bd855a pipeline.73: desk index rows no longer say the agent folders are pending [research-build]
-    fce213f7 S557 NEXT[research-build]: pipeline.73 steps 1–4 landed, waiting on the C112 mint for the POPID registrations [research-build]
-    6e49d46b NEXT[engine-sheet]: POPIDs go to the plan + rb after the C112 mint; Ines first run Wed 10-21 [engine/sheet]
-    e84086cb pipeline.73 steps 3–4: Tamsin Pruitt Lives slice + Ines Sorensen Voices slice, tests, agent folders, builder maps, weekend page refresh [research-build]
-    d4cf9a49 NEXT[engine-sheet]: C112 readback carries the journalist mint, roster rows, first lived wakes [engine/sheet]
-    f94a7be3 pipeline.73 step 2: codex impl review folded — one-generation dump publish, positive stamp before reads, input columns checked, six slice versions bumped, athlete debt-default + pulse tests [engine/sheet]
-    74cb3c3a pipeline.73 step 2: codex implementation review task [engine/sheet]
-    14ea6999 pipeline.73 step 2: LifeHistory_Log window + Lived_Events in the beat dump; sportsSubject lifted at all eight sites [engine/sheet]
-    1570002d pipeline.73 step 2: codex card review task [engine/sheet]
-    a896e8ce pipeline.73 step 2 wiring card: LifeHistory_Log window + Lived_Events rows into the beat dump, sportsSubject lift at all eight sites (engine already gates GAME from court and default), roster rows after the C112 mint [engine/sheet]
-    934380cf PROD stage 4c recorded: PIN, bench pointer @26, deploy history [engine/sheet]
-    7244a45e pipeline.73 step 1: codex impl review folded — fixed voice sentences, ordered survivors, unique receipts, household across wakes; PROD = stage 4c, journalists queued on live [engine/sheet]
-    ede37a96 pipeline.73: builder's overnight direction recorded — hourly wakes, stage passing seats for the 10-15 run, no approval-prompt waits between lanes [research-build]
-    63ade2f8 pipeline.73 mint flags: an unreadable flag is logged and left blank, never thrown [engine/sheet]
-    82423601 pipeline.73 step 1: codex implementation review task [engine/sheet]
-    4681760d pipeline.73 step 1: the lived wake slot — news-grade life events wake their citizen the week they happen [engine/sheet]
-    47315ba5 pipeline.73 mint flags benched: stage 4b (PROD + 8d449968) on 1004 @25, C112 off BASELINE-1004-C111 ok, Tamsin Pruitt POP-01211 / Ines Sorensen POP-01212 minted MEDIA + MED yes + BIZ-00018 (bench ids); PROD push script, dry run green [engine/sheet]
-    a0df04e0 pipeline.73: builder passed both voices — Tamsin Pruitt and Ines Sorensen voice files land, desk index registered, steps 3–4 gate now steps 1–2 [research-build]
-    8d449968 pipeline.73 mint door: CIV/MED/UNI intake flags reach the new ledger row beside ClockMode; engine employer rules synced to the mapping's 10-11 station rules [engine/sheet]
-    7f2f2d4d pipeline.73: Ines Sorensen voice sketch drafted for the builder (exemplar from a live C111 wake page) [research-build]
-    75ba8ce7 pipeline.73 step 1: builder rulings (floor lifted for news-grade, death = survivor's wake, mint carries flags) + mint facts for Tamsin and Ines [research-build]
-    0f5c9842 pipeline.73 step 1: codex review task for the lived-wake wiring card [engine/sheet]
-    1df8749e pipeline.73 step 1 card: tag set from the writers (Recovering is texture unless the hospital text), household dedupe, dry-run rule, mint via Advancement_Intake1 ClockMode, disposition samples for the floor call [engine/sheet]
-    aabed292 pipeline.73 step 1 wiring card: lived wake slot + journalist mint, read from code and live C108–C111 [engine/sheet]
-    79a22a8d S556 soft close: NEXT[research-build] — pipeline.73 citizen seats, es step 1 out [research-build]
-    6cc471cb pipeline.73: schedule approved; build order recorded [research-build]
-    9268bb66 pipeline.73: schedule revised — Tamsin Mon-Fri (needs the cycle slice), Ines Wed-Sun incl. Sunday (pages, not the dump) [research-build]
-    c3fc4ab0 S556 session-end persistence rotation [engine-sheet]
-    5552078a pipeline.73: wake rule (news-grade only) and schedule — Tamsin Sun-Thu, Ines Wed-Sun; grid keyed by weekday; Sunday-after-fire timing open [research-build]
-    4a975a0b pipeline.73: run-order table, true page and life-event counts (corrects 77), wake capacity, Ines draft [research-build]
-    fa6ba43e pipeline.73: Tamsin covers the day's citizens, daily, no repeats (covered list); Nia is the daily-on-top model [research-build]
-    f9d09d2f engine.214 pair: accepted codex review filed to docs/research, cites updated; trigger-inventory gap named [engine/sheet]
-    8c84c9a3 SESSION_CONTEXT: unpushed count points at git, not a number that goes stale [engine/sheet]
-    0b1bcc91 engine.214 pair declared: stage 4 vs stage 5 on frozen BASELINE-1004-C111, C112 CitySentiment 0.07 -> 0.13, hood mean +0.185 [engine/sheet]
-    c8a08f2a pipeline.73: Tamsin Pruitt voice sketch (Lives) for builder read [research-build]
-    e5e2a172 pipeline.73: journalists chosen — Tamsin Pruitt (Lives), Ines Sorensen (Voices) [research-build]
-    ae54b260 pipeline.73: builder ruling — Lives first, Celeste trending, lives-and-voices desk, life events reward a wake; wake gap read from citizen-wake [research-build]
-    2eb7cf0a pipeline.73: citizen coverage — three streams (occurrences, ambient log, voices), the people barely overlap; trending split and seat count drafted [research-build]
-    74402914 pipeline.73: wiring card for adding a beat-slice seat recorded (Task 4) [research-build]
-    81488b06 pipeline.73: citizens' side drafted — what exists to cover (pages, exchanges, digest, pulse) and two-job draft for the builder [research-build]
-    cd61442b engine.214 pair: codex procedure review folded into the bench pointer — frozen C111 image for both legs, guard 0 after each reset, clearfire 114 then 112, state-aware checkpoint clear, deployment id verified @24, carry-diagnostic gate on A [engine/sheet]
-    519b34e5 pipeline.73: builder scope — sports-subject exclusion lifted at every call site; Task 4 first item set [research-build]
-    65e1b520 pipeline.73: builder ruling recorded — citizens are citizens, no privacy; sports-subject exclusion blast radius mapped, change routed to Task 4 [research-build]
-    b33232a6 pipeline.73: builder's map framing recorded — seat = engine system + citizens it touches, crossover = the city, Seymour vs health-slice sports rule, slices two weeks old, citizens' side likely 1-2 new seats [research-build]
-    838875ed engine.214 pair: codex procedure-review task filed; bench reset to live C111 (84/84 tabs, cycleCount 111 read back) [engine/sheet]
-    1c5fcbb2 pipeline.73 map: why Carmen and Luis get one repeating item — tie-break by list position, no memory of prior cycles (C111 slice read) [research-build]
-    3e3f2e17 pipeline.73 map: rebuilt as one entry per journalist — beat, slice, what the slice tells them to write, what they wrote [research-build]
-    8ae7576a pipeline.73 map: what each seat's slice tells it to write — all 24 seats, verbatim from the latest run files [research-build]
-    ac3eedca pipeline.73 map: politics seats — what each is actually handed, from the latest run files [research-build]
-    6257a133 pipeline.73 walk: civic = the politics seats (Carmen, Luis, Jax), builder correction recorded [research-build]
-    791fb567 pipeline.73 walk: civic desk — builder's lead-voice ruling recorded, approval lever and civic seat days checked in code [research-build]
-    7ac85471 pipeline.73: builder's walk method recorded — one seat or desk at a time; sports overlap read at the sports desk [research-build]
-    f4879219 pipeline.73 Task 1: reporter map filled — 24 seats, slice, stated purpose, what each wrote, crossover, gaps [research-build]
+  ⚠ 20 unpushed commit(s) ahead of origin/main:
+    7cfd122e research.29: changelog — engine.292 LIVE PROD stage 4e @136 (builder's hand), pull-back verified by es [research-build]
+    a1a80d3b engine.292 LIVE PROD @136 — stage 4e = 4d + casinoLedgerEngine.js (fd51c70c), pushed 2026-10-16 by the builder's hand after the es deploy classifier refused; pull-back 168 files = stage4e-e292.sha256 (differs from 4d in exactly the one file, 0 test files), the three zero-night rules read in the live file; ROLLOUT engine.292 live-observing; PIN + NEXT[engine-sheet] (C112 readback: POP-00301's slip → void-gate) [engine-sheet]
+    dd919406 research.29: builder ruled — engine.292 casino fix goes to PROD before C112 ("push the casino fix"); GO relayed to es [research-build]
+    65b32186 research.29: changelog — engine.292 casino zero-night fix bench-proven as an isolated PROD candidate; POP-00301's slip is the live stake; builder's call pending [research-build]
+    819d4533 engine.292 push-prod.sh: bump the deploymentId pinned in .clasp.json (the live web app @135), never the first non-HEAD listing row (that is '@1 - Mags', a different endpoint); assert it is listed before bumping [engine-sheet]
+    bb6fd68b engine.292 bench PASS isolated — SANDBOX 1004 @31 = PROD 4d + casinoLedgerEngine.js, C112 on live-C111: Briar Soto's zero-night 'neg' slip → void-gate (was a 1.83× win), every other show slip as before, EE 4→4; stage + push-prod.sh in output/engine292; ROLLOUT engine.292 needs-info (builder's call: PROD before Sunday); PIN + NEXT[engine-sheet] [engine-sheet]
+    fd51c70c engine.292: a zero night pushes — credits_sign net 0 is neither sign (void, stake back), night_winner needs credits > 0; engine.291: $PILOTROLE needs a pilot with a job column (agy research.29 review hunts 3 + 5, relayed by rb, both verified against code)
+    fcd5ebd8 research.29: changelog count trued to the readback (11 unknown, 22 measured zeros) [research-build]
+    66b06d8d research.29: changelog — agy review dispositions, engine.291 smoke PASS [research-build]
+    f02980b9 research.29: agy plan-review fixes (hunts 1, 2, 4, 6) — identity + career ride the Packet as typed facts (story.facts → W1 known → W3 approvedFacts; angle under the 500-char cap), a measured zero needs gameplay evidence (12 session-only nights revert to unknown), a written log is never a stall, career lines lose the cNNN/TrueSource shorthand [research-build]
+    a1d58b49 engine.291 bench smoke PASS — SANDBOX 1004 @30 = HEAD (4d + 214 stack + 291) C112 on live-C111: 24 token lines, the three pilots, leader Eric Taveras, 0 raw, 0 self-naming, EE 4→4; PIN S562 + NEXT[engine-sheet] (214 re-pair on the C112 base after Sunday, then PROD before C113) [engine-sheet]
+    762f6fec research.29: changelog — Move 5 shipped, Saturday 10-17 is the first unattended test [research-build]
+    d258f56e research.29 Move 5: citizens crossing the city's systems — detected in Saturday curation (INTAKE or full name in the body, two or more desks), a storyline-move tie-break inside a grade, and handed to Mags's narration as the week's crossings [research-build]
+    d88efe6f engine.291: a pilot never draws an audience line naming themselves — the citizen's own POPID is dropped from the $PILOT options at the draw
+    f16f8971 research.29: plan changelog + ROLLOUT row — backfill applied, Moves 1–3 shipped, Move 4 = engine.291 (es), Move 5 next [research-build]
+    57cd17fa research.29 backfill applied: 38 UNDOCKED nights re-scored on the Undocked_Feed tab + the disk record (33 measured zeros, Clarissa Dane +14 → 317, 8 pilots named on 16 blank rows); board recomputed, no rank/CyclesLed/streak change [research-build]
+    f6aa9c65 research.29 Moves 2+3: every earned credit lands (trading.fuel_sold scored, measured zero vs unknown, --rescore-archive backfill) + the flight stops when the pilot stops flying (8 idle turns) [research-build]
+    e652f0aa engine.291 (research.29 Move 4): the city names who is flying UNDOCKED — $PILOT / $PILOTROLE / $LEADER entity slots on the ECL composer; the board leader derived from the feed tab; composer whole-token fix
+    b93ee2a4 research.29 Move 1: Nia knows who is in the chair — ledger RoleType + the sports feed's own sentences about the pilot ride her daily and weekly slices [research-build]
+    66a710e2 research.29: UNDOCKED crossover plan — the city knows its pilots (codex read verified claim by claim; builder's three rulings verbatim; held for go) [research-build]
   Model decision: push if all yours, hold if other terminals stacked.
 
 --- [5/5] pm2 restart ---
   ✓ godworld-dashboard restarted
 
 ========================================================================
-sessionEndMechanical: complete (terminal=engine-sheet)
+sessionEndMechanical: complete (terminal=research-build)
 ========================================================================

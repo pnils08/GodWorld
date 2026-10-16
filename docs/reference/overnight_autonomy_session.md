@@ -139,6 +139,8 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 
 02:43 rb — pipeline.80: a deterministic floor will index every canon citizen a piece prints as `mentioned` (the INTAKE contract already says so; the models skip it when they quoted nobody — 47 names at C111). It raises Citizen_Media_Usage `mentioned` rows by about that many a week, first at the Sat 10-24 ingest. Say so if that is not the rate you want; the floor entries carry `floor: true`.
 
+02:46 rb — pipeline.68 (roster rows for the mints): the fill-blanks dry run would write 50 EmployerBizId cells — 41 UNTRACKED (11 of them the actors/streamers/influencers minted for the stations, seats you said wait on the media map), 3 SELF_EMPLOYED, 6 tracked-business hires (that is a hiring event, which S357 says never bulk-writes), and Rick Dillon the grade-schooler → OUSD (a keyword rule matching 'School'). The live run also drops and rebuilds the Employment_Roster tab. Three ways: (a) `--untracked-only` now (sentinels only, 44 cells, media figures included), (b) the same but hold the 11 media figures until the map, (c) wait. Default if you say nothing: (c). The plan is in output/… p68-plan.txt via the dry run.
+
 ## 7. Working ledger
 
 Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman register, results first. Purge at the start of each night (git keeps history); do not write narrative here.
@@ -154,4 +156,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 02:33 rb BOOT overnight (builder: NEXT[research-build] 3 + 4 to completion, then past-due ROLLOUT; es/codex/agy support). WAKE set (recurring :26, job 58f72d4f). es purged §7, not repeated.
 02:39 rb BUILD research.29 Move 4 rows LIVE PROD ECL 846→856: 10 retagged in place to $PILOT (--retag mode, `was:` revert), 10 new (7 $PILOTROLE/$PILOT, 3 $LEADER); 6 wager lines still undeployed; test ok. es FOUND no $LEADER self-exclusion → R850/853/856 HELD Active=no (--active mode). Asked es: bench smoke of the real rows @32. FILE plan + ROLLOUT + SESSION_CONTEXT rb (this commit). Next: NEXT (4) INTAKE gap.
 02:43 rb BUILD NEXT (4) read: 10/21 C111 solos 0 NAMES, 47 printed canon citizens unindexed across 17 filings (checkText scan) — the model skips NAMES when it quoted nobody; parser clean. Card pipeline.80 (media-extension plan) + ROLLOUT row. CLAIM codex rb pipeline.80 impl as a patch (docs/for-claude-review/2026-10-16-pipeline80-intake-floor-impl-TASK.md → output/codex/pipeline80-intake-floor.patch). es lands after its $LEADER fix. §6 line filed (usage-row rate).
-
+02:46 rb CHECK past-due ROLLOUT (rb lane): pipeline.68 dry run read — 50 cells, 11 media figures + 6 tracked hires + 1 keyword defect inside it → needs-info, §6 line, no live write. Tool dry run now prints the blank-cell plan (commit). codex WORKING pipeline.80 (no output yet, 12 min). Next: pipeline.72 read.

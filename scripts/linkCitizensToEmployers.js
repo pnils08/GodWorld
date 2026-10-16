@@ -366,6 +366,21 @@ async function main() {
   }
 
   if (DRY_RUN) {
+    // pipeline.68 (rb 2026-10-16): a blank-cell dry run previews exactly the cells the live
+    // run would write — the live path below filters on the live cell, so the preview must too.
+    if (FILL_BLANKS_ONLY || UNTRACKED_ONLY) {
+      var plan = results.filter(function(r) {
+        var existing = employerColExists ? String(rows[r.rowIndex][iEmployerBizId] || '').trim() : '';
+        if (existing) return false;
+        if (UNTRACKED_ONLY && /^BIZ-/.test(r.bizId)) return false;
+        return true;
+      });
+      console.log('--- BLANK-CELL PLAN (' + plan.length + ' cells the live run would write) ---');
+      plan.forEach(function(r) {
+        console.log('  ' + r.popId + ' ' + r.name + ' | ' + r.roleType + ' → ' + r.bizId + ' ' + (bizNames[r.bizId] || '') + ' [' + r.layer + ']');
+      });
+      console.log('');
+    }
     console.log('=== DRY RUN COMPLETE — no changes written ===');
     return;
   }

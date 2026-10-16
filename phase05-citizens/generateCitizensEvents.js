@@ -3296,17 +3296,25 @@ function generateCitizensEvents_(ctx) {
       // fallback. Empty -> composeContentLine_ returns null -> the slot is dropped.
       var clPilotName = "", clPilotRole = "";
       if (clWantsPilot && undockedAiringPilots.length) {
+        // The show pool is `undocked`-gated, so a pilot draws audience rows too — never
+        // about themselves. The DSL has no negation, so the engine drops the citizen's
+        // own POPID; a sole pilot's token row then compose-nulls (rare, and right).
+        var clSelf = String(popId).trim().toUpperCase();
         var clPilotOpts = [];
-        for (var cpo = 0; cpo < undockedAiringPilots.length; cpo++) clPilotOpts.push({ pop: undockedAiringPilots[cpo], weight: 1 });
-        var clPilotPop = pickWeighted_(clPilotOpts).pop;
-        clPilotName = nameByPop[clPilotPop] || "";
-        if (!clPilotName) {
-          var clFeed = S.undockedFeedEntries || [];
-          for (var cfh = 0; cfh < clFeed.length; cfh++) {
-            if (String(clFeed[cfh].popId || "").trim().toUpperCase() === clPilotPop && clFeed[cfh].holder) { clPilotName = clFeed[cfh].holder; break; }
-          }
+        for (var cpo = 0; cpo < undockedAiringPilots.length; cpo++) {
+          if (undockedAiringPilots[cpo] !== clSelf) clPilotOpts.push({ pop: undockedAiringPilots[cpo], weight: 1 });
         }
-        clPilotRole = pilotRoleText_(roleByPop[clPilotPop]);
+        if (clPilotOpts.length) {
+          var clPilotPop = pickWeighted_(clPilotOpts).pop;
+          clPilotName = nameByPop[clPilotPop] || "";
+          if (!clPilotName) {
+            var clFeed = S.undockedFeedEntries || [];
+            for (var cfh = 0; cfh < clFeed.length; cfh++) {
+              if (String(clFeed[cfh].popId || "").trim().toUpperCase() === clPilotPop && clFeed[cfh].holder) { clPilotName = clFeed[cfh].holder; break; }
+            }
+          }
+          clPilotRole = pilotRoleText_(roleByPop[clPilotPop]);
+        }
       }
       var composedText = composeContentLine_(entry.ledgerLine, S.contentLedger, {
         VENUE: clVenue,

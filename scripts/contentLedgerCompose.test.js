@@ -442,8 +442,20 @@ console.log('═══ engine.291 (research.29 Move 4): the city names who is fl
   // The composer
   const ROLE = { 'Test POP-P1': 'district attorney', 'Test POP-P3': 'second baseman', 'Test POP-P4': 'CBA compliance monitor' };
   let pairLines = 0, badPair = 0, ghost = 0, notAiring = 0, leaderOk = 0, leaderBad = 0, raw = 0, pilotOnly = 0, firstBad = '';
+  let selfNamed = 0, pilotAudience = 0; // a pilot draws audience rows too (the pool is undocked-gated) — never about themselves
   for (let seed = 11; seed < 16; seed++) {
-    const lines = emittedLines(run(seed, FIXTURE.concat(TOKEN_ROWS), FEED));
+    const ctxS = run(seed, FIXTURE.concat(TOKEN_ROWS), FEED);
+    for (const r of ctxS.ledger.rows) {
+      const pop = String(r[0]), cell = String(r[5] || '');
+      if (!/^POP-P[134]$/.test(pop)) continue;
+      const own = 'Test ' + pop;
+      for (const ln of cell.split('\n')) {
+        if (!/in the chair tonight|fly and argued/.test(ln)) continue;
+        pilotAudience++;
+        if (ln.indexOf(own + ' was in the chair') >= 0 || ln.indexOf('watched ' + own + ' the ') >= 0) selfNamed++;
+      }
+    }
+    const lines = emittedLines(ctxS);
     for (const l of lines) {
       if (/\$[A-Z_]+/.test(l)) raw++;
       let m = l.match(/watched (.+?) the (.+?) fly and argued/);
@@ -467,6 +479,8 @@ console.log('═══ engine.291 (research.29 Move 4): the city names who is fl
   assert('$PILOT never names a pilot who is not flying tonight', notAiring === 0, 'hits=' + notAiring);
   assert('$LEADER is the board leader (' + leaderOk + ')', leaderOk > 0 && leaderBad === 0, 'bad=' + leaderBad);
   assert('no raw $PILOT/$PILOTROLE/$LEADER reaches LifeHistory', raw === 0, 'raw=' + raw);
+  assert('a pilot draws audience lines about the OTHER pilots (' + pilotAudience + ')', pilotAudience > 0);
+  assert('a pilot never draws an audience line naming themselves', selfNamed === 0, 'self=' + selfNamed);
   const d1 = emittedLines(run(777, FIXTURE.concat(TOKEN_ROWS), FEED)).join('||');
   const d2 = emittedLines(run(777, FIXTURE.concat(TOKEN_ROWS), FEED)).join('||');
   assert('token lines: same seed -> byte-identical', d1 === d2);

@@ -34,11 +34,10 @@
     "credits_delta": {
       "type": "FACT",
       "source": "get_action_log",
-      "hits": 0,
-      "note": "entries in window carry no credit event — measured zero",
-      "value": 0,
-      "rescoredAt": "2026-10-16T05:36:44.749Z",
-      "was": null
+      "note": "no gameplay recorded in window (runner never flew or stalled) — unknown",
+      "value": null,
+      "rescoredAt": "2026-10-16T05:52:54.956Z",
+      "was": 0
     },
     "systems_visited": {
       "type": "FACT",

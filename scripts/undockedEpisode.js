@@ -135,7 +135,11 @@ function createCompletionTracker(idleTurns) {
       try { e = JSON.parse(line); } catch (_) { return done; }
       if (e.event === 'turn_end') {
         idle++;
-        if (!done && idle >= limit) { stalled = true; done = true; }
+        // agy review 2026-10-16 hunt 4: sell/refuel/repair auto-dock the ship on
+        // the server, so the pilot's explicit `dock` errors and `docked` never
+        // flips here — 2 archived flights wrote their log, obeyed the stop rule,
+        // and would have read as stalls. Log written + stopped calling = done.
+        if (!done && idle >= limit) { stalled = !logWritten; done = true; }
         return done;
       }
       if (e.event !== 'tool_call' || !e.args || typeof e.args.command !== 'string') return done;

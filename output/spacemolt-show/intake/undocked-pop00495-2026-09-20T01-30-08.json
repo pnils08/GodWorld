@@ -10,7 +10,7 @@
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00495-2026-09-20T01-30-08.json",
   "Holder": "Rosalind Young",
-  "CreditsDelta": 0,
+  "CreditsDelta": null,
   "Magnitude": 2,
   "Flags": [
     "credits_delta_windowed"
@@ -26,7 +26,7 @@
     "POPID": "POP-00495",
     "Holder": "Rosalind Young",
     "EpisodeId": "undocked-pop00495-Y3C3-e2",
-    "CreditsDelta": 0,
+    "CreditsDelta": null,
     "Systems": [],
     "CombatEvents": 0,
     "MishapCount": 0,

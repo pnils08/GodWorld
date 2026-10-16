@@ -10,7 +10,7 @@
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00287-2026-10-10T01-30-04.json",
   "Holder": "Simone Adesanya",
-  "CreditsDelta": 0,
+  "CreditsDelta": null,
   "Magnitude": 2,
   "Flags": [
     "credits_delta_windowed"
@@ -26,7 +26,7 @@
     "POPID": "POP-00287",
     "Holder": "Simone Adesanya",
     "EpisodeId": "undocked-pop00287-Y3C6-e2",
-    "CreditsDelta": 0,
+    "CreditsDelta": null,
     "Systems": [],
     "CombatEvents": 0,
     "MishapCount": 0,

@@ -357,6 +357,14 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane,
     refClaim('FACT', story.label || story.angle, src),
   ];
   if (story.hookLine) known.push(refClaim('FACT', story.hookLine, src));
+  // research.29 (agy hunt 1): a story's own typed facts — who the UNDOCKED pilot
+  // is in the city, their career as the sports feed wrote it — are known claims,
+  // not assignment prose: task.assignment is capped at 500 chars and the V2
+  // auditor approves numbers only from known/approvedFacts.
+  for (const fact of (Array.isArray(story.facts) ? story.facts : [])) {
+    const text = clean(fact, 500);
+    if (text && !known.some(claim => claim.text === text && claim.src === src)) known.push(refClaim('FACT', text, src));
+  }
   if (slice && slice.contradiction) {
     if (slice.contradiction.a) known.push(refClaim('FACT', slice.contradiction.a,
       slice.contradiction.aSrc || src));

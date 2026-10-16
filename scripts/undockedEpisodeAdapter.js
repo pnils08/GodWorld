@@ -69,6 +69,8 @@ function loadEpisode(jsonPath) {
     popid: popidFromSession(raw.session),
     startedAt: raw.startedAt,
     endedAt: raw.endedAt,
+    // research.29 Move 3: the runner's idle-stop verdict rides into the staged night
+    stall: raw.stall || null,
     runner: {
       turns: raw.turns,
       exitCode: raw.exitCode,
@@ -198,9 +200,15 @@ function deriveCredits(entries) {
   // EARNED NOTHING — that is 0, and the board and the recap say so. Only a
   // window with no entries at all stays null (unknown). Before this, 34 of 55
   // nights read blank and nobody could tell a bad night from a broken fetch.
+  // agy review 2026-10-16 hunt 2: the runner's own login writes a `session`
+  // entry inside the window even when the pilot never flew (12 of the 33 blank
+  // archived nights were session-only — runner crashes and stalls). A measured
+  // zero needs gameplay evidence: at least one non-session entry. Session-only
+  // or empty stays unknown, and a stalled night is named as such.
   if (!hits) {
-    if (!entries.length) return fact(null, { note: 'no action-log entries in window — unknown' });
-    return fact(0, { hits: 0, note: 'entries in window carry no credit event — measured zero' });
+    const gameplay = entries.some(function (e) { return e.category && e.category !== 'session'; });
+    if (!gameplay) return fact(null, { note: entries.length ? 'no gameplay recorded in window (runner never flew or stalled) — unknown' : 'no action-log entries in window — unknown' });
+    return fact(0, { hits: 0, note: 'gameplay in window carries no credit event — measured zero' });
   }
   return fact(sum, { hits: hits, basis: basis.slice(0, 40) });
 }
@@ -310,7 +318,8 @@ function assemble(episode, byCategory, captains) {
     facts: {
       credits_delta: (function () {
         const c = deriveCredits(all);
-        if (episode.stall && c.value === 0) c.note = 'runner stall — pilot stopped flying; measured zero';
+        if (episode.stall && c.value === 0) c.note = 'runner stall — pilot stopped flying after real play; measured zero';
+        if (episode.stall && c.value == null) c.note = 'runner stall — pilot never flew; unknown, not zero';
         return c;
       })(),
       systems_visited: deriveSystems(all),

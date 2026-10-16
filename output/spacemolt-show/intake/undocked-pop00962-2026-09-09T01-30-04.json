@@ -10,7 +10,7 @@
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00962-2026-09-09T01-30-04.json",
   "Holder": "Marcus Walker",
-  "CreditsDelta": 0,
+  "CreditsDelta": null,
   "Magnitude": 2,
   "Flags": [
     "credits_delta_windowed"
@@ -26,7 +26,7 @@
     "POPID": "POP-00962",
     "Holder": "Marcus Walker",
     "EpisodeId": "undocked-pop00962-Y3C2",
-    "CreditsDelta": 0,
+    "CreditsDelta": null,
     "Systems": [],
     "CombatEvents": 0,
     "MishapCount": 0,

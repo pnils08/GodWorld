@@ -10,7 +10,7 @@
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00842-2026-09-23T01-30-08.json",
   "Holder": "Wanjiru Liu",
-  "CreditsDelta": 0,
+  "CreditsDelta": null,
   "Magnitude": 2,
   "Flags": [
     "credits_delta_windowed"
@@ -26,7 +26,7 @@
     "POPID": "POP-00842",
     "Holder": "Wanjiru Liu",
     "EpisodeId": "undocked-pop00842-Y3C4",
-    "CreditsDelta": 0,
+    "CreditsDelta": null,
     "Systems": [],
     "CombatEvents": 0,
     "MishapCount": 0,

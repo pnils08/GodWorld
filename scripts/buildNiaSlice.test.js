@@ -122,7 +122,7 @@ check('a printed pilot absent from the model INTAKE is still added as subject',
 const tmpFeed = require('path').join(os.tmpdir(), 'nia-career-feed-' + process.pid + '.jsonl');
 fs.writeFileSync(tmpFeed, [
   { Cycle: '109', SeasonType: 'playoffs', EventType: 'game-result', NamesUsed: 'Eric Taveras (2B), Vinnie Keane (DH)', Notes: 'Vinnie Keane sat. Eric Taveras continues his amazing playoff campaign with 2 homeruns.' },
-  { Cycle: '110', SeasonType: 'championship', EventType: 'game-result', NamesUsed: 'Eric Taveras, Pablo Almanzar', Notes: 'Eric Taveras win World Series MVP to go along with his post-season MVP.' },
+  { Cycle: '110', SeasonType: 'championship', EventType: 'game-result', NamesUsed: 'Eric Taveras, Pablo Almanzar', Notes: 'Eric Taveras win World Series MVP to go along with his post-season MVP. Parade for Eric Taveras set for Downtown in c111. Eric Taveras is rated at 82 in TrueSource.' },
   { Cycle: '101', SeasonType: 'regular', EventType: 'game-result', NamesUsed: 'Eric Taveras (2B)', Notes: 'Eric Taveras went 0-for-4 in April.' },
   { Cycle: '110', SeasonType: 'championship', EventType: 'game-result', NamesUsed: 'Vinnie Keane', Notes: 'Vinnie Keane waved from the float.' },
 ].map(r => JSON.stringify(r)).join('\n') + '\n');
@@ -133,8 +133,13 @@ check('career lines: only the sentences that name the pilot', !career[1].line.in
 check('career lines: C101 is outside the window', !career.some(l => l.cycle === 101));
 check('career lines: unknown pilot -> []', N.careerLinesFor('Nobody Here', 111, tmpFeed).length === 0);
 check('career lines: no name -> []', N.careerLinesFor(null, 111, tmpFeed).length === 0);
+check('career lines: season label, never a cycle number prefix', career[0].line.startsWith('Championship: ') && !/\bC\d{3}\b/.test(career[0].line));
+check('career lines: "in c111" shorthand stripped, cycle talk otherwise untouched', !/c111/.test(career[0].line) && /Parade for Eric Taveras set for Downtown\./.test(career[0].line));
+check('career lines: rating / TrueSource sentences dropped', !/rated at|TrueSource/.test(career[0].line));
 const who = N.whoLine('Eric Taveras', { roleType: "Second Baseman, Oakland A's" }, career);
-check('who line: name — RoleType. career sentences', who.startsWith("Eric Taveras — Second Baseman, Oakland A's. C110 championship:") && !who.endsWith('.'));
+check('who line: name — RoleType. career sentences', who.startsWith("Eric Taveras — Second Baseman, Oakland A's. Championship:") && !who.endsWith('.'));
+const wf = N.whoFacts('Eric Taveras', { roleType: "Second Baseman, Oakland A's" }, career);
+check('who facts: one ledger role fact + one fact per career line, each naming the pilot', wf.length === 3 && wf[0].includes('(ledger)') && wf.every(f => f.startsWith('Eric Taveras')));
 check('who line: no role, no career -> just the name', N.whoLine('Briar Soto', {}, []) === 'Briar Soto');
 try { fs.unlinkSync(tmpFeed); } catch (_) {}
 
@@ -146,7 +151,8 @@ if (fs.existsSync(snap)) {
 const c111 = N.buildNiaWeeklySlice(111);
 if (c111 && !c111.empty) {
   check('weekly c111: every pilot carries who + career', c111.pilots.every(p => typeof p.who === 'string' && Array.isArray(p.career)));
-  check('weekly c111: the angle says who is in the chair', c111.story.angle.includes('Who is in the chair:'));
+  check('weekly c111: the angle says who is in the chair and stays under the Packet 500-char cap', c111.story.angle.includes('In the chair:') && c111.story.angle.length <= 500);
+  check('weekly c111: per-pilot numbers and careers ride as story.facts', Array.isArray(c111.story.facts) && c111.story.facts.length >= c111.pilots.length);
   const eric = c111.pilots.find(p => p.POPID === 'POP-00597');
   if (eric) check('weekly c111: Eric Taveras reads as the A\'s second baseman with his MVP', eric.who.includes("Oakland A's") && eric.who.includes('MVP'));
 }

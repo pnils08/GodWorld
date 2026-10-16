@@ -220,6 +220,8 @@ function storyFromSeed(e) {
   const story = { ref: e.ref, label: e.label || null, kind: e.kind || null };
   if (h.angle) story.angle = h.angle;
   if (h.hookLine) story.hookLine = h.hookLine;
+  // research.29: a lane's typed facts ride into the Packet's known claims (W1 → W3)
+  if (Array.isArray(h.facts) && h.facts.length) story.facts = h.facts;
   if (Array.isArray(h.citizens) && h.citizens.length) story.citizens = h.citizens;
   if (Array.isArray(e.popids) && e.popids.length) story.popids = e.popids;
   if (e.hood) story.hood = e.hood;

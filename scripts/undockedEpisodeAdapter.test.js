@@ -134,6 +134,14 @@ const zero = A.deriveCredits(mined);
 check('entries without a credit event -> measured zero', zero.value === 0 && zero.type === 'FACT' && /measured zero/.test(zero.note));
 const unknown = A.deriveCredits([]);
 check('no entries in window -> null (unknown), never zero', unknown.value === null && /unknown/.test(unknown.note));
+const sessionOnly = A.deriveCredits([{ category: 'session', event_type: 'session.login', data: {} }, { category: 'session', event_type: 'session.login', data: {} }]);
+check('session-only window (runner never flew) -> null with the reason, never zero', sessionOnly.value === null && /never flew|stalled/.test(sessionOnly.note));
+check('loadEpisode carries the runner stall verdict', (function () {
+  const fs2 = require('fs'), os2 = require('os'), p = require('path').join(os2.tmpdir(), 'ep-stall-' + process.pid + '.json');
+  fs2.writeFileSync(p, JSON.stringify({ session: 'undocked-pop00287', startedAt: '2026-10-10T01:30:04Z', endedAt: '2026-10-10T01:40:04Z', stall: { idleTurns: 8, toolCalls: 2, limit: 8 } }));
+  const ep = A.loadEpisode(p); fs2.unlinkSync(p);
+  return ep.stall && ep.stall.idleTurns === 8;
+})());
 const scored = A.deriveCredits(mined.concat([fuel]));
 check('fuel sale on a mining night -> 14', scored.value === 14 && scored.hits === 1);
 check('entriesOf flattens the staged category map with category restored',
@@ -143,7 +151,8 @@ check('entriesOf flattens the staged category map with category restored',
 const plan = A.planRescore();
 check('planRescore: every approved change maps to a feed EpisodeId and a cycle (the tab key)',
   Array.isArray(plan.changes) && plan.changes.every(c => c.file && (c.applied !== 'yes' || (c.episodeId && c.cycle != null))));
-check('planRescore never turns a measured number into a blank', plan.changes.every(c => !(c.before != null && c.after == null)));
+check('planRescore never turns a real payout into a blank (a 0 may revert to unknown when no gameplay was recorded)',
+  plan.changes.every(c => !(c.before != null && Number(c.before) !== 0 && c.after == null)));
 
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('undockedEpisodeAdapter: ok');

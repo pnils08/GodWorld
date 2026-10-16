@@ -62,6 +62,10 @@ t.push(call('spacemolt/get_status'));
 for (let i = 0; i < 7; i++) t.push(te);
 check('a tool call resets the idle count', !t.complete && t.idleTurns === 7);
 check('IDLE_TURNS default is 8', E.IDLE_TURNS === 8);
+t = E.createCompletionTracker(8);
+t.push(call('spacemolt/undock')); t.push(te); t.push(call('spacemolt/sell')); t.push(call('spacemolt_social/captains_log_add')); t.push(te);
+for (let i = 0; i < 8; i++) t.push(te);
+check('server auto-dock (sell) + log written + obeying the stop rule = complete, NOT a stall (Soo Loo 09-24 shape)', t.complete && !t.stalled);
 
 if (failed) { console.error('cron-undocked-run: ' + failed + ' FAIL'); process.exit(1); }
 console.log('cron-undocked-run: ok');

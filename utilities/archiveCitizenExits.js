@@ -195,36 +195,53 @@ function archiveCitizenExits_(ctx) {
 
   var cand = citizenArchiveCandidates_(header, body);
   out.skipped = cand.skipped; out.skippedWhy = cand.skippedWhy;
-  // a re-fire of the same cycle must not double-snapshot: (POPID, ExitCycle, ArchiveReason) is unique
-  var existing = {};
+  // engine.285 (3/6): a fire killed between the copy and the removal left the snapshot on
+  // the archive and the row on Simulation_Ledger. The old key (POPID, THIS fire's cycle,
+  // reason) stalled the row on a same-cycle re-fire and took a second snapshot on the next
+  // cycle. The snapshot is this exit's when it is the latest for (POPID, reason) and the
+  // citizen has not returned since (ReturnedCycle blank or older than its ExitCycle) — then
+  // the row is removed and nothing is copied. A citizen restored after that snapshot and
+  // gone again is a new exit and gets a new snapshot. Citizen_Archive is never edited.
+  var latestExit = {};
   var av = ar.getDataRange().getValues();
-  for (var e = 1; e < av.length; e++) existing[String(av[e][iPopA] || '').trim().toUpperCase() + '|' + String(av[e][iExitA]) + '|' + String(av[e][iReasonA])] = true;
-  var moves = [];
+  for (var e = 1; e < av.length; e++) {
+    var ek = String(av[e][iPopA] || '').trim().toUpperCase() + '|' + String(av[e][iReasonA]);
+    var ex = Number(av[e][iExitA]) || 0;
+    if (!(ek in latestExit) || ex > latestExit[ek]) latestExit[ek] = ex;
+  }
+  var iRetSL = header.indexOf('ReturnedCycle');
+  var moves = [], verified = [];
   for (var k = 0; k < cand.rows.length; k++) {
     var c = cand.rows[k];
-    if (existing[c.popId + '|' + cycle + '|' + c.reason]) { out.skipped++; out.skippedWhy['already-archived-this-cycle'] = (out.skippedWhy['already-archived-this-cycle'] || 0) + 1; continue; }
+    var snapExit = latestExit[c.popId + '|' + c.reason];
+    var returned = iRetSL >= 0 ? (Number(body[c.q][iRetSL]) || 0) : 0;
+    if (snapExit !== undefined && snapExit > 0 && returned < snapExit) {
+      verified.push(c);
+      out.resumed = (out.resumed || 0) + 1;
+      Logger.log('archiveCitizenExits_ engine.285: ' + c.popId + ' already snapshotted (C' + snapExit + ', ' + c.reason + ') — removing the source row only');
+      continue;
+    }
     moves.push(c);
   }
-  out.candidates = moves.length;
-  if (!moves.length) { out.remaining = body.length; Logger.log('archiveCitizenExits_ engine.90 C' + cycle + ': no eligible rows'); return out; }
+  out.candidates = moves.length + verified.length;
+  if (!out.candidates) { out.remaining = body.length; Logger.log('archiveCitizenExits_ engine.90 C' + cycle + ': no eligible rows'); return out; }
 
   // 1. copy — one block append
   var block = [];
   var exitYear = simYearOf_(ctx, cycle); // engine.164
   for (var b = 0; b < moves.length; b++) block.push(citizenArchiveRow_(header, body[moves[b].q], moves[b].reason, cycle, exitYear));
   var start = ar.getLastRow() + 1;
-  ar.getRange(start, 1, block.length, want.length).setValues(block);
+  if (block.length) ar.getRange(start, 1, block.length, want.length).setValues(block);
 
   // 2. read back — every POPID + ExitCycle, in order
-  var back = ar.getRange(start, 1, block.length, want.length).getValues();
-  var verified = [];
+  var back = block.length ? ar.getRange(start, 1, block.length, want.length).getValues() : [];
   for (var r = 0; r < moves.length; r++) {
     var got = back[r] || [];
     var okRow = String(got[iPopA] || '').trim().toUpperCase() === moves[r].popId && String(got[iExitA]) === String(cycle);
     if (okRow) verified.push(moves[r]);
     else Logger.log('archiveCitizenExits_ engine.90: read-back mismatch for ' + moves[r].popId + ' — source row kept');
   }
-  out.skipped += moves.length - verified.length;
+  out.skipped += moves.length - (verified.length - (out.resumed || 0));   // read-back mismatches (resumed rows are in verified)
 
   // 3. remove — verified rows only, bottom-up, contiguous runs in one call each
   verified.sort(function(x, y) { return y.q - x.q; });

@@ -417,7 +417,7 @@ function validateIntent_(intent) {
  * ============================================================================
  *
  * INTENT KINDS:
- * - ensure: Create tab + write headers if missing; no-op if tab exists
+ * - ensure: Create tab + write headers if missing; headers onto an existing EMPTY tab; else no-op
  * - cell: Write single value at specific row/col
  * - range: Write 2D array starting at row/col
  * - append: Add rows at end of sheet

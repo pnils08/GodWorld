@@ -781,13 +781,21 @@ function archiveClosedBusinesses_(ctx) {
   var col = function(name) { for (var c = 0; c < bh.length; c++) if (String(bh[c]).trim() === name) return c; return -1; };
   var iId = col('BIZ_ID'), iCnt = col('Employee_Count');
   if (iId < 0) return out;
-  var ah = ar.getDataRange().getValues()[0] || [];
+  var av = ar.getDataRange().getValues();
+  var ah = av[0] || [];
   var aId = -1; for (var ac = 0; ac < ah.length; ac++) if (String(ah[ac]).trim() === 'BIZ_ID') aId = ac;
   if (aId < 0) { Logger.log('archiveClosedBusinesses_: Business_Archive has no BIZ_ID header'); return out; }
-  // bottom-up so a removal never shifts a row still to be examined
+  // engine.285 (2/6): BIZ_IDs are never reissued, so a BIZ_ID already on the archive is
+  // this business's copy — a fire killed between the copy and the removal left it there.
+  // The next fire removes the source row instead of copying it a second time.
+  var archived = {};
+  for (var aq = 1; aq < av.length; aq++) { var ak = String(av[aq][aId] || '').trim(); if (ak) archived[ak] = true; }
+  // bottom-up by ROW (was by BIZ_ID, which is bottom-up only while the ledger stays in id
+  // order) so a removal never shifts a row still to be examined
   var byId = {};
   for (var q = 1; q < v.length; q++) byId[String(v[q][iId] || '').trim()] = q;
-  var ids = closures.map(function(c) { return c.id; }).sort().reverse();
+  var ids = closures.map(function(c) { return c.id; });
+  ids.sort(function(x, y) { return (byId[y] === undefined ? -1 : byId[y]) - (byId[x] === undefined ? -1 : byId[x]); });
   for (var k = 0; k < ids.length; k++) {
     var id = ids[k];
     var q2 = byId[id];
@@ -797,13 +805,19 @@ function archiveClosedBusinesses_(ctx) {
     if (stated > 0 || tracked[id]) { out.waiting++; continue; }
     var meta = null;
     for (var m = 0; m < closures.length; m++) if (closures[m].id === id) meta = closures[m];
-    var rowOut = [];
-    for (var c2 = 0; c2 < 9; c2++) rowOut.push(c2 < v[q2].length ? v[q2][c2] : '');
-    rowOut.push('closed', cycle, 'engine.96:' + id + ':C' + cycle, meta ? meta.closedCycle : '');
-    var target = ar.getLastRow() + 1;
-    ar.getRange(target, 1, 1, rowOut.length).setValues([rowOut]);
-    var back = ar.getRange(target, 1, 1, rowOut.length).getValues()[0];
-    if (String(back[aId] || '').trim() !== id) { Logger.log('archiveClosedBusinesses_: read-back mismatch for ' + id + ' — source row kept'); out.skipped++; continue; }
+    if (archived[id]) {
+      Logger.log('archiveClosedBusinesses_ engine.285: ' + id + ' already on Business_Archive (copy landed, removal did not) — removing the source row only');
+      out.resumed = (out.resumed || 0) + 1;
+    } else {
+      var rowOut = [];
+      for (var c2 = 0; c2 < 9; c2++) rowOut.push(c2 < v[q2].length ? v[q2][c2] : '');
+      rowOut.push('closed', cycle, 'engine.96:' + id + ':C' + cycle, meta ? meta.closedCycle : '');
+      var target = ar.getLastRow() + 1;
+      ar.getRange(target, 1, 1, rowOut.length).setValues([rowOut]);
+      var back = ar.getRange(target, 1, 1, rowOut.length).getValues()[0];
+      if (String(back[aId] || '').trim() !== id) { Logger.log('archiveClosedBusinesses_: read-back mismatch for ' + id + ' — source row kept'); out.skipped++; continue; }
+      archived[id] = true;
+    }
     bl.deleteRow(q2 + 1);
     out.archived++;
     Logger.log('archiveClosedBusinesses_ engine.96: ' + id + ' archived (closed C' + (meta ? meta.closedCycle : '?') + ', removed C' + cycle + ')');

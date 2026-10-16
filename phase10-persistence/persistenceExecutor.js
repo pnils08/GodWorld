@@ -231,7 +231,8 @@ function appendRowWithRetry_(sheet, row, label) {
 
 /**
  * Executes an ensure-tab intent.
- * Creates the tab and writes headers if missing; no-op if tab already exists.
+ * Creates the tab and writes headers if missing; an existing EMPTY tab gets its
+ * headers (engine.285: a kill between insert and header); otherwise a no-op.
  * Idempotency-collapse for same-tab repeats is handled by caller.
  */
 function executeEnsureIntent_(ctx, intent) {
@@ -242,14 +243,25 @@ function executeEnsureIntent_(ctx, intent) {
     }
 
     var sheet = ctx.ss.getSheetByName(intent.tab);
+    var headers = (intent.values && intent.values[0]) || [];
     if (sheet) {
-      // Tab exists — no-op. Headers are not enforced against existing tab
-      // (writer is responsible for header alignment when reading existing data).
+      // engine.285 (5/6): a fire killed between insertSheet and the header write
+      // left an existing, EMPTY tab that every later ensure accepted as done. An
+      // existing tab with nothing on it gets its headers; a tab with any content
+      // is the writer's (header alignment is checked where the data is read).
+      if (headers.length > 0 && sheet.getLastRow() === 0) {
+        persistWithRetry_(function() {
+          sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+          sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+          sheet.setFrozenRows(1);
+        }, intent.tab + ' ensure header');
+        Logger.log('executeEnsureIntent_: ' + intent.tab + ' existed empty — wrote ' + headers.length + ' headers');
+        return { success: true };
+      }
       Logger.log('executeEnsureIntent_: ' + intent.tab + ' already exists — no-op');
       return { success: true };
     }
 
-    var headers = (intent.values && intent.values[0]) || [];
     persistWithRetry_(function() {
       sheet = ctx.ss.getSheetByName(intent.tab) || ctx.ss.insertSheet(intent.tab);
       if (headers.length > 0) {
@@ -433,11 +445,13 @@ function executeSheetIntents_(ctx, sheetName, intents) {
             paddedRows.push(padded);
           }
 
-          // Batch append. getLastRow() inside the retry so a re-attempt recomputes
-          // the tail (a thrown setValues added nothing, so startRow stays correct —
-          // no double-append).
+          // Batch append. engine.285 (6/6): the tail is computed ONCE, outside the
+          // retry — a timed-out setValues can still have landed, and a re-attempt
+          // that re-read getLastRow() wrote the block a second time below the first
+          // (codex engine95-design §7 probe: two rows, zero errors). A re-attempt now
+          // rewrites the same cells with the same values (appendRowWithRetry_'s shape).
+          var startRow = sheet.getLastRow() + 1;
           persistWithRetry_(function() {
-            var startRow = sheet.getLastRow() + 1;
             sheet.getRange(startRow, 1, paddedRows.length, maxCols).setValues(paddedRows);
           }, sheetName + ' append');
 

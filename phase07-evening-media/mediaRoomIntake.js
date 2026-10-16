@@ -416,6 +416,18 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
   var intakeSheet = ss.getSheetByName('Intake');
   var advSheet = requireTab_(ss, 'Advancement_Intake1'); // engine.119: no runtime create (Phase 11)
 
+  // engine.285 (4/6): routes are buffered, then written as ONE block per target
+  // (advancementLogBuffer_, Phase 5's writer: tail fixed, setValues under retry — a
+  // timed-out-but-landed block is rewritten in place, never doubled), then the Routed
+  // marks in contiguous runs — was an appendRow + a mark
+  // per row, 2N calls in Phase 11. A row is marked only after its block landed (S302).
+  // Exactly-once across a kill between the block and the marks needs a receipt the
+  // Phase-5 consumer honours (it clears consumed rows, so the target cannot be searched):
+  // engine.95's Phase-11 receipts.
+  var advBuf = advancementLogBuffer_(advSheet, 'Advancement_Intake1 media routes');
+  var newBuf = advancementLogBuffer_(intakeSheet, 'Intake media routes');
+  var advSrc = [], newSrc = [], markOnly = [];
+
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
 
@@ -439,11 +451,11 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
     }
     var exists = citizenExistsInLedger_(ledgerData, nameParts.first, nameParts.last);
 
-    var landed = false;
     if (exists) {
       // Existing citizen → Advancement_Intake1
       if (advSheet) {
-        advSheet.appendRow([
+        advSrc.push(i);
+        advBuf.sheet.appendRow([
           nameParts.first,          // A: First
           '',                       // B: Middle
           nameParts.last,           // C: Last
@@ -455,36 +467,42 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
           '',                       // I: UNI
           'Media usage C' + cycle + ' (' + usageType + '): ' + describeUsageContext_(context) // J: Notes — engine.163: in-world text, never the packet stem
         ]);
-        results.existingCitizens++;
-        landed = true;
       }
     } else if (gcNames[nameParts.first.toLowerCase() + ' ' + nameParts.last.toLowerCase()]) {
       // engine.58: GC citizen — emergence already counted by processMediaUsage_
       // from this usage row; no Intake route, no duplicate. Mark routed.
       results.gcSkipped = (results.gcSkipped || 0) + 1;
-      landed = true;
+      markOnly.push(i);
     } else {
       // New citizen → Intake (engine.51 lean shape; processor routes to GC —
       // engine.58: Intake no longer direct-mints SL rows)
       if (intakeSheet) {
-        appendLeanIntakeRow_(intakeSheet, {
+        newSrc.push(i);
+        appendLeanIntakeRow_(newBuf.sheet, {
           first: nameParts.first,
           last: nameParts.last,
           notes: 'Introduced via Media Room C' + cycle + '. ' + describeUsageContext_(context) // engine.163: same seam, in-world text
         });
-        results.newCitizens++;
-        landed = true;
       }
     }
-
-    // S302 data-loss guard: only mark Routed when the row actually landed —
-    // the old unconditional mark discarded every new-citizen mention while
-    // the Intake tab didn't exist (research §12.7 / engine.51 discovery).
-    if (landed) {
-      usageSheet.getRange(i + 1, routedCol + 1).setValue('Y');
-      results.routed++;
-    }
   }
+
+  // S302 data-loss guard: only mark Routed when the row actually landed —
+  // the old unconditional mark discarded every new-citizen mention while
+  // the Intake tab didn't exist (research §12.7 / engine.51 discovery).
+  var landedIdx = markOnly.slice();
+  if (advSrc.length) { advBuf.flush(); results.existingCitizens += advSrc.length; landedIdx = landedIdx.concat(advSrc); }
+  if (newSrc.length) { newBuf.flush(); results.newCitizens += newSrc.length; landedIdx = landedIdx.concat(newSrc); }
+  landedIdx.sort(function(a, b) { return a - b; });
+  for (var m = 0; m < landedIdx.length; ) {
+    var run = 1;
+    while (m + run < landedIdx.length && landedIdx[m + run] === landedIdx[m] + run) run++;
+    var marks = [];
+    for (var mk = 0; mk < run; mk++) marks.push(['Y']);
+    usageSheet.getRange(landedIdx[m] + 1, routedCol + 1, run, 1).setValues(marks);
+    m += run;
+  }
+  results.routed = landedIdx.length;
 
   Logger.log('routeCitizenUsageToIntake_: Routed ' + results.routed +
     ' citizens (new: ' + results.newCitizens + ', existing: ' + results.existingCitizens + ')');

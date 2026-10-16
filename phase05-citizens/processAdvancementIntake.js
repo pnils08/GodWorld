@@ -560,7 +560,7 @@ function processMediaUsage_(ctx, now, cycle) {
 // body and its helpers only ever call appendRow on it. One write, the
 // executor's batch-append shape: tail computed once, setValues under retry
 // (a re-attempt rewrites the same cells). A flush is attempted once, never twice.
-function advancementLogBuffer_(sheet) {
+function advancementLogBuffer_(sheet, label) {   // engine.285: Phase-11 media routing buffers Advancement_Intake1 / Intake the same way
   var buffer = { rows: [], attempted: false, sheet: null };
   if (!sheet) { buffer.flush = function() { return 0; }; return buffer; }
   buffer.sheet = { appendRow: function(row) { buffer.rows.push(row); } };
@@ -577,7 +577,7 @@ function advancementLogBuffer_(sheet) {
     }
     var target = sheet.getLastRow() + 1;
     var write = function() { sheet.getRange(target, 1, padded.length, width).setValues(padded); };
-    if (typeof persistWithRetry_ === 'function') persistWithRetry_(write, 'LifeHistory_Log advancement lines');
+    if (typeof persistWithRetry_ === 'function') persistWithRetry_(write, label || 'LifeHistory_Log advancement lines');
     else write();
     return padded.length;
   };

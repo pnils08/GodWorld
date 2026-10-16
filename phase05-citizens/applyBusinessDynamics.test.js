@@ -164,6 +164,21 @@ console.log('Task 6 — decline sheds; Task 7 — closure winds down, then archi
   let c4 = mkCtx(blS, [mod.BIZ_ARCHIVE_HEADERS.slice()], [], [{ id: 'BIZ-00200', closedCycle: 110 }]);
   res = mod.archiveClosedBusinesses_(c4);
   assert('mover: stated count still > 0 → waits', res.waiting === 1 && c4._bl.length === 4);
+  // engine.285 (2/6): a fire killed after the copy, before the removal — the next run removes, never copies twice
+  const blK = BLX(), arK = [mod.BIZ_ARCHIVE_HEADERS.slice()];
+  const c5 = mkCtx(blK, arK, [], [{ id: 'BIZ-00200', closedCycle: 110 }]);
+  const realGet = c5.ss.getSheetByName;
+  c5.ss.getSheetByName = (n) => { const s = realGet(n); if (n === 'Business_Ledger') s.deleteRow = () => { throw new Error('killed'); }; return s; };
+  let killed = false; try { mod.archiveClosedBusinesses_(c5); } catch (e) { killed = true; }
+  assert('mover (engine.285 setup): the kill lands between the copy and the removal', killed && arK.length === 2 && blK.length === 4);
+  const c6 = mkCtx(blK, arK, [], [{ id: 'BIZ-00200', closedCycle: 110 }]);
+  res = mod.archiveClosedBusinesses_(c6);
+  assert('mover (engine.285): the next run finds BIZ-00200 already archived — removes the source row, archive keeps ONE copy', res.archived === 1 && res.resumed === 1 && arK.length === 2 && blK.map(r => r[0]).join() === 'BIZ_ID,BIZ-00001,BIZ-00300', JSON.stringify([res, arK.map(r => r[0]), blK.map(r => r[0])]));
+  // removals run bottom-up by ROW, not by BIZ_ID: a ledger out of id order loses only the closed rows
+  const blO = [BL_H.map(h => h.trim()), ['BIZ-00400', 'Closed Hi', 'Retail', 'T', 0, 1, 1, -10, ''], ['BIZ-00001', 'Keep', 'Retail', 'T', 5, 1, 1, 1, ''], ['BIZ-00200', 'Closed Lo', 'Retail', 'T', 0, 1, 1, -10, ''], ['BIZ-00300', 'Also Keep', 'Food', 'T', 2, 1, 1, 1, '']];
+  const c7 = mkCtx(blO, [mod.BIZ_ARCHIVE_HEADERS.slice()], [], [{ id: 'BIZ-00400', closedCycle: 110 }, { id: 'BIZ-00200', closedCycle: 110 }]);
+  res = mod.archiveClosedBusinesses_(c7);
+  assert('mover (engine.285): a ledger out of id order — both closed rows go, both keepers stay', res.archived === 2 && blO.map(r => r[0]).join() === 'BIZ_ID,BIZ-00001,BIZ-00300', JSON.stringify(blO.map(r => r[0])));
   const career = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'runCareerEngine.js'), 'utf8');
   assert('runCareerEngine_ folds S.businessDeclines into careerSignals.businessDeltas[id].lost after its own init', /if \(S\.businessDeclines\) \{[\s\S]*?S\.careerSignals\.businessDeltas\[dk\]\.lost \+= dn;/.test(career));
   const orch2 = fs.readFileSync(path.join(__dirname, '..', 'phase01-config', 'godWorldEngine2.js'), 'utf8');

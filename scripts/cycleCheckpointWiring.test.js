@@ -321,5 +321,51 @@ console.log('═══ 11 — a big payload chunks and round-trips through the f
   assert('resumes from several chunks', !rs.err && w.cycleCount() === 111, rs);
 }
 
+console.log('═══ 12 — engine.285: the real executor under a lost acknowledgement and a half-made tab');
+{
+  // The real persistenceExecutor.js (+ validateIntent_), not the stub above. A sheet whose
+  // first setValues LANDS and then throws a transient timeout — the lost-ack codex probed.
+  const box = { Logger: { log() {} }, Utilities: { sleep() {} } };
+  vm.createContext(box);
+  for (const rel of ['utilities/writeIntents.js', 'phase10-persistence/persistenceExecutor.js']) {
+    vm.runInContext(fs.readFileSync(path.join(ROOT, rel), 'utf8'), box, { filename: rel });
+  }
+  const lostAckSheet = (rows) => {
+    let thrown = false;
+    return {
+      rows, getLastRow: () => rows.length,
+      getRange: (r, c, nr, nc) => ({
+        setValues: (vals) => {
+          for (let i = 0; i < vals.length; i++) rows[r - 1 + i] = vals[i].slice();
+          if (!thrown) { thrown = true; throw new Error('Service Spreadsheets timed out while accessing document'); }
+        },
+        setFontWeight() {}
+      }),
+      setFrozenRows() {}
+    };
+  };
+  const intent = (vals) => ({ tab: 'Log', kind: 'append', values: vals, priority: 100 });
+  const sh = lostAckSheet([['H1', 'H2']]);
+  const res = box.executeSheetIntents_({ ss: { getSheetByName: () => sh } }, 'Log', [intent([['a', 1]]), intent([['b', 2]])]);
+  assert('lost ack on a batch append: the retry rewrites the same rows — 2 appended once, no error', sh.rows.length === 3 && sh.rows[1][0] === 'a' && sh.rows[2][0] === 'b' && res.errors.length === 0 && res.appends === 2, JSON.stringify([sh.rows, res]));
+  // the shape it replaces: tail re-read inside the retry → the landed block is written again below itself
+  const old = lostAckSheet([['H1', 'H2']]);
+  box.persistWithRetry_(() => { const start = old.getLastRow() + 1; old.getRange(start, 1, 2, 2).setValues([['a', 1], ['b', 2]]); }, 'old');
+  assert('(control) the pre-fix shape doubles the same block under the same fault', old.rows.length === 5, JSON.stringify(old.rows));
+
+  const tab = (rows) => ({ rows, getLastRow: () => rows.length, setFrozenRows() {},
+    getRange: (r, c, nr, nc) => ({ setValues: (vals) => { for (let i = 0; i < vals.length; i++) rows[r - 1 + i] = vals[i].slice(); }, setFontWeight() {} }) });
+  const ens = { tab: 'Business_Archive', kind: 'ensure', values: [['BIZ_ID', 'Name']], priority: 25 };
+  const empty = tab([]);
+  let er = box.executeEnsureIntent_({ ss: { getSheetByName: () => empty } }, ens);
+  assert('ensure over a tab a kill left empty (inserted, header never written) writes the header', er.success && empty.rows.length === 1 && empty.rows[0].join() === 'BIZ_ID,Name', JSON.stringify(empty.rows));
+  const full = tab([['Other', 'Header'], ['x', 'y']]);
+  er = box.executeEnsureIntent_({ ss: { getSheetByName: () => full } }, ens);
+  assert('ensure over a tab with content touches nothing', er.success && full.rows.length === 2 && full.rows[0][0] === 'Other');
+  let made = null;
+  er = box.executeEnsureIntent_({ ss: { getSheetByName: () => made, insertSheet: () => (made = tab([])) } }, ens);
+  assert('ensure with no tab creates it with the header (unchanged path)', er.success && made && made.rows[0].join() === 'BIZ_ID,Name');
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

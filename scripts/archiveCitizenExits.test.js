@@ -118,14 +118,36 @@ test('no bump when the mark already covers every archived POPID', () => {
   const out = M.archiveCitizenExits_(ctx);
   assert.deepStrictEqual([out.highWaterBumped, ctx._writes.length], [false, 0]);
 });
-test('same-cycle re-fire: rows already snapshotted this cycle are skipped, not double-appended', () => {
+test('same-cycle re-fire after a kill between copy and remove: the 4 snapshots stand, the 4 source rows go, nothing copied twice (engine.285 — was: rows stalled on SL)', () => {
   const sl = makeSheet(H, body()), ar = makeSheet(H.concat(META), []);
   M.archiveCitizenExits_(ctxWith(1, { Simulation_Ledger: sl, Citizen_Archive: ar }, 1300));
   // simulate a crash after copy but before remove: put the moved rows back on SL
   const sl2 = makeSheet(H, body());
   const out = M.archiveCitizenExits_(ctxWith(1, { Simulation_Ledger: sl2, Citizen_Archive: ar }, 1300));
-  assert.deepStrictEqual([out.candidates, out.archived, out.skippedWhy['already-archived-this-cycle'], ar._rows.length], [0, 0, 4, 4]);
-  assert.strictEqual(sl2._rows.length, 9, 'source rows kept until a clean snapshot exists for them');
+  assert.deepStrictEqual([out.candidates, out.archived, out.resumed, out.skipped, ar._rows.length], [4, 4, 4, 2, 4]);
+  assert.deepStrictEqual(sl2._rows.map((r) => r[0]), ['POP-00001', 'POP-00043', 'POP-00044', 'POP-00044', 'BAD-1']);
+});
+test('engine.285: the NEXT cycle after the kill (no re-fire) removes without a second snapshot', () => {
+  const sl = makeSheet(H, body()), ar = makeSheet(H.concat(META), []);
+  M.archiveCitizenExits_(ctxWith(1, { Simulation_Ledger: sl, Citizen_Archive: ar }, 1300));
+  const sl2 = makeSheet(H, body());
+  const ctx = ctxWith(1, { Simulation_Ledger: sl2, Citizen_Archive: ar }, 1300);
+  ctx.summary.cycleId = 109;
+  const out = M.archiveCitizenExits_(ctx);
+  assert.deepStrictEqual([out.archived, out.resumed, ar._rows.length], [4, 4, 4]);
+  assert.ok(ar._rows.every((r) => r[H.length + 1] === 108), 'every snapshot keeps ExitCycle 108 — no C109 twin');
+  assert.strictEqual(sl2._rows.length, 5);
+});
+test('engine.285: a citizen restored after the snapshot and traded again is a new exit — new snapshot, then removed', () => {
+  const HR = H.concat(['ReturnedCycle']);
+  const ar = makeSheet(HR.concat(META), []);
+  const old = M.citizenArchiveRow_(HR, ['POP-00040', 'Gone', 'One', 'Traded', 3, 10, ''], 'traded-away', 100, 2041);
+  ar._rows.push(old);
+  const sl = makeSheet(HR, [['POP-00001', 'Vinnie', 'Keane', 'Active', 1, 100, ''], ['POP-00040', 'Gone', 'One', 'Traded', 3, 10, 104]]);
+  const out = M.archiveCitizenExits_(ctxWith(1, { Simulation_Ledger: sl, Citizen_Archive: ar }, 1300));
+  assert.deepStrictEqual([out.archived, out.resumed || 0, ar._rows.length], [1, 0, 2]);
+  assert.deepStrictEqual(ar._rows.map((r) => r[HR.length + 1]), [100, 108]);
+  assert.deepStrictEqual(sl._rows.map((r) => r[0]), ['POP-00001']);
 });
 test('read-back mismatch keeps the source row; the verified rows still move', () => {
   const sl = makeSheet(H, body()), ar = makeSheet(H.concat(META), [], { corruptReadBack: true });

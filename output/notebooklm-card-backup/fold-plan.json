@@ -1,122 +1,403 @@
-[
- {
-  "name": "Henry Rivas",
-  "fullTitle": "Henry Rivas \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
-  "fullId": "4717a0c8-295d-4fa3-974b-2b06a945350c",
-  "copyId": "e6755b6c-3561-4d55-a1e9-be1a1cf69022",
-  "file": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/Henry_Rivas.txt",
-  "blockHead": "PLAYER INTAKE (Pitcher) \u2014 2041 SEASON",
-  "stillMissing": [],
-  "len": 4586,
-  "upload": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/upload/Henry Rivas \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
-  "newId": "cf16bfba-0e7c-47ae-a4d5-bf20c401fc89"
- },
- {
-  "name": "Hitoki Ka",
-  "fullTitle": "Hitoki Ka FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
-  "fullId": "3bcb50b9-06fa-4560-bfd1-de5bcd5f9112",
-  "copyId": "f92947d1-cf63-4b48-b457-24fb2c69a573",
-  "file": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/Hitoki_Ka.txt",
-  "blockHead": "PLAYER INTAKE (Pitcher) \u2014 2041 SEASON",
-  "stillMissing": [],
-  "len": 4365,
-  "upload": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/upload/Hitoki Ka FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
-  "newId": "8d895ecc-9f90-4ac8-a64f-b15753e31f38"
- },
- {
-  "name": "Ian Devine",
-  "fullTitle": "Ian Devine FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
-  "fullId": "6709940d-4597-4235-a31c-868f9b5cc97b",
-  "copyId": "6b27412b-7c40-49bd-a4a3-a269f2f3d42d",
-  "file": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/Ian_Devine.txt",
-  "blockHead": "PLAYER INTAKE (Pitcher) \u2014 2041 SEASON",
-  "stillMissing": [],
-  "len": 4517,
-  "upload": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/upload/Ian Devine FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
-  "newId": "806a0cd4-3c93-4d24-adb3-1dac4f3f68b3"
- },
- {
-  "name": "John Ellis",
-  "fullTitle": "John Ellis \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
-  "fullId": "a5a2974b-a244-4401-8783-2efeeddedd22",
-  "copyId": "c69c4919-4fbf-445d-b9c8-95da6b85be7e",
-  "file": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/John_Ellis.txt",
-  "blockHead": "PLAYER INTAKE (Pitcher) \u2014 2041 SEASON",
-  "stillMissing": [],
-  "len": 4075,
-  "upload": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/upload/John Ellis \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
-  "newId": "b336567f-0857-4119-b267-3020463bccee"
- },
- {
-  "name": "Louis Cross",
-  "fullTitle": "Louis Cross FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
-  "fullId": "5863d65b-a9a9-4597-8fb5-affffdc74913",
-  "copyId": "d74ccf50-0ed7-4e54-9cd1-f79a0d897268",
-  "file": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/Louis_Cross.txt",
-  "blockHead": "PLAYER INTAKE (Pitcher) \u2014 2041 SEASON",
-  "stillMissing": [],
-  "len": 4039,
-  "upload": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/upload/Louis Cross FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
-  "newId": "7d481d54-a4be-4d6f-bdfe-c5ee8b1f1e6a"
- },
- {
-  "name": "POP-00018 Benji Dillon",
-  "fullTitle": "POP-00018 Benji Dillon \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
-  "fullId": "ae6bd557-1349-4609-98c9-ada2ba021380",
-  "copyId": "3ae936a7-08fc-468f-90c8-e7cce461b569",
-  "file": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/POP_00018_Benji_Dillon.txt",
-  "blockHead": "PLAYER INTAKE (Pitcher) \u2014 2041 SEASON",
-  "stillMissing": [],
-  "len": 4328,
-  "upload": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/upload/POP-00018 Benji Dillon \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
-  "newId": "5d3c7aa2-5275-4901-b386-66624b1bf85b"
- },
- {
-  "name": "POP-00025 Arturo Ramos",
-  "fullTitle": "POP-00025 Arturo Ramos \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
-  "fullId": "884552fc-493f-49ec-be3c-26574ca0d46e",
-  "copyId": "e59aa13f-55ff-404b-8e4b-1016f47fe861",
-  "file": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/POP_00025_Arturo_Ramos.txt",
-  "blockHead": "PLAYER INTAKE (Pitcher) \u2014 2041 SEASON",
-  "stillMissing": [],
-  "len": 4214,
-  "upload": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/upload/POP-00025 Arturo Ramos \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
-  "newId": "86c61596-6f06-483d-9774-96a290805fa8"
- },
- {
-  "name": "POP-00052 Clark Saryan",
-  "fullTitle": "POP-00052 Clark Saryan FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
-  "fullId": "9d0c081a-d114-4fa0-a1cf-e72c11fafec3",
-  "copyId": "c90b18fb-c312-468d-b1ea-2db1baa9dbb4",
-  "file": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/POP_00052_Clark_Saryan.txt",
-  "blockHead": "WHOLE COPY",
-  "stillMissing": [],
-  "len": 2781,
-  "upload": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/upload/POP-00052 Clark Saryan FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
-  "newId": "2734105f-8845-49bc-a6e8-1cfdeacb1e7f"
- },
- {
-  "name": "Travis Coles",
-  "fullTitle": "Travis Coles \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
-  "fullId": "0ef65b6f-9513-4520-b3ea-4436524b6a0e",
-  "copyId": "3386c602-ec38-4019-9d66-5dc7b3b51e5f",
-  "file": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/Travis_Coles.txt",
-  "blockHead": "PLAYER INTAKE (Pitcher) \u2014 2041 SEASON",
-  "stillMissing": [],
-  "len": 4427,
-  "upload": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/upload/Travis Coles \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
-  "newId": "f3159ce0-7f28-4dbb-8248-86c07489b0b5"
- },
- {
-  "name": "Vinnie Keane",
-  "fullTitle": "Vinnie Keane FULL STAT TRUE SOURCE \u2014 BATTER \u2014 2041.txt",
-  "fullId": "9bdf04a2-6180-4144-ab8f-259532e4d88d",
-  "copyId": "1bb0622a-dffd-4577-819f-f360a579c650",
-  "file": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/Vinnie_Keane.txt",
-  "blockHead": "2041 REGULAR SEASON",
-  "stillMissing": [],
-  "len": 5402,
-  "upload": "/tmp/claude-0/-root-GodWorld/7daf52a8-51f5-4913-a742-62caac395db9/scratchpad/fold/upload/Vinnie Keane FULL STAT TRUE SOURCE \u2014 BATTER \u2014 2041.txt",
-  "newId": "df1f0726-f97f-4d56-912b-dfaeb24a39b2"
- }
-]
+{
+ "rule": "one card per player (builder 2026-10-11, 2026-10-16); every line of the old full card and of the intake copy is present in the new card (verified line-for-line, lost=0) before either is retired",
+ "cards": [
+  {
+   "name": "Henry Rivas",
+   "title": "Henry Rivas \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "cf16bfba-0e7c-47ae-a4d5-bf20c401fc89",
+   "retire": [
+    "4717a0c8-295d-4fa3-974b-2b06a945350c",
+    "e6755b6c-3561-4d55-a1e9-be1a1cf69022"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4586
+  },
+  {
+   "name": "Hitoki Ka",
+   "title": "Hitoki Ka FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
+   "newId": "8d895ecc-9f90-4ac8-a64f-b15753e31f38",
+   "retire": [
+    "3bcb50b9-06fa-4560-bfd1-de5bcd5f9112",
+    "f92947d1-cf63-4b48-b457-24fb2c69a573"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4365
+  },
+  {
+   "name": "Ian Devine",
+   "title": "Ian Devine FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
+   "newId": "806a0cd4-3c93-4d24-adb3-1dac4f3f68b3",
+   "retire": [
+    "6709940d-4597-4235-a31c-868f9b5cc97b",
+    "6b27412b-7c40-49bd-a4a3-a269f2f3d42d"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4517
+  },
+  {
+   "name": "John Ellis",
+   "title": "John Ellis \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "b336567f-0857-4119-b267-3020463bccee",
+   "retire": [
+    "a5a2974b-a244-4401-8783-2efeeddedd22",
+    "c69c4919-4fbf-445d-b9c8-95da6b85be7e"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4075
+  },
+  {
+   "name": "Louis Cross",
+   "title": "Louis Cross FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
+   "newId": "7d481d54-a4be-4d6f-bdfe-c5ee8b1f1e6a",
+   "retire": [
+    "5863d65b-a9a9-4597-8fb5-affffdc74913",
+    "d74ccf50-0ed7-4e54-9cd1-f79a0d897268"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4039
+  },
+  {
+   "name": "POP-00018 Benji Dillon",
+   "title": "POP-00018 Benji Dillon \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "5d3c7aa2-5275-4901-b386-66624b1bf85b",
+   "retire": [
+    "ae6bd557-1349-4609-98c9-ada2ba021380",
+    "3ae936a7-08fc-468f-90c8-e7cce461b569"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4328
+  },
+  {
+   "name": "POP-00025 Arturo Ramos",
+   "title": "POP-00025 Arturo Ramos \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "86c61596-6f06-483d-9774-96a290805fa8",
+   "retire": [
+    "884552fc-493f-49ec-be3c-26574ca0d46e",
+    "e59aa13f-55ff-404b-8e4b-1016f47fe861"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4214
+  },
+  {
+   "name": "POP-00052 Clark Saryan",
+   "title": "POP-00052 Clark Saryan FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
+   "newId": "2734105f-8845-49bc-a6e8-1cfdeacb1e7f",
+   "retire": [
+    "9d0c081a-d114-4fa0-a1cf-e72c11fafec3",
+    "c90b18fb-c312-468d-b1ea-2db1baa9dbb4"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 2781
+  },
+  {
+   "name": "Travis Coles",
+   "title": "Travis Coles \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "f3159ce0-7f28-4dbb-8248-86c07489b0b5",
+   "retire": [
+    "0ef65b6f-9513-4520-b3ea-4436524b6a0e",
+    "3386c602-ec38-4019-9d66-5dc7b3b51e5f"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4427
+  },
+  {
+   "name": "Vinnie Keane",
+   "title": "Vinnie Keane FULL STAT TRUE SOURCE \u2014 BATTER \u2014 2041.txt",
+   "newId": "e96a72c3-55bc-4133-ae25-d74b2d1f9deb",
+   "retire": [
+    "9bdf04a2-6180-4144-ab8f-259532e4d88d",
+    "1bb0622a-dffd-4577-819f-f360a579c650"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 5834
+  },
+  {
+   "name": "Danny Horn",
+   "title": "Danny Horn \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "932e53cb-226c-43f5-ad9f-6e9a454476a2",
+   "retire": [
+    "afb69f26-167f-4661-b3a6-e1975e51633a",
+    "60288a05-3494-4db0-874f-7b9f44b09d8f"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 6134
+  },
+  {
+   "name": "Darrin Davis",
+   "title": "Darrin Davis \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "ca27a241-92f8-436f-b4a4-7928c4f6e536",
+   "retire": [
+    "b3dd48f2-fc2d-46c7-b1ad-e307b3dda543",
+    "f72f0a20-947c-4648-9e01-d616cfbe8d2e"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4949
+  },
+  {
+   "name": "Desmond Morton",
+   "title": "Desmond Morton FULL STAT TRUE SOURCE \u2014 BATTER \u2014 2041.txt",
+   "newId": "dd898baf-68a5-47f7-8b2e-5e4bf667bf8e",
+   "retire": [
+    "b0b7818a-686e-4766-95c3-fb69df648d0b",
+    "83a4b9f3-2750-458a-84f2-745a4f8e5ba4"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4077
+  },
+  {
+   "name": "Eric Taveras",
+   "title": "Eric Taveras \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "29d8d605-6ff7-42e6-b8e2-31ebb5bec67a",
+   "retire": [
+    "7e17ef59-5761-4c74-8bb3-349a754496ff",
+    "15394e55-618a-4f6a-8418-db802e4346a4"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 5717
+  },
+  {
+   "name": "Ernesto Quintero",
+   "title": "Ernesto Quintero \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "3851a1c3-258d-453f-8982-b1e0a2d7238f",
+   "retire": [
+    "9e10a073-7310-4ac0-b8b9-35f6e3abc386",
+    "265c15e9-95b4-40a4-96e3-b371edbd89e0"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4497
+  },
+  {
+   "name": "Frank Reyna",
+   "title": "Frank Reyna FULL STAT TRUE SOURCE \u2014 BATTER \u2014 2041.txt",
+   "newId": "c01f98bd-bfa0-463e-9ba3-3cac0a13ea69",
+   "retire": [
+    "7a4c8778-bf74-4292-8959-044a1d3f8a92",
+    "50f44073-9c18-4df8-b7f1-635643dc8e89"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4269
+  },
+  {
+   "name": "Isley Kelley",
+   "title": "Isley Kelley \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "9fc3b7d6-d44d-4848-8836-4dbd6c88aba8",
+   "retire": [
+    "bce4f858-366c-4835-b752-ecae863da99c",
+    "7c1f5604-9dd6-4432-baf1-79c909d4bd7c"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 5008
+  },
+  {
+   "name": "Jose Colon",
+   "title": "Jose Colon \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "4c5d6312-f252-4529-8e34-c7a7f6606760",
+   "retire": [
+    "2fb2b0a8-6477-44de-aadd-474b83c015bf",
+    "748c1362-899b-422c-b6e1-2265aa1aebeb"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 5013
+  },
+  {
+   "name": "JR Rosado",
+   "title": "JR Rosado FULL STAT TRUE SOURCE \u2014 BATTER \u2014 2041.txt",
+   "newId": "6e907ba2-1f88-405a-bfc6-75c9a20236c7",
+   "retire": [
+    "e695fe89-1e61-4cb2-8e0e-90892bca1e76",
+    "a6cd4868-b27f-495f-b496-bd91129f110e"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4204
+  },
+  {
+   "name": "Julio Valencia",
+   "title": "Julio Valencia FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
+   "newId": "dbd9c0ad-a0f7-4334-b8ff-b4e30fee3019",
+   "retire": [
+    "b0755cbc-4009-4fee-ba8a-4e7f49a5fb69",
+    "72f9a17e-01bb-482d-8924-764ca289fe9a"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4008
+  },
+  {
+   "name": "Kevin Clark",
+   "title": "Kevin Clark FULL STAT TRUE SOURCE \u2014 BATTER \u2014 2041.txt",
+   "newId": "bdaa1232-dbf8-49f7-9820-935538657216",
+   "retire": [
+    "867c508d-451f-4981-8ce0-996565320e6a",
+    "de785b2f-909c-4866-8a8c-d743c71cd4de"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4102
+  },
+  {
+   "name": "Mariano Rosales",
+   "title": "Mariano Rosales FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
+   "newId": "b25b8b21-f437-4232-8d79-9a357e4bef0a",
+   "retire": [
+    "fd5402f3-7780-4301-9f7b-332baab2e158",
+    "36d0e585-c415-4bfb-a408-160170eca0c2"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 5018
+  },
+  {
+   "name": "Mark Aitken",
+   "title": "Mark Aitken \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "861796e0-424e-4d9f-ba47-d10938734d0c",
+   "retire": [
+    "5af9b485-9eb4-4e12-9b81-0b7745d3c78d",
+    "d7fa447d-563e-4b88-aa24-313ecfd4b427"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 6201
+  },
+  {
+   "name": "Martin Richards",
+   "title": "Martin Richards \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "8a58cf40-7896-4288-bb02-396e367e108e",
+   "retire": [
+    "0c71f9f4-5f7d-418e-8523-6c85faed3061",
+    "3f60886e-b1e0-44fe-a4fc-00936311711a"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 5785
+  },
+  {
+   "name": "Pablo Almanzar",
+   "title": "Pablo Almanzar FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
+   "newId": "25be4294-424c-46b5-818d-421621003d72",
+   "retire": [
+    "0038423a-85bf-4f22-a9e8-55438dd8be1b",
+    "6c101fc1-4e51-4a40-a97f-ebd4b313e61e"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4204
+  },
+  {
+   "name": "POP-00081 Carmen Mesa",
+   "title": "POP-00081 Carmen Mesa FULL STAT TRUE SOURCE \u2014 PITCHER \u2014 2041.txt",
+   "newId": "f04a610e-bfb1-4dc8-8e0a-ee8d7bafce54",
+   "retire": [
+    "97d27ad7-7f27-41bb-bb89-78cb15c21802",
+    "a6b966e5-f113-4bb7-9ab6-eb44de06b8a7"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 3952
+  },
+  {
+   "name": "Sidney Tumolo",
+   "title": "Sidney Tumolo FULL STAT TRUE SOURCE \u2014 BATTER \u2014 2041.txt",
+   "newId": "4bc5256f-2a01-4357-90a6-71cb63e59eb2",
+   "retire": [
+    "2b94a1a9-596e-4127-9092-1ae7404f3ffe",
+    "24de4b6a-118d-4400-abc1-c6b27bb18ef0"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4048
+  },
+  {
+   "name": "Vladimir Gonzalez",
+   "title": "Vladimir Gonzalez \u2014 FULL STAT TRUE SOURCE \u2014 2041.txt",
+   "newId": "ef788802-9918-4ebf-b57d-2494e467e1ff",
+   "retire": [
+    "4a86ef7a-be77-4ced-b427-f6c2347dc054",
+    "004036c3-4bb9-4138-b88d-94029ded34e1"
+   ],
+   "copyLinesLost": 0,
+   "fullLinesLost": 0,
+   "chars": 4849
+  }
+ ],
+ "retireAfterVerify": [
+  "4717a0c8-295d-4fa3-974b-2b06a945350c",
+  "e6755b6c-3561-4d55-a1e9-be1a1cf69022",
+  "3bcb50b9-06fa-4560-bfd1-de5bcd5f9112",
+  "f92947d1-cf63-4b48-b457-24fb2c69a573",
+  "6709940d-4597-4235-a31c-868f9b5cc97b",
+  "6b27412b-7c40-49bd-a4a3-a269f2f3d42d",
+  "a5a2974b-a244-4401-8783-2efeeddedd22",
+  "c69c4919-4fbf-445d-b9c8-95da6b85be7e",
+  "5863d65b-a9a9-4597-8fb5-affffdc74913",
+  "d74ccf50-0ed7-4e54-9cd1-f79a0d897268",
+  "ae6bd557-1349-4609-98c9-ada2ba021380",
+  "3ae936a7-08fc-468f-90c8-e7cce461b569",
+  "884552fc-493f-49ec-be3c-26574ca0d46e",
+  "e59aa13f-55ff-404b-8e4b-1016f47fe861",
+  "9d0c081a-d114-4fa0-a1cf-e72c11fafec3",
+  "c90b18fb-c312-468d-b1ea-2db1baa9dbb4",
+  "0ef65b6f-9513-4520-b3ea-4436524b6a0e",
+  "3386c602-ec38-4019-9d66-5dc7b3b51e5f",
+  "9bdf04a2-6180-4144-ab8f-259532e4d88d",
+  "1bb0622a-dffd-4577-819f-f360a579c650",
+  "afb69f26-167f-4661-b3a6-e1975e51633a",
+  "60288a05-3494-4db0-874f-7b9f44b09d8f",
+  "b3dd48f2-fc2d-46c7-b1ad-e307b3dda543",
+  "f72f0a20-947c-4648-9e01-d616cfbe8d2e",
+  "b0b7818a-686e-4766-95c3-fb69df648d0b",
+  "83a4b9f3-2750-458a-84f2-745a4f8e5ba4",
+  "7e17ef59-5761-4c74-8bb3-349a754496ff",
+  "15394e55-618a-4f6a-8418-db802e4346a4",
+  "9e10a073-7310-4ac0-b8b9-35f6e3abc386",
+  "265c15e9-95b4-40a4-96e3-b371edbd89e0",
+  "7a4c8778-bf74-4292-8959-044a1d3f8a92",
+  "50f44073-9c18-4df8-b7f1-635643dc8e89",
+  "bce4f858-366c-4835-b752-ecae863da99c",
+  "7c1f5604-9dd6-4432-baf1-79c909d4bd7c",
+  "2fb2b0a8-6477-44de-aadd-474b83c015bf",
+  "748c1362-899b-422c-b6e1-2265aa1aebeb",
+  "e695fe89-1e61-4cb2-8e0e-90892bca1e76",
+  "a6cd4868-b27f-495f-b496-bd91129f110e",
+  "b0755cbc-4009-4fee-ba8a-4e7f49a5fb69",
+  "72f9a17e-01bb-482d-8924-764ca289fe9a",
+  "867c508d-451f-4981-8ce0-996565320e6a",
+  "de785b2f-909c-4866-8a8c-d743c71cd4de",
+  "fd5402f3-7780-4301-9f7b-332baab2e158",
+  "36d0e585-c415-4bfb-a408-160170eca0c2",
+  "5af9b485-9eb4-4e12-9b81-0b7745d3c78d",
+  "d7fa447d-563e-4b88-aa24-313ecfd4b427",
+  "0c71f9f4-5f7d-418e-8523-6c85faed3061",
+  "3f60886e-b1e0-44fe-a4fc-00936311711a",
+  "0038423a-85bf-4f22-a9e8-55438dd8be1b",
+  "6c101fc1-4e51-4a40-a97f-ebd4b313e61e",
+  "97d27ad7-7f27-41bb-bb89-78cb15c21802",
+  "a6b966e5-f113-4bb7-9ab6-eb44de06b8a7",
+  "2b94a1a9-596e-4127-9092-1ae7404f3ffe",
+  "24de4b6a-118d-4400-abc1-c6b27bb18ef0",
+  "4a86ef7a-be77-4ced-b427-f6c2347dc054",
+  "004036c3-4bb9-4138-b88d-94029ded34e1",
+  "df1f0726-f97f-4d56-912b-dfaeb24a39b2"
+ ],
+ "supersededFirstFold": [
+  "df1f0726-f97f-4d56-912b-dfaeb24a39b2"
+ ]
+}

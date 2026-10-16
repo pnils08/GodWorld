@@ -617,3 +617,5 @@ Found before the build: (a) Saturday curation (`curationScore`) was a count — 
 - 2026-10-16 (research-build, overnight) — pipeline.80 card: the INTAKE names floor (47 printed citizens unindexed at C111); codex implements as a patch, es lands.
 - 2026-10-16 (research-build, overnight) — pipeline.80 LIVE on main `f8c1eb8a`: codex patch + rb non-fatal guard; ROLLOUT live-observing.
 - 2026-10-16 (research-build, overnight) — codex Saturday-readers review folded `4fabf88e`: floor refuses ambiguous names, curation ignores floor mentions; crossover eligibility fix dated after Sat 10-17.
+
+- 2026-10-16 (builder, on the floor): coverage = "the story is about them or is featuring their viewpoint, could be a quote or something taken from their citizen page. Their name alone isn't necessarily coverage, but I also understand the gate may be difficult to enforce so it may be better to count it all and adjust the tier levels instead." Floor stays; `mentioned` keeps counting (`EMERGENCE_USAGE_TYPES`); the tier bars 3/6/9 are the dial the builder adjusts.

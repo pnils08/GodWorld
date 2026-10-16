@@ -137,6 +137,8 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 
 02:39 rb — research.29 Move 4 rows are live (plan changelog, every line verbatim with its `was:`). Cut any line by `node scripts/undockedEclPoolApply.js --active no --match '<words>' --apply`. The 3 `$LEADER` lines are held until es's self-exclusion fix is on PROD — if that push needs your hand Saturday, es stages it; release is one `--active yes` flip.
 
+02:43 rb — pipeline.80: a deterministic floor will index every canon citizen a piece prints as `mentioned` (the INTAKE contract already says so; the models skip it when they quoted nobody — 47 names at C111). It raises Citizen_Media_Usage `mentioned` rows by about that many a week, first at the Sat 10-24 ingest. Say so if that is not the rate you want; the floor entries carry `floor: true`.
+
 ## 7. Working ledger
 
 Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman register, results first. Purge at the start of each night (git keeps history); do not write narrative here.
@@ -151,3 +153,5 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 - Self-loop → `/self-debug`.
 02:33 rb BOOT overnight (builder: NEXT[research-build] 3 + 4 to completion, then past-due ROLLOUT; es/codex/agy support). WAKE set (recurring :26, job 58f72d4f). es purged §7, not repeated.
 02:39 rb BUILD research.29 Move 4 rows LIVE PROD ECL 846→856: 10 retagged in place to $PILOT (--retag mode, `was:` revert), 10 new (7 $PILOTROLE/$PILOT, 3 $LEADER); 6 wager lines still undeployed; test ok. es FOUND no $LEADER self-exclusion → R850/853/856 HELD Active=no (--active mode). Asked es: bench smoke of the real rows @32. FILE plan + ROLLOUT + SESSION_CONTEXT rb (this commit). Next: NEXT (4) INTAKE gap.
+02:43 rb BUILD NEXT (4) read: 10/21 C111 solos 0 NAMES, 47 printed canon citizens unindexed across 17 filings (checkText scan) — the model skips NAMES when it quoted nobody; parser clean. Card pipeline.80 (media-extension plan) + ROLLOUT row. CLAIM codex rb pipeline.80 impl as a patch (docs/for-claude-review/2026-10-16-pipeline80-intake-floor-impl-TASK.md → output/codex/pipeline80-intake-floor.patch). es lands after its $LEADER fix. §6 line filed (usage-row rate).
+

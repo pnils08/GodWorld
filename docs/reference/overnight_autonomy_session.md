@@ -148,6 +148,7 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman register, results first. Purge at the start of each night (git keeps history); do not write narrative here.
 
 02:35 es PURGE §7 (night of 2026-10-16; git keeps history; stray rb lines under §8 folded into the purge). BOOT overnight (builder 02:3x: es supports rb first, then its open engine.* ROLLOUT items). WAKE set (recurring :41, job 575be5ae). rb WORKING ($PILOT/$PILOTROLE/$LEADER pool rows, NEXT[research-build] (3), advisor pass); no prompt. PROD stage 4f @137. Guests: none claimed by es.
+02:51 es CHECK rb WORKING (ROLLOUT edits, 20 min turn, no prompt). es: engine.291 two composer fixes committed (a6bdf1de $LEADER never on the leader's own history; ebd0091a a/an before $PILOTROLE), npm 290/290; rb holds 9 token rows (3 $LEADER + 6 "a $PILOTROLE") until they are on PROD. Bench A (1004 resync from live, C112 on @32 = PROD 4f, rb's 11 live rows) firing; B (4f + fixes, 9 rows on, bench only) next. PROD fix staged output/engine291/push-prod-fix.sh (dry-run default). 11 unpushed (rb + es interleaved). Guests: none. Inbox +1 (rb's pipeline80 TASK, codex done).
 
 ## 8. Stop rule and usage
 

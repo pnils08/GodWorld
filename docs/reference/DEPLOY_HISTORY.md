@@ -146,6 +146,13 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 4g (`71637c7a` generateCitizensEvents.js + loadEventContentLedger.js over stage 4f) — engine.291 fixes + engine.294 (2026-10-16 ~03:15 CDT, engine-sheet, overnight)
+- **Why:** found supporting rb's `$PILOT/$PILOTROLE/$LEADER` pool rows. (1) `$LEADER` had no self-exclusion and a pilot's pool is show-only, so the leader (Eric Taveras, a C112 pilot) would read his own name (a6bdf1de, pool-fill exclusion). (2) "a $PILOTROLE" printed "a electrician" (ebd0091a, article from the role). (3) engine.294: live ECL R291 is a MOOD fragment whose Text is "$MOOD" — 96 raw "$MOOD" lines in LifeHistory C104–C111; loader now skips token-bearing fragments, composer drops any raw token (71637c7a). Live blast radius: 26 fragments, 2 skipped — R291 and R292 "$VENUE" (VENUE is code-filled; never read).
+- **Bench proof:** SANDBOX 1004 resynced from live C111. A = @32 (PROD 4f exact) C112: ok 180 s, EE 4 → 4, rb's 11 live rows → 10 token lines, 8 raw `$MOOD`. B = @33 (this stage), 9 held rows on bench-only: first fire 30 s after the cut ran @32 (propagation window — DEPLOY.md rule); refire 7 min after: ok 164 s, persist 635/0, EE 4 → 4, 23 token lines, 0 raw, 0 self-naming, 0 bad article, 0 compose-null.
+- **Push:** `output/engine291/push-prod-fix.sh --go` → @137 → @138; pull-back 168 = `output/engine-sheet/stage4g-e291fix.sha256`, differs from 4f in exactly the two files.
+- **Expectation at C112 (Sun 2026-10-18):** no `$LEADER` line on the leader's own POPID; "an electrician" where Briar Soto is named by role; 0 raw-token LifeHistory lines (C111 had 9); Content_Telemetry skipped +2 vs C111.
+- **Rollback:** push `output/engine291/prod-stage` (= stage 4f) + version cut.
+
 ### PROD stage 4c (`63ade2f8` processAdvancementIntake.js over stage 4) — pipeline.73 mint flags (2026-10-14, engine-sheet; builder lifted auto mode for the push)
 CIV/MED/UNI intake columns reach the new ledger row beside ClockMode (y/n → yes/no, blank stays blank, other values logged and left blank), and the engine employer rules are synced to the mapping's Bayline 6 / Oakland 12 / OakTown Echo rules. Stage 4b (`8d449968`, throw on a bad flag) went up first, benched @25; codex found `flagCitizenForTierReview_` queues 'pending' in G, so 4c replaced it the same night, benched @26 (C112 off BASELINE-1004-C111 ok, persist errors [], Engine_Errors 4 → 4, a CIV=pending row minted with CIV blank). Both pushes `output/engine-sheet/push-stage4{b,c}-prod.sh`, pull-back 167/167. Smoke: the C112 fire Sun 2026-10-18 mints Tamsin Pruitt + Ines Sorensen (live Advancement_Intake1 rows 124–125).
 

@@ -88,7 +88,7 @@ check('v tag', staged.v === 'UNDOCKED-ADAPTER/1');
 check('credits from trading + closed contract, accept not counted, old contract windowed out',
   staged.facts.credits_delta.value === 206 + 1500);
 check('mission category fetched', A.CATEGORIES.indexOf('mission') >= 0 && staged.source.categories.indexOf('mission') >= 0);
-check('mission accept alone scores nothing', A.deriveCredits([mission[0]]).value === null);
+check('mission accept alone is a measured zero (entries, no payout), never null', A.deriveCredits([mission[0]]).value === 0 && /measured zero/.test(A.deriveCredits([mission[0]]).note));
 check('mission completion scores its credits', A.deriveCredits([mission[1]]).value === 1500);
 check('credits is FACT', staged.facts.credits_delta.type === 'FACT'
   && staged.facts.credits_delta.source === 'get_action_log');
@@ -120,6 +120,30 @@ try {
 } catch (e) {
   check('leak detector', /leaked/.test(e.message));
 }
+
+// research.29 Move 2 (builder 2026-10-16: "give the citizens their awarded
+// points"). Station sales score; a night with entries but no credit event is a
+// measured zero; a window with no entries at all stays unknown.
+const fuel = { category: 'trading', event_type: 'trading.fuel_sold', data: { credits: 14, quantity: 14 } };
+check('trading.fuel_sold scores its credits (Clarissa 2026-09-07: 14)', A.creditDeltaForEntry(fuel) === 14);
+check('a station buy with plain credits is spent', A.creditDeltaForEntry({ category: 'trading', event_type: 'trading.fuel_bought', data: { credits: 20 } }) === -20);
+check('credits_delta still wins over plain credits', A.creditDeltaForEntry({ category: 'trading', event_type: 'trading.fuel_sold', data: { credits: 14, credits_delta: 9 } }) === 9);
+check('an unrecognised trading shape stays unscored', A.creditDeltaForEntry({ category: 'trading', event_type: 'trading.price_check', data: { credits: 5 } }) === null);
+const mined = [{ category: 'mining', event_type: 'mining.ore_mined', data: { quantity: 6 } }, { category: 'session', event_type: 'session.login', data: {} }];
+const zero = A.deriveCredits(mined);
+check('entries without a credit event -> measured zero', zero.value === 0 && zero.type === 'FACT' && /measured zero/.test(zero.note));
+const unknown = A.deriveCredits([]);
+check('no entries in window -> null (unknown), never zero', unknown.value === null && /unknown/.test(unknown.note));
+const scored = A.deriveCredits(mined.concat([fuel]));
+check('fuel sale on a mining night -> 14', scored.value === 14 && scored.hits === 1);
+check('entriesOf flattens the staged category map with category restored',
+  A.entriesOf({ facts: { entries: { value: { mining: [{ event_type: 'mining.ore_mined' }], trading: [{ event_type: 'trading.fuel_sold', data: { credits: 1 } }] } } } })
+    .map(e => e.category + ':' + e.event_type).join(',') === 'mining:mining.ore_mined,trading:trading.fuel_sold');
+// the archive re-score must be a pure read without --apply
+const plan = A.planRescore();
+check('planRescore: every approved change maps to a feed EpisodeId and a cycle (the tab key)',
+  Array.isArray(plan.changes) && plan.changes.every(c => c.file && (c.applied !== 'yes' || (c.episodeId && c.cycle != null))));
+check('planRescore never turns a measured number into a blank', plan.changes.every(c => !(c.before != null && c.after == null)));
 
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('undockedEpisodeAdapter: ok');

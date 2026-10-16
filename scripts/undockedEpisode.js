@@ -117,14 +117,30 @@ const ANSI_RE = /\x1b\[[0-9;]*m/g;
 // After the end condition is seen, give the current turn a moment to flush,
 // then take the same graceful SIGINT path the cap uses.
 const COMPLETION_SETTLE_MS = 20000;
+// research.29 Move 3 (builder 2026-10-16): a flight that has stopped flying
+// stops. Simone Adesanya 2026-10-10: 2 real tool_calls, then 153 turn_end
+// events of command-shaped prose until the 10-minute cap (2.71M tokens in).
+// Count turn_end events since the last tool_call; at IDLE_TURNS the episode
+// ends by the same graceful path the mission end uses, and the sidecar says
+// so (`stall`) so the night is labelled a runner stall, never a blank. Eric
+// Taveras's 29-call mission night (2026-10-16) never passed 2 idle turns.
+const IDLE_TURNS = 8;
 
-function createCompletionTracker() {
-  let docked = true, logWritten = false, done = false;
+function createCompletionTracker(idleTurns) {
+  const limit = idleTurns || IDLE_TURNS;
+  let docked = true, logWritten = false, done = false, idle = 0, stalled = false, calls = 0;
   return {
     push(line) {
       let e;
       try { e = JSON.parse(line); } catch (_) { return done; }
+      if (e.event === 'turn_end') {
+        idle++;
+        if (!done && idle >= limit) { stalled = true; done = true; }
+        return done;
+      }
       if (e.event !== 'tool_call' || !e.args || typeof e.args.command !== 'string') return done;
+      idle = 0;
+      calls++;
       const cmd = e.args.command;
       if (/(^|\/)undock$/.test(cmd)) docked = false;
       else if (/(^|\/)dock$/.test(cmd)) docked = true;
@@ -133,6 +149,9 @@ function createCompletionTracker() {
       return done;
     },
     get complete() { return done; },
+    get stalled() { return stalled; },
+    get idleTurns() { return idle; },
+    get toolCalls() { return calls; },
   };
 }
 
@@ -187,9 +206,15 @@ async function main() {
       if (!line.startsWith('{"event"')) continue;
       if (!completed && tracker.push(line)) {
         completed = true;
-        console.log('[episode] mission complete (captains_log written, docked) — settling ' +
-          (COMPLETION_SETTLE_MS / 1000) + 's then graceful stop');
-        setTimeout(() => { try { child.kill('SIGINT'); } catch (_) {} }, COMPLETION_SETTLE_MS).unref();
+        if (tracker.stalled) {
+          console.log('[episode] runner stall — ' + tracker.idleTurns + ' turns with no tool call after ' +
+            tracker.toolCalls + ' call(s); graceful stop now');
+          try { child.kill('SIGINT'); } catch (_) {}
+        } else {
+          console.log('[episode] mission complete (captains_log written, docked) — settling ' +
+            (COMPLETION_SETTLE_MS / 1000) + 's then graceful stop');
+          setTimeout(() => { try { child.kill('SIGINT'); } catch (_) {} }, COMPLETION_SETTLE_MS).unref();
+        }
       }
     }
   });
@@ -214,7 +239,10 @@ async function main() {
     capMinutes: a.minutes,
     exitCode: code,
     capped: timedOut,              // wall-clock cap fired (was: any non-clean exit)
-    completedCleanly: completed,   // mission end condition seen before the cap
+    completedCleanly: completed && !tracker.stalled,   // mission end condition seen before the cap
+    // research.29: the pilot stopped flying — IDLE_TURNS turn_end events with no
+    // tool call. The adapter carries this into the staged night's note.
+    stall: tracker.stalled ? { idleTurns: tracker.idleTurns, toolCalls: tracker.toolCalls, limit: IDLE_TURNS } : null,
     ...stats,
     // deepseek-chat list prices; cache reads push real cost lower
     estCostUsd: +((stats.tokensIn * 0.14 + stats.tokensOut * 0.28) / 1e6).toFixed(4),
@@ -229,7 +257,7 @@ async function main() {
   console.log('[episode] sidecar: ' + path.relative(ROOT, sidePath));
 }
 
-module.exports = { createCompletionTracker, parseLog };
+module.exports = { createCompletionTracker, parseLog, IDLE_TURNS };
 
 if (require.main === module) {
   main().catch(e => { console.error('[episode] FATAL: ' + (e && e.message || e)); process.exit(1); });

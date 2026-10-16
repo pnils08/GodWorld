@@ -156,6 +156,19 @@ function creditDeltaForEntry(e) {
   if (t === 'trading.order_cancelled') {
     return num(d.refunded_credits);
   }
+  // research.29 (builder 2026-10-16, "give the citizens their awarded points"):
+  // station sales and buys log under their own event types with a plain
+  // `credits` field, not `credits_delta` — trading.fuel_sold carried Clarissa
+  // Dane's 14 cr on 2026-09-07 and scored nothing. The full sweep of all 55
+  // archived nights found this the ONLY credit-bearing shape the adapter
+  // skipped. Sold = earned, bought = spent; anything else stays unscored.
+  if (e.category === 'trading' && d.credits_delta == null) {
+    const c = num(d.credits);
+    if (c != null) {
+      if (/sold|sell|sale/i.test(t)) return Math.abs(c);
+      if (/bought|buy|purchas/i.test(t)) return -Math.abs(c);
+    }
+  }
   if (e.category === 'mission' || /^mission\./.test(t)) {
     if (!/complet|claim|reward|paid/i.test(t)) return null;
     for (let i = 0; i < MISSION_CREDIT_KEYS.length; i++) {
@@ -180,7 +193,15 @@ function deriveCredits(entries) {
     hits++;
     basis.push({ id: e.id, event_type: e.event_type, n: n });
   });
-  if (!hits) return fact(null, { note: 'no credit fields on windowed entries' });
+  // research.29: a measured zero is a fact, a missing log is not. A night whose
+  // action log has entries (mining, docking, navigation…) but no credit event
+  // EARNED NOTHING — that is 0, and the board and the recap say so. Only a
+  // window with no entries at all stays null (unknown). Before this, 34 of 55
+  // nights read blank and nobody could tell a bad night from a broken fetch.
+  if (!hits) {
+    if (!entries.length) return fact(null, { note: 'no action-log entries in window — unknown' });
+    return fact(0, { hits: 0, note: 'entries in window carry no credit event — measured zero' });
+  }
   return fact(sum, { hits: hits, basis: basis.slice(0, 40) });
 }
 
@@ -278,13 +299,20 @@ function assemble(episode, byCategory, captains) {
     session: episode.session,
     window: { startedAt: episode.startedAt, endedAt: episode.endedAt },
     runner: episode.runner,
+    // research.29: the runner's own verdict on the flight (idle-turn stop), so a
+    // measured zero on a stalled night reads "runner stall", not "flew badly".
+    stall: episode.stall || null,
     source: {
       kind: 'get_action_log',
       categories: CATEGORIES.slice(),
       fetchedAt: new Date().toISOString(),
     },
     facts: {
-      credits_delta: deriveCredits(all),
+      credits_delta: (function () {
+        const c = deriveCredits(all);
+        if (episode.stall && c.value === 0) c.note = 'runner stall — pilot stopped flying; measured zero';
+        return c;
+      })(),
       systems_visited: deriveSystems(all),
       combat_results: deriveCombat(all),
       cargo: deriveCargo(all),
@@ -442,6 +470,174 @@ function threeEpisodePaths() {
   ];
 }
 
+// ---------------------------------------------------------------------------
+// research.29 Move 2 — BACKFILL (builder 2026-10-16: "yes lets back fill her
+// missing points and the other missing data on that ledger, scores and names").
+// The adapter learned mission rewards on 2026-10-11 and station sales today;
+// the archived nights keep their full windowed action-log entries
+// (facts.entries), so every past night is re-scored from the record it
+// already holds — no API call. Blank holders resolve by POPID against the
+// ledger snapshot (the world's record), never invented.
+//
+//   node scripts/undockedEpisodeAdapter.js --rescore-archive          # table only
+//   node scripts/undockedEpisodeAdapter.js --rescore-archive --apply  # writes
+//
+// --apply writes four places, all keyed by the episode: the archive file
+// (facts.credits_delta, holder), the intake row (CreditsDelta, Holder,
+// FeedEvent.*), the feed pack event (feed/c<Cycle>.json), and the
+// Undocked_Feed tab row by EpisodeId (CreditsDelta, Holder). The board is then
+// `node scripts/undockedStandings.js` — a full recompute from the tab, so it
+// converges on its own. Read the tab back after.
+// ---------------------------------------------------------------------------
+const ARCHIVE_DIR = path.join(STAGED, 'archive');
+const INTAKE_DIR = path.join(ROOT, 'output', 'spacemolt-show', 'intake');
+const FEED_DIR = path.join(ROOT, 'output', 'spacemolt-show', 'feed');
+const SNAPSHOT = path.join(ROOT, 'output', 'simulation_ledger_snapshot.jsonl');
+const FEED_TAB = 'Undocked_Feed';
+
+function snapshotNames() {
+  const out = {};
+  if (!fs.existsSync(SNAPSHOT)) return out;
+  fs.readFileSync(SNAPSHOT, 'utf8').split('\n').forEach(function (line) {
+    if (!line) return;
+    try {
+      const r = JSON.parse(line);
+      if (r.POPID && r.Name) out[String(r.POPID).toUpperCase()] = String(r.Name).trim();
+    } catch (_) { /* skip */ }
+  });
+  return out;
+}
+
+// The staged file keeps every windowed entry by category — the same list
+// assemble() scored from, so a re-derivation is the same computation.
+function entriesOf(staged) {
+  const byCat = (staged.facts && staged.facts.entries && staged.facts.entries.value) || {};
+  const all = [];
+  Object.keys(byCat).forEach(function (c) {
+    (byCat[c] || []).forEach(function (e) { all.push(Object.assign({ category: c }, e)); });
+  });
+  return all;
+}
+
+function intakeByStagedName() {
+  const out = {};
+  if (!fs.existsSync(INTAKE_DIR)) return out;
+  fs.readdirSync(INTAKE_DIR).filter(function (f) { return f.endsWith('.json'); }).forEach(function (f) {
+    const p = path.join(INTAKE_DIR, f);
+    try {
+      const r = JSON.parse(fs.readFileSync(p, 'utf8'));
+      out[path.basename(r.StagedPath || '')] = { row: r, path: p };
+    } catch (_) { /* skip */ }
+  });
+  return out;
+}
+
+function planRescore() {
+  const names = snapshotNames();
+  const intake = intakeByStagedName();
+  const changes = [];
+  const files = fs.existsSync(ARCHIVE_DIR)
+    ? fs.readdirSync(ARCHIVE_DIR).filter(function (f) { return f.endsWith('.json'); }).sort() : [];
+  files.forEach(function (f) {
+    const p = path.join(ARCHIVE_DIR, f);
+    const staged = JSON.parse(fs.readFileSync(p, 'utf8'));
+    const before = staged.facts && staged.facts.credits_delta ? staged.facts.credits_delta.value : undefined;
+    const after = deriveCredits(entriesOf(staged));
+    const holderBefore = staged.holder || '';
+    const holderAfter = holderBefore || names[String(staged.popid || '').toUpperCase()] || '';
+    const ik = intake[f] || null;
+    const creditsChanged = (before == null ? null : Number(before)) !== after.value;
+    const holderChanged = holderAfter !== holderBefore;
+    if (!creditsChanged && !holderChanged) return;
+    changes.push({
+      file: f, stagedPath: p, popid: staged.popid,
+      holderBefore: holderBefore, holderAfter: holderAfter,
+      before: before === undefined ? null : before, after: after.value, note: after.note || '',
+      fact: after,
+      intakePath: ik ? ik.path : null,
+      applied: ik ? ik.row.Applied : null,
+      cycle: ik ? ik.row.Cycle : null,
+      episodeId: ik && ik.row.FeedEvent ? ik.row.FeedEvent.EpisodeId : null,
+    });
+  });
+  return { scanned: files.length, changes: changes };
+}
+
+function printRescore(plan) {
+  console.log('[rescore] ' + plan.scanned + ' archived night(s), ' + plan.changes.length + ' change(s):');
+  plan.changes.forEach(function (c) {
+    console.log('  ' + (c.episodeId || '(no feed row)') + ' c' + (c.cycle == null ? '?' : c.cycle)
+      + ' ' + c.popid + ' ' + (c.holderBefore || '(blank)') + (c.holderAfter !== c.holderBefore ? ' -> ' + c.holderAfter : '')
+      + ' | credits ' + (c.before == null ? 'blank' : c.before) + ' -> ' + (c.after == null ? 'blank' : c.after)
+      + (c.note ? ' (' + c.note + ')' : ''));
+  });
+}
+
+async function applyRescore(plan) {
+  require('../lib/env');
+  const sheets = require('../lib/sheets');
+  const tab = await sheets.getSheetData(FEED_TAB);
+  if (!tab || !tab.length) throw new Error(FEED_TAB + ' unreadable — refusing to backfill');
+  const hdr = tab[0];
+  const iEp = hdr.indexOf('EpisodeId'), iCr = hdr.indexOf('CreditsDelta'), iHo = hdr.indexOf('Holder');
+  if (iEp < 0 || iCr < 0 || iHo < 0) throw new Error(FEED_TAB + ' missing EpisodeId/CreditsDelta/Holder');
+  const rowOf = {};
+  for (let r = 1; r < tab.length; r++) {
+    const v = String(tab[r][iEp] == null ? '' : tab[r][iEp]).trim();
+    if (v) rowOf[v] = r + 1;   // 1-based sheet row
+  }
+  const updates = [];
+  const report = { disk: 0, tab: 0, noFeedRow: [] };
+  // The tab FIRST, then disk. planRescore diffs against the archive, so if the
+  // disk were rewritten and the sheet call then failed, a re-run would find
+  // nothing to do and the board would stay half-wired forever. Tab-then-disk
+  // means a failure on either side is repaired by running --apply again.
+  plan.changes.forEach(function (c) {
+    // approved rows only — only decided-yes events ever left disk
+    if (c.applied === 'yes' && c.episodeId && rowOf[c.episodeId]) {
+      const r = rowOf[c.episodeId];
+      updates.push({ range: FEED_TAB + '!' + sheets.columnIndexToLetter(iCr) + r, values: [[c.after == null ? '' : c.after]] });
+      if (c.holderAfter) updates.push({ range: FEED_TAB + '!' + sheets.columnIndexToLetter(iHo) + r, values: [[c.holderAfter]] });
+      report.tab++;
+    } else if (c.applied === 'yes') {
+      report.noFeedRow.push(c.episodeId || c.file);
+    }
+  });
+  if (updates.length) await sheets.batchUpdate(updates);
+  plan.changes.forEach(function (c) {
+    // 1. archive file
+    const staged = JSON.parse(fs.readFileSync(c.stagedPath, 'utf8'));
+    staged.facts.credits_delta = Object.assign({}, c.fact, { rescoredAt: new Date().toISOString(), was: c.before });
+    if (c.holderAfter && !staged.holder) staged.holder = c.holderAfter;
+    fs.writeFileSync(c.stagedPath, JSON.stringify(staged, null, 2) + '\n');
+    report.disk++;
+    // 2. intake row + 3. feed pack event
+    if (c.intakePath) {
+      const row = JSON.parse(fs.readFileSync(c.intakePath, 'utf8'));
+      row.CreditsDelta = c.after;
+      if (c.holderAfter) row.Holder = c.holderAfter;
+      if (row.FeedEvent) {
+        row.FeedEvent.CreditsDelta = c.after;
+        if (c.holderAfter) row.FeedEvent.Holder = c.holderAfter;
+      }
+      fs.writeFileSync(c.intakePath, JSON.stringify(row, null, 2) + '\n');
+      if (c.episodeId && c.cycle != null) {
+        const fp = path.join(FEED_DIR, 'c' + c.cycle + '.json');
+        if (fs.existsSync(fp)) {
+          const pack = JSON.parse(fs.readFileSync(fp, 'utf8'));
+          (pack.events || []).forEach(function (e) {
+            if (e.EpisodeId !== c.episodeId) return;
+            e.CreditsDelta = c.after;
+            if (c.holderAfter) e.Holder = c.holderAfter;
+          });
+          fs.writeFileSync(fp, JSON.stringify(pack, null, 2) + '\n');
+        }
+      }
+    }
+  });
+  return report;
+}
+
 function summarize(staged) {
   const f = staged.facts;
   return staged.episode_id
@@ -460,20 +656,35 @@ module.exports = {
   loadEpisode, popidFromSession, inWindow, filterWindow,
   deriveCredits, deriveSystems, deriveCombat, deriveCargo, deriveMishaps,
   assemble, assertSplit, slimEntry,
+  creditDeltaForEntry, entriesOf, planRescore, applyRescore,
 };
 
 if (require.main === module) {
   const argv = process.argv.slice(2);
   let paths = [];
   let holder = null;
+  let rescore = false, apply = false;
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--episode') paths.push(argv[++i]);
     else if (argv[i] === '--holder') holder = argv[++i];
     else if (argv[i] === '--all-three') paths = paths.concat(threeEpisodePaths());
+    else if (argv[i] === '--rescore-archive') rescore = true;
+    else if (argv[i] === '--apply') apply = true;
     else {
       console.error('unknown arg ' + argv[i]);
       process.exit(2);
     }
+  }
+  if (rescore) {
+    const plan = planRescore();
+    printRescore(plan);
+    if (!apply) { console.log('[rescore] dry-run — no write (add --apply)'); process.exit(0); }
+    applyRescore(plan).then(function (rep) {
+      console.log('[rescore] wrote ' + rep.disk + ' archive/intake/feed set(s), ' + rep.tab + ' tab row(s)'
+        + (rep.noFeedRow.length ? '; approved but not on the tab: ' + rep.noFeedRow.join(', ') : ''));
+      console.log('[rescore] next: node scripts/undockedStandings.js  (full recompute from the tab)');
+    }).catch(function (err) { console.error(err.message || err); process.exit(1); });
+    return;
   }
   if (holder && paths.length !== 1) {
     console.error('--holder applies to exactly one --episode');

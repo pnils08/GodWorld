@@ -83,11 +83,68 @@ function citizenInfoFor(popids) {
     out[pop] = {
       hood: String(r.Neighborhood || '').trim() || null,
       name: String(r.Name || '').trim() || null,
+      // research.29 (builder 2026-10-16): Nia knows WHO is in the chair. The
+      // ledger's RoleType is the job line ("Second Baseman, Oakland A's",
+      // "District Attorney"); the career lines come from the sports feed below.
+      roleType: String(r.RoleType || '').trim() || null,
+      employerBizId: String(r.EmployerBizId || '').trim() || null,
+      tier: String(r.Tier || '').trim() || null,
     };
     if (Object.keys(out).length === want.size) break;
   }
   return out;
 }
+
+// research.29 — the pilot's career, as the sports feed already wrote it.
+// Deterministic: every Oakland_Sports_Feed row from the last CAREER_WINDOW
+// cycles whose NamesUsed carries the pilot's name, reduced to the sentence(s)
+// of Notes that name them. No LLM, no new fact source — the feed is canon the
+// sports desk already prints from. Eric Taveras C109-C111: playoff MVP, World
+// Series MVP, the parade. A pilot with no feed rows gets []. Civic office
+// holders (Clarissa Dane, DA) are covered by RoleType alone.
+const SPORTS_FEED = path.join(ROOT, 'output', 'beats', 'Oakland_Sports_Feed.jsonl');
+const CAREER_WINDOW = 6;
+const CAREER_MAX_LINES = 3;
+
+function sentencesNaming(text, name) {
+  return String(text || '').split(/(?<=[.!?])\s+/).filter(s => s.toLowerCase().includes(name.toLowerCase()));
+}
+
+function careerLinesFor(name, cycle, feedPath) {
+  const p = feedPath || SPORTS_FEED;
+  if (!name || !fs.existsSync(p)) return [];
+  const c = Number(cycle);
+  const lo = Number.isFinite(c) ? c - CAREER_WINDOW : -Infinity;
+  const hi = Number.isFinite(c) ? c : Infinity;
+  const needle = String(name).trim().toLowerCase();
+  const lines = [];
+  for (const line of fs.readFileSync(p, 'utf8').split('\n')) {
+    if (!line) continue;
+    let r;
+    try { r = JSON.parse(line); } catch (_) { continue; }
+    const rc = Number(r.Cycle);
+    if (!Number.isFinite(rc) || rc < lo || rc > hi) continue;
+    if (!String(r.NamesUsed || '').toLowerCase().includes(needle)) continue;
+    const sents = sentencesNaming(r.Notes, name);
+    const body = (sents.length ? sents.join(' ') : String(r.Notes || '')).trim();
+    if (!body) continue;
+    lines.push({ cycle: rc, seasonType: r.SeasonType || '', eventType: r.EventType || '',
+      line: 'C' + rc + (r.SeasonType ? ' ' + r.SeasonType : '') + ': ' + (body.length > 220 ? body.slice(0, 217) + '...' : body) });
+  }
+  // newest first; the headline moments are the most recent rows
+  lines.sort((a, b) => b.cycle - a.cycle);
+  return lines.slice(0, CAREER_MAX_LINES);
+}
+
+// One line the writer reads before the flight: who this pilot is in the city.
+function whoLine(name, info, career) {
+  const role = info && info.roleType;
+  let s = name + (role ? ' — ' + role : '');
+  if (career && career.length) s += '. ' + career.map(l => l.line).join(' ');
+  return s.replace(/\.$/, '');   // callers end the sentence
+}
+
+const WHO_RULE = ' The career is who they are, not the story; the story is the flight — but the city knows who is in the chair, and so does Nia.';
 
 function creditsPhrase(delta) {
   if (delta == null || delta === '') return 'a night the books can\'t settle yet';
@@ -97,9 +154,11 @@ function creditsPhrase(delta) {
   return 'dead even on the night';
 }
 
-function laneEntryFor(e, info, leader) {
+function laneEntryFor(e, info, leader, cycle) {
   const hood = info && info.hood;
   const name = e.Holder || (info && info.name) || e.POPID;
+  const career = careerLinesFor((info && info.name) || e.Holder, cycle);
+  const who = whoLine(name, info, career);
   const label = 'UNDOCKED: ' + name + ' — ' + creditsPhrase(e.CreditsDelta) +
     (e.CombatEvents ? ', ' + e.CombatEvents + ' combat event(s)' : '') +
     (e.MishapCount ? ', ' + e.MishapCount + ' mishap(s)' : '');
@@ -116,9 +175,13 @@ function laneEntryFor(e, info, leader) {
         ', combat ' + (e.CombatEvents || 0) + ', mishaps ' + (e.MishapCount || 0) +
         ', magnitude ' + (e.Magnitude || 1) + '/5' +
         ((e.Flags || []).indexOf('open_escrow') >= 0 ? ', open escrow position' : '') + '.' +
-        standingsNote(leader),
-      citizens: [name + ' — UNDOCKED cast pilot'],
+        standingsNote(leader) +
+        ' Who is in the chair: ' + who + '.' + WHO_RULE,
+      citizens: [name + ' — ' + ((info && info.roleType) ? info.roleType + ', ' : '') + 'UNDOCKED cast pilot'],
     },
+    // research.29: the ledger record + career the writer sees (daily and weekly)
+    who: { name, roleType: (info && info.roleType) || null, employerBizId: (info && info.employerBizId) || null,
+      tier: (info && info.tier) || null, career },
     // typed feed facts ride whole for the write stage — never a new fact source
     undockedEvent: e,
   };
@@ -169,14 +232,19 @@ function buildNiaWeeklySlice(cycle) {
   const leader = standingsLeader(standings);
   const pilots = roster.map(r => {
     const info = citizenInfo[String(r.POPID).toUpperCase()] || {};
-    return Object.assign({}, r, { name: info.name || r.POPID, hood: info.hood || null });
+    const name = info.name || r.POPID;
+    const career = careerLinesFor(info.name, c);
+    return Object.assign({}, r, { name, hood: info.hood || null,
+      roleType: info.roleType || null, employerBizId: info.employerBizId || null, tier: info.tier || null,
+      career, who: whoLine(name, info, career) });
   });
   const angle = 'Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (' +
     pilots.map(p => p.name).join(', ') + '), who is climbing and who is fading.' +
     standingsNote(leader) + ' Per-pilot facts: ' + pilots.map(p =>
       p.name + ' — ' + p.episodes + ' episode(s), ' + (p.hasWindowed ? 'partial ' : '') +
       'credits ' + p.creditsDelta + ', combat ' + p.combatEvents + ', mishaps ' + p.mishapCount
-    ).join('; ') + '.';
+    ).join('; ') + '.' +
+    ' Who is in the chair: ' + pilots.map(p => p.who).join(' | ') + '.' + WHO_RULE;
   return {
     v: V,
     cycle: c,
@@ -188,7 +256,7 @@ function buildNiaWeeklySlice(cycle) {
       label: 'UNDOCKED week-in-review c' + c,
       kind: 'undocked-digest',
       angle,
-      citizens: pilots.map(p => p.name + ' — UNDOCKED cast pilot'),
+      citizens: pilots.map(p => p.name + ' — ' + (p.roleType ? p.roleType + ', ' : '') + 'UNDOCKED cast pilot'),
       popids: pilots.map(p => p.POPID),
     },
     generatedAt: new Date().toISOString(),
@@ -227,7 +295,7 @@ function buildNiaSlice(cycle) {
     cycle: c,
     empty: false,
     events: unwritten,
-    laneEntries: unwritten.map(e => laneEntryFor(e, citizenInfo[String(e.POPID).toUpperCase()], leader)),
+    laneEntries: unwritten.map(e => laneEntryFor(e, citizenInfo[String(e.POPID).toUpperCase()], leader, c)),
     standings: leader ? { asOf: standings.computedAt, leader } : null,
     generatedAt: new Date().toISOString(),
   };
@@ -266,4 +334,5 @@ function markRecapped(episodeIds, meta) {
 module.exports = {
   V, buildNiaSlice, writeNiaSlice, loadNiaSlice, markRecapped, slicePath, standingsLeader, standingsNote,
   weeklyKey, buildNiaWeeklySlice, writeNiaWeeklySlice, loadNiaWeeklySlice, weeklySlicePath,
+  citizenInfoFor, careerLinesFor, whoLine,
 };

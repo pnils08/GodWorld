@@ -116,5 +116,40 @@ const injected2 = injectWeeklyPilotCredit(intake2, draft2, pilots);
 check('a printed pilot absent from the model INTAKE is still added as subject',
   injected2.names.length === 1 && injected2.names[0].popid === 'POP-00143' && injected2.names[0].role === 'subject');
 
+// research.29 (builder 2026-10-16): Nia knows who is in the chair — the ledger
+// RoleType and the sports feed's own sentences about the pilot ride the slice.
+
+const tmpFeed = require('path').join(os.tmpdir(), 'nia-career-feed-' + process.pid + '.jsonl');
+fs.writeFileSync(tmpFeed, [
+  { Cycle: '109', SeasonType: 'playoffs', EventType: 'game-result', NamesUsed: 'Eric Taveras (2B), Vinnie Keane (DH)', Notes: 'Vinnie Keane sat. Eric Taveras continues his amazing playoff campaign with 2 homeruns.' },
+  { Cycle: '110', SeasonType: 'championship', EventType: 'game-result', NamesUsed: 'Eric Taveras, Pablo Almanzar', Notes: 'Eric Taveras win World Series MVP to go along with his post-season MVP.' },
+  { Cycle: '101', SeasonType: 'regular', EventType: 'game-result', NamesUsed: 'Eric Taveras (2B)', Notes: 'Eric Taveras went 0-for-4 in April.' },
+  { Cycle: '110', SeasonType: 'championship', EventType: 'game-result', NamesUsed: 'Vinnie Keane', Notes: 'Vinnie Keane waved from the float.' },
+].map(r => JSON.stringify(r)).join('\n') + '\n');
+const career = N.careerLinesFor('Eric Taveras', 111, tmpFeed);
+check('career lines: only rows naming the pilot, inside the 6-cycle window', career.length === 2 && career.every(l => l.line.includes('Eric Taveras')));
+check('career lines: newest first', career[0].cycle === 110 && career[1].cycle === 109);
+check('career lines: only the sentences that name the pilot', !career[1].line.includes('Vinnie Keane sat'));
+check('career lines: C101 is outside the window', !career.some(l => l.cycle === 101));
+check('career lines: unknown pilot -> []', N.careerLinesFor('Nobody Here', 111, tmpFeed).length === 0);
+check('career lines: no name -> []', N.careerLinesFor(null, 111, tmpFeed).length === 0);
+const who = N.whoLine('Eric Taveras', { roleType: "Second Baseman, Oakland A's" }, career);
+check('who line: name — RoleType. career sentences', who.startsWith("Eric Taveras — Second Baseman, Oakland A's. C110 championship:") && !who.endsWith('.'));
+check('who line: no role, no career -> just the name', N.whoLine('Briar Soto', {}, []) === 'Briar Soto');
+try { fs.unlinkSync(tmpFeed); } catch (_) {}
+
+const snap = require('path').join(__dirname, '..', 'output', 'simulation_ledger_snapshot.jsonl');
+if (fs.existsSync(snap)) {
+  const info = N.citizenInfoFor(['POP-00597']);
+  check('citizenInfoFor carries roleType from the snapshot', info['POP-00597'] && typeof info['POP-00597'].roleType === 'string' && info['POP-00597'].roleType.length > 0);
+}
+const c111 = N.buildNiaWeeklySlice(111);
+if (c111 && !c111.empty) {
+  check('weekly c111: every pilot carries who + career', c111.pilots.every(p => typeof p.who === 'string' && Array.isArray(p.career)));
+  check('weekly c111: the angle says who is in the chair', c111.story.angle.includes('Who is in the chair:'));
+  const eric = c111.pilots.find(p => p.POPID === 'POP-00597');
+  if (eric) check('weekly c111: Eric Taveras reads as the A\'s second baseman with his MVP', eric.who.includes("Oakland A's") && eric.who.includes('MVP'));
+}
+
 if (failed) { console.error('buildNiaSlice: ' + failed + ' FAIL'); process.exit(1); }
 console.log('buildNiaSlice: ok');

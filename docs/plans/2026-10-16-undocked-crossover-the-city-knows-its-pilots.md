@@ -17,7 +17,7 @@ pointers:
 
 # research.29 — UNDOCKED crossover: the city knows its pilots
 
-**State:** GO (builder 2026-10-16 ~00:30 CDT). Building in §5 order.
+**State:** GO (builder 2026-10-16 ~00:30 CDT). Moves 1–3 shipped + backfill applied 2026-10-16; Move 4 = engine.291 (es, bench); Move 5 Saturday-curation design next.
 
 **Deadline that matters:** Nia's weekly digest fires **Sat 2026-10-17 08:15 CDT** (angle) → 09:15 (report) → 10:15 (write), on the C111 feed. Eric Taveras is in that feed with his 1,170 and the lead. Move 1 lands before 08:15 or her Saturday piece introduces him as "UNDOCKED cast pilot" again.
 
@@ -111,3 +111,4 @@ Original questions kept for the record:
 - 2026-10-16 (rb, S561): plan written from the codex read, every claim verified against the files; builder's three rulings recorded verbatim; held for go.
 - 2026-10-16 (es, S562): Move 4 built and unit-proven as engine.291 — see Move 4 "es, as built"; the multi-pilot rule (equal weight over the night's pilots) and the `$LEADER` source (the feed tab, standings rule) are es's calls, published here. Bench pending; nothing to PROD before the C112 readback.
 - 2026-10-16 ~00:30 (rb): builder answered both calls — backfill the archive incl. blank names; crossover goes to the trending journalist + Mags's Saturday pass. GO.
+- 2026-10-16 ~01:40 (rb): Moves 1–3 shipped (b93ee2a4, f6aa9c65). Backfill APPLIED per ruling 1: 38 nights — 33 measured zeros, Clarissa Dane +14 (`trading.fuel_sold`) → 317 rank 2, 8 pilots named on 16 blank Holder rows (Martin Richards, Otis Redd, Jackson Sift, Belle Lopez, Rosalind Young, Soo Loo, Leanne Wu, Wanjiru Liu); Undocked_Feed tab first, then archive/intake/feed packs (`was:` = revert map); board recomputed — no rank, CyclesLed or streak moved. Readback: tab blank Holder 0, null CreditsDelta 0. Already-printed recaps that said "can't settle yet" stand as canon. Move 4 built by es as engine.291 (`$PILOT` / `$PILOTROLE` / `$LEADER` entity slots, not `{pilot}`; see es's Move 4 "as built"); pool rows retag after its C112 bench smoke. agy plan review dispatched (output/antigravity/2026-10-16-review-research29-undocked-crossover.md).

@@ -21,6 +21,10 @@
  * Fail-closed row rules (S289 critique — a typo must NARROW, never widen):
  *   - Kind not line|fragment                          => skip + count
  *   - line without PoolKey / fragment without Slot    => skip + count
+ *   - fragment whose Text carries a $SLOT token       => skip + count
+ *     (a fragment fills a slot, it cannot open one: the composer replaces
+ *     only the line's own tokens, so "$MOOD" as a MOOD fragment printed raw
+ *     into LifeHistory C104–C111, live ECL row 291)
  *   - empty Text                                      => skip + count
  *   - line whose FIRST tag is not a recognized source => skip + count
  *     (primaryFromTags falls through to 'Daily' on unknown sources; a new
@@ -259,6 +263,7 @@ function loadEventContentLedger_(ctx) {
     } else {
       var slot = cell(row, iSlot);
       if (!slot) { S.contentLedger.skipped++; continue; }
+      if (/\$[A-Z_]+/.test(text)) { S.contentLedger.skipped++; continue; }
       if (!S.contentLedger.fragments[slot]) S.contentLedger.fragments[slot] = [];
       S.contentLedger.fragments[slot].push(entry);
       contentHash = contentLedgerHashStep_(contentHash, 'fragment|' + slot + '|' + text);

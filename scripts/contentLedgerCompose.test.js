@@ -139,6 +139,27 @@ console.log('═══ Determinism: fixed seed × fixed ledger = identical outpu
   assert('different seed -> different output (sanity)', run(777) !== run(778));
 }
 
+console.log('═══ A fragment that is itself a token never prints raw (live ECL R291 "$MOOD")');
+{
+  const MOOD_FIXTURE = [
+    LEDGER_HDR,
+    ['line', 'baseDaily.rehearsal', '', 'found a quiet minute at the corner and $MOOD', '5000', '', 'source:reflection', '', ''],
+    ['fragment', '', 'MOOD', 'let the week\'s noise settle', '1', '', '', '', ''],
+    ['fragment', '', 'MOOD', '$MOOD', '1', '', 'source:qol,auth:auto', '', '']
+  ];
+  let rawMood = 0, goodMood = 0, skipped = -1, frags = -1;
+  for (let seed = 71; seed < 76; seed++) {
+    const rows = [];
+    for (let i = 0; i < 40; i++) rows.push(makeRow('POP-M' + i));
+    const ctx = makeCtx(rows, mulberry32(seed), MOOD_FIXTURE);
+    skipped = ctx.summary.contentLedger.skipped; frags = (ctx.summary.contentLedger.fragments.MOOD || []).length;
+    generateCitizensEvents_(ctx);
+    for (const l of emittedLines(ctx)) { rawMood += (l.match(/\$MOOD/g) || []).length; goodMood += (l.match(/quiet minute at the corner and let the week's noise settle/g) || []).length; }
+  }
+  assert('loader: a fragment whose text carries a $SLOT token is skipped and counted', skipped === 1 && frags === 1, 'skipped=' + skipped + ' frags=' + frags);
+  assert('the line still draws with the good fragment (' + goodMood + ') and "$MOOD" never reaches LifeHistory', goodMood > 0 && rawMood === 0, 'raw=' + rawMood);
+}
+
 console.log('═══ Composition + fail-closed rules (300 citizen-cycles)');
 {
   let rawToken = 0, tightOnRich = 0, temescalFragElsewhere = 0, voidLines = 0, composedSeen = 0, venueComposed = 0, doubleNear = 0;

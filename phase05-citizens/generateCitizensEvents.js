@@ -1241,6 +1241,9 @@ function generateCitizensEvents_(ctx) {
       // String.replace pattern.
       text = text.replace(new RegExp("\\$" + slot + "(?![A-Z_])", "g"), function () { return value; });
     }
+    // The invariant above, enforced: a value that itself carries a token (a fragment
+    // "$MOOD", a name with "$" in it) never prints raw — drop the emit slot instead.
+    if (/\$[A-Z_]+/.test(text)) return null;
     return text.replace(/\s+/g, " ").trim();
   }
 

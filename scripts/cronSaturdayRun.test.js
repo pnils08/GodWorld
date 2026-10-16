@@ -233,5 +233,30 @@ console.log('Test 6: mergeStorylineLedger');
   assert('unknown byline is refused', !bylineResolves({ name: 'Nobody Here' }, L).ok);
 }
 
+// research.29 Move 5 (builder 2026-10-16 ruling 2): citizens crossing systems —
+// detected in code from the staged set, framed by Mags in the narration.
+{
+  const X = require('./cron-saturday-run');
+  const ok = (name, cond) => { if (cond) passed++; else { failed++; console.error('  FAIL ' + name); } };
+  const mk = (stem, desk, byline, text, names) => ({ stem, text, sidecar: { desk, byline, intake: { names: names || [] } } });
+  const set = [
+    mk('undocked_c111_nia', 'undocked', 'Nia Rook', 'Eric Taveras sold the haul and led the board.\n\n## INTAKE\nnames: none', []),
+    mk('sports_c111_pslayer', 'sports', 'P Slayer', 'Our second baseman is on a game show now.', [{ name: 'Eric Taveras', role: 'subject', popid: 'POP-00597' }]),
+    mk('civic_c111_carmen', 'civic', 'Carmen Delaine', 'Avery Santana spoke.', [{ name: 'Avery Santana', role: 'quoted-source', popid: 'POP-00034' }]),
+    mk('civic_c111_luis', 'civic', 'Luis Navarro', 'Avery Santana again.', [{ name: 'Avery Santana', role: 'quoted-source', popid: 'POP-00034' }]),
+    mk('undocked-digest_c111_nia', 'undocked-digest', 'Nia Rook', 'Clarissa Dane sat second.', [{ name: 'Clarissa Dane', role: 'subject', popid: 'POP-00143' }]),
+  ];
+  const x = X.crossoverCitizens(set, [{ name: 'Clarissa Dane', popid: 'POP-00143' }, { name: 'Eric Taveras', popid: 'POP-00597' }]);
+  ok('crossover: Eric Taveras — INTAKE in sports + body-named in undocked = two systems', x.length === 1 && x[0].name === 'Eric Taveras' && x[0].systems.sort().join('+') === 'sports+undocked');
+  ok('crossover: the body-named piece is recorded as named-in-body', x[0].pieces.find(p => p.stem === 'undocked_c111_nia').role === 'named-in-body');
+  ok('no crossover: Avery Santana quoted in two CIVIC pieces is one system', !x.some(c => c.name === 'Avery Santana'));
+  ok('no crossover: undocked + undocked-digest are one system (Clarissa Dane)', !x.some(c => c.name === 'Clarissa Dane') && X.deskSystem('undocked-digest') === 'undocked');
+  ok('crossoverBonus: +2 per crossing citizen on the piece, 0 elsewhere', X.crossoverBonus(set[1], x) === 2 && X.crossoverBonus(set[2], x) === 0);
+  ok('crossoverBlock: names the citizen with each system and byline', /Eric Taveras — .*sports \(P Slayer\)/.test(X.crossoverBlock(x)) && /undocked \(Nia Rook\)/.test(X.crossoverBlock(x)));
+  ok('crossoverBlock: empty when nothing crosses', X.crossoverBlock([]) === '');
+  ok('narrator charge: crossing line only when there is a crossing', /crossing is yours to name/.test(X.NARRATOR_CHARGE(111, 1)) && !/crossing is yours/.test(X.NARRATOR_CHARGE(111, 0)));
+  ok('narrator charge: no engine vocabulary leaks ("system")', !/\bsystems?\b/i.test(X.NARRATOR_CHARGE(111, 1).split('\n').slice(8).join(' ')));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

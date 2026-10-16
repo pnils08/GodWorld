@@ -921,6 +921,64 @@ function primarySlug(entry) {
   return (mover || st[0] || {}).slug || null;
 }
 
+// research.29 Move 5 (builder 2026-10-16, ruling 2: "whoever is the trending
+// journalist … and likely what Mags would pick up on Saturday to combine all
+// the angles to give citizens that are correctly crossing over their
+// attention"). Detection is code; the framing stays in the narrator's charge
+// (detector-framer split). A crossover = one citizen present in pieces from
+// two or more of the paper's systems in the same cycle — Eric Taveras in Nia's
+// UNDOCKED recap and in the sports desk's week; Clarissa Dane the DA on the
+// board. Present = named in the piece's INTAKE, or the full name in the
+// article body (INTAKE is often empty on the daily solos; the body is what
+// printed). Candidates are bounded: every INTAKE name across the set plus the
+// UNDOCKED board's holders. In curation a crossing citizen is worth a storyline
+// move on the tie-break INSIDE a grade — the grade still leads (pipeline.79).
+const SYSTEM_OF_DESK = { 'undocked-digest': 'undocked' };
+function deskSystem(desk) {
+  const d = String(desk || '').toLowerCase().trim();
+  return SYSTEM_OF_DESK[d] || d || 'unknown';
+}
+function undockedBoardCandidates() {
+  const s = readJsonSafe(path.join(ROOT, 'output', 'spacemolt-show', 'standings.json'));
+  return ((s && s.rows) || []).filter(r => r.Holder && r.POPID)
+    .map(r => ({ name: String(r.Holder).trim(), popid: String(r.POPID).trim() }));
+}
+function crossoverCitizens(set, extraCandidates) {
+  const keyOf = c => (c.popid ? String(c.popid).toUpperCase() : 'name:' + String(c.name).toLowerCase());
+  const cands = new Map();
+  const add = c => { if (c && c.name) { const k = keyOf(c); if (!cands.has(k)) cands.set(k, { name: String(c.name).trim(), popid: c.popid || null }); } };
+  for (const e of set) for (const n of ((e.sidecar.intake && e.sidecar.intake.names) || [])) add(n);
+  for (const c of (extraCandidates || [])) add(c);
+  const out = [];
+  for (const [k, c] of cands) {
+    const pieces = [];
+    for (const e of set) {
+      const names = (e.sidecar.intake && e.sidecar.intake.names) || [];
+      const inIntake = names.find(n => n && n.name && keyOf(n) === k);
+      const body = String(e.text || '').replace(/## INTAKE[\s\S]*$/, '');
+      if (!inIntake && !body.includes(c.name)) continue;
+      pieces.push({ stem: e.stem, desk: e.sidecar.desk || '', system: deskSystem(e.sidecar.desk),
+        byline: e.sidecar.byline || '', role: inIntake ? (inIntake.role || 'named') : 'named-in-body' });
+    }
+    const systems = [...new Set(pieces.map(p => p.system))];
+    if (systems.length >= 2) out.push({ name: c.name, popid: c.popid, systems, pieces });
+  }
+  return out.sort((a, b) => b.systems.length - a.systems.length || b.pieces.length - a.pieces.length || a.name.localeCompare(b.name));
+}
+function crossoverBonus(entry, crossovers) {
+  let n = 0;
+  for (const x of (crossovers || [])) if (x.pieces.some(p => p.stem === entry.stem)) n++;
+  return 2 * n;
+}
+function crossoverBlock(crossovers) {
+  if (!crossovers || !crossovers.length) return '';
+  return 'CITIZENS CROSSING THE CITY\'S SYSTEMS THIS WEEK (one person in more than one desk\'s reporting — ' +
+    'thread those angles into one life; the crossing is where the city becomes one city):\n' +
+    crossovers.map(x => '- ' + x.name + ' — ' + x.systems.map(sys =>
+      sys + ' (' + x.pieces.filter(p => p.system === sys).map(p => p.byline || 'staff').filter((v, i, a) => a.indexOf(v) === i).join(', ') + ')'
+    ).join('; ')).join('\n') + '\n\n';
+}
+
 async function stepCurate(cycle) {
   console.log('--- step 2: curation ---');
   const scorecard = readJsonSafe(path.join(ROOT, 'output', 'eic_scorecard_c' + cycle + '.json'));
@@ -932,11 +990,14 @@ async function stepCurate(cycle) {
   // after the audit has no verdict and waits for next week's.
   const unaudited = set.filter(e => !byStem[e.stem]).map(e => e.stem);
   for (const st of unaudited) console.log('  [skip] not in the EIC scorecard: ' + st);
+  // research.29 Move 5: citizens crossing systems this week, from the whole staged set
+  const crossovers = crossoverCitizens(set, undockedBoardCandidates());
+  for (const x of crossovers) console.log('  [crossover] ' + x.name + ' — ' + x.systems.join(' + ') + ' (' + x.pieces.length + ' piece(s))');
   const ranked = set
     .filter(e => byStem[e.stem] && byStem[e.stem].verdict !== 'canon-violation')
     .map(e => ({ stem: e.stem, byline: e.sidecar.byline || '', desk: e.sidecar.desk || '',
       grade: e.grade == null ? null : e.grade,
-      score: curationScore(e, byStem[e.stem]), slug: primarySlug(e), verdict: byStem[e.stem].verdict }))
+      score: curationScore(e, byStem[e.stem]) + crossoverBonus(e, crossovers), slug: primarySlug(e), verdict: byStem[e.stem].verdict }))
     // pipeline.79: the week's best-graded work leads; the storyline/names/audit count breaks
     // ties; an ungraded filing ranks below every graded one.
     .sort((a, b) => ((b.grade == null ? -1 : b.grade) - (a.grade == null ? -1 : a.grade)) || (b.score - a.score));
@@ -958,7 +1019,7 @@ async function stepCurate(cycle) {
     }
   }
   const excluded = set.length - ranked.length - unaudited.length;
-  const out = { cycle: String(cycle), top, selected, ranked, excludedCanonViolations: excluded, unaudited };
+  const out = { cycle: String(cycle), top, selected, ranked, excludedCanonViolations: excluded, unaudited, crossovers };
   const p = path.join(ROOT, 'output', 'edition_curation_c' + cycle + '.json');
   fs.writeFileSync(p, JSON.stringify(out, null, 2));
   for (const r of ranked) console.log((selected.includes(r.stem) ? '  PRINT ' : '        ') + (r.grade == null ? '-  ' : r.grade + '/4') + ' ' + String(r.score).padStart(5) + '  ' + r.stem);
@@ -975,7 +1036,7 @@ async function stepCurate(cycle) {
 // The hard-coded Y2C prefix this replaced titled every Pulse from C103 on with the wrong year.
 function simClock(cycle) { const c = Number(cycle); return 'Y' + Math.ceil(c / 52) + 'C' + (((c - 1) % 52) + 1); }
 
-const NARRATOR_CHARGE = (cycle) => [
+const NARRATOR_CHARGE = (cycle, crossoverCount) => [
   'You are Mags Corliss, 56, Editor-in-Chief of the Bay Tribune and the narrator of Oakland\'s week.',
   'You are writing THE CYCLE PULSE for cycle ' + simClock(cycle) + ' — not assembling an edition, narrating a city.',
   'You have your staff\'s published reporting below. Draw on it the way an editor\'s column draws on the',
@@ -984,7 +1045,12 @@ const NARRATOR_CHARGE = (cycle) => [
   'Never use system or engine vocabulary. Never use real-world dates — the clock is ' + simClock(cycle) + '.',
   'Thread the week: what moved, what contradicts, what nobody has answered yet. End on what you\'re',
   'watching next week. 900-1200 words, plain prose, no headers, no bullet lists.'
-].join('\n');
+].concat(crossoverCount ? [
+  // research.29 Move 5 (builder ruling 2): the editor combines the angles for a citizen crossing systems
+  'When one citizen appears in more than one desk\'s reporting this week, draw those angles together into',
+  'one life — a ballplayer in a cockpit is still the ballplayer, the district attorney on a game show is',
+  'still the DA. Name what the crossing means for them and for the city. The crossing is yours to name.'
+] : []).join('\n');
 
 async function stepNarrate(cycle) {
   console.log('--- step 3: narration (Mags) ---');
@@ -999,10 +1065,12 @@ async function stepNarrate(cycle) {
       e.text.replace(/## INTAKE[\s\S]*$/, '').trim().slice(0, 2400);
   }).filter(Boolean).join('\n\n');
   if (!material) throw new Error('curated set resolved to zero articles');
-  const pulse = await anthropicChat(NARRATOR_MODEL, NARRATOR_CHARGE(cycle),
+  // research.29 Move 5: the crossing citizens the curation step found, ahead of the reporting
+  const crossovers = curation.crossovers || [];
+  const pulse = await anthropicChat(NARRATOR_MODEL, NARRATOR_CHARGE(cycle, crossovers.length),
     // 3600, not 2200: Sonnet 5.5 reasons before it writes and OpenRouter cannot turn that off,
     // so ~800 thinking tokens share this cap with the ~1500-token narration (research.28 run).
-    'THE WEEK\'S REPORTING (your staff, already cleared and published):\n\n' + material, 3600);
+    crossoverBlock(crossovers) + 'THE WEEK\'S REPORTING (your staff, already cleared and published):\n\n' + material, 3600);
   const p = path.join(ROOT, 'output', 'cycle_pulse_c' + cycle + '.md');
   fs.writeFileSync(p, pulse + '\n');
   console.log(pulse.split(/\s+/).length + ' words → ' + path.relative(ROOT, p));
@@ -1215,4 +1283,5 @@ if (require.main === module) {
 
 module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
-  isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves };
+  isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
+  deskSystem, crossoverCitizens, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE };

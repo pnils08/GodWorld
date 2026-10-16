@@ -493,6 +493,9 @@ function generateCitizensEvents_(ctx) {
     if (!b || !b.leaderPopId) return "";
     return nameByPop[b.leaderPopId] || b.leaderHolder || "";
   })();
+  // The leader is a pilot most weeks, and a pilot's pool is show-only (below), so a
+  // $LEADER row would land on the leader's own LifeHistory. Per-citizen, at pool fill.
+  var undockedLeaderPop = (S.undockedBoard && S.undockedBoard.leaderPopId) ? String(S.undockedBoard.leaderPopId).trim().toUpperCase() : "";
   var eclEntityAvail_ = {
     PILOT: undockedAiringPilots.length > 0,
     PILOTROLE: undockedAiringPilotsWithRole.length > 0,
@@ -1167,12 +1170,13 @@ function generateCitizensEvents_(ctx) {
   // Injection-time guarantee: every fragment slot in this line has >=1
   // fragment eligible for THIS citizen. Entity slots skip the check (always
   // resolvable code-side). Slot list cached on the entry (load-once shape).
-  function contentSlotsFillable_(le, ledger, scopes) {
+  function contentSlotsFillable_(le, ledger, scopes, selfPop) {
     if (!le.slots) le.slots = contentSlotTokens_(le.text);
     for (var si = 0; si < le.slots.length; si++) {
       var slot = le.slots[si];
       if (CONTENT_ENTITY_SLOTS[slot]) {
         if (eclEntityAvail_[slot] === false) return false; // engine.291: no pilot / no leader this cycle
+        if (slot === "LEADER" && selfPop && selfPop === undockedLeaderPop) return false; // never about the leader themselves
         continue;
       }
       var frags = ledger.fragments[slot];
@@ -3037,7 +3041,7 @@ function generateCitizensEvents_(ctx) {
           // this citizen drew a commute moment this cycle".
           if (clk === TRANSIT_COMMUTE_POOL && !transitDisruptedHit) continue;
           if (!evalContentConditions_(clEntry.conditions, condScopes)) continue;
-          if (!contentSlotsFillable_(clEntry, contentLedger, condScopes)) continue;
+          if (!contentSlotsFillable_(clEntry, contentLedger, condScopes, String(popId).trim().toUpperCase())) continue;
           var clTags = clEntry.grain ? mergeTags(clEntry.tags, ["grain:" + clEntry.grain]) : clEntry.tags;
           var clPooled = makeEntry(clEntry.text, mergeTags(clTags, calendarTags), clEntry.weight, false);
           clPooled.ledgerLine = clEntry;      // draw-time compose hook

@@ -443,6 +443,7 @@ console.log('═══ engine.291 (research.29 Move 4): the city names who is fl
   const ROLE = { 'Test POP-P1': 'district attorney', 'Test POP-P3': 'second baseman', 'Test POP-P4': 'CBA compliance monitor' };
   let pairLines = 0, badPair = 0, ghost = 0, notAiring = 0, leaderOk = 0, leaderBad = 0, raw = 0, pilotOnly = 0, firstBad = '';
   let selfNamed = 0, pilotAudience = 0; // a pilot draws audience rows too (the pool is undocked-gated) — never about themselves
+  let leaderSelf = 0; // the leader is a pilot most weeks and a pilot's pool is show-only — a $LEADER line never lands on the leader
   for (let seed = 11; seed < 16; seed++) {
     const ctxS = run(seed, FIXTURE.concat(TOKEN_ROWS), FEED);
     for (const r of ctxS.ledger.rows) {
@@ -454,6 +455,7 @@ console.log('═══ engine.291 (research.29 Move 4): the city names who is fl
         pilotAudience++;
         if (ln.indexOf(own + ' was in the chair') >= 0 || ln.indexOf('watched ' + own + ' the ') >= 0) selfNamed++;
       }
+      if (cell.indexOf('said ' + own + ' still leads the board') >= 0) leaderSelf++;
     }
     const lines = emittedLines(ctxS);
     for (const l of lines) {
@@ -481,6 +483,7 @@ console.log('═══ engine.291 (research.29 Move 4): the city names who is fl
   assert('no raw $PILOT/$PILOTROLE/$LEADER reaches LifeHistory', raw === 0, 'raw=' + raw);
   assert('a pilot draws audience lines about the OTHER pilots (' + pilotAudience + ')', pilotAudience > 0);
   assert('a pilot never draws an audience line naming themselves', selfNamed === 0, 'self=' + selfNamed);
+  assert('the board leader never draws a $LEADER line naming themselves', leaderSelf === 0, 'self=' + leaderSelf);
   const d1 = emittedLines(run(777, FIXTURE.concat(TOKEN_ROWS), FEED)).join('||');
   const d2 = emittedLines(run(777, FIXTURE.concat(TOKEN_ROWS), FEED)).join('||');
   assert('token lines: same seed -> byte-identical', d1 === d2);

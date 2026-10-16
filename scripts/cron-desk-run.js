@@ -1184,6 +1184,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
   L.push('One NAMES line per named citizen, one BIZ line per named business/org, one HOOD line');
   L.push('per neighborhood, one CLAIM line per load-bearing fact. Index ONLY what your article');
   L.push('actually prints — never add a person or claim to INTAKE that is not in the piece.');
+  L.push('Every person you print is a citizen — athletes, pilots, officials, anyone from your feeds — one NAMES line each, quoted or not.');
   L.push('');
   // Task 2.5.3 — self-scoring footer (pressure-test #6): declared, machine-
   // checkable, stripped before publication by the Saturday compile.
@@ -2739,6 +2740,47 @@ async function runReport(assign) {
 // (ROLE_TO_USAGE maps that to 'featured' at the Saturday canon door, no
 // Saturday-side change needed). "Index only what the article prints" is
 // honored by the name-in-text guard.
+function injectPrintedCitizens(intake, draftText, byline) {
+  if (!intake || !Array.isArray(intake.names)) return intake;
+  // rb landing flag (2026-10-16): the floor must never cost a filing its sidecar — a missing or
+  // malformed snapshot skips the floor (the model's own INTAKE stands) instead of throwing
+  // after the Article is already on disk (desk doctrine: degrade, do not drop).
+  try {
+  const cnc = require('./canon-name-check');
+  const body = checkBody(draftText);
+  const author = String((byline && byline.name) || byline || '');
+  const excluded = new Set([author, ...cnc.checkText(author).verified].map(n => n.toLowerCase()));
+  const existing = new Set(intake.names.map(n => String(n.name).toLowerCase()));
+  const activeNames = new Set(), activeIds = new Set();
+  // Resolve against the same local ledger; archive-only / non-Active rows earn no floor credit.
+  const rows = fs.readFileSync(path.join(ROOT, 'output', 'simulation_ledger_snapshot.jsonl'), 'utf8');
+  for (const line of rows.split('\n').filter(Boolean)) {
+    const row = JSON.parse(line);
+    if (row.Status !== 'Active') continue;
+    activeIds.add(String(row.POPID || '').trim());
+    for (const name of [row.Name, [row.First, row.Last].filter(Boolean).join(' ')]) {
+      const key = String(name || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      if (key) { activeNames.add(key); activeNames.add(key.replace(/\.+$/, '')); }
+    }
+  }
+  const added = [];
+  for (const r of cnc.resolveCitizens(cnc.checkText(body).verified)) {
+    const key = r.name.toLowerCase();
+    if (!body.includes(r.name) || excluded.has(key) || existing.has(key) || !activeNames.has(key)) continue;
+    if (!r.ambiguous && (!r.popid || !activeIds.has(r.popid))) continue;
+    intake.names.push({ name: r.name, role: 'mentioned', popid: r.popid,
+      ...(r.ambiguous ? { ambiguous: true } : {}), floor: true });
+    existing.add(key);
+    added.push(r.name);
+  }
+  log('intake floor: +' + added.length + ' printed citizens — ' + added.join(', '));
+  return intake;
+  } catch (e) {
+    log('intake floor skipped (non-fatal): ' + (e && e.message || e));
+    return intake;
+  }
+}
+
 function injectWeeklyPilotCredit(intake, draftText, pilots) {
   if (!intake || !Array.isArray(intake.names) || !Array.isArray(pilots)) return intake;
   const body = String(draftText || '');
@@ -3094,6 +3136,7 @@ async function runWrite(assign) {
     const draftBody = fs.readFileSync(draftPath, 'utf8');
     let intake = buildIntakeSidecar(draftBody, quotes,
       storylineTagFor(assignment && assignment.story, cycle));
+    intake = injectPrintedCitizens(intake, draftBody, byline);
     if (desk === 'undocked-digest') {
       try {
         const { loadNiaWeeklySlice } = require(path.join(__dirname, 'buildNiaSlice'));
@@ -3627,6 +3670,7 @@ module.exports = {
   loadLane,
   yesterdaysFilings,
   buildIntakeSidecar,
+  injectPrintedCitizens,
   injectWeeklyPilotCredit,
   writeCitizenArc,
   storylineLines,

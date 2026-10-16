@@ -12,7 +12,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { yesterdaysFilings, buildIntakeSidecar } = require('./cron-desk-run');
+const { yesterdaysFilings, buildIntakeSidecar, injectPrintedCitizens, injectWeeklyPilotCredit } = require('./cron-desk-run');
 
 const ROOT = path.resolve(__dirname, '..');
 const STAGED = path.join(ROOT, 'output', 'cron-compare', 'staged');
@@ -87,6 +87,64 @@ try {
   }
 } finally {
   for (const f of fixtures) { try { fs.unlinkSync(f); } catch (_) { /* already gone */ } }
+}
+
+// Synthetic, non-canon snapshot in memory only; exercise the real checker/resolver.
+const cncPath = require.resolve('./canon-name-check');
+const originalCnc = require.cache[cncPath];
+const originalRead = fs.readFileSync;
+const snapshot = path.join(ROOT, 'output', 'simulation_ledger_snapshot.jsonl');
+const archive = path.join(ROOT, 'output', 'citizen_archive_snapshot.jsonl');
+const synthetic = [
+  ['Testa Alpha', 'SYNTHETIC-A', 'Active'], ['Testb Beta', 'SYNTHETIC-B', 'Active'],
+  ['Testc Author', 'SYNTHETIC-C', 'Active'], ['Testd Shared', 'SYNTHETIC-D', 'Active'],
+  ['Testd Shared', 'SYNTHETIC-E', 'Active'], ['Teste Retired', 'SYNTHETIC-F', 'Retired'],
+  ['Testf Missing', 'SYNTHETIC-G', null], ['Testg Absent', 'SYNTHETIC-H', 'Active'],
+  ['Testh Window', 'SYNTHETIC-I', 'Active'], ['Testi Case', 'SYNTHETIC-J', 'Active']
+].map(([Name, POPID, Status]) => ({ Name, POPID, Status }));
+try {
+  fs.readFileSync = function(file, ...args) {
+    if (String(file) === snapshot) return synthetic.map(r => JSON.stringify(r)).join('\n');
+    if (String(file) === archive) return JSON.stringify({ Name: 'Testj Archived', POPID: 'SYNTHETIC-K', Status: 'Deceased' });
+    return originalRead.call(this, file, ...args);
+  };
+  delete require.cache[cncPath];
+  console.log('Test 4: printed citizen floor (synthetic snapshot)');
+  const body = 'Testa Alpha spoke. Testb Beta listened. Testc Author filed.\n## INTAKE\n';
+  const side = injectPrintedCitizens(buildIntakeSidecar(body, []), body, { name: 'Sgt. Testc Author' });
+  assert('empty NAMES gains exactly two mentioned citizens with ids',
+    side.names.length === 2 && side.names.every(n => n.role === 'mentioned' && n.floor === true) &&
+    side.names.map(n => n.popid).join(',') === 'SYNTHETIC-A,SYNTHETIC-B');
+  assert('title-stripped byline excluded', !side.names.some(n => n.name === 'Testc Author'));
+  const existing = { name: 'testa alpha', role: 'quoted-source', popid: 'SYNTHETIC-KEEP' };
+  const kept = { names: [existing] };
+  injectPrintedCitizens(kept, body, 'Sgt. Testc Author');
+  assert('case-insensitive existing role and id untouched', kept.names.length === 2 &&
+    kept.names[0] === existing && existing.role === 'quoted-source' && existing.popid === 'SYNTHETIC-KEEP' && !existing.floor);
+  assert('no INTAKE remains null', injectPrintedCitizens(buildIntakeSidecar('Testa Alpha spoke.', []), body, null) === null);
+  const malformed = {};
+  assert('missing names array unchanged', injectPrintedCitizens(malformed, body, null) === malformed);
+  injectWeeklyPilotCredit(side, body, [{ name: 'Testa Alpha', POPID: 'SYNTHETIC-A' }]);
+  assert('floor then pilot credit becomes subject', side.names[0].role === 'subject' && side.names[0].floor === true);
+  const ambiguous = injectPrintedCitizens({ names: [] }, 'Testd Shared spoke.', null).names[0];
+  assert('ambiguous name retains null id and marker', ambiguous && ambiguous.popid === null && ambiguous.ambiguous === true);
+  const filtered = injectPrintedCitizens({ names: [] },
+    'Teste Retired spoke. Testf Missing spoke. Testj Archived spoke.\n' +
+    '<!-- Testa Alpha -->\n```\nTestb Beta\n```\n## INTAKE\nNAMES: Testg Absent | mentioned', null);
+  assert('non-Active, archived, comments, code and INTAKE-only names excluded', filtered.names.length === 0);
+  const cnc = require('./canon-name-check');
+  assert('checker really verifies non-Active and archive names', cnc.checkText('Teste Retired spoke. Testj Archived spoke.').verified.length === 2);
+  // A line break inside the two-word window verifies, but is not the whole printed name.
+  assert('checker window can normalize non-contiguous whitespace', cnc.checkText('Testh  Window Extra spoke.').verified.includes('Testh Window'));
+  assert('whole-name includes recheck rejects normalized window', injectPrintedCitizens({ names: [] }, 'Testh  Window Extra spoke.', null).names.length === 0);
+  assert('contiguous name inside three-word candidate survives', injectPrintedCitizens({ names: [] }, 'Testh Window Extra spoke.', null).names.length === 1);
+  assert('exact casing recheck rejects case-only checker match', injectPrintedCitizens({ names: [] }, 'Testi CASE spoke.', null).names.length === 0);
+  injectPrintedCitizens(kept, body, 'Sgt. Testc Author');
+  assert('repeat injection adds no duplicate', kept.names.length === 2);
+} finally {
+  fs.readFileSync = originalRead;
+  if (originalCnc) require.cache[cncPath] = originalCnc;
+  else delete require.cache[cncPath];
 }
 
 const leftovers = fs.existsSync(STAGED) ? fs.readdirSync(STAGED).filter(f => f.startsWith('zztest_')) : [];

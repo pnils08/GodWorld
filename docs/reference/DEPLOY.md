@@ -30,6 +30,8 @@ npx clasp deployments                     # read back: the id should now say @13
 
 Only a deployment listed as `@HEAD` picks up a bare push.
 
+**After a version cut, wait ~5 min before the fire.** The `/exec` URL keeps serving the previous version for a propagation window: C120 on 0908 ran @20 after @21 was cut, and C112 on 1004 (2026-10-16) ran @32 when fired ~30 s after @33 — a clean `ok`, the old code's output, no error. The fire's own readback must show the new code's effect; a fire inside the window is a wasted bench cycle, not a failed fix.
+
 ## From Cloud Shell (manual fallback)
 
 ```bash

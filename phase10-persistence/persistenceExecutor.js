@@ -187,9 +187,11 @@ function executePersistIntents_(ctx) {
  * this environment. Without retry, a single hiccup during Phase 10 drops the
  * ENTIRE cycle's writes — C100 lost 0/25 intents on one doc timeout. Backoff:
  * 0 / 2 / 5 / 12s. Only transient classes retry; real errors (bad range, type
- * errors) rethrow immediately so genuine bugs still surface. Safe to retry: a
- * thrown setValues writes nothing (atomic all-or-throw); setValue is idempotent
- * (same cell, same value); clearContent+rewrite is idempotent. fn() runs
+ * errors) rethrow immediately so genuine bugs still surface. Safe to retry ONLY
+ * when fn() writes a fixed address: a timed-out setValues can still have landed
+ * (lost acknowledgement), so a re-attempt must rewrite the same cells, never
+ * re-read the tail (engine.285); setValue is idempotent (same cell, same value);
+ * clearContent+rewrite is idempotent. fn() runs
  * synchronously, so loop-var closures resolve to the current iteration.
  */
 function persistWithRetry_(fn, label) {

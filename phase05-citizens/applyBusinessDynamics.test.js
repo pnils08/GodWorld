@@ -174,6 +174,12 @@ console.log('Task 6 — decline sheds; Task 7 — closure winds down, then archi
   const c6 = mkCtx(blK, arK, [], [{ id: 'BIZ-00200', closedCycle: 110 }]);
   res = mod.archiveClosedBusinesses_(c6);
   assert('mover (engine.285): the next run finds BIZ-00200 already archived — removes the source row, archive keeps ONE copy', res.archived === 1 && res.resumed === 1 && arK.length === 2 && blK.map(r => r[0]).join() === 'BIZ_ID,BIZ-00001,BIZ-00300', JSON.stringify([res, arK.map(r => r[0]), blK.map(r => r[0])]));
+  // a BIZ_ID reissued after a lost high-water mark (codex 2026-10-16): the archive's BIZ-00200 is a
+  // different business — the closing one still gets its own copy before it leaves the ledger
+  const arR = [mod.BIZ_ARCHIVE_HEADERS.slice(), ['BIZ-00200', 'Old Tenant', 'Food', 'Fruitvale', 0, 1, 1, -10, '', 'closed', 90, 'engine.96:BIZ-00200:C90', 88]];
+  const blR = BLX();
+  res = mod.archiveClosedBusinesses_(mkCtx(blR, arR, [], [{ id: 'BIZ-00200', closedCycle: 110 }]));
+  assert('mover (engine.285): same BIZ_ID, different business on the archive → copied, then removed (never removal-only)', res.archived === 1 && !res.resumed && arR.length === 3 && arR[2][1] === 'Corner Shop' && blR.length === 3, JSON.stringify([res, arR.map(r => r[1])]));
   // removals run bottom-up by ROW, not by BIZ_ID: a ledger out of id order loses only the closed rows
   const blO = [BL_H.map(h => h.trim()), ['BIZ-00400', 'Closed Hi', 'Retail', 'T', 0, 1, 1, -10, ''], ['BIZ-00001', 'Keep', 'Retail', 'T', 5, 1, 1, 1, ''], ['BIZ-00200', 'Closed Lo', 'Retail', 'T', 0, 1, 1, -10, ''], ['BIZ-00300', 'Also Keep', 'Food', 'T', 2, 1, 1, 1, '']];
   const c7 = mkCtx(blO, [mod.BIZ_ARCHIVE_HEADERS.slice()], [], [{ id: 'BIZ-00400', closedCycle: 110 }, { id: 'BIZ-00200', closedCycle: 110 }]);

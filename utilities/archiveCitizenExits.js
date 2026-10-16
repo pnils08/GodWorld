@@ -198,27 +198,38 @@ function archiveCitizenExits_(ctx) {
   // engine.285 (3/6): a fire killed between the copy and the removal left the snapshot on
   // the archive and the row on Simulation_Ledger. The old key (POPID, THIS fire's cycle,
   // reason) stalled the row on a same-cycle re-fire and took a second snapshot on the next
-  // cycle. The snapshot is this exit's when it is the latest for (POPID, reason) and the
-  // citizen has not returned since (ReturnedCycle blank or older than its ExitCycle) — then
-  // the row is removed and nothing is copied. A citizen restored after that snapshot and
-  // gone again is a new exit and gets a new snapshot. Citizen_Archive is never edited.
-  var latestExit = {};
+  // cycle. Now: when the archive already holds a (POPID, reason) snapshot whose ledger
+  // columns equal the row being removed (LastUpdated aside), a second copy would add
+  // nothing — the row is removed and nothing is copied. Any difference (an older exit, a
+  // restore, a row the engine touched since) takes a fresh snapshot: never a removal
+  // without the row's current state on the archive. Citizen_Archive is never edited.
+  // (codex review 2026-10-16: a ReturnedCycle chronology rule lost a fresh exit when the
+  // return stamp was stale or missing; payload equality cannot.)
   var av = ar.getDataRange().getValues();
+  var snapsBy = {};
   for (var e = 1; e < av.length; e++) {
     var ek = String(av[e][iPopA] || '').trim().toUpperCase() + '|' + String(av[e][iReasonA]);
-    var ex = Number(av[e][iExitA]) || 0;
-    if (!(ek in latestExit) || ex > latestExit[ek]) latestExit[ek] = ex;
+    (snapsBy[ek] = snapsBy[ek] || []).push(e);
   }
-  var iRetSL = header.indexOf('ReturnedCycle');
+  var iUpdSL = header.indexOf('LastUpdated');
+  var cellKey = function(x) { return Object.prototype.toString.call(x) === '[object Date]' ? 'D' + x.getTime() : String(x === null || x === undefined ? '' : x); };
+  var sameSnapshot = function(slRow, arRow) {
+    for (var col = 0; col < header.length; col++) {
+      if (col === iUpdSL) continue;
+      if (cellKey(slRow[col]) !== cellKey(arRow[col])) return false;
+    }
+    return true;
+  };
   var moves = [], verified = [];
   for (var k = 0; k < cand.rows.length; k++) {
     var c = cand.rows[k];
-    var snapExit = latestExit[c.popId + '|' + c.reason];
-    var returned = iRetSL >= 0 ? (Number(body[c.q][iRetSL]) || 0) : 0;
-    if (snapExit !== undefined && snapExit > 0 && returned < snapExit) {
+    var snaps = snapsBy[c.popId + '|' + c.reason] || [];
+    var held = -1;
+    for (var sn = 0; sn < snaps.length && held < 0; sn++) if (sameSnapshot(body[c.q], av[snaps[sn]])) held = snaps[sn];
+    if (held >= 0) {
       verified.push(c);
       out.resumed = (out.resumed || 0) + 1;
-      Logger.log('archiveCitizenExits_ engine.285: ' + c.popId + ' already snapshotted (C' + snapExit + ', ' + c.reason + ') — removing the source row only');
+      Logger.log('archiveCitizenExits_ engine.285: ' + c.popId + ' already on Citizen_Archive as an identical snapshot (C' + av[held][iExitA] + ', ' + c.reason + ') — removing the source row only');
       continue;
     }
     moves.push(c);

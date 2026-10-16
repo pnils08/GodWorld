@@ -149,6 +149,34 @@ test('engine.285: a citizen restored after the snapshot and traded again is a ne
   assert.deepStrictEqual(ar._rows.map((r) => r[HR.length + 1]), [100, 108]);
   assert.deepStrictEqual(sl._rows.map((r) => r[0]), ['POP-00001']);
 });
+test('engine.285 (codex probe): a stale return stamp (restored "at C99" from a C100 snapshot) never costs the fresh exit — the changed row gets its own snapshot', () => {
+  const HR = H.concat(['ReturnedCycle']);
+  const ar = makeSheet(HR.concat(META), []);
+  ar._rows.push(M.citizenArchiveRow_(HR, ['POP-00040', 'Gone', 'One', 'Traded', 3, 10, ''], 'traded-away', 100, 2041));
+  const sl = makeSheet(HR, [['POP-00040', 'Gone', 'One', 'Traded', 3, 99, 99]]);   // lived on after the return: NetWorth 10 → 99
+  const out = M.archiveCitizenExits_(ctxWith(1, { Simulation_Ledger: sl, Citizen_Archive: ar }, 1300));
+  assert.deepStrictEqual([out.archived, out.resumed || 0, ar._rows.length, sl._rows.length], [1, 0, 2, 0]);
+  assert.strictEqual(ar._rows[1][5], 99, 'the current state is on the archive');
+});
+test('engine.285 (codex probe): restored and gone again in the SAME cycle, then a kill before removal — the retry removes, archive holds 2 (not 3)', () => {
+  const HR = H.concat(['ReturnedCycle']);
+  const ar = makeSheet(HR.concat(META), []);
+  ar._rows.push(M.citizenArchiveRow_(HR, ['POP-00040', 'Gone', 'One', 'Traded', 3, 10, ''], 'traded-away', 108, 2041));
+  const row = ['POP-00040', 'Gone', 'One', 'Traded', 3, 12, 108];
+  M.archiveCitizenExits_(ctxWith(1, { Simulation_Ledger: makeSheet(HR, [row]), Citizen_Archive: ar }, 1300));
+  assert.strictEqual(ar._rows.length, 2, 'first pass: the new exit snapshotted');
+  const sl2 = makeSheet(HR, [row]);   // the kill: copy landed, removal did not
+  const out = M.archiveCitizenExits_(ctxWith(1, { Simulation_Ledger: sl2, Citizen_Archive: ar }, 1300));
+  assert.deepStrictEqual([out.archived, out.resumed, ar._rows.length, sl2._rows.length], [1, 1, 2, 0]);
+});
+test('engine.285: a row that differs from its snapshot only in LastUpdated is the same snapshot', () => {
+  const HU = H.concat(['LastUpdated']);
+  const ar = makeSheet(HU.concat(META), []);
+  ar._rows.push(M.citizenArchiveRow_(HU, ['POP-00040', 'Gone', 'One', 'Traded', 3, 10, 'C108'], 'traded-away', 108, 2041));
+  const sl = makeSheet(HU, [['POP-00040', 'Gone', 'One', 'Traded', 3, 10, 'C109']]);
+  const out = M.archiveCitizenExits_(ctxWith(1, { Simulation_Ledger: sl, Citizen_Archive: ar }, 1300));
+  assert.deepStrictEqual([out.archived, out.resumed, ar._rows.length], [1, 1, 1]);
+});
 test('read-back mismatch keeps the source row; the verified rows still move', () => {
   const sl = makeSheet(H, body()), ar = makeSheet(H.concat(META), [], { corruptReadBack: true });
   const out = M.archiveCitizenExits_(ctxWith(1, { Simulation_Ledger: sl, Citizen_Archive: ar }, 1300));

@@ -785,11 +785,14 @@ function archiveClosedBusinesses_(ctx) {
   var ah = av[0] || [];
   var aId = -1; for (var ac = 0; ac < ah.length; ac++) if (String(ah[ac]).trim() === 'BIZ_ID') aId = ac;
   if (aId < 0) { Logger.log('archiveClosedBusinesses_: Business_Archive has no BIZ_ID header'); return out; }
-  // engine.285 (2/6): BIZ_IDs are never reissued, so a BIZ_ID already on the archive is
-  // this business's copy — a fire killed between the copy and the removal left it there.
-  // The next fire removes the source row instead of copying it a second time.
+  // engine.285 (2/6): a fire killed between the copy and the removal left this business's
+  // copy on the archive. An archive row with the same BIZ_ID, Name, Sector and Neighborhood
+  // is that copy — the next fire removes the source row instead of copying it again. The
+  // name check is the guard codex asked for: a BIZ_ID reissued after a lost high-water mark
+  // is a different business and still gets its own copy (2026-10-16 review).
+  var bizKey = function(row) { var k = []; for (var kc = 0; kc < 4; kc++) k.push(String(row[kc] === undefined ? '' : row[kc]).trim()); return k.join('|'); };
   var archived = {};
-  for (var aq = 1; aq < av.length; aq++) { var ak = String(av[aq][aId] || '').trim(); if (ak) archived[ak] = true; }
+  for (var aq = 1; aq < av.length; aq++) if (String(av[aq][aId] || '').trim()) archived[bizKey(av[aq])] = true;
   // bottom-up by ROW (was by BIZ_ID, which is bottom-up only while the ledger stays in id
   // order) so a removal never shifts a row still to be examined
   var byId = {};
@@ -805,7 +808,7 @@ function archiveClosedBusinesses_(ctx) {
     if (stated > 0 || tracked[id]) { out.waiting++; continue; }
     var meta = null;
     for (var m = 0; m < closures.length; m++) if (closures[m].id === id) meta = closures[m];
-    if (archived[id]) {
+    if (archived[bizKey(v[q2])]) {
       Logger.log('archiveClosedBusinesses_ engine.285: ' + id + ' already on Business_Archive (copy landed, removal did not) — removing the source row only');
       out.resumed = (out.resumed || 0) + 1;
     } else {
@@ -816,7 +819,7 @@ function archiveClosedBusinesses_(ctx) {
       ar.getRange(target, 1, 1, rowOut.length).setValues([rowOut]);
       var back = ar.getRange(target, 1, 1, rowOut.length).getValues()[0];
       if (String(back[aId] || '').trim() !== id) { Logger.log('archiveClosedBusinesses_: read-back mismatch for ' + id + ' — source row kept'); out.skipped++; continue; }
-      archived[id] = true;
+      archived[bizKey(rowOut)] = true;
     }
     bl.deleteRow(q2 + 1);
     out.archived++;

@@ -219,7 +219,7 @@ function processArticleIntake_(ss, cycle, cal) {
   if (!intakeSheet) return 0;
 
   var data = intakeSheet.getDataRange().getValues();
-  var drafts = [];
+  var drafts = [], draftIdx = [];
 
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
@@ -236,9 +236,7 @@ function processArticleIntake_(ss, cycle, cal) {
       articleText: row[4] || '',
       culturalMentions: row[5] || ''
     });
-
-    // Mark processed
-    intakeSheet.getRange(i + 1, 7).setValue('processed');
+    draftIdx.push(i);
   }
 
   if (drafts.length === 0) return 0;
@@ -259,6 +257,10 @@ function processArticleIntake_(ss, cycle, cal) {
       }
     }
   }
+
+  // engine.285 (4/6): marked processed AFTER the mentions land (was before — a kill in
+  // between lost them); a kill now can repeat a mention, never drop one.
+  markRowRuns_(intakeSheet, draftIdx, 7, 'processed');
 
   return drafts.length;
 }
@@ -282,7 +284,7 @@ function processCitizenUsageIntake_(ss, cycle, cal) {
   if (!intakeSheet) return 0;
 
   var data = intakeSheet.getDataRange().getValues();
-  var usages = [];
+  var usages = [], usageIdx = [];
 
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
@@ -297,8 +299,7 @@ function processCitizenUsageIntake_(ss, cycle, cal) {
       context: row[2] || '',
       reporter: row[3] || ''
     });
-
-    intakeSheet.getRange(i + 1, 5).setValue('processed');
+    usageIdx.push(i);
   }
 
   if (usages.length === 0) return 0;
@@ -334,6 +335,9 @@ function processCitizenUsageIntake_(ss, cycle, cal) {
 
   var startRow = usageSheet.getLastRow() + 1;
   usageSheet.getRange(startRow, 1, rows.length, 12).setValues(rows);
+  // engine.285 (4/6): marked processed AFTER the usage rows land (was before — a kill in
+  // between lost them); a kill now can repeat a usage, never drop one.
+  markRowRuns_(intakeSheet, usageIdx, 5, 'processed');
 
   return usages.length;
 }
@@ -490,19 +494,12 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
   // S302 data-loss guard: only mark Routed when the row actually landed —
   // the old unconditional mark discarded every new-citizen mention while
   // the Intake tab didn't exist (research §12.7 / engine.51 discovery).
-  var landedIdx = markOnly.slice();
-  if (advSrc.length) { advBuf.flush(); results.existingCitizens += advSrc.length; landedIdx = landedIdx.concat(advSrc); }
-  if (newSrc.length) { newBuf.flush(); results.newCitizens += newSrc.length; landedIdx = landedIdx.concat(newSrc); }
-  landedIdx.sort(function(a, b) { return a - b; });
-  for (var m = 0; m < landedIdx.length; ) {
-    var run = 1;
-    while (m + run < landedIdx.length && landedIdx[m + run] === landedIdx[m] + run) run++;
-    var marks = [];
-    for (var mk = 0; mk < run; mk++) marks.push(['Y']);
-    usageSheet.getRange(landedIdx[m] + 1, routedCol + 1, run, 1).setValues(marks);
-    m += run;
-  }
-  results.routed = landedIdx.length;
+  // Each target's rows are marked as soon as ITS block lands — an Intake failure never
+  // leaves the Advancement rows that already landed unmarked (codex 2026-10-16).
+  var markRouted = function(idx) { markRowRuns_(usageSheet, idx, routedCol + 1, 'Y'); results.routed += idx.length; };
+  if (advSrc.length) { advBuf.flush(); results.existingCitizens += advSrc.length; }
+  markRouted(markOnly.concat(advSrc));
+  if (newSrc.length) { newBuf.flush(); results.newCitizens += newSrc.length; markRouted(newSrc); }
 
   Logger.log('routeCitizenUsageToIntake_: Routed ' + results.routed +
     ' citizens (new: ' + results.newCitizens + ', existing: ' + results.existingCitizens + ')');
@@ -1089,6 +1086,22 @@ function citizenExistsInLedger_(ledgerData, firstName, lastName) {
  * processIntake_ v3 derives everything else (salary, BirthYear, education,
  * tier); IntakeStatus left blank so the processor picks the row up.
  */
+/**
+ * engine.285: write `value` into column `col` (1-based) of the given data rows
+ * (0-based data indices, sheet row = index + 1), one setValues per contiguous run.
+ */
+function markRowRuns_(sheet, idx, col, value) {
+  idx = idx.slice().sort(function(a, b) { return a - b; });
+  for (var m = 0; m < idx.length; ) {
+    var run = 1;
+    while (m + run < idx.length && idx[m + run] === idx[m] + run) run++;
+    var marks = [];
+    for (var mk = 0; mk < run; mk++) marks.push([value]);
+    sheet.getRange(idx[m] + 1, col, run, 1).setValues(marks);
+    m += run;
+  }
+}
+
 function appendLeanIntakeRow_(intakeSheet, f) {
   intakeSheet.appendRow([
     f.first || '', f.last || '', f.age || '', f.neighborhood || '',

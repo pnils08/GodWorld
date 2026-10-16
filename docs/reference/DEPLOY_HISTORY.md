@@ -148,6 +148,13 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 4i (`aa0bf7e7` archiveLifeHistory.js over stage 4h) — engine.285 (1/6) LifeHistory trim reorder (2026-10-16 ~08:56 CDT, engine-sheet; builder lifted auto mode for the push)
+- **Why:** `runArchive_` appended the old rows to LifeHistory_Archive, cleared every LifeHistory_Log data row, then wrote the kept rows back. A fire killed between the clear and the write (the 6-minute cap) lost all retained history — only the old rows had been copied. Live log ~24.9k rows > the 12k trigger, so the trim runs on every fire. Now: kept rows written over the top first, then the leftover tail cleared; a kill anywhere leaves duplicate lines at worst. Codex `docs/research/2026-10-08-codex-engine95-design.md` §7, hazard 1 of 6.
+- **Bench proof:** SANDBOX 1004 @35, C112 on live C111: 24,914 + 2,558 C112 lines = 26,595 on the log + 877 archived; 0 lost, 0 doubled, 0 rows ≤ C100 left on the log; ok 251 s, persist 636/0. Unit T4 (kill after the first log write): old order loses 8,400 of 14,000 rows, new 0. npm 290/290.
+- **Push:** `output/engine285/push-prod.sh --go` → @140 (the listing lagged one read); pull-back 168 = `output/engine-sheet/stage4i-e285.sha256`, differs from 4h in exactly that file.
+- **Expectation at C112 (Sun 2026-10-18):** Phase11-MaintainLifeHistoryLog ok; LifeHistory_Log holds C101–C112 only (0 rows ≤ C100); LifeHistory_Archive's last rows are C100, grown by the C100 count (~877 on the bench).
+- **Rollback:** push `output/engine293/prod-stage` (= stage 4h) + version cut.
+
 ### PROD stage 4h (`bdcfb5c4` checkForPromotions.js over stage 4g) — engine.293 (1) promotion-door pay (2026-10-16 ~03:46 CDT, engine-sheet, overnight)
 - **Why:** 18 of the 19 Active citizens at exactly $60,000 were born at the promotion door (`checkForPromotions_`: 16 migration-wave arrivals C107–C111, 2 emergences), which priced by `lookupIncome_` alone (exact catalog hit → median, else `FALLBACK_INCOME_` 60000). The door now runs the intake's job rule: stage, then `jobReferencePay_(occ, '', stage, seed, {years, tier: 4})`, then `lookupIncome_`. Seeded, no rng. Titles no field places (QA tester, Youth mentor) keep 60000 + one Logger line.
 - **Bench proof:** SANDBOX 1004, two C112 fires on one resynced live-C111 base: @33 (= 4g) ok 178 s, persist 635/0; @34 (this stage, fired 6 min after the cut) ok 149 s, persist 635/0, EE 4 → 4. Diff: only the 6 wave arrivals' Income (Mechanic 80,000 → 78,700 / 64,600, Server 50,000 → 42,200, Dishwasher 44,000 → 42,500, Transit operator 60,000 → 77,900 / 74,900) and NetWorth by $1–9; LifeHistory_Log, bonds, Business_Ledger, World_Config, Engine_Errors, Generic_Citizens identical. The 4 BART crew intake mints unchanged (intake door).

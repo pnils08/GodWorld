@@ -58,19 +58,20 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 
 ## Current state
 
-**Current bench pointer (2026-10-16 morning, engine.285 LifeHistory trim):** SANDBOX 1004 web app **@35 = PROD 4h + `utilities/archiveLifeHistory.js` at `aa0bf7e7`** = the stage 4i PROD candidate (stage `output/engine285/prod-stage`, push `output/engine285/push-prod.sh`). Resync from live C111, guard 0, `clearfire cycle=112`, fired 5 min after the cut: ok 251 s, persist 636/0. LifeHistory conservation (`benchLH.js` before/after): log 24,914 + C112's 2,558 = log 26,595 + 877 newly archived — **0 lost, 0 doubled**, 0 rows ≤ cutoff C100 left on the log, archive's old 10,147 rows in place. Trim phase 44 s vs 23 s on the @33 fire, but untouched HouseholdFormation also 20 → 36 s (slow bench run; new order does strictly less sheet work). Bench is at C112 — resync before the next fire. (@34 = stage 4h, @33 = stage 4g, same night.)
+**Current bench pointer (2026-10-16 morning, engine.285 LifeHistory trim):** SANDBOX 1004 web app **@35 = PROD 4h + `utilities/archiveLifeHistory.js` at `aa0bf7e7`** = stage 4i, **LIVE PROD @140** (stage `output/engine285/prod-stage`, push `output/engine285/push-prod.sh`). Resync from live C111, guard 0, `clearfire cycle=112`, fired 5 min after the cut: ok 251 s, persist 636/0. LifeHistory conservation (`benchLH.js` before/after): log 24,914 + C112's 2,558 = log 26,595 + 877 newly archived — **0 lost, 0 doubled**, 0 rows ≤ cutoff C100 left on the log, archive's old 10,147 rows in place. Trim phase 44 s vs 23 s on the @33 fire, but untouched HouseholdFormation also 20 → 36 s (slow bench run; new order does strictly less sheet work). Bench is at C112 — resync before the next fire. (@34 = stage 4h, @33 = stage 4g, same night.)
 
 **This file is protocol + CURRENT pointers only.** Per-wave proving narrative and bench-write logs go to the wave's own plan doc (builder rule 2026-08-30) or to [[DEPLOY_HISTORY]] — a session that finds itself writing a paragraph here is writing in the wrong file.
 
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Live:** PROD engine files = **stage 4h** = stage 4g + `checkForPromotions.js` at `bdcfb5c4` (engine.293 (1): migration-wave and emergence arrivals priced by the job like the intake) — **PROD web app @139**, pushed 2026-10-16 ~03:46 CDT by engine-sheet (`output/engine293/push-prod.sh --go`), pull-back 168 = `output/engine-sheet/stage4h-e293.sha256`, differs from 4g in exactly that file. Stage 4g = 4f + `generateCitizensEvents.js` + `loadEventContentLedger.js` at `71637c7a` (@138, `stage4g-e291fix.sha256`). Rollback: `output/engine291/prod-stage-fix` (= 4g) push + version cut.
+**Live:** PROD engine files = **stage 4i** = stage 4h + `utilities/archiveLifeHistory.js` at `aa0bf7e7` (engine.285 1/6: the LifeHistory trim writes the kept rows first, clears the tail after — a fire killed mid-trim can no longer lose the retained log) — **PROD web app @140**, pushed 2026-10-16 ~08:56 CDT by engine-sheet (`output/engine285/push-prod.sh --go`), pull-back 168 = `output/engine-sheet/stage4i-e285.sha256`, differs from 4h in exactly that file. Stage 4h = 4g + `checkForPromotions.js` at `bdcfb5c4` (@139, `stage4h-e293.sha256`). Rollback: `output/engine293/prod-stage` (= 4h) push + version cut.
 
 **Recent PROD bumps** (last 5 — older → [[DEPLOY_HISTORY]] §PROD deploy log):
 
 | PROD | Date | Wave | Plan |
 |---|---|---|---|
+| @140 | 2026-10-16 | engine.285 (1/6) the LifeHistory trim writes kept rows first, clears the tail after — `archiveLifeHistory.js` over stage 4h (stage 4i) | ROLLOUT engine.285; `docs/research/2026-10-08-codex-engine95-design.md` §7 |
 | @139 | 2026-10-16 | engine.293 (1) the promotion door prices arrivals by the job — `checkForPromotions.js` over stage 4g (stage 4h) | ROLLOUT engine.293; [[../plans/2026-08-10-economy-native-rebuild]] §Read 2026-10-16 |
 | @138 | 2026-10-16 | engine.291 fixes + engine.294 — `$LEADER` self-exclusion, a/an before `$PILOTROLE`, no raw-token fragment (2 files over stage 4f; stage 4g) | ROLLOUT engine.291, engine.294 |
 | @137 | 2026-10-16 | engine.291 the city names who is flying UNDOCKED — 2 files over stage 4e (stage 4f) | ROLLOUT engine.291; [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]] §Move 4 |

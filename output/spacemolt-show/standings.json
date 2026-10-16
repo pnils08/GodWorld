@@ -1,22 +1,35 @@
 {
   "v": "UNDOCKED-STANDINGS/1",
-  "computedAt": "2026-10-14T01:40:22.758Z",
+  "computedAt": "2026-10-16T05:37:42.353Z",
   "rows": [
     {
       "Rank": 1,
+      "POPID": "POP-00597",
+      "Holder": "Eric Taveras",
+      "Episodes": 2,
+      "CreditsTotal": 1170,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 3,
+      "LastAiredCycle": 112,
+      "CyclesLed": 1,
+      "CurrentStreak": 1
+    },
+    {
+      "Rank": 2,
       "POPID": "POP-00143",
       "Holder": "Clarissa Dane",
       "Episodes": 9,
-      "CreditsTotal": 303,
+      "CreditsTotal": 317,
       "CombatTotal": 0,
       "MishapTotal": 0,
       "BestMagnitude": 3,
       "LastAiredCycle": 107,
-      "CyclesLed": 8,
-      "CurrentStreak": 8
+      "CyclesLed": 7,
+      "CurrentStreak": 0
     },
     {
-      "Rank": 2,
+      "Rank": 3,
       "POPID": "POP-00688",
       "Holder": "Merkin Jumper",
       "Episodes": 7,
@@ -29,7 +42,7 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 3,
+      "Rank": 4,
       "POPID": "POP-00121",
       "Holder": "Otis Redd",
       "Episodes": 2,
@@ -42,10 +55,10 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 4,
+      "Rank": 5,
       "POPID": "POP-01053",
       "Holder": "Rosario Medina",
-      "Episodes": 1,
+      "Episodes": 2,
       "CreditsTotal": 110,
       "CombatTotal": 0,
       "MishapTotal": 0,
@@ -55,7 +68,7 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 5,
+      "Rank": 6,
       "POPID": "POP-00300",
       "Holder": "Belle Lopez",
       "Episodes": 3,
@@ -68,7 +81,7 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 6,
+      "Rank": 7,
       "POPID": "POP-00190",
       "Holder": "Jackson Sift",
       "Episodes": 2,
@@ -81,7 +94,7 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 7,
+      "Rank": 8,
       "POPID": "POP-00141",
       "Holder": "Priya Narang",
       "Episodes": 2,
@@ -94,7 +107,7 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 8,
+      "Rank": 9,
       "POPID": "POP-00731",
       "Holder": "Leanne Wu",
       "Episodes": 2,
@@ -107,7 +120,7 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 9,
+      "Rank": 10,
       "POPID": "POP-00770",
       "Holder": "Kato Rivers",
       "Episodes": 3,
@@ -120,7 +133,7 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 10,
+      "Rank": 11,
       "POPID": "POP-00287",
       "Holder": "Simone Adesanya",
       "Episodes": 2,
@@ -133,7 +146,7 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 11,
+      "Rank": 12,
       "POPID": "POP-00495",
       "Holder": "Rosalind Young",
       "Episodes": 2,
@@ -146,7 +159,7 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 12,
+      "Rank": 13,
       "POPID": "POP-00235",
       "Holder": "Aaliyah Brennan",
       "Episodes": 2,
@@ -159,7 +172,7 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 13,
+      "Rank": 14,
       "POPID": "POP-00663",
       "Holder": "Soo Loo",
       "Episodes": 3,
@@ -172,7 +185,7 @@
       "CurrentStreak": 0
     },
     {
-      "Rank": 14,
+      "Rank": 15,
       "POPID": "POP-00031",
       "Holder": "Martin Richards",
       "Episodes": 2,
@@ -181,19 +194,6 @@
       "MishapTotal": 0,
       "BestMagnitude": 2,
       "LastAiredCycle": 108,
-      "CyclesLed": 0,
-      "CurrentStreak": 0
-    },
-    {
-      "Rank": 15,
-      "POPID": "POP-00597",
-      "Holder": "Eric Taveras",
-      "Episodes": 1,
-      "CreditsTotal": 0,
-      "CombatTotal": 0,
-      "MishapTotal": 0,
-      "BestMagnitude": 3,
-      "LastAiredCycle": 112,
       "CyclesLed": 0,
       "CurrentStreak": 0
     },

@@ -3,7 +3,7 @@
   "show": "UNDOCKED",
   "episode_id": "undocked-pop00663-2026-09-21T01-34-00",
   "popid": "POP-00663",
-  "holder": null,
+  "holder": "Soo Loo",
   "session": "undocked-pop00663",
   "window": {
     "startedAt": "2026-09-21T01:34:00.112Z",
@@ -42,7 +42,9 @@
           "n": 1
         }
       ],
-      "value": 1
+      "value": 1,
+      "rescoredAt": "2026-10-16T05:36:44.729Z",
+      "was": 1
     },
     "systems_visited": {
       "type": "FACT",

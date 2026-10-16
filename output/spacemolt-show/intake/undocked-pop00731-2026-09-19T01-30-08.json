@@ -9,8 +9,8 @@
   "EpisodeId": "undocked-pop00731-2026-09-19T01-30-08",
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00731-2026-09-19T01-30-08.json",
-  "Holder": "",
-  "CreditsDelta": null,
+  "Holder": "Leanne Wu",
+  "CreditsDelta": 0,
   "Magnitude": 2,
   "Flags": [
     "credits_delta_windowed"
@@ -24,9 +24,9 @@
     "Cycle": 107,
     "EventType": "undocked-episode",
     "POPID": "POP-00731",
-    "Holder": "",
+    "Holder": "Leanne Wu",
     "EpisodeId": "undocked-pop00731-Y3C3-e2",
-    "CreditsDelta": null,
+    "CreditsDelta": 0,
     "Systems": [],
     "CombatEvents": 0,
     "MishapCount": 0,

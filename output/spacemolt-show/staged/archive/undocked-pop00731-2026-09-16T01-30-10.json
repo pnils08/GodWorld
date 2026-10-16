@@ -3,7 +3,7 @@
   "show": "UNDOCKED",
   "episode_id": "undocked-pop00731-2026-09-16T01-30-10",
   "popid": "POP-00731",
-  "holder": null,
+  "holder": "Leanne Wu",
   "session": "undocked-pop00731",
   "window": {
     "startedAt": "2026-09-16T01:30:10.990Z",
@@ -47,7 +47,9 @@
           "n": 1
         }
       ],
-      "value": 4
+      "value": 4,
+      "rescoredAt": "2026-10-16T05:36:44.743Z",
+      "was": 4
     },
     "systems_visited": {
       "type": "FACT",

@@ -9,7 +9,7 @@
       "POPID": "POP-00770",
       "Holder": "Kato Rivers",
       "EpisodeId": "undocked-pop00770-Y3C6",
-      "CreditsDelta": null,
+      "CreditsDelta": 0,
       "Systems": [
         "alpha_centauri"
       ],
@@ -28,7 +28,7 @@
       "POPID": "POP-00235",
       "Holder": "Aaliyah Brennan",
       "EpisodeId": "undocked-pop00235-Y3C6",
-      "CreditsDelta": null,
+      "CreditsDelta": 0,
       "Systems": [
         "Sol",
         "alpha_centauri"
@@ -65,7 +65,7 @@
       "POPID": "POP-00770",
       "Holder": "Kato Rivers",
       "EpisodeId": "undocked-pop00770-Y3C6-e2",
-      "CreditsDelta": null,
+      "CreditsDelta": 0,
       "Systems": [
         "Sol",
         "sol"
@@ -102,7 +102,7 @@
       "POPID": "POP-00287",
       "Holder": "Simone Adesanya",
       "EpisodeId": "undocked-pop00287-Y3C6-e2",
-      "CreditsDelta": null,
+      "CreditsDelta": 0,
       "Systems": [],
       "CombatEvents": 0,
       "MishapCount": 0,

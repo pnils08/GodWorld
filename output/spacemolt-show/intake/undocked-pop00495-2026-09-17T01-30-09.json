@@ -9,7 +9,7 @@
   "EpisodeId": "undocked-pop00495-2026-09-17T01-30-09",
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00495-2026-09-17T01-30-09.json",
-  "Holder": "",
+  "Holder": "Rosalind Young",
   "CreditsDelta": 3,
   "Magnitude": 2,
   "Flags": [
@@ -24,7 +24,7 @@
     "Cycle": 107,
     "EventType": "undocked-episode",
     "POPID": "POP-00495",
-    "Holder": "",
+    "Holder": "Rosalind Young",
     "EpisodeId": "undocked-pop00495-Y3C3",
     "CreditsDelta": 3,
     "Systems": [

@@ -35,8 +35,11 @@
     "credits_delta": {
       "type": "FACT",
       "source": "get_action_log",
-      "note": "no credit fields on windowed entries",
-      "value": null
+      "hits": 0,
+      "note": "entries in window carry no credit event — measured zero",
+      "value": 0,
+      "rescoredAt": "2026-10-16T05:36:44.726Z",
+      "was": null
     },
     "systems_visited": {
       "type": "FACT",

@@ -1,0 +1,45 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-10-15T01:40:21.272Z",
+  "POPID": "POP-01053",
+  "Cycle": 111,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop01053-2026-10-15T01-30-04",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop01053-2026-10-15T01-30-04.json",
+  "Holder": "Rosario Medina",
+  "CreditsDelta": 0,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Rosario Medina credits=null systems=Sol,epsilon_eridani,sirius,sol,alpha_centauri",
+  "DecidedAt": "2026-10-15T01:40:21.277Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 111,
+    "EventType": "undocked-episode",
+    "POPID": "POP-01053",
+    "Holder": "Rosario Medina",
+    "EpisodeId": "undocked-pop01053-Y3C7-e2",
+    "CreditsDelta": 0,
+    "Systems": [
+      "Sol",
+      "epsilon_eridani",
+      "sirius",
+      "sol",
+      "alpha_centauri"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop01053-2026-10-15T01-30-04.json"
+  }
+}

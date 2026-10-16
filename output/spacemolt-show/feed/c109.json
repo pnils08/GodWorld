@@ -7,9 +7,9 @@
       "Cycle": 109,
       "EventType": "undocked-episode",
       "POPID": "POP-00121",
-      "Holder": "",
+      "Holder": "Otis Redd",
       "EpisodeId": "undocked-pop00121-Y3C5",
-      "CreditsDelta": null,
+      "CreditsDelta": 0,
       "Systems": [
         "Sol"
       ],
@@ -26,9 +26,9 @@
       "Cycle": 109,
       "EventType": "undocked-episode",
       "POPID": "POP-00190",
-      "Holder": "",
+      "Holder": "Jackson Sift",
       "EpisodeId": "undocked-pop00190-Y3C5",
-      "CreditsDelta": null,
+      "CreditsDelta": 0,
       "Systems": [],
       "CombatEvents": 0,
       "MishapCount": 0,
@@ -98,7 +98,7 @@
       "POPID": "POP-00141",
       "Holder": "Priya Narang",
       "EpisodeId": "undocked-pop00141-Y3C5-e2",
-      "CreditsDelta": null,
+      "CreditsDelta": 0,
       "Systems": [
         "sol",
         "sirius"

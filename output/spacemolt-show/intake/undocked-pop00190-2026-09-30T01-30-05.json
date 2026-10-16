@@ -9,8 +9,8 @@
   "EpisodeId": "undocked-pop00190-2026-09-30T01-30-05",
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00190-2026-09-30T01-30-05.json",
-  "Holder": "",
-  "CreditsDelta": null,
+  "Holder": "Jackson Sift",
+  "CreditsDelta": 0,
   "Magnitude": 2,
   "Flags": [
     "credits_delta_windowed"
@@ -24,9 +24,9 @@
     "Cycle": 109,
     "EventType": "undocked-episode",
     "POPID": "POP-00190",
-    "Holder": "",
+    "Holder": "Jackson Sift",
     "EpisodeId": "undocked-pop00190-Y3C5",
-    "CreditsDelta": null,
+    "CreditsDelta": 0,
     "Systems": [],
     "CombatEvents": 0,
     "MishapCount": 0,

@@ -1,0 +1,294 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00597-2026-10-16T01-30-04",
+  "popid": "POP-00597",
+  "holder": "Eric Taveras",
+  "session": "undocked-pop00597",
+  "window": {
+    "startedAt": "2026-10-16T01:30:04.842Z",
+    "endedAt": "2026-10-16T01:40:11.811Z"
+  },
+  "runner": {
+    "turns": 40,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 9,
+    "estCostUsd": 0.0694,
+    "tokensIn": 489223,
+    "tokensOut": 3272,
+    "log": "output/spacemolt-show/episodes/undocked-pop00597-2026-10-16T01-30-04.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-16T01:40:16.489Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 4,
+      "basis": [
+        {
+          "id": 197439595,
+          "event_type": "trading.exchange_fill",
+          "n": 128
+        },
+        {
+          "id": 197437947,
+          "event_type": "trading.exchange_fill",
+          "n": 36
+        },
+        {
+          "id": 197437713,
+          "event_type": "trading.exchange_fill",
+          "n": 6
+        },
+        {
+          "id": 197440066,
+          "event_type": "mission.completed",
+          "n": 1000
+        }
+      ],
+      "value": 1170
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "sirius"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {
+          "nickel_ore": 1,
+          "titanium_ore": 3,
+          "iron_ore": 6
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 3,
+        "mission": 5,
+        "combat": 0,
+        "navigation": 1,
+        "session": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [
+          {
+            "id": 197439595,
+            "created_at": "2026-10-16T01:37:04Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Nickel Ore @ 128 each (128 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "nickel_ore",
+              "price": 128,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 128
+            }
+          },
+          {
+            "id": 197437947,
+            "created_at": "2026-10-16T01:35:54Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 3x Titanium Ore @ 12 each (36 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "titanium_ore",
+              "price": 12,
+              "quantity": 3,
+              "role": "seller",
+              "source": "spot",
+              "total": 36
+            }
+          },
+          {
+            "id": 197437713,
+            "created_at": "2026-10-16T01:35:44Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 6x Iron Ore @ 1 each (6 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 1,
+              "quantity": 6,
+              "role": "seller",
+              "source": "spot",
+              "total": 6
+            }
+          }
+        ],
+        "mission": [
+          {
+            "id": 197442740,
+            "created_at": "2026-10-16T01:39:33Z",
+            "category": "mission",
+            "event_type": "mission.objective_completed",
+            "summary": "Completed objective for mission 'Local Sector Survey'",
+            "data": {
+              "mission_id": "72744c2f5c78887a1e437fb891d46754",
+              "objective_index": 0,
+              "objective_type": "visit_system",
+              "objectives_remaining": 2
+            }
+          },
+          {
+            "id": 197440898,
+            "created_at": "2026-10-16T01:38:04Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Local Sector Survey",
+            "data": {
+              "mission_id": "72744c2f5c78887a1e437fb891d46754",
+              "template_id": "local_sector_survey",
+              "title": "Local Sector Survey",
+              "type": "exploration"
+            }
+          },
+          {
+            "id": 197440066,
+            "created_at": "2026-10-16T01:37:25Z",
+            "category": "mission",
+            "event_type": "mission.completed",
+            "summary": "Completed mission: Market Participation: Selling (earned 1000 credits)",
+            "data": {
+              "credits": 1000,
+              "credits_promised": 1000,
+              "credits_shortfall": 0,
+              "items_received": {},
+              "mission_id": "1e01f52a6f16a9a1747279dc33b42199",
+              "reputation_changes": {},
+              "skill_xp": {
+                "trading": 15
+              },
+              "title": "Market Participation: Selling",
+              "type": "trading"
+            }
+          },
+          {
+            "id": 197439596,
+            "created_at": "2026-10-16T01:37:04Z",
+            "category": "mission",
+            "event_type": "mission.objective_completed",
+            "summary": "Completed objective for mission 'Market Participation: Selling'",
+            "data": {
+              "mission_id": "1e01f52a6f16a9a1747279dc33b42199",
+              "objective_index": 0,
+              "objective_type": "sell_item",
+              "objectives_remaining": 0
+            }
+          },
+          {
+            "id": 197427344,
+            "created_at": "2026-10-16T01:30:16Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Market Participation: Selling",
+            "data": {
+              "mission_id": "1e01f52a6f16a9a1747279dc33b42199",
+              "template_id": "market_participation_selling",
+              "title": "Market Participation: Selling",
+              "type": "trading"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 197442746,
+            "created_at": "2026-10-16T01:39:33Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Sirius",
+            "data": {
+              "arrival_poi": "sirius_gas_pocket",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "sirius",
+              "to_system_name": "Sirius"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 197427159,
+            "created_at": "2026-10-16T01:30:06Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "EricTaveras logged in",
+            "data": {
+              "last_login_at": "2026-10-13T01:40:14Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 2,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-16 01:40:11",
+        "text": "[Session Handoff] - **Current Action**: Mid-routing to Node Alpha (8 jumps required from Sirius).  \n- **Immediate Next Step**: Perform the first jump from Sirius to Nova Terra.  \n- **Location/Status**: In Sirius system (High Security), aboard current ship with ~99 fuel and 2,500cr mission reward pending. Cargo: Minimal (recently sold ores).  \n- **Active Goal**: Complete the **Local Sector Survey** mission (visit Node Alpha and Horizon). Progress: 1/3 systems (Sirius done).  \n- **Key Recent Events**:  \n  - Completed \"Market Participation\" mission (sold 10 units, earned 1,000cr).  \n  - Accepted exploration mission and jumped to Sirius.  \n  - Route to Node Alpha confirmed (8 jumps)."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 1,
+        "created_at": "2026-10-13 01:40:13",
+        "text": "[Session Handoff] - **Current Action:** Actively mining for Iron Ore at Main Belt (Sol system), just extracted 3 Copper Ore from a deposit (114 units remaining)\n- **Next Step:** Continue mining attempts at Main Belt to gather more Iron Ore (only 6/30 collected for contract)\n- **Location/Status:** \n  - Sol system (Main Belt asteroid field)\n  - Starship cargo: 41/70 used (6 Iron Ore, 30 Copper Ore, 3 Titanium Ore, 1 Sol Alloy Ore, 1 Nickel Ore)\n  - Credits: 500cr\n- **Active Goal:** \"Iron Supply Run\" contract (need 24 more Iron Ore units)\n- **Recent Events:** \n  - Unsuccessful trip to Sirius system (no viable mining locations)\n  - Just returned to Sol's Main Belt\n  - XP gains in deep_core_mining, mining, and piloting"
+      }
+    ]
+  }
+}

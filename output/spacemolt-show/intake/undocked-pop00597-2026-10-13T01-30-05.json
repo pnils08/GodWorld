@@ -10,7 +10,7 @@
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00597-2026-10-13T01-30-05.json",
   "Holder": "Eric Taveras",
-  "CreditsDelta": null,
+  "CreditsDelta": 0,
   "Magnitude": 3,
   "Flags": [
     "credits_delta_windowed"
@@ -26,7 +26,7 @@
     "POPID": "POP-00597",
     "Holder": "Eric Taveras",
     "EpisodeId": "undocked-pop00597-Y3C7",
-    "CreditsDelta": null,
+    "CreditsDelta": 0,
     "Systems": [
       "Sol",
       "sol",

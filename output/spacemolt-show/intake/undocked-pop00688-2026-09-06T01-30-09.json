@@ -10,7 +10,7 @@
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00688-2026-09-06T01-30-09.json",
   "Holder": "Merkin Jumper",
-  "CreditsDelta": null,
+  "CreditsDelta": 0,
   "Magnitude": 1,
   "Flags": [
     "credits_delta_windowed"
@@ -26,7 +26,7 @@
     "POPID": "POP-00688",
     "Holder": "Merkin Jumper",
     "EpisodeId": "undocked-pop00688-Y3C1-e2",
-    "CreditsDelta": null,
+    "CreditsDelta": 0,
     "Systems": [
       "sol",
       "alpha_centauri",

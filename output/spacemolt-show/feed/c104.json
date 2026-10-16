@@ -83,7 +83,7 @@
       "POPID": "POP-00962",
       "Holder": "Marcus Walker",
       "EpisodeId": "undocked-pop00962-Y2C52-e2",
-      "CreditsDelta": null,
+      "CreditsDelta": 0,
       "Systems": [],
       "CombatEvents": 0,
       "MishapCount": 0,
@@ -100,7 +100,7 @@
       "POPID": "POP-00688",
       "Holder": "Merkin Jumper",
       "EpisodeId": "undocked-pop00688-Y2C52-e2",
-      "CreditsDelta": null,
+      "CreditsDelta": 0,
       "Systems": [
         "sol"
       ],

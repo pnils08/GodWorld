@@ -10,7 +10,7 @@
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00770-2026-10-05T01-30-06.json",
   "Holder": "Kato Rivers",
-  "CreditsDelta": null,
+  "CreditsDelta": 0,
   "Magnitude": 2,
   "Flags": [
     "credits_delta_windowed"
@@ -26,7 +26,7 @@
     "POPID": "POP-00770",
     "Holder": "Kato Rivers",
     "EpisodeId": "undocked-pop00770-Y3C6",
-    "CreditsDelta": null,
+    "CreditsDelta": 0,
     "Systems": [
       "alpha_centauri"
     ],

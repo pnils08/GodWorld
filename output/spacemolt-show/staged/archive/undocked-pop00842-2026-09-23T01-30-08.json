@@ -3,7 +3,7 @@
   "show": "UNDOCKED",
   "episode_id": "undocked-pop00842-2026-09-23T01-30-08",
   "popid": "POP-00842",
-  "holder": null,
+  "holder": "Wanjiru Liu",
   "session": "undocked-pop00842",
   "window": {
     "startedAt": "2026-09-23T01:30:08.426Z",
@@ -34,8 +34,11 @@
     "credits_delta": {
       "type": "FACT",
       "source": "get_action_log",
-      "note": "no credit fields on windowed entries",
-      "value": null
+      "hits": 0,
+      "note": "entries in window carry no credit event — measured zero",
+      "value": 0,
+      "rescoredAt": "2026-10-16T05:36:44.749Z",
+      "was": null
     },
     "systems_visited": {
       "type": "FACT",

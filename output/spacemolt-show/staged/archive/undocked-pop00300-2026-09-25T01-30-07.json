@@ -3,7 +3,7 @@
   "show": "UNDOCKED",
   "episode_id": "undocked-pop00300-2026-09-25T01-30-07",
   "popid": "POP-00300",
-  "holder": null,
+  "holder": "Belle Lopez",
   "session": "undocked-pop00300",
   "window": {
     "startedAt": "2026-09-25T01:30:07.358Z",
@@ -57,7 +57,9 @@
           "n": 1
         }
       ],
-      "value": 98
+      "value": 98,
+      "rescoredAt": "2026-10-16T05:36:44.718Z",
+      "was": 98
     },
     "systems_visited": {
       "type": "FACT",

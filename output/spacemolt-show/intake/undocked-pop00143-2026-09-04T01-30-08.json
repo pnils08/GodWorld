@@ -10,7 +10,7 @@
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00143-2026-09-04T01-30-08.json",
   "Holder": "Clarissa Dane",
-  "CreditsDelta": null,
+  "CreditsDelta": 0,
   "Magnitude": 2,
   "Flags": [
     "credits_delta_windowed"
@@ -26,7 +26,7 @@
     "POPID": "POP-00143",
     "Holder": "Clarissa Dane",
     "EpisodeId": "undocked-pop00143-Y3C1-e2",
-    "CreditsDelta": null,
+    "CreditsDelta": 0,
     "Systems": [
       "sol",
       "alpha_centauri"

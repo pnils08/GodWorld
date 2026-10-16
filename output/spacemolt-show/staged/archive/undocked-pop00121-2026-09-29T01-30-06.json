@@ -3,7 +3,7 @@
   "show": "UNDOCKED",
   "episode_id": "undocked-pop00121-2026-09-29T01-30-06",
   "popid": "POP-00121",
-  "holder": null,
+  "holder": "Otis Redd",
   "session": "undocked-pop00121",
   "window": {
     "startedAt": "2026-09-29T01:30:06.248Z",
@@ -34,8 +34,11 @@
     "credits_delta": {
       "type": "FACT",
       "source": "get_action_log",
-      "note": "no credit fields on windowed entries",
-      "value": null
+      "hits": 0,
+      "note": "entries in window carry no credit event — measured zero",
+      "value": 0,
+      "rescoredAt": "2026-10-16T05:36:44.695Z",
+      "was": null
     },
     "systems_visited": {
       "type": "FACT",

@@ -9,8 +9,8 @@
   "EpisodeId": "undocked-pop00031-2026-09-18T01-30-11",
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00031-2026-09-18T01-30-11.json",
-  "Holder": "",
-  "CreditsDelta": null,
+  "Holder": "Martin Richards",
+  "CreditsDelta": 0,
   "Magnitude": 2,
   "Flags": [
     "credits_delta_windowed"
@@ -24,9 +24,9 @@
     "Cycle": 107,
     "EventType": "undocked-episode",
     "POPID": "POP-00031",
-    "Holder": "",
+    "Holder": "Martin Richards",
     "EpisodeId": "undocked-pop00031-Y3C3-e2",
-    "CreditsDelta": null,
+    "CreditsDelta": 0,
     "Systems": [],
     "CombatEvents": 0,
     "MishapCount": 0,

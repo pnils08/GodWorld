@@ -9,8 +9,8 @@
   "EpisodeId": "undocked-pop00121-2026-09-29T01-30-06",
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00121-2026-09-29T01-30-06.json",
-  "Holder": "",
-  "CreditsDelta": null,
+  "Holder": "Otis Redd",
+  "CreditsDelta": 0,
   "Magnitude": 3,
   "Flags": [
     "credits_delta_windowed"
@@ -24,9 +24,9 @@
     "Cycle": 109,
     "EventType": "undocked-episode",
     "POPID": "POP-00121",
-    "Holder": "",
+    "Holder": "Otis Redd",
     "EpisodeId": "undocked-pop00121-Y3C5",
-    "CreditsDelta": null,
+    "CreditsDelta": 0,
     "Systems": [
       "Sol"
     ],

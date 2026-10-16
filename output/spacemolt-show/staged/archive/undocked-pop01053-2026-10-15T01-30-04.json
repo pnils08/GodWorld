@@ -1,0 +1,267 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop01053-2026-10-15T01-30-04",
+  "popid": "POP-01053",
+  "holder": "Rosario Medina",
+  "session": "undocked-pop01053",
+  "window": {
+    "startedAt": "2026-10-15T01:30:04.500Z",
+    "endedAt": "2026-10-15T01:40:17.330Z"
+  },
+  "runner": {
+    "turns": 23,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 0,
+    "estCostUsd": 0.0555,
+    "tokensIn": 392294,
+    "tokensOut": 2136,
+    "log": "output/spacemolt-show/episodes/undocked-pop01053-2026-10-15T01-30-04.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-15T01:40:21.246Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "entries in window carry no credit event — measured zero",
+      "value": 0,
+      "rescoredAt": "2026-10-16T05:36:44.768Z",
+      "was": null
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol",
+        "epsilon_eridani",
+        "sirius",
+        "sol",
+        "alpha_centauri"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 1,
+          "nickel_ore": 1
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 2,
+        "trading": 0,
+        "mission": 1,
+        "combat": 0,
+        "navigation": 4,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 195158845,
+            "created_at": "2026-10-15T01:39:03Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 195151887,
+            "created_at": "2026-10-15T01:34:05Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Nickel Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "nickel_ore",
+              "resource_name": "Nickel Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [],
+        "mission": [
+          {
+            "id": 195144977,
+            "created_at": "2026-10-15T01:30:19Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Copper Requisition",
+            "data": {
+              "mission_id": "6ac741ca63e5dcca7067b26899d72c42",
+              "template_id": "copper_requisition",
+              "title": "Copper Requisition",
+              "type": "mining"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 195160175,
+            "created_at": "2026-10-15T01:40:07Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Epsilon Eridani",
+            "data": {
+              "arrival_poi": "delta_major_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "epsilon_eridani",
+              "to_system_name": "Epsilon Eridani"
+            }
+          },
+          {
+            "id": 195157750,
+            "created_at": "2026-10-15T01:38:47Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Sirius",
+            "data": {
+              "arrival_poi": "sirius_gas_pocket",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "sirius",
+              "to_system_name": "Sirius"
+            }
+          },
+          {
+            "id": 195153305,
+            "created_at": "2026-10-15T01:34:57Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alpha Centauri to Sol",
+            "data": {
+              "arrival_poi": "neptune",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "alpha_centauri",
+              "is_pathfinder": false,
+              "to_system": "sol",
+              "to_system_name": "Sol"
+            }
+          },
+          {
+            "id": 195148724,
+            "created_at": "2026-10-15T01:33:37Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Alpha Centauri",
+            "data": {
+              "arrival_poi": "alpha_centauri_a",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "alpha_centauri",
+              "to_system_name": "Alpha Centauri"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 195160405,
+            "created_at": "2026-10-15T01:40:17Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "RosarioMedina logged in",
+            "data": {
+              "last_login_at": "2026-10-15T01:30:06Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 195144640,
+            "created_at": "2026-10-15T01:30:06Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "RosarioMedina logged in",
+            "data": {
+              "last_login_at": "2026-10-12T01:37:21Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 3,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-15 01:40:17",
+        "text": "[Session Handoff] - **Current Action:** Just arrived in Epsilon Eridani system after jumping from Sirius.  \n- **Immediate Next Step:** Locate an asteroid belt to mine copper ore for the Copper Requisition mission.  \n- **Location:** Epsilon Eridani system (delta_major_star).  \n- **Ship:** Active, cargo space 0/70 used.  \n- **Credits:** 570cr.  \n- **Cargo:** 1 Nickel Ore (not mission-critical).  \n- **Active Goal:** Mine 25 Copper Ore for the Copper Requisition mission.  \n- Recent Events: Failed to mine copper in Sol and Sirius; Main Belt depleted, Kuiper Ice Fields unsuitable, no asteroid belts in Sirius."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 1,
+        "created_at": "2026-10-12 01:37:20",
+        "text": "[Session Handoff] **Handoff Note:**  \n- **Current Action:** Preparing for the next flight by checking for active missions.  \n- **Next Step:** Use `spacemolt/get_active_missions` to identify and resume any unfinished missions.  \n- **Location/Ship/Credits/Cargo:**  \n  - Location: Docked at Confederacy Central Command, Sol Central.  \n  - Ship: Theoria (theoria), hull 100/100, cargo 0/70.  \n  - Credits: 500cr.  \n  - Cargo: Empty.  \n- **Active Goals:** Maximize earnings in the next session.  \n- **Recent Events:**  \n  - Successfully mined and sold 2 Iron Ore and 2 Nickel Ore for 110cr.  \n  - Refueled to 100/100.  \n  - Recorded a captain’s log summarizing the activities."
+      },
+      {
+        "index": 2,
+        "created_at": "2026-10-12 01:36:48",
+        "text": "Tonight was a quiet run. I mined 2 Iron Ore and 2 Nickel Ore in the Main Belt, selling them for a modest 110 credits. The belt was thin, but I worked steadily and brought the ship home. Refueled completely to avoid any mishaps. The board will see a small gain tonight, but it’s honest work."
+      }
+    ]
+  }
+}

@@ -3,7 +3,7 @@
   "show": "UNDOCKED",
   "episode_id": "undocked-pop00495-2026-09-17T01-30-09",
   "popid": "POP-00495",
-  "holder": null,
+  "holder": "Rosalind Young",
   "session": "undocked-pop00495",
   "window": {
     "startedAt": "2026-09-17T01:30:09.243Z",
@@ -42,7 +42,9 @@
           "n": 3
         }
       ],
-      "value": 3
+      "value": 3,
+      "rescoredAt": "2026-10-16T05:36:44.723Z",
+      "was": 3
     },
     "systems_visited": {
       "type": "FACT",

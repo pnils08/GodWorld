@@ -34,8 +34,17 @@
     "credits_delta": {
       "type": "FACT",
       "source": "get_action_log",
-      "note": "no credit fields on windowed entries",
-      "value": null
+      "hits": 1,
+      "basis": [
+        {
+          "id": 120156794,
+          "event_type": "trading.fuel_sold",
+          "n": 14
+        }
+      ],
+      "value": 14,
+      "rescoredAt": "2026-10-16T05:36:44.705Z",
+      "was": null
     },
     "systems_visited": {
       "type": "FACT",

@@ -9,8 +9,8 @@
   "EpisodeId": "undocked-pop00663-2026-09-24T01-30-08",
   "Applied": "yes",
   "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00663-2026-09-24T01-30-08.json",
-  "Holder": "",
-  "CreditsDelta": null,
+  "Holder": "Soo Loo",
+  "CreditsDelta": 0,
   "Magnitude": 2,
   "Flags": [
     "credits_delta_windowed"
@@ -24,9 +24,9 @@
     "Cycle": 108,
     "EventType": "undocked-episode",
     "POPID": "POP-00663",
-    "Holder": "",
+    "Holder": "Soo Loo",
     "EpisodeId": "undocked-pop00663-Y3C4-e2",
-    "CreditsDelta": null,
+    "CreditsDelta": 0,
     "Systems": [
       "Sol",
       "sol",

@@ -504,6 +504,34 @@ console.log('═══ engine.291 (research.29 Move 4): the city names who is fl
   assert('no pilot tonight: $PILOT rows silent; an unflagged $LEADER row names the board leader from past nights', p.filter(l => /in the chair tonight|fly and argued/.test(l)).length === 0 && p.some(l => l.indexOf('said Test POP-P2 still leads the board') >= 0), p.filter(l => /leads the board/.test(l)).slice(0, 2).join(' || '));
   const z = emittedLines(run(31, FIXTURE.concat([LEADER_ANYWEEK]), EMPTY_FEED));
   assert('no board at all: an unflagged $LEADER row never enters the pool', z.filter(l => /leads the board/.test(l)).length === 0);
+
+  // agy hunt 5: a roleless airing pilot (POP-P9 has no ledger row) must never make a
+  // $PILOTROLE line compose-null. Capture the Content_Telemetry intent's ComposeNullJSON.
+  const hadQ = global.queueAppendIntent_, hadE = global.queueEnsureTabIntent_;
+  const telemetry = [];
+  global.queueEnsureTabIntent_ = () => {};
+  global.queueAppendIntent_ = (ctx, tab, row) => { if (tab === 'Content_Telemetry') telemetry.push(row); };
+  let pairNulls = 0, pairDraws = 0;
+  for (let seed = 21; seed < 26; seed++) {
+    telemetry.length = 0;
+    run(seed, FIXTURE.concat(TOKEN_ROWS), FEED);
+    const row = telemetry[0];
+    if (!row) { pairNulls = -1; break; }
+    const nulls = JSON.parse(row[7] || '{}'), draws = JSON.parse(row[6] || '{}');
+    for (const k of Object.keys(nulls)) if (k.indexOf('watched $PILOT the $PILOTROLE') >= 0) pairNulls += nulls[k]; // eclRowKey_ = poolKey#text[0:40]
+    for (const k of Object.keys(draws)) if (k.indexOf('watched $PILOT the $PILOTROLE') >= 0) pairDraws += draws[k];
+  }
+  assert('telemetry captured (Content_Telemetry intent queued)', pairNulls >= 0);
+  assert('$PILOT + $PILOTROLE lines drew (' + pairDraws + ') and never compose-nulled on the roleless pilot', pairDraws > 0 && pairNulls === 0, 'nulls=' + pairNulls);
+  // only roleless pilots airing: $PILOTROLE rows stay out of the pool; $PILOT alone still names the Holder
+  const GHOST_FEED = [FEED_HDR, ep(100, 'POP-P9', 1, 'Ghost Holder')];
+  const PAIR_ONLY = TOKEN_ROWS.slice(0, 1), NAME_ONLY = TOKEN_ROWS.slice(1, 2);
+  const g1 = emittedLines(run(41, FIXTURE.concat(PAIR_ONLY, NAME_ONLY), GHOST_FEED)).join('||');
+  const g2 = emittedLines(run(41, FIXTURE.concat(NAME_ONLY), GHOST_FEED)).join('||');
+  assert('only roleless pilots airing: the $PILOTROLE row never enters the pool (byte-identical with it absent)', g1 === g2);
+  assert('only roleless pilots airing: $PILOT alone still names the feed Holder', g2.indexOf('heard Ghost Holder was in the chair') >= 0);
+  if (hadQ === undefined) delete global.queueAppendIntent_; else global.queueAppendIntent_ = hadQ;
+  if (hadE === undefined) delete global.queueEnsureTabIntent_; else global.queueEnsureTabIntent_ = hadE;
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

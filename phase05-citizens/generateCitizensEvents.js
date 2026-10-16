@@ -480,6 +480,14 @@ function generateCitizensEvents_(ctx) {
       if (up && undockedAiringPilots.indexOf(up) < 0) undockedAiringPilots.push(up);
     }
   })();
+  // agy research.29 review hunt 5: $PILOTROLE needs a pilot WITH a job column. A
+  // roleless pilot (blank RoleType, or a feed POPID with no ledger row) is never a
+  // $PILOTROLE candidate, and with no such pilot the rows stay out of the pool —
+  // otherwise the line compose-nulls and the citizen's emit slot is lost.
+  var undockedAiringPilotsWithRole = [];
+  for (var upr = 0; upr < undockedAiringPilots.length; upr++) {
+    if (roleByPop[undockedAiringPilots[upr]]) undockedAiringPilotsWithRole.push(undockedAiringPilots[upr]);
+  }
   var undockedLeaderName = (function () {
     var b = S.undockedBoard;
     if (!b || !b.leaderPopId) return "";
@@ -487,7 +495,7 @@ function generateCitizensEvents_(ctx) {
   })();
   var eclEntityAvail_ = {
     PILOT: undockedAiringPilots.length > 0,
-    PILOTROLE: undockedAiringPilots.length > 0,
+    PILOTROLE: undockedAiringPilotsWithRole.length > 0,
     LEADER: !!undockedLeaderName
   };
 
@@ -3282,12 +3290,13 @@ function generateCitizensEvents_(ctx) {
     // are clauses, so ledger lines follow the same convention). Null compose =
     // drop this emit slot, never raw $SLOT into LifeHistory.
     if (entry.ledgerLine) {
-      var clVenue = "", clUsedContact = false, clWantsPilot = false;
+      var clVenue = "", clUsedContact = false, clWantsPilot = false, clWantsRole = false;
       var clSlots = entry.ledgerLine.slots || [];
       for (var cls = 0; cls < clSlots.length; cls++) {
         if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood) || (mem && mem.lastVenue) || "";
         else if (clSlots[cls] === "CONTACT") clUsedContact = true;
-        else if (clSlots[cls] === "PILOT" || clSlots[cls] === "PILOTROLE") clWantsPilot = true;
+        else if (clSlots[cls] === "PILOT") clWantsPilot = true;
+        else if (clSlots[cls] === "PILOTROLE") { clWantsPilot = true; clWantsRole = true; }
       }
       // engine.291: resolve the pilot only when the drawn line names one (lazy — a
       // line without the slot costs no roll). One pilot per line, equal weight over
@@ -3300,9 +3309,10 @@ function generateCitizensEvents_(ctx) {
         // about themselves. The DSL has no negation, so the engine drops the citizen's
         // own POPID; a sole pilot's token row then compose-nulls (rare, and right).
         var clSelf = String(popId).trim().toUpperCase();
+        var clPilotPool = clWantsRole ? undockedAiringPilotsWithRole : undockedAiringPilots; // a $PILOTROLE line needs a job to name
         var clPilotOpts = [];
-        for (var cpo = 0; cpo < undockedAiringPilots.length; cpo++) {
-          if (undockedAiringPilots[cpo] !== clSelf) clPilotOpts.push({ pop: undockedAiringPilots[cpo], weight: 1 });
+        for (var cpo = 0; cpo < clPilotPool.length; cpo++) {
+          if (clPilotPool[cpo] !== clSelf) clPilotOpts.push({ pop: clPilotPool[cpo], weight: 1 });
         }
         if (clPilotOpts.length) {
           var clPilotPop = pickWeighted_(clPilotOpts).pop;

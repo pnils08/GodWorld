@@ -283,6 +283,24 @@ check('all credits windowed (null): void', ures('credits_sign', 'c106:POP-00099'
 check('night_winner past its cycle: void', ures('night_winner', 'night-106', 'POP-00098', 107) === E.CASINO_ST.VOID_GATE);
 check('night_winner on its cycle resolves', ures('night_winner', 'night-106', 'POP-00098', 106) === E.CASINO_ST.WIN);
 
+// engine.292 (agy research.29 review hunt 3, 2026-10-16): a measured 0 is neither sign.
+const zeroFeed = [
+  { popId: 'POP-00099', episodeId: 'z1', creditsDelta: null, mishapCount: 0 },
+  { popId: 'POP-00099', episodeId: 'z2', creditsDelta: 0, mishapCount: 0 },     // real play, no sale
+  { popId: 'POP-00097', episodeId: 'z3', creditsDelta: 0, mishapCount: 0 },
+  { popId: 'POP-00096', episodeId: 'z4', creditsDelta: -40, mishapCount: 1 }
+];
+check('credits_sign net 0 (null + measured 0): neg does NOT win — push', ures('credits_sign', 'c106:POP-00099', 'neg', 106, zeroFeed) === E.CASINO_ST.VOID_GATE);
+check('credits_sign net 0: pos does NOT lose — push', ures('credits_sign', 'c106:POP-00099', 'pos', 106, zeroFeed) === E.CASINO_ST.VOID_GATE);
+check('credits_sign net 0 that cancels (+30 −30): push', ures('credits_sign', 'c106:POP-00095', 'pos', 106,
+  [{ popId: 'POP-00095', episodeId: 'c1', creditsDelta: 30 }, { popId: 'POP-00095', episodeId: 'c2', creditsDelta: -30 }]) === E.CASINO_ST.VOID_GATE);
+check('credits_sign negative night: neg still wins', ures('credits_sign', 'c106:POP-00096', 'neg', 106, zeroFeed) === E.CASINO_ST.WIN);
+check('legacy episode slip on a zero night: push', ures('credits_sign', 'z2', 'neg', 106, zeroFeed) === E.CASINO_ST.VOID_GATE);
+check('night_winner: nobody brought credits home (0 / 0 / −40 / null) — void, no crown by POPID', ures('night_winner', 'night-106', 'POP-00097', 106, zeroFeed) === E.CASINO_ST.VOID_GATE);
+check('night_winner: a 0 does not beat null', ures('night_winner', 'night-106', 'POP-00099', 106, zeroFeed) === E.CASINO_ST.VOID_GATE);
+check('night_winner: the one positive pilot wins over zeros', ures('night_winner', 'night-106', 'POP-00098', 106, zeroFeed.concat([{ popId: 'POP-00098', episodeId: 'z5', creditsDelta: 1 }])) === E.CASINO_ST.WIN);
+check('mishap market unchanged: 0 mishaps means no', ures('mishap', 'c106:POP-00097', 'no', 106, zeroFeed) === E.CASINO_ST.WIN);
+
 
 // Bench C119 (S438b) caught casinoResolveSports_ missing — the sports path must run through the main entry.
 const sportsSlipCtx = {

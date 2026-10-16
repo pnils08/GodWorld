@@ -195,6 +195,11 @@ function casinoNightWinner_(feed) {
     if (e.creditsDelta == null || e.creditsDelta === '') continue;
     n = Number(e.creditsDelta);
     if (isNaN(n)) continue;
+    // engine.292 (agy research.29 review hunt 3): the night is won by credits brought
+    // home. A measured 0 (real play, no sale — the adapter writes it since 2026-10-16)
+    // or a loss crowns nobody; before this, a 0 beat null and the lowest POPID "won"
+    // a night where every pilot came back empty.
+    if (!(n > 0)) continue;
     pop = String(e.popId || '').trim().toUpperCase();
     if (!best || n > best.creditsDelta || (n === best.creditsDelta && pop < best.popId)) {
       best = { popId: pop, creditsDelta: n, episodeId: e.episodeId };
@@ -256,6 +261,9 @@ function casinoResolveUndocked_(wager, feed, cycle) {
         seen++; sum += n;
       }
       if (!seen) return { status: CASINO_ST.VOID_GATE };
+      // engine.292: a net 0 is neither sign — the slip pushes (void, stake back). Before
+      // this `wantPos === (sum > 0)` paid 'neg' 1.83x on a nothing night and lost 'pos'.
+      if (sum === 0) return { status: CASINO_ST.VOID_GATE, eventId: ev };
       var wantPos = String(wager.side || '') === 'pos';
       return { status: wantPos === (sum > 0) ? CASINO_ST.WIN : CASINO_ST.LOSS, eventId: ev };
     }
@@ -279,6 +287,7 @@ function casinoResolveUndocked_(wager, feed, cycle) {
     if (ep.creditsDelta == null || ep.creditsDelta === '') return { status: CASINO_ST.VOID_GATE };
     var d = Number(ep.creditsDelta);
     if (isNaN(d)) return { status: CASINO_ST.VOID_GATE };
+    if (d === 0) return { status: CASINO_ST.VOID_GATE, eventId: ep.episodeId }; // engine.292: a zero night pushes
     var wantPosE = String(wager.side || '') === 'pos';
     return { status: wantPosE === (d > 0) ? CASINO_ST.WIN : CASINO_ST.LOSS, eventId: ep.episodeId };
   }

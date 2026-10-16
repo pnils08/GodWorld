@@ -64,6 +64,12 @@ const posWin = C.resolveUndocked({ marketId: 'credits_sign', eventId: 'ep-a', si
 check('credits_sign pos on +42 is win', posWin.status === C.STATUS.WIN);
 const posLoss = C.resolveUndocked({ marketId: 'credits_sign', eventId: 'ep-a', side: 'neg' }, undocked);
 check('credits_sign neg on +42 is loss', posLoss.status === C.STATUS.LOSS);
+// engine.292: a measured 0 is neither sign; the night is won by credits brought home
+const zeroU = [{ popId: 'POP-Z1', episodeId: 'z1', creditsDelta: 0 }, { popId: 'POP-Z2', episodeId: 'z2', creditsDelta: null }, { popId: 'POP-Z3', episodeId: 'z3', creditsDelta: -5 }];
+check('credits_sign neg on a measured 0 is a push, not a win', C.resolveUndocked({ marketId: 'credits_sign', eventId: 'z1', side: 'neg' }, zeroU).status === C.STATUS.VOID_GATE);
+check('credits_sign pos on a measured 0 is a push, not a loss', C.resolveUndocked({ marketId: 'credits_sign', eventId: 'z1', side: 'pos' }, zeroU).status === C.STATUS.VOID_GATE);
+check('night_winner with no positive night: void (no crown by POPID)', C.resolveUndocked({ marketId: 'night_winner', eventId: 'night-1', side: 'POP-Z1' }, zeroU).status === C.STATUS.VOID_GATE);
+check('night_winner: the one positive pilot wins', C.resolveUndocked({ marketId: 'night_winner', eventId: 'night-1', side: 'POP-Z4' }, zeroU.concat([{ popId: 'POP-Z4', episodeId: 'z4', creditsDelta: 2 }])).status === C.STATUS.WIN);
 const blankVoid = C.resolveUndocked({ marketId: 'credits_sign', eventId: 'ep-c', side: 'pos' }, undocked);
 check('blank CreditsDelta is void-gate not a loss', blankVoid.status === C.STATUS.VOID_GATE);
 const missingCarry = C.resolveUndocked({ marketId: 'credits_sign', eventId: 'ep-zzz', side: 'pos' }, undocked);

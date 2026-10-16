@@ -225,6 +225,7 @@ function nightWinner(feedEntries) {
     if (e.creditsDelta == null || e.creditsDelta === '') continue;
     var n = Number(e.creditsDelta);
     if (isNaN(n)) continue;
+    if (!(n > 0)) continue; // engine.292: the night is won by credits brought home — 0 or a loss crowns nobody
     var pop = String(e.popId || '').trim().toUpperCase();
     if (!best) {
       best = { popId: pop, creditsDelta: n, episodeId: e.episodeId };
@@ -255,6 +256,7 @@ function resolveUndocked(wager, feedEntries) {
     if (ep.creditsDelta == null || ep.creditsDelta === '') return { status: STATUS.VOID_GATE };
     var d = Number(ep.creditsDelta);
     if (isNaN(d)) return { status: STATUS.VOID_GATE };
+    if (d === 0) return { status: STATUS.VOID_GATE, eventId: ep.episodeId, fact: { creditsDelta: 0 } }; // engine.292: a zero night pushes
     var wantPos = String(wager.side || '') === 'pos';
     var isPos = d > 0;
     return { status: wantPos === isPos ? STATUS.WIN : STATUS.LOSS, eventId: ep.episodeId, fact: { creditsDelta: d } };

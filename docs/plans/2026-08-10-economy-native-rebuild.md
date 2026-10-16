@@ -120,6 +120,22 @@ the move-in repopulation. D1–D5 are valid either way: restored citizens
 correct via D3 events; new arrivals are born right via D1/D2. The plan does
 not touch this decision.
 
+## Read 2026-10-16 (rb, overnight) — refreshed audit, two live birth defects
+
+Codex's revision requirement 7 (refreshed audit figures), from `output/simulation_ledger_snapshot.jsonl` at C111 (1,032 rows; 988 Active / 44 Retired):
+
+- **role_mapping coverage hole is wider:** 545 of 988 Active citizens (55%) carry a RoleType absent from `data/role_mapping.json` — 272 distinct titles (August: 461/940, 212 titles).
+- **CareerStage vocab is clean now:** 6 spellings (mid-career 380, senior 355, retired 102, entry-level 84, student 60, early-career 51). D4's CareerStage half is done by whoever landed it; the plan's "10 spellings" is history.
+- **EducationLevel:** 12 spellings — the 6 canonical (`hs-diploma` 548, bachelors 204, masters 91, doctorate 59, trade-cert 40, associates 31) plus school stages for minors (High School 16, Elementary 13, Pre-K 9, Middle School 8) and two adult values outside the list (some-college 9, hs-dropout 4). The minors' stages are age truth, not drift; the two adult values are D4's remaining half.
+- **Income distribution:** 0 → 81 (students/minors: 46 students, 1 with income), <30k 5, 30–60k 84, exactly 60k 19, 60–100k 368, 100–300k 415, 300k–1M 15, ≥1M 45 (athletes, coaches, the A's and Oaks front office, Elias Varek — roster-owned and authored, as designed).
+
+**Two birth defects live today (the D1 premise holds, and it is concrete):**
+
+1. **The unmapped-role fallback.** `lib/citizenDerivation.js:42` `FALLBACK_INCOME = 60000` — `lookupIncome(roleType)` returns it for any RoleType not in `economic_parameters.json`. Nineteen Active citizens sit at exactly $60,000: the C110/C111 service mints (line cook, server, barista, delivery driver, taxi driver, bakery worker, warehouse worker, security guard, hair stylist, QA tester, IT support technician, EV mechanic, youth mentor, fleet dispatcher, vertical farm technician — POP-01085…01203) with CareerStage drawn independently of the pay (a line cook "senior" at $60k, a QA tester "mid-career" at $60k). A role-change already re-derives pay by salary-pool contains-match (`processAdvancementIntake.js rederiveIncomeForRole_`, engine.51 T5) and by hood reference pay (`jobReferencePay_`); the mint's first pay does not use that path. **Fix shape (es):** at mint, an unmapped role takes the T5 path (pool contains-match, then hood reference pay by Tier), the flat fallback only when both are empty and then logged as an Engine_Error so the title gets mapped. Not a sweep of the 19 — D2/D3 say a correction reaches them as a lived event (a raise or a re-grade), or not at all.
+2. **The owner door's pay scale.** Business owners minted through engine.96 Task 12 (`wireBusinessOwners_`) carry incomes of $8.1M–$83.7M with NetWorth ≈ 2× income: POP-01092 Managing Partner, Coastline Construction $83,652,927; 01093 Anchor Build $65.9M; 01094 Foothill Builders $43.6M; 01095 Northgate Construction $35.6M; 01096 Principal, Oakland Tech Collective $26.9M; 01097 Pacific Standard Architecture $18.8M; 01098 Ridgeline Studio $12.9M; 01099 Coliseum District Development $8.1M; the two founders (01109 Oakmesh $1.5M, 01110 Portside Bio $2.4M). Where the number comes from is not yet read (the owner-door code names no income; hunt for es: the business's revenue or valuation flowing into Income at mint). Whether a managing partner should earn the firm is a sim call — §6 line filed 2026-10-16.
+
+**What this does to the plan:** D4 is half done (CareerStage) and small (two adult EducationLevel values). D1 has a named defect with a fix shape that reuses live code. D2 (native pay book) is still the real work and still unvetted. Codex's blockers on eventless mutation paths, runtime sheet create/delete and fatal propagation stand as written and are engine-wide rules, not this plan's build. Next revision step: disposition of the two legacy mutating paths (the linker — see pipeline.68, now needs-info with its own blank-cell plan — and `generationalWealthEngine.js:420`), then the creation-path inventory.
+
 ## Codex vet result (2026-08-18, S380 — verdict: NOT ready for in-progress)
 
 Codex (gpt-5.6-sol, high) ran the S362 vet. Verdict: the plan *expresses* all
@@ -153,3 +169,4 @@ D2 proof before D1 activation; refreshed audit figures.
 - 2026-08-10 — Restored after repo deletion (original uncommitted copy lost).
 - 2026-08-18 — S380: codex vet verdict transcribed from terminal scrollback (engine-sheet); plan needs revision before engine.104 moves.
 - 2026-08-22 — codex re-ran the S362 vet: still NOT safe for in-progress, same blocker classes (eventless citizen mutations, runtime sheet create/delete, safePhaseCall_ swallows fatal errors, D1 before D2, no event idempotency, stale C103 audit). engine.104 stays `ready`.
+- 2026-10-16 — rb overnight read: audit refreshed from the C111 snapshot; two live birth defects named (flat $60k fallback for unmapped roles; owner-door incomes $8–84M); D4 CareerStage half found done; fix shape for the fallback handed to es (engine.293).

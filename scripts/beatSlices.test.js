@@ -254,7 +254,8 @@ try {
   ok('profile shape', t.citizens[0].profile === 'Test Operator — Transit Operator (AC Transit) — Test Transit Agency');
   // TRANSIT-SLICE-2 — the week header, the chaos car on the line, the citizens who lived a transit line
   ok('version bumped (cache refuses the old slice)', t.version === 'TRANSIT-SLICE-2');
-  ok('week header unions the engine causes once', /^The week on the line — every cause the engine named this cycle, once: /.test(t.facts[0].text) && /game day: Test Park; storm front/.test(t.facts[0].text) && (t.facts[0].text.match(/storm front/g) || []).length === 1);
+  ok('week header unions the engine causes once', (() => { const w = t.facts.find(f => /^The week on the line — every cause the engine named this cycle, once: /.test(f.text)); return !!w && /game day: Test Park; storm front/.test(w.text) && (w.text.match(/storm front/g) || []).length === 1; })());
+  ok('day type: no frame = ordinary weekday', t.facts.some(f => /^Day type this cycle: ordinary weekday — no citywide cut\./.test(f.text)));
   ok('weather on the record', t.facts.some(f => f.text === 'Weather this cycle: overcast, 52°F' && /Cycle_Weather/.test(f.src)));
   ok('game-result rows only, named as record not cause', t.facts.some(f => /^Game on the sports feed this cycle: Oaks at Jack London — Oaks drop another late \(the rider lift is real only where a station row says "game day"\)$/.test(f.text)));
   ok('chaos: the bart_train hit lands with its seed and the carry rule', t.facts.some(f => /^Chaos car on the line this cycle: bart_train — stalled train → citizen POP-90003 \(T4\) \(Sentiment -0\.05\) — the 7:40 sat dark between Test Central and Test North\. The engine carries a train hit one cycle: it reaches the platforms on NEXT cycle/.test(f.text) && /world_summary_c103\.md ## Chaos Events/.test(f.src)));
@@ -274,14 +275,15 @@ try {
     writeJsonl(path.join(beats, 'Transit_Metrics.jsonl'), [
       { Cycle: String(CYCLE - 1), Station: 'Test Central', RidershipVolume: '12500', OnTimePerformance: '0.85', TrafficIndex: '50', Corridor: '', Notes: '' },
       { Cycle: String(CYCLE - 1), Station: '', RidershipVolume: '0', OnTimePerformance: '0.85', TrafficIndex: '70', Corridor: 'Test Freeway', Notes: '' },
-      { Cycle: String(CYCLE), Station: 'Test Central', RidershipVolume: '6000', OnTimePerformance: '0.84', TrafficIndex: '', Corridor: '', Notes: '', Factors: 'base: ledger; rebased' },
-      { Cycle: String(CYCLE), Station: '', RidershipVolume: '', OnTimePerformance: '', TrafficIndex: '58', Corridor: 'Test Freeway', Notes: '', Factors: 'base: ledger; rebased' }
+      { Cycle: String(CYCLE), Station: 'Test Central', RidershipVolume: '6000', OnTimePerformance: '0.84', TrafficIndex: '', Corridor: '', Notes: '', Factors: 'weekend; holiday: Easter (major); base: ledger; rebased' },
+      { Cycle: String(CYCLE), Station: '', RidershipVolume: '', OnTimePerformance: '', TrafficIndex: '58', Corridor: 'Test Freeway', Notes: '', Factors: 'weekend; holiday: Easter (major); base: ledger; rebased' }
     ]);
     const rt = transit.buildTransitSlice(CYCLE, { root: rb });
     ok('rebase: total says not comparable', rt.facts.some(f => f.text.indexOf('total ridership 6,000 (rebased this cycle — not comparable)') >= 0));
     ok('rebase: no station delta', rt.facts.some(f => /Test Central: ridership 6,000 \(rebased this cycle — not comparable\), on-time 84%/.test(f.text)) && !rt.facts.some(f => /vs C102/.test(f.text)));
     ok('rebase: no corridor delta', rt.facts.some(f => /Test Freeway: traffic index 58 \(rebased this cycle — not comparable\)/.test(f.text)));
     ok('rebase: no lead-mover label', !/ up | down /.test(rt.story.label) && /rebased this cycle — not comparable/.test(rt.story.label));
+    ok('day type: the Factors frame is read as the citywide cut, major holiday outranks weekend', rt.facts.some(f => /^Day type this cycle: holiday: Easter \(major\) — riders cut citywide by the major-holiday rule \(outranks the weekend; the two never stack\)\./.test(f.text)));
     ok('rebase root has no world_summary: no chaos fact, no throw', !rt.facts.some(f => /[Cc]haos car/.test(f.text)) && !rt.pointers.some(p => /Chaos Events/.test(p)));
     fs.rmSync(rb, { recursive: true, force: true });
   }

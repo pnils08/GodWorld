@@ -23,7 +23,7 @@ const SEAT = {
   kind: 'beat-transit', domain: 'transit', artifact: 'transit', builder: 'buildTransitSlice.js',
   version: 'TRANSIT-SLICE-2', nameRe: /trevor\s*shimizu/i,
   tabs: ['Transit_Metrics', 'Employment_Roster', 'Business_Ledger', 'Story_Hook_Deck', 'Cycle_Weather', 'Oakland_Sports_Feed', 'LifeHistory_Log', 'Story_Seed_Deck'],
-  approach: 'Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. The week header (weather, home games, the union of causes), the chaos car on the line and the citizens who lived a transit line are record; the Factors on each station row are the engine\'s own causes — riders rise and fall for the reasons written there (holiday, First Friday, game day, events, a stalled train, a short crew, crowded platforms), never for a reason you add. A BART-train chaos hit this cycle reaches the platforms NEXT cycle. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed.',
+  approach: 'Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. The week header (weather, home games, the union of causes), the chaos car on the line and the citizens who lived a transit line are record; the Factors on each station row are the engine\'s own causes — the frame at their head (weather; weekend; holiday: <name> (major) or (no cut)) is the citywide day-type cut, and the rest are the row\'s own reasons (holiday lift in its hood, First Friday, game day, events, a stalled train, a short crew, crowded platforms). Riders rise and fall for the reasons written there, never for a reason you add. A BART-train chaos hit this cycle reaches the platforms NEXT cycle. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed.',
   roomIsYours: 'the platform at 7:40, the operator\'s cab, who is late and why, what the fare gate sounds like, what a regular rider notices first',
   build
 };
@@ -84,6 +84,18 @@ function build(cycle, { root, beats, profiles }) {
       seenCause.add(tok); causes.push(tok);
     }
   }
+  // the cycle-wide frame at the head of every row's Factors (factorsString_): weather, 'weekend',
+  // 'holiday: <label> (major)' / '(no cut)'. The frame IS the day-type cut — a major holiday cuts riders
+  // and outranks the weekend; a weekend cuts; '(no cut)' changes nothing (transitDayMult_, never stacked).
+  const frameTokens = String((rows.find(r => (r.Station || '') !== '') || rows[0]).Factors || '').split(';').map(t => t.trim());
+  const holidayTok = frameTokens.find(t => /^holiday: /.test(t)) || null;
+  const weekendTok = frameTokens.indexOf('weekend') >= 0;
+  const majorHoliday = !!(holidayTok && /\(major\)$/.test(holidayTok));
+  const dayType = majorHoliday ? holidayTok + ' — riders cut citywide by the major-holiday rule' + (weekendTok ? ' (outranks the weekend; the two never stack)' : '')
+    : weekendTok ? 'weekend — riders cut citywide by the weekend rule' + (holidayTok ? '; ' + holidayTok + ' — no change to riders' : '')
+    : holidayTok ? 'weekday; ' + holidayTok + ' — no change to riders'
+    : frameTokens.indexOf('holiday') >= 0 ? 'holiday named on the row (pre-engine.290 format — no cut rule recorded)' : 'ordinary weekday — no citywide cut';
+  facts.push({ text: 'Day type this cycle: ' + dayType + '. A station that moved more than the citywide rule names its own reason on its row.', src: 'output/beats/Transit_Metrics.jsonl Cycle ' + cycle + ' Factors (frame)' });
   if (causes.length) facts.push({ text: 'The week on the line — every cause the engine named this cycle, once: ' + causes.join('; '), src: 'output/beats/Transit_Metrics.jsonl Cycle ' + cycle + ' Factors' });
   const weather = (beats.Cycle_Weather || []).find(w => Number(w.CycleID) === cycle);
   if (weather) {

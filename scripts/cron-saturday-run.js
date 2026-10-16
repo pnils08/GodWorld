@@ -911,8 +911,12 @@ function curationScore(entry, auditRow) {
   for (const s of (intake.storylines || [])) {
     if (s.verb === 'referenced') refs++; else moves++;
   }
+  // pipeline.80 (codex Saturday-readers review hunt 4): the floor's automatic mention-only
+  // entries are indexing, not reporting — they never move the rank. A floor entry the weekly
+  // pilot credit promoted to `subject` still counts (it keeps floor:true).
+  const counted = (intake.names || []).filter(n => !(n && n.floor === true && n.role === 'mentioned'));
   return 3 * moves + refs
-    + 0.5 * ((intake.names || []).length)
+    + 0.5 * counted.length
     + (auditRow && auditRow.verdict === 'accurate' ? 2 : 0);
 }
 function primarySlug(entry) {
@@ -1284,4 +1288,4 @@ if (require.main === module) {
 module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
-  deskSystem, crossoverCitizens, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE };
+  deskSystem, crossoverCitizens, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };

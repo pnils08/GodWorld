@@ -126,8 +126,9 @@ try {
   assert('missing names array unchanged', injectPrintedCitizens(malformed, body, null) === malformed);
   injectWeeklyPilotCredit(side, body, [{ name: 'Testa Alpha', POPID: 'SYNTHETIC-A' }]);
   assert('floor then pilot credit becomes subject', side.names[0].role === 'subject' && side.names[0].floor === true);
-  const ambiguous = injectPrintedCitizens({ names: [] }, 'Testd Shared spoke.', null).names[0];
-  assert('ambiguous name retains null id and marker', ambiguous && ambiguous.popid === null && ambiguous.ambiguous === true);
+  // codex hunt 2: an ambiguous name (two Active rows) never enters the floor — Saturday's audit
+  // would reject the whole filing on its null id.
+  assert('ambiguous name is not floored', injectPrintedCitizens({ names: [] }, 'Testd Shared spoke.', null).names.length === 0);
   const filtered = injectPrintedCitizens({ names: [] },
     'Teste Retired spoke. Testf Missing spoke. Testj Archived spoke.\n' +
     '<!-- Testa Alpha -->\n```\nTestb Beta\n```\n## INTAKE\nNAMES: Testg Absent | mentioned', null);

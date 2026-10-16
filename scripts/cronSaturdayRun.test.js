@@ -246,6 +246,14 @@ console.log('Test 6: mergeStorylineLedger');
     mk('civic_c111_luis', 'civic', 'Luis Navarro', 'Avery Santana again.', [{ name: 'Avery Santana', role: 'quoted-source', popid: 'POP-00034' }]),
     mk('undocked-digest_c111_nia', 'undocked-digest', 'Nia Rook', 'Clarissa Dane sat second.', [{ name: 'Clarissa Dane', role: 'subject', popid: 'POP-00143' }]),
   ];
+  // pipeline.80: floor mentions never move the curation rank; a floor entry promoted to subject still does
+  (function () {
+    const base = { stem: 'f', text: '', sidecar: { intake: { storylines: [], hoods: [], names: [{ name: 'A B', popid: 'POP-1', role: 'quoted-source' }] } } };
+    const floored = { stem: 'g', text: '', sidecar: { intake: { storylines: [], hoods: [], names: [{ name: 'A B', popid: 'POP-1', role: 'quoted-source' }, { name: 'C D', popid: 'POP-2', role: 'mentioned', floor: true }, { name: 'E F', popid: 'POP-3', role: 'mentioned', floor: true }] } } };
+    const promoted = { stem: 'h', text: '', sidecar: { intake: { storylines: [], hoods: [], names: [{ name: 'C D', popid: 'POP-2', role: 'subject', floor: true }] } } };
+    ok('curationScore: floor mentions add nothing', X.curationScore(floored, null) === X.curationScore(base, null));
+    ok('curationScore: a floor entry promoted to subject counts', X.curationScore(promoted, null) === 0.5);
+  })();
   const x = X.crossoverCitizens(set, [{ name: 'Clarissa Dane', popid: 'POP-00143' }, { name: 'Eric Taveras', popid: 'POP-00597' }]);
   ok('crossover: Eric Taveras — INTAKE in sports + body-named in undocked = two systems', x.length === 1 && x[0].name === 'Eric Taveras' && x[0].systems.sort().join('+') === 'sports+undocked');
   ok('crossover: the body-named piece is recorded as named-in-body', x[0].pieces.find(p => p.stem === 'undocked_c111_nia').role === 'named-in-body');

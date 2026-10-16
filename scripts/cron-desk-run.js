@@ -2767,9 +2767,12 @@ function injectPrintedCitizens(intake, draftText, byline) {
   for (const r of cnc.resolveCitizens(cnc.checkText(body).verified)) {
     const key = r.name.toLowerCase();
     if (!body.includes(r.name) || excluded.has(key) || existing.has(key) || !activeNames.has(key)) continue;
-    if (!r.ambiguous && (!r.popid || !activeIds.has(r.popid))) continue;
-    intake.names.push({ name: r.name, role: 'mentioned', popid: r.popid,
-      ...(r.ambiguous ? { ambiguous: true } : {}), floor: true });
+    // codex Saturday-readers review (2026-10-16, hunt 2): a name two Active citizens share
+    // (Bruce Wright POP-00965 / POP-01085 at C111) can earn no usage row (null POPID) and
+    // would hard-fail the whole filing at Saturday's auditOne — so the floor never admits it.
+    // The model may still index it by hand; a floor entry always carries a resolved id.
+    if (r.ambiguous || !r.popid || !activeIds.has(r.popid)) continue;
+    intake.names.push({ name: r.name, role: 'mentioned', popid: r.popid, floor: true });
     existing.add(key);
     added.push(r.name);
   }

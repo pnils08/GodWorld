@@ -4,7 +4,7 @@
 **Deliver:** a patch file `output/codex/pipeline80-intake-floor.patch` (git format, against HEAD; do NOT edit tracked files — es is mid-edit in this tree) + `output/codex/pipeline80-intake-floor.md` (what you did, the four hunts answered with file:line, the test command and its output). No cron, model, Sheet or canon run.
 
 ## Build
-1. `scripts/cron-desk-run.js`: `injectPrintedCitizens(intake, draftText, byline)` per the spec; call it at EVERY sidecar write site that calls `buildIntakeSidecar` (grep — there are two), immediately after it and before `injectWeeklyPilotCredit`; export it.
+1. `scripts/cron-desk-run.js`: `injectPrintedCitizens(intake, draftText, byline)` per the spec; call it at every sidecar write site that calls `buildIntakeSidecar` (one at cron-desk-run.js:3095; the second byline-landed path near :3340 writes no sidecar — confirm and say so), immediately after it and before `injectWeeklyPilotCredit`; export it.
 2. The one prompt line in the INTAKE block of the write prompt (spec item 2), verbatim.
 3. Tests in `scripts/cronDeskFilings.test.js` (spec item 3) — follow that file's existing stubbing of `canon-name-check` if it has one; else stub `loadRows`/the snapshot path the way `scripts/buildNiaSlice.test.js` does. All existing tests still pass: `node scripts/cronDeskFilings.test.js && node scripts/buildNiaSlice.test.js`.
 

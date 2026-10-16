@@ -181,6 +181,13 @@ function writeDump(dir, cycle) {
         row('judicial', 'city', '', 'all', { Cycle: String(cycle - 1), TotalIntakes: '99', ClosingOccupancy: '99' })
       ];
     })(),
+    LifeHistory_Log: [
+      { Timestamp: 'Y2C' + cycle, POPID: 'POP-90001', Name: 'Test Civic Resident', EventTag: 'Work|source:occupation|transit:disruption|neighborhood:Fruitvale', EventText: 'waited out a stalled train at Test Central and walked the last mile', Neighborhood: 'Fruitvale', Cycle: String(cycle) },
+      { Timestamp: 'Y2C' + cycle, POPID: 'POP-90003', Name: 'Test Clinic Patient', EventTag: 'Personal|source:base', EventText: 'stood on the platform at 7:40 and counted the minutes', Neighborhood: 'Temescal', Cycle: String(cycle) },
+      { Timestamp: 'Y2C' + cycle, POPID: 'POP-90040', Name: 'Test Defendant', EventTag: 'Personal|source:base', EventText: 'cooked for the block', Neighborhood: 'Fruitvale', Cycle: String(cycle) },
+      { Timestamp: 'Y2C' + cycle, POPID: 'POP-00155', Name: 'Trevor Shimizu', EventTag: 'Work|source:occupation', EventText: 'rode BART to the office', Neighborhood: 'Laurel', Cycle: String(cycle) },
+      { Timestamp: 'Y2C' + (cycle - 1), POPID: 'POP-90004', Name: 'Test Seasonal Resident', EventTag: 'Work|source:occupation|transit:crew', EventText: 'last cycle on the train', Neighborhood: 'Laurel', Cycle: String(cycle - 1) }
+    ],
     Story_Seed_Deck: [
       { Cycle: String(cycle), SeedID: 'cs1', Desk: 'culture', Class: 'minor', Domain: 'COMMUNITY', Neighborhood: 'Temescal', What: 'holy_day +0.01', Why: 'x', Citizens: 'POP-90001 Test Civic Resident', CitizenEvents: '', Businesses: '', OtherEntities: '', Magnitude: '0.01', Trend: '', SuggestedJournalist: '', SuggestedAngle: '' }
     ],
@@ -222,7 +229,14 @@ try {
     '# World Summary — Cycle ' + CYCLE, '',
     '**Season:** Winter | **Weather:** 49°F overcast', '',
     '## Who Lived It (cycle ' + CYCLE + ')', '', '### Health (1)',
-    '- POP-90004 Test Seasonal Resident — dealt with a seasonal health concern (Laurel)', ''
+    '- POP-90004 Test Seasonal Resident — dealt with a seasonal health concern (Laurel)', '',
+    '## Chaos Events (Chaos_Cars, cycle ' + CYCLE + ' — 3 total)', '',
+    '| Vehicle | Outcome | Target | Metric | Magnitude | Floor fired |', '|---|---|---|---|---|---|',
+    '| bart_train | stalled_train | citizen POP-90003 (T4) | Sentiment | -0.05 | FALSE |',
+    '| pge_truck | planned_shutoff | neighborhood Laurel | Sentiment | -0.11 | FALSE |',
+    '| cop_car | ticket | business BIZ-00013 | Growth_Rate | -1 | FALSE |', '',
+    '**Narrative seeds:**', '- bart_train → POP-90003: the 7:40 sat dark between Test Central and Test North', '- pge_truck → Laurel: a planned shutoff', '',
+    '## Three-Cycle Trends', '', '- nothing'
   ].join('\n'));
 
   console.log('transit:');
@@ -234,10 +248,23 @@ try {
   ok('corridor facts are traffic rows, not pseudo-stations', t.facts.some(f => /Test Freeway: traffic index 65 \(\+15 vs C102\) — heavy congestion; weather-related slowdowns/.test(f.text)));
   ok('corridor deltas do not collide', t.facts.some(f => /Test Avenue: traffic index 38 \(-2 vs C102\) — light traffic/.test(f.text)));
   ok('inventory counts stations + corridors, ridership sums stations only', t.facts.some(f => /2 stations \+ 2 corridors on the record this cycle; total ridership 2,050 \(C102: 1,500\)/.test(f.text)));
-  ok('every fact sourced', t.facts.every(f => /output\/beats\//.test(f.src)));
-  ok('workers by BIZ_ID join only', t.story.citizens.length === 1 && t.story.citizens[0] === 'Test Operator (POP-90020)');
+  ok('every fact sourced (beats tabs, or the world summary for the chaos table)', t.facts.every(f => /output\/beats\/|output\/world_summary_c103\.md/.test(f.src)));
+  ok('workers by BIZ_ID join only', t.citizens.filter(c => /Employment_Roster/.test(c.why)).length === 1 && t.story.citizens[0] === 'Test Operator (POP-90020)');
   ok('bartender at "BART Bar" never attaches', !JSON.stringify(t.citizens).includes('Bartender'));
   ok('profile shape', t.citizens[0].profile === 'Test Operator — Transit Operator (AC Transit) — Test Transit Agency');
+  // TRANSIT-SLICE-2 — the week header, the chaos car on the line, the citizens who lived a transit line
+  ok('version bumped (cache refuses the old slice)', t.version === 'TRANSIT-SLICE-2');
+  ok('week header unions the engine causes once', /^The week on the line — every cause the engine named this cycle, once: /.test(t.facts[0].text) && /game day: Test Park; storm front/.test(t.facts[0].text) && (t.facts[0].text.match(/storm front/g) || []).length === 1);
+  ok('weather on the record', t.facts.some(f => f.text === 'Weather this cycle: overcast, 52°F' && /Cycle_Weather/.test(f.src)));
+  ok('game-result rows only, named as record not cause', t.facts.some(f => /^Game on the sports feed this cycle: Oaks at Jack London — Oaks drop another late \(the rider lift is real only where a station row says "game day"\)$/.test(f.text)));
+  ok('chaos: the bart_train hit lands with its seed and the carry rule', t.facts.some(f => /^Chaos car on the line this cycle: bart_train — stalled train → citizen POP-90003 \(T4\) \(Sentiment -0\.05\) — the 7:40 sat dark between Test Central and Test North\. The engine carries a train hit one cycle: it reaches the platforms on NEXT cycle/.test(f.text) && /world_summary_c103\.md ## Chaos Events/.test(f.src)));
+  ok('chaos: a hit on AC Transit (BIZ-00013) lands, a Laurel shutoff does not', t.facts.some(f => /cop_car — ticket → business BIZ-00013/.test(f.text)) && !t.facts.some(f => /pge_truck/.test(f.text)));
+  ok('chaos citizen target becomes a source', t.citizens.some(c => c.popid === 'POP-90003' && /the chaos car found them this cycle: bart_train stalled train/.test(c.why)));
+  ok('tagged transit line is a source, labelled', t.citizens.some(c => c.popid === 'POP-90001' && /lived it this cycle \(rode the disruption\): "waited out a stalled train at Test Central and walked the last mile"/.test(c.why)));
+  ok('text-matched line merges onto the same person', t.citizens.filter(c => c.popid === 'POP-90003').length === 1 && t.citizens.some(c => c.popid === 'POP-90003' && /stood on the platform at 7:40/.test(c.why)));
+  ok('the reporter is not his own source; prior-cycle lines and non-transit lines stay off', !t.citizens.some(c => c.popid === 'POP-00155' || c.popid === 'POP-90004' || c.popid === 'POP-90040'));
+  ok('hook counts roster and lived separately', /1 transit workers on the roster, 2 citizens who lived a transit line, a chaos car on the line\./.test(t.story.hookLine));
+  ok('pointers name the life log and the chaos section', t.pointers.some(p => /LifeHistory_Log\.jsonl Cycle 103/.test(p)) && t.pointers.some(p => /world_summary_c103\.md ## Chaos Events/.test(p)));
 
   // engine.290 move 3: a rebase cycle prints no deltas, no mover, no total comparison
   {
@@ -251,10 +278,11 @@ try {
       { Cycle: String(CYCLE), Station: '', RidershipVolume: '', OnTimePerformance: '', TrafficIndex: '58', Corridor: 'Test Freeway', Notes: '', Factors: 'base: ledger; rebased' }
     ]);
     const rt = transit.buildTransitSlice(CYCLE, { root: rb });
-    ok('rebase: total says not comparable', rt.facts[0].text.indexOf('total ridership 6,000 (rebased this cycle — not comparable)') >= 0);
+    ok('rebase: total says not comparable', rt.facts.some(f => f.text.indexOf('total ridership 6,000 (rebased this cycle — not comparable)') >= 0));
     ok('rebase: no station delta', rt.facts.some(f => /Test Central: ridership 6,000 \(rebased this cycle — not comparable\), on-time 84%/.test(f.text)) && !rt.facts.some(f => /vs C102/.test(f.text)));
     ok('rebase: no corridor delta', rt.facts.some(f => /Test Freeway: traffic index 58 \(rebased this cycle — not comparable\)/.test(f.text)));
     ok('rebase: no lead-mover label', !/ up | down /.test(rt.story.label) && /rebased this cycle — not comparable/.test(rt.story.label));
+    ok('rebase root has no world_summary: no chaos fact, no throw', !rt.facts.some(f => /[Cc]haos car/.test(f.text)) && !rt.pointers.some(p => /Chaos Events/.test(p)));
     fs.rmSync(rb, { recursive: true, force: true });
   }
 

@@ -98,16 +98,8 @@ function loadBeatDump(root, cycle) {
   return { ok: true, scandalRows, hooks };
 }
 
-function extractSection(md, heading) {
-  if (!md) return null;
-  const re = new RegExp('^##\\s+' + heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*$', 'mi');
-  const m = md.match(re);
-  if (!m) return null;
-  const start = m.index + m[0].length;
-  const rest = md.slice(start);
-  const next = rest.search(/^##\s+/m);
-  return (next < 0 ? rest : rest.slice(0, next)).trim();
-}
+// extractSection lives in beatSliceKit (prefix-tolerant: the summary's headings carry a suffix).
+const { extractSection } = require('./beatSliceKit');
 
 function extractHoodTexture(textureMd, hood) {
   if (!textureMd || !hood) return null;

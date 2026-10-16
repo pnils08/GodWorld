@@ -43,6 +43,25 @@ function fmtInt(n) {
 function loadJson(p) {
   try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; }
 }
+function loadText(p) {
+  try { return fs.readFileSync(p, 'utf8'); } catch (_) { return null; }
+}
+/**
+ * A `## Heading` section of a world_summary (or any markdown): the body up to the
+ * next `## `. The heading matches as a prefix — the summary writes
+ * `## Chaos Events (Chaos_Cars, cycle 111 — 9 total)` and `## Who Lived It (cycle 111)`,
+ * so an exact-line match (the old Jax copy) found nothing on a real summary.
+ */
+function extractSection(md, heading) {
+  if (!md || !heading) return null;
+  const re = new RegExp('^##\\s+' + heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?=\\s|\\(|$).*$', 'mi');
+  const m = md.match(re);
+  if (!m) return null;
+  const start = m.index + m[0].length;
+  const rest = md.slice(start);
+  const next = rest.search(/^##\s+/m);
+  return (next < 0 ? rest : rest.slice(0, next)).trim();
+}
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
   if (i !== -1 && process.argv[i + 1]) return process.argv[i + 1];
@@ -638,7 +657,7 @@ function debtPattern(profiles, hookRows, cycle, src, hood) {
 
 module.exports = {
   ROOT, SCHEMA, FACTS_TAIL, FORBIDDEN,
-  num, hoodKey, fmtInt, loadJson, arg,
+  num, hoodKey, fmtInt, loadJson, loadText, extractSection, arg,
   loadBeatTabs, loadProfiles, prevTabRows, rosterAtSectors, hooksFor, domainHooks, seedsFor,
   person, personFromProfile, figureHood, citizenTags, makeSlice, emptySlice, formatMarkdown, wire,
   // engine.254 Task 10

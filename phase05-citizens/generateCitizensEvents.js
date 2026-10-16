@@ -1230,6 +1230,11 @@ function generateCitizensEvents_(ctx) {
         }
       }
       if (!value) return null;
+      // A role is written bare ("electrician"), so a row's "a $PILOTROLE" needs its
+      // article to follow the value: "an electrician", "a second baseman".
+      if (slot === "PILOTROLE") {
+        text = text.replace(/\b([Aa])n? \$PILOTROLE(?![A-Z_])/g, function (m, a) { return a + (roleTakesAn_(value) ? "n " : " ") + value; });
+      }
       // engine.291: whole-token replace. split/join on "$PILOT" also ate the head of
       // "$PILOTROLE" (the compose test caught "Test POP-P3ROLE"); the lookahead stops
       // at a slot-name character. Function replacer: a value is literal, never a
@@ -1237,6 +1242,19 @@ function generateCitizensEvents_(ctx) {
       text = text.replace(new RegExp("\\$" + slot + "(?![A-Z_])", "g"), function () { return value; });
     }
     return text.replace(/\s+/g, " ").trim();
+  }
+
+  // "an" before a vowel sound: a lowercase word on its first letter (u-words that
+  // open on a "you" sound — union, usher aside — keep "a"); an acronym on how its
+  // first letter is said (an FBI agent, a CBA monitor).
+  function roleTakesAn_(role) {
+    var w = String(role || "").split(" ")[0];
+    if (!w) return false;
+    if (/^[A-Z]{2,4}$/.test(w)) return /^[AEFHILMNORSX]/.test(w);
+    w = w.toLowerCase();
+    if (/^u(ni|s[aeiu]|r[aeiou]|t[aeiou])/.test(w) || /^eu/.test(w) || /^one/.test(w)) return false;
+    if (/^(hour|honest|honou?r|heir)/.test(w)) return true;
+    return /^[aeiou]/.test(w);
   }
 
   // =========================================================================

@@ -535,6 +535,27 @@ console.log('═══ engine.291 (research.29 Move 4): the city names who is fl
   assert('only roleless pilots airing: $PILOT alone still names the feed Holder', g2.indexOf('heard Ghost Holder was in the chair') >= 0);
   if (hadQ === undefined) delete global.queueAppendIntent_; else global.queueAppendIntent_ = hadQ;
   if (hadE === undefined) delete global.queueEnsureTabIntent_; else global.queueEnsureTabIntent_ = hadE;
+
+  // "a $PILOTROLE" takes its article from the role: an electrician, a second baseman
+  // (live R848/R852 shape; Briar Soto's role is Electrician at C112)
+  const ART_ROW = ['line', 'culture.spacemolt-show', '', 'said a $PILOTROLE flies like a $PILOTROLE', '5000', 'undocked', 'source:undocked,show:undocked,ecl:kind:argue', '', ''];
+  const ART_FEED = [FEED_HDR, ep(100, 'POP-P5', 10), ep(100, 'POP-P3', 20)];
+  let anOk = 0, aOk = 0, artBad = 0, artFirstBad = '';
+  for (let seed = 61; seed < 64; seed++) {
+    const rows = [makeRow('POP-P5', { occ: 'Electrician' }), makeRow('POP-P3', { occ: 'Second Baseman, Oakland A\'s' })];
+    for (let i = 0; i < 40; i++) rows.push(makeRow('POP-A' + i, { hood: 'Temescal' }));
+    const ctxA = makeCtx(rows, mulberry32(seed), FIXTURE.concat([ART_ROW]), ART_FEED);
+    ctxA.config.cycleCount = 100;
+    loadUndockedFeed_(ctxA);
+    generateCitizensEvents_(ctxA);
+    for (const l of emittedLines(ctxA)) {
+      if (l.indexOf('flies like') < 0) continue;
+      if (l.indexOf('said an electrician flies like an electrician') >= 0) anOk++;
+      else if (l.indexOf('said a second baseman flies like a second baseman') >= 0) aOk++;
+      else { artBad++; if (!artFirstBad) artFirstBad = l; }
+    }
+  }
+  assert('"a $PILOTROLE" reads "an electrician" (' + anOk + ') and "a second baseman" (' + aOk + ')', anOk > 0 && aOk > 0 && artBad === 0, 'bad=' + artBad + ' e.g. ' + artFirstBad);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

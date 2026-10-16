@@ -228,5 +228,64 @@ t('a full city waves nobody', () => {
   eq(sb.selectFloorWaveRows_(ctx, GVALS, 2, 3, 4, 5, 106, mulberry32(3)), {});
 });
 
+console.log('T7 engine.293: the promotion door prices by the job');
+{
+  // The whole door, real files: a lottery promotion (rng 0 passes every roll) of
+  // Generic_Citizens rows into the ledger. Before engine.293 this door priced by
+  // lookupIncome_ alone — exact catalog hit, else 60000 — so a line cook, a barista
+  // and a taxi driver all arrived at $60,000 (16 migration-wave rows on live C107–C111).
+  const ep = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/economic_parameters.json'), 'utf8'));
+  const catalog = Array.isArray(ep) ? ep : (ep.roles || Object.values(ep).find(Array.isArray));
+  const logs = [];
+  const psb = { console, Logger: { log(m) { if (/engine\.293/.test(m)) logs.push(m); } } };
+  vm.createContext(psb);
+  ['phase01-config/canonNeighborhoodLoader.js', 'phase01-config/engine94SheetContract.js', 'utilities/citizenDerivation.js', 'utilities/popIdAllocator.js',
+    'utilities/safeRand.js', 'utilities/sportsWeekRecord.js', 'phase01-config/advanceSimulationCalendar.js', 'phase05-citizens/educationCareerEngine.js',
+    'phase05-citizens/generationalWealthEngine.js', 'phase05-citizens/generateGenericCitizens.js', 'phase05-citizens/generateCitizensEvents.js',
+    'phase05-citizens/checkForPromotions.js'].forEach(f => load(psb, f));
+  vm.runInContext('ECONOMIC_PARAMETERS = ' + JSON.stringify(catalog) + ';', psb);
+  const LH = ['POPID', 'First', 'Middle', 'Last', 'OriginGame', 'UNI (y/n)', 'MED (y/n)', 'CIV (y/n)', 'ClockMode', 'Tier', 'RoleType', 'Status', 'BirthYear', 'Neighborhood', 'LifeHistory', 'CreatedAt', 'LastUpdated', 'Income', 'YearsInCareer', 'CareerStage', 'EducationLevel', 'DebtLevel', 'NetWorth', 'MaritalStatus', 'Gender'];
+  const col = n => LH.indexOf(n);
+  const GH = ['First', 'Last', 'Age', 'Neighborhood', 'Occupation', 'EmergenceCount', 'Status', 'Sex', 'BirthYear', 'EmergedCycle'];
+  const PEOPLE = [['Lina', 'Cook', 34, 'Line cook'], ['Bea', 'Rista', 29, 'Barista'], ['Tad', 'Driver', 45, 'Taxi driver'], ['Quin', 'Tester', 31, 'QA tester'],
+    ['Yuri', 'Mentor', 27, 'Youth mentor'], ['Kit', 'Young', 15, 'Barista']];
+  const run = () => {
+    const rows = []; let n = 1;
+    HOODS.forEach(h => { for (let i = 0; i < 20; i++) { const r = LH.map(() => ''); r[0] = 'POP-' + String(n++).padStart(5, '0'); r[1] = 'A'; r[3] = 'B'; r[col('Neighborhood')] = h; r[col('Status')] = 'Active'; rows.push(r); } });
+    const map = [['Neighborhood', 'CoreSimRank', 'District', 'ChildAreas', 'Scenes']].concat(HOODS.map((h, i) => [h, i + 1, 'D1', '', '']));
+    const gvals = [GH].concat(PEOPLE.map(p => [p[0], p[1], p[2], 'Temescal', p[3], 5, 'Active', 'male', '', '']));
+    const ctx = { now: new Date(0), rng: () => 0, summary: { cycleId: 112, absoluteCycle: 112 },
+      config: { cycleCount: 112, hoodCitizenFloor: 12, gcSurfaceChance: 0.06, hoodFloorSurfaceQuota: 20, hoodFloorPromotePerCycle: 6, gcPoolFloorFemale: 120, gcPoolFloorMale: 40, popIdHighWater: 0 },
+      ledger: { headers: LH, rows, dirty: false },
+      ss: { getSheetByName: name => name === 'Neighborhood_Map' ? { getDataRange: () => ({ getValues: () => map }) }
+        : name === 'Generic_Citizens' ? { getDataRange: () => ({ getValues: () => gvals }), getRange: () => ({ setValue() {}, setValues() {} }) }
+        : name === 'LifeHistory_Log' ? { appendRow() {} } : null } };
+    psb.loadCanonNeighborhoods_(ctx);
+    logs.length = 0;
+    psb.checkForPromotions_(ctx);
+    const born = {};
+    rows.slice(HOODS.length * 20).forEach(r => { born[r[col('Last')]] = { pop: r[col('POPID')], role: r[col('RoleType')], income: r[col('Income')], stage: r[col('CareerStage')], years: r[col('YearsInCareer')], nw: r[col('NetWorth')] }; });
+    return born;
+  };
+  const b = run();
+  t('all six promoted', () => assert.strictEqual(Object.keys(b).length, 6, JSON.stringify(b)));
+  t('a title a field places is priced by the job, not the flat 60000 (line cook, barista, taxi driver)', () => {
+    for (const k of ['Cook', 'Rista', 'Driver']) { assert.ok(b[k].income > 0 && b[k].income !== 60000, k + ' ' + JSON.stringify(b[k])); assert.ok(b[k].income % 100 === 0, k); }
+  });
+  t('the price is the intake rule itself: jobReferencePay_ on the same title, stage, seed (First|Last|POPID) and years', () => {
+    for (const [k, first, title] of [['Cook', 'Lina', 'Line cook'], ['Rista', 'Bea', 'Barista'], ['Driver', 'Tad', 'Taxi driver']]) {
+      const want = psb.jobReferencePay_(title, '', b[k].stage, first + '|' + k + '|' + b[k].pop, { years: b[k].years, tier: 4 });
+      assert.strictEqual(b[k].income, want, k);
+    }
+  });
+  t('a title no field places keeps today\'s value and is named in the log (QA tester, Youth mentor)', () => {
+    assert.strictEqual(b.Tester.income, 60000); assert.strictEqual(b.Mentor.income, 60000);
+    assert.ok(logs.some(l => /"QA tester"/.test(l)) && logs.some(l => /"Youth mentor"/.test(l)), JSON.stringify(logs));
+    assert.strictEqual(logs.length, 2, JSON.stringify(logs));
+  });
+  t('a minor still arrives a student at 0', () => { assert.strictEqual(b.Young.income, 0); assert.strictEqual(b.Young.role, 'student'); });
+  t('same inputs -> identical incomes (seeded, no rng)', () => { const b2 = run(); eq(Object.keys(b2).map(k => b2[k].income), Object.keys(b).map(k => b[k].income)); });
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

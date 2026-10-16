@@ -377,9 +377,22 @@ function checkForPromotions_(ctx) {
     // market weds them organically (blank marital never enters the pool).
     var dSeed = first + '|' + last + '|' + popId;
     var dRetired = age >= 65;
-    var dIncome = lookupIncome_(occ);
     var dYears = deriveYearsInCareer_(dSeed, age, dRetired ? 'retired' : '');
     if (dYears > Math.max(0, age - 18)) dYears = Math.max(0, age - 18);
+    var dStage = age < 22 ? 'student' : (dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level'));
+    // engine.293: the job pays, as at the intake door (engine.172) — this door priced
+    // by lookupIncome_ alone (exact catalog hit, else a flat 60000), so a migration
+    // wave's line cook, barista and taxi driver all arrived at $60,000. Seeded, no rng.
+    // A stage that earns nothing here (student / retired) or a title no field places
+    // keeps lookupIncome_; the miss is named in the log and shows on the ledger as an
+    // arrival at exactly the fallback with an unplaced title — map the title to fix it.
+    var dIncome = (typeof jobReferencePay_ === 'function') ? jobReferencePay_(occ, '', dStage, dSeed, { years: dYears, tier: 4 }) : null;
+    if (dIncome === null) {
+      dIncome = lookupIncome_(occ);
+      if (age >= 22 && !dRetired && dIncome === FALLBACK_INCOME_) {
+        Logger.log('checkForPromotions_ engine.293: no pay rule places "' + occ + '" (' + popId + ') — kept ' + dIncome);
+      }
+    }
     var setL = function(n, v) { var i9 = idxL(n); if (i9 >= 0) newRow[i9] = v; };
     // engine.67 step 4 (S325 matrix): minor guard — this path had none, so a
     // child-age GC row promoted with a full adult economic profile. Minors
@@ -392,7 +405,7 @@ function checkForPromotions_(ctx) {
     }
     setL('Income', dIncome);
     setL('YearsInCareer', dYears);
-    setL('CareerStage', age < 22 ? 'student' : (dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level')));
+    setL('CareerStage', dStage);
     setL('EducationLevel', deriveEducationLevel_(dSeed, neigh, age, null));
     setL('DebtLevel', age < 18 ? 0 : deriveDebtLevel_(dSeed, age, dIncome));
     setL('NetWorth', age < 18 ? 0 : deriveNetWorth_(dSeed, age, dIncome, dRetired ? 'retired' : ''));

@@ -169,11 +169,11 @@ test('engine.285 (codex probe): restored and gone again in the SAME cycle, then 
   const out = M.archiveCitizenExits_(ctxWith(1, { Simulation_Ledger: sl2, Citizen_Archive: ar }, 1300));
   assert.deepStrictEqual([out.archived, out.resumed, ar._rows.length, sl2._rows.length], [1, 1, 2, 0]);
 });
-test('engine.285: a row that differs from its snapshot only in LastUpdated is the same snapshot', () => {
-  const HU = H.concat(['LastUpdated']);
+test('engine.285: a row that differs from its snapshot only in LastUpdated / DialState (re-stamped every Cycle) is the same snapshot', () => {
+  const HU = H.concat(['LastUpdated', 'DialState']);
   const ar = makeSheet(HU.concat(META), []);
-  ar._rows.push(M.citizenArchiveRow_(HU, ['POP-00040', 'Gone', 'One', 'Traded', 3, 10, 'C108'], 'traded-away', 108, 2041));
-  const sl = makeSheet(HU, [['POP-00040', 'Gone', 'One', 'Traded', 3, 10, 'C109']]);
+  ar._rows.push(M.citizenArchiveRow_(HU, ['POP-00040', 'Gone', 'One', 'Traded', 3, 10, 'C108', '{"base":{"drive":50}}'], 'traded-away', 108, 2041));
+  const sl = makeSheet(HU, [['POP-00040', 'Gone', 'One', 'Traded', 3, 10, 'C109', '{"base":{"drive":51}}']]);
   const out = M.archiveCitizenExits_(ctxWith(1, { Simulation_Ledger: sl, Citizen_Archive: ar }, 1300));
   assert.deepStrictEqual([out.archived, out.resumed, ar._rows.length], [1, 1, 1]);
 });

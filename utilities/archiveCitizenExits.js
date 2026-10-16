@@ -199,10 +199,13 @@ function archiveCitizenExits_(ctx) {
   // the archive and the row on Simulation_Ledger. The old key (POPID, THIS fire's cycle,
   // reason) stalled the row on a same-cycle re-fire and took a second snapshot on the next
   // cycle. Now: when the archive already holds a (POPID, reason) snapshot whose ledger
-  // columns equal the row being removed (LastUpdated aside), a second copy would add
-  // nothing — the row is removed and nothing is copied. Any difference (an older exit, a
-  // restore, a row the engine touched since) takes a fresh snapshot: never a removal
-  // without the row's current state on the archive. Citizen_Archive is never edited.
+  // columns equal the row being removed, a second copy would add nothing — the row is
+  // removed and nothing is copied. LastUpdated and DialState are left out of the
+  // comparison: the engine re-stamps both on every row every Cycle, departed rows too
+  // (bench 1004 @36, C112: the only two columns that moved on a Traded row between a
+  // C111 snapshot and Phase 11). Any other difference (an older exit, a restore's
+  // ReturnedCycle, a life lived since) takes a fresh snapshot: never a removal without
+  // the row's state on the archive. Citizen_Archive is never edited.
   // (codex review 2026-10-16: a ReturnedCycle chronology rule lost a fresh exit when the
   // return stamp was stale or missing; payload equality cannot.)
   var av = ar.getDataRange().getValues();
@@ -211,11 +214,11 @@ function archiveCitizenExits_(ctx) {
     var ek = String(av[e][iPopA] || '').trim().toUpperCase() + '|' + String(av[e][iReasonA]);
     (snapsBy[ek] = snapsBy[ek] || []).push(e);
   }
-  var iUpdSL = header.indexOf('LastUpdated');
+  var iUpdSL = header.indexOf('LastUpdated'), iDialSL = header.indexOf('DialState');
   var cellKey = function(x) { return Object.prototype.toString.call(x) === '[object Date]' ? 'D' + x.getTime() : String(x === null || x === undefined ? '' : x); };
   var sameSnapshot = function(slRow, arRow) {
     for (var col = 0; col < header.length; col++) {
-      if (col === iUpdSL) continue;
+      if (col === iUpdSL || col === iDialSL) continue;
       if (cellKey(slRow[col]) !== cellKey(arRow[col])) return false;
     }
     return true;

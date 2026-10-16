@@ -58,19 +58,20 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 
 ## Current state
 
-**Current bench pointer (2026-10-16 overnight, engine.291 fixes + engine.294):** SANDBOX 1004 web app **@33 = PROD 4f + `generateCitizensEvents.js` + `loadEventContentLedger.js` at `71637c7a`** = the stage 4g PROD candidate (stage `output/engine291/prod-stage-fix`). Resync from live, guard 0, `clearfire cycle=112`, rb's 9 held token rows flipped yes bench-only; **C112 on @33** (fired 7 min after the cut): ok 164 s, persist 635/0, EE 4 → 4, 23 token lines, 0 raw tokens, 0 self-naming, 0 bad articles, 0 compose-null. Bench is now at C112 — resync before the next fire. (@32 = PROD 4f exact, A fire same night: 10 token lines on rb's 11 live rows, 8 raw `$MOOD`.)
+**Current bench pointer (2026-10-16 overnight, engine.293 (1)):** SANDBOX 1004 web app **@34 = PROD 4g + `checkForPromotions.js` at `bdcfb5c4`** = the stage 4h PROD candidate (stage `output/engine293/prod-stage`). Paired on one base (resync from live C111, guard 0, `clearfire cycle=112`): **C112 on @33** (= 4g) ok 178 s, persist 635/0 · **C112 on @34** (fired 6 min after the cut) ok 149 s, persist 635/0, EE 4 → 4 — the only cells that differ are the 6 wave arrivals' Income (+ NetWorth by a few dollars) and LastUpdated stamps; LifeHistory_Log, bonds, Business_Ledger, World_Config, Engine_Errors identical. Bench is at C112 — resync before the next fire. (@33 = stage 4g, the engine.291-fix/294 proof, same night.)
 
 **This file is protocol + CURRENT pointers only.** Per-wave proving narrative and bench-write logs go to the wave's own plan doc (builder rule 2026-08-30) or to [[DEPLOY_HISTORY]] — a session that finds itself writing a paragraph here is writing in the wrong file.
 
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Live:** PROD engine files = **stage 4g** = stage 4f + `generateCitizensEvents.js` + `loadEventContentLedger.js` at `71637c7a` (engine.291 fixes a6bdf1de `$LEADER` never on the leader, ebd0091a a/an before `$PILOTROLE`; engine.294 a token-bearing fragment never loads or prints) — **PROD web app @138**, pushed 2026-10-16 ~03:15 CDT by engine-sheet (`output/engine291/push-prod-fix.sh --go`), pull-back 168 files = `output/engine-sheet/stage4g-e291fix.sha256`, differs from 4f (`stage4f-e291.sha256`) in exactly those two files. Rollback: `output/engine291/prod-stage` (= 4f) push + version cut.
+**Live:** PROD engine files = **stage 4h** = stage 4g + `checkForPromotions.js` at `bdcfb5c4` (engine.293 (1): migration-wave and emergence arrivals priced by the job like the intake) — **PROD web app @139**, pushed 2026-10-16 ~03:46 CDT by engine-sheet (`output/engine293/push-prod.sh --go`), pull-back 168 = `output/engine-sheet/stage4h-e293.sha256`, differs from 4g in exactly that file. Stage 4g = 4f + `generateCitizensEvents.js` + `loadEventContentLedger.js` at `71637c7a` (@138, `stage4g-e291fix.sha256`). Rollback: `output/engine291/prod-stage-fix` (= 4g) push + version cut.
 
 **Recent PROD bumps** (last 5 — older → [[DEPLOY_HISTORY]] §PROD deploy log):
 
 | PROD | Date | Wave | Plan |
 |---|---|---|---|
+| @139 | 2026-10-16 | engine.293 (1) the promotion door prices arrivals by the job — `checkForPromotions.js` over stage 4g (stage 4h) | ROLLOUT engine.293; [[../plans/2026-08-10-economy-native-rebuild]] §Read 2026-10-16 |
 | @138 | 2026-10-16 | engine.291 fixes + engine.294 — `$LEADER` self-exclusion, a/an before `$PILOTROLE`, no raw-token fragment (2 files over stage 4f; stage 4g) | ROLLOUT engine.291, engine.294 |
 | @137 | 2026-10-16 | engine.291 the city names who is flying UNDOCKED — 2 files over stage 4e (stage 4f) | ROLLOUT engine.291; [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]] §Move 4 |
 | @136 | 2026-10-16 | engine.292 a zero night pushes — `casinoLedgerEngine.js` over stage 4d (1 file; stage 4e) | ROLLOUT engine.292; agy `output/antigravity/2026-10-16-review-research29-undocked-crossover.md` §Hunt 3 |

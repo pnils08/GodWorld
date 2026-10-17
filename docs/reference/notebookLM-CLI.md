@@ -538,6 +538,12 @@ Reasons:
   an upgrade will remove it.
 - Upstream 0.9.4 adds Gemini Notebook rebrand/redirect support, but its current
   `launch_chrome_process` still does not add `--no-sandbox` for root.
+- 2026-10-17: the box was upgraded to 0.15.5 at 01:14; `launch_chrome_process`
+  still lacks `--no-sandbox` for root, the upgrade wiped the local patch, the
+  01:21 login could not start Chrome, and the 08:00 daily brief failed
+  `Authentication expired`. Patch reapplied after every upgrade, then
+  `nlm login` over `ssh -Y` (a pasted-cookie login has no profile to rotate from
+  and dies within hours).
 - The next distinct scheduled daily run is still the cleanest proof that the new
   persistent profile survives unattended execution.
 

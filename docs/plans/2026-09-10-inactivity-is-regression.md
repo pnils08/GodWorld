@@ -545,11 +545,11 @@ Not built. Rev 1 → codex HOLD (`docs/for-claude-review/2026-10-17-codex-wake-n
 
 **As built (branch `engine197-wakes-no-rules`, worktree `/root/GodWorld-wake`; codex diff review `docs/for-claude-review/2026-10-17-codex-wake-no-rules-diff-review.md` = FIX, folded in `2de1744d`).** Where these differ from Rev 4, these win:
 - M2 spool, not one pending file: `logs/nightly-intake/<central-date>.json`, one per night, atomic (tmp + rename). Unreadable / malformed / wrong-night files stay and are logged. `flushNightlySpool` (lib, injected I/O) runs under the lock every run.
-- Lock: content `pid token`; taken over only when the owner pid is dead (rename aside, confirm it is the dead lock, link back on mismatch); released only while it still holds this run's token. No age-based takeover — a live run keeps it however long it runs.
+- Lock (`6bab1571`, after codex fix re-check FIX): content `pid token`, published atomically (temp + link — never visible empty). A dead owner's lock is broken only by the holder of an also-atomic `<lock>.break` mutex, which re-reads and unlinks only that same dead lock; nothing else removes the lock path, so a live owner's lock is never removed. Unknown ownership, a live owner or a held break → fail closed (the night stays spooled). Released only while it still holds this run's token. Residual: a process dying while holding `.break` (held for microseconds) leaves takeovers blocked until it is cleared by hand; rows keep spooling and the log says so.
 - `planNightlyIntake` checks the live A–H header (`Timestamp, POPID, Cycle, Daypart, Tag, ReflectionExcerpt, Applied, Affect`) and counts only a valid row (Applied yes/no + event or affect) as present; a truncated match keeps the night spooled.
 - M1 scrub: POP-00005's page only — a NIGHTLY doc on any other page is untouched.
 - Limits on record: a classifier throw / off-vocab night composes no row; a failed spool write logs the row as its only receipt; no timeout on the classifier / sheet calls; the caller-level wake path (spend after page write) is source-reviewed (codex SHIP), not unit-tested — the IIFE is not importable.
-- Commits: `7f66332f` `15bccdb6` `620a8a3f` `7636f11e` `874008e5` `2de1744d` mergeable; `b310439b` = W3, held (revert + re-apply put it at the tip). Tests: wakePerception 103, memoryFence 42, citizenPage 33.
+- Merge = every branch commit except W3 `b310439b` (cherry-pick, oldest first: `7f66332f` `15bccdb6` `620a8a3f` `7636f11e` `874008e5` `2de1744d` `6bab1571`; the W3 `e2874b53` + its revert `1d374091` cancel and can be skipped). Tests: wakePerception 108, memoryFence 42, citizenPage 33.
 
 ## Changelog
 

@@ -424,6 +424,7 @@ function compressLifeHistory_(ctx, options) {
   var biasApplied = 0, biasCitizens = 0;
   var unlivedApplied = 0; // engine.38 B3 (S283) — branch events captured at fold
   var foldedEntries = 0, settled = 0; // engine.177 — watermark fold + mood settle counts
+  var futureStampedEntries = 0, futureWatermarkRows = 0; // engine.197 — clock errors, counted not folded
   var pushesQueued = 0; // engine.180 — resolves that name an action
 
   // engine.94 Task 3: Phase-4 grief cascades drain into the same single-writer
@@ -549,10 +550,17 @@ function compressLifeHistory_(ctx, options) {
     // reads 50 and is left byte-identical (grief / wear stability); the one-time seed writes those.
     var fandomSeedDue = !existingDialState;
     var foldedMark = (parsedDial && parsedDial.folded > 0) ? parsedDial.folded : 0;
+    // engine.197 (codex dial review 2026-10-17, hunt 1c): a line stamped AFTER the current Cycle is a
+    // clock error, never an event — the engine57 spouse migration stamped Y3C29 (= C133) at C101 and
+    // the fold advanced 13 watermarks to 133, so every later line was skipped. It does not fold and
+    // does not move the watermark; it is counted. A watermark already past the current Cycle is
+    // counted too (repair is a separate, reviewed data correction — not done here).
+    if (cycle > 0 && foldedMark > cycle) futureWatermarkRows++;
     var newEntries = [];
     if (entries && entries.length) {
       for (var ne = 0; ne < entries.length; ne++) {
         var neC = entries[ne].cycle;
+        if (neC != null && cycle > 0 && neC > cycle) { futureStampedEntries++; continue; }
         if (neC != null && neC > 0 && neC > foldedMark && entries[ne].tag !== 'CareerState' && entries[ne].tag !== 'HospitalIncomeState') newEntries.push(entries[ne]); // cycle <= 0 (C0 / C?) = legacy, folds at trim
       }
     }
@@ -736,6 +744,7 @@ function compressLifeHistory_(ctx, options) {
     biasCitizens: biasCitizens,
     unlivedApplied: unlivedApplied,
     foldedEntries: foldedEntries,
+    futureStamped: { entries: futureStampedEntries, watermarkRows: futureWatermarkRows }, // engine.197
     settled: settled,
     pushesQueued: pushesQueued,
     griefApplied: griefApplied,
@@ -751,6 +760,7 @@ function compressLifeHistory_(ctx, options) {
     ', reflections ' + reflectionsMoved + '/' + reflectionCitizens + ' citizens' +
     ', biases ' + biasApplied + '/' + biasCitizens + ' citizens' +
     ', folded ' + foldedEntries + ' entries, settled ' + settled +
+    (futureStampedEntries || futureWatermarkRows ? ', FUTURE-STAMPED ' + futureStampedEntries + ' lines / ' + futureWatermarkRows + ' watermarks past C' + cycle : '') + // engine.197
     ', fandom seeded ' + fandomSeeded + ' (' + fandomInheritedFans + ' as household fans)' + // engine.208 C8
     (S.pressureCounts ? ', pressure ' + JSON.stringify(S.pressureCounts) : ', pressure none') + // engine.176 per-emitter counts (S.pressureCounts)
     (S.contests ? ', contests ' + JSON.stringify(S.contests) : ', contests none') + // engine.179 (S.contests)
@@ -1392,8 +1402,7 @@ function serializeDialState_(c) {
   if (c.fan) o.fan = c.fan; // engine.208 the team a fan follows ('as' | 'oaks' | 'both')
   if (c.lifeEvent) o.lifeEvent = c.lifeEvent; // engine.286 Task 2 held medium event {k, d, c} — the promotion die writes it, the order + own roll read it
   if (c.pet) o.pet = c.pet; // engine.98 the household animal {k: 'cat'|'dog', l, n, name?} — survives every dial rewrite
-  // Any key this writer does not manage is written back as stored (citizenMemory carryDialExtras_).
-  return JSON.stringify(carryDialExtras_(o, c));
+  return JSON.stringify(o);
 }
 
 // engine.180 (S438): a Reflection_Intake `Resolves` text -> +1 (an action that reaches:

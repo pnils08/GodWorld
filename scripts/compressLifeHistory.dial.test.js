@@ -329,28 +329,27 @@ console.log('═══ Section I — no-pending byte-identical regression (objec
   assert('P4 no pet key when the citizen has none', !('pet' in JSON.parse(C.serializeDialState_(E.newCitizen_()))));
 }
 
-// A DialState key no writer manages rides through every rewrite untouched; a managed key the engine
-// clears stays cleared (the extras never resurrect a DIAL_STATE_KEYS name).
+// engine.197 (codex dial review 2026-10-17, hunt 1c): a line stamped after the current Cycle never folds
+// and never moves the watermark (the engine57 spouse migration stamped Y3C29 = C133 at C101).
 {
   const state = E.newCitizen_();
   state.folded = 105;
-  state.futureKey = { a: 1, l: 106 };
-  state.lifeEvent = { k: 'promotion', d: 1, c: 105 };
-  const ctx = makeCtx([{ POPID: 'SYNTHETIC-EXTRA',
-    LifeHistory: 'C106 — [Promotion] Synthetic extra promotion', TraitProfile: 'Updated:c105',
-    DialState: JSON.stringify(state) }], 106, true);
+  const ctx = makeCtx([{ POPID: 'SYNTHETIC-FUTURE',
+    LifeHistory: 'Y3C29 — [Household] Synthetic future-dated line\nC106 — [Promotion] Synthetic real promotion',
+    TraitProfile: 'Updated:c105', DialState: JSON.stringify(state) }], 106, true);
   C.compressLifeHistory_(ctx);
   const stored = JSON.parse(get(ctx, 0, 'DialState'));
-  assert('X1 an unmanaged key survives the Phase-9 rewrite', JSON.stringify(stored.futureKey) === JSON.stringify(state.futureKey) && stored.folded === 106,
-    JSON.stringify({ futureKey: stored.futureKey || null, folded: stored.folded }));
-  const c = E.deserialize_(stored);
-  assert('X2 the extras are invisible to the dial logic', !Object.keys(c).includes('_dialExtras') && !('futureKey' in c) && !JSON.stringify(c).includes('futureKey'));
-  delete c.lifeEvent;
-  const out = JSON.parse(C.serializeDialState_(c));
-  assert('X3 chaos-cars path keeps the unmanaged key, a cleared managed key stays cleared',
-    JSON.stringify(out.futureKey) === JSON.stringify(state.futureKey) && out.lifeEvent === undefined, JSON.stringify(out));
-  assert('X4 citizenMemory serialize_ carries it too', JSON.stringify(E.serialize_(E.deserialize_(stored)).futureKey) === JSON.stringify(state.futureKey));
-  assert('X5 a citizen with no extras writes no extras', Object.keys(JSON.parse(C.serializeDialState_(E.deserialize_({ base: { drive: 50 } })))).sort().join(',') === 'base,mood,streak');
+  assert('F1 a future-stamped line does not move the watermark; the real C106 line folds', stored.folded === 106 && stored.mood.drive > 0,
+    JSON.stringify({ folded: stored.folded, driveMood: stored.mood.drive }));
+  assert('F2 the future line does not reach family', !(stored.mood.family > 0), JSON.stringify(stored.mood));
+  assert('F3 the future line is counted', ctx.summary.lifeHistoryCompression.futureStamped.entries === 1, JSON.stringify(ctx.summary.lifeHistoryCompression.futureStamped));
+  // a watermark already past the Cycle is counted, and its row is left as stored (repair is separate)
+  const frozen = E.newCitizen_(); frozen.folded = 133;
+  const ctx2 = makeCtx([{ POPID: 'SYNTHETIC-FROZEN', LifeHistory: 'C106 — [Promotion] Synthetic promotion',
+    TraitProfile: 'Updated:c105', DialState: JSON.stringify(frozen) }], 106, true);
+  C.compressLifeHistory_(ctx2);
+  assert('F4 a watermark past the Cycle is counted and not lowered', ctx2.summary.lifeHistoryCompression.futureStamped.watermarkRows === 1 &&
+    JSON.parse(get(ctx2, 0, 'DialState')).folded === 133);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

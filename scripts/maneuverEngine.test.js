@@ -118,7 +118,6 @@ function ctxFor(rows, cfg, S) { return { config: Object.assign({ cycleCount: 106
 
 console.log('the round trip through the Phase 9 serializer');
 {
-  global.carryDialExtras_ = mem.carryDialExtras_;
   const CL = require('../utilities/compressLifeHistory.js');
   const parsed = JSON.parse(dial({ drive: 80 }, { maneuver: { p: 'climb', g: 'home', a: 71, c: 106 }, chaosExposure: { count: 1 } }));
   const c = mem.deserialize_(parsed);

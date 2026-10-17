@@ -184,7 +184,8 @@ function L(i) { return sheets.columnIndexToLetter(i); }
     set(iBirth, 2042 - pick.age); set(iCity, 'Oakland'); set(iNbhd, cNbhd);
     set(iMar, 'married'); set(iInc, GENERIC_SPOUSE_INCOME); set(iGen, pick.sex);
     set(iSp, id + ' ' + nm(id));
-    set(iLife, `Y3C29 — [Family] The record catches up: married to ${nm(id)}, at home in ${cNbhd}.`);
+    // engine.197: the stamp was hand-typed Y3C29 (= C133) while CYCLE is 101; computed from CYCLE now.
+    set(iLife, `${'Y' + (Math.floor((CYCLE - 1) / 52) + 1) + 'C' + (((CYCLE - 1) % 52) + 1)} — [Family] The record catches up: married to ${nm(id)}, at home in ${cNbhd}.`);
 
     let targetHH = hid;
     if (targetHH) { set(iHH, targetHH); } // spouse joins existing household

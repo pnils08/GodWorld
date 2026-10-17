@@ -251,23 +251,6 @@ function snapshot_(c) {
 // storage round-trip (Phase 2 will persist this in TraitProfile/JSON) — pure objects, no I/O.
 // chaosExposure rides along only when present (additive; old DialState rows lack it and
 // deserialize to no exposure — backward compatible with the S256-live dial spine).
-// The DialState keys the engine manages by name. Any other key on a stored DialState is carried
-// through every rewrite untouched (carryDialExtras_), so a new field can never be silently dropped
-// by a writer that predates it. A managed key comes only from the live citizen object, so a field
-// the engine deliberately clears (delete c.lifeEvent) stays cleared.
-var DIAL_STATE_KEYS = ['base', 'mood', 'streak', 'folded', 'chaosExposure', 'maneuver', 'pressure',
-  'wear', 'debtDefault', 'grief', 'fan', 'lifeEvent', 'pet'];
-function carryDialExtras_(o, c) {
-  var x = c && c._dialExtras;
-  if (!x) return o;
-  for (var k in x) {
-    if (!Object.prototype.hasOwnProperty.call(x, k)) continue;
-    if (Object.prototype.hasOwnProperty.call(o, k) || DIAL_STATE_KEYS.indexOf(k) >= 0) continue;
-    o[k] = x[k];
-  }
-  return o;
-}
-
 function serialize_(c) {
   var o = { base: c.base, mood: c.mood, streak: c.streak };
   if (c.chaosExposure) o.chaosExposure = c.chaosExposure;
@@ -278,7 +261,7 @@ function serialize_(c) {
   if (c.fan) o.fan = c.fan; // engine.208 the team a fan follows: 'as' | 'oaks' | 'both'
   if (c.lifeEvent) o.lifeEvent = c.lifeEvent; // engine.286 Task 2 held medium event {k, d, c}
   if (c.pet) o.pet = c.pet; // engine.98 the household animal {k: 'cat'|'dog', l, n, name?}
-  return carryDialExtras_(o, c);
+  return o;
 }
 function deserialize_(obj) {
   var c = newCitizen_(obj && obj.base);
@@ -298,12 +281,6 @@ function deserialize_(obj) {
     if (obj.fan) c.fan = obj.fan;                 // engine.208 the team a fan follows — seed / household / mint write it
     if (obj.lifeEvent) c.lifeEvent = obj.lifeEvent; // engine.286 Task 2 held medium event {k, d, c} — the promotion die writes it
     if (obj.pet) c.pet = obj.pet;                 // engine.98 the household animal {k, l, n, name?} — authored or acquired
-    // Unmanaged keys ride along, hidden from the dial logic (non-enumerable), written back as stored.
-    var extras = null;
-    for (var k in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, k) && DIAL_STATE_KEYS.indexOf(k) < 0) (extras = extras || {})[k] = obj[k];
-    }
-    if (extras) Object.defineProperty(c, '_dialExtras', { value: extras, enumerable: false, writable: true, configurable: true });
   }
   return c;
 }
@@ -527,7 +504,6 @@ if (typeof module !== 'undefined' && module.exports) {
     DIALS: DIALS, MIDPOINT: MIDPOINT, BAND_CUTS: BAND_CUTS, BAND_MULT: BAND_MULT,
     HARDEN_STREAK: HARDEN_STREAK,
     newCitizen_: newCitizen_, current_: current_,
-    DIAL_STATE_KEYS: DIAL_STATE_KEYS, carryDialExtras_: carryDialExtras_,
     applyEvent_: applyEvent_, applyTaggedEvent_: applyTaggedEvent_,
     roomScaled_: roomScaled_, applyCycleEffects_: applyCycleEffects_,
     applyReflectionDualTag_: applyReflectionDualTag_,

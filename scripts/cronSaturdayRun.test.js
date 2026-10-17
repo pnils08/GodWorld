@@ -266,9 +266,6 @@ console.log('Test 6: mergeStorylineLedger');
   ok('narrator charge: no engine vocabulary leaks ("system")', !/\bsystems?\b/i.test(X.NARRATOR_CHARGE(111, 1).split('\n').slice(8).join(' ')));
 }
 
-console.log(`\n${passed} passed, ${failed} failed`);
-process.exit(failed ? 1 : 0);
-
 // Builder ruling 2026-10-16: coverage credit comes only from the filings the Cycle Pulse printed.
 (function () {
   const { printedOnly } = require('./cron-saturday-run');
@@ -277,3 +274,30 @@ process.exit(failed ? 1 : 0);
   assert('no published record → no coverage credit', printedOnly(set, null).length === 0);
   assert('empty set', printedOnly([], new Set(['a'])).length === 0);
 })();
+
+// Receipt reader: missing / malformed / empty selection, and only printed stems reach usage rows.
+(function () {
+  const fs = require('fs'), path = require('path');
+  const { printedStems, printedOnly, usageRowsFor } = require('./cron-saturday-run');
+  const ROOT = path.resolve(__dirname, '..');
+  const receipt = c => path.join(ROOT, 'output', 'edition_published_c' + c + '.json');
+  const C = 990001; // a cycle no run will ever write
+  try { fs.unlinkSync(receipt(C)); } catch (_) {}
+  assert('missing receipt -> null', printedStems(C) === null);
+  fs.writeFileSync(receipt(C), '{not json');
+  assert('malformed receipt -> null', printedStems(C) === null);
+  fs.writeFileSync(receipt(C), JSON.stringify({ cycle: String(C), selected: [] }));
+  const empty = printedStems(C);
+  assert('empty selection -> empty set', empty instanceof Set && empty.size === 0);
+  fs.writeFileSync(receipt(C), JSON.stringify({ cycle: String(C), selected: ['printed-one'] }));
+  const set = [
+    { stem: 'printed-one', text: 'Tomas Aguilar argued with the board.', sidecar: { intake: { names: [{ name: 'Tomas Aguilar', popid: 'POP-00529', role: 'subject' }] } } },
+    { stem: 'drawer-two', text: 'Merkin Jumper said the show changed him.', sidecar: { intake: { names: [{ name: 'Merkin Jumper', popid: 'POP-00688', role: 'quoted-source' }] } } },
+  ];
+  const rows = printedOnly(set, printedStems(C)).flatMap(e => usageRowsFor(e));
+  assert('only the printed filing names become usage rows', rows.length === 1 && rows[0].name === 'Tomas Aguilar' && rows[0].context === 'printed-one');
+  try { fs.unlinkSync(receipt(C)); } catch (_) {}
+})();
+
+console.log(`\n${passed} passed, ${failed} failed`);
+process.exit(failed ? 1 : 0);

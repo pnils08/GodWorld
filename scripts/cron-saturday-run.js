@@ -1268,10 +1268,11 @@ async function main() {
     // engine.114 (S427): stepPublish can throw on either armed gate — the
     // ingestEdition exit-code check or the NotebookLM `source add` check —
     // and until now an uncaught throw here aborted every step below it.
-    // coverage/sweep/sheets/signals read the staged set and the scorecard,
-    // never the edition file or Supermemory ingest state (verified), so a
-    // canon-door failure has no reason to take Citizen_Media_Usage and
-    // Storyline_Ledger down with it. Surface it loud, keep going, still
+    // coverage/sweep/signals read the staged set and the scorecard, never the
+    // edition file. stepSheets reads the publish receipt (edition_published_c<N>.json)
+    // since 2026-10-16: with no receipt it writes no coverage or byline-published
+    // credit and logs the recover line, so a canon-door failure still has no reason
+    // to take Storyline_Ledger down with it. Surface it loud, keep going, still
     // fail the run at the end so this doesn't become a new silent false-clear.
     let publishErr = null;
     try {

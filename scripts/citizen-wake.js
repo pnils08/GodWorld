@@ -2,7 +2,8 @@
 /* citizen-wake — the rotating-citizen wake loop (citizen-loop Phase 2, engine-sheet S262).
  *
  * Mags keeps her nightly reflection (scripts/discord-reflection.js, the fixed anchor). THIS wakes a
- * DIFFERENT citizen each run — the variety engine. Each wake: pick a citizen living a big live delta,
+ * DIFFERENT citizen each run — the variety engine. Each wake: draw one citizen by lottery over the whole
+ * ledger (engine.197, builder 2026-10-17: "Any citizen can wake whenever, there are no rules"),
  * assemble THEIR scoped perception (dials -> disposition, their real LifeHistory tail, real
  * co-residents), have them reflect in their own voice (DeepSeek), accrete the prose to their private
  * Supermemory page, and persist the classified tag to Reflection_Intake for the (gated) cycle read.
@@ -35,8 +36,8 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory,
   loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord,
-  loadLivedEvents, pickLived, renderLivedLine } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice
-const { selectProvocation, _hash53 } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank; _hash53 seeds T1 draw + T2 slot
+  loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice
+const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
 
 const ARGV = process.argv.slice(2);
@@ -45,7 +46,6 @@ const arg = (k, d) => { const m = ARGV.find((a) => a.startsWith(`--${k}=`)); ret
 const WAKE = (arg('wake', 'evening') || 'evening').toLowerCase();
 const FORCE_POP = arg('pop', null);
 
-const ROTATION_MEMORY = 100;    // don't re-wake the last N citizens (engine.48 T1: 25 -> 100 — reach past the orbit; re-wakes still possible within ~3 weeks at 5/day)
 const STATE_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake-state.json');
 const LOG_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake.log');
 const TENSION_FILE = path.join(__dirname, '..', 'logs', 'citizen-tension-state.json'); // B2 index — page is the durable surface, this skips a page search
@@ -79,7 +79,7 @@ function logLine(s) {
   try { fs.appendFileSync(LOG_FILE, line); } catch (e) {}
   console.log(s);
 }
-function loadState() { try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch (e) { return { recent: [] }; } }
+function loadState() { try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch (e) { return {}; } }
 function saveState(st) { try { fs.writeFileSync(STATE_FILE, JSON.stringify(st, null, 2)); } catch (e) {} }
 
 // ---- B2 tension register (seams Task 3) — loop-side only: no dial writes, no sheet writes,
@@ -139,79 +139,6 @@ function loadEditionSlice(popId, name, nh, cycle) {
     }
     return '';
   } catch (e) { return ''; }
-}
-
-// engine.48 T2 — voiced POPIDs from the authored voice agents, agent-count-agnostic
-// (same enumeration as engine.43 Task 1: first POP- after "POP ID:" per IDENTITY.md).
-function voicedPopIds() {
-  const out = [];
-  try {
-    const dir = path.join(__dirname, '..', '.claude', 'agents');
-    for (const d of fs.readdirSync(dir).filter((x) => x.startsWith('citizen-voice-'))) {
-      try {
-        const md = fs.readFileSync(path.join(dir, d, 'IDENTITY.md'), 'utf8');
-        const m = md.match(/POP ID:\*{0,2}\s*(POP-\d{5})/);
-        if (m) out.push(m[1].toUpperCase());
-      } catch (e) {}
-    }
-  } catch (e) {}
-  return out;
-}
-
-// engine.48 T1 — seeded WEIGHTED draw replaces the deterministic sort[0] pick: high-delta
-// citizens stay favored but mid-pool citizens get real probability mass. Same (cycle, wake)
-// -> same pick. T2 — a seeded 1-in-5 slot goes to the least-recently-woken voiced citizen
-// that passes the same pool filters, so authored voices keep cycling into the loop.
-function selectCitizen(pool, state, cycle, lived) {
-  if (FORCE_POP) {
-    const forced = pool.find((p) => p.popId === FORCE_POP.toUpperCase());
-    if (forced) return { c: forced, slot: 'forced' };
-    logLine(`--pop ${FORCE_POP} not in shaped pool; falling back to rotation`);
-  }
-  const recentList = state.recent || [];
-  const recent = new Set(recentList);
-
-  // T2 voiced slot — before the weighted draw
-  if (_hash53('voiced:' + cycle + ':' + WAKE, 0x5eed) % 5 === 0) {
-    const voiced = voicedPopIds().map((id) => pool.find((p) => p.popId === id && !p.livedOnly)).filter(Boolean);
-    if (voiced.length) {
-      // least-recently-woken first: recent is most-recent-first, so absent beats present
-      // and a deeper index beats a shallower one.
-      const oldness = (p) => { const i = recentList.indexOf(p.popId); return i < 0 ? Number.MAX_SAFE_INTEGER : i; };
-      voiced.sort((a, b) => oldness(b) - oldness(a));
-      return { c: voiced[0], slot: 'voiced' };
-    }
-    logLine('voiced slot fired but no voiced citizen passes the pool filters; falling through to rotation');
-  }
-
-  // pipeline.73 step 1 — the LIVED slot: a news-grade life event (birth, death's survivor, hospital,
-  // retirement, promotion) wakes its citizen before posture. Picked upstream by pickLived (cap, window,
-  // age, once per event); a livedOnly citizen (under the shaped floor) is reachable from here alone.
-  if (lived) return { c: lived.c, slot: 'lived', event: lived.event, rel: lived.rel };
-
-  // engine.180 (S438) — the POSTURE slot: a citizen whose game state moved this cycle
-  // (a [Maneuver-*] line stamped on the current cycle) and who has not woken since
-  // speaks the day it happened. Least-recently-woken first. One per wake, before the draw.
-  if (cycle) {
-    const moved = pool.filter((p) => !p.livedOnly && p.postureChangedCycle === Number(cycle) && !recent.has(p.popId));
-    if (moved.length) {
-      const oldnessM = (p) => { const i = recentList.indexOf(p.popId); return i < 0 ? Number.MAX_SAFE_INTEGER : i; };
-      moved.sort((a, b) => oldnessM(b) - oldnessM(a));
-      return { c: moved[0], slot: 'posture' };
-    }
-  }
-
-  const shaped = pool.filter((p) => !p.livedOnly);
-  let candidates = shaped.filter((p) => !recent.has(p.popId));
-  if (!candidates.length) candidates = shaped; // everyone woken recently -> reset the cycle
-  const weights = candidates.map((p) => 1 + p.eventMag * 2 + dials.deviation(p.cur) / 50);
-  const total = weights.reduce((s, w) => s + w, 0);
-  let x = (_hash53('select:' + cycle + ':' + WAKE, 0x5eed) % Math.max(1, Math.floor(total * 1000))) / 1000;
-  for (let i = 0; i < candidates.length; i++) {
-    if (x < weights[i]) return { c: candidates[i], slot: 'rotation' };
-    x -= weights[i];
-  }
-  return { c: candidates[0], slot: 'rotation' };
 }
 
 function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, livedLine) {
@@ -293,19 +220,23 @@ async function generateVoice(system, user) {
 
 (async () => {
   const cycle = Number(arg('cycle', null)) || (() => { try { return getCurrentCycle(); } catch (e) { return null; } })();
-  // pipeline.73 step 1 — this Cycle's lived events; their recipients join the pool under the floor.
+  // pipeline.73 — this Cycle's lived events. engine.197: perception for whoever is drawn, not a slot.
   const livedEvents = cycle ? await loadLivedEvents(cycle) : [];
-  if (livedEvents.error) logLine('lived events read failed (non-fatal, no lived slot this wake): ' + livedEvents.error);
+  if (livedEvents.error) logLine('lived events read failed (non-fatal, no lived line this wake): ' + livedEvents.error);
   const livedList = Array.isArray(livedEvents) ? livedEvents : [];
-  const pool = await buildPool({ include: new Set(livedList.flatMap((e) => (e.recipients || []).map((r) => r.pop))) });
-  logLine(`pool: ${pool.length} shaped citizens with lived history (wake=${WAKE}, cycle=${cycle}, dry=${DRY}, lived events=${livedList.length})`);
+  // engine.197 — no floors at the wake (builder 2026-10-17): every ledger row with dials, a name and a hood.
+  const poolStats = {};
+  const pool = await buildPool({ shapedMin: 0, lifeMinChars: 0, stats: poolStats });
+  logLine(`pool: ${pool.length} of ${poolStats.rows} ledger rows (skipped: dial ${poolStats.dial}, name/hood ${poolStats.nameHood}, rule ${poolStats.rule}) (wake=${WAKE}, cycle=${cycle}, dry=${DRY}, lived events=${livedList.length})`);
   if (!pool.length) { logLine('empty pool — nothing to wake'); process.exit(0); }
 
   const state = loadState();
-  const lived = (FORCE_POP || !cycle) ? null : pickLived(livedList, pool, state, cycle, require('/root/GodWorld/lib/citizenDerivation').currentSimYear());
-  const picked = selectCitizen(pool, state, cycle, lived);
-  const livedLine = picked.slot === 'lived' ? renderLivedLine(picked.event, cycle, picked.rel) : '';
+  const seedKey = wakeSeedKey(cycle, WAKE, new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' }));
+  const picked = selectWakeCitizen(pool, { forcePop: FORCE_POP, seedKey });
+  if (FORCE_POP && picked.slot !== 'forced') logLine(`--pop ${FORCE_POP} not in the pool; falling back to the draw`);
   const c = picked.c;
+  const lived = cycle ? livedFor(c.popId, livedList, state) : null;
+  const livedLine = lived ? renderLivedLine(lived.event, cycle, lived.rel) : '';
   const neighbors = await coResidents(c.nh, c.popId);
   const sportsLine = await loadSportsSlice();                 // T1b — one feed read, shared across the wake
   const lifeArc = await loadLifeArc(c.popId);                 // T1a — canonical milestone arc from LifeHistory_Log
@@ -378,7 +309,7 @@ async function generateVoice(system, user) {
     }) + '\n');
   } catch (e) { logLine('offered-names log failed (non-fatal): ' + e.message); }
 
-  logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot}${picked.event ? ' event=' + picked.event.id : ''}`);
+  logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot} seed=${seedKey}${lived ? ' event=' + lived.event.id : ''}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');
   if (DRY) console.log('\n--- provocation (user prompt, T5) ---\n' + user + '\n----------------------------------');
   const reflection = await generateVoice(system, user);
@@ -466,21 +397,13 @@ async function generateVoice(system, user) {
   for (const k of rippleKeysHit) { delete rippleState[k]; logLine(`ripple consumed: ${k}`); }
   saveRippleState(rippleState); // also persists this wake's silent expiry pass
 
-  // 5) record rotation + recall bookkeeping (staleness input for future wakes — live runs only)
-  state.recent = [c.popId, ...(state.recent || [])].slice(0, ROTATION_MEMORY);
-  // pipeline.73 — the lived event is spent only here, after the page write landed (a failed append
-  // exits above and the event waits for the next wake). Spent ids age out past the window.
-  if (picked.slot === 'lived' && picked.event) {
-    state.livedSpent = state.livedSpent || {};
-    state.livedCount = state.livedCount || {};
-    state.livedSpent[picked.event.id] = cycle;
-    state.livedCount[cycle] = (state.livedCount[cycle] || 0) + 1;
-    for (const k of Object.keys(state.livedSpent)) if (Number(state.livedSpent[k]) < cycle - 3) delete state.livedSpent[k];
-    for (const k of Object.keys(state.livedCount)) if (Number(k) < cycle - 3) delete state.livedCount[k];
-  }
+  // 5) recall bookkeeping (live runs only). pipeline.73 — the lived event is spent only here, after the
+  // page write landed (a failed append exits above and the event waits). engine.197: spent per recipient,
+  // eventId:POPID — another survivor of the same death still perceives it if drawn. Receipts age out.
+  const spentKey = recordLivedSpend(state, lived, c.popId, cycle);
   saveState(state);
-  if (picked.slot === 'lived' && picked.event && !((loadState().livedSpent || {})[picked.event.id])) {
-    logLine(`LIVED STATE NOT SAVED — ${picked.event.id} will wake again (the page already holds this reflection)`);
+  if (spentKey && !((loadState().livedSpent || {})[spentKey])) {
+    logLine(`LIVED STATE NOT SAVED — ${spentKey} will render again (the page already holds this reflection)`);
   }
   resonance.markRecalled(c.popId, cycle, pageRead.keys);
 })().catch((e) => { logLine('FATAL ' + e.message); process.exit(1); });

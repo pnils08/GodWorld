@@ -21,10 +21,6 @@
  *
  * Outputs:
  *   output/beats/<Tab>.jsonl   — one row object per line, header keys verbatim
- *   output/beats/Employment_Roster.jsonl — DERIVED from Simulation_Ledger (Active rows with an
- *                                EmployerBizId), not a tab read. The sheet tab of that name is a
- *                                2026-03-01 one-shot copy (linkCitizensToEmployers.js) that drifted
- *                                225 rows from the ledger by C111 and is unread since 2026-10-17.
  *   output/beats/meta.json     — cycle, generatedAt, rows per tab
  *   output/beats/prev/         — the prior cycle's dump, kept so a builder can
  *                                compute "what moved" (Transit_Metrics,
@@ -48,7 +44,8 @@ const META = path.join(OUT_DIR, 'meta.json');
 
 // The beat tabs and who they feed (plan Task 4 names the columns per seat).
 const BEAT_TABS = [
-  'Business_Ledger',          // business / food — the faces come from Employment_Roster.jsonl, derived from Simulation_Ledger below
+  'Business_Ledger',          // business / food — with Employment_Roster for the faces
+  'Employment_Roster',
   'Casino_Ledger',            // business — casino activity (builder, S433)
   'Transit_Metrics',          // Trevor
   'Crime_Metrics',            // Rachel
@@ -90,30 +87,11 @@ const quiet = args.includes('--quiet');
 const cycleArg = args.find(a => !a.startsWith('--')) || null;
 function log(...m) { if (!quiet) console.error(...m); }
 
-// pipeline.73 step 2 — derived files beside the tabs (not tabs: never listed in ALL_TABS).
+// pipeline.73 step 2 — two derived files beside the tabs (not tabs: never listed in ALL_TABS).
 // LifeHistory_Log.jsonl = the raw tab's rows for the stamped Cycle and the one before, header keys verbatim.
 // Lived_Events.jsonl     = the lived wake's news-grade events for that window, names joined from the
 //                          same Simulation_Ledger read (the archive for the deceased).
 const hdrOf = (rows) => (rows && rows[0]) || [];
-// Employment_Roster.jsonl = who works where, read off Simulation_Ledger itself (builder 2026-10-17: the
-// ledger is the only truth; the Employment_Roster TAB is a stale March copy nobody maintained). Same
-// row shape the slice builders and newsroomSourcing already consume: BIZ_ID, POP_ID, CitizenName,
-// RoleType, Status, MappingLayer. Only Active citizens with an EmployerBizId — a blank employer is
-// the engine's hiring pool (engine.135 E3), never SELF_EMPLOYED/UNTRACKED guessed from a keyword.
-function rosterFromLedger(ledgerRaw) {
-  const h = hdrOf(ledgerRaw), ix = (k) => h.indexOf(k);
-  const iPop = ix('POPID'), iFirst = ix('First'), iLast = ix('Last'), iStat = ix('Status'), iRole = ix('RoleType'), iEmp = ix('EmployerBizId');
-  const out = [];
-  for (const r of (ledgerRaw || []).slice(1)) {
-    const pop = String(r[iPop] || '').trim(), emp = String(r[iEmp] || '').trim();
-    if (!pop || !emp) continue;
-    if (String(r[iStat] || '').trim().toLowerCase() !== 'active') continue;
-    const name = (String(r[iFirst] || '').trim() + ' ' + String(r[iLast] || '').trim()).trim();
-    if (!name) continue;
-    out.push({ BIZ_ID: emp, POP_ID: pop, CitizenName: name, RoleType: String(r[iRole] || '').trim(), Status: 'Active', MappingLayer: 'ledger' });
-  }
-  return out;
-}
 function toObjects(rows) { const h = hdrOf(rows); return (rows || []).slice(1).map(r => Object.fromEntries(h.map((k, i) => [k, r[i] === undefined ? '' : r[i]]))); }
 function lifeWindowRows(logRaw, stamp) {
   const h = hdrOf(logRaw), iC = h.indexOf('Cycle');
@@ -141,7 +119,7 @@ function livedEventRows(src, stamp) {
     return out;
   });
 }
-module.exports = { lifeWindowRows, livedEventRows, rosterFromLedger, toObjects, resolveStamp, requireCols, publishGeneration };
+module.exports = { lifeWindowRows, livedEventRows, toObjects, resolveStamp, requireCols, publishGeneration };
 
 function readMeta(p) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; } }
 
@@ -229,7 +207,7 @@ async function main() {
   log('dumpBeatTabs: reading LifeHistory_Log, Hospital_Ledger, Simulation_Ledger for the lived window…');
   const logRaw = requireCols('LifeHistory_Log', await sheets.getRawSheetData('LifeHistory_Log'), ['POPID', 'EventTag', 'EventText', 'Cycle'], true);
   const hospRaw = requireCols('Hospital_Ledger', await sheets.getRawSheetData('Hospital_Ledger'), ['AdmissionId', 'POPID', 'AdmitCycle', 'DischargeCycle', 'Cause'], false);
-  const ledgerRaw = requireCols('Simulation_Ledger', await sheets.getRawSheetData('Simulation_Ledger'), ['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'HouseholdId', 'Status', 'BirthYear', 'EmployerBizId'], true);
+  const ledgerRaw = requireCols('Simulation_Ledger', await sheets.getRawSheetData('Simulation_Ledger'), ['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'HouseholdId', 'Status', 'BirthYear'], true);
   const lifeRows = lifeWindowRows(logRaw, stamp);
   const anyDeath = lifeRows.some(r => /^Death$/i.test(String(r.EventTag || '').trim()));
   const archiveRaw = anyDeath ? requireCols('Citizen_Archive', await sheets.getRawSheetData('Citizen_Archive'), ['POPID', 'First', 'Last', 'HouseholdId', 'SpouseId'], true) : [];
@@ -240,14 +218,10 @@ async function main() {
   for (const tab of ALL_TABS) files[tab] = data[tab].map(r => JSON.stringify(r));
   files.LifeHistory_Log = lifeRows.map(r => JSON.stringify(r));
   files.Lived_Events = livedRows.map(r => JSON.stringify(r));
-  const rosterRows = rosterFromLedger(ledgerRaw);
-  files.Employment_Roster = rosterRows.map(r => JSON.stringify(r));
-  log('dumpBeatTabs: Employment_Roster derived from Simulation_Ledger — ' + rosterRows.length + ' Active employed citizens'
-    + (titles.has('Employment_Roster') ? ' (the sheet tab Employment_Roster is a stale copy, unread; deleting it is the builder\'s hand)' : ''));
   const counts = Object.fromEntries(Object.keys(files).map(k => [k, files[k].length])); // LifeHistory_Log = the window rows written
   const advancing = priorCycle != null && stamp > priorCycle;
   const meta = {
-    source: 'beat tabs (' + ALL_TABS.length + ') + LifeHistory_Log window (Cycle ' + (stamp - LIVED_WINDOW) + '–' + stamp + ') + Lived_Events (derived) + Employment_Roster (derived from Simulation_Ledger)',
+    source: 'beat tabs (' + ALL_TABS.length + ') + LifeHistory_Log window (Cycle ' + (stamp - LIVED_WINDOW) + '–' + stamp + ') + Lived_Events (derived)',
     cycle: stamp,
     prevCycle: advancing ? priorCycle : (readMeta(path.join(PREV_DIR, 'meta.json')) || {}).cycle ?? null,
     rows: counts,
@@ -257,7 +231,7 @@ async function main() {
   };
   publishGeneration(OUT_DIR, files, meta, advancing);
 
-  log(`dumpBeatTabs: wrote ${ALL_TABS.length} tabs + 3 derived → ${path.relative(ROOT, OUT_DIR)}/` + (advancing ? ` (prior cycle ${priorCycle} kept in prev/)` : ''));
+  log(`dumpBeatTabs: wrote ${ALL_TABS.length} tabs + 2 derived → ${path.relative(ROOT, OUT_DIR)}/` + (advancing ? ` (prior cycle ${priorCycle} kept in prev/)` : ''));
   if (!quiet) console.log(JSON.stringify({ ok: true, cycle: meta.cycle, prevCycle: meta.prevCycle, rows: counts }));
 }
 

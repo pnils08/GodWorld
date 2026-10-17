@@ -2,7 +2,7 @@
 // pipeline.73 step 2 — the beat dump's derived files: the LifeHistory_Log window and Lived_Events.
 // Pure helpers only (the sheet reads and the staged publish run in main()).
 // Run: node scripts/dumpBeatTabs.test.js
-const { lifeWindowRows, livedEventRows, rosterFromLedger, resolveStamp, requireCols, publishGeneration } = require('./dumpBeatTabs');
+const { lifeWindowRows, livedEventRows, resolveStamp, requireCols, publishGeneration } = require('./dumpBeatTabs');
 const fs = require('fs'), os = require('os'), path = require('path');
 let pass = 0, fail = 0;
 const ok = (n, c, d) => { if (c) { pass++; console.log('  ok   ' + n); } else { fail++; console.log('  FAIL ' + n + (d ? ' — ' + d : '')); } };
@@ -63,23 +63,6 @@ ok('a failure before the swap leaves the live dump and prev/ untouched', /disk f
 publishGeneration(out, { A: ['{"c":113}'] }, { cycle: 113 }, true);
 ok('the retry after a failure publishes cleanly (no leftover .next)', read('A.jsonl') === '{"c":113}\n' && !fs.existsSync(out + '.next') && !fs.existsSync(out + '.old') && fs.readFileSync(path.join(out, 'prev', 'A.jsonl'), 'utf8') === '{"c":112,"again":1}\n');
 fs.rmSync(tmp, { recursive: true, force: true });
-
-// Employment_Roster derived from Simulation_Ledger (builder 2026-10-17) — the only truth for who works where.
-const LH = ['POPID', 'First', 'Last', 'Status', 'RoleType', 'EmployerBizId', 'Neighborhood'];
-const roster = rosterFromLedger([LH,
-  ['POP-00023', 'Gregory', 'Mims', 'Active', 'Organized Crime', 'BIZ-00100', 'Downtown'],
-  ['POP-00040', 'Aaron', 'Whitfield', 'active ', 'City Manager', ' BIZ-00017 ', 'Rockridge'],
-  ['POP-00500', 'Idle', 'Pool', 'Active', 'Barista', '', 'Temescal'],
-  ['POP-00594', 'Robert', 'Corliss', 'Retired', 'Retired PG&E Engineer', 'BIZ-00030', 'Lake Merritt'],
-  ['', 'No', 'Popid', 'Active', 'Clerk', 'BIZ-00017', 'Downtown'],
-  ['POP-00700', '', '', 'Active', 'Clerk', 'BIZ-00017', 'Downtown']]);
-ok('roster: Active + EmployerBizId rows only, ledger order kept', roster.map(r => r.POP_ID).join(',') === 'POP-00023,POP-00040');
-ok('roster: exact row shape the slices and sourcing read', JSON.stringify(roster[0]) === JSON.stringify({ BIZ_ID: 'BIZ-00100', POP_ID: 'POP-00023', CitizenName: 'Gregory Mims', RoleType: 'Organized Crime', Status: 'Active', MappingLayer: 'ledger' }));
-ok('roster: status and employer are trimmed/case-folded, Status written as Active', roster[1].BIZ_ID === 'BIZ-00017' && roster[1].Status === 'Active' && roster[1].CitizenName === 'Aaron Whitfield');
-ok('roster: blank employer (the hiring pool) is not SELF_EMPLOYED or UNTRACKED — it is absent', !roster.some(r => r.POP_ID === 'POP-00500'));
-ok('roster: a retired citizen is off the roster even with an employer id', !roster.some(r => r.POP_ID === 'POP-00594'));
-ok('roster: no POPID or no name → no row', roster.length === 2);
-ok('roster: empty ledger → empty roster, no throw', rosterFromLedger([]).length === 0 && rosterFromLedger(null).length === 0);
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

@@ -382,6 +382,20 @@ function citationSnippet(text, name) {
 // each printed filing earns its author 'byline-published' (processAdvancementIntake engine.88:
 // MEDIA climbs on these alone). ingestPublishedEntities' ARTICLE TABLE path never matched this
 // edition shape, so none were written after C102. Context = the stem, like byline-landed.
+// Builder ruling 2026-10-16 ("the cycle pulse that mags runs accounts for the only
+// usagecount recorded"): a citizen earns coverage credit only from the filings the Cycle
+// Pulse printed — the canon door's own record (edition_published_c<N>.json, the same set
+// byline-published reads). No record, no credit. Pure.
+function printedStems(cycle) {
+  const pub = readJsonSafe(path.join(ROOT, 'output', 'edition_published_c' + cycle + '.json'));
+  if (!pub || !Array.isArray(pub.selected)) return null;
+  return new Set(pub.selected);
+}
+function printedOnly(set, printed) {
+  if (!printed) return [];
+  return (set || []).filter(e => e && printed.has(e.stem));
+}
+
 function bylinePublishedRows(cycle, set) {
   // Credit only what the canon door published (stepPublish writes this after ingest + notebook).
   const pub = readJsonSafe(path.join(ROOT, 'output', 'edition_published_c' + cycle + '.json'));
@@ -414,7 +428,10 @@ function bylineResolves(row, ledger) {
 async function stepSheets(cycle) {
   console.log('--- step 6: Citizen_Media_Usage ingest from INTAKE ---');
   const set = loadStagedSetExcludingCanonViolations(cycle);
-  const wanted = set.flatMap(e => usageRowsFor(e)).concat(bylinePublishedRows(cycle, set));
+  const printed = printedStems(cycle);
+  if (!printed) console.log('[coverage] none: c' + cycle + ' edition not published — the Pulse is the only usage door (recover: --step publish --apply, then --step sheets --apply)');
+  else console.log('[coverage] crediting ' + printedOnly(set, printed).length + ' printed filing(s) of ' + set.length + ' staged');
+  const wanted = printedOnly(set, printed).flatMap(e => usageRowsFor(e)).concat(bylinePublishedRows(cycle, set));
   if (!wanted.length) { console.log('no INTAKE usage rows for c' + cycle); return { written: 0 }; }
   if (!APPLY) {
     for (const w of wanted) console.log('(dry-run) would append: ' + w.name + ' | ' + w.usageType + ' | ' + w.context + (w.snippet ? ' | light: (classified on --apply)' : ' | light: no snippet'));
@@ -1285,7 +1302,7 @@ if (require.main === module) {
   main().catch(err => { console.error('[saturday] Fatal: ' + err.message); process.exit(1); });
 }
 
-module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, citationSnippet, ROLE_TO_USAGE,
+module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
   deskSystem, crossoverCitizens, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };

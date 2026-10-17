@@ -268,3 +268,12 @@ console.log('Test 6: mergeStorylineLedger');
 
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);
+
+// Builder ruling 2026-10-16: coverage credit comes only from the filings the Cycle Pulse printed.
+(function () {
+  const { printedOnly } = require('./cron-saturday-run');
+  const set = [{ stem: 'a' }, { stem: 'b' }, { stem: 'c' }];
+  assert('printed filings only', printedOnly(set, new Set(['a', 'c'])).map(e => e.stem).join() === 'a,c');
+  assert('no published record → no coverage credit', printedOnly(set, null).length === 0);
+  assert('empty set', printedOnly([], new Set(['a'])).length === 0);
+})();

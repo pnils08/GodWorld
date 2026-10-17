@@ -171,11 +171,10 @@ function buildEveningFamous_(ctx) {
     { name: "Cultural Ambassador Li Wei", role: "cultural figure" }
   ];
 
-  var SPORTS_LEGENDS = [
-    { name: "Former A's Star Rodriguez", role: "sports legend" },
-    { name: "Warriors Alumni Thompson", role: "basketball legend" },
-    { name: "Oakland Native MVP Davis", role: "sports figure" }
-  ];
+  // engine.296 (builder 2026-10-16): no hardcoded famous names. SPORTS_LEGENDS is the ledger's
+  // retired MLB-origin citizens, filled in the ledger read below; no literal fallback — an empty pool
+  // is an empty pool, and a traded player leaves it by leaving the ledger.
+  var SPORTS_LEGENDS = [];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // REAL A'S PLAYERS FROM SIMULATION_LEDGER (Phase 15.5)
@@ -203,6 +202,22 @@ function buildEveningFamous_(ctx) {
           var pStat = (pr[_iStatus] || "").toString().trim().toLowerCase();
           var pOrig = (pr[_iOrigin] || "").toString();
           var pTier = Number(pr[_iTier] || 4);
+
+          // engine.296: a retired MLB-origin citizen is an A's legend (any ClockMode, any Tier).
+          if (pStat === "retired" && pOrig.indexOf("MLB") >= 0) {
+            var lFirst = (pr[_iFirst] || "").toString();
+            var lLast = (pr[_iLast] || "").toString();
+            var lName = (lFirst + " " + lLast).trim();
+            if (lName && lFirst !== lLast) {
+              SPORTS_LEGENDS.push({
+                name: lName,
+                role: "A's legend",
+                tier: pTier,
+                homeNeighborhood: (_iNeigh >= 0) ? (pr[_iNeigh] || "").toString() : "",
+                traitProfile: (_iTrait >= 0) ? (pr[_iTrait] || "").toString() : ""
+              });
+            }
+          }
 
           if (pClock !== "GAME") continue;
           if (pStat !== "active") continue;
@@ -576,7 +591,7 @@ function buildEveningFamous_(ctx) {
  * - STREAMERS (3), AUTHORS (2), CIVIC (3), BUSINESS (2)
  * - ARTISTS (4) - v2.2
  * - CULTURAL_LEADERS (3) - v2.2
- * - SPORTS_LEGENDS (3) - v2.2
+ * - SPORTS_LEGENDS (dynamic from Simulation_Ledger: Status Retired, OriginGame MLB) - engine.296
  *
  * REAL PLAYER INTEGRATION (v2.5):
  * - Reads Simulation_Ledger for ClockMode=GAME, Status=active, OriginGame=MLB

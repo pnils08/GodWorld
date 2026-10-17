@@ -553,6 +553,7 @@ Not built. Rev 1 → codex HOLD (`docs/for-claude-review/2026-10-17-codex-wake-n
 
 ## Changelog
 
+- 2026-10-17 (engine-sheet S570) — Codex lock re-check SHIP (`docs/for-claude-review/2026-10-17-codex-wake-no-rules-lock-recheck.md`): both concurrency findings closed. Code review complete. Merge (cherry-pick the As-built set, W3 left out) after the C112 readback Sun 2026-10-18; first live proof = the next scheduled wake log + the next 19:00 nightly row + the next Cycle drain.
 - 2026-10-17 (engine-sheet S570) — Wakes-no-rules BUILT on branch engine197-wakes-no-rules (worktree): codex diff review FIX folded (spool, owner-safe lock, header/row validation, M1 scope). Not merged: codex re-check of the fix, then merge after the C112 readback; W3 held for the builder.
 - 2026-10-17 (engine-sheet S570) — Wakes-no-rules Rev 4: codex Rev 3 FIX folded — exclusive lock over scan→append, source instant binds column A, pending file so no night is lost, scrub scoped to her journal (non-Mags byte-identical) across content/chunk/chunks, composite spend keys at all three sites, caller-level + two-writer + midnight acceptance. Next gate: codex diff review.
 - 2026-10-17 (engine-sheet S570) — Wakes-no-rules Rev 3: codex Rev 2 HOLD folded. M2 overwrite dropped for write-once from the evening run (kills the drain race); M1 scrub moved to the page read layer (covers every reader codex named, before truncation); lived events become a per-recipient post-draw lookup, pickLived retires; D1 skips surfaced; selection extracted pure. Builder (a)/(b) still open. To codex re-check.

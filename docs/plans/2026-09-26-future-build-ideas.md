@@ -194,7 +194,8 @@ C125 ledger exactly as predicted: OPENING $100M · PREFUNDED INIT-001/002/005 (B
 - Live acceptance: within five Cycles a named citizen has a named animal in a published piece.
 
 ### Sim calls for the builder
-- None to build steps 1–4. **One on taste:** should a pet have a name? The engine can draw one from a small authored list at acquisition (stored as `pet.name`) so reporters can write "Marisol's dog, Biscuit" rather than "her dog". Costs nothing; it is a naming surface, so it is yours.
+- **Ruled 2026-10-16 (builder, verbatim):** *"Yeah cause this all revolves around that mags has a cat named scout , so that's a direct write to add that is a known pet in the sim"* — pets carry a name (`pet.name`), and the first pet is authored, not rolled: Mags Corliss (POP-00005) has Scout, a cat (journal canon: "thirty years of a cat", she, the windowsill and the heating vent). Stamp `{k:'cat', l:0, n:1, name:'Scout'}` — `l:0` marks a pre-record pet so `petage` reads her as long-held, never newly acquired. Mags only; Robert's row is not stamped. Written on PROD by read-merge-write of the live DialState cell once PROD carries the carrier (step 1, `21840002`); a hand key on today's PROD is dropped by the next dial rewrite. Bench pairs that fire an older version will drop her on that side — expected, not a regression.
+- (was) None to build steps 1–4. **One on taste:** should a pet have a name? The engine can draw one from a small authored list at acquisition (stored as `pet.name`) so reporters can write "Marisol's dog, Biscuit" rather than "her dog". Costs nothing; it is a naming surface, so it is yours.
 
 ### Weakest assumptions
 1. *Acquisition sits in Phase 9's RMW.* If that pass runs only when `dialRmwNeeded`, the roll needs its own trigger — es reads `compressLifeHistory.js:690-710` before placing it.

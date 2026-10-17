@@ -476,7 +476,16 @@ Builder: "safe to say the dials are completely broken." Measured on live Simulat
 
 **Open questions for review (no fix designed yet):** who the wake loop selects (why 613 never wake), how a reflection's event tag is chosen (family life → Household 48 of 1,740), and why Sports reflections reach fandom 0 when engine.208 made fandom Dial 9.
 
+## Builder rulings 2026-10-17 (after the codex dial reviews)
+
+- **Wakes:** "Any citizen can wake whenever , there are no rules" — the rotating wake's shaped threshold (summed deviation ≥60, `lib/wakePerception.js:376-424`), the dial-distance weight (`scripts/citizen-wake.js:207`) and the Corliss name exclusion (`wakePerception.js:423`) are guards the builder does not want. Build under codex review; not started.
+- **Big events:** "A wedding or birth should happen once every 20 cycles so who cares" — the single-event fade (one Birth/Wedding leaves base 50, mood +10) stands; no change to HARDEN_STREAK / MOOD_DECAY.
+- **Mags:** "the most curated citizen isn't even getting all I've paid for" — her journal (`discord-reflection.js`) never reaches Reflection_Intake, and the wake pool skips her; both are in scope of the wake ruling above.
+- **State at close (es):** 113e78aa (future-stamp guard) + 01ea836f engine.296 legend predicate = codex SHIP (`docs/for-claude-review/2026-10-17-codex-dial-fixes-review.md`); staged `output/engine197/prod-stage` (= PROD 4l + those two files, diff verified); bench 1004 resynced from live C111, guard 0, clearfire 112 done — NOT fired, NOT on PROD. The 13-spouse repair (POP-01029..01041) is codex HOLD pending the per-row frontier + replay manifest + builder OK.
+
 ## Changelog
+
+- 2026-10-17 (engine-sheet) — Builder rulings on wakes (no rules) and big events (fade stands) recorded; dial fixes codex-SHIP, staged, bench prepared not fired.
 
 - 2026-10-17 (engine-sheet) — Dial read on live C111 (§Dial read 2026-10-17): stuck shares, three non-causes ruled out, the reflection path reaches 375 of 988; sent to codex for review before any design.
 

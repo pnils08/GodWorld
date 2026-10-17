@@ -268,23 +268,3 @@ console.log('Test 6: mergeStorylineLedger');
 
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);
-
-// Builder ruling 2026-10-16: one coverage credit per citizen per Cycle, strongest type wins; bylines untouched.
-(function () {
-  const { oneCreditPerCitizen } = require('./cron-saturday-run');
-  const rows = [
-    { name: 'Eric Taveras', popid: 'POP-00040', usageType: 'mentioned', context: 'a' },
-    { name: 'Eric Taveras', popid: 'POP-00040', usageType: 'quoted', context: 'b' },
-    { name: 'Eric Taveras', popid: 'POP-00040', usageType: 'mentioned', context: 'c' },
-    { name: 'Mei Wong', popid: 'POP-00500', usageType: 'featured', context: 'a' },
-    { name: 'Hal Richmond', popid: 'POP-00014', usageType: 'byline-published', context: 'a', byline: true },
-    { name: 'Hal Richmond', popid: 'POP-00014', usageType: 'byline-published', context: 'd', byline: true },
-  ];
-  const out = oneCreditPerCitizen(rows);
-  const eric = out.filter(r => r.popid === 'POP-00040');
-  assert('one credit per citizen per Cycle', eric.length === 1);
-  assert('the strongest type survives (quoted over mentioned)', eric[0].usageType === 'quoted' && eric[0].context === 'b');
-  assert('a single row passes through', out.filter(r => r.popid === 'POP-00500').length === 1);
-  assert('bylines are not collapsed', out.filter(r => r.byline).length === 2);
-  assert('empty input', oneCreditPerCitizen([]).length === 0);
-})();

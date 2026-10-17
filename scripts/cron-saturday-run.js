@@ -353,24 +353,6 @@ async function stepSweep(cycle) {
 // ---------------------------------------------------------------------------
 // Step 6 — sheet ingest: usage rows from the sidecar intake.
 // ---------------------------------------------------------------------------
-// Builder ruling 2026-10-16 ("what sense does someone getting 20 mentions a week make"):
-// a citizen earns ONE coverage credit per Cycle however many filings name them — the
-// strongest type survives (featured > quoted > mentioned), the context is the filing that
-// carried it. Bylines are the journalist's own path and are not collapsed. Pure.
-const USAGE_STRENGTH = { featured: 3, quoted: 2, mentioned: 1 };
-function oneCreditPerCitizen(rows) {
-  const byPop = new Map();
-  const out = [];
-  for (const r of rows || []) {
-    if (!r || r.byline) { if (r) out.push(r); continue; }
-    const key = String(r.popid || r.name || '').trim().toUpperCase();
-    const have = byPop.get(key);
-    if (!have) { byPop.set(key, r); continue; }
-    if ((USAGE_STRENGTH[r.usageType] || 0) > (USAGE_STRENGTH[have.usageType] || 0)) byPop.set(key, r);
-  }
-  return [...byPop.values()].concat(out);
-}
-
 function usageRowsFor(entry) {
   const intake = entry.sidecar.intake;
   if (!intake) return [];
@@ -432,7 +414,7 @@ function bylineResolves(row, ledger) {
 async function stepSheets(cycle) {
   console.log('--- step 6: Citizen_Media_Usage ingest from INTAKE ---');
   const set = loadStagedSetExcludingCanonViolations(cycle);
-  const wanted = oneCreditPerCitizen(set.flatMap(e => usageRowsFor(e))).concat(bylinePublishedRows(cycle, set));
+  const wanted = set.flatMap(e => usageRowsFor(e)).concat(bylinePublishedRows(cycle, set));
   if (!wanted.length) { console.log('no INTAKE usage rows for c' + cycle); return { written: 0 }; }
   if (!APPLY) {
     for (const w of wanted) console.log('(dry-run) would append: ' + w.name + ' | ' + w.usageType + ' | ' + w.context + (w.snippet ? ' | light: (classified on --apply)' : ' | light: no snippet'));
@@ -461,14 +443,6 @@ async function stepSheets(cycle) {
     console.log('light: ' + w.name + ' -> ' + (res.light || '(unclassified: ' + String(res.raw).slice(0, 60) + ')'));
   }
   if (iN < 0 || iT < 0) throw new Error('Citizen_Media_Usage headers missing CitizenName/UsageType');
-  const iCy = h.indexOf('Cycle');
-  const creditedThisCycle = new Set(data.slice(1)
-    .filter(r => iCy >= 0 && String(r[iCy] || '').trim() === String(cycle) && USAGE_STRENGTH[String(r[iT] || '').trim()])
-    .map(r => String(r[iN] || '').trim().toUpperCase()));
-  for (let i = wanted.length - 1; i >= 0; i--) {
-    const w = wanted[i];
-    if (!w.byline && creditedThisCycle.has(String(w.name || '').trim().toUpperCase())) { console.log('one-credit skip (already credited C' + cycle + '): ' + w.name); wanted.splice(i, 1); }
-  }
   const existing = new Set(data.slice(1).map(r =>
     [String(r[iN] || '').trim(), String(r[iT] || '').trim(), iC < 0 ? '' : String(r[iC] || '').trim()].join('|')));
   const rows = [];
@@ -1311,7 +1285,7 @@ if (require.main === module) {
   main().catch(err => { console.error('[saturday] Fatal: ' + err.message); process.exit(1); });
 }
 
-module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, oneCreditPerCitizen, USAGE_STRENGTH, citationSnippet, ROLE_TO_USAGE,
+module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
   deskSystem, crossoverCitizens, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };

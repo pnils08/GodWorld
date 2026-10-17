@@ -29,6 +29,7 @@ const {
   continuitySourceIds,
   dailyAudioFocus,
   stripDailyNoise,
+  staleDailySourceIds,
   SOURCE_VERSION,
   DEFAULT_AUDIO_LENGTH,
   DAILY_NEWS_IDENTITY,
@@ -507,6 +508,18 @@ const syntheticDigest = {
   const out = stripDailyNoise(md);
   for (const keep of ['kept city line', 'kept move', 'kept sports line', 'kept texture']) assert(out.includes(keep), keep);
   for (const drop of ['Mayor 69%', 'an initiative line', 'an approval line', 'dropped fold line', 'math-imbalance', 'placeholder']) assert(!out.includes(drop), drop);
+}
+
+{
+  const list = [
+    { id: 'today-src', title: 'The Bay Tribune Daily C111 — v1.7 daily news source — aaaaaaaaaaaa' },
+    { id: 'old-src', title: 'The Bay Tribune Daily C104 — v1.7 daily news source — bbbbbbbbbbbb' },
+    { id: 'today-guide', title: '00_AUDIO_DIRECTION_GUIDE — daily — cccccccccccc' },
+    { id: 'old-guide', title: '00_AUDIO_DIRECTION_GUIDE — daily — dddddddddddd' },
+    { id: 'other', title: '109_As_Roster' },
+  ];
+  const stale = staleDailySourceIds(list, ['today-src', 'today-guide']);
+  assert.deepStrictEqual(stale.sort(), ['old-guide', 'old-src']);
 }
 
 console.log('notebooklmDailyNews tests: PASS');

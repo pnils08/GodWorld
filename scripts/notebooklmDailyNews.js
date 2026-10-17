@@ -649,6 +649,28 @@ function directionGuideTitle(hash) {
   return '00_AUDIO_DIRECTION_GUIDE — daily — ' + hash.slice(0, 12);
 }
 
+// NotebookLM's --source-ids is a hint, not a wall: with 95 daily packs piled up the
+// brief and audio blended weeks-old drafts and initiatives into today's news
+// (builder 2026-10-17). The working daily notebook keeps only today's sources.
+// Matches daily-pack and direction-guide titles only; never run on the permanent notebook.
+const DAILY_SOURCE_TITLE = /^(The Bay Tribune Daily C\d+ — |00_AUDIO_DIRECTION_GUIDE — daily — )/;
+
+function staleDailySourceIds(listJson, keepIds) {
+  const keep = new Set(keepIds);
+  return sourceRecords(listJson)
+    .filter((source) => DAILY_SOURCE_TITLE.test(source.title || '') && !keep.has(source.id))
+    .map((source) => source.id);
+}
+
+function pruneStaleDailySources(notebookId, listJson, keepIds) {
+  const stale = staleDailySourceIds(listJson, keepIds);
+  for (let i = 0; i < stale.length; i += 20) {
+    const del = nlm(['source', 'delete'].concat(stale.slice(i, i + 20), ['--confirm']), { timeoutMs: 300 * 1000 });
+    if (!del.ok) throw new Error('stale source delete failed: ' + del.out.slice(0, 300));
+  }
+  return stale.length;
+}
+
 function ensureSource(notebookId, file, title, existingSources) {
   const existing = findSourceId(existingSources, title);
   if (existing) return { id: existing, reused: true };
@@ -1139,6 +1161,12 @@ async function run(argv) {
     const audioSourceIds = directionSourceId
       ? sourceIds.concat(directionSourceId)
       : sourceIds.slice();
+    try {
+      const pruned = pruneStaleDailySources(config.newsroomNotebookId, existingSources, audioSourceIds);
+      console.log('Working notebook: pruned ' + pruned + ' stale daily source(s)');
+    } catch (e) {
+      console.log('STALE SOURCE PRUNE SKIPPED (non-blocking): ' + e.message);
+    }
     const presentation = resolveAudioPresentation(routing, config, dailyConfig);
     manifest.audioPresentation = presentation;
     fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
@@ -1258,6 +1286,7 @@ module.exports = {
   isCompletedManifest,
   buildSourcePack,
   stripDailyNoise,
+  staleDailySourceIds,
   buildBoundedNewsSource,
   parseJsonOutput,
   queryAnswer,

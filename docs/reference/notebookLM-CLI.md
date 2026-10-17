@@ -1,7 +1,7 @@
 ---
 title: Gemini Notebook / NotebookLM CLI Operations
 created: 2026-07-25
-updated: 2026-08-20
+updated: 2026-10-17
 type: reference
 tags: [infrastructure, media, active]
 sources:
@@ -532,8 +532,8 @@ Do not accept the interactive `0.8.5 → 0.9.4` upgrade prompt yet.
 
 Reasons:
 
-- 0.8.5 is the version currently authenticated and validated against both
-  GodWorld scripts.
+- 0.8.5 was the version validated through 2026-08; the box now runs 0.15.5
+  (upgraded 2026-10-17 01:14, host `notebook.google.com` / "Gemini Notebook").
 - The local root-Chrome `--no-sandbox` patch is inside the installed package and
   an upgrade will remove it.
 - Upstream 0.9.4 adds Gemini Notebook rebrand/redirect support, but its current
@@ -544,6 +544,13 @@ Reasons:
   `Authentication expired`. Patch reapplied after every upgrade, then
   `nlm login` over `ssh -Y` (a pasted-cookie login has no profile to rotate from
   and dies within hours).
+- Login lifetime on record: the 2026-07-25 persistent-profile login ran the daily
+  brief every day until it died between 2026-10-16 08:09 and 21:25 (~12 weeks).
+  A pasted-cookie login does not last; only the `ssh -Y` profile login self-renews.
+  Dead-session proof: `google-chrome --headless=new --no-sandbox
+  --user-data-dir=/root/.notebooklm-mcp-cli/chrome-profiles/default --dump-dom
+  https://notebooklm.google.com/` shows the "Sign in" page when Google has
+  signed the profile out; `nlm doctor auth-replay` failing on every lane agrees.
 - The next distinct scheduled daily run is still the cleanest proof that the new
   persistent profile survives unattended execution.
 

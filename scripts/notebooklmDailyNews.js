@@ -1212,7 +1212,10 @@ async function main() {
   } catch (e) {
     console.log('NOTEBOOKLM DAILY NEWS FAILED (non-blocking): ' + e.message);
     if (args && args.deliver && !args.dryRun) {
-      await sendDiscordText('⚠️ **GodWorld Daily News did not run**\n' + e.message.slice(0, 500));
+      const authFix = /authentication/i.test(e.message)
+        ? '\nFix: `ssh -Y` in from the Chromebook, run `/root/GodWorld/.venv/nlm/bin/nlm login`, finish the Google sign-in, then tell Mags to rerun today (docs/reference/notebookLM-CLI.md)'
+        : '';
+      await sendDiscordText('⚠️ **GodWorld Daily News did not run**\n' + e.message.slice(0, 500) + authFix);
     }
     process.exitCode = 0;
   }

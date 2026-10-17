@@ -400,27 +400,9 @@ function budgetReached(cycle) {
   return false;
 }
 
-// Interview rest-cycles (Task 2.5.4 pressure-test #4, Mike-direct 2026-08-01
-// "just because a citizen is higher on the list doesn't mean use her every
-// single time"): tally who landed quotes in recent packet artifacts; a citizen
-// at the cap sits out this wake and the pool moves down the list — spread the
-// light (universal protagonism). Soft: if EVERY candidate is rested the cap is
-// waived rather than running a quoteless wake on a seeded assignment.
-const REST_CAP = 2;              // interviews inside the window before a rest
-const REST_WINDOW_H = 72;        // hours of packet history that count
-function interviewTally() {
-  const tally = {};
-  const cutoff = Date.now() - REST_WINDOW_H * 3600 * 1000;
-  let files = [];
-  try { files = fs.readdirSync(COMPARE).filter(f => f.endsWith('packet.json')); } catch (_) { return tally; }
-  for (const f of files) {
-    const p = path.join(COMPARE, f);
-    try { if (fs.statSync(p).mtimeMs < cutoff) continue; } catch (_) { continue; }
-    const j = readJson(p);
-    for (const q of ((j && j.quotes) || [])) if (q.pop) tally[q.pop] = (tally[q.pop] || 0) + 1;
-  }
-  return tally;
-}
+// Interview rest-cycles (REST_CAP / interviewTally, 2026-08-01) removed by pipeline.81 S3 (builder
+// 2026-10-16): "I drop any guard on a citizen being interviewed. If they are in the whatever wakes them
+// wakes them." QUOTE_CITIZEN_CAP stays — it is the per-wake budget, not a guard on a citizen.
 
 // Layer 4 — collect the affected citizens (distinct POPIDs, capped) and their
 // reaction ask. Task 2.5.4: the assigned story's citizens fill the pool FIRST —
@@ -435,8 +417,6 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
     return asks;
   }
   const seen = new Set();
-  const rested = [];
-  const tally = interviewTally();
   const exactPacketCandidates = ((angleArt && angleArt.inputPacket &&
     angleArt.inputPacket.exposure && angleArt.inputPacket.exposure.candidates) || [])
     .filter(c => c && /^(?:POP-|TEST-)/i.test(String(c.pop || '')));
@@ -455,23 +435,16 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
         JSON.stringify(w1.evidence) === JSON.stringify(c.evidence);
     })
     : story ? livedPacket.candidateRows(story, slice) : [];
-  // Builder ruling 2026-09-30: a reporter interviews a citizen the story
-  // touched, or no citizen. The four-person bench used to be completed from the
-  // ledger (same hood, then anyone — street jobs first), so the same bakers and
-  // servers answered every reporter about news they never lived: 74 of 204
-  // asks over C107–C109. A proximity candidate is no longer asked; a story with
-  // nobody attached files without a quote.
+  // pipeline.81 S3 (builder 2026-10-16): no guard on a citizen the slice names — the 2026-09-30
+  // proximity exclusion is gone. An office record is a document, not a citizen, and stays out; so does
+  // a ledger fill-in no slice named (livedPacket.isLedgerFillCandidate).
   const packetCandidates = new Map();
   for (const c of filled) {
-    if (c && c.pop && c.sourceKind !== 'office-record' &&
-        !livedPacket.isProximityCandidate(c)) packetCandidates.set(c.pop, c);
+    if (c && c.pop && c.sourceKind !== 'office-record' && !livedPacket.isLedgerFillCandidate(c)) packetCandidates.set(c.pop, c);
   }
-  const push = (pop, label, ignoreRest) => {
+  const push = (pop, label) => {
     if (!pop || seen.has(pop) || asks.length >= QUOTE_CITIZEN_CAP) return;
     if (persona && persona.popid && String(pop).toUpperCase() === String(persona.popid).toUpperCase()) return;
-    // The A/B treatment holds the candidate pool fixed across retries. The
-    // production rest window remains unchanged on the baseline path.
-    if (!PACKET_ACTIVE && !ignoreRest && (tally[pop] || 0) >= REST_CAP) { rested.push({ pop, label }); return; }
     seen.add(pop);
     // Phase 2.3: voice the ask in the persona's register — the question's voice
     // shapes the answer's friction (the Antigravity/Jax lesson, 2026-07-24).
@@ -523,13 +496,6 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
       for (const pop of (e.popids || [])) push(pop, e.label);
       if (asks.length >= QUOTE_CITIZEN_CAP) break;
     }
-  }
-  // soft floor: everyone rested -> waive the cap rather than run quoteless
-  if (!asks.length && rested.length) {
-    log('[rest] all candidates rested (' + rested.length + ') — cap waived for this wake');
-    for (const r of rested) { push(r.pop, r.label, true); if (asks.length >= QUOTE_CITIZEN_CAP) break; }
-  } else if (rested.length) {
-    log('[rest] resting ' + rested.length + ' recently-interviewed citizen(s): ' + rested.map(r => r.pop).join(', '));
   }
   return asks;
 }
@@ -926,7 +892,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
           }
           if (bs.prewrite.note) L.push('NOTE: ' + bs.prewrite.note);
           if ((bs.prewrite.hooks || []).length) {
-            L.push('ENGINE HOOKS FOR YOU (colour, not fact):');
+            L.push('CITY HOOKS FOR YOU (colour, not fact):');
             for (const h of bs.prewrite.hooks.slice(0, 3)) L.push('  - ' + h.text);
           }
           if ((bs.prewrite.pageVoices || []).length) {

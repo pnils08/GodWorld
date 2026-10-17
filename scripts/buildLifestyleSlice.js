@@ -36,6 +36,8 @@ const DOWN_RE = /fading|cooling|quiet|declin/i;
 function figures(beats, profiles) {
   return (beats.Cultural_Ledger || [])
     .filter(r => r.Name && !ACTIVE_RE.test(String(r.Status || '')))
+    // pipeline.81 Task 2: a figure with no ledger citizen is an engine template name — off the slice.
+    .filter(r => /POP-/i.test(String(r.UniverseLinks || '')))
     .map(r => ({
       name: String(r.Name).trim(),
       role: String(r.RoleType || '').trim() || null,

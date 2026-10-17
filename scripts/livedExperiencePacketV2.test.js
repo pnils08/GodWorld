@@ -328,6 +328,19 @@ const unresolvedSportsW1 = p.buildAnglePacket({
 // ledger residents — nobody attached means nobody to interview.
 assert.deepStrictEqual(unresolvedSportsW1.exposure.candidates, [],
   'no story-linked citizen resolves, so the reporter is offered no bystander');
+// pipeline.81 S3 (builder 2026-10-16): a citizen the slice names is a target whatever the row's why —
+// the Jax bench fills (same-hood-signal / city-resident / bond-hop) ride; a ledger fill-in does not.
+const slicedNeighborW1 = p.buildAnglePacket({
+  cycle: 999, desk: 'sports', reporter: pReporter,
+  story: { ...sportsStory, popids: [], citizens: [] },
+  approach: 'TEST-ONLY first-person fan heat',
+  slice: { ...sportsSlice, players: [], citizens: [
+    { popid: 'POP-90031', name: 'Test Slice Neighbor', why: 'same-hood-signal' },
+    { popid: 'POP-90032', name: 'Test Bond Hop', why: 'bond-hop from interview pool' }] },
+  lane: [],
+});
+assert.deepStrictEqual(slicedNeighborW1.exposure.candidates.map(c => c.pop).sort(), ['POP-90031', 'POP-90032'],
+  'every citizen the slice names is offered');
 
 // Hal's archive posture is typed, but history is not a creative blank check.
 // Present feed facts enter the manifest; unsupplied people/events remain missing.

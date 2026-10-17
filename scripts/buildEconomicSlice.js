@@ -550,7 +550,7 @@ function buildEconomicSlice(cycle, opts) {
   for (const sd of seedsHere) for (const c of sd.citizens) {
     if (c.popid && !citizenRows.some(r => r.popid === c.popid)) {
       citizenRows.push({ popid: c.popid, name: c.name, role: null, neighborhood: hood, business: null,
-        profile: c.name + ' — ' + hood, why: 'engine seed for ' + hood + ' this cycle (Story_Seed_Deck)' });
+        profile: c.name + ' — ' + hood, why: 'city seed for ' + hood + ' this cycle (Story_Seed_Deck)' });
     }
   }
   const factSrc = 'output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C' + cyc;
@@ -574,7 +574,7 @@ function buildEconomicSlice(cycle, opts) {
   for (const s of seeds.slice(0, 2)) {
     const who = s.citizens.slice(0, 4).map(c => c.name).join('; ');
     const where = s.businesses.map(b => b.name).join('; ');
-    factEntries.push({ text: 'ENGINE SEED' + (s.hood ? ' (' + s.hood + ')' : '') + ': ' +
+    factEntries.push({ text: 'CITY SEED' + (s.hood ? ' (' + s.hood + ')' : '') + ': ' +
       (who ? 'citizens ' + who : 'no citizens attached') +
       (where ? ' · businesses ' + where : '') +
       (s.otherEntities ? ' · ' + s.otherEntities : ''), src: seedSrc });
@@ -733,11 +733,11 @@ function formatEconomicSliceMarkdown(slice) {
     L.push('');
   }
   if (slice.prewrite.hooks && slice.prewrite.hooks.length) {
-    L.push('## ENGINE HOOKS (colour, not fact)');
+    L.push('## CITY HOOKS (colour, not fact)');
     for (const h of slice.prewrite.hooks) L.push('- ' + h.text + (h.angle ? ' (' + h.angle + ')' : ''));
     L.push('');
   }
-  L.push('## ENGINE SEEDS (this cycle, business desk)');
+  L.push('## CITY SEEDS (this cycle, business desk)');
   if (!slice.seeds.length) L.push('_none this cycle_');
   for (const s of slice.seeds) {
     L.push('- ' + (s.hood || 'city') + (s.trend ? ' · ' + s.trend : ''));

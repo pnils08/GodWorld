@@ -29,7 +29,10 @@ const namedSlice = { story: { ref: 'output/beats/Test_Only.jsonl' },
   ] };
 assert.deepEqual(source.buildPool({ mode: 'records', story: {}, slice: namedSlice, cycle: 999, beats }).candidates, []);
 const named = source.buildPool({ mode: 'named', story: {}, slice: namedSlice, cycle: 999, beats });
-assert.deepEqual(named.candidates.map(c => c.pop), ['POP-90005']);
+// pipeline.81 S3: no guard on a citizen the slice names — the same-hood row is a target too.
+assert.deepEqual(named.candidates.map(c => c.pop), ['POP-90005', 'POP-90006']);
+assert.deepEqual(source.buildPool({ mode: 'named', story: {}, slice: { ...namedSlice, story: { ref: 'assignment' } }, cycle: 999, beats })
+  .candidates.map(c => c.pop), ['POP-90005', 'POP-90006'], 'an assignment-ref slice still hands its names over');
 assert.ok(Object.isFrozen(named.candidates) && Object.isFrozen(named.candidates[0].evidence));
 const feedDir = path.join(root, 'output', 'spacemolt-show', 'feed');
 fs.mkdirSync(feedDir, { recursive: true });
@@ -60,6 +63,11 @@ const streetOpts = { meta: { cycle: 999 }, pageIndex: [], ledgerRows: [
 const street = source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
   seat: 'talia-finch', cycle: 999, beats, streetOptions: streetOpts });
 assert.deepEqual(street.candidates.map(c => c.pop), ['POP-90007']);
+// pipeline.81 Task 4: the slice's names start every non-records pool; street adds, never gates.
+assert.deepEqual(source.buildPool({ mode: 'street', story: { pulseClass: 'beat-trends' }, slice: { ...namedSlice, pulse: { className: 'beat-trends' } },
+  seat: 'celeste-tran', cycle: 999, beats, streetOptions: streetOpts }).candidates.map(c => c.pop).slice(0, 2), ['POP-90005', 'POP-90006']);
+assert.deepEqual(source.buildPool({ mode: 'workplace', story: {}, slice: { ...namedSlice, businesses: [{ bizId: 'BIZ-90001' }] }, cycle: 999, beats })
+  .candidates.map(c => c.pop), ['POP-90005', 'POP-90006', 'POP-90001']);
 assert.equal(street.candidates[0].evidence.line, streetOpts.ledgerRows[0].LifeHistory);
 assert.deepEqual(source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
   seat: 'talia-finch', cycle: 999, beats, root, streetOptions: { ...streetOpts, pageIndex: [] } }).candidates,

@@ -91,15 +91,15 @@ function named(story, slice, cycle, root) {
   if (!slice || slice.empty) return Object.freeze([]);
   const pools = [slice.packetSeat && slice.packetSeat.citizens, slice.citizens,
     slice.players, slice.candidates].filter(Array.isArray);
-  const source = clean(slice.story && slice.story.ref || story && story.ref);
-  if (!source || source === 'assignment') return Object.freeze([]);
+  // pipeline.81 S3 (builder 2026-10-16): "I drop any guard on a citizen being interviewed. If they
+  // are in the whatever wakes them wakes them." A citizen the slice names is a target, whatever the
+  // slice's ref and whatever the row's why.
+  const source = clean(slice.story && slice.story.ref || story && story.ref) || 'slice';
   const out = [];
   for (const pool of pools) for (const row of pool) {
     const pop = clean(row && (row.popid || row.pop));
-    // The typed slice row itself must name the person. A story-level POPID or
-    // candidate rationale cannot create an interview target.
-    if (!/^POP-\d{5}$/.test(pop) || !row.name ||
-        /^(?:same-hood|ledger-resident|city-resident|bond-hop)/i.test(clean(row.why))) continue;
+    // The typed slice row itself must name the person (a story-level POPID alone is not a row).
+    if (!/^POP-\d{5}$/.test(pop) || !row.name) continue;
     out.push(frozen('named', 'slice-row', row,
       { source, pop, rowName: row.name, kind: 'slice-row' }));
   }
@@ -411,12 +411,15 @@ function buildPool({ mode, story, slice, cycle, seat, root = ROOT, beats, street
   const beatData = beats || (DUMP_TABS[mode] ? dumpRows(root, cycle, DUMP_TABS[mode]) : {});
   let candidates = Object.freeze([]);
   let officeRecords = Object.freeze([]);
-  if (mode === 'named') candidates = named(story, slice, cycle, root);
-  else if (mode === 'workplace') candidates = workplace(story, slice, beatData);
+  // pipeline.81 Task 4: every seat's pool starts from the slice's names; the mode's own sources add,
+  // never gate (a trends story has no typed highlights, so street() alone left Celeste at zero).
+  const sliceNamed = named(story, slice, cycle, root);
+  if (mode === 'named') candidates = sliceNamed;
+  else if (mode === 'workplace') candidates = unique(sliceNamed.concat(workplace(story, slice, beatData)));
   else if (mode === 'offices') {
     const result = offices(story, slice, beatData, cycle, root);
-    candidates = result.candidates; officeRecords = result.records;
-  } else if (mode === 'street') candidates = street(story, slice, cycle, root, seat, streetOptions);
+    candidates = unique(sliceNamed.concat(result.candidates)); officeRecords = result.records;
+  } else if (mode === 'street') candidates = unique(sliceNamed.concat(street(story, slice, cycle, root, seat, streetOptions)));
   else throw new Error('unknown sourcing mode: ' + mode);
   return Object.freeze({ mode, candidates, officeRecords });
 }

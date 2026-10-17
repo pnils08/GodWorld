@@ -407,11 +407,11 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane,
   }
   // Interview exposure is identity-bearing: unresolved names may remain in the
   // assigned facts, but only ledger-resolved POPIDs can become W2 targets.
-  // Builder ruling 2026-09-30: a reporter interviews a citizen the story
-  // touched, or no citizen. The proximity fallback (a neighbor, a city resident)
-  // is not a target.
+  // pipeline.81 S3 (builder 2026-10-16, supersedes the 2026-09-30 touched-or-nobody ruling for slice
+  // names): "I drop any guard on a citizen being interviewed. If they are in the whatever wakes them
+  // wakes them." Identity stays (a ledger POPID), and a ledger fill-in that no slice named stays out.
   const candidates = (modeCandidates === undefined ? candidateRows(story, slice) : modeCandidates)
-    .filter(candidate => isLedgerPop(candidate.pop) && !isProximityCandidate(candidate))
+    .filter(candidate => isLedgerPop(candidate.pop) && !isLedgerFillCandidate(candidate))
     .slice(0, 12);
   const hasTargetCandidates = candidates.length > 0;
   const creativeBrief = creativeBriefFromSlice(slice);
@@ -728,6 +728,10 @@ function questionFor(candidate, anglePlan, story) {
 // 'same-hood-signal' (named on some other signal in the hood), 'city-resident'
 // and 'bond-hop …' are the Jax slice's own bench fills — near the story, not in it.
 const PROXIMITY_WHY = new Set(['same-hood-ledger', 'ledger-resident', 'same-hood-signal', 'city-resident']);
+// pipeline.81: the two markers neighborsFromLedger stamps when the packet reaches past the slice into the
+// ledger. Those citizens are on nothing that woke the seat; every row the slice itself names is a target.
+const LEDGER_FILL_WHY = new Set(['same-hood-ledger', 'ledger-resident']);
+function isLedgerFillCandidate(candidate) { return LEDGER_FILL_WHY.has(String(candidate && candidate.why || '')); }
 function isProximityCandidate(candidate) {
   const why = String(candidate && candidate.why || '');
   return PROXIMITY_WHY.has(why) || /^bond-hop\b/.test(why);
@@ -754,6 +758,8 @@ function evidenceFor(candidate, story) {
   }
   const ref = clean(story && story.ref, 300);
   if (!ref || ref === 'assignment') return [];
+  // pipeline.81 makes a proximity row an interview target, but not a witness: same-neighborhood is
+  // not lived exposure (ADR-0017 §1/§4), so it carries no evidence row and answers as a neighbor.
   if (isProximityCandidate(candidate)) return [];
   const pop = clean(candidate && candidate.pop, 40);
   if (!pop) return [];
@@ -967,6 +973,6 @@ module.exports = {
   VERSION, CLAIM_TYPES, WAKES, refClaim, assertBase, buildAnglePacket,
   validateAngleOutput, reporterChaseText, chaseIsJsonShaped, candidateRows,
   buildReportPacket, validateReportOutput,
-  quoteIneligibility, isAthleteRow, ledgerRowForPop, neighborsFromLedger, isProximityCandidate,
+  quoteIneligibility, isAthleteRow, ledgerRowForPop, neighborsFromLedger, isProximityCandidate, isLedgerFillCandidate,
   buildWritePacket, parseJsonObject, prompt,
 };

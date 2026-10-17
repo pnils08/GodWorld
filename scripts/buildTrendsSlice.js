@@ -5,8 +5,9 @@
  * her voice agent). pipeline.68 shape via beatSliceKit.
  *
  * What the city is doing together this week:
- *   Cultural_Ledger — who/what the city is talking about (MediaCount x trend),
- *     and who just appeared.
+ *   Cultural_Ledger — who the city is talking about THIS cycle (MediaCount gained vs
+ *     output/beats/prev/, pipeline.81), and who just appeared. Only figures linked to a
+ *     ledger citizen ride (no-POPID rows are engine template names Rhea cannot verify).
  *   Neighborhood_Demographics vs output/beats/prev/ — where people are moving
  *     (adults/students deltas per hood; the drift that IS live).
  *   Story_Hook_Deck — name-matched, plus NEIGHBORHOOD_BOOM / RISING / COOLING /
@@ -26,10 +27,10 @@ const pulseSlice = require('./buildPulseSlice');
 const SEAT = {
   slug: 'celeste-tran', name: 'Celeste Tran', popid: 'POP-00164', desk: 'wire',
   kind: 'beat-trends', domain: 'trends', artifact: 'trends', builder: 'buildTrendsSlice.js',
-  version: 'TRENDS-SLICE-3', nameRe: /celeste\s*tran/i,
+  version: 'TRENDS-SLICE-4', nameRe: /celeste\s*tran/i,
   tabs: ['Cultural_Ledger', 'Neighborhood_Demographics', 'Story_Hook_Deck'],
   // + output/cron-compare/pulse_c{N}.json (pipeline.70), read soft
-  approach: 'Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the engine\'s hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours.',
+  approach: 'Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city\'s hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours.',
   roomIsYours: 'the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about',
   build
 };
@@ -37,8 +38,14 @@ const SEAT = {
 const ACTIVE_RE = /inactive|retired|closed/i;
 
 function build(cycle, { root, beats, profiles }) {
+  // pipeline.81: mentions gained since the previous dump, keyed by CUL-ID (Name as fallback).
+  const prevCul = K.prevTabRows(root, 'Cultural_Ledger');
+  const prevCount = new Map(prevCul.rows.map(r => [String(r['CUL-ID'] || r.Name || '').trim(), K.num(r.MediaCount) || 0]));
+  const hasPrevCul = prevCul.state === 'PRIOR_CYCLE_ON_DISK' && prevCul.rows.length > 0;
   const figures = (beats.Cultural_Ledger || [])
     .filter(r => r.Name && !ACTIVE_RE.test(String(r.Status || '')))
+    // pipeline.81 Task 2: a figure with no ledger citizen is a template name — off the slice.
+    .filter(r => /POP-/i.test(String(r.UniverseLinks || '')))
     .map(r => ({
       name: String(r.Name).trim(),
       role: String(r.RoleType || '').trim() || null,
@@ -50,6 +57,11 @@ function build(cycle, { root, beats, profiles }) {
       mediaCount: K.num(r.MediaCount),
       trend: String(r.TrendTrajectory || '').trim() || null,
       firstSeen: K.num(r.FirstSeenCycle),
+      lastSeen: K.num(r.LastSeenCycle),
+      // gained this cycle: vs prev/ when on disk (a row new since the dump gains its whole count);
+      // with no prev/, null — sighted-this-cycle stands in for movement.
+      gained: hasPrevCul ? (K.num(r.MediaCount) || 0) - (prevCount.has(String(r['CUL-ID'] || r.Name || '').trim())
+        ? prevCount.get(String(r['CUL-ID'] || r.Name || '').trim()) : 0) : null,
       popids: String(r.UniverseLinks || '').split(/[;,\s]+/).filter(t => /^POP-/i.test(t)).map(t => t.toUpperCase())
     }));
   const demoRows = beats.Neighborhood_Demographics || [];
@@ -60,15 +72,22 @@ function build(cycle, { root, beats, profiles }) {
   const seenNames = new Set();
   const culSrc = 'output/beats/Cultural_Ledger.jsonl @C' + cycle;
 
-  // What the city is talking about: most-mentioned active figures, trend first.
-  const talkedAbout = figures.filter(f => f.mediaCount != null)
-    .sort((a, b) => (b.mediaCount - a.mediaCount) || ((b.fame || 0) - (a.fame || 0)));
+  // What the city is talking about THIS cycle (pipeline.81): mentions gained vs prev/, then
+  // sighted this cycle, then the lifetime count. A figure that did not move never leads —
+  // a lifetime leader would hand the seat the same angle every cycle (C109–C111).
+  const movedNow = f => hasPrevCul ? f.gained > 0 : f.lastSeen === Number(cycle) && f.mediaCount > 0;
+  const talkedAbout = figures.filter(f => f.mediaCount != null && movedNow(f))
+    .sort((a, b) => ((b.gained || 0) - (a.gained || 0)) ||
+      ((b.lastSeen === Number(cycle)) - (a.lastSeen === Number(cycle))) ||
+      (b.mediaCount - a.mediaCount) || ((b.fame || 0) - (a.fame || 0)));
+  const movedText = f => (f.gained != null ? 'gained ' + f.gained + ' mention' + (f.gained === 1 ? '' : 's') + ' this cycle (' + f.mediaCount + ' total)'
+    : 'on the record this cycle (' + f.mediaCount + ' mentions total)');
   for (const f of talkedAbout.slice(0, 3)) {
     seenNames.add(f.name);
     facts.push({
-      text: f.name + (f.role ? ' (' + f.role + ')' : '') + (f.domain ? ', ' + f.domain : '') + ' — ' + f.mediaCount +
-        ' media mentions' + (f.trend ? ', ' + f.trend : '') + (f.fame != null ? ', fame ' + f.fame : ''),
-      src: culSrc
+      text: f.name + (f.role ? ' (' + f.role + ')' : '') + (f.domain ? ', ' + f.domain : '') + ' — ' + movedText(f) +
+        (f.trend ? ', ' + f.trend : '') + (f.fame != null ? ', fame ' + f.fame : ''),
+      src: hasPrevCul ? culSrc + ' vs output/beats/prev/Cultural_Ledger.jsonl @C' + prevCul.vs : culSrc
     });
     for (const popid of f.popids) {
       if (people.some(p => p.popid === popid)) continue;
@@ -121,19 +140,23 @@ function build(cycle, { root, beats, profiles }) {
   }
 
   const lead = talkedAbout[0];
-  const label = (lead ? lead.name + ' leads the conversation (' + lead.mediaCount + ' mentions)' : 'a quiet week on the culture record') +
-    (moves.length ? '; ' + moves[0].hood + ' moves the most' : '');
+  const seatHood = (profiles && profiles.get && profiles.get(SEAT.popid) && String(profiles.get(SEAT.popid).Neighborhood || '').trim()) || null;
+  const label = lead
+    ? lead.name + ' ' + movedText(lead) + (moves.length ? '; ' + moves[0].hood + ' moves the most' : '')
+    : (moves.length ? moves[0].hood + ' moves the most; the culture record is quiet this cycle' : 'a quiet week on the culture record');
   return K.makeSlice(SEAT, cycle, beats, {
-    ref: culSrc, hood: (lead && lead.hood) || (moves[0] && moves[0].hood) || null, label,
+    // hood: the lead figure's when one moved; else her own block (pipeline.81), then the biggest move.
+    ref: culSrc, hood: (lead && lead.hood) || seatHood || (moves[0] && moves[0].hood) || null, label,
     angle: label + ' — what Oakland is doing together this week',
     hookLine: lead
-      ? lead.name + ' — ' + lead.mediaCount + ' mentions' + (lead.trend ? ', ' + lead.trend : '') + '. The trend is the story; the mood is yours.'
+      ? lead.name + ' — ' + movedText(lead) + (lead.trend ? ', ' + lead.trend : '') + '. The trend is the story; the mood is yours.'
       : 'Nobody spiked this week — a flat trend line is also a story.',
     facts, people,
     deltas: { state: prev.state, vs: prev.vs },
     hooks,
     pageVoices,
-    note: [people.length ? null : 'no talked-about figure links to a ledger citizen this cycle',
+    note: [talkedAbout.length ? null : 'no figure on the culture record moved this cycle',
+      people.length ? null : 'no ledger citizen on the culture record or the pages this cycle',
       pulse ? null : 'no pulse on disk for this Cycle (buildPulseSlice.js) — the pages are silent in this slice'].filter(Boolean).join('; ') || null,
     extra: { talkedAbout: talkedAbout.length, appeared: appeared.length, moves: moves.length,
       pulse: pulse ? { generatedAt: pulse.generatedAt, docs: pulse.counted.docs, citizens: pulse.counted.citizens } : null }

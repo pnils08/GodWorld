@@ -91,12 +91,12 @@ function synthFixtureRoot(cycle, journalist, withDecks) {
   assert.ok(!slice.seeds.some(s => s.seedId === 'SEED-SYN-PRIOR'));
   assert.ok(slice.pointers.some(p => /Story_Hook_Deck\.jsonl \+ Story_Seed_Deck\.jsonl \(sports, this cycle\)/.test(p)));
   const md = formatTanyaSliceMarkdown(slice);
-  assert.match(md, /## ENGINE HOOKS \/ SEEDS \(colour, not fact\)/);
+  assert.match(md, /## CITY HOOKS \/ SEEDS \(colour, not fact\)/);
 
   const bare = buildTanyaSlice(FIX_CYCLE, { root: synthFixtureRoot(FIX_CYCLE, 'Tanya Cruz', false) });
   assert.deepStrictEqual(bare.hooks, []);
   assert.deepStrictEqual(bare.seeds, []);
-  assert.doesNotMatch(formatTanyaSliceMarkdown(bare), /## ENGINE HOOKS/);
+  assert.doesNotMatch(formatTanyaSliceMarkdown(bare), /## CITY HOOKS/);
 }
 
 // pipeline.74 — an off-season row (Record '-') labels from its StoryAngle, never "update: -"

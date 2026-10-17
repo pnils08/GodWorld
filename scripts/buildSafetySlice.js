@@ -52,7 +52,7 @@ function build(cycle, { root, beats, profiles }) {
   // engine.235: what the engine itself flagged — hotspots against the city's own middle, and which
   // hoods moved this cycle. The engine computed these every cycle and kept them in memory until now.
   const hot = rows.filter(r => r.hotspot != null).sort((a, b) => b.hotspot - a.hotspot);
-  if (hot.length) facts.push({ text: 'Engine hotspots this cycle (over the city\'s own bar): ' + hot.map(r => r.hood + (r.pressure != null ? ' (' + r.pressure + '× the city median)' : '')).join(', '), src });
+  if (hot.length) facts.push({ text: 'Hotspots this cycle (over the city\'s own bar): ' + hot.map(r => r.hood + (r.pressure != null ? ' (' + r.pressure + '× the city median)' : '')).join(', '), src });
   const rising = rows.filter(r => r.trend === 'rising').map(r => r.hood), easing = rows.filter(r => r.trend === 'falling').map(r => r.hood);
   if (rising.length || easing.length) facts.push({ text: 'Moved this cycle — rising: ' + (rising.join(', ') || 'none') + '; easing: ' + (easing.join(', ') || 'none'), src });
   const people = K.rosterAtSectors(beats, /\bpublic safety\b|crisis response/i)

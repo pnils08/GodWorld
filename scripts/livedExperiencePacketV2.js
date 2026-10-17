@@ -766,6 +766,7 @@ module.exports = {
   candidateRows: v1.candidateRows,
   neighborsFromLedger: v1.neighborsFromLedger,
   isProximityCandidate: v1.isProximityCandidate,
+  isLedgerFillCandidate: v1.isLedgerFillCandidate,
   validateAngleOutput: v1.validateAngleOutput,
   reporterChaseText: v1.reporterChaseText,
   chaseIsJsonShaped: v1.chaseIsJsonShaped,

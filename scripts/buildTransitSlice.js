@@ -23,7 +23,7 @@ const SEAT = {
   kind: 'beat-transit', domain: 'transit', artifact: 'transit', builder: 'buildTransitSlice.js',
   version: 'TRANSIT-SLICE-2', nameRe: /trevor\s*shimizu/i,
   tabs: ['Transit_Metrics', 'Employment_Roster', 'Business_Ledger', 'Story_Hook_Deck', 'Cycle_Weather', 'Oakland_Sports_Feed', 'LifeHistory_Log', 'Story_Seed_Deck'],
-  approach: 'Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. The week header (weather, home games, the union of causes), the chaos car on the line and the citizens who lived a transit line are record; the Factors on each station row are the engine\'s own causes — the frame at their head (weather; weekend; holiday: <name> (major) or (no cut)) is the citywide day-type cut, and the rest are the row\'s own reasons (holiday lift in its hood, First Friday, game day, events, a stalled train, a short crew, crowded platforms). Riders rise and fall for the reasons written there, never for a reason you add. A BART-train chaos hit this cycle reaches the platforms NEXT cycle. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed.',
+  approach: 'Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. The week header (weather, home games, the union of causes), the chaos car on the line and the citizens who lived a transit line are record; the Factors on each station row are the city\'s own causes — the frame at their head (weather; weekend; holiday: <name> (major) or (no cut)) is the citywide day-type cut, and the rest are the row\'s own reasons (holiday lift in its hood, First Friday, game day, events, a stalled train, a short crew, crowded platforms). Riders rise and fall for the reasons written there, never for a reason you add. A BART-train chaos hit this cycle reaches the platforms NEXT cycle. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed.',
   roomIsYours: 'the platform at 7:40, the operator\'s cab, who is late and why, what the fare gate sounds like, what a regular rider notices first',
   build
 };
@@ -94,9 +94,9 @@ function build(cycle, { root, beats, profiles }) {
   const dayType = majorHoliday ? holidayTok + ' — riders cut citywide by the major-holiday rule' + (weekendTok ? ' (outranks the weekend; the two never stack)' : '')
     : weekendTok ? 'weekend — riders cut citywide by the weekend rule' + (holidayTok ? '; ' + holidayTok + ' — no change to riders' : '')
     : holidayTok ? 'weekday; ' + holidayTok + ' — no change to riders'
-    : frameTokens.indexOf('holiday') >= 0 ? 'holiday named on the row (pre-engine.290 format — no cut rule recorded)' : 'ordinary weekday — no citywide cut';
+    : frameTokens.indexOf('holiday') >= 0 ? 'holiday named on the row (older format — no cut rule recorded)' : 'ordinary weekday — no citywide cut';
   facts.push({ text: 'Day type this cycle: ' + dayType + '. A station that moved more than the citywide rule names its own reason on its row.', src: 'output/beats/Transit_Metrics.jsonl Cycle ' + cycle + ' Factors (frame)' });
-  if (causes.length) facts.push({ text: 'The week on the line — every cause the engine named this cycle, once: ' + causes.join('; '), src: 'output/beats/Transit_Metrics.jsonl Cycle ' + cycle + ' Factors' });
+  if (causes.length) facts.push({ text: 'The week on the line — every cause on the record this cycle, once: ' + causes.join('; '), src: 'output/beats/Transit_Metrics.jsonl Cycle ' + cycle + ' Factors' });
   const weather = (beats.Cycle_Weather || []).find(w => Number(w.CycleID) === cycle);
   if (weather) {
     facts.push({
@@ -142,7 +142,7 @@ function build(cycle, { root, beats, profiles }) {
         facts.push({
           text: 'Chaos car on the line this cycle: ' + c.vehicle + (c.outcome ? ' — ' + c.outcome.replace(/_/g, ' ') : '') + ' → ' + c.target +
             (c.metric && c.magnitude ? ' (' + c.metric + ' ' + c.magnitude + ')' : '') + (c.seed ? ' — ' + c.seed : '') +
-            (/^bart_train$/i.test(c.vehicle) ? '. The engine carries a train hit one cycle: it reaches the platforms on NEXT cycle\'s station rows as "BART train: … (last week)"' : ''),
+            (/^bart_train$/i.test(c.vehicle) ? '. A train hit carries one cycle: it reaches the platforms on NEXT cycle\'s station rows as "BART train: … (last week)"' : ''),
           src: summaryPath + ' ## Chaos Events'
         });
       }

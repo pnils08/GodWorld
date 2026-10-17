@@ -633,7 +633,7 @@ function formatHalSliceMarkdown(slice) {
   }
   L.push('');
   if ((slice.hooks && slice.hooks.length) || (slice.seeds && slice.seeds.length)) {
-    L.push('## ENGINE HOOKS / SEEDS (colour, not fact)');
+    L.push('## CITY HOOKS / SEEDS (colour, not fact)');
     L.push('_Colour and pointers only — never merge into presentFacts / anchorFacts._');
     for (const h of slice.hooks || []) {
       L.push('- HOOK: ' + h.text + (h.angle ? ' — angle: ' + h.angle : '') +

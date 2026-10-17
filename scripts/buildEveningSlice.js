@@ -37,7 +37,7 @@ const ROOT = path.join(__dirname, '..');
 const EVENING_APPROACH =
   'Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — ' +
   'restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. ' +
-  'Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). ' +
+  'Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw decimals as lead). ' +
   'Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). ' +
   'Do not file multi-voice culture-desk average. One room, one night, one truth.';
 

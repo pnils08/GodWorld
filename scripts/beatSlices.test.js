@@ -60,6 +60,8 @@ function writeDump(dir, cycle) {
       { 'CUL-ID': 'CUL-T1', Name: 'Test Rising Musician', RoleType: 'Musician', FameCategory: 'musician', CulturalDomain: 'Arts', Status: 'Active', UniverseLinks: 'POP-90001', FirstSeenCycle: '80', LastSeenCycle: String(cycle), MediaCount: '7', FameScore: '34', TrendTrajectory: 'rising', CityTier: 'Local', Neighborhood: 'Temescal' },
       { 'CUL-ID': 'CUL-T2', Name: 'Test Fading Actor', RoleType: 'Actor', FameCategory: 'actor', CulturalDomain: 'Media', Status: 'Active', UniverseLinks: '', FirstSeenCycle: '60', LastSeenCycle: '98', MediaCount: '21', FameScore: '58', TrendTrajectory: 'fading', CityTier: 'City', Neighborhood: 'Piedmont Ave' },
       { 'CUL-ID': 'CUL-T3', Name: 'Test New Chef', RoleType: 'Chef', FameCategory: 'chef', CulturalDomain: 'Culinary', Status: 'Active', UniverseLinks: 'POP-90003', FirstSeenCycle: String(cycle), LastSeenCycle: String(cycle), MediaCount: '1', FameScore: '12', TrendTrajectory: 'quiet', CityTier: 'Local', Neighborhood: 'Fruitvale' },
+      // pipeline.81: the fading side of the file needs a citizen behind it (an unlinked row leaves every slice).
+      { 'CUL-ID': 'CUL-T6', Name: 'Test Faded Singer', RoleType: 'Singer', FameCategory: 'musician', CulturalDomain: 'Music', Status: 'Active', UniverseLinks: 'POP-90002', FirstSeenCycle: '50', LastSeenCycle: '97', MediaCount: '18', FameScore: '55', TrendTrajectory: 'fading', CityTier: 'City', Neighborhood: 'Piedmont Ave' },
       // No mentions yet — never makes the talked-about list; the appeared list catches her.
       { 'CUL-ID': 'CUL-T5', Name: 'Test Fresh Poet', RoleType: 'Poet', FameCategory: 'poet', CulturalDomain: 'Literature', Status: 'Active', UniverseLinks: '', FirstSeenCycle: String(cycle - 1), LastSeenCycle: String(cycle - 1), MediaCount: '', FameScore: '8', TrendTrajectory: 'quiet', CityTier: 'Local', Neighborhood: 'Temescal' },
       // Inactive — never rides a slice.
@@ -254,11 +256,11 @@ try {
   ok('profile shape', t.citizens[0].profile === 'Test Operator — Transit Operator (AC Transit) — Test Transit Agency');
   // TRANSIT-SLICE-2 — the week header, the chaos car on the line, the citizens who lived a transit line
   ok('version bumped (cache refuses the old slice)', t.version === 'TRANSIT-SLICE-2');
-  ok('week header unions the engine causes once', (() => { const w = t.facts.find(f => /^The week on the line — every cause the engine named this cycle, once: /.test(f.text)); return !!w && /game day: Test Park; storm front/.test(w.text) && (w.text.match(/storm front/g) || []).length === 1; })());
+  ok('week header unions the engine causes once', (() => { const w = t.facts.find(f => /^The week on the line — every cause on the record this cycle, once: /.test(f.text)); return !!w && /game day: Test Park; storm front/.test(w.text) && (w.text.match(/storm front/g) || []).length === 1; })());
   ok('day type: no frame = ordinary weekday', t.facts.some(f => /^Day type this cycle: ordinary weekday — no citywide cut\./.test(f.text)));
   ok('weather on the record', t.facts.some(f => f.text === 'Weather this cycle: overcast, 52°F' && /Cycle_Weather/.test(f.src)));
   ok('game-result rows only, named as record not cause', t.facts.some(f => /^Game on the sports feed this cycle: Oaks at Jack London — Oaks drop another late \(the rider lift is real only where a station row says "game day"\)$/.test(f.text)));
-  ok('chaos: the bart_train hit lands with its seed and the carry rule', t.facts.some(f => /^Chaos car on the line this cycle: bart_train — stalled train → citizen POP-90003 \(T4\) \(Sentiment -0\.05\) — the 7:40 sat dark between Test Central and Test North\. The engine carries a train hit one cycle: it reaches the platforms on NEXT cycle/.test(f.text) && /world_summary_c103\.md ## Chaos Events/.test(f.src)));
+  ok('chaos: the bart_train hit lands with its seed and the carry rule', t.facts.some(f => /^Chaos car on the line this cycle: bart_train — stalled train → citizen POP-90003 \(T4\) \(Sentiment -0\.05\) — the 7:40 sat dark between Test Central and Test North\. A train hit carries one cycle: it reaches the platforms on NEXT cycle/.test(f.text) && /world_summary_c103\.md ## Chaos Events/.test(f.src)));
   ok('chaos: a hit on AC Transit (BIZ-00013) lands, a Laurel shutoff does not', t.facts.some(f => /cop_car — ticket → business BIZ-00013/.test(f.text)) && !t.facts.some(f => /pge_truck/.test(f.text)));
   ok('chaos citizen target becomes a source', t.citizens.some(c => c.popid === 'POP-90003' && /the chaos car found them this cycle: bart_train stalled train/.test(c.why)));
   ok('tagged transit line is a source, labelled', t.citizens.some(c => c.popid === 'POP-90001' && /lived it this cycle \(rode the disruption\): "waited out a stalled train at Test Central and walked the last mile"/.test(c.why)));
@@ -402,16 +404,16 @@ try {
   ok('kai: rising figure leads with trajectory + fame', k.facts.some(f => /Test Rising Musician \(Musician\), Arts, Fruitvale — fame rising \(fame 34, rising\), last seen C103/.test(f.text)));
   ok('kai: linked figure carries the citizen\'s home hood, never the sighting hood', !JSON.stringify(k.facts).includes('Test Rising Musician (Musician), Arts, Temescal'));
   ok('kai: new-on-record figure', k.facts.some(f => /Test New Chef.*new on the culture record this cycle/.test(f.text)));
-  ok('kai: fading is the other side of the file', k.facts.some(f => /Test Fading Actor.*fading — the where-are-they-now file/.test(f.text)));
+  ok('kai: fading is the other side of the file', k.facts.some(f => /Test Faded Singer.*fading — the where-are-they-now file/.test(f.text)));
   ok('kai: inactive figure never rides', !JSON.stringify(k.facts).includes('Test Retired Poet'));
   ok('kai: universe-linked figure resolves to the ledger citizen', k.citizens.some(c => c.popid === 'POP-90001' && /fame rising/.test(c.why)));
   ok('kai: CULTURE hook reaches him by domain despite no desk', k.prewrite.hooks.some(h => /Test Rising Musician gaining attention/.test(h.text)));
-  ok('kai: culture-desk seed becomes a fact + a candidate', k.facts.some(f => /ENGINE SEED \(Temescal\): Test Civic Resident/.test(f.text)));
+  ok('kai: culture-desk seed becomes a fact + a candidate', k.facts.some(f => /CITY SEED \(Temescal\): Test Civic Resident/.test(f.text)));
   const sh = lifestyle.buildLifestyleSlice(CYCLE, { root });
-  ok('sharon: fading leads the fame file', /Test Fading Actor.*fading — the where-are-they-now file/.test(sh.facts[0].text) && /City-tier/.test(sh.facts[0].text));
+  ok('sharon: fading leads the fame file', /Test Faded Singer.*fading — the where-are-they-now file/.test(sh.facts[0].text) && /City-tier/.test(sh.facts[0].text));
   ok('sharon: the city-knows-them row', sh.facts.some(f => /Test Rising Musician.*the city knows them/.test(f.text)));
   ok('sharon: linked figure carries the citizen\'s home hood (Fruitvale), not the sighting hood (Temescal)', sh.facts.some(f => /Test Rising Musician \(Musician\), Arts, Fruitvale/.test(f.text)) && !JSON.stringify(sh.facts).includes('Arts, Temescal'));
-  ok('sharon: unlinked figure keeps the sighting hood — nothing else to read', sh.facts.some(f => /Test Fading Actor \(Actor\), Media, Piedmont Ave/.test(f.text)));
+  ok('sharon: an unlinked figure leaves the slice (pipeline.81 — a template name Rhea cannot verify)', !sh.facts.some(f => /Test Fading Actor/.test(f.text)) && !k.facts.some(f => /Test Fading Actor/.test(f.text)));
   ok('sharon: CELEBRITY hook by domain (City Desk misroute)', sh.prewrite.hooks.some(h => /Test Fading Actor spotted at a gala/.test(h.text)));
   ok('sharon: FAME_WATCH hook by type (raw-carried, no desk)', sh.prewrite.hooks.some(h => /Test Rising Musician gaining attention/.test(h.text)));
   const m = neighborhood.buildNeighborhoodSlice(CYCLE, { root });
@@ -531,9 +533,28 @@ try {
 
   console.log('trends (celeste):');
   const ct = trends.buildTrendsSlice(CYCLE, { root });
-  ok('celeste: most-mentioned leads the conversation', /Test Fading Actor \(Actor\), Media — 21 media mentions, fading/.test(ct.facts[0].text));
-  ok('celeste: new-on-record rides (and never double-lists)', ct.facts.some(f => /Test Fresh Poet \(Literature\) — new on the culture record C102/.test(f.text)) &&
-    ct.facts.filter(f => /Test New Chef/.test(f.text)).length === 1);
+  // pipeline.81: no prev/ here, so sighted-this-cycle stands in for movement; no-citizen rows never ride.
+  ok('celeste: a figure sighted this cycle leads, lifetime count is not the rank', /^Test Rising Musician \(Musician\), Arts — on the record this cycle \(7 mentions total\)/.test(ct.facts[0].text), ct.facts[0].text);
+  ok('celeste: no-citizen figures leave the slice (template names Rhea cannot verify)', !JSON.stringify(ct).includes('Test Fading Actor') && !JSON.stringify(ct).includes('Test Fresh Poet'));
+  ok('celeste: never double-lists', ct.facts.filter(f => /Test New Chef/.test(f.text)).length === 1);
+  ok('celeste: no "leads the conversation" and no "engine" in the slice', !/leads the conversation/.test(JSON.stringify(ct)) && !/engine/i.test(ct.approach + ct.story.angle + ct.story.hookLine + JSON.stringify(ct.facts)));
+  ok('celeste: ranks by mentions gained vs prev/', (() => {
+    const pd = path.join(output, 'beats', 'prev');
+    fs.mkdirSync(pd, { recursive: true });
+    writeJsonl(path.join(pd, 'Cultural_Ledger.jsonl'), [
+      { 'CUL-ID': 'CUL-T1', Name: 'Test Rising Musician', MediaCount: '7', UniverseLinks: 'POP-90001' }, { 'CUL-ID': 'CUL-T6', Name: 'Test Faded Singer', MediaCount: '18' }
+    ]);
+    fs.writeFileSync(path.join(pd, 'meta.json'), JSON.stringify({ cycle: CYCLE - 1, rows: { Cultural_Ledger: 1 } }));
+    const x = trends.buildTrendsSlice(CYCLE, { root });
+    // the quiet case: nothing gained since the dump
+    writeJsonl(path.join(pd, 'Cultural_Ledger.jsonl'), [
+      { 'CUL-ID': 'CUL-T1', Name: 'Test Rising Musician', MediaCount: '7' }, { 'CUL-ID': 'CUL-T3', Name: 'Test New Chef', MediaCount: '1' }, { 'CUL-ID': 'CUL-T6', Name: 'Test Faded Singer', MediaCount: '18' }
+    ]);
+    const q = trends.buildTrendsSlice(CYCLE, { root });
+    fs.rmSync(pd, { recursive: true, force: true });
+    return /^Test New Chef gained 1 mention this cycle \(1 total\)/.test(x.story.label) && !x.facts.some(f => /Test Rising Musician/.test(f.text)) &&
+      /quiet/.test(q.story.label) && !q.facts.some(f => /gained/.test(f.text));
+  })());
   ok('celeste: universe-linked figure resolves', ct.citizens.some(c => c.popid === 'POP-90001' && /city is talking about them/.test(c.why)));
   ok('celeste: movement needs prev/ (none here → no movement fact)', !ct.facts.some(f => /Movement vs/.test(f.text)) && ct.prewrite.deltas.state === 'NO_PRIOR_CYCLE');
   ok('celeste: movement fact when prev/ exists', (() => {

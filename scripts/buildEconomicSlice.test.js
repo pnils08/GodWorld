@@ -227,7 +227,7 @@ console.log('business variant:');
   ok('every evidence line is sourced to a file on disk', slice.prewrite.evidence.length === slice.prewrite.anchorFacts.length &&
     slice.prewrite.evidence.every(e => /^output\//.test(e.src)));
   const mdV3 = formatEconomicSliceMarkdown(slice);
-  ok('md carries the new sections', /## CLOSED \/ GONE THIS CYCLE/.test(mdV3) && /## CONTRACTION WATCH/.test(mdV3) && /## THE CASINO THIS CYCLE/.test(mdV3) && /## ENGINE HOOKS/.test(mdV3));
+  ok('md carries the new sections', /## CLOSED \/ GONE THIS CYCLE/.test(mdV3) && /## CONTRACTION WATCH/.test(mdV3) && /## THE CASINO THIS CYCLE/.test(mdV3) && /## CITY HOOKS/.test(mdV3));
 }
 
 console.log('movement: no prev/ → typed NO_PRIOR_CYCLE, archive closures still reported');

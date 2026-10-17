@@ -258,7 +258,7 @@ function formatMarkdown(slice) {
   for (const c of slice.citizens) L.push('- ' + c.profile + ' — ' + c.why);
   L.push('');
   if ((slice.prewrite.hooks || []).length) {
-    L.push('## ENGINE HOOKS FOR YOU (colour, not fact)');
+    L.push('## CITY HOOKS FOR YOU (colour, not fact)');
     for (const h of slice.prewrite.hooks) L.push('- ' + h.text + (h.angle ? ' (' + h.angle + ')' : ''));
     L.push('');
   }

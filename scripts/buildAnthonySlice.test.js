@@ -266,13 +266,13 @@ console.log('beat-deck wiring (synthetic fixture root):');
   ok('prior-cycle seed excluded', !(slice.seeds || []).some(s => s.seedId === 'SEED-SYN-PRIOR'));
   ok('beat-decks pointer entry present', (slice.pointers || []).some(p => /Story_Hook_Deck\.jsonl \+ Story_Seed_Deck\.jsonl \(sports, this cycle\)/.test(p)));
   const mdOut = formatAnthonySliceMarkdown(slice);
-  ok('md has ENGINE HOOKS / SEEDS section', /## ENGINE HOOKS \/ SEEDS \(colour, not fact\)/.test(mdOut));
+  ok('md has CITY HOOKS / SEEDS section', /## CITY HOOKS \/ SEEDS \(colour, not fact\)/.test(mdOut));
 
   const bareRoot = synthFixtureRoot(FIX_CYCLE, 'Anthony Raines', false);
   const bare = buildAnthonySlice(FIX_CYCLE, { root: bareRoot });
   ok('no beats dump → hooks empty', Array.isArray(bare.hooks) && bare.hooks.length === 0);
   ok('no beats dump → seeds empty', Array.isArray(bare.seeds) && bare.seeds.length === 0);
-  ok('no beats dump → md omits section', !/## ENGINE HOOKS/.test(formatAnthonySliceMarkdown(bare)));
+  ok('no beats dump → md omits section', !/## CITY HOOKS/.test(formatAnthonySliceMarkdown(bare)));
 }
 
 if (failures) {

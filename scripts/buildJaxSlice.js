@@ -533,7 +533,7 @@ function buildJaxSlice(cycle, opts) {
       {
         source: 'Neighborhood_Map row metrics on slice',
         status: 'partial',
-        why: 'Stink label carries some decay numbers; full hood board not embedded as color (avoid engine jargon in prose)'
+        why: 'Stink label carries some decay numbers; full hood board not embedded as color (avoid jargon in prose)'
       },
       {
         source: 'Map hoods with zero Simulation_Ledger residents (e.g. Brooklyn on C102)',

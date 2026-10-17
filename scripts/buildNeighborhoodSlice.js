@@ -29,7 +29,7 @@ const SEAT = {
   kind: 'beat-neighborhood', domain: 'neighborhood', artifact: 'neighborhood', builder: 'buildNeighborhoodSlice.js',
   version: 'HOOD-SLICE-3', nameRe: /maria\s*keen/i,
   tabs: ['Community_Programs', 'Neighborhood_Demographics', 'Story_Hook_Deck', 'Crime_Metrics', 'Hospital_Ledger', 'Judicial_Ledger', 'Care_Justice_Census'],
-  approach: 'Neighborhood approach: this slice is one block\'s record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the engine\'s neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours.',
+  approach: 'Neighborhood approach: this slice is one block\'s record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city\'s neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours.',
   roomIsYours: 'the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about',
   build
 };

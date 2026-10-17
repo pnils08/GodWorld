@@ -1028,7 +1028,7 @@ function formatCivicDomainSliceMarkdown(slice) {
       for (const row of packet.factions) lines.push('  - ' + row);
     }
     if (packet.hooks && packet.hooks.length) {
-      lines.push('- Engine hooks (colour, not fact):');
+      lines.push('- City hooks (colour, not fact):');
       for (const hook of packet.hooks) {
         lines.push('  - ' + hook.text + (hook.angle ? ' — angle: ' + hook.angle : '') +
           (hook.hood ? ' [' + hook.hood + ']' : ''));

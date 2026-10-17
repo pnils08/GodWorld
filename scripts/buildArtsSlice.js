@@ -25,7 +25,7 @@ const SEAT = {
   kind: 'beat-arts', domain: 'arts', artifact: 'arts', builder: 'buildArtsSlice.js',
   version: 'ARTS-SLICE-1', nameRe: /kai\s*marston/i,
   tabs: ['Cultural_Ledger', 'Story_Hook_Deck', 'Story_Seed_Deck'],
-  approach: 'Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the engine\'s culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours.',
+  approach: 'Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the city\'s culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours.',
   roomIsYours: 'the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started',
   build
 };
@@ -37,6 +37,8 @@ const DOWN_RE = /fading|cooling|quiet|declin/i;
 function figures(beats, profiles) {
   return (beats.Cultural_Ledger || [])
     .filter(r => r.Name && !ACTIVE_RE.test(String(r.Status || '')))
+    // pipeline.81 Task 2: a figure with no ledger citizen is an engine template name — off the slice.
+    .filter(r => /POP-/i.test(String(r.UniverseLinks || '')))
     .map(r => ({
       culId: r['CUL-ID'] || null,
       name: String(r.Name).trim(),
@@ -94,7 +96,7 @@ function build(cycle, { beats, profiles }) {
   for (const sd of seeds.slice(0, 3)) {
     const who = sd.citizens.slice(0, 3).map(c => c.name).join('; ');
     facts.push({
-      text: 'ENGINE SEED' + (sd.hood ? ' (' + sd.hood + ')' : '') + ': ' + (who || 'no citizens attached') +
+      text: 'CITY SEED' + (sd.hood ? ' (' + sd.hood + ')' : '') + ': ' + (who || 'no citizens attached') +
         (sd.businesses.length ? ' · at ' + sd.businesses.slice(0, 2).join('; ') : ''),
       src: 'output/beats/Story_Seed_Deck.jsonl @C' + cycle
     });

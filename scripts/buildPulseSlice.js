@@ -71,6 +71,7 @@ function adHocThemes(root, cycle) {
     if (Number(meta.cycle) !== Number(cycle)) return out; // another Cycle's record is not this week's talk
     const rows = fs.readFileSync(p, 'utf8').split('\n').filter(Boolean).map(l => JSON.parse(l))
       .filter(r => r.Name && !/inactive|retired|closed/i.test(String(r.Status || '')))
+      .filter(r => /POP-/i.test(String(r.UniverseLinks || ''))) // pipeline.81: no citizen, no theme
       .map(r => ({ name: String(r.Name).trim(), n: K.num(r.MediaCount) || 0 }))
       .sort((a, b) => b.n - a.n).slice(0, 5);
     for (const r of rows) {

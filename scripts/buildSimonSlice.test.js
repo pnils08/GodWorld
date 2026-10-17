@@ -112,14 +112,14 @@ function synthFixtureRoot(cycle, journalist, withDecks) {
   assert.ok(slice.civicFacts.length <= 6);
 
   const md = formatSimonSliceMarkdown(slice);
-  assert.match(md, /## ENGINE HOOKS \/ SEEDS \(colour, not fact\)/);
+  assert.match(md, /## CITY HOOKS \/ SEEDS \(colour, not fact\)/);
   assert.match(md, /## FRANCHISE \/ CIVIC COLUMNS \(raw feed\)/);
 
   const bare = buildSimonSlice(FIX_CYCLE, { root: synthFixtureRoot(FIX_CYCLE, 'Simon Leary', false) });
   assert.deepStrictEqual(bare.hooks, []);
   assert.deepStrictEqual(bare.seeds, []);
   assert.deepStrictEqual(bare.civicFacts, []);
-  assert.doesNotMatch(formatSimonSliceMarkdown(bare), /## ENGINE HOOKS/);
+  assert.doesNotMatch(formatSimonSliceMarkdown(bare), /## CITY HOOKS/);
   assert.doesNotMatch(formatSimonSliceMarkdown(bare), /## FRANCHISE \/ CIVIC COLUMNS/);
 }
 

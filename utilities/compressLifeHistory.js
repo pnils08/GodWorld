@@ -1391,6 +1391,7 @@ function serializeDialState_(c) {
   if (c.grief) o.grief = c.grief; // engine.94 B.1 durable bereavement stamp
   if (c.fan) o.fan = c.fan; // engine.208 the team a fan follows ('as' | 'oaks' | 'both')
   if (c.lifeEvent) o.lifeEvent = c.lifeEvent; // engine.286 Task 2 held medium event {k, d, c} — the promotion die writes it, the order + own roll read it
+  if (c.pet) o.pet = c.pet; // engine.98 the household animal {k: 'cat'|'dog', l, n, name?} — survives every dial rewrite
   return JSON.stringify(o);
 }
 

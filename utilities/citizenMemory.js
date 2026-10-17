@@ -260,6 +260,7 @@ function serialize_(c) {
   if (c.grief) o.grief = c.grief;
   if (c.fan) o.fan = c.fan; // engine.208 the team a fan follows: 'as' | 'oaks' | 'both'
   if (c.lifeEvent) o.lifeEvent = c.lifeEvent; // engine.286 Task 2 held medium event {k, d, c}
+  if (c.pet) o.pet = c.pet; // engine.98 the household animal {k: 'cat'|'dog', l, n, name?}
   return o;
 }
 function deserialize_(obj) {
@@ -279,6 +280,7 @@ function deserialize_(obj) {
     if (obj.grief) c.grief = obj.grief; // engine.94 B.1 latest bereavement Cycle
     if (obj.fan) c.fan = obj.fan;                 // engine.208 the team a fan follows — seed / household / mint write it
     if (obj.lifeEvent) c.lifeEvent = obj.lifeEvent; // engine.286 Task 2 held medium event {k, d, c} — the promotion die writes it
+    if (obj.pet) c.pet = obj.pet;                 // engine.98 the household animal {k, l, n, name?} — authored or acquired
   }
   return c;
 }

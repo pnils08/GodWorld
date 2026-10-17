@@ -309,5 +309,25 @@ console.log('═══ Section I — no-pending byte-identical regression (objec
     JSON.stringify({ pressure: stored.pressure || null, folded: stored.folded, driveMood: stored.mood.drive }));
 }
 
+// engine.98: a household animal must survive the Phase-9 dial rewrite and the
+// citizenMemory round-trip (chaos cars uses deserialize_ -> serializeDialState_).
+{
+  const pet = { k: 'cat', l: 111, n: 1, name: 'Scout' };
+  const state = E.newCitizen_();
+  state.folded = 105;
+  state.pet = pet;
+  const ctx = makeCtx([{ POPID: 'SYNTHETIC-PET',
+    LifeHistory: 'C106 — [Promotion] Synthetic pet promotion', TraitProfile: 'Updated:c105',
+    DialState: JSON.stringify(state) }], 106, true);
+  C.compressLifeHistory_(ctx);
+  const stored = JSON.parse(get(ctx, 0, 'DialState'));
+  assert('P1 pet survives compressLifeHistory serialize', JSON.stringify(stored.pet) === JSON.stringify(pet) && stored.folded === 106,
+    JSON.stringify({ pet: stored.pet || null, folded: stored.folded }));
+  const round = C.serializeDialState_(E.deserialize_(JSON.parse(JSON.stringify(stored))));
+  assert('P2 pet survives deserialize_ -> serializeDialState_ (chaos-cars path)', JSON.stringify(JSON.parse(round).pet) === JSON.stringify(pet), round);
+  assert('P3 pet survives citizenMemory serialize_', JSON.stringify(E.serialize_(E.deserialize_(stored)).pet) === JSON.stringify(pet));
+  assert('P4 no pet key when the citizen has none', !('pet' in JSON.parse(C.serializeDialState_(E.newCitizen_()))));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

@@ -464,7 +464,21 @@ mean 0.341, range 0.21–0.46, **0 at 1.00**, spread 0.25; city 0.52. The bench 
 the old 20/22 pin could not recur here regardless — the proof is the lift size and intact spread.
 Ships after the current stack's live fire (second ship), not inside it.
 
+## Dial read 2026-10-17 (engine-sheet, live C111, read only)
+
+Builder: "safe to say the dials are completely broken." Measured on live Simulation_Ledger + LifeHistory_Log + Reflection_Intake.
+
+**Stuck share (988 active):** base exactly 50 — integrity 91%, outabout 76%, fandom 73%, family 70%, openness 68%, warmth 61%, sociability 57%, drive 53%, composure 40%. 205 citizens at 50 on all nine. Of 49 citizens with a spouse or children and 3+ family life lines, 36 (73%) sit at family 50 (Amara Keane POP-00002, 23 family lines; Mags Corliss POP-00005).
+
+**What is NOT the cause (corrections to the same session's chat):** (a) the row LifeHistory keeping only `[PrimaryTag]` while LifeHistory_Log keeps the full `PrimaryTag|source:…` string (`generateCitizensEvents.js:3504-3530`) — under ruling 1b those plain-day tags map to `{}` either way (`citizenDialMap.js:74,172-178`); (b) CONTENT_RULES `/relative|friend|neighbor|community|gathering/` (`citizenDialMap.js:274`) matching the `neighborhood:` suffix — only reached when the full log tag is fed to `nudgesForEvent_`, which the fold never does; (c) the `Y3C7` stamp — converts to 111 (`compressLifeHistory.js` inWorld match, `(year-1)*52 + c`), same scale as `DialState.folded`.
+
+**Where it fails, per ruling 1b's own path** ("these events are fed to the crons as lived experiences and can speak on them, those outputs route back to sheets and to the dials"): Reflection_Intake C102–C111 = 1,740 rows from 375 of 988 active citizens; 613 never reflected (Mags POP-00005: 0 rows ever). Citizens a reflection reached, by dial: composure 375 (affect is the sole composure authority), warmth 214, sociability 196, drive 172, openness 43, family 41, outabout 28, integrity 12, fandom 0. Reflection event tags: Community 472, Neighborhood 317, Sports 246, Career 213, Personal 126, Civic 95, Relationship 76, Media 67, Household 48.
+
+**Open questions for review (no fix designed yet):** who the wake loop selects (why 613 never wake), how a reflection's event tag is chosen (family life → Household 48 of 1,740), and why Sports reflections reach fandom 0 when engine.208 made fandom Dial 9.
+
 ## Changelog
+
+- 2026-10-17 (engine-sheet) — Dial read on live C111 (§Dial read 2026-10-17): stuck shares, three non-causes ruled out, the reflection path reaches 375 of 988; sent to codex for review before any design.
 
 - 2026-10-11 overnight (engine-sheet) — engine.193 (b) built + bench-proven (`e3a85853`, 1004 @21 C111–C112); PROD in stage 2, pending the builder's push.
 

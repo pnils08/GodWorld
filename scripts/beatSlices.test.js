@@ -555,6 +555,33 @@ try {
     return /^Test New Chef gained 1 mention this cycle \(1 total\)/.test(x.story.label) && !x.facts.some(f => /Test Rising Musician/.test(f.text)) &&
       /quiet/.test(q.story.label) && !q.facts.some(f => /gained/.test(f.text));
   })());
+  ok('celeste: a stale or same-cycle prev/ is not last week (codex 2026-10-16) — no measured gain, never "quiet"', (() => {
+    const pd = path.join(output, 'beats', 'prev');
+    const run = (vs, rows) => {
+      fs.mkdirSync(pd, { recursive: true });
+      writeJsonl(path.join(pd, 'Cultural_Ledger.jsonl'), rows);
+      fs.writeFileSync(path.join(pd, 'meta.json'), JSON.stringify({ cycle: vs, rows: { Cultural_Ledger: rows.length } }));
+      const x = trends.buildTrendsSlice(CYCLE, { root });
+      fs.rmSync(pd, { recursive: true, force: true });
+      return x;
+    };
+    const prev = [{ 'CUL-ID': 'CUL-T1', Name: 'Test Rising Musician', MediaCount: '3', UniverseLinks: 'POP-90001' }];
+    const measured = x => x.facts.some(f => /gained \d+ mention/.test(f.text)) || /gained \d+ mention/.test(x.story.label);
+    const stale = run(CYCLE - 3, prev);   // a skipped dump: C-3 is not the cycle before
+    const same = run(CYCLE, prev);        // same-cycle metadata
+    const fresh = run(CYCLE - 1, prev);   // the real baseline still measures
+    return !measured(stale) && !measured(same) && !/quiet/.test(stale.story.label + same.story.label) && measured(fresh);
+  })());
+  ok('celeste: a row the valid prev/ merely lacks is unknown movement, not its whole lifetime count', (() => {
+    const pd = path.join(output, 'beats', 'prev');
+    fs.mkdirSync(pd, { recursive: true });
+    writeJsonl(path.join(pd, 'Cultural_Ledger.jsonl'), [{ 'CUL-ID': 'CUL-T1', Name: 'Test Rising Musician', MediaCount: '7', UniverseLinks: 'POP-90001' }]);
+    fs.writeFileSync(path.join(pd, 'meta.json'), JSON.stringify({ cycle: CYCLE - 1, rows: { Cultural_Ledger: 1 } }));
+    const x = trends.buildTrendsSlice(CYCLE, { root });
+    fs.rmSync(pd, { recursive: true, force: true });
+    // Test Faded Singer (old row, 18 lifetime, absent from this prev) must not read "gained 18"
+    return !x.facts.some(f => /Test Faded Singer.*gained 18/.test(f.text)) && !/Test Faded Singer gained/.test(x.story.label);
+  })());
   ok('celeste: universe-linked figure resolves', ct.citizens.some(c => c.popid === 'POP-90001' && /city is talking about them/.test(c.why)));
   ok('celeste: movement needs prev/ (none here → no movement fact)', !ct.facts.some(f => /Movement vs/.test(f.text)) && ct.prewrite.deltas.state === 'NO_PRIOR_CYCLE');
   ok('celeste: movement fact when prev/ exists', (() => {

@@ -647,6 +647,7 @@ function neighborsFromLedger(hood, opts) {
       hood: r.Neighborhood || null,
       profile: [r.Name, r.RoleType, r.Neighborhood].filter(Boolean).join(' — '),
       why: hoodName && r.Neighborhood === hoodName ? 'same-hood-ledger' : 'ledger-resident',
+      ledgerFill: true,   // pipeline.81: provenance — the packet reached past the slice for this one
     };
     if (/\b(?:journalist|reporter|columnist|editor)\b/i.test(String(r.RoleType || ''))) continue;
     const block = quoteIneligibility(cand, opts && opts.desk, opts && opts.story);
@@ -728,10 +729,10 @@ function questionFor(candidate, anglePlan, story) {
 // 'same-hood-signal' (named on some other signal in the hood), 'city-resident'
 // and 'bond-hop …' are the Jax slice's own bench fills — near the story, not in it.
 const PROXIMITY_WHY = new Set(['same-hood-ledger', 'ledger-resident', 'same-hood-signal', 'city-resident']);
-// pipeline.81: the two markers neighborsFromLedger stamps when the packet reaches past the slice into the
-// ledger. Those citizens are on nothing that woke the seat; every row the slice itself names is a target.
-const LEDGER_FILL_WHY = new Set(['same-hood-ledger', 'ledger-resident']);
-function isLedgerFillCandidate(candidate) { return LEDGER_FILL_WHY.has(String(candidate && candidate.why || '')); }
+// pipeline.81: a citizen neighborsFromLedger reached for past the slice carries ledgerFill (provenance,
+// not the why label — a slice can name a citizen with why 'same-hood-ledger', buildJaxSlice). Those are
+// on nothing that woke the seat; every row the slice itself names is a target.
+function isLedgerFillCandidate(candidate) { return !!(candidate && candidate.ledgerFill === true); }
 function isProximityCandidate(candidate) {
   const why = String(candidate && candidate.why || '');
   return PROXIMITY_WHY.has(why) || /^bond-hop\b/.test(why);
@@ -784,7 +785,10 @@ function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story
     : (angleInput && angleInput.known || []).filter(c => c.t === 'FACT').slice(0, 8);
   if (candidate.profile && !streetLife) known.push(refClaim('FACT', candidate.profile, 'Simulation_Ledger profile for ' + candidate.pop));
   const isOfficial = /council|mayor|official|director|chief/i.test(candidate.role || '');
-  const block = quoteIneligibility(candidate, desk, story);
+  // pipeline.81 S3 (builder 2026-10-16): "I drop any guard on a citizen being interviewed." A citizen
+  // reaches W2 only from the slice's pool, so an athlete or an official named there answers. An official
+  // still gets the accountability question (questionFor): no official action the Packet does not supply.
+  const block = null;
   const packet = {
     v: VERSION,
     wake: 'W2',

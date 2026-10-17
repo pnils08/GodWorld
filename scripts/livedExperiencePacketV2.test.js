@@ -67,10 +67,12 @@ assert.equal(resident.v, 'LEP/2');
 assert.equal(resident.exposure.planTarget, undefined);
 assert.ok(resident.lattice.stances.every(row => row.id && row.text));
 
-assert.throws(() => p.validateReportOutput({
+// pipeline.81 S3 (builder 2026-10-16): a slice-named official is an eligible target, so the quote path is open to them.
+assert.equal(official.limits.quoteEligible, true);
+assert.doesNotThrow(() => p.validateReportOutput({
   answer: 'quote', fact_ids: [official.known[0].id], stance_id: 'S_CONCERN', question_id: 'Q_OWNER',
   intention_id: 'I_ANSWER', unverifiedLead: [], abstain_reason: null,
-}, official), /institutional quote/);
+}, official));
 assert.throws(() => p.validateReportOutput({
   answer: 'quote', fact_ids: ['MADE_UP'], stance_id: 'S_CONCERN', question_id: 'Q_OWNER',
   intention_id: 'I_ANSWER', unverifiedLead: [], abstain_reason: null,
@@ -341,6 +343,20 @@ const slicedNeighborW1 = p.buildAnglePacket({
 });
 assert.deepStrictEqual(slicedNeighborW1.exposure.candidates.map(c => c.pop).sort(), ['POP-90031', 'POP-90032'],
   'every citizen the slice names is offered');
+// Provenance, not the why label (codex 2026-10-16): a slice row that itself carries a ledger-fill label is still a target.
+const labeledSliceW1 = p.buildAnglePacket({
+  cycle: 999, desk: 'sports', reporter: pReporter,
+  story: { ...sportsStory, popids: [], citizens: [] },
+  approach: 'TEST-ONLY first-person fan heat',
+  slice: { ...sportsSlice, players: [], citizens: [
+    { popid: 'POP-90033', name: 'Test Labeled Resident', why: 'ledger-resident' },
+    { popid: 'POP-90034', name: 'Test Labeled Hood', why: 'same-hood-ledger' }] },
+  lane: [],
+});
+assert.deepStrictEqual(labeledSliceW1.exposure.candidates.map(c => c.pop).sort(), ['POP-90033', 'POP-90034'],
+  'a slice row labeled ledger-resident / same-hood-ledger is still offered');
+assert.ok(p.neighborsFromLedger('Dimond', { cap: 2 }).every(c => c.ledgerFill === true && p.isLedgerFillCandidate(c)),
+  'a citizen the packet reached for on its own carries the provenance mark');
 
 // Hal's archive posture is typed, but history is not a creative blank check.
 // Present feed facts enter the manifest; unsupplied people/events remain missing.

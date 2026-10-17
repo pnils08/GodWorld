@@ -196,7 +196,9 @@ assert.match(official.task.question, /creates accountability/);
 assert.match(resident.task.question, /seen, felt, or understood/);
 assert.doesNotMatch(official.task.question, /Tribune/);
 assert.doesNotMatch(resident.task.question, /Tribune/);
-assert.equal(official.limits.quoteEligible, false);
+// pipeline.81 S3 (builder 2026-10-16): "I drop any guard on a citizen being interviewed." A named official on the
+// slice is an eligible target; the packet still frames the ask as accountability and supplies no official action.
+assert.equal(official.limits.quoteEligible, true);
 assert.equal(p.quoteIneligibility({ pop: 'POP-00599', role: 'Catcher, Oakland A\'s' }, 'civic', { kind: 'anomaly' }),
   'PRO_ATHLETE_CIVIC_INELIGIBLE');
 {
@@ -207,9 +209,10 @@ assert.equal(p.quoteIneligibility({ pop: 'POP-00599', role: 'Catcher, Oakland A\
       'PRO_ATHLETE_CIVIC_INELIGIBLE');
   }
 }
-assert.throws(() => p.validateReportOutput({ answer: 'quote', observation: [],
-  interpretation: ['I speak for the office'], intention: [], unverifiedLead: [],
-  quoteParts: [{ t: 'INTERPRETATION', i: 0 }], limits: [] }, official), /institutional quote/);
+// The ledger fill-in is where the institutional/athlete filter still applies: neighborsFromLedger never reaches
+// for an official or a GAME-clock athlete on a civic story (see the quoteIneligibility asserts above).
+assert.ok(p.neighborsFromLedger('Dimond', { cap: 6, desk: 'civic', story: { kind: 'anomaly' } })
+  .every(c => !/council|mayor|official|director|chief/i.test(String(c.role || ''))));
 
 const claims = p.validateReportOutput({ answer: 'quote', observation: [],
   interpretation: ['I think the response is slow'], intention: ['I will ask at council'],

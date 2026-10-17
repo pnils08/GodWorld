@@ -41,7 +41,12 @@ function build(cycle, { root, beats, profiles }) {
   // pipeline.81: mentions gained since the previous dump, keyed by CUL-ID (Name as fallback).
   const prevCul = K.prevTabRows(root, 'Cultural_Ledger');
   const prevCount = new Map(prevCul.rows.map(r => [String(r['CUL-ID'] || r.Name || '').trim(), K.num(r.MediaCount) || 0]));
-  const hasPrevCul = prevCul.state === 'PRIOR_CYCLE_ON_DISK' && prevCul.rows.length > 0;
+  // A delta is "this cycle" only against the dump of the cycle before (codex 2026-10-16: a stale or
+  // same-cycle prev/ is not last week). Without that baseline, gained is null and the slice says so.
+  const hasPrevCul = prevCul.state === 'PRIOR_CYCLE_ON_DISK' && prevCul.rows.length > 0 && Number(prevCul.vs) === Number(cycle) - 1;
+  const baselineNote = hasPrevCul ? null : (prevCul.state === 'PRIOR_CYCLE_ON_DISK' && prevCul.rows.length
+    ? 'no usable culture-record baseline (prev/ is C' + prevCul.vs + ', not C' + (Number(cycle) - 1) + ') — movement unavailable, sightings this cycle stand in'
+    : 'no prior culture-record dump — movement unavailable, sightings this cycle stand in');
   const figures = (beats.Cultural_Ledger || [])
     .filter(r => r.Name && !ACTIVE_RE.test(String(r.Status || '')))
     // pipeline.81 Task 2: a figure with no ledger citizen is a template name — off the slice.
@@ -60,8 +65,11 @@ function build(cycle, { root, beats, profiles }) {
       lastSeen: K.num(r.LastSeenCycle),
       // gained this cycle: vs prev/ when on disk (a row new since the dump gains its whole count);
       // with no prev/, null — sighted-this-cycle stands in for movement.
-      gained: hasPrevCul ? (K.num(r.MediaCount) || 0) - (prevCount.has(String(r['CUL-ID'] || r.Name || '').trim())
-        ? prevCount.get(String(r['CUL-ID'] || r.Name || '').trim()) : 0) : null,
+      // A row absent from a valid prev/ is new ONLY if it was first seen after that dump; an older row the
+      // dump simply lacks has unknown movement (null), never its whole lifetime count (codex 2026-10-16).
+      gained: !hasPrevCul ? null : prevCount.has(String(r['CUL-ID'] || r.Name || '').trim())
+        ? (K.num(r.MediaCount) || 0) - prevCount.get(String(r['CUL-ID'] || r.Name || '').trim())
+        : (K.num(r.FirstSeenCycle) != null && K.num(r.FirstSeenCycle) > Number(prevCul.vs) ? (K.num(r.MediaCount) || 0) : null),
       popids: String(r.UniverseLinks || '').split(/[;,\s]+/).filter(t => /^POP-/i.test(t)).map(t => t.toUpperCase())
     }));
   const demoRows = beats.Neighborhood_Demographics || [];
@@ -75,7 +83,7 @@ function build(cycle, { root, beats, profiles }) {
   // What the city is talking about THIS cycle (pipeline.81): mentions gained vs prev/, then
   // sighted this cycle, then the lifetime count. A figure that did not move never leads —
   // a lifetime leader would hand the seat the same angle every cycle (C109–C111).
-  const movedNow = f => hasPrevCul ? f.gained > 0 : f.lastSeen === Number(cycle) && f.mediaCount > 0;
+  const movedNow = f => hasPrevCul ? (f.gained != null && f.gained > 0) : f.lastSeen === Number(cycle) && f.mediaCount > 0;
   const talkedAbout = figures.filter(f => f.mediaCount != null && movedNow(f))
     .sort((a, b) => ((b.gained || 0) - (a.gained || 0)) ||
       ((b.lastSeen === Number(cycle)) - (a.lastSeen === Number(cycle))) ||
@@ -143,7 +151,9 @@ function build(cycle, { root, beats, profiles }) {
   const seatHood = (profiles && profiles.get && profiles.get(SEAT.popid) && String(profiles.get(SEAT.popid).Neighborhood || '').trim()) || null;
   const label = lead
     ? lead.name + ' ' + movedText(lead) + (moves.length ? '; ' + moves[0].hood + ' moves the most' : '')
-    : (moves.length ? moves[0].hood + ' moves the most; the culture record is quiet this cycle' : 'a quiet week on the culture record');
+    : hasPrevCul
+      ? (moves.length ? moves[0].hood + ' moves the most; the culture record is quiet this cycle' : 'a quiet week on the culture record')
+      : (moves.length ? moves[0].hood + ' moves the most; culture-record movement unavailable this cycle' : 'culture-record movement unavailable this cycle');
   return K.makeSlice(SEAT, cycle, beats, {
     // hood: the lead figure's when one moved; else her own block (pipeline.81), then the biggest move.
     ref: culSrc, hood: (lead && lead.hood) || seatHood || (moves[0] && moves[0].hood) || null, label,
@@ -155,7 +165,7 @@ function build(cycle, { root, beats, profiles }) {
     deltas: { state: prev.state, vs: prev.vs },
     hooks,
     pageVoices,
-    note: [talkedAbout.length ? null : 'no figure on the culture record moved this cycle',
+    note: [baselineNote, talkedAbout.length || !hasPrevCul ? null : 'no figure on the culture record moved this cycle',
       people.length ? null : 'no ledger citizen on the culture record or the pages this cycle',
       pulse ? null : 'no pulse on disk for this Cycle (buildPulseSlice.js) — the pages are silent in this slice'].filter(Boolean).join('; ') || null,
     extra: { talkedAbout: talkedAbout.length, appeared: appeared.length, moves: moves.length,

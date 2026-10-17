@@ -485,6 +485,8 @@ Builder: "safe to say the dials are completely broken." Measured on live Simulat
 - **State at close (es):** 113e78aa (future-stamp guard) + 01ea836f engine.296 legend predicate = codex SHIP (`docs/for-claude-review/2026-10-17-codex-dial-fixes-review.md`); staged `output/engine197/prod-stage` (= PROD 4l + those two files, diff verified); bench 1004 resynced from live C111, guard 0, clearfire 112 done — NOT fired, NOT on PROD. The 13-spouse repair (POP-01029..01041) is codex HOLD pending the per-row frontier + replay manifest + builder OK.
 - **Update 2026-10-17 (S570):** bench 1004 @40 C112 clean (`output/engine-sheet/2026-10-17-engine197-bench-c112-@40.md`) → **LIVE PROD @144 = stage 4m**. For the HOLD repair: 8 of the 13 `Y3C29` mint lines left the cell at bench C112 by the existing length trim — same on live Sunday.
 
+- **Wake selection, after codex's HOLD (builder 2026-10-17 ~16:10, verbatim).** Asked: (1) the 100-recent lockout — stay or go? (2) voiced / lived / posture slots before ordinary rotation — keep? (3) with dial distance gone, citizens with recent events still picked more often? (4) Mags's journal rows feeding her dials — one per night (up to 7/Cycle) or one per run (up to 21)? Answer: "1 - it should go, 2 - no i think we have enough purpose behind a cron wake to avoid giving preferential treatment, 3 yes, with 4 that wake on lottery, 4 - 1 a night"
+
 ### Wakes have no rules — build plan (engine-sheet 2026-10-17, to codex before build)
 
 Not built. Codex is the review. Every pool/picker condition, read 2026-10-17:

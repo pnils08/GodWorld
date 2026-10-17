@@ -330,7 +330,7 @@ console.log('7. engine.281 (a2) — sportsRung_ and the ladder sites');
       getCoreSimNeighborhoods_: () => ['Temescal', 'Downtown'], hoodNamesWithScene_: () => [], normHood_: h => h,
       culturalStatusByPop_: () => ({}), recordRipple_: () => {}, registerCulturalEntity_: () => {} });
     load(sb, 'phase07-evening-media/buildEveningFamous.js');
-    const headers = ['POPID', 'First', 'Last', 'Tier', 'ClockMode', 'Status', 'OriginGame', 'Neighborhood', 'TraitProfile'];
+    const headers = ['POPID', 'First', 'Last', 'Tier', 'ClockMode', 'Status', 'OriginGame', 'Neighborhood', 'TraitProfile', 'RoleType'];
     const ctx = { summary: { cycleId: 112, sportsSeason: 'championship' }, config: {}, ledger: { headers, rows } };
     try { sb.buildEveningFamous_(ctx); } catch (e) { if (!/STOP-AT-PICK/.test(e.message)) throw e; }
     return picked || [];
@@ -339,7 +339,8 @@ console.log('7. engine.281 (a2) — sportsRung_ and the ladder sites');
     ['POP-90101', 'Test', 'Legend', 1, 'ENGINE', 'Retired', 'MLB', 'Temescal', ''],
     ['POP-90102', 'Test', 'Starter', 1, 'GAME', 'Active', 'MLB', 'Jack London', ''],
     ['POP-90103', 'Test', 'Hooper', 1, 'ENGINE', 'Retired', 'NBA', 'Downtown', ''],
-    ['POP-90104', 'Test', 'Traded', 1, 'GAME', 'Traded', 'MLB', 'Downtown', '']];
+    ['POP-90104', 'Test', 'Traded', 1, 'GAME', 'Traded', 'MLB', 'Downtown', ''],
+    ['POP-90105', 'Test', 'Active Legend', 1, 'GAME', 'Active', 'MLB The Show', 'Piedmont Ave', '', "Left Fielder, Oakland A's Legend"]];
   const pool = famousPool(rows);
   const names = pool.map(p => p.name);
   const legend = pool.find(p => p.name === 'Test Legend');
@@ -347,6 +348,10 @@ console.log('7. engine.281 (a2) — sportsRung_ and the ladder sites');
     !!legend && legend.role === "A's legend" && legend.homeNeighborhood === 'Temescal', JSON.stringify(legend));
   check('engine.296: no hardcoded legend survives (Warriors / Rodriguez / MVP Davis)',
     !names.some(n => /Warriors|Rodriguez|MVP Davis/.test(n)), names.join(', '));
+  const active = pool.filter(p => p.name === 'Test Active Legend');
+  check('engine.296: an active player the ledger calls a legend is sighted as a legend; other players stay players',
+    active.length > 0 && active.every(p => p.role === "A's legend" && p.homeNeighborhood === 'Piedmont Ave') &&
+    pool.some(p => p.name === 'Test Starter' && p.role === "A's player"), JSON.stringify(active));
   check('engine.296: a retired NBA row and a traded MLB row are not legends',
     !pool.some(p => p.role === "A's legend" && /Hooper|Traded/.test(p.name)));
   const empty = famousPool([['POP-90102', 'Test', 'Starter', 1, 'GAME', 'Active', 'MLB', 'Jack London', '']]);

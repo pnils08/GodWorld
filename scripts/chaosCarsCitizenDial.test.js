@@ -18,7 +18,7 @@ const { makeDemandFixture_ } = require('./careJusticeService.test.js');
 global.careJusticeResidentIndex_ = require('../phase04-events/careJusticeService.js').careJusticeResidentIndex_;
 global.Logger = { log() {} };
 global.inWorldStamp_ = () => 'C100';
-['deserialize_', 'serialize_', 'accrueChaos_', 'applyChaosReaction_', 'newCitizen_']
+['deserialize_', 'serialize_', 'accrueChaos_', 'applyChaosReaction_', 'newCitizen_', 'carryDialExtras_']
   .forEach(k => { global[k] = cm[k]; });
 global.parseDialState_ = comp.parseDialState_;
 global.serializeDialState_ = comp.serializeDialState_;

@@ -329,5 +329,29 @@ console.log('═══ Section I — no-pending byte-identical regression (objec
   assert('P4 no pet key when the citizen has none', !('pet' in JSON.parse(C.serializeDialState_(E.newCitizen_()))));
 }
 
+// A DialState key no writer manages rides through every rewrite untouched; a managed key the engine
+// clears stays cleared (the extras never resurrect a DIAL_STATE_KEYS name).
+{
+  const state = E.newCitizen_();
+  state.folded = 105;
+  state.futureKey = { a: 1, l: 106 };
+  state.lifeEvent = { k: 'promotion', d: 1, c: 105 };
+  const ctx = makeCtx([{ POPID: 'SYNTHETIC-EXTRA',
+    LifeHistory: 'C106 — [Promotion] Synthetic extra promotion', TraitProfile: 'Updated:c105',
+    DialState: JSON.stringify(state) }], 106, true);
+  C.compressLifeHistory_(ctx);
+  const stored = JSON.parse(get(ctx, 0, 'DialState'));
+  assert('X1 an unmanaged key survives the Phase-9 rewrite', JSON.stringify(stored.futureKey) === JSON.stringify(state.futureKey) && stored.folded === 106,
+    JSON.stringify({ futureKey: stored.futureKey || null, folded: stored.folded }));
+  const c = E.deserialize_(stored);
+  assert('X2 the extras are invisible to the dial logic', !Object.keys(c).includes('_dialExtras') && !('futureKey' in c) && !JSON.stringify(c).includes('futureKey'));
+  delete c.lifeEvent;
+  const out = JSON.parse(C.serializeDialState_(c));
+  assert('X3 chaos-cars path keeps the unmanaged key, a cleared managed key stays cleared',
+    JSON.stringify(out.futureKey) === JSON.stringify(state.futureKey) && out.lifeEvent === undefined, JSON.stringify(out));
+  assert('X4 citizenMemory serialize_ carries it too', JSON.stringify(E.serialize_(E.deserialize_(stored)).futureKey) === JSON.stringify(state.futureKey));
+  assert('X5 a citizen with no extras writes no extras', Object.keys(JSON.parse(C.serializeDialState_(E.deserialize_({ base: { drive: 50 } })))).sort().join(',') === 'base,mood,streak');
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

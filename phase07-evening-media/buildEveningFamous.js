@@ -195,6 +195,7 @@ function buildEveningFamous_(ctx) {
         var _iOrigin = slH.indexOf("OriginGame");
         var _iNeigh = slH.indexOf("Neighborhood");
         var _iTrait = slH.indexOf("TraitProfile");
+        var _iRole = slH.indexOf("RoleType");
 
         for (var p = 0; p < slRows.length; p++) {
           var pr = slRows[p];
@@ -203,8 +204,10 @@ function buildEveningFamous_(ctx) {
           var pOrig = (pr[_iOrigin] || "").toString();
           var pTier = Number(pr[_iTier] || 4);
 
-          // engine.296: a retired MLB-origin citizen is an A's legend (any ClockMode, any Tier).
-          if (pStat === "retired" && pOrig.indexOf("MLB") >= 0) {
+          // engine.296: an MLB-origin citizen is an A's legend when the ledger says so — retired, or a
+          // RoleType that names it (Darrin Davis: "Left Fielder, Oakland A's Legend", still playing).
+          var pRole = (_iRole >= 0) ? (pr[_iRole] || "").toString() : "";
+          if (pOrig.indexOf("MLB") >= 0 && (pStat === "retired" || /\blegend\b/i.test(pRole))) {
             var lFirst = (pr[_iFirst] || "").toString();
             var lLast = (pr[_iLast] || "").toString();
             var lName = (lFirst + " " + lLast).trim();
@@ -234,7 +237,7 @@ function buildEveningFamous_(ctx) {
 
           REAL_PLAYERS.push({
             name: pName,
-            role: "A's player",
+            role: /\blegend\b/i.test(pRole) ? "A's legend" : "A's player",   // engine.296: the ledger's word
             tier: pTier,
             homeNeighborhood: pNeigh,
             traitProfile: pTrait
@@ -591,7 +594,7 @@ function buildEveningFamous_(ctx) {
  * - STREAMERS (3), AUTHORS (2), CIVIC (3), BUSINESS (2)
  * - ARTISTS (4) - v2.2
  * - CULTURAL_LEADERS (3) - v2.2
- * - SPORTS_LEGENDS (dynamic from Simulation_Ledger: Status Retired, OriginGame MLB) - engine.296
+ * - SPORTS_LEGENDS (dynamic from Simulation_Ledger: OriginGame MLB and Status Retired or a RoleType naming a legend) - engine.296
  *
  * REAL PLAYER INTEGRATION (v2.5):
  * - Reads Simulation_Ledger for ClockMode=GAME, Status=active, OriginGame=MLB

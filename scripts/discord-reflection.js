@@ -39,8 +39,7 @@ const LOG_DIR = mags.LOG_DIR;
 const LOG_FILE = path.join(LOG_DIR, 'discord-reflection.log');
 const CLAUDE_MEM_URL = 'http://127.0.0.1:37777/api/memory/save';
 const INTAKE_LOCK = path.join(LOG_DIR, 'nightly-intake.lock');
-const INTAKE_PENDING = path.join(LOG_DIR, 'nightly-intake-pending.json');
-const INTAKE_LOCK_STALE_MS = 30 * 60 * 1000;
+const INTAKE_SPOOL = path.join(LOG_DIR, 'nightly-intake');
 
 const DRY_RUN = process.argv.includes('--dry-run');
 
@@ -375,38 +374,19 @@ async function loadPageTail(count) {
 
 // ---------------------------------------------------------------------------
 // engine.197 M2 — her journal reaches Reflection_Intake (builder 2026-10-17: "1 a night").
-// Only the evening run composes the night's row. The row goes to a local pending file first, then
-// appends under an exclusive lock after a scan proves the night is not already in; it leaves pending
-// only when a re-read finds it. Every run flushes pending first, so a failed append or a crash is
-// retried, never lost and never doubled. A row is never updated (that would race the Cycle drain).
+// Only the evening run composes the night's row. It is spooled to its own file, then appended under
+// an exclusive lock only when a scan finds no valid row for that night, and leaves the spool only when
+// a re-read finds it. Every run flushes the spool first, so a failed append or a crash is retried and
+// never doubled. A row is never updated (that would race the Cycle drain). Limits: a classifier
+// throw / off-vocab night composes nothing; a failed spool write logs the row as its only receipt.
 // ---------------------------------------------------------------------------
-function loadIntakePending() {
-  try { return JSON.parse(fs.readFileSync(INTAKE_PENDING, 'utf8')) || {}; } catch (_) { return {}; }
-}
-function saveIntakePending(pending) {
-  if (Object.keys(pending).length) fs.writeFileSync(INTAKE_PENDING, JSON.stringify(pending, null, 2));
-  else { try { fs.unlinkSync(INTAKE_PENDING); } catch (_) {} }
-}
-
-async function flushIntakePending() {
-  var pending = loadIntakePending();
-  var nights = Object.keys(pending);
-  if (!nights.length) return;
-  var ran = await wake.withFileLock(INTAKE_LOCK, INTAKE_LOCK_STALE_MS, async function () {
-    for (var i = 0; i < nights.length; i++) {
-      var night = nights[i];
-      var plan = wake.planNightlyIntake(await sheets.getRawSheetData('Reflection_Intake'), MAGS_POPID, night);
-      if (plan === 'append') {
-        await sheets.appendRows('Reflection_Intake', [pending[night]]);
-        plan = wake.planNightlyIntake(await sheets.getRawSheetData('Reflection_Intake'), MAGS_POPID, night);
-      }
-      if (plan === 'present') { delete pending[night]; log.info('Reflection_Intake <- nightly row for ' + night + ' (in, read back)'); }
-      else log.warn('Reflection_Intake nightly row for ' + night + ' kept pending (' + plan + ')');
-    }
-    saveIntakePending(pending);
-    return true;
+function flushIntakeSpool() {
+  return wake.flushNightlySpool({
+    dir: INTAKE_SPOOL, lockPath: INTAKE_LOCK, popId: MAGS_POPID,
+    readRows: function () { return sheets.getRawSheetData('Reflection_Intake'); },
+    appendRow: function (row) { return sheets.appendRows('Reflection_Intake', [row]); },
+    log: function (m) { log.info('Reflection_Intake: ' + m); }
   });
-  if (ran === null) log.warn('Reflection_Intake: intake lock held by another run — pending kept');
 }
 
 async function queueNightlyIntake(reflection, cycle, clock, instant) {
@@ -423,10 +403,12 @@ async function queueNightlyIntake(reflection, cycle, clock, instant) {
     var hits = matchBondTargets_(body, (bonds && bonds.pairs) || []);
     bondTarget = hits.length ? hits[0].pop : '';
   } catch (_) { /* no bond match is a blank column, not a lost row */ }
-  var pending = loadIntakePending();
-  pending[clock.date] = wake.nightlyIntakeRow({ instantIso: instant.toISOString(), popId: MAGS_POPID, cycle: cycle, cls: cls, body: body, bondTarget: bondTarget });
-  saveIntakePending(pending);
-  await flushIntakePending();
+  var row = wake.nightlyIntakeRow({ instantIso: instant.toISOString(), popId: MAGS_POPID, cycle: cycle, cls: cls, body: body, bondTarget: bondTarget });
+  try { wake.spoolNightlyRow(INTAKE_SPOOL, clock.date, row); } catch (e) {
+    log.error('Reflection_Intake: spool write failed — row not queued: ' + e.message + ' ROW ' + JSON.stringify(row));
+    return;
+  }
+  await flushIntakeSpool();
 }
 
 // ---------------------------------------------------------------------------
@@ -508,7 +490,7 @@ async function main() {
 
   try {
     // engine.197 M2 — every run, quiet or not, first retries a night's intake row still pending
-    if (!DRY_RUN) { try { await flushIntakePending(); } catch (e) { log.warn('Reflection_Intake pending flush: ' + e.message); } }
+    if (!DRY_RUN) { try { await flushIntakeSpool(); } catch (e) { log.warn('Reflection_Intake spool flush: ' + e.message); } }
 
     // Load today's conversations (Discord + Moltbook)
     var entries = loadTodayConversations();
@@ -593,7 +575,7 @@ async function main() {
     log.info('Nightly reflection saved to Supermemory');
 
     // engine.197 M2 — after every durable save above; its own failure never undoes them
-    try { await queueNightlyIntake(reflection, cycle, runClock, runInstant); } catch (e) { log.warn('Reflection_Intake: ' + e.message + ' (row stays pending if composed)'); }
+    try { await queueNightlyIntake(reflection, cycle, runClock, runInstant); } catch (e) { log.warn('Reflection_Intake: ' + e.message + ' (a spooled row stays for the next run)'); }
 
     // Advance only after the durable reflection outputs above succeed. A failed
     // wake leaves the batch available for the next wake instead of losing it.

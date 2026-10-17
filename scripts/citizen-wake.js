@@ -45,6 +45,9 @@ const DRY = ARGV.includes('--dry-run');
 const arg = (k, d) => { const m = ARGV.find((a) => a.startsWith(`--${k}=`)); return m ? m.split('=')[1] : d; };
 const WAKE = (arg('wake', 'evening') || 'evening').toLowerCase();
 const FORCE_POP = arg('pop', null);
+// engine.197 — Elias Varek writes his own page once a Cycle (scripts/civisJournal.js, run-cycle);
+// the lottery leaves him to that cadence (builder 2026-10-17). --pop still reaches him.
+const OWN_CADENCE = new Set(['POP-00789']);
 
 const STATE_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake-state.json');
 const LOG_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake.log');
@@ -226,8 +229,9 @@ async function generateVoice(system, user) {
   const livedList = Array.isArray(livedEvents) ? livedEvents : [];
   // engine.197 — no floors at the wake (builder 2026-10-17): every ledger row with dials, a name and a hood.
   const poolStats = {};
-  const pool = await buildPool({ shapedMin: 0, lifeMinChars: 0, stats: poolStats });
-  logLine(`pool: ${pool.length} of ${poolStats.rows} ledger rows (skipped: dial ${poolStats.dial}, name/hood ${poolStats.nameHood}, rule ${poolStats.rule}) (wake=${WAKE}, cycle=${cycle}, dry=${DRY}, lived events=${livedList.length})`);
+  const ledgerPool = await buildPool({ shapedMin: 0, lifeMinChars: 0, stats: poolStats });
+  const pool = ledgerPool.filter((p) => !OWN_CADENCE.has(p.popId) || p.popId === String(FORCE_POP || '').toUpperCase());
+  logLine(`pool: ${pool.length} of ${poolStats.rows} ledger rows (skipped: dial ${poolStats.dial}, name/hood ${poolStats.nameHood}, rule ${poolStats.rule}, own cadence ${ledgerPool.length - pool.length}) (wake=${WAKE}, cycle=${cycle}, dry=${DRY}, lived events=${livedList.length})`);
   if (!pool.length) { logLine('empty pool — nothing to wake'); process.exit(0); }
 
   const state = loadState();

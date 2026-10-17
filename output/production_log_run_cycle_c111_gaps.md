@@ -337,6 +337,61 @@
 - A5 Step 4 + Step 6 judgment: model-written (the premium seat). Everything else in the chain (5–5.85) ran unattended-shaped this Cycle: every script exited 0 with its gate read back.
 - A6 Civic chain: the hourly tick launches on `world_summary_c111.md` + `engine_audit_c111.json`; at 16:30 CDT the log still showed the c110 APPLY tick — confirm `launched the chain` for c111 at the next tick.
 
+### Builder findings 2026-10-12 → 10-17, no open ROLLOUT row (logged 2026-10-17, engine-sheet)
+
+Each entry carries the builder's words. Numbers read 2026-10-17 from `output/simulation_ledger_snapshot.jsonl` (C111 close), live Event_Content_Ledger and code. Not triaged; nothing built.
+
+### G-EC58 — daily news reads as real-world Oakland [judgment] [canon-leak] [HIGH]
+- Builder 10-12: "the daily news I got for today is terrible , 100% real Oakland".
+
+### G-EC59 — records downstream of the September INIT-003 canon rewrite stay contaminated [judgment] [cross-cycle-debt] [HIGH]
+- INIT-003 restored to passed C86 on 10-11 (`98e2e562`); the slices, world summaries, editions and histories written on the rewritten state were not. Builder 10-12: "the slides and world summaries are contaminated with the canon rewrite you did back in September on the transit hub, about 3 weeks of contamination"; 10-17: "The editions and histories are the worst contamination".
+
+### G-EC60 — initiative tracker does nothing [judgment] [silent-fail] [HIGH]
+- Builder 10-12: "iniative tracker is broken and useless aide it was changed in September"; "the tracker does nothing". engine.213 covers approval only.
+
+### G-EC61 — NotebookLM login keeps dropping; the daily news stops with it [judgment] [silent-fail] [HIGH]
+- Builder 10-17: "my news didn't run for today on notebook"; "Logged out already ??? I need a real fix here … the last login lasted how long ?". `4abc8623` reapplied the root `--no-sandbox` patch after the 0.15.5 upgrade; login lifetime not addressed.
+
+### G-EC62 — DialState carries more than the nine dials [judgment] [header-drift] [MED]
+- Live keys: base, streak, mood, folded, maneuver, fan (+ pet on POP-00005). Builder 10-17: "idk what all that other stuff in dials is for , why it's there , why it isn't erased , how the 2 dials cells communicate".
+
+### G-EC63 — hardcoded crime table ranks hoods the way real-world Oakland does [judgment] [canon-leak] [HIGH]
+- `utilities/ensureCrimeMetrics.js` NEIGHBORHOOD_CRIME_PROFILES violentCrimeMod: Piedmont Ave 0.3, Rockridge 0.4 … Fruitvale 1.0, East Oakland 1.0, Downtown 1.1; no row names a canon source. Builder 10-17: "no hardcode is allowed ever".
+
+### G-EC64 — finished reviews are not archived out of the inbox [judgment] [header-drift] [LOW]
+- 33 files in `docs/for-claude-review/` + 3 untracked. Builder 10-17: "What's with the full inbox ? Aren't you moving the completed reviews out to archive?"
+
+### G-EC65 — awarded firm on initiatives [judgment] [cross-cycle-debt] [LOW]
+- Builder 10-17: "add a 'firm' or something like that to iniative tracker as the awarded firm on iniatives to account for a boost". Money-game plan §Firms has the initiative lift, no awarded-firm field.
+
+### G-EC66 — reaction lines move no dial [judgment] [silent-fail] [HIGH]
+- `utilities/citizenDialMap.js`: Daily / Neighborhood / Personal / Background / PrevEvening / Sports / Lifestyle / Civic Perception → `{}` (engine.201 ruling 1b). An Lopez POP-00810: 19 of 20 cell lines move nothing, every base dial 50; 205 active citizens 50 on every dial. Builder 10-17: "those 4 events tell me exactly how her dials should read … the city moves and she should be reacting to that". Recorded in the engine.197 plan §Builder rulings 2026-10-17; no row.
+
+### G-EC67 — four library lines import real-world poverty [judgment] [canon-leak] [HIGH]
+- 189 of 988 active citizens carry one; 88 earn at or above the median ($99,863). "walked past the old Mandela Parkway encampment site" (hood.west-oakland, any adult) 75; "carried three boxes of canned goods from the pantry truck" (faith.volunteering) 75; "priced out the bigger apartment and decided to wait another year" (econ.middle, wealth 4–7, tied to no housing state) 49; "ignored the check engine light … because rent was due" (econ.tight) 8. An Lopez ($93,600, NetWorth $259,748) reads as distressed. Builder 10-17: "how many citizens lives are following the real world oakland like this one clearly is".
+
+### G-EC68 — the library does not read the city [judgment] [silent-fail] [HIGH]
+- 499 of 826 active line rows carry no Conditions; the rest gate on who the citizen is (lifestate, occupation, band, hood, wealth, children, age). About 16 read something that moved: transitdisrupted 10, hoodtrend 4, momentum 2 (`generateCitizensEvents.js:3012` already passes hoodtrend). Builder 10-17: "engines are still sending events as color even though those systems are built".
+
+### G-EC69 — 42 engine files write their own life lines [judgment] [writeback-drift] [MED]
+- 42 engine files write LifeHistory lines with their own pools and rules, plus the library = 43 sources. 71 of 2,194 functions have no caller; all 84 tabs are referenced. Builder 10-17: "alot of junk code when most of this would require 1/3 of the lines in code and 1/2 of the ledgers used".
+
+### G-EC70 — ROLLOUT does not match the code [judgment] [header-drift] [MED]
+- engine.253 "Transit as its own system" reads ready while engine.290 built and shipped it; engine.98 reads "acquisition roll next" while the builder said pets are not worth it (10-17). Builder 10-17: "none of it is even whats on rollout".
+
+### G-EC71 — DEPLOY.md written as a state log [judgment] [header-drift] [MED]
+- 34 commits to `docs/reference/DEPLOY.md` since 10-10 (live stage, bench pointer, PROD bump table). Builder 10-17: "deploy.md is a uneditable instruction md".
+
+### G-EC72 — pay outside the job's own range [judgment] [writeback-drift] [MED]
+- 119 active citizens paid more than 25% outside their Economic_Parameters incomeRange (Server $96,636 vs 40,000–68,000; Nurse aide $100,976 vs 46,000–70,000; Herbalist $127,400 vs 40,000–75,000). With engine.104 (453 RoleTypes off the table) and pipeline.82 (289 placeholder EmployerBizId).
+
+### G-EC73 — real-world company in ten job titles [judgment] [canon-leak] [HIGH]
+- RoleType "AI Safety Researcher (Anthropic)" on 10 active citizens (POP-00481, POP-00699, POP-00749, POP-00805 …).
+
+### G-EC74 — Renteria children's parent is 5–6 years older [judgment] [writeback-drift] [MED]
+- POP-01042 Isaac and POP-01043 Mei Renteria list ParentIds POP-00744, born 6 and 5 years before them; POP-00744's ChildrenIds does not list them.
+
 ## LEG: /city-hall (G-R)
 
 No gaps this run.

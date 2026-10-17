@@ -1,7 +1,7 @@
 ---
 title: Celeste's Dead Slice, Engine Legends, and the Interview Guards Plan
 created: 2026-10-16
-updated: 2026-10-16
+updated: 2026-10-17
 type: plan
 tags: [media, pipeline, engine, culture, draft]
 sources:
@@ -23,7 +23,7 @@ pointers:
 
 **Goal:** Celeste Tran's seat gets a slice that moves and people she can talk to; the engine stops minting famous figures from a hardcoded name list; every seat may interview anyone its slice names.
 
-**Rows:** pipeline.81 (slice + sourcing, scripts/) · engine.296 (legends pool, phase07) · **Owner:** research-build designs, engine-sheet executes.
+**Rows:** pipeline.81 (slice + sourcing, scripts/) · engine.296 (legends pool, phase07) · engine.297 (fame pools from the Cultural_Ledger, phase07) · **Owner:** research-build designs, engine-sheet executes.
 
 ## The read (rb, 2026-10-16, C111)
 
@@ -58,10 +58,11 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 | 6 | **engine.296 — SPORTS_LEGENDS from the ledger.** `buildEveningFamous.js`: replace the three-entry literal with rows where `OriginGame` contains `MLB` and `Status == Retired` (6 today: Kinder, Conrad, Skenes, Kerkering, Bubic, Rushing), role "A's legend", home hood from the row. No literal fallback — an empty pool is an empty pool. A traded player is archived off the ledger and leaves the pool by itself. Bench on 1004 before PROD; `/stub-engine` in the same commit. | es | done (es, 2026-10-16) |
 | 7 | **Retire the three template rows on live Cultural_Ledger** (CUL-424B3208 Thompson, + Rodriguez, + Davis): `Status → Inactive` so every slice's `ACTIVE_RE` skips them and the record keeps the history. Read back. | es | done (es, 2026-10-16) |
 | 8 | **Acceptance — C112 Celeste (Fri 2026-10-23 wire run):** angle ≠ "Marin Tao leads the conversation"; `quotesRequested ≥ 1`; no no-POPID name on the slice; "engine" absent from the slice; Rhea `pass` or flags unrelated to 1–4. Read `.wake.json` + `.rhea.json`. | rb | waits C112 |
+| 9 | **engine.297 — fame sightings draw from the Cultural_Ledger.** Builder 2026-10-17, verbatim: *"There is a cultural ledger that is the fame citizens , those hardcoded may be the same as them but the fame sightings and event Injection should come from there"*. `buildEveningFamous.js:92–172` holds **twelve** literal pools (ACTORS, MUSICIANS, ATHLETES, INFLUENCERS, JOURNALISTS, CHEFS, STREAMERS, AUTHORS, CIVIC, BUSINESS, ARTISTS, CULTURAL_LEADERS — the earlier "seven"/"eight" counts were short). They become buckets filled from Active `Cultural_Ledger` rows by `FameCategory`/`RoleType` (`classifyRole` at `culturalLedger.js:167` already maps role → category); the context weighting at `:281–409` keeps concatenating buckets; an empty bucket is an empty bucket (engine.296 rule); hood from the linked citizen's row — every Active row is `POP-`-linked since Task 7 (the 3 unlinked rows in the C111 dump were the three template rows). `S.famousSightings` / `S.famousPeople` shape unchanged (readers: `buildMediaPacket.js:304–439`, `mediaFeedbackEngine.js:597–663`); `registerCulturalEntity_` (`:574–579`) keeps bumping the row it drew. Bench on 1004 carries codex's HOLD: a synthetic playoff/championship rung so the legends pool is seen in a fire. `/stub-engine` same commit. The builder routes the work. | codex builds the patch (builder 2026-10-17: "Ask codex"; TASK `docs/for-claude-review/2026-10-17-engine297-fame-ledger-impl-TASK.md`) → es benches + PROD when the builder routes | ready |
 
 ## Open (held, not in scope)
 
-- The other hardcoded pools in `buildEveningFamous.js` — ACTORS, MUSICIANS, STREAMERS, AUTHORS ("Marcus Webb" collides with the OEWD program-director agent), CIVIC ("Councilwoman Rivera"), BUSINESS, ARTISTS, CULTURAL_LEADERS — mint the same no-citizen rows ("Cultural Ambassador Li Wei" @C110, "Pixel Pete" @C111). The builder's ruling named sports; the rest is his call. Task 2 keeps them off the slices either way.
+- **Two readings Task 9 builds without (builder's calls):** (a) do the active Tier 1–2 A's still seed the sighting pool from `Simulation_Ledger` (`REAL_PLAYERS`, `buildEveningFamous.js:186–245`), or only once they hold a `Cultural_Ledger` row (14 "A's player" rows in the C111 dump; the engine.118 usage bridge in `processAdvancementIntake.js:1150+` writes a row at the tier bar)? (b) "event Injection" — a sighting already injects a ripple (`recordRipple_` at `:518–548`, `effectType 'sighting'`), which moves with the pool; the separate fame seam in `generateCitizensEvents.js:2719–2735` fires on `usageCount ≥ 8 OR culturalFame ≥ 25` — does the ruling retire the `usageCount` branch so the seam reads the Cultural_Ledger alone?
 - Oaks players in the athlete pool (`REAL_PLAYERS` reads `MLB` origin only).
 
 ## Build notes (engine-sheet, 2026-10-16)
@@ -76,9 +77,11 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 ## Reviews reconciled
 
-_none yet_
+- **codex 2026-10-16** (`docs/archive/for-claude-review/2026-10-16-codex-celeste-usage-legends-review.md`; TASK beside it) — **FIX landed:** pipeline.81 one-cycle baseline / provenance / athlete-and-official eligibility (`01cb95aa`); print-credit tests moved above the suite's exit + receipt fixtures + integration check (`dcb767cb`). **SHIP accepted:** engine.296 source change; cap revert clean; Saturday main order publish → coverage → sweep → sheets. **HOLD carried:** engine.296 never seen in a fire (→ Task 9 bench rung); the non-sports pools (ruled 2026-10-17 → Task 9); the publisher silently omits a missing staged entry while the receipt records every selected stem (not built — hardening, builder's call whether it matters); first-live print-credit claims (Sat 10-17 16:00 run).
 
 ## Changelog
+
+- 2026-10-17 (research-build) — builder's fame-ledger ruling recorded verbatim → Task 9 / engine.297 (ready; the builder routes it); two readings left open for him; codex 2026-10-16 review reconciled and archived.
 
 - 2026-10-16 (engine-sheet) — Tasks 6–7: engine.296 LIVE PROD @143; template rows Inactive on live.
 

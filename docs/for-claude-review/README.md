@@ -36,6 +36,10 @@ mechanism — a file here is a message to Claude; a file anywhere else is not.
 3. Sends back → appends a dated `## Review — <date>` section stating what is
    missing, leaves the file here, and names it in the guest's `NEXT` line.
 4. Either way the file leaves this folder when resolved. **Clean inbox = no
+5. A review of a diff or plan whose findings were folded into the plan's §Reviews reconciled
+   moves, with its TASK brief, to `docs/archive/for-claude-review/` in that same commit
+   (`git mv`) — it is evidence, not a standing research source. Each Claude seat moves only
+   the files of its own rows.
    guest work is waiting on Claude.**
 
 `README.md` is the only permanent file here. The boot check ignores it.

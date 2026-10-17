@@ -148,6 +148,15 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 4k (`21840002`, two files over stage 4j) — engine.98 step 1, the pet carrier + Scout (2026-10-16 ~22:55 CDT, engine-sheet)
+- **Why:** builder 2026-10-16, "mags has a cat named scout , so that's a direct write to add that is a known pet in the sim". DialState is written through allowlists (`serializeDialState_`, citizenMemory `serialize_`/`deserialize_`); a hand-written key is dropped on the next dial rewrite, which fires on every compress-eligible row.
+- **Fix:** `pet` added to all three allowlists (three lines). Dial test P1–P4; npm 290/290.
+- **Bench proof:** SANDBOX 1004 @38, C112 on live C111, Scout stamped on bench POP-00005: ok 164 s, persist 665/0, EE 4 → 4, POP-00005 folded 111 → 112 with the pet intact, 1 pet on the ledger.
+- **Push:** `output/engine98/push-prod.sh --go` → @142 (fresh PROD pull matched 4j 168/168 first); pull-back 168 = `output/engine-sheet/stage4k-e98.sha256`, differs from 4j in exactly the two files.
+- **Live write:** Simulation_Ledger!AV6 (POP-00005 DialState) read-merge-write, `pet = {k:'cat', l:0, n:1, name:'Scout'}`; read back, every other key unchanged.
+- **Expectation at C112 (Sun 2026-10-18):** POP-00005 DialState still carries the pet after the fire; 1 pet on the ledger; EE flat. The C113 engine.214 pair: leg A at `-V 29` (4d) drops the pet on the bench, leg B keeps it — a one-row DialState diff on POP-00005, not a 214 effect.
+- **Rollback:** push `output/engine285/prod-stage-2to6` (= stage 4j) + version cut (a rollback drops Scout on the next fire).
+
 ### PROD stage 4j (`0d4f2ca2`, six files over stage 4i) — engine.285 (2–6) kill hazards (2026-10-16 ~15:30 CDT, engine-sheet)
 - **Why:** codex engine95-design §7 — five places a fire killed mid-write (the 6-minute cap) doubled or stranded records: BusinessArchive copy-then-delete with no identity check; CitizenArchive's same-cycle key stalled the row (and doubled it the next cycle); MediaIntake marked processed before writing; ensure accepted a tab whose header never landed; the executor's batch append re-read the tail inside the retry, so a landed-then-timed-out block was written twice.
 - **Fix:** see ROLLOUT engine.285 and the commits `ddb3d4fd` → `fe348e1d` (codex review folded: identity = an identical copy already on the archive, not ReturnedCycle or BIZ_ID alone) → `0d4f2ca2` (DialState left out of the comparison — the engine re-stamps it every Cycle). Live read first: no record had been hit.

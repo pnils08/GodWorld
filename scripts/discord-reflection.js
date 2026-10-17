@@ -353,7 +353,7 @@ async function appendToPage(reflection, cycle) {
 // the citizenPage consumer contract. Fail-open to '' like the wake.
 async function loadPageTail(count) {
   try {
-    var res = await page.recentPage_(MAGS_POPID, count || 2);
+    var res = await page.recentPage_(MAGS_POPID, count || 2, { raw: true }); // engine.197 M1: her journal reads its own past raw; every citizen-side reader gets it scrubbed
     var texts = ((res && res.results) || [])
       .filter(function (r) { return String((r && r.metadata && r.metadata.type) || '') !== 'tension'; })
       .map(function (r) { return String((r && r.content) || '').trim(); })

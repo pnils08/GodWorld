@@ -482,8 +482,32 @@ Builder: "safe to say the dials are completely broken." Measured on live Simulat
 - **Big events:** "A wedding or birth should happen once every 20 cycles so who cares" — the single-event fade (one Birth/Wedding leaves base 50, mood +10) stands; no change to HARDEN_STREAK / MOOD_DECAY.
 - **Mags:** "the most curated citizen isn't even getting all I've paid for" — her journal (`discord-reflection.js`) never reaches Reflection_Intake, and the wake pool skips her; both are in scope of the wake ruling above.
 - **State at close (es):** 113e78aa (future-stamp guard) + 01ea836f engine.296 legend predicate = codex SHIP (`docs/for-claude-review/2026-10-17-codex-dial-fixes-review.md`); staged `output/engine197/prod-stage` (= PROD 4l + those two files, diff verified); bench 1004 resynced from live C111, guard 0, clearfire 112 done — NOT fired, NOT on PROD. The 13-spouse repair (POP-01029..01041) is codex HOLD pending the per-row frontier + replay manifest + builder OK.
+- **Update 2026-10-17 (S570):** bench 1004 @40 C112 clean (`output/engine-sheet/2026-10-17-engine197-bench-c112-@40.md`) → **LIVE PROD @144 = stage 4m**. For the HOLD repair: 8 of the 13 `Y3C29` mint lines left the cell at bench C112 by the existing length trim — same on live Sunday.
+
+### Wakes have no rules — build plan (engine-sheet 2026-10-17, to codex before build)
+
+Not built. Codex is the review. Every pool/picker condition, read 2026-10-17:
+
+| # | Where | Condition | Kind | Cut |
+|---|---|---|---|---|
+| W1 | `lib/wakePerception.js:410-413` (+ `SHAPED_MIN` 60 :26) | summed dial deviation < 60 → out, unless lived (`livedOnly`) | exclusion | `scripts/citizen-wake.js:300` passes `shapedMin: 0` (voice `citizenVoice.js:259,298,319` + exchange `citizen-exchange.js:429,440` already do). `livedOnly` then never sets; the lived slot still fires first |
+| W2 | `wakePerception.js:417` (`LIFE_MIN_CHARS` 25 :27) | LifeHistory < 25 chars → out | exclusion (not named in the ruling; "no rules" covers it) | `lifeMinChars: 0` at the same call. A thin-history citizen voices from dials + hood + neighbours, as voice/exchange already do |
+| W3 | `wakePerception.js:421` | name matches /corliss/ → out | exclusion | delete the line. Blast radius: all six `buildPool` calls — POP-00005 enters wake rotation, citizenVoice, citizen-exchange |
+| W4 | `scripts/citizen-wake.js:207` | weight `1 + eventMag*2 + deviation/50` | dial-distance weight | → `1 + eventMag*2` (the ruling names dial distance; recent-event weight stays — codex: hit this reading) |
+| — | `wakePerception.js:406`, `:420` | no DialState / no name or hood | data precondition — the prompt cannot render without them | stays |
+| — | `citizen-wake.js:203-205` recent set; voiced / lived / posture slots | rotation order + priority, not who can wake (recent set falls back to everyone) | order | stays |
+
+**M1 — Mags's page in the wake prompt.** `loadOwnPageReadback` (`wakePerception.js:279`, also `cron-work-wake.js:30`) reads her page via `recentPage_`. Her page = the nightly reflections; each opens `### Nightly Reflection — 2026-10-16`, a real-world date (`discord-reflection.js:323-327`). Six newest read 2026-10-17: in-world content (Robert, Luis, Rick Walker, Fruitvale, Citlali), no builder reference seen. Cut: strip a leading `### Nightly Reflection — <date>` header from page candidates in `loadOwnPageReadback` — a text fix, not an exclusion.
+
+**M2 — journal → Reflection_Intake.** Today `discord-reflection.js:513` writes page + claude-mem + Supermemory, never the intake. Cut: after `appendToPage`, classify with `classifier.classifyTripleReflection_` (as `citizen-wake.js:399`) and append one row in the wake shape (`citizen-wake.js:448-451`): ts, POP-00005, cycle, wake `nightly`, event, snippet = header-stripped first 180 chars, applied `no`, affect, bondTarget, tension, resolves. Engine side unchanged: `compressLifeHistory.js:128-133` reads it; the drain `citizenMemory.js:185` → `nudgesForReflection_(event, affect, mult, text)` moves base only — the snippet is not written to a ledger cell (reflection rows do not pass `captureUnlived_`, which is the LifeHistory fold). Second reader: the council petition pool `scripts/buildCivicOfficeSlice.js:993-1001` takes Civic-tagged negative rows from citizens in a seat's hoods, snippet included — her rows join it like any citizen's; no gate added.
+
+Open for codex: (a) one row per night = up to ~7 per Cycle vs ~1–3 for a woken citizen — a rate, so the number goes to the builder, not a cap in code; (b) bondTarget for her rows (reuse the wake's matcher or blank); (c) any builder/real-world text path from Discord conversations into her page or the snippet beyond the date header.
+
+Acceptance (no manual demo): unit tests in `lib/wakePerception.test.js` for W1–W4/M1; the next scheduled wake logs a pool ≈ every dialed citizen with a name and hood, POP-00005 among them; the next nightly reflection appends one intake row; the next Cycle's compress marks it applied.
 
 ## Changelog
+
+- 2026-10-17 (engine-sheet S570) — Dial fixes bench 1004 @40 C112 clean → LIVE PROD @144 (stage 4m). Wakes-no-rules build plan written (W1–W4, M1–M2); codex TASK `docs/for-claude-review/2026-10-17-wake-no-rules-plan-review-TASK.md`.
 
 - 2026-10-17 (engine-sheet) — Builder rulings on wakes (no rules) and big events (fade stands) recorded; dial fixes codex-SHIP, staged, bench prepared not fired.
 

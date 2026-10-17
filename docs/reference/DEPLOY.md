@@ -58,19 +58,20 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 
 ## Current state
 
-**Current bench pointer (2026-10-16 late, engine.296):** SANDBOX 1004 web app **@39 = PROD 4k + `buildEveningFamous.js` at `173b9e49`** (= PROD 4l; stage `output/engine296/prod-stage`, push `output/engine296/push-prod.sh`). Resync from live C111 after the Task 7 Cultural_Ledger write (Scout carried from live), guard 0, `clearfire cycle=112`, `clearcheckpoint` null. C112 `&expect=111`: ok 224 s, persist 665/0, EE 4 → 4, Cultural_Ledger 53 → 55 (both citizen-linked), 0 active no-POPID rows, Scout intact. Previous: @38 = 4k (engine.98). Bench is at C112 — resync before the next fire.
+**Current bench pointer (2026-10-17, engine.197 + engine.296 fix):** SANDBOX 1004 web app **@40 = PROD 4l + `utilities/compressLifeHistory.js` (113e78aa) + `buildEveningFamous.js` (01ea836f)** (= PROD 4m; stage `output/engine197/prod-stage`, push `output/engine197/push-prod.sh`). Resync from live C111, guard 0, `clearfire cycle=112`, `clearcheckpoint` null. C112 `&expect=111`: ok 253 s, persist 665/0, EE 4 → 4, the 13 spouse watermarks @133 unmoved, 0 new past the cycle (`output/engine-sheet/2026-10-17-engine197-bench-c112-@40.md`). Previous: @39 = 4l (engine.296). Bench is at C112 — resync before the next fire.
 
 **This file is protocol + CURRENT pointers only.** Per-wave proving narrative and bench-write logs go to the wave's own plan doc (builder rule 2026-08-30) or to [[DEPLOY_HISTORY]] — a session that finds itself writing a paragraph here is writing in the wrong file.
 
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Live:** PROD engine files = **stage 4l** = stage 4k + `phase07-evening-media/buildEveningFamous.js` at `173b9e49` (engine.296: SPORTS_LEGENDS from retired MLB-origin ledger rows, no literal fallback) — **PROD web app @143**, pushed 2026-10-16 ~23:10 CDT by engine-sheet (`output/engine296/push-prod.sh --go`; fresh PROD pull matched 4k 168/168 first), pull-back 168 = `output/engine-sheet/stage4l-e296.sha256`. Stage 4k = 4j + two files at `21840002` (engine.98 pet carrier, @142, `stage4k-e98.sha256`). Rollback: `output/engine98/prod-stage` (= 4k) push + version cut.
+**Live:** PROD engine files = **stage 4m** = stage 4l + `utilities/compressLifeHistory.js` at `113e78aa` (engine.197: a LifeHistory line stamped past the current Cycle never folds or moves `DialState.folded`) + `phase07-evening-media/buildEveningFamous.js` at `01ea836f` (engine.296: a legend is MLB-origin and retired OR named a legend on RoleType) — **PROD web app @144**, pushed 2026-10-17 ~01:20 CDT by engine-sheet (`output/engine197/push-prod.sh --go`; fresh PROD pull matched 4l 168/168 first), pull-back 168 = `output/engine-sheet/stage4m-e197.sha256`. Stage 4l = 4k + `buildEveningFamous.js` at `173b9e49` (@143, `stage4l-e296.sha256`). Rollback: `output/engine296/prod-stage` (= 4l) push + version cut.
 
 **Recent PROD bumps** (last 5 — older → [[DEPLOY_HISTORY]] §PROD deploy log):
 
 | PROD | Date | Wave | Plan |
 |---|---|---|---|
+| @144 | 2026-10-17 | engine.197 a LifeHistory line stamped past the current Cycle never folds (13 spouses' Y3C29 counted, not repaired) + engine.296 Davis legend predicate — 2 files over stage 4l (stage 4m) | ROLLOUT engine.197, engine.296; codex `docs/for-claude-review/2026-10-17-codex-dial-fixes-review.md` |
 | @143 | 2026-10-16 | engine.296 the sports-legend sightings read the ledger's retired MLB-origin citizens, no hardcoded names — 1 file over stage 4k (stage 4l); 3 template Cultural_Ledger rows → Inactive | ROLLOUT engine.296; [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
 | @142 | 2026-10-16 | engine.98 step 1 a household animal survives every dial rewrite (`DialState.pet`) — 2 files over stage 4j (stage 4k); Scout, Mags's cat, stamped on live POP-00005 | ROLLOUT engine.98; [[../plans/2026-09-26-future-build-ideas]] §engine.98 |
 | @141 | 2026-10-16 | engine.285 (2–6) a fire killed mid-write no longer doubles or strands records — 6 files over stage 4i (stage 4j) | ROLLOUT engine.285; [[../research/2026-10-16-codex-engine285-hazards2-6-review]] |

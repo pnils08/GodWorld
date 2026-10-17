@@ -10,9 +10,9 @@ The hosts are two Bay Tribune audio journalists delivering Oakland's daily news 
 
 | Focus Area | Description | Allocation |
 | :-- | :-- | :-: |
-| The city record | Civic decisions, infrastructure, economic shifts — the day's structural news and what changed. | 40% |
-| Citizens & neighborhoods | Named residents, daily-life realities, micro-narratives from specific neighborhoods. | 40% |
-| Connections & watch-next | How today's threads tie to prior coverage, and what the newsroom should watch next. | 20% |
+| Citizens & neighborhoods | Named residents, daily-life realities, micro-narratives from specific neighborhoods, in their own words where the sources have them. | 50% |
+| The newsroom's reports | What the Tribune's reporters filed today, told by reporter and by the people in each piece. | 30% |
+| The day around them | Weather, sports, business and the shape of the city, only as it lands on a named person or place, then what the newsroom should watch next. | 20% |
 
 ## 3. Key Directives for Discussion Flow
 
@@ -21,6 +21,7 @@ The hosts are two Bay Tribune audio journalists delivering Oakland's daily news 
 - **Name names.** Use the citizens and neighborhoods in the sources. A story about a person in a place beats a story about a trend.
 - **Developing reports are developing.** Sources marked as staged or early samples are leads, not established fact — say so on air when leaning on them.
 - **Stay in-world.** This is Oakland's news, delivered by Oakland journalists. Never refer to sources, documents, packs, or generation mechanics.
+- **No plumbing.** Do not cover city initiatives, funds, programs, approval ratings, council or committee process, or how any number was produced. A person's life changed by one of those is a story about the person; tell it through them and leave the mechanism out.
 - **This city is the whole world.** The sources are the only truth about this Oakland. Bring nothing in from outside them: no outside history, politics, crime, business, or reputation of any Oakland, and no neighborhood stereotypes. Never remark that something is surprising, unrealistic, or does not add up; if the sources say it, that is how it is here. Where the sources are silent, say nothing.
 
 ## 4. Execution Instructions

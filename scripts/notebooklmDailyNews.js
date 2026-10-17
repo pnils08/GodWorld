@@ -480,10 +480,6 @@ function buildBoundedNewsSource(input) {
   const lines = [
     '# The Bay Tribune Daily News — Cycle ' + input.cycle,
     '',
-    '## Today’s city record',
-    '',
-    dailyWorldRecord(input.worldSummary),
-    '',
   ];
 
   if (input.citizenDigest) {
@@ -546,6 +542,14 @@ function buildBoundedNewsSource(input) {
       ''
     );
   }
+
+  // The city record is the backdrop to the people and the reports above it.
+  lines.push(
+    '## The day around them — city record',
+    '',
+    dailyWorldRecord(input.worldSummary),
+    ''
+  );
 
   lines.push(
     '## Background from the published record',
@@ -693,12 +697,33 @@ function continuitySourceIds(policy, count) {
   return { cycles, sourceIds: cycles.map((c) => byCycle.get(c)) };
 }
 
+// Builder 2026-10-17: the listening brief is citizens and the newsroom's reports,
+// not initiative plumbing. Drops the world-summary sections that are engine
+// diagnostics or civic mechanism (approval ledger, initiative/approval ripples,
+// audit findings, the city-hall placeholder) before the text reaches the pack.
+const DAILY_NOISE_H2 = /^## (Approval Ratings|Engine Review Findings|Civic Decisions)\b/;
+const DAILY_NOISE_H3 = /^### (initiative-implementation|approval-shift)\b/;
+const DAILY_NOISE_LINE = /^- fold-applied\/(initiative-implementation|approval-shift)\b/;
+
+function stripDailyNoise(markdown) {
+  const out = [];
+  let skipping = null;
+  for (const line of String(markdown).split('\n')) {
+    if (/^## /.test(line)) skipping = DAILY_NOISE_H2.test(line) ? 'h2' : null;
+    else if (/^### /.test(line) && skipping !== 'h2') skipping = DAILY_NOISE_H3.test(line) ? 'h3' : null;
+    if (!skipping && !DAILY_NOISE_LINE.test(line)) out.push(line);
+  }
+  return out.join('\n');
+}
+
 function dailyPrompt(cycle, hasFlagged) {
   // The gate-desk section is only demanded when the pack actually carries
   // FLAGGED drafts — demanding a section with no material to build it from
   // is suspected in the 2026-08-24 ETIMEDOUT on an empty-window Monday.
   return 'Prepare The Bay Tribune daily news for Oakland for Cycle ' + cycle +
-    ', including the connections that matter and what the newsroom should watch next.' +
+    ', led by the newsroom\'s own reports, told by reporter, and by what citizens said and lived.' +
+    ' Leave out city initiatives, approval ratings, and any engine or audit diagnostics.' +
+    ' Close with what the newsroom should watch next.' +
     (hasFlagged
       ? ' Then add a section titled "The gate desk": for every FLAGGED draft in the sources,' +
         ' say what the draft reported, what the gate found, and whether the finding holds up' +
@@ -795,8 +820,8 @@ async function run(argv) {
 
   const dailyConfig = config.dailyNews || {};
   const hours = args.hours || dailyConfig.hours || 36;
-  const worldSummary = fs.readFileSync(worldPath, 'utf8');
-  let newsroom = args.routingShadow ? null : collectNewsroomArtifacts(cycle, hours, Date.now());
+  const worldSummary = stripDailyNoise(fs.readFileSync(worldPath, 'utf8'));
+  let newsroom =args.routingShadow ? null : collectNewsroomArtifacts(cycle, hours, Date.now());
 
   // pipeline.53: the daily citizen digest is the people-spine of the drop.
   // Build failure must never block the run (same contract as the audio
@@ -1238,6 +1263,7 @@ module.exports = {
   mergeManifest,
   isCompletedManifest,
   buildSourcePack,
+  stripDailyNoise,
   buildBoundedNewsSource,
   parseJsonOutput,
   queryAnswer,

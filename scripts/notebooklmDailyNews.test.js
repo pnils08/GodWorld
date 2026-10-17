@@ -28,6 +28,7 @@ const {
   dailyPrompt,
   continuitySourceIds,
   dailyAudioFocus,
+  stripDailyNoise,
   SOURCE_VERSION,
   DEFAULT_AUDIO_LENGTH,
   DAILY_NEWS_IDENTITY,
@@ -488,6 +489,24 @@ const syntheticDigest = {
   const live = continuitySourceIds(require('./notebooklmCanonSources.json'), 2);
   assert.strictEqual(live.sourceIds.length, 2);
   assert(live.cycles[0] > live.cycles[1]);
+}
+
+{
+  const md = [
+    '## City State', 'kept city line',
+    '## Approval Ratings', 'Mayor 69%',
+    '## What Moved', '### migration (1)', 'kept move',
+    '### initiative-implementation (2)', '- an initiative line',
+    '### approval-shift (1)', '- an approval line',
+    '### sports (1)', 'kept sports line',
+    '- fold-applied/approval-shift | dropped fold line',
+    '## Engine Review Findings', '### High-Severity Patterns', 'math-imbalance',
+    '## Civic Decisions', 'placeholder',
+    '## Evening Texture', 'kept texture',
+  ].join('\n');
+  const out = stripDailyNoise(md);
+  for (const keep of ['kept city line', 'kept move', 'kept sports line', 'kept texture']) assert(out.includes(keep), keep);
+  for (const drop of ['Mayor 69%', 'an initiative line', 'an approval line', 'dropped fold line', 'math-imbalance', 'placeholder']) assert(!out.includes(drop), drop);
 }
 
 console.log('notebooklmDailyNews tests: PASS');

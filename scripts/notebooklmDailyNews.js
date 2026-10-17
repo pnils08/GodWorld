@@ -531,7 +531,7 @@ function buildBoundedNewsSource(input) {
       : report.classification === 'PREVIOUS_FILING'
         ? 'Previous Cycle filing — continuity only, not current-Cycle reporting.'
         : report.classification === 'FLAGGED'
-          ? 'Gate-flagged draft — held back by the editorial gate, not published. Cover what it reported AND why it was held.'
+          ? 'Gate-flagged draft — held back by the editorial gate, not published.'
           : 'Developing report — early newsroom sample.';
     lines.push(
       '### ' + reportHeading(report),
@@ -717,19 +717,13 @@ function stripDailyNoise(markdown) {
 }
 
 function dailyPrompt(cycle, hasFlagged) {
-  // The gate-desk section is only demanded when the pack actually carries
-  // FLAGGED drafts — demanding a section with no material to build it from
-  // is suspected in the 2026-08-24 ETIMEDOUT on an empty-window Monday.
+  // Gate decisions are no longer part of the news (builder 2026-10-17): they live in
+  // the editor's ops report (opsReportPrompt). hasFlagged stays for caller compatibility.
   return 'Prepare The Bay Tribune daily news for Oakland for Cycle ' + cycle +
     ', led by the newsroom\'s own reports, told by reporter, and by what citizens said and lived.' +
     ' Leave out city initiatives, approval ratings, and any engine or audit diagnostics.' +
-    ' Close with what the newsroom should watch next.' +
-    (hasFlagged
-      ? ' Then add a section titled "The gate desk": for every FLAGGED draft in the sources,' +
-        ' say what the draft reported, what the gate found, and whether the finding holds up' +
-        ' against the other sources — the editor reviews these decisions and needs to hear' +
-        ' every one, so cover them all; never skip a flagged draft.'
-      : '');
+    ' Drafts the editorial gate held back are not news; do not report on them.' +
+    ' Close with what the newsroom should watch next.';
 }
 
 // The editor's daily "report on the data" (Mike-direct 2026-08-23): a

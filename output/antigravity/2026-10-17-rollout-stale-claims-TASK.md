@@ -1,0 +1,20 @@
+TASK (agy, adversarial claim check, read-only, no commits, no sheet access): five claims about five ROLLOUT rows (docs/engine/ROLLOUT_PLAN.md). Check each against the code and the local data files. Your only write path: output/antigravity/2026-10-17-review-rollout-stale-claims.md.
+
+For each claim write: CONFIRMED / WRONG / PARTIAL, then file:line evidence and one sentence on anything the claim gets wrong or leaves out. Try to break each claim — look for a live code path that contradicts it, not only the lines named. Do not propose builds. Do not edit any other file.
+
+Data files (C111 live snapshot): output/simulation_ledger_snapshot.jsonl (one citizen per line; DialState is a JSON string with base/mood/streak), output/engine201/cohort-c110.json and cohort-c111.json (48 fixed citizens, field dialState). Note: cohort-baseline.json and cohort-c110.json are the same cycle — a diff between them proves nothing.
+
+## C1 — engine.5 (row: "life events still need causal household effects (Phase 2b)")
+Claim: the "events fire into a vacuum" finding in docs/engine/archive/LEDGER_REPAIR_HOUSEHOLDS.md §Phase 2b no longer describes the engine. Weddings fire in phase05-citizens/bondEngine.js when a romance crosses MARRIAGE_THRESHOLD and write MaritalStatus + SpouseId on both rows; the dice wedding in phase04-events/generationalEventsEngine.js is retired (no caller). A birth creates a real child row (createChildRow_) and bumps NumChildren. The TODO stubs in phase05-citizens/householdFormationEngine.js (~945–966) are not on the live path. Promotions change CareerStage/Income in the owning career engine.
+
+## C2 — engine.257 (row: "Household stress from real outflows: build spending (makes vs spends)")
+Claim: citizens do lose money today — debt drag, shock expenses, defaults, job loss adding debt, forced home sale (phase05-citizens/generationalWealthEngine.js, engine.60/61/276/286). "Citizens earn but never spend" is false. State what the row's actual open item still is, if any (the plan is docs/plans/2026-09-22-initiative-budget-disbursement.md, builder call 8).
+
+## C3 — engine.256 (row: "Leases on one hood-median stamp")
+Claim: rent works — a household's MonthlyRent is its hood's MedianRent at formation (estimateRent_, householdFormationEngine.js, engine.160). The only gap: MonthlyRent is never rewritten after formation except when a household buys (it becomes the mortgage payment). Search every writer of MonthlyRent.
+
+## C4 — engine.197 (row: "the ~60% all-neutral share via event-engine reach")
+Claim: the cause is the dial conversion code, not event reach. Evidence to recompute from the snapshot: 1,032 dialed citizens; 961 have nonzero mood on some dial at C111; 656 (63.6%) have all 8 base dials in 40–60; median per-citizen largest |mood| ≈ 2.8. Cohort C110→C111: 9 of 48 had any base move, max 1.33. Mechanism in utilities/citizenMemory.js: mood fades ×0.8 per cycle and snaps to 0 under 0.5 (settleCycle_); base changes only when a dial is pushed the same way 3 cycles running while the last swing is still felt (HARDEN_STREAK 3, applyCycleEffects_ resets the streak otherwise), then 40% of mood bakes in, scaled by room (HARDEN_FRACTION). Check also the event effect sizes (utilities/citizenDialMap.js) and whether any other writer moves base.
+
+## C5 — engine.104 (row: "Mint economy: arrivals born right … 545/988 unmapped")
+Claim: phase05-citizens/generateGenericCitizens.js picks a new generic citizen's occupation from its own hardcoded 32-title list (~line 418, picked ~637), not from the job table the engine prices pay from (economicParameters_ in utilities/citizenDerivation.js reads the Economic_Parameters tab; local copy data/economic_parameters.json). 15 of the 32 titles are absent from that table. The row's 545 figure was counted against data/role_mapping.json, a different list; against data/economic_parameters.json, 453 of 988 Active citizens carry a RoleType not in the table, 43 of them "student". Check whether any other mint path (intake, migration wave, emergence/promotion) also draws titles outside the table.

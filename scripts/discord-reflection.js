@@ -26,6 +26,10 @@ const page = require('../lib/citizenPage');
 const memoryFence = require('../lib/memoryFence');
 const getCurrentCycle = require('../lib/getCurrentCycle');
 const moltbookActivity = require('./moltbookActivity');
+const sheets = require('../lib/sheets');
+const classifier = require('../lib/reflectionClassifier');
+const wake = require('../lib/wakePerception');
+const { matchBondTargets_ } = require('./bondTargetMatch');
 
 const MAGS_POPID = 'POP-00005';
 const CONVO_LOG_DIR = path.join(__dirname, '..', 'logs', 'discord-conversations');
@@ -34,6 +38,9 @@ const MOLTBOOK_REFLECTION_CURSOR = path.join(MOLTBOOK_LOG_DIR, '.reflection-curs
 const LOG_DIR = mags.LOG_DIR;
 const LOG_FILE = path.join(LOG_DIR, 'discord-reflection.log');
 const CLAUDE_MEM_URL = 'http://127.0.0.1:37777/api/memory/save';
+const INTAKE_LOCK = path.join(LOG_DIR, 'nightly-intake.lock');
+const INTAKE_PENDING = path.join(LOG_DIR, 'nightly-intake-pending.json');
+const INTAKE_LOCK_STALE_MS = 30 * 60 * 1000;
 
 const DRY_RUN = process.argv.includes('--dry-run');
 
@@ -367,6 +374,62 @@ async function loadPageTail(count) {
 }
 
 // ---------------------------------------------------------------------------
+// engine.197 M2 — her journal reaches Reflection_Intake (builder 2026-10-17: "1 a night").
+// Only the evening run composes the night's row. The row goes to a local pending file first, then
+// appends under an exclusive lock after a scan proves the night is not already in; it leaves pending
+// only when a re-read finds it. Every run flushes pending first, so a failed append or a crash is
+// retried, never lost and never doubled. A row is never updated (that would race the Cycle drain).
+// ---------------------------------------------------------------------------
+function loadIntakePending() {
+  try { return JSON.parse(fs.readFileSync(INTAKE_PENDING, 'utf8')) || {}; } catch (_) { return {}; }
+}
+function saveIntakePending(pending) {
+  if (Object.keys(pending).length) fs.writeFileSync(INTAKE_PENDING, JSON.stringify(pending, null, 2));
+  else { try { fs.unlinkSync(INTAKE_PENDING); } catch (_) {} }
+}
+
+async function flushIntakePending() {
+  var pending = loadIntakePending();
+  var nights = Object.keys(pending);
+  if (!nights.length) return;
+  var ran = await wake.withFileLock(INTAKE_LOCK, INTAKE_LOCK_STALE_MS, async function () {
+    for (var i = 0; i < nights.length; i++) {
+      var night = nights[i];
+      var plan = wake.planNightlyIntake(await sheets.getRawSheetData('Reflection_Intake'), MAGS_POPID, night);
+      if (plan === 'append') {
+        await sheets.appendRows('Reflection_Intake', [pending[night]]);
+        plan = wake.planNightlyIntake(await sheets.getRawSheetData('Reflection_Intake'), MAGS_POPID, night);
+      }
+      if (plan === 'present') { delete pending[night]; log.info('Reflection_Intake <- nightly row for ' + night + ' (in, read back)'); }
+      else log.warn('Reflection_Intake nightly row for ' + night + ' kept pending (' + plan + ')');
+    }
+    saveIntakePending(pending);
+    return true;
+  });
+  if (ran === null) log.warn('Reflection_Intake: intake lock held by another run — pending kept');
+}
+
+async function queueNightlyIntake(reflection, cycle, clock, instant) {
+  if (clock.hour < wake.NIGHTLY_INTAKE_HOUR) { log.info('Reflection_Intake: not the evening run — the night\'s row comes from the evening reflection'); return; }
+  if (cycle == null) { log.warn('Reflection_Intake: cycle unresolved — no row tonight'); return; }
+  var body = memoryFence.scrubNightly(reflection);
+  if (!body) { log.info('Reflection_Intake: nothing in-world left after the scrub — no row tonight'); return; }
+  var cls;
+  try { cls = await classifier.classifyTripleReflection_(body, []); } catch (e) { log.warn('Reflection_Intake: classifier threw — no row tonight: ' + e.message); return; }
+  if (!cls || (!cls.event && !cls.affect)) { log.info('Reflection_Intake: classifier off-vocab — no row tonight'); return; }
+  var bondTarget = '';
+  try {
+    var bonds = await wake.loadBonds(MAGS_POPID, { pairs: true });
+    var hits = matchBondTargets_(body, (bonds && bonds.pairs) || []);
+    bondTarget = hits.length ? hits[0].pop : '';
+  } catch (_) { /* no bond match is a blank column, not a lost row */ }
+  var pending = loadIntakePending();
+  pending[clock.date] = wake.nightlyIntakeRow({ instantIso: instant.toISOString(), popId: MAGS_POPID, cycle: cycle, cls: cls, body: body, bondTarget: bondTarget });
+  saveIntakePending(pending);
+  await flushIntakePending();
+}
+
+// ---------------------------------------------------------------------------
 // Save to Claude-Mem
 // ---------------------------------------------------------------------------
 function saveToClaudeMem(reflection, conversationCount) {
@@ -435,6 +498,8 @@ function logRun(status, details) {
 // ---------------------------------------------------------------------------
 async function main() {
   var startTime = Date.now();
+  var runInstant = new Date(); // engine.197 M2 — the night this run speaks for, fixed at start
+  var runClock = wake.centralClock(runInstant);
   var status = 'success';
 
   console.log("Mags' Nightly Discord Reflection");
@@ -442,6 +507,9 @@ async function main() {
   if (DRY_RUN) console.log('Mode: DRY RUN\n');
 
   try {
+    // engine.197 M2 — every run, quiet or not, first retries a night's intake row still pending
+    if (!DRY_RUN) { try { await flushIntakePending(); } catch (e) { log.warn('Reflection_Intake pending flush: ' + e.message); } }
+
     // Load today's conversations (Discord + Moltbook)
     var entries = loadTodayConversations();
     var moltbookEntries = loadUnconsumedMoltbookInteractions();
@@ -523,6 +591,9 @@ async function main() {
       'Mags Corliss nightly reflection (' + today + ', ' + discordCount + ' conversations):\n\n' + reflection
     );
     log.info('Nightly reflection saved to Supermemory');
+
+    // engine.197 M2 — after every durable save above; its own failure never undoes them
+    try { await queueNightlyIntake(reflection, cycle, runClock, runInstant); } catch (e) { log.warn('Reflection_Intake: ' + e.message + ' (row stays pending if composed)'); }
 
     // Advance only after the durable reflection outputs above succeed. A failed
     // wake leaves the batch available for the next wake instead of losing it.

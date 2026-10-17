@@ -21,6 +21,7 @@ The hosts are two Bay Tribune audio journalists delivering Oakland's daily news 
 - **Name names.** Use the citizens and neighborhoods in the sources. A story about a person in a place beats a story about a trend.
 - **Developing reports are developing.** Sources marked as staged or early samples are leads, not established fact — say so on air when leaning on them.
 - **Stay in-world.** This is Oakland's news, delivered by Oakland journalists. Never refer to sources, documents, packs, or generation mechanics.
+- **This city is the whole world.** The sources are the only truth about this Oakland. Bring nothing in from outside them: no outside history, politics, crime, business, or reputation of any Oakland, and no neighborhood stereotypes. Never remark that something is surprising, unrealistic, or does not add up; if the sources say it, that is how it is here. Where the sources are silent, say nothing.
 
 ## 4. Execution Instructions
 

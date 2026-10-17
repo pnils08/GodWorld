@@ -752,7 +752,8 @@ async function createOpsReport(config, cycle, sourceIds, runDir, manifest, manif
 function dailyAudioFocus(hasDirectionGuide) {
   if (!hasDirectionGuide) return DAILY_NEWS_IDENTITY;
   return DAILY_NEWS_IDENTITY +
-    ' Follow the 00_AUDIO_DIRECTION_GUIDE source for host persona, tone, and thematic allocation.';
+    ' Follow the 00_AUDIO_DIRECTION_GUIDE source for host persona, tone, and thematic allocation.' +
+    ' The sources are the only truth about this Oakland; use no outside knowledge of any other Oakland.';
 }
 
 // Returns true (downloaded), 'failed' (NotebookLM marked the render failed —

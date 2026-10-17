@@ -114,7 +114,7 @@ Registry: `docs/index.md` — grep it, don't load it. New MDs still register the
 1. Design the work, document in `ROLLOUT_PLAN.md`
 2. Tag with `(engine terminal)`
 3. Include: what to build, which docs to read, acceptance criteria
-4. **Dispatch now, same turn** — message engine-sheet directly (`SendMessage` if a live session is up per `ListAgents`, `tmux send-keys -l` + separate `C-m` otherwise per [[../../../docs/reference/CROSS_LANE_MESSAGING]]). Filing the row is documentation of the decision, not delivery of it. A row left "ready" for es to notice at its own next boot is the pre-S372 steward pattern — this seat has live dispatch now, use it. (S375 correction, Mike-direct.)
+4. **File it; the builder routes it.** The row + the plan is the delivery. Research-build does not message engine-sheet work — builder 2026-10-17, verbatim: "Don't bother es, it's not up to you to send it work." This supersedes the S375 same-turn-dispatch pattern. `SendMessage` to es only to answer something it asked. House-guest lanes (codex/kimi/grok/agy) still take TASK files per [[../../../docs/reference/CROSS_LANE_MESSAGING]].
 
 ### Civic/media pipeline work
 There's no receiving terminal — rb designs, es executes directly. No ROLLOUT tag needed unless the work is large enough to need tracking.

@@ -159,6 +159,8 @@
 
 ## Status log
 
+- **2026-10-17 (rb) — Employment_Roster vs Simulation_Ledger, measured (the "217 wrong links" the S565 NEXT line carried without a record).** The `Employment_Roster` tab was generated once on 2026-03-01 (`linkCitizensToEmployers.js`, Phase 14.4) and never regenerated; `dumpBeatTabs` copies it to `output/beats/Employment_Roster.jsonl` (869 rows) each dump. Against `output/simulation_ledger_snapshot.jsonl` (1,032 rows): 786 rows agree on the employer; **31 name a different employer than the ledger** (e.g. POP-00023 Gregory Mims roster BIZ-00005 / ledger BIZ-00100; POP-00040 Aaron Whitfield BIZ-00016 / BIZ-00017; POP-00048 Carlos Presti SELF_EMPLOYED / BIZ-00102); **33 roster citizens are no longer Active on the ledger; 51 roster POPIDs are not on the ledger at all; 110 Active, employed ledger citizens are missing from the roster** — 225 disagreements. Readers: `beatSliceKit.js:104` (`workersAt`), `buildSafetySlice.js:59` and `buildTransitSlice.js:177` ("works at X (Employment_Roster)" source people), `livedExperiencePacket.js`. Not checked: whether a wrong employer has reached print. Builder 2026-10-17 on the derive fix: "why if nothing is broken" — dropped; this entry is the record so the number has a home if it bites.
+
 ### pipeline.68 — status (drained from ROLLOUT, 2026-09-07 / S436)
 
 Beat slices from Sheets (§13). T1 dump (ac808611) · T2 economic/food slice (662e614d) · T3 Mason + packet-v2 wiring (6860e07f) · T4 one builder + artifact per journalist: transit/health/schools/environment/faith/safety (1e1f0ead) · T7 WEEK_GRID rota, seat-scoped failure (69396c28, a553ca9c) — all LIVE 2026-09-07. Open: T5 approach strings (non-beat seats), T6 write-gate audit, T7b latency, T8 docs. Acceptance = unattended Mon–Fri rota from 2026-09-07
@@ -448,6 +450,8 @@ After the mint: OPD 15 tracked (5 existing + 10), OFD 13 (2 + 11), OARI 11 (dire
 The live ledger had 0 physicians at Oakland Hospital (BIZ-00015, 70 tracked workers) and no school command at Oakland Unified (BIZ-00016, 5,201 headcount, 11 active classroom teachers). Same pattern as police and fire: 24 authored rows queued on `Advancement_Intake1` rows 179–202 for the C110 mint, ClockMode ENGINE, employer carried. Hospital 12: Chief Medical Officer, Chief of Emergency Medicine, Chief of Surgery (Tier 3), nine line physicians (Tier 4). Schools 12: Superintendent, Deputy Superintendent, two principals, Special Education Director (Tier 3), seven teachers, counselor and nurse (Tier 4). Names checked against the 963 ledger rows and the queue (no duplicates; two hyphenates renamed off existing Delacroix and Cho families). Post-fire steps are the same as the 30 staff above. Not done, a sim call: a school board as Civic_Office_Ledger rows.
 
 ## Changelog
+
+- 2026-10-17 (rb) — Employment_Roster staleness measured and recorded in the Status log (225 disagreements vs the ledger); derive fix dropped on the builder's word.
 
 - 2026-10-03 (research-build) — follow-on plan [[2026-10-03-citizen-pages-drive-canon]] (pipeline.70): the `street` pool gains the citizen pages as a second evidence source; Celeste, letters and Rhea seams.
 

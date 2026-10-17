@@ -14,3 +14,6 @@ Builder 2026-10-17: "make sure codex reviews it so it actually works and isn't t
 5. **Anything the read missed.** Any other writer of DialState base (reflections direct-to-base, wear, chaos break, seeds, mints, back-date) and whether its share explains the stuck numbers better than the read does.
 
 Done = the md exists.
+
+## Hunt 6 (added after dispatch)
+6. **The wake picker feeds the stuck share back into itself.** `scripts/citizen-wake.js:207` weights rotation candidates `1 + eventMag*2 + dials.deviation(cur)/50` (`lib/citizenDials.js:60` = summed distance of the nine dials from 50). A citizen at 50 on every dial gets the minimum weight, wakes least, writes no reflection, and stays at 50. Confirm or refute against the full selection path (posture slot, livedOnly, recent-reset at :205), and estimate from code how often an all-50 citizen is picked vs a shaped one. Also: `lib/wakePerception.js:414-441` reads only `base` + `maneuver` from DialState — confirm grief / debtDefault / fan / pressure / wear / lifeEvent never reach the wake, and that `dials.disposition` (`lib/citizenDials.js:49`) prints nothing for a dial in the neutral band.

@@ -1,5 +1,5 @@
 ========================================================================
-sessionEndMechanical: terminal=research-build, rotate-history=false, dry-run=false
+sessionEndMechanical: terminal=engine-sheet, rotate-history=false, dry-run=false
 ========================================================================
 Expected upstream model step (BEFORE this script):
   1. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated
@@ -13,41 +13,50 @@ Mechanical sub-steps (5):
 ========================================================================
 
 --- [1/5] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc VzqcYqVzbAquX7qVE88czF (2486 chars, 16 summary rows folded)
+✓ session log → Supermemory [session-logs] doc Qt7fcGxR7ccD7kcynMGhua (2967 chars, 12 summary rows folded)
 
 --- [2/5] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-10-16T19:01:49.875Z
-  Plans scanned: 141
+  Generated: 2026-10-17T02:59:31.837Z
+  Plans scanned: 142
   No frontmatter: 7
   No changelog: 8
-  No status-verb match: 124
+  No status-verb match: 125
   Drifts found: 0
   
   No plan-tag drift detected.
   ✓ no drift detected
 
 --- [3/5] ROLLOUT conformance lint (informational) ---
-  ROLLOUT LINT: 7 non-conforming row(s) — state-cell breaks the sweep, or item cell over the 280-char pointer budget:
-    L108 pipeline.68: NO clean state-token cell → the sweep SILENTLY SKIPS this row (never archives). Fix: a bare `| <state> |` cell, no prose/pipes mangling it.
-    L132 engine.294: item cell 401 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L133 engine.295: item cell 721 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L134 engine.293: item cell 497 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L137 pipeline.72: item cell 916 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L145 pipeline.80: item cell 328 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L154 engine.285: NO clean state-token cell → the sweep SILENTLY SKIPS this row (never archives). Fix: a bare `| <state> |` cell, no prose/pipes mangling it.
+  ROLLOUT LINT: 6 non-conforming row(s) — state-cell breaks the sweep, or item cell over the 280-char pointer budget:
+    L110 pipeline.68: NO clean state-token cell → the sweep SILENTLY SKIPS this row (never archives). Fix: a bare `| <state> |` cell, no prose/pipes mangling it.
+    L134 engine.294: item cell 401 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L135 engine.295: item cell 2285 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L136 engine.293: item cell 497 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L139 pipeline.72: item cell 916 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L147 pipeline.80: item cell 328 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
   ROLLOUT OVERDUE: 3 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
-    L139 pipeline.74: latest date named 2026-10-15, today is 2026-10-16
-    L140 pipeline.75: latest date named 2026-10-15, today is 2026-10-16
-    L145 pipeline.80: names no Cycle or date — overdue can't see it; name the fire it waits on or start the item 'Organic:'
+    L141 pipeline.74: latest date named 2026-10-15, today is 2026-10-16
+    L142 pipeline.75: latest date named 2026-10-15, today is 2026-10-16
+    L147 pipeline.80: names no Cycle or date — overdue can't see it; name the fire it waits on or start the item 'Organic:'
 
 --- [4/5] cross-terminal git stack check (read-only) ---
-  ✓ stack clean (origin/main..HEAD empty)
+  ⚠ 9 unpushed commit(s) ahead of origin/main:
+    f666be39 The Money Game plan started for research-build (builder go 2026-10-16): baseline read (loss doors + live firing counts, C106→C111 arc, mint firms' revenue/head, heritage doors vs ladder), builder rulings S1–S5 verbatim, Tasks 1–6 for the builder + rb session, open questions; indexed; ROLLOUT engine.295 → needs-info, owner research-build, pointer to the plan; NEXT[research-build] (d) points at it [engine-sheet]
+    76c4688c engine.295 row + NEXT: builder idea recorded — AwardedFirm on Initiative_Tracker (contractor boost while the work runs; distinct from BizID), for the game document [engine-sheet]
+    701f6a5e engine.295 re-scoped → needs-info: the money read with the builder (accumulation + event losses, median NetWorth +0.02% C106→C111; owner draw not the defect — mint firms' books + heritage Door C are); builder rulings recorded (seeded fortunes stand, firm revenue is the canon call, $50M is not a Rockefeller gate); cost-model/cap build not to be built; next = game-document session on research-build [engine-sheet]
+    185f850b S567 close [engine-sheet]: ROLLOUT engine.285 drained to a pointer with a bare live-observing state cell (the close lint showed the sweep skipping it; detail lives in DEPLOY_HISTORY stage 4j + the codex review); PIN S566 → S567. NEXT[engine-sheet] unchanged: engine.295 first in a clean session, then the C112 readback. Git push held — C112 smoke pending Sun 10-18.
+    c44616ec PROD stage 4j @141 LIVE — engine.285 hazards 2–6 (six files at 0d4f2ca2 over stage 4i); fresh PROD pull matched 4i 168/168 before the push; pull-back 168 = stage4j-e285b.sha256, differs from 4i in exactly the six files. Bench 1004 @37 C112 clean. DEPLOY live pointer + bumps + history, ROLLOUT engine.285 → live-observing (2,3,5,6 closed; 4 narrowed, exactly-once routing → engine.95 receipts; dormant intake tabs + header drift noted), stub maps regenerated (markRowRuns_, advancementLogBuffer_ label), codex review accepted → docs/research + index, PIN → 4j, NEXT[engine-sheet] → engine.295 then the C112 readback with this package's checks [engine-sheet]
+    a4a487f6 DEPLOY bench pointer: 1004 @37 = PROD 4i + engine.285 hazards 2–6 (0d4f2ca2), C112 clean, planted interrupted-archive fixture removed without a second snapshot, 19 media routes in one block [engine-sheet]
+    0d4f2ca2 engine.285 (3/6): snapshot equality leaves out DialState as well as LastUpdated — bench 1004 @36 C112 showed the engine re-stamps both on every row every Cycle, departed rows included (the only two columns that moved on a planted Traded row between its C111 snapshot and Phase 11), so an interrupted copy would never match and every recovery took a second snapshot. Safe either way (no loss); this makes the remove-only path reachable. Test updated. npm 290/290. [engine-sheet]
+    fe348e1d engine.285 hazards 2–6, codex review folded: identity by identical copy, not by stamps; routing marks per target; dormant intake readers write-then-mark [engine-sheet]
+    ddb3d4fd engine.285 hazards 2–6 (codex engine95-design §7): a fire killed mid-write no longer doubles or strands records [engine-sheet]
+  Model decision: push if all yours, hold if other terminals stacked.
 
 --- [5/5] pm2 restart ---
   ✓ godworld-dashboard restarted
 
 ========================================================================
-sessionEndMechanical: complete (terminal=research-build)
+sessionEndMechanical: complete (terminal=engine-sheet)
 ========================================================================

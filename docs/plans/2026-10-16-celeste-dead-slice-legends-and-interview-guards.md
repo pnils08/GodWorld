@@ -62,7 +62,7 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 ## Open (held, not in scope)
 
-- **Two readings Task 9 builds without (builder's calls):** (a) do the active Tier 1–2 A's still seed the sighting pool from `Simulation_Ledger` (`REAL_PLAYERS`, `buildEveningFamous.js:186–245`), or only once they hold a `Cultural_Ledger` row (14 "A's player" rows in the C111 dump; the engine.118 usage bridge in `processAdvancementIntake.js:1150+` writes a row at the tier bar)? (b) "event Injection" — a sighting already injects a ripple (`recordRipple_` at `:518–548`, `effectType 'sighting'`), which moves with the pool; the separate fame seam in `generateCitizensEvents.js:2719–2735` fires on `usageCount ≥ 8 OR culturalFame ≥ 25` — does the ruling retire the `usageCount` branch so the seam reads the Cultural_Ledger alone?
+- **Two readings Task 9 builds around — decided at rb, 2026-10-17, not put to the builder** (he was asked and answered "Idk what you're asking me anymore"; the ruling was about hardcoded names, not these paths): (a) the active Tier 1–2 A's keep entering the sighting pool from `Simulation_Ledger` (`REAL_PLAYERS`, `buildEveningFamous.js:186–245`) as today — that path is already the ledger, and it is how a player first earns a `Cultural_Ledger` row (14 "A's player" rows in the C111 dump); (b) the fame seam in `generateCitizensEvents.js:2719–2735` stays as written — it already reads the Cultural_Ledger (`culturalFame ≥ 25`) alongside the paper-appearance count (`usageCount ≥ 8`); nothing hardcoded there. A sighting's own ripple (`recordRipple_` at `:518–548`) moves with the pool by construction. Reopen only if the builder says so.
 - Oaks players in the athlete pool (`REAL_PLAYERS` reads `MLB` origin only).
 
 ## Build notes (engine-sheet, 2026-10-16)
@@ -81,7 +81,7 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 ## Changelog
 
-- 2026-10-17 (research-build) — builder's fame-ledger ruling recorded verbatim → Task 9 / engine.297 (ready; the builder routes it); two readings left open for him; codex 2026-10-16 review reconciled and archived.
+- 2026-10-17 (research-build) — builder's fame-ledger ruling recorded verbatim → Task 9 / engine.297 (ready; codex builds the patch on "Ask codex"); the two side readings decided at rb as keep-as-is (the builder declined them); codex 2026-10-16 review reconciled and archived.
 
 - 2026-10-16 (engine-sheet) — Tasks 6–7: engine.296 LIVE PROD @143; template rows Inactive on live.
 

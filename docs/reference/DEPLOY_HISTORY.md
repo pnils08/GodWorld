@@ -148,6 +148,15 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 4l (`173b9e49`, one file over stage 4k) — engine.296 legends from the ledger (2026-10-16 ~23:10 CDT, engine-sheet)
+- **Why:** builder 2026-10-16, "there shouldn't be "warriors" players hard coded in the engine , the other 2 are my players but Rodriguez was traded so those hardcoded will cause problems". `SPORTS_LEGENDS` minted three no-citizen names onto Cultural_Ledger (C107/C108/C110) that the trends slice printed and Rhea blocked.
+- **Fix:** `buildEveningFamous.js` fills `SPORTS_LEGENDS` from the existing ctx.ledger read: Status Retired + OriginGame MLB, role "A's legend", home hood from the row (6 today); no literal fallback. Runtime test in `sportsWeekCity.test.js`.
+- **Live data (pipeline.81 Task 7):** the three template rows on live Cultural_Ledger (CUL-6BE26977 Rodriguez, CUL-90C4267D Davis, CUL-424B3208 Thompson) → Status Inactive, read back, 53 rows unchanged.
+- **Bench proof:** SANDBOX 1004 @39, C112 on live C111 (resynced after the Task 7 write): ok 224 s, persist 665/0, EE 4 → 4; Cultural_Ledger 53 → 55, both new rows citizen-linked (Martin Richards POP-00031, Alma Vasquez POP-01063), 0 active no-POPID rows. The C112 week did not reach a playoffs/championship rung, so the legends pool itself is unit-proven only.
+- **Push:** `output/engine296/push-prod.sh --go` → @143 (fresh PROD pull matched 4k 168/168 first); pull-back 168 = `output/engine-sheet/stage4l-e296.sha256`, differs from 4k in exactly the one file.
+- **Expectation at C112 (Sun 2026-10-18):** no new Cultural_Ledger row without a POPID from the sports pool; EE flat.
+- **Rollback:** push `output/engine98/prod-stage` (= stage 4k) + version cut.
+
 ### PROD stage 4k (`21840002`, two files over stage 4j) — engine.98 step 1, the pet carrier + Scout (2026-10-16 ~22:55 CDT, engine-sheet)
 - **Why:** builder 2026-10-16, "mags has a cat named scout , so that's a direct write to add that is a known pet in the sim". DialState is written through allowlists (`serializeDialState_`, citizenMemory `serialize_`/`deserialize_`); a hand-written key is dropped on the next dial rewrite, which fires on every compress-eligible row.
 - **Fix:** `pet` added to all three allowlists (three lines). Dial test P1–P4; npm 290/290.

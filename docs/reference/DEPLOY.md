@@ -58,19 +58,20 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 
 ## Current state
 
-**Current bench pointer (2026-10-16 late, engine.98 step 1):** SANDBOX 1004 web app **@38 = PROD 4j + two files at `21840002`** (= PROD 4k; stage `output/engine98/prod-stage`, push `output/engine98/push-prod.sh`). Resync from live C111 (84/84, read-back verified), guard 0, `clearfire cycle=112`, `clearcheckpoint` null, Scout stamped on bench POP-00005 (`{k:'cat', l:0, n:1, name:'Scout'}`, read-merge-write). C112 `&expect=111`: ok 164 s, persist 665/0, EE 4 → 4; POP-00005 DialState rewritten (folded 111 → 112) with the pet key intact, 1 pet on the ledger. Bench is at C112 — resync before the next fire.
+**Current bench pointer (2026-10-16 late, engine.296):** SANDBOX 1004 web app **@39 = PROD 4k + `buildEveningFamous.js` at `173b9e49`** (= PROD 4l; stage `output/engine296/prod-stage`, push `output/engine296/push-prod.sh`). Resync from live C111 after the Task 7 Cultural_Ledger write (Scout carried from live), guard 0, `clearfire cycle=112`, `clearcheckpoint` null. C112 `&expect=111`: ok 224 s, persist 665/0, EE 4 → 4, Cultural_Ledger 53 → 55 (both citizen-linked), 0 active no-POPID rows, Scout intact. Previous: @38 = 4k (engine.98). Bench is at C112 — resync before the next fire.
 
 **This file is protocol + CURRENT pointers only.** Per-wave proving narrative and bench-write logs go to the wave's own plan doc (builder rule 2026-08-30) or to [[DEPLOY_HISTORY]] — a session that finds itself writing a paragraph here is writing in the wrong file.
 
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Live:** PROD engine files = **stage 4k** = stage 4j + two files at `21840002` (engine.98 step 1: `utilities/citizenMemory.js` + `utilities/compressLifeHistory.js` carry `DialState.pet` through every dial rewrite) — **PROD web app @142**, pushed 2026-10-16 ~22:55 CDT by engine-sheet (`output/engine98/push-prod.sh --go`; fresh PROD pull matched 4j 168/168 first), pull-back 168 = `output/engine-sheet/stage4k-e98.sha256`, differs from 4j in exactly the two files. Stage 4j = 4i + six files at `0d4f2ca2` (engine.285 hazards 2–6, @141, `stage4j-e285b.sha256`). Rollback: `output/engine285/prod-stage-2to6` (= 4j) push + version cut.
+**Live:** PROD engine files = **stage 4l** = stage 4k + `phase07-evening-media/buildEveningFamous.js` at `173b9e49` (engine.296: SPORTS_LEGENDS from retired MLB-origin ledger rows, no literal fallback) — **PROD web app @143**, pushed 2026-10-16 ~23:10 CDT by engine-sheet (`output/engine296/push-prod.sh --go`; fresh PROD pull matched 4k 168/168 first), pull-back 168 = `output/engine-sheet/stage4l-e296.sha256`. Stage 4k = 4j + two files at `21840002` (engine.98 pet carrier, @142, `stage4k-e98.sha256`). Rollback: `output/engine98/prod-stage` (= 4k) push + version cut.
 
 **Recent PROD bumps** (last 5 — older → [[DEPLOY_HISTORY]] §PROD deploy log):
 
 | PROD | Date | Wave | Plan |
 |---|---|---|---|
+| @143 | 2026-10-16 | engine.296 the sports-legend sightings read the ledger's retired MLB-origin citizens, no hardcoded names — 1 file over stage 4k (stage 4l); 3 template Cultural_Ledger rows → Inactive | ROLLOUT engine.296; [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
 | @142 | 2026-10-16 | engine.98 step 1 a household animal survives every dial rewrite (`DialState.pet`) — 2 files over stage 4j (stage 4k); Scout, Mags's cat, stamped on live POP-00005 | ROLLOUT engine.98; [[../plans/2026-09-26-future-build-ideas]] §engine.98 |
 | @141 | 2026-10-16 | engine.285 (2–6) a fire killed mid-write no longer doubles or strands records — 6 files over stage 4i (stage 4j) | ROLLOUT engine.285; [[../research/2026-10-16-codex-engine285-hazards2-6-review]] |
 | @140 | 2026-10-16 | engine.285 (1/6) the LifeHistory trim writes kept rows first, clears the tail after — `archiveLifeHistory.js` over stage 4h (stage 4i) | ROLLOUT engine.285; `docs/research/2026-10-08-codex-engine95-design.md` §7 |

@@ -55,8 +55,8 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 | 3 | **Strip "engine" from slice text.** `buildTrendsSlice.js` approach → "what the city's hooks say is shifting"; grep every `scripts/build*Slice.js` for `engine` in reporter-facing strings and fix the same way. | es | done (es, 2026-10-16) |
 | 4 | **Every seat's pool starts from the slice's names.** `newsroomSourcing.buildPool()`: for every mode except `records`, candidates = `named(story, slice)` ∪ the mode's own (street/workplace/offices add, never gate). `named()` drops the `why` exclusion regex (same-hood/ledger-resident/city-resident/bond-hop) and the `source === 'assignment'` early return. | es | done (es, 2026-10-16) |
 | 5 | **Drop the proximity and rest guards.** `livedExperiencePacket.js:412-414` exposure filter keeps only `isLedgerPop`; `cron-desk-run.js:467` same; `REST_CAP`/`interviewTally` rest branch removed (the soft-floor waiver goes with it). `QUOTE_CITIZEN_CAP = 4` stays — it is the per-wake budget, not a guard on a citizen. `records` seats (Marbury) stay interview-less — seat design, not a guard. Tests from the 2026-09-30 ruling invert: `newsroomSourcing`, `livedExperiencePacket*`, cron-desk suites green. | es | done (es, 2026-10-16) |
-| 6 | **engine.296 — SPORTS_LEGENDS from the ledger.** `buildEveningFamous.js`: replace the three-entry literal with rows where `OriginGame` contains `MLB` and `Status == Retired` (6 today: Kinder, Conrad, Skenes, Kerkering, Bubic, Rushing), role "A's legend", home hood from the row. No literal fallback — an empty pool is an empty pool. A traded player is archived off the ledger and leaves the pool by itself. Bench on 1004 before PROD; `/stub-engine` in the same commit. | es | ready |
-| 7 | **Retire the three template rows on live Cultural_Ledger** (CUL-424B3208 Thompson, + Rodriguez, + Davis): `Status → Inactive` so every slice's `ACTIVE_RE` skips them and the record keeps the history. Read back. | es | ready |
+| 6 | **engine.296 — SPORTS_LEGENDS from the ledger.** `buildEveningFamous.js`: replace the three-entry literal with rows where `OriginGame` contains `MLB` and `Status == Retired` (6 today: Kinder, Conrad, Skenes, Kerkering, Bubic, Rushing), role "A's legend", home hood from the row. No literal fallback — an empty pool is an empty pool. A traded player is archived off the ledger and leaves the pool by itself. Bench on 1004 before PROD; `/stub-engine` in the same commit. | es | done (es, 2026-10-16) |
+| 7 | **Retire the three template rows on live Cultural_Ledger** (CUL-424B3208 Thompson, + Rodriguez, + Davis): `Status → Inactive` so every slice's `ACTIVE_RE` skips them and the record keeps the history. Read back. | es | done (es, 2026-10-16) |
 | 8 | **Acceptance — C112 Celeste (Fri 2026-10-23 wire run):** angle ≠ "Marin Tao leads the conversation"; `quotesRequested ≥ 1`; no no-POPID name on the slice; "engine" absent from the slice; Rhea `pass` or flags unrelated to 1–4. Read `.wake.json` + `.rhea.json`. | rb | waits C112 |
 
 ## Open (held, not in scope)
@@ -71,11 +71,16 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 - **Task 3 reach:** every reporter-facing "engine" in the slice builders went — headings ("ENGINE HOOKS" → "CITY HOOKS", "ENGINE SEED" → "CITY SEED"), the arts / neighborhood / transit approach lines, transit's cause and train-hit lines, the safety hotspot fact, the desk runner's hooks block. Nothing parses those headings (grepped scripts, lib, agents, skills).
 - **Task 5, one reading narrower than the table:** the ruling says "if they are in the whatever wakes them". Every row the slice names is now a target whatever its `why` (the Jax bench fills same-hood-signal / city-resident / bond-hop included). The packet's own reach past the slice into the ledger (`neighborsFromLedger`, why `same-hood-ledger` / `ledger-resident`) is NOT on anything that woke the seat, so it stays out (`isLedgerFillCandidate`). A proximity target still carries no evidence row (ADR-0017 §1/§4: same-neighborhood is not lived exposure) — it is interviewed as a neighbor, not a witness. Rest cap, tally and soft-floor waiver removed; QUOTE_CITIZEN_CAP stays.
 
+- **Task 6 (engine.296) LIVE PROD @143 (stage 4l)**, bench 1004 @39 C112 clean (DEPLOY_HISTORY stage 4l). The C112 bench week reached no playoffs/championship rung, so the legends pool is unit-proven (`sportsWeekCity.test.js`), not yet seen in a fire.
+- **Task 7 done on live:** CUL-6BE26977, CUL-90C4267D, CUL-424B3208 → Inactive, read back.
+
 ## Reviews reconciled
 
 _none yet_
 
 ## Changelog
+
+- 2026-10-16 (engine-sheet) — Tasks 6–7: engine.296 LIVE PROD @143; template rows Inactive on live.
 
 - 2026-10-16 (engine-sheet) — Tasks 1–5 built on main; build notes above (Task 5 ledger fill-ins stay out).
 

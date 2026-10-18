@@ -3,13 +3,13 @@ title: Event Engines Move Dials — review and repair Plan
 created: 2026-10-18
 updated: 2026-10-18
 type: plan
-tags: [engine, citizens, dials, events, parked]
+tags: [engine, citizens, dials, events, active]
 sources:
   - builder 2026-10-18 (verbatim below)
-  - docs/SIM_DOCTRINE.md §1–§3, §7, §15–§17
-  - docs/plans/2026-10-08-engine-286-game-of-life-events.md (the ruled die pattern; Tasks 3/4/5/7/11 not started)
+  - docs/SIM_DOCTRINE.md §1–§3, §7, §13–§17
+  - docs/plans/2026-10-08-engine-286-game-of-life-events.md (Tasks 3/4/5/7/11 are this work)
   - docs/plans/2026-09-10-inactivity-is-regression.md §Dial read 2026-10-17, §Builder rulings 2026-10-17
-  - utilities/citizenDialMap.js (ruling 1b — plain-day tags map to {})
+  - utilities/citizenDialMap.js (the 20 kinds that map to {})
   - output/engine201/measure-c121-all.json (bench C107–C121 tag counts)
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — engine.299"
@@ -19,87 +19,64 @@ pointers:
 
 **Builder's words (2026-10-18, verbatim):** "In some of the work lately it's been turning up some of the hardcoded event code engines are send real world Oakland hardship and throwing events that don't move a life , like a divorce or promotion, we have moved away from events for color and events like those actually change a citizen now. There are a lot of these engines in the code base through the phases and feel like starting to fix the offenders is some good overnight work you can do . You can use wire cards , codex and agy, once rb finishes up it current work it can help too. Come up with a plan to address this review and repairs , use a plan template.md, things to consider when applying a fix, the reality of the sim, other ledgers the events could pull from to add depth , aligning Events that will move the 9 dials state, the rare big event , the often everyday events , events that fire if they have debt at a certain level , a certain tier , net worth , creating differences in citizens based on Their differences. If this makes sense you can get started and set your hourly wakes to keep on the plan , follow my doctrines and avoid basing this off real world Oakland , only use the land mass and landmarks"
 
-**Builder's correction (2026-10-18, verbatim, minutes later):** "I did not say events should move a life , I never said that I said move a dial, this whole review is garbage already"
+**Builder, same hour (verbatim):** "I did not say events should move a life , I never said that I said move a dial" · "Every event that always exists dms move a dial so it's not something complicated" · "not event would have a divorce or a promotion , that happens somewhere else not as a color event" · "Delete your plan , read my message from the start again and do what I asked" · "revert the delete , I want all the work you did and what I paid for" · "Rb is booting an will support this , use codex and agy often"
 
-**Builder's second correction (2026-10-18, verbatim):** "Every event that always exists dms move a dial so it's not something complicated and if you don't understand what I mean this is useless just quit"
+**Builder, 2026-10-17 (verbatim, An Lopez POP-00810's row):** "those 4 events tell me exactly how her dials should read, why do things need to happen to her? the city moves and she should be reacting to that, occassionally maybe something happens to her thats and event she gets attached to."
 
-**Builder's third correction (2026-10-18, verbatim):** "What I'm saying is not event would have a divorce or a promotion , that happens somewhere else not as a color event , this is a waste of time you aren't following what I said at all"
+**Goal:** every hardcoded event that fires moves a dial and reads this world, not the real one; the offenders through the phases are found and fixed overnight, on hourly wakes, each fix benched and on PROD the same wake.
 
-**Builder's fourth (2026-10-18, verbatim):** "So you missed the entire point and 80% of what the ask was and god knows what stupid shit you wrote up"
+**Rows:** engine.299 · **Owner:** engine-sheet (rb supports; codex and agy on every task)
 
-**What the ask is (es, read against every word above):** rebuild how the hardcoded event engines *generate* a citizen's events. Today they deal one hood-flavored deck to everyone and most of what they deal moves nothing. They should read the citizen's own row and the ledgers around them — debt level, tier, net worth, hood, employer, household, bonds, health, the law — and throw events that move the nine dials: everyday ones small and often, big ones rare, with a citizen's differences making their events different. Big life events (a divorce, a promotion) are not this layer's business; they happen in their owning engines. Nothing in it reads real-world Oakland; the map is the land mass and the landmarks.
+## The offenders — what the review finds
 
-**Goal:** the seven everyday engines generate each citizen's week from their reality and move their dials by it.
+Three kinds. A line is an offender if any one is true of it.
 
-**Rows:** engine.299 · **Owner:** engine-sheet
+1. **It moves no dial.** Its tag maps to `{}` in `utilities/citizenDialMap.js`. Twenty kinds do (file read 2026-10-18): Civic, Civic Perception, Neighborhood, Team, Season, Lifestyle, Death, Background, Daily, Micro-Event, Life Event, Life, Personal, PrevEvening, FirstFriday, Holiday, CreationDay, Sports, Weather, Faith-Drift. Live C111: 2,771 lines fired on 1,001 citizens; ≈2,400 (87%) carry one of these — Neighborhood 702, Daily 435, Civic Perception 321, Personal 254, PrevEvening 182, Sports 146, Lifestyle 76, Background 74, Micro-Event 74, Undocked-Audience 63, Holiday 28. 63.6% of the ledger sits all-neutral. Ruling 1b (2026-09-13, "plain days move nothing") is superseded by the 2026-10-18 ruling above: a line that moves nothing is not an event and is not written.
+2. **It reads real-world Oakland.** A displacement, gentrification, priced-out, encampment, crime-ranking or decline premise on the path (grep 2026-10-18, hits per file): `phase05-citizens/migrationTrackingEngine.js` 53 ("Week 4 Gentrification & Migration Tracking", DisplacementRisk 0–10, FORCED_MIGRATION "displaced by rent/eviction"); `phase05-citizens/generateCitizensEvents.js` 10 (`econ:displacement` lines 2816–2817 keyed on DisplacementRisk ≥ 7, `displacementmove` 1056/1064); `phase07-evening-media/buildContractSeeds.js` 5; `phase05-citizens/neighborhoodTrajectoryEngine.js` 4; `phase06-analysis/applyMigrationDrift.js` 3; `storyHook.js` 2; `applyStorySeeds.js`, `tier1EssenceEvents.js`, `rippleLedger.js`, `compressLifeHistory.js` 1 each; `utilities/ensureCrimeMetrics.js` NEIGHBORHOOD_CRIME_PROFILES carry the inherited crime ranking (engine.237 memory); ECL rows 130 ("priced out"), 219 ("Mandela Parkway encampment site"), 532. `phase03-population/updateCrimeMetrics.js`'s "displacement" is enforcement spillover between areas, not a premise — left alone.
+3. **It says a life changed when nothing changed.** A color line that throws a divorce, promotion, layoff, marriage, birth, death, hospital stay or move. Those fire in their owning engines (`householdFormationEngine`, `runCareerEngine` / `checkForPromotions`, `bondEngine`, `judicialLifecycle`, migration) and nowhere else. Verified 2026-10-18: no color pool throws one today — `generateCitizensEvents.js` 1057/1065/2797–2798 read MaritalStatus for register ("handled a logistics call with an ex"); `tier1EssenceEvents.js` 'Promotion' lines are authored Tier-1 essence. Task 2's scan keeps it that way.
 
-## What is wrong today (live C111, read 2026-10-18)
+## Things to consider when applying a fix
 
-- 2,771 lines fired on 1,001 citizens; ≈2,400 (87%) carry a tag that maps to `{}` in `utilities/citizenDialMap.js` — Neighborhood 702, Civic Perception 321, Daily 435, PrevEvening 182, Personal 254, Sports 146, Background 74, Lifestyle 76, Micro-Event 74, Undocked-Audience 63, Holiday 28. 20 tags are inert by design (ruling 1b, 2026-09-13). 63.6% of the ledger sits all-neutral.
-- The everyday engines read no money column. `runNeighborhoodEngine`, `runHouseholdEngine`, `runRelationshipEngine`, `runEducationEngine`, `runYouthEngine`, `generateGenericCitizenMicroEvent`, `generateCitizensEvents`: DebtLevel 0×, NetWorth 0×, Income 0× (grep 2026-10-18). They key on Tier and the dial bands — the same deck for a citizen at DebtLevel 6 and one sitting on a paid-off house.
-- The deck is hood-flavored text, not a reading of the hood: `hoodTexturePool_` picks a label pool by Neighborhood_Map.EmployerCharacter and the line says "noticed the creative energy shifting in Temescal" whether Temescal is growing or decaying this Cycle.
-- Real-world Oakland premises on the path: `migrationTrackingEngine.js` is built on a displacement/gentrification model ("Week 4 Gentrification & Migration Tracking", DisplacementRisk 0–10, "priced out"); `ensureCrimeMetrics.js` profiles carry the inherited crime ranking (engine.237 memory); ECL rows 130 ("priced out"), 219 ("Mandela Parkway encampment site"), 532 (pothole) read the real city.
+- **The reality of the sim.** The line says something true of this citizen this Cycle, read from their row or a ledger. The city moves and the citizen reacts; a personal event is occasional, on top (builder 2026-10-17). "Noticed the creative energy shifting in Temescal" is written only when Temescal's trend moved, and its sign is the trend's.
+- **Other ledgers the events could pull from to add depth.** Before a family writes, it reads: money — Simulation_Ledger DebtLevel / NetWorth / SavingsRate / WealthLevel against Neighborhood_Map MedianIncome; work — EmployerBizId → Business_Ledger (revenue drift, closure risk, hiring); household — Household_Ledger, ChildrenIds, Youth_Events; bonds — Relationship_Bonds (strength, last contact, rivalry); hood — S.neighborhoodState trend/momentum/pressure, Neighborhood_Map BoomIndex / IncomeTier, Initiative_Tracker, Transit_Metrics; health — Status, Hospital / Health_Cause_Queue, `hoodhospital`; law — Judicial_Ledger (`charged`, `hoodcharged`), Chaos_Cars; faith and culture — Faith_Organizations, Cultural_Ledger; sports — Sports_Feed, `DialState.fan`; weather and season — S.weather, Simulation_Calendar. A line names what the ledger says — the employer, the bond, the hood's trend — never an invented crowd. Facts gate; color is the wording (§13).
+- **Aligning events that will move the 9 dials state.** Every line → one dial and a sign. The sign is the fact's direction (the business lost money → down; the bond warmed → up; the hood is growing → up). The tag the row keeps is `<Kind>-<Up|Down>-<S|M|L>`, because Phase 9 folds the cell's tag, not the log's (codex 2026-10-17 hunt 1a). `DIAL_MAP` has no `{}`. Sign skews up and the heavier event is rarer at every aura (builder 2026-10-10, standing).
+- **The rare big event, the often everyday events.** S: most citizens most weeks, ±1. M: rarer, ±2–3, a two-Cycle hold where the kind supports it. L: rare, ±4–5, the lottery grabs two (§10), a citywide handful a Cycle. Odds and deltas are World_Config keys — rate and severity ARE the dials (builder 2026-09-22). No cap, no quota (§1).
+- **Events that fire if they have debt at a certain level, a certain tier, net worth.** Eligibility is the row. DebtLevel ≥ 4 opens the money-tight family and its odds rise per level (the default at 6 already exists, engine.276); NetWorth over the hood median opens the comfortable family; a mortgage over half of income (engine.286) opens the stretched one. Tier sets the register and the reach — Tier 1–2 the media-scale wording, Tier 4 the everyday. One predicate: `CONTENT_LEDGER_DSL_FIELDS` in `citizenContextBuilder.js` (wealth, tier, hood, hoodtrend, defaulted, charged, bereaved, married, children, age are there) gains `debt` and `networth`; the hardcoded pools route through it like the ECL rows do.
+- **Creating differences in citizens based on their differences.** Two citizens in one hood with different rows draw different events. The fixture: same hood, one at DebtLevel 5 / NetWorth under the median / Tier 4, one at DebtLevel 0 / NetWorth over / Tier 2 — the same Cycle gives them different families, signs and reach.
+- **Not real-world Oakland; the land mass and the landmarks.** Hood character comes from Neighborhood_Map and INSTITUTIONS §Neighborhoods; places are the lake, the estuary, the hills, the port, the square, the parkway. No displacement, gentrification, blight, encampment, crime-ranking, priced-out or decline premise anywhere on the path. The intra-city move is income fit against the hood (§14), not displacement.
+- **Not this layer.** Divorce, promotion, layoff, marriage, birth, death, hospital, move: owner engines only. A color pool that wants to say one is cut.
+- **FIX, don't ADD.** The change goes inside the engine that owns the lines; the shared reads extend `citizenContextBuilder.js` beside `deriveLifeState_` / `isEventEligible_`. No new file.
+- **Engine rules.** `ctx.rng` only; `ctx.writeIntents` only; wiring card before the cut; caller graph for every renamed tag; truth docs (`TAG_REGISTRY.md`, `EVENT_SYSTEM_MAP.md` §2, STUB_MAP) in the same commit.
+- **The gate.** codex diff review on every task before the bench (codex SHIP is approval of the code); agy adversarial read of every pool text and the premise sweep; bench 1004 from live-synced state; one unbenched change in flight; then PROD the same wake — no code waits. The Sunday fire confirms: C112 Sun 2026-10-18, C113 Sun 2026-10-25.
 
-## The design — the builder's six considerations
+## Tasks
 
-### 1. The reality of the sim
-A citizen's week is a reading of their row and what the ledgers say happened around them this Cycle — not a draw from a deck. The engine assembles, per citizen, the facts that are true of them right now and throws an event *about one of those facts*.
-
-| Fact about the citizen | Where it is read | What it throws (dial) |
-|---|---|---|
-| Money: DebtLevel, NetWorth vs the hood's MedianIncome, SavingsRate, WealthLevel, `DialState.debtDefault` | Simulation_Ledger AE/AC/AD/Z, Neighborhood_Map | money-tight / comfortable / stretched weeks → composure, outabout, drive |
-| Work: the employer's week | EmployerBizId → Business_Ledger (revenue drift, closure risk, hiring), Employment_Roster | a good/bad week at work → drive, composure (never the promotion/layoff — engine.286 owns those) |
-| Household: spouse, children, HouseholdId | Household_Ledger, Family_Relationships, ChildrenIds, Youth_Events | the household's week → family, warmth |
-| Bonds | Relationship_Bonds / Bond_Ledger (strength, last contact, rivalry) | a bond warming or cooling → sociability, warmth (`ConnectionWithdrawn/Maintained` already exist) |
-| Hood: trend, momentum, pressure, the initiative in it | S.neighborhoodState, Neighborhood_Map (IncomeTier, BoomIndex, Adjacent, ChildAreas), Initiative_Tracker, Transit_Metrics | the block this week → outabout, sociability, composure |
-| Health | Status, StatusStartCycle, Hospital/Health_Cause_Queue; `hoodhospital` | a scare, a recovery, a neighbor in the hospital → composure, outabout |
-| The law | Judicial_Ledger (`charged`, `hoodcharged`), Chaos_Cars | a charge near them, a chaos car on their street → composure, integrity |
-| Faith, culture | Faith_Organizations (membership), Cultural_Ledger | a service, a show → integrity, warmth, openness |
-| Sports | Sports_Feed, `DialState.fan` | their team's week → fandom |
-| Weather, season, holiday | S.weather, Simulation_Calendar | → outabout |
-
-### 2. Other ledgers for depth
-Every row in the table above names a ledger the engine reads before it writes. A line names what the ledger says — the employer by name, the bond by name, the hood by its trend — never an invented crowd. Facts gate; color is the wording (§13).
-
-### 3. Aligned to the nine dials
-Every event maps to a dial and a sign. The sign comes from the fact's direction (the business lost money → down; the bond warmed → up; the hood is growing → up). The tag the row keeps carries kind, direction and band — `<Kind>-<Up|Down>-<S|M|L>` — because Phase 9 folds the cell's tag, not the log's (codex 2026-10-17 hunt 1a); `DIAL_MAP` maps every one of them to deltas and no tag maps to `{}`. Sign skews up and the heavier event is rarer at every aura (builder 2026-10-10, standing rule for every kind added).
-
-### 4. The rare big event, the often everyday event
-S: most citizens most weeks, ±1, the texture of a life. M: rarer, ±2–3, a two-Cycle hold where the kind supports it. L: rare, ±4–5, the lottery grabs two (§10) — a citywide handful a Cycle. Band odds and deltas are World_Config keys (rate and severity ARE the dials, 2026-09-22); no cap, no quota (§1). Proposed numbers in §Rates for the builder.
-
-### 5. Events that fire on debt, tier, net worth
-Eligibility is the row. DebtLevel ≥ 4 opens the money-pressure family and its odds rise with the level (at 6 the default already exists, engine.276); NetWorth above the hood median opens the comfortable family; a stretched mortgage (engine.286 "over half") opens the stretched one. Tier sets the stage — Tier 1–2 events carry the media-scale wording and reach, Tier 4 the everyday scale. The one predicate is `CONTENT_LEDGER_DSL_FIELDS` (wealth, tier, hood, hoodtrend, defaulted, charged, bereaved, married, children, age… already there) plus `debt` and `networth`; the hardcoded pools route through the same predicate as the ECL rows.
-
-### 6. Differences in citizens from their differences
-Two citizens in the same hood with different rows draw different events. The fixture that proves it: same hood, one at DebtLevel 5 / NetWorth under the median / Tier 4, one at DebtLevel 0 / NetWorth over / Tier 2 — the same Cycle gives them different families, different signs, different reach.
-
-### The map
-Hood character comes from Neighborhood_Map and INSTITUTIONS §Neighborhoods; places are the land mass and the landmarks (the lake, the estuary, the hills, the port, the square, the parkway). No displacement, gentrification, blight, encampment, crime-ranking or "priced out" premise anywhere on the path.
-
-## Tasks (overnight order — biggest offender first)
+Overnight order, biggest offender first. Each wake takes the next open row.
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | **Wiring cards** for `runNeighborhoodEngine_`, `generateCitizensEvents_`, `runHouseholdEngine_`, `runRelationshipEngine_`, `runEducationEngine_`, `generateGenericCitizenMicroEvents_`, `runYouthEngine_` and the fold (`nudgesForEvent_` / `DIAL_MAP` consumers); `scripts/deadBranchScan.js` on live. | es + wiring agent | in progress |
-| 2 | **The citizen-fact reader** — one pure function the seven engines share: given a row + ctx, returns the facts in §1 with direction (money, work, household, bonds, hood, health, law, faith/culture, sports, weather). Reads only; unit-tested against fixture rows; FIX-don't-ADD: lives in `citizenContextBuilder.js` beside `deriveLifeState_` / `isEventEligible_` (engine.286 Task 3's contract). | es | not started |
-| 3 | **No inert tag.** `DIAL_MAP`: every `{}` kind becomes a graded family with deltas; `TAG_REGISTRY.md` + `EVENT_SYSTEM_MAP.md` §2 same commit; test: every key resolves to ≥1 dial or is STRUCTURAL. | es | not started |
-| 4 | **Neighborhood (702 lines).** `runNeighborhoodEngine.js` + the `neighborhood/communityLife/nbhdState` pools: the event is about the hood's trend and the citizen's standing in it (fact reader); both directions; graded tag; row-gated; ECL families per direction/band. codex diff → bench 1004 → PROD. | es → codex | not started |
-| 5 | **Household / familyLife (222) + Relationship.** The household's week from Household_Ledger / bonds / children; graded; row-gated. | es → codex | not started |
-| 6 | **Civic Perception (321) + PrevEvening (182) + Personal (254).** civicNews about the initiative/office in *their* hood with the outcome's sign; prevEvening from the evening's own result; Personal from a fact, or not thrown. | es → codex | not started |
-| 7 | **Money family.** DebtLevel / NetWorth / stretched-mortgage events (composure, outabout, drive) through the fact reader; ECL families money-tight / comfortable / stretched; `debt`, `networth` DSL fields. | es → codex | not started |
-| 8 | **Work week, health, law, faith/culture, sports (fandom), weather** — the remaining facts, each a small family; Sports moves fandom by result and team followed. | es → codex | not started |
-| 9 | **Real-Oakland premise sweep.** `migrationTrackingEngine.js` premise (displacement model) — re-source the intra-city move to income-fit (§14) and cut the displacement framing; `ensureCrimeMetrics.js` profiles trued to INSTITUTIONS; ECL rows 130, 219, 532 and any pool text; agy adversarial read. | es + agy | not started |
-| 10 | **Rates table** (§Rates) for the builder: per family, S/M/L odds and deltas as World_Config keys with the live range each reads. | es → builder | not started |
-| 11 | **Prove it.** Fixture pair (§6) through the real entry points; bench 1004 fire from live-synced C112: zero lines mapping to `{}`, both directions per family, S > M > L; C113 live readback (Sun 2026-10-25). | es | not started |
+| 1 | **Every event that fires moves a dial.** `utilities/citizenDialMap.js`: the 20 `{}` kinds each become directional graded families (`<Kind>-Up/Down-S/M/L` → deltas) or are marked STRUCTURAL with the reason (Death is the decedent's; Life / Life Event are umbrella tags the owner engines refine); every emitter of a `{}` kind either writes the graded tag from a fact or does not write the line. Emitters (grep 2026-10-18): `phase05-citizens/generateCitizensEvents.js`, `phase04-events/generateGenericCitizenMicroEvent.js`, `utilities/tier1EssenceEvents.js`, `phase05-citizens/runNeighborhoodEngine.js`, `generateMediaModeEvents.js`, `generateCivicModeEvents.js`, `phase04-events/generateGameModeMicroEvents.js`. Wiring cards for `nudgesForEvent_` / `DIAL_MAP` consumers and `generateCitizensEvents_` first. Test: every key resolves to ≥ 1 dial or is STRUCTURAL. | es → codex | in progress |
+| 2 | **Offender scan.** `scripts/deadBranchScan.js --offenders`: reads the emitters' pools + `citizenDialMap.js` and lists (1) kinds and lines mapping to `{}`, (2) premise words with file:line, (3) life-event verbs inside color pools → `output/engine299/offenders.json`. Re-run after every task; the acceptance is an empty report. | es | not started |
+| 3 | **Neighborhood (702).** `runNeighborhoodEngine.js` + `hoodTexturePool_` / `neighborhood` / `communityLife` / `nbhdState` pools: the line is about the hood's trend this Cycle and the citizen's standing in it; both directions; graded tag; row-gated register and reach. codex diff → bench 1004 → PROD. | es → codex | not started |
+| 4 | **generateCitizensEvents.js families.** Civic Perception (321): the initiative or office in *their* hood with the outcome's sign. Daily (435): from a row fact (money, household, health) or not written. PrevEvening (182): the evening's own result. Personal (254): a fact or not thrown. Sports (146): fandom by result and team followed. Lifestyle, Background, Micro-Event, Undocked-Audience, Holiday: a fact or not written. `econ:displacement` 2816–2817 and `displacementmove` 1056/1064 re-sourced to the row's money (DebtLevel, NetWorth vs hood median). | es → codex | not started |
+| 5 | **Money: debt level, tier, net worth.** `debt`, `networth` in `CONTENT_LEDGER_DSL_FIELDS`; the money-tight / comfortable / stretched families (composure, outabout, drive); every hardcoded pool routes through `isEventEligible_`; Tier sets register and reach. | es → codex | not started |
+| 6 | **The other ledgers.** The reads in §Things to consider, folded into `citizenContextBuilder.js` beside `deriveLifeState_`; the work-week, household, bonds, health, law, faith/culture, sports and weather families each read theirs before writing (never the promotion/layoff — engine.286 owns those). | es → codex | not started |
+| 7 | **Real-Oakland premise sweep.** Engine side (es): `migrationTrackingEngine.js` — the intra-city move re-sourced to income fit (§14), DisplacementRisk and the displacement framing cut, FORCED_MIGRATION's reason set trued; `ensureCrimeMetrics.js` profiles trued to INSTITUTIONS; `neighborhoodTrajectoryEngine.js`, `applyMigrationDrift.js`. Writer side (rb): `buildContractSeeds.js`, `storyHook.js`, `applyStorySeeds.js`, `tier1EssenceEvents.js`, `rippleLedger.js`, `compressLifeHistory.js`, ECL rows 130 / 219 / 532 and any pool text. agy adversarial read of the whole list; places trued to the land mass and landmarks. | es + rb → agy | not started |
+| 8 | **Rates as World_Config keys.** Per family, S/M/L odds and deltas (engine.286's key pattern); starting values in §Rates; the sheet is where the builder changes them. | es | not started |
+| 9 | **Prove it.** The fixture pair through the real entry points; bench 1004 from live-synced state: zero lines mapping to `{}`, both directions per family, S > M > L, the scan empty; live readback at the Sunday fire after each PROD push. | es | not started |
+| 10 | **Lanes on every task.** Wiring card before each cut (`engine-wiring`); codex diff review before each bench, findings folded here; agy read on pool text; rb on Task 7's writer side and the ledger reads it already owns; returns land in `docs/for-claude-review/` and `output/antigravity/`, reconciled below. | es | in progress |
+| 11 | **Hourly wakes.** `ScheduleWakeup` every 60 min until the Tasks table is done: each wake takes the next open row, folds any lane return, re-runs the scan, commits path-specifically, logs one Changelog line. | es | in progress |
 | 12 | engine.286 Tasks 3/4/5/7/11 are this work; that plan's rows point here. | es | not started |
 
-## Rates (proposed for the builder's ruling — engineering proceeds on World_Config keys, numbers are his)
+## Rates
 
-| Family | S odds / Cycle per eligible citizen | M | L | S / M / L deltas |
+Starting values, written as World_Config keys in Task 8; the builder changes them in the sheet.
+
+| Family (dials) | S odds / Cycle / eligible citizen | M | L | S / M / L deltas |
 |---|---|---|---|---|
 | hood (outabout, sociability) | .35 | .06 | .01 | ±1 / ±2 / ±4 |
 | household (family, warmth) | .30 | .05 | .01 | ±1 / ±2 / ±4 |
-| money (composure, outabout, drive) — opens at DebtLevel ≥ 4 or NetWorth over median | .25, rising .05 per debt level | .05 | .01 | ±1 / ±3 / ±5 |
+| money (composure, outabout, drive) — opens at DebtLevel ≥ 4 or NetWorth over median | .25, +.05 per debt level | .05 | .01 | ±1 / ±3 / ±5 |
 | work week (drive, composure) | .30 | .05 | — (L is engine.286's) | ±1 / ±2 |
 | bonds (sociability, warmth) | .25 | .04 | .005 | ±1 / ±2 / ±4 |
 | health / law / chaos (composure, integrity) — opens on a fact | .15 | .04 | .01 | ±1 / ±3 / ±5 |
@@ -110,11 +87,12 @@ Sign skews up (≈ .6 / .4) except where the fact's direction is known, which de
 
 ## Acceptance
 
-1. A bench fire on live-synced state produces zero event lines whose tag maps to `{}` — C112 bench fire + a tag→delta check over LifeHistory_Log.
-2. Every family shows both directions in one bench fire, S > M > L.
-3. The fixture pair (§6) draws different families, signs and reach through the real entry points.
-4. The premise sweep list closes to zero, agy's read agrees.
-5. All-neutral share falls from 63.6% at the C113 live readback — reported, not targeted (§1).
+1. A bench fire on live-synced state writes zero event lines whose tag maps to `{}` — bench 1004 + a tag→delta check over LifeHistory_Log.
+2. The offender scan (Task 2) returns empty: no `{}` kind, no premise word, no life-event verb in a color pool.
+3. Every family shows both directions in one bench fire, S > M > L.
+4. The fixture pair draws different families, signs and reach through the real entry points.
+5. agy's read of the premise sweep agrees; codex SHIP on every diff that reached PROD.
+6. All-neutral share falls from 63.6% at the next Sunday live readback — reported, not targeted (§1).
 
 ## Reviews reconciled
 
@@ -140,4 +118,5 @@ Sign skews up (≈ .6 / .4) except where the fact's direction is known, which de
 
 ## Changelog
 
-- 2026-10-18 (engine-sheet) — Created; the builder rejected the reading four times the same hour (verbatim above; ECL is the wording source for the real life-event engines, not the subject of this work). PARKED — no lane acts on it until the builder restates the ask.
+- 2026-10-18 03:40 (engine-sheet) — Plan rewritten to the builder's message: the es reading paragraph and the "citizen's week" redesign removed; offenders named in three kinds with file:line; "things to consider" in his words; rb, codex, agy on every task; hourly wakes are Task 11. Un-parked. Task 1 started.
+- 2026-10-18 (engine-sheet) — Created; three readings rejected the same hour; deleted on his word, reverted on his word ("I want all the work you did").

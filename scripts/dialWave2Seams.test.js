@@ -157,11 +157,12 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
     const skipped = ctx.summary.engine299 ? ctx.summary.engine299.noDialBySource['runNeighborhoodEngine:Neighborhood:no-trajectory'] : 0;
     assert(`engine.299 a hood that did not move writes no hood line (${pressure} run); the skip is counted`, still.length === 0 && skipped === 2, JSON.stringify({ still, skipped }));
   }
-  // engine.299 (codex Task 3 F1): a world event's presence is not a direction — with a positive world event and
-  // steady hoods, the "felt atmosphere influenced by recent city events" line is never written Down (or at all).
+  // engine.299 (codex Task 3 F1; rb 2026-10-18): a world event's presence is not a direction — with a positive world
+  // event and a steady hood, the unsigned "felt atmosphere influenced by recent city events" line never enters the
+  // pool, so nothing is written (never Down) and the empty pool is counted under the hood's trajectory.
   if (pressure === 'housingPressure') {
-    // codex A1: enter the drift branch (first draw 0 < driftChance) and pick the LAST pool entry (0.99) — the
-    // city-events line is pushed last — so the repaired branch is actually reached; then require a counted skip.
+    // codex A1: enter the drift branch (first draw 0 < driftChance) so the pool is built with a world event present;
+    // the pool is empty (steady hood, no signed context line) and the skip is counted.
     const ctx = context(rows.slice(0, 1).map(r => r.slice()));
     const seq = [0, 0.99]; let k = 0; ctx.rng = () => (k < seq.length ? seq[k++] : 0.99);
     ctx.config.dialHoodPressureBar = 2; ctx.config.dialHoodCrimeBar = 2;
@@ -170,7 +171,7 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
     writes.length = 0; w.runNeighborhoodEngine_(ctx);
     const got = writes.filter(x => x.tab === 'LifeHistory_Log').map(x => x.row[3] + ' :: ' + x.row[4]);
     const skipped = (ctx.summary.engine299 && ctx.summary.engine299.noDialBySource['runNeighborhoodEngine:Neighborhood:steady']) || 0;
-    assert('engine.299 a positive world event reaches the city-events line, which is skipped and counted — never written Down', got.length === 0 && skipped === 1, JSON.stringify({ got, skipped, draws: k }));
+    assert('engine.299 a positive world event with a steady hood writes no hood line; the empty pool is counted — never written Down', got.length === 0 && skipped === 1, JSON.stringify({ got, skipped, draws: k }));
   }
 }
 {

@@ -213,6 +213,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 15:32 rb CHECK es WORKING (taking the rename refs and the storefront ruling; no new commits yet). codex/agy idle. No new review files. Live still C111; C112 fires on 4p.
 15:57 rb VERIFY es 7acb6a25: chaos truck displayName 'Estuary Power & Gas truck' (key kept); Intake pattern 'Estuary Power' added beside old PG&E; Robert's essence untouched. Side fix: chaosCarsConfig.test (outside the npm runner) trued 11→12 vehicles. Storefront real-pressure line queued in es NEXT(0) for the next wave. No name hold left.
 16:30 rb CHECK es IDLE. codex/agy idle. No new commits from es or review files. Live C111; C112 fires on 4p. Nothing unblocked.
+17:30 rb CHECK es IDLE (compacted, at prompt). codex/agy idle. No new commits or review files since 16:30. Live still C111 (civic chain: c111 week closed); C112 fires on 4p. Nothing unblocked.
 12:35 es CLAIM agy es engine.299 Task 13 cap-lift adversarial read (13a neighborhood a8985e7e; 13b generic + 13c game-mode as they land) → output/antigravity/2026-10-18-engine299-task13-caps-read.md. PROD for Task 13 holds for codex (out to 10-24) or the builder's word that agy is enough (rb §6).
 13:12 es RELEASE agy — Task 13 caps read folded 793dd806 (generic citywide text uniqueness → per citizen; neighborhood pool writable lines only); CATCH-UP odds sent to rb for §6.
 
@@ -222,4 +223,3 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 - No subagent fan-out for coding. Advisor once before a cut and once before declaring done; not on mechanical trims.
 - Systemic blocker (unexplained test failure, guest rewriting outside scope, weekly budget warning): stop that thread, log `BLOCKED <what>`, take the next item. Two consecutive blocked threads → stand down and wait for morning; do not thrash.
 - Self-loop → `/self-debug`.
-- 17:30 rb CHECK es IDLE (compacted, at prompt). codex/agy idle. No new commits or review files since 16:30. Live still C111 (civic chain: c111 week closed); C112 fires on 4p. Nothing unblocked.

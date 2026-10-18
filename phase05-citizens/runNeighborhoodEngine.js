@@ -482,59 +482,70 @@ function runNeighborhoodEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     if (rng() < driftChance) {
 
-      var eventPool = hoodTexturePool_(ctx, neighborhood, NEIGHBORHOOD_DRIFT_BY_CHARACTER_, NEIGHBORHOOD_DRIFT_BESPOKE_, 'runNeighborhoodEngine_');
+      // engine.299 Task 3 (builder 2026-10-18: "the city moves and she should be reacting to that"): every
+      // line this engine writes carries the dial it moves and which way. A hood texture line is a reaction
+      // to the hood, so its sign is the hood's own trajectory this Cycle (Neighborhood_Map via
+      // S.neighborhoodState: growth -> Up, decay -> Down); a hood that did not move gives the line no sign
+      // and the line is not written (counted in S.engine299.noDialBySource). The context lines say their
+      // own direction. The pool holds { t: text, d: "dial:<dial>:<up|down>" | null }.
+      var hoodTraj = String((S.neighborhoodState && S.neighborhoodState[neighborhood] && S.neighborhoodState[neighborhood].trajectory) || '').toLowerCase();
+      var hoodSign = hoodTraj === 'growth' ? 'dial:outabout:up' : (hoodTraj === 'decay' ? 'dial:outabout:down' : null);
+      var signed_ = function(texts, d) { var out = []; for (var ti = 0; ti < texts.length; ti++) out.push({ t: texts[ti], d: d }); return out; };
+      var eventPool = signed_(hoodTexturePool_(ctx, neighborhood, NEIGHBORHOOD_DRIFT_BY_CHARACTER_, NEIGHBORHOOD_DRIFT_BESPOKE_, 'runNeighborhoodEngine_'), hoodSign);
       var eventTag = "Neighborhood";
 
-      // Add holiday-specific events (v2.2)
+      // Add holiday-specific events (v2.2) — a day out in the hood
       if (holidayNeighborhoodEvents[neighborhood]) {
-        eventPool = eventPool.concat(holidayNeighborhoodEvents[neighborhood]);
+        eventPool = eventPool.concat(signed_(holidayNeighborhoodEvents[neighborhood], 'dial:sociability:up'));
       }
 
-      // Add First Friday events (v2.2)
+      // Add First Friday events (v2.2) — out at the art walk
       if (isFirstFriday && firstFridayEvents[neighborhood]) {
-        eventPool = eventPool.concat(firstFridayEvents[neighborhood]);
+        eventPool = eventPool.concat(signed_(firstFridayEvents[neighborhood], 'dial:sociability:up'));
       }
 
-      // Add Creation Day events (v2.2)
+      // Add Creation Day events (v2.2) — belonging
       if (isCreationDay) {
-        eventPool = eventPool.concat(creationDayEvents);
+        eventPool = eventPool.concat(signed_(creationDayEvents, 'dial:warmth:up'));
       }
 
       // Add weather-context events
       if (weather.type === "rain") {
-        eventPool.push("noticed how the rain affected neighborhood mood");
+        eventPool.push({ t: "noticed how the rain affected neighborhood mood", d: 'dial:outabout:down' });
       }
       if (weather.type === "fog") {
-        eventPool.push("felt the fog settle over the neighborhood");
+        eventPool.push({ t: "felt the fog settle over the neighborhood", d: 'dial:outabout:down' });
       }
       if (weatherMood.primaryMood === 'irritable') {
-        eventPool.push("sensed neighbors' frustration with the weather");
+        eventPool.push({ t: "sensed neighbors' frustration with the weather", d: 'dial:composure:down' });
       }
 
       // Add economic-context events
       if (econMood <= 35) {
-        eventPool.push("noticed economic concerns among neighbors");
+        eventPool.push({ t: "noticed economic concerns among neighbors", d: 'dial:composure:down' });
       }
       if (econMood >= 65) {
-        eventPool.push("sensed optimism in the neighborhood");
+        eventPool.push({ t: "sensed optimism in the neighborhood", d: 'dial:composure:up' });
       }
 
       // Add chaos-context events
       if (chaos.length > 0) {
-        eventPool.push("felt atmosphere influenced by recent city events");
+        eventPool.push({ t: "felt atmosphere influenced by recent city events", d: 'dial:composure:down' });
       }
 
       // Add cultural activity events (v2.2)
       if (dynamics.culturalActivity >= 1.4) {
-        eventPool.push("noticed increased cultural activity in the area");
+        eventPool.push({ t: "noticed increased cultural activity in the area", d: 'dial:openness:up' });
       }
 
       // Add community engagement events (v2.2)
       if (dynamics.communityEngagement >= 1.3) {
-        eventPool.push("felt neighbors more engaged with each other");
+        eventPool.push({ t: "felt neighbors more engaged with each other", d: 'dial:sociability:up' });
       }
 
-      var entry = eventPool[Math.floor(rng() * eventPool.length)];
+      var picked = eventPool[Math.floor(rng() * eventPool.length)];
+      var entry = picked.t;
+      var entryDial = picked.d;
 
       // engine.176 (S438): a hood under PERSISTED pressure (Neighborhood_Map via
       // S.neighborhoodState — never the same-cycle pulse) tints this citizen's
@@ -564,6 +575,17 @@ function runNeighborhoodEngine_(ctx) {
       } else if (holidayNeighborhoodEvents[neighborhood] && holidayNeighborhoodEvents[neighborhood].indexOf(entry) >= 0) {
         eventTag = "Holiday";
       }
+      // engine.299: the written tag is the graded form <Kind>-<Dial>-<Up|Down>-S (utilities/citizenDialMap.js
+      // gradedNudges_ folds it; baseTag_ strips it back to the kind for pulse/registry readers). No sign, no line.
+      var dm = /^dial:([a-z]+):(up|down)$/.exec(entryDial || '');
+      if (!dm) {
+        S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+        S.engine299.noDial++;
+        var nkey = 'runNeighborhoodEngine:' + eventTag + (hoodTraj ? ':' + hoodTraj : ':no-trajectory');
+        S.engine299.noDialBySource[nkey] = (S.engine299.noDialBySource[nkey] || 0) + 1;
+        continue;
+      }
+      eventTag = eventTag + '-' + dm[1].charAt(0).toUpperCase() + dm[1].slice(1) + '-' + (dm[2] === 'up' ? 'Up' : 'Down') + '-S';
 
       // Stamp entry
       var stamp = inWorldStamp_(ctx);

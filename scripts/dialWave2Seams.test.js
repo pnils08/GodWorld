@@ -121,8 +121,10 @@ for (const [resolution, personnel] of [['POPID', 'POP-99001 (Synthetic Nonmatchi
     JSON.stringify({ resolved: counts(resolved, 'RoutineRetrenched'), ambiguous: counts(ambiguous, 'RoutineRetrenched') }));
 }
 
-// S451 (builder ruling 2026-09-13): the hood-rank retag is GONE. The ordinary hood line stays a plain
-// `Neighborhood` line whatever the hood's rank; only a PERSISTED pressure bar still tints it (engine.176).
+// S451 (builder ruling 2026-09-13): the hood-rank retag is GONE — rank never decides a line. engine.299
+// (builder 2026-10-18): the ordinary hood line is a reaction to the hood, so it carries the hood's own
+// TRAJECTORY as its sign (growth → Neighborhood-Outabout-Up-S, decay → -Down-S); a hood that did not move
+// gives no sign and the line is not written. Only a PERSISTED pressure bar still tints Friction (engine.176).
 for (const pressure of ['housingPressure', 'crimeIndex']) {
   const rows = [citizen('POP-99001', 'Synthetic', 'Alpha', 'Synthetic Hood A'),
     citizen('POP-99002', 'Synthetic', 'Beta', 'Synthetic Hood B')];
@@ -130,8 +132,8 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
     const ctx = context(rows.map(r => r.slice())); ctx.rng = () => 0;
     ctx.config.dialHoodPressureBar = 2; ctx.config.dialHoodCrimeBar = 2; // engine.212: crime bar = 2 × city median (0.5 → 1.0)
     ctx.summary.neighborhoodState = {
-      'Synthetic Hood A': { retailVitality: 10, eventAttractiveness: 90, housingPressure: 0, crimeIndex: 0.5 },
-      'Synthetic Hood B': { retailVitality: 70, eventAttractiveness: 20, housingPressure: 0, crimeIndex: 0.5 },
+      'Synthetic Hood A': { retailVitality: 10, eventAttractiveness: 90, housingPressure: 0, crimeIndex: 0.5, trajectory: 'growth' },
+      'Synthetic Hood B': { retailVitality: 70, eventAttractiveness: 20, housingPressure: 0, crimeIndex: 0.5, trajectory: 'decay' },
       'Synthetic Hood C': { retailVitality: 20, eventAttractiveness: 20, housingPressure: 0, crimeIndex: 0.5 },
       'Synthetic Hood D': { retailVitality: 10, eventAttractiveness: 10, housingPressure: 0, crimeIndex: 0.5 }
     };
@@ -140,10 +142,20 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
     return { ctx, tags: writes.filter(x => x.tab === 'LifeHistory_Log').map(x => x.row[3]) };
   }
   const ordinary = neighborhoodRun(false), stressed = neighborhoodRun(true);
-  assert(`S451 a top-band hood's ordinary line is a plain Neighborhood line (no ActivityExpanded); ${pressure} still tints Friction`,
-    JSON.stringify(ordinary.tags) === '["Neighborhood","Neighborhood"]' &&
+  assert(`S451/engine.299 the hood line carries the hood's trajectory, never its rank (growth Up, decay Down); ${pressure} still tints Friction`,
+    JSON.stringify(ordinary.tags) === '["Neighborhood-Outabout-Up-S","Neighborhood-Outabout-Down-S"]' &&
     stressed.tags[0] === 'Friction' && counts(stressed.ctx, 'Friction')[0] === 1,
     JSON.stringify({ ordinary: ordinary.tags, stressed: stressed.tags }));
+  // engine.299: a hood with no trajectory gives the line no sign — nothing written, the skip counted.
+  {
+    const ctx = context(rows.map(r => r.slice())); ctx.rng = () => 0;
+    ctx.config.dialHoodPressureBar = 2; ctx.config.dialHoodCrimeBar = 2;
+    ctx.summary.neighborhoodState = { 'Synthetic Hood A': { housingPressure: 0, crimeIndex: 0.5 }, 'Synthetic Hood B': { housingPressure: 0, crimeIndex: 0.5 } };
+    writes.length = 0; w.runNeighborhoodEngine_(ctx);
+    const still = writes.filter(x => x.tab === 'LifeHistory_Log').map(x => x.row[3]);
+    const skipped = ctx.summary.engine299 ? ctx.summary.engine299.noDialBySource['runNeighborhoodEngine:Neighborhood:no-trajectory'] : 0;
+    assert(`engine.299 a hood that did not move writes no hood line (${pressure} run); the skip is counted`, still.length === 0 && skipped === 2, JSON.stringify({ still, skipped }));
+  }
 }
 {
   const gc = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens/generateCitizensEvents.js'), 'utf8');
@@ -229,9 +241,10 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
     JSON.stringify([M('ActivityExpanded'), M('ActivityContracted'), M('StreetsGuarded')]));
   const rows = [citizen('POP-99001', 'Synthetic', 'Alpha', 'H')];
   const ctx = context(rows); ctx.rng = () => 0; Object.assign(ctx.config, cfg.config); ctx.summary.neighborhoodState = st;
+  ctx.summary.neighborhoodState.H = Object.assign({}, ctx.summary.neighborhoodState.H, { trajectory: 'growth' });   // engine.299: the hood moved
   writes.length = 0; w.runNeighborhoodEngine_(ctx);
   const tags = writes.filter(x => x.tab === 'LifeHistory_Log').map(x => x.row[3]);
-  assert('S451 the neighborhood engine writes a plain Neighborhood line for a bottom-quarter resident', tags[0] === 'Neighborhood', JSON.stringify(tags));
+  assert('S451/engine.299 a bottom-quarter resident\'s hood line carries the hood\'s trajectory, not the rank', tags[0] === 'Neighborhood-Outabout-Up-S', JSON.stringify(tags));
 }
 {
   // S451 (builder ruling): a base read AT a pole is read back AS IS — the five seeded 100s are not remapped.

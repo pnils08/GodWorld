@@ -181,6 +181,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 08:30 rb CHECK es STALLED (Fable limit since 06:29; no change). codex idle (cleared). No new inbox. rb NEXT: 08:00 NotebookLM daily cron PASSED (brief/audio/Drive/Discord C111; ops report timed out, non-blocking) → NEXT[research-build] updated.
 09:30 rb CHECK es STALLED (Fable limit since 06:29; idle prompt, no change). codex idle (cleared; <25% weekly left). agy idle. No new review files, no new commits. Nothing unblocked; waiting on builder `/model opus` in engine-sheet (§6).
 10:30 rb CHECK es STALLED (Fable limit since 06:29; idle prompt, no change). codex/agy idle. No new review files or commits. Nothing unblocked; waiting on builder `/model opus` (§6).
+11:24 rb VERIFY es resumed on Opus 11:14. 540f53f0 (T3 agy fold + T4 wave C): rb bespoke constant byte-identical to rb's data. 4fe2e9b9 (codex T7 + alias allowlist): three read-alias entries present (compressLifeHistory, generateCitizensEvents, resonanceRecall); East Oakland character = INSTITUTIONS.md:392 verbatim. es owns codex (review of both commits, then T4C). Bench 1004 @47 C112 fires 11:30; PROD stays 4n for Sunday. rb §6 lines stand, no new ones.
 
 ## 8. Stop rule and usage
 

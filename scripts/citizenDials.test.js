@@ -233,6 +233,7 @@ console.log('═══ Section X — engine.299 graded form: every event that fi
   assert('X5 severityMult scales the graded delta', M.nudgesForEvent_('Daily-Family-Up-M', 2).family === 4);
   assert('X6 a bare history kind still maps to {} (never re-valued)', Object.keys(M.nudgesForEvent_('Neighborhood', 1)).length === 0 && Object.keys(M.nudgesForEvent_('Daily', 1)).length === 0);
   assert('X7 an unknown dial name is not a graded tag', M.gradedNudges_('Daily-Mood-Up-S') === null && M.gradedTag_('Daily', 'mood', true, 'S') === '');
+  assert('X9 PostCareer sub-tags carry deltas; Advancement and Death are declared structural', M.nudgesForEvent_('PostCareer-Travel', 1).openness === 2 && M.nudgesForEvent_('PostCareer-Wellness', 1).composure === 3 && M.STRUCTURAL.Advancement === true && M.STRUCTURAL.Death === true && Object.keys(M.nudgesForEvent_('Advancement', 1)).length === 0);
   assert('X8 a real compound key is not mistaken for the graded form', M.nudgesForEvent_('CivicRole-Up-M', 1).drive === 2 && M.baseTag_('Career-Transition') === 'Career-Transition');
 }
 

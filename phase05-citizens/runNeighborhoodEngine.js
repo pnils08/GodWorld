@@ -52,98 +52,138 @@
 // (a label with no pool throws); the twelve original hoods keep their bespoke
 // lines on top. Resolved by hoodTexturePool_ (canonNeighborhoodLoader.js).
 // ═══════════════════════════════════════════════════════════════════════════
+// engine.299 Task 3 (agy 2026-10-18, HIGH): a texture line carries ITS OWN direction — ["text", "up"|"down"]
+// where the line says the hood is livelier (up) or quieter (down); a plain string says neither and is never
+// written. The hood's trajectory then PICKS from the lines that match it (growth → up lines, decay → down
+// lines); it never stamps a sign on a line that does not say it. Lines that assert a fact the row does not
+// carry (game-day crowds without Sports_Feed, cranes and a boom, a new mural, clinic crowds, campus construction)
+// stay unsigned — agy (a). Down lines for decay hoods are this city's own quieter streets, never a decline premise.
 var NEIGHBORHOOD_DRIFT_BY_CHARACTER_ = {
-  'institutional': ["noticed the civic buildings emptying out at dusk", "felt the neighborhood's official rhythm shift", "observed lines forming outside a public office"],
+  'institutional': [["noticed the civic buildings emptying out at dusk", "down"], "felt the neighborhood's official rhythm shift", ["observed lines forming outside a public office", "up"]],
   'clinic': ["noticed more people heading toward the clinics", "felt the neighborhood's weary, caring pace", "observed a health worker finishing a long shift"],
-  'schools-retail': ["noticed the after-school rush on the main street", "felt the block settle once the school bells finished", "observed parents talking outside the corner shops"],
-  'campus': ["noticed the campus crowd spilling onto the sidewalks", "felt the neighborhood's young, restless energy", "observed new construction beside the old blocks"],
-  'transit-retail': ["noticed the station crowd thinning after rush hour", "felt the neighborhood's constant coming and going", "observed vendors packing up near the transit stop"],
-  'nightlife': ["noticed the bars filling earlier than usual", "felt the neighborhood's evening energy rise", "observed the night crowd gathering on the corners"],
-  'professional': ["noticed the office crowd leaving in step", "felt the neighborhood's orderly hum", "observed shoppers lingering along the main avenue"],
-  'residential': ["noticed neighbors talking across a fence", "felt the block's quiet settle in", "observed porch lights coming on down the street"],
-  'retail': ["noticed the shops changing their window displays", "felt the neighborhood's shopping-day bustle", "observed a line outside a popular storefront"],
-  'medical': ["noticed hospital shift change on the sidewalks", "felt the neighborhood's steady, tended rhythm", "observed a scrubs-clad crowd at the coffee counter"],
-  'family-retail': ["noticed families filling the market street", "felt the neighborhood's generations mixing", "observed shopkeepers greeting regulars by name"],
-  'mixed': ["noticed apartments and storefronts sharing the block", "felt the neighborhood's patchwork rhythm", "observed the corner store doing steady business"],
-  'village-retail': ["noticed the village main street winding down", "felt the neighborhood's small-town pace", "observed regulars gathering outside the bakery"],
-  'service-labor': ["noticed the early shift heading out before dawn", "felt the neighborhood's working rhythm", "observed workers gathering at the bus stop"],
-  'arts': ["noticed a new mural going up on the corridor", "felt the neighborhood's creative pulse", "observed a gallery crowd drifting between openings"],
+  'schools-retail': [["noticed the after-school rush on the main street", "up"], ["felt the block settle once the school bells finished", "down"], ["observed parents talking outside the corner shops", "up"]],
+  'campus': [["noticed the campus crowd spilling onto the sidewalks", "up"], "felt the neighborhood's young, restless energy", "observed new construction beside the old blocks"],
+  'transit-retail': [["noticed the station crowd thinning after rush hour", "down"], "felt the neighborhood's constant coming and going", ["observed vendors packing up near the transit stop", "down"]],
+  'nightlife': [["noticed the bars filling earlier than usual", "up"], ["felt the neighborhood's evening energy rise", "up"], ["observed the night crowd gathering on the corners", "up"]],
+  'professional': [["noticed the office crowd leaving in step", "down"], "felt the neighborhood's orderly hum", ["observed shoppers lingering along the main avenue", "up"]],
+  'residential': [["noticed neighbors talking across a fence", "up"], ["felt the block's quiet settle in", "down"], "observed porch lights coming on down the street"],
+  'retail': ["noticed the shops changing their window displays", ["felt the neighborhood's shopping-day bustle", "up"], ["observed a line outside a popular storefront", "up"]],
+  'medical': ["noticed hospital shift change on the sidewalks", "felt the neighborhood's steady, tended rhythm", ["observed a scrubs-clad crowd at the coffee counter", "up"]],
+  'family-retail': [["noticed families filling the market street", "up"], ["felt the neighborhood's generations mixing", "up"], ["observed shopkeepers greeting regulars by name", "up"]],
+  'mixed': ["noticed apartments and storefronts sharing the block", "felt the neighborhood's patchwork rhythm", ["observed the corner store doing steady business", "up"]],
+  'village-retail': [["noticed the village main street winding down", "down"], "felt the neighborhood's small-town pace", ["observed regulars gathering outside the bakery", "up"]],
+  'service-labor': ["noticed the early shift heading out before dawn", "felt the neighborhood's working rhythm", ["observed workers gathering at the bus stop", "up"]],
+  'arts': ["noticed a new mural going up on the corridor", "felt the neighborhood's creative pulse", ["observed a gallery crowd drifting between openings", "up"]],
   'stadium': ["noticed game-day crowds moving toward the arena", "felt the district's pregame anticipation", "observed vendors setting up along the concourse"],
   'construction': ["noticed cranes swinging over the boom blocks", "felt the neighborhood's build-out energy", "observed a new frame rising where a lot stood empty"]
 };
 
 var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
+  // engine.299 Task 3 (rb, data): ["text", "up"|"down"] = the line says the hood is livelier / quieter
+  // and is drawn only when the hood's trajectory matches (growth up, decay down); a plain string says
+  // neither and is never written. Down lines are this city's own trend — quieter streets, earlier
+  // closings, thinner crowds — never a decline premise (Neighborhood_Map + INSTITUTIONS §Neighborhoods).
   'Temescal': [
     "noticed the creative energy shifting in Temescal",
     "felt Temescal's community vibe change slightly",
-    "observed new activity around Temescal's cafes",
-    "sensed the neighborhood's artistic pulse"
+    ["observed new activity around Temescal's cafes", "up"],
+    ["sensed the neighborhood's artistic pulse", "up"],
+    ["noticed a few Telegraph cafes closing earlier than they used to", "down"],
+    ["found an open table at a Temescal spot that usually has a wait", "down"],
+    ["walked Telegraph on a Saturday and found the sidewalks thinner than usual", "down"]
   ],
   'Downtown': [
-    "felt Downtown's urban rhythm intensify",
+    ["felt Downtown's urban rhythm intensify", "up"],
     "noticed shifting crowds in the city center",
     "observed changes in Downtown foot traffic",
-    "sensed the business district's mood"
+    "sensed the business district's mood",
+    ["noticed the plaza by City Hall emptying out earlier after work", "down"],
+    ["found the lunch line on Broadway short for once", "down"],
+    ["rode a tower elevator alone at an hour it is usually full", "down"]
   ],
   'Fruitvale': [
-    "felt Fruitvale's cultural energy",
+    ["felt Fruitvale's cultural energy", "up"],
     "noticed community gathering patterns shift",
     "observed the neighborhood's familiar rhythms",
-    "sensed changes in the local atmosphere"
+    "sensed changes in the local atmosphere",
+    ["noticed the strip by the transit hub quieter than it was a season ago", "down"],
+    ["saw a few platform-side shops keeping shorter hours", "down"],
+    ["caught a nearly empty train car out of Fruitvale at rush hour", "down"]
   ],
   'Lake Merritt': [
     "noticed activity patterns around the lake",
     "felt the lakeside community's mood",
-    "observed joggers and families by Lake Merritt",
-    "sensed the peaceful energy near the water"
+    ["observed joggers and families by Lake Merritt", "up"],
+    "sensed the peaceful energy near the water",
+    ["had the lake path nearly to themselves on an evening it is usually crowded", "down"],
+    ["noticed fewer boats out on the lake than a usual weekend", "down"]
   ],
   'West Oakland': [
     "noticed West Oakland's industrial rhythm",
     "felt the neighborhood's changing landscape",
     "observed development activity nearby",
-    "sensed the area's evolving character"
+    "sensed the area's evolving character",
+    ["noticed the converted-warehouse cafes on the block busier than last season", "up"],
+    ["noticed the rail-yard lunch spots quieter than usual this week", "down"],
+    ["passed a warehouse campus with its lot half empty on a weekday", "down"]
   ],
   'Laurel': [
     "appreciated Laurel's residential calm",
     "noticed the quiet neighborhood's subtle shifts",
     "felt the local community's steady presence",
-    "observed familiar faces on the street"
+    "observed familiar faces on the street",
+    ["noticed more neighbors out along MacArthur on a weekend afternoon", "up"],
+    ["noticed the corner shops on MacArthur closing up early", "down"],
+    ["walked the whole block without passing a neighbor", "down"]
   ],
   'Rockridge': [
     "noticed Rockridge's upscale atmosphere",
     "felt the tree-lined streets' ambiance",
-    "observed shoppers along College Ave",
-    "sensed the neighborhood's refined energy"
+    ["observed shoppers along College Ave", "up"],
+    "sensed the neighborhood's refined energy",
+    ["found parking on College Ave on a Saturday, which never happens", "down"],
+    ["noticed the College Ave shops quieter than a usual weekend", "down"]
   ],
   'Jack London': [
-    "felt Jack London's waterfront energy",
-    "noticed nightlife activity picking up",
-    "observed the arts district's creative buzz",
-    "sensed the estuary's calming presence"
+    ["felt Jack London's waterfront energy", "up"],
+    ["noticed nightlife activity picking up", "up"],
+    ["observed the arts district's creative buzz", "up"],
+    "sensed the estuary's calming presence",
+    ["noticed the waterfront venues letting out early on a Friday", "down"],
+    ["got a table at a Jack London restaurant without a reservation", "down"],
+    ["found the estuary promenade thinner than a usual evening", "down"]
   ],
   'Uptown': [
-    "felt Uptown's urban arts energy",
-    "noticed gallery-goers and theater crowds",
-    "observed the neighborhood's creative pulse",
-    "sensed the cultural district's momentum"
+    ["felt Uptown's urban arts energy", "up"],
+    ["noticed gallery-goers and theater crowds", "up"],
+    ["observed the neighborhood's creative pulse", "up"],
+    ["sensed the cultural district's momentum", "up"],
+    ["noticed the Uptown bars emptying out earlier than they used to", "down"],
+    ["walked past a theater on a show night and found no line", "down"]
   ],
   'KONO': [
     "noticed KONO's artistic atmosphere",
     "felt the Koreatown-Northgate creative vibe",
-    "observed murals and street art activity",
-    "sensed the neighborhood's DIY spirit"
+    ["observed murals and street art activity", "up"],
+    "sensed the neighborhood's DIY spirit",
+    ["noticed fewer people along the Telegraph corridor after dark", "down"],
+    ["noticed the corridor's late-night spots closing a little earlier", "down"]
   ],
   'Chinatown': [
-    "felt Chinatown's bustling energy",
-    "noticed the busy morning markets",
-    "observed multigenerational community activity",
-    "sensed the neighborhood's cultural rhythms"
+    ["felt Chinatown's bustling energy", "up"],
+    ["noticed the busy morning markets", "up"],
+    ["observed multigenerational community activity", "up"],
+    "sensed the neighborhood's cultural rhythms",
+    ["noticed the morning market lines shorter than usual", "down"],
+    ["found the dim sum hall half full on a weekend", "down"]
   ],
   'Piedmont Ave': [
     "noticed Piedmont Ave's leafy calm",
     "felt the neighborhood's boutique atmosphere",
-    "observed afternoon strollers along the avenue",
-    "sensed the area's residential tranquility"
+    ["observed afternoon strollers along the avenue", "up"],
+    "sensed the area's residential tranquility",
+    ["noticed the avenue's boutiques quieter than a usual afternoon", "down"],
+    ["saw the avenue's cafes clearing out early", "down"]
   ]
 };
 
@@ -489,9 +529,21 @@ function runNeighborhoodEngine_(ctx) {
       // and the line is not written (counted in S.engine299.noDialBySource). The context lines say their
       // own direction. The pool holds { t: text, d: "dial:<dial>:<up|down>" | null }.
       var hoodTraj = String((S.neighborhoodState && S.neighborhoodState[neighborhood] && S.neighborhoodState[neighborhood].trajectory) || '').toLowerCase();
-      var hoodSign = hoodTraj === 'growth' ? 'dial:outabout:up' : (hoodTraj === 'decay' ? 'dial:outabout:down' : null);
+      var hoodDir = hoodTraj === 'growth' ? 'up' : (hoodTraj === 'decay' ? 'down' : null);
       var signed_ = function(texts, d) { var out = []; for (var ti = 0; ti < texts.length; ti++) out.push({ t: texts[ti], d: d }); return out; };
-      var eventPool = signed_(hoodTexturePool_(ctx, neighborhood, NEIGHBORHOOD_DRIFT_BY_CHARACTER_, NEIGHBORHOOD_DRIFT_BESPOKE_, 'runNeighborhoodEngine_'), hoodSign);
+      // texture: keep only the lines whose own direction matches the hood's trajectory (agy HIGH, 2026-10-18)
+      var textureSigned_ = function(items, dir) {
+        var out = [];
+        for (var ti = 0; ti < items.length; ti++) {
+          var it = items[ti];
+          var txt = Array.isArray(it) ? it[0] : it;
+          var d = Array.isArray(it) ? it[1] : null;
+          if (!dir || !d) { out.push({ t: txt, d: null }); continue; }     // unsigned line or unmoved hood: never written
+          if (d === dir) out.push({ t: txt, d: 'dial:outabout:' + d });
+        }
+        return out;
+      };
+      var eventPool = textureSigned_(hoodTexturePool_(ctx, neighborhood, NEIGHBORHOOD_DRIFT_BY_CHARACTER_, NEIGHBORHOOD_DRIFT_BESPOKE_, 'runNeighborhoodEngine_'), hoodDir);
       var eventTag = "Neighborhood";
 
       // Add holiday-specific events (v2.2) — a day out in the hood

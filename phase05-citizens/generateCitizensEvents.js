@@ -2401,11 +2401,14 @@ function generateCitizensEvents_(ctx) {
       var hhParts = hhRaw.split("|");
       var hhText = hhParts[0];
       var hhKind = hhParts[1] || "quiet";
+      // engine.299: the shared moment carries the dial it moves — a quiet moment and a celebration are the
+      // family's closeness (Daily-Family-Up-S); a crisis is the house holding its breath (Daily-Composure-Down-S).
+      var hhPrimary = (hhIsCrisis && hhKind === "crisis") ? "Daily-Composure-Down-S" : "Daily-Family-Up-S";
       var hhTagStr = hhIsCrisis
-        ? "Daily|source:familyLife|family:household|household:" + hhKind
-        : "Daily|source:familyLife|family:household|household:quiet";
+        ? hhPrimary + "|source:familyLife|family:household|household:" + hhKind
+        : hhPrimary + "|source:familyLife|family:household|household:quiet";
       var hhStamp = inWorldStamp_(ctx);
-      var hhLine = hhStamp + " — [Daily] " + hhText;
+      var hhLine = hhStamp + " — [" + hhPrimary + "] " + hhText;
       var hhHoodAny = "";
       for (var hmi = 0; hmi < hhIdx.length; hmi++) {
         var hmRow = rows[hhIdx[hmi]];

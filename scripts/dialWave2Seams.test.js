@@ -18,7 +18,8 @@ const w = {
   queueAppendIntent_: (ctx, tab, row) => writes.push({ tab, row: row.slice() }),
   queueCellIntent_: () => {}, queueRangeIntent_: () => {}, queueEnsureTabIntent_: () => {},
   getCoreSimNeighborhoods_: ctx => Object.keys(ctx.summary.neighborhoodState || {}),
-  hoodTexturePool_: () => ['Synthetic ordinary neighborhood encounter']
+  // engine.299: texture lines carry their own direction; the hood's trajectory picks the matching ones
+  hoodTexturePool_: () => [['Synthetic livelier neighborhood encounter', 'up'], ['Synthetic quieter neighborhood encounter', 'down']]
 };
 vm.createContext(w);
 for (const rel of ['utilities/citizenMemory.js', 'utilities/citizenDialMap.js', 'utilities/compressLifeHistory.js',

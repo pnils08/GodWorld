@@ -192,11 +192,17 @@ function buildOffenders({ log, ecl, sources, resolver, cycle, sheet = 'live', ge
     }
   }
   const inert = { total: 0, share: 0, byTag: {}, byEngine: {}, codeSites: [] };
+  // engine.299: a DECLARED structural marker (citizenDialMap STRUCTURAL === true — Compressed, CareerState,
+  // Advancement, Death) is a record of state, not a lived day; it is reported here, never hidden, and does
+  // not count as inert texture against acceptance.
+  const structural = { total: 0, byTag: {} };
   const bump = (obj,k) => { Object.defineProperty(obj, k, { value: (Object.hasOwn(obj,k) ? obj[k] : 0) + 1, enumerable: true, configurable: true, writable: true }); };
   for (const r of scanned) {
     // Generator logs primaryTag|context; only the first part is the cell tag.
     const tag = String(r.EventTag).split('|')[0].trim();
     if (Object.keys(resolver.nudgesForEvent_(tag, 1, String(r.EventText))).length) continue;
+    const base = typeof resolver.baseTag_ === 'function' ? resolver.baseTag_(tag) : tag;
+    if (resolver.STRUCTURAL && resolver.STRUCTURAL[base] === true) { structural.total++; bump(structural.byTag, base); continue; }
     inert.total++; bump(inert.byTag, tag || '(blank)');
     let engine = String(r.SourceEngine || r.Engine || '').trim();
     if (!engine) {
@@ -242,7 +248,7 @@ function buildOffenders({ log, ecl, sources, resolver, cycle, sheet = 'live', ge
     if (PREMISE.test(hit.text)) premise.push(hit);
     if (LIFE.test(hit.text)) lifeVerbs.push(hit);
   }
-  return { generatedAt, sheet, cycle: selected, scannedLines: scanned.length, inert, premise, lifeVerbs,
+  return { generatedAt, sheet, cycle: selected, scannedLines: scanned.length, inert, structural, premise, lifeVerbs,
     acceptanceEmpty: inert.total === 0 && !premise.some(h => !h.allowed) && !lifeVerbs.some(h => !h.allowed) };
 }
 async function offenders(root, liveId, benchId, cycle) {
@@ -264,7 +270,7 @@ async function offenders(root, liveId, benchId, cycle) {
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.writeFileSync(dest, JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ sheet: report.sheet, cycle: report.cycle, scannedLines: report.scannedLines,
-    inert: report.inert.total, share: report.inert.share, premise: report.premise.length, lifeVerbs: report.lifeVerbs.length,
+    inert: report.inert.total, share: report.inert.share, structural: report.structural ? report.structural.total : 0, premise: report.premise.length, lifeVerbs: report.lifeVerbs.length,
     acceptanceEmpty: report.acceptanceEmpty, incomplete: !!report.incomplete }));
 }
 module.exports = { buildOffenders, fragments, readSources, ALLOWLIST };

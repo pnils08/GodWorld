@@ -104,6 +104,12 @@ var DIAL_MAP = {
   'Maneuver-Retreat':   { composure: 2, family: 1 },
   'Maneuver-Hold':      { composure: 1 },
   'PostCareer':         { family: 4, openness: 2 },
+  // engine.299: the as-universe pipeline's post-career sub-tags (runAsUniversePipeline.js :541–551) — each says what it moves.
+  'PostCareer-Travel':     { openness: 2, outabout: 2 },
+  'PostCareer-Influence':  { sociability: 3 },
+  'PostCareer-Community':  { sociability: 2, warmth: 2 },
+  'PostCareer-Fundraiser': { integrity: 2, sociability: 2 },
+  'PostCareer-Wellness':   { composure: 3 },
   'Career-Layoff':      { composure: -5, drive: -2 },  // engine.176: a layoff is a Setback with a drive cost (applyBusinessDynamics sheds)
   'Career-Hired':       { drive: 4, composure: 2 },    // engine.201 W1a: rehire matcher — reaches the LifeHistory cell since S449
   'Career-FieldChange': { drive: 3, openness: 3 },     // engine.201 W1a: a hire into a new field (same shape as Career-Transition)
@@ -245,7 +251,10 @@ function pressureCauseOfText_(text) {
 }
 
 // Structural markers — summaries/state, NOT events. The only legitimately inert tags.
-var STRUCTURAL = { 'Compressed': true, 'CareerState': true, 'EngineEvent': false };
+var STRUCTURAL = { 'Compressed': true, 'CareerState': true, 'EngineEvent': false,
+  // engine.299 (2026-10-18): two more markers, declared so the offender scan reports them apart from inert texture —
+  'Advancement': true,   // the intake stamp ("Intake at Tier N", processAdvancementIntake) — a record of the ledger move, not a lived day
+  'Death': true };       // the decedent's own line (generationalEventsEngine); the bereaved carry Bereaved, which moves
 // (EngineEvent carries real content in its text -> content-routed, not inert.)
 
 // Edition citations (E80, E83, E86-S1, ...) = newsroom coverage -> public recognition.

@@ -134,7 +134,7 @@ console.log('═══ engine.144 loop 3 — youth-mode gate (S411)');
     const rows = [mk('POP-A' + i, 1990), mk('POP-K' + i, 2032)];
     const ctx = makeCtx(rows, mulberry32(i + 99)); ctx.ledger.headers = H2.slice(); ctx.summary.simYear = 2042;
     generateCitizensEvents_(ctx);
-    if (/\[Daily\]/.test(String(rows[1][HEADERS.indexOf('LifeHistory')] || ''))) kidHH++;
+    if (/\[Daily(-[A-Za-z]+-(Up|Down)-S)?\]/.test(String(rows[1][HEADERS.indexOf('LifeHistory')] || ''))) kidHH++;   // engine.299: the shared moment is graded
   }
   assert('Y.7 household shared moment still lands on the kid (family-level)', kidHH > 0, String(kidHH));
 }

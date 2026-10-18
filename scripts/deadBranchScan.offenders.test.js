@@ -22,10 +22,11 @@ const sources = {
 const report = buildOffenders({ log, ecl, sources, resolver, sheet: 'bench', generatedAt: 'synthetic' });
 assert.equal(report.cycle, 111);
 assert.equal(report.scannedLines, 3);
-assert.equal(report.inert.total, 2); // structural is still inert, no hidden exemption
-assert.equal(report.inert.share, 2/3);
-assert.deepEqual(report.inert.byTag, { Daily: 1, Compressed: 1 });
-assert.deepEqual(report.inert.byEngine, { syntheticEngine: 2 });
+assert.equal(report.inert.total, 1); // engine.299: a declared structural marker is reported apart, never hidden
+assert.equal(report.structural.total, 1); assert.deepEqual(report.structural.byTag, { Compressed: 1 });
+assert.equal(report.inert.share, 1/3); // engine.299: the structural marker is reported apart
+assert.deepEqual(report.inert.byTag, { Daily: 1 });
+assert.deepEqual(report.inert.byEngine, { syntheticEngine: 1 }); // engine.299: the structural line is counted apart
 assert(report.inert.codeSites.some(s => s.tag === 'Daily' && s.line === 1));
 assert(report.premise.some(h => h.kind === 'string' && h.text === 'SYNTHETIC priced out'));
 assert(report.premise.some(h => h.allowed && h.kind === 'comment' && h.reason.includes('ordering')));

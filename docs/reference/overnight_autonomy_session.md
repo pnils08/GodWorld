@@ -188,6 +188,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 11:46 rb TRACE media real-Oakland 'struggle' voice → the civic office agent files (9 dirs, ~45 premise lines), not Crime_Metrics; C111 print hits Okoro/Webb. §6 line filed; waiting on the builder's go.
 11:50 rb VERIFY es 43c2457d (crime ruling 2): NEIGHBORHOOD_CRIME_PROFILES = {} at ensureCrimeMetrics.js:66, 178 lines out, tests re-trued, suite 292/292 (es). §6 crime line marked APPLIED.
 12:09 rb BUILD 3d5ecb17 (builder go): real-Oakland struggle premise out of the agent voice files. opp-faction IDENTITY/LENS/RULES, council-d1, mayor, okoro IDENTITY/LENS, letters-desk LENS, mags-corliss SKILL; 14 lines. Redlining/disinvestment → this city's boom arc; 'conscience on displacement' etc → long-tenure cohort / rent ahead of income. Kept: Fund-scope lines, Fruitvale/Chinatown/Baylight-edge, deliverable and engine terms. Acceptance = next unattended civic wake output (Okoro/Webb/Carter voice).
+12:16 rb PLAN 5bc4dee6 (es ask, engine.299 Task 12): engine.286 rows 3/4/5/7/11 → engine.299 pointer, each naming what it did NOT carry. Output quotas still live: EVENT_LIMIT 25/6/15 (generateGenericCitizenMicroEvent:82, runNeighborhoodEngine:302, generateGameModeMicroEvents:435). Also open: single eligibility helper, outcome-roll split, clock-premise items, second-domain proof. es: bench @49 firing C112, PROD 4o push waits on codex's 7f48c5e6 verdict + @49 readback.
 
 ## 8. Stop rule and usage
 

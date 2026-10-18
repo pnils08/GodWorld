@@ -174,14 +174,14 @@ console.log('\nTest 8: validateVehicleConfig scans full textureOutcomes[]');
 // ────────────────────────────────────────────────────────────────────────────
 // Test 9: VEHICLE_CONFIGS table — §S265 finalized shape
 // ────────────────────────────────────────────────────────────────────────────
-console.log('\nTest 9: VEHICLE_CONFIGS finalized 11-vehicle table');
+console.log('\nTest 9: VEHICLE_CONFIGS finalized 12-vehicle table');
 {
   const cfgs = helper.loadChaosCarsConfig_();
   assert('loadChaosCarsConfig_ returns the array', cfgs === helper.VEHICLE_CONFIGS);
-  assert('exactly 11 vehicles', cfgs.length === 11);
+  assert('exactly 12 vehicles (engine.290 Task 5 added bart_train)', cfgs.length === 12);
 
   const EXPECTED = ['cop_car', 'fire_engine', 'ambulance', 'oari_van', 'building_inspector',
-    'garbage_truck', 'mail_truck', 'ice_cream_truck', 'street_sweeper', 'pge_truck', 'cargo_ship'];
+    'garbage_truck', 'mail_truck', 'ice_cream_truck', 'street_sweeper', 'pge_truck', 'cargo_ship', 'bart_train'];
   const names = cfgs.map((c) => c.name);
   for (const n of EXPECTED) assert(`vehicle "${n}" present`, names.indexOf(n) >= 0);
 

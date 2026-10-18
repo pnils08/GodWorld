@@ -305,7 +305,7 @@ var VEHICLE_CONFIGS = [
     ]
   },
   {
-    name: 'pge_truck', displayName: 'PG&E truck',
+    name: 'pge_truck', displayName: 'Estuary Power & Gas truck',   // BIZ-00032, builder 2026-10-18: the canon utility (key kept)
     scopes: ['neighborhood', 'business'], baseFrequencyWeight: 0.7,
     textureOutcomes: [
       { outcome: 'planned_shutoff',        weight: 0.45, severity: 'low',  bizEvent: -0.25 },

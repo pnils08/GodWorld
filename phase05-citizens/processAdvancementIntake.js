@@ -1580,7 +1580,7 @@ var MINT_KEYWORD_RULES = [
   ['Housing Authority', 'BIZ-00034'], ['Homeless Outreach', 'BIZ-00034'], ['Shelter Director', 'BIZ-00034'],
   ['Reentry', 'BIZ-00034'], ['Editor-in-Chief', 'BIZ-00018'], ['Journalist', 'BIZ-00018'], ['Reporter', 'BIZ-00018'],
   ['Desk Reporter', 'BIZ-00018'], ['Columnist', 'BIZ-00018'], ['Photographer', 'BIZ-00018'],
-  ['Sideline Reporter', 'BIZ-00018'], ['PG&E', 'BIZ-00032'], ['Baylight', 'BIZ-00020'],
+  ['Sideline Reporter', 'BIZ-00018'], ['PG&E', 'BIZ-00032'], ['Estuary Power', 'BIZ-00032'], ['Baylight', 'BIZ-00020'],
   ['Parks and Recreation', 'BIZ-00027'], ['Park Ranger', 'BIZ-00031'], ['Welding Instructor', 'BIZ-00035'],
   ['Community College', 'BIZ-00035'], ['Pastry Chef', 'BIZ-00043'], ['Line Cook', 'BIZ-00044'],
   ['Bartender', 'BIZ-00036'], ['Sommelier', 'BIZ-00043'], ['DJ$', 'BIZ-00039'], ['OEWD', 'BIZ-00094'],

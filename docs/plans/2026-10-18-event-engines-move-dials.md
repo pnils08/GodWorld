@@ -21,7 +21,11 @@ pointers:
 
 **Builder's correction (2026-10-18, verbatim, minutes later):** "I did not say events should move a life , I never said that I said move a dial, this whole review is garbage already"
 
-**Reading (es):** the test for every line an engine throws is *does it move one of the nine dials, by what it says, for this citizen* — not whether it changes a row state. A divorce or a promotion are named as events that already change a citizen; they are the contrast, not the target. The target is the hardcoded pools that throw color (no dial, no cause from the row or the hood) and any pool that imports real-world Oakland hardship. The map is the land mass and the landmarks only.
+**Builder's second correction (2026-10-18, verbatim):** "Every event that always exists dms move a dial so it's not something complicated and if you don't understand what I mean this is useless just quit"
+
+**Builder's third correction (2026-10-18, verbatim):** "What I'm saying is not event would have a divorce or a promotion , that happens somewhere else not as a color event , this is a waste of time you aren't following what I said at all"
+
+**Reading (es, after all three):** two offender classes in the hardcoded pools, one rule for what stays. (1) A color line that *says* a life event happened — a divorce, a promotion, a layoff, a hire, a birth, a death, a wedding, a hospital stay, a move, a home bought or lost — when the row did not change. Those events happen in their owning engines (career, bonds, household, generational, money) and change the citizen there; a pool never narrates one. Cut. (2) A line that reads real-world Oakland hardship. Cut. What stays: every line that fires moves a dial, by what it says, for this citizen — differentiated by their row (debt, tier, net worth), everyday lines small and often, big ones rare.
 
 **Goal:** every event engine on the cycle path throws lines that move a dial by their content, differentiated by the citizen's own row (DebtLevel, Tier, NetWorth, hood state, bonds), with everyday lines often and small and big lines rare and large — and no line that reads real-world Oakland.
 
@@ -29,7 +33,10 @@ pointers:
 
 ## The rule (builder 2026-10-18)
 
-**Every event that fires moves a dial.** By what the line says, for this citizen. Not complicated. An event tag mapped to `{}` is a defect; a pool that cannot throw both directions is a defect (§3, §15); a line that reads real-world Oakland is a canon defect (§17).
+1. **A color pool never throws a life event.** Divorce, promotion, layoff, hire, birth, death, wedding, hospital stay, move, home bought or lost happen in their owning engines and change the row; a pool line that claims one is a defect — cut.
+2. **No real-world Oakland hardship** in any pool or premise (§17) — cut.
+3. **Every event that fires moves a dial**, by what it says, for this citizen. A tag mapped to `{}` is a defect.
+4. **Differences from the row** (debt, tier, net worth, hood); everyday small and often, big rare.
 
 ## Where it stands — live C111 (LifeHistory_Log, read 2026-10-18)
 

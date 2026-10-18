@@ -1,7 +1,7 @@
 ---
 title: Deploy History — full sandbox + PROD deployment ledger
 created: 2026-09-04
-updated: 2026-10-10
+updated: 2026-10-18
 type: reference
 tags: [engine, deploy, history, active]
 sources:
@@ -18,6 +18,8 @@ pointers:
 ---
 
 ## Current sandbox — full trail
+
+**`SANDBOX 1004` @42 → @43 → @44 = PROD 4m + `citizenDialMap.js` + `generateCitizensEvents.js` (11334296 → d5266294 → 2854dc10) — engine.299 Task 1, C112 on live-C111 state three times (2026-10-18 04:55–05:18, engine-sheet).** @42 (pre-codex-2 code, bench ECL predating rb's 175 `dial:` rows): ok 131 s, persist 714/0, EE 4 → 4, LifeHistory_Log C112 1,658 lines / 1,136 graded / 139 inert. Resync from live (rb's signed rows present; the resync copies live's `fireGuardMinutes` 60 — set to 0 on the bench, row 187, before `clearfire cycle=112` + `clearcheckpoint force=1`). @43 (admission first, own-tag sign, calendar pools signed): ok 142 s, persist 700/0, EE 4 → 4, 2,349 lines / 1,801 graded / 82 inert (3.5%, bare kinds from the other emitters — runHouseholdEngine Daily, generic Sports, Advancement intake). @44 (QoL + patrol lines signed by their own bank/text): identical counts, ok 149 s. Codex reviews 1–3 FIX folded, review 4 SHIP. **PROD @145 = stage 4n** pushed 2026-10-18 05:19 CDT, pull-back 168/168 (`stage4n-e299.sha256`). Plan: `docs/plans/2026-10-18-event-engines-move-dials.md`.
 
 **`SANDBOX 1004` @40 = PROD 4l + `compressLifeHistory.js` (113e78aa) + `buildEveningFamous.js` (01ea836f) — engine.197 future-stamp guard + engine.296 Davis predicate, C112 on live-C111 state (2026-10-17, engine-sheet).** Codex SHIP both. Fresh PROD pull 168/168 = `stage4l-e296.sha256`; resync from live, guard 0, `clearfire cycle=112`, `clearcheckpoint` null; fired ~5 min after the cut `&expect=111`: ok 253 s, 665 intents, `persist.errors` [], EE 4 → 4, cycleCount 112. The 13 spouse watermarks (POP-01029..01041) stay 133 — a no-op under either code; 0 new watermarks past the cycle; folded 111 → 112 on 948 rows. 8 of the 13 `Y3C29` mint lines left the cell by the existing length trim (unchanged code) — the HOLD repair manifest must account for it. Cultural_Ledger 53 → 55, 0 legend rows (no postseason rung). Readback `output/engine-sheet/2026-10-17-engine197-bench-c112-@40.md`. **PROD @144 = stage 4m** same night (`output/engine197/push-prod.sh --go`, pull-back `stage4m-e197.sha256`). **Bench at C112 on @40, next fire `&expect=112`.**
 

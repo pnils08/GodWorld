@@ -292,7 +292,7 @@ var DEFAULT_AMBIENT = {};
 // Calendar suffixes are TEXTURE: a Career event on a holiday is still a Career
 // memory. Strip a known calendar half and route by the base tag. (Must NOT strip
 // real compound tags like 'Career-Transition' or 'Transgression-Petty'.)
-var CALENDAR_SUFFIXES = ['FirstFriday', 'CreationDay', 'Holiday', 'Sports'];
+var CALENDAR_SUFFIXES = ['FirstFriday', 'CreationDay', 'Holiday', 'Sports', 'Weather'];   // engine.299: a Relationship line in the rain is still a Relationship memory
 
 // engine.299: the graded form. <Kind>-<Dial>-<Up|Down>-<S|M|L> -> { dial: +/-BAND_DELTA[band] }.
 // One dial per line (what the line says), the fact's direction, the band's weight. The nine dials

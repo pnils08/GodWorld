@@ -366,6 +366,7 @@ function generateCitizensEvents_(ctx) {
   var iMarital = idx("MaritalStatus");
   var iNumChildren = idx("NumChildren");
   var iWealth = idx("WealthLevel");
+  var iDebtLevel = idx("DebtLevel");          // engine.299 Task 4: the money lines gate on the row's own debt, not DisplacementRisk
   var iDisplRisk = idx("DisplacementRisk");
   var iMemReg = idx("MemoryRegisters"); // engine.38 B3 read (S283, seams Task 9) — unlived echo source
   var iDialState = idx("DialState");
@@ -1057,7 +1058,6 @@ function generateCitizensEvents_(ctx) {
     "state:community":       ["sociability", true],
     "state:watchful":        ["composure", false], "state:housing":        ["composure", false],
     "econ:tight":            ["composure", false], "econ:low":             ["composure", false],
-    "econ:displacement":     ["composure", false],
     "econ:comfortable":      ["composure", true],  "econ:high":            ["composure", true],
     "evening:crowd":         ["sociability", true], "evening:nightlife":   ["outabout", true],
     "evening:cityEventAttend": ["outabout", true], "evening:vibe":         ["warmth", true],
@@ -2913,10 +2913,14 @@ function generateCitizensEvents_(ctx) {
       pool.push(makeEntry("quietly covered the table's coffee and waved off the thanks", mergeTags(["source:economy", "econ:comfortable"], calendarTags), 0.95, false));
       pool.push(makeEntry("spent an hour moving money around to work a little harder", mergeTags(["source:economy", "econ:comfortable"], calendarTags), 0.9, false));
     }
-    var displRisk = (iDisplRisk >= 0) ? (Number(row[iDisplRisk]) || 0) : 0;
-    if (displRisk >= 7) {
-      pool.push(makeEntry("did rent math on the back of an envelope and sat back hard", mergeTags(["source:economy", "econ:displacement"], calendarTags), 1.15, false));
-      pool.push(makeEntry("noticed the listing price on a place like theirs and read it twice", mergeTags(["source:economy", "econ:displacement"], calendarTags), 1.1, false));
+    // engine.299 Task 4 (builder 2026-10-18: events that fire if they have debt at a certain level): the stretched
+    // lines open on the row's own DebtLevel (≥ 4, the plan's bar; the default at 6 is engine.276's), not on the
+    // migration engine's DisplacementRisk — a real-Oakland displacement premise is not a fact about this citizen.
+    var displRisk = (iDisplRisk >= 0) ? (Number(row[iDisplRisk]) || 0) : 0;   // still a DSL field for ECL conditions (the column's fate is the builder's — Task 7 §6)
+    var debtLvl = (iDebtLevel >= 0 && row[iDebtLevel] !== "" && row[iDebtLevel] != null) ? Number(row[iDebtLevel]) : null;
+    if (debtLvl !== null && debtLvl >= 4) {
+      pool.push(makeEntry("did rent math on the back of an envelope and sat back hard", mergeTags(["source:economy", "econ:tight", "debt:high"], calendarTags), 1.15, false));
+      pool.push(makeEntry("noticed the listing price on a place like theirs and read it twice", mergeTags(["source:economy", "econ:tight", "debt:high"], calendarTags), 1.1, false));
     }
 
     // S280 depth-step: bond texture names the actual counterpart when the

@@ -229,6 +229,7 @@ console.log('═══ Section X — engine.299 graded form: every event that fi
   assert('X2 all 9 dials × Up/Down × S/M/L resolve to exactly one dial at the band delta, and baseTag_ returns the kind', okAll);
   assert('X3 S/M/L deltas are 1/2/4', M.BAND_DELTA.S === 1 && M.BAND_DELTA.M === 2 && M.BAND_DELTA.L === 4);
   assert('X4 a graded tag on a calendar kind still strips to the kind', M.baseTag_('Holiday-Sociability-Up-S') === 'Holiday');
+  assert('X4b Weather is a texture suffix: Relationship-Weather folds as Relationship', M.baseTag_('Relationship-Weather') === 'Relationship' && M.nudgesForEvent_('Relationship-Weather', 1).sociability === 5 && Object.keys(M.nudgesForEvent_('Weather', 1)).length === 0);
   assert('X5 severityMult scales the graded delta', M.nudgesForEvent_('Daily-Family-Up-M', 2).family === 4);
   assert('X6 a bare history kind still maps to {} (never re-valued)', Object.keys(M.nudgesForEvent_('Neighborhood', 1)).length === 0 && Object.keys(M.nudgesForEvent_('Daily', 1)).length === 0);
   assert('X7 an unknown dial name is not a graded tag', M.gradedNudges_('Daily-Mood-Up-S') === null && M.gradedTag_('Daily', 'mood', true, 'S') === '');

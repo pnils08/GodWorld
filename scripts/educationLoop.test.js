@@ -346,7 +346,7 @@ console.log('\n9. engine.144 loop 4 — youth texture, the minors\' whole textur
   check('under-five draws nothing; a 30-year-old draws nothing here', under5 === 0 && adult === 0, under5 + '/' + adult);
   check('no "(participated)" suffix on any line', suffix === 0, String(suffix));
   // engine.299: Team / Civic / Neighborhood alone map to {}, so the youth line carries its graded form (Team-Fandom-Up-S …).
-  check('lines are stamped with a routable dial tag', /^Y3C4 — \[(Education|Team-Fandom-Up-S|Cultural|Community|Civic-Sociability-Up-S|Graduation|Stabilized|Neighborhood-Composure-Up-S)\] /.test(lineChild) && /^Y3C4 — \[/.test(lineTeen), lineChild + ' | ' + lineTeen);
+  check('lines are stamped with a routable dial tag', /^Y3C4 — \[(Education|Cultural|Community|Graduation|Stabilized|(Team|Civic|Neighborhood)-[A-Z][a-z]+-(Up|Down)-S)\] /.test(lineChild) && /^Y3C4 — \[/.test(lineTeen), lineChild + ' | ' + lineTeen);
   const tex = intents.filter(x => x.tab === 'LifeHistory_Log' && /\|texture$/.test(x.row[3]));
   const ev = intents.filter(x => x.tab === 'LifeHistory_Log' && !/\|texture$/.test(x.row[3]));
   check('log rows: texture layer carries the |texture token; event layer does not', tex.length > 0 && ev.length > 0 && tex.every(x => /^\w[\w -]*\|youth-[a-z_]+\|texture$/.test(x.row[3])), tex.length + '/' + ev.length);

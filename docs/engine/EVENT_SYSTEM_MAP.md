@@ -44,7 +44,7 @@ Ripples become digested narrative media for LLMs.
 
 | Generator | Phase | Mode gate | Pools / Events | Dial Seam / Mechanics |
 |---|---|---|---|---|
-| `generateGenericCitizenMicroEvent.js` | 4 | ENGINE | ~200 ambient texture | `mult.outabout`; pulse feeds Phase 8 nbhd map. **engine.299:** every line graded (fixed texts signed by what they say, hood lines by the hood's trajectory, dynamic lines by shape); no sign → not written, counted; the log row carries the written tag. |
+| `generateGenericCitizenMicroEvent.js` | 4 | ENGINE | ~200 ambient texture | `mult.outabout`; pulse feeds Phase 8 nbhd map. **engine.299:** every line whose kind maps to `{}` is written graded (fixed texts signed by what they say, hood lines by the hood's trajectory, dynamic lines by shape); Community / Cultural keep their bare tags (they carry deltas); no sign → not written, counted; the log row carries the written tag. |
 | `generateGameModeMicroEvents.js` | 4 | GAME | ~72 role pools + 7 trait-pools | `mult.outabout`; reads TraitProfile |
 | `generationalEventsEngine.js` | 4 | ENGINE+CIVIC | 12 milestones (Graduation, Death, etc.) | Mutates `Status`, `NumChildren`, `MaritalStatus`. Plumbed to `familyFreq`/`careerFreq`. |
 | `generateCitizensEvents.js` | 5 | ENGINE (T3-4) | ~100+ weighted pools + T3 fame recognition | Richly individuated via `getCitizenDialBands_` + bonds/arcs. **engine.299:** a kind that maps to `{}` is written only as `<Kind>-<Dial>-<Up|Down>-<Band>` (the sign from the entry's own fact tag, the dial from the fact or the source; a source never decides the sign); a line with no dial is not written — `S.engine299.noDial{,BySource}` counts it. |

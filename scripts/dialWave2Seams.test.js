@@ -159,13 +159,17 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
   // engine.299 (codex Task 3 F1): a world event's presence is not a direction — with a positive world event and
   // steady hoods, the "felt atmosphere influenced by recent city events" line is never written Down (or at all).
   if (pressure === 'housingPressure') {
-    const ctx = context(rows.map(r => r.slice())); ctx.rng = () => 0.99;
+    // codex A1: enter the drift branch (first draw 0 < driftChance) and pick the LAST pool entry (0.99) — the
+    // city-events line is pushed last — so the repaired branch is actually reached; then require a counted skip.
+    const ctx = context(rows.slice(0, 1).map(r => r.slice()));
+    const seq = [0, 0.99]; let k = 0; ctx.rng = () => (k < seq.length ? seq[k++] : 0.99);
     ctx.config.dialHoodPressureBar = 2; ctx.config.dialHoodCrimeBar = 2;
-    ctx.summary.neighborhoodState = { 'Synthetic Hood A': { housingPressure: 0, crimeIndex: 0.5 }, 'Synthetic Hood B': { housingPressure: 0, crimeIndex: 0.5 } };
+    ctx.summary.neighborhoodState = { 'Synthetic Hood A': { housingPressure: 0, crimeIndex: 0.5, trajectory: 'steady' } };
     ctx.summary.worldEvents = [{ type: 'community', description: 'team-sponsored community cleanup day', severity: 2 }];
     writes.length = 0; w.runNeighborhoodEngine_(ctx);
     const got = writes.filter(x => x.tab === 'LifeHistory_Log').map(x => x.row[3] + ' :: ' + x.row[4]);
-    assert('engine.299 a positive world event never yields a Composure-Down "recent city events" line', got.every(g => !/recent city events/.test(g)), JSON.stringify(got));
+    const skipped = (ctx.summary.engine299 && ctx.summary.engine299.noDialBySource['runNeighborhoodEngine:Neighborhood:steady']) || 0;
+    assert('engine.299 a positive world event reaches the city-events line, which is skipped and counted — never written Down', got.length === 0 && skipped === 1, JSON.stringify({ got, skipped, draws: k }));
   }
 }
 {

@@ -537,7 +537,7 @@ function runRelationshipEngine_(ctx) {
           ctx.summary.weatherEventPools.special || []
         );
         if (allWeatherEvents.indexOf(pick) >= 0) {
-          eventTag = "Weather";
+          eventTag = "Relationship-Weather";       // engine.299: folds as Relationship (texture suffix), not a bare {} Weather day
         }
       }
 

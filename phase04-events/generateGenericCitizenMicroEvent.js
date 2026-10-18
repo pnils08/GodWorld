@@ -425,8 +425,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
     if (/^picked up on unease specific to /.test(text)) return 'dial:composure:down';
     if (/upbeat neighborhood mood$/.test(text)) return 'dial:composure:up';
     if (/^moved through fog that had settled over /.test(text)) return 'dial:outabout:down';
-    if (/ running warmer than the rest of the city$/.test(text)) return 'dial:outabout:up';
-    if (/^felt the cool pocket /.test(text)) return 'dial:outabout:up';
+    // the 'running warmer' / 'cool pocket' microclimate lines are observations with no reaction in the text — unsigned, not written (codex 2026-10-18)
     return null;
   }
   function gradedKind_(kind, sign) {

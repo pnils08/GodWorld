@@ -1017,14 +1017,63 @@ var YOUTH_DIAL_TAG = {
   academic: 'Education',
   graduation: 'Graduation',
   coming_of_age: 'Graduation',
-  sports: 'Team-Fandom-Up-S',               // engine.299: Team / Civic / Neighborhood alone map to {} — the youth line says what it moves
+  sports: 'Team',
   arts: 'Cultural',
   clubs: 'Community',
   community_support: 'Community',
-  civic_participation: 'Civic-Sociability-Up-S',
+  civic_participation: 'Civic',
   resilience: 'Stabilized',
-  safety_awareness: 'Neighborhood-Composure-Up-S'
+  safety_awareness: 'Neighborhood'
 };
+
+// engine.299 (builder 2026-10-18): Team / Civic / Neighborhood alone map to {} — a youth line of those kinds
+// carries the dial it moves and which way, by what the LINE says (a lost pickup game is not a win). The
+// written tag is <Kind>-<Dial>-<Up|Down>-S; a line with no sign is not written and is counted.
+var YOUTH_BARE_KINDS = { Team: true, Civic: true, Neighborhood: true };
+var YOUTH_SIGN_BY_TEXT = {
+  // child sports
+  'ran the bases at the park until the streetlights came on': 'drive:up',
+  'learned to ride without training wheels on the flat stretch by the lake': 'drive:up',
+  'lost the pickup game on the blacktop and argued the last call all the way home': 'composure:down',
+  'got picked first for once and pretended not to notice': 'composure:up',
+  'wore the new cleats to school even though there was no practice': 'drive:up',
+  'practiced free throws against the garage until the neighbor came out to rebound': 'drive:up',
+  // teen sports
+  'made the cut at tryouts and walked home without touching the ground': 'drive:up',
+  'ran the hill workout twice because the coach said once': 'drive:up',
+  'sat the bench for the first half and played the second like it mattered': 'composure:up',
+  'iced a rolled ankle and watched film of a game they were not in': 'composure:down',
+  'took the late bus home from an away game, still in uniform, still buzzing': 'drive:up',
+  'played pickup at the park with people twice their age and held their own': 'composure:up',
+  // college sports
+  'played intramurals on a team named after a bad joke': 'sociability:up',
+  "ran the lake loop at dawn before the eight o'clock lecture": 'drive:up',
+  // civic participation
+  'helped hand out flyers for the block party and took the job very seriously': 'sociability:up',
+  'sat through a community meeting with the adults and drew the speakers': 'openness:up',
+  'picked up litter along the creek trail with the class and counted every piece': 'integrity:up',
+  'made a sign for the neighborhood garden and spelled everything right': 'warmth:up',
+  'asked the librarian how the library decides what to buy and got a real answer': 'openness:up',
+  'spoke for two minutes at the council meeting and did not stop shaking until the bus': 'drive:up',
+  'registered classmates for the youth advisory board with a clipboard and a grin': 'sociability:up',
+  "volunteered at the food drive and learned every regular's name": 'warmth:up',
+  'wrote a letter to the Tribune about the bus route and got a reply': 'drive:up',
+  'helped run the block cleanup and argued for better trash cans': 'integrity:up',
+  'canvassed the neighborhood for the student housing measure': 'sociability:up',
+  'sat on the first committee and learned what a quorum was the hard way': 'openness:up',
+  // safety awareness
+  'practiced the walk to school with the safe corners marked in chalk': 'composure:up',
+  'learned which porch lights on the block stay on and who answers them': 'composure:up',
+  'walked the long, lit way home without being asked': 'composure:up',
+  'texted the group when they got in, the way they had all agreed to': 'warmth:up'
+};
+function youthWrittenTag_(kind, description) {
+  if (!YOUTH_BARE_KINDS[kind]) return kind;
+  var sg = YOUTH_SIGN_BY_TEXT[String(description || '').trim()];
+  if (!sg) return '';
+  var parts = sg.split(':');
+  return kind + '-' + parts[0].charAt(0).toUpperCase() + parts[0].slice(1) + '-' + (parts[1] === 'up' ? 'Up' : 'Down') + '-S';
+}
 
 function recordYouthLifeHistory_(ctx, events) {
   var cycle = (ctx.summary && ctx.summary.absoluteCycle) || 0;
@@ -1046,7 +1095,15 @@ function recordYouthLifeHistory_(ctx, events) {
 
   for (var i = 0; i < events.length; i++) {
     var e = events[i];
-    var dialTag = YOUTH_DIAL_TAG[e.eventType] || 'Education';
+    var dialTag = youthWrittenTag_(YOUTH_DIAL_TAG[e.eventType] || 'Education', e.description);
+    if (!dialTag) {                                   // engine.299: no sign in the line → not written, counted
+      var S299 = ctx.summary || (ctx.summary = {});
+      S299.engine299 = S299.engine299 || { noDial: 0, noDialBySource: {} };
+      S299.engine299.noDial++;
+      var yk = 'runYouthEngine:' + (YOUTH_DIAL_TAG[e.eventType] || 'Education');
+      S299.engine299.noDialBySource[yk] = (S299.engine299.noDialBySource[yk] || 0) + 1;
+      continue;
+    }
 
     // col-O: the child LIVES it — compressor folds it into dials next Phase 9
     var yIdx = rowByPop[String(e.youthId || '').trim().toUpperCase()];

@@ -78,34 +78,51 @@ assert('T5 every hardcoded pool carries a sign today: nothing skipped across 800
 
 // T6: an entry with NO signed fact (a bespoke hood-texture line, as the pool helper hands them in) is not written,
 // and the skip is counted by its source. The stub returns one heavy unsigned entry so the draw lands on it often.
-global.hoodTexturePool_ = () => [{ text: 'noticed the creative energy shifting on the block', tags: ['source:neighborhood'], weight: 500, template: false }];
+// contract-correct stub (codex review 3 hunt 6): hoodTexturePool_ returns STRINGS; the engine wraps them as
+// source:neighborhood entries. Scoped to the texture caller so venues/institutions stay empty.
+const UNSIGNED = 'SYNTHETIC unsigned observation on the block';
+global.hoodTexturePool_ = (ctx, hood, byLabel, bespoke, caller) => (caller === 'generateCitizensEvents_' ? [UNSIGNED] : []);
 let unsignedWritten = 0, skips = 0, bySrc = {};
 for (let seed = 1; seed <= 200; seed++) {
   const ctx = ctxFor(seed, 0);
   GEN.generateCitizensEvents_(ctx);
   const cell = String(ctx.ledger.rows[0][5] || '');
-  if (cell.indexOf('creative energy shifting') >= 0) unsignedWritten++;
+  if (cell.indexOf(UNSIGNED) >= 0) unsignedWritten++;
   if (ctx.summary.engine299) { skips += ctx.summary.engine299.noDial; for (const k in ctx.summary.engine299.noDialBySource) bySrc[k] = (bySrc[k] || 0) + ctx.summary.engine299.noDialBySource[k]; }
 }
 assert('T6 an unsigned entry is never written and the skip is counted by source', unsignedWritten === 0 && skips > 0 && bySrc['source:neighborhood'] > 0, JSON.stringify({ unsignedWritten, skips, bySrc }));
 console.log('  T6 skips by source:', JSON.stringify(bySrc));
 
-// T7 (codex F1): hood quality never supplies the sign to an unsigned line — not for a hood line, and not for an
-// unsigned source:qol line either. Hood QoL 0.2 / 0.8; the helper hands in one unsigned entry of each source.
-let qolWritten = { low: 0, high: 0 };
-global.hoodTexturePool_ = () => [
-  { text: 'noticed the creative energy shifting on the block', tags: ['source:neighborhood'], weight: 500, template: false },
-  { text: 'creative energy shifting, unsigned qol observation', tags: ['source:qol'], weight: 500, template: false }
-];
-for (const [band, q] of [['low', 0.2], ['high', 0.8]]) {
+// T7 (codex F1 / R3.1 / R3.2): hood quality never supplies a sign. (a) the unsigned hood line is never written at
+// QoL 0.2 / 0.5 / 0.8; (b) a patrol line that reads uneasy ("felt watched but not necessarily safer") is Down even in a
+// high-QoL hood under a suppress strategy; (c) moderate-low QoL lines (q=0.4) are written, graded Down, none skipped.
+let qolWritten = { low: 0, mid: 0, high: 0 }, patrolUp = 0, patrolDown = 0, modLowLines = 0, modLowSkips = 0, modLowUp = 0;
+for (const [band, q] of [['low', 0.2], ['mid', 0.5], ['high', 0.8]]) {
   for (let seed = 1; seed <= 300; seed++) {
     const ctx = ctxFor(seed, 0);
     ctx.summary.crimeMetrics = { context: { city: {}, byHood: { Temescal: { qualityOfLifeIndex: q } } } };
     GEN.generateCitizensEvents_(ctx);
-    if (String(ctx.ledger.rows[0][5] || '').indexOf('creative energy shifting') >= 0) qolWritten[band]++;
+    if (String(ctx.ledger.rows[0][5] || '').indexOf(UNSIGNED) >= 0) qolWritten[band]++;
   }
 }
-assert('T7 an unsigned entry is never written whatever the hood QoL (no rank-driven sign)', qolWritten.low === 0 && qolWritten.high === 0, JSON.stringify(qolWritten));
+global.hoodTexturePool_ = () => [];
+for (let seed = 1; seed <= 400; seed++) {
+  const ctx = ctxFor(seed, 0);
+  ctx.summary.crimeMetrics = { context: { city: { patrolStrategy: 'suppress_hotspots', hotspotHoods: ['Temescal'] }, byHood: { Temescal: { qualityOfLifeIndex: 0.8 } } } };
+  GEN.generateCitizensEvents_(ctx);
+  String(ctx.ledger.rows[0][5] || '').split('\n').forEach((l) => { if (l.indexOf('felt watched but not necessarily safer') >= 0) { if (/-Down-/.test(l)) patrolDown++; else patrolUp++; } });
+}
+for (let seed = 1; seed <= 400; seed++) {
+  const ctx = ctxFor(seed, 0);
+  ctx.summary.crimeMetrics = { context: { city: {}, byHood: { Temescal: { qualityOfLifeIndex: 0.4 } } } };
+  GEN.generateCitizensEvents_(ctx);
+  String(ctx.ledger.rows[0][5] || '').split('\n').forEach((l) => { if (/^C101 — \[QoL-/.test(l)) { modLowLines++; if (!/-Down-/.test(l)) modLowUp++; } });
+  if (ctx.summary.engine299 && ctx.summary.engine299.noDialBySource['source:qol']) modLowSkips += ctx.summary.engine299.noDialBySource['source:qol'];
+}
+assert('T7a an unsigned hood line is never written at QoL 0.2 / 0.5 / 0.8', qolWritten.low === 0 && qolWritten.mid === 0 && qolWritten.high === 0, JSON.stringify(qolWritten));
+assert('T7b the uneasy patrol line is Down in a high-QoL suppress hood (seen, never Up)', patrolDown > 0 && patrolUp === 0, JSON.stringify({ patrolDown, patrolUp }));
+assert('T7c moderate-low QoL lines are written, graded Down, none skipped', modLowLines > 0 && modLowUp === 0 && modLowSkips === 0, JSON.stringify({ modLowLines, modLowUp, modLowSkips }));
+global.hoodTexturePool_ = (ctx, hood, byLabel, bespoke, caller) => (caller === 'generateCitizensEvents_' ? [UNSIGNED] : []);
 
 // T8 (codex F3): a dropped line has no consequences — no FAME_WATCH hook, no ripple for it.
 global.culturalStatusByPop_ = () => ({ 'POP-00002': { fameScore: 60 } });
@@ -115,9 +132,9 @@ let hooksForUnsigned = 0, ripplesForUnsigned = 0, hooksTotal = 0;
 for (let seed = 1; seed <= 1200; seed++) {
   const ctx = ctxFor(seed, 0);
   GEN.generateCitizensEvents_(ctx);
-  (ctx.summary.storyHooks || []).forEach((h) => { hooksTotal++; if (String(h.text || h.description || '').indexOf('creative energy shifting') >= 0) hooksForUnsigned++; });
+  (ctx.summary.storyHooks || []).forEach((h) => { hooksTotal++; if (String(h.text || h.description || '').indexOf(UNSIGNED) >= 0) hooksForUnsigned++; });
 }
-ripples.forEach((r) => { if (String(r.causeDetail || '').indexOf('creative energy shifting') >= 0) ripplesForUnsigned++; });
+ripples.forEach((r) => { if (String(r.causeDetail || '').indexOf(UNSIGNED) >= 0) ripplesForUnsigned++; });
 assert('T8 a dropped line raises no FAME_WATCH hook and no ripple', hooksForUnsigned === 0 && ripplesForUnsigned === 0, JSON.stringify({ hooksForUnsigned, ripplesForUnsigned, hooksTotal, ripples: ripples.length }));
 delete global.culturalStatusByPop_; delete global.recordRipple_;
 global.hoodTexturePool_ = () => [];

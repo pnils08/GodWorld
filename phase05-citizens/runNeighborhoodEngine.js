@@ -57,7 +57,9 @@
 // written. The hood's trajectory then PICKS from the lines that match it (growth → up lines, decay → down
 // lines); it never stamps a sign on a line that does not say it. Lines that assert a fact the row does not
 // carry (game-day crowds without Sports_Feed, cranes and a boom, a new mural, clinic crowds, campus construction)
-// stay unsigned — agy (a). Down lines for decay hoods are this city's own quieter streets, never a decline premise.
+// stay unsigned — agy (a). So do lines that name a mood without a change in activity ("felt the cultural
+// energy", "the creative pulse", "steady business" — codex 2026-10-18). Down lines for decay hoods are this
+// city's own quieter streets, never a decline premise.
 var NEIGHBORHOOD_DRIFT_BY_CHARACTER_ = {
   'institutional': [["noticed the civic buildings emptying out at dusk", "down"], "felt the neighborhood's official rhythm shift", ["observed lines forming outside a public office", "up"]],
   'clinic': ["noticed more people heading toward the clinics", "felt the neighborhood's weary, caring pace", "observed a health worker finishing a long shift"],
@@ -69,8 +71,8 @@ var NEIGHBORHOOD_DRIFT_BY_CHARACTER_ = {
   'residential': [["noticed neighbors talking across a fence", "up"], ["felt the block's quiet settle in", "down"], "observed porch lights coming on down the street"],
   'retail': ["noticed the shops changing their window displays", ["felt the neighborhood's shopping-day bustle", "up"], ["observed a line outside a popular storefront", "up"]],
   'medical': ["noticed hospital shift change on the sidewalks", "felt the neighborhood's steady, tended rhythm", ["observed a scrubs-clad crowd at the coffee counter", "up"]],
-  'family-retail': [["noticed families filling the market street", "up"], ["felt the neighborhood's generations mixing", "up"], ["observed shopkeepers greeting regulars by name", "up"]],
-  'mixed': ["noticed apartments and storefronts sharing the block", "felt the neighborhood's patchwork rhythm", ["observed the corner store doing steady business", "up"]],
+  'family-retail': [["noticed families filling the market street", "up"], "felt the neighborhood's generations mixing", "observed shopkeepers greeting regulars by name"],
+  'mixed': ["noticed apartments and storefronts sharing the block", "felt the neighborhood's patchwork rhythm", "observed the corner store doing steady business"],
   'village-retail': [["noticed the village main street winding down", "down"], "felt the neighborhood's small-town pace", ["observed regulars gathering outside the bakery", "up"]],
   'service-labor': ["noticed the early shift heading out before dawn", "felt the neighborhood's working rhythm", ["observed workers gathering at the bus stop", "up"]],
   'arts': ["noticed a new mural going up on the corridor", "felt the neighborhood's creative pulse", ["observed a gallery crowd drifting between openings", "up"]],
@@ -87,7 +89,7 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     "noticed the creative energy shifting in Temescal",
     "felt Temescal's community vibe change slightly",
     ["observed new activity around Temescal's cafes", "up"],
-    ["sensed the neighborhood's artistic pulse", "up"],
+    "sensed the neighborhood's artistic pulse",
     ["noticed a few Telegraph cafes closing earlier than they used to", "down"],
     ["found an open table at a Temescal spot that usually has a wait", "down"],
     ["walked Telegraph on a Saturday and found the sidewalks thinner than usual", "down"]
@@ -102,10 +104,11 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     ["rode a tower elevator alone at an hour it is usually full", "down"]
   ],
   'Fruitvale': [
-    ["felt Fruitvale's cultural energy", "up"],
+    "felt Fruitvale's cultural energy",
     "noticed community gathering patterns shift",
     "observed the neighborhood's familiar rhythms",
     "sensed changes in the local atmosphere",
+    ["noticed the plaza by the transit hub fuller on a weekend than it was a season ago", "up"],
     ["noticed the strip by the transit hub quieter than it was a season ago", "down"],
     ["saw a few platform-side shops keeping shorter hours", "down"],
     ["caught a nearly empty train car out of Fruitvale at rush hour", "down"]
@@ -145,19 +148,19 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     ["noticed the College Ave shops quieter than a usual weekend", "down"]
   ],
   'Jack London': [
-    ["felt Jack London's waterfront energy", "up"],
+    "felt Jack London's waterfront energy",
     ["noticed nightlife activity picking up", "up"],
-    ["observed the arts district's creative buzz", "up"],
+    "observed the arts district's creative buzz",
     "sensed the estuary's calming presence",
     ["noticed the waterfront venues letting out early on a Friday", "down"],
     ["got a table at a Jack London restaurant without a reservation", "down"],
     ["found the estuary promenade thinner than a usual evening", "down"]
   ],
   'Uptown': [
-    ["felt Uptown's urban arts energy", "up"],
+    "felt Uptown's urban arts energy",
     ["noticed gallery-goers and theater crowds", "up"],
-    ["observed the neighborhood's creative pulse", "up"],
-    ["sensed the cultural district's momentum", "up"],
+    "observed the neighborhood's creative pulse",
+    "sensed the cultural district's momentum",
     ["noticed the Uptown bars emptying out earlier than they used to", "down"],
     ["walked past a theater on a show night and found no line", "down"]
   ],

@@ -233,7 +233,9 @@ console.log('═══ Section X — engine.299 graded form: every event that fi
   assert('X5 severityMult scales the graded delta', M.nudgesForEvent_('Daily-Family-Up-M', 2).family === 4);
   assert('X6 a bare history kind still maps to {} (never re-valued)', Object.keys(M.nudgesForEvent_('Neighborhood', 1)).length === 0 && Object.keys(M.nudgesForEvent_('Daily', 1)).length === 0);
   assert('X7 an unknown dial name is not a graded tag', M.gradedNudges_('Daily-Mood-Up-S') === null && M.gradedTag_('Daily', 'mood', true, 'S') === '');
-  assert('X9 PostCareer sub-tags carry deltas; Advancement and Death are declared structural', M.nudgesForEvent_('PostCareer-Travel', 1).openness === 2 && M.nudgesForEvent_('PostCareer-Wellness', 1).composure === 3 && M.STRUCTURAL.Advancement === true && M.STRUCTURAL.Death === true && Object.keys(M.nudgesForEvent_('Advancement', 1)).length === 0);
+  assert('X9 PostCareer sub-tags carry deltas', M.nudgesForEvent_('PostCareer-Travel', 1).openness === 2 && M.nudgesForEvent_('PostCareer-Wellness', 1).composure === 3);
+  // codex 2026-10-18: the fold contract for intake lines is unchanged — "Intake at Tier 3" still routes to drive.
+  assert('X10 an Advancement intake line still folds as before (content rule: tier 3 → drive)', M.nudgesForEvent_('Advancement', 1, 'Intake at Tier 3. Synthetic note').drive === 6 && !M.STRUCTURAL.Advancement && !M.STRUCTURAL.Death);
   assert('X8 a real compound key is not mistaken for the graded form', M.nudgesForEvent_('CivicRole-Up-M', 1).drive === 2 && M.baseTag_('Career-Transition') === 'Career-Transition');
 }
 

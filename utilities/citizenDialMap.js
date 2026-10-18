@@ -251,10 +251,7 @@ function pressureCauseOfText_(text) {
 }
 
 // Structural markers — summaries/state, NOT events. The only legitimately inert tags.
-var STRUCTURAL = { 'Compressed': true, 'CareerState': true, 'EngineEvent': false,
-  // engine.299 (2026-10-18): two more markers, declared so the offender scan reports them apart from inert texture —
-  'Advancement': true,   // the intake stamp ("Intake at Tier N", processAdvancementIntake) — a record of the ledger move, not a lived day
-  'Death': true };       // the decedent's own line (generationalEventsEngine); the bereaved carry Bereaved, which moves
+var STRUCTURAL = { 'Compressed': true, 'CareerState': true, 'EngineEvent': false };
 // (EngineEvent carries real content in its text -> content-routed, not inert.)
 
 // Edition citations (E80, E83, E86-S1, ...) = newsroom coverage -> public recognition.

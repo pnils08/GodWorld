@@ -71,3 +71,12 @@ console.log('deadBranchScan offenders: PASS (Cycle filtering, resolver, strings/
   assert(r3.premise.length >= 2 && r3.premise.every(h => h.prose === false), 'identifier + comment reported, not prose');
 }
 console.log('engine.299 owner-pool + prose acceptance: PASS');
+// codex 2026-10-18: a graded variant of a marker is NOT exempt; marker rows carry provenance.
+{
+  const log3 = [['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighborhood', 'Cycle'],
+    ['t', 'POP-1', '', 'Death', 'SYNTHETIC death line', '', 111], ['t', 'POP-2', '', 'Death-Bogus|x', 'SYNTHETIC graded death', '', 111]];
+  const r4 = buildOffenders({ log: log3, ecl: [['Kind', 'PoolKey', 'Text', 'Active']], sources: {}, resolver, sheet: 'bench', generatedAt: 'synthetic' });
+  assert(r4.structural.total === 1 && r4.structural.rows[0].popId === 'POP-1', 'bare marker reported with provenance');
+  assert(r4.inert.total === 1 && r4.inert.byTag['Death-Bogus'] === 1, 'a non-marker variant stays inert and visible');
+}
+console.log('engine.299 marker provenance: PASS');

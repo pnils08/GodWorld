@@ -198,17 +198,22 @@ function buildOffenders({ log, ecl, sources, resolver, cycle, sheet = 'live', ge
     }
   }
   const inert = { total: 0, share: 0, byTag: {}, byEngine: {}, codeSites: [] };
-  // engine.299: a DECLARED structural marker (citizenDialMap STRUCTURAL === true — Compressed, CareerState,
-  // Advancement, Death) is a record of state, not a lived day; it is reported here, never hidden, and does
-  // not count as inert texture against acceptance.
-  const structural = { total: 0, byTag: {} };
+  // engine.299: a bookkeeping marker (an exact bare REPORT_MARKERS tag that moves nothing) is a record of state,
+  // not a lived day; it is reported here with its rows, never hidden, and does not count as inert texture.
+  const structural = { total: 0, byTag: {}, rows: [] };
+  // The scan's OWN list of bookkeeping markers (codex 2026-10-18: never via the resolver, whose fold must not change).
+  // Exact bare tags only — a graded variant (Death-Composure-Down-S) is not a marker and stays visible as inert.
+  const REPORT_MARKERS = { Compressed: 1, CareerState: 1, Advancement: 1, Death: 1 };
   const bump = (obj,k) => { Object.defineProperty(obj, k, { value: (Object.hasOwn(obj,k) ? obj[k] : 0) + 1, enumerable: true, configurable: true, writable: true }); };
   for (const r of scanned) {
     // Generator logs primaryTag|context; only the first part is the cell tag.
     const tag = String(r.EventTag).split('|')[0].trim();
     if (Object.keys(resolver.nudgesForEvent_(tag, 1, String(r.EventText))).length) continue;
-    const base = typeof resolver.baseTag_ === 'function' ? resolver.baseTag_(tag) : tag;
-    if (resolver.STRUCTURAL && resolver.STRUCTURAL[base] === true) { structural.total++; bump(structural.byTag, base); continue; }
+    if (Object.hasOwn(REPORT_MARKERS, tag)) {
+      structural.total++; bump(structural.byTag, tag);
+      structural.rows.push({ tag, text: String(r.EventText).slice(0, 120), popId: String(r.POPID || '') });
+      continue;
+    }
     inert.total++; bump(inert.byTag, tag || '(blank)');
     let engine = String(r.SourceEngine || r.Engine || '').trim();
     if (!engine) {

@@ -237,7 +237,7 @@ function generateGameModeMicroEvents_(ctx) {
   var staffPool = [
     ["coordinated across departments", "dial:sociability:up"],
     ["managed logistics for upcoming events", "dial:drive:up"],
-    ["handled sensitive communications", "dial:integrity:up"]
+    ["handled sensitive communications"]
   ].map(function(t) { return entry(t[0], ["role:civic", "civic:staff"].concat(t[1] ? [t[1]] : []), "Civic"); });
 
   var publicFigureGeneral = [

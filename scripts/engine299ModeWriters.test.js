@@ -66,6 +66,9 @@ for (const [mode, file, fn, roles] of specs) {
   const down = mode === 'GAME' ? 'sensed the heightened expectations' : mode === 'MEDIA' ? "skipped lunch and didn't notice until 4 PM" : 'sensed growing public discontent with city leadership';
   assert(seen.has(down), `${mode} down fixture not reached`);
   assert(seen.get(down).includes('-Down-S]'), `${mode} wrong sign: ${down}`);
+  // codex 2026-10-18: "handled sensitive communications" names a task, not an ethical outcome — no integrity sign;
+  // it is unsigned, so the writer skips it and writes nothing.
+  if (seen.has('handled sensitive communications')) assert.strictEqual(seen.get('handled sensitive communications'), '', `${mode} sensitive communications must not be signed`);
   if (mode === 'CIVIC') {
     assert(seen.has('pushed back on administration priorities in caucus'));
     assert(seen.has('raised fiscal accountability concerns in committee'));

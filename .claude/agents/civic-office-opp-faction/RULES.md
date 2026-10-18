@@ -183,10 +183,10 @@ Beyond the shared rules in CANON_RULES.md:
 Faction statements have particular tier reach patterns:
 
 - **Community-organizing references.** OPP came up through organizing. The temptation is to name the real-world Oakland organizing groups (Unity Council, Greenlining, EBASE, Causa Justa, Just Cause, ACCE, EBASE, etc.). All tier 2 — functional reference until canon-substitutes exist.
-- **Tenant-organizing references for Carter.** West Oakland tenant organizations are real and influential — Carter's voice would naturally reach for them. Generic ("the tenant organizers I've worked with for fifteen years," "a West Oakland tenant coalition") preserves the substance.
+- **Tenant-organizing references for Carter.** Carter's voice reaches for the organizers she has worked with. Generic ("the tenant organizers I've worked with for fifteen years," "a West Oakland tenant coalition") preserves the substance.
 - **Bilingual-organizing references for Delgado.** Fruitvale community organizations with deep proprietary identity — generic ("a Fruitvale community organization," "a Spanish-language community group on International").
 - **OARI implementation amplification.** OPP champions OARI. When citing implementation specifics, stay inside canon — Dr. Vanessa Tran-Muñoz is the canon project director; behavioral-health partners are generic until canon-substitutes exist.
-- **Stabilization Fund celebration.** Carter's signature. Specific family numbers must match canon. Generic citizen vignettes ("a family in West Oakland that had been displaced and came back") are canon-permissible.
+- **Stabilization Fund celebration.** Carter's signature. Specific family numbers must match canon. A family vignette names a household the packet or the Fund's record carries; no generic displaced-family vignette (this city's West Oakland is boom-born and expensive, INSTITUTIONS §Neighborhoods).
 - **Comparable-city models.** When OPP cites how other cities handle housing, public safety, transit — cities as place names are fine. Real real-world city officials are tier 3.
 - **Mobley's qualifications.** When Mobley qualifies a bloc statement, the qualification must be substantive — and grounded in his D9 vantage. Don't fabricate Mobley qualifications for political color.
 

@@ -41,7 +41,7 @@ Letters reach the desk through several channels. The desk reads them all, picks 
 
 Patterns the desk has internalized after years of reading.
 
-- **The retired postal worker from West Oakland** — writes in tight cursive on lined paper, mails the envelope on Tuesdays. Has been writing since the 1990s. Knows what a redlined block looks like. Has a granddaughter she mentions in three out of every five letters.
+- **The retired postal worker from West Oakland** — writes in tight cursive on lined paper, mails the envelope on Tuesdays. Has been writing since the 1990s. Remembers the flats before the first campus went up. Has a granddaughter she mentions in three out of every five letters.
 - **The retired teacher from Temescal** — emails. Subject line in caps. Three paragraphs, never four. Compares the present to the late 1980s.
 - **The barista from KONO** — emails after closing. Sarcastic, fast, types fast. Knows the city differently than the retired teacher does. Their letters often read as a counterpoint without ever mentioning each other.
 - **The grandmother in Fruitvale who writes in Spanish** — the desk runs these in translation when they get them. Always about her grandchildren and what they're walking into.

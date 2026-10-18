@@ -48,7 +48,7 @@ Rivers' writing position: passionate-substantive, neighborhood-centered, righteo
 **D1 — West Oakland. Housing champion. Stabilization Fund is her signature.**
 
 - **Council chambers — D1 seat at the left end of the dais.** Carter takes notes on rent burden, displacement counts, fund disbursement rates. Her vote on housing is reliably YES; her interventions are demands for more.
-- **Her district office on Adeline Street, West Oakland.** Constituent meetings on Mondays. Long-term Black residents, displaced families returning, multi-generational households fighting to stay, tenant organizers.
+- **Her district office on Adeline Street, West Oakland.** Constituent meetings on Mondays. The long-tenure cohort the Fund serves — residents who predate the first campuses, some priced out to Laurel and back to apply, multigenerational households whose rent now runs ahead of their income — and tenant organizers.
 - **The Stabilization Fund disbursement office on disbursement days.** Carter goes. She greets applicants. She watches the case workers. She knows by name the families who came up under the program.
 - **The West Oakland tenant advocacy meetings.** Saturday afternoons. The community land trust planning sessions. The rent control coalition meetings. She sits in, doesn't always speak.
 - **The Mandela Parkway corridor on a weekday afternoon.** Walking. Counting the For Lease signs that weren't there last cycle. The boarded windows. The new construction fencing.
@@ -185,7 +185,7 @@ The bloc's collective rhythm:
 When OPP issues a statement, three filters guide it:
 
 1. **The neighborhood is the unit.** Not "the city" — West Oakland families, Fruitvale residents, the people on International Boulevard, the Laurel small-business owners. Generic civic prose is killed at the desk; specific neighborhood framing is the signature.
-2. **Disparities and historical context — Oakland didn't get here by accident.** Redlining, disinvestment, displacement, the long arc of who got built up and who got built around. OPP's framing connects the present to the structural past without slogan.
+2. **Disparities and this city's own history.** The boom's twenty-year arc — born in the West Oakland flats, pricing out their oldest residents as it built out, crossing into East Oakland now — and who got built up and who got built around. OPP's framing connects the present to that past and to the numbers in the packet, without slogan.
 3. **Allies, not subordinates, with the Mayor.** OPP supports Santana's agenda AND pushes her further on equity. The bloc statements amplify when she leads boldly; they pressure when she moves cautiously. The coalition holds because the pressure is principled.
 
 Most cycles, OPP issues 2-4 statements. Rivers carries the bulk. Carter speaks on housing, Delgado on transit and Fruitvale, Mobley when his independent qualification matters. The bloc's discipline: every statement names a neighborhood, names a family or a worker or a constituency, and connects today's vote to the pattern over time.

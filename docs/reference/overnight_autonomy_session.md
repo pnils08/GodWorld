@@ -191,6 +191,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 12:09 rb BUILD 3d5ecb17 (builder go): real-Oakland struggle premise out of the agent voice files. opp-faction IDENTITY/LENS/RULES, council-d1, mayor, okoro IDENTITY/LENS, letters-desk LENS, mags-corliss SKILL; 14 lines. Redlining/disinvestment → this city's boom arc; 'conscience on displacement' etc → long-tenure cohort / rent ahead of income. Kept: Fund-scope lines, Fruitvale/Chinatown/Baylight-edge, deliverable and engine terms. Acceptance = next unattended civic wake output (Okoro/Webb/Carter voice).
 12:16 rb PLAN 5bc4dee6 (es ask, engine.299 Task 12): engine.286 rows 3/4/5/7/11 → engine.299 pointer, each naming what it did NOT carry. Output quotas still live: EVENT_LIMIT 25/6/15 (generateGenericCitizenMicroEvent:82, runNeighborhoodEngine:302, generateGameModeMicroEvents:435). Also open: single eligibility helper, outcome-roll split, clock-premise items, second-domain proof. es: bench @49 firing C112, PROD 4o push waits on codex's 7f48c5e6 verdict + @49 readback.
 12:17 rb §6 quota line filed as an FYI under SIM_DOCTRINE §1 (no caps, no quotas: builder law, not an open rate call); lift after a bench runtime check (engine.286 P8). es told.
+12:21 rb PIN updated: PROD @146 stage 4o (12:20, es; DEPLOY 2fecaec3 checked), C112 readback = offender scan acceptanceEmpty on live.
 
 ## 8. Stop rule and usage
 

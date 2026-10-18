@@ -1,6 +1,6 @@
 # TASK — codex: build engine.299 Task 2, the offender scan (`deadBranchScan.js --offenders`)
 
-Deliver a patch, not a commit: `output/codex/engine299-offenders-scan.patch` plus `output/codex/engine299-offenders-scan.md` (what it does, how you proved it, the first run's numbers). Do not commit, do not push. Sheet access is read-only. Run against the bench by `--sheet-id=1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA` (SANDBOX 1004) and once against live with no flag. No cron, model, bench fire or canon run. Report in one line when done.
+Deliver a patch, not a commit: `output/codex/engine299-offenders-scan.patch` plus `output/codex/engine299-offenders-scan.md` (what it does, how you proved it, the first run's numbers). Do not commit, do not push. Sheet access is read-only. Run against the bench by `--sheet-id=<the SANDBOX 1004 ID from docs/reference/DEPLOY.md §Current bench pointer>` and once against live with no flag. No cron, model, bench fire or canon run. Report in one line when done.
 
 **Plan:** `docs/plans/2026-10-18-event-engines-move-dials.md`, §The offenders (three kinds), Task 2, Acceptance 2, and §Reviews reconciled → Agreed A1–A4 (the settled exceptions).
 **The builder's scope (2026-10-18):** "we aren't rebuilding any systems just cleaning up hardcoded events in the engines that don't fit how the sim works now." This is a report tool on an existing script. FIX, don't ADD. The only new files allowed are a test file and the output JSON.

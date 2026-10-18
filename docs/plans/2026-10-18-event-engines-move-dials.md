@@ -123,7 +123,7 @@ Sign skews up (≈ .6 / .4) except where the fact's direction is known, which de
 
 ## Changelog
 
-- 2026-10-18 04:52 (research-build) — Task 4 ECL authoring: 171 live rows in {} sources tagged `dial:<dial>:<up|down>` by what the line says, read back 171/171. Held untagged (premise, rewrite pending): R214 R230 R279 R283. 5 fragments untouched.
+- 2026-10-18 04:52 (research-build) — Task 4 ECL authoring: 171 live rows in {} sources tagged `dial:<dial>:<up|down>` by what the line says, read back 171/171. R214 R230 R279 R283 premise rewritten (04:56) and tagged. 5 fragments untouched.
 - 2026-10-18 05:25 (engine-sheet) — Every hardcoded pool in generateCitizensEvents now carries its sign by what the line says (61 human-domain lines, 12 season/age lines, the unlived echo); the writer test proves nothing skips from the hardcoded pools and an unsigned entry is never written. Four tests re-trued to the rule (plain day → not written / graded). Suite 290/290.
 - 2026-10-18 04:50 (engine-sheet) — codex Task 1 review FIX (docs/for-claude-review/2026-10-18-codex-engine299-task1-diff-review.md) folded: a source names the dial, never the sign (generic `:negative`/`:positive` rule; no signed fact → not written); kindMovesNothing_ fails closed; Task 1 re-scoped to generateCitizensEvents, other emitters → Tasks 3–4; STUB_MAP regenerated; writer-level test added. rb fixed the street-source read (fd98763b).
 - 2026-10-18 04:20 (engine-sheet) — Task 1 cut `6db7b48f`: graded form in citizenDialMap; generateCitizensEvents writes a {} kind only graded, skips a line with no dial; suite 289/289. Tasks 5/6 scaled to cleanup (builder to rb: no rebuilds). codex dispatched on rb's TASK spec; bench 1004 after its return.

@@ -92,7 +92,9 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     "sensed the neighborhood's artistic pulse",
     ["noticed a few Telegraph cafes closing earlier than they used to", "down"],
     ["found an open table at a Temescal spot that usually has a wait", "down"],
-    ["walked Telegraph on a Saturday and found the sidewalks thinner than usual", "down"]
+    ["walked Telegraph on a Saturday and found the sidewalks thinner than usual", "down"],
+    ["found the Telegraph cafes fuller than they were a season ago", "up"],
+    ["waited in a longer line than usual at a Temescal spot", "up"]
   ],
   'Downtown': [
     ["felt Downtown's urban rhythm intensify", "up"],
@@ -101,7 +103,9 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     "sensed the business district's mood",
     ["noticed the plaza by City Hall emptying out earlier after work", "down"],
     ["found the lunch line on Broadway short for once", "down"],
-    ["rode a tower elevator alone at an hour it is usually full", "down"]
+    ["rode a tower elevator alone at an hour it is usually full", "down"],
+    ["noticed the plaza by City Hall staying busy well after work", "up"],
+    ["waited for the second elevator in the tower lobby at lunch", "up"]
   ],
   'Fruitvale': [
     "felt Fruitvale's cultural energy",
@@ -111,7 +115,9 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     ["noticed the plaza by the transit hub fuller on a weekend than it was a season ago", "up"],
     ["noticed the strip by the transit hub quieter than it was a season ago", "down"],
     ["saw a few platform-side shops keeping shorter hours", "down"],
-    ["caught a nearly empty train car out of Fruitvale at rush hour", "down"]
+    ["caught a nearly empty train car out of Fruitvale at rush hour", "down"],
+    ["noticed the platform-side shops staying open later than last season", "up"],
+    ["squeezed onto a busier train out of Fruitvale than they were used to", "up"]
   ],
   'Lake Merritt': [
     "noticed activity patterns around the lake",
@@ -119,7 +125,9 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     ["observed joggers and families by Lake Merritt", "up"],
     "sensed the peaceful energy near the water",
     ["had the lake path nearly to themselves on an evening it is usually crowded", "down"],
-    ["noticed fewer boats out on the lake than a usual weekend", "down"]
+    ["noticed fewer boats out on the lake than a usual weekend", "down"],
+    ["found the lake path busier than a usual evening", "up"],
+    ["counted more boats out on the lake than a usual weekend", "up"]
   ],
   'West Oakland': [
     "noticed West Oakland's industrial rhythm",
@@ -128,7 +136,9 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     "sensed the area's evolving character",
     ["noticed the converted-warehouse cafes on the block busier than last season", "up"],
     ["noticed the rail-yard lunch spots quieter than usual this week", "down"],
-    ["passed a warehouse campus with its lot half empty on a weekday", "down"]
+    ["passed a warehouse campus with its lot half empty on a weekday", "down"],
+    ["noticed a new lunch counter by the rail yard with a line out the door", "up"],
+    ["found the warehouse-campus lot full on a weekday", "up"]
   ],
   'Laurel': [
     "appreciated Laurel's residential calm",
@@ -137,7 +147,9 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     "observed familiar faces on the street",
     ["noticed more neighbors out along MacArthur on a weekend afternoon", "up"],
     ["noticed the corner shops on MacArthur closing up early", "down"],
-    ["walked the whole block without passing a neighbor", "down"]
+    ["walked the whole block without passing a neighbor", "down"],
+    ["noticed the MacArthur corner shops staying open later than they used to", "up"],
+    ["passed three neighbors they knew on one walk around the block", "up"]
   ],
   'Rockridge': [
     "noticed Rockridge's upscale atmosphere",
@@ -145,7 +157,9 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     ["observed shoppers along College Ave", "up"],
     "sensed the neighborhood's refined energy",
     ["found parking on College Ave on a Saturday, which never happens", "down"],
-    ["noticed the College Ave shops quieter than a usual weekend", "down"]
+    ["noticed the College Ave shops quieter than a usual weekend", "down"],
+    ["circled College Ave twice for parking on a Saturday", "up"],
+    ["found the College Ave shops busier than a usual weekend", "up"]
   ],
   'Jack London': [
     "felt Jack London's waterfront energy",
@@ -154,7 +168,9 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     "sensed the estuary's calming presence",
     ["noticed the waterfront venues letting out early on a Friday", "down"],
     ["got a table at a Jack London restaurant without a reservation", "down"],
-    ["found the estuary promenade thinner than a usual evening", "down"]
+    ["found the estuary promenade thinner than a usual evening", "down"],
+    ["waited for a table at a Jack London restaurant on a weeknight", "up"],
+    ["found the estuary promenade busier than a usual evening", "up"]
   ],
   'Uptown': [
     "felt Uptown's urban arts energy",
@@ -162,7 +178,9 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     "observed the neighborhood's creative pulse",
     "sensed the cultural district's momentum",
     ["noticed the Uptown bars emptying out earlier than they used to", "down"],
-    ["walked past a theater on a show night and found no line", "down"]
+    ["walked past a theater on a show night and found no line", "down"],
+    ["noticed the Uptown bars filling up earlier than they used to", "up"],
+    ["walked past a theater line that stretched down the block on a show night", "up"]
   ],
   'KONO': [
     "noticed KONO's artistic atmosphere",
@@ -170,7 +188,9 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     ["observed murals and street art activity", "up"],
     "sensed the neighborhood's DIY spirit",
     ["noticed fewer people along the Telegraph corridor after dark", "down"],
-    ["noticed the corridor's late-night spots closing a little earlier", "down"]
+    ["noticed the corridor's late-night spots closing a little earlier", "down"],
+    ["noticed more people along the Telegraph corridor after dark", "up"],
+    ["noticed a corridor late-night spot staying open past its usual close", "up"]
   ],
   'Chinatown': [
     ["felt Chinatown's bustling energy", "up"],
@@ -186,7 +206,9 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     ["observed afternoon strollers along the avenue", "up"],
     "sensed the area's residential tranquility",
     ["noticed the avenue's boutiques quieter than a usual afternoon", "down"],
-    ["saw the avenue's cafes clearing out early", "down"]
+    ["saw the avenue's cafes clearing out early", "down"],
+    ["noticed the avenue's boutiques busier than a usual afternoon", "up"],
+    ["saw the avenue's cafes full well into the evening", "up"]
   ]
 };
 

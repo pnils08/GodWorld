@@ -49,6 +49,7 @@ console.log('═══ Task 4 — crime iterates the Neighborhood_Map set');
   check('T4a Montclair has no profile', !P.Montclair);
   check('T4b every Neighborhood_Map hood has an authored profile', NM.every(h => P[h]), NM.filter(h => !P[h]).join(','));
   check('T4c no 2026 strife labels survive', !Object.keys(P).some(h => /underserved|gentrifying/i.test(P[h].character)));
+  check('T4c2 East Oakland uses its own canon character, not Baylight', P['East Oakland'].character === 'east flatlands, arriving frontier');
   check('T4d iteration set = canonHoods.list when seeded',
     JSON.stringify(sb.crimeIterationHoods_({ canonHoods: { list: NM } })) === JSON.stringify(NM));
   check('T4e iteration set falls to profile keys only when unseeded',

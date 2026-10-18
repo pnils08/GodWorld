@@ -31,7 +31,7 @@ assert(report.inert.codeSites.some(s => s.tag === 'Daily' && s.line === 1));
 assert(report.premise.some(h => h.kind === 'string' && h.text === 'SYNTHETIC priced out'));
 assert(report.premise.some(h => h.allowed && h.kind === 'comment' && h.reason.includes('ordering')));
 assert(report.premise.some(h => h.allowed && h.reason.includes('Elena')));
-assert(report.premise.some(h => h.allowed && h.text === 'displacementmove'));
+assert(report.premise.some(h => h.allowed && h.text === 'displacementmove' && /read alias/.test(h.reason))); // engine.299: read aliases are allowed with a reason, shown not hidden
 assert(report.premise.some(h => h.where === 'live:Event_Content_Ledger' && h.row === 2));
 assert(!report.premise.some(h => /decline|inactive/.test(h.text)));
 assert(report.lifeVerbs.some(h => h.text === 'SYNTHETIC married'));
@@ -45,7 +45,7 @@ assert.deepEqual(older.inert.byEngine, { oldEngine: 1 });
 const clean = buildOffenders({ log: [header, log[3]], ecl: [ecl[0]], sources: {}, resolver });
 assert.equal(clean.inert.total, 0);
 assert.equal(clean.acceptanceEmpty, true);
-const allowedOnly = buildOffenders({ log: [header, log[3]], ecl: [ecl[0]], sources: { 'utilities/compressLifeHistory.js': 'var x="displacementmove";' }, resolver });
+const allowedOnly = buildOffenders({ log: [header, log[3]], ecl: [ecl[0]], sources: { 'phase07-evening-media/buildContractSeeds.js': '// never displaced' }, resolver });
 assert.equal(allowedOnly.acceptanceEmpty, true);
 assert.equal(allowedOnly.premise.length, 1);
 const noSource = buildOffenders({ log: [['Cycle','EventTag','EventText'],[111,'Daily','SYNTHETIC long exact prose observation']],

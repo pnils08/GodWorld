@@ -1600,7 +1600,10 @@ function foldBiasIntents_(regs, intents, cycle) {
 // Returns the number of unlived entries captured (0 when regs is null).
 var UNLIVED_CAP = 3;
 var UNLIVED_TXT_MAX = 120;
-var UNLIVED_BRANCH_TAGS = { careershift: 1, relocation: 1, divorce: 1, retirement: 1, businessclose: 1, displacementmove: 1 };
+var UNLIVED_BRANCH_TAGS = { careershift: 1, relocation: 1, divorce: 1, retirement: 1, businessclose: 1, incomefitmove: 1 };
+// Read old history tags; only a NEW capture uses the new key. Existing history
+// and already-stored MemoryRegisters entries are not rewritten.
+var UNLIVED_BRANCH_ALIASES = { displacementmove: 'incomefitmove' };
 // engine.177 (S438): unstampedOnly=true skips entries that carry a cycle stamp — those
 // were folded at arrival by foldNewEntries_ (the watermark); only legacy lines fold here.
 function foldAgedOutEntries_(c, entries, keepCount, regs, unstampedOnly) {
@@ -1656,9 +1659,11 @@ function foldOneEntry_(c, e, regs) {
 
 // engine.38 B3 unlived capture for one entry (shared by the legacy and per-cycle folds).
 function captureUnlived_(e, regs) {
-  if (regs && UNLIVED_BRANCH_TAGS[String(e.tag || '').toLowerCase()]) {
+  var key = String(e.tag || '').toLowerCase();
+  key = UNLIVED_BRANCH_ALIASES[key] || key;
+  if (regs && UNLIVED_BRANCH_TAGS[key]) {
     regs.unlived.push({
-      tag: String(e.tag),
+      tag: key === 'incomefitmove' ? key : String(e.tag),
       txt: String(e.text || '').slice(0, UNLIVED_TXT_MAX),
       cy: (e.cycle != null ? e.cycle : 0)
     });

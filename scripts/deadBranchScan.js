@@ -123,14 +123,18 @@ const ALLOWLIST = [
     reason: 'Enforcement spillover between areas, not a displacement premise.' },
   { file: 'utilities/tier1EssenceEvents.js', re: /^Reads the anti-displacement and workforce mechanics end to end\.$/,
     reason: 'Elena POP-00791 published essence, held for the builder (A2).' },
-  { file: 'utilities/compressLifeHistory.js', re: /^displacementmove$/,
-    reason: 'Legacy displacementmove tag; paired rename belongs to Task 4 (A3).' },
-  { file: 'phase05-citizens/generateCitizensEvents.js', re: /^displacementmove$/,
-    reason: 'Legacy displacementmove tag; paired rename belongs to Task 4 (A3).' },
   { file: 'utilities/tier1EssenceEvents.js', re: /^Promotion$/,
     reason: 'Authored Tier-1 essence tag, not a color-pool promotion.' },
   { file: 'phase05-citizens/generateCitizensEvents.js', re: /^handled a logistics call with an ex$/,
-    reason: 'Reads MaritalStatus for register; does not create a divorce.' }
+    reason: 'Reads MaritalStatus for register; does not create a divorce.' },
+  // engine.299 Task 7 item 5: displacementmove → incomefitmove. The three read-alias sites keep the old key
+  // so registers already stored on citizens still resolve; no stored value is rewritten.
+  { file: 'utilities/compressLifeHistory.js', re: /^displacementmove$/,
+    reason: 'History read alias: stored registers carry the old key (engine.299 Task 7).' },
+  { file: 'phase05-citizens/generateCitizensEvents.js', re: /^displacementmove$/,
+    reason: 'History read alias: stored registers carry the old key (engine.299 Task 7).' },
+  { file: 'lib/resonanceRecall.js', re: /^displacementmove$/,
+    reason: 'History read alias: stored registers carry the old key (engine.299 Task 7).' }
 ];
 function annotate(hit) {
   const rule = ALLOWLIST.find(r => r.file === hit.file && (!r.kind || r.kind === hit.kind) && r.re.test(hit.text));

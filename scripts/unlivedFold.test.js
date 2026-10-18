@@ -102,6 +102,17 @@ console.log('═══ Section B — foldAgedOutEntries_ capture');
   entries = [mk('DISPLACEMENTMOVE', 'forced out by rent', 82)].concat(fill(20));
   n = C.foldAgedOutEntries_(E.newCitizen_(), entries, 20, regs);
   assert('B7 case-insensitive branch match', n === 1);
+  assert('B7a new capture uses income-fit key without rewriting the history event',
+    regs.unlived[0].tag === 'incomefitmove' && entries[0].tag === 'DISPLACEMENTMOVE');
+  const historical = { tag: 'displacementmove', txt: 'SYNTHETIC historical move', cy: 70 };
+  const compatible = C.parseMemoryRegisters_(JSON.stringify({ unlived: [historical] }));
+  C.foldAgedOutEntries_(E.newCitizen_(), [mk('IncomeFitMove', 'SYNTHETIC new move', 83)].concat(fill(20)), 20, compatible);
+  assert('B7b old stored key stays untouched, new key captures alongside it',
+    JSON.stringify(compatible.unlived[0]) === JSON.stringify(historical) && compatible.unlived[1].tag === 'incomefitmove');
+  const recall = require('../lib/resonanceRecall.js');
+  const recallOld = recall.unlivedCandidates(JSON.stringify({ unlived: [historical] }));
+  const recallNew = recall.unlivedCandidates(JSON.stringify({ unlived: [{ ...historical, tag: 'incomefitmove' }] }));
+  assert('B7c recall reads both keys with identical voice', JSON.stringify(recallOld) === JSON.stringify(recallNew) && recallOld[0].text.includes('the version of you that stayed'));
   n = C.foldAgedOutEntries_(E.newCitizen_(), entries, 20, null);
   assert('B8 regs=null -> fold-only, returns 0, no throw', n === 0);
 

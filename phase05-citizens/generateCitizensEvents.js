@@ -1142,7 +1142,7 @@ function generateCitizensEvents_(ctx) {
   var UNLIVED_ECHO_TEXT = {
     careershift: "caught themselves thinking about the job they didn't take",
     relocation: "thought for a moment about the version of them that stayed",
-    displacementmove: "thought for a moment about the version of them that stayed",
+    incomefitmove: "thought for a moment about the version of them that stayed",
     divorce: "wondered briefly about the life that marriage might have been",
     retirement: "missed the working years for a heartbeat, then let it go",
     businessclose: "passed a shuttered storefront and thought of the business that didn't make it"
@@ -1150,7 +1150,7 @@ function generateCitizensEvents_(ctx) {
   var UNLIVED_RHYME = {
     careershift: ["career", "work", "promotion", "job", "postcareer"],
     relocation: ["relocation", "move", "housing", "displacement", "neighborhood"],
-    displacementmove: ["relocation", "move", "housing", "displacement", "economy"],
+    incomefitmove: ["relocation", "move", "housing", "displacement", "economy"],
     divorce: ["divorce", "wedding", "marriage", "anniversary"],
     retirement: ["retirement", "postcareer", "work"],
     businessclose: ["business"]
@@ -1169,6 +1169,7 @@ function generateCitizensEvents_(ctx) {
     if (!tailTags.length) return null;
     for (var ui = 0; ui < reg.unlived.length; ui++) {
       var key = String((reg.unlived[ui] && reg.unlived[ui].tag) || "").toLowerCase();
+      if (key === 'displacementmove') key = 'incomefitmove'; // read alias; never rewrite stored registers
       var fam = UNLIVED_RHYME[key];
       if (!fam) continue;
       for (var fi = 0; fi < fam.length; fi++) {

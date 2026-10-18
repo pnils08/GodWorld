@@ -45,8 +45,8 @@
  * - Generates story hooks for forced migrations
  *
  * Story Hooks:
- * - FORCED_MIGRATION (severity 7): Citizen displaced by rent/eviction
- * - MASS_EXODUS (severity 8): 5+ citizens leave same neighborhood in one cycle
+ * - FORCED_MIGRATION (severity 7): High-risk citizen planning an income-fit move
+ * - MASS_EXODUS (severity 8): 5+ residents planning to leave the same neighborhood
  * - RETURN_MIGRATION (severity 4): Citizen returns to Oakland after leaving
  * - CITIZEN_RELOCATED (severity 5): unit completed an intra-city move (engine.55)
  *
@@ -795,10 +795,10 @@ function processRelocations_(ctx, cycle) {
     var reason, phrase;
     if (unit.maxRisk >= 9) {
       reason = MIGRATION_REASONS.DISPLACED;
-      phrase = 'displaced from ' + unit.hood + ' (risk ' + unit.maxRisk + '/10)';
+      phrase = 'household income fit favored ' + bestName + ' over ' + unit.hood;
     } else if (lane === 'pressure') {
       reason = MIGRATION_REASONS.COST;
-      phrase = 'priced out of ' + unit.hood;
+      phrase = 'moving for a better fit between household income and housing costs';
     } else {
       reason = MIGRATION_REASONS.OPPORTUNITY;
       // the misfit lane sorts to the best FIT, which is not always a richer hood
@@ -1028,7 +1028,7 @@ function generateMigrationHooks_(ctx, cycle) {
         hookType: 'FORCED_MIGRATION',
         domain: 'COMMUNITY',
         severity: 7,
-        description: first + ' ' + last + ' at severe displacement risk in ' + neighborhood + ' (risk: ' + displRisk + '/10)',
+        description: first + ' ' + last + ' planning a move from ' + neighborhood + ' toward a better household-income fit',
         cycleGenerated: cycle,
         popid: popid,
         neighborhood: neighborhood,
@@ -1041,7 +1041,7 @@ function generateMigrationHooks_(ctx, cycle) {
     }
   }
 
-  // MASS_EXODUS (5+ citizens at risk in same neighborhood)
+  // MASS_EXODUS (5+ residents planning to leave the same neighborhood)
   for (var hood in displacementByNeighborhood) {
     var count = displacementByNeighborhood[hood];
     if (count >= 5) {
@@ -1050,7 +1050,7 @@ function generateMigrationHooks_(ctx, cycle) {
         hookType: 'MASS_EXODUS',
         domain: 'COMMUNITY',
         severity: 8,
-        description: hood + ' mass displacement risk: ' + count + ' residents planning to leave',
+        description: count + ' residents in ' + hood + ' planning to leave for a better household-income fit',
         cycleGenerated: cycle,
         neighborhood: hood,
         atRiskCount: count

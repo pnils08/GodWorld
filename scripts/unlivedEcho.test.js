@@ -88,7 +88,7 @@ function makeCtx(rows, rng) {
 }
 
 // run N seeded cycles over K citizens; count echo lines + collect emitted text
-function runTrials(life, memReg, seeds, citizensPerRun) {
+function runTrials(life, memReg, seeds, citizensPerRun, needle = "the job they didn't take") {
   let echoes = 0, threw = false, leakedSpecifics = 0;
   for (let s = 1; s <= seeds; s++) {
     const rows = [];
@@ -97,7 +97,7 @@ function runTrials(life, memReg, seeds, citizensPerRun) {
     try { generateCitizensEvents_(ctx); } catch (e) { threw = true; break; }
     for (const r of ctx.ledger.rows) {
       const emitted = String(r[5] || '').slice(life.length); // new lines only
-      if (emitted.indexOf("the job they didn't take") >= 0) echoes++;
+      if (emitted.indexOf(needle) >= 0) echoes++;
       if (emitted.indexOf('Sacramento') >= 0) leakedSpecifics++;
     }
   }
@@ -146,5 +146,14 @@ console.log('═══ Routing');
     tagged !== null && /\[Personal(-[A-Za-z]+-(Up|Down)-[SML])?\]/.test(tagged), tagged || 'no echo in 200 single-citizen seeds');   // engine.299: graded form
 }
 
+// Both persisted keys retain the same read behavior; nothing rewrites the input.
+for (const tailTag of ['IncomeFitMove', 'DisplacementMove']) {
+  const life = 'C97 — [' + tailTag + '] SYNTHETIC move history';
+  const oldReg = JSON.stringify({ unlived: [{ tag: 'displacementmove', txt: 'SYNTHETIC old branch', cy: 80 }] });
+  const newReg = JSON.stringify({ unlived: [{ tag: 'incomefitmove', txt: 'SYNTHETIC old branch', cy: 80 }] });
+  const oldRead = runTrials(life, oldReg, 100, 25, 'the version of them that stayed');
+  const newRead = runTrials(life, newReg, 100, 25, 'the version of them that stayed');
+  assert('income-fit echo aliases match on ' + tailTag, oldRead.echoes > 0 && !oldRead.threw && JSON.stringify(oldRead) === JSON.stringify(newRead), JSON.stringify({ oldRead, newRead }));
+}
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

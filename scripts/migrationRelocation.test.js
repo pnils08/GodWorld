@@ -285,6 +285,8 @@ console.log('A10 MASS_EXODUS threshold on planning intent');
     JSON.stringify(exodus.map(h => h.neighborhood)));
   assert('exodus count = planning count; a considering row never inflates it', exodus[0].atRiskCount === 5,
     String(exodus[0].atRiskCount));
+  assert('planning hook describes residents and income fit, without changing the hook type',
+    exodus[0].description === '5 residents in Middleton planning to leave for a better household-income fit', exodus[0].description);
 }
 
 // ═══ A3: pressure lane — household moves as a unit ═══════════════════════════
@@ -327,6 +329,9 @@ console.log('A3 pressure lane household move');
   const moveLines = appendIntents.filter(a => a.tab === 'LifeHistory_Log' && a.row[3] === 'Neighborhood');
   assert('LifeHistory line per moved member', moveLines.length === 3, String(moveLines.length));
   assert('line names both hoods and the why', moveLines.every(a => /moved from Highgate to Lowmarket — /.test(a.row[4])), moveLines[0] && moveLines[0].row[4]);
+  assert('move log and hook describe income fit, not displacement or being priced out',
+    moveLines.every(a => /income fit|household income/.test(a.row[4]) && !/displaced|priced out/.test(a.row[4])) &&
+    /income fit|household income/.test(moveHooks[0].description) && !/displaced|priced out/.test(moveHooks[0].description));
   assert('no LifeHistory line for the bystander', !appendIntents.some(a => a.row[1] === 'POP-13'));
 }
 

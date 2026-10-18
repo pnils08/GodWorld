@@ -103,7 +103,7 @@ var NEIGHBORHOOD_CRIME_PROFILES = {
     violentCrimeMod: 1.0,
     responseMod: 0.8,
     baseIncidents: 7,
-    character: 'east flatlands, the Baylight frontier'
+    character: 'east flatlands, arriving frontier' // INSTITUTIONS.md §Neighborhoods: East Oakland
   },
   'Lake Merritt': {
     propertyCrimeMod: 1.0,

@@ -5,7 +5,7 @@
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C111 (fired 2026-10-11 ~16:18 CDT, 0 errors, 148 s); next live fire C112, Sunday 2026-10-18.
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (51)** — each plan, its rows and the state each is in:
+**Plans in motion (52)** — each plan, its rows and the state each is in:
 
 - [[../plans/2026-10-11-media-extension]]: pipeline.83 ready, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
@@ -58,6 +58,7 @@
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
 - [[../plans/2026-09-19-civic-wake-game-loop]]: engine.253 ready
+- [[../plans/2026-10-18-event-engines-move-dials]]: engine.299 live-observing
 <!-- /generated -->
 
 ## Pull order (builder, 2026-09-29; trued 2026-10-07)
@@ -171,4 +172,4 @@
 | engine.253 | Transit as its own system: ridership and station load from hood canon | ready | engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] §Rulings (g) |
 | engine.261 | Firm agents: three business owners get a wake slice to run their business | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.298 | World summary and sports slices hand the desks one number per fact (C111 failure review, three honest pieces failed): (1) the summary's hospital segment counted tracked Hospital_Ledger rows ("0 in care") — now the cycle's Care_Justice_Census city row in the care trail's words ("37 admissions, 75 in care at the close (0 tracked), 75 beds occupied"), no load % (census vs tracked-scale beds); civic-domain slice reads the new segment; (2) the summary's sports line was literal (C110, playoffs) — the present-tense "The A's record is 4-1." was minted in Simon's slice; Simon and Tanya now state a record with its season and tense (`sportsSubstrate.recordSentence`). Live proof: C112 summary hospital = health slice census line; Sat 10-24 audit fails no piece on either | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §engine.298; [[../plans/2026-10-11-media-extension]] §pipeline.83 |
-| engine.299 | Hardcoded event engines reviewed and repaired to the builder's 2026-10-18 message: every event that fires moves a dial, reads this world not real Oakland, never throws an owner engine's life event; 20 `{}` kinds, premise sweep, debt/tier/net-worth gating. Hourly wakes; rb supports; codex + agy on every task | in progress | engine-sheet | [[../plans/2026-10-18-event-engines-move-dials]] |
+| engine.299 | Every hardcoded event moves a dial, no real-Oakland premise. LIVE PROD @146 stage 4o (bench @49 0 inert). C112 readback = offender scan (expect 1 Household-GameNight). Task 13 caps lifted, benched @53, PROD holds for codex/builder | live-observing | engine-sheet | [[../plans/2026-10-18-event-engines-move-dials]] |

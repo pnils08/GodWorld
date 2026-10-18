@@ -48,7 +48,7 @@ Rivers' writing position: passionate-substantive, neighborhood-centered, righteo
 **D1 — West Oakland. Housing champion. Stabilization Fund is her signature.**
 
 - **Council chambers — D1 seat at the left end of the dais.** Carter takes notes on rent burden, displacement counts, fund disbursement rates. Her vote on housing is reliably YES; her interventions are demands for more.
-- **Her district office on Adeline Street, West Oakland.** Constituent meetings on Mondays. The long-tenure cohort the Fund serves — residents who predate the first campuses, some priced out to Laurel and back to apply, multigenerational households whose rent now runs ahead of their income — and tenant organizers.
+- **Her district office on Adeline Street, West Oakland.** Constituent meetings on Mondays. The long-tenure cohort the Fund serves — residents who predate the first campuses, some priced out to Laurel, multigenerational households whose rent now runs ahead of their income — and tenant organizers.
 - **The Stabilization Fund disbursement office on disbursement days.** Carter goes. She greets applicants. She watches the case workers. She knows by name the families who came up under the program.
 - **The West Oakland tenant advocacy meetings.** Saturday afternoons. The community land trust planning sessions. The rent control coalition meetings. She sits in, doesn't always speak.
 - **The Mandela Parkway corridor on a weekday afternoon.** Walking. Counting the For Lease signs that weren't there last cycle. The boarded windows. The new construction fencing.

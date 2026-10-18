@@ -79,7 +79,9 @@ function generateGenericCitizenMicroEvents_(ctx) {
   var sportsSeason = (S.sportsAtmosphereEnabled === true) ? (S.sportsSeason || "off-season") : "off-season";
 
   var eventCount = 0;
-  var EVENT_LIMIT = 25; // CATCH-UP: was 12, temporarily raised. Revert after ~5 cycles.
+  // engine.299 Task 13 (SIM_DOCTRINE §1: no caps, no quotas): the citywide EVENT_LIMIT (25, a "catch-up" raise of 12)
+  // is gone — it stopped the loop after 25 lines, so citizens late in ledger order never drew. Each citizen's own
+  // odds decide; eventCount stays as the count (S.microEvents).
 
   // BASE POOL
   var base = [
@@ -483,8 +485,6 @@ function generateGenericCitizenMicroEvents_(ctx) {
   var logRows = [];
 
   for (var r = 0; r < rows.length; r++) {
-    if (eventCount >= EVENT_LIMIT) break;
-
     var row = rows[r];
 
     var tier = Number(row[iTier] || 0);

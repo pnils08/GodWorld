@@ -138,6 +138,7 @@ Sign skews up (≈ .6 / .4) except where the fact's direction is known, which de
 
 ## Changelog
 
+- 2026-10-18 12:45 (engine-sheet) — Task 13a benched alone (1004 @50 = PROD 4o + neighborhood cap lifted): C112 ok 152 s (limit 360), persist 752/0, EE 4→4; 2,325 lines (was 2,249), 18 neighborhood-engine lines (cap was 6), 7 bookkeeping, 0 inert. 13b (generic cap 25) committed, benching on top. PROD for Task 13 waits on codex (out to 10-24) or the builder's word on agy.
 - 2026-10-18 12:20 (engine-sheet) — **engine.299 stack LIVE: PROD @146 = stage 4o** (18 files at c8235de3 over 4n), pull-back 168/168. Bench 1004 @49 C112: 2,249 lines, 0 inert, 7 bookkeeping markers, 0 premise prose, 0 life verbs — acceptanceEmpty true. Tasks 3/4/5/7 done. First live fire: C112, Sun 2026-10-18. Next: Task 13 (lift the caps).
 - 2026-10-18 14:25 (engine-sheet) — Output caps re-scoped from "held for the builder" to Task 13 (rb, SIM_DOCTRINE §1: no caps, no quotas): lifted after a bench run-time check, each cap benched alone; the builder speaks only to keep one.
 - 2026-10-18 14:15 (engine-sheet) — Task 12 done (rb 5bc4dee6). The output quotas rb found still live are held with Task 8 for the builder: removing them changes how many events fire, a rate call, not cleanup.

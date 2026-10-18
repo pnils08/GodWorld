@@ -326,8 +326,10 @@ console.log('A3 pressure lane household move');
   assert('bystander did not move', sl[3][col('Neighborhood')] === 'Middleton');
   // 2026-09-23 (kimi): every member's own record notes the move — citizens no
   // longer teleport between the roll and the settled-in verdict.
-  const moveLines = appendIntents.filter(a => a.tab === 'LifeHistory_Log' && a.row[3] === 'Neighborhood');
+  // engine.299: the move carries its dial (Relocation-<Dial>-<Up|Down>-M) on the log AND the member's own cell.
+  const moveLines = appendIntents.filter(a => a.tab === 'LifeHistory_Log' && /^Relocation-[A-Z][a-z]+-(Up|Down)-M$/.test(a.row[3]));
   assert('LifeHistory line per moved member', moveLines.length === 3, String(moveLines.length));
+
   assert('line names both hoods and the why', moveLines.every(a => /moved from Highgate to Lowmarket — /.test(a.row[4])), moveLines[0] && moveLines[0].row[4]);
   assert('move log and hook describe income fit, not displacement or being priced out',
     moveLines.every(a => /income fit|household income/.test(a.row[4]) && !/displaced|priced out/.test(a.row[4])) &&
@@ -518,6 +520,8 @@ console.log('A12 owner move — sell up, buy or rent there; authored homes stay'
   assert('trade-up: still owned, mortgage on the new price', t.type === 'owned' && t.rent === 4620 && t.cost === 990000, [t.type, t.rent, t.cost].join(','));
   assert('trade-up: NetWorth = 400,000 + 59,400 − 198,000', t.nw === 261400, String(t.nw));
   assert('trade-up: one [Home] line names both hoods', /\[Home\] sold the place in Lowmarket and bought in Highgate/.test(t.life), t.life);
+  // engine.299: the move itself lands on the citizen's own record with its dial (moving up → drive up).
+  assert('engine.299 trade-up: the cell carries [Relocation-Drive-Up-M] moved from Lowmarket to Highgate', /\[Relocation-Drive-Up-M\] moved from Lowmarket to Highgate/.test(t.life), t.life);
   assert('trade-up: HomesOwned unchanged (sell one, buy one)', t.homes === 2, String(t.homes));
   assert('trade-up: the move hook says so', t.ctx.summary.storyHooks.some(k => k.hookType === 'CITIZEN_RELOCATED' && /bought in Highgate/.test(k.description)));
   assert('trade-up: no separate HOME_SALE hook (one event, one hook)', !t.ctx.summary.storyHooks.some(k => k.hookType === 'HOME_SALE'));

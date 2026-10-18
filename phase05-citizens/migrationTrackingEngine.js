@@ -518,9 +518,11 @@ function processSettledInCheck_(ctx, cycle) {
     } else {
       worked = traj.indexOf('declin') < 0;
     }
+    // engine.299: the verdict carries its dial — the move worked reads composure up, same problems reads down
+    // ([Home] alone maps to no dial).
     var line = worked ?
-      '[Home] ten weeks in ' + hood + ' — the move worked' :
-      '[Home] ten weeks in ' + hood + ' — same problems, new address';
+      '[Home-Composure-Up-S] ten weeks in ' + hood + ' — the move worked' :
+      '[Home-Composure-Down-S] ten weeks in ' + hood + ' — same problems, new address';
     row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + stamp + ' — ' + line;
     checked++;
   }
@@ -636,7 +638,8 @@ function processRelocations_(ctx, cycle) {
       iMigReason = idx('MigrationReason'), iMigDest = idx('MigrationDestination'),
       iMigCycle = idx('MigratedCycle'),
       iWealthLevel = idx('WealthLevel'), // engine.135 F — admission band
-      iDialStateR = idx('DialState');   // engine.178 — openness gates the misfit lane
+      iDialStateR = idx('DialState'),   // engine.178 — openness gates the misfit lane
+      iLifeR = idx('LifeHistory');      // engine.299 — the move lands on the citizen's own record
   if (iNeighborhood < 0 || iIncome < 0 || iMigIntent < 0) return { moved: 0 };
   // engine.135 F (S399): the B1 hood profile (S.neighborhoodState, Phase 2)
   // carries each neighborhood's WealthLevel admission band.
@@ -792,18 +795,25 @@ function processRelocations_(ctx, cycle) {
     }
 
     // ── Reason (enum) + narrative phrase ──────────────────────────────────
-    var reason, phrase;
+    // engine.299 (builder 2026-10-18: every event that fires moves a dial): the move is the citizen's own
+    // event, so it carries the dial it moves — a move forced by cost reads composure down; moving up reads
+    // drive up; a lateral move to a better fit reads composure up. Band M: a move is rarer and heavier than a
+    // day's texture (starting value; rates are the builder's — plan §Rates).
+    var reason, phrase, moveTag;
     if (unit.maxRisk >= 9) {
       reason = MIGRATION_REASONS.DISPLACED;
       phrase = 'household income fit favored ' + bestName + ' over ' + unit.hood;
+      moveTag = 'Relocation-Composure-Down-M';
     } else if (lane === 'pressure') {
       reason = MIGRATION_REASONS.COST;
       phrase = 'moving for a better fit between household income and housing costs';
+      moveTag = 'Relocation-Composure-Down-M';
     } else {
       reason = MIGRATION_REASONS.OPPORTUNITY;
       // the misfit lane sorts to the best FIT, which is not always a richer hood
       var upward = hoods[bestName].income > current.income;
       phrase = (upward ? 'moving up from ' + unit.hood : 'leaving ' + unit.hood + ' for a better fit') + (ownerReceipt ? ' — ' + ownerReceipt.phrase : '');
+      moveTag = upward ? 'Relocation-Drive-Up-M' : 'Relocation-Composure-Up-M';
     }
 
     // ── Execute: mutate every member row in ctx.ledger (Phase 10 commits) ──
@@ -820,12 +830,17 @@ function processRelocations_(ctx, cycle) {
     // Every member's own record notes the move (2026-09-23, kimi): until now
     // the first trace on the citizen was the settled-in verdict 10 Cycles
     // later — from the cron-wake point of view citizens teleported.
-    if (typeof queueAppendIntent_ === 'function') {
-      for (var lh = 0; lh < unit.rowIdxs.length; lh++) {
-        var lhPop = String(rows[unit.rowIdxs[lh]][iPOPID] || '').trim();
-        if (!lhPop) continue;
-        queueAppendIntent_(ctx, 'LifeHistory_Log', [ctx.now, lhPop, '', 'Neighborhood',
-          'moved from ' + unit.hood + ' to ' + bestName + ' — ' + phrase, '', cycle],
+    // engine.299: the move is written to each member's LifeHistory cell (Phase 9 folds the cell) as well as the
+    // log, with the same graded tag — before, the log carried a bare 'Neighborhood' and the cell nothing.
+    var moveText = 'moved from ' + unit.hood + ' to ' + bestName + ' — ' + phrase;
+    var moveStamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
+    for (var lh = 0; lh < unit.rowIdxs.length; lh++) {
+      var lhRow = rows[unit.rowIdxs[lh]];
+      var lhPop = String(lhRow[iPOPID] || '').trim();
+      if (!lhPop) continue;
+      if (iLifeR >= 0) lhRow[iLifeR] = (lhRow[iLifeR] ? lhRow[iLifeR] + '\n' : '') + moveStamp + ' — [' + moveTag + '] ' + moveText;
+      if (typeof queueAppendIntent_ === 'function') {
+        queueAppendIntent_(ctx, 'LifeHistory_Log', [ctx.now, lhPop, '', moveTag, moveText, '', cycle],
           'migration relocation', 'citizens', 5);
       }
     }

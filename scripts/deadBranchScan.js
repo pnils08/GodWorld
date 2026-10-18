@@ -134,7 +134,9 @@ const ALLOWLIST = [
   { file: 'phase05-citizens/generateCitizensEvents.js', re: /^displacementmove$/,
     reason: 'History read alias: stored registers carry the old key (engine.299 Task 7).' },
   { file: 'lib/resonanceRecall.js', re: /^displacementmove$/,
-    reason: 'History read alias: stored registers carry the old key (engine.299 Task 7).' }
+    reason: 'History read alias: stored registers carry the old key (engine.299 Task 7).' },
+  { file: 'lib/coverageAnchorRetirements.js', re: /^displacement intake$/,
+    reason: 'An avoidFramings entry: tells the desks NOT to use this framing (anti-premise).' }
 ];
 function annotate(hit) {
   const rule = ALLOWLIST.find(r => r.file === hit.file && (!r.kind || r.kind === hit.kind) && r.re.test(hit.text));
@@ -248,12 +250,22 @@ function buildOffenders({ log, ecl, sources, resolver, cycle, sheet = 'live', ge
   }
   for (const r of table(ecl, ['Text', 'Active'], 'Event_Content_Ledger')) {
     if (String(r.Active).trim().toLowerCase() !== 'yes') continue;
-    const hit = { where: 'live:Event_Content_Ledger', row: r.row, line: r.row, text: String(r.Text), kind: 'string' };
+    const pool = String(r.PoolKey || '');
+    const hit = { where: 'live:Event_Content_Ledger', row: r.row, line: r.row, text: String(r.Text), kind: 'string', pool };
     if (PREMISE.test(hit.text)) premise.push(hit);
-    if (LIFE.test(hit.text)) lifeVerbs.push(hit);
+    if (LIFE.test(hit.text)) {
+      // engine.299: owner-engine pools are excluded here exactly as owner-engine FILES are above — lifeEvent.* is the
+      // promotion/home dice's own text, civicRole.* is what an official hears from a constituent (the event is theirs).
+      const owner = /^(lifeEvent|civicRole)\./.test(pool);
+      lifeVerbs.push(owner ? { ...hit, allowed: true, reason: 'Owner-engine pool (' + pool.split('.')[0] + '.*): the life event belongs to its own engine, not a color pool.' } : hit);
+    }
   }
+  // engine.299 (builder 2026-10-18: no engine-words gate): premise acceptance counts PROSE that can reach a citizen
+  // or a desk — a string with words in it. Comments and bare identifiers (a column name, a DSL field) are code words:
+  // reported in premise with prose:false, never hidden, never blocking.
+  for (const h of premise) h.prose = h.kind === 'string' && /\s/.test(h.text.trim());
   return { generatedAt, sheet, cycle: selected, scannedLines: scanned.length, inert, structural, premise, lifeVerbs,
-    acceptanceEmpty: inert.total === 0 && !premise.some(h => !h.allowed) && !lifeVerbs.some(h => !h.allowed) };
+    acceptanceEmpty: inert.total === 0 && !premise.some(h => !h.allowed && h.prose) && !lifeVerbs.some(h => !h.allowed) };
 }
 async function offenders(root, liveId, benchId, cycle) {
   let report;

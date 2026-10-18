@@ -60,3 +60,14 @@ const parts = fragments('var s = "url // gentrification"; // blight\n/* displace
 assert.deepEqual(parts.map(t => [t.kind,t.line]), [['string',1], ['comment',1], ['comment',2], ['string',4]]);
 assert.equal(fragments('var r=/["\']/; var t=`a ${"nested"} displaced`;').filter(t => t.kind === 'string').length, 3);
 console.log('deadBranchScan offenders: PASS (Cycle filtering, resolver, strings/comments, allowlist, live ECL, missing-data rejection)');
+
+// engine.299: owner-engine ledger pools are excluded from life-verbs; premise acceptance counts prose only.
+{
+  const ecl2 = [['Kind', 'PoolKey', 'Text', 'Active'], ['line', 'lifeEvent.promotion.up.L', 'Promoted at {employer}', 'yes'], ['line', 'civicRole.everyday.up.M', 'A couple said they named them in their wedding speech', 'yes'], ['line', 'neighborhood.texture', 'SYNTHETIC got married on the block', 'yes']];
+  const r2 = buildOffenders({ log, ecl: ecl2, sources: {}, resolver, sheet: 'bench', generatedAt: 'synthetic' });
+  assert(r2.lifeVerbs.filter(h => h.where === 'live:Event_Content_Ledger' && h.allowed).length === 2, 'owner pools allowed');
+  assert(r2.lifeVerbs.some(h => h.where === 'live:Event_Content_Ledger' && !h.allowed && /married/.test(h.text)), 'a color pool life verb still flags');
+  const r3 = buildOffenders({ log, ecl: [['Kind', 'PoolKey', 'Text', 'Active']], sources: { 'lib/synthetic.js': 'var col = "DisplacementRisk"; /* gentrification note */' }, resolver, sheet: 'bench', generatedAt: 'synthetic' });
+  assert(r3.premise.length >= 2 && r3.premise.every(h => h.prose === false), 'identifier + comment reported, not prose');
+}
+console.log('engine.299 owner-pool + prose acceptance: PASS');

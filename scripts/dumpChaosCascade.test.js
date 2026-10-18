@@ -90,15 +90,10 @@ function restore() { sheets.getSheetAsObjects = REAL_getSheetAsObjects; }
     const b2 = dcc.reactionBlockFor({ targetName: 'X', vehicle: 'cop_car', outcome: 'arrested' }, 'Chief Montez');
     assert('uses "a" before cop car (consonant)', b2.includes('hit by a cop car'));
 
-    // Run the block through the REAL cron packet linter (scripts/lintCivicPackets.js),
-    // not a hand-guessed regex of what it might flag — cron-civic-run.js lints every
-    // packet and "fails loud on any leak" (its own header); a regex here tests this
-    // script's model of that linter, not the linter itself (advisor-pass finding,
-    // S423 — same class as the two fixes already applied this session).
-    const { lintText } = require('./lintCivicPackets');
+    // The cron packet linter was retired 2026-10-18 (no engine-words gate); the block only
+    // has to render.
     const b3 = dcc.reactionBlockFor({ targetName: 'Vinnie Keane', vehicle: 'ambulance', outcome: 'medical_emergency' }, 'Mayor Avery Santana');
-    const issues = lintText(b3);
-    assert('passes the real cron packet linter clean', issues.length === 0, JSON.stringify(issues));
+    assert('renders a non-empty block', typeof b3 === 'string' && b3.length > 0);
   }
 
   console.log(`\n${passed} passed, ${failed} failed`);

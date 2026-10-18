@@ -189,8 +189,8 @@ function loadEvaluationPriorArcEvidence(filePath) {
 // injected. Viable because the tool-heavy checks are deterministic pre-checks.
 // ---------------------------------------------------------------------------
 
-// Phase 2.1 flag class (a), deterministic half: engine/system language that must
-// never reach prose. Scans the BODY only — PREWRITE/EVIDENCE are fenced metadata.
+// Phase 2.1 flag class (a), deterministic half: the fourth wall. Scans the BODY only —
+// PREWRITE/EVIDENCE are fenced metadata.
 // §4.7 re-scope (ENGINE_CRON_LOOP.md, Mike-direct 2026-08-23; class definition
 // Mike-direct 2026-08-24): the fourth wall is exactly two things — REAL-WORLD
 // OAKLAND leaking into the city (the actual city's people, businesses, geography;
@@ -201,17 +201,10 @@ function loadEvaluationPriorArcEvidence(filePath) {
 const FOURTH_WALL_TOKENS = [
   'simulation', 'simulated',
 ];
-// SYSTEM_TOKENS are raw table/column/enum and infrastructure names leaking into
-// prose — repair cues, severity med at most, never a fail on their own (§4.7:
-// trade vocabulary and data language are protected; over-tuned instruments zero
-// real reporting).
-const SYSTEM_TOKENS = [
-  'construction-planning', 'active internal state', 'Ripple Ledger', 'impactScore',
-  'tension score', 'severity level', 'civic load', 'DialState', 'MemoryRegisters',
-  'DisplacementRisk', 'MigrationIntent', 'WealthLevel', 'CareerStage', 'EconomicProfileKey',
-  'EmployerBizId', 'SMPageId', 'desk_signal', 'world_summary', 'Initiative_Tracker',
-  'Neighborhood_Map', 'Reflection_Intake', 'Supermemory', 'claude-mem',
-];
+// There is no system-vocabulary class and no POPID-in-prose blocker (builder 2026-09-20
+// S426, restated 2026-10-18: "ledger terms are not contamination" — there is no engine-words
+// gate). Table names, field names, metric names, IDs and the record's own vocabulary are the
+// city's public language; the gate judges claims against the record, never the words.
 // Unwrap a whole-document code fence before any scan. S344: a DeepSeek business
 // draft wrapped its ENTIRE article in ```markdown …```; scanEngineVerbiage strips
 // fenced blocks (to skip code examples), so it stripped the whole article, scanned
@@ -244,18 +237,6 @@ function articleProseForReview(draftText) {
   return unwrapWholeDocFence(draftText).split(/^##\s+INTAKE\s*$/im)[0].trim();
 }
 
-// A raw POPID in the article's PROSE is machine text in the reader's news —
-// the reader hears names, never the register's IDs. The INTAKE block is a
-// machine sidecar (a POPID there is not contamination, builder 2026-10-08) and
-// is not scanned; the daily brief and the delivery copy strip it before any
-// person reads or hears it (lib/articleIntake readerCopy). Fenced blocks are
-// skipped after the whole-doc unwrap, so a fence can never blank the scan.
-function scanPopidLeak(draftText) {
-  const prose = articleProseForReview(draftText).replace(/```[\s\S]*?```/g, '');
-  const hits = prose.match(/\bPOP-\d{5}\b/g);
-  return hits ? [...new Set(hits)] : [];
-}
-
 function scanEngineVerbiage(draftText) {
   // INTAKE is machine-readable provenance, not Article prose. Source refs in
   // that block intentionally retain canonical table/artifact names, so scanning
@@ -268,17 +249,9 @@ function scanEngineVerbiage(draftText) {
     const m = body.match(re);
     if (m) hits.push({ token: t, count: m.length, cls: 'fourth-wall' });
   }
-  for (const t of SYSTEM_TOKENS) {
-    const re = new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-    const m = body.match(re);
-    if (m) hits.push({ token: t, count: m.length, cls: 'system-vocab' });
-  }
-  const pops = body.match(/\bPOP-\d{5}\b/g);
-  if (pops) hits.push({ token: 'POPID literal (POP-XXXXX)', count: pops.length, cls: 'system-vocab' });
   // Mike-direct 2026-08-07: engine NUMBERS are not contamination — Civis Systems is the
   // in-world publisher of city-level metrics, so a cited figure is ordinary journalism.
-  // The raw-decimal scan is retired; system LANGUAGE (metric names, status enums, table
-  // names, POPID literals) is still policed by the token list above.
+  // 2026-10-18: engine WORDS are not contamination either. Only the fourth wall is scanned.
   return hits;
 }
 
@@ -477,7 +450,7 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
         '   unchanged and is checked below.',
       ].join('\n')
       : '   every person-name candidate resolved to a ledger citizen' + (nameCheck && nameCheck.verified.length ? ' (' + nameCheck.verified.join('; ') + ')' : '') + '.',
-    '2. Verbiage scan (article body — §4.7 two-class split):',
+    '2. Fourth-wall scan (article body):',
     verbiage.length
       ? [
         '   HITS: ' + verbiage.map(v => v.token + ' ×' + v.count + ' [' + v.cls + ']').join('; '),
@@ -485,11 +458,11 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
         '   into the city (that axis is the real-world-import pre-check above) and the word "simulation".',
         '   Judge the word in context: "traffic simulation" in a civic story is an engineer\'s ordinary word —',
         '   dismiss; the city or its people framed as a simulation is HIGH-severity.',
-        '   [system-vocab] = raw table/column/metric names in prose. Repair cue, severity med at MOST — never',
-        '   fail an article on system-vocab alone. Trade words ("packet", "cycle"), cited data figures, and',
-        '   legitimate sports-game stats (OVR, avg/HR/RBI/ERA, records, standings) are canon — dismiss those.',
       ].join('\n')
       : '   clean.',
+    '   VOCABULARY IS NEVER A FLAG (standing newsroom rule): ledger terms, table and field names, metric',
+    '   names, IDs, tiers, "cycle", cited figures and sports stats are the city\'s public language. Judge',
+    '   whether a claim is true to the ground truth, never which words carry it.',
     '3. Ledger profiles of verified citizens named in the draft (bio ground truth — any age, occupation,' +
     '   tenure, wealth, or neighborhood claim contradicting these is HIGH-severity misrepresentation):',
     profiles.length ? profiles.map(p => '   - ' + p).join('\n') : '   (none)',
@@ -769,8 +742,6 @@ async function main() {
   const detBlockers = [];
   detBlockers.push(...intakeBlockers);   // pipeline.45: INTAKE validity is part of clearance
   for (const j of scanStructuralJunk(draftText)) detBlockers.push({ severity: 'high', check: 'structural', issue: j });
-  const popHits = scanPopidLeak(draftText);
-  if (popHits.length) detBlockers.push({ severity: 'high', check: 'popid-leak', issue: 'raw POPID(s) in prose: ' + popHits.join(', ') });
   // groundedBy support (articleContamination.js, 2026-09-17 Chinatown/Caldera
   // false-positive fix): a blunt decay/safety phrase only blocks when the
   // packet carries no matching engine-anomaly signal, so this call needs the
@@ -880,6 +851,5 @@ module.exports = {
   articleProseForReview,
   scanEngineVerbiage,
   scanStructuralJunk,
-  scanPopidLeak,
   contractWordFloor, contractWordCount, buildContractPrompt, parseContractScore, // pipeline.77
 };

@@ -3,7 +3,6 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { lintText } = require('./lintCivicPackets');
 const { districtPackRef, weekCarryBlock, spliceWeekCarry, modelChainFor, FALLBACK_MODELS } = require('./cron-civic-run');
 
 let failed = 0;
@@ -29,17 +28,16 @@ check('clean wall line kept', block.includes('KONO needs investment, not abandon
 // carrying its own hood-vs-city sentiment reading is NOT an engine leak and is
 // no longer stripped. Previously this asserted the line was dropped.
 check('public-metric wall line kept', block.includes('0.27'));
-// The drop mechanism itself still has to work — proven on vocabulary that only
-// exists inside the engine.
-check('engine-internal metric wall line dropped', !weekCarryBlock({
+// 2026-10-18 (builder): ledger terms are not contamination — there is no engine-words gate.
+// A wall line carrying the engine's own vocabulary is kept whole.
+check('engine-vocabulary wall line kept', weekCarryBlock({
   posts: [{ content: 'KONO momentum 0.27 against the citywide dial' }],
   packPath: 'output/cron-civic/packs/COUNCIL-D7_c103.json',
-}).includes('0.27'));
+}).includes('KONO momentum 0.27 against the citywide dial'));
 check('object-object wall line dropped', !weekCarryBlock({
   posts: [{ content: 'datawake: [object Object] | action: audit' }],
   packPath: 'output/cron-civic/packs/COUNCIL-D7_c103.json',
 }).includes('[object Object]'));
-check('week block lints clean', lintText(block).length === 0, JSON.stringify(lintText(block)));
 
 const empty = weekCarryBlock({ posts: [], packPath: null });
 check('empty wall named', empty.includes('No CIVIC wall lines this week yet'));

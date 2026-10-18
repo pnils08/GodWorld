@@ -797,31 +797,37 @@ function worldSummaryText(cycle) {
 // ---------------------------------------------------------------------------
 const AUDIT_CHARGE = [
   'You are the accuracy desk of an Oakland newsroom, auditing one article against the ground truth supplied.',
-  'Verdict enum: "accurate" (every load-bearing claim grounded), "corrections-needed" (engine/system',
-  'vocabulary leaking into prose, or a claim stated imprecisely but not bent), "canon-violation" (a person,',
-  'role, age, neighborhood, or ledger fact contradicted or invented, or a data value misrepresented).',
-  'Severity doctrine: bending a PERSON is the worst class; engine-verbiage is the lesser class.',
+  'Verdict enum: "accurate" (every load-bearing claim grounded), "corrections-needed" (a claim stated',
+  'imprecisely but not bent), "canon-violation" (a person, role, age, neighborhood, or ledger fact',
+  'contradicted or invented, or a data value misrepresented).',
+  'Severity doctrine: bending a PERSON is the worst class.',
+  'VOCABULARY IS NEVER A FAILURE (standing newsroom rule, builder-direct): ledger terms, table and field names,',
+  'IDs, metric names, tiers and tables, "cycle", a show\'s scoring words, raw identifiers — the city\'s own record',
+  'is public language in this city. Judge whether a claim is TRUE to the record, never which words carry it.',
+  'A QUOTED CITIZEN speaks for themselves: a claim inside a citizen\'s quoted words (an event they name, a',
+  'thing they believe) is the citizen\'s own, never the paper\'s — it is not a failure.',
   'A person may only be called invented if the LEDGER PROFILES section is non-empty and they are absent',
   'from it AND from the world summary — you cannot see the full ledger, so absence of evidence about a',
   'named person is NOT evidence of invention. A supplied ledger profile IS proof the person is real.',
   'The word "cycle" is the city\'s canonical time unit and engine NUMBERS are ordinary journalism (newsroom rule) — neither is engine-verbiage.',
   'A council member\'s district is the SEAT they hold, not the neighborhood they live in: never judge a district claim from the ledger home neighborhood.',
   'Scene texture (weather, unnamed street life, color) is NEVER a failure — only contradiction is.',
-  'Reply STRICT JSON only: {"verdict":"...","failures":[{"what":"...","class":"citizen-bending|data-misrepresentation|engine-verbiage|unsupported-claim","why":"..."}]}'
+  'Reply STRICT JSON only: {"verdict":"...","failures":[{"what":"...","class":"citizen-bending|data-misrepresentation|unsupported-claim","why":"..."}]}'
 ].join('\n');
 
 // UNDOCKED is the city's serialized reality show (plan 2026-08-07-spacemolt-game-show). The audit's
 // ground truth is the world summary, which carries no show record: C109/C110 failed the digest as
 // invented (the pilots "were" a principal and a nurse) and C111 flagged the show's own scoring words
 // as engine leakage. The board is the show's authoritative record, so an UNDOCKED piece is audited
-// against it.
+// against it. The show's words, raw identifiers and field names in prose are never a failure
+// (builder 2026-10-18: there is no engine-words gate).
 function undockedGroundTruth(rows) {
   const board = (rows || []).filter(r => r && r.Holder);
   if (!board.length) return '';
   return 'UNDOCKED is a serialized in-world reality program the city watches: real citizens fly a ship each episode and are scored. ' +
     'Its own scoring words (flights, episodes, standings, credits, combat, mishaps, magnitude, cycles led, streak) are in-world, not engine vocabulary, ' +
-    'and a citizen who flies is still the citizen the ledger says — flying is not bending them. Raw snake_case identifiers, field names and prompt ' +
-    'scaffolding in prose remain engine-verbiage. The board is as of this audit and standings move every episode: a daily written earlier in the week may state an earlier standing, which is not a violation — only the weekly digest is held to these totals.\nBOARD (authoritative for who flew and their totals):\n' +
+    'and a citizen who flies is still the citizen the ledger says — flying is not bending them. ' +
+    'The board is as of this audit and standings move every episode: a daily written earlier in the week may state an earlier standing, which is not a violation — only the weekly digest is held to these totals.\nBOARD (authoritative for who flew and their totals):\n' +
     board.map(r => r.Rank + '. ' + r.Holder + (r.POPID ? ' (' + r.POPID + ')' : '') + ' — ' + r.Episodes + ' episodes, ' + r.CreditsTotal +
       ' credits, combat ' + r.CombatTotal + ', mishaps ' + r.MishapTotal + ', best magnitude ' + r.BestMagnitude + ', cycles led ' + r.CyclesLed +
       ', streak ' + r.CurrentStreak + ', last aired C' + r.LastAiredCycle).join('\n');
@@ -1109,7 +1115,7 @@ const NARRATOR_CHARGE = (cycle, crossoverCount) => [
   'You have your staff\'s published reporting below. Draw on it the way an editor\'s column draws on the',
   'paper: quote your reporters BY NAME when their reporting carries a moment ("as Dana Reeve reported...").',
   'Never restate a number as the story — the number is the cause; the people living it are the content.',
-  'Never use system or engine vocabulary. Never use real-world dates — the clock is ' + simClock(cycle) + '.',
+  'Never use real-world dates — the clock is ' + simClock(cycle) + '.',
   'Thread the week: what moved, what contradicts, what nobody has answered yet. End on what you\'re',
   'watching next week. 900-1200 words, plain prose, no headers, no bullet lists.'
 ].concat(crossoverCount ? [

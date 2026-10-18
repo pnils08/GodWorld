@@ -302,13 +302,11 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
   assert.equal(cdr.thinCheck('# Head\n\n' + body(45), null, 'x').floor, 150);
   assert.ok(t.words < 50, 'INTAKE words not counted: ' + t.words);
   assert.equal(cdr.thinCheck('# Head\n\n' + body(200), null).thin, false);
-  // engine terms: reuses validateEdition's list
-  assert.deepStrictEqual(cdr.engineTermCheck('The tension score rose.\n\n## INTAKE\ncivic load'), ['tension score']);
-  assert.deepStrictEqual(cdr.engineTermCheck('Nothing odd here at all.'), []);
+  // engine terms: no check — ledger terms are not contamination (builder 2026-10-18)
+  assert.equal(typeof cdr.engineTermCheck, 'undefined');
   // codex pipeline.75 #4 — a *** divider mid-body does not end the count
   const divided = '# Head\n\n' + body(100) + '\n\n***\n\n' + body(100) + '\n\n## INTAKE\n' + body(50);
   assert.equal(cdr.thinCheck(divided).words, 201);
-  assert.deepStrictEqual(cdr.engineTermCheck(body(10) + '\n\n***\n\nThe tension score rose.'), ['tension score']);
   // verbatim: event text from a Who Lived It row, 6+ word run; the name alone never hits
   const pk = { known: [
     { t: 'FACT', text: 'Javier Robertson — limited social activity due to winter mood', src: 'output/world_summary_c111.md ## Who Lived It' },
@@ -332,11 +330,11 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
   assert.equal(cdr.angleCapHit(null), false);
   // totals + summary format
   const totals = cdr.fanoutCheckTotals([
-    { toolCalls: 0, capHits: 1, thin: true, engineTerms: [], verbatim: [] },
-    { toolCalls: 2, capHits: 0, thin: false, engineTerms: ['tension score'], verbatim: [{ run: 'x' }] },
+    { toolCalls: 0, capHits: 1, thin: true, verbatim: [] },
+    { toolCalls: 2, capHits: 0, thin: false, verbatim: [{ run: 'x' }] },
     null]);
-  assert.deepStrictEqual(totals, { seats: 2, toolSeats: 1, capHits: 1, thin: 1, engineTerm: 1, verbatim: 1, graded: 0, gradeSum: 0 });
-  assert.equal(cdr.formatCheckTotals(totals, 'write'), 'tools 1/2 · cap-hits 1 · thin 1 · engine-term 1 · verbatim 1 (warn)');
+  assert.deepStrictEqual(totals, { seats: 2, toolSeats: 1, capHits: 1, thin: 1, verbatim: 1, graded: 0, gradeSum: 0 });
+  assert.equal(cdr.formatCheckTotals(totals, 'write'), 'tools 1/2 · cap-hits 1 · thin 1 · verbatim 1 (warn)');
   assert.equal(cdr.formatCheckTotals(totals, 'angle'), 'cap-hits 1');
   // pipeline.77 — graded line round-trips; group totals show the average
   const line = cdr.gradedLine({ score: 3, short: 'It closed on a recap.' });

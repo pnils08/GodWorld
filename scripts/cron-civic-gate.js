@@ -11,8 +11,8 @@
  *   2. strict phase vocabulary — every ImplementationPhase literally in the
  *      20-value INITIATIVE_TRACKER_CONTRACT set (stricter than the validator's
  *      variant-mapping, which only warns)
- *   3. engine-verbiage scan on statement prose — POPIDs, engine tokens,
- *      lintCivicPackets rules (σ / signed deltas / metric decimals / code spans)
+ *   3. (retired 2026-10-18) there is no engine-words gate — ledger terms, POPIDs and
+ *      metric names in a statement are the city's public language
  *   4. diff-size sanity — a decision cycle touching more than --max-rows
  *      distinct initiatives blocks (default 5)
  *
@@ -47,7 +47,6 @@ const https = require('https');
 
 const ROOT = path.join(__dirname, '..');
 const CIVIC = path.join(ROOT, 'output', 'cron-civic');
-const { lintText } = require('./lintCivicPackets');
 const { validateCycle } = require('./validateTrackerUpdates');
 // The pipeline's own initiative attribution (4-signal) — the gate must never
 // count initiatives differently than assembleDecisions writes them.
@@ -64,15 +63,6 @@ const PHASES = new Set([
   'dispatch-live', 'pilot-active', 'pilot_evaluation', 'operational',
   'complete', 'stalled', 'blocked', 'suspended', 'defunded'
 ]);
-
-// Hard engine tokens that must never appear in civic statement prose. Civic
-// counterpart of cron-rhea-gate's media list — phase names excluded (statements
-// legitimately narrate project stages), system/sheet tokens are never legitimate.
-const ENGINE_TOKENS = [
-  'DialState', 'Ripple Ledger', 'impactScore', 'MemoryRegisters', 'desk_signal',
-  'world_summary', 'engine_audit', 'engine review HIGH', 'Neighborhood_Map',
-  'Simulation_Ledger', 'ctx.summary', 'safePhaseCall', 'Supermemory', 'claude-mem'
-];
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
@@ -288,19 +278,8 @@ if (require.main === module) (async () => {
     failures.push({ check: 'diff-size', detail: touched.size + ' initiatives touched > max ' + MAX_ROWS + ' — implausibly large decision cycle' });
   }
 
-  // 3. engine-verbiage scan over statement prose
-  for (const [slug, j] of Object.entries(voiceJsons)) {
-    const prose = ((j && j.statements) || []).map(st => [st.decision, st.quote, st.fullStatement].filter(Boolean).join(' ')).join(' ');
-    const pops = prose.match(/\bPOP-\d{5}\b/g);
-    if (pops) failures.push({ check: 'engine-verbiage', detail: slug + ': POPID literal(s) ' + [...new Set(pops)].join(', ') });
-    for (const t of ENGINE_TOKENS) {
-      if (prose.toLowerCase().includes(t.toLowerCase())) failures.push({ check: 'engine-verbiage', detail: slug + ': engine token "' + t + '"' });
-    }
-    for (const issue of lintText(prose).slice(0, 5)) {
-      failures.push({ check: 'engine-verbiage', detail: slug + ': [' + issue.rule + '] "' + issue.match + '"' });
-    }
-  }
-  log('engine-verbiage: scanned ' + Object.keys(voiceJsons).length + ' voice file(s)');
+  // 3. (retired 2026-10-18) there is no engine-words gate: ledger terms, POPIDs and metric
+  //    names in a statement are the city's public language, never a failure (builder-direct).
 
   // 5. model sanity-read — only when prechecks are clean (no spend on a doomed run).
   // Audits the ASSEMBLED write-set (decisions_c{XX}.json — what actually reaches

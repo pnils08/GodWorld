@@ -187,17 +187,7 @@ if echo "$COMMAND" | grep -qi "git commit"; then
       fi
     fi
 
-    # Check 3: Engine language in media/edition files
-    STAGED_FILES=$(git -C /root/GodWorld diff --cached --name-only 2>/dev/null)
-    MEDIA_FILES=$(echo "$STAGED_FILES" | grep -E "^(editions/|docs/media/)" || true)
-    if [ -n "$MEDIA_FILES" ]; then
-      for f in $MEDIA_FILES; do
-        ENGINE_LANG=$(git -C /root/GodWorld diff --cached -- "$f" 2>/dev/null | grep -n "^+" | grep -v "^+++" | grep -iE "this cycle|next cycle|cycle [0-9]" || true)
-        if [ -n "$ENGINE_LANG" ]; then
-          WARNINGS="${WARNINGS}\nEngine language in ${f}:\n${ENGINE_LANG}\n"
-        fi
-      done
-    fi
+    # Check 3 (engine language in media files) retired 2026-10-18 — there is no engine-words gate.
   fi
 
   if [ -n "$WARNINGS" ]; then

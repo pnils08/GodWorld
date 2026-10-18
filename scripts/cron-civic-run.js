@@ -9,8 +9,7 @@
  *   --stage=prep       Task 2.1 — deterministic port of city-hall-prep Steps 1-4:
  *                      reads world_summary / engine_audit / baseline_briefs /
  *                      initiative_tracker / truesource, routes topics to offices,
- *                      writes per-office pending-decisions packets, lints them
- *                      (lintCivicPackets rules), fails loud on any leak.
+ *                      writes per-office pending-decisions packets.
  *   --stage=directive  Task 2.2 — headless Mara-directive replacement (later commit)
  *   --stage=decide     Task 2.3 — Mayor decision call (later commit)
  *   --stage=voices     Task 2.3 — Layer-2 office calls (later commit)
@@ -42,9 +41,8 @@
  *
  * Telemetry contract: every packet is prose-only perception (city-hall-prep
  * Step 3 translation contract). Engine numbers are translated by the builders
- * below, never copied; any prose sliced from generated docs passes through the
- * lintCivicPackets rule set line-by-line, and the whole packet is linted again
- * before the stage exits 0.
+ * below. Prose sliced from generated docs passes through whole — the packet
+ * linter was retired 2026-10-18 (builder: ledger terms are not contamination).
  *
  * Usage:
  *   node scripts/cron-civic-run.js --stage=prep [--cycle 102]
@@ -60,7 +58,6 @@ const ROOT = path.join(__dirname, '..');
 const CIVIC = path.join(ROOT, 'output', 'cron-civic');
 const PACKETS = path.join(CIVIC, 'packets');
 
-const { lintText } = require('./lintCivicPackets');
 const { getDistrictForNeighborhood } = require('../lib/districtMap');
 const getCurrentCycle = require('../lib/getCurrentCycle');
 const officeWall = require('./officeWall');
@@ -211,18 +208,15 @@ function deltaWord(d, up, down, flat) {
   return flat;
 }
 
-// Line filter: any prose line sliced from a generated doc (world_summary,
-// tracker summaries, prior voice JSON) is dropped if it trips the packet
-// linter's rules. Dropping beats leaking — the builders above carry the signal
-// in translated form.
+// Lines sliced from a generated doc (world_summary, tracker summaries, prior voice JSON)
+// pass through whole. The packet linter that dropped engine-telemetry lines here was retired
+// 2026-10-18 (builder: ledger terms are not contamination; there is no engine-words gate).
 function cleanLines(text) {
-  return String(text || '').split('\n')
-    .filter(l => lintText(l).length === 0)
-    .join('\n');
+  return String(text || '');
 }
 function cleanInline(text) {
   const t = String(text || '').replace(/\s+/g, ' ').trim();
-  return lintText(t).length === 0 ? t : null;
+  return t || null;
 }
 
 // ---------------------------------------------------------------------------
@@ -411,7 +405,6 @@ function districtPackRef(agentDir, cycle, officeMap, root) {
   try {
     const p = JSON.parse(fs.readFileSync(abs, 'utf8'));
     lever = String((p.task && p.task.goal) || (p.pulse && p.pulse.lever) || '').trim();
-    if (lintText(lever).length) lever = '';
   } catch (_) { /* pointer still valid without lever */ }
   return { path: path.relative(base, abs), lever, officeId: id || null };
 }
@@ -778,14 +771,8 @@ async function runPrep() {
     written.push({ dir, path: path.relative(ROOT, outPath), topics: topics.length });
   }
 
-  // --- Step 4: verify — lint every packet, fail loud ---
-  let leaks = 0;
-  for (const w of written) {
-    const issues = lintText(fs.readFileSync(path.join(ROOT, w.path), 'utf8'));
-    console.log('  [' + (issues.length ? '✗' : '✓') + '] ' + w.path + ' — ' + issues.length + ' leak(s), ' + w.topics + ' topic(s)');
-    for (const it of issues) console.error('      ✗ [' + it.rule + '] "' + it.match + '" «' + it.context + '»');
-    leaks += issues.length;
-  }
+  // --- Step 4: verify — every packet written (the telemetry lint was retired 2026-10-18) ---
+  for (const w of written) console.log('  [✓] ' + w.path + ' — ' + w.topics + ' topic(s)');
   const missingSeats = civicSeat.councilAgentDirs(officeMap).filter(d => !written.some(w => w.dir === d));
   if (missingSeats.length) {
     console.error('HALT: civic.24 Sunday needs all 9 district packets; missing: ' + missingSeats.join(', '));
@@ -793,6 +780,7 @@ async function runPrep() {
   }
 
   // Vote-ready routing check (G-R11)
+  let leaks = 0;
   const voteInits = hotInits.filter(i => /vote-ready/i.test((i.implementation || {}).phase || '') || /vote-ready/i.test(i.status || ''));
   for (const vi of voteInits) {
     for (const seatDir of civicSeat.councilAgentDirs(officeMap)) {
@@ -821,7 +809,7 @@ async function runPrep() {
     '- Pressure (AUTO path, S215 G-5): ' + audit.patterns.filter(p => p.severity === 'high').length + ' HIGH engine patterns + ' + (directive ? 'Mara directive ' + path.basename(directivePath) : 'no Mara directive'),
     '- Ledger snapshot: cycle=' + meta.cycle + ' rowCount=' + meta.rowCount,
     '- Packets: ' + written.map(w => w.dir + '(' + w.topics + ')').join(', '),
-    '- Lint: ' + (leaks ? leaks + ' LEAK(S) — HALTED' : 'clean'),
+    '- Routing: ' + (leaks ? leaks + ' FAILURE(S) — HALTED' : 'clean'),
     '- Chaos cascade (engine.11 T5.3): ' + (chaosHits.length
       ? chaosHits.length + ' Tier-1 hit(s) — CHAOS CASCADE block in every packet: ' + chaosHits.map(h => h.targetName + ' via ' + h.vehicle).join(', ')
       : 'none this cycle'),
@@ -841,10 +829,10 @@ async function runPrep() {
   fs.writeFileSync(plog, kept.join('\n').replace(/\n+$/, '\n') + plogSection);
 
   if (leaks) {
-    console.error('\nHALT: prep produced ' + leaks + ' telemetry leak(s)/routing failure(s) — packets staged but chain must not proceed.');
+    console.error('\nHALT: prep produced ' + leaks + ' routing failure(s) — packets staged but chain must not proceed.');
     haltStage(1);
   }
-  console.log('\n=== prep complete: ' + written.length + ' packets, lint clean → ' + path.relative(ROOT, PACKETS) + ' ===');
+  console.log('\n=== prep complete: ' + written.length + ' packets → ' + path.relative(ROOT, PACKETS) + ' ===');
 }
 
 // ---------------------------------------------------------------------------
@@ -1570,8 +1558,6 @@ function injectPacketSection(cycle, marker, lines, skipPrefix) {
     const at = body.indexOf(marker);
     if (at !== -1) body = body.slice(0, at).replace(/\n+$/, '\n');
     fs.writeFileSync(p, body.replace(/\n+$/, '\n') + '\n' + lines.join('\n') + '\n');
-    const issues = lintText(fs.readFileSync(p, 'utf8'));
-    if (issues.length) { console.error('HALT: packet inject leaked telemetry into ' + f + ' — ' + issues.map(i => i.match).join(', ')); process.exit(1); }
     injected++;
   }
   return injected;
@@ -2152,7 +2138,7 @@ async function runClose() {
   } else {
     const clerkUser = [
       'Cycle ' + cycle + ' civic outputs for verification. For each check answer pass/fail with one line of evidence.',
-      'Checks: (1) no single office contradicts ITSELF within its own statements; (2) tracker updates use only contract phases; (3) statements read as in-world civic voice (no engine/system language).',
+      'Checks: (1) no single office contradicts ITSELF within its own statements; (2) tracker updates use only contract phases; (3) statements read as in-world civic voice. Vocabulary is never a failure: ledger terms, IDs, metric names and "cycle" are the city\'s public language (standing rule).',
       'Voice completeness is NOT a check: seats whose voice JSON never arrived are PENDING (listed below) and will be resubmitted next window — report them under "missingVoices", never as a failed check.',
       'Cross-office disagreement (two offices naming different figures or phases) is EXPECTED POLITICS, not a failure — list any you see under "observations", never under failed checks; the apply gate separately audits the final write-set.',
       '',

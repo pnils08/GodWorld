@@ -1376,7 +1376,7 @@ function uniqueDest(dir, name) {
 
 // pipeline.75 — deterministic draft checks (builder 2026-10-14: "add any automation checks
 // that may help them"). Pure; runWrite applies them before disposition and the fan-out
-// summary totals them. thin + engine-term flag the draft; verbatim slice text is WARN-only
+// summary totals them. thin flags the draft; verbatim slice text is WARN-only
 // for a week (rb reads the hit rate before it blocks); a cap hit is counted, never fatal.
 const THIN_WORDS = 150;
 const VERBATIM_RUN = 6;
@@ -1396,11 +1396,6 @@ function thinCheck(text, targetWords, floor) {
   const min = Number.isInteger(floor) && floor > 0 ? floor : THIN_WORDS; // package thinFloor, else 150
   return { words, floor: min, thin: words < min,
     reason: words < min ? 'thin: ' + words + ' words (floor ' + min + ', seat target ' + (targetWords || 'unset') + ')' : null };
-}
-// Reuses validateEdition's ENGINE_TERMS through its exported checker — one list, not a copy.
-function engineTermCheck(text) {
-  return require('./validateEdition').checkEngineLanguage(checkBody(text))
-    .map(i => (String(i.detail).match(/Found "([^"]+)"/) || [])[1] || i.detail);
 }
 function wordsOf(text) {
   return String(text || '').toLowerCase().replace(/[’']/g, '').match(/[a-z0-9]+/g) || [];
@@ -1455,7 +1450,6 @@ function fanoutCheckTotals(seats) {
     toolSeats: list.filter(x => x.toolCalls > 0).length,
     capHits: list.reduce((a, x) => a + (Number(x.capHits) || 0), 0),
     thin: list.filter(x => x.thin).length,
-    engineTerm: list.filter(x => x.engineTerms && x.engineTerms.length).length,
     verbatim: list.filter(x => x.verbatim && x.verbatim.length).length,
     graded: list.filter(x => Number.isInteger(x.contractScore)).length,
     gradeSum: list.reduce((a, x) => a + (Number.isInteger(x.contractScore) ? x.contractScore : 0), 0),
@@ -1464,7 +1458,7 @@ function fanoutCheckTotals(seats) {
 function formatCheckTotals(t, stage) {
   if (stage === 'angle') return 'cap-hits ' + t.capHits;
   return 'tools ' + t.toolSeats + '/' + t.seats + ' · cap-hits ' + t.capHits + ' · thin ' + t.thin +
-    ' · engine-term ' + t.engineTerm + ' · verbatim ' + t.verbatim + ' (warn)' +
+    ' · verbatim ' + t.verbatim + ' (warn)' +
     (t.graded ? ' · graded ' + t.graded + ' avg ' + (t.gradeSum / t.graded).toFixed(1) + '/4' : '');
 }
 let SEAT_CHECKS = null; // the current seat's checks; the fan-out loop collects it after each seat
@@ -3003,15 +2997,14 @@ async function runWrite(assign) {
     log('article shape observations: ' + shape.observations.join(','));
   }
 
-  // pipeline.75 — deterministic checks. thin + engine-term flag the draft whatever Rhea says;
-  // verbatim slice text is a WARN in the record only.
+  // pipeline.75 — deterministic checks. thin flags the draft whatever Rhea says; verbatim slice
+  // text is a WARN in the record only. The engine-term check was retired 2026-10-18 (builder:
+  // ledger terms are not contamination; there is no engine-words gate).
   const targetWords = writePacket && writePacket.reviewProfile && writePacket.reviewProfile.articleContract &&
     writePacket.reviewProfile.articleContract.targetWords || null;
   const thin = thinCheck(draftText, targetWords, ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.thinFloor);
-  const engineTerms = engineTermCheck(draftText);
   const verbatim = PACKET_ACTIVE ? verbatimSliceRuns(draftText, writePacket) : [];
-  const checkFlags = [].concat(thin.thin ? [thin.reason] : [],
-    engineTerms.length ? ['engine-term: ' + engineTerms.join(', ')] : []);
+  const checkFlags = thin.thin ? [thin.reason] : [];
   if (checkFlags.length) log('deterministic check flags: ' + checkFlags.join('; '));
   if (verbatim.length) log('WARN verbatim slice text: ' + verbatim.map(h => '"' + h.run + '"').join('; '));
 
@@ -3227,7 +3220,7 @@ async function runWrite(assign) {
     toolCalls: traceArt ? traceArt.calls.length : 0,
     wordCount: thin.words, targetWords,
     capHit: Number(angle && angle.angleCapHits) || 0,
-    checkFlags, engineTerms, verbatimWarn: verbatim,
+    checkFlags, verbatimWarn: verbatim,
     // pipeline.77 group — shape score from the gate; the SELF-SCORE footer is retired for the group
     rewardLoop, contractScore, gradeRecord,
     article: path.relative(ROOT, destPath),
@@ -3235,7 +3228,7 @@ async function runWrite(assign) {
   };
   fs.writeFileSync(path.join(COMPARE, base + '.wake.json'), JSON.stringify(record, null, 2));
   SEAT_CHECKS = { stage: 'write', toolCalls: record.toolCalls, capHits: record.capHit, thin: thin.thin,
-    engineTerms, verbatim, words: thin.words,
+    verbatim, words: thin.words,
     contractScore: contractScore && Number.isInteger(contractScore.score) ? contractScore.score : null };
   if (rewardLoop) appendRewardLoopRead(cycle, {
     date: new Date().toISOString().slice(0, 10), name: byline && byline.name, persona: personaSlug, model: route.model,
@@ -3653,7 +3646,7 @@ module.exports = {
   noteQuoteState,
   assertPublishableQuotesStrict,
   // pipeline.75 checks
-  checkBody, draftWordCount, thinCheck, engineTermCheck, verbatimSliceRuns, angleCapHit,
+  checkBody, draftWordCount, thinCheck, verbatimSliceRuns, angleCapHit,
   fanoutCheckTotals, formatCheckTotals, THIN_WORDS,
   gradedLine, lastGradedLine, // pipeline.77
 };

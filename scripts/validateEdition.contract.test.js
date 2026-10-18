@@ -74,21 +74,10 @@ console.log('\nTest 2: Severity constants present');
   assert("NOTE constant", /const\s+NOTE\s*=\s*['"]NOTE['"]/.test(source));
 }
 
-console.log('\nTest 3: ENGINE_TERMS contains load-bearing patterns');
+console.log('\nTest 3: no engine-language check (builder 2026-10-18: ledger terms are not contamination)');
 {
-  assert('ENGINE_TERMS array declared', /const\s+ENGINE_TERMS\s*=\s*\[/.test(source));
-  // Each pattern is a literal regex inside the array — match the slash-delimited form.
-  assert("'tension score' pattern", /\/\\btension\s+score\\b\//.test(source));
-  assert("'severity level' pattern", /\/\\bseverity\s+level\\b\//.test(source));
-  assert("'simulation' pattern", /\/\\bsimulation\\b\//.test(source));
-  assert("'phase \\d+' pattern", /\/\\bphase\s+\\d\+\//.test(source));
-  // S231 pipeline.28 G-W51: ledger removed from ENGINE_TERMS — overloaded
-  // with journalism metaphor use ("on the ledger", "ledger entry"); was
-  // BLOCKING-tier false-positive on natural prose. Real engine vocabulary
-  // is unique (tension score / civic load / story seed / phase NN).
-  assert("'ledger' pattern REMOVED (G-W51, was false-positive on metaphor)",
-    !/\/\\bledger\\b\//.test(source));
-  assert("'Edition \\d+' pattern", /\/\\bEdition\\s\+\\d\+\//.test(source));
+  assert('ENGINE_TERMS array removed', !/const\s+ENGINE_TERMS\s*=\s*\[/.test(source));
+  assert('checkEngineLanguage removed', !/function\s+checkEngineLanguage\b/.test(source));
 }
 
 console.log('\nTest 4: DEFENSIVE_TERMS array for DH-award conflicts');
@@ -115,12 +104,12 @@ console.log('\nTest 6: Exit codes documented');
   assert('process.exit(2) for file-error path', /process\.exit\(2\)/.test(source));
 }
 
-console.log('\nTest 7: All 11 check functions present');
+console.log('\nTest 7: All 10 check functions present');
 {
   const checkFns = [
     'checkCouncilNames', 'checkVoteMath', 'checkVoteBreakdownConsistency',
     'checkPlayerPositions', 'checkMayorName', 'checkRealNames',
-    'checkEngineLanguage', 'checkPlayerFirstNames', 'checkCitizenNames',
+    'checkPlayerFirstNames', 'checkCitizenNames',
     'checkInitiativeFacts', 'checkCivicOfficeNames'
   ];
   for (const fn of checkFns) {
@@ -137,7 +126,6 @@ console.log('\nTest 8: async main() entry');
 console.log('\n═══ Section B — Fixture subprocess (live execution)');
 
 const TMP_PREFIX = `/tmp/validateEdition_contract_${process.pid}`;
-const TMP_ENGINE = `${TMP_PREFIX}_engine.txt`;
 const TMP_REALNAME = `${TMP_PREFIX}_realname.txt`;
 const TMP_VOTEMATH = `${TMP_PREFIX}_votemath.txt`;
 const TMP_MAYOR = `${TMP_PREFIX}_mayor.txt`;
@@ -146,8 +134,6 @@ const TMP_MAYOR = `${TMP_PREFIX}_mayor.txt`;
 // check's CRITICAL path. Each fixture targets one check; validator runs all
 // checks regardless, so other categories may also fire (harmless — assertions
 // only require the targeted check's label to appear).
-fs.writeFileSync(TMP_ENGINE,
-  'The simulation entered its tension score window during phase 4.\n');
 fs.writeFileSync(TMP_REALNAME,
   'Billy Donovan attended the council meeting last night.\n');
 fs.writeFileSync(TMP_VOTEMATH,
@@ -169,20 +155,19 @@ function countCriticals(stdout) {
 (async () => {
   // 8 invocations in parallel — wall-clock should drop to slowest single run
   // + overhead (~7-10s on a 4-CPU box) vs ~55s serial.
-  const [e93, e78, e85, e90, engineLeak, realName, voteMath, mayor] =
+  const [e93, e78, e85, e90, realName, voteMath, mayor] =
     await Promise.all([
       runValidator(path.join(ROOT, 'editions/cycle_pulse_edition_93.txt')),
       runValidator(path.join(ROOT, 'editions/cycle_pulse_edition_78.txt')),
       runValidator(path.join(ROOT, 'editions/cycle_pulse_edition_85.txt')),
       runValidator(path.join(ROOT, 'editions/cycle_pulse_edition_90.txt')),
-      runValidator(TMP_ENGINE),
       runValidator(TMP_REALNAME),
       runValidator(TMP_VOTEMATH),
       runValidator(TMP_MAYOR),
     ]);
 
   // Cleanup tmpfiles
-  for (const f of [TMP_ENGINE, TMP_REALNAME, TMP_VOTEMATH, TMP_MAYOR]) {
+  for (const f of [TMP_REALNAME, TMP_VOTEMATH, TMP_MAYOR]) {
     try { fs.unlinkSync(f); } catch { /* ok */ }
   }
 
@@ -244,17 +229,6 @@ function countCriticals(stdout) {
   // failures too), but the label-in-output assertion requires the check
   // function to actually run — which needs canon loaded. Guard the label
   // assertions with CANON_PRESENT.
-  console.log('\nTest 13: Engine-language leak fixture triggers CRITICAL');
-  {
-    assert('engine-leak fixture exits 1', engineLeak.status === 1,
-      `exit=${engineLeak.status}`);
-    if (CANON_PRESENT) {
-      assert('Engine Language label in output',
-        /\[Engine Language\]/.test(engineLeak.stdout));
-    } else {
-      skip('Engine Language label in output', 'canon files absent (CI environment)');
-    }
-  }
 
   console.log('\nTest 14: Real-name blocklist fixture triggers CRITICAL');
   {

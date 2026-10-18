@@ -7,7 +7,7 @@
  * Runs BEFORE Rhea Morgan verification. Zero LLM tokens.
  * Catches data errors that broke Editions 82 and 87: wrong positions,
  * wrong first names, swapped votes, wrong mayor name, real-name leaks,
- * engine language, phantom citizens, wrong initiative data.
+ * phantom citizens, wrong initiative data.
  *
  * v2.0: Live sheet checks (Simulation_Ledger, Initiative_Tracker, Civic_Office_Ledger).
  *       Use --no-sheets to skip sheet checks (offline mode).
@@ -39,81 +39,10 @@ const CRITICAL = 'CRITICAL';
 const WARNING = 'WARNING';
 const NOTE = 'NOTE';
 
-// ─── Engine language patterns ───────────────────────────────────
-// Each entry: { pattern, exclude (optional regex that makes the match OK) }
-const ENGINE_TERMS = [
-  // Direct engine words.
-  // S197 BUNDLE-C — removed cycle-related patterns. Per
-  // .claude/rules/newsroom.md: "The word 'cycle' is allowed and encouraged
-  // in edition text, headlines, and letters as the canonical time unit (S146
-  // reversal — was forbidden, was: 'use natural time references')." The four
-  // patterns here ('cycle \d+', 'this cycle', 'next cycle', 'single-cycle')
-  // were stale relative to that rule and produced 70 of 77 critical findings
-  // on E93 — every one a false positive. Numbered cycle references (Cycle 93,
-  // Cycle 95) and relative cycle references (this cycle, next cycle) are
-  // canonical reporter language, not engine leakage.
-  { pattern: /\btension score\b/gi },
-  { pattern: /\bseverity level\b/gi },
-  { pattern: /\bhigh-severity\b/gi },
-  { pattern: /\bcivic load\b/gi },
-  { pattern: /\barc strength\b/gi },
-  { pattern: /\bevent count\b/gi },
-  { pattern: /\bretail load[:\s]/gi },
-  { pattern: /\bnightlife volume[:\s]/gi },
-  { pattern: /\beconomic influence[:\s]/gi },
-  // Compound engine labels (camelCase/no-space)
-  { pattern: /\bSummerFestival\b/g },
-  { pattern: /\bFirstFriday\b/g },
-  { pattern: /\bCreationDay\b/g },
-  { pattern: /\bSecondDawn\b/g },
-  { pattern: /\bOpenCourtWeek\b/g },
-  // System language — with exclusions for legitimate uses
-  // "the engine" is OK as a sports metaphor ("engine of the offense")
-  // "Ledger" used to be flagged here as engine-language, but it's overloaded
-  //   with metaphor use in journalism prose ("on the ledger", "ledger entry",
-  //   "an 8-0 ledger entry") AND Carmen Delaine's byline is "Bay Tribune
-  //   Civic Ledger". The actual engine-leak risk vocabulary is unique to
-  //   the simulation: "tension score / civic load / severity level / cycle
-  //   weight / raw decimals / story seed / phase NN" — those are caught
-  //   above and are not overloaded. Dropping "ledger" closes G-W51
-  //   (S231 pipeline.28) — pre-fix flagged 2 CRITICAL on natural metaphor
-  //   use in C94 (Editor's Desk + P Slayer columns) and would have
-  //   blocked publish if not manually rephrased.
-  { pattern: /\bsimulation\b/gi },
-  { pattern: /\bphase \d+/gi },
-  { pattern: /\bmedia intake\b/gi },
-  { pattern: /\bstory seed\b/gi },
-  // Edition number references — S233 governance.15 carve-out
-  // ALLOWED in editorial chrome: "See also: Edition N", byline citations
-  // ("Bay Tribune Sports, Edition N"), sidebars, footers. The masthead
-  // already exposes the cycle/edition number; cross-references are normal
-  // newspaper convention. FORBIDDEN in body prose voice + citizen quotes
-  // (characters don't read mastheads). Per .claude/rules/newsroom.md
-  // §Standing rules. Exclude regex matches the legitimate chrome
-  // surroundings; body-prose hits still fire CRITICAL.
-  { pattern: /\bEdition\s+\d+/g, exclude: /(?:See also[:\s]|Bay Tribune[^|]*,\s*Edition|—\s*Bay Tribune|Editor['']s note|Sidebar|Footer)/i },
-  // ─── G-W6/W7 (ES-1, S256) — data/reporting-layer narration ────────────
-  // The engine leaking onto the page as if the CITY runs a data office /
-  // reporting cycle / logs errors. Distinct from "cycle" (canonical time
-  // unit, allowed): these narrate the simulation's measurement apparatus as
-  // in-world fact. Severity calibrated against the 38-edition corpus before
-  // CRITICAL. "reporting cycle" carries a real-prose collision risk (quarterly
-  // reporting cycle) — excluded when adjacent to fiscal/quarterly framing.
-  { pattern: /\breporting cycle\b/gi, exclude: /(?:quarterly|fiscal|annual|earnings|budget)/i },
-  { pattern: /\bdata office\b/gi },
-  { pattern: /\blogged (?:an?\s+)?error\b/gi },
-  { pattern: /\bthe fields (?:that )?the city (?:monitors|tracks|logs|watches)\b/gi },
-  { pattern: /\bthe city(?:'s)? (?:data|reporting) (?:office|layer|system|cycle)\b/gi },
-  // ─── G-W5 (ES-1, S267) — engine measurement apparatus narrated in-world ───
-  // C99 leak: "The engine's sentiment tracker flagged it: +0.63" — the
-  // simulation's measurement layer surfacing as if the CITY runs a tracker.
-  // "sentiment tracker" / "<metric> tracker" is unambiguous engine telemetry.
-  // "the engine" stays allowed as a sports/economic metaphor ("engine of the
-  // offense", "engine of growth") — flag it ONLY when it flags/tracks/logs/
-  // measures a value (the data-narration sense), excluding the metaphor uses.
-  { pattern: /\b(?:sentiment|approval|momentum|crime|civic)\s+tracker\b/gi },
-  { pattern: /\bthe engine(?:'s)?\s+(?:\w+\s+){0,2}(?:flagged|tracked|logged|measured|recorded|registered|scored)\b/gi, exclude: /(?:offense|offensive|defense|lineup|rotation|of (?:the )?(?:offense|attack|growth|economy|team)|growth engine|economic engine)/i },
-];
+// ─── Engine language ─────────────────────────────────────────────
+// There is no engine-language check (builder 2026-10-18: "ledger terms are not contamination",
+// "there is no such gate as engine words"). The ENGINE_TERMS list and checkEngineLanguage
+// that lived here were retired; the validator judges claims, never vocabulary.
 
 // Defensive award terms that conflict with DH
 const DEFENSIVE_TERMS = [
@@ -719,58 +648,20 @@ function checkRealNames(editionText, blocklist) {
   return issues;
 }
 
-function checkEngineLanguage(editionText) {
-  const issues = [];
-
-  // Only check within article sections, not in metadata/tables at the bottom
-  // Split at ARTICLE TABLE to isolate editorial content
-  const articleTableSplit = editionText.split(/ARTICLE TABLE/i);
-  const editorialContent = articleTableSplit[0] || editionText;
-
-  for (const term of ENGINE_TERMS) {
-    const { pattern, exclude } = term;
-    // Reset lastIndex for global patterns
-    pattern.lastIndex = 0;
-    let match;
-    while ((match = pattern.exec(editorialContent)) !== null) {
-      // Get surrounding context for exclusion check and display
-      const contextStart = Math.max(0, match.index - 40);
-      const contextEnd = Math.min(editorialContent.length, match.index + match[0].length + 40);
-      const context = editorialContent.substring(contextStart, contextEnd).replace(/\n/g, ' ').trim();
-
-      // Check exclusions — if the surrounding context matches an exclusion pattern, skip
-      if (exclude && exclude.test(context)) continue;
-
-      issues.push({
-        severity: CRITICAL,
-        check: 'Engine Language',
-        detail: `Found "${match[0]}" — engine/system language in article text`,
-        fix: `Replace or remove near: "...${context}..."`
-      });
-    }
-  }
-
-  return issues;
-}
-
-// ─── In-World Time + Engine-Metric Leak Scan (G-W-C97-2, ES-3 S257) ─────────
+// ─── In-World Time Leak Scan (G-W-C97-2, ES-3 S257) ─────────────────────────
 //
-// Deterministic backstop for two recurring reporter leaks the operator kept
-// catching by eye at Step 2 (C97: "November dusk", "first week of April",
-// "September chase", "Retail sentiment sits above 0.71"):
-//   1. Real calendar months in canon prose — the fence is cycles-not-months.
-//   2. Raw engine metric decimals (sentiment/approval/etc.) in prose.
+// Deterministic backstop for real calendar months in canon prose — the fence is
+// cycles-not-months (C97: "November dusk", "first week of April"). The engine-metric
+// decimal half was retired 2026-10-18 (engine numbers and words are not contamination).
 // WARNING severity — surfaces for review without blocking compile (CRITICAL is
 // reserved for hard canon breaks; this matches the should-fix exit model).
-// Scans editorial content only (split at ARTICLE TABLE), like checkEngineLanguage.
+// Scans editorial content only (split at ARTICLE TABLE).
 
 // Months that are NOT common given names → flag on any prose occurrence.
 const MONTHS_UNAMBIGUOUS = ['January', 'February', 'July', 'September', 'October', 'November', 'December'];
 // Months that ARE common given names → flag only in a temporal construction,
 // never as a bare token (avoids false-positive on "April <Lastname>").
 const MONTHS_NAMELIKE = ['March', 'April', 'May', 'June', 'August'];
-// Metric words whose nearby decimals are engine telemetry (not sports/money).
-const METRIC_WORDS = ['sentiment', 'approval', 'momentum', 'rating', 'index', 'load'];
 // Temporal cues that precede a name-like month used as a date.
 const TEMPORAL_CUE_BEFORE = /(?:\b(?:in|by|since|early|late|mid|this|last|next|through|until|before|after)\s+$)|(?:\b(?:week|weeks|month|end|start|beginning|middle|spring|summer|fall|autumn|winter)\s+of\s+$)/i;
 // G-W7 (ES-1): baseball/sports IDIOM uses of a month — NOT calendar dates.
@@ -835,23 +726,6 @@ function checkInWorldLeaks(editionText) {
         flagMonth(m, match.index, true);
       }
     }
-  }
-
-  // 2. Engine metric decimals — a decimal (with leading digit, so batting ".312"
-  //    and sports integer scores are excluded) within ~30 chars of a metric word.
-  const metricAlt = METRIC_WORDS.join('|');
-  const decimalNearMetric = new RegExp(
-    '(?:(?:' + metricAlt + ')[^.\\n]{0,30}?\\d+\\.\\d+)|(?:\\d+\\.\\d+[^.\\n]{0,30}?(?:' + metricAlt + '))',
-    'gi'
-  );
-  let dm;
-  while ((dm = decimalNearMetric.exec(editorial)) !== null) {
-    issues.push({
-      severity: WARNING,
-      check: 'Engine Metric Leak',
-      detail: `Raw engine decimal near a metric word — "${dm[0].replace(/\n/g, ' ').trim()}"`,
-      fix: `Express as perception ("rising"/"strong"), not a raw score`
-    });
   }
 
   return issues;
@@ -1461,7 +1335,6 @@ Checks (static — always run):
   4. Player positions against roster data
   5. Mayor/executive name verification
   6. Real-name blocklist screening
-  7. Engine language sweep
   8. Player first names against roster data
 
 Checks (live sheets — skip with --no-sheets):
@@ -1502,7 +1375,7 @@ Exit codes:
 
   if (!baseContext && !truesource) {
     console.error('WARNING: Neither base_context.json nor truesource_reference.json found.');
-    console.error('Validation will be limited to engine language and real-name checks.\n');
+    console.error('Validation will be limited to real-name checks.\n');
   }
 
   // Prefer truesource (more compact, purpose-built for verification)
@@ -1599,11 +1472,6 @@ Exit codes:
   const nameIssues = checkRealNames(editionText, blocklist);
   allIssues.push(...nameIssues);
   console.log(`  [${nameIssues.length === 0 ? '✓' : '!'}] Real-name screening: ${nameIssues.length} issues`);
-
-  // 7. Engine language
-  const engineIssues = checkEngineLanguage(editionText);
-  allIssues.push(...engineIssues);
-  console.log(`  [${engineIssues.length === 0 ? '✓' : '!'}] Engine language: ${engineIssues.length} issues`);
 
   // 7b. ARTICLE TABLE placement consistency (G-W62) — static, uses the parser.
   const placementIssues = checkArticleTablePlacement(editionPath);
@@ -1767,8 +1635,7 @@ module.exports = {
   checkCitizenNames,
   // ES-1 (S256) quoted-source resolution gate
   checkQuotedSourcesResolve,
-  checkEngineLanguage,
-  // ES-3 (S257 G-W-C97-2) in-world time + engine-metric leak scan
+  // ES-3 (S257 G-W-C97-2) in-world time leak scan
   checkInWorldLeaks,
   // G-W4 (S267 ES-1) faith-org canon-name near-miss
   checkFaithOrgNames,

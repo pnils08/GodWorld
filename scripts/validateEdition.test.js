@@ -217,22 +217,6 @@ console.log('\nTest 8: ES-1 — checkQuotedSourcesResolve (quoted source must re
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// Test 9: ES-1 (G-W6/W7) — data/reporting-layer engine-language additions
-// ────────────────────────────────────────────────────────────────────────────
-console.log('\nTest 9: ES-1 — checkEngineLanguage data/reporting-layer phrases');
-{
-  const fn = helper.checkEngineLanguage;
-  // POSITIVE — in-world narration of the data layer flags.
-  const leak = 'The city data office logged an error during the reporting cycle; the fields the city monitors showed strain.';
-  assert('"data office" flagged', fn(leak).some(i => /data office/i.test(i.detail)));
-  assert('"logged an error" flagged', fn(leak).some(i => /logged an error/i.test(i.detail)));
-  assert('"the fields the city monitors" flagged', fn(leak).some(i => /fields the city monitors/i.test(i.detail)));
-  // NEGATIVE — "quarterly reporting cycle" (fiscal prose) excluded; plain prose clean.
-  assertEqual('"quarterly reporting cycle" (fiscal) — not flagged',
-    fn('The firm closed its quarterly reporting cycle.').filter(i => /reporting cycle/i.test(i.detail)).length, 0);
-  assertEqual('clean civic prose — 0 engine-language', fn('The council met at the lake on a warm afternoon.').length, 0);
-}
-
 // ────────────────────────────────────────────────────────────────────────────
 // Test: ES-1 / governance.42 (S267) — G-W4 faith-org, G-W5 engine-tracker, G-W7 idiom
 // ────────────────────────────────────────────────────────────────────────────
@@ -248,11 +232,7 @@ console.log('\nTest: ES-1 governance.42 gates (G-W4 / G-W5 / G-W7)');
   assertEqual('G-W4 no flag on unrelated org', helper.checkFaithOrgNames('Services at the First Baptist Church.').length, 0);
   assertEqual('levenshtein Word→World == 1', helper.levenshtein('Word', 'World'), 1);
 
-  // G-W5 — engine measurement apparatus narrated in-world.
-  assert('G-W5 catches "sentiment tracker"',
-    hasDetail(helper.checkEngineLanguage('The engine sentiment tracker flagged it: +0.63.'), 'tracker'));
-  assertEqual('G-W5 allows "engine of the offense" sports metaphor',
-    helper.checkEngineLanguage('Coles was the engine of the offense all night.').length, 0);
+  // G-W5 retired 2026-10-18 — engine words are not contamination.
 
   // G-W7 — baseball-idiom months suppressed; real dates still flagged.
   const TIME = 'In-World Time Leak';

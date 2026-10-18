@@ -185,7 +185,6 @@ These checks no longer live in Rhea — they are owned by the lane listed:
 
 | Removed check | New owner |
 |---|---|
-| Engine language sweep | capability reviewer (`assertNoEngineMetricsInJournalism`) |
 | Edition numbers in article text | capability reviewer (`assertEditionNumbersNotInArticleText`) |
 | Reporter beat assignment / reporter budget | capability reviewer (extension) |
 | Cross-desk duplicates | cycle-review (editorial overlap is reasoning, not sourcing) |

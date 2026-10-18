@@ -45,7 +45,7 @@ const NARRATOR_CHARGE = (cycle) => [
   'You have your staff\'s published reporting below. Draw on it the way an editor\'s column draws on the',
   'paper: quote your reporters BY NAME when their reporting carries a moment ("as Dana Reeve reported...").',
   'Never restate a number as the story — the number is the cause; the people living it are the content.',
-  'Never use system or engine vocabulary. Never use real-world dates — the clock is Y2C' + cycle + '.',
+  'Never use real-world dates — the clock is Y2C' + cycle + '.',
   'Thread the week: what moved, what contradicts, what nobody has answered yet. End on what you\'re',
   'watching next week. 900-1200 words, plain prose, no headers, no bullet lists.'
 ].join('\n');

@@ -1,7 +1,7 @@
 'use strict';
 
 const assert = require('assert');
-const { scanEngineVerbiage, scanPopidLeak } = require('./cron-rhea-gate');
+const { scanEngineVerbiage } = require('./cron-rhea-gate');
 
 const provenanceOnly = [
   '# Test-only brief',
@@ -14,42 +14,27 @@ const provenanceOnly = [
 
 assert.deepStrictEqual(scanEngineVerbiage(provenanceOnly), []);
 
-const proseLeak = provenanceOnly.replace(
+// Ledger terms are not contamination (builder 2026-09-20 S426, restated 2026-10-18): a table
+// name, a field name or a POPID in prose is the city's own vocabulary — no hit.
+const proseLedgerWords = provenanceOnly.replace(
   'The supplied public record describes a delayed initiative.',
-  'Initiative_Tracker describes a delayed initiative.'
+  'Initiative_Tracker describes a delayed initiative; POP-00022 took the mound on Friday.'
 );
-// cls added by the gate re-scope (2cc23cee) — §4.7 token-class separation
-assert.deepStrictEqual(scanEngineVerbiage(proseLeak), [
-  { cls: 'system-vocab', token: 'Initiative_Tracker', count: 1 },
+assert.deepStrictEqual(scanEngineVerbiage(proseLedgerWords), []);
+
+// The fourth wall is the only scan: the city framed as a simulation.
+const fourthWall = provenanceOnly.replace(
+  'The supplied public record describes a delayed initiative.',
+  'The whole city is a simulation and the initiative is simulated.'
+);
+assert.deepStrictEqual(scanEngineVerbiage(fourthWall), [
+  { token: 'simulation', count: 1, cls: 'fourth-wall' },
+  { token: 'simulated', count: 1, cls: 'fourth-wall' },
 ]);
 
-// Prose POPIDs block; INTAKE-register POPIDs do not (builder 2026-10-08: names in
-// the news, IDs are not contamination — the register is a machine sidecar).
-const proseWithPop = [
-  '# Headline',
-  '',
-  'POP-00022 took the mound on Friday.',
-  '',
-  '## INTAKE',
-  'CLAIM: A claim | cite POP-00031',
-].join('\n');
-assert.deepStrictEqual(scanPopidLeak(proseWithPop), ['POP-00022']);
-
-const intakeOnlyPop = [
-  '# Headline',
-  '',
-  'Danny Horn took the mound on Friday.',
-  '',
-  '## INTAKE',
-  'CLAIM: Danny Horn — nine seasons | output/player_truesource_mirror.json POP-00022 @C110',
-].join('\n');
-assert.deepStrictEqual(scanPopidLeak(intakeOnlyPop), []);
-
-// A whole-doc fence must never blank the scan: prose POPID inside it still blocks,
-// INTAKE inside it still exempt.
-assert.deepStrictEqual(scanPopidLeak('```markdown\n' + proseWithPop + '\n```'), ['POP-00022']);
-assert.deepStrictEqual(scanPopidLeak('```markdown\n' + intakeOnlyPop + '\n```'), []);
+// A whole-doc fence must never blank the scan.
+assert.deepStrictEqual(scanEngineVerbiage('```markdown\n' + fourthWall + '\n```').length, 2);
 // A code sample inside prose is skipped, as before.
-assert.deepStrictEqual(scanPopidLeak('Plain.\n\n```\nPOP-00022\n```\n\n## INTAKE\nHOOD: Uptown'), []);
+assert.deepStrictEqual(scanEngineVerbiage('Plain.\n\n```\nsimulation\n```\n\n## INTAKE\nHOOD: Uptown'), []);
 
 console.log('cron-rhea-gate tests passed');

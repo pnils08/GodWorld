@@ -432,7 +432,8 @@ function generateGameModeMicroEvents_(ctx) {
 
   // MAIN LOOP
   var eventCount = 0;
-  var EVENT_LIMIT = 15;
+  // engine.299 Task 13 (SIM_DOCTRINE §1: no caps, no quotas): the citywide EVENT_LIMIT of 15 is gone — it stopped the
+  // loop after 15 lines, so GAME-clock citizens late in ledger order never drew. Each citizen's own odds decide.
 
   var logRows = []; // schema-safe 7 cols
   var details = [];
@@ -468,7 +469,6 @@ function generateGameModeMicroEvents_(ctx) {
   }
 
   for (var r = 0; r < rows.length; r++) {
-    if (eventCount >= EVENT_LIMIT) break;
 
     var row = rows[r];
 

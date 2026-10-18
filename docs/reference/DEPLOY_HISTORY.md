@@ -154,6 +154,15 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 4p (`8acd5f30`, four files over stage 4o) — engine.299 Task 13, the citywide event caps gone (2026-10-18 14:07 CDT, engine-sheet)
+- **Why:** SIM_DOCTRINE §1 (no caps, no quotas). The neighborhood (6), generic (25) and game-mode (15) micro-event engines stopped their loops at a citywide line count, so citizens late in ledger order never drew. Builder 2026-10-18 13:30: "agy is enough, push the caps".
+- **Files:** `phase05-citizens/runNeighborhoodEngine.js`, `phase04-events/generateGenericCitizenMicroEvent.js`, `phase04-events/generateGameModeMicroEvents.js`, `utilities/citizenDialMap.js` — every commit on them since 4o (`c8235de3`) is Task 13: a8985e7e, 5a4e741f, 5854ceb0, 793dd806 (agy fold), 23dfd97e (GameNight suffix), 8acd5f30 (least-used repeat).
+- **Bench proof:** SANDBOX 1004 @54 = stage 4p, resynced from live C111: C112 ok 192 s (limit 360), persist 747/0, EE 4 → 4; 2,344 lines, 0 inert, 8 bookkeeping markers (6 Advancement, 2 CareerState), 0 unallowed premise prose, 0 unallowed life verbs — acceptanceEmpty true. Generic engine: 323 lines in 119 distinct texts, max repeat 10 (@53: 47 lines in 7 texts).
+- **Push:** `output/engine299/push-prod-4p.sh --go` → @147; pull-back 168 = `output/engine-sheet/stage4p-e299.sha256`, differs from 4o in exactly the four files.
+- **Expectation at C112 (Sun 2026-10-18):** `node scripts/deadBranchScan.js --offenders` on live C112 → acceptanceEmpty true, 0 inert (the Household-GameNight line folds as Household); ~2,300–2,400 LifeHistory lines; run time well under 360 s; EE flat. Anything else is a finding.
+- **Seen on the bench, not 4p's:** event-content-library hood lines (`generateCitizensEvents.js`, unchanged since 4o) repeat 34–38× a Cycle citywide — live C111 shows the same (rb: 7 lines ×40).
+- **Rollback:** clasp push from `output/engine299/prod-stage-4o-c8235de3` + version cut.
+
 ### PROD stage 4l (`173b9e49`, one file over stage 4k) — engine.296 legends from the ledger (2026-10-16 ~23:10 CDT, engine-sheet)
 - **Why:** builder 2026-10-16, "there shouldn't be "warriors" players hard coded in the engine , the other 2 are my players but Rodriguez was traded so those hardcoded will cause problems". `SPORTS_LEGENDS` minted three no-citizen names onto Cultural_Ledger (C107/C108/C110) that the trends slice printed and Rhea blocked.
 - **Fix:** `buildEveningFamous.js` fills `SPORTS_LEGENDS` from the existing ctx.ledger read: Status Retired + OriginGame MLB, role "A's legend", home hood from the row (6 today); no literal fallback. Runtime test in `sportsWeekCity.test.js`.

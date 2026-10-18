@@ -58,9 +58,11 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 
 ## Current state
 
-**Current bench pointer (2026-10-17, engine.197 + engine.296 fix):** SANDBOX 1004 web app **@40 = PROD 4l + `utilities/compressLifeHistory.js` (113e78aa) + `buildEveningFamous.js` (01ea836f)** (= PROD 4m; stage `output/engine197/prod-stage`, push `output/engine197/push-prod.sh`). Resync from live C111, guard 0, `clearfire cycle=112`, `clearcheckpoint` null. C112 `&expect=111`: ok 253 s, persist 665/0, EE 4 → 4, the 13 spouse watermarks @133 unmoved, 0 new past the cycle (`output/engine-sheet/2026-10-17-engine197-bench-c112-@40.md`). Previous: @39 = 4l (engine.296). Bench is at C112 — resync before the next fire.
+**Current bench pointer (2026-10-18, engine.299 Task 1):** SANDBOX 1004 web app **@43 = PROD 4m + `utilities/citizenDialMap.js` + `phase05-citizens/generateCitizensEvents.js` (d5266294)** (stage `output/engine299/prod-stage`, push `output/engine299/push-prod.sh`). Bench identifiers, so nobody digs again: spreadsheet `1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA` ("Sandox_104_c109-live_Simulation_Narrative", 84 tabs), script `1gbJmGeDilxIhe25TC8SrSei89uJTEgVYgN2aOClEHHKJiykADzPVAIC2`, web app `AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC`. A resync from live copies live's `fireGuardMinutes` 60 — set it to 0 on the bench before `clearfire` / `clearcheckpoint`, or both are refused. @42 (11334296) fired C112 on live-C111 state: ok 131 s, persist 714/0, EE 4 → 4, LifeHistory_Log C112 1,658 lines / 1,136 graded / 139 inert (`docs/plans/2026-10-18-event-engines-move-dials.md` §Changelog).
 
 **This file is protocol + CURRENT pointers only.** Per-wave proving narrative and bench-write logs go to the wave's own plan doc (builder rule 2026-08-30) or to [[DEPLOY_HISTORY]] — a session that finds itself writing a paragraph here is writing in the wrong file.
+
+**Previous bench pointer (2026-10-17, engine.197 + engine.296 fix):** SANDBOX 1004 @40 = PROD 4l + `compressLifeHistory.js` (113e78aa) + `buildEveningFamous.js` (01ea836f); C112 ok 253 s (`output/engine-sheet/2026-10-17-engine197-bench-c112-@40.md`).
 
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 

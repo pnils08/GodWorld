@@ -1102,7 +1102,7 @@ function generateCitizensEvents_(ctx) {
     return true;
   }
   var GRADED_DIALS_ = ["drive", "sociability", "warmth", "openness", "composure", "integrity", "family", "outabout", "fandom"];
-  function gradedTagFor_(kind, tags, qolBand) {
+  function gradedTagFor_(kind, tags) {
     var dial = null, up = null, band = 'S', t, i, m;
     for (i = 0; i < tags.length; i++) {                        // 1. the entry says it outright
       m = /^dial:([a-z]+):(up|down)(?::([SML]))?$/i.exec(tags[i]);
@@ -1110,9 +1110,6 @@ function generateCitizensEvents_(ctx) {
     }
     if (!dial) {                                               // 2. a directional fact tag names dial + sign
       for (i = 0; i < tags.length; i++) { t = DIAL_BY_FACT_TAG[tags[i]]; if (t) { dial = t[0]; up = t[1]; break; } }
-    }
-    if (!dial && tags.indexOf("source:qol") >= 0 && (qolBand === 'low' || qolBand === 'high')) {
-      dial = "composure"; up = qolBand === 'high';             // a QoL line's own fact is the band its pool keyed on
     }
     if (!dial) {                                               // 3. a generic signed fact + the source's dial
       for (i = 0; i < tags.length && up === null; i++) {
@@ -1454,10 +1451,15 @@ function generateCitizensEvents_(ctx) {
       keys.sort(function(a, b) { return sign < 0 ? parts[a] - parts[b] : parts[b] - parts[a]; });
       return keys.length ? keys.slice(0, 2) : ['mood'];
     };
+    // engine.299: a QoL line's sign is the bank it was written in (LOW reads down, HIGH reads up — what the line
+    // says), never the hood's band read back after selection; the dial follows the cause the line is about.
+    var QOL_CAUSE_DIAL = { safety: "composure", work: "drive", health: "composure", street: "outabout", housing: "composure", mood: "composure" };
     var add = function(bank, keys, tag, w) {
+      var dir = bank === HIGH ? "up" : "down";
       for (var i = 0; i < keys.length; i++) {
         var lines = bank[keys[i]] || bank.mood;
-        for (var j = 0; j < lines.length; j++) pool.push(makeEntry(lines[j], ["source:qol", tag, "qol-cause:" + keys[i]], w - 0.05 * i, false));
+        var dialTag = "dial:" + (QOL_CAUSE_DIAL[keys[i]] || "composure") + ":" + dir;
+        for (var j = 0; j < lines.length; j++) pool.push(makeEntry(lines[j], ["source:qol", tag, "qol-cause:" + keys[i], dialTag], w - 0.05 * i, false));
       }
     };
     if (qol <= 0.35) add(LOW, pick(-1), "qol:low", 1.2);
@@ -1471,11 +1473,11 @@ function generateCitizensEvents_(ctx) {
   function patrolPoolFor_(strategy, isHotspot) {
     var pool = [];
     if (strategy === 'suppress_hotspots' && isHotspot) {
-      pool.push(makeEntry("noticed concentrated police presence on the block", ["source:qol", "patrol:suppress"], 1.1, false));
-      pool.push(makeEntry("felt watched but not necessarily safer", ["source:qol", "patrol:suppress"], 1.05, false));
+      pool.push(makeEntry("noticed concentrated police presence on the block", ["source:qol", "patrol:suppress", "dial:composure:down"], 1.1, false));
+      pool.push(makeEntry("felt watched but not necessarily safer", ["source:qol", "patrol:suppress", "dial:composure:down"], 1.05, false));
     } else if (strategy === 'community_presence') {
-      pool.push(makeEntry("saw officers on foot patrol, nodding at neighbors", ["source:qol", "patrol:community"], 1.0, false));
-      pool.push(makeEntry("noticed community-oriented policing efforts", ["source:qol", "patrol:community"], 0.95, false));
+      pool.push(makeEntry("saw officers on foot patrol, nodding at neighbors", ["source:qol", "patrol:community", "dial:composure:up"], 1.0, false));
+      pool.push(makeEntry("noticed community-oriented policing efforts", ["source:qol", "patrol:community", "dial:composure:up"], 0.95, false));
     }
     return pool;
   }
@@ -3541,7 +3543,7 @@ function generateCitizensEvents_(ctx) {
     // kind alone moves nothing; a line that moves nothing is not written.
     var lineKind = primaryTag;
     if (kindMovesNothing_(primaryTag, pick)) {
-      var gradedTag = gradedTagFor_(primaryTag, tags, nhQoL <= 0.35 ? 'low' : (nhQoL >= 0.65 ? 'high' : null));
+      var gradedTag = gradedTagFor_(primaryTag, tags);
       if (!gradedTag) {
         S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
         S.engine299.noDial++;

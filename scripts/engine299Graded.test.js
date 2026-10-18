@@ -90,8 +90,13 @@ for (let seed = 1; seed <= 200; seed++) {
 assert('T6 an unsigned entry is never written and the skip is counted by source', unsignedWritten === 0 && skips > 0 && bySrc['source:neighborhood'] > 0, JSON.stringify({ unsignedWritten, skips, bySrc }));
 console.log('  T6 skips by source:', JSON.stringify(bySrc));
 
-// T7 (codex F1): hood quality never supplies the sign to an unsigned line. Same unsigned helper entry, hood QoL 0.2 / 0.8.
+// T7 (codex F1): hood quality never supplies the sign to an unsigned line — not for a hood line, and not for an
+// unsigned source:qol line either. Hood QoL 0.2 / 0.8; the helper hands in one unsigned entry of each source.
 let qolWritten = { low: 0, high: 0 };
+global.hoodTexturePool_ = () => [
+  { text: 'noticed the creative energy shifting on the block', tags: ['source:neighborhood'], weight: 500, template: false },
+  { text: 'creative energy shifting, unsigned qol observation', tags: ['source:qol'], weight: 500, template: false }
+];
 for (const [band, q] of [['low', 0.2], ['high', 0.8]]) {
   for (let seed = 1; seed <= 300; seed++) {
     const ctx = ctxFor(seed, 0);

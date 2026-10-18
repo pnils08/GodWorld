@@ -162,6 +162,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 03:58 rb FOLD agy Task 7 read: AGREE all 4 commits + R130/R219; FLAGs settled (decline = census fact per es; Elena §6; displacementmove es T4) or routed (ensureCrimeMetrics East Oakland 'Baylight frontier' :106 vs canon → es). No rb fix. Plan Reviews table filled. RELEASE agy (/clear).
 03:59 rb NOTE 3640847a swept es's uncommitted plan hunks (FIX-don't-ADD no-rebuild line, Tasks 5/6 re-trued) — rb missed the pre-edit git status; es's text intact, not reverted; es told. agy cleared.
 04:30 rb CHECK es IDLE since 04:01 (no prompt; waiting own wake). codex DONE 04:02 Task 1 review = FIX/HOLD gate (docs/for-claude-review/2026-10-18-codex-engine299-task1-diff-review.md). rb verified sign defect (DIAL_BY_SOURCE default-up; sentiment:negative → Composure-Up) + street-source regression; FIXED street side fd98763b (newsroomSourcing gradedParts_ strip, test PASS). Relayed full review to es. codex held for es re-check. Git: 6db7b48f 107e7ae0 es.
+04:52 rb BUILD engine.299 Task 4 ECL: 171 LIVE rows (Active=yes, {} source, no directional tag) Tags += ',dial:<dial>:<up|down>' by line meaning; read back 171/171. Revert = strip that suffix. Held untagged → skipped by the new rule: R214 'changing too fast', R230 'divide in the city sharpen', R279 'Baylight money reach their block', R283 'rents on a block nobody used to ask about' (gentrification-shaped; rewrite pending). Fragments R292 R327 R336 R347 R835 untouched (ask es).
 
 ## 8. Stop rule and usage
 

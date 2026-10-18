@@ -165,6 +165,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 04:52 rb BUILD engine.299 Task 4 ECL: 171 LIVE rows (Active=yes, {} source, no directional tag) Tags += ',dial:<dial>:<up|down>' by line meaning; read back 171/171. Revert = strip that suffix. Held untagged → skipped by the new rule: R214 'changing too fast', R230 'divide in the city sharpen', R279 'Baylight money reach their block', R283 'rents on a block nobody used to ask about' (gentrification-shaped; rewrite pending). Fragments R292 R327 R336 R347 R835 untouched (ask es).
 04:56 rb BUILD ECL R214 R230 R279 R283 rewritten LIVE (premise out, landmark + condition kept) + dial tagged; read back OK. was: 'wondered if the neighborhood was changing too fast' / 'felt the divide in the city sharpen' / 'whether the Baylight money would ever reach their block' / 'asking about rents on a block nobody used to ask about'.
 05:03 rb SPEC engine.299 Task 2 offender scan TASK for codex: docs/for-claude-review/2026-10-18-engine299-task2-offender-scan-impl-TASK.md (deadBranchScan.js --offenders, patch to output/codex/). codex held by es (review 3); es dispatches after.
+05:30 rb SPEC engine.299 Task 7 engine side TASK for codex: docs/for-claude-review/2026-10-18-engine299-task7-engine-side-impl-TASK.md (move phrases + hook text + drift labels to income fit; A4 East Oakland label; DisplacementRisk column, enum values, crime mods KEPT — no rebuild, no engine-words gate). es dispatches.
 
 ## 8. Stop rule and usage
 

@@ -208,6 +208,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 14:21 rb NOTE es took the venue/institution slots (NEXT[engine-sheet] 7, 4c26bb2b): benching with engine.214 before C113, not tonight. rb NEXT carries the ECL rewrite once the slots are live.
 14:30 rb CHECK es IDLE (prompt empty; 4p live @147, venue slots queued for the C113 wave). codex idle (gpt-6-sol). agy idle. No new review files. Nothing unblocked; the builder's open calls are on §6.
 14:36 rb RULINGS stack firms stay; INSTITUTIONS rows trued (b290fbcb). The 22 up pairs are approved and sent to es. Kaiser/PG&E: citizens link by EmployerBizId (3 rows each), so a Name rename is ledger-safe; 1 published file names Kaiser. Substitute names proposed to the builder.
+14:39 rb NOTE es landed the 22 bespoke up pairs verbatim (014f31bc; 3 up lines per bespoke hood; main only, next bench wave). Kaiser/PG&E held until the builder rules on names.
 12:35 es CLAIM agy es engine.299 Task 13 cap-lift adversarial read (13a neighborhood a8985e7e; 13b generic + 13c game-mode as they land) → output/antigravity/2026-10-18-engine299-task13-caps-read.md. PROD for Task 13 holds for codex (out to 10-24) or the builder's word that agy is enough (rb §6).
 13:12 es RELEASE agy — Task 13 caps read folded 793dd806 (generic citywide text uniqueness → per citizen; neighborhood pool writable lines only); CATCH-UP odds sent to rb for §6.
 

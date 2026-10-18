@@ -222,3 +222,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 - No subagent fan-out for coding. Advisor once before a cut and once before declaring done; not on mechanical trims.
 - Systemic blocker (unexplained test failure, guest rewriting outside scope, weekly budget warning): stop that thread, log `BLOCKED <what>`, take the next item. Two consecutive blocked threads → stand down and wait for morning; do not thrash.
 - Self-loop → `/self-debug`.
+- 17:30 rb CHECK es IDLE (compacted, at prompt). codex/agy idle. No new commits or review files since 16:30. Live still C111 (civic chain: c111 week closed); C112 fires on 4p. Nothing unblocked.

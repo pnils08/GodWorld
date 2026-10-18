@@ -45,7 +45,7 @@ When filling a tier-2 canon substitute, pick something that fits the prosperity-
 
 | Real Name | Canon Substitute | Status | Notes |
 |---|---|---|---|
-| Kaiser Permanente | TBD | TBD | Major private managed-care system. Bobby Chen-Ramirez backstory candidate. |
+| Kaiser Permanente | Piedmont Avenue Medical Center (BIZ-00025, Piedmont Ave) | canon | Major private managed-care system. Bobby Chen-Ramirez backstory candidate. |
 | Sutter Health | TBD | TBD | Private health system |
 | Dignity Health | TBD | TBD | Private health system |
 | John Muir Health | TBD | TBD | Private health system |
@@ -193,6 +193,7 @@ When filling a tier-2 canon substitute, pick something that fits the prosperity-
 | Stripe / Salesforce / Google / Apple / Meta / etc. | use canon roster | canon | See `output/supplemental_tech_landscape_c84.md` (9 companies, 900 employees) |
 | Varek | Varek | canon | Tech sector anchor — POP-00789 |
 | DigitalOcean | DigitalOcean | canon | Tied to Sarah's employment + Baylight (Mags' daughter) |
+| PG&E | Estuary Power & Gas (BIZ-00032, city-wide) | canon | The city's power and gas utility. Robert Corliss (POP-00594) retired from it as an engineer. |
 
 ---
 

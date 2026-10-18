@@ -315,6 +315,10 @@
       "bizId": "BIZ-00032"
     },
     {
+      "pattern": "Estuary Power",
+      "bizId": "BIZ-00032"
+    },
+    {
       "pattern": "Baylight",
       "bizId": "BIZ-00020"
     },
@@ -725,7 +729,7 @@
     },
     {
       "bizId": "BIZ-00025",
-      "name": "Kaiser Permanente Oakland",
+      "name": "Piedmont Avenue Medical Center",
       "sector": "Healthcare",
       "neighborhood": "Piedmont Avenue"
     },
@@ -767,7 +771,7 @@
     },
     {
       "bizId": "BIZ-00032",
-      "name": "PG&E Oakland Service Area",
+      "name": "Estuary Power & Gas",
       "sector": "Utilities",
       "neighborhood": "City-wide"
     },

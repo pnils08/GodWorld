@@ -1071,6 +1071,7 @@ function generateCitizensEvents_(ctx) {
     "weather:cold":          ["outabout", false], "weather:cold-front":    ["outabout", false],
     "family:partner":        ["family", true],    "family:widowed":        ["warmth", true],
     "family:divorced":       ["composure", true],
+    "evening:traffic":       ["outabout", false],
     "grief:memorial":        ["warmth", true]        // engine.94 memorial response: remembering someone (Personal kind)
   };
   // The source names the DIAL a line of that source speaks to. It never names the sign (codex
@@ -1101,7 +1102,7 @@ function generateCitizensEvents_(ctx) {
     return true;
   }
   var GRADED_DIALS_ = ["drive", "sociability", "warmth", "openness", "composure", "integrity", "family", "outabout", "fandom"];
-  function gradedTagFor_(kind, tags) {
+  function gradedTagFor_(kind, tags, qolBand) {
     var dial = null, up = null, band = 'S', t, i, m;
     for (i = 0; i < tags.length; i++) {                        // 1. the entry says it outright
       m = /^dial:([a-z]+):(up|down)(?::([SML]))?$/i.exec(tags[i]);
@@ -1110,8 +1111,12 @@ function generateCitizensEvents_(ctx) {
     if (!dial) {                                               // 2. a directional fact tag names dial + sign
       for (i = 0; i < tags.length; i++) { t = DIAL_BY_FACT_TAG[tags[i]]; if (t) { dial = t[0]; up = t[1]; break; } }
     }
+    if (!dial && tags.indexOf("source:qol") >= 0 && (qolBand === 'low' || qolBand === 'high')) {
+      dial = "composure"; up = qolBand === 'high';             // a QoL line's own fact is the band its pool keyed on
+    }
     if (!dial) {                                               // 3. a generic signed fact + the source's dial
       for (i = 0; i < tags.length && up === null; i++) {
+        if (tags[i].indexOf("qol:") === 0) continue;           // hood context, never a line's own sign (codex F1)
         if (FACT_DOWN_RE.test(tags[i])) up = false;
         else if (FACT_UP_RE.test(tags[i])) up = true;
       }
@@ -1125,6 +1130,7 @@ function generateCitizensEvents_(ctx) {
     // same format as citizenDialMap.js gradedTag_ (the map is a global in Apps Script; tests expose only nudgesForEvent_)
     return String(kind) + '-' + dial.charAt(0).toUpperCase() + dial.slice(1) + '-' + (up ? 'Up' : 'Down') + '-' + band;
   }
+
 
   function normText_(s) {
     return String(s || "").toLowerCase().replace(/\s+/g, " ").trim();
@@ -2242,28 +2248,29 @@ function generateCitizensEvents_(ctx) {
   }
 
 
+  // engine.299: each holiday line carries the dial it moves, by what it says.
   var holidayPools = {
-    Thanksgiving: ["prepared for a holiday gathering", "reflected on things to be grateful for", "helped with meal preparations"],
-    Holiday: ["felt the holiday spirit in the air", "wrapped up last-minute seasonal tasks", "enjoyed decorations around town"],
-    NewYear: ["reflected on the year past", "thought about resolutions ahead", "felt the fresh-start energy of the year's first Cycle"],
-    NewYearsEve: ["made plans for the evening countdown", "felt anticipation for the new year", "prepared for celebration"],
-    Valentine: ["noticed Valentine's displays around town", "thought about loved ones", "felt the romantic atmosphere"],
-    Halloween: ["noticed spooky decorations around town", "saw costumes appearing early", "felt the playful autumn spirit"],
-    Easter: ["noticed spring celebrations around town", "enjoyed the seasonal atmosphere", "saw families gathering"],
-    MothersDay: ["thought about family connections", "noticed families gathering", "felt grateful for maternal figures"],
-    FathersDay: ["thought about family bonds", "noticed families celebrating", "felt grateful for paternal figures"]
+    Thanksgiving: [["prepared for a holiday gathering", "dial:family:up"], ["reflected on things to be grateful for", "dial:warmth:up"], ["helped with meal preparations", "dial:family:up"]],
+    Holiday: [["felt the holiday spirit in the air", "dial:warmth:up"], ["wrapped up last-minute seasonal tasks", "dial:drive:up"], ["enjoyed decorations around town", "dial:outabout:up"]],
+    NewYear: [["reflected on the year past", "dial:openness:up"], ["thought about resolutions ahead", "dial:drive:up"], ["felt the fresh-start energy of the year's first Cycle", "dial:drive:up"]],
+    NewYearsEve: [["made plans for the evening countdown", "dial:sociability:up"], ["felt anticipation for the new year", "dial:openness:up"], ["prepared for celebration", "dial:sociability:up"]],
+    Valentine: [["noticed Valentine's displays around town", "dial:outabout:up"], ["thought about loved ones", "dial:warmth:up"], ["felt the romantic atmosphere", "dial:warmth:up"]],
+    Halloween: [["noticed spooky decorations around town", "dial:outabout:up"], ["saw costumes appearing early", "dial:openness:up"], ["felt the playful autumn spirit", "dial:openness:up"]],
+    Easter: [["noticed spring celebrations around town", "dial:outabout:up"], ["enjoyed the seasonal atmosphere", "dial:outabout:up"], ["saw families gathering", "dial:family:up"]],
+    MothersDay: [["thought about family connections", "dial:family:up"], ["noticed families gathering", "dial:family:up"], ["felt grateful for maternal figures", "dial:warmth:up"]],
+    FathersDay: [["thought about family bonds", "dial:family:up"], ["noticed families celebrating", "dial:family:up"], ["felt grateful for paternal figures", "dial:warmth:up"]]
   };
 
   var firstFridayTexts = ["checked out First Friday galleries", "enjoyed the art walk atmosphere", "felt the creative energy of First Friday", "wandered through open studios", "discovered new local artists", "soaked in the community arts scene"];
   var firstFridayPool = [];
   for (var ffi = 0; ffi < firstFridayTexts.length; ffi++) {
-    firstFridayPool.push(makeEntry(firstFridayTexts[ffi], ["source:firstFriday"], 1.2, false));
+    firstFridayPool.push(makeEntry(firstFridayTexts[ffi], ["source:firstFriday", "dial:sociability:up"], 1.2, false));   // engine.299: out at the art walk
   }
 
   var creationDayTexts = ["felt a sense of belonging in Oakland", "reflected on roots in the community", "appreciated the city's foundational spirit", "felt connected to Oakland's story"];
   var creationDayPool = [];
   for (var cdi = 0; cdi < creationDayTexts.length; cdi++) {
-    creationDayPool.push(makeEntry(creationDayTexts[cdi], ["source:creationDay"], 1.1, false));
+    creationDayPool.push(makeEntry(creationDayTexts[cdi], ["source:creationDay", "dial:warmth:up"], 1.1, false));   // engine.299: belonging
   }
 
   var sportsSeasonPools = {
@@ -2742,7 +2749,10 @@ function generateCitizensEvents_(ctx) {
     if (holiday !== "none" && holidayPools[holiday]) {
       var hTexts = holidayPools[holiday];
       for (var hi = 0; hi < hTexts.length; hi++) {
-        pool.push(makeEntry(hTexts[hi], mergeTags(["source:holiday", "holiday:" + holiday], calendarTags), 1.1, false));
+        var hItem = hTexts[hi];                                   // engine.299: ["text", "dial:<dial>:<up|down>"]
+        var hText = Array.isArray(hItem) ? hItem[0] : hItem;
+        var hBase = (Array.isArray(hItem) && hItem[1]) ? ["source:holiday", "holiday:" + holiday, hItem[1]] : ["source:holiday", "holiday:" + holiday];
+        pool.push(makeEntry(hText, mergeTags(hBase, calendarTags), 1.1, false));
       }
     }
 
@@ -2763,7 +2773,7 @@ function generateCitizensEvents_(ctx) {
     if (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) {
       var sTexts = sportsSeasonPools[sportsSeason];
       for (var si = 0; si < sTexts.length; si++) {
-        pool.push(makeEntry(sTexts[si], mergeTags(["source:sports"], calendarTags), 1.05, false));
+        pool.push(makeEntry(sTexts[si], mergeTags(["source:sports", "dial:fandom:up"], calendarTags), 1.05, false));   // engine.299: a season week
       }
     }
 
@@ -3512,6 +3522,38 @@ function generateCitizensEvents_(ctx) {
       pick += " [" + activeArc.type + " arc]";
     }
 
+    // engine.299 (codex 2026-10-18 F3): the primary tag and the admission guard run HERE, before the bias
+    // intent, the FAME_WATCH hook, the ripple and the context-tag merge (qol/hotspot/archetype) below.
+    var primaryTag = primaryFromTags(tags);
+    // engine.208 C5: a drawn A's / Oaks ledger line in a week that team has a signed result is the
+    // week as this citizen caught it — its tag, not a plain Sports day. Only the exact team pools;
+    // citywide / hood / hardcoded sports lines stay plain (no team guessed from prose).
+    var sportsLineTeam = entry.eclPoolKey === "sports.as" ? "A's" : (entry.eclPoolKey === "sports.oaks" ? "Oaks" : "");
+    if (sportsLineTeam && S.sportsWeek && S.sportsWeek[sportsLineTeam] &&
+        SPORTS_WEEK_TAG_[S.sportsWeek[sportsLineTeam].cls]) {
+      primaryTag = SPORTS_WEEK_TAG_[S.sportsWeek[sportsLineTeam].cls];
+    }
+    // engine.299 (builder 2026-10-18): every event that fires moves a dial. ADMISSION FIRST (codex
+    // 2026-10-18 F3): the line is graded or dropped here, before the bias intent, the FAME_WATCH hook and
+    // the ripple — a dropped line has no consequences. The sign is read from the entry's own tags, before
+    // the citizen/hood context tags (qol:, hotspot:, archetype:) are merged in below (codex F1). The kind
+    // stays the record's vocabulary (pulse, dedupe memory); the written tag is the graded form when the
+    // kind alone moves nothing; a line that moves nothing is not written.
+    var lineKind = primaryTag;
+    if (kindMovesNothing_(primaryTag, pick)) {
+      var gradedTag = gradedTagFor_(primaryTag, tags, nhQoL <= 0.35 ? 'low' : (nhQoL >= 0.65 ? 'high' : null));
+      if (!gradedTag) {
+        S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+        S.engine299.noDial++;
+        var srcTag = "";
+        for (var sti = 0; sti < tags.length; sti++) { if (tags[sti].indexOf("source:") === 0) { srcTag = tags[sti]; break; } }
+        var srcKey = srcTag || ("kind:" + primaryTag);
+        S.engine299.noDialBySource[srcKey] = (S.engine299.noDialBySource[srcKey] || 0) + 1;
+        continue;
+      }
+      primaryTag = gradedTag;
+    }
+
     // engine.38 B1 (S283): opinion DRAWN -> intent. Fires only when a bias
     // line is actually selected as the citizen's event — pooled-but-not-drawn
     // leaves no trace. S.biasIntents {popId: [{t,s,o}]} is a cycle-scoped
@@ -3580,34 +3622,8 @@ function generateCitizensEvents_(ctx) {
     // v2.7: Add archetype tag
     if (archetype && archetype !== 'Drifter') tags = mergeTags(tags, ["archetype:" + archetype]);
 
-    var primaryTag = primaryFromTags(tags);
-    // engine.208 C5: a drawn A's / Oaks ledger line in a week that team has a signed result is the
-    // week as this citizen caught it — its tag, not a plain Sports day. Only the exact team pools;
-    // citywide / hood / hardcoded sports lines stay plain (no team guessed from prose).
-    var sportsLineTeam = entry.eclPoolKey === "sports.as" ? "A's" : (entry.eclPoolKey === "sports.oaks" ? "Oaks" : "");
-    if (sportsLineTeam && S.sportsWeek && S.sportsWeek[sportsLineTeam] &&
-        SPORTS_WEEK_TAG_[S.sportsWeek[sportsLineTeam].cls]) {
-      primaryTag = SPORTS_WEEK_TAG_[S.sportsWeek[sportsLineTeam].cls];
-    }
     // engine.201b hood retag (ActivityExpanded / ActivityContracted / StreetsGuarded) REMOVED S451
     // (builder ruling 2026-09-13: dials follow EVENTS — never retag texture to move a dial).
-    // engine.299 (builder 2026-10-18): every event that fires moves a dial. The kind stays the
-    // record's vocabulary (pulse, dedupe memory); the written tag is the graded form when the kind
-    // alone moves nothing; a line that moves nothing is not written.
-    var lineKind = primaryTag;
-    if (kindMovesNothing_(primaryTag, pick)) {
-      var gradedTag = gradedTagFor_(primaryTag, tags);
-      if (!gradedTag) {
-        S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
-        S.engine299.noDial++;
-        var srcTag = "";
-        for (var sti = 0; sti < tags.length; sti++) { if (tags[sti].indexOf("source:") === 0) { srcTag = tags[sti]; break; } }
-        var srcKey = srcTag || ("kind:" + primaryTag);
-        S.engine299.noDialBySource[srcKey] = (S.engine299.noDialBySource[srcKey] || 0) + 1;
-        continue;
-      }
-      primaryTag = gradedTag;
-    }
     var tagString = [primaryTag].concat(tags).join("|");
 
     var stamp = inWorldStamp_(ctx);

@@ -89,5 +89,43 @@ for (let seed = 1; seed <= 200; seed++) {
 }
 assert('T6 an unsigned entry is never written and the skip is counted by source', unsignedWritten === 0 && skips > 0 && bySrc['source:neighborhood'] > 0, JSON.stringify({ unsignedWritten, skips, bySrc }));
 console.log('  T6 skips by source:', JSON.stringify(bySrc));
+
+// T7 (codex F1): hood quality never supplies the sign to an unsigned line. Same unsigned helper entry, hood QoL 0.2 / 0.8.
+let qolWritten = { low: 0, high: 0 };
+for (const [band, q] of [['low', 0.2], ['high', 0.8]]) {
+  for (let seed = 1; seed <= 300; seed++) {
+    const ctx = ctxFor(seed, 0);
+    ctx.summary.crimeMetrics = { context: { city: {}, byHood: { Temescal: { qualityOfLifeIndex: q } } } };
+    GEN.generateCitizensEvents_(ctx);
+    if (String(ctx.ledger.rows[0][5] || '').indexOf('creative energy shifting') >= 0) qolWritten[band]++;
+  }
+}
+assert('T7 an unsigned entry is never written whatever the hood QoL (no rank-driven sign)', qolWritten.low === 0 && qolWritten.high === 0, JSON.stringify(qolWritten));
+
+// T8 (codex F3): a dropped line has no consequences — no FAME_WATCH hook, no ripple for it.
+global.culturalStatusByPop_ = () => ({ 'POP-00002': { fameScore: 60 } });
+const ripples = [];
+global.recordRipple_ = (ctx, r) => { ripples.push(r); };
+let hooksForUnsigned = 0, ripplesForUnsigned = 0, hooksTotal = 0;
+for (let seed = 1; seed <= 1200; seed++) {
+  const ctx = ctxFor(seed, 0);
+  GEN.generateCitizensEvents_(ctx);
+  (ctx.summary.storyHooks || []).forEach((h) => { hooksTotal++; if (String(h.text || h.description || '').indexOf('creative energy shifting') >= 0) hooksForUnsigned++; });
+}
+ripples.forEach((r) => { if (String(r.causeDetail || '').indexOf('creative energy shifting') >= 0) ripplesForUnsigned++; });
+assert('T8 a dropped line raises no FAME_WATCH hook and no ripple', hooksForUnsigned === 0 && ripplesForUnsigned === 0, JSON.stringify({ hooksForUnsigned, ripplesForUnsigned, hooksTotal, ripples: ripples.length }));
+delete global.culturalStatusByPop_; delete global.recordRipple_;
+global.hoodTexturePool_ = () => [];
+
+// T9 (codex F2): the calendar, season and gridlock pools carry their sign — nothing skips from them.
+let calSkips = {};
+for (let seed = 1; seed <= 300; seed++) {
+  const ctx = ctxFor(seed, 0);
+  Object.assign(ctx.summary, { isFirstFriday: true, holiday: 'Thanksgiving', previousEvening: { eveningTraffic: 'gridlock' }, sportsSeason: 'championship' });
+  GEN.generateCitizensEvents_(ctx);
+  if (ctx.summary.engine299) for (const k in ctx.summary.engine299.noDialBySource) calSkips[k] = (calSkips[k] || 0) + ctx.summary.engine299.noDialBySource[k];
+}
+assert('T9 firstFriday / holiday / prevEvening-gridlock / sports-season pools never skip', !calSkips['source:firstFriday'] && !calSkips['source:holiday'] && !calSkips['source:prevEvening'] && !calSkips['source:sports'], JSON.stringify(calSkips));
+console.log('  T9 skips by source:', JSON.stringify(calSkips));
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

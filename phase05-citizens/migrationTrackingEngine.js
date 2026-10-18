@@ -508,15 +508,19 @@ function processSettledInCheck_(ctx, cycle) {
     if (!st) continue;
 
     var reason = iMigReason >= 0 ? String(row[iMigReason] || '').toLowerCase() : '';
-    var press = (typeof st.housingPressure === 'number') ? st.housingPressure : 5;
+    var press = (typeof st.housingPressure === 'number' && isFinite(st.housingPressure)) ? st.housingPressure : null;
     var traj = String(st.trajectory || '').toLowerCase();
     // The verdict is physics, not sentiment: a cost-driven move judged on
     // pressure where they landed; an opportunity move judged on trajectory.
+    // engine.299 (codex 2026-10-18): the trajectory enum is decay | steady | growth (neighborhoodTrajectoryEngine);
+    // a missing pressure or an unknown trajectory is no fact — the verdict is not written (nothing invented).
     var worked;
     if (reason.indexOf('cost') >= 0 || reason.indexOf('displaced') >= 0) {
+      if (press === null) continue;
       worked = press < 7;
     } else {
-      worked = traj.indexOf('declin') < 0;
+      if (traj !== 'decay' && traj !== 'steady' && traj !== 'growth') continue;
+      worked = traj !== 'decay';
     }
     // engine.299: the verdict carries its dial — the move worked reads composure up, same problems reads down
     // ([Home] alone maps to no dial).

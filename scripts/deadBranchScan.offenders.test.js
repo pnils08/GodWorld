@@ -80,3 +80,21 @@ console.log('engine.299 owner-pool + prose acceptance: PASS');
   assert(r4.inert.total === 1 && r4.inert.byTag['Death-Bogus'] === 1, 'a non-marker variant stays inert and visible');
 }
 console.log('engine.299 marker provenance: PASS');
+// codex 2026-10-18: one-word LEDGER text is prose and blocks; a clean report is acceptanceEmpty=true.
+{
+  const cleanLog = [['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighborhood', 'Cycle'], ['t', 'POP-1', '', 'Neighborhood-Outabout-Up-S', 'SYNTHETIC livelier', '', 111]];
+  const eclHdr = ['Kind', 'PoolKey', 'Text', 'Active'];
+  const clean = buildOffenders({ log: cleanLog, ecl: [eclHdr], sources: {}, resolver, sheet: 'bench', generatedAt: 'synthetic' });
+  assert.strictEqual(clean.acceptanceEmpty, true);
+  for (const word of ['blight', 'displaced']) {
+    const r = buildOffenders({ log: cleanLog, ecl: [eclHdr, ['line', 'neighborhood.texture', word, 'yes']], sources: {}, resolver, sheet: 'bench', generatedAt: 'synthetic' });
+    assert(r.premise.some(h => h.text === word && h.prose === true), word + ' is prose');
+    assert.strictEqual(r.acceptanceEmpty, false, 'one-word ledger text blocks: ' + word);
+  }
+  // code: a one-word string in an identifier position is not prose; the same word as a bare value is.
+  const codeIdent = buildOffenders({ log: cleanLog, ecl: [eclHdr], sources: { 'lib/synthetic.js': 'if (reason === "displaced") x(); var col = idx("DisplacementRisk");' }, resolver, sheet: 'bench', generatedAt: 'synthetic' });
+  assert(codeIdent.premise.length >= 2 && codeIdent.premise.every(h => h.prose === false) && codeIdent.acceptanceEmpty === true, 'identifier positions do not block');
+  const codeProse = buildOffenders({ log: cleanLog, ecl: [eclHdr], sources: { 'lib/synthetic.js': 'var line = "displaced";' }, resolver, sheet: 'bench', generatedAt: 'synthetic' });
+  assert(codeProse.premise.some(h => h.prose === true) && codeProse.acceptanceEmpty === false, 'a bare one-word value blocks');
+}
+console.log('engine.299 prose boundary: PASS');

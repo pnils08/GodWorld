@@ -555,5 +555,39 @@ console.log('A12 owner move — sell up, buy or rent there; authored homes stay'
   global.planOwnerMove_ = WE.planOwnerMove_;
 }
 
+
+// engine.299 (codex 2026-10-18): the ten-week settled-in verdict reads the canonical trajectory enum
+// (decay | steady | growth) and missing facts, and only then signs the line.
+console.log('═══ engine.299 — settled-in verdict');
+{
+  const settle = loadEngine('../phase05-citizens/migrationTrackingEngine.js', 'processSettledInCheck_');
+  const H = ['POPID', 'Status', 'Neighborhood', 'LifeHistory', 'MigrationReason', 'MigrationDestination', 'MigratedCycle'];
+  const verdict = (reason, state) => {
+    const row = ['POP-V1', 'active', 'Dest', '', reason, 'Dest', 100];
+    const ctx = { ledger: { headers: H.slice(), rows: [row], dirty: false }, summary: { neighborhoodState: { Dest: state } } };
+    settle(ctx, 110);
+    return String(row[3] || '');
+  };
+  assert('opportunity into a DECAY hood: same problems, composure down', /\[Home-Composure-Down-S\] .*same problems/.test(verdict('opportunity', { trajectory: 'decay' })));
+  assert('opportunity into a growth hood: the move worked, composure up', /\[Home-Composure-Up-S\] .*the move worked/.test(verdict('opportunity', { trajectory: 'growth' })));
+  assert('opportunity into a hood with no trajectory: no verdict written', verdict('opportunity', { trajectory: '' }) === '');
+  assert('cost move with no housing pressure: no verdict written', verdict('cost', {}) === '');
+  assert('cost move, pressure 8: composure down', /\[Home-Composure-Down-S\]/.test(verdict('cost', { housingPressure: 8 })));
+  assert('cost move, pressure 2: composure up', /\[Home-Composure-Up-S\]/.test(verdict('cost', { housingPressure: 2 })));
+}
+
+// engine.299 (codex 2026-10-18): a graded move reaches branch memory as its kind, and the wake summary names it.
+console.log('═══ engine.299 — graded move → branch memory and wake summary');
+{
+  const CLH = new Function(fs.readFileSync(path.resolve(__dirname, '../utilities/compressLifeHistory.js'), 'utf8') + '\nreturn { captureUnlived_ };')();
+  for (const tag of ['Relocation', 'Relocation-Drive-Up-M', 'Relocation-Composure-Down-M']) {
+    const regs = { unlived: [] };
+    const n = CLH.captureUnlived_({ tag, text: 'moved from A to B', cycle: 112 }, regs);
+    assert('branch memory captures ' + tag + ' and stores the kind', n === 1 && regs.unlived[0].tag === 'Relocation', JSON.stringify(regs.unlived));
+  }
+  const CD = require('../lib/citizenDials.js');
+  const words = CD.thrown ? CD.thrown('C112 — [Relocation-Drive-Up-M] moved from A to B') : null;
+  assert('wake summary names a graded move "a move"', words === null || /a move/.test(words), String(words));
+}
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

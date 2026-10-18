@@ -1659,11 +1659,16 @@ function foldOneEntry_(c, e, regs) {
 
 // engine.38 B3 unlived capture for one entry (shared by the legacy and per-cycle folds).
 function captureUnlived_(e, regs) {
-  var key = String(e.tag || '').toLowerCase();
+  // engine.299: a graded tag (Relocation-Drive-Up-M) is read as its kind (baseTag_ strips the graded tail), and the
+  // register stores the KIND, so the exact-key readers (generateCitizensEvents' echo, resonanceRecall) still match.
+  var rawTag = String(e.tag || '');
+  var gm = /^(.+)-(Drive|Sociability|Warmth|Openness|Composure|Integrity|Family|Outabout|Fandom)-(Up|Down)-(S|M|L)$/i.exec(rawTag);
+  var kindTag = gm ? gm[1] : rawTag;   // same pattern as citizenDialMap.js GRADED_RE
+  var key = kindTag.toLowerCase();
   key = UNLIVED_BRANCH_ALIASES[key] || key;
   if (regs && UNLIVED_BRANCH_TAGS[key]) {
     regs.unlived.push({
-      tag: key === 'incomefitmove' ? key : String(e.tag),
+      tag: key === 'incomefitmove' ? key : kindTag,
       txt: String(e.text || '').slice(0, UNLIVED_TXT_MAX),
       cy: (e.cycle != null ? e.cycle : 0)
     });

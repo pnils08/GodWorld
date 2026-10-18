@@ -230,8 +230,19 @@ function buildOffenders({ log, ecl, sources, resolver, cycle, sheet = 'live', ge
     const owner = OWNERS.has(path.basename(file, '.js'));
     for (const t of list) {
       const hit = { where: 'code', file, line: t.line, text: t.text, kind: t.kind };
+      // engine.299 (codex 2026-10-18): a string is PROSE unless it is a single token in an identifier position —
+      // a call argument, a comparison operand, an array/list or map entry, a case label, a key. Comments are never prose.
+      let prose = false;
+      if (t.kind === 'string') {
+        const pre = sources[file].slice(Math.max(0, t.offset - 12), t.offset).replace(/\s+$/, '');
+        const post = sources[file].slice(t.offset + t.text.length + 2, t.offset + t.text.length + 6).replace(/^\s+/, '');
+        const singleToken = !/\s/.test(t.text.trim());
+        const identCtx = /(?:[([,:?]|===?|!==?|\bcase|\|\||&&)$/.test(pre) || /^[:\]),]/.test(post);
+        const identShape = /[a-z][A-Z]|^[A-Z][a-z]+[A-Z]|_|\./.test(t.text.trim());   // camelCase / PascalCase compound / snake / dotted
+        prose = !singleToken || !(identCtx || identShape);
+      }
       t.text.split('\n').forEach((text, n) => {
-        if (PREMISE.test(text)) premise.push(annotate({ ...hit, text, line: t.line + n }));
+        if (PREMISE.test(text)) premise.push(annotate({ ...hit, text, line: t.line + n, prose }));
       });
       // Candidate prose in writer files, not proof the branch fires. Comments
       // are kept separate; metadata false positives remain reviewable.
@@ -256,7 +267,7 @@ function buildOffenders({ log, ecl, sources, resolver, cycle, sheet = 'live', ge
   for (const r of table(ecl, ['Text', 'Active'], 'Event_Content_Ledger')) {
     if (String(r.Active).trim().toLowerCase() !== 'yes') continue;
     const pool = String(r.PoolKey || '');
-    const hit = { where: 'live:Event_Content_Ledger', row: r.row, line: r.row, text: String(r.Text), kind: 'string', pool };
+    const hit = { where: 'live:Event_Content_Ledger', row: r.row, line: r.row, text: String(r.Text), kind: 'string', pool, prose: true };   // authored text, whatever its length
     if (PREMISE.test(hit.text)) premise.push(hit);
     if (LIFE.test(hit.text)) {
       // engine.299: owner-engine pools are excluded here exactly as owner-engine FILES are above — lifeEvent.* is the
@@ -266,9 +277,9 @@ function buildOffenders({ log, ecl, sources, resolver, cycle, sheet = 'live', ge
     }
   }
   // engine.299 (builder 2026-10-18: no engine-words gate): premise acceptance counts PROSE that can reach a citizen
-  // or a desk — a string with words in it. Comments and bare identifiers (a column name, a DSL field) are code words:
-  // reported in premise with prose:false, never hidden, never blocking.
-  for (const h of premise) h.prose = h.kind === 'string' && /\s/.test(h.text.trim());
+  // or a desk — every ledger text, and any code string not sitting in an identifier position. Comments and identifiers
+  // (a column name, an enum value, a DSL field) are code words: reported with prose:false, never hidden, never blocking.
+  for (const h of premise) if (h.prose === undefined) h.prose = false;
   return { generatedAt, sheet, cycle: selected, scannedLines: scanned.length, inert, structural, premise, lifeVerbs,
     acceptanceEmpty: inert.total === 0 && !premise.some(h => !h.allowed && h.prose) && !lifeVerbs.some(h => !h.allowed) };
 }

@@ -452,35 +452,46 @@ function generateGenericCitizenMicroEvents_(ctx) {
   var holidayPoolArr = (holiday !== "none" && holidayPools[holiday]) ? holidayPools[holiday] : [];
   var sportsPoolArr = (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) ? sportsSeasonPools[sportsSeason] : [];
 
-  // engine.299 Task 13 (agy 2026-10-18, SIM_DOCTRINE §1): uniqueness is PER CITIZEN per Cycle, as in the game-mode
-  // engine. It was citywide — each line of text once per Cycle for the whole city — which capped this engine's output
-  // at the number of distinct lines (a quota in disguise) and starved citizens late in ledger order.
+  // engine.299 Task 13 (agy + review 2026-10-18, SIM_DOCTRINE §1): PREFER a line no one in the city has drawn this
+  // Cycle, and when every line in this citizen's pool is taken, ACCEPT A REPEAT — never return nothing. The old rule
+  // returned null once each text had been used citywide, which capped this engine at the count of distinct lines (a
+  // quota in disguise) and starved citizens late in ledger order. Each citizen draws once, so variety is a citywide
+  // preference, not a per-citizen key.
   var usedGlobalObj = Object.create(null);
+  var usedCountObj = Object.create(null);    // how many times each line was drawn this Cycle (1 once first used)
 
-  function uniquePickGlobal_(pool, popId) {
+  function uniquePickGlobal_(pool) {
     if (!pool.length) return null;
 
     var maxSpins = Math.min(16, pool.length * 2);
     for (var s = 0; s < maxSpins; s++) {
       var cand = pickOne(pool);
-      var key = cycle + "|" + popId + "|" + cand;
+      var key = cycle + "|" + cand;
       if (!usedGlobalObj[key]) {
-        usedGlobalObj[key] = true;
+        usedGlobalObj[key] = true; usedCountObj[key] = 1;
         return cand;
       }
     }
 
-    // deterministic scan fallback
+    // deterministic scan for an unused line
     for (var i = 0; i < pool.length; i++) {
-      var cand = pool[i];
-      var key = cycle + "|" + popId + "|" + cand;
-      if (!usedGlobalObj[key]) {
-        usedGlobalObj[key] = true;
-        return cand;
+      var cand2 = pool[i];
+      var key2 = cycle + "|" + cand2;
+      if (!usedGlobalObj[key2]) {
+        usedGlobalObj[key2] = true; usedCountObj[key2] = 1;
+        return cand2;
       }
     }
 
-    return null; // exhausted for this citizen this cycle
+    // every line taken this Cycle: repeat the LEAST-used line (ties broken by the draw) — a repeat, never nothing
+    var least = null, leastN = Infinity, ties = [];
+    for (var j = 0; j < pool.length; j++) {
+      var n = usedCountObj[cycle + "|" + pool[j]] || 0;
+      if (n < leastN) { leastN = n; ties = [pool[j]]; } else if (n === leastN) ties.push(pool[j]);
+    }
+    least = pickOne(ties);
+    usedCountObj[cycle + "|" + least] = leastN + 1;
+    return least;
   }
 
   // Batch logs (schema-safe 7 cols)
@@ -598,7 +609,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
       }
     }
 
-    var pick = uniquePickGlobal_(pool, popId);
+    var pick = uniquePickGlobal_(pool);
     if (!pick) continue;
 
     // Tag (fast) - using indexOf for ES5 compatibility

@@ -34,7 +34,7 @@ Built only on the C111 night page of POP-00186, Ray Samson, appliance repair tec
 
 - Paraphrase or tidy a quote; cut only with an ellipsis, never rewrite
 - Use a PRESS reply as the subject (a reporter's interview already fed the day's article); PRESS pages are context only
-- Open on a number, a trend, a civic frame or the engine; no engine language, no "the data shows"
+- Open on a number, a trend, a civic frame or the engine; no no "the data shows"
 - Explain what the person meant; let them. No diagnosis of a mood from a tag
 - Invent a setting, a companion or a name the page does not carry; when the page is thin, say so and move on
 - Skip someone because they are well known or hurt; there is no privacy element in this city

@@ -93,7 +93,6 @@ You will receive:
 4. **Crane's crossover is canon.** He voted YES on Stabilization Fund. That's not a betrayal — the CRC position was that the numbers worked on that one. Don't pretend it didn't happen.
 5. **CRC was unified NO on OARI and Baylight.** All three members. Don't fabricate crossovers. This is the most common newsroom error — don't create source material that enables it.
 6. **Chen is not Ashford.** She's procedural, not political. Her critiques are about process, not ideology.
-7. **No engine language.** No "cycle," no "initiative tracker," no "civic office ledger." Political language only.
 8. **Every quote must be fresh.** Don't reuse lines from previous cycles.
 9. **Use correct names and vote positions.** Crane, Ashford, Chen. Check the canon data before asserting any vote.
 

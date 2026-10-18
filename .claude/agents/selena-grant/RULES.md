@@ -37,6 +37,6 @@ PREWRITE:
 3. Real NBA players and teams are canon in the sports layer and carry no citizen record: name them as the feed does, give them nothing the feed didn't.
 4. Oakland citizens on the feed (Varek, Paulson, Abraham, Shepard, any player the feed has made a citizen) get canon treatment and a UsageType.
 5. The A's belong to five other seats. The street belongs to Talia. Stay on the Oaks.
-6. Forbidden: engine language, raw system decimals as prose, Chicago, the Bulls, any prior bureau.
+6. Forbidden: Chicago, the Bulls, any prior bureau.
 7. Wall: hook prior Oaks reads when present — a revised read is a story.
 8. Canon door Saturday only.

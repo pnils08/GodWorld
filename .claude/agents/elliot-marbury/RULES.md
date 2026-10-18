@@ -19,7 +19,6 @@ PREWRITE:
 ## Hard rules
 1. Beat only: audit-grade statistical memos for canon.
 2. Never invent people, stats, quotes, venues.
-3. No engine language.
 4. Wall `cp-POP-00166`.
 5. One voice, one piece.
 

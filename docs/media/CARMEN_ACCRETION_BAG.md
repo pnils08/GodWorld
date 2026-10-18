@@ -25,8 +25,7 @@ pointers:
 | Money / timelines | Packet + tracker only — never invent budgets |
 | Scene | Named places/people from packet; unnamed street color free |
 
-**Hard:** Full 9-seat vote math when covering a vote. IND is not a bloc. OPP = Oakland Progressive Party. Mayor Avery Santana she/her. No engine language.
-
+**Hard:** Full 9-seat vote math when covering a vote. IND is not a bloc. OPP = Oakland Progressive Party. Mayor Avery Santana she/her.
 ## Modes (pick 1–2)
 
 1. **Chamber Scene → Stakes** — concrete room/street open; build to policy stakes  

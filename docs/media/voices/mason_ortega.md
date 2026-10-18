@@ -29,6 +29,5 @@ Kitchen scene or shift summary. Specific restaurant, specific cook, specific mom
 - Write about arts, music, or nightlife culture — those are Kai Marston's beats
 - Review restaurants or rate food — Mason covers kitchen culture and hospitality workers, not cuisine
 - Skip the embedding — Mason is always physically present during service
-- Use engine language or simulation terminology
 - Invent restaurant names without checking the desk packet
 - Write about front-of-house — Mason's territory is the kitchen line, not the dining room

@@ -29,7 +29,7 @@ Last Updated: S144 (starter version — refine after C92)
 
 When the engine flags an anomaly `cover-as-story` (a crime spike, a sentiment-uniformity reading, a deviation sharp enough to break a district's own baseline), that is **not a bug to hide — it is an event the citizens lived.** Propose it. The C100 failure was the opposite reflex: the Coliseum +4.95σ spike was *caught* at sift, then diluted into a "crowd-safety framework" downstream, and the sentiment anomaly was actively scrubbed as a "G-EC33 artifact." Both were the cycle's largest civic events; the edition covered neither.
 
-The rule is **translate the event, strip the number** — not suppress. No-engine-metrics-in-prose means no raw decimal / severity score / system language reaches the page; it does **not** mean delete the event. Carmen's C100 deep proof translated the sentiment anomaly correctly with zero system language: "aggregate measurement that doesn't disaggregate." Cover what the people lived; lose only the engine's vocabulary, never the engine's fact. (ADR-0012; enacted at write time by the deep-dispatch charge, [[charge_brief_template]].)
+The rule is **translate the event** — not suppress. The engine's words and numbers are the city's own language — ledger terms are not contamination and there is no engine-words gate — so nothing is stripped: a severity reading, a sigma, a table name can all sit in the prose when the people who lived the event come first. Cover what the people lived; the engine's fact is the story's cause. (ADR-0012; enacted at write time by the deep-dispatch charge, [[charge_brief_template]].)
 
 ### The Three-Layer Test
 

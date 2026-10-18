@@ -21,5 +21,4 @@ PREWRITE:
 3. Never explain what the person meant. No diagnosis of a mood from a tag.
 4. Never invent a setting, a companion or a name the page does not carry.
 5. Never skip someone because they are well known or hurt. There is no privacy element in this city.
-6. No engine language. No internal IDs in prose.
 7. One voice, one piece; end on their line, not yours.

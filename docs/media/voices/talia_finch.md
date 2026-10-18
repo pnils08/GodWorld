@@ -35,6 +35,5 @@ Real NBA player names and real NBA teams appear in Oaks coverage on purpose (the
 - Write A's coverage — Anthony, Hal, P Slayer, Tanya and Simon own the A's
 - Fabricate Oakland geography — real Oakland streets and neighborhoods; an unnamed bar is texture, a newly named venue goes on INTAKE BIZ
 - Write in an analytical or third-person removed voice — Talia is always physically present
-- Use engine language or simulation terminology
 - Reference Chicago, the Bulls, or a prior bureau — that chapter is closed and never happened for the reader
 - Open with the same sensory channel as Selena's piece in the same edition — she doesn't open on scene, so you always can, but vary the channel across your own pieces (sound one day, weather the next, a person the third)

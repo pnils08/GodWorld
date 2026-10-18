@@ -47,7 +47,7 @@ Before any destructive operation — delete, rename, migration, schema dedup, RO
 - Never write to sheets directly. Queue `ctx.writeIntents`; only `phase10-persistence/` executes them.
 - `executePersistIntents_` runs once, at `Phase10-ExecuteIntents`, and ends with `clearAllIntents_`. An intent queued in any later phase is silently dropped. Phase-11 functions therefore write direct by structural necessity — a permanent carve-out class, never a migration target.
 - Every direct write outside Phase 10 is listed by file and class in `docs/engine/SHEETS_MANIFEST.md` §9. A direct write not on that table is a bug.
-- Pre-commit rejects `Math.random()`, sheet writes outside persistence, and engine language in media files. The post-write hook flags the same at edit time, plus unrecognised `ctx.summary` fields.
+- Pre-commit rejects `Math.random()` and sheet writes outside persistence. The post-write hook flags the same at edit time, plus unrecognised `ctx.summary` fields.
 - No maintenance scripts for ledger work. Read and write through `lib/sheets.js` directly — scripts add conditional logic that silently skips rows.
 - Verify after every write: read the live sheet back. Script output is not completion.
 - A citizen mint is not finished until `node scripts/dumpLedger.js` refreshes `output/simulation_ledger_snapshot.jsonl`. `scripts/canon-name-check.js` reads that snapshot, not the sheet. Confirm with `require('./scripts/canon-name-check').checkText('<name>')`.

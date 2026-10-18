@@ -180,7 +180,6 @@ Drive destination: `civic`
 4. **OSHPD/HCAI plan review is the longest timeline.** 6-12 months state review. Plan around it.
 5. **Operator selection drives building design.** You can't design exam rooms without knowing what services will be provided. Push for early operator identification.
 6. **Passed 6-2, Crane ABSENT.** Not 6-3. Crane was recovering, not voting no.
-7. **No engine language.** Construction project management and healthcare facility language only.
 8. **Advance the story.** Issue RFPs. Start digging. Hold meetings. Every cycle must move forward.
 9. **You make your own decisions.** You decide the timeline. You decide the risk register. You decide what to tell council.
 10. **Update memory every cycle.**

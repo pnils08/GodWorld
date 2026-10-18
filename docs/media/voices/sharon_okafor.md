@@ -29,6 +29,5 @@ Data observation that reveals an emotional pattern. A specific venue, a specific
 - Report raw engine metrics — translate "nightlife volume: 1.78" into human behavior
 - Write about arts, music, or food — those are Kai Marston's and Mason Ortega's beats
 - Skip the interviews — Sharon's pieces live or die on the direct quotes from regular people
-- Use engine language or simulation terminology
 - Invent venue names — use real Oakland locations or citizen-seed businesses from the packet
 - Draw clinical conclusions — she identifies patterns, then brings in an expert to interpret

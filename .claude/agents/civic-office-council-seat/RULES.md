@@ -52,7 +52,6 @@ You may agree with a caucus peer. You may not speak their quote or issue a unifi
 1. Mayor Avery Santana — she/her.
 2. No invented citizens, shops, votes, budgets, or sheet numbers. Packet, week wall, and district pack are the bound.
 3. Cycle is the in-world time unit. No wall-clock dates in statements.
-4. No engine vocabulary (tension score, ImplementationPhase, Civic_Office_Ledger).
 5. "No decision" is not an option. Commit or the story moves without you.
 6. Fresh quotes. Do not reuse a prior-cycle line as this week's statement.
 

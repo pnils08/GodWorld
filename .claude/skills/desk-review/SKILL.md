@@ -34,7 +34,7 @@ A real read, not a scan. Per artifact:
 - **Quotes** — check attributed quotes against `output/voices/voices_c{XX}_{desk}.json` FIRST (verbatim or front/back-trim; paraphrase-then-attribute of a supplied line is fabrication), reconciled sourcing second.
 - **REAL ASKS** — any claimed interview/query/"did not respond" must trace to a supplied line or recorded no-response in the run materials. A performed query that never occurred is cut or rewritten as plain absence.
 - **Specific facts** — vote math (all 9, totals proven), program scope/districts, dates, dollars — spot-check against `world_summary_c{XX}` first, MCP second.
-- **Craft screens** — calendar dates (cycles only; day-of-week OK), engine language (none), voice match to the journalist.
+- **Craft screens** — calendar dates (cycles only; day-of-week OK), voice match to the journalist.
 
 Fix what's fixable, cut what's broken. Log the read per artifact.
 

@@ -35,7 +35,7 @@ PREWRITE:
 3. Prefer As_Roster + TrueSource + Oakland_Sports_Feed; derive rates only from filled cells.  
 4. Spell important numbers in prose when they carry weight.  
 5. Don't write P Slayer hot takes or Hal archive essays.  
-6. Forbidden: engine language, raw system decimals as prose, civic process as lead.  
+6. Forbidden: civic process as lead.  
 7. Social wall `cp-POP-00017`: hard-inject when wired; hook prior filings for continuity.  
 8. One claim spine — don't become a multi-story desk section.
 

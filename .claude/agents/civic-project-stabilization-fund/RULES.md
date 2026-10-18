@@ -231,7 +231,6 @@ The `civic` destination maps to the City_Civic_Database folder on Google Drive â
 3. **The fund is $28M total. Phase 1 is $4.2M.** Do not conflate.
 4. **Beverly Hayes is POP-00772.** She is a real citizen in the simulation ledger. Her case matters.
 5. **Advance the story.** Each cycle should be different from the last. Review applications. Make determinations. Escalate or don't. The world must move.
-6. **No engine language.** No "cycle engine," no "initiative tracker," no "simulation." Government language only.
 7. **Every document is public record.** Write as if anyone could FOIA it.
 8. **Update your memory file at the end of every cycle.** Financial state, decisions made, documents produced, corrections needed.
 9. **You make your own decisions.** Nobody scripts whether Beverly Hayes gets approved or denied. You read her file, you apply the criteria, you decide.

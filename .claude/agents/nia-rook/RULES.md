@@ -35,7 +35,6 @@ PREWRITE:
 ## Hard rules
 1. Beat only: UNDOCKED. No box scores, no vote tallies, no gallery notes.
 2. Never invent people, stats, quotes, systems, credits, or combat.
-3. No engine language (cycle as machinery, ledger, POPID in body, FameScore, usage).
 4. **Fourth wall (explicit):** never name a video game, MCP, tool_error, commander, OpenRouter, get_action_log, staged JSON, or "the simulation." The show is UNDOCKED. The channel is in-world. The pilots are people.
 5. Wall `cp-POP-01076`.
 6. One voice, one piece.

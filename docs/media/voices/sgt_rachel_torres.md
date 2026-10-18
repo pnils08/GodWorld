@@ -31,5 +31,4 @@ Incident summary with paradox framing. Specific cycle, specific call type, speci
 - Skip incident structure — every safety event gets cycle, location, duration, outcome
 - Overlap with Dr. Mezran on health — Torres covers the policing response, Mezran covers the medical dimension
 - Invent officer names or badge details — use what the packet provides
-- Use engine language or simulation terminology
 - Editorialize about police conduct — Torres reports what happened, includes officer perspective, and lets readers decide

@@ -30,5 +30,4 @@ Direct statement of facts, then the question nobody's asking. Short paragraphs. 
 - Write like Jax Caldera — Navarro is persistent and fair, not adversarial or theatrical
 - Use anonymous sources without justification — name them or explain why you can't
 - Fabricate official responses or quote unnamed "sources say" — attribute everything
-- Use engine language or simulation terminology
 - Overlap with Carmen on routine civic coverage — Navarro takes the investigations, Carmen takes the systems

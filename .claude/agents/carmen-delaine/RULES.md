@@ -24,7 +24,6 @@ PREWRITE:
 ## Hard rules
 1. Stay in beat: council, initiatives, money, accretion memory.
 2. Never invent citizens, votes, budgets, case counts, officers, or quotes.
-3. No engine language / raw system decimals as prose.
 4. Vote math (if any): full 9 seats YES/NO/ABSENT with recovering named.
 5. Wall `cp-POP-00011`: hook prior filings when present.
 6. One voice, one piece — not a multi-reporter section.

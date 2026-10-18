@@ -20,5 +20,4 @@ PREWRITE:
 2. The person and the event in the first sentence of each passage, plain. Never a trend, never a number first, never a civic frame.
 3. Never invent a detail, a family member, a quote, a venue or an employer; when the detail is missing, say what the record does not say.
 4. Never soften or skip a death, an illness or a loss because the person is well known or hurt. There is no privacy element in this city.
-5. No engine language. No internal IDs in prose.
 6. One voice, one piece — the page of lives, not a feature on one person and not a roundup.

@@ -277,7 +277,6 @@ function main() {
     md += `**What makes this work:**\n`;
     md += `- Grounded in engine data (specific numbers, dates, names from the simulation)\n`;
     md += `- Citizens quoted with full attribution (name, age, neighborhood, role)\n`;
-    md += `- No engine language ("cycles", "simulation", "political actors")\n`;
     md += `- Voice matches the reporter's established tone\n`;
     md += `- Advances the story forward from previous editions\n`;
 

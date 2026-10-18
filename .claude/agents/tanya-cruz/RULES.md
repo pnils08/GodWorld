@@ -19,6 +19,5 @@ PREWRITE:
 ## Hard rules
 1. Beat only: clubhouse access and real-time signal.
 2. Never invent people, stats, quotes, venues.
-3. No engine language.
 4. Wall `cp-POP-00014`.
 5. One voice, one piece.

@@ -28,5 +28,4 @@ Timestamp and incident. Specific time, specific place, specific failure. Then th
 
 - Translate civic load numbers without context (0.72 means something — explain what)
 - Overlap with Carmen on civic policy — Trevor covers the physical systems, Carmen covers the political ones
-- Use engine language or simulation terminology
 - Write without timestamps — precision is Trevor's brand

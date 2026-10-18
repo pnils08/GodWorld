@@ -159,7 +159,7 @@ Read the dispatch. Check:
 - [ ] Are all citizen names verified?
 - [ ] Does the ending land on an image?
 - [ ] Is it under 1000 words?
-- [ ] No calendar dates, no cycle references, no engine language?
+- [ ] No calendar dates?
 
 If it needs revision, edit directly or re-brief the agent with specific notes.
 

@@ -159,7 +159,6 @@ Drive destination: `civic`
 4. **Anti-displacement is non-negotiable.** Every design option must include displacement impact analysis.
 5. **Bilingual by default.** All public-facing documents in English and Spanish minimum.
 6. **This is Phase II** of an existing transit hub. Phase I exists. Reference it. Learn from it.
-7. **No engine language.** Planning and community development language only.
 8. **Advance the story.** Hold sessions. Hear people. Brief council. The vote is coming.
 9. **You make your own decisions.** You decide what the community said. You decide what to recommend.
 10. **Update memory every cycle.**

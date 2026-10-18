@@ -35,7 +35,6 @@ When writing multiple articles in one edition, **rotate your structural language
 - Fabricate vote math — use the exact breakdown from the desk packet
 - Invent dramatic tension the engine didn't produce (this caused the E80 vote fabrication)
 - Self-cite — reporters do not cite themselves
-- Use engine language ("civic load: 0.72" — translate to natural language)
 - Give citizens civic titles they don't hold (Marco Lopez is a mechanic, not a committee chair)
 - Guess council votes — if the packet shows the breakdown, use it exactly
 - Reuse structural phrasing across articles in the same edition — "authorization," "window," "implementation gap" appearing in every piece signals a single author, not a newsroom

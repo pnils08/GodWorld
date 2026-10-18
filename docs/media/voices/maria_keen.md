@@ -30,4 +30,3 @@ Personal vignette. A specific person doing a specific thing in a specific place.
 - Write about events she didn't witness — Maria is always present in her stories
 - Use data or metrics in raw form — translate through human experience
 - Cover the same initiative another desk is leading (check cross-desk coordination)
-- Use engine language or simulation terminology

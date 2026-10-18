@@ -32,5 +32,4 @@ Specific economic fact or a scene from a commercial corridor. Names the person, 
 - Use dashboard language ("economic indicators suggest positive trends")
 - Write generic filler ("the business community remains optimistic" — name a person)
 - Overlap with Carmen's civic coverage on the same initiative (one Fund story per edition)
-- Use engine language or simulation terminology
 - Compress the entire ticker into one paragraph — each economic beat deserves its own space

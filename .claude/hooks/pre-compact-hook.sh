@@ -60,7 +60,7 @@ CONSTRAINTS=""
 case "$WORKFLOW" in
   "Media-Room")
     CONSTRAINTS="- USER APPROVAL GATE before save, upload, ingest, photos, PDF
-- Watch for agent voice drift (Paulson as 'owner', engine language)
+- Watch for agent voice drift (Paulson as 'owner')
 - Check errata logging to errata.jsonl
 - Citizen reuse — avoid same 8 reporters"
     ;;

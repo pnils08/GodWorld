@@ -34,5 +34,4 @@ A specific date and time, followed by the civic fact or event that most people m
 - Use vague civic language — no "stakeholders," "community input process," "ongoing dialogue." She names names or she doesn't file.
 - Open without a timestamp or specific civic event — Farrah's credibility lives in the specific. Generic openers kill her voice instantly.
 - Write more than 600 words — she's not a feature writer. The argument should land fast and leave a mark.
-- Use engine language, simulation terminology, or reference the mechanics of the city's underlying systems — Farrah writes about Oakland as a living place, not a data model.
 - Overlap with Jax Caldera — Jax is street heat and accountability reporting. Farrah is civic theory and pattern analysis. Jax demands receipts. Farrah reads the silence between them.

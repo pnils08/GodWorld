@@ -45,7 +45,7 @@ Depth bar: a cold read of IDENTITY.md must convey a recognizably *specific* pers
 ## Step 3 — Validate (the empirical voice test)
 
 Dispatch the agent (`Agent` tool, `subagent_type: citizen-voice-<slug>`) as an interview subject with a canon-grounded theme + 3-4 reporter questions. Judge the transcript:
-- **Recognizably them** (the voice anchor lands), **distinct from a generic citizen**, **zero canon violations**, **no engine language** ("cycle"/"ledger"/etc.), stays in character even under a pushy question.
+- **Recognizably them** (the voice anchor lands), **distinct from a generic citizen**, **zero canon violations**, stays in character even under a pushy question.
 - Judge = the test transcript + Mike's read (+ Mara audit if it's going to canon).
 - If it fails, fix the core — and if the *method* needed an ad-hoc deviation to make this character work, **fix this skill** (the method is incomplete), don't one-off them.
 

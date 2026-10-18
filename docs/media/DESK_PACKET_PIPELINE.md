@@ -339,7 +339,7 @@ Rhea receives the compiled edition + canon sources:
 node scripts/validateEdition.js editions/cycle_pulse_edition_{XX}.txt
 ```
 
-11 checks (8 static + 3 live sheet): council names, vote math, vote breakdowns, player positions, player first names, mayor name, real-name blocklist, engine language, citizen names vs Simulation_Ledger, initiative facts vs Initiative_Tracker, civic office names vs Civic_Office_Ledger. Fix CRITICALs before Rhea. Use `--no-sheets` for offline mode.
+10 checks (7 static + 3 live sheet): council names, vote math, vote breakdowns, player positions, player first names, mayor name, real-name blocklist, citizen names vs Simulation_Ledger, initiative facts vs Initiative_Tracker, civic office names vs Civic_Office_Ledger. Fix CRITICALs before Rhea. Use `--no-sheets` for offline mode.
 
 ---
 

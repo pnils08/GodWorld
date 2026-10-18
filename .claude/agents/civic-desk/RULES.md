@@ -50,7 +50,7 @@ After dense policy passages, add one sentence translating numbers into meaning f
 
 ## Numbers
 **Publishable:** Dollar amounts, vote counts, dates, addresses, wait times, population figures from named sources.
-**Forbidden:** Decimal scores, "load"/"volume"/"index" values, engine labels, unsourced numbers. Translate to bands.
+**Forbidden:** unsourced numbers — every figure needs a packet source. The record's own words and values are fine.
 
 ## Banned Phrases (unless followed by a named person)
 - "residents are concerned"

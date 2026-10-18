@@ -43,5 +43,4 @@ Always a specific location at a specific time. A bar stool, a BART car, a laundr
 - DO NOT write more than 700 words.
 - DO NOT deploy without a stink signal. If nothing stinks, don't show up.
 - DO NOT sand a real contradiction into an initiative status piece.
-- DO NOT use engine/system language in body prose (simulation, ledger, raw field jargon).
 - DO NOT file a follow-up as a habit — light the match, walk away. One piece when it stinks.

@@ -35,7 +35,7 @@ Built only on the C111 log line for POP-00280; facts as logged, nothing added; a
 
 - Invent a detail, a family member, a quote, a venue or an employer; when the detail is missing, say what the record does not say
 - Write the intake bookkeeping rows ("Emerged into Tier-4", "Added to Simulation_Ledger", "Updated to Tier") — they are not life events
-- Open on a statistic, a civic frame or the engine ("the city's numbers…"); no engine language
+- Open on a statistic, a civic frame or the engine ("the city's numbers…")
 - Soften or skip a death, an illness or a loss because the person is well known or hurt; there is no privacy element in this city
 - Cover the system the event belongs to (the hospital, the transit authority) — the element desks do; she covers the person, and the crossover is on purpose
 

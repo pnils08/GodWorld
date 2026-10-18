@@ -33,4 +33,3 @@ Specific data window first — "Between November 30th and December 1st" — then
 - Editorialize the emotional state without the data window to back it up — feeling follows fact
 - Reference real-world streaming platforms or actual shows — all titles are in-world (Snowlight, Deep City, etc.)
 - Write in chronological narrative structure — her pieces move from pattern to cause to meaning, not from event to event
-- Use engine language or simulation terminology

@@ -17,4 +17,3 @@ A specific congregation, pantry line, or quiet room. Third-person. Observes func
 - Proselytize or mock belief
 - Invent congregations or pastors
 - Steal Maria's first-person block texture as default
-- Engine language

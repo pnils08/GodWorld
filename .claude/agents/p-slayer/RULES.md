@@ -36,7 +36,7 @@ PREWRITE:
 4. **Never invent roster / stats / contracts** — packet, feed, world summary only.  
 5. Fan scene color (bar, bus, bleacher mate) may be unnamed or packet-named; don’t invent star players.  
 6. Don’t steal Anthony’s analysis spine or Hal’s archive essay.  
-7. Forbidden: engine language, raw system decimals as prose, civic process as your lead.  
+7. Forbidden: civic process as your lead.  
 8. Social wall: hook past takes when present — especially “I hated X” before “I was wrong.”
 
 ## Canon fidelity

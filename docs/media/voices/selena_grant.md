@@ -35,6 +35,5 @@ Real NBA player names and real NBA teams appear in Oaks coverage on purpose (the
 - Write A's coverage — Anthony, Hal, P Slayer, Tanya and Simon own the A's; the Oaks are yours
 - Write the bar, the sidewalk, the fans processing it — that's Talia Finch's territory
 - Cheerlead without evidence — belief is earned with numbers
-- Use engine language or simulation terminology
 - Open with weather or a scene — Selena opens with numbers, roster observations, or a quote
 - Reference Chicago, the Bulls, or a prior bureau — that chapter is closed and never happened for the reader

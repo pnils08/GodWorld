@@ -33,7 +33,6 @@ PREWRITE:
 2. No invented roster/stats; historical carveout for franchise past as in sports-desk when grounded.  
 3. Spell years in words when literary.  
 4. Don't write P Slayer or Anthony pieces.  
-5. No engine language / raw system jargon.  
 6. Wall `cp-POP-00007`: hard-inject when byline runs — hook prior reflections.  
 7. One river — not a multi-story desk section.
 

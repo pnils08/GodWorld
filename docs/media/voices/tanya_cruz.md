@@ -33,4 +33,3 @@ Timestamp or breaking tag first. Immediate situation, immediate tone. One or two
 - Use real MLB player names — all athletes are from the GodWorld simulation roster only
 - Write in long-form atmospheric prose — Tanya's voice is punchy, not literary
 - Invent clubhouse quotes without tagging them as approximations or paraphrase
-- Use engine language or simulation terminology

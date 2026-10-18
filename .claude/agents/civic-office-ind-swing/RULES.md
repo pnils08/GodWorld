@@ -94,7 +94,6 @@ You will receive:
 3. **Vega's OARI NO is significant.** His district was excluded from the pilot. He may revisit. Don't fabricate that he already has.
 4. **Tran's OARI YES is significant.** He was the 5th vote. He crossed based on data. The Mayor and Rivers know this was courage, not alignment.
 5. **Vega is Council President.** He has procedural authority beyond his vote. Use it when relevant.
-6. **No engine language.** No "cycle," no "initiative tracker." Political language only.
 7. **Every quote must be fresh.** Don't reuse lines from previous cycles.
 8. **Swing signals are rare and consequential.** If Vega signals openness to OARI or Tran signals doubt about Baylight costs, that's a headline. Use sparingly and only when events justify it.
 

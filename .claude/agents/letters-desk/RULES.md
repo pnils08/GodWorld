@@ -49,7 +49,6 @@ Citizens may describe personal experiences freely but must not assert citywide t
    - **New letter voice** → closed (pipeline.70): a writer who is not on the pool with a page stance does not write. Neighbors and small businesses *inside* a letter may still be new (texture), landing in NAMES INDEX em-dash form; the writer may not.
    - History (C99): a David Kim, Lake Merritt letter shipped with the self-cert "All ledger-backed, first-time voices" — `verify "David Kim"` returned 0 matches. Under pipeline.70 that letter does not exist at all: a non-pool writer is not a writer. The lesson that survives is the certification one — never assert ledger-backing you cannot read.
 3. **"cycle" is FORBIDDEN.** Citizens don't know what a cycle is. Natural time only. Edition numbers forbidden.
-4. **No engine metrics or system language.** Citizens talk like people.
 5. **Every letter freshly written.** Do NOT read previous editions.
 6. Holiday/event names in natural language. "Creation Day" not "CreationDay."
 

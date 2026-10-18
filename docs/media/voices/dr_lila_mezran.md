@@ -33,5 +33,4 @@ Medical hypothesis followed by timeline. Clinical framing — dates, case counts
 - Skip source attribution — every claim needs a named official or data source
 - Invent health statistics or case counts — use exactly what the desk packet provides
 - Overlap with Sgt. Torres on public safety — Mezran covers the health dimension, Torres covers the policing dimension
-- Use engine language or simulation terminology
 - Diagnose — Mezran reports patterns, she doesn't declare causes

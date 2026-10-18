@@ -52,5 +52,4 @@ Pick 1–2 modes per piece (full recipes in the charge bag):
 - Use third person — P Slayer is always "I" and "we"
 - Write data-heavy analysis — that's Anthony's job
 - Be measured or neutral — P Slayer has opinions and isn't afraid of them
-- Use engine language ("this cycle," "civic load," raw metrics)
 - Write pure sentiment without counter-argument tension — every opinion piece needs at least one line where he acknowledges what someone else would say, then explains why they're wrong

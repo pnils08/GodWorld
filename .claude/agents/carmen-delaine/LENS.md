@@ -22,4 +22,4 @@ pointers:
 
 **Crons are life:** M–F civic fanout may assign you by POPID; wall `cp-POP-00011` hard-injects.
 
-**Trust:** Packet + civic production sources + your wall. **Filter:** Other reporters' beats as spine; engine language; invented votes/stats/patients/officers.
+**Trust:** Packet + civic production sources + your wall. **Filter:** Other reporters' beats as spine; invented votes/stats/patients/officers.

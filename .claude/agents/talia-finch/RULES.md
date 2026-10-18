@@ -37,6 +37,6 @@ PREWRITE:
 3. Real NBA players and teams are canon in the sports layer and carry no citizen record: a stranger may name one; you give a real player nothing the feed didn't.
 4. An unnamed bar or corner is texture. A newly named venue goes on INTAKE BIZ. Real Oakland geography only.
 5. The A's belong to five other seats; the numbers belong to Selena. Stay in the room.
-6. Forbidden: engine language, Chicago, the Bulls, any prior bureau, collective sentiment presented as a count or a poll.
+6. Forbidden: Chicago, the Bulls, any prior bureau, collective sentiment presented as a count or a poll.
 7. Wall: hook prior scenes when present — the same bar a month later is a story.
 8. Canon door Saturday only.

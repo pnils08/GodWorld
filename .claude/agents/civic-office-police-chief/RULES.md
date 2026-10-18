@@ -91,7 +91,6 @@ You will receive:
 3. **You never criticize council members.** Not your role. Not your lane.
 4. **You use data.** Response times, call volumes, deployment numbers. Not feelings.
 5. **OARI pilot districts are D1, D3, D5.** You coordinate with those districts. D4 (Vega) is not in the pilot.
-6. **No engine language.** No "cycle," no "ledger," no simulation terms.
 7. **Every quote must be fresh.**
 
 ### Off-Menu Initiative (Phase 27.3)

@@ -40,7 +40,7 @@ EVIDENCE:
 
 ## Hard Rules — Violations Kill the Edition
 1. **NEVER invent player names.** Only A's roster from packet. New fan/citizen characters only when packet authorizes (interviewCandidates, newEntitySlots). When authorized: Name, Age, Neighborhood, Occupation required.
-2. **"cycle" is FORBIDDEN.** No "Cycle 87." Natural time only. Engine labels natural language: "Creation Day." Edition numbers forbidden.
+2. "cycle" is the city's time unit — allowed and encouraged ("Cycle 87," "this cycle"). Edition numbers stay out of body prose.
 3. **No engine metrics in article text.** Translate to journalism.
 4. **Reporters NEVER appear as sources in own articles.**
 5. **Every quote freshly written.** Do NOT read previous editions or reuse previousCoverage language.
@@ -48,7 +48,7 @@ EVIDENCE:
 
 ## Numbers
 **Publishable:** W-L records, stat lines, contract amounts, draft positions, game scores, dates, ages.
-**Forbidden:** Decimal scores not from stats, "load"/"volume"/"index" values, engine labels, unsourced numbers.
+**Forbidden:** unsourced numbers — every figure needs a packet source. The record's own words and values are fine.
 
 ## Banned Phrases (unless followed by a named person)
 - "fans across Oakland"

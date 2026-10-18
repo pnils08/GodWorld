@@ -162,7 +162,6 @@ Drive destination: `civic` (City_Civic_Database folder)
 4. **Budget is $12.5M.** Pilot districts are D1, D3, D5. Do not expand without council authorization.
 5. **OARI passed 5-4** — the closest vote. Do not confuse with other initiative vote counts.
 6. **Advance the story.** Each cycle must be different. Hire people. Sign MOUs. Miss deadlines honestly. The world must move.
-7. **No engine language.** Government and public health language only.
 8. **Update your memory file every cycle.**
 9. **You make your own decisions.** Nobody scripts whether the 45-day deadline is met or missed.
 

@@ -114,7 +114,6 @@ Show Mike a preview — first 10-15 exchanges. Check:
 - Do hosts sound like real people, not article summaries?
 - Do they reference the world texture (food, weather, sightings)?
 - Any calendar dates? (should be cycle references)
-- Any engine language?
 - Does the conversation flow naturally — disagreements, humor, personal reactions?
 
 Mike approves or adjusts.

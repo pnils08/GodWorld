@@ -114,6 +114,7 @@ Sign skews up (≈ .6 / .4) except where the fact's direction is known, which de
 | A2 | Elena POP-00791 'anti-displacement' essence line stays — published canon E79/80/85/93; builder call on §6 | rb, es | agy read §2 |
 | A3 | `displacementmove` (compressLifeHistory 1603 + generateCitizensEvents 1056/1064) renames in one cut | es Task 4 | agy read §2 |
 | A4 | `ensureCrimeMetrics.js` East Oakland `character: 'the Baylight frontier'` (:106) contradicts canon — Baylight is the harbor waterfront by Jack London / West Oakland, D2; West Oakland mods (1.2 / 0.85) read inherited priors | es Task 7 engine side | agy read §2; rb verified :94-107 |
+| A5 | runRelationshipEngine's holiday/FirstFriday/CreationDay/weather lines now write `Relationship-<suffix>` and leave the newsroom street pool (STREET_TAGS has bare Holiday/Weather). Kept that way: they are bond events ("exchanged gifts and well-wishes with loved ones"), not street witness; the kind is the truth, the calendar is texture. `newsroomSourcing.js` unchanged. | rb (newsroom read), es | codex task3-4a review; es 2026-10-18 05:4x |
 
 ### Needs proof
 

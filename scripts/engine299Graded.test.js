@@ -149,5 +149,31 @@ for (let seed = 1; seed <= 300; seed++) {
 }
 assert('T9 firstFriday / holiday / prevEvening-gridlock / sports-season pools never skip', !calSkips['source:firstFriday'] && !calSkips['source:holiday'] && !calSkips['source:prevEvening'] && !calSkips['source:sports'], JSON.stringify(calSkips));
 console.log('  T9 skips by source:', JSON.stringify(calSkips));
+
+// T10 (engine.299 Task 9, builder 2026-10-18: "creating differences in citizens based on their differences"):
+// two citizens in the same hood, same Cycle, same seed — one stretched (DebtLevel 5, WealthLevel 2), one comfortable
+// (DebtLevel 0, WealthLevel 9). Their money lines differ in kind and sign, read from their own rows.
+{
+  global.hoodTexturePool_ = () => [];
+  const H2 = HEADERS.concat(['DebtLevel', 'WealthLevel']);
+  const mk = (pop, debt, wealth) => ['POP-' + pop, 'Synthetic', pop, 3, 'ENGINE', '', '', 'Temescal', 1990, 'teacher', '', '', '', 0, '', 'active', C.serializeDialState_(E.newCitizen_()), debt, wealth];
+  const tally = { stretched: { down: 0, up: 0, debtLines: 0 }, comfortable: { down: 0, up: 0, debtLines: 0 } };
+  const MONEY = /did the math twice|moved a bill to next month|rent math on the back of an envelope|listing price on a place like theirs|covered the table's coffee|moving money around/;
+  for (let seed = 1; seed <= 600; seed++) {
+    for (const [who, debt, wealth] of [['stretched', 5, 2], ['comfortable', 0, 9]]) {
+      const ctx = ctxFor(seed, 0);
+      ctx.ledger.headers = H2.slice(); ctx.ledger.rows = [mk(who, debt, wealth)];
+      ctx.summary.cycleActiveCitizens = ['POP-' + who];
+      GEN.generateCitizensEvents_(ctx);
+      String(ctx.ledger.rows[0][5] || '').split('\n').forEach((l) => {
+        if (!MONEY.test(l)) return;
+        if (/-Down-/.test(l)) tally[who].down++; else if (/-Up-/.test(l)) tally[who].up++;
+        if (/rent math|listing price/.test(l)) tally[who].debtLines++;
+      });
+    }
+  }
+  assert('T10 the stretched citizen draws money lines that read Down (and the debt lines open on their DebtLevel)', tally.stretched.down > 0 && tally.stretched.up === 0 && tally.stretched.debtLines > 0, JSON.stringify(tally.stretched));
+  assert('T10 the comfortable citizen in the same hood draws money lines that read Up, never the debt lines', tally.comfortable.up > 0 && tally.comfortable.down === 0 && tally.comfortable.debtLines === 0, JSON.stringify(tally.comfortable));
+}
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

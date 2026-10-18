@@ -158,6 +158,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 03:34 rb PURGE §7 + stray rb lines under §8 (night of 2026-10-16; git keeps history). BOOT overnight (builder 03:3x: support es; ask = clean up hardcoded events in the engines that do not fit how the sim works now, no system rebuilds; es uses codex + agy often). WAKE set (recurring :26, job 23c748f8). es WORKING (rewriting the event-engines plan to the ask, advisor pass). Guests: none claimed by rb.
 
 03:40 rb BUILD engine.299 Task 7 rb half: d1877af0 7eb7fd5a 074c0959 6a25bcde (writer files); ECL R130 R219 Text trued LIVE, read back OK (was: 'priced out the bigger apartment…' / 'Mandela Parkway encampment site…'); R532 no premise, kept; Elena essence line HELD → §6. compressLifeHistory displacementmove left for es Task 4 rename. CLAIM codex es engine.299 Task 1 diff review (TASK docs/for-claude-review/2026-10-18-engine299-task1-diff-review-TASK.md; dispatch when es's cut lands).
+03:44 rb CLAIM agy rb engine.299 Task 7 writer-side adversarial read (→ output/antigravity/2026-10-18-engine299-task7-rb-premise-read.md). Ripple_Ledger live: 0 causeType=gentrification rows, the removed seed path is dead. codex: es dispatches its Task 1 hashes against rb's TASK path (rb does not send).
 
 ## 8. Stop rule and usage
 

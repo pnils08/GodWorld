@@ -1017,13 +1017,13 @@ var YOUTH_DIAL_TAG = {
   academic: 'Education',
   graduation: 'Graduation',
   coming_of_age: 'Graduation',
-  sports: 'Team',
+  sports: 'Team-Fandom-Up-S',               // engine.299: Team / Civic / Neighborhood alone map to {} — the youth line says what it moves
   arts: 'Cultural',
   clubs: 'Community',
   community_support: 'Community',
-  civic_participation: 'Civic',
+  civic_participation: 'Civic-Sociability-Up-S',
   resilience: 'Stabilized',
-  safety_awareness: 'Neighborhood'
+  safety_awareness: 'Neighborhood-Composure-Up-S'
 };
 
 function recordYouthLifeHistory_(ctx, events) {

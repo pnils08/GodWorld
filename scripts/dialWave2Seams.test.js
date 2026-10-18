@@ -156,6 +156,17 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
     const skipped = ctx.summary.engine299 ? ctx.summary.engine299.noDialBySource['runNeighborhoodEngine:Neighborhood:no-trajectory'] : 0;
     assert(`engine.299 a hood that did not move writes no hood line (${pressure} run); the skip is counted`, still.length === 0 && skipped === 2, JSON.stringify({ still, skipped }));
   }
+  // engine.299 (codex Task 3 F1): a world event's presence is not a direction — with a positive world event and
+  // steady hoods, the "felt atmosphere influenced by recent city events" line is never written Down (or at all).
+  if (pressure === 'housingPressure') {
+    const ctx = context(rows.map(r => r.slice())); ctx.rng = () => 0.99;
+    ctx.config.dialHoodPressureBar = 2; ctx.config.dialHoodCrimeBar = 2;
+    ctx.summary.neighborhoodState = { 'Synthetic Hood A': { housingPressure: 0, crimeIndex: 0.5 }, 'Synthetic Hood B': { housingPressure: 0, crimeIndex: 0.5 } };
+    ctx.summary.worldEvents = [{ type: 'community', description: 'team-sponsored community cleanup day', severity: 2 }];
+    writes.length = 0; w.runNeighborhoodEngine_(ctx);
+    const got = writes.filter(x => x.tab === 'LifeHistory_Log').map(x => x.row[3] + ' :: ' + x.row[4]);
+    assert('engine.299 a positive world event never yields a Composure-Down "recent city events" line', got.every(g => !/recent city events/.test(g)), JSON.stringify(got));
+  }
 }
 {
   const gc = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens/generateCitizensEvents.js'), 'utf8');

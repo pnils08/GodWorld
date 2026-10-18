@@ -345,10 +345,11 @@ console.log('\n9. engine.144 loop 4 — youth texture, the minors\' whole textur
   check('minors 5–17 draw texture at the adults\' rate (0.5–0.85 in January)', rate > 0.5 && rate < 0.85, rate.toFixed(3));
   check('under-five draws nothing; a 30-year-old draws nothing here', under5 === 0 && adult === 0, under5 + '/' + adult);
   check('no "(participated)" suffix on any line', suffix === 0, String(suffix));
-  check('lines are stamped with a routable dial tag', /^Y3C4 — \[(Education|Team|Cultural|Community|Civic|Graduation|Stabilized|Neighborhood)\] /.test(lineChild) && /^Y3C4 — \[/.test(lineTeen), lineChild + ' | ' + lineTeen);
+  // engine.299: Team / Civic / Neighborhood alone map to {}, so the youth line carries its graded form (Team-Fandom-Up-S …).
+  check('lines are stamped with a routable dial tag', /^Y3C4 — \[(Education|Team-Fandom-Up-S|Cultural|Community|Civic-Sociability-Up-S|Graduation|Stabilized|Neighborhood-Composure-Up-S)\] /.test(lineChild) && /^Y3C4 — \[/.test(lineTeen), lineChild + ' | ' + lineTeen);
   const tex = intents.filter(x => x.tab === 'LifeHistory_Log' && /\|texture$/.test(x.row[3]));
   const ev = intents.filter(x => x.tab === 'LifeHistory_Log' && !/\|texture$/.test(x.row[3]));
-  check('log rows: texture layer carries the |texture token; event layer does not', tex.length > 0 && ev.length > 0 && tex.every(x => /^\w[\w ]*\|youth-[a-z_]+\|texture$/.test(x.row[3])), tex.length + '/' + ev.length);
+  check('log rows: texture layer carries the |texture token; event layer does not', tex.length > 0 && ev.length > 0 && tex.every(x => /^\w[\w -]*\|youth-[a-z_]+\|texture$/.test(x.row[3])), tex.length + '/' + ev.length);
   check('S.youthTexture reports cohort + generated', (() => { const c = yctx([yrow('K8', 2034)], 5, 1); Y.runYouthEngine_(c); return c.summary.youthTexture && c.summary.youthTexture.cohort === 1 && typeof c.summary.youthTexture.generated === 'number'; })());
   // calendar pulls the type mix; summer cuts academic
   const typeShare = (month, age, type) => { let n = 0; const rng = mul(3); for (let i = 0; i < 2000; i++) if (Y.selectYouthEventType_(age, month, rng) === type) n++; return n / 2000; };

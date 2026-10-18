@@ -503,11 +503,11 @@ function runRelationshipEngine_(ctx) {
       } else if (arcRels.indexOf(pick) >= 0) {
         eventTag = "Arc";
       } else if (holidayRels.indexOf(pick) >= 0) {
-        eventTag = "Holiday";
+        eventTag = "Relationship-Holiday";        // engine.299: a relationship line on a holiday folds as Relationship (calendar suffix), not a bare plain day
       } else if (firstFridayRels.indexOf(pick) >= 0) {
-        eventTag = "FirstFriday";
+        eventTag = "Relationship-FirstFriday";
       } else if (creationDayRels.indexOf(pick) >= 0) {
-        eventTag = "CreationDay";
+        eventTag = "Relationship-CreationDay";
       } else if (culturalRels.indexOf(pick) >= 0) {
         eventTag = "Cultural";
       } else if (communityRels.indexOf(pick) >= 0) {

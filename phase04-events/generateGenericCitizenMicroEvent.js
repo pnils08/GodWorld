@@ -321,6 +321,121 @@ function generateGenericCitizenMicroEvents_(ctx) {
     }
   }
 
+
+  // engine.299 Task 4 (builder 2026-10-18: every event that fires moves a dial). Every line this engine
+  // writes carries the dial it moves and which way — by what the line says. Fixed texts are signed here;
+  // a hood line takes the hood's own trajectory (S.neighborhoodState, Neighborhood_Map NeighborhoodTrajectory:
+  // growth Up / decay Down; steady → no sign, not written); the dynamic lines are signed by their shape. A
+  // line with no sign is not written and is counted in S.engine299.noDialBySource. Kinds that already carry
+  // deltas (Community, Cultural) keep their bare tag. The two world-event presence lines are deliberately
+  // unsigned (S.worldEvents holds good news too; presence is not a direction — codex 2026-10-18 Task 3 F1).
+  var SIGN_BY_TEXT_ = {
+    "enjoyed a calm, uneventful day": "dial:composure:up",
+    "spent time at a corner store; routine stop": "dial:composure:up",
+    "stepped outside briefly; peaceful moment": "dial:composure:up",
+    "noticed minor shifts in everyday neighborhood flow": "dial:openness:up",
+    "watched part of a daily sports highlight": "dial:fandom:up",
+    "took a casual walk through their area": "dial:outabout:up",
+    "moved quietly through a cold evening": "dial:outabout:down",
+    "noticed seasonal change in the air": "dial:openness:up",
+    "took in warm evening weather": "dial:outabout:up",
+    "adjusted to early autumn atmosphere": "dial:composure:up",
+    "adjusted plans due to light rain": "dial:outabout:down",
+    "moved more carefully due to fog": "dial:outabout:down",
+    "took shelter from warm conditions": "dial:outabout:down",
+    "bundled up against the cold": "dial:outabout:down",
+    "noted windy conditions during outing": "dial:outabout:down",
+    "enjoyed a cozy indoor moment": "dial:composure:up",
+    "felt a bit restless from the weather": "dial:composure:down",
+    "enjoyed the perfect weather outside": "dial:outabout:up",
+    "felt a moment of nostalgia": "dial:warmth:up",
+    "picked up on a slightly positive city mood": "dial:composure:up",
+    "noticed a subtle tension in the environment": "dial:composure:down",
+    "overheard concerns about the economy": "dial:composure:down",
+    "sensed optimism in local conversations": "dial:composure:up",
+    "noticed vibrant cultural activity around town": "dial:openness:up",
+    "felt the city's creative pulse": "dial:openness:up",
+    "appreciated the artistic atmosphere": "dial:openness:up",
+    "felt welcomed by neighborhood energy": "dial:sociability:up",
+    "noticed community members connecting": "dial:sociability:up",
+    "appreciated the local camaraderie": "dial:sociability:up",
+    "checked out a First Friday gallery": "dial:sociability:up",
+    "enjoyed the art walk atmosphere": "dial:sociability:up",
+    "wandered through open studios": "dial:sociability:up",
+    "discovered a new local artist": "dial:openness:up",
+    "soaked in the creative energy": "dial:openness:up",
+    "grabbed food from a First Friday vendor": "dial:outabout:up",
+    "felt a quiet sense of belonging": "dial:warmth:up",
+    "reflected on roots in the community": "dial:warmth:up",
+    "appreciated Oakland's spirit": "dial:warmth:up",
+    "felt connected to the city's story": "dial:warmth:up",
+    "felt championship fever everywhere": "dial:fandom:up",
+    "saw fans celebrating in the streets": "dial:fandom:up",
+    "heard cheers from nearby bars": "dial:fandom:up",
+    "followed playoff updates on their phone": "dial:fandom:up",
+    "felt the city's sports tension": "dial:fandom:up",
+    "overheard excited sports talk": "dial:fandom:up",
+    "caught playoff highlights at a cafe": "dial:fandom:up",
+    "felt the city rooting for the team": "dial:fandom:up",
+    "noticed playoff energy in the air": "dial:fandom:up",
+    "followed the pennant race closely": "dial:fandom:up",
+    "felt the late-season intensity": "dial:fandom:up",
+    "overheard talk about standings": "dial:fandom:up",
+    "noticed Thanksgiving preparations around town": "dial:family:up",
+    "smelled holiday cooking in the air": "dial:warmth:up",
+    "saw families gathering": "dial:family:up",
+    "noticed holiday decorations everywhere": "dial:outabout:up",
+    "felt the festive atmosphere": "dial:warmth:up",
+    "heard holiday music from nearby shops": "dial:warmth:up",
+    "felt the fresh-start energy of the new year": "dial:drive:up",
+    "noticed people making resolutions": "dial:drive:up",
+    "enjoyed the optimistic atmosphere": "dial:composure:up",
+    "noticed party preparations underway": "dial:sociability:up",
+    "felt anticipation for the countdown": "dial:openness:up",
+    "saw people dressed for celebration": "dial:sociability:up",
+    "noticed Valentine's displays in windows": "dial:outabout:up",
+    "saw couples enjoying the day": "dial:warmth:up",
+    "felt the romantic atmosphere": "dial:warmth:up",
+    "noticed spooky decorations appearing": "dial:outabout:up",
+    "saw early costumes being worn": "dial:openness:up",
+    "felt the playful autumn spirit": "dial:openness:up",
+    "noticed spring decorations around": "dial:outabout:up",
+    "saw families in their Sunday best": "dial:warmth:up",
+    "felt the seasonal renewal": "dial:openness:up",
+    "saw families treating their mothers": "dial:family:up",
+    "noticed brunch crowds everywhere": "dial:outabout:up",
+    "felt the family-oriented atmosphere": "dial:family:up",
+    "saw families out with their dads": "dial:family:up",
+    "noticed barbecue gatherings": "dial:sociability:up",
+    "felt the family-focused energy": "dial:family:up"
+  };
+  function hoodSign_(hood) {
+    var st = (S.neighborhoodState && hood) ? S.neighborhoodState[hood] : null;
+    var traj = String((st && st.trajectory) || '').toLowerCase();
+    return traj === 'growth' ? 'dial:outabout:up' : (traj === 'decay' ? 'dial:outabout:down' : null);
+  }
+  function signFor_(text, hood) {
+    if (SIGN_BY_TEXT_.hasOwnProperty(text)) return SIGN_BY_TEXT_[text];
+    var nArr = hood ? neighborhoodPool[hood] : null;
+    if (nArr && nArr.indexOf(text) >= 0) return hoodSign_(hood);
+    if (/ was lively last night$/.test(text)) return 'dial:outabout:up';
+    if (/^sensed the after-effects of a busy night/.test(text)) return 'dial:outabout:down';
+    if (/^felt the creative buzz of /.test(text)) return 'dial:openness:up';
+    if (/^felt warmth from /.test(text)) return 'dial:warmth:up';
+    if (/^picked up on unease specific to /.test(text)) return 'dial:composure:down';
+    if (/upbeat neighborhood mood$/.test(text)) return 'dial:composure:up';
+    if (/^moved through fog that had settled over /.test(text)) return 'dial:outabout:down';
+    if (/ running warmer than the rest of the city$/.test(text)) return 'dial:outabout:up';
+    if (/^felt the cool pocket /.test(text)) return 'dial:outabout:up';
+    return null;
+  }
+  function gradedKind_(kind, sign) {
+    var m = /^dial:([a-z]+):(up|down)$/.exec(sign || '');
+    if (!m) return '';
+    return kind + '-' + m[1].charAt(0).toUpperCase() + m[1].slice(1) + '-' + (m[2] === 'up' ? 'Up' : 'Down') + '-S';
+  }
+  var KIND_HAS_DELTAS_ = { 'Community': true, 'Cultural': true };   // utilities/citizenDialMap.js DIAL_MAP, read 2026-10-18
+
   // Build basePool
   var basePool = base
     .concat(seasonal, weatherPool, moodPool, chaosPool, sentimentPool, econPool, culturalActivityPool, communityPool, prevEvePool);
@@ -498,6 +613,19 @@ function generateGenericCitizenMicroEvents_(ctx) {
     else if (communityPool.indexOf(pick) >= 0) tag = "Community";
     else if (prevEvePool.indexOf(pick) >= 0) tag = "PrevEvening";
 
+    // engine.299: admission — graded tag or no line (before any write).
+    if (!KIND_HAS_DELTAS_[tag]) {
+      var gTag = gradedKind_(tag, signFor_(pick, neighborhood));
+      if (!gTag) {
+        S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+        S.engine299.noDial++;
+        var gKey = 'generateGenericCitizenMicroEvent:' + tag;
+        S.engine299.noDialBySource[gKey] = (S.engine299.noDialBySource[gKey] || 0) + 1;
+        continue;
+      }
+      tag = gTag;
+    }
+
     var stamp = inWorldStamp_(ctx);
     var line = stamp + " — [" + tag + "] " + pick;
 
@@ -510,7 +638,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
       inWorldStamp_(ctx),
       popId,
       '',
-      "Micro-Event",
+      tag,            // engine.299: the log carries the written tag (was a bare "Micro-Event" whatever the cell said)
       pick,
       '',
       cycle

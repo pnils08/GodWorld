@@ -1,0 +1,16 @@
+// rb 2026-10-18 — NEIGHBORHOOD_DRIFT_BESPOKE_ up-line adds (each states more activity; mirrors the hood's down lines).
+// Append each pair to the named hood's array in phase05-citizens/runNeighborhoodEngine.js.
+'Temescal':     ["found the Telegraph cafes fuller than they were a season ago", "up"], ["waited in a longer line than usual at a Temescal spot", "up"]
+'Downtown':     ["noticed the plaza by City Hall staying busy well after work", "up"], ["waited for the second elevator in the tower lobby at lunch", "up"]
+'Fruitvale':    ["noticed the platform-side shops staying open later than last season", "up"], ["squeezed onto a busier train out of Fruitvale than they were used to", "up"]
+'Lake Merritt': ["found the lake path busier than a usual evening", "up"], ["counted more boats out on the lake than a usual weekend", "up"]
+'West Oakland': ["noticed a new lunch counter by the rail yard with a line out the door", "up"], ["found the warehouse-campus lot full on a weekday", "up"]
+'Laurel':       ["noticed the MacArthur corner shops staying open later than they used to", "up"], ["passed three neighbors they knew on one walk around the block", "up"]
+'Rockridge':    ["circled College Ave twice for parking on a Saturday", "up"], ["found the College Ave shops busier than a usual weekend", "up"]
+'Jack London':  ["waited for a table at a Jack London restaurant on a weeknight", "up"], ["found the estuary promenade busier than a usual evening", "up"]
+'Uptown':       ["noticed the Uptown bars filling up earlier than they used to", "up"], ["walked past a theater line that stretched down the block on a show night", "up"]
+'KONO':         ["noticed more people along the Telegraph corridor after dark", "up"], ["noticed a corridor late-night spot staying open past its usual close", "up"]
+'Piedmont Ave': ["noticed the avenue's boutiques busier than a usual afternoon", "up"], ["saw the avenue's cafes full well into the evening", "up"]
+// generateCitizensEvents.js:1715 decay line, reword (quieter, not a closure premise):
+//   "walked past a storefront that never reopened in " + neighborhood
+//   -> "found a familiar spot in " + neighborhood + " closing earlier than it used to"

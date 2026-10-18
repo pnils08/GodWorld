@@ -194,6 +194,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 12:17 rb §6 quota line filed as an FYI under SIM_DOCTRINE §1 (no caps, no quotas: builder law, not an open rate call); lift after a bench runtime check (engine.286 P8). es told.
 12:21 rb PIN updated: PROD @146 stage 4o (12:20, es; DEPLOY 2fecaec3 checked), C112 readback = offender scan acceptanceEmpty on live.
 12:30 rb CHECK es WORKING (Task 13: neighborhood cap lifted a8985e7e, benching alone; generic-cap lift staged in tree). Builder typed to es 'push it when codex ships'. codex OUT (usage limit until 10-24 16:38, at a spend menu, untouched); its 7f48c5e6 verdict never ran (scanner-only). agy idle/free. §6 line filed; es told agy is the review lane.
+12:35 es CLAIM agy es engine.299 Task 13 cap-lift adversarial read (13a neighborhood a8985e7e; 13b generic + 13c game-mode as they land) → output/antigravity/2026-10-18-engine299-task13-caps-read.md. PROD for Task 13 holds for codex (out to 10-24) or the builder's word that agy is enough (rb §6).
 
 ## 8. Stop rule and usage
 

@@ -136,7 +136,13 @@ const ALLOWLIST = [
   { file: 'lib/resonanceRecall.js', re: /^displacementmove$/,
     reason: 'History read alias: stored registers carry the old key (engine.299 Task 7).' },
   { file: 'lib/coverageAnchorRetirements.js', re: /^displacement intake$/,
-    reason: 'An avoidFramings entry: tells the desks NOT to use this framing (anti-premise).' }
+    reason: 'An avoidFramings entry: tells the desks NOT to use this framing (anti-premise).' },
+  { file: 'phase05-citizens/generateCitizensEvents.js', re: /^displacement$/,
+    reason: 'UNLIVED_RHYME keyword matched against tags already stored in a citizen\'s history; never written as text.' },
+  { file: 'phase05-citizens/migrationTrackingEngine.js', re: /^displaced$/,
+    reason: 'MIGRATION_REASONS enum value — builder 2026-10-18 kept the enum ("engine words are not gates").' },
+  { file: 'phase06-analysis/applyMigrationDrift.js', re: /^(severe-weather|chaos|high-chaos)-displacement$/,
+    reason: 'Drift factor label; humanizeDriver_ maps it to weather / instability before any readable text.' }
 ];
 function annotate(hit) {
   const rule = ALLOWLIST.find(r => r.file === hit.file && (!r.kind || r.kind === hit.kind) && r.re.test(hit.text));
@@ -237,8 +243,16 @@ function buildOffenders({ log, ecl, sources, resolver, cycle, sheet = 'live', ge
         const pre = sources[file].slice(Math.max(0, t.offset - 12), t.offset).replace(/\s+$/, '');
         const post = sources[file].slice(t.offset + t.text.length + 2, t.offset + t.text.length + 6).replace(/^\s+/, '');
         const singleToken = !/\s/.test(t.text.trim());
-        const identCtx = /(?:[([,:?]|===?|!==?|\bcase|\|\||&&)$/.test(pre) || /^[:\]),]/.test(post);
-        const identShape = /[a-z][A-Z]|^[A-Z][a-z]+[A-Z]|_|\./.test(t.text.trim());   // camelCase / PascalCase compound / snake / dotted
+        // KNOWN identifier uses only (codex 2026-10-18 re-review 2): a column/sheet lookup argument, a comparison or
+        // case operand, an object KEY. Array entries, object values and call arguments are where event text lives, so an
+        // unknown position is prose. Shape: camelCase / PascalCase compound / snake / dotted path (a trailing period is
+        // sentence punctuation, not a dotted identifier).
+        const lookupArg = /\b(?:idx|indexOf|col|tcol|hj|idxG|idxL|getSheetByName|getSheetData|getSheetAsObjects|headerIndex|has|hasOwnProperty|hasOwn)\s*\($/.test(pre);
+        const comparison = /(?:===?|!==?|\bcase)$/.test(pre) || /^(?:===?|!==?)/.test(post);
+        const objectKey = /^:/.test(post);
+        const identCtx = lookupArg || comparison || objectKey;
+        const tt = t.text.trim();
+        const identShape = /[a-z][A-Z]|^[A-Z][a-z]+[A-Z]|_|\.[A-Za-z]/.test(tt);
         prose = !singleToken || !(identCtx || identShape);
       }
       t.text.split('\n').forEach((text, n) => {

@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-18T10:29:26.106Z",
+  "generatedAt": "2026-10-18T17:12:30.526Z",
   "sheet": "live",
   "cycle": 111,
   "scannedLines": 2771,
   "inert": {
-    "total": 2348,
-    "share": 0.8473475279682425,
+    "total": 2342,
+    "share": 0.8451822446770119,
     "byTag": {
       "Sports": 146,
       "Daily": 435,
@@ -19,21 +19,19 @@
       "Holiday": 29,
       "QoL": 3,
       "Weather": 2,
-      "Advancement": 5,
       "Civic": 4,
       "Team": 12,
       "GAME-Micro": 4,
       "CIVIC-Event": 6,
-      "MEDIA-Event": 13,
-      "CareerState": 1
+      "MEDIA-Event": 13
     },
     "byEngine": {
       "inferred:phase05-citizens/applyGameNightMoments.js": 8,
-      "unknown:no unique source evidence": 1582,
+      "unknown:no unique source evidence": 1575,
       "inferred:phase05-citizens/generateCitizensEvents.js": 702,
       "inferred:phase05-citizens/runRelationshipEngine.js": 1,
       "inferred:phase05-citizens/runNeighborhoodEngine.js": 1,
-      "inferred:phase05-citizens/runYouthEngine.js": 14,
+      "inferred:phase05-citizens/runYouthEngine.js": 15,
       "inferred:phase04-events/generateGenericCitizenMicroEvent.js": 19,
       "inferred:phase04-events/generateGameModeMicroEvents.js": 4,
       "inferred:phase05-citizens/generateCivicModeEvents.js": 5,
@@ -156,63 +154,48 @@
         "tag": "Life"
       },
       {
-        "file": "phase04-events/generateGameModeMicroEvents.js",
-        "line": 536,
-        "tag": "GAME-Micro"
-      },
-      {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
         "line": 44,
         "tag": "Neighborhood"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 489,
+        "line": 603,
         "tag": "Background"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 492,
+        "line": 606,
         "tag": "Neighborhood"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 493,
+        "line": 607,
         "tag": "FirstFriday"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 494,
+        "line": 608,
         "tag": "CreationDay"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 495,
+        "line": 609,
         "tag": "Holiday"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 496,
+        "line": 610,
         "tag": "Sports"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 499,
+        "line": 613,
         "tag": "PrevEvening"
       },
       {
-        "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 513,
-        "tag": "Micro-Event"
-      },
-      {
         "file": "phase05-citizens/applyGameNightMoments.js",
-        "line": 146,
-        "tag": "Sports"
-      },
-      {
-        "file": "phase05-citizens/applyGameNightMoments.js",
-        "line": 176,
+        "line": 178,
         "tag": "Neighborhood"
       },
       {
@@ -222,78 +205,73 @@
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 420,
+        "line": 421,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 446,
+        "line": 447,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 980,
+        "line": 981,
         "tag": "Personal"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 989,
+        "line": 990,
         "tag": "QoL"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 991,
+        "line": 992,
         "tag": "Weather"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1009,
+        "line": 1010,
         "tag": "PrevEvening"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1014,
+        "line": 1015,
         "tag": "Lifestyle"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1015,
-        "tag": "Neighborhood"
-      },
-      {
-        "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1018,
+        "line": 1016,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
         "line": 1019,
-        "tag": "FirstFriday"
+        "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
         "line": 1020,
-        "tag": "CreationDay"
+        "tag": "FirstFriday"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
         "line": 1021,
-        "tag": "Holiday"
+        "tag": "CreationDay"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
         "line": 1022,
+        "tag": "Holiday"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1023,
         "tag": "Sports"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1028,
-        "tag": "Background"
-      },
-      {
-        "file": "phase05-citizens/generateCitizensEvents.js",
         "line": 1029,
-        "tag": "Personal"
+        "tag": "Background"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
@@ -308,12 +286,12 @@
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
         "line": 1032,
-        "tag": "Micro-Event"
+        "tag": "Personal"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
         "line": 1033,
-        "tag": "Civic Perception"
+        "tag": "Micro-Event"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
@@ -322,37 +300,37 @@
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1036,
-        "tag": "Lifestyle"
-      },
-      {
-        "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1037,
-        "tag": "Neighborhood"
-      },
-      {
-        "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1038,
+        "line": 1035,
         "tag": "Civic Perception"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1040,
-        "tag": "Daily"
+        "line": 1037,
+        "tag": "Lifestyle"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 2328,
+        "line": 1038,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 2408,
+        "line": 1039,
+        "tag": "Civic Perception"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1041,
         "tag": "Daily"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 3286,
+        "line": 2329,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 3294,
         "tag": "Neighborhood"
       },
       {
@@ -626,11 +604,6 @@
         "tag": "Civic"
       },
       {
-        "file": "phase05-citizens/generateCivicModeEvents.js",
-        "line": 483,
-        "tag": "CIVIC-Event"
-      },
-      {
         "file": "phase05-citizens/generateMediaModeEvents.js",
         "line": 56,
         "tag": "Neighborhood"
@@ -666,33 +639,28 @@
         "tag": "Personal"
       },
       {
-        "file": "phase05-citizens/generateMediaModeEvents.js",
-        "line": 443,
-        "tag": "MEDIA-Event"
-      },
-      {
         "file": "phase05-citizens/runNeighborhoodEngine.js",
-        "line": 221,
+        "line": 264,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/runNeighborhoodEngine.js",
-        "line": 495,
+        "line": 550,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/runNeighborhoodEngine.js",
-        "line": 572,
+        "line": 629,
         "tag": "FirstFriday"
       },
       {
         "file": "phase05-citizens/runNeighborhoodEngine.js",
-        "line": 574,
+        "line": 631,
         "tag": "CreationDay"
       },
       {
         "file": "phase05-citizens/runNeighborhoodEngine.js",
-        "line": 576,
+        "line": 633,
         "tag": "Holiday"
       },
       {
@@ -704,26 +672,6 @@
         "file": "phase05-citizens/runRelationshipEngine.js",
         "line": 213,
         "tag": "Holiday"
-      },
-      {
-        "file": "phase05-citizens/runRelationshipEngine.js",
-        "line": 506,
-        "tag": "Holiday"
-      },
-      {
-        "file": "phase05-citizens/runRelationshipEngine.js",
-        "line": 508,
-        "tag": "FirstFriday"
-      },
-      {
-        "file": "phase05-citizens/runRelationshipEngine.js",
-        "line": 510,
-        "tag": "CreationDay"
-      },
-      {
-        "file": "phase05-citizens/runRelationshipEngine.js",
-        "line": 540,
-        "tag": "Weather"
       },
       {
         "file": "phase05-citizens/runYouthEngine.js",
@@ -757,27 +705,81 @@
       }
     ]
   },
+  "structural": {
+    "total": 6,
+    "byTag": {
+      "Advancement": 5,
+      "CareerState": 1
+    },
+    "rows": [
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C110 (mentioned): a Bay Tribune civic desk piece, C109",
+        "popId": "POP-00170"
+      },
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C110 (quoted): a Bay Tribune civic desk piece, C109",
+        "popId": "POP-00198"
+      },
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C110 (quoted): a Bay Tribune civic desk piece, C109",
+        "popId": "POP-00201"
+      },
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C110 (mentioned): a Bay Tribune civic desk piece, C109",
+        "popId": "POP-00170"
+      },
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C110 (quoted): a Bay Tribune civic desk piece, C109",
+        "popId": "POP-00201"
+      },
+      {
+        "tag": "CareerState",
+        "text": "industry=service|employer=large|level=1|careerMod=0.92",
+        "popId": "POP-01017"
+      }
+    ]
+  },
   "premise": [
     {
       "where": "code",
       "file": "lib/coverageAnchorRetirements.js",
       "line": 72,
       "text": "displacement intake",
-      "kind": "string"
+      "kind": "string",
+      "prose": true,
+      "allowed": true,
+      "reason": "An avoidFramings entry: tells the desks NOT to use this framing (anti-premise)."
     },
     {
       "where": "code",
       "file": "lib/neighborhoodSlice.js",
       "line": 15,
       "text": " * S315: trajectory block replaces the gentrification block on Neighborhood_Map.",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "lib/resonanceRecall.js",
+      "line": 135,
+      "text": "displacementmove",
+      "kind": "string",
+      "prose": false,
+      "allowed": true,
+      "reason": "History read alias: stored registers carry the old key (engine.299 Task 7)."
     },
     {
       "where": "code",
       "file": "phase02-world-state/loadEventContentLedger.js",
       "line": 73,
       "text": " S.neighborhoodState[hood].displacementPressure",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
@@ -785,6 +787,7 @@
       "line": 9,
       "text": " * - Adds spillover diffusion + enforcement displacement",
       "kind": "comment",
+      "prose": false,
       "allowed": true,
       "reason": "Enforcement spillover between areas, not a displacement premise."
     },
@@ -794,6 +797,7 @@
       "line": 1215,
       "text": " * - suppress_hotspots: Higher displacement, better clearance, no QoL focus",
       "kind": "comment",
+      "prose": false,
       "allowed": true,
       "reason": "Enforcement spillover between areas, not a displacement premise."
     },
@@ -803,6 +807,7 @@
       "line": 1216,
       "text": " * - community_presence: Lower displacement, modest clearance, reduces QoL issues",
       "kind": "comment",
+      "prose": false,
       "allowed": true,
       "reason": "Enforcement spillover between areas, not a displacement premise."
     },
@@ -811,399 +816,432 @@
       "file": "phase05-citizens/bondEngine.js",
       "line": 2675,
       "text": " envy, displacement grievance — are design-listed, not yet built.)",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
       "line": 369,
-      "text": "DisplacementRisk",
-      "kind": "string"
+      "text": " engine.299 Task 4: the money lines gate on the row's own debt, not DisplacementRisk",
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 1060,
-      "text": "econ:displacement",
-      "kind": "string"
+      "line": 370,
+      "text": "DisplacementRisk",
+      "kind": "string",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
       "line": 1152,
       "text": "displacement",
-      "kind": "string"
+      "kind": "string",
+      "prose": true,
+      "allowed": true,
+      "reason": "UNLIVED_RHYME keyword matched against tags already stored in a citizen's history; never written as text."
     },
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
       "line": 1153,
       "text": "displacement",
-      "kind": "string"
+      "kind": "string",
+      "prose": true,
+      "allowed": true,
+      "reason": "UNLIVED_RHYME keyword matched against tags already stored in a citizen's history; never written as text."
     },
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 1693,
+      "line": 1172,
+      "text": "displacementmove",
+      "kind": "string",
+      "prose": false,
+      "allowed": true,
+      "reason": "History read alias: stored registers carry the old key (engine.299 Task 7)."
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/generateCitizensEvents.js",
+      "line": 1694,
       "text": " displacement crisis, C115/C116). Counts stay at city scale; only the",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 1701,
+      "line": 1702,
       "text": " gentrification stuck-emitter; the dial is now attached to live mechanics",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 2904,
+      "line": 2908,
       "text": " citywide mood alone. WealthLevel 0-10; DisplacementRisk 0-10 (≥7 = the",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 2918,
-      "text": "econ:displacement",
-      "kind": "string"
-    },
-    {
-      "where": "code",
-      "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 2919,
-      "text": "econ:displacement",
-      "kind": "string"
+      "line": 2922,
+      "text": " migration engine's DisplacementRisk — a real-Oakland displacement premise is not a fact about this citizen.",
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/householdFormationEngine.js",
       "line": 115,
       "text": " migrationTrackingEngine.js for the displacement-risk buffer; legal var",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 6,
       "text": " * Tracks individual migration decisions, displacement risk, and migration events.",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 8,
       "text": " * Part of: Week 4 Gentrification & Migration Tracking",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 11,
       "text": " * - Displacement risk assessment (0-10 scale)",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 13,
       "text": " * - Migration reason detection (job, family, cost, crime, opportunity, displaced)",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 28,
       "text": " *   and wrote DisplacementRisk + MigrationIntent back via direct setValues",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 42,
       "text": " * - Writes displacement risk and migration intent to ctx.ledger.rows;",
-      "kind": "comment"
-    },
-    {
-      "where": "code",
-      "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 48,
-      "text": " * - FORCED_MIGRATION (severity 7): Citizen displaced by rent/eviction",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 80,
       "text": "displaced",
-      "kind": "string"
+      "kind": "string",
+      "prose": true,
+      "allowed": true,
+      "reason": "MIGRATION_REASONS enum value — builder 2026-10-18 kept the enum (\"engine words are not gates\")."
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 103,
       "text": " Displacement risk weights",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 155,
       "text": " Step 1: Assess displacement risk for all citizens",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 164,
       "text": " For now, just track existing displaced citizens",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 180,
       "text": " DISPLACEMENT RISK ASSESSMENT",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 196,
       "text": "DisplacementRisk",
-      "kind": "string"
+      "kind": "string",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 213,
       "text": " live SL income sum — a 192k earner got \"priced out\" off a 50k ledger",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 234,
       "text": " engine.90 Commit 8: a traded-away player carries no Oakland displacement risk or move intent",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 242,
       "text": " Calculate displacement risk",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 245,
       "text": " Neighborhood displacement pressure",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 388,
       "text": " Phase 42 §5.6: read/mutate ctx.ledger.rows; sees DisplacementRisk values",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 389,
       "text": " assessDisplacementRisk_ just wrote earlier in this engine.",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 396,
       "text": "DisplacementRisk",
-      "kind": "string"
+      "kind": "string",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 415,
       "text": " engine.90 Commit 8: a traded-away player carries no Oakland displacement risk or move intent",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
       "line": 466,
       "text": " Check for citizens with very high displacement risk",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 516,
+      "line": 518,
       "text": "displaced",
-      "kind": "string"
+      "kind": "string",
+      "prose": false,
+      "allowed": true,
+      "reason": "MIGRATION_REASONS enum value — builder 2026-10-18 kept the enum (\"engine words are not gates\")."
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 543,
+      "line": 549,
       "text": "     at ingest without needing displacement pressure.",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 635,
+      "line": 641,
       "text": "DisplacementRisk",
-      "kind": "string"
+      "kind": "string",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 718,
+      "line": 725,
       "text": " no rent to be priced out of — distress sales are the stress dissolution's",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 740,
+      "line": 747,
       "text": " income ratio at dialOpenMoveThresholdMult of it. The pressure lane (displacement)",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 798,
-      "text": "displaced from ",
-      "kind": "string"
-    },
-    {
-      "where": "code",
-      "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 801,
-      "text": "priced out of ",
-      "kind": "string"
-    },
-    {
-      "where": "code",
-      "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 949,
+      "line": 968,
       "text": " DisplacementRisk + MigrationIntent values written upstream.",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 956,
+      "line": 975,
       "text": "DisplacementRisk",
-      "kind": "string"
+      "kind": "string",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 966,
+      "line": 985,
       "text": " engine.90 Commit 8: a traded-away player carries no Oakland displacement risk or move intent",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 971,
+      "line": 990,
       "text": " Count citizens at severe displacement risk",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 987,
+      "line": 1006,
       "text": " the DisplacementRisk + MigrationIntent values written upstream.",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 998,
+      "line": 1017,
       "text": "DisplacementRisk",
-      "kind": "string"
+      "kind": "string",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 1007,
+      "line": 1026,
       "text": " engine.90 Commit 8: a traded-away player carries no Oakland displacement risk or move intent",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 1016,
+      "line": 1035,
       "text": " Track displacement by neighborhood — count actual planning intent",
-      "kind": "comment"
-    },
-    {
-      "where": "code",
-      "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 1031,
-      "text": " at severe displacement risk in ",
-      "kind": "string"
-    },
-    {
-      "where": "code",
-      "file": "phase05-citizens/migrationTrackingEngine.js",
-      "line": 1053,
-      "text": " mass displacement risk: ",
-      "kind": "string"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/neighborhoodTrajectoryEngine.js",
       "line": 7,
       "text": " * - Full repurpose of gentrificationEngine v1.1 (git mv, same file lineage).",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/neighborhoodTrajectoryEngine.js",
       "line": 8,
       "text": " *   The gentrification block was a real-world Oakland displacement-study",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/neighborhoodTrajectoryEngine.js",
       "line": 31,
       "text": " *                            DisplacementRisk in migrationTrackingEngine (kept:",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase05-citizens/neighborhoodTrajectoryEngine.js",
       "line": 346,
       "text": " engine.45 T1 instrumentation kept from gentrification lineage: hooks must",
-      "kind": "comment"
+      "kind": "comment",
+      "prose": false
     },
     {
       "where": "code",
       "file": "phase06-analysis/applyMigrationDrift.js",
       "line": 253,
       "text": "severe-weather-displacement",
-      "kind": "string"
+      "kind": "string",
+      "prose": true,
+      "allowed": true,
+      "reason": "Drift factor label; humanizeDriver_ maps it to weather / instability before any readable text."
     },
     {
       "where": "code",
       "file": "phase06-analysis/applyMigrationDrift.js",
       "line": 255,
       "text": "chaos-displacement",
-      "kind": "string"
+      "kind": "string",
+      "prose": true,
+      "allowed": true,
+      "reason": "Drift factor label; humanizeDriver_ maps it to weather / instability before any readable text."
     },
     {
       "where": "code",
       "file": "phase06-analysis/applyMigrationDrift.js",
       "line": 256,
       "text": "high-chaos-displacement",
-      "kind": "string"
+      "kind": "string",
+      "prose": true,
+      "allowed": true,
+      "reason": "Drift factor label; humanizeDriver_ maps it to weather / instability before any readable text."
     },
     {
       "where": "code",
@@ -1211,6 +1249,7 @@
       "line": 188,
       "text": " * (targetScope 'citizen') still lead and are never displaced; the draw only",
       "kind": "comment",
+      "prose": false,
       "allowed": true,
       "reason": "Code-sense ordering comment, not citizen displacement (settled A1 context)."
     },
@@ -1220,6 +1259,7 @@
       "line": 495,
       "text": " passed through verbatim otherwise) and are never displaced; the draw only",
       "kind": "comment",
+      "prose": false,
       "allowed": true,
       "reason": "Code-sense ordering comment, not citizen displacement (settled A1 context)."
     },
@@ -1229,6 +1269,7 @@
       "line": 619,
       "text": "Reads the anti-displacement and workforce mechanics end to end.",
       "kind": "string",
+      "prose": true,
       "allowed": true,
       "reason": "Elena POP-00791 published essence, held for the builder (A2)."
     }
@@ -1383,28 +1424,44 @@
       "row": 576,
       "line": 576,
       "text": "A restaurant owner in {hood} said he laid off two servers this week and wanted them to hear the names.",
-      "kind": "string"
+      "kind": "string",
+      "pool": "civicRole.business.down.M",
+      "prose": true,
+      "allowed": true,
+      "reason": "Owner-engine pool (civicRole.*): the life event belongs to its own engine, not a color pool."
     },
     {
       "where": "live:Event_Content_Ledger",
       "row": 631,
       "line": 631,
       "text": "A couple in {hood} said they named them in their wedding speech, and showed the video.",
-      "kind": "string"
+      "kind": "string",
+      "pool": "civicRole.everyday.up.M",
+      "prose": true,
+      "allowed": true,
+      "reason": "Owner-engine pool (civicRole.*): the life event belongs to its own engine, not a color pool."
     },
     {
       "where": "live:Event_Content_Ledger",
       "row": 757,
       "line": 757,
       "text": "Promoted at {employer}",
-      "kind": "string"
+      "kind": "string",
+      "pool": "lifeEvent.promotion.up.L",
+      "prose": true,
+      "allowed": true,
+      "reason": "Owner-engine pool (lifeEvent.*): the life event belongs to its own engine, not a color pool."
     },
     {
       "where": "live:Event_Content_Ledger",
       "row": 764,
       "line": 764,
       "text": "Laid off from {employer} when the department was cut.",
-      "kind": "string"
+      "kind": "string",
+      "pool": "lifeEvent.promotion.down.L",
+      "prose": true,
+      "allowed": true,
+      "reason": "Owner-engine pool (lifeEvent.*): the life event belongs to its own engine, not a color pool."
     }
   ],
   "acceptanceEmpty": false

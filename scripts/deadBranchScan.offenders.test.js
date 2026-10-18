@@ -98,3 +98,14 @@ console.log('engine.299 marker provenance: PASS');
   assert(codeProse.premise.some(h => h.prose === true) && codeProse.acceptanceEmpty === false, 'a bare one-word value blocks');
 }
 console.log('engine.299 prose boundary: PASS');
+// codex re-review 2: array entries, object values, call arguments and a terminal period are prose; lookups/comparisons/keys are not.
+{
+  const cleanLog = [['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighborhood', 'Cycle'], ['t', 'POP-1', '', 'Neighborhood-Outabout-Up-S', 'SYNTHETIC livelier', '', 111]];
+  const eclHdr = ['Kind', 'PoolKey', 'Text', 'Active'];
+  const one = (src) => buildOffenders({ log: cleanLog, ecl: [eclHdr], sources: { 'lib/synthetic.js': src }, resolver, sheet: 'bench', generatedAt: 'synthetic' });
+  for (const src of ['var pool = ["blight"];', 'var event = { text: "displaced" };', 'writeLine("blight");', 'var line = "blight.";', 'var line = "displaced";'])
+    assert.strictEqual(one(src).acceptanceEmpty, false, 'prose blocks: ' + src);
+  for (const src of ['var col = idx("DisplacementRisk");', 'if (reason === "displaced") go();', 'var m = { displaced: 1 }; var k = { "displaced": 1 };', 'switch (x) { case "displaced": break; }'])
+    assert.strictEqual(one(src).acceptanceEmpty, true, 'identifier use does not block: ' + src);
+}
+console.log('engine.299 known-identifier boundary: PASS');

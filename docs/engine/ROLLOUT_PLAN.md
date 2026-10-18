@@ -5,21 +5,21 @@
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C111 (fired 2026-10-11 ~16:18 CDT, 0 errors, 148 s); next live fire C112, Sunday 2026-10-18.
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (50)** — each plan, its rows and the state each is in:
+**Plans in motion (51)** — each plan, its rows and the state each is in:
 
-- [[../plans/2026-10-11-media-extension]]: pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
+- [[../plans/2026-10-11-media-extension]]: pipeline.83 ready, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, pipeline.71 ready, engine.287 live-observing, engine.288 live-observing, engine.289 blocked
+- [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing, engine.298 ready
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 in-progress, engine.264 needs-info, engine.261 ready
-- [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing
+- [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: pipeline.81 live-observing, engine.296 live-observing, engine.297 ready
 - [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]: research.29 live-observing, engine.292 live-observing, engine.291 live-observing
-- [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 in-progress
+- [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 needs-info
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
-- [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: pipeline.81 live-observing, engine.296 live-observing
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
 - [[../reference/DEPLOY_HISTORY]]: engine.213 in-progress, engine.294 live-observing
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.293 live-observing, engine.104 ready
-- [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 ready
+- [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 wontfix
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
 - [[../plans/2026-10-06-supermemory-v5-migration]]: infrastructure.10 blocked
@@ -27,6 +27,7 @@
 - [[../plans/2026-08-16-new-life-intake]]: engine.108 live-observing
 - [[../plans/2026-09-24-initiatives-in-the-world]]: engine.260 live-observing
 - [[../plans/2026-08-29-employment-system-cascade]]: civic.33 live-observing
+- [[../plans/2026-09-07-beat-slices-from-sheets-plan]]: pipeline.82 needs-info
 - [[../plans/2026-07-31-platform-ceiling-resilience]]: engine.95 live-observing
 - [[../plans/2026-09-29-sim-holiday-calendar]]: engine.273 in-progress
 - [[../plans/2026-10-03-citizen-pages-drive-canon]]: pipeline.70 live-observing
@@ -128,6 +129,7 @@
 | engine.213 | Approval reads the city: the mood sawtooth. (The Mon–Thu datawakes reaching no sheet is closed: civic.38 move ledger → Sunday fold → Initiative_Tracker LIVE WRITE C110, civic-cron.log 2026-10-04) | in-progress | engine-sheet | `phase05-citizens/updateCivicApprovalRatings.js`, [[../reference/DEPLOY_HISTORY]] §PROD @84 |
 | engine.27 | Card auto-invalidation Phase B (cycle-end marker hook); Phase A daemon live | ready | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] |
 | infrastructure.6 | Sim-health observability: /api/sim-health + dashboard panel; 11 ghost tab refs + tab-reference test | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
+| pipeline.83 | Failure review — when a piece fails, whose failure was it. Method standing in the Saturday readback (auditor / summary-or-packet / reporter / quote-source; fix lives with the owner; a recurring class reopens). C111 first pass done: 6 of 13 failures were the auditor's (fixed `f9e2aec6`, `40a5e71e`), 3 the world summary (engine.298), 4 the reporters. Open: UNDOCKED digest seat (lost on grade 3/4 vs ten 4/4; under print-only credit its pilots earn nothing) — reserved seat vs credit door, builder's call 2026-10-18; writer-side vocabulary guard for the 4 real leaks; sweep the daily gate's flagged folder with the same tags | ready | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.83 |
 
 ## 4. Queue — ruled, not started
 
@@ -149,7 +151,7 @@
 | pipeline.77 | Reward loop on five seats (rubric seen = rubric judged, grade on the page, W1 reads it); C111 baseline staged; first unattended C112 runs Mon–Wed 10-19..21; mechanism 2 held | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
 | pipeline.78 | Staged readers take suffixed reruns (one matcher); Saturday 10-17 lands 16 C111 pieces incl. Nia's three; Friday reconciler + per-filing Packet folded (es a8095541, 734db7cd) | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
 | pipeline.79 | Every journalist graded; Saturday prints the best-graded first; printed pieces earn byline-published (tier credit, none written since C102); C111 backfilled; length graded as a floor only | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
-| pipeline.80 | INTAKE names floor LIVE on main `4fabf88e` (codex review folded: no ambiguous names at the floor, curation ignores floor mentions). Open: crossover eligibility (audited set only, narrate selected crossings) after Sat 10-17's Move 5 read, before Sat 10-24; first floor entries Mon 10-19 → Sat 10-24 ingest; builder's rate call §6 | live-observing | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.80 — **builder RULED 2026-10-16 on what counts as coverage:** "the story is about them or is featuring their viewpoint, a quote or something taken from their citizen page. Their name alone isn't necessarily coverage, but the gate may be difficult to enforce so count it all and adjust the tier levels instead." → the floor stays (every printed canon citizen = `mentioned` row); the MEDIA tier bars (`TIER_BAR` in processAdvancementIntake.js: 3 → Tier 3, 6 → Tier 2, 9 → Tier 1; `mentioned` counts) are the dial, his numbers to set. |
+| pipeline.80 | INTAKE names floor LIVE on main `4fabf88e` (codex review folded: no ambiguous names at the floor, curation ignores floor mentions). Crossover eligibility DONE `f9e2aec6` (Sat 10-17 read: every crossing had one printed side → narrate printed-only). Open: first floor entries Mon 10-19 → Sat 10-24 ingest; UNDOCKED digest seat → pipeline.83. Tier bars 3/6/9 stay (builder 2026-10-18) | live-observing | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.80 — **builder RULED 2026-10-16 on what counts as coverage:** "the story is about them or is featuring their viewpoint, a quote or something taken from their citizen page. Their name alone isn't necessarily coverage, but the gate may be difficult to enforce so count it all and adjust the tier levels instead." → the floor stays (every printed canon citizen = `mentioned` row); the MEDIA tier bars (`TIER_BAR` in processAdvancementIntake.js: 3 → Tier 3, 6 → Tier 2, 9 → Tier 1; `mentioned` counts) are the dial, they stay for now (builder 2026-10-18). |
 | engine.287 | Citywide crime gate: floor 3 carried spikes, half share on each hood (builder 2026-10-10). Built as engine.214 Task 19 `1ce99668`, benched @14 (the C112 wave gone). Rides the engine.214 PROD. Live counts on record 2/0/0/1/1/1 | live-observing | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Tasks 17/18/19 — mechanism |
 | engine.288 | Mood gates read both seed lists (builder 2026-10-10: "the second option") — the newsroom's deck carried beside the engine list. Built `5c6c551d` + `1d0d7b83`, benched @16: active seed hoods 7 → 14 at C112, city unchanged. Rides the engine.214 PROD | live-observing | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.288 bench results |
 | engine.289 | Absolute CULTURE gates (`wCulture >= 3 / >= 6` in `applyCityDynamics.js`) were written while the seed input was dead; they have input for the first time on the engine.214 PROD. Waits on live C113 (Sun 2026-10-25): re-read, then keep, re-tier, or move to the relative shape | blocked | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Tasks 17/18/19 — mechanism → Bench results |
@@ -168,3 +170,4 @@
 | engine.248 | Faith orgs get a sim role: membership, a slight dial nudge, faith-life events | ready | engine-sheet | [[../research/2026-09-10-kimi-faith-lane-routing]] |
 | engine.253 | Transit as its own system: ridership and station load from hood canon | ready | engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] §Rulings (g) |
 | engine.261 | Firm agents: three business owners get a wake slice to run their business | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
+| engine.298 | World summary tells the truth the desks are handed (C111 failure review, two honest desks failed): (1) `buildWorldSummary.js` counts hospital "in care" from open Hospital_Ledger rows with a POPID — tracked patients only, so it printed 0 while the care trail (Care_Justice_Census city row) held 37 admissions, 75 in care; same words, two denominators — read the city census row or label the line tracked-only; (2) the Sports line "record 4-1" is the World Series result in the off-season and reads as a season start (Simon Leary wrote a "4-1 start"). Auditor and packet must agree on one number per fact | ready | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]]; [[../plans/2026-10-11-media-extension]] §pipeline.83 |

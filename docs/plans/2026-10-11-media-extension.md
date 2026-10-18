@@ -598,6 +598,21 @@ Found before the build: (a) Saturday curation (`curationScore`) was a count — 
 
 **Execution (as dispatched):** codex implements as a patch (`output/codex/pipeline80-intake-floor.patch`) + test run; rb verifies (`git apply --check`, tests in a scratch worktree, hunts below); es lands it when free of the `$LEADER` fix. Hunts for the implementer: whether the byline-landed path near `cron-desk-run.js:3340` writes a sidecar (one `buildIntakeSidecar` call exists, :3095); `checkText`'s two-word window on three-word names ("Guadalupe Lupe Lee" verified both "Guadalupe Lee" and "Guadalupe Lupe" on the business desk at C111 — a floor entry must be the whole canon name the body actually contains, so re-check `body.includes(name)`); title-stripped bylines ("Sgt. Rachel Torres"); archived citizens in the snapshot (engine.90 — a dead citizen's name verifies; should the floor credit them? default: skip rows whose snapshot Status is not Active, say why).
 
+### pipeline.83 — failure review: when a piece fails, find out whose failure it was (rb 2026-10-18, builder: "when articles fail we need to have sessions we look at why to guard against future fails")
+
+**Method (standing, folded into the Saturday readback — no new skill, no new file).** After each Saturday audit, read every non-accurate verdict against the piece's packet and the world summary and tag it one of: **auditor** (the audit judged wrongly — its ground truth or a rule it does not know), **summary/packet** (the desk was handed a wrong or ambiguous number; the reporter was faithful), **reporter** (a real leak or misreading), **quote-source** (a citizen's line carried a claim the record does not hold). The fix lives with the tag's owner; a class that recurs after its fix reopens. The daily gate's flagged folder takes the same tags (not yet swept).
+
+**First review — C111 (13 non-accurate of 27; 51.9%).**
+
+| Tag | Pieces | Cause | State |
+|---|---|---|---|
+| auditor (6) | UNDOCKED digest, 2316, 2317, base; Luis Navarro; Trevor Shimizu | audit ground truth had no UNDOCKED record (show words read as leakage, pilots read as invented); "cycle" is allowed vocabulary; council district is the seat (Rivers = D5 per canon), not the home hood | fixed `f9e2aec6`, `40a5e71e`; read-only re-audit flips all six (est. C111 → 20/27 = 74.1%) |
+| summary/packet (3) | Lila Mezran; Maria Keen (hospital line); Simon Leary | world summary counts tracked Hospital_Ledger rows ("0 in care") while the care trail reads the city census (37 admissions, 75 in care): same words, two denominators; summary Sports line "record 4-1" is the Series result and reads as a season start | engine.298 (es) |
+| reporter (4) | Kai Marston (printed: "where-are-they-now file"), Sharon Okafor ("fame table"/tiers), Selena Grant ("player-feature", "the supplied record"), Nia Rook 2320 (raw `epsilon_eridani`) | real system language in prose; two of four did not print | open — writer-side vocabulary guard |
+| quote-source (1) | Maria Keen: a Downtown First Friday that the calendar says did not happen | a wake-2 citizen quote carried an event not in the record | open — check whether the quote pass should hold event claims to the calendar |
+
+**Status.** UNDOCKED digest seat: the digest lost on grade (3/4 against ten 4/4) and, under the print-only credit rule, its pilots earn nothing this week. Reserved seat vs a credit door is the builder's call (asked 2026-10-18).
+
 ## Changelog
 
 - 2026-10-14 (research-build) — Steps 3–4 built: both slice builders, tests, agent folders, builder maps, stances, the weekend page refresh. Recorded the POPID-bound landing list for Sunday. First live runs Tamsin Mon 10-19, Ines Wed 10-21 (not 10-15: three gates need the ledger POPID).
@@ -619,3 +634,4 @@ Found before the build: (a) Saturday curation (`curationScore`) was a count — 
 - 2026-10-16 (research-build, overnight) — codex Saturday-readers review folded `4fabf88e`: floor refuses ambiguous names, curation ignores floor mentions; crossover eligibility fix dated after Sat 10-17.
 
 - 2026-10-16 (builder, on the floor): coverage = "the story is about them or is featuring their viewpoint, could be a quote or something taken from their citizen page. Their name alone isn't necessarily coverage, but I also understand the gate may be difficult to enforce so it may be better to count it all and adjust the tier levels instead." Floor stays; `mentioned` keeps counting (`EMERGENCE_USAGE_TYPES`); the tier bars 3/6/9 are the dial the builder adjusts.
+- 2026-10-18 (research-build) — Move 5 read done: crossings had one printed side; narrate printed-only (`f9e2aec6`). UNDOCKED audit ground truth + "cycle"/seat-district auditor fixes (`f9e2aec6`, `40a5e71e`). pipeline.83 failure review: method + C111 first pass added. Tier bars stay 3/6/9 (builder 2026-10-18).

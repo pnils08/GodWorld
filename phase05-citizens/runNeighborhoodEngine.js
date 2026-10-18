@@ -584,12 +584,10 @@ function runNeighborhoodEngine_(ctx) {
         eventPool.push({ t: "sensed optimism in the neighborhood", d: 'dial:composure:up' });
       }
 
-      // Add chaos-context events — S.worldEvents holds good news as well as bad (a cleanup day, a market
-      // turnout); the presence of events is not a direction, so this neutral line carries no sign and is
-      // not written until a world event carries its own (codex 2026-10-18 Task 3 F1).
-      if (chaos.length > 0) {
-        eventPool.push({ t: "felt atmosphere influenced by recent city events", d: null });
-      }
+      // Chaos-context line — S.worldEvents holds good news as well as bad (a cleanup day, a market turnout); the
+      // presence of events is not a direction, so "felt atmosphere influenced by recent city events" carries no sign
+      // (codex 2026-10-18 Task 3 F1) and stays out of the pool until a world event carries its own — an unsigned
+      // line holding a slot made a winning drift roll come to nothing (rb 2026-10-18, the case 793dd806 closed).
 
       // Add cultural activity events (v2.2)
       if (dynamics.culturalActivity >= 1.4) {

@@ -161,6 +161,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 03:44 rb CLAIM agy rb engine.299 Task 7 writer-side adversarial read (→ output/antigravity/2026-10-18-engine299-task7-rb-premise-read.md). Ripple_Ledger live: 0 causeType=gentrification rows, the removed seed path is dead. codex: es dispatches its Task 1 hashes against rb's TASK path (rb does not send).
 03:58 rb FOLD agy Task 7 read: AGREE all 4 commits + R130/R219; FLAGs settled (decline = census fact per es; Elena §6; displacementmove es T4) or routed (ensureCrimeMetrics East Oakland 'Baylight frontier' :106 vs canon → es). No rb fix. Plan Reviews table filled. RELEASE agy (/clear).
 03:59 rb NOTE 3640847a swept es's uncommitted plan hunks (FIX-don't-ADD no-rebuild line, Tasks 5/6 re-trued) — rb missed the pre-edit git status; es's text intact, not reverted; es told. agy cleared.
+04:30 rb CHECK es IDLE since 04:01 (no prompt; waiting own wake). codex DONE 04:02 Task 1 review = FIX/HOLD gate (docs/for-claude-review/2026-10-18-codex-engine299-task1-diff-review.md). rb verified sign defect (DIAL_BY_SOURCE default-up; sentiment:negative → Composure-Up) + street-source regression; FIXED street side fd98763b (newsroomSourcing gradedParts_ strip, test PASS). Relayed full review to es. codex held for es re-check. Git: 6db7b48f 107e7ae0 es.
 
 ## 8. Stop rule and usage
 

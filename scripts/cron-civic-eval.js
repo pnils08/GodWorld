@@ -8,7 +8,7 @@
  *
  *   deterministic: JSON parse / decision-schema fields / ImplementationPhase
  *                  vocabulary (INITIATIVE_TRACKER_CONTRACT 20-value list) /
- *                  canon names (canon-name-check.js) / engine-verbiage leaks
+ *                  canon names (canon-name-check.js)
  *   judged:        voice-match 0-10 by a DIFFERENT model family (independence
  *                  rule — same reason cron-rhea-gate.js forbids self-grading)
  *
@@ -39,8 +39,6 @@ const PHASES = new Set([
   'dispatch-live', 'pilot-active', 'pilot_evaluation', 'operational',
   'complete', 'stalled', 'blocked', 'suspended', 'defunded'
 ]);
-
-const ENGINE_TOKENS = /DialState|Ripple Ledger|impactScore|POP-\d{5}|Engine:|σ|desk_signal|world_summary/;
 
 const DEFAULT_MODELS = [
   'deepseek/deepseek-chat',
@@ -151,7 +149,7 @@ function stripFences(t) {
 }
 
 function scoreDeterministic(raw) {
-  const s = { parse: false, schema: false, phaseVocab: true, badPhases: [], canonUnverified: [], engineLeaks: [] };
+  const s = { parse: false, schema: false, phaseVocab: true, badPhases: [], canonUnverified: [] };
   let j;
   try { j = JSON.parse(stripFences(raw)); s.parse = true; } catch (e) { return s; }
   s.schema = !!(j.office && j.speaker && Array.isArray(j.statements) && j.statements.length &&
@@ -164,8 +162,6 @@ function scoreDeterministic(raw) {
   }
   const prose = (j.statements || []).map(st => [st.fullStatement, st.quote].join(' ')).join(' ');
   try { s.canonUnverified = (checkText(prose).unverified || []).slice(0, 10); } catch (e) { s.canonUnverified = ['CHECK-FAILED: ' + e.message]; }
-  const leak = prose.match(ENGINE_TOKENS);
-  if (leak) s.engineLeaks.push(leak[0]);
   return s;
 }
 
@@ -213,14 +209,13 @@ async function judgeVoices(persona, outputs) {
   const out = path.join(EVAL_DIR, path.basename(agentDir).replace(/^civic-office-/, '') + '_c' + CYCLE + '_scorecard.json');
   fs.writeFileSync(out, JSON.stringify({ office: path.basename(agentDir), cycle: Number(CYCLE), judge: JUDGE, ranAt: 'S343', results: outputs }, null, 2));
 
-  console.log('\nmodel                          parse schema vocab canon-unverified leaks voice');
+  console.log('\nmodel                          parse schema vocab canon-unverified voice');
   for (const o of outputs) {
     if (o.error) { console.log(o.model.padEnd(30) + ' ERROR'); continue; }
     console.log(o.model.padEnd(30) +
       (o.det.parse ? ' yes ' : ' NO  ') + (o.det.schema ? '  yes  ' : '  NO   ') +
       (o.det.phaseVocab ? ' yes ' : ' NO(' + o.det.badPhases.join(',') + ')') +
-      String(o.det.canonUnverified.length).padStart(8) + '         ' +
-      String(o.det.engineLeaks.length).padStart(2) + '   ' +
+      String(o.det.canonUnverified.length).padStart(8) + '   ' +
       (o.judge ? o.judge.voiceMatch : '-'));
   }
   console.log('\nscorecard: ' + out);

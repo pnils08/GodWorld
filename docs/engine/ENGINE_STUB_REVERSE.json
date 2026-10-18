@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-16",
+  "generated": "2026-10-18",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1704,
+  "functionsMapped": 1707,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -3518,6 +3518,14 @@
       ]
     },
     "citizenEventMemory": {
+      "writers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ],
+      "readers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ]
+    },
+    "engine299": {
       "writers": [
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ],

@@ -1046,8 +1046,9 @@ function generateCitizensEvents_(ctx) {
   // graded form <Kind>-<Dial>-<Up|Down>-<Band> (utilities/citizenDialMap.js gradedTag_). The dial
   // and its direction are what the line SAYS: an explicit "dial:<dial>:<up|down>[:<S|M|L>]" tag on
   // the entry wins; else the entry's fact tag (state: / econ: / evening: / weather: / family:) —
-  // the hood's trajectory, the money, the evening's result, the weather — decides; else the source's
-  // default. A line that resolves to no dial is not written (S.engine299.noDial counts it by source;
+  // the hood's trajectory, the money, the evening's result, the weather — decides; else a generic signed
+  // fact ("<x>:negative" / "<x>:positive") on the source's dial. A source never decides the sign (codex
+  // 2026-10-18). A line that resolves to no dial is not written (S.engine299.noDial counts it by source;
   // Task 2's offender scan reads the count). Sign skews up only where the fact has no direction.
   var DIAL_BY_FACT_TAG = {
     "state:trajectory-up":   ["outabout", true],  "state:trajectory-down": ["outabout", false],
@@ -1072,45 +1073,52 @@ function generateCitizensEvents_(ctx) {
     "family:divorced":       ["composure", true],
     "grief:memorial":        ["warmth", true]        // engine.94 memorial response: remembering someone (Personal kind)
   };
+  // The source names the DIAL a line of that source speaks to. It never names the sign (codex
+  // 2026-10-18, hunt 2): the sign is a fact on the entry — a directional fact tag above, or any
+  // "<x>:negative|down|low|bad|loss" / "<x>:positive|up|high|good|win" tag — or the line is not written.
   var DIAL_BY_SOURCE = {
-    "source:nbhdState": ["outabout", true],     "source:neighborhood": ["outabout", true],
-    "source:communityLife": ["sociability", true], "source:prevEvening": ["outabout", true],
-    "source:weather": ["outabout", true],       "source:weatherPool": ["outabout", true],
-    "source:economy": ["composure", true],      "source:homeLife": ["family", true],
-    "source:familyLife": ["family", true],      "source:civicNews": ["openness", true],
-    "source:bias": ["openness", false],         "source:sports": ["fandom", true],
-    "source:holiday": ["sociability", true],    "source:firstFriday": ["sociability", true],
-    "source:creationDay": ["sociability", true], "source:season": ["outabout", true],
-    "source:identity": ["openness", true],      "source:reflection": ["openness", true],
-    "source:listening": ["openness", true],     "source:curiosity": ["openness", true],
-    "source:groove": ["composure", true],       "source:age": ["composure", true],
-    "source:sentiment": ["composure", true],    "source:chaos": ["composure", false],
-    "source:undocked": ["fandom", true],        "source:template": ["sociability", true],
-    "source:continuity": ["warmth", true]       // engine.94 memory row with no memory: tag — a memory resurfacing
+    "source:nbhdState": "outabout",      "source:neighborhood": "outabout",
+    "source:communityLife": "sociability", "source:prevEvening": "outabout",
+    "source:weather": "outabout",        "source:weatherPool": "outabout",
+    "source:economy": "composure",       "source:homeLife": "family",
+    "source:familyLife": "family",       "source:civicNews": "openness",
+    "source:bias": "openness",           "source:sports": "fandom",
+    "source:holiday": "sociability",     "source:firstFriday": "sociability",
+    "source:creationDay": "sociability", "source:season": "outabout",
+    "source:identity": "openness",       "source:reflection": "openness",
+    "source:listening": "openness",      "source:curiosity": "openness",
+    "source:groove": "composure",        "source:age": "composure",
+    "source:sentiment": "composure",     "source:chaos": "composure",
+    "source:undocked": "fandom",         "source:template": "sociability",
+    "source:continuity": "warmth",       "source:qol": "composure"
   };
+  var FACT_DOWN_RE = /:(negative|down|low|bad|loss|moderate-low)$/i;
+  var FACT_UP_RE = /:(positive|up|high|good|win|moderate-high)$/i;
   function kindMovesNothing_(kind, text) {
-    if (typeof nudgesForEvent_ !== 'function') return false;   // dial map not co-loaded: leave the kind
+    if (typeof nudgesForEvent_ !== 'function') return true;    // resolver absent: fail closed — graded or not written
     var fx = nudgesForEvent_(kind, 1, text);
     for (var k in fx) { if (fx.hasOwnProperty(k)) return false; }
     return true;
   }
   var GRADED_DIALS_ = ["drive", "sociability", "warmth", "openness", "composure", "integrity", "family", "outabout", "fandom"];
   function gradedTagFor_(kind, tags) {
-    var dial = null, up = true, band = 'S', t, i, m;
-    for (i = 0; i < tags.length; i++) {
+    var dial = null, up = null, band = 'S', t, i, m;
+    for (i = 0; i < tags.length; i++) {                        // 1. the entry says it outright
       m = /^dial:([a-z]+):(up|down)(?::([SML]))?$/i.exec(tags[i]);
       if (m) { dial = m[1]; up = m[2].toLowerCase() === 'up'; band = m[3] ? m[3].toUpperCase() : 'S'; break; }
     }
-    if (!dial) {
+    if (!dial) {                                               // 2. a directional fact tag names dial + sign
       for (i = 0; i < tags.length; i++) { t = DIAL_BY_FACT_TAG[tags[i]]; if (t) { dial = t[0]; up = t[1]; break; } }
     }
-    if (!dial && tags.indexOf("source:qol") >= 0) {      // a QoL line reads the hood's quality: low -> down, else up
-      dial = "composure"; up = tags.indexOf("qol:low") < 0 && tags.indexOf("qol:moderate-low") < 0;
+    if (!dial) {                                               // 3. a generic signed fact + the source's dial
+      for (i = 0; i < tags.length && up === null; i++) {
+        if (FACT_DOWN_RE.test(tags[i])) up = false;
+        else if (FACT_UP_RE.test(tags[i])) up = true;
+      }
+      if (up === null) return '';                              // no fact says which way: the line is not written
+      for (i = 0; i < tags.length; i++) { t = DIAL_BY_SOURCE[tags[i]]; if (t) { dial = t; break; } }
+      if (!dial) return '';
     }
-    if (!dial) {
-      for (i = 0; i < tags.length; i++) { t = DIAL_BY_SOURCE[tags[i]]; if (t) { dial = t[0]; up = t[1]; break; } }
-    }
-    if (!dial) return '';
     dial = String(dial).toLowerCase();
     if (GRADED_DIALS_.indexOf(dial) < 0) return '';
     if (typeof gradedTag_ === 'function') return gradedTag_(kind, dial, up, band);

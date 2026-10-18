@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-10-16 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-10-18 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1704 · **S.* fields:** 377 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1707 · **S.* fields:** 378 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -159,6 +159,7 @@
 | `S.educationEvents` | `phase05-citizens/runEducationEngine.js::runEducationEngine_` | _(none)_ | 1 | 0 |
 | `S.employmentDistress` | `phase03-population/applyDemographicDrift.js::applyDemographicDrift_` | _(none)_ | 1 | 0 |
 | `S.enforcement` | _(none)_ | `phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_` | 0 | 1 |
+| `S.engine299` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 1 |
 | `S.engineErrorCount` | `phase01-config/godWorldEngine2.js::logEngineError_` | `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase10-persistence/cycleCheckpoint.js::resumeCore_` | 1 | 3 |
 | `S.engineEvents` | `phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_` | `phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_`, `phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_`, `phase06-analysis/prioritizeEvents.js::prioritizeEvents_` | 1 | 3 |
 | `S.eveningFood` | `phase07-evening-media/buildEveningFood.js::buildEveningFood_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 3 |

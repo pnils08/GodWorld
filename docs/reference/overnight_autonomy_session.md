@@ -159,6 +159,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 
 03:40 rb BUILD engine.299 Task 7 rb half: d1877af0 7eb7fd5a 074c0959 6a25bcde (writer files); ECL R130 R219 Text trued LIVE, read back OK (was: 'priced out the bigger apartment…' / 'Mandela Parkway encampment site…'); R532 no premise, kept; Elena essence line HELD → §6. compressLifeHistory displacementmove left for es Task 4 rename. CLAIM codex es engine.299 Task 1 diff review (TASK docs/for-claude-review/2026-10-18-engine299-task1-diff-review-TASK.md; dispatch when es's cut lands).
 03:44 rb CLAIM agy rb engine.299 Task 7 writer-side adversarial read (→ output/antigravity/2026-10-18-engine299-task7-rb-premise-read.md). Ripple_Ledger live: 0 causeType=gentrification rows, the removed seed path is dead. codex: es dispatches its Task 1 hashes against rb's TASK path (rb does not send).
+03:58 rb FOLD agy Task 7 read: AGREE all 4 commits + R130/R219; FLAGs settled (decline = census fact per es; Elena §6; displacementmove es T4) or routed (ensureCrimeMetrics East Oakland 'Baylight frontier' :106 vs canon → es). No rb fix. Plan Reviews table filled. RELEASE agy (/clear).
 
 ## 8. Stop rule and usage
 

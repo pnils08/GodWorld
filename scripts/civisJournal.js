@@ -40,6 +40,32 @@ function idFor(pattern, cycle, index) {
     .update(JSON.stringify([cycle, index, pattern.type, pattern.evidence]))
     .digest('hex').slice(0, 12);
 }
+// The writer may not print a digit, so every count he is handed is already a word.
+const NUMBER_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+  'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty',
+  'twenty-one', 'twenty-two', 'twenty-three', 'twenty-four', 'twenty-five'];
+function inWords(n) {
+  const k = Math.round(Number(n));
+  return Number.isFinite(k) && k >= 0 && k < NUMBER_WORDS.length ? NUMBER_WORDS[k] : 'many';
+}
+function weeks(n) { return Number(n) === 1 ? 'one week' : inWords(n) + ' weeks'; }
+function listOf(items) {
+  return items.length < 2 ? items.join('') : items.slice(0, -1).join(', ') + ' and ' + items[items.length - 1];
+}
+function stageWords(phase) { return String(phase || '').replace(/-?phase$/i, '').replace(/-/g, ' ').trim() || 'current'; }
+// A district's decay signals as plain direction words; a field with no wording stays unsaid.
+const SIGNAL_WORDS = {
+  Sentiment: ['mood rose', 'mood fell'],
+  RetailVitality: ['street trade picked up', 'street trade cooled'],
+  HousingPressure: ['housing pressure climbed', 'housing pressure eased'],
+};
+function signalWords(signals) {
+  return (signals || []).map(sig => {
+    const m = /^([A-Za-z]+)\s+([+-])/.exec(String(sig));
+    const w = m && SIGNAL_WORDS[m[1]];
+    return w ? (m[2] === '+' ? w[0] : w[1]) : null;
+  }).filter(Boolean);
+}
 function translate(pattern, initiativeNames = new Map()) {
   const e = pattern.affectedEntities || {};
   const f = pattern.evidence && pattern.evidence.fields || {};
@@ -48,20 +74,106 @@ function translate(pattern, initiativeNames = new Map()) {
   const initiatives = (e.initiatives || []).map(id => initiativeNames.get(id)).filter(Boolean);
   const target = places[0] || f.Name || initiatives[0] || null;
   const where = target ? ' in ' + target : '';
+  const project = f.Name || initiatives[0] || 'A public commitment';
+  const unanswered = /^no-mitigator/.test(String((pattern.mitigatorState || {}).gap || f.mitigatorState || ''));
   const table = {
-    'repeating-event': 'The same signal keeps returning' + where + ' without an answer downstream.',
-    'math-imbalance': 'Two district readings disagree' + where + '; a rising burden is not reflected in the city\'s stated mood.',
-    'coverage-gap': 'There was real movement in the city\'s ' + String(f.domain || 'civic') + ' life this week, but the public instrument did not carry it to the paper.',
-    'writeback-drift': 'Council action reached the public record while the response instrument stayed flat.',
-    'improvement': f.InitiativeID
-      ? String(f.Name || initiativeNames.get(f.InitiativeID) || 'A city initiative') + ' has advanced; Civis should measure whether the promised service actually reaches people.'
-      : 'A previous remedy moved beyond its expected mark; Civis should examine the calibration before claiming success.',
-    'stuck-initiative': 'A public commitment has not moved through its next stage' + where + '.',
-    'production-imbalance': 'A district reading is out of balance' + where + '.',
-    'cascade-failure': 'One unanswered signal is spreading into another part of the city' + where + '.',
-    'incoherence': 'Two accounts of the same city change do not reconcile' + where + '.',
+    'repeating-event': () => f.recurringIssue
+      ? 'The city keeps reporting \u201c' + f.recurringIssue + '\u201d \u2014 ' + weeks(f.cyclesRecurring || pattern.cyclesInState) +
+        ' running' + where + (unanswered ? ', and no program in the city is aimed at it.' : ', and nothing downstream has answered it.')
+      : 'The same signal keeps returning' + where + ' without an answer downstream.',
+    'math-imbalance': () => {
+      const moved = signalWords(f.decaySignals);
+      return moved.length
+        ? (target || 'A district') + ': ' + listOf(moved) + ' this week' + (unanswered ? ', with no city program aimed at it.' : '.')
+        : 'Two district readings disagree' + where + '.';
+    },
+    'coverage-gap': () => 'The city\'s ' + String(f.domain || 'civic') + ' life produced ' + inWords(f.eventCount) +
+      ' events this week, and the paper ran nothing on it the week before.',
+    'writeback-drift': () => 'Council action reached the public record while the response instrument stayed flat.',
+    'improvement': () => f.InitiativeID
+      ? project + ' moved from ' + stageWords(f.fromPhase) + ' to ' + stageWords(f.toPhase) + '.'
+      : f.sentimentDelta != null
+        ? 'Mood ' + (Number(f.sentimentDelta) < 0 ? 'fell' : 'rose') + where + ' this week.'
+        : 'A previous remedy moved beyond its expected mark' + where + '.',
+    'stuck-initiative': () => project + (places[0] && places[0] !== project ? ' (' + places[0] + ')' : '') +
+      ' has not left its ' + stageWords(f.ImplementationPhase) + ' stage in ' + weeks(pattern.cyclesInState) + '.',
+    'production-imbalance': () => f.migratingCount != null
+      ? 'People moved in or out of ' + inWords(f.migratingCount) + ' districts this week, and the instrument logged ' +
+        (Number(f.economicEventsThisCycle) ? 'little' : 'no') + ' economic activity behind any of it.'
+      : 'A district reading is out of balance' + where + '.',
+    'cascade-failure': () => 'One unanswered signal is spreading into another part of the city' + where + '.',
+    'incoherence': () => 'Two accounts of the same city change do not reconcile' + where + '.',
   };
-  return { target, text: table[pattern.type] || 'An unresolved signal in the city instrument needs a closer read' + where + '.' };
+  const text = table[pattern.type] ? table[pattern.type]() : 'An unresolved signal in the city instrument needs a closer read' + where + '.';
+  return { target, text };
+}
+// Many districts moving the same way is one finding, not twenty: the district
+// findings of one kind fold into a single citywide line under the first id.
+function foldDistricts(findings, patterns) {
+  const out = [];
+  const groups = new Map();
+  findings.forEach((fd, i) => {
+    const p = patterns[i];
+    const f = p.evidence && p.evidence.fields || {};
+    const kind = p.type === 'math-imbalance' ? 'decay' : (p.type === 'improvement' && f.sentimentDelta != null ? 'rise' : null);
+    if (!kind || !fd.target) { out.push(fd); return; }
+    if (!groups.has(kind)) { groups.set(kind, { at: out.length, items: [] }); out.push(null); }
+    groups.get(kind).items.push({ fd, p, f });
+  });
+  for (const [kind, g] of groups) {
+    if (g.items.length < 2) { out[g.at] = g.items[0].fd; continue; }
+    const hoods = g.items.map(x => x.fd.target);
+    let text;
+    if (kind === 'rise') {
+      text = 'Mood rose in ' + inWords(hoods.length) + ' districts this week: ' + listOf(hoods) + '.';
+    } else {
+      const by = label => g.items.filter(x => signalWords(x.f.decaySignals).includes(label)).map(x => x.fd.target);
+      const parts = [['mood fell', by('mood fell')], ['street trade cooled', by('street trade cooled')],
+        ['housing pressure climbed', by('housing pressure climbed')]].filter(([, h]) => h.length);
+      const rank = (x, end) => { const st = (x.f.standing || {}).Sentiment || {};
+        return end === 'top' ? Number(st.rank) <= 2 : Number(st.rank) >= Number(st.of) - 1; };
+      const top = g.items.filter(x => rank(x, 'top')).map(x => x.fd.target);
+      const low = g.items.filter(x => rank(x, 'low')).map(x => x.fd.target);
+      const bare = g.items.filter(x => /^no-mitigator/.test(String(x.f.mitigatorState || ''))).length;
+      const aimed = bare === hoods.length ? ', and no city program is aimed at any of them'
+        : bare * 2 > hoods.length ? ', and no city program is aimed at most of them' : '';
+      const said = parts.map(([label, h]) => label + ' in ' + (h.length > 6 ? inWords(h.length) + ' of them' : listOf(h))).join('; ');
+      text = 'Readings decayed in ' + inWords(hoods.length) + ' districts this week' + aimed + '. ' +
+        said.charAt(0).toUpperCase() + said.slice(1) + '.' +
+        (top.length ? ' ' + listOf(top) + (top.length === 1 ? ' still carries' : ' still carry') + ' the brightest mood in the city' + (low.length ? '; ' + listOf(low) + ' the lowest.' : '.') : '');
+    }
+    out[g.at] = { id: g.items[0].fd.id, type: g.items[0].fd.type, target: null, civisFinding: text,
+      covers: g.items.map(x => x.fd.id) };
+  }
+  return out;
+}
+// His own company, read off the Business_Ledger the way he would say it.
+const TENS = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety', 'a hundred'];
+function roughly(n) {
+  const k = Math.round(n / 10);
+  return n <= 20 ? inWords(n) : k <= 10 ? 'about ' + TENS[k] : 'over a hundred';
+}
+function companyLines(beats) {
+  const out = [];
+  for (const row of lines(path.join(beats, 'Business_Ledger.jsonl'))) {
+    const name = String(row.Name || '').trim();
+    if (!/^Civis Systems/.test(name)) continue;
+    const staff = Number(row.Employee_Count);
+    const millions = Math.round(Number(row.Annual_Revenue) / 1e6);
+    out.push(name + (row.Neighborhood ? ', ' + String(row.Neighborhood).trim() : '') +
+      (staff > 0 ? ': ' + roughly(staff) + ' people' : '') +
+      (millions > 0 ? ', ' + roughly(millions) + ' million a year in revenue' : '') +
+      (/%$/.test(String(row.Growth_Rate || '')) ? ', growing fast' : '') + '.');
+  }
+  return out;
+}
+// Where the Oaks' season stands now, so his clock runs forward from today.
+function oaksSeason(beats) {
+  const rows = lines(path.join(beats, 'Oakland_Sports_Feed.jsonl'))
+    .filter(r => /\bOaks\b/.test(String(r.TeamsUsed || '')) && r.SeasonType);
+  if (!rows.length) return null;
+  const last = rows.reduce((a, b) => (Number(b.Cycle) >= Number(a.Cycle) ? b : a));
+  return String(last.SeasonType).replace(/-/g, ' ').trim();
 }
 function beatDeltas(beats, previousCycle) {
   if (!Number.isInteger(previousCycle) || previousCycle < 1) return [];
@@ -120,7 +232,8 @@ function loadFrame(cycle, root = ROOT) {
   const deltas = beatDeltas(beats, previousCycle);
   // The writer is handed display names only. Record ids (initiative, business,
   // office) stay on this side: they are how a row is found, never what is printed.
-  const names = new Set(['Oakland', 'Civis Systems', 'Civis Systems Journal', 'Elias Varek', 'Oaks', 'Paulson']);
+  const names = new Set(['Oakland', 'City Hall', 'Civis Systems', 'Civis Systems Journal', 'Elias Varek', 'Oaks', 'Oakland Oaks', 'Paulson',
+    "A's", 'A\u2019s', 'Baylight', 'The Town']);
   const initiativeNames = new Map();
   for (const tab of ['Neighborhood_Demographics', 'Civic_Office_Ledger', 'Initiative_Tracker', 'Business_Ledger']) {
     for (const row of lines(path.join(beats, tab + '.jsonl'))) {
@@ -130,22 +243,32 @@ function loadFrame(cycle, root = ROOT) {
       if (row.InitiativeID && row.Name) initiativeNames.set(String(row.InitiativeID).trim(), String(row.Name).trim());
     }
   }
-  const findings = (audit.patterns || []).map((p, i) => {
+  const patterns = audit.patterns || [];
+  const findings = foldDistricts(patterns.map((p, i) => {
     const t = translate(p, initiativeNames);
     return { id: idFor(p, cycle, i), type: p.type, target: t.target, civisFinding: t.text };
-  });
+  }), patterns);
   if (!findings.length) throw new Error('audit has no patterns for C' + cycle);
   for (const f of findings) if (f.target && !names.has(f.target)) {
     throw new Error('audit target absent from current beat dump: ' + f.target);
   }
-  return { cycle, previousCycle, findings, names, deltas };
+  return { cycle, previousCycle, findings, names, deltas, company: companyLines(beats), oaksSeason: oaksSeason(beats) };
 }
-function assertEntry(prose, frame, selectedIds) {
+function sentencesOf(text) {
+  return String(text || '').split(/(?<=[.!?])\s+|\n+/)
+    .map(x => x.toLowerCase().replace(/[^a-z' ]+/g, ' ').replace(/\s+/g, ' ').trim())
+    .filter(x => x.split(' ').length >= 8);
+}
+function assertEntry(prose, frame, selectedIds, prior = []) {
   const failures = [];
   const body = String(prose || '').trim();
   const words = body.split(/\s+/).filter(Boolean);
   if (words.length < 300 || words.length > 500) failures.push('word count outside 300–500');
-  if (!/\bI\b|\bmy\b|\bwe\b/i.test(body)) failures.push('first-person voice missing');
+  if (!/\bI\b/.test(body)) failures.push('first-person voice missing');
+  // A published entry is never printed twice: a sentence of eight words or more
+  // that already ran in an earlier entry fails the week.
+  const published = new Set(sentencesOf((prior || []).join('\n')));
+  if (sentencesOf(body).some(x => published.has(x))) failures.push('repeats a sentence from an earlier entry');
   // Names the writer was handed are lifted out before the machine-shape checks:
   // real businesses carry mid-word capitals (DigitalOcean, OakTown Social) and a
   // council district carries its numeral. Everything else is held to the rule.
@@ -197,8 +320,12 @@ function assertEntry(prose, frame, selectedIds) {
   return { ok: failures.length === 0, failures, words: words.length };
 }
 function parseAnswer(raw) {
+  // A model in full voice sometimes puts a heading or a sentence around the
+  // object; the object itself is what is read.
   const cleaned = String(raw || '').replace(/^```(?:json)?\s*|\s*```$/g, '').trim();
-  const answer = JSON.parse(cleaned);
+  const open = cleaned.indexOf('{');
+  const close = cleaned.lastIndexOf('}');
+  const answer = JSON.parse(open >= 0 && close > open ? cleaned.slice(open, close + 1) : cleaned);
   if (!answer || typeof answer.prose !== 'string') throw new Error('model reply lacks prose');
   return answer;
 }
@@ -249,23 +376,27 @@ function promptFor(frame, prior, root = ROOT) {
   const agentFiles = ['IDENTITY.md', 'LENS.md', 'RULES.md'].map(name =>
     name + '\n' + fs.readFileSync(path.join(agentDir, name), 'utf8').trim());
   const system = [
-    'You are Elias Varek, founder of Civis Systems. You own the instrument that helps Oakland read itself.',
-    'Write a first-person Civis Systems Journal entry about how your system can serve the city better.',
-    'The findings below are your company\'s internal audit translated into Civis terms. Lead with one, carry two or three, and end with exactly one forward move: the single thing Civis will examine or tune next. You publish; you change no city number.',
-    'Use only the named places, offices, initiatives and businesses in the allowed list. Make no claims about a person\'s history or an unsupplied company act.',
+    'You are Elias Varek, the most powerful man in Oakland. Civis Systems, your company, built the instrument this city reads itself with: every district reading, every signal and every finding below is your product, and it landed on your desk this morning. You own the Oaks, your company\'s name is on the A\'s ballpark, and you hold a stake in Baylight.',
+    'Write this week\'s Civis Systems Journal entry in your own voice, first person, "I". You push the frontier: blunt, impatient with slow institutions, quick to say who is dragging their feet, sure the city\'s problems are engineering problems Civis can solve faster than city hall. You bet big and you say it in public. This is your journal, not a report or a memo.',
+    'The findings below are your company\'s own audit of the city. Lead with the one that bothers you most, carry two or three more, and close on what you are going to do about it: what Civis will build, ship, hire for or instrument next, and by when, on your own clock, said in words. Say it as a promise you expect to be held to. A promise is a plan, never a thing already done: you publish and you announce; you change no city number and you claim no result that has not happened.',
+    'Use only the named places, offices, initiatives and businesses in the allowed list. Invent no person, client, signed deal, company figure beyond what you are handed, or history for yourself. Anything new you announce, a tool, a team, a role, is said in plain lowercase words, never given a capitalized name.',
     'Write every allowed name exactly as listed, including a numeral that is part of the name. Otherwise never print a digit, a decimal, a percentage, a dial or index name, a score, a rating or severity level (low, medium, high as a grade), a record id, a table or detector name, JSON, or the words "simulation", "tag", "cycle", "dial" or "sentiment" — say "week", "reading", "signal", "mood", "the instrument". The Oaks and Paulson get one sentence at most, or none.',
-    'Return JSON with exactly prose (300–500 words, paragraphs) and findingIds (three or four IDs, first is lead).',
+    'Return JSON with exactly prose (about four hundred words, never more than five hundred, in paragraphs) and findingIds (three or four IDs, first is lead).',
     'Varek voice and identity context follows. Where older wake instructions conflict, the journal contract above governs this work-side entry.',
     ...agentFiles,
   ].join('\n\n');
   // The labels are read by the model and come back in its prose: no machine words here.
-  const user = 'THIS WEEK\'S FINDINGS:\n' +
+  const user = 'YOUR COMPANY:\n' + (frame.company && frame.company.length ? frame.company.join('\n') : 'Civis Systems.') +
+    '\nYOUR CLOCK: the expansion draft, the draft and free agency are behind you' +
+    (frame.oaksSeason ? '; the Oaks are in their ' + frame.oaksSeason : '') + '. Set every promise by what is still ahead.' +
+    '\nTHIS WEEK\'S FINDINGS:\n' +
     frame.findings.map(f => f.id + ': ' + f.civisFinding).join('\n') +
     '\nDISTRICT MOVEMENT SINCE LAST WEEK (qualitative; describe only what serves a finding):\n' +
     (frame.deltas.length ? frame.deltas.join('\n') : '(no comparable movement)') +
     '\nALLOWED NAMES: ' + [...frame.names].sort().join('; ') +
-    '\nYOUR PRIOR JOURNAL ENTRIES (memory, not new facts):\n' +
-    (prior.length ? require('../lib/memoryFence').wrap(prior.join('\n---\n'), 'citizen-page-journal') : '(none)');
+    '\nYOUR PRIOR JOURNAL ENTRIES (already published: reuse no sentence from them; if one closed on a promise, open with what came of it):\n' +
+    (prior.length ? require('../lib/memoryFence').wrap(prior.join('\n---\n'), 'citizen-page-journal') : '(none)') +
+    '\nReply with the JSON object only: {"prose": "...", "findingIds": ["..."]}.';
   return { system, user };
 }
 async function run(cycle, opts = {}) {
@@ -303,7 +434,7 @@ async function run(cycle, opts = {}) {
     }
     answered = true;
     answer = attempt;
-    assertion = assertEntry(attempt.prose, frame, attempt.findingIds);
+    assertion = assertEntry(attempt.prose, frame, attempt.findingIds, prior);
     if (dry) {
       console.log('--- ' + label + ' entry ---\n' + attempt.prose.trim());
       console.log('Civis assertion (' + label + '): ' + (assertion.ok ? 'PASS' : 'FAIL — ' + assertion.failures.join('; ')) +
@@ -332,7 +463,7 @@ async function run(cycle, opts = {}) {
     pageCustomId: appended.customId,
     leadFindingId: answer.findingIds[0],
     findings: frame.findings.map(f => ({ auditPatternId: f.id, type: f.type,
-      target: f.target, civisFinding: f.civisFinding,
+      target: f.target, civisFinding: f.civisFinding, ...(f.covers ? { covers: f.covers } : {}),
       selected: answer.findingIds.includes(f.id) })),
     prose: answer.prose.trim() };
   fs.writeFileSync(jsonPath, JSON.stringify(record, null, 2) + '\n');
@@ -352,4 +483,4 @@ if (require.main === module) {
     .catch(e => { console.error('civisJournal failed: ' + e.message); process.exitCode = 1; });
 }
 
-module.exports = { translate, loadFrame, assertEntry, promptFor, run, idFor };
+module.exports = { translate, foldDistricts, loadFrame, assertEntry, promptFor, run, idFor };

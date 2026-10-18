@@ -96,6 +96,36 @@ assert.equal(journal.translate(byId, new Map([['INIT-900', 'Test Initiative']]))
 assert.equal(journal.translate(byId).target, null);
 assert.ok(![...frame.names].some(n => /^(?:INIT|BIZ)-/.test(n)), 'record ids are not handed to the writer');
 
+// He is handed the city in words: the project's name, how long, which way, never a figure.
+const stuck = { type: 'stuck-initiative', cyclesInState: 4, affectedEntities: { neighborhoods: ['Test District'], initiatives: ['INIT-900'] },
+  evidence: { fields: { Name: 'Test Hub', ImplementationPhase: 'design-phase' } } };
+assert.equal(journal.translate(stuck).text, 'Test Hub (Test District) has not left its design stage in four weeks.');
+const strain = { type: 'repeating-event', cyclesInState: 3, mitigatorState: { gap: 'no-mitigator' }, affectedEntities: {},
+  evidence: { fields: { recurringIssue: 'strain', cyclesRecurring: 3 } } };
+assert.match(journal.translate(strain).text, /\u201cstrain\u201d \u2014 three weeks running, and no program in the city is aimed at it/);
+const decay = (hood, signals, rank, gap = 'no-mitigator-needs-new-initiative') => ({ type: 'math-imbalance', affectedEntities: { neighborhoods: [hood] },
+  evidence: { fields: { Neighborhood: hood, decaySignals: signals, mitigatorState: gap, standing: { Sentiment: { rank, of: 22 } } } } });
+assert.equal(journal.translate(decay('Test District', ['Sentiment -0.170', 'HousingPressure +1.000'], 1)).text,
+  'Test District: mood fell and housing pressure climbed this week, with no city program aimed at it.');
+for (const p of [stuck, strain, decay('Test District', ['Sentiment -0.170', 'RetailVitality -2.04'], 1)]) {
+  assert.doesNotMatch(journal.translate(p).text, /\d/, 'no digit reaches the writer');
+}
+// Twenty districts moving one way are one citywide finding under the first id.
+const pats = [stuck, decay('North', ['Sentiment -0.2', 'RetailVitality -1'], 1), decay('South', ['Sentiment -0.1', 'HousingPressure +1'], 22, 'mitigator-firing'),
+  decay('East', ['Sentiment -0.3'], 21), { type: 'improvement', affectedEntities: { neighborhoods: ['North'] }, evidence: { fields: { sentimentDelta: '0.3' } } },
+  { type: 'improvement', affectedEntities: { neighborhoods: ['South'] }, evidence: { fields: { sentimentDelta: '0.2' } } }];
+const folded = journal.foldDistricts(pats.map((p, i) => ({ id: 'F' + i, type: p.type, ...(() => { const t = journal.translate(p); return { target: t.target, civisFinding: t.text }; })() })), pats);
+assert.deepEqual(folded.map(x => x.id), ['F0', 'F1', 'F4']);
+assert.deepEqual(folded[1].covers, ['F1', 'F2', 'F3']);
+assert.equal(folded[1].civisFinding, 'Readings decayed in three districts this week, and no city program is aimed at most of them. ' +
+  'Mood fell in North, South and East; street trade cooled in North; housing pressure climbed in South. North still carries the brightest mood in the city; South and East the lowest.');
+assert.equal(folded[2].civisFinding, 'Mood rose in two districts this week: North and South.');
+// "I", not "we"; and a sentence that already ran is never printed twice.
+assert.match(journal.assertEntry(prose.replace(/\bI\b/g, 'we'), frame, ids).failures.join(';'), /first-person/);
+const ran = 'I want the instrument to account for what the city experiences before I claim it has explained the change.';
+assert.match(journal.assertEntry(prose, frame, ids, [ran]).failures.join(';'), /repeats a sentence/);
+assert.equal(journal.assertEntry(prose, frame, ids, ['A different week, a different sentence about Test District and its readings.']).ok, true);
+
 const answer = JSON.stringify({ prose, findingIds: ids });
 let calls = 0;
 const page = { appendReflection_: async (_pop, _body, options) => {

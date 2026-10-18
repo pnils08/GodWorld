@@ -47,7 +47,7 @@ Ripples become digested narrative media for LLMs.
 | `generateGenericCitizenMicroEvent.js` | 4 | ENGINE | ~200 ambient texture | `mult.outabout`; pulse feeds Phase 8 nbhd map |
 | `generateGameModeMicroEvents.js` | 4 | GAME | ~72 role pools + 7 trait-pools | `mult.outabout`; reads TraitProfile |
 | `generationalEventsEngine.js` | 4 | ENGINE+CIVIC | 12 milestones (Graduation, Death, etc.) | Mutates `Status`, `NumChildren`, `MaritalStatus`. Plumbed to `familyFreq`/`careerFreq`. |
-| `generateCitizensEvents.js` | 5 | ENGINE (T3-4) | ~100+ weighted pools + T3 fame recognition | Richly individuated via `getCitizenDialBands_` + bonds/arcs. |
+| `generateCitizensEvents.js` | 5 | ENGINE (T3-4) | ~100+ weighted pools + T3 fame recognition | Richly individuated via `getCitizenDialBands_` + bonds/arcs. **engine.299:** a kind that maps to `{}` is written only as `<Kind>-<Dial>-<Up|Down>-<Band>` (dial + sign from the entry's fact tag or source default); a line with no dial is not written — `S.engine299.noDial{,BySource}` counts it. |
 | `generateNamedCitizensEvents.js` | 5 | ENGINE | ~50 type-first pools | Type-primary (Skip dial seam) |
 | `generateMediaModeEvents.js` | 5 | MEDIA | ~40 role pools | Reads arcs/metrics/votes. (Skip dial seam) |
 | `generateCivicModeEvents.js` | 5 | CIVIC | ~40 role pools | Reads actual votes/grants. (Skip dial seam) |

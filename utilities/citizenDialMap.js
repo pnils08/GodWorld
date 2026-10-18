@@ -8,6 +8,15 @@
  * the C131 bench) — the same always-on shape engine.188 cut out of sentiment.
  * Structural markers (Compressed / CareerState) stay inert: summaries OF events.
  *
+ * engine.299 (builder 2026-10-18): "Every event that always exists [must] move a dial so it's not
+ * something complicated." A writer that wants to log a line of a kind whose bare key is {} writes it
+ * in the GRADED form <Kind>-<Dial>-<Up|Down>-<S|M|L> (one dial, the fact's direction, the band's
+ * delta — gradedNudges_ below), or does not write the line. The bare kind keys that still map to {}
+ * are HISTORY: lines written before engine.299 that sit in LifeHistory cells and fold on age-out;
+ * they are never re-valued (ruling 2026-09-13: never retag texture to move a dial). No new line
+ * may carry a bare {} kind — the offender scan (engine.299 Task 2) and the generator's own skip
+ * counter hold that.
+ *
  * Three resolution stages (in order):
  *   1. exact/normalized TAG  -> DIAL_MAP (+ edition + calendar-suffix handling)
  *   2. CONTENT routing on tag+text -> for Untagged / EngineEvent / sentence-tags
@@ -285,9 +294,44 @@ var DEFAULT_AMBIENT = {};
 // real compound tags like 'Career-Transition' or 'Transgression-Petty'.)
 var CALENDAR_SUFFIXES = ['FirstFriday', 'CreationDay', 'Holiday', 'Sports'];
 
+// engine.299: the graded form. <Kind>-<Dial>-<Up|Down>-<S|M|L> -> { dial: +/-BAND_DELTA[band] }.
+// One dial per line (what the line says), the fact's direction, the band's weight. The nine dials
+// are citizenMemory.js DIALS (asserted equal in scripts/citizenDials.test.js). S is the everyday
+// line (+/-1), M the rarer one (+/-2), L the rare big one (+/-4); the odds per band are the writer's
+// (World_Config keys, engine.299 Task 8). Kind keeps the record's vocabulary (pulse map, dedupe,
+// registry) — baseTag_ strips the graded tail so every kind reader still sees the kind.
+var GRADED_DIALS = ['drive', 'sociability', 'warmth', 'openness', 'composure', 'integrity', 'family', 'outabout', 'fandom'];
+var BAND_DELTA = { S: 1, M: 2, L: 4 };
+var GRADED_RE = /^(.+)-(Drive|Sociability|Warmth|Openness|Composure|Integrity|Family|Outabout|Fandom)-(Up|Down)-(S|M|L)$/i;
+
+function gradedParts_(tag) {
+  var m = GRADED_RE.exec(String(tag == null ? '' : tag).trim());
+  if (!m) return null;
+  return { kind: m[1], dial: m[2].toLowerCase(), up: m[3].toLowerCase() === 'up', band: m[4].toUpperCase() };
+}
+
+function gradedNudges_(tag) {
+  var g = gradedParts_(tag);
+  if (!g) return null;
+  var fx = {};
+  fx[g.dial] = (g.up ? 1 : -1) * BAND_DELTA[g.band];
+  return fx;
+}
+
+// The tag a writer should log for a kind that moves nothing on its own.
+function gradedTag_(kind, dial, up, band) {
+  var d = String(dial || '').toLowerCase();
+  if (GRADED_DIALS.indexOf(d) < 0) return '';
+  var b = String(band || 'S').toUpperCase();
+  if (!BAND_DELTA.hasOwnProperty(b)) b = 'S';
+  return String(kind) + '-' + d.charAt(0).toUpperCase() + d.slice(1) + '-' + (up ? 'Up' : 'Down') + '-' + b;
+}
+
 function baseTag_(tag) {
   if (!tag) return '';
   var s = String(tag);
+  var g = gradedParts_(s);                 // engine.299: <Kind>-<Dial>-<Up|Down>-<Band> -> Kind
+  if (g) s = g.kind;
   var dash = s.lastIndexOf('-');
   if (dash > 0) {
     var tail = s.substring(dash + 1);
@@ -318,6 +362,8 @@ function nudgesForEvent_(tag, severityMult, text) {
   var norm = baseTag_(tagS);
   if (STRUCTURAL[norm] === true) return {};               // Compressed / CareerState
   if (EDITION_RE.test(tagS)) return scale_(EDITION_FX, severityMult);
+  var graded = gradedNudges_(tagS);                        // engine.299: the graded form carries its own dial
+  if (graded) return scale_(graded, severityMult);
   if (DIAL_MAP.hasOwnProperty(norm)) {
     if (PRESSURE_STATE_TAGS[norm]) {
       var pCause = pressureCauseOfText_(text);
@@ -523,7 +569,8 @@ if (typeof module !== 'undefined' && module.exports) {
     pressureBar_: pressureBar_, pressureText_: pressureText_, pressureRun_: pressureRun_, pressureRunFromState_: pressureRunFromState_, PRESSURE_SLOT: PRESSURE_SLOT, PRESSURE_ADAPT: PRESSURE_ADAPT, PRESSURE_LOOKBACK: PRESSURE_LOOKBACK, PRESSURE_NO_ADAPT: PRESSURE_NO_ADAPT,
     DIAL_MAP: DIAL_MAP, CONTENT_RULES: CONTENT_RULES, STRUCTURAL: STRUCTURAL, PRESSURE_CAUSE_FX: PRESSURE_CAUSE_FX, pressureCauseOfText_: pressureCauseOfText_,
     EDITION_RE: EDITION_RE, CALENDAR_SUFFIXES: CALENDAR_SUFFIXES, DEFAULT_AMBIENT: DEFAULT_AMBIENT,
-    baseTag_: baseTag_, nudgesForEvent_: nudgesForEvent_,
+    baseTag_: baseTag_, gradedNudges_: gradedNudges_, gradedParts_: gradedParts_, gradedTag_: gradedTag_,
+    GRADED_RE: GRADED_RE, GRADED_DIALS: GRADED_DIALS, BAND_DELTA: BAND_DELTA, nudgesForEvent_: nudgesForEvent_,
     nudgesForReflection_: nudgesForReflection_, hasTag_: hasTag_
   };
 }

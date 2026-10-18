@@ -1040,6 +1040,84 @@ function generateCitizensEvents_(ctx) {
     return "Daily";
   }
 
+  // engine.299 (builder 2026-10-18): every event that fires moves a dial. A kind whose bare key
+  // resolves to {} (Neighborhood, Daily, Civic Perception, Personal, PrevEvening, Sports, Lifestyle,
+  // Background, Micro-Event, Holiday, Weather, FirstFriday, CreationDay ...) is written only in the
+  // graded form <Kind>-<Dial>-<Up|Down>-<Band> (utilities/citizenDialMap.js gradedTag_). The dial
+  // and its direction are what the line SAYS: an explicit "dial:<dial>:<up|down>[:<S|M|L>]" tag on
+  // the entry wins; else the entry's fact tag (state: / econ: / evening: / weather: / family:) —
+  // the hood's trajectory, the money, the evening's result, the weather — decides; else the source's
+  // default. A line that resolves to no dial is not written (S.engine299.noDial counts it by source;
+  // Task 2's offender scan reads the count). Sign skews up only where the fact has no direction.
+  var DIAL_BY_FACT_TAG = {
+    "state:trajectory-up":   ["outabout", true],  "state:trajectory-down": ["outabout", false],
+    "state:mood-up":         ["composure", true], "state:mood-down":       ["composure", false],
+    "state:retail":          ["outabout", true],  "state:retail-low":      ["outabout", false],
+    "state:community":       ["sociability", true],
+    "state:watchful":        ["composure", false], "state:housing":        ["composure", false],
+    "econ:tight":            ["composure", false], "econ:low":             ["composure", false],
+    "econ:displacement":     ["composure", false],
+    "econ:comfortable":      ["composure", true],  "econ:high":            ["composure", true],
+    "evening:crowd":         ["sociability", true], "evening:nightlife":   ["outabout", true],
+    "evening:cityEventAttend": ["outabout", true], "evening:vibe":         ["warmth", true],
+    "evening:safety":        ["composure", false],
+    "weather:warm-pocket":   ["outabout", true],  "weather:warm-front":    ["outabout", true],
+    "weather:hot":           ["outabout", true],  "weather:cool-pocket":   ["outabout", true],
+    "weather:rain":          ["outabout", false], "weather:drizzle":       ["outabout", false],
+    "weather:heavy-rain":    ["outabout", false], "weather:atmospheric-river": ["outabout", false],
+    "weather:fog":           ["outabout", false], "weather:microclimate-fog": ["outabout", false],
+    "weather:low-visibility": ["outabout", false], "weather:wind":         ["outabout", false],
+    "weather:cold":          ["outabout", false], "weather:cold-front":    ["outabout", false],
+    "family:partner":        ["family", true],    "family:widowed":        ["warmth", true],
+    "family:divorced":       ["composure", true],
+    "grief:memorial":        ["warmth", true]        // engine.94 memorial response: remembering someone (Personal kind)
+  };
+  var DIAL_BY_SOURCE = {
+    "source:nbhdState": ["outabout", true],     "source:neighborhood": ["outabout", true],
+    "source:communityLife": ["sociability", true], "source:prevEvening": ["outabout", true],
+    "source:weather": ["outabout", true],       "source:weatherPool": ["outabout", true],
+    "source:economy": ["composure", true],      "source:homeLife": ["family", true],
+    "source:familyLife": ["family", true],      "source:civicNews": ["openness", true],
+    "source:bias": ["openness", false],         "source:sports": ["fandom", true],
+    "source:holiday": ["sociability", true],    "source:firstFriday": ["sociability", true],
+    "source:creationDay": ["sociability", true], "source:season": ["outabout", true],
+    "source:identity": ["openness", true],      "source:reflection": ["openness", true],
+    "source:listening": ["openness", true],     "source:curiosity": ["openness", true],
+    "source:groove": ["composure", true],       "source:age": ["composure", true],
+    "source:sentiment": ["composure", true],    "source:chaos": ["composure", false],
+    "source:undocked": ["fandom", true],        "source:template": ["sociability", true],
+    "source:continuity": ["warmth", true]       // engine.94 memory row with no memory: tag — a memory resurfacing
+  };
+  function kindMovesNothing_(kind, text) {
+    if (typeof nudgesForEvent_ !== 'function') return false;   // dial map not co-loaded: leave the kind
+    var fx = nudgesForEvent_(kind, 1, text);
+    for (var k in fx) { if (fx.hasOwnProperty(k)) return false; }
+    return true;
+  }
+  var GRADED_DIALS_ = ["drive", "sociability", "warmth", "openness", "composure", "integrity", "family", "outabout", "fandom"];
+  function gradedTagFor_(kind, tags) {
+    var dial = null, up = true, band = 'S', t, i, m;
+    for (i = 0; i < tags.length; i++) {
+      m = /^dial:([a-z]+):(up|down)(?::([SML]))?$/i.exec(tags[i]);
+      if (m) { dial = m[1]; up = m[2].toLowerCase() === 'up'; band = m[3] ? m[3].toUpperCase() : 'S'; break; }
+    }
+    if (!dial) {
+      for (i = 0; i < tags.length; i++) { t = DIAL_BY_FACT_TAG[tags[i]]; if (t) { dial = t[0]; up = t[1]; break; } }
+    }
+    if (!dial && tags.indexOf("source:qol") >= 0) {      // a QoL line reads the hood's quality: low -> down, else up
+      dial = "composure"; up = tags.indexOf("qol:low") < 0 && tags.indexOf("qol:moderate-low") < 0;
+    }
+    if (!dial) {
+      for (i = 0; i < tags.length; i++) { t = DIAL_BY_SOURCE[tags[i]]; if (t) { dial = t[0]; up = t[1]; break; } }
+    }
+    if (!dial) return '';
+    dial = String(dial).toLowerCase();
+    if (GRADED_DIALS_.indexOf(dial) < 0) return '';
+    if (typeof gradedTag_ === 'function') return gradedTag_(kind, dial, up, band);
+    // same format as citizenDialMap.js gradedTag_ (the map is a global in Apps Script; tests expose only nudgesForEvent_)
+    return String(kind) + '-' + dial.charAt(0).toUpperCase() + dial.slice(1) + '-' + (up ? 'Up' : 'Down') + '-' + band;
+  }
+
   function normText_(s) {
     return String(s || "").toLowerCase().replace(/\s+/g, " ").trim();
   }
@@ -3501,6 +3579,23 @@ function generateCitizensEvents_(ctx) {
     }
     // engine.201b hood retag (ActivityExpanded / ActivityContracted / StreetsGuarded) REMOVED S451
     // (builder ruling 2026-09-13: dials follow EVENTS — never retag texture to move a dial).
+    // engine.299 (builder 2026-10-18): every event that fires moves a dial. The kind stays the
+    // record's vocabulary (pulse, dedupe memory); the written tag is the graded form when the kind
+    // alone moves nothing; a line that moves nothing is not written.
+    var lineKind = primaryTag;
+    if (kindMovesNothing_(primaryTag, pick)) {
+      var gradedTag = gradedTagFor_(primaryTag, tags);
+      if (!gradedTag) {
+        S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+        S.engine299.noDial++;
+        var srcTag = "";
+        for (var sti = 0; sti < tags.length; sti++) { if (tags[sti].indexOf("source:") === 0) { srcTag = tags[sti]; break; } }
+        var srcKey = srcTag || ("kind:" + primaryTag);
+        S.engine299.noDialBySource[srcKey] = (S.engine299.noDialBySource[srcKey] || 0) + 1;
+        continue;
+      }
+      primaryTag = gradedTag;
+    }
     var tagString = [primaryTag].concat(tags).join("|");
 
     var stamp = inWorldStamp_(ctx);
@@ -3541,12 +3636,12 @@ function generateCitizensEvents_(ctx) {
     // scale those metrics with texture volume and confound the live G-EC33
     // uniformity watch + the engine.38 convergence concern. Once-per-citizen
     // holds the metric grain at exactly today's rate.
-    if (ev === 0 && typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, primaryTag, tags, pick);
+    if (ev === 0 && typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, lineKind, tags, pick);
 
     // engine.47 Hop 4: attribution — this citizen actually drew tonight's game.
     if (tags.indexOf("gameNight") >= 0) gameNightDrawn.push(String(popId));
 
-    remember(popId, primaryTag, pick, chosenVenue, neighborhood, contact && contact.name, tags);
+    remember(popId, lineKind, pick, chosenVenue, neighborhood, contact && contact.name, tags);
 
     // ENGINE_REPAIR Row 33 (S301): publish this cycle's event citizens.
     // Phase5-Bonds (moved after this engine) builds its active-citizen pool

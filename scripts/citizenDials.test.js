@@ -216,5 +216,24 @@ console.log('═══ Wave 1 — sign, current-value room, and meaningful tags'
   }
 }
 
+console.log('═══ Section X — engine.299 graded form: every event that fires moves a dial (builder 2026-10-18)');
+{
+  assert('X1 the graded dials are the nine dials, in order', JSON.stringify(M.GRADED_DIALS) === JSON.stringify(E.DIALS));
+  let okAll = true;
+  for (const d of E.DIALS) for (const dir of ['Up', 'Down']) for (const b of ['S', 'M', 'L']) {
+    const tag = M.gradedTag_('Neighborhood', d, dir === 'Up', b);
+    const fx = M.nudgesForEvent_(tag, 1);
+    const want = (dir === 'Up' ? 1 : -1) * M.BAND_DELTA[b];
+    if (Object.keys(fx).length !== 1 || fx[d] !== want || M.baseTag_(tag) !== 'Neighborhood') okAll = false;
+  }
+  assert('X2 all 9 dials × Up/Down × S/M/L resolve to exactly one dial at the band delta, and baseTag_ returns the kind', okAll);
+  assert('X3 S/M/L deltas are 1/2/4', M.BAND_DELTA.S === 1 && M.BAND_DELTA.M === 2 && M.BAND_DELTA.L === 4);
+  assert('X4 a graded tag on a calendar kind still strips to the kind', M.baseTag_('Holiday-Sociability-Up-S') === 'Holiday');
+  assert('X5 severityMult scales the graded delta', M.nudgesForEvent_('Daily-Family-Up-M', 2).family === 4);
+  assert('X6 a bare history kind still maps to {} (never re-valued)', Object.keys(M.nudgesForEvent_('Neighborhood', 1)).length === 0 && Object.keys(M.nudgesForEvent_('Daily', 1)).length === 0);
+  assert('X7 an unknown dial name is not a graded tag', M.gradedNudges_('Daily-Mood-Up-S') === null && M.gradedTag_('Daily', 'mood', true, 'S') === '');
+  assert('X8 a real compound key is not mistaken for the graded form', M.nudgesForEvent_('CivicRole-Up-M', 1).drive === 2 && M.baseTag_('Career-Transition') === 'Career-Transition');
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

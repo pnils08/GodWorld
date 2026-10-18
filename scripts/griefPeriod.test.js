@@ -253,7 +253,8 @@ console.log('═══ F. Seeded next-Cycle consumer + dial safety');
   const certainLife = certain.ctx.ledger.rows[0][5];
   const hits = responseLines(certainLife);
   assert('F2 responseChance=1 yields exactly one reserved response', hits.length === 1, JSON.stringify(hits));
-  assert('F3 response routes to approved existing primary tag', /^C101 — \[(Strain|Personal|Community)\]/.test(hits[0] || ''), hits[0]);
+  // engine.299: a Personal line is written in its graded form (Personal-Warmth-Up-S) — the kind still routes.
+  assert('F3 response routes to approved existing primary tag', /^C101 — \[(Strain|Personal(-[A-Za-z]+-(Up|Down)-[SML])?|Community)\]/.test(hits[0] || ''), hits[0]);
   assert('F4 generator leaves DialState byte-identical', certain.ctx.ledger.rows[0][16] === certain.dial);
 
   const routed = { withdrawal: 0, memorial: 0, reconnection: 0 };
@@ -267,7 +268,7 @@ console.log('═══ F. Seeded next-Cycle consumer + dial safety');
       if (line.indexOf('[Strain]') < 0) routeMismatch++;
     } else if (line.indexOf('paused over') >= 0 || line.indexOf('made room for') >= 0) {
       routed.memorial++;
-      if (line.indexOf('[Personal]') < 0) routeMismatch++;
+      if (!/\[Personal(-[A-Za-z]+-(Up|Down)-[SML])?\]/.test(line)) routeMismatch++;   // engine.299 graded form
     } else if (line.indexOf('answered a check-in') >= 0 || line.indexOf('accepted quiet company') >= 0) {
       routed.reconnection++;
       if (line.indexOf('[Community]') < 0) routeMismatch++;

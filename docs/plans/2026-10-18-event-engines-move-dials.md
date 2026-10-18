@@ -139,6 +139,7 @@ Sign skews up (≈ .6 / .4) except where the fact's direction is known, which de
 
 ## Changelog
 
+- 2026-10-18 13:25 (engine-sheet) — Bench 1004 @53 (PROD 4o + all three caps lifted + agy fold): C112 ok 179 s, persist 726/0, EE 4→4; 2,335 lines (2,325 at @52); generic fixed-text lines 47 (7 at @52: per-citizen uniqueness), neighborhood 17; one inert line, Household-GameNight → GameNight made a texture suffix (folds as Household). Task 13 PROD holds for codex / the builder's word on agy.
 - 2026-10-18 13:10 (engine-sheet) — agy's Task 13 read folded: the generic engine's citywide one-use-per-text rule was a cap in disguise → per citizen; neighborhood pool holds only writable lines, an empty pool is counted. The generic CATCH-UP rates go to the builder (rate call).
 - 2026-10-18 13:00 (engine-sheet) — Task 13b benched (1004 @51 = PROD 4o + 13a + 13b): C112 ok 202 s, persist 753/0, EE 4→4, 2,325 lines — the generic cap of 25 did not bind this Cycle (its fixed texts wrote 7). 13c (game-mode cap 15) committed, benching.
 - 2026-10-18 12:45 (engine-sheet) — Task 13a benched alone (1004 @50 = PROD 4o + neighborhood cap lifted): C112 ok 152 s (limit 360), persist 752/0, EE 4→4; 2,325 lines (was 2,249), 18 neighborhood-engine lines (cap was 6), 7 bookkeeping, 0 inert. 13b (generic cap 25) committed, benching on top. PROD for Task 13 waits on codex (out to 10-24) or the builder's word on agy.

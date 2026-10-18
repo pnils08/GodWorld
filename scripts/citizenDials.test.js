@@ -236,6 +236,7 @@ console.log('═══ Section X — engine.299 graded form: every event that fi
   assert('X9 PostCareer sub-tags carry deltas', M.nudgesForEvent_('PostCareer-Travel', 1).openness === 2 && M.nudgesForEvent_('PostCareer-Wellness', 1).composure === 3);
   // codex 2026-10-18: the fold contract for intake lines is unchanged — "Intake at Tier 3" still routes to drive.
   assert('X10 an Advancement intake line still folds as before (content rule: tier 3 → drive)', M.nudgesForEvent_('Advancement', 1, 'Intake at Tier 3. Synthetic note').drive === 6 && !M.STRUCTURAL.Advancement && !M.STRUCTURAL.Death);
+  assert('X11 GameNight is a texture suffix: Household-GameNight folds as Household', M.baseTag_('Household-GameNight') === 'Household' && M.nudgesForEvent_('Household-GameNight', 1).family === 5);
   assert('X8 a real compound key is not mistaken for the graded form', M.nudgesForEvent_('CivicRole-Up-M', 1).drive === 2 && M.baseTag_('Career-Transition') === 'Career-Transition');
 }
 

@@ -63,6 +63,11 @@ const streetOpts = { meta: { cycle: 999 }, pageIndex: [], ledgerRows: [
 const street = source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
   seat: 'talia-finch', cycle: 999, beats, streetOptions: streetOpts });
 assert.deepEqual(street.candidates.map(c => c.pop), ['POP-90007']);
+// engine.299: a graded tag is still its kind — the same night out, written graded, stays a street source.
+const gradedOpts = { ...streetOpts, ledgerRows: [{ POPID: 'POP-90007', Name: 'Test Visitor', Status: 'Active',
+  LifeHistory: 'Y20C11 — [PrevEvening-Outabout-Up-S] visited Test Venue after work' }] };
+assert.deepEqual(source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
+  seat: 'talia-finch', cycle: 999, beats, streetOptions: gradedOpts }).candidates.map(c => c.pop), ['POP-90007']);
 // pipeline.81 Task 4: the slice's names start every non-records pool; street adds, never gates.
 assert.deepEqual(source.buildPool({ mode: 'street', story: { pulseClass: 'beat-trends' }, slice: { ...namedSlice, pulse: { className: 'beat-trends' } },
   seat: 'celeste-tran', cycle: 999, beats, streetOptions: streetOpts }).candidates.map(c => c.pop).slice(0, 2), ['POP-90005', 'POP-90006']);

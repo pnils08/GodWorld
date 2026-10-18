@@ -7,6 +7,10 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
+// engine.299: a graded tag <Kind>-<Dial>-<Up|Down>-<S|M|L> is still its kind here; only the
+// grade is stripped, so an ungraded tag classifies exactly as before.
+const { gradedParts_ } = require('../utilities/citizenDialMap.js');
+function streetKind_(tag) { const g = gradedParts_(String(tag || '')); return g ? g.kind : tag; }
 const STREET_TAGS = new Set(['Sports', 'PrevEvening', 'Media', 'Lifestyle', 'Cultural',
   'Casino', 'Holiday', 'Neighborhood', 'Weather']);
 // City employers by Business_Ledger id, with the names a story uses for them.
@@ -306,7 +310,7 @@ function street(story, slice, cycle, root, seat, opts = {}) {
     if (clean(row.Status).toLowerCase() !== 'active') continue;
     for (const raw of String(row.LifeHistory || '').split(/\r?\n/)) {
       const life = parseLife(raw);
-      if (!life || life.cycle !== Number(cycle) || !STREET_TAGS.has(life.tag)) continue;
+      if (!life || life.cycle !== Number(cycle) || !STREET_TAGS.has(streetKind_(life.tag))) continue;
       const hit = highlights.find(h => phrase(life.text, h.entity) &&
         verbSupports(life.text, h.predicate) &&
         (h.kind !== 'venue' || !(/\b(?:heard|noticed|recap)\b/i.test(life.text) &&

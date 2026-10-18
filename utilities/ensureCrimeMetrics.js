@@ -56,168 +56,14 @@ var CRIME_METRICS_SHEET_NAME = 'Crime_Metrics';
  * responseMod: Police response efficiency (higher = faster)
  * baseIncidents: Expected incidents per cycle at equilibrium
  */
-var NEIGHBORHOOD_CRIME_PROFILES = {
-  // engine.134 Task 4 (S423) — every Neighborhood_Map hood carries a profile,
-  // character strings authored from docs/canon/INSTITUTIONS.md §Neighborhoods
-  // (prosperity-era Oakland), not from 2026 strife priors. Mods are tuning.
-  // Montclair REMOVED: no Neighborhood_Map row, so it is not a simulated place
-  // (its stale Crime_Metrics row is a hand delete — ensure* has no delete path).
-  // Coliseum / Elmhurst were removed under civic.20 E2 for the same reason.
-  'Downtown': {
-    propertyCrimeMod: 1.3,
-    violentCrimeMod: 1.1,
-    responseMod: 1.2,
-    baseIncidents: 12,
-    character: 'civic and corporate spine, institutional'
-  },
-  'Temescal': {
-    propertyCrimeMod: 0.9,
-    violentCrimeMod: 0.7,
-    responseMod: 1.0,
-    baseIncidents: 5,
-    character: 'behind the boom, clinic corridor'
-  },
-  'Rockridge': {
-    propertyCrimeMod: 0.6,
-    violentCrimeMod: 0.4,
-    responseMod: 1.1,
-    baseIncidents: 3,
-    character: 'earned money, professional, tree-lined'
-  },
-  'Fruitvale': {
-    propertyCrimeMod: 1.1,
-    violentCrimeMod: 1.0,
-    responseMod: 0.9,
-    baseIncidents: 8,
-    character: 'transit hub over a multigenerational base'
-  },
-  'West Oakland': {
-    propertyCrimeMod: 1.2,
-    violentCrimeMod: 0.9,
-    responseMod: 0.85,
-    baseIncidents: 10,
-    character: 'boom-born industrial, Civis campus'
-  },
-  'East Oakland': {
-    propertyCrimeMod: 1.15,
-    violentCrimeMod: 1.0,
-    responseMod: 0.8,
-    baseIncidents: 7,
-    character: 'east flatlands, arriving frontier' // INSTITUTIONS.md §Neighborhoods: East Oakland
-  },
-  'Lake Merritt': {
-    propertyCrimeMod: 1.0,
-    violentCrimeMod: 0.8,
-    responseMod: 1.1,
-    baseIncidents: 6,
-    character: 'old money lake ring, settled'
-  },
-  'Jack London': {
-    propertyCrimeMod: 1.1,
-    violentCrimeMod: 0.9,
-    responseMod: 1.15,
-    baseIncidents: 7,
-    character: 'estuary nightlife, waterfront'
-  },
-  'Piedmont Ave': {
-    propertyCrimeMod: 0.5,
-    violentCrimeMod: 0.3,
-    responseMod: 1.2,
-    baseIncidents: 2,
-    character: 'boutique and medical corridor'
-  },
-  'Grand Lake': {
-    propertyCrimeMod: 0.7,
-    violentCrimeMod: 0.5,
-    responseMod: 1.05,
-    baseIncidents: 4,
-    character: 'theater district, family retail'
-  },
-  'Chinatown': {
-    propertyCrimeMod: 1.0,
-    violentCrimeMod: 0.85,
-    responseMod: 0.95,
-    baseIncidents: 6,
-    character: 'the neighborhood that refused, multigenerational'
-  },
-  'Adams Point': {
-    propertyCrimeMod: 0.8,
-    violentCrimeMod: 0.6,
-    responseMod: 1.0,
-    baseIncidents: 4,
-    character: 'lake-ring spillover, young and renting'
-  },
-  'Dimond': {
-    propertyCrimeMod: 0.75,
-    violentCrimeMod: 0.55,
-    responseMod: 1.0,
-    baseIncidents: 3,
-    character: 'village commercial, living down a name'
-  },
-  'Glenview': {
-    propertyCrimeMod: 0.65,
-    violentCrimeMod: 0.45,
-    responseMod: 1.05,
-    baseIncidents: 3,
-    character: 'family suburban, untouched'
-  },
-  'Laurel': {
-    propertyCrimeMod: 0.7,
-    violentCrimeMod: 0.5,
-    responseMod: 1.0,
-    baseIncidents: 3,
-    character: 'the family belt that stayed reachable'
-  },
-  'Uptown': {
-    propertyCrimeMod: 1.0,
-    violentCrimeMod: 0.6,
-    responseMod: 1.1,
-    baseIncidents: 6,
-    character: 'arts and nightlife district'
-  },
-  'KONO': {
-    propertyCrimeMod: 0.9,
-    violentCrimeMod: 0.6,
-    responseMod: 1.0,
-    baseIncidents: 5,
-    character: 'emerging arts corridor'
-  },
-  'Brooklyn': {
-    propertyCrimeMod: 0.7,
-    violentCrimeMod: 0.5,
-    responseMod: 1.05,
-    baseIncidents: 3,
-    character: 'new waterfront residential, quiet'
-  },
-  'Baylight District': {
-    propertyCrimeMod: 1.1,
-    violentCrimeMod: 0.9,
-    responseMod: 1.15,
-    baseIncidents: 7,
-    character: 'sports mecca new-build, stadium crowds'
-  },
-  'Eastlake': {
-    propertyCrimeMod: 0.8,
-    violentCrimeMod: 0.6,
-    responseMod: 1.0,
-    baseIncidents: 4,
-    character: 'lake money thinning, transitional'
-  },
-  'Ivy Hill': {
-    propertyCrimeMod: 0.65,
-    violentCrimeMod: 0.45,
-    responseMod: 1.05,
-    baseIncidents: 3,
-    character: 'smallest D4 village, quiet'
-  },
-  'San Antonio': {
-    propertyCrimeMod: 1.0,
-    violentCrimeMod: 0.8,
-    responseMod: 0.95,
-    baseIncidents: 6,
-    character: 'dense working core, pressured'
-  }
-};
+// engine.299 Task 7 (builder 2026-10-18, verbatim: "we shouldn't be using real world Oakland as that triggers
+// everything after it to use real world Oakland lens to fill in the gaps. These should be aligned to my sims
+// reality and allowed to drift as the cycles roll."): the authored per-hood crime numbers are gone. They only
+// ever SEEDED a hood with no Crime_Metrics row (engine.212 carries every live hood forward from its own last
+// level; engine.237 took responseMod off the per-cycle path), and all 22 live hoods have rows — so no live
+// number moves. A hood the map gains tomorrow seeds from its own Neighborhood_Map boom index (crimeProfileFor_).
+// The empty table stays as an identifier so a stale reader fails soft, never on a real-Oakland ranking.
+var NEIGHBORHOOD_CRIME_PROFILES = {};
 
 // ============================================================================
 // ITERATION SET + PROFILE LOOKUP (engine.134 Task 4, S423)
@@ -234,19 +80,19 @@ function crimeIterationHoods_(S) {
   if (S && S.canonHoods && S.canonHoods.list && S.canonHoods.list.length) {
     return S.canonHoods.list.slice();
   }
-  return Object.keys(NEIGHBORHOOD_CRIME_PROFILES);
+  // engine.299: no authored table to fall back on — the hoods Phase 2 loaded from Neighborhood_Map.
+  return (S && S.neighborhoodState) ? Object.keys(S.neighborhoodState) : [];
 }
 
 /**
- * Profile for a hood: the authored entry, else one DERIVED from the hood's
+ * Profile for a hood: DERIVED from the hood's
  * Neighborhood_Map boom index (S.neighborhoodState, engine.135 B1) so a hood the
  * ledger gains tomorrow simulates from its own register on day one instead of
  * throwing on profile.propertyCrimeMod. Boom lowers crime a little; a blank
  * boom index reads 0 (the flat register), never a guess.
  */
 function crimeProfileFor_(hood, S) {
-  var authored = NEIGHBORHOOD_CRIME_PROFILES[hood];
-  if (authored) return authored;
+  // engine.299: every hood's seed is derived from the sim's own Neighborhood_Map boom index (no authored table).
   var ns = S && S.neighborhoodState && S.neighborhoodState[hood];
   var boom = ns && typeof ns.boomIndex === 'number' && isFinite(ns.boomIndex) ? ns.boomIndex : 0;
   var round2 = function(n) { return Math.round(n * 100) / 100; };

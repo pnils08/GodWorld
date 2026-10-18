@@ -104,7 +104,8 @@ console.log('═══ 2 — the profile seeds only a hood with no row');
   const sb = sandbox();
   const rows = liveRows(); delete rows['Rockridge'];
   const r = runCycle(sb, rows, 107, { demo: flatDemo }, makeRng(2));
-  check('2a Rockridge (no row) seeds from 50×0.6 = 30', Math.abs(r.written['Rockridge'].propertyLevel - 30) <= 3.5, String(r.written['Rockridge'].propertyLevel));
+  // engine.299: no authored table — a hood with no row seeds from its own boom index (none in this sandbox → flat 1.0 → 50).
+  check('2a Rockridge (no row) seeds from 50 × its derived mod (no boom → 1.0) = 50', Math.abs(r.written['Rockridge'].propertyLevel - 50) <= 3.5, String(r.written['Rockridge'].propertyLevel));
   const r2 = runCycle(sb, r.next, 108, { demo: flatDemo }, makeRng(3));
   check('2b from the second cycle on it carries its own level (moves ≤ cap+reversion from C107, profile not re-read)',
     Math.abs(r2.written['Rockridge'].propertyLevel - r.written['Rockridge'].propertyLevel) <= 3.5);
@@ -175,10 +176,10 @@ console.log('═══ 6 — draw count per hood unchanged: 7 with a prev row, 5
 console.log('═══ 7 — the authored table is inert on the per-cycle path');
 {
   const sbA = sandbox(), sbB = sandbox();
-  sbB.NEIGHBORHOOD_CRIME_PROFILES['Downtown'].propertyCrimeMod = 0.2; // would have been the equilibrium before engine.212
+  sbB.NEIGHBORHOOD_CRIME_PROFILES['Downtown'] = { propertyCrimeMod: 0.2, violentCrimeMod: 0.2, responseMod: 1.2, baseIncidents: 1 }; // engine.299: the table is empty; an injected entry must still be inert
   let a = liveRows(), b = liveRows();
   for (let c = 107; c < 137; c++) { a = runCycle(sbA, a, c, { demo: flatDemo }, makeRng(c)).next; b = runCycle(sbB, b, c, { demo: flatDemo }, makeRng(c)).next; }
-  check('7a 30 cycles with Downtown\'s authored mod cut 1.3 → 0.2 produce the SAME carried level (literal never read)',
+  check('7a 30 cycles with a Downtown table entry injected (0.2) produce the SAME carried level (table never read)',
     a['Downtown'].propertyLevel === b['Downtown'].propertyLevel, JSON.stringify({ a: a['Downtown'].propertyLevel, b: b['Downtown'].propertyLevel }));
 }
 
@@ -257,7 +258,7 @@ console.log('═══ 10 — capacity scales with the map; clearance reads the 
   check('10d over 200 cycles clearance is not pinned: floor ' + floorHits + ' / ceiling ' + ceilHits + ' of ' + n + ' hood-cycles',
     floorHits / n < 0.05 && ceilHits === 0, JSON.stringify({ floorHits, ceilHits, n }));
   const sbA = sandbox(), sbB = sandbox();
-  sbB.NEIGHBORHOOD_CRIME_PROFILES['West Oakland'].responseMod = 1.2;   // the authored table must not decide clearance
+  sbB.NEIGHBORHOOD_CRIME_PROFILES['West Oakland'] = { propertyCrimeMod: 1.2, violentCrimeMod: 1.2, responseMod: 1.2, baseIncidents: 9 };   // engine.299: an injected table entry must not decide clearance
   const ra = runCycle(sbA, rows, 400, { demo: flatDemo }, makeRng(400)).written, rb = runCycle(sbB, rows, 400, { demo: flatDemo }, makeRng(400)).written;
   check('10e the authored profile table does not decide clearance (West Oakland ' + ra['West Oakland'].clearanceRate + ' == ' + rb['West Oakland'].clearanceRate + ' with its responseMod changed)',
     ra['West Oakland'].clearanceRate === rb['West Oakland'].clearanceRate);

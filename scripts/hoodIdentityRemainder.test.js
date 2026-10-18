@@ -46,19 +46,19 @@ console.log('═══ Task 4 — crime iterates the Neighborhood_Map set');
   load(sb, 'phase03-population/updateCrimeMetrics.js');
 
   const P = sb.NEIGHBORHOOD_CRIME_PROFILES;
-  check('T4a Montclair has no profile', !P.Montclair);
-  check('T4b every Neighborhood_Map hood has an authored profile', NM.every(h => P[h]), NM.filter(h => !P[h]).join(','));
-  check('T4c no 2026 strife labels survive', !Object.keys(P).some(h => /underserved|gentrifying/i.test(P[h].character)));
-  check('T4c2 East Oakland uses its own canon character, not Baylight', P['East Oakland'].character === 'east flatlands, arriving frontier');
+  // engine.299 (builder 2026-10-18): the authored real-Oakland crime table is gone; every hood seeds from its own boom index.
+  check('T4a the authored crime table is empty', Object.keys(P).length === 0);
+  check('T4b every Neighborhood_Map hood gets a derived profile', NM.every(h => sb.crimeProfileFor_(h, {}).derived === true));
+  check('T4c no authored character string survives', !NM.some(h => sb.crimeProfileFor_(h, {}).character !== 'derived from Neighborhood_Map boom index'));
   check('T4d iteration set = canonHoods.list when seeded',
     JSON.stringify(sb.crimeIterationHoods_({ canonHoods: { list: NM } })) === JSON.stringify(NM));
-  check('T4e iteration set falls to profile keys only when unseeded',
-    sb.crimeIterationHoods_({}).length === Object.keys(P).length);
+  check('T4e unseeded, the iteration set is the hoods Phase 2 loaded from Neighborhood_Map (no authored fallback)',
+    JSON.stringify(sb.crimeIterationHoods_({ neighborhoodState: { A: {}, B: {} } })) === '["A","B"]' && sb.crimeIterationHoods_({}).length === 0);
   const d1 = sb.crimeProfileFor_('New Place', { neighborhoodState: { 'New Place': { boomIndex: 1 } } });
   const d0 = sb.crimeProfileFor_('New Place', { neighborhoodState: { 'New Place': { boomIndex: null } } });
   check('T4f derived default from boom index (boom 1 → quieter)', d1.derived && d1.propertyCrimeMod === 0.8 && d1.violentCrimeMod === 0.6 && d1.baseIncidents === 3, JSON.stringify(d1));
   check('T4g derived default reads a blank boom as flat', d0.propertyCrimeMod === 1.0 && d0.violentCrimeMod === 0.8 && d0.baseIncidents === 5, JSON.stringify(d0));
-  check('T4h authored profile wins over derivation', sb.crimeProfileFor_('Temescal', {}) === P.Temescal);
+  check('T4h Temescal derives like any hood (no authored override)', sb.crimeProfileFor_('Temescal', { neighborhoodState: { Temescal: { boomIndex: 1 } } }).propertyCrimeMod === 0.8);
 
   // End-to-end: Phase 3 writes one metrics row per canon hood, nothing for ghosts.
   let written = null;

@@ -1,15 +1,15 @@
 {
   "artifactClass": "CODEX_NOTEBOOKLM_SOURCE_INVENTORY",
   "canonStatus": "NOT_CANON",
-  "generatedAt": "2026-10-12T01:41:11.752Z",
+  "generatedAt": "2026-10-18T06:52:48.979Z",
   "notebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
   "notebookName": "GodWorld",
-  "total": 165,
+  "total": 196,
   "counts": {
     "publication_candidate": 43,
     "nonpublication_candidate": 0,
     "exclude_candidate": 1,
-    "needs_review": 121
+    "needs_review": 152
   },
   "sources": [
     {
@@ -141,7 +141,7 @@
     {
       "id": "76818efd-5148-4151-9519-d8071179706c",
       "title": "bay_tribune_e101.pdf",
-      "type": "word_doc",
+      "type": "pdf",
       "reviewBucket": "publication_candidate",
       "reviewReason": "title resembles an Edition or approved off-cycle publication"
     },
@@ -183,35 +183,35 @@
     {
       "id": "3271f3d6-377e-4cb9-a2a7-03ca596e1a83",
       "title": "bay_tribune_e83.pdf",
-      "type": "word_doc",
+      "type": "pdf",
       "reviewBucket": "publication_candidate",
       "reviewReason": "title resembles an Edition or approved off-cycle publication"
     },
     {
       "id": "c564717a-d594-4578-acb5-a6beb8ec5cc3",
       "title": "bay_tribune_e84.pdf",
-      "type": "word_doc",
+      "type": "pdf",
       "reviewBucket": "publication_candidate",
       "reviewReason": "title resembles an Edition or approved off-cycle publication"
     },
     {
       "id": "810c73ce-129a-4ba6-9a9a-b98464dbb7dd",
       "title": "bay_tribune_e85.pdf",
-      "type": "word_doc",
+      "type": "pdf",
       "reviewBucket": "publication_candidate",
       "reviewReason": "title resembles an Edition or approved off-cycle publication"
     },
     {
       "id": "69152332-d248-477e-b1c9-539ae5fc9889",
       "title": "bay_tribune_e86.pdf",
-      "type": "word_doc",
+      "type": "pdf",
       "reviewBucket": "publication_candidate",
       "reviewReason": "title resembles an Edition or approved off-cycle publication"
     },
     {
       "id": "a15092b6-df99-4ee7-b1bd-e73788254bf7",
       "title": "bay_tribune_e87.pdf",
-      "type": "word_doc",
+      "type": "pdf",
       "reviewBucket": "publication_candidate",
       "reviewReason": "title resembles an Edition or approved off-cycle publication"
     },
@@ -274,14 +274,14 @@
     {
       "id": "57c67f9d-5e82-43ab-8ba1-c6ca636d4b68",
       "title": "bay_tribune_e97.pdf",
-      "type": "word_doc",
+      "type": "pdf",
       "reviewBucket": "publication_candidate",
       "reviewReason": "title resembles an Edition or approved off-cycle publication"
     },
     {
       "id": "0e7451f3-4842-4ddb-9fa3-fb6f47d9d314",
       "title": "bay_tribune_e98.pdf",
-      "type": "word_doc",
+      "type": "pdf",
       "reviewBucket": "publication_candidate",
       "reviewReason": "title resembles an Edition or approved off-cycle publication"
     },
@@ -440,6 +440,13 @@
       "reviewReason": "title signals draft/sample/unpublished material"
     },
     {
+      "id": "932e53cb-226c-43f5-ad9f-6e9a454476a2",
+      "title": "Danny Horn — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "afb69f26-167f-4661-b3a6-e1975e51633a",
       "title": "Danny Horn — FULL STAT TRUE SOURCE — 2041.txt",
       "type": "generated_text",
@@ -461,6 +468,13 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "ca27a241-92f8-436f-b4a4-7928c4f6e536",
+      "title": "Darrin Davis — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "b0b7818a-686e-4766-95c3-fb69df648d0b",
       "title": "Desmond Morton FULL STAT TRUE SOURCE — BATTER — 2041.txt",
       "type": "generated_text",
@@ -468,8 +482,29 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "dd898baf-68a5-47f7-8b2e-5e4bf667bf8e",
+      "title": "Desmond Morton FULL STAT TRUE SOURCE — BATTER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "29d8d605-6ff7-42e6-b8e2-31ebb5bec67a",
+      "title": "Eric Taveras — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "7e17ef59-5761-4c74-8bb3-349a754496ff",
       "title": "Eric Taveras — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "3851a1c3-258d-453f-8982-b1e0a2d7238f",
+      "title": "Ernesto Quintero — FULL STAT TRUE SOURCE — 2041.txt",
       "type": "generated_text",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"
@@ -489,7 +524,21 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "c01f98bd-bfa0-463e-9ba3-3cac0a13ea69",
+      "title": "Frank Reyna FULL STAT TRUE SOURCE — BATTER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "4717a0c8-295d-4fa3-974b-2b06a945350c",
+      "title": "Henry Rivas — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "cf16bfba-0e7c-47ae-a4d5-bf20c401fc89",
       "title": "Henry Rivas — FULL STAT TRUE SOURCE — 2041.txt",
       "type": "generated_text",
       "reviewBucket": "needs_review",
@@ -510,6 +559,13 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "8d895ecc-9f90-4ac8-a64f-b15753e31f38",
+      "title": "Hitoki Ka FULL STAT TRUE SOURCE — PITCHER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "f92947d1-cf63-4b48-b457-24fb2c69a573",
       "title": "Hitoki Ka_2041.txt",
       "type": "generated_text",
@@ -524,8 +580,22 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "806a0cd4-3c93-4d24-adb3-1dac4f3f68b3",
+      "title": "Ian Devine FULL STAT TRUE SOURCE — PITCHER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "6b27412b-7c40-49bd-a4a3-a269f2f3d42d",
       "title": "Ian Devine_2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "9fc3b7d6-d44d-4848-8836-4dbd6c88aba8",
+      "title": "Isley Kelley — FULL STAT TRUE SOURCE — 2041.txt",
       "type": "generated_text",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"
@@ -539,6 +609,13 @@
     },
     {
       "id": "a5a2974b-a244-4401-8783-2efeeddedd22",
+      "title": "John Ellis — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "b336567f-0857-4119-b267-3020463bccee",
       "title": "John Ellis — FULL STAT TRUE SOURCE — 2041.txt",
       "type": "generated_text",
       "reviewBucket": "needs_review",
@@ -559,6 +636,20 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "4c5d6312-f252-4529-8e34-c7a7f6606760",
+      "title": "Jose Colon — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "6e907ba2-1f88-405a-bfc6-75c9a20236c7",
+      "title": "JR Rosado FULL STAT TRUE SOURCE — BATTER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "e695fe89-1e61-4cb2-8e0e-90892bca1e76",
       "title": "JR Rosado FULL STAT TRUE SOURCE — BATTER — 2041.txt",
       "type": "generated_text",
@@ -573,8 +664,29 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "dbd9c0ad-a0f7-4334-b8ff-b4e30fee3019",
+      "title": "Julio Valencia FULL STAT TRUE SOURCE — PITCHER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "867c508d-451f-4981-8ce0-996565320e6a",
       "title": "Kevin Clark FULL STAT TRUE SOURCE — BATTER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "bdaa1232-dbf8-49f7-9820-935538657216",
+      "title": "Kevin Clark FULL STAT TRUE SOURCE — BATTER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "3824b8b0-910b-4fe5-ad3e-3cc1a181cca1",
+      "title": "Lore: danny_horn_deep_dive (Y3C7)",
       "type": "generated_text",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"
@@ -622,8 +734,22 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "7d481d54-a4be-4d6f-bdfe-c5ee8b1f1e6a",
+      "title": "Louis Cross FULL STAT TRUE SOURCE — PITCHER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "d74ccf50-0ed7-4e54-9cd1-f79a0d897268",
       "title": "Louis Cross_2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "b25b8b21-f437-4232-8d79-9a357e4bef0a",
+      "title": "Mariano Rosales FULL STAT TRUE SOURCE — PITCHER — 2041.txt",
       "type": "generated_text",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"
@@ -643,7 +769,21 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "861796e0-424e-4d9f-ba47-d10938734d0c",
+      "title": "Mark Aitken — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "0c71f9f4-5f7d-418e-8523-6c85faed3061",
+      "title": "Martin Richards — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "8a58cf40-7896-4288-bb02-396e367e108e",
       "title": "Martin Richards — FULL STAT TRUE SOURCE — 2041.txt",
       "type": "generated_text",
       "reviewBucket": "needs_review",
@@ -679,6 +819,13 @@
     },
     {
       "id": "0038423a-85bf-4f22-a9e8-55438dd8be1b",
+      "title": "Pablo Almanzar FULL STAT TRUE SOURCE — PITCHER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "25be4294-424c-46b5-818d-421621003d72",
       "title": "Pablo Almanzar FULL STAT TRUE SOURCE — PITCHER — 2041.txt",
       "type": "generated_text",
       "reviewBucket": "needs_review",
@@ -779,6 +926,13 @@
       "id": "5d798f03-b50a-4df5-b05f-71246aef717c",
       "title": "POP-00007_Hal Richmond-Lore-The Long View from Ninth Street.md",
       "type": "google_docs",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "5d3c7aa2-5275-4901-b386-66624b1bf85b",
+      "title": "POP-00018 Benji Dillon — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
@@ -902,6 +1056,13 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "86c61596-6f06-483d-9774-96a290805fa8",
+      "title": "POP-00025 Arturo Ramos — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "884552fc-493f-49ec-be3c-26574ca0d46e",
       "title": "POP-00025 Arturo Ramos — FULL STAT TRUE SOURCE — 2041.txt",
       "type": "generated_text",
@@ -958,6 +1119,13 @@
       "reviewReason": "title resembles an Edition or approved off-cycle publication"
     },
     {
+      "id": "2734105f-8845-49bc-a6e8-1cfdeacb1e7f",
+      "title": "POP-00052 Clark Saryan FULL STAT TRUE SOURCE — PITCHER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "9d0c081a-d114-4fa0-a1cf-e72c11fafec3",
       "title": "POP-00052 Clark Saryan FULL STAT TRUE SOURCE — PITCHER — 2041.txt",
       "type": "generated_text",
@@ -973,6 +1141,13 @@
     },
     {
       "id": "97d27ad7-7f27-41bb-bb89-78cb15c21802",
+      "title": "POP-00081 Carmen Mesa FULL STAT TRUE SOURCE — PITCHER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "f04a610e-bfb1-4dc8-8e0a-ee8d7bafce54",
       "title": "POP-00081 Carmen Mesa FULL STAT TRUE SOURCE — PITCHER — 2041.txt",
       "type": "generated_text",
       "reviewBucket": "needs_review",
@@ -1002,7 +1177,7 @@
     {
       "id": "a6e97c33-b597-47f7-aaec-068096ed0078",
       "title": "POP-00533_COLES ORIGINS HAL RICHMOND.pdf",
-      "type": "word_doc",
+      "type": "pdf",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
@@ -1091,6 +1266,13 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "4bc5256f-2a01-4357-90a6-71cb63e59eb2",
+      "title": "Sidney Tumolo FULL STAT TRUE SOURCE — BATTER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "af829925-5cd7-41f1-b5a0-828b5de835b7",
       "title": "Sports_Lore",
       "type": "unknown",
@@ -1133,7 +1315,21 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "45e84e2f-87a7-4e37-a3ff-2d1f828239ef",
+      "title": "The Cycle Pulse — Y3C7",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "0ef65b6f-9513-4520-b3ea-4436524b6a0e",
+      "title": "Travis Coles — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "f3159ce0-7f28-4dbb-8248-86c07489b0b5",
       "title": "Travis Coles — FULL STAT TRUE SOURCE — 2041.txt",
       "type": "generated_text",
       "reviewBucket": "needs_review",
@@ -1154,6 +1350,20 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "df1f0726-f97f-4d56-912b-dfaeb24a39b2",
+      "title": "Vinnie Keane FULL STAT TRUE SOURCE — BATTER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "e96a72c3-55bc-4133-ae25-d74b2d1f9deb",
+      "title": "Vinnie Keane FULL STAT TRUE SOURCE — BATTER — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "1bb0622a-dffd-4577-819f-f360a579c650",
       "title": "Vinnie Keane_2041.txt",
       "type": "generated_text",
@@ -1162,6 +1372,13 @@
     },
     {
       "id": "4a86ef7a-be77-4ced-b427-f6c2347dc054",
+      "title": "Vladimir Gonzalez — FULL STAT TRUE SOURCE — 2041.txt",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "ef788802-9918-4ebf-b57d-2494e467e1ff",
       "title": "Vladimir Gonzalez — FULL STAT TRUE SOURCE — 2041.txt",
       "type": "generated_text",
       "reviewBucket": "needs_review",

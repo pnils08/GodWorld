@@ -853,7 +853,7 @@ function applyStorySeeds_(ctx) {
   // Patrol strategy flavor
   if (patrolStrategy === 'suppress_hotspots' && crimeHotspots.length > 0) {
     seeds.push(makeSeed(
-      "Hotspot suppression strategy concentrates resources in " + String(crimeHotspots.length) + " zones. Displacement concerns?",
+      "Hotspot suppression strategy concentrates resources in " + String(crimeHotspots.length) + " zones. Does activity shift to the zones next door?",
       'SAFETY', '', 2, 'qol'
     ));
   } else if (patrolStrategy === 'community_presence') {

@@ -35,7 +35,6 @@ var CONTRACT_SEED_DOMAIN = {
   'initiative': 'CIVIC',
   'economic-event': 'ECONOMIC',
   'edition-coverage': 'COMMUNITY',
-  'gentrification': 'COMMUNITY',
   'migration': 'COMMUNITY',
   'sports': 'SPORTS',
   'crime': 'SAFETY',
@@ -142,7 +141,6 @@ var CONTRACT_SEED_EVENT_HINTS = {
   'initiative': /council|initiative|program|civic|vote|clinic|transit|fund|meeting/i,
   'sports': /game|playoff|team|stadium|ballpark|fan|score|inning/i,
   'economic-event': /work|job|shift|business|market|shop|hire|wage|customer|vendor/i,
-  'gentrification': /rent|landlord|lease|moving|displac|evict|housing|develop/i,
   'migration': /moving|leave|leaving|goodbye|arriv|relocat|farewell/i,
   'edition-coverage': /read|paper|article|news|tribune|coverage/i,
   'city-event': /festival|market|night|concert|gallery|music|walk|series|fair|parade|celebrat/i

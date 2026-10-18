@@ -256,7 +256,7 @@ var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighbo
     b.buildContractSeeds_(ctx);
     return ctx.summary.contractSeeds;
   }
-  var hoodRipple = [{ cycle: 96, causeType: 'gentrification', causeId: 'FV', causeDetail: 'Rent pressure +0.2', effectType: 'rent', targetScope: 'neighborhood', targetIds: [], neighborhood: 'Fruitvale', magnitude: 0.2, duration: 1 }];
+  var hoodRipple = [{ cycle: 96, causeType: 'migration', causeId: 'FV', causeDetail: 'Move-ins +0.2', effectType: 'arrivals', targetScope: 'neighborhood', targetIds: [], neighborhood: 'Fruitvale', magnitude: 0.2, duration: 1 }];
   var s8 = build(7, hoodRipple)[0];
   assert('8a fills to CONTRACT_SEED_FILL_BIZ', s8.businesses.split(';').length === 2);
   assert('8b drawn businesses carry id + name', /BIZ-0000\d [A-Z]/.test(s8.businesses));

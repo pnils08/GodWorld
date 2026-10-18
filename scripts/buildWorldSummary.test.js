@@ -104,7 +104,8 @@ console.log('\nTest 2b: emitSnapshotLine');
   };
   const worldPop = { totalPopulation: 385162, illnessRate: '0.096', employmentRate: '0.898' };
 
-  const line = helper.emitSnapshotLine(100, rileyCurr, worldPop, { inCare: 3, loadPct: 8 });
+  const line = helper.emitSnapshotLine(100, rileyCurr, worldPop,
+    { complete: true, admissions: 37, inCare: 75, tracked: 0, beds: 75 });
   assert('snapshot is single line', typeof line === 'string' && !line.includes('\n'));
   assert('snapshot has stable prefix', line.startsWith('Snapshot: Cycle 100 | '));
   assertIncludes('snapshot pop', line, 'Pop 385,162');
@@ -115,7 +116,31 @@ console.log('\nTest 2b: emitSnapshotLine');
   assertIncludes('snapshot pattern', line, 'Pattern stability-streak');
   assertIncludes('snapshot shock', line, 'Shock shock-flag');
   assertIncludes('snapshot load', line, 'Load minor-variance');
-  assertIncludes('snapshot hospital', line, 'Hospital 3 in care (8% load)');
+  assertIncludes('snapshot hospital', line, 'Hospital 37 admissions, 75 in care at the close (0 tracked), 75 beds occupied');
+  assertExcludes('no load % against the tracked-scale capacity', line, '% load');
+
+  // engine.298 — the census row, read the way the care trail reads it (SYNTHETIC rows).
+  const census = [
+    { Cycle: '111', System: 'hospital', GeographicScope: 'city', Neighborhood: '', IntakeType: 'all', Completeness: 'complete',
+      TotalIntakes: '37', TrackedIntakes: '0', OtherResidentIntakes: '37', ClosingOccupancy: '75', TrackedOccupancy: '0',
+      OtherResidentOccupancy: '75', BedsOccupied: '75', Exits: '39' },
+    { Cycle: '111', System: 'hospital', GeographicScope: 'city', Neighborhood: '', IntakeType: 'illness', Completeness: 'complete',
+      TotalIntakes: '37', ClosingOccupancy: '75', BedsOccupied: '75' },
+    { Cycle: '111', System: 'hospital', GeographicScope: 'unallocated', Neighborhood: '', IntakeType: 'all', Completeness: 'complete',
+      TotalIntakes: '0', ClosingOccupancy: '0', BedsOccupied: '0' },
+    { Cycle: '111', System: 'judicial', GeographicScope: 'city', Neighborhood: '', IntakeType: 'all', Completeness: 'complete',
+      TotalIntakes: '30', ClosingOccupancy: '64' },
+    { Cycle: '110', System: 'hospital', GeographicScope: 'city', Neighborhood: '', IntakeType: 'all', Completeness: 'complete',
+      TotalIntakes: '38', ClosingOccupancy: '77', BedsOccupied: '76' }
+  ];
+  const h111 = helper.hospitalCensusFor(census, 111);
+  assert('census reads the city all row', h111 && h111.complete && h111.admissions === 37 && h111.inCare === 75 && h111.beds === 75 && h111.tracked === 0);
+  assert('census reads its own cycle only', helper.hospitalCensusFor(census, 110).inCare === 77);
+  assert('no city row -> no hospital segment', helper.hospitalCensusFor(census, 112) === null);
+  assert('no census tab -> no hospital segment', helper.hospitalCensusFor([], 111) === null);
+  const partial = helper.hospitalCensusFor([{ ...census[0], Completeness: 'partial' }], 111);
+  assertIncludes('incomplete census withholds the number', helper.hospitalCensusText(partial), 'census partial this cycle — numbers withheld');
+  assertIncludes('one admission is singular', helper.hospitalCensusText({ complete: true, admissions: 1, inCare: 1, tracked: 1, beds: 1 }), '1 admission, 1 in care');
 
   const noHosp = helper.emitSnapshotLine(101, rileyCurr, worldPop, null);
   assertExcludes('no hospital segment when census null', noHosp, 'Hospital');

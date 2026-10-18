@@ -123,4 +123,44 @@ function synthFixtureRoot(cycle, journalist, withDecks) {
   assert.doesNotMatch(formatSimonSliceMarkdown(bare), /## FRANCHISE \/ CIVIC COLUMNS/);
 }
 
+// engine.298 — a record says what it measures and when (SYNTHETIC fixture, the C111 shape:
+// an off-season week with no record, last week's World Series row carrying 4-1 / W3).
+{
+  const sports = require('./sportsSubstrate');
+  const at = (seasonType, cycle) => ({ team: "A's", record: '4-1', streak: 'W3', seasonType, cycle });
+  assert.equal(sports.recordSentence(at('late-season', 912), 912), "The A's record is 4-1.");
+  assert.equal(sports.recordSentence(at('playoffs', 912), 912), "The A's playoff series stands at 4-1.");
+  assert.equal(sports.recordSentence(at('post-season', 911), 912), "Last week the A's playoff series stood at 4-1.");
+  assert.equal(sports.recordSentence(at('championship', 910), 912), "Two weeks ago the A's postseason record stood at 4-1.");
+  assert.equal(sports.recordSentence({ ...at('preseason', 912), team: 'Oaks' }, 912), 'The Oaks preseason record is 4-1.');
+  assert.equal(sports.recordSentence({ ...at('off-season', 912), record: '-' }, 912), null);
+  assert.equal(sports.streakSentence(at('playoffs', 911), 912), "Last week the A's had won 3 straight.");
+  assert.equal(sports.streakSentence(at('playoffs', 912), 912), "The A's have won 3 straight.");
+  assert.equal(sports.streakSentence({ ...at('playoffs', 912), streak: 'L2' }, 912), null);
+
+  const FIX_CYCLE = 912;
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'gw-simon-series-'));
+  fs.mkdirSync(path.join(root, 'output'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'output', 'world_summary_c' + FIX_CYCLE + '.md'), [
+    '# World Summary C' + FIX_CYCLE + ' (SYNTHETIC TEST FIXTURE — not canon)', '', '## Sports', '',
+    '### C' + FIX_CYCLE + ' (1 entries)', '',
+    "- **A's — editorial-note (off-season):** Danny Horn (CF)",
+    '  - StoryAngle: SYNTH parade rolls through Downtown.',
+    '  - Stats: -',
+    '  - Record -, Streak -, Mood electric, FanSentiment euphoric, Neighborhood Downtown', '',
+    '### C' + (FIX_CYCLE - 1) + ' (1 entries)', '',
+    "- **A's — game-result (playoffs):** Danny Horn (CF)",
+    '  - StoryAngle: SYNTH game 5 closes the series.',
+    '  - Stats: Danny Horn/1HR/2RBI',
+    '  - Record 4-1, Streak W3, Mood electric, FanSentiment high, Neighborhood Downtown', ''
+  ].join('\n'));
+  const ledger = { byPop: new Map(), byName: new Map([['danny horn',
+    { Name: 'Danny Horn', POPID: 'POP-99911', RoleType: "Center Fielder, Oakland A's", Neighborhood: 'Downtown' }]]) };
+  const slice = buildSimonSlice(FIX_CYCLE, { root, ledger });
+  assert.equal(slice.story.label, "Last week the A's playoff series stood at 4-1.");
+  assert.deepStrictEqual(slice.prewrite.anchorFacts,
+    ["Last week the A's playoff series stood at 4-1.", "Last week the A's had won 3 straight."]);
+  assert.ok(slice.prewrite.anchorFacts.every(f => !/record is|have won/.test(f)), 'no present-tense record from an earlier cycle');
+}
+
 console.log('buildSimonSlice tests: PASS');

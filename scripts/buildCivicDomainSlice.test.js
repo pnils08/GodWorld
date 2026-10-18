@@ -40,7 +40,7 @@ try {
     '',
     '## City State',
     '',
-    '- **Population:** 100,000 | Illness rate 6.4% | Employment 93.0% | Economy stable | Hospital: 3 in care (8% load)',
+    '- **Population:** 100,000 | Illness rate 6.4% | Employment 93.0% | Economy stable | Hospital: 37 admissions, 75 in care at the close (0 tracked), 75 beds occupied',
     '',
     '## World Events (cycle 103 — 2 total)',
     '',
@@ -161,12 +161,12 @@ try {
     'lila-mezran'), 0);
   // The citywide rate and hospital census ride outside the candidate slots.
   assert.strictEqual(lila.prewrite.cityHealth.fact,
-    'The city illness rate stands at 6.4%, with 3 in hospital care at 8% of capacity.');
+    'The city illness rate stands at 6.4%, with 37 hospital admissions this cycle and 75 in care at the close.');
   assert.strictEqual(lila.prewrite.cityHealth.src,
     'output/world_summary_c103.md "## City State"');
   assert.deepStrictEqual(lila.prewrite.anchorFacts, [
     'Test Clinic Patient took time to recover from the flu (Temescal).',
-    'The city illness rate stands at 6.4%, with 3 in hospital care at 8% of capacity.'
+    'The city illness rate stands at 6.4%, with 37 hospital admissions this cycle and 75 in care at the close.'
   ], 'the citywide figure travels in the brief cron-desk-run.js renders');
   assert.strictEqual(slice.packets['angela-reyes'].seat.popid, 'POP-00156');
   assert.strictEqual(slice.packets['angela-reyes'].story.label,

@@ -129,6 +129,29 @@ function synthFixtureRoot(cycle, journalist, withDecks) {
   assert.ok(off.prewrite.anchorFacts.every(f => !/\(feed\)/.test(f) && f.length <= 500));
 }
 
+// engine.298 — last week's playoff row labels as past and names the series (SYNTHETIC fixture)
+{
+  const FIX_CYCLE = 913;
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'gw-tanya-series-'));
+  fs.mkdirSync(path.join(root, 'output'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'output', 'world_summary_c' + FIX_CYCLE + '.md'), [
+    '# World Summary C' + FIX_CYCLE + ' (SYNTHETIC TEST FIXTURE — not canon)', '', '## Sports', '',
+    '### C' + FIX_CYCLE + ' (0 entries)', '',
+    '### C' + (FIX_CYCLE - 1) + ' (1 entries)', '',
+    "- **A's — game-result (playoffs):** Danny Horn (CF)",
+    '  - StoryAngle: SYNTH clubhouse after game 5.',
+    '  - Stats: Danny Horn/1HR/2RBI',
+    '  - Record 4-1, Streak W3, Mood electric, FanSentiment high, Neighborhood Downtown', ''
+  ].join('\n'));
+  const ledger = { byPop: new Map(), byName: new Map([['danny horn',
+    { Name: 'Danny Horn', POPID: 'POP-99921', RoleType: "Center Fielder, Oakland A's", Neighborhood: 'Downtown' }]]) };
+  const s = buildTanyaSlice(FIX_CYCLE, { root, ledger });
+  assert.match(s.story.label, /^Last week the A's playoff series stood at 4-1/);
+  assert.doesNotMatch(s.story.label, /update: 4-1/);
+  assert.ok(s.prewrite.anchorFacts.includes("Last week the A's playoff series stood at 4-1."));
+  assert.ok(s.prewrite.anchorFacts.every(f => !/record is 4-1|update: 4-1/.test(f)));
+}
+
 // pipeline.74 codex — a placeholder StoryAngle ("Open space …") never becomes the assignment
 {
   const { score } = require('./buildTanyaSlice');

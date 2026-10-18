@@ -561,6 +561,37 @@ function resolveFeedPlayers(row, ledger, limit, opts) {
   return players;
 }
 
+// engine.298 — a feed row's Record means what its SeasonType says it means, as of
+// its own cycle: a playoffs row's record is the series, a championship row's is
+// the postseason, a preseason row's is the preseason, and a row from an earlier
+// cycle is past, not this week's. C111: the World Series row (C110, 4-1, W3)
+// reached Simon Leary as "The A's record is 4-1." and printed as a "4-1 start"
+// in the off-season. The world summary's line was literal and stays as it is.
+function feedWhen(row, cycle) {
+  const ago = Number(cycle) - Number(row && row.cycle);
+  if (row == null || row.cycle == null || !Number.isFinite(ago) || ago <= 0) return '';
+  return ago === 1 ? 'Last week' : ago === 2 ? 'Two weeks ago' : ago + ' weeks ago';
+}
+
+function recordSentence(row, cycle) {
+  if (!row || !/\d/.test(String(row.record || ''))) return null;
+  const season = String(row.seasonType || '').toLowerCase();
+  const scope = /playoff|post-?season/.test(season) ? 'playoff series'
+    : /championship/.test(season) ? 'postseason record'
+      : /pre-?season|spring/.test(season) ? 'preseason record' : 'record';
+  const when = feedWhen(row, cycle);
+  if (when) return when + ' the ' + row.team + ' ' + scope + ' stood at ' + row.record + '.';
+  return 'The ' + row.team + ' ' + scope + (scope === 'playoff series' ? ' stands at ' : ' is ') + row.record + '.';
+}
+
+function streakSentence(row, cycle) {
+  const m = String((row && row.streak) || '').match(/^W(\d+)$/i);
+  if (!m) return null;
+  const when = feedWhen(row, cycle);
+  return when ? when + ' the ' + row.team + ' had won ' + m[1] + ' straight.'
+    : 'The ' + row.team + ' have won ' + m[1] + ' straight.';
+}
+
 function buildFeedAnchorFacts(row, cycle) {
   const facts = [];
   if (row.storyAngle) facts.push('StoryAngle (feed): ' + row.storyAngle);
@@ -673,6 +704,8 @@ module.exports = {
   loadSportsRows,
   resolveFeedPlayers,
   buildFeedAnchorFacts,
+  recordSentence,
+  streakSentence,
   loadBeatDecks,
   sportsHooks,
   sportsSeeds,

@@ -134,16 +134,20 @@ function loadHealthEntries(cycle, root = ROOT, profiles = null) {
   // health beat is never left with nothing to stand on.
   const cityLine = (md.match(/^- \*\*Population:\*\*.*$/m) || [])[0] || '';
   const illness = (cityLine.match(/Illness rate\s+([\d.]+)%/) || [])[1];
-  const hospital = cityLine.match(/Hospital:\s*(\d+)\s+in care\s*\((\d+)%\s*load\)/i);
+  // engine.298 — the summary's hospital segment is the city census in the care
+  // trail's words ("37 admissions, 75 in care at the close (0 tracked), 75 beds
+  // occupied"); no load %, the census is not on the tracked capacity's scale.
+  const hospital = cityLine.match(/Hospital:\s*(\d+)\s+admissions?,\s*(\d+)\s+in care at the close/i);
   if (illness) {
     const census = hospital
-      ? ', with ' + hospital[1] + ' in hospital care at ' + hospital[2] + '% of capacity'
+      ? ', with ' + hospital[1] + ' hospital admission' + (hospital[1] === '1' ? '' : 's') +
+        ' this cycle and ' + hospital[2] + ' in care at the close'
       : '';
     out.push({
       kind: 'health-city',
       ref: ref + ' "## City State"',
       label: 'City illness rate ' + illness + '%' +
-        (hospital ? ' | Hospital ' + hospital[1] + ' in care (' + hospital[2] + '% load)' : ''),
+        (hospital ? ' | Hospital ' + hospital[1] + ' admissions, ' + hospital[2] + ' in care' : ''),
       handle: {
         angle: 'The city illness rate stands at ' + illness + '%' + census + '.',
         hookLine: 'The city carries its illness rate unevenly; the record shows where.'

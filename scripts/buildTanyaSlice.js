@@ -42,10 +42,9 @@ function publishableAnchorFacts(row, players, cycle) {
       facts.push(canonical + ' recorded ' + line + '.');
     }
   }
-  if (row.record && /\d/.test(row.record)) {
-    facts.push('The ' + row.team + (row.seasonType ? ' ' + row.seasonType : '') +
-      ' record is ' + row.record + '.');
-  }
+  // engine.298 — the record says what it measures and when (sportsSubstrate.recordSentence)
+  const record = sports.recordSentence(row, cycle);
+  if (record) facts.push(record);
   return facts.slice(0, 8);
 }
 
@@ -116,11 +115,16 @@ function buildTanyaSlice(cycle, opts) {
   // "A's off-season update: -" and the row's StoryAngle (the C111 parade) never reached
   // her. A record with no number labels from the StoryAngle.
   const hasRecord = /\d/.test(row.record || '');
+  // engine.298 — a record from an earlier cycle labels as past ("Last week the A's
+  // playoff series stood at 4-1"), never as this week's update.
+  const recordFact = sports.recordSentence(row, cycle);
+  const pastRecord = hasRecord && row.cycle != null && Number(row.cycle) < Number(cycle);
   const storyLabel = [
     (!hasRecord && row.storyAngle && !PLACEHOLDER_ANGLE.test(row.storyAngle.trim())) ? row.storyAngle.replace(/\.\s*$/, '') :
-      row.team + (row.seasonType ? ' ' + row.seasonType : '') +
-        (hasRecord ? ' update: ' + row.record : ' update'),
-    statFacts.find(fact => !fact.startsWith('The ' + row.team)) || null,
+      pastRecord ? recordFact.replace(/\.$/, '') :
+        row.team + (row.seasonType ? ' ' + row.seasonType : '') +
+          (hasRecord ? ' update: ' + row.record : ' update'),
+    statFacts.find(fact => fact !== recordFact) || null,
   ].filter(Boolean).join(' — ');
   const story = {
     angle: storyLabel,

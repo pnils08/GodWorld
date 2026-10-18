@@ -51,6 +51,7 @@ Sheets via `lib/sheets.js` (service account):
 - **World_Population** — population aggregate
 - **Simulation_Calendar** — cycle calendar state
 - **Chaos_Cars** — engine.11 typed-vehicle event rows (tolerant of a missing tab — copies/sandboxes without the tab return an empty section, not a failure)
+- **Care_Justice_Census** — engine.298: the hospital segment of the Snapshot and City State lines is this cycle's city row (hospital, city scope, IntakeType `all`), read through `beatSliceKit.censusTrail` like the health slices, in the care trail's words: `Hospital: 37 admissions, 75 in care at the close (0 tracked), 75 beds occupied`. No load % — the census is not on the tracked-scale bed capacity. Incomplete census → `census <state> this cycle — numbers withheld`; no city row or no tab → no hospital segment. `buildCivicDomainSlice.js` parses this segment
 
 Disk:
 

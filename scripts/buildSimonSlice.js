@@ -22,7 +22,7 @@ function score(row, cycle) {
   return value;
 }
 
-function publicFacts(row, players) {
+function publicFacts(row, players, cycle) {
   const resolved = (players || []).filter(player => player.popid);
   const facts = [];
   const dillon = resolved.find(player => /dillon$/i.test(player.name));
@@ -30,11 +30,11 @@ function publicFacts(row, players) {
   if (dillon && /mov(?:e|es|ed|ing).{0,40}bullpen/i.test(blob)) {
     facts.push(dillon.name + ' is moving to the bullpen for the remainder of the season.');
   }
-  if (row.record && /\d/.test(row.record)) {
-    facts.push('The ' + row.team + ' record is ' + row.record + '.');
-  }
-  const streak = String(row.streak || '').match(/^W(\d+)$/i);
-  if (streak) facts.push('The ' + row.team + ' have won ' + streak[1] + ' straight.');
+  // engine.298 — the record and streak say what they measure and when
+  const record = sports.recordSentence(row, cycle);
+  if (record) facts.push(record);
+  const streak = sports.streakSentence(row, cycle);
+  if (streak) facts.push(streak);
   return facts.slice(0, 6);
 }
 
@@ -68,15 +68,15 @@ function buildSimonSlice(cycle, opts) {
   const ledger = o.ledger || sports.loadLedgerNameIndex(root);
   const ranked = rows.map(row => ({ row, score: score(row, cycle) }))
     .sort((a, b) => b.score - a.score);
-  const top = ranked.find(item => publicFacts(item.row, sports.resolveFeedPlayers(item.row, ledger, 8)).length >= 2);
+  const top = ranked.find(item => publicFacts(item.row, sports.resolveFeedPlayers(item.row, ledger, 8), cycle).length >= 2);
   if (!top) {
     return { empty: true, cycle: Number(cycle), kind: 'simon-longview', reason: 'no-publishable-structural-row' };
   }
   const row = top.row;
   const players = sports.resolveFeedPlayers(row, ledger, 8).filter(player => player.popid);
-  const anchorFacts = publicFacts(row, players);
+  const anchorFacts = publicFacts(row, players, cycle);
   const moveFact = anchorFacts.find(fact => /bullpen/.test(fact));
-  const recordFact = anchorFacts.find(fact => /record is/.test(fact));
+  const recordFact = sports.recordSentence(row, cycle);
   const label = [recordFact, moveFact].filter(Boolean).join(' ');
   const story = {
     angle: label,

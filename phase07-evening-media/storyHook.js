@@ -976,7 +976,7 @@ function storyHookEngine_(ctx) {
         'SAFETY',
         ev.neighborhood || '',
         3,
-        'Fire incident reported. Scene coverage, displacement, cause investigation.',
+        'Fire incident reported. Scene coverage, who was affected, cause investigation.',
         null,
         'event'
       ));
@@ -1064,7 +1064,7 @@ function storyHookEngine_(ctx) {
           'COMMUNITY',
           shiftHood,
           2,
-          shiftHood + ' losing senior residents (' + shiftPct + '% decline). Displacement? Family migration? Feature angle.',
+          shiftHood + ' losing senior residents (' + shiftPct + '% decline). Where did they go — closer to family, another part of the city? Feature angle.',
           null,
           'demographic'
         ));

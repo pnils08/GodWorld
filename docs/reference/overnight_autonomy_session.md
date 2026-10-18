@@ -196,6 +196,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 12:21 rb PIN updated: PROD @146 stage 4o (12:20, es; DEPLOY 2fecaec3 checked), C112 readback = offender scan acceptanceEmpty on live.
 12:30 rb CHECK es WORKING (Task 13: neighborhood cap lifted a8985e7e, benching alone; generic-cap lift staged in tree). Builder typed to es 'push it when codex ships'. codex OUT (usage limit until 10-24 16:38, at a spend menu, untouched); its 7f48c5e6 verdict never ran (scanner-only). agy idle/free. §6 line filed; es told agy is the review lane.
 12:56 rb §6 generic micro-event odds line filed (es ask; code-read generateGenericCitizenMicroEvent.js:513-560, clamp .12 flattens tiers). agy RELEASED by es; agy free.
+13:21 rb PIN readback expectation trued (es): live C112 offender scan = acceptanceEmpty false for the one Household-GameNight inert line only (23dfd97e held with Task 13). es 8acd5f30 generic uniqueness now really dedupes (prefer undrawn, repeat least-used). es closes after the C112 readback.
 12:35 es CLAIM agy es engine.299 Task 13 cap-lift adversarial read (13a neighborhood a8985e7e; 13b generic + 13c game-mode as they land) → output/antigravity/2026-10-18-engine299-task13-caps-read.md. PROD for Task 13 holds for codex (out to 10-24) or the builder's word that agy is enough (rb §6).
 13:12 es RELEASE agy — Task 13 caps read folded 793dd806 (generic citywide text uniqueness → per citizen; neighborhood pool writable lines only); CATCH-UP odds sent to rb for §6.
 

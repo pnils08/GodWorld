@@ -541,8 +541,9 @@ function runNeighborhoodEngine_(ctx) {
           var it = items[ti];
           var txt = Array.isArray(it) ? it[0] : it;
           var d = Array.isArray(it) ? it[1] : null;
-          if (!dir || !d) { out.push({ t: txt, d: null }); continue; }     // unsigned line or unmoved hood: never written
-          if (d === dir) out.push({ t: txt, d: 'dial:outabout:' + d });
+          // engine.299 Task 13 (agy 2026-10-18): only lines that can be written enter the pool — an unsigned line or an
+          // unmoved hood's line never could, and holding a slot it made a winning drift roll come to nothing.
+          if (dir && d === dir) out.push({ t: txt, d: 'dial:outabout:' + d });
         }
         return out;
       };
@@ -600,6 +601,13 @@ function runNeighborhoodEngine_(ctx) {
         eventPool.push({ t: "felt neighbors more engaged with each other", d: 'dial:sociability:up' });
       }
 
+      if (!eventPool.length) {                         // nothing this citizen's hood can say this Cycle: counted, not written
+        S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+        S.engine299.noDial++;
+        var ekey = 'runNeighborhoodEngine:Neighborhood:' + (hoodTraj || 'no-trajectory');
+        S.engine299.noDialBySource[ekey] = (S.engine299.noDialBySource[ekey] || 0) + 1;
+        continue;
+      }
       var picked = eventPool[Math.floor(rng() * eventPool.length)];
       var entry = picked.t;
       var entryDial = picked.d;

@@ -452,16 +452,18 @@ function generateGenericCitizenMicroEvents_(ctx) {
   var holidayPoolArr = (holiday !== "none" && holidayPools[holiday]) ? holidayPools[holiday] : [];
   var sportsPoolArr = (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) ? sportsSeasonPools[sportsSeason] : [];
 
-  // NEW: global per-cycle uniqueness (citywide) - using object for ES5 compatibility
+  // engine.299 Task 13 (agy 2026-10-18, SIM_DOCTRINE §1): uniqueness is PER CITIZEN per Cycle, as in the game-mode
+  // engine. It was citywide — each line of text once per Cycle for the whole city — which capped this engine's output
+  // at the number of distinct lines (a quota in disguise) and starved citizens late in ledger order.
   var usedGlobalObj = Object.create(null);
 
-  function uniquePickGlobal_(pool) {
+  function uniquePickGlobal_(pool, popId) {
     if (!pool.length) return null;
 
     var maxSpins = Math.min(16, pool.length * 2);
     for (var s = 0; s < maxSpins; s++) {
       var cand = pickOne(pool);
-      var key = cycle + "|" + cand;
+      var key = cycle + "|" + popId + "|" + cand;
       if (!usedGlobalObj[key]) {
         usedGlobalObj[key] = true;
         return cand;
@@ -471,14 +473,14 @@ function generateGenericCitizenMicroEvents_(ctx) {
     // deterministic scan fallback
     for (var i = 0; i < pool.length; i++) {
       var cand = pool[i];
-      var key = cycle + "|" + cand;
+      var key = cycle + "|" + popId + "|" + cand;
       if (!usedGlobalObj[key]) {
         usedGlobalObj[key] = true;
         return cand;
       }
     }
 
-    return null; // exhausted globally for this cycle
+    return null; // exhausted for this citizen this cycle
   }
 
   // Batch logs (schema-safe 7 cols)
@@ -596,7 +598,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
       }
     }
 
-    var pick = uniquePickGlobal_(pool);
+    var pick = uniquePickGlobal_(pool, popId);
     if (!pick) continue;
 
     // Tag (fast) - using indexOf for ES5 compatibility

@@ -804,6 +804,8 @@ const AUDIT_CHARGE = [
   'A person may only be called invented if the LEDGER PROFILES section is non-empty and they are absent',
   'from it AND from the world summary — you cannot see the full ledger, so absence of evidence about a',
   'named person is NOT evidence of invention. A supplied ledger profile IS proof the person is real.',
+  'The word "cycle" is the city\'s canonical time unit and engine NUMBERS are ordinary journalism (newsroom rule) — neither is engine-verbiage.',
+  'A council member\'s district is the SEAT they hold, not the neighborhood they live in: never judge a district claim from the ledger home neighborhood.',
   'Scene texture (weather, unnamed street life, color) is NEVER a failure — only contradiction is.',
   'Reply STRICT JSON only: {"verdict":"...","failures":[{"what":"...","class":"citizen-bending|data-misrepresentation|engine-verbiage|unsupported-claim","why":"..."}]}'
 ].join('\n');

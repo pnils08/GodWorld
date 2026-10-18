@@ -14,6 +14,9 @@
 const fs = require('fs');
 const path = require('path');
 
+// engine.299: the writer resolves kinds through the dial map (a global in Apps Script); load it as production does.
+global.nudgesForEvent_ = require('../utilities/citizenDialMap.js').nudgesForEvent_;
+global.baseTag_ = require('../utilities/citizenDialMap.js').baseTag_;
 global.Logger = { log() {} };
 const M = require('../utilities/citizenDialMap.js');
 const C = require('../utilities/compressLifeHistory.js');
@@ -140,7 +143,7 @@ console.log('═══ Routing');
     if (line) tagged = line;
   }
   assert('echo line routes [Personal] (source:identity ambient key)',
-    tagged !== null && tagged.indexOf('[Personal]') >= 0, tagged || 'no echo in 200 single-citizen seeds');
+    tagged !== null && /\[Personal(-[A-Za-z]+-(Up|Down)-[SML])?\]/.test(tagged), tagged || 'no echo in 200 single-citizen seeds');   // engine.299: graded form
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

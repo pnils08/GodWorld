@@ -1172,7 +1172,7 @@ function generateCitizensEvents_(ctx) {
         for (var ti = 0; ti < tailTags.length; ti++) {
           if (tailTags[ti].indexOf(fam[fi]) >= 0) {
             return makeEntry(UNLIVED_ECHO_TEXT[key] || "let a thought of a path not taken drift through, then set it down",
-              ["source:identity", "unlived:echo"], 0.9, false);
+              ["source:identity", "unlived:echo", "dial:openness:up"], 0.9, false);   // engine.299: a path not taken drifting through — openness
           }
         }
       }
@@ -1834,89 +1834,90 @@ function generateCitizensEvents_(ctx) {
   //   wanderer stop drawing identical dial pushes from a quiet week.
   // - weight 0.9 so engine-tied pools (chaos/prevEvening/nbhdState) keep a
   //   slight edge in the draw; these are the floor of a life, not the news.
+  // engine.299 (builder 2026-10-18): each line carries the dial it moves and which way — what the line says.
   var DOMAIN_MOMENTS = {
     "source:familyLife": [
-      "checked in with a relative",
-      "found a forgotten photograph tucked in a book and sat with it a while",
-      "cooked an old family recipe from memory, mostly getting it right",
-      "played a relative's voicemail twice before saving it again",
-      "spent the evening sorting a box of things that used to be someone's",
-      "wrote half a letter to family, then decided to call instead",
-      "retold an old family story and caught a detail they'd never noticed",
-      "smelled something on the stove next door that belonged to childhood"
+      ["checked in with a relative", "dial:family:up"],
+      ["found a forgotten photograph tucked in a book and sat with it a while", "dial:warmth:up"],
+      ["cooked an old family recipe from memory, mostly getting it right", "dial:family:up"],
+      ["played a relative's voicemail twice before saving it again", "dial:family:up"],
+      ["spent the evening sorting a box of things that used to be someone's", "dial:family:up"],
+      ["wrote half a letter to family, then decided to call instead", "dial:family:up"],
+      ["retold an old family story and caught a detail they'd never noticed", "dial:warmth:up"],
+      ["smelled something on the stove next door that belonged to childhood", "dial:warmth:up"]
     ],
     "source:homeLife": [
-      "had a quiet moment at home",
-      "finally fixed the thing that had been broken for months",
-      "reorganized a closet and found something thought lost",
-      "couldn't sleep for the wind rattling the window frame",
-      "brought home a new plant and picked its spot carefully",
-      "lent a neighbor a tool and got a story back with it",
-      "rearranged the front room and kept walking in to look at it",
-      "unpacked a box that had stayed sealed since the last move"
+      ["had a quiet moment at home", "dial:composure:up"],
+      ["finally fixed the thing that had been broken for months", "dial:drive:up"],
+      ["reorganized a closet and found something thought lost", "dial:composure:up"],
+      ["couldn't sleep for the wind rattling the window frame", "dial:composure:down"],
+      ["brought home a new plant and picked its spot carefully", "dial:warmth:up"],
+      ["lent a neighbor a tool and got a story back with it", "dial:sociability:up"],
+      ["rearranged the front room and kept walking in to look at it", "dial:openness:up"],
+      ["unpacked a box that had stayed sealed since the last move", "dial:composure:up"]
     ],
     "source:reflection": [
-      "thought about an old friend on the walk home",
-      "wondered if a decision from years back had been the right one",
-      "re-read an old journal page and didn't recognize the handwriting mood",
-      "couldn't shake a strange dream through the morning coffee",
-      "remembered a teacher who'd said one thing that stuck",
-      "felt unexpectedly nostalgic at the smell of rain on warm pavement",
-      "realized the week had passed without a single thing worth retelling",
-      "caught themselves narrating the day as if telling it to someone gone"
+      ["thought about an old friend on the walk home", "dial:warmth:up"],
+      ["wondered if a decision from years back had been the right one", "dial:composure:down"],
+      ["re-read an old journal page and didn't recognize the handwriting mood", "dial:openness:up"],
+      ["couldn't shake a strange dream through the morning coffee", "dial:composure:down"],
+      ["remembered a teacher who'd said one thing that stuck", "dial:openness:up"],
+      ["felt unexpectedly nostalgic at the smell of rain on warm pavement", "dial:warmth:up"],
+      ["realized the week had passed without a single thing worth retelling", "dial:drive:down"],
+      ["caught themselves narrating the day as if telling it to someone gone", "dial:composure:down"]
     ],
     "source:curiosity": [
-      "read about something unfamiliar and kept pulling the thread",
-      "tried a new recipe that mostly worked",
-      "walked a different street home just to see it",
-      "spent too long in a bookstore aisle they'd never stopped at",
-      "learned a useless, wonderful fact and told two people",
-      "started a small project with no deadline and no reason",
-      "listened to a style of music they'd always skipped, twice",
-      "looked up how something works and came away more amazed, not less"
+      ["read about something unfamiliar and kept pulling the thread", "dial:openness:up"],
+      ["tried a new recipe that mostly worked", "dial:openness:up"],
+      ["walked a different street home just to see it", "dial:openness:up"],
+      ["spent too long in a bookstore aisle they'd never stopped at", "dial:openness:up"],
+      ["learned a useless, wonderful fact and told two people", "dial:openness:up"],
+      ["started a small project with no deadline and no reason", "dial:openness:up"],
+      ["listened to a style of music they'd always skipped, twice", "dial:openness:up"],
+      ["looked up how something works and came away more amazed, not less", "dial:openness:up"]
     ],
     "source:communityLife": [
-      "helped someone carry groceries up the block",
-      "talked with a stranger long enough to learn a name",
-      "recognized a face from years ago across the street",
-      "attended a small local gathering and stayed later than planned",
-      "noticed a familiar face missing from the morning routine",
-      "traded produce over a fence and came out ahead",
-      "held the door and got a whole conversation for it",
-      "waved at the regulars on the usual route, all present and accounted for"
+      ["helped someone carry groceries up the block", "dial:warmth:up"],
+      ["talked with a stranger long enough to learn a name", "dial:sociability:up"],
+      ["recognized a face from years ago across the street", "dial:sociability:up"],
+      ["attended a small local gathering and stayed later than planned", "dial:sociability:up"],
+      ["noticed a familiar face missing from the morning routine", "dial:composure:down"],
+      ["traded produce over a fence and came out ahead", "dial:sociability:up"],
+      ["held the door and got a whole conversation for it", "dial:sociability:up"],
+      ["waved at the regulars on the usual route, all present and accounted for", "dial:sociability:up"]
     ],
     "source:identity": [
-      "realized they're becoming more like an older relative — and didn't mind",
-      "didn't recognize themselves in an old photograph at first glance",
-      "felt quietly proud of how they handled something small",
-      "wondered when exactly they became the adult in the room",
-      "noticed younger people asking them for advice now",
-      "caught their reflection in a shop window and stood a little straighter",
-      "said no to something and felt the shape of who they are in it",
-      "kept a small promise to themselves nobody else knew about"
+      ["realized they're becoming more like an older relative — and didn't mind", "dial:composure:up"],
+      ["didn't recognize themselves in an old photograph at first glance", "dial:composure:down"],
+      ["felt quietly proud of how they handled something small", "dial:composure:up"],
+      ["wondered when exactly they became the adult in the room", "dial:composure:up"],
+      ["noticed younger people asking them for advice now", "dial:drive:up"],
+      ["caught their reflection in a shop window and stood a little straighter", "dial:composure:up"],
+      ["said no to something and felt the shape of who they are in it", "dial:integrity:up"],
+      ["kept a small promise to themselves nobody else knew about", "dial:integrity:up"]
     ],
     // S280 build item 4 (Kimi intake add, anonymous form): being half-witness
     // to a stranger's life, turned inward. No cross-citizen wiring — the
     // stranger stays anonymous; the reflection is the citizen's own.
     "source:listening": [
-      "watched someone repair a fence for an hour and wondered when they last finished anything",
-      "overheard a goodbye at the corner that sounded permanent, and carried it a block",
-      "saw a stranger laugh at their phone and invented the joke all the way home",
-      "watched an old man feed pigeons like a ritual and wondered what theirs was",
-      "heard a kid explain something to a parent with total authority and grinned",
-      "saw someone running for the bus make it, and felt weirdly invested",
-      "watched a couple argue quietly over groceries and rooted for them anyway",
-      "caught a stranger humming their song and felt briefly, wrongly, known"
+      ["watched someone repair a fence for an hour and wondered when they last finished anything", "dial:drive:down"],
+      ["overheard a goodbye at the corner that sounded permanent, and carried it a block", "dial:composure:down"],
+      ["saw a stranger laugh at their phone and invented the joke all the way home", "dial:openness:up"],
+      ["watched an old man feed pigeons like a ritual and wondered what theirs was", "dial:openness:up"],
+      ["heard a kid explain something to a parent with total authority and grinned", "dial:warmth:up"],
+      ["saw someone running for the bus make it, and felt weirdly invested", "dial:warmth:up"],
+      ["watched a couple argue quietly over groceries and rooted for them anyway", "dial:warmth:up"],
+      ["caught a stranger humming their song and felt briefly, wrongly, known", "dial:sociability:up"]
     ],
     // S280 build item 6 (Gemini intake add, content only): the gravity of
     // routine — autopilot noticed from inside. The dial-locking mechanic was
     // skipped; these are just the texture of a groove.
     "source:groove": [
-      "drove the whole way home without remembering a single turn",
-      "realized the same seven meals had rotated for a month, and shrugged",
-      "answered 'how's it going' the exact same way for the fifth time this week",
-      "noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
-      "caught the coffee order coming out of their mouth before deciding to order it"
+      ["drove the whole way home without remembering a single turn", "dial:composure:down"],
+      ["realized the same seven meals had rotated for a month, and shrugged", "dial:composure:up"],
+      ["answered 'how's it going' the exact same way for the fifth time this week", "dial:composure:down"],
+      ["noticed the calendar squares all look alike lately, and couldn't decide if that's peace", "dial:composure:down"],
+      ["caught the coffee order coming out of their mouth before deciding to order it", "dial:composure:up"]
     ]
   };
   var baseDaily = [];
@@ -1924,15 +1925,18 @@ function generateCitizensEvents_(ctx) {
     if (!DOMAIN_MOMENTS.hasOwnProperty(dmKey)) continue;
     var dmLines = DOMAIN_MOMENTS[dmKey];
     for (var dmi = 0; dmi < dmLines.length; dmi++) {
-      baseDaily.push(makeEntry(dmLines[dmi], [dmKey], 0.9, false));
+      var dmItem = dmLines[dmi];                                   // engine.299: ["text", "dial:<dial>:<up|down>"]
+      var dmText = Array.isArray(dmItem) ? dmItem[0] : dmItem;
+      var dmTags = (Array.isArray(dmItem) && dmItem[1]) ? [dmKey, dmItem[1]] : [dmKey];
+      baseDaily.push(makeEntry(dmText, dmTags, 0.9, false));
     }
   }
 
   var seasonal = [];
-  if (season === "Winter") seasonal.push(makeEntry("coped with the colder winter evening", ["source:season", "season:Winter"], 1, false));
-  if (season === "Spring") seasonal.push(makeEntry("felt energy from seasonal change", ["source:season", "season:Spring"], 1, false));
-  if (season === "Summer") seasonal.push(makeEntry("enjoyed warmth during the evening", ["source:season", "season:Summer"], 1, false));
-  if (season === "Fall") seasonal.push(makeEntry("prepared for shorter fall days", ["source:season", "season:Fall"], 1, false));
+  if (season === "Winter") seasonal.push(makeEntry("coped with the colder winter evening", ["dial:outabout:down", "source:season", "season:Winter"], 1, false));
+  if (season === "Spring") seasonal.push(makeEntry("felt energy from seasonal change", ["dial:outabout:up", "source:season", "season:Spring"], 1, false));
+  if (season === "Summer") seasonal.push(makeEntry("enjoyed warmth during the evening", ["dial:outabout:up", "source:season", "season:Summer"], 1, false));
+  if (season === "Fall") seasonal.push(makeEntry("prepared for shorter fall days", ["dial:outabout:down", "source:season", "season:Fall"], 1, false));
 
   var weatherPool = [];
   if (weather.type === "rain") weatherPool.push(makeEntry("adjusted plans due to rain", ["source:weatherPool", "weather:rain"], 1, false));
@@ -2215,25 +2219,25 @@ function generateCitizensEvents_(ctx) {
     if (ageGroup === "child" || ageGroup === "teen") return [];
     if (ageGroup === "youth") {
       return [
-        makeEntry("connected with friends over something small but intense", ["source:age", "ageGroup:youth"], 1.05, false),
-        makeEntry("felt the pressure of being watched—even when no one was watching", ["source:age", "ageGroup:youth"], 1.0, false)
+        makeEntry("connected with friends over something small but intense", ["dial:sociability:up", "source:age", "ageGroup:youth"], 1.05, false),
+        makeEntry("felt the pressure of being watched—even when no one was watching", ["dial:composure:down", "source:age", "ageGroup:youth"], 1.0, false)
       ];
     }
     if (ageGroup === "youngAdult") {
       return [
-        makeEntry("juggled plans that didn't quite fit together", ["source:age", "ageGroup:youngAdult"], 1.05, false),
-        makeEntry("felt the city's pace pulling them forward", ["source:age", "ageGroup:youngAdult"], 1.0, false)
+        makeEntry("juggled plans that didn't quite fit together", ["dial:composure:down", "source:age", "ageGroup:youngAdult"], 1.05, false),
+        makeEntry("felt the city's pace pulling them forward", ["dial:drive:up", "source:age", "ageGroup:youngAdult"], 1.0, false)
       ];
     }
     if (ageGroup === "senior") {
       return [
-        makeEntry("noticed patterns repeating—and chose not to comment", ["source:age", "ageGroup:senior"], 1.05, false),
-        makeEntry("shared a small piece of history with someone who needed it", ["source:age", "ageGroup:senior"], 1.0, false)
+        makeEntry("noticed patterns repeating—and chose not to comment", ["dial:composure:up", "source:age", "ageGroup:senior"], 1.05, false),
+        makeEntry("shared a small piece of history with someone who needed it", ["dial:warmth:up", "source:age", "ageGroup:senior"], 1.0, false)
       ];
     }
     return [
-      makeEntry("handled responsibilities that didn't make the news", ["source:age", "ageGroup:adult"], 1.0, false),
-      makeEntry("felt a quiet tradeoff settle into place", ["source:age", "ageGroup:adult"], 1.0, false)
+      makeEntry("handled responsibilities that didn't make the news", ["dial:drive:up", "source:age", "ageGroup:adult"], 1.0, false),
+      makeEntry("felt a quiet tradeoff settle into place", ["dial:composure:up", "source:age", "ageGroup:adult"], 1.0, false)
     ];
   }
 

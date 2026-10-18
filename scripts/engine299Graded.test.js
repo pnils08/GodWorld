@@ -74,7 +74,20 @@ for (let seed = 1; seed <= 400; seed++) {
 assert('T2 lines were written and some are graded', written > 50 && graded > 0, `${written} written, ${graded} graded`);
 assert('T3 no new written line carries a tag that moves nothing', bareWritten.length === 0, JSON.stringify(bareWritten.slice(0, 5)));
 assert('T4 a negative-sentiment line never comes out Up', negSeen > 0 && negUp.length === 0, `${negSeen} seen; ${JSON.stringify(negUp.slice(0, 3))}`);
-assert('T5 a line with no signed fact is not written (skip counter moved, by source)', skipped > 0 && Object.keys(skippedBySource).length > 0, JSON.stringify(skippedBySource));
-console.log('  skipped by source:', JSON.stringify(skippedBySource));
+assert('T5 every hardcoded pool carries a sign today: nothing skipped across 800 runs', skipped === 0, JSON.stringify(skippedBySource));
+
+// T6: an entry with NO signed fact (a bespoke hood-texture line, as the pool helper hands them in) is not written,
+// and the skip is counted by its source. The stub returns one heavy unsigned entry so the draw lands on it often.
+global.hoodTexturePool_ = () => [{ text: 'noticed the creative energy shifting on the block', tags: ['source:neighborhood'], weight: 500, template: false }];
+let unsignedWritten = 0, skips = 0, bySrc = {};
+for (let seed = 1; seed <= 200; seed++) {
+  const ctx = ctxFor(seed, 0);
+  GEN.generateCitizensEvents_(ctx);
+  const cell = String(ctx.ledger.rows[0][5] || '');
+  if (cell.indexOf('creative energy shifting') >= 0) unsignedWritten++;
+  if (ctx.summary.engine299) { skips += ctx.summary.engine299.noDial; for (const k in ctx.summary.engine299.noDialBySource) bySrc[k] = (bySrc[k] || 0) + ctx.summary.engine299.noDialBySource[k]; }
+}
+assert('T6 an unsigned entry is never written and the skip is counted by source', unsignedWritten === 0 && skips > 0 && bySrc['source:neighborhood'] > 0, JSON.stringify({ unsignedWritten, skips, bySrc }));
+console.log('  T6 skips by source:', JSON.stringify(bySrc));
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

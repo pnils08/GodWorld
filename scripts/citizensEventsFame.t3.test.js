@@ -14,6 +14,9 @@
 const fs = require('fs');
 const path = require('path');
 
+// engine.299: the writer resolves kinds through the dial map (a global in Apps Script); load it as production does.
+global.nudgesForEvent_ = require('../utilities/citizenDialMap.js').nudgesForEvent_;
+global.baseTag_ = require('../utilities/citizenDialMap.js').baseTag_;
 global.Logger = { log() {} };
 const M = require('../utilities/citizenDialMap.js');
 const C = require('../utilities/compressLifeHistory.js');

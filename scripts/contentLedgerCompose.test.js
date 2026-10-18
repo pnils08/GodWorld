@@ -17,6 +17,9 @@
 const fs = require('fs');
 const path = require('path');
 
+// engine.299: the writer resolves kinds through the dial map (a global in Apps Script); load it as production does.
+global.nudgesForEvent_ = require('../utilities/citizenDialMap.js').nudgesForEvent_;
+global.baseTag_ = require('../utilities/citizenDialMap.js').baseTag_;
 global.Logger = { log() {} };
 const M = require('../utilities/citizenDialMap.js');
 const C = require('../utilities/compressLifeHistory.js');
@@ -72,6 +75,8 @@ function makeRow(popId, opts) {
     o.wealth != null ? o.wealth : '', o.displ || 0];
 }
 
+// engine.299 (2026-10-18): a ledger line whose kind maps to {} is written only with a signed fact (a dial: tag or
+// a fact tag such as econ:tight); the fixtures carry one so composition stays testable. See scripts/engine299Graded.test.js.
 const LEDGER_HDR = ['Kind', 'PoolKey', 'Slot', 'Text', 'Weight', 'Conditions', 'Tags', 'Grain', 'Active'];
 
 function makeCtx(rows, rng, ledgerRows, feedRows) {
@@ -106,9 +111,9 @@ function emittedLines(ctx) {
 // Ledger fixture: high weights so seeded lines actually get drawn in trials.
 const FIXTURE = [
   LEDGER_HDR,
-  ['line', 'test.tight', '', 'counted the register twice, $MOOD', '50', 'wealth<=3', 'source:economy', '', ''],
-  ['line', 'test.venue', '', 'lingered at $VENUE past closing, $MOOD', '50', '', 'source:neighborhood', '', ''],
-  ['line', 'test.unfillable', '', 'stared into $VOID for an hour', '50', '', 'source:qol', '', ''],
+  ['line', 'test.tight', '', 'counted the register twice, $MOOD', '50', 'wealth<=3', 'source:economy,econ:tight', '', ''],
+  ['line', 'test.venue', '', 'lingered at $VENUE past closing, $MOOD', '50', '', 'source:neighborhood,dial:outabout:up', '', ''],
+  ['line', 'test.unfillable', '', 'stared into $VOID for an hour', '50', '', 'source:qol,dial:composure:down', '', ''],
   ['fragment', '', 'MOOD', 'satisfied with the small win', '', '', '', '', ''],
   ['fragment', '', 'MOOD', 'uneasy about the week ahead', '', '', '', '', ''],
   ['fragment', '', 'MOOD', 'temescal-only calm settling in', '', 'hood=Temescal', '', '', '']
@@ -143,7 +148,7 @@ console.log('═══ A fragment that is itself a token never prints raw (live 
 {
   const MOOD_FIXTURE = [
     LEDGER_HDR,
-    ['line', 'baseDaily.rehearsal', '', 'found a quiet minute at the corner and $MOOD', '5000', '', 'source:reflection', '', ''],
+    ['line', 'baseDaily.rehearsal', '', 'found a quiet minute at the corner and $MOOD', '5000', '', 'source:reflection,dial:composure:up', '', ''],
     ['fragment', '', 'MOOD', 'let the week\'s noise settle', '1', '', '', '', ''],
     ['fragment', '', 'MOOD', '$MOOD', '1', '', 'source:qol,auth:auto', '', '']
   ];
@@ -219,7 +224,7 @@ console.log('═══ Routing: ledger line primary tag');
   // qol-sourced ledger line must carry [QoL] primary in the LifeHistory line.
   const QOL_FIXTURE = [
     LEDGER_HDR,
-    ['line', 'test.qol', '', 'noticed the block feeling looked-after', '80', '', 'source:qol', '', '']
+    ['line', 'test.qol', '', 'noticed the block feeling looked-after', '80', '', 'source:qol,dial:composure:up', '', '']
   ];
   let taggedLine = null;
   for (let s = 1; s <= 200 && !taggedLine; s++) {
@@ -228,19 +233,20 @@ console.log('═══ Routing: ledger line primary tag');
     const line = emittedLines(ctx)[0].split('\n').find(l => l.indexOf('looked-after') >= 0);
     if (line) taggedLine = line;
   }
-  assert('source:qol ledger line routes [QoL] primary',
-    taggedLine !== null && taggedLine.indexOf('[QoL]') >= 0, taggedLine || 'never drawn in 200 seeds');
+  assert('source:qol ledger line routes [QoL] primary (engine.299: graded by its own dial: tag)',
+    taggedLine !== null && /\[QoL-Composure-Up-S\]/.test(taggedLine), taggedLine || 'never drawn in 200 seeds');
 }
 
 console.log('═══ engine.94 B.2a: memory rows route through the dial vocabulary');
 {
   // First tag source:continuity (the loader whitelist); the memory: tag picks the
-  // primary that moves the dial. No memory: tag = a plain day, as before.
+  // primary that moves the dial. engine.299 (builder 2026-10-18): a memory row with no
+  // memory: tag and no signed fact moves nothing, so it is NOT written (was: a plain day).
   const ROUTES = [
     ['memory:strain', '[Strain]', 'checked the lock twice since the spring'],
     ['memory:community', '[Community]', 'brought a plate to the block table again'],
     ['memory:rivalry', '[Rivalry]', 'crossed the street rather than share the corner'],
-    ['', '[Continuity]', 'kept the receipt in the kitchen drawer']
+    ['', null, 'kept the receipt in the kitchen drawer']
   ];
   for (const [tag, primary, text] of ROUTES) {
     const FIX = [LEDGER_HDR, ['line', 'test.memory', '', text, '80', '', 'source:continuity' + (tag ? ',' + tag : ''), '', '']];
@@ -250,8 +256,8 @@ console.log('═══ engine.94 B.2a: memory rows route through the dial vocabu
       generateCitizensEvents_(ctx);
       drawn = emittedLines(ctx)[0].split('\n').find(l => l.indexOf(text) >= 0) || null;
     }
-    assert((tag || 'bare source:continuity') + ' routes ' + primary,
-      drawn !== null && drawn.indexOf(primary) >= 0, drawn || 'never drawn in 200 seeds');
+    if (primary === null) assert('bare source:continuity (no signed fact) is not written — engine.299', drawn === null, drawn || '');
+    else assert(tag + ' routes ' + primary, drawn !== null && drawn.indexOf(primary) >= 0, drawn || 'never drawn in 200 seeds');
   }
 }
 
@@ -260,10 +266,10 @@ console.log('═══ engine.208 C5: the sports picker');
   global.SPORTS_WEEK_TAG_ = require('../utilities/sportsWeekRecord.js').SPORTS_WEEK_TAG_;
   const SPORTS_FIXTURE = [
     LEDGER_HDR,
-    ['line', 'sports.as', '', 'wore the green cap to the corner store', '80', '', 'source:sports', '', ''],
-    ['line', 'sports.oaks', '', 'argued the Oaks rotation at the barbershop', '80', '', 'source:sports', '', ''],
-    ['line', 'sports.citywide', '', 'heard a game through an open window', '80', '', 'source:sports', '', ''],
-    ['line', 'test.fan', '', 'planned the whole night around the game', '80', 'fandom>=60', 'source:neighborhood', '', '']
+    ['line', 'sports.as', '', 'wore the green cap to the corner store', '80', '', 'source:sports,dial:fandom:up', '', ''],
+    ['line', 'sports.oaks', '', 'argued the Oaks rotation at the barbershop', '80', '', 'source:sports,dial:fandom:up', '', ''],
+    ['line', 'sports.citywide', '', 'heard a game through an open window', '80', '', 'source:sports,dial:fandom:up', '', ''],
+    ['line', 'test.fan', '', 'planned the whole night around the game', '80', 'fandom>=60', 'source:neighborhood,dial:fandom:up', '', '']
   ];
   const weeks = { "A's": { cls: 'TITLE' }, Oaks: { cls: 'LOSING_WEEK' } };
   const prevBands = global.getCitizenDialBands_;
@@ -289,7 +295,8 @@ console.log('═══ engine.208 C5: the sports picker');
   global.getCitizenDialBands_ = prevBands;
   assert('an A\'s pool line in a title week reads [Sports-Title]', seen.as && seen.as.indexOf('[Sports-Title]') >= 0, seen.as || 'never drawn');
   assert('an Oaks pool line in a losing week reads [Sports-LosingWeek]', seen.oaks && seen.oaks.indexOf('[Sports-LosingWeek]') >= 0, seen.oaks || 'never drawn');
-  assert('a citywide sports line stays a plain [Sports] day', seen.city && seen.city.indexOf('[Sports]') >= 0, seen.city || 'never drawn');
+  // engine.299: a citywide sports line is not the team's week (no Sports-Title/LosingWeek retag) — it carries its own sign.
+  assert('a citywide sports line is not retagged to the team week; it carries its own graded tag', seen.city && /\[Sports-Fandom-Up-S\]/.test(seen.city), seen.city || 'never drawn');
   assert('a GAME-clock citizen never draws a spectator line', gameSports === 0, `hits=${gameSports}`);
   assert('fandom>=60 row reaches the fan', fanGateRight > 0, `hits=${fanGateRight}`);
   assert('fandom>=60 row never reaches fandom 40', fanGateWrong === 0, `hits=${fanGateWrong}`);

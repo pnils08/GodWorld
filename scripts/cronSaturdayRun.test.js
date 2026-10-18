@@ -268,6 +268,13 @@ console.log('Test 6: mergeStorylineLedger');
   const px = X.printedCrossovers(x, ['sports_c111_pslayer', 'undocked_c111_nia']);
   ok('printedCrossovers: both sides printed → kept, with only printed pieces', px.length === 1 && px[0].pieces.every(p => ['sports_c111_pslayer', 'undocked_c111_nia'].includes(p.stem)) && px[0].systems.length === 2);
   ok('printedCrossovers: nothing printed / no list → empty', X.printedCrossovers(x, []).length === 0 && X.printedCrossovers(null, sel).length === 0);
+  // UNDOCKED weekly digest: standing seat, paper stays at top
+  const rk = [{ stem: 'a', desk: 'sports' }, { stem: 'b', desk: 'civic' }, { stem: 'dg', desk: 'undocked-digest' }];
+  const full = X.reserveDigestSeat(['a', 'b'], rk, 2);
+  ok('digest seat: full list gives up its last pick, paper stays at top', full.stem === 'dg' && full.selected.join() === 'a,dg');
+  ok('digest seat: room left → appended', X.reserveDigestSeat(['a'], rk, 3).selected.join() === 'a,dg');
+  ok('digest seat: already selected → untouched', X.reserveDigestSeat(['a', 'dg'], rk, 2).stem === null && X.reserveDigestSeat(['a', 'dg'], rk, 2).selected.join() === 'a,dg');
+  ok('digest seat: no digest in ranked (excluded or unwritten) → untouched', X.reserveDigestSeat(['a', 'b'], rk.slice(0, 2), 2).stem === null);
   // the audit judges UNDOCKED against the show's board, and the show's own words are not leakage
   const ug = X.undockedGroundTruth([{ Rank: 1, POPID: 'POP-00597', Holder: 'Eric Taveras', Episodes: 2, CreditsTotal: 1170, CombatTotal: 0, MishapTotal: 0, BestMagnitude: 3, CyclesLed: 1, CurrentStreak: 1, LastAiredCycle: 112 }]);
   ok('undockedGroundTruth: board row + in-world vocabulary line', /Eric Taveras \(POP-00597\) — 2 episodes, 1170 credits/.test(ug) && /in-world, not engine vocabulary/.test(ug));

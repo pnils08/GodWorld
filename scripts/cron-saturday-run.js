@@ -1009,6 +1009,19 @@ function crossoverCitizens(set, extraCandidates) {
 // Move 5 read (Sat 10-17): every crossing had one printed side, so the narration sent readers to
 // Mason Ortega's pages and Nia's reporting, neither of which printed. The narrator names a crossing
 // only where two systems both printed it; the whole-set list still drives the curation tie-break.
+// UNDOCKED's weekly digest holds a standing Saturday seat (builder 2026-10-18: "make sure undocked gets
+// coverage that gets citizens potential usage" — C111's playoff MVP and board leader earned 0 because
+// the digest, where the weekly pilot credit tags every pilot a subject, lost the cut on grade 3/4
+// against ten 4/4 filings). Print is still the only door to usage: the seat gets the digest PRINTED,
+// it earns nothing by being exempt. Canon-violations and unaudited filings never reach `ranked`, so a
+// failed digest still sits out. The paper stays at `top`: a full list gives up its last pick.
+function reserveDigestSeat(selected, ranked, top) {
+  const digest = (ranked || []).find(r => r.desk === 'undocked-digest');
+  if (!digest || selected.includes(digest.stem)) return { selected, stem: null };
+  const next = selected.length >= top ? selected.slice(0, top - 1) : selected.slice();
+  next.push(digest.stem);
+  return { selected: next, stem: digest.stem };
+}
 function printedCrossovers(crossovers, selected) {
   const printed = new Set(selected || []);
   return (crossovers || []).map(x => {
@@ -1054,7 +1067,7 @@ async function stepCurate(cycle) {
     .sort((a, b) => ((b.grade == null ? -1 : b.grade) - (a.grade == null ? -1 : a.grade)) || (b.score - a.score));
   // Storyline variety works INSIDE a grade (codex .79 #2): a lower grade never takes a slot from a
   // higher one for being on a fresh thread. Per grade: unique threads first, then that grade's rest.
-  const seen = new Set(), selected = [];
+  const seen = new Set(); let selected = [];
   const tiers = [...new Set(ranked.map(r => r.grade))];
   for (const g of tiers) {
     const tier = ranked.filter(r => r.grade === g);
@@ -1069,8 +1082,11 @@ async function stepCurate(cycle) {
       if (!selected.includes(r.stem)) selected.push(r.stem);
     }
   }
+  const seat = reserveDigestSeat(selected, ranked, top);
+  selected = seat.selected;
+  if (seat.stem) console.log('  [seat] UNDOCKED weekly digest seated: ' + seat.stem);
   const excluded = set.length - ranked.length - unaudited.length;
-  const out = { cycle: String(cycle), top, selected, ranked, excludedCanonViolations: excluded, unaudited, crossovers };
+  const out = { cycle: String(cycle), top, selected, ranked, excludedCanonViolations: excluded, unaudited, crossovers, digestSeat: seat.stem };
   const p = path.join(ROOT, 'output', 'edition_curation_c' + cycle + '.json');
   fs.writeFileSync(p, JSON.stringify(out, null, 2));
   for (const r of ranked) console.log((selected.includes(r.stem) ? '  PRINT ' : '        ') + (r.grade == null ? '-  ' : r.grade + '/4') + ' ' + String(r.score).padStart(5) + '  ' + r.stem);
@@ -1336,4 +1352,4 @@ if (require.main === module) {
 module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
-  auditOne, loadLedgerProfiles, worldSummaryText, deskSystem, crossoverCitizens, printedCrossovers, undockedGroundTruth, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };
+  auditOne, loadLedgerProfiles, worldSummaryText, deskSystem, crossoverCitizens, printedCrossovers, reserveDigestSeat, undockedGroundTruth, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };

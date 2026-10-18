@@ -149,12 +149,15 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 03:01 es — engine.294: since C104 every week 8–17 citizens got a life-history line that ends in a stray code word: "found a quiet minute at a small gallery and $MOOD", "bought a new A's jersey and $MOOD" — 96 lines on live through C111. Cause was one bad content row (the mood word itself saved as the mood text); it is fixed in code and goes out with tonight's push, so no new ones. The 96 already printed are the record as it stands. Leave them, or repair each to a real mood ("…and let the week's noise settle") so no citizen's history carries the stray word? A repair rewrites published citizen history, so it is yours.
 
 04:37 rb — es stopped at ~03:52 after a commit was refused in its own session: the next fix (a LifeHistory trim in utilities/archiveLifeHistory.js + its test) sits uncommitted in the tree. A refusal in a seat is yours, not ours to route around, so it stays as it is — not committed, not benched, not reverted — until you say commit / bench / drop. Nothing live depends on it; PROD is at stage 4h @139 with four bench-proven fixes from tonight.
+03:40 rb — Elena Soria Dominguez (Transit Hub lead, POP-00791) has a Tier-1 line 'Reads the anti-displacement and workforce mechanics end to end.' The Transit Hub's anti-displacement assessment is in published editions (79, 80, 85, 93). Tonight's sweep cuts displacement premises; this one is canon, so it stays until you say cut or keep.
 
 ## 7. Working ledger
 
 Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman register, results first. Purge at the start of each night (git keeps history); do not write narrative here.
 
 03:34 rb PURGE §7 + stray rb lines under §8 (night of 2026-10-16; git keeps history). BOOT overnight (builder 03:3x: support es; ask = clean up hardcoded events in the engines that do not fit how the sim works now, no system rebuilds; es uses codex + agy often). WAKE set (recurring :26, job 23c748f8). es WORKING (rewriting the event-engines plan to the ask, advisor pass). Guests: none claimed by rb.
+
+03:40 rb BUILD engine.299 Task 7 rb half: d1877af0 7eb7fd5a 074c0959 6a25bcde (writer files); ECL R130 R219 Text trued LIVE, read back OK (was: 'priced out the bigger apartment…' / 'Mandela Parkway encampment site…'); R532 no premise, kept; Elena essence line HELD → §6. compressLifeHistory displacementmove left for es Task 4 rename. CLAIM codex es engine.299 Task 1 diff review (TASK docs/for-claude-review/2026-10-18-engine299-task1-diff-review-TASK.md; dispatch when es's cut lands).
 
 ## 8. Stop rule and usage
 

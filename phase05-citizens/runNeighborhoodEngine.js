@@ -299,7 +299,9 @@ function runNeighborhoodEngine_(ctx) {
   var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
 
   var globalEvents = 0;
-  var EVENT_LIMIT = 6;
+  // engine.299 Task 13 (SIM_DOCTRINE §1: "No caps, no quotas, no curation of what the world produces"): the citywide
+  // EVENT_LIMIT of 6 is gone — it stopped the loop after six lines, so citizens late in ledger order never drew. Each
+  // citizen's own drift odds decide; globalEvents stays as the count.
 
   // Track for summary
   var neighborhoodDriftEvents = [];
@@ -418,8 +420,6 @@ function runNeighborhoodEngine_(ctx) {
   // ITERATE THROUGH CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
   for (var r = 0; r < rows.length; r++) {
-
-    if (globalEvents >= EVENT_LIMIT) break;
 
     var row = rows[r];
 

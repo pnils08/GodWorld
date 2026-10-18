@@ -233,7 +233,10 @@ function loadFrame(cycle, root = ROOT) {
   // The writer is handed display names only. Record ids (initiative, business,
   // office) stay on this side: they are how a row is found, never what is printed.
   const names = new Set(['Oakland', 'City Hall', 'Civis Systems', 'Civis Systems Journal', 'Elias Varek', 'Oaks', 'Oakland Oaks', 'Paulson',
-    "A's", 'A\u2019s', 'Baylight', 'The Town']);
+    "A's", 'A\u2019s', 'Baylight', 'The Town',
+    // his published background (IDENTITY.md): the people and places he may name from it
+    'Port of Oakland', 'Port', 'Highland Hospital', 'Estuary', 'West Oakland', 'Civis 4D Urban Overlay Engine', '4D',
+    'Mike Paulson', 'Elliot Abraham', 'Avery Santana', 'Jax Caldera', 'Keisha Ramos', 'Baylight Authority']);
   const initiativeNames = new Map();
   for (const tab of ['Neighborhood_Demographics', 'Civic_Office_Ledger', 'Initiative_Tracker', 'Business_Ledger']) {
     for (const row of lines(path.join(beats, tab + '.jsonl'))) {

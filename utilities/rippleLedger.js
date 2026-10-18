@@ -98,7 +98,7 @@ function recordRipple_(ctx, e) {
 }
 
 /**
- * Convenience: persist a story hook (gentrification/migration shape) as a ripple row.
+ * Convenience: persist a story hook (trajectory/migration/household shape) as a ripple row.
  * Hooks carry {hookType, severity, description, cycleGenerated, neighborhood, popid?}.
  */
 function recordHookRipple_(ctx, causeType, hook, sourceEngine) {

@@ -20,6 +20,10 @@ Deliver a patch, not a commit: `output/codex/engine299-task7-engine.patch` plus 
 4. **`utilities/ensureCrimeMetrics.js:106`** East Oakland `character: 'east flatlands, the Baylight frontier'` contradicts canon: Baylight is the harbor waterfront by Jack London / West Oakland, council D2. Replace with a character drawn from `docs/canon/INSTITUTIONS.md` §Neighborhoods (or Neighborhood_Map) for East Oakland, citing the line you used. Trace where `character` lands.
 5. Comments in the four files: fix only those that are now false (e.g. `neighborhoodTrajectoryEngine.js:31` if the hook text changes). Lineage notes stay.
 
+## For the builder (in the md)
+
+List every reader of the 'displaced' MigrationReason value, of `DisplacementRisk`, and of the FORCED_MIGRATION / MASS_EXODUS hook types, with file:line. Whether the displacement-risk lane itself stays (as income-fit mechanics) or is cut is the builder's call. This list is what such a cut would touch. Change nothing on that lane.
+
 ## Prove it
 
 - `node --check` on every changed file. Run the existing tests that touch these files (`scripts/migrationRelocation.test.js` and any the grep finds), plus `npm test` if it runs in your sandbox. Report subprocess-EPERM failures as environment, as before.

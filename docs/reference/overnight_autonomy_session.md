@@ -150,6 +150,7 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 
 04:37 rb — es stopped at ~03:52 after a commit was refused in its own session: the next fix (a LifeHistory trim in utilities/archiveLifeHistory.js + its test) sits uncommitted in the tree. A refusal in a seat is yours, not ours to route around, so it stays as it is — not committed, not benched, not reverted — until you say commit / bench / drop. Nothing live depends on it; PROD is at stage 4h @139 with four bench-proven fixes from tonight.
 03:40 rb — Elena Soria Dominguez (Transit Hub lead, POP-00791) has a Tier-1 line 'Reads the anti-displacement and workforce mechanics end to end.' The Transit Hub's anti-displacement assessment is in published editions (79, 80, 85, 93). Tonight's sweep cuts displacement premises; this one is canon, so it stays until you say cut or keep.
+05:36 rb — The move engine has a 'displacement risk' lane: a 0–10 score on each citizen (ledger column AL) that, at 9+, forces a household to move. Tonight only its wording changes to income fit ("the budget no longer fit the hood"); the lane, the column, and who it moves stay. Keep it as income-fit mechanics, or cut the lane? Codex's Task 7 md (output/codex/engine299-task7-engine.md) lists every reader a cut would touch — the city-hall initiative packets read the column.
 
 ## 7. Working ledger
 
@@ -167,6 +168,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 05:03 rb SPEC engine.299 Task 2 offender scan TASK for codex: docs/for-claude-review/2026-10-18-engine299-task2-offender-scan-impl-TASK.md (deadBranchScan.js --offenders, patch to output/codex/). codex held by es (review 3); es dispatches after.
 05:30 rb SPEC engine.299 Task 7 engine side TASK for codex: docs/for-claude-review/2026-10-18-engine299-task7-engine-side-impl-TASK.md (move phrases + hook text + drift labels to income fit; A4 East Oakland label; DisplacementRisk column, enum values, crime mods KEPT — no rebuild, no engine-words gate). es dispatches.
 05:32 rb CHECK es WORKING (Task 3 follow-up, no prompt). Live: PROD @145 stage 4n (engine.299 T1). git: 81ffe5c8 T2 scan landed, fbcb6e7b T3 cut. codex: es's T3 review dispatch sat unsubmitted (idle since 05:27) → rb sent C-m 05:32, codex WORKING; es told. agy free. Inbox: rb T7 engine-side TASK waiting es dispatch.
+05:36 rb CLAIM agy rb engine.299 Task 3 pool-text read (→ output/antigravity/2026-10-18-engine299-task3-pool-read.md). T7 TASK + reader-list section (es ask); §6 displacement-lane question filed.
 
 ## 8. Stop rule and usage
 

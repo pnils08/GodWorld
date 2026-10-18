@@ -45,9 +45,6 @@ const DRY = ARGV.includes('--dry-run');
 const arg = (k, d) => { const m = ARGV.find((a) => a.startsWith(`--${k}=`)); return m ? m.split('=')[1] : d; };
 const WAKE = (arg('wake', 'evening') || 'evening').toLowerCase();
 const FORCE_POP = arg('pop', null);
-// engine.197 — Elias Varek writes his own page once a Cycle (scripts/civisJournal.js, run-cycle);
-// the lottery leaves him to that cadence (builder 2026-10-17). --pop still reaches him.
-const OWN_CADENCE = new Set(['POP-00789']);
 // engine.197 — a child under 7 is not drawn (builder 2026-10-17: "under 7 years old"). Unknown age stays in.
 const MIN_WAKE_AGE = 7;
 
@@ -233,10 +230,9 @@ async function generateVoice(system, user) {
   const poolStats = {};
   const ledgerPool = await buildPool({ shapedMin: 0, lifeMinChars: 0, stats: poolStats });
   const forced = String(FORCE_POP || '').toUpperCase();
-  const ownCadence = ledgerPool.filter((p) => OWN_CADENCE.has(p.popId) && p.popId !== forced).length;
   const tooYoung = ledgerPool.filter((p) => typeof p.age === 'number' && p.age < MIN_WAKE_AGE && p.popId !== forced).length;
-  const pool = ledgerPool.filter((p) => p.popId === forced || (!OWN_CADENCE.has(p.popId) && !(typeof p.age === 'number' && p.age < MIN_WAKE_AGE)));
-  logLine(`pool: ${pool.length} of ${poolStats.rows} ledger rows (skipped: dial ${poolStats.dial}, name/hood ${poolStats.nameHood}, rule ${poolStats.rule}, own cadence ${ownCadence}, under ${MIN_WAKE_AGE} ${tooYoung}) (wake=${WAKE}, cycle=${cycle}, dry=${DRY}, lived events=${livedList.length})`);
+  const pool = ledgerPool.filter((p) => p.popId === forced || !(typeof p.age === 'number' && p.age < MIN_WAKE_AGE));
+  logLine(`pool: ${pool.length} of ${poolStats.rows} ledger rows (skipped: dial ${poolStats.dial}, name/hood ${poolStats.nameHood}, rule ${poolStats.rule}, under ${MIN_WAKE_AGE} ${tooYoung}) (wake=${WAKE}, cycle=${cycle}, dry=${DRY}, lived events=${livedList.length})`);
   if (!pool.length) { logLine('empty pool — nothing to wake'); process.exit(0); }
 
   const state = loadState();

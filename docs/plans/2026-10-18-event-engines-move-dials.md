@@ -3,7 +3,7 @@ title: Event Engines Move Dials — review and repair Plan
 created: 2026-10-18
 updated: 2026-10-18
 type: plan
-tags: [engine, citizens, dials, events, draft]
+tags: [engine, citizens, dials, events, parked]
 sources:
   - builder 2026-10-18 (verbatim below)
   - docs/SIM_DOCTRINE.md §1–§3, §7, §15–§17
@@ -140,4 +140,4 @@ Sign skews up (≈ .6 / .4) except where the fact's direction is known, which de
 
 ## Changelog
 
-- 2026-10-18 (engine-sheet) — Created with the builder's verbatim and his correction; audit and tasks follow.
+- 2026-10-18 (engine-sheet) — Created; the builder rejected the reading four times the same hour (verbatim above; ECL is the wording source for the real life-event engines, not the subject of this work). PARKED — no lane acts on it until the builder restates the ask.

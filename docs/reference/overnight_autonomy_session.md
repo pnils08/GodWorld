@@ -170,6 +170,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 05:32 rb CHECK es WORKING (Task 3 follow-up, no prompt). Live: PROD @145 stage 4n (engine.299 T1). git: 81ffe5c8 T2 scan landed, fbcb6e7b T3 cut. codex: es's T3 review dispatch sat unsubmitted (idle since 05:27) → rb sent C-m 05:32, codex WORKING; es told. agy free. Inbox: rb T7 engine-side TASK waiting es dispatch.
 05:36 rb CLAIM agy rb engine.299 Task 3 pool-text read (→ output/antigravity/2026-10-18-engine299-task3-pool-read.md). T7 TASK + reader-list section (es ask); §6 displacement-lane question filed.
 05:42 rb SPEC engine.299 Task 4 wave C TASK for codex (GAME/MEDIA/CIVIC mode writers + tier1 seed kinds; future seeds only, essence text untouched): docs/for-claude-review/2026-10-18-engine299-task4c-mode-writers-impl-TASK.md. T7 TASK += displacementmove paired rename w/ alias for history. es dispatches.
+05:52 rb FOLD agy T3 pool read: HIGH verified (runNeighborhoodEngine:491-494 stamps hood trajectory sign on every texture line regardless of text — decay hood can write 'bars filling earlier' as Outabout-Down); smaller: invented facts in campus/stadium/construction/arts/clinic pools, empty holidayNeighborhoodEvents stub, FirstFriday dup. Sent to es. Plan held by es (uncommitted) — es adds the Reviews row. RELEASE agy (/clear).
 
 ## 8. Stop rule and usage
 

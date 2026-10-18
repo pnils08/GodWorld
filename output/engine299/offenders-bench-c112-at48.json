@@ -1,0 +1,1395 @@
+{
+  "generatedAt": "2026-10-18T16:54:54.803Z",
+  "sheet": "bench",
+  "cycle": 112,
+  "scannedLines": 2249,
+  "inert": {
+    "total": 1,
+    "share": 0.00044464206313917296,
+    "byTag": {
+      "Sports": 1
+    },
+    "byEngine": {
+      "inferred:phase05-citizens/applyGameNightMoments.js": 1
+    },
+    "codeSites": [
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 118,
+        "tag": "Life"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 142,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 149,
+        "tag": "Team"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 172,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 208,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 223,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 229,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 235,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 241,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 249,
+        "tag": "Life"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 257,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 263,
+        "tag": "Season"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 269,
+        "tag": "Season"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 275,
+        "tag": "Season"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 290,
+        "tag": "Team"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 297,
+        "tag": "Team"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 304,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 311,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 318,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 325,
+        "tag": "Team"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 332,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 426,
+        "tag": "Holiday"
+      },
+      {
+        "file": "phase04-events/generateGameModeMicroEvents.js",
+        "line": 520,
+        "tag": "Life"
+      },
+      {
+        "file": "phase04-events/generateGenericCitizenMicroEvent.js",
+        "line": 44,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase04-events/generateGenericCitizenMicroEvent.js",
+        "line": 603,
+        "tag": "Background"
+      },
+      {
+        "file": "phase04-events/generateGenericCitizenMicroEvent.js",
+        "line": 606,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase04-events/generateGenericCitizenMicroEvent.js",
+        "line": 607,
+        "tag": "FirstFriday"
+      },
+      {
+        "file": "phase04-events/generateGenericCitizenMicroEvent.js",
+        "line": 608,
+        "tag": "CreationDay"
+      },
+      {
+        "file": "phase04-events/generateGenericCitizenMicroEvent.js",
+        "line": 609,
+        "tag": "Holiday"
+      },
+      {
+        "file": "phase04-events/generateGenericCitizenMicroEvent.js",
+        "line": 610,
+        "tag": "Sports"
+      },
+      {
+        "file": "phase04-events/generateGenericCitizenMicroEvent.js",
+        "line": 613,
+        "tag": "PrevEvening"
+      },
+      {
+        "file": "phase05-citizens/applyGameNightMoments.js",
+        "line": 146,
+        "tag": "Sports"
+      },
+      {
+        "file": "phase05-citizens/applyGameNightMoments.js",
+        "line": 176,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 346,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 421,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 447,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 981,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 990,
+        "tag": "QoL"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 992,
+        "tag": "Weather"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1010,
+        "tag": "PrevEvening"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1015,
+        "tag": "Lifestyle"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1016,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1019,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1020,
+        "tag": "FirstFriday"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1021,
+        "tag": "CreationDay"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1022,
+        "tag": "Holiday"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1023,
+        "tag": "Sports"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1029,
+        "tag": "Background"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1030,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1031,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1032,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1033,
+        "tag": "Micro-Event"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1034,
+        "tag": "Civic Perception"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1035,
+        "tag": "Civic Perception"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1037,
+        "tag": "Lifestyle"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1038,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1039,
+        "tag": "Civic Perception"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 1041,
+        "tag": "Daily"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 2329,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 3294,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 58,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 127,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 128,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 129,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 130,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 139,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 141,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 148,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 153,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 155,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 160,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 170,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 171,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 172,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 173,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 181,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 182,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 186,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 187,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 194,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 197,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 208,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 209,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 211,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 215,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 220,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 233,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 234,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 236,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 240,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 244,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 246,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 250,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 260,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 261,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 262,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 263,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 269,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 277,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 283,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 293,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 294,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 295,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 296,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 300,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 310,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 311,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 312,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 313,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 320,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 327,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 329,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 337,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateCivicModeEvents.js",
+        "line": 468,
+        "tag": "Civic"
+      },
+      {
+        "file": "phase05-citizens/generateMediaModeEvents.js",
+        "line": 56,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/generateMediaModeEvents.js",
+        "line": 153,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateMediaModeEvents.js",
+        "line": 233,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateMediaModeEvents.js",
+        "line": 273,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateMediaModeEvents.js",
+        "line": 274,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateMediaModeEvents.js",
+        "line": 275,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/generateMediaModeEvents.js",
+        "line": 276,
+        "tag": "Personal"
+      },
+      {
+        "file": "phase05-citizens/runNeighborhoodEngine.js",
+        "line": 264,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/runNeighborhoodEngine.js",
+        "line": 550,
+        "tag": "Neighborhood"
+      },
+      {
+        "file": "phase05-citizens/runNeighborhoodEngine.js",
+        "line": 629,
+        "tag": "FirstFriday"
+      },
+      {
+        "file": "phase05-citizens/runNeighborhoodEngine.js",
+        "line": 631,
+        "tag": "CreationDay"
+      },
+      {
+        "file": "phase05-citizens/runNeighborhoodEngine.js",
+        "line": 633,
+        "tag": "Holiday"
+      }
+    ]
+  },
+  "structural": {
+    "total": 7,
+    "byTag": {
+      "Advancement": 6,
+      "CareerState": 1
+    },
+    "rows": [
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C111 (byline-landed): a Bay Tribune sports desk piece, C110",
+        "popId": "POP-00007"
+      },
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C111 (quoted): a Bay Tribune civic desk piece, C110",
+        "popId": "POP-00034"
+      },
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C111 (quoted): a Bay Tribune civic desk piece, C110",
+        "popId": "POP-00034"
+      },
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C111 (quoted): a Bay Tribune sports desk piece, C110",
+        "popId": "POP-00170"
+      },
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C111 (quoted): a Bay Tribune sports desk piece, C110",
+        "popId": "POP-00198"
+      },
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C111 (quoted): a Bay Tribune sports desk piece, C110",
+        "popId": "POP-00018"
+      },
+      {
+        "tag": "CareerState",
+        "text": "industry=service|employer=large|level=1|careerMod=0.93",
+        "popId": "POP-00240"
+      }
+    ]
+  },
+  "premise": [
+    {
+      "where": "code",
+      "file": "lib/coverageAnchorRetirements.js",
+      "line": 72,
+      "text": "displacement intake",
+      "kind": "string",
+      "allowed": true,
+      "reason": "An avoidFramings entry: tells the desks NOT to use this framing (anti-premise).",
+      "prose": true
+    },
+    {
+      "where": "code",
+      "file": "lib/neighborhoodSlice.js",
+      "line": 15,
+      "text": " * S315: trajectory block replaces the gentrification block on Neighborhood_Map.",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "lib/resonanceRecall.js",
+      "line": 135,
+      "text": "displacementmove",
+      "kind": "string",
+      "allowed": true,
+      "reason": "History read alias: stored registers carry the old key (engine.299 Task 7).",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase02-world-state/loadEventContentLedger.js",
+      "line": 73,
+      "text": " S.neighborhoodState[hood].displacementPressure",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase03-population/updateCrimeMetrics.js",
+      "line": 9,
+      "text": " * - Adds spillover diffusion + enforcement displacement",
+      "kind": "comment",
+      "allowed": true,
+      "reason": "Enforcement spillover between areas, not a displacement premise.",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase03-population/updateCrimeMetrics.js",
+      "line": 1215,
+      "text": " * - suppress_hotspots: Higher displacement, better clearance, no QoL focus",
+      "kind": "comment",
+      "allowed": true,
+      "reason": "Enforcement spillover between areas, not a displacement premise.",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase03-population/updateCrimeMetrics.js",
+      "line": 1216,
+      "text": " * - community_presence: Lower displacement, modest clearance, reduces QoL issues",
+      "kind": "comment",
+      "allowed": true,
+      "reason": "Enforcement spillover between areas, not a displacement premise.",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/bondEngine.js",
+      "line": 2675,
+      "text": " envy, displacement grievance — are design-listed, not yet built.)",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/generateCitizensEvents.js",
+      "line": 369,
+      "text": " engine.299 Task 4: the money lines gate on the row's own debt, not DisplacementRisk",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/generateCitizensEvents.js",
+      "line": 370,
+      "text": "DisplacementRisk",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/generateCitizensEvents.js",
+      "line": 1152,
+      "text": "displacement",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/generateCitizensEvents.js",
+      "line": 1153,
+      "text": "displacement",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/generateCitizensEvents.js",
+      "line": 1172,
+      "text": "displacementmove",
+      "kind": "string",
+      "allowed": true,
+      "reason": "History read alias: stored registers carry the old key (engine.299 Task 7).",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/generateCitizensEvents.js",
+      "line": 1694,
+      "text": " displacement crisis, C115/C116). Counts stay at city scale; only the",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/generateCitizensEvents.js",
+      "line": 1702,
+      "text": " gentrification stuck-emitter; the dial is now attached to live mechanics",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/generateCitizensEvents.js",
+      "line": 2908,
+      "text": " citywide mood alone. WealthLevel 0-10; DisplacementRisk 0-10 (≥7 = the",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/generateCitizensEvents.js",
+      "line": 2922,
+      "text": " migration engine's DisplacementRisk — a real-Oakland displacement premise is not a fact about this citizen.",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/householdFormationEngine.js",
+      "line": 115,
+      "text": " migrationTrackingEngine.js for the displacement-risk buffer; legal var",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 6,
+      "text": " * Tracks individual migration decisions, displacement risk, and migration events.",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 8,
+      "text": " * Part of: Week 4 Gentrification & Migration Tracking",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 11,
+      "text": " * - Displacement risk assessment (0-10 scale)",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 13,
+      "text": " * - Migration reason detection (job, family, cost, crime, opportunity, displaced)",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 28,
+      "text": " *   and wrote DisplacementRisk + MigrationIntent back via direct setValues",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 42,
+      "text": " * - Writes displacement risk and migration intent to ctx.ledger.rows;",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 80,
+      "text": "displaced",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 103,
+      "text": " Displacement risk weights",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 155,
+      "text": " Step 1: Assess displacement risk for all citizens",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 164,
+      "text": " For now, just track existing displaced citizens",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 180,
+      "text": " DISPLACEMENT RISK ASSESSMENT",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 196,
+      "text": "DisplacementRisk",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 213,
+      "text": " live SL income sum — a 192k earner got \"priced out\" off a 50k ledger",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 234,
+      "text": " engine.90 Commit 8: a traded-away player carries no Oakland displacement risk or move intent",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 242,
+      "text": " Calculate displacement risk",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 245,
+      "text": " Neighborhood displacement pressure",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 388,
+      "text": " Phase 42 §5.6: read/mutate ctx.ledger.rows; sees DisplacementRisk values",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 389,
+      "text": " assessDisplacementRisk_ just wrote earlier in this engine.",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 396,
+      "text": "DisplacementRisk",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 415,
+      "text": " engine.90 Commit 8: a traded-away player carries no Oakland displacement risk or move intent",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 466,
+      "text": " Check for citizens with very high displacement risk",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 516,
+      "text": "displaced",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 545,
+      "text": "     at ingest without needing displacement pressure.",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 637,
+      "text": "DisplacementRisk",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 721,
+      "text": " no rent to be priced out of — distress sales are the stress dissolution's",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 743,
+      "text": " income ratio at dialOpenMoveThresholdMult of it. The pressure lane (displacement)",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 964,
+      "text": " DisplacementRisk + MigrationIntent values written upstream.",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 971,
+      "text": "DisplacementRisk",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 981,
+      "text": " engine.90 Commit 8: a traded-away player carries no Oakland displacement risk or move intent",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 986,
+      "text": " Count citizens at severe displacement risk",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 1002,
+      "text": " the DisplacementRisk + MigrationIntent values written upstream.",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 1013,
+      "text": "DisplacementRisk",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 1022,
+      "text": " engine.90 Commit 8: a traded-away player carries no Oakland displacement risk or move intent",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/migrationTrackingEngine.js",
+      "line": 1031,
+      "text": " Track displacement by neighborhood — count actual planning intent",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/neighborhoodTrajectoryEngine.js",
+      "line": 7,
+      "text": " * - Full repurpose of gentrificationEngine v1.1 (git mv, same file lineage).",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/neighborhoodTrajectoryEngine.js",
+      "line": 8,
+      "text": " *   The gentrification block was a real-world Oakland displacement-study",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/neighborhoodTrajectoryEngine.js",
+      "line": 31,
+      "text": " *                            DisplacementRisk in migrationTrackingEngine (kept:",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase05-citizens/neighborhoodTrajectoryEngine.js",
+      "line": 346,
+      "text": " engine.45 T1 instrumentation kept from gentrification lineage: hooks must",
+      "kind": "comment",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase06-analysis/applyMigrationDrift.js",
+      "line": 253,
+      "text": "severe-weather-displacement",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase06-analysis/applyMigrationDrift.js",
+      "line": 255,
+      "text": "chaos-displacement",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase06-analysis/applyMigrationDrift.js",
+      "line": 256,
+      "text": "high-chaos-displacement",
+      "kind": "string",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase07-evening-media/buildContractSeeds.js",
+      "line": 188,
+      "text": " * (targetScope 'citizen') still lead and are never displaced; the draw only",
+      "kind": "comment",
+      "allowed": true,
+      "reason": "Code-sense ordering comment, not citizen displacement (settled A1 context).",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "phase07-evening-media/buildContractSeeds.js",
+      "line": 495,
+      "text": " passed through verbatim otherwise) and are never displaced; the draw only",
+      "kind": "comment",
+      "allowed": true,
+      "reason": "Code-sense ordering comment, not citizen displacement (settled A1 context).",
+      "prose": false
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 619,
+      "text": "Reads the anti-displacement and workforce mechanics end to end.",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Elena POP-00791 published essence, held for the builder (A2).",
+      "prose": true
+    }
+  ],
+  "lifeVerbs": [
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 40,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 67,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 108,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 136,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 154,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 155,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 173,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 190,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 191,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 257,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 375,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 434,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 471,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 577,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 616,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "code",
+      "file": "utilities/tier1EssenceEvents.js",
+      "line": 650,
+      "text": "Promotion",
+      "kind": "string",
+      "allowed": true,
+      "reason": "Authored Tier-1 essence tag, not a color-pool promotion."
+    },
+    {
+      "where": "live:Event_Content_Ledger",
+      "row": 576,
+      "line": 576,
+      "text": "A restaurant owner in {hood} said he laid off two servers this week and wanted them to hear the names.",
+      "kind": "string",
+      "pool": "civicRole.business.down.M",
+      "allowed": true,
+      "reason": "Owner-engine pool (civicRole.*): the life event belongs to its own engine, not a color pool."
+    },
+    {
+      "where": "live:Event_Content_Ledger",
+      "row": 631,
+      "line": 631,
+      "text": "A couple in {hood} said they named them in their wedding speech, and showed the video.",
+      "kind": "string",
+      "pool": "civicRole.everyday.up.M",
+      "allowed": true,
+      "reason": "Owner-engine pool (civicRole.*): the life event belongs to its own engine, not a color pool."
+    },
+    {
+      "where": "live:Event_Content_Ledger",
+      "row": 757,
+      "line": 757,
+      "text": "Promoted at {employer}",
+      "kind": "string",
+      "pool": "lifeEvent.promotion.up.L",
+      "allowed": true,
+      "reason": "Owner-engine pool (lifeEvent.*): the life event belongs to its own engine, not a color pool."
+    },
+    {
+      "where": "live:Event_Content_Ledger",
+      "row": 764,
+      "line": 764,
+      "text": "Laid off from {employer} when the department was cut.",
+      "kind": "string",
+      "pool": "lifeEvent.promotion.down.L",
+      "allowed": true,
+      "reason": "Owner-engine pool (lifeEvent.*): the life event belongs to its own engine, not a color pool."
+    }
+  ],
+  "acceptanceEmpty": false
+}

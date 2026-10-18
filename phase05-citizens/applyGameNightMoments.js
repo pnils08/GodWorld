@@ -143,7 +143,9 @@ function sportsNamedRoute_(eventType, cls) {
   if (t === 'injury') return { tag: 'Sports-Injured', pool: 'injured' };
   if (t === 'roster-move' || t === 'trade-recap' || t === 're-signing' || t === 'draft') return { tag: 'Sports-Moved', pool: 'moved' };
   if (t === 'player-feature' || t === 'awards') return { tag: 'Reputation', pool: 'featured' };
-  return { tag: 'Sports', pool: 'named' };
+  // engine.299: the 'named' pool (their name in the papers, on the radio, asked about at dinner) says the citizen was
+  // talked about — sociability up. A bare 'Sports' maps to no dial.
+  return { tag: 'Sports-Sociability-Up-S', pool: 'named' };
 }
 
 // the franchises a GAME-clock citizen works for: employer of record, plus a role that names

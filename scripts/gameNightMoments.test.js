@@ -89,7 +89,7 @@ assert.deepStrictEqual(r.tags['POP-00025'], ['Sports-Played', 'Sports-Injured'])
 assert.deepStrictEqual(r.tags['POP-01024'], ['Sports-Played', 'Sports-Moved']);
 assert.deepStrictEqual(r.tags['POP-01028'], ['Sports-Played'], 'Jr. matched');
 assert.deepStrictEqual(r.tags['POP-00019'], ['Reputation']);
-assert.deepStrictEqual(r.tags['POP-00527'], ['Sports'], 'any other kind: a plain, inert life event');
+assert.deepStrictEqual(r.tags['POP-00527'], ['Sports-Sociability-Up-S'], 'any other kind: being named in coverage moves sociability (engine.299 — no inert line)');
 assert.ok(!r.tags['POP-00003'], 'a typo never resolves');
 assert.ok(!r.tags['POP-00202'], 'EVEN week: no fan line');
 for (const x of r.appended.filter((x) => String(x[3]).startsWith('Sports-Played'))) {

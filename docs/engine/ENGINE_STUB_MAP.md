@@ -1028,16 +1028,16 @@
 - **mulberry32GameMode_(seed)**
 
 - **generateGameModeMicroEvents_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.worldEvents
-  Writes: S.eventsGenerated, S.gameModeMicroEventDetails, S.gameModeMicroEvents
+  Reads: S.cityDynamics, S.cycleId, S.engine299, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.worldEvents
+  Writes: S.engine299, S.eventsGenerated, S.gameModeMicroEventDetails, S.gameModeMicroEvents
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### generateGenericCitizenMicroEvent.js
 - **generateGenericCitizenMicroEvents_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.eventsGenerated, S.microEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.engine299, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Writes: S.engine299, S.eventsGenerated, S.microEvents
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -1908,8 +1908,8 @@
 - **mulberry32CivicMode_(seed)**
 
 - **generateCivicModeEvents_(ctx)**
-  Reads: S.cityDynamics, S.civicLoad, S.crimeMetrics, S.cycleId, S.eventArcs, S.eventsGenerated, S.grantsThisCycle, S.holiday, S.holidayLabel, S.holidayPriority, S.initiativeEvents, S.sportsSeason, S.votesThisCycle, S.weather
-  Writes: S.civicModeEventDetails, S.civicModeEvents, S.eventsGenerated
+  Reads: S.cityDynamics, S.civicLoad, S.crimeMetrics, S.cycleId, S.engine299, S.eventArcs, S.eventsGenerated, S.grantsThisCycle, S.holiday, S.holidayLabel, S.holidayPriority, S.initiativeEvents, S.sportsSeason, S.votesThisCycle, S.weather
+  Writes: S.civicModeEventDetails, S.civicModeEvents, S.engine299, S.eventsGenerated
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -1938,8 +1938,8 @@
 - **mulberry32MediaMode_(seed)**
 
 - **generateMediaModeEvents_(ctx)**
-  Reads: S.cityDynamics, S.civicLoad, S.crimeMetrics, S.cycleId, S.eventArcs, S.eventsGenerated, S.grantsThisCycle, S.holiday, S.holidayLabel, S.holidayPriority, S.sportsSeason, S.votesThisCycle, S.weather
-  Writes: S.eventsGenerated, S.mediaModeEventDetails, S.mediaModeEvents
+  Reads: S.cityDynamics, S.civicLoad, S.crimeMetrics, S.cycleId, S.engine299, S.eventArcs, S.eventsGenerated, S.grantsThisCycle, S.holiday, S.holidayLabel, S.holidayPriority, S.sportsSeason, S.votesThisCycle, S.weather
+  Writes: S.engine299, S.eventsGenerated, S.mediaModeEventDetails, S.mediaModeEvents
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -2602,8 +2602,8 @@
   Reads: S.neighborhoodState
 
 - **runNeighborhoodEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.season, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.eventsGenerated, S.neighborhoodAssignments, S.neighborhoodDriftEvents
+  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.engine299, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.season, S.weather, S.weatherMood, S.worldEvents
+  Writes: S.engine299, S.eventsGenerated, S.neighborhoodAssignments, S.neighborhoodDriftEvents
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -2663,6 +2663,8 @@
 - **countYouthEventsByType_(events)**
 
 - **countYouthEventsByLevel_(events)**
+
+- **youthWrittenTag_(kind, description)**
 
 - **recordYouthLifeHistory_(ctx, events)**
   Reads: S.absoluteCycle
@@ -4739,4 +4741,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1707
+**Functions mapped:** 1708

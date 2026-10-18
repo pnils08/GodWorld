@@ -124,10 +124,10 @@ function generateCivicModeEvents_(ctx) {
 
     // Base mayor events (always available)
     pool.push(
-      ev("weighed competing priorities in the administration's agenda", ["civic:mayor", "type:governance"], "Civic"),
-      ev("reviewed the latest approval numbers with senior staff", ["civic:mayor", "type:approval"], "Civic"),
-      ev("held a private meeting with department heads", ["civic:mayor", "type:internal"], "Civic"),
-      ev("stepped away from City Hall for a quiet walk", ["civic:mayor", "type:personal"], "Personal")
+      ev("weighed competing priorities in the administration's agenda", ["dial:drive:up", "civic:mayor", "type:governance"], "Civic"),
+      ev("reviewed the latest approval numbers with senior staff", ["dial:openness:up", "civic:mayor", "type:approval"], "Civic"),
+      ev("held a private meeting with department heads", ["dial:sociability:up", "civic:mayor", "type:internal"], "Civic"),
+      ev("stepped away from City Hall for a quiet walk", ["dial:composure:up", "civic:mayor", "type:personal"], "Personal")
     );
 
     // Vote outcome reactions
@@ -136,9 +136,9 @@ function generateCivicModeEvents_(ctx) {
       // civic.43 Task 3: a school board vote is not the mayor's to sign or to answer for
       if (vote.body && vote.body !== 'council') continue;
       if (vote.outcome === "PASSED") {
-        pool.push(ev("prepared signing remarks for the " + vote.name + " passage", ["civic:mayor", "type:legislation", "initiative:" + vote.name], "Civic"));
+        pool.push(ev("prepared signing remarks for the " + vote.name + " passage", ["dial:drive:up", "civic:mayor", "type:legislation", "initiative:" + vote.name], "Civic"));
       } else if (vote.outcome === "FAILED") {
-        pool.push(ev("assessed political fallout from the " + vote.name + " failure", ["civic:mayor", "type:legislation", "initiative:" + vote.name], "Civic"));
+        pool.push(ev("assessed political fallout from the " + vote.name + " failure", ["dial:composure:down", "civic:mayor", "type:legislation", "initiative:" + vote.name], "Civic"));
       }
     }
 
@@ -150,14 +150,14 @@ function generateCivicModeEvents_(ctx) {
 
     // Sentiment-driven
     if (sentiment < -0.3) {
-      pool.push(ev("faced mounting public frustration with City Hall", ["civic:mayor", "type:pressure"], "Civic"));
+      pool.push(ev("faced mounting public frustration with City Hall", ["dial:composure:down", "civic:mayor", "type:pressure"], "Civic"));
     } else if (sentiment > 0.3) {
-      pool.push(ev("felt cautious optimism about the city's direction", ["civic:mayor", "type:momentum"], "Civic"));
+      pool.push(ev("felt cautious optimism about the city's direction", ["dial:composure:up", "civic:mayor", "type:momentum"], "Civic"));
     }
 
     // Civic load pressure
     if (civicLoad === "load-strain") {
-      pool.push(ev("felt the weight of multiple civic crises converging", ["civic:mayor", "type:strain"], "Civic"));
+      pool.push(ev("felt the weight of multiple civic crises converging", ["dial:composure:down", "civic:mayor", "type:strain"], "Civic"));
     }
 
     return pool;
@@ -167,9 +167,9 @@ function generateCivicModeEvents_(ctx) {
     var pool = [];
 
     pool.push(
-      ev("prepared for upcoming council session", ["civic:council", "type:governance"], "Civic"),
-      ev("met with constituents about neighborhood concerns", ["civic:council", "type:constituent"], "Civic"),
-      ev("reviewed policy briefs from committee staff", ["civic:council", "type:policy"], "Civic"),
+      ev("prepared for upcoming council session", ["dial:drive:up", "civic:council", "type:governance"], "Civic"),
+      ev("met with constituents about neighborhood concerns", ["dial:sociability:up", "civic:council", "type:constituent"], "Civic"),
+      ev("reviewed policy briefs from committee staff", ["dial:openness:up", "civic:council", "type:policy"], "Civic"),
       ev("navigated internal caucus dynamics", ["civic:council", "type:faction", "faction:" + faction], "Civic")
     );
 
@@ -179,22 +179,22 @@ function generateCivicModeEvents_(ctx) {
       if (vote.outcome === "PASSED") {
         pool.push(
           ev("voted on the " + vote.name + " — measure passed " + (vote.voteCount || ""), ["civic:council", "type:vote", "initiative:" + vote.name], "Civic"),
-          ev("fielded constituent calls about the " + vote.name + " passage", ["civic:council", "type:constituent", "initiative:" + vote.name], "Civic")
+          ev("fielded constituent calls about the " + vote.name + " passage", ["dial:sociability:up", "civic:council", "type:constituent", "initiative:" + vote.name], "Civic")
         );
       } else {
         pool.push(
           ev("voted on the " + vote.name + " — measure failed " + (vote.voteCount || ""), ["civic:council", "type:vote", "initiative:" + vote.name], "Civic"),
-          ev("heard frustration from supporters of the " + vote.name, ["civic:council", "type:constituent", "initiative:" + vote.name], "Civic")
+          ev("heard frustration from supporters of the " + vote.name, ["dial:composure:down", "civic:council", "type:constituent", "initiative:" + vote.name], "Civic")
         );
       }
     }
 
     // Faction-specific pressure
     if (faction === "OPP" && sentiment < -0.2) {
-      pool.push(ev("pushed back on administration priorities in caucus", ["civic:council", "type:opposition"], "Civic"));
+      pool.push(ev("pushed back on administration priorities in caucus", ["dial:drive:up", "civic:council", "type:opposition"], "Civic"));
     }
     if (faction === "CRC") {
-      pool.push(ev("raised fiscal accountability concerns in committee", ["civic:council", "type:oversight"], "Civic"));
+      pool.push(ev("raised fiscal accountability concerns in committee", ["dial:integrity:up", "civic:council", "type:oversight"], "Civic"));
     }
 
     return pool;
@@ -205,19 +205,19 @@ function generateCivicModeEvents_(ctx) {
     var qol = crimeCity.qualityOfLifeIndex || 0.5;
 
     pool.push(
-      ev("reviewed active case files with senior prosecutors", ["civic:da", "type:legal"], "Civic"),
-      ev("coordinated with law enforcement on pending investigations", ["civic:da", "type:legal"], "Civic"),
+      ev("reviewed active case files with senior prosecutors", ["dial:drive:up", "civic:da", "type:legal"], "Civic"),
+      ev("coordinated with law enforcement on pending investigations", ["dial:sociability:up", "civic:da", "type:legal"], "Civic"),
       ev("prepared public safety statements for the press", ["civic:da", "type:public"], "Public"),
-      ev("balanced prosecutorial priorities with limited resources", ["civic:da", "type:governance"], "Civic")
+      ev("balanced prosecutorial priorities with limited resources", ["dial:composure:down", "civic:da", "type:governance"], "Civic")
     );
 
     if (qol < 0.4) {
-      pool.push(ev("addressed rising public concern about neighborhood safety", ["civic:da", "type:crime"], "Civic"));
+      pool.push(ev("addressed rising public concern about neighborhood safety", ["dial:composure:down", "civic:da", "type:crime"], "Civic"));
     }
 
     // OARI tension — DA and police chief both feel this
     if (hasActiveInitiative_("OARI", initiativeEvents)) {
-      pool.push(ev("weighed in on the alternative response initiative's legal framework", ["civic:da", "type:oari"], "Civic"));
+      pool.push(ev("weighed in on the alternative response initiative's legal framework", ["dial:openness:up", "civic:da", "type:oari"], "Civic"));
     }
 
     return pool;
@@ -230,24 +230,24 @@ function generateCivicModeEvents_(ctx) {
     var hotspots = crimeCity.hotspotHoods || [];   // hood names
 
     pool.push(
-      ev("reviewed department performance metrics with command staff", ["civic:police", "type:internal"], "Civic"),
-      ev("approved patrol deployment adjustments", ["civic:police", "type:operations"], "Civic"),
+      ev("reviewed department performance metrics with command staff", ["dial:openness:up", "civic:police", "type:internal"], "Civic"),
+      ev("approved patrol deployment adjustments", ["dial:drive:up", "civic:police", "type:operations"], "Civic"),
       ev("maintained public-facing composure during a press briefing", ["civic:police", "type:public"], "Public"),
-      ev("reflected on the demands of leading a department under scrutiny", ["civic:police", "type:personal"], "Personal")
+      ev("reflected on the demands of leading a department under scrutiny", ["dial:composure:down", "civic:police", "type:personal"], "Personal")
     );
 
     if (hotspots.length > 0) {
-      pool.push(ev("directed additional resources to " + pickOne(hotspots) + " after elevated activity", ["civic:police", "type:hotspot"], "Civic"));
+      pool.push(ev("directed additional resources to " + pickOne(hotspots) + " after elevated activity", ["dial:drive:up", "civic:police", "type:hotspot"], "Civic"));
     }
 
     if (strategy === "suppress_hotspots") {
       pool.push(ev("defended the focused enforcement strategy to community stakeholders", ["civic:police", "type:strategy"], "Civic"));
     } else if (strategy === "community_presence") {
-      pool.push(ev("reviewed community policing outcomes with district commanders", ["civic:police", "type:strategy"], "Civic"));
+      pool.push(ev("reviewed community policing outcomes with district commanders", ["dial:openness:up", "civic:police", "type:strategy"], "Civic"));
     }
 
     if (hasActiveInitiative_("OARI", initiativeEvents)) {
-      pool.push(ev("coordinated with OARI implementation team on dispatch protocols", ["civic:police", "type:oari"], "Civic"));
+      pool.push(ev("coordinated with OARI implementation team on dispatch protocols", ["dial:sociability:up", "civic:police", "type:oari"], "Civic"));
     }
 
     return pool;
@@ -257,10 +257,10 @@ function generateCivicModeEvents_(ctx) {
     var pool = [];
 
     pool.push(
-      ev("managed stakeholder expectations on project timelines", ["civic:director", "type:project"], "Civic"),
-      ev("reviewed budget projections with the finance team", ["civic:director", "type:budget"], "Civic"),
-      ev("prepared status reports for council oversight committee", ["civic:director", "type:reporting"], "Civic"),
-      ev("balanced community demands with institutional constraints", ["civic:director", "type:engagement"], "Civic")
+      ev("managed stakeholder expectations on project timelines", ["dial:drive:up", "civic:director", "type:project"], "Civic"),
+      ev("reviewed budget projections with the finance team", ["dial:openness:up", "civic:director", "type:budget"], "Civic"),
+      ev("prepared status reports for council oversight committee", ["dial:drive:up", "civic:director", "type:reporting"], "Civic"),
+      ev("balanced community demands with institutional constraints", ["dial:composure:down", "civic:director", "type:engagement"], "Civic")
     );
 
     // Check if their initiative had activity this cycle
@@ -274,13 +274,13 @@ function generateCivicModeEvents_(ctx) {
       for (var a = 0; a < eventArcs.length; a++) {
         var arc = eventArcs[a];
         if (arc.neighborhood === neighborhood && (arc.phase === "rising" || arc.phase === "peak")) {
-          pool.push(ev("felt neighborhood tension affecting project momentum in " + neighborhood, ["civic:director", "type:arc", "neighborhood:" + neighborhood], "Civic"));
+          pool.push(ev("felt neighborhood tension affecting project momentum in " + neighborhood, ["dial:composure:down", "civic:director", "type:arc", "neighborhood:" + neighborhood], "Civic"));
         }
       }
     }
 
     if (civicLoad === "load-strain") {
-      pool.push(ev("stretched thin across competing institutional demands", ["civic:director", "type:strain"], "Civic"));
+      pool.push(ev("stretched thin across competing institutional demands", ["dial:composure:down", "civic:director", "type:strain"], "Civic"));
     }
 
     return pool;
@@ -290,14 +290,14 @@ function generateCivicModeEvents_(ctx) {
     var pool = [];
 
     pool.push(
-      ev("coordinated logistics across city departments", ["civic:staff", "type:operations"], "Civic"),
-      ev("managed communications for upcoming public announcements", ["civic:staff", "type:comms"], "Civic"),
-      ev("reviewed scheduling conflicts for senior leadership", ["civic:staff", "type:admin"], "Civic"),
-      ev("handled sensitive constituent inquiries", ["civic:staff", "type:constituent"], "Civic")
+      ev("coordinated logistics across city departments", ["dial:sociability:up", "civic:staff", "type:operations"], "Civic"),
+      ev("managed communications for upcoming public announcements", ["dial:drive:up", "civic:staff", "type:comms"], "Civic"),
+      ev("reviewed scheduling conflicts for senior leadership", ["dial:drive:up", "civic:staff", "type:admin"], "Civic"),
+      ev("handled sensitive constituent inquiries", ["dial:warmth:up", "civic:staff", "type:constituent"], "Civic")
     );
 
     if (votesThisCycle.length > 0) {
-      pool.push(ev("managed post-vote communications for the administration", ["civic:staff", "type:vote"], "Civic"));
+      pool.push(ev("managed post-vote communications for the administration", ["dial:drive:up", "civic:staff", "type:vote"], "Civic"));
     }
 
     return pool;
@@ -307,26 +307,26 @@ function generateCivicModeEvents_(ctx) {
   // SHARED POOLS — all civic figures share these
   // ─────────────────────────────────────────────────────────────────────────
   var sharedPersonal = [
-    ev("found a quiet moment between obligations", ["type:personal"], "Personal"),
-    ev("reflected on the cost of public service", ["type:personal"], "Personal"),
-    ev("caught up with family after a long day", ["type:personal"], "Personal"),
-    ev("balanced the weight of the office with personal needs", ["type:personal"], "Personal")
+    ev("found a quiet moment between obligations", ["dial:composure:up", "type:personal"], "Personal"),
+    ev("reflected on the cost of public service", ["dial:composure:down", "type:personal"], "Personal"),
+    ev("caught up with family after a long day", ["dial:family:up", "type:personal"], "Personal"),
+    ev("balanced the weight of the office with personal needs", ["dial:composure:up", "type:personal"], "Personal")
   ];
 
   var holidayPool = [];
   if (holiday !== "none") {
     holidayPool.push(
       ev("attended a " + (S.holidayLabel || holiday) + " civic observance", ["type:holiday", "holiday:" + holiday], "Public"),
-      ev("balanced " + (S.holidayLabel || holiday) + " obligations with public duties", ["type:holiday", "holiday:" + holiday], "Personal")
+      ev("balanced " + (S.holidayLabel || holiday) + " obligations with public duties", ["dial:composure:down", "type:holiday", "holiday:" + holiday], "Personal")
     );
   }
 
   // Sentiment-wide pool
   var sentimentPool = [];
   if (sentiment < -0.4) {
-    sentimentPool.push(ev("sensed growing public discontent with city leadership", ["type:sentiment"], "Civic"));
+    sentimentPool.push(ev("sensed growing public discontent with city leadership", ["dial:composure:down", "type:sentiment"], "Civic"));
   } else if (sentiment > 0.4) {
-    sentimentPool.push(ev("noted a wave of civic optimism across the city", ["type:sentiment"], "Civic"));
+    sentimentPool.push(ev("noted a wave of civic optimism across the city", ["dial:composure:up", "type:sentiment"], "Civic"));
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -466,6 +466,26 @@ function generateCivicModeEvents_(ctx) {
     if (!picked) continue;
 
     var primaryTag = picked.primary || "Civic";
+    // engine.299: only the selected line's explicit meaning can grade an inert kind.
+    // Missing helpers fail closed; no rejected line reaches any write or event hook.
+    var writtenTag = '';
+    if (typeof nudgesForEvent_ === 'function') {
+      var ownFx = nudgesForEvent_(primaryTag, 1, picked.text);
+      if (Object.keys(ownFx).length) writtenTag = primaryTag;
+      else if (typeof gradedTag_ === 'function') {
+        var dialTags = (picked.tags || []).filter(function(t) { return /^dial:/.test(t); });
+        var signed = dialTags.length === 1 && /^dial:(composure|outabout|sociability|family|warmth|openness|fandom|drive|integrity):(up|down)(?::([SML]))?$/.exec(dialTags[0]);
+        if (signed) writtenTag = gradedTag_(primaryTag, signed[1], signed[2] === 'up', signed[3] || 'S');
+      }
+    }
+    if (!writtenTag) {
+      S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+      S.engine299.noDial++;
+      var source = (picked.tags || []).filter(function(t) { return t.indexOf('source:') === 0; })[0] || ('kind:' + primaryTag);
+      S.engine299.noDialBySource[source] = (S.engine299.noDialBySource[source] || 0) + 1;
+      continue;
+    }
+    primaryTag = writtenTag;
     var stamp = inWorldStamp_(ctx);
     var line = stamp + " — [" + primaryTag + "] " + picked.text;
 
@@ -480,7 +500,7 @@ function generateCivicModeEvents_(ctx) {
         ctx.now,
         popId,
         (first + ' ' + last).trim(),
-        "CIVIC-Event",
+        primaryTag,
         picked.text,
         neighborhood,
         cycle

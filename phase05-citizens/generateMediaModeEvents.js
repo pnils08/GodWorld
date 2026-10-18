@@ -150,7 +150,7 @@ function generateMediaModeEvents_(ctx) {
       ev("stared at a blank page for twenty minutes before the column came", ["media:columnist", "type:writing"], "Media"),
       ev("filed a column that landed harder than expected", ["media:columnist", "type:writing"], "Media"),
       ev("argued with an editor about word count", ["media:columnist", "type:internal"], "Media"),
-      ev("reread old columns looking for a thread to pull", ["media:columnist", "type:reflection"], "Personal"),
+      ev("reread old columns looking for a thread to pull", ["dial:openness:up", "media:columnist", "type:reflection"], "Personal"),
       ev("took notes at the game, listening to the crowd more than the commentary", ["media:columnist", "type:observation"], "Media")
     );
 
@@ -230,7 +230,7 @@ function generateMediaModeEvents_(ctx) {
       ev("shot three assignments in four hours across two neighborhoods", ["media:photo", "type:assignment"], "Media"),
       ev("waited forty minutes for the right light on a portrait", ["media:photo", "type:craft"], "Media"),
       ev("archived the week's selects and updated the photo desk", ["media:photo", "type:operations"], "Media"),
-      ev("carried forty pounds of gear up three flights of stairs", ["media:photo", "type:craft"], "Personal")
+      ev("carried forty pounds of gear up three flights of stairs", ["dial:drive:up", "media:photo", "type:craft"], "Personal")
     );
 
     if (weather.type === "rain" || weather.type === "storm") {
@@ -270,10 +270,10 @@ function generateMediaModeEvents_(ctx) {
   // SHARED POOLS
   // ─────────────────────────────────────────────────────────────────────────
   var sharedPersonal = [
-    ev("stayed late at the newsroom, watching the city go dark through the window", ["type:personal"], "Personal"),
-    ev("skipped lunch and didn't notice until 4 PM", ["type:personal"], "Personal"),
-    ev("walked home through the neighborhood instead of driving", ["type:personal"], "Personal"),
-    ev("thought about whether the work still matters the way it used to", ["type:personal"], "Personal")
+    ev("stayed late at the newsroom, watching the city go dark through the window", ["dial:outabout:down", "type:personal"], "Personal"),
+    ev("skipped lunch and didn't notice until 4 PM", ["dial:composure:down", "type:personal"], "Personal"),
+    ev("walked home through the neighborhood instead of driving", ["dial:outabout:up", "type:personal"], "Personal"),
+    ev("thought about whether the work still matters the way it used to", ["dial:drive:down", "type:personal"], "Personal")
   ];
 
   var holidayPool = [];
@@ -426,6 +426,26 @@ function generateMediaModeEvents_(ctx) {
     if (!picked) continue;
 
     var primaryTag = picked.primary || "Media";
+    // engine.299: only the selected line's explicit meaning can grade an inert kind.
+    // Missing helpers fail closed; no rejected line reaches any write or event hook.
+    var writtenTag = '';
+    if (typeof nudgesForEvent_ === 'function') {
+      var ownFx = nudgesForEvent_(primaryTag, 1, picked.text);
+      if (Object.keys(ownFx).length) writtenTag = primaryTag;
+      else if (typeof gradedTag_ === 'function') {
+        var dialTags = (picked.tags || []).filter(function(t) { return /^dial:/.test(t); });
+        var signed = dialTags.length === 1 && /^dial:(composure|outabout|sociability|family|warmth|openness|fandom|drive|integrity):(up|down)(?::([SML]))?$/.exec(dialTags[0]);
+        if (signed) writtenTag = gradedTag_(primaryTag, signed[1], signed[2] === 'up', signed[3] || 'S');
+      }
+    }
+    if (!writtenTag) {
+      S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+      S.engine299.noDial++;
+      var source = (picked.tags || []).filter(function(t) { return t.indexOf('source:') === 0; })[0] || ('kind:' + primaryTag);
+      S.engine299.noDialBySource[source] = (S.engine299.noDialBySource[source] || 0) + 1;
+      continue;
+    }
+    primaryTag = writtenTag;
     var stamp = inWorldStamp_(ctx);
     var line = stamp + " — [" + primaryTag + "] " + picked.text;
 
@@ -440,7 +460,7 @@ function generateMediaModeEvents_(ctx) {
         ctx.now,
         popId,
         (first + ' ' + last).trim(),
-        "MEDIA-Event",
+        primaryTag,
         picked.text,
         neighborhood,
         cycle

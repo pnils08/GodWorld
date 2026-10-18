@@ -45,12 +45,12 @@ Ripples become digested narrative media for LLMs.
 | Generator | Phase | Mode gate | Pools / Events | Dial Seam / Mechanics |
 |---|---|---|---|---|
 | `generateGenericCitizenMicroEvent.js` | 4 | ENGINE | ~200 ambient texture | `mult.outabout`; pulse feeds Phase 8 nbhd map. **engine.299:** every line whose kind maps to `{}` is written graded (fixed texts signed by what they say, hood lines by the hood's trajectory, dynamic lines by shape); Community / Cultural keep their bare tags (they carry deltas); no sign → not written, counted; the log row carries the written tag. |
-| `generateGameModeMicroEvents.js` | 4 | GAME | ~72 role pools + 7 trait-pools | `mult.outabout`; reads TraitProfile |
+| `generateGameModeMicroEvents.js` | 4 | GAME | ~72 role pools + 7 trait-pools | `mult.outabout`; reads TraitProfile. Task 4C: per-line signed metadata grades inert kinds; unsigned lines skip and count in `S.engine299`; log tag matches LifeHistory. |
 | `generationalEventsEngine.js` | 4 | ENGINE+CIVIC | 12 milestones (Graduation, Death, etc.) | Mutates `Status`, `NumChildren`, `MaritalStatus`. Plumbed to `familyFreq`/`careerFreq`. |
 | `generateCitizensEvents.js` | 5 | ENGINE (T3-4) | ~100+ weighted pools + T3 fame recognition | Richly individuated via `getCitizenDialBands_` + bonds/arcs. **engine.299:** a kind that maps to `{}` is written only as `<Kind>-<Dial>-<Up|Down>-<Band>` (the sign from the entry's own fact tag, the dial from the fact or the source; a source never decides the sign); a line with no dial is not written — `S.engine299.noDial{,BySource}` counts it. |
 | `generateNamedCitizensEvents.js` | 5 | ENGINE | ~50 type-first pools | Type-primary (Skip dial seam) |
-| `generateMediaModeEvents.js` | 5 | MEDIA | ~40 role pools | Reads arcs/metrics/votes. (Skip dial seam) |
-| `generateCivicModeEvents.js` | 5 | CIVIC | ~40 role pools | Reads actual votes/grants. (Skip dial seam) |
+| `generateMediaModeEvents.js` | 5 | MEDIA | ~40 role pools | Reads arcs/metrics/votes. Task 4C: Personal lines graded by meaning; Media and other own-delta kinds stay bare; admission before writes, log = written tag. |
+| `generateCivicModeEvents.js` | 5 | CIVIC | ~40 role pools | Reads actual votes/grants. Task 4C: Civic/Personal lines graded by meaning; ambiguous outcomes skip and count in `S.engine299`; admission before writes, log = written tag. |
 | `runCareerEngine.js` | 5 | ENGINE (T3-4) | transitions [promo/layoff/sector] | `careerFreq`. **Ripples to Phase 6 `economicRippleEngine`** |
 | `runRelationshipEngine.js` | 5 | ENGINE (T3-4) | ~60 bond/arc-aware events | `mult.sociability`. Pushes to Bond Engine loop. |
 | `runHouseholdEngine.js` | 5 | ENGINE (T3-4) | ~70 home/family texture | `familyFreq`. MaritalStatus/NumChildren gates pools. |

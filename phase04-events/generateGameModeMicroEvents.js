@@ -132,21 +132,21 @@ function generateGameModeMicroEvents_(ctx) {
   ].map(function(t) { return entry(t, ["role:mlb"], "Public"); });
 
   var mlbPersonal = [
-    "spent downtime away from the ballpark",
-    "caught up with family via video call",
-    "enjoyed a quiet meal in the city",
-    "stepped away from baseball briefly",
-    "ran personal errands around town",
-    "spent time with friends outside the game",
-    "enjoyed an off-day in Oakland"
-  ].map(function(t) { return entry(t, ["role:mlb"], "Personal"); });
+    ["spent downtime away from the ballpark", "dial:composure:up"],
+    ["caught up with family via video call", "dial:family:up"],
+    ["enjoyed a quiet meal in the city", "dial:composure:up"],
+    ["stepped away from baseball briefly", "dial:outabout:down"],
+    ["ran personal errands around town", "dial:outabout:up"],
+    ["spent time with friends outside the game", "dial:sociability:up"],
+    ["enjoyed an off-day in Oakland", "dial:composure:up"]
+  ].map(function(t) { return entry(t[0], ["role:mlb"].concat(t[1] ? [t[1]] : []), "Personal"); });
 
   var mlbTeamLife = [
-    "joined teammates for a team meal",
-    "participated in clubhouse conversations",
-    "connected with younger players",
-    "shared a laugh with teammates"
-  ].map(function(t) { return entry(t, ["role:mlb"], "Team"); });
+    ["joined teammates for a team meal", "dial:sociability:up"],
+    ["participated in clubhouse conversations", "dial:sociability:up"],
+    ["connected with younger players", "dial:warmth:up"],
+    ["shared a laugh with teammates", "dial:warmth:up"]
+  ].map(function(t) { return entry(t[0], ["role:mlb"].concat(t[1] ? [t[1]] : []), "Team"); });
 
   var mediaWork = [
     "worked on developing a story lead",
@@ -165,11 +165,11 @@ function generateGameModeMicroEvents_(ctx) {
   ].map(function(t) { return entry(t, ["role:media"], "Public"); });
 
   var mediaPersonal = [
-    "decompressed after a long news cycle",
-    "caught up on industry reading",
-    "reflected on recent coverage decisions",
-    "maintained source relationships quietly"
-  ].map(function(t) { return entry(t, ["role:media"], "Personal"); });
+    ["decompressed after a long news cycle", "dial:composure:up"],
+    ["caught up on industry reading", "dial:openness:up"],
+    ["reflected on recent coverage decisions", "dial:openness:up"],
+    ["maintained source relationships quietly", "dial:sociability:up"]
+  ].map(function(t) { return entry(t[0], ["role:media"].concat(t[1] ? [t[1]] : []), "Personal"); });
 
   var editorPool = [
     "reviewed the day's editorial priorities",
@@ -200,12 +200,12 @@ function generateGameModeMicroEvents_(ctx) {
   ].map(function(t) { return entry(t, ["role:media", "media:photographer"], "Work"); });
 
   var civicWork = [
-    "reviewed briefing materials",
-    "attended internal policy meetings",
-    "consulted with department heads",
-    "prepared for upcoming public sessions",
-    "addressed constituent concerns"
-  ].map(function(t) { return entry(t, ["role:civic"], "Civic"); });
+    ["reviewed briefing materials", "dial:drive:up"],
+    ["attended internal policy meetings", "dial:sociability:up"],
+    ["consulted with department heads", "dial:sociability:up"],
+    ["prepared for upcoming public sessions", "dial:drive:up"],
+    ["addressed constituent concerns", "dial:warmth:up"]
+  ].map(function(t) { return entry(t[0], ["role:civic"].concat(t[1] ? [t[1]] : []), "Civic"); });
 
   var civicPublic = [
     "made a brief public appearance",
@@ -216,63 +216,63 @@ function generateGameModeMicroEvents_(ctx) {
   ].map(function(t) { return entry(t, ["role:civic"], "Public"); });
 
   var civicPersonal = [
-    "found a quiet moment between obligations",
-    "balanced public duties with personal time",
-    "reflected on the weight of public service",
-    "maintained composure under public scrutiny"
-  ].map(function(t) { return entry(t, ["role:civic"], "Personal"); });
+    ["found a quiet moment between obligations", "dial:composure:up"],
+    ["balanced public duties with personal time", "dial:composure:up"],
+    ["reflected on the weight of public service", "dial:composure:down"],
+    ["maintained composure under public scrutiny", "dial:composure:up"]
+  ].map(function(t) { return entry(t[0], ["role:civic"].concat(t[1] ? [t[1]] : []), "Personal"); });
 
   var mayorPool = [
-    "navigated competing political pressures",
-    "considered long-term city priorities",
-    "met with key stakeholders privately"
-  ].map(function(t) { return entry(t, ["role:civic", "civic:mayor"], "Civic"); });
+    ["navigated competing political pressures", "dial:composure:down"],
+    ["considered long-term city priorities", "dial:drive:up"],
+    ["met with key stakeholders privately", "dial:sociability:up"]
+  ].map(function(t) { return entry(t[0], ["role:civic", "civic:mayor"].concat(t[1] ? [t[1]] : []), "Civic"); });
 
   var councilPool = [
-    "prepared for council deliberations",
-    "met with district constituents",
-    "reviewed proposed legislation"
-  ].map(function(t) { return entry(t, ["role:civic", "civic:council"], "Civic"); });
+    ["prepared for council deliberations", "dial:drive:up"],
+    ["met with district constituents", "dial:sociability:up"],
+    ["reviewed proposed legislation", "dial:openness:up"]
+  ].map(function(t) { return entry(t[0], ["role:civic", "civic:council"].concat(t[1] ? [t[1]] : []), "Civic"); });
 
   var staffPool = [
-    "coordinated across departments",
-    "managed logistics for upcoming events",
-    "handled sensitive communications"
-  ].map(function(t) { return entry(t, ["role:civic", "civic:staff"], "Civic"); });
+    ["coordinated across departments", "dial:sociability:up"],
+    ["managed logistics for upcoming events", "dial:drive:up"],
+    ["handled sensitive communications", "dial:integrity:up"]
+  ].map(function(t) { return entry(t[0], ["role:civic", "civic:staff"].concat(t[1] ? [t[1]] : []), "Civic"); });
 
   var publicFigureGeneral = [
-    "navigated being recognized in public",
-    "maintained public composure",
-    "handled attention with practiced ease",
-    "found a moment of privacy",
-    "managed the demands of public life"
-  ].map(function(t) { return entry(t, ["role:publicFigure"], "Life"); });
+    ["navigated being recognized in public", ""],
+    ["maintained public composure", "dial:composure:up"],
+    ["handled attention with practiced ease", "dial:composure:up"],
+    ["found a moment of privacy", "dial:outabout:down"],
+    ["managed the demands of public life", "dial:drive:up"]
+  ].map(function(t) { return entry(t[0], ["role:publicFigure"].concat(t[1] ? [t[1]] : []), "Life"); });
 
   var publicFigurePersonal = [
-    "enjoyed a rare quiet evening",
-    "connected with close friends",
-    "took time for personal wellness",
-    "stepped back from the spotlight briefly",
-    "appreciated a normal moment"
-  ].map(function(t) { return entry(t, ["role:publicFigure"], "Personal"); });
+    ["enjoyed a rare quiet evening", "dial:composure:up"],
+    ["connected with close friends", "dial:sociability:up"],
+    ["took time for personal wellness", "dial:composure:up"],
+    ["stepped back from the spotlight briefly", "dial:outabout:down"],
+    ["appreciated a normal moment", "dial:composure:up"]
+  ].map(function(t) { return entry(t[0], ["role:publicFigure"].concat(t[1] ? [t[1]] : []), "Personal"); });
 
   var championshipPool = [
-    "felt the city's championship energy",
-    "navigated heightened media attention",
-    "noticed more fans recognizing them"
-  ].map(function(t) { return entry(t, ["context:sportsAtmosphere"], "Season"); });
+    ["felt the city's championship energy", "dial:fandom:up"],
+    ["navigated heightened media attention", "dial:composure:down"],
+    ["noticed more fans recognizing them", ""]
+  ].map(function(t) { return entry(t[0], ["context:sportsAtmosphere"].concat(t[1] ? [t[1]] : []), "Season"); });
 
   var playoffPool = [
-    "felt the city's postseason energy",
-    "noticed increased media presence",
-    "sensed the heightened expectations"
-  ].map(function(t) { return entry(t, ["context:sportsAtmosphere"], "Season"); });
+    ["felt the city's postseason energy", "dial:fandom:up"],
+    ["noticed increased media presence", ""],
+    ["sensed the heightened expectations", "dial:composure:down"]
+  ].map(function(t) { return entry(t[0], ["context:sportsAtmosphere"].concat(t[1] ? [t[1]] : []), "Season"); });
 
   var offseasonPool = [
-    "enjoyed the slower offseason pace",
-    "appreciated time away from the spotlight",
-    "recharged during the break"
-  ].map(function(t) { return entry(t, ["context:sportsAtmosphere"], "Season"); });
+    ["enjoyed the slower offseason pace", "dial:composure:up"],
+    ["appreciated time away from the spotlight", "dial:outabout:down"],
+    ["recharged during the break", "dial:composure:up"]
+  ].map(function(t) { return entry(t[0], ["context:sportsAtmosphere"].concat(t[1] ? [t[1]] : []), "Season"); });
 
   // ─────────────────────────────────────────────────────────────────────────
   // TRAIT-SPECIFIC EVENT POOLS (Phase 15.5)
@@ -283,59 +283,59 @@ function generateGameModeMicroEvents_(ctx) {
 
   var traitPools = {
     Catalyst: [
-      "brought infectious energy to the clubhouse",
-      "sparked a lively conversation among teammates",
-      "rallied spirits during a team gathering",
-      "was the first to organize a group outing"
-    ].map(function(t) { return entry(t, ["role:mlb", "trait:Catalyst"], "Team"); }),
+      ["brought infectious energy to the clubhouse", "dial:sociability:up"],
+      ["sparked a lively conversation among teammates", "dial:sociability:up"],
+      ["rallied spirits during a team gathering", "dial:warmth:up"],
+      ["was the first to organize a group outing", "dial:sociability:up"]
+    ].map(function(t) { return entry(t[0], ["role:mlb", "trait:Catalyst"].concat(t[1] ? [t[1]] : []), "Team"); }),
 
     Anchor: [
-      "provided steady presence in the clubhouse",
-      "offered quiet counsel to a younger teammate",
-      "maintained his routine with characteristic discipline",
-      "kept the team grounded during a hectic stretch"
-    ].map(function(t) { return entry(t, ["role:mlb", "trait:Anchor"], "Team"); }),
+      ["provided steady presence in the clubhouse", "dial:composure:up"],
+      ["offered quiet counsel to a younger teammate", "dial:warmth:up"],
+      ["maintained his routine with characteristic discipline", "dial:drive:up"],
+      ["kept the team grounded during a hectic stretch", "dial:composure:up"]
+    ].map(function(t) { return entry(t[0], ["role:mlb", "trait:Anchor"].concat(t[1] ? [t[1]] : []), "Team"); }),
 
     Watcher: [
-      "observed the city from a quiet corner",
-      "took in the scene at a local establishment",
-      "noticed details others missed around town",
-      "spent time studying the rhythm of the neighborhood"
-    ].map(function(t) { return entry(t, ["role:mlb", "trait:Watcher"], "Personal"); }),
+      ["observed the city from a quiet corner", "dial:outabout:down"],
+      ["took in the scene at a local establishment", "dial:openness:up"],
+      ["noticed details others missed around town", "dial:openness:up"],
+      ["spent time studying the rhythm of the neighborhood", "dial:openness:up"]
+    ].map(function(t) { return entry(t[0], ["role:mlb", "trait:Watcher"].concat(t[1] ? [t[1]] : []), "Personal"); }),
 
     Grounded: [
-      "enjoyed a hearty meal at a neighborhood spot",
-      "spent time in familiar surroundings",
-      "found comfort in a simple routine",
-      "appreciated the stability of home life"
-    ].map(function(t) { return entry(t, ["role:mlb", "trait:Grounded"], "Personal"); }),
+      ["enjoyed a hearty meal at a neighborhood spot", "dial:composure:up"],
+      ["spent time in familiar surroundings", "dial:openness:down"],
+      ["found comfort in a simple routine", "dial:composure:up"],
+      ["appreciated the stability of home life", "dial:family:up"]
+    ].map(function(t) { return entry(t[0], ["role:mlb", "trait:Grounded"].concat(t[1] ? [t[1]] : []), "Personal"); }),
 
     Striver: [
-      "worked on something beyond the baseball field",
-      "pursued a personal project with focus",
-      "studied film or read to sharpen his edge",
-      "channeled competitive energy into a side interest"
-    ].map(function(t) { return entry(t, ["role:mlb", "trait:Striver"], "Personal"); }),
+      ["worked on something beyond the baseball field", "dial:drive:up"],
+      ["pursued a personal project with focus", "dial:drive:up"],
+      ["studied film or read to sharpen his edge", "dial:openness:up"],
+      ["channeled competitive energy into a side interest", "dial:drive:up"]
+    ].map(function(t) { return entry(t[0], ["role:mlb", "trait:Striver"].concat(t[1] ? [t[1]] : []), "Personal"); }),
 
     Connector: [
-      "bridged conversations between different teammate groups",
-      "checked in with a teammate going through a tough stretch",
-      "organized something that brought the team closer",
-      "strengthened a bond with a fellow player"
-    ].map(function(t) { return entry(t, ["role:mlb", "trait:Connector"], "Team"); }),
+      ["bridged conversations between different teammate groups", "dial:sociability:up"],
+      ["checked in with a teammate going through a tough stretch", "dial:warmth:up"],
+      ["organized something that brought the team closer", "dial:sociability:up"],
+      ["strengthened a bond with a fellow player", "dial:warmth:up"]
+    ].map(function(t) { return entry(t[0], ["role:mlb", "trait:Connector"].concat(t[1] ? [t[1]] : []), "Team"); }),
 
     Drifter: [
-      "explored a part of Oakland he hadn't visited before",
-      "wandered through the city with no particular destination",
-      "found an unexpected moment of solitude",
-      "let the afternoon unfold without a plan"
-    ].map(function(t) { return entry(t, ["role:mlb", "trait:Drifter"], "Personal"); })
+      ["explored a part of Oakland he hadn't visited before", "dial:openness:up"],
+      ["wandered through the city with no particular destination", "dial:outabout:up"],
+      ["found an unexpected moment of solitude", "dial:sociability:down"],
+      ["let the afternoon unfold without a plan", "dial:drive:down"]
+    ].map(function(t) { return entry(t[0], ["role:mlb", "trait:Drifter"].concat(t[1] ? [t[1]] : []), "Personal"); })
   };
 
   var holidayPublicPool = {
-    Thanksgiving: ["participated in a holiday community event"],
-    Holiday: ["attended a holiday charity function"],
-    NewYear: ["reflected publicly on the year ahead"]
+    Thanksgiving: [["participated in a holiday community event", "dial:sociability:up"]],
+    Holiday: [["attended a holiday charity function", "dial:warmth:up"]],
+    NewYear: [["reflected publicly on the year ahead", "dial:openness:up"]]
   };
 
   function yn_(v) {
@@ -423,7 +423,7 @@ function generateGameModeMicroEvents_(ctx) {
 
     if (holiday !== "none" && holidayPublicPool[holiday]) {
       pool = pool.concat(
-        holidayPublicPool[holiday].map(function(t) { return entry(t, ["source:holidayPublic"], "Holiday"); })
+        holidayPublicPool[holiday].map(function(t) { return entry(t[0], ["source:holidayPublic", t[1]], "Holiday"); })
       );
     }
 
@@ -518,6 +518,26 @@ function generateGameModeMicroEvents_(ctx) {
     if (!picked) continue;
 
     var primaryTag = picked.primary || "Life";
+    // engine.299: only the selected line's explicit meaning can grade an inert kind.
+    // Missing helpers fail closed; no rejected line reaches any write or event hook.
+    var writtenTag = '';
+    if (typeof nudgesForEvent_ === 'function') {
+      var ownFx = nudgesForEvent_(primaryTag, 1, picked.text);
+      if (Object.keys(ownFx).length) writtenTag = primaryTag;
+      else if (typeof gradedTag_ === 'function') {
+        var dialTags = (picked.tags || []).filter(function(t) { return /^dial:/.test(t); });
+        var signed = dialTags.length === 1 && /^dial:(composure|outabout|sociability|family|warmth|openness|fandom|drive|integrity):(up|down)(?::([SML]))?$/.exec(dialTags[0]);
+        if (signed) writtenTag = gradedTag_(primaryTag, signed[1], signed[2] === 'up', signed[3] || 'S');
+      }
+    }
+    if (!writtenTag) {
+      S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+      S.engine299.noDial++;
+      var source = (picked.tags || []).filter(function(t) { return t.indexOf('source:') === 0; })[0] || ('kind:' + primaryTag);
+      S.engine299.noDialBySource[source] = (S.engine299.noDialBySource[source] || 0) + 1;
+      continue;
+    }
+    primaryTag = writtenTag;
     var stamp = inWorldStamp_(ctx);
     var line = stamp + " — [" + primaryTag + "] " + picked.text;
 
@@ -533,7 +553,7 @@ function generateGameModeMicroEvents_(ctx) {
         ctx.now,
         popId,
         '',
-        "GAME-Micro",
+        primaryTag,
         picked.text,
         '',
         cycle

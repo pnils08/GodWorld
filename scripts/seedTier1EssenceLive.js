@@ -114,6 +114,7 @@ function backdate(events) {
   // an archive that already contains it. This keeps a re-run single-count: first run prior=0/new=N,
   // re-run prior=N/new=0, both -> N essence events counted once. (Idempotency bug fix, S265.)
   const appendRows = [], newByPop = {};
+  const S = {}; // same no-dial summary shape as the cycle writers
   for (const pop of active) {
     const ess = TIER1_ESSENCE[pop];
     if (!ess) { console.error(`no essence authored for ${pop}`); process.exit(1); }
@@ -124,12 +125,30 @@ function backdate(events) {
     let skipped = 0;
     for (const ev of ess.events) {
       if (seenKey.has(pop + '|' + ev.text)) { skipped++; continue; } // author-once
-      appendRows.push(['', pop, name, ev.tag, ev.text, nbhd, ESSENCE_CYCLE]);
-      newByPop[pop].push({ tag: ev.tag, text: ev.text, cycle: ESSENCE_CYCLE });
+      // Grade only NEW appends. The POPID|text guard above keeps historical tags intact.
+      let writtenTag = '';
+      if (typeof M.nudgesForEvent_ === 'function') {
+        if (Object.keys(M.nudgesForEvent_(ev.tag, 1, ev.text)).length) writtenTag = ev.tag;
+        else if (typeof M.gradedTag_ === 'function') {
+          const dialTags = (ev.tags || []).filter(t => /^dial:/.test(t));
+          const signed = dialTags.length === 1 && /^dial:(composure|outabout|sociability|family|warmth|openness|fandom|drive|integrity):(up|down)(?::([SML]))?$/.exec(dialTags[0]);
+          if (signed) writtenTag = M.gradedTag_(ev.tag, signed[1], signed[2] === 'up', signed[3] || 'S');
+        }
+      }
+      if (!writtenTag) {
+        S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+        S.engine299.noDial++;
+        const source = 'kind:' + ev.tag;
+        S.engine299.noDialBySource[source] = (S.engine299.noDialBySource[source] || 0) + 1;
+        continue;
+      }
+      appendRows.push(['', pop, name, writtenTag, ev.text, nbhd, ESSENCE_CYCLE]);
+      newByPop[pop].push({ tag: writtenTag, text: ev.text, cycle: ESSENCE_CYCLE });
       seenKey.add(pop + '|' + ev.text);
     }
     console.log(`  ${pop} ${ess.name.padEnd(14)} essence: +${newByPop[pop].length} new${skipped ? `, ${skipped} already present (skip)` : ''} | prior archive rows: ${(archByPop[pop] || []).length}`);
   }
+  console.log('engine299 admission: ' + JSON.stringify(S.engine299 || { noDial: 0, noDialBySource: {} }));
   console.log(`append plan: ${appendRows.length} rows -> LifeHistory_Archive (currently ${archiveArr.length - 1} data rows)`);
 
   // ---- 2. preview the re-derive (archive-only: prior archive + the NEW essence, NOT column O) ----

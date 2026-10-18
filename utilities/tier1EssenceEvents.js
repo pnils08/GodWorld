@@ -43,9 +43,9 @@ var TIER1_ESSENCE = {
       { tag: 'Reputation', text: 'Came up an underdog — scouts called the swing too ordinary; he kept the receipts and turned it into payback with interest.' },
       { tag: 'Reputation', text: 'Leads by repetition, not speeches — shows up the same way every day, deflects credit to teammates by name.' },
       { tag: 'Reputation', text: 'Useful over adored — plain truth, no spin; weight keeps you honest.' },
-      { tag: 'Daily',      text: 'A quiet life off the field with Amara between road trips — the part no box score measures.' },
+      { tag: 'Daily',      tags: ['dial:family:up'], text: 'A quiet life off the field with Amara between road trips — the part no box score measures.' },
       { tag: 'Background',  text: 'Stood in the loudest moments in franchise history and felt the air go still.' },
-      { tag: 'Personal',   text: 'The joy is in the swing — the half-second the ball leaves the world.' },
+      { tag: 'Personal',   tags: ['dial:warmth:up'], text: 'The joy is in the swing — the half-second the ball leaves the world.' },
       { tag: 'Cultural',   text: 'Lives around music and art off the field; Amara composed “The Seventh Inning Sky”.' }
     ]
   },
@@ -61,7 +61,7 @@ var TIER1_ESSENCE = {
       { tag: 'Stabilized', text: 'Surfs to find stillness, the way his father taught him; met loss with calm, not rage.' },
       { tag: 'Recovery',   text: 'After his father Rick was killed in a surfing accident, he didn’t rage — he surfed, and found his center.' },
       { tag: 'Stabilized', text: 'Pitches like he is meditating; even-keeled, the still center of the clubhouse.' },
-      { tag: 'Background',  text: 'Command over power — deconstructs lineups batter by batter, like a chemist breaking down molecules.' },
+      { tag: 'Background',  tags: ['dial:openness:up'], text: 'Command over power — deconstructs lineups batter by batter, like a chemist breaking down molecules.' },
       { tag: 'Education',  text: 'Studied marine biology at UC San Diego — physics and the ocean, the invisible patterns under things.' },
       { tag: 'Education-Cultural', text: 'Reads the city’s systems the way he reads a hitter — the patterns beneath the surface.' },
       { tag: 'Promotion',  text: 'Five Cy Young Awards; two hundred wins — “The Golden Arm.”' },
@@ -70,7 +70,7 @@ var TIER1_ESSENCE = {
       { tag: 'Reputation', text: 'Soft-spoken; doesn’t chase the spotlight while others preen.' },
       { tag: 'Wedding',    text: 'Married Maya Torres barefoot on the beach where his father caught his last surf.' },
       { tag: 'Birth',      text: 'Son Rick Dillon Jr., named for his father.' },
-      { tag: 'Personal',   text: 'Drawn to the invisible patterns — a scientist’s curiosity for how things really work.' }
+      { tag: 'Personal',   tags: ['dial:openness:up'], text: 'Drawn to the invisible patterns — a scientist’s curiosity for how things really work.' }
     ]
   },
 
@@ -83,9 +83,9 @@ var TIER1_ESSENCE = {
     target: { composure: 'high', drive: 'high', openness: 'high', integrity: 'high',
               warmth: 'moderate', sociability: 'moderate', family: 'neutral', outabout: 'neutral' },
     events: [
-      { tag: 'Background',  text: 'Doesn’t get loud, doesn’t chase — rookies talk for twenty minutes; he asks the one right question.' },
+      { tag: 'Background',  tags: ['dial:warmth:up'], text: 'Doesn’t get loud, doesn’t chase — rookies talk for twenty minutes; he asks the one right question.' },
       { tag: 'Stabilized', text: 'Maintained public composure through the dynasty’s twilight and the rookie integration.' },
-      { tag: 'Daily',      text: 'A quiet watcher — comfortable in a clubhouse, not at a podium.' },
+      { tag: 'Daily',      tags: ['dial:outabout:down'], text: 'A quiet watcher — comfortable in a clubhouse, not at a podium.' },
       { tag: 'Career',     text: 'First-year manager of the Oakland A’s, navigating the dynasty’s last lap.' },
       { tag: 'Career',     text: 'Liked the invisible jobs — relentless about the work, indifferent to the credit.' },
       { tag: 'Mentorship', text: 'Players seek him out because he listens; veterans trust him, rookies improve around him.' },
@@ -138,10 +138,10 @@ var TIER1_ESSENCE = {
       { tag: 'Civic Role', text: 'Players’ union representative and community liaison — the bridge between the clubhouse and the city.' },
       { tag: 'Civic Role', text: 'Often at civic events; carries the team’s voice into Oakland.' },
       { tag: 'Education-Cultural', text: 'Sees angles others don’t think in — reads the game three moves ahead.' },
-      { tag: 'Lifestyle',  text: 'A student of the game’s angles, on and off the field.' },
+      { tag: 'Lifestyle',  tags: ['dial:openness:up'], text: 'A student of the game’s angles, on and off the field.' },
       { tag: 'Reputation', text: 'Son of a former mayor; carries the name with a straight back.' },
       { tag: 'Reputation', text: 'Honest, cerebral, dependable — leads by understanding the whole board.' },
-      { tag: 'Background', text: 'A measured presence in the clubhouse.' }
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'A measured presence in the clubhouse.' }
     ]
   },
 
@@ -156,8 +156,8 @@ var TIER1_ESSENCE = {
       { tag: 'Career',     text: '92.1 career WAR — the everyday machine, never a day off at shortstop.' },
       { tag: 'Career',     text: 'The standard the clubhouse measures itself against.' },
       { tag: 'Education-Cultural', text: 'Reads a ball like he lived in the dirt — instinct honed past thought.' },
-      { tag: 'Lifestyle',  text: 'A student of the game’s geometry — sees the angles in everything.' },
-      { tag: 'Background', text: 'Machine-steady; the same flawless glove every night.' },
+      { tag: 'Lifestyle',  tags: ['dial:openness:up'], text: 'A student of the game’s geometry — sees the angles in everything.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Machine-steady; the same flawless glove every night.' },
       { tag: 'Stabilized', text: 'Unshowy excellence — lets the numbers speak, season after season.' },
       { tag: 'Reputation', text: 'Plays it straight; the work is the statement.' },
       { tag: 'Reputation', text: 'Quiet authority — never asks for credit.' }
@@ -192,7 +192,7 @@ var TIER1_ESSENCE = {
       { tag: 'Career',     text: 'Franchise pillar; the everyday centerpiece of the lineup.' },
       { tag: 'Career',     text: 'Perfect fielding — the standard in center.' },
       { tag: 'Career',     text: 'Carries the franchise without noise.' },
-      { tag: 'Background', text: 'Quietly dominant — lets the game come to him.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Quietly dominant — lets the game come to him.' },
       { tag: 'Stabilized', text: 'Unshakable at the center of the order and the outfield.' },
       { tag: 'Reputation', text: 'The pillar — steady, honest, dependable.' },
       { tag: 'Reputation', text: 'Greatness without the noise.' }
@@ -208,7 +208,7 @@ var TIER1_ESSENCE = {
       { tag: 'Career',     text: 'Silent workhorse — first-round, 2029, out of Puerto Rico.' },
       { tag: 'Career',     text: 'Logs his innings without a word; the rotation’s quiet anchor.' },
       { tag: 'Career',     text: '14-12, 3.70, 169 strikeouts — the work, every fifth day.' },
-      { tag: 'Background', text: 'Says little; lets the work speak.' },
+      { tag: 'Background', tags: ['dial:sociability:down'], text: 'Says little; lets the work speak.' },
       { tag: 'Stabilized', text: 'Unflappable on the mound — the same temperament every start.' },
       { tag: 'Stabilized', text: 'The steady hand in the rotation.' },
       { tag: 'Reputation', text: 'No spin, no flash — the honest workhorse.' },
@@ -224,7 +224,7 @@ var TIER1_ESSENCE = {
     events: [
       { tag: 'Career',     text: 'Unsung hero — 6.8 WAR, zero dedicated coverage; does the job for its own sake.' },
       { tag: 'Career',     text: 'Third baseman, 1.000 fielding — flawless and uncelebrated.' },
-      { tag: 'Background', text: 'Quiet, steady, no spotlight.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Quiet, steady, no spotlight.' },
       { tag: 'Stabilized', text: 'The same reliable glove and bat, year after year.' },
       { tag: 'Stabilized', text: 'Unbothered by the lack of attention.' },
       { tag: 'Reputation', text: 'Plays it straight; the work is the reward.' },
@@ -243,8 +243,8 @@ var TIER1_ESSENCE = {
       { tag: 'Education',  text: 'Still learning the craft; a little better every start.' },
       { tag: 'Education-Cultural', text: 'Studies the veterans, absorbs the dynasty’s way.' },
       { tag: 'Career',     text: 'Pre-arbitration — earning his place.' },
-      { tag: 'Background', text: 'Composed beyond his years for a young arm.' },
-      { tag: 'Personal',   text: 'Open, curious, hungry to improve.' }
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Composed beyond his years for a young arm.' },
+      { tag: 'Personal',   tags: ['dial:openness:up'], text: 'Open, curious, hungry to improve.' }
     ]
   },
 
@@ -257,8 +257,8 @@ var TIER1_ESSENCE = {
       { tag: 'Promotion',  text: 'Home Run Derby winner, 2039 — raw, prodigious power.' },
       { tag: 'Career',     text: 'A $225M gamble at second base — a career .244 hitter carrying a max contract.' },
       { tag: 'Career',     text: 'Everyday starter, not a utility man — the bet is on the ceiling.' },
-      { tag: 'Background', text: 'Carries the weight of the contract every at-bat.' },
-      { tag: 'Personal',   text: 'Swinging for the ceiling that justified the gamble.' }
+      { tag: 'Background', tags: ['dial:composure:down'], text: 'Carries the weight of the contract every at-bat.' },
+      { tag: 'Personal',   tags: ['dial:drive:up'], text: 'Swinging for the ceiling that justified the gamble.' }
     ]
   },
 
@@ -285,8 +285,8 @@ var TIER1_ESSENCE = {
       { tag: 'Mentorship', text: 'Gives the younger players what an older player once gave him.' },
       { tag: 'PostCareer', text: 'Ex-A’s star right fielder, now in the chapter after playing.' },
       { tag: 'Retirement', text: 'Stepped away from the game he gave his prime to.' },
-      { tag: 'Daily',      text: 'A settled life after baseball.' },
-      { tag: 'Background', text: 'Carries the calm of a man who already proved it.' },
+      { tag: 'Daily',      tags: ['dial:composure:up'], text: 'A settled life after baseball.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Carries the calm of a man who already proved it.' },
       { tag: 'Stabilized', text: 'The steadiness of a man with nothing left to prove.' }
     ]
   },
@@ -303,9 +303,9 @@ var TIER1_ESSENCE = {
     events: [
       { tag: 'Wedding',    text: 'Married to Mags Corliss; holds her hand on their morning lake walks.' },
       { tag: 'Daily',      text: 'Two glasses on the terrace at Lake Merritt, watching the lake go dark.' },
-      { tag: 'Daily',      text: 'A quiet, settled life — morning walks, Sunday chili.' },
+      { tag: 'Daily',      tags: ['dial:composure:up'], text: 'A quiet, settled life — morning walks, Sunday chili.' },
       { tag: 'Retirement', text: 'Retired PG&E engineer; stepped back from the work.' },
-      { tag: 'Background', text: 'The steady one; fixes things slowly and perfectly.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'The steady one; fixes things slowly and perfectly.' },
       { tag: 'Reputation', text: 'Methodical and exact — does it right, not fast.' },
       { tag: 'Reputation', text: 'Dependable to the core; loses his glasses, never his patience.' },
       { tag: 'Mentorship', text: 'Tender with the people he loves; the calm anchor of the household.' },
@@ -324,7 +324,7 @@ var TIER1_ESSENCE = {
       { tag: 'Cultural',   text: 'Travels light; follows the work to wherever the light is.' },
       { tag: 'Cultural',   text: 'Restless for the next frame, the next port.' },
       { tag: 'Lifestyle',  text: 'No insurance, no plan — the artist’s life, lived for the next image.' },
-      { tag: 'Personal',   text: 'Sees what others overlook; open to everything.' },
+      { tag: 'Personal',   tags: ['dial:openness:up'], text: 'Sees what others overlook; open to everything.' },
       { tag: 'Career',     text: 'Builds a photography life one assignment at a time.' }
     ]
   },
@@ -340,7 +340,7 @@ var TIER1_ESSENCE = {
       { tag: 'Education',  text: 'UC Berkeley computer science; built her own path.' },
       { tag: 'Education-Cultural', text: 'Reads systems for a living; analytical to the core.' },
       { tag: 'Career',     text: 'Independent — too independent to lean on people.' },
-      { tag: 'Background', text: 'Self-contained, composed; keeps her own counsel.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Self-contained, composed; keeps her own counsel.' },
       { tag: 'Stabilized', text: 'Steady and self-reliant; carries her own weight.' },
       { tag: 'Reputation', text: 'Careful, precise, principled in her work.' }
     ]
@@ -356,7 +356,7 @@ var TIER1_ESSENCE = {
       { tag: 'Education-Cultural', text: 'Sees the whole board — the second- and third-order effects of every plan.' },
       { tag: 'Education-Cultural', text: 'A planner’s mind — patterns, flows, consequences.' },
       { tag: 'Career',     text: 'Decades shaping the city’s bones.' },
-      { tag: 'Background', text: 'Measured, deliberate — a planner’s composure.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Measured, deliberate — a planner’s composure.' },
       { tag: 'Stabilized', text: 'Steady under the weight of the city’s decisions.' },
       { tag: 'Reputation', text: 'Rigorous and principled — the plan has to hold up.' },
       { tag: 'Reputation', text: 'Tells it straight, even when it’s unwelcome.' }
@@ -374,7 +374,7 @@ var TIER1_ESSENCE = {
       { tag: 'Career',     text: 'General Manager of the Oakland A’s and the Chicago Bulls — the dual role, again.' },
       { tag: 'Promotion',  text: 'Holds a dynasty’s window open; a historic legacy taking on a new chapter.' },
       { tag: 'Career',     text: 'Carries two franchises on one set of shoulders.' },
-      { tag: 'Background', text: 'Steady under the weight of two front offices.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Steady under the weight of two front offices.' },
       { tag: 'Stabilized', text: 'Unflinching through roster decisions that define eras.' },
       { tag: 'Civic Role', text: 'The public face of the franchise’s direction.' },
       { tag: 'Reputation', text: 'His word holds; builds for the long arc.' }
@@ -391,9 +391,9 @@ var TIER1_ESSENCE = {
       { tag: 'Faith',      text: 'Holds space for others’ healing; faith and calm are her practice.' },
       { tag: 'Mentorship', text: 'Tends to people’s well-being — warm, present, healing.' },
       { tag: 'Stabilized', text: 'A practitioner’s calm; the still, grounding presence in the room.' },
-      { tag: 'Background', text: 'Centered, unhurried, attuned.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Centered, unhurried, attuned.' },
       { tag: 'Education-Cultural', text: 'Reads energy and intention; open to what others dismiss.' },
-      { tag: 'Lifestyle',  text: 'Lives by wellness and intention.' },
+      { tag: 'Lifestyle',  tags: ['dial:composure:up'], text: 'Lives by wellness and intention.' },
       { tag: 'Community',  text: 'Warm with the people who come to her.' }
     ]
   },
@@ -407,7 +407,7 @@ var TIER1_ESSENCE = {
       { tag: 'Career',     text: 'Lead beat reporter on the Oakland A’s — the byline closest to the dynasty.' },
       { tag: 'Career',     text: 'A senior journalist; decades on the beat.' },
       { tag: 'Education-Cultural', text: 'Reads the game and the people behind it.' },
-      { tag: 'Personal',   text: 'Always chasing the quiet story behind the loud one.' },
+      { tag: 'Personal',   tags: ['dial:drive:up'], text: 'Always chasing the quiet story behind the loud one.' },
       { tag: 'Media',      text: 'Always working the room — the sources, the clubhouse.' },
       { tag: 'Public',     text: 'The recognized voice on the A’s beat.' },
       { tag: 'Reputation', text: 'Chronicled the dynasty start to finish; his word is trusted.' },
@@ -453,7 +453,7 @@ var TIER1_ESSENCE = {
       { tag: 'Career',     text: 'Runs the Stabilization Fund and community/economic development — gets it done.' },
       { tag: 'Career',     text: 'Carries the Mayor’s office operational load.' },
       { tag: 'Stabilized', text: 'Steady under operational pressure.' },
-      { tag: 'Background', text: 'Measured, unflashy, effective.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Measured, unflashy, effective.' },
       { tag: 'Mentorship', text: 'Tends to the community’s real needs, not the headlines.' },
       { tag: 'Reputation', text: 'Operational honesty — the delivery, not the spin.' },
       { tag: 'Reputation', text: 'Does the work, indifferent to the political credit.' },
@@ -470,7 +470,7 @@ var TIER1_ESSENCE = {
       { tag: 'Career',     text: 'District Attorney; a former federal prosecutor — precise, exacting.' },
       { tag: 'Promotion',  text: 'Took the DA’s office on a record of hard, clean convictions.' },
       { tag: 'Stabilized', text: 'Unshakable in the courtroom; controls the room with precision.' },
-      { tag: 'Background', text: 'Measured, deliberate — every word on the record chosen.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Measured, deliberate — every word on the record chosen.' },
       { tag: 'Education-Cultural', text: 'Reads a case the way a chemist reads a reaction — element by element.' },
       { tag: 'Reputation', text: 'No spin — the law, the facts, the honest charge.' },
       { tag: 'Reputation', text: 'Plays it straight; the framework holds or it doesn’t.' },
@@ -487,7 +487,7 @@ var TIER1_ESSENCE = {
       { tag: 'Career',     text: 'Police Chief — professional, measured, data-driven.' },
       { tag: 'Career',     text: 'Runs the department by the numbers, not the noise.' },
       { tag: 'Stabilized', text: 'Steady under public scrutiny; never reactive.' },
-      { tag: 'Background', text: 'Measured in every public statement.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Measured in every public statement.' },
       { tag: 'Education-Cultural', text: 'Reads the crime data for what it actually says.' },
       { tag: 'Reputation', text: 'Professional and accountable — the facts, plainly.' },
       { tag: 'Reputation', text: 'Plays it straight; owns the department’s record.' },
@@ -507,7 +507,7 @@ var TIER1_ESSENCE = {
       { tag: 'Community',  text: 'Warm, present, organizing — meets people where they are.' },
       { tag: 'Mentorship', text: 'Lifts up the communities the city overlooks.' },
       { tag: 'Education-Cultural', text: 'Sees the equity dimension others miss.' },
-      { tag: 'Lifestyle',  text: 'Open to new approaches; the old answers haven’t worked for everyone.' },
+      { tag: 'Lifestyle',  tags: ['dial:openness:up'], text: 'Open to new approaches; the old answers haven’t worked for everyone.' },
       { tag: 'Public',     text: 'A recognized progressive voice in the city.' },
       { tag: 'Reputation', text: 'Means the equity she fights for.' }
     ]
@@ -522,7 +522,7 @@ var TIER1_ESSENCE = {
       { tag: 'Career',     text: 'Civic Reform Coalition voice on the Council — fiscal accountability and oversight.' },
       { tag: 'Career',     text: 'Process-focused — every dollar and every step has to justify itself.' },
       { tag: 'Stabilized', text: 'Steady, exacting; unmoved by political pressure.' },
-      { tag: 'Background', text: 'Measured, deliberate, scrutinizing.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Measured, deliberate, scrutinizing.' },
       { tag: 'Education-Cultural', text: 'Reads the budget line by line for what doesn’t add up.' },
       { tag: 'Reputation', text: 'Demands the process hold; oversight before approval.' },
       { tag: 'Reputation', text: 'Principled about accountability — no shortcuts.' },
@@ -538,7 +538,7 @@ var TIER1_ESSENCE = {
     events: [
       { tag: 'Civic Role', text: 'City Council President — convenes the chamber, an independent who weighs each issue on its merits.' },
       { tag: 'Stabilized', text: 'Steady hand presiding; doesn’t chase a faction.' },
-      { tag: 'Background', text: 'Measured — listens to all sides before he moves.' },
+      { tag: 'Background', tags: ['dial:openness:up'], text: 'Measured — listens to all sides before he moves.' },
       { tag: 'Education-Cultural', text: 'Weighs each question case by case, second-order effects and all.' },
       { tag: 'Education-Cultural', text: 'An independent mind — open to the argument, not the party.' },
       { tag: 'Reputation', text: 'No bloc, no spin — calls it as he sees it.' },
@@ -555,8 +555,8 @@ var TIER1_ESSENCE = {
       { tag: 'Education-Cultural', text: 'An independent on the Council — studies each issue, votes his own read.' },
       { tag: 'Education-Cultural', text: 'Open to the argument over the alliance; weighs it himself.' },
       { tag: 'Stabilized', text: 'Even-keeled; doesn’t swing with the room.' },
-      { tag: 'Background', text: 'Measured, deliberate, his own counsel.' },
-      { tag: 'Personal',   text: 'Curious, independent-minded; thinks it through.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Measured, deliberate, his own counsel.' },
+      { tag: 'Personal',   tags: ['dial:openness:up'], text: 'Curious, independent-minded; thinks it through.' },
       { tag: 'Reputation', text: 'Speaks for himself — no bloc, plays it straight.' }
     ]
   },
@@ -595,7 +595,7 @@ var TIER1_ESSENCE = {
       { tag: 'Career',     text: 'Director of the West Oakland Stabilization Fund (OEWD) — accountable on the disbursement schedule.' },
       { tag: 'Career',     text: 'Gets the checks to the households; outcome over optics.' },
       { tag: 'Stabilized', text: 'Steady operator; clear on the timeline even under pressure.' },
-      { tag: 'Background', text: 'Measured, deliberate — the foundation before the structure.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Measured, deliberate — the foundation before the structure.' },
       { tag: 'Education-Cultural', text: 'Reads the disbursement-to-impact chain in cycles, not slogans.' },
       { tag: 'Reputation', text: 'A family stays housed because the Fund moved — accountable for that.' },
       { tag: 'Reputation', text: 'Operationalizes the position; no spin, just delivery.' },
@@ -615,7 +615,7 @@ var TIER1_ESSENCE = {
       { tag: 'Career',     text: 'Maps every step from a young person without a trade to a paid apprentice on the project.' },
       { tag: 'Promotion',  text: 'Got the Community Benefits Agreement signed — not pending, executed.' },
       { tag: 'Stabilized', text: 'Precise and unflappable through the visioning and the gates.' },
-      { tag: 'Background', text: 'Measured — describes every step on the record.' },
+      { tag: 'Background', tags: ['dial:integrity:up'], text: 'Measured — describes every step on the record.' },
       { tag: 'Education-Cultural', text: 'Reads the anti-displacement and workforce mechanics end to end.' },
       { tag: 'Reputation', text: 'The terms Councilmember Delgado held firm on are the terms in the document — not value-engineered.' },
       { tag: 'Reputation', text: 'Accountable to the public tracker, monthly, by name.' },
@@ -632,7 +632,7 @@ var TIER1_ESSENCE = {
       { tag: 'Career',     text: 'Project Director of the $45M Temescal Community Health Center.' },
       { tag: 'Career',     text: 'Architect selection, site due diligence, HCAI licensing — carries the build.' },
       { tag: 'Stabilized', text: 'Steady through the long permitting and construction runway.' },
-      { tag: 'Background', text: 'Methodical — the milestones in order, none skipped.' },
+      { tag: 'Background', tags: ['dial:drive:up'], text: 'Methodical — the milestones in order, none skipped.' },
       { tag: 'Education-Cultural', text: 'Reads the licensing and construction systems precisely.' },
       { tag: 'Mentorship', text: 'Builds for the community’s health — the people who’ll walk in the door.' },
       { tag: 'Reputation', text: 'Accountable for the public dollars and the timeline.' },
@@ -650,7 +650,7 @@ var TIER1_ESSENCE = {
       { tag: 'Promotion',  text: 'Carries a multibillion-dollar redevelopment from milestone to milestone.' },
       { tag: 'Career',     text: 'TIF reports, workforce agreements, deliverable filings — the whole apparatus.' },
       { tag: 'Stabilized', text: 'Unflinching at the scale of it; doesn’t blink at the numbers.' },
-      { tag: 'Background', text: 'Measured, exact — every gate documented.' },
+      { tag: 'Background', tags: ['dial:integrity:up'], text: 'Measured, exact — every gate documented.' },
       { tag: 'Education-Cultural', text: 'Reads the financing and construction board several moves ahead.' },
       { tag: 'Reputation', text: 'Accountable for the public stake in a private-scale build.' },
       { tag: 'Reputation', text: 'Plays it straight; the deliverables are filed or they aren’t.' }
@@ -682,7 +682,7 @@ var TIER1_ESSENCE = {
       { tag: 'Education-Cultural', text: 'Literary and allusive — connects present players to the historical ghosts he covered.' },
       { tag: 'Stabilized', text: 'Reverent even about decline; a measured, elegiac calm on the page.' },
       { tag: 'Stabilized', text: 'The quiet road after parade days — at peace with time passing.' },
-      { tag: 'Background', text: 'Knows the rhythm of the seasons the way sailors learn tides.' },
+      { tag: 'Background', tags: ['dial:openness:up'], text: 'Knows the rhythm of the seasons the way sailors learn tides.' },
       { tag: 'Media',      text: 'The recognized voice of Oakland baseball history.' },
       { tag: 'Public',     text: 'Pulls readers in with “you” — the narrator of the city’s baseball memory.' },
       { tag: 'Reputation', text: 'His word on the dynasty is trusted; the keeper of the record.' },
@@ -705,8 +705,8 @@ var TIER1_ESSENCE = {
       { tag: 'Public',     text: 'The confrontational voice of the bleachers; names the counter-argument and dismantles it.' },
       { tag: 'Media',      text: 'References his colleagues by name — Anthony for the metrics, Hal for the history.' },
       { tag: 'Reputation', text: 'Takes it personally and owns every word; corrected his own column in public when he was wrong.' },
-      { tag: 'Team',       text: 'Lives in the stands and the bars where the games actually get felt.' },
-      { tag: 'Personal',   text: 'Confessional and confrontational by turns — the heat is the point.' }
+      { tag: 'Team',       tags: ['dial:outabout:up'], text: 'Lives in the stands and the bars where the games actually get felt.' },
+      { tag: 'Personal',   tags: ['dial:composure:down'], text: 'Confessional and confrontational by turns — the heat is the point.' }
     ]
   },
 
@@ -727,8 +727,8 @@ var TIER1_ESSENCE = {
       { tag: 'Reputation', text: 'Principled to the letter; the ethics writer has to live the ethics.' },
       { tag: 'Reputation', text: 'Holds the line on fairness; names the hard truth plainly.' },
       { tag: 'Reputation', text: 'Trusted to get the moral framing right.' },
-      { tag: 'Personal',   text: 'Curious about the questions that don’t have clean answers.' },
-      { tag: 'Background', text: 'Deliberate and unhurried in his judgments.' }
+      { tag: 'Personal',   tags: ['dial:openness:up'], text: 'Curious about the questions that don’t have clean answers.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Deliberate and unhurried in his judgments.' }
     ]
   },
 
@@ -745,7 +745,7 @@ var TIER1_ESSENCE = {
       { tag: 'Education-Cultural', text: 'Reads the whole municipal system — service health, infrastructure, the money trail.' },
       { tag: 'Stabilized', text: 'Patient, not cynical; skeptical of timelines, steady across years.' },
       { tag: 'Stabilized', text: 'Steady through eleven years of council churn.' },
-      { tag: 'Background', text: 'Precise and unhurried — built on sourced facts, never vague.' },
+      { tag: 'Background', tags: ['dial:integrity:up'], text: 'Precise and unhurried — built on sourced facts, never vague.' },
       { tag: 'Reputation', text: 'Follows the money, not the press release; the extraction question is hers.' },
       { tag: 'Reputation', text: 'Tracks the record honestly across a decade of votes.' },
       { tag: 'Reputation', text: 'Trusted to get the vote math and the timeline exactly right.' },
@@ -768,10 +768,10 @@ var TIER1_ESSENCE = {
       { tag: 'Cultural',   text: 'First Friday is her territory — out in the art walk every month.' },
       { tag: 'Cultural',   text: 'Always in the scene, never above it — light, hands, sounds.' },
       { tag: 'Cultural',   text: 'Out in the neighborhoods at all hours, a witness to the city’s nights.' },
-      { tag: 'FirstFriday', text: 'The First Friday art walk is her beat — she works it block by block.' },
+      { tag: 'FirstFriday', tags: ['dial:outabout:up'], text: 'The First Friday art walk is her beat — she works it block by block.' },
       { tag: 'Education-Cultural', text: 'Finds beauty in complicated moments — the policy felt at street level.' },
       { tag: 'Public',     text: 'A familiar face across the city’s blocks.' },
-      { tag: 'Background', text: 'Even-keeled, present, unhurried.' }
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Even-keeled, present, unhurried.' }
     ]
   },
 
@@ -792,7 +792,7 @@ var TIER1_ESSENCE = {
       { tag: 'Reputation', text: 'Skeptical of the word “development”; tests the claim against the street.' },
       { tag: 'Reputation', text: 'Trusted to get the dollar figure and the human cost right.' },
       { tag: 'Household',  text: 'A father of four; the economy is never abstract to him.' },
-      { tag: 'Personal',   text: 'Curious about how the whole economic loop turns.' }
+      { tag: 'Personal',   tags: ['dial:openness:up'], text: 'Curious about how the whole economic loop turns.' }
     ]
   },
 
@@ -811,7 +811,7 @@ var TIER1_ESSENCE = {
       { tag: 'Reputation', text: 'Persistent and fair — documents, never guesses.' },
       { tag: 'Reputation', text: 'Trusted to separate the confirmed fact from the open question.' },
       { tag: 'Education-Cultural', text: 'Reads the documents for what they actually say.' },
-      { tag: 'Background', text: 'Measured, exact, unflappable under stonewalling.' }
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'Measured, exact, unflappable under stonewalling.' }
     ]
   },
 
@@ -829,9 +829,9 @@ var TIER1_ESSENCE = {
       { tag: 'Cultural',   text: 'Shoots every A’s home game; six championship parades on his record.' },
       { tag: 'Cultural',   text: 'Knows the Coliseum at midnight after the confetti and the waterfront at six a.m.' },
       { tag: 'Cultural',   text: 'Works from the bar stool, the dugout steps, the street corner.' },
-      { tag: 'PrevEvening', text: 'Out shooting the city’s nights, the light no one else waited for.' },
+      { tag: 'PrevEvening', tags: ['dial:outabout:up'], text: 'Out shooting the city’s nights, the light no one else waited for.' },
       { tag: 'Household',  text: 'Family-minded; Jack London Square is home.' },
-      { tag: 'Background', text: 'A steady eye; thirty years of making the frame count.' },
+      { tag: 'Background', tags: ['dial:composure:up'], text: 'A steady eye; thirty years of making the frame count.' },
       { tag: 'Mentorship', text: 'Leads a small photo team; loyal to the people he shoots with.' }
     ]
   },
@@ -852,8 +852,8 @@ var TIER1_ESSENCE = {
       { tag: 'Education-Cultural', text: 'Sees the irregularity others walk past; names it or doesn’t file.' },
       { tag: 'Cultural',   text: 'Opens in a bar, a laundromat, a BART car — out in the city where the story actually lives.' },
       { tag: 'Cultural',   text: 'Couch-surfing from Jingletown to Bushrod; always out, never at a desk.' },
-      { tag: 'PrevEvening', text: 'Files from the bar stool at Eli’s Mile High, last night’s city still on him.' },
-      { tag: 'FirstFriday', text: 'Out in the city’s nights, watching who shows and who doesn’t.' },
+      { tag: 'PrevEvening', tags: ['dial:outabout:up'], text: 'Files from the bar stool at Eli’s Mile High, last night’s city still on him.' },
+      { tag: 'FirstFriday', tags: ['dial:outabout:up'], text: 'Out in the city’s nights, watching who shows and who doesn’t.' },
       { tag: 'Reputation', text: 'His facts check out; accountability is the whole point.' },
       { tag: 'Resisted',   text: 'Names the irregularity or doesn’t file — no weasel words, no “sources suggest” hedge.' },
       { tag: 'Resisted',   text: 'Won’t make an unqualified accusation; holds to the question or the attributed claim, nothing looser.' }

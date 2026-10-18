@@ -2,7 +2,7 @@
   "generated": "2026-10-18",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1707,
+  "functionsMapped": 1708,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1963,6 +1963,7 @@
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_",
+        "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/bondEngine.js::bondProsperityTerm_",
         "phase05-citizens/bondEngine.js::spouseNetWorthFor_",
@@ -3019,6 +3020,24 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
     },
+    "engine299": {
+      "writers": [
+        "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
+        "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
+        "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
+        "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_"
+      ],
+      "readers": [
+        "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
+        "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
+        "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
+        "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_"
+      ]
+    },
     "gameModeMicroEventDetails": {
       "writers": [
         "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_"
@@ -3518,14 +3537,6 @@
       ]
     },
     "citizenEventMemory": {
-      "writers": [
-        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
-      ],
-      "readers": [
-        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
-      ]
-    },
-    "engine299": {
       "writers": [
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ],

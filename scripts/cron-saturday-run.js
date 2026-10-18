@@ -808,6 +808,23 @@ const AUDIT_CHARGE = [
   'Reply STRICT JSON only: {"verdict":"...","failures":[{"what":"...","class":"citizen-bending|data-misrepresentation|engine-verbiage|unsupported-claim","why":"..."}]}'
 ].join('\n');
 
+// UNDOCKED is the city's serialized reality show (plan 2026-08-07-spacemolt-game-show). The audit's
+// ground truth is the world summary, which carries no show record: C109/C110 failed the digest as
+// invented (the pilots "were" a principal and a nurse) and C111 flagged the show's own scoring words
+// as engine leakage. The board is the show's authoritative record, so an UNDOCKED piece is audited
+// against it.
+function undockedGroundTruth(rows) {
+  const board = (rows || []).filter(r => r && r.Holder);
+  if (!board.length) return '';
+  return 'UNDOCKED is a serialized in-world reality program the city watches: real citizens fly a ship each episode and are scored. ' +
+    'Its own scoring words (flights, episodes, standings, credits, combat, mishaps, magnitude, cycles led, streak) are in-world, not engine vocabulary, ' +
+    'and a citizen who flies is still the citizen the ledger says — flying is not bending them. Raw snake_case identifiers, field names and prompt ' +
+    'scaffolding in prose remain engine-verbiage. The board is as of this audit and standings move every episode: a daily written earlier in the week may state an earlier standing, which is not a violation — only the weekly digest is held to these totals.\nBOARD (authoritative for who flew and their totals):\n' +
+    board.map(r => r.Rank + '. ' + r.Holder + (r.POPID ? ' (' + r.POPID + ')' : '') + ' — ' + r.Episodes + ' episodes, ' + r.CreditsTotal +
+      ' credits, combat ' + r.CombatTotal + ', mishaps ' + r.MishapTotal + ', best magnitude ' + r.BestMagnitude + ', cycles led ' + r.CyclesLed +
+      ', streak ' + r.CurrentStreak + ', last aired C' + r.LastAiredCycle).join('\n');
+}
+
 async function auditOne(entry, profiles, worldText) {
   const s = entry.sidecar;
   const intake = s.intake || null;
@@ -845,6 +862,7 @@ async function auditOne(entry, profiles, worldText) {
   const user = [
     '=== LEDGER PROFILES (authoritative for every named citizen) ===', groundProfiles || '(none supplied)',
     '', '=== WORLD SUMMARY (authoritative cycle record) ===', worldText || '(missing)',
+    ...(deskSystem(s.desk) === 'undocked' ? ['', '=== UNDOCKED SHOW RECORD (authoritative for the show) ===', undockedGroundTruth((readJsonSafe(path.join(ROOT, 'output', 'spacemolt-show', 'standings.json')) || {}).rows) || '(board missing)'] : []),
     '', '=== ARTICLE ===', entry.text.slice(0, 12000),
     '', intake ? '=== INTAKE (the article\'s own claim register) ===\n' + JSON.stringify(intake) : '=== NOTE: legacy article, no INTAKE block — judge the prose directly ===',
     '', 'Reply with the verdict JSON object ONLY. The first character of your reply must be {.'
@@ -986,6 +1004,16 @@ function crossoverCitizens(set, extraCandidates) {
   }
   return out.sort((a, b) => b.systems.length - a.systems.length || b.pieces.length - a.pieces.length || a.name.localeCompare(b.name));
 }
+// Move 5 read (Sat 10-17): every crossing had one printed side, so the narration sent readers to
+// Mason Ortega's pages and Nia's reporting, neither of which printed. The narrator names a crossing
+// only where two systems both printed it; the whole-set list still drives the curation tie-break.
+function printedCrossovers(crossovers, selected) {
+  const printed = new Set(selected || []);
+  return (crossovers || []).map(x => {
+    const pieces = x.pieces.filter(p => printed.has(p.stem));
+    return Object.assign({}, x, { pieces, systems: [...new Set(pieces.map(p => p.system))] });
+  }).filter(x => x.systems.length >= 2);
+}
 function crossoverBonus(entry, crossovers) {
   let n = 0;
   for (const x of (crossovers || [])) if (x.pieces.some(p => p.stem === entry.stem)) n++;
@@ -1087,7 +1115,7 @@ async function stepNarrate(cycle) {
   }).filter(Boolean).join('\n\n');
   if (!material) throw new Error('curated set resolved to zero articles');
   // research.29 Move 5: the crossing citizens the curation step found, ahead of the reporting
-  const crossovers = curation.crossovers || [];
+  const crossovers = printedCrossovers(curation.crossovers, curation.selected);
   const pulse = await anthropicChat(NARRATOR_MODEL, NARRATOR_CHARGE(cycle, crossovers.length),
     // 3600, not 2200: Sonnet 5.5 reasons before it writes and OpenRouter cannot turn that off,
     // so ~800 thinking tokens share this cap with the ~1500-token narration (research.28 run).
@@ -1306,4 +1334,4 @@ if (require.main === module) {
 module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
-  deskSystem, crossoverCitizens, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };
+  auditOne, loadLedgerProfiles, worldSummaryText, deskSystem, crossoverCitizens, printedCrossovers, undockedGroundTruth, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };

@@ -262,6 +262,16 @@ console.log('Test 6: mergeStorylineLedger');
   ok('crossoverBonus: +2 per crossing citizen on the piece, 0 elsewhere', X.crossoverBonus(set[1], x) === 2 && X.crossoverBonus(set[2], x) === 0);
   ok('crossoverBlock: names the citizen with each system and byline', /Eric Taveras — .*sports \(P Slayer\)/.test(X.crossoverBlock(x)) && /undocked \(Nia Rook\)/.test(X.crossoverBlock(x)));
   ok('crossoverBlock: empty when nothing crosses', X.crossoverBlock([]) === '');
+  // Move 5 read: a crossing is narrated only where both systems printed
+  const sel = ['sports_c111_pslayer', 'civic_c111_carmen'];
+  ok('printedCrossovers: one printed side → no crossing', X.printedCrossovers(x, sel).length === 0);
+  const px = X.printedCrossovers(x, ['sports_c111_pslayer', 'undocked_c111_nia']);
+  ok('printedCrossovers: both sides printed → kept, with only printed pieces', px.length === 1 && px[0].pieces.every(p => ['sports_c111_pslayer', 'undocked_c111_nia'].includes(p.stem)) && px[0].systems.length === 2);
+  ok('printedCrossovers: nothing printed / no list → empty', X.printedCrossovers(x, []).length === 0 && X.printedCrossovers(null, sel).length === 0);
+  // the audit judges UNDOCKED against the show's board, and the show's own words are not leakage
+  const ug = X.undockedGroundTruth([{ Rank: 1, POPID: 'POP-00597', Holder: 'Eric Taveras', Episodes: 2, CreditsTotal: 1170, CombatTotal: 0, MishapTotal: 0, BestMagnitude: 3, CyclesLed: 1, CurrentStreak: 1, LastAiredCycle: 112 }]);
+  ok('undockedGroundTruth: board row + in-world vocabulary line', /Eric Taveras \(POP-00597\) — 2 episodes, 1170 credits/.test(ug) && /in-world, not engine vocabulary/.test(ug));
+  ok('undockedGroundTruth: no board → empty', X.undockedGroundTruth([]) === '' && X.undockedGroundTruth(null) === '');
   ok('narrator charge: crossing line only when there is a crossing', /crossing is yours to name/.test(X.NARRATOR_CHARGE(111, 1)) && !/crossing is yours/.test(X.NARRATOR_CHARGE(111, 0)));
   ok('narrator charge: no engine vocabulary leaks ("system")', !/\bsystems?\b/i.test(X.NARRATOR_CHARGE(111, 1).split('\n').slice(8).join(' ')));
 }

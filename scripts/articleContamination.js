@@ -24,7 +24,7 @@ const LATTICE = [
 ];
 
 const REAL_OAKLAND = [
-  { id: 'international-blvd', re: /International (?:Boulevard|Blvd)\b/i },
+  // International Boulevard is the map, not a leak: the engine writes it (LifeHistory_Log 68 lines at C112) and 14 editions carry it — pipeline.83 sweep 2026-10-19.
   { id: 'allen-temple-bus', re: /Allen Temple bus stop/i },
   { id: 'reagan-era', re: /since the Reagan administration/i },
   // EBMUD is also a ledger business (BIZ-00019, Priya Nair's employer): leaked only when the packet does not supply it.

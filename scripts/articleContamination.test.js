@@ -12,7 +12,7 @@ const vacuum = fs.readFileSync(
 const v = scan(vacuum, { desk: 'civic' });
 assert.equal(v.fail, true, 'e103 vacuum must fail');
 assert(v.findings.some(f => f.check === 'blight-import'), JSON.stringify(v.findings));
-assert(v.findings.some(f => f.check === 'real-oakland-leak'), 'International Blvd / Allen Temple bus stop');
+assert(v.findings.some(f => f.check === 'real-oakland-leak'), 'Allen Temple bus stop (International Blvd is canon, pipeline.83)');
 // A ledger-supplied name (EBMUD, BIZ-00019) is canon when the packet carries it; unsupplied it still leaks.
 const ebText = 'Priya Nair works at EBMUD on water systems.';
 assert(scan(ebText, {}).findings.some(f => f.issue === 'ebmud'), 'EBMUD unsupplied still leaks');

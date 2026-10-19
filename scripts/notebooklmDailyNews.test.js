@@ -537,14 +537,21 @@ const syntheticDigest = {
   const staged = path.join(root, 'output', 'cron-compare', 'staged');
   fs.mkdirSync(staged, { recursive: true });
   fs.mkdirSync(path.join(root, 'output', 'civis-journal'), { recursive: true });
+  fs.mkdirSync(path.join(root, 'editions'), { recursive: true });
   const now = Date.now();
   const hours = 36;
   const old = new Date(now - 5 * 24 * 3600e3);
-  const edition = path.join(root, 'output', 'cycle_pulse_c777.md');
+  const edition = path.join(root, 'editions', 'cycle_pulse_c777.txt');
   const journal = path.join(root, 'output', 'civis-journal', 'civis_journal_c777.md');
   const digest = path.join(staged, 'undocked-digest_c777_nia-rook-weekly_packet-v2_x.staged.md');
   const fresh = path.join(staged, 'wire_c777_someone_packet-v2_x.staged.md');
-  fs.writeFileSync(edition, '# The Cycle Pulse — synthetic\n');
+  fs.writeFileSync(edition, [
+    'THE CYCLE PULSE — synthetic', '', 'First synthetic article body.', '',
+    '## INTAKE', 'NAMES: Synthetic One | mentioned', '<!-- SELF-SCORE: question-answered=no -->', '',
+    '============================================================', '',
+    '# Second Synthetic Headline', '', 'Second synthetic article body survives.', '',
+    '## INTAKE', 'NAMES: Synthetic Two | mentioned', '',
+  ].join('\n'));
   fs.writeFileSync(journal, '# Civis Systems Journal — C777\n');
   fs.writeFileSync(digest, '# UNDOCKED digest synthetic\n');
   fs.writeFileSync(fresh, '# Synthetic wire\n');
@@ -563,9 +570,11 @@ const syntheticDigest = {
   const pack = buildSourcePack(Object.assign({}, syntheticInput, {
     reports: onEditionDay.reports, flagged: [],
   }));
-  assert(pack.text.includes('PUBLISHED_EDITION — output/cycle_pulse_c777.md'));
+  assert(pack.text.includes('PUBLISHED_EDITION — editions/cycle_pulse_c777.txt'));
   assert(pack.text.includes('canon, the week\'s reported record'));
   assert(pack.text.includes('not Tribune reporting'));
+  assert(pack.text.includes('Second synthetic article body survives.'), 'every article of the edition is carried');
+  assert(!pack.text.includes('NAMES: Synthetic'), 'INTAKE blocks are stripped per article');
 
   // Edition outside the window (a weekday): journal and stale digest stay out.
   fs.utimesSync(edition, old, old);

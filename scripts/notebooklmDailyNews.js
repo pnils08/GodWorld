@@ -240,8 +240,10 @@ function collectNewsroomArtifacts(cycle, hours, nowMs, root = ROOT) {
   // edition file landing inside the window — Saturday's print sits inside Sunday
   // 08:00's 36 h and outside Monday's — so it is the Sunday run by data, not by
   // clock. The edition and journal are published work and count toward the
-  // router's reported-day bar (publishedExtras).
-  const editionFile = path.join(root, 'output', 'cycle_pulse_c' + cycle + '.md');
+  // router's reported-day bar (publishedExtras). The edition is editions/*.txt
+  // (the full print, what the canon notebook holds); output/cycle_pulse_c<N>.md
+  // is only the editor's column over it.
+  const editionFile = path.join(root, 'editions', 'cycle_pulse_c' + cycle + '.txt');
   const editionDay = fs.existsSync(editionFile) && fs.statSync(editionFile).mtimeMs >= cutoff;
   const extras = [];
   if (editionDay) {

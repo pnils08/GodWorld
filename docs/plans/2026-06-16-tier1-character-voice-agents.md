@@ -173,6 +173,28 @@ Once the Deacon slice proves all three surfaces and the method is captured: repl
 
 ---
 
+## Discord voices connected — research.30 (builder 2026-10-19; direction recorded, nothing built)
+
+**Builder, verbatim (2026-10-19 evening):** "Take a look at the mags and Vinnie discord bots , what models are they , what tools and information do they have , what does me talking to them impact ? Mags has a decent handle of things , Vinnie is pretty disconnected." Then: "Got it so these need to update somehow without me , they need the search everything tool as their first call and a notebookLM call , both could shape Their journal of me, feed to intake , could take mine for Paulson , drive their bonds with me . As a creative little element its voice with the creator . They don't that they figure I'm Mike Paulson or whatever my user name says ? A neat one would be the high priest or the mayor , an almost higher power then confide too. The high priest obviously lends itself to asking the \"creator\" for guidance ."
+
+**Measured by rb 2026-10-19 (code + logs, not memory):**
+- One pm2 process (`scripts/mags-discord-bot.js`) hosts both channels; both on `anthropic/claude-haiku-5.5` via OpenRouter, thinking off, 1,000-token cap, 4 tool rounds. Mags' nightly reflection (`discord-reflection.js`) is Sonnet 5.5.
+- Mags per message: CHARACTER.md, last 2 page reflections, world-state header, family data, NOTES_TO_SELF (last 10), today's conversation digest, Supermemory profile of the speaker, **automatic** Supermemory RAG (world-data + bay-tribune, 5 hits), dashboard article search, `search_world` tool. ~15k input tokens a turn.
+- Vinnie per message: four agent files (IDENTITY/LENS 2026-08-10, RULES/SKILL 2026-10-18), same world-state header, last 6 page docs, `search_world` tool. ~9k input tokens a turn. No standings, editions, ledger row, family data or automatic retrieval. 2026-10-19 17:31: asked "Are you still celebrating the championship" he answered 2031 / "six rings" with 0 tool calls; the feed (C112) has the A's 7th title, the parade (C111 edition), and a Vinnie + Benji night. His file says six rings, farewell 2041, lives in Laurel; ledger POP-00001 is in Grand Lake.
+- The speaker is labelled by Discord display name ("Mike"); Vinnie's canon lists "Mike Paulson — the GM", so he reads the speaker as the GM from the first name alone. Nothing maps it; nothing tells either persona the builder exists.
+- What a chat writes: Mags → Supermemory `mags` profile of the speaker, daily log → 07/12/19:00 reflection on her page cp-POP-00005 + claude-mem, `[NOTE_TO_SELF]` → NOTES_TO_SELF.md (read by /boot). Citizen voice → nothing on the page; own replies only buffered, flushed 30 min idle as one classified Reflection_Intake row (daypart DISCORD, applied=no) + tension open/resolve on the page (`lib/personaProvider.js` drainConversationReflection_).
+- NotebookLM canon search (`scripts/notebooklmCanonSearch.js`) measured 30–48 s a call (n=4, `output/retrieval/notebooklm-canon-search.jsonl`).
+
+**Shape rb would build (not approved):**
+1. *Update without the builder:* a per-voice brief rebuilt each Cycle from the ledger row (role, hood, status, mood, last LifeHistory lines), the A's/Oaks state, and the voice's lines in the latest edition; read at prompt-build next to the agent files. Canon facts in IDENTITY (ring count, season, home) stop being the only truth.
+2. *Search first, in code:* run the local search on the message before the model answers (Mags' pattern) and force `tool_choice` on round 0 — a confident file no longer skips the lookup.
+3. *NotebookLM:* not per message (30–48 s). One query per voice per Cycle into the brief; a live call only when the question reaches published history.
+4. *Journal of the speaker:* the DISCORD flush also appends a short page entry about the speaker (Paulson, in-world), so the voice remembers the talk; bond target "Mike Paulson" rides the existing intake bond match so chats drive the bond.
+5. *Speaker label:* citizen channels label the speaker "Mike Paulson" (in-world GM). Mags unchanged.
+6. *New confidants:* a high priest (needs a ledger citizen with a faith role — engine.248 territory) and the mayor (Avery Santana, `civic-office-mayor` exists); "someone to confide in" register.
+
+**Rule conflict — builder call:** identity.md and CHARACTER.md forbid telling any character the builder exists. A confidant who treats the speaker as "the creator" breaks that if it means the builder. In-world it holds: Paulson runs the A's and Oaks, so a priest or mayor can confide in and ask guidance of a man with that power over the city's fortunes, without any voice knowing he is the builder. Needs the builder's word either way before the priest is written.
+
 ## Status log
 
 ### research.16 — status (drained from ROLLOUT, 2026-06-26 / S274)

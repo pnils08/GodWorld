@@ -1,0 +1,22 @@
+require('/root/GodWorld/lib/env');
+const { google } = require('/root/GodWorld/node_modules/googleapis');
+const BENCH = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA';
+const LIVE = process.env.GODWORLD_SHEET_ID;
+const URL = 'https://script.google.com/macros/s/AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC/exec';
+const tok = process.env.CYCLE_TRIGGER_TOKEN;
+const MARK = 'AIMCHECK-1004';
+(async () => {
+  const auth = new google.auth.GoogleAuth({ keyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS, scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
+  const api = google.sheets({ version: 'v4', auth });
+  const meta = await api.spreadsheets.get({ spreadsheetId: BENCH, fields: 'properties.title' });
+  if (meta.data.properties.title !== 'Sandox_104_c109-live_Simulation_Narrative' || BENCH === LIVE) throw new Error('target check failed');
+  const a1 = async id => ((await api.spreadsheets.values.get({ spreadsheetId: id, range: '_CycleCheckpoint!A1' })).data.values || [[]])[0][0] || '';
+  const cp = async () => { const r = await fetch(URL + '?' + new URLSearchParams({ token: tok, action: 'checkpoint' }), { redirect: 'follow' }); const t = await r.text(); try { return JSON.parse(t).checkpoint; } catch (e) { return 'nonJSON ' + r.status; } };
+  console.log('before: bench A1', JSON.stringify(await a1(BENCH)), '| live A1', JSON.stringify(await a1(LIVE)), '| script reads', JSON.stringify(await cp()));
+  await api.spreadsheets.values.update({ spreadsheetId: BENCH, range: '_CycleCheckpoint!A1', valueInputOption: 'RAW', requestBody: { values: [[MARK]] } });
+  const seen = await cp();
+  console.log('marked bench: script reads', JSON.stringify(seen), '| live A1', JSON.stringify(await a1(LIVE)));
+  await api.spreadsheets.values.clear({ spreadsheetId: BENCH, range: '_CycleCheckpoint!A1' });
+  console.log('cleared: bench A1', JSON.stringify(await a1(BENCH)), '| script reads', JSON.stringify(await cp()));
+  console.log(seen && seen.raw === MARK ? 'AIM = BENCH (script read the bench marker)' : 'AIM NOT PROVEN');
+})().catch(e => { console.error('ERR', e.message); process.exit(1); });

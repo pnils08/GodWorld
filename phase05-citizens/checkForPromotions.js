@@ -409,7 +409,7 @@ function checkForPromotions_(ctx) {
     setL('EducationLevel', deriveEducationLevel_(dSeed, neigh, age, null));
     setL('DebtLevel', age < 18 ? 0 : deriveDebtLevel_(dSeed, age, dIncome));
     setL('NetWorth', age < 18 ? 0 : deriveNetWorth_(dSeed, age, dIncome, dRetired ? 'retired' : ''));
-    setL('MaritalStatus', 'single');
+    setL('MaritalStatus', age < 18 ? 'youth' : 'single'); // engine.302: a minor is youth
     var gcSex = gSex >= 0 ? String(row[gSex] || '').toLowerCase() : '';
     setL('Gender', (gcSex === 'male' || gcSex === 'female') ? gcSex : deriveGender_(dSeed, neigh));
 

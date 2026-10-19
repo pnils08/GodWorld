@@ -18,6 +18,7 @@
 
 require('../lib/env');
 const { google } = require('googleapis');
+const MARITAL_VALUES = ['married', 'divorced', 'widowed', 'single', 'youth']; // engine.302 (builder 2026-10-19)
 const SIM_YEAR = require('../lib/citizenDerivation').currentSimYear(); // the sim's calendar year for age math (2042 from C105; the 2041 anchor is retired)
 const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods'); // S247: shared canon set (kills audit/pre-mortem list drift)
 const path = require('path');
@@ -106,6 +107,7 @@ async function main() {
   const tierClockMatrix = {};
   const statusEnum = {};
   const roleTypeCitizen = [];
+  const maritalOffEnum = [], minorNotYouth = [], adultYouth = [], noBirthYear = []; // engine.302: the five marital values
   const birthYearOOB = [];          // out-of-bounds age (negative or > 110)
   const nonCanonNeighborhood = {};
   const untrimmedName = [];         // leading/trailing whitespace in First/Last/MaidenName
@@ -163,6 +165,16 @@ async function main() {
     // finite year is out-of-bounds by definition.
     if (byRaw && (!Number.isFinite(by) || SIM_YEAR - by < 0 || SIM_YEAR - by > 110)) {
       birthYearOOB.push({ popid: popidRaw, name: `${first} ${last}`.trim(), birthYear: Number.isFinite(by) ? by : byRaw, age: Number.isFinite(by) ? SIM_YEAR - by : 'n/a' });
+    }
+
+    // engine.302 (builder 2026-10-19): MaritalStatus is married / divorced / widowed / single / youth
+    // (under 18) — never blank, never partnered. A missing BirthYear is flagged apart, never classified.
+    const mar = String(row[c('MaritalStatus')] ?? '').trim().toLowerCase();
+    if (!byRaw) noBirthYear.push({ popid: popidRaw, name: `${first} ${last}`.trim() });
+    if (MARITAL_VALUES.indexOf(mar) < 0) maritalOffEnum.push({ popid: popidRaw, value: mar || '(blank)' });
+    else if (byRaw && Number.isFinite(by)) {
+      if (SIM_YEAR - by < 18 && mar !== 'youth') minorNotYouth.push({ popid: popidRaw, value: mar, age: SIM_YEAR - by });
+      if (SIM_YEAR - by >= 18 && mar === 'youth') adultYouth.push({ popid: popidRaw, age: SIM_YEAR - by });
     }
 
     const nbhd = String(row[c('Neighborhood')] || '').trim();
@@ -259,6 +271,10 @@ async function main() {
   console.log('Drift sentinels:');
   console.log(`  RoleType="Citizen":     ${roleTypeCitizen.length}` + (roleTypeCitizen.length ? ' — ' + roleTypeCitizen.slice(0,5).map(x => `${x.popid} ${x.name}`).join('; ') : ''));
   console.log(`  BirthYear age OOB:      ${birthYearOOB.length}` + (birthYearOOB.length ? ' — ' + birthYearOOB.slice(0,5).map(x => `${x.popid} age=${x.age}`).join('; ') : ''));
+  console.log(`  MaritalStatus off-enum: ${maritalOffEnum.length}` + (maritalOffEnum.length ? ' — ' + Object.entries(maritalOffEnum.reduce((m, x) => (m[x.value] = (m[x.value] || 0) + 1, m), {})).map(([k, n]) => `${k} ${n}`).join(', ') : ''));
+  console.log(`  Minor not youth:        ${minorNotYouth.length}` + (minorNotYouth.length ? ' — ' + minorNotYouth.slice(0,5).map(x => `${x.popid} ${x.value} age=${x.age}`).join('; ') : ''));
+  console.log(`  Adult reading youth:    ${adultYouth.length}` + (adultYouth.length ? ' — ' + adultYouth.slice(0,5).map(x => `${x.popid} age=${x.age}`).join('; ') : ''));
+  console.log(`  BirthYear missing:      ${noBirthYear.length}` + (noBirthYear.length ? ' — ' + noBirthYear.slice(0,5).map(x => `${x.popid} ${x.name}`).join('; ') : ''));
   console.log(`  Untrimmed name field:   ${untrimmedName.length}` + (untrimmedName.length ? ' — ' + untrimmedName.slice(0,5).map(x => `${x.popid} ${x.field}=${JSON.stringify(x.value)}`).join('; ') : ''));
   const nonCanonTotal = Object.values(nonCanonNeighborhood).reduce((a,b)=>a+b,0);
   console.log(`  Non-canon neighborhood: ${nonCanonTotal} citizens across ${Object.keys(nonCanonNeighborhood).length} variants`);

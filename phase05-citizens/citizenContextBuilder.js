@@ -87,7 +87,7 @@ function deriveLifeState_(f) {
     isMinor: (age !== null && age < 18),
     working: working,
     statusNorm: statusNorm,
-    married: (maritalLc === "married" || maritalLc === "partnered"),
+    married: maritalLc === "married", // engine.302: partnered is not a status
     hasKids: (Number(f.numChildren) || 0) > 0,
     wealthBand: (wl === null || isNaN(wl)) ? "unknown" : (wl <= 3 ? "tight" : (wl >= 8 ? "comfortable" : "mid"))
   };

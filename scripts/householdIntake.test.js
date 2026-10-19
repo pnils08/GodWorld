@@ -157,7 +157,7 @@ console.log('\n2. the mint — through the populator, wired, one household:');
   const kids = JSON.stringify([T[col('POPID')], I[col('POPID')]]);
   check('children on both parents, counted — no phantom kids for the drip', M[col('ChildrenIds')] === kids && D[col('ChildrenIds')] === kids && M[col('NumChildren')] === 2 && D[col('NumChildren')] === 2);
   check('kids carry both parents', JSON.parse(T[col('ParentIds')]).sort().join() === [M[col('POPID')], D[col('POPID')]].sort().join() && JSON.parse(I[col('ParentIds')]).length === 2);
-  check('kids are students, single, childless', T[col('RoleType')] === 'student' && T[col('CareerStage')] === 'student' && T[col('MaritalStatus')] === 'single' && T[col('NumChildren')] === 0);
+  check('kids are students, youth, childless', T[col('RoleType')] === 'student' && T[col('CareerStage')] === 'student' && T[col('MaritalStatus')] === 'youth' && T[col('NumChildren')] === 0); // engine.302
   check('kids hold no employer and earn nothing; the adults were placed', T[col('EmployerBizId')] === '' && I[col('EmployerBizId')] === '' && !/Seeking work/.test(T[col('LifeHistory')]) && T[col('Income')] === '' && M[col('EmployerBizId')] !== undefined);
   check('one HouseholdId on all four, in the intake series', nu.every(r => r[col('HouseholdId')] === 'HH-0106-I001'));
   check('the ascent columns are filled (education, income, net worth, gender, tags)', M[col('EducationLevel')] && M[col('Income')] === 61000 && M[col('NetWorth')] !== '' && M[col('Gender')] === 'male' && D[col('Gender')] === 'female' && M[col('SkillTags')] !== '');

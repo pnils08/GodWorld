@@ -157,15 +157,17 @@ function deriveNetWorth(popId, age, income, careerStage) {
 // Age-bracket CDF. Calibrated to 2020s US baseline + slight prosperity-era
 // Oakland tweak (marginally higher partnered/married rates).
 function deriveMaritalStatus(popId, age) {
+  // engine.302 (builder 2026-10-19): five values — the partnered band reads married, a minor is youth
+  if (age < 18) return 'youth';
   const r = rand01(popId, 'MaritalStatus');
   const bracket = ageBracket(age);
 
   const CDF = {
-    '18-24': [['single', 0.88], ['partnered', 0.97], ['married', 1.00]],
-    '25-34': [['single', 0.45], ['partnered', 0.62], ['married', 0.93], ['divorced', 1.00]],
-    '35-49': [['single', 0.22], ['partnered', 0.32], ['married', 0.85], ['divorced', 0.97], ['widowed', 1.00]],
-    '50-64': [['single', 0.15], ['partnered', 0.20], ['married', 0.78], ['divorced', 0.93], ['widowed', 1.00]],
-    '65+':   [['single', 0.10], ['partnered', 0.13], ['married', 0.65], ['divorced', 0.78], ['widowed', 1.00]],
+    '18-24': [['single', 0.88], ['married', 1.00]],
+    '25-34': [['single', 0.45], ['married', 0.93], ['divorced', 1.00]],
+    '35-49': [['single', 0.22], ['married', 0.85], ['divorced', 0.97], ['widowed', 1.00]],
+    '50-64': [['single', 0.15], ['married', 0.78], ['divorced', 0.93], ['widowed', 1.00]],
+    '65+':   [['single', 0.10], ['married', 0.65], ['divorced', 0.78], ['widowed', 1.00]],
   };
   return pickFromCDF(r, CDF[bracket]);
 }

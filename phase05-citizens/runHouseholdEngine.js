@@ -533,7 +533,7 @@ function runHouseholdEngine_(ctx) {
     // engine.32 T4 — circumstance gates: partnered/parent lines only for
     // citizens whose ledger row says so (lowercase enum per generational S248).
     var marital = iMarital >= 0 ? (row[iMarital] || "").toString().toLowerCase() : "";
-    if (marital === "married" || marital === "partnered") {
+    if (marital === "married") { // engine.302: partnered is not a status
       for (var pi = 0; pi < partneredPool.length; pi++) { citizenPool.push(partneredPool[pi]); }
     }
     var numKids = iNumChildren >= 0 ? Number(row[iNumChildren]) || 0 : 0;

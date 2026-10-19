@@ -214,7 +214,7 @@ async function main() {
     set('UsageCount', 0);
     set('Neighborhood', y.neighborhood);
     set('HouseholdId', y.hhid);
-    set('MaritalStatus', 'single');
+    set('MaritalStatus', y.age < 18 ? 'youth' : 'single'); // engine.302: a minor is youth
     set('NumChildren', 0);
     set('ParentIds', '[]');     // parents off-sample
     set('ChildrenIds', '[]');

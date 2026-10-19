@@ -5,7 +5,7 @@
  *
  * v1.3 engine.56 (S316) — the ledger becomes true:
  * - reconcileHouseholds_ runs every cycle: SL HouseholdId is the membership
- *   truth source. Spouse-merge (married/partnered, same Last+hood, exactly-2
+ *   truth source. Spouse-merge (married, same Last+hood, exactly-2
  *   groups, absorb single/unassigned side), adopt intake-authored households
  *   the ledger never had (HH-KEANE class), rebuild Members, repair
  *   Head/Neighborhood/Type, un-dissolve rows citizens still live in,
@@ -79,7 +79,7 @@ var HOUSING_TYPES = {
 var MARITAL_STATUS = {
   SINGLE: 'single',
   MARRIED: 'married',
-  PARTNERED: 'partnered',
+  YOUTH: 'youth', // engine.302 (builder 2026-10-19): five values; partnered is not one
   DIVORCED: 'divorced',
   WIDOWED: 'widowed'
 };
@@ -619,7 +619,7 @@ function reconcileHouseholds_(ctx, cycle) {
     return String(row[iStatus] || 'active').toLowerCase() !== 'deceased';
   };
 
-  // ── 1. Spouse-merge: married/partnered pairs sharing Last name + hood but
+  // ── 1. Spouse-merge: married pairs sharing Last name + hood but
   //      split across households. Conservative: exactly-2-candidate groups
   //      only, and only absorb a single-member-or-unassigned side into the
   //      other. Ambiguity (3+ same-name married in one hood) → skip.
@@ -635,7 +635,7 @@ function reconcileHouseholds_(ctx, cycle) {
       var pr = rows[p];
       if (!alive(pr)) continue;
       var ms = String(pr[iMarital] || '').toLowerCase();
-      if (ms !== 'married' && ms !== 'partnered') continue;
+      if (ms !== 'married') continue;
       var last = String(pr[iLast] || '').trim();
       var hood = String(pr[iNeighborhood] || '').trim();
       if (!last || !hood) continue;
@@ -745,7 +745,7 @@ function reconcileHouseholds_(ctx, cycle) {
           newType = 'couple';
         } else {
           var headMar = headRow && iMarital >= 0 ? String(headRow[iMarital] || '').toLowerCase() : '';
-          if (headMar === 'married' || headMar === 'partnered') {
+          if (headMar === 'married') {
             newType = 'couple';
           } else {
             // engine.73/153: an established single (income >= SOLO_INCOME_FLOOR,
@@ -806,7 +806,7 @@ function reconcileHouseholds_(ctx, cycle) {
         newRow[lType] = 'couple';
       } else {
         var adoptMar = headP && iMarital >= 0 ? String(headP[iMarital] || '').toLowerCase() : '';
-        newRow[lType] = (adoptMar === 'married' || adoptMar === 'partnered') ? 'couple' : 'single';
+        newRow[lType] = adoptMar === 'married' ? 'couple' : 'single';
       }
     }
     newRow[lMembers] = JSON.stringify(mem);
@@ -1089,7 +1089,7 @@ function buildCitizenMoneyLookup_(ctx) {
       income: isMinor ? 0 : (Number(rows[r][incomeCol]) || 0),
       netWorth: netWorthCol >= 0 ? (Number(rows[r][netWorthCol]) || 0) : 0,
       adult: by > 0 ? (simYear - by) >= 18 : true, // 18+ = adult (S320 kid-age ruling)
-      married: ms === 'married' || ms === 'partnered',
+      married: ms === 'married',
       spousePop: sp ? sp.split(' ')[0] : ''
     };
   }

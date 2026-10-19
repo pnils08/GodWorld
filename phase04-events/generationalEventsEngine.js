@@ -414,6 +414,10 @@ function runGenerationalEngine_(ctx) {
     var age = birthYear ? (simYear - birthYear) : 0;
     var name = ((row[iFirst] || "") + " " + (row[iLast] || "")).trim();
 
+    // engine.302: the year a citizen turns 18, youth reads single — every row past the skip list
+    // above, before the health branch (a hospitalized 18-year-old turns too) and the mode gate.
+    if (youthComesOfAge_(row, iMarital, birthYear, age)) updatedRows[r] = true;
+
     // HEALTH STATUS LIFECYCLE — runs for ALL modes (engine.52 A1): a citizen
     // in hospital transitions every cycle regardless of clock mode; the mode
     // gate below only guards new-milestone generation.
@@ -1173,7 +1177,7 @@ function createChildRow_(ctx, parentRowIdx, cycle) {
   set("OrginCity", "Oakland");
   set("Neighborhood", hood);
   set("HouseholdId", hhId);
-  set("MaritalStatus", "single");
+  set("MaritalStatus", "youth"); // engine.302: a minor is youth until their 18th year
   set("Gender", sex);
   set("Income", 0);
   set("NumChildren", 0);
@@ -1676,6 +1680,42 @@ function triggerDeathCascade_(ctx, deceasedId, name, tier, tierRole, neighborhoo
       season: cal.season
     });
   }
+
+  widowSurvivingSpouse_(ctx, deceasedId);
+}
+
+// engine.302 (builder 2026-10-19): youth is under 18 only. A state check, not an event — no life line.
+function youthComesOfAge_(row, iMarital, birthYear, age) {
+  if (iMarital < 0 || !birthYear || age < 18) return false;
+  if (String(row[iMarital] || "").trim().toLowerCase() !== "youth") return false;
+  row[iMarital] = "single";
+  return true;
+}
+
+// engine.302 (builder 2026-10-19): a death leaves the surviving spouse widowed. Both death paths
+// (the health lifecycle and checkDeath_) end in triggerDeathCascade_, so this is the one sink. The
+// survivor is a row whose OWN SpouseId names the deceased and who reads married — a pointer on the
+// deceased's side alone never widows anyone. SpouseId is kept: the heritage join resolves the late
+// spouse through Citizen_Archive (generationalWealthEngine.js updateHeritage_), and the deceased row
+// leaves the ledger at Phase 11. Runs after the arcs above (they read the household as it stood).
+function widowSurvivingSpouse_(ctx, deceasedId) {
+  if (!ctx.ledger || !ctx.ledger.rows || !deceasedId) return 0;
+  var h = ctx.ledger.headers;
+  var iPop = h.indexOf("POPID"), iMar = h.indexOf("MaritalStatus"), iSp = h.indexOf("SpouseId"), iSt = h.indexOf("Status");
+  if (iPop < 0 || iMar < 0 || iSp < 0) return 0;
+  var dead = String(deceasedId).trim(), widowed = 0;
+  for (var r = 0; r < ctx.ledger.rows.length; r++) {
+    var row = ctx.ledger.rows[r];
+    if (String(row[iPop] || "").trim() === dead) continue;
+    if (iSt >= 0 && String(row[iSt] || "").trim().toLowerCase() === "deceased") continue;
+    var sp = (String(row[iSp] || "").match(/POP-\d+/) || [])[0] || "";
+    if (sp !== dead) continue;
+    if (String(row[iMar] || "").trim().toLowerCase() !== "married") continue;
+    row[iMar] = "widowed";
+    ctx.ledger.dirty = true;
+    widowed++;
+  }
+  return widowed;
 }
 
 function generateGenerationalSummary_(ctx) {

@@ -1107,6 +1107,28 @@ function detectNewBonds_(ctx) {
   // v2.4: Use ctx.neighborhoodList instead of global
   var neighborhoodList = ctx.neighborhoodList || [];
 
+  // engine.302 (builder 2026-10-19, ruling 6): no hood gate on forming a bond. Proximity reads the
+  // city's own adjacency (Neighborhood_Map.Adjacent -> S.neighborhoodAdjacency: canonical keys,
+  // symmetric, child areas folded at load), turned into a pair-readable set once per call.
+  if (!S.neighborhoodAdjacency) {
+    throw new Error('detectNewBonds_: S.neighborhoodAdjacency missing — Phase1-CanonHoods did not run (engine.148 P2: adjacency is sheet truth).');
+  }
+  var hoodAdj = {};
+  for (var adjKey in S.neighborhoodAdjacency) {
+    if (!S.neighborhoodAdjacency.hasOwnProperty(adjKey)) continue;
+    hoodAdj[adjKey] = {};
+    var adjList = S.neighborhoodAdjacency[adjKey] || [];
+    for (var adjI = 0; adjI < adjList.length; adjI++) hoodAdj[adjKey][adjList[adjI]] = true;
+  }
+  var hoodFold = {}; // a ledger hood folded to its canonical parent (a child-area name reads its parent)
+  var foldHood = function (nh) {
+    if (!nh) return '';
+    if (!hoodFold.hasOwnProperty(nh)) {
+      hoodFold[nh] = hoodAdj[nh] ? nh : ((typeof resolveHoodOrChild_ === 'function' && resolveHoodOrChild_(ctx, nh)) || nh);
+    }
+    return hoodFold[nh];
+  };
+
   // v2.2: Calendar context
   var cal = ctx.bondCalendarContext || {};
   var holiday = cal.holiday || 'none';
@@ -1160,6 +1182,8 @@ function detectNewBonds_(ctx) {
       var nhA = dataA.Neighborhood || '';
       var nhB = dataB.Neighborhood || '';
       var sameNeighborhood = nhA && nhA === nhB && neighborhoodList.indexOf(nhA) >= 0;
+      var fA = foldHood(nhA), fB = foldHood(nhB);
+      var adjacentHood = !sameNeighborhood && !!fA && !!fB && !!(hoodAdj[fA] && hoodAdj[fA][fB]); // engine.302
 
       // ─────────────────────────────────────────────────────────────
       // v2.2/v2.4: CALENDAR-SPECIFIC BOND DETECTION
@@ -1302,7 +1326,7 @@ function detectNewBonds_(ctx) {
         var fA = bondJobFamily_(dataA.Occupation || dataA.TierRole);
         return fA && fA === bondJobFamily_(dataB.Occupation || dataB.TierRole);
       })();
-      if (frictionLane && (sameNeighborhood || sameJobFamily) && rng() < 0.15) {
+      if (frictionLane && (sameNeighborhood || adjacentHood || sameJobFamily) && rng() < 0.15) { // engine.302: + adjacent
         newBonds.push(makeBond_(
           citizenA, citizenB,
           BOND_TYPES.TENSION,
@@ -1320,7 +1344,8 @@ function detectNewBonds_(ctx) {
 
       // Same neighborhood = neighbor bond. engine.67 step 9: the friendship
       // lane leans in — high-compat neighbors connect half again as often.
-      if (sameNeighborhood && rng() < (frictionLane ? 0.2 : 0.3)) {
+      // engine.302: an adjacent hood is a neighbor too, across the line.
+      if ((sameNeighborhood || adjacentHood) && rng() < (frictionLane ? 0.2 : 0.3)) {
         newBonds.push(makeBond_(
           citizenA, citizenB,
           BOND_TYPES.NEIGHBOR,
@@ -1329,7 +1354,7 @@ function detectNewBonds_(ctx) {
           nhA,
           3,
           currentCycle,
-          'Neighbors in ' + nhA + '.',
+          sameNeighborhood ? 'Neighbors in ' + nhA + '.' : 'Neighbors across the ' + nhA + '–' + nhB + ' line.',
           ctx
         ));
         bondsCreated++;
@@ -1410,6 +1435,27 @@ function detectNewBonds_(ctx) {
           ctx
         ));
         bondsCreated++;
+        continue;
+      }
+
+      // engine.302 (ruling 6): a far pair no lane above took can still get along — the neighbor lane's
+      // draw, last in the chain so every lane keeps its priority. The hood still weighs: a far pair has
+      // no same-hood +3 in bondCompatibility_ (always the 3–5 get-along tier here), and a neighbor bond
+      // with no hood fades 0.1 a week faster (updateExistingBonds_).
+      if (!sameNeighborhood && !adjacentHood && rng() < (frictionLane ? 0.2 : 0.3)) {
+        newBonds.push(makeBond_(
+          citizenA, citizenB,
+          BOND_TYPES.NEIGHBOR,
+          BOND_ORIGINS.RANDOM_ENCOUNTER,
+          '',
+          '',
+          3,
+          currentCycle,
+          'Crossed paths in the city.',
+          ctx
+        ));
+        bondsCreated++;
+        continue;
       }
     }
   }
@@ -2081,7 +2127,7 @@ function buildBondLedgerIndex_(ctx) {
       iMar = idx('MaritalStatus'), iGen = idx('Gender'), iBirth = idx('BirthYear'),
       iHH = idx('HouseholdId'), iInc = idx('Income'), iHood = idx('Neighborhood'),
       iStatus = idx('Status'), iTier = idx('Tier'), iEdu = idx('EducationLevel'),
-      iDebt = idx('DebtLevel'), iSav = idx('SavingsRate');
+      iDebt = idx('DebtLevel'), iSav = idx('SavingsRate'), iSp = idx('SpouseId');
   if (iPop < 0) return null;
   var map = {};
   for (var r = 0; r < rows.length; r++) {
@@ -2100,10 +2146,23 @@ function buildBondLedgerIndex_(ctx) {
       tier: iTier >= 0 ? (Number(row[iTier]) || 4) : 4,
       edu: iEdu >= 0 ? String(row[iEdu] || '').trim() : '',
       debt: iDebt >= 0 ? (Number(row[iDebt]) || 0) : 0,
-      savings: iSav >= 0 ? (Number(row[iSav]) || 0) : 0
+      savings: iSav >= 0 ? (Number(row[iSav]) || 0) : 0,
+      spouse: iSp >= 0 ? ((String(row[iSp] || '').match(/POP-\d+/) || [])[0] || '') : '' // engine.302 courting guard
     };
   }
   return map;
+}
+
+// engine.302 (builder 2026-10-19): who can court — single, divorced or widowed, an unmarried adult (each
+// gate keeps its own age window). Blank, youth and married cannot. A citizen whose SpouseId names an
+// active row that reads married and points back is married in fact whatever the cell says (live: every
+// SpouseId sits on a reciprocal married pair — a guard, not a path). people = buildBondLedgerIndex_.
+var BOND_CAN_COURT = { single: true, divorced: true, widowed: true };
+function bondCanCourt_(people, pid) {
+  var P = people && people[pid];
+  if (!P || !BOND_CAN_COURT[P.marital]) return false;
+  var Sp = P.spouse ? people[P.spouse] : null;
+  return !(Sp && Sp.marital === 'married' && Sp.spouse === String(pid).trim());
 }
 
 function processRomanceAndMarriage_(ctx) {
@@ -2123,7 +2182,7 @@ function processRomanceAndMarriage_(ctx) {
     var A = people[bond.citizenA], B = people[bond.citizenB];
     if (!A || !B) continue;
 
-    var bothSingle = A.marital === 'single' && B.marital === 'single';
+    var bothCanCourt = bondCanCourt_(people, bond.citizenA) && bondCanCourt_(people, bond.citizenB); // engine.302
     var ageA = A.birthYear > 0 ? simYear - A.birthYear : 0;
     var ageB = B.birthYear > 0 ? simYear - B.birthYear : 0;
     var ageOk = ageA >= ageMin && ageA <= ageMax && ageB >= ageMin && ageB <= ageMax;
@@ -2159,7 +2218,7 @@ function processRomanceAndMarriage_(ctx) {
     if (bond.bondType === BOND_TYPES.FRIENDSHIP &&
         Number(bond.intensity) >= ROMANCE_THRESHOLD &&
         romCompat >= 6 &&
-        bothSingle && ageOk && oppositeSex &&
+        bothCanCourt && ageOk && oppositeSex &&
         rng() < ROMANCE_CHANCE * tierFactor * pairFitness * bondFamilyFactor_(ctx, bond.citizenA, bond.citizenB)) {
       bond.bondType = BOND_TYPES.ROMANTIC;
       bond.notes = 'Grew from friendship (C' + cycle + ')';
@@ -2183,8 +2242,12 @@ function processRomanceAndMarriage_(ctx) {
     // engine.66b: the years live in the growth rate, not in a timer here.)
     if (bond.bondType === BOND_TYPES.ROMANTIC &&
         Number(bond.intensity) >= MARRIAGE_THRESHOLD &&
-        bothSingle && ageOk) {
+        bothCanCourt && ageOk) {
       marryCitizens_(ctx, bond, A, B, cycle);
+      // engine.302: the index is this pass's snapshot — mark the pair married in it, so a second grown
+      // romance on either partner (a triangle) cannot marry them again the same pass
+      A.marital = 'married'; B.marital = 'married';
+      A.spouse = String(bond.citizenB).trim(); B.spouse = String(bond.citizenA).trim();
     }
   }
 }
@@ -2233,6 +2296,28 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
     var jm = joinTarget.info.members;
     var joinerId = (joiner === A) ? bond.citizenA : bond.citizenB;
     if (jm.indexOf(joinerId) < 0) jm.push(joinerId);
+    // engine.302: a joiner leaving a household that holds others brings their own children — a
+    // remarrying divorced or widowed parent no longer leaves a minor behind in the old home (the hole
+    // was already there for single parents; the wider courting door makes it common). A child moves
+    // when ParentIds names the joiner, they share the joiner's old HouseholdId, and they are under 18.
+    // The formation reconciler drops them from the old row's Members on its next pass.
+    var oldHid = String(joiner.householdId || '').trim();
+    var iHHk = idx('HouseholdId'), iParK = idx('ParentIds'), iBirthK = idx('BirthYear'), iPopK = idx('POPID');
+    if (oldHid && oldHid !== joinTarget.hid && iHHk >= 0 && iParK >= 0 && iBirthK >= 0 && iPopK >= 0) {
+      var simYk = simYearOf_(ctx, ctx.summary.cycleId || ctx.config.cycleCount || 0);
+      for (var mk = 0; mk < ctx.ledger.rows.length; mk++) {
+        var krow = ctx.ledger.rows[mk];
+        if (String(krow[iHHk] || '').trim() !== oldHid) continue;
+        var kby = Number(krow[iBirthK]) || 0;
+        if (!(kby > 0 && (simYk - kby) < 18)) continue;
+        var kpar = []; try { kpar = JSON.parse(krow[iParK] || '[]'); } catch (ek) { kpar = []; }
+        if (!Array.isArray(kpar) || kpar.indexOf(joinerId) < 0) continue;
+        krow[iHHk] = joinTarget.hid;
+        var kpop = String(krow[iPopK] || '').trim();
+        if (kpop && jm.indexOf(kpop) < 0) jm.push(kpop);
+        ctx.ledger.dirty = true;
+      }
+    }
     hhSheet0.getRange(joinTarget.info.row, hv[0].indexOf('Members') + 1).setValue(JSON.stringify(jm));
     var iHH0 = idx('HouseholdId');
     if (iHH0 >= 0) ctx.ledger.rows[joiner.idx][iHH0] = joinTarget.hid;
@@ -2373,7 +2458,7 @@ function processGCCourtship_(ctx) {
     if (String(bd.citizenB || '').indexOf('GC:') !== 0) continue;
     if (Number(bd.intensity) < MARRIAGE_THRESHOLD) continue;
     var P = people[bd.citizenA];
-    if (!P || P.marital !== 'single') continue;
+    if (!P || !bondCanCourt_(people, bd.citizenA)) continue; // engine.302
     var gcName = String(bd.citizenB).slice(3);
     var found = -1;
     for (var g0 = 1; g0 < gcVals.length; g0++) {
@@ -2445,7 +2530,7 @@ function processGCCourtship_(ctx) {
   var singles = [];
   for (var pid in people) {
     var S1 = people[pid];
-    if (S1.marital !== 'single' || hasProspects[pid]) continue;
+    if (!bondCanCourt_(people, pid) || hasProspects[pid]) continue; // engine.302
     var age1 = S1.birthYear > 0 ? simYear - S1.birthYear : 0;
     if (age1 < 20 || age1 > 65) continue;
     if (S1.gender !== 'male' && S1.gender !== 'female') continue;
@@ -2548,7 +2633,7 @@ function processGCMarriageLottery_(ctx) {
   var idxCol = function(n) { return header.indexOf(n); };
   for (var pid in people) {
     var P = people[pid];
-    if (P.marital !== 'single' || hasProspects[pid]) continue;
+    if (!bondCanCourt_(people, pid) || hasProspects[pid]) continue; // engine.302
     var pAge = P.birthYear > 0 ? simYear - P.birthYear : 0;
     if (pAge < ageMin || pAge > ageMax) continue;
     if (!P.gender || (P.gender !== 'male' && P.gender !== 'female')) continue;

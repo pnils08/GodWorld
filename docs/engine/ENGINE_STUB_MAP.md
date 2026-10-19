@@ -1112,6 +1112,10 @@
   Reads: S.eventArcs, S.pendingCascades, S.relationshipBonds
   Writes: S.eventArcs, S.pendingCascades
 
+- **youthComesOfAge_(row, iMarital, birthYear, age)**
+
+- **widowSurvivingSpouse_(ctx, deceasedId)**
+
 - **generateGenerationalSummary_(ctx)**
   Reads: S.generationalEvents, S.pendingCascades
   Writes: S.generationalSummary
@@ -1267,7 +1271,7 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 - **detectNewBonds_(ctx)**
-  Reads: S.cycleActiveCitizens, S.cycleId, S.holidayLabel, S.sportsCity, S.sportsZones
+  Reads: S.cycleActiveCitizens, S.cycleId, S.holidayLabel, S.neighborhoodAdjacency, S.sportsCity, S.sportsZones
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1341,6 +1345,8 @@
 - **courtshipTierBoost_(tierA, tierB)**
 
 - **buildBondLedgerIndex_(ctx)**
+
+- **bondCanCourt_(people, pid)**
 
 - **processRomanceAndMarriage_(ctx)**
   Reads: S.cycleId, S.relationshipBonds, S.storyHooks
@@ -4741,4 +4747,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1708
+**Functions mapped:** 1711

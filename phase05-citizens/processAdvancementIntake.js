@@ -900,7 +900,8 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
         // queued beside it — never the profile's dice. Blank here; the spouse
         // and child wiring below and formIntakeHouseholds_ fill them from truth.
         // (A random NumChildren would open phantom kid slots for the family drip.)
-        if (lMaritalStatus >= 0) newRow[lMaritalStatus] = 'single';
+        // engine.302: a queued child arrives youth, an adult single until the spouse wiring below
+        if (lMaritalStatus >= 0) newRow[lMaritalStatus] = age < 18 ? 'youth' : 'single';
         if (lNumChildren >= 0) newRow[lNumChildren] = 0;
         var lChildrenH = findColByName_(ledgerHeaders, 'ChildrenIds');
         if (lChildrenH >= 0) newRow[lChildrenH] = '[]';
@@ -1811,9 +1812,9 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
     if (!popId || !surname) continue;
     var hTier = heritageByPop[popId] || null;
 
-    // SPOUSE slot — married/partnered, spouse off-camera
+    // SPOUSE slot — married, spouse off-camera (engine.302: partnered is not a status)
     if (iMarital >= 0 && iSpouse >= 0 &&
-        /married|partner/i.test(String(row[iMarital] || '')) &&
+        String(row[iMarital] || '').trim().toLowerCase() === 'married' &&
         !String(row[iSpouse] || '').trim()) {
       openSlots.push({
         type: 'spouse', targetPop: popId, surname: surname, hood: hood, hTier: hTier,
@@ -2488,7 +2489,9 @@ function wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cy
 
   if (matchType === 'spouse') {
     if (iSpouse >= 0) { target[iSpouse] = newPopId; newRow[iSpouse] = targetPopId; }
-    if (iMarital >= 0) newRow[iMarital] = String(target[iMarital] || 'married');
+    // engine.302: a spouse match is a marriage — both rows read married (the drip slot opens only on a
+    // married target; an authored queue row can name a target of any status, which then marries)
+    if (iMarital >= 0) { newRow[iMarital] = 'married'; target[iMarital] = 'married'; }
     // Kids are shared: mirror the family's kid state instead of the mint
     // profile's random NumChildren (which would open phantom child slots).
     if (iNumKids >= 0) newRow[iNumKids] = Number(target[iNumKids]) || 0;
@@ -2508,11 +2511,11 @@ function wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cy
       for (var c = 0; c < rows.length; c++) {
         if (rows[c] && String(rows[c][iPop] || '').trim() === priorParents[0]) { coParent = rows[c]; break; }
       }
-      if (coParent && /married|partner/i.test(String(coParent[iMarital] || '')) &&
+      if (coParent && String(coParent[iMarital] || '').trim().toLowerCase() === 'married' &&
           !String(coParent[iSpouse] || '').trim()) {
         coParent[iSpouse] = newPopId;
         newRow[iSpouse] = String(coParent[iPop]);
-        newRow[iMarital] = String(coParent[iMarital]);
+        newRow[iMarital] = 'married';
         desc = 'parent of ' + targetName + ', married to ' +
           (String(coParent[iFirst] || '') + ' ' + String(coParent[iLast] || '')).trim();
       }

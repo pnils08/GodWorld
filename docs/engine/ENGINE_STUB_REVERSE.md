@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1708 · **S.* fields:** 378 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1711 · **S.* fields:** 378 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -259,7 +259,7 @@
 | `S.minorsSkippedTexture` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | _(none)_ | 1 | 0 |
 | `S.month` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase04-events/generationalEventsEngine.js::runGenerationalEngine_`, `phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_`, `phase07-evening-media/mediaFeedbackEngine.js::runMediaFeedbackEngine_`, `phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_`, `phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_` | 1 | 5 |
 | `S.namedSpotlights` | `phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase06-analysis/computeRecurringCitizens.js::computeRecurringCitizens_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/mediaFeedbackEngine.js::analyzeCelebrityCoverage_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_`, `phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 2 | 6 |
-| `S.neighborhoodAdjacency` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_` | `phase01-config/canonNeighborhoodLoader.js::getAdjacentHoods_`, `phase03-population/updateCrimeMetrics.js::buildCrimeAdjacencyGraph_`, `phase06-analysis/economicRippleEngine.js::createRipple_` | 1 | 3 |
+| `S.neighborhoodAdjacency` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_` | `phase01-config/canonNeighborhoodLoader.js::getAdjacentHoods_`, `phase03-population/updateCrimeMetrics.js::buildCrimeAdjacencyGraph_`, `phase05-citizens/bondEngine.js::detectNewBonds_`, `phase06-analysis/economicRippleEngine.js::createRipple_` | 1 | 4 |
 | `S.neighborhoodAssignments` | `phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_` | _(none)_ | 1 | 0 |
 | `S.neighborhoodDemographics` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase04-events/careJusticeService.js::runCareJusticeDemand_`, `phase04-events/generationalEventsEngine.js::checkHealthEvent_`, `phase06-analysis/prioritizeEvents.js::prioritizeEvents_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/storyHook.js::storyHookEngine_` | 2 | 6 |
 | `S.neighborhoodDriftEvents` | `phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_` | _(none)_ | 1 | 0 |

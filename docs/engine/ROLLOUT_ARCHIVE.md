@@ -973,6 +973,16 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S580 Archive Pass (2026-10-19, research-build) — post-S579 closures sweep
+
+3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.* + 1 engine.*.
+
+- **pipeline.82** [research-build] — Employment_Roster derived from Simulation_Ledger — **WITHDRAWN 2026-10-19 (builder).** The engine's own update is the preferred method for now: the tab moved 869 → 971 rows between the C111 and C112 dumps with no derived-roster change. Proposal kept for reference: reverted `4a630f1c`, patch `output/research-build/pipeline82-roster-from-ledger.patch` (suite 290/290 with it), blast radius + the `EmployerBizId` SELF_EMPLOYED/UNTRACKED defect in [[../plans/2026-09-07-beat-slices-from-sheets-plan]] §Status log 2026-10-17. **State at archive:** wontfix. Pointer: [[../plans/2026-09-07-beat-slices-from-sheets-plan]] §Status log
+- **pipeline.68** [research-build] — Roster rows for the C110/C111 mints — **WITHDRAWN 2026-10-16 (builder)**. The engine hires only a citizen whose EmployerBizId is BLANK (`runCareerEngine.js` engine.135 E3): the fill would have written UNTRACKED into 41 cells and taken those citizens out of the hiring pool, and forced 6 hires with no event behind them. The blank cell is the hireable state; a tracked employer comes only from the engine's hiring. rb's row and morning reply mis-called 11 of the 50 "media figures from the extension" — they are Tier 2/3 ENGINE citizens on the ledger since the first upload (Nina Reyes, Pixel Pete, Marcus Duval …), not mints, not intake. `Employment_Roster` is a hand-run report tab rebuilt by `linkCitizensToEmployers.js`; no engine phase reads it, no cron runs it. **State at archive:** wontfix. Pointer: [[../plans/2026-09-07-beat-slices-from-sheets-plan]]
+- **engine.256** [engine-sheet] — Rent does not need to change (builder 2026-10-17); it is set at move-in and re-set on a move. Lease drift not built **State at archive:** wontfix. Pointer: [[../plans/2026-09-22-initiative-budget-disbursement]] §Data reality
+
+This pass: 3 rows — pipeline.82 + pipeline.68 + engine.256. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S579 Archive Pass (2026-10-19, research-build) — post-S578 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.*.

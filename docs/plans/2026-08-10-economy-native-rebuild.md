@@ -163,6 +163,12 @@ mutating legacy paths; complete creation/mutation-path inventory; event
 idempotency; setup manifest for every sheet/header; fatal error propagation;
 D2 proof before D1 activation; refreshed audit figures.
 
+## Status log
+
+### engine.104 — status (drained from ROLLOUT, 2026-10-19 / S580)
+
+Mint economy: arrivals born right. Mint paths take job titles from lists outside the Economic_Parameters job table — the generic-citizen generator's own 32 titles (15 not in the table), the intake fallback pool (22 of 65), adulthood settlement; 453/988 Active RoleTypes are not in the table, 43 of them students (the 545 was against role_mapping.json). Revision still owes legacy mutating-path disposition + D2 proof (agy 2026-10-17)
+
 ## Changelog
 
 - 2026-08-10 — Written S364 from the live-session audit; awaiting S362 vet.

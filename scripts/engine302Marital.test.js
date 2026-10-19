@@ -25,6 +25,8 @@
  *   G1  GC courtship: the matured wedding marries the one Courting row of that name (not a same-name active
  *       row), writes UNI/MED/CIV no; two Courting rows of one name → no wedding; out of the window → waits;
  *       the start draws an aligned GC, near hood first, else the city; none aligned → nothing
+ *   cut 3 (ruling 10): DV1–DV12 divorce on 3 crisis kinds inside 13 Cycles with a major loss — never on one
+ *       issue, a stale or future mark, a marriage made this week, a widow; the couple's union; who stays
  *
  * Run: node scripts/engine302Marital.test.js
  */
@@ -299,6 +301,10 @@ function gcWorld(opts) {
   const sheet = v => ({ getDataRange: () => ({ getValues: () => v.map(r => r.slice()) }), getLastColumn: () => v[0].length, getLastRow: () => v.length,
     getRange: (r, c) => ({ setValue: x => { v[r - 1][c - 1] = x; }, getValues: () => [v[r - 1].slice()] }), appendRow: x => v.push(x) });
   const bonds = opts.bond ? [bondRow('BG', 'POP-01', 'GC:' + opts.bond, 'romantic', 8.5)] : [];
+  if (opts.bond && opts.stamp !== false) { // stamped as a courtship start stamps it: the first Courting row of that name
+    const gi = GC.findIndex((r, i) => i > 0 && (r[0] + ' ' + r[1]) === opts.bond && r[6] === 'Courting');
+    if (gi > 0) bonds[0].notes = 'Met by chance in Downtown (C100) [gc:' + GC[gi][4] + '|' + GC[gi][7] + '|r' + (gi + 1) + ']';
+  }
   const ctx = { ledger: { headers: LH, rows: [row], dirty: false }, summary: { cycleId: 113, simYear: 2042, relationshipBonds: bonds, storyHooks: [], neighborhoodAdjacency: { Downtown: ['Uptown'], Uptown: ['Downtown'], Laurel: [] } },
     config: { cycleCount: 113 }, rng: opts.rng || (() => 0.99), ss: { getSheetByName: n => sheets[n] ? sheet(sheets[n]) : null }, _bondNameLookup: {} };
   return { ctx, GC, LH, rows: ctx.ledger.rows, bonds };
@@ -312,9 +318,9 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
   assert('G1 the matured wedding mints the spouse', !!sp && w.rows[0][w.LH.indexOf('MaritalStatus')] === 'married');
   assert('G1 it promotes the Courting row, not the same-name active one', w.GC[2][6] === 'Promoted' && w.GC[1][6] === 'active' && sp && sp[w.LH.indexOf('RoleType')] === 'Baker');
   assert('G1 the mint writes UNI / MED / CIV no', sp && ['UNI (y/n)', 'MED (y/n)', 'CIV (y/n)'].every(k => sp[w.LH.indexOf(k)] === 'no'));
-  const two = gcWorld({ bond: 'Rui Moss', gcs: [['Rui', 'Moss', 42, '', 'Uptown', 'Chef', 'Courting', 'male'], ['Rui', 'Moss', 41, '', 'Laurel', 'Baker', 'Courting', 'male']] });
-  B.processGCCourtship_(two.ctx);
-  assert('G1 two Courting rows of one name → no wedding, the courtship waits', two.rows.length === 1 && two.bonds[0].bondType === 'romantic');
+  const unst = gcWorld({ bond: 'Rui Moss', stamp: false, gcs: [['Rui', 'Moss', 41, '', 'Laurel', 'Baker', 'Courting', 'male']] });
+  B.processGCCourtship_(unst.ctx);
+  assert('G1 an unstamped courtship bond fails closed — no wedding, it waits (codex A2)', unst.rows.length === 1 && unst.bonds[0].bondType === 'romantic');
   const old = gcWorld({ ageA: 60, bond: 'Rui Moss', gcs: [['Rui', 'Moss', 55, '', 'Uptown', 'Chef', 'Courting', 'male']] });
   B.processGCCourtship_(old.ctx);
   assert('G1 a matured courtship outside 24–58 waits', old.rows.length === 1);
@@ -351,7 +357,7 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
 // ── G2 courtship binding, the same pass, missing age, 57/59 (codex diff review H7/H8) ──
 {
   const twoBonds = gcWorld({ bond: 'Rui Moss', gcs: [['Rui', 'Moss', 41, '', 'Laurel', 'Baker', 'Courting', 'male']] });
-  twoBonds.bonds.push(bondRow('BG2', 'POP-01', 'GC:Rui Moss', 'romantic', 9));
+  twoBonds.bonds.push(Object.assign(bondRow('BG2', 'POP-01', 'GC:Rui Moss', 'romantic', 9), { notes: twoBonds.bonds[0].notes }));
   B.processGCCourtship_(twoBonds.ctx);
   assert('G2 two matured bonds on one citizen + one GC name in a pass: one mint, one wedding', twoBonds.rows.length === 2);
   const tok = gcWorld({ bond: 'Rui Moss', gcs: [['Rui', 'Moss', 41, '', 'Laurel', 'Baker', 'Courting', 'male']] });
@@ -381,6 +387,75 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
   own.bonds[0].notes = 'Met by chance in Laurel (C100) [gc:Laurel|male|r3]';
   B.processGCCourtship_(own.ctx);
   assert('G2 two lookalike Courting rows: the stamped row marries', own.rows.length === 2 && own.GC[2][6] === 'Promoted' && own.GC[1][6] === 'Courting');
+}
+
+// ── DV divorce on stacked crisis (cut 3, ruling 10) ────────────────────────────
+{
+  const HF = load('../phase05-citizens/householdFormationEngine.js', ['processDivorces_', 'DIVORCE_CRISIS_WINDOW', 'DIVORCE_CRISIS_COUNT'], '',
+    ['../utilities/safeRand.js', '../phase05-citizens/bondPersistence.js', '../phase05-citizens/bondEngine.js']);
+  const C = 120, ST = 'Y3C16';
+  const DH = ['POPID', 'First', 'Last', 'Status', 'BirthYear', 'MaritalStatus', 'SpouseId', 'HouseholdId', 'ParentIds', 'ChildrenIds', 'Income', 'Neighborhood', 'DialState', 'LifeHistory'];
+  const d = n => DH.indexOf(n);
+  const drow = (pop, o) => { const r = DH.map(() => ''); r[d('POPID')] = pop; r[d('First')] = pop.slice(-2); r[d('Last')] = 'Q'; r[d('Status')] = o.status || 'Active';
+    r[d('BirthYear')] = o.by || 1990; r[d('MaritalStatus')] = o.m || 'married'; r[d('SpouseId')] = o.sp || ''; r[d('HouseholdId')] = o.hh || '';
+    r[d('ParentIds')] = JSON.stringify(o.par || []); r[d('ChildrenIds')] = JSON.stringify(o.ch || []); r[d('Income')] = o.inc || 50000; r[d('Neighborhood')] = 'Fruitvale';
+    r[d('DialState')] = o.ds === undefined ? '' : (typeof o.ds === 'string' ? o.ds : JSON.stringify(o.ds)); r[d('LifeHistory')] = o.life || ''; return r; };
+  const HHH = ['HouseholdId', 'HeadOfHousehold', 'HouseholdType', 'Members', 'Status'];
+  const world = (rows, hhRows, bonds) => {
+    const HV = [HHH].concat(hhRows || []);
+    const sheet = { getLastColumn: () => HHH.length, getRange: (r, c) => ({ getValues: () => [HV[r - 1].slice()], setValue: v => { HV[r - 1][c - 1] = v; } }) };
+    const households = (hhRows || []).map((r, i) => ({ rowIndex: i + 2, householdId: r[0], headOfHousehold: r[1], householdType: r[2], members: JSON.parse(r[3]), status: r[4] }));
+    const ctx = { ledger: { headers: DH, rows, dirty: false }, summary: { cycleId: C, simYear: 2042, storyHooks: [], relationshipBonds: bonds || [] },
+      config: { cycleCount: C }, ss: { getSheetByName: n => n === 'Household_Ledger' ? sheet : null } };
+    return { ctx, households, HV, rows };
+  };
+  const run = w => HF.processDivorces_(w.ctx, w.households, C);
+  const m = (w, i) => w.rows[i][d('MaritalStatus')];
+  const crisis = (o) => ({ debtDefault: o.def ? { l: o.def, n: 1 } : undefined, grief: o.grief ? { l: o.grief } : undefined,
+    pressure: Object.fromEntries(Object.entries(o.p || {}).map(([k, l]) => [k, { n: 3, l }])) });
+
+  let w = world([drow('POP-01', { hh: 'HH-1', ds: crisis({ def: C - 2, p: { rent: C - 1, debt: C - 1 } }) })], [['HH-1', 'POP-01', 'couple', '["POP-01"]', 'active']]);
+  run(w);
+  assert('DV1 a default + rent + debt (3 kinds, a major loss) ends an off-camera marriage', m(w, 0) === 'divorced' && /\[Divorce\] the marriage ended/.test(w.rows[0][d('LifeHistory')]));
+  assert('DV1 the off-camera couple household retypes in memory (no generic spouse income this week)', w.households[0].householdType === 'single');
+  assert('DV1 one CITIZEN_DIVORCED hook', w.ctx.summary.storyHooks.filter(x => x.hookType === 'CITIZEN_DIVORCED').length === 1);
+  w = world([drow('POP-01', { ds: crisis({ p: { rent: C - 1, debt: C - 1, hood: C - 1 } }) })]); run(w);
+  assert('DV2 three issues with no major loss: no divorce', m(w, 0) === 'married');
+  w = world([drow('POP-01', { ds: crisis({ def: C - 1, p: { rent: C - 1 } }) })]); run(w);
+  assert('DV3 two kinds with a major loss: no divorce', m(w, 0) === 'married');
+  w = world([drow('POP-01', { ds: crisis({ def: C - 13, p: { rent: C - 1, debt: C - 1 } }) })]); run(w);
+  const w12 = world([drow('POP-01', { ds: crisis({ def: C - 12, p: { rent: C - 1, debt: C - 1 } }) })]); run(w12);
+  assert('DV4 the window is 13 Cycles: a default 13 back is stale, 12 back counts', m(w, 0) === 'married' && m(w12, 0) === 'divorced');
+  w = world([drow('POP-01', { ds: crisis({ def: C + 3, p: { rent: C - 1, debt: C - 1 } }) })]); run(w);
+  assert('DV5 a future-stamped mark never counts', m(w, 0) === 'married');
+  w = world([drow('POP-01', { ds: '{not json', life: '' })]); let threw = false; try { run(w); } catch (e) { threw = true; }
+  assert('DV5 a malformed DialState reads as no record (no throw, no divorce)', !threw && m(w, 0) === 'married');
+  w = world([drow('POP-01', { ds: crisis({ def: C - 2, p: { rent: C - 1, debt: C - 1 } }), life: ST + ' — [Wedding] married X; a household begins in Fruitvale' })]); run(w);
+  const wi = world([drow('POP-01', { ds: crisis({ def: C - 2, p: { rent: C - 1, debt: C - 1 } }), life: ST + ' — [Family] Came on-camera — married to X Y (household intake)' })]); run(wi);
+  assert('DV6 a marriage made this Cycle (the bond wedding or the intake spouse match) is never divorced the same week', m(w, 0) === 'married' && m(wi, 0) === 'married');
+  w = world([drow('POP-01', { m: 'widowed', ds: crisis({ def: C - 2, p: { rent: C - 1, debt: C - 1 } }) }), drow('POP-02', { status: 'deceased', ds: crisis({ def: C - 2, p: { rent: C - 1, debt: C - 1 } }) })]); run(w);
+  assert('DV7 a widow and a deceased row are never divorced', m(w, 0) === 'widowed' && m(w, 1) === 'married');
+  w = world([drow('POP-01', { status: 'critical', ds: crisis({ def: C - 2, p: { rent: C - 1 } }) })]); run(w);
+  assert('DV8 a health crisis held now counts (a non-Active row is read)', m(w, 0) === 'divorced');
+  w = world([drow('POP-01', { ds: crisis({ p: { rent: C - 1, debt: C - 1 } }), life: 'Y3C10 — [LifeEvent-Home-Down-L] lost the house' })]); run(w);
+  assert('DV9 a forced home sale on LifeHistory inside the window is a major loss', m(w, 0) === 'divorced');
+  // on-ledger couple: A (head, step-parent) has the default; B (the child's recorded parent) carries rent + hood
+  const bond = { bondId: 'BW', citizenA: 'POP-00701', citizenB: 'POP-00702', bondType: 'romantic', status: 'active', intensity: 9, notes: 'Married C100' };
+  w = world([drow('POP-00701', { sp: 'POP-00702 X', hh: 'HH-2', ds: crisis({ def: C - 3 }) }),
+             drow('POP-00702', { sp: 'POP-00701 X', hh: 'HH-2', ch: ['POP-00703'], ds: crisis({ p: { rent: C - 1, hood: C - 2 } }) }),
+             drow('POP-00703', { m: 'youth', by: 2034, hh: 'HH-2', par: ['POP-00702', 'POP-00701'] })],
+            [['HH-2', 'POP-00701', 'family', '["POP-00701","POP-00702","POP-00703"]', 'active']], [bond]);
+  run(w);
+  assert('DV10 a couple\'s record is the union of both: both divorced, SpouseIds cleared', m(w, 0) === 'divorced' && m(w, 1) === 'divorced' && !w.rows[0][d('SpouseId')] && !w.rows[1][d('SpouseId')]);
+  assert('DV10 the child\'s recorded parent stays, the step-parent head leaves; the child never moves', w.rows[1][d('HouseholdId')] === 'HH-2' && w.rows[0][d('HouseholdId')] === '' && w.rows[2][d('HouseholdId')] === 'HH-2');
+  assert('DV10 the head cell passes to the stayer; this week\'s members drop the leaver', w.HV[1][1] === 'POP-00702' && JSON.stringify(w.households[0].members) === '["POP-00702","POP-00703"]');
+  assert('DV10 the romantic bond is resolved', bond.status === 'resolved' && /\[Divorced C120\]/.test(bond.notes));
+  assert('DV10 one [Divorce] line each, naming the other', /the marriage to 02 Q ended/.test(w.rows[0][d('LifeHistory')]) && /the marriage to 01 Q ended/.test(w.rows[1][d('LifeHistory')]));
+  w = world([drow('POP-00701', { sp: 'POP-00702 X', hh: 'HH-3', ds: crisis({ def: C - 3, p: { rent: C - 1, debt: C - 1 } }) }), drow('POP-00702', { sp: 'POP-00701 X', hh: 'HH-3' })],
+            [['HH-3', 'POP-00701', 'couple', '["POP-00701","POP-00702"]', 'active']]);
+  run(w);
+  assert('DV11 no children: a tie keeps the head', w.rows[0][d('HouseholdId')] === 'HH-3' && w.rows[1][d('HouseholdId')] === '' && w.HV[1][1] === 'POP-00701');
+  assert('DV12 the set amount is 3 kinds over a 13-Cycle window (the builder\'s dials)', HF.DIVORCE_CRISIS_COUNT === 3 && HF.DIVORCE_CRISIS_WINDOW === 13);
 }
 
 console.log(`\nengine302Marital: ${passed} passed, ${failed} failed`);

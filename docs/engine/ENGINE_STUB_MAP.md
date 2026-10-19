@@ -2127,7 +2127,7 @@
 - **parseJSON(value, defaultValue)**
 
 - **processHouseholdFormation_(ctx)**
-  Reads: S.storyHooks
+  Reads: S.cycleId, S.storyHooks
   Writes: S.householdFormation, S.storyHooks
   Config: ctx.config.cycleCount
   Sheets: Family_Relationships, Household_Ledger
@@ -2155,7 +2155,12 @@
 
 - **processMarriages_(ss, citizens, cycle)**
 
-- **processDivorces_(ss, citizens, households, cycle)**
+- **divorceCrisisKinds_(row, h, cycle, into)**
+
+- **processDivorces_(ctx, households, cycle)**
+  Reads: S.relationshipBonds, S.storyHooks
+  Writes: S.storyHooks
+  Sheets: Household_Ledger
 
 - **updateHouseholdIncomes_(ctx, households, citizens)**
   Sheets: Household_Ledger
@@ -4752,4 +4757,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1713
+**Functions mapped:** 1714

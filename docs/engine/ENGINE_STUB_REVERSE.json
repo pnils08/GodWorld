@@ -2,7 +2,7 @@
   "generated": "2026-10-19",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1713,
+  "functionsMapped": 1714,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -716,6 +716,7 @@
         "phase05-citizens/generationalWealthEngine.js::calculateCitizenIncomes_",
         "phase05-citizens/generationalWealthEngine.js::processGenerationalWealth_",
         "phase05-citizens/householdFormationEngine.js::buildCitizenMoneyLookup_",
+        "phase05-citizens/householdFormationEngine.js::processHouseholdFormation_",
         "phase05-citizens/judicialLifecycle.js::cityCourtRevenue_",
         "phase05-citizens/judicialLifecycle.js::runJudicialLifecycle_",
         "phase05-citizens/maneuverEngine.js::runManeuverEngine_",
@@ -1088,6 +1089,7 @@
         "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",
         "phase05-citizens/generationalWealthEngine.js::trackWealthMobility_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/householdFormationEngine.js::processDivorces_",
         "phase05-citizens/householdFormationEngine.js::processHouseholdFormation_",
         "phase05-citizens/judicialLifecycle.js::runJudicialLifecycle_",
         "phase05-citizens/migrationTrackingEngine.js::generateMigrationHooks_",
@@ -1123,6 +1125,7 @@
         "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",
         "phase05-citizens/generationalWealthEngine.js::trackWealthMobility_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/householdFormationEngine.js::processDivorces_",
         "phase05-citizens/householdFormationEngine.js::processHouseholdFormation_",
         "phase05-citizens/judicialLifecycle.js::runJudicialLifecycle_",
         "phase05-citizens/migrationTrackingEngine.js::generateMigrationHooks_",
@@ -3139,6 +3142,7 @@
         "phase05-citizens/bondPersistence.js::migrateBondSchema_",
         "phase05-citizens/bondPersistence.js::purgeInactiveBonds_",
         "phase05-citizens/bondPersistence.js::saveRelationshipBonds_",
+        "phase05-citizens/householdFormationEngine.js::processDivorces_",
         "phase05-citizens/processAdvancementIntake.js::processAdvancementIntake_",
         "phase05-citizens/processAdvancementIntake.js::seedEmergenceBonds_",
         "phase05-citizens/runRelationshipEngine.js::getCitizenBonds_",
@@ -5034,6 +5038,7 @@
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/householdFormationEngine.js::applyFundDisbursementBody_",
         "phase05-citizens/householdFormationEngine.js::dissolveStressedHouseholds_",
+        "phase05-citizens/householdFormationEngine.js::processDivorces_",
         "phase05-citizens/householdFormationEngine.js::updateHouseholdIncomes_"
       ],
       "readers": [
@@ -5054,6 +5059,7 @@
         "phase05-citizens/householdFormationEngine.js::formCriteriaHouseholds_",
         "phase05-citizens/householdFormationEngine.js::formNewHouseholds_",
         "phase05-citizens/householdFormationEngine.js::loadHouseholds_",
+        "phase05-citizens/householdFormationEngine.js::processDivorces_",
         "phase05-citizens/householdFormationEngine.js::processHouseholdFormation_",
         "phase05-citizens/householdFormationEngine.js::reconcileHouseholds_",
         "phase05-citizens/householdFormationEngine.js::updateHouseholdIncomes_",

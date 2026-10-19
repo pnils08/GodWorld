@@ -2552,15 +2552,11 @@ function processGCCourtship_(ctx) {
       return !gcTok || ((gNbhd >= 0 ? String(r0[gNbhd] || '').trim() : '') === gcTok[1] &&
                         String(r0[gSex] || '').trim().toLowerCase() === gcTok[2]);
     };
+    // codex cut-3 review A2: no row stamp, no wedding — an unstamped or older bond fails closed and waits rather
+    // than scan for a same-name row (live carries no GC courtship bond; every new one is stamped with its row)
     if (gcTok && gcTok[3]) {
       var stampedRow = Number(gcTok[3]) - 1; // sheet row -> gcVals index
       if (gcRowMatches(stampedRow)) { found = stampedRow; courtingRows = 1; }
-    } else {
-      for (var g0 = 1; g0 < gcVals.length; g0++) {
-        if (!gcRowMatches(g0)) continue;
-        courtingRows++;
-        found = g0;
-      }
     }
     if (courtingRows !== 1) {
       Logger.log('processGCCourtship_: ' + bd.citizenA + ' — ' + courtingRows + ' Courting rows named ' + gcName + '; no wedding this Cycle (C' + cycle + ')');

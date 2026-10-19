@@ -217,9 +217,12 @@ function processHouseholdFormation_(ctx) {
     var marriages = processMarriages_(ss, citizens, cycle);
     results.marriages = marriages.length;
 
-    // Process divorces
-    var divorces = processDivorces_(ss, citizens, households, cycle);
+    // Process divorces — engine.302 cut 3 (ruling 10): reads ctx.ledger directly (loadCitizens_ is Active-only, and a
+    // health crisis is a non-Active status); after any divorce both views reload, so the income, stress and
+    // dissolution passes read the new membership
+    var divorces = processDivorces_(ctx, households, (S && S.cycleId) || cycle);
     results.divorces = divorces.length;
+    if (divorces.length) citizens = loadCitizens_(ctx); // households were updated in place (members, off-camera retype)
 
     // Update household incomes
     updateHouseholdIncomes_(ctx, households, citizens);
@@ -961,13 +964,163 @@ function processMarriages_(ss, citizens, cycle) {
   return marriages;
 }
 
-function processDivorces_(ss, citizens, households, cycle) {
+// engine.302 cut 3 (builder 2026-10-19, ruling 10, verbatim): "This needs to happen when a set amount of crisis hits
+// but in a major loss situation, multiple issues would need to cause it." A marriage ends the Cycle its crisis record
+// holds DIVORCE_CRISIS_COUNT distinct kinds inside DIVORCE_CRISIS_WINDOW Cycles, at least one a major loss. Never on
+// one issue, never by a die. The record is what the citizen already carries — no new storage:
+//   major losses: a debt default (DialState.debtDefault), a bereavement (DialState.grief), being out of work
+//     (DialState.pressure.unemployed), a forced home sale ([LifeEvent-Home-Down-L] on LifeHistory)
+//   issues: rent / debt / hood / overwork pressure (DialState.pressure.*), a health crisis held now (Status)
+// Debt, default, forced sale (GenerationalWealth), rent (MigrationTracking) and bereavement (Phase 9) are written after
+// this pass, so this Cycle's are seen next Cycle. An on-ledger couple's record is the union of both; a kind counts once.
+// Only the ledger, the bond list, the hooks and this pass's in-memory households change here — the first three
+// committed together at Phase 10. The household row
+// follows next pass: the reconciler rebuilds Members from the ledger's HouseholdId and retypes the household from the
+// head's status; the one direct cell is HeadOfHousehold when the head is the one who leaves (the stayer is a member
+// either way, so a failed commit leaves nothing false). Family_Relationships keeps its married row as history.
+var DIVORCE_CRISIS_WINDOW = 13; // Cycles (a quarter year) — the builder's dial
+var DIVORCE_CRISIS_COUNT = 3;   // distinct kinds, at least one a major loss — the builder's dial
+var DIVORCE_MAJOR_KINDS = { default: true, bereaved: true, jobless: true, forcedSale: true };
+
+function divorceCrisisKinds_(row, h, cycle, into) {
+  var within = function (l) { var n = Number(l); return isFinite(n) && n > 0 && n <= cycle && cycle - n < DIVORCE_CRISIS_WINDOW; };
+  var ds = null;
+  var iDS = h.indexOf('DialState');
+  if (iDS >= 0 && row[iDS]) { try { ds = JSON.parse(String(row[iDS])); } catch (e) { ds = null; } }
+  if (ds && typeof ds === 'object') {
+    if (ds.debtDefault && within(ds.debtDefault.l)) into['default'] = true;
+    if (ds.grief && within(ds.grief.l)) into.bereaved = true;
+    var p = (ds.pressure && typeof ds.pressure === 'object') ? ds.pressure : {};
+    if (p.unemployed && within(p.unemployed.l)) into.jobless = true;
+    var issues = ['rent', 'debt', 'hood', 'overwork'];
+    for (var k = 0; k < issues.length; k++) if (p[issues[k]] && within(p[issues[k]].l)) into[issues[k]] = true;
+  }
+  var iLife = h.indexOf('LifeHistory');
+  if (iLife >= 0 && row[iLife]) {
+    var re = /Y(\d+)C(\d+) — \[LifeEvent-Home-Down-L\]/g, m;
+    var txt = String(row[iLife]);
+    while ((m = re.exec(txt)) !== null) { if (within((Number(m[1]) - 1) * 52 + Number(m[2]))) { into.forcedSale = true; break; } }
+  }
+  var iSt = h.indexOf('Status');
+  var st = iSt >= 0 ? String(row[iSt] || '').trim().toLowerCase() : '';
+  if (st === 'hospitalized' || st === 'critical' || st === 'serious-condition') into.health = true;
+  return into;
+}
+
+function processDivorces_(ctx, households, cycle) {
   var divorces = [];
-  // TODO: Implement divorce mechanics
-  // - Random chance for married couples
-  // - Higher chance if economic stress
-  // - Split household
-  // - Update MaritalStatus to divorced
+  if (!ctx.ledger || !ctx.ledger.rows) return divorces;
+  var h = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var idx = function (n) { return h.indexOf(n); };
+  var iPop = idx('POPID'), iMar = idx('MaritalStatus'), iSp = idx('SpouseId'), iSt = idx('Status'), iHH = idx('HouseholdId'),
+      iBY = idx('BirthYear'), iPar = idx('ParentIds'), iCh = idx('ChildrenIds'), iFirst = idx('First'), iLast = idx('Last'),
+      iLife = idx('LifeHistory'), iHood = idx('Neighborhood');
+  if (iPop < 0 || iMar < 0 || iSp < 0) return divorces;
+  var simYear = simYearOf_(ctx, cycle);
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  var gone = { deceased: true, inactive: true, traded: true, pending: true };
+  var byPop = {};
+  for (var r = 0; r < rows.length; r++) { var p0 = String(rows[r][iPop] || '').trim(); if (p0) byPop[p0] = r; }
+  var living = function (ri) { return !gone[String(rows[ri][iSt] || 'active').trim().toLowerCase()]; };
+  var married = function (ri) { return String(rows[ri][iMar] || '').trim().toLowerCase() === 'married'; };
+  var spouseOf = function (ri) { return (String(rows[ri][iSp] || '').match(/POP-\d+/) || [])[0] || ''; };
+  var nameOf = function (ri) { return (String(rows[ri][iFirst] || '') + ' ' + String(rows[ri][iLast] || '')).trim(); };
+  // a marriage made this Cycle, by any door (the bond wedding, the intake spouse match, the intake household)
+  var marriedNow = function (ri) {
+    var lines = String(iLife >= 0 ? rows[ri][iLife] || '' : '').split('\n');
+    for (var q = lines.length - 1; q >= 0 && q >= lines.length - 12; q--) {
+      if (lines[q].indexOf(stamp + ' ') === 0 && /\[Wedding\]|married to|\[Household\]/.test(lines[q])) return true;
+    }
+    return false;
+  };
+  var hhById = {};
+  for (var hq = 0; hq < (households || []).length; hq++) hhById[String(households[hq].householdId)] = households[hq];
+  var done = {};
+
+  for (var ri = 0; ri < rows.length; ri++) {
+    var pop = String(rows[ri][iPop] || '').trim();
+    if (!pop || done[pop] || !living(ri) || !married(ri)) continue;
+    var sp = spouseOf(ri), si = sp && byPop.hasOwnProperty(sp) ? byPop[sp] : -1;
+    var couple = si >= 0 && living(si) && married(si) && spouseOf(si) === pop;
+    done[pop] = true; if (couple) done[sp] = true;
+    if (marriedNow(ri) || (couple && marriedNow(si))) continue;
+    var kinds = divorceCrisisKinds_(rows[ri], h, cycle, {});
+    if (couple) divorceCrisisKinds_(rows[si], h, cycle, kinds);
+    var names = Object.keys(kinds), majors = names.filter(function (k) { return DIVORCE_MAJOR_KINDS[k]; });
+    if (names.length < DIVORCE_CRISIS_COUNT || !majors.length) continue;
+
+    // the marriage ends
+    var parties = couple ? [ri, si] : [ri];
+    for (var pi = 0; pi < parties.length; pi++) { rows[parties[pi]][iMar] = 'divorced'; rows[parties[pi]][iSp] = ''; }
+    if (couple) {
+      appendBondLifeLine_(ctx, ri, 'Divorce', 'the marriage to ' + nameOf(si) + ' ended', cycle);
+      appendBondLifeLine_(ctx, si, 'Divorce', 'the marriage to ' + nameOf(ri) + ' ended', cycle);
+      var bonds = (ctx.summary && ctx.summary.relationshipBonds) || [];
+      for (var b = 0; b < bonds.length; b++) {
+        var bd = bonds[b];
+        if (!bd || bd.bondType !== 'romantic' || bd.status !== 'active') continue;
+        var a0 = String(bd.citizenA || '').trim(), b0 = String(bd.citizenB || '').trim();
+        if (!((a0 === pop && b0 === sp) || (a0 === sp && b0 === pop))) continue;
+        bd.status = 'resolved'; bd.notes = String(bd.notes || '') + ' [Divorced C' + cycle + ']'; bd.lastUpdate = cycle;
+      }
+      // who stays: the recorded parent (the child names them, they name the child) of more of the resident minors;
+      // a tie keeps the head. Children never move.
+      var hid = iHH >= 0 ? String(rows[ri][iHH] || '').trim() : '';
+      if (hid && hid === String(rows[si][iHH] || '').trim()) {
+        var parentOf = function (pRow, pPop) {
+          var n = 0, ch = String(iCh >= 0 ? pRow[iCh] || '' : '');
+          for (var c = 0; c < rows.length; c++) {
+            if (String(rows[c][iHH] || '').trim() !== hid) continue;
+            var by = iBY >= 0 ? Number(rows[c][iBY]) || 0 : 0;
+            if (!(by > 0 && simYear - by < 18)) continue;
+            var cpop = String(rows[c][iPop] || '').trim();
+            if (String(iPar >= 0 ? rows[c][iPar] || '' : '').indexOf(pPop) >= 0 && ch.indexOf(cpop) >= 0) n++;
+          }
+          return n;
+        };
+        var nA = parentOf(rows[ri], pop), nB = parentOf(rows[si], sp);
+        var hh = hhById[hid], head = hh ? String(hh.headOfHousehold || '').trim() : '';
+        var stayer = nA > nB ? ri : (nB > nA ? si : (head === sp ? si : ri));
+        var leaver = stayer === ri ? si : ri;
+        rows[leaver][iHH] = '';
+        var leaverPop = String(rows[leaver][iPop]).trim();
+        if (hh) hh.members = (hh.members || []).filter(function (m) { return String(m).trim() !== leaverPop; }); // this Cycle's income/stress read it
+        if (hh && head === leaverPop) {
+          var hs = ctx.ss && ctx.ss.getSheetByName('Household_Ledger');
+          var hHead = hs ? hs.getRange(1, 1, 1, hs.getLastColumn()).getValues()[0] : [];
+          var cHead = hHead.indexOf('HeadOfHousehold');
+          if (hs && cHead >= 0 && hh.rowIndex) hs.getRange(hh.rowIndex, cHead + 1).setValue(String(rows[stayer][iPop]).trim());
+        }
+      }
+    } else {
+      appendBondLifeLine_(ctx, ri, 'Divorce', 'the marriage ended', cycle);
+      // an off-camera marriage: the household's generic spouse leaves with it — this Cycle's income pass reads the
+      // type in memory (the reconciler writes the same retype to the row next pass, householdFormationEngine :748-757)
+      var ohh = hhById[iHH >= 0 ? String(rows[ri][iHH] || '').trim() : ''];
+      if (ohh && ohh.householdType === HOUSEHOLD_TYPES.COUPLE && (ohh.members || []).length === 1) {
+        var ownInc = Number(String(rows[ri][idx('Income')] || '').replace(/[$,\s]/g, '')) || 0;
+        ohh.householdType = ownInc >= SOLO_INCOME_FLOOR ? 'solo' : 'single';
+      }
+    }
+    ctx.ledger.dirty = true;
+    var who = couple ? nameOf(ri) + ' and ' + nameOf(si) : nameOf(ri);
+    var hood = iHood >= 0 ? String(rows[ri][iHood] || '') : '';
+    ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+    ctx.summary.storyHooks.push({
+      hookType: 'CITIZEN_DIVORCED', severity: 4, priority: 3,
+      description: who + ' divorced in ' + (hood || 'the city') + ' after a hard stretch (' + names.join(', ') + ')',
+      cycleGenerated: cycle, neighborhood: hood, domain: 'COMMUNITY', text: who + ' divorced'
+    });
+    if (typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'bond-event', causeId: pop, causeDetail: who + ' divorced', effectType: 'divorce',
+        targetScope: 'citizen', targetIds: couple ? [pop, sp] : [pop], neighborhood: hood,
+        magnitude: 0.05, duration: 1, sourceEngine: 'householdFormationEngine'
+      });
+    }
+    divorces.push({ popId: pop, spouse: couple ? sp : '', kinds: names });
+    Logger.log('processDivorces_: ' + who + ' — ' + names.join(', ') + ' (C' + cycle + ')');
+  }
   return divorces;
 }
 

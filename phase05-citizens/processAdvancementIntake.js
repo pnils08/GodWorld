@@ -2385,6 +2385,13 @@ function formIntakeHouseholds_(ctx, mints, cycle, now, logSheet) {
   for (var key in mints) {
     if (!mints.hasOwnProperty(key)) continue;
     var hh = mints[key];
+    // engine.302 (codex cut-3 review A1): a spouse whose link was refused (a minor) or never wired joins no
+    // household as a spouse — they stay unhoused, logged; the household forms from the rest
+    hh.members = hh.members.filter(function (mm) {
+      if (mm.type !== 'spouse' || mm.linked) return true;
+      Logger.log('formIntakeHouseholds_: ' + mm.pop + ' queued as spouse but not wired — left out of household ' + key + ' (engine.302)');
+      return false;
+    });
     if (!hh.head || hh.members.length < 2) continue;
     var hhId;
     do { seq++; hhId = 'HH-' + String(cycle).padStart(4, '0') + '-I' + String(seq).padStart(3, '0'); } while (used[hhId]);

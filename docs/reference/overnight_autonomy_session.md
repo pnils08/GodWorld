@@ -174,6 +174,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 05:21 es FOLD codex cuts 1+2 diff review (HOLD) → 5f057a26 fix round, tests 70/70, npm 294/294. CLAIM codex recheck.
 05:31 es BENCH 1004 @58 = stage 6 (stage 5 + 8 files at 5f057a26, pull-back identical); reset BASELINE-1004-C112b (0 diffs), bench MaritalStatus migration 156 cells read back clean, clearfire 132, aim = bench. Soak C113-C132 running (output/engine-sheet/2026-10-19-e302-soak.log).
 05:38 es CHECK rb IDLE (prompt empty, no permission prompt). codex WORKING (es claim: recheck-2 + cut 3 plan review). git: 8b00524f recheck fixes. Soak C113 205 s / C114 225 s PASS, C115 firing. Inbox: only es's own codex files.
+05:55 rb CHECK es IDLE at prompt, no permission prompt, soak shell running, one-off 05:57 set for codex cut 3 review (landed 05:41, HOLD). codex IDLE at prompt (es claim). git e1bea907 top, all es. Inbox: es codex files only. No action. NEXT[rb] 06:15 Anthony read at the 06:26 wake, 08:00 news at 08:26.
 
 ## 8. Stop rule and usage
 

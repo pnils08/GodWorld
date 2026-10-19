@@ -722,7 +722,8 @@ function reconcileHouseholds_(ctx, cycle) {
     }
     if (actual.length > 0) {
       // Head must be a member; keep if so, else the first (sorted) adult member — engine.302: a divorce or a
-      // remarriage that moves the head out must never leave a child heading the home — else the first member
+      // remarriage that moves the head out hands the home to an adult when one lives there; an all-minor home keeps
+      // the first member, as before (the income pass prices that case, updateHouseholdIncomes_)
       var head = lrow[lHead];
       if (actual.indexOf(head) < 0) {
         var adultHead = '';
@@ -1082,7 +1083,7 @@ function processDivorces_(ctx, households, cycle) {
     }
     // codex B4: a couple's bond change rides the bond master replace, which a load that did not certify never queues
     // (bondPersistence.js saveRelationshipBonds_) — the couple's divorce waits a Cycle rather than split the record
-    if (couple && !(ctx.summary && ctx.summary.relationshipBondsLoaded === true)) { Logger.log('processDivorces_: bond load not certified — ' + pop + ' + ' + sp + ' wait'); continue; }
+    if (sp && !(ctx.summary && ctx.summary.relationshipBondsLoaded === true)) { Logger.log('processDivorces_: bond load not certified — ' + pop + ' + ' + sp + ' wait'); continue; }
     if (marriedNow(ri) || (couple && marriedNow(si))) continue;
     var kinds = divorceCrisisKinds_(rows[ri], h, cycle, {});
     if (couple) divorceCrisisKinds_(rows[si], h, cycle, kinds);
@@ -1145,8 +1146,8 @@ function processDivorces_(ctx, households, cycle) {
     for (var pi = 0; pi < parties.length; pi++) { rows[parties[pi]][iMar] = 'divorced'; rows[parties[pi]][iSp] = ''; }
     if (leaver >= 0) rows[leaver][iHH] = '';
     if (couple) {
-      appendBondLifeLine_(ctx, ri, 'Divorce', 'the marriage to ' + nameOf(si) + ' ended', cycle);
-      appendBondLifeLine_(ctx, si, 'Divorce', 'the marriage to ' + nameOf(ri) + ' ended', cycle);
+      appendBondLifeLine_(ctx, ri, 'Divorce', 'the marriage to ' + nameOf(si) + ' (' + sp + ') ended', cycle);
+      appendBondLifeLine_(ctx, si, 'Divorce', 'the marriage to ' + nameOf(ri) + ' (' + pop + ') ended', cycle);
       var bonds = (ctx.summary && ctx.summary.relationshipBonds) || [];
       for (var b = 0; b < bonds.length; b++) {
         var bd = bonds[b];

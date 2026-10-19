@@ -195,6 +195,16 @@ function bondCtx(hoodA, hoodB, rngFn, opts) {
   assert('R1 the joiner\'s own child moves with them', rows[3][l('HouseholdId')] === 'HH-A' && memA.indexOf('POP-BK') >= 0, rows[3][l('HouseholdId')] + ' ' + HH[1][3]);
   assert('R1 the head\'s child stays, gaining the joiner as a parent', rows[1][l('HouseholdId')] === 'HH-A' && JSON.parse(rows[1][l('ParentIds')]).indexOf('POP-B') >= 0);
   assert('R1 a child who already lists two parents gains no third', JSON.parse(rows[4][l('ParentIds')]).length === 2);
+  const rows2 = [lrow('POP-A', 'Ana', 1990, 'HH-A', 'widowed'), lrow('POP-AK', 'Kid', 2032, 'HH-A', 'youth', ['POP-A']),
+    lrow('POP-B', 'Ben', 1989, 'HH-B', 'divorced'), lrow('POP-BK', 'Kid', 2034, 'HH-B', 'youth', ['POP-B'])];
+  const HH2 = [['HouseholdId', 'HeadOfHousehold', 'HouseholdType', 'Members', 'Status'],
+    ['HH-A', 'POP-A', 'family', JSON.stringify(['POP-A', 'POP-AK']), 'active'], ['HH-B', 'POP-B', 'family', JSON.stringify(['POP-B', 'POP-BK']), 'active']];
+  const failing = v => ({ getDataRange: () => ({ getValues: () => v.map(r => r.slice()) }), getLastColumn: () => v[0].length,
+    getRange: () => ({ setValue: () => { throw new Error('quota'); }, getValues: () => [v[0].slice()] }), appendRow: () => {} });
+  const ctx2 = { ledger: { headers: LH, rows: rows2, dirty: false }, summary: { cycleId: 113, simYear: 2042, storyHooks: [] }, config: { cycleCount: 113 }, rng: () => 0.5,
+    ss: { getSheetByName: n => n === 'Household_Ledger' ? failing(HH2) : null } };
+  let threw2 = false; try { B.marryCitizens_(ctx2, { citizenA: 'POP-A', citizenB: 'POP-B', notes: '' }, Object.assign({}, A, { idx: 0 }), Object.assign({}, Bp, { idx: 2 }), 113); } catch (e) { threw2 = true; }
+  assert('R1 a destination write that throws moves no child (the write comes first)', threw2 && rows2[3][l('HouseholdId')] === 'HH-B');
   assert('R1 the old row is left to the same Cycle\'s reconcile (no direct write); the ledger carries the move', HH[2][3] === JSON.stringify(['POP-B', 'POP-BK', 'POP-BX']) && rows[2][l('HouseholdId')] === 'HH-A' && rows[3][l('HouseholdId')] === 'HH-A');
 }
 
@@ -452,7 +462,7 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
   assert('DV10 this week\'s household (in memory) drops the leaver and passes the head to the stayer; the sheet row is left to next Cycle\'s reconcile',
     w.households[0].headOfHousehold === 'POP-00702' && JSON.stringify(w.households[0].members) === '["POP-00702","POP-00703"]' && w.HV[1][1] === 'POP-00701');
   assert('DV10 the romantic bond is resolved', bond.status === 'resolved' && /\[Divorced C120\]/.test(bond.notes));
-  assert('DV10 one [Divorce] line each, naming the other', /the marriage to 02 Q ended/.test(w.rows[0][d('LifeHistory')]) && /the marriage to 01 Q ended/.test(w.rows[1][d('LifeHistory')]));
+  assert('DV10 one [Divorce] line each, naming the other', /the marriage to 02 Q \(POP-00702\) ended/.test(w.rows[0][d('LifeHistory')]) && /the marriage to 01 Q \(POP-00701\) ended/.test(w.rows[1][d('LifeHistory')]));
   w = world([drow('POP-00701', { sp: 'POP-00702 X', hh: 'HH-3', ds: crisis({ def: C - 3, p: { rent: C - 1, debt: C - 1 } }) }), drow('POP-00702', { sp: 'POP-00701 X', hh: 'HH-3' })],
             [['HH-3', 'POP-00701', 'couple', '["POP-00701","POP-00702"]', 'active']]);
   run(w);
@@ -476,6 +486,9 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
   const wa = world([drow('POP-00761', { sp: 'POP-09999 Gone', ds: crisis({ def: C - 3, p: { rent: C - 1, debt: C - 1 } }) })], null, [archBond]);
   wa.ctx._citizenArchiveByPop = { 'POP-09999': { row: [], reason: 'traded-away' } }; run(wa);
   assert('DV19 a spouse on Citizen_Archive (traded away): judged like an off-camera marriage, and their romantic bond resolved', m(wa, 0) === 'divorced' && archBond.status === 'resolved');
+  const wau = world([drow('POP-00781', { sp: 'POP-09998 Gone', ds: crisis({ def: C - 3, p: { rent: C - 1, debt: C - 1 } }) })]);
+  wau.ctx._citizenArchiveByPop = { 'POP-09998': { row: [] } }; wau.ctx.summary.relationshipBondsLoaded = false; run(wau);
+  assert('DV19 an archived-spouse divorce waits too when the bond load did not certify', m(wau, 0) === 'married');
   const wq = world([drow('POP-00771', { sp: 'POP-08888 Nobody', ds: crisis({ def: C - 3, p: { rent: C - 1, debt: C - 1 } }) })]);
   wq.ctx._citizenArchiveByPop = {}; run(wq);
   assert('DV19 a SpouseId on neither the ledger nor the archive is an unproven link: never divorced', m(wq, 0) === 'married');
@@ -503,9 +516,19 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
 {
   const w = weddingCtx(2042 - 40, 2042 - 41);
   w.rows[0][w.m] = 'divorced'; w.rows[1][w.m] = 'divorced';
-  w.rows[0][w.ctx.ledger.headers.indexOf('LifeHistory')] = 'Y3C15 — [Divorce] the marriage to Ben Roe ended';
+  w.rows[0][w.ctx.ledger.headers.indexOf('LifeHistory')] = 'Y3C15 — [Divorce] the marriage to Ben Roe (POP-02) ended';
   B.processRomanceAndMarriage_(w.ctx);
   assert('RC a romantic bond still active between a pair whose record says divorced is resolved, never re-married', w.bond.status === 'resolved' && w.rows[0][w.m] === 'divorced');
+  const w2 = weddingCtx(2042 - 40, 2042 - 41);
+  w2.rows[0][w2.m] = 'divorced'; w2.rows[1][w2.m] = 'divorced'; w2.bond.cycleCreated = 125;
+  w2.rows[0][w2.ctx.ledger.headers.indexOf('LifeHistory')] = 'Y3C15 — [Divorce] the marriage to Ben Roe (POP-02) ended';
+  B.processRomanceAndMarriage_(w2.ctx);
+  assert('RC a courtship the same two start after the divorce is a new bond: it stands (and can marry again)', w2.bond.status === 'active' && w2.rows[0][w2.m] === 'married');
+  const w3 = weddingCtx(2042 - 40, 2042 - 41);
+  w3.rows[0][w3.m] = 'divorced'; w3.rows[1][w3.m] = 'divorced';
+  w3.rows[0][w3.ctx.ledger.headers.indexOf('LifeHistory')] = 'Y3C15 — [Divorce] the marriage to Ben Roe (POP-77) ended';
+  B.processRomanceAndMarriage_(w3.ctx);
+  assert('RC a same-name divorce line about someone else never resolves this bond', w3.bond.status === 'active');
   const HR = load('../phase05-citizens/householdFormationEngine.js', ['reconcileHouseholds_']);
   const RH = ['POPID', 'Last', 'Status', 'Neighborhood', 'HouseholdId', 'MaritalStatus', 'BirthYear', 'Tier', 'Income'];
   const rr = (pop, by, m) => [pop, 'Q', 'Active', 'Fruitvale', 'HH-9', m, by, 4, 50000];

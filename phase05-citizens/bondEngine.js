@@ -2226,13 +2226,21 @@ function deepenBondToFriendship_(ctx, bond, cycle) {
   if (pB) appendBondLifeLine_(ctx, pB.idx, 'Bond', line(nameOf(pA, bond.citizenA)), cycle);
 }
 
-// engine.302: did this pair's marriage end in divorce? Either partner's LifeHistory carries "[Divorce] the marriage to
-// <the other's name> ended" (processDivorces_, householdFormationEngine).
-function bondPairDivorced_(ctx, A, B) {
+// engine.302: is this romantic bond the one a divorce ended? Either partner's LifeHistory carries "[Divorce] the
+// marriage to <name> (<the other's POPID>) ended" (processDivorces_, householdFormationEngine), stamped in a Cycle
+// after the bond began — a courtship the same two start again after the divorce is a new bond and stands.
+function bondPairDivorced_(ctx, bond, A, B) {
   var iLife = ctx.ledger.headers.indexOf('LifeHistory');
   if (iLife < 0) return false;
-  var la = String(ctx.ledger.rows[A.idx][iLife] || ''), lb = String(ctx.ledger.rows[B.idx][iLife] || '');
-  return la.indexOf('[Divorce] the marriage to ' + B.name + ' ended') >= 0 || lb.indexOf('[Divorce] the marriage to ' + A.name + ' ended') >= 0;
+  var began = Number(bond.cycleCreated) || 0;
+  var ended = function (life, otherPop) {
+    var re = /Y(\d+)C(\d+) — \[Divorce\] the marriage to [^\n]*\((POP-\d+)\) ended/g, m;
+    while ((m = re.exec(String(life || ''))) !== null) {
+      if (m[3] === otherPop && (Number(m[1]) - 1) * 52 + Number(m[2]) >= began) return true;
+    }
+    return false;
+  };
+  return ended(ctx.ledger.rows[A.idx][iLife], String(bond.citizenB).trim()) || ended(ctx.ledger.rows[B.idx][iLife], String(bond.citizenA).trim());
 }
 
 function processRomanceAndMarriage_(ctx) {
@@ -2254,7 +2262,7 @@ function processRomanceAndMarriage_(ctx) {
 
     // engine.302 (codex final gate B4): the ledger's [Divorce] lines are the durable record of a divorce; a romantic bond
     // still active between the pair (its replace did not land) is resolved here, never re-married
-    if (bond.bondType === BOND_TYPES.ROMANTIC && bondPairDivorced_(ctx, A, B)) {
+    if (bond.bondType === BOND_TYPES.ROMANTIC && bondPairDivorced_(ctx, bond, A, B)) {
       bond.status = BOND_STATUS.RESOLVED;
       bond.notes = String(bond.notes || '') + ' [Divorced — record caught up C' + cycle + ']';
       bond.lastUpdate = cycle;
@@ -2376,13 +2384,14 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
     var jm = joinTarget.info.members;
     var joinerId = (joiner === A) ? bond.citizenA : bond.citizenB;
     if (jm.indexOf(joinerId) < 0) jm.push(joinerId);
-    // engine.302: a joiner leaving a household that holds others brings their own children — a
-    // remarrying divorced or widowed parent no longer leaves a minor behind in the old home (the hole
-    // was already there for single parents; the wider courting door makes it common). A child moves
-    // when ParentIds names the joiner, they share the joiner's old HouseholdId, and they are under 18.
-    // The formation reconciler drops them from the old row's Members on its next pass.
+    // engine.302: a joiner leaving a household that holds others brings their own children — a remarrying divorced or
+    // widowed parent no longer leaves a minor behind in the old home. A child moves when ParentIds names the joiner,
+    // they share the joiner's old HouseholdId, and they are under 18. The destination row is written first (with the
+    // children in it); only then do the children's HouseholdIds move, so a write that throws moves no one. The old row
+    // is rebuilt from the ledger by the same Cycle's Phase5-HouseholdFormation reconcile.
     var oldHid = String(joiner.householdId || '').trim();
     var iHHk = idx('HouseholdId'), iParK = idx('ParentIds'), iBirthK = idx('BirthYear'), iPopK = idx('POPID');
+    var movingKids = [];
     if (oldHid && oldHid !== joinTarget.hid && iHHk >= 0 && iParK >= 0 && iBirthK >= 0 && iPopK >= 0) {
       var simYk = simYearOf_(ctx, ctx.summary.cycleId || ctx.config.cycleCount || 0);
       for (var mk = 0; mk < ctx.ledger.rows.length; mk++) {
@@ -2392,16 +2401,13 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
         if (!(kby > 0 && (simYk - kby) < 18)) continue;
         var kpar = []; try { kpar = JSON.parse(krow[iParK] || '[]'); } catch (ek) { kpar = []; }
         if (!Array.isArray(kpar) || kpar.indexOf(joinerId) < 0) continue;
-        krow[iHHk] = joinTarget.hid;
+        movingKids.push(krow);
         var kpop = String(krow[iPopK] || '').trim();
         if (kpop && jm.indexOf(kpop) < 0) jm.push(kpop);
-        ctx.ledger.dirty = true;
       }
-      // The old row's Members are not written here (codex final gate): the same Cycle's Phase5-HouseholdFormation
-      // reconcile rebuilds every row's Members from the ledger's HouseholdIds — which already carry the move — before
-      // anything reads them.
     }
     hhSheet0.getRange(joinTarget.info.row, hv[0].indexOf('Members') + 1).setValue(JSON.stringify(jm));
+    for (var mv = 0; mv < movingKids.length; mv++) { movingKids[mv][iHHk] = joinTarget.hid; ctx.ledger.dirty = true; }
     var iHH0 = idx('HouseholdId');
     if (iHH0 >= 0) ctx.ledger.rows[joiner.idx][iHH0] = joinTarget.hid;
     // resident minors gain the new spouse as second parent (drip convention)

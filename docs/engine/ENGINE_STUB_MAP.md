@@ -1353,7 +1353,7 @@
 
 - **deepenBondToFriendship_(ctx, bond, cycle)**
 
-- **bondPairDivorced_(ctx, A, B)**
+- **bondPairDivorced_(ctx, bond, A, B)**
 
 - **processRomanceAndMarriage_(ctx)**
   Reads: S.cycleId, S.relationshipBonds, S.storyHooks

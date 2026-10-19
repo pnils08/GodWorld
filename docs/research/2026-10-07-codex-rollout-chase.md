@@ -5,7 +5,7 @@ updated: 2026-10-07
 type: research
 tags: [rollout, review, active]
 sources:
-  - docs/for-claude-review/2026-10-07-codex-rollout-chase-TASK.md
+  - docs/archive/for-claude-review/2026-10-07-codex-rollout-chase-TASK.md
   - docs/engine/ROLLOUT_PLAN.md
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — rows checked"

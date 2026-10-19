@@ -6,7 +6,7 @@ type: plan
 tags: [engine, citizens, crons, draft]
 sources:
   - docs/research/2026-10-08-engine-286-event-engines-read-before.md
-  - docs/for-claude-review/2026-10-08-codex-engine286-read-and-plan.md
+  - docs/archive/for-claude-review/2026-10-08-codex-engine286-read-and-plan.md
   - docs/plans/2026-07-31-citizen-memory-perception.md §engine.284 (flag audit, builder rulings)
   - docs/plans/2026-07-18-event-pools-design.md (engine.67, closed 2026-09-29)
 pointers:
@@ -73,7 +73,7 @@ pointers:
 | 9 | Check the two direct in-cycle log writers against `SHEETS_MANIFEST.md` §9; clear the written-but-never-read fields as a rider (FIX, don't ADD) only after a producer→consumer check — a scoped-file search does not prove a downstream field dead. The daily generator's direct Generic_Citizens writes (`generateCitizensEvents.js:3432`, `:3447`) are absent from its manifest row (`SHEETS_MANIFEST.md:152`): reconcile the class, do not migrate all three direct writes by reflex. Same for the wedding: `marryCitizens_` appends to `Household_Ledger` and `Family_Relationships` and the GC paths set `Generic_Citizens` status in-cycle (`bondEngine.js` :2236, :2285, :2297, :2424, :2485, :2614) and the manifest lists bondEngine only for `Relationship_Bond_Ledger` and `Faith_Organizations` (`SHEETS_MANIFEST.md` :168–169) — reconcile the class before any family kind is built on it. | es | not started |
 | 10 | Tests and bench proving sequence: codex's seven test groups, adopted by exact reference (codex report 195–201 — routing matrix with all tiers, spellings, statuses, minors, custody, household and ECL paths, unchanged death behavior; paired causal tests incl. all 22 canonical hoods and child areas and absent/zero/malformed/unknown state; opportunity tests incl. shared events and the RNG boundary; civic identity incl. current vs former holder, a director's own vs unrelated initiative, repeated retired status, replay; mint tests across every mint door (births, intake, the two GC spouse mints); event→dial tests through the real parser, mapper and compressor with named existing suites; failure and persistence tests, four cases, visible errors, no unearned completion) plus the acceptance below. Bench data is labelled synthetic; the builder reads actual success and failure texture before any production release. | es | **partial (es 2026-10-12)** — per-task fixtures exist for Tasks 2 + 6 through the real entry points (`employerSuccess.test.js` incl. the Acceptance-1 pair and the salience fixture :510–537, `homeSale.test.js` home die 36/36, `careerEngineReach.test.js`, the civic-role suites) plus bench G/H; codex's seven groups as a set (routing matrix across all tiers/spellings/custody, all 22 hoods, mint doors, the four persistence-failure cases) are not built |
 | 11 | After the first kind passes: a second domain and contrasting citizens prove it, then the replacement-driven reduction of overlapping filler with before/after wake-context inspection (per-citizen rates, never a replacement population quota); broader adoption across the eight generators follows. | es | → engine.299 (docs/plans/2026-10-18-event-engines-move-dials.md): every hardcoded line carries the dial and sign its own text states, else is not written; contrasting-citizens fixture = engine299Graded T10 (same hood, DebtLevel 5 vs 0). The second-domain proof and replacement-driven filler reduction were not part of engine.299; open. |
-| 12 | Codex reviews the engine-sheet diff before production (house review lane); findings reconciled back into this plan's tables. Production deployment and live observation are separately authorized; C111 is not a deadline. | codex / rb | **done per task (es 2026-10-12)** — Task 6: [[../for-claude-review/2026-10-09-codex-engine286-task6-impl]] HOLD, folded before PROD; Task 2: [[../research/2026-10-11-codex-engine286-task2-impl-review]] HOLD, folded `652e608b` before PROD `63754ca8`. Repeats for every later task |
+| 12 | Codex reviews the engine-sheet diff before production (house review lane); findings reconciled back into this plan's tables. Production deployment and live observation are separately authorized; C111 is not a deadline. | codex / rb | **done per task (es 2026-10-12)** — Task 6: [[../archive/for-claude-review/2026-10-09-codex-engine286-task6-impl]] HOLD, folded before PROD; Task 2: [[../research/2026-10-11-codex-engine286-task2-impl-review]] HOLD, folded `652e608b` before PROD `63754ca8`. Repeats for every later task |
 
 ## Acceptance
 
@@ -101,7 +101,7 @@ pointers:
 | Hunt 1 | Die L promotion and the budget could both promote one citizen in a Cycle | Fixed: die-touched citizens leave the budget's staff that Cycle; tested |
 
 
-### Task 6 — codex implementation review 2026-10-09 (`docs/for-claude-review/2026-10-09-codex-engine286-task6-impl.md`, HOLD on `6ac15e9f`; each finding re-read by es)
+### Task 6 — codex implementation review 2026-10-09 (`docs/archive/for-claude-review/2026-10-09-codex-engine286-task6-impl.md`, HOLD on `6ac15e9f`; each finding re-read by es)
 
 | # | Finding | Disposition |
 |---|---|---|
@@ -112,7 +112,7 @@ pointers:
 | I-F5 | `safeRand_` seeded fallback | The shared engine RNG contract; not changed for one engine. |
 | bench | C113 premise mix was all business-up | Premises read against the city's own spread, everyday always a candidate (`b6263f95`). |
 
-### Task 6 — codex design review 2026-10-09 (`docs/for-claude-review/2026-10-09-codex-engine286-task6-civic-role.md`, verdict HOLD; every cited line re-read by es) — dispositions, all engineering
+### Task 6 — codex design review 2026-10-09 (`docs/archive/for-claude-review/2026-10-09-codex-engine286-task6-civic-role.md`, verdict HOLD; every cited line re-read by es) — dispositions, all engineering
 
 | # | Finding | Disposition |
 |---|---|---|
@@ -127,9 +127,9 @@ pointers:
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
 | Event-engine read-before (eight wiring cards, conditioning table, C110 tag counts, comparison §7) | rb | [[../research/2026-10-08-engine-286-event-engines-read-before]] | read-only |
-| Independent read and plan, with the builder amendment and wake/return trace | codex | [[../for-claude-review/2026-10-08-codex-engine286-read-and-plan]] | HOLD implementation for builder calls; read-before complete |
+| Independent read and plan, with the builder amendment and wake/return trace | codex | [[../archive/for-claude-review/2026-10-08-codex-engine286-read-and-plan]] | HOLD implementation for builder calls; read-before complete |
 | Wiring cards ×8 (runCivicRoleEngine_, generateCitizensEvents_, generateGenericCitizenMicroEvents_, runNeighborhoodEngine_, runAsUniversePipeline_, generateGameModeMicroEvents_, generateCivicModeEvents_, generateMediaModeEvents_) | rb (engine-wiring agent) | summarized in the rb read-before §1; reproducible per target with the engine-wiring agent | read-only |
-| Plan fidelity review and five proofs (P1, P9, P10, P11, P13); 42 corrections F1–F42, dispositions below | codex | [[../for-claude-review/2026-10-08-codex-engine286-plan-review-and-proofs]] | HOLD on the plan as written; folded 2026-10-09 |
+| Plan fidelity review and five proofs (P1, P9, P10, P11, P13); 42 corrections F1–F42, dispositions below | codex | [[../archive/for-claude-review/2026-10-08-codex-engine286-plan-review-and-proofs]] | HOLD on the plan as written; folded 2026-10-09 |
 | engine.284 flag audit and applied ledger edits | rb | [[2026-07-31-citizen-memory-perception]] §engine.284 | 13 edits applied and read back 2026-10-08 |
 
 ### Agreed
@@ -361,7 +361,7 @@ F. Tests: `scripts/engine302Marital.test.js` (new, named here) loads the real fi
 
 G. Findings for the builder, not cut (data on §6 of the overnight doc): (1) `maxNewBonds` 2–4 a Cycle citywide (`bondEngine.js:1119-1127`) — the soak's 1–5 new bonds a Cycle; the same quota class SIM_DOCTRINE §1 rules out, and lifting it needs a per-citizen rate. (2) Nothing turns a NEIGHBOR (or any type) into a FRIENDSHIP: new friendships come only from the same-trade lane (:1340) and canon mints, and friendship is the only door to romance (:2159). (3) No divorce: `processDivorces_` is a stub (`householdFormationEngine.js:964`); every `divorced` row is backfill. (4) The 24–50 wedding window bars 31 of 35 widowed and 45 of 98 divorced adults (51–65), so ruling 5 reaches few widows. (5) GC courtships: 0 in 20 soak Cycles.
 
-Cut 1 — codex plan review (`docs/for-claude-review/2026-10-19-codex-engine302-cut1-plan-review.md`, HOLD; every finding re-read against the code by es; advisor reconcile on hunt 7) — dispositions:
+Cut 1 — codex plan review (`docs/research/2026-10-19-codex-engine302-cut1-plan-review.md`, HOLD; every finding re-read against the code by es; advisor reconcile on hunt 7) — dispositions:
 - H1 FIX accepted: the manual scripts that can still write the old values are trued to the enum — `scripts/backfillLifecycleDefaults.js:159-170` (same fold as the derivation; minors `youth`) and `scripts/seedYouthBalance.js:217` (`youth`). `addHouseholdFamilyColumns.js:38` (column seed, already ran) and `canon3_backfill_t9.js:134` (history) left. E flags a missing BirthYear apart, never classifying it (live: 0).
 - H2 SHIP: `youth` shows raw on the Saturday, packet and card surfaces — compatible.
 - H3 FIX accepted: widowing needs the survivor's **own** `SpouseId` to name the deceased and the survivor to read `married` (a deceased-side pointer alone never widows). `lib/wakePerception.js:240` says "You're married to <name>" only when the status is `married` (it preferred a resolved SpouseId over the status, and `nameOf` holds every live row, deceased included, until Phase 11 archives them). `SpouseId` kept (heritage join, archive-aware). `Family_Relationships` keeps its old married row as history (a register; no engine reads it for status).

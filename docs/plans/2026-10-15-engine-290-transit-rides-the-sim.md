@@ -6,7 +6,7 @@ type: plan
 tags: [engine, transit, citizens, active]
 sources:
   - output/antigravity/2026-10-14-review-engine290-transit.md — agy adversarial review (rb-verified 2026-10-15 against the code)
-  - docs/for-claude-review/2026-10-15-codex-engine290-plan.md — codex plan review v1 (HOLD; every item reconciled below)
+  - docs/archive/for-claude-review/2026-10-15-codex-engine290-plan.md — codex plan review v1 (HOLD; every item reconciled below)
   - output/antigravity/2026-10-15-engine290-share-readbefore.md — agy share read-before on the C111 beats
   - docs/plans/2026-09-09-transit-hood-alignment-plan.md — engine.183, the causal frame this builds on
   - docs/SIM_DOCTRINE.md §1, §2, §4, §6, §8
@@ -102,11 +102,11 @@ Canon writes, in order, each read back before the next live fire (codex §8):
 | Review | Pointer | Disposition |
 |---|---|---|
 | agy adversarial review 2026-10-14 | `output/antigravity/2026-10-14-review-engine290-transit.md` | reconciled (v1) |
-| codex plan review v1 2026-10-15 (HOLD) | `docs/for-claude-review/2026-10-15-codex-engine290-plan.md` | reconciled (v2, below) |
+| codex plan review v1 2026-10-15 (HOLD) | `docs/archive/for-claude-review/2026-10-15-codex-engine290-plan.md` | reconciled (v2, below) |
 | agy share read-before 2026-10-15 | `output/antigravity/2026-10-15-engine290-share-readbefore.md` | folded into move 3 / Task 3 |
-| codex diff review Tasks 6–8 2026-10-15 (FIX on §2–§5) | `docs/for-claude-review/2026-10-15-codex-engine290-impl-tasks6-8.md` | folded by es `ac1d38bb` (runtime gate on commute rows, `--poolkey`, Transit Dispatcher unrouted, voice-role additions reverted, docs wording); rb verified 05:35; bounded re-check dispatched |
-| codex bounded re-check 2026-10-15 (FIX: apply fail-open, plan wording) | `docs/for-claude-review/2026-10-15-codex-engine290-fold2-recheck.md` | folded by es `4ea5d6dd` (transit pool never applies without `--poolkey`; plan body reconciled; catalog read-back 306 → 309); rb verified 05:50 |
-| codex diff review Tasks 1–5 2026-10-15 (FIX on §1, §3) | `docs/for-claude-review/2026-10-15-codex-engine290-impl-tasks1-5.md` | folded by es `254163a6`; rb verified 04:50 |
+| codex diff review Tasks 6–8 2026-10-15 (FIX on §2–§5) | `docs/archive/for-claude-review/2026-10-15-codex-engine290-impl-tasks6-8.md` | folded by es `ac1d38bb` (runtime gate on commute rows, `--poolkey`, Transit Dispatcher unrouted, voice-role additions reverted, docs wording); rb verified 05:35; bounded re-check dispatched |
+| codex bounded re-check 2026-10-15 (FIX: apply fail-open, plan wording) | `docs/archive/for-claude-review/2026-10-15-codex-engine290-fold2-recheck.md` | folded by es `4ea5d6dd` (transit pool never applies without `--poolkey`; plan body reconciled; catalog read-back 306 → 309); rb verified 05:50 |
+| codex diff review Tasks 1–5 2026-10-15 (FIX on §1, §3) | `docs/archive/for-claude-review/2026-10-15-codex-engine290-impl-tasks1-5.md` | folded by es `254163a6`; rb verified 04:50 |
 
 ### Agreed
 - Write coercion at `ensureTransitMetrics.js:417-430, 449-468` (agy §Verdict 1; codex §1 SHIP) → move 1; fixtures in `beatSlices.test.js` updated (codex §1).

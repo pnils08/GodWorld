@@ -1,6 +1,6 @@
 # TASK — codex: plan review, engine.302 cut 1 (marital statuses, the courting door, hood proximity)
 
-Read-only: code + docs + `output/` dumps; no cron, model, Sheet write, bench or canon run. Do not commit, do not push. Write to `docs/for-claude-review/2026-10-19-codex-engine302-cut1-plan-review.md`, SHIP / FIX / HOLD per hunt, file:line evidence, under ~120 lines. Report in one line when done.
+Read-only: code + docs + `output/` dumps; no cron, model, Sheet write, bench or canon run. Do not commit, do not push. Write to `docs/research/2026-10-19-codex-engine302-cut1-plan-review.md`, SHIP / FIX / HOLD per hunt, file:line evidence, under ~120 lines. Report in one line when done.
 
 **The plan:** `docs/plans/2026-10-08-engine-286-game-of-life-events.md` §Bench soak — the builder's verbatim (:332, :334, :336), the rulings (1)–(7), the engine.302 sequence (:338), and **engine.302 cut 1 — design** (:340 on, items A–G). Rulings are fixed; attack the mechanism. Commit `ee1746b5`.
 

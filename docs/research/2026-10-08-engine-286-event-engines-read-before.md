@@ -71,7 +71,7 @@ Live data point (C110-end ledger, 1,025 rows): 924 citizens carry at least one l
 
 ## 7. Compared with codex's independent run (2026-10-08)
 
-Codex's report: [[../../docs/for-claude-review/2026-10-08-codex-engine286-read-and-plan]] (273 lines, eight tasks, six builder calls, plus a builder amendment appended). Disclosure: codex read plan line 200 and lines 187–190 before stopping, so the run is not perfectly blind.
+Codex's report: [[../../docs/archive/for-claude-review/2026-10-08-codex-engine286-read-and-plan]] (273 lines, eight tasks, six builder calls, plus a builder amendment appended). Disclosure: codex read plan line 200 and lines 187–190 before stopping, so the run is not perfectly blind.
 
 **Agree.** The main generator is the engine already shaped by the citizen; the rest are thinner. Do not wake the civic role engine as written — re-align it to real official actions or retire it, no new engine file. The flag, clock and death rulings stay untouched. The main generator and the Universe pipeline write the log tab directly in-cycle. Births and intake promotions should write explicit flags (codex: `no/no/no` for ordinary births and promotions, protected entrants only from authoritative intake facts).
 
@@ -91,6 +91,6 @@ Codex's report: [[../../docs/for-claude-review/2026-10-08-codex-engine286-read-a
 
 ## 6. Next
 
-Codex is running the same job independently (task: `docs/for-claude-review/2026-10-08-engine286-codex-independent-run-TASK.md`, output `docs/for-claude-review/2026-10-08-codex-engine286-read-and-plan.md`). When it lands: compare read to read first (where the two disagree is where one of us is wrong), then cut one plan with the engine.284 build folded in. The merged plan is cut: [[../plans/2026-10-08-engine-286-game-of-life-events]] (Agreed / Needs proof / New concepts, each pointing back here and at codex's report); it was: the merged skeleton starts from codex's tasks 2–8 re-ordered around the amendment (one consequential path proven end to end first, quotas and premise defects second).
+Codex is running the same job independently (task: `docs/archive/for-claude-review/2026-10-08-engine286-codex-independent-run-TASK.md`, output `docs/archive/for-claude-review/2026-10-08-codex-engine286-read-and-plan.md`). When it lands: compare read to read first (where the two disagree is where one of us is wrong), then cut one plan with the engine.284 build folded in. The merged plan is cut: [[../plans/2026-10-08-engine-286-game-of-life-events]] (Agreed / Needs proof / New concepts, each pointing back here and at codex's report); it was: the merged skeleton starts from codex's tasks 2–8 re-ordered around the amendment (one consequential path proven end to end first, quotas and premise defects second).
 
 Ignited plans: none yet. Verdict: adopt (the job is ruled; this is its substrate read).

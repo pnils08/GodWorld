@@ -1,0 +1,16 @@
+# TASK — codex: (A) recheck-2 of the cuts 1+2 fix, (B) plan review of engine.302 cut 3 (divorce)
+
+Read-only; no cron, model, Sheet write, bench or canon run. Do not commit, do not push. Write to `docs/for-claude-review/2026-10-19-codex-engine302-cut3-plan-review.md`, SHIP / FIX / HOLD per hunt, file:line evidence, under ~110 lines. Report in one line when done.
+
+**(A)** `git show 8b00524f` against your recheck (`docs/research/2026-10-19-codex-engine302-cut12-recheck.md`): are the two HOLDs closed (household-door `linked` = wired; the GC stamp row binding), and does either open anything (a `wireFamilyMatch_` path that wires but returns undefined; the r<n> stamp after a Generic_Citizens row insert/delete; legacy bonds without the r part)?
+
+**(B)** The plan: `docs/plans/2026-10-08-engine-286-game-of-life-events.md` §Bench soak — builder ruling 10 verbatim ("This needs to happen when a set amount of crisis hits but in a major loss situation, multiple issues would need to cause it") and **engine.302 cut 3 — design** (:394 on). The ruling is fixed; attack the mechanism.
+1. **Signals.** Is each crisis kind real and reachable on the engine as it runs (who writes `DialState.pressure.*`, `debtDefault`, `grief`, `[LifeEvent-Home-Down-L]`, the health statuses; are any written after Phase5-HouseholdFormation, so a same-Cycle event is seen only next Cycle; can DialState be absent or stale on a row)? A kind the design names that no engine writes is a §15 gate that cannot fire.
+2. **The set amount.** 3 distinct kinds with ≥ 1 major inside 13 Cycles, deterministic when it holds. For an on-ledger couple the union of both. Edge: a kind held continuously for months counts once; a widow/divorcee cannot be divorced; a couple married this Cycle is skipped. Is "distinct kinds" the right unit for "multiple issues"? Any way one event counts twice (e.g. unemployed + debt from the same layoff)?
+3. **Placement.** `processDivorces_` inside `processHouseholdFormation_` (`householdFormationEngine.js:143-260`), with `ctx` and a household reload. Phase order vs Bonds (a romance that matured this Cycle), Generational (a death this Cycle widows first), GenerationalWealth (defaults), the reconciler at the top of the same function (does it undo the leave next pass?), `updateHouseholdIncomes_`, stress/dissolution after.
+4. **Writes.** Both statuses `divorced`, SpouseId cleared, `[Divorce]` lines, the bond RESOLVED, the leaver out of Members + HouseholdId, HeadOfHousehold to the stayer, the Family_Relationships row Status `divorced`, the hook and the ripple. Which readers of SpouseId / HouseholdId / Members / Family_Relationships / bond status break or double-count (heritage, inheritance, intake spouse slot, the reconciler's spouse-merge, the solo door, the wake, citizen cards, desk packets)? Direct-write class of each write (SHEETS_MANIFEST §9).
+5. **Who stays.** The parent of more resident minors, a tie → the head. Children never move; an owned home stays with the household. Name any case this leaves wrong (a step-parent head with the other spouse's children; a minor whose only parent leaves).
+6. **Tests named.** Enough to catch a divorce on one issue, a stale window, a double count, a wrong leaver?
+7. **Scope.** Anything past ruling 10, anything ruling 10 asks that the design does not deliver.
+
+Done = the md exists.

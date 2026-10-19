@@ -5,7 +5,7 @@ updated: 2026-10-12
 type: reference
 tags: [engine, infrastructure, research]
 sources:
-  - docs/for-claude-review/2026-10-12-engine214-pair-procedure-review-TASK.md
+  - docs/archive/for-claude-review/2026-10-12-engine214-pair-procedure-review-TASK.md
   - docs/reference/DEPLOY.md
   - output/engine-sheet/stage4.sha256
   - output/engine-sheet/stage5-e214.sha256

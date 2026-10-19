@@ -5,7 +5,7 @@ updated: 2026-10-19
 type: reference
 tags: [engine, review]
 sources:
-  - docs/for-claude-review/2026-10-19-engine302-final-gate-TASK.md
+  - docs/archive/for-claude-review/2026-10-19-engine302-final-gate-TASK.md
   - docs/plans/2026-10-08-engine-286-game-of-life-events.md
 pointers:
   - docs/research/2026-10-19-codex-engine302-cut3-recheck.md

@@ -37,7 +37,7 @@ const ANTHONY_APPROACH =
   'Analytic approach (Anthony Raines): third-person only — never fan "we." ' +
   'One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). ' +
   'Open from the board (roster fact, contract on the feed, season line) — not the bleachers. ' +
-  'Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. ' +
+  'Pick 1–2 tools from the analysis bag in this slice. Numbers as the card or feed prints them, named to their source. ' +
   'FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; ' +
   'P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.';
 

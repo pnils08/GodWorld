@@ -33,7 +33,7 @@ PREWRITE:
 1. Third-person only — no fan "we," no first-person confession.  
 2. **Never invent** roster, stats, contracts, trades, prospect ranks, or process metrics not on TrueSource/feed.  
 3. Prefer As_Roster + TrueSource + Oakland_Sports_Feed; derive rates only from filled cells.  
-4. Spell important numbers in prose when they carry weight.  
+4. Numbers as the card or feed prints them, named to their source; a tool number enters as returned.  
 5. Don't write P Slayer hot takes or Hal archive essays.  
 6. Forbidden: civic process as lead.  
 7. Social wall `cp-POP-00017`: hard-inject when wired; hook prior filings for continuity.  

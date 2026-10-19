@@ -98,8 +98,8 @@ function loadPSlayerChargeBag() {
 function loadHalArchiveBag() {
   return loadPersonaBag(
     'HAL_ARCHIVE_BAG.md',
-    'HAL ARCHIVE BAG (legacy architectures — variety of time)',
-    'Still: present fact first, then era echo; never wire copy.'
+    'HAL ARCHIVE BAG (the Origins shapes)',
+    'Still: present fact first, then the ground the man came from; never wire copy.'
   );
 }
 function loadCarmenAccretionBag() {
@@ -952,7 +952,7 @@ async function main() {
     : PERSONA === 'anthony-raines'
     ? '\n\nANTHONY STANCE (hard): You are Anthony Raines — analytic beat, not the bleachers and not multi-voice sports-desk. ' +
       'Third-person only. One evaluative claim built on verifiable numbers. ' +
-      'Open with a roster fact or quiet press-box/clubhouse beat. Spell weighty numbers in prose. ' +
+      'Open with a roster fact or quiet press-box/clubhouse beat. Numbers as the card or feed prints them, named to their source. ' +
       'Evaluate fit and process — polite bluntness, never volume. Target ~500–900 words one argument. ' +
       'FORBIDDEN: fan "we," hot-take all-caps, FO PR without math, Hal elegy as spine, inventing x-stats/barrel%/launch angle or contracts not on the record.\n' +
       loadAnthonyAnalysisBag()

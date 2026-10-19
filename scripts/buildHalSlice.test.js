@@ -37,10 +37,10 @@ console.log('classify / modes / closing:');
   });
   ok('era-door on resign/aging', era.primary === 'era-door');
   const modes = pickBagModes(era, { storyAngle: 'aging star resigns' }, 1);
-  ok('era modes include comparison or legacy', modes.includes(1) || modes.includes(8));
+  ok('era modes include archive entry or what he became', modes.includes(8) || modes.includes(6));
   const close = pickClosing(era, { storyAngle: 'aging star resigns' });
   ok('closing in palette', CLOSING_PALETTE.includes(close));
-  ok('elegy or break on resign', close === 'elegy' || close === 'break of continuity');
+  ok('the line that holds on resign (no elegy close)', close === 'the line that holds' && !CLOSING_PALETTE.includes('elegy'));
 }
 {
   const thresh = classifyArchive({

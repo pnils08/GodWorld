@@ -55,7 +55,7 @@ Derived rates (allowed — pure arithmetic from filled cells):
 | K/BB | SO / BB | Command quality |
 | ERA vs IP | pair only | Sample weight |
 
-Spell weighty numbers in prose when they carry the claim.
+Numbers as the card or feed prints them, named to their source, when they carry the claim.
 
 ---
 

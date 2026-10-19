@@ -5,7 +5,7 @@
  * Shared sports substrate (sportsSubstrate.js) + HAL_ARCHIVE_BAG overlay.
  * NOT fan heat (P Slayer). NOT board architecture (Anthony). NOT business desk.
  *
- * Present fact first (feed-true), then era echo. Closing palette required.
+ * Present fact first (feed-true), then the ground the man came from. Closing line required.
  *
  * Sources (disk-first):
  *   output/world_summary_c{N}.md  ## Sports
@@ -34,34 +34,32 @@ const sports = require('./sportsSubstrate');
 const ROOT = path.join(__dirname, '..');
 
 const HAL_APPROACH =
-  'Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. ' +
-  'Present fact first (feed-true: StoryAngle, Stats, record), then era echo. ' +
-  'An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. ' +
-  'Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. ' +
-  'End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). ' +
-  'FORBIDDEN: fan "we" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, ' +
+  'Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. ' +
+  'Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. ' +
+  'An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. ' +
+  'Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. ' +
+  'End on the closing note in this slice (the line that holds, or the quiet note the class carries). ' +
+  'FORBIDDEN: fan "we" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, ' +
   'FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.';
 
 /** Archive bag modes (docs/media/HAL_ARCHIVE_BAG.md) */
 const BAG_MODES = {
-  1: 'Era Comparison',
-  2: 'Quiet Road After Parade',
-  3: 'Predecessor Ghost',
-  4: 'Paper Cuts vs Percentiles',
-  5: 'Crossing the Threshold',
-  6: 'What the City Remembers',
-  7: 'Metrics as Poetry',
-  8: 'Legacy Guarantee Piece',
-  9: 'Season Tide',
-  10: 'Desk at Dawn'
+  1: 'The Ground',
+  2: 'The Long Road',
+  3: 'The Name the City Gave Him',
+  4: 'His Own Words',
+  5: 'The Locker Row',
+  6: 'What He Became',
+  7: 'The Line That Holds',
+  8: 'The Archive Entry',
+  9: 'Desk at Dawn',
+  10: 'The Record Plain'
 };
 
 const CLOSING_PALETTE = [
+  'the line that holds',
   'continuity',
-  'break of continuity',
   'quiet pride',
-  'unease',
-  'elegy',
   'threshold crossed',
   'the city remembers'
 ];
@@ -210,39 +208,39 @@ function pickBagModes(cls, row, priorHits) {
   const p = cls.primary;
 
   if (p === 'era-door') {
-    modes.add(1); // Era Comparison
-    modes.add(8); // Legacy Guarantee
+    modes.add(8); // The Archive Entry — farewell, anniversary, arrival
+    modes.add(6); // What He Became
     if (/aging|farewell|resign/.test((row.storyAngle || '').toLowerCase())) modes.add(3);
   } else if (p === 'threshold') {
-    modes.add(5);
-    modes.add(1);
+    modes.add(2); // The Long Road — the draft, the call
+    modes.add(1); // The Ground
   } else if (p === 'metrics-poetry') {
-    modes.add(7);
-    modes.add(4);
-  } else if (p === 'break-continuity') {
-    modes.add(1);
-    modes.add(8);
-  } else if (p === 'quiet-road') {
-    modes.add(2);
-    modes.add(10);
-  } else if (p === 'season-tide') {
-    modes.add(9);
-    if (cls.hasStats) modes.add(7);
-  } else if (p === 'city-remembers') {
+    modes.add(10); // The Record Plain — a number is the story
     modes.add(6);
+  } else if (p === 'break-continuity') {
     modes.add(2);
+    modes.add(6);
+  } else if (p === 'quiet-road') {
+    modes.add(6);
+    modes.add(9);
+  } else if (p === 'season-tide') {
+    modes.add(6);
+    if (cls.hasStats) modes.add(10);
+  } else if (p === 'city-remembers') {
+    modes.add(3); // The Name the City Gave Him
+    modes.add(6);
   } else if (p === 'franchise-chapter') {
-    modes.add(1);
+    modes.add(8);
     modes.add(6);
   } else if (p === 'present-line') {
-    modes.add(7);
+    modes.add(6);
     modes.add(10);
   } else {
-    modes.add(10);
-    modes.add(1);
+    modes.add(9); // Desk at Dawn — a thin week
+    modes.add(6);
   }
 
-  if (priorHits) modes.add(1); // era comparison with own prior filing
+  if (priorHits) modes.add(6); // his own prior filing: the man's record, continued
 
   return [...modes].slice(0, 2).sort((a, b) => a - b);
 }
@@ -250,14 +248,13 @@ function pickBagModes(cls, row, priorHits) {
 function pickClosing(cls, row) {
   const p = cls.primary;
   if (p === 'era-door' || p === 'break-continuity') {
-    if (/resign|farewell|aging/.test((row.storyAngle || '').toLowerCase())) return 'elegy';
-    return 'break of continuity';
+    return 'the line that holds';
   }
   if (p === 'threshold') return 'threshold crossed';
   if (p === 'metrics-poetry' || p === 'season-tide') return 'quiet pride';
-  if (p === 'quiet-road') return 'unease';
+  if (p === 'quiet-road') return 'the line that holds';
   if (p === 'city-remembers' || p === 'franchise-chapter') return 'the city remembers';
-  if (p === 'noise-at-edge') return 'unease';
+  if (p === 'noise-at-edge') return 'the line that holds';
   return 'continuity';
 }
 
@@ -265,13 +262,13 @@ function pickHistoricalAnchor(cls, row) {
   const p = cls.primary;
   if (p === 'era-door') return 'era door — living chapter vs the age it closes or extends';
   if (p === 'threshold') return 'threshold — arrival of youth as history happening';
-  if (p === 'metrics-poetry') return 'one feed number as poetry of time (not a grade)';
-  if (p === 'break-continuity') return 'trade / roster break — what the river lost';
-  if (p === 'quiet-road') return 'quiet road after parade (or after injury silence)';
-  if (p === 'season-tide') return 'season tide — this stretch of the calendar as sailor knows water';
+  if (p === 'metrics-poetry') return 'one feed number printed as the record prints it, then the man behind it (not a grade)';
+  if (p === 'break-continuity') return 'trade / roster break — the road the man was on';
+  if (p === 'quiet-road') return 'a quiet stretch after the parade or the injury — the man\'s record, plain';
+  if (p === 'season-tide') return 'season tide — this stretch of the calendar, one man, one shape';
   if (p === 'city-remembers') return 'what the city remembers — civic/athlete act on record only';
   if (p === 'franchise-chapter') return 'franchise chapter — stadium / expansion / naming as place-memory';
-  return 'desk at dawn — one present fact, one echo';
+  return 'desk at dawn — one present fact, one man, one shape';
 }
 
 function buildHistorianClaim(row, cls, foil, closing) {
@@ -281,7 +278,7 @@ function buildHistorianClaim(row, cls, foil, closing) {
     : (row.storyAngle
       ? 'Present fact: ' + String(row.storyAngle).slice(0, 140)
       : 'Present fact: the feed names this chapter.');
-  return present + ' Archive claim: place this against time — ' + angle +
+  return present + ' Archive claim: the man behind the line — ' + angle +
     ' Close toward ' + closing + '.';
 }
 

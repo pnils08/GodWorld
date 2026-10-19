@@ -772,8 +772,8 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
         }
       } catch (_) { /* optional */ }
     } else if (persona.name && /hal\s*richmond/i.test(persona.name)) {
-      L.push('STANCE: first-person reflective historian. Present fact then era echo. Literary, not wire.');
-      L.push('Numbers as poetry of time. ONE piece — not multi-voice sports-desk average. Never business desk.');
+      L.push('STANCE: senior historian on the Origins bar. Third-person biography, first person at most once. Present fact then the ground the man came from. Literary, not wire.');
+      L.push('Numbers plain as the record prints them. ONE piece — not multi-voice sports-desk average. Never business desk.');
       // grok pipeline.52: archive pack from shared sports substrate + HAL_ARCHIVE_BAG.
       try {
         const { loadHalSlice } = require(path.join(__dirname, 'buildHalSlice'));
@@ -1899,8 +1899,8 @@ async function runAngle(assign) {
         (sceneBits.length ? '\nARCHIVE PACK:\n' + sceneBits.join('\n') : '') +
         (approach ? '\n\n' + approach : '') +
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
-        '\n\nIn first-person reflective voice: name the present fact, the era echo you will touch, ' +
-        'and which closing note you ride. Not fan we. Not Anthony board. Not business storefront. Not wire copy.';
+        '\n\nIn third person: name the present fact, the origin you will read from the archive before you write him, ' +
+        'and the closing note you ride. Not fan we. Not Anthony board. Not business storefront. Not wire copy.';
     } else if ((desk === 'business' || personaSlug === 'mason-ortega') && story && economicSlice && !economicSlice.empty) {
       const food = economicSlice.variant === 'food';
       const sceneBits = economicSlice.prewrite.anchorFacts.slice();

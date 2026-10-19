@@ -5,9 +5,9 @@
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C111 (fired 2026-10-11 ~16:18 CDT, 0 errors, 148 s); next live fire C112, Sunday 2026-10-18.
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (52)** — each plan, its rows and the state each is in:
+**Plans in motion (53)** — each plan, its rows and the state each is in:
 
-- [[../plans/2026-10-11-media-extension]]: pipeline.83 ready, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
+- [[../plans/2026-10-11-media-extension]]: pipeline.83 live-observing, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, pipeline.71 ready, engine.287 live-observing, engine.288 live-observing, engine.289 blocked
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing, engine.298 live-observing
@@ -19,7 +19,6 @@
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
 - [[../reference/DEPLOY_HISTORY]]: engine.213 in-progress, engine.294 live-observing
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.293 live-observing, engine.104 ready
-- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing, engine.300 ready
 - [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 wontfix
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
@@ -55,10 +54,12 @@
 - [[../research/2026-10-11-codex-engine194-cut]]: engine.194 live-observing
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
 - [[../research/2026-10-16-codex-engine285-hazards2-6-review]]: engine.285 live-observing
+- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
 - [[../plans/2026-09-19-civic-wake-game-loop]]: engine.253 ready
 - [[../plans/2026-10-18-event-engines-move-dials]]: engine.299 live-observing
+- `output/antigravity/2026-10-19-review-engine214-prod-candidate.md`: engine.301 ready
 <!-- /generated -->
 
 ## Pull order (builder, 2026-09-29; trued 2026-10-07)
@@ -172,5 +173,4 @@
 | engine.261 | Firm agents: three business owners get a wake slice to run their business | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.298 | World summary and sports slices hand the desks one number per fact (C111 failure review, three honest pieces failed): (1) the summary's hospital segment counted tracked Hospital_Ledger rows ("0 in care") — now the cycle's Care_Justice_Census city row in the care trail's words ("37 admissions, 75 in care at the close (0 tracked), 75 beds occupied"), no load % (census vs tracked-scale beds); civic-domain slice reads the new segment; (2) the summary's sports line was literal (C110, playoffs) — the present-tense "The A's record is 4-1." was minted in Simon's slice; Simon and Tanya now state a record with its season and tense (`sportsSubstrate.recordSentence`). Live proof C112: summary hospital reads "36 admissions, 73 in care at the close (0 tracked), 73 beds occupied" — census line, pass; Sat 10-24 audit fails no piece on either | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §engine.298; [[../plans/2026-10-11-media-extension]] §pipeline.83 |
 | engine.299 | Every hardcoded event moves a dial, no real-Oakland premise. LIVE PROD @147 stage 4p = 4o + Task 13 caps lifted. **C112 live readback PASS (2026-10-18 22:16 CDT): 0 inert, acceptanceEmpty true, 2,344 lines = bench @54, 250 s, 0 raw tokens** (`output/engine299/offenders_c112_live.txt`). On main, not PROD: unsigned chaos line out of the pool, rb's 22 bespoke up lines, the Estuary truck rename — ride the engine.214 wave. Storefront line on a real hood fact: NOT built (live fires it on trajectory decay alone, `generateCitizensEvents.js:1713`); cut 8a of the wave | live-observing | engine-sheet | [[../plans/2026-10-18-event-engines-move-dials]] |
-| engine.300 | 20-Cycle soak on the engine.214 PROD candidate (bench @57, C113–C132): 20/20 PASS; weddings 0, kids 11, promotions 6, one romance (C120, 7.25 of 8 by C132). Table `output/engine-sheet/2026-10-19-engine300-soak-c113-c132.md`; rates are the builder's read | done-pending-archive | engine-sheet | [[../plans/2026-10-08-engine-286-game-of-life-events]] §Bench soak |
 | engine.301 | Pre-existing dead wires (agy 2026-10-19, es-verified): `S.crimeByNeighborhood` has no writer, so the citizen crime-carry line reads 0; five hoods' drift pools carry no signed line (rb authoring). Detail: agy review F1, F6 | ready | engine-sheet / research-build | `output/antigravity/2026-10-19-review-engine214-prod-candidate.md` F1, F6 |

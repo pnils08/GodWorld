@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S578 Archive Pass (2026-10-19, engine-sheet) — post-S577 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.
+
+- **engine.300** [engine-sheet] — 20-Cycle soak on the engine.214 PROD candidate (bench @57, C113–C132): 20/20 PASS; weddings 0, kids 11, promotions 6, one romance (C120, 7.25 of 8 by C132). Table `output/engine-sheet/2026-10-19-engine300-soak-c113-c132.md`; rates are the builder's read **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-08-engine-286-game-of-life-events]] §Bench soak
+
+This pass: 1 rows — engine.300. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S576 Archive Pass (2026-10-19, engine-sheet) — post-S575 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.

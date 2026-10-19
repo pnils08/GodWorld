@@ -540,10 +540,11 @@ function ensureBondEngineData_(ctx) {
     }
   }
 
-  // Deterministic shuffle (ctx.rng) — the detectNewBonds_ pair loop starts at
-  // index 0 and the per-cycle cap is 2-4, so an unshuffled pool hands every
+  // Deterministic shuffle (ctx.rng) — the detectNewBonds_ pair loop started at
+  // index 0 under a per-cycle cap of 2-4, so an unshuffled pool handed every
   // cycle's whole bond budget to the same first citizen (C122: all 6 bonds
-  // were Brianna Lee's). Fisher-Yates spreads formation across the pool.
+  // were Brianna Lee's). engine.302 retired the cap (each citizen meets one
+  // other); the shuffle still varies the draw order week to week.
   var shuffleRng = safeRand_(ctx);
   for (var sh = ctx._bondActivePool.length - 1; sh > 0; sh--) {
     var sj = Math.floor(shuffleRng() * (sh + 1));
@@ -674,10 +675,14 @@ function updateExistingBonds_(ctx) {
         ENGINE59_DIAG.friendGrowths++;
         if (ENGINE59_DIAG.factors.length < 5) ENGINE59_DIAG.factors.push(bond.citizenA + 'x' + bond.citizenB + ':' + wf59.toFixed(3));
         intensity += FRIENDSHIP_GROWTH * wf59;
-      } else if (bond.bondType === BOND_TYPES.FAMILY || bond.bondType === BOND_TYPES.PROFESSIONAL ||
-                 bond.bondType === BOND_TYPES.NEIGHBOR) {
-        // engine.201b (S449): these types had no shared-cycle path, so once neglect fades
-        // them (below) nothing could ever bring one back. A shared cycle keeps them up.
+      } else if (bond.bondType === BOND_TYPES.PROFESSIONAL || bond.bondType === BOND_TYPES.NEIGHBOR) {
+        // engine.302 (builder 2026-10-19, ruling 9): bonds deepen. A shared week grows a neighbor or
+        // a colleague the way it grows a friend — under BOND_MAINTAIN they drifted down about 0.06 a
+        // week against neglect and could never reach the deepening bar below.
+        intensity += FRIENDSHIP_GROWTH * bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB);
+      } else if (bond.bondType === BOND_TYPES.FAMILY) {
+        // engine.201b (S449): this type had no shared-cycle path, so once neglect faded it
+        // (below) nothing could ever bring it back. A shared cycle keeps it up.
         intensity += BOND_MAINTAIN * bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB);
       }
     }
@@ -857,6 +862,13 @@ function updateExistingBonds_(ctx) {
         bond.bondType = BOND_TYPES.PROFESSIONAL;
         bond.notes = (bond.notes || '') + ' [Settled into professional respect C' + currentCycle + ']';
       }
+    } else if (aActive && bActive && bond.status === BOND_STATUS.ACTIVE && bond.intensity >= BOND_DEEPEN_AT &&
+               (bond.bondType === BOND_TYPES.NEIGHBOR || bond.bondType === BOND_TYPES.PROFESSIONAL ||
+                bond.bondType === BOND_TYPES.FESTIVAL)) {
+      // engine.302 (ruling 9): a neighbor, colleague or festival acquaintance this strong, in a week both
+      // lived, becomes a friend — the only door to romance (processRomanceAndMarriage_). Read after every
+      // intensity step above, so a holiday-only boost never deepens a bond on its own.
+      deepenBondToFriendship_(ctx, bond, currentCycle);
     }
 
     // v2.7: Only stamp lastUpdate for meaningful changes — prevents ledger bloat.
@@ -1087,6 +1099,39 @@ function processFaithJoins_(ctx) {
   S.faithJoins = joins;
 }
 
+// engine.302 (builder 2026-10-19, ruling 6): proximity from the city's own adjacency
+// (Neighborhood_Map.Adjacent -> S.neighborhoodAdjacency: canonical keys, symmetric, child areas folded at
+// load), read once per Cycle into a pair-readable set; a child-area ledger hood reads its parent.
+function bondProximity_(ctx) {
+  if (ctx._bondProximity) return ctx._bondProximity;
+  var S = ctx.summary || {};
+  if (!S.neighborhoodAdjacency) {
+    throw new Error('bondProximity_: S.neighborhoodAdjacency missing — Phase1-CanonHoods did not run (engine.148 P2: adjacency is sheet truth).');
+  }
+  var adj = {};
+  for (var k in S.neighborhoodAdjacency) {
+    if (!S.neighborhoodAdjacency.hasOwnProperty(k)) continue;
+    adj[k] = {};
+    var list = S.neighborhoodAdjacency[k] || [];
+    for (var a = 0; a < list.length; a++) adj[k][list[a]] = true;
+  }
+  var folded = {};
+  var fold = function (nh) {
+    nh = String(nh || '').trim();
+    if (!nh) return '';
+    if (!folded.hasOwnProperty(nh)) {
+      folded[nh] = adj[nh] ? nh : ((typeof resolveHoodOrChild_ === 'function' && resolveHoodOrChild_(ctx, nh)) || nh);
+    }
+    return folded[nh];
+  };
+  ctx._bondProximity = {
+    fold: fold,
+    adjacent: function (a, b) { var fa = fold(a), fb = fold(b); return !!fa && !!fb && fa !== fb && !!(adj[fa] && adj[fa][fb]); },
+    near: function (a, b) { var fa = fold(a), fb = fold(b); return !!fa && !!fb && (fa === fb || !!(adj[fa] && adj[fa][fb])); }
+  };
+  return ctx._bondProximity;
+}
+
 function detectNewBonds_(ctx) {
   var rng = safeRand_(ctx);
   var S = ctx.summary || {};
@@ -1107,27 +1152,9 @@ function detectNewBonds_(ctx) {
   // v2.4: Use ctx.neighborhoodList instead of global
   var neighborhoodList = ctx.neighborhoodList || [];
 
-  // engine.302 (builder 2026-10-19, ruling 6): no hood gate on forming a bond. Proximity reads the
-  // city's own adjacency (Neighborhood_Map.Adjacent -> S.neighborhoodAdjacency: canonical keys,
-  // symmetric, child areas folded at load), turned into a pair-readable set once per call.
-  if (!S.neighborhoodAdjacency) {
-    throw new Error('detectNewBonds_: S.neighborhoodAdjacency missing — Phase1-CanonHoods did not run (engine.148 P2: adjacency is sheet truth).');
-  }
-  var hoodAdj = {};
-  for (var adjKey in S.neighborhoodAdjacency) {
-    if (!S.neighborhoodAdjacency.hasOwnProperty(adjKey)) continue;
-    hoodAdj[adjKey] = {};
-    var adjList = S.neighborhoodAdjacency[adjKey] || [];
-    for (var adjI = 0; adjI < adjList.length; adjI++) hoodAdj[adjKey][adjList[adjI]] = true;
-  }
-  var hoodFold = {}; // a ledger hood folded to its canonical parent (a child-area name reads its parent)
-  var foldHood = function (nh) {
-    if (!nh) return '';
-    if (!hoodFold.hasOwnProperty(nh)) {
-      hoodFold[nh] = hoodAdj[nh] ? nh : ((typeof resolveHoodOrChild_ === 'function' && resolveHoodOrChild_(ctx, nh)) || nh);
-    }
-    return hoodFold[nh];
-  };
+  // engine.302 (builder 2026-10-19, ruling 6): no hood gate on forming a bond — proximity reads the
+  // city's own adjacency (bondProximity_).
+  var prox = bondProximity_(ctx);
 
   // v2.2: Calendar context
   var cal = ctx.bondCalendarContext || {};
@@ -1137,27 +1164,33 @@ function detectNewBonds_(ctx) {
   var isFirstFriday = cal.isFirstFriday || false;
   var isCreationDay = cal.isCreationDay || false;
 
-  // v2.2: Adjust max bonds based on calendar
-  var maxNewBonds = 2;
-  if (holiday !== 'none' && (holidayPriority === 'oakland' || holidayPriority === 'major')) {
-    maxNewBonds = 4; // More bonds form during major celebrations
-  }
-  if (isFirstFriday) {
-    maxNewBonds = Math.max(maxNewBonds, 3);
-  }
-  if (((ctx.summary && ctx.summary.sportsCity) || {}).band === 'top') {   // engine.281 (a): band, not the word
-    maxNewBonds = Math.max(maxNewBonds, 3);
-  }
+  // engine.302 (builder 2026-10-19, ruling 8): no cap on new bonds. The old 2-4 a Cycle (2; major or
+  // Oakland holiday 4; First Friday 3; sports band top 3) let the first pairs of the shuffled pool take
+  // the whole week. Each citizen in the pool now meets one other pool citizen with chance
+  // BOND_ENCOUNTER_CHANCE x their sociability factor (0.75-1.25, the bondPairFactor_ envelope) x the
+  // week's calendar factor (the old raises as ratios over 2 — holiday x2, First Friday x1.5, sports top
+  // x1.5 — the largest that applies, never multiplied). The met pair runs the lane chain below once; a
+  // meeting with someone they already know, or with a pair already met this call, is spent.
+  var calFactor = 1;
+  if (holiday !== 'none' && (holidayPriority === 'oakland' || holidayPriority === 'major')) calFactor = Math.max(calFactor, 2);
+  if (isFirstFriday) calFactor = Math.max(calFactor, 1.5);
+  if (((ctx.summary && ctx.summary.sportsCity) || {}).band === 'top') calFactor = Math.max(calFactor, 1.5); // engine.281 (a): band, not the word
+  var metPairs = {};
+  var bondsCreated = 0, meetings = 0;
 
-  var bondsCreated = 0;
-
-  for (var i = 0; i < activeCitizens.length && bondsCreated < maxNewBonds; i++) {
-    for (var j = i + 1; j < activeCitizens.length && bondsCreated < maxNewBonds; j++) {
-      var citizenA = activeCitizens[i];
-      var citizenB = activeCitizens[j];
-
+  for (var i = 0; i < activeCitizens.length; i++) {
+    var citizenA = activeCitizens[i];
+    var sociabilityFactor = 1 + 0.125 * bondDialBand_(ctx, citizenA, 'sociability');
+    if (rng() >= BOND_ENCOUNTER_CHANCE * sociabilityFactor * calFactor) continue;
+    var pick = Math.floor(rng() * (activeCitizens.length - 1));
+    if (pick >= i) pick++; // never themselves
+    var citizenB = activeCitizens[pick];
+    meetings++;
+    {
       // v2.4: Use set lookup
       var key = getBondKey_(citizenA, citizenB);
+      if (metPairs[key]) continue;
+      metPairs[key] = true;
       if (ctx._bondKeySet && ctx._bondKeySet[key]) continue;
 
       var dataA = citizenData[citizenA] || {};
@@ -1182,8 +1215,7 @@ function detectNewBonds_(ctx) {
       var nhA = dataA.Neighborhood || '';
       var nhB = dataB.Neighborhood || '';
       var sameNeighborhood = nhA && nhA === nhB && neighborhoodList.indexOf(nhA) >= 0;
-      var fA = foldHood(nhA), fB = foldHood(nhB);
-      var adjacentHood = !sameNeighborhood && !!fA && !!fB && !!(hoodAdj[fA] && hoodAdj[fA][fB]); // engine.302
+      var adjacentHood = !sameNeighborhood && prox.adjacent(nhA, nhB); // engine.302
 
       // ─────────────────────────────────────────────────────────────
       // v2.2/v2.4: CALENDAR-SPECIFIC BOND DETECTION
@@ -1460,7 +1492,7 @@ function detectNewBonds_(ctx) {
     }
   }
 
-  Logger.log('detectNewBonds_ v2.4: Found ' + newBonds.length + ' potential bonds from ' + activeCitizens.length + ' active citizens (calendar: ' + holiday + ')');
+  Logger.log('detectNewBonds_ v2.4: Found ' + newBonds.length + ' potential bonds from ' + meetings + ' meetings among ' + activeCitizens.length + ' active citizens (calendar: ' + holiday + ', factor ' + calFactor + ')');
   return newBonds;
 }
 
@@ -1619,6 +1651,8 @@ function generateBondSummary_(ctx) {
     professional: 0,
     festival: 0,        // v2.2
     sportsRival: 0,     // v2.2
+    friendships: 0,     // engine.302: bonds deepen into friendship; counted beside the types they came from
+    romantic: 0,        // engine.302
     pendingConfrontations: confrontations.length,
     highIntensityBonds: 0,
     hottestBonds: [],
@@ -1643,6 +1677,8 @@ function generateBondSummary_(ctx) {
     if (b.bondType === BOND_TYPES.PROFESSIONAL) summary.professional++;
     if (b.bondType === BOND_TYPES.FESTIVAL) summary.festival++;
     if (b.bondType === BOND_TYPES.SPORTS_RIVAL) summary.sportsRival++;
+    if (b.bondType === BOND_TYPES.FRIENDSHIP) summary.friendships++;
+    if (b.bondType === BOND_TYPES.ROMANTIC) summary.romantic++;
     if (b.intensity >= 7) summary.highIntensityBonds++;
   }
 
@@ -1875,6 +1911,8 @@ var FRIENDSHIP_GROWTH = 0.4;  // engine.59: per-cycle when both co-active (× wa
 var BOND_MAINTAIN = 0.15;         // engine.201b: family/professional/neighbor, per shared cycle (× warmth)
 var BOND_FADE_ONE_ABSENT = 0.5;   // engine.201b: per cycle only one of the pair lived (× 2 − warmth)
 var BOND_FADE_BOTH_ABSENT = 0.7;  // engine.201b: per cycle neither did — the old 0.2 + 0.5 together
+var BOND_ENCOUNTER_CHANCE = 0.1;  // engine.302 (ruling 8): a citizen's weekly chance to meet one other pool citizen (x sociability x calendar) — the builder's dial
+var BOND_DEEPEN_AT = 6;           // engine.302 (ruling 9): a NEIGHBOR / PROFESSIONAL / FESTIVAL bond this strong, in a week both lived, becomes a FRIENDSHIP (the TENSION -> RIVALRY bar)
 var CONFRONT_ADAPT = 6;           // engine.201b: a feud rests this many cycles after a confrontation before it can flare again
 // engine.66e (S324, Mike-direct): romance growth is a per-cycle CHANCE draw,
 // not a rate — see the ROMANTIC block in updateBondIntensities. The old flat
@@ -2165,6 +2203,29 @@ function bondCanCourt_(people, pid) {
   return !(Sp && Sp.marital === 'married' && Sp.spouse === String(pid).trim());
 }
 
+// engine.302 (builder 2026-10-19, ruling 9): the flip into FRIENDSHIP. One Bond line on each side, the
+// one time it happens (the type changes, so the branch never fires again for this bond); the stamp on
+// the notes keeps the same pass's romance gate from turning it romantic in the same week.
+function deepenBondToFriendship_(ctx, bond, cycle) {
+  var fromType = bond.bondType;
+  bond.bondType = BOND_TYPES.FRIENDSHIP;
+  bond.notes = (bond.notes || '') + ' [Deepened into friendship C' + cycle + ']';
+  bond.lastUpdate = cycle;
+  if (!ctx.ledger || !ctx.ledger.rows || typeof buildBondLedgerIndex_ !== 'function') return;
+  ctx._bondLedgerIdx74 = ctx._bondLedgerIdx74 || buildBondLedgerIndex_(ctx) || {};
+  var pA = ctx._bondLedgerIdx74[String(bond.citizenA || '').trim().toUpperCase()];
+  var pB = ctx._bondLedgerIdx74[String(bond.citizenB || '').trim().toUpperCase()];
+  var line = function (other) {
+    if (fromType === BOND_TYPES.NEIGHBOR) return other.name + ' went from neighbor to friend';
+    if (fromType === BOND_TYPES.PROFESSIONAL) return other.name + ' became a real friend, not just a colleague';
+    return 'the friendship with ' + other.name + ' outlasted the festival';
+  };
+  if (pA && pB) {
+    appendBondLifeLine_(ctx, pA.idx, 'Bond', line(pB), cycle);
+    appendBondLifeLine_(ctx, pB.idx, 'Bond', line(pA), cycle);
+  }
+}
+
 function processRomanceAndMarriage_(ctx) {
   if (!ctx.ledger || !ctx.ledger.rows || !ctx.ledger.rows.length) return;
   var rng = safeRand_(ctx);
@@ -2216,6 +2277,7 @@ function processRomanceAndMarriage_(ctx) {
     }
     romCompat += bondSpouseQuality_(romA, romB, ctx); // engine.154: net worth + hood prosperity, at this gate only
     if (bond.bondType === BOND_TYPES.FRIENDSHIP &&
+        String(bond.notes || '').indexOf('[Deepened into friendship C' + cycle + ']') < 0 && // engine.302: not the same week
         Number(bond.intensity) >= ROMANCE_THRESHOLD &&
         romCompat >= 6 &&
         bothCanCourt && ageOk && oppositeSex &&
@@ -2436,6 +2498,9 @@ function processGCCourtship_(ctx) {
   var rng = safeRand_(ctx);
   var cycle = ctx.summary.cycleId || ctx.config.cycleCount || 0;
   var simYear = simYearOf_(ctx, cycle);
+  // engine.302 (ruling 11): one wedding window on every path (generationalEventsEngine.js AGE_RANGES)
+  if (typeof AGE_RANGES === 'undefined' || !AGE_RANGES.WEDDING) throw new Error('processGCCourtship_: AGE_RANGES.WEDDING missing');
+  var wedMin = AGE_RANGES.WEDDING.min, wedMax = AGE_RANGES.WEDDING.max;
   var bonds = ctx.summary.relationshipBonds || [];
   var gcSheet = ctx.ss.getSheetByName('Generic_Citizens');
   if (!gcSheet) return;
@@ -2460,14 +2525,26 @@ function processGCCourtship_(ctx) {
     var P = people[bd.citizenA];
     if (!P || !bondCanCourt_(people, bd.citizenA)) continue; // engine.302
     var gcName = String(bd.citizenB).slice(3);
-    var found = -1;
+    // engine.302 (codex cut-2 review H5): the bond carries a name, and Generic_Citizens has no id column
+    // (19 duplicate names on live) — marry only the one row under that name that is Courting (set when this
+    // courtship began). None, or more than one: no wedding this Cycle, logged; the courtship waits.
+    var found = -1, courtingRows = 0;
     for (var g0 = 1; g0 < gcVals.length; g0++) {
       var nm0 = (String(gcVals[g0][gF] || '').trim() + ' ' + String(gcVals[g0][gL] || '').trim()).trim();
-      if (nm0 === gcName) { found = g0; break; }
+      if (nm0 !== gcName || String(gcVals[g0][gStat] || '').trim().toLowerCase() !== 'courting') continue;
+      courtingRows++;
+      found = g0;
     }
-    if (found < 0) continue;
+    if (courtingRows !== 1) {
+      Logger.log('processGCCourtship_: ' + bd.citizenA + ' — ' + courtingRows + ' Courting rows named ' + gcName + '; no wedding this Cycle (C' + cycle + ')');
+      continue;
+    }
     var gRowM = gcVals[found];
     var gAgeM = Number(gRowM[gAge]) || (Number(gRowM[gBirth]) ? simYear - Number(gRowM[gBirth]) : 35);
+    // engine.302 (ruling 11, codex H4): the matured GC wedding keeps the same window as every wedding —
+    // outside it the courtship waits, unresolved.
+    var pAgeM = P.birthYear > 0 ? simYear - P.birthYear : 0;
+    if (pAgeM < wedMin || pAgeM > wedMax || gAgeM < wedMin || gAgeM > wedMax) continue;
 
     var spId = nextPopIdLocked_(ctx); // engine.90 shared allocator
     var last = P.name.split(' ').slice(-1)[0] || '';
@@ -2483,6 +2560,12 @@ function processGCCourtship_(ctx) {
     setC('Neighborhood', P.hood); setC('MaritalStatus', 'single'); // marryCitizens_ flips it
     setC('Gender', String(gRowM[gSex]).toLowerCase());
     setC('UsageCount', 0);
+    // engine.302 (plan Task 8 / A28 / R4): an engine-born spouse starts unprotected — explicit no/no/no
+    var flagCols = ['UNI (y/n)', 'MED (y/n)', 'CIV (y/n)'];
+    for (var fcI = 0; fcI < flagCols.length; fcI++) {
+      if (idxCol(flagCols[fcI]) < 0) throw new Error('processGCCourtship_: Simulation_Ledger has no ' + flagCols[fcI] + ' column — the spouse mint cannot register its flags.');
+      setC(flagCols[fcI], 'no');
+    }
     var dSeed = spFirst + '|' + last + '|' + spId;
     var dRetired = gAgeM >= 65;
     var dYears = deriveYearsInCareer_(dSeed, gAgeM, dRetired ? 'retired' : '');
@@ -2527,49 +2610,54 @@ function processGCCourtship_(ctx) {
     if (!x || x.status !== BOND_STATUS.ACTIVE) continue;
     if (x.bondType === BOND_TYPES.ROMANTIC) { hasProspects[x.citizenA] = true; hasProspects[x.citizenB] = true; }
   }
+  // engine.302 (ruling 12, a boost of life): the blind draw — one random single against one random GC,
+  // kept only if age, sex and hood all lined up — fired about once in 550 Cycles (0 in the 20-Cycle
+  // soak). Now the citizen is drawn from everyone who can court inside the wedding window, then the GC
+  // from those who line up with them (opposite sex, age within 10, age inside the window too), preferring
+  // their own or an adjacent hood when any are there (ruling 6: no hood gate), else anywhere in the city.
   var singles = [];
   for (var pid in people) {
     var S1 = people[pid];
     if (!bondCanCourt_(people, pid) || hasProspects[pid]) continue; // engine.302
     var age1 = S1.birthYear > 0 ? simYear - S1.birthYear : 0;
-    if (age1 < 20 || age1 > 65) continue;
+    if (age1 < wedMin || age1 > wedMax) continue;
     if (S1.gender !== 'male' && S1.gender !== 'female') continue;
     singles.push(pid);
   }
-  var gcPool = [];
-  for (var g2 = 1; g2 < gcVals.length; g2++) {
-    if (String(gcVals[g2][gStat] || '').toLowerCase() !== 'active') continue;
-    var sx2 = String(gcVals[g2][gSex] || '').toLowerCase();
-    if (sx2 !== 'male' && sx2 !== 'female') continue;
-    gcPool.push(g2);
-  }
-  if (!singles.length || !gcPool.length) return;
+  if (!singles.length) return;
 
   var pid2 = singles[Math.floor(rng() * singles.length)];
   var P2 = people[pid2];
-  var gRow2i = gcPool[Math.floor(rng() * gcPool.length)];
-  var gRow2 = gcVals[gRow2i];
-  var gAge2 = Number(gRow2[gAge]) || (Number(gRow2[gBirth]) ? simYear - Number(gRow2[gBirth]) : 0);
   var pAge2 = P2.birthYear > 0 ? simYear - P2.birthYear : 0;
-  var gHood2 = gNbhd >= 0 ? String(gRow2[gNbhd] || '').trim() : '';
   var wantSex2 = P2.gender === 'male' ? 'female' : 'male';
-  var gcFull = (String(gRow2[gF] || '').trim() + ' ' + String(gRow2[gL] || '').trim()).trim();
-
-  var aligned = gAge2 > 0 && pAge2 > 0 && Math.abs(gAge2 - pAge2) <= 10 &&
-    String(gRow2[gSex] || '').toLowerCase() === wantSex2 &&
-    gHood2 && P2.hood && gHood2 === P2.hood;
-  if (!aligned) {
-    Logger.log('processGCCourtship_: reels did not align — ' + pid2 + ' vs ' + gcFull + ' (C' + cycle + ')');
+  var prox = bondProximity_(ctx);
+  var nearPool = [], cityPool = [];
+  for (var g2 = 1; g2 < gcVals.length; g2++) {
+    var gr2 = gcVals[g2];
+    if (String(gr2[gStat] || '').toLowerCase() !== 'active') continue;
+    if (String(gr2[gSex] || '').toLowerCase() !== wantSex2) continue;
+    var ga2 = Number(gr2[gAge]) || (Number(gr2[gBirth]) ? simYear - Number(gr2[gBirth]) : 0);
+    if (!(ga2 > 0) || Math.abs(ga2 - pAge2) > 10 || ga2 < wedMin || ga2 > wedMax) continue;
+    var gh2 = gNbhd >= 0 ? String(gr2[gNbhd] || '').trim() : '';
+    if (gh2 && P2.hood && prox.near(gh2, P2.hood)) nearPool.push(g2); else cityPool.push(g2);
+  }
+  var alignedPool = nearPool.length ? nearPool : cityPool;
+  if (!alignedPool.length) {
+    Logger.log('processGCCourtship_: no GC lines up with ' + pid2 + ' (C' + cycle + ')');
     return;
   }
+  var gRow2i = alignedPool[Math.floor(rng() * alignedPool.length)];
+  var gRow2 = gcVals[gRow2i];
+  var gcFull = (String(gRow2[gF] || '').trim() + ' ' + String(gRow2[gL] || '').trim()).trim();
+  var metWhere = nearPool.length ? ('in ' + P2.hood) : 'across the city';
 
   // A romance begins. Nothing minted, nothing given — the record waits.
   ctx.summary.relationshipBonds.push(makeBond_(pid2, 'GC:' + gcFull,
-    BOND_TYPES.ROMANTIC, 'gc-courtship', 'COMMUNITY', P2.hood,
-    5.5, cycle, 'Met by chance in ' + P2.hood + ' (C' + cycle + ') — partner off-camera, the record waits', ctx));
+    BOND_TYPES.ROMANTIC, 'gc-courtship', 'COMMUNITY', nearPool.length ? P2.hood : '',
+    5.5, cycle, 'Met by chance ' + metWhere + ' (C' + cycle + ') — partner off-camera, the record waits', ctx));
   gcSheet.getRange(gRow2i + 1, gStat + 1).setValue('Courting');
   appendBondLifeLine_(ctx, P2.idx, 'Bond', 'met ' + gcFull + ' — something starting', cycle);
-  Logger.log('processGCCourtship_: courtship begins — ' + pid2 + ' + ' + gcFull + ' in ' + P2.hood);
+  Logger.log('processGCCourtship_: courtship begins — ' + pid2 + ' + ' + gcFull + ' ' + metWhere);
 }
 
 // ════════════════════════════════════════════════════════════════════════════

@@ -261,8 +261,9 @@ console.log('6. engine.281 (a1) — media, bonds, nightlife, food, migration on 
   check('no numeric payload left under a phase word in the a1 files', hits.length === 0, hits.join(' '));
 
   const bo = fs.readFileSync(path.join(ROOT, 'phase05-citizens/bondEngine.js'), 'utf8');
-  check('bonds: rivalry heat, new-bond cap and confront threshold read the band',
-    /sportsBandU === 'top'\) \{\s*intensity \+= 1\.5/.test(bo) && /sportsCity\) \|\| \{\}\)\.band === 'top'\) \{[^\n]*\n\s*maxNewBonds = Math\.max\(maxNewBonds, 3\)/.test(bo)
+  // engine.302: the new-bond cap became a meeting-chance factor (sports top x1.5); it still reads the band
+  check('bonds: rivalry heat, the meeting factor and confront threshold read the band',
+    /sportsBandU === 'top'\) \{\s*intensity \+= 1\.5/.test(bo) && /sportsCity\) \|\| \{\}\)\.band === 'top'\) calFactor = Math\.max\(calFactor, 1\.5\)/.test(bo)
     && /SPORTS_RIVAL && sportsBandC === 'top'\) \{\s*threshold = 6/.test(bo));
   const nl = fs.readFileSync(path.join(ROOT, 'phase07-evening-media/buildNightLife.js'), 'utf8');
   check('nightlife: volume +3/+2 and the 3-spot floor on band top/high',

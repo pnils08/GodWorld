@@ -77,7 +77,7 @@ var MILESTONE_TYPES = {
 
 var AGE_RANGES = {
   GRADUATION: { min: 22, max: 28 },
-  WEDDING: { min: 24, max: 50 },
+  WEDDING: { min: 24, max: 58 }, // engine.302 (builder 2026-10-19): "Expand to 58" — every wedding path reads this
   BIRTH: { min: 26, max: 42 },
   PROMOTION: { min: 28, max: 58 },
   RETIREMENT: { min: 68, max: 72 },

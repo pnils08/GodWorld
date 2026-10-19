@@ -15,6 +15,16 @@
  *   B1  detectNewBonds_: same hood → NEIGHBOR "Neighbors in"; adjacent → NEIGHBOR across the line; far → NEIGHBOR
  *       with no hood, "Crossed paths in the city", last in the chain; adjacency missing → throws
  *   R1  remarriage: the joiner's own minor moves into the joined household with them; the head's child stays
+ *   cut 2 (rulings 8, 9, 11, 12; codex plan review folded):
+ *   E1  no ceiling: 40 citizens who all meet form 39 bonds (the old cap was 2–4); a reverse pair runs once
+ *   E2  the meeting chance gates and the calendar factor is the largest that applies, never multiplied;
+ *       sociability scales it; an already-bonded pair spends the meeting
+ *   P1  deepening: a neighbor at 6+ in a shared week → friendship with one Bond line each side; one side absent
+ *       → no flip; FAMILY never flips; a just-deepened bond does not turn romantic the same week
+ *   A1  the wedding window 24–58: a romance at 57 marries, at 59 waits
+ *   G1  GC courtship: the matured wedding marries the one Courting row of that name (not a same-name active
+ *       row), writes UNI/MED/CIV no; two Courting rows of one name → no wedding; out of the window → waits;
+ *       the start draws an aligned GC, near hood first, else the city; none aligned → nothing
  *
  * Run: node scripts/engine302Marital.test.js
  */
@@ -113,8 +123,12 @@ const grow = (pop, o) => { const r = GH.map(() => ''); r[g('POPID')] = pop; r[g(
 }
 
 // ── C1 / B1 / R1 bond engine ───────────────────────────────────────────────────
-const B = load('../phase05-citizens/bondEngine.js', ['bondCanCourt_', 'detectNewBonds_', 'marryCitizens_', 'BOND_TYPES'],
-  'bondWarmthFactor_ = function () { return 1; };', ['../utilities/safeRand.js', '../phase05-citizens/bondPersistence.js']);
+global.__SOC = {};
+const B = load('../phase05-citizens/bondEngine.js', ['bondCanCourt_', 'detectNewBonds_', 'marryCitizens_', 'BOND_TYPES', 'updateExistingBonds_',
+  'processRomanceAndMarriage_', 'processGCCourtship_', 'BOND_ENCOUNTER_CHANCE', 'getBondKey_'],
+  'bondWarmthFactor_ = function () { return 1; }; bondFamilyFactor_ = function () { return 1; }; bondDialBand_ = function (ctx, p) { return global.__SOC[p] || 0; }; var __bid = 0; generateBondId_ = function () { return "BOND-T" + (++__bid); };',
+  ['../utilities/safeRand.js', '../phase05-citizens/bondPersistence.js', '../phase04-events/generationalEventsEngine.js']);
+const seq = (arr, rest) => { const q = arr.slice(); return () => (q.length ? q.shift() : (rest === undefined ? 0.99 : rest)); };
 {
   const people = { 'POP-1': { marital: 'single' }, 'POP-2': { marital: 'divorced' }, 'POP-3': { marital: 'widowed', spouse: 'POP-9' },
     'POP-4': { marital: 'married' }, 'POP-5': { marital: 'youth' }, 'POP-6': { marital: '' },
@@ -124,7 +138,7 @@ const B = load('../phase05-citizens/bondEngine.js', ['bondCanCourt_', 'detectNew
   assert('C1 single / divorced / widowed (late spouse off the ledger) can court', yes);
   assert('C1 married / youth / blank / unknown / live reciprocal married spouse cannot', no);
 }
-function bondCtx(hoodA, hoodB, rngValue, opts) {
+function bondCtx(hoodA, hoodB, rngFn, opts) {
   opts = opts || {};
   const lookup = {
     'Ana Vale': { Name: 'Ana Vale', Neighborhood: hoodA, Occupation: 'Accountant', BirthYear: 1990 },
@@ -132,23 +146,23 @@ function bondCtx(hoodA, hoodB, rngValue, opts) {
   };
   const summary = { cycleId: 113, simYear: 2042, relationshipBonds: [], eventArcs: [],
     neighborhoodAdjacency: opts.noAdj ? undefined : { Downtown: ['Uptown'], Uptown: ['Downtown'], Laurel: [] } };
-  return { summary, config: { cycleCount: 113 }, rng: () => rngValue, _bondActivePool: ['Ana Vale', 'Ben Roe'], _bondNameLookup: lookup,
+  return { summary, config: { cycleCount: 113 }, rng: typeof rngFn === 'function' ? rngFn : () => rngFn, _bondActivePool: ['Ana Vale', 'Ben Roe'], _bondNameLookup: lookup,
     neighborhoodList: ['Downtown', 'Uptown', 'Laurel'], bondCalendarContext: {}, _bondKeySet: {} };
 }
 {
-  const same = B.detectNewBonds_(bondCtx('Downtown', 'Downtown', 0.17));
+  const same = B.detectNewBonds_(bondCtx('Downtown', 'Downtown', seq([0.05, 0, 0.17, 0.17])));
   assert('B1 same hood → NEIGHBOR "Neighbors in Downtown"', same.length === 1 && same[0].bondType === 'neighbor' && /Neighbors in Downtown/.test(same[0].notes), JSON.stringify(same[0] || null));
-  const adj = B.detectNewBonds_(bondCtx('Downtown', 'Uptown', 0.17));
+  const adj = B.detectNewBonds_(bondCtx('Downtown', 'Uptown', seq([0.05, 0, 0.17, 0.17])));
   assert('B1 adjacent hood → NEIGHBOR across the line', adj.length === 1 && adj[0].bondType === 'neighbor' && /across the Downtown–Uptown line/.test(adj[0].notes), JSON.stringify(adj[0] || null));
-  const adjFric = B.detectNewBonds_(bondCtx('Downtown', 'Uptown', 0.1));
+  const adjFric = B.detectNewBonds_(bondCtx('Downtown', 'Uptown', seq([0.05, 0, 0.1, 0.1])));
   assert('B1 adjacent pair reaches the friction lane first (TENSION)', adjFric.length === 1 && adjFric[0].bondType === 'tension');
-  const far = B.detectNewBonds_(bondCtx('Downtown', 'Laurel', 0.17));
+  const far = B.detectNewBonds_(bondCtx('Downtown', 'Laurel', seq([0.05, 0, 0.17, 0.17])));
   assert('B1 far pair → NEIGHBOR with no hood, "Crossed paths in the city"', far.length === 1 && far[0].bondType === 'neighbor' && !far[0].neighborhood && /Crossed paths in the city/.test(far[0].notes), JSON.stringify(far[0] || null));
-  const farFric = B.detectNewBonds_(bondCtx('Downtown', 'Laurel', 0.1));
+  const farFric = B.detectNewBonds_(bondCtx('Downtown', 'Laurel', seq([0.05, 0, 0.1, 0.1])));
   assert('B1 far pair never takes the friction lane (no proximity, no shared trade)', farFric.length === 1 && farFric[0].bondType === 'neighbor');
-  const none = B.detectNewBonds_(bondCtx('Downtown', 'Laurel', 0.5));
+  const none = B.detectNewBonds_(bondCtx('Downtown', 'Laurel', seq([0.05, 0, 0.5, 0.5])));
   assert('B1 a missed draw forms nothing', none.length === 0);
-  let threw = false; try { B.detectNewBonds_(bondCtx('Downtown', 'Laurel', 0.17, { noAdj: true })); } catch (e) { threw = /neighborhoodAdjacency/.test(e.message); }
+  let threw = false; try { B.detectNewBonds_(bondCtx('Downtown', 'Laurel', seq([0.05, 0, 0.17]), { noAdj: true })); } catch (e) { threw = /neighborhoodAdjacency/.test(e.message); }
   assert('B1 missing adjacency throws (sheet truth, no fallback)', threw);
 }
 {
@@ -173,6 +187,128 @@ function bondCtx(hoodA, hoodB, rngValue, opts) {
   assert('R1 the joiner moves in', rows[2][l('HouseholdId')] === 'HH-A' && memA.indexOf('POP-B') >= 0);
   assert('R1 the joiner\'s own child moves with them', rows[3][l('HouseholdId')] === 'HH-A' && memA.indexOf('POP-BK') >= 0, rows[3][l('HouseholdId')] + ' ' + HH[1][3]);
   assert('R1 the head\'s child stays, gaining the joiner as a parent', rows[1][l('HouseholdId')] === 'HH-A' && JSON.parse(rows[1][l('ParentIds')]).indexOf('POP-B') >= 0);
+}
+
+// ── E1 / E2 encounters (cut 2, ruling 8) ───────────────────────────────────────
+function poolCtx(n, rngFn, cal) {
+  const lookup = {}, pool = [];
+  for (let i = 0; i < n; i++) { const nm = 'Cit Zen' + i; pool.push(nm); lookup[nm] = { Name: nm, Neighborhood: 'Downtown', Occupation: 'Accountant', BirthYear: 1990 }; }
+  return { summary: { cycleId: 113, simYear: 2042, relationshipBonds: [], eventArcs: [], neighborhoodAdjacency: { Downtown: [] }, sportsCity: cal && cal.sportsTop ? { band: 'top' } : {} },
+    config: { cycleCount: 113 }, rng: rngFn, _bondActivePool: pool, _bondNameLookup: lookup, neighborhoodList: ['Downtown'],
+    bondCalendarContext: Object.assign({}, cal || {}), _bondKeySet: {} };
+}
+{
+  const many = B.detectNewBonds_(poolCtx(40, () => 0.01));
+  assert('E1 no ceiling: 40 citizens who all meet form 39 bonds (the old cap was 2–4)', many.length === 39, many.length);
+  const keys = new Set(many.map(b => [b.citizenA, b.citizenB].sort().join('|')));
+  assert('E1 every met pair forms at most once (the reverse meeting is spent)', keys.size === many.length);
+  assert('E2 the starting meeting chance is 0.1 (the builder\'s dial)', B.BOND_ENCOUNTER_CHANCE === 0.1);
+  assert('E2 a draw at 0.15 meets nobody on an ordinary week', B.detectNewBonds_(poolCtx(10, () => 0.15)).length === 0);
+  assert('E2 a major holiday doubles the chance (0.15 < 0.2)', B.detectNewBonds_(poolCtx(10, () => 0.15, { holiday: 'Thanksgiving', holidayPriority: 'major' })).length > 0);
+  assert('E2 holiday + First Friday + sports top is ×2, never multiplied (0.25 meets nobody)',
+    B.detectNewBonds_(poolCtx(10, () => 0.25, { holiday: 'Thanksgiving', holidayPriority: 'major', isFirstFriday: true, sportsTop: true })).length === 0);
+  assert('E2 First Friday alone ×1.5 (0.14 meets, 0.16 does not)',
+    B.detectNewBonds_(poolCtx(10, () => 0.14, { isFirstFriday: true })).length > 0 && B.detectNewBonds_(poolCtx(10, () => 0.16, { isFirstFriday: true })).length === 0);
+  global.__SOC = { 'Cit Zen0': 2 };
+  const soc = B.detectNewBonds_(poolCtx(2, seq([0.11, 0, 0.01], 0.99)));
+  global.__SOC = {};
+  const plain = B.detectNewBonds_(poolCtx(2, seq([0.11, 0, 0.01], 0.99)));
+  assert('E2 a magnetic citizen (sociability +2, ×1.25) meets at 0.11; an average one does not', soc.length === 1 && plain.length === 0);
+  const known = poolCtx(2, () => 0.01); known._bondKeySet['Cit Zen0|Cit Zen1'] = true; known._bondKeySet['Cit Zen1|Cit Zen0'] = true;
+  assert('E2 an already-bonded pair spends the meeting', B.detectNewBonds_(known).length === 0);
+}
+
+// ── P1 deepening (cut 2, ruling 9) ─────────────────────────────────────────────
+function deepCtx(bonds, active) {
+  const LH = ['POPID', 'First', 'Last', 'Status', 'BirthYear', 'MaritalStatus', 'Gender', 'Neighborhood', 'LifeHistory', 'LastUpdated'];
+  const rows = ['POP-01', 'POP-02', 'POP-03', 'POP-04'].map((p, i) => [p, 'F' + i, 'L' + i, 'Active', 1990, 'single', i % 2 ? 'male' : 'female', 'Downtown', '', '']);
+  return { ledger: { headers: LH, rows, dirty: false }, summary: { cycleId: 113, simYear: 2042, relationshipBonds: bonds, eventArcs: [] },
+    config: { cycleCount: 113 }, rng: () => 0.99, _bondActivePool: active, bondCalendarContext: {}, LH };
+}
+const bondRow = (id, a, b, type, intensity, hood) => ({ bondId: id, citizenA: a, citizenB: b, bondType: type, intensity, status: 'active', neighborhood: hood === undefined ? 'Downtown' : hood, cycleCreated: 100, lastUpdate: 100, notes: '' });
+{
+  const nb = bondRow('B1', 'POP-01', 'POP-02', 'neighbor', 5.9);
+  const pr = bondRow('B2', 'POP-03', 'POP-04', 'professional', 5.8);
+  const fam = bondRow('B3', 'POP-01', 'POP-03', 'family', 9);
+  const ctx = deepCtx([nb, pr, fam], ['POP-01', 'POP-02', 'POP-03']);   // POP-04 not in the pool: B2 is one-sided
+  B.updateExistingBonds_(ctx);
+  const lh = r => String(ctx.ledger.rows[r][ctx.LH.indexOf('LifeHistory')] || '');
+  assert('P1 a neighbor grows 0.4 on a shared week and deepens at 6 → friendship', nb.bondType === 'friendship' && nb.intensity >= 6 && /Deepened into friendship C113/.test(nb.notes), nb.bondType + ' ' + nb.intensity);
+  assert('P1 one Bond line on each side', (lh(0).match(/went from neighbor to friend/g) || []).length === 1 && (lh(1).match(/went from neighbor to friend/g) || []).length === 1, lh(0) + ' / ' + lh(1));
+  assert('P1 one side absent → no flip (and the bond fades)', pr.bondType === 'professional' && pr.intensity < 5.8);
+  assert('P1 FAMILY never flips', fam.bondType === 'family');
+  B.updateExistingBonds_(deepCtx([nb], ['POP-01', 'POP-02']));
+  assert('P1 a deepened bond flips once (no second line)', (lh(0).match(/went from neighbor to friend/g) || []).length === 1);
+  const romCtx = bond => { const c = deepCtx([bond], ['POP-01', 'POP-02']); c.rng = () => 0; c._bondNameLookup = {};
+    c._bondCompatByKey = {}; c._bondCompatByKey[B.getBondKey_(bond.citizenA, bond.citizenB)] = 10; return c; };
+  nb.intensity = 7;
+  B.processRomanceAndMarriage_(romCtx(nb));
+  assert('P1 a bond deepened this week does not turn romantic the same week', nb.bondType === 'friendship');
+  const old = bondRow('B9', 'POP-01', 'POP-02', 'friendship', 7); old.notes = '[Deepened into friendship C112]';
+  B.processRomanceAndMarriage_(romCtx(old));
+  assert('P1 control: a friendship deepened last week can turn romantic', old.bondType === 'romantic');
+}
+
+// ── A1 the wedding window (cut 2, ruling 11) ───────────────────────────────────
+function weddingCtx(byA, byB) {
+  const LH = ['POPID', 'First', 'Last', 'Status', 'BirthYear', 'MaritalStatus', 'Gender', 'SpouseId', 'HouseholdId', 'LifeHistory', 'LastUpdated'];
+  const rows = [['POP-01', 'Ana', 'Vale', 'Active', byA, 'single', 'female', '', '', '', ''], ['POP-02', 'Ben', 'Roe', 'Active', byB, 'divorced', 'male', '', '', '', '']];
+  const bond = bondRow('BW', 'POP-01', 'POP-02', 'romantic', 8.5);
+  return { ctx: { ledger: { headers: LH, rows, dirty: false }, summary: { cycleId: 113, simYear: 2042, relationshipBonds: [bond], storyHooks: [] }, config: { cycleCount: 113 },
+    rng: () => 0.5, ss: { getSheetByName: () => null }, _bondNameLookup: {} }, bond, rows, m: LH.indexOf('MaritalStatus') };
+}
+{
+  const w57 = weddingCtx(2042 - 57, 2042 - 50); B.processRomanceAndMarriage_(w57.ctx);
+  assert('A1 a grown romance at 57 marries (a divorced partner can)', w57.rows[0][w57.m] === 'married' && w57.rows[1][w57.m] === 'married');
+  const w59 = weddingCtx(2042 - 59, 2042 - 50); B.processRomanceAndMarriage_(w59.ctx);
+  assert('A1 at 59 the romance waits', w59.rows[0][w59.m] === 'single' && w59.bond.bondType === 'romantic');
+}
+
+// ── G1 GC courtship (cut 2, ruling 12; codex H4/H5) ────────────────────────────
+function gcWorld(opts) {
+  const LH = ['POPID', 'First', 'Last', 'MaidenName', 'Tier', 'RoleType', 'ClockMode', 'Status', 'BirthYear', 'OrginCity', 'Neighborhood', 'MaritalStatus', 'Gender',
+    'UsageCount', 'YearsInCareer', 'CareerStage', 'Income', 'EducationLevel', 'DebtLevel', 'NetWorth', 'LifeHistory', 'SpouseId', 'HouseholdId', 'LastUpdated',
+    'UNI (y/n)', 'MED (y/n)', 'CIV (y/n)'];
+  const row = LH.map(() => ''); row[LH.indexOf('POPID')] = 'POP-01'; row[LH.indexOf('First')] = 'Ana'; row[LH.indexOf('Last')] = 'Vale';
+  row[LH.indexOf('Status')] = 'Active'; row[LH.indexOf('BirthYear')] = 2042 - (opts.ageA || 40); row[LH.indexOf('MaritalStatus')] = 'widowed';
+  row[LH.indexOf('Gender')] = 'female'; row[LH.indexOf('Neighborhood')] = 'Downtown'; row[LH.indexOf('NetWorth')] = 0;
+  const GH = ['First', 'Last', 'Age', 'BirthYear', 'Neighborhood', 'Occupation', 'Status', 'Sex'];
+  const GC = [GH].concat(opts.gcs);
+  const sheets = { Generic_Citizens: GC, Household_Ledger: [['HouseholdId', 'Members', 'Status']], Family_Relationships: [['HouseholdId']] };
+  const sheet = v => ({ getDataRange: () => ({ getValues: () => v.map(r => r.slice()) }), getLastColumn: () => v[0].length, getLastRow: () => v.length,
+    getRange: (r, c) => ({ setValue: x => { v[r - 1][c - 1] = x; }, getValues: () => [v[r - 1].slice()] }), appendRow: x => v.push(x) });
+  const bonds = opts.bond ? [bondRow('BG', 'POP-01', 'GC:' + opts.bond, 'romantic', 8.5)] : [];
+  const ctx = { ledger: { headers: LH, rows: [row], dirty: false }, summary: { cycleId: 113, simYear: 2042, relationshipBonds: bonds, storyHooks: [], neighborhoodAdjacency: { Downtown: ['Uptown'], Uptown: ['Downtown'], Laurel: [] } },
+    config: { cycleCount: 113 }, rng: opts.rng || (() => 0.99), ss: { getSheetByName: n => sheets[n] ? sheet(sheets[n]) : null }, _bondNameLookup: {} };
+  return { ctx, GC, LH, rows: ctx.ledger.rows, bonds };
+}
+global.jobReferencePay_ = () => 60000; global.deriveYearsInCareer_ = () => 10; global.deriveEducationLevel_ = () => 'bachelors';
+global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.estimateRent_ = () => 2000;
+{
+  const w = gcWorld({ bond: 'Rui Moss', gcs: [['Rui', 'Moss', 42, '', 'Uptown', 'Chef', 'active', 'male'], ['Rui', 'Moss', 41, '', 'Laurel', 'Baker', 'Courting', 'male']] });
+  B.processGCCourtship_(w.ctx);
+  const sp = w.rows[1];
+  assert('G1 the matured wedding mints the spouse', !!sp && w.rows[0][w.LH.indexOf('MaritalStatus')] === 'married');
+  assert('G1 it promotes the Courting row, not the same-name active one', w.GC[2][6] === 'Promoted' && w.GC[1][6] === 'active' && sp && sp[w.LH.indexOf('RoleType')] === 'Baker');
+  assert('G1 the mint writes UNI / MED / CIV no', sp && ['UNI (y/n)', 'MED (y/n)', 'CIV (y/n)'].every(k => sp[w.LH.indexOf(k)] === 'no'));
+  const two = gcWorld({ bond: 'Rui Moss', gcs: [['Rui', 'Moss', 42, '', 'Uptown', 'Chef', 'Courting', 'male'], ['Rui', 'Moss', 41, '', 'Laurel', 'Baker', 'Courting', 'male']] });
+  B.processGCCourtship_(two.ctx);
+  assert('G1 two Courting rows of one name → no wedding, the courtship waits', two.rows.length === 1 && two.bonds[0].bondType === 'romantic');
+  const old = gcWorld({ ageA: 60, bond: 'Rui Moss', gcs: [['Rui', 'Moss', 55, '', 'Uptown', 'Chef', 'Courting', 'male']] });
+  B.processGCCourtship_(old.ctx);
+  assert('G1 a matured courtship outside 24–58 waits', old.rows.length === 1);
+  // start: 20% gate (0.1), single pick (0), GC pick (0)
+  const near = gcWorld({ rng: seq([0.1, 0, 0]), gcs: [['Far', 'One', 42, '', 'Laurel', 'Chef', 'active', 'male'], ['Near', 'Two', 44, '', 'Uptown', 'Chef', 'active', 'male'], ['Young', 'Three', 22, '', 'Downtown', 'Chef', 'active', 'male']] });
+  B.processGCCourtship_(near.ctx);
+  const nb2 = near.ctx.summary.relationshipBonds[0];
+  assert('G1 the start prefers a GC from the citizen\'s own or an adjacent hood', nb2 && nb2.citizenB === 'GC:Near Two' && near.GC[2][6] === 'Courting' && /in Downtown/.test(nb2.notes), JSON.stringify(nb2 || null));
+  const city = gcWorld({ rng: seq([0.1, 0, 0]), gcs: [['Far', 'One', 42, '', 'Laurel', 'Chef', 'active', 'male'], ['Wrong', 'Sex', 40, '', 'Downtown', 'Chef', 'active', 'female']] });
+  B.processGCCourtship_(city.ctx);
+  const cb = city.ctx.summary.relationshipBonds[0];
+  assert('G1 no near GC → one from across the city', cb && cb.citizenB === 'GC:Far One' && /across the city/.test(cb.notes), JSON.stringify(cb || null));
+  const none = gcWorld({ rng: seq([0.1, 0, 0]), gcs: [['Too', 'Young', 22, '', 'Downtown', 'Chef', 'active', 'male'], ['No', 'Age', '', '', 'Downtown', 'Chef', 'active', 'male']] });
+  B.processGCCourtship_(none.ctx);
+  assert('G1 nobody lines up (age outside the window or unknown) → no courtship', none.ctx.summary.relationshipBonds.length === 0);
 }
 
 console.log(`\nengine302Marital: ${passed} passed, ${failed} failed`);

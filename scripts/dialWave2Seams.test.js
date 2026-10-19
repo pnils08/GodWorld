@@ -235,8 +235,10 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
   const oldShared = step('friendship', ['POP-99001', 'POP-99002'], 100);
   assert('201b an old friendship the pair keeps sharing grows (+0.4); the lastUpdate stamp no longer fades it', oldShared === 0.4, String(oldShared));
   const kept = ['family', 'professional', 'neighbor'].map(t => step(t, ['POP-99001', 'POP-99002'], 199));
-  assert('201b family / professional / neighbor bonds rise +0.15 on a shared cycle (a return path from neglect)',
-    kept.every(d => d === 0.15), JSON.stringify(kept));
+  // engine.302 (builder 2026-10-19, ruling 9: bonds deepen): a neighbor or colleague grows like a friend (+0.4) on a
+  // shared cycle; family keeps the +0.15 return path from neglect
+  assert('201b family +0.15, professional / neighbor +0.4 on a shared cycle (engine.302 deepening)',
+    kept[0] === 0.15 && kept[1] === 0.4 && kept[2] === 0.4, JSON.stringify(kept));
 }
 {
   const bond = pair('rivalry', 'active', 8);

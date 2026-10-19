@@ -1270,8 +1270,11 @@
   Sheets: Faith_Organizations
   RNG: ctx.rng / safeRand_(ctx)
 
+- **bondProximity_(ctx)**
+  Reads: S.neighborhoodAdjacency
+
 - **detectNewBonds_(ctx)**
-  Reads: S.cycleActiveCitizens, S.cycleId, S.holidayLabel, S.neighborhoodAdjacency, S.sportsCity, S.sportsZones
+  Reads: S.cycleActiveCitizens, S.cycleId, S.holidayLabel, S.sportsCity, S.sportsZones
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1347,6 +1350,8 @@
 - **buildBondLedgerIndex_(ctx)**
 
 - **bondCanCourt_(people, pid)**
+
+- **deepenBondToFriendship_(ctx, bond, cycle)**
 
 - **processRomanceAndMarriage_(ctx)**
   Reads: S.cycleId, S.relationshipBonds, S.storyHooks
@@ -4747,4 +4752,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1711
+**Functions mapped:** 1713

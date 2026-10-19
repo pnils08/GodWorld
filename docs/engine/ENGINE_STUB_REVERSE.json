@@ -2,7 +2,7 @@
   "generated": "2026-10-19",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1711,
+  "functionsMapped": 1713,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -845,7 +845,7 @@
       "readers": [
         "phase01-config/canonNeighborhoodLoader.js::getAdjacentHoods_",
         "phase03-population/updateCrimeMetrics.js::buildCrimeAdjacencyGraph_",
-        "phase05-citizens/bondEngine.js::detectNewBonds_",
+        "phase05-citizens/bondEngine.js::bondProximity_",
         "phase06-analysis/economicRippleEngine.js::createRipple_"
       ]
     },

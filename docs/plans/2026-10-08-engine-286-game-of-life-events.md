@@ -318,6 +318,15 @@ Read per Cycle, one row of a series table:
 
 Questions the table answers: does the scoreboard leave zero, and at what per-Cycle rate; are bonds forming and advancing fast enough to reach a wedding inside 20 Cycles; are kids and promotions reachable at all under the ruled rates. Whether the rates then move is the builder's call; the readback script and the bench run are this seat's. Bench resync destroys dial evidence — the resync is already planned for engine.214, so the soak costs no extra evidence.
 
+Readback contract (es 2026-10-19, codex plan review folded — `docs/research/2026-10-19-codex-engine214-wave-soak-plan.md` §1, §4; procedure in `docs/plans/2026-10-10-engine-214-mood-per-hood.md` §PROD wave procedure):
+- Code: the engine.214 PROD candidate, labelled **candidate C113–C132**; served deployment version recorded per fire. Not an @147 rate series.
+- Path: scratchpad script, `lib/env` first then the bench id; imports `buildCitizenScoreboard` / `buildCitizenStates` / `cycleStamp` only. Never `engineAuditor.js` `main()` (writes cycle-keyed `output/engine_audit_c<N>.json` the live chain reads). Per-Cycle snapshots (POPID set, ParentIds, MaritalStatus/SpouseId, LastPromotionCycle/Income, bonds) in the scratchpad; prior states carried from a C112 read.
+- Scoreboard counts are distinct citizens with a surviving tag, not events: `born` counts parent and child for one birth.
+- Kids = new POPIDs with ParentIds + BirthYear + HouseholdId, checked against the household's Members and the parents' ChildrenIds (`generationalEventsEngine.js:1135-1249`); other mints listed apart.
+- Promotions = `LastPromotionCycle` = this Cycle with an Income step and `[Promotion]` (`careerApplyPromotion_`, `runCareerEngine.js:429-439`), split employer budget vs pursuit-die L; `LifeEvent-Promotion-*-S/M` counted apart as texture.
+- Bonds = master Relationship_Bonds (header-validated): count by BondType × Status; the enum is `romantic`, courtship = a `romantic` bond whose CitizenB starts `GC:`; friendship flips at Intensity ≥ 5.5, wedding at `romantic` ≥ 8 (`bondEngine.js:669-724`, `:2132-2187`). Per bond id: first Cycle crossing 5.5 and 8, and the wedding Cycle (MaritalStatus/SpouseId + `[Wedding]`). C112 live: 619 bonds, 0 `romantic`.
+- Output: `output/engine-sheet/2026-10-19-engine300-soak-c113-c132.{json,md}`, one row per Cycle; counts only, rates and severity stay the builder's read.
+
 ## Changelog
 
 - 2026-10-08 (research-build) — Created: merges the rb read-before and codex's independent run into Agreed / Needs proof / New concepts with pointers; engine.284 folded in; builds on engine.67.
@@ -359,3 +368,4 @@ Questions the table answers: does the scoreboard leave zero, and at what per-Cyc
 - 2026-10-12 (engine-sheet) — N31: builder sequenced it — own record on the wake now (`6489ab23`, live on the cron), the wake-as-turn design waits on the citizens' reactions and on identifying the game itself.
 - 2026-10-12 (engine-sheet) — N32 added on the builder's word: who a citizen talks to is picked by the script, not the citizen — the exchange as built (pair choice, alternating turns, canon wall, no own record), and the open design questions; part of step 2.
 - 2026-10-18 (engine-sheet) — Builder asked for a 20-Cycle bench soak on the next bench (verbatim in §Bench soak): scoreboard numbers, bond formation speed, whether kids and promotions are obtainable. Filed as engine.300, rides the engine.214 bench wave.
+- 2026-10-19 (engine-sheet) — §Bench soak readback contract from the codex plan review: candidate label, scratchpad path off the auditor main, births by POPID mint, promotions by LastPromotionCycle, bonds by the `romantic` enum and per-bond crossing Cycles; live C112 carries 0 romantic bonds.

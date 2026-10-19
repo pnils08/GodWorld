@@ -1,0 +1,16 @@
+# TASK — codex: plan review, engine.302 cut 2 (the bond cap goes, bonds deepen, wedding window 58, GC courtship)
+
+Read-only: code + docs + `output/` dumps; no cron, model, Sheet write, bench or canon run. Do not commit, do not push. Write to `docs/for-claude-review/2026-10-19-codex-engine302-cut2-plan-review.md`, SHIP / FIX / HOLD per hunt, file:line evidence, under ~120 lines. Report in one line when done.
+
+**The plan:** `docs/plans/2026-10-08-engine-286-game-of-life-events.md` — the builder's verbatim on the five findings (rulings 8–12), **engine.302 cut 2 — design** (:377 on), and cut 1 as folded (D: no hood gate on the neighbor lane, far pairs at the end of the chain; your cut-1 review is folded at :364). Commit `ca279540`. Rulings are fixed; attack the mechanism.
+
+## Hunts
+1. **Encounters replace the cap (8).** `detectNewBonds_` (`bondEngine.js:1090-1419`): one meeting per citizen at `BOND_ENCOUNTER_CHANCE` × sociability × calendar, a uniform partner from the shuffled pool, the lane chain unchanged. Is any lane's meaning broken when it sees one sampled pair instead of the pair loop's order (the arc lane :1377, the career-overlap TENSION lane :1281 with no rng, festival/sports/First Friday lanes)? Determinism and `ctx.rng` draw order; both entry points; downstream readers of the new-bond volume (persistence `bondPersistence.js`, `ctx._bondKeySet`, `_bondCompatByKey` stash for the romance gate :2153, Relationship_Bonds growth, runtime). Is anything else in the engine sized to 2–4 new bonds a Cycle?
+2. **Calendar factor.** The old cap raises (holiday 4, First Friday 3, sports top 3, over base 2) as ratios ×2 / ×1.5 / ×1.5 — any other reader of `maxNewBonds` or those flags in this function.
+3. **Deepening (9).** `updateExistingBonds_` (:596-870): NEIGHBOR + PROFESSIONAL grow at `FRIENDSHIP_GROWTH` × warmth on a shared week (FAMILY keeps `BOND_MAINTAIN`); NEIGHBOR / PROFESSIONAL / FESTIVAL ≥ 6 in a shared week → FRIENDSHIP. Interactions: the TENSION → PROFESSIONAL settle (:850-858) then deepening; the far NEIGHBOR −0.1 (:797); dormancy (:839); triangle and romance reads of FRIENDSHIP (:2159, :2518, `detectTriangleRivalries_` :2672); `noteBondConnectionShift_`; anything keyed on bond type that a flip would orphan (story hooks, `generateBondSummary_`, desk packets, citizen cards, `scripts/` beat readers).
+4. **Wedding window 58 (11).** Every reader of `AGE_RANGES.WEDDING` and every other age window on the courtship/wedding path (GC courtship step 2 hard-codes 20–65 at :2449-2450; step 1 has no age gate). Births `AGE_RANGES.BIRTH` 26–42 untouched — any coupling?
+5. **GC courtship (12).** Step 2 (:2437-2487) picks a citizen who can court, then an aligned GC (sex, age ±10) preferring own/adjacent hood, else any. `Generic_Citizens` Status writes (`Courting` :2485, `Promoted` :2424) and the matured-courtship mint (:2368-2435): what does a higher courtship rate do to ledger growth and the intake/mint contracts (UNI/MED/CIV flags, plan A28)?
+6. **Tests named in the design.** Are they enough to catch a regression back to a cap, a deepening that fires without a shared week, or a GC courtship that ignores alignment?
+7. **Scope.** Against the builder's verbatim: anything in cut 2 past rulings 8, 9, 11, 12, and anything those rulings ask that cut 2 does not deliver.
+
+Done = the md exists.

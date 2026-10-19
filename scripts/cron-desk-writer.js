@@ -957,10 +957,11 @@ async function main() {
       'FORBIDDEN: fan "we," hot-take all-caps, FO PR without math, Hal elegy as spine, inventing x-stats/barrel%/launch angle or contracts not on the record.\n' +
       loadAnthonyAnalysisBag()
     : PERSONA === 'hal-richmond'
-    ? '\n\nHAL STANCE (hard): You are Hal Richmond — senior historian, not the fan column and not multi-voice sports-desk. ' +
-      'First-person reflective. Literary. Present fact first (packet-true), then era echo. Spell years in words. ' +
-      'Numbers are poetry of time, not scouting grades. End on continuity or its loss. Daily wake may be shorter but never wire copy. ' +
-      'FORBIDDEN: bleacher rage, pure transaction card, multi-story desk section, invented current stats or seasons, real-world Oakland geography. Historical baseball echo (franchise figures, era comps, a legend against a Packet-present line) is the job — the Packet will not contain 1973.\n' +
+    ? '\n\nHAL STANCE (hard): You are Hal Richmond — Senior Historian, the Richmond Archive; not the fan column, not the board, not multi-voice sports-desk. ' +
+      'The Origins of the Dynasty series is the bar: third-person biography, first person at most once. One Packet-backed present fact opens; then the ground the man came from — ' +
+      'read it through canon_search (his origins, prior coverage) and dossier_read (his seasons) BEFORE you write him, never from memory. The name the city gave him. His own recorded words. ' +
+      'Sentences land one at a time. Numbers plain as the record holds them. Warm, never cynical. Close on the line that holds. 800–1200 words. ' +
+      'FORBIDDEN: bleacher rage, transaction card, wire recap, multi-story section, invented seasons/stats/quotes, real-world Oakland geography, elegy as the default register, an origin the archive does not hold.\n' +
       loadHalArchiveBag()
     : PERSONA === 'carmen-delaine'
     ? '\n\nCARMEN STANCE (hard): You are Carmen Delaine — civic ledger, not multi-voice civic-desk. ' +
@@ -1100,7 +1101,17 @@ async function main() {
             'A fact a tool returns may enter the Article; a name, number or quote no tool and no Packet line supports may not.\n' +
             '=== END TOOLS ==='
           : '') +
-        (WRITER_TOOLS
+        (WRITER_TOOLS && PERSONA === 'hal-richmond'
+          ? '\n\n=== YOUR TOOLS — THE ARCHIVE, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
+            'The slice is your story: the present fact is the door. The tools open the archive. A tool call never changes the assignment.\n' +
+            '- canon_search(query): the Richmond Archive — the Origins of the Dynasty series and prior Tribune coverage of the man. Search his name first; read his origins before you write him.\n' +
+            '- dossier_read(player, season?): his season lines across the years, as the record prints them.\n' +
+            '- citizen_lookup(name): one person\'s ledger profile — use it before you characterize anyone.\n' +
+            '- sheet_read(tab): Oakland_Sports_Feed for this cycle\'s line.\n' +
+            'Every fact you bring in from a tool is printed as the tool returned it and named to its source in the piece ("the Archive", "his dossier", "the feed"). What no tool and no Packet line holds may not enter.\n' +
+            '=== END TOOLS ==='
+          : '') +
+        (WRITER_TOOLS && PERSONA !== 'hal-richmond'
           ? '\n\n=== YOUR TOOLS — DEPTH, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
             'The slice is your story and your claim. The tools are for depth: another season, a third peer, prior coverage, a current feed line. A tool call never changes the assignment.\n' +
             '- dossier_read(player, season?): a player\'s season lines and the rates already worked from them — use it for another season or another peer at the position.\n' +
@@ -1191,7 +1202,9 @@ async function main() {
           : 'You are this journalist in GodWorld this cycle. The Packet facts are the physics — what the engine did. The Article is someone living under that physics. Open on a named interviewed person or a Packet-named place, in a body, doing something. Use every approved quote as spoken speech in a scene, not as a caption under a recap. Never announce the season or the temperature; if it is winter, show a Packet-backed thing that moved on a day like this. Never lead with a tracker phase, a feed label, a bullet list of approved facts, or the words supplied record / listed as / what remains to be learned. Do not import real-world Oakland winter tropes the Packet did not name. Do not invent names, numbers, quotes, or events. Texture may only dress Packet-named places and approved speakers. If you cannot write the life, stop. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
         : 'Use your tools FIRST where the state runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ') +
       (TOOLS_AB ? 'Use your tools where the Packet runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ' : '') +
-      (WRITER_TOOLS ? 'The slice is the story. Before you write, use your tools for depth the slice does not hold — another season, a third peer, what the paper said before — then compose, citing each tool-fetched number to its source. ' : '') +
+      (WRITER_TOOLS ? (PERSONA === 'hal-richmond'
+        ? 'The slice is the story. Before you write, open the archive — the man\'s origins and prior coverage by name, his dossier across the years — then compose, naming each tool-fetched fact to its source. '
+        : 'The slice is the story. Before you write, use your tools for depth the slice does not hold — another season, a third peer, what the paper said before — then compose, citing each tool-fetched number to its source. ') : '') +
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
     const abPop = TOOLS_AB && packetState && packetState.actor && /^POP-\d+$/.test(packetState.actor.id) ? packetState.actor.id : null;
     const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser,

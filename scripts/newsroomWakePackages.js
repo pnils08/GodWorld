@@ -12,7 +12,7 @@ function slug(value) {
   return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
-const WRITER_TOOLS_SEATS = ['elliot-marbury']; // pipeline.76, builder 2026-10-14
+const WRITER_TOOLS_SEATS = ['elliot-marbury', 'hal-richmond']; // pipeline.76, builder 2026-10-14; Hal 2026-10-19 ("yes give hal the tools")
 
 function validatePackage(key, value) {
   const errors = [];

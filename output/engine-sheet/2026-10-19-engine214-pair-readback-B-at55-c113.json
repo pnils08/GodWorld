@@ -1,0 +1,240 @@
+{
+ "label": "B-at55",
+ "cycleCount": 113,
+ "carryCycle": 113,
+ "keysInState": [
+  "cycle",
+  "events",
+  "chaosCount",
+  "sentiment",
+  "econMood",
+  "pattern",
+  "shockFlag",
+  "shockStartCycle",
+  "civicLoad",
+  "civicLoadScore",
+  "weatherType",
+  "weatherImpact",
+  "cycleWeight",
+  "cycleWeightScore",
+  "recoveryLevel",
+  "overloadScore",
+  "activeCooldowns",
+  "holiday",
+  "holidayPriority",
+  "isFirstFriday",
+  "isCreationDay",
+  "sportsSeason",
+  "season",
+  "mediaEffects",
+  "neighborhoodDynamics",
+  "domainPresence",
+  "dominantDomain",
+  "economicRipples",
+  "initiativeRipples",
+  "initiativePhases",
+  "initiativeEnginePhaseMoves",
+  "approvalHoodMoodEma",
+  "approvalNeighborhoodEffects",
+  "migrationDrift",
+  "migrationDriftFactors",
+  "bankRate",
+  "crimeSpikes",
+  "weatherTracking",
+  "weatherFrontTracking",
+  "transitDisrupted"
+ ],
+ "hoodCount": 22,
+ "hoodMeanSentiment": 0.0048,
+ "spread": 0.2723,
+ "cityDynamics": null,
+ "riley": {
+  "Cycle": 113,
+  "CityEvents": "Piedmont Ave Winter Walk, Downtown Winter Festival, Downtown Civic Response Meeting",
+  "CityTraffic": 0.97,
+  "RetailLoad": 1.21,
+  "TourismLoad": 0.59,
+  "NightlifeLoad": 0.89,
+  "CitySentiment": 0.07
+ },
+ "clusterAnchorsRows": 5,
+ "engineErrorsRows": 4,
+ "neighborhoodDynamics": {
+  "Downtown": {
+   "sentiment": 0.11921590354000001,
+   "nightlife": 0.984087022526054,
+   "retail": 1.6313680094637344,
+   "tourism": 0.6860226048732248,
+   "publicSpaces": 0.774864450725071,
+   "communityEngagement": 0.877138641888
+  },
+  "Temescal": {
+   "sentiment": -0.04623766860851003,
+   "nightlife": 0.7686688431916188,
+   "retail": 1.2745277358698341,
+   "tourism": 0.5312600789897207,
+   "publicSpaces": 0.8098771727172026,
+   "communityEngagement": 0.9092528008751999
+  },
+  "Laurel": {
+   "sentiment": -0.03600768226939201,
+   "nightlife": 0.6115861619793501,
+   "retail": 1.102130352641414,
+   "tourism": 0.46227484086762827,
+   "publicSpaces": 0.7239809226347824,
+   "communityEngagement": 0.9656474461323294
+  },
+  "West Oakland": {
+   "sentiment": 0.211505996845518,
+   "nightlife": 0.828112478289442,
+   "retail": 1.4199857109062193,
+   "tourism": 0.694698526550368,
+   "publicSpaces": 0.7712962039647595,
+   "communityEngagement": 1.0471478827324
+  },
+  "Fruitvale": {
+   "sentiment": 0.12828197270381758,
+   "nightlife": 0.7127552460390703,
+   "retail": 1.399055126266639,
+   "tourism": 0.534096029584215,
+   "publicSpaces": 0.7239809226347824,
+   "communityEngagement": 1.0945911784863296
+  },
+  "Jack London": {
+   "sentiment": 0.0994618658429328,
+   "nightlife": 0.9081373875007517,
+   "retail": 1.4169980551486328,
+   "tourism": 0.7125982566039998,
+   "publicSpaces": 0.7451547039647595,
+   "communityEngagement": 0.8844471503783999
+  },
+  "Rockridge": {
+   "sentiment": -0.0045954214636600085,
+   "nightlife": 0.7440579839022221,
+   "retail": 1.3733256275223094,
+   "tourism": 0.5872870678450577,
+   "publicSpaces": 0.7465424048292024,
+   "communityEngagement": 0.9376506250992
+  },
+  "Adams Point": {
+   "sentiment": -0.039137223855904,
+   "nightlife": 0.6576308933317425,
+   "retail": 1.032338262320276,
+   "tourism": 0.59707357008,
+   "publicSpaces": 0.8922525284749999,
+   "communityEngagement": 0.8986736928000001
+  },
+  "Grand Lake": {
+   "sentiment": -0.025719208443180788,
+   "nightlife": 0.7088026119105357,
+   "retail": 1.2085071893551211,
+   "tourism": 0.64093727808,
+   "publicSpaces": 0.8922525284749999,
+   "communityEngagement": 0.8986736928000001
+  },
+  "Piedmont Ave": {
+   "sentiment": -0.004737812289704027,
+   "nightlife": 0.6822747198980997,
+   "retail": 1.2228541320910147,
+   "tourism": 0.5754157064868024,
+   "publicSpaces": 0.8432446217611906,
+   "communityEngagement": 0.903946328602752
+  },
+  "Chinatown": {
+   "sentiment": -0.06083148116722198,
+   "nightlife": 0.762773086501065,
+   "retail": 1.3140239271476593,
+   "tourism": 0.6483160429032246,
+   "publicSpaces": 0.7474158757250708,
+   "communityEngagement": 0.8990834738879999
+  },
+  "Brooklyn": {
+   "sentiment": -0.018915365227064013,
+   "nightlife": 0.6828184149570731,
+   "retail": 1.0510082512349228,
+   "tourism": 0.6249465881856,
+   "publicSpaces": 0.8234711762899999,
+   "communityEngagement": 0.87843276
+  },
+  "Eastlake": {
+   "sentiment": -0.0374226429023328,
+   "nightlife": 0.7068526119105358,
+   "retail": 1.0645393309303148,
+   "tourism": 0.60229727808,
+   "publicSpaces": 0.866111028475,
+   "communityEngagement": 0.8986736928000001
+  },
+  "Glenview": {
+   "sentiment": -0.043398333319988006,
+   "nightlife": 0.6576308933317425,
+   "retail": 0.9961257061087344,
+   "tourism": 0.5653372780799999,
+   "publicSpaces": 0.8682023484749999,
+   "communityEngagement": 0.8955386928000001
+  },
+  "Dimond": {
+   "sentiment": -0.04995440920421603,
+   "nightlife": 0.6360001764394823,
+   "retail": 1.0489738254889134,
+   "tourism": 0.47222298316799993,
+   "publicSpaces": 0.72388318331,
+   "communityEngagement": 0.94662695504
+  },
+  "Ivy Hill": {
+   "sentiment": -0.047024738229748037,
+   "nightlife": 0.6361673507194823,
+   "retail": 0.9543339358778861,
+   "tourism": 0.5126736199679999,
+   "publicSpaces": 0.7782575033099999,
+   "communityEngagement": 0.9484189550400001
+  },
+  "San Antonio": {
+   "sentiment": -0.031035776685748,
+   "nightlife": 0.6361673507194823,
+   "retail": 0.964269836620449,
+   "tourism": 0.4555536199679999,
+   "publicSpaces": 0.6977416833099999,
+   "communityEngagement": 0.95112695504
+  },
+  "KONO": {
+   "sentiment": -0.026305037638409988,
+   "nightlife": 0.8442350307489681,
+   "retail": 1.1626353992716565,
+   "tourism": 0.6407382048732246,
+   "publicSpaces": 0.774864450725071,
+   "communityEngagement": 0.8774486418879999
+  },
+  "Lake Merritt": {
+   "sentiment": -0.027013818334409138,
+   "nightlife": 0.6576638606087031,
+   "retail": 1.1264453106287182,
+   "tourism": 0.5932706666028024,
+   "publicSpaces": 0.8923906417611905,
+   "communityEngagement": 0.898901828602752
+  },
+  "Uptown": {
+   "sentiment": -0.017635208621008015,
+   "nightlife": 0.8919800977703976,
+   "retail": 1.3360402048585618,
+   "tourism": 0.6984882048732246,
+   "publicSpaces": 0.748722950725071,
+   "communityEngagement": 0.8218986418879999
+  },
+  "Baylight District": {
+   "sentiment": -0.01612122651479201,
+   "nightlife": 0.7832307208578114,
+   "retail": 1.2752120518707524,
+   "tourism": 0.7656633881855999,
+   "publicSpaces": 0.7711881762899999,
+   "communityEngagement": 0.8607177599999999
+  },
+  "East Oakland": {
+   "sentiment": 0.07837605557356798,
+   "nightlife": 0.656182936053499,
+   "retail": 0.997620686649509,
+   "tourism": 0.47222298316800004,
+   "publicSpaces": 0.6977416833099999,
+   "communityEngagement": 1.06894170504
+  }
+ }
+}

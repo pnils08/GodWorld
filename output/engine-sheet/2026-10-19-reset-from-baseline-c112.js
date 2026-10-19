@@ -3,7 +3,7 @@
 // usage: node resetFromBaseline.js [--apply]
 require('/root/GodWorld/lib/env');
 const { google } = require('/root/GodWorld/node_modules/googleapis');
-const BASE = '1orX0qlIQloaM5gqCRJa3LHdkwajIufmcbCTHUWHda4E', BASE_TITLE = 'BASELINE-1004-C112';
+const BASE = '1Mbz-sE13iu1RU4qo-rzsczjjPRKAU-KSfnQnrJNXCgA', BASE_TITLE = 'BASELINE-1004-C112b';   // C112 + the Advancement_Intake1!L3 hood spelling (bench-side, live replay pending)
 const BENCH = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA', BENCH_TITLE = 'Sandox_104_c109-live_Simulation_Narrative';
 const REAL_LIVE = process.env.GODWORLD_SHEET_ID;
 (async () => {

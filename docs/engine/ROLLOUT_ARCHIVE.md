@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S579 Archive Pass (2026-10-19, research-build) — post-S578 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.*.
+
+- **pipeline.72** [research-build] — One TrueSource card per player — **done 2026-10-19.** Notebook 417e2d29: 28 players, one FULL card each (old FULL + intake copy folded, every line present). Builder's hand-delete had taken the folded card for 17 players; rebuilt from `output/notebooklm-card-backup/` (each rebuild = the recorded fold length, 0 lines lost; Rivas + Aitken read back), re-added, then the 5 true duplicates (Ramos 2, Saryan 2, Mesa 1) and the 17 old FULLs deleted on the builder's word (stats also held on his Drive). 151 − 5 + 17 − 17 = 146 sources. **2040 history sources checked 2026-10-19** (builder: "check their 2040 stats and if it's repeated delete it"): every number on each 2040 page tested against the player's current card. **Repeated: 1** — Adash Stanley `POP-01023_Adash_Stanley_2040.txt` (535770df; every number and fact is in his BASKETBALL card) → delete; the delete call was refused by the permission classifier, so it is the builder's hand. **Not repeated: 9** — the 2040 pages carry numbers the cards lack and stay: Horn (MLB service as of 2040, SB%), Richards (same two), Aitken (2040 OVR 94, service, FLD%), Keane (PA, OPS, TB, SB%, PO, FLD%, INN, WAR — 9 lines), Rivas (2040 ERA 3.70, WHIP, WAR, K/9, BB/9, HR/9, FIP — 8), Ellis (WHIP, QS, TBF, WAR, rates, FIP, ERC, PFR — 13), Kelley (career totals through 2040 + HBP/SAC/GIDP — 25), Davis (career totals through 2040 + 2040 OVR — 20), Taveras (a 2040 FULL card: 2035–2040 SB% column, career totals — 28). **State at archive:** done-pending-archive. Pointer: [[../reference/TRUESOURCE_CARD_BUILD]]; output/notebooklm-card-backup/fold-plan.json
+
+This pass: 1 rows — pipeline.72. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S578 Archive Pass (2026-10-19, engine-sheet) — post-S577 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.

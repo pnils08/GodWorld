@@ -5,7 +5,7 @@
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C111 (fired 2026-10-11 ~16:18 CDT, 0 errors, 148 s); next live fire C112, Sunday 2026-10-18.
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (53)** — each plan, its rows and the state each is in:
+**Plans in motion (52)** — each plan, its rows and the state each is in:
 
 - [[../plans/2026-10-11-media-extension]]: pipeline.83 live-observing, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
@@ -19,6 +19,7 @@
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
 - [[../reference/DEPLOY_HISTORY]]: engine.213 in-progress, engine.294 live-observing
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.293 live-observing, engine.104 ready
+- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing, engine.302 live-observing
 - [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 wontfix
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
@@ -27,7 +28,6 @@
 - [[../plans/2026-08-16-new-life-intake]]: engine.108 live-observing
 - [[../plans/2026-09-24-initiatives-in-the-world]]: engine.260 live-observing
 - [[../plans/2026-08-29-employment-system-cascade]]: civic.33 live-observing
-- [[../plans/2026-09-07-beat-slices-from-sheets-plan]]: pipeline.82 needs-info
 - [[../plans/2026-07-31-platform-ceiling-resilience]]: engine.95 live-observing
 - [[../plans/2026-09-29-sim-holiday-calendar]]: engine.273 in-progress
 - [[../plans/2026-10-03-citizen-pages-drive-canon]]: pipeline.70 live-observing
@@ -49,17 +49,16 @@
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
 - [[../plans/2026-10-15-engine-290-transit-rides-the-sim]]: engine.290 live-observing
 - [[../plans/2026-10-16-the-money-game]]: engine.295 needs-info
-- [[../output/notebooklm-card-backup/fold-plan.json]]: pipeline.72 in-progress
 - [[../docs/plans/2026-10-11-media-extension.md]]: pipeline.73 live-observing
 - [[../research/2026-10-11-codex-engine194-cut]]: engine.194 live-observing
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
 - [[../research/2026-10-16-codex-engine285-hazards2-6-review]]: engine.285 live-observing
-- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
 - [[../plans/2026-09-19-civic-wake-game-loop]]: engine.253 ready
 - [[../plans/2026-10-18-event-engines-move-dials]]: engine.299 live-observing
 - `output/antigravity/2026-10-19-review-engine214-prod-candidate.md`: engine.301 ready
+- [[../DEPLOY_HISTORY]]: engine.303 ready
 <!-- /generated -->
 
 ## Pull order (builder, 2026-09-29; trued 2026-10-07)
@@ -144,7 +143,6 @@
 | engine.291 | UNDOCKED rows name the pilot: `$PILOT`/`$PILOTROLE`/`$LEADER`. LIVE PROD @138 (stage 4g, `stage4g-e291fix.sha256`) with fixes a6bdf1de ($LEADER not on the leader) + ebd0091a (a/an before $PILOTROLE); bench 1004 @33. rb releases its 9 held rows. C112 read: 46 Undocked-Audience + 4 Reputation lines, pilots named in text, 0 raw tokens — pass | live-observing | engine-sheet | [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]] §Move 4 |
 | engine.297 | Fame sightings draw from the Cultural_Ledger (builder 2026-10-17: "the fame sightings and event Injection should come from there") — the twelve literal pools in `buildEveningFamous.js:92–172` become buckets filled from Active Cultural_Ledger rows by FameCategory/RoleType; context weighting and the sightings shape unchanged; an empty bucket is an empty bucket; bench carries the codex HOLD (synthetic playoff rung so legends are seen in a fire). A's players keep seeding from Simulation_Ledger and the fame seam stays as written (rb call 2026-10-17; plan §Open). Codex builds the patch (builder 2026-10-17: "Ask codex"); es benches + PROD when the builder routes | ready | codex → engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] Task 9 |
 | pipeline.71 | Media hood read: live vs the INSTITUTIONS seed (today every reader gets prev-Cycle delta only — baseline_briefs, buildWorldSummary classifyDelta). Builder 2026-10-10: the seed is the permanent referent; coverage says 'used to be' when the data moves. Spec after engine.214 lands | ready | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Reviews reconciled A4 |
-| pipeline.72 | One TrueSource card per player — **done 2026-10-19.** Notebook 417e2d29: 28 players, one FULL card each (old FULL + intake copy folded, every line present). Builder's hand-delete had taken the folded card for 17 players; rebuilt from `output/notebooklm-card-backup/` (each rebuild = the recorded fold length, 0 lines lost; Rivas + Aitken read back), re-added, then the 5 true duplicates (Ramos 2, Saryan 2, Mesa 1) and the 17 old FULLs deleted on the builder's word (stats also held on his Drive). 151 − 5 + 17 − 17 = 146 sources. **2040 history sources checked 2026-10-19** (builder: "check their 2040 stats and if it's repeated delete it"): every number on each 2040 page tested against the player's current card. **Repeated: 1** — Adash Stanley `POP-01023_Adash_Stanley_2040.txt` (535770df; every number and fact is in his BASKETBALL card) → delete; the delete call was refused by the permission classifier, so it is the builder's hand. **Not repeated: 9** — the 2040 pages carry numbers the cards lack and stay: Horn (MLB service as of 2040, SB%), Richards (same two), Aitken (2040 OVR 94, service, FLD%), Keane (PA, OPS, TB, SB%, PO, FLD%, INN, WAR — 9 lines), Rivas (2040 ERA 3.70, WHIP, WAR, K/9, BB/9, HR/9, FIP — 8), Ellis (WHIP, QS, TBF, WAR, rates, FIP, ERC, PFR — 13), Kelley (career totals through 2040 + HBP/SAC/GIDP — 25), Davis (career totals through 2040 + 2040 OVR — 20), Taveras (a 2040 FULL card: 2035–2040 SB% column, career totals — 28). | done-pending-archive | research-build | [[../reference/TRUESOURCE_CARD_BUILD]]; output/notebooklm-card-backup/fold-plan.json |
 | pipeline.73 | Tamsin Pruitt (POP-01210, Lives Mon–Fri) + Ines Sorensen (POP-01211, Voices Wed–Fri + own Sat/Sun crons) landed 2026-10-19. Read: Mon 10-19 Tamsin, Wed 10-21 Ines, Sat 10-24 / Sun 10-25 Ines alone | live-observing | research-build + engine-sheet | docs/plans/2026-10-11-media-extension.md |
 | pipeline.74 | First-run read of the swapped cron models: angle cap 1600, off-season label, P Slayer POPIDs, Noah → grok-4.3 (landed es c9d59d24; read 2026-10-15 06:15 fan-out) | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
 | pipeline.75 | Tanya gets the feed names + Notes; deterministic write checks (thin/engine-term/verbatim/cap/toolCalls); tools A/B = 0 calls (landed es; read 2026-10-15 06:15 fan-out) | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |

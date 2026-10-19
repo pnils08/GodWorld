@@ -1806,6 +1806,13 @@ function checkEmergencePromotions_(ss, cycle, maxQueue, simYear, ctx) {
     var last = String(data[r][gL] || '').trim();
     if (!first || !last) continue;
     var famOf = '', famRole = '', famHood = '';
+    // engine.304 (agy review §8): a stranger whose name already belongs to a ledger citizen would mint as a bump of THAT
+    // citizen and stay Active at the threshold, re-queued every Cycle — holding a shared cap slot for good. It waits.
+    if (gst === 'active' && fam && famNames[normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last)]) {
+      results.nameTaken = (results.nameTaken || 0) + 1;
+      Logger.log('checkEmergencePromotions_: ' + first + ' ' + last + ' — the name is already a ledger citizen; not queued (C' + cycle + ')');
+      continue;
+    }
     if (gst === 'family') {
       famOf = String(data[r][fam.cols.of] || '').trim();
       famRole = String(data[r][fam.cols.role] || '').trim().toLowerCase();
@@ -2876,15 +2883,21 @@ function markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle, held, fam
     data[hits[0]][gStatus] = 'Emerged';
     return;
   }
+  // engine.304 (agy review §8): two pool rows can share a name — the one still waiting is the one that emerged, not
+  // an earlier row already flipped
+  var firstHit = -1, liveHit = -1;
   for (var r = 1; r < data.length; r++) {
     var f = String(data[r][gFirst] || '').trim();
     var l = String(data[r][gLast] || '').trim();
     if (f.toLowerCase() === first.toLowerCase() && l.toLowerCase() === last.toLowerCase()) {
-      if (gStatus >= 0) {
-        genericSheet.getRange(r + 1, gStatus + 1).setValue('Emerged');
-        data[r][gStatus] = 'Emerged';
-      }
-      break;
+      if (firstHit < 0) firstHit = r;
+      var hst = gStatus >= 0 ? String(data[r][gStatus] || '').trim().toLowerCase() : '';
+      if (hst !== 'emerged' && hst !== 'promoted') { liveHit = r; break; }
     }
+  }
+  var hitRow = liveHit >= 0 ? liveHit : firstHit;
+  if (hitRow >= 0 && gStatus >= 0) {
+    genericSheet.getRange(hitRow + 1, gStatus + 1).setValue('Emerged');
+    data[hitRow][gStatus] = 'Emerged';
   }
 }

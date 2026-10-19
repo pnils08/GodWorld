@@ -193,7 +193,7 @@ t('no BirthYear column passed → today\'s behaviour (no sim-year read)', () => 
 console.log('P4 age from BirthYear (D8)');
 t('the wave mint reads BirthYear before the Age column (blank Age is not 30)', () => {
   const c = src('phase05-citizens/checkForPromotions.js');
-  assert.ok(/var age = rowBY > 1900 \? simYear - rowBY : Number\(row\[gAge\] \|\| 30\);/.test(c));
+  assert.ok(/var age = rowBY > 1900 \? simYear - rowBY : \(\(rowAgeCell/.test(c));
   assert.ok(/selectFloorWaveRows_\(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng, gBirthYear, gAge\)/.test(c));
 });
 t('both live courtship reads take BirthYear first', () => {
@@ -247,7 +247,7 @@ const sandbox2 = {
   bondProximity_: () => ({ near: (a, b) => a === b || (ADJ[a] || []).indexOf(b) >= 0 }),
 };
 const E2 = new Function(...Object.keys(sandbox2), src('phase01-config/advanceSimulationCalendar.js') + '\n' + src('utilities/citizenDerivation.js') + '\n' + src('phase05-citizens/processAdvancementIntake.js') +
-  '\nreturn { checkFamilyMatchPromotions_, checkEmergencePromotions_, processAdvancementRows_, familySpotsOpen_, familyLedgerCols_, gcFamilyLinks_, simYearFromCycle_, processMediaUsage_, earnedCitationsByKey_, isFamilyUsage_ };')(...Object.values(sandbox2));
+  '\nreturn { checkFamilyMatchPromotions_, checkEmergencePromotions_, processAdvancementRows_, familySpotsOpen_, familyLedgerCols_, gcFamilyLinks_, simYearFromCycle_, processMediaUsage_, earnedCitationsByKey_, isFamilyUsage_, markAsEmergedInGeneric_ };')(...Object.values(sandbox2));
 const SL2 = ['POPID','First','MaidenName','Last','ClockMode','Tier','RoleType','Status','BirthYear','LifeHistory','SpouseId','UsageCount','Neighborhood','HouseholdId','MaritalStatus','NumChildren','ParentIds','ChildrenIds','Income','NetWorth','DebtLevel','EducationLevel','CareerStage','YearsInCareer','EmployerBizId','Gender','SkillTags'];
 const c2 = n => SL2.indexOf(n);
 const sl2 = o => { const r = SL2.map(() => ''); Object.keys(o).forEach(k => { r[c2(k)] = o[k]; }); return r; };
@@ -536,6 +536,26 @@ t('decay, Intake routing and the citizen-context readers skip it', () => {
   assert.ok(/if \(iUType >= 0 && isFamilyUsage_\(uv\[ur\]\[iUType\]\)\) continue;/.test(pa));
   assert.ok(/isFamilyUsage_\(usageType\)\) \{\s*results\.familySkipped = \(results\.familySkipped \|\| 0\) \+ 1;\s*markOnly\.push\(i\);\s*continue;/.test(mr));
   assert.strictEqual((cb.match(/isFamilyUsage_\(/g) || []).length, 2);
+});
+
+console.log('C8 final-gate fixes (agy review)');
+t('a stranger whose name is already a ledger citizen is not queued (it would bump that citizen and hold a cap slot for good)', () => {
+  const twin = sl2({ POPID: 'POP-00900', First: 'Jose', Last: 'Johnson', Status: 'Active', BirthYear: 1990 });
+  const w = world2([darrin(), twin], [gc({ First: 'Jose', Last: 'Johnson', EmergenceCount: 3, BirthYear: 1995, Neighborhood: 'Temescal', Sex: 'male' }), gc({ First: 'Ana', Last: 'Lu', EmergenceCount: 3, BirthYear: 1995, Neighborhood: 'Temescal', Sex: 'female' })]);
+  const res = E2.checkEmergencePromotions_(w.ctx.ss, C2, 2, Y2, w.ctx);
+  assert.strictEqual(res.queued, 1); assert.strictEqual(res.nameTaken, 1);
+  eq(w.sheets.Advancement_Intake1.appended[0][0], 'Ana');
+});
+t('two pool rows share a name: the one still waiting is flipped, not the one already Emerged', () => {
+  const w = world2([darrin()], [gc({ First: 'Rafael', Last: 'Phillips', Status: 'Emerged', EmergenceCount: 3 }), gc({ First: 'Rafael', Last: 'Phillips', EmergenceCount: 3 })]);
+  E2.markAsEmergedInGeneric_(w.ctx.ss, w.sheets.Generic_Citizens, 'Rafael', 'Phillips', C2, {});
+  eq(w.sheets.Generic_Citizens.rows.slice(1).map(r => r[g2('Status')]), ['Emerged', 'Emerged']);
+  const solo = world2([darrin()], [gc({ First: 'Omar', Last: 'Clark', Status: 'Emerged' })]);
+  E2.markAsEmergedInGeneric_(solo.ctx.ss, solo.sheets.Generic_Citizens, 'Omar', 'Clark', C2, {});
+  eq(solo.sheets.Generic_Citizens.rows[1][g2('Status')], 'Emerged'); // no live row → today's first-hit behaviour
+});
+t('the wave mint reads an explicit Age 0 (blank BirthYear) as a newborn, not 30', () => {
+  assert.ok(/var age = rowBY > 1900 \? simYear - rowBY : \(\(rowAgeCell !== '' && isFinite\(Number\(rowAgeCell\)\)\) \? Number\(rowAgeCell\) : 30\);/.test(src('phase05-citizens/checkForPromotions.js')));
 });
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

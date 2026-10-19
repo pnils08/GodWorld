@@ -441,6 +441,10 @@ Final gate 2 (`docs/research/2026-10-19-codex-engine302-final-gate-2.md`, HOLD) 
 10. "1% is good" (the R16 rate)
 11. "Kids both ways as you suggested" (GC minors reach the ledger through a family link and on their own)
 12. "Paulson is open to the lottery" (2026-10-19 evening, during the cuts 1–3 bench: POP-00527 Mike Paulson, T1, married with no SpouseId, drew a background wife on 1004 at C113 — no exclusion for him)
+13. "since death is archived ledger the parent should always be able to be found and what their net worth was or whatever else . Even in death the popid doesnt change or delete . So there is likely an easy way to persist a dead citizen affairs just without events firing on them . Orphans , or is this case a bastard child would automatically be minted into a household based on the current set up , but the issue then is the code will assume he has living parents of ledger . So there is a gap here , the household may need to declare a parent deceased."
+14. "gating status or net worth would be a future concept for matching so whatever is set now is fine"
+15. "correct or some random media story is covering kids . But as a hood backfill option I wonder if some kids should occasionally mint ,"
+16. "fix to get bio , then she goes into the pool as looking for a new relationship," (Rachel Torres POP-00057: bio "divorced, no children", ledger NumChildren 1)
 
 **Rulings, read (es; build in a clean session, nothing built yet):**
 
@@ -583,3 +587,4 @@ Tests: new `scripts/engine304FamilyLottery.test.js` on the `engine302Marital.tes
 - 2026-10-19 (engine-sheet) — engine.304 built in three cuts with codex reviews folded per cut (Build block above); cut 1 benched alone, cuts 1–3 bench next; nothing pushed, live header waits for the builder.
 - 2026-10-19 (engine-sheet) — builder statement 12 recorded verbatim: Paulson is open to the lottery (no exclusion).
 - 2026-10-19 (engine-sheet) — engine.304 cuts 1–3 benched: 20/20 PASS C113–C132 + arrival probe C133 (Bench block above). Report to the builder next; nothing pushed.
+- 2026-10-19 (engine-sheet) — builder statements 13–16 recorded verbatim (answers to the bench report: a dead citizen's family persists — no release on death, the household declares a dead parent; status/net-worth match gates are future; under-13 surfacing stays, kids may also mint as hood backfill; Rachel Torres NumChildren to her bio).

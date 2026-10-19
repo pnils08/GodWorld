@@ -332,7 +332,8 @@ function checkForPromotions_(ctx) {
     var last = row[gLast] || "";
     // engine.304 (R19): age from BirthYear — a blank Age read as 30 would mint a pooled child as a worker
     var rowBY = gBirthYear >= 0 ? (Number(row[gBirthYear]) || 0) : 0;
-    var age = rowBY > 1900 ? simYear - rowBY : Number(row[gAge] || 30);
+    var rowAgeCell = gAge >= 0 ? String(row[gAge]).trim() : ''; // agy review §4: an explicit Age 0 is a newborn, not 30
+    var age = rowBY > 1900 ? simYear - rowBY : ((rowAgeCell !== '' && isFinite(Number(rowAgeCell))) ? Number(rowAgeCell) : 30);
     var neigh = validateNeighborhood(row[gNeigh] || "Downtown");
     var occ = row[gOcc] || "Citizen";
 

@@ -3833,7 +3833,7 @@
         "EmployerCharacter": "clinic",
         "WealthMin": "2",
         "WealthMax": "5",
-        "ChildAreas": "Telegraph corridor, Longfellow, Shafter",
+        "ChildAreas": "Telegraph corridor, Longfellow, Shafter, North Oakland",
         "WeatherZone": "moderate",
         "Adjacent": "Uptown, KONO, Rockridge, Piedmont Ave",
         "AttentionWeight": "1",
@@ -19154,5 +19154,15 @@
     "changes": null,
     "note": "first persisted citizen-state snapshot — week-over-week changes start next Cycle"
   },
-  "citizenStatesNote": "seeded after the fact from the live sheet between the C111 close and the C112 fire (engine.286 R2-3) — includes any post-fire hand or Intake writes"
+  "citizenStatesNote": "seeded after the fact from the live sheet between the C111 close and the C112 fire (engine.286 R2-3) — includes any post-fire hand or Intake writes",
+  "snapshotNotes": [
+    {
+      "at": "pre-fire C112",
+      "field": "Neighborhood_Map",
+      "why": "engine.290 Sequencing 3 (888c71a6, es 2026-10-15): North Oakland folded as a Temescal ChildArea on the builder's morning ruling (c2bf57c1); lib/canonNeighborhoods.js carries the same fold",
+      "changes": [
+        "Neighborhood_Map.Temescal.ChildAreas Telegraph corridor, Longfellow, Shafter→Telegraph corridor, Longfellow, Shafter, North Oakland"
+      ]
+    }
+  ]
 }

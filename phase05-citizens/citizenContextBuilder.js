@@ -638,6 +638,7 @@ function getMediaAppearances_(ss, name) {
     for (var i = 1; i < data.length; i++) {
       var row = data[i];
       var rowName = nameCol >= 0 ? String(row[nameCol]).toLowerCase() : '';
+      if (usageCol >= 0 && typeof isFamilyUsage_ === 'function' && isFamilyUsage_(row[usageCol])) continue; // engine.304 D10: not a media appearance
       
       if (rowName === nameLower || rowName.indexOf(nameLower) >= 0) {
         appearances.push({
@@ -1233,6 +1234,7 @@ function getReturningCitizens(neighborhood, count) {
     
     var nameCol = headers.indexOf('CitizenName');
     var contextCol = headers.indexOf('Context');
+    var typeCol = headers.indexOf('UsageType');
     
     var nameCounts = {};
     var neighborhoodLower = (neighborhood || '').toLowerCase();
@@ -1242,6 +1244,7 @@ function getReturningCitizens(neighborhood, count) {
       var context = contextCol >= 0 ? String(data[i][contextCol] || '').toLowerCase() : '';
       
       if (!name || name.length < 3) continue;
+      if (typeCol >= 0 && typeof isFamilyUsage_ === 'function' && isFamilyUsage_(data[i][typeCol])) continue; // engine.304 D10: not a returning media voice
       
       // v1.2: Filter by neighborhood if specified
       if (neighborhood && context.indexOf(neighborhoodLower) < 0) {

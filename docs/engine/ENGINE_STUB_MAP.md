@@ -2354,6 +2354,8 @@
   Writes: S.storyHooks
 
 ### processAdvancementIntake.js
+- **isFamilyUsage_(usageType)**
+
 - **pickDemographicVoiceRole_(seed)**
 
 - **markUsageProcessed_(ctx, usageSheet, row1, col1, value)**
@@ -2438,7 +2440,11 @@
 
 - **familyLedgerCols_(h)**
 
-- **releaseFamilyLink_(sheet, gData, r, cols, gL)**
+- **writeGcRow_(sheet, gData, r)**
+
+- **noteGcContext_(gData, r, gC, note)**
+
+- **releaseFamilyLink_(sheet, gData, r, cols, gL, cycle)**
 
 - **checkFamilyMatchPromotions_(ctx, cycle)**
   Config: ctx.config.rngSeed
@@ -4772,4 +4778,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1722
+**Functions mapped:** 1725

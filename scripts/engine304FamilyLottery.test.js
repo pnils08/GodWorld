@@ -217,7 +217,7 @@ t('the queue mint zeroes a minor\'s income, debt and net worth (GAME rows except
 // ═══ Cut 2 ═══════════════════════════════════════════════════════════════
 const logs2 = [];
 function mkSheet(rows) {
-  const s = { rows, appended: [], cleared: [], setCells: [] };
+  const s = { rows, appended: [], cleared: [], setCells: [], rowWrites: 0, failWrites: false };
   s.getDataRange = () => ({ getValues: () => s.rows.map(r => r.slice()) });
   s.getLastColumn = () => (s.rows[0] || []).length;
   s.getLastRow = () => s.rows.length;
@@ -226,7 +226,7 @@ function mkSheet(rows) {
     getValues: () => [s.rows[r - 1].slice(c - 1, c - 1 + (nc || 1))],
     setValue: (v) => { while (s.rows[r - 1].length < c) s.rows[r - 1].push(''); s.rows[r - 1][c - 1] = v; s.setCells.push([r, c, v]); },
     clearContent: () => { for (let k = 0; k < (nr || 1); k++) { s.cleared.push(r + k); if (s.rows[r + k - 1]) s.rows[r + k - 1] = s.rows[r + k - 1].map(() => ''); } },
-    setValues: (vals) => { for (let k = 0; k < vals.length; k++) { while (!s.rows[r + k - 1]) s.rows.push([]); for (let m = 0; m < vals[k].length; m++) s.rows[r + k - 1][c + m - 1] = vals[k][m]; } },
+    setValues: (vals) => { if (s.failWrites) throw new Error('Service Spreadsheets failed (injected)'); s.rowWrites++; for (let k = 0; k < vals.length; k++) { while (!s.rows[r + k - 1]) s.rows.push([]); for (let m = 0; m < vals[k].length; m++) s.rows[r + k - 1][c + m - 1] = vals[k][m]; } },
   });
   return s;
 }
@@ -247,7 +247,7 @@ const sandbox2 = {
   bondProximity_: () => ({ near: (a, b) => a === b || (ADJ[a] || []).indexOf(b) >= 0 }),
 };
 const E2 = new Function(...Object.keys(sandbox2), src('phase01-config/advanceSimulationCalendar.js') + '\n' + src('utilities/citizenDerivation.js') + '\n' + src('phase05-citizens/processAdvancementIntake.js') +
-  '\nreturn { checkFamilyMatchPromotions_, checkEmergencePromotions_, processAdvancementRows_, familySpotsOpen_, familyLedgerCols_, gcFamilyLinks_, simYearFromCycle_ };')(...Object.values(sandbox2));
+  '\nreturn { checkFamilyMatchPromotions_, checkEmergencePromotions_, processAdvancementRows_, familySpotsOpen_, familyLedgerCols_, gcFamilyLinks_, simYearFromCycle_, processMediaUsage_, earnedCitationsByKey_, isFamilyUsage_ };')(...Object.values(sandbox2));
 const SL2 = ['POPID','First','MaidenName','Last','ClockMode','Tier','RoleType','Status','BirthYear','LifeHistory','SpouseId','UsageCount','Neighborhood','HouseholdId','MaritalStatus','NumChildren','ParentIds','ChildrenIds','Income','NetWorth','DebtLevel','EducationLevel','CareerStage','YearsInCareer','EmployerBizId','Gender','SkillTags'];
 const c2 = n => SL2.indexOf(n);
 const sl2 = o => { const r = SL2.map(() => ''); Object.keys(o).forEach(k => { r[c2(k)] = o[k]; }); return r; };
@@ -434,9 +434,95 @@ t('same batch: a parent\'s co-parent stroke fills the spouse spot another linked
   E2.checkFamilyMatchPromotions_(next.ctx, C2 + 1);
   eq(next.sheets.Generic_Citizens.rows[2][g2('Last')], 'Ng');
 });
+console.log('C6 codex cut-2 review — integrity');
+t('a link is one row write, carries the causal note, and keeps the namers roster', () => {
+  const pool = [gc({ First: 'Amara', Last: 'Keane', BirthYear: Y2 - 31, Neighborhood: 'Temescal', Sex: 'female', EmergenceContext: "Named in Isla Sike's week, Y3C7" })];
+  const d = darrin(); d[c2('NumChildren')] = 0;
+  const w = world2([d], pool, () => 0);
+  E2.checkFamilyMatchPromotions_(w.ctx, C2);
+  const G = w.sheets.Generic_Citizens;
+  assert.strictEqual(G.rowWrites, 1); assert.strictEqual(G.setCells.length, 0);
+  eq(G.rows[1][g2('EmergenceContext')], "Named in Isla Sike's week, Y3C7 | Family: spouse of Darrin Davis (POP-00021), C113");
+});
+t('a failed write leaves the row exactly as it was — never half-linked', () => {
+  const pool = [gc({ First: 'Amara', Last: 'Keane', BirthYear: Y2 - 31, Neighborhood: 'Temescal', Sex: 'female' })];
+  const d = darrin(); d[c2('NumChildren')] = 0;
+  const w = world2([d], pool, () => 0);
+  const before = w.sheets.Generic_Citizens.rows[1].slice();
+  w.sheets.Generic_Citizens.failWrites = true;
+  assert.throws(() => E2.checkFamilyMatchPromotions_(w.ctx, C2), /injected/);
+  eq(w.sheets.Generic_Citizens.rows[1], before);
+});
+t('a non-numeric Age or an impossible BirthYear is not in the fit; a citizen with no Gender gets no spouse', () => {
+  const d = darrin(); d[c2('NumChildren')] = 0;
+  const w = world2([d], [gc({ First: 'Odd', Last: 'Q', Age: 'thirty', Neighborhood: 'Temescal', Sex: 'female' }), gc({ First: 'Fut', Last: 'Q', BirthYear: Y2 + 5, Neighborhood: 'Temescal', Sex: 'female' })], () => 0);
+  assert.strictEqual(E2.checkFamilyMatchPromotions_(w.ctx, C2).linked, 0);
+  const nog = darrin(); nog[c2('NumChildren')] = 0; nog[c2('Gender')] = '';
+  const w2 = world2([nog], [gc({ First: 'Amara', Last: 'Keane', BirthYear: Y2 - 31, Neighborhood: 'Temescal', Sex: 'female' }), gc({ First: 'Abe', Last: 'Keane', BirthYear: Y2 - 31, Neighborhood: 'Temescal', Sex: 'male' })], () => 0);
+  const r2 = E2.checkFamilyMatchPromotions_(w2.ctx, C2);
+  assert.strictEqual(r2.linked, 0); assert.strictEqual(r2.noFit, 1);
+});
+t('released and redrawn in the same pass: a freed row can join another family', () => {
+  const closed = darrin(); closed[c2('SpouseId')] = 'POP-00777'; closed[c2('NumChildren')] = 0;
+  const other = sl2({ POPID: 'POP-00030', First: 'Ike', Last: 'Moss', Tier: 1, Status: 'Active', BirthYear: Y2 - 33, Neighborhood: 'Temescal', MaritalStatus: 'married', Gender: 'male' });
+  const w = world2([closed, other], [gc({ First: 'Amara', Last: 'Davis', MaidenName: 'Keane', FamilyOf: 'POP-00021', FamilyRole: 'spouse', Status: 'Family', BirthYear: Y2 - 31, Neighborhood: 'Temescal', Sex: 'female' })], () => 0);
+  const res = E2.checkFamilyMatchPromotions_(w.ctx, C2);
+  assert.strictEqual(res.released, 1); assert.strictEqual(res.linked, 1);
+  const r = w.sheets.Generic_Citizens.rows[1];
+  eq([r[g2('First')], r[g2('Last')], r[g2('MaidenName')], r[g2('FamilyOf')]], ['Amara', 'Moss', 'Keane', 'POP-00030']);
+});
+t('two Family rows of one citizen by the same name → neither minted, no POPID spent', () => {
+  const w = world2([darrin()], [famRow()]);
+  E2.checkEmergencePromotions_(w.ctx.ss, C2, 2, Y2, w.ctx); // queued alone (a second spouse link would be released at the door)
+  w.sheets.Generic_Citizens.rows.push(famRow({ EmergenceCount: 0 })); // a duplicate appears between the door and the mint
+  const before = w.ctx.ledger.rows.length;
+  logs2.length = 0;
+  E2.processAdvancementRows_(w.ctx, 'C' + C2, C2);
+  assert.strictEqual(w.ctx.ledger.rows.length, before);
+  assert.ok(logs2.some(m => /2 Family rows of POP-00021 by this name; not minted/.test(m)));
+});
+t('a citizen who moved between the link and the arrival takes the family to the new hood', () => {
+  const d = darrin(); d[c2('Neighborhood')] = 'Downtown';
+  const w = world2([d], [famRow()]);
+  E2.checkEmergencePromotions_(w.ctx.ss, C2, 2, Y2, w.ctx);
+  const q = w.sheets.Advancement_Intake1; eq(q.appended[0][q.rows[0].indexOf('Neighborhood')], 'Downtown');
+  const before = w.ctx.ledger.rows.length;
+  E2.processAdvancementRows_(w.ctx, 'C' + C2, C2);
+  eq(w.ctx.ledger.rows[before][c2('Neighborhood')], 'Downtown');
+});
 t('media naming a linked member is usage: the GC index admits Family rows', () => {
   assert.ok(/!== 'Active' && String\(r\[gStatusCol\] \|\| ''\) !== 'Family'\) return false;/.test(src('phase05-citizens/processAdvancementIntake.js')));
   assert.ok(/if \(gsSt !== 'active' && gsSt !== 'family'\) continue;/.test(src('phase05-citizens/generateCitizensEvents.js')));
+});
+
+console.log('C7 cut 3 engine side — own words about family are usage, never coverage (D10)');
+const USAGE_H = ['Timestamp', 'Cycle', 'CitizenName', 'UsageType', 'Context', 'Reporter', 'Processed', 'Sentiment'];
+const usageRow = (o) => USAGE_H.map(h => (o[h] !== undefined ? o[h] : ''));
+t('a family-own-words row ticks the Family row\'s EmergenceCount and not a same-named ledger citizen', () => {
+  const twin = sl2({ POPID: 'POP-00800', First: 'Amara', Last: 'Davis', Status: 'Active', Tier: 4, BirthYear: 1990, UsageCount: 2 });
+  const w = world2([darrin(), twin], [famRow({ EmergenceCount: 1 })]);
+  w.sheets.Citizen_Media_Usage = mkSheet([USAGE_H.slice(), usageRow({ Cycle: '113', CitizenName: 'Amara Davis', UsageType: 'family-own-words', Context: 'cp-POP-00021-c113-evening' })]);
+  w.ctx.ss.getSheetByName = n => w.sheets[n] || null;
+  E2.processMediaUsage_(w.ctx, 'C' + C2, C2);
+  eq(w.sheets.Generic_Citizens.rows[1][g2('EmergenceCount')], 2);
+  eq(w.ctx.ledger.rows[1][c2('UsageCount')], 2);
+});
+t('the same row is no earned citation on the tier ladder; a media mention still is', () => {
+  const w = world2([darrin()], [famRow()]);
+  w.sheets.Citizen_Media_Usage = mkSheet([USAGE_H.slice(),
+    usageRow({ Cycle: '113', CitizenName: 'Amara Davis', UsageType: 'family-own-words', Context: 'cp-POP-00021-c113-evening' }),
+    usageRow({ Cycle: '113', CitizenName: 'Darrin Davis', UsageType: 'mentioned', Context: 'x' })]);
+  w.ctx.ss.getSheetByName = n => w.sheets[n] || null;
+  const cites = E2.earnedCitationsByKey_(w.ctx);
+  assert.ok(!cites['amara davis'] || cites['amara davis'].cited === 0);
+  assert.ok(cites['darrin davis'] && cites['darrin davis'].cited === 1);
+  assert.ok(E2.isFamilyUsage_('Family-Own-Words') && !E2.isFamilyUsage_('mentioned'));
+});
+t('decay, Intake routing and the citizen-context readers skip it', () => {
+  const pa = src('phase05-citizens/processAdvancementIntake.js'), mr = src('phase07-evening-media/mediaRoomIntake.js'), cb = src('phase05-citizens/citizenContextBuilder.js');
+  assert.ok(/if \(iUType >= 0 && isFamilyUsage_\(uv\[ur\]\[iUType\]\)\) continue;/.test(pa));
+  assert.ok(/isFamilyUsage_\(usageType\)\) \{\s*results\.familySkipped = \(results\.familySkipped \|\| 0\) \+ 1;\s*markOnly\.push\(i\);\s*continue;/.test(mr));
+  assert.strictEqual((cb.match(/isFamilyUsage_\(/g) || []).length, 2);
 });
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

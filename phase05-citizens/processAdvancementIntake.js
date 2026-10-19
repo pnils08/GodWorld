@@ -42,6 +42,16 @@ var NON_EMERGENCE_USAGE_TYPES = [
   'byline', 'stats', 'official', 'roster', 'routine', 'coverage', 'announcement'
 ];
 
+// engine.304 (builder 2026-10-19, R18; plan engine.286 §engine.304 D10): a tracked citizen naming a linked
+// family member in their own words (lib/citizenPage.js writes the row). It is usage of that background
+// citizen — EmergenceCount ticks — and never media coverage: no ledger UsageCount, no earned citation, no
+// recent-attention mark, no Intake route, no media appearance.
+var FAMILY_USAGE_TYPES = ['family-own-words'];
+function isFamilyUsage_(usageType) {
+  var t = String(usageType || '').trim().toLowerCase();
+  return FAMILY_USAGE_TYPES.indexOf(t) >= 0;
+}
+
 // S184 Row 17 fix — demographic-voice fallback pool (Path B).
 // Used only when an intake row's RoleType is empty AND the citizen is NEW.
 // Preferred path: upstream intake writers compute RoleType. This pool is the
@@ -437,7 +447,7 @@ function processMediaUsage_(ctx, now, cycle) {
 
     if (split) {
       var usageKey = normalizeCitizenName_(split.first) + ' ' + normalizeCitizenName_(split.last);
-      var ledgerHits = ledgerIndex[usageKey] || [];
+      var ledgerHits = isFamilyUsage_(usageType) ? [] : (ledgerIndex[usageKey] || []); // engine.304 D10: a family row ticks the background citizen only
 
       if (ledgerHits.length === 1) {
         var lr = ledgerHits[0];
@@ -816,11 +826,18 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
         for (var fa = 0; fa < ledgerRows.length; fa++) {
           if (ledgerRows[fa] && String(ledgerRows[fa][lPopId] || '').trim() === matchPop) { famAnchorNow = ledgerRows[fa]; break; }
         }
-        var famStill = famAnchorNow && String(famAnchorNow[FLm.status] || '').trim().toLowerCase() === 'active' &&
+        var famHits = 0;
+        for (var fs3 = 0; fs3 < famList.length; fs3++) {
+          var gRowH = genericHeld.data[famList[fs3]];
+          if (String(gRowH[findColByName_(genericHeld.data[0], 'First')] || '').trim().toLowerCase() === first.toLowerCase() &&
+              String(gRowH[findColByName_(genericHeld.data[0], 'Last')] || '').trim().toLowerCase() === last.toLowerCase()) famHits++;
+        }
+        var famStill = famHits === 1 && famAnchorNow && String(famAnchorNow[FLm.status] || '').trim().toLowerCase() === 'active' && // codex cut-2 review §4: exactly one row, before a POPID
           familySpotsOpen_(FLm, famAnchorNow, simYearOf_(ctx, cycle), famNow.byAnchor[matchPop], famSelf, false)[matchType] >= 1;
         if (!famStill) {
-          Logger.log('processAdvancementRows_: ' + first + ' ' + last + ' — the ' + matchType + ' spot of ' + matchPop +
-            ' closed in this batch; not minted (engine.304)');
+          Logger.log('processAdvancementRows_: ' + first + ' ' + last + ' — ' + (famHits !== 1
+            ? famHits + ' Family rows of ' + matchPop + ' by this name; not minted (engine.304)'
+            : 'the ' + matchType + ' spot of ' + matchPop + ' closed in this batch; not minted (engine.304)'));
           rowsToClear.push(i + 1);
           continue;
         }
@@ -1268,6 +1285,7 @@ function earnedCitationsByKey_(ctx) {
       if (iName >= 0) {
         for (var r = 1; r < uv.length; r++) {
           var ut = iType >= 0 ? String(uv[r][iType] || '').trim().toLowerCase() : '';
+          if (isFamilyUsage_(ut)) continue; // engine.304 D10: own words about family are not a citation
           var sp = splitUsageName_(String(uv[r][iName] || '').trim());
           if (!sp) continue;
           var key = normalizeCitizenName_(sp.first) + ' ' + normalizeCitizenName_(sp.last);
@@ -1407,9 +1425,10 @@ function decayMediaAttention_(ctx, cycle) {
     var us = ctx.ss.getSheetByName('Citizen_Media_Usage');
     if (us && us.getLastRow() > 1) {
       var uv = us.getDataRange().getValues();
-      var uh = uv[0], iUCyc = uh.indexOf('Cycle'), iUName = uh.indexOf('CitizenName');
+      var uh = uv[0], iUCyc = uh.indexOf('Cycle'), iUName = uh.indexOf('CitizenName'), iUType = uh.indexOf('UsageType');
       if (iUCyc >= 0 && iUName >= 0) {
         for (var ur = 1; ur < uv.length; ur++) {
+          if (iUType >= 0 && isFamilyUsage_(uv[ur][iUType])) continue; // engine.304 D10: not media attention
           var un = String(uv[ur][iUName] || '').trim().toLowerCase();
           var uc = Number(String(uv[ur][iUCyc] || '').replace(/[^0-9]/g, '')) || 0;
           if (un && uc && (!(un in lastNamedByName) || uc > lastNamedByName[un])) lastNamedByName[un] = uc;
@@ -1774,7 +1793,7 @@ function checkEmergencePromotions_(ss, cycle, maxQueue, simYear, ctx) {
         familySpotsOpen_(FL, famAnchor, simYear, fam.byAnchor[famOf], r, false)[famRole] >= 1 &&
         !famNames[normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last)];
       if (!famOpen) { // D6a: the spot closed or the name is taken — released here, not queued
-        releaseFamilyLink_(genericSheet, data, r, fam.cols, gL);
+        releaseFamilyLink_(genericSheet, data, r, fam.cols, gL, cycle);
         results.released++;
         Logger.log('checkEmergencePromotions_: ' + first + ' ' + last + ' — the ' + famRole + ' spot of ' + famOf + ' closed; back in the pool (C' + cycle + ')');
         continue;
@@ -1896,13 +1915,27 @@ function familyLedgerCols_(h) {
            children: idx('ChildrenIds'), numKids: idx('NumChildren'), hood: idx('Neighborhood'), tier: idx('Tier') };
 }
 
+// engine.304 (codex cut-2 review §2): a link or a release is ONE row write — the row is set in memory, then
+// written whole, so a failed call leaves the row as it was, never half-linked. gData is this pass's own fresh
+// read and the only GC writer between the read and the write, so the rest of the row is current.
+function writeGcRow_(sheet, gData, r) {
+  sheet.getRange(r + 1, 1, 1, gData[r].length).setValues([gData[r]]);
+}
+function noteGcContext_(gData, r, gC, note) {
+  if (gC < 0) return;
+  var cur = String(gData[r][gC] || '').trim();
+  gData[r][gC] = cur ? cur + ' | ' + note : note; // appended — seedEmergenceBonds_ reads only its "Named in …'s week" entries
+}
+
 // engine.304 D5: a released row returns to the pool under its own name.
-function releaseFamilyLink_(sheet, gData, r, cols, gL) {
+function releaseFamilyLink_(sheet, gData, r, cols, gL, cycle) {
+  var before = gData[r].slice();
   var maiden = String(gData[r][cols.maiden] || '').trim();
-  var put = function (c, v) { sheet.getRange(r + 1, c + 1).setValue(v); gData[r][c] = v; };
-  put(cols.status, 'Active');
-  if (maiden && gL >= 0) put(gL, maiden);
-  put(cols.maiden, ''); put(cols.of, ''); put(cols.role, '');
+  gData[r][cols.status] = 'Active';
+  if (maiden && gL >= 0) gData[r][gL] = maiden;
+  gData[r][cols.maiden] = ''; gData[r][cols.of] = ''; gData[r][cols.role] = '';
+  noteGcContext_(gData, r, findColByName_(gData[0], 'EmergenceContext'), 'Family link released, C' + cycle);
+  try { writeGcRow_(sheet, gData, r); } catch (e) { gData[r] = before; throw e; }
 }
 
 function checkFamilyMatchPromotions_(ctx, cycle) {
@@ -1948,7 +1981,7 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
         var gr = list[k];
         var open = active(anchorRow) && familySpotsOpen_(L, anchorRow, simYear, links.byAnchor[anchorPop], gr, false)[role] >= 1;
         if (open) continue;
-        releaseFamilyLink_(genericSheet, gData, gr, fc, gL);
+        releaseFamilyLink_(genericSheet, gData, gr, fc, gL, cycle);
         list.splice(k, 1);
         results.released++;
         Logger.log('checkFamilyMatchPromotions_: released ' + String(gData[gr][gF]) + ' ' + String(gData[gr][gL]) +
@@ -1989,11 +2022,12 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
   if (!drawn.length) return results;
 
   // ── D3: the pool and the names already taken ──
-  var gcAge = function (gr) {
-    var gby = gB >= 0 ? (Number(gData[gr][gB]) || 0) : 0;
-    if (gby > 0) return { by: gby, age: simYear - gby };
+  var gcAge = function (gr) { // codex cut-2 review §1: a credible BirthYear, else a finite Age, else not in the fit
+    var gby = gB >= 0 ? Number(gData[gr][gB]) : NaN;
+    if (isFinite(gby) && gby > 1900 && gby <= simYear) return { by: gby, age: simYear - gby };
     var ac = gA >= 0 ? String(gData[gr][gA]).trim() : '';
-    return ac === '' ? null : { by: simYear - Number(ac), age: Number(ac) };
+    var an = ac === '' ? NaN : Number(ac);
+    return (isFinite(an) && an >= 0 && an <= 110) ? { by: simYear - an, age: an } : null;
   };
   var pool = [];
   for (var g = 1; g < gData.length; g++) {
@@ -2028,7 +2062,14 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
     var aHood = L.hood >= 0 ? String(aRow[L.hood] || '').trim() : '';
     var aSex = L.gender >= 0 ? String(aRow[L.gender] || '').trim().toLowerCase() : '';
     var wantSex = '';
-    if (type === 'spouse') wantSex = aSex === 'female' ? 'male' : (aSex === 'male' ? 'female' : '');
+    if (type === 'spouse') {
+      wantSex = aSex === 'female' ? 'male' : (aSex === 'male' ? 'female' : '');
+      if (!wantSex) { // codex cut-2 review §1: no recorded sex → no spouse drawn, rather than either
+        results.noFit++;
+        Logger.log('checkFamilyMatchPromotions_: ' + c.pop + ' drawn for a spouse — no Gender on the row (C' + cycle + ')');
+        continue;
+      }
+    }
     if (type === 'parent') {
       var pids = String(aRow[L.parents] || '').match(/POP-\d+/g) || [];
       var pRow = pids.length === 1 ? rowByPop[pids[0]] : null;
@@ -2059,13 +2100,16 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
     }
     var won = fit[Math.floor(rng() * fit.length)];
     var ownLast = String(gData[won][gL]).trim();
-    var put = function (col, v) { genericSheet.getRange(won + 1, col + 1).setValue(v); gData[won][col] = v; };
-    put(fc.status, 'Family');
-    put(gL, c.surname);
-    put(fc.maiden, ownLast);
-    put(fc.of, c.pop);
-    put(fc.role, type);
-    if (gN >= 0 && aHood) put(gN, aHood); // they share the family's home
+    var wasRow = gData[won].slice();
+    gData[won][fc.status] = 'Family';
+    gData[won][gL] = c.surname;
+    gData[won][fc.maiden] = ownLast;
+    gData[won][fc.of] = c.pop;
+    gData[won][fc.role] = type;
+    if (gN >= 0 && aHood) gData[won][gN] = aHood; // they share the family's home
+    noteGcContext_(gData, won, findColByName_(gh, 'EmergenceContext'),
+      'Family: ' + type + ' of ' + String(aRow[L.first] || '').trim() + ' ' + c.surname + ' (' + c.pop + '), C' + cycle);
+    try { writeGcRow_(genericSheet, gData, won); } catch (eW) { gData[won] = wasRow; throw eW; }
     claimed[won] = true;
     takeName(gData[won][gF], c.surname);
     if (!links.byAnchor[c.pop]) links.byAnchor[c.pop] = { spouse: [], child: [], parent: [] };

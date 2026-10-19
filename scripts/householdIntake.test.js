@@ -214,6 +214,10 @@ console.log('\n3. the drip path is untouched, and collisions are refused:');
   const adv = w.sheets.Advancement_Intake1;
   E.ensureHouseholdQueueSheet_(w.ctx.ss);
   const qh = adv.rows[0]; const qc = (n) => qh.indexOf(n);
+  // engine.304: a family arrival carries its Family row from the pool (the exact-row gate mints nobody without one)
+  const gch = w.sheets.Generic_Citizens.rows[0]; const gfam = gch.map(() => '');
+  Object.entries({ First: 'Sam', Last: 'Santana', BirthYear: 1988, Neighborhood: 'Downtown', Status: 'Family', Sex: 'male', FamilyOf: 'POP-00034', FamilyRole: 'spouse', MaidenName: 'Lopez', EmergenceCount: 3 }).forEach(([k, v]) => { gfam[gch.indexOf(k)] = v; });
+  w.sheets.Generic_Citizens.rows.push(gfam);
   const drip = new Array(qh.length).fill(''); drip[qc('First')] = 'Sam'; drip[qc('Last')] = 'Santana'; drip[qc('Tier')] = 4; drip[qc('ClockMode')] = 'ENGINE'; drip[qc('BirthYear')] = 1988; drip[qc('Neighborhood')] = 'Downtown'; drip[qc('MatchPopId')] = 'POP-00034'; drip[qc('MatchType')] = 'spouse'; drip[qc('MaidenName')] = 'Lopez';
   adv.appendRow(drip);
   const coll = new Array(qh.length).fill(''); coll[qc('First')] = 'Rosa'; coll[qc('Last')] = 'Nguyen'; coll[qc('Tier')] = 4; coll[qc('HouseholdKey')] = 'nguyen'; coll[qc('BirthYear')] = 1990; coll[qc('Neighborhood')] = 'Temescal';

@@ -453,6 +453,13 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
       var strippedParts = splitUsageName_(citizenName);
       if (strippedParts) nameParts = strippedParts;
     }
+    // engine.304 D10: a citizen's own words about family were counted as the background citizen's usage by
+    // processMediaUsage_; they are not a media appearance and route nowhere.
+    if (typeof isFamilyUsage_ === 'function' && isFamilyUsage_(usageType)) {
+      results.familySkipped = (results.familySkipped || 0) + 1;
+      markOnly.push(i);
+      continue;
+    }
     var exists = citizenExistsInLedger_(ledgerData, nameParts.first, nameParts.last);
 
     if (exists) {

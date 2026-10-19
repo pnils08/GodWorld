@@ -352,7 +352,11 @@ function sourceClasses(inventory, materialSignals) {
 
 function routeDailyNews(inventory, options = {}) {
   const counts = inventory.counts || {};
-  const passed = Number(counts.passed || 0);
+  // Edition day (2026-10-18): the published edition and the Civis journal count
+  // toward the reported-day bar alongside Rhea-passed filings.
+  const rheaPassed = Number(counts.passed || 0);
+  const publishedExtras = Number(options.publishedExtras || 0);
+  const passed = rheaPassed + publishedExtras;
   const materialSignals = Array.isArray(inventory.materialSignals) ? inventory.materialSignals.slice().sort() : [];
   const threshold = Number(options.reportedDayThreshold);
   const thresholdConfigured = Number.isInteger(threshold) && threshold > 0;
@@ -365,7 +369,8 @@ function routeDailyNews(inventory, options = {}) {
     reasonCodes.push('PACKET_OPPOSITION_PROVEN');
   } else if (thresholdConfigured && passed >= threshold) {
     profile = PROFILES.REPORTED_DAY;
-    reasonCodes.push('RHEA_PASSED_' + passed);
+    reasonCodes.push('RHEA_PASSED_' + rheaPassed);
+    if (publishedExtras > 0) reasonCodes.push('PUBLISHED_EXTRAS_' + publishedExtras);
     reasonCodes.push('REPORTED_THRESHOLD_MET_' + threshold);
   } else if (inventory.cycleChanged || Number(counts.angles || 0) > 0 ||
       passed > 0 ||
@@ -401,7 +406,7 @@ function routeDailyNews(inventory, options = {}) {
     sourceClasses: sourceClasses(inventory, materialSignals),
     reasonCodes: Array.from(new Set(reasonCodes)),
     dispositionCounts: {
-      passed,
+      passed: rheaPassed,
       rheaFlagged: Number(counts.rheaFlagged || 0),
       neverGated: Number(counts.neverGated || 0),
     },

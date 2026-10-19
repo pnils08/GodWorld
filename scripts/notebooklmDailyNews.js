@@ -43,7 +43,7 @@ const AUDIO_RETRY_MAX = 30;
 const AUDIO_CREATE_ATTEMPTS = 2;
 const CANON_POLICY_PATH = path.join(ROOT, 'scripts', 'notebooklmCanonSources.json');
 const CONTINUITY_EDITIONS = 2;
-const SOURCE_VERSION = '1.7';
+const SOURCE_VERSION = '1.8';
 const DEFAULT_AUDIO_LENGTH = 'default';
 const DEFAULT_AUDIO_FORMAT = 'deep_dive';
 
@@ -153,8 +153,20 @@ function artifactStem(file) {
     .replace(/\.flags\.json$/, '');
 }
 
-function collectNewsroomArtifacts(cycle, hours, nowMs) {
+function artifactRecord(file, classification, cycle, root) {
+  return {
+    classification,
+    cycle,
+    file,
+    relativePath: path.relative(root, file),
+    mtimeMs: fs.statSync(file).mtimeMs,
+    body: fs.readFileSync(file, 'utf8'),
+  };
+}
+
+function collectNewsroomArtifacts(cycle, hours, nowMs, root = ROOT) {
   const cutoff = nowMs - hours * 3600e3;
+  const compareDir = path.join(root, 'output', 'cron-compare');
   const records = [];
   // cron-desk-run routes a passing article through uniqueDest(), which appends
   // an HHMM suffix when the destination name is already taken — so a re-run of
@@ -163,13 +175,13 @@ function collectNewsroomArtifacts(cycle, hours, nowMs) {
   // real articles and the daily news collected two, losing P Slayer and Jordan
   // Velez purely on filename. Match the suffixed form too.
   const specs = [
-    { dir: path.join(COMPARE_DIR, 'staged'), re: /\.staged(?:-\d{3,4})?\.md$/, classification: 'STAGED' },
-    { dir: path.join(COMPARE_DIR, 'samples'), re: /\.sample(?:-\d{3,4})?\.md$/, classification: 'UNGATED_SAMPLE' },
+    { dir: path.join(compareDir, 'staged'), re: /\.staged(?:-\d{3,4})?\.md$/, classification: 'STAGED' },
+    { dir: path.join(compareDir, 'samples'), re: /\.sample(?:-\d{3,4})?\.md$/, classification: 'UNGATED_SAMPLE' },
     // Flagged drafts ride along in full (Mike-direct 2026-08-23: "let it
     // report on it all — I'll never know the issues if you keep hiding
     // them"). The brief is a listening surface, never a canon write, so a
     // gated draft is safe to report on as long as it is labeled as gated.
-    { dir: path.join(COMPARE_DIR, 'flagged'), re: /(?:^|\/)(?!.*\.flags\.json$).*\.md$/, classification: 'FLAGGED' },
+    { dir: path.join(compareDir, 'flagged'), re: /(?:^|\/)(?!.*\.flags\.json$).*\.md$/, classification: 'FLAGGED' },
   ];
 
   for (const spec of specs) {
@@ -178,19 +190,12 @@ function collectNewsroomArtifacts(cycle, hours, nowMs) {
       const stat = fs.statSync(file);
       const fileCycle = cycleFromName(file);
       if (stat.mtimeMs < cutoff || fileCycle !== cycle) continue;
-      records.push({
-        classification: spec.classification,
-        cycle: fileCycle,
-        file,
-        relativePath: path.relative(ROOT, file),
-        mtimeMs: stat.mtimeMs,
-        body: fs.readFileSync(file, 'utf8'),
-      });
+      records.push(artifactRecord(file, spec.classification, fileCycle, root));
     }
   }
 
   const flagged = [];
-  const flagDir = path.join(COMPARE_DIR, 'flagged');
+  const flagDir = path.join(compareDir, 'flagged');
   for (const file of walkFiles(flagDir)) {
     if (!file.endsWith('.flags.json')) continue;
     const stat = fs.statSync(file);
@@ -205,7 +210,7 @@ function collectNewsroomArtifacts(cycle, hours, nowMs) {
     flagged.push({
       classification: 'FLAGGED_EXCLUSION',
       cycle: fileCycle,
-      relativePath: path.relative(ROOT, file),
+      relativePath: path.relative(root, file),
       reasonCount: Array.isArray(data.flags) ? data.flags.length
         : Array.isArray(data.issues) ? data.issues.length
           : Array.isArray(data.findings) ? data.findings.length
@@ -228,8 +233,38 @@ function collectNewsroomArtifacts(cycle, hours, nowMs) {
       record.flagSummary = data.summary || null;
     } catch (_) { /* unreadable sidecar; report the draft without findings */ }
   }
-  const eligible = records.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
-  return { reports: eligible, flagged };
+  // Edition day (builder 2026-10-18: "put the cycle pulse, civis journal and the
+  // undocked summary into the Sunday daily news run"): the run after The Cycle
+  // Pulse publishes carries the edition itself, the Civis Systems journal, and
+  // the UNDOCKED digest as sources, not as continuity lookups. Gated on the
+  // edition file landing inside the window — Saturday's print sits inside Sunday
+  // 08:00's 36 h and outside Monday's — so it is the Sunday run by data, not by
+  // clock. The edition and journal are published work and count toward the
+  // router's reported-day bar (publishedExtras).
+  const editionFile = path.join(root, 'output', 'cycle_pulse_c' + cycle + '.md');
+  const editionDay = fs.existsSync(editionFile) && fs.statSync(editionFile).mtimeMs >= cutoff;
+  const extras = [];
+  if (editionDay) {
+    extras.push(artifactRecord(editionFile, 'PUBLISHED_EDITION', cycle, root));
+    // The journal is written at the Cycle fire, days before the edition prints:
+    // cycle-match only, no mtime cutoff.
+    const journalFile = path.join(root, 'output', 'civis-journal', 'civis_journal_c' + cycle + '.md');
+    if (fs.existsSync(journalFile)) extras.push(artifactRecord(journalFile, 'CIVIS_JOURNAL', cycle, root));
+    // The UNDOCKED digest is Saturday's staged piece; ride it even when it fell
+    // out of the window, unless the staged walk already took it.
+    const digestRe = new RegExp('^undocked-digest_c' + cycle + '_.*\\.staged(?:-\\d{3,4})?\\.md$');
+    const digest = walkFiles(path.join(compareDir, 'staged'))
+      .filter((file) => digestRe.test(path.basename(file)))
+      .sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs)[0];
+    if (digest && !records.some((r) => r.file === digest)) extras.push(artifactRecord(digest, 'STAGED', cycle, root));
+  }
+  const eligible = extras.concat(records.sort((a, b) => a.relativePath.localeCompare(b.relativePath)));
+  return {
+    reports: eligible,
+    flagged,
+    editionDay,
+    publishedExtras: extras.filter((r) => r.classification !== 'STAGED').length,
+  };
 }
 
 function reportsFromPulse(pulse, root = ROOT) {
@@ -424,7 +459,11 @@ function buildSourcePack(input) {
     lines.push(
       '### ' + report.classification + ' — ' + report.relativePath,
       '',
-      'This report is ' + (report.classification === 'STAGED'
+      'This report is ' + (report.classification === 'PUBLISHED_EDITION'
+        ? 'The Cycle Pulse, the Tribune\'s published edition for this Cycle — canon, the week\'s reported record. Lead with its stories, by reporter.'
+        : report.classification === 'CIVIS_JOURNAL'
+        ? 'the Civis Systems journal — the in-world data publisher\'s own reading of the week, under its own name; not Tribune reporting.'
+        : report.classification === 'STAGED'
         ? 'behind the publication gate and is not yet canon.'
         : report.classification === 'PREVIOUS_FILING'
           ? 'an exact Rhea-passed filing from the previous completed Cycle and is labeled as continuity, not current reporting.'
@@ -685,7 +724,9 @@ function ensureSource(notebookId, file, title, existingSources) {
 }
 
 function archivePrompt(cycle, reports) {
-  const reportHeads = reports.map((report) => {
+  const reportHeads = reports.filter((report) =>
+    report.classification !== 'PUBLISHED_EDITION' && report.classification !== 'CIVIS_JOURNAL'
+  ).map((report) => {
     const heading = report.body.match(/^#\s+(.+)$/m);
     return '- ' + (heading ? heading[1] : path.basename(report.file));
   }).join('\n');
@@ -738,13 +779,17 @@ function stripDailyNoise(markdown) {
   return out.join('\n');
 }
 
-function dailyPrompt(cycle, hasFlagged) {
+const EDITION_DAY_CLAUSE = ' This is the run after The Cycle Pulse published: carry the edition\'s stories by reporter,' +
+  ' the Civis Systems journal\'s reading of the week, and the UNDOCKED digest.';
+
+function dailyPrompt(cycle, hasFlagged, editionDay) {
   // Gate decisions are no longer part of the news (builder 2026-10-17): they live in
   // the editor's ops report (opsReportPrompt). hasFlagged stays for caller compatibility.
   return 'Prepare The Bay Tribune daily news for Oakland for Cycle ' + cycle +
     ', led by the newsroom\'s own reports, told by reporter, and by what citizens said and lived.' +
     ' Leave out city initiatives, approval ratings, and any engine or audit diagnostics.' +
     ' Drafts the editorial gate held back are not news; do not report on them.' +
+    (editionDay ? EDITION_DAY_CLAUSE : '') +
     ' Close with what the newsroom should watch next.';
 }
 
@@ -790,11 +835,13 @@ async function createOpsReport(config, cycle, sourceIds, runDir, manifest, manif
     ' minutes (nlm report create then 30×30s download poll)');
 }
 
-function dailyAudioFocus(hasDirectionGuide) {
-  if (!hasDirectionGuide) return DAILY_NEWS_IDENTITY;
+function dailyAudioFocus(hasDirectionGuide, editionDay) {
+  const edition = editionDay ? EDITION_DAY_CLAUSE : '';
+  if (!hasDirectionGuide) return DAILY_NEWS_IDENTITY + edition;
   return DAILY_NEWS_IDENTITY +
     ' Follow the 00_AUDIO_DIRECTION_GUIDE source for host persona, tone, and thematic allocation.' +
-    ' The sources are the only truth about this Oakland; use no outside knowledge of any other Oakland.';
+    ' The sources are the only truth about this Oakland; use no outside knowledge of any other Oakland.' +
+    edition;
 }
 
 // Returns true (downloaded), 'failed' (NotebookLM marked the render failed —
@@ -871,6 +918,7 @@ async function run(argv) {
     pulse.hasCitizenDigest = Boolean(citizenDigest);
     routing = dailyRouter.routeDailyNews(pulse, {
       reportedDayThreshold: dailyConfig.reportedDayThreshold,
+      publishedExtras: newsroom ? newsroom.publishedExtras : 0,
     });
     console.log('Daily routing shadow: ' + routing.profile + ' (' + routing.reasonCodes.join(', ') + ')');
   } catch (e) {
@@ -961,6 +1009,7 @@ async function run(argv) {
       path: r.relativePath,
     })),
     flaggedReports: newsroom.flagged.map((r) => r.relativePath),
+    editionDay: newsroom.editionDay === true,
     routingShadow: routing,
     newsroomPulse: {
       fingerprint: pulse.fingerprint,
@@ -1115,7 +1164,7 @@ async function run(argv) {
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
 
   const hasFlagged = newsroom.reports.some((r) => r.classification === 'FLAGGED');
-  const prompt = dailyPrompt(cycle, hasFlagged);
+  const prompt = dailyPrompt(cycle, hasFlagged, newsroom.editionDay === true);
   const briefQuery = nlm([
     'notebook', 'query', config.newsroomNotebookId, prompt,
     '--json', '--source-ids', sourceIds.join(','), '--timeout', '280',
@@ -1184,7 +1233,7 @@ async function run(argv) {
         '--format', presentation.format,
         '--length', presentation.length,
         '--source-ids', audioSourceIds.join(','),
-        '--focus', dailyAudioFocus(Boolean(directionSourceId)),
+        '--focus', dailyAudioFocus(Boolean(directionSourceId), newsroom.editionDay === true),
         '--confirm',
       ]);
       if (!create.ok) throw new Error('daily audio create failed: ' + create.out.slice(0, 400));

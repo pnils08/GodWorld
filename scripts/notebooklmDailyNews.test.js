@@ -8,6 +8,7 @@ const path = require('path');
 const {
   parseArgs,
   cycleFromName,
+  collectNewsroomArtifacts,
   artifactStem,
   reportsFromPulse,
   flaggedFromPulse,
@@ -402,10 +403,17 @@ const syntheticDigest = {
   const title = sourceTitle('current source pack', 999, 'abcdef1234567890');
   assert.strictEqual(title, 'The Bay Tribune Daily C999 — current source pack — abcdef123456');
   const prompt = dailyPrompt(999);
-  assert.strictEqual(SOURCE_VERSION, '1.7');
+  assert.strictEqual(SOURCE_VERSION, '1.8');
+  assert.strictEqual(notebookConfig.dailyNews.reportedDayThreshold, 2, 'builder 2026-10-18: bar lowered from 3');
   assert.strictEqual(DEFAULT_AUDIO_LENGTH, 'default');
   assert.strictEqual(notebookConfig.dailyNews.audioLength, 'default');
   assert(prompt.includes('The Bay Tribune daily news for Oakland for Cycle 999'));
+  assert(!prompt.includes('Civis Systems journal'), 'weekday prompt carries no edition-day clause');
+  const editionPrompt = dailyPrompt(999, false, true);
+  assert(editionPrompt.includes('run after The Cycle Pulse published'));
+  assert(editionPrompt.includes('UNDOCKED digest'));
+  assert(dailyAudioFocus(true, true).includes('Civis Systems journal'));
+  assert(!dailyAudioFocus(true, false).includes('Civis Systems journal'));
   assert(!prompt.includes('GodWorld Oakland, 2042'));
   assert.strictEqual(dailyAudioFocus(), DAILY_NEWS_IDENTITY);
   assert.strictEqual(dailyAudioFocus(false), 'The Bay Tribune daily news for Oakland.');
@@ -520,6 +528,52 @@ const syntheticDigest = {
   ];
   const stale = staleDailySourceIds(list, ['today-src', 'today-guide']);
   assert.deepStrictEqual(stale.sort(), ['old-guide', 'old-src']);
+}
+
+{
+  // Edition day (builder 2026-10-18): the run after The Cycle Pulse publishes
+  // carries the edition, the Civis journal, and the UNDOCKED digest.
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'nlm-edition-day-'));
+  const staged = path.join(root, 'output', 'cron-compare', 'staged');
+  fs.mkdirSync(staged, { recursive: true });
+  fs.mkdirSync(path.join(root, 'output', 'civis-journal'), { recursive: true });
+  const now = Date.now();
+  const hours = 36;
+  const old = new Date(now - 5 * 24 * 3600e3);
+  const edition = path.join(root, 'output', 'cycle_pulse_c777.md');
+  const journal = path.join(root, 'output', 'civis-journal', 'civis_journal_c777.md');
+  const digest = path.join(staged, 'undocked-digest_c777_nia-rook-weekly_packet-v2_x.staged.md');
+  const fresh = path.join(staged, 'wire_c777_someone_packet-v2_x.staged.md');
+  fs.writeFileSync(edition, '# The Cycle Pulse — synthetic\n');
+  fs.writeFileSync(journal, '# Civis Systems Journal — C777\n');
+  fs.writeFileSync(digest, '# UNDOCKED digest synthetic\n');
+  fs.writeFileSync(fresh, '# Synthetic wire\n');
+  fs.utimesSync(journal, old, old);
+  fs.utimesSync(digest, old, old);
+
+  const onEditionDay = collectNewsroomArtifacts(777, hours, now, root);
+  assert.strictEqual(onEditionDay.editionDay, true);
+  assert.strictEqual(onEditionDay.publishedExtras, 2, 'edition + journal count toward the bar');
+  assert.deepStrictEqual(
+    onEditionDay.reports.map((r) => r.classification),
+    ['PUBLISHED_EDITION', 'CIVIS_JOURNAL', 'STAGED', 'STAGED'],
+    'edition first, journal second, stale digest rides, fresh staged follows'
+  );
+  assert(onEditionDay.reports[2].file === digest, 'the out-of-window digest is carried on edition day');
+  const pack = buildSourcePack(Object.assign({}, syntheticInput, {
+    reports: onEditionDay.reports, flagged: [],
+  }));
+  assert(pack.text.includes('PUBLISHED_EDITION — output/cycle_pulse_c777.md'));
+  assert(pack.text.includes('canon, the week\'s reported record'));
+  assert(pack.text.includes('not Tribune reporting'));
+
+  // Edition outside the window (a weekday): journal and stale digest stay out.
+  fs.utimesSync(edition, old, old);
+  const weekday = collectNewsroomArtifacts(777, hours, now, root);
+  assert.strictEqual(weekday.editionDay, false);
+  assert.strictEqual(weekday.publishedExtras, 0);
+  assert.deepStrictEqual(weekday.reports.map((r) => path.basename(r.file)), [path.basename(fresh)]);
+  fs.rmSync(root, { recursive: true, force: true });
 }
 
 console.log('notebooklmDailyNews tests: PASS');

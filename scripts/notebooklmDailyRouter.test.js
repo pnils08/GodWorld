@@ -180,6 +180,20 @@ try {
   assert.strictEqual(reported.format, 'deep_dive');
   assert.strictEqual(reported.activationEligible, true);
 
+  // Edition day (2026-10-18): one Rhea-passed filing plus the edition and the
+  // Civis journal clears a bar of 2; the raw disposition count stays honest.
+  const editionDay = router.routeDailyNews({
+    counts: { passed: 1, angles: 1, quotes: 0, rheaFlagged: 1, neverGated: 0 },
+    cycleChanged: true,
+    filings: { previous: [] },
+    materialSignals: [],
+  }, { reportedDayThreshold: 2, publishedExtras: 2 });
+  assert.strictEqual(editionDay.profile, router.PROFILES.REPORTED_DAY);
+  assert.strictEqual(editionDay.format, 'deep_dive');
+  assert(editionDay.reasonCodes.includes('RHEA_PASSED_1'));
+  assert(editionDay.reasonCodes.includes('PUBLISHED_EXTRAS_2'));
+  assert.strictEqual(editionDay.dispositionCounts.passed, 1);
+
   const provisional = router.routeDailyNews({
     counts: { passed: 1, angles: 1, quotes: 1, rheaFlagged: 0, neverGated: 0 },
     cycleChanged: true,

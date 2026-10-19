@@ -440,6 +440,7 @@ Final gate 2 (`docs/research/2026-10-19-codex-engine302-final-gate-2.md`, HOLD) 
 9. "Yeah I think this looks good to adjust what was built to this , the correction I’d make is that Darrin Davis knows he has a wife and kids from what his wake tells him . Once a name goes into that data he will know his wife and/or kids names. So like Amara Keane , they start to get mentions. The family usage is a good idea I just not sure the media is built to allow that rn , we can start to record these rulings into the plan, may be better to approach this in a clean session so old logic build doesn’t get confused"
 10. "1% is good" (the R16 rate)
 11. "Kids both ways as you suggested" (GC minors reach the ledger through a family link and on their own)
+12. "Paulson is open to the lottery" (2026-10-19 evening, during the cuts 1–3 bench: POP-00527 Mike Paulson, T1, married with no SpouseId, drew a background wife on 1004 at C113 — no exclusion for him)
 
 **Rulings, read (es; build in a clean session, nothing built yet):**
 
@@ -578,3 +579,4 @@ Tests: new `scripts/engine304FamilyLottery.test.js` on the `engine302Marital.tes
 - 2026-10-19 (engine-sheet) — §engine.304 design pass recorded (F1–F9 from six wiring cards + live C112 read; D1–D10; three cuts). Nothing built; codex plan review next.
 - 2026-10-19 (engine-sheet) — codex plan review of the engine.304 design folded (HOLD as written → F9 false, D9 uses the existing orphan-minor household; D2 counts + replay; D3 alias + pending-intake names; D6 arrival revalidated before mint + exact GC row; D7 youth alternates; D10 typed usage walled off from media readers). Review filed to docs/research.
 - 2026-10-19 (engine-sheet) — engine.304 built in three cuts with codex reviews folded per cut (Build block above); cut 1 benched alone, cuts 1–3 bench next; nothing pushed, live header waits for the builder.
+- 2026-10-19 (engine-sheet) — builder statement 12 recorded verbatim: Paulson is open to the lottery (no exclusion).

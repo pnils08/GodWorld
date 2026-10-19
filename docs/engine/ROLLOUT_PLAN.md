@@ -13,12 +13,13 @@
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing, engine.298 live-observing
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 in-progress, engine.264 needs-info, engine.261 ready
 - [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: pipeline.81 live-observing, engine.296 live-observing, engine.297 ready
-- [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]: research.29 live-observing, engine.292 live-observing, engine.291 live-observing
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 needs-info
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
+- [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]: research.29 live-observing, engine.291 live-observing
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
 - [[../reference/DEPLOY_HISTORY]]: engine.213 in-progress, engine.294 live-observing
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.293 live-observing, engine.104 ready
+- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing, engine.300 ready
 - [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 wontfix
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
@@ -54,7 +55,6 @@
 - [[../research/2026-10-11-codex-engine194-cut]]: engine.194 live-observing
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
 - [[../research/2026-10-16-codex-engine285-hazards2-6-review]]: engine.285 live-observing
-- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing, engine.300 ready
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
 - [[../plans/2026-09-19-civic-wake-game-loop]]: engine.253 ready
@@ -137,7 +137,6 @@
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.290 | Transit rides the sim — LIVE PROD `588b0bc5` 2026-10-15 (stage 4d). C112 mint read back: POP-01212 Quintero (Train Conductor), -01213 Oyelaran (Train Operator), -01214 Raghunathan (Rail Dispatcher), -01215 Villaseñor (Track Maintenance Technician) — all BIZ-00014 T4; three at $86,086, the technician $214,800 (engine's own job-rule draw, stands; read the rule first). Open: crew ECL rows + governor (plan §Sequencing 4); Trevor's slice TRANSIT-SLICE-2 first live read. | live-observing | engine-sheet / research-build | [[../plans/2026-10-15-engine-290-transit-rides-the-sim]] |
-| engine.292 | A zero night pushes (credits_sign 0 → void, night_winner > 0). LIVE PROD @136 2026-10-16 (stage 4e, `stage4e-e292.sha256`). C112 read: POP-00301 wager 78fdb90c (c112:POP-00926 credits_sign neg 519) → payout 0, Status void-gate; `voided 1`. As expected. | done-pending-archive | engine-sheet | agy `output/antigravity/2026-10-16-review-research29-undocked-crossover.md` §Hunt 3; [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]] |
 | engine.294 | Raw "$MOOD" in LifeHistory C104–C111 (96 lines): live ECL R291 MOOD fragment Text "$MOOD" (engine.49 drafter). Fixed 71637c7a (loader skips token fragments; composer drops raw tokens), LIVE PROD @138. **R291 flipped Active=no 2026-10-16 on the builder's word** (`undockedEclPoolApply --active no --match '^\$MOOD$' --apply`, read back 1/1). The 96 printed lines stand as lived. C112 read: 0 raw lines in 2,344 — pass | live-observing | engine-sheet | commit 71637c7a; [[../reference/DEPLOY_HISTORY]] §stage 4g |
 | engine.295 | Owner draw → the money game. Read 2026-10-16: the system holds (event losses, median NetWorth +0.02% C106→C111); off-scale = the mint firms' books + heritage Door C, not the draw. Cost-model/cap NOT built. Design session rb + builder; builds come out of the plan's Task 6. → plan | needs-info | research-build | [[../plans/2026-10-16-the-money-game]] |
 | engine.293 | Arrivals born wrong: (1) promotion-door pay (`checkForPromotions_` priced by `lookupIncome_` alone → flat $60k for 18 wave arrivals) now runs the intake's job rule — LIVE PROD @139 stage 4h `bdcfb5c4`, bench @33 vs @34 differs only in 6 arrivals' pay; unmapped titles still land at 60000 until mapped (audit: an arrival at exactly 60000); (2) owner pay = `applyOwnerDraw_` ½ × (revenue − payroll) per cycle, margins 33–90% — builder's call §6 2026-10-16. Read Sun C112: wave arrivals priced by job | live-observing | engine-sheet | [[../plans/2026-08-10-economy-native-rebuild]] §Read 2026-10-16 |

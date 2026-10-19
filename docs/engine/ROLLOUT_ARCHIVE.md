@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S576 Archive Pass (2026-10-19, engine-sheet) — post-S575 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.
+
+- **engine.292** [engine-sheet] — A zero night pushes (credits_sign 0 → void, night_winner > 0). LIVE PROD @136 2026-10-16 (stage 4e, `stage4e-e292.sha256`). C112 read: POP-00301 wager 78fdb90c (c112:POP-00926 credits_sign neg 519) → payout 0, Status void-gate; `voided 1`. As expected. **State at archive:** done-pending-archive. Pointer: agy `output/antigravity/2026-10-16-review-research29-undocked-crossover.md` §Hunt 3; [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]
+
+This pass: 1 rows — engine.292. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S552 Archive Pass (2026-10-11, engine-sheet) — post-S551 closures sweep
 
 2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 engine.*.

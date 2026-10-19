@@ -153,6 +153,14 @@ t('the two new cells seed through engine.148 with their values', () => {
   assert.strictEqual(byKey.gcPoolMaxPerCycle, 12);
 });
 
+t('a blank BirthYear with an explicit Age 0 is a newborn, a blank Age is an adult', () => {
+  const kids = []; for (let i = 0; i < 40; i++) kids.push(['N' + i, 'Row', 0, '', 'Temescal', 'student', 0, 'Cycle 100', '', 'Active', i % 2 ? 'female' : 'male', '']);
+  const blanks = []; for (let i = 0; i < 120; i++) blanks.push(['B' + i, 'Row', '', '', 'Temescal', 'Barista', 0, 'Cycle 100', '', 'Active', 'female', '']);
+  const { ctx, written } = makeCtx(sb, 20, null, blanks.concat(gcAdults(0, 40)).concat(kids));
+  sb.generateGenericCitizens_(ctx);
+  assert.strictEqual(written.length, 0, '120 blank-age women meet the floor, 40 Age-0 rows meet the youth floor');
+});
+
 console.log('P3 the wave takes adults first, minors still');
 const WAVE = [['First', 'Last', 'Neighborhood', 'Status', 'Sex', 'EmergedCycle', 'BirthYear']]
   .concat([['girl', 'x', 'Eastlake', 'Active', 'female', '', 2032], ['woman', 'x', 'Eastlake', 'Active', 'female', '', 1990], ['man', 'x', 'Eastlake', 'Active', 'male', '', 1990]]);
@@ -166,6 +174,12 @@ t('with room for all three, the girl is still taken (kids reach the ledger throu
   const ctx = sparse(sb);
   eq(Object.keys(sb.selectFloorWaveRows_(ctx, WAVE, 2, 3, 4, 5, 113, mulberry32(3), 6)).sort(), ['1', '2', '3']);
 });
+t('a girl with a blank BirthYear and Age 9 stays out of the women-first line', () => {
+  const W2 = [['First', 'Last', 'Neighborhood', 'Status', 'Sex', 'EmergedCycle', 'BirthYear', 'Age']]
+    .concat([['girl', 'x', 'Eastlake', 'Active', 'female', '', '', 9], ['woman', 'x', 'Eastlake', 'Active', 'female', '', '', 34], ['man', 'x', 'Eastlake', 'Active', 'male', '', 1990, '']]);
+  const ctx = sparse(sb); ctx.config.hoodFloorPromotePerCycle = 1;
+  for (let seed = 1; seed <= 20; seed++) eq(Object.keys(sb.selectFloorWaveRows_(ctx, W2, 2, 3, 4, 5, 113, mulberry32(seed), 6, 7)), ['2']);
+});
 t('no BirthYear column passed → today\'s behaviour (no sim-year read)', () => {
   const ctx = sparse(sb); ctx.config.hoodFloorPromotePerCycle = 1;
   const picked = Object.keys(sb.selectFloorWaveRows_(ctx, WAVE, 2, 3, 4, 5, 113, mulberry32(5)));
@@ -176,12 +190,24 @@ console.log('P4 age from BirthYear (D8)');
 t('the wave mint reads BirthYear before the Age column (blank Age is not 30)', () => {
   const c = src('phase05-citizens/checkForPromotions.js');
   assert.ok(/var age = rowBY > 1900 \? simYear - rowBY : Number\(row\[gAge\] \|\| 30\);/.test(c));
-  assert.ok(/selectFloorWaveRows_\(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng, gBirthYear\)/.test(c));
+  assert.ok(/selectFloorWaveRows_\(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng, gBirthYear, gAge\)/.test(c));
 });
 t('both live courtship reads take BirthYear first', () => {
   const b = src('phase05-citizens/bondEngine.js');
   assert.ok(/var gAgeM = Number\(gRowM\[gBirth\]\) \? simYear - Number\(gRowM\[gBirth\]\) : \(Number\(gRowM\[gAge\]\) \|\| 0\);/.test(b));
   assert.ok(/var ga2 = Number\(gr2\[gBirth\]\) \? simYear - Number\(gr2\[gBirth\]\) : \(Number\(gr2\[gAge\]\) \|\| 0\);/.test(b));
+});
+
+t('surfacing: no child under 13 in the acquaintance pool; a teen gets only the neutral line', () => {
+  const e = src('phase05-citizens/generateCitizensEvents.js');
+  assert.ok(/if \(gsAge < 13\) continue;/.test(e));
+  assert.ok(/minor: gsAge < 18/.test(e));
+  assert.ok(/if \(!gcPick\.minor\) \{[\s\S]{0,400}gcT1[\s\S]{0,200}gcT2[\s\S]{0,300}\}\n\s*pool\.push\(makeEntry\(gcT3/.test(e));
+});
+t('the queue mint zeroes a minor\'s income, debt and net worth (GAME rows excepted)', () => {
+  const m = src('phase05-citizens/processAdvancementIntake.js');
+  assert.ok(/if \(age < 18 && String\(clockMode \|\| ''\)\.trim\(\)\.toUpperCase\(\) !== 'GAME'\) \{\s*if \(lIncomeN >= 0\) newRow\[lIncomeN\] = 0;\s*if \(lDebtLevel >= 0\) newRow\[lDebtLevel\] = 0;\s*if \(lNetWorth >= 0\) newRow\[lNetWorth\] = 0;/.test(m));
+  // behaviour: scripts/householdIntake.test.js §2 runs the mint and asserts the kids at 0/0/0
 });
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

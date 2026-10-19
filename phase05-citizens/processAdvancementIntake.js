@@ -893,6 +893,14 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
           if (lNetWorth >= 0) newRow[lNetWorth] = deriveNetWorth_(seed, age, intakePay, profile._careerStage);
         }
       }
+      // engine.304 (codex cut-1 review §5): a minor minted here earns and owns nothing — the S320 convention the
+      // wave mint keeps (checkForPromotions.js); the profile's debt and net worth are adult derivations. A GAME row
+      // is the sports layer's.
+      if (age < 18 && String(clockMode || '').trim().toUpperCase() !== 'GAME') {
+        if (lIncomeN >= 0) newRow[lIncomeN] = 0;
+        if (lDebtLevel >= 0) newRow[lDebtLevel] = 0;
+        if (lNetWorth >= 0) newRow[lNetWorth] = 0;
+      }
       if (lMaritalStatus >= 0) newRow[lMaritalStatus] = profile.MaritalStatus;
       if (lNumChildren >= 0) newRow[lNumChildren] = profile.NumChildren;
       if (householdKey) {

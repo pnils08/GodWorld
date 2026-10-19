@@ -158,7 +158,7 @@ console.log('\n2. the mint — through the populator, wired, one household:');
   check('children on both parents, counted — no phantom kids for the drip', M[col('ChildrenIds')] === kids && D[col('ChildrenIds')] === kids && M[col('NumChildren')] === 2 && D[col('NumChildren')] === 2);
   check('kids carry both parents', JSON.parse(T[col('ParentIds')]).sort().join() === [M[col('POPID')], D[col('POPID')]].sort().join() && JSON.parse(I[col('ParentIds')]).length === 2);
   check('kids are students, youth, childless', T[col('RoleType')] === 'student' && T[col('CareerStage')] === 'student' && T[col('MaritalStatus')] === 'youth' && T[col('NumChildren')] === 0); // engine.302
-  check('kids hold no employer and earn nothing; the adults were placed', T[col('EmployerBizId')] === '' && I[col('EmployerBizId')] === '' && !/Seeking work/.test(T[col('LifeHistory')]) && T[col('Income')] === '' && M[col('EmployerBizId')] !== undefined);
+  check('kids hold no employer, earn nothing and own nothing; the adults were placed', T[col('EmployerBizId')] === '' && I[col('EmployerBizId')] === '' && !/Seeking work/.test(T[col('LifeHistory')]) && T[col('Income')] === 0 && T[col('DebtLevel')] === 0 && T[col('NetWorth')] === 0 && I[col('NetWorth')] === 0 && M[col('EmployerBizId')] !== undefined); // engine.304: the S320 minor convention at this mint too
   check('one HouseholdId on all four, in the intake series', nu.every(r => r[col('HouseholdId')] === 'HH-0106-I001'));
   check('the ascent columns are filled (education, income, net worth, gender, tags)', M[col('EducationLevel')] && M[col('Income')] === 61000 && M[col('NetWorth')] !== '' && M[col('Gender')] === 'male' && D[col('Gender')] === 'female' && M[col('SkillTags')] !== '');
   const hh = w.sheets.Household_Ledger.appended;

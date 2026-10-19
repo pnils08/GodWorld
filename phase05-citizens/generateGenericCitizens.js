@@ -372,8 +372,8 @@ function generateGenericCitizens_(ctx) {
     if (norm(genericValues[pr][iStatus]) !== 'active') continue;
     var psx = iSex >= 0 ? norm(genericValues[pr][iSex]) : '';
     var pby = iBirthYear >= 0 ? (Number(genericValues[pr][iBirthYear]) || 0) : 0;
-    var page = pby > 0 ? poolYear - pby : (iAge >= 0 ? (Number(genericValues[pr][iAge]) || 0) : 0);
-    var pYouth = (pby > 0 || page > 0) && page < 18;
+    var pAgeCell = iAge >= 0 ? String(genericValues[pr][iAge]).trim() : '';
+    var pYouth = pby > 0 ? (poolYear - pby) < 18 : (pAgeCell !== '' && Number(pAgeCell) < 18); // a blank Age is unknown, an explicit 0 a newborn
     if (psx === 'female') { if (pYouth) youthF++; else activeF++; }
     else if (psx === 'male') { if (pYouth) youthM++; else activeM++; }
   }

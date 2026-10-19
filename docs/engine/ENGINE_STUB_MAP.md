@@ -1565,7 +1565,7 @@
   Sheets: Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
-- **selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng, gBirthYear)**
+- **selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng, gBirthYear, gAge)**
   Config: ctx.config.hoodCitizenFloor, ctx.config.hoodFloorPromotePerCycle
 
 - **waveSexPreference_(ctx)**

@@ -2326,7 +2326,8 @@ function generateCitizensEvents_(ctx) {
     var gcSurfVals = gcSurfaceSheet.getDataRange().getValues();
     var gcSurfHead = gcSurfVals[0];
     var gsF = gcSurfHead.indexOf('First'), gsL = gcSurfHead.indexOf('Last'),
-        gsN = gcSurfHead.indexOf('Neighborhood'), gsS = gcSurfHead.indexOf('Status');
+        gsN = gcSurfHead.indexOf('Neighborhood'), gsS = gcSurfHead.indexOf('Status'),
+        gsB = gcSurfHead.indexOf('BirthYear'), gsA = gcSurfHead.indexOf('Age'); // engine.304: the pool holds children now
     gsE = gcSurfHead.indexOf('EmergenceCount');
     gsC = gcSurfHead.indexOf('EmergenceContext');
     if (gsF >= 0 && gsL >= 0 && gsE >= 0) {
@@ -2334,12 +2335,19 @@ function generateCitizensEvents_(ctx) {
         if (gsS >= 0 && String(gcSurfVals[gsi][gsS] || '').toLowerCase() !== 'active') continue;
         var gsName = (String(gcSurfVals[gsi][gsF] || '').trim() + ' ' + String(gcSurfVals[gsi][gsL] || '').trim()).trim();
         if (gsName.indexOf(' ') < 0) continue; // needs first+last
+        // engine.304 (codex cut-1 review §5): the acquaintance lines are adult errands — a child under 13 is not
+        // crossed this way; a teen is offered only the neutral line. Age from BirthYear, Age when it is blank.
+        var gsBY = gsB >= 0 ? (Number(gcSurfVals[gsi][gsB]) || 0) : 0;
+        var gsAgeCell = gsA >= 0 ? String(gcSurfVals[gsi][gsA]).trim() : '';
+        var gsAge = gsBY > 0 ? simYear - gsBY : (gsAgeCell !== '' ? Number(gsAgeCell) : 99);
+        if (gsAge < 13) continue;
         gcSurfacePool.push({
           name: gsName,
           nbhd: gsN >= 0 ? (resolveHoodOrChild_(ctx, gcSurfVals[gsi][gsN]) || String(gcSurfVals[gsi][gsN] || '').trim()) : '', // engine.148: child spellings fold to the parent
           sheetRow: gsi + 1,
           count: Number(gcSurfVals[gsi][gsE]) || 0,
-          ctx0: gsC >= 0 ? String(gcSurfVals[gsi][gsC] || '').trim() : '' // engine.59: roster base
+          ctx0: gsC >= 0 ? String(gcSurfVals[gsi][gsC] || '').trim() : '', // engine.59: roster base
+          minor: gsAge < 18 // engine.304
         });
       }
     }
@@ -2997,11 +3005,13 @@ function generateCitizensEvents_(ctx) {
       // 40+ entry pool (~8% pick => a tick every ~8 cycles, lottery never
       // draws; C102 sandbox verify S320). At 12+11+10 vs ~40 base mass the
       // offered lines win ~45% of picks => ~1 tick/cycle world-wide.
-      pool.push(makeEntry(gcT1, mergeTags(["relationship:acquaintance"], calendarTags), 12, false));
-      pool.push(makeEntry(gcT2, mergeTags(["relationship:acquaintance"], calendarTags), 11, false));
+      if (!gcPick.minor) { // engine.304: a teen is offered only the neutral line
+        pool.push(makeEntry(gcT1, mergeTags(["relationship:acquaintance"], calendarTags), 12, false));
+        pool.push(makeEntry(gcT2, mergeTags(["relationship:acquaintance"], calendarTags), 11, false));
+        gcPendingByText[gcT1] = gcPick;
+        gcPendingByText[gcT2] = gcPick;
+      }
       pool.push(makeEntry(gcT3, mergeTags(["relationship:acquaintance"], calendarTags), 10, false));
-      gcPendingByText[gcT1] = gcPick;
-      gcPendingByText[gcT2] = gcPick;
       gcPendingByText[gcT3] = gcPick;
     }
     if (activeArc && chanceHit(0.5)) {

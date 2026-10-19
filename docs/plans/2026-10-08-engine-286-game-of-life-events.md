@@ -418,6 +418,9 @@ Cut 3 — codex recheck (`docs/research/2026-10-19-codex-engine302-cut3-recheck.
 
 
 
+
+**engine.302 soak results (es 2026-10-19, bench 1004 @58 = stage 6 = stage 5 + cuts 1+2 at `5f057a26`, from `BASELINE-1004-C112b` with the bench MaritalStatus migration applied first — 156 cells, read back clean; C113–C132, 20/20 PASS, 154–240 s; table `output/engine-sheet/2026-10-19-engine302-soak.md`, rows `.jsonl`, beside the engine.300 run):** weddings 0 → 10 citizens married (5 weddings, two of them a divorced citizen remarrying); new bonds 55 → 494 (~25 a week; 16% same hood, 30% adjacent, 54% far, 1% GC courtship); friendships at or above the romance bar 270 → 545; friendship → romance flips 15 (romantic bonds 0 → 19, 5 at the wedding bar by C132); GC courtships 0 → 4; type flips 16 → 377 (the first weeks' burst is the 27 strong colleague bonds deepening, then 10–45 a week); widowings 2; kids 11 → 5 (births need a married couple and the household dice — a different draw order; the read is the builder's); promotions 6 → 7. Cut 3 (divorce) was not in this run (built after; benched in the stage 7 smoke).
+
 ## Changelog
 
 - 2026-10-08 (research-build) — Created: merges the rb read-before and codex's independent run into Agreed / Needs proof / New concepts with pointers; engine.284 folded in; builds on engine.67.

@@ -6,7 +6,7 @@ const packagesApi = require('./newsroomWakePackages');
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
 assert.deepStrictEqual(active.map(row => row.key),
-  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'selena-grant', 'talia-finch', 'celeste-tran']);
+  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'selena-grant', 'talia-finch', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen']);
 
 // pipeline.60 — Nia Rook's UNDOCKED show seat (own desk key, feed-built lane)
 const nia = packages['nia-rook'];
@@ -153,7 +153,7 @@ const modeKeys = {
   offices: ['carmen-delaine', 'luis-navarro', 'rachel-torres'],
   workplace: ['trevor-shimizu', 'angela-reyes', 'mason-ortega', 'business-desk'],
   named: ['lila-mezran', 'tanya-cruz', 'simon-leary', 'elliot-graye', 'kai-marston', 'nia-rook', 'nia-rook-weekly'],
-  street: ['noah-tan', 'freelance-firebrand', 'p-slayer', 'talia-finch', 'maria-keen', 'sharon-okafor', 'celeste-tran'],
+  street: ['noah-tan', 'freelance-firebrand', 'p-slayer', 'talia-finch', 'maria-keen', 'sharon-okafor', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen'],
   records: ['anthony-raines', 'elliot-marbury', 'hal-richmond', 'selena-grant'],
 };
 assert.deepStrictEqual(Object.values(modeKeys).flat().sort(), Object.keys(packages).sort());
@@ -502,11 +502,11 @@ const approaches = {
 };
 
 const rotaPool = activeRotaCandidates(packages);
-assert.equal(rotaPool.length, 24); // + elliot-marbury, data desk (seated 2026-09-30)
+assert.equal(rotaPool.length, 26); // + elliot-marbury (2026-09-30); + Tamsin Pruitt, Ines Sorensen (pipeline.73, landed 2026-10-19)
 assert.deepStrictEqual(
   Object.fromEntries(Object.keys(DAILY_QUOTAS).map(desk => [desk,
     rotaPool.filter(row => row.desk === desk).length])),
-  { civic: 8, sports: 8, culture: 5, business: 1, undocked: 1 }); // celeste-tran's desk is 'wire', outside DAILY_QUOTAS' known buckets
+  { civic: 8, sports: 8, culture: 7, business: 1, undocked: 1 }); // celeste-tran's desk is 'wire', outside DAILY_QUOTAS' known buckets; Tamsin + Ines are culture (COMMUNITY)
 
 // The daily selector supplies at most the declared 2/2/1/1 seats. The package
 // gate normalizes those selected identities but cannot insert the other active

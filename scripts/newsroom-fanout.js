@@ -43,13 +43,15 @@ const DAILY_QUOTAS = { civic: 2, sports: 2, culture: 1, business: 1, undocked: 1
 // stays only for boundDailyAssignments (legacy fanout files) and the tests.
 // Off the grid by ruling: the OakTown Echo six, podcast hosts, photographers,
 // Ariana (data analyst), Rhea (copy chief). Elliot Marbury (data desk) seated
-// Wednesday 2026-09-30 with MARBURY-LEP2-1 + buildMarburySlice.
+// Wednesday 2026-09-30 with MARBURY-LEP2-1 + buildMarburySlice. pipeline.73 (builder
+// 2026-10-14 "That schedule works"): Tamsin Pruitt Lives Mon–Fri, Ines Sorensen Voices
+// Wed–Fri here + her own Sat/Sun --persona crons (the grid has no 0/6 by design).
 const WEEK_GRID = Object.freeze({
-  1: ['carmen-delaine', 'business-desk', 'lila-mezran', 'trevor-shimizu', 'anthony-raines'],
-  2: ['luis-navarro', 'rachel-torres', 'angela-reyes', 'selena-grant'],
-  3: ['freelance-firebrand', 'noah-tan', 'elliot-marbury', 'p-slayer', 'tanya-cruz'],
-  4: ['elliot-graye', 'simon-leary', 'hal-richmond', 'talia-finch'],
-  5: ['mason-ortega', 'kai-marston', 'sharon-okafor', 'maria-keen', 'celeste-tran']
+  1: ['carmen-delaine', 'business-desk', 'lila-mezran', 'trevor-shimizu', 'anthony-raines', 'tamsin-pruitt'],
+  2: ['luis-navarro', 'rachel-torres', 'angela-reyes', 'selena-grant', 'tamsin-pruitt'],
+  3: ['freelance-firebrand', 'noah-tan', 'elliot-marbury', 'p-slayer', 'tanya-cruz', 'tamsin-pruitt', 'ines-sorensen'],
+  4: ['elliot-graye', 'simon-leary', 'hal-richmond', 'talia-finch', 'tamsin-pruitt', 'ines-sorensen'],
+  5: ['mason-ortega', 'kai-marston', 'sharon-okafor', 'maria-keen', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen']
 });
 function weekdayOf(date) {
   return new Date(String(date) + 'T12:00:00Z').getUTCDay();

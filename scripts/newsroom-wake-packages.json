@@ -1498,5 +1498,127 @@
         "a generic culture-desk roundup that abandons the assigned data window"
       ]
     }
+  },
+  "tamsin-pruitt": {
+    "version": "TAMSIN-LIVES-1",
+    "rewardLoop": true,
+    "active": true,
+    "requiredDaily": true,
+    "persona": "tamsin-pruitt",
+    "sourcing": "street",
+    "assignment": {
+      "desk": "culture",
+      "name": "Tamsin Pruitt",
+      "popid": "POP-01210",
+      "beatDomain": "COMMUNITY"
+    },
+    "packetContract": "v2",
+    "models": {
+      "angle": {
+        "provider": "openrouter",
+        "model": "meta-llama/llama-4-maverick"
+      },
+      "report": {
+        "provider": "openrouter",
+        "model": "meta-llama/llama-4-maverick"
+      },
+      "write": {
+        "provider": "openrouter",
+        "model": "x-ai/grok-4.3"
+      }
+    },
+    "reviewProfile": {
+      "id": "tamsin-lives-v1",
+      "canonPolicy": "load-bearing",
+      "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. The page is the city's real calendar; every person on it is one the record holds.",
+      "articleContract": {
+        "renderMode": "SOURCE_BRIEF",
+        "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+        "targetWords": "450-750",
+        "opening": "the heaviest event on the slice, stated as it happened to the named person",
+        "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+      },
+      "authorizedTexture": [
+        "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+        "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+        "the neighborhood the slice names as where the person lives, without an invented street scene",
+        "the order and pacing of the passages — heaviest first, one person at a time"
+      ],
+      "textureConditions": [
+        "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+        "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+        "what came next appears only when a later Cycle's supplied record holds it",
+        "a thin day (few events) is written as a short page, not padded"
+      ],
+      "canonBlockers": [
+        "any person, event, quote, venue, employer or family member not on the slice",
+        "a paraphrased or invented quote",
+        "a cause, diagnosis or outcome the record does not state",
+        "a statistic, rate or trend claim — the page is people, not numbers",
+        "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+        "raw engine labels or decimals printed as public-facing evidence"
+      ]
+    }
+  },
+  "ines-sorensen": {
+    "version": "INES-VOICES-1",
+    "rewardLoop": true,
+    "active": true,
+    "requiredDaily": true,
+    "persona": "ines-sorensen",
+    "sourcing": "street",
+    "thinFloor": 80,
+    "assignment": {
+      "desk": "culture",
+      "name": "Ines Sorensen",
+      "popid": "POP-01211",
+      "beatDomain": "COMMUNITY"
+    },
+    "packetContract": "v2",
+    "models": {
+      "angle": {
+        "provider": "openrouter",
+        "model": "meta-llama/llama-4-maverick"
+      },
+      "report": {
+        "provider": "openrouter",
+        "model": "meta-llama/llama-4-maverick"
+      },
+      "write": {
+        "provider": "openrouter",
+        "model": "x-ai/grok-4.3"
+      }
+    },
+    "reviewProfile": {
+      "id": "ines-voices-v1",
+      "canonPolicy": "load-bearing",
+      "purpose": "Carry what citizens wrote on their own pages into the paper, verbatim and attributed, the day it happened — the line first, then the name, the city only as the frame. Up to four people and one conversation; nothing paraphrased, nothing added.",
+      "articleContract": {
+        "renderMode": "SOURCE_BRIEF",
+        "voice": "a call-in host's ear — the person's own words first, the frame short and plain",
+        "targetWords": "300-600",
+        "opening": "a citizen's own line, verbatim, before their name",
+        "closing": "the last person's own words, left standing — no summary of what the voices add up to"
+      },
+      "authorizedTexture": [
+        "the frame around a quote — who the person is as the ledger line says, where they live, what the page was about",
+        "the order of the voices and the cut between them",
+        "naming that Lives carried the person's event this week, when the slice says so",
+        "the plain respect of letting a line stand without comment"
+      ],
+      "textureConditions": [
+        "every quote is verbatim from the supplied page excerpt; ellipses only for cuts, never for additions",
+        "every person, neighborhood, role and employer must come from the slice",
+        "a day with two pages is written as two passages, not stretched",
+        "no second-hand voice — no 'neighbors say', no composite"
+      ],
+      "canonBlockers": [
+        "any person, page, quote, venue or employer not on the slice",
+        "a paraphrased quote inside quotation marks, or words added to a quote",
+        "a statistic, rate or trend claim drawn from the voices",
+        "a journalist or masthead member quoted as a citizen",
+        "raw engine labels or decimals printed as public-facing evidence"
+      ]
+    }
   }
 }

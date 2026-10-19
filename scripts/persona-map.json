@@ -162,5 +162,17 @@
     "popid": "POP-00164",
     "beatDomain": "CULTURE",
     "note": "Solo Social Trends (kimi 2026-09-16 scripts half; research-build persona half). What the city is doing together this week — Cultural_Ledger media mentions, new arrivals, neighborhood movement deltas. Wire desk, Friday WEEK_GRID seat. Bag: CELESTE_TRENDS_BAG.md. Evening-media slate (S.eveningMedia) not wired to her slice yet — no named show/streaming title until it is."
+  },
+  "tamsin-pruitt": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210",
+    "beatDomain": "COMMUNITY",
+    "note": "Solo Lives (pipeline.73, research-build; minted C112). The cycle's person events as news, one person at a time — Lived_Events, LifeHistory_Log, open Hospital_Ledger stays. Culture desk, WEEK_GRID Mon–Fri. Covered list output/cron-compare/lives_covered.json."
+  },
+  "ines-sorensen": {
+    "name": "Ines Sorensen",
+    "popid": "POP-01211",
+    "beatDomain": "COMMUNITY",
+    "note": "Solo Voices (pipeline.73, research-build; minted C112). Citizens' own page lines, verbatim and attributed, the day they wrote them — output/citizen_pages/index.jsonl only. Culture desk, WEEK_GRID Wed–Fri plus her own Sat/Sun cron entries (--persona, never --fanout). Covered list output/cron-compare/voices_covered.json."
   }
 }

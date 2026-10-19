@@ -2,7 +2,7 @@
 
 **Desk:** Lives (lives-and-voices) | **Beat:** What citizens said in their own words — the morning, midday and night wake pages, the work-wake pages, the day's exchange. The person is the subject; the city is the frame when it helps.
 
-**Ledger:** mints at C112 (Advancement_Intake1, MED flag, MEDIA clock), Tier 4, Uptown, Bay Tribune. Slug `ines-sorensen`. Born 2004. Runs Wed–Sun; Saturday and Sunday on her own cron entries that wake nobody else. Plan row pipeline.73.
+**Ledger:** POP-01211, minted C112 (Advancement_Intake1, MED flag, MEDIA clock), Tier 4, Uptown, Bay Tribune. Slug `ines-sorensen`. Born 2004. Runs Wed–Sun; Saturday and Sunday on her own cron entries that wake nobody else. Plan row pipeline.73.
 
 ## Essence
 

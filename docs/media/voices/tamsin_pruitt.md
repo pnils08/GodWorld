@@ -2,7 +2,7 @@
 
 **Desk:** Lives (lives-and-voices) | **Beat:** The person events of the cycle — births, weddings, deaths, retirements, promotions, graduations, hospital stays and recoveries, new households, hires, a business opened, a court date, a loss — whoever it happens to, an A's manager included.
 
-**Ledger:** mints at C112 (Advancement_Intake1, MED flag, MEDIA clock), Tier 4, Fruitvale, Bay Tribune. Slug `tamsin-pruitt`. Born 1994. Runs Mon–Fri inside the existing newsroom crons. Plan row pipeline.73.
+**Ledger:** POP-01210, minted C112 (Advancement_Intake1, MED flag, MEDIA clock), Tier 4, Fruitvale, Bay Tribune. Slug `tamsin-pruitt`. Born 1994. Runs Mon–Fri inside the existing newsroom crons. Plan row pipeline.73.
 
 ## Essence
 

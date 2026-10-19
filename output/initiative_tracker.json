@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-10-14",
-  "updatedBy": "initiativeTrackerSnapshot.js (live tab, civic tick 2026-10-14T21:17:03.775Z)",
+  "lastUpdated": "2026-10-19",
+  "updatedBy": "buildInitiativePackets.js (auto)",
   "initiatives": [
     {
       "id": "INIT-001",
@@ -26,7 +26,7 @@
       "opensCycle": null,
       "lastStageChangeCycle": 108,
       "lastWorkCycle": 111,
-      "budgetRemaining": 22600000
+      "budgetRemaining": 22200000
     },
     {
       "id": "INIT-002",
@@ -54,7 +54,7 @@
       "opensCycle": null,
       "lastStageChangeCycle": 108,
       "lastWorkCycle": 111,
-      "budgetRemaining": 12019230.76
+      "budgetRemaining": 11778846.14
     },
     {
       "id": "INIT-003",
@@ -106,7 +106,7 @@
       "opensCycle": 88,
       "lastStageChangeCycle": 108,
       "lastWorkCycle": 111,
-      "budgetRemaining": 17307692.3
+      "budgetRemaining": 16961538.45
     },
     {
       "id": "INIT-006",
@@ -219,9 +219,9 @@
       "id": "INIT-010",
       "name": "West Oakland Tenant Defense Fund",
       "keywords": [],
-      "status": "pending-vote",
+      "status": "passed",
       "voteCycle": 112,
-      "vote": null,
+      "vote": "PASSED",
       "budget": "$4.2M",
       "domain": "economic",
       "neighborhoods": [
@@ -234,10 +234,10 @@
         "nextScheduledAction": "Committee hearing and vote",
         "nextActionCycle": 112
       },
-      "stage": "Proposed",
-      "state": "Proposed — a passed council vote funds it",
+      "stage": "Funded",
+      "state": "Funded — one work move stands it up",
       "opensCycle": null,
-      "lastStageChangeCycle": null,
+      "lastStageChangeCycle": 112,
       "lastWorkCycle": null,
       "budgetRemaining": 4200000
     },
@@ -265,7 +265,7 @@
       "opensCycle": null,
       "lastStageChangeCycle": null,
       "lastWorkCycle": null,
-      "budgetRemaining": null
+      "budgetRemaining": 2500000
     }
   ]
 }

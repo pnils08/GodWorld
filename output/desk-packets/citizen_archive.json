@@ -2,7 +2,7 @@
   "Mike Paulson": {
     "popId": "POP-00527",
     "name": "Mike Paulson",
-    "totalRefs": 10,
+    "totalRefs": 11,
     "articles": [
       {
         "source": "",
@@ -53,6 +53,11 @@
         "source": "",
         "title": "Bulls GM — first-year, Warriors interest confirmed",
         "cycle": "84"
+      },
+      {
+        "source": "Tanya Cruz",
+        "title": "sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3",
+        "cycle": "111"
       }
     ]
   },
@@ -292,7 +297,7 @@
   "Mark Aitken": {
     "popId": "POP-00003",
     "name": "Mark Aitken",
-    "totalRefs": 9,
+    "totalRefs": 10,
     "articles": [
       {
         "source": "",
@@ -338,6 +343,11 @@
         "source": "Hal Richmond",
         "title": "sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat",
         "cycle": "105"
+      },
+      {
+        "source": "Tanya Cruz",
+        "title": "sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3",
+        "cycle": "111"
       }
     ]
   },
@@ -428,7 +438,7 @@
   "Benji Dillon": {
     "popId": "POP-00018",
     "name": "Benji Dillon",
-    "totalRefs": 12,
+    "totalRefs": 13,
     "articles": [
       {
         "source": "",
@@ -489,13 +499,18 @@
         "source": "Tanya Cruz",
         "title": "sports_c110_tanya-cruz_packet-v2_x-ai-grok-4-3",
         "cycle": "110"
+      },
+      {
+        "source": "Tanya Cruz",
+        "title": "sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3",
+        "cycle": "111"
       }
     ]
   },
   "Avery Santana": {
     "popId": "POP-00034",
     "name": "Avery Santana",
-    "totalRefs": 10,
+    "totalRefs": 11,
     "articles": [
       {
         "source": "",
@@ -546,6 +561,11 @@
         "source": "Luis Navarro",
         "title": "civic_c110_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
         "cycle": "110"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+        "cycle": "111"
       }
     ]
   },
@@ -646,7 +666,7 @@
   "Brenda Okoro": {
     "popId": "POP-00037",
     "name": "Brenda Okoro",
-    "totalRefs": 3,
+    "totalRefs": 4,
     "articles": [
       {
         "source": "",
@@ -662,6 +682,11 @@
         "source": "Carmen Delaine",
         "title": "civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
         "cycle": "110"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+        "cycle": "111"
       }
     ]
   },
@@ -771,7 +796,7 @@
   "Lena Cross": {
     "popId": "POP-00539",
     "name": "Lena Cross",
-    "totalRefs": 3,
+    "totalRefs": 4,
     "articles": [
       {
         "source": "",
@@ -787,6 +812,11 @@
         "source": "",
         "title": "Celebrity/Arts, Uptown",
         "cycle": "80"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+        "cycle": "111"
       }
     ]
   },
@@ -852,7 +882,7 @@
   "Nina Reyes": {
     "popId": "POP-01057",
     "name": "Nina Reyes",
-    "totalRefs": 2,
+    "totalRefs": 3,
     "articles": [
       {
         "source": "",
@@ -863,6 +893,11 @@
         "source": "",
         "title": "actress, 10, rising",
         "cycle": "79"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+        "cycle": "111"
       }
     ]
   },
@@ -903,7 +938,7 @@
   "Rowan Pierce": {
     "popId": "POP-00545",
     "name": "Rowan Pierce",
-    "totalRefs": 2,
+    "totalRefs": 3,
     "articles": [
       {
         "source": "",
@@ -914,13 +949,18 @@
         "source": "",
         "title": "journalist, 55",
         "cycle": "79"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+        "cycle": "111"
       }
     ]
   },
   "Tara Ellison": {
     "popId": "POP-00546",
     "name": "Tara Ellison",
-    "totalRefs": 3,
+    "totalRefs": 4,
     "articles": [
       {
         "source": "",
@@ -936,6 +976,11 @@
         "source": "Kai Marston",
         "title": "culture_c108_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
         "cycle": "108"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+        "cycle": "111"
       }
     ]
   },
@@ -1197,7 +1242,7 @@
   "Denise Carter": {
     "popId": "POP-00501",
     "name": "Denise Carter",
-    "totalRefs": 8,
+    "totalRefs": 9,
     "articles": [
       {
         "source": "",
@@ -1238,6 +1283,11 @@
         "source": "Carmen Delaine",
         "title": "civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
         "cycle": "110"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+        "cycle": "111"
       }
     ]
   },
@@ -1476,7 +1526,7 @@
   "Marcus Webb": {
     "popId": "POP-00790",
     "name": "Marcus Webb",
-    "totalRefs": 2,
+    "totalRefs": 3,
     "articles": [
       {
         "source": "",
@@ -1487,6 +1537,11 @@
         "source": "Carmen Delaine",
         "title": "civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
         "cycle": "110"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+        "cycle": "111"
       }
     ]
   },
@@ -2257,7 +2312,7 @@
     ]
   },
   "Jose Johnson": {
-    "popId": "POP-00968",
+    "popId": "POP-01204",
     "name": "Jose Johnson",
     "totalRefs": 3,
     "articles": [
@@ -3321,7 +3376,7 @@
   "Melton Neilon": {
     "popId": "POP-00170",
     "name": "Melton Neilon",
-    "totalRefs": 11,
+    "totalRefs": 12,
     "articles": [
       {
         "source": "Dr. Lila Mezran",
@@ -3377,6 +3432,11 @@
         "source": "Talia Finch",
         "title": "sports_c110_talia-finch_packet-v2_openai-gpt-5-6-luna",
         "cycle": "110"
+      },
+      {
+        "source": "Talia Finch",
+        "title": "sports_c111_talia-finch_packet-v2_openai-gpt-5-6-luna",
+        "cycle": "111"
       }
     ]
   },
@@ -3439,7 +3499,7 @@
   "Rick Walker": {
     "popId": "POP-00198",
     "name": "Rick Walker",
-    "totalRefs": 11,
+    "totalRefs": 12,
     "articles": [
       {
         "source": "Sgt. Rachel Torres",
@@ -3495,6 +3555,11 @@
         "source": "Talia Finch",
         "title": "sports_c110_talia-finch_packet-v2_openai-gpt-5-6-luna",
         "cycle": "110"
+      },
+      {
+        "source": "Talia Finch",
+        "title": "sports_c111_talia-finch_packet-v2_openai-gpt-5-6-luna",
+        "cycle": "111"
       }
     ]
   },
@@ -4015,7 +4080,7 @@
   "Joel Wren": {
     "popId": "POP-00218",
     "name": "Joel Wren",
-    "totalRefs": 3,
+    "totalRefs": 4,
     "articles": [
       {
         "source": "Trevor Shimizu",
@@ -4031,6 +4096,11 @@
         "source": "Trevor Shimizu",
         "title": "civic_c109_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
         "cycle": "109"
+      },
+      {
+        "source": "Trevor Shimizu",
+        "title": "civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+        "cycle": "111"
       }
     ]
   },
@@ -4603,6 +4673,102 @@
         "source": "Luis Navarro",
         "title": "civic_c110_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
         "cycle": "110"
+      }
+    ]
+  },
+  "Elle Lilo": {
+    "popId": "POP-00177",
+    "name": "Elle Lilo",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Jordan Velez",
+        "title": "business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5",
+        "cycle": "111"
+      }
+    ]
+  },
+  "Blair Patel": {
+    "popId": "POP-00189",
+    "name": "Blair Patel",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Jordan Velez",
+        "title": "business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5",
+        "cycle": "111"
+      }
+    ]
+  },
+  "Elena Leon": {
+    "popId": "POP-00193",
+    "name": "Elena Leon",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Jordan Velez",
+        "title": "business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5",
+        "cycle": "111"
+      }
+    ]
+  },
+  "Dmitri Soto": {
+    "popId": "POP-00276",
+    "name": "Dmitri Soto",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Jordan Velez",
+        "title": "business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5",
+        "cycle": "111"
+      }
+    ]
+  },
+  "Evan Lewis": {
+    "popId": "POP-00200",
+    "name": "Evan Lewis",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Trevor Shimizu",
+        "title": "civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+        "cycle": "111"
+      }
+    ]
+  },
+  "Ray Neal": {
+    "popId": "POP-00448",
+    "name": "Ray Neal",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Trevor Shimizu",
+        "title": "civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+        "cycle": "111"
+      }
+    ]
+  },
+  "Calvin Mwangi": {
+    "popId": "POP-00573",
+    "name": "Calvin Mwangi",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Trevor Shimizu",
+        "title": "civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+        "cycle": "111"
+      }
+    ]
+  },
+  "Alma Vasquez": {
+    "popId": "POP-01063",
+    "name": "Alma Vasquez",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Kai Marston",
+        "title": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+        "cycle": "111"
       }
     ]
   }

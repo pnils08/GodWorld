@@ -1,5 +1,5 @@
 {
-  "cycle": 111,
+  "cycle": 112,
   "mayor": "Avery Santana",
   "executiveBranch": {
     "mayor": "Avery Santana",
@@ -8,7 +8,7 @@
       "title": "Mayor",
       "popId": "POP-00034",
       "status": "active",
-      "approvalRating": "69"
+      "approvalRating": "72"
     },
     "deputyMayor": "Brenda Okoro",
     "deputyMayorDetail": {
@@ -487,7 +487,7 @@
       "name": "Oakland Youth Apprenticeship Pipeline",
       "id": "INIT-007",
       "status": "announced",
-      "voteBreakdown": "[ENGINE-CLOCK n=3 from=C109] Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (OUSD MOU C76, Peralta MOU C78, budget allocation C80, A's commitment C83) unverified.",
+      "voteBreakdown": "[ENGINE-CLOCK n=3 from=C109] Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (Oakland City Schools MOU C76, Oakland Community College District MOU C78, budget allocation C80, A's commitment C83) unverified.",
       "implementationPhase": null,
       "nextScheduledAction": null,
       "nextActionCycle": null
@@ -498,8 +498,8 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)",
       "implementationPhase": "disbursement-active",
-      "nextScheduledAction": "Month-ten disbursement review",
-      "nextActionCycle": 111
+      "nextScheduledAction": "Month-eleven disbursement review",
+      "nextActionCycle": 112
     },
     {
       "name": "Oakland Alternative Response Initiative",
@@ -509,6 +509,15 @@
       "implementationPhase": "dispatch-live",
       "nextScheduledAction": "Quarterly outcome report",
       "nextActionCycle": 112
+    },
+    {
+      "name": "Fruitvale Transit Hub Phase II — Visioning",
+      "id": "INIT-003",
+      "status": "PASSED",
+      "voteBreakdown": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented.",
+      "implementationPhase": "design-phase",
+      "nextScheduledAction": "Preliminary schematics community review",
+      "nextActionCycle": 114
     },
     {
       "name": "Temescal Community Health Center",
@@ -525,7 +534,16 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes.",
       "implementationPhase": "construction-active",
-      "nextScheduledAction": "Remediation completion and construction milestone review",
+      "nextScheduledAction": "Construction milestone review",
+      "nextActionCycle": 115
+    },
+    {
+      "name": "West Oakland Tenant Defense Fund",
+      "id": "INIT-010",
+      "status": "PASSED",
+      "voteBreakdown": "Proposed by Denise Carter in the C109 week — eviction filings outpacing Stabilization Fund relief.\nCycle 112: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Leonard Tran voted yes. Ramon Vega voted yes.",
+      "implementationPhase": "vote-scheduled",
+      "nextScheduledAction": "Committee hearing and vote",
       "nextActionCycle": 112
     }
   ]

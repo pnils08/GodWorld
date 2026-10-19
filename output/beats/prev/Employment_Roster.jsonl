@@ -631,14 +631,14 @@
 {"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00770","CitizenName":"Kato Rivers","RoleType":"Fitness Trainer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
 {"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00771","CitizenName":"Sage Vienta","RoleType":"Actor","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00028","POP_ID":"POP-00772","CitizenName":"Beverly Hayes","RoleType":"Community Director, West Oakland Community Center","Status":"Active","MappingLayer":"keyword"}
-{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00773","CitizenName":"Jada Rayes","RoleType":"Editor-in-Chief, OakTown Echo","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00774","CitizenName":"Malik Hayes","RoleType":"Lead Investigator, OakTown Echo","Status":"UNTRACKED","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00775","CitizenName":"Sam Alvarez","RoleType":"Civic & Neighborhood Reporter, OakTown Echo","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00776","CitizenName":"Kwame Ellis","RoleType":"Civic Opinion Columnist, OakTown Echo","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00777","CitizenName":"Rico Valdez","RoleType":"Lead Sports Reporter, OakTown Echo","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00778","CitizenName":"Jamal Thompson","RoleType":"Fan & Culture Columnist, OakTown Echo","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00779","CitizenName":"Nia Patel","RoleType":"Economics Reporter, OakTown Echo","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00780","CitizenName":"Delin Morales","RoleType":"Senior Photographer, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00099","POP_ID":"POP-00773","CitizenName":"Jada Rayes","RoleType":"Editor-in-Chief, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00099","POP_ID":"POP-00774","CitizenName":"Malik Hayes","RoleType":"Lead Investigator, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00099","POP_ID":"POP-00775","CitizenName":"Sam Alvarez","RoleType":"Civic & Neighborhood Reporter, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00099","POP_ID":"POP-00776","CitizenName":"Kwame Ellis","RoleType":"Civic Opinion Columnist, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00099","POP_ID":"POP-00777","CitizenName":"Rico Valdez","RoleType":"Lead Sports Reporter, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00099","POP_ID":"POP-00778","CitizenName":"Jamal Thompson","RoleType":"Fan & Culture Columnist, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00099","POP_ID":"POP-00779","CitizenName":"Nia Patel","RoleType":"Economics Reporter, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00099","POP_ID":"POP-00780","CitizenName":"Delin Morales","RoleType":"Senior Photographer, OakTown Echo","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00038","POP_ID":"POP-00781","CitizenName":"Vanessa Treary","RoleType":"Barista","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"UNTRACKED","POP_ID":"POP-00782","CitizenName":"Devon Willis","RoleType":"Server","Status":"UNTRACKED","MappingLayer":"unmatched"}
 {"BIZ_ID":"BIZ-00036","POP_ID":"POP-00783","CitizenName":"Yuki Ji","RoleType":"Bartender","Status":"Active","MappingLayer":"existing"}

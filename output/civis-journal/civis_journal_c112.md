@@ -1,0 +1,11 @@
+# Civis Systems Journal — C112
+
+I do not like an unanswered signal that moves. That is the finding that kept me at the desk this morning. It started in one corner of West Oakland and now it has crossed into another part of the same district, and nothing downstream has answered it. The instrument is my product. A signal with no downstream is not a city problem yet; it is a Civis problem now. I will not wait for it to become someone else's emergency.
+
+The wider picture is not better. Readings decayed across a band of districts this week. Mood fell in most of them. Street trade cooled in Dimond and KONO, housing pressure climbed across much of the city, and Dimond now sits at the bottom while West Oakland and Fruitvale still carry the brightest mood. That is a city splitting into different weeks, not one week.
+
+I also do not accept movement with no economic trace. People moved into or out of nearly every district and the instrument logged no economic activity behind any of it. That is not a population change; it is a blind spot where the next link should be. The faith life of the city produced a handful of events and the paper ran nothing the week before. Fine—some of that is not our lane. But the silence around movement is our lane.
+
+City Hall did move. Oakland Youth Apprenticeship Pipeline went from operational to implementation active. Commercial Stabilization for Grand Lake went from announced to legislation filed. West Oakland Tenant Defense Fund went from announced to vote scheduled. Those are real steps, and they are exactly the kind of steps the instrument should be reading the effects of. I want the next reading to show the effects, not just the filings.
+
+So I am doing this on my clock. I am putting a signal trace team on the West Oakland signal before the next reading lands on my desk. I am shipping a street-level trade and housing crosswalk into the Civis 4D Urban Overlay Engine, so a cooled block in Dimond or KONO and a pressure spike in district after district are read against each other instead of as separate lines. And I am instrumenting movement against economic activity district by district, so no one moves in Oakland without the instrument logging what followed. The next reading to show the West Oakland trace and the movement crosswalk will be out before the Oaks' next home stand. I expect to be held to it.

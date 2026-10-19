@@ -7,3 +7,5 @@
 {"Cycle":"110","Entry":"REVENUE","Amount":"153351","Counterparty":"COURT","BalanceAfter":"105153851","Note":"34 cleared charges, fined at the hood rate"}
 {"Cycle":"111","Entry":"REVENUE","Amount":"5000000","Counterparty":"WEEKLY-ALLOCATION","BalanceAfter":"110153851","Note":"weekly budget allocation"}
 {"Cycle":"111","Entry":"REVENUE","Amount":"135242","Counterparty":"COURT","BalanceAfter":"110289093","Note":"30 cleared charges, fined at the hood rate"}
+{"Cycle":"112","Entry":"REVENUE","Amount":"5000000","Counterparty":"WEEKLY-ALLOCATION","BalanceAfter":"115289093","Note":"weekly budget allocation"}
+{"Cycle":"112","Entry":"REVENUE","Amount":"122035","Counterparty":"COURT","BalanceAfter":"115411128","Note":"27 cleared charges, fined at the hood rate"}

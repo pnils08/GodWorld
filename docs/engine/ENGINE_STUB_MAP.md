@@ -1353,6 +1353,8 @@
 
 - **deepenBondToFriendship_(ctx, bond, cycle)**
 
+- **bondPairDivorced_(ctx, A, B)**
+
 - **processRomanceAndMarriage_(ctx)**
   Reads: S.cycleId, S.relationshipBonds, S.storyHooks
   Writes: S.storyHooks
@@ -2155,12 +2157,13 @@
 
 - **processMarriages_(ss, citizens, cycle)**
 
+- **applyDivorceEditsToHouseholds_(households, divorces)**
+
 - **divorceCrisisKinds_(row, h, cycle, into)**
 
 - **processDivorces_(ctx, households, cycle)**
   Reads: S.relationshipBonds, S.relationshipBondsLoaded, S.storyHooks
   Writes: S.storyHooks
-  Sheets: Household_Ledger
 
 - **updateHouseholdIncomes_(ctx, households, citizens)**
   Sheets: Household_Ledger
@@ -4757,4 +4760,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1714
+**Functions mapped:** 1716

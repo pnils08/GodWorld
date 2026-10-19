@@ -2226,6 +2226,15 @@ function deepenBondToFriendship_(ctx, bond, cycle) {
   if (pB) appendBondLifeLine_(ctx, pB.idx, 'Bond', line(nameOf(pA, bond.citizenA)), cycle);
 }
 
+// engine.302: did this pair's marriage end in divorce? Either partner's LifeHistory carries "[Divorce] the marriage to
+// <the other's name> ended" (processDivorces_, householdFormationEngine).
+function bondPairDivorced_(ctx, A, B) {
+  var iLife = ctx.ledger.headers.indexOf('LifeHistory');
+  if (iLife < 0) return false;
+  var la = String(ctx.ledger.rows[A.idx][iLife] || ''), lb = String(ctx.ledger.rows[B.idx][iLife] || '');
+  return la.indexOf('[Divorce] the marriage to ' + B.name + ' ended') >= 0 || lb.indexOf('[Divorce] the marriage to ' + A.name + ' ended') >= 0;
+}
+
 function processRomanceAndMarriage_(ctx) {
   if (!ctx.ledger || !ctx.ledger.rows || !ctx.ledger.rows.length) return;
   var rng = safeRand_(ctx);
@@ -2242,6 +2251,15 @@ function processRomanceAndMarriage_(ctx) {
     if (!bond || bond.status !== BOND_STATUS.ACTIVE) continue;
     var A = people[bond.citizenA], B = people[bond.citizenB];
     if (!A || !B) continue;
+
+    // engine.302 (codex final gate B4): the ledger's [Divorce] lines are the durable record of a divorce; a romantic bond
+    // still active between the pair (its replace did not land) is resolved here, never re-married
+    if (bond.bondType === BOND_TYPES.ROMANTIC && bondPairDivorced_(ctx, A, B)) {
+      bond.status = BOND_STATUS.RESOLVED;
+      bond.notes = String(bond.notes || '') + ' [Divorced — record caught up C' + cycle + ']';
+      bond.lastUpdate = cycle;
+      continue;
+    }
 
     var bothCanCourt = bondCanCourt_(people, bond.citizenA) && bondCanCourt_(people, bond.citizenB); // engine.302
     var ageA = A.birthYear > 0 ? simYear - A.birthYear : 0;
@@ -2365,7 +2383,6 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
     // The formation reconciler drops them from the old row's Members on its next pass.
     var oldHid = String(joiner.householdId || '').trim();
     var iHHk = idx('HouseholdId'), iParK = idx('ParentIds'), iBirthK = idx('BirthYear'), iPopK = idx('POPID');
-    var leaving = [joinerId]; // the old row's Members lose the joiner and every child who moves (codex diff review H3)
     if (oldHid && oldHid !== joinTarget.hid && iHHk >= 0 && iParK >= 0 && iBirthK >= 0 && iPopK >= 0) {
       var simYk = simYearOf_(ctx, ctx.summary.cycleId || ctx.config.cycleCount || 0);
       for (var mk = 0; mk < ctx.ledger.rows.length; mk++) {
@@ -2378,15 +2395,11 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
         krow[iHHk] = joinTarget.hid;
         var kpop = String(krow[iPopK] || '').trim();
         if (kpop && jm.indexOf(kpop) < 0) jm.push(kpop);
-        if (kpop) leaving.push(kpop);
         ctx.ledger.dirty = true;
       }
-      var oldInfo = findHH(oldHid);
-      if (!oldInfo) Logger.log('marryCitizens_: old household ' + oldHid + ' has no active Household_Ledger row — its Members left to the reconciler (engine.302)');
-      if (oldInfo) {
-        var oldMem = oldInfo.members.filter(function (m) { return leaving.indexOf(String(m).trim()) < 0; });
-        if (oldMem.length !== oldInfo.members.length) hhSheet0.getRange(oldInfo.row, hv[0].indexOf('Members') + 1).setValue(JSON.stringify(oldMem));
-      }
+      // The old row's Members are not written here (codex final gate): the same Cycle's Phase5-HouseholdFormation
+      // reconcile rebuilds every row's Members from the ledger's HouseholdIds — which already carry the move — before
+      // anything reads them.
     }
     hhSheet0.getRange(joinTarget.info.row, hv[0].indexOf('Members') + 1).setValue(JSON.stringify(jm));
     var iHH0 = idx('HouseholdId');

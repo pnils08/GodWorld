@@ -233,6 +233,7 @@ function processHouseholdFormation_(ctx) {
     // land in the objects stress and the dissolution roll consume.
     results.fundDisbursement = applyFundDisbursement_(ctx, cycle);
     households = loadHouseholds_(ss);
+    applyDivorceEditsToHouseholds_(households, divorces); // engine.302: the reload reads the row, which the divorce left to next Cycle's reconcile
 
     // Detect household stress
     var stressedHouseholds = detectHouseholdStress_(ss, households);
@@ -720,9 +721,18 @@ function reconcileHouseholds_(ctx, cycle) {
       lrow[lMembers] = recordedJson; rowChanged = true; out.membersRebuilt++;
     }
     if (actual.length > 0) {
-      // Head must be a member; keep if so, else first (sorted) member
+      // Head must be a member; keep if so, else the first (sorted) adult member — engine.302: a divorce or a
+      // remarriage that moves the head out must never leave a child heading the home — else the first member
       var head = lrow[lHead];
-      if (actual.indexOf(head) < 0) { lrow[lHead] = actual[0]; head = actual[0]; rowChanged = true; }
+      if (actual.indexOf(head) < 0) {
+        var adultHead = '';
+        for (var ah = 0; ah < actual.length && !adultHead; ah++) {
+          var aRow = citizenByPOPID[actual[ah]];
+          var aBy = aRow && iBirthYear >= 0 ? Number(aRow[iBirthYear]) || 0 : 0;
+          if (!(aBy > 0 && simYear - aBy < 18)) adultHead = actual[ah];
+        }
+        lrow[lHead] = adultHead || actual[0]; head = lrow[lHead]; rowChanged = true;
+      }
       // Neighborhood follows the head's real one
       var headRow = citizenByPOPID[head];
       var realHood = headRow && iNeighborhood >= 0 ? (headRow[iNeighborhood] || '') : '';
@@ -976,13 +986,28 @@ function processMarriages_(ss, citizens, cycle) {
 // The ledger (statuses, SpouseId, HouseholdId, [Divorce] lines) commits at Phase10-CommitLedger, the bond at the
 // Phase10-Bonds master replace (a couple waits a Cycle when the bond load did not certify), the hook with the story
 // writer; a Cycle that crosses the wall resumes the whole intent tail (engine.95 checkpoint); a replace that fails is a
-// persist error on the fire, the same class as every bond change (weddings, flips, deepenings). The household row is
-// written direct, own-tab class, BEFORE the ledger changes — one checked write of the row (Members, the head when the
-// head left, an off-camera couple's type); if it fails, the marriage stands this Cycle.
+// persist error on the fire; and the ledger's [Divorce] lines are the durable record — a romantic bond still active
+// between a pair whose record says they divorced is resolved by the romance pass (bondEngine) the next Cycle. No sheet
+// is written here: this pass's households change in memory and are re-applied after the post-fund reload; the row is
+// rebuilt from the ledger by next Cycle's reconcile.
 // Family_Relationships keeps its married row as history.
 var DIVORCE_CRISIS_WINDOW = 13; // Cycles (a quarter year) — the builder's dial
 var DIVORCE_CRISIS_COUNT = 3;   // distinct kinds, at least one a major loss — the builder's dial
 var DIVORCE_MAJOR_KINDS = { default: true, bereaved: true, jobless: true, forcedSale: true };
+
+// engine.302: this Cycle's divorces re-applied to a freshly loaded household list (in memory only).
+function applyDivorceEditsToHouseholds_(households, divorces) {
+  if (!divorces || !divorces.length) return;
+  var byId = {};
+  for (var i = 0; i < households.length; i++) byId[String(households[i].householdId)] = households[i];
+  for (var d = 0; d < divorces.length; d++) {
+    var dv = divorces[d], hh = dv.edit && byId[String(dv.householdId)];
+    if (!hh) continue;
+    if (dv.edit.Members) hh.members = JSON.parse(dv.edit.Members);
+    if (dv.edit.HeadOfHousehold) hh.headOfHousehold = dv.edit.HeadOfHousehold;
+    if (dv.edit.HouseholdType) hh.householdType = dv.edit.HouseholdType;
+  }
+}
 
 function divorceCrisisKinds_(row, h, cycle, into) {
   var within = function (l) { var n = Number(l); return n > 0 && n === Math.floor(n) && n <= cycle && cycle - n < DIVORCE_CRISIS_WINDOW; }; // a whole Cycle, never ahead
@@ -1049,6 +1074,12 @@ function processDivorces_(ctx, households, cycle) {
     // is a malformed link — skipped, never divorced alone. A spouse who has left the ledger (traded away, archived)
     // is off the record now: the marriage is judged like an off-camera one, on this citizen's record alone.
     if (sp && si >= 0 && !couple) { Logger.log('processDivorces_: ' + pop + ' SpouseId ' + sp + ' is not a reciprocal married pair — skipped'); continue; }
+    // codex final gate B3: an absent SpouseId is off the record only when Citizen_Archive holds that POPID; an unknown
+    // POPID is an unproven link — skipped, never divorced
+    if (sp && si < 0) {
+      var archived = (typeof citizenArchiveLatestByPop_ === 'function') ? citizenArchiveLatestByPop_(ctx, h) : {};
+      if (!archived[sp.toUpperCase()]) { Logger.log('processDivorces_: ' + pop + ' SpouseId ' + sp + ' is on neither the ledger nor the archive — skipped'); continue; }
+    }
     // codex B4: a couple's bond change rides the bond master replace, which a load that did not certify never queues
     // (bondPersistence.js saveRelationshipBonds_) — the couple's divorce waits a Cycle rather than split the record
     if (couple && !(ctx.summary && ctx.summary.relationshipBondsLoaded === true)) { Logger.log('processDivorces_: bond load not certified — ' + pop + ' + ' + sp + ' wait'); continue; }
@@ -1099,29 +1130,11 @@ function processDivorces_(ctx, households, cycle) {
         rowEdit = { HouseholdType: ownInc >= SOLO_INCOME_FLOOR ? 'solo' : 'single' };
       }
     }
-    // the household row: stress and dissolution reload the sheet after the fund pass, so a home sold this Cycle must
-    // not pay the one who left. One read, the row's HouseholdId checked, one write of the whole row — and only then
-    // the ledger changes. A write that fails leaves the marriage as it was this Cycle (logged); each cell is one the
-    // reconciler rebuilds from the ledger next pass (Members, the type) or a member it keeps (the stayer as head).
-    if (rowEdit) {
-      try {
-        var hs = ctx.ss.getSheetByName('Household_Ledger');
-        var lastCol = hs.getLastColumn();
-        var hHead = hs.getRange(1, 1, 1, lastCol).getValues()[0];
-        var cId = hHead.indexOf('HouseholdId');
-        var cur = hs.getRange(hh.rowIndex, 1, 1, lastCol).getValues()[0];
-        if (cId < 0 || String(cur[cId]).trim() !== rowHid) throw new Error('Household_Ledger row ' + hh.rowIndex + ' is not ' + rowHid);
-        for (var ek in rowEdit) {
-          if (!rowEdit.hasOwnProperty(ek)) continue;
-          var ec = hHead.indexOf(ek);
-          if (ec < 0) throw new Error('Household_Ledger has no ' + ek + ' column');
-          cur[ec] = rowEdit[ek];
-        }
-        hs.getRange(hh.rowIndex, 1, 1, lastCol).setValues([cur]);
-      } catch (eRow) {
-        Logger.log('processDivorces_: ' + pop + ' — household row not written (' + eRow.message + '); the marriage stands this Cycle');
-        continue;
-      }
+    // No sheet write here (codex final gate B4). This pass's households change in memory — the income pass reads them,
+    // and processHouseholdFormation_ re-applies the same edits after its post-fund reload, so stress, dissolution and a
+    // forced sale see the one who left as gone. The row itself is rebuilt from the ledger by next Cycle's reconcile
+    // (Members from HouseholdId, the head to an adult member, the type from the head's status).
+    if (rowEdit && hh) {
       if (rowEdit.Members) hh.members = JSON.parse(rowEdit.Members);
       if (rowEdit.HeadOfHousehold) hh.headOfHousehold = rowEdit.HeadOfHousehold;
       if (rowEdit.HouseholdType) hh.householdType = rowEdit.HouseholdType;
@@ -1144,6 +1157,17 @@ function processDivorces_(ctx, households, cycle) {
       }
     } else {
       appendBondLifeLine_(ctx, ri, 'Divorce', 'the marriage ended', cycle);
+      // codex final gate B3: a spouse who left the ledger can still hold this citizen's romantic bond — resolve it
+      if (sp) {
+        var obonds = (ctx.summary && ctx.summary.relationshipBonds) || [];
+        for (var ob = 0; ob < obonds.length; ob++) {
+          var obd = obonds[ob];
+          if (!obd || obd.bondType !== 'romantic' || obd.status !== 'active') continue;
+          var oa = String(obd.citizenA || '').trim(), obb = String(obd.citizenB || '').trim();
+          if (!((oa === pop && obb === sp) || (oa === sp && obb === pop))) continue;
+          obd.status = 'resolved'; obd.notes = String(obd.notes || '') + ' [Divorced C' + cycle + ']'; obd.lastUpdate = cycle;
+        }
+      }
     }
     ctx.ledger.dirty = true;
     var who = couple ? nameOf(ri) + ' and ' + nameOf(si) : nameOf(ri);
@@ -1161,7 +1185,7 @@ function processDivorces_(ctx, households, cycle) {
         magnitude: 0.05, duration: 1, sourceEngine: 'householdFormationEngine'
       });
     }
-    divorces.push({ popId: pop, spouse: couple ? sp : '', kinds: names });
+    divorces.push({ popId: pop, spouse: couple ? sp : '', kinds: names, householdId: rowHid, edit: rowEdit });
     Logger.log('processDivorces_: ' + who + ' — ' + names.join(', ') + ' (C' + cycle + ')');
   }
   return divorces;

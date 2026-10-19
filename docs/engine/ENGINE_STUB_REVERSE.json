@@ -2,7 +2,7 @@
   "generated": "2026-10-19",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1714,
+  "functionsMapped": 1716,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -5059,7 +5059,6 @@
         "phase05-citizens/householdFormationEngine.js::formCriteriaHouseholds_",
         "phase05-citizens/householdFormationEngine.js::formNewHouseholds_",
         "phase05-citizens/householdFormationEngine.js::loadHouseholds_",
-        "phase05-citizens/householdFormationEngine.js::processDivorces_",
         "phase05-citizens/householdFormationEngine.js::processHouseholdFormation_",
         "phase05-citizens/householdFormationEngine.js::reconcileHouseholds_",
         "phase05-citizens/householdFormationEngine.js::updateHouseholdIncomes_",

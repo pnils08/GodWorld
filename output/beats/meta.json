@@ -31,7 +31,7 @@
     "LifeHistory_Log": 5115,
     "Lived_Events": 6
   },
-  "generatedAt": "2026-10-19T08:18:38.477Z",
+  "generatedAt": "2026-10-19T09:03:37.977Z",
   "generatedBy": "scripts/dumpBeatTabs.js",
   "note": "pipeline.68 Task 1 — beat-tab dump for the slice builders. Stable filenames, overwritten each cycle; prior cycle kept in prev/. Published as one generation (directory swap)."
 }

@@ -167,6 +167,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 04:05 es PURGE §7 (night of 2026-10-19; git keeps history). BOOT overnight (builder: NEXT line, measure twice, wiring cards, outside review before build). WAKE set (recurring :41, job d353d1ca). Task engine.302 cut 1 (plan :340, ee1746b5).
 04:06 es CLAIM codex es engine.302 cut 1 plan review (TASK docs/for-claude-review/2026-10-19-engine302-cut1-plan-review-TASK.md → …-codex-engine302-cut1-plan-review.md).
 04:14 rb BOOT overnight (builder present, asked rb to support es). WAKE set (recurring :26, job f108866c). Codex pane confirmed mid-review for es (verdict file writing). Guest pane table re-indexed to tmux truth (codex 3, agy 4, aider 5; address by window name).
+04:55 rb CHECK es at a prompt (rm of inbox codex cut 1 review, byte-identical to committed docs/research copy a0e65d4d) → APPROVED es rm single untracked duplicate; es building cut 1. codex done cut 2 plan review (HOLD, 04:29) for es to fold; es holds the claim. git a0e65d4d top. NEXT[rb] clocks 06:15 / 08:00 not yet due.
 
 ## 8. Stop rule and usage
 

@@ -1565,7 +1565,7 @@
   Sheets: Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
-- **selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng)**
+- **selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng, gBirthYear)**
   Config: ctx.config.hoodCitizenFloor, ctx.config.hoodFloorPromotePerCycle
 
 - **waveSexPreference_(ctx)**
@@ -1938,7 +1938,7 @@
 - **generateGenericCitizens_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.genericCitizensHoodShortfall, S.holiday, S.isCreationDay, S.isFirstFriday, S.season, S.sportsCity, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.genericCitizensDistribution, S.genericCitizensGenerated, S.genericCitizensHoodShortfall, S.newGenericCitizens
-  Config: ctx.config.gcPoolFloorFemale, ctx.config.gcPoolFloorMale
+  Config: ctx.config.gcPoolFloorFemale, ctx.config.gcPoolFloorMale, ctx.config.gcPoolFloorYouth, ctx.config.gcPoolMaxPerCycle
   Sheets: Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1946,6 +1946,8 @@
   Config: ctx.config.hoodCitizenFloor
 
 - **feederHoodWeights_(ctx, coreHoods)**
+
+- **planFeederSlots_(fillCount, deficitF, deficitM, deficitY, youthF, youthM, prefSex)**
 
 ### generateMediaModeEvents.js
 - **mulberry32MediaMode_(seed)**
@@ -4760,4 +4762,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1716
+**Functions mapped:** 1717

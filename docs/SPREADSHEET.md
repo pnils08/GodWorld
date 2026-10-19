@@ -99,8 +99,10 @@ Six rows, self-armed by `ensureEngine148Config_` at boot (same contract as engin
 | `hoodFloorPromotePerCycle` | 6 | 0–100 int | **Migration wave** (builder-ruled 2026-09-05): Active Generic_Citizens rows promoted straight to the ledger from under-floor hoods each cycle, most-deficient hood first, no EmergenceCount gate. `checkForPromotions_` → `selectFloorWaveRows_`. 0 disables. |
 | `hoodFloorSurfaceQuota` | 20 | 0–500 int | Unnamed ENGINE citizen events per cycle whose Generic_Citizens crossing is forced and drawn from under-floor hoods (deficit-weighted) — the earned road (engine.58, 3 ticks = a row) pointed at the empty hoods. `generateCitizensEvents_` → `pickUnderFloorGc_`. |
 | `gcSurfaceChance` | 0.06 | 0–1 | The engine.58 lottery dial (was the `GC_SURFACE_CHANCE` code literal): per unnamed ENGINE citizen event, chance the week crosses a Generic_Citizens name. |
-| `gcPoolFloorFemale` | 120 | 0–500 int | Active female Generic_Citizens rows the feeder keeps the waiting room at (builder-ruled 2026-09-05: the sim runs male-heavy, the room skews female). The feeder grows a side only while it is under its floor, at the full 8/cycle cap. |
+| `gcPoolFloorFemale` | 120 | 0–500 int | Active female Generic_Citizens rows aged 18+ the feeder keeps the waiting room at (builder-ruled 2026-09-05: the sim runs male-heavy, the room skews female; engine.304: adults only). The feeder grows a side only while it is under its floor, at the full `gcPoolMaxPerCycle` cap. |
 | `gcPoolFloorMale` | 40 | 0–500 int | Same for the male side. |
+| `gcPoolFloorYouth` | 40 | 0–500 int | engine.304 (builder 2026-10-19: kids into the background) — Active Generic_Citizens rows under 18. Youth slots alternate sex and alternate with adult slots while both are short; a minor is a student. |
+| `gcPoolMaxPerCycle` | 12 | 0–100 int | engine.304 (builder 2026-10-19: add more women) — rows the feeder may mint a cycle while a floor or a hood line is short (was the 8 literal). |
 
 Headcount per hood is counted once per cycle on first read (`getHoodHeadcount_`, child spellings fold via `ChildAreas`); `hoodFloorDeficit_` = (floor − count) / floor. The wave draws the sex the Active ledger is short of first (`waveSexPreference_`), and a row minted into the room this cycle waits one cycle before a wave can take it.
 

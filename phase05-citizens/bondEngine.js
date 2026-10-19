@@ -2582,7 +2582,7 @@ function processGCCourtship_(ctx) {
       continue;
     }
     var gRowM = gcVals[found];
-    var gAgeM = Number(gRowM[gAge]) || (Number(gRowM[gBirth]) ? simYear - Number(gRowM[gBirth]) : 0);
+    var gAgeM = Number(gRowM[gBirth]) ? simYear - Number(gRowM[gBirth]) : (Number(gRowM[gAge]) || 0); // engine.304 R19: BirthYear first
     // engine.302 (ruling 11, codex H4): the matured GC wedding keeps the same window as every wedding —
     // outside it, or with an age the record does not hold, the courtship waits, unresolved.
     var pAgeM = P.birthYear > 0 ? simYear - P.birthYear : 0;
@@ -2682,7 +2682,7 @@ function processGCCourtship_(ctx) {
     var gr2 = gcVals[g2];
     if (String(gr2[gStat] || '').toLowerCase() !== 'active') continue;
     if (String(gr2[gSex] || '').toLowerCase() !== wantSex2) continue;
-    var ga2 = Number(gr2[gAge]) || (Number(gr2[gBirth]) ? simYear - Number(gr2[gBirth]) : 0);
+    var ga2 = Number(gr2[gBirth]) ? simYear - Number(gr2[gBirth]) : (Number(gr2[gAge]) || 0); // engine.304 R19: BirthYear first
     if (!(ga2 > 0) || Math.abs(ga2 - pAge2) > 10 || ga2 < wedMin || ga2 > wedMax) continue;
     var gh2 = gNbhd >= 0 ? String(gr2[gNbhd] || '').trim() : '';
     if (gh2 && P2.hood && prox.near(gh2, P2.hood)) nearPool.push(g2); else cityPool.push(g2);

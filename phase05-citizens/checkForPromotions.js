@@ -300,7 +300,7 @@ function checkForPromotions_(ctx) {
   // from the waiting room, most-deficient hood first, World_Config
   // hoodFloorPromotePerCycle rows a cycle. Everyone else still earns the row
   // at EmergenceCount 3 through the lottery below (engine.58).
-  var waveRows = selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng);
+  var waveRows = selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng, gBirthYear);
   var waveCount = 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -330,7 +330,9 @@ function checkForPromotions_(ctx) {
     // === Promote to Tier-4 (S320: lottery entry tier — climbs via UsageCount) ===
     var first = row[gFirst] || "";
     var last = row[gLast] || "";
-    var age = Number(row[gAge] || 30);
+    // engine.304 (R19): age from BirthYear — a blank Age read as 30 would mint a pooled child as a worker
+    var rowBY = gBirthYear >= 0 ? (Number(row[gBirthYear]) || 0) : 0;
+    var age = rowBY > 1900 ? simYear - rowBY : Number(row[gAge] || 30);
     var neigh = validateNeighborhood(row[gNeigh] || "Downtown");
     var occ = row[gOcc] || "Citizen";
 
@@ -636,7 +638,7 @@ function checkForPromotions_(ctx) {
 // this cycle's earlier picks), drawn uniformly among that hood's Active rows.
 // Returns { sheetRowIndex: hood }. Empty when the cell is 0 or nobody is
 // waiting in an under-floor hood.
-function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng) {
+function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng, gBirthYear) {
   var quota = ctx && ctx.config ? Number(ctx.config.hoodFloorPromotePerCycle) : NaN;
   if (!isFinite(quota)) {
     throw new Error('selectFloorWaveRows_: World_Config hoodFloorPromotePerCycle missing — the engine.148 self-arm did not run (ADR-0015).');
@@ -651,6 +653,7 @@ function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cy
   var prefer = waveSexPreference_(ctx);
   var byHood = {};
   var bornThisCycle = "Cycle " + cycle; // the feeder stamps EmergedCycle at creation
+  var waveYear = (gBirthYear >= 0) ? simYearOf_(ctx, cycle) : 0; // engine.304
   for (var r = 1; r < gVals.length; r++) {
     if ((gVals[r][gStat] || "").toString() !== "Active") continue;
     if (ctx.civicGcTaken && ctx.civicGcTaken[r]) continue; // engine.94 B.3 v3 F2: taken by a civic mint this fire
@@ -661,7 +664,10 @@ function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cy
     if (!hood) continue;
     if (!byHood[hood]) byHood[hood] = { preferred: [], other: [] };
     var sx = gSex >= 0 ? String(gVals[r][gSex] || '').trim().toLowerCase() : '';
-    (prefer && sx === prefer ? byHood[hood].preferred : byHood[hood].other).push(r);
+    // engine.304: the preference answers an adult imbalance — a minor waits in the other line (ruled: kids reach the ledger through the wave too)
+    var wby = waveYear ? (Number(gVals[r][gBirthYear]) || 0) : 0;
+    var minor = wby > 0 && (waveYear - wby) < 18;
+    (prefer && sx === prefer && !minor ? byHood[hood].preferred : byHood[hood].other).push(r);
   }
   var added = {};
   for (var q = 0; q < quota; q++) {

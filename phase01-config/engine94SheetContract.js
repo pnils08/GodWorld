@@ -561,6 +561,8 @@ var ENGINE148_CONFIG_SEEDS = [
   ['hoodFloorPromotePerCycle', 6, 'engine.148 migration wave (builder-ruled 2026-09-05: the slow drip will not fill ten hoods) — per cycle, Active Generic_Citizens rows promoted straight to the ledger from under-floor hoods, most-deficient hood first, no EmergenceCount gate. 0 disables', 0, 100, true],
   ['gcPoolFloorFemale', 120, 'engine.148 (builder 2026-09-05: the sim runs male-heavy, the waiting room should skew female) — Active female Generic_Citizens rows the feeder keeps the pool at; it grows only while a side is under its floor', 0, 500, true],
   ['gcPoolFloorMale', 40, 'engine.148 — Active male Generic_Citizens rows the feeder keeps the pool at', 0, 500, true],
+  ['gcPoolFloorYouth', 40, 'engine.304 (builder 2026-10-19: kids into the background) — Active Generic_Citizens rows under 18 the feeder keeps the pool at; youth slots alternate sex; the female/male floors count adults only', 0, 500, true],
+  ['gcPoolMaxPerCycle', 12, 'engine.304 (builder 2026-10-19: add more women) — rows the feeder may mint a cycle while a floor or a hood line is short (was the MAX_PER_CYCLE 8 literal)', 0, 100, true],
   ['hoodFloorSurfaceQuota', 20, 'engine.148 per cycle, unnamed ENGINE citizen events whose GC crossing is forced and drawn from under-floor hoods (deficit-weighted); ~45% of offerings tick, 3 ticks earn the row (engine.58). 0 disables', 0, 500, true]
 ];
 

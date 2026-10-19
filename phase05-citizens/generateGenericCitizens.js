@@ -5,6 +5,13 @@
  *
  * World-aware background citizen generation with GodWorld Calendar integration.
  *
+ * engine.304 (builder 2026-10-19, R19): kids into the background. BirthYear
+ * is drawn relative to the sim year (adults 18–75, youth 0–17; it was a fixed
+ * 1966–2023 that aged a year every sim year). The female/male floors count
+ * adults; gcPoolFloorYouth counts minors, youth slots alternate sex and
+ * alternate with adult slots while both are short; a minor is a 'student'.
+ * The per-cycle cap is World_Config gcPoolMaxPerCycle.
+ *
  * v2.8 Changes from v2.7 (S320 — Mike-direct, GC as Tier-5 feeder):
  * - Sex-tagged name pools + Sex column write (column added S318; generator
  *   never wrote it — the S205 disable's core defect)
@@ -187,6 +194,7 @@ function generateGenericCitizens_(ctx) {
   var iFirst = idx('First');
   var iLast = idx('Last');
   var iBirthYear = idx('BirthYear');
+  var iAge = idx('Age'); // engine.304: read only when BirthYear is blank
   var iNeighborhood = idx('Neighborhood');
   var iOccupation = idx('Occupation');
   var iEmergenceCount = idx('EmergenceCount');
@@ -352,16 +360,26 @@ function generateGenericCitizens_(ctx) {
   var FEMALE_FLOOR = Number(ctx.config && ctx.config.gcPoolFloorFemale);
   var MALE_FLOOR = Number(ctx.config && ctx.config.gcPoolFloorMale);
   if (!isFinite(FEMALE_FLOOR) || !isFinite(MALE_FLOOR)) throw new Error('generateGenericCitizens_: World_Config gcPoolFloorFemale/gcPoolFloorMale missing — the engine.148 self-arm did not run (ADR-0015).');
-  var MAX_PER_CYCLE = 8;
-  var activeF = 0, activeM = 0;
+  // engine.304 (R19): a youth floor beside the sex floors, and the cap is a cell.
+  var YOUTH_FLOOR = Number(ctx.config && ctx.config.gcPoolFloorYouth);
+  var MAX_PER_CYCLE = Number(ctx.config && ctx.config.gcPoolMaxPerCycle);
+  if (!isFinite(YOUTH_FLOOR) || !isFinite(MAX_PER_CYCLE)) throw new Error('generateGenericCitizens_: World_Config gcPoolFloorYouth/gcPoolMaxPerCycle missing — the engine.148 self-arm did not run (ADR-0015).');
+  var poolYear = simYearOf_(ctx, cycle);
+  // engine.304: the sex floors count adults — a girl in the pool is not a woman
+  // the spouse draw can reach. Age from BirthYear; Age only when BirthYear is blank.
+  var activeF = 0, activeM = 0, youthF = 0, youthM = 0;
   for (var pr = 1; pr < genericValues.length; pr++) {
     if (norm(genericValues[pr][iStatus]) !== 'active') continue;
     var psx = iSex >= 0 ? norm(genericValues[pr][iSex]) : '';
-    if (psx === 'female') activeF++;
-    else if (psx === 'male') activeM++;
+    var pby = iBirthYear >= 0 ? (Number(genericValues[pr][iBirthYear]) || 0) : 0;
+    var page = pby > 0 ? poolYear - pby : (iAge >= 0 ? (Number(genericValues[pr][iAge]) || 0) : 0);
+    var pYouth = (pby > 0 || page > 0) && page < 18;
+    if (psx === 'female') { if (pYouth) youthF++; else activeF++; }
+    else if (psx === 'male') { if (pYouth) youthM++; else activeM++; }
   }
   var deficitF = Math.max(0, FEMALE_FLOOR - activeF);
   var deficitM = Math.max(0, MALE_FLOOR - activeM);
+  var deficitY = Math.max(0, YOUTH_FLOOR - (youthF + youthM));
   // engine.174 (2026-09-07, builder 'go'): the room also refills PER HOOD. The
   // migration wave can only surface who is waiting in a hood's own line, and the
   // line was empty exactly where the map was thin (Glenview 3, Brooklyn 5, East
@@ -369,8 +387,8 @@ function generateGenericCitizens_(ctx) {
   // skipped every cycle (civic.21). A hood under the citizen floor with fewer
   // waiting than its open seats gets the difference minted into it.
   var shortfall = feederHoodShortfall_(ctx, genericValues, iNeighborhood, iStatus);
-  if (deficitF + deficitM === 0 && shortfall.total === 0) {
-    S.genericCitizensDistribution = { skipped: 'pool-at-floor', activeFemale: activeF, activeMale: activeM };
+  if (deficitF + deficitM + deficitY === 0 && shortfall.total === 0) {
+    S.genericCitizensDistribution = { skipped: 'pool-at-floor', activeFemale: activeF, activeMale: activeM, activeYouth: youthF + youthM };
     return;
   }
   S.genericCitizensHoodShortfall = shortfall; // engine.174: read by the log line below
@@ -383,12 +401,10 @@ function generateGenericCitizens_(ctx) {
   // (largest shortfall, round-robin) and drawn by weight after. A woman minted
   // into Glenview counts for both floors — bench C115 showed the sex floor
   // otherwise taking all eight slots and the short hoods getting none.
-  var fillCount = Math.min(MAX_PER_CYCLE, Math.max(deficitF + deficitM, shortfall.total));
-  var sexQueue = [], hoodQueue = [];
+  var fillCount = Math.min(MAX_PER_CYCLE, Math.max(deficitF + deficitM + deficitY, shortfall.total));
+  var hoodQueue = [];
   var prefSex = (typeof waveSexPreference_ === 'function') ? waveSexPreference_(ctx) : null;
-  for (var q = 0; q < fillCount; q++) {
-    sexQueue.push(q < deficitF ? 'female' : (q < deficitF + deficitM ? 'male' : (prefSex || (q % 2 === 0 ? 'female' : 'male'))));
-  }
+  var sexQueue = planFeederSlots_(fillCount, deficitF, deficitM, deficitY, youthF, youthM, prefSex); // engine.304: {sex, youth}
   var shortHoods = Object.keys(shortfall.byHood).sort(function(x, y) { return shortfall.byHood[y] - shortfall.byHood[x]; });
   var left = {}; for (var sh = 0; sh < shortHoods.length; sh++) left[shortHoods[sh]] = shortfall.byHood[shortHoods[sh]];
   for (var hq = 0, rr = 0; hq < fillCount && shortHoods.length && rr < shortHoods.length * 64; rr++) {
@@ -621,20 +637,18 @@ function generateGenericCitizens_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   for (var i = 0; i < baseCount; i++) {
 
-    var sex = sexQueue[i]; // v2.8 (S320): sex decided first, name follows
+    var sex = sexQueue[i].sex; // v2.8 (S320): sex decided first, name follows
     var nameResult = getUniqueName(50, sex);
     if (!nameResult) continue;
 
     var first = nameResult.first;
     var last = nameResult.last;
 
-    // v2.4: BirthYear range 1966-2023 -> ages 18-75 in 2041
-    var minBirthYear = 1966;
-    var maxBirthYear = 2023;
-    var birthYear = minBirthYear + randInt(maxBirthYear - minBirthYear + 1);
+    // engine.304 (R19): BirthYear relative to the sim year — adults 18–75, youth 0–17
+    var birthYear = sexQueue[i].youth ? poolYear - randInt(18) : poolYear - (18 + randInt(58));
 
     var neighborhood = hoodQueue[i] || pickWeightedNeighborhood(birthYear); // engine.174: a short hood's seat is placed, not drawn
-    var occupation = randItem(occupations);
+    var occupation = sexQueue[i].youth ? 'student' : randItem(occupations); // engine.304: a minor is a student, never a hire
 
     // v2.6: Track distribution
     neighborhoodCounts[neighborhood] = (neighborhoodCounts[neighborhood] || 0) + 1;
@@ -861,4 +875,28 @@ function feederHoodWeights_(ctx, coreHoods) {
     w[coreHoods[i]] = base * (1 + 2 * hoodFloorDeficit_(ctx, coreHoods[i]));
   }
   return w;
+}
+
+// engine.304 (R19): the feeder's slot plan — one {sex, youth} per slot. The adult
+// sex deficits go first in their order (female, then male); while an adult deficit
+// and the youth deficit are both open the slots alternate adult/youth, so a long
+// adult shortfall cannot hold the youth line at zero. A youth slot takes the sex
+// with fewer minors waiting (girls on a tie). Hood-shortfall slots past every
+// deficit are adults of the wave's preferred sex, else alternating.
+function planFeederSlots_(fillCount, deficitF, deficitM, deficitY, youthF, youthM, prefSex) {
+  var slots = [];
+  var fLeft = deficitF, mLeft = deficitM, yLeft = deficitY, yF = youthF, yM = youthM;
+  for (var q = 0; q < fillCount; q++) {
+    var adultOpen = fLeft + mLeft > 0;
+    var youth = (adultOpen && yLeft > 0) ? (q % 2 === 1) : yLeft > 0;
+    if (youth) {
+      var ysx = yF <= yM ? 'female' : 'male';
+      if (ysx === 'female') yF++; else yM++;
+      yLeft--;
+      slots.push({ sex: ysx, youth: true });
+    } else if (fLeft > 0) { fLeft--; slots.push({ sex: 'female', youth: false }); }
+    else if (mLeft > 0) { mLeft--; slots.push({ sex: 'male', youth: false }); }
+    else slots.push({ sex: prefSex || (q % 2 === 0 ? 'female' : 'male'), youth: false });
+  }
+  return slots;
 }

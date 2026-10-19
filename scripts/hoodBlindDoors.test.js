@@ -77,10 +77,10 @@ const FULL = {}; HOODS.forEach(h => { FULL[h] = 20; });
 const SPARSE = Object.assign({}, FULL, { Eastlake: 0, Brooklyn: 3, Glenview: 6, 'San Antonio': 12 });
 
 console.log('T1 World_Config self-arm seeds');
-t('six engine.148 keys seed on a bare World_Config', () => {
+t('eight engine.148 keys seed on a bare World_Config (engine.304 adds the youth floor and the per-cycle cap)', () => {
   const plan = sb.inspectEngine94Config_([['Key', 'Value', 'Description']], sb.ENGINE148_CONFIG_SEEDS);
-  eq(plan.additions.map(a => a[0]).sort(), ['gcPoolFloorFemale', 'gcPoolFloorMale', 'gcSurfaceChance', 'hoodCitizenFloor', 'hoodFloorPromotePerCycle', 'hoodFloorSurfaceQuota']);
-  assert.strictEqual(plan.additions.length, 6);
+  eq(plan.additions.map(a => a[0]).sort(), ['gcPoolFloorFemale', 'gcPoolFloorMale', 'gcPoolFloorYouth', 'gcPoolMaxPerCycle', 'gcSurfaceChance', 'hoodCitizenFloor', 'hoodFloorPromotePerCycle', 'hoodFloorSurfaceQuota']);
+  assert.strictEqual(plan.additions.length, 8);
 });
 t('an out-of-range or fractional integer cell fails loud', () => {
   assert.throws(() => sb.inspectEngine94Config_([['Key', 'Value', 'Description'], ['hoodCitizenFloor', 2.5, '']], sb.ENGINE148_CONFIG_SEEDS), /invalid World_Config.hoodCitizenFloor/);

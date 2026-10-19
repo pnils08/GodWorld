@@ -2158,7 +2158,7 @@
 - **divorceCrisisKinds_(row, h, cycle, into)**
 
 - **processDivorces_(ctx, households, cycle)**
-  Reads: S.relationshipBonds, S.storyHooks
+  Reads: S.relationshipBonds, S.relationshipBondsLoaded, S.storyHooks
   Writes: S.storyHooks
   Sheets: Household_Ledger
 

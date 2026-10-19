@@ -3363,6 +3363,7 @@
       "readers": [
         "phase05-citizens/bondEngine.js::saveV3BondsToLedger_",
         "phase05-citizens/bondPersistence.js::saveRelationshipBonds_",
+        "phase05-citizens/householdFormationEngine.js::processDivorces_",
         "phase05-citizens/updateCivicApprovalRatings.js::demotionGrudge_"
       ]
     },

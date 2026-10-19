@@ -973,17 +973,18 @@ function processMarriages_(ss, citizens, cycle) {
 //   issues: rent / debt / hood / overwork pressure (DialState.pressure.*), a health crisis held now (Status)
 // Debt, default, forced sale (GenerationalWealth), rent (MigrationTracking) and bereavement (Phase 9) are written after
 // this pass, so this Cycle's are seen next Cycle. An on-ledger couple's record is the union of both; a kind counts once.
-// Only the ledger, the bond list, the hooks and this pass's in-memory households change here — the first three
-// committed together at Phase 10. The household row
-// follows next pass: the reconciler rebuilds Members from the ledger's HouseholdId and retypes the household from the
-// head's status; the one direct cell is HeadOfHousehold when the head is the one who leaves (the stayer is a member
-// either way, so a failed commit leaves nothing false). Family_Relationships keeps its married row as history.
+// The ledger (statuses, SpouseId, HouseholdId, [Divorce] lines) commits at Phase10-CommitLedger, the bond at the
+// Phase10-Bonds master replace (a couple waits a Cycle when the bond load did not certify), the hook with the story
+// writer; a Cycle that crosses the wall resumes the whole intent tail (engine.95 checkpoint). The household row is
+// written direct, own-tab class: Members, the head when the head left, the type of an off-camera couple — each
+// self-healing, since the reconciler rebuilds Members, head and type from the ledger the next pass.
+// Family_Relationships keeps its married row as history.
 var DIVORCE_CRISIS_WINDOW = 13; // Cycles (a quarter year) — the builder's dial
 var DIVORCE_CRISIS_COUNT = 3;   // distinct kinds, at least one a major loss — the builder's dial
 var DIVORCE_MAJOR_KINDS = { default: true, bereaved: true, jobless: true, forcedSale: true };
 
 function divorceCrisisKinds_(row, h, cycle, into) {
-  var within = function (l) { var n = Number(l); return isFinite(n) && n > 0 && n <= cycle && cycle - n < DIVORCE_CRISIS_WINDOW; };
+  var within = function (l) { var n = Number(l); return n > 0 && n === Math.floor(n) && n <= cycle && cycle - n < DIVORCE_CRISIS_WINDOW; }; // a whole Cycle, never ahead
   var ds = null;
   var iDS = h.indexOf('DialState');
   if (iDS >= 0 && row[iDS]) { try { ds = JSON.parse(String(row[iDS])); } catch (e) { ds = null; } }
@@ -1028,7 +1029,7 @@ function processDivorces_(ctx, households, cycle) {
   // a marriage made this Cycle, by any door (the bond wedding, the intake spouse match, the intake household)
   var marriedNow = function (ri) {
     var lines = String(iLife >= 0 ? rows[ri][iLife] || '' : '').split('\n');
-    for (var q = lines.length - 1; q >= 0 && q >= lines.length - 12; q--) {
+    for (var q = 0; q < lines.length; q++) { // every line of this Cycle, wherever earlier writers left it
       if (lines[q].indexOf(stamp + ' ') === 0 && /\[Wedding\]|married to|\[Household\]/.test(lines[q])) return true;
     }
     return false;
@@ -1043,6 +1044,12 @@ function processDivorces_(ctx, households, cycle) {
     var sp = spouseOf(ri), si = sp && byPop.hasOwnProperty(sp) ? byPop[sp] : -1;
     var couple = si >= 0 && living(si) && married(si) && spouseOf(si) === pop;
     done[pop] = true; if (couple) done[sp] = true;
+    // codex cut-3 diff review B3: a SpouseId that is not one half of a living married pair is a malformed link, not an
+    // off-camera marriage (that one has no SpouseId) — it is left for the record to settle, never divorced alone
+    if (sp && !couple) { Logger.log('processDivorces_: ' + pop + ' SpouseId ' + sp + ' is not a reciprocal married pair — skipped'); continue; }
+    // codex B4: a couple's bond change rides the bond master replace, which a load that did not certify never queues
+    // (bondPersistence.js saveRelationshipBonds_) — the couple's divorce waits a Cycle rather than split the record
+    if (couple && !(ctx.summary && ctx.summary.relationshipBondsLoaded === true)) { Logger.log('processDivorces_: bond load not certified — ' + pop + ' + ' + sp + ' wait'); continue; }
     if (marriedNow(ri) || (couple && marriedNow(si))) continue;
     var kinds = divorceCrisisKinds_(rows[ri], h, cycle, {});
     if (couple) divorceCrisisKinds_(rows[si], h, cycle, kinds);
@@ -1084,12 +1091,19 @@ function processDivorces_(ctx, households, cycle) {
         var leaver = stayer === ri ? si : ri;
         rows[leaver][iHH] = '';
         var leaverPop = String(rows[leaver][iPop]).trim();
-        if (hh) hh.members = (hh.members || []).filter(function (m) { return String(m).trim() !== leaverPop; }); // this Cycle's income/stress read it
-        if (hh && head === leaverPop) {
+        if (hh) {
+          // codex cut-3 diff review B4: the row itself, not only this pass's copy — stress and dissolution reload the
+          // sheet after the fund pass, and a home sold this Cycle must not pay the one who left. Both cells are
+          // self-healing: if the Phase-10 commit fails, the reconciler rebuilds Members and the head from the ledger.
+          hh.members = (hh.members || []).filter(function (m) { return String(m).trim() !== leaverPop; });
           var hs = ctx.ss && ctx.ss.getSheetByName('Household_Ledger');
           var hHead = hs ? hs.getRange(1, 1, 1, hs.getLastColumn()).getValues()[0] : [];
-          var cHead = hHead.indexOf('HeadOfHousehold');
-          if (hs && cHead >= 0 && hh.rowIndex) hs.getRange(hh.rowIndex, cHead + 1).setValue(String(rows[stayer][iPop]).trim());
+          var cMem = hHead.indexOf('Members'), cHead = hHead.indexOf('HeadOfHousehold');
+          if (hs && cMem >= 0 && hh.rowIndex) hs.getRange(hh.rowIndex, cMem + 1).setValue(JSON.stringify(hh.members));
+          if (hs && cHead >= 0 && hh.rowIndex && head === leaverPop) {
+            hs.getRange(hh.rowIndex, cHead + 1).setValue(String(rows[stayer][iPop]).trim());
+            hh.headOfHousehold = String(rows[stayer][iPop]).trim();
+          }
         }
       }
     } else {
@@ -1100,6 +1114,11 @@ function processDivorces_(ctx, households, cycle) {
       if (ohh && ohh.householdType === HOUSEHOLD_TYPES.COUPLE && (ohh.members || []).length === 1) {
         var ownInc = Number(String(rows[ri][idx('Income')] || '').replace(/[$,\s]/g, '')) || 0;
         ohh.householdType = ownInc >= SOLO_INCOME_FLOOR ? 'solo' : 'single';
+        // the row too (the stress pass reloads the sheet); self-healing like Members — the reconciler types it next pass
+        var ohs = ctx.ss && ctx.ss.getSheetByName('Household_Ledger');
+        var oHead = ohs ? ohs.getRange(1, 1, 1, ohs.getLastColumn()).getValues()[0] : [];
+        var cType = oHead.indexOf('HouseholdType');
+        if (ohs && cType >= 0 && ohh.rowIndex) ohs.getRange(ohh.rowIndex, cType + 1).setValue(ohh.householdType);
       }
     }
     ctx.ledger.dirty = true;

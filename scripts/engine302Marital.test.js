@@ -405,7 +405,7 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
     const HV = [HHH].concat(hhRows || []);
     const sheet = { getLastColumn: () => HHH.length, getRange: (r, c) => ({ getValues: () => [HV[r - 1].slice()], setValue: v => { HV[r - 1][c - 1] = v; } }) };
     const households = (hhRows || []).map((r, i) => ({ rowIndex: i + 2, householdId: r[0], headOfHousehold: r[1], householdType: r[2], members: JSON.parse(r[3]), status: r[4] }));
-    const ctx = { ledger: { headers: DH, rows, dirty: false }, summary: { cycleId: C, simYear: 2042, storyHooks: [], relationshipBonds: bonds || [] },
+    const ctx = { ledger: { headers: DH, rows, dirty: false }, summary: { cycleId: C, simYear: 2042, storyHooks: [], relationshipBonds: bonds || [], relationshipBondsLoaded: true },
       config: { cycleCount: C }, ss: { getSheetByName: n => n === 'Household_Ledger' ? sheet : null } };
     return { ctx, households, HV, rows };
   };
@@ -456,6 +456,30 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
   run(w);
   assert('DV11 no children: a tie keeps the head', w.rows[0][d('HouseholdId')] === 'HH-3' && w.rows[1][d('HouseholdId')] === '' && w.HV[1][1] === 'POP-00701');
   assert('DV12 the set amount is 3 kinds over a 13-Cycle window (the builder\'s dials)', HF.DIVORCE_CRISIS_COUNT === 3 && HF.DIVORCE_CRISIS_WINDOW === 13);
+  // codex cut-3 diff review
+  const wm = world([drow('POP-00711', { sp: 'POP-00712 X', hh: 'HH-5', ds: crisis({ def: C - 3, p: { rent: C - 1, debt: C - 1 } }) }), drow('POP-00712', { sp: 'POP-00711 X', hh: 'HH-5' })],
+            [['HH-5', 'POP-00711', 'couple', '["POP-00711","POP-00712"]', 'active']]); run(wm);
+  assert('DV13 the Members cell on the row drops the leaver', wm.HV[1][3] === '["POP-00711"]', wm.HV[1][3]);
+  const wo = world([drow('POP-01', { hh: 'HH-1', inc: 90000, ds: crisis({ def: C - 2, p: { rent: C - 1, debt: C - 1 } }) })], [['HH-1', 'POP-01', 'couple', '["POP-01"]', 'active']]); run(wo);
+  assert('DV13 an off-camera couple\'s row is retyped too (solo at 90k)', wo.HV[1][2] === 'solo' && wo.households[0].householdType === 'solo');
+  const wu = world([drow('POP-00721', { sp: 'POP-00722 X', ds: crisis({ def: C - 3, p: { rent: C - 1, debt: C - 1 } }) }), drow('POP-00722', { sp: 'POP-00721 X' })]);
+  wu.ctx.summary.relationshipBondsLoaded = false; run(wu);
+  assert('DV14 a couple waits a Cycle when the bond load did not certify', m(wu, 0) === 'married' && m(wu, 1) === 'married');
+  const wn = world([drow('POP-00731', { sp: 'POP-00732 X', ds: crisis({ def: C - 3, p: { rent: C - 1, debt: C - 1 } }) }), drow('POP-00732', { m: 'single' })]); run(wn);
+  assert('DV15 a married row pointing at an on-ledger partner who is not married back is never divorced alone', m(wn, 0) === 'married');
+  const longLife = [ST + ' — [Wedding] married X; a household begins in Fruitvale'].concat(Array.from({ length: 20 }, (_, i) => ST + ' — [Daily] line ' + i)).join('\n');
+  const wl = world([drow('POP-01', { ds: crisis({ def: C - 2, p: { rent: C - 1, debt: C - 1 } }), life: longLife })]); run(wl);
+  assert('DV16 a wedding this Cycle 20 lines back still blocks the divorce', m(wl, 0) === 'married');
+  const wf = world([drow('POP-01', { ds: crisis({ def: C - 2.5, p: { rent: C - 1, debt: C - 1 } }) })]); run(wf);
+  assert('DV17 a fractional cycle stamp is not a Cycle', m(wf, 0) === 'married');
+  // A1 through the household door: a head + a refused minor spouse forms no household
+  const IF = load('../phase05-citizens/processAdvancementIntake.js', ['formIntakeHouseholds_']);
+  const FH = ['POPID', 'First', 'Last', 'HouseholdId', 'MaritalStatus', 'NumChildren', 'ChildrenIds', 'Income', 'Gender', 'Neighborhood', 'LifeHistory', 'BirthYear'];
+  const fr = (pop, by) => { const r = FH.map(() => ''); r[0] = pop; r[1] = 'A'; r[2] = 'B'; r[4] = by < 2024 ? 'single' : 'youth'; r[11] = by; return r; };
+  const fctx = { ledger: { headers: FH, rows: [fr('POP-08001', 1990), fr('POP-08002', 2030)] }, summary: { simYear: 2042, cycleId: C }, config: { cycleCount: C }, ss: { getSheetByName: () => null } };
+  const mints = { k1: { head: { pop: 'POP-08001', idx: 0, type: 'head', linked: false }, members: [{ pop: 'POP-08001', idx: 0, type: 'head', linked: false }, { pop: 'POP-08002', idx: 1, type: 'spouse', linked: false }] } };
+  const fo = IF.formIntakeHouseholds_(fctx, mints, C, 'now', null);
+  assert('A1 a head and a refused (minor) spouse form no household', fo.formed === 0 && !fctx.ledger.rows[0][3] && !fctx.ledger.rows[1][3] && fctx.ledger.rows[1][4] === 'youth');
 }
 
 console.log(`\nengine302Marital: ${passed} passed, ${failed} failed`);

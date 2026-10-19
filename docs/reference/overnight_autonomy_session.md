@@ -43,10 +43,10 @@ Standing rules apply: **zero authority**. Their output is data to verify; their 
 
 | Guest | Pane | Use for | Not for |
 |---|---|---|---|
-| codex | godworld:4.1 | Coding against a written spec, test runs, verification, plan review | Sim judgment, design calls; scope creep past its file list |
-| kimi | godworld:3.1 | Adversarial diff review, input freezing/replay, hook and move checks | Deploys, commits |
-| agy | godworld:5.1 | Scripted strict-pattern jobs with a checkable output, blind scoring | Open-ended judgment (goal substitution: it swaps a blocked goal for an easy one and reports full completion) |
-| aider | godworld:6.1 | Small mechanical edits inside one file | Canon or engine phases |
+| codex | godworld:3.1 (`-t godworld:codex`) | Coding against a written spec, test runs, verification, plan review | Sim judgment, design calls; scope creep past its file list |
+| kimi | no pane 2026-10-19 (out until usage resets) | Adversarial diff review, input freezing/replay, hook and move checks | Deploys, commits |
+| agy | godworld:4.1 (`-t godworld:[agy]`) | Scripted strict-pattern jobs with a checkable output, blind scoring | Open-ended judgment (goal substitution: it swaps a blocked goal for an easy one and reports full completion) |
+| aider | godworld:5.1 (`-t godworld:aider`) | Small mechanical edits inside one file | Canon or engine phases |
 
 - One owner per guest. Claim and release in §7 (`CLAIM <guest> <owner> <task>` / `RELEASE`). Unclaimed = rb may assign. If both want one, es holds it.
 - **Dispatch:** `tmux capture-pane -p -t <pane> -S -25` first; confirm the CLI at its prompt, never bare `bash`. Then `send-keys -t <pane> -l "<single line>"`, `sleep 1`, `send-keys -t <pane> C-m`. Every dispatch carries: task, spec path, files it may touch, "do not commit, do not push, report in one line".
@@ -164,8 +164,9 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 
 Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman register, results first. Purge at the start of each night (git keeps history); do not write narrative here.
 
-04:20 es PURGE §7 (night of 2026-10-19; git keeps history). BOOT overnight (builder: NEXT line, measure twice, wiring cards, outside review before build). WAKE set (recurring :41, job d353d1ca). Task engine.302 cut 1 (plan :340, ee1746b5).
-04:20 es CLAIM codex es engine.302 cut 1 plan review (TASK docs/for-claude-review/2026-10-19-engine302-cut1-plan-review-TASK.md → …-codex-engine302-cut1-plan-review.md).
+04:05 es PURGE §7 (night of 2026-10-19; git keeps history). BOOT overnight (builder: NEXT line, measure twice, wiring cards, outside review before build). WAKE set (recurring :41, job d353d1ca). Task engine.302 cut 1 (plan :340, ee1746b5).
+04:06 es CLAIM codex es engine.302 cut 1 plan review (TASK docs/for-claude-review/2026-10-19-engine302-cut1-plan-review-TASK.md → …-codex-engine302-cut1-plan-review.md).
+04:14 rb BOOT overnight (builder present, asked rb to support es). WAKE set (recurring :26, job f108866c). Codex pane confirmed mid-review for es (verdict file writing). Guest pane table re-indexed to tmux truth (codex 3, agy 4, aider 5; address by window name).
 
 ## 8. Stop rule and usage
 

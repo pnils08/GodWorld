@@ -296,7 +296,7 @@ console.log('\n8. engine.279 — the pass logs once and reads Generic_Citizens o
   check('every line carries the timestamp and the Cycle as before', log.rows.slice(1).every(r => r[0] === 'C' + CYCLE && r[6] === CYCLE && r.length === 7));
   check('all seven queue rows processed and cleared after the log landed', res.processed === 7 && adv.cleared.length === 7);
   check('Generic_Citizens is read once for six mints', gc.reads === 1, 'reads ' + gc.reads);
-  check('the first name hit is the row marked, as before — an already-Emerged first hit stays the one written', gc.setCells.filter(c => c[2] === 'Emerged').map(c => c[0]).join() === '3,2' && gc.rows[3][9] === 'Active', JSON.stringify(gc.setCells));
+  check('the row still waiting is the one marked (engine.304, agy §8): the second Jonah Pike flips, the already-Emerged first hit is left as it was', gc.setCells.filter(c => c[2] === 'Emerged').map(c => c[0]).join() === '3,4' && gc.rows[3][9] === 'Emerged' && gc.rows[1][9] === 'Emerged', JSON.stringify(gc.setCells));
 
   // Nothing to log → no write.
   const quiet = world([]);

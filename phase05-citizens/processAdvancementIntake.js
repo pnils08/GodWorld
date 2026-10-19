@@ -1007,14 +1007,17 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
       // engine.66 — family-drip rows queued under the FAMILY surname; the GC
       // row still carries the birth name, so mark it Emerged by that.
       markAsEmergedInGeneric_(ss, genericSheet, first, maiden || last, cycle, genericHeld);
+      var familyWired = false;
       if (matchPop && matchType) {
-        wireFamilyMatch_(ctx, ledgerRows.length - 1, newPopId, matchPop, matchType, now, cycle, logSheet,
-          householdKey ? 'household intake' : 'drip lottery');
+        familyWired = wireFamilyMatch_(ctx, ledgerRows.length - 1, newPopId, matchPop, matchType, now, cycle, logSheet,
+          householdKey ? 'household intake' : 'drip lottery') === true;
       }
       if (ownerBiz) ownerMints.push({ pop: newPopId, idx: ledgerRows.length - 1, biz: ownerBiz }); // engine.96 Task 12
       if (householdKey) {
         if (!householdMints[householdKey]) householdMints[householdKey] = { head: null, members: [] };
-        var hhMint = { pop: newPopId, idx: ledgerRows.length - 1, type: matchType || 'head', linked: !!(matchPop && matchType) };
+        // engine.302 (codex recheck H2): linked = the wiring happened — a refused link (a minor spouse) or a missing
+        // target forms no spouse household and writes no married register row
+        var hhMint = { pop: newPopId, idx: ledgerRows.length - 1, type: matchType || 'head', linked: familyWired };
         householdMints[householdKey].members.push(hhMint);
         if (!matchType) householdMints[householdKey].head = hhMint;
       }
@@ -2575,6 +2578,7 @@ function wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cy
     });
   }
   Logger.log('wireFamilyMatch_: ' + newPopId + ' ' + desc + ' — links wired');
+  return true; // engine.302: the household door counts a member as linked only when the wiring happened
 }
 
 /**

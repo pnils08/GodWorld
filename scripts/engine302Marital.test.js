@@ -339,8 +339,13 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
   const ir = (pop, by, m) => { const r = IH.map(() => ''); r[0] = pop; r[1] = 'X'; r[2] = 'Y'; r[3] = by; r[4] = m; return r; };
   const rows = [ir('POP-T', 2027, 'youth'), ir('POP-N', 2000, 'single')];
   const ctx = { ledger: { headers: IH, rows }, summary: { simYear: 2042, cycleId: 113 }, config: { cycleCount: 113 } };
-  IW.wireFamilyMatch_(ctx, 1, 'POP-N', 'POP-T', 'spouse', 'now', 113, { appendRow() {} }, 'test');
-  assert('I1 an authored spouse link onto a minor is refused whole', rows[0][4] === 'youth' && rows[1][4] === 'single' && !rows[0][5] && !rows[1][5]);
+  const wiredMinor = IW.wireFamilyMatch_(ctx, 1, 'POP-N', 'POP-T', 'spouse', 'now', 113, { appendRow() {} }, 'test');
+  assert('I1 an authored spouse link onto a minor is refused whole (returns not-wired)', wiredMinor !== true && rows[0][4] === 'youth' && rows[1][4] === 'single' && !rows[0][5] && !rows[1][5]);
+  rows.push(ir('POP-W', 1995, 'single'));
+  const wiredAdult = IW.wireFamilyMatch_(ctx, 1, 'POP-N', 'POP-W', 'spouse', 'now', 113, null, 'test');
+  assert('I1 an adult spouse link wires and returns true; both married', wiredAdult === true && rows[1][4] === 'married' && rows[2][4] === 'married');
+  const isrc = R('../phase05-citizens/processAdvancementIntake.js');
+  assert('I1 the household door counts a member linked only when the wiring happened', /linked: familyWired \}/.test(isrc) && /familyWired = wireFamilyMatch_\(/.test(isrc));
 }
 
 // ── G2 courtship binding, the same pass, missing age, 57/59 (codex diff review H7/H8) ──
@@ -367,7 +372,15 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
   B.processGCCourtship_(st.ctx);
   const sb = st.ctx.summary.relationshipBonds[0];
   assert('G2 the courtship start stamps [gc:<hood>|<sex>] and the life line says where they met',
-    sb && /\[gc:Uptown\|male\]/.test(sb.notes) && /met Near Two in Downtown — something starting/.test(String(st.rows[0][st.LH.indexOf('LifeHistory')])));
+    sb && /\[gc:Uptown\|male\|r2\]/.test(sb.notes) && /met Near Two in Downtown — something starting/.test(String(st.rows[0][st.LH.indexOf('LifeHistory')])));
+  const same = [['Rui', 'Moss', 41, '', 'Laurel', 'Baker', 'Promoted', 'male'], ['Rui', 'Moss', 44, '', 'Laurel', 'Chef', 'Courting', 'male']];
+  const look = gcWorld({ bond: 'Rui Moss', gcs: same.map(r => r.slice()) }); look.bonds[0].notes = 'Met by chance in Laurel (C100) [gc:Laurel|male|r2]';
+  B.processGCCourtship_(look.ctx);
+  assert('G2 a stamped row no longer Courting: the bond waits, never the same-name/hood/sex lookalike', look.rows.length === 1 && look.GC[2][6] === 'Courting');
+  const own = gcWorld({ bond: 'Rui Moss', gcs: [['Rui', 'Moss', 44, '', 'Laurel', 'Chef', 'Courting', 'male'], ['Rui', 'Moss', 41, '', 'Laurel', 'Baker', 'Courting', 'male']] });
+  own.bonds[0].notes = 'Met by chance in Laurel (C100) [gc:Laurel|male|r3]';
+  B.processGCCourtship_(own.ctx);
+  assert('G2 two lookalike Courting rows: the stamped row marries', own.rows.length === 2 && own.GC[2][6] === 'Promoted' && own.GC[1][6] === 'Courting');
 }
 
 console.log(`\nengine302Marital: ${passed} passed, ${failed} failed`);

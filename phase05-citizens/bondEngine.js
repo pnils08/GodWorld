@@ -2382,6 +2382,7 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
         ctx.ledger.dirty = true;
       }
       var oldInfo = findHH(oldHid);
+      if (!oldInfo) Logger.log('marryCitizens_: old household ' + oldHid + ' has no active Household_Ledger row — its Members left to the reconciler (engine.302)');
       if (oldInfo) {
         var oldMem = oldInfo.members.filter(function (m) { return leaving.indexOf(String(m).trim()) < 0; });
         if (oldMem.length !== oldInfo.members.length) hhSheet0.getRange(oldInfo.row, hv[0].indexOf('Members') + 1).setValue(JSON.stringify(oldMem));
@@ -2539,15 +2540,27 @@ function processGCCourtship_(ctx) {
     // courtship began). None, or more than one: no wedding this Cycle, logged; the courtship waits.
     // The courtship start stamps the GC's hood and sex on the bond ([gc:<hood>|<sex>]); a stamped bond needs
     // them to match too. A row this pass already promoted reads Promoted in the snapshot below.
-    var gcTok = /\[gc:([^|\]]*)\|([^\]]*)\]/.exec(String(bd.notes || ''));
+    // codex recheck H7: the stamp also carries the GC's sheet row (r<n>); a stamped bond marries only that row,
+    // and only while it still holds the same name and reads Courting — otherwise it waits (never a lookalike).
+    var gcTok = /\[gc:([^|\]]*)\|([^|\]]*)(?:\|r(\d+))?\]/.exec(String(bd.notes || ''));
     var found = -1, courtingRows = 0;
-    for (var g0 = 1; g0 < gcVals.length; g0++) {
-      var nm0 = (String(gcVals[g0][gF] || '').trim() + ' ' + String(gcVals[g0][gL] || '').trim()).trim();
-      if (nm0 !== gcName || String(gcVals[g0][gStat] || '').trim().toLowerCase() !== 'courting') continue;
-      if (gcTok && ((gNbhd >= 0 ? String(gcVals[g0][gNbhd] || '').trim() : '') !== gcTok[1] ||
-                    String(gcVals[g0][gSex] || '').trim().toLowerCase() !== gcTok[2])) continue;
-      courtingRows++;
-      found = g0;
+    var gcRowMatches = function (gi) {
+      var r0 = gcVals[gi];
+      if (!r0) return false;
+      var nm0 = (String(r0[gF] || '').trim() + ' ' + String(r0[gL] || '').trim()).trim();
+      if (nm0 !== gcName || String(r0[gStat] || '').trim().toLowerCase() !== 'courting') return false;
+      return !gcTok || ((gNbhd >= 0 ? String(r0[gNbhd] || '').trim() : '') === gcTok[1] &&
+                        String(r0[gSex] || '').trim().toLowerCase() === gcTok[2]);
+    };
+    if (gcTok && gcTok[3]) {
+      var stampedRow = Number(gcTok[3]) - 1; // sheet row -> gcVals index
+      if (gcRowMatches(stampedRow)) { found = stampedRow; courtingRows = 1; }
+    } else {
+      for (var g0 = 1; g0 < gcVals.length; g0++) {
+        if (!gcRowMatches(g0)) continue;
+        courtingRows++;
+        found = g0;
+      }
     }
     if (courtingRows !== 1) {
       Logger.log('processGCCourtship_: ' + bd.citizenA + ' — ' + courtingRows + ' Courting rows named ' + gcName + '; no wedding this Cycle (C' + cycle + ')');
@@ -2670,7 +2683,7 @@ function processGCCourtship_(ctx) {
   var metWhere = nearPool.length ? ('in ' + P2.hood) : 'across the city';
 
   // A romance begins. Nothing minted, nothing given — the record waits.
-  var gcStamp = '[gc:' + (gNbhd >= 0 ? String(gRow2[gNbhd] || '').trim() : '') + '|' + String(gRow2[gSex] || '').trim().toLowerCase() + ']';
+  var gcStamp = '[gc:' + (gNbhd >= 0 ? String(gRow2[gNbhd] || '').trim() : '') + '|' + String(gRow2[gSex] || '').trim().toLowerCase() + '|r' + (gRow2i + 1) + ']';
   ctx.summary.relationshipBonds.push(makeBond_(pid2, 'GC:' + gcFull,
     BOND_TYPES.ROMANTIC, 'gc-courtship', 'COMMUNITY', nearPool.length ? P2.hood : '',
     5.5, cycle, 'Met by chance ' + metWhere + ' (C' + cycle + ') — partner off-camera, the record waits ' + gcStamp, ctx));

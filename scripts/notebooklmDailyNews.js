@@ -43,7 +43,7 @@ const AUDIO_RETRY_MAX = 30;
 const AUDIO_CREATE_ATTEMPTS = 2;
 const CANON_POLICY_PATH = path.join(ROOT, 'scripts', 'notebooklmCanonSources.json');
 const CONTINUITY_EDITIONS = 2;
-const SOURCE_VERSION = '1.8';
+const SOURCE_VERSION = '1.9';
 const DEFAULT_AUDIO_LENGTH = 'default';
 const DEFAULT_AUDIO_FORMAT = 'deep_dive';
 
@@ -260,11 +260,23 @@ function collectNewsroomArtifacts(cycle, hours, nowMs, root = ROOT) {
       .sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs)[0];
     if (digest && !records.some((r) => r.file === digest)) extras.push(artifactRecord(digest, 'STAGED', cycle, root));
   }
+  // First morning (builder 2026-10-19: "if sunday is the week that was, monday is the
+  // week that will be"): the run after the Cycle fire. The world summary is written
+  // at the fire; when it landed inside the last 24 h this is the cold read on the
+  // new Cycle before the desks have reported it (Sunday ~22:30 fire → Monday 08:00
+  // is 9.5 h; Tuesday 08:00 is 33.5 h, so Tuesday is not). Edition day wins when
+  // both would hold. The first morning counts toward the router's bar like the
+  // edition does, so the program is long by construction; the pack body is
+  // already the world summary — what changes is what the hosts are told it is.
+  const summaryFile = path.join(root, 'output', 'world_summary_c' + cycle + '.md');
+  const firstMorning = !editionDay && fs.existsSync(summaryFile) &&
+    fs.statSync(summaryFile).mtimeMs >= nowMs - 24 * 3600 * 1000;
   const eligible = extras.concat(records.sort((a, b) => a.relativePath.localeCompare(b.relativePath)));
   return {
     reports: eligible,
     flagged,
     editionDay,
+    firstMorning,
     publishedExtras: extras.filter((r) => r.classification !== 'STAGED').length,
   };
 }
@@ -784,7 +796,13 @@ function stripDailyNoise(markdown) {
 const EDITION_DAY_CLAUSE = ' This is the run after The Cycle Pulse published: carry the edition\'s stories by reporter,' +
   ' the Civis Systems journal\'s reading of the week, and the UNDOCKED digest.';
 
-function dailyPrompt(cycle, hasFlagged, editionDay) {
+const FIRST_MORNING_CLAUSE = ' This is the first morning of the Cycle — the cold read on the week that will be,' +
+  ' before the desks have reported it; Sunday carried the week that was. Name the Cycle. Lead with who this Cycle' +
+  ' happens to, by name, from the engine\'s record of what moved and who lived it; then what citizens said in their' +
+  ' own words — the Voices page if it filed, and the daily digest; then the sports feed and the evening texture;' +
+  ' civic only as far as its stories trend. Close with what the week ahead holds for the people named.';
+
+function dailyPrompt(cycle, hasFlagged, editionDay, firstMorning) {
   // Gate decisions are no longer part of the news (builder 2026-10-17): they live in
   // the editor's ops report (opsReportPrompt). hasFlagged stays for caller compatibility.
   return 'Prepare The Bay Tribune daily news for Oakland for Cycle ' + cycle +
@@ -792,6 +810,7 @@ function dailyPrompt(cycle, hasFlagged, editionDay) {
     ' Leave out city initiatives, approval ratings, and any engine or audit diagnostics.' +
     ' Drafts the editorial gate held back are not news; do not report on them.' +
     (editionDay ? EDITION_DAY_CLAUSE : '') +
+    (firstMorning ? FIRST_MORNING_CLAUSE : '') +
     ' Close with what the newsroom should watch next.';
 }
 
@@ -837,8 +856,8 @@ async function createOpsReport(config, cycle, sourceIds, runDir, manifest, manif
     ' minutes (nlm report create then 30×30s download poll)');
 }
 
-function dailyAudioFocus(hasDirectionGuide, editionDay) {
-  const edition = editionDay ? EDITION_DAY_CLAUSE : '';
+function dailyAudioFocus(hasDirectionGuide, editionDay, firstMorning) {
+  const edition = (editionDay ? EDITION_DAY_CLAUSE : '') + (firstMorning ? FIRST_MORNING_CLAUSE : '');
   if (!hasDirectionGuide) return DAILY_NEWS_IDENTITY + edition;
   return DAILY_NEWS_IDENTITY +
     ' Follow the 00_AUDIO_DIRECTION_GUIDE source for host persona, tone, and thematic allocation.' +
@@ -921,6 +940,7 @@ async function run(argv) {
     routing = dailyRouter.routeDailyNews(pulse, {
       reportedDayThreshold: dailyConfig.reportedDayThreshold,
       publishedExtras: newsroom ? newsroom.publishedExtras : 0,
+      firstMorning: newsroom ? newsroom.firstMorning === true : false,
     });
     console.log('Daily routing shadow: ' + routing.profile + ' (' + routing.reasonCodes.join(', ') + ')');
   } catch (e) {
@@ -1012,6 +1032,7 @@ async function run(argv) {
     })),
     flaggedReports: newsroom.flagged.map((r) => r.relativePath),
     editionDay: newsroom.editionDay === true,
+    firstMorning: newsroom.firstMorning === true,
     routingShadow: routing,
     newsroomPulse: {
       fingerprint: pulse.fingerprint,
@@ -1166,7 +1187,7 @@ async function run(argv) {
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
 
   const hasFlagged = newsroom.reports.some((r) => r.classification === 'FLAGGED');
-  const prompt = dailyPrompt(cycle, hasFlagged, newsroom.editionDay === true);
+  const prompt = dailyPrompt(cycle, hasFlagged, newsroom.editionDay === true, newsroom.firstMorning === true);
   const briefQuery = nlm([
     'notebook', 'query', config.newsroomNotebookId, prompt,
     '--json', '--source-ids', sourceIds.join(','), '--timeout', '280',
@@ -1235,7 +1256,7 @@ async function run(argv) {
         '--format', presentation.format,
         '--length', presentation.length,
         '--source-ids', audioSourceIds.join(','),
-        '--focus', dailyAudioFocus(Boolean(directionSourceId), newsroom.editionDay === true),
+        '--focus', dailyAudioFocus(Boolean(directionSourceId), newsroom.editionDay === true, newsroom.firstMorning === true),
         '--confirm',
       ]);
       if (!create.ok) throw new Error('daily audio create failed: ' + create.out.slice(0, 400));

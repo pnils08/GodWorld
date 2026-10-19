@@ -403,7 +403,7 @@ const syntheticDigest = {
   const title = sourceTitle('current source pack', 999, 'abcdef1234567890');
   assert.strictEqual(title, 'The Bay Tribune Daily C999 — current source pack — abcdef123456');
   const prompt = dailyPrompt(999);
-  assert.strictEqual(SOURCE_VERSION, '1.8');
+  assert.strictEqual(SOURCE_VERSION, '1.9');
   assert.strictEqual(notebookConfig.dailyNews.reportedDayThreshold, 1, 'builder 2026-10-18: bar 3→2; 2026-10-19: →1 (only Monday moved)');
   assert.strictEqual(DEFAULT_AUDIO_LENGTH, 'default');
   assert.strictEqual(notebookConfig.dailyNews.audioLength, 'default');
@@ -413,6 +413,12 @@ const syntheticDigest = {
   assert(editionPrompt.includes('run after The Cycle Pulse published'));
   assert(editionPrompt.includes('UNDOCKED digest'));
   assert(dailyAudioFocus(true, true).includes('Civis Systems journal'));
+  // First morning (2026-10-19): the cold read on the week that will be.
+  assert(dailyPrompt(999, false, false, true).includes('first morning of the Cycle'));
+  assert(!dailyPrompt(999, false, false).includes('first morning'));
+  assert(dailyAudioFocus(true, false, true).includes('week that will be'));
+  assert(dailyAudioFocus(false, false, true).includes('week that will be'));
+  assert(!dailyAudioFocus(true, false, false).includes('week that will be'));
   assert(!dailyAudioFocus(true, false).includes('Civis Systems journal'));
   assert(!prompt.includes('GodWorld Oakland, 2042'));
   assert.strictEqual(dailyAudioFocus(), DAILY_NEWS_IDENTITY);
@@ -580,8 +586,27 @@ const syntheticDigest = {
   fs.utimesSync(edition, old, old);
   const weekday = collectNewsroomArtifacts(777, hours, now, root);
   assert.strictEqual(weekday.editionDay, false);
+  assert.strictEqual(weekday.firstMorning, false, 'no world summary on disk — not a first morning');
   assert.strictEqual(weekday.publishedExtras, 0);
   assert.deepStrictEqual(weekday.reports.map((r) => path.basename(r.file)), [path.basename(fresh)]);
+
+  // First morning (2026-10-19): the world summary written at the fire inside the
+  // last 24 h makes the run the cold read on the new Cycle; 30 h old it does not
+  // (Tuesday); on edition day the edition wins.
+  const summary = path.join(root, 'output', 'world_summary_c777.md');
+  fs.writeFileSync(summary, '# World summary C777\n');
+  const monday = collectNewsroomArtifacts(777, hours, now, root);
+  assert.strictEqual(monday.firstMorning, true);
+  assert.strictEqual(monday.editionDay, false);
+  assert.strictEqual(monday.publishedExtras, 0, 'the summary is the pack body, not an extra source');
+  const tuesday = new Date(now - 30 * 3600e3);
+  fs.utimesSync(summary, tuesday, tuesday);
+  assert.strictEqual(collectNewsroomArtifacts(777, hours, now, root).firstMorning, false);
+  fs.utimesSync(summary, new Date(now), new Date(now));
+  fs.utimesSync(edition, new Date(now), new Date(now));
+  const both = collectNewsroomArtifacts(777, hours, now, root);
+  assert.strictEqual(both.editionDay, true);
+  assert.strictEqual(both.firstMorning, false, 'edition day wins');
   fs.rmSync(root, { recursive: true, force: true });
 }
 

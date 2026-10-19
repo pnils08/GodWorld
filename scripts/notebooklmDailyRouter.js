@@ -356,7 +356,10 @@ function routeDailyNews(inventory, options = {}) {
   // toward the reported-day bar alongside Rhea-passed filings.
   const rheaPassed = Number(counts.passed || 0);
   const publishedExtras = Number(options.publishedExtras || 0);
-  const passed = rheaPassed + publishedExtras;
+  // First morning (2026-10-19): the run after the Cycle fire counts the engine's
+  // own record as one toward the bar — the cold read on the week is a program.
+  const firstMorning = options.firstMorning === true;
+  const passed = rheaPassed + publishedExtras + (firstMorning ? 1 : 0);
   const materialSignals = Array.isArray(inventory.materialSignals) ? inventory.materialSignals.slice().sort() : [];
   const threshold = Number(options.reportedDayThreshold);
   const thresholdConfigured = Number.isInteger(threshold) && threshold > 0;
@@ -371,6 +374,7 @@ function routeDailyNews(inventory, options = {}) {
     profile = PROFILES.REPORTED_DAY;
     reasonCodes.push('RHEA_PASSED_' + rheaPassed);
     if (publishedExtras > 0) reasonCodes.push('PUBLISHED_EXTRAS_' + publishedExtras);
+    if (firstMorning) reasonCodes.push('FIRST_MORNING_OF_CYCLE');
     reasonCodes.push('REPORTED_THRESHOLD_MET_' + threshold);
   } else if (inventory.cycleChanged || Number(counts.angles || 0) > 0 ||
       passed > 0 ||

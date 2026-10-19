@@ -194,6 +194,27 @@ try {
   assert(editionDay.reasonCodes.includes('PUBLISHED_EXTRAS_2'));
   assert.strictEqual(editionDay.dispositionCounts.passed, 1);
 
+  // First morning (2026-10-19): zero filings in the window, bar 1 — the engine's
+  // own record counts one, so the cold read on the new Cycle is the long program.
+  const firstMorning = router.routeDailyNews({
+    counts: { passed: 0, angles: 0, quotes: 0, rheaFlagged: 0, neverGated: 0 },
+    cycleChanged: true,
+    filings: { previous: [] },
+    materialSignals: [],
+  }, { reportedDayThreshold: 1, firstMorning: true });
+  assert.strictEqual(firstMorning.profile, router.PROFILES.REPORTED_DAY);
+  assert.strictEqual(firstMorning.format, 'deep_dive');
+  assert(firstMorning.reasonCodes.includes('FIRST_MORNING_OF_CYCLE'));
+  assert(firstMorning.reasonCodes.includes('RHEA_PASSED_0'));
+  assert.strictEqual(firstMorning.dispositionCounts.passed, 0);
+  const notFirst = router.routeDailyNews({
+    counts: { passed: 0, angles: 0, quotes: 0, rheaFlagged: 0, neverGated: 0 },
+    cycleChanged: true,
+    filings: { previous: [] },
+    materialSignals: [],
+  }, { reportedDayThreshold: 1 });
+  assert.strictEqual(notFirst.profile, router.PROFILES.CYCLE_OPEN);
+
   const provisional = router.routeDailyNews({
     counts: { passed: 1, angles: 1, quotes: 1, rheaFlagged: 0, neverGated: 0 },
     cycleChanged: true,

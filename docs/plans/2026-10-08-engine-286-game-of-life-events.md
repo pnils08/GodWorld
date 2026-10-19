@@ -304,6 +304,20 @@ Every correction in the codex plan review, and where it landed. `folded` = chang
 | R2-6 | The player can't see the board: the payload carries no Tier, NetWorth or rent stress (`lib/wakePerception.js:459` comment "NEVER an engine number"), against a "game an AI must fight." | RULED (builder 2026-10-12): "The citizen can absolutely know their data the engine holds on them. LLMs only see things on your side as numbers so it's just telling them who they are." The hide-the-numbers rule is lifted for the citizen's OWN data: tier, net worth, rent stress and the rest of what the engine holds on them reach the wake as who they are. Not a tension. Other citizens' numbers and city-wide engine internals stay out (not in the ruling). es builds it with the wake-as-turn plan; the `:459` comment and its guard are reconciled there. | es |
 | R2-7 | Stale: Task 10/12 say "not started" though codex reviewed and suites ran; P4/P5/P6 are proven by the Task 2 bench and were never moved to Agreed; line 45 carried .00625; frontmatter date. | Line 45 and the date FIXED here. Task 10/12 state and P4–P6 → Agreed need es's evidence per row; es flips them with the evidence, not rb on a relay. | es |
 
+## Bench soak (engine.300) — builder 2026-10-18
+
+Builder's words, on the C112 report that the scoreboard read zero a second Cycle (no weddings, births, promotions, layoffs or hires across ~1,030 citizens): "once we are set to run a bench lets include this, we can run 20 cycles to see what numbers we see here and if bonds are forming fast enough and if kids and promotions are obtainable."
+
+What it is: SANDBOX 1004 resynced from live C112 (already the first move of the engine.214 wave), then twenty bench fires, a readback after each. Not a separate bench and not a demo — the series is the evidence the rate rulings (pursuit die .05 / .08 / .01, forced sale 1 in 20 Cycles citywide, marriage at bond 8) get judged against.
+
+Read per Cycle, one row of a series table:
+- Scoreboard counts — married, born, promoted, laidOff, hired, boughtHome, soldHome, forcedSale, heritage (the `engineCycleAudit` scoreboard shape, pointed at the bench).
+- Bonds — Relationship_Bonds row count, stage distribution, how many sit at or above the marriage bar, how many crossed it this Cycle; cycles-to-marriage for any that do.
+- Kids — child rows minted (born count and the household they land in).
+- Promotions — promoted count and the writer that fired (`applyEmployerSuccess_` vs the pursuit die).
+
+Questions the table answers: does the scoreboard leave zero, and at what per-Cycle rate; are bonds forming and advancing fast enough to reach a wedding inside 20 Cycles; are kids and promotions reachable at all under the ruled rates. Whether the rates then move is the builder's call; the readback script and the bench run are this seat's. Bench resync destroys dial evidence — the resync is already planned for engine.214, so the soak costs no extra evidence.
+
 ## Changelog
 
 - 2026-10-08 (research-build) — Created: merges the rb read-before and codex's independent run into Agreed / Needs proof / New concepts with pointers; engine.284 folded in; builds on engine.67.
@@ -344,3 +358,4 @@ Every correction in the codex plan review, and where it landed. `folded` = chang
 - 2026-10-12 (research-build) — R2-6 extended by the builder (verbatim): "Whether they need to see those city numbers is up to how well we want them to know the game, the city numbers come from Civis systems and it's just regular track city type stuff." Reading: city-wide numbers are NOT forbidden to the citizen; they are a dial on how well the citizen knows the game, and in-world they are Civis Systems' ordinary city tracking (a public-style source), not engine internals. The depth of what a citizen sees is a design choice for the wake-as-turn plan (es), made with the builder. City-scale and tracked-scale numbers stay on their own scales and are not forced to reconcile (project doctrine).
 - 2026-10-12 (engine-sheet) — N31: builder sequenced it — own record on the wake now (`6489ab23`, live on the cron), the wake-as-turn design waits on the citizens' reactions and on identifying the game itself.
 - 2026-10-12 (engine-sheet) — N32 added on the builder's word: who a citizen talks to is picked by the script, not the citizen — the exchange as built (pair choice, alternating turns, canon wall, no own record), and the open design questions; part of step 2.
+- 2026-10-18 (engine-sheet) — Builder asked for a 20-Cycle bench soak on the next bench (verbatim in §Bench soak): scoreboard numbers, bond formation speed, whether kids and promotions are obtainable. Filed as engine.300, rides the engine.214 bench wave.

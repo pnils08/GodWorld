@@ -189,8 +189,10 @@ assert.equal(packagesApi.routeFor(hal, 'angle').model, 'meta-llama/llama-4-maver
 assert.equal(packagesApi.routeFor(hal, 'report').model, 'meta-llama/llama-4-maverick');
 assert.equal(packagesApi.routeFor(hal, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(hal.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.match(hal.reviewProfile.purpose, /Packet will not contain 1973/);
-assert.ok(hal.reviewProfile.authorizedTexture.some(v => /predecessor ghost|era comparison/i.test(v)));
+// 2026-10-19: Hal rebuilt on the Origins of the Dynasty bar — the archive is read through the tools.
+assert.match(hal.reviewProfile.purpose, /Origins of the Dynasty series is the bar/);
+assert.ok(hal.reviewProfile.authorizedTexture.some(v => /nickname|locker row/i.test(v)));
+assert.ok(hal.reviewProfile.canonBlockers.some(v => /origin, hometown, family, nickname/.test(v)));
 assert.ok(hal.reviewProfile.canonBlockers.some(v => v.includes('real-world Oakland')));
 assert.ok(!hal.reviewProfile.canonBlockers.some(v => v.includes('historical person')));
 

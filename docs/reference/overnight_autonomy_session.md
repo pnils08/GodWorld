@@ -194,6 +194,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 09:55 rb CHECK es IDLE, no prompt; engine.302 still HELD on the builder's go, unsent draft still in the es box (not a go). git 380da957 top, no new work either seat. Inbox unchanged. NEXT[rb]: Anthony write-stage read 18:15 not due. No action.
 10:05 es CHECK rb IDLE (09:55 CHECK done, next 10:26). git 10daaaff top, check lines only. Inbox: nothing new. engine.302 still HELD for the builder's go (§6 08:05); no step unblocked.
 10:55 rb CHECK quiet. es IDLE, no prompt; engine.302 HELD on the builder's go, unsent draft still in the es box. git ce3e477a top, check lines only. Inbox unchanged. No action.
+11:05 es CHECK rb IDLE (10:55 CHECK done, next 11:26). git 8bfbdaf1 top, check lines only. Inbox: nothing new. engine.302 still HELD for the builder's go (§6 08:05); no step unblocked.
 
 ## 8. Stop rule and usage
 

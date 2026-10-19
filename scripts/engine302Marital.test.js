@@ -56,6 +56,10 @@ const OLD_MS = { // the pre-engine.302 table, frozen for the old -> new mapping
   '75+':   [['single', 0.06], ['partnered', 0.08], ['married', 0.44], ['divorced', 0.64], ['widowed', 1.00]]
 };
 const oldMs = (seed, age) => U.pickFromCDF_(U.rand01_(seed, 'MaritalStatus'), OLD_MS[U.ageBracket_(age)]);
+const OLD_NC_COUPLED = { '18-29': [[0, 0.62], [1, 0.85], [2, 0.95], [3, 1.00]], '30-44': [[0, 0.32], [1, 0.58], [2, 0.82], [3, 0.95], [4, 1.00]],
+  '45-59': [[0, 0.16], [1, 0.40], [2, 0.72], [3, 0.90], [4, 0.98], [5, 1.00]], '60-74': [[0, 0.14], [1, 0.36], [2, 0.66], [3, 0.86], [4, 0.96], [5, 1.00]],
+  '75+': [[0, 0.13], [1, 0.34], [2, 0.64], [3, 0.85], [4, 0.96], [5, 1.00]] }; // the old '-partnered' rows (married and partnered both read them)
+const oldNcCoupled = (seed, age) => U.pickFromCDF_(U.rand01_(seed, 'NumChildren'), OLD_NC_COUPLED[U.ageBracket_(age)]);
 let minorBad = 0, partneredSeen = 0, adultMismatch = 0, kidsMismatch = 0, mirrorMismatch = 0, oldPartnered = 0, n = 0;
 for (let i = 0; i < 5000; i++) {
   const seed = 'Seed' + i + '|Last|POP-' + i;
@@ -67,7 +71,7 @@ for (let i = 0; i < 5000; i++) {
     else {
       const o = oldMs(seed, age); if (o === 'partnered') oldPartnered++;
       if (ms !== (o === 'partnered' ? 'married' : o)) adultMismatch++;
-      if (ms === 'married' && kids !== U.deriveNumChildren_(seed, age, 'married')) kidsMismatch++;
+      if (o === 'partnered' || o === 'married') { if (U.deriveNumChildren_(seed, age, 'married') !== oldNcCoupled(seed, age)) kidsMismatch++; }
     }
     if (L.deriveMaritalStatus(seed, age) !== ms || L.deriveNumChildren(seed, age, ms) !== kids) mirrorMismatch++;
   }
@@ -75,7 +79,7 @@ for (let i = 0; i < 5000; i++) {
 assert('D1 every minor draws youth with 0 children', minorBad === 0, minorBad + ' bad');
 assert('D1 no draw reads partnered', partneredSeen === 0, partneredSeen + ' seen');
 assert('D1 adult draw = old draw with partnered → married (old table drew partnered ' + oldPartnered + 'x)', adultMismatch === 0 && oldPartnered > 0, adultMismatch + ' mismatches');
-assert('D1 NumChildren deterministic for married', kidsMismatch === 0);
+assert('D1 a married draw has the children the old partnered/married row gave (frozen table)', kidsMismatch === 0, kidsMismatch + ' mismatches');
 assert('D2 lib/ mirror agrees with utilities/ on ' + n + ' draws', mirrorMismatch === 0, mirrorMismatch + ' mismatches');
 
 // ── N1 / Y1 / W1 generational engine ───────────────────────────────────────────
@@ -171,9 +175,10 @@ function bondCtx(hoodA, hoodB, rngFn, opts) {
   const lrow = (pop, first, by, hh, m, parents) => { const r = LH.map(() => ''); r[l('POPID')] = pop; r[l('First')] = first; r[l('Last')] = 'X';
     r[l('Status')] = 'Active'; r[l('BirthYear')] = by; r[l('HouseholdId')] = hh; r[l('MaritalStatus')] = m; r[l('ParentIds')] = JSON.stringify(parents || []); return r; };
   const rows = [lrow('POP-A', 'Ana', 1990, 'HH-A', 'widowed'), lrow('POP-AK', 'Kid', 2032, 'HH-A', 'youth', ['POP-A']),
-    lrow('POP-B', 'Ben', 1989, 'HH-B', 'divorced'), lrow('POP-BK', 'Kid', 2034, 'HH-B', 'youth', ['POP-B'])];
+    lrow('POP-B', 'Ben', 1989, 'HH-B', 'divorced'), lrow('POP-BK', 'Kid', 2034, 'HH-B', 'youth', ['POP-B']),
+    lrow('POP-AK2', 'Kid2', 2033, 'HH-A', 'youth', ['POP-A', 'POP-LATE'])];
   const HH = [['HouseholdId', 'HeadOfHousehold', 'HouseholdType', 'Members', 'Status'],
-    ['HH-A', 'POP-A', 'family', JSON.stringify(['POP-A', 'POP-AK']), 'active'], ['HH-B', 'POP-B', 'family', JSON.stringify(['POP-B', 'POP-BK']), 'active']];
+    ['HH-A', 'POP-A', 'family', JSON.stringify(['POP-A', 'POP-AK', 'POP-AK2']), 'active'], ['HH-B', 'POP-B', 'family', JSON.stringify(['POP-B', 'POP-BK', 'POP-BX']), 'active']];
   const FR = [['HouseholdId', 'Husband', 'Wife', 'Type', 'Cycle', 'Status', 'c1', 'c2', 'c3', 'c4', 'c5']];
   const sheet = v => ({ getDataRange: () => ({ getValues: () => v.map(r => r.slice()) }), getLastColumn: () => v[0].length,
     getRange: (r, c) => ({ setValue: x => { v[r - 1][c - 1] = x; }, getValues: () => [v[r - 1].slice()] }), appendRow: x => v.push(x) });
@@ -187,6 +192,8 @@ function bondCtx(hoodA, hoodB, rngFn, opts) {
   assert('R1 the joiner moves in', rows[2][l('HouseholdId')] === 'HH-A' && memA.indexOf('POP-B') >= 0);
   assert('R1 the joiner\'s own child moves with them', rows[3][l('HouseholdId')] === 'HH-A' && memA.indexOf('POP-BK') >= 0, rows[3][l('HouseholdId')] + ' ' + HH[1][3]);
   assert('R1 the head\'s child stays, gaining the joiner as a parent', rows[1][l('HouseholdId')] === 'HH-A' && JSON.parse(rows[1][l('ParentIds')]).indexOf('POP-B') >= 0);
+  assert('R1 a child who already lists two parents gains no third', JSON.parse(rows[4][l('ParentIds')]).length === 2);
+  assert('R1 the old household drops the joiner and the child who moved, keeps the rest', HH[2][3] === JSON.stringify(['POP-BX']), HH[2][3]);
 }
 
 // ── E1 / E2 encounters (cut 2, ruling 8) ───────────────────────────────────────
@@ -202,7 +209,11 @@ function poolCtx(n, rngFn, cal) {
   assert('E1 no ceiling: 40 citizens who all meet form 39 bonds (the old cap was 2–4)', many.length === 39, many.length);
   const keys = new Set(many.map(b => [b.citizenA, b.citizenB].sort().join('|')));
   assert('E1 every met pair forms at most once (the reverse meeting is spent)', keys.size === many.length);
+  const both = B.detectNewBonds_(poolCtx(2, () => 0.01));
+  assert('E1 two citizens who each meet the other form one bond (the reverse meeting is spent)', both.length === 1);
   assert('E2 the starting meeting chance is 0.1 (the builder\'s dial)', B.BOND_ENCOUNTER_CHANCE === 0.1);
+  assert('E2 sports band top alone ×1.5 (0.14 meets, 0.16 does not)',
+    B.detectNewBonds_(poolCtx(10, () => 0.14, { sportsTop: true })).length > 0 && B.detectNewBonds_(poolCtx(10, () => 0.16, { sportsTop: true })).length === 0);
   assert('E2 a draw at 0.15 meets nobody on an ordinary week', B.detectNewBonds_(poolCtx(10, () => 0.15)).length === 0);
   assert('E2 a major holiday doubles the chance (0.15 < 0.2)', B.detectNewBonds_(poolCtx(10, () => 0.15, { holiday: 'Thanksgiving', holidayPriority: 'major' })).length > 0);
   assert('E2 holiday + First Friday + sports top is ×2, never multiplied (0.25 meets nobody)',
@@ -237,8 +248,18 @@ const bondRow = (id, a, b, type, intensity, hood) => ({ bondId: id, citizenA: a,
   assert('P1 one Bond line on each side', (lh(0).match(/went from neighbor to friend/g) || []).length === 1 && (lh(1).match(/went from neighbor to friend/g) || []).length === 1, lh(0) + ' / ' + lh(1));
   assert('P1 one side absent → no flip (and the bond fades)', pr.bondType === 'professional' && pr.intensity < 5.8);
   assert('P1 FAMILY never flips', fam.bondType === 'family');
-  B.updateExistingBonds_(deepCtx([nb], ['POP-01', 'POP-02']));
-  assert('P1 a deepened bond flips once (no second line)', (lh(0).match(/went from neighbor to friend/g) || []).length === 1);
+  ctx._bondActivePool = ['POP-01', 'POP-02', 'POP-03', 'POP-04'];
+  B.updateExistingBonds_(ctx);
+  assert('P1 a deepened bond flips once (same ledger, a second shared week: still one line)', (lh(0).match(/went from neighbor to friend/g) || []).length === 1);
+  const fest = bondRow('B4', 'POP-01', 'POP-04', 'festival', 5.8); const fctx = deepCtx([fest], ['POP-01']); fctx.bondCalendarContext = { holiday: 'Thanksgiving' };
+  B.updateExistingBonds_(fctx);
+  assert('P1 a holiday boost alone (one side absent) never deepens a festival bond', fest.bondType === 'festival');
+  const fest2 = bondRow('B5', 'POP-01', 'POP-02', 'festival', 5.8); const f2 = deepCtx([fest2], ['POP-01', 'POP-02']); f2.bondCalendarContext = { holiday: 'Thanksgiving' };
+  B.updateExistingBonds_(f2);
+  assert('P1 a festival bond at 6+ in a shared week deepens', fest2.bondType === 'friendship');
+  const lone = bondRow('B6', 'POP-01', 'POP-77', 'professional', 5.9); const lctx = deepCtx([lone], ['POP-01', 'POP-77']);
+  B.updateExistingBonds_(lctx);
+  assert('P1 a partner missing from the ledger: the present side still gets its line', lone.bondType === 'friendship' && /POP-77 became a real friend/.test(String(lctx.ledger.rows[0][lctx.LH.indexOf('LifeHistory')])));
   const romCtx = bond => { const c = deepCtx([bond], ['POP-01', 'POP-02']); c.rng = () => 0; c._bondNameLookup = {};
     c._bondCompatByKey = {}; c._bondCompatByKey[B.getBondKey_(bond.citizenA, bond.citizenB)] = 10; return c; };
   nb.intensity = 7;
@@ -309,6 +330,44 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
   const none = gcWorld({ rng: seq([0.1, 0, 0]), gcs: [['Too', 'Young', 22, '', 'Downtown', 'Chef', 'active', 'male'], ['No', 'Age', '', '', 'Downtown', 'Chef', 'active', 'male']] });
   B.processGCCourtship_(none.ctx);
   assert('G1 nobody lines up (age outside the window or unknown) → no courtship', none.ctx.summary.relationshipBonds.length === 0);
+}
+
+// ── I1 intake: a minor marries no one (codex diff review H2) ───────────────────
+{
+  const IW = load('../phase05-citizens/processAdvancementIntake.js', ['wireFamilyMatch_']);
+  const IH = ['POPID', 'First', 'Last', 'BirthYear', 'MaritalStatus', 'SpouseId', 'ParentIds', 'ChildrenIds', 'NumChildren', 'HouseholdId', 'Neighborhood', 'LifeHistory'];
+  const ir = (pop, by, m) => { const r = IH.map(() => ''); r[0] = pop; r[1] = 'X'; r[2] = 'Y'; r[3] = by; r[4] = m; return r; };
+  const rows = [ir('POP-T', 2027, 'youth'), ir('POP-N', 2000, 'single')];
+  const ctx = { ledger: { headers: IH, rows }, summary: { simYear: 2042, cycleId: 113 }, config: { cycleCount: 113 } };
+  IW.wireFamilyMatch_(ctx, 1, 'POP-N', 'POP-T', 'spouse', 'now', 113, { appendRow() {} }, 'test');
+  assert('I1 an authored spouse link onto a minor is refused whole', rows[0][4] === 'youth' && rows[1][4] === 'single' && !rows[0][5] && !rows[1][5]);
+}
+
+// ── G2 courtship binding, the same pass, missing age, 57/59 (codex diff review H7/H8) ──
+{
+  const twoBonds = gcWorld({ bond: 'Rui Moss', gcs: [['Rui', 'Moss', 41, '', 'Laurel', 'Baker', 'Courting', 'male']] });
+  twoBonds.bonds.push(bondRow('BG2', 'POP-01', 'GC:Rui Moss', 'romantic', 9));
+  B.processGCCourtship_(twoBonds.ctx);
+  assert('G2 two matured bonds on one citizen + one GC name in a pass: one mint, one wedding', twoBonds.rows.length === 2);
+  const tok = gcWorld({ bond: 'Rui Moss', gcs: [['Rui', 'Moss', 41, '', 'Laurel', 'Baker', 'Courting', 'male']] });
+  tok.bonds[0].notes = 'Met by chance in Downtown (C100) [gc:Uptown|male]';
+  B.processGCCourtship_(tok.ctx);
+  assert('G2 a stamped bond marries only the Courting row with its hood and sex', tok.rows.length === 1);
+  const noAge = gcWorld({ bond: 'Rui Moss', gcs: [['Rui', 'Moss', '', '', 'Laurel', 'Baker', 'Courting', 'male']] });
+  B.processGCCourtship_(noAge.ctx);
+  assert('G2 a GC with no age on record never marries (no 35 default)', noAge.rows.length === 1);
+  const at58 = gcWorld({ ageA: 58, bond: 'Rui Moss', gcs: [['Rui', 'Moss', 50, '', 'Laurel', 'Baker', 'Courting', 'male']] });
+  B.processGCCourtship_(at58.ctx);
+  const at59 = gcWorld({ ageA: 59, bond: 'Rui Moss', gcs: [['Rui', 'Moss', 50, '', 'Laurel', 'Baker', 'Courting', 'male']] });
+  B.processGCCourtship_(at59.ctx);
+  const gc59 = gcWorld({ ageA: 50, bond: 'Rui Moss', gcs: [['Rui', 'Moss', 59, '', 'Laurel', 'Baker', 'Courting', 'male']] });
+  B.processGCCourtship_(gc59.ctx);
+  assert('G2 the GC wedding window: 58 marries, 59 waits (either side)', at58.rows.length === 2 && at59.rows.length === 1 && gc59.rows.length === 1);
+  const st = gcWorld({ rng: seq([0.1, 0, 0]), gcs: [['Near', 'Two', 44, '', 'Uptown', 'Chef', 'active', 'male']] });
+  B.processGCCourtship_(st.ctx);
+  const sb = st.ctx.summary.relationshipBonds[0];
+  assert('G2 the courtship start stamps [gc:<hood>|<sex>] and the life line says where they met',
+    sb && /\[gc:Uptown\|male\]/.test(sb.notes) && /met Near Two in Downtown — something starting/.test(String(st.rows[0][st.LH.indexOf('LifeHistory')])));
 }
 
 console.log(`\nengine302Marital: ${passed} passed, ${failed} failed`);

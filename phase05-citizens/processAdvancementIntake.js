@@ -2395,7 +2395,10 @@ function formIntakeHouseholds_(ctx, mints, cycle, now, logSheet) {
       if (mem.type === 'spouse' && !spouse && mem.linked) spouse = mem;
       if (mem.type === 'child' && mem.linked) kids.push(mem);
     }
-    if (spouse && iMar >= 0) { headRow[iMar] = 'married'; rows[spouse.idx][iMar] = 'married'; }
+    // engine.302: a minor marries no one — the household's spouse is married only when both are adults
+    var iBYh = idx('BirthYear'), simYh = simYearOf_(ctx, cycle);
+    var adultH = function(r) { var by = iBYh >= 0 ? Number(r[iBYh]) || 0 : 0; return !(by > 0 && (simYh - by) < 18); };
+    if (spouse && iMar >= 0 && adultH(headRow) && adultH(rows[spouse.idx])) { headRow[iMar] = 'married'; rows[spouse.idx][iMar] = 'married'; }
     var kidIds = JSON.stringify(kids.map(function(k) { return k.pop; }));
     if (iKids >= 0) { headRow[iKids] = kids.length; if (spouse) rows[spouse.idx][iKids] = kids.length; }
     if (iCh >= 0) { headRow[iCh] = kidIds; if (spouse) rows[spouse.idx][iCh] = kidIds; }
@@ -2487,6 +2490,14 @@ function wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cy
   };
   var desc = '';
 
+  // engine.302 (codex diff review H2): a minor marries no one — an authored spouse link on a row under 18
+  // (either side) is refused whole, logged, the rest of the mint stands
+  var iBYw = h.indexOf('BirthYear'), simYw = simYearOf_(ctx, cycle);
+  var minorW = function (r) { var by = iBYw >= 0 ? Number(r[iBYw]) || 0 : 0; return by > 0 && (simYw - by) < 18; };
+  if (matchType === 'spouse' && (minorW(newRow) || minorW(target))) {
+    Logger.log('wireFamilyMatch_: spouse link ' + newPopId + ' <-> ' + targetPopId + ' refused — a minor marries no one (engine.302)');
+    return;
+  }
   if (matchType === 'spouse') {
     if (iSpouse >= 0) { target[iSpouse] = newPopId; newRow[iSpouse] = targetPopId; }
     // engine.302: a spouse match is a marriage — both rows read married (the drip slot opens only on a

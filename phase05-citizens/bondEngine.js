@@ -2220,10 +2220,10 @@ function deepenBondToFriendship_(ctx, bond, cycle) {
     if (fromType === BOND_TYPES.PROFESSIONAL) return other.name + ' became a real friend, not just a colleague';
     return 'the friendship with ' + other.name + ' outlasted the festival';
   };
-  if (pA && pB) {
-    appendBondLifeLine_(ctx, pA.idx, 'Bond', line(pB), cycle);
-    appendBondLifeLine_(ctx, pB.idx, 'Bond', line(pA), cycle);
-  }
+  // each endpoint on the ledger gets its line (an off-ledger or inactive partner is named from the bond)
+  var nameOf = function (p, id) { return p ? p : { name: String(id || '').trim() }; };
+  if (pA) appendBondLifeLine_(ctx, pA.idx, 'Bond', line(nameOf(pB, bond.citizenB)), cycle);
+  if (pB) appendBondLifeLine_(ctx, pB.idx, 'Bond', line(nameOf(pA, bond.citizenA)), cycle);
 }
 
 function processRomanceAndMarriage_(ctx) {
@@ -2365,6 +2365,7 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
     // The formation reconciler drops them from the old row's Members on its next pass.
     var oldHid = String(joiner.householdId || '').trim();
     var iHHk = idx('HouseholdId'), iParK = idx('ParentIds'), iBirthK = idx('BirthYear'), iPopK = idx('POPID');
+    var leaving = [joinerId]; // the old row's Members lose the joiner and every child who moves (codex diff review H3)
     if (oldHid && oldHid !== joinTarget.hid && iHHk >= 0 && iParK >= 0 && iBirthK >= 0 && iPopK >= 0) {
       var simYk = simYearOf_(ctx, ctx.summary.cycleId || ctx.config.cycleCount || 0);
       for (var mk = 0; mk < ctx.ledger.rows.length; mk++) {
@@ -2377,7 +2378,13 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
         krow[iHHk] = joinTarget.hid;
         var kpop = String(krow[iPopK] || '').trim();
         if (kpop && jm.indexOf(kpop) < 0) jm.push(kpop);
+        if (kpop) leaving.push(kpop);
         ctx.ledger.dirty = true;
+      }
+      var oldInfo = findHH(oldHid);
+      if (oldInfo) {
+        var oldMem = oldInfo.members.filter(function (m) { return leaving.indexOf(String(m).trim()) < 0; });
+        if (oldMem.length !== oldInfo.members.length) hhSheet0.getRange(oldInfo.row, hv[0].indexOf('Members') + 1).setValue(JSON.stringify(oldMem));
       }
     }
     hhSheet0.getRange(joinTarget.info.row, hv[0].indexOf('Members') + 1).setValue(JSON.stringify(jm));
@@ -2395,7 +2402,9 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
         if (!(mby > 0 && (simY0 - mby) < 18)) continue;
         var mpar = []; try { mpar = JSON.parse(mrow[iPar0] || '[]'); } catch (e1) {}
         if (!Array.isArray(mpar)) mpar = [];
-        if (mpar.indexOf(joinerId) < 0) { mpar.push(joinerId); mrow[iPar0] = JSON.stringify(mpar); ctx.ledger.dirty = true; }
+        // engine.302: the new spouse becomes the SECOND parent — a child who already lists two (a remarrying
+        // divorced or widowed head's child) keeps them; a step-parent never makes a third
+        if (mpar.indexOf(joinerId) < 0 && mpar.length < 2) { mpar.push(joinerId); mrow[iPar0] = JSON.stringify(mpar); ctx.ledger.dirty = true; }
       }
     }
   }
@@ -2528,10 +2537,15 @@ function processGCCourtship_(ctx) {
     // engine.302 (codex cut-2 review H5): the bond carries a name, and Generic_Citizens has no id column
     // (19 duplicate names on live) — marry only the one row under that name that is Courting (set when this
     // courtship began). None, or more than one: no wedding this Cycle, logged; the courtship waits.
+    // The courtship start stamps the GC's hood and sex on the bond ([gc:<hood>|<sex>]); a stamped bond needs
+    // them to match too. A row this pass already promoted reads Promoted in the snapshot below.
+    var gcTok = /\[gc:([^|\]]*)\|([^\]]*)\]/.exec(String(bd.notes || ''));
     var found = -1, courtingRows = 0;
     for (var g0 = 1; g0 < gcVals.length; g0++) {
       var nm0 = (String(gcVals[g0][gF] || '').trim() + ' ' + String(gcVals[g0][gL] || '').trim()).trim();
       if (nm0 !== gcName || String(gcVals[g0][gStat] || '').trim().toLowerCase() !== 'courting') continue;
+      if (gcTok && ((gNbhd >= 0 ? String(gcVals[g0][gNbhd] || '').trim() : '') !== gcTok[1] ||
+                    String(gcVals[g0][gSex] || '').trim().toLowerCase() !== gcTok[2])) continue;
       courtingRows++;
       found = g0;
     }
@@ -2540,11 +2554,11 @@ function processGCCourtship_(ctx) {
       continue;
     }
     var gRowM = gcVals[found];
-    var gAgeM = Number(gRowM[gAge]) || (Number(gRowM[gBirth]) ? simYear - Number(gRowM[gBirth]) : 35);
+    var gAgeM = Number(gRowM[gAge]) || (Number(gRowM[gBirth]) ? simYear - Number(gRowM[gBirth]) : 0);
     // engine.302 (ruling 11, codex H4): the matured GC wedding keeps the same window as every wedding —
-    // outside it the courtship waits, unresolved.
+    // outside it, or with an age the record does not hold, the courtship waits, unresolved.
     var pAgeM = P.birthYear > 0 ? simYear - P.birthYear : 0;
-    if (pAgeM < wedMin || pAgeM > wedMax || gAgeM < wedMin || gAgeM > wedMax) continue;
+    if (!(gAgeM > 0) || pAgeM < wedMin || pAgeM > wedMax || gAgeM < wedMin || gAgeM > wedMax) continue;
 
     var spId = nextPopIdLocked_(ctx); // engine.90 shared allocator
     var last = P.name.split(' ').slice(-1)[0] || '';
@@ -2599,6 +2613,10 @@ function processGCCourtship_(ctx) {
     bd.citizenB = spId; // the bond now holds a real citizen
     bd.notes = String(bd.notes || '') + ' [record caught up C' + cycle + ']';
     marryCitizens_(ctx, bd, P, B, cycle);
+    // engine.302 (codex diff review H7): this pass's snapshots learn the wedding — the GC row is Promoted and the
+    // citizen married, so a second matured bond on either cannot mint or marry again the same pass
+    gcVals[found][gStat] = 'Promoted';
+    P.marital = 'married'; P.spouse = spId;
     Logger.log('processGCCourtship_: matured — ' + bd.citizenA + ' married ' + spId + ' (' + spName + ')');
   }
 
@@ -2652,11 +2670,12 @@ function processGCCourtship_(ctx) {
   var metWhere = nearPool.length ? ('in ' + P2.hood) : 'across the city';
 
   // A romance begins. Nothing minted, nothing given — the record waits.
+  var gcStamp = '[gc:' + (gNbhd >= 0 ? String(gRow2[gNbhd] || '').trim() : '') + '|' + String(gRow2[gSex] || '').trim().toLowerCase() + ']';
   ctx.summary.relationshipBonds.push(makeBond_(pid2, 'GC:' + gcFull,
     BOND_TYPES.ROMANTIC, 'gc-courtship', 'COMMUNITY', nearPool.length ? P2.hood : '',
-    5.5, cycle, 'Met by chance ' + metWhere + ' (C' + cycle + ') — partner off-camera, the record waits', ctx));
+    5.5, cycle, 'Met by chance ' + metWhere + ' (C' + cycle + ') — partner off-camera, the record waits ' + gcStamp, ctx));
   gcSheet.getRange(gRow2i + 1, gStat + 1).setValue('Courting');
-  appendBondLifeLine_(ctx, P2.idx, 'Bond', 'met ' + gcFull + ' — something starting', cycle);
+  appendBondLifeLine_(ctx, P2.idx, 'Bond', 'met ' + gcFull + ' ' + metWhere + ' — something starting', cycle);
   Logger.log('processGCCourtship_: courtship begins — ' + pid2 + ' + ' + gcFull + ' ' + metWhere);
 }
 
@@ -2761,6 +2780,11 @@ function processGCMarriageLottery_(ctx) {
     setC('ClockMode', 'ENGINE'); setC('Status', 'Active');
     setC('BirthYear', simYear - pick.age); setC('OrginCity', 'Oakland');
     setC('Neighborhood', P.hood); setC('MaritalStatus', 'single'); // marryCitizens_ flips it
+    // engine.302 (plan Task 8 / A28 / R4): an engine-born spouse starts unprotected — explicit no/no/no
+    ['UNI (y/n)', 'MED (y/n)', 'CIV (y/n)'].forEach(function (fc) {
+      if (idxCol(fc) < 0) throw new Error('processGCMarriageLottery_: Simulation_Ledger has no ' + fc + ' column — the spouse mint cannot register its flags.');
+      setC(fc, 'no');
+    });
     setC('Gender', wantSex);
     setC('UsageCount', 0);
     // engine.62b (S322): mint with a derived economic profile, not blanks —

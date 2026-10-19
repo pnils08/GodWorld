@@ -136,7 +136,7 @@ const REGATE = process.argv.includes('--regate');
 // on gate-cleared (staged) articles per cycle-week — the ~20–28/wk cost envelope.
 // At the cap a write wake exits BEFORE any writer spend. --no-gate samples are
 // exempt (they never stage). Override: --budget-cap N or NEWSROOM_WEEKLY_CAP env.
-const WEEKLY_CAP = parseInt(arg('--budget-cap', process.env.NEWSROOM_WEEKLY_CAP || '28'), 10);
+const WEEKLY_CAP = parseInt(arg('--budget-cap', process.env.NEWSROOM_WEEKLY_CAP || '40'), 10);
 // --persona (S332 firebrand lane, plumbed 2026-07-24): run an authored reporter's
 // adversarial stance instead of the desk skill. Forwarded to cron-desk-writer.js;
 // also keys the draft/artifact filenames so persona runs never overwrite desk runs.

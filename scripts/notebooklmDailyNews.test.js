@@ -404,7 +404,7 @@ const syntheticDigest = {
   assert.strictEqual(title, 'The Bay Tribune Daily C999 — current source pack — abcdef123456');
   const prompt = dailyPrompt(999);
   assert.strictEqual(SOURCE_VERSION, '1.8');
-  assert.strictEqual(notebookConfig.dailyNews.reportedDayThreshold, 2, 'builder 2026-10-18: bar lowered from 3');
+  assert.strictEqual(notebookConfig.dailyNews.reportedDayThreshold, 1, 'builder 2026-10-18: bar 3→2; 2026-10-19: →1 (only Monday moved)');
   assert.strictEqual(DEFAULT_AUDIO_LENGTH, 'default');
   assert.strictEqual(notebookConfig.dailyNews.audioLength, 'default');
   assert(prompt.includes('The Bay Tribune daily news for Oakland for Cycle 999'));

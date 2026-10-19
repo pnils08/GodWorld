@@ -1111,7 +1111,17 @@ async function main() {
             'Every fact you bring in from a tool is printed as the tool returned it and named to its source in the piece ("the Archive", "his dossier", "the feed"). What no tool and no Packet line holds may not enter.\n' +
             '=== END TOOLS ==='
           : '') +
-        (WRITER_TOOLS && PERSONA !== 'hal-richmond'
+        (WRITER_TOOLS && PERSONA === 'anthony-raines'
+          ? '\n\n=== YOUR TOOLS — THE BOARD, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
+            'The slice is your story and your claim. The tools are the board behind it. A tool call never changes the assignment.\n' +
+            '- dossier_read(player, season?): the player\'s TrueSource card — every season line on file and the rates already worked from it. Pull it for the man you are evaluating and for a peer at the position.\n' +
+            '- canon_search(query): the archive — his Statcast player card if one exists (search "STATCAST PLAYER CARD <name>"), the PANDAS method and Paper Cuts (reasoning shapes: they supply no number), prior Tribune coverage.\n' +
+            '- sheet_read(tab): Oakland_Sports_Feed for this cycle\'s line.\n' +
+            '- citizen_lookup(name): one person\'s ledger profile — use it before you characterize anyone.\n' +
+            'Every number you bring in from a tool is printed exactly as the tool returned it and named to its source ("his TrueSource card", "his Statcast card", "the feed"). Do no arithmetic on it. A method shapes the argument; it never invents a figure.\n' +
+            '=== END TOOLS ==='
+          : '') +
+        (WRITER_TOOLS && PERSONA !== 'hal-richmond' && PERSONA !== 'anthony-raines'
           ? '\n\n=== YOUR TOOLS — DEPTH, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
             'The slice is your story and your claim. The tools are for depth: another season, a third peer, prior coverage, a current feed line. A tool call never changes the assignment.\n' +
             '- dossier_read(player, season?): a player\'s season lines and the rates already worked from them — use it for another season or another peer at the position.\n' +
@@ -1204,6 +1214,8 @@ async function main() {
       (TOOLS_AB ? 'Use your tools where the Packet runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ' : '') +
       (WRITER_TOOLS ? (PERSONA === 'hal-richmond'
         ? 'The slice is the story. Before you write, open the archive — the man\'s origins and prior coverage by name, his dossier across the years — then compose, naming each tool-fetched fact to its source. '
+        : PERSONA === 'anthony-raines'
+        ? 'The slice is the story. Before you write, pull the board — the player\'s TrueSource card, a peer\'s, his Statcast card if the archive holds one, this cycle\'s feed line — then compose, naming each tool-fetched number to its source. '
         : 'The slice is the story. Before you write, use your tools for depth the slice does not hold — another season, a third peer, what the paper said before — then compose, citing each tool-fetched number to its source. ') : '') +
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
     const abPop = TOOLS_AB && packetState && packetState.actor && /^POP-\d+$/.test(packetState.actor.id) ? packetState.actor.id : null;

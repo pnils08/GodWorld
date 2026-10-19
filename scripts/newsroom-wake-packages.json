@@ -312,7 +312,7 @@
     }
   },
   "anthony-raines": {
-    "version": "ANTHONY-LEP2-2",
+    "version": "ANTHONY-LEP2-3",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -336,13 +336,13 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-haiku-5.5"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {
       "id": "anthony-sports-analytics-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "Evaluate one Packet-backed sports line, roster fit, or feed delta with correctly attributed numbers and explicit sample limits. One sourced analytic claim is success; fan heat, elegy, and invented advanced metrics are not.",
+      "purpose": "Evaluate one Packet-backed sports line, roster fit, or feed delta with correctly attributed numbers and explicit sample limits. The board is read through the tools — the player's TrueSource card for the career line, the archive for his Statcast card, the PANDAS method and prior coverage, the feed for this cycle — never recalled. One sourced analytic claim is success; fan heat, elegy, and invented advanced metrics are not.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "precise third-person sports analysis",
@@ -359,7 +359,8 @@
         "every named player, team, venue, institution, league, organization, and source must come from the Packet",
         "every statistic, record, streak, result, roster move, role, award, contract, salary, injury, date, and sample claim requires Packet support",
         "an unresolved feed subject may be named only as supplied and may not receive a POPID, biography, role beyond the supplied label, quote, or interview",
-        "single-game production may support a feed-delta observation but not an unsupported season projection or new player identity"
+        "single-game production may support a feed-delta observation but not an unsupported season projection or new player identity",
+        "a number from a TrueSource card, a Statcast card or the feed enters only through a tool call, printed as returned and named to its source; a method (PANDAS, Paper Cuts) shapes the reasoning and supplies no number of its own"
       ],
       "canonBlockers": [
         "a statistic attributed to the wrong player or two player lines merged into one subject",
@@ -368,6 +369,9 @@
         "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
         "fan we, emotional crowd consensus, or historical elegy replacing the analytic claim"
       ]
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "elliot-marbury": {

@@ -125,7 +125,7 @@ assert.ok(pSlayer.reviewProfile.textureConditions.some(v => v.includes('prior-ta
 assert.ok(pSlayer.reviewProfile.canonBlockers.some(v => v.includes('collective fan sentiment')));
 
 const anthony = packages['anthony-raines'];
-assert.equal(anthony.version, 'ANTHONY-LEP2-2');
+assert.equal(anthony.version, 'ANTHONY-LEP2-3');
 assert.equal(packagesApi.sourcingFor(anthony), 'records');
 assert.equal(anthony.active, true);
 assert.equal(anthony.requiredDaily, true);
@@ -136,7 +136,7 @@ assert.equal(anthony.assignment.beatDomain, 'SPORTS_ANALYTICS');
 assert.equal(anthony.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(anthony, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
 assert.equal(packagesApi.routeFor(anthony, 'report').model, 'deepseek/deepseek-v4-flash-0731');
-assert.equal(packagesApi.routeFor(anthony, 'write').model, 'anthropic/claude-haiku-5.5');
+assert.equal(packagesApi.routeFor(anthony, 'write').model, 'anthropic/claude-sonnet-5.5'); // 2026-10-19: tools on, lead analytic seat
 assert.equal(anthony.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(anthony.reviewProfile.textureConditions.some(v => v.includes('unresolved feed subject')));
 assert.ok(anthony.reviewProfile.canonBlockers.some(v => v.includes('wrong player')));
@@ -171,11 +171,11 @@ const seats = Object.entries(packages).filter(([, v]) => v && v.persona);
 assert(seats.length >= 25);
 assert.deepStrictEqual(seats.filter(([, v]) => v.rewardLoop !== true).map(([k]) => k), []);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
-assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['elliot-marbury', 'hal-richmond']); // Hal: builder 2026-10-19
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['anthony-raines', 'elliot-marbury', 'hal-richmond']); // registry order; Hal + Anthony: builder 2026-10-19
 assert.equal(packages['hal-richmond'].writerTools.maxToolCalls, 6);
 assert.equal(packages['hal-richmond'].version, 'HAL-LEP2-3');
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { writerTools: { maxToolCalls: 9 } })), /writerTools/);
-assert.throws(() => packagesApi.validatePackage(jax.persona, Object.assign({}, jax, { writerTools: { maxToolCalls: 6 } })), /granted only to elliot-marbury, hal-richmond/);
+assert.throws(() => packagesApi.validatePackage(jax.persona, Object.assign({}, jax, { writerTools: { maxToolCalls: 6 } })), /granted only to elliot-marbury, hal-richmond, anthony-raines/);
 assert.equal(marbury.assignment.popid, 'POP-00166');
 assert.equal(packagesApi.routeFor(marbury, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(hal.active, true);
@@ -345,7 +345,7 @@ assert.equal(gate.eligible.length, 5);
 assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-1');
 assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-2');
 assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-1');
-assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-2');
+assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-3');
 assert.equal(gate.eligible[4].wakePackage, 'JORDAN-LEP2-1');
 assert.deepStrictEqual(gate.skipped.map(row => row.name),
   ['TEST-ONLY Unpackaged Reporter']);

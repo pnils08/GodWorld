@@ -321,6 +321,26 @@ var SOLO_ESTABLISH_CHANCE = 0.10;
  *  - Bond-engine weddings already form/join households completely (verified
  *    S322): anything they made is truth this function routes around.
  */
+// engine.304 D11 (builder 2026-10-19, statement 13: "the household may need to declare a parent deceased"): the
+// tracked parents known dead — Status deceased on the ledger (the Cycle of the death) or a death in Citizen_Archive.
+// A traded-away or unknown parent is not known dead. → { POPID: true }
+function deadParentSet_(ctx) {
+  var out = {}, h = ctx.ledger.headers, iPop = h.indexOf('POPID'), iSt = h.indexOf('Status');
+  for (var r = 0; r < ctx.ledger.rows.length; r++) {
+    var row = ctx.ledger.rows[r];
+    if (row && iSt >= 0 && String(row[iSt] || '').trim().toLowerCase() === 'deceased') out[String(row[iPop]).trim()] = true;
+  }
+  var arch = (typeof citizenArchiveLatestByPop_ === 'function') ? citizenArchiveLatestByPop_(ctx, h) : {};
+  for (var p in arch) if (arch.hasOwnProperty(p) && arch[p].reason === 'deceased') out[p] = true;
+  return out;
+}
+// engine.304 D11: off-camera parent salaries a minor still has — 2 less the tracked parents known dead
+function livingOffcamParentSlots_(parentIds, deadSet) {
+  var ids = (String(Array.isArray(parentIds) ? parentIds.join(' ') : parentIds || '').match(/POP-\d+/g) || []), seen = {}, dead = 0;
+  for (var i = 0; i < ids.length; i++) { if (seen[ids[i]]) continue; seen[ids[i]] = true; if (deadSet[ids[i]]) dead++; }
+  return Math.max(0, 2 - dead);
+}
+
 function formCriteriaHouseholds_(ctx, households, cycle) {
   var out = { formed: 0, adopted: 0, solo: 0 };
   var rng = safeRand_(ctx); // engine.73: solo establishment dice
@@ -379,6 +399,7 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
   var popIdOf = function(v) { var mm = String(v || '').match(/POP-\d+/); return mm ? mm[0] : ''; };
   var liveHH = function(cz) { return String(rows[cz.ledgerIndex][iHH] || '').trim(); };
   var seq = 0;
+  var deadSet = null; // engine.304 D11: read once, only when an orphan forms
 
   for (var i = 0; i < citizens.length; i++) {
     var cz = citizens[i];
@@ -400,7 +421,8 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
       var kid = byPop[popIdOf(rawKids[k])];
       if (kid && !liveHH(kid)) onKids.push(String(kid.popId).trim());
     }
-    var orphanMinor = age < 18 && !(cz.parentIds || []).length;
+    // engine.304 D11: an orphan is a minor with no LIVING tracked parent — a child of the dead gets a home too
+    var orphanMinor = age < 18 && !(cz.parentIds || []).some(function (pp) { return !!byPop[popIdOf(pp)]; });
     var ownInc = iInc >= 0 ? (Number(String(rows[cz.ledgerIndex][iInc]).replace(/[$,\s]/g, '')) || 0) : 0;
 
     if (!married && !(age >= 18 && onKids.length) && !orphanMinor) {
@@ -440,7 +462,10 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
       type = 'family';
       for (var k2 = 0; k2 < onKids.length; k2++) members.push(onKids[k2]);
     }
-    if (orphanMinor) { type = 'family'; income = ownInc + offcamInc * 2; } // both parents off-camera
+    if (orphanMinor) { // engine.304 D11: the household declares a dead parent — no salary for them
+      if (!deadSet) deadSet = deadParentSet_(ctx);
+      type = 'family'; income = ownInc + offcamInc * livingOffcamParentSlots_(cz.parentIds, deadSet);
+    }
 
     var hhId = 'HH-' + String(cycle).padStart(4, '0') + '-F' + String(++seq).padStart(3, '0');
     var vals = {
@@ -1222,6 +1247,7 @@ function updateHouseholdIncomes_(ctx, households, citizens) {
 
   var citizenMoney = buildCitizenMoneyLookup_(ctx);
   if (!citizenMoney) return;
+  var deadSetInc = null; // engine.304 D11: read once, only when an all-minor family is priced
 
   // Batched write: one column vector each, aligned to sheet rows 2..lastRow.
   var lastRow = sheet.getLastRow();
@@ -1258,7 +1284,15 @@ function updateHouseholdIncomes_(ctx, households, citizens) {
           }
         }
       }
-      if (famAdults === 0) totalIncome += 2 * GENERIC_SPOUSE_SALARY;
+      if (famAdults === 0) { // engine.304 D11: the most living off-camera parents any of its minors still has
+        if (!deadSetInc) deadSetInc = deadParentSet_(ctx);
+        var slots = 0;
+        for (var fm = 0; fm < members.length; fm++) {
+          var mMoney = citizenMoney[members[fm]];
+          if (mMoney) slots = Math.max(slots, livingOffcamParentSlots_(mMoney.parentIds, deadSetInc));
+        }
+        totalIncome += slots * GENERIC_SPOUSE_SALARY;
+      }
       else if (offCamSpouse) totalIncome += GENERIC_SPOUSE_SALARY;
     }
     var vecIdx = household.rowIndex - 2;
@@ -1288,6 +1322,7 @@ function buildCitizenMoneyLookup_(ctx) {
   var birthYearCol = header.indexOf('BirthYear');
   var maritalCol = header.indexOf('MaritalStatus');
   var spouseCol = header.indexOf('SpouseId');
+  var parentsCol = header.indexOf('ParentIds'); // engine.304 D11
 
   if (popIdCol < 0 || incomeCol < 0) return null;
 
@@ -1311,7 +1346,8 @@ function buildCitizenMoneyLookup_(ctx) {
       netWorth: netWorthCol >= 0 ? (Number(rows[r][netWorthCol]) || 0) : 0,
       adult: by > 0 ? (simYear - by) >= 18 : true, // 18+ = adult (S320 kid-age ruling)
       married: ms === 'married',
-      spousePop: sp ? sp.split(' ')[0] : ''
+      spousePop: sp ? sp.split(' ')[0] : '',
+      parentIds: parentsCol >= 0 ? String(rows[r][parentsCol] || '') : '' // engine.304 D11
     };
   }
 

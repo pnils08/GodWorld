@@ -2137,6 +2137,10 @@
   Sheets: Family_Relationships, Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
+- **deadParentSet_(ctx)**
+
+- **livingOffcamParentSlots_(parentIds, deadSet)**
+
 - **formCriteriaHouseholds_(ctx, households, cycle)**
   Sheets: Family_Relationships, Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
@@ -2444,6 +2448,8 @@
 
 - **noteGcContext_(gData, r, gC, note)**
 
+- **familyAnchorOf_(ctx, L, rowByPop, pop)**
+
 - **releaseFamilyLink_(sheet, gData, r, cols, gL, cycle)**
 
 - **checkFamilyMatchPromotions_(ctx, cycle)**
@@ -2479,6 +2485,10 @@
   Sheets: Family_Relationships, Household_Ledger
 
 - **wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cycle, logSheet, source)**
+  Reads: S.storyHooks
+  Writes: S.storyHooks
+
+- **wireFamilyToDeceased_(ctx, newIdx, newPopId, deadPop, deadRow, matchType, now, cycle, logSheet)**
   Reads: S.storyHooks
   Writes: S.storyHooks
 
@@ -4778,4 +4788,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1725
+**Functions mapped:** 1729

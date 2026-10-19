@@ -2,7 +2,7 @@
   "generated": "2026-10-19",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1725,
+  "functionsMapped": 1729,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1098,6 +1098,7 @@
         "phase05-citizens/processAdvancementIntake.js::formIntakeHouseholds_",
         "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
         "phase05-citizens/processAdvancementIntake.js::wireFamilyMatch_",
+        "phase05-citizens/processAdvancementIntake.js::wireFamilyToDeceased_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
@@ -1134,6 +1135,7 @@
         "phase05-citizens/processAdvancementIntake.js::formIntakeHouseholds_",
         "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
         "phase05-citizens/processAdvancementIntake.js::wireFamilyMatch_",
+        "phase05-citizens/processAdvancementIntake.js::wireFamilyToDeceased_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",

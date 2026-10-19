@@ -832,6 +832,7 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
       // engine.304 D6b: a family arrival is re-checked against the ledger as it stands NOW — an earlier wire in
       // this batch (a parent's co-parent stroke) may have filled the spot. Closed → nothing minted; the GC row
       // stays Family and the next family pass releases it.
+      var famDeadAnchor = null; // engine.304 D11: set when the family's citizen is dead — the arrival is wired one-sided
       if (matchPop && matchType && !householdKey && genericSheet) {
         if (!genericHeld.data) genericHeld.data = genericSheet.getDataRange().getValues();
         var famNow = gcFamilyLinks_(genericHeld.data);
@@ -853,8 +854,11 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
           if (String(gRowH[findColByName_(genericHeld.data[0], 'First')] || '').trim().toLowerCase() === first.toLowerCase() &&
               String(gRowH[findColByName_(genericHeld.data[0], 'Last')] || '').trim().toLowerCase() === last.toLowerCase()) famHits++;
         }
-        var famStill = famHits === 1 && famAnchorNow && String(famAnchorNow[FLm.status] || '').trim().toLowerCase() === 'active' && // codex cut-2 review §4: exactly one row, before a POPID
-          familySpotsOpen_(FLm, famAnchorNow, simYearOf_(ctx, cycle), famNow.byAnchor[matchPop], famSelf, false)[matchType] >= 1;
+        var famByPopNow = {}; if (famAnchorNow) famByPopNow[matchPop] = famAnchorNow;
+        var famAtNow = familyAnchorOf_(ctx, FLm, famByPopNow, matchPop); // D11: ledger first, then an archived death
+        var famStill = famHits === 1 && !!famAtNow && // codex cut-2 review §4: exactly one row, before a POPID
+          familySpotsOpen_(FLm, famAtNow.row, simYearOf_(ctx, cycle), famNow.byAnchor[matchPop], famSelf, false)[matchType] >= 1;
+        if (famStill && famAtNow.dead) famDeadAnchor = famAtNow.row;
         if (!famStill) {
           Logger.log('processAdvancementRows_: ' + first + ' ' + last + ' — ' + (famHits !== 1
             ? famHits + ' Family rows of ' + matchPop + ' by this name; not minted (engine.304)'
@@ -1085,8 +1089,10 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
       else markAsEmergedInGeneric_(ss, genericSheet, first, maiden || last, cycle, genericHeld);
       var familyWired = false;
       if (matchPop && matchType) {
-        familyWired = wireFamilyMatch_(ctx, ledgerRows.length - 1, newPopId, matchPop, matchType, now, cycle, logSheet,
-          householdKey ? 'household intake' : 'drip lottery') === true;
+        familyWired = (famDeadAnchor // engine.304 D11: the dead's row and the archive are never written
+          ? wireFamilyToDeceased_(ctx, ledgerRows.length - 1, newPopId, matchPop, famDeadAnchor, matchType, now, cycle, logSheet)
+          : wireFamilyMatch_(ctx, ledgerRows.length - 1, newPopId, matchPop, matchType, now, cycle, logSheet,
+            householdKey ? 'household intake' : 'drip lottery')) === true;
       }
       if (ownerBiz) ownerMints.push({ pop: newPopId, idx: ledgerRows.length - 1, biz: ownerBiz }); // engine.96 Task 12
       if (householdKey) {
@@ -1816,8 +1822,9 @@ function checkEmergencePromotions_(ss, cycle, maxQueue, simYear, ctx) {
     if (gst === 'family') {
       famOf = String(data[r][fam.cols.of] || '').trim();
       famRole = String(data[r][fam.cols.role] || '').trim().toLowerCase();
-      var famAnchor = famRowByPop[famOf];
-      var famOpen = famAnchor && String(famAnchor[FL.status] || '').trim().toLowerCase() === 'active' &&
+      var famAt = familyAnchorOf_(ctx, FL, famRowByPop, famOf); // D11: a dead citizen's family still arrives as family
+      var famAnchor = famAt ? famAt.row : null;
+      var famOpen = !!famAt &&
         familySpotsOpen_(FL, famAnchor, simYear, fam.byAnchor[famOf], r, false)[famRole] >= 1 &&
         !famNames[normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last)];
       if (!famOpen) { // D6a: the spot closed or the name is taken — released here, not queued
@@ -1839,7 +1846,7 @@ function checkEmergencePromotions_(ss, cycle, maxQueue, simYear, ctx) {
     if (aT >= 0) out[aT] = 4; // lottery entry is Tier 4 — climbs via UsageCount like everyone
     if (aC >= 0) out[aC] = 'ENGINE';
     if (aNo >= 0) out[aNo] = famOf
-      ? 'GC family emergence — ' + famRole + ' of ' + famOf + ', EmergenceCount ' + count + ', C' + cycle + ' (engine.304)'
+      ? 'GC family emergence — ' + famRole + ' of ' + (famAt && famAt.dead ? 'the late ' : '') + famOf + ', EmergenceCount ' + count + ', C' + cycle + ' (engine.304)'
       : 'GC emergence promotion — EmergenceCount ' + count + ', C' + cycle + ' (engine.58 lottery)';
     if (aBY >= 0 && birthYear) out[aBY] = birthYear;
     if (aNB >= 0) out[aNB] = famHood || (gN >= 0 ? String(data[r][gN] || '').trim() : '');
@@ -1955,6 +1962,22 @@ function noteGcContext_(gData, r, gC, note) {
   gData[r][gC] = cur ? cur + ' | ' + note : note; // appended — seedEmergenceBonds_ reads only its "Named in …'s week" entries
 }
 
+// engine.304 D11 (builder 2026-10-19, statement 13: "Even in death the popid doesnt change or delete"): a family's
+// tracked citizen is found on the ledger first — Active, or Status deceased in the Cycle of the death — then in
+// Citizen_Archive, where only a DEATH counts. A trade, or no record at all, is not death: that link releases (D5).
+//   → { row, dead } | null   (row is ledger-shaped either way)
+function familyAnchorOf_(ctx, L, rowByPop, pop) {
+  var row = rowByPop[pop];
+  if (row) {
+    var st = String(row[L.status] || '').trim().toLowerCase();
+    if (st === 'active') return { row: row, dead: false };
+    return st === 'deceased' ? { row: row, dead: true } : null;
+  }
+  if (typeof citizenArchiveLatestByPop_ !== 'function') return null;
+  var arch = citizenArchiveLatestByPop_(ctx, ctx.ledger.headers)[String(pop).trim().toUpperCase()];
+  return (arch && arch.reason === 'deceased') ? { row: arch.row, dead: true } : null;
+}
+
 // engine.304 D5: a released row returns to the pool under its own name.
 function releaseFamilyLink_(sheet, gData, r, cols, gL, cycle) {
   var before = gData[r].slice();
@@ -2002,12 +2025,12 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
   // ── D5: release links whose spot closed ──
   for (var anchorPop in links.byAnchor) {
     if (!links.byAnchor.hasOwnProperty(anchorPop)) continue;
-    var anchorRow = rowByPop[anchorPop];
+    var anchorAt = familyAnchorOf_(ctx, L, rowByPop, anchorPop); // D11: the dead keep their family
     ['spouse', 'child', 'parent'].forEach(function (role) {
       var list = links.byAnchor[anchorPop][role];
       for (var k = list.length - 1; k >= 0; k--) {
         var gr = list[k];
-        var open = active(anchorRow) && familySpotsOpen_(L, anchorRow, simYear, links.byAnchor[anchorPop], gr, false)[role] >= 1;
+        var open = !!anchorAt && familySpotsOpen_(L, anchorAt.row, simYear, links.byAnchor[anchorPop], gr, false)[role] >= 1;
         if (open) continue;
         releaseFamilyLink_(genericSheet, gData, gr, fc, gL, cycle);
         list.splice(k, 1);
@@ -2790,6 +2813,77 @@ function wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cy
   }
   Logger.log('wireFamilyMatch_: ' + newPopId + ' ' + desc + ' — links wired');
   return true; // engine.302: the household door counts a member as linked only when the wiring happened
+}
+
+/**
+ * engine.304 D11 (builder 2026-10-19, statement 13): a family member of a DEAD citizen arrives. Only the arriving
+ * row is written — the dead's row (ledger, Status deceased) and the archive snapshot are never touched; no event
+ * fires on the dead. spouse → widowed, SpouseId = the dead (engine.302's widow convention), the dead's children
+ * as theirs; child → ParentIds = the dead (+ the dead's spouse when recorded); parent → ChildrenIds = the dead,
+ * NumChildren at least 1. Household: the dead's, while another Active ledger citizen still holds it — otherwise
+ * none (an arriving adult with no one at home is housed the way any single adult is). Hood: the dead's.
+ */
+function wireFamilyToDeceased_(ctx, newIdx, newPopId, deadPop, deadRow, matchType, now, cycle, logSheet) {
+  var h = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var idx = function(n) { return h.indexOf(n); };
+  var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'), iSpouse = idx('SpouseId'), iMarital = idx('MaritalStatus'),
+      iParents = idx('ParentIds'), iChildren = idx('ChildrenIds'), iNumKids = idx('NumChildren'), iHH = idx('HouseholdId'),
+      iHood = idx('Neighborhood'), iLife = idx('LifeHistory'), iBY = idx('BirthYear'), iStatus = idx('Status');
+  var newRow = rows[newIdx];
+  if (!newRow || !deadRow) return;
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  var newName = (String(newRow[iFirst] || '') + ' ' + String(newRow[iLast] || '')).trim();
+  var deadName = (String(deadRow[iFirst] || '') + ' ' + String(deadRow[iLast] || '')).trim();
+  var simYw = simYearOf_(ctx, cycle);
+  var newBY = iBY >= 0 ? (Number(newRow[iBY]) || 0) : 0;
+  var desc;
+  if (matchType === 'spouse') {
+    if (newBY > 0 && (simYw - newBY) < 18) { Logger.log('wireFamilyToDeceased_: ' + newPopId + ' is a minor — no spouse link (engine.302)'); return; }
+    if (iMarital >= 0) newRow[iMarital] = 'widowed';
+    if (iSpouse >= 0) newRow[iSpouse] = deadPop;
+    if (iNumKids >= 0) newRow[iNumKids] = Number(deadRow[iNumKids]) || 0;
+    if (iChildren >= 0) newRow[iChildren] = String(deadRow[iChildren] || '[]');
+    desc = 'widow of the late ' + deadName;
+  } else if (matchType === 'child') {
+    var pars = [deadPop];
+    var dSp = iSpouse >= 0 ? ((String(deadRow[iSpouse] || '').match(/POP-\d+/) || [])[0] || '') : '';
+    if (dSp && pars.indexOf(dSp) < 0) pars.push(dSp);
+    if (iParents >= 0) newRow[iParents] = JSON.stringify(pars);
+    desc = 'child of the late ' + deadName;
+  } else if (matchType === 'parent') {
+    if (iChildren >= 0) newRow[iChildren] = JSON.stringify([deadPop]);
+    if (iNumKids >= 0) newRow[iNumKids] = Math.max(Number(newRow[iNumKids]) || 0, 1);
+    desc = 'parent of the late ' + deadName;
+  } else {
+    Logger.log('wireFamilyToDeceased_: unknown matchType "' + matchType + '" — links skipped');
+    return;
+  }
+  var deadHH = iHH >= 0 ? String(deadRow[iHH] || '').trim() : '';
+  if (deadHH && iStatus >= 0) {
+    for (var r = 0; r < rows.length; r++) {
+      if (r === newIdx || !rows[r]) continue;
+      if (String(rows[r][iHH] || '').trim() === deadHH && String(rows[r][iStatus] || '').trim().toLowerCase() === 'active') { newRow[iHH] = deadHH; break; }
+    }
+  }
+  if (iHood >= 0 && deadRow[iHood]) newRow[iHood] = deadRow[iHood];
+  if (iLife >= 0) {
+    var line = stamp + ' — [Family] Came on-camera — ' + desc + ' (family lottery)';
+    newRow[iLife] = (String(newRow[iLife] || '') ? String(newRow[iLife]) + '\n' : '') + line;
+  }
+  ctx.ledger.dirty = true;
+  if (logSheet) logSheet.appendRow([now, newPopId, newName, 'Family', 'Arrived as family — ' + desc + ' (engine.304)', '', cycle]);
+  if (ctx.summary) {
+    ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+    ctx.summary.storyHooks.push({
+      hookType: 'FAMILY_REALIZED', severity: 3, priority: 3,
+      description: newName + ' came on-camera — ' + desc,
+      cycleGenerated: cycle, neighborhood: iHood >= 0 ? String(newRow[iHood] || '') : '',
+      domain: 'COMMUNITY',
+      text: 'The late ' + deadName + "'s " + matchType + ' ' + newName + ' enters the record (family lottery C' + cycle + ')'
+    });
+  }
+  Logger.log('wireFamilyToDeceased_: ' + newPopId + ' ' + desc + ' — one-sided, the dead untouched');
+  return true;
 }
 
 /**

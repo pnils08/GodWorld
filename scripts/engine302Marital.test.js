@@ -361,7 +361,7 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
   const wiredAdult = IW.wireFamilyMatch_(ctx, 1, 'POP-N', 'POP-W', 'spouse', 'now', 113, null, 'test');
   assert('I1 an adult spouse link wires and returns true; both married', wiredAdult === true && rows[1][4] === 'married' && rows[2][4] === 'married');
   const isrc = R('../phase05-citizens/processAdvancementIntake.js');
-  assert('I1 the household door counts a member linked only when the wiring happened', /linked: familyWired \}/.test(isrc) && /familyWired = wireFamilyMatch_\(/.test(isrc));
+  assert('I1 the household door counts a member linked only when the wiring happened', /linked: familyWired \}/.test(isrc) && /familyWired = \(famDeadAnchor[\s\S]{0,400}: wireFamilyMatch_\(/.test(isrc));
 }
 
 // ── G2 courtship binding, the same pass, missing age, 57/59 (codex diff review H7/H8) ──

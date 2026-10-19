@@ -211,6 +211,9 @@ console.log('engine.214 — mood per hood');
 // ── 6. crime ladder per hood + the receipt ───────────────────────────────────
 {
   const none = run();
+  // Live bound (agy 2026-10-19, verified): one hood carries at most two counted spikes a Cycle — property and
+  // violent increases only (finalizeCycleState.js compactCrimeSpikes_) — so the n >= 3 rung is reached only by
+  // this stub. On live it cannot fire; the builder's call with engine.289.
   const r = run({ summary: { crimeByNeighborhood: { Laurel: 1, Dimond: 2, Glenview: 3 },
     previousCycleState: { cycle: 119, crimeSpikes: [{ neighborhood: 'Dimond', metric: 'propertyCrime', magnitude: 2, newValue: 7 }, { neighborhood: 'Glenview', metric: 'crime', magnitude: 3 }] } } });
   const ratio = (h, k) => r.nd[h][k] / none.nd[h][k];
@@ -332,8 +335,21 @@ console.log('engine.214 — mood per hood');
   check('markers: the shock zone is the institutional hood, by label', marker('Downtown', { shockFlag: 'shock-flag' }) === 'Shock event zone' && marker('Uptown', { shockFlag: 'shock-flag' }) === 'base');
   const ws = src('phase08-v3-chicago/v3NeighborhoodWriter.js');
   const fn = ws.slice(ws.indexOf('function buildHolidayNeighborhoodMods_'), ws.indexOf('// engine.204/205 §2.2'));
-  const calendarPart = fn.slice(fn.indexOf('if (isFirstFriday)'), fn.indexOf("if (holiday === 'NewYearsEve')"));
+  const calendarPart = fn.slice(fn.indexOf('if (isFirstFriday)'));   // agy 2026-10-19 F5: the holiday blocks now come first
   check('no First Friday / Creation Day hood literal remains in the writer\'s calendar mods', calendarPart.length > 100 && !/'Temescal'|'Downtown'|'Jack London'|'West Oakland'/.test(calendarPart) && /hoodsWithScene_\(ctx, 'FirstFriday'\)/.test(calendarPart) && /hoodsWithScene_\(ctx, 'CreationDay'\)/.test(calendarPart));
+  // agy 2026-10-19 F5: New Year's Eve / Halloween assign whole objects, so they run first and the Scenes
+  // boosts multiply on top (the @147 order) — a coinciding First Friday / Creation Day is never erased.
+  for (const hol of ['NewYearsEve', 'Halloween']) {
+    const only = sb.buildHolidayNeighborhoodMods_(ctx, hol, false, false, 'off-season', {});
+    const ffo = sb.buildHolidayNeighborhoodMods_(ctx, 'none', true, false, 'off-season', {});
+    const cdo = sb.buildHolidayNeighborhoodMods_(ctx, 'none', false, true, 'off-season', {});
+    const both = sb.buildHolidayNeighborhoodMods_(ctx, hol, true, true, 'off-season', {});
+    const hoods = Object.keys(only);
+    check('calendar mods (agy F5): ' + hol + ' + First Friday + Creation Day compose — each holiday hood keeps its own eventMod times the Scenes factors',
+      hoods.length >= 3 && hoods.every(h => near(both[h].eventMod, only[h].eventMod * ((ffo[h] && ffo[h].eventMod) || 1) * ((cdo[h] && cdo[h].eventMod) || 1))) &&
+      Object.keys(ffo).every(h => both[h] && both[h].eventMod >= ffo[h].eventMod),
+      JSON.stringify(hoods.map(h => [h, both[h].eventMod, only[h].eventMod, ffo[h] && ffo[h].eventMod, cdo[h] && cdo[h].eventMod])));
+  }
 }
 
 // ── 11. the real phase wrapper: a throw is an Engine_Errors row, nothing published, nothing queued ───

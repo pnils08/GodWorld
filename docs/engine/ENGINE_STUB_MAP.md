@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-18 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-19 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1036,7 +1036,7 @@
 
 ### generateGenericCitizenMicroEvent.js
 - **generateGenericCitizenMicroEvents_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.engine299, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.engine299, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.microEvents, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.engine299, S.eventsGenerated, S.microEvents
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: LifeHistory_Log
@@ -3436,7 +3436,7 @@
   Reads: S.contractSeeds
 
 - **compactSeedList_(S, seeds, mapRow)**
-  Reads: S.cycle, S.cycleId
+  Reads: S.cycle, S.cycleId, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason
 
 - **compactNeighborhoodDynamics_(nd)**
 
@@ -4227,7 +4227,7 @@
 
 ### ensureCrimeMetrics.js
 - **crimeIterationHoods_(S)**
-  Reads: S.canonHoods
+  Reads: S.canonHoods, S.neighborhoodState
 
 - **crimeProfileFor_(hood, S)**
   Reads: S.neighborhoodState

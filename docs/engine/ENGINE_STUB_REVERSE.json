@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-18",
+  "generated": "2026-10-19",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
   "functionsMapped": 1708,
@@ -175,6 +175,7 @@
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
+        "phase09-digest/finalizeCycleState.js::compactSeedList_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
         "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_",
@@ -286,6 +287,7 @@
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
+        "phase09-digest/finalizeCycleState.js::compactSeedList_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
         "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_"
@@ -354,6 +356,7 @@
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
+        "phase09-digest/finalizeCycleState.js::compactSeedList_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
         "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_"
@@ -423,6 +426,7 @@
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
+        "phase09-digest/finalizeCycleState.js::compactSeedList_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
         "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_"
@@ -1343,6 +1347,7 @@
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
+        "phase09-digest/finalizeCycleState.js::compactSeedList_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_",
         "utilities/sportsWeekRecord.js::sportsWeeklyResult_"
@@ -1994,6 +1999,7 @@
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodCharacterCity_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodLabelOf_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodRetailRaw_",
+        "utilities/ensureCrimeMetrics.js::crimeIterationHoods_",
         "utilities/ensureCrimeMetrics.js::crimeProfileFor_"
       ]
     },
@@ -3054,7 +3060,9 @@
       "writers": [
         "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_"
       ],
-      "readers": []
+      "readers": [
+        "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_"
+      ]
     },
     "generationalEvents": {
       "writers": [

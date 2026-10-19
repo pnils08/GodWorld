@@ -168,11 +168,20 @@ console.log('engine.228 — activity observations carry');
   const w = world();
   const mk = (hood, p, dom, type, extra) => Object.assign({ text: 'seed text', neighborhood: hood, priority: p, domain: dom || 'GENERAL', seedType: type || 'signal',
     calendarContext: { holiday: 'none', isFirstFriday: true, isCreationDay: false, sportsSeason: 'off-season' }, suggestedCitizens: ['POP-1'], seedId: 'abcd1234' }, extra || {});
-  const S = { cycleId: 108, storySeeds: [mk('Dimond', 3, 'COMMUNITY'), mk('', 5, 'HEALTH', 'shock'), mk('Laurel', 1), { text: '', neighborhood: 'Glenview', priority: 9 }, mk('Narnia', 2)] };
+  const S = { cycleId: 108, holiday: 'none', holidayPriority: 'none', isFirstFriday: true, isCreationDay: false, sportsSeason: 'off-season',
+    storySeeds: [mk('Dimond', 3, 'COMMUNITY'), mk('', 5, 'HEALTH', 'shock'), mk('Laurel', 1), { text: '', neighborhood: 'Glenview', priority: 9 }, mk('Narnia', 2)] };
   const c = w.sb.compactStorySeeds_(S);
   check('compact: four fields per seed (n/d/p/t), the Cycle\'s calendarContext once, textless seeds skipped, sorted by priority',
     c && c.cycle === 108 && c.count === 5 && c.seeds.length === 4 && c.seeds[0].p === 5 && c.seeds[0].n === '' && c.seeds[0].t === 'shock' && Object.keys(c.seeds[0]).length === 4 &&
     c.calendarContext.isFirstFriday === true && c.calendarContext.holiday === 'none', JSON.stringify(c));
+  // agy 2026-10-19 F2: the calendar is read from the Cycle (S), not a seed — makeSeed's context carries no
+  // holidayPriority and the contract deck carries none, so the holiday branches of seedCalendarBoost_ were dead on carried seeds.
+  const hol = { cycleId: 108, holiday: 'OaklandPride', holidayPriority: 'oakland', isFirstFriday: false, isCreationDay: false, sportsSeason: 'playoffs' };
+  const ch = w.sb.compactStorySeeds_(Object.assign({ storySeeds: [mk('Dimond', 3)] }, hol));
+  const cd = w.sb.compactContractSeeds_(Object.assign({ contractSeeds: [{ seedId: 'x', neighborhood: 'Fruitvale', what: 'deck text', seedClass: 'major', domain: 'SAFETY', magnitude: 1 }] }, hol));
+  check('compact (agy F2): calendarContext is the Cycle\'s — holidayPriority carried on the engine list (the seed\'s own context has none) and the contract deck gets a calendar too',
+    ch.calendarContext.holidayPriority === 'oakland' && ch.calendarContext.holiday === 'OaklandPride' && ch.calendarContext.isFirstFriday === false && ch.calendarContext.sportsSeason === 'playoffs' &&
+    cd.calendarContext && cd.calendarContext.holidayPriority === 'oakland' && cd.calendarContext.holiday === 'OaklandPride', JSON.stringify([ch.calendarContext, cd.calendarContext]));
   check('compact: no seeds → an EMPTY blob with the Cycle stamp (codex F4: never null, so the stamp always advances)',
     JSON.stringify(w.sb.compactStorySeeds_({ cycleId: 108, storySeeds: [] })) === JSON.stringify({ cycle: 108, count: 0, calendarContext: null, seeds: [] }) && w.sb.compactStorySeeds_({}).seeds.length === 0);
   const many = []; for (let i = 0; i < 80; i++) many.push(mk('Dimond', (i % 7) + 1));
@@ -187,6 +196,7 @@ console.log('engine.228 — activity observations carry');
   check('first fire: nothing carried → Phase 2 reads no seeds (totalWeighted 0), the citywide ratio is 1', A.summary.storySeedsCarried === undefined && A.summary.storySeedSignals.totalWeighted === 0 && A.summary.storySeedSignals.citywideX === 1);
   A.summary.eventsGenerated = 12; A.summary.worldEvents = new Array(9);
   A.summary.storySeeds = [mk('Dimond', 3, 'COMMUNITY'), mk('Dimond', 4, 'COMMUNITY'), mk('Laurel', 2), mk('Glenview', 2), mk('', 5, 'HEALTH', 'shock'), mk('Citywide', 2)];
+  A.summary.holiday = 'none'; A.summary.isFirstFriday = true;   // the Cycle's calendar (agy F2: the carried context is read from S)
   w.sb.finalizeCycleState_(A);
   w.sb.savePreviousCycleState_(A);
   check('save: PREV_STORY_SEEDS_JSON written for cycle 108 on its own key, not inside PREV_CYCLE_STATE_JSON',
@@ -209,6 +219,7 @@ console.log('engine.228 — activity observations carry');
     JSON.stringify({ D: sig.byHood.Dimond, L: sig.byHood.Laurel, cw: sig.citywideWeighted }));
   check('Phase 2: first Cycle with input — no citywide baseline yet, ratio 1', sig.citywideBaseline === null && sig.citywideX === 1);
   B.summary.eventsGenerated = 12; B.summary.worldEvents = new Array(9); B.summary.storySeeds = A.summary.storySeeds.slice();
+  B.summary.holiday = 'none'; B.summary.isFirstFriday = true;   // the same week's calendar as Cycle 108 (agy F2: the carry reads it from S)
   w.sb.finalizeCycleState_(B);
   w.sb.savePreviousCycleState_(B);
   const e109 = JSON.parse(w.props.PREV_ACTIVITY_OBS_JSON).history.slice(-1)[0];

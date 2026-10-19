@@ -731,21 +731,21 @@ function compactContractSeeds_(S) {
 /** Shared compactor for the two seed carries (engine.214 Task 18a / engine.288): text-bearing rows only, mapped, sorted by priority, cap 60. */
 function compactSeedList_(S, seeds, mapRow) {
   var out = [];
-  var cc = null;
   for (var i = 0; i < seeds.length; i++) {
     var sd = seeds[i];
     if (!sd || typeof sd !== 'object' || !(sd.text || sd.what)) continue;   // the engine list carries `text`, the contract deck `what`
     out.push(mapRow(sd));
-    if (!cc && sd.calendarContext && typeof sd.calendarContext === 'object') {
-      cc = {
-        holiday: sd.calendarContext.holiday || '',
-        holidayPriority: sd.calendarContext.holidayPriority || '',
-        isFirstFriday: !!sd.calendarContext.isFirstFriday,
-        isCreationDay: !!sd.calendarContext.isCreationDay,
-        sportsSeason: sd.calendarContext.sportsSeason || ''
-      };
-    }
   }
+  // agy 2026-10-19 F2: the calendar is the Cycle's, not a seed's. makeSeed's calendarContext carries no
+  // holidayPriority and the contract deck carries no calendar at all, so seedCalendarBoost_'s holiday
+  // branches could never fire on a carried seed. Read once from S (advanceSimulationCalendar, applySportsSeason).
+  var cc = out.length ? {
+    holiday: String(S.holiday || ''),
+    holidayPriority: String(S.holidayPriority || ''),
+    isFirstFriday: !!S.isFirstFriday,
+    isCreationDay: !!S.isCreationDay,
+    sportsSeason: String(S.sportsSeason || '')
+  } : null;
   out.sort(function(a, b) { return b.p - a.p; });
   if (out.length > 60) out = out.slice(0, 60);
   return { cycle: Number(S.cycleId || S.cycle || 0), count: seeds.length, calendarContext: cc, seeds: out };

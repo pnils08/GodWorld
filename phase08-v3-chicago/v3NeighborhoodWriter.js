@@ -663,9 +663,24 @@ function ensureNeighborhoodMapSchemaAppendOnly_(ss, sheetName, headers) {
 // values sit at the top weight: FirstFriday ≥ 3 → event ×1.8, nightlife ×1.4
 // (the former Temescal line), 1–2 → event ×1.4; CreationDay ≥ 3 → event ×1.5,
 // sentiment +0.1 (the former Downtown line), 1–2 → event ×1.3. The NewYearsEve
-// and Halloween hood literals below are outside Task 14's scope and stay.
+// and Halloween hood literals (first in the function) are outside Task 14's scope and stay.
 function buildHolidayNeighborhoodMods_(ctx, holiday, isFirstFriday, isCreationDay, sportsSeason, sportsWeek) {
   var mods = {};
+
+  // agy 2026-10-19 F5: the two holiday blocks assign whole objects, so they run FIRST and First
+  // Friday / Creation Day multiply on top — the @147 order; after them they erased a coinciding
+  // Scenes boost on Downtown / Jack London / Temescal.
+  if (holiday === 'NewYearsEve') {
+    mods['Downtown'] = { eventMod: 2.0, nightlifeMod: 2.0, noiseMod: 1.8, sentimentMod: 0.1 };
+    mods['Jack London'] = { eventMod: 1.8, nightlifeMod: 1.8, noiseMod: 1.5 };
+    mods['Grand Lake'] = { eventMod: 1.3, nightlifeMod: 1.4 };
+  }
+
+  if (holiday === 'Halloween') {
+    mods['Temescal'] = { eventMod: 1.8, nightlifeMod: 1.3, noiseMod: 1.2 };
+    mods['Rockridge'] = { eventMod: 1.5, nightlifeMod: 1.2 };
+    mods['Piedmont Ave'] = { eventMod: 1.3, nightlifeMod: 1.1 };
+  }
 
   if (isFirstFriday) {
     var ffHoods = hoodsWithScene_(ctx, 'FirstFriday');
@@ -694,20 +709,6 @@ function buildHolidayNeighborhoodMods_(ctx, holiday, isFirstFriday, isCreationDa
       }
     }
   }
-
-  if (holiday === 'NewYearsEve') {
-    mods['Downtown'] = { eventMod: 2.0, nightlifeMod: 2.0, noiseMod: 1.8, sentimentMod: 0.1 };
-    mods['Jack London'] = { eventMod: 1.8, nightlifeMod: 1.8, noiseMod: 1.5 };
-    mods['Grand Lake'] = { eventMod: 1.3, nightlifeMod: 1.4 };
-  }
-
-  if (holiday === 'Halloween') {
-    mods['Temescal'] = { eventMod: 1.8, nightlifeMod: 1.3, noiseMod: 1.2 };
-    mods['Rockridge'] = { eventMod: 1.5, nightlifeMod: 1.2 };
-    mods['Piedmont Ave'] = { eventMod: 1.3, nightlifeMod: 1.1 };
-  }
-
-
 
   // engine.204/205 §2.2: the stadium hoods by each franchise's home volume (unsigned ×
   // venueShare) at its own venue — the old championship mods are the top of the scale

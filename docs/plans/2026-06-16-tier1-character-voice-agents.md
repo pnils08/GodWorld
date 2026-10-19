@@ -193,7 +193,21 @@ Once the Deacon slice proves all three surfaces and the method is captured: repl
 5. *Speaker label:* citizen channels label the speaker "Mike Paulson" (in-world GM). Mags unchanged.
 6. *New confidants:* a high priest (needs a ledger citizen with a faith role — engine.248 territory) and the mayor (Avery Santana, `civic-office-mayor` exists); "someone to confide in" register.
 
-**Rule conflict — builder call:** identity.md and CHARACTER.md forbid telling any character the builder exists. A confidant who treats the speaker as "the creator" breaks that if it means the builder. In-world it holds: Paulson runs the A's and Oaks, so a priest or mayor can confide in and ask guidance of a man with that power over the city's fortunes, without any voice knowing he is the builder. Needs the builder's word either way before the priest is written.
+**Builder ruling on the creator framing (2026-10-19, verbatim):** "The diety approach wouldn't be Mike Paulson if we ever made that. For a mayor or a high priest that is making sim level decisions it could be a neat addition at some point where they could ping me on discord for guidance , but not as Mike Paulson , as their guidance, to help With a decision, just a idea but first I'd want mags and Vinnie to work better and for their interactions with me to have a nudge to them". Rule conflict closed: a guidance voice is not Paulson and is not announced as the builder; Paulson stays the in-world GM. Deity voice = later idea (mayor / high priest ping the builder on Discord to help a decision), not scheduled. Order: Mags + Vinnie work better, then their talks with him nudge them.
+
+**Builder, same night:** "Also keep in Mind how mags writes her cycle pulse now as Saturdays" → Mags' prompt now carries the Saturday-run newsroom (below). "Does it makes sense to give them write and read access to their wiki pages ?" → rb answer: **read yes, already** (own page, last six docs, fenced); **write only the narrow way** — no mid-chat write tool. Pages drive canon (pipeline.70, builder 2026-10-03: letters, Rhea page-contradiction), so a Haiku voice (or a typo) writing freely into its own page would plant canon from chat. ADR-0014 keeps chat prose off the page. The write that makes sense is the typed line after a talk (the classifier's event/affect, like the TENSION lines), through the existing flush. Canon cards and ledger rows: no write, ever (Sheets truth; only crons + Mags write).
+
+**Phase 1 BUILT + LIVE 2026-10-19 (rb; mags-bot restarted, both channels registered):**
+- `lib/personaProvider.js` `buildVoiceBrief_`: ledger row (role, status, hood, marital, age), last five LifeHistory lines, sports-feed rows naming the voice + the club's last two, Tribune lines naming the voice from the two newest Pulses — rebuilt at every hourly prompt build, header "records are true now where the file differs". Plus one line: a speaker named Mike is Mike Paulson, the GM.
+- `scripts/mags-discord-bot.js`: every persona's first round is forced to `search_world` (`tool_choice`), with a "First move" paragraph; later rounds free.
+- `lib/mags.js` `loadNewsroomWeek` → Mags' prompt: no longer writes the Pulse per cycle; desks file weekday evenings; Saturday the paper audits, curates ~9 best-graded, she narrates; last Pulse's curation counts and accuracy score; pieces staged this Cycle.
+- Test `scripts/personaProviderBrief.test.js` 15/15. Live smoke (OpenRouter Haiku 5.5, Vinnie, "Are you still celebrating the championship"): round 0 forced search ("Vinnie Keane championship celebration"), answer named the Blue Lattern night and the parade (was: 2031 / six rings, 0 searches).
+- Not done: NotebookLM (30–48 s a call) as a per-Cycle brief query; the agent files' stale canon lines (six rings, Laurel) are overridden by the brief, not edited.
+
+**Open — the nudge (rb defaults, builder calls marked):**
+- Vinnie's flush already writes one Reflection_Intake row per talk (own replies only). No Vinnie–Paulson bond exists (POP-00527 holds 4 bonds: Varek rivalry, Seymour professional, two others), so the BondTarget has nothing to move. *Builder call:* seed a canon professional bond Vinnie–Paulson (Seymour's is 6.17), as the Dillon canon bond was seeded?
+- Page line after a talk (typed, classifier words only) — rb will build; no builder call.
+- Mags: her talks reach her page via the 07/12/19 reflection; no dial row for POP-00005 (the handle vs the citizen layer, memory two-Magses). *Builder call:* should her Discord talks also nudge citizen-Mags' dials?
 
 ## Status log
 

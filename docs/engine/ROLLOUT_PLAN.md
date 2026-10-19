@@ -21,7 +21,7 @@
 - [[../reference/DEPLOY_HISTORY]]: engine.213 in-progress, engine.294 live-observing
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.293 live-observing, engine.104 ready
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
-- [[../plans/2026-06-16-tier1-character-voice-agents]]: research.30 needs-info
+- [[../plans/2026-06-16-tier1-character-voice-agents]]: research.30 in-progress
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
 - [[../plans/2026-10-06-supermemory-v5-migration]]: infrastructure.10 blocked
 - [[../plans/2026-05-07-chaos-cars-engine]]: engine.11 live-observing
@@ -75,7 +75,7 @@
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | civic.43 | School board: T1 + T3 LIVE. T2 seating HELD (builder 2026-10-07): schools half built (hood school data, no schools in hoods); deep review first, then the canon-name fix | needs-info | research-build / engine-sheet | [[../plans/2026-10-04-school-board]] §Builder's words (2026-10-07) |
-| research.30 | Discord voices connected (builder 2026-10-19): brief rebuilt each Cycle, search-first, journal/intake/bond with Paulson, confidant voices (high priest, mayor). Waits on the builder's call on the creator framing | needs-info | research-build | [[../plans/2026-06-16-tier1-character-voice-agents]] §Discord voices connected |
+| research.30 | Discord voices connected (builder 2026-10-19): Phase 1 LIVE (Cycle-fresh brief, search first, Mags' Saturday-newsroom block). Open: nudge — seed a Vinnie–Paulson bond? Mags' dial row? Later: a guidance voice (mayor / high priest) | in-progress | research-build | [[../plans/2026-06-16-tier1-character-voice-agents]] §Discord voices connected |
 
 ## 2. Waiting on a fire — dated or organic
 

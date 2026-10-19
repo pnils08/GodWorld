@@ -239,6 +239,10 @@ async function buildMagsSystemPrompt() {
   }
   // citizen/archive/edition dumps removed S252 Task 5 — she pulls those on demand
   // via search_world (free local disk), instead of carrying them every message.
+  var newsroomWeek = mags.loadNewsroomWeek();      // research.30 — the Saturday-run newsroom, as it stands this week
+  if (newsroomWeek) {
+    prompt += '\n\n---\n\n' + newsroomWeek;
+  }
   if (notesToSelf) {
     prompt += '\n\n---\n\n' + notesToSelf;
   }
@@ -469,6 +473,11 @@ async function callClaude(provider, session, userMessage, userName, userId) {
   // Per-message dynamic context is provider-specific (Mags: profile/archive/family/dashboard;
   // citizen: their own fenced page recall).
   systemPrompt = await provider.augment(systemPrompt, { userMessage: userMessage, userId: userId });
+  // research.30 — the lookup is the first move on every message, for every persona: the first
+  // round is forced to search_world, so a confident character file can never skip the records.
+  systemPrompt += '\n\n---\n\n## First move\n\nYour first move on every message is one search_world lookup. ' +
+    'Pick 2-3 keywords from what was asked (a name, a place, a thing). If it is small talk with nothing ' +
+    'to look up, search your own name. Then answer from what you find plus what you already know.';
 
   // Build messages array from this channel's conversation history + new message
   var messages = session.history.slice();
@@ -487,6 +496,7 @@ async function callClaude(provider, session, userMessage, userName, userId) {
     // (S252 flaw fix — a still-searching turn returned 0 chars).
     var isFinal = (round === MAX_TOOL_ROUNDS - 1);
     var opts = { model: BOT_MODEL, max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt, messages: messages, tools: [SEARCH_TOOL], thinking: { type: 'disabled' } };
+    if (round === 0) opts.tool_choice = { type: 'tool', name: 'search_world' };  // research.30 — search first
     if (isFinal) opts.tool_choice = { type: 'none' };  // force a reply, never empty
     response = await claude.messages.create(opts);
 

@@ -5039,7 +5039,6 @@
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/householdFormationEngine.js::applyFundDisbursementBody_",
         "phase05-citizens/householdFormationEngine.js::dissolveStressedHouseholds_",
-        "phase05-citizens/householdFormationEngine.js::processDivorces_",
         "phase05-citizens/householdFormationEngine.js::updateHouseholdIncomes_"
       ],
       "readers": [

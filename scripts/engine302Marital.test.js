@@ -403,11 +403,12 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
   const HHH = ['HouseholdId', 'HeadOfHousehold', 'HouseholdType', 'Members', 'Status'];
   const world = (rows, hhRows, bonds) => {
     const HV = [HHH].concat(hhRows || []);
-    const sheet = { getLastColumn: () => HHH.length, getRange: (r, c) => ({ getValues: () => [HV[r - 1].slice()], setValue: v => { HV[r - 1][c - 1] = v; } }) };
+    const sheet = { getLastColumn: () => HHH.length, failWrites: false, getRange: (r, c) => ({ getValues: () => [HV[r - 1].slice()], setValue: v => { HV[r - 1][c - 1] = v; },
+      setValues: v => { if (sheet.failWrites) throw new Error('quota'); HV[r - 1] = v[0].slice(); } }) };
     const households = (hhRows || []).map((r, i) => ({ rowIndex: i + 2, householdId: r[0], headOfHousehold: r[1], householdType: r[2], members: JSON.parse(r[3]), status: r[4] }));
     const ctx = { ledger: { headers: DH, rows, dirty: false }, summary: { cycleId: C, simYear: 2042, storyHooks: [], relationshipBonds: bonds || [], relationshipBondsLoaded: true },
       config: { cycleCount: C }, ss: { getSheetByName: n => n === 'Household_Ledger' ? sheet : null } };
-    return { ctx, households, HV, rows };
+    return { ctx, households, HV, rows, sheet };
   };
   const run = w => HF.processDivorces_(w.ctx, w.households, C);
   const m = (w, i) => w.rows[i][d('MaritalStatus')];
@@ -462,6 +463,17 @@ global.deriveDebtLevel_ = () => 0; global.deriveNetWorth_ = () => 1000; global.e
   assert('DV13 the Members cell on the row drops the leaver', wm.HV[1][3] === '["POP-00711"]', wm.HV[1][3]);
   const wo = world([drow('POP-01', { hh: 'HH-1', inc: 90000, ds: crisis({ def: C - 2, p: { rent: C - 1, debt: C - 1 } }) })], [['HH-1', 'POP-01', 'couple', '["POP-01"]', 'active']]); run(wo);
   assert('DV13 an off-camera couple\'s row is retyped too (solo at 90k)', wo.HV[1][2] === 'solo' && wo.households[0].householdType === 'solo');
+  const wr = world([drow('POP-00741', { sp: 'POP-00742 X', hh: 'HH-7', ds: crisis({ def: C - 3, p: { rent: C - 1, debt: C - 1 } }) }), drow('POP-00742', { sp: 'POP-00741 X', hh: 'HH-7' })],
+            [['HH-OTHER', 'POP-00741', 'couple', '["POP-00741","POP-00742"]', 'active']]);
+  wr.households[0].householdId = 'HH-7'; run(wr);
+  assert('DV18 the row at the index is another household: no write, the marriage stands', m(wr, 0) === 'married' && wr.HV[1][3] === '["POP-00741","POP-00742"]');
+  const wx = world([drow('POP-00751', { sp: 'POP-00752 X', hh: 'HH-8', ds: crisis({ def: C - 3, p: { rent: C - 1, debt: C - 1 } }) }), drow('POP-00752', { sp: 'POP-00751 X', hh: 'HH-8' })],
+            [['HH-8', 'POP-00751', 'couple', '["POP-00751","POP-00752"]', 'active']]);
+  wx.sheet.failWrites = true; run(wx);
+  assert('DV18 a household write that fails leaves the marriage whole this Cycle (statuses, SpouseIds, HouseholdIds)',
+    m(wx, 0) === 'married' && m(wx, 1) === 'married' && wx.rows[1][d('SpouseId')] === 'POP-00751 X' && wx.rows[1][d('HouseholdId')] === 'HH-8');
+  const wa = world([drow('POP-00761', { sp: 'POP-09999 Gone', ds: crisis({ def: C - 3, p: { rent: C - 1, debt: C - 1 } }) })]); run(wa);
+  assert('DV19 a spouse who left the ledger (traded, archived): judged like an off-camera marriage', m(wa, 0) === 'divorced');
   const wu = world([drow('POP-00721', { sp: 'POP-00722 X', ds: crisis({ def: C - 3, p: { rent: C - 1, debt: C - 1 } }) }), drow('POP-00722', { sp: 'POP-00721 X' })]);
   wu.ctx.summary.relationshipBondsLoaded = false; run(wu);
   assert('DV14 a couple waits a Cycle when the bond load did not certify', m(wu, 0) === 'married' && m(wu, 1) === 'married');

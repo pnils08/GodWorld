@@ -975,9 +975,10 @@ function processMarriages_(ss, citizens, cycle) {
 // this pass, so this Cycle's are seen next Cycle. An on-ledger couple's record is the union of both; a kind counts once.
 // The ledger (statuses, SpouseId, HouseholdId, [Divorce] lines) commits at Phase10-CommitLedger, the bond at the
 // Phase10-Bonds master replace (a couple waits a Cycle when the bond load did not certify), the hook with the story
-// writer; a Cycle that crosses the wall resumes the whole intent tail (engine.95 checkpoint). The household row is
-// written direct, own-tab class: Members, the head when the head left, the type of an off-camera couple — each
-// self-healing, since the reconciler rebuilds Members, head and type from the ledger the next pass.
+// writer; a Cycle that crosses the wall resumes the whole intent tail (engine.95 checkpoint); a replace that fails is a
+// persist error on the fire, the same class as every bond change (weddings, flips, deepenings). The household row is
+// written direct, own-tab class, BEFORE the ledger changes — one checked write of the row (Members, the head when the
+// head left, an off-camera couple's type); if it fails, the marriage stands this Cycle.
 // Family_Relationships keeps its married row as history.
 var DIVORCE_CRISIS_WINDOW = 13; // Cycles (a quarter year) — the builder's dial
 var DIVORCE_CRISIS_COUNT = 3;   // distinct kinds, at least one a major loss — the builder's dial
@@ -1044,9 +1045,10 @@ function processDivorces_(ctx, households, cycle) {
     var sp = spouseOf(ri), si = sp && byPop.hasOwnProperty(sp) ? byPop[sp] : -1;
     var couple = si >= 0 && living(si) && married(si) && spouseOf(si) === pop;
     done[pop] = true; if (couple) done[sp] = true;
-    // codex cut-3 diff review B3: a SpouseId that is not one half of a living married pair is a malformed link, not an
-    // off-camera marriage (that one has no SpouseId) — it is left for the record to settle, never divorced alone
-    if (sp && !couple) { Logger.log('processDivorces_: ' + pop + ' SpouseId ' + sp + ' is not a reciprocal married pair — skipped'); continue; }
+    // codex cut-3 reviews B3: a SpouseId naming an on-ledger row that is not the other half of a living married pair
+    // is a malformed link — skipped, never divorced alone. A spouse who has left the ledger (traded away, archived)
+    // is off the record now: the marriage is judged like an off-camera one, on this citizen's record alone.
+    if (sp && si >= 0 && !couple) { Logger.log('processDivorces_: ' + pop + ' SpouseId ' + sp + ' is not a reciprocal married pair — skipped'); continue; }
     // codex B4: a couple's bond change rides the bond master replace, which a load that did not certify never queues
     // (bondPersistence.js saveRelationshipBonds_) — the couple's divorce waits a Cycle rather than split the record
     if (couple && !(ctx.summary && ctx.summary.relationshipBondsLoaded === true)) { Logger.log('processDivorces_: bond load not certified — ' + pop + ' + ' + sp + ' wait'); continue; }
@@ -1056,20 +1058,10 @@ function processDivorces_(ctx, households, cycle) {
     var names = Object.keys(kinds), majors = names.filter(function (k) { return DIVORCE_MAJOR_KINDS[k]; });
     if (names.length < DIVORCE_CRISIS_COUNT || !majors.length) continue;
 
-    // the marriage ends
-    var parties = couple ? [ri, si] : [ri];
-    for (var pi = 0; pi < parties.length; pi++) { rows[parties[pi]][iMar] = 'divorced'; rows[parties[pi]][iSp] = ''; }
+    // ── decide first, write the household row once, then change the ledger (codex cut-3 recheck B4) ──
+    var stayer = ri, leaver = -1, rowHid = '', rowEdit = null;
+    var hh = null;
     if (couple) {
-      appendBondLifeLine_(ctx, ri, 'Divorce', 'the marriage to ' + nameOf(si) + ' ended', cycle);
-      appendBondLifeLine_(ctx, si, 'Divorce', 'the marriage to ' + nameOf(ri) + ' ended', cycle);
-      var bonds = (ctx.summary && ctx.summary.relationshipBonds) || [];
-      for (var b = 0; b < bonds.length; b++) {
-        var bd = bonds[b];
-        if (!bd || bd.bondType !== 'romantic' || bd.status !== 'active') continue;
-        var a0 = String(bd.citizenA || '').trim(), b0 = String(bd.citizenB || '').trim();
-        if (!((a0 === pop && b0 === sp) || (a0 === sp && b0 === pop))) continue;
-        bd.status = 'resolved'; bd.notes = String(bd.notes || '') + ' [Divorced C' + cycle + ']'; bd.lastUpdate = cycle;
-      }
       // who stays: the recorded parent (the child names them, they name the child) of more of the resident minors;
       // a tie keeps the head. Children never move.
       var hid = iHH >= 0 ? String(rows[ri][iHH] || '').trim() : '';
@@ -1086,40 +1078,72 @@ function processDivorces_(ctx, households, cycle) {
           return n;
         };
         var nA = parentOf(rows[ri], pop), nB = parentOf(rows[si], sp);
-        var hh = hhById[hid], head = hh ? String(hh.headOfHousehold || '').trim() : '';
-        var stayer = nA > nB ? ri : (nB > nA ? si : (head === sp ? si : ri));
-        var leaver = stayer === ri ? si : ri;
-        rows[leaver][iHH] = '';
-        var leaverPop = String(rows[leaver][iPop]).trim();
+        hh = hhById[hid];
+        var head = hh ? String(hh.headOfHousehold || '').trim() : '';
+        stayer = nA > nB ? ri : (nB > nA ? si : (head === sp ? si : ri));
+        leaver = stayer === ri ? si : ri;
         if (hh) {
-          // codex cut-3 diff review B4: the row itself, not only this pass's copy — stress and dissolution reload the
-          // sheet after the fund pass, and a home sold this Cycle must not pay the one who left. Both cells are
-          // self-healing: if the Phase-10 commit fails, the reconciler rebuilds Members and the head from the ledger.
-          hh.members = (hh.members || []).filter(function (m) { return String(m).trim() !== leaverPop; });
-          var hs = ctx.ss && ctx.ss.getSheetByName('Household_Ledger');
-          var hHead = hs ? hs.getRange(1, 1, 1, hs.getLastColumn()).getValues()[0] : [];
-          var cMem = hHead.indexOf('Members'), cHead = hHead.indexOf('HeadOfHousehold');
-          if (hs && cMem >= 0 && hh.rowIndex) hs.getRange(hh.rowIndex, cMem + 1).setValue(JSON.stringify(hh.members));
-          if (hs && cHead >= 0 && hh.rowIndex && head === leaverPop) {
-            hs.getRange(hh.rowIndex, cHead + 1).setValue(String(rows[stayer][iPop]).trim());
-            hh.headOfHousehold = String(rows[stayer][iPop]).trim();
-          }
+          var leaverPop = String(rows[leaver][iPop]).trim(), stayerPop = String(rows[stayer][iPop]).trim();
+          rowHid = hid;
+          rowEdit = { Members: JSON.stringify((hh.members || []).filter(function (m) { return String(m).trim() !== leaverPop; })) };
+          if (head === leaverPop) rowEdit.HeadOfHousehold = stayerPop;
         }
       }
     } else {
-      appendBondLifeLine_(ctx, ri, 'Divorce', 'the marriage ended', cycle);
-      // an off-camera marriage: the household's generic spouse leaves with it — this Cycle's income pass reads the
-      // type in memory (the reconciler writes the same retype to the row next pass, householdFormationEngine :748-757)
-      var ohh = hhById[iHH >= 0 ? String(rows[ri][iHH] || '').trim() : ''];
-      if (ohh && ohh.householdType === HOUSEHOLD_TYPES.COUPLE && (ohh.members || []).length === 1) {
+      // an off-camera marriage: the household's generic spouse leaves with it
+      var ohid = iHH >= 0 ? String(rows[ri][iHH] || '').trim() : '';
+      hh = hhById[ohid];
+      if (hh && hh.householdType === HOUSEHOLD_TYPES.COUPLE && (hh.members || []).length === 1) {
         var ownInc = Number(String(rows[ri][idx('Income')] || '').replace(/[$,\s]/g, '')) || 0;
-        ohh.householdType = ownInc >= SOLO_INCOME_FLOOR ? 'solo' : 'single';
-        // the row too (the stress pass reloads the sheet); self-healing like Members — the reconciler types it next pass
-        var ohs = ctx.ss && ctx.ss.getSheetByName('Household_Ledger');
-        var oHead = ohs ? ohs.getRange(1, 1, 1, ohs.getLastColumn()).getValues()[0] : [];
-        var cType = oHead.indexOf('HouseholdType');
-        if (ohs && cType >= 0 && ohh.rowIndex) ohs.getRange(ohh.rowIndex, cType + 1).setValue(ohh.householdType);
+        rowHid = ohid;
+        rowEdit = { HouseholdType: ownInc >= SOLO_INCOME_FLOOR ? 'solo' : 'single' };
       }
+    }
+    // the household row: stress and dissolution reload the sheet after the fund pass, so a home sold this Cycle must
+    // not pay the one who left. One read, the row's HouseholdId checked, one write of the whole row — and only then
+    // the ledger changes. A write that fails leaves the marriage as it was this Cycle (logged); each cell is one the
+    // reconciler rebuilds from the ledger next pass (Members, the type) or a member it keeps (the stayer as head).
+    if (rowEdit) {
+      try {
+        var hs = ctx.ss.getSheetByName('Household_Ledger');
+        var lastCol = hs.getLastColumn();
+        var hHead = hs.getRange(1, 1, 1, lastCol).getValues()[0];
+        var cId = hHead.indexOf('HouseholdId');
+        var cur = hs.getRange(hh.rowIndex, 1, 1, lastCol).getValues()[0];
+        if (cId < 0 || String(cur[cId]).trim() !== rowHid) throw new Error('Household_Ledger row ' + hh.rowIndex + ' is not ' + rowHid);
+        for (var ek in rowEdit) {
+          if (!rowEdit.hasOwnProperty(ek)) continue;
+          var ec = hHead.indexOf(ek);
+          if (ec < 0) throw new Error('Household_Ledger has no ' + ek + ' column');
+          cur[ec] = rowEdit[ek];
+        }
+        hs.getRange(hh.rowIndex, 1, 1, lastCol).setValues([cur]);
+      } catch (eRow) {
+        Logger.log('processDivorces_: ' + pop + ' — household row not written (' + eRow.message + '); the marriage stands this Cycle');
+        continue;
+      }
+      if (rowEdit.Members) hh.members = JSON.parse(rowEdit.Members);
+      if (rowEdit.HeadOfHousehold) hh.headOfHousehold = rowEdit.HeadOfHousehold;
+      if (rowEdit.HouseholdType) hh.householdType = rowEdit.HouseholdType;
+    }
+
+    // the marriage ends
+    var parties = couple ? [ri, si] : [ri];
+    for (var pi = 0; pi < parties.length; pi++) { rows[parties[pi]][iMar] = 'divorced'; rows[parties[pi]][iSp] = ''; }
+    if (leaver >= 0) rows[leaver][iHH] = '';
+    if (couple) {
+      appendBondLifeLine_(ctx, ri, 'Divorce', 'the marriage to ' + nameOf(si) + ' ended', cycle);
+      appendBondLifeLine_(ctx, si, 'Divorce', 'the marriage to ' + nameOf(ri) + ' ended', cycle);
+      var bonds = (ctx.summary && ctx.summary.relationshipBonds) || [];
+      for (var b = 0; b < bonds.length; b++) {
+        var bd = bonds[b];
+        if (!bd || bd.bondType !== 'romantic' || bd.status !== 'active') continue;
+        var a0 = String(bd.citizenA || '').trim(), b0 = String(bd.citizenB || '').trim();
+        if (!((a0 === pop && b0 === sp) || (a0 === sp && b0 === pop))) continue;
+        bd.status = 'resolved'; bd.notes = String(bd.notes || '') + ' [Divorced C' + cycle + ']'; bd.lastUpdate = cycle;
+      }
+    } else {
+      appendBondLifeLine_(ctx, ri, 'Divorce', 'the marriage ended', cycle);
     }
     ctx.ledger.dirty = true;
     var who = couple ? nameOf(ri) + ' and ' + nameOf(si) : nameOf(ri);

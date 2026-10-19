@@ -518,6 +518,19 @@ t('the same row is no earned citation on the tier ladder; a media mention still 
   assert.ok(cites['darrin davis'] && cites['darrin davis'].cited === 1);
   assert.ok(E2.isFamilyUsage_('Family-Own-Words') && !E2.isFamilyUsage_('mentioned'));
 });
+t('two rows for one member on one page (a race) tick once; a row already counted earlier never ticks again', () => {
+  const w = world2([darrin()], [famRow({ EmergenceCount: 0 })]);
+  const fam = { Cycle: '113', CitizenName: 'Amara Davis', UsageType: 'family-own-words', Context: 'cp-POP-00021-c113-evening' };
+  w.sheets.Citizen_Media_Usage = mkSheet([USAGE_H.slice(), usageRow(fam), usageRow(fam), usageRow(Object.assign({}, fam, { Context: 'cp-POP-00021-c113-night' }))]);
+  w.ctx.ss.getSheetByName = n => w.sheets[n] || null;
+  E2.processMediaUsage_(w.ctx, 'C' + C2, C2);
+  eq(w.sheets.Generic_Citizens.rows[1][g2('EmergenceCount')], 2); // evening once + night once
+  const w2 = world2([darrin()], [famRow({ EmergenceCount: 0 })]);
+  w2.sheets.Citizen_Media_Usage = mkSheet([USAGE_H.slice(), usageRow(Object.assign({}, fam, { Processed: 'Y' })), usageRow(fam)]);
+  w2.ctx.ss.getSheetByName = n => w2.sheets[n] || null;
+  E2.processMediaUsage_(w2.ctx, 'C' + C2, C2);
+  eq(w2.sheets.Generic_Citizens.rows[1][g2('EmergenceCount')], 0);
+});
 t('decay, Intake routing and the citizen-context readers skip it', () => {
   const pa = src('phase05-citizens/processAdvancementIntake.js'), mr = src('phase07-evening-media/mediaRoomIntake.js'), cb = src('phase05-citizens/citizenContextBuilder.js');
   assert.ok(/if \(iUType >= 0 && isFamilyUsage_\(uv\[ur\]\[iUType\]\)\) continue;/.test(pa));

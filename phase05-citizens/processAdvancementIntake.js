@@ -424,6 +424,21 @@ function processMediaUsage_(ctx, now, cycle) {
       }, 1)                                                       // genericData[0] is the header row
     : {};
 
+  // engine.304 D10 (codex cut-3 review B4): one family-own-words row per member per page, enforced where the count
+  // happens — two wakes racing on one page id can both append; only the first row (processed or not) ever ticks.
+  var familyKeyOf = function (r) {
+    if (usageTypeCol < 0 || !isFamilyUsage_(r[usageTypeCol])) return '';
+    return String(r[nameCol] || '').trim().toLowerCase() + '|' + (contextCol >= 0 ? String(r[contextCol] || '').trim() : '');
+  };
+  var familyFirstRow = {};
+  for (var fpre = 1; fpre < usageData.length; fpre++) {
+    var fkey = familyKeyOf(usageData[fpre]);
+    if (!fkey) continue;
+    var fdone = processedCol >= 0 && usageData[fpre][processedCol] === 'Y';
+    if (fdone) familyFirstRow[fkey] = -1;                         // already counted in an earlier pass
+    else if (!(fkey in familyFirstRow)) familyFirstRow[fkey] = fpre; // the first unprocessed row is the one that ticks
+  }
+
   for (var i = 1; i < usageData.length; i++) {
     var row = usageData[i];
     var citizenName = row[nameCol] ? String(row[nameCol]).trim() : '';
@@ -435,6 +450,12 @@ function processMediaUsage_(ctx, now, cycle) {
     if (!citizenName || alreadyProcessed) continue;
 
     var countsForEmergence = isEmergenceUsage_(usageType);
+    var famKey = familyKeyOf(row);
+    if (famKey && familyFirstRow[famKey] !== i) { // a duplicate of a row that already ticked, or will this pass
+      markUsageProcessed_(ctx, usageSheet, i + 1, processedCol + 1, 'Y');
+      results.skipped++;
+      continue;
+    }
 
     if (!countsForEmergence) {
       markUsageProcessed_(ctx, usageSheet, i + 1, processedCol + 1, 'Y');

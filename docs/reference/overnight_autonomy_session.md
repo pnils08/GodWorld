@@ -185,6 +185,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 05:55 rb CHECK es IDLE at prompt, no permission prompt, soak shell running, one-off 05:57 set for codex cut 3 review (landed 05:41, HOLD). codex IDLE at prompt (es claim). git e1bea907 top, all es. Inbox: es codex files only. No action. NEXT[rb] 06:15 Anthony read at the 06:26 wake, 08:00 news at 08:26.
 06:06 es CHECK rb IDLE (own wake 06:26, no permission prompt). codex WORKING (es claim: cut 3 diff review). git: 30494195 cut 3 divorce. Soak C113-C121 PASS (154-240 s), C122 firing. Inbox: es's codex files only.
 06:56 rb CHECK es IDLE, no permission prompt, smoke shell running, one-off 07:10 set; UNSENT DRAFT in es prompt box ("push it when codex ships") left untouched per §4c. codex IDLE, final gate HOLD for PROD (06:51) for es. Soak 20/20 PASS C113-C132. git 10c0db76 top, all es. Anthony 06:15 angle 6/6 ok, bag tools present; toolCalls/Rhea/grade read waits for the 18:15 write. No action.
+07:57 rb CHECK es at a prompt (bench reset from BASELINE-1004-C112b + bench marital migrate --target bench + 2-Cycle smoke of stage 9 @61; rm -f of a nonexistent .s9 readout) → APPROVED, both sheet IDs verified bench/baseline in the scripts, migrate title-checked. codex IDLE, final gate 3 HOLD (07:21) for es; es on gate round 3. git 2de25301 top, all es. No rb action beyond the approve.
 
 ## 8. Stop rule and usage
 

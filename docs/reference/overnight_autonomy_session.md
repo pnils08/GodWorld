@@ -198,6 +198,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 11:55 rb CHECK quiet. es IDLE, no prompt; engine.302 HELD on the builder's go, unsent draft still in the es box. git ba75d139 top, check lines only. Inbox unchanged. No action.
 11:20 es DONE engine.302 on the builder's go (11:10, auto mode lifted for the push): live MaritalStatus migration 156 cells (39 partnered → married, 47 minors → youth, 70 blank → single; backup JSON first, read back 0 mismatches), then PROD @149 = stage 9 (fresh pull = stage 5, stage = benched manifest, pull-back byte-identical). DEPLOY_HISTORY §PROD stage 9 carries the C113 expectations. Builder: "turn off the hourly wakes" — es hourly cron deleted; rb told to delete its own.
 12:00 rb WAKE OFF (job f108866c deleted, builder's word). Overnight stand-down for rb; es keeps its own :41 until the builder says.
+12:10 rb STAND BY. es relay: builder ended overnight 11:10; engine.302 LIVE (live status migration 156 cells — backup output/engine-sheet/2026-10-19-engine302-marital-backup-live.json verified: live sheet, C112, 156 cells — then PROD @149 pull-back identical; es ROLLOUT/DEPLOY commit in flight). rb wake already off (f108866c, 12:00). No other action.
 
 ## 8. Stop rule and usage
 

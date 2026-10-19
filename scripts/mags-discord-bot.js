@@ -287,6 +287,11 @@ async function magsAugment(systemPrompt, opts) {
   return systemPrompt;
 }
 
+// research.30 — Mags' talks drain like the citizen voices' (her replies -> POP-00005's intake row, Mike's lines ->
+// Paulson's row + the bond). No page line: her 07/12/19:00 reflection already writes her page. Neutral snippet:
+// her replies can speak of the build; the intake sheet and the digests that read it must not.
+const magsTalk = personaProvider.makeTalkBuffer_(MAGS_POPID, 'Mags', { snippet: 'a conversation in the morning room' });
+
 const magsProvider = {
   id: 'mags',
   label: 'Mags',
@@ -297,7 +302,9 @@ const magsProvider = {
   augment: magsAugment,
   persistResponse: function (userName, userMessage, response, userId) {
     saveToSupermemory(userName, userMessage, response, userId);
+    magsTalk.persist(userName, userMessage, response);   // research.30 — her dials and Paulson's move with the talk
   },
+  flushVoiceBuffer: function (force) { return magsTalk.flush(force); },
 };
 
 // ---------------------------------------------------------------------------
@@ -752,11 +759,12 @@ async function main() {
   // Boot sweep covers buffers stranded by a pm2 restart or crash mid-conversation.
   function sweepVoiceBuffers(where) {
     personas.forEach(function (provider) {
-      if (typeof provider.flushVoiceBuffer !== 'function') return; // Mags provider has no buffer
+      if (typeof provider.flushVoiceBuffer !== 'function') return;
       provider.flushVoiceBuffer(false).then(function (res) {
         if (res && res.flushed) {
           log.info('[' + provider.label + '] voice buffer flushed (' + where + '): event=' +
-            (res.event || '-') + ' affect=' + (res.affect || '-') + (res.offVocab ? ' (off-vocab, no intake row)' : ''));
+            (res.event || '-') + ' affect=' + (res.affect || '-') + (res.offVocab ? ' (off-vocab, no intake row)' : '') +
+            (res.paulson ? ' | paulson=' + res.paulson : '') + (res.pageLine ? ' | page=' + res.pageLine : ''));
         }
       }).catch(function (err) {
         log.error('[' + provider.label + '] voice buffer flush failed (' + where + '): ' + err.message);

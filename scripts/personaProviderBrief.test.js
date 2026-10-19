@@ -38,5 +38,19 @@ assert(/Saturday afternoon/.test(week) && /no longer write the Pulse cycle by cy
 assert(/Last Pulse: Cycle \d+/.test(week) && /This week \(Cycle \d+\)/.test(week), 'newsroom block names the last Pulse and this week');
 assert(!/\b20(2[0-9]|3[0-9])-\d\d-\d\d\b/.test(week), 'newsroom block carries no real-world date');
 
-if (failures) { console.error(failures + ' failure(s)'); process.exit(1); }
-console.log('all passed');
+// talk recorder — who counts as Paulson, and what the buffer keeps
+const fs = require('fs'), path = require('path');
+assert(pp.isPaulsonSpeaker_('Mike') && pp.isPaulsonSpeaker_('mike P') && !pp.isPaulsonSpeaker_('Michael') && !pp.isPaulsonSpeaker_('Dana'), 'only a speaker named Mike is read as Paulson');
+const tid = 'POP-TEST-0000', tfile = path.join(__dirname, '..', 'logs', 'discord-voice-buffer-' + tid + '.json');
+try { fs.unlinkSync(tfile); } catch (e) {}
+const tb = pp.makeTalkBuffer_(tid, 'Test Voice', {});
+tb.persist('Mike', 'first line from Mike', 'reply one');
+tb.persist('Dana', 'a stranger speaking', 'reply two');
+const buf = JSON.parse(fs.readFileSync(tfile, 'utf8'));
+assert(buf.replies.length === 2 && buf.builderLines.length === 1 && buf.builderLines[0] === 'first line from Mike', 'buffer keeps every reply and only Mike\'s lines');
+tb.flush(false).then(function (r) {
+  assert(r.flushed === false && r.reason === 'active', 'a fresh session does not flush before the idle boundary');
+  try { fs.unlinkSync(tfile); } catch (e) {}
+  if (failures) { console.error(failures + ' failure(s)'); process.exit(1); }
+  console.log('all passed');
+});

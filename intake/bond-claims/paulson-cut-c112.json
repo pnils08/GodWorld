@@ -1,0 +1,36 @@
+{
+  "claimSet": "paulson-cut-c112",
+  "cycle": 112,
+  "producedBy": "research-build (S580), builder 2026-10-19: seed Paulson's relationships with Vinnie Keane, Mags Corliss, Elias Varek, Elliot Abraham from canon. Varek (rivalry 10) and Abraham (mentorship 8.8) already carry canon-origin bonds from the C104 cut and are not re-minted.",
+  "note": "expectedPopA/expectedPopB are ADVISORY ONLY. The intake resolves POPIDs by name against the live Simulation_Ledger and flags any mismatch loudly; it never uses a supplied id.",
+  "sources": [
+    "Oakland_Sports_Feed C110/C112 (seventh championship in the Paulson era; the Vinnie Keane and Benji Dillon night)",
+    "editions/cycle_pulse_c111.txt (the parade bus: Paulson, Vinnie Keane and Benji Dillon at the front)",
+    "archive/articles — 2041 spring-training sports piece bylined Mags Corliss: Paulson announces plans to honor the championship era",
+    ".claude/agents/citizen-voice-vinnie-keane/IDENTITY.md (Relationships: Mike Paulson, the GM)"
+  ],
+  "claims": [
+    {
+      "a": "Mike Paulson",
+      "b": "Vinnie Keane",
+      "expectedPopA": "POP-00527",
+      "expectedPopB": "POP-00001",
+      "bondType": "professional",
+      "intensity": 8,
+      "domainTag": "SPORTS",
+      "nature": "The GM and the franchise's heartbeat. Paulson built the roster and the farewell season around Keane; seven championships in the Paulson era, and the two rode the front of the parade bus together.",
+      "evidence": "Oakland_Sports_Feed C110 'seventh championship in the Paulson era' + C112 Blue Lattern night; Cycle Pulse C111 parade bus; Vinnie Keane voice file lists Mike Paulson, the GM, among his relationships"
+    },
+    {
+      "a": "Mike Paulson",
+      "b": "Mags Corliss",
+      "expectedPopA": "POP-00527",
+      "expectedPopB": "POP-00005",
+      "bondType": "professional",
+      "intensity": 6,
+      "domainTag": "SPORTS",
+      "nature": "The Tribune's editor and the club's general manager. Mags runs the paper that covers his announcements and the dynasty he built; the working relationship of a newsroom and the man at the center of its biggest beat.",
+      "evidence": "Published 2041 sports-season piece bylined Mags Corliss: 'Paulson announces plans to honor championship era throughout 2041'; the Tribune's parade and championship coverage C110-C111"
+    }
+  ]
+}

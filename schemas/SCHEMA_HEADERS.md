@@ -843,6 +843,11 @@ pointers:
 | J | Status |
 | K | Sex |
 | L | EmployerBizId |
+| M | FamilyOf |
+| N | FamilyRole |
+| O | MaidenName |
+
+> engine.304 (2026-10-19): M–O are the family-lottery link — a `Family`-Status row is linked to `FamilyOf` (a tracked POPID) as `FamilyRole` (spouse / child / parent), carrying the family surname with its own kept in `MaidenName`. Written on the bench first; the live header waits for the builder's go (plan engine.286 §engine.304 D1).
 
 ---
 

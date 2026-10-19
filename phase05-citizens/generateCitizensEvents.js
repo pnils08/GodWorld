@@ -2332,7 +2332,8 @@ function generateCitizensEvents_(ctx) {
     gsC = gcSurfHead.indexOf('EmergenceContext');
     if (gsF >= 0 && gsL >= 0 && gsE >= 0) {
       for (var gsi = 1; gsi < gcSurfVals.length; gsi++) {
-        if (gsS >= 0 && String(gcSurfVals[gsi][gsS] || '').toLowerCase() !== 'active') continue;
+        var gsSt = gsS >= 0 ? String(gcSurfVals[gsi][gsS] || '').toLowerCase() : 'active';
+        if (gsSt !== 'active' && gsSt !== 'family') continue; // engine.304: a linked family member can still be crossed — that tick is usage
         var gsName = (String(gcSurfVals[gsi][gsF] || '').trim() + ' ' + String(gcSurfVals[gsi][gsL] || '').trim()).trim();
         if (gsName.indexOf(' ') < 0) continue; // needs first+last
         // engine.304 (codex cut-1 review §5): the acquaintance lines are adult errands — a child under 13 is not

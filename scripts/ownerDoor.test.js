@@ -237,7 +237,7 @@ console.log('\n4c. an authored row carries its bio onto the ledger (builder-dire
 console.log('\n5. the plumbing — cap, order, keys:');
 {
   const src = R('phase05-citizens/processAdvancementIntake.js');
-  check('the door takes only the slots emergence and the family door left', /checkBusinessOwnerPromotions_\(ctx, cycle,\s*DRIP_CAP_PER_CYCLE - emergenceResults\.queued - familyResults\.queued\)/.test(src) && src.indexOf('checkFamilyMatchPromotions_(ctx, cycle') < src.indexOf('checkBusinessOwnerPromotions_(ctx, cycle') && src.indexOf('checkBusinessOwnerPromotions_(ctx, cycle') < src.indexOf('var advResults = processAdvancementRows_'));
+  check('the door takes only the slots emergence left (engine.304: the family door links, it spends no slot)', /checkBusinessOwnerPromotions_\(ctx, cycle,\s*DRIP_CAP_PER_CYCLE - emergenceResults\.queued\)/.test(src) && src.indexOf('checkFamilyMatchPromotions_(ctx, cycle') < src.indexOf('checkBusinessOwnerPromotions_(ctx, cycle') && src.indexOf('checkBusinessOwnerPromotions_(ctx, cycle') < src.indexOf('var advResults = processAdvancementRows_'));
   const seeds = R('phase01-config/engine94SheetContract.js');
   check('the four keys are seeded in ENGINE96_CONFIG_SEEDS', E.OWNER_DOOR_REQUIRED_KEYS.every(k => new RegExp("\\['" + k + "', ").test(seeds)));
   check('no Math.random in the door', !/Math\.random/.test(src.slice(src.indexOf('THE OWNER DOOR'), src.indexOf('THE HOUSEHOLD DOOR'))));

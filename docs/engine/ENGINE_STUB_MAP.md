@@ -2427,12 +2427,22 @@
 - **pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom)**
   RNG: ctx.rng / safeRand_(ctx)
 
-- **checkEmergencePromotions_(ss, cycle, maxQueue, simYear)**
+- **checkEmergencePromotions_(ss, cycle, maxQueue, simYear, ctx)**
   Sheets: Generic_Citizens
 
-- **checkFamilyMatchPromotions_(ctx, cycle, slots)**
+- **familyPopCount_(v)**
+
+- **gcFamilyLinks_(gData)**
+
+- **familySpotsOpen_(L, row, simYear, linked, selfRow, forDraw)**
+
+- **familyLedgerCols_(h)**
+
+- **releaseFamilyLink_(sheet, gData, r, cols, gL)**
+
+- **checkFamilyMatchPromotions_(ctx, cycle)**
   Config: ctx.config.rngSeed
-  Sheets: Generic_Citizens
+  Sheets: Advancement_Intake1, Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
 
 - **ownerDoorConfig_(ctx)**
@@ -2471,7 +2481,7 @@
   Writes: S.relationshipBonds
   Sheets: Generic_Citizens
 
-- **markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle, held)**
+- **markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle, held, familyOf)**
   Sheets: Generic_Citizens
 
 ### runAsUniversePipeline.js
@@ -4762,4 +4772,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1717
+**Functions mapped:** 1722

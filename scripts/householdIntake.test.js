@@ -71,7 +71,7 @@ function world(intakeRows, opts) {
     Household_Ledger: mkSheet([HH_H.slice()]),
     Family_Relationships: mkSheet([['HouseholdId','Husband','Wife','RelationshipType','SinceCycle','Status','Child1','Child2','Child3','Child4','Child5']]),
     Business_Ledger: mkSheet([['BIZ_ID','Name','Sector','Neighborhood','Employee_Count','Avg_Salary','Annual_Revenue','Growth_Rate','Key_Personnel']]),
-    Generic_Citizens: mkSheet([['First','Last','Age','BirthYear','Neighborhood','Occupation','EmergenceCount','EmergedCycle','EmergenceContext','Status','Sex','EmployerBizId']]),
+    Generic_Citizens: mkSheet([['First','Last','Age','BirthYear','Neighborhood','Occupation','EmergenceCount','EmergedCycle','EmergenceContext','Status','Sex','EmployerBizId','FamilyOf','FamilyRole','MaidenName']]), // engine.304 D1: the link columns
   };
   let i = 0; const seq = opts.seq || [0.3, 0.7, 0.5, 0.2, 0.9, 0.1];
   const ledgerRows = [

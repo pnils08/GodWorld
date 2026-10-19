@@ -2,7 +2,7 @@
   "generated": "2026-10-19",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1717,
+  "functionsMapped": 1722,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -5222,6 +5222,7 @@
     "Advancement_Intake1": {
       "writers": [],
       "readers": [
+        "phase05-citizens/processAdvancementIntake.js::checkFamilyMatchPromotions_",
         "phase05-citizens/processAdvancementIntake.js::processAdvancementRowsBody_",
         "phase07-evening-media/mediaRoomIntake.js::flagCitizenForTierReview_",
         "phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_",

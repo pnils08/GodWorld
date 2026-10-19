@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1717 · **S.* fields:** 378 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1722 · **S.* fields:** 378 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -414,7 +414,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | Sheet | Writers | Readers | #W | #R |
 |---|---|---|---:|---:|
 | `_CycleCheckpoint` | _(none)_ | `phase10-persistence/cycleCheckpoint.js::getCheckpointSheet_` | 0 | 1 |
-| `Advancement_Intake1` | _(none)_ | `phase05-citizens/processAdvancementIntake.js::processAdvancementRowsBody_`, `phase07-evening-media/mediaRoomIntake.js::flagCitizenForTierReview_`, `phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_`, `phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_` | 0 | 4 |
+| `Advancement_Intake1` | _(none)_ | `phase05-citizens/processAdvancementIntake.js::checkFamilyMatchPromotions_`, `phase05-citizens/processAdvancementIntake.js::processAdvancementRowsBody_`, `phase07-evening-media/mediaRoomIntake.js::flagCitizenForTierReview_`, `phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_`, `phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_` | 0 | 5 |
 | `Business_Archive` | _(none)_ | `phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_` | 0 | 1 |
 | `Business_Ledger` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, `phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_`, `phase05-citizens/runCareerEngine.js::runCareerEngine_` | `phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_`, `phase03-population/applyDemographicDrift.js::businessDistressShare_`, `phase04-events/chaosCarsEngine.js::loadBusinessRows_`, `phase04-events/chaosCarsEngine.test.js::makeCtx`, `phase04-events/chaosCarsEngine.test.js::reset`, …(+19 more) | 5 | 24 |
 | `Care_Justice_Census` | _(none)_ | `phase03-population/applyDemographicDrift.js::readHospitalCensusTail_` | 0 | 1 |

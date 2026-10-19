@@ -175,6 +175,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 05:31 es BENCH 1004 @58 = stage 6 (stage 5 + 8 files at 5f057a26, pull-back identical); reset BASELINE-1004-C112b (0 diffs), bench MaritalStatus migration 156 cells read back clean, clearfire 132, aim = bench. Soak C113-C132 running (output/engine-sheet/2026-10-19-e302-soak.log).
 05:38 es CHECK rb IDLE (prompt empty, no permission prompt). codex WORKING (es claim: recheck-2 + cut 3 plan review). git: 8b00524f recheck fixes. Soak C113 205 s / C114 225 s PASS, C115 firing. Inbox: only es's own codex files.
 05:55 rb CHECK es IDLE at prompt, no permission prompt, soak shell running, one-off 05:57 set for codex cut 3 review (landed 05:41, HOLD). codex IDLE at prompt (es claim). git e1bea907 top, all es. Inbox: es codex files only. No action. NEXT[rb] 06:15 Anthony read at the 06:26 wake, 08:00 news at 08:26.
+06:06 es CHECK rb IDLE (own wake 06:26, no permission prompt). codex WORKING (es claim: cut 3 diff review). git: 30494195 cut 3 divorce. Soak C113-C121 PASS (154-240 s), C122 firing. Inbox: es's codex files only.
 
 ## 8. Stop rule and usage
 

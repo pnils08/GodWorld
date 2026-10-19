@@ -168,6 +168,11 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 04:06 es CLAIM codex es engine.302 cut 1 plan review (TASK docs/for-claude-review/2026-10-19-engine302-cut1-plan-review-TASK.md → …-codex-engine302-cut1-plan-review.md).
 04:14 rb BOOT overnight (builder present, asked rb to support es). WAKE set (recurring :26, job f108866c). Codex pane confirmed mid-review for es (verdict file writing). Guest pane table re-indexed to tmux truth (codex 3, agy 4, aider 5; address by window name).
 04:55 rb CHECK es at a prompt (rm of inbox codex cut 1 review, byte-identical to committed docs/research copy a0e65d4d) → APPROVED es rm single untracked duplicate; es building cut 1. codex done cut 2 plan review (HOLD, 04:29) for es to fold; es holds the claim. git a0e65d4d top. NEXT[rb] clocks 06:15 / 08:00 not yet due.
+04:12 es FOLD codex cut 1 plan review (HOLD): no hood gate on the neighbor lane (advisor reconcile), widowing pointer rule, wake, remarriage kids, courting guard, migration age stop.
+04:25 es BUILDER RULINGS 8-12 recorded verbatim (cap off, bonds deepen, divorce on stacked crisis, window 58, GC boost); cut 2 designed + CLAIM codex plan review.
+04:47 es BUILD 0125b59a cut 1; 8e77f7a0 cut 2 (codex cut 2 plan HOLD folded first).
+05:21 es FOLD codex cuts 1+2 diff review (HOLD) → 5f057a26 fix round, tests 70/70, npm 294/294. CLAIM codex recheck.
+05:31 es BENCH 1004 @58 = stage 6 (stage 5 + 8 files at 5f057a26, pull-back identical); reset BASELINE-1004-C112b (0 diffs), bench MaritalStatus migration 156 cells read back clean, clearfire 132, aim = bench. Soak C113-C132 running (output/engine-sheet/2026-10-19-e302-soak.log).
 
 ## 8. Stop rule and usage
 

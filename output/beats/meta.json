@@ -19,7 +19,7 @@
     "Story_Seed_Deck": 464,
     "Story_Hook_Deck": 2052,
     "Business_Archive": 2,
-    "Cultural_Ledger": 51,
+    "Cultural_Ledger": 50,
     "Oakland_Sports_Feed": 250,
     "Initiative_Tracker": 11,
     "Civic_Office_Ledger": 999,
@@ -31,7 +31,7 @@
     "LifeHistory_Log": 5115,
     "Lived_Events": 6
   },
-  "generatedAt": "2026-10-19T08:11:56.866Z",
+  "generatedAt": "2026-10-19T08:18:38.477Z",
   "generatedBy": "scripts/dumpBeatTabs.js",
   "note": "pipeline.68 Task 1 — beat-tab dump for the slice builders. Stable filenames, overwritten each cycle; prior cycle kept in prev/. Published as one generation (directory swap)."
 }

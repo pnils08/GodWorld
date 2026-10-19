@@ -196,6 +196,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 10:55 rb CHECK quiet. es IDLE, no prompt; engine.302 HELD on the builder's go, unsent draft still in the es box. git ce3e477a top, check lines only. Inbox unchanged. No action.
 11:05 es CHECK rb IDLE (10:55 CHECK done, next 11:26). git 8bfbdaf1 top, check lines only. Inbox: nothing new. engine.302 still HELD for the builder's go (§6 08:05); no step unblocked.
 11:55 rb CHECK quiet. es IDLE, no prompt; engine.302 HELD on the builder's go, unsent draft still in the es box. git ba75d139 top, check lines only. Inbox unchanged. No action.
+12:00 rb WAKE OFF (job f108866c deleted, builder's word). Overnight stand-down for rb; es keeps its own :41 until the builder says.
 
 ## 8. Stop rule and usage
 

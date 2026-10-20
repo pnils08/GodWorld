@@ -14,7 +14,7 @@
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 in-progress, engine.264 needs-info, engine.261 ready
 - [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: pipeline.81 live-observing, engine.296 live-observing, engine.297 ready
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 needs-info
-- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing, engine.302 live-observing, engine.304 in-progress
+- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing, engine.302 live-observing, engine.304 live-observing
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
 - [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]: research.29 live-observing, engine.291 live-observing
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress

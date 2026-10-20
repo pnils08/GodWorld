@@ -1,7 +1,7 @@
 ---
 title: Bay Tribune Master Index Plan
 created: 2026-10-19
-updated: 2026-10-19
+updated: 2026-10-20
 type: plan
 tags: [media, newsroom, retrieval, draft]
 sources:
@@ -53,16 +53,43 @@ Drive (read-only, service account): `1_The_Bay_Trbune` 108 folders / 686 files /
 
 Pre-check state: none in production. `priorArcRequirement.js` and the NotebookLM `prior-published-arc` lane run in evaluation only (`--brief-requirement-file`; no cron). Jax's C108 assignment listed Elias Varek among the affected citizens; the staged piece never named him.
 
+## Measured 2026-10-20 (overnight prep; read-only, nothing landed)
+
+Drive walked live with the read-only service account; all 746 text-or-doc files fetched to a scratch folder and compared with `editions/`, `archive/`, the dashboard and the canon search.
+
+**Claims checked**
+- Drive totals exact: 250 folders, 1,006 files (Bay Tribune 108 / 686, Citizens 142 / 320); 746 text-or-doc files. Oakland_Sports_Desk and Bay_Tribune_Oakland sit under God_World_Citizens, not under the Bay Tribune root.
+- Dashboard filters live: Jax Caldera 8 pieces, earliest C87 (the labor supplemental), not C92; Elias Varek 23; `q=Heat Shield` 0. The `archive/articles` counts hold: 216 files, 181 `cXX`, 35 numbered (none past C81), 149 byline `unknown`.
+- Heat Shield is Edition 100: the canon search returns it inside the Edition 100 ingest record (cycle 100, type edition), the trade it opens on (Cy Newell to New York, Herbert Jones) is printed in Edition 99, and the Edition 102 record carries Varek's printed reply. Task 6 said Edition 95; corrected. The bond row itself names no edition.
+- Local `editions/cycle_pulse_edition_100.txt` holds nine pieces and not the Heat Shield, and no commit in git history ever held it (pickaxe on `Heat Shield` over `editions` and `archive`: no hit). The file has four Drive copies (Supplementals, its `archive`, Gemini, its `archive`), none with a cycle in the header; the two Supplementals copies differ by one byte and the desk word (`Opinion` matches the Edition 100 ingest, `Civic` is the other).
+
+**What is on disk (individual file, not a bundle) versus not.** Two shelves, kept apart: "on disk" is the repo; "in Supermemory" is the canon store. The 2026-10-19 "not synced" list was the second.
+- In-scope text files: 410 across 12 top folders, 351 unique by body fingerprint (59 copies).
+- On disk already: 324 of the 351. 279 sit in `editions/`, `archive/articles` or the profiles shelf. About 45 sit only on the data / unknown / templates / indexes / mirrors shelves or in `archive/editions`, so they need a classification pass, not a landing.
+- Not on disk at all: 27 files, about 20 distinct pieces: the Heat Shield (2 copies); the C100 Martin Richards trade (3 versions); the C99 Jerami Grant trade, Oaks offseason dispatch and Oaks expansion draft; Coles trade analytics; Mason Ortega's kitchen piece; four C89 culture supplementals; the C76 West Oakland and C86 Paulson Media supplementals; the C90 podcast transcript and the continuity briefing; the C92 Santana interview; the C102 Varek profile and three citizen records (Saint Lucia, Amara Olsen, Richmond manifest); Hal's Danny Horn player profile; edition 87 v1 (a draft of an edition already on disk); two index files (Sports_Desk manifest, Hal index README) that are not articles.
+
+**Header reality.** From the file's own text or name: cycle for 122 of 410, byline for 194, both for 87. Sports_Desk and Oakland_Sports_Desk give a cycle for 0 of 178: pre-cycle work dated by season. The reorganize log shows 183 moves landed as `cXX`: Anthony, Hal and arts columns from the old Drive mirror folders, pre-cycle by origin, not a failed extraction. The archive names carry two orderings (desk_slug_reporter and desk_reporter_slug), so a byline cannot be read from a filename. **Decision (rb): pre-cycle pieces keep `cycle: null` plus an era note; no cycle is invented; byline repair only where the header carries one.**
+
+**Why the dashboard cannot be the index.** Its edition parser lists section headings (`CIVIC / GOVERNMENT`) and table rows (`POP-00527 | Mike Paulson | ...`) as articles with a null author, and leaves interviews and supplementals at `C?`. Its archive parser reads the author from filename group 4 and only from an `UPPERCASE NAME - Role` first line, so a `By X` header in an archive file is not read. A landed file must therefore carry the byline slug as its last filename part to answer `author=`.
+
+**Why disk placement fixes the writers.** The writers' `canon_search` and the MCP file shelf are a live keyword grep over `output`, `docs`, `editions`, `archive`. `editions/` and `archive/articles` rank first; the cap is 6 files and 5,000 characters. A piece landed in `archive/articles` with its byline and names in the text is found with no search change. The 0 of 5 for the Heat Shield was absence from disk.
+
+**Sources for the rows.** `editions/` (50 files, 393 `By Name | Bay Tribune Desk` lines; `Names Index:` lines before C103, `## INTAKE` blocks from C103); `archive/articles` (216); staged sidecars (110, C107 to C112: `bylinePopid`, desk, hoods, status; Jax C111 intake names are empty); published set per cycle in `edition_published_c{N}.json` `selected`; citizens named from a name scan of `output/citizen-names.tsv` (1,044 rows), resolved by name, never by an agent-supplied POPID. Rename blast radius for `archive/articles`: 2 references outside `archive/`.
+
+**Pre-check ground.** `priorArcRequirement.js` is the NotebookLM evaluation lane (UUID source ids, forced use), not this. The per-seat `_arc.json` files hold citizen quote seeds, not prior coverage. The hook is `buildJaxSlice.js`, the Jax assignment pack.
+
+**Files this plan names (FIX, don't ADD).** Rewritten in place: `scripts/buildArticleIndex.js` (it already has the reporter map, edition parser and fingerprint dedupe; its inputs are stale). New, named here: `scripts/syncDriveArticles.js` (reuses the canon sweep's Drive walk), `archive/drive-manifest.json` (Drive id to disk path to fingerprint), `archive/ARTICLE_INDEX.jsonl` (one row per piece). Task 5 will name its own lib file in its design.
+
 ## Tasks
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | Scope: published pieces only — Cycle Pulses, Supplementals, Sports Desk and Oakland_Sports_Desk columns and features, Dispatch, Interviews and Pressers, Profiles, Mags editorials, podcast scripts. Out: Mara's audits, exports, tool folders (Gemini, Kimi, NotebookLM, Crons_Media) | builder | decided 2026-10-19 |
-| 2 | Sync in-scope Drive text to disk under the archive convention (Drive stays the front door); derive cycle and byline from each file's own header; repair the `cXX` / `unknown` names | rb | not started |
-| 3 | Master index builder — one row per article, copies folded (repo path, Drive id, Supermemory customId); staged pieces that missed the Saturday gate listed and flagged unpublished; rebuilt each Saturday after the sweep | rb | not started |
-| 4 | MCP `search_articles` passes `author` and `citizen`; writers' `canon_search` and the bots read the index | rb / es | not started |
-| 5 | Assignment-time pre-check, Jax first: byline POPID x the slice's citizens -> that journalist's earlier pieces on them and the replies printed to them, shown in the assignment as context (not forced); widen to every seat once it reads well | rb (+ es for the slice builders) | not started |
-| 6 | Jax–Varek rivalry canon bond (`mintCanonBonds.js`) — rivalry 7, CIVIC, one-sided as Varek–Paulson; from The Heat Shield, Edition 95 and Varek's named reply | rb | done, live, read back (BondId `b6edvstz`) |
+| 2 | Land the Drive-only pieces (list in §Measured 2026-10-20) with `scripts/syncDriveArticles.js`: articles into `archive/articles`, profiles into `archive/non-articles/profiles`, filename `c<cycle>_<desk>_<slug>_<byline-slug>.txt` (cycle from header, name, or the published ingest tag; pre-cycle `cXX`); manifest `archive/drive-manifest.json`; folded copies keep the one matching the published ingest, the other's Drive id and diff go on the row; classify the ~45 shelf-only pieces. Own commit; renames are a second commit, only where the header supplies a byline or a number | rb | not started |
+| 3 | Rewrite `scripts/buildArticleIndex.js` in place to emit `archive/ARTICLE_INDEX.jsonl`: one row per piece from `editions/` (split per article), `archive/articles`, the profiles shelf, staged sidecars (flagged unpublished unless in `selected`) and the manifest; title, filed headline, byline and POPID, desk, cycle or null plus era, citizens named (name scan), copies folded (repo path, Drive id, Supermemory customId). Rebuilt each Saturday after the sweep (cron-saturday-run, es wires) | rb | not started |
+| 4 | `search_articles` passes `author` and `citizen`, and the dashboard endpoint reads the index rows so a section heading is never an article; writers' `canon_search` needs no change once Task 2 lands. Spec and diff by rb, reviewed by agy against a checklist, pushed by es; the MCP server picks it up when the builder reconnects it | rb / es | not started |
+| 5 | Assignment-time pre-check, Jax first: byline POPID x the slice's citizens -> that journalist's earlier pieces on them and the replies printed to them, read from the index and shown as context in the `buildJaxSlice.js` pack (not forced); design and test spec tonight, build after the index exists; widen to every seat once it reads well | rb (+ es for the slice builders) | design only |
+| 6 | Jax–Varek rivalry canon bond (`mintCanonBonds.js`) — rivalry 7, CIVIC, one-sided as Varek–Paulson; from The Heat Shield, Edition 100 and Varek's named reply | rb | done, live, read back (BondId `b6edvstz`) |
 
 ## Acceptance
 
@@ -79,8 +106,11 @@ Pre-check state: none in production. `priorArcRequirement.js` and the NotebookLM
 
 None open. Answered 2026-10-19: scope = published pieces only; front door = Drive; pre-check = Jax first, shown not forced. rb call: unpublished staged pieces are indexed and flagged.
 
+For the builder (does not block): canon says the Heat Shield ran in Edition 100 but the local Edition 100 file lacks it. rb lands it as its own piece at cycle 100 and leaves the edition file untouched; adding it into `editions/cycle_pulse_edition_100.txt` changes a published file and stays the builder's call.
+
 ## Changelog
 
 - 2026-10-19 (research-build) — Created from the BACKLOG entry and the retrieval, index and Drive measurements taken while building research.30. Nothing built.
 - 2026-10-19 (research-build) — Builder answered scope (published only), front door (Drive), pre-check (Jax first, shown not forced); unpublished staged pieces indexed and flagged (rb call). Row pipeline.84 stays needs-info until Task 2 is picked up.
 - 2026-10-19 (research-build) — Task 6 done: Jax–Varek rivalry 7 minted live from the Heat Shield the builder pointed at (the Drive file); rb had wrongly held it for a further article.
+- 2026-10-20 (research-build) — Overnight prep, read-only. Drive totals confirmed; 351 unique in-scope pieces, 324 already on disk, about 20 distinct pieces missing (Task 2 shrinks from a sync to a landing); pre-cycle pieces keep `cycle: null`; the dashboard parser rules it out as the index; Task 6 edition corrected 95 to 100; files named in §Measured 2026-10-20. Nothing landed.

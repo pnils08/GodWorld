@@ -858,6 +858,9 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
         var famAtNow = familyAnchorOf_(ctx, FLm, famByPopNow, matchPop); // D11: ledger first, then an archived death
         var famStill = famHits === 1 && !!famAtNow && // codex cut-2 review §4: exactly one row, before a POPID
           familySpotsOpen_(FLm, famAtNow.row, simYearOf_(ctx, cycle), famNow.byAnchor[matchPop], famSelf, false)[matchType] >= 1;
+        // codex cut-4 review §2: a minor is no one's widow — refused here, before a POPID or the GC flip
+        if (famStill && matchType === 'spouse' && iBirthYear >= 0 && (Number(row[iBirthYear]) || 0) > 0 &&
+            (simYearOf_(ctx, cycle) - Number(row[iBirthYear])) < 18) famStill = false;
         if (famStill && famAtNow.dead) famDeadAnchor = famAtNow.row;
         if (!famStill) {
           Logger.log('processAdvancementRows_: ' + first + ' ' + last + ' — ' + (famHits !== 1

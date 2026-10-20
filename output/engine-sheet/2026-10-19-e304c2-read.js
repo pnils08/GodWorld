@@ -15,6 +15,8 @@ const LOG = '/root/GodWorld/output/engine-sheet/2026-10-19-e304c2-bench.jsonl';
 (async () => {
   const gc = await sheets.getSheetData('Generic_Citizens'); const gh = gc[0]; const g = n => gh.indexOf(n);
   const sl = await sheets.getSheetData('Simulation_Ledger'); const H = sl[0]; const S = n => H.indexOf(n);
+  let ar = []; try { ar = await sheets.getSheetData('Citizen_Archive'); } catch (e) {}
+  const AH = ar[0] || []; const deadArch = new Set(ar.slice(1).filter(r => String(r[AH.indexOf('ArchiveReason')]) === 'deceased').map(r => r[AH.indexOf('POPID')])); // engine.304 D11
   const byPop = {}; const byName = {};
   sl.slice(1).forEach(r => { byPop[r[S('POPID')]] = r; byName[(r[S('First')] + ' ' + r[S('Last')]).toLowerCase()] = r; });
   const pool = { aF: 0, aM: 0, yF: 0, yM: 0 }, standing = { spouse: 0, child: 0, parent: 0 }, made = [], bad = [];
@@ -29,7 +31,7 @@ const LOG = '/root/GodWorld/output/engine-sheet/2026-10-19-e304c2-bench.jsonl';
     if (st === 'Family') {
       if (standing[role] !== undefined) standing[role]++;
       if (!of || !role) bad.push('Family row without link: ' + r[g('First')] + ' ' + r[g('Last')]);
-      const a = byPop[of]; if (!a || String(a[S('Status')]).toLowerCase() !== 'active') bad.push('Family row of a missing/inactive citizen: ' + r[g('First')] + ' ' + r[g('Last')] + ' → ' + of);
+      const a = byPop[of]; const aDead = deadArch.has(of) || (a && String(a[S('Status')]).toLowerCase() === 'deceased'); if (aDead) standing.ofTheLate = (standing.ofTheLate || 0) + 1; if (!aDead && (!a || String(a[S('Status')]).toLowerCase() !== 'active')) bad.push('Family row of a missing/inactive citizen: ' + r[g('First')] + ' ' + r[g('Last')] + ' → ' + of);
     }
     const mk = ctx.match(new RegExp('Family: (spouse|child|parent) of (.+?) \\((POP-\\d{5})\\), C' + N + '(?!\\d)'));
     if (mk) { const a = byPop[mk[3]]; made.push({ role: mk[1], of: mk[3], tier: a ? a[S('Tier')] : '?', name: r[g('First')] + ' ' + r[g('Last')], age }); }
@@ -38,7 +40,8 @@ const LOG = '/root/GodWorld/output/engine-sheet/2026-10-19-e304c2-bench.jsonl';
       const lr = byName[(r[g('First')] + ' ' + r[g('Last')]).toLowerCase()];
       let wired = false;
       if (lr) {
-        if (role === 'spouse') wired = String(lr[S('SpouseId')]).includes(of) && String((byPop[of] || [])[S('SpouseId')] || '').includes(lr[S('POPID')]);
+        const late = deadArch.has(of) || !byPop[of] || String(byPop[of][S('Status')]).toLowerCase() === 'deceased'; // D11: one-sided to the dead
+        if (role === 'spouse') wired = String(lr[S('SpouseId')]).includes(of) && (late ? String(lr[S('MaritalStatus')]).toLowerCase() === 'widowed' : String((byPop[of] || [])[S('SpouseId')] || '').includes(lr[S('POPID')]));
         if (role === 'child') wired = String(lr[S('ParentIds')]).includes(of);
         if (role === 'parent') wired = String(lr[S('ChildrenIds')]).includes(of);
       }

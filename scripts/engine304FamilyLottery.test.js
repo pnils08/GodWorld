@@ -636,10 +636,69 @@ t('known-dead parents: the ledger\'s deceased rows and the archive\'s deaths; a 
   assert.strictEqual(HF.livingOffcamParentSlots_('["POP-00888"]', set), 2);
 });
 t('the orphan rule and both salary sites read the dead (source)', () => {
-  assert.ok(/var orphanMinor = age < 18 && !\(cz\.parentIds \|\| \[\]\)\.some\(function \(pp\) \{ return !!byPop\[popIdOf\(pp\)\]; \}\);/.test(HFsrc));
+  assert.ok(/var orphanMinor = age < 18 && czPars\.every\(function \(pp\) \{ return !!deadSet\[pp\]; \}\);/.test(HFsrc)); // codex cut-4 §3: no parents, or every parent confirmed dead
   assert.ok(/income = ownInc \+ offcamInc \* livingOffcamParentSlots_\(cz\.parentIds, deadSet\);/.test(HFsrc));
   assert.ok(/slots = Math\.max\(slots, livingOffcamParentSlots_\(mMoney\.parentIds, deadSetInc\)\);[\s\S]{0,80}totalIncome \+= slots \* GENERIC_SPOUSE_SALARY;/.test(HFsrc));
   assert.ok(!/if \(famAdults === 0\) totalIncome \+= 2 \* GENERIC_SPOUSE_SALARY;/.test(HFsrc));
+});
+
+console.log('C11 codex cut-4 review — households run for real, the dead edge cases');
+const HHH = ['HouseholdId','HeadOfHousehold','HouseholdType','Members','Neighborhood','HousingType','MonthlyRent','HousingCost','HouseholdIncome','FormedCycle','DissolvedCycle','Status','HouseholdSavings'];
+const HF2 = new Function('citizenArchiveLatestByPop_', 'Logger', 'safeRand_', 'estimateRent_', 'simYearOf_', 'ctx_unused',
+  HFsrc + '\nreturn { formCriteriaHouseholds_ };')(() => ARCH, { log() {} }, (c) => c.rng, () => 2000, () => Y2);
+function hhWorld(rows) {
+  const sheets = { Household_Ledger: mkSheet([HHH.slice()]), Family_Relationships: mkSheet([['HouseholdId','Husband','Wife','RelationshipType','SinceCycle','Status','Child1','Child2','Child3','Child4','Child5']]) };
+  return { sheets, ctx: { ledger: { headers: SL2.slice(), rows, dirty: false }, summary: { cycleId: C2, simYear: Y2, neighborhoodState: { Temescal: { medianRent: 2000 } } }, config: { cycleCount: C2 }, rng: () => 0.99, ss: { getSheetByName: n => sheets[n] || null } } };
+}
+t('formCriteriaHouseholds_: an unhoused child of a dead parent gets a family home paid one living parent; of two dead parents, none; a traded parent leaves the child as before', () => {
+  ARCH['POP-00768'] = { row: [], reason: 'deceased' }; ARCH['POP-00769'] = { row: [], reason: 'deceased' }; ARCH['POP-00888'] = { row: [], reason: 'traded-away' };
+  const kid = (pop, pars) => sl2({ POPID: pop, First: 'K', Last: pop, Status: 'Active', BirthYear: Y2 - 9, Neighborhood: 'Temescal', MaritalStatus: 'youth', ParentIds: pars, Income: 0 });
+  const w = hhWorld([kid('POP-00901', '["POP-00768"]'), kid('POP-00902', '["POP-00768","POP-00769"]'), kid('POP-00903', '["POP-00888"]'), kid('POP-00904', '[]')]);
+  HF2.formCriteriaHouseholds_(w.ctx, [], C2);
+  const hh = w.sheets.Household_Ledger.appended, H = n => HHH.indexOf(n);
+  const of = pop => hh.find(r => r[H('HeadOfHousehold')] === pop);
+  assert.ok(of('POP-00901') && of('POP-00901')[H('HouseholdType')] === 'family', 'child of one dead parent housed');
+  assert.ok(of('POP-00902') && of('POP-00904'), 'two dead parents, and no parents, both housed');
+  assert.ok(!of('POP-00903'), 'a traded parent is alive — no orphan home (unchanged)');
+  const off = of('POP-00904')[H('HouseholdIncome')];
+  assert.ok(off > 0 && of('POP-00901')[H('HouseholdIncome')] * 2 === off && of('POP-00902')[H('HouseholdIncome')] === 0, JSON.stringify([of('POP-00901')[H('HouseholdIncome')], of('POP-00902')[H('HouseholdIncome')], off]));
+});
+t('a minor queued as the spouse of the dead is refused before a POPID is spent; the next queue row is wired as live family (no leak)', () => {
+  const d = deadEli(); d[c2('SpouseId')] = '';
+  const w = world2([darrin(), d], [famRow({ First: 'Tia', Last: 'Bishop', MaidenName: 'Ng', FamilyOf: 'POP-00768', FamilyRole: 'spouse', BirthYear: Y2 - 16 }), famRow({ First: 'Amara', Last: 'Davis', MaidenName: 'Keane' })]);
+  w.ctx.civicGcTaken = {};
+  // queue both by hand in order (the door's own age checks would stop Tia first — this proves the mint's guard)
+  const adv = w.sheets.Advancement_Intake1; adv.rows[0] = adv.rows[0].concat(['BirthYear', 'Neighborhood', 'MatchPopId', 'MatchType', 'MaidenName']);
+  const qh = adv.rows[0], q = (o) => qh.map(c => (o[c] !== undefined ? o[c] : ''));
+  adv.appendRow(q({ First: 'Tia', Last: 'Bishop', Tier: 4, ClockMode: 'ENGINE', BirthYear: Y2 - 16, Neighborhood: 'Temescal', MatchPopId: 'POP-00768', MatchType: 'spouse', MaidenName: 'Ng' }));
+  adv.appendRow(q({ First: 'Amara', Last: 'Davis', Tier: 4, ClockMode: 'ENGINE', BirthYear: Y2 - 31, Neighborhood: 'Temescal', MatchPopId: 'POP-00021', MatchType: 'spouse', MaidenName: 'Keane' }));
+  const before = w.ctx.ledger.rows.length;
+  E3.processAdvancementRows_(w.ctx, 'C' + C2, C2);
+  const rows = w.ctx.ledger.rows;
+  assert.strictEqual(rows.length, before + 1);
+  eq([rows[before][c2('First')], rows[before][c2('MaritalStatus')], rows[0][c2('SpouseId')]], ['Amara', 'married', rows[before][c2('POPID')]]);
+  eq(w.sheets.Generic_Citizens.rows[1][g2('Status')], 'Family'); // Tia stays linked — the family pass decides her
+});
+t('an archived widow-to-be: the widow of a citizen already in the archive arrives widowed', () => {
+  const d = deadEli(); d[c2('SpouseId')] = '';
+  ARCH['POP-00768'] = { row: d, reason: 'deceased', exitCycle: 120 };
+  const w = world2([darrin()], [famRow({ First: 'Irene', Last: 'Bishop', MaidenName: 'Cole', FamilyOf: 'POP-00768', FamilyRole: 'spouse', BirthYear: Y2 - 68 })]);
+  E3.checkEmergencePromotions_(w.ctx.ss, C2, 2, Y2, w.ctx);
+  const before = w.ctx.ledger.rows.length;
+  E3.processAdvancementRows_(w.ctx, 'C' + C2, C2);
+  eq([w.ctx.ledger.rows[before][c2('MaritalStatus')], w.ctx.ledger.rows[before][c2('SpouseId')]], ['widowed', 'POP-00768']);
+});
+t('dual presence: deceased on the ledger AND archived — the ledger row answers; an Active ledger row beats a stale archived death', () => {
+  const L3 = E3.familyLedgerCols_(SL2), ctx = { ledger: { headers: SL2, rows: [] } };
+  const onLedger = deadEli(); onLedger[c2('NumChildren')] = 5;
+  ARCH['POP-00768'] = { row: deadEli(), reason: 'deceased', exitCycle: 119 };
+  eq(E3.familyAnchorOf_(ctx, L3, { 'POP-00768': onLedger }, 'POP-00768').row[c2('NumChildren')], 5);
+  const alive = darrin(); ARCH['POP-00021'] = { row: darrin(), reason: 'deceased' };
+  assert.strictEqual(E3.familyAnchorOf_(ctx, L3, { 'POP-00021': alive }, 'POP-00021').dead, false);
+  delete ARCH['POP-00021'];
+});
+t('the wake names nobody "the late" without an ArchiveReason column (source)', () => {
+  assert.ok(/for \(let i = 1; ar && aP >= 0 && aR >= 0 && i < ar\.length; i\+\+\)/.test(src('lib/wakePerception.js')));
 });
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

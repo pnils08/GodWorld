@@ -421,8 +421,11 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
       var kid = byPop[popIdOf(rawKids[k])];
       if (kid && !liveHH(kid)) onKids.push(String(kid.popId).trim());
     }
-    // engine.304 D11: an orphan is a minor with no LIVING tracked parent — a child of the dead gets a home too
-    var orphanMinor = age < 18 && !(cz.parentIds || []).some(function (pp) { return !!byPop[popIdOf(pp)]; });
+    // engine.304 D11 (codex cut-4 review §3): an orphan is a minor with no tracked parent, or whose every tracked parent
+    // is confirmed dead — a child of the dead gets a home; a parent traded away or in hospital is alive (unchanged)
+    var czPars = (cz.parentIds || []).map(popIdOf).filter(Boolean);
+    if (age < 18 && czPars.length && !deadSet) deadSet = deadParentSet_(ctx);
+    var orphanMinor = age < 18 && czPars.every(function (pp) { return !!deadSet[pp]; });
     var ownInc = iInc >= 0 ? (Number(String(rows[cz.ledgerIndex][iInc]).replace(/[$,\s]/g, '')) || 0) : 0;
 
     if (!married && !(age >= 18 && onKids.length) && !orphanMinor) {

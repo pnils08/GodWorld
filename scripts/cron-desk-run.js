@@ -617,7 +617,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
   const profileStamp = { assignment: null, lane: null, quotes: null };
   const story = assignment && assignment.story;
   if (story) {
-    const brief = citizenBrief(story.citizens);
+    const brief = citizenBrief(story.citizens, story.popids);
     if (brief.total) profileStamp.assignment = brief.resolved + '/' + brief.total;
     L.push('### YOUR ASSIGNMENT (from your editor — the angle is fixed; the story is yours)');
     L.push('ANGLE: ' + (story.angle || story.label));
@@ -1779,7 +1779,7 @@ async function runAngle(assign) {
       story, slice: typedSlice, cycle, seat: personaSlug || '', root: ROOT })
     : null;
   if (asker) {
-    const brief = story ? citizenBrief(story.citizens) : { names: [], profiles: [] };
+    const brief = story ? citizenBrief(story.citizens, story.popids) : { names: [], profiles: [] };
     // grok 2026-08-06: persona + stink seed → lead with the contradiction (not free
     // digest only, not civic "official action first"). Roster + story stays EIC-fixed.
     // Persona without story keeps the original smells-off digest ask.
@@ -2288,12 +2288,18 @@ async function runAngle(assign) {
 // the fallback for pop-less or unresolved entries. Resolution misses are
 // logged, never swallowed — a citizen with NO LEDGER PROFILE is precisely the
 // case a writer will hallucinate a bio for.
-function citizenBrief(citizens) {
-  const parsed = (citizens || []).map(raw => {
+// 2026-10-20: `popids` rides alongside by index, the same zip livedExperiencePacket
+// already does — a slice that keeps its citizen strings POPID-free (Nia's cast
+// pilot: "Name — role, UNDOCKED cast pilot", pinned by buildNiaSlice.test) resolved
+// 0/1 every day because the name-keyed fallback saw the whole string as the name.
+function citizenBrief(citizens, popids) {
+  const pops = Array.isArray(popids) ? popids : [];
+  const parsed = (citizens || []).map((raw, i) => {
     const s = String(raw);
     const pm = s.match(/\(?(POP-\d+)\)?/i);
+    const sidePop = pops[i] ? String(pops[i]).match(/POP-\d+/i) : null;
     return {
-      popid: pm ? pm[1].toUpperCase() : null,
+      popid: pm ? pm[1].toUpperCase() : (sidePop ? sidePop[0].toUpperCase() : null),
       name: s.replace(/\s*\(POP-[\d]+\)\s*/g, ' ').replace(/\s+/g, ' ').trim()
     };
   }).filter(c => c.name || c.popid);

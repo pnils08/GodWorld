@@ -180,6 +180,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 02:47 es BUILD 3ed34b61 Cut B (tests 42/42, npm 296/296, STUB regen). CLAIM codex es Cut B diff review (TASK docs/for-claude-review/2026-10-20-engine214-cutB-diff-review-TASK.md).
 02:58 es FOLD codex Cut B diff review (code SHIP x5, tests FIX accepted) → 9b5b4281, tests 45/45. BENCH pair 1004 C113 running (A = stage 14 via e305 push, B = + 3ed34b61; output/engine-sheet/2026-10-20-e214b-pair.log). CLAIM codex es Cut B tests recheck.
 03:10 es CHECK rb IDLE, no permission prompt; UNSENT DRAFT in rb box ("go, start the overnight") left untouched per §4c. codex DONE tests recheck (C8a/C2g3 SHIP, C8e FIX: one-sided complain multiplier escapes) → folding. git cef4e26b top, all es. Inbox: es's codex files only. Bench pair at leg A propagation wait.
+03:20 es FOLD codex tests recheck (C8e one-sided escape) → C8f post-T5 real-path weights, mutation-proven; BENCH pair 1004 C113 PASS both legs (A @69 188 s, B @70 204 s, EE 4 → 4, with:against 30:15) → e33f56b6. PROD push dry run PASS. CLAIM codex es Cut B final gate. rm-guard refused 2 probe receipts (output/engine-sheet/2026-10-20-e214b-receipt-probe-c112.*), left in place.
 
 ## 8. Stop rule and usage
 

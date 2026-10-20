@@ -611,3 +611,4 @@ Facts: a death sets ledger Status `deceased`; with `citizenArchiveEnabled` 1, Ph
 - 2026-10-19 (engine-sheet) — cut 4 (D11) benched: C113–C122 10/10 + the child-of-the-late probe C123 (Cut 4 bench block). PROD candidate = stage 9 + 9 files at ac5acf2a.
 - 2026-10-19 (engine-sheet) — rollback clears queued family arrivals too (codex final recheck §2), proven on 1004.
 - 2026-10-19 (engine-sheet) — codex rollback recheck 2: SHIP. Every engine.304 gate closed; PROD waits for the builder (live M–O header, then the push).
+- 2026-10-19 (engine-sheet) — engine.304 LIVE: builder go ("Yes you are off auto so you can push your work"); live Generic_Citizens M–O header written + read back, then PROD @150 = stage 9 + 9 files at ac5acf2a, pull-back byte-identical. First live fire C113 Sun 2026-10-25.

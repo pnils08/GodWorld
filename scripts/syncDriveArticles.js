@@ -76,7 +76,7 @@ const OVERRIDES = {
 
 const norm = t => t.replace(/[’‘]/g, "'").replace(/[“”]/g, '"').replace(/[—–]/g, '-').replace(/\s+/g, ' ').trim().toLowerCase();
 const sha = t => crypto.createHash('sha1').update(norm(t)).digest('hex').slice(0, 16);
-const clean = t => String(t).replace(/^﻿/, '').replace(/\r\n?/g, '\n');
+const clean = t => String(t).replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
 
 // shelf rank for choosing the primary disk home: lower is better
 function shelfRank(p) {

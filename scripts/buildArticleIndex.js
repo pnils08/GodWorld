@@ -29,7 +29,7 @@ const STAGED = path.join(ROOT, 'output/cron-compare/staged');
 const norm = t => t.replace(/[’‘]/g, "'").replace(/[“”]/g, '"').replace(/[—–]/g, '-').replace(/\s+/g, ' ').trim().toLowerCase();
 const sha = t => crypto.createHash('sha1').update(norm(t)).digest('hex');
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8').replace(/^﻿/, '').replace(/\r\n?/g, '\n');
+const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
 function titleCase(s) { return s.toLowerCase().replace(/\b[a-z]/g, c => c.toUpperCase()); }
 const strip = s => s.replace(/^\s*#{1,6}\s*/, '').replace(/\*\*|__/g, '').replace(/^["“'‘]+|["”'’]+$/g, '').replace(/\s+/g, ' ').trim();
 
@@ -133,6 +133,11 @@ function splitPieces(text, defaultCycle) {
     const m = matchBy(L);
     if (m) marks.push({ i, author: m.author, desk: m.desk });
   }
+  const isLabel = k => {
+    let a = k - 1; while (a >= 0 && !lines[a].trim()) a--;
+    let b = k + 1; while (b < lines.length && !lines[b].trim()) b++;
+    return a >= 0 && b < lines.length && RULE.test(lines[a]) && RULE.test(lines[b]);
+  };
   // title: a "# Title" right after the byline (C103+); else above it: heading, then a bold line, then the first non-italic line
   for (const m of marks) {
     let j = m.i + 1; while (j < lines.length && !lines[j].trim()) j++;
@@ -140,7 +145,9 @@ function splitPieces(text, defaultCycle) {
     const above = [];
     for (let k = m.i - 1, n = 0; k >= 0 && n < 8; k--) {
       const t = lines[k].trim();
-      if (!t) continue; n++;
+      if (!t) continue;
+      if (isLabel(k)) continue; // a section label between two rules is not a headline
+      n++;
       if (RULE.test(lines[k]) || /^---+$/.test(t)) { if (!above.length) continue; break; }
       if (/^(Names Index:|NAMES:|HOOD:|CLAIM:|<!--)/.test(t)) break;
       above.push(k);
@@ -194,6 +201,7 @@ function headerTitle(text, fallback) {
     if (RULE.test(l) || /^---+$/.test(l) || /^=+$/.test(l)) continue;
     if (/^\[TYPE:/i.test(l) || /^THE CYCLE PULSE\b/i.test(l) || /^(By |Byline|Desk:|Date:|\*\*Desk|\*\*By|\*\*Date)/i.test(l)) continue;
     if (BYL.slice(3).some(rx => rx.test(l))) continue;
+    if (l.length < 40 && resolveByline(l) && !DESK_BYLINE.test(l)) continue; // a lone reporter name is a byline, not a headline
     const ban = l.split(/\s[—–-]\s/); // a "DESK — Reporter" banner is not a headline
     if (ban.length === 2 && (resolveByline(ban[0]) || resolveByline(ban[1])) && ban[1].length < 40) continue;
     if (/^#\s*BAY TRIBUNE SUPPLEMENTAL/i.test(l)) continue;

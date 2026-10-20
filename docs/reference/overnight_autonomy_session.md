@@ -189,6 +189,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 11:12 es CHECK rb at a permission prompt (node sample writer for its agy pipeline.84 job + rm -f of one scratch agy_out.tsv) → APPROVED, in plan, replaceable. codex WORKING final gate 2 (es claim). git e0e9f092 top (es) over rb 67fba924. Inbox: es's gate-2 task only. 11:20 line above corrected to 11:08.
 11:50 es APPROVED rb Bash (agy question file + rm -f of one scratch agy_out2.tsv). DONE rb ask (3) e4d4b05b; ask (2) sent back (two silent catches) → rb fixed de04a5aa, es spot-checked, tests PASS; ask (1) dashboard restart HELD for rb's agy fold line.
 11:56 es DONE engine.214 Cut B PROD @152 = stage 15 on codex final gate 3 SHIP (fresh PROD = stage 14, manifest pinned, pinned deployment serves @152, pull-back byte-identical). RELEASE codex.
+12:02 es CANCEL redundant one-shots (3:37, 11:57). Hourly wake f5f1cd0a stays on while rb works (strike it if not wanted). es HOLDS the git push for rb's agy fold of pipeline.84 Task 4; dashboard restart (rb ask 1) after the same line. 11:56 'serves @152' = the deployment listing names @152.
 
 ## 8. Stop rule and usage
 

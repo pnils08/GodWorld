@@ -49,6 +49,8 @@ const E = require('../utilities/citizenMemory.js');
 Object.keys(E).forEach(k => { global[k] = E[k]; });
 const C = require('../utilities/compressLifeHistory.js');
 global.getCitizenDialBands_ = C.getCitizenDialBands_;
+global.getGriefConfig_ = C.getGriefConfig_;                 // engine.94 grief (the generator reads it every Cycle)
+global.activeGriefFromRegisters_ = C.activeGriefFromRegisters_;
 global.conductCohortRow_ = C.conductCohortRow_; // engine.272 shared cohort predicate
 const P = require('../utilities/neighborhoodPulseMap.js');
 global.recordPulse_ = P.recordPulse_;
@@ -66,10 +68,33 @@ let rngImpl = mulberry32(2026);
 const rngWrap = () => rngImpl();
 global.safeRand_ = () => rngWrap;
 
+// World_Config at the contract's seeded defaults (phase01-config/engine94SheetContract.js *_SEEDS).
+const CONTRACT_DEFAULTS = (() => {
+  const src = fs.readFileSync(path.resolve(__dirname, '../phase01-config/engine94SheetContract.js'), 'utf8');
+  const names = [...src.matchAll(/^var ([A-Z_0-9]+SEEDS) = \[/gm)].map(m => m[1]);
+  const o = {};
+  new Function(src + '\nreturn [' + names.join(',') + '];')().flat()
+    .forEach(r => { if (Array.isArray(r) && typeof r[0] === 'string') o[r[0]] = r[1]; });
+  return o;
+})();
+
+// Apps Script runs every file in one global scope. Each engine here is loaded with the helpers it
+// calls as globals: sportsWeekRecord (engine.208), the sim-year helpers (engine.164), canon hoods,
+// the city's-middle bars, event class and the weather PRNG.
+const simYearSrc_ = () => { const s = fs.readFileSync(path.resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8'); return s.match(/function simYearFromCycle_[\s\S]*?\n}\n/)[0] + s.match(/function simYearOf_[\s\S]*?\n}\n/)[0]; };
+const SCOPE_SRC = ['../utilities/sportsWeekRecord.js', '../phase01-config/canonNeighborhoodLoader.js',
+  '../phase05-citizens/runNeighborhoodEngine.js', '../phase05-citizens/citizenContextBuilder.js',
+  '../phase02-world-state/applyWeatherModel.js', '../utilities/utilityFunctions.js']
+  .map(rel => fs.readFileSync(path.resolve(__dirname, rel), 'utf8')).join('\n') + simYearSrc_();
+const DM = require('../utilities/citizenDialMap.js');
+global.pressureBar_ = DM.pressureBar_;
+global.nudgesForEvent_ = DM.nudgesForEvent_; // engine.299: without the resolver the generator fails closed and drops every
+global.baseTag_ = DM.baseTag_;               // line whose kind moves a dial on its own (faith, ...) as unsigned
 const loadEngine = (rel, fnName) => {
   const src = fs.readFileSync(path.resolve(__dirname, rel), 'utf8');
-  return new Function(src + '\nreturn ' + fnName + ';')();
+  return new Function(SCOPE_SRC + '\n' + src + '\nreturn ' + fnName + ';')();
 };
+const loadCanonNeighborhoods_ = loadEngine('../phase01-config/canonNeighborhoodLoader.js', 'loadCanonNeighborhoods_');
 const loadNeighborhoodState_ = loadEngine('../phase02-world-state/loadNeighborhoodState.js', 'loadNeighborhoodState_');
 const generateCitizensEvents_ = loadEngine('../phase05-citizens/generateCitizensEvents.js', 'generateCitizensEvents_');
 const generateGenericCitizenMicroEvents_ = loadEngine('../phase04-events/generateGenericCitizenMicroEvent.js', 'generateGenericCitizenMicroEvents_');
@@ -127,20 +152,46 @@ const LOADER_HEADERS = ['Timestamp', 'Cycle', 'Neighborhood', 'NightlifeProfile'
   'CrimeIndex', 'RetailVitality', 'EventAttractiveness', 'Sentiment', 'DemographicMarker',
   'Holiday', 'HolidayPriority', 'FirstFriday', 'CreationDay', 'SportsSeason',
   'MigrationFlow', 'NeighborhoodTrajectory', 'HousingPressure', 'TrajectoryStartCycle',
-  'MedianIncome', 'MedianRent', 'TrajectoryMomentum', 'District'];
+  'MedianIncome', 'MedianRent', 'TrajectoryMomentum', 'District',
+  // Phase1-CanonHoods columns (engine.148): live C112 values, Adjacent kept inside the fixture's four hoods
+  'Adjacent', 'AttentionWeight', 'ChildAreas', 'CoreSimRank', 'EmployerCharacter', 'Scenes', 'WeatherZone'];
 // Fruitvale: high crime, low sentiment, decay trajectory, high housing
 // pressure, weak retail. Rockridge: quiet, happy, strong retail (growth).
 function seedLoaderMapData() {
-  const row = (hood, crime, retail, evt, sent, traj, mom, press, income, rent, flow) =>
+  const row = (hood, crime, retail, evt, sent, traj, mom, press, income, rent, flow, canon) =>
     ['t0', 94, hood, 1, 5, crime, retail, evt, sent, 'zone', 'none', 'none', false, false,
-      'off-season', flow, traj, press, 90, income, rent, mom, ''];
+      'off-season', flow, traj, press, 90, income, rent, mom, ''].concat(canon);
   return [
     LOADER_HEADERS.slice(),
-    row('Fruitvale', 2, 7, 30, 0.15, 'decay', 2, 7, 60000, 2400, -10),
-    row('Rockridge', 0, 14, 45, 0.75, 'growth', 8, 1, 114000, 3800, 5),
-    row('West Oakland', 1, 9, 25, 0.5, '', 5, 4, 81000, 2100, 0),
-    row('Temescal', 0.5, 12, 50, 0.6, '', 5, 3, 74000, 3200, 3)
+    row('Fruitvale', 2, 7, 30, 0.15, 'decay', 2, 7, 60000, 2400, -10, ['West Oakland', 1, '', 3, 'transit-retail', 'CincoDeMayo:5, DiaDeMuertos:5', 'inland']),
+    row('Rockridge', 0, 14, 45, 0.75, 'growth', 8, 1, 114000, 3800, 5, ['Temescal', 0.5, 'Claremont', 7, 'professional', 'Halloween:2', 'hills']),
+    row('West Oakland', 1, 9, 25, 0.5, '', 5, 4, 81000, 2100, 0, ['Fruitvale, Temescal', 1.5, '', 5, 'campus', 'CreationDay:2, Juneteenth:4', 'bay-fog']),
+    row('Temescal', 0.5, 12, 50, 0.6, '', 5, 3, 74000, 3200, 3, ['Rockridge, West Oakland', 1, '', 1, 'clinic', 'arts, FirstFriday:2, Halloween:3', 'moderate'])
   ];
+}
+
+// The Phase-8 writer writes every hood on its own 22-name list (v3NeighborhoodWriter NMAP_NEIGHBORHOODS),
+// so its runs get the four fixture hoods plus 18 neutral rows (EmployerCharacter / WeatherZone / District
+// as live C112). The generator sections keep the four-hood city, so their city-middle bars do not move.
+const NEUTRAL_HOODS = [
+  ['Downtown', 'institutional', 'urban-core', 'D2'], ['Laurel', 'schools-retail', 'valley', 'D9'],
+  ['Jack London', 'nightlife', 'waterfront', 'D2'], ['Adams Point', 'residential', 'urban-corridor', 'D8'],
+  ['Grand Lake', 'retail', 'lake', 'D8'], ['Piedmont Ave', 'medical', 'piedmont-edge', 'D6'],
+  ['Chinatown', 'family-retail', 'urban-core', 'D2'], ['Brooklyn', 'residential', 'waterfront', 'D1'],
+  ['Eastlake', 'mixed', 'lake', 'D8'], ['Glenview', 'residential', 'hills', 'D4'],
+  ['Dimond', 'village-retail', 'valley', 'D4'], ['Ivy Hill', 'residential', 'hills', 'D4'],
+  ['San Antonio', 'service-labor', 'inland', 'D3'], ['KONO', 'arts', 'urban-corridor', 'D7'],
+  ['Lake Merritt', 'residential', 'lake', 'D8'], ['Uptown', 'nightlife', 'urban-corridor', 'D9'],
+  ['Baylight District', 'stadium', 'waterfront', 'D2'], ['East Oakland', 'construction', 'inland', 'D5']
+];
+function writerMapData() {
+  const data = seedLoaderMapData();
+  for (const [hood, character, zone, district] of NEUTRAL_HOODS) {
+    data.push(['t0', 94, hood, 1, 5, 0.5, 9, 30, 0.5, 'zone', 'none', 'none', false, false,
+      'off-season', 0, '', 3, 90, 80000, 2500, 5, district,
+      hood === 'Downtown' ? 'Chinatown' : 'Downtown', 1, '', 9, character, '', zone]);
+  }
+  return data;
 }
 
 const CITY_WEATHER = { type: 'clear', temp: 62, impact: 1, windSpeed: 5, precipitationIntensity: 0, visibility: 'normal' };
@@ -187,7 +238,9 @@ function buildLedger(hoods, perHood) {
 function makeCtx(cycle, rows, ss) {
   const ctx = {
     now: new Date(0),
-    config: { cycleCount: cycle },
+    // Every World_Config key at its contract default (each reader throws on a missing key, ADR-0015);
+    // no GC forced across — the harness has no Generic_Citizens tab.
+    config: Object.assign({}, CONTRACT_DEFAULTS, { cycleCount: cycle, hoodFloorSurfaceQuota: 0 }),
     mode: {},
     rng: rngWrap,
     ss: ss,
@@ -206,6 +259,7 @@ function makeCtx(cycle, rows, ss) {
     },
     ledger: { headers: HEADERS.slice(), rows, dirty: false }
   };
+  loadCanonNeighborhoods_(ctx); // Phase1-CanonHoods — S.canonHoods (resolveHoodOrChild_ throws without it, ADR-0016)
   loadNeighborhoodState_(ctx); // T5 — prev cycle's Neighborhood_Map -> S
   return ctx;
 }
@@ -282,9 +336,14 @@ rngImpl = mulberry32(2026);
     warmHits.length === 1 && warmHits[0] === 'Rockridge', warmHits.join(',') || 'none');
 
   // T6 neighborhood-state texture — decay/housing strain in Fruitvale, retail in Rockridge
-  const dispHits = [...new Set(inHoods('compared rent notes').concat(inHoods('never reopened in')))];
-  assert('C2g decay/housing-pressure texture ONLY in Fruitvale (pressure 7, decay)',
-    dispHits.length === 1 && dispHits[0] === 'Fruitvale', dispHits.join(',') || 'none');
+  // The rent line's bar is World_Config dialHoodPressureBar (2026-09-19; contract 3), not the old literal 6:
+  // Fruitvale 7, West Oakland 4, Temescal 3 clear it; Rockridge 1 does not.
+  const rentHits = inHoods('compared rent notes').sort();
+  assert('C2g housing-pressure line ONLY where HousingPressure >= dialHoodPressureBar (Fruitvale 7, Temescal 3, West Oakland 4)',
+    rentHits.join(',') === 'Fruitvale,Temescal,West Oakland', rentHits.join(',') || 'none');
+  const decayHits = inHoods('never reopened in');
+  assert('C2g2 decay-trajectory line ONLY in Fruitvale (the one decay hood)',
+    decayHits.length === 1 && decayHits[0] === 'Fruitvale', decayHits.join(',') || 'none');
   const retailHits = [...new Set(inHoods('new shop that just opened').concat(inHoods('busy weekend market')))];
   assert('C2h high-retail texture ONLY in Rockridge (retail 14 >= 13)',
     retailHits.length === 1 && retailHits[0] === 'Rockridge', retailHits.join(',') || 'none');
@@ -301,16 +360,18 @@ console.log('═══ C3 — T4 fold: paired same-seed writer runs, deltas boun
   const CAPS = { sentiment: 0.15, crime: 0.10, vitality: 1.00, attractiveness: 4.00 };
   function writerRun(seed, pulse) {
     rngImpl = mulberry32(seed);
-    const sheets = {};
+    // engine.119: the cycle never creates tabs — the map exists before the writer runs
+    const sheets = { 'Neighborhood_Map': memSheet('Neighborhood_Map', writerMapData()) };
     const ss = memSS(sheets);
     const ctx = {
-      now: new Date(0), config: { cycleCount: 95 }, mode: {}, ss,
+      now: new Date(0), config: Object.assign({}, CONTRACT_DEFAULTS, { cycleCount: 95 }), mode: {}, ss,
       summary: {
         cityDynamics: { sentiment: 0.3, traffic: 1, retail: 1.5, publicSpaces: 1, nightlife: 0.7 },
         weather: Object.assign({}, CITY_WEATHER), worldEvents: [], storySeeds: [], storyHooks: [],
         neighborhoodPulse: pulse
       }
     };
+    loadCanonNeighborhoods_(ctx); loadNeighborhoodState_(ctx); // Phases 1–2, as the cycle runs them before the writer
     saveV3NeighborhoodMap_(ctx);
     const data = sheets['Neighborhood_Map']._data;
     const header = data[0];
@@ -381,7 +442,7 @@ console.log('═══ C5 — determinism: two identical-seed closed-loop runs a
   function closedLoopRun(seed) {
     rngImpl = mulberry32(seed);
     const rows = buildLedger(HOODS, 8);
-    const mapData = seedLoaderMapData();
+    const mapData = writerMapData(); // the loop runs the writer, which writes all 22 hoods
     const sheets = {
       'Neighborhood_Map': memSheet('Neighborhood_Map', mapData),
       'LifeHistory_Log': memSheet('LifeHistory_Log', [['Timestamp', 'Cycle', 'POPID', 'Name', 'Event', 'Tag']])
@@ -417,16 +478,18 @@ console.log('═══ C6 — G-EC33: per-hood sentiment breaks citywide lockste
   // and the citywide scalar is demoted to a CITY_SENTIMENT_NUDGE (0.15) shade.
   function sentRun(seed, citySent, nhoodDyn) {
     rngImpl = mulberry32(seed);
-    const sheets = {};
+    // engine.119: the cycle never creates tabs — the map exists before the writer runs
+    const sheets = { 'Neighborhood_Map': memSheet('Neighborhood_Map', writerMapData()) };
     const ss = memSS(sheets);
     const ctx = {
-      now: new Date(0), config: { cycleCount: 95 }, mode: {}, ss,
+      now: new Date(0), config: Object.assign({}, CONTRACT_DEFAULTS, { cycleCount: 95 }), mode: {}, ss,
       summary: {
         cityDynamics: { sentiment: citySent, traffic: 1, retail: 1.5, publicSpaces: 1, nightlife: 0.7 },
         weather: Object.assign({}, CITY_WEATHER), worldEvents: [], storySeeds: [], storyHooks: [],
         neighborhoodDynamics: nhoodDyn
       }
     };
+    loadCanonNeighborhoods_(ctx); loadNeighborhoodState_(ctx); // Phases 1–2, as the cycle runs them before the writer
     saveV3NeighborhoodMap_(ctx);
     const data = sheets['Neighborhood_Map']._data;
     const header = data[0];
@@ -437,14 +500,14 @@ console.log('═══ C6 — G-EC33: per-hood sentiment breaks citywide lockste
     return byHood;
   }
   // Same seed both cycles -> per-hood variance() draws identical -> cancels in delta.
-  const dynA = { 'Fruitvale': { sentiment: 0.30 }, 'Rockridge': { sentiment: 0.60 }, 'Downtown': { sentiment: 0.45 } };
-  const dynB = { 'Fruitvale': { sentiment: 0.20 }, 'Rockridge': { sentiment: 0.62 }, 'Downtown': { sentiment: 0.45 } };
+  const dynA = { 'Fruitvale': { sentiment: 0.30 }, 'Rockridge': { sentiment: 0.60 }, 'West Oakland': { sentiment: 0.45 } };
+  const dynB = { 'Fruitvale': { sentiment: 0.20 }, 'Rockridge': { sentiment: 0.62 }, 'West Oakland': { sentiment: 0.45 } };
   const A = sentRun(555, 0.40, dynA);
   const B = sentRun(555, 0.56, dynB);  // citywide +0.16 uniform swing
   const dFrui = B['Fruitvale'] - A['Fruitvale'];
   const dRock = B['Rockridge'] - A['Rockridge'];
-  const dDown = B['Downtown'] - A['Downtown'];
-  console.log(`   deltas — Fruitvale=${dFrui.toFixed(3)} Rockridge=${dRock.toFixed(3)} Downtown=${dDown.toFixed(3)} (citywide swing +0.160)`);
+  const dDown = B['West Oakland'] - A['West Oakland'];
+  console.log(`   deltas — Fruitvale=${dFrui.toFixed(3)} Rockridge=${dRock.toFixed(3)} WestOakland=${dDown.toFixed(3)} (citywide swing +0.160)`);
   const spread = Math.max(dFrui, dRock, dDown) - Math.min(dFrui, dRock, dDown);
   assert('C6a per-hood deltas NON-uniform (lockstep broken; pre-fix spread==0)', spread > 0.05, 'spread=' + spread.toFixed(3));
   assert('C6b a hood can fall while the city rises (Fruitvale down, citywide up)', dFrui < 0, 'dFrui=' + dFrui.toFixed(3));

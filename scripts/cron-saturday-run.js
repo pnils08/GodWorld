@@ -17,9 +17,15 @@
  *   4b coverage — rate the published edition into Edition_Coverage_Ratings
  *                (pipeline.62); non-fatal, pre-flight catches a miss next cycle
  *                runs ingestEdition + permanent-NotebookLM source add
- *   5 sweep    — per-article canon ingest (ALL staged, curated or not)
+ *   5 sweep    — per-article canon ingest (ALL staged, curated or not); then
+ *                retracts canon-violations and any weekday-ingested id the
+ *                canon set no longer holds
  *   5b index   — rebuild archive/ARTICLE_INDEX.jsonl (pipeline.84; --apply writes, non-blocking)
  *   6 sheets   — Citizen_Media_Usage rows from the INTAKE sidecar
+ *
+ *   daily      — not part of the Saturday chain: `--step daily --apply`, M–F
+ *                18:50 after wake 3, upserts the gate-passed Articles not yet
+ *                in the store (same customId as the sweep; builder 2026-10-20)
  *
  * Seats built 2026-08-05 (narrator design adopted — docs/research/
  * 2026-08-04-mags-as-narrator.md). Steps 1-3 write local artifacts only and
@@ -343,10 +349,11 @@ async function stepSweep(cycle) {
   // Task 7c). The Saturday print pick is grades, the highlight and MEDIA usage —
   // never a canon gate. The S433 cut that scoped this to the curated stems was a
   // misread and is reverted; the sweep no longer reads edition_curation at all.
-  const set = loadStagedSetExcludingCanonViolations(cycle);
-  if (!set.length) { console.log('no gate-passed articles for c' + cycle); return { swept: 0 }; }
+  const scorecard = readJsonSafe(path.join(ROOT, 'output', 'eic_scorecard_c' + cycle + '.json'));
+  const set = excludeCanonViolations(loadStagedSet(cycle), scorecard);
   if (!API_KEY && APPLY) throw new Error('SUPERMEMORY_CC_API_KEY missing');
   let swept = 0;
+  if (!set.length) console.log('no gate-passed articles for c' + cycle);
   for (const entry of set) {
     const doc = articleDoc(cycle, entry);
     if (!APPLY) {
@@ -359,7 +366,102 @@ async function stepSweep(cycle) {
     swept++;
   }
   console.log((APPLY ? swept : set.length) + ' article(s) ' + (APPLY ? 'swept' : 'in dry-run scope'));
-  return { swept };
+  const { retracted, retractFailed } = await retractFromStore(cycle, set, scorecard);
+  return { swept, retracted, retractFailed };
+}
+
+// ---------------------------------------------------------------------------
+// Daily canon ingest (builder 2026-10-20, relayed by research-build): M–F after
+// wake 3, the gate-passed Articles go to the store the evening they stage, so
+// the journalists' tools see earlier pieces before Saturday. Same doc and
+// customId as the sweep — Saturday's upsert of the same bytes is a no-op.
+// Staging and the Saturday selection are untouched. The state file (customId
+// -> Article sha256) posts only what is new or rewritten since the last run,
+// and tells the sweep what a weekday put in the store.
+// ---------------------------------------------------------------------------
+const DAILY_STATE = path.join(ROOT, 'output', 'canon-daily-ingest-state.json');
+
+function loadDailyState() {
+  const s = readJsonSafe(DAILY_STATE);
+  return s && s.ingested ? s : { ingested: {} };
+}
+
+function saveDailyState(state) {
+  fs.writeFileSync(DAILY_STATE, JSON.stringify(state, null, 2) + '\n');
+}
+
+// Pure: the entries whose bytes the store does not hold yet.
+function dailyPending(cycle, set, state) {
+  return set.filter(e => {
+    const had = state.ingested[articleCustomId(cycle, e.stem)];
+    return !had || had.sha256 !== e.articleSha256;
+  });
+}
+
+async function stepDaily(cycle) {
+  console.log('--- daily: canon ingest of the gate-passed Articles staged so far ---');
+  // A late-fire week can already hold this Cycle's scorecard; its violations never post.
+  const set = loadStagedSetExcludingCanonViolations(cycle);
+  const state = loadDailyState();
+  const pending = dailyPending(cycle, set, state);
+  console.log(set.length + ' gate-passed for c' + cycle + ', ' + pending.length + ' not yet in the store');
+  if (pending.length && !API_KEY && APPLY) throw new Error('SUPERMEMORY_CC_API_KEY missing');
+  let ingested = 0;
+  for (const entry of pending) {
+    const doc = articleDoc(cycle, entry);
+    if (!APPLY) { console.log('(dry-run) would upsert ' + doc.customId); continue; }
+    await postDocument(doc);
+    state.ingested[doc.customId] = { cycle: String(cycle), sha256: entry.articleSha256 };
+    saveDailyState(state);
+    console.log('upserted ' + doc.customId);
+    ingested++;
+  }
+  return { ingested };
+}
+
+// Pure: what Saturday takes back out of the store — every canon-violation stem
+// (404 when no weekday posted it), and every id a weekday posted for this Cycle
+// that the sweep's canon set no longer holds (a proof that stopped verifying, a
+// collision suffix that moved to another filing). Never an id the sweep keeps.
+function retractionIds(cycle, canonSet, scorecard, state) {
+  const keep = new Set(canonSet.map(e => articleCustomId(cycle, e.stem)));
+  const out = new Set();
+  for (const a of (scorecard && scorecard.articles) || []) {
+    if (a.verdict === 'canon-violation') out.add(articleCustomId(cycle, a.stem));
+  }
+  for (const [id, rec] of Object.entries(state.ingested)) {
+    if (rec.cycle === String(cycle)) out.add(id);
+  }
+  return [...out].filter(id => !keep.has(id));
+}
+
+// The Aug 15 wrong-venue piece was removed by hand; with the daily ingest the
+// EIC verdict lands after the article is already in the store, so the sweep
+// removes it. A failed delete keeps its state entry for the --step sweep re-run.
+async function retractFromStore(cycle, canonSet, scorecard) {
+  const { deleteDocument } = require('./ingestEdition');
+  const state = loadDailyState();
+  const ids = retractionIds(cycle, canonSet, scorecard, state);
+  const retractFailed = [];
+  let retracted = 0;
+  for (const id of ids) {
+    if (!APPLY) { console.log('(dry-run) would retract ' + id); continue; }
+    const r = await deleteDocument(id);
+    if (r.status >= 200 && r.status < 300) { console.log('retracted ' + id); retracted++; }
+    else if (r.status !== 404) {
+      console.error('[RETRACT FAILED] ' + id + ' → HTTP ' + r.status + ': ' + String(r.body).slice(0, 200));
+      retractFailed.push(id);
+    }
+  }
+  if (APPLY) {
+    // The Cycle is closed: every other daily entry for it was just re-upserted as canon.
+    for (const [id, rec] of Object.entries(state.ingested)) {
+      if (rec.cycle === String(cycle) && !retractFailed.includes(id)) delete state.ingested[id];
+    }
+    saveDailyState(state);
+  }
+  console.log(ids.length + ' retraction candidate(s), ' + (APPLY ? retracted + ' removed from the store' : 'dry run'));
+  return { retracted, retractFailed };
 }
 
 // ---------------------------------------------------------------------------
@@ -1318,11 +1420,12 @@ async function main() {
     narrate: () => stepNarrate(cycle), publish: () => stepPublish(cycle),
     coverage: () => stepCoverage(cycle),
     sweep: () => stepSweep(cycle), sheets: () => stepSheets(cycle),
-    signals: () => stepSignals(cycle)
+    signals: () => stepSignals(cycle), daily: () => stepDaily(cycle)
   };
   if (step) {
-    if (!dispatch[step]) throw new Error('unknown --step "' + step + '" (want audit|curate|narrate|publish|coverage|sweep|index|sheets|signals)');
-    await dispatch[step]();
+    if (!dispatch[step]) throw new Error('unknown --step "' + step + '" (want audit|curate|narrate|publish|coverage|sweep|index|sheets|signals|daily)');
+    const res = await dispatch[step]();
+    if (res && res.retractFailed && res.retractFailed.length) throw new Error(res.retractFailed.length + ' retraction(s) failed — re-run --step sweep --apply');
   } else {
     // Plan §Phase 3 order: audit → curate → narrate → publish → sweep → sheets → signals.
     // pipeline.62 inserts coverage straight after publish — it reads the file
@@ -1357,7 +1460,7 @@ async function main() {
       }
     }
     await stepCoverage(cycle);
-    await stepSweep(cycle);
+    const sweep = await stepSweep(cycle);
     // pipeline.84 Task 3: the master article index rebuilds after the sweep. Context only (the dashboard
     // search, Jax's prior coverage): a failure is loud and fails the run at the end, never the steps below.
     let indexErr = null;
@@ -1372,6 +1475,11 @@ async function main() {
     await stepSignals(cycle);
     if (publishErr) throw publishErr;
     if (indexErr) throw indexErr;
+    // A canon-violation still in the store fails the run loud, after the steps below it ran.
+    if (sweep.retractFailed.length) {
+      throw new Error(sweep.retractFailed.length + ' retraction(s) failed — recover: node scripts/cron-saturday-run.js --cycle ' +
+        cycle + ' --step sweep --apply');
+    }
   }
 }
 
@@ -1379,7 +1487,7 @@ if (require.main === module) {
   main().catch(err => { console.error('[saturday] Fatal: ' + err.message); process.exit(1); });
 }
 
-module.exports = { loadStagedSet, loadArcSeeds, excludeCanonViolations, stepSweep, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
+module.exports = { loadStagedSet, loadArcSeeds, excludeCanonViolations, stepSweep, stepDaily, dailyPending, retractionIds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
   auditOne, loadLedgerProfiles, worldSummaryText, deskSystem, crossoverCitizens, printedCrossovers, reserveDigestSeat, undockedGroundTruth, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };

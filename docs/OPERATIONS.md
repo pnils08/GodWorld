@@ -64,6 +64,7 @@ it is weekly).
 | `0 17 * * *` | Citizen exchange | `scripts/citizen-exchange.js` | `logs/citizen-exchange.log` |
 | `15 18 * * 1-5` | Weekday newsroom write + Rhea gate | `scripts/cron-desk-run.js --stage=write --fanout --gate-backend api` | `logs/newsroom-fanout.log` |
 | `45 18 * * 1-5` | Weekday articles to Discord | `scripts/deliver-articles.js` | `logs/deliver-articles.log` |
+| `50 18 * * 1-5` | Daily canon ingest — the day's gate-passed Articles to Supermemory, same customId as the Saturday sweep (which retracts EIC canon-violations) | `scripts/cron-saturday-run.js --step daily --apply` | `logs/canon-daily.log` |
 | `18 20 * * 2,4` | Work-wake packs — working citizens on their day's data (civic.34; ME/EMS/players registry in `scripts/work-wake-packages.json`) | `scripts/cron-work-wake.js` | `logs/cron-work-wake.log` |
 | `30 20 * * *` | UNDOCKED daily flight (orchestrator: flight→adapter→gate→push→standings) | `scripts/cron-undocked-run.js` | `logs/undocked-run.log` |
 | `0 21 * * 0` | Civic Sunday chain late retry (same guard) | `scripts/cron-civic-run.js --stage=chain --apply` | `logs/civic-cron.log` |

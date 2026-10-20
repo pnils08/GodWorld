@@ -642,5 +642,6 @@ module.exports = {
   extractBylineMeta: extractBylineMeta,
   intakeMeta: intakeMeta,
   deriveCustomId: deriveCustomId,
+  deleteDocument: deleteDocument,
   stripMetadataLeaks: stripMetadataLeaks
 };

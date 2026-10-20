@@ -332,6 +332,29 @@ console.log('Test 6: mergeStorylineLedger');
   let threw = null, res = null;
   try { res = await stepSweep(C); } catch (e) { threw = e; }
   assert('sweep needs no print pick (no edition_curation file, dry run)', !threw && res && res.swept === 0, threw && threw.message);
+
+  // Daily canon ingest (builder 2026-10-20): post only new or rewritten bytes; Saturday retracts.
+  const { dailyPending, retractionIds, stepDaily } = require('./cron-saturday-run');
+  const id = s => articleCustomId('112', s);
+  const day = [{ stem: 'a', articleSha256: 'h1' }, { stem: 'b', articleSha256: 'h2' }, { stem: 'c', articleSha256: 'h3' }];
+  const st = { ingested: { [id('a')]: { cycle: '112', sha256: 'h1' }, [id('b')]: { cycle: '112', sha256: 'old' } } };
+  assert('daily posts the new and the rewritten, skips what the store already holds',
+    dailyPending('112', day, st).map(e => e.stem).join() === 'b,c');
+  assert('daily with no state posts everything', dailyPending('112', day, { ingested: {} }).length === 3);
+  const weekState = { ingested: {
+    [id('kept')]: { cycle: '112', sha256: 'x' }, [id('violated')]: { cycle: '112', sha256: 'x' },
+    [id('dropped')]: { cycle: '112', sha256: 'x' }, [articleCustomId('111', 'dropped')]: { cycle: '111', sha256: 'x' } } };
+  const verdicts = { articles: [{ stem: 'violated', verdict: 'canon-violation' }, { stem: 'never-posted', verdict: 'canon-violation' },
+    { stem: 'kept', verdict: 'accurate' }] };
+  const out = retractionIds('112', [{ stem: 'kept' }], verdicts, weekState).sort();
+  assert('Saturday retracts violations (posted or not) and weekday ids the canon set lost, this Cycle only',
+    out.join() === [id('dropped'), id('never-posted'), id('violated')].sort().join(), out.join());
+  assert('never retracts an id the sweep keeps',
+    retractionIds('112', [{ stem: 'violated' }], verdicts, weekState).indexOf(id('violated')) === -1);
+  assert('no scorecard, no state -> nothing to retract', retractionIds('112', [], null, { ingested: {} }).length === 0);
+  let dthrew = null, dres = null;
+  try { dres = await stepDaily(C); } catch (e) { dthrew = e; }
+  assert('daily dry run on an empty Cycle posts nothing', !dthrew && dres && dres.ingested === 0, dthrew && dthrew.message);
   console.log(`\n${passed} passed, ${failed} failed`);
   process.exit(failed ? 1 : 0);
 })();

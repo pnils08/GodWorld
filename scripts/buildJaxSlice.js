@@ -409,8 +409,10 @@ function buildJaxSlice(cycle, opts) {
 
   const citizens = collectCitizens(top, signal, ledger);
   // pipeline.84 Task 5: what Jax already filed on these citizens and the pieces since that name them both — shown, never forced
-  let priorCoverage = [];
-  try { priorCoverage = require(path.join(__dirname, 'buildArticleIndex')).priorCoverage('Jax Caldera', citizens, { beforeCycle: Number(cycle) }); } catch (e) { /* the index is context only: never block the assignment */ }
+  // A broken index must not stop the assignment, and must not read as "Jax never covered them": it is warned and carried.
+  let priorCoverage = [], priorCoverageError = null;
+  try { priorCoverage = require(path.join(__dirname, 'buildArticleIndex')).priorCoverage('Jax Caldera', citizens, { beforeCycle: Number(cycle) }); }
+  catch (e) { priorCoverageError = String(e && e.message || e); console.warn('buildJaxSlice: earlier coverage unavailable (' + priorCoverageError + ')'); }
 
   const auditPattern = auditPatternForRef(root, cycle, top.ref);
 
@@ -580,6 +582,7 @@ function buildJaxSlice(cycle, opts) {
     prewrite,
     citizens,
     priorCoverage,
+    priorCoverageError,
     bonds,
     scene,
     gaps,
@@ -637,7 +640,11 @@ function formatJaxSliceMarkdown(slice) {
   }
   if (!slice.citizens.length) L.push('_No POPID pool on this stink — quote stage may fall back to lane; still no invented names._');
   L.push('');
-  if (slice.priorCoverage && slice.priorCoverage.length) {
+  if (slice.priorCoverageError) {
+    L.push('## EARLIER COVERAGE OF THESE CITIZENS');
+    L.push('_Earlier coverage unavailable (the Tribune index could not be read: ' + slice.priorCoverageError + '). This is not a finding that Jax never covered them._');
+    L.push('');
+  } else if (slice.priorCoverage && slice.priorCoverage.length) {
     L.push('## EARLIER COVERAGE OF THESE CITIZENS (from the Tribune index; context, not a requirement)');
     for (const p of slice.priorCoverage) {
       L.push('- ' + p.name + (p.popid ? ' (' + p.popid + ')' : ''));

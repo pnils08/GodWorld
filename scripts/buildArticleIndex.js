@@ -391,24 +391,24 @@ function searchIndex(rows, { author, citizen, q, cycle, desk } = {}) {
 
 // pipeline.84 Task 5 (assignment-time pre-check): what a journalist already filed on these citizens, and the published
 // pieces since that name both the citizen and the journalist (where a reply to the journalist would sit). Read from
-// the index; a missing or unreadable index returns [] so an assignment is never blocked.
+// the index. It THROWS when the index cannot be read: an empty list means "no earlier coverage", never "unreadable",
+// so the caller decides how to stay non-blocking and still say so.
 function priorCoverage(journalist, citizens, { beforeCycle, rows } = {}) {
-  try {
-    const all = rows || loadIndex();
-    const j = String(journalist || '').toLowerCase();
-    const isJ = r => `${r.byline || ''} ${r.bylineName || ''}`.toLowerCase().includes(j);
-    const names = r => r.citizens.map(c => c.name);
-    const brief = r => ({ cycle: r.cycle, title: r.title || r.lede, byline: r.bylineName || r.byline || null, file: r.copies[0].path });
-    const pub = all.filter(r => r.published && (beforeCycle == null || r.cycle == null || r.cycle < beforeCycle));
-    const out = [];
-    for (const c of citizens || []) {
-      const mine = pub.filter(r => isJ(r) && names(r).includes(c.name));
-      const first = mine.reduce((m, r) => (r.cycle != null && (m == null || r.cycle < m) ? r.cycle : m), null);
-      const replies = pub.filter(r => !isJ(r) && names(r).includes(c.name) && names(r).includes(journalist) && (first == null || (r.cycle != null && r.cycle >= first)));
-      if (mine.length || replies.length) out.push({ name: c.name, popid: c.popid || null, mine: mine.map(brief), later: replies.map(brief) });
-    }
-    return out;
-  } catch (e) { return []; }
+  const all = rows || loadIndex();
+  if (!Array.isArray(all)) throw new Error('article index is not a list of rows');
+  const j = String(journalist || '').toLowerCase();
+  const isJ = r => `${r.byline || ''} ${r.bylineName || ''}`.toLowerCase().includes(j);
+  const names = r => r.citizens.map(c => c.name);
+  const brief = r => ({ cycle: r.cycle, title: r.title || r.lede, byline: r.bylineName || r.byline || null, file: r.copies[0].path });
+  const pub = all.filter(r => r.published && (beforeCycle == null || r.cycle == null || r.cycle < beforeCycle));
+  const out = [];
+  for (const c of citizens || []) {
+    const mine = pub.filter(r => isJ(r) && names(r).includes(c.name));
+    const first = mine.reduce((m, r) => (r.cycle != null && (m == null || r.cycle < m) ? r.cycle : m), null);
+    const replies = pub.filter(r => !isJ(r) && names(r).includes(c.name) && names(r).includes(journalist) && (first == null || (r.cycle != null && r.cycle >= first)));
+    if (mine.length || replies.length) out.push({ name: c.name, popid: c.popid || null, mine: mine.map(brief), later: replies.map(brief) });
+  }
+  return out;
 }
 
 if (require.main === module) {

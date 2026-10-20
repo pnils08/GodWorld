@@ -195,3 +195,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 10:31 rb BOOT overnight (builder go: pipeline.84 Bay Tribune master index; Heat Shield = standalone C100 piece). Task 2 landed 4ccc1461 (21 pieces + manifest), Task 2b renames 46e0129c (47). Next Task 3 index. No guest claimed yet; agy pane idle. Wake: none set (hourly wakes off since 10-19 11:10, builder go here = job only).
 10:41 rb CLAIM agy rb pipeline.84 Task 3 sample check (36 rows: read file, report headline/byline/cycle for a locator; no edits except its output TSV; blind to my values).
 11:20 rb RELEASE agy rb round 1 (38 rows scored: 28 headlines agreed, defects fixed in index, 37/38 after). CLAIM agy rb round 2 (fresh 40-row blind sample, same task).
+11:51 rb DISPATCH es: pipeline.84 asks (dashboard restart after agy diff review, accept/send back Jax slice hook, wire index rebuild into cron-saturday-run). Task 4 diff ccf78191, Task 5 2342a743.

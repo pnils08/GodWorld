@@ -189,6 +189,9 @@ console.log('beat-dump wiring (civic tabs, synthetic fixture):');
   fs.writeFileSync(path.join(bare, 'output', 'simulation_ledger_snapshot.jsonl'), [
     { POPID: 'POP-99001', Name: 'Test Resident One', RoleType: 'Mechanic', Neighborhood: 'Test Hood', Status: 'active' },
   ].map(row => JSON.stringify(row)).join('\n') + '\n');
+  const bare2 = fs.mkdtempSync(path.join(os.tmpdir(), 'jax-pcerr-'));
+  fs.mkdirSync(path.join(bare2, 'output'), { recursive: true });
+  fs.copyFileSync(path.join(bare, 'output', 'simulation_ledger_snapshot.jsonl'), path.join(bare2, 'output', 'simulation_ledger_snapshot.jsonl'));
   const bareSlice = buildJaxSlice(998, { root: bare, report: {
     top: healthTop, candidates: [healthTop], illnessRate: 10.1,
     maxScore: 40, shouldForce: true, candidateCount: 1
@@ -214,10 +217,19 @@ console.log('beat-dump wiring (civic tabs, synthetic fixture):');
   ok('prior coverage: only the citizen with history comes back', pc.length === 1 && pc[0].name === 'Elias Varek');
   ok('prior coverage: his own earlier piece is listed, the unpublished draft and this cycle are not', pc[0].mine.length === 1 && pc[0].mine[0].cycle === 95);
   ok('prior coverage: a later piece naming both is listed, one naming only the citizen is not', pc[0].later.length === 1 && pc[0].later[0].cycle === 102);
-  ok('prior coverage: an unreadable index returns [] and never throws', Array.isArray(priorCoverage('Jax Caldera', [{ name: 'X' }], { rows: {} })) && priorCoverage('Jax Caldera', [{ name: 'X' }], { rows: {} }).length === 0);
+  let threw = false; try { priorCoverage('Jax Caldera', [{ name: 'X' }], { rows: {} }); } catch (e) { threw = true; }
+  ok('prior coverage: an unreadable index throws, it is never a silent empty list', threw);
   const withPc = Object.assign({}, bareSlice, { priorCoverage: pc });
   const mdPc = formatJaxSliceMarkdown(withPc);
   ok('prior coverage: markdown carries the section with both lines', /## EARLIER COVERAGE/.test(mdPc) && /yours, C95: Jax on Varek/.test(mdPc) && /printed since, naming you both, C102 \(Hal Richmond\)/.test(mdPc));
+  const bai = require('./buildArticleIndex'); const realPc = bai.priorCoverage;
+  bai.priorCoverage = () => { throw new Error('index unreadable (test)'); };
+  const warned = []; const realWarn = console.warn; console.warn = m => warned.push(m);
+  let broken; try { broken = buildJaxSlice(998, { root: bare2, report: { top: healthTop, candidates: [healthTop], illnessRate: 10.1, maxScore: 40, shouldForce: true, candidateCount: 1 } }); } finally { console.warn = realWarn; bai.priorCoverage = realPc; }
+  ok('prior coverage: a broken index does not stop the slice', broken && !broken.empty && Array.isArray(broken.citizens));
+  ok('prior coverage: the slice carries the error and warns', broken.priorCoverageError === 'index unreadable (test)' && broken.priorCoverage.length === 0 && warned.some(m => /earlier coverage unavailable/.test(m)));
+  ok('prior coverage: the packet says unavailable, not that nothing exists', /Earlier coverage unavailable/.test(formatJaxSliceMarkdown(broken)) && /not a finding that Jax never covered/.test(formatJaxSliceMarkdown(broken)));
+  fs.rmSync(bare2, { recursive: true, force: true });
   ok('prior coverage: empty list → no section', !/## EARLIER COVERAGE/.test(formatJaxSliceMarkdown(Object.assign({}, bareSlice, { priorCoverage: [] }))));
 }
 

@@ -1,0 +1,34 @@
+AIM = BENCH (script read the bench marker)
+== leg B2 (stage 15 + Cut C files at 72dacd68)
+bench project = stage 15 outside the Cut C files
+stage = stage 15 + 2 Cut C files at 72dacd68; manifest /tmp/claude-0/-root-GodWorld/1278dd4d-7ce3-4acf-826a-759a4fe124c9/scratchpad/diag-B2.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @75
+pull-back 167 js + manifest byte-identical to /tmp/claude-0/-root-GodWorld/1278dd4d-7ce3-4acf-826a-759a4fe124c9/scratchpad/diag-B2.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 84 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+version cut; waiting 99 s more for /exec propagation
+leg B2 C113 fire rc=0 "verdict": "PASS" "wallS": 251
+B2 C113: 2373 LifeHistory rows, sha 330ba1dace86ba64, spot lines drawn 1 {"quiet":1}, eligible citizens {"quiet":13,"shed":4}, not their spot 0, strays 0
+== leg Bnolift (stage 15 + Cut C files at 8d652b5dd4a6f0c064cb4253a955354998451082)
+bench project = stage 15 outside the Cut C files
+stage = stage 15 + 2 Cut C files at 8d652b5dd4a6f0c064cb4253a955354998451082; manifest /tmp/claude-0/-root-GodWorld/1278dd4d-7ce3-4acf-826a-759a4fe124c9/scratchpad/diag-Bnolift.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @76
+pull-back 167 js + manifest byte-identical to /tmp/claude-0/-root-GodWorld/1278dd4d-7ce3-4acf-826a-759a4fe124c9/scratchpad/diag-Bnolift.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 84 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+version cut; waiting 77 s more for /exec propagation
+leg Bnolift C113 fire rc=0 "verdict": "PASS" "wallS": 210
+Bnolift C113: 2308 LifeHistory rows, sha df4c732827b21315, spot lines drawn 0 {}, eligible citizens {"quiet":13,"shed":4}, not their spot 0, strays 0
+DIAG DONE

@@ -206,3 +206,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 11:57 rb RELEASE agy rb round 2 scored (42 rows: headlines 41/42, cycles 42/42, bylines 39/42, misses fixed in index). CLAIM agy rb Task 4+5 diff review against a fixed 15-item checklist (YES/NO/UNSURE + evidence; output TSV only).
 11:59 rb RELEASE agy rb diff review folded (14/14 as expected; rb re-read D3 D4 D12 D13 D14 in the code). agy idle. es: dashboard restart is clear to go.
 12:03 rb DONE pipeline.84 (Tasks 2 to 5 built, reviewed, pushed; dashboard live; row live-observing). Open for the builder: reconnect the godworld MCP. agy idle, no claims held.
+12:56 rb DISPATCH es: builder correction, canon = every gate-passed article. Asks: sweep scope back to full staged set minus EIC violations, backfill C107-C111, dashboard restart for abcb01ec.

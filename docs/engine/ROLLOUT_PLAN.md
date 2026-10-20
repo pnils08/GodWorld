@@ -5,11 +5,11 @@
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C111 (fired 2026-10-11 ~16:18 CDT, 0 errors, 148 s); next live fire C112, Sunday 2026-10-18.
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (53)** — each plan, its rows and the state each is in:
+**Plans in motion (54)** — each plan, its rows and the state each is in:
 
 - [[../plans/2026-10-11-media-extension]]: pipeline.83 live-observing, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
+- [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, pipeline.71 ready, engine.287 live-observing, engine.288 live-observing, engine.289 blocked, engine.305 ready, engine.306 ready
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
-- [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, pipeline.71 ready, engine.287 live-observing, engine.288 live-observing, engine.289 blocked
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing, engine.298 live-observing
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 in-progress, engine.264 needs-info, engine.261 ready
 - [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: pipeline.81 live-observing, engine.296 live-observing, engine.297 ready
@@ -21,7 +21,8 @@
 - [[../reference/DEPLOY_HISTORY]]: engine.213 in-progress, engine.294 live-observing
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.293 live-observing, engine.104 ready
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
-- [[../plans/2026-06-16-tier1-character-voice-agents]]: research.30 live-observing
+- [[../plans/2026-10-19-discord-voices-connected]]: research.30 live-observing
+- [[../plans/2026-10-19-bay-tribune-master-index]]: pipeline.84 ready
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
 - [[../plans/2026-10-06-supermemory-v5-migration]]: infrastructure.10 blocked
 - [[../plans/2026-05-07-chaos-cars-engine]]: engine.11 live-observing
@@ -75,7 +76,8 @@
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | civic.43 | School board: T1 + T3 LIVE. T2 seating HELD (builder 2026-10-07): schools half built (hood school data, no schools in hoods); deep review first, then the canon-name fix | needs-info | research-build / engine-sheet | [[../plans/2026-10-04-school-board]] §Builder's words (2026-10-07) |
-| research.30 | Discord voices connected (builder 2026-10-19): Phase 1 + 2 LIVE (fresh brief, search first, Saturday newsroom for Mags, Paulson bonds seeded, talk recorder moves voice + Paulson dials, TALK page line). Read 2026-10-25: first Cycle drain of DISCORD rows (C113) | live-observing | research-build | [[../plans/2026-06-16-tier1-character-voice-agents]] §Discord voices connected |
+| research.30 | Discord voices connected (builder 2026-10-19): brief, search first, Paulson bonds, talk recorder LIVE. Read 2026-10-25: first Cycle drain of DISCORD rows (C113) | live-observing | research-build | [[../plans/2026-10-19-discord-voices-connected]] |
+| pipeline.84 | Bay Tribune master index + assignment-time pre-check (builder 2026-10-19): scope, front door and pre-check ruled; Jax–Varek bond waits on his article. Ready to build from the plan | ready | research-build | [[../plans/2026-10-19-bay-tribune-master-index]] |
 
 ## 2. Waiting on a fire — dated or organic
 

@@ -205,6 +205,59 @@ function hoodReactionMult_(reactTag, dm) {
   throw new Error('engine.214: no dial for reaction tag ' + reactTag);
 }
 
+// engine.214 8a Cut C — the citizen's spot. Builder 2026-10-19: things happen to the citizen at their
+// own place ("my taco spot closed for repairs"), and a spot the engine fires lets the cron build on it.
+// One spot per citizen from the parent hood's open food / retail rows (S.hoodSpots), stable across
+// Cycles: the highest spotRank_ wins (ties by BIZ_ID), so a closure or an opening moves only the
+// citizens whose spot it was or who take the new one. Lines come only from the spot's own facts this
+// Cycle; an all-steady spot offers nothing. The record's own words: a blowout darkens the block.
+var SPOT_CHAOS_LINES_ = {
+  minor_fire: 'heard <Name> had a small fire this week',
+  major_blaze_contained: 'heard <Name> had a fire this week — contained',
+  transformer_blowout: 'heard the block around <Name> went dark when a transformer blew',
+  forced_temporary_closure: 'heard <Name> was temporarily shut pending an inspection'
+};
+
+// FNV-1a over "POPID|BIZ_ID", then the murmur3 fmix32 finalizer — FNV-1a alone barely moves when only
+// the last digit of a BIZ-000NN id differs, which would hand most of a hood the same spot.
+function spotRank_(popId, bizId) {
+  var s = String(popId) + '|' + String(bizId), h = 2166136261;
+  for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  h ^= h >>> 16; h = Math.imul(h, 0x85ebca6b) >>> 0;
+  h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35) >>> 0;
+  return (h ^ (h >>> 16)) >>> 0;
+}
+
+function citizenSpotFor_(hoodSpots, popId) {
+  if (!hoodSpots || !hoodSpots.length || !popId) return null;
+  var best = null, bestRank = -1;
+  for (var i = 0; i < hoodSpots.length; i++) {
+    var sp = hoodSpots[i], rk = spotRank_(popId, sp.id);
+    if (rk > bestRank || (rk === bestRank && String(sp.id) < String(best.id))) { best = sp; bestRank = rk; }
+  }
+  return best;
+}
+
+// Quiet weighs like the state pool's pw(1.0, (streak − 1) / 4): 2 at a two-week streak, 5 from five.
+function citizenSpotLines_(spot) {
+  if (!spot) return [];
+  var out = [];
+  var line = function(text, ev, up, weight) {
+    out.push({ text: text.replace('<Name>', function() { return spot.name; }),
+      tags: ['source:nbhdState', 'spot:' + ev, 'dial:outabout:' + (up ? 'up' : 'down')], weight: weight });
+  };
+  var chaos = spot.chaos || [];
+  for (var c = 0; c < chaos.length; c++) {
+    if (SPOT_CHAOS_LINES_.hasOwnProperty(chaos[c])) line(SPOT_CHAOS_LINES_[chaos[c]], chaos[c], false, 3.0);
+  }
+  var streak = Number(spot.streak) || 0;
+  if (streak >= 2) line('has watched <Name> go quiet lately', 'quiet', false, Math.min(6, 1 + 4 * Math.min(1, (streak - 1) / 4)));
+  if (Number(spot.shed) > 0) line('heard <Name> let some staff go', 'shed', false, 2.0);
+  if ((Number(spot.prevStreak) || 0) >= 2 && streak === 0) line('was glad to see <Name> steadier again', 'recovery', true, 2.0);
+  if (spot.lift) line('felt a lift at <Name> after the win', 'lift', true, 1.5);
+  return out;
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // engine.148 P3 — citizen-event texture, venues and institutions by place label.
 // Every hood gets the pool for its Neighborhood_Map.EmployerCharacter label
@@ -2508,6 +2561,9 @@ function generateCitizensEvents_(ctx) {
     var mode = row[iClock] || "ENGINE";
     var popId = row[iPopID];
     var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || "") : "";
+    // engine.214 8a Cut C: the parent hood (a child-area cell folds) — the citizen's spot key and the
+    // hood the pulse lands on (the Phase-8 writer reads canon hood names only).
+    var citizenHood = (neighborhood && S.canonHoods) ? (resolveHoodOrChild_(ctx, neighborhood) || neighborhood) : neighborhood;
 
     var birthYear = (iBirthYear >= 0) ? Number(row[iBirthYear] || 0) : 0;
     var occupation = (iOccupation >= 0) ? String(row[iOccupation] || "") : "";
@@ -2756,6 +2812,13 @@ function generateCitizensEvents_(ctx) {
     var nbhdStatePool = neighborhoodStatePool_(neighborhood);
     for (var nsi = 0; nsi < nbhdStatePool.length; nsi++) {
       pool.push(makeEntry(nbhdStatePool[nsi].text, mergeTags(nbhdStatePool[nsi].tags, calendarTags), nbhdStatePool[nsi].weight, false));
+    }
+
+    // engine.214 8a Cut C: what happened at the citizen's own spot this week (S.hoodSpots, Phase5-BusinessDynamics;
+    // unset when that phase failed → nothing offered).
+    var spotPool = citizenSpotLines_(citizenSpotFor_(S.hoodSpots ? S.hoodSpots[citizenHood] : null, popId));
+    for (var spi = 0; spi < spotPool.length; spi++) {
+      pool.push(makeEntry(spotPool[spi].text, mergeTags(spotPool[spi].tags, calendarTags), spotPool[spi].weight, false));
     }
 
     // S280 depth-step (Mike-direct): a world event in THIS citizen's hood is
@@ -3734,7 +3797,8 @@ function generateCitizensEvents_(ctx) {
     // holds the metric grain at exactly today's rate.
     // engine.305: the pulse follows the written line's grade — a Neighborhood line graded Down
     // pulses Neighborhood-Down (pulseKindForLine_, same file as recordPulse_).
-    if (ev === 0 && typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, pulseKindForLine_(lineKind, primaryTag), tags, pick);
+    // engine.214 Cut C: keyed by the parent hood (citizenHood) — a child-area cell's pulse reached no writer.
+    if (ev === 0 && typeof recordPulse_ === 'function') recordPulse_(S, citizenHood, pulseKindForLine_(lineKind, primaryTag), tags, pick);
 
     // engine.47 Hop 4: attribution — this citizen actually drew tonight's game.
     if (tags.indexOf("gameNight") >= 0) gameNightDrawn.push(String(popId));

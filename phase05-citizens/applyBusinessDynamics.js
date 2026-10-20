@@ -284,6 +284,10 @@ function bizIsBar_(sector) {
   return bizSectorClass_(sector) === 'food' || /hospitality|\bfood\b/i.test(String(sector || ''));
 }
 
+// engine.214 8a Cut C: the chaos outcomes that close or damage a business (utilities/chaosCarsConfig.js
+// fire_engine, building_inspector, pge_truck) — the ones a regular at the spot hears about.
+var BIZ_SPOT_CHAOS_ = { minor_fire: true, major_blaze_contained: true, transformer_blowout: true, forced_temporary_closure: true };
+
 // The mayor's standing approval — Civic_Office_Ledger, first MAYOR* office. null when unreadable.
 function bizMayorApproval_(ctx) {
   try {
@@ -513,7 +517,7 @@ function applyBusinessDynamics_(ctx) {
   var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
   if (!sheet) throw new Error('applyBusinessDynamics_: Business_Ledger not found');
   var bl = sheet.getDataRange().getValues();
-  if (!bl || bl.length < 2) { S.businessDynamicsState = {}; S.hoodBusinessMomentum = {}; return out; }
+  if (!bl || bl.length < 2) { S.businessDynamicsState = {}; S.hoodBusinessMomentum = {}; S.hoodSpots = {}; return out; }
   var bh = bl[0];
   var col = function(name) { for (var c = 0; c < bh.length; c++) if (String(bh[c]).trim() === name) return c; return -1; };
   var iId = col('BIZ_ID'), iSec = col('Sector'), iHood = col('Neighborhood'), iRev = col('Annual_Revenue'), iGrow = col('Growth_Rate');
@@ -571,6 +575,18 @@ function applyBusinessDynamics_(ctx) {
     if (closedNow) { t.closedRevenue += revenue; t.closures++; }
     else t.growthWeighted += revenue * growth;
   };
+  // engine.214 8a Cut C: the citizen's spot — the hood's open food and retail rows, each with this
+  // Cycle's facts (streak, last Cycle's streak, staff shed, a game-week lift, the chaos outcomes that
+  // hit it). Arts is out: its live rows are newsrooms. Built locally, published at the end of the
+  // phase, so a throw mid-loop leaves S.hoodSpots unset and the citizen pool offers nothing.
+  var spotChaos = {}, spots = {};
+  var spotCycle = Number(S.absoluteCycle || S.cycleId);   // the stamp runChaosCarsEngine_ puts on its payloads
+  var cce = S.chaosCarsEvents || [];
+  for (var sc = 0; sc < cce.length; sc++) {
+    var sev = cce[sc];
+    if (!sev || sev.targetScope !== 'business' || Number(sev.cycleId) !== spotCycle || !BIZ_SPOT_CHAOS_[sev.diceOutcome]) continue;
+    (spotChaos[sev.targetId] = spotChaos[sev.targetId] || []).push(sev.diceOutcome);
+  }
   for (var r = 1; r < bl.length; r++) {
     var row = bl[r];
     var id = String(row[iId] || '').trim();
@@ -693,6 +709,15 @@ function applyBusinessDynamics_(ctx) {
       if (shed > 0) { declines[id] = shed; out.shed += shed; }
     }
     if (d.streak || d.win || d.ship) state[id] = [d.streak, d.win, 0, d.ship];
+    if (d.cls === 'food' || d.cls === 'retail') {
+      var spotName = iNm >= 0 ? String(row[iNm] || '').trim() : '', spotHood = bizHoodKey(hood);
+      if (spotName && spotHood) {
+        (spots[spotHood] = spots[spotHood] || []).push({
+          id: id, name: spotName, cls: d.cls, streak: d.streak, prevStreak: Number(ps.streak) || 0,
+          shed: declines[id] || 0, lift: d.cls === 'food' && barTerm > 0, chaos: spotChaos[id] || []
+        });
+      }
+    }
     if (d.parts.ship) out.shipMoved = (out.shipMoved || 0) + 1;
     revCol.push([d.revenue === null ? row[iRev] : d.revenue]);
     growCol.push([d.growth]);
@@ -737,7 +762,8 @@ function applyBusinessDynamics_(ctx) {
     S.sportsWeekBars = { byHood: barsByHood, ids: barIds, pp: out.sportsBarPp };
   }
   S.businessDynamicsState = state; // finalizeCycleState carries it as businessDynamics
-  Logger.log('applyBusinessDynamics_ engine.96: ' + out.rows + ' businesses, ' + out.drifted + ' drifted, ' +
+  S.hoodSpots = spots;             // engine.214 Cut C — read by generateCitizensEvents_ (citizenSpotPool_)
+  Logger.log('applyBusinessDynamics_ engine.96:' + out.rows + ' businesses, ' + out.drifted + ' drifted, ' +
     out.distressed + ' in distress, ' + out.disrupted + ' disrupted, ' + out.successWindows + ' under success pressure, ' +
     out.shed + ' shed, ' + out.closed + ' closing now, ' + out.closing + ' winding down, mayor ' + mayorApproval +
     ', initiative lift ' + (out.initLift || 0) + ' / drag ' + (out.initDrag || 0) +

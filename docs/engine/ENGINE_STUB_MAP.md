@@ -1185,8 +1185,8 @@
 - **bizShipOffset_(ship, sector, echoShare)**
 
 - **applyBusinessDynamics_(ctx)**
-  Reads: S.canonHoods, S.chaosBusinessFold, S.chaosNeighborhoodFold, S.chaosShip, S.cycleId, S.initiativeNeighborhoodEffects, S.neighborhoodState, S.previousCycleState, S.sportsWeek, S.worldEvents
-  Writes: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.hoodBusinessMomentum, S.sportsWeekBars, S.worldEvents
+  Reads: S.absoluteCycle, S.canonHoods, S.chaosBusinessFold, S.chaosCarsEvents, S.chaosNeighborhoodFold, S.chaosShip, S.cycleId, S.hoodSpots, S.initiativeNeighborhoodEffects, S.neighborhoodState, S.previousCycleState, S.sportsWeek, S.worldEvents
+  Writes: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.hoodBusinessMomentum, S.hoodSpots, S.sportsWeekBars, S.worldEvents
   Config: ctx.config.cycleCount
   Sheets: Business_Ledger
 
@@ -1905,6 +1905,13 @@
 - **hoodReactionSet_(trajectory, mass, neighborhood)**
 
 - **hoodReactionMult_(reactTag, dm)**
+  Reads: S.hoodSpots
+
+- **spotRank_(popId, bizId)**
+
+- **citizenSpotFor_(hoodSpots, popId)**
+
+- **citizenSpotLines_(spot)**
 
 - **folkMemoryAdd_(memory, pop, hood, tag, eventCycle)**
 
@@ -1913,7 +1920,7 @@
 - **folkMemoryScopes_(memory, pop, hood, cycle, dialCell, bonds)**
 
 - **generateCitizensEvents_(ctx)**
-  Reads: S.biasIntents, S.chaosTransit, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.engine299, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodDynamics, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsAftermath, S.sportsCity, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedBoard, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
+  Reads: S.biasIntents, S.canonHoods, S.chaosTransit, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.engine299, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.hoodSpots, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodDynamics, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsAftermath, S.sportsCity, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedBoard, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cycleActiveCitizens, S.engine299, S.eventsGenerated, S.faithExposures, S.folkMemory, S.householdMoments, S.minorsSkippedTexture, S.storyHooks, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.folkMemoryWindow, ctx.config.gcSurfaceChance, ctx.config.hoodFloorSurfaceQuota, ctx.config.rngSeed
   Sheets: Content_Telemetry, Generic_Citizens, LifeHistory_Log
@@ -4794,4 +4801,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1732
+**Functions mapped:** 1735

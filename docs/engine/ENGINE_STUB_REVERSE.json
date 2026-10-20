@@ -2,7 +2,7 @@
   "generated": "2026-10-20",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1732,
+  "functionsMapped": 1735,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -22,6 +22,7 @@
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
         "phase04-events/faithEventsEngine.js::runFaithEventsEngine_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/civicInitiativeEngine.js::applyActiveInitiativeRipples_",
         "phase05-citizens/civicInitiativeEngine.js::applyNeighborhoodRipple_",
         "phase05-citizens/civicInitiativeEngine.js::checkMayoralVeto_",
@@ -829,6 +830,7 @@
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/civicInitiativeEngine.js::applyCivicStageBaseline_",
         "phase05-citizens/civicInitiativeEngine.js::freezeCivicStageCohort_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/householdFormationEngine.js::applyFundDisbursementBody_",
         "phase06-analysis/economicRippleEngine.js::sceneHoods_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
@@ -2955,6 +2957,7 @@
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
         "phase04-events/chaosCarsEngine.js::runChaosEvent_",
         "phase04-events/chaosCarsEngine.js::runChaosShip_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_"
       ]
     },
@@ -3228,6 +3231,16 @@
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessCity_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessFactor_"
+      ]
+    },
+    "hoodSpots": {
+      "writers": [
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
+      ],
+      "readers": [
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/generateCitizensEvents.js::hoodReactionMult_"
       ]
     },
     "sportsWeekBars": {

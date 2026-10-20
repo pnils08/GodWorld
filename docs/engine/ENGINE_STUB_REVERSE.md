@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1732 · **S.* fields:** 378 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1735 · **S.* fields:** 379 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -24,7 +24,7 @@
 | `S._configMissingWarnings` | `phase03-population/applyDemographicDrift.js::pushMissingConfigWarning_` | `phase03-population/applyDemographicDrift.js::pushMissingConfigWarning_` | 1 | 1 |
 | `S._faithJoinRipple` | `phase05-citizens/bondEngine.js::processFaithJoins_` | `phase05-citizens/bondEngine.js::processFaithJoins_` | 1 | 1 |
 | `S._rng` | `phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_` | _(none)_ | 1 | 0 |
-| `S.absoluteCycle` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase01-config/advanceSimulationCalendar.js::inWorldStamp_`, `phase01-config/advanceSimulationCalendar.js::simYearOf_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_`, …(+40 more) | 1 | 46 |
+| `S.absoluteCycle` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase01-config/advanceSimulationCalendar.js::inWorldStamp_`, `phase01-config/advanceSimulationCalendar.js::simYearOf_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_`, …(+41 more) | 1 | 47 |
 | `S.activeBonds` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | 1 | 1 |
 | `S.activeCooldowns` | `phase08-v3-chicago/applyDomainCooldowns.js::applyDomainCooldowns_` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 1 |
 | `S.activeRippleCount` | `phase05-citizens/civicInitiativeEngine.js::applyActiveInitiativeRipples_` | _(none)_ | 1 | 0 |
@@ -49,7 +49,7 @@
 | `S.businessDeclines` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase05-citizens/runCareerEngine.js::runCareerEngine_` | 1 | 2 |
 | `S.businessDynamicsState` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 2 |
 | `S.canonHoodCount` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_` | _(none)_ | 1 | 0 |
-| `S.canonHoods` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_` | `phase01-config/canonNeighborhoodLoader.js::buildAdjacencyFromSheet_`, `phase01-config/canonNeighborhoodLoader.js::countTrackedByHood_`, `phase01-config/canonNeighborhoodLoader.js::getCanonNeighborhoods_`, `phase01-config/canonNeighborhoodLoader.js::getCoreSimNeighborhoods_`, `phase01-config/canonNeighborhoodLoader.js::getDistrictHoods_`, `phase01-config/canonNeighborhoodLoader.js::getHoodAttention_`, …(+21 more) | 1 | 27 |
+| `S.canonHoods` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_` | `phase01-config/canonNeighborhoodLoader.js::buildAdjacencyFromSheet_`, `phase01-config/canonNeighborhoodLoader.js::countTrackedByHood_`, `phase01-config/canonNeighborhoodLoader.js::getCanonNeighborhoods_`, `phase01-config/canonNeighborhoodLoader.js::getCoreSimNeighborhoods_`, `phase01-config/canonNeighborhoodLoader.js::getDistrictHoods_`, `phase01-config/canonNeighborhoodLoader.js::getHoodAttention_`, …(+22 more) | 1 | 28 |
 | `S.canonSportsPhase` | `phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_` | _(none)_ | 1 | 0 |
 | `S.careerChurn` | `phase06-analysis/economicRippleEngine.js::detectCareerRipples_` | _(none)_ | 1 | 0 |
 | `S.careerEvents` | `phase05-citizens/runCareerEngine.js::runCareerEngine_` | _(none)_ | 1 | 0 |
@@ -60,7 +60,7 @@
 | `S.casinoGates` | `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_` | `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_` | 1 | 1 |
 | `S.casinoSettlements` | `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_` | `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_` | 1 | 1 |
 | `S.chaosBusinessFold` | `phase04-events/chaosCarsEngine.js::accumulateBusinessEvent_` | `phase04-events/chaosCarsEngine.js::accumulateBusinessEvent_`, `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | 1 | 3 |
-| `S.chaosCarsEvents` | `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_`, `phase04-events/chaosCarsEngine.js::runChaosEvent_`, `phase04-events/chaosCarsEngine.js::runChaosShip_` | `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_`, `phase04-events/chaosCarsEngine.js::runChaosEvent_`, `phase04-events/chaosCarsEngine.js::runChaosShip_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_` | 3 | 4 |
+| `S.chaosCarsEvents` | `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_`, `phase04-events/chaosCarsEngine.js::runChaosEvent_`, `phase04-events/chaosCarsEngine.js::runChaosShip_` | `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_`, `phase04-events/chaosCarsEngine.js::runChaosEvent_`, `phase04-events/chaosCarsEngine.js::runChaosShip_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_` | 3 | 5 |
 | `S.chaosCategoryMap` | `phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_` | _(none)_ | 1 | 0 |
 | `S.chaosCategoryWeights` | `phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_` | _(none)_ | 1 | 0 |
 | `S.chaosFriction` | `phase04-events/chaosCarsEngine.js::writeChaosFrictionLog_` | _(none)_ | 1 | 0 |
@@ -208,6 +208,7 @@
 | `S.hoodEmployerDepth` | `phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_` | `phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodCharacterCity_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodRetailRaw_` | 1 | 3 |
 | `S.hoodFloorWaveCount` | `phase05-citizens/checkForPromotions.js::checkForPromotions_` | _(none)_ | 1 | 0 |
 | `S.hoodHeadcount` | `phase01-config/canonNeighborhoodLoader.js::getHoodHeadcount_` | `phase01-config/canonNeighborhoodLoader.js::getHoodHeadcount_` | 1 | 1 |
+| `S.hoodSpots` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/generateCitizensEvents.js::hoodReactionMult_` | 1 | 3 |
 | `S.hookSuppression` | `phase08-v3-chicago/applyCycleRecovery.js::applyCycleRecovery_` | _(none)_ | 1 | 0 |
 | `S.hospitalCensus` | `phase10-persistence/buildCyclePacket.js::persistHospitalLedger_` | _(none)_ | 1 | 0 |
 | `S.hospitalEvents` | `phase04-events/chaosCarsEngine.js::runChaosEvent_`, `phase04-events/generationalEventsEngine.js::runGenerationalEngine_` | `phase04-events/chaosCarsEngine.js::runChaosEvent_`, `phase04-events/generationalEventsEngine.js::runGenerationalEngine_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_`, `phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_`, `phase10-persistence/buildCyclePacket.js::persistHospitalLedger_` | 2 | 5 |

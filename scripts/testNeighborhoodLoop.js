@@ -747,5 +747,98 @@ console.log('═══ C8 — engine.214 8a Cut B: the trajectory as dial-gated 
   }
 }
 
+console.log('═══ C9 — engine.214 8a Cut C: the citizen\'s spot');
+{
+  const GEN = '../phase05-citizens/generateCitizensEvents.js';
+  const citizenSpotLines_ = loadEngine(GEN, 'citizenSpotLines_');
+  const citizenSpotFor_ = loadEngine(GEN, 'citizenSpotFor_');
+  const sp = (o) => Object.assign({ id: 'BIZ-1', name: 'Taco Spot', cls: 'food', streak: 0, prevStreak: 0, shed: 0, lift: false, chaos: [] }, o);
+  const evs = (s) => JSON.stringify(citizenSpotLines_(s).map(e => e.tags[1].slice(5) + ':' + e.tags[2].split(':')[2] + ':' + e.weight));
+  assert('C9a an all-steady spot, and no spot, offer nothing', citizenSpotLines_(sp({})).length === 0 && citizenSpotLines_(null).length === 0);
+  const cases = [[{ streak: 1 }, '[]'], [{ streak: 2 }, '["quiet:down:2"]'], [{ streak: 3 }, '["quiet:down:3"]'],
+    [{ streak: 8, shed: 2 }, '["quiet:down:5","shed:down:2"]'], [{ prevStreak: 2 }, '["recovery:up:2"]'],
+    [{ prevStreak: 1 }, '[]'], [{ prevStreak: 3, streak: 1 }, '[]'], [{ lift: true }, '["lift:up:1.5"]'],
+    [{ chaos: ['minor_fire', 'transformer_blowout', 'missed_pickup'] }, '["minor_fire:down:3","transformer_blowout:down:3"]'],
+    [{ chaos: ['major_blaze_contained', 'forced_temporary_closure'] }, '["major_blaze_contained:down:3","forced_temporary_closure:down:3"]']];
+  const caseMiss = cases.filter(([o, want]) => evs(sp(o)) !== want).map(([o, want]) => JSON.stringify(o) + ' → ' + evs(sp(o)) + ' want ' + want);
+  assert('C9a each fact offers only its own line, signed (outabout) and weighed — quiet 2 / 3 / 5 by streak, recovery needs ≥ 2 then 0',
+    caseMiss.length === 0, caseMiss.slice(0, 3).join(' | '));
+  const allFacts = sp({ streak: 6, shed: 1, prevStreak: 0, lift: true, chaos: ['minor_fire', 'major_blaze_contained', 'transformer_blowout', 'forced_temporary_closure'] });
+  const textMiss = [];
+  for (const name of ['Corner Shop', 'Main Street Business', 'Shop', 'Taco $& Spot']) {
+    for (const e of citizenSpotLines_(Object.assign({}, allFacts, { name })).concat(citizenSpotLines_(Object.assign({}, sp({ prevStreak: 4 }), { name })))) {
+      const low = e.text.toLowerCase();
+      if (e.text.indexOf(name) < 0) textMiss.push('name lost: ' + e.text);
+      if (/coordinated|noticed|work/.test(low)) textMiss.push('archetype boost: ' + e.text);
+      if (/closed/.test(low)) textMiss.push('closed: ' + e.text);
+      for (const rule of P.PULSE_CONTENT_RULES) if (rule.re.test(low)) textMiss.push('pulse content rule: ' + e.text);
+      if (e.tags[0] !== 'source:nbhdState' || e.tags.some(t => t.indexOf('state:') === 0)) textMiss.push('tags: ' + e.tags.join());
+    }
+  }
+  assert('C9b every spot line, rendered with names ending Shop / Business (and a "$&" name), keeps the name and is clear of the archetype boosts, "closed", the pulse content rules and any state: tag',
+    textMiss.length === 0, textMiss.slice(0, 3).join(' | '));
+
+  // Rendezvous over the real POPIDs (output/simulation_ledger_snapshot.jsonl): stable, balanced, minimal movement.
+  const pops = fs.readFileSync(path.resolve(__dirname, '../output/simulation_ledger_snapshot.jsonl'), 'utf8')
+    .split('\n').filter(Boolean).map(l => JSON.parse(l).POPID).filter(Boolean);
+  const three = ['BIZ-00041', 'BIZ-00042', 'BIZ-00043'].map(id => sp({ id }));
+  const pick = (list) => pops.map(p => (citizenSpotFor_(list, p) || {}).id);
+  const a = pick(three), again = pick(three.slice().reverse());
+  const share = {}; a.forEach(id => { share[id] = (share[id] || 0) + 1; });
+  assert('C9c the pick is deterministic and order-free (' + pops.length + ' POPIDs, identical replay with the list reversed)', a.join() === again.join() && a.every(Boolean));
+  assert('C9c three adjacent BIZ ids split the city roughly evenly (each 20–47%): ' + JSON.stringify(share),
+    Object.keys(share).length === 3 && Object.values(share).every(n => n / pops.length >= 0.2 && n / pops.length <= 0.47));
+  const without = pick(three.filter(s => s.id !== 'BIZ-00042'));
+  const moveMiss = a.filter((id, i) => id !== 'BIZ-00042' && without[i] !== id).length;
+  const movedOk = a.every((id, i) => id !== 'BIZ-00042' || without[i] !== 'BIZ-00042');
+  const withNew = pick(three.concat([sp({ id: 'BIZ-00099' })]));
+  const strays = a.filter((id, i) => withNew[i] !== id && withNew[i] !== 'BIZ-00099').length, movers = a.filter((id, i) => withNew[i] !== id).length;
+  assert('C9c a spot removed moves only its own holders; a new spot takes a subset and moves no one elsewhere (moved ' + movers + ')',
+    moveMiss === 0 && movedOk && strays === 0 && movers > 0 && movers < pops.length);
+
+  // The real generator path: spot lines reach only their hood's citizens (a child area folds to its parent),
+  // and the first-draw pulse follows each line's sign onto the parent hood.
+  const pulses = [], realPulse = global.recordPulse_;
+  global.recordPulse_ = (S, hood, kind, tags, text) => { if ((tags || []).some(t => t.indexOf('spot:') === 0)) pulses.push({ hood, kind, tags }); return realPulse(S, hood, kind, tags, text); };
+  rngImpl = mulberry32(2214);
+  const rows = buildLedger(['Fruitvale', 'Rockridge', 'West Oakland'], 6);
+  const claremont = buildLedger(['Claremont'], 6); claremont.forEach(r => { r[0] = r[0] + 'c'; });
+  rows.push(...claremont);
+  const SPOTS = {
+    Fruitvale: [sp({ id: 'BIZ-F', name: 'Corner Shop', cls: 'retail', streak: 6, prevStreak: 5, shed: 1, chaos: ['minor_fire'] })],
+    Rockridge: [sp({ id: 'BIZ-R', name: 'Taco Spot', streak: 0, prevStreak: 3, lift: true })]
+  };
+  let noSpotThrew = false, noSpotLines = null;
+  for (let cy = 0; cy < 40; cy++) {
+    const ss = memSS({
+      'Neighborhood_Map': memSheet('Neighborhood_Map', seedLoaderMapData()),
+      'LifeHistory_Log': memSheet('LifeHistory_Log', [['Timestamp', 'Cycle', 'POPID', 'Name', 'Event', 'Tag']])
+    });
+    const ctx = makeCtx(100 + cy, rows, ss);
+    if (cy > 0) ctx.summary.hoodSpots = SPOTS;   // Cycle 0: no map (Phase5-BusinessDynamics failed) → nothing offered, no throw
+    try { generateCitizensEvents_(ctx); } catch (e) { if (cy === 0) noSpotThrew = true; else throw e; }
+    if (cy === 0) noSpotLines = rows.map(r => r[iLife] || '').join('\n');
+  }
+  global.recordPulse_ = realPulse;
+  const lifeOf = (prefix) => rows.filter(r => r[0].indexOf(prefix) === 0).map(r => r[iLife] || '').join('\n');
+  const count = (txt, s) => txt.split(s).length - 1;
+  const fv = lifeOf('POP-Frui'), rr = rows.filter(r => r[iHood] === 'Rockridge').map(r => r[iLife] || '').join('\n'),
+    cl = rows.filter(r => r[iHood] === 'Claremont').map(r => r[iLife] || '').join('\n'), wo = lifeOf('POP-West');
+  console.log('   spot lines drawn over 39 Cycles — Fruitvale ' + count(fv, 'Corner Shop') + ', Rockridge ' + count(rr, 'Taco Spot') +
+    ', Claremont ' + count(cl, 'Taco Spot') + ', West Oakland ' + (count(wo, 'Corner Shop') + count(wo, 'Taco Spot')) + '; spot pulses ' + pulses.length);
+  assert('C9d the Cycle with no spot map neither throws nor offers a spot line',
+    !noSpotThrew && noSpotLines !== null && noSpotLines.length > 0 && count(noSpotLines, 'Corner Shop') + count(noSpotLines, 'Taco Spot') === 0);
+  assert('C9d spot lines reach only their own hood: Fruitvale draws Corner Shop, Rockridge and its child area Claremont draw Taco Spot, West Oakland neither',
+    count(fv, 'Corner Shop') > 0 && count(rr, 'Taco Spot') > 0 && count(cl, 'Taco Spot') > 0 && count(fv, 'Taco Spot') === 0 &&
+    count(rr + cl, 'Corner Shop') === 0 && count(wo, 'Corner Shop') + count(wo, 'Taco Spot') === 0);
+  const pulseMiss = pulses.filter(p => {
+    const down = p.tags.indexOf('dial:outabout:down') >= 0;
+    return p.kind !== (down ? 'Neighborhood-Down' : 'Neighborhood') || (p.hood !== 'Fruitvale' && p.hood !== 'Rockridge');
+  });
+  assert('C9e every first-draw spot pulse follows its sign (down → Neighborhood-Down, up → Neighborhood) and lands on a parent hood (Claremont folds to Rockridge)',
+    pulses.length > 0 && pulseMiss.length === 0 && pulses.some(p => p.kind === 'Neighborhood-Down') && pulses.some(p => p.kind === 'Neighborhood'),
+    JSON.stringify(pulseMiss.slice(0, 2)));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

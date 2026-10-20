@@ -138,10 +138,19 @@ function splitPieces(text, defaultCycle) {
     let b = k + 1; while (b < lines.length && !lines[b].trim()) b++;
     return a >= 0 && b < lines.length && RULE.test(lines[a]) && RULE.test(lines[b]);
   };
-  // title: a "# Title" right after the byline (C103+); else above it: heading, then a bold line, then the first non-italic line
+  // title, in order: (1) a heading or bold line after the byline (C103+; the cron wrapper puts "Here's the ... section" and a
+  // "---" between), (2) a heading above it, (3) a bold line above it, (4) the top line of the short plain cluster just above
+  // (headline, optional [TAG], optional dek)
+  const plain = k => { const t = lines[k].trim(); return t && !RULE.test(lines[k]) && !/^---+$/.test(t) && !/^\*[^*]/.test(t) && !HEADING.test(lines[k]) && !/^\[[A-Z ]+\]$/.test(t) && t.length <= 280; };
   for (const m of marks) {
     let j = m.i + 1; while (j < lines.length && !lines[j].trim()) j++;
-    if (j < lines.length && /^#{1,2}\s+\S/.test(lines[j]) && !/^#{1,2}\s+INTAKE\b/.test(lines[j]) && lines[j].length < 170) { m.title = strip(lines[j]); m.titleLine = j; m.after = true; continue; }
+    const fwd = k => k < lines.length && (/^#{1,4}\s+\S/.test(lines[k]) && !/^#{1,4}\s+INTAKE\b/.test(lines[k]) && lines[k].length < 170 || /^\*\*[^*].{2,160}\*\*\s*$/.test(lines[k].trim()));
+    if (fwd(j) && /^#{1,4}\s/.test(lines[j])) { m.title = strip(lines[j]); m.titleLine = j; m.after = true; continue; }
+    if (j < lines.length && /^Here'?s (the|a|your)\b[^\n]*\bsection\b/i.test(lines[j].trim())) {
+      let q = j + 1; while (q < lines.length && !lines[q].trim()) q++;
+      if (q < lines.length && /^---+$/.test(lines[q].trim())) { q++; while (q < lines.length && !lines[q].trim()) q++; }
+      if (fwd(q)) { m.title = strip(lines[q]); m.titleLine = q; m.after = true; continue; }
+    }
     const above = [];
     for (let k = m.i - 1, n = 0; k >= 0 && n < 8; k--) {
       const t = lines[k].trim();
@@ -152,7 +161,18 @@ function splitPieces(text, defaultCycle) {
       if (/^(Names Index:|NAMES:|HOOD:|CLAIM:|<!--)/.test(t)) break;
       above.push(k);
     }
-    const pick = above.find(k => HEADING.test(lines[k])) ?? above.find(k => /^\*\*[^*].*\*\*$/.test(lines[k].trim())) ?? above.find(k => !/^\*[^*]/.test(lines[k].trim())) ?? above[0];
+    let pick = above.find(k => HEADING.test(lines[k])) ?? above.find(k => /^\*\*[^*].*\*\*$/.test(lines[k].trim()));
+    if (pick == null && above.length) { // top line of the contiguous short plain cluster nearest the byline
+      const cluster = []; let last = m.i;
+      for (const k of above) {
+        if (/^\[[A-Z ]+\]$|^(reporter|desk|section):/i.test(lines[k].trim())) continue; // a [TAG] or reporter: line sits inside the cluster
+        if (!plain(k)) { if (cluster.length) break; continue; }
+        const gap = lines.slice(k + 1, last).filter(x => x.trim()).length;
+        if (cluster.length && (gap > 1 || cluster.length >= 3 || last - k > 4)) break;
+        cluster.push(k); last = k;
+      }
+      pick = cluster.length ? cluster[cluster.length - 1] : above[0];
+    }
     if (pick != null) { m.title = strip(lines[pick]); m.titleLine = pick; }
   }
   const pieces = [];
@@ -197,11 +217,15 @@ function headerTitle(text, fallback) {
     const hl = /^\*{0,2}Headline:\*{0,2}\s*(.+)/i.exec(l);
     if (hl) return strip(hl[1]);
   }
+  const nm = lines.map(l => /^Name:\s*(.+)/i.exec(l)).find(Boolean);
+  if (nm) return strip(nm[1]); // a record file: the name is the title
   for (const l of lines) {
-    if (RULE.test(l) || /^---+$/.test(l) || /^=+$/.test(l)) continue;
+    if (RULE.test(l.replace(/^#+\s*/, '')) || /^---+$/.test(l) || /^=+$/.test(l) || /^(Role|POPID|Status):/i.test(l)) continue;
     if (/^\[TYPE:/i.test(l) || /^THE CYCLE PULSE\b/i.test(l) || /^(By |Byline|Desk:|Date:|\*\*Desk|\*\*By|\*\*Date)/i.test(l)) continue;
     if (BYL.slice(3).some(rx => rx.test(l))) continue;
     if (l.length < 40 && resolveByline(l) && !DESK_BYLINE.test(l)) continue; // a lone reporter name is a byline, not a headline
+    if (/\s[—–-]\s.*\b(Reporter|Desk|Correspondent|Columnist|Column|Ledger|Liaison|Historian)\b/i.test(l) && l.length < 90) continue; // "NAME — Role" banner
+    if (/^Compiled by /i.test(l)) continue;
     const ban = l.split(/\s[—–-]\s/); // a "DESK — Reporter" banner is not a headline
     if (ban.length === 2 && (resolveByline(ban[0]) || resolveByline(ban[1])) && ban[1].length < 40) continue;
     if (/^#\s*BAY TRIBUNE SUPPLEMENTAL/i.test(l)) continue;
@@ -273,7 +297,7 @@ function build() {
   // archive/editions bundles (supplemental and old editions); PDFs and mirrors of already-split editions are skipped by type
   for (const f of fs.readdirSync(path.join(ROOT, 'archive/editions')).filter(n => n.endsWith('.txt')).sort()) {
     const p = 'archive/editions/' + f, text = read(p);
-    const cyc = (/CYCLE\s+(\d{1,3})\b/i.exec(f) || /EDITION\s+(\d{1,3})\b/i.exec(f) || [])[1];
+    const cyc = (/CYCLE\s+(\d{1,3})\b/i.exec(f) || /EDITION\s+(\d{1,3})\b/i.exec(f) || [])[1] || (cycleFromName(f) != null ? String(cycleFromName(f)) : undefined);
     let pcs = splitPieces(text, cyc ? parseInt(cyc, 10) : null);
     if (!pcs.length && text.trim().length >= 100) pcs = [{ title: headerTitle(text, f.replace(/\.txt$/, '')), byline: resolveByline(headerByline(text)), cycle: cyc ? parseInt(cyc, 10) : null, body: text.trim(), names: [] }];
     for (const x of pcs) push({ ...x, type: 'bundle-article', published: true, source: 'archive-edition' }, p, 'archive-edition');
@@ -363,6 +387,28 @@ function searchIndex(rows, { author, citizen, q, cycle, desk } = {}) {
     (!desk || lc(r.desk).includes(lc(desk))));
 }
 
+// pipeline.84 Task 5 (assignment-time pre-check): what a journalist already filed on these citizens, and the published
+// pieces since that name both the citizen and the journalist (where a reply to the journalist would sit). Read from
+// the index; a missing or unreadable index returns [] so an assignment is never blocked.
+function priorCoverage(journalist, citizens, { beforeCycle, rows } = {}) {
+  try {
+    const all = rows || loadIndex();
+    const j = String(journalist || '').toLowerCase();
+    const isJ = r => `${r.byline || ''} ${r.bylineName || ''}`.toLowerCase().includes(j);
+    const names = r => r.citizens.map(c => c.name);
+    const brief = r => ({ cycle: r.cycle, title: r.title || r.lede, byline: r.bylineName || r.byline || null, file: r.copies[0].path });
+    const pub = all.filter(r => r.published && (beforeCycle == null || r.cycle == null || r.cycle < beforeCycle));
+    const out = [];
+    for (const c of citizens || []) {
+      const mine = pub.filter(r => isJ(r) && names(r).includes(c.name));
+      const first = mine.reduce((m, r) => (r.cycle != null && (m == null || r.cycle < m) ? r.cycle : m), null);
+      const replies = pub.filter(r => !isJ(r) && names(r).includes(c.name) && names(r).includes(journalist) && (first == null || (r.cycle != null && r.cycle >= first)));
+      if (mine.length || replies.length) out.push({ name: c.name, popid: c.popid || null, mine: mine.map(brief), later: replies.map(brief) });
+    }
+    return out;
+  } catch (e) { return []; }
+}
+
 if (require.main === module) {
   const { rows, attached, staged, skipped } = build();
   const count = (f) => rows.filter(f).length;
@@ -378,4 +424,4 @@ if (require.main === module) {
   } else console.log('dry run — nothing written');
 }
 
-module.exports = { build, loadIndex, searchIndex, splitPieces };
+module.exports = { build, loadIndex, searchIndex, splitPieces, priorCoverage };

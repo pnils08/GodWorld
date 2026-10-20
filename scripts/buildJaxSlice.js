@@ -408,6 +408,8 @@ function buildJaxSlice(cycle, opts) {
   }
 
   const citizens = collectCitizens(top, signal, ledger);
+  // pipeline.84 Task 5: what Jax already filed on these citizens and the pieces since that name them both — shown, never forced
+  const priorCoverage = require(path.join(__dirname, 'buildArticleIndex')).priorCoverage('Jax Caldera', citizens, { beforeCycle: Number(cycle) });
 
   const auditPattern = auditPatternForRef(root, cycle, top.ref);
 
@@ -576,6 +578,7 @@ function buildJaxSlice(cycle, opts) {
     story,
     prewrite,
     citizens,
+    priorCoverage,
     bonds,
     scene,
     gaps,
@@ -633,6 +636,15 @@ function formatJaxSliceMarkdown(slice) {
   }
   if (!slice.citizens.length) L.push('_No POPID pool on this stink — quote stage may fall back to lane; still no invented names._');
   L.push('');
+  if (slice.priorCoverage && slice.priorCoverage.length) {
+    L.push('## EARLIER COVERAGE OF THESE CITIZENS (from the Tribune index; context, not a requirement)');
+    for (const p of slice.priorCoverage) {
+      L.push('- ' + p.name + (p.popid ? ' (' + p.popid + ')' : ''));
+      for (const m of p.mine) L.push('  - yours, C' + (m.cycle == null ? '?' : m.cycle) + ': ' + m.title + '  [' + m.file + ']');
+      for (const m of p.later) L.push('  - printed since, naming you both, C' + (m.cycle == null ? '?' : m.cycle) + (m.byline ? ' (' + m.byline + ')' : '') + ': ' + m.title + '  [' + m.file + ']');
+    }
+    L.push('');
+  }
   L.push('## BONDS (real edges — color social graph, do not invent)');
   if (slice.bonds.length) {
     for (const b of slice.bonds) {

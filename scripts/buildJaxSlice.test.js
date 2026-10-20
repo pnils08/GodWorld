@@ -199,6 +199,26 @@ console.log('beat-dump wiring (civic tabs, synthetic fixture):');
   ok('no dump → no beat-dump pointers entry', !bareSlice.pointers.some(p => /beats/.test(p)));
   fs.rmSync(bare, { recursive: true, force: true });
   fs.rmSync(tmp, { recursive: true, force: true });
+
+  // (f) pipeline.84 Task 5: earlier coverage from the Tribune index — shown when it exists, silent when it does not.
+  const { priorCoverage } = require('./buildArticleIndex');
+  const row = (cycle, title, byline, names, published) => ({ cycle, title, byline, bylineName: byline, published: published !== false, copies: [{ path: 'archive/articles/x' + cycle + '.txt' }], citizens: names.map(n => ({ name: n })) });
+  const fakeRows = [
+    row(95, 'Jax on Varek', 'Jax Caldera', ['Jax Caldera', 'Elias Varek']),
+    row(102, 'Reply printed', 'Hal Richmond', ['Jax Caldera', 'Elias Varek']),
+    row(104, 'Unrelated', 'Hal Richmond', ['Elias Varek']),
+    row(110, 'Draft not printed', 'Jax Caldera', ['Elias Varek'], false),
+    row(112, 'This cycle', 'Jax Caldera', ['Elias Varek']),
+  ];
+  const pc = priorCoverage('Jax Caldera', [{ name: 'Elias Varek', popid: 'POP-00789' }, { name: 'Nobody Known' }], { rows: fakeRows, beforeCycle: 112 });
+  ok('prior coverage: only the citizen with history comes back', pc.length === 1 && pc[0].name === 'Elias Varek');
+  ok('prior coverage: his own earlier piece is listed, the unpublished draft and this cycle are not', pc[0].mine.length === 1 && pc[0].mine[0].cycle === 95);
+  ok('prior coverage: a later piece naming both is listed, one naming only the citizen is not', pc[0].later.length === 1 && pc[0].later[0].cycle === 102);
+  ok('prior coverage: an unreadable index returns [] and never throws', Array.isArray(priorCoverage('Jax Caldera', [{ name: 'X' }], { rows: {} })) && priorCoverage('Jax Caldera', [{ name: 'X' }], { rows: {} }).length === 0);
+  const withPc = Object.assign({}, bareSlice, { priorCoverage: pc });
+  const mdPc = formatJaxSliceMarkdown(withPc);
+  ok('prior coverage: markdown carries the section with both lines', /## EARLIER COVERAGE/.test(mdPc) && /yours, C95: Jax on Varek/.test(mdPc) && /printed since, naming you both, C102 \(Hal Richmond\)/.test(mdPc));
+  ok('prior coverage: empty list → no section', !/## EARLIER COVERAGE/.test(formatJaxSliceMarkdown(Object.assign({}, bareSlice, { priorCoverage: [] }))));
 }
 
 if (failures) {

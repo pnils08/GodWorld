@@ -190,3 +190,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 - No subagent fan-out for coding. Advisor once before a cut and once before declaring done; not on mechanical trims.
 - Systemic blocker (unexplained test failure, guest rewriting outside scope, weekly budget warning): stop that thread, log `BLOCKED <what>`, take the next item. Two consecutive blocked threads → stand down and wait for morning; do not thrash.
 - Self-loop → `/self-debug`.
+10:31 rb BOOT overnight (builder go: pipeline.84 Bay Tribune master index; Heat Shield = standalone C100 piece). Task 2 landed 4ccc1461 (21 pieces + manifest), Task 2b renames 46e0129c (47). Next Task 3 index. No guest claimed yet; agy pane idle. Wake: none set (hourly wakes off since 10-19 11:10, builder go here = job only).

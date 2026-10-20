@@ -19,7 +19,7 @@ Tools:
   search_build(query)        — search session-logs Supermemory (building brain:
                                mirrored claude-mem session summaries; engineering
                                memory, not sim canon)
-  search_articles(query)     — search dashboard API articles
+  search_articles(query, author, citizen) — search dashboard API articles
   get_roster(team)           — player roster from truesource
   get_neighborhood(name)     — neighborhood state from world-data
   get_council_member(district) — official + approval from Civic_Office_Ledger
@@ -31,7 +31,7 @@ import json
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urlencode
 from fastmcp import FastMCP
 
 # Load env. S197 BUNDLE-B (G-S7/G-S10/G-W15): canonical env path is
@@ -583,15 +583,41 @@ def search_build(query: str) -> str:
     )
 
 
+def _format_article_results(raw: str) -> str:
+    """One line per piece: cycle | reporter | headline | file | citizens named."""
+    try:
+        data = json.loads(raw)
+    except Exception:
+        return raw[:3000]
+    if not isinstance(data, dict) or 'results' not in data:
+        return raw[:3000]
+    rows = data.get('results') or []
+    lines = [f"{data.get('total', len(rows))} piece(s), showing {len(rows)}"]
+    for r in rows[:40]:
+        names = (r.get('namesIndex') or '')[:120]
+        lines.append(
+            f"C{r.get('cycle') if r.get('cycle') is not None else '?'} | {r.get('author') or '-'} | "
+            f"{(r.get('title') or '')[:110]} | {r.get('file') or ''}"
+            + (f" | names: {names}" if names else '')
+            + ('' if r.get('published', True) else ' | UNPUBLISHED DRAFT')
+        )
+    return '\n'.join(lines)[:6000]
+
+
 @mcp.tool()
-def search_articles(query: str) -> str:
-    """Search all published articles via the dashboard API.
-    Returns headlines, reporters, citizens mentioned.
-    Use for: 'articles about Danny Horn', 'civic affairs coverage', 'Fruitvale stories'."""
-    # G-3 fix (S215): URL-encode query — spaces/punctuation crashed urllib
-    # with "URL can't contain control characters" on every multi-word call.
-    result = dashboard_get(f'/api/search/articles?q={quote(query)}')
-    return result[:3000] if result else "Dashboard not available"
+def search_articles(query: str = "", author: str = "", citizen: str = "") -> str:
+    """Search all published Bay Tribune articles via the dashboard API.
+    query: words in the headline or text. author: a reporter's name ("Jax Caldera").
+    citizen: a citizen's name ("Elias Varek"). One is enough; together they narrow.
+    Returns one line per piece: cycle, reporter, headline, file, citizens named.
+    Use for: 'articles about Danny Horn', 'everything Jax Caldera wrote', 'pieces that name Elias Varek'."""
+    # G-3 fix (S215): URL-encode — spaces/punctuation crashed urllib with
+    # "URL can't contain control characters" on every multi-word call.
+    params = {k: v for k, v in (('q', query), ('author', author), ('citizen', citizen)) if v}
+    if not params:
+        return "Give a query, an author or a citizen."
+    result = dashboard_get('/api/search/articles?' + urlencode(params))
+    return _format_article_results(result) if result else "Dashboard not available"
 
 
 @mcp.tool()

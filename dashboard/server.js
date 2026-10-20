@@ -6,7 +6,7 @@ import crypto from 'crypto';
 const __envPath = process.env.GODWORLD_ENV_FILE || '/root/.config/godworld/.env';
 if (fs.existsSync(__envPath)) dotenv.config({ path: __envPath, override: true });
 import express from 'express';
-import { readFileSync, existsSync, readdirSync, appendFileSync, writeFileSync } from 'fs';
+import { readFileSync, existsSync, readdirSync, appendFileSync, writeFileSync, statSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
@@ -1640,20 +1640,39 @@ app.get('/api/domains', async (req, res) => {
 });
 
 // --- Article Index ---
-// Returns the pre-built article index with optional filters
+// The Bay Tribune master index (pipeline.84): archive/ARTICLE_INDEX.jsonl, one row per piece, rebuilt by
+// scripts/buildArticleIndex.js. Re-read when the file changes.
 let _articleIndexCache = null;
-let _articleIndexCacheTime = 0;
+let _articleIndexMtime = 0;
 
 function getArticleIndex() {
-  const indexPath = join(ROOT, 'output/article-index.json');
+  const indexPath = join(ROOT, 'archive/ARTICLE_INDEX.jsonl');
   if (!existsSync(indexPath)) return null;
-  const now = Date.now();
-  if (_articleIndexCache && now - _articleIndexCacheTime < SHEET_CACHE_TTL) return _articleIndexCache;
   try {
-    _articleIndexCache = JSON.parse(readFileSync(indexPath, 'utf-8'));
-    _articleIndexCacheTime = now;
+    const mtime = statSync(indexPath).mtimeMs;
+    if (_articleIndexCache && mtime === _articleIndexMtime) return _articleIndexCache;
+    _articleIndexCache = readFileSync(indexPath, 'utf-8').split('\n').filter(Boolean).map(l => JSON.parse(l));
+    _articleIndexMtime = mtime;
     return _articleIndexCache;
   } catch { return null; }
+}
+
+// One index row in the shape /api/search/articles returns.
+function articleIndexResult(r) {
+  return {
+    cycle: r.cycle,
+    file: r.copies[0].path,
+    source: 'article-index',
+    title: r.title || r.lede || null,
+    section: r.section || null,
+    author: r.bylineName || r.byline || null,
+    desk: r.desk || null,
+    namesIndex: r.citizens.map(c => c.name).join(', ') || null,
+    type: r.type,
+    published: r.published,
+    stage: r.stage || null,
+    era: r.era || null,
+  };
 }
 
 // --- Player Index ---
@@ -1825,31 +1844,31 @@ app.get('/api/players/:popId', (req, res) => {
 });
 
 app.get('/api/articles/index', (req, res) => {
-  const index = getArticleIndex();
-  if (!index) {
+  const rows = getArticleIndex();
+  if (!rows) {
     return res.status(404).json({ error: 'Article index not built. Run: node scripts/buildArticleIndex.js --write' });
   }
 
-  let entries = index.entries.filter(e => !e.isDuplicate);
-
-  // Optional filters
-  const { cycle, desk, author, classification, q, limit: limitStr } = req.query;
-  if (cycle) entries = entries.filter(e => e.cycle === parseInt(cycle));
-  if (desk) entries = entries.filter(e => e.desk === desk);
-  if (author) entries = entries.filter(e => e.author?.toLowerCase().includes(author.toLowerCase()));
-  if (classification) entries = entries.filter(e => e.classification === classification);
+  // Optional filters. Unpublished staged drafts are listed only with published=all.
+  const { cycle, desk, author, classification, q, published, limit: limitStr } = req.query;
+  let entries = rows;
+  if (published !== 'all') entries = entries.filter(r => r.published);
+  if (cycle) entries = entries.filter(r => r.cycle === parseInt(cycle));
+  if (desk) entries = entries.filter(r => r.desk === desk);
+  if (author) entries = entries.filter(r => `${r.byline || ''} ${r.bylineName || ''}`.toLowerCase().includes(author.toLowerCase()));
+  if (classification) entries = entries.filter(r => r.type === classification);
   if (q) {
     const pattern = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
-    entries = entries.filter(e => pattern.test(e.title || '') || pattern.test(e.author || ''));
+    entries = entries.filter(r => pattern.test(r.title || r.lede || '') || pattern.test(r.byline || ''));
   }
 
   const limit = parseInt(limitStr) || 200;
   res.json({
-    generated: index.generated,
-    stats: index.stats,
+    generated: new Date(_articleIndexMtime).toISOString(),
+    stats: { rows: rows.length, published: rows.filter(r => r.published).length },
     total: entries.length,
     showing: Math.min(limit, entries.length),
-    entries: entries.slice(0, limit),
+    entries: entries.slice(0, limit).map(articleIndexResult),
   });
 });
 
@@ -1882,6 +1901,28 @@ app.get('/api/search/articles', (req, res) => {
   const { q, author, section, citizen, cycle: cycleFilter, limit: limitStr } = req.query;
   if (!q && !author && !section && !citizen) {
     return res.json({ error: 'Provide at least one: q, author, section, or citizen', results: [] });
+  }
+
+  // An author or citizen lookup reads the master index: a section heading or table row is never a piece there.
+  // Unpublished staged drafts are listed only with published=all.
+  const articleRows = (author || citizen) && !section ? getArticleIndex() : null;
+  if (articleRows) {
+    const lc = v => String(v || '').toLowerCase();
+    const hits = articleRows
+      .filter(r => req.query.published === 'all' || r.published)
+      .filter(r => !cycleFilter || r.cycle === parseInt(cycleFilter))
+      .filter(r => !author || lc(`${r.byline || ''} ${r.bylineName || ''}`).includes(lc(author)))
+      .filter(r => !citizen || r.citizens.some(c => lc(c.name).includes(lc(citizen))))
+      .filter(r => !q || lc(r.title || r.lede).includes(lc(q)))
+      .sort((a, b) => (b.cycle ?? -1) - (a.cycle ?? -1));
+    const lim = parseInt(limitStr) || 50;
+    return res.json({
+      query: { q, author, section, citizen, cycle: cycleFilter },
+      source: 'article-index',
+      total: hits.length,
+      showing: Math.min(lim, hits.length),
+      results: hits.slice(0, lim).map(articleIndexResult),
+    });
   }
 
   const editions = getAllEditions();

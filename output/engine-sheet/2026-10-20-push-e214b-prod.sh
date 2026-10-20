@@ -12,6 +12,7 @@ OUT=/root/GodWorld/output/engine-sheet
 PRE=ea777cae
 FILES="phase05-citizens/generateCitizensEvents.js"
 [ -f "$MAN" ] || { echo "no benched manifest $MAN — stop"; exit 1; }
+[ "$(realpath "$MAN")" = "$OUT/stage15-e214b.sha256" ] || { echo "manifest must be the benched stage15-e214b.sha256 — stop"; exit 1; } # codex final gate 2026-10-20
 W=$(mktemp -d); mkdir -p "$W/stage" "$W/pullback"
 ( cd "$W/stage" && printf '{"scriptId":"%s","rootDir":""}' "$PROD_ID" > .clasp.json && "$CLASP" pull >/dev/null )
 ( cd "$W/stage" && find . -type f ! -name .clasp.json | sort | xargs sha256sum ) | diff -q - "$OUT/stage14-e305.sha256" >/dev/null \
@@ -29,8 +30,11 @@ DEP=$(grep -o '"deploymentId": "[^"]*"' /root/GodWorld/.clasp.json | cut -d'"' -
 [ -n "$DEP" ] || { echo "no pinned deploymentId in the repo .clasp.json — STOP"; exit 1; }
 /root/GodWorld/node_modules/.bin/clasp-real deployments 2>/dev/null | grep -q "$DEP" || { echo "pinned deployment $DEP not in the listing — STOP"; exit 1; }
 ( cd "$W/stage" && CLAUDE_CTL=1 "$CLASP" push --force | tail -1 )
-( cd "$W/stage" && CLAUDE_CTL=1 "$CLASP" deploy -i "$DEP" -d "engine.214 Cut B = stage 14 + 1 file at $SRC (hood lines as dial-gated reactions) — bench 1004 pair C113" | tail -1 )
-/root/GodWorld/node_modules/.bin/clasp-real deployments 2>/dev/null | grep "$DEP"
+VER=$( cd "$W/stage" && CLAUDE_CTL=1 "$CLASP" deploy -i "$DEP" -d "engine.214 Cut B = stage 14 + 1 file at $SRC (hood lines as dial-gated reactions) — bench 1004 pair C113" | tail -1 | grep -o '@[0-9]*$' )
+[ -n "$VER" ] || { echo "deploy printed no version — STOP, read the deployment listing by hand"; exit 1; }
+/root/GodWorld/node_modules/.bin/clasp-real deployments 2>/dev/null | grep "$DEP" | grep -qE " ${VER}( |$)" \
+  || { echo "pinned deployment $DEP does not serve $VER — STOP"; exit 1; } # codex final gate 2026-10-20
+echo "pinned deployment $DEP serves $VER"
 ( cd "$W/pullback" && printf '{"scriptId":"%s","rootDir":""}' "$PROD_ID" > .clasp.json && "$CLASP" pull >/dev/null )
 ( cd "$W/pullback" && find . -type f ! -name .clasp.json | sort | xargs sha256sum ) | diff -q - "$MAN" >/dev/null \
   || { echo "PULL-BACK MISMATCH — PROD is not the benched stage"; exit 1; }

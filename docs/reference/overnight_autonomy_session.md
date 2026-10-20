@@ -182,6 +182,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 03:10 es CHECK rb IDLE, no permission prompt; UNSENT DRAFT in rb box ("go, start the overnight") left untouched per §4c. codex DONE tests recheck (C8a/C2g3 SHIP, C8e FIX: one-sided complain multiplier escapes) → folding. git cef4e26b top, all es. Inbox: es's codex files only. Bench pair at leg A propagation wait.
 10:09 es FOLD codex tests recheck (C8e one-sided escape) → C8f post-T5 real-path weights, mutation-proven; BENCH pair 1004 C113 PASS both legs (A @69 188 s, B @70 204 s, EE 4 → 4, with:against 30:15) → e33f56b6. PROD push dry run PASS. CLAIM codex es Cut B final gate. rm-guard refused 2 probe receipts (output/engine-sheet/2026-10-20-e214b-receipt-probe-c112.*), left in place.
 10:12 es CHECK BLOCKED 03:15–10:09: es sat at its own rm prompt (two probe receipts, rm-guard refused after) with no peer wake to answer; the 10:09 line above was stamped 03:20 by mistake, corrected. rb IDLE, empty prompt. codex WORKING final gate (dispatched 10:10; flags bench-pair sheet-compare not fatal + PROD manifest path open). git 916c46b5 top, all es.
+10:40 es FOLD codex final gate (C8f SHIP; PROD HOLD on bench state / thin receipt / manifest path): carry props traced (every key ghost-skipped → sheet ring in both legs, FIRE_ADMISSION cleared), sheet compare now fatal, PROD manifest pinned + served version checked; npm 296/296. BENCH replicate 1004 C113–C117 per leg running (output/engine-sheet/2026-10-20-e214b-replicate.log).
 
 ## 8. Stop rule and usage
 

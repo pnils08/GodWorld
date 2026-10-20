@@ -177,7 +177,8 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 02:12 es APPROVED rb read-only Bash (staged sidecar json read, grep, localhost health curl, ss).
 02:12 es CLAIM codex es engine.214 Cut B plan recheck 3 (TASK docs/for-claude-review/2026-10-20-engine214-cutB-recheck3-TASK.md → …-codex-engine214-cutB-recheck3.md).
 02:40 es FOLD codex recheck 3 (HOLD on plan text, mechanism viable; all accepted) → accf99a3. RELEASE codex (/clear).
-03:05 es BUILD 3ed34b61 Cut B (tests 42/42, npm 296/296, STUB regen). CLAIM codex es Cut B diff review (TASK docs/for-claude-review/2026-10-20-engine214-cutB-diff-review-TASK.md).
+02:47 es BUILD 3ed34b61 Cut B (tests 42/42, npm 296/296, STUB regen). CLAIM codex es Cut B diff review (TASK docs/for-claude-review/2026-10-20-engine214-cutB-diff-review-TASK.md).
+02:58 es FOLD codex Cut B diff review (code SHIP x5, tests FIX accepted) → 9b5b4281, tests 45/45. BENCH pair 1004 C113 running (A = stage 14 via e305 push, B = + 3ed34b61; output/engine-sheet/2026-10-20-e214b-pair.log). CLAIM codex es Cut B tests recheck.
 
 ## 8. Stop rule and usage
 

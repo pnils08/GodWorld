@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-19 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-20 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1901,6 +1901,10 @@
   Reads: S.chaosTransit
 
 - **applyGriefPoolWeights_(pool, griefConfig)**
+
+- **hoodReactionSet_(trajectory, mass, neighborhood)**
+
+- **hoodReactionMult_(reactTag, dm)**
 
 - **folkMemoryAdd_(memory, pop, hood, tag, eventCycle)**
 
@@ -4790,4 +4794,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1730
+**Functions mapped:** 1732

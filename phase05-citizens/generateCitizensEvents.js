@@ -155,6 +155,56 @@ function applyGriefPoolWeights_(pool, griefConfig) {
   return pool;
 }
 
+// engine.214 8a Cut B — the hood trajectory reaches a citizen as their reaction to
+// the hood, not a fact about it. The trajectory label picks the direction; the
+// citizen's dials pick the reaction (hoodReactionMult_, in the T5 loop). Each side
+// carries two entries: the reactions running with the trajectory share 2/3 of
+// today's branch mass, the ones against it 1/3, so at neutral dials the set leans
+// 2:1 the hood's way. <hood> is replaced with the hood name.
+var HOOD_REACTIONS_ = {
+  growth: {
+    withT:   [['brag', 'up', 'caught themselves bragging a little about the neighborhood lately'],
+              ['humble', 'up', 'felt quietly lucky to call <hood> home']],
+    against: [['complain', 'down', 'grumbled about the neighborhood over coffee'],
+              ['complain', 'down', 'griped about <hood> over dinner']]
+  },
+  decay: {
+    withT:   [['complain', 'down', 'complained about the neighborhood to anyone who\'d listen'],
+              ['complain', 'down', 'vented about <hood> on the walk home']],
+    against: [['humble', 'up', 'shrugged off the grumbling about <hood> and got on with the week'],
+              ['defend', 'up', 'stuck up for the neighborhood to a friend across town']]
+  }
+};
+
+// mass = the branch's total weight (today's pw(1.1, mi) + pw(1.0, mi)).
+// Returns [] for a steady or blank trajectory.
+function hoodReactionSet_(trajectory, mass, neighborhood) {
+  if (!HOOD_REACTIONS_.hasOwnProperty(trajectory)) return [];
+  var set = HOOD_REACTIONS_[trajectory];
+  var dir = trajectory === 'growth' ? 'up' : 'down';
+  var out = [];
+  var sides = [[set.withT, mass / 3], [set.against, mass / 6]];
+  for (var si = 0; si < sides.length; si++) {
+    for (var ri = 0; ri < sides[si][0].length; ri++) {
+      var r = sides[si][0][ri];
+      out.push({
+        text: r[2].replace('<hood>', neighborhood),
+        tags: ['source:nbhdState', 'state:trajectory-' + dir, 'react:' + r[0], 'dial:outabout:' + r[1]],
+        weight: sides[si][1]
+      });
+    }
+  }
+  return out;
+}
+
+// One dial per reaction (engine.32 T5 band multipliers, 0.5..1.5).
+function hoodReactionMult_(reactTag, dm) {
+  if (reactTag === 'react:brag' || reactTag === 'react:defend') return dm.sociability;
+  if (reactTag === 'react:humble') return dm.warmth;
+  if (reactTag === 'react:complain') return 2 - dm.composure;
+  throw new Error('engine.214: no dial for reaction tag ' + reactTag);
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // engine.148 P3 — citizen-event texture, venues and institutions by place label.
 // Every hood gets the pool for its Neighborhood_Map.EmployerCharacter label
@@ -1706,16 +1756,10 @@ function generateCitizensEvents_(ctx) {
     var traj = (st.trajectory || '').toLowerCase();
     var tMom = Number(st.trajectoryMomentum);
     var mi = isNaN(tMom) ? 0 : Math.abs(tMom - 5) / 5; // distance from neutral → intensity 0..1
-    if (traj === 'growth') {
-      pool.push(makeEntry("noticed another new spot opening up in " + neighborhood,
-        ["source:nbhdState", "state:trajectory-up"], pw(1.1, mi), false));
-      pool.push(makeEntry("caught themselves bragging a little about the neighborhood lately",
-        ["source:nbhdState", "state:trajectory-up"], pw(1.0, mi), false));
-    } else if (traj === 'decay') {
-      pool.push(makeEntry("walked past a storefront that never reopened in " + neighborhood,
-        ["source:nbhdState", "state:trajectory-down"], pw(1.1, mi), false));
-      pool.push(makeEntry("heard a neighbor wondering out loud where the block's energy went",
-        ["source:nbhdState", "state:trajectory-down"], pw(1.0, mi), false));
+    // engine.214 8a Cut B: the citizen's reaction to the hood (hoodReactionSet_), same total mass.
+    var reactions = hoodReactionSet_(traj, pw(1.1, mi) + pw(1.0, mi), neighborhood);
+    for (var rxi = 0; rxi < reactions.length; rxi++) {
+      pool.push(makeEntry(reactions[rxi].text, reactions[rxi].tags, reactions[rxi].weight, false));
     }
 
     // Housing pressure (/10) — prosperity strain: hot blocks price people tight
@@ -1749,8 +1793,8 @@ function generateCitizensEvents_(ctx) {
     // C96 range the column left long ago: at C107 (3.5–10.9, median 7.3) no hood
     // reached 13 and 14 of 22 sat under 8 — most of a prosperous city walked past
     // boarded storefronts every cycle. A quiet street is not a dying one: the
-    // decline line lives on the trajectory branch above (decay = storefronts that
-    // never reopened); low retail here is a hood with little open, said as that.
+    // trajectory reaches citizens as their reaction to the hood (branch above,
+    // engine.214 Cut B); low retail here is a hood with little open, said as that.
     var retailMed = hoodStateMedian_(ctx, S, 'retailVitality');
     var rv = Number(st.retailVitality) || 0;
     if (retailMed && rv >= retailMed * 1.25) {
@@ -3326,9 +3370,11 @@ function generateCitizensEvents_(ctx) {
         var dwEntry = pool[dwi];
         var dwTags = dwEntry.tags || [];
         var dwMod = 1.0;
+        var dwReact = false;
         for (var dwti = 0; dwti < dwTags.length; dwti++) {
           var dwTag = dwTags[dwti];
-          if (dwTag.indexOf('relationship:') === 0) dwMod *= dm.sociability;
+          if (dwTag.indexOf('react:') === 0) { dwMod *= hoodReactionMult_(dwTag, dm); dwReact = true; } // engine.214 8a Cut B
+          else if (dwTag.indexOf('relationship:') === 0) dwMod *= dm.sociability;
           else if (dwTag === 'source:occupation') dwMod *= dm.drive;
           else if (dwTag === 'source:neighborhood' || dwTag === 'source:prevEvening') dwMod *= dm.outabout;
           else if (dwTag === 'source:sports') dwMod *= dm.fandom; // engine.208: fandom is the selector (plan §4) — was outabout
@@ -3338,6 +3384,7 @@ function generateCitizensEvents_(ctx) {
           else if (dwTag === 'source:fame') dwMod *= dm.sociability; // engine.32 T3 — sociable citizens lean into recognition
         }
         if (dwMod !== 1.0) dwEntry.weight = (dwEntry.weight || 1) * dwMod;
+        if (dwReact && dwEntry.weight > 6) dwEntry.weight = 6; // engine.214 8a Cut B: a reaction never outweighs the state pool's cap
       }
     }
 

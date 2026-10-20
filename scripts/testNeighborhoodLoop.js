@@ -342,9 +342,34 @@ rngImpl = mulberry32(2026);
   const rentHits = inHoods('compared rent notes').sort();
   assert('C2g housing-pressure line ONLY where HousingPressure >= dialHoodPressureBar (Fruitvale 7, Temescal 3, West Oakland 4)',
     rentHits.join(',') === 'Fruitvale,Temescal,West Oakland', rentHits.join(',') || 'none');
-  const decayHits = inHoods('never reopened in');
-  assert('C2g2 decay-trajectory line ONLY in Fruitvale (the one decay hood)',
-    decayHits.length === 1 && decayHits[0] === 'Fruitvale', decayHits.join(',') || 'none');
+  // engine.214 8a Cut B: the trajectory reaches a citizen as a reaction, each side in its own hood, each line
+  // written with its own sign (growth fixture Rockridge, decay fixture Fruitvale).
+  const REACT = {
+    Rockridge: [['caught themselves bragging a little about the neighborhood lately', 'Up'], ['felt quietly lucky to call Rockridge home', 'Up'],
+      ['grumbled about the neighborhood over coffee', 'Down'], ['griped about Rockridge over dinner', 'Down']],
+    Fruitvale: [["complained about the neighborhood to anyone who'd listen", 'Down'], ['vented about Fruitvale on the walk home', 'Down'],
+      ['shrugged off the grumbling about Fruitvale and got on with the week', 'Up'], ['stuck up for the neighborhood to a friend across town', 'Up']]
+  };
+  const reactMiss = [];
+  for (const home of Object.keys(REACT)) {
+    for (const [txt] of REACT[home]) {
+      const hits = inHoods(txt);
+      if (hits.length !== 1 || hits[0] !== home) reactMiss.push(home + ': ' + txt + ' -> ' + (hits.join(',') || 'none'));
+    }
+  }
+  assert('C2g2 every reaction line lands, and only in its trajectory hood (growth Rockridge, decay Fruitvale)', reactMiss.length === 0, reactMiss.join(' | '));
+  const signMiss = [];
+  for (const home of Object.keys(REACT)) {
+    for (const line of lifeByHood[home].split('\n')) {
+      const m = /\[([^\]]+)\] (.*)$/.exec(line);
+      if (!m) continue;
+      const r = REACT[home].find(([txt]) => m[2] === txt);
+      if (r && !new RegExp('^Neighborhood-Outabout-' + r[1] + '-[SML]$').test(m[1])) signMiss.push(m[1] + ' ' + m[2]);
+    }
+  }
+  assert('C2g3 every reaction line is written with its own sign (Neighborhood-Outabout-Up|Down)', signMiss.length === 0, signMiss.slice(0, 3).join(' | '));
+  const retired = ['never reopened in', "where the block's energy went", 'another new spot opening up'].filter(t => inHoods(t).length);
+  assert('C2g4 the storefront, block-energy and new-spot lines are gone', retired.length === 0, retired.join(','));
   const retailHits = [...new Set(inHoods('new shop that just opened').concat(inHoods('busy weekend market')))];
   assert('C2h high-retail texture ONLY in Rockridge (retail 14 >= 13)',
     retailHits.length === 1 && retailHits[0] === 'Rockridge', retailHits.join(',') || 'none');
@@ -577,6 +602,75 @@ console.log('═══ C7 — engine.305: the hood pulse follows the written lin
   assert('C7j harness: the hardcoded hood-texture strings are drawn but write no graded line (admission drops them, noDial moves)',
     textureDropped > 0 && byRoute['source:neighborhood'].Down + byRoute['source:neighborhood'].Up === 0,
     'dropped ' + textureDropped + ' / written ' + JSON.stringify(byRoute['source:neighborhood']));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+console.log('═══ C8 — engine.214 8a Cut B: the trajectory as dial-gated reactions');
+{
+  const hoodReactionSet_ = loadEngine('../phase05-citizens/generateCitizensEvents.js', 'hoodReactionSet_');
+  const hoodReactionMult_ = loadEngine('../phase05-citizens/generateCitizensEvents.js', 'hoodReactionMult_');
+  const pw = (b, i) => Math.min(6, b * (1 + 4 * Math.max(0, Math.min(1, i)))); // generateCitizensEvents.js neighborhoodStatePool_
+  const massMiss = [];
+  for (const traj of ['growth', 'decay']) {
+    const withSign = traj === 'growth' ? 'up' : 'down';
+    for (const mi of [0, 0.2, 0.4, 0.6, 1]) {
+      const M = pw(1.1, mi) + pw(1.0, mi);
+      const set = hoodReactionSet_(traj, M, 'Glenview');
+      const sum = set.reduce((n, e) => n + e.weight, 0);
+      const withW = set.filter(e => e.tags.indexOf('dial:outabout:' + withSign) >= 0).reduce((n, e) => n + e.weight, 0);
+      const oneEach = set.every(e => e.tags.filter(t => t.indexOf('react:') === 0).length === 1 && e.tags.filter(t => t.indexOf('dial:') === 0).length === 1);
+      if (set.length !== 4 || Math.abs(sum - M) > 1e-9 || Math.abs(withW - 2 * (M - withW)) > 1e-9 || !oneEach ||
+          Math.max(...set.map(e => e.weight)) * 1.5 > 6) massMiss.push(traj + ' mi ' + mi + ': n ' + set.length + ' sum ' + sum + ' of ' + M + ' with ' + withW);
+    }
+  }
+  assert('C8a four entries per direction; total = today\'s branch mass, with:against 2:1, max entry x1.5 under 6 (mi 0 / .2 / .4 / .6 / 1)', massMiss.length === 0, massMiss.join(' | '));
+  assert('C8b steady, blank and prototype-named trajectories offer nothing',
+    hoodReactionSet_('steady', 10.5, 'X').length === 0 && hoodReactionSet_('', 10.5, 'X').length === 0 && hoodReactionSet_('constructor', 10.5, 'X').length === 0);
+
+  const HOOD_NAMES = HOODS.concat(NEUTRAL_HOODS.map(h => h[0]));
+  const neutralFx = (k) => JSON.stringify(P.pulseForEvent_(k, [], 'a plain day'));
+  const textMiss = [];
+  for (const h of HOOD_NAMES) {
+    for (const traj of ['growth', 'decay']) {
+      for (const e of hoodReactionSet_(traj, 10.5, h)) {
+        if (/coordinated|noticed|work/.test(e.text)) textMiss.push('archetype boost: ' + e.text);
+        if (e.text.indexOf('<hood>') >= 0) textMiss.push('unrendered: ' + e.text);
+        for (const k of ['Neighborhood', 'Neighborhood-Down']) {
+          if (JSON.stringify(P.pulseForEvent_(k, e.tags, e.text)) !== neutralFx(k)) textMiss.push('pulse content/tag rule: ' + e.text);
+        }
+      }
+    }
+  }
+  assert('C8c every reaction text, rendered for all 22 hoods, is clear of the archetype text boosts and the pulse content / tag rules', textMiss.length === 0, textMiss.slice(0, 3).join(' | '));
+
+  const dm = { sociability: 1.5, warmth: 0.5, composure: 1.5 };
+  let threw = false; try { hoodReactionMult_('react:shrug', dm); } catch (e) { threw = true; }
+  assert('C8d one dial per reaction: brag / defend x sociability, humble x warmth, complain x (2 - composure), both ways; unknown throws',
+    hoodReactionMult_('react:brag', dm) === 1.5 && hoodReactionMult_('react:defend', dm) === 1.5 && hoodReactionMult_('react:humble', dm) === 0.5 &&
+    hoodReactionMult_('react:complain', dm) === 0.5 && hoodReactionMult_('react:complain', { composure: 0.5 }) === 1.5 && threw);
+
+  // The real generator: Fruitvale (decay) citizens at the composure extremes, everything else neutral.
+  // Low composure should lean into complaining; a steady citizen should lean the other way.
+  const complainTxt = ["complained about the neighborhood to anyone who'd listen", 'vented about Fruitvale on the walk home'];
+  const otherTxt = ['shrugged off the grumbling about Fruitvale and got on with the week', 'stuck up for the neighborhood to a friend across town'];
+  const tilt = (composure) => {
+    rngImpl = mulberry32(214);
+    const rows = buildLedger(['Fruitvale'], 20).map(r => { r[HEADERS.indexOf('DialState')] = dialState({ composure }); return r; });
+    for (let cy = 1; cy <= 60; cy++) {
+      const ss = memSS({
+        'Neighborhood_Map': memSheet('Neighborhood_Map', seedLoaderMapData()),
+        'LifeHistory_Log': memSheet('LifeHistory_Log', [['Timestamp', 'Cycle', 'POPID', 'Name', 'Event', 'Tag']])
+      });
+      generateCitizensEvents_(makeCtx(94 + cy, rows, ss));
+    }
+    const all = rows.map(r => r[iLife] || '').join('\n');
+    const count = (txts) => txts.reduce((n, t) => n + all.split(t).length - 1, 0);
+    return { complain: count(complainTxt), other: count(otherTxt) };
+  };
+  const low = tilt(5), high = tilt(95);
+  console.log('   Fruitvale reactions, 20 citizens x 60 Cycles: low composure ' + JSON.stringify(low) + ' / high composure ' + JSON.stringify(high));
+  assert('C8e the composure dial tilts the decay reactions: low composure complains more, relative to humble + defend, than high',
+    low.complain > 0 && high.other > 0 && low.complain / Math.max(1, low.other) > high.complain / Math.max(1, high.other), JSON.stringify({ low, high }));
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

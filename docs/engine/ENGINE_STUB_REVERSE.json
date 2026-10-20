@@ -3239,8 +3239,7 @@
       ],
       "readers": [
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
-        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
-        "phase05-citizens/generateCitizensEvents.js::hoodReactionMult_"
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
     },
     "sportsWeekBars": {

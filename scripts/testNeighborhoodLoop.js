@@ -795,6 +795,17 @@ console.log('═══ C9 — engine.214 8a Cut C: the citizen\'s spot');
   const strays = a.filter((id, i) => withNew[i] !== id && withNew[i] !== 'BIZ-00099').length, movers = a.filter((id, i) => withNew[i] !== id).length;
   assert('C9c a spot removed moves only its own holders; a new spot takes a subset and moves no one elsewhere (moved ' + movers + ')',
     moveMiss === 0 && movedOk && strays === 0 && movers > 0 && movers < pops.length);
+  // The exact rank: an independent FNV-1a / murmur3 fmix32, checked against their published vectors first
+  // (FNV-1a 32: "" 811c9dc5, "a" e40c292c, "foobar" bf9cf968; fmix32(1) 514e28b7).
+  const spotRank_ = loadEngine(GEN, 'spotRank_');
+  const fnv1a = (s) => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return h >>> 0; };
+  const fmix32 = (h) => { h ^= h >>> 16; h = Math.imul(h, 0x85ebca6b) >>> 0; h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35) >>> 0; return (h ^ (h >>> 16)) >>> 0; };
+  const vectorsOk = fnv1a('') === 0x811c9dc5 && fnv1a('a') === 0xe40c292c && fnv1a('foobar') === 0xbf9cf968 && fmix32(1) === 0x514e28b7;
+  const rankMiss = pops.slice(0, 200).filter(p => ['BIZ-00041', 'BIZ-00187'].some(b => spotRank_(p, b) !== fmix32(fnv1a(p + '|' + b))));
+  const tieFor = new Function(SCOPE_SRC + '\n' + fs.readFileSync(path.resolve(__dirname, GEN), 'utf8') + '\nspotRank_ = function() { return 7; };\nreturn citizenSpotFor_;')();
+  assert('C9c spotRank_ = fmix32(FNV-1a("POPID|BIZ_ID")), unsigned, on 200 real POPIDs; a forced tie goes to the lowest BIZ_ID',
+    vectorsOk && rankMiss.length === 0 && spotRank_('POP-00001', 'BIZ-00041') >= 0 &&
+    tieFor([sp({ id: 'BIZ-9' }), sp({ id: 'BIZ-2' }), sp({ id: 'BIZ-5' })], 'POP-1').id === 'BIZ-2', 'vectors ' + vectorsOk + ', rank misses ' + rankMiss.length);
 
   // The real generator path: spot lines reach only their hood's citizens (a child area folds to its parent),
   // and the first-draw pulse follows each line's sign onto the parent hood.
@@ -819,7 +830,21 @@ console.log('═══ C9 — engine.214 8a Cut C: the citizen\'s spot');
     try { generateCitizensEvents_(ctx); } catch (e) { if (cy === 0) noSpotThrew = true; else throw e; }
     if (cy === 0) noSpotLines = rows.map(r => r[iLife] || '').join('\n');
   }
+  // Claremont citizens alone (child area of Rockridge): every spot pulse they make lands on Rockridge.
+  const clPulses = [];
+  global.recordPulse_ = (S, hood, kind, tags, text) => { if ((tags || []).some(t => t.indexOf('spot:') === 0)) clPulses.push(hood); return realPulse(S, hood, kind, tags, text); };
+  const clRows = buildLedger(['Claremont'], 8); clRows.forEach(r => { r[0] = r[0] + 'x'; });
+  for (let cy = 0; cy < 40; cy++) {
+    const ss = memSS({
+      'Neighborhood_Map': memSheet('Neighborhood_Map', seedLoaderMapData()),
+      'LifeHistory_Log': memSheet('LifeHistory_Log', [['Timestamp', 'Cycle', 'POPID', 'Name', 'Event', 'Tag']])
+    });
+    const ctx = makeCtx(200 + cy, clRows, ss); ctx.summary.hoodSpots = SPOTS;
+    generateCitizensEvents_(ctx);
+  }
   global.recordPulse_ = realPulse;
+  assert('C9e a Claremont-only run: its citizens\' spot pulses (' + clPulses.length + ') all land on Rockridge, none on Claremont',
+    clPulses.length > 0 && clPulses.every(h => h === 'Rockridge'), JSON.stringify(clPulses.slice(0, 4)));
   const lifeOf = (prefix) => rows.filter(r => r[0].indexOf(prefix) === 0).map(r => r[iLife] || '').join('\n');
   const count = (txt, s) => txt.split(s).length - 1;
   const fv = lifeOf('POP-Frui'), rr = rows.filter(r => r[iHood] === 'Rockridge').map(r => r[iLife] || '').join('\n'),

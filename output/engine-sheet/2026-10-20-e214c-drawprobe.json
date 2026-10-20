@@ -1,0 +1,80 @@
+{
+ "seeds": 100,
+ "citizens": 1000,
+ "ms": 75650,
+ "spotStates": {
+  "Jack London": [
+   "Blue Lantern Bar",
+   "Green & Gold Tavern",
+   "Harborline Grill",
+   "Dockhouse BBQ"
+  ],
+  "Downtown": [
+   "Temple Lounge",
+   "Pulse District",
+   "Miso Metro",
+   "Midnight Bistro",
+   "SpeedyBurger"
+  ],
+  "Temescal": [
+   "OakTown Social"
+  ],
+  "Lake Merritt": [
+   "Merritt Club"
+  ],
+  "Rockridge": [
+   "OakHouse"
+  ],
+  "Uptown": [
+   "Art Walk Cafe",
+   "Gallery Night Lounge",
+   "First Lamp Club"
+  ],
+  "Baylight District": [
+   "Oakland Casino Town"
+  ],
+  "Ivy Hill": [
+   "Ivy Hill Market",
+   "Ivy Hill Cafe",
+   "Hillcrest Kitchen"
+  ]
+ },
+ "citizensOfferedASpotLinePerCycle": 263.9,
+ "offeredWeightPerCycle": {
+  "lift": 228.3,
+  "forced_temporary_closure": 207.18,
+  "transformer_blowout": 72.03,
+  "major_blaze_contained": 49.47,
+  "recovery": 18.06,
+  "quiet": 31.55,
+  "minor_fire": 8.73,
+  "shed": 5.82
+ },
+ "drawSlotsWithASpotLineAvailablePerCycle": 643.8,
+ "meanSpotShareOfUsablePoolAtThoseSlots": 0.0268,
+ "meanUsablePoolMassAtThoseSlots": 90.4,
+ "spotEntriesFilteredOutAtDrawPerCycle": 15.9,
+ "drawnPerCycle": {
+  "forced_temporary_closure": 6.45,
+  "lift": 5.75,
+  "transformer_blowout": 2.28,
+  "major_blaze_contained": 1.28,
+  "recovery": 0.47,
+  "quiet": 0.92,
+  "minor_fire": 0.29,
+  "shed": 0.1
+ },
+ "drawnPerCycleByHood": {
+  "Lake Merritt:forced_temporary_closure": 6.45,
+  "Uptown:lift": 1.56,
+  "Temescal:transformer_blowout": 2.28,
+  "Downtown:major_blaze_contained": 1.28,
+  "Jack London:lift": 1.81,
+  "Downtown:lift": 2.38,
+  "Rockridge:recovery": 0.47,
+  "Ivy Hill:quiet": 0.7,
+  "Ivy Hill:minor_fire": 0.29,
+  "Ivy Hill:shed": 0.1,
+  "Baylight District:quiet": 0.22
+ }
+}

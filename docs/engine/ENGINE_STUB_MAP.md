@@ -1905,7 +1905,6 @@
 - **hoodReactionSet_(trajectory, mass, neighborhood)**
 
 - **hoodReactionMult_(reactTag, dm)**
-  Reads: S.hoodSpots
 
 - **spotRank_(popId, bizId)**
 

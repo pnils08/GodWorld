@@ -207,7 +207,7 @@ function hoodReactionMult_(reactTag, dm) {
 
 // engine.214 8a Cut C — the citizen's spot. Builder 2026-10-19: things happen to the citizen at their
 // own place ("my taco spot closed for repairs"), and a spot the engine fires lets the cron build on it.
-// One spot per citizen from the parent hood's open food / retail rows (S.hoodSpots), stable across
+// One spot per citizen from the parent hood's open food / retail rows (the business phase's spot map), stable across
 // Cycles: the highest spotRank_ wins (ties by BIZ_ID), so a closure or an opening moves only the
 // citizens whose spot it was or who take the new one. Lines come only from the spot's own facts this
 // Cycle; an all-steady spot offers nothing. The record's own words: a blowout darkens the block.

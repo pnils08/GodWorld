@@ -151,6 +151,7 @@ for (const [name, rows, personnel] of [
     ['BIZ-T1', 'Tech Co', 'Tech', 'Parent Hood', 5, 100000, 5, '']];
   const chaos = [
     { targetScope: 'business', targetId: 'BIZ-F1', cycleId: 200, diceOutcome: 'minor_fire' },
+    { targetScope: 'business', targetId: 'BIZ-F1', cycleId: 200, diceOutcome: 'minor_fire' },   // a second fire the same week: one line
     { targetScope: 'business', targetId: 'BIZ-F1', cycleId: 199, diceOutcome: 'major_blaze_contained' },
     { targetScope: 'port', targetId: 'BIZ-F1', cycleId: 200, diceOutcome: 'forced_temporary_closure' },
     { targetScope: 'business', targetId: 'BIZ-R1', cycleId: 200, diceOutcome: 'missed_pickup' },
@@ -174,7 +175,7 @@ for (const [name, rows, personnel] of [
     f1.name === 'Taco Spot' && f1.cls === 'food' && f1.streak === 6 && f1.prevStreak === 5 && f1.shed === 2 && f1.lift === true, f1);
   check('Cut C: a recovered retail spot reads streak 0 after 3, no shed, no lift (retail never lifts)',
     r1.cls === 'retail' && r1.streak === 0 && r1.prevStreak === 3 && r1.shed === 0 && r1.lift === false, r1);
-  check('Cut C: chaos = this Cycle\'s business-scope outcomes of the four (stale Cycle, port scope, missed_pickup out; a string Cycle stamp counts)',
+  check('Cut C: chaos = this Cycle\'s business-scope outcomes of the four, one per kind (a repeat fire, stale Cycle, port scope, missed_pickup out; a string Cycle stamp counts)',
     JSON.stringify(f1.chaos) === '["minor_fire"]' && JSON.stringify(r1.chaos) === '["transformer_blowout"]', { f1: f1.chaos, r1: r1.chaos });
   const empty = mk(); empty.ss = { getSheetByName: tab => tab === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => [rows[0]] }) } : null };
   w.applyBusinessDynamics_(empty);
@@ -184,6 +185,11 @@ for (const [name, rows, personnel] of [
   let threw = false; try { w.applyBusinessDynamics_(broken); } catch (e) { threw = true; }
   w.queueRangeIntent_ = qri;
   check('Cut C: a throw after the loop leaves S.hoodSpots unpublished (the citizen pool then offers nothing)', threw && broken.summary.hoodSpots === undefined, broken.summary.hoodSpots);
+  const realLog = w.Logger.log, lastStep = mk();
+  w.Logger.log = (m) => { if (String(m).indexOf('applyBusinessDynamics_ engine.96:') === 0) throw new Error('log failed'); };
+  let threwLast = false; try { w.applyBusinessDynamics_(lastStep); } catch (e) { threwLast = true; }
+  w.Logger.log = realLog;
+  check('Cut C: a throw at the phase\'s final log still leaves S.hoodSpots unpublished (publication is the last step)', threwLast && lastStep.summary.hoodSpots === undefined, lastStep.summary.hoodSpots);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

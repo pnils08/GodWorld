@@ -585,7 +585,8 @@ function applyBusinessDynamics_(ctx) {
   for (var sc = 0; sc < cce.length; sc++) {
     var sev = cce[sc];
     if (!sev || sev.targetScope !== 'business' || Number(sev.cycleId) !== spotCycle || !BIZ_SPOT_CHAOS_[sev.diceOutcome]) continue;
-    (spotChaos[sev.targetId] = spotChaos[sev.targetId] || []).push(sev.diceOutcome);
+    var spl = spotChaos[sev.targetId] || (spotChaos[sev.targetId] = []);
+    if (spl.indexOf(sev.diceOutcome) < 0) spl.push(sev.diceOutcome);   // one line per outcome kind: two fires in a week are still "a fire"
   }
   for (var r = 1; r < bl.length; r++) {
     var row = bl[r];
@@ -762,13 +763,13 @@ function applyBusinessDynamics_(ctx) {
     S.sportsWeekBars = { byHood: barsByHood, ids: barIds, pp: out.sportsBarPp };
   }
   S.businessDynamicsState = state; // finalizeCycleState carries it as businessDynamics
-  S.hoodSpots = spots;             // engine.214 Cut C — read by generateCitizensEvents_ (citizenSpotPool_)
   Logger.log('applyBusinessDynamics_ engine.96:' + out.rows + ' businesses, ' + out.drifted + ' drifted, ' +
     out.distressed + ' in distress, ' + out.disrupted + ' disrupted, ' + out.successWindows + ' under success pressure, ' +
     out.shed + ' shed, ' + out.closed + ' closing now, ' + out.closing + ' winding down, mayor ' + mayorApproval +
     ', initiative lift ' + (out.initLift || 0) + ' / drag ' + (out.initDrag || 0) +
     ', ship ' + (ship ? ship.outcome + ' ' + ship.phase + ' on ' + (out.shipMoved || 0) : 'none') +
     ', game-week bars ' + out.sportsBars + ' at ' + out.sportsBarPp + 'pp');
+  S.hoodSpots = spots;   // engine.214 Cut C — the phase's last step; generateCitizensEvents_ reads it
   return out;
 }
 

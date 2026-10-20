@@ -1,0 +1,32 @@
+{
+ "seeds": 200,
+ "citizens": 1000,
+ "ms": 150131,
+ "offeredWithShare": 0.6883,
+ "expectedWithShareAtDraw": 0.6834,
+ "drawnWithShare": 0.6868,
+ "growthSide": {
+  "withShare": 0.6905,
+  "with": 11813,
+  "against": 5296
+ },
+ "decaySide": {
+  "withShare": 0.6545,
+  "with": 1273,
+  "against": 672
+ },
+ "byReaction": {
+  "growth:brag": 6191,
+  "growth:humble": 5622,
+  "growth:complain": 5296,
+  "decay:complain": 1273,
+  "decay:defend": 345,
+  "decay:humble": 327
+ },
+ "slots": 366320,
+ "slotsWithReactionAvailable": 220370,
+ "reactionEntriesFilteredOutAtDraw": {
+  "with": 11515,
+  "against": 5197
+ }
+}

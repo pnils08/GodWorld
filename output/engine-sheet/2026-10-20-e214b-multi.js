@@ -1,7 +1,8 @@
 // engine.214 8a Cut B replicate readback (codex final gate 2026-10-20: one Cycle is too thin): after one leg's C<from>..C<to>
 // sitting on SANDBOX 1004, every trajectory line by hood, Cycle, text group and written sign, plus the hood's generator lines
 // (rows whose EventTag carries "|source:") as the denominator. Direction is read from the text itself: each reaction text
-// belongs to one trajectory side, and A's four old texts are known. Hood = the citizen's ledger hood on the bench now.
+// belongs to one trajectory side, and A's four old texts are known. Hood = the citizen's ledger hood on the bench now (a mover's
+// lines count under the hood they live in at read time; the totals and sides are by text).
 // usage: node 2026-10-20-e214b-multi.js <label> <from> <to>  → output/engine-sheet/2026-10-20-e214b-multi-<label>.json
 require('/root/GodWorld/lib/env');
 const BENCH = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA';
@@ -36,7 +37,8 @@ const LINES = [
     const c = Number(String(r[iC]).replace(/^C/, '')); if (!(c >= from && c <= to)) continue;
     const pop = r[iP], hood = hoodOf[pop] || '(none)', tag = String(r[iT] || ''), text = String(r[iX] || '');
     if (tag.indexOf('|source:') >= 0) H(hood).generatorLines++;
-    const hit = LINES.find(([n]) => text.indexOf(n.replace('<hood>', hood)) === 0);
+    // by text alone: a citizen can draw a hood-named line, then move (codex final gate 2: four such lines were missed)
+    const hit = LINES.find(([n]) => n.indexOf('<hood>') < 0 ? text.indexOf(n) === 0 : new RegExp('^' + n.split('<hood>').map(x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('.+?')).test(text));
     if (!hit) continue;
     const o = H(hood);
     o.lines++; o[hit[3]]++; o.byGroup[hit[1]] = (o.byGroup[hit[1]] || 0) + 1; o.side[hit[2]] = (o.side[hit[2]] || 0) + 1;

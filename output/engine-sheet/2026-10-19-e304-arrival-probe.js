@@ -13,7 +13,9 @@ const BENCH = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA', BENCH_TITLE = 'San
   const v = (await api.spreadsheets.values.get({ spreadsheetId: BENCH, range: 'Generic_Citizens' })).data.values;
   const h = v[0], c = n => h.indexOf(n);
   const fam = v.map((r, i) => ({ r, i })).slice(1).filter(x => x.r[c('Status')] === 'Family');
-  const pick = [fam.find(x => x.r[c('FamilyRole')] === 'spouse'), fam.find(x => x.r[c('FamilyRole')] === 'child')]; // the highest rows: the door is top-down under the cap
+  const ofArg = process.argv.indexOf('--of') > 0 ? process.argv[process.argv.indexOf('--of') + 1] : ''; // engine.304 D11 probe: a dead citizen's family
+  const pick = ofArg ? fam.filter(x => x.r[c('FamilyOf')] === ofArg).slice(0, 2)
+    : [fam.find(x => x.r[c('FamilyRole')] === 'spouse'), fam.find(x => x.r[c('FamilyRole')] === 'child')]; // the highest rows: the door is top-down under the cap
   const above = v.slice(1).filter((r, i) => r[c('Status')] === 'Active' && Number(r[c('EmergenceCount')]) >= 2).length;
   pick.forEach(x => console.log('row', x.i + 1, x.r[c('First')], x.r[c('Last')], x.r[c('FamilyRole')], 'of', x.r[c('FamilyOf')], 'count', x.r[c('EmergenceCount')]));
   console.log('Active rows at count >= 2 (can take a cap slot first):', above);

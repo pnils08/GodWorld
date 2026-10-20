@@ -1,0 +1,145 @@
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 84 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+C112 pool A 89F/187M Y 0F/0M | made A 8F/0M Y 0F/0M | wave took A 4F/2M Y 0F/0M | cfg {} | EE~0
+C112 pool A 89F/187M Y 0F/0M | standing S0/C0/P0 | made 0 {} | released 0 | arrivals to date 0 | bad 0
+C113 fire rc=2 "verdict": "HALT" "wallS": 5
+HALT at C113
+{
+ "label": "e304c4",
+ "expect": 112,
+ "at": "2026-10-19T23:28:43.236Z",
+ "pre": {
+  "bench": 112,
+  "live": 112,
+  "ee": 4,
+  "rileyLast": 112,
+  "checkpoint": null
+ },
+ "wallS": 5,
+ "http": 200,
+ "resp": {
+  "ok": false,
+  "error": "engine.275: Cycle 133 was already admitted (done) and World_Config.cycleCount is still 112 — refusing to run it again. If Cycle 133 did run, set cycleCount to 133; if it did not, clear script property FIRE_ADMISSION_JSON. Then fire."
+ },
+ "post": {
+  "bench": 112,
+  "live": 112,
+  "ee": 5,
+  "rileyLast": 112,
+  "checkpoint": null
+ },
+ "newEE": [
+  "[113,\"Phase1-FireGuard\",\"engine.275: Cycle 133 was already admitted (done) and World_Config.cycleCount is still 112 — refusing to run it again. If Cycle 133 did run, set cycleCount to 1\"]"
+ ],
+ "verdict": "HALT",
+ "why": "bench advanced 0 (want exactly 1)"
+}
+C113 fire rc=0 "verdict": "PASS" "wallS": 301
+  minor on ledger: {"pop":"POP-01216","name":"Theo Bautista","age":0,"tier":"4","ms":"youth","role":"student","emp":"","hh":"HH-0084-359","hhType":"family","hhHead":"POP-00515"}
+C113 pool A 86F/181M Y 2F/3M | standing S6/C3/P1 | made 10 {"T4":5,"T1":4,"T2":1} | released 0 | arrivals to date 0 | bad 0
+  link: Damien Hint (58) spouse of POP-00673 T4
+  link: Rick Santana (60) spouse of POP-00034 T1
+  link: Mateo Lewis (57) spouse of POP-00459 T4
+  link: Linh Navarro (53) parent of POP-00975 T4
+  link: Darius Miller (22) child of POP-00127 T1
+  link: Vikram Washington (60) spouse of POP-00939 T4
+  link: Yuki Neilon (50) spouse of POP-00170 T1
+  link: Colette Paulson (58) spouse of POP-00527 T1
+  link: Freya Foil (23) child of POP-00452 T4
+  link: Noelia Rayes (10) child of POP-00773 T2
+C114 fire rc=0 "verdict": "PASS" "wallS": 220
+  minor on ledger: {"pop":"POP-01225","name":"Mateo Salcedo","age":0,"tier":"4","ms":"youth","role":"student","emp":"","hh":"HH-0110-F043","hhType":"family","hhHead":"POP-01179"}
+C114 pool A 87F/175M Y 5F/3M | standing S9/C8/P1 | made 8 {"T2":3,"T4":4,"T1":1} | released 0 | arrivals to date 0 | bad 0
+  link: Tyrone Bishop (33) child of POP-00768 T2
+  link: Andre Adams (41) spouse of POP-00942 T4
+  link: Kofi Marston (26) child of POP-00753 T2
+  link: Lucia Perez (55) spouse of POP-00203 T4
+  link: Eleanor Ibarra (57) spouse of POP-00629 T4
+  link: Guadalupe Krishnamurthy (5) child of POP-00765 T2
+  link: Wen Richards (12) child of POP-00031 T1
+  link: Adrian Adeyemi (2) child of POP-00803 T4
+C115 fire rc=0 "verdict": "PASS" "wallS": 190
+  minor on ledger: {"pop":"POP-01232","name":"Amara Pham","age":0,"tier":"4","ms":"youth","role":"student","emp":"","hh":"HH-0102-F073","hhType":"family","hhHead":"POP-00914"}
+C115 pool A 86F/169M Y 6F/7M | standing S14/C11/P1 | made 8 {"T4":2,"T2":2,"T3":3,"T1":1} | released 0 | arrivals to date 0 | bad 0
+  link: Devon Ruiz (27) spouse of POP-01169 T4
+  link: Terrence Flores (35) spouse of POP-00859 T4
+  link: Rick Seymour (24) child of POP-00528 T2
+  link: Yuki Mitchell (49) spouse of POP-00708 T3
+  link: Tariq Karim (33) child of POP-00761 T2
+  link: Ines Burkes (44) spouse of POP-00541 T3
+  link: Mina Train (55) spouse of POP-00520 T3
+  link: Leticia Horn (9) child of POP-00022 T1
+C116 fire rc=0 "verdict": "PASS" "wallS": 219
+  minor on ledger: {"pop":"POP-01239","name":"Amara McAllister","age":0,"tier":"4","ms":"youth","role":"student","emp":"","hh":"HH-0102-F064","hhType":"family","hhHead":"POP-00898"}
+  minor on ledger: {"pop":"POP-01245","name":"Mai Rahimi","age":12,"tier":"4","ms":"youth","role":"student","emp":"","hh":"HH-0116-F009","hhType":"family","hhHead":"POP-01245"}
+C116 pool A 85F/166M Y 8F/9M | standing S17/C14/P1 | made 6 {"T4":4,"T2":2} | released 0 | arrivals to date 0 | bad 0
+  link: Evan Erazmo (24) child of POP-00323 T4
+  link: Owen Monroe (23) child of POP-00769 T2
+  link: Esperanza Nakagawa (34) spouse of POP-01189 T4
+  link: Vanessa Carter Jr. (32) spouse of POP-01028 T4
+  link: Liliana Reyes (44) spouse of POP-00146 T4
+  link: Shreya Solis (13) child of POP-00953 T2
+C117 fire rc=0 "verdict": "PASS" "wallS": 270
+C117 pool A 87F/159M Y 10F/9M | standing S18/C24/P3 | made 13 {"T4":4,"T3":5,"T2":2,"T1":2} | released 0 | arrivals to date 0 | bad 0
+  link: Howard Leu (57) parent of POP-00994 T4
+  link: Ronald Lingio (32) child of POP-00206 T3
+  link: Ronald Okafor (51) spouse of POP-00159 T2
+  link: Howard Arenson (37) child of POP-00367 T3
+  link: Guadalupe Varek (20) child of POP-00789 T1
+  link: Esperanza Reed (44) parent of POP-01123 T4
+  link: Cedric Chen (33) child of POP-00505 T2
+  link: Hector Farrot (19) child of POP-00453 T3
+  link: Alicia Polito (30) child of POP-00004 T3
+  link: Elena Hall (8) child of POP-00439 T3
+  link: Henrik Kollars (12) child of POP-00118 T4
+  link: Iris Neilon (14) child of POP-00170 T1
+  link: Antoine Saryan (8) child of POP-00052 T4
+C118 fire rc=0 "verdict": "PASS" "wallS": 220
+  minor on ledger: {"pop":"POP-01248","name":"Ravi Jilner","age":0,"tier":"4","ms":"youth","role":"student","emp":"","hh":"HH-0084-474","hhType":"family","hhHead":"POP-00691"}
+C118 pool A 91F/159M Y 12F/12M | standing S18/C26/P3 | made 2 {"T4":2} | released 0 | arrivals to date 0 | bad 0
+  link: Adriana Adams (30) child of POP-00258 T4
+  link: Moana Alvarez (0) child of POP-00941 T4
+C119 fire rc=0 "verdict": "PASS" "wallS": 217
+C119 pool A 93F/158M Y 14F/13M | standing S19/C33/P3 | made 8 {"T4":4,"T3":3,"T1":1} | released 0 | arrivals to date 0 | bad 0
+  link: Devon Cross (40) spouse of POP-01080 T4
+  link: Marcus Hess (38) child of POP-00212 T3
+  link: Elisa Berry (37) child of POP-00705 T4
+  link: Deepa Nwachukwu (26) child of POP-01141 T3
+  link: Alessandro Horn (9) child of POP-00022 T1
+  link: Ramon Raghunathan (12) child of POP-01214 T4
+  link: Hana Polito (12) child of POP-00004 T3
+  link: Brianna Del Rio (19) child of POP-00161 T4
+C120 fire rc=0 "verdict": "PASS" "wallS": 192
+  minor on ledger: {"pop":"POP-01250","name":"Nia Cerrano","age":0,"tier":"4","ms":"youth","role":"student","emp":"","hh":"HH-0084-367","hhType":"family","hhHead":"POP-00523"}
+C120 pool A 95F/155M Y 15F/16M | standing S23/C38/P3 | made 9 {"T4":7,"T3":2} | released 0 | arrivals to date 0 | bad 0
+  link: Jamie Hayes (36) child of POP-00787 T4
+  link: Darius Tort (41) spouse of POP-00485 T3
+  link: Hector Lai (48) spouse of POP-00936 T4
+  link: Luis Ramirez (23) child of POP-00885 T4
+  link: Kaila Clark (50) spouse of POP-00461 T4
+  link: Audrey Fila (51) spouse of POP-00493 T4
+  link: Rania Ellis (12) child of POP-00776 T4
+  link: Sage Raines (19) child of POP-00017 T3
+  link: Beatriz Travis (14) child of POP-00255 T4
+C121 fire rc=0 "verdict": "PASS" "wallS": 262
+C121 pool A 94F/155M Y 18F/17M | standing S26/C41/P4 | made 7 {"T1":3,"T4":2,"T2":1,"T3":1} | released 0 | arrivals to date 0 | bad 0
+  link: Lila Horn (30) spouse of POP-00022 T1
+  link: Miriam Pilgrim (39) parent of POP-01016 T4
+  link: Noor Walker (50) spouse of POP-00198 T1
+  link: Emeka Montez (15) child of POP-00136 T2
+  link: Amira King (18) child of POP-00525 T3
+  link: Janelle Aitken (31) spouse of POP-00003 T1
+  link: Monique Treary (13) child of POP-00781 T4
+C122 fire rc=0 "verdict": "PASS" "wallS": 168
+  minor on ledger: {"pop":"POP-01253","name":"Theo Cerrano","age":0,"tier":"4","ms":"youth","role":"student","emp":"","hh":"HH-0084-367","hhType":"family","hhHead":"POP-00523"}
+C122 pool A 101F/148M Y 20F/20M | standing S29/C43/P4 | made 5 {"T4":3,"T2":2} | released 0 | arrivals to date 0 | bad 0
+  link: Dante Al-Hassan (42) spouse of POP-00626 T4
+  link: Brian Solis (43) spouse of POP-00953 T2
+  link: Hector Ying (33) child of POP-00210 T2
+  link: Marco Kapoor (42) spouse of POP-00696 T4
+  link: Rafael Oh (29) child of POP-00845 T4
+SITTING DONE C113-C122

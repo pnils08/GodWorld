@@ -142,6 +142,7 @@
 - **Ruling (Mike, 2026-09-07):** published articles are canon; no paying to canonize copy that isn't used. The Saturday sweep (step 5) now upserts only `edition_curation_c{N}.selected` stems to Supermemory; missing curation fails loud. Steps 6 (Citizen_Media_Usage credits) and signals still read the full staged set — not ruled on; flag if a citizen quoted only in an unpublished article should earn no credit.
 - **Verify:** `node scripts/cron-saturday-run.js --step sweep --cycle 105` (dry) → scope = curated count, not staged count. Live proof: Saturday 09-13 16:00 run.
 - **Status:** [x] cut S433; live proof Saturday
+- **CORRECTED 2026-10-20 (Mike, verbatim):** "no thats false, I dont pay for them to write all week to only move 9 to canon, saturday is based on grades and how media gets usage it has nothing to do with gating canon. As I understood this the crons passed articles all go to supermemory already? But if you changed the system to throw away 90% of what Im paying for you completly are missing the point". The S433 cut above read "published" as the Saturday print pick. It is not: canon is every article that passed the Rhea gate and was not failed by the EIC audit (`canon-violation`, 25 of the 59 unprinted drafts since C107). The print pick stays for grades, the highlight and MEDIA usage only. The sweep scope goes back to the full gate-passed staged set (`loadStagedSetExcludingCanonViolations`), and the drafts the cut skipped are backfilled. Handed to engine-sheet 2026-10-20.
 
 ### Task 8: Docs — same commit as Task 1
 

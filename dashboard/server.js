@@ -1669,7 +1669,8 @@ function articleIndexResult(r) {
     desk: r.desk || null,
     namesIndex: r.citizens.map(c => c.name).join(', ') || null,
     type: r.type,
-    published: r.published,
+    printed: r.published,
+    canon: r.canon !== false,
     stage: r.stage || null,
     era: r.era || null,
   };
@@ -1849,10 +1850,10 @@ app.get('/api/articles/index', (req, res) => {
     return res.status(404).json({ error: 'Article index not built. Run: node scripts/buildArticleIndex.js --write' });
   }
 
-  // Optional filters. Unpublished staged drafts are listed only with published=all.
-  const { cycle, desk, author, classification, q, published, limit: limitStr } = req.query;
+  // Optional filters. Canon = printed, or a draft that passed the Rhea gate; an EIC canon-violation is listed only with canon=all.
+  const { cycle, desk, author, classification, q, canon, limit: limitStr } = req.query;
   let entries = rows;
-  if (published !== 'all') entries = entries.filter(r => r.published);
+  if (canon !== 'all') entries = entries.filter(r => r.canon !== false);
   if (cycle) entries = entries.filter(r => r.cycle === parseInt(cycle));
   if (desk) entries = entries.filter(r => r.desk === desk);
   if (author) entries = entries.filter(r => `${r.byline || ''} ${r.bylineName || ''}`.toLowerCase().includes(author.toLowerCase()));
@@ -1865,7 +1866,7 @@ app.get('/api/articles/index', (req, res) => {
   const limit = parseInt(limitStr) || 200;
   res.json({
     generated: new Date(_articleIndexMtime).toISOString(),
-    stats: { rows: rows.length, published: rows.filter(r => r.published).length },
+    stats: { rows: rows.length, canon: rows.filter(r => r.canon !== false).length, printed: rows.filter(r => r.published).length },
     total: entries.length,
     showing: Math.min(limit, entries.length),
     entries: entries.slice(0, limit).map(articleIndexResult),
@@ -1904,12 +1905,12 @@ app.get('/api/search/articles', (req, res) => {
   }
 
   // An author or citizen lookup reads the master index: a section heading or table row is never a piece there.
-  // Unpublished staged drafts are listed only with published=all.
+  // Canon = printed, or a draft that passed the Rhea gate. An EIC canon-violation is listed only with canon=all.
   const articleRows = (author || citizen) && !section ? getArticleIndex() : null;
   if (articleRows) {
     const lc = v => String(v || '').toLowerCase();
     const hits = articleRows
-      .filter(r => req.query.published === 'all' || r.published)
+      .filter(r => req.query.canon === 'all' || r.canon !== false)
       .filter(r => !cycleFilter || r.cycle === parseInt(cycleFilter))
       .filter(r => !author || lc(`${r.byline || ''} ${r.bylineName || ''}`).includes(lc(author)))
       .filter(r => !citizen || r.citizens.some(c => lc(c.name).includes(lc(citizen))))

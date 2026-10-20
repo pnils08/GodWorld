@@ -648,8 +648,8 @@ function formatJaxSliceMarkdown(slice) {
     L.push('## EARLIER COVERAGE OF THESE CITIZENS (from the Tribune index; context, not a requirement)');
     for (const p of slice.priorCoverage) {
       L.push('- ' + p.name + (p.popid ? ' (' + p.popid + ')' : ''));
-      for (const m of p.mine) L.push('  - yours, C' + (m.cycle == null ? '?' : m.cycle) + ': ' + m.title + '  [' + m.file + ']');
-      for (const m of p.later) L.push('  - printed since, naming you both, C' + (m.cycle == null ? '?' : m.cycle) + (m.byline ? ' (' + m.byline + ')' : '') + ': ' + m.title + '  [' + m.file + ']');
+      for (const m of p.mine) L.push('  - yours, C' + (m.cycle == null ? '?' : m.cycle) + (m.printed === false ? ' (passed the gate, not printed)' : '') + ': ' + m.title + '  [' + m.file + ']');
+      for (const m of p.later) L.push('  - since, naming you both, C' + (m.cycle == null ? '?' : m.cycle) + (m.byline ? ' (' + m.byline + ')' : '') + (m.printed === false ? ' (passed the gate, not printed)' : '') + ': ' + m.title + '  [' + m.file + ']');
     }
     L.push('');
   }

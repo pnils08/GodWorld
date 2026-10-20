@@ -4,8 +4,8 @@
  *
  * Rewritten in place (S583). The old builder read output/drive-files/, which is gone; this one reads what is on
  * disk: editions/ (split per article), archive/articles, archive/non-articles/profiles, archive/editions (bundles),
- * and the staged sidecars in output/cron-compare/staged (flagged unpublished unless their stem is in the cycle's
- * published set). archive/drive-manifest.json (syncDriveArticles.js) supplies the Drive id of each copy.
+ * and the staged sidecars in output/cron-compare/staged (canon once they passed the Rhea gate; `published` marks what a
+ * Saturday edition printed, and an EIC canon-violation verdict keeps a draft out of canon). archive/drive-manifest.json (syncDriveArticles.js) supplies the Drive id of each copy.
  *
  * A row: title, byline (+ POPID resolved BY NAME against output/citizen-names.tsv, never an agent-supplied id),
  * desk, cycle or null (+ era note; a cycle is never invented), type, published, citizens named (name scan,
@@ -341,6 +341,14 @@ function build() {
     }
     return null;
   })());
+  // canon: a printed piece, or a staged draft that passed the Rhea gate (staging only happens after the pass). The EIC audit's
+  // canon-violation verdict (a gate-passed piece that is factually wrong) is the one thing that keeps a draft out.
+  const violations = {};
+  const violationSet = c => violations[c] || (violations[c] = (() => {
+    const p = path.join(ROOT, 'output', 'eic_scorecard_c' + c + '.json');
+    if (!fs.existsSync(p)) return new Set();
+    return new Set((JSON.parse(fs.readFileSync(p, 'utf8')).articles || []).filter(a => a.verdict === 'canon-violation').map(a => a.stem));
+  })());
   const staged = [];
   if (fs.existsSync(STAGED)) for (const f of fs.readdirSync(STAGED).filter(n => n.endsWith('.staged.json')).sort()) {
     const s = JSON.parse(fs.readFileSync(path.join(STAGED, f), 'utf8'));
@@ -351,7 +359,7 @@ function build() {
     let names = [];
     try { names = (JSON.parse(s.intake).names || []).map(x => x.name).filter(Boolean); } catch (e) { /* intake absent or not JSON */ }
     const ps = pubSet(s.cycle);
-    staged.push({ stem, mdRel, s, md, names, isPublished: !!(ps && ps.has(stem)), known: !!ps });
+    staged.push({ stem, mdRel, s, md, names, isPublished: !!(ps && ps.has(stem)), known: !!ps, violation: violationSet(s.cycle).has(stem) });
   }
 
   // fold copies by fingerprint (editions first, then archive, profile, archive-edition)
@@ -376,7 +384,7 @@ function build() {
     const body = st.md.replace(/^\s*#.*\n/, '').trim();
     out.push({
       title, lede: title ? undefined : body.replace(/\s+/g, ' ').slice(0, 110), byline: st.s.byline || null, bylineSource: 'sidecar', bylineDesk: null, desk: titleCase(st.s.desk || ''), cycle, body, names: st.names,
-      type: 'article', published: st.isPublished, source: 'staged', stage: st.isPublished ? 'selected-not-matched-to-edition' : (st.known ? 'staged-not-selected' : 'staged-cycle-open'),
+      type: 'article', published: st.isPublished, canon: !st.violation, source: 'staged', stage: st.violation ? 'canon-violation' : st.isPublished ? 'selected-not-matched-to-edition' : (st.known ? 'passed-gate-not-printed' : 'passed-gate-cycle-open'),
       copies: [{ path: st.mdRel, kind: 'staged', driveIds: [] }], fp: sha(body).slice(0, 16), words: wordsOf(body),
     });
   }
@@ -389,6 +397,7 @@ function build() {
     const seen = new Map();
     for (const c of scanCitizens(r.body + '\n' + (r.names || []).join('\n'), byName)) seen.set(c.name, c);
     r.citizens = [...seen.values()];
+    if (r.canon === undefined) r.canon = true;
     r.id = r.fp;
     delete r.body; delete r.names; delete r.bylineDesk; delete r.fp;
     if (r.lede === undefined) delete r.lede;
@@ -420,8 +429,8 @@ function priorCoverage(journalist, citizens, { beforeCycle, rows } = {}) {
   const j = String(journalist || '').toLowerCase();
   const isJ = r => `${r.byline || ''} ${r.bylineName || ''}`.toLowerCase().includes(j);
   const names = r => r.citizens.map(c => c.name);
-  const brief = r => ({ cycle: r.cycle, title: r.title || r.lede, byline: r.bylineName || r.byline || null, file: r.copies[0].path });
-  const pub = all.filter(r => r.published && (beforeCycle == null || r.cycle == null || r.cycle < beforeCycle));
+  const brief = r => ({ cycle: r.cycle, title: r.title || r.lede, byline: r.bylineName || r.byline || null, file: r.copies[0].path, printed: r.published !== false });
+  const pub = all.filter(r => r.canon !== false && (beforeCycle == null || r.cycle == null || r.cycle < beforeCycle));
   const out = [];
   for (const c of citizens || []) {
     const mine = pub.filter(r => isJ(r) && names(r).includes(c.name));
@@ -438,7 +447,7 @@ if (require.main === module) {
   console.log('rows: ' + rows.length + ' | non-article working docs skipped: ' + skipped.length + ' | staged sidecars read: ' + staged + ', drafts attached to a printed row: ' + attached);
   const bySrc = {}; for (const r of rows) bySrc[r.source] = (bySrc[r.source] || 0) + 1;
   console.log('by source: ' + JSON.stringify(bySrc));
-  console.log('byline ' + count(r => r.byline) + ' | popid ' + count(r => r.bylinePopid) + ' | cycle ' + count(r => r.cycle != null) + ' | citizens>0 ' + count(r => r.citizens.length) + ' | published ' + count(r => r.published) + ' | multi-copy ' + count(r => r.copies.length > 1));
+  console.log('byline ' + count(r => r.byline) + ' | popid ' + count(r => r.bylinePopid) + ' | cycle ' + count(r => r.cycle != null) + ' | citizens>0 ' + count(r => r.citizens.length) + ' | printed ' + count(r => r.published) + ' | canon ' + count(r => r.canon) + ' | multi-copy ' + count(r => r.copies.length > 1));
   const jax = searchIndex(rows, { author: 'Jax Caldera' }), varek = searchIndex(rows, { citizen: 'Elias Varek' }), hs = searchIndex(rows, { q: 'Heat Shield' });
   console.log('untitled ' + count(r => !r.title) + ' | Jax Caldera: ' + jax.length + ' (' + jax.map(r => 'C' + r.cycle).join(' ') + ') | Elias Varek: ' + varek.length + ' | Heat Shield title: ' + hs.length + (hs[0] ? ' C' + hs[0].cycle + ' ' + hs[0].copies[0].path : ''));
   if (process.argv.includes('--write')) {

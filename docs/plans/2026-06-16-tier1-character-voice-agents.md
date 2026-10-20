@@ -212,6 +212,8 @@ Once the Deacon slice proves all three surfaces and the method is captured: repl
 - Checked: dry-run classification of today's real exchange (Paulson: Sports / Content; page line renders), test `scripts/personaProviderBrief.test.js` 18/18. Acceptance: Mike's next Discord talk -> the log line `voice buffer flushed ... paulson=... page=written` ~30 min later; DialState for POP-00527 / POP-00005 and the bonds move at the next full Cycle's Phase-9 drain (C113).
 - *The card Mags holds on the speaker* is the Supermemory `mags` container profile fetched without a user id: container-wide, so every speaker gets the same card; its content is mostly facts about Mags and a few citizens, nothing specific to Mike. Not fixed; recorded.
 
+- *Search fan-out (late 2026-10-19, after the Heat Shield miss):* the builder's directive was "the search everything tool as their first call"; Phase 1 had wired the disk-only `search_world`. The Heat Shield (Jax Caldera on Varek, builder: "everywhere") lives in Supermemory as an Edition 100 record (headline: the Cy Newell trade opinion) and two Drive-canon copies named `jax_varek_column.md` — not in the repo (local Edition 100 lacks it; the only disk traces are NotebookLM daily query outputs C104/C105) and not in the dashboard index under "Heat Shield". The persona search now fans out like the MCP's search_everything: disk + Supermemory (`world-data` + `bay-tribune`) + the article index (`searchEverything` in the bot). NotebookLM stays out of the per-message path (30–48 s).
+
 **Still open:** NotebookLM as a per-Cycle brief query; a per-speaker card (needs a user id on the profile call); the deity/guidance voice (later, not Paulson).
 
 ## Status log

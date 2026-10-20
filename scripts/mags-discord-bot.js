@@ -461,7 +461,7 @@ function searchDashboard(query) {
 // ---------------------------------------------------------------------------
 var SEARCH_TOOL = {
   name: 'search_world',
-  description: 'Search Oakland from the city records on disk. VERY IMPORTANT: This is a strict AND keyword search. Every word you type MUST be in the document or it will be excluded. KEEP QUERIES EXTREMELY SHORT (2-3 words max). Do NOT use conversational words or filler (e.g. do not use "details", "contract", "news"). If looking for a trade, just search "Martin Richards trade". Returns ranked excerpts from the live city data.',
+  description: 'Search Oakland: the city records on disk, the published canon and world cards (Supermemory), and the published-article index, all at once. VERY IMPORTANT: The disk part is a strict AND keyword search. Every word you type MUST be in the document or it will be excluded. KEEP QUERIES EXTREMELY SHORT (2-3 words max). Do NOT use conversational words or filler (e.g. do not use "details", "contract", "news"). If looking for a trade, just search "Martin Richards trade". Returns ranked excerpts from the live city data.',
   input_schema: {
     type: 'object',
     properties: {
@@ -470,6 +470,24 @@ var SEARCH_TOOL = {
     required: ['query']
   }
 };
+
+// research.30 (builder 2026-10-19: "the search everything tool as their first call"): the persona's
+// search is the fan-out the MCP's search_everything does — disk, the published canon + world cards
+// in Supermemory, and the article index — not disk alone. A column that lives only in Supermemory
+// (the Heat Shield: Edition 100 record + the Drive canon copies, nothing in the repo) is found.
+async function searchEverything(query) {
+  var q = String(query == null ? '' : query).trim();
+  if (!q) return '(empty search)';
+  var parts = await Promise.all([
+    Promise.resolve().then(function () { return mags.searchDisk(q, 8); }).catch(function (e) { return '(disk search failed: ' + e.message + ')'; }),
+    searchSupermemory(q).catch(function () { return ''; }),
+    searchDashboard(q).catch(function () { return ''; })
+  ]);
+  var out = ['## Records on disk\n' + parts[0]];
+  if (parts[1]) out.push('## Published canon and world cards (Supermemory)\n' + parts[1]);
+  if (parts[2]) out.push('## Published article index\n' + parts[2]);
+  return out.join('\n\n');
+}
 
 // ---------------------------------------------------------------------------
 // Call Claude API — generalized over a persona provider + its channel session.
@@ -514,12 +532,12 @@ async function callClaude(provider, session, userMessage, userName, userId) {
 
     if (!isFinal && response.stop_reason === 'tool_use' && toolUses.length) {
       messages.push({ role: 'assistant', content: response.content });
-      var toolResults = toolUses.map(function (tu) {
+      var toolResults = await Promise.all(toolUses.map(async function (tu) {
         var result;
-        try { result = mags.searchDisk(tu.input && tu.input.query, 8); }
+        try { result = await searchEverything(tu.input && tu.input.query); }
         catch (e) { result = '(search failed: ' + e.message + ')'; }
         return { type: 'tool_result', tool_use_id: tu.id, content: result };
-      });
+      }));
       messages.push({ role: 'user', content: toolResults });
       log.info('[' + provider.label + '] search_world: ' + toolUses.map(function (t) { return t.input && t.input.query; }).join(' | '));
       continue;  // let it see results and answer (or search again)

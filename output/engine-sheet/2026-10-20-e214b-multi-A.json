@@ -1,0 +1,411 @@
+{
+ "label": "A",
+ "from": 113,
+ "to": 117,
+ "total": {
+  "lines": 238,
+  "with": 238,
+  "against": 0
+ },
+ "byCycle": {
+  "113": 37,
+  "114": 41,
+  "115": 48,
+  "116": 54,
+  "117": 58
+ },
+ "hoods": {
+  "Downtown": {
+   "generatorLines": 769,
+   "lines": 36,
+   "with": 36,
+   "against": 0,
+   "byGroup": {
+    "brag": 21,
+    "A:new-spot": 15
+   },
+   "graded": {
+    "Up": 36,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {
+    "growth": 36
+   }
+  },
+  "KONO": {
+   "generatorLines": 234,
+   "lines": 3,
+   "with": 3,
+   "against": 0,
+   "byGroup": {
+    "brag": 2,
+    "A:new-spot": 1
+   },
+   "graded": {
+    "Up": 3,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {
+    "growth": 3
+   }
+  },
+  "West Oakland": {
+   "generatorLines": 1386,
+   "lines": 42,
+   "with": 42,
+   "against": 0,
+   "byGroup": {
+    "A:new-spot": 25,
+    "brag": 17
+   },
+   "graded": {
+    "Up": 42,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {
+    "growth": 42
+   }
+  },
+  "Fruitvale": {
+   "generatorLines": 1009,
+   "lines": 38,
+   "with": 38,
+   "against": 0,
+   "byGroup": {
+    "brag": 22,
+    "A:new-spot": 16
+   },
+   "graded": {
+    "Up": 38,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {
+    "growth": 38
+   }
+  },
+  "Jack London": {
+   "generatorLines": 686,
+   "lines": 26,
+   "with": 26,
+   "against": 0,
+   "byGroup": {
+    "A:new-spot": 18,
+    "brag": 8
+   },
+   "graded": {
+    "Up": 26,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {
+    "growth": 26
+   }
+  },
+  "Uptown": {
+   "generatorLines": 860,
+   "lines": 36,
+   "with": 36,
+   "against": 0,
+   "byGroup": {
+    "A:new-spot": 20,
+    "brag": 16
+   },
+   "graded": {
+    "Up": 36,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {
+    "growth": 36
+   }
+  },
+  "Piedmont Ave": {
+   "generatorLines": 699,
+   "lines": 3,
+   "with": 3,
+   "against": 0,
+   "byGroup": {
+    "brag": 3
+   },
+   "graded": {
+    "Up": 3,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {
+    "growth": 3
+   }
+  },
+  "Grand Lake": {
+   "generatorLines": 116,
+   "lines": 2,
+   "with": 2,
+   "against": 0,
+   "byGroup": {
+    "A:new-spot": 1,
+    "brag": 1
+   },
+   "graded": {
+    "Up": 2,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {
+    "growth": 2
+   }
+  },
+  "Chinatown": {
+   "generatorLines": 605,
+   "lines": 5,
+   "with": 5,
+   "against": 0,
+   "byGroup": {
+    "brag": 3,
+    "A:new-spot": 2
+   },
+   "graded": {
+    "Up": 5,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {
+    "growth": 5
+   }
+  },
+  "Lake Merritt": {
+   "generatorLines": 934,
+   "lines": 4,
+   "with": 4,
+   "against": 0,
+   "byGroup": {
+    "A:storefront": 3,
+    "A:block-energy": 1
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 4,
+    "other": 0
+   },
+   "side": {
+    "decay": 4
+   }
+  },
+  "Laurel": {
+   "generatorLines": 568,
+   "lines": 8,
+   "with": 8,
+   "against": 0,
+   "byGroup": {
+    "A:block-energy": 5,
+    "A:storefront": 3
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 8,
+    "other": 0
+   },
+   "side": {
+    "decay": 8
+   }
+  },
+  "Rockridge": {
+   "generatorLines": 893,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "Temescal": {
+   "generatorLines": 552,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "East Oakland": {
+   "generatorLines": 161,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "Baylight District": {
+   "generatorLines": 104,
+   "lines": 2,
+   "with": 2,
+   "against": 0,
+   "byGroup": {
+    "A:storefront": 2
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 2,
+    "other": 0
+   },
+   "side": {
+    "decay": 2
+   }
+  },
+  "Adams Point": {
+   "generatorLines": 98,
+   "lines": 2,
+   "with": 2,
+   "against": 0,
+   "byGroup": {
+    "A:storefront": 1,
+    "A:block-energy": 1
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 2,
+    "other": 0
+   },
+   "side": {
+    "decay": 2
+   }
+  },
+  "Brooklyn": {
+   "generatorLines": 79,
+   "lines": 3,
+   "with": 3,
+   "against": 0,
+   "byGroup": {
+    "A:storefront": 2,
+    "A:block-energy": 1
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 3,
+    "other": 0
+   },
+   "side": {
+    "decay": 3
+   }
+  },
+  "Dimond": {
+   "generatorLines": 102,
+   "lines": 3,
+   "with": 3,
+   "against": 0,
+   "byGroup": {
+    "A:storefront": 1,
+    "A:block-energy": 2
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 3,
+    "other": 0
+   },
+   "side": {
+    "decay": 3
+   }
+  },
+  "San Antonio": {
+   "generatorLines": 71,
+   "lines": 4,
+   "with": 4,
+   "against": 0,
+   "byGroup": {
+    "A:block-energy": 3,
+    "A:storefront": 1
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 4,
+    "other": 0
+   },
+   "side": {
+    "decay": 4
+   }
+  },
+  "Ivy Hill": {
+   "generatorLines": 109,
+   "lines": 6,
+   "with": 6,
+   "against": 0,
+   "byGroup": {
+    "A:block-energy": 3,
+    "A:storefront": 3
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 6,
+    "other": 0
+   },
+   "side": {
+    "decay": 6
+   }
+  },
+  "(none)": {
+   "generatorLines": 3,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "Glenview": {
+   "generatorLines": 103,
+   "lines": 9,
+   "with": 9,
+   "against": 0,
+   "byGroup": {
+    "A:storefront": 6,
+    "A:block-energy": 3
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 9,
+    "other": 0
+   },
+   "side": {
+    "decay": 9
+   }
+  },
+  "Eastlake": {
+   "generatorLines": 90,
+   "lines": 6,
+   "with": 6,
+   "against": 0,
+   "byGroup": {
+    "A:storefront": 3,
+    "A:block-energy": 3
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 6,
+    "other": 0
+   },
+   "side": {
+    "decay": 6
+   }
+  }
+ }
+}

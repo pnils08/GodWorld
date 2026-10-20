@@ -1,0 +1,44 @@
+== leg A (stage 14)
+bench project = stage 13 outside the engine.305 files
+stage = stage 13 + 2 engine.305 files at ea777cae; manifest output/engine-sheet/2026-10-20-e214b-repA.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @71
+pull-back 167 js + manifest byte-identical to output/engine-sheet/2026-10-20-e214b-repA.sha256
+leg A stage = stage14-e305.sha256 byte for byte
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 84 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+version cut; waiting 87 s more for /exec propagation
+leg A C113 fire rc=0 "verdict": "PASS" "wallS": 212
+leg A C114 fire rc=0 "verdict": "PASS" "wallS": 215
+leg A C115 fire rc=0 "verdict": "PASS" "wallS": 249
+leg A C116 fire rc=0 "verdict": "PASS" "wallS": 174
+leg A C117 fire rc=0 "verdict": "PASS" "wallS": 204
+A C113-C117: trajectory lines 238 (with 238 / against 0), by Cycle {"113":37,"114":41,"115":48,"116":54,"117":58}
+== leg B (stage 14 + Cut B at 3ed34b61)
+bench project = stage 14 outside the Cut B files
+stage = stage 14 + 1 Cut B files at 3ed34b61; manifest output/engine-sheet/2026-10-20-e214b-repB.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @72
+pull-back 167 js + manifest byte-identical to output/engine-sheet/2026-10-20-e214b-repB.sha256
+leg B stage = stage15-e214b.sha256 byte for byte
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 84 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C117
+version cut; waiting 74 s more for /exec propagation
+leg B C113 fire rc=0 "verdict": "PASS" "wallS": 183
+leg B C114 fire rc=0 "verdict": "PASS" "wallS": 202
+leg B C115 fire rc=0 "verdict": "PASS" "wallS": 218
+leg B C116 fire rc=0 "verdict": "PASS" "wallS": 197
+leg B C117 fire rc=0 "verdict": "PASS" "wallS": 238
+B C113-C117: trajectory lines 281 (with 175 / against 106), by Cycle {"113":43,"114":43,"115":59,"116":61,"117":75}
+REPLICATE DONE
+exit 0

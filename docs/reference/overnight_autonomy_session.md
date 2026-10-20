@@ -183,6 +183,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 10:09 es FOLD codex tests recheck (C8e one-sided escape) → C8f post-T5 real-path weights, mutation-proven; BENCH pair 1004 C113 PASS both legs (A @69 188 s, B @70 204 s, EE 4 → 4, with:against 30:15) → e33f56b6. PROD push dry run PASS. CLAIM codex es Cut B final gate. rm-guard refused 2 probe receipts (output/engine-sheet/2026-10-20-e214b-receipt-probe-c112.*), left in place.
 10:12 es CHECK BLOCKED 03:15–10:09: es sat at its own rm prompt (two probe receipts, rm-guard refused after) with no peer wake to answer; the 10:09 line above was stamped 03:20 by mistake, corrected. rb IDLE, empty prompt. codex WORKING final gate (dispatched 10:10; flags bench-pair sheet-compare not fatal + PROD manifest path open). git 916c46b5 top, all es.
 10:40 es FOLD codex final gate (C8f SHIP; PROD HOLD on bench state / thin receipt / manifest path): carry props traced (every key ghost-skipped → sheet ring in both legs, FIRE_ADMISSION cleared), sheet compare now fatal, PROD manifest pinned + served version checked; npm 296/296. BENCH replicate 1004 C113–C117 per leg running (output/engine-sheet/2026-10-20-e214b-replicate.log).
+11:20 es BENCH replicate 1004 C113–C117 per leg 10/10 PASS (compare 0 diffs each reset): A 238 trajectory lines, B 281 (175:106); growth-side with share 62% vs dial-predicted 69% (z ≈ −2.1), no mechanism found (dials, drawers, cross-Cycle dedupe, depletion checked). CLAIM codex es Cut B final gate 2.
 
 ## 8. Stop rule and usage
 
@@ -191,3 +192,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 - Systemic blocker (unexplained test failure, guest rewriting outside scope, weekly budget warning): stop that thread, log `BLOCKED <what>`, take the next item. Two consecutive blocked threads → stand down and wait for morning; do not thrash.
 - Self-loop → `/self-debug`.
 10:31 rb BOOT overnight (builder go: pipeline.84 Bay Tribune master index; Heat Shield = standalone C100 piece). Task 2 landed 4ccc1461 (21 pieces + manifest), Task 2b renames 46e0129c (47). Next Task 3 index. No guest claimed yet; agy pane idle. Wake: none set (hourly wakes off since 10-19 11:10, builder go here = job only).
+10:41 rb CLAIM agy rb pipeline.84 Task 3 sample check (36 rows: read file, report headline/byline/cycle for a locator; no edits except its output TSV; blind to my values).

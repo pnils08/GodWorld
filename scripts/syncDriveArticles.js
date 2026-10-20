@@ -143,7 +143,8 @@ async function main() {
   const rows = await pool(files, 6, async f => {
     const prev = old[f.id];
     const ov = OVERRIDES[f.id];
-    const fresh = prev && prev.modified === f.modifiedTime && (!ov || ov.action !== 'land' || fs.existsSync(path.join(ROOT, ov.dest)));
+    const there = x => !x || fs.existsSync(path.join(ROOT, x));
+    const fresh = prev && prev.modified === f.modifiedTime && there(prev.disk) && (prev.alsoOn || []).every(there) && (!ov || ov.action !== 'land' || there(ov.dest));
     const base = { name: f.name, drivePath: f.path, modified: f.modifiedTime };
     if (fresh) return { id: f.id, row: { ...prev, ...base } };
     const text = clean(await fetchText(drive, f));

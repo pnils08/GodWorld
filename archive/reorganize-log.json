@@ -3650,5 +3650,383 @@
       "dstFull": "/root/GodWorld/archive/non-articles/unknown/WEEK4_STORYLINE_RESOLUTION_LIFECYCLE.md",
       "status": "copied"
     }
+  ],
+  "renames": [
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/c28_education_unknown_angela-reyes-education-desk.txt",
+      "to": "archive/articles/c28_education_unknown_angela-reyes.txt",
+      "why": "set",
+      "header": "ANGELA REYES"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/c30_civic_unknown_carmen-delaine-civic-ledger.txt",
+      "to": "archive/articles/c30_civic_unknown_carmen-delaine.txt",
+      "why": "set",
+      "header": "CARMEN DELAINE"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/c30_civic_unknown_mags-corliss-civic-culture.txt",
+      "to": "archive/articles/c30_civic_unknown_mags-corliss.txt",
+      "why": "set",
+      "header": "MAGS CORLISS"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/c30_lifestyle_cycle-35-the-line-at_sharon-okafor-lifestyle.txt",
+      "to": "archive/articles/c30_lifestyle_cycle-35-the-line-at_sharon-okafor.txt",
+      "why": "set",
+      "header": "SHARON OKAFOR"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/c34_culture_evening-four-more-ca_maria-keen-cultural-liaison.txt",
+      "to": "archive/articles/c34_culture_evening-four-more-ca_maria-keen.txt",
+      "why": "set",
+      "header": "MARIA KEEN"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/c35_general_unknown_the-cycle-pulse.txt",
+      "to": "archive/articles/c35_general_unknown_carmen-delaine.txt",
+      "why": "set",
+      "header": "CARMEN DELAINE"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/c38_culture_the-end-of-the-secon_cycles-34-39-mags-corliss-multiple-journalists-eme.txt",
+      "to": "archive/articles/c38_culture_the-end-of-the-secon_mags-corliss.txt",
+      "why": "set",
+      "header": "MAGS CORLISS"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/c39_general_the-time-both-incide_the-cycle-pulse-sonnet4-5.txt",
+      "to": "archive/articles/c39_general_the-time-both-incide_dr-lila-mezran.txt",
+      "why": "set",
+      "header": "DR. LILA MEZRAN"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_chicago_unknown_luis-navarro-investigations.txt",
+      "to": "archive/articles/cXX_chicago_unknown_luis-navarro.txt",
+      "why": "set",
+      "header": "LUIS NAVARRO"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_civic_unknown_carmen-delaine-civic-ledger.txt",
+      "to": "archive/articles/cXX_civic_unknown_carmen-delaine.txt",
+      "why": "set",
+      "header": "CARMEN DELAINE"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_culture_maria-keen_the-oakland-civic-ledger-feature-column-2.txt",
+      "to": "archive/articles/cXX_culture_the-oakland-civic-ledger-feature-column-2_maria-keen.txt",
+      "why": "swap",
+      "header": "Maria Keen"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_culture_maria-keen_the-oakland-civic-ledger-feature-column.txt",
+      "to": "archive/articles/cXX_culture_the-oakland-civic-ledger-feature-column_maria-keen.txt",
+      "why": "swap",
+      "header": "Maria Keen"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_culture_unknown_maria-keen-cultural-liaison.txt",
+      "to": "archive/articles/cXX_culture_unknown_maria-keen.txt",
+      "why": "set",
+      "header": "MARIA KEEN"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_faith_unknown_elliot-graye-faith-essays.txt",
+      "to": "archive/articles/cXX_faith_unknown_elliot-graye.txt",
+      "why": "set",
+      "header": "ELLIOT GRAYE"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_food_cycle-35-restaurant_mason-ortega-food-hospitality.txt",
+      "to": "archive/articles/cXX_food_cycle-35-restaurant_mason-ortega.txt",
+      "why": "set",
+      "header": "MASON ORTEGA"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_health_unknown_dr-lila-mezran-health-desk.txt",
+      "to": "archive/articles/cXX_health_unknown_dr-lila-mezran.txt",
+      "why": "set",
+      "header": "DR. LILA MEZRAN"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_lifestyle_unknown_sharon-okafor-lifestyle.txt",
+      "to": "archive/articles/cXX_lifestyle_unknown_sharon-okafor.txt",
+      "why": "set",
+      "header": "SHARON OKAFOR"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_public-safety_unknown_sgt-rachel-torres-public-safety-desk.txt",
+      "to": "archive/articles/cXX_public-safety_unknown_sgt-rachel-torres.txt",
+      "why": "set",
+      "header": "SGT. RACHEL TORRES"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_anthony-p-slayer_bay-tribune-dynasty-retrospective-vol-1-feature-2.txt",
+      "to": "archive/articles/cXX_sports_bay-tribune-dynasty-retrospective-vol-1-feature-2_anthony-p-slayer.txt",
+      "why": "swap",
+      "header": "Anthony & P Slayer"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_anthony-p-slayer_bay-tribune-special-debate-feature.txt",
+      "to": "archive/articles/cXX_sports_bay-tribune-special-debate-feature_anthony-p-slayer.txt",
+      "why": "swap",
+      "header": "Anthony & P Slayer"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_anthony_bay-tribune-insider-column-2.txt",
+      "to": "archive/articles/cXX_sports_bay-tribune-insider-column-2_anthony.txt",
+      "why": "swap",
+      "header": "Anthony"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_anthony_bay-tribune-insider-column-3.txt",
+      "to": "archive/articles/cXX_sports_bay-tribune-insider-column-3_anthony.txt",
+      "why": "swap",
+      "header": "Anthony"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_anthony_bay-tribune-insider-column.txt",
+      "to": "archive/articles/cXX_sports_bay-tribune-insider-column_anthony.txt",
+      "why": "swap",
+      "header": "Anthony"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_anthony_bay-tribune-insider-deep-dive-2.txt",
+      "to": "archive/articles/cXX_sports_bay-tribune-insider-deep-dive-2_anthony.txt",
+      "why": "swap",
+      "header": "Anthony"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_anthony_bay-tribune-insider-deep-dive-3.txt",
+      "to": "archive/articles/cXX_sports_bay-tribune-insider-deep-dive-3_anthony.txt",
+      "why": "swap",
+      "header": "Anthony"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_anthony_bay-tribune-insider-deep-dive-4.txt",
+      "to": "archive/articles/cXX_sports_bay-tribune-insider-deep-dive-4_anthony.txt",
+      "why": "swap",
+      "header": "Anthony"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_anthony_bay-tribune-insider-deep-dive-5.txt",
+      "to": "archive/articles/cXX_sports_bay-tribune-insider-deep-dive-5_anthony.txt",
+      "why": "swap",
+      "header": "Anthony"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_anthony_bay-tribune-insider-deep-dive-6.txt",
+      "to": "archive/articles/cXX_sports_bay-tribune-insider-deep-dive-6_anthony.txt",
+      "why": "swap",
+      "header": "Anthony"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_anthony_bay-tribune-insider-deep-dive-7.txt",
+      "to": "archive/articles/cXX_sports_bay-tribune-insider-deep-dive-7_anthony.txt",
+      "why": "swap",
+      "header": "Anthony"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_anthony_bay-tribune-insider-deep-dive.txt",
+      "to": "archive/articles/cXX_sports_bay-tribune-insider-deep-dive_anthony.txt",
+      "why": "swap",
+      "header": "Anthony"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_hal-richmond-senior_origins-isley-kelley.txt",
+      "to": "archive/articles/cXX_sports_origins-isley-kelley_hal-richmond.txt",
+      "why": "swap",
+      "header": "Hal Richmond"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_hal-richmond-senior_origins-mark-aitken.txt",
+      "to": "archive/articles/cXX_sports_origins-mark-aitken_hal-richmond.txt",
+      "why": "swap",
+      "header": "Hal Richmond"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_hal-richmond-senior_the-richmond-archive-collection-all-star-feature-2.txt",
+      "to": "archive/articles/cXX_sports_the-richmond-archive-collection-all-star-feature-2_hal-richmond.txt",
+      "why": "swap",
+      "header": "Hal Richmond"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_hal-richmond-senior_the-richmond-archive-collection-midseason-essay-20.txt",
+      "to": "archive/articles/cXX_sports_the-richmond-archive-collection-midseason-essay-20_hal-richmond.txt",
+      "why": "swap",
+      "header": "Hal Richmond"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_hal-richmond-senior_the-richmond-archive-collection-offseason-essay.txt",
+      "to": "archive/articles/cXX_sports_the-richmond-archive-collection-offseason-essay_hal-richmond.txt",
+      "why": "swap",
+      "header": "Hal Richmond"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_hal-richmond-senior_the-richmond-archive-collection-opening-day-essay.txt",
+      "to": "archive/articles/cXX_sports_the-richmond-archive-collection-opening-day-essay_hal-richmond.txt",
+      "why": "swap",
+      "header": "Hal Richmond"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_hal-richmond-senior_the-richmond-archive-collection-spring-dispatches.txt",
+      "to": "archive/articles/cXX_sports_the-richmond-archive-collection-spring-dispatches_hal-richmond.txt",
+      "why": "swap",
+      "header": "Hal Richmond"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_p-slayer_slayer-syndicate-fan-column.txt",
+      "to": "archive/articles/cXX_sports_slayer-syndicate-fan-column_p-slayer.txt",
+      "why": "swap",
+      "header": "P Slayer"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_p-slayer_slayer-syndicate-minor-league-deep-dive-aa-level.txt",
+      "to": "archive/articles/cXX_sports_slayer-syndicate-minor-league-deep-dive-aa-level_p-slayer.txt",
+      "why": "swap",
+      "header": "P Slayer"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_p-slayer_slayer-syndicate-minor-league-deep-dive-aaa-level-2.txt",
+      "to": "archive/articles/cXX_sports_slayer-syndicate-minor-league-deep-dive-aaa-level-2_p-slayer.txt",
+      "why": "swap",
+      "header": "P Slayer"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_p-slayer_slayer-syndicate-minor-league-deep-dive-aaa-level.txt",
+      "to": "archive/articles/cXX_sports_slayer-syndicate-minor-league-deep-dive-aaa-level_p-slayer.txt",
+      "why": "swap",
+      "header": "P Slayer"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_p-slayer_slayer-syndicate-minor-league-deep-dive-high-a-lev.txt",
+      "to": "archive/articles/cXX_sports_slayer-syndicate-minor-league-deep-dive-high-a-lev_p-slayer.txt",
+      "why": "swap",
+      "header": "P Slayer"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_unknown_farrah-del-rio-opinions.txt",
+      "to": "archive/articles/cXX_sports_unknown_farrah-del-rio.txt",
+      "why": "set",
+      "header": "FARRAH DEL RIO"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_sports_unknown_hal-richmond-senior-historian.txt",
+      "to": "archive/articles/cXX_sports_unknown-2_hal-richmond.txt",
+      "why": "set",
+      "header": "HAL RICHMOND"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_transit_cycle-35-maintenance_trevor-shimizu-transit-infrastructure.txt",
+      "to": "archive/articles/cXX_transit_cycle-35-maintenance_trevor-shimizu.txt",
+      "why": "set",
+      "header": "TREVOR SHIMIZU"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_transit_the-time-both-incide_trevor-shimizu-transit-infrastructure.txt",
+      "to": "archive/articles/cXX_transit_the-time-both-incide_trevor-shimizu.txt",
+      "why": "set",
+      "header": "TREVOR SHIMIZU"
+    },
+    {
+      "date": "2026-10-20",
+      "reason": "filename byline repaired from the file header (known reporter names only)",
+      "from": "archive/articles/cXX_weather_unknown_noah-tan-weather-environment.txt",
+      "to": "archive/articles/cXX_weather_unknown_noah-tan.txt",
+      "why": "set",
+      "header": "NOAH TAN"
+    }
   ]
 }

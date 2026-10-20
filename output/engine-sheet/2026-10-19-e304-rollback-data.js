@@ -4,8 +4,10 @@
 //      MaidenName cleared; EmergenceCount, hood and EmergenceContext kept (the context gains "engine.304 rolled back").
 //   2. every Citizen_Media_Usage row typed family-own-words and not yet Processed → Processed Y (stage 9 would read the
 //      type as media coverage).
-//   3. every Advancement_Intake1 row a partial Cycle left queued as a family arrival (Notes "(engine.304)", or MatchPopId +
-//      MatchType with no HouseholdKey) → cleared, so stage 9 never wires it two-sided (codex final recheck §2).
+//   3. every Advancement_Intake1 row a partial Cycle left queued as an engine.304 family arrival — Notes "GC family
+//      emergence … (engine.304)" AND MatchPopId + MatchType AND no HouseholdKey — cleared, so stage 9 never wires it
+//      two-sided (codex final recheck §2). Any other row carrying MatchPopId + MatchType without HouseholdKey (a
+//      pre-304 drip row) is listed for review by hand and never touched (codex rollback recheck).
 // Rows that already arrived on the ledger (Status Emerged, wired) stay — they are citizens now. The M–O header stays
 // (stage 9 never reads it). Preimage of every touched cell to output/engine-sheet/, then one write per tab, then read back.
 //   node 2026-10-19-e304-rollback-data.js --target bench|live [--apply] [--go]   (live --apply needs --go: the builder's word)
@@ -32,8 +34,12 @@ const colL = (i) => { let s = ''; i++; while (i > 0) { const m = (i - 1) % 26; s
   const us = await get('Citizen_Media_Usage'); const uh = us[0] || []; const u = n => uh.indexOf(n);
   const famUse = (u('UsageType') < 0 || u('Processed') < 0) ? [] : us.map((r, i) => ({ r, i })).slice(1).filter(x => String(x.r[u('UsageType')] || '').toLowerCase() === 'family-own-words' && String(x.r[u('Processed')] || '') !== 'Y');
   const adv = await get('Advancement_Intake1'); const ah = adv[0] || []; const a = n => ah.indexOf(n);
-  const famQ = adv.map((r, i) => ({ r, i })).slice(1).filter(x => /\(engine\.304\)/.test(String(x.r[a('Notes')] || '')) ||
-    (a('MatchPopId') >= 0 && String(x.r[a('MatchPopId')] || '').trim() && String(x.r[a('MatchType')] || '').trim() && !(a('HouseholdKey') >= 0 && String(x.r[a('HouseholdKey')] || '').trim())));
+  const cell = (r, n) => (a(n) >= 0 ? String(r[a(n)] || '').trim() : '');
+  const looksFamily = (r) => cell(r, 'MatchPopId') && cell(r, 'MatchType') && !cell(r, 'HouseholdKey');
+  const is304 = (r) => looksFamily(r) && /^GC family emergence — .*\(engine\.304\)$/.test(cell(r, 'Notes'));
+  const famQ = adv.map((r, i) => ({ r, i })).slice(1).filter(x => is304(x.r));
+  const review = adv.map((r, i) => ({ r, i })).slice(1).filter(x => looksFamily(x.r) && !is304(x.r));
+  review.forEach(x => console.log(`  REVIEW BY HAND (not touched): Advancement_Intake1 row ${x.i + 1} ${cell(x.r, 'First')} ${cell(x.r, 'Last')} → ${cell(x.r, 'MatchType')} of ${cell(x.r, 'MatchPopId')} | ${cell(x.r, 'Notes').slice(0, 80)}`));
   console.log(`${target} "${title}": Family rows ${famRows.length} | unprocessed family-own-words rows ${famUse.length} | queued family arrivals ${famQ.length}`);
   if (!APPLY) { famRows.slice(0, 5).forEach(x => console.log('  would release', x.r[g('First')], x.r[g('Last')], '→', x.r[g('MaidenName')] || '(keeps Last)')); console.log('dry run'); return; }
   const stamp = new Date().toISOString().replace(/[:.]/g, '-');

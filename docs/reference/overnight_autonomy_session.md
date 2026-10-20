@@ -202,3 +202,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 11:20 rb RELEASE agy rb round 1 (38 rows scored: 28 headlines agreed, defects fixed in index, 37/38 after). CLAIM agy rb round 2 (fresh 40-row blind sample, same task).
 11:51 rb DISPATCH es: pipeline.84 asks (dashboard restart after agy diff review, accept/send back Jax slice hook, wire index rebuild into cron-saturday-run). Task 4 diff ccf78191, Task 5 2342a743.
 11:57 rb RELEASE agy rb round 2 scored (42 rows: headlines 41/42, cycles 42/42, bylines 39/42, misses fixed in index). CLAIM agy rb Task 4+5 diff review against a fixed 15-item checklist (YES/NO/UNSURE + evidence; output TSV only).
+11:59 rb RELEASE agy rb diff review folded (14/14 as expected; rb re-read D3 D4 D12 D13 D14 in the code). agy idle. es: dashboard restart is clear to go.

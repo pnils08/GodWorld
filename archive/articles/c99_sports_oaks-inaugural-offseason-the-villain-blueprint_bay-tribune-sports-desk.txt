@@ -1,0 +1,54 @@
+[TYPE: edition | C99]
+
+# THE CYCLE PULSE — SPECIAL EDITION
+## OAKLAND OAKS INAUGURAL OFFSEASON: THE VILLAIN BLUEPRINT
+**By The Bay Tribune Sports Desk**
+
+OAKLAND — General Manager Mike Paulson stood at the podium with a blank spreadsheet. He walked away with a fully formed, unapologetically hostile championship contender. The Oakland Oaks inaugural offseason is officially complete, and the Baylight arena is bracing for impact.
+
+It began in the Expansion Draft. Paulson ruthlessly monopolized the league's point-of-attack defense, drafting Wendell Carter Jr., Draymond Green, and Jose Alvarado, establishing an immediate "99-Hustle" defensive identity under Head Coach Wilson Shepard. But the true masterclass lay in asset arbitrage. Paulson flipped his remaining expansion picks—Herbert Jones, Max Strus, and Dorian Finney-Smith—extracting maximum value to secure the #1 overall pick, the #10 overall pick, and over $25 million in clean cap space. 
+
+With the #1 overall pick, the Oaks selected the franchise engine: **AJ Dybantsa**. The 6'9" scoring phenom immediately gives Oakland the isolation safety valve their motion offense desperately required. At #10, Paulson drafted the high-upside Italian shooter **Dame Sarr** to replace the perimeter spacing lost in the Strus trade. And with their final draft capital, the Oaks drafted the explosive highlight-reel forward **Coen Carr**, officially moving "Lob City" to the Bay.
+
+Then came Free Agency. With pristine cap sheets, Paulson outbid the market to sign 6th Man of the Year **Adash Stanley** to a 3-year, $75 million contract, securing the relentless floor general Shepard's system demands. He immediately followed it up by acquiring elite secondary playmaker **Austin Reaves** on a 4-year deal, and securing critical frontcourt depth with the bargain signing of **Precious Achiuwa**. Veterans **Tim Hardaway Jr.** and **Jaxson Hayes** were brought in on minimums to round out the 12-man rotation.
+
+But Paulson wasn't done. In a final, chaotic masterstroke that sent the Tribune Sports Desk into a frenzy, Paulson traded defensive stalwart Alex Caruso for the ultimate NBA antagonist: **Dillon Brooks**.
+
+The message is clear. A defensive trio of Draymond Green, Jose Alvarado, and Dillon Brooks is not just a basketball team; it is a physical and psychological torture chamber. Opposing offenses will cross the Bay Bridge into Oakland and face the most annoying, instigating, physical defense ever assembled. 
+
+The dogs are loose in Oakland.
+
+***
+
+############################################################
+NAMES INDEX
+############################################################
+
+- POP-00527 | Mike Paulson | General Manager, Oakland A's & Oaks
+- POP-01022 | Wilson Shepard | Head Coach, Oakland Oaks
+- POP-01023 | Adash Stanley | Point Guard, Oakland Oaks
+- AJ Dybantsa — Forward, Oakland Oaks
+- Dame Sarr — Guard, Oakland Oaks
+- Coen Carr — Forward, Oakland Oaks
+- Austin Reaves — Guard, Oakland Oaks
+- Precious Achiuwa — Center, Oakland Oaks
+- Tim Hardaway Jr. — Guard, Oakland Oaks
+- Jaxson Hayes — Center, Oakland Oaks
+- Dillon Brooks — Forward, Oakland Oaks
+
+############################################################
+CITIZEN USAGE LOG
+############################################################
+
+[SECTION] OAKLAND OAKS INAUGURAL OFFSEASON: THE VILLAIN BLUEPRINT
+- Mike Paulson (POP-00527) - mentioned as architect of the defense and trades
+- Wilson Shepard (POP-01022) - mentioned as head coach implementing the 99-hustle system
+- Adash Stanley (POP-01023) - mentioned as the $75M free agency signing
+- AJ Dybantsa - introduced as the #1 overall pick and franchise engine
+- Dame Sarr - introduced as the #10 overall pick and perimeter shooter
+- Coen Carr - introduced as the explosive lob threat
+- Austin Reaves - introduced as the secondary playmaker
+- Precious Achiuwa - introduced as frontcourt depth
+- Tim Hardaway Jr. - introduced as veteran insurance
+- Jaxson Hayes - introduced as veteran insurance
+- Dillon Brooks - introduced as the final physical wing addition

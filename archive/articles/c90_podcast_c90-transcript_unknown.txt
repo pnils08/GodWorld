@@ -1,0 +1,100 @@
+<Person1>You got the paper before me again.</Person1>
+<Person2>I've been here for twenty minutes. It was sitting on the table when I walked in. I wasn't going to ignore it.</Person2>
+<Person1>It's 62 degrees out and there's a breeze off the Bay and you came inside to read a newspaper.</Person1>
+<Person2>I read it out there first. Then I came in for the coffee. Both things happened, Tomas.</Person2>
+
+<Person1>All right. Tell me what hit you first.</Person1>
+<Person2>Beverly Hayes. Front page. I actually put the paper down and sat with it for a second.</Person2>
+<Person1>Yeah. I saw her name and I got this — I don't know. It wasn't celebration exactly. More like exhale.</Person1>
+<Person2>You were watching her. We talked about her last time. You said her getting a check was the test.</Person2>
+
+<Person1>I did. And here's the thing — the check came. $18,500. After eight months. She wrote a letter to the paper and the line that got me was about the difference between gratitude and relief. She said gratitude is when someone gives you something. Relief is when someone finally stops making you wait for what was already yours.</Person1>
+<Person2>That's a precise sentence. That's not a person who is happy. That's a person who is done being patient.</Person2>
+<Person1>She said she's staying in her apartment. Staying in West Oakland. That's what the money means. Not a vacation, not new furniture. Just: I get to stay.</Person1>
+<Person2>And there are forty-six other families in the same situation. Forty-seven checks total, going out by October 7th. That's — that's actually happening.</Person2>
+
+<Person1>It is. But the disbursement authority got yanked from Webb because apparently the man just wasn't sending the checks. Fund passed two years ago. Twenty-eight million dollars authorized. Zero checks mailed. The Mayor had to take the checkbook away from him.</Person1>
+<Person2>Which is wild. There were forty-seven approved applications sitting there. Stamped. Approved. No action.</Person2>
+<Person1>Okoro has it now. She's the one who's going to make sure Beverly's check actually arrives. And the other forty-six. And then there are two hundred ninety-five more applications in queue at fifty a week.</Person1>
+<Person2>The fifty-a-week target is Vega, right? That was the other piece of this.</Person2>
+
+<Person1>Yeah, Vega set that as a minimum with weekly reporting to the full council. So at fifty a week, you're looking at roughly six weeks to clear the queue. Assuming they all come back as approvals.</Person1>
+<Person2>Which they might not. The approval rate hasn't been made public.</Person2>
+<Person1>There's a guy named Darius Clark — bakery worker, also West Oakland — who's in that pending pool. The article doesn't say whether his application is early or late in the queue. Just that he's waiting.</Person1>
+<Person2>So there are two stories here. Beverly's story already resolved. And then there are two hundred ninety-five more stories that haven't resolved yet, and the sequencing is being decided right now by an office that hasn't told anyone how it's doing the sequencing.</Person2>
+
+<Person1>That's it. That's exactly it. The filing cabinet finally opened. But it's processing fifty files a week and there are almost three hundred files in there. And nobody's told anyone how they decide which fifty go first.</Person1>
+<Person2>I'm glad Beverly has her check. I genuinely am. But I want to know what Darius Clark's timeline looks like. And the hundred people in line behind him.</Person2>
+<Person1>That's the watch. Webb's out of the loop. Okoro is running it now. Let's see what fifty a week actually looks like when you're watching it happen.</Person1>
+
+<Person2>Speaking of things finally happening — I owe you a callback. Baylight. You remember I said the fiscal close was my thing to watch this fall.</Person2>
+<Person1>End of Q3. You said it like you were making a bet.</Person1>
+<Person2>The piles go in October 10. Two-point-one billion dollars. Financial close. Real construction starting on the waterfront.</Person2>
+<Person1>That's a big number landing in a small number of weeks.</Person1>
+
+<Person2>It is. And I want to be straightforward about what it means — this is the thing I was tracking, it delivered on schedule, and now I'm reading Lorraine Castillo's letter in the paper and I'm not sure I feel as clean about it as I expected to.</Person2>
+<Person1>She's the retired city planner. Jack London. What did she write?</Person1>
+<Person2>She broke down the Ashford-Ramos standoff. Ashford wants the transparency dashboard before the TIF closes. Ramos says she'll deliver it simultaneously. And Castillo writes: "Before means you see the terms and then you agree. Simultaneously means you agree and then you see the terms."</Person2>
+
+<Person1>Okay but that's — yeah. That's the whole thing, right there in one sentence. And she was a city planner. She's not guessing at how this works.</Person1>
+<Person2>Thirty years of it. And she says: once that door shuts on a thirty-year financial commitment, it doesn't reopen. Ask anyone who signed a contract they couldn't review in advance.</Person2>
+<Person1>So the piles go in October 10. The TIF locks the public revenue for thirty years. And the dashboard that would let people actually track what's happening with that money — the workforce compliance, the minority employment numbers — might show up at the same moment the deal is already done.</Person1>
+<Person2>That's the concern. I wanted the fiscal close to happen. It's happening. And Castillo is right that "simultaneously" is not the same as "before."</Person2>
+
+<Person1>You said it was your watch. What are you watching now?</Person1>
+<Person2>Whether Ashford's motion gets a vote before October 10. He put it to the council. If it doesn't get scheduled in time, the dashboard question gets answered by Ramos's timeline, not the council's.</Person2>
+<Person1>And if the piles are already in the ground when the dashboard shows up, nobody's stopping a two-point-one-billion-dollar construction project to have that conversation.</Person1>
+<Person2>No. They're not. So that's the race right now. That's what Castillo was saying in plain language that a planner who's seen this before would say.</Person2>
+
+<Person1>All right. Can we talk about the OARI thing? Because that whole front page had a lot going on and I want to make sure people are tracking what actually happened.</Person1>
+<Person2>The same morning. Rivers at the podium naming Montez as the person blocking the program. Montez signing the document in his office. Neither of them knowing what the other was doing.</Person2>
+<Person1>That is actually wild. The Mayor set a deadline on Friday — end of business, you sign, this is not optional. Rivers scheduled her press conference for Monday. Montez signed before lunch on Monday. Before Rivers even finished her statement.</Person1>
+
+<Person2>And Rivers didn't back down anyway. She stood there and gave the whole speech about the OPP caucus representing forty-seven thousand residents in West Oakland, Fruitvale, and East Oakland who voted for a different kind of response. Even after she found out the MOU was already signed.</Person2>
+<Person1>Because she's saying: I want to be on record. I want it documented that this required pressure. He didn't just decide to do the right thing. He had a deadline and a press conference happening and a Mayor telling him the signature was not optional.</Person1>
+<Person2>Which Montez's statement kind of acknowledges in its own way. He called it "operational rather than political." Said delay serves no public safety purpose. He didn't mention the pressure at all.</Person2>
+
+<Person1>Right, because he's framing it as: I looked at the data and made a professional call. Not: I had three months of people making my life difficult and eventually I ran out of runway.</Person1>
+<Person2>Does it matter how he frames it? The teams are deploying in D1, D3, and D5. That's real.</Person2>
+<Person1>It matters for what comes next. Because now Tran is already on record — his district's not in the pilot, he cast the deciding vote, and he's conditioning renewal funding on a specific D2 expansion timeline. He's not waiting for data. He said it right out: "If D2 expansion stalls, so does my support for renewal funding."</Person1>
+
+<Person2>Which is the thing I keep thinking about. The program hasn't taken a single call yet and the coalition that passed it is already fractured around what happens after the pilot.</Person2>
+<Person1>Tran's leverage is real. He was the fifth vote. Without him it's four-four and the whole program dies in chambers. He knows that and he wants D2 to know that he knows that.</Person1>
+<Person2>I think the program works. I think Denise Okafor's letter in the paper — the East Oakland woman, her neighbor's son, the episode in the street, two squad cars with handcuffs and no behavioral health training — I think that's why the program exists. And I think a counselor showing up instead would have had him home that night instead of three days in custody.</Person2>
+
+<Person1>I think so too. And now the question is whether the politics around renewal let the program prove what it can prove before the leverage games start. Tran's not wrong to want D2 served. But the timing of when you make that demand is a separate question from whether the demand is legitimate.</Person1>
+<Person2>Six months. Tran basically said: show me in the pilot, bring me a D2 plan, I'll fund the next phase. That's actually a reasonable ask delivered in a somewhat aggressive way.</Person2>
+<Person1>Yeah. Reasonable ask. Aggressive timing. Welcome to Oakland politics. Let's see what the first call looks like when it goes out in D1.</Person1>
+
+<Person2>Okay. I need to talk about Danny Horn before you do, because I saw you flip straight to sports the second you opened the paper.</Person2>
+<Person1>I was checking the score first. That is allowed.</Person1>
+<Person2>Seven and one. Horn has six home runs in eight games.</Person2>
+<Person1>P Slayer was right there at Heinold's watching it happen and the line he got from DeShawn Hartley — the Tribune photographer — was: "He's not chasing anymore." That's it. That's the whole thing. A hitter who stops expanding his zone and waits for exactly what he wants.</Person1>
+
+<Person2>P Slayer made the point about the difference between a hot player and a changed player. A hot player is riding variance. A changed player has altered something fundamental about how he approaches an at-bat.</Person2>
+<Person1>Six home runs says he's a changed player. Two different pitchers, two different mistakes, because Horn forced them into uncomfortable counts and punished them both. That's not luck. That's a decision he made about how he was going to hit.</Person1>
+<Person2>And Hal's piece on Keane watching all of this from the dugout steps — I keep thinking about that framing. Six championships. You know what a good October start means and how long the road is from that start to what it might become.</Person2>
+
+<Person1>Keane's thirty-seven. This is the last one. And the rotation is actually there — Rivas, Coles, both of them dealing. Hal called it "seven-and-one" and then said "it is also only October." That's forty years of watching baseball in one sentence.</Person1>
+<Person2>I'm not a Keane lifer the way you are. I've been here two years. But I find myself wanting to watch the games because of that piece. Because the story is real — the farewell season, the guy in center suddenly becoming the reason people are watching.</Person2>
+<Person1>That's what good sports writing does. You don't have to have thirty years of Coliseum memories to feel the weight of this one. The story works on its own.</Person1>
+
+<Person2>Quick hits before we go? I want to do the Maria Keen piece and then I'm going to say one more thing about Baylight.</Person2>
+<Person1>Go.</Person1>
+<Person2>Philly Rodriguez at the vendor stand on Telegraph and 18th. Moved to Temescal in August after a job reorganization. Helping a friend run produce from a community garden for exactly four weeks. And he said: "I wanted to notice seasons again." That's the whole piece. That's October in Oakland in four words.</Person2>
+
+<Person1>Maria Keen wrote that piece the way you actually notice a Tuesday afternoon when the slant light hits the concrete and the shadows are different. October doesn't announce itself. It just changes the rhythm.</Person1>
+<Person2>The construction on Grand Avenue doesn't feel as loud this month. She wrote that. It's the same construction. October just changes how you hear it.</Person2>
+<Person1>Robert Tran's letter too — the Lake Merritt one. Thirty-one years near that lake. He wrote: "Some days the city does not need to be fixed. It just needs to be noticed." That's not nothing. That's somebody who's earned the right to have a day without a complaint to file.</Person1>
+
+<Person2>Okay. Last thing. Baylight. The TIF thing. I said I'd say one more thing and it's this: Lorraine Castillo is not against development. She said so in her letter. She's against closing a thirty-year commitment without the oversight mechanism in place first. And I think those are different things that are getting collapsed into the same conversation, and they shouldn't be.</Person2>
+<Person1>The people who want the dashboard before the close aren't saying kill the project. They're saying: put the visibility in place before you lock the door for thirty years. That's it.</Person1>
+<Person2>And "simultaneously" is not "before." Castillo nailed it. I'm going to be watching October 10 very closely.</Person2>
+
+<Person1>What are you watching this week? Just this week.</Person1>
+<Person2>Whether Beverly Hayes's check actually clears. Not whether it was mailed. Whether it clears and she stays in that apartment. And I want to know how Okoro decides which fifty applications go first next week.</Person2>
+<Person1>I'm watching D1. First call the OARI co-responders take. First real test of whether this thing works the way the advocates have been saying it works for three years.</Person1>
+<Person2>And if it does?</Person2>
+<Person1>Then Tran's leverage play looks a lot smaller next to the data. And if it doesn't — we'll talk about that when it happens. I'm hoping we don't have to.</Person1>
+<Person2>62 degrees. Breeze off the Bay. October in Oakland. I'll see you next week.</Person2>
+<Person1>Same table.</Person1>

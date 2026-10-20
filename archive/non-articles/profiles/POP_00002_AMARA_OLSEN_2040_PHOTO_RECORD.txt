@@ -1,0 +1,14 @@
+POPID Photo Reconstruction Record (Template v1.0)
+
+POPID: POP_00002
+Name: Amara Olsen
+Simulation Year: 2040
+Image_ID: A_digital_photograph_portrait_features_a_young_wom.png
+Model: Stable-Diffusion-v1.5 (Base reference for likeness extraction)
+Seed: 672401
+Hash: 7D3C9F12A51E47
+Identity_Embedding_Model: OpenAI-Vision-Embedding-v2
+Identity_Embedding_Vector: [0.5128, -0.3012, 0.6829, -0.1991, 0.4287, -0.3548, 0.2555, -0.5677, 0.6032, -0.2774, ...]
+Semantic_Embedding_Model: CLIP-ViT-L/14
+Semantic_Embedding_Vector: [0.2512, 0.4799, -0.2735, 0.3161, -0.1459, 0.3928, -0.5312, 0.1721, 0.2446, -0.0665, ...]
+Notes: Base likeness record derived from wedding photo extraction (subject isolated and rendered in everyday attire). Used as foundational photo DNA for simulation mirror references.

@@ -1,0 +1,32 @@
+[TYPE: edition | C99]
+
+# THE CYCLE PULSE — BREAKING NEWS
+## OAKLAND SACRIFICES CULTURE FOR FIREPOWER: DRAYMOND GREEN TRADED
+**By The Bay Tribune Sports Desk**
+
+OAKLAND — The culture setter is gone, but the fatal flaw has been fixed. 
+
+In a shocking last-minute blockbuster that rocked the Baylight arena, General Manager Mike Paulson traded the heart and soul of the Oakland Oaks, defensive anchor Draymond Green, to the Portland Trail Blazers in exchange for 6'8" scoring forward **Jerami Grant**. 
+
+The trade, which also included a future second-round pick heading to Portland, perfectly balances the Oaks' starting rotation. Paulson managed to execute a massive arbitrage victory, retaining the services of point-of-attack menace Jose Alvarado and starting center Wendell Carter Jr. while extracting a 21-point-per-game scorer in his prime. Grant’s 40% three-point shooting will space the floor beautifully for #1 overall pick AJ Dybantsa, definitively solving the Oaks' frontcourt scoring deficit. 
+
+While fans mourn the departure of Green—the architect of the "99-Hustle" identity—the arrival of Jerami Grant elevates the Oakland Oaks from a defensive menace to a comprehensively terrifying, well-balanced championship contender.
+
+***
+
+############################################################
+NAMES INDEX
+############################################################
+
+- POP-00527 | Mike Paulson | General Manager, Oakland A's & Oaks
+- POP-01024 | AJ Dybantsa | Forward, Oakland Oaks
+- Jerami Grant — Forward, Oakland Oaks
+
+############################################################
+CITIZEN USAGE LOG
+############################################################
+
+[SECTION] OAKLAND SACRIFICES CULTURE FOR FIREPOWER: DRAYMOND GREEN TRADED
+- Mike Paulson (POP-00527) - mentioned as architect of the trade
+- AJ Dybantsa (POP-01024) - mentioned as benefiting from the floor spacing
+- Jerami Grant - introduced as the new scoring forward acquired via trade

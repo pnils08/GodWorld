@@ -1,0 +1,37 @@
+[Manifest Version]: 1.0
+[Archive Collection]: The Richmond Archive
+[File Type]: Companion Image Manifest
+[Status]: ACTIVE
+[POPID]: POP-00002
+[Author]: Hal Richmond
+[Created]: 2025-11-08
+[Purpose]: Registers companion imagery and reconstruction metadata for subject Amara Olsen, linking her artistic and personal narrative to continuity canon.
+
+=== ENTRY ===
+[Subject Name]: Amara Olsen
+[Tags]: Pianist, Violinist, Musician, San Sequoia, California, Family Heritage, Marriage Canon
+[Birthplace]: San Sequoia, California
+[Family]: Oldest of eight siblings, large family heritage emphasizing harmony, mentorship, and perseverance.
+[Occupation]: Pianist and Violinist (Independent Performer and Educator)
+[Era]: 2030s–2040s
+[Spouse]: Vinnie Keane (Married 2032)
+[Linked Manifest]: LINK: C-MARITAL-KEANE-001 (Vinnie Keane, POP-00001)
+[Primary Image File]: /Images/AmaraOlsen_OfficialPortrait.png
+[Image Caption]: “Amara Olsen, pianist and violinist from San Sequoia, captured in soft studio light — the heart and melody behind the Keane family legacy.”
+[Photographer / Generator]: P Slayer Visual Engine v1.2
+
+[Metadata Generation Record]:
+{
+  "prompt": "portrait of Amara Olsen, mid-30s woman with light tan skin and olive undertones, brown eyes, long wavy brown hair, elegant black dress, seated at piano with violin resting beside her, warm natural light",
+  "engine": "AI Visual Engine v1.2",
+  "seed": 30541,
+  "style": "artistic realism, cinematic soft tone",
+  "camera": "Canon EOS R5 emulation, 50mm lens, f/2.0",
+  "aspect_ratio": "3:2",
+  "generation_date": "2025-11-08"
+}
+=== END ENTRY ===
+
+[Notes]:
+Amara Olsen represents the creative and emotional dimension of the Keane lineage. As a pianist and violinist with a disciplined yet expressive temperament (noted traits: Genius, Fitness, Musical), she embodies structure and grace.
+Her marriage to Vinnie Keane in 2032 serves as both an emotional counterpoint to his athletic journey and a thematic bridge in the forthcoming “Wedding Chronicle” feature.

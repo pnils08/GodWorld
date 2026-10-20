@@ -176,4 +176,4 @@ if (require.main === module) {
   main().catch(e => { console.error('sweepCanonIngest: ' + e.message); process.exit(1); });
 }
 
-module.exports = { chunkText, customIdFor, DRIVE_CANON_FOLDERS };
+module.exports = { chunkText, customIdFor, DRIVE_CANON_FOLDERS, listDriveFiles, fetchText };

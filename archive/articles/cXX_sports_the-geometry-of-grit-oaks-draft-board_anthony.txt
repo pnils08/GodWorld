@@ -1,0 +1,44 @@
+# BAY TRIBUNE SUPPLEMENTAL
+**Desk:** Sports Analytics
+**By:** Anthony
+**Date:** Post-Expansion Draft
+
+## The Geometry of Grit: Decoding the Oaks' Draft Board
+
+The first seven picks of the Oakland Oaks' inaugural expansion draft did not look like the birth of an entertainment product. They looked like the blueprints for a barricade. 
+
+While the city screamed for a franchise savior to put on posters outside the new Jack London Square practice facility, Head of Basketball Operations Mike Paulson executed a cold, mathematically ruthless strategy. He drafted Wendell Carter Jr., Donte DiVincenzo, Herbert Jones, Draymond Green, Max Strus, Jose Alvarado, and Dorian Finney-Smith. 
+
+If you look at raw scoring averages, you panic. If you look at the geometry of Wilson Shepard's offensive motion system and the "99 Hustle" metric, you realize Paulson is building a switchable, defensively suffocating machine designed to exhaust opponents before the fourth quarter even begins.
+
+But the masterstroke wasn't the defense. It was the leverage.
+
+Paulson knew the Los Angeles Lakers were desperate to extend their fading championship window with win-now perimeter defense. He didn't draft Herbert Jones to play in Oakland; he drafted him to hold Los Angeles hostage. Minutes after making the pick, Paulson traded Jones, the Oaks' upcoming #5 overall entry pick, and a future first-round pick to the Lakers for the #1 overall pick in the upcoming entry draft.
+
+And he did it all while preserving maximum cap space for free agency.
+
+For weeks, the rumor mill assumed Paulson would trade massive draft capital to Chicago to acquire Adash Stanley—the 19-year-old point guard who won 6th Man of the Year as an undrafted rookie last season while playing under Paulson's previous front office regime. But Paulson understood the contract structure: Stanley is an unrestricted free agent. You don't have to draft him. You just have to write him a check. 
+
+By drafting Jose Alvarado as a point-of-attack disruptor, Paulson secured his defensive baseline at the guard spot. By preserving cap space, he can now aggressively pursue Stanley *and* a veteran scorer in free agency. And by executing the Lakers trade, he now holds the #1 overall pick to draft a true, blue-chip difference-maker to tie it all together.
+
+Elias Varek promised the city a competitive franchise. Paulson is delivering a fortress, and he just bought the artillery.
+
+***
+
+############################################################
+NAMES INDEX
+############################################################
+
+POP-00527 | Mike Paulson | General Manager, Oakland A's & Oaks
+POP-00789 | Elias Varek | Owner, Oakland Oaks & Civis Systems
+POP-NEW | Wilson Shepard | Head Coach, Oakland Oaks
+POP-NEW | Adash Stanley | Point Guard, Free Agent
+
+############################################################
+CITIZEN USAGE LOG
+############################################################
+
+- **POP-00527 (Mike Paulson)**: Executed the Oaks expansion draft strategy, focusing on switchable defense and trading Herbert Jones to the Lakers for the #1 overall pick.
+- **POP-00789 (Elias Varek)**: Acknowledged as the financial backer who promised a competitive team.
+- **POP-NEW (Wilson Shepard)**: Mentioned as the architect of the Oaks' offensive motion system requiring high-hustle guards.
+- **POP-NEW (Adash Stanley)**: Identified as the primary free-agent target for Paulson, previously winning 6th Man of the Year as an undrafted rookie.

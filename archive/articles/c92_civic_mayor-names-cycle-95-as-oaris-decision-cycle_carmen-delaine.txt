@@ -1,0 +1,104 @@
+# Mayor Names Cycle 95 As OARI's Decision Cycle, Signals Sunset Vote If Expansion Stalls
+
+**The pilot moved the wrong direction. Now the Mayor is asking the city to grade it on a different test — and she's saying so out loud.**
+
+*Carmen Delaine, Civic Ledger*
+
+---
+
+The number at the center of Oakland's alternative response debate is not the one the program was built to move. The OARI pilot launched with a single chartered metric: push the ViolentCrimeIndex down one-twentieth of a point in West Oakland, Fruitvale, and East Oakland over the evaluation window. Six weeks of operational data came in. The index moved up two full points.
+
+That gap — two points up against an expected half-point down — is where Mayor Avery Santana sat down with the Bay Tribune this cycle in a wide-ranging on-the-record interview, the first since OARI's program director, Vanessa Tran-Muñoz, released a reframed evaluation standard and Councilmember Janae Rivers filed the D2 expansion motion. The Mayor did not minimize the number. She said she couldn't.
+
+"Two points up instead of a half-point down is not noise," Santana said. "That's not measurement error. That's a real difference, and it warrants a real look at why."
+
+---
+
+## The Rubric Shift
+
+What that real look has produced, the Mayor says, is a reckoning with the original charter's assumptions. Tran-Muñoz's revised framework replaces violent-crime reduction as the renewal threshold with two operational measures: a 75% non-police resolution rate and stable complaint volume in the pilot neighborhoods. The pilot, under the new standard, is performing.
+
+Santana acknowledged the shift directly. "We are shifting the rubric," she said, "and I'm going to be straight with you about that. The initial metric was based on an assumption about how violence reduction happens in communities with fresh access to non-police response. Six weeks of data said that assumption was incomplete. That's not a goalpost move — that's a rubric that needs sharpening."
+
+She drew a line between two readings of the data. Her own read is that complaint volume may represent latent demand surfacing — communities that spent years managing problems alone, now calling for help because the resource exists and they trust it. Tran-Muñoz's reframe is a different question: is the system doing the job it was designed to do? "Does it resolve problems that communities used to have no way to address, and without creating new cascading crises?" Santana said. "Low-level conflicts, noise, welfare checks, disputes — that's OARI's actual scope. Not overnight violent crime reduction."
+
+She was unambiguous that the reframe carries a political price. "If Vanessa's framework becomes the renewal standard, I'm asking the city to judge the program on operational performance instead of crime reduction. That's a political tax." She said Tran-Muñoz led the framework revision — that the division was correct: project director owns the technical content, mayor owns the deadline and the political reality.
+
+---
+
+## Montez and the Protocol Record
+
+The Chief's position has moved across two cycles. In the cycle prior, Rafael Montez appeared before the council with real routing concerns about the dispatch protocol. This cycle, he offered operational support, describing six weeks of data confirming the refinements were holding.
+
+Santana framed the shift as straightforward. "He raised routing concerns because they were real operational concerns. In between, his team ran the pilot for six weeks. They refined the protocol. They tested it. And the data showed it was working." She was careful to maintain the separation. "I didn't negotiate his testimony. I don't get to do that. The Chief runs Oakland Police."
+
+What the Mayor's office did do, she said, was work alongside OPD on the specific protocol engineering: "He identified a routing problem. We got the engineering team with him. They solved it together. That's a working relationship between a mayor's office and a police chief who both care about the same city." The buy-in, she said, was earned — and she described it as the kind that holds because it was grounded in what the data actually showed, not managed for political effect.
+
+---
+
+## The Eight-Vote Architecture
+
+The expansion motion's path to passage runs through two members of Santana's coalition who are, at the moment, pulling in opposite directions.
+
+Janae Rivers, the D5 councilmember and OPP progressive caucus leader who is filing the D2 expansion motion this cycle, argues the evidence is already in. Leonard Tran, the independent D2 voice whose district expansion would directly affect, says a framework with thresholds is not enough — he needs a committed implementation cycle on the table before he walks with the vote.
+
+The Mayor told Rivers what she told the Bay Tribune: Leonard is right. "A motion that passes with just the OPP bloc is a vote we survive. A motion that passes with OPP plus Leonard is a vote we win."
+
+Her proposed path is procedural and specific. Rivers files the expansion motion. While it moves through committee, a friendly amendment is drafted — separately coordinated, ready to be offered from the floor — that names the implementation cycle Tran is requiring. "The motion reaches the floor with both things in it. Leonard gets his commitment. Janae gets her vote. We pass with eight votes instead of five."
+
+She acknowledged the conversation she still owes Rivers. "She's going to ask if this is a win or a compromise. The answer is: it's both. It's how you govern with a divided council. You don't slow down the people who are ready to move. You move them forward with the people who need one more thing to walk with you." Then, without prompting, she added: "Janae understands that calculus. She's the one who taught it to me."
+
+---
+
+## The DA's Three Gates
+
+District Attorney Clarissa Dane has identified three legal-framework items she considers governance gates before expansion becomes defensible: scene-safety authority, evidentiary protocols, and escalation triggers. None are resolved.
+
+Santana addressed each one.
+
+Scene-safety authority, she said, is a coordination problem, not a policy dispute. It lives between her office and OPD's protocols. "Two weeks of technical drafting, maybe three. That one doesn't gate the motion." Evidentiary protocols — the documentation standards that ensure OARI's records hold up if they're ever cited in prosecution or civil proceedings — she is prepared to carry into expansion with a mid-cycle-96 resolution target written into the motion language as a conditions trigger. Work in motion, not a prerequisite.
+
+Escalation triggers are different. That is the protocol that governs how OARI hands off to Oakland Police in real time when a call goes volatile. "That one gates expansion," the Mayor said flatly. "Cycle 95 motion carries the expansion authority, but it doesn't trigger funding until the escalation protocol is DA-signed and OPD-trained."
+
+She was direct about what that architecture represents. "The people calling for help deserve legal clarity, not procedural shortcuts." The DA's scope, she said, is not obstruction — it is what legitimate expansion requires.
+
+---
+
+## The Slow-Defeat Question
+
+The Mayor was asked what a stall costs — if the data holds where it is, the motion can't carry, and OARI keeps renewing in pilot status without expansion, cycle after cycle.
+
+She named the concrete cost first: District Two doesn't get the resource. Communities where police-community relations remain brittle don't receive the alternative response the pilot data shows is working. "The trust-building stops at a boundary. We don't scale it."
+
+Then she named what it costs her. "OARI is my signature on this issue. If it freezes in pilot status — if we keep renewing it every cycle without expansion while data sits there proving the concept works — that's a slow defeat disguised as a holding pattern." She said she would rather lose a clean vote on the merits, the council making a deliberate choice, than hold the program in stasis. "I'd rather lose a clean expansion vote, on the merits, with the council making a deliberate choice, than win a renewal that means stagnation. One is a decision. The other is just drift."
+
+If the motion stalls, she said, her ask to council is an honest one — not next cycle but this one. "I'm going to ask them to tell me whether OARI stays operational or sunsets. Pilot forever is not sustainable. It's not honest to the neighborhoods depending on it, and it's not honest to the staff running it."
+
+She closed with the line that will travel. "I won't ask for expansion twice on the same data. But I will ask for a decision."
+
+Cycle 95 is when that decision lands.
+
+---
+
+**PREWRITE:**
+- Reporter: Carmen Delaine
+- StoryType: Analysis/Interview
+- AllowedNames: Mayor Avery Santana, Vanessa Tran-Muñoz, Janae Rivers, Leonard Tran, Rafael Montez, Clarissa Dane, Ramon Vega (mentioned), Laila Cortez (mentioned)
+- AnchorFacts: ViolentCrimeIndex +2 vs. projected −0.05; eight-vote target named by Mayor; escalation trigger gates expansion funding
+- CentralTension: Did the Mayor get out ahead of the data collapse or get caught by it — and is the rubric shift a correction or a cover?
+- MissingData: Council whip count is not publicly confirmed; eight votes is Mayor's projection, not a verified tally
+
+---
+
+**EVIDENCE:**
+- Claims:
+  1. Claim: "ViolentCrimeIndex moved +2 against expected −0.05" | Type: FACT(engine) | Source: Brief + transcript Q1
+  2. Claim: "Tran-Muñoz framework uses 75% non-police resolution + stable complaint volume as renewal threshold" | Type: FACT(record) | Source: Brief
+  3. Claim: "Chief Montez moved from C91 routing concerns to C92 operational support" | Type: FACT(record) | Source: Brief + transcript Q3
+  4. Claim: "DA Dane named three items: scene-safety authority, evidentiary protocols, escalation triggers" | Type: QUOTE(named) | Source: Brief
+  5. Claim: "Mayor projects eight-vote passage with Leonard Tran amendment" | Type: QUOTE(named) | Source: transcript Q4
+- Unverified: Ramon Vega as potential friendly amendment sponsor (Mayor said "maybe Ramon, maybe someone else" — written as "someone on council")
+
+---
+
+**Names Index:** Mayor Avery Santana (Mayor, OPP), Vanessa Tran-Muñoz (OARI Program Director), Janae Rivers (D5 Councilmember, OPP), Leonard Tran (D2 Councilmember, IND), Rafael Montez (Police Chief), Clarissa Dane (District Attorney), Laila Cortez (Chief of Staff)

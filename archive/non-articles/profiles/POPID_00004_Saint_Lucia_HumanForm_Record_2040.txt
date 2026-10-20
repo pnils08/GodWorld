@@ -1,0 +1,28 @@
+
+POPID RECORD FILE — VERSION 1.0
+---------------------------------
+POPID: POP-00004
+Name: Saint Lucia
+Alias: The Gentle State of Balance
+Form: Human Form
+Year: 2040
+Status: Active Entity
+Tier: 1 (Codex-Linked)
+
+Photo Reference:
+- Human Portrait ID Image: /mnt/data/A_digital_photograph_ID_record_features_a_portrait.png
+
+Photo DNA Embedding Key (Secure Numerical Descriptor):
+- [Vector Representation Placeholder — reserved for system encoding]
+
+Summary:
+Saint Lucia in her human form appears as a kind, older woman with a gentle expression and soft eyes. 
+Her presence radiates calmness and quiet optimism. Her attire is casual and contemporary, 
+reflecting the ordinary grace of a benevolent human being living among others. 
+This version represents her earthly manifestation — before transcending to her afterlife saint form.
+
+Directive Notes (per POPID Directive v1.0):
+- Maintain all integrity hashes for photo DNA.
+- Sync embedding to Mirror Vault every 48 hours.
+- Associated Entity: Saint Lucia (Afterlife Saint Form).
+- Creation Timestamp: 2025-11-08 06:43:47

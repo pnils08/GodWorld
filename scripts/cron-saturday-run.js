@@ -18,6 +18,7 @@
  *                (pipeline.62); non-fatal, pre-flight catches a miss next cycle
  *                runs ingestEdition + permanent-NotebookLM source add
  *   5 sweep    — per-article canon ingest (ALL staged, curated or not)
+ *   5b index   — rebuild archive/ARTICLE_INDEX.jsonl (pipeline.84; --apply writes, non-blocking)
  *   6 sheets   — Citizen_Media_Usage rows from the INTAKE sidecar
  *
  * Seats built 2026-08-05 (narrator design adopted — docs/research/
@@ -320,6 +321,15 @@ function loadStagedSetExcludingCanonViolations(cycle) {
   if (!scorecard) return set; // no audit run yet — nothing to exclude by
   const violations = new Set(scorecard.articles.filter(a => a.verdict === 'canon-violation').map(a => a.stem));
   return set.filter(e => !violations.has(e.stem));
+}
+
+// Step 5b — the master article index (pipeline.84 Task 3, plan docs/plans/2026-10-19-bay-tribune-master-index.md):
+// rebuilt from the repo's editions, archive and staged sidecars. A local artifact: --apply writes
+// archive/ARTICLE_INDEX.jsonl, a dry run prints the counts only.
+function stepIndex() {
+  console.log('--- step 5b: master article index ---');
+  const args = [path.join(ROOT, 'scripts', 'buildArticleIndex.js')].concat(APPLY ? ['--write'] : []);
+  require('child_process').execFileSync(process.execPath, args, { cwd: ROOT, stdio: 'inherit' });
 }
 
 async function stepSweep(cycle) {
@@ -1301,6 +1311,7 @@ async function main() {
   const step = arg('--step', null);
   console.log('Saturday run — c' + cycle + (APPLY ? ' [APPLY]' : ' [dry-run]'));
   const dispatch = {
+    index: () => stepIndex(),
     audit: () => stepAudit(cycle), curate: () => stepCurate(cycle),
     narrate: () => stepNarrate(cycle), publish: () => stepPublish(cycle),
     coverage: () => stepCoverage(cycle),
@@ -1308,7 +1319,7 @@ async function main() {
     signals: () => stepSignals(cycle)
   };
   if (step) {
-    if (!dispatch[step]) throw new Error('unknown --step "' + step + '" (want audit|curate|narrate|publish|coverage|sweep|sheets|signals)');
+    if (!dispatch[step]) throw new Error('unknown --step "' + step + '" (want audit|curate|narrate|publish|coverage|sweep|index|sheets|signals)');
     await dispatch[step]();
   } else {
     // Plan §Phase 3 order: audit → curate → narrate → publish → sweep → sheets → signals.
@@ -1345,9 +1356,20 @@ async function main() {
     }
     await stepCoverage(cycle);
     await stepSweep(cycle);
+    // pipeline.84 Task 3: the master article index rebuilds after the sweep. Context only (the dashboard
+    // search, Jax's prior coverage): a failure is loud and fails the run at the end, never the steps below.
+    let indexErr = null;
+    try {
+      stepIndex();
+    } catch (e) {
+      indexErr = e;
+      console.error('[INDEX FAILED] ' + e.message);
+      console.error('  Recover: node scripts/cron-saturday-run.js --cycle ' + cycle + ' --step index --apply');
+    }
     await stepSheets(cycle);
     await stepSignals(cycle);
     if (publishErr) throw publishErr;
+    if (indexErr) throw indexErr;
   }
 }
 

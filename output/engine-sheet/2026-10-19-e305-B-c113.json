@@ -1,0 +1,119 @@
+{
+ "cycle": 113,
+ "label": "B",
+ "sentiment": {
+  "Downtown": 0.13,
+  "Temescal": 0.06,
+  "Laurel": 0,
+  "West Oakland": 0.25,
+  "Fruitvale": 0.2,
+  "Jack London": 0.17,
+  "Rockridge": 0.01,
+  "Adams Point": -0.08,
+  "Grand Lake": -0.06,
+  "Piedmont Ave": 0.07,
+  "Chinatown": -0.07,
+  "Brooklyn": -0.11,
+  "Eastlake": 0,
+  "Glenview": -0.02,
+  "Dimond": -0.07,
+  "Ivy Hill": -0.09,
+  "San Antonio": -0.04,
+  "KONO": 0,
+  "Lake Merritt": -0.02,
+  "Uptown": 0.02,
+  "Baylight District": 0.08,
+  "East Oakland": 0.25
+ },
+ "neighborhoodLines": {
+  "Grand Lake": {
+   "Up": 5,
+   "Down": 1
+  },
+  "West Oakland": {
+   "Up": 67,
+   "Down": 5
+  },
+  "Chinatown": {
+   "Up": 43,
+   "Down": 3
+  },
+  "Laurel": {
+   "Up": 30,
+   "Down": 3
+  },
+  "Rockridge": {
+   "Up": 55,
+   "Down": 9
+  },
+  "Jack London": {
+   "Up": 35,
+   "Down": 4
+  },
+  "Fruitvale": {
+   "Up": 60,
+   "Down": 12
+  },
+  "Uptown": {
+   "Up": 63,
+   "Down": 14
+  },
+  "Lake Merritt": {
+   "Up": 44,
+   "Down": 12
+  },
+  "Piedmont Ave": {
+   "Up": 27,
+   "Down": 6
+  },
+  "Baylight District": {
+   "Up": 9,
+   "Down": 2
+  },
+  "Downtown": {
+   "Up": 41,
+   "Down": 12
+  },
+  "Temescal": {
+   "Up": 29,
+   "Down": 5
+  },
+  "Brooklyn": {
+   "Up": 3,
+   "Down": 0
+  },
+  "Dimond": {
+   "Up": 3,
+   "Down": 0
+  },
+  "San Antonio": {
+   "Up": 2,
+   "Down": 1
+  },
+  "Adams Point": {
+   "Up": 2,
+   "Down": 4
+  },
+  "East Oakland": {
+   "Up": 8,
+   "Down": 0
+  },
+  "KONO": {
+   "Up": 10,
+   "Down": 1
+  },
+  "Glenview": {
+   "Up": 6,
+   "Down": 1
+  },
+  "Eastlake": {
+   "Up": 5,
+   "Down": 2
+  },
+  "Ivy Hill": {
+   "Up": 3,
+   "Down": 4
+  }
+ },
+ "neighborhoodLineTotal": 651
+}

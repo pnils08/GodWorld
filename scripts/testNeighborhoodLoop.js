@@ -569,9 +569,12 @@ console.log('═══ C7 — engine.305: the hood pulse follows the written lin
   assert('C7g every first-draw Neighborhood pulse matches its written grade (Down -> Neighborhood-Down, Up -> Neighborhood), all three routes', mism === 0, JSON.stringify(byRoute));
   assert('C7h the generator path reaches hood-state Up lines too (Rockridge growth)', byRoute['source:nbhdState'].Up > 0, JSON.stringify(byRoute['source:nbhdState']));
   assert('C7i the community-life route reaches both grades (Down and Up)', byRoute['source:communityLife'].Down > 0 && byRoute['source:communityLife'].Up > 0, JSON.stringify(byRoute['source:communityLife']));
-  // Hood texture strings (CITIZEN_EVENT_TEXTURE_BY_CHARACTER_) carry no signed fact, so the engine.299 admission
-  // drops them before they are written — drawn, never written, never pulsed. If one ever gains a sign, C7g covers it.
-  assert('C7j the hood-texture route is drawn but writes no graded line (admission drops it, noDial moves)',
+  // In this harness the source:neighborhood route offers only the hardcoded texture strings
+  // (CITIZEN_EVENT_TEXTURE_BY_CHARACTER_), which carry no signed fact, so the engine.299 admission drops them —
+  // drawn, never written, never pulsed. On a live sheet the same route also writes Event_Content_Ledger library
+  // rows with an explicit dial tag (bench C113: Neighborhood-Outabout-Up-S|source:neighborhood|auth:library-s325|
+  // dial:outabout:up); there is no ECL tab here, and C7g's kind rule covers those rows the same way.
+  assert('C7j harness: the hardcoded hood-texture strings are drawn but write no graded line (admission drops them, noDial moves)',
     textureDropped > 0 && byRoute['source:neighborhood'].Down + byRoute['source:neighborhood'].Up === 0,
     'dropped ' + textureDropped + ' / written ' + JSON.stringify(byRoute['source:neighborhood']));
 }

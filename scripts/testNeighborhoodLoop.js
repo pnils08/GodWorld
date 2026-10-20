@@ -474,7 +474,7 @@ console.log('═══ C6 — G-EC33: per-hood sentiment breaks citywide lockste
 {
   // Two cycles. The citywide scalar swings UNIFORMLY +0.16 (the old lockstep
   // driver). Per-hood dynamics move DIFFERENTLY: Fruitvale drops (e.g. crime),
-  // Rockridge ticks up, Downtown is flat. Pre-fix every hood's delta == +0.16
+  // Rockridge ticks up, West Oakland is flat. Pre-fix every hood's delta == +0.16
   // (output = citywide + frozen offset). Post-fix the per-hood track is the base
   // and the citywide scalar is demoted to a CITY_SENTIMENT_NUDGE (0.15) shade.
   function sentRun(seed, citySent, nhoodDyn) {
@@ -533,16 +533,20 @@ console.log('═══ C7 — engine.305: the hood pulse follows the written lin
   assert('C7e a down + an up line: sentiment 0 over 2 events (events count kept)',
     S0.neighborhoodPulse.Fruitvale.sentiment === 0 && S0.neighborhoodPulse.Fruitvale.events === 2, JSON.stringify(S0.neighborhoodPulse.Fruitvale));
 
-  // The real generator on the four-hood city: every first-draw hood-state pulse, by its fact tag.
-  const DOWN_FACTS = ['state:trajectory-down', 'state:watchful', 'state:housing', 'state:mood-down', 'state:retail-low'];
-  const UP_FACTS = ['state:trajectory-up', 'state:mood-up'];
-  const realPulse = global.recordPulse_;
-  const seen = { down: 0, up: 0, downAsUp: 0, upAsDown: 0 };
+  // The real generator on the four-hood city: every first-draw pulse on the three routes into the
+  // Neighborhood kind (generateCitizensEvents.js:1016 / 1019 / 1038), checked against the tag the line
+  // was WRITTEN with (pulseKindForLine_ is evaluated as the call's argument, so its writtenTag is this pulse's).
+  const ROUTES = ['source:nbhdState', 'source:neighborhood', 'source:communityLife'];
+  const realPulse = global.recordPulse_, realKind = global.pulseKindForLine_;
+  const byRoute = {}; ROUTES.forEach(r => { byRoute[r] = { Down: 0, Up: 0, mismatch: 0 }; });
+  let lastWritten = '', textureDropped = 0;
+  global.pulseKindForLine_ = (lineKind, writtenTag) => { lastWritten = String(writtenTag || ''); return realKind(lineKind, writtenTag); };
   global.recordPulse_ = (S, hood, kind, tags, text) => {
-    if (tags && tags.indexOf('source:nbhdState') >= 0) {
-      const isDown = tags.some(t => DOWN_FACTS.indexOf(t) >= 0), isUp = tags.some(t => UP_FACTS.indexOf(t) >= 0);
-      if (isDown) { seen.down++; if (kind !== 'Neighborhood-Down') seen.downAsUp++; }
-      if (isUp) { seen.up++; if (kind !== 'Neighborhood') seen.upAsDown++; }
+    const route = ROUTES.find(r => tags && tags.indexOf(r) >= 0);
+    const g = /^Neighborhood-[A-Z][a-z]+-(Up|Down)-[SML]$/.exec(lastWritten);
+    if (route && g) {
+      byRoute[route][g[1]]++;
+      if (kind !== (g[1] === 'Down' ? 'Neighborhood-Down' : 'Neighborhood')) byRoute[route].mismatch++;
     }
     return realPulse(S, hood, kind, tags, text);
   };
@@ -553,13 +557,23 @@ console.log('═══ C7 — engine.305: the hood pulse follows the written lin
       'Neighborhood_Map': memSheet('Neighborhood_Map', seedLoaderMapData()),
       'LifeHistory_Log': memSheet('LifeHistory_Log', [['Timestamp', 'Cycle', 'POPID', 'Name', 'Event', 'Tag']])
     });
-    generateCitizensEvents_(makeCtx(94 + cy, rows, ss));
+    const c7 = makeCtx(94 + cy, rows, ss);
+    generateCitizensEvents_(c7);
+    const nd = c7.summary.engine299 && c7.summary.engine299.noDialBySource;
+    textureDropped += (nd && nd['source:neighborhood']) || 0;
   }
-  global.recordPulse_ = realPulse;
-  console.log('   hood-state first-draw pulses: ' + seen.down + ' down-fact, ' + seen.up + ' up-fact');
-  assert('C7f the generator path reaches hood-state down lines (Fruitvale decay / rent / crime watch)', seen.down > 0, JSON.stringify(seen));
-  assert('C7g no hood-state down line pulses Neighborhood +1', seen.downAsUp === 0, JSON.stringify(seen));
-  assert('C7h no hood-state up line pulses Neighborhood-Down', seen.upAsDown === 0, JSON.stringify(seen));
+  global.recordPulse_ = realPulse; global.pulseKindForLine_ = realKind;
+  console.log('   first-draw Neighborhood pulses by route: ' + JSON.stringify(byRoute));
+  const mism = ROUTES.reduce((n, r) => n + byRoute[r].mismatch, 0);
+  assert('C7f the generator path reaches hood-state Down lines (Fruitvale decay / rent / crime watch)', byRoute['source:nbhdState'].Down > 0, JSON.stringify(byRoute['source:nbhdState']));
+  assert('C7g every first-draw Neighborhood pulse matches its written grade (Down -> Neighborhood-Down, Up -> Neighborhood), all three routes', mism === 0, JSON.stringify(byRoute));
+  assert('C7h the generator path reaches hood-state Up lines too (Rockridge growth)', byRoute['source:nbhdState'].Up > 0, JSON.stringify(byRoute['source:nbhdState']));
+  assert('C7i the community-life route reaches both grades (Down and Up)', byRoute['source:communityLife'].Down > 0 && byRoute['source:communityLife'].Up > 0, JSON.stringify(byRoute['source:communityLife']));
+  // Hood texture strings (CITIZEN_EVENT_TEXTURE_BY_CHARACTER_) carry no signed fact, so the engine.299 admission
+  // drops them before they are written — drawn, never written, never pulsed. If one ever gains a sign, C7g covers it.
+  assert('C7j the hood-texture route is drawn but writes no graded line (admission drops it, noDial moves)',
+    textureDropped > 0 && byRoute['source:neighborhood'].Down + byRoute['source:neighborhood'].Up === 0,
+    'dropped ' + textureDropped + ' / written ' + JSON.stringify(byRoute['source:neighborhood']));
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

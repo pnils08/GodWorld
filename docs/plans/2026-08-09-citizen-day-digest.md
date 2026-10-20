@@ -86,7 +86,7 @@ pointers:
   1. Propose thematic-allocation rebalance per Mike's listener directives: Citizens & neighborhoods up (40% → 60%), city record down (40% → 20%), connections 20% unchanged; add a directive line that the daily citizen digest section is the people-spine of the show.
   2. Hand the diff to engine-sheet (or land it here only if Mike explicitly grants config scope).
 - **Verify:** engine-sheet confirms landing; next daily audio reflects the allocation.
-- **Landed 2026-10-17 (`af3c1f57`, research-build) as 50 / 30 / 20** — Citizens & neighborhoods 50%, the newsroom`s reports 30% (a tier this task did not name), the day around them 20%; "no plumbing" directive in §3. ROLLOUT pipeline.53 flipped done-pending-archive 2026-10-19.
+- **Landed 2026-10-17 (`af3c1f57`, research-build) as 50 / 30 / 20** — Citizens & neighborhoods 50%, the newsroom's reports 30% (a tier this task did not name), the day around them 20%; "no plumbing" directive in §3. ROLLOUT pipeline.53 flipped done-pending-archive 2026-10-19.
 - **Status:** [ ] proposal written — **owner: engine-sheet (kimi proposed)**. Exact diff at `output/kimi/citizen-day-digest/audio-direction-daily-proposal.md` (city record 40%→20% background-only, citizens 40%→60% spine, digest-first directive).
 
 ---

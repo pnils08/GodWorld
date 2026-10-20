@@ -359,15 +359,20 @@ rngImpl = mulberry32(2026);
   }
   assert('C2g2 every reaction line lands, and only in its trajectory hood (growth Rockridge, decay Fruitvale)', reactMiss.length === 0, reactMiss.join(' | '));
   const signMiss = [];
+  let signChecked = 0, signSuffixed = 0;
   for (const home of Object.keys(REACT)) {
     for (const line of lifeByHood[home].split('\n')) {
       const m = /\[([^\]]+)\] (.*)$/.exec(line);
       if (!m) continue;
-      const r = REACT[home].find(([txt]) => m[2] === txt);
-      if (r && !new RegExp('^Neighborhood-Outabout-' + r[1] + '-[SML]$').test(m[1])) signMiss.push(m[1] + ' ' + m[2]);
+      // a non-template line may carry the generator's ' near <venue>' suffix (generateCitizensEvents.js, chosenVenue)
+      const r = REACT[home].find(([txt]) => m[2] === txt || m[2].indexOf(txt + ' near ') === 0);
+      if (!r) continue;
+      signChecked++; if (m[2] !== r[0]) signSuffixed++;
+      if (!new RegExp('^Neighborhood-Outabout-' + r[1] + '-[SML]$').test(m[1])) signMiss.push(m[1] + ' ' + m[2]);
     }
   }
-  assert('C2g3 every reaction line is written with its own sign (Neighborhood-Outabout-Up|Down)', signMiss.length === 0, signMiss.slice(0, 3).join(' | '));
+  assert('C2g3 every reaction line, venue-suffixed or not, is written with its own sign (Neighborhood-Outabout-Up|Down)',
+    signMiss.length === 0 && signChecked > 0 && signSuffixed > 0, signMiss.slice(0, 3).join(' | ') + ' checked ' + signChecked + ' suffixed ' + signSuffixed);
   const retired = ['never reopened in', "where the block's energy went", 'another new spot opening up'].filter(t => inHoods(t).length);
   assert('C2g4 the storefront, block-energy and new-spot lines are gone', retired.length === 0, retired.join(','));
   const retailHits = [...new Set(inHoods('new shop that just opened').concat(inHoods('busy weekend market')))];
@@ -610,20 +615,30 @@ console.log('═══ C8 — engine.214 8a Cut B: the trajectory as dial-gated 
   const hoodReactionSet_ = loadEngine('../phase05-citizens/generateCitizensEvents.js', 'hoodReactionSet_');
   const hoodReactionMult_ = loadEngine('../phase05-citizens/generateCitizensEvents.js', 'hoodReactionMult_');
   const pw = (b, i) => Math.min(6, b * (1 + 4 * Math.max(0, Math.min(1, i)))); // generateCitizensEvents.js neighborhoodStatePool_
+  // [reaction, sign, share of M] per entry, in order (plan step 8, recheck 3 contract)
+  const WANT = {
+    growth: [['brag', 'up', 1 / 3], ['humble', 'up', 1 / 3], ['complain', 'down', 1 / 6], ['complain', 'down', 1 / 6]],
+    decay: [['complain', 'down', 1 / 3], ['complain', 'down', 1 / 3], ['humble', 'up', 1 / 6], ['defend', 'up', 1 / 6]]
+  };
   const massMiss = [];
   for (const traj of ['growth', 'decay']) {
-    const withSign = traj === 'growth' ? 'up' : 'down';
+    const dir = traj === 'growth' ? 'up' : 'down';
     for (const mi of [0, 0.2, 0.4, 0.6, 1]) {
       const M = pw(1.1, mi) + pw(1.0, mi);
       const set = hoodReactionSet_(traj, M, 'Glenview');
       const sum = set.reduce((n, e) => n + e.weight, 0);
-      const withW = set.filter(e => e.tags.indexOf('dial:outabout:' + withSign) >= 0).reduce((n, e) => n + e.weight, 0);
-      const oneEach = set.every(e => e.tags.filter(t => t.indexOf('react:') === 0).length === 1 && e.tags.filter(t => t.indexOf('dial:') === 0).length === 1);
-      if (set.length !== 4 || Math.abs(sum - M) > 1e-9 || Math.abs(withW - 2 * (M - withW)) > 1e-9 || !oneEach ||
-          Math.max(...set.map(e => e.weight)) * 1.5 > 6) massMiss.push(traj + ' mi ' + mi + ': n ' + set.length + ' sum ' + sum + ' of ' + M + ' with ' + withW);
+      if (set.length !== 4 || Math.abs(sum - M) > 1e-9) massMiss.push(traj + ' mi ' + mi + ': n ' + set.length + ' sum ' + sum + ' of ' + M);
+      set.forEach((e, k) => {
+        const [react, sign, share] = WANT[traj][k] || [];
+        const want = ['source:nbhdState', 'state:trajectory-' + dir, 'react:' + react, 'dial:outabout:' + sign];
+        if (Math.abs(e.weight - M * share) > 1e-9 || JSON.stringify(e.tags) !== JSON.stringify(want) || e.weight * 1.5 > 6) {
+          massMiss.push(traj + ' mi ' + mi + ' entry ' + k + ': ' + e.weight + ' ' + e.tags.join(','));
+        }
+      });
     }
   }
-  assert('C8a four entries per direction; total = today\'s branch mass, with:against 2:1, max entry x1.5 under 6 (mi 0 / .2 / .4 / .6 / 1)', massMiss.length === 0, massMiss.join(' | '));
+  assert('C8a four entries per direction, each its own reaction / sign / weight (with M/3, against M/6; total = today\'s branch mass; x1.5 under 6), mi 0 / .2 / .4 / .6 / 1',
+    massMiss.length === 0, massMiss.slice(0, 3).join(' | '));
   assert('C8b steady, blank and prototype-named trajectories offer nothing',
     hoodReactionSet_('steady', 10.5, 'X').length === 0 && hoodReactionSet_('', 10.5, 'X').length === 0 && hoodReactionSet_('constructor', 10.5, 'X').length === 0);
 
@@ -649,13 +664,17 @@ console.log('═══ C8 — engine.214 8a Cut B: the trajectory as dial-gated 
     hoodReactionMult_('react:brag', dm) === 1.5 && hoodReactionMult_('react:defend', dm) === 1.5 && hoodReactionMult_('react:humble', dm) === 0.5 &&
     hoodReactionMult_('react:complain', dm) === 0.5 && hoodReactionMult_('react:complain', { composure: 0.5 }) === 1.5 && threw);
 
-  // The real generator: Fruitvale (decay) citizens at the composure extremes, everything else neutral.
-  // Low composure should lean into complaining; a steady citizen should lean the other way.
-  const complainTxt = ["complained about the neighborhood to anyone who'd listen", 'vented about Fruitvale on the walk home'];
-  const otherTxt = ['shrugged off the grumbling about Fruitvale and got on with the week', 'stuck up for the neighborhood to a friend across town'];
-  const tilt = (composure) => {
+  // The real generator, through the real T5 pass: one hood's citizens at a dial's extremes, everything else neutral.
+  // Each reaction's share of the reaction set must move with its own dial (both directions).
+  const RX = {
+    Rockridge: { brag: ['caught themselves bragging a little about the neighborhood lately'], humble: ['felt quietly lucky to call Rockridge home'],
+      complain: ['grumbled about the neighborhood over coffee', 'griped about Rockridge over dinner'] },
+    Fruitvale: { complain: ["complained about the neighborhood to anyone who'd listen", 'vented about Fruitvale on the walk home'],
+      humble: ['shrugged off the grumbling about Fruitvale and got on with the week'], defend: ['stuck up for the neighborhood to a friend across town'] }
+  };
+  const tilt = (hood, dial, value) => {
     rngImpl = mulberry32(214);
-    const rows = buildLedger(['Fruitvale'], 20).map(r => { r[HEADERS.indexOf('DialState')] = dialState({ composure }); return r; });
+    const rows = buildLedger([hood], 20).map(r => { r[HEADERS.indexOf('DialState')] = dialState({ [dial]: value }); return r; });
     for (let cy = 1; cy <= 60; cy++) {
       const ss = memSS({
         'Neighborhood_Map': memSheet('Neighborhood_Map', seedLoaderMapData()),
@@ -664,13 +683,20 @@ console.log('═══ C8 — engine.214 8a Cut B: the trajectory as dial-gated 
       generateCitizensEvents_(makeCtx(94 + cy, rows, ss));
     }
     const all = rows.map(r => r[iLife] || '').join('\n');
-    const count = (txts) => txts.reduce((n, t) => n + all.split(t).length - 1, 0);
-    return { complain: count(complainTxt), other: count(otherTxt) };
+    const out = {};
+    for (const [rx, txts] of Object.entries(RX[hood])) out[rx] = txts.reduce((n, t) => n + all.split(t).length - 1, 0);
+    return out;
   };
-  const low = tilt(5), high = tilt(95);
-  console.log('   Fruitvale reactions, 20 citizens x 60 Cycles: low composure ' + JSON.stringify(low) + ' / high composure ' + JSON.stringify(high));
-  assert('C8e the composure dial tilts the decay reactions: low composure complains more, relative to humble + defend, than high',
-    low.complain > 0 && high.other > 0 && low.complain / Math.max(1, low.other) > high.complain / Math.max(1, high.other), JSON.stringify({ low, high }));
+  const share = (o, rx) => o[rx] / Math.max(1, Object.values(o).reduce((a, b) => a + b, 0));
+  const CASES = [['Fruitvale', 'composure', 'complain', 'low'], ['Rockridge', 'sociability', 'brag', 'high'],
+    ['Rockridge', 'warmth', 'humble', 'high'], ['Fruitvale', 'sociability', 'defend', 'high']];
+  for (const [hood, dial, rx, leansWhen] of CASES) {
+    const lo = tilt(hood, dial, 5), hi = tilt(hood, dial, 95);
+    console.log('   ' + hood + ' ' + dial + ' 5 vs 95, 20 citizens x 60 Cycles: ' + JSON.stringify(lo) + ' / ' + JSON.stringify(hi));
+    const [more, less] = leansWhen === 'low' ? [lo, hi] : [hi, lo];
+    assert('C8e ' + dial + ' tilts ' + rx + ' (' + hood + '): its share of the reaction set is higher at ' + leansWhen + ' ' + dial,
+      more[rx] > 0 && share(more, rx) > share(less, rx), JSON.stringify({ lo, hi }));
+  }
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);
